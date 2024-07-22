@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_DonationUnion))]
-    [FriendOfAttribute(typeof (ES_DonationUnion))]
+    [EntitySystemOf(typeof(ES_DonationUnion))]
+    [FriendOfAttribute(typeof(ES_DonationUnion))]
     public static partial class ES_DonationUnionSystem
     {
         [EntitySystem]
@@ -36,14 +36,20 @@ namespace ET.Client
 
             if (raceopen && curTime < opentime)
             {
-                self.E_Text_Open_TimeText.text = $"{dateTime.Month}月{dateTime.Day}日 21点30开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_Open_TimeText.text = zstring.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
+                }
             }
             else
             {
                 long addTime = (7 - (int)dateTime.DayOfWeek) * TimeHelper.OneDay + (opentime - curTime) * TimeHelper.Second;
                 serverTime += addTime;
                 dateTime = TimeInfo.Instance.ToDateTime(serverTime);
-                self.E_Text_Open_TimeText.text = $"{dateTime.Month}月{dateTime.Day}日 21点30开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_Open_TimeText.text = zstring.Format("{0}月{1}日 21点30开启", dateTime.Month, dateTime.Day);
+                }
             }
         }
 
@@ -111,7 +117,10 @@ namespace ET.Client
         {
             U2C_UnionRaceInfoResponse response = await UnionNetHelper.UnionRaceInfoRequest(self.Root());
             self.UnionListItems = response.UnionInfoList;
-            self.E_Text_BonusText.text = $"累计总奖金： {response.TotalDonation}";
+            using (zstring.Block())
+            {
+                self.E_Text_BonusText.text = zstring.Format("累计总奖金： {0}", response.TotalDonation);
+            }
 
             string unionnamelist = "已报名家族: ";
             for (int i = 0; i < self.UnionListItems.Count; i++)

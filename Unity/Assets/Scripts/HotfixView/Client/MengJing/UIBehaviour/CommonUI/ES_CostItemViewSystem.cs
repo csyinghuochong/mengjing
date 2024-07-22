@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_CostItem))]
-    [FriendOfAttribute(typeof (ES_CostItem))]
+    [EntitySystemOf(typeof(ES_CostItem))]
+    [FriendOfAttribute(typeof(ES_CostItem))]
     public static partial class ES_CostItemSystem
     {
         [EntitySystem]
@@ -26,9 +26,14 @@ namespace ET.Client
             self.E_ItemNameText.text = itemConfig.ItemName;
 
             //显示字
-            self.E_ItemNumText.text = $"{CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{CommonViewHelper.NumToWString(itemNum)}";
+            using (zstring.Block())
+            {
+                self.E_ItemNumText.text = zstring.Format("{0}/{1}", CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId)),
+                    CommonViewHelper.NumToWString(itemNum));
+            }
+
             //显示颜色
-            self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId))? Color.green : Color.red;
+            self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId)) ? Color.green : Color.red;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 

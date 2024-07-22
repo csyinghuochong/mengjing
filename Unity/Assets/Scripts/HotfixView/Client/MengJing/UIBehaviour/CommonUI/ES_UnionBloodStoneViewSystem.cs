@@ -10,7 +10,7 @@ namespace ET.Client
         private static void Awake(this ES_UnionBloodStone self, Transform transform)
         {
             self.uiTransform = transform;
-            
+
             self.E_UpBtnButton.AddListenerAsync(self.OnUpBtn);
             self.UpdateInfo();
         }
@@ -43,11 +43,17 @@ namespace ET.Client
             }
             else
             {
-                self.E_PropertyTextText.text = "下一级:\n" +
-                        ItemViewHelp.GetAttributeDesc(PublicQiangHuaConfigCategory.Instance.Get(publicQiangHuaConfig.NextID).EquipPropreAdd);
+                using (zstring.Block())
+                {
+                    self.E_PropertyTextText.text = zstring.Format("下一级:\n{0}",
+                        ItemViewHelp.GetAttributeDesc(PublicQiangHuaConfigCategory.Instance.Get(publicQiangHuaConfig.NextID).EquipPropreAdd));
+                }
             }
 
-            self.ES_CostList.Refresh($"1;{publicQiangHuaConfig.CostGold}@" + publicQiangHuaConfig.CostItem);
+            using (zstring.Block())
+            {
+                self.ES_CostList.Refresh(zstring.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem));
+            }
         }
 
         public static async ETTask OnUpBtn(this ES_UnionBloodStone self)
@@ -63,15 +69,22 @@ namespace ET.Client
 
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv < publicQiangHuaConfig.UpLvLimit)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"玩家等级不足，{publicQiangHuaConfig.UpLvLimit}开启");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("玩家等级不足，{0}开启", publicQiangHuaConfig.UpLvLimit));
+                }
+
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (!bagComponent.CheckNeedItem("1;" + publicQiangHuaConfig.CostGold + "@" + publicQiangHuaConfig.CostItem))
+            using (zstring.Block())
             {
-                FlyTipComponent.Instance.ShowFlyTip("道具不足！");
-                return;
+                if (!bagComponent.CheckNeedItem(zstring.Format("1;{0}@{1}", publicQiangHuaConfig.CostGold, publicQiangHuaConfig.CostItem)))
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("道具不足！");
+                    return;
+                }
             }
 
             M2C_BloodstoneQiangHuaResponse response = await UnionNetHelper.BloodstoneQiangHuaRequest(self.Root());

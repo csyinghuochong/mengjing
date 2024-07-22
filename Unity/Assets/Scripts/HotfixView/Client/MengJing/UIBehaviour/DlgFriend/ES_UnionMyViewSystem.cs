@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UnionJingXuanTimer)]
-    public class UnionJingXuanTimer: ATimer<ES_UnionMy>
+    public class UnionJingXuanTimer : ATimer<ES_UnionMy>
     {
         protected override void Run(ES_UnionMy self)
         {
@@ -16,13 +16,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_UnionMy))]
-    [FriendOfAttribute(typeof (ES_UnionMy))]
+    [EntitySystemOf(typeof(ES_UnionMy))]
+    [FriendOfAttribute(typeof(ES_UnionMy))]
     public static partial class ES_UnionMySystem
     {
         [EntitySystem]
@@ -209,26 +212,29 @@ namespace ET.Client
 
             self.UnionInfo = response.UnionMyInfo;
             self.OnLinePlayer = response.OnLinePlayer;
-            self.E_Text_LevelText.text = $"{response.UnionMyInfo.Level}";
-            if (UnionConfigCategory.Instance.Contain(response.UnionMyInfo.Level))
+            self.E_Text_LevelText.text = response.UnionMyInfo.Level.ToString();
+            using (zstring.Block())
             {
-                UnionConfig unionConfig = UnionConfigCategory.Instance.Get(response.UnionMyInfo.Level);
-                self.E_Text_ExpText.text = $"{response.UnionMyInfo.Exp}/{unionConfig.Exp}";
-                if (response.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
+                if (UnionConfigCategory.Instance.Contain(response.UnionMyInfo.Level))
                 {
-                    self.E_Text_UnionGoldText.text =
-                            $"{response.UnionMyInfo.UnionGold / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
+                    UnionConfig unionConfig = UnionConfigCategory.Instance.Get(response.UnionMyInfo.Level);
+                    self.E_Text_ExpText.text = zstring.Format("{0}/{1}", response.UnionMyInfo.Exp, unionConfig.Exp);
+                    if (response.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
+                    {
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0:0.#}万/{1:0.#}万", response.UnionMyInfo.UnionGold / 10000f, unionConfig
+                                .UnionGoldLimit / 10000f);
+                    }
+                    else
+                    {
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0:0.#}万/{1:0.#}万", unionConfig.UnionGoldLimit / 10000f, unionConfig
+                                .UnionGoldLimit / 10000f);
+                    }
                 }
                 else
                 {
-                    self.E_Text_UnionGoldText.text =
-                            $"{unionConfig.UnionGoldLimit / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
+                    self.E_Text_ExpText.text = String.Empty;
+                    self.E_Text_UnionGoldText.text = string.Empty;
                 }
-            }
-            else
-            {
-                self.E_Text_ExpText.text = String.Empty;
-                self.E_Text_UnionGoldText.text = string.Empty;
             }
 
             await self.UpdateMyUnion(self.UnionInfo);
@@ -261,9 +267,13 @@ namespace ET.Client
             UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
             UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionInfo.Level);
             bool leader = userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId;
-            self.E_Text_OnLineText.text = $"在线人数 {self.OnLinePlayer.Count}";
-            self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;
-            self.E_Text_NumberText.text = $"{self.UnionInfo.UnionPlayerList.Count}/{unionCof.PeopleNum}";
+            using (zstring.Block())
+            {
+                self.E_Text_OnLineText.text = zstring.Format("在线人数 {0}", self.OnLinePlayer.Count);
+                self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;
+                self.E_Text_NumberText.text = zstring.Format("{0}/{1}", self.UnionInfo.UnionPlayerList.Count, unionCof.PeopleNum);
+            }
+
             self.E_Text_LeaderText.text = self.UnionInfo.LeaderName;
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;
             self.EG_LeadNodeRectTransform.gameObject.SetActive(leader || mainPlayerInfo.Position != 0);
@@ -286,8 +296,8 @@ namespace ET.Client
                 //int leaderida = (a.UserID == self.UnionInfo.LeaderId) ? 1 : 0;
                 //int leaderidb = (b.UserID == self.UnionInfo.LeaderId) ? 1 : 0;
                 //return (leaderidb - leaderida);
-                int positiona = a.Position == 0? 10 : a.Position;
-                int positionb = b.Position == 0? 10 : b.Position;
+                int positiona = a.Position == 0 ? 10 : a.Position;
+                int positionb = b.Position == 0 ? 10 : b.Position;
                 return positiona - positionb;
             });
 

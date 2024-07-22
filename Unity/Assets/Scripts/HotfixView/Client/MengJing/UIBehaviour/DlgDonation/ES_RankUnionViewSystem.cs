@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RankUnion))]
-    [FriendOfAttribute(typeof (ES_RankUnion))]
+    [EntitySystemOf(typeof(ES_RankUnion))]
+    [FriendOfAttribute(typeof(ES_RankUnion))]
     public static partial class ES_RankUnionSystem
     {
         [EntitySystem]
@@ -61,14 +61,17 @@ namespace ET.Client
 
             response.RankList.Sort((x, y) => (int)(y.KillNumber - x.KillNumber));
 
-            for (int i = 0; i < response.RankList.Count; i++)
+            using (zstring.Block())
             {
-                GameObject go = UnityEngine.Object.Instantiate(self.EG_UIRankUnionItemRectTransform.gameObject);
-                CommonViewHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
-                go.SetActive(true);
-                ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
-                rc.Get<GameObject>("NameText").GetComponent<Text>().text = $"   {i + 1}    {response.RankList[i].PlayerName}";
-                rc.Get<GameObject>("NumText").GetComponent<Text>().text = $"{response.RankList[i].KillNumber}";
+                for (int i = 0; i < response.RankList.Count; i++)
+                {
+                    GameObject go = UnityEngine.Object.Instantiate(self.EG_UIRankUnionItemRectTransform.gameObject);
+                    CommonViewHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
+                    go.SetActive(true);
+                    ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
+                    rc.Get<GameObject>("NameText").GetComponent<Text>().text = zstring.Format("   {0}    {1}", i + 1, response.RankList[i].PlayerName);
+                    rc.Get<GameObject>("NumText").GetComponent<Text>().text = response.RankList[i].KillNumber.ToString();
+                }
             }
         }
 
@@ -86,10 +89,10 @@ namespace ET.Client
 
             taskPros.Sort(delegate(TaskPro a, TaskPro b)
             {
-                int commita = a.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
-                int commitb = b.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
-                int completea = a.taskStatus == (int)TaskStatuEnum.Completed? 1 : 0;
-                int completeb = b.taskStatus == (int)TaskStatuEnum.Completed? 1 : 0;
+                int commita = a.taskStatus == (int)TaskStatuEnum.Commited ? 1 : 0;
+                int commitb = b.taskStatus == (int)TaskStatuEnum.Commited ? 1 : 0;
+                int completea = a.taskStatus == (int)TaskStatuEnum.Completed ? 1 : 0;
+                int completeb = b.taskStatus == (int)TaskStatuEnum.Completed ? 1 : 0;
 
                 if (commita == commitb)
                     return completeb - completea; //可以领取的在前

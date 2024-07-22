@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ActivityToken))]
-    [FriendOfAttribute(typeof (ES_ActivityToken))]
+    [EntitySystemOf(typeof(ES_ActivityToken))]
+    [FriendOfAttribute(typeof(ES_ActivityToken))]
     public static partial class ES_ActivityTokenSystem
     {
         [EntitySystem]
@@ -56,7 +56,11 @@ namespace ET.Client
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
-            self.E_TextRechargeText.text = $"当前额度：{selfRechage}/298";
+            using (zstring.Block())
+            {
+                self.E_TextRechargeText.text = zstring.Format("当前额度：{0}/298", selfRechage);
+            }
+
             self.E_TextRechargeText.gameObject.SetActive(selfRechage < 298);
         }
     }

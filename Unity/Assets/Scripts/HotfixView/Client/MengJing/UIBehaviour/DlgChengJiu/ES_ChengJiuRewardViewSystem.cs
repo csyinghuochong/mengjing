@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ChengJiuRewardItem))]
-    [EntitySystemOf(typeof (ES_ChengJiuReward))]
-    [FriendOfAttribute(typeof (ES_ChengJiuReward))]
+    [FriendOf(typeof(Scroll_Item_ChengJiuRewardItem))]
+    [EntitySystemOf(typeof(ES_ChengJiuReward))]
+    [FriendOfAttribute(typeof(ES_ChengJiuReward))]
     public static partial class ES_ChengJiuRewardSystem
     {
         [EntitySystem]
@@ -120,7 +120,11 @@ namespace ET.Client
 
             self.E_Image_RewardIconImage.sprite = sp;
 
-            self.E_Text_RewardPointText.text = $"{chengJiuConfig.NeedPoint}成就奖励";
+            using (zstring.Block())
+            {
+                self.E_Text_RewardPointText.text = zstring.Format("{0}成就奖励", chengJiuConfig.NeedPoint);
+            }
+
             self.E_Text_RewardDescText.text = chengJiuConfig.Desc;
 
             self.E_Text_TotalPointText.text = self.Root().GetComponent<ChengJiuComponentC>().TotalChengJiuPoint.ToString();

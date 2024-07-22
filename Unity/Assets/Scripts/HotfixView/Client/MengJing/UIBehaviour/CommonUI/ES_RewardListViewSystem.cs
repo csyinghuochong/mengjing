@@ -27,7 +27,11 @@ namespace ET.Client
         {
             if (index < 0 || index >= self.ShowBagInfos.Count)
             {
-                Log.Error($"index超了 {index} {self.ShowBagInfos.Count}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("index超了 {0} {1}", index, self.ShowBagInfos.Count));
+                }
+
                 return;
             }
 

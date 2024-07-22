@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ActivityYueKa))]
-    [FriendOfAttribute(typeof (ES_ActivityYueKa))]
+    [EntitySystemOf(typeof(ES_ActivityYueKa))]
+    [FriendOfAttribute(typeof(ES_ActivityYueKa))]
     public static partial class ES_ActivityYueKaSystem
     {
         [EntitySystem]
@@ -36,7 +36,10 @@ namespace ET.Client
                 self.E_Btn_OpenYueKaButton.gameObject.SetActive(false);
 
                 int leftDay = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes);
-                self.E_Text_RemainingtimesText.text = $"{leftDay}/7";
+                using (zstring.Block())
+                {
+                    self.E_Text_RemainingtimesText.text = zstring.Format("{0}/7", leftDay);
+                }
             }
             else
             {
@@ -45,7 +48,7 @@ namespace ET.Client
                 self.E_Btn_GetRewardButton.gameObject.SetActive(false);
                 self.E_Btn_GoPayButton.gameObject.SetActive(false);
                 self.E_Btn_OpenYueKaButton.gameObject.SetActive(true);
-                self.E_Text_RemainingtimesText.text = $"0/7";
+                self.E_Text_RemainingtimesText.text = "0/7";
             }
         }
 
@@ -74,7 +77,7 @@ namespace ET.Client
             }
 
             int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+                    .Get(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10).Value);
             long nowPiLao = self.Root().GetComponent<UserInfoComponentC>().UserInfo.PiLao;
 
             if (maxPiLao < nowPiLao + 20)
@@ -113,7 +116,11 @@ namespace ET.Client
         {
             // 判断自身是否有钻石
             string cost = GlobalValueConfigCategory.Instance.Get(37).Value;
-            PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", $"是否花费{cost}钻石开启月卡?", () => { self.ReqestOpenYueKa().Coroutine(); }, null).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", zstring.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOpenYueKa().Coroutine(); },
+                    null).Coroutine();
+            }
         }
     }
 }

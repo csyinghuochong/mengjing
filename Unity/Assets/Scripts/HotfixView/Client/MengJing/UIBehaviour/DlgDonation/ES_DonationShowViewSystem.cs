@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_DonationShow))]
-    [FriendOfAttribute(typeof (ES_DonationShow))]
+    [EntitySystemOf(typeof(ES_DonationShow))]
+    [FriendOfAttribute(typeof(ES_DonationShow))]
     public static partial class ES_DonationShowSystem
     {
         [EntitySystem]
@@ -69,17 +69,20 @@ namespace ET.Client
         public static async ETTask OnUpdateUI(this ES_DonationShow self)
         {
             U2C_DonationRankListResponse response = await UnionNetHelper.DonationRankListRequest(self.Root());
-            
+
             self.ShowRankingInfos = response.RankList;
 
             self.AddUIScrollItems(ref self.ScrollItemDonationShowItems, self.ShowRankingInfos.Count);
             self.E_DonationShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingInfos.Count);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.E_Text_MyDonationText.text =
-                    $"我已捐献{unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber)}金币";
-            self.E_TextMyDonationText.text =
-                    $"我已捐献{unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber)}金币";
+            using (zstring.Block())
+            {
+                self.E_Text_MyDonationText.text =
+                        zstring.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
+                self.E_TextMyDonationText.text =
+                        zstring.Format("我已捐献{0}金币", unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber));
+            }
 
             await ETTask.CompletedTask;
         }

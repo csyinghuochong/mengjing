@@ -4,9 +4,9 @@ using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ChangeEquipComponent))]
-    [EntitySystemOf(typeof (ES_ModelShow))]
-    [FriendOf(typeof (ES_ModelShow))]
+    [FriendOf(typeof(ChangeEquipComponent))]
+    [EntitySystemOf(typeof(ES_ModelShow))]
+    [FriendOf(typeof(ES_ModelShow))]
     public static partial class ES_ModelShowSystem
     {
         [EntitySystem]
@@ -109,26 +109,30 @@ namespace ET.Client
 
             self.ReSetTexture();
 
-            string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
-            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-            ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
-            changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
-            changeEquipComponent.EquipIndex = equipIndex;
-            changeEquipComponent.UseLayer = true;
-            changeEquipComponent.LoadEquipment(go, fashionids, occ);
-            Animator animator = go.GetComponentInChildren<Animator>();
-            if (animator != null)
+            using (zstring.Block())
             {
-                animator.Play("ShowIdel");
+                string path = ABPathHelper.GetUnitPath(zstring.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+                ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
+                changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
+                changeEquipComponent.EquipIndex = equipIndex;
+                changeEquipComponent.UseLayer = true;
+                changeEquipComponent.LoadEquipment(go, fashionids, occ);
+                Animator animator = go.GetComponentInChildren<Animator>();
+                if (animator != null)
+                {
+                    animator.Play("ShowIdel");
+                }
+
+                LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+                go.transform.localScale = Vector3.one;
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localEulerAngles = Vector3.zero;
+
+                self.Model.Add(go);
             }
-
-            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
-            go.transform.localScale = Vector3.one;
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localEulerAngles = Vector3.zero;
-
-            self.Model.Add(go);
         }
 
         public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
@@ -145,27 +149,30 @@ namespace ET.Client
 
             self.ReSetTexture();
 
-            var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
-            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-            ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
-            changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
-            changeEquipComponent.EquipIndex = 0;
-            changeEquipComponent.UseLayer = true;
-            changeEquipComponent.LoadEquipment(go, fashionids, occ);
-
-            Animator animator = go.GetComponentInChildren<Animator>();
-            if (animator != null)
+            using (zstring.Block())
             {
-                animator.Play("ShowIdel");
+                var path = ABPathHelper.GetUnitPath(zstring.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+                ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
+                changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
+                changeEquipComponent.EquipIndex = 0;
+                changeEquipComponent.UseLayer = true;
+                changeEquipComponent.LoadEquipment(go, fashionids, occ);
+
+                Animator animator = go.GetComponentInChildren<Animator>();
+                if (animator != null)
+                {
+                    animator.Play("ShowIdel");
+                }
+
+                LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+                go.transform.localScale = Vector3.one;
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localEulerAngles = Vector3.zero;
+
+                self.Model.Add(go);
             }
-
-            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
-            go.transform.localScale = Vector3.one;
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localEulerAngles = Vector3.zero;
-
-            self.Model.Add(go);
         }
 
         private static int GetWeaponId(this ES_ModelShow self, BagInfo bagInfo, int occ)
@@ -197,7 +204,10 @@ namespace ET.Client
             GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             if (prefab == null)
             {
-                Log.Error($"prefab == null: {path}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("prefab == null: {0}", path));
+                }
             }
 
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
@@ -210,7 +220,7 @@ namespace ET.Client
             if (isPet)
             {
                 Animator animator = go.GetComponentInChildren<Animator>();
-                animator.Play(RandomHelper.RandFloat01() >= 0.5? "Skill_1" : "Skill_2");
+                animator.Play(RandomHelper.RandFloat01() >= 0.5 ? "Skill_1" : "Skill_2");
             }
 
             self.Model.Add(go);
@@ -248,7 +258,7 @@ namespace ET.Client
             {
                 self.RenderTexture.Release();
             }
-            
+
             RenderTexture renderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
             renderTexture.Create();
             self.RenderTexture = renderTexture;

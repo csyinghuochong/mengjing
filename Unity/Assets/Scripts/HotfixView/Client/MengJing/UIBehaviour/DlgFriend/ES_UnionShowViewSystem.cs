@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_UnionShow))]
-    [FriendOfAttribute(typeof (ES_UnionShow))]
+    [EntitySystemOf(typeof(ES_UnionShow))]
+    [FriendOfAttribute(typeof(ES_UnionShow))]
     public static partial class ES_UnionShowSystem
     {
         [EntitySystem]
@@ -121,8 +121,11 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_UnionShow self)
         {
-            self.E_Text_Contion1Text.text = $"1. 角色等级达到{GlobalValueConfigCategory.Instance.Get(21).Value}级";
-            self.E_Text_Contion2Text.text = $"2. 消耗{GlobalValueConfigCategory.Instance.Get(22).Value}钻石";
+            using (zstring.Block())
+            {
+                self.E_Text_Contion1Text.text = zstring.Format("1. 角色等级达到{0}级", GlobalValueConfigCategory.Instance.Get(21).Value);
+                self.E_Text_Contion2Text.text = zstring.Format("2. 消耗{0}钻石", GlobalValueConfigCategory.Instance.Get(22).Value);
+            }
         }
 
         public static async ETTask RequestCreateUnion(this ES_UnionShow self)

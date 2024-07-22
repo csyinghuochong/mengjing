@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ActivityMaoXian))]
-    [FriendOfAttribute(typeof (ES_ActivityMaoXian))]
+    [EntitySystemOf(typeof(ES_ActivityMaoXian))]
+    [FriendOfAttribute(typeof(ES_ActivityMaoXian))]
     public static partial class ES_ActivityMaoXianSystem
     {
         [EntitySystem]
@@ -101,7 +101,11 @@ namespace ET.Client
             float value = rechargeNum * 1f / needNumber;
             value = Mathf.Clamp01(value);
             self.E_ImageProgressImage.transform.localScale = new Vector3(value, 1f, 1f);
-            self.E_Text_ProgressText.text = $"{rechargeNum}/{needNumber}";
+            using (zstring.Block())
+            {
+                self.E_Text_ProgressText.text = zstring.Format("{0}/{1}", rechargeNum, needNumber);
+            }
+
             self.E_Btn_GetRewardButton.gameObject.SetActive(!activityComponent.ActivityReceiveIds.Contains(self.CurActivityId));
             self.E_ImageReceivedImage.gameObject.SetActive(activityComponent.ActivityReceiveIds.Contains(self.CurActivityId));
 

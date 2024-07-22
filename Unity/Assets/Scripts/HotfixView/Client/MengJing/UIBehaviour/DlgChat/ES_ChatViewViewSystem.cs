@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (FriendComponent))]
-    [EntitySystemOf(typeof (ES_ChatView))]
-    [FriendOfAttribute(typeof (ES_ChatView))]
+    [FriendOf(typeof(FriendComponent))]
+    [EntitySystemOf(typeof(ES_ChatView))]
+    [FriendOfAttribute(typeof(ES_ChatView))]
     public static partial class ES_ChatViewSystem
     {
         [EntitySystem]
@@ -33,7 +33,11 @@ namespace ET.Client
         public static void Refresh(this ES_ChatView self, FriendInfo friendInfo)
         {
             self.FriendInfo = friendInfo;
-            self.E_ChatPlayNameText.text = "与" + friendInfo.PlayerName + "私聊中...";
+            using (zstring.Block())
+            {
+                self.E_ChatPlayNameText.text = zstring.Format("与{0}私聊中...", friendInfo.PlayerName);
+            }
+
             self.RefreshFriendChatItems();
         }
 
