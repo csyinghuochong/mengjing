@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgMJLobby))]
-    [FriendOf(typeof (PlayerComponent))]
+    [FriendOf(typeof(DlgMJLobby))]
+    [FriendOf(typeof(PlayerComponent))]
     public static class DlgMJLobbySystem
     {
         public static void RegisterUIEvent(this DlgMJLobby self)
@@ -86,7 +86,7 @@ namespace ET.Client
             roleNumber = Mathf.Max(roleNumber, 8);
 
             int pagetotal = roleNumber / 4;
-            pagetotal += ((roleNumber % 4 > 0)? 1 : 0);
+            pagetotal += ((roleNumber % 4 > 0) ? 1 : 0);
 
             self.View.E_PrevButton.gameObject.SetActive(self.PageIndex > 0);
             self.View.E_NextButton.gameObject.SetActive(self.PageIndex < pagetotal - 1);
@@ -105,7 +105,11 @@ namespace ET.Client
             if (self.SeletRoleInfo != null)
             {
                 self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
-                self.View.E_LvText.text = $"{self.SeletRoleInfo.PlayerLv}级";
+                using (zstring.Block())
+                {
+                    self.View.E_LvText.text = zstring.Format("{0}级", self.SeletRoleInfo.PlayerLv);
+                }
+
                 self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
                 self.View.ES_ModelShow.ShowPlayerModel(BagInfo.Create(), createRoleInfo.PlayerOcc, 0, new List<int>());
                 self.View.ES_ModelShow.SetShow(true);
@@ -167,7 +171,7 @@ namespace ET.Client
             roleNumber = Mathf.Max(roleNumber, 8);
 
             int pagetotal = roleNumber / 4;
-            pagetotal += ((roleNumber % 4 > 0)? 1 : 0);
+            pagetotal += ((roleNumber % 4 > 0) ? 1 : 0);
             if (self.PageIndex >= pagetotal - 1)
             {
                 return;

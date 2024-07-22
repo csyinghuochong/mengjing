@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
-    [FriendOf(typeof (DlgOccTwo))]
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
+    [FriendOf(typeof(DlgOccTwo))]
     public static class DlgOccTwoSystem
     {
         public static void RegisterUIEvent(this DlgOccTwo self)
@@ -35,8 +35,11 @@ namespace ET.Client
             }
 
             OccupationTwoConfig occupationTwoConfig = OccupationTwoConfigCategory.Instance.Get(self.OccTwoId);
-            PopupTipHelp.OpenPopupTip(self.Root(), "转职", $"是否转职为：{occupationTwoConfig.OccupationName}",
-                () => { self.RequestChangeOcc().Coroutine(); }).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "转职", zstring.Format("是否转职为：{0}", occupationTwoConfig.OccupationName),
+                    () => { self.RequestChangeOcc().Coroutine(); }).Coroutine();
+            }
         }
 
         public static async ETTask RequestChangeOcc(this DlgOccTwo self)
@@ -63,7 +66,7 @@ namespace ET.Client
             int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
             List<int> occTwoList = new List<int>(OccTwoID);
             int index = occTwoList.IndexOf(occTwo);
-            index = index < 0? 0 : index;
+            index = index < 0 ? 0 : index;
             self.OnButton_ZhiYe(index);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();

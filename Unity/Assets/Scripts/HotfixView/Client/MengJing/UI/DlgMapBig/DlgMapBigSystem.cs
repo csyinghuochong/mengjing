@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UIMapBigTimer)]
-    public class UIMapBigTimer: ATimer<DlgMapBig>
+    public class UIMapBigTimer : ATimer<DlgMapBig>
     {
         protected override void Run(DlgMapBig self)
         {
@@ -18,14 +18,17 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_MapBigNpcItem))]
-    [FriendOf(typeof (MoveComponent))]
-    [FriendOf(typeof (DlgMapBig))]
+    [FriendOf(typeof(Scroll_Item_MapBigNpcItem))]
+    [FriendOf(typeof(MoveComponent))]
+    [FriendOf(typeof(DlgMapBig))]
     public static class DlgMapBigSystem
     {
         public static void RegisterUIEvent(this DlgMapBig self)

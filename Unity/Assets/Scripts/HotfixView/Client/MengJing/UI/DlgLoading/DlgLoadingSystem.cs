@@ -15,7 +15,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -284,7 +287,10 @@ namespace ET.Client
         {
             progress = Mathf.Min(1f, Mathf.Max(progress, 0f));
             self.View.E_Img_LodingValueImage.fillAmount = progress;
-            self.View.E_Lab_TextText.text = $"{(int)(progress * 100)}%";
+            using (zstring.Block())
+            {
+                self.View.E_Lab_TextText.text = zstring.Format("{0}%", (int)(progress * 100));
+            }
         }
 
         public static void UpdateMainUI(this DlgLoading self, int sceneTypeEnum)

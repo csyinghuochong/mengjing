@@ -311,7 +311,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -675,7 +678,13 @@ namespace ET.Client
                 return;
             }
 
-            string fubenName = $"请前往{DungeonConfigCategory.Instance.Get(fubenId).ChapterName} {NpcConfigCategory.Instance.Get(getNpc).Name} 出接取任务";
+            string fubenName;
+            using (zstring.Block())
+            {
+                fubenName = zstring.Format("请前往{0} {1} 出接取任务", DungeonConfigCategory.Instance.Get(fubenId).ChapterName,
+                    NpcConfigCategory.Instance.Get(getNpc).Name);
+            }
+
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
@@ -881,7 +890,11 @@ namespace ET.Client
                 return;
             }
 
-            self.View.E_ExpValueText.text = userInfo.Exp + "/" + ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            using (zstring.Block())
+            {
+                self.View.E_ExpValueText.text = zstring.Format("{0}/{1}", userInfo.Exp, ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp);
+            }
+
             self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
         }
 
@@ -1145,9 +1158,13 @@ namespace ET.Client
                     color = "C4FF00";
                 }
 
-                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = $"<color=#{color}>击败怪物</color>";
-                rc.Get<GameObject>("LvText").GetComponent<Text>().text =
-                        $"<color=#{color}>{numericComponent.GetAsInt(NumericType.KillMonsterNumber)}/{newNum}</color>";
+                using (zstring.Block())
+                {
+                    rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = zstring.Format("<color=#{0}>击败怪物</color>", color);
+                    rc.Get<GameObject>("LvText").GetComponent<Text>().text =
+                            zstring.Format("<color=#{0}>{1}/{2}</color>", color, numericComponent.GetAsInt(NumericType.KillMonsterNumber), newNum);
+                }
+
                 self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(true);
             }
             else
@@ -1264,8 +1281,12 @@ namespace ET.Client
                     color = "C4FF00";
                 }
 
-                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = $"<color=#{color}>等级奖励</color>";
-                rc.Get<GameObject>("LvText").GetComponent<Text>().text = $"<color=#{color}>{newLv}级领取</color>";
+                using (zstring.Block())
+                {
+                    rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = zstring.Format("<color=#{0}>等级奖励</color>", color);
+                    rc.Get<GameObject>("LvText").GetComponent<Text>().text = zstring.Format("<color=#{0}>{1}级领取</color>", color, newLv);
+                }
+
                 self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(true);
             }
             else
@@ -1588,7 +1609,12 @@ namespace ET.Client
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
                     // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
-                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:"),
+                            userInfo.Lv));
+                    }
+
                     self.UpdateLvReward();
                     // self.CheckCanEquip().Coroutine();
                     // if (int.Parse(updateValue) > 30)
@@ -1642,38 +1668,56 @@ namespace ET.Client
                 case UserDataType.WeiJingGold:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"获得{updateValue} 兑换币");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 兑换币", updateValue));
+                        }
                     }
 
                     if (int.Parse(updateValue) < 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"消耗{int.Parse(updateValue) * -1} 兑换币");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 兑换币", int.Parse(updateValue) * -1));
+                        }
                     }
 
                     break;
                 case UserDataType.RongYu:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"获得{updateValue} 荣誉");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 荣誉", updateValue));
+                        }
                     }
 
                     if (int.Parse(updateValue) < 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"消耗{int.Parse(updateValue) * -1} 荣誉");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 荣誉", int.Parse(updateValue) * -1));
+                        }
                     }
 
                     break;
                 case UserDataType.JiaYuanFund:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"获得{updateValue} 家园资金");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 家园资金", updateValue));
+                        }
                     }
 
                     break;
                 case UserDataType.BaoShiDu:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"获得{updateValue} 饱食度");
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 饱食度", updateValue));
+                        }
                     }
 
                     break;
@@ -1849,7 +1893,10 @@ namespace ET.Client
 
         public static void OnRechageSucess(this DlgMain self, int addNumber)
         {
-            FlyTipComponent.Instance.ShowFlyTip($"充值{addNumber}元成功");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("充值{0}元成功", addNumber));
+            }
 
             self.Root().GetComponent<PlayerComponent>().PlayerInfo.RechargeInfos.Add(new()
             {

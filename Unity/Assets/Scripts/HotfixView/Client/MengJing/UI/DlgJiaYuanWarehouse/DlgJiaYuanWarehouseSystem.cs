@@ -59,7 +59,7 @@ namespace ET.Client
                 string costItems = ET.JiaYuanHelper.GetOpenJiaYuanWarehouse(cangkuNumber);
                 using (zstring.Block())
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", (zstring)"是否消耗" + CommonViewHelper.GetNeedItemDesc(costItems) + "开启一个仓库",
+                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", zstring.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
                         () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
                 }
 
@@ -101,7 +101,7 @@ namespace ET.Client
             self.RefreshHouseItems();
             using (zstring.Block())
             {
-                FlyTipComponent.Instance.ShowFlyTip((zstring)"获得道具: " + CommonViewHelper.GetNeedItemDesc(dataparams));
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得道具: {0}", CommonViewHelper.GetNeedItemDesc(dataparams)));
             }
         }
 
@@ -111,7 +111,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                    (zstring)"是否花费" + CommonViewHelper.GetNeedItemDesc(costitems) + "购买一个背包格子?",
+                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(costitems)),
                     () => { },
                     null).Coroutine();
             }
