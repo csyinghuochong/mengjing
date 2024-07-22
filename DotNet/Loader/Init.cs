@@ -21,7 +21,6 @@ namespace ET
 						.WithParsed((o)=>World.Instance.AddSingleton(o));
 				
 				World.Instance.AddSingleton<Logger>().Log = new NLogger(Options.Instance.AppType.ToString(), Options.Instance.Process, 0);
-				Options.Instance.Process = 2;
 				
 				ETTask.ExceptionHandler += Log.Error;
 				World.Instance.AddSingleton<TimeInfo>();
