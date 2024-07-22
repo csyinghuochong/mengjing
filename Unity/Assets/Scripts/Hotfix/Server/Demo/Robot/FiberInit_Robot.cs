@@ -1,4 +1,5 @@
 ﻿using System;
+using ET.Server;
 
 namespace ET.Client
 {
@@ -17,20 +18,42 @@ namespace ET.Client
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<ObjectWait>();
+            root.AddComponent<BagComponentC>();
+            root.AddComponent<UserInfoComponentC>();
+            root.AddComponent<ChatComponent>();
+            root.AddComponent<FriendComponent>();
+            root.AddComponent<TaskComponentC>();
+            root.AddComponent<BattleMessageComponent>();
+            root.AddComponent<MapComponent>();
+            root.AddComponent<PetComponentC>();
+            root.AddComponent<SkillSetComponentC>();
+            root.AddComponent<ChengJiuComponentC>();
+            root.AddComponent<MailComponentC>();
+            root.AddComponent<ShoujiComponentC>();
+            root.AddComponent<TitleComponentC>();
+            root.AddComponent<ReddotComponentC>();
+            root.AddComponent<AttackComponent>();
+            root.AddComponent<ActivityComponentC>();
+            root.AddComponent<JiaYuanComponentC>();
+            root.AddComponent<TeamComponentC>();
             
             root.SceneType = SceneType.Demo;
-
-            await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
-            
-
-            await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord);
             
             PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            int versionMode =  ComHelperS.IsInnerNet() ? VersionMode.Alpha: VersionMode.Beta;
+            playerComponent.ServerItem = ServerHelper.GetServerList(versionMode)[0];
+            
+            await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
+            
+            await LoginHelper.Login(root, "1001_ET", ConfigData.RobotPassWord);
+            //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
+            
             if (playerComponent.CreateRoleList.Count == 0)
             {
-                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, "机器人" + playerComponent.Account);
+                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1,  playerComponent.Account);
             }
-            
+
+            playerComponent.CurrentRoleId = playerComponent.CreateRoleList[0].UnitId;
             await LoginHelper.LoginGameAsync(root);
 
             //root.AddComponent<AIComponent, int>(1);

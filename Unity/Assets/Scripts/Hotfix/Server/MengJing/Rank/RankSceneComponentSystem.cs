@@ -730,6 +730,7 @@ namespace ET.Server
 
         public static async ETTask BroadcastShowLie(this RankSceneComponent self, string loadvalue)
         {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
             ServerHelper.GetServerList(VersionMode.Beta);
 
             int firstserver = 0;

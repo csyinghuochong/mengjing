@@ -6,7 +6,7 @@ namespace ET.Client.Handler
     {
         protected override async ETTask Run(Scene root, M2C_TaskUpdate message)
         {
-            root.GetComponent<TaskComponentC>().OnRecvTaskUpdate( message );
+            root.GetComponent<TaskComponentC>()?.OnRecvTaskUpdate( message );
             await ETTask.CompletedTask;
         }
     }
