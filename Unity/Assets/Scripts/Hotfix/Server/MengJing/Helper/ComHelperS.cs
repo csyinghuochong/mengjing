@@ -44,15 +44,7 @@ namespace ET.Server
             return false;
         }
 
-        public static bool IsBanHaoZone()
-        {
-            //////20201是版号区的
-            if (StartMachineConfigCategory.Instance.Get(1).WatcherPort.Equals("20201") )
-            {
-                return true;
-            }
-            return false;
-        }
+       
         
         public static int GetWorldLv(int openserverDay)
         {

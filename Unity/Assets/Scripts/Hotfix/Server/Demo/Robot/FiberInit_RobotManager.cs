@@ -1,20 +1,24 @@
-namespace ET.Server
+using System;
+
+namespace ET.Client
 {
-    [Invoke((long)SceneType.Rank)]
-    public class FiberInit_Rank : AInvokeHandler<FiberInit, ETTask>
+    [Invoke((long)SceneType.RobotManager)]
+    public class FiberInit_RobotManager : AInvokeHandler<FiberInit, ETTask>
     {
+
         public override async ETTask Handle(FiberInit fiberInit)
         {
+            Console.WriteLine("FiberInit_Robot");
+
             Scene root = fiberInit.Fiber.Root;
             root.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             root.AddComponent<TimerComponent>();
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
-            root.AddComponent<MessageSender>();
-            root.AddComponent<LocationManagerComoponent>();
-            root.AddComponent<RankSceneComponent>();
-            root.AddComponent<DBManagerComponent>();
-            root.AddComponent<MessageLocationSenderComponent>();
+            root.AddComponent<PlayerComponent>();
+            root.AddComponent<CurrentScenesComponent>();
+            root.AddComponent<ObjectWait>();
+
             await ETTask.CompletedTask;
         }
     }
