@@ -57,7 +57,7 @@ namespace ET.Server
             }
             userInfoComponentS.OnLogin( remoteIp,  deviceName);
             unit.GetComponent<BagComponentS>().OnLogin(userInfo.RobotId);
-            unit.GetComponent<TaskComponentS>().OnLogin();
+            unit.GetComponent<TaskComponentS>().OnLogin(userInfo.RobotId);
             unit.GetComponent<HeroDataComponentS>().OnLogin(userInfo.RobotId);
             unit.GetComponent<DBSaveComponent>().OnLogin();
             unit.GetComponent<RechargeComponent>().OnLogin();

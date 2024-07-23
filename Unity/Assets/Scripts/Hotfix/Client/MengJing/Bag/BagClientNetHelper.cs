@@ -652,6 +652,26 @@ namespace ET.Client
             return response;
         }
 
+        public static async ETTask CheckCanJianDing(Scene root)
+        {
+            //可以鉴定的装备
+            // List<BagInfo> bagInfos =  root.GetComponent<BagComponentC>().GetCanJianDing();
+
+            //鉴定装备
+            C2M_ItemOperateRequest itemOperateRequest = C2M_ItemOperateRequest.Create();
+            await ETTask.CompletedTask;
+        }
+        
+        public static async ETTask CheckCanEquip(Scene root)
+        {
+            //可以穿戴的装备
+            // List<BagInfo> bagInfos =  root.GetComponent<BagComponentC>().GetCanEquipList();
+
+            //穿戴装备
+            C2M_ItemOperateRequest itemOperateRequest = C2M_ItemOperateRequest.Create();
+            await ETTask.CompletedTask;
+        }
+
         public static async ETTask<M2C_ItemXiLianTransferResponse> ItemXiLianTransfer(Scene root, long operateBagID_1, long operateBagID_2)
         {
             C2M_ItemXiLianTransferRequest request = C2M_ItemXiLianTransferRequest.Create();

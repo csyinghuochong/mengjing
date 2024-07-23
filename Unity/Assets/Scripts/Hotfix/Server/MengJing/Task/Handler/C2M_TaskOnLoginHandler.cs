@@ -7,7 +7,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TaskOnLoginRequest request, M2C_TaskOnLoginResponse response)
         {
             TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
-            taskComponent.OnLogin();
+            taskComponent.OnLogin(unit.GetComponent<UserInfoComponentS>().UserInfo.RobotId);
             await ETTask.CompletedTask;
         }
     }

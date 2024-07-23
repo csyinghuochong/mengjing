@@ -1,0 +1,39 @@
+using System.Collections.Generic;
+using Unity.Mathematics;
+
+namespace ET
+{
+    
+    [ComponentOf(typeof(Scene))]
+    public class BehaviourComponent : Entity, IAwake<int>, IDestroy
+    {
+        
+        public List<KeyValuePair> Behaviours = new List<KeyValuePair>();
+
+        public ETCancellationToken CancellationToken;
+
+        public long Timer;
+
+        public int Current;
+
+        public int NewBehaviour { get; set; }
+
+        public long TargetID;
+
+        public string MessageValue;
+
+        public float3 TargetPosition;
+
+        public RobotConfig RobotConfig;
+
+        public long CreateTime;
+
+        /// <summary>
+        /// 攻击范围，范围内攻击
+        /// </summary>
+        public float ActDistance = 3;
+
+        public readonly C2M_SkillCmd c2mSkillCmd = C2M_SkillCmd.Create();
+    }
+}
+

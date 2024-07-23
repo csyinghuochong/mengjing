@@ -57,7 +57,7 @@ namespace ET.Server
             userInfo.JiaYuanLv = 10001;
             userInfo.JiaYuanFund = 10000;
             userInfo.AccInfoID = accountId;
-            userInfo.Name = "";
+            userInfo.Name = createRoleInfo.PlayerName;
             userInfo.ServerMailIdCur = -1;
             userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value); //初始化疲劳
             userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
@@ -148,6 +148,13 @@ namespace ET.Server
                 {
                     self.UserInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
                 }
+            }
+
+            if (self.UserInfo.RobotId > 0)
+            { 
+                self.UserInfo.Lv = math.max(self.UserInfo.Lv, 100000);
+                self.UserInfo.Gold = math.max(self.UserInfo.Gold, 100000000);
+                self.UserInfo.Diamond = math.max(self.UserInfo.Diamond, 100000);
             }
         }
 

@@ -12,7 +12,7 @@ namespace ET.Client
         public long CombatEndTime;
 
         public bool AutoAttack { get; set; } = true;
-        public float AttackDistance;
+        public float AttackDistance { get; set; }
         public List<int> Weights = new();
         public List<int> SkillList = new();
         public List<int> SkillCDs = new();

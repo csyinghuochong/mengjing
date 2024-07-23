@@ -878,7 +878,7 @@ namespace ET.Server
         }
 
 
-        public static void OnLogin(this TaskComponentS self)
+        public static void OnLogin(this TaskComponentS self, int robotid)
         {
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();

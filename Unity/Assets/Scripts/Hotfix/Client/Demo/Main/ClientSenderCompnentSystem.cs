@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System;
+
+namespace ET.Client
 {
     public struct CommonHintError 
     {
@@ -63,6 +65,7 @@
             main2NetClientLogin.ServerId     = playerComponent.ServerItem.ServerId;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
             Log.Debug("LoginAsync2222");
+            Console.WriteLine($"playerComponent.Account: {account}");
             playerComponent.Account = account;
             playerComponent.Token = response.Token;
             playerComponent.AccountId = response.AccountId;
