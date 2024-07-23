@@ -88,7 +88,11 @@ namespace ET.Client
             UnionQiangHuaConfig nextunionQiangHuaConfig = UnionQiangHuaConfigCategory.Instance.Get(nextxiulianid);
             self.EG_Pro_1RectTransform.Find("Text_Tip_Pro_0").GetComponent<Text>().text =
                     ItemViewHelp.GetAttributeDesc(nextunionQiangHuaConfig.EquipPropreAdd);
-            self.EG_Pro_1RectTransform.parent.transform.Find("Text_Tip_Pro_1").GetComponent<Text>().text = $"消耗:{unionQiangHuaConfig.CostGold}点家族贡献";
+            using (zstring.Block())
+            {
+                self.EG_Pro_1RectTransform.parent.transform.Find("Text_Tip_Pro_1").GetComponent<Text>().text =
+                        zstring.Format("消耗:{0}点家族贡献", unionQiangHuaConfig.CostGold);
+            }
 
             if (!CommonHelp.IfNull(unionQiangHuaConfig.CostItem))
             {

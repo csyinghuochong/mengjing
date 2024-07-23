@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TrialDungeonItem))]
-    [EntitySystemOf(typeof (ES_TrialDungeon))]
-    [FriendOfAttribute(typeof (ES_TrialDungeon))]
+    [FriendOf(typeof(Scroll_Item_TrialDungeonItem))]
+    [EntitySystemOf(typeof(ES_TrialDungeon))]
+    [FriendOfAttribute(typeof(ES_TrialDungeon))]
     public static partial class ES_TrialDungeonSystem
     {
         [EntitySystem]
@@ -51,7 +51,7 @@ namespace ET.Client
                 }
             }
 
-            return TowerConfigCategory.Instance.Get(nextId == 0? towerId : nextId).CengNum;
+            return TowerConfigCategory.Instance.Get(nextId == 0 ? towerId : nextId).CengNum;
         }
 
         public static int GetMaxCengNum(this ES_TrialDungeon self)
@@ -140,8 +140,12 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemTrialDungeonItems, self.ShowTowerConfigs.Count);
             self.E_TrialDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTowerConfigs.Count);
 
-            showIndex = showIndex == -1? 0 : showIndex;
-            self.E_TextLayerText.text = $"第{cengNum}层";
+            showIndex = showIndex == -1 ? 0 : showIndex;
+            using (zstring.Block())
+            {
+                self.E_TextLayerText.text = zstring.Format("第{0}层", cengNum);
+            }
+
             int moveIndex = Mathf.Max(showIndex, showNum - 5);
             Scroll_Item_TrialDungeonItem scrollItemTrialDungeonItem = self.ScrollItemTrialDungeonItems[showIndex];
             scrollItemTrialDungeonItem.OnBtn_XuanZhong();

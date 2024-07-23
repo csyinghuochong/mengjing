@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_FirstWin))]
-    [FriendOfAttribute(typeof (ES_FirstWin))]
+    [EntitySystemOf(typeof(ES_FirstWin))]
+    [FriendOfAttribute(typeof(ES_FirstWin))]
     public static partial class ES_FirstWinSystem
     {
         [EntitySystem]
@@ -98,7 +98,11 @@ namespace ET.Client
                     });
                 }
 
-                typeButtonInfos.Add(new TypeButtonInfo() { TypeId = item.Key, TypeName = $"第{item.Key}章", typeButtonItems = typeButtonItems });
+                using (zstring.Block())
+                {
+                    typeButtonInfos.Add(new TypeButtonInfo()
+                            { TypeId = item.Key, TypeName = zstring.Format("第{0}章", item.Key), typeButtonItems = typeButtonItems });
+                }
             }
 
             return typeButtonInfos;
@@ -165,35 +169,42 @@ namespace ET.Client
             int bossId = FirstWinConfigCategory.Instance.Get(firstwinId).BossID;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
             self.E_Text_BossNameText.text = monsterConfig.MonsterName;
-            self.E_Text_LvText.text = "等级:" + monsterConfig.Lv;
+            using (zstring.Block())
+            {
+                self.E_Text_LvText.text = zstring.Format("等级:{0}", monsterConfig.Lv);
+            }
 
             int[] skillIds = monsterConfig.SkillID;
             for (int i = 0; i < skillIds.Length; i++)
             {
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIds[i]);
-                string str = $"{skillConfig.SkillName}:" + skillConfig.SkillDescribe;
-                float height = (str.Length / 30 + 1) * 40; // 16个字一行
-                if (i == 0)
+                using (zstring.Block())
                 {
-                    self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
-                    self.SkillDescriptionList[i].GetComponent<Text>().text = str;
-                }
-                else
-                {
-                    if (self.SkillDescriptionList.Count > i)
+                    string str = zstring.Format("{0}:{1}", skillConfig.SkillName, skillConfig.SkillDescribe);
+                    float height = (str.Length / 30 + 1) * 40; // 16个字一行
+
+                    if (i == 0)
                     {
                         self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
                         self.SkillDescriptionList[i].GetComponent<Text>().text = str;
-                        self.SkillDescriptionList[i].SetActive(true);
                     }
                     else
                     {
-                        GameObject obj = UnityEngine.Object.Instantiate(self.E_SkillDescriptionItemTextText.gameObject);
-                        obj.SetActive(true);
-                        CommonViewHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
-                        self.SkillDescriptionList.Add(obj);
-                        obj.GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
-                        obj.GetComponent<Text>().text = str;
+                        if (self.SkillDescriptionList.Count > i)
+                        {
+                            self.SkillDescriptionList[i].GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
+                            self.SkillDescriptionList[i].GetComponent<Text>().text = str;
+                            self.SkillDescriptionList[i].SetActive(true);
+                        }
+                        else
+                        {
+                            GameObject obj = UnityEngine.Object.Instantiate(self.E_SkillDescriptionItemTextText.gameObject);
+                            obj.SetActive(true);
+                            CommonViewHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
+                            self.SkillDescriptionList.Add(obj);
+                            obj.GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
+                            obj.GetComponent<Text>().text = str;
+                        }
                     }
                 }
             }
@@ -206,8 +217,8 @@ namespace ET.Client
                 }
             }
 
-            self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
-            self.ES_ModelShow.ShowOtherModel("Monster/" + 70001001).Coroutine();
+            // self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
+            self.ES_ModelShow.ShowOtherModel("Monster/70001001").Coroutine();
 
             string skilldesc = "";
             int[] skilllist = monsterConfig.SkillID;
@@ -219,35 +230,53 @@ namespace ET.Client
                 }
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
-                skilldesc = skilldesc + skillConfig.SkillName + " " + skillConfig.SkillDescribe + "\n";
+                using (zstring.Block())
+                {
+                    skilldesc = zstring.Format("{0}{1} {2}\n", skilldesc, skillConfig.SkillName, skillConfig.SkillDescribe);
+                }
             }
 
             self.E_Text_SkillJieShaoText.text = skilldesc;
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             bool noupdatestatus = userInfoComponent.GetReviveTime(bossId) > TimeHelper.ServerNow();
             DateTime dateTime = TimeInfo.Instance.ToDateTime(userInfoComponent.GetReviveTime(bossId));
-            self.E_Text_UpdateStatusText.text = noupdatestatus? $"下次刷新时间\n{dateTime.ToString()}" : "(已刷新)";
+            using (zstring.Block())
+            {
+                self.E_Text_UpdateStatusText.text = noupdatestatus ? zstring.Format("下次刷新时间\n{0}", dateTime.ToString()) : "(已刷新)";
+            }
+
             self.E_Text_UpdateStatusText.color =
-                    noupdatestatus? new Color(164f / 255, 66f / 255f, 8f / 255f) : new Color(25f / 255, 180f / 255f, 25f / 255f);
+                    noupdatestatus ? new Color(164f / 255, 66f / 255f, 8f / 255f) : new Color(25f / 255, 180f / 255f, 25f / 255f);
 
             int killNumber = userInfoComponent.GetMonsterKillNumber(bossId);
             BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(self.ChapterId, killNumber);
             BossDevelopment bossDevelopmentNext = ConfigHelper.GetBossDevelopmentById(self.ChapterId, bossDevelopment.Level + 1);
             if (bossDevelopmentNext == null)
             {
-                self.E_Text_BossDevpText.text = $"{bossDevelopment.Name}";
+                using (zstring.Block())
+                {
+                    self.E_Text_BossDevpText.text = zstring.Format("{0}", bossDevelopment.Name);
+                }
+
                 self.E_ImageProgressImage.fillAmount = 1f;
             }
             else
             {
-                self.E_Text_BossDevpText.text = $"领主升级: {killNumber}/{bossDevelopmentNext.KillNumber}";
+                using (zstring.Block())
+                {
+                    self.E_Text_BossDevpText.text = zstring.Format("领主升级: {0}/{1}", killNumber, bossDevelopmentNext.KillNumber);
+                }
+
                 self.E_ImageProgressImage.fillAmount = killNumber * 1f / bossDevelopmentNext.KillNumber;
             }
 
-            self.E_Text_BossExpText.text = $"怪物经验:{1f * bossDevelopment.ExpAdd * monsterConfig.Exp}";
-            self.E_Text_BossDevpNameText.text = bossDevelopment.Name;
-            long cdTime = (long)(monsterConfig.ReviveTime * 1000 * bossDevelopment.ReviveTimeAdd);
-            self.E_Text_BossFreshTImeText.text = "冷却时间:" + TimeHelper.ShowLeftTime(cdTime);
+            using (zstring.Block())
+            {
+                self.E_Text_BossExpText.text = zstring.Format("怪物经验:{0}", 1f * bossDevelopment.ExpAdd * monsterConfig.Exp);
+                self.E_Text_BossDevpNameText.text = bossDevelopment.Name;
+                long cdTime = (long)(monsterConfig.ReviveTime * 1000 * bossDevelopment.ReviveTimeAdd);
+                self.E_Text_BossFreshTImeText.text = zstring.Format("冷却时间:{0}", TimeHelper.ShowLeftTime(cdTime));
+            }
 
             List<RewardItem> droplist = DropHelper.Show_MonsterDrop(monsterConfig.Id, 1f, true);
             List<int> itemIdList = new List<int>();
@@ -283,8 +312,11 @@ namespace ET.Client
         {
             if (firstWinInfo != null)
             {
-                Text_JiSha_1.GetComponent<Text>().text =
-                        $"{firstWinInfo.PlayerName} (时间： {TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime).ToString()})";
+                using (zstring.Block())
+                {
+                    Text_JiSha_1.GetComponent<Text>().text =
+                            zstring.Format("{0} (时间： {1})", firstWinInfo.PlayerName, TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime).ToString());
+                }
             }
             else
             {

@@ -107,22 +107,26 @@ namespace ET.Client
 
             Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
             self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
-            self.E_LvTextText.text = $"等级：{unionKeJiConfig.QiangHuaLv.ToString()}";
-            self.E_NeedUnionLvTextText.text = $"需要家族等级达到{unionKeJiConfig.NeedUnionLv}级";
-            if (unionKeJiConfig.QiangHuaLv == 0)
+            using (zstring.Block())
             {
-                UnionKeJiConfig unionKeJiConfig1 = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.NextID);
-                self.E_AttributeTextText.text = "下一级：" + ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd);
-            }
-            else
-            {
-                self.E_AttributeTextText.text = ItemViewHelp.GetAttributeDesc(unionKeJiConfig.EquipPropreAdd);
-            }
+                self.E_LvTextText.text = zstring.Format("等级：{0}", unionKeJiConfig.QiangHuaLv.ToString());
+                self.E_NeedUnionLvTextText.text = zstring.Format("需要家族等级达到{0}级", unionKeJiConfig.NeedUnionLv);
+                if (unionKeJiConfig.QiangHuaLv == 0)
+                {
+                    UnionKeJiConfig unionKeJiConfig1 = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.NextID);
+                    self.E_AttributeTextText.text = zstring.Format("下一级：{0}", ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd));
+                }
+                else
+                {
+                    self.E_AttributeTextText.text = ItemViewHelp.GetAttributeDesc(unionKeJiConfig.EquipPropreAdd);
+                }
 
-            self.ES_CommonItem.UpdateItem(new() { ItemID = 35, ItemNum = unionKeJiConfig.CostUnionGold }, ItemOperateEnum.None);
-            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-            self.E_CostUnionGoldTextText.text = $"消耗家族金币：{unionKeJiConfig.CostUnionGold / 10000f:0.#}万/{self.UnionMyInfo.UnionGold / 10000f:0.#}万";
-            self.E_NeedTimeTextText.text = $"研究消耗时间：{unionKeJiConfig.NeedTime / 3600f:0.##}小时";
+                self.ES_CommonItem.UpdateItem(new() { ItemID = 35, ItemNum = unionKeJiConfig.CostUnionGold }, ItemOperateEnum.None);
+                self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+                self.E_CostUnionGoldTextText.text = zstring.Format("消耗家族金币：{0}万/{1}万", (unionKeJiConfig.CostUnionGold / 10000f).ToString("0.#"),
+                    (self.UnionMyInfo.UnionGold / 10000f).ToString("0.#"));
+                self.E_NeedTimeTextText.text = zstring.Format("研究消耗时间：{0}小时", (unionKeJiConfig.NeedTime / 3600f).ToString("0.##"));
+            }
         }
 
         public static async ETTask UpdataProgressBar(this ES_UnionKeJiResearch self)
@@ -143,7 +147,11 @@ namespace ET.Client
                     {
                         self.E_ProgressBarImgImage.fillAmount = passTime * 1f / self.NeedTime;
                         long leftTime = self.NeedTime - passTime;
-                        self.E_UnderwayTextText.text = $"{leftTime / 3600}时{leftTime % 3600 / 60}分{leftTime % 3600 % 60}秒";
+                        using (zstring.Block())
+                        {
+                            self.E_UnderwayTextText.text =
+                                    zstring.Format("{0}时{1}分{2}秒", leftTime / 3600, leftTime % 3600 / 60, leftTime % 3600 % 60);
+                        }
                     }
                     else
                     {
@@ -182,22 +190,26 @@ namespace ET.Client
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "加速科技",
-                $"是否花费{UnionHelper.CalcuNeedeForAccele(self.UnionMyInfo.KeJiActiteTime, unionKeJiConfig.NeedTime)}钻石加速科技", async () =>
-                {
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                    long unionId = unit.GetUnionId();
-
-                    U2C_UnionKeJiQuickResponse response = await UnionNetHelper.UnionKeJiQuickRequest(self.Root(), unionId, self.Position);
-
-                    if (response.Error != ErrorCode.ERR_Success)
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "加速科技",
+                    zstring.Format("是否花费{0}钻石加速科技", UnionHelper.CalcuNeedeForAccele(self.UnionMyInfo.KeJiActiteTime, unionKeJiConfig.NeedTime)),
+                    async () =>
                     {
-                        return;
-                    }
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        long unionId = unit.GetUnionId();
 
-                    self.UnionMyInfo = response.UnionInfo;
-                    self.UpdateInfo(self.Position);
-                }, () => { }).Coroutine();
+                        U2C_UnionKeJiQuickResponse response = await UnionNetHelper.UnionKeJiQuickRequest(self.Root(), unionId, self.Position);
+
+                        if (response.Error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
+
+                        self.UnionMyInfo = response.UnionInfo;
+                        self.UpdateInfo(self.Position);
+                    }, () => { }).Coroutine();
+            }
         }
 
         public static async ETTask OnStartBtn(this ES_UnionKeJiResearch self)

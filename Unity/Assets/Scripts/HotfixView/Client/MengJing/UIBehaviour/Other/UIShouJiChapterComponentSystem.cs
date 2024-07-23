@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIShouJiChapterComponent))]
-    [EntitySystemOf(typeof (UIShouJiChapterComponent))]
+    [FriendOf(typeof(UIShouJiChapterComponent))]
+    [EntitySystemOf(typeof(UIShouJiChapterComponent))]
     public static partial class UIShouJiChapterComponentSystem
     {
         [EntitySystem]
@@ -118,7 +118,11 @@ namespace ET.Client
 
             self.ImageProgress.GetComponent<Image>().fillAmount = progress;
             self.Text_Name.GetComponent<Text>().text = shouJiConfig.ChapterDes;
-            self.Text_StarNum.GetComponent<Text>().text = $"{starNum}/{shouJiConfig.ProList3_StartNum}";
+            using (zstring.Block())
+            {
+                self.Text_StarNum.GetComponent<Text>().text = zstring.Format("{0}/{1}", starNum, shouJiConfig.ProList3_StartNum);
+            }
+
             self.Text_Star1.GetComponent<Text>().text = shouJiConfig.ProList1_StartNum.ToString();
             self.Text_Star2.GetComponent<Text>().text = shouJiConfig.ProList2_StartNum.ToString();
             self.Text_Star3.GetComponent<Text>().text = shouJiConfig.ProList3_StartNum.ToString();
@@ -146,7 +150,7 @@ namespace ET.Client
             }
 
             int row = (itemNum / 7);
-            row += (itemNum % 7 > 0? 1 : 0);
+            row += (itemNum % 7 > 0 ? 1 : 0);
             self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1600f, 200 + row * 270f);
 
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();

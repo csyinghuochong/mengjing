@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ZhanQuCombat))]
-    [FriendOfAttribute(typeof (ES_ZhanQuCombat))]
+    [EntitySystemOf(typeof(ES_ZhanQuCombat))]
+    [FriendOfAttribute(typeof(ES_ZhanQuCombat))]
     public static partial class ES_ZhanQuCombatSystem
     {
         [EntitySystem]
@@ -39,7 +39,11 @@ namespace ET.Client
                 self.ShowActivityConfigs.Add(activityConfigs[i]);
             }
 
-            self.E_MyCombatText.GetComponent<Text>().text = $"我的战力：{self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat}";
+            using (zstring.Block())
+            {
+                self.E_MyCombatText.GetComponent<Text>().text =
+                        zstring.Format("我的战力：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemZhanQuCombatItems, self.ShowActivityConfigs.Count);
             self.E_ZhanQuCombatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);

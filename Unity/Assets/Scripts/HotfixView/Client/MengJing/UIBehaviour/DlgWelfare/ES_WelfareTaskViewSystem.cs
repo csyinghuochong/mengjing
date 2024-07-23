@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_WelfareTask))]
-    [FriendOfAttribute(typeof (ES_WelfareTask))]
+    [EntitySystemOf(typeof(ES_WelfareTask))]
+    [FriendOfAttribute(typeof(ES_WelfareTask))]
     public static partial class ES_WelfareTaskSystem
     {
         [EntitySystem]
@@ -94,12 +94,19 @@ namespace ET.Client
                     taskPro.taskID = tasks[i];
                     taskPro.taskTargetNum_1 = taskConfig.TargetValue[0];
                     taskPro.taskStatus = (int)TaskStatuEnum.Commited;
-                    Log.Debug($"已完成的任务 {tasks[i]}");
+                    using (zstring.Block())
+                    {
+                        Log.Debug(zstring.Format("已完成的任务 {0}", tasks[i]));
+                    }
                 }
 
                 if (taskPro == null)
                 {
-                    Log.Error($"未领取的任务 {tasks[i]}");
+                    using (zstring.Block())
+                    {
+                        Log.Error(zstring.Format("未领取的任务 {0}", tasks[i]));
+                    }
+
                     taskPro = TaskPro.Create();
                     taskPro.taskID = tasks[i];
                     taskPro.taskTargetNum_1 = 0;
@@ -117,7 +124,10 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemWelfareTaskItems, self.ShowTaskPros.Count);
             self.E_WelfareTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
 
-            self.E_CompletenessTextText.text = $"当天完成度:{commited}/{tasks.Count}";
+            using (zstring.Block())
+            {
+                self.E_CompletenessTextText.text = zstring.Format("当天完成度:{0}/{1}", commited, tasks.Count);
+            }
 
             self.ES_RewardList.Refresh(ConfigData.WelfareTaskReward[day]);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.WelfareTaskRewards.Contains(day))

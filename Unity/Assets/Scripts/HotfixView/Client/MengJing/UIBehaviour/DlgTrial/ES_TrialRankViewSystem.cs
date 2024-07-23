@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_TrialRank))]
-    [FriendOfAttribute(typeof (ES_TrialRank))]
+    [EntitySystemOf(typeof(ES_TrialRank))]
+    [FriendOfAttribute(typeof(ES_TrialRank))]
     public static partial class ES_TrialRankSystem
     {
         [EntitySystem]
@@ -69,7 +69,7 @@ namespace ET.Client
             long serverTime = TimeHelper.ServerNow();
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
 
-            int today = (int)dateTime.DayOfWeek == 0? 7 : (int)dateTime.DayOfWeek;
+            int today = (int)dateTime.DayOfWeek == 0 ? 7 : (int)dateTime.DayOfWeek;
             long opentime = 7 * TimeHelper.OneDay;
             long curTime = today * TimeHelper.OneDay + dateTime.Hour * TimeHelper.Hour + dateTime.Minute * TimeHelper.Minute +
                     dateTime.Second * TimeHelper.Second;
@@ -81,7 +81,10 @@ namespace ET.Client
             }
             else
             {
-                self.E_Text_RewardTimeText.text = $"奖励发放时间: {TimeHelper.ShowLeftTime(leftTime)}";
+                using (zstring.Block())
+                {
+                    self.E_Text_RewardTimeText.text = zstring.Format("奖励发放时间: {0}", TimeHelper.ShowLeftTime(leftTime));
+                }
             }
         }
 
@@ -165,7 +168,10 @@ namespace ET.Client
                 rank++;
             }
 
-            self.E_Text_MyRankText.text = myRank == -1? "我的排名: 未上榜" : $"我的排名: {myRank}";
+            using (zstring.Block())
+            {
+                self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : zstring.Format("我的排名: {0}", myRank);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemRankItems, self.ShowRankingTrialInfos.Count);
             self.E_RankItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingTrialInfos.Count);

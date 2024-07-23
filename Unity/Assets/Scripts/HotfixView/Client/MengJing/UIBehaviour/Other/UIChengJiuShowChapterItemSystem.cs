@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIChengJiuShowChapterItem))]
-    [EntitySystemOf(typeof (UIChengJiuShowChapterItem))]
+    [FriendOf(typeof(UIChengJiuShowChapterItem))]
+    [EntitySystemOf(typeof(UIChengJiuShowChapterItem))]
     public static partial class UIChengJiuShowChapterItemSystem
     {
         [EntitySystem]
@@ -35,10 +35,14 @@ namespace ET.Client
             int number = 0;
             for (int i = 0; i < ids.Count; i++)
             {
-                number += chengJiuComponent.ChengJiuCompleteList.Contains(ids[i])? 1 : 0;
+                number += chengJiuComponent.ChengJiuCompleteList.Contains(ids[i]) ? 1 : 0;
             }
 
-            self.E_Lab_TaskNum.GetComponent<Text>().text = $" ({number}/{ids.Count})";
+            using (zstring.Block())
+            {
+                self.E_Lab_TaskNum.GetComponent<Text>().text = zstring.Format(" ({0}/{1})", number, ids.Count);
+            }
+
             self.E_Lab_TaskName.GetComponent<Text>().text = ChengJiuData.ChapterIndexText[chapter];
             self.E_Ima_Progress.transform.localScale = new Vector3(number * 1f / ids.Count, 1f, 1f);
             self.E_Ima_CompleteTask.gameObject.SetActive(number >= ids.Count);

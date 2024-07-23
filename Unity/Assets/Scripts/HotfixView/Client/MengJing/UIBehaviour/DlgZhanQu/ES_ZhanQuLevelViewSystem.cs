@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ZhanQuLevel))]
-    [FriendOfAttribute(typeof (ES_ZhanQuLevel))]
+    [EntitySystemOf(typeof(ES_ZhanQuLevel))]
+    [FriendOfAttribute(typeof(ES_ZhanQuLevel))]
     public static partial class ES_ZhanQuLevelSystem
     {
         [EntitySystem]
@@ -44,7 +44,10 @@ namespace ET.Client
                 self.ShowActivityConfigs.Add(activityConfigs[i]);
             }
 
-            self.E_Lab_MyLvText.text = "我的等级：" + self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
+            using (zstring.Block())
+            {
+                self.E_Lab_MyLvText.text = zstring.Format("我的等级：{0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemZhanQuLevelItems, self.ShowActivityConfigs.Count);
             self.E_ZhanQuLevelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);

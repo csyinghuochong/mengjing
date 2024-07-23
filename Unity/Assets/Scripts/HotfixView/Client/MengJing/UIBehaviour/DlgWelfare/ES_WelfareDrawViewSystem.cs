@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_WelfareDraw))]
-    [FriendOfAttribute(typeof (ES_WelfareDraw))]
+    [EntitySystemOf(typeof(ES_WelfareDraw))]
+    [FriendOfAttribute(typeof(ES_WelfareDraw))]
     public static partial class ES_WelfareDrawSystem
     {
         [EntitySystem]
@@ -37,8 +37,11 @@ namespace ET.Client
                 {
                     UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                     int weaponId = CommonHelp.GetWelfareWeapon(userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo);
-                    string reward = $"{weaponId};1";
-                    rewardItems = ItemHelper.GetRewardItems(reward);
+                    using (zstring.Block())
+                    {
+                        string reward = zstring.Format("{0};1", weaponId);
+                        rewardItems = ItemHelper.GetRewardItems(reward);
+                    }
                 }
                 else
                 {

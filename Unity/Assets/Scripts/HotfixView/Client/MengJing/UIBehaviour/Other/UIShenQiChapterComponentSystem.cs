@@ -43,18 +43,21 @@ namespace ET.Client
 
             if (chaptet == 0)
             {
-                self.Text_Name.GetComponent<Text>().text = $"生肖";
+                self.Text_Name.GetComponent<Text>().text = "生肖";
                 Scroll_Item_MakeItem item = self.MakeListUI[0];
                 self.OnClickMakeItem(item.MakeID);
             }
             else if (chaptet == 6)
             {
-                self.Text_Name.GetComponent<Text>().text = $"传承";
+                self.Text_Name.GetComponent<Text>().text = "传承";
                 //self.OnClickMakeItem(self.MakeListUI[0].MakeID);
             }
             else
             {
-                self.Text_Name.GetComponent<Text>().text = $"第{chaptet}章";
+                using (zstring.Block())
+                {
+                    self.Text_Name.GetComponent<Text>().text = zstring.Format("第{0}章", chaptet);
+                }
             }
         }
 
