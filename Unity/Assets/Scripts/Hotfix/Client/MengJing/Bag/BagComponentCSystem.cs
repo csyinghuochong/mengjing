@@ -455,5 +455,90 @@ namespace ET.Client
         {
             return CommonHelp.PetHeXinMax - self.GetItemsByLoc(ItemLocType.ItemPetHeXinBag).Count;
         }
+
+        public static List<BagInfo> GetCanJianDing(this BagComponentC self)
+        {
+            List<BagInfo> bagInfos = new List<BagInfo>();
+            List<BagInfo> equipList = self.GetItemsByType((int)ItemTypeEnum.Equipment);
+            for (int i = 0; i < equipList.Count; i++)
+            {
+                ItemConfig itemconf = ItemConfigCategory.Instance.Get(equipList[i].ItemID);
+                // 赛季晶核除外
+                if (itemconf.ItemType == 3 && itemconf.EquipType == 201)
+                {
+                    continue;
+                }
+
+                if (equipList[i].IfJianDing == false)
+                {
+                    bagInfos.Add(equipList[i]);
+                }
+            }
+
+            return bagInfos;
+        }
+
+        public static List<BagInfo> GetCanEquipList(this BagComponentC self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            UserInfo useInfo = userInfoComponent.UserInfo;
+
+            List<BagInfo> canEquipList = new List<BagInfo>();
+
+            // 检测是否有可以穿戴的装备
+            List<BagInfo> bagInfos = self.GetItemsByLoc(ItemLocType.ItemLocBag);
+            for (int i = bagInfos.Count - 1; i >= 0; i--)
+            {
+                if (bagInfos.Count <= i)
+                {
+                    continue;
+                }
+
+                BagInfo baginfo1 = bagInfos[i];
+                if (baginfo1 == null)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baginfo1.ItemID);
+
+                int error = ItemHelper.CanEquip(baginfo1, useInfo);
+                if (error != 0)
+                {
+                    continue;
+                }
+
+                // 猎人武器特殊处理 。。。
+                // 。。。。。。。。
+
+                int weizhi = itemConfig.ItemSubType;
+                //获取之前的位置是否有装备
+                BagInfo beforeequip = null;
+                if (weizhi == (int)ItemSubTypeEnum.Shiping)
+                {
+                    List<BagInfo> equipList = self.GetEquipListByWeizhi(weizhi);
+                    beforeequip = equipList.Count < 3 ? null : equipList[0];
+                }
+                else
+                {
+                    beforeequip = self.GetEquipBySubType(ItemLocType.ItemLocEquip, weizhi);
+                }
+
+                if (beforeequip == null)
+                {
+                    canEquipList.Add(baginfo1);
+                }
+                else
+                {
+                    ItemConfig nowItemConfig = ItemConfigCategory.Instance.Get(beforeequip.ItemID);
+                    if (itemConfig.UseLv > nowItemConfig.UseLv && itemConfig.ItemQuality > nowItemConfig.ItemQuality)
+                    {
+                        canEquipList.Add(baginfo1);
+                    }
+                }
+            }
+
+            return canEquipList;
+        }
     }
 }

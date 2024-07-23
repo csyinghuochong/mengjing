@@ -235,6 +235,7 @@ namespace ET.Client
             return response.Error;
         }
 
+        // 鉴定
         public static async ETTask<int> RequestAppraisalItem(Scene root, BagInfo bagInfo, long appID = 0)
         {
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
@@ -655,13 +656,17 @@ namespace ET.Client
         public static async ETTask CheckCanJianDing(Scene root)
         {
             //可以鉴定的装备
-            // List<BagInfo> bagInfos =  root.GetComponent<BagComponentC>().GetCanJianDing();
+            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanJianDing();
 
             //鉴定装备
-            C2M_ItemOperateRequest itemOperateRequest = C2M_ItemOperateRequest.Create();
+            foreach (BagInfo bagInfo in bagInfos)
+            {
+                await RequestAppraisalItem(root, bagInfo);
+            }
+
             await ETTask.CompletedTask;
         }
-        
+
         public static async ETTask CheckCanEquip(Scene root)
         {
             //可以穿戴的装备

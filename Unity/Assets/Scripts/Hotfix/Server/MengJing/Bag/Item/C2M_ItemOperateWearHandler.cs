@@ -23,65 +23,13 @@ namespace ET.Server
                 }
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
-                //判断等级
-                int roleLv = useInfo.Lv;
-                int equipLv = itemConfig.UseLv;
-                //简易
-                if (useBagInfo.HideSkillLists.Contains(68000103))
+                int error = ItemHelper.CanEquip(useBagInfo, useInfo);
+                if (error != 0)
                 {
-                    equipLv = equipLv - 5;
-                }
-
-                //无级别
-                if (useBagInfo.HideSkillLists.Contains(68000106))
-                {
-                    equipLv = 1;
-                }
-
-                if (roleLv < equipLv)
-                {
-                    response.Error = ErrorCode.ERR_EquipLvLimit;
+                    response.Error = error;
                     return;
                 }
-
-                //对应部位是否符合
-                if (itemConfig.ItemType == 3 && itemConfig.EquipType != 0)
-                {
-                    //查看自身是否是二转
-                    if (useInfo.OccTwo > 0)
-                    {
-                        OccupationTwoConfig occtwoCof = OccupationTwoConfigCategory.Instance.Get(useInfo.OccTwo);
-                        if (occtwoCof.ArmorMastery == itemConfig.EquipType || itemConfig.EquipType == 99 || itemConfig.EquipType == 101)
-                        {
-                            //可以穿戴
-                        }
-                        else
-                        {
-                            bool ifWear = false;
-                            if (useInfo.Occ == 1 && (itemConfig.EquipType == 1 || itemConfig.EquipType == 2))
-                            {
-                                ifWear = true;
-                            }
-
-                            if (useInfo.Occ == 2 && (itemConfig.EquipType == 3 || itemConfig.EquipType == 4))
-                            {
-                                ifWear = true;
-                            }
-                            if (useInfo.Occ == 3 && (itemConfig.EquipType == 1 || itemConfig.EquipType == 5))
-                            {
-                                ifWear = true;
-                            }
-
-                            //佩戴部位不符
-                            if (ifWear == false)
-                            {
-                                response.Error = ErrorCode.ERR_EquipType;     //错误码:穿戴类型不符
-                                return;
-                            }
-                        }
-                    }
-                }
-
+                
                 int weizhi = itemConfig.ItemSubType;
                 if (weizhi != (int)ItemSubTypeEnum.Wuqi)
                 {
