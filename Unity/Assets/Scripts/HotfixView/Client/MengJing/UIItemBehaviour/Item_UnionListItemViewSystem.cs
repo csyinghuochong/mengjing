@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionListItem))]
-    [EntitySystemOf(typeof (Scroll_Item_UnionListItem))]
+    [FriendOf(typeof(Scroll_Item_UnionListItem))]
+    [EntitySystemOf(typeof(Scroll_Item_UnionListItem))]
     public static partial class Scroll_Item_UnionListItemSystem
     {
         [EntitySystem]
@@ -32,7 +32,11 @@ namespace ET.Client
             if (TimeHelper.ServerNow() - leaveTime < TimeHelper.Hour * 8)
             {
                 string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
-                FlyTipComponent.Instance.ShowFlyTip($"{tip} 后才能加入家族！");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0} 后才能加入家族！", tip));
+                }
+
                 return;
             }
 
@@ -52,8 +56,12 @@ namespace ET.Client
             self.UnionListItem = unionListItem;
             unionListItem.UnionLevel = Math.Max(unionListItem.UnionLevel, 1);
             int peopleMax = UnionConfigCategory.Instance.Get(unionListItem.UnionLevel).PeopleNum;
-            self.E_Text_RequestText.text = $"等级达到1级";
-            self.E_Text_NumberText.text = $"人数 {unionListItem.PlayerNumber}/{peopleMax}";
+            self.E_Text_RequestText.text = "等级达到1级";
+            using (zstring.Block())
+            {
+                self.E_Text_NumberText.text = zstring.Format("人数 {0}/{1}", unionListItem.PlayerNumber, peopleMax);
+            }
+
             self.E_Text_NameText.text = unionListItem.UnionName;
             self.E_Text_LeaderText.text = unionListItem.UnionLeader;
             self.E_Text_LevelText.text = unionListItem.UnionLevel.ToString();

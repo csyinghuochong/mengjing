@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_RankItem))]
-    [EntitySystemOf(typeof (Scroll_Item_RankItem))]
+    [FriendOf(typeof(Scroll_Item_RankItem))]
+    [EntitySystemOf(typeof(Scroll_Item_RankItem))]
     public static partial class Scroll_Item_RankItemSystem
     {
         [EntitySystem]
@@ -39,7 +39,11 @@ namespace ET.Client
                 rankingInfo.FubenId = 20001;
             }
 
-            self.E_Text_CombatText.text = $" {rankingInfo.FubenId % 20000}层({rankingInfo.Hurt}/秒)";
+            using (zstring.Block())
+            {
+                self.E_Text_CombatText.text = zstring.Format(" {0}层({1}/秒)", rankingInfo.FubenId % 20000, rankingInfo.Hurt);
+            }
+
             self.E_Text_LevelText.text = rankingInfo.PlayerLv.ToString();
             self.E_Text_NameText.text = rankingInfo.PlayerName;
             self.E_Text_RankText.text = rank.ToString();

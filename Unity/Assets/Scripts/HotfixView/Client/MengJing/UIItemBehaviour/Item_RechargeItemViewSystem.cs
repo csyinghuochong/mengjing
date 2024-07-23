@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_RechargeItem))]
-    [EntitySystemOf(typeof (Scroll_Item_RechargeItem))]
+    [FriendOf(typeof(Scroll_Item_RechargeItem))]
+    [EntitySystemOf(typeof(Scroll_Item_RechargeItem))]
     public static partial class Scroll_Item_RechargeItemSystem
     {
         [EntitySystem]
@@ -23,7 +23,11 @@ namespace ET.Client
             self.E_ButtonChargeButton.AddListener(self.OnImageButton);
             self.RechargeNumber = recharge;
 
-            self.E_Text_giveText.text = GameSettingLanguge.Instance.LoadLocalization("赠送") + " " + giveNumber;
+            using (zstring.Block())
+            {
+                self.E_Text_giveText.text = zstring.Format("{0} {1}", GameSettingLanguge.Instance.LoadLocalization("赠送"), giveNumber);
+            }
+
             self.EG_ZengSongRectTransform.gameObject.SetActive(giveNumber > 0);
             self.E_Text_ZuanShiText.text = (recharge * 100).ToString();
             self.E_Text_RMBText.text = "￥" + recharge;

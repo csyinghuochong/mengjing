@@ -102,9 +102,9 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_Attribute1Text.text = zstring.Format("对应部位提升 {0}%属性", svalue);
+                self.ES_EquipSetItem.E_QiangHuaLvText.text = zstring.Format("+{0}", qianghuaLevel);
             }
 
-            self.ES_EquipSetItem.E_QiangHuaLvText.text = zstring.Format("+{0}", qianghuaLevel);
             self.E_QiangHuaNameText.text = ItemViewData.EquipWeiZhiToName[subType].Name;
             esRoleQiangHuaItem.OnUpateUI(qianghuaLevel);
 

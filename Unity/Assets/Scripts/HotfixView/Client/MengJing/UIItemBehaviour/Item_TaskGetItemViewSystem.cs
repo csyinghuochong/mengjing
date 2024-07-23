@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TaskGetItem))]
-    [EntitySystemOf(typeof (Scroll_Item_TaskGetItem))]
+    [FriendOf(typeof(Scroll_Item_TaskGetItem))]
+    [EntitySystemOf(typeof(Scroll_Item_TaskGetItem))]
     public static partial class Scroll_Item_TaskGetItemSystem
     {
         [EntitySystem]
@@ -30,7 +30,11 @@ namespace ET.Client
             }
             else
             {
-                self.E_TextTaskNameText.text = taskConfig.TaskName + "(已完成)";
+                using (zstring.Block())
+                {
+                    self.E_TextTaskNameText.text = zstring.Format("{0}(已完成)", taskConfig.TaskName);
+                }
+
                 self.E_TextTaskNameText.color = new Color(131f / 255f, 255f / 255f, 83f / 255f);
             }
 

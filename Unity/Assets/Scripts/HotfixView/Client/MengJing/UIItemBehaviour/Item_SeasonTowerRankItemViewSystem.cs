@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [EntitySystemOf(typeof (Scroll_Item_SeasonTowerRankItem))]
+    [EntitySystemOf(typeof(Scroll_Item_SeasonTowerRankItem))]
     public static partial class Scroll_Item_SeasonTowerRankItemSystem
     {
         [EntitySystem]
@@ -18,9 +18,12 @@
         {
             self.E_NuTextText.text = rank.ToString();
             self.E_NameTextText.text = info.PlayerName;
-            self.E_LayerTextText.text = $"{info.FubenId % 250000}层";
-            self.E_TimeTextText.text =
-                    $"{info.TotalTime / 3600000}小时{info.TotalTime % 3600000 / 60000}分{info.TotalTime % 3600000 % 60000 / 1000}秒";
+            using (zstring.Block())
+            {
+                self.E_LayerTextText.text = zstring.Format("{0}层", info.FubenId % 250000);
+                self.E_TimeTextText.text = zstring.Format("{0}小时{1}分{2}秒", info.TotalTime / 3600000, info.TotalTime % 3600000 / 60000,
+                    info.TotalTime % 3600000 % 60000 / 1000);
+            }
 
             if (rank >= 4)
             {

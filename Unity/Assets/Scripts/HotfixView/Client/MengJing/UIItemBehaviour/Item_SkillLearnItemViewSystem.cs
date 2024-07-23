@@ -144,7 +144,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_Lab_NeedSpText.text = (zstring)"需要技能点: " + skillBaseConfig.CostSPValue;
+                self.E_Lab_NeedSpText.text = zstring.Format("需要技能点: {0}", skillBaseConfig.CostSPValue);
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
@@ -161,13 +161,16 @@ namespace ET.Client
             self.E_Lab_SkillNameText.text = skillConfig.SkillName;
             self.E_Img_SkillIconImage.sprite = sp;
 
-            self.E_Lab_SkillLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级 ") + skillConfig.SkillLv;
+            using (zstring.Block())
+            {
+                self.E_Lab_SkillLvText.text = zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
+            }
 
             if (skillBaseConfig.SkillLv == 0)
             {
                 using (zstring.Block())
                 {
-                    self.E_Lab_SkillLvText.text = (zstring)skillBaseConfig.LearnRoseLv + "级以后学习";
+                    self.E_Lab_SkillLvText.text = zstring.Format("{0}级以后学习", skillBaseConfig.LearnRoseLv);
                 }
 
                 CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, true);

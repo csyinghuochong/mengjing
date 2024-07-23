@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ZhanQuLevelItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ZhanQuLevelItem))]
+    [FriendOf(typeof(Scroll_Item_ZhanQuLevelItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ZhanQuLevelItem))]
     public static partial class Scroll_Item_ZhanQuLevelItemSystem
     {
         [EntitySystem]
@@ -43,8 +43,11 @@
 
             leftNumber = int.Parse(activityInfo.Par_2) - receiveNum;
 
-            self.E_TextLeftText.text = $"{leftNumber}/{activityInfo.Par_2}";
-            self.E_Text_levelText.text = $"等级达到{activityInfo.Par_1}级";
+            using (zstring.Block())
+            {
+                self.E_TextLeftText.text = zstring.Format("{0}/{1}", leftNumber, activityInfo.Par_2);
+                self.E_Text_levelText.text = zstring.Format("等级达到{0}级", activityInfo.Par_1);
+            }
 
             self.EG_YiLingQuSetRectTransform.gameObject.SetActive(activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id) && leftNumber > 0);
             self.E_ButtonReceiveButton.gameObject.SetActive(!activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id) && leftNumber > 0);

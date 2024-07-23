@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
-    [FriendOf(typeof (Scroll_Item_RoleXiLianSkillItem))]
-    [EntitySystemOf(typeof (Scroll_Item_RoleXiLianSkillItem))]
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
+    [FriendOf(typeof(Scroll_Item_RoleXiLianSkillItem))]
+    [EntitySystemOf(typeof(Scroll_Item_RoleXiLianSkillItem))]
     public static partial class Scroll_Item_RoleXiLianSkillItemSystem
     {
         [EntitySystem]
@@ -25,11 +25,16 @@ namespace ET.Client
 
             var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
-            self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.Instance.LoadLocalization("额外增加概率出现的特殊属性");
+            using (zstring.Block())
+            {
+                self.E_Text_XiLianNameText.text = zstring.Format("{0}{1}", equipXiLianConfig.Title,
+                    GameSettingLanguge.Instance.LoadLocalization("额外增加概率出现的特殊属性"));
+            }
+
             List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
 
             int row = (xilianSkill.Count / 8);
-            row += (xilianSkill.Count % 8 > 0? 1 : 0);
+            row += (xilianSkill.Count % 8 > 0 ? 1 : 0);
             self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(1400f, 100f + row * 170f);
 
             for (int i = 0; i < xilianSkill.Count; i++)
@@ -40,7 +45,11 @@ namespace ET.Client
                 ui_item.uiTransform = bagSpace.transform;
                 ui_item.OnUpdateUI((int)xilianSkill[i].Value, ABAtlasTypes.RoleSkillIcon, false, ItemViewHelp.XiLianWeiZhiTip(xilianSkill[i].KeyId));
 
-                Log.Info("xilianSkill[i] = " + xilianSkill[i]);
+                using (zstring.Block())
+                {
+                    Log.Info(zstring.Format("xilianSkill[i] = {0}", xilianSkill[i].ToString()));
+                }
+
                 SkillConfig skillcof = SkillConfigCategory.Instance.Get((int)xilianSkill[i].Value);
                 ui_item.E_TextSkillNameText.text = skillcof.SkillName;
                 ui_item.E_TextSkillNameText.gameObject.SetActive(true);

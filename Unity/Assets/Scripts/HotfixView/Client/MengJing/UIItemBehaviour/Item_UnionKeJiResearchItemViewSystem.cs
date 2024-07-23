@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionKeJiResearchItem))]
-    [EntitySystemOf(typeof (Scroll_Item_UnionKeJiResearchItem))]
+    [FriendOf(typeof(Scroll_Item_UnionKeJiResearchItem))]
+    [EntitySystemOf(typeof(Scroll_Item_UnionKeJiResearchItem))]
     public static partial class Scroll_Item_UnionKeJiResearchItemSystem
     {
         [EntitySystem]
@@ -26,7 +26,10 @@ namespace ET.Client
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(configId);
             Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
             self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
-            self.E_LvTextText.text = unionKeJiConfig.QiangHuaLv == 0? "未研究" : $"等级：{unionKeJiConfig.QiangHuaLv.ToString()}";
+            using (zstring.Block())
+            {
+                self.E_LvTextText.text = unionKeJiConfig.QiangHuaLv == 0 ? "未研究" : zstring.Format("等级：{0}", unionKeJiConfig.QiangHuaLv.ToString());
+            }
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, unionKeJiConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

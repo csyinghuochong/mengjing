@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [EntitySystemOf(typeof (Scroll_Item_RankRewardItem))]
+    [EntitySystemOf(typeof(Scroll_Item_RankRewardItem))]
     public static partial class Scroll_Item_RankRewardItemSystem
     {
         [EntitySystem]
@@ -16,7 +16,11 @@
 
         public static void OnUpdateUI(this Scroll_Item_RankRewardItem self, RankRewardConfig rankRewardConfig)
         {
-            self.E_Text_RankText.text = $"{rankRewardConfig.NeedPoint[0]}-{rankRewardConfig.NeedPoint[1]}名";
+            using (zstring.Block())
+            {
+                self.E_Text_RankText.text = zstring.Format("{0}-{1}名", rankRewardConfig.NeedPoint[0], rankRewardConfig.NeedPoint[1]);
+            }
+
             self.E_Text_RankText.gameObject.SetActive(true);
             self.ES_RewardList.Refresh(rankRewardConfig.RewardItems, 0.9f);
 

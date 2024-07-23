@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TrialDungeonItem))]
-    [EntitySystemOf(typeof (Scroll_Item_TrialDungeonItem))]
+    [FriendOf(typeof(Scroll_Item_TrialDungeonItem))]
+    [EntitySystemOf(typeof(Scroll_Item_TrialDungeonItem))]
     public static partial class Scroll_Item_TrialDungeonItemSystem
     {
         [EntitySystem]
@@ -37,8 +37,11 @@ namespace ET.Client
             string[] monsterInfo = monsterSet.Split(';');
             int monster = int.Parse(monsterInfo[2]);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monster);
-            self.E_Lab_LvText.text = $"等级: {monsterConfig.Lv}";
-            self.E_Lab_HPText.text = $"生命: {monsterConfig.Hp}";
+            using (zstring.Block())
+            {
+                self.E_Lab_LvText.text = zstring.Format("等级: {0}", monsterConfig.Lv);
+                self.E_Lab_HPText.text = zstring.Format("生命: {0}", monsterConfig.Hp);
+            }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             NumericComponentC numcom = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
@@ -74,7 +77,7 @@ namespace ET.Client
 
         public static void OnSelected(this Scroll_Item_TrialDungeonItem self, int towerId)
         {
-            self.E_Btn_XuanZhongImage.color = new Color(255, 255, 255, towerId == self.TowerConfig.Id? 255 : 0);
+            self.E_Btn_XuanZhongImage.color = new Color(255, 255, 255, towerId == self.TowerConfig.Id ? 255 : 0);
         }
     }
 }

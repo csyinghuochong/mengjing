@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TeamDungeonItem))]
-    [EntitySystemOf(typeof (Scroll_Item_TeamDungeonItem))]
+    [FriendOf(typeof(Scroll_Item_TeamDungeonItem))]
+    [EntitySystemOf(typeof(Scroll_Item_TeamDungeonItem))]
     public static partial class Scroll_Item_TeamDungeonItemSystem
     {
         [EntitySystem]
@@ -51,14 +51,21 @@ namespace ET.Client
                 TeamPlayerInfo teamPlayerInfo = teamInfo.PlayerList[i];
                 self.ImagePlayerList[i].SetActive(true);
                 self.ImagePlayerNullList[i].SetActive(false);
-                self.ImagePlayerList[i].transform.Find("Text_Level").GetComponent<Text>().text = $"{teamPlayerInfo.PlayerLv}级";
+                using (zstring.Block())
+                {
+                    self.ImagePlayerList[i].transform.Find("Text_Level").GetComponent<Text>().text = zstring.Format("{0}级", teamPlayerInfo.PlayerLv);
+                }
+
                 self.ImagePlayerList[i].transform.Find("ImageMask/ImageHead").GetComponent<Image>().sprite = self.Root()
                         .GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, teamPlayerInfo.Occ.ToString()));
             }
 
             SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
-            self.E_Text_ConditionText.text = $"进入条件: {teamDungeonConfig.EnterLv}级";
+            using (zstring.Block())
+            {
+                self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", teamDungeonConfig.EnterLv);
+            }
 
             string addStr = "";
 
@@ -76,9 +83,11 @@ namespace ET.Client
                 addStr = "(深渊模式)";
             }
 
-            self.E_Text_NameText.text = teamDungeonConfig.Name + addStr;
-
-            self.E_Text_TuijianText.text = $"推荐等级： {teamDungeonConfig.TuiJianLv[0]}-{teamDungeonConfig.TuiJianLv[1]}级";
+            using (zstring.Block())
+            {
+                self.E_Text_NameText.text = zstring.Format("{0}{1}", teamDungeonConfig.Name, addStr);
+                self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
+            }
         }
     }
 }

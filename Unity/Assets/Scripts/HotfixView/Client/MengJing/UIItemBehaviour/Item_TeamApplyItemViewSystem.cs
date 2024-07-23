@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TeamApplyItem))]
-    [EntitySystemOf(typeof (Scroll_Item_TeamApplyItem))]
+    [FriendOf(typeof(Scroll_Item_TeamApplyItem))]
+    [EntitySystemOf(typeof(Scroll_Item_TeamApplyItem))]
     public static partial class Scroll_Item_TeamApplyItemSystem
     {
         [EntitySystem]
@@ -22,8 +22,11 @@
 
             self.TeamPlayerInfo = teamPlayerInfo;
             self.E_TextNameText.text = teamPlayerInfo.PlayerName;
-            self.E_TextCombatText.text = $"战力：{teamPlayerInfo.Combat}";
-            self.E_TextLevelText.text = $"等级：{teamPlayerInfo.PlayerLv}";
+            using (zstring.Block())
+            {
+                self.E_TextCombatText.text = zstring.Format("战力：{0}", teamPlayerInfo.Combat);
+                self.E_TextLevelText.text = zstring.Format("等级：{0}", teamPlayerInfo.PlayerLv);
+            }
 
             string occName = "";
             if (teamPlayerInfo.OccTwo != 0)

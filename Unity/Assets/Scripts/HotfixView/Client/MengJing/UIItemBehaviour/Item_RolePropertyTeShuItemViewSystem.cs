@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (Scroll_Item_RolePropertyTeShuItem))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(Scroll_Item_RolePropertyTeShuItem))]
     public static partial class Scroll_Item_RolePropertyTeShuItemSystem
     {
         [EntitySystem]
@@ -72,8 +72,7 @@
 
                 if (showPropertyList.NumericType == NumericType.Now_ActSpeedPro)
                 {
-                    value += CommonHelp.LvProChange(
-                        numericComponentC.GetAsLong(NumericType.PointMinJie) * 2 +
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointMinJie) * 2 +
                         numericComponentC.GetAsLong(NumericType.PointLiLiang) * 2,
                         userInfoComponentC.UserInfo.Lv) * 100f;
                 }
@@ -84,13 +83,16 @@
                     //value += ComHelp.LvProChange(numericComponent.GetAsLong(NumericType.Now_SkillCDTimeCostPro), self.UserInfoComponent.UserInfo.Lv) * 100f;
                 }
 
-                if (value.ToString().Contains("."))
+                using (zstring.Block())
                 {
-                    self.E_ProTypeValueText.text = value.ToString("F2") + "%";
-                }
-                else
-                {
-                    self.E_ProTypeValueText.text = value.ToString() + "%";
+                    if (value.ToString().Contains("."))
+                    {
+                        self.E_ProTypeValueText.text = zstring.Format("{0}%", value.ToString("F2"));
+                    }
+                    else
+                    {
+                        self.E_ProTypeValueText.text = zstring.Format("{0}%", value.ToString());
+                    }
                 }
             }
         }

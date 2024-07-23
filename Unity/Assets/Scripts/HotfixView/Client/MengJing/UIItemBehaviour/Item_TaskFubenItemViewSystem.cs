@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TaskFubenItem))]
-    [EntitySystemOf(typeof (Scroll_Item_TaskFubenItem))]
+    [FriendOf(typeof(Scroll_Item_TaskFubenItem))]
+    [EntitySystemOf(typeof(Scroll_Item_TaskFubenItem))]
     public static partial class Scroll_Item_TaskFubenItemSystem
     {
         [EntitySystem]
@@ -51,7 +51,10 @@ namespace ET.Client
         {
             self.ClickHandler2 = action;
             self.UserId = 0;
-            self.E_TextFubenNameText.text = $"补偿金额:{number}";
+            using (zstring.Block())
+            {
+                self.E_TextFubenNameText.text = zstring.Format("补偿金额:{0}", number);
+            }
 
             self.E_ImageButtonButton.AddListener(() => { self.ClickHandler2(self.UserId); });
         }

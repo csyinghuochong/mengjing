@@ -47,7 +47,12 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem.HideItemName();
-            self.E_NameTextText.text = $"<color=\"#{CommonHelp.QualityReturnColor(itemConfig.ItemQuality)}\">{itemConfig.ItemName}</color>";
+            using (zstring.Block())
+            {
+                self.E_NameTextText.text = zstring.Format("<color=\"#{0}\">{1}</color>", CommonHelp.QualityReturnColor(itemConfig.ItemQuality),
+                    itemConfig.ItemName);
+            }
+
             self.E_ValueTextText.text = storeSellConfig.SellValue.ToString();
 
             ItemConfig sellTypeItemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellType);

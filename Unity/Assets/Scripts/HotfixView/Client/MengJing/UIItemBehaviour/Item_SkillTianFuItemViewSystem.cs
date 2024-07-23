@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SkillTianFuItem))]
-    [EntitySystemOf(typeof (Scroll_Item_SkillTianFuItem))]
+    [FriendOf(typeof(Scroll_Item_SkillTianFuItem))]
+    [EntitySystemOf(typeof(Scroll_Item_SkillTianFuItem))]
     public static partial class Scroll_Item_SkillTianFuItemSystem
     {
         [EntitySystem]
@@ -68,7 +68,10 @@ namespace ET.Client
             self.E_ImageIcon3Image.sprite = sp3;
             self.E_TextName3Text.text = skillConfig.Name;
 
-            self.E_TextLvText.text = skillConfig.LearnRoseLv + "级激活此天赋";
+            using (zstring.Block())
+            {
+                self.E_TextLvText.text = zstring.Format("{0}级激活此天赋", skillConfig.LearnRoseLv);
+            }
         }
 
         public static void OnActiveTianFu(this Scroll_Item_SkillTianFuItem self)

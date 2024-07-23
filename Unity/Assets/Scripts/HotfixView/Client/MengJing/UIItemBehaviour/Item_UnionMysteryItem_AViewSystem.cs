@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionMysteryItem_A))]
-    [EntitySystemOf(typeof (Scroll_Item_UnionMysteryItem_A))]
+    [FriendOf(typeof(Scroll_Item_UnionMysteryItem_A))]
+    [EntitySystemOf(typeof(Scroll_Item_UnionMysteryItem_A))]
     public static partial class Scroll_Item_UnionMysteryItem_ASystem
     {
         [EntitySystem]
@@ -58,7 +58,11 @@ namespace ET.Client
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
             self.MysteryItemInfo = mysteryItemInfo;
-            self.E_Text_NumberText.text = $"剩余 {mysteryItemInfo.ItemNumber}件";
+            using (zstring.Block())
+            {
+                self.E_Text_NumberText.text = zstring.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
+            }
+
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
             self.ES_CommonItem.UpdateItem(new() { ItemID = self.MysteryItemInfo.ItemID }, ItemOperateEnum.None);
