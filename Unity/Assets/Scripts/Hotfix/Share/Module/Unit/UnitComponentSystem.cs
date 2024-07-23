@@ -29,7 +29,7 @@ namespace ET
             return self.Units;
         }
 
-        public static List<long> GetAllIds(this UnitComponent self)
+        public static List<long> GetAllIds(this UnitComponent self, int uniType)
         {
             List<long> ids = new List<long>();
             List<EntityRef<Unit>> allunits = self.GetAll();
@@ -37,7 +37,10 @@ namespace ET
             for (int i = 0; i < allnumber; i++)
             {
                 Unit unit = allunits[i];
-                ids.Add(unit.Id);
+                if (unit.Type == uniType)
+                {
+                    ids.Add(unit.Id);
+                }
             }
             return ids;
         }
