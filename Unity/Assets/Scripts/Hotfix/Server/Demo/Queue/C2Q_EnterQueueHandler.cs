@@ -11,7 +11,7 @@ namespace ET.Server
         protected override async ETTask Run(Session session, C2Q_EnterQueue request, Q2C_EnterQueue response)
         {
             AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
-            accountSessionsComponent.Add( request.Account, session );
+            //accountSessionsComponent.Add( request.Account, session );
             
             await ETTask.CompletedTask;
         }

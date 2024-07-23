@@ -12,10 +12,18 @@ namespace ET.Server
 
         }
 
-        public static void Add(this TokenComponent self, string key, string token)
+        public static void Add(this TokenComponent self, string key, string token, bool dispose)
         {
             self.TokenDictionary.Add(key, token);
-            self.TimeOutRemoveKey(key, token).Coroutine();
+            if (dispose)
+            {
+                self.TimeOutRemoveKey(key, token).Coroutine();
+            }
+        }
+
+        public static int GetTotalNumber(this TokenComponent self)
+        {
+            return self.TokenDictionary.Keys.Count;
         }
 
         public static string Get(this TokenComponent self, string key)

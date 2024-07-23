@@ -194,8 +194,9 @@ message G2L_DisconnectGateUnit // IResponse
 message R2Q_EnterQueue // IRequest
 {
 	int32 RpcId = 90;
-	int64 AccountId = 1;
-	string Token = 2;
+	string Account  = 1;
+	int64 AccountId = 2;
+	string Token = 3;
 }
 
 message Q2R_EnterQueue // IResponse

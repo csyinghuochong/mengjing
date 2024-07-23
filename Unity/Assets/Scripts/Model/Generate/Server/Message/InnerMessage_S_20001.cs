@@ -867,9 +867,12 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(0)]
-        public long AccountId { get; set; }
+        public string Account { get; set; }
 
         [MemoryPackOrder(1)]
+        public long AccountId { get; set; }
+
+        [MemoryPackOrder(2)]
         public string Token { get; set; }
 
         public override void Dispose()
@@ -880,6 +883,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.Account = default;
             this.AccountId = default;
             this.Token = default;
 
