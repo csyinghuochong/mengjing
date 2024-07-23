@@ -1,7 +1,7 @@
 
 namespace ET
 {
-    public class IUnitCache
+    public interface IUnitCache
     {
     
     }

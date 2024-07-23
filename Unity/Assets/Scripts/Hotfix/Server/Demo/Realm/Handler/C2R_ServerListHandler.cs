@@ -9,6 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Session session, C2R_ServerList request, R2C_ServerList response)
         {
+            //session.RemoveComponent<SessionAcceptTimeoutComponent>();
             if (session.GetComponent<SessionLockingComponent>() != null)
             {
                 response.Error = ErrorCode.ERR_RequestRepeatedly;
