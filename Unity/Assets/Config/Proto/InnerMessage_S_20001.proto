@@ -190,6 +190,35 @@ message G2L_DisconnectGateUnit // IResponse
 	string Message = 3;
 }
 
+//ResponseType Q2R_EnterQueue
+message R2Q_EnterQueue // IRequest
+{
+	int32 RpcId = 90;
+	int64 AccountId = 1;
+	string Token = 2;
+}
+
+message Q2R_EnterQueue // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 QueueNumber = 1;
+}
+
+//ResponseType Q2G_ExitGame
+message G2Q_ExitGame // IRequest
+{
+	int32 RpcId = 90;
+	int64 AccountId = 1;
+}
+
+message Q2G_ExitGame // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
 
 //ResponseType L2G_AddLoginRecord
 message G2L_AddLoginRecord // IRequest

@@ -411,6 +411,20 @@ message R2C_DeleteRoleData // ISessionResponse
 	string Message = 92;
 }
 
+//ResponseType Q2C_EnterQueue
+message C2Q_EnterQueue // ISessionRequest
+{
+	int32 RpcId = 90;
+	string Token = 1;
+	int64 AccountId = 3;
+}
+
+message Q2C_EnterQueue // ISessionResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
 
 //ResponseType R2C_GetRealmKey
 message C2R_GetRealmKey // ISessionRequest

@@ -139,7 +139,7 @@ namespace ET.Server
                     TokenComponent tokenComponent = rootScene.GetComponent<TokenComponent>();
                     string queueToken = tokenComponent.Get(centerAccountInfo.Account);
 
-                    //在线人数判断有问题。[获取的是在保存在账号服的玩家数量]
+                    //排队功能要重新实现
                     AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
                     long onlineNumber = accountSessionsComponent.AccountSessionDictionary.Values.Count;
                     int maxNumber = GlobalValueConfigCategory.Instance.OnLineLimit;
@@ -153,7 +153,7 @@ namespace ET.Server
                         tokenComponent.Remove(centerAccountInfo.Account);
                         tokenComponent.Add(centerAccountInfo.Account, queueToken);
 
-                        //long queueServerId = DBHelper.GetQueueServerId(session.DomainZone());
+                        ActorId queueServerId = UnitCacheHelper.GetQueueServerId(request.ServerId);
                         //Q2A_EnterQueue d2GGetUnit = (Q2A_EnterQueue)await ActorMessageSenderComponent.Instance.Call(queueServerId, new A2Q_EnterQueue()
                         //{
                         //    AccountId = account.Id,

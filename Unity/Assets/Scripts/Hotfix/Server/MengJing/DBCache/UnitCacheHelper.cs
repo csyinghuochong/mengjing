@@ -7,16 +7,6 @@ namespace ET.Server
     public static class UnitCacheHelper
     {
         
-        public static ActorId GetRechargeCenter()
-        {
-            return StartSceneConfigCategory.Instance.RechargeConfig.ActorId;
-        }
-
-        public static ActorId GetLoginCenterId()
-        {
-            return StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
-        }
-
         /// <summary>
         /// 保存或者更新玩家缓存
         /// </summary>
@@ -205,6 +195,22 @@ namespace ET.Server
         public static ActorId GetTeamServerId(int zone)
         { 
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Team.ToString()).ActorId;
+        }
+
+        public static ActorId GetRechargeCenter()
+        {
+            return StartSceneConfigCategory.Instance.RechargeConfig.ActorId;
+        }
+
+        public static ActorId GetLoginCenterId()
+        {
+            return StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
+        }
+
+        
+        public static ActorId GetQueueServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Queue.ToString()).ActorId;
         }
 
         public static ActorId GetFriendServerId(int zone)
