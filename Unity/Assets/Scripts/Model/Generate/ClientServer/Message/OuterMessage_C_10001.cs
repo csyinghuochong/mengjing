@@ -1824,6 +1824,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public string Token { get; set; }
 
+        [MemoryPackOrder(1)]
+        public string Account { get; set; }
+
         [MemoryPackOrder(2)]
         public long AccountId { get; set; }
 
@@ -1836,6 +1839,7 @@ namespace ET
 
             this.RpcId = default;
             this.Token = default;
+            this.Account = default;
             this.AccountId = default;
 
             ObjectPool.Instance.Recycle(this);
