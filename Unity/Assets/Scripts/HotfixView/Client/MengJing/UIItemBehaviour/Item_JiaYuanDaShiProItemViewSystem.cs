@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanDaShiProItem))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanDaShiProItem))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanDaShiProItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanDaShiProItem))]
     public static partial class Scroll_Item_JiaYuanDaShiProItemSystem
     {
         [EntitySystem]
@@ -52,8 +52,12 @@ namespace ET.Client
 
             string atrname = ItemViewHelp.GetAttributeName(int.Parse(proinfo[0]));
             self.E_Text_NameText.text = atrname;
-            string curvalue = keyValuePair != null? keyValuePair.Value : "0";
-            self.E_Text_ProgessText.text = $"{curvalue}/{proinfo[1]}";
+            string curvalue = keyValuePair != null ? keyValuePair.Value : "0";
+            using (zstring.Block())
+            {
+                self.E_Text_ProgessText.text = zstring.Format("{0}/{1}", curvalue, proinfo[1]);
+            }
+
             self.E_ImageTo_1ValueImage.fillAmount = float.Parse(curvalue) / float.Parse(proinfo[1]);
 
             self.E_ImageToLockImage.gameObject.SetActive(false);

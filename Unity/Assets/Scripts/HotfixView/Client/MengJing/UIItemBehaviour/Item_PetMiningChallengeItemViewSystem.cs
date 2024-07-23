@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetMiningChallengeItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetMiningChallengeItem))]
+    [FriendOf(typeof(Scroll_Item_PetMiningChallengeItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetMiningChallengeItem))]
     public static partial class Scroll_Item_PetMiningChallengeItemSystem
     {
         [EntitySystem]
@@ -57,7 +57,10 @@ namespace ET.Client
 
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             int openLv = ConfigData.PetMiningTeamOpenLevel[self.TeamId];
-            self.TextTip12.GetComponent<Text>().text = $"{openLv}级开启";
+            using (zstring.Block())
+            {
+                self.TextTip12.GetComponent<Text>().text = zstring.Format("{0}级开启", openLv);
+            }
 
             bool isopen = playerLv >= openLv;
 

@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetSelectItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetSelectItem))]
+    [FriendOf(typeof(Scroll_Item_PetSelectItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetSelectItem))]
     public static partial class Scroll_Item_PetSelectItemSystem
     {
         [EntitySystem]
@@ -27,7 +27,11 @@ namespace ET.Client
 
             self.E_Img_PetHeroIonImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
-            self.E_Lab_PetLvText.text = rolePetInfo.PetLv + GameSettingLanguge.Instance.LoadLocalization("级");
+            using (zstring.Block())
+            {
+                self.E_Lab_PetLvText.text = zstring.Format("{0}{1}", rolePetInfo.PetLv, GameSettingLanguge.Instance.LoadLocalization("级"));
+            }
+
             self.E_Image_ProtectImage.gameObject.SetActive(rolePetInfo.IsProtect);
 
             self.E_ImageDiButtonButton.AddListener(self.OnClickPetItem);
@@ -41,8 +45,11 @@ namespace ET.Client
                 return;
             }
 
-            EventSystem.Instance.Publish(self.Root(),
-                new PetItemSelect { DataParamString = self.OperationType + "@" + self.RolePetInfo.Id });
+            using (zstring.Block())
+            {
+                EventSystem.Instance.Publish(self.Root(),
+                    new PetItemSelect { DataParamString = zstring.Format("{0}@{1}", self.OperationType.ToString(), self.RolePetInfo.Id) });
+            }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSelect);
         }

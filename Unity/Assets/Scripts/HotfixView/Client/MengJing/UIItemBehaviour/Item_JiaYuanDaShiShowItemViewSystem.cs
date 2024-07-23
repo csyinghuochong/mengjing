@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanDaShiShowItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanDaShiShowItem))]
     public static partial class Scroll_Item_JiaYuanDaShiShowItemSystem
     {
         [EntitySystem]
@@ -37,13 +37,16 @@ namespace ET.Client
             self.EG_Item_1RectTransform.Find("Text_Name").GetComponent<Text>().text = keyValuePair_1.Value;
             self.EG_Item_2RectTransform.Find("Text_Name").GetComponent<Text>().text = keyValuePair_2.Value;
 
-            self.EG_Item_0RectTransform.Find("Text_Attri").GetComponent<Text>().text = $"{attriname_0} +{attriinfo_0[1]}";
-            self.EG_Item_1RectTransform.Find("Text_Attri").GetComponent<Text>().text = $"{attriname_1} +{attriinfo_1[1]}";
-            self.EG_Item_2RectTransform.Find("Text_Attri").GetComponent<Text>().text = $"{attriname_2} +{attriinfo_2[1]}";
+            using (zstring.Block())
+            {
+                self.EG_Item_0RectTransform.Find("Text_Attri").GetComponent<Text>().text = zstring.Format("{0} +{1}", attriname_0, attriinfo_0[1]);
+                self.EG_Item_1RectTransform.Find("Text_Attri").GetComponent<Text>().text = zstring.Format("{0} +{1}", attriname_1, attriinfo_1[1]);
+                self.EG_Item_2RectTransform.Find("Text_Attri").GetComponent<Text>().text = zstring.Format("{0} +{1}", attriname_2, attriinfo_2[1]);
 
-            self.EG_Item_0RectTransform.Find("Text_Tip").GetComponent<Text>().text = $"品尝{need_time_0}次开启";
-            self.EG_Item_1RectTransform.Find("Text_Tip").GetComponent<Text>().text = $"品尝{need_time_1}次开启";
-            self.EG_Item_2RectTransform.Find("Text_Tip").GetComponent<Text>().text = $"品尝{need_time_2}次开启";
+                self.EG_Item_0RectTransform.Find("Text_Tip").GetComponent<Text>().text = zstring.Format("品尝{0}次开启", need_time_0);
+                self.EG_Item_1RectTransform.Find("Text_Tip").GetComponent<Text>().text = zstring.Format("品尝{0}次开启", need_time_1);
+                self.EG_Item_2RectTransform.Find("Text_Tip").GetComponent<Text>().text = zstring.Format("品尝{0}次开启", need_time_2);
+            }
 
             CommonViewHelper.SetImageGray(self.Root(), self.EG_Item_0RectTransform.Find("ImageIcon").gameObject, dashiTime < need_time_0);
             CommonViewHelper.SetImageGray(self.Root(), self.EG_Item_1RectTransform.Find("ImageIcon").gameObject, dashiTime < need_time_1);

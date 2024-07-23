@@ -3,8 +3,8 @@ using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetFormationItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetFormationItem))]
+    [FriendOf(typeof(Scroll_Item_PetFormationItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetFormationItem))]
     public static partial class Scroll_Item_PetFormationItemSystem
     {
         [EntitySystem]
@@ -73,7 +73,11 @@ namespace ET.Client
 
             self.E_ImageIconImage.sprite = sp;
             self.E_ImageFightImage.gameObject.SetActive(fighting);
-            self.E_TextLvText.text = $"等级: {rolePetInfo.PetLv}";
+            using (zstring.Block())
+            {
+                self.E_TextLvText.text = zstring.Format("等级: {0}", rolePetInfo.PetLv);
+            }
+
             self.E_TextNameText.text = rolePetInfo.PetName;
         }
     }

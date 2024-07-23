@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetFormationItem))]
-    [FriendOf(typeof (Scroll_Item_PetMiningTeamItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetMiningTeamItem))]
+    [FriendOf(typeof(Scroll_Item_PetFormationItem))]
+    [FriendOf(typeof(Scroll_Item_PetMiningTeamItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetMiningTeamItem))]
     public static partial class Scroll_Item_PetMiningTeamItemSystem
     {
         [EntitySystem]
@@ -41,7 +41,11 @@ namespace ET.Client
 
             for (int i = 0; i < self.FormationItemComponents.Length; i++)
             {
-                self.PetIcon_di_List[i] = self.uiTransform.Find($"PetIcon_di_{i}").gameObject;
+                using (zstring.Block())
+                {
+                    self.PetIcon_di_List[i] = self.uiTransform.Find(zstring.Format("PetIcon_di_{0}", i)).gameObject;
+                }
+
                 self.FormationItemComponents[i] = null;
             }
 
@@ -52,13 +56,19 @@ namespace ET.Client
             self.ButtonSet.GetComponent<Button>().onClick.AddListener(() => { self.OnButtonSet().Coroutine(); });
 
             self.TeamId = position;
-            self.TextTip11.GetComponent<Text>().text = $"{position + 1}队";
+            using (zstring.Block())
+            {
+                self.TextTip11.GetComponent<Text>().text = zstring.Format("{0}队", position + 1);
+            }
 
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             int openLv = ConfigData.PetMiningTeamOpenLevel[position];
             if (playerLv < openLv)
             {
-                self.TextTip12.GetComponent<Text>().text = $"{openLv}级开启";
+                using (zstring.Block())
+                {
+                    self.TextTip12.GetComponent<Text>().text = zstring.Format("{0}级开启", openLv);
+                }
             }
             else
             {
@@ -96,7 +106,7 @@ namespace ET.Client
                     FormationItem.SetDragEnable(true);
                 }
 
-                if (rolePetInfo == null && item  != null)
+                if (rolePetInfo == null && item != null)
                 {
                     item.uiTransform.gameObject.SetActive(false);
                 }

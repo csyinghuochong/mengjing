@@ -109,14 +109,18 @@ namespace ET.Client
             {
                 self.E_Button_AddButton.gameObject.SetActive(false);
                 self.RolePetInfo = rolePetInfo;
-                self.E_Text_TotalExpText.text = $"{jiaYuanPet.CurExp}";
+                self.E_Text_TotalExpText.text = jiaYuanPet.CurExp.ToString();
 
                 for (int i = 0; i < self.ImageMood_List.Length; i++)
                 {
                     self.ImageMood_List[i].SetActive(i < ET.JiaYuanHelper.GetPetMoodStar(jiaYuanPet.MoodValue));
                 }
 
-                self.E_Text_LevelText.text = $"等级：{rolePetInfo.PetLv}";
+                using (zstring.Block())
+                {
+                    self.E_Text_LevelText.text = zstring.Format("等级：{0}", rolePetInfo.PetLv);
+                }
+
                 self.E_Text_NameText.text = rolePetInfo.PetName;
 
                 PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
@@ -126,12 +130,19 @@ namespace ET.Client
                 self.E_ImagePetIconImage.sprite = sp;
 
                 long walkTime = jiaYuanPet.StartTime > 0 ? TimeHelper.ServerNow() - jiaYuanPet.StartTime : 0;
-                self.E_Text_Tip_121Text.text = $"已经散步:{TimeHelper.ShowLeftTime(walkTime)}";
+                using (zstring.Block())
+                {
+                    self.E_Text_Tip_121Text.text = zstring.Format("已经散步:{0}", TimeHelper.ShowLeftTime(walkTime));
+                }
 
                 self.E_Button_WalkButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 0);
                 self.E_Button_StopButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 2);
 
-                self.E_Text_TotalExpHourText.text = CommonHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue) + "/小时";
+                using (zstring.Block())
+                {
+                    self.E_Text_TotalExpHourText.text =
+                            zstring.Format("{0}/小时", CommonHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue));
+                }
             }
         }
     }

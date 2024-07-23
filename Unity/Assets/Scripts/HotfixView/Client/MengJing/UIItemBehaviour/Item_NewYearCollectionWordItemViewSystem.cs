@@ -2,10 +2,10 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_RewardList))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_NewYearCollectionWordItem))]
-    [EntitySystemOf(typeof (Scroll_Item_NewYearCollectionWordItem))]
+    [FriendOf(typeof(ES_RewardList))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_NewYearCollectionWordItem))]
+    [EntitySystemOf(typeof(Scroll_Item_NewYearCollectionWordItem))]
     public static partial class Scroll_Item_NewYearCollectionWordItemSystem
     {
         [EntitySystem]
@@ -58,7 +58,10 @@ namespace ET.Client
             }
 
             //显示兑换次数
-            self.E_LabDuiHuanText.text = GameSettingLanguge.Instance.LoadLocalization($"兑换次数:{receiveNumber}/{activityConfig.Par_1}");
+            using (zstring.Block())
+            {
+                self.E_LabDuiHuanText.text = zstring.Format("兑换次数:{0}/{1}", receiveNumber, activityConfig.Par_1);
+            }
         }
 
         public static void SetAction(this Scroll_Item_NewYearCollectionWordItem self, Action action)

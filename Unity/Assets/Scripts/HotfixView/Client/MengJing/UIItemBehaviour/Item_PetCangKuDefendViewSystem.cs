@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_ModelShow))]
-    [FriendOf(typeof (Scroll_Item_PetCangKuDefend))]
-    [EntitySystemOf(typeof (Scroll_Item_PetCangKuDefend))]
+    [FriendOf(typeof(ES_ModelShow))]
+    [FriendOf(typeof(Scroll_Item_PetCangKuDefend))]
+    [EntitySystemOf(typeof(Scroll_Item_PetCangKuDefend))]
     public static partial class Scroll_Item_PetCangKuDefendSystem
     {
         [EntitySystem]
@@ -40,8 +40,11 @@ namespace ET.Client
             string costitem = ConfigData.PetOpenCangKu[self.Index - 1];
 
             string costdesc = CommonViewHelper.GetNeedItemDesc(costitem);
-            PopupTipHelp.OpenPopupTip(self.Root(), "宠物仓库", $"是否花费{costdesc}开启宠物仓库?", () => { self.RequestOpenCangKu().Coroutine(); }, null)
-                    .Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "宠物仓库", zstring.Format("是否花费{0}开启宠物仓库?", costdesc),
+                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+            }
         }
 
         public static async ETTask RequestOpenCangKu(this Scroll_Item_PetCangKuDefend self)
@@ -118,7 +121,11 @@ namespace ET.Client
             if (petNum < index || !petComponent.PetCangKuOpen.Contains(index - 1))
             {
                 int openlv = PetHelper.GetCangKuOpenLv(index);
-                self.E_Text_NameText.text = $"{JiaYuanConfigCategory.Instance.Get(openlv).Lv}级开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_NameText.text = zstring.Format("{0}级开启", JiaYuanConfigCategory.Instance.Get(openlv).Lv);
+                }
+
                 self.E_ButtonOpenButton.gameObject.SetActive(true);
                 self.E_ButtonQuHuiButton.gameObject.SetActive(false);
                 return;
@@ -158,7 +165,7 @@ namespace ET.Client
                 self.ES_ModelShow.uiTransform.gameObject.SetActive(false);
             }
 
-            self.E_Text_NameText.text = rolePetInfo != null? rolePetInfo.PetName : string.Empty;
+            self.E_Text_NameText.text = rolePetInfo != null ? rolePetInfo.PetName : string.Empty;
             self.E_ButtonQuHuiButton.gameObject.SetActive(rolePetInfo != null);
             self.E_ButtonOpenButton.gameObject.SetActive(!petComponent.PetCangKuOpen.Contains(index - 1));
 

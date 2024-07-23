@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_MainTeamItem))]
-    [EntitySystemOf(typeof (Scroll_Item_MainTeamItem))]
+    [FriendOf(typeof(Scroll_Item_MainTeamItem))]
+    [EntitySystemOf(typeof(Scroll_Item_MainTeamItem))]
     public static partial class Scroll_Item_MainTeamItemSystem
     {
         [EntitySystem]
@@ -21,12 +21,15 @@ namespace ET.Client
         {
             long value = teamPlayerInfo.Damage;
             string str = value.ToString();
-            if (value >= 10000)
+            using (zstring.Block())
             {
-                str = ((float)value / 10000.0f).ToString("F2") + "万";
-            }
+                if (value >= 10000)
+                {
+                    str = zstring.Format("{0}万", ((float)value / 10000.0f).ToString("F2"));
+                }
 
-            self.E_DamageValueText.text = "输出:" + str;
+                self.E_DamageValueText.text = zstring.Format("输出:{0}", str);
+            }
         }
 
         public static void OnReset(this Scroll_Item_MainTeamItem self)
@@ -59,7 +62,11 @@ namespace ET.Client
             self.TeamPlayerInfo = teamPlayerInfo;
             self.UnitId = teamPlayerInfo.UserID;
             self.E_PlayerNameText.text = teamPlayerInfo.PlayerName;
-            self.E_PlayerLvText.text = $"{teamPlayerInfo.PlayerLv}级";
+            using (zstring.Block())
+            {
+                self.E_PlayerLvText.text = zstring.Format("{0}级", teamPlayerInfo.PlayerLv);
+            }
+
             self.OnUpdateDamage(teamPlayerInfo);
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             self.E_ImageHeadImage.sprite =

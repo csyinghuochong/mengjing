@@ -52,7 +52,10 @@ namespace ET.Client
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             long haveNumber = bagComponent.GetItemNumber(itemId);
-            self.E_Label_ItemNumText.text = $"{haveNumber}/{needNumber}";
+            using (zstring.Block())
+            {
+                self.E_Label_ItemNumText.text = zstring.Format("{0}/{1}", haveNumber, needNumber);
+            }
 
             if (haveNumber >= needNumber)
             {

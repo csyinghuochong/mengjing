@@ -40,12 +40,19 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (jiaYuanPastureConfig.BuyJiaYuanLv <= jiayuanCof.Lv)
             {
-                self.E_Text_RenKouText.text = $"人口：{jiaYuanPastureConfig.PeopleNum}";
+                using (zstring.Block())
+                {
+                    self.E_Text_RenKouText.text = zstring.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
+                }
+
                 self.E_Text_NameText.text = jiaYuanPastureConfig.Name;
                 self.E_Text_value2Text.text = ((int)(jiaYuanPastureConfig.BuyGold * 1.5f)).ToString();
 
                 int hour = jiaYuanPastureConfig.UpTime[3] / 3600;
-                self.E_Text_valueText.text = $"{hour}小时";
+                using (zstring.Block())
+                {
+                    self.E_Text_valueText.text = zstring.Format("{0}小时", hour);
+                }
             }
             else
             {
@@ -59,7 +66,10 @@ namespace ET.Client
                 self.E_Text_value2Text.gameObject.SetActive(false);
                 self.E_Text_valueText.gameObject.SetActive(false);
                 self.E_Text_TipText.gameObject.SetActive(true);
-                self.E_Text_TipText.text = $"家园{jiaYuanPastureConfig.BuyJiaYuanLv}级开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_TipText.text = zstring.Format("家园{0}级开启", jiaYuanPastureConfig.BuyJiaYuanLv);
+                }
             }
         }
 
@@ -72,7 +82,11 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (myJiaYuanPastureConfig.BuyJiaYuanLv > jiayuanCof.Lv)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"家园{myJiaYuanPastureConfig.BuyJiaYuanLv}级开启");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("家园{0}级开启", myJiaYuanPastureConfig.BuyJiaYuanLv));
+                }
+
                 return;
             }
 
@@ -84,10 +98,13 @@ namespace ET.Client
             }
 
             JiaYuanPastureConfig mysteryConfig = JiaYuanPastureConfigCategory.Instance.Get(self.MysteryItemInfo.MysteryId);
-            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"13;{mysteryConfig.BuyGold}"))
+            using (zstring.Block())
             {
-                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
-                return;
+                if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(zstring.Format("13;{0}", mysteryConfig.BuyGold)))
+                {
+                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
+                    return;
+                }
             }
 
             M2C_JiaYuanPastureBuyResponse response =
@@ -102,7 +119,10 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
 
-            FlyTipComponent.Instance.ShowFlyTip($"购买{mysteryConfig.Name}成功");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("购买{0}成功", mysteryConfig.Name));
+            }
         }
     }
 }

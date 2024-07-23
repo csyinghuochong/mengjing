@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetShouHuItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetShouHuItem))]
+    [FriendOf(typeof(Scroll_Item_PetShouHuItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetShouHuItem))]
     public static partial class Scroll_Item_PetShouHuItemSystem
     {
         [EntitySystem]
@@ -40,7 +40,10 @@ namespace ET.Client
             self.EG_Node_1RectTransform.gameObject.SetActive(shouhulist.Contains(rolePetInfo.Id));
             self.EG_Node_2RectTransform.gameObject.SetActive(!shouhulist.Contains(rolePetInfo.Id));
 
-            self.E_Lab_PinFenText.text = $"评分: {PetHelper.PetPingJia(rolePetInfo)}";
+            using (zstring.Block())
+            {
+                self.E_Lab_PinFenText.text = zstring.Format("评分: {0}", PetHelper.PetPingJia(rolePetInfo));
+            }
 
             if (PetHelper.IsShenShou(rolePetInfo.ConfigId))
             {
@@ -51,10 +54,12 @@ namespace ET.Client
                 self.E_Lab_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
             }
 
-            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"ShouHu_{rolePetInfo.ShouHuPos - 1}");
-            Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-
-            self.E_Img_ShouHuIconImage.sprite = sp2;
+            using (zstring.Block())
+            {
+                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
+                Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+                self.E_Img_ShouHuIconImage.sprite = sp2;
+            }
 
             self.E_ButtonShouHuButton.AddListener(() => { self.ButtonShouHuHandler(self.RolePetInfo.Id); });
         }

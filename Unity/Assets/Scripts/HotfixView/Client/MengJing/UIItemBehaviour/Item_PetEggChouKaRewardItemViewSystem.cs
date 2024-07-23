@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetEggChouKaRewardItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetEggChouKaRewardItem))]
+    [FriendOf(typeof(Scroll_Item_PetEggChouKaRewardItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetEggChouKaRewardItem))]
     public static partial class Scroll_Item_PetEggChouKaRewardItemSystem
     {
         [EntitySystem]
@@ -72,8 +72,11 @@ namespace ET.Client
 
             self.ES_RewardList.Refresh(rewardItems, 0.8f);
             string[] diamond = reward[1].Split(';')[1].Split(',');
-            self.E_TextZuanshiText.text = $"{diamond[0]}-{diamond[1]}";
-            self.E_TextNeedTimesText.text = $"探索次数达到{key}次";
+            using (zstring.Block())
+            {
+                self.E_TextZuanshiText.text = zstring.Format("{0}-{1}", diamond[0], diamond[1]);
+                self.E_TextNeedTimesText.text = zstring.Format("探索次数达到{0}次", key);
+            }
 
             self.UpdateButton();
         }

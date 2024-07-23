@@ -26,7 +26,11 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (mysteryConfig.JiaYuanLv > jiayuanCof.Lv)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"家园{mysteryConfig.JiaYuanLv}级开启");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("家园{0}级开启", mysteryConfig.JiaYuanLv));
+                }
+
                 return;
             }
 
@@ -94,7 +98,11 @@ namespace ET.Client
             else
             {
                 self.E_Text_TipText.gameObject.SetActive(true);
-                self.E_Text_TipText.text = $"家园{mysteryConfig.JiaYuanLv}级开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_TipText.text = zstring.Format("家园{0}级开启", mysteryConfig.JiaYuanLv);
+                }
+
                 Material mat = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
                 self.ES_CommonItem.E_ItemIconImage.material = mat;
                 self.E_Image_goldImage.gameObject.SetActive(false);

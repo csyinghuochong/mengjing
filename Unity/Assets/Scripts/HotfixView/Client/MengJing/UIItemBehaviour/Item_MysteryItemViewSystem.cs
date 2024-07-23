@@ -41,10 +41,14 @@ namespace ET.Client
                 return;
             }
 
-            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
+            using (zstring.Block())
             {
-                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
-                return;
+                if (!self.Root().GetComponent<BagComponentC>()
+                            .CheckNeedItem(zstring.Format("{0};{1}", mysteryConfig.SellType, mysteryConfig.SellValue)))
+                {
+                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
+                    return;
+                }
             }
 
             MysteryItemInfo mysteryItemInfo = new() { MysteryId = self.MysteryItemInfo.MysteryId };
@@ -62,7 +66,11 @@ namespace ET.Client
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
             self.MysteryItemInfo = mysteryItemInfo;
-            self.E_Text_NumberText.text = $"剩余 {mysteryItemInfo.ItemNumber}件";
+            using (zstring.Block())
+            {
+                self.E_Text_NumberText.text = zstring.Format("剩余 {0}件", mysteryItemInfo.ItemNumber);
+            }
+
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
             BagInfo bagInfoNew = BagInfo.Create();

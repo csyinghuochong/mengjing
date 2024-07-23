@@ -23,8 +23,12 @@ namespace ET.Client
             self.E_ButtonVisitButton.AddListener(self.OnButtonVisit);
             self.JiaYuanVisit = jiaYuanVisit;
 
-            self.E_TextTimes_2Text.text = $"X{jiaYuanVisit.Rubbish}";
-            self.E_TextTimes_1Text.text = $"X{jiaYuanVisit.Gather}";
+            using (zstring.Block())
+            {
+                self.E_TextTimes_2Text.text = zstring.Format("X{0}", jiaYuanVisit.Rubbish);
+                self.E_TextTimes_1Text.text = zstring.Format("X{0}", jiaYuanVisit.Gather);
+            }
+
             self.E_TextNameText.text = jiaYuanVisit.PlayerName;
             self.E_ImageIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, jiaYuanVisit.Occ.ToString()));

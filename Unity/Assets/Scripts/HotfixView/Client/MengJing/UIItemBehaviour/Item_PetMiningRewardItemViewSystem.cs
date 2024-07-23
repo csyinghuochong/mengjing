@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetMiningRewardItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetMiningRewardItem))]
+    [FriendOf(typeof(Scroll_Item_PetMiningRewardItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetMiningRewardItem))]
     public static partial class Scroll_Item_PetMiningRewardItemSystem
     {
         [EntitySystem]
@@ -39,7 +39,10 @@
             TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_Text_tipText.text = taskCountryConfig.TaskDes;
-            self.E_Text_progressText.text = $"{taskPro.taskTargetNum_1}/{taskCountryConfig.TargetValue[0]}";
+            using (zstring.Block())
+            {
+                self.E_Text_progressText.text = zstring.Format("{0}/{1}", taskPro.taskTargetNum_1, taskCountryConfig.TargetValue[0]);
+            }
 
             self.E_ImageReceivedImage.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
             self.E_ButtonRewardButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

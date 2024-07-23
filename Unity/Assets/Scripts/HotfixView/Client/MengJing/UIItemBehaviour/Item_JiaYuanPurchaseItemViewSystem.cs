@@ -51,7 +51,11 @@ namespace ET.Client
             }
             else
             {
-                self.E_Text_TimeText.text = "剩余时间:" + TimeHelper.ShowLeftTime(endTime - serverTime);
+                using (zstring.Block())
+                {
+                    self.E_Text_TimeText.text = zstring.Format("剩余时间:{0}", TimeHelper.ShowLeftTime(endTime - serverTime));
+                }
+
                 return true;
             }
         }
@@ -71,7 +75,10 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_RewardList.Refresh(equipMakeConfig.NeedItems);
 
-            self.E_Text_PriceText.text = "资金:" + jiaYuanPurchaseItem.BuyZiJin.ToString();
+            using (zstring.Block())
+            {
+                self.E_Text_PriceText.text = zstring.Format("资金:{0}", jiaYuanPurchaseItem.BuyZiJin.ToString());
+            }
 
             self.UpdateLeftTime();
         }

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetListItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PetListItem))]
+    [FriendOf(typeof(Scroll_Item_PetListItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PetListItem))]
     public static partial class Scroll_Item_PetListItemSystem
     {
         [EntitySystem]
@@ -98,13 +98,16 @@ namespace ET.Client
                 self.E_Lab_PetQualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
                 self.E_Lab_PetQualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
 
-                self.E_Lab_StatusText.text = rolePetInfo.PetStatus == 2? "散步中..." : String.Empty;
+                self.E_Lab_StatusText.text = rolePetInfo.PetStatus == 2 ? "散步中..." : String.Empty;
 
                 self.E_Image_ProtectImage.gameObject?.SetActive(rolePetInfo.IsProtect);
             }
             else
             {
-                self.E_Text_OpenText.text = $"{nextLv}级开启";
+                using (zstring.Block())
+                {
+                    self.E_Text_OpenText.text = zstring.Format("{0}级开启", nextLv);
+                }
             }
         }
 

@@ -28,7 +28,10 @@ namespace ET.Client
             else
             {
                 int leftsecond = Mathf.FloorToInt(cdTime * 0.001f);
-                self.E_TexTCdText.text = $"{leftsecond}秒";
+                using (zstring.Block())
+                {
+                    self.E_TexTCdText.text = zstring.Format("{0}秒", leftsecond);
+                }
             }
         }
 
@@ -42,7 +45,7 @@ namespace ET.Client
             self.E_TexTCdText.text = string.Empty;
             self.E_ButtonButton.AddListener(() => { self.ClickHandler(self.PetId); });
             self.E_IconButton.AddListener(() => { self.ClickHandler(self.PetId); });
-            
+
             self.PetId = rolePetInfo.Id;
             self.ClickHandler = handler;
 

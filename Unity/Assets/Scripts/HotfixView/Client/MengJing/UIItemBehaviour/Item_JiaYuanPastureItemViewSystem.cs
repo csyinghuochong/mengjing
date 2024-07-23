@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanPastureItem))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanPastureItem))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanPastureItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanPastureItem))]
     public static partial class Scroll_Item_JiaYuanPastureItemSystem
     {
         [EntitySystem]
@@ -35,12 +35,19 @@ namespace ET.Client
             self.OnInitUI(jiaYuanPastureConfig, index);
             self.MysteryItemInfo = mysteryItemInfo;
 
-            self.E_Text_RenKouText.text = $"人口：{jiaYuanPastureConfig.PeopleNum}";
+            using (zstring.Block())
+            {
+                self.E_Text_RenKouText.text = zstring.Format("人口：{0}", jiaYuanPastureConfig.PeopleNum);
+            }
+
             self.E_Text_NameText.text = jiaYuanPastureConfig.Name;
             self.E_Text_value2Text.text = jiaYuanPastureConfig.BuyGold.ToString();
 
             int hour = jiaYuanPastureConfig.UpTime[3] / 3600;
-            self.E_Text_valueText.text = $"{hour}小时";
+            using (zstring.Block())
+            {
+                self.E_Text_valueText.text = zstring.Format("{0}小时", hour);
+            }
         }
 
         public static async ETTask OnButtonBuy(this Scroll_Item_JiaYuanPastureItem self)
@@ -53,10 +60,13 @@ namespace ET.Client
             }
 
             JiaYuanPastureConfig mysteryConfig = JiaYuanPastureConfigCategory.Instance.Get(self.MysteryItemInfo.MysteryId);
-            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"13;{mysteryConfig.BuyGold}"))
+            using (zstring.Block())
             {
-                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
-                return;
+                if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(zstring.Format("13;{0}", mysteryConfig.BuyGold)))
+                {
+                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_HouBiNotEnough);
+                    return;
+                }
             }
 
             M2C_JiaYuanPastureBuyResponse response =
@@ -73,7 +83,10 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
 
-            FlyTipComponent.Instance.ShowFlyTip($"购买{mysteryConfig.Name}成功");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("购买{0}成功", mysteryConfig.Name));
+            }
         }
     }
 }
