@@ -37,7 +37,7 @@ namespace ET
                  //检测背包有可以镶嵌的宝石 直接镶嵌
                 
                  // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                 await root.GetComponent<TimerComponent>().WaitAsync(2000, cancellationToken);
+                 await root.GetComponent<TimerComponent>().WaitAsync(20000, cancellationToken);
                  if (cancellationToken.IsCancel())
                  {
                      Log.Debug("Behaviour_Arena: Exit1");
