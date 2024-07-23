@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using MongoDB.Bson;
 
 namespace ET.Server
 {
@@ -100,17 +102,9 @@ namespace ET.Server
 
             Scene root = self.Root();
             
-            if (messageLocationSender.ActorId != default)
-            {
-                messageLocationSender.LastSendOrRecvTime = TimeInfo.Instance.ServerNow();
-                root.GetComponent<MessageSender>().Send(messageLocationSender.ActorId, message);
-                return;
-            }
-            
             long instanceId = messageLocationSender.InstanceId;
             
-            int coroutineLockType = ((int)self.Id << 16) | CoroutineLockType.MessageLocationSender;
-            using (await root.Root().GetComponent<CoroutineLockComponent>().Wait(coroutineLockType, entityId))
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.MessageLocationSender, entityId))
             {
                 if (messageLocationSender.InstanceId != instanceId)
                 {
@@ -139,16 +133,9 @@ namespace ET.Server
 
             Scene root = self.Root();
             
-            if (messageLocationSender.ActorId != default)
-            {
-                messageLocationSender.LastSendOrRecvTime = TimeInfo.Instance.ServerNow();
-                return await root.GetComponent<MessageSender>().Call(messageLocationSender.ActorId, request);
-            }
-            
             long instanceId = messageLocationSender.InstanceId;
             
-            int coroutineLockType = ((int)self.Id << 16) | CoroutineLockType.MessageLocationSender;
-            using (await root.GetComponent<CoroutineLockComponent>().Wait(coroutineLockType, entityId))
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.MessageLocationSender, entityId))
             {
                 if (messageLocationSender.InstanceId != instanceId)
                 {
@@ -181,8 +168,7 @@ namespace ET.Server
             Scene root = self.Root();
             Type iRequestType = iRequest.GetType();
             long actorLocationSenderInstanceId = messageLocationSender.InstanceId;
-            int coroutineLockType = ((int)self.Id << 16) | CoroutineLockType.MessageLocationSender;
-            using (await root.GetComponent<CoroutineLockComponent>().Wait(coroutineLockType, entityId))
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.MessageLocationSender, entityId))
             {
                 if (messageLocationSender.InstanceId != actorLocationSenderInstanceId)
                 {

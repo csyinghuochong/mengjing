@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [EntitySystemOf(typeof(LockInfo))]
     [FriendOf(typeof(LockInfo))]
@@ -18,7 +20,7 @@
             self.LockActorId = default;
         }
     }
-
+    
 
     [EntitySystemOf(typeof(LocationOneType))]
     [FriendOf(typeof(LocationOneType))]
@@ -29,7 +31,7 @@
         private static void Awake(this LocationOneType self)
         {
         }
-
+        
         public static async ETTask Add(this LocationOneType self, long key, ActorId instanceId)
         {
             int coroutineLockType = ((int)self.Id << 16) | CoroutineLockType.Location;
@@ -112,7 +114,6 @@
                 return actorId;
             }
         }
-       
     }
 
     [EntitySystemOf(typeof(LocationManagerComoponent))]
