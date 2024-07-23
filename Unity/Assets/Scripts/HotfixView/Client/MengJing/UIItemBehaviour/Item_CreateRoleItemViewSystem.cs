@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (PlayerComponent))]
-    [FriendOf(typeof (Scroll_Item_CreateRoleItem))]
-    [EntitySystemOf(typeof (Scroll_Item_CreateRoleItem))]
+    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(Scroll_Item_CreateRoleItem))]
+    [EntitySystemOf(typeof(Scroll_Item_CreateRoleItem))]
     public static partial class Scroll_Item_CreateRoleItemSystem
     {
         [EntitySystem]
@@ -25,16 +25,26 @@ namespace ET.Client
             if (createRoleInfo != null)
             {
                 self.E_RoleNameText.text = createRoleInfo.PlayerName;
-                self.E_RoleLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级:") + createRoleInfo.PlayerLv;
+                using (zstring.Block())
+                {
+                    self.E_RoleLvText.text = zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("等级:"), createRoleInfo.PlayerLv);
+                }
+
                 if (createRoleInfo.OccTwo > 0)
                 {
                     OccupationTwoConfig occupationTwo = OccupationTwoConfigCategory.Instance.Get(createRoleInfo.OccTwo);
-                    self.E_RoleOccText.text = $"职业:{occupationTwo.OccupationName}";
+                    using (zstring.Block())
+                    {
+                        self.E_RoleOccText.text = zstring.Format("职业:{0}", occupationTwo.OccupationName);
+                    }
                 }
                 else
                 {
                     OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(createRoleInfo.PlayerOcc);
-                    self.E_RoleOccText.text = $"职业:{occupationConfig.OccupationName}";
+                    using (zstring.Block())
+                    {
+                        self.E_RoleOccText.text = zstring.Format("职业:{0}", occupationConfig.OccupationName);
+                    }
                 }
 
                 self.E_RoleHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()

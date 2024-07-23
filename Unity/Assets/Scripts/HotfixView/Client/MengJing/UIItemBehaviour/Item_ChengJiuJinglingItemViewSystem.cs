@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ChengJiuJinglingItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ChengJiuJinglingItem))]
+    [FriendOf(typeof(Scroll_Item_ChengJiuJinglingItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ChengJiuJinglingItem))]
     public static partial class Scroll_Item_ChengJiuJinglingItemSystem
     {
         [EntitySystem]
@@ -48,7 +48,7 @@ namespace ET.Client
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
             // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
             // 测试 70001001
-            self.ES_ModelShow.ShowOtherModel("JingLing/" + 70001001, canDrag: false).Coroutine();
+            self.ES_ModelShow.ShowOtherModel("JingLing/70001001", canDrag: false).Coroutine();
 
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
             gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);

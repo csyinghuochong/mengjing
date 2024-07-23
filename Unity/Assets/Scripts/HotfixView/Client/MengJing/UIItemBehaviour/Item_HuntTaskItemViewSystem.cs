@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_HuntTaskItem))]
-    [EntitySystemOf(typeof (Scroll_Item_HuntTaskItem))]
+    [FriendOf(typeof(Scroll_Item_HuntTaskItem))]
+    [EntitySystemOf(typeof(Scroll_Item_HuntTaskItem))]
     public static partial class Scroll_Item_HuntTaskItemSystem
     {
         [EntitySystem]
@@ -31,18 +31,24 @@ namespace ET.Client
             self.E_TextTaskNameText.text = taskConfig.TaskName;
             self.E_TextTaskDescText.text = taskConfig.TaskDes;
 
-            taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0]? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
-            self.E_TextTaskProgressText.text =
-                    GameSettingLanguge.Instance.LoadLocalization("进度值") + ": " + $"{taskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
+            taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0] ? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
+            using (zstring.Block())
+            {
+                self.E_TextTaskProgressText.text = zstring.Format("{0}: {1}/{2}", GameSettingLanguge.Instance.LoadLocalization("进度值"),
+                    taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+            }
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_ImageIconImage.sprite = sp;
 
-            self.E_ItemNumberText.text = " +" + taskConfig.TaskCoin;
-
-            self.E_TextHuoyueValueText.text = GameSettingLanguge.Instance.LoadLocalization("活跃度") + " +" + taskConfig.EveryTaskRewardNum;
+            using (zstring.Block())
+            {
+                self.E_ItemNumberText.text = zstring.Format(" +{0}", taskConfig.TaskCoin);
+                self.E_TextHuoyueValueText.text =
+                        zstring.Format("{0} +{1}", GameSettingLanguge.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
+            }
 
             self.E_ButtonCompleteButton.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
             self.E_ButtonReceiveButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

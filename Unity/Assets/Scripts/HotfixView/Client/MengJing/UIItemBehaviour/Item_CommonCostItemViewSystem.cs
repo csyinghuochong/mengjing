@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (Scroll_Item_CommonCostItem))]
+    [EntitySystemOf(typeof(Scroll_Item_CommonCostItem))]
     public static partial class Scroll_Item_CommonCostItemSystem
     {
         [EntitySystem]
@@ -26,9 +26,14 @@ namespace ET.Client
 
             //显示字
             //self.Label_ItemNum.GetComponent<Text>().text = $"{bagComponent.GetItemNumber(itemId)}/{itemNum}";
-            self.E_ItemNumText.text = $"{CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{CommonViewHelper.NumToWString(itemNum)}";
+            using (zstring.Block())
+            {
+                self.E_ItemNumText.text = zstring.Format("{0}/{1}", CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId)),
+                    CommonViewHelper.NumToWString(itemNum));
+            }
+
             //显示颜色
-            self.E_ItemNumText.color = (itemNum <= bagComponent.GetItemNumber(itemId))? Color.green : Color.red;
+            self.E_ItemNumText.color = (itemNum <= bagComponent.GetItemNumber(itemId)) ? Color.green : Color.red;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ItemIconImage.sprite = sp;

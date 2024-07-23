@@ -80,18 +80,21 @@ namespace ET.Client
             self.E_Btn_LingQu_1Button.AddListener(() => { self.On_Btn_LingQu(1).Coroutine(); });
 
             self.ActivityConfig = activityConfig;
-            self.E_TextNameText.text = $"{activityConfig.Par_1}级";
+            using (zstring.Block())
+            {
+                self.E_TextNameText.text = zstring.Format("{0}级", activityConfig.Par_1);
+            }
 
             BagInfo bagInfo1 = BagInfo.Create();
             bagInfo1.ItemID = int.Parse(activityConfig.Par_2.Split(';')[0]);
             bagInfo1.ItemNum = int.Parse(activityConfig.Par_2.Split(';')[1]);
             self.ES_CommonItem_1.UpdateItem(bagInfo1, ItemOperateEnum.None);
-            
+
             BagInfo bagInfo2 = BagInfo.Create();
             bagInfo2.ItemID = int.Parse(activityConfig.Par_3.Split(';')[0]);
             bagInfo2.ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]);
             self.ES_CommonItem_2.UpdateItem(bagInfo2, ItemOperateEnum.None);
-            
+
             BagInfo bagInfo3 = BagInfo.Create();
             bagInfo3.ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]);
             bagInfo3.ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]);

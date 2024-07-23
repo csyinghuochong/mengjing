@@ -43,12 +43,20 @@ namespace ET.Client
                 string[] reward = str.Split(',');
                 if (reward[0] == "1")
                 {
-                    self.E_ItemNumberText.text = " +" + reward[1];
+                    using (zstring.Block())
+                    {
+                        self.E_ItemNumberText.text = zstring.Format(" +{0}", reward[1]);
+                    }
+
                     break;
                 }
             }
 
-            self.E_TextHuoyueValueText.text = GameSettingLanguge.Instance.LoadLocalization("活跃度") + " +" + taskConfig.EveryTaskRewardNum;
+            using (zstring.Block())
+            {
+                self.E_TextHuoyueValueText.text =
+                        zstring.Format("{0} +{1}", GameSettingLanguge.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
+            }
 
             self.E_ButtonCompleteButton.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
             self.E_ButtonReceiveButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

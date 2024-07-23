@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (ES_ModelShow))]
-    [FriendOf(typeof (Scroll_Item_FashionShowItem))]
-    [EntitySystemOf(typeof (Scroll_Item_FashionShowItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(ES_ModelShow))]
+    [FriendOf(typeof(Scroll_Item_FashionShowItem))]
+    [EntitySystemOf(typeof(Scroll_Item_FashionShowItem))]
     public static partial class Scroll_Item_FashionShowItemSystem
     {
         [EntitySystem]
@@ -90,7 +90,7 @@ namespace ET.Client
             int status = 0; //0 未激活  1没穿戴 2 已穿戴
             if (bagComponent.FashionActiveIds.Contains(fashionid))
             {
-                status = bagComponent.FashionEquipList.Contains(fashionid)? 2 : 1;
+                status = bagComponent.FashionEquipList.Contains(fashionid) ? 2 : 1;
             }
 
             self.Status = status;
@@ -126,7 +126,11 @@ namespace ET.Client
             else
             {
                 string[] costitem = fashionConfig.ActiveCost.Split(';');
-                self.E_Text_222Text.text = $"需要:{int.Parse(costitem[1])}个";
+                using (zstring.Block())
+                {
+                    self.E_Text_222Text.text = zstring.Format("需要:{0}个", int.Parse(costitem[1]));
+                }
+
                 int havenumber = (int)bagComponent.GetItemNumber(int.Parse(costitem[0]));
                 BagInfo bagInfo = BagInfo.Create();
                 bagInfo.ItemID = int.Parse(costitem[0]);
@@ -151,8 +155,12 @@ namespace ET.Client
             }
 
             List<string> assetList = FashionConfigCategory.Instance.GetModelList(fashionid);
-            string initPath = isbasefashion? $"Parts/{occ}/" : "Parts/Fashion/";
-            self.ES_ModelShow.ShowModelList(initPath, assetList).Coroutine();
+            using (zstring.Block())
+            {
+                string initPath = isbasefashion ? zstring.Format("Parts/{0}/", occ) : "Parts/Fashion/";
+                self.ES_ModelShow.ShowModelList(initPath, assetList).Coroutine();
+            }
+
             self.ES_ModelShow.Camera.localPosition = new Vector3((float)fashionConfig.Camera[0], (float)fashionConfig.Camera[1],
                 (float)fashionConfig.Camera[2]);
             self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = (float)fashionConfig.Camera[3];

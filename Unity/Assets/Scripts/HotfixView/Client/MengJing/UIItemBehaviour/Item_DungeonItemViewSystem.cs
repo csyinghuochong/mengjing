@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_DungeonItem))]
-    [EntitySystemOf(typeof (Scroll_Item_DungeonItem))]
+    [FriendOf(typeof(Scroll_Item_DungeonItem))]
+    [EntitySystemOf(typeof(Scroll_Item_DungeonItem))]
     public static partial class Scroll_Item_DungeonItemSystem
     {
         [EntitySystem]
@@ -47,7 +47,10 @@ namespace ET.Client
             if (selfLv < openlv)
             {
                 self.EG_UnLockRectTransform.gameObject.SetActive(true);
-                self.E_Text_UnlockLevelText.text = $"{openlv}级解锁";
+                using (zstring.Block())
+                {
+                    self.E_Text_UnlockLevelText.text = zstring.Format("{0}级解锁", openlv);
+                }
             }
             else
             {

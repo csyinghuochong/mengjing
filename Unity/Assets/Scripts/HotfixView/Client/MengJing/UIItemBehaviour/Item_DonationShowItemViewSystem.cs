@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_DonationShowItem))]
-    [EntitySystemOf(typeof (Scroll_Item_DonationShowItem))]
+    [FriendOf(typeof(Scroll_Item_DonationShowItem))]
+    [EntitySystemOf(typeof(Scroll_Item_DonationShowItem))]
     public static partial class Scroll_Item_DonationShowItemSystem
     {
         [EntitySystem]
@@ -41,8 +41,12 @@ namespace ET.Client
             self.E_Button_WatchEquipButton.AddListenerAsync(self.OnButtonWatch);
             self.RankingInfo = rankingInfo;
 
-            self.E_Text_CombatText.text = rankingInfo.Combat + "金币";
-            self.E_Text_DonationText.text = rankingInfo.PlayerLv + "级";
+            using (zstring.Block())
+            {
+                self.E_Text_CombatText.text = zstring.Format("{0}金币", rankingInfo.Combat);
+                self.E_Text_DonationText.text = zstring.Format("{0}级", rankingInfo.PlayerLv);
+            }
+
             self.E_Text_NameText.text = rankingInfo.PlayerName;
             self.E_Text_RankText.text = rank.ToString();
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();

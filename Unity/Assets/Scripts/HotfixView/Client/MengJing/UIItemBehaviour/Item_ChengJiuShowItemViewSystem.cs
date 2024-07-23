@@ -30,14 +30,14 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    self.E_Lab_ProValueText.text = (zstring)"进度:" + chengJiuConfig.TargetValue + "/" + chengJiuConfig.TargetValue;
+                    self.E_Lab_ProValueText.text = zstring.Format("进度:{0}/{1}", chengJiuConfig.TargetValue, chengJiuConfig.TargetValue);
                 }
             }
             else
             {
                 using (zstring.Block())
                 {
-                    self.E_Lab_ProValueText.text = (zstring)"进度:" + chengJiuInfo?.ChengJiuProgess ?? 0 + "/" + chengJiuConfig.TargetValue;
+                    self.E_Lab_ProValueText.text = zstring.Format("进度:{0}/{1}", chengJiuInfo?.ChengJiuProgess ?? 0, chengJiuConfig.TargetValue);
                 }
             }
 
@@ -50,7 +50,10 @@ namespace ET.Client
 
             self.E_Ima_IconImage.sprite = sp;
 
-            self.E_Lab_ChengJiuNumText.text = (zstring)"成就点数:" + chengJiuConfig.RewardNum;
+            using (zstring.Block())
+            {
+                self.E_Lab_ChengJiuNumText.text = zstring.Format("成就点数:{0}", chengJiuConfig.RewardNum);
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ActivitySingleRechargeItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ActivitySingleRechargeItem))]
+    [FriendOf(typeof(Scroll_Item_ActivitySingleRechargeItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ActivitySingleRechargeItem))]
     public static partial class Scroll_Item_ActivitySingleRechargeItemSystem
     {
         [EntitySystem]
@@ -22,7 +22,11 @@
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
             self.Key = key;
-            self.E_ConsumeNumTextText.text = $"单笔充值{key}元";
+            using (zstring.Block())
+            {
+                self.E_ConsumeNumTextText.text = zstring.Format("单笔充值{0}元", key);
+            }
+
             self.E_ReddotImage.gameObject.SetActive(userInfoComponent.UserInfo.SingleRechargeIds.Contains(key) &&
                 !userInfoComponent.UserInfo.SingleRewardIds.Contains(key));
             self.E_ReceivedImgImage.gameObject.SetActive(userInfoComponent.UserInfo.SingleRewardIds.Contains(key));

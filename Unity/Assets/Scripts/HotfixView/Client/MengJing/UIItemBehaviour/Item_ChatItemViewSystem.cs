@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ChatItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ChatItem))]
+    [FriendOf(typeof(Scroll_Item_ChatItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ChatItem))]
     public static partial class Scroll_Item_ChatItemSystem
     {
         [EntitySystem]
@@ -24,7 +24,11 @@ namespace ET.Client
             self.E_NameButton.AddListenerAsync(self.OnWatchNemu);
             for (int i = 0; i < ChannelEnum.Number; i++)
             {
-                self.TitleList[i] = self.uiTransform.Find($"EG_Node1/{i}").gameObject;
+                using (zstring.Block())
+                {
+                    self.TitleList[i] = self.uiTransform.Find(zstring.Format("EG_Node1/{0}", i)).gameObject;
+                }
+
                 self.TitleList[i].SetActive(false);
             }
 

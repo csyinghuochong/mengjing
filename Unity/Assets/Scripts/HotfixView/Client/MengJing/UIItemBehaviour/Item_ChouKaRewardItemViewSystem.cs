@@ -57,8 +57,8 @@
 
             using (zstring.Block())
             {
-                self.E_TextZuanshiText.text = (zstring)takeCardRewardConfig.RewardDiamond[0] + "-" + takeCardRewardConfig.RewardDiamond[1];
-                self.E_TextNeedTimesText.text = (zstring)"抽卡次数达到" + takeCardRewardConfig.RoseLvLimit + "次";
+                self.E_TextZuanshiText.text = zstring.Format("{0}-{1}", takeCardRewardConfig.RewardDiamond[0], takeCardRewardConfig.RewardDiamond[1]);
+                self.E_TextNeedTimesText.text = zstring.Format("抽卡次数达到{0}次", takeCardRewardConfig.RoseLvLimit);
             }
 
             self.UpdateButton();

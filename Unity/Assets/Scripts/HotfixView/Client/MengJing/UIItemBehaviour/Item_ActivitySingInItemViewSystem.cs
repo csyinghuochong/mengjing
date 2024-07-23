@@ -36,7 +36,10 @@ namespace ET.Client
             int index = int.Parse(activityConfig.Par_1);
             self.ActivityConfig = activityConfig;
 
-            self.E_Label_ItemNameText.text = zstring.Format("第{0}天", index);
+            using (zstring.Block())
+            {
+                self.E_Label_ItemNameText.text = zstring.Format("第{0}天", index);
+            }
 
             int current = index % 2;
             self.Image_ItemIconList[current].SetActive(true);

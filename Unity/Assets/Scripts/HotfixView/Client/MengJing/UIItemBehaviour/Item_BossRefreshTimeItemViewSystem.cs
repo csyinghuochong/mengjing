@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_BossRefreshTimeItem))]
-    [EntitySystemOf(typeof (Scroll_Item_BossRefreshTimeItem))]
+    [FriendOf(typeof(Scroll_Item_BossRefreshTimeItem))]
+    [EntitySystemOf(typeof(Scroll_Item_BossRefreshTimeItem))]
     public static partial class Scroll_Item_BossRefreshTimeItemSystem
     {
         [EntitySystem]
@@ -31,7 +31,10 @@ namespace ET.Client
             int dungeonid = SceneConfigHelper.GetFubenByMonster(monsterConfig.Id);
             if (dungeonid > 0)
             {
-                self.E_MapText.text = $"({DungeonConfigCategory.Instance.Get(dungeonid).ChapterName})";
+                using (zstring.Block())
+                {
+                    self.E_MapText.text = zstring.Format("({0})", DungeonConfigCategory.Instance.Get(dungeonid).ChapterName);
+                }
             }
 
             self.RefreshTime();
@@ -47,8 +50,11 @@ namespace ET.Client
                 int hour = (int)time / 3600;
                 int min = (int)((time - (hour * 3600)) / 60);
                 int sec = (int)(time - (hour * 3600) - (min * 60));
-                string showStr = hour + "时" + min + "分" + sec + "秒";
-                self.E_TimeText.text = $"刷新时间:{showStr}";
+                using (zstring.Block())
+                {
+                    string showStr = zstring.Format("{0}时{1}分{2}秒", hour, min, sec);
+                    self.E_TimeText.text = zstring.Format("刷新时间:{0}", showStr);
+                }
             }
             else
             {

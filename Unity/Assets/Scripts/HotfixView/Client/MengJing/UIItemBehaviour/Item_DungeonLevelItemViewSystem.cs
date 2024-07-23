@@ -53,7 +53,7 @@ namespace ET.Client
 
                     using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip((zstring)"请求传送 副本Id:" + self.ChapterId + " 副本难度：" + uIDungeonLevel.Difficulty);
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.ChapterId, uIDungeonLevel.Difficulty));
                     }
 
                     errorCode =
@@ -100,8 +100,11 @@ namespace ET.Client
             self.ChapterId = levelId;
             DungeonConfig chapterConfig = DungeonConfigCategory.Instance.Get(levelId);
             self.E_Lab_ChapSonNameOutText.text = chapterConfig.ChapterName;
-            self.E_Lab_ChapIndexText.text = (zstring)"第" + levelIndex + 1 + "关";
-            self.E_Lab_EnterLevelText.text = (zstring)"挑战等级:" + chapterConfig.EnterLv;
+            using (zstring.Block())
+            {
+                self.E_Lab_ChapIndexText.text = zstring.Format("第{0}关", levelIndex + 1);
+                self.E_Lab_EnterLevelText.text = zstring.Format("挑战等级:{0}", chapterConfig.EnterLv);
+            }
 
             self.E_ButtonEnterButton.AddListenerAsync(self.OnEnterChapter);
         }

@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_FriendApplyItem))]
-    [EntitySystemOf(typeof (Scroll_Item_FriendApplyItem))]
+    [FriendOf(typeof(Scroll_Item_FriendApplyItem))]
+    [EntitySystemOf(typeof(Scroll_Item_FriendApplyItem))]
     public static partial class Scroll_Item_FriendApplyItemSystem
     {
         [EntitySystem]
@@ -23,13 +23,17 @@ namespace ET.Client
 
             self.E_HeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, friendInfo.Occ.ToString()));
-            self.E_PlayerOnLineText.text = friendInfo.OnLineTime == 1? "状态:在线" : "状态:离线";
+            self.E_PlayerOnLineText.text = friendInfo.OnLineTime == 1 ? "状态:在线" : "状态:离线";
             if (friendInfo.OnLineTime != 1)
             {
                 self.E_PlayerOnLineText.color = new Color(0.62f, 0.62f, 0.62f);
             }
 
-            self.E_PlayerLevelText.text = $"等级:{friendInfo.PlayerLevel}";
+            using (zstring.Block())
+            {
+                self.E_PlayerLevelText.text = zstring.Format("等级:{0}", friendInfo.PlayerLevel);
+            }
+
             self.E_PlayerNameText.text = friendInfo.PlayerName;
             self.E_PlayerOccText.text = OccupationConfigCategory.Instance.Get(friendInfo.Occ).OccupationName;
 
