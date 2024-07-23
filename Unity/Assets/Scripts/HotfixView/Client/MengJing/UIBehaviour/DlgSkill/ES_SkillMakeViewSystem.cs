@@ -16,7 +16,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -167,13 +170,16 @@ namespace ET.Client
             string tip = string.Empty;
             if (plan == 2 && skillmakePlan_2 == 0)
             {
-                if (rechargeNumber < needRecharge)
+                using (zstring.Block())
                 {
-                    tip = $"当前充值金额累计达到{needRecharge}元，将自动开启第二个生活技能栏位，当前充值金额{rechargeNumber}元";
-                }
-                else
-                {
-                    tip = $"当前充值金额累计达到{needRecharge}元，将自动开启第二个生活技能栏位，您目前已经满足条件，请点击开启";
+                    if (rechargeNumber < needRecharge)
+                    {
+                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，当前充值金额{1}元", needRecharge, rechargeNumber);
+                    }
+                    else
+                    {
+                        tip = zstring.Format("当前充值金额累计达到{0}元，将自动开启第二个生活技能栏位，您目前已经满足条件，请点击开启", needRecharge);
+                    }
                 }
 
                 PopupTipHelp.OpenPopupTipWithButtonText(self.Root(), "开启栏位", tip, () =>
@@ -279,7 +285,11 @@ namespace ET.Client
             int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 
-            self.E_Lab_ShuLianDuText.text = $"{curValue}/{maxValue}";
+            using (zstring.Block())
+            {
+                self.E_Lab_ShuLianDuText.text = zstring.Format("{0}/{1}", curValue, maxValue);
+            }
+
             self.E_Img_ShuLianProImage.fillAmount = curValue * 1f / maxValue;
         }
 
@@ -303,8 +313,11 @@ namespace ET.Client
 
             if (equipMakeConfig.ProficiencyValue[0] != 0)
             {
-                self.E_Lab_ShuLianShowText.text =
-                        $"熟练度:{equipMakeConfig.ProficiencyValue[0]}-{equipMakeConfig.ProficiencyValue[1]}点 上限:{equipMakeConfig.ProficiencyMax}点";
+                using (zstring.Block())
+                {
+                    self.E_Lab_ShuLianShowText.text = zstring.Format("熟练度:{0}-{1}点 上限:{2}点", equipMakeConfig.ProficiencyValue[0],
+                        equipMakeConfig.ProficiencyValue[1], equipMakeConfig.ProficiencyMax);
+                }
             }
             else
             {
@@ -314,7 +327,10 @@ namespace ET.Client
             //self.TextVitality.GetComponent<Text>().text = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Vitality.ToString();
             //显示消耗活力
             self.E_Lab_HuoLiText.text = equipMakeConfig.CostVitality.ToString();
-            self.E_Text_CurrentText.text = $"当前活力:  {self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality}";
+            using (zstring.Block())
+            {
+                self.E_Text_CurrentText.text = zstring.Format("当前活力:  {0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality);
+            }
 
             self.ShowMakeNeed.Clear();
 
@@ -560,7 +576,7 @@ namespace ET.Client
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
                 Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
-                
+
                 if (scrollItemCommonItem.uiTransform == null)
                 {
                     continue;

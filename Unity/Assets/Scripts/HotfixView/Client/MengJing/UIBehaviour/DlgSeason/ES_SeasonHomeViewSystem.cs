@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_SeasonHome))]
-    [FriendOfAttribute(typeof (ES_SeasonHome))]
+    [EntitySystemOf(typeof(ES_SeasonHome))]
+    [FriendOfAttribute(typeof(ES_SeasonHome))]
     public static partial class ES_SeasonHomeSystem
     {
         [EntitySystem]
@@ -40,7 +40,11 @@ namespace ET.Client
             DateTime startTime = TimeInfo.Instance.ToDateTime(seasonOpenTime.Value);
             DateTime endTime = TimeInfo.Instance.ToDateTime(seasonOpenTime.Value2);
 
-            self.E_SeasonTimeTextText.text = $"赛季时间:{startTime.Year}.{startTime.Month}.{startTime.Day}-{endTime.Year}.{endTime.Month}.{endTime.Day}";
+            using (zstring.Block())
+            {
+                self.E_SeasonTimeTextText.text = zstring.Format("赛季时间:{0}.{1}.{2}-{3}.{4}.{5}", startTime.Year, startTime.Month, startTime.Day,
+                    endTime.Year, endTime.Month, endTime.Day);
+            }
 
             if (seasonOpenTime.KeyId == 0)
             {
@@ -60,7 +64,11 @@ namespace ET.Client
                 seasonExp = seasonLevelConfig.UpExp;
             }
 
-            self.E_SeasonExperienceTextText.text = $"赛季经验:{seasonExp}/{seasonLevelConfig.UpExp}";
+            using (zstring.Block())
+            {
+                self.E_SeasonExperienceTextText.text = zstring.Format("赛季经验:{0}/{1}", seasonExp, seasonLevelConfig.UpExp);
+            }
+
             self.E_SeasonExperienceImgImage.fillAmount = 1f * seasonExp / seasonLevelConfig.UpExp;
 
             self.E_SeasonLvTextText.text = userInfo.SeasonLevel.ToString();
@@ -83,7 +91,10 @@ namespace ET.Client
             else
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(fubenid);
-                self.E_MonsterPositionTextText.text = $"出现位置:{dungeonConfig.ChapterName}";
+                using (zstring.Block())
+                {
+                    self.E_MonsterPositionTextText.text = zstring.Format("出现位置:{0}", dungeonConfig.ChapterName);
+                }
             }
 
             self.UpdateSeasonReward();
@@ -108,7 +119,10 @@ namespace ET.Client
                 self.E_GetBtnButton.gameObject.SetActive(true);
             }
 
-            self.E_SeasonRewardTextText.text = $"{nowReward}级赛季奖励";
+            using (zstring.Block())
+            {
+                self.E_SeasonRewardTextText.text = zstring.Format("{0}级赛季奖励", nowReward);
+            }
 
             self.ES_RewardList.Refresh(SeasonLevelConfigCategory.Instance.Get(nowReward).Reward, 0.9f);
         }
@@ -128,7 +142,10 @@ namespace ET.Client
                     DateTime nowTime = TimeInfo.Instance.ToDateTime(now);
                     DateTime endTime = TimeInfo.Instance.ToDateTime(end);
                     TimeSpan ts = endTime - nowTime;
-                    self.E_MonsterRefreshTimeTextText.text = $"刷新时间:{ts.Days}天{ts.Hours}小时{ts.Minutes}分";
+                    using (zstring.Block())
+                    {
+                        self.E_MonsterRefreshTimeTextText.text = zstring.Format("刷新时间:{0}天{1}小时{2}分", ts.Days, ts.Hours, ts.Minutes);
+                    }
                 }
                 else
                 {

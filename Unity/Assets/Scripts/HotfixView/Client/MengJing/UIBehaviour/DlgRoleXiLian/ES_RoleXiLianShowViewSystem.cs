@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (ES_EquipSet))]
-    [EntitySystemOf(typeof (ES_RoleXiLianShow))]
-    [FriendOfAttribute(typeof (ES_RoleXiLianShow))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(ES_EquipSet))]
+    [EntitySystemOf(typeof(ES_RoleXiLianShow))]
+    [FriendOfAttribute(typeof(ES_RoleXiLianShow))]
     public static partial class ES_RoleXiLianShowSystem
     {
         [EntitySystem]
@@ -183,8 +183,12 @@ namespace ET.Client
             self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
 
-            self.E_Text_CostValueText.text = $"{bagComponent.GetItemNumber(itemCost[0])}/{itemCost[1]}";
-            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1]? Color.green : Color.red;
+            using (zstring.Block())
+            {
+                self.E_Text_CostValueText.text = zstring.Format("{0}/{1}", bagComponent.GetItemNumber(itemCost[0]), itemCost[1]);
+            }
+
+            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1] ? Color.green : Color.red;
 
             self.E_Text_CostNameText.text = ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemName;
             self.E_Text_CostNameText.color = FunctionUI.QualityReturnColorDi((int)ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemQuality);
@@ -261,7 +265,10 @@ namespace ET.Client
             if (times > 1)
             {
                 int newXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
-                FlyTipComponent.Instance.ShowFlyTip($"获得{newXiLianDu - oldXiLianDu}洗炼经验");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0}洗炼经验", newXiLianDu - oldXiLianDu));
+                }
 
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianTen);
                 DlgRoleXiLianTen dlgRoleXiLianTen = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLianTen>();

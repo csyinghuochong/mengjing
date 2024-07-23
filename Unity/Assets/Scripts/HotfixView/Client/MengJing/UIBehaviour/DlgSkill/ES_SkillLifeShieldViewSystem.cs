@@ -122,13 +122,16 @@ namespace ET.Client
                     }
                 }
 
-                if (minExp == maxExp)
+                using (zstring.Block())
                 {
-                    self.E_Text_Zhuru_ExpText.text = $"本次注入预计获得{minExp}经验";
-                }
-                else
-                {
-                    self.E_Text_Zhuru_ExpText.text = $"本次注入预计获得{minExp}-{maxExp}经验";
+                    if (minExp == maxExp)
+                    {
+                        self.E_Text_Zhuru_ExpText.text = zstring.Format("本次注入预计获得{0}经验", minExp);
+                    }
+                    else
+                    {
+                        self.E_Text_Zhuru_ExpText.text = zstring.Format("本次注入预计获得{0}-{1}经验", minExp, maxExp);
+                    }
                 }
             }
         }
@@ -228,7 +231,7 @@ namespace ET.Client
             int nextlifeId = skillSetComponent.GetLifeShieldShowId(shieldType);
 
             LifeShieldConfig lifeShieldConfig = LifeShieldConfigCategory.Instance.Get(nextlifeId);
-            self.E_Text_ShieldNameText.text = $"{lifeShieldConfig.ShieldName}";
+            self.E_Text_ShieldNameText.text = "{lifeShieldConfig.ShieldName}";
             self.E_Text_ShieldDescText.text = lifeShieldConfig.Des;
 
             LifeShieldInfo lifeShieldInfo = skillSetComponent.GetLifeShieldByType(shieldType);
@@ -236,11 +239,15 @@ namespace ET.Client
 
             if (curLv == maxLv)
             {
-                self.E_Text_ProgessText.text = $"已满级";
+                self.E_Text_ProgessText.text = "已满级";
             }
             else
             {
-                self.E_Text_ProgessText.text = $"{curExp}/{lifeShieldConfig.ShieldExp}";
+                using (zstring.Block())
+                {
+                    self.E_Text_ProgessText.text = zstring.Format("{0}/{1}", curExp, lifeShieldConfig.ShieldExp);
+                }
+
                 self.E_ImageProgessImage.fillAmount = (float)(curExp) / (float)(lifeShieldConfig.ShieldExp);
             }
 
@@ -275,7 +282,10 @@ namespace ET.Client
 
             if (response.AddExp > 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip("注入成功!本次增加" + response.AddExp + "点魂值");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("注入成功!本次增加{0}点魂值", response.AddExp));
+                }
             }
 
             self.Root().GetComponent<SkillSetComponentC>().LifeShieldList = response.ShieldList;

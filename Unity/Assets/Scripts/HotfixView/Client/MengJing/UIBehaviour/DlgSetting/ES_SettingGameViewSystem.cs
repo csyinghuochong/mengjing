@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (MJCameraComponent))]
-    [FriendOf(typeof (ES_MainSkill))]
-    [EntitySystemOf(typeof (ES_SettingGame))]
-    [FriendOfAttribute(typeof (ES_SettingGame))]
+    [FriendOf(typeof(MJCameraComponent))]
+    [FriendOf(typeof(ES_MainSkill))]
+    [EntitySystemOf(typeof(ES_SettingGame))]
+    [FriendOfAttribute(typeof(ES_SettingGame))]
     public static partial class ES_SettingGameSystem
     {
         [EntitySystem]
@@ -149,7 +149,7 @@ namespace ET.Client
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click);
             self.E_Image_ClickImage.gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.Click, value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.Click, value == "0" ? "1" : "0");
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
         }
 
@@ -157,8 +157,8 @@ namespace ET.Client
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
             self.E_Image_YinYingImage.gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.Shadow, value == "0"? "1" : "0");
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().UpdateShadow(value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.Shadow, value == "0" ? "1" : "0");
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().UpdateShadow(value == "0" ? "1" : "0");
         }
 
         public static void UpdateShadow(this ES_SettingGame self)
@@ -189,11 +189,15 @@ namespace ET.Client
             }
 
             setvalues = value.Split('@');
-            setvalues[index] = setvalues[index] == "1"? "0" : "1";
+            setvalues[index] = setvalues[index] == "1" ? "0" : "1";
 
             value = $"{setvalues[0]}@{setvalues[1]}@{setvalues[2]}@{setvalues[3]}";
 
-            self.EG_OneSellSetRectTransform.Find($"Image_Click_{index}").gameObject.SetActive(setvalues[index] == "1");
+            using (zstring.Block())
+            {
+                self.EG_OneSellSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+            }
+
             self.SaveSettings(GameSettingEnum.OneSellSet, value);
         }
 
@@ -201,10 +205,14 @@ namespace ET.Client
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet);
             string[] setvalues = value.Split('@');
-            setvalues[index] = setvalues[index] == "1"? "0" : "1";
+            setvalues[index] = setvalues[index] == "1" ? "0" : "1";
             value = $"{setvalues[0]}@{setvalues[1]}";
 
-            self.EG_PickSetRectTransform.Find($"Image_Click_{index}").gameObject.SetActive(setvalues[index] == "1");
+            using (zstring.Block())
+            {
+                self.EG_PickSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+            }
+
             self.SaveSettings(GameSettingEnum.PickSet, value);
             self.UserInfoComponent.PickSet = value.Split('@');
         }
@@ -213,7 +221,7 @@ namespace ET.Client
         {
             int value = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle);
             self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, value == 0? 1 : 0);
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, value == 0 ? 1 : 0);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(value == 0);
         }
 
@@ -221,14 +229,14 @@ namespace ET.Client
         {
             int value = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo);
             self.EG_ZhuBoSetRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, value == 0? 1 : 0);
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, value == 0 ? 1 : 0);
         }
 
         public static void OnBtn_RandomHorese(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.RandomHorese);
             self.EG_RandomHoreseRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.RandomHorese, value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.RandomHorese, value == "0" ? "1" : "0");
         }
 
         public static void OnLenDepth(this ES_SettingGame self, float value)
@@ -263,15 +271,15 @@ namespace ET.Client
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FirstUnionName);
             self.EG_FirstUnionNameRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.FirstUnionName, value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.FirstUnionName, value == "0" ? "1" : "0");
         }
 
         public static void OnSkillAttackPlayerFirst(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst);
             self.EG_SkillAttackPlayerFirstRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.SkillAttackPlayerFirst, value == "0"? "1" : "0");
-            self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst = int.Parse(value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.SkillAttackPlayerFirst, value == "0" ? "1" : "0");
+            self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst = int.Parse(value == "0" ? "1" : "0");
         }
 
         public static void OnBtn_NoMoving(this ES_SettingGame self)
@@ -283,14 +291,14 @@ namespace ET.Client
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             self.EG_HideLeftBottomRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.HideLeftBottom, value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.HideLeftBottom, value == "0" ? "1" : "0");
         }
 
         public static void OnBtn_AutoAttack(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack);
             self.EG_AutoAttackRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
-            self.SaveSettings(GameSettingEnum.AutoAttack, value == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.AutoAttack, value == "0" ? "1" : "0");
 
             AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
             attackComponent.AutoAttack = value == "0";
@@ -303,11 +311,11 @@ namespace ET.Client
             self.E_Image_YinYingImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow) == "1");
 
             string music = PlayerPrefsHelp.GetString(PlayerPrefsHelp.MusicVolume);
-            float musicvalue = string.IsNullOrEmpty(music)? 1f : float.Parse(music);
+            float musicvalue = string.IsNullOrEmpty(music) ? 1f : float.Parse(music);
             self.E_SliderSoundSlider.value = musicvalue;
 
             string sound = PlayerPrefsHelp.GetString(PlayerPrefsHelp.SoundVolume);
-            float soundvalue = string.IsNullOrEmpty(sound)? 1f : float.Parse(sound);
+            float soundvalue = string.IsNullOrEmpty(sound) ? 1f : float.Parse(sound);
             self.E_SliderMusicSlider.value = soundvalue;
 
             self.E_ScreenToggle0Toggle.isOn = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FenBianlLv) == "1";
@@ -441,18 +449,18 @@ namespace ET.Client
         public static void OnBtn_Sound(this ES_SettingGame self)
         {
             self.E_Image_SoundImage.gameObject.SetActive(!self.E_Image_SoundImage.gameObject.activeSelf);
-            self.SaveSettings(GameSettingEnum.Sound, self.E_Image_SoundImage.gameObject.activeSelf? "1" : "0");
+            self.SaveSettings(GameSettingEnum.Sound, self.E_Image_SoundImage.gameObject.activeSelf ? "1" : "0");
         }
 
         public static void OnBtn_YinYue(this ES_SettingGame self)
         {
             self.E_Image_yinyuImage.gameObject.SetActive(!self.E_Image_yinyuImage.gameObject.activeSelf);
-            self.SaveSettings(GameSettingEnum.Music, self.E_Image_yinyuImage.gameObject.activeSelf? "1" : "0");
+            self.SaveSettings(GameSettingEnum.Music, self.E_Image_yinyuImage.gameObject.activeSelf ? "1" : "0");
         }
 
         public static void OnBtn_Fixed(this ES_SettingGame self)
         {
-            string value = self.E_Image_FixedImage.gameObject.activeSelf? "1" : "0";
+            string value = self.E_Image_FixedImage.gameObject.activeSelf ? "1" : "0";
             self.SaveSettings(GameSettingEnum.YanGan, value);
             self.UpdateYaoGan();
         }
@@ -469,13 +477,13 @@ namespace ET.Client
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "开启高帧模式，根据手机的配置不同可能导致手机发热耗电的情况，如果出现此现象请及时关闭喔!", () =>
                 {
-                    self.SaveSettings(GameSettingEnum.HighFps, oldValue == "0"? "1" : "0");
+                    self.SaveSettings(GameSettingEnum.HighFps, oldValue == "0" ? "1" : "0");
                     self.UpdateHighFps();
                 }, null).Coroutine();
             }
             else
             {
-                self.SaveSettings(GameSettingEnum.HighFps, oldValue == "0"? "1" : "0");
+                self.SaveSettings(GameSettingEnum.HighFps, oldValue == "0" ? "1" : "0");
                 self.UpdateHighFps();
             }
         }
@@ -483,9 +491,9 @@ namespace ET.Client
         public static void OnSmooth(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Smooth);
-            self.SaveSettings(GameSettingEnum.Smooth, oldValue == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.Smooth, oldValue == "0" ? "1" : "0");
             self.UpdateSmooth();
-            SettingHelper.OnSmooth(oldValue == "0"? "1" : "0");
+            SettingHelper.OnSmooth(oldValue == "0" ? "1" : "0");
         }
 
         public static void OnGameMemory(this ES_SettingGame self)
@@ -529,7 +537,7 @@ namespace ET.Client
             // stringBuilder.Append(MonoPool.Instance.ToString());
             stringBuilder.Append("GameObjectPool:");
             stringBuilder.AppendLine();
-          
+
             battleMessage.UploadMemoryTime = TimeHelper.ServerNow();
 
             Popularize2C_UploadResponse response = await BagClientNetHelper.Upload(self.Root(), stringBuilder.ToString());
@@ -538,9 +546,9 @@ namespace ET.Client
         public static void OnNoShowOther(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther);
-            self.SaveSettings(GameSettingEnum.NoShowOther, oldValue == "0"? "1" : "0");
+            self.SaveSettings(GameSettingEnum.NoShowOther, oldValue == "0" ? "1" : "0");
             self.UpdateNoShowOther();
-            SettingHelper.OnShowOther(oldValue == "0"? "1" : "0");
+            SettingHelper.OnShowOther(oldValue == "0" ? "1" : "0");
 
             List<Unit> units = UnitHelper.GetUnitList(self.Root().CurrentScene(), UnitType.Player);
             for (int i = units.Count - 1; i >= 0; i--)
@@ -556,7 +564,7 @@ namespace ET.Client
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
             self.EG_HighFpsRectTransform.Find("Image_Click").gameObject.SetActive(oldValue == "1");
-            CommonViewHelper.TargetFrameRate(oldValue == "1"? 60 : 30);
+            CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
         }
 
         public static void UpdateSmooth(this ES_SettingGame self)
@@ -584,7 +592,11 @@ namespace ET.Client
             PlayerInfo playerInfo = self.Root().GetComponent<PlayerComponent>().PlayerInfo;
             if (!string.IsNullOrEmpty(playerInfo.PhoneNumber))
             {
-                FlyTipComponent.Instance.ShowFlyTip($"已绑定手机号:{playerInfo.PhoneNumber}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("已绑定手机号:{0}", playerInfo.PhoneNumber));
+                }
+
                 return;
             }
 
@@ -618,7 +630,11 @@ namespace ET.Client
             if (!bagComponent.CheckNeedItem(globalValueConfig.Value))
             {
                 string needItem = CommonViewHelper.GetNeedItemDesc(globalValueConfig.Value);
-                FlyTipComponent.Instance.ShowFlyTip($"需要 {needItem}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("需要 {0}", needItem));
+                }
+
                 return;
             }
 

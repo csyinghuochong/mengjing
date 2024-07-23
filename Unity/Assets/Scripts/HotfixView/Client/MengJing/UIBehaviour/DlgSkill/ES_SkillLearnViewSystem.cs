@@ -56,7 +56,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置",
-                    (zstring)"是否花费" + needGold + "金币重置技能点",
+                    zstring.Format("是否花费{0}金币重置技能点", needGold),
                     () => { self.RequestReset(operation).Coroutine(); }).Coroutine();
             }
         }
@@ -359,7 +359,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             using (zstring.Block())
             {
-                self.E_Text_LeftSpText.text = (zstring)"剩余技能点: " + userInfo.Sp;
+                self.E_Text_LeftSpText.text = zstring.Format("剩余技能点: {0}", userInfo.Sp);
             }
         }
 

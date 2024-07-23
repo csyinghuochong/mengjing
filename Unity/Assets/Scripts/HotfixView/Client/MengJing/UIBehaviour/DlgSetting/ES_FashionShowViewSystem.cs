@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_FashionShowItem))]
-    [EntitySystemOf(typeof (ES_FashionShow))]
-    [FriendOfAttribute(typeof (ES_FashionShow))]
+    [FriendOf(typeof(Scroll_Item_FashionShowItem))]
+    [EntitySystemOf(typeof(ES_FashionShow))]
+    [FriendOfAttribute(typeof(ES_FashionShow))]
     public static partial class ES_FashionShowSystem
     {
         [EntitySystem]
@@ -21,9 +21,12 @@ namespace ET.Client
             for (int i = 0; i < keys.Count; i++)
             {
                 int keyid = keys[i];
-                GameObject Button_key = rc.Get<GameObject>($"Button_{keyid}");
-                Button_key.GetComponent<Button>().AddListener(() => { self.OnClickSubButton(keyid); });
-                self.ButtonList.Add(keyid, Button_key);
+                using (zstring.Block())
+                {
+                    GameObject Button_key = rc.Get<GameObject>(zstring.Format("Button_{0}", keyid));
+                    Button_key.GetComponent<Button>().AddListener(() => { self.OnClickSubButton(keyid); });
+                    self.ButtonList.Add(keyid, Button_key);
+                }
             }
 
             self.OnClickSubButton(keys[0]);

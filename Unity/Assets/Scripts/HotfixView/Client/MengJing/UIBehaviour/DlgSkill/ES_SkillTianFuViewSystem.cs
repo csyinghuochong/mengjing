@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SkillTianFuItem))]
-    [EntitySystemOf(typeof (ES_SkillTianFu))]
-    [FriendOfAttribute(typeof (ES_SkillTianFu))]
+    [FriendOf(typeof(Scroll_Item_SkillTianFuItem))]
+    [EntitySystemOf(typeof(ES_SkillTianFu))]
+    [FriendOfAttribute(typeof(ES_SkillTianFu))]
     public static partial class ES_SkillTianFuSystem
     {
         [EntitySystem]
@@ -165,7 +165,7 @@ namespace ET.Client
             for (int i = 0; i < self.ScrollItemSkillTianFuItems.Count; i++)
             {
                 Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
-                
+
                 if (scrollItemSkillTianFuItem.uiTransform == null)
                 {
                     continue;
@@ -198,9 +198,13 @@ namespace ET.Client
             {
                 // GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(48);
                 // string itemdesc = UICommonHelper.GetNeedItemDesc(globalValueConfig.Value);
-                PopupTipHelp.OpenPopupTip(self.Root(), "重置专精",
-                    $"是否花费{50000 + talentConfig.LearnRoseLv * 100}金币重置专精",
-                    () => { SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine(); }).Coroutine();
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "重置专精",
+                        zstring.Format("是否花费{0}金币重置专精", 50000 + talentConfig.LearnRoseLv * 100),
+                        () => { SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine(); }).Coroutine();
+                }
+
                 return;
             }
 

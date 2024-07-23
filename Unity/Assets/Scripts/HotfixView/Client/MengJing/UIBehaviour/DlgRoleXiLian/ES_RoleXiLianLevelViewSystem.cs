@@ -15,7 +15,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -71,11 +74,11 @@ namespace ET.Client
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             timerComponent.Remove(ref self.Timer);
-            
+
             ES_RoleXiLianLevelItem item0 = self.UIRoleXiLianLevels[0];
             ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
             ES_RoleXiLianLevelItem item2 = self.UIRoleXiLianLevels[2];
-            
+
             item0.PostionY = self.ItemWidth * -1f;
             item1.PostionY = 0f;
             item2.PostionY = self.ItemWidth;
@@ -104,7 +107,7 @@ namespace ET.Client
             ES_RoleXiLianLevelItem item0 = self.UIRoleXiLianLevels[0];
             ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
             ES_RoleXiLianLevelItem item2 = self.UIRoleXiLianLevels[2];
-            
+
             float offset = item1.uiTransform.localPosition.x;
             float movedis = offset < 0 ? self.MoveSpeed : -self.MoveSpeed;
 
@@ -133,7 +136,7 @@ namespace ET.Client
             self.UIRoleXiLianLevels.Insert(0, esRoleXiLianLevelItem);
 
             ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
-            
+
             item1.OnUpdateUI(self.EquipXilianId - 1);
             self.OnUpdateButton(self.EquipXilianId - 1);
             self.SetPosition();
@@ -151,7 +154,7 @@ namespace ET.Client
             self.UIRoleXiLianLevels.Add(esRoleXiLianLevelItem);
 
             ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
-            
+
             item1.OnUpdateUI(self.EquipXilianId + 1);
             self.OnUpdateButton(self.EquipXilianId + 1);
             self.SetPosition();

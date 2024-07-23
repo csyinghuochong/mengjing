@@ -50,7 +50,7 @@ namespace ET.Client
                 string npcName = NpcConfigCategory.Instance.Get(taskConfig.CompleteNpcID).Name;
                 using (zstring.Block())
                 {
-                    self.E_ComTaskNpcText.text = (zstring)"完成任务请找:<color=#5C7B32>" + npcName + "</color>";
+                    self.E_ComTaskNpcText.text = zstring.Format("完成任务请找:<color=#5C7B32>{0}</color>", npcName);
                 }
             }
 

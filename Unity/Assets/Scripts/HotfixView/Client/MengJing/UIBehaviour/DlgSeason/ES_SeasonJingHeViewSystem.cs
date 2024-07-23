@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CostItem))]
-    [FriendOf(typeof (Scroll_Item_SeasonJingHeItem))]
-    [EntitySystemOf(typeof (ES_SeasonJingHe))]
-    [FriendOfAttribute(typeof (ES_SeasonJingHe))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CostItem))]
+    [FriendOf(typeof(Scroll_Item_SeasonJingHeItem))]
+    [EntitySystemOf(typeof(ES_SeasonJingHe))]
+    [FriendOfAttribute(typeof(ES_SeasonJingHe))]
     public static partial class ES_SeasonJingHeSystem
     {
         [EntitySystem]
@@ -66,7 +66,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_SeasonJingHe self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
         }
 
         private static void OnSeasonJingHeItemsRefresh(this ES_SeasonJingHe self, Transform transform, int index)
@@ -107,7 +107,7 @@ namespace ET.Client
                 {
                     nowItem = item;
                     item.E_OutLineImgImage.gameObject.SetActive(true);
-                    self.E_JingHeImgImage.sprite = item.E_IconImgImage.gameObject.activeSelf? item.E_IconImgImage.sprite : self.OldSprite;
+                    self.E_JingHeImgImage.sprite = item.E_IconImgImage.gameObject.activeSelf ? item.E_IconImgImage.sprite : self.OldSprite;
                 }
             }
 
@@ -144,13 +144,16 @@ namespace ET.Client
                             if (hideProList.HideID == 0) continue;
                             string proName = ItemViewHelp.GetAttributeName(hideProList.HideID);
                             int showType = NumericHelp.GetNumericValueType(hideProList.HideID);
-                            if (showType == 2)
+                            using (zstring.Block())
                             {
-                                attribute = $"当前附加 {proName}:" + (hideProList.HideValue / 100f).ToString("0.##") + "%" + "\n";
-                            }
-                            else
-                            {
-                                attribute = $"当前附加 {proName}:" + hideProList.HideValue + "\n";
+                                if (showType == 2)
+                                {
+                                    attribute = zstring.Format("当前附加 {0}:{1}%\n", proName, (hideProList.HideValue / 100f).ToString("0.##"));
+                                }
+                                else
+                                {
+                                    attribute = zstring.Format("当前附加 {0}:{1}\n", proName, hideProList.HideValue);
+                                }
                             }
                         }
                     }
@@ -161,7 +164,10 @@ namespace ET.Client
                         {
                             int skillID = nowItem.BagInfo.HideSkillLists[i];
                             SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
-                            attribute = "当前附加技能" + ":" + skillCof.SkillName + "\n";
+                            using (zstring.Block())
+                            {
+                                attribute = zstring.Format("当前附加技能:{0}\n", skillCof.SkillName);
+                            }
                         }
                     }
 

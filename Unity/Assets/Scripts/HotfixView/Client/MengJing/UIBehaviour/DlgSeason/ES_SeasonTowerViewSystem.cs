@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_SeasonTower))]
-    [FriendOfAttribute(typeof (ES_SeasonTower))]
+    [EntitySystemOf(typeof(ES_SeasonTower))]
+    [FriendOfAttribute(typeof(ES_SeasonTower))]
     public static partial class ES_SeasonTowerSystem
     {
         [EntitySystem]
@@ -56,8 +56,12 @@ namespace ET.Client
             int cengshu = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SeasonTowerId) %
                     250000;
 
-            self.E_LayerTextText.text = $"{cengshu}/10";
-            self.E_Text_CengText.text = $"{cengshu}层";
+            using (zstring.Block())
+            {
+                self.E_LayerTextText.text = zstring.Format("{0}/10", cengshu);
+                self.E_Text_CengText.text = zstring.Format("{0}层", cengshu);
+            }
+
             long selfId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             self.ShowRankSeasonTowerInfos = response.RankList;
 
@@ -71,8 +75,14 @@ namespace ET.Client
                 if (self.ShowRankSeasonTowerInfos[i].UserId == selfId)
                 {
                     //NumericType.SeasonTowerId 当前通关的塔ID
-                    self.E_TimeTextText.text =
-                            $"{self.ShowRankSeasonTowerInfos[i].TotalTime / 3600000}小时{self.ShowRankSeasonTowerInfos[i].TotalTime % 3600000 / 60000}分{self.ShowRankSeasonTowerInfos[i].TotalTime % 3600000 % 60000 / 1000}秒";
+                    using (zstring.Block())
+                    {
+                        self.E_TimeTextText.text =
+                                zstring.Format("{0}小时{1}分{2}秒",
+                                    self.ShowRankSeasonTowerInfos[i].TotalTime / 3600000,
+                                    self.ShowRankSeasonTowerInfos[i].TotalTime % 3600000 / 60000,
+                                    self.ShowRankSeasonTowerInfos[i].TotalTime % 3600000 % 60000 / 1000);
+                    }
                 }
             }
 
