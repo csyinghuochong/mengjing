@@ -32,6 +32,13 @@ namespace ET
         public static List<long> GetAllIds(this UnitComponent self)
         {
             List<long> ids = new List<long>();
+            List<EntityRef<Unit>> allunits = self.GetAll();
+            int allnumber = allunits.Count;
+            for (int i = 0; i < allnumber; i++)
+            {
+                Unit unit = allunits[i];
+                ids.Add(unit.Id);
+            }
             return ids;
         }
         [EntitySystem]

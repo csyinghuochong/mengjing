@@ -71,7 +71,8 @@ namespace ET.Server
                     }
                 }
 
-                if (TimeHelper.ServerNow() - jiaYuanComponent.JiaYuanFuJinTime_3 > TimeHelper.Hour * 4)
+                //if (TimeHelper.ServerNow() - jiaYuanComponent.JiaYuanFuJinTime_3 > TimeHelper.Hour * 4)
+                if (TimeHelper.ServerNow() - jiaYuanComponent.JiaYuanFuJinTime_3 > TimeHelper.Second * 4)
                 {
                     jiaYuanComponent.JiaYuanFuJins_3.Clear();
                     M2M_AllPlayerListRequest M2M_AllPlayerListRequest = M2M_AllPlayerListRequest.Create();

@@ -30,22 +30,6 @@ namespace ET.Client
             M2C_JiaYuanVisitListResponse response =
                     await JiaYuanNetHelper.JiaYuanVisitListRequest(self.Root(), jiaYuanComponent.MasterId, unit.Id, operateType);
 
-            // 测试数据
-            JiaYuanVisit jiaYuanVisit1 = JiaYuanVisit.Create();
-            jiaYuanVisit1.Occ = 1;
-            jiaYuanVisit1.PlayerName = "测试角色1";
-            response.JiaYuanVisit_1.Add(jiaYuanVisit1);
-
-            JiaYuanVisit jiaYuanVisit2 = JiaYuanVisit.Create();
-            jiaYuanVisit2.Occ = 2;
-            jiaYuanVisit2.PlayerName = "测试角色2";
-            response.JiaYuanVisit_1.Add(jiaYuanVisit2);
-
-            JiaYuanVisit jiaYuanVisit3 = JiaYuanVisit.Create();
-            jiaYuanVisit3.Occ = 1;
-            jiaYuanVisit3.PlayerName = "测试角色3";
-            response.JiaYuanVisit_2.Add(jiaYuanVisit3);
-
             self.m2C_JiaYuanVisitList = response;
             Log.Debug($"UIJiaYuanVisitComponent: {response.JiaYuanVisit_1.Count} {response.JiaYuanVisit_2.Count}");
             self.OnClickPageButton(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
