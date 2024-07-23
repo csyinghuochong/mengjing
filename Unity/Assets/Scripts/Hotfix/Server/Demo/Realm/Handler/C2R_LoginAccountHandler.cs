@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ET.Server
 {
@@ -20,23 +21,24 @@ namespace ET.Server
 
             if (string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.Password))
 			{
-				response.Error = 20002;
+				response.Error = ErrorCode.ERR_AccountOrPasswordError;
                 session.Disconnect().Coroutine();
                 return;
 			}
-            // if (!Regex.IsMatch(request.Account.Trim(), @"^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,15}$"))
-            // {
-            //     response.Error = ErrorCode.ERR_AccountNameFormError;
-            //     session.Disconnect().Coroutine();
-            //     return;
-            // }
-            //
-            // if (!Regex.IsMatch(request.Password.Trim(), @"^[A-Za-z0-9]+$"))
-            // {
-            //     response.Error = ErrorCode.ERR_PasswordFormError;
-            //     session.Disconnect().Coroutine();
-            //     return;
-            // }
+            
+            if (!Regex.IsMatch(request.Account.Trim(), @"^[A-Za-z0-9]+$"))   //, @"^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,15}$"))
+            {
+                response.Error = ErrorCode.ERR_AccountNameFormError;
+                session.Disconnect().Coroutine();
+                return;
+            }
+            
+            if (!Regex.IsMatch(request.Password.Trim(), @"^[A-Za-z0-9]+$"))
+            {
+                response.Error = ErrorCode.ERR_PasswordFormError;
+                session.Disconnect().Coroutine();
+                return;
+            }
 
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
@@ -104,8 +106,9 @@ namespace ET.Server
                         return;
                     }
 
-                    bool IsHoliday = session.Root().GetComponent<FangChenMiComponentS>().IsHoliday;;
-                    bool StopServer = session.Root().GetComponent<FangChenMiComponentS>().IsHoliday;;
+                    FangChenMiComponentS fangChenMiComponentS = session.Root().GetComponent<FangChenMiComponentS>();
+                    bool IsHoliday = fangChenMiComponentS.IsHoliday;;
+                    bool StopServer = fangChenMiComponentS.IsHoliday;;
                     if (StopServer && !GMHelp.IsGmAccount(request.Account))
                     {
                         response.Error = ErrorCode.ERR_StopServer;
