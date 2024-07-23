@@ -416,6 +416,7 @@ message C2Q_EnterQueue // ISessionRequest
 {
 	int32 RpcId = 90;
 	string Token = 1;
+	string Account = 2;
 	int64 AccountId = 3;
 }
 

@@ -154,18 +154,16 @@ namespace ET.Server
                         tokenComponent.Add(centerAccountInfo.Account, queueToken);
 
                         ActorId queueServerId = UnitCacheHelper.GetQueueServerId(request.ServerId);
-                        //Q2A_EnterQueue d2GGetUnit = (Q2A_EnterQueue)await ActorMessageSenderComponent.Instance.Call(queueServerId, new A2Q_EnterQueue()
-                        //{
-                        //    AccountId = account.Id,
-                        //    Token = queueToken
-                        //});
-
-                        ////进入排队
-                        //response.Error = ErrorCode.ERR_EnterQueue;
-                        //response.AccountId = account.Id;
-                        //response.QueueNumber = d2GGetUnit.QueueNumber;
-                        //response.QueueAddres = StartSceneConfigCategory.Instance.Queues[session.DomainZone()].OuterIPPort.ToString();
-
+                        R2Q_EnterQueue qEnterQueue = R2Q_EnterQueue.Create();
+                        qEnterQueue.AccountId = centerAccountInfo.Id;
+                        qEnterQueue.Token = queueToken;
+                        
+                        ////进入排队  realm添加token
+                        Q2R_EnterQueue d2GGetUnit = (Q2R_EnterQueue)await session.Root().GetComponent<MessageSender>().Call(queueServerId, qEnterQueue);
+                        response.Error = ErrorCode.ERR_EnterQueue;
+                        response.AccountId = centerAccountInfo.Id;
+                        response.QueueNumber = d2GGetUnit.QueueNumber;
+                        response.QueueAddres = StartSceneConfigCategory.Instance.Realms[request.ServerId].OuterIPPort.ToString();
                         session.Disconnect().Coroutine();
                         centerAccountInfo?.Dispose();
                         return;

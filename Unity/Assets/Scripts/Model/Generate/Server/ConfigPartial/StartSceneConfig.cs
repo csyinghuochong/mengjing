@@ -19,6 +19,8 @@ namespace ET
 
         public List<StartSceneConfig> Maps = new();
 
+        public Dictionary<int, StartSceneConfig> Queues =  new Dictionary<int, StartSceneConfig>();
+
         public StartSceneConfig Match;
 
         public StartSceneConfig Benchmark;
@@ -66,6 +68,9 @@ namespace ET
                 {
                     case SceneType.Realm:
                         this.Realms.Add(startSceneConfig);
+                        break;
+                    case SceneType.Queue:
+                        this.Queues.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
                     case SceneType.Gate:
                         this.Gates.Add(startSceneConfig.Zone, startSceneConfig);
