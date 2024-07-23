@@ -31,7 +31,6 @@ namespace ET.Client
                     await JiaYuanNetHelper.JiaYuanVisitListRequest(self.Root(), jiaYuanComponent.MasterId, unit.Id, operateType);
 
             self.m2C_JiaYuanVisitList = response;
-            Log.Debug($"UIJiaYuanVisitComponent: {response.JiaYuanVisit_1.Count} {response.JiaYuanVisit_2.Count}");
             self.OnClickPageButton(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
         }
 
