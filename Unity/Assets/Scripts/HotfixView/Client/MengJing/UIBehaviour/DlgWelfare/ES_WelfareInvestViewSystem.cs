@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_WelfareInvest))]
-    [FriendOfAttribute(typeof (ES_WelfareInvest))]
+    [EntitySystemOf(typeof(ES_WelfareInvest))]
+    [FriendOfAttribute(typeof(ES_WelfareInvest))]
     public static partial class ES_WelfareInvestSystem
     {
         [EntitySystem]
@@ -93,7 +93,10 @@ namespace ET.Client
                 TimeSpan ts = self.EndTime - nowTime;
                 if (ts.TotalMinutes > 0)
                 {
-                    self.E_TimeTextText.text = $"{ts.Days}天{ts.Hours}小时{ts.Minutes}分";
+                    using (zstring.Block())
+                    {
+                        self.E_TimeTextText.text = zstring.Format("{0}天{1}小时{2}分", ts.Days, ts.Hours, ts.Minutes);
+                    }
                 }
                 else
                 {

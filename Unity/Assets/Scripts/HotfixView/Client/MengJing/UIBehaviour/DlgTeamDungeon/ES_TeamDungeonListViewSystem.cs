@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_TeamDungeonList))]
-    [FriendOfAttribute(typeof (ES_TeamDungeonList))]
+    [EntitySystemOf(typeof(ES_TeamDungeonList))]
+    [FriendOfAttribute(typeof(ES_TeamDungeonList))]
     public static partial class ES_TeamDungeonListSystem
     {
         [EntitySystem]
@@ -62,11 +62,17 @@ namespace ET.Client
             int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
             int times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonTimes();
             self.E_Text_LeftTimeText.gameObject.SetActive(true);
-            self.E_Text_LeftTimeText.text = $"副本次数：{totalTimes - times}/{totalTimes}";
+            using (zstring.Block())
+            {
+                self.E_Text_LeftTimeText.text = zstring.Format("副本次数：{0}/{1}", totalTimes - times, totalTimes);
+            }
 
             totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
             times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonXieZhu();
-            self.E_Text_XieZhuNumText.text = $"帮助次数：{totalTimes - times}/{totalTimes}";
+            using (zstring.Block())
+            {
+                self.E_Text_XieZhuNumText.text = zstring.Format("帮助次数：{0}/{1}", totalTimes - times, totalTimes);
+            }
         }
     }
 }

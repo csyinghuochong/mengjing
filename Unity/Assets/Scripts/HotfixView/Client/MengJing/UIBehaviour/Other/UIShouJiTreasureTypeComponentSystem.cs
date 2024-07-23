@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIShouJiTreasureTypeComponent))]
-    [EntitySystemOf(typeof (UIShouJiTreasureTypeComponent))]
+    [FriendOf(typeof(UIShouJiTreasureTypeComponent))]
+    [EntitySystemOf(typeof(UIShouJiTreasureTypeComponent))]
     public static partial class UIShouJiTreasureTypeComponentSystem
     {
         [EntitySystem]
@@ -42,7 +42,11 @@ namespace ET.Client
         {
             self.Chapter = chapter;
 
-            self.Lab_TaskName.GetComponent<Text>().text = $"第{chapter}章";
+            using (zstring.Block())
+            {
+                self.Lab_TaskName.GetComponent<Text>().text = zstring.Format("第{0}章", chapter);
+            }
+
             self.UpdateRedDot();
         }
 
@@ -56,7 +60,7 @@ namespace ET.Client
                 ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(shouList[i]);
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
                 KeyValuePairInt keyValuePairInt = shoujiComponent.GetTreasureInfo(shouList[i]);
-                int haveNumber = keyValuePairInt != null? (int)keyValuePairInt.Value : 0;
+                int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
                 bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
 
                 if (bagComponent.GetItemNumber(shouJiItemConfig.ItemID) > 0 && !actived)

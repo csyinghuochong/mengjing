@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_TowerDungeon))]
-    [FriendOfAttribute(typeof (ES_TowerDungeon))]
+    [EntitySystemOf(typeof(ES_TowerDungeon))]
+    [FriendOfAttribute(typeof(ES_TowerDungeon))]
     public static partial class ES_TowerDungeonSystem
     {
         [EntitySystem]
@@ -16,9 +16,13 @@ namespace ET.Client
             self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_Enter);
             GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(63);
             string[] jianyiLevel = globalValueConfig.Value.Split(';');
-            self.E_TextLevelJianyi_1Text.text = $"建议等级达到{jianyiLevel[0]}级后进行挑战";
-            self.E_TextLevelJianyi_2Text.text = $"建议等级达到{jianyiLevel[1]}级后进行挑战";
-            self.E_TextLevelJianyi_3Text.text = $"建议等级达到{jianyiLevel[2]}级后进行挑战";
+            using (zstring.Block())
+            {
+                self.E_TextLevelJianyi_1Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[0]);
+                self.E_TextLevelJianyi_2Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[1]);
+                self.E_TextLevelJianyi_3Text.text = zstring.Format("建议等级达到{0}级后进行挑战", jianyiLevel[2]);
+            }
+
             globalValueConfig = GlobalValueConfigCategory.Instance.Get(61);
             self.ES_RewardList.Refresh(globalValueConfig.Value);
             self.OnButtonSelect(FubenDifficulty.Normal);
@@ -34,9 +38,9 @@ namespace ET.Client
         {
             Color color_1 = new(255, 255, 255, 150);
             Color color_2 = new(255, 255, 255, 0);
-            self.E_ButtonSelect_3Image.color = difficulty == FubenDifficulty.DiYu? color_1 : color_2;
-            self.E_ButtonSelect_2Image.color = difficulty == FubenDifficulty.TiaoZhan? color_1 : color_2;
-            self.E_ButtonSelect_1Image.color = difficulty == FubenDifficulty.Normal? color_1 : color_2;
+            self.E_ButtonSelect_3Image.color = difficulty == FubenDifficulty.DiYu ? color_1 : color_2;
+            self.E_ButtonSelect_2Image.color = difficulty == FubenDifficulty.TiaoZhan ? color_1 : color_2;
+            self.E_ButtonSelect_1Image.color = difficulty == FubenDifficulty.Normal ? color_1 : color_2;
             self.FubenDifficulty = difficulty;
         }
 
@@ -47,7 +51,11 @@ namespace ET.Client
             string[] jianyiLevel = globalValueConfig.Value.Split(';');
             if (userInfoComponent.UserInfo.Lv < int.Parse(jianyiLevel[self.FubenDifficulty - 1]))
             {
-                FlyTipComponent.Instance.ShowFlyTip($"{jianyiLevel[self.FubenDifficulty - 1]}级进入！");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}级进入！", jianyiLevel[self.FubenDifficulty - 1]));
+                }
+
                 return;
             }
 

@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIShouJiTreasureItemComponent))]
-    [EntitySystemOf(typeof (UIShouJiTreasureItemComponent))]
+    [FriendOf(typeof(UIShouJiTreasureItemComponent))]
+    [EntitySystemOf(typeof(UIShouJiTreasureItemComponent))]
     public static partial class UIShouJiTreasureItemComponentSystem
     {
         [EntitySystem]
@@ -41,8 +41,12 @@ namespace ET.Client
         {
             ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(self.ShoujiId);
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(self.ShoujiId);
-            int haveNumber = keyValuePairInt != null? (int)keyValuePairInt.Value : 0;
-            self.TextNumber.GetComponent<Text>().text = $"激活:{haveNumber}/{shouJiItemConfig.AcitveNum}";
+            int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
+            using (zstring.Block())
+            {
+                self.TextNumber.GetComponent<Text>().text = zstring.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
+            }
+
             bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
 
             // 显示红点
@@ -70,28 +74,35 @@ namespace ET.Client
                 string[] attributeInfo = attributeInfoList[i].Split(',');
                 int numericType = int.Parse(attributeInfo[0]);
 
-                if (NumericHelp.GetNumericValueType(numericType) == 2)
+                using (zstring.Block())
                 {
-                    float fvalue = float.Parse(attributeInfo[1]);
-                    string svalue = fvalue.ToString("0.#####");
-                    attributeStr = attributeStr + $"{ItemViewHelp.GetAttributeName(numericType)} {svalue}% ";
-                }
-                else
-                {
-                    attributeStr = attributeStr + $"提升{ItemViewHelp.GetAttributeName(numericType)}{int.Parse(attributeInfo[1])}点";
-                }
+                    if (NumericHelp.GetNumericValueType(numericType) == 2)
+                    {
+                        float fvalue = float.Parse(attributeInfo[1]);
+                        string svalue = fvalue.ToString("0.#####");
+                        attributeStr = zstring.Format("{0}{1} {2}%", attributeStr, ItemViewHelp.GetAttributeName(numericType), svalue);
+                    }
+                    else
+                    {
+                        attributeStr = zstring.Format("{0}提升{1}{2}点", attributeStr, ItemViewHelp.GetAttributeName(numericType),
+                            int.Parse(attributeInfo[1]));
+                    }
 
-                if (i < attributeInfoList.Length - 1)
-                {
-                    attributeStr += "\n";
+                    if (i < attributeInfoList.Length - 1)
+                    {
+                        attributeStr = zstring.Format("{0}{1}", attributeStr, "\n");
+                    }
                 }
             }
 
             self.TextAttribute.GetComponent<Text>().text = attributeStr;
 
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(shouijId);
-            int haveNumber = keyValuePairInt != null? (int)keyValuePairInt.Value : 0;
-            self.TextNumber.GetComponent<Text>().text = $"激活:{haveNumber}/{shouJiItemConfig.AcitveNum}";
+            int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
+            using (zstring.Block())
+            {
+                self.TextNumber.GetComponent<Text>().text = zstring.Format("激活:{0}/{1}", haveNumber, shouJiItemConfig.AcitveNum);
+            }
 
             CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemIconImage.gameObject, haveNumber == 0);
             CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemQualityImage.gameObject, haveNumber == 0);

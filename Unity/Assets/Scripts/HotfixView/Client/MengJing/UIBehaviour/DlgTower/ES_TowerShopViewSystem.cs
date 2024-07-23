@@ -2,9 +2,9 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_WeiJingShopItem))]
-    [EntitySystemOf(typeof (ES_TowerShop))]
-    [FriendOfAttribute(typeof (ES_TowerShop))]
+    [FriendOf(typeof(Scroll_Item_WeiJingShopItem))]
+    [EntitySystemOf(typeof(ES_TowerShop))]
+    [FriendOfAttribute(typeof(ES_TowerShop))]
     public static partial class ES_TowerShopSystem
     {
         [EntitySystem]
@@ -103,7 +103,10 @@ namespace ET.Client
         public static void OnUpdateNumShow(this ES_TowerShop self)
         {
             //获取道具数量进行显示
-            self.E_Lab_NumText.text = "当前拥有数量:" + self.Root().GetComponent<BagComponentC>().GetItemNumber(10000148);
+            using (zstring.Block())
+            {
+                self.E_Lab_NumText.text = zstring.Format("当前拥有数量:{0}", self.Root().GetComponent<BagComponentC>().GetItemNumber(10000148));
+            }
         }
 
         public static void OnBtn_BuyNum_jia(this ES_TowerShop self, int num)

@@ -89,7 +89,10 @@ namespace ET.Client
             self.EG_Pro_1RectTransform.Find("Text_Tip_Pro_0").GetComponent<Text>().text =
                     ItemViewHelp.GetAttributeDesc(nextunionQiangHuaConfig.EquipPropreAdd);
 
-            self.ES_CostList.Refresh($"16;{unionQiangHuaConfig.CostGold}@" + unionQiangHuaConfig.CostItem);
+            using (zstring.Block())
+            {
+                self.ES_CostList.Refresh(zstring.Format("16;{0}@{1}", unionQiangHuaConfig.CostGold, unionQiangHuaConfig.CostItem));
+            }
         }
 
         public static async ETTask OnButton_Donation(this ES_UnionPetXiuLian self)

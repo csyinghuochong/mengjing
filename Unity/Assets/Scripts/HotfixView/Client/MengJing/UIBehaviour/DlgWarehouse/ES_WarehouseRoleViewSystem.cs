@@ -52,8 +52,12 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", $"是否消耗{CommonViewHelper.GetNeedItemDesc(costItems)}开启一个仓库",
-                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", zstring.Format("是否消耗{0}开启一个仓库", CommonViewHelper.GetNeedItemDesc(costItems)),
+                        () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+                }
+
                 return false;
             }
 
@@ -84,7 +88,10 @@ namespace ET.Client
         public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
         {
             self.RefreshHouseItems();
-            FlyTipComponent.Instance.ShowFlyTip($"获得道具: {CommonViewHelper.GetNeedItemDesc(dataparams)}");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得道具: {0}", CommonViewHelper.GetNeedItemDesc(dataparams)));
+            }
         }
 
         private static void OnClickImage_Lock(this ES_WarehouseRole self)
@@ -92,15 +99,18 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             int addcell = bagComponent.WarehouseAddedCell[self.E_ItemTypeSetToggleGroup.GetCurrentIndex()];
             BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() * 10 + addcell];
-            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                $"是否花费{CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
-                () =>
-                {
-                    BagClientNetHelper
-                            .RequestBuyBagCell(self.Root(), self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)
-                            .Coroutine();
-                },
-                null).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
+                    () =>
+                    {
+                        BagClientNetHelper
+                                .RequestBuyBagCell(self.Root(), self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)
+                                .Coroutine();
+                    },
+                    null).Coroutine();
+            }
         }
 
         public static void Refresh(this ES_WarehouseRole self)

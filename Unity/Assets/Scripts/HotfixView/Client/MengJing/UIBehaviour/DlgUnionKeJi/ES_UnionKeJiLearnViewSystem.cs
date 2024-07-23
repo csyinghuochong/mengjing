@@ -78,12 +78,18 @@ namespace ET.Client
 
             Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
             self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
-            self.E_LvTextText.text = $"等级：{unionKeJiConfig.QiangHuaLv.ToString()}";
+            using (zstring.Block())
+            {
+                self.E_LvTextText.text = zstring.Format("等级：{0}", unionKeJiConfig.QiangHuaLv.ToString());
+            }
 
             if (unionKeJiConfig.QiangHuaLv == 0)
             {
                 UnionKeJiConfig unionKeJiConfig1 = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.NextID);
-                self.E_AttributeTextText.text = "下一级：" + ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd);
+                using (zstring.Block())
+                {
+                    self.E_AttributeTextText.text = zstring.Format("下一级：{0}", ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd));
+                }
             }
             else
             {

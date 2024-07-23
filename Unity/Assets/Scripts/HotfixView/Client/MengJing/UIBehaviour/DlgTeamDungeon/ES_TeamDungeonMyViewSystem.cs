@@ -2,9 +2,9 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_TeamItem))]
-    [EntitySystemOf(typeof (ES_TeamDungeonMy))]
-    [FriendOfAttribute(typeof (ES_TeamDungeonMy))]
+    [FriendOf(typeof(ES_TeamItem))]
+    [EntitySystemOf(typeof(ES_TeamDungeonMy))]
+    [FriendOfAttribute(typeof(ES_TeamDungeonMy))]
     public static partial class ES_TeamDungeonMySystem
     {
         [EntitySystem]
@@ -73,7 +73,7 @@ namespace ET.Client
         {
             bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader? "是否离开队伍" : "是否离开队伍？",
+            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader ? "是否离开队伍" : "是否离开队伍？",
                 () => { TeamNetHelper.SendLeaveRequest(self.Root()).Coroutine(); }).Coroutine();
         }
 
@@ -90,9 +90,14 @@ namespace ET.Client
             BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
             if (battleMessageComponent.CanShout())
             {
-                string text =
-                        $" 副本:{SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name}开启冒险,现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{teamInfo.TeamId}_{teamInfo.SceneId}_{teamInfo.FubenType}_{teamInfo.PlayerList[0].PlayerLv}></link>";
-                ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
+                using (zstring.Block())
+                {
+                    string text = zstring.Format(" 副本:{0}开启冒险,现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{1}_{2}_{3}_{4}></link>",
+                        SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
+                        teamInfo.PlayerList[0].PlayerLv);
+                    ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
+                }
+
                 FlyTipComponent.Instance.ShowFlyTip("已发送！");
             }
             else
@@ -117,7 +122,7 @@ namespace ET.Client
 
                 if (totalTimes - times > 0 && totalTimes_2 - times_2 <= 0)
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"帮助副本次数已尽，继续则消耗正常次数", async () =>
+                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，继续则消耗正常次数", async () =>
                     {
                         int errorCode = await TeamNetHelper.RequestTeamDungeonOpen(self.Root());
                         if (errorCode != ErrorCode.ERR_Success)
@@ -170,8 +175,12 @@ namespace ET.Client
                 addStr = "(深渊模式)";
             }
 
-            self.E_Lab_FuBenNameText.text = sceneConfig.Name + addStr;
-            self.E_Lab_FuBenLvText.text = $"{GameSettingLanguge.Instance.LoadLocalization("等级")}: {sceneConfig.EnterLv} - 50";
+            using (zstring.Block())
+            {
+                self.E_Lab_FuBenNameText.text = zstring.Format("{0}{1}", sceneConfig.Name, addStr);
+                self.E_Lab_FuBenLvText.text =
+                        zstring.Format("{0}: {1} - 50", GameSettingLanguge.Instance.LoadLocalization("等级"), sceneConfig.EnterLv);
+            }
         }
     }
 }
