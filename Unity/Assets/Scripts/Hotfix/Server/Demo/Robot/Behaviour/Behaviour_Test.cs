@@ -26,10 +26,11 @@ namespace ET
                  Console.WriteLine("Behaviour_Test");
                  
                  //副本（需要切场景）类型的玩法除外... 所有协议都要测试到， 可以按照移植顺序或者自定义
+                 //尽量模拟真实玩家的行为测试所有外围系统协议
                  
                  //抽卡
                  // await BagClientNetHelper.ChouKa( root, 1001,  1);
-                 // //检测背包有可鉴定装备 直接鉴定
+                 // //检测背包有可鉴定装备 直接鉴定.  功能函数写在system，收发协议写在helper
                  // await BagClientNetHelper.CheckCanJianDing(root);
                  // //检测背包有可替换的装备 直接穿戴
                  // await BagClientNetHelper.CheckCanEquip(root);
