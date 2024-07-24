@@ -151,7 +151,7 @@ namespace ET.Server
 
                         queueToken = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
                         tokenComponent.Remove(centerAccountInfo.Account);
-                        tokenComponent.Add(centerAccountInfo.Account, queueToken);
+                        tokenComponent.Add(centerAccountInfo.Account, queueToken, true);
 
                         ActorId queueServerId = UnitCacheHelper.GetQueueServerId(request.ServerId);
                         R2Q_EnterQueue qEnterQueue = R2Q_EnterQueue.Create();
@@ -224,7 +224,7 @@ namespace ET.Server
                     
                     string Token = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
                     tokenComponent.Remove(centerAccountInfo.Account);    //Token也是保留十分钟
-                    tokenComponent.Add(centerAccountInfo.Account, Token);
+                    tokenComponent.Add(centerAccountInfo.Account, Token, true);
                     response.PlayerInfo = centerAccountInfo.PlayerInfo;
                     response.AccountId = centerAccountInfo.Id;
                     response.Token = Token;
