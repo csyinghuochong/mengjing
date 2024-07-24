@@ -670,10 +670,14 @@ namespace ET.Client
         public static async ETTask CheckCanEquip(Scene root)
         {
             //可以穿戴的装备
-            // List<BagInfo> bagInfos =  root.GetComponent<BagComponentC>().GetCanEquipList();
+            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanEquipList();
 
             //穿戴装备
-            C2M_ItemOperateRequest itemOperateRequest = C2M_ItemOperateRequest.Create();
+            foreach (BagInfo bagInfo in bagInfos)
+            {
+                await RequestTakeoffEquip(root, bagInfo);
+            }
+
             await ETTask.CompletedTask;
         }
 

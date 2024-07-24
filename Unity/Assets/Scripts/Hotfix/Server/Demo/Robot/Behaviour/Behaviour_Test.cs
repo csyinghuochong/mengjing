@@ -30,12 +30,15 @@ namespace ET
                 //抽卡
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
-                // //检测背包有可鉴定装备 直接鉴定.  功能函数写在system，收发协议写在helper
+
+                // 检测背包有可鉴定装备 直接鉴定.  功能函数写在system，收发协议写在helper
                 Console.WriteLine("鉴定");
                 await BagClientNetHelper.CheckCanJianDing(root);
-                // //检测背包有可替换的装备 直接穿戴
-                Console.WriteLine("穿戴");
+
+                // 检测背包有可替换的装备 直接穿戴
+                Console.WriteLine("穿戴装备");
                 await BagClientNetHelper.CheckCanEquip(root);
+
                 //检测背包有可以镶嵌的宝石 直接镶嵌
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
