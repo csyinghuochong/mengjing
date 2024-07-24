@@ -653,34 +653,6 @@ namespace ET.Client
             return response;
         }
 
-        public static async ETTask CheckCanJianDing(Scene root)
-        {
-            //可以鉴定的装备
-            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanJianDing();
-
-            //鉴定装备
-            foreach (BagInfo bagInfo in bagInfos)
-            {
-                await RequestAppraisalItem(root, bagInfo);
-            }
-
-            await ETTask.CompletedTask;
-        }
-
-        public static async ETTask CheckCanEquip(Scene root)
-        {
-            //可以穿戴的装备
-            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanEquipList();
-
-            //穿戴装备
-            foreach (BagInfo bagInfo in bagInfos)
-            {
-                await RequestTakeoffEquip(root, bagInfo);
-            }
-
-            await ETTask.CompletedTask;
-        }
-
         public static async ETTask<M2C_ItemXiLianTransferResponse> ItemXiLianTransfer(Scene root, long operateBagID_1, long operateBagID_2)
         {
             C2M_ItemXiLianTransferRequest request = C2M_ItemXiLianTransferRequest.Create();
@@ -923,6 +895,82 @@ namespace ET.Client
             M2C_ItemIncreaseTransferResponse response =
                     (M2C_ItemIncreaseTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
+        }
+
+        public static async ETTask CheckCanJianDing(Scene root)
+        {
+            //可以鉴定的装备
+            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanJianDing();
+
+            //鉴定装备
+            foreach (BagInfo bagInfo in bagInfos)
+            {
+                await RequestAppraisalItem(root, bagInfo);
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        public static async ETTask CheckCanEquip(Scene root)
+        {
+            //可以穿戴的装备
+            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanEquipList();
+
+            //穿戴装备
+            foreach (BagInfo bagInfo in bagInfos)
+            {
+                await RequestTakeoffEquip(root, bagInfo);
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        public static async ETTask CheckCanXiangQianGem(Scene root)
+        {
+            List<BagInfo> gemstones = root.GetComponent<BagComponentC>().GetItemsByType((int)ItemTypeEnum.Gemstone);
+            List<BagInfo> equips = root.GetComponent<BagComponentC>().GetEquipList();
+
+            foreach (BagInfo equip in equips)
+            {
+                string[] gemHoles = equip.GemHole.Split('_');
+                string[] gemIDNews = equip.GemIDNew.Split('_');
+
+                for (int j = 0; j < gemHoles.Length; j++)
+                {
+                    string gemHole = gemHoles[j];
+                    string gemIDNew = gemIDNews[j];
+
+                    for (int i = gemstones.Count - 1; i >= 0; i--)
+                    {
+                        BagInfo gemstone = gemstones[i];
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(gemstone.ItemID);
+                        if (gemHole != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
+                        {
+                            // 宝石与孔位不符！
+                            continue;
+                        }
+
+                        if (gemIDNew != "0")
+                        {
+                            // 该孔位存在宝石
+                            ItemConfig beforeItemConfig = ItemConfigCategory.Instance.Get(int.Parse(gemIDNew));
+
+                            if (itemConfig.SellMoneyValue <= beforeItemConfig.SellMoneyValue)
+                            {
+                                continue;
+                            }
+                        }
+
+                        string usrPar = string.Format("{0}_{1}", equip.BagInfoID, j);
+
+                        await RequestXiangQianGem(root, gemstone, usrPar);
+
+                        gemstones.RemoveAt(i);
+                    }
+                }
+
+                await ETTask.CompletedTask;
+            }
         }
     }
 }

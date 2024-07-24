@@ -346,17 +346,17 @@ namespace ET.Client
                 string[] getIdNew = dlgRole.View.ES_RoleGem.XiangQianItem.GemIDNew.Split('_');
                 using (zstring.Block())
                 {
-                    usrPar = (zstring)dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID + "_" + dlgRole.View.ES_RoleGem.XiangQianIndex;
-                }
+                    usrPar = zstring.Format("{0}_{1}", dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID, dlgRole.View.ES_RoleGem.XiangQianIndex);
 
-                if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
-                            .Coroutine();
-                }
-                else
-                {
-                    self.RequestXiangQianGem(usrPar);
+                    if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
+                    {
+                        PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
+                                .Coroutine();
+                    }
+                    else
+                    {
+                        self.RequestXiangQianGem(usrPar);
+                    }
                 }
 
                 return;
