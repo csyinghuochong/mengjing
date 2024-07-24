@@ -203,5 +203,35 @@ namespace ET.Client
 
             await BagClientNetHelper.RequestHuiShou(root, huishouList);
         }
+
+        public static async ETTask QiangHua(Scene root)
+        {
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            for (int itemSubType = 1; itemSubType <= 11; itemSubType++)
+            {
+                int qianghuaLevel = bagComponent.QiangHuaLevel[itemSubType];
+                int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(itemSubType);
+                if (qianghuaLevel >= maxLevel - 1)
+                {
+                    // 已经强化到最大等级！
+                    continue;
+                }
+
+                EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(itemSubType, qianghuaLevel);
+                string costItems = equipQiangHuaConfig.CostItem;
+
+                costItems += string.Format("@1;{0}", equipQiangHuaConfig.CostGold);
+
+                if (!bagComponent.CheckNeedItem(costItems))
+                {
+                    // 道具不足！
+                    continue;
+                }
+
+                await BagClientNetHelper.RequestItemQiangHua(root, itemSubType);
+            }
+
+            await ETTask.CompletedTask;
+        }
     }
 }

@@ -45,7 +45,10 @@ namespace ET
 
                 Console.WriteLine("回收道具");
                 await RobotHelper.HuiShou(root);
-                
+
+                Console.WriteLine("强化");
+                await RobotHelper.QiangHua(root);
+
                 Console.WriteLine("整理背包");
                 await BagClientNetHelper.RequestSortByLoc(root, ItemLocType.ItemLocBag);
 
