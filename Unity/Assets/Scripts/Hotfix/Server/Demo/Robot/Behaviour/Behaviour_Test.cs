@@ -43,6 +43,8 @@ namespace ET
                 Console.WriteLine("镶嵌宝石");
                 await BagClientNetHelper.CheckCanXiangQianGem(root);
 
+                Console.WriteLine("属性加点");
+
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await root.GetComponent<TimerComponent>().WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())

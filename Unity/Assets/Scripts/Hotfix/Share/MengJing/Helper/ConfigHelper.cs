@@ -401,28 +401,6 @@ namespace ET
 
         }
 
-        /// <summary>
-        /// 角色属性推荐加点,按比例加点
-        /// </summary>
-        public static Dictionary<int, string> RecommendAddPoint()
-        {
-            return new Dictionary<int, string>()
-            {
-                { 1, "3@0@1@1@0" },
-                { 2, "0@3@1@1@0" },
-                { 3, "2@0@1@1@1" },
-                { 101, "0@3@1@1@0" },
-                { 102, "0@0@1@1@3" },
-                { 103, "3@0@1@1@0" },
-                { 201, "0@3@1@1@0" },
-                { 202, "0@3@1@1@0" },
-                { 203, "0@3@1@1@0" },
-                { 301, "2@0@1@1@1" },
-                { 302, "2@0@1@1@1" },
-                { 303, "2@0@1@1@1" }
-            };
-        }
-
         public static Dictionary<int, string> PropertyHint()
         {
             return new Dictionary<int, string>()

@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (ES_RoleProperty))]
-    [FriendOfAttribute(typeof (ES_RoleProperty))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(ES_RoleProperty))]
+    [FriendOfAttribute(typeof(ES_RoleProperty))]
     public static partial class ES_RolePropertySystem
     {
         [EntitySystem]
@@ -149,7 +150,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
             int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10).Value);
             self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
             self.E_PiLaoTextText.text = userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
             self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / CommonHelp.GetMaxBaoShiDu();
@@ -266,7 +267,6 @@ namespace ET.Client
 
         private static async ETTask OnAddPointConfirmButton(this ES_RoleProperty self)
         {
-            self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("确认加点");
             long instanceId = self.InstanceId;
             await BagClientNetHelper.RoleAddPoint(self.Root(), self.PointList);
             if (instanceId != self.InstanceId)
@@ -279,7 +279,44 @@ namespace ET.Client
 
         private static void OnRecommendAddPointButton(this ES_RoleProperty self)
         {
-            self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("推荐加点");
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            int occ = userInfoComponent.UserInfo.Occ;
+            int occTwo = userInfoComponent.UserInfo.OccTwo;
+
+            // 按比例推荐加点 可以在OccupationConfig和OccupationTwoConfig加个这样的字段
+            string recommendAddPoint = string.Empty;
+            if (ConfigData.RecommendAddPoint.ContainsKey(occTwo))
+            {
+                recommendAddPoint = ConfigData.RecommendAddPoint[occTwo];
+            }
+            else if (ConfigData.RecommendAddPoint.ContainsKey(occ))
+            {
+                recommendAddPoint = ConfigData.RecommendAddPoint[occ];
+            }
+            else
+            {
+                return;
+            }
+
+            string[] str = recommendAddPoint.Split('@');
+            int all = 0;
+            List<int> points = new List<int>();
+            foreach (string s in str)
+            {
+                all += int.Parse(s);
+                points.Add(int.Parse(s));
+            }
+
+            int red = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                int add = self.PointRemain / all * points[i];
+                red += add;
+                self.PointList[i] += add;
+            }
+
+            self.PointRemain -= red;
+            self.RefreshAddProperty();
         }
 
         #endregion
