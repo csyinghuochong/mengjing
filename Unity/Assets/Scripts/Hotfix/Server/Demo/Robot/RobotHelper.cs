@@ -4,11 +4,6 @@ namespace ET.Client
 {
     public static class RobotHelper
     {
-        public static async ETTask ChouKa(Scene root)
-        {
-            await BagClientNetHelper.ChouKa(root, 1001, 1);
-        }
-
         public static async ETTask JianDing(Scene root)
         {
             //可以鉴定的装备
@@ -131,6 +126,55 @@ namespace ET.Client
             PointRemain -= red;
 
             await BagClientNetHelper.RoleAddPoint(root, PointList);
+        }
+
+        public static async ETTask GemHeCheng(Scene root)
+        {
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            if (bagComponent.GetBagLeftCell() < 1)
+            {
+                // 请至少预留一个格子
+                return;
+            }
+
+            List<BagInfo> bagItemList = bagComponent.GetBagList();
+            List<BagInfo> gemList = new List<BagInfo>();
+            for (int i = 0; i < bagItemList.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagItemList[i].ItemID);
+                if (itemConfig.ItemType != ItemTypeEnum.Gemstone)
+                {
+                    continue;
+                }
+
+                if (!EquipMakeConfigCategory.Instance.GetHeChengList.ContainsKey(itemConfig.Id))
+                {
+                    continue;
+                }
+
+                gemList.Add(bagItemList[i]);
+            }
+
+            long costgold = 0;
+            long costvitality = 0;
+            for (int i = gemList.Count - 1; i >= 0; i--)
+            {
+                KeyValuePairInt keyValuePair = EquipMakeConfigCategory.Instance.GetHeChengList[gemList[i].ItemID];
+                int neednumber = (int)keyValuePair.Value;
+                int newmakeid = keyValuePair.KeyId;
+                int newnumber = gemList[i].ItemNum / neednumber;
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(newmakeid);
+                costgold += (equipMakeConfig.MakeNeedGold * newnumber);
+                costvitality += (equipMakeConfig.CostVitality * newnumber);
+            }
+
+            if (costgold <= 0)
+            {
+                // 当前背包暂无可合成宝石
+                return;
+            }
+
+            await BagClientNetHelper.RquestGemHeCheng(root, 0);
         }
     }
 }
