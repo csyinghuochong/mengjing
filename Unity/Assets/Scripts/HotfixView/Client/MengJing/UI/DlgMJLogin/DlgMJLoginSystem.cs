@@ -82,7 +82,6 @@ namespace ET.Client
         {
             if (self.ServerInfo == null)
             {
-                FlyTipComponent.Instance.ShowFlyTip("Wait Wait Wait");
                 return;
             }
 

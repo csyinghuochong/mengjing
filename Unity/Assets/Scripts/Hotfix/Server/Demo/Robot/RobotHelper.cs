@@ -233,5 +233,44 @@ namespace ET.Client
 
             await ETTask.CompletedTask;
         }
+
+        public static async ETTask PetFight(Scene root)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            RolePetInfo rolePetInfo = null;
+
+            foreach (RolePetInfo petInfo in petComponent.RolePetInfos)
+            {
+                if (petInfo.PetStatus == 2)
+                {
+                    // 先停止散步！
+                    continue;
+                }
+
+                if (rolePetInfo == null)
+                {
+                    rolePetInfo = petInfo;
+                    continue;
+                }
+
+                // 选一只评分最高的
+                if (PetHelper.PetPingJia(petInfo) > PetHelper.PetPingJia(rolePetInfo))
+                {
+                    rolePetInfo = petInfo;
+                }
+            }
+
+            if (rolePetInfo == null)
+            {
+                return;
+            }
+
+            if (rolePetInfo.PetStatus == 1)
+            {
+                return;
+            }
+
+            await PetNetHelper.RequestPetFight(root, rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0);
+        }
     }
 }

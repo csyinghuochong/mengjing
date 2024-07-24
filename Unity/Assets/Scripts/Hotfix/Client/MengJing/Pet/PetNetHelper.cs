@@ -54,15 +54,6 @@ namespace ET.Client
 
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
-            //简单写一下，有其他出战的则不能出战。
-            //for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
-            //{
-            //    if (self.RolePetInfos[i].PetStatus == 1 && self.RolePetInfos[i].Id != petId && fight == 1)
-            //    {
-            //        return;
-            //    }
-            //}
-
             C2M_RolePetFight request = C2M_RolePetFight.Create();
             request.PetInfoId = petId;
             request.PetStatus = fight;
