@@ -43,6 +43,9 @@ namespace ET
                 Console.WriteLine("出售背包中低品质装备和宝石");
                 await BagClientNetHelper.RequestOneSell(root, ItemLocType.ItemLocBag);
 
+                Console.WriteLine("出售背包中低品质增幅");
+                await BagClientNetHelper.RequestOneSell2(root, ItemLocType.ItemLocBag);
+
                 Console.WriteLine("回收道具");
                 await RobotHelper.HuiShou(root);
 
