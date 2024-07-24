@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (UIPlayerHpComponent))]
-    [FriendOf(typeof (UIPlayerHpComponent))]
+    [EntitySystemOf(typeof(UIPlayerHpComponent))]
+    [FriendOf(typeof(UIPlayerHpComponent))]
     public static partial class UIPlayerHpComponentSystem
     {
         [EntitySystem]
@@ -151,7 +151,7 @@ namespace ET.Client
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
 
-            string imageHp = canAttack? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
+            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
             self.DialogText = rc.Get<GameObject>("DialogText");
             self.DialogText.SetActive(false);
@@ -172,14 +172,14 @@ namespace ET.Client
             self.Img_MpValue.gameObject.SetActive(false);
             self.UIXuLieZhenComponent = self.AddChild<UIXuLieZhenComponent, GameObject>(self.Img_ChengHao);
             bool lierenxuetiao = unit.MainHero && unit.ConfigId == 3;
-            self.Img_HpValue.GetComponent<RectTransform>().sizeDelta = lierenxuetiao? new Vector2(160f, 14f) : new Vector2(160f, 18f);
-            self.Img_HpValue.transform.localPosition = lierenxuetiao? new Vector3(-82.5f, 1.9f, 0f) : new Vector3(-82.5f, 0.1f, 0f);
+            self.Img_HpValue.GetComponent<RectTransform>().sizeDelta = lierenxuetiao ? new Vector2(160f, 14f) : new Vector2(160f, 18f);
+            self.Img_HpValue.transform.localPosition = lierenxuetiao ? new Vector3(-82.5f, 1.9f, 0f) : new Vector3(-82.5f, 0.1f, 0f);
 
             self.Lal_Name = rc.Get<GameObject>("Lal_Name");
             self.Lal_JiaZuName = rc.Get<GameObject>("Lal_JiaZuName");
             self.UIPosition = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-            GameObject bloodparent = unit.Type == UnitType.Monster? globalComponent.BloodMonster : globalComponent.BloodPlayer;
+            GameObject bloodparent = unit.Type == UnitType.Monster ? globalComponent.BloodMonster : globalComponent.BloodPlayer;
             self.GameObject.transform.SetParent(bloodparent.transform);
             self.GameObject.transform.localScale = Vector3.one;
 
@@ -229,7 +229,7 @@ namespace ET.Client
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
             {
-                self.EnterStealth(canAttack? 0f : 0.3f);
+                self.EnterStealth(canAttack ? 0f : 0.3f);
             }
 
             if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
@@ -258,10 +258,10 @@ namespace ET.Client
                 vector3_zuoqi.y += (float)zuoQiShowConfig.NameShowUp;
             }
 
-            self.GameObject.transform.localPosition = horseRide > 0? vector3_zuoqi : vector3_normal;
+            self.GameObject.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
             if (unit.MainHero)
             {
-                self.UIPlayerHpText.transform.localPosition = horseRide > 0? vector3_zuoqi : vector3_normal;
+                self.UIPlayerHpText.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
             }
         }
 
@@ -281,7 +281,7 @@ namespace ET.Client
             //判断自身是否有家族进行显示
             if (firstUnionName == 1 && infoComponent.UnionName.Length > 0)
             {
-                string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1? "族长" : "成员";
+                string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "族长" : "成员";
                 unionname = infoComponent.UnionName + text1;
 
                 if (numericComponent.GetAsInt(NumericType.UnionRaceWin) == 1 && !string.IsNullOrEmpty(unionname))
@@ -304,7 +304,7 @@ namespace ET.Client
             }
 
             self.Lal_JiaZuName.GetComponent<Text>().text = unionname;
-            Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0)? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
+            Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
             self.Img_ChengHao.transform.localPosition = vector3_pos;
         }
 
@@ -330,14 +330,20 @@ namespace ET.Client
             {
                 UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
                 self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
-                self.Lal_JiaZuName.GetComponent<Text>().text = $"{unitInfoComponent.MasterName}的宠物";
+                using (zstring.Block())
+                {
+                    self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", unitInfoComponent.MasterName);
+                }
             }
 
             if (self.GetParent<Unit>().Type == UnitType.JingLing)
             {
                 UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
                 self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
-                self.Lal_JiaZuName.GetComponent<Text>().text = $"{unitInfoComponent.MasterName}的精灵";
+                using (zstring.Block())
+                {
+                    self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的精灵", unitInfoComponent.MasterName);
+                }
             }
 
             if (self.GetParent<Unit>().Type == UnitType.Stall)
@@ -473,7 +479,10 @@ namespace ET.Client
             }
             else
             {
-                self.Lal_AddtionName.GetComponent<Text>().text = $"{stallName}的小跟班";
+                using (zstring.Block())
+                {
+                    self.Lal_AddtionName.GetComponent<Text>().text = zstring.Format("{0}的小跟班", stallName);
+                }
             }
         }
 
@@ -545,7 +554,7 @@ namespace ET.Client
                 }
 
                 bool canAttack = mainUnit.IsCanAttackUnit(unitlist[i]);
-                string imageHp = canAttack? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
+                string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
 
                 switch (unitlist[i].Type)
                 {

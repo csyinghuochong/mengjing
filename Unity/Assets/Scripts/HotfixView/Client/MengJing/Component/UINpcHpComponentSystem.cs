@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UINpcHpComponent))]
-    [EntitySystemOf(typeof (UINpcHpComponent))]
+    [FriendOf(typeof(UINpcHpComponent))]
+    [EntitySystemOf(typeof(UINpcHpComponent))]
     public static partial class UINpcHpComponentSystem
     {
         [EntitySystem]
@@ -92,7 +92,10 @@ namespace ET.Client
             }
 
             self.UINpcName.transform.Find("NpcHeadSpeakSet").gameObject.SetActive(true);
-            self.UINpcName.transform.Find("NpcHeadSpeakSet/Lab_HeadSpeak").GetComponent<Text>().text = $"东西给你!{name} 不要追着我啦！";
+            using (zstring.Block())
+            {
+                self.UINpcName.transform.Find("NpcHeadSpeakSet/Lab_HeadSpeak").GetComponent<Text>().text = zstring.Format("东西给你!{0} 不要追着我啦！", name);
+            }
 
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             timerComponent.Remove(ref self.TurtleTimer);

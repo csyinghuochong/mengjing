@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIJingLingHpComponent))]
-    [EntitySystemOf(typeof (UIJingLingHpComponent))]
+    [FriendOf(typeof(UIJingLingHpComponent))]
+    [EntitySystemOf(typeof(UIJingLingHpComponent))]
     public static partial class UIJingLingHpComponentSystem
     {
         [EntitySystem]
@@ -144,7 +144,7 @@ namespace ET.Client
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
             {
-                self.EnterStealth(canAttack? 0f : 0.3f);
+                self.EnterStealth(canAttack ? 0f : 0.3f);
             }
 
             if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
@@ -174,7 +174,10 @@ namespace ET.Client
         {
             UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
             self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
-            self.Lal_JiaZuName.GetComponent<Text>().text = $"{unitInfoComponent.MasterName}的精灵";
+            using (zstring.Block())
+            {
+                self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的精灵", unitInfoComponent.MasterName);
+            }
         }
     }
 }

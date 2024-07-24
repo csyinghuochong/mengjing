@@ -15,7 +15,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -108,16 +111,20 @@ namespace ET.Client
                     long shouhuoTime = ET.JiaYuanHelper.GetPlanNextShouHuoTime(unit.ConfigId, startTime, gatherNumber, gatherLastTime);
                     TimeSpan chaDate = TimeInfo.Instance.ToDateTime(shouhuoTime) - TimeHelper.DateTimeNow();
                     string showStr = String.Empty;
-                    if (chaDate.Days > 0)
-                    {
-                        showStr = chaDate.Days + "天" + chaDate.Hours + "时" + chaDate.Minutes + "分" + chaDate.Seconds + "秒";
-                    }
-                    else
-                    {
-                        showStr = chaDate.Hours + "时" + chaDate.Minutes + "分" + chaDate.Seconds + "秒";
-                    }
 
-                    self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = $"收获计时: {showStr}";
+                    using (zstring.Block())
+                    {
+                        if (chaDate.Days > 0)
+                        {
+                            showStr = zstring.Format("{0}天{1}时{2}分{3}秒", chaDate.Days, chaDate.Hours, chaDate.Minutes, chaDate.Seconds);
+                        }
+                        else
+                        {
+                            showStr = zstring.Format("{0}时{1}分{2}秒", chaDate.Hours, chaDate.Minutes, chaDate.Seconds);
+                        }
+
+                        self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = zstring.Format("收获计时: {0}", showStr);
+                    }
                 }
                 else
                 {

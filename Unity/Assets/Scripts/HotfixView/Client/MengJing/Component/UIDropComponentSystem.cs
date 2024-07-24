@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.DropUITimer)]
-    public class DropUITimer: ATimer<UIDropComponent>
+    public class DropUITimer : ATimer<UIDropComponent>
     {
         protected override void Run(UIDropComponent self)
         {
@@ -15,13 +15,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (UIDropComponent))]
-    [FriendOf(typeof (UIDropComponent))]
+    [EntitySystemOf(typeof(UIDropComponent))]
+    [FriendOf(typeof(UIDropComponent))]
     public static partial class UIDropComponentSystem
     {
         [EntitySystem]
@@ -113,7 +116,10 @@ namespace ET.Client
             }
             else
             {
-                textMeshProUGUI.text = $"{dropinfo.ItemNum}{itemConfig.ItemName}";
+                using (zstring.Block())
+                {
+                    textMeshProUGUI.text = zstring.Format("{0}{1}", dropinfo.ItemNum, itemConfig.ItemName);
+                }
             }
 
             //显示品质

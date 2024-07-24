@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (UIXuLieZhenComponent))]
-    [FriendOf(typeof (UIXuLieZhenComponent))]
+    [EntitySystemOf(typeof(UIXuLieZhenComponent))]
+    [FriendOf(typeof(UIXuLieZhenComponent))]
     public static partial class UIXuLieZhenComponentSystem
     {
         [EntitySystem]
@@ -39,21 +39,24 @@ namespace ET.Client
             List<Sprite> Sprites = new List<Sprite>();
             for (int i = 0; i < titleConfig.AnimatorNumber; i++)
             {
-                var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, $"{10001}/{i + 1}");
-                Sprite sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
-                if (instanceId != self.InstanceId)
+                using (zstring.Block())
                 {
-                    return;
-                }
+                    var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, zstring.Format("{0}/{1}", 10001, i + 1));
+                    Sprite sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
+                    if (instanceId != self.InstanceId)
+                    {
+                        return;
+                    }
 
-                if (i == 0)
-                {
-                    self.XuLieZhen.SetSize(sprite, Vector2.one * (float)titleConfig.size,
-                        new Vector3((float)titleConfig.MoveX, 75 + (float)titleConfig.MoveY, self.GameObject.transform.localPosition.z));
-                    self.XuLieZhen.Index = 0;
-                }
+                    if (i == 0)
+                    {
+                        self.XuLieZhen.SetSize(sprite, Vector2.one * (float)titleConfig.size,
+                            new Vector3((float)titleConfig.MoveX, 75 + (float)titleConfig.MoveY, self.GameObject.transform.localPosition.z));
+                        self.XuLieZhen.Index = 0;
+                    }
 
-                Sprites.Add(sprite);
+                    Sprites.Add(sprite);
+                }
             }
 
             self.XuLieZhen.SetSprites(Sprites);

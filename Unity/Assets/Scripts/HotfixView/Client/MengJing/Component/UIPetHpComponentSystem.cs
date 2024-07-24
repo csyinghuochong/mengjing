@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIPetHpComponent))]
-    [EntitySystemOf(typeof (UIPetHpComponent))]
+    [FriendOf(typeof(UIPetHpComponent))]
+    [EntitySystemOf(typeof(UIPetHpComponent))]
     public static partial class UIPetHpComponentSystem
     {
         [EntitySystem]
@@ -109,7 +109,7 @@ namespace ET.Client
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
 
-            string imageHp = canAttack? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_4;
+            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_4;
             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
             self.Img_HpValue.GetComponent<Image>().sprite = sp;
 
@@ -153,7 +153,7 @@ namespace ET.Client
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
             {
-                self.EnterStealth(canAttack? 0f : 0.3f);
+                self.EnterStealth(canAttack ? 0f : 0.3f);
             }
 
             if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
@@ -197,7 +197,10 @@ namespace ET.Client
         {
             UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
             self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
-            self.Lal_JiaZuName.GetComponent<Text>().text = $"{unitInfoComponent.MasterName}的宠物";
+            using (zstring.Block())
+            {
+                self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", unitInfoComponent.MasterName);
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ namespace ET.Client
                 return;
             }
 
-            self.PlanEffectPath = ABPathHelper.GetEffetPath($"ScenceEffect/Eff_JiaYuan_Zhong");
+            self.PlanEffectPath = ABPathHelper.GetEffetPath("ScenceEffect/Eff_JiaYuan_Zhong");
             GameObjectLoadHelper.AddLoadQueue(self.Root(), self.PlanEffectPath, self.InstanceId, self.OnLoadEffect);
         }
 
