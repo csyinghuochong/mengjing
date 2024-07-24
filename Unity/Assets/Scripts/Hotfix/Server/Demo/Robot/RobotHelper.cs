@@ -176,5 +176,32 @@ namespace ET.Client
 
             await BagClientNetHelper.RquestGemHeCheng(root, 0);
         }
+
+        public static async ETTask HuiShou(Scene root)
+        {
+            BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+
+            List<BagInfo> bagInfos = new List<BagInfo>();
+
+            bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Equipment));
+            bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
+            bagInfos.AddRange(bagComponentC.GetItemsByLoc(ItemLocType.ItemPetHeXinBag));
+            bagInfos.AddRange(bagComponentC.GetItemsByTypeAndSubType(ItemTypeEnum.Consume, 5));
+
+            List<long> huishouList = new List<long>();
+            foreach (BagInfo bagInfo in bagInfos)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+
+                // 回收绿色及其以下品质的道具
+                if (itemConfig.ItemQuality <= 2)
+                {
+                    huishouList.Add(bagInfo.BagInfoID);
+                }
+            }
+
+            await BagClientNetHelper.RequestHuiShou(root, huishouList);
+        }
     }
 }
