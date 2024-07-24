@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Client
@@ -375,6 +376,50 @@ namespace ET.Client
 
             M2C_ItemOneSellResponse response = (M2C_ItemOneSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestOneSell2(Scene root, ItemLocType itemLocType)
+        {
+            List<long> baginfoids = new List<long>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            string[] set2Values = userInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet2).Split('@'); // 低级、中级、高级
+            if (set2Values.Length < 6)
+            {
+                Array.Resize(ref set2Values, set2Values.Length + 1);
+                set2Values[set2Values.Length - 1] = "0";
+            }
+
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                //锁定装备不能一键出售
+                if (bagInfos[i].IsProtect)
+                {
+                    continue;
+                }
+
+                // 一键出售 低级、中级、高级、超级、神级、终级
+                for (int j = 0; j < 6; j++)
+                {
+                    if (set2Values[j] == "1")
+                    {
+                        if (ConfigData.OneSellList[j].Contains(bagInfos[i].ItemID))
+                        {
+                            baginfoids.Add(bagInfos[i].BagInfoID);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            C2M_ItemOneSellRequest request = C2M_ItemOneSellRequest.Create();
+            request.BagInfoIds = baginfoids;
+            request.OperateType = (int)itemLocType;
+
+            M2C_ItemOneSellResponse response = (M2C_ItemOneSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 

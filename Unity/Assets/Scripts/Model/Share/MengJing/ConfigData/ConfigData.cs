@@ -15,32 +15,32 @@ namespace ET
         {
             10010042, 10010043
         };
-        
+
         public const string RobotPassWord = "et@#robot";
-        
+
         //客戶端活动提示
         [StaticField]
         public static List<ActivityTipConfig> ActivityShowList = new List<ActivityTipConfig>()
         {
-            new ActivityTipConfig(){ OpenTime = 1940, OpenDay = new List<int>{-1}, CloseTime = 1950, Conent = "角斗场" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2000, OpenDay = new List<int>{1,3,5,0}, CloseTime = 2025, Conent = "世界领主活动开启" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2000, OpenDay = new List<int>{2,4,6}, CloseTime = 2025, Conent = "小龟赛跑" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2030, OpenDay = new List<int>{ -1},CloseTime = 2055, Conent = "战场活动开启" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2100, OpenDay = new List<int>{1,3,5,0},CloseTime = 2115, Conent = "宝藏活动开启" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2100, OpenDay = new List<int>{2,4,6},CloseTime = 2105, Conent = "变身大赛活动开启" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2130, OpenDay = new List<int>{1,3,5,0}, CloseTime = 2140, Conent = "狩猎活动" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2130, OpenDay = new List<int>{2,4,6}, CloseTime = 2140, Conent = "喜从天降" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2200, OpenDay = new List<int>{2,4,6},CloseTime = 2210, Conent = "家族入侵" , UIType = 0 },
-            new ActivityTipConfig(){ OpenTime = 2200, OpenDay = new List<int>{1,3,5,0},CloseTime = 2200, Conent = "竞技场活动开启" , UIType = 0 },
-                //new ActivityTipConfig(){ OpenTime = 2130, OpenDay = new List<int>{ -1},CloseTime = 2155, Conent = "竞技场活动开启"  , UIType = string.Empty },
-                //示例
-                //new ActivityTipConfig(){ OpenTime = 1516, CloseTime = 1517, Conent = "活动333" , UIType = "Main/Chat/UIChat"  },
+            new ActivityTipConfig() { OpenTime = 1940, OpenDay = new List<int> { -1 }, CloseTime = 1950, Conent = "角斗场", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2000, OpenDay = new List<int> { 1, 3, 5, 0 }, CloseTime = 2025, Conent = "世界领主活动开启", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2000, OpenDay = new List<int> { 2, 4, 6 }, CloseTime = 2025, Conent = "小龟赛跑", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2030, OpenDay = new List<int> { -1 }, CloseTime = 2055, Conent = "战场活动开启", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2100, OpenDay = new List<int> { 1, 3, 5, 0 }, CloseTime = 2115, Conent = "宝藏活动开启", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2100, OpenDay = new List<int> { 2, 4, 6 }, CloseTime = 2105, Conent = "变身大赛活动开启", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2130, OpenDay = new List<int> { 1, 3, 5, 0 }, CloseTime = 2140, Conent = "狩猎活动", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2130, OpenDay = new List<int> { 2, 4, 6 }, CloseTime = 2140, Conent = "喜从天降", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2200, OpenDay = new List<int> { 2, 4, 6 }, CloseTime = 2210, Conent = "家族入侵", UIType = 0 },
+            new ActivityTipConfig() { OpenTime = 2200, OpenDay = new List<int> { 1, 3, 5, 0 }, CloseTime = 2200, Conent = "竞技场活动开启", UIType = 0 },
+            //new ActivityTipConfig(){ OpenTime = 2130, OpenDay = new List<int>{ -1},CloseTime = 2155, Conent = "竞技场活动开启"  , UIType = string.Empty },
+            //示例
+            //new ActivityTipConfig(){ OpenTime = 1516, CloseTime = 1517, Conent = "活动333" , UIType = "Main/Chat/UIChat"  },
         };
-        
-        
+
+
         [StaticField]
         public static bool ShowLieOpen = false;
-        
+
         // 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
         [StaticField]
         public static int GMDungeonId = 1060003;
@@ -1502,7 +1502,7 @@ namespace ET
             new float3(19.78f, 0.16f, -4.37f - 3f),
             new float3(19.78f, 0.16f, -4.37f - 6f),
             new float3(19.78f, 0.16f, -4.37f - 9f),
-            
+
             new float3(-2f, 0f, -31.24f - 0.5f),
             new float3(-2f, 0f, -33.32f - 0.5f),
             new float3(-2f, 0f, -35.39f - 0.5f),
@@ -1606,7 +1606,7 @@ namespace ET
             { 2, new List<string>() { "我好累,妈妈说累了就可以歇一歇", "好饱啊,我要停下来歇一歇。", "唉呀,谁用石头丢了我一下,头好晕哦" } }
         };
 
-        
+
         /// <summary>
         /// 角色属性推荐加点,按比例加点
         /// </summary>
@@ -1625,6 +1625,26 @@ namespace ET
             { 301, "2@0@1@1@1" },
             { 302, "2@0@1@1@1" },
             { 303, "2@0@1@1@1" }
+        };
+
+        /// <summary>
+        /// 背包一键出售增幅
+        /// </summary>
+        [StaticField]
+        public static List<List<int>> OneSellList = new List<List<int>>()
+        {
+            // 基础
+            new List<int> { 11300101, 11300102, 11300103, 11300104, 11300105 },
+            // 中级
+            new List<int> { 11300201, 11300202, 11300203, 11300204, 11300205 },
+            // 高级
+            new List<int> { 11300301, 11300302, 11300303, 11300304, 11300305 },
+            // 特级
+            new List<int> { 11300401, 11300402, 11300403, 11300404, 11300405 },
+            // 超级 
+            new List<int> { 11300501, 11300502, 11300503, 11300504, 11300505 },
+            // 终极
+            new List<int> { 11300601, 11300602, 11300603, 11300604, 11300605 }
         };
     }
 }
