@@ -7,28 +7,6 @@ namespace ET.Client
     {
         
         // 注册router
-        public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address)
-        {
-            string account = "tcg001";
-            string password = "111111";
-            uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
-            (uint recvLocalConn, IPEndPoint routerAddress) = await GetRouterAddress(netComponent, address, localConn, 0);
-
-            if (recvLocalConn == 0)
-            {
-                throw new Exception($"get router fail: {netComponent.Root().Id} {address}");
-            }
-            
-            Log.Info($"get router: {recvLocalConn} {routerAddress}");
-
-            Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
-            routerSession.AddComponent<PingComponent>();
-            routerSession.AddComponent<RouterCheckComponent>();
-            
-            return routerSession;
-        }
-        
-        // 注册router
         public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password)
         {
             uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
@@ -46,6 +24,7 @@ namespace ET.Client
             
             Log.Info($"get router: {recvLocalConn} {routerAddress}");
 
+            Log.Debug($"CreateRouterSession.localConn: AddComponent<PingComponent>");
             Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
             routerSession.AddComponent<PingComponent>();
             routerSession.AddComponent<RouterCheckComponent>();
