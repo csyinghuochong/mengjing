@@ -16,6 +16,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_OpenOneSellSetButton.AddListenerAsync(self.OnButton_OpenOneSellSet);
             self.E_OneGemButton.AddListener(self.OnOneGemButton);
             self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
             self.E_OneSellButton.AddListener(self.OnOneSellButton);
@@ -199,6 +200,11 @@ namespace ET.Client
                     scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
+        }
+
+        private static async ETTask OnButton_OpenOneSellSet(this ES_RoleBag self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_OneSellSet);
         }
 
         private static void OnOneGemButton(this ES_RoleBag self)

@@ -180,5 +180,6 @@ namespace ET.Client
 		WindowID_EquipmentIncrease,
 		WindowID_YinSi,
 		WindowID_JueXing,
+		WindowID_OneSellSet,
 	}
 }

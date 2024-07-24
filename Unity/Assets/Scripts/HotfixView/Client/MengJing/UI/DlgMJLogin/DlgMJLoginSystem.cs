@@ -80,6 +80,12 @@ namespace ET.Client
 
         public static async ETTask OnLogin(this DlgMJLogin self)
         {
+            if (self.ServerInfo == null)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("Wait Wait Wait");
+                return;
+            }
+
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             playerComponent.ServerItem = self.ServerInfo;
 
