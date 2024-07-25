@@ -67,11 +67,14 @@ namespace ET
                 Console.WriteLine("宠物加点 平均加点");
                 await RobotHelper.RolePetJiadian(root);
 
+                Console.WriteLine("出战一只最强宠物");
+                await RobotHelper.PetFight(root);
+
                 Console.WriteLine("宠物融合 融合评分低于4000 且技能数量少于4个");
                 await RobotHelper.RolePetHeCheng(root, 4000, 4);
 
-                Console.WriteLine("出战一只最强宠物");
-                await RobotHelper.PetFight(root);
+                Console.WriteLine("给最猛的宠物用一个道具");
+                await RobotHelper.RolePetXiLian(root);
 
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);

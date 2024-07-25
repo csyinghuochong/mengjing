@@ -421,5 +421,64 @@ namespace ET.Client
                 await PetNetHelper.RequestRolePetHeCheng(root, HeChengPet_Left.Id, HeChengPet_Right.Id);
             }
         }
+
+        public static async ETTask RolePetXiLian(Scene root)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            List<BagInfo> ShowBagInfos = new List<BagInfo>();
+
+            List<BagInfo> bagList = root.GetComponent<BagComponentC>().GetBagList();
+            for (int i = 0; i < bagList.Count; i++)
+            {
+                int itemID = bagList[i].ItemID;
+                ItemConfig conf = ItemConfigCategory.Instance.Get(itemID);
+                int itemType = conf.ItemType;
+                int itemSubType = conf.ItemSubType;
+
+                if (itemSubType != 105 && itemSubType != 108 && itemSubType != 109
+                    && itemSubType != 117 && itemSubType != 118 && itemSubType != 119
+                    && itemSubType != 122 && itemSubType != 133 && itemSubType != 134
+                    && itemSubType != 136)
+                {
+                    continue;
+                }
+
+                ShowBagInfos.Add(bagList[i]);
+            }
+
+            if (ShowBagInfos.Count == 0)
+            {
+                return;
+            }
+
+            RolePetInfo rolePetInfo = null;
+            foreach (RolePetInfo petInfo in petComponent.RolePetInfos)
+            {
+                if (petInfo.PetStatus == 2)
+                {
+                    // 先停止散步！
+                    continue;
+                }
+
+                if (rolePetInfo == null)
+                {
+                    rolePetInfo = petInfo;
+                    continue;
+                }
+
+                // 选一只评分最高的
+                if (PetHelper.PetPingJia(petInfo) > PetHelper.PetPingJia(rolePetInfo))
+                {
+                    rolePetInfo = petInfo;
+                }
+            }
+
+            if (rolePetInfo == null)
+            {
+                return;
+            }
+
+            await PetNetHelper.RequestXiLian(root, ShowBagInfos[0].BagInfoID, rolePetInfo.Id);
+        }
     }
 }
