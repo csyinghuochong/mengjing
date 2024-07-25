@@ -61,6 +61,9 @@ namespace ET
                 Console.WriteLine("合成宠物之核");
                 await PetNetHelper.RequestPetHeXinHeChengQuick(root);
 
+                Console.WriteLine("穿戴宠物之核 评分大于3000的 穿戴或替换更好的核心");
+                await RobotHelper.RolePetHeXin(root, 3000);
+
                 Console.WriteLine("出战一只最强宠物");
                 await RobotHelper.PetFight(root);
 

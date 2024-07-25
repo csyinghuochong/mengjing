@@ -272,5 +272,82 @@ namespace ET.Client
 
             await PetNetHelper.RequestPetFight(root, rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0);
         }
+
+        public static async ETTask RolePetHeXin(Scene root, int score)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            List<RolePetInfo> rolePetInfos = new List<RolePetInfo>();
+
+            foreach (RolePetInfo petInfo in petComponent.RolePetInfos)
+            {
+                if (PetHelper.PetPingJia(petInfo) > score)
+                {
+                    rolePetInfos.Add(petInfo);
+                }
+            }
+
+            if (rolePetInfos.Count == 0)
+            {
+                return;
+            }
+
+            foreach (RolePetInfo rolePetInfo in rolePetInfos)
+            {
+                for (int position = 0; position < 3; position++)
+                {
+                    List<BagInfo> bagInfos = new List<BagInfo>();
+
+                    foreach (BagInfo item in root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag))
+                    {
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ItemID);
+
+                        if (itemConfig.ItemSubType - 1 != position)
+                        {
+                            continue;
+                        }
+
+                        bagInfos.Add(item);
+                    }
+
+                    if (bagInfos.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    bagInfos.Sort((bagInfo1, bagInfo2) =>
+                    {
+                        ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
+                        ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
+                        return itemConfig2.UseLv - itemConfig1.UseLv;
+                    });
+
+                    List<BagInfo> eqipInfos = root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+
+                    long baginfoId = rolePetInfo.PetHeXinList[position];
+                    BagInfo bagInfo = null;
+                    for (int i = 0; i < eqipInfos.Count; i++)
+                    {
+                        if (eqipInfos[i].BagInfoID == baginfoId)
+                        {
+                            bagInfo = eqipInfos[i];
+                        }
+                    }
+
+                    if (bagInfo == null)
+                    {
+                        await PetNetHelper.RequestRolePetHeXin(root, 1, bagInfos[0].BagInfoID, rolePetInfo.Id, position);
+                    }
+                    else
+                    {
+                        ItemConfig beforeItemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                        ItemConfig afterItemConfig = ItemConfigCategory.Instance.Get(bagInfos[0].ItemID);
+                        if (beforeItemConfig.UseLv < afterItemConfig.UseLv)
+                        {
+                            await PetNetHelper.RequestRolePetHeXin(root, 1, bagInfos[0].BagInfoID, rolePetInfo.Id, position);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
