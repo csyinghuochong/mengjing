@@ -277,35 +277,38 @@ namespace ET.Client
             UnitInfoComponent infoComponent = unit.GetComponent<UnitInfoComponent>();
             int firstUnionName = numericComponent.GetAsInt(NumericType.FirstUnionName);
 
-            string unionname = string.Empty;
-            //判断自身是否有家族进行显示
-            if (firstUnionName == 1 && infoComponent.UnionName.Length > 0)
+            using (zstring.Block())
             {
-                string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "族长" : "成员";
-                unionname = infoComponent.UnionName + text1;
-
-                if (numericComponent.GetAsInt(NumericType.UnionRaceWin) == 1 && !string.IsNullOrEmpty(unionname))
+                string unionname = string.Empty;
+                //判断自身是否有家族进行显示
+                if (firstUnionName == 1 && infoComponent.UnionName.Length > 0)
                 {
-                    unionname += "(争霸)";
+                    string text1 = numericComponent.GetAsInt(NumericType.UnionLeader) == 1 ? "族长" : "成员";
+                    unionname = zstring.Format("{0}{1}", infoComponent.UnionName, text1);
+
+                    if (numericComponent.GetAsInt(NumericType.UnionRaceWin) == 1 && !string.IsNullOrEmpty(unionname))
+                    {
+                        unionname = zstring.Format("{0}{1}{2}", infoComponent.UnionName, text1, "(争霸)");
+                    }
                 }
-            }
 
-            if (string.IsNullOrEmpty(unionname))
-            {
-                int rankId = numericComponent.GetAsInt(NumericType.CombatRankID);
-                int occRankId = numericComponent.GetAsInt(NumericType.OccCombatRankID);
-                int occ = unit.ConfigId;
-                unionname = ConfigHelper.GetRankChengHao(rankId, occRankId, occ);
-            }
+                if (string.IsNullOrEmpty(unionname))
+                {
+                    int rankId = numericComponent.GetAsInt(NumericType.CombatRankID);
+                    int occRankId = numericComponent.GetAsInt(NumericType.OccCombatRankID);
+                    int occ = unit.ConfigId;
+                    unionname = ConfigHelper.GetRankChengHao(rankId, occRankId, occ);
+                }
 
-            if (string.IsNullOrEmpty(unionname) && !string.IsNullOrEmpty(infoComponent.UnionName))
-            {
-                unionname = infoComponent.UnionName;
-            }
+                if (string.IsNullOrEmpty(unionname) && !string.IsNullOrEmpty(infoComponent.UnionName))
+                {
+                    unionname = infoComponent.UnionName;
+                }
 
-            self.Lal_JiaZuName.GetComponent<Text>().text = unionname;
-            Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
-            self.Img_ChengHao.transform.localPosition = vector3_pos;
+                self.Lal_JiaZuName.GetComponent<Text>().text = unionname;
+                Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
+                self.Img_ChengHao.transform.localPosition = vector3_pos;
+            }
         }
 
         //更新显示
