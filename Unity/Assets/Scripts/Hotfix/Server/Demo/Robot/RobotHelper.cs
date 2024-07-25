@@ -480,5 +480,104 @@ namespace ET.Client
 
             await PetNetHelper.RequestXiLian(root, ShowBagInfos[0].BagInfoID, rolePetInfo.Id);
         }
+
+        public static async ETTask PetShouHu(Scene root)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            RolePetInfo rolePetInfo1 = null;
+            RolePetInfo rolePetInfo2 = null;
+            RolePetInfo rolePetInfo3 = null;
+            RolePetInfo rolePetInfo4 = null;
+
+            List<long> shouhulist = petComponent.PetShouHuList;
+
+            foreach (RolePetInfo rolePetInfo in petComponent.RolePetInfos)
+            {
+                if (shouhulist.Contains(rolePetInfo.Id))
+                {
+                    continue;
+                }
+
+                if (rolePetInfo.ShouHuPos == 1)
+                {
+                    if (rolePetInfo1 == null)
+                    {
+                        rolePetInfo1 = rolePetInfo;
+                    }
+                    else
+                    {
+                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo1))
+                        {
+                            rolePetInfo1 = rolePetInfo;
+                        }
+                    }
+                }
+
+                if (rolePetInfo.ShouHuPos == 2)
+                {
+                    if (rolePetInfo2 == null)
+                    {
+                        rolePetInfo2 = rolePetInfo;
+                    }
+                    else
+                    {
+                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo2))
+                        {
+                            rolePetInfo2 = rolePetInfo;
+                        }
+                    }
+                }
+
+                if (rolePetInfo.ShouHuPos == 3)
+                {
+                    if (rolePetInfo3 == null)
+                    {
+                        rolePetInfo3 = rolePetInfo;
+                    }
+                    else
+                    {
+                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo3))
+                        {
+                            rolePetInfo3 = rolePetInfo;
+                        }
+                    }
+                }
+
+                if (rolePetInfo.ShouHuPos == 4)
+                {
+                    if (rolePetInfo4 == null)
+                    {
+                        rolePetInfo4 = rolePetInfo;
+                    }
+                    else
+                    {
+                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo4))
+                        {
+                            rolePetInfo4 = rolePetInfo;
+                        }
+                    }
+                }
+            }
+
+            if (rolePetInfo1 != null)
+            {
+                await PetNetHelper.RequestPetShouHu(root, rolePetInfo1.Id, 0);
+            }
+
+            if (rolePetInfo2 != null)
+            {
+                await PetNetHelper.RequestPetShouHu(root, rolePetInfo2.Id, 0);
+            }
+
+            if (rolePetInfo3 != null)
+            {
+                await PetNetHelper.RequestPetShouHu(root, rolePetInfo3.Id, 0);
+            }
+
+            if (rolePetInfo3 != null)
+            {
+                await PetNetHelper.RequestPetShouHu(root, rolePetInfo3.Id, 0);
+            }
+        }
     }
 }
