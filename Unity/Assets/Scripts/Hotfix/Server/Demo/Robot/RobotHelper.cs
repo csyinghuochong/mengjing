@@ -579,5 +579,39 @@ namespace ET.Client
                 await PetNetHelper.RequestPetShouHu(root, rolePetInfo3.Id, 0);
             }
         }
+
+        public static async ETTask PetShouHuActive(Scene root)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+
+            int index = -1;
+            RolePetInfo maxPetInfo = null;
+            for (int i = 0; i < petComponent.PetShouHuList.Count; i++)
+            {
+                RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petComponent.PetShouHuList[i]);
+                if (rolePetInfo == null)
+                {
+                    continue;
+                }
+
+                if (maxPetInfo == null)
+                {
+                    maxPetInfo = rolePetInfo;
+                    index = i;
+                    continue;
+                }
+
+                if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(maxPetInfo))
+                {
+                    maxPetInfo = rolePetInfo;
+                    index = i;
+                }
+            }
+
+            if (index != -1)
+            {
+                await PetNetHelper.RequestPetShouHuActive(root, index + 1);
+            }
+        }
     }
 }

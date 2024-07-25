@@ -79,6 +79,9 @@ namespace ET
                 Console.WriteLine("开启守护 选评分最高的");
                 await RobotHelper.PetShouHu(root);
 
+                Console.WriteLine("改变守护 选评分最高的");
+                await RobotHelper.PetShouHuActive(root); 
+
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 
