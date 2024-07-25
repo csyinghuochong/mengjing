@@ -85,6 +85,9 @@ namespace ET
                 Console.WriteLine("学习强化一遍技能");
                 await RobotHelper.SkillUp(root);
 
+                Console.WriteLine("设置技能位置 根据技能等级排序");
+                await RobotHelper.SkillSet(root);
+
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 

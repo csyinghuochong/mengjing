@@ -670,5 +670,55 @@ namespace ET.Client
                 await SkillNetHelper.ActiveSkillID(root, skillPro.SkillID);
             }
         }
+
+        public static async ETTask SkillSet(Scene root)
+        {
+            List<SkillPro> skillPros = root.GetComponent<SkillSetComponentC>().SkillList;
+
+            List<SkillPro> ShowSkillPros = new List<SkillPro>();
+            for (int i = 0; i < skillPros.Count; i++)
+            {
+                if (skillPros[i].SkillSetType == (int)SkillSetEnum.Item)
+                {
+                    continue;
+                }
+
+                //没激活的不显示
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPros[i].SkillID);
+                if (skillConfig.SkillLv == 0 || skillConfig.IsShow == 1)
+                {
+                    continue;
+                }
+
+                if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill
+                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill
+                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                {
+                    continue;
+                }
+
+                ShowSkillPros.Add(skillPros[i]);
+            }
+
+            ShowSkillPros.Sort((skillPro1, skillPro2) =>
+            {
+                SkillConfig skillConfig1 = SkillConfigCategory.Instance.Get(skillPro1.SkillID);
+                SkillConfig skillConfig2 = SkillConfigCategory.Instance.Get(skillPro2.SkillID);
+
+                return skillConfig2.SkillLv - skillConfig1.SkillLv;
+            });
+
+            int index = 1;
+            foreach (SkillPro skillPro in ShowSkillPros)
+            {
+                if (index >= 9)
+                {
+                    break;
+                }
+
+                index++;
+                await SkillNetHelper.SetSkillIdByPosition(root, skillPro.SkillID, (int)SkillSetEnum.Skill, index);
+            }
+        }
     }
 }
