@@ -720,5 +720,55 @@ namespace ET.Client
                 await SkillNetHelper.SetSkillIdByPosition(root, skillPro.SkillID, (int)SkillSetEnum.Skill, index);
             }
         }
+
+        public static async ETTask TianFuActive(Scene root)
+        {
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            int occTwo = OccupationConfigCategory.Instance.Get(userInfo.Occ).OccTwoID[0];
+
+            Dictionary<int, List<int>> TianFuToLevel = new Dictionary<int, List<int>>();
+            int[] TalentList = OccupationTwoConfigCategory.Instance.Get(occTwo).Talent;
+            for (int i = 0; i < TalentList.Length; i++)
+            {
+                int talentId = TalentList[i];
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
+                if (!TianFuToLevel.ContainsKey(talentConfig.LearnRoseLv))
+                {
+                    TianFuToLevel.Add(talentConfig.LearnRoseLv, new List<int>());
+                }
+
+                TianFuToLevel[talentConfig.LearnRoseLv].Add(talentId);
+            }
+
+            List<List<int>> ShowTianFu = new List<List<int>>();
+            foreach (var item in TianFuToLevel)
+            {
+                ShowTianFu.Add(item.Value);
+            }
+
+            int playerLv = userInfo.Lv;
+            SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
+            foreach (List<int> list in ShowTianFu)
+            {
+                // 默认选第一个
+                int tianFuId = list[0];
+
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianFuId);
+                if (playerLv < talentConfig.LearnRoseLv)
+                {
+                    // 等级不足!
+                    continue;
+                }
+
+                int oldId = skillSetComponent.HaveSameTianFu(tianFuId);
+                if (oldId != 0 && oldId != tianFuId)
+                {
+                    // 选了天赋了
+                    continue;
+                }
+
+                await SkillNetHelper.ActiveTianFu(root, tianFuId);
+            }
+        }
     }
 }
