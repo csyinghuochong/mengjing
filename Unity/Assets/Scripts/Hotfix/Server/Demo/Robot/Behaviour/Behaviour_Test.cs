@@ -58,6 +58,9 @@ namespace ET
                 Console.WriteLine("属性加点");
                 await RobotHelper.AddPoint(root);
 
+                Console.WriteLine("合成宠物之核");
+                await PetNetHelper.RequestPetHeXinHeChengQuick(root);
+
                 Console.WriteLine("出战一只最强宠物");
                 await RobotHelper.PetFight(root);
 
