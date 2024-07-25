@@ -91,6 +91,9 @@ namespace ET
                 Console.WriteLine("激活天赋 默认选第一个");
                 await RobotHelper.TianFuActive(root);
 
+                Console.WriteLine("生命之魂注入 随机");
+                await RobotHelper.LifeShieldCost(root);
+
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 

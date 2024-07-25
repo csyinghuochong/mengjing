@@ -770,5 +770,49 @@ namespace ET.Client
                 await SkillNetHelper.ActiveTianFu(root, tianFuId);
             }
         }
+
+        public static async ETTask LifeShieldCost(Scene root)
+        {
+            List<BagInfo> allInfos = new List<BagInfo>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Material));
+            allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Equipment));
+
+            List<BagInfo> showBagInfos = new List<BagInfo>();
+            for (int i = 0; i < allInfos.Count; i++)
+            {
+                if (!ConfigData.ItemAddShieldExp.ContainsKey(allInfos[i].ItemID))
+                {
+                    continue;
+                }
+
+                showBagInfos.Add(allInfos[i]);
+            }
+
+            if (showBagInfos.Count == 0)
+            {
+                return;
+            }
+
+            SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
+            for (int i = showBagInfos.Count - 1; i >= 0; i--)
+            {
+                int shieldType = RandomHelper.RandomNumber(1, 7);
+
+                if (shieldType == 6)
+                {
+                    int hplv = skillSetComponent.GetLifeShieldLevel(shieldType);
+                    int otlv = skillSetComponent.GetOtherMinLevel();
+                    if (otlv <= hplv)
+                    {
+                        // 请先升级其他护盾！
+
+                        shieldType--;
+                    }
+                }
+
+                await SkillNetHelper.LifeShieldCost(root, shieldType, new List<long>() { showBagInfos[i].BagInfoID });
+            }
+        }
     }
 }
