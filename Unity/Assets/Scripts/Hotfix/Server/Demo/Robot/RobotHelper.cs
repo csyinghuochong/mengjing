@@ -349,5 +349,36 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask RolePetJiadian(Scene root)
+        {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+
+            foreach (RolePetInfo petInfo in petComponent.RolePetInfos)
+            {
+                List<int> PointList = new List<int>();
+
+                string[] propertyList = petInfo.AddPropretyValue.Split('_');
+                PointList.Add(int.Parse(propertyList[0]));
+                PointList.Add(int.Parse(propertyList[1]));
+                PointList.Add(int.Parse(propertyList[2]));
+                PointList.Add(int.Parse(propertyList[3]));
+
+                int PointRemain = petInfo.AddPropretyNum;
+
+                // 平均加点
+                int add = PointRemain / 4;
+                if (add == 0)
+                {
+                    continue;
+                }
+
+                PointList[0] += add;
+                PointList[1] += add;
+                PointList[2] += add;
+                PointList[3] += add;
+                await PetNetHelper.RequestRolePetJiadian(root, petInfo.Id, PointList);
+            }
+        }
     }
 }

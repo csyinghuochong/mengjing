@@ -64,6 +64,9 @@ namespace ET
                 Console.WriteLine("穿戴宠物之核 评分大于3000的 穿戴或替换更好的核心");
                 await RobotHelper.RolePetHeXin(root, 3000);
 
+                Console.WriteLine("宠物加点");
+                await RobotHelper.RolePetJiadian(root);
+
                 Console.WriteLine("出战一只最强宠物");
                 await RobotHelper.PetFight(root);
 

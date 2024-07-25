@@ -78,22 +78,22 @@ namespace ET.Client
 
             EventTrigger ZhiLi_Btn_Add = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             EventTrigger ZhiLi_Btn_Cost = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(1).Coroutine(); });
+            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(1).Coroutine(); });
             ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
             ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
 
             EventTrigger TiZhi_Btn_Add = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             EventTrigger TiZhi_Btn_Cost = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(2).Coroutine(); });
+            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(2).Coroutine(); });
             TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
             TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
 
             EventTrigger NaiLi_Btn_Add = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             EventTrigger NaiLi_Btn_Cost = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(3).Coroutine(); });
+            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(3).Coroutine(); });
             NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
             NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
         }
@@ -884,7 +884,7 @@ namespace ET.Client
             self.PointRemain += (value * -1);
             self.PointList[addType] += value;
 
-            self.OnUpdateUI();
+            self.OnUpdateAddPointUI();
         }
 
         private static async ETTask OnBtn_Confirm(this ES_PetList self)
