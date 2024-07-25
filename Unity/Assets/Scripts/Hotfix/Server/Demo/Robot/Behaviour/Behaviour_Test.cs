@@ -55,7 +55,7 @@ namespace ET
                 Console.WriteLine("整理背包");
                 await BagClientNetHelper.RequestSortByLoc(root, ItemLocType.ItemLocBag);
 
-                Console.WriteLine("属性加点");
+                Console.WriteLine("人物加点 根据配置按比例");
                 await RobotHelper.AddPoint(root);
 
                 Console.WriteLine("合成宠物之核");
@@ -64,8 +64,11 @@ namespace ET
                 Console.WriteLine("穿戴宠物之核 评分大于3000的 穿戴或替换更好的核心");
                 await RobotHelper.RolePetHeXin(root, 3000);
 
-                Console.WriteLine("宠物加点");
+                Console.WriteLine("宠物加点 平均加点");
                 await RobotHelper.RolePetJiadian(root);
+
+                Console.WriteLine("宠物融合 融合评分低于4000 且技能数量少于4个");
+                await RobotHelper.RolePetHeCheng(root, 4000, 4);
 
                 Console.WriteLine("出战一只最强宠物");
                 await RobotHelper.PetFight(root);

@@ -195,6 +195,10 @@ namespace ET.Client
             request.PetInfoId2 = petInfoId2;
 
             M2C_RolePetHeCheng response = (M2C_RolePetHeCheng)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == 0 && response.rolePetInfo != null)
+            {
+                root.GetComponent<PetComponentC>().OnRecvHeCheng(response);
+            }
 
             return response;
         }

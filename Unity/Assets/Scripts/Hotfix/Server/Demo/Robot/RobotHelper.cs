@@ -380,5 +380,11 @@ namespace ET.Client
                 await PetNetHelper.RequestRolePetJiadian(root, petInfo.Id, PointList);
             }
         }
+
+        public static async ETTask RolePetHeCheng(Scene root, int score, int skillNum)
+        {
+            // await PetNetHelper.RequestRolePetHeCheng(self.Root(), self.HeChengPet_Left.Id, self.HeChengPet_Right.Id);
+            await ETTask.CompletedTask;
+        }
     }
 }

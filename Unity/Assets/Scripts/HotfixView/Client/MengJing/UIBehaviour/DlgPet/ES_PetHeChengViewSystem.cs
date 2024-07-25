@@ -108,7 +108,7 @@ namespace ET.Client
                 }
             }
 
-            string addStr = havepetHexin ? "当前放入的宠物身上穿戴了宠物之核，融合后会消失," : "";
+            string addStr = havepetHexin ? "当前放入的宠物身上穿戴了宠物之核，融合后会消失," : " ";
 
             using (zstring.Block())
             {
@@ -149,8 +149,6 @@ namespace ET.Client
 
             self.HeChengPet_Left = null;
             self.HeChengPet_Right = null;
-
-            self.Root().GetComponent<PetComponentC>().OnRecvHeCheng(response);
 
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetChouKaGet);
 
