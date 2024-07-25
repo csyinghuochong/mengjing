@@ -613,5 +613,62 @@ namespace ET.Client
                 await PetNetHelper.RequestPetShouHuActive(root, index + 1);
             }
         }
+
+        public static async ETTask SkillUp(Scene root)
+        {
+            List<SkillPro> skillPros = root.GetComponent<SkillSetComponentC>().SkillList;
+            List<SkillPro> showSkillPros = new List<SkillPro>();
+
+            for (int i = 0; i < skillPros.Count; i++)
+            {
+                SkillPro skillPro = skillPros[i];
+                if (skillPro.SkillSetType == (int)SkillSetEnum.Item)
+                {
+                    continue;
+                }
+
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPro.SkillID);
+                if (skillConfig.IsShow == 1)
+                {
+                    continue;
+                }
+
+                showSkillPros.Add(skillPro);
+            }
+
+            foreach (SkillPro skillPro in showSkillPros)
+            {
+                UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+
+                SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(skillPro.SkillID);
+
+                int playerLv = userInfo.Lv;
+                if (userInfo.Sp < skillConfig_base.CostSPValue)
+                {
+                    // 技能点不足！!
+                    return;
+                }
+
+                if (playerLv < skillConfig_base.LearnRoseLv)
+                {
+                    // 等级不足！!
+                    return;
+                }
+
+                if (userInfo.Gold < skillConfig_base.CostGoldValue)
+                {
+                    // 金币不足！!
+                    return;
+                }
+
+                if (skillConfig_base.NextSkillID == 0)
+                {
+                    // 已满级！!
+                    return;
+                }
+
+                await SkillNetHelper.ActiveSkillID(root, skillPro.SkillID);
+            }
+        }
     }
 }
