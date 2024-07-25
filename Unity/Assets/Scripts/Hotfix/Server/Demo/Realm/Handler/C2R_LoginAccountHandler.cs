@@ -26,14 +26,14 @@ namespace ET.Server
                 return;
 			}
             
-            if (!Regex.IsMatch(request.Account.Trim(), @"^[A-Za-z0-9]+$"))   //, @"^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,15}$"))
+            if (!Regex.IsMatch(request.Account.Trim(), @"^[A-Za-z0-9_]+$"))   //, @"^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,15}$"))
             {
                 response.Error = ErrorCode.ERR_AccountNameFormError;
                 session.Disconnect().Coroutine();
                 return;
             }
             
-            if (!Regex.IsMatch(request.Password.Trim(), @"^[A-Za-z0-9]+$"))
+            if (!Regex.IsMatch(request.Password.Trim(), @"^[A-Za-z0-9@#]+$"))
             {
                 response.Error = ErrorCode.ERR_PasswordFormError;
                 session.Disconnect().Coroutine();
