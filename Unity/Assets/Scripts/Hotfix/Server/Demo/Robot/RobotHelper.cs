@@ -383,8 +383,43 @@ namespace ET.Client
 
         public static async ETTask RolePetHeCheng(Scene root, int score, int skillNum)
         {
-            // await PetNetHelper.RequestRolePetHeCheng(self.Root(), self.HeChengPet_Left.Id, self.HeChengPet_Right.Id);
-            await ETTask.CompletedTask;
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            if (petComponent.RolePetInfos.Count < 3)
+            {
+                // 最少有3个宠物才可以开启合成！
+                return;
+            }
+
+            RolePetInfo HeChengPet_Left = null;
+            RolePetInfo HeChengPet_Right = null;
+
+            foreach (RolePetInfo rolePetInfo in petComponent.RolePetInfos)
+            {
+                if (rolePetInfo.PetStatus == 1)
+                {
+                    continue;
+                }
+
+                if (PetHelper.PetPingJia(rolePetInfo) < score && rolePetInfo.PetSkill.Count < skillNum)
+                {
+                    if (HeChengPet_Left == null)
+                    {
+                        HeChengPet_Left = rolePetInfo;
+                        continue;
+                    }
+
+                    if (HeChengPet_Right == null)
+                    {
+                        HeChengPet_Right = rolePetInfo;
+                        continue;
+                    }
+                }
+            }
+
+            if (HeChengPet_Left != null && HeChengPet_Right != null)
+            {
+                await PetNetHelper.RequestRolePetHeCheng(root, HeChengPet_Left.Id, HeChengPet_Right.Id);
+            }
         }
     }
 }
