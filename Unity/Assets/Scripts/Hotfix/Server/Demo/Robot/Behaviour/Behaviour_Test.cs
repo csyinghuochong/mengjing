@@ -91,6 +91,9 @@ namespace ET
                 Console.WriteLine("激活天赋 默认选第一个");
                 await RobotHelper.TianFuActive(root);
 
+                Console.WriteLine("熔炼一个装备");
+                await RobotHelper.ItemMelting(root);
+
                 Console.WriteLine("锻造一个物品");
                 await RobotHelper.MakeEquip(root, 1);
                 Console.WriteLine("裁缝一个物品");

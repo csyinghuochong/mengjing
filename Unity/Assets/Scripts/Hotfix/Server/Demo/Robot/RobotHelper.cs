@@ -815,6 +815,39 @@ namespace ET.Client
             }
         }
 
+        public static async ETTask ItemMelting(Scene root)
+        {
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+
+            List<long> huishouList = new List<long>();
+            List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                if (bagInfos[i].IsProtect)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.ItemQuality < 4)
+                {
+                    continue;
+                }
+
+                huishouList.Add(bagInfos[i].BagInfoID);
+            }
+
+            if (huishouList.Count == 0)
+            {
+                return;
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            int makeId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
+
+            await SkillNetHelper.ItemMelting(root, huishouList, makeId);
+        }
+
         public static async ETTask MakeEquip(Scene root, int makeType)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
