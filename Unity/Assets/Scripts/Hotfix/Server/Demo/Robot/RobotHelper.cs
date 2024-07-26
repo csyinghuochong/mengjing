@@ -890,5 +890,16 @@ namespace ET.Client
                 await BagClientNetHelper.RequestEquipMake(root, 0, makeList[i], 1);
             }
         }
+
+        public static async ETTask FriendApplyReply(Scene root)
+        {
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            List<FriendInfo> friendInfos = friendComponent.ApplyList;
+
+            for (int i = friendInfos.Count - 1; i >= 0; i--)
+            {
+                await FriendNetHelper.RequestFriendApplyReply(root, friendInfos[i], 1);
+            }
+        }
     }
 }
