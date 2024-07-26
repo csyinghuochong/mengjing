@@ -21,7 +21,7 @@ namespace ET.Server
             }
             
 
-            ItemLocType locType = request.OperateType == 1 ? ItemLocType.ItemLocBag : ItemLocType.SeasonJingHe;
+            int locType = request.OperateType == 1 ? ItemLocType.ItemLocBag : ItemLocType.SeasonJingHe;
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             BagInfo useBagInfo = bagComponent.GetItemByLoc(locType, request.OperateBagID);
             if (useBagInfo == null)

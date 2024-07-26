@@ -55,11 +55,11 @@ namespace ET.Server
                 }
                 
                 //消耗凭证
-                for (int i = 0; i < bagComponent.BagItemList.Count; i++)
+                for (int i = 0; i < bagComponent.GetItemByLoc(ItemLocType.ItemLocBag).Count; i++)
                 {
-                    if (bagComponent.BagItemList[i].ItemID == itemConfigID)
+                    if (bagComponent.GetItemByLoc(ItemLocType.ItemLocBag)[i].ItemID == itemConfigID)
                     {
-                        bagComponent.OnCostItemData(bagComponent.BagItemList[i].BagInfoID, 1);
+                        bagComponent.OnCostItemData(bagComponent.GetItemByLoc(ItemLocType.ItemLocBag)[i].BagInfoID, 1);
                     }
                 }
             }
@@ -95,11 +95,11 @@ namespace ET.Server
                 }
 
                 //消耗凭证
-                for (int i = 0; i < bagComponent.BagItemList.Count; i++)
+                for (int i = 0; i < bagComponent.GetItemByLoc(ItemLocType.ItemLocBag).Count; i++)
                 {
-                    if (bagComponent.BagItemList[i].ItemID == itemConfigID)
+                    if (bagComponent.GetItemByLoc(ItemLocType.ItemLocBag)[i].ItemID == itemConfigID)
                     {
-                        bagComponent.OnCostItemData(bagComponent.BagItemList[i].BagInfoID, 1);
+                        bagComponent.OnCostItemData(bagComponent.GetItemByLoc(ItemLocType.ItemLocBag)[i].BagInfoID, 1);
                     }
                 }
             }

@@ -23,29 +23,29 @@ namespace ET.Server
 
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
-            List <BagInfo> bagInfos = unit.GetComponent<BagComponentS>().BagItemList;
+            List <BagInfo> bagInfos = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag);
 
             List<BagInfo> itemList = new List<BagInfo>();
             
             // 家园种子仓库
-            if ((ItemLocType)hourseId >= ItemLocType.JianYuanWareHouse1 && (ItemLocType)hourseId <= ItemLocType.JianYuanWareHouse4)
+            if (hourseId >= ItemLocType.JianYuanWareHouse1 && hourseId <= ItemLocType.JianYuanWareHouse4)
             {
                 itemList = ItemHelper.GetSeedList(bagInfos);
             }
             // 家园藏宝图仓库_存藏宝图的
-            else if ((ItemLocType)hourseId == ItemLocType.JianYuanTreasureMapStorage1)
+            else if (hourseId == ItemLocType.JianYuanTreasureMapStorage1)
             {
                 itemList = ItemHelper.GetTreasureMapList(bagInfos);
             } 
             // 家园藏宝图仓库_存生活材料的
-            else if ((ItemLocType)hourseId == ItemLocType.JianYuanTreasureMapStorage2)
+            else if (hourseId == ItemLocType.JianYuanTreasureMapStorage2)
             {
                 itemList = ItemHelper.GetTreasureMapList2(bagInfos);
             }
             
             for (int i = 0; i < itemList.Count; i++)
             {
-                unit.GetComponent<BagComponentS>().OnChangeItemLoc(itemList[i], (ItemLocType)hourseId, ItemLocType.ItemLocBag);
+                unit.GetComponent<BagComponentS>().OnChangeItemLoc(itemList[i], hourseId, ItemLocType.ItemLocBag);
                 m2c_bagUpdate.BagInfoUpdate.Add(itemList[i]);
                 leftCell--;
                 if (leftCell <= 0)

@@ -1,6 +1,5 @@
 ﻿namespace ET.Server
 {
-
     [MessageHandler(SceneType.Friend)]
     [FriendOf(typeof(NumericComponentS))]
     public class C2F_WatchPlayerHandler : MessageHandler<Scene, C2F_WatchPlayerRequest, F2C_WatchPlayerResponse>
@@ -13,8 +12,9 @@
                 response.Error = ErrorCode.ERR_Error;
                 return;
             }
+
             //根据类型返回不同的值
-            switch (request.WatchType) 
+            switch (request.WatchType)
             {
                 //全部
                 case 0:
@@ -26,27 +26,27 @@
                         response.Error = ErrorCode.ERR_Error;
                         return;
                     }
-                    
+
                     PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), request.UserId);
-                    
-                 
-                    NumericComponentS numericComponent =  await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UserId);
+
+                    NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UserId);
                     foreach ((int key, long value) in numericComponent.NumericDic)
                     {
                         if (key >= (int)NumericType.Max)
                         {
                             continue;
                         }
+
                         response.Ks.Add(key);
                         response.Vs.Add(value);
                     }
-                    
-                    response.EquipList .AddRange(bagComponents.EquipList); 
-                    response.PetHeXinList .AddRange(bagComponents.PetHeXinList); 
+
+                    response.EquipList.AddRange(bagComponents.GetItemByLoc(ItemLocType.ItemLocEquip));
+                    response.PetHeXinList.AddRange(bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip));
                     response.Occ = userinfo.UserInfo.Occ;
-                    response.RolePetInfos .AddRange(petComponent.RolePetInfos); 
-                    response.PetSkinList .AddRange(petComponent.PetSkinList); 
-                    response.FashionIds .AddRange(bagComponents.FashionEquipList); 
+                    response.RolePetInfos.AddRange(petComponent.RolePetInfos);
+                    response.PetSkinList.AddRange(petComponent.PetSkinList);
+                    response.FashionIds.AddRange(bagComponents.FashionEquipList);
                     break;
                 //只返回名字
                 case 1:
@@ -56,15 +56,14 @@
                     ActorId teamServerId = UnitCacheHelper.GetTeamServerId(scene.Zone());
                     C2T_GetTeamInfoRequest C2T_GetTeamInfoRequest = C2T_GetTeamInfoRequest.Create();
                     C2T_GetTeamInfoRequest.UserID = request.UserId;
-                    T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                        (teamServerId, C2T_GetTeamInfoRequest);
+                    T2C_GetTeamInfoResponse g_SendChatRequest1 =
+                            (T2C_GetTeamInfoResponse)await scene.Root().GetComponent<MessageSender>().Call(teamServerId, C2T_GetTeamInfoRequest);
 
                     response.TeamId = g_SendChatRequest1.TeamInfo != null ? g_SendChatRequest1.TeamInfo.TeamId : 0;
                     break;
                 default:
                     break;
             }
-
         }
     }
 }

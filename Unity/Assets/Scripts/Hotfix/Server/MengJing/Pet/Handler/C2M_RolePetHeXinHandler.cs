@@ -39,7 +39,7 @@ namespace ET.Server
                 }
                 if (request.OperateType == 1) //1 装备  2卸下[前面已经处理过了]
                 {
-                    ItemLocType itemLocType = request.OperateType == 1 ? ItemLocType.ItemPetHeXinBag : ItemLocType.ItemPetHeXinEquip;
+                    int itemLocType = request.OperateType == 1 ? ItemLocType.ItemPetHeXinBag : ItemLocType.ItemPetHeXinEquip;
                     BagInfo bagInfo = bagComponent.GetItemByLoc(itemLocType, request.BagInfoId);
                     if (bagInfo == null)
                     {

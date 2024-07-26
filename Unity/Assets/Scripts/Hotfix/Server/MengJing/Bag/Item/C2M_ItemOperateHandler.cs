@@ -18,7 +18,7 @@ namespace ET.Server
             UserInfo useInfo = userInfoComponent.UserInfo;
             long bagInfoID = request.OperateBagID;
 
-            ItemLocType locType = ItemLocType.ItemLocBag;
+            int locType = ItemLocType.ItemLocBag;
             if (request.OperateType == 2)
             {
                 ItemConfig config = ItemConfigCategory.Instance.Get(int.Parse(request.OperatePar.Split('_')[0]));
@@ -32,7 +32,7 @@ namespace ET.Server
 
             if (request.OperateType == 7)
             {
-                locType = (ItemLocType) (int.Parse(request.OperatePar));
+                locType = int.Parse(request.OperatePar);
             }
 
             int weizhi = -1;
@@ -805,7 +805,7 @@ namespace ET.Server
                     return;
                 }
 
-                bagComponent.OnChangeItemLoc(useBagInfo, (ItemLocType) hourseId, ItemLocType.ItemLocBag);
+                bagComponent.OnChangeItemLoc(useBagInfo, hourseId, ItemLocType.ItemLocBag);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
             }
 
@@ -825,7 +825,7 @@ namespace ET.Server
                     return;
                 }
 
-                bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, (ItemLocType) hourseId);
+                bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, hourseId);
                 unit.GetComponent<TaskComponentS>().OnGetItemForWarehouse(useBagInfo.ItemID);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
             }
@@ -833,7 +833,7 @@ namespace ET.Server
             //整理背包
             if (request.OperateType == 8)
             {
-                bagComponent.OnRecvItemSort((ItemLocType) (int.Parse(request.OperatePar)));
+                bagComponent.OnRecvItemSort(int.Parse(request.OperatePar));
             }
             bool isRobot = unit.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
             if (isRobot)

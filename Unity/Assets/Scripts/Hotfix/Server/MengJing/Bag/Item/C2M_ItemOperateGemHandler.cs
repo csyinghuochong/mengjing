@@ -62,7 +62,7 @@ namespace ET.Server
                 {
                     int equipShiShiGemNum = 0;
                     bool isTihuan = false;
-                    List<BagInfo> EquipList = unit.GetComponent<BagComponentS>().EquipList;
+                    List<BagInfo> EquipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
                     for (int i = 0; i < EquipList.Count; i++)
                     {
                         string[] gemList = EquipList[i].GemIDNew.Split('_');

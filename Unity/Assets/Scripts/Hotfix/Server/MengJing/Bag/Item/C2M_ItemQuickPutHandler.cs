@@ -19,7 +19,7 @@ namespace ET.Server
 
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 
-            List<BagInfo> warehourselist = bagComponent.GetItemByLoc((ItemLocType)hourseId);
+            List<BagInfo> warehourselist = bagComponent.GetItemByLoc(hourseId);
 
             List<BagInfo> bagList = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag);
 

@@ -21,7 +21,7 @@ namespace ET.Server
             }
 
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(request.MakeId);
-            ItemLocType locType = ItemLocType.ItemLocBag;
+            int locType = ItemLocType.ItemLocBag;
             int costItemId = 0;
             if (request.BagInfoID != 0)
             {

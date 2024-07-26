@@ -271,7 +271,7 @@ namespace ET.Server
             //self.ChouKaTimes 
             //self.PetChouKaTimes
 
-            self.ChengZhuangNumber = ItemHelper.GetNumberByQulity(bagComponent.EquipList, 5);
+            self.ChengZhuangNumber = ItemHelper.GetNumberByQulity(bagComponent.GetItemByLoc(ItemLocType.ItemLocEquip), 5);
 
             self.XiLianExp = numericComponent.GetAsInt(NumericType.ItemXiLianDu);
 

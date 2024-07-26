@@ -18,11 +18,11 @@ namespace ET.Server
             List<BagInfo> storeLists = new List<BagInfo>();
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             
-            storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)hourseId));
+            storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc(hourseId));
 
             for (int i = 0; i < storeLists.Count; i++)
             {
-                unit.GetComponent<BagComponentS>().OnChangeItemLoc(storeLists[i], ItemLocType.ItemLocBag, (ItemLocType)hourseId);
+                unit.GetComponent<BagComponentS>().OnChangeItemLoc(storeLists[i], ItemLocType.ItemLocBag, hourseId);
                 m2c_bagUpdate.BagInfoUpdate.Add(storeLists[i]);
                 leftBagSpace--;
                 if (leftBagSpace <= 0)

@@ -10,7 +10,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this BagComponentC self)
         {
-            self.AllItemList = new List<BagInfo>[(int)ItemLocType.ItemLocMax];
+            self.AllItemList = new Dictionary<int, List<BagInfo>>();
             for (int i = 0; i < (int)ItemLocType.ItemLocMax; i++)
             {
                 self.AllItemList[i] = new List<BagInfo>();
@@ -88,7 +88,7 @@ namespace ET.Client
             return null;
         }
 
-        public static void OnRecvItemSort(this BagComponentC self, ItemLocType itemEquipType)
+        public static void OnRecvItemSort(this BagComponentC self, int itemEquipType)
         {
             List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
             ItemHelper.ItemLitSort(ItemTypeList);
@@ -286,12 +286,7 @@ namespace ET.Client
             return number;
         }
 
-        public static List<BagInfo> GetItemsByLoc(this BagComponentC self, ItemLocType itemLocType)
-        {
-            return self.AllItemList[(int)itemLocType];
-        }
-
-        private static List<BagInfo> GetItemsByLoc(this BagComponentC self, int loc)
+        public static List<BagInfo> GetItemsByLoc(this BagComponentC self, int loc)
         {
             return self.AllItemList[loc];
         }
@@ -336,7 +331,7 @@ namespace ET.Client
 
         public static BagInfo GetBagInfoByConfigId(this BagComponentC self, int itemId)
         {
-            for (int i = 0; i < self.AllItemList.Length; i++)
+            for (int i = 0; i < self.AllItemList.Count; i++)
             {
                 List<BagInfo> baglist = self.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)
@@ -353,7 +348,7 @@ namespace ET.Client
 
         public static BagInfo GetBagInfo(this BagComponentC self, long id)
         {
-            for (int i = 0; i < self.AllItemList.Length; i++)
+            for (int i = 0; i < self.AllItemList.Count; i++)
             {
                 List<BagInfo> baglist = self.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)
@@ -371,7 +366,7 @@ namespace ET.Client
         public static List<BagInfo> GetAllItems(this BagComponentC self)
         {
             List<BagInfo> bagInfos = new List<BagInfo>();
-            foreach (List<BagInfo> list in self.AllItemList)
+            foreach (List<BagInfo> list in self.AllItemList.Values)
             {
                 bagInfos.AddRange(list);
             }
@@ -379,7 +374,7 @@ namespace ET.Client
             return bagInfos;
         }
 
-        public static BagInfo GetEquipBySubType(this BagComponentC self, ItemLocType itemLocType, int subType)
+        public static BagInfo GetEquipBySubType(this BagComponentC self, int itemLocType, int subType)
         {
             List<BagInfo> bagInfos = self.GetItemsByLoc(itemLocType);
             for (int i = 0; i < bagInfos.Count; i++)

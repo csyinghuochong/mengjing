@@ -38,7 +38,7 @@ namespace ET.Server
                     ItemNum = int.Parse(iteminfo[1]),
                 };
                 List<RewardItem> rewardItems = new List<RewardItem>() { rewardItem };
-                bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, (ItemLocType)request.OperateType);
+                bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, request.OperateType);
             }
             else if (request.OperateType == (int)ItemLocType.GemWareHouse1)
             {
@@ -78,7 +78,7 @@ namespace ET.Server
                     ItemNum = int.Parse(iteminfo[1]),
                 };
                 List<RewardItem> rewardItems = new List<RewardItem>() { rewardItem };
-                bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, (ItemLocType)request.OperateType);
+                bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, request.OperateType);
             }
 
             response.WarehouseAddedCell .AddRange(bagComponent.WarehouseAddedCell); 

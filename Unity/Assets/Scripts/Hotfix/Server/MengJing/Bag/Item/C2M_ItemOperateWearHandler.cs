@@ -15,7 +15,7 @@ namespace ET.Server
             if (request.OperateType == 3)
             {
 
-                ItemLocType locType = ItemLocType.ItemLocBag;
+                int locType = ItemLocType.ItemLocBag;
                 BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, bagInfoID);
                 if (useBagInfo == null)
                 {
@@ -59,7 +59,7 @@ namespace ET.Server
                 M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
                 //获取之前的位置是否有装备
-                ItemLocType toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
+                int toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
                 BagInfo beforeequip = unit.GetComponent<BagComponentS>().GetEquipBySubType(toLocType, weizhi);
 
                 if (beforeequip != null)
@@ -95,7 +95,7 @@ namespace ET.Server
             else
             {
 
-                ItemLocType beloc = ItemLocType.ItemLocEquip;
+                int beloc = ItemLocType.ItemLocEquip;
                 BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(beloc, bagInfoID);
                 if (useBagInfo == null)
                 {

@@ -17,7 +17,7 @@ namespace ET.Server
                 return;
             }
 
-            List<BagInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)request.LocType);
+            List<BagInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc(request.LocType);
 
             List<BagInfo> gemList = new List<BagInfo>();
             for (int i = 0; i < bagItemList.Count; i++)
@@ -93,7 +93,7 @@ namespace ET.Server
             }
             if (removeItems != string.Empty)
             {
-                unit.GetComponent<BagComponentS>().OnCostItemData(removeItems, (ItemLocType)request.LocType);
+                unit.GetComponent<BagComponentS>().OnCostItemData(removeItems, request.LocType);
             }
 
             List<RewardItem> rewardItems = new List<RewardItem>();
@@ -107,7 +107,7 @@ namespace ET.Server
                 rewardItems.Add(new RewardItem() { ItemID = itemid, ItemNum = number });
             }
             unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GemHeCheng}_{TimeHelper.ServerNow()}",
-                UseLocType: (ItemLocType)request.LocType);
+                UseLocType: request.LocType);
 
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Gold, (costgold * -1).ToString(), true, ItemGetWay.SkillMake);
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Vitality, (costvitality * -1).ToString());

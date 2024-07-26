@@ -218,7 +218,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestSortByLoc(Scene root, ItemLocType loc)
+        public static async ETTask<int> RequestSortByLoc(Scene root, int loc)
         {
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             bagComponentC.RealAddItem = false;
@@ -304,7 +304,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestOneSell(Scene root, ItemLocType itemLocType)
+        public static async ETTask<int> RequestOneSell(Scene root, int itemLocType)
         {
             List<long> baginfoids = new List<long>();
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
@@ -379,7 +379,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestOneSell2(Scene root, ItemLocType itemLocType)
+        public static async ETTask<int> RequestOneSell2(Scene root, int itemLocType)
         {
             List<long> baginfoids = new List<long>();
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
@@ -462,7 +462,7 @@ namespace ET.Client
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             List<long> idlist = new List<long>();
 
-            for (int i = 0; i < bagComponent.AllItemList.Length; i++)
+            for (int i = 0; i < bagComponent.AllItemList.Count; i++)
             {
                 List<BagInfo> baglist = bagComponent.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)

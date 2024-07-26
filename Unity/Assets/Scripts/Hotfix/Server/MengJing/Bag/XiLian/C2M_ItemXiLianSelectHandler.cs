@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_ItemXiLianSelectRequest request, M2C_ItemXiLianSelectResponse response)
         {
-            ItemLocType itemLocType = ItemLocType.ItemLocBag;
+            int itemLocType = ItemLocType.ItemLocBag;
             BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {

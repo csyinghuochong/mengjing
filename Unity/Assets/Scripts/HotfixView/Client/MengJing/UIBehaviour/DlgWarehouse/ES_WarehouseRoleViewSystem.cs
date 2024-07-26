@@ -82,7 +82,7 @@ namespace ET.Client
         private static void OnBtn_ZhengLi(this ES_WarehouseRole self)
         {
             int currentHouse = self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1;
-            BagClientNetHelper.RequestSortByLoc(self.Root(), (ItemLocType)currentHouse).Coroutine();
+            BagClientNetHelper.RequestSortByLoc(self.Root(), currentHouse).Coroutine();
         }
 
         public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
@@ -125,7 +125,7 @@ namespace ET.Client
 
             self.ShowHouseBagInfos.Clear();
             self.ShowHouseBagInfos.AddRange(
-                bagComponentC.GetItemsByLoc((ItemLocType)(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)));
+                bagComponentC.GetItemsByLoc(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1));
 
             int allNumber = bagComponentC.GetHouseShowCell(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, allNumber);

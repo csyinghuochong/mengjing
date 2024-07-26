@@ -81,7 +81,7 @@ namespace ET.Client
         private static void OnBtn_ZhengLi(this DlgJiaYuanWarehouse self)
         {
             int currentHouse = self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1;
-            BagClientNetHelper.RequestSortByLoc(self.Root(), (ItemLocType)currentHouse).Coroutine();
+            BagClientNetHelper.RequestSortByLoc(self.Root(), currentHouse).Coroutine();
         }
 
         public static async ETTask OnButtonTakeOutAll(this DlgJiaYuanWarehouse self)
@@ -128,7 +128,7 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() +
+            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() +
                 (int)ItemLocType.JianYuanWareHouse1)));
 
             int allNumber =

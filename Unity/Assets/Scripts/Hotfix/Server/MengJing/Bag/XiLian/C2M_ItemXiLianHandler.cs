@@ -11,7 +11,7 @@ namespace ET.Server
         {
             try
             {
-                ItemLocType itemLocType = ItemLocType.ItemLocBag;
+                int itemLocType = ItemLocType.ItemLocBag;
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
 

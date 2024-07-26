@@ -12,7 +12,7 @@ namespace ET.Server
 
             for (int i = 0; i < request.BagInfoIds.Count; i++)
             {
-                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)request.OperateType, request.BagInfoIds[i]);
+                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(request.OperateType, request.BagInfoIds[i]);
                 if (useBagInfo == null)
                 {
                     continue;
@@ -42,7 +42,7 @@ namespace ET.Server
                 }
 
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd((int)itemConfig.SellMoneyType, (useBagInfo.ItemNum * sellValue).ToString(), true, 39);
-                unit.GetComponent<BagComponentS    >().OnCostItemData(useBagInfo, (ItemLocType)request.OperateType, useBagInfo.ItemNum);
+                unit.GetComponent<BagComponentS    >().OnCostItemData(useBagInfo, request.OperateType, useBagInfo.ItemNum);
 
                 if (useBagInfo.ItemNum == 0)
                 {
