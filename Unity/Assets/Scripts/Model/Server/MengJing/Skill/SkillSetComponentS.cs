@@ -16,7 +16,7 @@ namespace ET.Server
 
         public List<SkillPro> SkillList { get; set; } = new List<SkillPro>();
 
-        //����֮��
+
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();
 
 
