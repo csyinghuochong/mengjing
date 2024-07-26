@@ -92,6 +92,7 @@ namespace ET
                 await RobotHelper.TianFuActive(root);
 
                 Console.WriteLine("锻造一个物品");
+                await RobotHelper.MakeEquip(root, 1);
                 Console.WriteLine("裁缝一个物品");
                 Console.WriteLine("炼金一个物品");
                 Console.WriteLine("附魔一个物品");

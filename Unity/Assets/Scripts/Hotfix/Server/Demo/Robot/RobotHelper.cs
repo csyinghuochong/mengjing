@@ -814,5 +814,48 @@ namespace ET.Client
                 await SkillNetHelper.LifeShieldCost(root, shieldType, new List<long>() { showBagInfos[i].BagInfoID });
             }
         }
+
+        public static async ETTask MakeEquip(Scene root, int makeType)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+
+            List<int> makeList = userInfoComponent.UserInfo.MakeList;
+            for (int i = 0; i < makeList.Count; i++)
+            {
+                if (!EquipMakeConfigCategory.Instance.Contain(makeList[i]))
+                {
+                    continue;
+                }
+
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeList[i]);
+                if (equipMakeConfig.ProficiencyType != makeType)
+                {
+                    continue;
+                }
+
+                long cdEndTime = userInfoComponent.GetMakeTime(makeList[i]);
+                if (cdEndTime > TimeHelper.ServerNow())
+                {
+                    // InMakeCD
+                    return;
+                }
+
+                if (userInfoComponent.UserInfo.Gold < equipMakeConfig.MakeNeedGold)
+                {
+                    // 金币不足！
+                    return;
+                }
+
+                bool success = bagComponent.CheckNeedItem(equipMakeConfig.NeedItems);
+                if (!success)
+                {
+                    // 材料不足！
+                    return;
+                }
+
+                await BagClientNetHelper.RequestEquipMake(root, 0, makeList[i], 1);
+            }
+        }
     }
 }
