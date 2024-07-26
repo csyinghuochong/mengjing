@@ -94,8 +94,11 @@ namespace ET
                 Console.WriteLine("锻造一个物品");
                 await RobotHelper.MakeEquip(root, 1);
                 Console.WriteLine("裁缝一个物品");
+                await RobotHelper.MakeEquip(root, 3);
                 Console.WriteLine("炼金一个物品");
+                await RobotHelper.MakeEquip(root, 3);
                 Console.WriteLine("附魔一个物品");
+                await RobotHelper.MakeEquip(root, 6);
 
                 Console.WriteLine("生命之魂注入 随机");
                 await RobotHelper.LifeShieldCost(root);
