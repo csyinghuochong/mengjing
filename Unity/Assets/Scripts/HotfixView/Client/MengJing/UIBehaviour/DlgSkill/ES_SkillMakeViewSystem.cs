@@ -445,7 +445,6 @@ namespace ET.Client
 
             self.ShowMake.Clear();
 
-            int number = 0;
             List<int> makeList = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MakeList;
             for (int i = 0; i < makeList.Count; i++)
             {
@@ -461,7 +460,6 @@ namespace ET.Client
                 }
 
                 self.ShowMake.Add(equipMakeConfig.Id);
-                number++;
             }
 
             self.AddUIScrollItems(ref self.ScrollItemMakeItems, self.ShowMake.Count);
@@ -476,7 +474,11 @@ namespace ET.Client
                 if (self.ScrollItemMakeItems != null && self.ScrollItemMakeItems.Count > 0)
                 {
                     Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[0];
-                    self.OnSelectMakeItem(number == 0 ? 0 : scrollItemMakeItem.MakeID);
+                    self.OnSelectMakeItem(scrollItemMakeItem.MakeID);
+                }
+                else
+                {
+                    self.OnSelectMakeItem(0);
                 }
             }
         }
