@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEngine;
 using YooAsset;
 
 namespace ET
@@ -115,7 +116,7 @@ namespace ET
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
                 string hostServerIP = "http://47.94.107.92";
                 string appVersion = "v1.0";
-
+                
 #if UNITY_EDITOR
                 if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";

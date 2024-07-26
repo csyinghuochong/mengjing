@@ -18,8 +18,8 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this PlayerOfflineOutTimeComponent self)
         {
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() + 5000, TimerInvokeType.PlayerOfflineOutTime, self);
-
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() +  
+                MessageLocationSenderOneType.TIMEOUT_TIME * 5, TimerInvokeType.PlayerOfflineOutTime, self);
         }
         
         [EntitySystem]

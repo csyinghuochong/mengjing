@@ -37,7 +37,6 @@ namespace ET.Server
                     response.NoticeText = stringxxx[1];
                 }
             } 
-            Console.WriteLine("R2C_ServerList Handler");
             await ETTask.CompletedTask;
         }
     }

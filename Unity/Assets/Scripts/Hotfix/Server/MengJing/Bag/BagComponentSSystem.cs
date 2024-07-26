@@ -11,6 +11,8 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this BagComponentS self)
         {
+            self.CheckAllItemList();
+            
             self.OnAddItemData(GlobalValueConfigCategory.Instance.Get(9).Value, $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
             self.OnAddItemData($"10030001;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
             self.OnAddItemData($"14100005;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
@@ -20,8 +22,24 @@ namespace ET.Server
         private static void Destroy(this BagComponentS self)
         {
         }
-        
-       public static List<PropertyValue> GetGemProLists(this BagComponentS self)
+
+        public static void CheckAllItemList(this BagComponentS self)
+        {
+            if (self.AllItemList == null)
+            {
+                self.AllItemList = new Dictionary<int, List<BagInfo>>();
+            }
+
+            for (int i = 0; i < (int)ItemLocType.ItemLocMax; i++)
+            {
+                if (!self.AllItemList.ContainsKey((i)))
+                {
+                    self.AllItemList.Add(i, new List<BagInfo>());
+                }
+            }
+        }
+
+        public static List<PropertyValue> GetGemProLists(this BagComponentS self)
        {
            List<PropertyValue> list = new List<PropertyValue>();
            for (int i = 0; i < self.GemList.Count; i++)
@@ -578,6 +596,8 @@ namespace ET.Server
 
    public static void OnLogin(this BagComponentS self, int robotId)
    {  
+       self.CheckAllItemList();
+       
        Console.WriteLine("BagComponentS.OnLogin");
        Unit unit = self.GetParent<Unit>();
        int zodiacnumber = self.GetZodiacnumber();

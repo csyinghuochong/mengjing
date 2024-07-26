@@ -13,12 +13,12 @@ namespace ET.Client
         public List<int> QiangHuaFails { get; set; } = new();
 
         /// <summary>
-        /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）
+        /// ItemLocType.ItemLocBag 
         /// </summary>
         public List<int> WarehouseAddedCell { get; set; } = new();
 
         /// <summary>
-        /// 附加格子，ItemLocType.ItemBag开始
+        /// 附加格子，ItemLocType.ItemLocBag
         /// </summary>
         public List<int> AdditionalCellNum { get; set; } = new();
 
@@ -32,7 +32,9 @@ namespace ET.Client
         /// </summary>
         public List<int> FashionEquipList { get; set; } = new();
 
-        public List<BagInfo>[] AllItemList { get; set; }
+        //public List<BagInfo>[] AllItemList { get; set; }
+        
+        public Dictionary<int, List<BagInfo>> AllItemList { get; set; } = new();
 
         public bool RealAddItem;
     }

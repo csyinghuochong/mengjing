@@ -470,7 +470,7 @@ namespace ET.Server
             }
             else
             {
-                Console.WriteLine($"拍卖无旧数据:  {zone}");
+                //Console.WriteLine($"拍卖无旧数据:  {zone}");
             }
 
             await self.InitPaiMaiShangJia(1, oldPaiMaiAll);

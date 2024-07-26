@@ -260,7 +260,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    Log.Debug($"self.gameObjects[i].name == {self.gameObjects[i].name} : null");
+                    //Log.Debug($"self.gameObjects[i].name == {self.gameObjects[i].name} : null");
                     GameObject.Destroy(self.gameObjects[i]);
                 }
             }

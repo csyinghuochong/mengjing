@@ -52,7 +52,7 @@
     
     public interface IPopularizeActorRequest: IRequest
     {
-        
+
     }
     
     public interface IPopularizeActorResponse: IResponse

@@ -173,32 +173,32 @@ namespace ET
     //8仓库4
     //9-12 家园仓库
     //13-14 家园藏宝仓库
-    public enum ItemLocType : int
+    public static class ItemLocType
     {
-        ItemLocBag = 0,
-        ItemPetHeXinBag = 1,
-        ItemLocEquip = 2,
-        ItemLocGem = 3,
-        ItemPetHeXinEquip = 4,
-        ItemWareHouse1 = 5,
-        ItemWareHouse2 = 6,
-        ItemWareHouse3 = 7,
-        ItemWareHouse4 = 8,
-        JianYuanWareHouse1 = 9,
-        JianYuanWareHouse2 = 10,
-        JianYuanWareHouse3 = 11,
-        JianYuanWareHouse4 = 12,
-        JianYuanTreasureMapStorage1 = 13, // 家园藏宝图仓库_存藏宝图的
-        JianYuanTreasureMapStorage2 = 14, // 家园藏宝图仓库_存生活材料的
-        ChouKaWarehouse = 15, // 抽卡仓库
-        ItemLocEquip_2 = 16,    //第二套装备
-        SeasonJingHe = 17,      //赛季晶核
-        PetLocEquip = 18,       //宠物装备
-        GemWareHouse1 = 19,     //宝石仓库
+        public const int ItemLocBag = 0;
+        public const int ItemPetHeXinBag = 1;
+        public const int ItemLocEquip = 2;
+        public const int ItemLocGem = 3;
+        public const int ItemPetHeXinEquip = 4;
+        public const int ItemWareHouse1 = 5;
+        public const int ItemWareHouse2 = 6;
+        public const int ItemWareHouse3 = 7;
+        public const int ItemWareHouse4 = 8;
+        public const int  JianYuanWareHouse1 = 9;
+        public const int JianYuanWareHouse2 = 10;
+        public const int  JianYuanWareHouse3 = 11;
+        public const int JianYuanWareHouse4 = 12;
+        public const int JianYuanTreasureMapStorage1 = 13; // 家园藏宝图仓库_存藏宝图的
+        public const int JianYuanTreasureMapStorage2 = 14; // 家园藏宝图仓库_存生活材料的
+        public const int ChouKaWarehouse = 15; // 抽卡仓库
+        public const int ItemLocEquip_2 = 16;    //第二套装备
+        public const int SeasonJingHe = 17;     //赛季晶核
+        public const int PetLocEquip = 18;     //宠物装备
+        public const int GemWareHouse1 = 19;     //宝石仓库
 
-        ItemLocMax,
+        public const int  ItemLocMax = 20;
     }
-
+    
     //道具装备位置
     //1 武器
     //2 衣服

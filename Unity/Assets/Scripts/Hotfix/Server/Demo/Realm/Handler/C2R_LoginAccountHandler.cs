@@ -234,8 +234,6 @@ namespace ET.Server
                         response.PlayerInfo.RechargeInfos[r].OrderInfo = String.Empty;
                     }
                     centerAccountInfo?.Dispose();
-                    
-                    Console.WriteLine($"C2RLoginAccountHandler__11");
                 }
             }
 		}

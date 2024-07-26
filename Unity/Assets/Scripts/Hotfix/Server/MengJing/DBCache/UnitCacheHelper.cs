@@ -8,23 +8,6 @@ namespace ET.Server
     {
         
         /// <summary>
-        /// 保存或者更新玩家缓存
-        /// </summary>
-        /// <param name="self"></param>
-        /// <typeparam name="T"></typeparam>
-        public static async ETTask AddOrUpdateUnitCache<T>(this T self) where T : Entity, IUnitCache
-        {
-            Other2UnitCache_AddOrUpdateUnit message = Other2UnitCache_AddOrUpdateUnit.Create();
-            message.UnitId = self.Id;
-            message.EntityTypes.Add(typeof(T).FullName);
-            message.EntityBytes.Add(self.ToBson());
-
-            Scene root = self.Root();
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(self.Zone());
-            await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
-        }
-
-        /// <summary>
         /// 获取玩家缓存
         /// </summary>
         /// <param name="scene"></param>
@@ -32,7 +15,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<Unit> GetUnitCache(Scene scene, long unitId)
         {
-            int zone = scene.Zone();
+            int zone =  UnitIdStruct.GetUnitZone(unitId);
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
@@ -87,7 +70,8 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
         {
-            ActorId dbCacheId = GetDbCacheId(root.Zone());
+            int zone =  UnitIdStruct.GetUnitZone(unitId);
+            ActorId dbCacheId = GetDbCacheId(zone);
 
             Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
             other2UnitCacheGetComponent.UnitId = unitId;
@@ -104,19 +88,21 @@ namespace ET.Server
         
         public static async ETTask SaveComponentCache(Scene root,  Entity entity)
         {
+            int zone =  UnitIdStruct.GetUnitZone(entity.Id);
             Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = Other2UnitCache_AddOrUpdateUnit.Create();
             addOrUpdateUnit.UnitId = entity.Id;
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
             addOrUpdateUnit.EntityBytes.Add(entity.ToBson());
 
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(root.Zone());
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
         }
                 
         public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
         {
+            int zone =  UnitIdStruct.GetUnitZone(unitId);
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
-            DBComponent dbComponent = dbManagerComponent.GetZoneDB(root.Zone());
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
             if (resulets == null || resulets.Count == 0)
             {
@@ -128,8 +114,9 @@ namespace ET.Server
 
         public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
         {
+            int zone =  UnitIdStruct.GetUnitZone(unitId);
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
-            DBComponent dbComponent = dbManagerComponent.GetZoneDB(root.Zone());
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             await dbComponent.Save(root.Zone(), entity);
         }
         
@@ -140,8 +127,9 @@ namespace ET.Server
         /// <param name="unitId"></param>
         public static async ETTask DeleteUnitCache(Scene scene, long unitId)
         {
+            int zone =  UnitIdStruct.GetUnitZone(unitId);
             Scene root = scene.Root();
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             Other2UnitCache_DeleteUnit message = Other2UnitCache_DeleteUnit.Create();
             message.UnitId = unitId;
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
@@ -154,6 +142,7 @@ namespace ET.Server
         /// <param name="unit"></param>
         public static void AddOrUpdateUnitAllCache(Unit unit)
         {
+            int zone =  UnitIdStruct.GetUnitZone(unit.Id);
             Other2UnitCache_AddOrUpdateUnit message = Other2UnitCache_AddOrUpdateUnit.Create();
             message.UnitId = unit.Id;
 
@@ -173,7 +162,7 @@ namespace ET.Server
             }
 
             Scene root = unit.Root();
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(unit.Zone());
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message).Coroutine();
         }
 
