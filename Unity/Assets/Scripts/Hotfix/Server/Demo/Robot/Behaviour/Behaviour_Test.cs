@@ -91,11 +91,14 @@ namespace ET
                 Console.WriteLine("激活天赋 默认选第一个");
                 await RobotHelper.TianFuActive(root);
 
+                Console.WriteLine("锻造一个物品");
+                Console.WriteLine("裁缝一个物品");
+                Console.WriteLine("炼金一个物品");
+                Console.WriteLine("附魔一个物品");
+
                 Console.WriteLine("生命之魂注入 随机");
                 await RobotHelper.LifeShieldCost(root);
 
-                
-                
                 Console.WriteLine("世界频道发送消息");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
 
