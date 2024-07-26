@@ -114,18 +114,18 @@ namespace ET.Client
             int skillcnt = self.Skills.Count;
             for (int i = skillcnt - 1; i >= 0; i--)
             {
-                SkillC skillHandler = self.Skills[i];
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
-                if (skillHandler.IsSkillFinied())
+                SkillC skill = self.Skills[i];
+                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skill.SkillConf.GameObjectName);
+                if (skill.IsSkillFinied())
                 {
-                    aaiHandler.OnFinished(skillHandler);
+                    aaiHandler.OnFinished(skill);
                     self.Skills.RemoveAt(i);
-                    ObjectPool.Instance.Recycle(skillHandler);
+                    ObjectPool.Instance.Recycle(skill);
                     continue;
                 }
 
                 //self.Skills[i].OnUpdate();
-                aaiHandler.OnUpdate(skillHandler);
+                aaiHandler.OnUpdate(skill);
             }
 
             if (self.MainHero)
@@ -144,11 +144,19 @@ namespace ET.Client
             int skillcnt = self.Skills.Count;
             for (int i = skillcnt - 1; i >= 0; i--)
             {
-                SkillC skillHandler = self.Skills[i];
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
-                aaiHandler.OnFinished(skillHandler);
+                SkillC skill = self.Skills[i];
+
+                if (skill == null)
+                {
+                    Log.Error("技能消失？！");
+                    self.Skills.RemoveAt(i);
+                    continue;
+                }
+
+                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skill.SkillConf.GameObjectName);
+                aaiHandler.OnFinished(skill);
                 self.Skills.RemoveAt(i);
-                ObjectPool.Instance.Recycle(skillHandler);
+                ObjectPool.Instance.Recycle(skill);
             }
 
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0)
