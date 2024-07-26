@@ -94,6 +94,8 @@ namespace ET
                 Console.WriteLine("生命之魂注入 随机");
                 await RobotHelper.LifeShieldCost(root);
 
+                
+                
                 Console.WriteLine("世界频道发送消息");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
 

@@ -473,8 +473,11 @@ namespace ET.Client
             }
             else
             {
-                Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[0];
-                self.OnSelectMakeItem(number == 0 ? 0 : scrollItemMakeItem.MakeID);
+                if (self.ScrollItemMakeItems != null && self.ScrollItemMakeItems.Count > 0)
+                {
+                    Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[0];
+                    self.OnSelectMakeItem(number == 0 ? 0 : scrollItemMakeItem.MakeID);
+                }
             }
         }
 
