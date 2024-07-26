@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.EMail)]
     public class C2E_AccountWarehousInfoHandler : MessageHandler<Scene, C2E_AccountWarehousInfoRequest, E2C_AccountWarehousInfoResponse>
     {
         protected override async ETTask Run(Scene scene, C2E_AccountWarehousInfoRequest request, E2C_AccountWarehousInfoResponse response)
@@ -17,6 +17,7 @@
                 {
                     DBAccountBagInfo dBAccountBagInfo = scene.AddChildWithId<DBAccountBagInfo>(request.AccInfoID);
                     UnitCacheHelper.SaveComponent(scene.Root(),request.AccInfoID, dBAccountBagInfo).Coroutine();
+                    response.BagInfos = dBAccountWarehouse.BagInfoList;
                 }
             }
             await ETTask.CompletedTask;
