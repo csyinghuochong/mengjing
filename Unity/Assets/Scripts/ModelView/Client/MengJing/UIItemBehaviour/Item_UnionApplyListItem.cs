@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_UnionApplyListItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_UnionApplyListItem> 
 	{
+		public UnionPlayerInfo UnionPlayerInfo;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

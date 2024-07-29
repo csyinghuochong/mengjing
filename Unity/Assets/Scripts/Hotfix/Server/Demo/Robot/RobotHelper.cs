@@ -1010,7 +1010,7 @@ namespace ET.Client
                 }
             });
 
-            await UnionNetHelper.UnionApply(root, response.UnionList[^1].UnionId, unit.Id);
+            await UnionNetHelper.UnionApplyRequest(root, response.UnionList[^1].UnionId, unit.Id);
         }
     }
 }

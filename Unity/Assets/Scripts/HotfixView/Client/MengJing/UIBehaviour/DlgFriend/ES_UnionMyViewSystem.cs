@@ -183,17 +183,11 @@ namespace ET.Client
 
             self.EG_ShowSetRectTransform.gameObject.SetActive(false);
 
-            FlyTipComponent.Instance.ShowFlyTip("UIUnionApplyList 暂未开放");
-            // UIHelper.Create(self.ZoneScene(), UIType.UIUnionApplyList).Coroutine();
-            // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIUnionApplyList);
-            // ui.GetComponent<UIUnionApplyListComponent>().ActionFunc = () => { self.ShowSetShow(); };
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionApplyList);
+            DlgUnionApplyList dlgUnionApplyList = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionApplyList>();
+            dlgUnionApplyList.ActionFunc = () => { self.ShowSetShow(); };
 
-            // C2M_ReddotReadRequest m_ReddotReadRequest = new C2M_ReddotReadRequest() { ReddotType = ReddotType.UnionApply };
-            // M2C_ReddotReadResponse m_ReddotReadResponse =
-            //         (M2C_ReddotReadResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(m_ReddotReadRequest);
-            // self.Root().GetComponent<ReddotComponent>().RemoveReddont(ReddotType.UnionApply);
-
-            await ETTask.CompletedTask;
+            UserInfoNetHelper.ReddotReadRequest(self.Root(), ReddotType.UnionApply).Coroutine();
         }
 
         public static void ShowSetShow(this ES_UnionMy self)

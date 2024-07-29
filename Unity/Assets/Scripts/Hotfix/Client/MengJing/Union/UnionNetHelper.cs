@@ -2,7 +2,7 @@
 {
     public static partial class UnionNetHelper
     {
-        public static async ETTask<U2C_UnionApplyResponse> UnionApply(Scene root, long unionId, long userId)
+        public static async ETTask<U2C_UnionApplyResponse> UnionApplyRequest(Scene root, long unionId, long userId)
         {
             C2U_UnionApplyRequest request = C2U_UnionApplyRequest.Create();
             request.UnionId = unionId;
@@ -163,6 +163,26 @@
         {
             C2M_BloodstoneQiangHuaRequest request = C2M_BloodstoneQiangHuaRequest.Create();
             M2C_BloodstoneQiangHuaResponse response = (M2C_BloodstoneQiangHuaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<U2C_UnionApplyListResponse> UnionApplyListRequest(Scene root, long unionId)
+        {
+            C2U_UnionApplyListRequest request = C2U_UnionApplyListRequest.Create();
+            request.UnionId = unionId;
+
+            U2C_UnionApplyListResponse response = (U2C_UnionApplyListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<U2C_UnionApplyReplyResponse> UnionApplyReplyRequest(Scene root, int replyCode, long userId, long unionId)
+        {
+            C2U_UnionApplyReplyRequest request = C2U_UnionApplyReplyRequest.Create();
+            request.ReplyCode = replyCode;
+            request.UserId = userId;
+            request.UnionId = unionId;
+
+            U2C_UnionApplyReplyResponse response = (U2C_UnionApplyReplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
     }

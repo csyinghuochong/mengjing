@@ -86,5 +86,16 @@
             M2C_HorseRideResponse response = (M2C_HorseRideResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> ReddotReadRequest(Scene root, int reddotType)
+        {
+            C2M_ReddotReadRequest request = C2M_ReddotReadRequest.Create();
+            request.ReddotType = reddotType;
+
+            M2C_ReddotReadResponse response = (M2C_ReddotReadResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            root.GetComponent<ReddotComponentC>().RemoveReddont(reddotType);
+
+            return response.Error;
+        }
     }
 }

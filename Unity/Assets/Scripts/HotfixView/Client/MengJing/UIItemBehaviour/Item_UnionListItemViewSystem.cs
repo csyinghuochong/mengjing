@@ -40,7 +40,7 @@ namespace ET.Client
                 return;
             }
 
-            await UnionNetHelper.UnionApply(self.Root(), self.UnionListItem.UnionId, unit.Id);
+            await UnionNetHelper.UnionApplyRequest(self.Root(), self.UnionListItem.UnionId, unit.Id);
             if (self.IsDisposed)
             {
                 return;
