@@ -506,7 +506,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestAccountWarehousInfo(Scene root)
+        public static async ETTask<E2C_AccountWarehousInfoResponse> RequestAccountWarehousInfo(Scene root)
         {
             long accountId = root.GetComponent<PlayerComponent>().AccountId;
             C2E_AccountWarehousInfoRequest reuqest = C2E_AccountWarehousInfoRequest.Create();
@@ -514,7 +514,7 @@ namespace ET.Client
 
             E2C_AccountWarehousInfoResponse response = (E2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
 
-            return response.Error;
+            return response;
         }
 
         public static async ETTask<int> RquestOpenCangKu(Scene root)

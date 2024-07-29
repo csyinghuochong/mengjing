@@ -14,6 +14,7 @@ namespace ET.Client
 
             self.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_ButtonPackButton.AddListenerAsync(self.OnBtn_ZhengLi);
 
             self.Init().Coroutine();
             self.RefreshBagItems();
@@ -71,7 +72,8 @@ namespace ET.Client
 
         private static async ETTask Init(this ES_WarehouseAccount self)
         {
-            await BagClientNetHelper.RequestAccountWarehousInfo(self.Root());
+            E2C_AccountWarehousInfoResponse response = await BagClientNetHelper.RequestAccountWarehousInfo(self.Root());
+            self.AccountBagInfos = response.BagInfos;
             self.RefreshHouseItems();
         }
 
