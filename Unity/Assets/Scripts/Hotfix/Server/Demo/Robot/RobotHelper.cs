@@ -891,6 +891,30 @@ namespace ET.Client
             }
         }
 
+        public static async ETTask AddFriend(Scene root)
+        {
+            List<Unit> units = UnitHelper.GetUnitsByType(root, UnitType.Player);
+            List<FriendInfo> friendInfos = root.GetComponent<FriendComponent>().FriendList;
+
+            foreach (Unit unit in units)
+            {
+                bool isFriend = false;
+                foreach (FriendInfo friendInfo in friendInfos)
+                {
+                    if (friendInfo.UserId == unit.Id)
+                    {
+                        isFriend = true;
+                        break;
+                    }
+                }
+
+                if (!isFriend)
+                {
+                    await FriendNetHelper.RequestFriendApply(root, unit.Id);
+                }
+            }
+        }
+
         public static async ETTask FriendApplyReply(Scene root)
         {
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
