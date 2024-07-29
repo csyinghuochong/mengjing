@@ -185,5 +185,14 @@
             U2C_UnionApplyReplyResponse response = (U2C_UnionApplyReplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static void UnionInviteReplyRequest(Scene root, long unionId, int replyCode)
+        {
+            C2M_UnionInviteReplyRequest request = C2M_UnionInviteReplyRequest.Create();
+            request.UnionId = unionId;
+            request.ReplyCode = replyCode;
+
+            root.GetComponent<ClientSenderCompnent>().Send(request);
+        }
     }
 }

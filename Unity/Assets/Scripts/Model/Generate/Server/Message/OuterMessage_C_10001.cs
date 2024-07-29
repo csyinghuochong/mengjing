@@ -15778,7 +15778,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(OuterMessage.M2C_UnionApplyResult)]
-    public partial class M2C_UnionApplyResult : MessageObject, ILocationMessage
+    public partial class M2C_UnionApplyResult : MessageObject, IMessage
     {
         public static M2C_UnionApplyResult Create(bool isFromPool = false)
         {

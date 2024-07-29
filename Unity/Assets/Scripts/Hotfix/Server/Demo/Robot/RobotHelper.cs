@@ -947,18 +947,20 @@ namespace ET.Client
         public static async ETTask RemoveBlack(Scene root)
         {
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
-            foreach (FriendInfo friendInfo in friendComponent.Blacklist)
+
+            for (int i = friendComponent.Blacklist.Count - 1; i >= 0; i--)
             {
-                await FriendNetHelper.RequestRemoveBlack(root, friendInfo.UserId);
+                await FriendNetHelper.RequestRemoveBlack(root, friendComponent.Blacklist[i].UserId);
             }
         }
 
         public static async ETTask FriendDelete(Scene root)
         {
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
-            foreach (FriendInfo friendInfo in friendComponent.FriendList)
+
+            for (int i = friendComponent.FriendList.Count - 1; i >= 0; i--)
             {
-                await FriendNetHelper.RequestFriendDelete(root, friendInfo.UserId);
+                await FriendNetHelper.RequestRemoveBlack(root, friendComponent.FriendList[i].UserId);
             }
         }
 

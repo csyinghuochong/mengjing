@@ -3627,7 +3627,7 @@ message U2C_UnionApplyResponse // IUnionActorResponse
 	string Message = 92;
 }
 
-message M2C_UnionApplyResult // ILocationMessage
+message M2C_UnionApplyResult // IMessage
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

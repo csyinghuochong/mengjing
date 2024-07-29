@@ -446,4 +446,14 @@ namespace ET.Client
     {
         public BagInfo BagInfo;
     }
+
+    public struct UnionInvite
+    {
+        public M2C_UnionInviteMessage M2C_UnionInviteMessage;
+    }
+
+    public struct UnionRaceInfo
+    {
+        public M2C_UnionRaceInfoResult m2C_Battle;
+    }
 }
