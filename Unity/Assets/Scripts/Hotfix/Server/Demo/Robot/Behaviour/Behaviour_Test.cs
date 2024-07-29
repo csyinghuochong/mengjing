@@ -126,6 +126,9 @@ namespace ET
                 Console.WriteLine("无情删除所有好友");
                 await RobotHelper.FriendDelete(root);
 
+                Console.WriteLine("申请加入最弱的工会");
+                await RobotHelper.UnionApply(root);
+
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 

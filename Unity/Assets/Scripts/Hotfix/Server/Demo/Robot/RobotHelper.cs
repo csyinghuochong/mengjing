@@ -961,5 +961,56 @@ namespace ET.Client
                 await FriendNetHelper.RequestFriendDelete(root, friendInfo.UserId);
             }
         }
+
+        public static async ETTask UnionApply(Scene root)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            long unionId = numericComponent.GetAsLong(NumericType.UnionId_0);
+            if (unionId != 0)
+            {
+                // 请先退出公会
+                return;
+            }
+
+            long leaveTime = numericComponent.GetAsLong(NumericType.UnionIdLeaveTime);
+            if (TimeHelper.ServerNow() - leaveTime < TimeHelper.Hour * 8)
+            {
+                string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
+                // $"{tip} 后才能加入家族！"
+                return;
+            }
+
+            U2C_UnionListResponse response = await UnionNetHelper.UnionList(root);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            if (response.UnionList.Count == 0)
+            {
+                return;
+            }
+
+            response.UnionList.Sort(delegate(UnionListItem a, UnionListItem b)
+            {
+                int unionlevela = a.UnionLevel;
+                int unionlevelb = b.UnionLevel;
+                int numbera = a.PlayerNumber;
+                int numberb = b.PlayerNumber;
+
+                if (numbera == numberb)
+                {
+                    return unionlevelb - unionlevela;
+                }
+                else
+                {
+                    return numberb - numbera;
+                }
+            });
+
+            await UnionNetHelper.UnionApply(root, response.UnionList[^1].UnionId, unit.Id);
+        }
     }
 }
