@@ -109,8 +109,13 @@ namespace ET
                 Console.WriteLine("世界频道发送消息");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
 
+                // Console.WriteLine("向附近的人发送好友请求");
+                
                 Console.WriteLine("同意添加好友请求");
                 await RobotHelper.FriendApplyReply(root);
+
+                Console.WriteLine("问候我亲爱的好友们");
+                await RobotHelper.SendFriendChat(root, "许久未见，我亲爱的友友。紫禁之巅，今晚8点，是兄弟就来砍！");
 
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);

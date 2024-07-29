@@ -21,26 +21,26 @@
             request.ChatInfo = ChatInfo.Create();
             request.ChatInfo.PlayerLevel = userInfo.Lv;
             request.ChatInfo.Occ = userInfo.Occ;
-            // switch (channelEnum)
-            // {
-            //     case ChannelEnum.Word:
-            //         self.LastSendWord = TimeHelper.ClientNow();
-            //         break;
-            //     case ChannelEnum.Team:
-            //         Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //         NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            //         c2S_SendChatRequest.ChatInfo.ParamId = numericComponent.GetAsLong(NumericType.TeamId);
-            //         break;
-            //     case ChannelEnum.Union:
-            //         unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //         numericComponent = unit.GetComponent<NumericComponent>();
-            //         c2S_SendChatRequest.ChatInfo.ParamId = numericComponent.GetAsLong(NumericType.UnionId_0);
-            //         break;
-            //     case ChannelEnum.Friend:
-            //         c2S_SendChatRequest.ChatInfo.ParamId = paramId;
-            //         break;
-            // }
-            //
+            switch (channelEnum)
+            {
+                case ChannelEnum.Word:
+                    // self.LastSendWord = TimeHelper.ClientNow();
+                    break;
+                case ChannelEnum.Team:
+                    Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+                    request.ChatInfo.ParamId = numericComponent.GetAsLong(NumericType.TeamId);
+                    break;
+                case ChannelEnum.Union:
+                    unit = UnitHelper.GetMyUnitFromClientScene(root);
+                    numericComponent = unit.GetComponent<NumericComponentC>();
+                    request.ChatInfo.ParamId = numericComponent.GetAsLong(NumericType.UnionId_0);
+                    break;
+                case ChannelEnum.Friend:
+                    request.ChatInfo.ParamId = paramId;
+                    break;
+            }
+
             request.ChatInfo.UserId = userInfo.UserId;
             request.ChatInfo.ChannelId = (int)channelEnum;
             request.ChatInfo.ChatMsg = content;

@@ -901,5 +901,14 @@ namespace ET.Client
                 await FriendNetHelper.RequestFriendApplyReply(root, friendInfos[i], 1);
             }
         }
+
+        public static async ETTask SendFriendChat(Scene root, string str)
+        {
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            foreach (FriendInfo friendInfo in friendComponent.FriendList)
+            {
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Friend, str, friendInfo.UserId);
+            }
+        }
     }
 }
