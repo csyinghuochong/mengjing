@@ -129,6 +129,9 @@ namespace ET
                 Console.WriteLine("申请加入最弱的工会");
                 await RobotHelper.UnionApply(root);
 
+                // 同意加入工会消息没有返回
+                // C2U_UnionApplyReplyRequest", "ReplyCode" : 1
+                
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 
