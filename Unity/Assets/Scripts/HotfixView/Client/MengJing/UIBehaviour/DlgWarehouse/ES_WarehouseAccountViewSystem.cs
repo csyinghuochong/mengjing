@@ -102,7 +102,7 @@ namespace ET.Client
 
             if (index < self.AccountBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.AccountBagInfos[index], ItemOperateEnum.AccountBag, self.UpdateHouseSelect);
+                scrollItemCommonItem.Refresh(self.AccountBagInfos[index], ItemOperateEnum.AccountCangku, self.UpdateHouseSelect);
             }
             else
             {
@@ -113,18 +113,21 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_WarehouseAccount self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.AccountBag,
                 self.UpdateBagSelect);
         }
 
         private static void UpdateHouseSelect(this ES_WarehouseAccount self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
+            if (self.ScrollItemHouseItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemHouseItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }

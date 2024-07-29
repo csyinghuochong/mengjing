@@ -111,12 +111,15 @@ namespace ET.Client
 
         private static void UpdateHouseSelect(this ES_WarehouseGem self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
+            if (self.ScrollItemHouseItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemHouseItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }
