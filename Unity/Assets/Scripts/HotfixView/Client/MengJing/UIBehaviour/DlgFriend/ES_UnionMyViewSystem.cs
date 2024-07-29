@@ -221,23 +221,23 @@ namespace ET.Client
                     self.E_Text_ExpText.text = zstring.Format("{0}/{1}", response.UnionMyInfo.Exp, unionConfig.Exp);
                     if (response.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
                     {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0:0.#}万/{1:0.#}万", response.UnionMyInfo.UnionGold / 10000f, unionConfig
-                                .UnionGoldLimit / 10000f);
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (response.UnionMyInfo.UnionGold / 10000f).ToString("0.#"),
+                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
                     }
                     else
                     {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0:0.#}万/{1:0.#}万", unionConfig.UnionGoldLimit / 10000f, unionConfig
-                                .UnionGoldLimit / 10000f);
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"),
+                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
                     }
                 }
                 else
                 {
-                    self.E_Text_ExpText.text = String.Empty;
+                    self.E_Text_ExpText.text = string.Empty;
                     self.E_Text_UnionGoldText.text = string.Empty;
                 }
             }
 
-            await self.UpdateMyUnion(self.UnionInfo);
+            self.UpdateMyUnion();
         }
 
         public static void OnUnionJingXuanTimer(this ES_UnionMy self)
@@ -252,20 +252,11 @@ namespace ET.Client
             self.E_TextJingXuanEndTimeText.text = TimeHelper.ShowLeftTime(lastTime);
         }
 
-        public static async ETTask UpdateMyUnion(this ES_UnionMy self, UnionInfo unionInfo)
+        public static void UpdateMyUnion(this ES_UnionMy self)
         {
-            //客户端获取家族等级
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
-            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root(), unionId);
-            if (response.Error != ErrorCode.ERR_Success)
-            {
-                return;
-            }
-
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
-            UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionInfo.Level);
+            UnionConfig unionCof = UnionConfigCategory.Instance.Get(self.UnionInfo.Level);
             bool leader = userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId;
             using (zstring.Block())
             {
