@@ -181,5 +181,6 @@ namespace ET.Client
 		WindowID_YinSi,
 		WindowID_JueXing,
 		WindowID_OneSellSet,
+		WindowID_UnionApplyList,
 	}
 }
