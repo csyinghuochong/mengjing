@@ -935,6 +935,24 @@ namespace ET.Client
             }
         }
 
+        public static async ETTask AddBlack(Scene root)
+        {
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            foreach (FriendInfo friendInfo in friendComponent.FriendList)
+            {
+                await FriendNetHelper.RequestAddBlack(root, friendInfo.UserId);
+            }
+        }
+
+        public static async ETTask RemoveBlack(Scene root)
+        {
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            foreach (FriendInfo friendInfo in friendComponent.Blacklist)
+            {
+                await FriendNetHelper.RequestRemoveBlack(root, friendInfo.UserId);
+            }
+        }
+
         public static async ETTask FriendDelete(Scene root)
         {
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();

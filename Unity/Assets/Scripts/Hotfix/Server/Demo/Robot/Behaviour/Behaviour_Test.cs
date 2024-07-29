@@ -117,7 +117,12 @@ namespace ET
 
                 Console.WriteLine("问候我亲爱的好友们");
                 await RobotHelper.SendFriendChat(root, "许久未见，我亲爱的友友。紫禁之巅，今晚8点，是兄弟就来砍！");
-                
+
+                Console.WriteLine("将好友添加到黑名单");
+                await RobotHelper.AddFriend(root);
+                Console.WriteLine("将好友移出黑名单");
+                await RobotHelper.RemoveBlack(root);
+
                 Console.WriteLine("无情删除所有好友");
                 await RobotHelper.FriendDelete(root);
 
