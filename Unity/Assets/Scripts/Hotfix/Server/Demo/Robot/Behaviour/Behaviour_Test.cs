@@ -117,6 +117,9 @@ namespace ET
 
                 Console.WriteLine("问候我亲爱的好友们");
                 await RobotHelper.SendFriendChat(root, "许久未见，我亲爱的友友。紫禁之巅，今晚8点，是兄弟就来砍！");
+                
+                Console.WriteLine("无情删除所有好友");
+                await RobotHelper.FriendDelete(root);
 
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);

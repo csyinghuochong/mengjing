@@ -934,5 +934,14 @@ namespace ET.Client
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Friend, str, friendInfo.UserId);
             }
         }
+
+        public static async ETTask FriendDelete(Scene root)
+        {
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            foreach (FriendInfo friendInfo in friendComponent.FriendList)
+            {
+                await FriendNetHelper.RequestFriendDelete(root, friendInfo.UserId);
+            }
+        }
     }
 }
