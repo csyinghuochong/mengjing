@@ -347,6 +347,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_TextYinSiText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextYinSiText == null )
+     			{
+		    		this.m_E_TextYinSiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_YongHuXieYi/Scroll View/Viewport/ChatContent/E_TextYinSi");
+     			}
+     			return this.m_E_TextYinSiText;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_TextButton_1Button = null;
@@ -369,6 +386,7 @@ namespace ET.Client
 			this.m_EG_YongHuXieYiRectTransform = null;
 			this.m_E_YongHuXieYiCloseButton = null;
 			this.m_E_YongHuXieYiCloseImage = null;
+			this.m_E_TextYinSiText = null;
 			this.uiTransform = null;
 		}
 
@@ -392,6 +410,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_YongHuXieYiRectTransform = null;
 		private UnityEngine.UI.Button m_E_YongHuXieYiCloseButton = null;
 		private UnityEngine.UI.Image m_E_YongHuXieYiCloseImage = null;
+		private UnityEngine.UI.Text m_E_TextYinSiText = null;
 		public Transform uiTransform = null;
 	}
 }

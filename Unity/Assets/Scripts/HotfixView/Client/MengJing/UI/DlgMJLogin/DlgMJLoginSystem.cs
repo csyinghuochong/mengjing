@@ -25,6 +25,9 @@ namespace ET.Client
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
 
+            self.View.E_TextYinSiText.gameObject.SetActive(false);
+            UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
+
             self.RequestServerList().Coroutine();
 
             // if (string.IsNullOrEmpty(PlayerPrefsHelp.GetString("UIYinSi0627")))
