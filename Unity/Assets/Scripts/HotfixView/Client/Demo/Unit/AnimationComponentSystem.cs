@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Animancer;
 using UnityEngine;
 
@@ -68,6 +69,28 @@ namespace ET.Client
             if (self.ClipTransitions.ContainsKey(name))
             {
                 self.Animancer.Play(self.ClipTransitions[name]);
+            }
+            else
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("动画 {0} 未加载", name));
+                }
+            }
+        }
+
+        public static void SetOnEnd(this AnimationComponent self, string name, Action action)
+        {
+            if (self.ClipTransitions.ContainsKey(name))
+            {
+                self.ClipTransitions[name].Events.OnEnd = action;
+            }
+            else
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("动画 {0} 未加载", name));
+                }
             }
         }
     }
