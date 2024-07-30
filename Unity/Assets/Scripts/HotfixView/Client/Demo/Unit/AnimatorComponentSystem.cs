@@ -27,20 +27,6 @@ namespace ET.Client
             self.InitController(gameObject);
             self.UpdateAnimator(gameObject);
             self.UpdateController();
-
-            if (self.ControllerType == 1)
-            {
-                self.Animator.enabled = false;
-                
-                self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
-                // 通过Animator获得要用到的Clip，也可以把Clip放在热更资源内，根据配置加载
-                foreach (KeyValuePair<string, AnimationClip> keyValuePair in self.animationClips)
-                {
-                    ClipTransition clipTransition = new();
-                    clipTransition.Clip = keyValuePair.Value;
-                    self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
-                }
-            }
         }
 
         public static void InitController(this AnimatorComponent self, GameObject gameObject)

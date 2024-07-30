@@ -33,9 +33,5 @@ namespace ET.Client
 
         public Animator Animator { get; set; }
         public int Speed = 1;
-
-        public int ControllerType = 0; // 0 Animator；1 Animancer
-        public AnimancerComponent Animancer;
-        public Dictionary<string, ClipTransition> ClipTransitions = new();
     }
 }
