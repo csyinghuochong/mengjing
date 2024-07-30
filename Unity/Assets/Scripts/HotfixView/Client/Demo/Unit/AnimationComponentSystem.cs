@@ -28,12 +28,11 @@ namespace ET.Client
             // 测试
             if (Input.GetMouseButton(0))
             {
-                Log.Warning("按下");
-                self.Play("Anim_Move");
+                self.Play("Run");
             }
             else
             {
-                self.Play("Anim_Idel");
+                self.Play("Idle");
             }
         }
 
@@ -47,15 +46,16 @@ namespace ET.Client
             // 测试数据
             Dictionary<string, string> roleAnims = new()
             {
-                { "Anim_Move", "RoleFaShi/Girl_Run2" },
-                { "Anim_Idel", "RoleFaShi/Girl_Idle2" }
+                { "Run", "RoleFaShi/Girl_Run2" },
+                { "Idle", "RoleFaShi/Girl_Idle2" }
             };
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
             foreach (KeyValuePair<string, string> keyValuePair in roleAnims)
             {
-                AnimationClip animationClip = await resourcesLoaderComponent.LoadAssetAsync<AnimationClip>(ABPathHelper.GetAnimPath(keyValuePair.Value));
+                AnimationClip animationClip =
+                        await resourcesLoaderComponent.LoadAssetAsync<AnimationClip>(ABPathHelper.GetAnimPath(keyValuePair.Value));
                 ClipTransition clipTransition = new();
                 clipTransition.Clip = animationClip;
                 self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
