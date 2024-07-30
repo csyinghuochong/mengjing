@@ -13,6 +13,10 @@ namespace ET.Client
         {
             GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
 
+            // 使用Animancer的话Animator不用添加Controller
+            Animator animator = gameObject.GetComponentInChildren<Animator>();
+            animator.runtimeAnimatorController = null;
+
             self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();

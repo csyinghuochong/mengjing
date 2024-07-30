@@ -495,8 +495,15 @@ namespace ET.Client
                     List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
                     go.transform.name = unit.Id.ToString();
 
-                    unit.AddComponent<AnimatorComponent>();
-                    unit.AddComponent<AnimationComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>();
+                    }
+                    
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建

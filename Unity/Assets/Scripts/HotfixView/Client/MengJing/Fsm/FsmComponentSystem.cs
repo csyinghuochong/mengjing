@@ -91,11 +91,25 @@ namespace ET.Client
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillid = 0)
         { 
             Unit unit = self.GetParent<Unit>();
-            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
-            if (animatorComponent == null)
+            AnimatorComponent animatorComponent = null;
+            AnimationComponent animationComponent = null;
+            if (SettingData.AnimController == 0)
             {
-                return;
+                animatorComponent = unit.GetComponent<AnimatorComponent>();
+                if (animatorComponent == null)
+                {
+                    return;
+                }
             }
+            else
+            {
+                animationComponent = unit.GetComponent<AnimationComponent>();
+                if (animationComponent == null)
+                {
+                    return;
+                }
+            }
+
             switch (self.CurrentFsm)
             {
                 case FsmStateEnum.FsmRunState:
@@ -109,7 +123,14 @@ namespace ET.Client
                     self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    animatorComponent.SetBoolValue("Death", false);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Death", false);
+                    }
+                    else
+                    {
+                    }
+                    
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
                     animatorComponent.SetBoolValue("Idle", true);
