@@ -40,6 +40,15 @@ namespace ET.Client
             return listStr;
         }
 
+        public static void SetParent(GameObject son, GameObject parent)
+        {
+            if (son == null || parent == null)
+                return;
+            son.transform.SetParent(parent.transform);
+            son.transform.localPosition = Vector3.zero;
+            son.transform.localScale = Vector3.one;
+        }
+        
         public static void ShowTextList(GameObject textItem, int platForm)
         {
             string pageHtml = GetYingSiText(platForm);
@@ -86,7 +95,7 @@ namespace ET.Client
                     lineStr = lineStr.Substring(0, lineStr.Length - 1);
 
                     GameObject textGo = GameObject.Instantiate(textItem);
-                    CommonViewHelper.SetParent(textGo, parentobject);
+                    SetParent(textGo, parentobject);
 
                     Text text = textGo.GetComponent<Text>();
 
