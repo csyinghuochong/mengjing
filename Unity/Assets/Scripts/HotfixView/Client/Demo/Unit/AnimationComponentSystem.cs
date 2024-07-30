@@ -19,15 +19,21 @@ namespace ET.Client
 
             self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
 
-            ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
+            self.InitAnimClip().Coroutine();
+        }
 
-            // 初始化Clip
-            List<string> list = rc.GetKeysWithStart("Anim_");
-            foreach (string s in list)
+        [EntitySystem]
+        private static void Update(this AnimationComponent self)
+        {
+            // 测试
+            if (Input.GetMouseButton(0))
             {
-                ClipTransition clipTransition = new();
-                clipTransition.Clip = rc.Get<AnimationClip>(s);
-                self.ClipTransitions.Add(s, clipTransition);
+                Log.Warning("按下");
+                self.Play("Anim_Move");
+            }
+            else
+            {
+                self.Play("Anim_Idel");
             }
         }
 
@@ -36,9 +42,32 @@ namespace ET.Client
         {
         }
 
+        public static async ETTask InitAnimClip(this AnimationComponent self)
+        {
+            // 测试数据
+            Dictionary<string, string> roleAnims = new()
+            {
+                { "Anim_Move", "RoleFaShi/Girl_Run2" },
+                { "Anim_Idel", "RoleFaShi/Girl_Idle2" }
+            };
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+
+            foreach (KeyValuePair<string, string> keyValuePair in roleAnims)
+            {
+                AnimationClip animationClip = await resourcesLoaderComponent.LoadAssetAsync<AnimationClip>(ABPathHelper.GetAnimPath(keyValuePair.Value));
+                ClipTransition clipTransition = new();
+                clipTransition.Clip = animationClip;
+                self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
+            }
+        }
+
         public static void Play(this AnimationComponent self, string name)
         {
-            self.Animancer.Play(self.ClipTransitions[name]);
+            if (self.ClipTransitions.ContainsKey(name))
+            {
+                self.Animancer.Play(self.ClipTransitions[name]);
+            }
         }
     }
 }

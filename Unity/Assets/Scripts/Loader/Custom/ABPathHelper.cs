@@ -5,6 +5,17 @@
     /// </summary>
     public class ABPathHelper
     {
+        public static string GetAnimPath(string fileName)
+        {
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Animation/{0}.fbx", fileName);
+            }
+
+            return prefabPath;
+        }
+
         public static string GetMaterialPath(string fileName)
         {
             string prefabPath;
