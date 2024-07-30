@@ -1,4 +1,5 @@
-﻿using Animancer;
+﻿using System.Collections.Generic;
+using Animancer;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,20 +14,27 @@ namespace ET.Client
             GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
 
             self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
-            
-            Animator animator = gameObject.GetComponentInChildren<Animator>();
-            // 暂时通过Animator获得要用到的Clip，也可以把Clip放在热更资源内，根据配置加载
-            foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
+
+            ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
+
+            // 初始化Clip
+            List<string> list = rc.GetKeysWithStart("Anim_");
+            foreach (string s in list)
             {
                 ClipTransition clipTransition = new();
-                clipTransition.Clip = animationClip;
-                self.ClipTransitions.Add(animationClip.name, clipTransition);
+                clipTransition.Clip = rc.Get<AnimationClip>(s);
+                self.ClipTransitions.Add(s, clipTransition);
             }
         }
 
         [EntitySystem]
         private static void Destroy(this AnimationComponent self)
         {
+        }
+
+        public static void Play(this AnimationComponent self, string name)
+        {
+            self.Animancer.Play(self.ClipTransitions[name]);
         }
     }
 }

@@ -126,6 +126,20 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
 		return dictGo as T;
 	}
 
+	public List<string> GetKeysWithStart(string start)
+	{
+		List<string> list = new List<string>();
+		foreach (string key in this.dict.Keys)
+		{
+			if (key.StartsWith(start))
+			{
+				list.Add(key);
+			}
+		}
+
+		return list;
+	}
+
 	public Object GetObject(string key)
 	{
 		Object dictGo;
