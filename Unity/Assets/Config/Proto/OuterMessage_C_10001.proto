@@ -121,6 +121,7 @@ message C2G_EnterGame // ISessionRequest
 	int32 RpcId = 1;
 	int64 UnitId = 2;
 	int64 AccountId = 3;
+	int32 ReLink = 4;
 }
 
 message G2C_EnterGame // ISessionResponse
@@ -725,6 +726,13 @@ message DonationRecord
 message A2C_Disconnect	//IMessage
 {
 	int32 Error = 1;
+}
+
+message G2C_SecondLogin	//IMessage
+{
+	int32 Error = 1;
+	int32 SceneType = 2;
+	int32 SceneId = 3;
 }
 
 //等级 经验 货币 或者不变的数值都放在这。 

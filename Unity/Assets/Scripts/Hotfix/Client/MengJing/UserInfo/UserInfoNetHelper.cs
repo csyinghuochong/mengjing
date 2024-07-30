@@ -16,6 +16,13 @@
             return ErrorCode.ERR_Success;
         }
 
+        public static  async ETTask RequestFreshUnit(Scene root)
+        {
+            C2M_RefreshUnitRequest refreshUnitRequest = C2M_RefreshUnitRequest.Create();
+            root.GetComponent<ClientSenderCompnent>().Send(refreshUnitRequest);
+            await ETTask.CompletedTask;
+        }
+
         public static async ETTask<R2C_WorldLvResponse> WorldLv(Scene root)
         {
             C2R_WorldLvRequest request = C2R_WorldLvRequest.Create();

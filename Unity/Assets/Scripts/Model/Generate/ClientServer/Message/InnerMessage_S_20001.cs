@@ -1169,6 +1169,12 @@ namespace ET
         [MemoryPackOrder(2)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(4)]
+        public int SceneType { get; set; }
+
+        [MemoryPackOrder(5)]
+        public int SceneId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1179,6 +1185,8 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.SceneType = default;
+            this.SceneId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -269,6 +269,8 @@ message M2G_SecondLogin // ILocationResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
+	int32 SceneType = 5;
+	int32 SceneId = 6;
 }
 
 
