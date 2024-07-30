@@ -1,0 +1,28 @@
+namespace ET.Client
+{
+    [MessageHandler(SceneType.Demo)]
+    public class G2C_SecondLoginHandler: MessageHandler<Scene, G2C_SecondLogin>
+    {
+        protected override async ETTask Run(Scene root, G2C_SecondLogin message)
+        {
+            Log.Debug("G2C_SecondLoginHandler");
+
+
+            if (SceneTypeEnum.MainCityScene != message.SceneType)
+            {
+                Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType != message.SceneType");
+                EnterMapHelper.RequestTransfer(  root, message.SceneType,  message.SceneId, 0, "0" ).Coroutine();
+            }
+            else
+            {
+                await UserInfoNetHelper.RequestUserInfoInit(root);
+                
+                SceneChangeHelper.SceneChangeTo( root, IdGenerater.Instance.GenerateInstanceId(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(),0, "0" ).Coroutine();
+                await UserInfoNetHelper.RequestFreshUnit(root);
+                Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType == message.SceneType");
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+}

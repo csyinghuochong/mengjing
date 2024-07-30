@@ -37,7 +37,6 @@ namespace ET.Client
 
             Init init = GameObject.Find("Global").GetComponent<Init>();
             self.EditorMode = init.EditorMode;
-            self.UpdateClickMode();
         }
 
         [EntitySystem]

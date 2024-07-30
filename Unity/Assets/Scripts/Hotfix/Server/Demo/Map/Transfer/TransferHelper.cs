@@ -643,6 +643,7 @@ namespace ET.Server
             request.Unit = unit.ToBson();
             request.SceneType = sceneType;
             request.SceneId = sceneId;
+            request.FubenDifficulty = fubenDifficulty;
             request.ParamInfo = paramInfo;
             
             foreach (Entity entity in unit.Components.Values)

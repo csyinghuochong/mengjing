@@ -7,6 +7,11 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RefreshUnitRequest request)
         {
+            // 通知客户端创建My Unit
+            M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
+            m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+            MapMessageHelper.SendToClient(unit, m2CCreateUnits);
+            
             M2C_CreateUnits createUnits = M2C_CreateUnits.Create();
             Dictionary<long, EntityRef<AOIEntity>>  dict = unit.GetBeSeePlayers();
             foreach (AOIEntity u in dict.Values)

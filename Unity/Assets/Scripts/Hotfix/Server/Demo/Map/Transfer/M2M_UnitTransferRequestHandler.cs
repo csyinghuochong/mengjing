@@ -265,7 +265,7 @@ namespace ET.Server
             TransferHelper.AfterTransfer(unit, request.SceneType);
             
             // 通知客户端创建My Unit
-            M2C_CreateMyUnit m2CCreateUnits = new();
+            M2C_CreateMyUnit m2CCreateUnits = M2C_CreateMyUnit.Create();
             m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
 

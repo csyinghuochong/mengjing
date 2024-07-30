@@ -1585,6 +1585,7 @@ namespace ET.Client
             self.UpdateKillMonsterReward();
 
             self.CheckMailReddot().Coroutine();
+            self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
         }
 
         public static void OnUpdateUserData(this DlgMain self, string updateType)

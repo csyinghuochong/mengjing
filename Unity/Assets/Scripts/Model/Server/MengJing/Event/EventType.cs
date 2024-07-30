@@ -39,4 +39,16 @@ namespace ET.Server
     {
         public Scene Scene;
     }
+    
+    public struct UnitDisconnect
+    {
+        public Scene Scene;
+        public long UnitId;
+    }
+    
+    public struct ReturnMainCity
+    {
+        public Scene Scene;
+        public long UnitId;
+    }
 }

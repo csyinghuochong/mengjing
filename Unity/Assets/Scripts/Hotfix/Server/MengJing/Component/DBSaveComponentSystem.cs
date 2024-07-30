@@ -54,6 +54,83 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false); 
         }
 
+        public static void OnDisconnect(this DBSaveComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}  移除";
+
+            Scene scene = unit.Scene();
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            if (sceneTypeEnum == SceneTypeEnum.MainCityScene)
+            {
+                unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());
+            }
+            unit.GetComponent<EnergyComponentS>().OnDisconnect();
+            if (!unit.IsRobot())
+            {
+                self.UpdateCacheDB();
+                LogHelper.LoginInfo(offLineInfo);
+                LogHelper.LogDebug(offLineInfo);
+            }
+
+            TransferHelper.BeforeTransfer(unit);
+            unit.GetParent<UnitComponent>().Remove(unit.Id);
+
+            EventSystem.Instance.Publish( scene, new UnitDisconnect() { UnitId = unit.Id }  );
+        }
+        
+        public static void OnRelogin(this DBSaveComponent self, long gateSessionId)
+        {
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}   二次登录";
+
+            if (!unit.IsRobot())
+            {
+                LogHelper.LoginInfo(offLineInfo);
+                //需要通知其他服务器吗？
+                Log.Debug(offLineInfo);
+            }
+            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.Game;
+        }
+        
+        public static  void OnOffLine(this DBSaveComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}   离线";
+
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            if (numericComponent.GetAsLong(NumericType.Now_Stall) > 0)
+            {
+                long stallId = numericComponent.GetAsLong(NumericType.Now_Stall);
+                Unit unitstall = unit.GetParent<UnitComponent>().Get(stallId);
+                if (unitstall != null)
+                {
+                    unitstall.AddComponent<DeathTimeComponent, long>(TimeHelper.Hour * 6);
+                }
+            }
+
+            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false);
+            // unit.GetComponent<UserInfoComponentS>().OnOffLine();
+            // unit.GetComponent<DataCollationComponent>().OnOffLine();
+            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.None;
+            if (!unit.IsRobot())
+            {
+                LogHelper.LoginInfo(offLineInfo);
+                Log.Warning(offLineInfo);
+                self.UpdateCacheDB();
+            }
+        }
+
+        
         public static void Activeted(this DBSaveComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);

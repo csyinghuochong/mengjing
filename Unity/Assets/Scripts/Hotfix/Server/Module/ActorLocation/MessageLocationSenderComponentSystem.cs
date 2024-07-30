@@ -47,7 +47,8 @@ namespace ET.Server
                 foreach ((long key, Entity value) in self.Children)
                 {
                     MessageLocationSender messageLocationMessageSender = (MessageLocationSender) value;
-
+//客户端一段时间内（大概一分钟）没有向服务器发送IActorLocationRequest消息，服务器会Dispose掉这个Unit的ActorMessageSender
+//这样，SendToClient发送M2C_Info时，就会触发从ActorLoation获取ActorId，这是一个异步操作，从而导致M2CInfo会晚于M2C_XXX到达客户端。
                     if (timeNow > messageLocationMessageSender.LastSendOrRecvTime + MessageLocationSenderOneType.TIMEOUT_TIME)
                     {
                         list.Add(key);

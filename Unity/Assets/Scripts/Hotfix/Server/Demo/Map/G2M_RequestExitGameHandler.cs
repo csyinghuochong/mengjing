@@ -7,12 +7,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, G2M_RequestExitGame request, M2G_RequestExitGame response)
         {
-            await ETTask.CompletedTask;
-            
+
             //Unit角色下线业务逻辑，然后保存Unit及组件数据至数据库
             
             //正式释放Unit
-            RemoveUnit(unit).Coroutine();
+            await  RemoveUnit(unit);
+            await ETTask.CompletedTask;
         }
 
         private async ETTask RemoveUnit(Unit unit)
@@ -22,17 +22,9 @@ namespace ET.Server
             
             await unit.RemoveLocation(LocationType.Unit);
             
-            UnitComponent unitComponent = unit.Root().GetComponent<UnitComponent>();
+            unit.GetComponent<DBSaveComponent>().OnDisconnect();
             
-            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            RolePetInfo rolePetInfo =  petComponentS.GetFightPet();
-            if (rolePetInfo != null)
-            {
-                unitComponent.Remove(rolePetInfo.Id);
-            }
-
             
-            unitComponent.Remove(unit.Id);
         }
         
     }
