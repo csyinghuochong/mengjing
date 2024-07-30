@@ -32,6 +32,7 @@ namespace ET.Server
                 {
                     player.GetComponent<PlayerSessionComponent>().Session = null;
                 }
+                player.RemoveComponent<PlayerOfflineOutTimeComponent>();
                 player.AddComponent<PlayerOfflineOutTimeComponent>();
             }
         }
