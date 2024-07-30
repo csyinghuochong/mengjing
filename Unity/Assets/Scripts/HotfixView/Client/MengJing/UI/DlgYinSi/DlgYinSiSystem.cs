@@ -15,7 +15,7 @@ namespace ET.Client
             self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
 
             self.View.E_TextYinSiText.gameObject.SetActive(false);
-            // UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
+            UILoginHelper.ShowTextList(self.View.E_TextYinSiText.gameObject, GlobalHelp.GetPlatform());
 
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
