@@ -5,7 +5,7 @@
     /// </summary>
     public class ABPathHelper
     {
-        public static string GetAnimPath(string fileName)
+        public static string GetAnimFbxPath(string fileName)
         {
             string prefabPath;
             using (zstring.Block())

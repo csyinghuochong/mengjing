@@ -47,7 +47,8 @@ namespace ET.Client
             Dictionary<string, string> roleAnims = new()
             {
                 { "Run", "RoleFaShi/Girl_Run2" },
-                { "Idle", "RoleFaShi/Girl_Idle2" }
+                { "Idle", "RoleFaShi/Girl_Idle2" },
+                { "Death", "RoleZhanShi/Death" }
             };
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -55,7 +56,7 @@ namespace ET.Client
             foreach (KeyValuePair<string, string> keyValuePair in roleAnims)
             {
                 AnimationClip animationClip =
-                        await resourcesLoaderComponent.LoadAssetAsync<AnimationClip>(ABPathHelper.GetAnimPath(keyValuePair.Value));
+                        await resourcesLoaderComponent.LoadAssetAsync<AnimationClip>(ABPathHelper.GetAnimFbxPath(keyValuePair.Value));
                 ClipTransition clipTransition = new();
                 clipTransition.Clip = animationClip;
                 self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
