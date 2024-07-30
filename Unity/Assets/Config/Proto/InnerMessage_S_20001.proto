@@ -299,7 +299,8 @@ message M2M_UnitTransferRequest // IRequest
 	int32 SceneType = 5;
 	int32 SceneId = 6;
 	int32 Difficulty = 7;
-	string  ParamInfo = 8;
+	int32 FubenDifficulty = 8;
+	string  ParamInfo = 9;
 }
 
 message M2M_UnitTransferResponse // IResponse

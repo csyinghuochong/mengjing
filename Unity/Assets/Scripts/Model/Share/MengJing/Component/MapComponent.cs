@@ -16,6 +16,8 @@ namespace ET
         public int NavMeshId { set; get; }
 
         public int FubenDifficulty { set; get; }
+        
+        public string ParamInfo{ set; get; }
     }
 }
 
