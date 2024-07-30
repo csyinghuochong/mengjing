@@ -22,19 +22,19 @@ namespace ET.Client
             self.InitAnimClip().Coroutine();
         }
 
-        [EntitySystem]
-        private static void Update(this AnimationComponent self)
-        {
-            // 测试
-            if (Input.GetMouseButton(0))
-            {
-                self.Play("Run");
-            }
-            else
-            {
-                self.Play("Idle");
-            }
-        }
+        // [EntitySystem]
+        // private static void Update(this AnimationComponent self)
+        // {
+        //     // 测试
+        //     if (Input.GetMouseButton(0))
+        //     {
+        //         self.Play("Run");
+        //     }
+        //     else
+        //     {
+        //         self.Play("Idle");
+        //     }
+        // }
 
         [EntitySystem]
         private static void Destroy(this AnimationComponent self)

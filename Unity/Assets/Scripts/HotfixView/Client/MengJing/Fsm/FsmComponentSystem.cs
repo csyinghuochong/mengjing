@@ -32,17 +32,18 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             bool idle = moveComponent == null || moveComponent.IsArrived();
-            self.ChangeState(idle? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
+            self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
             self.WaitIdleTime = 0;
         }
+
         [EntitySystem]
         private static void Destroy(this FsmComponent self)
         {
             self.EndTimer();
         }
-        
+
         public static void Check(this FsmComponent self)
-        { 
+        {
             SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
             if (skillManagerComponentCSystem.SkillMoveTime != 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillMoveTime)
             {
@@ -51,23 +52,28 @@ namespace ET.Client
                 {
                     self.SetIdleState();
                 }
-                if (self.CurrentFsm == FsmStateEnum.FsmSkillState)  //光之能量 保持在动作的最后一帧
+
+                if (self.CurrentFsm == FsmStateEnum.FsmSkillState) //光之能量 保持在动作的最后一帧
                 {
                     self.SetIdleState();
                 }
+
                 if (self.CurrentFsm == FsmStateEnum.FsmRunState)
                 {
                     self.SetRunState();
                 }
+
                 self.EndTimer();
             }
+
             if (skillManagerComponentCSystem.SkillSingTime > 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillSingTime)
             {
                 skillManagerComponentCSystem.SkillSingTime = 0;
                 self.SetIdleState();
                 self.EndTimer();
             }
-            if (self.WaitIdleTime > 0 && TimeHelper.ClientNow() >= self.WaitIdleTime)   //连击回Idle
+
+            if (self.WaitIdleTime > 0 && TimeHelper.ClientNow() >= self.WaitIdleTime) //连击回Idle
             {
                 self.WaitIdleTime = 0;
                 self.SetIdleState();
@@ -89,7 +95,7 @@ namespace ET.Client
         }
 
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillid = 0)
-        { 
+        {
             Unit unit = self.GetParent<Unit>();
             AnimatorComponent animatorComponent = null;
             AnimationComponent animationComponent = null;
@@ -117,6 +123,7 @@ namespace ET.Client
                     {
                         return;
                     }
+
                     break;
                 case FsmStateEnum.FsmComboState:
                     self.WaitIdleTime = 0;
@@ -129,8 +136,9 @@ namespace ET.Client
                     }
                     else
                     {
+                        animationComponent.Play("Death");
                     }
-                    
+
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
                     animatorComponent.SetBoolValue("Idle", true);
@@ -196,19 +204,19 @@ namespace ET.Client
                 default:
                     break;
             }
+
             self.CurrentFsm = targetFsm;
         }
 
         public static void OnEnterFsmSkillState(this FsmComponent self, int skillid)
         {
-
             Unit unit = self.GetParent<Unit>();
             AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
             SkillManagerComponentC skillManagerComponentCSystem = unit.GetComponent<SkillManagerComponentC>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            
+
             if (skillManagerComponentCSystem.SkillMoveTime > TimeHelper.ClientNow()
-               || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
+                || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
             {
                 animatorComponent.SetBoolValue("Idle", false);
                 animatorComponent.SetBoolValue("Run", false);
@@ -219,7 +227,7 @@ namespace ET.Client
                 animatorComponent.SetBoolValue("Run", false);
                 animatorComponent.SetBoolValue("Idle", true);
             }
-            
+
             Log.Debug($"PlayAnimator: {skillConfig.SkillAnimation}");
             animatorComponent.Play(skillConfig.SkillAnimation);
         }
@@ -257,19 +265,35 @@ namespace ET.Client
         public static void SetIdleState(this FsmComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
-            animatorComponent.SetBoolValue("Run", false);
-            animatorComponent.SetBoolValue("Idle", true);
-            animatorComponent.Play("Idle");
+            if (SettingData.AnimController == 0)
+            {
+                AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+                animatorComponent.SetBoolValue("Run", false);
+                animatorComponent.SetBoolValue("Idle", true);
+                animatorComponent.Play("Idle");
+            }
+            else
+            {
+                AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
+                animationComponent.Play("Idle");
+            }
         }
 
         public static void SetRunState(this FsmComponent self)
-        { 
+        {
             Unit unit = self.GetParent<Unit>();
-            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
-            animatorComponent.SetBoolValue("Idle", false);
-            animatorComponent.SetBoolValue("Run", true);
-            animatorComponent.Play("Run");
+            if (SettingData.AnimController == 0)
+            {
+                AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+                animatorComponent.SetBoolValue("Idle", false);
+                animatorComponent.SetBoolValue("Run", true);
+                animatorComponent.Play("Run");
+            }
+            else
+            {
+                AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
+                animationComponent.Play("Run");
+            }
         }
 
         public static void OnEnterFsmComboState(this FsmComponent self, int skillid)
@@ -294,15 +318,17 @@ namespace ET.Client
                 {
                     boolAnimation = "Act_1";
                 }
+
                 if (boolAnimation == "Act_12")
                 {
                     boolAnimation = "Act_2";
                 }
+
                 if (boolAnimation == "Act_13")
                 {
                     boolAnimation = "Act_3";
                 }
-                
+
                 string curAckAnimation = String.Empty;
                 AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
                 foreach (var item in SkillData.AckExitTime)
@@ -313,6 +339,7 @@ namespace ET.Client
                         break;
                     }
                 }
+
                 if (self.LastAnimator == skillConfig.SkillAnimation)
                 {
                     animatorComponent.SetBoolValue("Act_1", false);
