@@ -2346,7 +2346,19 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 46fafdf43ff4a024c80b1a5088844bfe, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
+    Start: 0
     StateName: Idle
+    _ApplyRootMotion: 0
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 4873297978657799274, guid: 9c3d8aa6fcda47d45b79076b09f5e970, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    Start: 0
+    StateName: Run
     _ApplyRootMotion: 0
 --- !u!114 &2857056453225311360
 MonoBehaviour:

@@ -354,7 +354,7 @@ namespace ET.Client
             try
             {
                 unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(go);
-                unit.GetComponent<AnimationComponent>()?.UpdateAnimData(go, 1);
+                unit.GetComponent<AnimationComponent>()?.UpdateAnimData(go);
             }
             catch (Exception ex)
             {
@@ -377,7 +377,7 @@ namespace ET.Client
             CommonViewHelper.SetParent(self.GameObject, self.Root().GetComponent<GlobalComponent>().Unit.gameObject);
             self.UpdatePositon(self.GetParent<Unit>().Position);
             unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(self.GameObject);
-            unit.GetComponent<AnimationComponent>()?.UpdateAnimData(self.GameObject, 0);
+            unit.GetComponent<AnimationComponent>()?.UpdateAnimData(self.GameObject);
             self.ShowRoleDi(true);
             self.CheckRunState();
         }
@@ -504,7 +504,7 @@ namespace ET.Client
                     else
                     {
                         AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
-                        animationComponent.UpdateAnimData(go, 0);
+                        animationComponent.UpdateAnimData(go);
                     }
 
                     unit.AddComponent<FsmComponent>(); //当前状态组建
@@ -582,7 +582,7 @@ namespace ET.Client
                         else
                         {
                             AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
-                            animationComponent.UpdateAnimData(go, 1);
+                            animationComponent.UpdateAnimData(go);
                         }
 
                         unit.AddComponent<FsmComponent>(true); //当前状态组建
