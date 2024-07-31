@@ -134,22 +134,30 @@ namespace ET.Client
                     {
                         animatorComponent.SetBoolValue("Death", false);
                     }
-                    else
-                    {
-                        animationComponent.Play("Death");
-                    }
 
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
-                    animatorComponent.SetBoolValue("Idle", true);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", true);
+                    }
+
                     break;
                 case FsmStateEnum.FsmSinging:
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.SetBoolValue("Idle", true);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.SetBoolValue("Idle", true);
+                    }
+
                     break;
                 case FsmStateEnum.FsmSkillState:
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.SetBoolValue("Idle", true);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.SetBoolValue("Idle", true);
+                    }
+
                     break;
                 default:
                     break;
@@ -159,47 +167,100 @@ namespace ET.Client
             {
                 case FsmStateEnum.FsmComboState:
                     //this.ClearnAnimator();
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Run", false);
-                    self.OnEnterFsmComboState(skillid);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Run", false);
+                        self.OnEnterFsmComboState(skillid);
+                    }
+                    // ...
+
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Death", true);
-                    animatorComponent.Play("Death");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Death", true);
+                        animatorComponent.Play("Death");
+                    }
+                    else
+                    {
+                        animationComponent.Play("Death");
+                    }
+
                     break;
                 case FsmStateEnum.FsmHui:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.Play("Hui");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.Play("Hui");
+                    }
+                    else
+                    {
+                        animationComponent.Play("Hui");
+                    }
+
                     break;
                 case FsmStateEnum.FsmIdleState:
                     self.OnEnterIdleState();
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.Play("Speak");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.Play("Speak");
+                    }
+                    else
+                    {
+                        animationComponent.Play("Speak");
+                    }
+
                     break;
                 case FsmStateEnum.FsmRunState:
                     self.OnEnterFsmRunState();
                     break;
                 case FsmStateEnum.FsmShiQuItem:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.Play("ShiQu");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.Play("ShiQu");
+                    }
+                    else
+                    {
+                        animationComponent.Play("ShiQu");
+                    }
+
                     break;
                 case FsmStateEnum.FsmSinging:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.Play("YinChang");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.Play("YinChang");
+                    }
+                    else
+                    {
+                        animationComponent.Play("YinChang");
+                    }
+
                     break;
                 case FsmStateEnum.FsmSkillState:
                     self.OnEnterFsmSkillState(skillid);
                     break;
                 case FsmStateEnum.FsmHorse:
-                    animatorComponent.SetBoolValue("Idle", false);
-                    animatorComponent.SetBoolValue("Run", false);
-                    animatorComponent.Play("Horse");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Idle", false);
+                        animatorComponent.SetBoolValue("Run", false);
+                        animatorComponent.Play("Horse");
+                    }
+                    else
+                    {
+                        animationComponent.Play("Horse");
+                    }
+
                     break;
                 default:
                     break;
@@ -256,10 +317,18 @@ namespace ET.Client
         public static void SetHorseState(this FsmComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
-            animatorComponent.SetBoolValue("Run", false);
-            animatorComponent.SetBoolValue("Idle", false);
-            animatorComponent.Animator.Play("ZuoQi");
+            if (SettingData.AnimController == 0)
+            {
+                AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+                animatorComponent.SetBoolValue("Run", false);
+                animatorComponent.SetBoolValue("Idle", false);
+                animatorComponent.Animator.Play("ZuoQi");
+            }
+            else
+            {
+                AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
+                animationComponent.Play("ZuoQi");
+            }
         }
 
         public static void SetIdleState(this FsmComponent self)
