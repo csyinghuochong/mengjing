@@ -34,12 +34,77 @@ namespace ET.Client
             bool idle = moveComponent == null || moveComponent.IsArrived();
             self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
             self.WaitIdleTime = 0;
+
+            if (SettingData.AnimController == 1)
+            {
+                self.InitAnimTrans();
+            }
         }
 
         [EntitySystem]
         private static void Destroy(this FsmComponent self)
         {
             self.EndTimer();
+        }
+
+        public static void InitAnimTrans(this FsmComponent self)
+        {
+            AnimationComponent animationComponent = null;
+            Unit unit = self.GetParent<Unit>();
+            animationComponent = unit.GetComponent<AnimationComponent>();
+            if (animationComponent == null)
+            {
+                return;
+            }
+
+            animationComponent.SetOnEnd("Act_1", () =>
+            {
+                if (self.Act_2)
+                {
+                    animationComponent.Play("Act_2");
+                    self.Act_2 = false;
+                }
+                else
+                {
+                    animationComponent.Play("Idle");
+                }
+            });
+            animationComponent.SetOnEnd("Act_2", () =>
+            {
+                if (self.Act_3)
+                {
+                    animationComponent.Play("Act_3");
+                    self.Act_3 = false;
+                }
+                else
+                {
+                    animationComponent.Play("Idle");
+                }
+            });
+
+            animationComponent.SetOnEnd("Act_3", () =>
+            {
+                if (self.Act_1)
+                {
+                    animationComponent.Play("Act_1");
+                    self.Act_1 = false;
+                }
+                else
+                {
+                    animationComponent.Play("Idle");
+                }
+            });
+            animationComponent.SetOnEnd("Skill_1", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_2", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_3", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_4", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_5", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_6", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_7", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_8", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_9", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_10", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Skill_11", () => { animationComponent.Play("Idle"); });
         }
 
         public static void Check(this FsmComponent self)
@@ -171,9 +236,9 @@ namespace ET.Client
                     {
                         animatorComponent.SetBoolValue("Idle", false);
                         animatorComponent.SetBoolValue("Run", false);
-                        self.OnEnterFsmComboState(skillid);
                     }
-                    // ...
+
+                    self.OnEnterFsmComboState(skillid);
 
                     break;
                 case FsmStateEnum.FsmDeathState:
@@ -379,6 +444,7 @@ namespace ET.Client
 
             //1:剑 2:刀 11 默认11  //(EquipType == 2)
             AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
 
             if (unit.ConfigId == 1)
             {
@@ -399,36 +465,75 @@ namespace ET.Client
                 }
 
                 string curAckAnimation = String.Empty;
-                AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
-                foreach (var item in SkillData.AckExitTime)
+                if (SettingData.AnimController == 0)
                 {
-                    if (animatorStateInfo.IsName(item.Key))
+                    AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
+                    foreach (var item in SkillData.AckExitTime)
                     {
-                        curAckAnimation = item.Key;
-                        break;
+                        if (animatorStateInfo.IsName(item.Key))
+                        {
+                            curAckAnimation = item.Key;
+                            break;
+                        }
                     }
                 }
 
                 if (self.LastAnimator == skillConfig.SkillAnimation)
                 {
-                    animatorComponent.SetBoolValue("Act_1", false);
-                    animatorComponent.SetBoolValue("Act_2", false);
-                    animatorComponent.SetBoolValue("Act_3", false);
-                    animatorComponent.Play(skillConfig.SkillAnimation);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Act_1", false);
+                        animatorComponent.SetBoolValue("Act_2", false);
+                        animatorComponent.SetBoolValue("Act_3", false);
+                        animatorComponent.Play(skillConfig.SkillAnimation);
+                    }
+                    else
+                    {
+                        animationComponent.Play(skillConfig.SkillAnimation);
+                    }
                 }
                 else if (curAckAnimation == String.Empty)
                 {
-                    animatorComponent.SetBoolValue("Act_1", false);
-                    animatorComponent.SetBoolValue("Act_2", false);
-                    animatorComponent.SetBoolValue("Act_3", false);
-                    animatorComponent.Play(skillConfig.SkillAnimation);
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Act_1", false);
+                        animatorComponent.SetBoolValue("Act_2", false);
+                        animatorComponent.SetBoolValue("Act_3", false);
+                        animatorComponent.Play(skillConfig.SkillAnimation);
+                    }
+                    else
+                    {
+                        animationComponent.Play(skillConfig.SkillAnimation);
+                    }
                 }
                 else
                 {
-                    animatorComponent.SetBoolValue("Act_1", false);
-                    animatorComponent.SetBoolValue("Act_2", false);
-                    animatorComponent.SetBoolValue("Act_3", false);
-                    animatorComponent.SetBoolValue(boolAnimation, true);
+                    Log.Debug("连续击打");
+                    if (SettingData.AnimController == 0)
+                    {
+                        animatorComponent.SetBoolValue("Act_1", false);
+                        animatorComponent.SetBoolValue("Act_2", false);
+                        animatorComponent.SetBoolValue("Act_3", false);
+                        animatorComponent.SetBoolValue(boolAnimation, true);
+                    }
+                    else
+                    {
+                        // 不一定要。。。。
+                        // if (boolAnimation == "Act_1")
+                        // {
+                        //     self.Act_1 = true;
+                        // }
+                        // else if (boolAnimation == "Act_2")
+                        // {
+                        //     self.Act_2 = true;
+                        // }
+                        // else if (boolAnimation == "Act_3")
+                        // {
+                        //     self.Act_3 = true;
+                        // }
+                        
+                        animationComponent.Play(boolAnimation);
+                    }
                 }
 
                 self.LastAnimator = skillConfig.SkillAnimation;
@@ -438,7 +543,14 @@ namespace ET.Client
             }
             else
             {
-                animatorComponent.Play(skillConfig.SkillAnimation);
+                if (SettingData.AnimController == 0)
+                {
+                    animatorComponent.Play(skillConfig.SkillAnimation);
+                }
+                else
+                {
+                    animationComponent.Play(skillConfig.SkillAnimation);
+                }
             }
         }
 
