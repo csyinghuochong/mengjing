@@ -46,7 +46,7 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
             
             Console.WriteLine($"root.Name:  {root.Name}");
-            await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord);
+            await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord, 0);
             //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
             
             if (playerComponent.CreateRoleList.Count == 0)
@@ -55,7 +55,7 @@ namespace ET.Client
             }
 
             playerComponent.CurrentRoleId = playerComponent.CreateRoleList[0].UnitId;
-            await LoginHelper.LoginGameAsync(root);
+            await LoginHelper.LoginGameAsync(root, 0);
 
             int robotid = int.Parse( root.Name.Split('_')[0]);
             root.AddComponent<BehaviourComponent, int>(robotid);

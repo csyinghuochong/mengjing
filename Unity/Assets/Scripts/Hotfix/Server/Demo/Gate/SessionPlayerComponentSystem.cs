@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [EntitySystemOf(typeof(SessionPlayerComponent))]
     public static partial class SessionPlayerComponentSystem
@@ -21,7 +23,7 @@
 
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
             
-            
+            Console.Write($"SessionPlayerComponent.Destroy:  self.Player  {self.Player.Id}");
             // Session playerSession = playerSessionComponent ?.Session;
             // if ( playerSession == null)
             // {

@@ -9,7 +9,6 @@ namespace ET.Client
     {
         public static async ETTask<int> RequestBagInit(Scene root)
         {
-            Log.Debug($"C2M_BagInitHandler: client0");
             M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_BagInitRequest.Create());
 
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
@@ -19,7 +18,6 @@ namespace ET.Client
                 List<BagInfo> bagList = bagComponentC.AllItemList[Loc];
                 bagList.Add(response.BagInfos[i]);
             }
-
             bagComponentC.QiangHuaLevel = response.QiangHuaLevel;
             bagComponentC.QiangHuaFails = response.QiangHuaFails;
             bagComponentC.WarehouseAddedCell = response.WarehouseAddedCell;
@@ -27,8 +25,6 @@ namespace ET.Client
             bagComponentC.FashionEquipList = response.FashionEquipList;
             bagComponentC.SeasonJingHePlan = response.SeasonJingHePlan;
             bagComponentC.AdditionalCellNum = response.AdditionalCellNum;
-
-            Log.Debug($"C2M_BagInitHandler: client1");
             return ErrorCode.ERR_Success;
         }
 

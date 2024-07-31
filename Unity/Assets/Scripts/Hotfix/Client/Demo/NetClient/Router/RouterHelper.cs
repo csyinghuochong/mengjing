@@ -11,10 +11,6 @@ namespace ET.Client
         {
             uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
             
-            Log.Debug($"CreateRouterSession.account:  {account.GetLongHashCode()}");
-            Log.Debug($"CreateRouterSession.password:  {password.GetLongHashCode()}");
-            Log.Debug($"CreateRouterSession.localConn:  {localConn}");
-            
             (uint recvLocalConn, IPEndPoint routerAddress) = await GetRouterAddress(netComponent, address, localConn, 0);
 
             if (recvLocalConn == 0)

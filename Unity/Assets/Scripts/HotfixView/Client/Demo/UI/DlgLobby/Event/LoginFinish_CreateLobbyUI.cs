@@ -5,6 +5,8 @@
     {
         protected override async ETTask Run(Scene scene, LoginFinish args)
         {
+            
+            
             scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_MJLobby);
             await ETTask.CompletedTask;
         }

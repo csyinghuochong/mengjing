@@ -7,8 +7,15 @@ namespace ET.Client
         {
             Log.Debug("G2C_SecondLoginHandler");
 
-
-            if (SceneTypeEnum.MainCityScene != message.SceneType)
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+           
+            if (mapComponent.SceneType == message.SceneType )
+            {
+                await UserInfoNetHelper.RequestUserInfoInit(root);
+                await UserInfoNetHelper.RequestFreshUnit(root);
+                Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType == message.SceneType");
+            }
+            else  if (SceneTypeEnum.MainCityScene != message.SceneType)
             {
                 Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType != message.SceneType");
                 EnterMapHelper.RequestTransfer(  root, message.SceneType,  message.SceneId, 0, "0" ).Coroutine();
@@ -19,7 +26,7 @@ namespace ET.Client
                 
                 SceneChangeHelper.SceneChangeTo( root, IdGenerater.Instance.GenerateInstanceId(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(),0, "0" ).Coroutine();
                 await UserInfoNetHelper.RequestFreshUnit(root);
-                Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType == message.SceneType");
+                Log.Debug("G2C_SecondLoginHandler: mapComponent.SceneType  else");
             }
 
             await ETTask.CompletedTask;

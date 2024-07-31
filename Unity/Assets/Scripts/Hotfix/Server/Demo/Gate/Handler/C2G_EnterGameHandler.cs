@@ -49,14 +49,12 @@ namespace ET.Server
                     if (instanceId != session.InstanceId || player.IsDisposed)
                     {
                         response.Error = ErrorCode.ERR_PlayerSessionError;
-
                         return;
                     }
 
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
-                        Console.WriteLine("player.PlayerState == PlayerState.Game");
-                            
+                        Console.WriteLine($"player.PlayerState == PlayerState.Game:  {TimeHelper.ServerNow()}");
                         var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
                                 .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();

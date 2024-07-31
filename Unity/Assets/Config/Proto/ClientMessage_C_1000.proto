@@ -55,6 +55,7 @@ message Main2NetClient_LoginGame // IRequest
 	int64 RoleId = 4;
 	string GateAddress = 5;
 	int64 AccountId = 6;
+	int32  ReLink = 7;
 }
 
 message NetClient2Main_LoginGame // IResponse

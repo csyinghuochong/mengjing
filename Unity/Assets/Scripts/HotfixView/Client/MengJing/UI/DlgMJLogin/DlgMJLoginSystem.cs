@@ -90,7 +90,8 @@ namespace ET.Client
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             playerComponent.ServerItem = self.ServerInfo;
-
+            playerComponent.Account = self.View.E_AccountInputField.text;
+            playerComponent.Password = self.View.E_PasswordInputField.text;
             self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
@@ -98,7 +99,7 @@ namespace ET.Client
             PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
 
-            await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text);
+            await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text, 0);
         }
 
         public static void OnSelectServer(this DlgMJLogin self, ServerItem serverId)

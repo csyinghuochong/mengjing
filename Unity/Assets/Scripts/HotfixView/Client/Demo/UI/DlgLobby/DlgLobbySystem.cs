@@ -16,7 +16,7 @@
 		public static async ETTask EnterMap(this DlgLobby self)
 		{
 			Scene root = self.Root();
-			await LoginHelper.LoginGameAsync(root);
+			await LoginHelper.LoginGameAsync(root, 0);
 			root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Lobby);
 		}
 

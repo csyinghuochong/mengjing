@@ -29,6 +29,7 @@ namespace ET.Client
              C2G_EnterGame cEnterGame = C2G_EnterGame.Create();
              cEnterGame.AccountId = request.AccountId;
              cEnterGame.UnitId = request.RoleId;
+             cEnterGame.ReLink = request.ReLink;
              G2C_EnterGame g2CEnterGame = (G2C_EnterGame)await gateSession.Call(cEnterGame);
              if (g2CEnterGame.Error != ErrorCode.ERR_Success)
              {

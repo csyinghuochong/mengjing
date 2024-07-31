@@ -24,7 +24,9 @@ namespace ET.Client
         public string RealmAddress;
         
         public string Account { get; set; }
-        public string Password;
+        
+        public string Password { get; set; }
+        
         public string LoginType;
         public long CurrentRoleId { get; set; }
 

@@ -33,19 +33,24 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());
         }
         
-        public static async ETTask Login(Scene root, string account, string password)
+        public static async ETTask Login(Scene root, string account, string password, int reLink)
         {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             //登陆成功之后才有session.  才能call
             await clientSenderCompnent.LoginAsync(account, password);
-            await EventSystem.Instance.PublishAsync(root, new LoginFinish());
+
+            if (reLink == 0)
+            {
+                await EventSystem.Instance.PublishAsync(root, new LoginFinish());
+            }
         }
 
-        public static async ETTask LoginGameAsync(Scene root)
+        public static async ETTask LoginGameAsync(Scene root, int reLink)
         {
             try
             {
+                Log.Debug("LoginGameAsync");
                 //请求游戏角色进入Map地图
                 PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
 
@@ -67,7 +72,8 @@ namespace ET.Client
                     playerComponent.AccountId,
                     r2CGetRealmKey.Key,
                     playerComponent.CurrentRoleId,
-                    r2CGetRealmKey.Address);
+                    r2CGetRealmKey.Address,
+                    reLink);
                 if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
                 {
                     Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");

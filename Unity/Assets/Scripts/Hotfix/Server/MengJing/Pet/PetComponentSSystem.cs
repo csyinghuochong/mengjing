@@ -280,7 +280,6 @@ namespace ET.Server
 
         public static void OnLogin(this PetComponentS self)
         {
-            Console.WriteLine("PetComponentS.OnLogin");
             self.InitPetInfo();
             self.CheckSkin();
             self.CheckPetPingFen();

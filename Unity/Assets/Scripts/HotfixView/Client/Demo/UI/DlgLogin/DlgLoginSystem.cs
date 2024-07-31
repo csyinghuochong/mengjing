@@ -29,7 +29,7 @@ namespace ET.Client
 			LoginHelper.Login(
 				self.Root(), 
 				self.View.EAccountInputField.text, 
-				self.View.EPasswordInputField.text).Coroutine();
+				self.View.EPasswordInputField.text, 0).Coroutine();
 		}
 		 
 

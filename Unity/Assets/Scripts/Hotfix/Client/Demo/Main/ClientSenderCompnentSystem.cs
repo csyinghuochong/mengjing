@@ -54,9 +54,9 @@ namespace ET.Client
 
         public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password)
         {
-            Log.Debug("LoginAsync111");
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+            
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
@@ -64,9 +64,7 @@ namespace ET.Client
             main2NetClientLogin.Password     = password;
             main2NetClientLogin.ServerId     = playerComponent.ServerItem.ServerId;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
-            Log.Debug("LoginAsync2222");
-            Console.WriteLine($"playerComponent.Account: {account}");
-            playerComponent.Account = account;
+            
             playerComponent.Token = response.Token;
             playerComponent.AccountId = response.AccountId;
             playerComponent.PlayerInfo = response.PlayerInfo;
@@ -75,7 +73,7 @@ namespace ET.Client
             return response.PlayerId;
         }
 
-        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long accountId, long key,long roleId,string address)
+        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long accountId, long key,long roleId,string address,int reLink)
         {
             Main2NetClient_LoginGame main2NetClientLoginGame = Main2NetClient_LoginGame.Create();
             main2NetClientLoginGame.RealmKey    = key;
@@ -83,6 +81,7 @@ namespace ET.Client
             main2NetClientLoginGame.RoleId      = roleId;
             main2NetClientLoginGame.GateAddress = address;
             main2NetClientLoginGame.AccountId   = accountId;
+            main2NetClientLoginGame.ReLink      = reLink;
             NetClient2Main_LoginGame response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLoginGame) as NetClient2Main_LoginGame;
             return response;
         }

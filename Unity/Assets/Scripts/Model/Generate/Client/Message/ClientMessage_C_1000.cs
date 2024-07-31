@@ -209,6 +209,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public long AccountId { get; set; }
 
+        [MemoryPackOrder(6)]
+        public int ReLink { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -222,6 +225,7 @@ namespace ET
             this.RoleId = default;
             this.GateAddress = default;
             this.AccountId = default;
+            this.ReLink = default;
 
             ObjectPool.Instance.Recycle(this);
         }

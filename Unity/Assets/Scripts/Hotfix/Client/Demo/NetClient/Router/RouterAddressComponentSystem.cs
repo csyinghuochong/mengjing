@@ -78,16 +78,7 @@ namespace ET.Client
             //}
             return new IPEndPoint(ipAddress, int.Parse(ss[1]));
         }
-        
-        public static IPEndPoint GetCenterAddress(this RouterAddressComponent self, int versionMode)
-        {
-            string ip = ServerHelper.GetRouterHttpHost(versionMode);
-            IPAddress ipAddress = IPAddress.Parse(ip);
-            
-            Log.Debug($"GetCenterAddress: {ip}  30310");
-            return new IPEndPoint(ipAddress, 30310);
-        }
-        
+
         public static IPEndPoint GetRealmAddress(this RouterAddressComponent self, string account, int zone)
         {
             int v = account.Mode(self.Info.Realms.Count);

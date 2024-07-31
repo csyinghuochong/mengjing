@@ -564,8 +564,6 @@ namespace ET.Server
         public static void OnLogin(this BagComponentS self, int robotId)
         {
             self.CheckAllItemList();
-
-            Console.WriteLine("BagComponentS.OnLogin");
             Unit unit = self.GetParent<Unit>();
             int zodiacnumber = self.GetZodiacnumber();
             //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
