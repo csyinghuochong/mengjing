@@ -14,6 +14,24 @@ namespace ET.Client
         {
             GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
 
+            // Dictionary<string, AnimationClip> animationClips = new Dictionary<string, AnimationClip>();
+
+            // // 获取Animator引用的所有动画片段，只能看到片段的名字(很多名字相同)
+            // var animations = gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController.animationClips;
+
+            // // 获取Animator定义的State，名字，引用动画片段的名字，好像只能在编辑器模式下运行
+            // if (gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController is AnimatorController at)
+            // {
+            //     var stateMachine = at.layers[0].stateMachine;
+            //     foreach (var animState in stateMachine.states)
+            //     {
+            //         if (animState.state.nameHash == gameObject.GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).shortNameHash)
+            //         {
+            //             animationClips.Add(animState.state.name,);
+            //         }
+            //     }
+            // }
+
             // 使用Animancer的话Animator不用添加Controller
             Animator animator = gameObject.GetComponentInChildren<Animator>();
             animator.runtimeAnimatorController = null;
