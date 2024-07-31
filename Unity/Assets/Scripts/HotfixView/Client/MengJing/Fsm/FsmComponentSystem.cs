@@ -94,6 +94,10 @@ namespace ET.Client
                     animationComponent.Play("Idle");
                 }
             });
+            animationComponent.SetOnEnd("Act_11", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Act_12", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Act_13", () => { animationComponent.Play("Idle"); });
+
             animationComponent.SetOnEnd("Skill_1", () => { animationComponent.Play("Idle"); });
             animationComponent.SetOnEnd("Skill_2", () => { animationComponent.Play("Idle"); });
             animationComponent.SetOnEnd("Skill_3", () => { animationComponent.Play("Idle"); });
@@ -344,18 +348,33 @@ namespace ET.Client
             if (skillManagerComponentCSystem.SkillMoveTime > TimeHelper.ClientNow()
                 || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
             {
-                animatorComponent.SetBoolValue("Idle", false);
-                animatorComponent.SetBoolValue("Run", false);
+                if (SettingData.AnimController == 0)
+                {
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
+                }
+
                 self.BeginTimer();
             }
             else
             {
-                animatorComponent.SetBoolValue("Run", false);
-                animatorComponent.SetBoolValue("Idle", true);
+                if (SettingData.AnimController == 0)
+                {
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.SetBoolValue("Idle", true);
+                }
             }
 
             Log.Debug($"PlayAnimator: {skillConfig.SkillAnimation}");
-            animatorComponent.Play(skillConfig.SkillAnimation);
+            if (SettingData.AnimController == 0)
+            {
+                animatorComponent.Play(skillConfig.SkillAnimation);
+            }
+            else
+            {
+                AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
+                animationComponent.Play(skillConfig.SkillAnimation);
+            }
         }
 
         public static void OnEnterFsmRunState(this FsmComponent self)
@@ -531,7 +550,7 @@ namespace ET.Client
                         // {
                         //     self.Act_3 = true;
                         // }
-                        
+
                         animationComponent.Play(boolAnimation);
                     }
                 }

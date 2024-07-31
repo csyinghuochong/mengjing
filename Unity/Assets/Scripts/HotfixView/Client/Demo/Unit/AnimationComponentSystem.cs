@@ -19,23 +19,13 @@ namespace ET.Client
             animator.runtimeAnimatorController = null;
 
             self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
+            if (self.Animancer == null)
+            {
+                Log.Error("对象未添加 AnimancerComponent！！！");
+            }
 
             self.InitAnimClip();
         }
-
-        // [EntitySystem]
-        // private static void Update(this AnimationComponent self)
-        // {
-        //     // 测试
-        //     if (Input.GetMouseButton(0))
-        //     {
-        //         self.Play("Run");
-        //     }
-        //     else
-        //     {
-        //         self.Play("Idle");
-        //     }
-        // }
 
         [EntitySystem]
         private static void Destroy(this AnimationComponent self)
@@ -53,6 +43,8 @@ namespace ET.Client
                 { "Act_1", "RoleFaShi/Girl_Act_1" },
                 { "Act_2", "RoleFaShi/Girl_Act_2" },
                 { "Act_3", "RoleFaShi/Girl_Act_3" },
+                { "Act_11", "RoleFaShi/Girl_Act_1" },
+                { "Act_12", "RoleFaShi/Girl_Act_1" },
                 { "Skill_1", "RoleFaShi/Girl_Act_3" },
                 { "Skill_2", "RoleFaShi/Girl_Skill_2" },
                 { "Skill_3", "RoleFaShi/Girl_Act_3" },
