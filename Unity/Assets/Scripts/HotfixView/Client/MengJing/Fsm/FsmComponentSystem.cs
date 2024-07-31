@@ -57,43 +57,10 @@ namespace ET.Client
                 return;
             }
 
-            animationComponent.SetOnEnd("Act_1", () =>
-            {
-                if (self.Act_2)
-                {
-                    animationComponent.Play("Act_2");
-                    self.Act_2 = false;
-                }
-                else
-                {
-                    animationComponent.Play("Idle");
-                }
-            });
-            animationComponent.SetOnEnd("Act_2", () =>
-            {
-                if (self.Act_3)
-                {
-                    animationComponent.Play("Act_3");
-                    self.Act_3 = false;
-                }
-                else
-                {
-                    animationComponent.Play("Idle");
-                }
-            });
+            animationComponent.SetOnEnd("Act_1", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Act_2", () => { animationComponent.Play("Idle"); });
+            animationComponent.SetOnEnd("Act_3", () => { animationComponent.Play("Idle"); });
 
-            animationComponent.SetOnEnd("Act_3", () =>
-            {
-                if (self.Act_1)
-                {
-                    animationComponent.Play("Act_1");
-                    self.Act_1 = false;
-                }
-                else
-                {
-                    animationComponent.Play("Idle");
-                }
-            });
             animationComponent.SetOnEnd("Act_11", () => { animationComponent.Play("Idle"); });
             animationComponent.SetOnEnd("Act_12", () => { animationComponent.Play("Idle"); });
             animationComponent.SetOnEnd("Act_13", () => { animationComponent.Play("Idle"); });
@@ -541,20 +508,6 @@ namespace ET.Client
                     }
                     else
                     {
-                        // 不一定要。。。。
-                        // if (boolAnimation == "Act_1")
-                        // {
-                        //     self.Act_1 = true;
-                        // }
-                        // else if (boolAnimation == "Act_2")
-                        // {
-                        //     self.Act_2 = true;
-                        // }
-                        // else if (boolAnimation == "Act_3")
-                        // {
-                        //     self.Act_3 = true;
-                        // }
-
                         animationComponent.Play(boolAnimation);
                     }
                 }

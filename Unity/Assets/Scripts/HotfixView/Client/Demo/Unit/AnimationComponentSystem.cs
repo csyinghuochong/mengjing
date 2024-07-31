@@ -70,11 +70,13 @@ namespace ET.Client
             }
         }
 
-        public static void Play(this AnimationComponent self, string name)
+        public static void Play(this AnimationComponent self, string name, float speed = 1f)
         {
             if (self.ClipTransitions.ContainsKey(name))
             {
                 self.CurrentAnimation = name;
+                self.Animancer.Playable.Speed = speed;
+
                 self.Animancer.Play(self.ClipTransitions[name]);
                 using (zstring.Block())
                 {

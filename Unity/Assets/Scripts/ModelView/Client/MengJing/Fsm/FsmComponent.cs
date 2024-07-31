@@ -11,9 +11,5 @@
         public long WaitIdleTime;
 
         public string LastAnimator;
-
-        public bool Act_1;
-        public bool Act_2;
-        public bool Act_3;
     }
 }
