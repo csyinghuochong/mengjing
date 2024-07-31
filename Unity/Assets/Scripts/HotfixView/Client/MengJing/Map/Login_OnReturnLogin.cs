@@ -43,30 +43,11 @@
                 return;
             }
 
-            // Scene oldroot = scene.Root();
-            // scene.Root().RemoveComponent<ClientSenderCompnent>();
-            // SceneManager.MoveGameObjectToScene(GameObject.Find("Global"), SceneManager.GetActiveScene());
-            // GameObject.DestroyImmediate(GameObject.Find("Global"));
-            // //await scene.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Init"), LoadSceneMode.Single);   
-            // oldroot.Dispose();
-            // World.Instance.Dispose();
-            // SceneManager.LoadScene("Init");
-
-            // Camera camera = UIComponent.Instance.MainCamera.gameObject.GetComponent<Camera>();
-            // camera.GetComponent<MyCamera_1>().enabled = false;
-            // Session session = scene.GetComponent<SessionComponent>().Session;
-            // if (session != null && !session.IsDisposed)
-            // {
-            //     session.GetComponent<PingComponent>().DisconnectType = -1;
-            // }
-            //
-            // Game.Scene.GetComponent<SceneManagerComponent>().ChangeScene(args.ZoneScene, (int)SceneTypeEnum.LoginScene, SceneTypeEnum.NONE, 1)
-            //         .Coroutine();
-            // args.ZoneScene.Dispose();
-            // Scene zoneScene = SceneFactory.CreateZoneScene(1, "Game", Game.Scene);
-            //
-            // EventType.AppStartInitFinish.Instance.ZoneScene = zoneScene;
-            // Game.EventSystem.PublishClass(EventType.AppStartInitFinish.Instance);
+            Scene oldroot = scene.Root();
+            scene.Root().RemoveComponent<ClientSenderCompnent>();
+            oldroot.CurrentScene().Dispose();
+            oldroot.GetComponent<UIComponent>().CloseAllWindow();
+            await EventSystem.Instance.PublishAsync(oldroot, new AppStartInitFinish());
         }
     }
 }

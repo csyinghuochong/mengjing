@@ -5,7 +5,6 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, EntryEvent3 args)
         {
-            Log.Warning("EntryEvent3_InitClient");
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<MaskWordHelper>();

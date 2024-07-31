@@ -95,7 +95,11 @@ namespace ET.Client
             var path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             Log.Warning("切换场景" + path);
-            EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+
+            if (sceneTypeEnum!= SceneTypeEnum.LoginScene)
+            {
+                EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+            }
 
             self.UpdateChuanSong(sceneTypeEnum);
 
