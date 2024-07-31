@@ -2258,6 +2258,7 @@ GameObject:
   - component: {fileID: 7778671190638578803}
   - component: {fileID: 7778671190638578809}
   - component: {fileID: 6149603174580631065}
+  - component: {fileID: 5018373128574449213}
   - component: {fileID: 2857056453225311360}
   m_Layer: 14
   m_Name: Hero_2
@@ -2324,6 +2325,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Animator: {fileID: 7778671190638578809}
   _ActionOnDisable: 0
+--- !u!114 &5018373128574449213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778671190638578811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4373935cb14b34da08554bbccc4e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animations: []
 --- !u!114 &2857056453225311360
 MonoBehaviour:
   m_ObjectHideFlags: 0
