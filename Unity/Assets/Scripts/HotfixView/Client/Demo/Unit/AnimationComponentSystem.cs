@@ -43,7 +43,7 @@ namespace ET.Client
                 return;
             }
 
-            if (animData.Animations == null || animData.Animations.Length == 0)
+            if (animData.Animations == null || animData.Animations.Count == 0)
             {
                 Log.Error("mono脚本 AnimData 没有添加动画片段！！！");
                 return;

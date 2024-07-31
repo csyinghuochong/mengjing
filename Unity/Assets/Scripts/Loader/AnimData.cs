@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Animancer;
 using UnityEngine;
 
@@ -21,6 +22,9 @@ namespace ET
 
     public class AnimData : MonoBehaviour
     {
-        public MotionTransition[] Animations;
+        public List<MotionTransition> Animations;
+
+        // 也许可以保存在一个ScriptableObject中
+        public AnimGroup AnimGroup;
     }
 }
