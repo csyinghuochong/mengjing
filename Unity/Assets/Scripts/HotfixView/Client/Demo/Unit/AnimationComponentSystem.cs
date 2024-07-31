@@ -17,14 +17,6 @@ namespace ET.Client
             // 使用Animancer的话Animator不用添加Controller
             Animator animator = gameObject.GetComponentInChildren<Animator>();
             animator.runtimeAnimatorController = null;
-
-            self.Animancer = gameObject.GetComponentInChildren<AnimancerComponent>();
-            if (self.Animancer == null)
-            {
-                Log.Error("对象未添加 AnimancerComponent！！！");
-            }
-
-            self.InitAnimClip();
         }
 
         [EntitySystem]
@@ -32,8 +24,17 @@ namespace ET.Client
         {
         }
 
-        public static void InitAnimClip(this AnimationComponent self)
+        public static void UpdateAnimData(this AnimationComponent self, GameObject go, int type)
         {
+            self.Animancer = go.GetComponentInChildren<AnimancerComponent>();
+            if (self.Animancer == null)
+            {
+                Log.Error("对象未添加 mono脚本 AnimancerComponent！！！");
+                return;
+            }
+
+            self.ClipTransitions.Clear();
+
             // 测试数据
             Dictionary<string, string> roleAnims = new()
             {
@@ -57,16 +58,42 @@ namespace ET.Client
                 { "Skill_9", "RoleFaShi/Girl_Act_1" },
                 { "Skill_10", "RoleFaShi/Girl_Act_1" },
                 { "Skill_11", "RoleFaShi/Girl_Act_1" },
+                { "Speak", "RoleFaShi/Girl_Act_1" },
+            };
+
+            Dictionary<string, string> monsterAnims = new()
+            {
+                { "More", "Monster/Lang_2_Animation" }
             };
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-
-            foreach (KeyValuePair<string, string> keyValuePair in roleAnims)
+            Dictionary<string, string> date;
+            if (type == 0)
             {
-                AnimationClip animationClip = resourcesLoaderComponent.LoadAssetSync<AnimationClip>(ABPathHelper.GetAnimFbxPath(keyValuePair.Value));
-                ClipTransition clipTransition = new();
-                clipTransition.Clip = animationClip;
-                self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
+                date = roleAnims;
+
+                foreach (KeyValuePair<string, string> keyValuePair in date)
+                {
+                    AnimationClip animationClip =
+                            resourcesLoaderComponent.LoadAssetSync<AnimationClip>(ABPathHelper.GetAnimFbxPath(keyValuePair.Value));
+                    ClipTransition clipTransition = new();
+                    clipTransition.Clip = animationClip;
+                    self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
+                }
+            }
+            else
+            {
+                date = roleAnims;
+
+                // 有些是一个.fbx文件包含多个动画片段
+                Dictionary<string, AnimationClip> animationClips =
+                        resourcesLoaderComponent.LoadSubAssetsSync<AnimationClip>(ABPathHelper.GetAnimFbxPath("Monster/Lang_2_Animation"));
+                foreach (KeyValuePair<string, AnimationClip> keyValuePair in animationClips)
+                {
+                    ClipTransition clipTransition = new();
+                    clipTransition.Clip = keyValuePair.Value as AnimationClip;
+                    self.ClipTransitions.Add(keyValuePair.Key, clipTransition);
+                }
             }
         }
 

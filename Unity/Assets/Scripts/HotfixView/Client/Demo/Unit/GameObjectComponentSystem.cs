@@ -354,6 +354,7 @@ namespace ET.Client
             try
             {
                 unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(go);
+                unit.GetComponent<AnimationComponent>()?.UpdateAnimData(go, 1);
             }
             catch (Exception ex)
             {
@@ -376,6 +377,7 @@ namespace ET.Client
             CommonViewHelper.SetParent(self.GameObject, self.Root().GetComponent<GlobalComponent>().Unit.gameObject);
             self.UpdatePositon(self.GetParent<Unit>().Position);
             unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(self.GameObject);
+            unit.GetComponent<AnimationComponent>()?.UpdateAnimData(self.GameObject, 0);
             self.ShowRoleDi(true);
             self.CheckRunState();
         }
@@ -501,9 +503,10 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>();
+                        AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
+                        animationComponent.UpdateAnimData(go, 0);
                     }
-                    
+
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建
@@ -571,7 +574,17 @@ namespace ET.Client
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                         self.OnAddCollider(go);
                         unit.AddComponent<EffectViewComponent>(true); //添加特效组建
-                        unit.AddComponent<AnimatorComponent>(true);
+
+                        if (SettingData.AnimController == 0)
+                        {
+                            unit.AddComponent<AnimatorComponent>(true);
+                        }
+                        else
+                        {
+                            AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
+                            animationComponent.UpdateAnimData(go, 1);
+                        }
+
                         unit.AddComponent<FsmComponent>(true); //当前状态组建
                         unit.AddComponent<SkillYujingComponent>(true);
                     }
