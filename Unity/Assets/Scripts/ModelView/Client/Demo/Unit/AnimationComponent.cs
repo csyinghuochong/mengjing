@@ -8,5 +8,6 @@ namespace ET.Client
     {
         public AnimancerComponent Animancer;
         public Dictionary<string, ClipTransition> ClipTransitions = new();
+        public string CurrentAnimation { get; set; }
     }
 }

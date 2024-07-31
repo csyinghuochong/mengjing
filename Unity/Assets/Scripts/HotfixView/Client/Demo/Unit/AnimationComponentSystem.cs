@@ -45,6 +45,7 @@ namespace ET.Client
                 { "Act_3", "RoleFaShi/Girl_Act_3" },
                 { "Act_11", "RoleFaShi/Girl_Act_1" },
                 { "Act_12", "RoleFaShi/Girl_Act_1" },
+                { "Act_13", "RoleFaShi/Girl_Act_1" },
                 { "Skill_1", "RoleFaShi/Girl_Act_3" },
                 { "Skill_2", "RoleFaShi/Girl_Skill_2" },
                 { "Skill_3", "RoleFaShi/Girl_Act_3" },
@@ -73,6 +74,7 @@ namespace ET.Client
         {
             if (self.ClipTransitions.ContainsKey(name))
             {
+                self.CurrentAnimation = name;
                 self.Animancer.Play(self.ClipTransitions[name]);
                 using (zstring.Block())
                 {

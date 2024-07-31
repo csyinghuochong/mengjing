@@ -453,13 +453,6 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            //int EquipType = (int)ItemEquipType.Common;
-            //int itemId = (int)unit.GetComponent<NumericComponent>().GetAsInt(NumericType.Now_Weapon);
-            //if (itemId != 0)
-            //{
-            //    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
-            //    EquipType = itemConfig.EquipType;
-            //}
 
             //1:剑 2:刀 11 默认11  //(EquipType == 2)
             AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
@@ -490,6 +483,17 @@ namespace ET.Client
                     foreach (var item in SkillData.AckExitTime)
                     {
                         if (animatorStateInfo.IsName(item.Key))
+                        {
+                            curAckAnimation = item.Key;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var item in SkillData.AckExitTime)
+                    {
+                        if (animationComponent.CurrentAnimation == item.Key)
                         {
                             curAckAnimation = item.Key;
                             break;
