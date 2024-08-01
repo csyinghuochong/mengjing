@@ -131,7 +131,6 @@ namespace ET
                 await RobotHelper.UnionApply(root);
 
                 // ！！！有问题的协议！！！
-                // C2U_UnionApplyReplyRequest
                 // C2T_TeamDungeonInfoRequest
 
                 Console.WriteLine("使用一个精灵");
