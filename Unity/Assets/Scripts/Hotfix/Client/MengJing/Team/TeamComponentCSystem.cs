@@ -91,5 +91,26 @@
 
             EventSystem.Instance.Publish(self.Root(), new TeamUpdate());
         }
+
+        public static void OnRecvTeamApply(this TeamComponentC self, TeamPlayerInfo teamPlayerInfo)
+        {
+            bool have = false;
+            for (int i = 0; i < self.ApplyList.Count; i++)
+            {
+                if (self.ApplyList[i].UserID == teamPlayerInfo.UserID)
+                {
+                    self.ApplyList[i] = teamPlayerInfo;
+                    have = true;
+                    break;
+                }
+            }
+
+            if (!have && self.ApplyList.Count < 10)
+            {
+                self.ApplyList.Add(teamPlayerInfo);
+            }
+
+            self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.TeamApply);
+        }
     }
 }

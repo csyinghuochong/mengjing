@@ -201,5 +201,15 @@
 
             root.GetComponent<ClientSenderCompnent>().Send(request);
         }
+
+        public static async ETTask AgreeTeamInvite(Scene root, M2C_TeamInviteResult m2C_Team)
+        {
+            C2T_TeamAgreeRequest request = C2T_TeamAgreeRequest.Create();
+
+            request.TeamPlayerInfo_1 = m2C_Team.TeamPlayerInfo;
+            request.TeamPlayerInfo_2 = UnitHelper.GetSelfTeamPlayerInfo(root);
+
+            T2C_TeamAgreeResponse response = (T2C_TeamAgreeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+        }
     }
 }

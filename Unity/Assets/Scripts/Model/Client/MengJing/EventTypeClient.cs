@@ -173,6 +173,36 @@ namespace ET.Client
     {
     }
 
+    public struct TeamDungeonBoxReward
+    {
+        public M2C_TeamDungeonBoxRewardResult M2CTeamDungeonBoxRewardResult;
+    }
+
+    public struct RecvTeamDungeonOpen
+    {
+        public TeamInfo TeamInfo;
+    }
+
+    public struct RecvTeamInvite
+    {
+        public M2C_TeamInviteResult m2C_TeamInviteResult;
+    }
+
+    public struct TeamDungeonSettlement
+    {
+        public M2C_TeamDungeonSettlement m2C_FubenSettlement;
+    }
+
+    public struct RecvTeamDungeonPrepare
+    {
+        public M2C_TeamDungeonPrepareResult m2CTeamDungeonPrepareResult;
+    }
+
+    public struct TeamDungeonQuit
+    {
+        public M2C_TeamDungeonQuitMessage M2CTeamDungeonQuitMessage;
+    }
+
     // 好友更新
     public struct FriendUpdate
     {

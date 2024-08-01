@@ -1137,7 +1137,14 @@ namespace ET.Client
             else
             {
                 // 有副本队伍
-                // 自己是队长，人满了就开。不是队长就给队友打招呼
+
+                // 同意申请加入队伍
+                for (int i = teamComponent.ApplyList.Count - 1; i >= 0; i--)
+                {
+                    await TeamNetHelper.AgreeTeamApply(root, teamComponent.ApplyList[i], 1);
+                }
+
+                // 自己是队长，人满了就开
             }
         }
     }
