@@ -12,4 +12,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da39ef3be0ccfd9459853f4d73a8251f, type: 3}
   m_Name: PetAnimGroup
   m_EditorClassIdentifier: 
-  Animations: []
+  Animations:
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 9084167645055927277, guid: 88766f970cc9ca34190d273865582879, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Idle
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -5633665032767851046, guid: 0950ab5444ce5364f84d1c00576a92eb,
+      type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Death
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Skill_1
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Skill_2
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -1153445141144022658, guid: bed6471d6cd3dbc4fb17f6e0495bc697,
+      type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Walk
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 2996576903393284788, guid: ead6e11816e6eaf429457ab2f8aea1c0, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Run
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Attack_1
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7517590787166607204, guid: fc6ae4460b3214a42aad29b07741b02f, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Hit
