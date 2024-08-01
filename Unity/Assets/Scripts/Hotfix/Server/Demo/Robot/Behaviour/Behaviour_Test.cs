@@ -24,6 +24,7 @@ namespace ET
             Scene root = aiComponent.Root();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            TimerComponent timerComponent = root.GetComponent<TimerComponent>();
 
             Log.Debug($"Behaviour_Arena: Execute");
             while (true)
@@ -165,11 +166,12 @@ namespace ET
                         bagInfos.Add(bagInfo);
                     }
                 }
+
                 if (bagInfos.Count > 0)
                 {
                     await BagClientNetHelper.RequestAccountWarehousOperate(root, 1, bagInfos[0].BagInfoID);
                 }
-                
+
                 // 宝石合成
                 await BagClientNetHelper.RquestGemHeCheng(root, 19);
                 // 存宝石仓库
@@ -182,6 +184,7 @@ namespace ET
                         bagInfos.Add(bagInfo);
                     }
                 }
+
                 if (bagInfos.Count > 0)
                 {
                     await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.GemWareHouse1);
@@ -189,6 +192,24 @@ namespace ET
 
                 Console.WriteLine("邮箱领取信件");
                 await RobotHelper.MoveToNpc(root, 20000006);
+                await MailNetHelper.SendGetMailList(root);
+                MailComponentC mailComponent = root.GetComponent<MailComponentC>();
+                while (mailComponent.MailInfoList.Count > 0)
+                {
+                    int errorCode = await MailNetHelper.SendReceiveMail(root);
+                    if (errorCode != 0)
+                    {
+                        break;
+                    }
+
+                    if (cancellationToken.IsCancel())
+                    {
+                        Log.Debug("Behaviour_Arena: Exit1");
+                        return;
+                    }
+
+                    await timerComponent.WaitAsync(200);
+                }
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
@@ -197,7 +218,7 @@ namespace ET
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                await root.GetComponent<TimerComponent>().WaitAsync(20000, cancellationToken);
+                await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     Log.Debug("Behaviour_Arena: Exit1");
