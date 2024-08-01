@@ -3955,7 +3955,7 @@ namespace ET
     [MemoryPackable]
     [Message(InnerMessage.U2M_UnionApplyRequest)]
     [ResponseType(nameof(M2U_UnionApplyResponse))]
-    public partial class U2M_UnionApplyRequest : MessageObject, IRequest
+    public partial class U2M_UnionApplyRequest : MessageObject, ILocationRequest
     {
         public static U2M_UnionApplyRequest Create(bool isFromPool = false)
         {
@@ -3992,7 +3992,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.M2U_UnionApplyResponse)]
-    public partial class M2U_UnionApplyResponse : MessageObject, IResponse
+    public partial class M2U_UnionApplyResponse : MessageObject, ILocationResponse
     {
         public static M2U_UnionApplyResponse Create(bool isFromPool = false)
         {

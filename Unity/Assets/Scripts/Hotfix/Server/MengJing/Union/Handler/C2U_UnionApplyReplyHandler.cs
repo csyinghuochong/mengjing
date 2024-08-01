@@ -9,7 +9,8 @@
         {
             using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId)) 
             {
-                response.Error = await scene.GetComponent<UnionSceneComponent>().OnJoinUinon(request.UnionId, request.UserId, request.ReplyCode);
+                int errorcode = await scene.GetComponent<UnionSceneComponent>().OnJoinUinon(request.UnionId, request.UserId, request.ReplyCode);
+                response.Error = errorcode;
             }
         }
     }

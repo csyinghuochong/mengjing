@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
-    [MessageHandler(SceneType.Union)]
-    public class U2M_UnionApplyHandler : MessageHandler<Unit, U2M_UnionApplyRequest, M2U_UnionApplyResponse>
+    [MessageHandler(SceneType.Map)]
+    public class U2M_UnionApplyHandler : MessageLocationHandler<Unit, U2M_UnionApplyRequest, M2U_UnionApplyResponse>
     {
         protected override async ETTask Run(Unit unit, U2M_UnionApplyRequest request, M2U_UnionApplyResponse response)
         {

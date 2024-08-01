@@ -916,7 +916,7 @@ message U2M_UnionTransferResponse // IResponse
 
 //入会通知
 //ResponseType M2U_UnionApplyResponse
-message U2M_UnionApplyRequest // IRequest
+message U2M_UnionApplyRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -924,7 +924,7 @@ message U2M_UnionApplyRequest // IRequest
 	string UnionName = 2;
 }
 
-message M2U_UnionApplyResponse // IResponse
+message M2U_UnionApplyResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
