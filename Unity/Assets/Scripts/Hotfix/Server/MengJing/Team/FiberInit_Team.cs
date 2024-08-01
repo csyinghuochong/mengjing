@@ -12,9 +12,10 @@ namespace ET.Server
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
-
+            root.AddComponent<LocationProxyComponent>();
+            root.AddComponent<DBManagerComponent>();
+            root.AddComponent<MessageLocationSenderComponent>();
             root.AddComponent<TeamSceneComponent>();
-
             await ETTask.CompletedTask;
         }
     }

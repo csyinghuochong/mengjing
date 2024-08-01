@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.Team)]
     public class C2T_TeamInviteHandler : MessageHandler<Scene, C2T_TeamInviteRequest, T2C_TeamInviteResponse>
     {
         protected override async ETTask Run(Scene scene, C2T_TeamInviteRequest request, T2C_TeamInviteResponse response)

@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.Team)]
     public class C2T_TeamRobotHandler : MessageHandler<Scene, C2T_TeamRobotRequest, T2C_TeamRobotResponse>
     {
         protected override async ETTask Run(Scene scene, C2T_TeamRobotRequest request, T2C_TeamRobotResponse response)

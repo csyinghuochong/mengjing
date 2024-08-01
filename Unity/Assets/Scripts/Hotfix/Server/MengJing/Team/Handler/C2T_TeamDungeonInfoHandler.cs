@@ -3,7 +3,7 @@
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.Team)]
     public class C2T_TeamDungeonInfoHandler : MessageHandler<Scene, C2T_TeamDungeonInfoRequest, T2C_TeamDungeonInfoResponse>
     {
 

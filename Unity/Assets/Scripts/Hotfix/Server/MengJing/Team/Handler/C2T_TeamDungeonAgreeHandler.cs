@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.Team)]
     public class C2T_TeamDungeonAgreeHandler : MessageHandler<Scene, C2T_TeamDungeonAgreeRequest, T2C_TeamDungeonAgreeResponse>
     {
         protected override async ETTask Run(Scene scene, C2T_TeamDungeonAgreeRequest request, T2C_TeamDungeonAgreeResponse response)

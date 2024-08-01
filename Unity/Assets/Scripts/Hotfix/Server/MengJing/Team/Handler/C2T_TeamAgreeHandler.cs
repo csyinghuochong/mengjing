@@ -3,7 +3,7 @@
     /// <summary>
     /// 同意组队邀请
     /// </summary>
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.Team)]
     public class C2T_TeamAgreeHandler : MessageHandler<Scene, C2T_TeamAgreeRequest, T2C_TeamAgreeResponse>
     {
 
