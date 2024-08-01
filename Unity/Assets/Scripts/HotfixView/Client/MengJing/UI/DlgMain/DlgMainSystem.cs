@@ -9,6 +9,16 @@ namespace ET.Client
     # region 注册的事件
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_TeamUpdatet_DlgMainRefresh : AEvent<Scene, TeamUpdate>
+    {
+        protected override async ETTask Run(Scene scene, TeamUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateTeamUI();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class CommonHintErrorEvent : AEvent<Scene, CommonHintError>
     {
         protected override async ETTask Run(Scene root, CommonHintError args)

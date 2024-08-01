@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (TeamComponentC))]
-    [EntitySystemOf(typeof (TeamComponentC))]
+    [FriendOf(typeof(TeamComponentC))]
+    [EntitySystemOf(typeof(TeamComponentC))]
     public static partial class TeamComponentCSystem
     {
         [EntitySystem]
@@ -58,6 +58,38 @@
             }
 
             return ErrorCode.ERR_Success;
+        }
+
+        public static void OnRecvTeamUpdate(this TeamComponentC self, M2C_TeamUpdateResult message)
+        {
+            bool haveTeam = false;
+            for (int i = self.TeamList.Count - 1; i >= 0; i--)
+            {
+                if (self.TeamList[i].TeamId != message.TeamInfo.TeamId)
+                {
+                    continue;
+                }
+
+                if (message.TeamInfo.PlayerList.Count == 0)
+                {
+                    self.TeamList.RemoveAt(i);
+                }
+                else
+                {
+                    self.TeamList[i] = message.TeamInfo;
+                }
+
+                haveTeam = true;
+                break;
+            }
+
+            if (!haveTeam && message.TeamInfo.PlayerList.Count > 0)
+            {
+                self.TeamList.Add(message.TeamInfo);
+                self.ApplyList.Clear();
+            }
+
+            EventSystem.Instance.Publish(self.Root(), new TeamUpdate());
         }
     }
 }

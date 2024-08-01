@@ -169,6 +169,10 @@ namespace ET.Client
     {
     }
 
+    public struct RecvTeamUpdate
+    {
+    }
+
     // 好友更新
     public struct FriendUpdate
     {
