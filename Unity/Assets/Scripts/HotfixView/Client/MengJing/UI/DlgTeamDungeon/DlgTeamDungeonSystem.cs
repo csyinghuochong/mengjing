@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh: AEvent<Scene, TeamUpdate>
+    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh : AEvent<Scene, TeamUpdate>
     {
         protected override async ETTask Run(Scene scene, TeamUpdate args)
         {
@@ -13,7 +13,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgTeamDungeonRefresh: AEvent<Scene, BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgTeamDungeonRefresh : AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
@@ -22,10 +22,10 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_TeamDungeonList))]
-    [FriendOf(typeof (ES_TeamDungeonMy))]
-    [FriendOf(typeof (ES_TeamDungeonShop))]
-    [FriendOf(typeof (DlgTeamDungeon))]
+    [FriendOf(typeof(ES_TeamDungeonList))]
+    [FriendOf(typeof(ES_TeamDungeonMy))]
+    [FriendOf(typeof(ES_TeamDungeonShop))]
+    [FriendOf(typeof(DlgTeamDungeon))]
     public static class DlgTeamDungeonSystem
     {
         public static void RegisterUIEvent(this DlgTeamDungeon self)
@@ -64,12 +64,8 @@ namespace ET.Client
 
         public static async ETTask RequestTeamDungeonInfo(this DlgTeamDungeon self)
         {
-            // await TeamNetHelper.RequestTeamDungeonList(self.Root());
-            // 测试数据
-            long userId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            self.Root().GetComponent<TeamComponentC>().TeamList
-                    .Add(new() { PlayerList = new() { new() { UserID = userId, Occ = 1, Combat = 999, PlayerName = "测试角色" } }, SceneId = 110001 });
-            await ETTask.CompletedTask;
+            await TeamNetHelper.RequestTeamDungeonList(self.Root());
+
             if (self.IsDisposed)
             {
                 return;

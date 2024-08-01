@@ -126,8 +126,9 @@ namespace ET
                 Console.WriteLine("申请加入最弱的工会");
                 await RobotHelper.UnionApply(root);
 
-                // 同意加入工会消息没有返回
-                // C2U_UnionApplyReplyRequest", "ReplyCode" : 1
+                // ！！！有问题的协议！！！
+                // C2U_UnionApplyReplyRequest
+                // C2T_TeamDungeonInfoRequest
 
                 Console.WriteLine("使用一个精灵");
                 await RobotHelper.JingLingUse(root);

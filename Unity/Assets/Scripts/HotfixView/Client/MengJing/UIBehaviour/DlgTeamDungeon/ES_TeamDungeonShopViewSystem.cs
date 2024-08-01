@@ -2,9 +2,9 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_BattleShopItem))]
-    [EntitySystemOf(typeof (ES_TeamDungeonShop))]
-    [FriendOfAttribute(typeof (ES_TeamDungeonShop))]
+    [FriendOf(typeof(Scroll_Item_BattleShopItem))]
+    [EntitySystemOf(typeof(ES_TeamDungeonShop))]
+    [FriendOfAttribute(typeof(ES_TeamDungeonShop))]
     public static partial class ES_TeamDungeonShopSystem
     {
         [EntitySystem]
