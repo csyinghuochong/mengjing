@@ -106,9 +106,6 @@ namespace ET
                 Console.WriteLine("生命之魂注入 随机");
                 await RobotHelper.LifeShieldCost(root);
 
-                Console.WriteLine("世界频道发送消息");
-                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
-
                 Console.WriteLine("向附近的人发送好友请求");
                 await RobotHelper.AddFriend(root);
 
@@ -134,6 +131,13 @@ namespace ET
 
                 Console.WriteLine("使用一个精灵");
                 await RobotHelper.JingLingUse(root);
+
+                Console.WriteLine("发言，打个招呼");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Team, "兄弟们好，我是Robot");
+                await ChatNetHelper.RequestSendChat(root, ChannelEnum.Union, "家人们好，我是Robot");
+                
+                
 
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
