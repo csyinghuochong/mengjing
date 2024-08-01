@@ -1014,5 +1014,21 @@ namespace ET.Client
 
             await UnionNetHelper.UnionApplyRequest(root, response.UnionList[^1].UnionId, unit.Id);
         }
+
+        public static async ETTask JingLingUse(Scene root)
+        {
+            ChengJiuComponentC chengJiuComponent = root.GetComponent<ChengJiuComponentC>();
+            if (chengJiuComponent.JingLingList.Count == 0)
+            {
+                return;
+            }
+
+            if (chengJiuComponent.JingLingList[^1] == chengJiuComponent.JingLingId)
+            {
+                return;
+            }
+
+            await JingLingNetHelper.RequestJingLingUse(root, chengJiuComponent.JingLingList[^1], 1);
+        }
     }
 }

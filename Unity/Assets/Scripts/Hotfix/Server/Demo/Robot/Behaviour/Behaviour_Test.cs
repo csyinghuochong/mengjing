@@ -131,7 +131,10 @@ namespace ET
 
                 // 同意加入工会消息没有返回
                 // C2U_UnionApplyReplyRequest", "ReplyCode" : 1
-                
+
+                Console.WriteLine("使用一个精灵");
+                await RobotHelper.JingLingUse(root);
+
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);
 
