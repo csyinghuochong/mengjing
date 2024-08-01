@@ -503,8 +503,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
-                        animationComponent.UpdateAnimData(go);
+                       unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
 
                     unit.AddComponent<FsmComponent>(); //当前状态组建
@@ -559,7 +558,14 @@ namespace ET.Client
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
                     self.OnAddCollider(go);
                     go.name = unit.Id.ToString();
-                    unit.AddComponent<AnimatorComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                    }
                     unit.AddComponent<HeroTransformComponent>();
                     unit.AddComponent<UIStallHpComponent>(true);
                     break;
@@ -577,12 +583,11 @@ namespace ET.Client
 
                         if (SettingData.AnimController == 0)
                         {
-                            unit.AddComponent<AnimatorComponent>(true);
+                            unit.AddComponent<AnimatorComponent>();
                         }
                         else
                         {
-                            AnimationComponent animationComponent = unit.AddComponent<AnimationComponent>();
-                            animationComponent.UpdateAnimData(go);
+                            unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                         }
 
                         unit.AddComponent<FsmComponent>(true); //当前状态组建
@@ -668,7 +673,14 @@ namespace ET.Client
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建
-                    unit.AddComponent<AnimatorComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                    }
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIPetHpComponent>(); //血条UI组件
@@ -682,7 +694,14 @@ namespace ET.Client
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.NPC);
                     self.OnAddCollider(go);
                     go.name = unit.ConfigId.ToString();
-                    unit.AddComponent<AnimatorComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                    }
                     unit.AddComponent<HeroTransformComponent>();
                     unit.AddComponent<UINpcHpComponent>();
                     unit.AddComponent<FsmComponent>();
@@ -729,7 +748,14 @@ namespace ET.Client
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建
-                    unit.AddComponent<AnimatorComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                    }
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIJingLingHpComponent>(); //血条UI组件
@@ -742,7 +768,14 @@ namespace ET.Client
                     self.OnAddCollider(go);
                     go.transform.name = unit.Id.ToString();
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建
-                    unit.AddComponent<AnimatorComponent>();
+                    if (SettingData.AnimController == 0)
+                    {
+                        unit.AddComponent<AnimatorComponent>();
+                    }
+                    else
+                    {
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                    }
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIJiaYuanPastureComponent>(); //血条UI组件
@@ -1084,6 +1117,7 @@ namespace ET.Client
                 unit.RemoveComponent<ChangeEquipComponent>();
                 unit.RemoveComponent<HeroTransformComponent>(); //获取角色绑点组件
                 unit.RemoveComponent<AnimatorComponent>();
+                unit.RemoveComponent<AnimationComponent>();
                 unit.RemoveComponent<FsmComponent>(); //当前状态组建
                 unit.RemoveComponent<EffectViewComponent>(); //添加特效组建
                 unit.RemoveComponent<SkillYujingComponent>();

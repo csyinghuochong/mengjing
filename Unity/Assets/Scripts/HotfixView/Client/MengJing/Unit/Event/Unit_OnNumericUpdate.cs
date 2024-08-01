@@ -139,7 +139,8 @@
                     if (args.Defend.MainHero)
                     {
                         root.GetComponent<AttackComponent>().OnInitOcc(args.Defend.ConfigId);
-                        args.Defend.GetComponent<AnimatorComponent>().UpdateController();
+                        args.Defend.GetComponent<AnimatorComponent>()?.UpdateController();
+                        args.Defend.GetComponent<AnimationComponent>().UpdateAnimData(args.Defend.GetComponent<GameObjectComponent>().GameObject);
                         args.Defend.GetComponent<GameObjectComponent>().CheckRunState();
                     }
 

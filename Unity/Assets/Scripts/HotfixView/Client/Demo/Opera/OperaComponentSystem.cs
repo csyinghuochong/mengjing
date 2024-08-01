@@ -468,9 +468,17 @@ namespace ET.Client
 
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
             Vector3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
-            if (npcConfig.MovePosition.Length == 0 && npc != null && npc.GetComponent<AnimatorComponent>() != null)
+            if (npcConfig.MovePosition.Length == 0 && npc != null)
             {
-                npc.GetComponent<AnimatorComponent>().Play(MotionType.SelectNpc);
+                if (npc.GetComponent<AnimatorComponent>() != null)
+                {
+                    npc.GetComponent<AnimatorComponent>().Play(MotionType.SelectNpc);
+                }
+
+                if (npc.GetComponent<AnimationComponent>() != null)
+                {
+                    npc.GetComponent<AnimationComponent>().Play(MotionType.SelectNpc);
+                }
             }
 
             if (npc != null)
