@@ -781,8 +781,16 @@ namespace ET.Client
         {
             self.ShowTeamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
 
-            self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, self.ShowTeamInfo.PlayerList.Count);
-            self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfo.PlayerList.Count);
+            if (self.ShowTeamInfo == null)
+            {
+                self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, 0);
+                self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, 0);
+            }
+            else
+            {
+                self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, self.ShowTeamInfo.PlayerList.Count);
+                self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfo.PlayerList.Count);
+            }
         }
 
         #endregion
