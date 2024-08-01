@@ -138,6 +138,14 @@ namespace ET
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Team, "兄弟们好，我是Robot");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Union, "家人们好，我是Robot");
 
+                Console.WriteLine("组队相关。。。");
+                // ..............
+
+                Console.WriteLine("去储物箱存取东西");
+                // await 前往NPC
+
+                Console.WriteLine("邮箱领取信件");
+
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
