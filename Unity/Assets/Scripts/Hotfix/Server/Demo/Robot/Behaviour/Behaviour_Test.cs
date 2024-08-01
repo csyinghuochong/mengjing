@@ -136,8 +136,9 @@ namespace ET
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Word, "大家好，我是Robot");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Team, "兄弟们好，我是Robot");
                 await ChatNetHelper.RequestSendChat(root, ChannelEnum.Union, "家人们好，我是Robot");
-                
-                
+
+                Console.WriteLine("领红包");
+                await ActivityNetHelper.HongBaoOpen(root);
 
                 Console.WriteLine("抽卡");
                 await BagClientNetHelper.ChouKa(root, 1001, 1);

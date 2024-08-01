@@ -253,7 +253,6 @@ namespace ET.Client
             Log.Debug("ES_PetChallenge.OnInitUI");
 
             self.ShowPetFubenConfig.Clear();
-            self.ScrollItemPetChallengeItems.Clear();
             List<PetFubenConfig> petFubenConfigs = PetFubenConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < petFubenConfigs.Count; i++)
             {
