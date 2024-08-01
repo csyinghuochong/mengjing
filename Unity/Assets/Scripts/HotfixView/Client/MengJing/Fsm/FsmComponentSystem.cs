@@ -79,6 +79,8 @@ namespace ET.Client
                 animationComponent.SetOnEnd("Skill_9", () => { animationComponent.Play("Idle"); });
                 animationComponent.SetOnEnd("Skill_10", () => { animationComponent.Play("Idle"); });
                 animationComponent.SetOnEnd("Skill_11", () => { animationComponent.Play("Idle"); });
+
+                animationComponent.SetOnEnd("SelectNpc", () => { animationComponent.Play("Idle"); });
             }
             else if (unit.Type == UnitType.Monster)
             {
