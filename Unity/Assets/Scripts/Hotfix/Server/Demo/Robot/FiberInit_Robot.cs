@@ -54,6 +54,7 @@ namespace ET.Client
                 await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1,  playerComponent.Account);
             }
 
+            playerComponent.Account = root.Name;
             playerComponent.CurrentRoleId = playerComponent.CreateRoleList[0].UnitId;
             await LoginHelper.LoginGameAsync(root, 0);
 

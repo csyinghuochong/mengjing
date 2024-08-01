@@ -1,5 +1,7 @@
 using System;
+using System.Numerics;
 using ET.Client;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -19,6 +21,8 @@ namespace ET
         public override async ETTask Execute(BehaviourComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Scene root = aiComponent.Root();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+
             Log.Debug($"Behaviour_Arena: Execute");
             while (true)
             {
@@ -142,9 +146,16 @@ namespace ET
                 // ..............
 
                 Console.WriteLine("去储物箱存取东西");
-                // await 前往NPC
+                int npcId = 20000003;
+                NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);
+                float3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
+                await unit.MoveToAsync(newTarget);
 
                 Console.WriteLine("邮箱领取信件");
+                npcId = 20000006;
+                npcConfig = NpcConfigCategory.Instance.Get(npcId);
+                newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
+                await unit.MoveToAsync(newTarget);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
