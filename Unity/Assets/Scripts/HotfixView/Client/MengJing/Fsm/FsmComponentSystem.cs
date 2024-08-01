@@ -57,25 +57,34 @@ namespace ET.Client
                 return;
             }
 
-            animationComponent.SetOnEnd("Act_1", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Act_2", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Act_3", () => { animationComponent.Play("Idle"); });
+            if (unit.Type == UnitType.Player)
+            {
+                animationComponent.SetOnEnd("Act_1", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Act_2", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Act_3", () => { animationComponent.Play("Idle"); });
 
-            animationComponent.SetOnEnd("Act_11", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Act_12", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Act_13", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Act_11", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Act_12", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Act_13", () => { animationComponent.Play("Idle"); });
 
-            animationComponent.SetOnEnd("Skill_1", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_2", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_3", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_4", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_5", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_6", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_7", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_8", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_9", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_10", () => { animationComponent.Play("Idle"); });
-            animationComponent.SetOnEnd("Skill_11", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_1", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_2", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_3", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_4", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_5", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_6", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_7", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_8", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_9", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_10", () => { animationComponent.Play("Idle"); });
+                animationComponent.SetOnEnd("Skill_11", () => { animationComponent.Play("Idle"); });
+            }
+            else if (unit.Type == UnitType.Monster)
+            {
+            }
+            else if (unit.Type == UnitType.Pet)
+            {
+            }
         }
 
         public static void Check(this FsmComponent self)

@@ -25,7 +25,7 @@ namespace ET.Client
             self.ClipTransitions.Clear();
             self.CurrentAnimation = string.Empty;
 
-            // 使用Animancer的话Animator不用添加Controller
+            // 使用Animancer的话Animator不要添加Controller
             Animator animator = go.GetComponentInChildren<Animator>();
             animator.runtimeAnimatorController = null;
 
