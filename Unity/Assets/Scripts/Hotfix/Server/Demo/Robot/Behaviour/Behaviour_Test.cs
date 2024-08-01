@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using ET.Client;
 using Unity.Mathematics;
@@ -22,6 +23,7 @@ namespace ET
         {
             Scene root = aiComponent.Root();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
 
             Log.Debug($"Behaviour_Arena: Execute");
             while (true)
@@ -145,16 +147,15 @@ namespace ET
                 // ..............
 
                 Console.WriteLine("去储物箱存取东西");
-                int npcId = 20000003;
-                NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);
-                float3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
-                await unit.MoveToAsync(newTarget);
+                await RobotHelper.MoveToNpc(root, 20000003);
+                List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemLocType.ItemLocBag);
+                if (bagInfos.Count > 0)
+                {
+                    await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.ItemWareHouse1);
+                }
 
                 Console.WriteLine("邮箱领取信件");
-                npcId = 20000006;
-                npcConfig = NpcConfigCategory.Instance.Get(npcId);
-                newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
-                await unit.MoveToAsync(newTarget);
+                await RobotHelper.MoveToNpc(root, 20000006);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

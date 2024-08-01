@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -1029,6 +1030,13 @@ namespace ET.Client
             }
 
             await JingLingNetHelper.RequestJingLingUse(root, chengJiuComponent.JingLingList[^1], 1);
+        }
+
+        public static async ETTask MoveToNpc(Scene root, int npcConfigId)
+        {
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcConfigId);
+            float3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
+            await UnitHelper.GetMyUnitFromClientScene(root).MoveToAsync(newTarget);
         }
     }
 }
