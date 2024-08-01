@@ -91,7 +91,15 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagBagInfos.Clear();
-            self.ShowBagBagInfos.AddRange(bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag));
+            foreach (BagInfo bagInfo in bagComponentC.GetItemsByType(ItemLocType.ItemLocBag))
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
+                {
+                    self.ShowBagBagInfos.Add(bagInfo);
+                }
+            }
+
             int allNumber = bagComponentC.GetBagShowCell();
 
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
