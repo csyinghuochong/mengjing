@@ -1102,5 +1102,43 @@ namespace ET.Client
                 await timerComponent.WaitAsync(200);
             }
         }
+
+        public static async ETTask JoinTeam(Scene root)
+        {
+            await TeamNetHelper.RequestTeamDungeonList(root);
+            TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
+            TeamInfo teamInfo = teamComponent.GetSelfTeam();
+            if (teamInfo == null || teamInfo.SceneId == 0)
+            {
+                //无副本队伍
+                int error = -1;
+                List<TeamInfo> teamList = teamComponent.TeamList;
+                for (int i = 0; i < teamList.Count; i++)
+                {
+                    if (teamList[i].SceneId == 0)
+                    {
+                        continue;
+                    }
+
+                    error = await TeamNetHelper.SendTeamApply(root, teamList[i].TeamId, teamList[i].SceneId, teamList[i].FubenType,
+                        teamList[i].PlayerList[0].PlayerLv, true);
+
+                    if (error == 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (error != 0)
+                {
+                    await TeamNetHelper.RequestTeamDungeonCreate(root, 110001, 1);
+                }
+            }
+            else
+            {
+                // 有副本队伍
+                // 自己是队长，人满了就开。不是队长就给队友打招呼
+            }
+        }
     }
 }
