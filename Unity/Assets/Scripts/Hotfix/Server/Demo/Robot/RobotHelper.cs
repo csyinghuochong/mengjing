@@ -1038,5 +1038,69 @@ namespace ET.Client
             float3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
             await UnitHelper.GetMyUnitFromClientScene(root).MoveToAsync(newTarget);
         }
+
+        public static async ETTask Warehous(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 20000003);
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            // 存普通仓库
+            List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemLocType.ItemLocBag);
+            if (bagInfos.Count > 0)
+            {
+                await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.ItemWareHouse1);
+            }
+
+            // 存账号仓库
+            bagInfos.Clear();
+            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
+                {
+                    bagInfos.Add(bagInfo);
+                }
+            }
+
+            if (bagInfos.Count > 0)
+            {
+                await BagClientNetHelper.RequestAccountWarehousOperate(root, 1, bagInfos[0].BagInfoID);
+            }
+
+            // 宝石合成
+            await BagClientNetHelper.RquestGemHeCheng(root, 19);
+            // 存宝石仓库
+            bagInfos.Clear();
+            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (itemConfig.ItemType == ItemTypeEnum.Gemstone)
+                {
+                    bagInfos.Add(bagInfo);
+                }
+            }
+
+            if (bagInfos.Count > 0)
+            {
+                await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.GemWareHouse1);
+            }
+        }
+
+        public static async ETTask GetMail(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 20000006);
+            await MailNetHelper.SendGetMailList(root);
+            TimerComponent timerComponent = root.GetComponent<TimerComponent>();
+            MailComponentC mailComponent = root.GetComponent<MailComponentC>();
+            while (mailComponent.MailInfoList.Count > 0)
+            {
+                int errorCode = await MailNetHelper.SendReceiveMail(root);
+                if (errorCode != 0)
+                {
+                    break;
+                }
+
+                await timerComponent.WaitAsync(200);
+            }
+        }
     }
 }

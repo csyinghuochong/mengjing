@@ -148,68 +148,10 @@ namespace ET
                 // ..............
 
                 Console.WriteLine("去储物箱存取东西");
-                await RobotHelper.MoveToNpc(root, 20000003);
-                // 存普通仓库
-                List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemLocType.ItemLocBag);
-                if (bagInfos.Count > 0)
-                {
-                    await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.ItemWareHouse1);
-                }
-
-                // 存账号仓库
-                bagInfos.Clear();
-                foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
-                {
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                    if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
-                    {
-                        bagInfos.Add(bagInfo);
-                    }
-                }
-
-                if (bagInfos.Count > 0)
-                {
-                    await BagClientNetHelper.RequestAccountWarehousOperate(root, 1, bagInfos[0].BagInfoID);
-                }
-
-                // 宝石合成
-                await BagClientNetHelper.RquestGemHeCheng(root, 19);
-                // 存宝石仓库
-                bagInfos.Clear();
-                foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
-                {
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                    if (itemConfig.ItemType == ItemTypeEnum.Gemstone)
-                    {
-                        bagInfos.Add(bagInfo);
-                    }
-                }
-
-                if (bagInfos.Count > 0)
-                {
-                    await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.GemWareHouse1);
-                }
+                await RobotHelper.Warehous(root);
 
                 Console.WriteLine("邮箱领取信件");
-                await RobotHelper.MoveToNpc(root, 20000006);
-                await MailNetHelper.SendGetMailList(root);
-                MailComponentC mailComponent = root.GetComponent<MailComponentC>();
-                while (mailComponent.MailInfoList.Count > 0)
-                {
-                    int errorCode = await MailNetHelper.SendReceiveMail(root);
-                    if (errorCode != 0)
-                    {
-                        break;
-                    }
-
-                    if (cancellationToken.IsCancel())
-                    {
-                        Log.Debug("Behaviour_Arena: Exit1");
-                        return;
-                    }
-
-                    await timerComponent.WaitAsync(200);
-                }
+                await RobotHelper.GetMail(root);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
