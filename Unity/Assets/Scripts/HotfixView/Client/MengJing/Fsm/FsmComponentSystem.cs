@@ -59,6 +59,7 @@ namespace ET.Client
 
             if (unit.Type == UnitType.Player)
             {
+                // 动画结束后还没通知下一个State则自动转到Idle
                 animationComponent.SetOnEnd("Act_1", () => { animationComponent.Play("Idle"); });
                 animationComponent.SetOnEnd("Act_2", () => { animationComponent.Play("Idle"); });
                 animationComponent.SetOnEnd("Act_3", () => { animationComponent.Play("Idle"); });
