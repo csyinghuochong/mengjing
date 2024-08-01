@@ -43,13 +43,23 @@ namespace ET.Client
                 return;
             }
 
-            if (animData.Animations == null || animData.Animations.Count == 0)
+            if (animData.AnimGroup == null)
             {
-                Log.Error("mono脚本 AnimData 没有添加动画片段！！！");
+                Log.Error("mono脚本 AnimData 没有添加AnimGroup！！！");
                 return;
             }
 
-            foreach (MotionTransition motionTransition in animData.Animations)
+            if (animData.AnimGroup.Animations.Count == 0)
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
+                }
+
+                return;
+            }
+
+            foreach (MotionTransition motionTransition in animData.AnimGroup.Animations)
             {
                 self.ClipTransitions.Add(motionTransition.StateName, motionTransition);
             }
