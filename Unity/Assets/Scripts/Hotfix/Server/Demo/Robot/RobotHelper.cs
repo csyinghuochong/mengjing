@@ -1451,5 +1451,13 @@ namespace ET.Client
 
             await PetNetHelper.RequestPetHeXinChouKa(root, choukaType);
         }
+
+        public static async ETTask ChouKa(Scene root)
+        {
+            int npcid = 20000011;
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            await BagClientNetHelper.ChouKa(root, 1001, 1);
+        }
     }
 }

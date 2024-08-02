@@ -166,9 +166,12 @@ namespace ET
                 await RobotHelper.PetEgg(root);
 
                 Console.WriteLine("去幸运探宝 抽卡");
-                await BagClientNetHelper.ChouKa(root, 1001, 1);
+                await RobotHelper.ChouKa(root);
 
-                Console.WriteLine("领红包");
+                Console.WriteLine("去裁缝大师 做衣服");
+                // 。。。
+
+                Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
