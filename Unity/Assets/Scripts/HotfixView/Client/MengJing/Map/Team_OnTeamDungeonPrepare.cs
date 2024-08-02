@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class Team_OnTeamDungeonPrepare : AEvent<Scene, RecvTeamDungeonPrepare>
@@ -18,13 +12,14 @@ namespace ET.Client
             }
 
             FlyTipComponent.Instance.ShowFlyTip("未创建 UITeamDungeonPrepare");
-            // UI uI = UIHelper.GetUI(args.ZoneScene, UIType.UITeamDungeonPrepare);
-            // if (uI == null)
-            // {
-            //     return;
-            // }
-            //
-            // uI.GetComponent<UITeamDungeonPrepareComponent>().OnUpdateUI(args.PrepareResult.TeamInfo, args.PrepareResult.ErrorCode);
+            DlgTeamDungeonPrepare dlgTeamDungeonPrepare = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonPrepare>();
+
+            if (dlgTeamDungeonPrepare == null)
+            {
+                return;
+            }
+
+            dlgTeamDungeonPrepare.OnUpdateUI(args.m2CTeamDungeonPrepareResult.TeamInfo, args.m2CTeamDungeonPrepareResult.ErrorCode);
             await ETTask.CompletedTask;
         }
     }

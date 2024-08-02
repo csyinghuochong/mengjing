@@ -182,5 +182,6 @@ namespace ET.Client
 		WindowID_JueXing,
 		WindowID_OneSellSet,
 		WindowID_UnionApplyList,
+		WindowID_TeamDungeonPrepare,
 	}
 }

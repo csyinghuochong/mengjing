@@ -6,6 +6,12 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        public static void ShowOccIcon(Scene root, GameObject gameObject, int occ)
+        {
+            gameObject.GetComponent<Image>().sprite = root.GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, occ.ToString()));
+        }
+
         //播放UI音效
         public static void PlayUIMusic(string music)
         {

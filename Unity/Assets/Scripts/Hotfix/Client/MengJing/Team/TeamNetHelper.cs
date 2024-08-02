@@ -211,5 +211,16 @@
 
             T2C_TeamAgreeResponse response = (T2C_TeamAgreeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
         }
+
+        public static async ETTask<int> TeamDungeonPrepareRequest(Scene root, TeamInfo teamInfo, int prepare)
+        {
+            C2M_TeamDungeonPrepareRequest request = C2M_TeamDungeonPrepareRequest.Create();
+            request.TeamInfo = teamInfo;
+            request.Prepare = prepare;
+
+            M2C_TeamDungeonPrepareResponse response = (M2C_TeamDungeonPrepareResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
