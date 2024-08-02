@@ -1228,5 +1228,13 @@ namespace ET.Client
 
             await BagClientNetHelper.RquestStoreBuy(root, ShowStores[random], 1);
         }
+
+        public static async ETTask RoleXiLian(Scene root)
+        {
+            int npcid = 20000004;
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            await ETTask.CompletedTask;
+        }
     }
 }

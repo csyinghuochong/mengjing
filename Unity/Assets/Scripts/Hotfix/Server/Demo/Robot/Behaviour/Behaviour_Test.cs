@@ -147,17 +147,20 @@ namespace ET
                 Console.WriteLine("组队 有队伍加入队伍，无队伍自己创建一个");
                 await RobotHelper.JoinTeam(root);
 
-                Console.WriteLine("去储物箱存取东西");
-                await RobotHelper.Warehous(root);
-
-                Console.WriteLine("邮箱领取信件");
-                await RobotHelper.GetMail(root);
-
                 Console.WriteLine("去杂货店老板 买个东西");
                 await RobotHelper.Mystery(root);
 
                 Console.WriteLine("去啄啄百货店 买个东西");
                 await RobotHelper.Store(root);
+
+                Console.WriteLine("去储物箱 存取东西");
+                await RobotHelper.Warehous(root);
+
+                Console.WriteLine("去装备洗炼大师 给自己的装备洗练一下");
+                await RobotHelper.RoleXiLian(root);
+
+                Console.WriteLine("去邮箱 领取信件");
+                await RobotHelper.GetMail(root);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
