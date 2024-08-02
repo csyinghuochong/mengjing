@@ -222,5 +222,15 @@
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_TeamDungeonBoxRewardResponse> TeamDungeonBoxRewardRequest(Scene root, int boxIndex, RewardItem rewardItem)
+        {
+            C2M_TeamDungeonBoxRewardRequest request = C2M_TeamDungeonBoxRewardRequest.Create();
+            request.BoxIndex = boxIndex;
+            request.RewardItem = rewardItem;
+
+            M2C_TeamDungeonBoxRewardResponse response = (M2C_TeamDungeonBoxRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

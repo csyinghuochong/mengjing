@@ -66,18 +66,17 @@
         {
             await scene.GetComponent<TimerComponent>().WaitAsync(3000);
 
-            // if (UIHelper.GetUI(args.ZoneScene, UIType.UITeamDungeonSettlement) != null)
-            //     return;
+            if (scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonSettlement>() != null)
+                return;
 
             int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
-            if (sceneTypeEnum == (int)SceneTypeEnum.MainCityScene)
+            if (sceneTypeEnum == SceneTypeEnum.MainCityScene)
             {
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTip("未创建 UITeamDungeonSettlement");
-            // UI ui = await UIHelper.Create(args.ZoneScene, UIType.UITeamDungeonSettlement);
-            // ui.GetComponent<UITeamDungeonSettlementComponent>().OnUpdateUI(args.m2C_FubenSettlement);
+            await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonSettlement);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement);
         }
     }
 
@@ -86,13 +85,11 @@
     {
         protected override async ETTask Run(Scene scene, TeamDungeonBoxReward args)
         {
-            FlyTipComponent.Instance.ShowFlyTip("未创建 UITeamDungeonSettlement");
-
-            // UI ui = UIHelper.GetUI(scene, UIType.UITeamDungeonSettlement);
-            // if (ui != null)
-            // {
-            //     ui.GetComponent<UITeamDungeonSettlementComponent>().OnTeamDungeonBoxReward(args.m2C_FubenSettlement);
-            // }
+            DlgTeamDungeonSettlement dlgTeamDungeonSettlement = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonSettlement>();
+            if (dlgTeamDungeonSettlement != null)
+            {
+                dlgTeamDungeonSettlement.OnTeamDungeonBoxReward(args.M2CTeamDungeonBoxRewardResult);
+            }
 
             await ETTask.CompletedTask;
         }

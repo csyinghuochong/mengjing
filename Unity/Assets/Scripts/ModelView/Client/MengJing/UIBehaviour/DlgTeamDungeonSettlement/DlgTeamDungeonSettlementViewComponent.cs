@@ -41,74 +41,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageIconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIconImage == null )
-     			{
-		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SettlementItemList/TeamDungeonSettlementPlayer/E_ImageIcon");
-     			}
-     			return this.m_E_ImageIconImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_Text_NameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Text_NameText == null )
-     			{
-		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SettlementItemList/TeamDungeonSettlementPlayer/E_Text_Name");
-     			}
-     			return this.m_E_Text_NameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_Text_LevelText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Text_LevelText == null )
-     			{
-		    		this.m_E_Text_LevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SettlementItemList/TeamDungeonSettlementPlayer/E_Text_Level");
-     			}
-     			return this.m_E_Text_LevelText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_Text_DamageText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Text_DamageText == null )
-     			{
-		    		this.m_E_Text_DamageText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SettlementItemList/TeamDungeonSettlementPlayer/E_Text_Damage");
-     			}
-     			return this.m_E_Text_DamageText;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SelectEffectSetRectTransform
      	{
      		get
@@ -181,10 +113,6 @@ namespace ET.Client
 		{
 			this.m_E_Img_back2Button = null;
 			this.m_E_Img_back2Image = null;
-			this.m_E_ImageIconImage = null;
-			this.m_E_Text_NameText = null;
-			this.m_E_Text_LevelText = null;
-			this.m_E_Text_DamageText = null;
 			this.m_EG_SelectEffectSetRectTransform = null;
 			this.m_E_Button_exitButton = null;
 			this.m_E_Button_exitImage = null;
@@ -194,10 +122,6 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_Img_back2Button = null;
 		private UnityEngine.UI.Image m_E_Img_back2Image = null;
-		private UnityEngine.UI.Image m_E_ImageIconImage = null;
-		private UnityEngine.UI.Text m_E_Text_NameText = null;
-		private UnityEngine.UI.Text m_E_Text_LevelText = null;
-		private UnityEngine.UI.Text m_E_Text_DamageText = null;
 		private UnityEngine.RectTransform m_EG_SelectEffectSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Button_exitButton = null;
 		private UnityEngine.UI.Image m_E_Button_exitImage = null;
