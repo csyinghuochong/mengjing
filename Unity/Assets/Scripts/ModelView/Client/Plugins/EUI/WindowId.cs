@@ -183,5 +183,6 @@ namespace ET.Client
 		WindowID_OneSellSet,
 		WindowID_UnionApplyList,
 		WindowID_TeamDungeonPrepare,
+		WindowID_TeamDungeonSettlement,
 	}
 }
