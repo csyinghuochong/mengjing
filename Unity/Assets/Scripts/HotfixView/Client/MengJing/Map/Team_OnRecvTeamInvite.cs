@@ -11,8 +11,11 @@
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(scene, "组队邀请", $"{args.m2C_TeamInviteResult.TeamPlayerInfo.PlayerName}邀请你组队",
-                () => { TeamNetHelper.AgreeTeamInvite(scene, args.m2C_TeamInviteResult).Coroutine(); }).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(scene, "组队邀请", zstring.Format("{0}邀请你组队", args.m2C_TeamInviteResult.TeamPlayerInfo.PlayerName),
+                    () => { TeamNetHelper.AgreeTeamInvite(scene, args.m2C_TeamInviteResult).Coroutine(); }).Coroutine();
+            }
 
             await ETTask.CompletedTask;
         }
@@ -50,17 +53,9 @@
                 tip = "<color=#FDFB47>队伍内有人机,副本掉率将降低!</color>\n建议:和其他玩家组队爆率将获得大幅度提升\n";
             }
 
-            RecvTeamDungeonPrepare(scene, args).Coroutine();
-
-            await ETTask.CompletedTask;
-        }
-
-        private async ETTask RecvTeamDungeonPrepare(Scene scene, RecvTeamDungeonOpen args)
-        {
-            // UI uI = await UIHelper.Create(zoneScene, UIType.UITeamDungeonPrepare);
-            // uI.GetComponent<UITeamDungeonPrepareComponent>().OnUpdateUI(args.TeamInfo, ErrorCode.Err_HaveNotPrepare);
-            FlyTipComponent.Instance.ShowFlyTip("未创建 UITeamDungeonPrepareComponent");
-            await ETTask.CompletedTask;
+            await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonPrepare);
+            DlgTeamDungeonPrepare dlgTeamDungeonPrepare = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonPrepare>();
+            dlgTeamDungeonPrepare.OnUpdateUI(args.TeamInfo, ErrorCode.Err_HaveNotPrepare);
         }
     }
 
