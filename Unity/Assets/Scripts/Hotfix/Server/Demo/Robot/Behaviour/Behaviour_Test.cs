@@ -162,7 +162,7 @@ namespace ET
                 Console.WriteLine("去邮箱 领取信件");
                 await RobotHelper.GetMail(root);
 
-                Console.WriteLine("去宠物蛋培养 孵化宠物、抽蛋");
+                Console.WriteLine("去宠物蛋培养 孵化宠物、兑换宠物、抽蛋");
                 await RobotHelper.PetEgg(root);
 
                 Console.WriteLine("领红包");

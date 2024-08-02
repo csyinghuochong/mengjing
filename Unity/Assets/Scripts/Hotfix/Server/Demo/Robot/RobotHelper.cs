@@ -1307,6 +1307,7 @@ namespace ET.Client
             int npcid = 20000010;
             await RobotHelper.MoveToNpc(root, npcid);
 
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             PetComponentC petComponent = root.GetComponent<PetComponentC>();
             // 有宠物蛋孵化完成就领取宠物,有空位和蛋，就把蛋放上去孵化
             for (int index = 0; index < 3; index++)
@@ -1323,7 +1324,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetBagList();
+                    List<BagInfo> bagInfos = bagComponent.GetBagList();
                     for (int j = 0; j < bagInfos.Count; j++)
                     {
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[j].ItemID);
@@ -1337,7 +1338,27 @@ namespace ET.Client
                 }
             }
 
+            // 兑换宠物
+            for (int index = 1; index < 4; index++)
+            {
+                PetEggDuiHuanConfig cofig0 = PetEggDuiHuanConfigCategory.Instance.Get(index);
+                if (!bagComponent.CheckNeedItem(cofig0.CostItems))
+                {
+                    // 道具不足!
+                    return;
+                }
+
+                if (bagComponent.GetBagLeftCell() <= 1)
+                {
+                    // 背包空间不足！
+                    return;
+                }
+
+                await PetNetHelper.RequestPetEggDuiHuan(root, index);
+            }
+
             // 抽卡
+            
         }
     }
 }
