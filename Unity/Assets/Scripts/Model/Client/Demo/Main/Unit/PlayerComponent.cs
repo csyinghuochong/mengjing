@@ -28,6 +28,9 @@ namespace ET.Client
         public string Password { get; set; }
         
         public string LoginType;
+
+        public int VersionMode { get; set; }
+        
         public long CurrentRoleId { get; set; }
 
         public long LastTime = 0;

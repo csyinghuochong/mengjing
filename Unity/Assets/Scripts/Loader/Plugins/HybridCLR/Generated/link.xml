@@ -49,7 +49,6 @@
     <type fullname="System.Collections.Generic.SortedDictionary`2" preserve="all" />
     <type fullname="System.Collections.Generic.SortedDictionary`2/Enumerator" preserve="all" />
     <type fullname="System.Collections.Generic.SortedDictionary`2/ValueCollection" preserve="all" />
-    <type fullname="System.Diagnostics.Debug" preserve="all" />
     <type fullname="System.Net.DecompressionMethods" preserve="all" />
     <type fullname="System.Net.EndPoint" preserve="all" />
     <type fullname="System.Net.HttpStatusCode" preserve="all" />
@@ -97,7 +96,6 @@
     <type fullname="System.Runtime.CompilerServices.Unsafe" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Core">
-    <type fullname="ET.ABPathHelper" preserve="all" />
     <type fullname="ET.AEvent`2" preserve="all" />
     <type fullname="ET.AInvokeHandler`1" preserve="all" />
     <type fullname="ET.AInvokeHandler`2" preserve="all" />
@@ -244,20 +242,33 @@
     <type fullname="ET.UnOrderMultiMap`2" preserve="all" />
     <type fullname="ET.UniqueIdAttribute" preserve="all" />
     <type fullname="ET.UpdateSystem`1" preserve="all" />
-    <type fullname="ET.VersionMode" preserve="all" />
     <type fullname="ET.WinPeriod" preserve="all" />
     <type fullname="ET.World" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Loader">
+    <type fullname="Animancer.AnimancerComponent" preserve="all" />
+    <type fullname="Animancer.AnimancerEvent" preserve="all" />
+    <type fullname="Animancer.AnimancerEvent/Sequence" preserve="all" />
+    <type fullname="Animancer.AnimancerPlayable" preserve="all" />
+    <type fullname="Animancer.AnimancerState" preserve="all" />
+    <type fullname="Animancer.AnimancerTransition`1" preserve="all" />
+    <type fullname="Animancer.ClipState" preserve="all" />
+    <type fullname="Animancer.ClipTransition" preserve="all" />
+    <type fullname="Animancer.ITransition" preserve="all" />
     <type fullname="DG.Tweening.DOTweenModuleUI" preserve="all" />
     <type fullname="DoTweeningMove" preserve="all" />
+    <type fullname="ET.ABPathHelper" preserve="all" />
+    <type fullname="ET.AnimData" preserve="all" />
+    <type fullname="ET.AnimGroup" preserve="all" />
     <type fullname="ET.AssetBundleHelper" preserve="all" />
     <type fullname="ET.Client.GameObjectPoolHelper" preserve="all" />
     <type fullname="ET.Client.PoolInflationType" preserve="all" />
+    <type fullname="ET.Client.UILoginHelper" preserve="all" />
     <type fullname="ET.CodeLoader" preserve="all" />
     <type fullname="ET.GlobalComponent" preserve="all" />
     <type fullname="ET.GlobalConfig" preserve="all" />
     <type fullname="ET.Init" preserve="all" />
+    <type fullname="ET.MotionTransition" preserve="all" />
     <type fullname="ET.SoundData" preserve="all" />
     <type fullname="ET.UILayerScript" preserve="all" />
     <type fullname="HeadBarUI" preserve="all" />
@@ -273,6 +284,7 @@
     <type fullname="UnityEngine.UI.LoopVerticalScrollRect" preserve="all" />
     <type fullname="WorldPosiToUIPos" preserve="all" />
     <type fullname="XuLieZhen" preserve="all" />
+    <type fullname="zstring" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Mathematics">
     <type fullname="Unity.Mathematics.float2" preserve="all" />
@@ -299,7 +311,6 @@
     <type fullname="ET.ETTaskCompleted" preserve="all" />
     <type fullname="ET.ETTaskHelper" preserve="all" />
     <type fullname="ET.ETTask`1" preserve="all" />
-    <type fullname="NativeCollection.List`1" preserve="all" />
     <type fullname="TrueSync.FP" preserve="all" />
     <type fullname="TrueSync.TSMatrix" preserve="all" />
     <type fullname="TrueSync.TSQuaternion" preserve="all" />
@@ -398,7 +409,6 @@
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule">
     <type fullname="UnityEngine.HorizontalWrapMode" preserve="all" />
-    <type fullname="UnityEngine.TextMesh" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI">
     <type fullname="UnityEngine.EventSystems.BaseEventData" preserve="all" />

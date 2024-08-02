@@ -31,6 +31,7 @@ message Main2NetClient_Login // IRequest
 	string Password = 4;
 	int32 ServerId = 5;
 	int32 Relink = 6;
+	int32 VersionMode = 7;
 }
 
 message NetClient2Main_Login // IResponse

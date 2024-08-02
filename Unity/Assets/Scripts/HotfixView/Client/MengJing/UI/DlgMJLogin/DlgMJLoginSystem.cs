@@ -99,7 +99,7 @@ namespace ET.Client
             PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
 
-            await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text, 0);
+            await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text, 0, GlobalHelp.GetVersionMode());
         }
 
         public static void OnSelectServer(this DlgMJLogin self, ServerItem serverId)

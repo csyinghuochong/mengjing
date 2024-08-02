@@ -33,12 +33,12 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());
         }
         
-        public static async ETTask Login(Scene root, string account, string password, int reLink)
+        public static async ETTask Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             //登陆成功之后才有session.  才能call
-            await clientSenderCompnent.LoginAsync(account, password, reLink);
+            await clientSenderCompnent.LoginAsync(account, password, reLink, versionmode);
 
             if (reLink == 0)
             {
