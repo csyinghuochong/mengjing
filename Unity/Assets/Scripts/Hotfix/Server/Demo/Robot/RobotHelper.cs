@@ -1358,7 +1358,56 @@ namespace ET.Client
             }
 
             // 抽卡
+            int choukaType = 1;
+            if (bagComponent.GetBagLeftCell() < choukaType)
+            {
+                // 请预留足够的背包空间！
+                return;
+            }
+
+            if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
+            {
+                // 请清理一下宠物之核背包！
+                return;
+            }
+
+            if (petComponent.RolePetBag.Count >= GlobalValueConfigCategory.Instance.Get(119).Value2)
+            {
+                // 请及时清理探索宠物仓库！
+                return;
+            }
+
+            string needItems = GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[0];
+            if (choukaType == 1 && !bagComponent.CheckNeedItem(needItems))
+            {
+                // ErrorCode.ERR_ItemNotEnoughError);
+                return;
+            }
+
+            int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(40).Value.Split('@')[0]);
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            int exlporeNumber = UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>()
+                    .GetAsInt(NumericType.PetExploreNumber);
+            string[] set = GlobalValueConfigCategory.Instance.Get(107).Value.Split(';');
+            float discount;
+            if (exlporeNumber < int.Parse(set[0])) // 超过300次打8折
+            {
+                discount = 1;
+            }
+            else
+            {
+                discount = float.Parse(set[1]);
+            }
+
+            if (choukaType == 10 && userInfo.Diamond < (int)(needDimanond * discount))
+            {
+                // ErrorCode.ERR_DiamondNotEnoughError);
+                return;
+            }
+
+            await PetNetHelper.RequestPetEggChouKa(root, choukaType);
             
+            // 核心抽卡
         }
     }
 }
