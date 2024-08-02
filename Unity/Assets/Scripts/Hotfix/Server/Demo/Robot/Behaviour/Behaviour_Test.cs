@@ -153,8 +153,11 @@ namespace ET
                 Console.WriteLine("邮箱领取信件");
                 await RobotHelper.GetMail(root);
 
-                Console.WriteLine("去杂货店老板哪里买个东西");
+                Console.WriteLine("去杂货店老板 买个东西");
                 await RobotHelper.Mystery(root);
+
+                Console.WriteLine("去啄啄百货店 买个东西");
+                await RobotHelper.Store(root);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

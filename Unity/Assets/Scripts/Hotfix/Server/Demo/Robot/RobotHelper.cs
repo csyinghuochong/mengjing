@@ -1194,5 +1194,39 @@ namespace ET.Client
 
             await BagClientNetHelper.RquestMysteryBuy(root, mysteryItemInfo, npcid);
         }
+
+        public static async ETTask Store(Scene root)
+        {
+            int npcid = 20000002;
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
+            int shopSellid = npcConfig.ShopValue;
+
+            int playLv = root.GetComponent<UserInfoComponentC>().UserInfo.Lv;
+
+            List<int> ShowStores = new List<int>();
+            while (shopSellid != 0)
+            {
+                StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(shopSellid);
+
+                if (playLv < storeSellConfig.ShowRoleLvMin || playLv > storeSellConfig.ShowRoleLvMax)
+                {
+                    continue;
+                }
+
+                ShowStores.Add(shopSellid);
+                shopSellid = storeSellConfig.NextID;
+            }
+
+            if (ShowStores.Count == 0)
+            {
+                return;
+            }
+
+            int random = RandomHelper.RandomNumber(0, ShowStores.Count);
+
+            await BagClientNetHelper.RquestStoreBuy(root, ShowStores[random], 1);
+        }
     }
 }
