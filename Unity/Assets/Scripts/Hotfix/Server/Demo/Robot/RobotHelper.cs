@@ -1406,8 +1406,50 @@ namespace ET.Client
             }
 
             await PetNetHelper.RequestPetEggChouKa(root, choukaType);
-            
+
             // 核心抽卡
+            choukaType = 1;
+            if (bagComponent.GetBagLeftCell() < choukaType)
+            {
+                // 请预留足够的背包空间！
+                return;
+            }
+
+            if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
+            {
+                // 请清理一下宠物之核背包！
+                return;
+            }
+
+            needItems = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0];
+            if (choukaType == 1 && !bagComponent.CheckNeedItem(needItems))
+            {
+                // ErrorCode.ERR_ItemNotEnoughError
+                return;
+            }
+
+            string[] itemInfo10 = GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[0].Split(';');
+            exlporeNumber = UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>()
+                    .GetAsInt(NumericType.PetExploreNumber);
+            set = GlobalValueConfigCategory.Instance.Get(112).Value.Split(';');
+
+            if (exlporeNumber < int.Parse(set[0]))
+            {
+                discount = 1;
+            }
+            else
+            {
+                discount = float.Parse(set[1]);
+            }
+
+            long haveNumber10 = bagComponent.GetItemNumber(int.Parse(itemInfo10[0]));
+            if (choukaType == 10 && haveNumber10 < (int)(int.Parse(itemInfo10[1]) * discount))
+            {
+                // ErrorCode.ERR_ItemNotEnoughError
+                return;
+            }
+
+            await PetNetHelper.RequestPetHeXinChouKa(root, choukaType);
         }
     }
 }
