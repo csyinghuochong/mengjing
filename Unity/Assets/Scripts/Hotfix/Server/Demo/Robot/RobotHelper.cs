@@ -1210,10 +1210,10 @@ namespace ET.Client
             {
                 StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(shopSellid);
 
-                if (playLv < storeSellConfig.ShowRoleLvMin || playLv > storeSellConfig.ShowRoleLvMax)
-                {
-                    continue;
-                }
+                // if (playLv < storeSellConfig.ShowRoleLvMin || playLv > storeSellConfig.ShowRoleLvMax)
+                // {
+                //     continue;
+                // }
 
                 ShowStores.Add(shopSellid);
                 shopSellid = storeSellConfig.NextID;
