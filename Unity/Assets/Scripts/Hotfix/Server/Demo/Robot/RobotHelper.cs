@@ -1301,5 +1301,17 @@ namespace ET.Client
 
             await BagClientNetHelper.ItemInherit(root, equips[random].BagInfoID);
         }
+
+        public static async ETTask PetEgg(Scene root)
+        {
+            int npcid = 20000010;
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            // 有宠物蛋孵化完成就领取宠物
+
+            // 有空位和蛋，就把蛋放上去孵化
+
+            // 抽卡
+        }
     }
 }

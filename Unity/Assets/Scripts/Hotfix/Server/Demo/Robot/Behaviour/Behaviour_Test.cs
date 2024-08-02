@@ -35,6 +35,9 @@ namespace ET
                 // 尽量模拟真实玩家的行为测试所有外围系统协议
                 // 功能函数写在system，收发协议写在helper
 
+                // ！！！有问题的协议！！！
+                // 
+
                 Console.WriteLine("检测背包有可鉴定装备 直接鉴定");
                 await RobotHelper.JianDing(root);
 
@@ -133,9 +136,6 @@ namespace ET
                 Console.WriteLine("申请加入最弱的工会");
                 await RobotHelper.UnionApply(root);
 
-                // ！！！有问题的协议！！！
-                // 
-
                 Console.WriteLine("使用一个精灵");
                 await RobotHelper.JingLingUse(root);
 
@@ -161,6 +161,9 @@ namespace ET
 
                 Console.WriteLine("去邮箱 领取信件");
                 await RobotHelper.GetMail(root);
+
+                Console.WriteLine("去宠物蛋培养 孵化宠物、抽蛋");
+                await RobotHelper.PetEgg(root);
 
                 Console.WriteLine("领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
