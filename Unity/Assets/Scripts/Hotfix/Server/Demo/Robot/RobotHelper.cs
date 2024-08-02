@@ -1234,7 +1234,17 @@ namespace ET.Client
             int npcid = 20000004;
             await RobotHelper.MoveToNpc(root, npcid);
 
-            await ETTask.CompletedTask;
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+
+            List<BagInfo> equips = bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip);
+            if (equips.Count == 0)
+            {
+                return;
+            }
+
+            int random = RandomHelper.RandomNumber(0, equips.Count);
+
+            await BagClientNetHelper.RquestItemXiLian(root, equips[random].BagInfoID, 1);
         }
     }
 }
