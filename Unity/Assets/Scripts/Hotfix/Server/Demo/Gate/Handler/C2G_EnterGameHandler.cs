@@ -136,9 +136,8 @@ namespace ET.Server
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;
-                        Log.Debug($"M2M_UnitTransferRequest_a:{unit.Components.Count}");
+ 
                         player.ChatInfoInstanceId = await EnterWorldChatServer(unit); //登录聊天服
-                        Log.Debug($"M2M_UnitTransferRequest_b:{unit.Components.Count}");
                         // 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
                         unit.OnLogin(session.RemoteAddress.ToString(), "");
 

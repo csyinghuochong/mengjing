@@ -111,6 +111,9 @@ namespace ET
         [MemoryPackOrder(4)]
         public int ServerId { get; set; }
 
+        [MemoryPackOrder(5)]
+        public int Relink { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -123,6 +126,7 @@ namespace ET
             this.Account = default;
             this.Password = default;
             this.ServerId = default;
+            this.Relink = default;
 
             ObjectPool.Instance.Recycle(this);
         }

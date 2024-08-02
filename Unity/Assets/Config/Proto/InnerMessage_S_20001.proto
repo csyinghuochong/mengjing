@@ -167,6 +167,7 @@ message R2L_LoginAccountRequest // IRequest
 {
 	int32 RpcId = 1;
 	string AccountName = 2;
+	int32 Relink = 4;
 }
 
 message L2R_LoginAccountRequest // IResponse
@@ -181,6 +182,7 @@ message L2G_DisconnectGateUnit // IRequest
 {
 	int32 RpcId = 1;
 	string AccountName = 2;
+	int32 ReLink = 4;
 }
 
 message G2L_DisconnectGateUnit // IResponse

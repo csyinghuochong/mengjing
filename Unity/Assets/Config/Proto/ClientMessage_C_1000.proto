@@ -30,6 +30,7 @@ message Main2NetClient_Login // IRequest
 	string Account = 3;
 	string Password = 4;
 	int32 ServerId = 5;
+	int32 Relink = 6;
 }
 
 message NetClient2Main_Login // IResponse

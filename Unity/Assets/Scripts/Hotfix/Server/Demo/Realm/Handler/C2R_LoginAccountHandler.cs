@@ -171,6 +171,7 @@ namespace ET.Server
                     
                     R2L_LoginAccountRequest r2LLoginAccountRequest = R2L_LoginAccountRequest.Create();
                     r2LLoginAccountRequest.AccountName = request.Account;
+                    r2LLoginAccountRequest.Relink = request.Relink;
                     StartSceneConfig loginCenterConfig = StartSceneConfigCategory.Instance.LoginCenterConfig;
                     var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>()
                             .Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;

@@ -6,7 +6,6 @@ namespace ET.Server
 	{
 		protected override async ETTask Run(Unit unit, C2M_PathfindingResult message)
 		{
-			Log.Debug($"C2M_PathfindingResultHandler: { unit.Id}");
 			unit.FindPathMoveToAsync(message.Position).Coroutine();
 			await ETTask.CompletedTask;
 		}

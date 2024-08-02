@@ -52,7 +52,7 @@ namespace ET.Client
             return r2CServerList;
         }
 
-        public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password)
+        public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -62,6 +62,7 @@ namespace ET.Client
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
             main2NetClientLogin.Account      = account;
             main2NetClientLogin.Password     = password;
+            main2NetClientLogin.Relink       = relink;
             main2NetClientLogin.ServerId     = playerComponent.ServerItem.ServerId;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
             

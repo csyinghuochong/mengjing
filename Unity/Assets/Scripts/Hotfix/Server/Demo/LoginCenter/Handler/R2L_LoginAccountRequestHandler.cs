@@ -20,6 +20,7 @@ namespace ET.Server
                 
                 L2G_DisconnectGateUnit l2GDisconnectGateUnit = L2G_DisconnectGateUnit.Create();
                 l2GDisconnectGateUnit.AccountName = request.AccountName;
+                l2GDisconnectGateUnit.ReLink = request.Relink;
                 var g2LDisconnectGateUnit = (G2L_DisconnectGateUnit) await scene.GetComponent<MessageSender>()
                         .Call(gateConfig.ActorId, l2GDisconnectGateUnit);
 

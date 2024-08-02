@@ -34,6 +34,11 @@ namespace ET.Server
                 }
                 player.RemoveComponent<PlayerOfflineOutTimeComponent>();
                 player.AddComponent<PlayerOfflineOutTimeComponent>();
+                
+                if (request.ReLink == 0)
+                {
+                    await  DisconnectHelper.KickPlayer(player);
+                }
             }
         }
     }

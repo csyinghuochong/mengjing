@@ -743,6 +743,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public string AccountName { get; set; }
 
+        [MemoryPackOrder(3)]
+        public int Relink { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -752,6 +755,7 @@ namespace ET
 
             this.RpcId = default;
             this.AccountName = default;
+            this.Relink = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -806,6 +810,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public string AccountName { get; set; }
 
+        [MemoryPackOrder(3)]
+        public int ReLink { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -815,6 +822,7 @@ namespace ET
 
             this.RpcId = default;
             this.AccountName = default;
+            this.ReLink = default;
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -305,8 +305,8 @@ message C2R_LoginAccount // ISessionRequest
 	string  Account = 2;  // 帐号
 	string  Password = 3;  // 密码
 	string  Token = 4;  
-	string  ThirdLogin = 5;  
-	bool Relink = 6;
+	string  ThirdLogin = 5;
+	int32 Relink = 6;
 	int32 age_type = 7;
 	int32  ServerId = 8;
 }

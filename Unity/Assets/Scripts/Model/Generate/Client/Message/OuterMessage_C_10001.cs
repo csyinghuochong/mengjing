@@ -1339,7 +1339,7 @@ namespace ET
         public string ThirdLogin { get; set; }
 
         [MemoryPackOrder(5)]
-        public bool Relink { get; set; }
+        public int Relink { get; set; }
 
         [MemoryPackOrder(6)]
         public int age_type { get; set; }
