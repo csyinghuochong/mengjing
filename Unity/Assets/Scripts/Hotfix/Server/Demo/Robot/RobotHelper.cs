@@ -1307,9 +1307,35 @@ namespace ET.Client
             int npcid = 20000010;
             await RobotHelper.MoveToNpc(root, npcid);
 
-            // 有宠物蛋孵化完成就领取宠物
-
-            // 有空位和蛋，就把蛋放上去孵化
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            // 有宠物蛋孵化完成就领取宠物,有空位和蛋，就把蛋放上去孵化
+            for (int index = 0; index < 3; index++)
+            {
+                if (petComponent.RolePetEggs[index].KeyId > 0)
+                {
+                    long timeNow = petComponent.RolePetEggs[index].Value - TimeHelper.ServerNow();
+                    if (timeNow < 0)
+                    {
+                        // 孵化结束，取出
+                        await PetNetHelper.RequestPetEggOpen(root, index);
+                        return;
+                    }
+                }
+                else
+                {
+                    List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetBagList();
+                    for (int j = 0; j < bagInfos.Count; j++)
+                    {
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[j].ItemID);
+                        if (itemConfig.ItemSubType == 102 && itemConfig.ItemType == 1)
+                        {
+                            // 放蛋
+                            await PetNetHelper.RequestPetEggPut(root, index, bagInfos[j].BagInfoID);
+                            break;
+                        }
+                    }
+                }
+            }
 
             // 抽卡
         }
