@@ -169,7 +169,7 @@ namespace ET
                 await RobotHelper.ChouKa(root);
 
                 Console.WriteLine("去裁缝大师 做衣服");
-                // 。。。
+                await RobotHelper.MakeLearn(root);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

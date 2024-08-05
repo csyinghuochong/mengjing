@@ -1459,5 +1459,11 @@ namespace ET.Client
 
             await BagClientNetHelper.ChouKa(root, 1001, 1);
         }
+
+        public static async ETTask MakeLearn(Scene root)
+        {
+            int npcid = 20000012;
+            await RobotHelper.MoveToNpc(root, npcid);
+        }
     }
 }
