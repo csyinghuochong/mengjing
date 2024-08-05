@@ -472,12 +472,12 @@ namespace ET.Client
             {
                 if (npc.GetComponent<AnimatorComponent>() != null)
                 {
-                    npc.GetComponent<AnimatorComponent>().Play(MotionType.SelectNpc);
+                    npc.GetComponent<AnimatorComponent>().Play(MotionType.ShowSelect);
                 }
 
                 if (npc.GetComponent<AnimationComponent>() != null)
                 {
-                    npc.GetComponent<AnimationComponent>().Play(MotionType.SelectNpc);
+                    npc.GetComponent<AnimationComponent>().Play(MotionType.ShowSelect);
                 }
             }
 

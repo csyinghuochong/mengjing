@@ -16,7 +16,7 @@ namespace ET.Client
         public const string CriAct = "CriAct";
         public const string Death = "Death";
         public const string Hui = "Hui";
-        public const string SelectNpc = "SelectNpc";
+        public const string ShowSelect = "ShowSelect";
     }
 
     [ComponentOf]

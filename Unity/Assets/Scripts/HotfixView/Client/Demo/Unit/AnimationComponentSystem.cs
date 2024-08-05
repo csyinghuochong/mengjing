@@ -67,7 +67,7 @@ namespace ET.Client
                 self.ClipTransitions.Add(motionTransition.StateName, motionTransition);
             }
 
-            if (animData.AnimGroup.name == "HeroAnimGroup")
+            if (animData.AnimGroup.name == "Role_FaShi")
             {
                 // 动画播放完毕后还没通知下一个State则自动转到Idle
                 self.SetOnEnd("Act_1", () => { Log.Debug("Act_1播放完毕"); self.Play("Idle"); });
@@ -90,7 +90,7 @@ namespace ET.Client
                 self.SetOnEnd("Skill_10", () => { Log.Debug("Skill_10播放完毕"); self.Play("Idle"); });
                 self.SetOnEnd("Skill_11", () => { Log.Debug("Skill_11播放完毕"); self.Play("Idle"); });
                 
-                self.SetOnEnd("SelectNpc", () => { Log.Debug("SelectNpc播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("ShowSelect", () => { Log.Debug("ShowSelect播放完毕"); self.Play("Idle"); });
                 self.SetOnEnd("Speak", () => { Log.Debug("Speak播放完毕"); self.Play("Idle"); });
             }
             else if (animData.AnimGroup.name == "MonsterAnimGroup")
