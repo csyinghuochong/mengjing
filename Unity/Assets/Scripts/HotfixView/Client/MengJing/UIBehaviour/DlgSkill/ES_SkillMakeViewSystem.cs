@@ -299,7 +299,7 @@ namespace ET.Client
 
             BagInfo bagInfo = BagInfo.Create();
             bagInfo.ItemID = equipMakeConfig.MakeItemID;
-            self.ES_CommonItem_0.UpdateItem(bagInfo, ItemOperateEnum.MakeItem);
+            self.ES_CommonItem_0.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem_0.E_ItemNumText.gameObject.SetActive(false);
 
             string needItems = equipMakeConfig.NeedItems;

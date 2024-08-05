@@ -177,6 +177,8 @@ namespace ET
                 Console.WriteLine("去炼金大师");
                 await RobotHelper.MakeLearn(root, 20000014);
 
+                Console.WriteLine("去转职大师");
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
