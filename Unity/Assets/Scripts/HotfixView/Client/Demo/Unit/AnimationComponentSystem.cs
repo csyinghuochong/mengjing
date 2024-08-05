@@ -59,9 +59,44 @@ namespace ET.Client
                 return;
             }
 
-            foreach (MotionTransition motionTransition in animData.AnimGroup.Animations)
+            // ！！！克隆一个ScriptableObject，不然引用的是同一个，设置OnEnd会出问题
+            self.AnimGroup = UnityEngine.Object.Instantiate(animData.AnimGroup);
+            foreach (MotionTransition motionTransition in self.AnimGroup.Animations)
             {
                 self.ClipTransitions.Add(motionTransition.StateName, motionTransition);
+            }
+
+            if (animData.AnimGroup.name == "HeroAnimGroup")
+            {
+                // 动画播放完毕后还没通知下一个State则自动转到Idle
+                self.SetOnEnd("Act_1", () => { Log.Debug("Act_1播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Act_2", () => { Log.Debug("Act_2播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Act_3", () => { Log.Debug("Act_3播放完毕"); self.Play("Idle"); });
+                
+                self.SetOnEnd("Act_11", () => { Log.Debug("Act_11播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Act_12", () => { Log.Debug("Act_12播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Act_13", () => { Log.Debug("Act_13播放完毕"); self.Play("Idle"); });
+                
+                self.SetOnEnd("Skill_1", () => { Log.Debug("Skill_1播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_2", () => { Log.Debug("Skill_2播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_3", () => { Log.Debug("Skill_3播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_4", () => { Log.Debug("Skill_4播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_5", () => { Log.Debug("Skill_5播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_6", () => { Log.Debug("Skill_6播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_7", () => { Log.Debug("Skill_7播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_8", () => { Log.Debug("Skill_8播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_9", () => { Log.Debug("Skill_9播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_10", () => { Log.Debug("Skill_10播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Skill_11", () => { Log.Debug("Skill_11播放完毕"); self.Play("Idle"); });
+                
+                self.SetOnEnd("SelectNpc", () => { Log.Debug("SelectNpc播放完毕"); self.Play("Idle"); });
+                self.SetOnEnd("Speak", () => { Log.Debug("Speak播放完毕"); self.Play("Idle"); });
+            }
+            else if (animData.AnimGroup.name == "MonsterAnimGroup")
+            {
+            }
+            else if (animData.AnimGroup.name == "PetAnimGroup")
+            {
             }
         }
 

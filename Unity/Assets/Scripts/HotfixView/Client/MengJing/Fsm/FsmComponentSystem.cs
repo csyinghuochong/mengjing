@@ -34,60 +34,12 @@ namespace ET.Client
             bool idle = moveComponent == null || moveComponent.IsArrived();
             self.ChangeState(idle ? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
             self.WaitIdleTime = 0;
-
-            if (SettingData.AnimController == 1)
-            {
-                self.InitAnimTrans();
-            }
         }
 
         [EntitySystem]
         private static void Destroy(this FsmComponent self)
         {
             self.EndTimer();
-        }
-
-        public static void InitAnimTrans(this FsmComponent self)
-        {
-            AnimationComponent animationComponent = null;
-            Unit unit = self.GetParent<Unit>();
-            animationComponent = unit.GetComponent<AnimationComponent>();
-            if (animationComponent == null)
-            {
-                return;
-            }
-
-            if (unit.Type == UnitType.Player)
-            {
-                // 动画播放完毕后还没通知下一个State则自动转到Idle
-                animationComponent.SetOnEnd("Act_1", () => { Log.Debug("Act_1播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Act_2", () => { Log.Debug("Act_2播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Act_3", () => { Log.Debug("Act_3播放完毕"); animationComponent.Play("Idle"); });
-
-                animationComponent.SetOnEnd("Act_11", () => { Log.Debug("Act_11播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Act_12", () => { Log.Debug("Act_12播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Act_13", () => { Log.Debug("Act_13播放完毕"); animationComponent.Play("Idle"); });
-
-                animationComponent.SetOnEnd("Skill_1", () => { Log.Debug("Skill_1播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_2", () => { Log.Debug("Skill_2播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_3", () => { Log.Debug("Skill_3播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_4", () => { Log.Debug("Skill_4播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_5", () => { Log.Debug("Skill_5播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_6", () => { Log.Debug("Skill_6播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_7", () => { Log.Debug("Skill_7播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_8", () => { Log.Debug("Skill_8播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_9", () => { Log.Debug("Skill_9播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_10", () => { Log.Debug("Skill_10播放完毕"); animationComponent.Play("Idle"); });
-                animationComponent.SetOnEnd("Skill_11", () => { Log.Debug("Skill_11播放完毕"); animationComponent.Play("Idle"); });
-
-                animationComponent.SetOnEnd("SelectNpc", () => { Log.Debug("SelectNpc播放完毕"); animationComponent.Play("Idle"); });
-            }
-            else if (unit.Type == UnitType.Monster)
-            {
-            }
-            else if (unit.Type == UnitType.Pet)
-            {
-            }
         }
 
         public static void Check(this FsmComponent self)
