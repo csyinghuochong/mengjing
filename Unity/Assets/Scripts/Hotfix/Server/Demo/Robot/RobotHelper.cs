@@ -1460,12 +1460,11 @@ namespace ET.Client
             await BagClientNetHelper.ChouKa(root, 1001, 1);
         }
 
-        public static async ETTask MakeLearn(Scene root)
+        public static async ETTask MakeLearn(Scene root, int npcid)
         {
-            int npcid = 20000012;
             await RobotHelper.MoveToNpc(root, npcid);
-            
-            
+
+            // await SkillNetHelper.MakeLearn(root, self.MakeId, self.Plan);
         }
     }
 }

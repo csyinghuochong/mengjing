@@ -168,8 +168,14 @@ namespace ET
                 Console.WriteLine("去幸运探宝 抽卡");
                 await RobotHelper.ChouKa(root);
 
-                Console.WriteLine("去裁缝大师 做衣服");
-                await RobotHelper.MakeLearn(root);
+                Console.WriteLine("去裁缝大师");
+                await RobotHelper.MakeLearn(root, 20000012);
+
+                Console.WriteLine("去锻造大师");
+                await RobotHelper.MakeLearn(root, 20000013);
+
+                Console.WriteLine("去炼金大师");
+                await RobotHelper.MakeLearn(root, 20000014);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
