@@ -9,6 +9,7 @@ namespace ET
     {
         private AnimatorController animatorController;
         private string assetName = "New AnimGroup";
+        private string folderPath = "Assets/Res/AnimGroup";
 
         [MenuItem("Tools/Generate or Update AnimGroup")]
         private static void ShowWindow()
@@ -31,6 +32,28 @@ namespace ET
 
             assetName = EditorGUILayout.TextField("生成Asset的名字", assetName);
 
+            EditorGUILayout.LabelField("文件夹路径");
+            EditorGUILayout.BeginHorizontal();
+            folderPath = EditorGUILayout.TextField(folderPath);
+
+            if (GUILayout.Button("Browse", GUILayout.Width(75)))
+            {
+                string selectedFolder = EditorUtility.OpenFolderPanel("选择文件夹", folderPath, "");
+                if (!string.IsNullOrEmpty(selectedFolder))
+                {
+                    if (selectedFolder.StartsWith(Application.dataPath))
+                    {
+                        folderPath = "Assets" + selectedFolder.Substring(Application.dataPath.Length);
+                    }
+                    else
+                    {
+                        Log.Error("Selected folder is not within the Unity project.");
+                    }
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+
             if (GUILayout.Button("Generate or Update"))
             {
                 GenerateOrUpdateAnimationStateData();
@@ -47,11 +70,17 @@ namespace ET
 
             if (string.IsNullOrEmpty(this.assetName))
             {
-                Log.Error("请输入生成asset的名字");
+                Log.Error("请输入生成Asset的名字");
                 return;
             }
 
-            string path = $"Assets/Res/AnimGroup/{this.assetName}.asset";
+            if (string.IsNullOrEmpty(folderPath) || !folderPath.StartsWith("Assets"))
+            {
+                Log.Error("请输入正确的文件路径");
+                return;
+            }
+
+            string path = $"{this.folderPath}/{this.assetName}.asset";
             AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(path);
 
             if (animGroup == null)
