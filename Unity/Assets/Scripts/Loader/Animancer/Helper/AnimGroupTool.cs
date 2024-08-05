@@ -11,7 +11,7 @@ namespace ET
         private string assetName = "New AnimGroup";
         private string folderPath = "Assets/Res/AnimGroup";
 
-        [MenuItem("Tools/Generate AnimGroup")]
+        [MenuItem("Tools/Animancer/Generate AnimGroup")]
         private static void ShowWindow()
         {
             var window = GetWindow<AnimGroupTool>("Generate AnimGroup");
