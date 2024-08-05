@@ -26,6 +26,17 @@ namespace ET.Client
 
         private static void OnMakeLearnItemsRefresh(this DlgMakeLearn self, Transform transform, int index)
         {
+            // 如果有 选中高亮 等功能，则要添加此段类型代码。
+            // 原因：因为滚动组件是从对象池获取gameobject，当item不显示时并不会让item.uiTransform = null，所以可能导致不同item引用同一个gameobject。
+            // 这样会出现点击了，但是没有高亮效果，因为激活物体后又隐藏物体。
+            foreach (Scroll_Item_MakeLearnItem item in self.ScrollItemMakeLearnItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
             Scroll_Item_MakeLearnItem scrollItemMakeLearnItem = self.ScrollItemMakeLearnItems[index].BindTrans(transform);
             scrollItemMakeLearnItem.SetClickHandler((int itemid) => { self.OnSelectLearnItem(itemid); });
             scrollItemMakeLearnItem.OnUpdateUI(self.ShowMakeLearns[index]);

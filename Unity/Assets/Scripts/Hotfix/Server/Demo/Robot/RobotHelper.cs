@@ -1464,6 +1464,8 @@ namespace ET.Client
         {
             int npcid = 20000012;
             await RobotHelper.MoveToNpc(root, npcid);
+            
+            
         }
     }
 }
