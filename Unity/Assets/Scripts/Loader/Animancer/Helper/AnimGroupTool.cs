@@ -11,7 +11,7 @@ namespace ET
         private string assetName = "New AnimGroup";
         private string folderPath = "Assets/Res/AnimGroup";
 
-        [MenuItem("Tools/Generate or Update AnimGroup")]
+        [MenuItem("Tools/Generate AnimGroup")]
         private static void ShowWindow()
         {
             var window = GetWindow<AnimGroupTool>("Generate AnimGroup");
@@ -20,8 +20,6 @@ namespace ET
 
         private void OnGUI()
         {
-            GUILayout.Label("Generate AnimGroup", EditorStyles.boldLabel);
-
             EditorGUI.BeginChangeCheck();
             animatorController =
                     (AnimatorController)EditorGUILayout.ObjectField("Animator Controller", animatorController, typeof(AnimatorController), false);
@@ -30,15 +28,15 @@ namespace ET
                 assetName = animatorController.name;
             }
 
-            assetName = EditorGUILayout.TextField("生成Asset的名字", assetName);
+            assetName = EditorGUILayout.TextField("Asset Name", assetName);
 
-            EditorGUILayout.LabelField("文件夹路径");
             EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Folder Path", GUILayout.Width(80));
             folderPath = EditorGUILayout.TextField(folderPath);
 
             if (GUILayout.Button("Browse", GUILayout.Width(75)))
             {
-                string selectedFolder = EditorUtility.OpenFolderPanel("选择文件夹", folderPath, "");
+                string selectedFolder = EditorUtility.OpenFolderPanel("Select Folder", "Assets", "");
                 if (!string.IsNullOrEmpty(selectedFolder))
                 {
                     if (selectedFolder.StartsWith(Application.dataPath))
@@ -54,7 +52,7 @@ namespace ET
 
             EditorGUILayout.EndHorizontal();
 
-            if (GUILayout.Button("Generate or Update"))
+            if (GUILayout.Button("Generate"))
             {
                 GenerateOrUpdateAnimationStateData();
             }
