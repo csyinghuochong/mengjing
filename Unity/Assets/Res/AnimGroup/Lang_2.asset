@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da39ef3be0ccfd9459853f4d73a8251f, type: 3}
-  m_Name: MonsterAnimGroup
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Lang_2
   m_EditorClassIdentifier: 
   Animations:
   - _FadeDuration: 0.25
@@ -28,31 +28,11 @@ MonoBehaviour:
       _NormalizedTimes: []
       _Callbacks: []
       _Names: []
-    _Clip: {fileID: 7400012, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
-    _Speed: 1
-    _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
-    StateName: Death
-  - _FadeDuration: 0.25
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
     _Clip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
     _ApplyRootMotion: 0
     StateName: Walk
-  - _FadeDuration: 0.25
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
-    _Speed: 1
-    _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
-    StateName: Run
   - _FadeDuration: 0.25
     _Events:
       _NormalizedTimes: []
@@ -73,3 +53,23 @@ MonoBehaviour:
     _NormalizedStartTime: NaN
     _ApplyRootMotion: 0
     StateName: Hit
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Run
+  - _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400012, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: NaN
+    _ApplyRootMotion: 0
+    StateName: Death

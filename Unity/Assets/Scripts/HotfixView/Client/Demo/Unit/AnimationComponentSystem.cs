@@ -22,6 +22,7 @@ namespace ET.Client
         public static void UpdateAnimData(this AnimationComponent self, GameObject go)
         {
             self.Animancer = null;
+            self.AnimGroup = null;
             self.ClipTransitions.Clear();
             self.CurrentAnimation = string.Empty;
 
@@ -49,7 +50,7 @@ namespace ET.Client
                 return;
             }
 
-            if (animData.AnimGroup.Animations.Count == 0)
+            if (animData.AnimGroup.Animations.Length == 0)
             {
                 using (zstring.Block())
                 {
@@ -59,7 +60,7 @@ namespace ET.Client
                 return;
             }
 
-            // ！！！克隆一个ScriptableObject，不然引用的是同一个，设置OnEnd会出问题
+            // ！！！克隆一个ScriptableObject，不然直接引用的是同一个，设置OnEnd会出问题
             self.AnimGroup = UnityEngine.Object.Instantiate(animData.AnimGroup);
             foreach (MotionTransition motionTransition in self.AnimGroup.Animations)
             {

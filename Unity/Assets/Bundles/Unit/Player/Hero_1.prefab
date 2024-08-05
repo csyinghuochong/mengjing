@@ -2258,7 +2258,7 @@ GameObject:
   - component: {fileID: 7778671190638578803}
   - component: {fileID: 7778671190638578809}
   - component: {fileID: -7265765736673107865}
-  - component: {fileID: 8534988859018070902}
+  - component: {fileID: 2083225230435313397}
   - component: {fileID: 2857056453225311360}
   m_Layer: 14
   m_Name: Hero_1
@@ -2325,7 +2325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Animator: {fileID: 7778671190638578809}
   _ActionOnDisable: 0
---- !u!114 &8534988859018070902
+--- !u!114 &2083225230435313397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2334,10 +2334,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7778671190638578811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd4373935cb14b34da08554bbccc4e01, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 55de20e09964c804eb24a5d115f48661, type: 2}
+  AnimGroup: {fileID: 11400000, guid: e28dd1ad6c2f7254f85de7b8d69fb52e, type: 2}
 --- !u!114 &2857056453225311360
 MonoBehaviour:
   m_ObjectHideFlags: 0
