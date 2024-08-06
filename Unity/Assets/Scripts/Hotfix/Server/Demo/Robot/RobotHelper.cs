@@ -1521,5 +1521,26 @@ namespace ET.Client
                 await SkillNetHelper.MakeLearn(root, showMakeLearns[i], plan == -1 ? 1 : plan);
             }
         }
+
+        public static async ETTask OccTwo(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 20000015);
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            int occ = userInfoComponent.UserInfo.Occ;
+            OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(occ);
+
+            int index = RandomHelper.RandomNumber(0, occupationConfig.OccTwoID.Length);
+            
+            int occTwoId = occupationConfig.OccTwoID[index];
+
+            if (userInfoComponent.UserInfo.OccTwo != 0)
+            {
+                // 不能重复转职!
+                return;
+            }
+
+            await SkillNetHelper.ChangeOccTwoRequest(root, occTwoId);
+        }
     }
 }

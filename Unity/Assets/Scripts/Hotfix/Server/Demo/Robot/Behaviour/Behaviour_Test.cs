@@ -178,6 +178,7 @@ namespace ET
                 await RobotHelper.MakeLearn(root, 20000014);
 
                 Console.WriteLine("去转职大师");
+                await RobotHelper.OccTwo(root);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
