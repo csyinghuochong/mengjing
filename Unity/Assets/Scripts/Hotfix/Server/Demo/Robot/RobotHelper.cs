@@ -1852,5 +1852,16 @@ namespace ET.Client
 
             await ETTask.CompletedTask;
         }
+
+        public static async ETTask TaskGet(Scene root)
+        {
+            int npcid = 20000024;
+
+            await RobotHelper.MoveToNpc(root, npcid);
+            
+            
+
+            await ETTask.CompletedTask;
+        }
     }
 }

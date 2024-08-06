@@ -211,6 +211,9 @@ namespace ET
                 Console.WriteLine("去神器商人");
                 await RobotHelper.ShenQiMake(root);
 
+                Console.WriteLine("任务使者:赛利");
+                await RobotHelper.TaskGet(root);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
