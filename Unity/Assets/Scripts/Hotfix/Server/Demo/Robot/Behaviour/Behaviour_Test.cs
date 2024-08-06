@@ -212,7 +212,7 @@ namespace ET
                 await RobotHelper.ShenQiMake(root);
 
                 Console.WriteLine("任务使者:赛利");
-                await RobotHelper.TaskGet(root);
+                await RobotHelper.TaskGet(root, 20000024);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

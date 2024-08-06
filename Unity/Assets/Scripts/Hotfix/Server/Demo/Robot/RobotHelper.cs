@@ -1853,13 +1853,99 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        public static async ETTask TaskGet(Scene root)
+        public static async ETTask TaskGet(Scene root, int npcid)
         {
-            int npcid = 20000024;
-
             await RobotHelper.MoveToNpc(root, npcid);
-            
-            
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            TaskComponentC taskComponent = root.GetComponent<TaskComponentC>();
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+
+            //获取npc任务
+            List<int> taskids = new List<int>();
+
+            List<TaskPro> taskProCompleted = taskComponent.GetCompltedTaskByNpc(npcid);
+            for (int i = 0; i < taskProCompleted.Count; i++)
+            {
+                taskids.Add(taskProCompleted[i].taskID);
+            }
+
+            taskids.AddRange(taskComponent.GetOpenTaskIds(npcid));
+
+            List<int> addTaskids = new List<int>();
+            if (npcid == 20000024) //任务使者：赛利
+            {
+                int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
+                if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
+                {
+                    addTaskids.Add(weeklyTask);
+                }
+
+                int dailyTaskId = numericComponent.GetAsInt(NumericType.DailyTaskID);
+                if (dailyTaskId > 0 && taskComponent.GetTaskById(dailyTaskId) == null)
+                {
+                    addTaskids.Add(dailyTaskId);
+                }
+            }
+
+            if (npcid == 20000102) //家族任务
+            {
+                int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
+                if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)
+                {
+                    addTaskids.Add(unionTaskId);
+                }
+
+                int ringTaskId = numericComponent.GetAsInt(NumericType.RingTaskId);
+                if (ringTaskId > 0 && taskComponent.GetTaskById(ringTaskId) == null)
+                {
+                    addTaskids.Add(ringTaskId);
+                }
+            }
+
+            taskids.AddRange(addTaskids);
+
+            //给予任务
+            List<TaskPro> taskPros = taskComponent.RoleTaskList;
+            for (int i = 0; i < taskPros.Count; i++)
+            {
+                if (taskids.Contains(taskPros[i].taskID))
+                {
+                    continue;
+                }
+
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
+                if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
+                    && taskConfig.CompleteNpcID == npcid)
+                {
+                    taskids.Add(taskPros[i].taskID);
+                }
+                else if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25) &&
+                         taskConfig.TaskType == TaskTypeEnum.Ring && npcid == 20000102)
+                {
+                    // 家族给予任务可以CompleteNpcID==0，找家族任务NPC提交
+                    taskids.Add(taskPros[i].taskID);
+                }
+            }
+
+            foreach (int taskid in taskids)
+            {
+                TaskPro taskPro = taskComponent.GetTaskById(taskid);
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
+                if (taskConfig.TargetType == TaskTargetType.GiveItem_10 || taskConfig.TargetType == TaskTargetType.GivePet_25)
+                {
+                    // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(taskPro != null);
+                    // self.View.E_ButtonGetButton.gameObject.SetActive(taskPro == null);
+                }
+                else
+                {
+                    bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
+                    Log.Info($"是否完成 {isCompleted}");
+                    // self.View.E_BtnCommitTask1Button.gameObject.SetActive(isCompleted);
+                    // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
+                    // self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
+                }
+            }
 
             await ETTask.CompletedTask;
         }
