@@ -1934,16 +1934,28 @@ namespace ET.Client
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
                 if (taskConfig.TargetType == TaskTargetType.GiveItem_10 || taskConfig.TargetType == TaskTargetType.GivePet_25)
                 {
-                    // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(taskPro != null);
-                    // self.View.E_ButtonGetButton.gameObject.SetActive(taskPro == null);
+                    if (taskPro == null)
+                    {
+                        await TaskClientNetHelper.RequestGetTask(root, taskid);
+                    }
+                    else
+                    {
+                        // TODO UIGiveTask..
+                        // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(taskPro != null);
+                    }
                 }
                 else
                 {
                     bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
                     Log.Info($"是否完成 {isCompleted}");
-                    // self.View.E_BtnCommitTask1Button.gameObject.SetActive(isCompleted);
-                    // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
-                    // self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
+                    if (isCompleted)
+                    {
+                        await TaskClientNetHelper.RequestCommitTask(root, taskid, 0);
+                    }
+                    else
+                    {
+                        await TaskClientNetHelper.RequestGetTask(root, taskid);
+                    }
                 }
             }
 
