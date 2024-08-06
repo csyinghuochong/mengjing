@@ -1582,5 +1582,10 @@ namespace ET.Client
             await PaiMaiNetHelper.PaiMaiBuy(root, response.PaiMaiItemInfos[index], 0,
                 UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber));
         }
+
+        public static async ETTask PaiMaiSell(Scene root)
+        {
+            await ETTask.CompletedTask;
+        }
     }
 }
