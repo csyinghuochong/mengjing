@@ -1652,5 +1652,20 @@ namespace ET.Client
             paiMaiItemInfo.Price = price;
             await PaiMaiNetHelper.PaiMaiSell(root, paiMaiItemInfo);
         }
+
+        public static async ETTask ES_PaiMaiDuiHuan(Scene root)
+        {
+            //初始化兑换值
+            R2C_DBServerInfoResponse response = await PaiMaiNetHelper.DBServerInfo(root);
+
+            long diamondsNumber = 100;
+            if (root.GetComponent<UserInfoComponentC>().UserInfo.Diamond < diamondsNumber)
+            {
+                // 钻石不足！
+                return;
+            }
+
+            await PaiMaiNetHelper.PaiMaiDuiHuan(root, diamondsNumber);
+        }
     }
 }
