@@ -60,7 +60,7 @@ namespace ET.Client
                 return;
             }
 
-            // ！！！克隆一个ScriptableObject，不然直接引用的是同一个，设置OnEnd会出问题
+            // ！！！复制一个ScriptableObject，不然直接引用的是同一个，设置OnEnd会出问题
             self.AnimGroup = UnityEngine.Object.Instantiate(animData.AnimGroup);
             foreach (MotionTransition motionTransition in self.AnimGroup.Animations)
             {
