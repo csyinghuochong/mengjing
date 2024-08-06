@@ -1653,7 +1653,7 @@ namespace ET.Client
             await PaiMaiNetHelper.PaiMaiSell(root, paiMaiItemInfo);
         }
 
-        public static async ETTask ES_PaiMaiDuiHuan(Scene root)
+        public static async ETTask PaiMaiDuiHuan(Scene root)
         {
             //初始化兑换值
             R2C_DBServerInfoResponse response = await PaiMaiNetHelper.DBServerInfo(root);
@@ -1666,6 +1666,53 @@ namespace ET.Client
             }
 
             await PaiMaiNetHelper.PaiMaiDuiHuan(root, diamondsNumber);
+        }
+
+        public static async ETTask GemMake(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 20000018);
+
+            int showValue = NpcConfigCategory.Instance.Get(20000018).ShopValue;
+
+            List<EquipMakeConfig> makeList = EquipMakeConfigCategory.Instance.GetAll().Values.ToList();
+            List<int> showMake = new List<int>();
+            for (int i = 0; i < makeList.Count; i++)
+            {
+                EquipMakeConfig equipMakeConfig1 = makeList[i];
+                if (equipMakeConfig1.ProficiencyType != showValue)
+                {
+                    continue;
+                }
+
+                showMake.Add(equipMakeConfig1.Id);
+            }
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            foreach (int makeId in showMake)
+            {
+                long cdEndTime = userInfoComponent.GetMakeTime(makeId);
+                if (cdEndTime > TimeHelper.ServerNow())
+                {
+                    continue;
+                }
+
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
+                if (userInfoComponent.UserInfo.Gold < equipMakeConfig.MakeNeedGold)
+                {
+                    // 金币不足！
+                    continue;
+                }
+
+                bool success = bagComponent.CheckNeedItem(equipMakeConfig.NeedItems);
+                if (!success)
+                {
+                    // 材料不足！
+                    continue;
+                }
+
+                await BagClientNetHelper.RequestEquipMake(root, 0, makeId, 1);
+            }
         }
     }
 }

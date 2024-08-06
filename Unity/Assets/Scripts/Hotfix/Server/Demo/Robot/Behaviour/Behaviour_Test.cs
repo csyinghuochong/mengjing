@@ -188,7 +188,10 @@ namespace ET
                 await RobotHelper.PaiMaiShop(root);
                 await RobotHelper.PaiMaiBuy(root);
                 await RobotHelper.PaiMaiSell(root);
-                await RobotHelper.ES_PaiMaiDuiHuan(root);
+                await RobotHelper.PaiMaiDuiHuan(root);
+
+                Console.WriteLine("去宝石制造商人");
+                await RobotHelper.GemMake(root);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
