@@ -529,6 +529,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonCreateSystem.<OnButton_Create>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonPrepareSystem.<OnButton_Agree>d__4>
 	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonPrepareSystem.<ShowCountDount>d__3>
+	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonSettlementSystem.<BeingTimer>d__2>
+	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonSettlementSystem.<OnClickRewardItem>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgTeamDungeonSystem.<RequestTeamDungeonInfo>d__3>
 	// ET.StateMachineWrap<ET.Client.DlgTowerOfSealSystem.<OnBtn_Enter>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgTowerOpenSystem.<OnFubenResult>d__5>
@@ -1101,11 +1103,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<RequestTeamDungeonOpen>d__5>
 	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<SendLeaveRequest>d__4>
 	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<SendTeamApply>d__1>
+	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<TeamDungeonBoxRewardRequest>d__10>
 	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<TeamDungeonPrepareRequest>d__9>
 	// ET.StateMachineWrap<ET.Client.TeamNetHelper.<TeamRobotRequest>d__3>
 	// ET.StateMachineWrap<ET.Client.Team_OnRecvTeamInvite.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Team_OnTeamDungeonBoxReward.<Run>d__0>
-	// ET.StateMachineWrap<ET.Client.Team_OnTeamDungeonOpen.<RecvTeamDungeonPrepare>d__1>
 	// ET.StateMachineWrap<ET.Client.Team_OnTeamDungeonOpen.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Team_OnTeamDungeonPrepare.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Team_OnTeamDungeonSettlement.<Run>d__0>
@@ -2210,8 +2212,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Task_OnTaskNpcDialog.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Task_OnTaskNpcDialog.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_OnRecvTeamInvite.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_OnRecvTeamInvite.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_OnTeamDungeonBoxReward.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_OnTeamDungeonBoxReward.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_OnTeamDungeonOpen.<RecvTeamDungeonPrepare>d__1>(ET.ETTaskCompleted&,ET.Client.Team_OnTeamDungeonOpen.<RecvTeamDungeonPrepare>d__1&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_OnTeamDungeonOpen.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_OnTeamDungeonOpen.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_OnTeamDungeonPrepare.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_OnTeamDungeonPrepare.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_TeamPickNotice.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_TeamPickNotice.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>(ET.ETTaskCompleted&,ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1&)
@@ -2391,6 +2391,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonCreateSystem.<OnButton_Create>d__6>(object&,ET.Client.DlgTeamDungeonCreateSystem.<OnButton_Create>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonPrepareSystem.<OnButton_Agree>d__4>(object&,ET.Client.DlgTeamDungeonPrepareSystem.<OnButton_Agree>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonPrepareSystem.<ShowCountDount>d__3>(object&,ET.Client.DlgTeamDungeonPrepareSystem.<ShowCountDount>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonSettlementSystem.<BeingTimer>d__2>(object&,ET.Client.DlgTeamDungeonSettlementSystem.<BeingTimer>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonSettlementSystem.<OnClickRewardItem>d__6>(object&,ET.Client.DlgTeamDungeonSettlementSystem.<OnClickRewardItem>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTeamDungeonSystem.<RequestTeamDungeonInfo>d__3>(object&,ET.Client.DlgTeamDungeonSystem.<RequestTeamDungeonInfo>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTowerOfSealSystem.<OnBtn_Enter>d__2>(object&,ET.Client.DlgTowerOfSealSystem.<OnBtn_Enter>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgTowerOpenSystem.<OnFubenResult>d__5>(object&,ET.Client.DlgTowerOpenSystem.<OnFubenResult>d__5&)
@@ -2732,6 +2734,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.TaskClientNetHelper.<SendTaskNotice>d__8>(object&,ET.Client.TaskClientNetHelper.<SendTaskNotice>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.TeamNetHelper.<AgreeTeamInvite>d__8>(object&,ET.Client.TeamNetHelper.<AgreeTeamInvite>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.TeamNetHelper.<SendLeaveRequest>d__4>(object&,ET.Client.TeamNetHelper.<SendLeaveRequest>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Team_OnTeamDungeonOpen.<Run>d__0>(object&,ET.Client.Team_OnTeamDungeonOpen.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Team_OnTeamDungeonSettlement.<Run>d__0>(object&,ET.Client.Team_OnTeamDungeonSettlement.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<LoadBaseWindowsAsync>d__26>(object&,ET.Client.UIComponentSystem.<LoadBaseWindowsAsync>d__26&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<ShowWindowAsync>d__11>(object&,ET.Client.UIComponentSystem.<ShowWindowAsync>d__11&)
@@ -3015,6 +3018,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.SkillNetHelper.<LifeShieldCost>d__10>(object&,ET.Client.SkillNetHelper.<LifeShieldCost>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.SkillNetHelper.<MakeLearn>d__11>(object&,ET.Client.SkillNetHelper.<MakeLearn>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.TaskClientNetHelper.<WelfareTaskReward>d__6>(object&,ET.Client.TaskClientNetHelper.<WelfareTaskReward>d__6&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.TeamNetHelper.<TeamDungeonBoxRewardRequest>d__10>(object&,ET.Client.TeamNetHelper.<TeamDungeonBoxRewardRequest>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<ShowBaseWindowAsync>d__18>(object&,ET.Client.UIComponentSystem.<ShowBaseWindowAsync>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.UnionNetHelper.<BloodstoneQiangHuaRequest>d__17>(object&,ET.Client.UnionNetHelper.<BloodstoneQiangHuaRequest>d__17&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.UnionNetHelper.<DonationRankListRequest>d__6>(object&,ET.Client.UnionNetHelper.<DonationRankListRequest>d__6&)
@@ -3280,6 +3284,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonCreateSystem.<OnButton_Create>d__6>(ET.Client.DlgTeamDungeonCreateSystem.<OnButton_Create>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonPrepareSystem.<OnButton_Agree>d__4>(ET.Client.DlgTeamDungeonPrepareSystem.<OnButton_Agree>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonPrepareSystem.<ShowCountDount>d__3>(ET.Client.DlgTeamDungeonPrepareSystem.<ShowCountDount>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonSettlementSystem.<BeingTimer>d__2>(ET.Client.DlgTeamDungeonSettlementSystem.<BeingTimer>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonSettlementSystem.<OnClickRewardItem>d__6>(ET.Client.DlgTeamDungeonSettlementSystem.<OnClickRewardItem>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTeamDungeonSystem.<RequestTeamDungeonInfo>d__3>(ET.Client.DlgTeamDungeonSystem.<RequestTeamDungeonInfo>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTowerOfSealSystem.<OnBtn_Enter>d__2>(ET.Client.DlgTowerOfSealSystem.<OnBtn_Enter>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgTowerOpenSystem.<OnFubenResult>d__5>(ET.Client.DlgTowerOpenSystem.<OnFubenResult>d__5&)
@@ -3723,7 +3729,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.TeamNetHelper.<SendLeaveRequest>d__4>(ET.Client.TeamNetHelper.<SendLeaveRequest>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnRecvTeamInvite.<Run>d__0>(ET.Client.Team_OnRecvTeamInvite.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnTeamDungeonBoxReward.<Run>d__0>(ET.Client.Team_OnTeamDungeonBoxReward.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnTeamDungeonOpen.<RecvTeamDungeonPrepare>d__1>(ET.Client.Team_OnTeamDungeonOpen.<RecvTeamDungeonPrepare>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnTeamDungeonOpen.<Run>d__0>(ET.Client.Team_OnTeamDungeonOpen.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnTeamDungeonPrepare.<Run>d__0>(ET.Client.Team_OnTeamDungeonPrepare.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Team_OnTeamDungeonSettlement.<Run>d__0>(ET.Client.Team_OnTeamDungeonSettlement.<Run>d__0&)
@@ -4030,6 +4035,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.SkillNetHelper.<LifeShieldCost>d__10>(ET.Client.SkillNetHelper.<LifeShieldCost>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.SkillNetHelper.<MakeLearn>d__11>(ET.Client.SkillNetHelper.<MakeLearn>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.TaskClientNetHelper.<WelfareTaskReward>d__6>(ET.Client.TaskClientNetHelper.<WelfareTaskReward>d__6&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.TeamNetHelper.<TeamDungeonBoxRewardRequest>d__10>(ET.Client.TeamNetHelper.<TeamDungeonBoxRewardRequest>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.UIComponentSystem.<ShowBaseWindowAsync>d__18>(ET.Client.UIComponentSystem.<ShowBaseWindowAsync>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.UnionNetHelper.<BloodstoneQiangHuaRequest>d__17>(ET.Client.UnionNetHelper.<BloodstoneQiangHuaRequest>d__17&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.UnionNetHelper.<DonationRankListRequest>d__6>(ET.Client.UnionNetHelper.<DonationRankListRequest>d__6&)
