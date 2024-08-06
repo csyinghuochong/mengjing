@@ -1758,5 +1758,12 @@ namespace ET.Client
 
             await BagClientNetHelper.RquestMysteryBuy(root, mysteryItemInfo, npcid);
         }
+
+        public static async ETTask ShenQiMake(Scene root)
+        {
+            int npcid = 20000023;
+
+            await RobotHelper.MoveToNpc(root, npcid);
+        }
     }
 }
