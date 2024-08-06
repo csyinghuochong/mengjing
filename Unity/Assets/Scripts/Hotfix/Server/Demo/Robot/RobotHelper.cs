@@ -1714,5 +1714,49 @@ namespace ET.Client
                 await BagClientNetHelper.RequestEquipMake(root, 0, makeId, 1);
             }
         }
+
+        public static async ETTask ShenMiBuy(Scene root)
+        {
+            int npcid = 20000022;
+
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            A2C_MysteryListResponse response =
+                    await BagClientNetHelper.RquestMysteryList(root, root.GetComponent<UserInfoComponentC>().UserInfo.UserId);
+
+            List<int> itemList = new List<int>();
+
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
+            int shopValue = npcConfig.ShopValue;
+            while (shopValue != 0)
+            {
+                itemList.Add(shopValue);
+
+                MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(shopValue);
+                shopValue = mysteryConfig.NextId;
+            }
+
+            List<MysteryItemInfo> mysteryItemInfos = new List<MysteryItemInfo>();
+            for (int i = 0; i < response.MysteryItemInfos.Count; i++)
+            {
+                if (!itemList.Contains(response.MysteryItemInfos[i].MysteryId))
+                {
+                    continue;
+                }
+
+                mysteryItemInfos.Add(response.MysteryItemInfos[i]);
+            }
+
+            if (mysteryItemInfos.Count == 0)
+            {
+                return;
+            }
+
+            int index = RandomHelper.RandomNumber(0, mysteryItemInfos.Count);
+
+            MysteryItemInfo mysteryItemInfo = new() { MysteryId = mysteryItemInfos[index].MysteryId };
+
+            await BagClientNetHelper.RquestMysteryBuy(root, mysteryItemInfo, npcid);
+        }
     }
 }

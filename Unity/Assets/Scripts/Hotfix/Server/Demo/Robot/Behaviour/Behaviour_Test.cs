@@ -205,6 +205,9 @@ namespace ET
                 await RobotHelper.MoveToNpc(root, 20000021);
                 await PetNetHelper.PetDuiHuanRequest(root, 54);
 
+                Console.WriteLine("去神秘商人");
+                await RobotHelper.ShenMiBuy(root);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
