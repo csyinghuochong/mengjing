@@ -65,40 +65,26 @@ namespace ET.Client
             foreach (MotionTransition motionTransition in self.AnimGroup.Animations)
             {
                 self.ClipTransitions.Add(motionTransition.StateName, motionTransition);
+                self.SetAutoTransition(motionTransition);
+            }
+        }
+
+        private static void SetAutoTransition(this AnimationComponent self, MotionTransition motionTransition)
+        {
+            if (string.IsNullOrEmpty(motionTransition.NextStateName))
+            {
+                return;
             }
 
-            if (animData.AnimGroup.name == "Role_FaShi")
+            motionTransition.Events.OnEnd = () =>
             {
-                // 动画播放完毕后还没通知下一个State则自动转到Idle
-                self.SetOnEnd("Act_1", () => { Log.Debug("Act_1播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Act_2", () => { Log.Debug("Act_2播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Act_3", () => { Log.Debug("Act_3播放完毕"); self.Play("Idle"); });
-                
-                self.SetOnEnd("Act_11", () => { Log.Debug("Act_11播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Act_12", () => { Log.Debug("Act_12播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Act_13", () => { Log.Debug("Act_13播放完毕"); self.Play("Idle"); });
-                
-                self.SetOnEnd("Skill_1", () => { Log.Debug("Skill_1播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_2", () => { Log.Debug("Skill_2播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_3", () => { Log.Debug("Skill_3播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_4", () => { Log.Debug("Skill_4播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_5", () => { Log.Debug("Skill_5播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_6", () => { Log.Debug("Skill_6播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_7", () => { Log.Debug("Skill_7播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_8", () => { Log.Debug("Skill_8播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_9", () => { Log.Debug("Skill_9播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_10", () => { Log.Debug("Skill_10播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Skill_11", () => { Log.Debug("Skill_11播放完毕"); self.Play("Idle"); });
-                
-                self.SetOnEnd("ShowSelect", () => { Log.Debug("ShowSelect播放完毕"); self.Play("Idle"); });
-                self.SetOnEnd("Speak", () => { Log.Debug("Speak播放完毕"); self.Play("Idle"); });
-            }
-            else if (animData.AnimGroup.name == "MonsterAnimGroup")
-            {
-            }
-            else if (animData.AnimGroup.name == "PetAnimGroup")
-            {
-            }
+                using (zstring.Block())
+                {
+                    Log.Debug(zstring.Format("{0} 播放完毕,自动切换为 {1}", motionTransition.StateName, motionTransition.NextStateName));
+                }
+
+                self.Play(motionTransition.NextStateName);
+            };
         }
 
         public static void Play(this AnimationComponent self, string name, float speed = 1f)

@@ -21,7 +21,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 9c3d8aa6fcda47d45b79076b09f5e970, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Run
   - _FadeDuration: 0.25
     _Events:
@@ -31,7 +32,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 46fafdf43ff4a024c80b1a5088844bfe, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Idle
   - _FadeDuration: 0.25
     _Events:
@@ -41,7 +43,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_1
   - _FadeDuration: 0.25
     _Events:
@@ -51,7 +54,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 37e0af9ccdabbfb4493cd4581dd55d56, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_2
   - _FadeDuration: 0.25
     _Events:
@@ -61,7 +65,8 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: CriAct
   - _FadeDuration: 0.25
     _Events:
@@ -71,7 +76,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 5d359f065a02c14469bb2990d6f32631, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_1
   - _FadeDuration: 0.25
     _Events:
@@ -81,7 +87,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 04a1bfb68b3a9604ea897f4899be7a5f, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_2
   - _FadeDuration: 0.25
     _Events:
@@ -91,7 +98,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 5d359f065a02c14469bb2990d6f32631, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_3
   - _FadeDuration: 0.25
     _Events:
@@ -101,7 +109,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 672709b9d38ddc84cb168503d042150e, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Death
   - _FadeDuration: 0.25
     _Events:
@@ -111,7 +120,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: e30728171e2c62a4aae1d2b587b43b94, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: FanGun
   - _FadeDuration: 0.25
     _Events:
@@ -121,7 +131,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 46fafdf43ff4a024c80b1a5088844bfe, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: CreateIdle
   - _FadeDuration: 0.25
     _Events:
@@ -131,7 +142,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 482206cad67562449b4dd80fe8f02758, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: CreateWalk
   - _FadeDuration: 0.25
     _Events:
@@ -141,7 +153,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 994d68f2f3462484f80507486aee3d42, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: ZuoQi
   - _FadeDuration: 0.25
     _Events:
@@ -151,7 +164,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: f992f4d7d2bee1b4ea44741899d1f091, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Tiao
   - _FadeDuration: 0.25
     _Events:
@@ -161,7 +175,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 5d359f065a02c14469bb2990d6f32631, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_3
   - _FadeDuration: 0.25
     _Events:
@@ -171,7 +186,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_4
   - _FadeDuration: 0.25
     _Events:
@@ -181,7 +197,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_6
   - _FadeDuration: 0.25
     _Events:
@@ -191,7 +208,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_5
   - _FadeDuration: 0.25
     _Events:
@@ -201,7 +219,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_7
   - _FadeDuration: 0.25
     _Events:
@@ -211,7 +230,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_8
   - _FadeDuration: 0.25
     _Events:
@@ -221,7 +241,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_9
   - _FadeDuration: 0.25
     _Events:
@@ -231,7 +252,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Skill_10
   - _FadeDuration: 0.25
     _Events:
@@ -241,7 +263,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_11
   - _FadeDuration: 0.25
     _Events:
@@ -251,7 +274,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 0660e9e677d36b64ba9c5ead97e85850, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: ShiQu
   - _FadeDuration: 0.25
     _Events:
@@ -261,7 +285,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 612b97b476199d049ac847cd37976eb6, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Speak
   - _FadeDuration: 0.25
     _Events:
@@ -271,7 +296,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 46fafdf43ff4a024c80b1a5088844bfe, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: ShowIdel 0
     StateName: ShowIdel
   - _FadeDuration: 0.25
     _Events:
@@ -281,7 +307,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 3969decfd02f50e46babefd98ef57d24, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: ShowSelect
   - _FadeDuration: 0.25
     _Events:
@@ -291,7 +318,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 8a39dd45bf32d614494b2bb21b01d0c4, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_11
   - _FadeDuration: 0.25
     _Events:
@@ -301,7 +329,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 37e0af9ccdabbfb4493cd4581dd55d56, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_12
   - _FadeDuration: 0.25
     _Events:
@@ -311,7 +340,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 5d359f065a02c14469bb2990d6f32631, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Act_13
   - _FadeDuration: 0.25
     _Events:
@@ -321,7 +351,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 46fafdf43ff4a024c80b1a5088844bfe, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: ShowIdel 0
   - _FadeDuration: 0.25
     _Events:
@@ -331,7 +362,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 04a1bfb68b3a9604ea897f4899be7a5f, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: YinChang
   - _FadeDuration: 0.25
     _Events:
@@ -341,7 +373,8 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 30df632b1ee6e0f41ac47ea2958d7743, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: YinChangZhong
   - _FadeDuration: 0.25
     _Events:
@@ -351,5 +384,6 @@ MonoBehaviour:
     _Clip: {fileID: 4873297978657799274, guid: 3969decfd02f50e46babefd98ef57d24, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: OpenLock

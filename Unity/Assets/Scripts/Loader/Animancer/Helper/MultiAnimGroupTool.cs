@@ -88,6 +88,7 @@ namespace ET
                             var state = states[i].state;
                             stateData.Animations[i] = new MotionTransition()
                             {
+                                NextStateName = GetNextStateName(state),
                                 StateName = state.name,
                                 Clip = state.motion as AnimationClip
                             };
@@ -100,6 +101,19 @@ namespace ET
                     }
                 }
             }
+        }
+
+        private string GetNextStateName(AnimatorState state)
+        {
+            foreach (var transition in state.transitions)
+            {
+                if (transition.conditions.Length == 0 && transition.hasExitTime)
+                {
+                    return transition.destinationState.name;
+                }
+            }
+
+            return null;
         }
     }
 }

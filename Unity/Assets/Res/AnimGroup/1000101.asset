@@ -21,7 +21,8 @@ MonoBehaviour:
     _Clip: {fileID: 9084167645055927277, guid: 88766f970cc9ca34190d273865582879, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Idle
   - _FadeDuration: 0.25
     _Events:
@@ -32,7 +33,8 @@ MonoBehaviour:
       type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Walk
   - _FadeDuration: 0.25
     _Events:
@@ -42,7 +44,8 @@ MonoBehaviour:
     _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Attack_1
   - _FadeDuration: 0.25
     _Events:
@@ -52,7 +55,8 @@ MonoBehaviour:
     _Clip: {fileID: 7517590787166607204, guid: fc6ae4460b3214a42aad29b07741b02f, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Attack_1
     StateName: Hit
   - _FadeDuration: 0.25
     _Events:
@@ -62,7 +66,8 @@ MonoBehaviour:
     _Clip: {fileID: 2996576903393284788, guid: ead6e11816e6eaf429457ab2f8aea1c0, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Run
   - _FadeDuration: 0.25
     _Events:
@@ -73,7 +78,8 @@ MonoBehaviour:
       type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Death
   - _FadeDuration: 0.25
     _Events:
@@ -83,7 +89,8 @@ MonoBehaviour:
     _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_1
   - _FadeDuration: 0.25
     _Events:
@@ -93,5 +100,6 @@ MonoBehaviour:
     _Clip: {fileID: 9201473070627420566, guid: ca16b6dbc2be608419232f26ea4ded36, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Skill_2

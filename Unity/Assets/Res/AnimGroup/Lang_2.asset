@@ -21,7 +21,8 @@ MonoBehaviour:
     _Clip: {fileID: 7400000, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Idle
   - _FadeDuration: 0.25
     _Events:
@@ -31,7 +32,8 @@ MonoBehaviour:
     _Clip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Walk
   - _FadeDuration: 0.25
     _Events:
@@ -41,7 +43,8 @@ MonoBehaviour:
     _Clip: {fileID: 7400004, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Idle
     StateName: Attack_1
   - _FadeDuration: 0.25
     _Events:
@@ -51,7 +54,8 @@ MonoBehaviour:
     _Clip: {fileID: 7400008, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: Attack_1
     StateName: Hit
   - _FadeDuration: 0.25
     _Events:
@@ -61,7 +65,8 @@ MonoBehaviour:
     _Clip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Run
   - _FadeDuration: 0.25
     _Events:
@@ -71,5 +76,6 @@ MonoBehaviour:
     _Clip: {fileID: 7400012, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
-    _ApplyRootMotion: 0
+    ApplyRootMotion: 0
+    NextStateName: 
     StateName: Death
