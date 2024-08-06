@@ -1764,6 +1764,93 @@ namespace ET.Client
             int npcid = 20000023;
 
             await RobotHelper.MoveToNpc(root, npcid);
+
+            int showValue = NpcConfigCategory.Instance.Get(npcid).ShopValue;
+
+            List<EquipMakeConfig> makeList = EquipMakeConfigCategory.Instance.GetAll().Values.ToList();
+            Dictionary<int, List<int>> chapterMakeids = new Dictionary<int, List<int>>();
+            chapterMakeids.Add(0, new List<int>()); //消耗性道具
+            chapterMakeids.Add(1, new List<int>()); //<=20
+            chapterMakeids.Add(2, new List<int>()); //<=30
+            chapterMakeids.Add(3, new List<int>()); //<= 40
+            chapterMakeids.Add(4, new List<int>()); //<= 50
+            chapterMakeids.Add(5, new List<int>()); //<= 100
+            chapterMakeids.Add(6, new List<int>()); //其他
+
+            for (int i = 0; i < makeList.Count; i++)
+            {
+                EquipMakeConfig equipMakeConfig = makeList[i];
+                if (equipMakeConfig.ProficiencyType != showValue)
+                {
+                    continue;
+                }
+
+                int chapterindex = -1;
+                int itemid = equipMakeConfig.MakeItemID;
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
+                if (itemConfig.ItemType == 1 || itemConfig.ItemType == 2)
+                {
+                    chapterindex = 0;
+                }
+                else if (equipMakeConfig.LearnLv <= 20)
+                {
+                    chapterindex = 1;
+                }
+                else if (equipMakeConfig.LearnLv <= 30)
+                {
+                    chapterindex = 2;
+                }
+                else if (equipMakeConfig.LearnLv <= 40)
+                {
+                    chapterindex = 3;
+                }
+                else if (equipMakeConfig.LearnLv <= 50)
+                {
+                    chapterindex = 4;
+                }
+                else if (equipMakeConfig.LearnLv < 58)
+                {
+                    chapterindex = 5;
+                }
+                else
+                {
+                    chapterindex = 6;
+                }
+
+                chapterMakeids[chapterindex].Add(equipMakeConfig.Id);
+            }
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            for (int i = 0; i < 7; i++)
+            {
+                for (int j = chapterMakeids[i].Count; j >= 0; j--)
+                {
+                    long cdEndTime = userInfoComponent.GetMakeTime(chapterMakeids[i][j]);
+                    if (cdEndTime > TimeHelper.ServerNow())
+                    {
+                        continue;
+                    }
+
+                    EquipMakeConfig equipMakeConfig1 = EquipMakeConfigCategory.Instance.Get(chapterMakeids[i][j]);
+                    if (userInfoComponent.UserInfo.Gold < equipMakeConfig1.MakeNeedGold)
+                    {
+                        // 金币不足！
+                        continue;
+                    }
+
+                    bool success = bagComponent.CheckNeedItem(equipMakeConfig1.NeedItems);
+                    if (!success)
+                    {
+                        // 材料不足！
+                        continue;
+                    }
+
+                    await BagClientNetHelper.RequestEquipMake(root, 0, chapterMakeids[i][j], 1);
+                }
+            }
+
+            await ETTask.CompletedTask;
         }
     }
 }
