@@ -9,7 +9,8 @@ namespace ET
 {
     public class MultiAnimGroupTool : EditorWindow
     {
-        private string folderPath = string.Empty;
+        private string prefabFolderPath = "Assets/Bundles/Unit";
+        private string assetBaseFolderPath = "Assets/Res/AnimGroup";
 
         [MenuItem("Tools/Animancer/Generate Multi AnimGroup")]
         private static void ShowWindow()
@@ -23,28 +24,50 @@ namespace ET
             EditorGUI.BeginChangeCheck();
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Folder Path", GUILayout.Width(80));
-            folderPath = EditorGUILayout.TextField(folderPath);
+            EditorGUILayout.LabelField("Prefab Folder Path", GUILayout.Width(150));
+            prefabFolderPath = EditorGUILayout.TextField(prefabFolderPath, GUILayout.Width(300));
 
             if (GUILayout.Button("Browse", GUILayout.Width(75)))
             {
-                string selectedFolder = EditorUtility.OpenFolderPanel("Select Folder", "Assets", "");
+                string selectedFolder = EditorUtility.OpenFolderPanel("Select Folder", prefabFolderPath, "");
                 if (!string.IsNullOrEmpty(selectedFolder))
                 {
                     if (selectedFolder.StartsWith(Application.dataPath))
                     {
-                        folderPath = "Assets" + selectedFolder.Substring(Application.dataPath.Length);
+                        prefabFolderPath = "Assets" + selectedFolder.Substring(Application.dataPath.Length);
                     }
                     else
                     {
-                        Log.Error("Selected folder is not within the Unity project.");
+                        Debug.LogError("Selected folder is not within the Unity project.");
                     }
                 }
             }
 
             EditorGUILayout.EndHorizontal();
 
-            if (GUILayout.Button("Generate"))
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Asset Base Folder Path", GUILayout.Width(150));
+            assetBaseFolderPath = EditorGUILayout.TextField(assetBaseFolderPath, GUILayout.Width(300));
+
+            if (GUILayout.Button("Browse", GUILayout.Width(75)))
+            {
+                string selectedFolder = EditorUtility.OpenFolderPanel("Select Folder", assetBaseFolderPath, "");
+                if (!string.IsNullOrEmpty(selectedFolder))
+                {
+                    if (selectedFolder.StartsWith(Application.dataPath))
+                    {
+                        assetBaseFolderPath = "Assets" + selectedFolder.Substring(Application.dataPath.Length);
+                    }
+                    else
+                    {
+                        Debug.LogError("Selected folder is not within the Unity project.");
+                    }
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            if (GUILayout.Button("Generate Animation State Data"))
             {
                 GenerateOrUpdateAnimationStateData();
             }
@@ -52,13 +75,19 @@ namespace ET
 
         private void GenerateOrUpdateAnimationStateData()
         {
-            if (string.IsNullOrEmpty(folderPath) || !folderPath.StartsWith("Assets"))
+            if (string.IsNullOrEmpty(prefabFolderPath) || !prefabFolderPath.StartsWith("Assets"))
             {
                 Log.Error("请输入正确的文件路径");
                 return;
             }
 
-            string[] prefabPaths = Directory.GetFiles(folderPath, "*.prefab", SearchOption.AllDirectories);
+            if (string.IsNullOrEmpty(assetBaseFolderPath) || !assetBaseFolderPath.StartsWith("Assets"))
+            {
+                Log.Error("请输入正确的文件路径");
+                return;
+            }
+
+            string[] prefabPaths = Directory.GetFiles(prefabFolderPath, "*.prefab", SearchOption.AllDirectories);
 
             foreach (string prefabPath in prefabPaths)
             {
@@ -68,10 +97,39 @@ namespace ET
                 if (animator != null)
                 {
                     AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+
                     if (animatorController != null)
                     {
+                        string relativePath = Path.GetDirectoryName(prefabPath).Substring(prefabFolderPath.Length);
+                        string assetFolderPath = (assetBaseFolderPath + relativePath).Replace('\\', '/');
+
+                        if (!AssetDatabase.IsValidFolder(assetFolderPath))
+                        {
+                            string[] folders = assetFolderPath.Split('/');
+                            string currentPath = "";
+                            for (int i = 0; i < folders.Length; i++)
+                            {
+                                string folder = folders[i];
+                                if (string.IsNullOrEmpty(folder)) continue;
+
+                                if (i == 0)
+                                {
+                                    currentPath = folder;
+                                }
+                                else
+                                {
+                                    string parentPath = currentPath;
+                                    currentPath = $"{parentPath}/{folder}";
+                                    if (!AssetDatabase.IsValidFolder(currentPath))
+                                    {
+                                        AssetDatabase.CreateFolder(parentPath, folder);
+                                    }
+                                }
+                            }
+                        }
+
                         string assetName = animatorController.name;
-                        string assetPath = $"Assets/Res/AnimGroup/{assetName}.asset";
+                        string assetPath = Path.Combine(assetFolderPath, $"{assetName}.asset");
 
                         AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
 
@@ -98,7 +156,7 @@ namespace ET
                         EditorUtility.SetDirty(animGroup);
                         AssetDatabase.SaveAssets();
 
-                        Log.Debug("AnimGroup generated at " + assetPath);
+                        Log.Debug(prefabPath + " AnimGroup generated at " + assetPath);
 
                         // 添加组件和引用
                         AnimancerComponent animancerComponent = prefab.GetComponent<AnimancerComponent>();
