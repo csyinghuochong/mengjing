@@ -1464,7 +1464,62 @@ namespace ET.Client
         {
             await RobotHelper.MoveToNpc(root, npcid);
 
-            // await SkillNetHelper.MakeLearn(root, self.MakeId, self.Plan);
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            int makeType_1 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
+            int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
+
+            int showValue = NpcConfigCategory.Instance.Get(npcid).ShopValue;
+
+            int plan = -1;
+            if (makeType_1 == showValue)
+            {
+                plan = 1;
+            }
+
+            if (plan == -1)
+            {
+                if (makeType_1 != 0)
+                {
+                    // "重置后自身学习的生活技能将全部遗忘,请谨慎选择!"
+                }
+
+                await SkillNetHelper.MakeSelect(root, showValue, plan == -1 ? 1 : plan);
+            }
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            int playeLv = userInfoComponent.UserInfo.Lv;
+            Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
+            string initMakeList = GlobalValueConfigCategory.Instance.Get(43).Value;
+            List<int> showMakeLearns = new List<int>();
+            foreach (var item in keyValuePairs)
+            {
+                if (userInfoComponent.UserInfo.MakeList.Contains(item.Key))
+                {
+                    continue;
+                }
+
+                if (initMakeList.Contains(item.Key.ToString()))
+                {
+                    continue;
+                }
+
+                if (playeLv < item.Value.LearnLv || item.Value.LearnType != 0)
+                {
+                    continue;
+                }
+
+                if (item.Value.ProficiencyType != showValue)
+                {
+                    continue;
+                }
+
+                showMakeLearns.Add(item.Key);
+            }
+
+            for (int i = showMakeLearns.Count - 1; i >= 0; i--)
+            {
+                await SkillNetHelper.MakeLearn(root, showMakeLearns[i], plan == -1 ? 1 : plan);
+            }
         }
     }
 }
