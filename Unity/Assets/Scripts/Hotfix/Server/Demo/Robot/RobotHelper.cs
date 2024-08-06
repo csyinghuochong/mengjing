@@ -1531,7 +1531,7 @@ namespace ET.Client
             OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(occ);
 
             int index = RandomHelper.RandomNumber(0, occupationConfig.OccTwoID.Length);
-            
+
             int occTwoId = occupationConfig.OccTwoID[index];
 
             if (userInfoComponent.UserInfo.OccTwo != 0)
@@ -1541,6 +1541,15 @@ namespace ET.Client
             }
 
             await SkillNetHelper.ChangeOccTwoRequest(root, occTwoId);
+        }
+
+        public static async ETTask PaiMai(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 20000017);
+            
+            // 买东西
+            
+            // 上架东西
         }
     }
 }
