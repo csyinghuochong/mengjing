@@ -184,7 +184,9 @@ namespace ET
                 await RobotHelper.MoveToNpc(root, 20000016);
 
                 Console.WriteLine("去拍卖行商人");
-                await RobotHelper.PaiMai(root);
+                await RobotHelper.MoveToNpc(root, 20000017);
+                await RobotHelper.PaiMaiShop(root);
+                await RobotHelper.PaiMaiBuy(root);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

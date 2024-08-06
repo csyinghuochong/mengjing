@@ -1544,11 +1544,8 @@ namespace ET.Client
             await SkillNetHelper.ChangeOccTwoRequest(root, occTwoId);
         }
 
-        public static async ETTask PaiMai(Scene root)
+        public static async ETTask PaiMaiShop(Scene root)
         {
-            await RobotHelper.MoveToNpc(root, 20000017);
-
-            // 买东西
             List<int> numbers = PaiMaiSellConfigCategory.Instance.GetAll().Keys.ToList();
             int randomIndex = RandomHelper.RandomNumber(0, numbers.Count);
             int paiMaiSellId = numbers[randomIndex];
@@ -1569,8 +1566,21 @@ namespace ET.Client
             }
 
             await PaiMaiNetHelper.PaiMaiShop(root, paiMaiSellId, 1);
+        }
 
-            // 上架东西
+        public static async ETTask PaiMaiBuy(Scene root)
+        {
+            int itemType = RandomHelper.RandomNumber(1, 5);
+            P2C_PaiMaiListResponse response = await PaiMaiNetHelper.PaiMaiList(root, 1, itemType, UnitHelper.GetMyUnitFromClientScene(root).Id);
+            if (response.PaiMaiItemInfos.Count == 0)
+            {
+                return;
+            }
+
+            int index = RandomHelper.RandomNumber(0, response.PaiMaiItemInfos.Count);
+
+            await PaiMaiNetHelper.PaiMaiBuy(root, response.PaiMaiItemInfos[index], 0,
+                UnitHelper.GetMyUnitFromClientScene(root).GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber));
         }
     }
 }
