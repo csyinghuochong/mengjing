@@ -430,12 +430,18 @@ namespace ET.Client
                 string text1 = "";
                 if (i == 0)
                 {
-                    text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[i], fubenName);
+                    using (zstring.Block())
+                    {
+                        text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_1, taskConfig.TargetValue[i], fubenName);
+                    }
                 }
 
                 if (i == 1)
                 {
-                    text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_2, taskConfig.TargetValue[i], fubenName);
+                    using (zstring.Block())
+                    {
+                        text1 = zstring.Format(progress, monsterConfig.MonsterName, taskPro.taskTargetNum_2, taskConfig.TargetValue[i], fubenName);
+                    }
                 }
 
                 desc = desc + text1 + "\n";
