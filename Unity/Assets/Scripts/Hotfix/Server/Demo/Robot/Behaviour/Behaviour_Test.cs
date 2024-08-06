@@ -193,6 +193,18 @@ namespace ET
                 Console.WriteLine("去宝石制造商人");
                 await RobotHelper.GemMake(root);
 
+                Console.WriteLine("去神兽:精灵麋鹿");
+                await RobotHelper.MoveToNpc(root, 20000019);
+                await PetNetHelper.PetDuiHuanRequest(root, 52);
+
+                Console.WriteLine("去神兽:幽光晴晴");
+                await RobotHelper.MoveToNpc(root, 20000020);
+                await PetNetHelper.PetDuiHuanRequest(root, 53);
+
+                Console.WriteLine("去神兽:仙界魔龙");
+                await RobotHelper.MoveToNpc(root, 20000021);
+                await PetNetHelper.PetDuiHuanRequest(root, 54);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
