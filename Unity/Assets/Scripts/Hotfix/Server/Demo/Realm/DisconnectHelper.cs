@@ -54,7 +54,6 @@ namespace ET.Server
     
             TimerComponent timerComponent = player.Root().GetComponent<TimerComponent>();
             player.PlayerState = PlayerState.Disconnect;
-
             await player.GetComponent<PlayerSessionComponent>().RemoveLocation(LocationType.GateSession);
             await player.RemoveLocation(LocationType.Player);
             player.Root().GetComponent<PlayerComponent>()?.Remove(player);

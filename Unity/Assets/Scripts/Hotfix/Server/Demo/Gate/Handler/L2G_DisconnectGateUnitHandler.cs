@@ -37,7 +37,7 @@ namespace ET.Server
                 
                 if (request.ReLink == 0)
                 {
-                    await  DisconnectHelper.KickPlayer(player);
+                    DisconnectHelper.KickPlayer(player).Coroutine();
                 }
             }
         }
