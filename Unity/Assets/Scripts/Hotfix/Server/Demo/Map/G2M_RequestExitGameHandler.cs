@@ -18,13 +18,14 @@ namespace ET.Server
         private async ETTask RemoveUnit(Unit unit)
         {
             Console.WriteLine("RemoveUnit");
+            Scene root = unit.Root();
             await unit.Fiber().WaitFrameFinish();
             
             await unit.RemoveLocation(LocationType.Unit);
             
             unit.GetComponent<DBSaveComponent>().OnDisconnect();
             
-            
+            root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(unit.Id);
         }
         
     }
