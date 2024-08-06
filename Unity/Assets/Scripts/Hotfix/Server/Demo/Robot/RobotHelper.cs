@@ -1585,7 +1585,72 @@ namespace ET.Client
 
         public static async ETTask PaiMaiSell(Scene root)
         {
-            await ETTask.CompletedTask;
+            List<BagInfo> equipInfos = root.GetComponent<BagComponentC>().GetBagList();
+            List<BagInfo> showBagInfos = new List<BagInfo>();
+
+            P2C_PaiMaiListResponse response = await PaiMaiNetHelper.PaiMaiList(root, 0, 0, root.GetComponent<UserInfoComponentC>().UserInfo.UserId);
+
+            for (int i = 0; i < equipInfos.Count; i++)
+            {
+                if (equipInfos[i].isBinging || equipInfos[i].IsProtect)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipInfos[i].ItemID);
+                if (itemConfig.IfStopPaiMai == 1)
+                {
+                    // 此道具禁止上架！
+                    continue;
+                }
+
+                if (!CommonHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
+                {
+                    // 此道具不能上架！
+                    continue;
+                }
+
+                if (response.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.Get(50).Value2)
+                {
+                    // 已经达到最大上架数量！
+                    continue;
+                }
+
+                if (itemConfig.ItemQuality >= 5 && itemConfig.ItemType == 3)
+                {
+                    // 橙色品质及以上的装备不能上架！
+                    continue;
+                }
+
+                showBagInfos.Add(equipInfos[i]);
+            }
+
+            if (showBagInfos.Count == 0)
+            {
+                return;
+            }
+
+            int index = RandomHelper.RandomNumber(0, showBagInfos.Count);
+
+            //设置价格
+            int price = 10000; //临时
+            //获取是否是快捷购买的道具列表
+            P2C_PaiMaiShopShowListResponse response2 = await PaiMaiNetHelper.PaiMaiShopShowList(root);
+            foreach (PaiMaiShopItemInfo info in response2.PaiMaiShopItemInfos)
+            {
+                if (info.Id == showBagInfos[index].ItemID)
+                {
+                    price = info.Price;
+                }
+            }
+
+            int sellNum = showBagInfos[index].ItemNum;
+
+            PaiMaiItemInfo paiMaiItemInfo = new();
+            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(showBagInfos[index]);
+            paiMaiItemInfo.BagInfo.ItemNum = sellNum;
+            paiMaiItemInfo.Price = price;
+            await PaiMaiNetHelper.PaiMaiSell(root, paiMaiItemInfo);
         }
     }
 }
