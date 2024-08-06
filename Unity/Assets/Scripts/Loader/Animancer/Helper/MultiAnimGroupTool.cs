@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Animancer;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -72,21 +73,21 @@ namespace ET
                         string assetName = animatorController.name;
                         string assetPath = $"Assets/Res/AnimGroup/{assetName}.asset";
 
-                        AnimGroup stateData = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
+                        AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
 
-                        if (stateData == null)
+                        if (animGroup == null)
                         {
-                            stateData = ScriptableObject.CreateInstance<AnimGroup>();
-                            AssetDatabase.CreateAsset(stateData, assetPath);
+                            animGroup = ScriptableObject.CreateInstance<AnimGroup>();
+                            AssetDatabase.CreateAsset(animGroup, assetPath);
                         }
 
                         var states = animatorController.layers[0].stateMachine.states;
-                        stateData.Animations = new MotionTransition[states.Length];
+                        animGroup.Animations = new MotionTransition[states.Length];
 
                         for (int i = 0; i < states.Length; i++)
                         {
                             var state = states[i].state;
-                            stateData.Animations[i] = new MotionTransition()
+                            animGroup.Animations[i] = new MotionTransition()
                             {
                                 NextStateName = GetNextStateName(state),
                                 StateName = state.name,
@@ -94,10 +95,27 @@ namespace ET
                             };
                         }
 
-                        EditorUtility.SetDirty(stateData);
+                        EditorUtility.SetDirty(animGroup);
                         AssetDatabase.SaveAssets();
 
                         Log.Debug("AnimGroup generated at " + assetPath);
+
+                        // 添加组件和引用
+                        AnimancerComponent animancerComponent = prefab.GetComponent<AnimancerComponent>();
+                        if (animancerComponent == null)
+                        {
+                            prefab.AddComponent<AnimancerComponent>();
+                        }
+
+                        AnimData animData = prefab.GetComponent<AnimData>();
+                        if (animData == null)
+                        {
+                            animData = prefab.AddComponent<AnimData>();
+                        }
+
+                        animData.AnimGroup = animGroup;
+                        EditorUtility.SetDirty(prefab);
+                        PrefabUtility.SavePrefabAsset(prefab);
                     }
                 }
             }
