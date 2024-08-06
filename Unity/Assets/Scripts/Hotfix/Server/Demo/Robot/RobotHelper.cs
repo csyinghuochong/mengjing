@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Client
@@ -1546,9 +1547,29 @@ namespace ET.Client
         public static async ETTask PaiMai(Scene root)
         {
             await RobotHelper.MoveToNpc(root, 20000017);
-            
+
             // 买东西
-            
+            List<int> numbers = PaiMaiSellConfigCategory.Instance.GetAll().Keys.ToList();
+            int randomIndex = RandomHelper.RandomNumber(0, numbers.Count);
+            int paiMaiSellId = numbers[randomIndex];
+
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            PaiMaiSellConfig paiMaiSellConfig = PaiMaiSellConfigCategory.Instance.Get(paiMaiSellId);
+            if (userInfo.Lv < paiMaiSellConfig.BuyLv)
+            {
+                // "{0}级才能购买！", paiMaiSellConfig.BuyLv));
+
+                return;
+            }
+
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            {
+                // "背包已满！"
+                return;
+            }
+
+            await PaiMaiNetHelper.PaiMaiShop(root, paiMaiSellId, 1);
+
             // 上架东西
         }
     }
