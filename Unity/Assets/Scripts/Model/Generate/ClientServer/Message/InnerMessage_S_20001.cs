@@ -4098,13 +4098,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.T2G_GateUnitInfoRequest)]
-    [ResponseType(nameof(G2T_GateUnitInfoResponse))]
-    public partial class T2G_GateUnitInfoRequest : MessageObject, IRequest
+    [Message(InnerMessage.A2M_GetUnitInfoRequest)]
+    [ResponseType(nameof(M2A_GetUnitInfoResponse))]
+    public partial class A2M_GetUnitInfoRequest : MessageObject, ILocationRequest
     {
-        public static T2G_GateUnitInfoRequest Create(bool isFromPool = false)
+        public static A2M_GetUnitInfoRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(T2G_GateUnitInfoRequest), isFromPool) as T2G_GateUnitInfoRequest;
+            return ObjectPool.Instance.Fetch(typeof(A2M_GetUnitInfoRequest), isFromPool) as A2M_GetUnitInfoRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -4132,12 +4132,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.G2T_GateUnitInfoResponse)]
-    public partial class G2T_GateUnitInfoResponse : MessageObject, IResponse
+    [Message(InnerMessage.M2A_GetUnitInfoResponse)]
+    public partial class M2A_GetUnitInfoResponse : MessageObject, ILocationResponse
     {
-        public static G2T_GateUnitInfoResponse Create(bool isFromPool = false)
+        public static M2A_GetUnitInfoResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(G2T_GateUnitInfoResponse), isFromPool) as G2T_GateUnitInfoResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2A_GetUnitInfoResponse), isFromPool) as M2A_GetUnitInfoResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -4149,14 +4149,11 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
-        [MemoryPackOrder(0)]
-        public long SessionInstanceId { get; set; }
-
+        /// <summary>
+        /// 0 正常 1 离线
+        /// </summary>
         [MemoryPackOrder(1)]
         public int PlayerState { get; set; }
-
-        [MemoryPackOrder(2)]
-        public long UnitId { get; set; }
 
         public override void Dispose()
         {
@@ -4168,9 +4165,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.SessionInstanceId = default;
             this.PlayerState = default;
-            this.UnitId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -8628,12 +8623,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2M_JiaYuanOperateMessage)]
-    public partial class M2M_JiaYuanOperateMessage : MessageObject, IMessage
+    [Message(InnerMessage.J2M_JiaYuanOperateRequest)]
+    [ResponseType(nameof(M2J_JiaYuanOperateResponse))]
+    public partial class J2M_JiaYuanOperateRequest : MessageObject, ILocationRequest
     {
-        public static M2M_JiaYuanOperateMessage Create(bool isFromPool = false)
+        public static J2M_JiaYuanOperateRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2M_JiaYuanOperateMessage), isFromPool) as M2M_JiaYuanOperateMessage;
+            return ObjectPool.Instance.Fetch(typeof(J2M_JiaYuanOperateRequest), isFromPool) as J2M_JiaYuanOperateRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -8651,6 +8647,39 @@ namespace ET
 
             this.RpcId = default;
             this.JiaYuanOperate = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.M2J_JiaYuanOperateResponse)]
+    public partial class M2J_JiaYuanOperateResponse : MessageObject, ILocationResponse
+    {
+        public static M2J_JiaYuanOperateResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2J_JiaYuanOperateResponse), isFromPool) as M2J_JiaYuanOperateResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -8952,8 +8981,8 @@ namespace ET
         public const ushort U2M_UnionTransferResponse = 20111;
         public const ushort U2M_UnionApplyRequest = 20112;
         public const ushort M2U_UnionApplyResponse = 20113;
-        public const ushort T2G_GateUnitInfoRequest = 20114;
-        public const ushort G2T_GateUnitInfoResponse = 20115;
+        public const ushort A2M_GetUnitInfoRequest = 20114;
+        public const ushort M2A_GetUnitInfoResponse = 20115;
         public const ushort U2M_UnionKeJiQuickRequest = 20116;
         public const ushort M2U_UnionKeJiQuickResponse = 20117;
         public const ushort U2M_UnionKickOutRequest = 20118;
@@ -9072,10 +9101,11 @@ namespace ET
         public const ushort M2A_PetMingLoginResponse = 20231;
         public const ushort M2J_JiaYuanEnterRequest = 20232;
         public const ushort J2M_JiaYuanEnterResponse = 20233;
-        public const ushort M2M_JiaYuanOperateMessage = 20234;
-        public const ushort M2R_RechargeRequest = 20235;
-        public const ushort R2M_RechargeResponse = 20236;
-        public const ushort R2G_RechargeResultRequest = 20237;
-        public const ushort G2R_RechargeResultResponse = 20238;
+        public const ushort J2M_JiaYuanOperateRequest = 20234;
+        public const ushort M2J_JiaYuanOperateResponse = 20235;
+        public const ushort M2R_RechargeRequest = 20236;
+        public const ushort R2M_RechargeResponse = 20237;
+        public const ushort R2G_RechargeResultRequest = 20238;
+        public const ushort G2R_RechargeResultResponse = 20239;
     }
 }

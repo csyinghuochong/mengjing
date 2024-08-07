@@ -1,12 +1,12 @@
 ﻿namespace ET.Server
 {
-    [MessageHandler(SceneType.JiaYuan)]
-    public class M2M_JiaYuanOperateHandler : MessageHandler<Unit, M2M_JiaYuanOperateMessage>
+    [MessageHandler(SceneType.Map)]
+    public class J2M_JiaYuanOperateHandler : MessageHandler<Unit, J2M_JiaYuanOperateRequest, M2J_JiaYuanOperateResponse>
     {
-        protected override async ETTask Run(Unit unit, M2M_JiaYuanOperateMessage message)
+        protected override async ETTask Run(Unit unit, J2M_JiaYuanOperateRequest request, M2J_JiaYuanOperateResponse response)
         {
             JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
-            JiaYuanOperate jiaYuanOperate = message.JiaYuanOperate;
+            JiaYuanOperate jiaYuanOperate = request.JiaYuanOperate;
             switch (jiaYuanOperate.OperateType)
             {
                 case JiaYuanOperateType.Visit:

@@ -119,25 +119,15 @@
                         break;
                 }
 
-
-                ActorId gateServerId = UnitCacheHelper.GetGateServerId(unit.Zone());
-                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                T2G_GateUnitInfoRequest.UserID = request.MasterId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, T2G_GateUnitInfoRequest);
-
                 //玩家在线
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-                    M2M_JiaYuanOperateMessage opmessage = M2M_JiaYuanOperateMessage.Create();
-                    opmessage.JiaYuanOperate = jiaYuanOperate;
-                    unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send (request.MasterId, opmessage);
-                }
-                else
+                J2M_JiaYuanOperateRequest opmessage = J2M_JiaYuanOperateRequest.Create();
+                opmessage.JiaYuanOperate = jiaYuanOperate;
+                M2J_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (M2J_JiaYuanOperateResponse)await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.MasterId, opmessage);
+                if (m2JJiaYuanOperateResponse.Error != ErrorCode.ERR_Success)
                 {
                     await UnitCacheHelper.SaveComponentCache(unit.Root(),  jiaYuanComponent);
                 }
-               
+
                 unit.GetComponent<NumericComponentS>().ApplyChange( null, NumericType.JiaYuanGatherOther,1, 0 );
             }
 

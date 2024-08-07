@@ -10,19 +10,16 @@
             {
                 dBUnionInfo.UnionInfo.ApplyList.Add(request.UserId);
             }
-
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = dBUnionInfo.UnionInfo.LeaderId;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                  (gateServerId, T2G_GateUnitInfoRequest);
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
+            
+            A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
+            M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
+                    .Get(LocationType.Unit).Call(dBUnionInfo.UnionInfo.LeaderId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
+            if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success &&  m2AGetUnitInfoResponse.PlayerState == 0)
             {
                 M2C_UnionApplyResult m2C_HorseNoticeInfo = M2C_UnionApplyResult.Create();
-                MapMessageHelper.SendToClient(scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
+                MapMessageHelper.SendToClient(scene.Root(), dBUnionInfo.UnionInfo.LeaderId, m2C_HorseNoticeInfo);
             }
-            //暂时离线需要通知到map?
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.None)
+            else
             {
                 ReddotComponentS reddotComponent =
                         await UnitCacheHelper.GetComponentCache<ReddotComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);

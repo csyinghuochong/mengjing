@@ -949,8 +949,8 @@ message M2U_UnionApplyResponse // ILocationResponse
 	string Message = 92;
 }
 
-//ResponseType G2T_GateUnitInfoResponse
-message T2G_GateUnitInfoRequest // IRequest
+//ResponseType M2A_GetUnitInfoResponse
+message A2M_GetUnitInfoRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -958,15 +958,13 @@ message T2G_GateUnitInfoRequest // IRequest
 	int64 UserID = 1;
 }
 
-message G2T_GateUnitInfoResponse // IResponse
+message M2A_GetUnitInfoResponse // ILocationResponse
 {
     int32 RpcId = 90;
     int32 Error = 91;
     string Message = 92;
-
-    int64 SessionInstanceId = 1;
-    int32 PlayerState = 2;
-    int64 UnitId = 3;
+		
+    int32 PlayerState = 2;  // 0 正常 1 离线
 }
 
 //加速完成
@@ -2011,12 +2009,19 @@ message J2M_JiaYuanEnterResponse // IResponse
 	ActorId FubenActorId = 3;
 }
 
-message M2M_JiaYuanOperateMessage // IMessage
+//ResponseType M2J_JiaYuanOperateResponse
+message J2M_JiaYuanOperateRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	JiaYuanOperate  JiaYuanOperate = 1;
 }
 
+message M2J_JiaYuanOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
 
 //ResponseType R2M_RechargeResponse
 message M2R_RechargeRequest // IRequest
