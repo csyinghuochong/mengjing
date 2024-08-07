@@ -454,21 +454,12 @@ namespace ET.Server
 
                 playerlist.AddRange(dBUnionInfo.UnionInfo.UnionPlayerList);
             }
-
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
+            
             M2C_HorseNoticeInfo m2C_HorseNoticeInfo = M2C_HorseNoticeInfo.Create();
             m2C_HorseNoticeInfo.NoticeType = NoticeType.UnionRace;
-
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
             for (int i = 0; i < playerlist.Count; i++)
             {
-                T2G_GateUnitInfoRequest.UserID = playerlist[i].UserID;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>()
-                        .Call(gateServerId, T2G_GateUnitInfoRequest);
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-                    MapMessageHelper.SendToClient(self.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
-                }
+                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(playerlist[i].UserID, m2C_HorseNoticeInfo);
             }
         }
 

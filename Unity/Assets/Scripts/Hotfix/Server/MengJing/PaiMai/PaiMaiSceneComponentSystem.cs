@@ -127,18 +127,11 @@ namespace ET.Server
 
             if (self.AuctioUnitId != 0)
             {
-                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                T2G_GateUnitInfoRequest.UserID = self.AuctioUnitId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
 
                 bool getitem = false;
 
                 //在线
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-
-                    P2M_PaiMaiAuctionOverRequest p2M_PaiMaiAuctionOverRequest = P2M_PaiMaiAuctionOverRequest.Create();
+                 P2M_PaiMaiAuctionOverRequest p2M_PaiMaiAuctionOverRequest = P2M_PaiMaiAuctionOverRequest.Create();
                     p2M_PaiMaiAuctionOverRequest.Price = self.AuctionPrice;
                     p2M_PaiMaiAuctionOverRequest.ItemID = self.AuctionItem;
                     p2M_PaiMaiAuctionOverRequest.ItemNumber = self.AuctionItemNum;
@@ -159,33 +152,30 @@ namespace ET.Server
                         {
                             self.AuctionJoinList.Remove(self.AuctioUnitId);
                         }
+                        
+                        Log.Warning($"OnAuctionOver[离线]:  {self.Zone()}  {self.AuctioUnitId}  {self.AuctionPlayer}");
+                        UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), self.AuctioUnitId);
+                        if (userInfoComponent.UserInfo.Gold >= self.AuctionPrice)
+                        {
+                            userInfoComponent.UserInfo.Gold -= self.AuctionPrice;
+                            UnitCacheHelper.SaveComponentCache(self.Root(),  userInfoComponent).Coroutine();
+
+                            //发送道具
+                            getitem = true;
+                        }
+                        else
+                        {
+                            //流派则不退还保证金
+                            if (self.AuctionJoinList.Contains(self.AuctioUnitId))
+                            {
+                                self.AuctionJoinList.Remove(self.AuctioUnitId);
+                            }
+                        }
+
+                        Log.Warning($"OnAuctionOver[离线]:   {getitem}");
                     }
 
                     Log.Warning($"OnAuctionOver[在线]:  {m2G_RechargeResponse.Error}  {getitem}");
-                }
-                else
-                {
-                    Log.Warning($"OnAuctionOver[离线]:  {self.Zone()}  {self.AuctioUnitId}  {self.AuctionPlayer}");
-                    UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), self.AuctioUnitId);
-                    if (userInfoComponent.UserInfo.Gold >= self.AuctionPrice)
-                    {
-                        userInfoComponent.UserInfo.Gold -= self.AuctionPrice;
-                        UnitCacheHelper.SaveComponentCache(self.Root(),  userInfoComponent).Coroutine();
-
-                        //发送道具
-                        getitem = true;
-                    }
-                    else
-                    {
-                        //流派则不退还保证金
-                        if (self.AuctionJoinList.Contains(self.AuctioUnitId))
-                        {
-                            self.AuctionJoinList.Remove(self.AuctioUnitId);
-                        }
-                    }
-
-                    Log.Warning($"OnAuctionOver[离线]:   {getitem}");
-                }
 
                 if (getitem)
                 {

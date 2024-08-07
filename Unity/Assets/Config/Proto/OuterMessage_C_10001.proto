@@ -3858,15 +3858,6 @@ message U2C_UnionSignUpResponse // IUnionActorResponse
 	string Message = 92;
 }
 
-//排行榜刷新
-message R2M_RankUpdateMessage // IMessage
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	int32 RankType = 1;   //1 战力 2天梯 3捐献
-	int32 RankId = 2;
-	int32 OccRankId = 3;   //目前只有战力有职业排行
-}
 
 message RankingTrialInfo
 {
