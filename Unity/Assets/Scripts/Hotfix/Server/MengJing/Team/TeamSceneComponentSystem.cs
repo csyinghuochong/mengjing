@@ -108,27 +108,19 @@ namespace ET.Server
             return teamInfo;
         }
 
-        public static async ETTask SyncTeamInfo(this TeamSceneComponent self, TeamInfo teamInfo, List<TeamPlayerInfo> userIds)
+        public static  void SyncTeamInfo(this TeamSceneComponent self, TeamInfo teamInfo, List<TeamPlayerInfo> userIds)
         {
-            M2C_TeamUpdateResult m2C_HorseNoticeInfo = self.m2C_TeamUpdateResult;
+            M2C_TeamUpdateResult m2C_HorseNoticeInfo = M2C_TeamUpdateResult.Create();
             m2C_HorseNoticeInfo.TeamInfo = teamInfo;
-            T2M_TeamUpdateRequest t2M_TeamUpdateRequest = self.t2M_TeamUpdateRequest;
-
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2M_TeamUpdateRequest t2M_TeamUpdateRequest = T2M_TeamUpdateRequest.Create();
+            
             for (int i = 0; i < userIds.Count; i++)
             {
                 long userId = userIds[i].UserID;
-                T2G_GateUnitInfoRequest.UserID = userId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
-
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-                    t2M_TeamUpdateRequest.TeamId = self.GetTeamInfoId(userId);
-                    MapMessageHelper.SendToClient(self.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
-                    self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, t2M_TeamUpdateRequest);
-                }
+                t2M_TeamUpdateRequest.TeamId = self.GetTeamInfoId(userId);
+                   
+                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(userId, m2C_HorseNoticeInfo);
+                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, t2M_TeamUpdateRequest);
             }
         }
 
@@ -173,7 +165,7 @@ namespace ET.Server
                 self.TeamList.Remove(teamInfo);
             }
 
-            self.SyncTeamInfo(teamInfo, userIDList).Coroutine();
+            self.SyncTeamInfo(teamInfo, userIDList);
         }
 
         /// <summary>

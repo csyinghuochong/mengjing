@@ -35,7 +35,7 @@
                 teamInfo.PlayerList.Add(request.TeamPlayerInfo_2);
             }
 
-            teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList).Coroutine();
+            teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList);
             await ETTask.CompletedTask;
         }
     }

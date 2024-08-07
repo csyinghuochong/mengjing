@@ -24,15 +24,9 @@
             //需要判断次数就添加C2M
             M2C_TeamDungeonApplyResult m2C_HorseNoticeInfo = M2C_TeamDungeonApplyResult.Create();
             m2C_HorseNoticeInfo.TeamPlayerInfo = request.TeamPlayerInfo;
-            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = teamInfo.TeamId;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                  (gateServerId, T2G_GateUnitInfoRequest);
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-            {
-                MapMessageHelper.SendToClient(scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
-            }
+            
+            scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(teamInfo.TeamId, m2C_HorseNoticeInfo);
+            await ETTask.CompletedTask;
         }
     }
 }

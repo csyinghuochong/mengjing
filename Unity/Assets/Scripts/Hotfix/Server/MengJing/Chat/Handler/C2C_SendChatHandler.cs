@@ -111,7 +111,6 @@
                         }
                     }
                     break;
-
                 case (int)ChannelEnum.Friend:
                 {
                     T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();

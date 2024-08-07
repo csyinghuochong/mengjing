@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [MessageHandler(SceneType.Team)]
+    [MessageHandler(SceneType.Map)]
     public class T2M_TeamUpdateHandler : MessageHandler<Unit, T2M_TeamUpdateRequest>
     {
         protected override async ETTask Run(Unit unit, T2M_TeamUpdateRequest message)

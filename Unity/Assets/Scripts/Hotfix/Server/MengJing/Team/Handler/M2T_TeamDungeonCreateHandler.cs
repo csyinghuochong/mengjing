@@ -24,7 +24,7 @@
                 teamInfo.SceneId = request.FubenId;
             }
             teamInfo.FubenType = request.FubenType; 
-            teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList).Coroutine();
+            teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList);
             
             await ETTask.CompletedTask;
         }
