@@ -185,5 +185,6 @@ namespace ET.Client
 		WindowID_TeamDungeonPrepare,
 		WindowID_TeamDungeonSettlement,
 		WindowID_GiveTask,
+		WindowID_GivePet,
 	}
 }
