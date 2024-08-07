@@ -216,9 +216,15 @@ namespace ET
 
                 Console.WriteLine("去收集珍宝");
                 await RobotHelper.ShouJi(root);
-                
+
                 Console.WriteLine("去附魔大师");
                 await RobotHelper.MakeLearn(root, 20000026);
+
+                Console.WriteLine("去宝藏之地");
+                await RobotHelper.MoveToNpc(root, 20000027);
+
+                Console.WriteLine("去密境传送");
+                await RobotHelper.MoveToNpc(root, 20000028);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
