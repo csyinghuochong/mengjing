@@ -21,19 +21,12 @@ namespace ET.Server
 
         public static async ETTask UpdateSoloRank(this SoloSceneComponent self, long unitid, int rankid)
         {
-            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Gate1").ActorId;
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = unitid;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
 
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-            {
-                R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
-                r2M_RankUpdateMessage.RankType = 4;
-                r2M_RankUpdateMessage.RankId = rankid;
-                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, r2M_RankUpdateMessage);
-            }
+            R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
+            r2M_RankUpdateMessage.RankType = 4;
+            r2M_RankUpdateMessage.RankId = rankid;
+            self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, r2M_RankUpdateMessage);
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnSoloBegin(this SoloSceneComponent self)
@@ -381,23 +374,17 @@ namespace ET.Server
 
                 //循环给每个要进入的玩家发送进入副本的消息
                 //发送消息获取对应的玩家数据
-                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                T2G_GateUnitInfoRequest.UserID = playerlist[i].UnitId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
-                //判断目标是玩家且当前是在线的
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-                    //给对应玩家发送进入地图的消息
-                    MapMessageHelper.SendToClient(self.Root(), g2M_UpdateUnitResponse.SessionInstanceId, self.m2C_SoloMatchResult);
+                //给对应玩家发送进入地图的消息
+                MapMessageHelper.SendToClient(self.Root(), playerlist[i].UnitId, self.m2C_SoloMatchResult);
 
-                    //匹配成功的要移除匹配列表
-                    if (self.MatchList.Contains(playerlist[i]))
-                    {
-                        self.MatchList.Remove(playerlist[i]);
-                    }
+                //匹配成功的要移除匹配列表
+                if (self.MatchList.Contains(playerlist[i]))
+                {
+                    self.MatchList.Remove(playerlist[i]);
                 }
             }
+            
+            await ETTask.CompletedTask;
         }
 
         public static long GetSoloInstanceId(this SoloSceneComponent self, long unitID_1, long unitID_2)

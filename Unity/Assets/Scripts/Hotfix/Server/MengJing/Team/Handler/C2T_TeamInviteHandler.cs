@@ -30,19 +30,11 @@
                 }
             }
 
-            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = request.UserID;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                (gateServerId, T2G_GateUnitInfoRequest);
+            M2C_TeamInviteResult m2C_HorseNoticeInfo = M2C_TeamInviteResult.Create();
+            m2C_HorseNoticeInfo.TeamPlayerInfo = request.TeamPlayerInfo;
+            MapMessageHelper.SendToClient(scene.Root(),request.UserID, m2C_HorseNoticeInfo);
 
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-            {
-                M2C_TeamInviteResult m2C_HorseNoticeInfo = M2C_TeamInviteResult.Create();
-                m2C_HorseNoticeInfo.TeamPlayerInfo = request.TeamPlayerInfo;
-                MapMessageHelper.SendToClient(scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
-            }
-
+            await ETTask.CompletedTask;
         }
     }
 }

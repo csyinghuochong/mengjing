@@ -383,19 +383,12 @@ namespace ET.Server
             }
 
             //通知玩家
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(zone);
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = userId;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
-            if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-            {
-                R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
-                r2M_RankUpdateMessage.RankType = 1;
-                r2M_RankUpdateMessage.RankId = rankId;
-                r2M_RankUpdateMessage.OccRankId = self.GetOccCombatRank(userId, occ);
-                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, r2M_RankUpdateMessage);
-            }
+            R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
+            r2M_RankUpdateMessage.RankType = 1;
+            r2M_RankUpdateMessage.RankId = rankId;
+            r2M_RankUpdateMessage.OccRankId = self.GetOccCombatRank(userId, occ);
+            self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, r2M_RankUpdateMessage);
+            await ETTask.CompletedTask;
         }
 
         public static int GetTrialRank(this RankSceneComponent self, long userId)
