@@ -35,20 +35,18 @@
 
                     return;
                 }
-
-                ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
-                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                T2G_GateUnitInfoRequest.UserID = request.Id;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                      (gateServerId, T2G_GateUnitInfoRequest);
-
+                
+                A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
+                M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
+                        .Get(LocationType.Unit).Call(request.Id, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
+                
                 //在线直接推送
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
+                if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
                 {
                     M2C_UpdateMailInfo m2C_HorseNoticeInfo = M2C_UpdateMailInfo.Create();
-                    MapMessageHelper.SendToClient( scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
+                    MapMessageHelper.SendToClient( scene.Root(), request.Id, m2C_HorseNoticeInfo);
                 }
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.None)
+                else
                 {
                     ReddotComponentS reddotComponent = await UnitCacheHelper.GetComponentCache<ReddotComponentS>(scene.Root(), request.Id);
                     if (reddotComponent != null)

@@ -9,24 +9,16 @@
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(unit.Root(), request.MasterId);
             if (unit.Id != request.MasterId)
             {
-                ActorId gateServerId = UnitCacheHelper.GetGateServerId(unit.Zone());
-                T2G_GateUnitInfoRequest t2GGateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                t2GGateUnitInfoRequest.UserID = request.MasterId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, t2GGateUnitInfoRequest);
-
+                
+                JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
+                jiaYuanOperate = JiaYuanOperate.Create();
+                jiaYuanOperate.OperateType = JiaYuanOperateType.Visit;
+                jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                J2M_JiaYuanOperateRequest opmessage = J2M_JiaYuanOperateRequest.Create();
+                opmessage.JiaYuanOperate = jiaYuanOperate;
+                M2J_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (M2J_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.MasterId, opmessage);
                 //玩家在线
-                if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                {
-                    JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
-                    jiaYuanOperate = JiaYuanOperate.Create();
-                    jiaYuanOperate.OperateType = JiaYuanOperateType.Visit;
-                    jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-                    M2M_JiaYuanOperateMessage opmessage = M2M_JiaYuanOperateMessage.Create();
-                    opmessage.JiaYuanOperate = jiaYuanOperate;
-                    unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(request.MasterId, opmessage);
-                }
-                else
+                if (m2JJiaYuanOperateResponse.Error != ErrorCode.ERR_Success)
                 {
                     JiaYuanRecord JiaYuanRecord = JiaYuanRecord.Create();
                     JiaYuanRecord.OperateType = JiaYuanOperateType.Visit;

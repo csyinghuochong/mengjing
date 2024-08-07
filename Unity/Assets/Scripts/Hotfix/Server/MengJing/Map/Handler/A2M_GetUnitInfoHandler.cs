@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene scene, A2M_GetUnitInfoRequest request, M2A_GetUnitInfoResponse response)
         {
 
-            response.PlayerState = 0;
+            response.PlayerState = (int)PlayerState.Game;
             await ETTask.CompletedTask;
         }
     }
