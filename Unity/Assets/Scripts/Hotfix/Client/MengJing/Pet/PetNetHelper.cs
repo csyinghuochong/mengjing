@@ -397,6 +397,11 @@ namespace ET.Client
 
             M2C_RolePetProtect response = (M2C_RolePetProtect)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+               root.GetComponent<PetComponentC>().OnPetProtect(petInfoId, isProtect);
+            }
+
             return response.Error;
         }
 

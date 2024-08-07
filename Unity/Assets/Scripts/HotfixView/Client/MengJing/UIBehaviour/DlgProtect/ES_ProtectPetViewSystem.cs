@@ -76,8 +76,13 @@ namespace ET.Client
 
         public static async ETTask RequestProtect(this ES_ProtectPet self, bool isprotectd)
         {
-            await PetNetHelper.RolePetProtect(self.Root(), self.PetInfoId, isprotectd);
+            int error = await PetNetHelper.RolePetProtect(self.Root(), self.PetInfoId, isprotectd);
 
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+            
             if (self.IsDisposed)
             {
                 return;
@@ -88,8 +93,7 @@ namespace ET.Client
             {
                 FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物{0}成功", tip));
             }
-
-            self.Root().GetComponent<PetComponentC>().OnPetProtect(self.PetInfoId, isprotectd);
+            
             self.OnInitPetList();
             self.OnClickPetHandler(self.PetInfoId);
         }

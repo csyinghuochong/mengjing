@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 
@@ -2198,10 +2199,49 @@ namespace ET.Client
         {
             await RobotHelper.MoveToNpc(root, 30000011);
 
-            // 好装备加锁
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            // 橙色装备加锁
+            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (itemConfig.EquipType == 101)
+                {
+                    continue;
+                }
+
+                if (itemConfig.ItemQuality < 5)
+                {
+                    continue;
+                }
+
+                if (bagInfo.IsProtect)
+                {
+                    continue;
+                }
+
+                await BagClientNetHelper.ItemProtect(root, bagInfo.BagInfoID, true);
+            }
 
             // 好宠物加锁
-            
+            foreach (RolePetInfo rolePetInfo in root.GetComponent<PetComponentC>().RolePetInfos)
+            {
+                if (rolePetInfo.IsProtect)
+                {
+                    continue;
+                }
+
+                if (rolePetInfo.PetLv < 30)
+                {
+                    continue;
+                }
+
+                if (rolePetInfo.PetSkill.Count < 6)
+                {
+                    continue;
+                }
+
+                await PetNetHelper.RolePetProtect(root, rolePetInfo.Id, true);
+            }
         }
     }
 }
