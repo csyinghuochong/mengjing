@@ -151,7 +151,7 @@ namespace ET
                 await RobotHelper.Mystery(root);
 
                 Console.WriteLine("去啄啄百货店 买个东西");
-                await RobotHelper.Store(root);
+                await RobotHelper.Store(root, 20000002);
 
                 Console.WriteLine("去储物箱 存取东西");
                 await RobotHelper.Warehous(root);
@@ -240,6 +240,9 @@ namespace ET
 
                 Console.WriteLine("去节日使者");
                 await RobotHelper.TaskGet(root, 20000033);
+
+                Console.WriteLine("珍宝商人");
+                await RobotHelper.Store(root, 20000036);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);

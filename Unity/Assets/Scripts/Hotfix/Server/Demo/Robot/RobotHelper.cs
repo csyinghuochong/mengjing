@@ -1196,9 +1196,8 @@ namespace ET.Client
             await BagClientNetHelper.RquestMysteryBuy(root, mysteryItemInfo, npcid);
         }
 
-        public static async ETTask Store(Scene root)
+        public static async ETTask Store(Scene root, int npcid)
         {
-            int npcid = 20000002;
             await RobotHelper.MoveToNpc(root, npcid);
 
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
