@@ -1940,14 +1940,84 @@ namespace ET.Client
                     }
                     else
                     {
-                        // TODO UIGiveTask..
-                        // self.View.E_ButtonGiveTaskButton.gameObject.SetActive(taskPro != null);
+                        if (taskConfig.TargetType == TaskTargetType.GivePet_25)
+                        {
+                            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+
+                            List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
+                            for (int i = 0; i < rolePetInfos.Count; i++)
+                            {
+                                if (rolePetInfos[i].IsProtect)
+                                {
+                                    // 宠物已锁定！
+                                    continue;
+                                }
+
+                                if (rolePetInfos[i].PetStatus == 1)
+                                {
+                                    // 出战宠物不能提交！
+                                    continue;
+                                }
+
+                                if (rolePetInfos[i].PetStatus == 2)
+                                {
+                                    // 请先停止家园散步！
+                                    continue;
+                                }
+
+                                if (rolePetInfos[i].PetStatus == 3)
+                                {
+                                    // 请先从仓库取出！
+                                    continue;
+                                }
+
+                                if (petComponent.TeamPetList.Contains(rolePetInfos[i].Id))
+                                {
+                                    // 当前宠物存在于宠物天梯上阵中,不能提交！
+                                    continue;
+                                }
+
+                                if (petComponent.PetFormations.Contains(rolePetInfos[i].Id))
+                                {
+                                    // 当前宠物存在于宠物副本上阵中,不能提交！
+                                    continue;
+                                }
+
+                                if (petComponent.PetMingList.Contains(rolePetInfos[i].Id))
+                                {
+                                    // 当前宠物存在于宠物矿场队伍中,不能提交！
+                                    continue;
+                                }
+
+                                if (TaskHelper.IsTaskGivePet(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, rolePetInfos[i]))
+                                {
+                                    taskPro.taskStatus = (int)TaskStatuEnum.Completed; // 手动修改
+
+                                    await TaskClientNetHelper.RequestCommitTask(root, taskid, rolePetInfos[i].Id);
+
+                                    return;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+
+                            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+                            {
+                                if (TaskHelper.IsTaskGiveItem(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, bagInfo))
+                                {
+                                    taskPro.taskStatus = (int)TaskStatuEnum.Completed;
+                                    await TaskClientNetHelper.RequestCommitTask(root, taskid, bagInfo.BagInfoID);
+                                    return;
+                                }
+                            }
+                        }
                     }
                 }
                 else
                 {
                     bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
-                    Log.Info($"是否完成 {isCompleted}");
                     if (isCompleted)
                     {
                         await TaskClientNetHelper.RequestCommitTask(root, taskid, 0);
