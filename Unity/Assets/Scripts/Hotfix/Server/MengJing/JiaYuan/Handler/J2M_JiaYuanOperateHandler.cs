@@ -1,7 +1,7 @@
 ﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class J2M_JiaYuanOperateHandler : MessageHandler<Unit, J2M_JiaYuanOperateRequest, M2J_JiaYuanOperateResponse>
+    public class J2M_JiaYuanOperateHandler : MessageLocationHandler<Unit, J2M_JiaYuanOperateRequest, M2J_JiaYuanOperateResponse>
     {
         protected override async ETTask Run(Unit unit, J2M_JiaYuanOperateRequest request, M2J_JiaYuanOperateResponse response)
         {
