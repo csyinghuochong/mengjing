@@ -523,9 +523,10 @@ namespace ET.Client
                 // 给予宠物界面
                 // 参考一下宠物界面 不能放生的宠物此处也不同提交。 添加道具检测一遍。  
                 // 加个任务测试
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGivePet);
-                // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskId);
-                // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GivePet);
+                DlgGivePet dlgGivePet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>();
+                dlgGivePet.InitTask(self.TaskId);
+                dlgGivePet.OnUpdateUI();
             }
             else
             {

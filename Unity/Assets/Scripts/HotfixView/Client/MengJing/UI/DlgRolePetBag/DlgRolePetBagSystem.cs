@@ -58,7 +58,9 @@ namespace ET.Client
             }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int maxNum = PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, userInfo.Lv);
+            int petexpendNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
+                    .GetAsInt(NumericType.PetExtendNumber);
+            int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
             if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
             {
                 FlyTipComponent.Instance.ShowFlyTip("已达到宠物最大数量");
