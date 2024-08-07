@@ -215,7 +215,8 @@ namespace ET
                 await RobotHelper.TaskGet(root, 20000024);
 
                 Console.WriteLine("去收集珍宝");
-                
+                await RobotHelper.ShouJi(root);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 

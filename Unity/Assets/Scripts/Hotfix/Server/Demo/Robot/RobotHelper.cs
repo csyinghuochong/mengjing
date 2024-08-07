@@ -2031,5 +2031,49 @@ namespace ET.Client
 
             await ETTask.CompletedTask;
         }
+
+        public static async ETTask ShouJi(Scene root)
+        {
+            int npcid = 20000025;
+            await RobotHelper.MoveToNpc(root, npcid);
+
+            ShoujiComponentC shoujiComponent = root.GetComponent<ShoujiComponentC>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            // 珍宝
+            foreach (ShouJiItemConfig shouJiItemConfig in ShouJiItemConfigCategory.Instance.GetAll().Values.ToList())
+            {
+                KeyValuePairInt keyValuePairInt = shoujiComponent.GetTreasureInfo(shouJiItemConfig.Id);
+                int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
+
+                bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
+                if (!actived)
+                {
+                    List<BagInfo> showBagInfos = new List<BagInfo>();
+                    foreach (BagInfo bagInfo in bagComponent.GetBagList())
+                    {
+                        if (bagInfo.ItemID != shouJiItemConfig.ItemID)
+                        {
+                            continue;
+                        }
+
+                        showBagInfos.Add(bagInfo);
+                    }
+
+                    if (showBagInfos.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    int count = shouJiItemConfig.AcitveNum - haveNumber;
+                    List<long> selects = new List<long>();
+                    for (int i = 0; i < count; i++)
+                    {
+                        selects.Add(showBagInfos[i].BagInfoID);
+                    }
+
+                    await ShoujiNetHelper.ShouJiTreasure(root, selects, shouJiItemConfig.Id);
+                }
+            }
+        }
     }
 }
