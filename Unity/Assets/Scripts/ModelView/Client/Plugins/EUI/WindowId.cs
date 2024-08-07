@@ -184,5 +184,6 @@ namespace ET.Client
 		WindowID_UnionApplyList,
 		WindowID_TeamDungeonPrepare,
 		WindowID_TeamDungeonSettlement,
+		WindowID_GiveTask,
 	}
 }
