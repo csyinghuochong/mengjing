@@ -250,6 +250,12 @@ namespace ET
                 Console.WriteLine("去装备宠物加锁");
                 await RobotHelper.Protect(root);
 
+                Console.WriteLine("去传承商人");
+                await RobotHelper.Store(root, 20000039);
+
+                Console.WriteLine("去封印之塔");
+                await RobotHelper.MoveToNpc(root, 20000041);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
