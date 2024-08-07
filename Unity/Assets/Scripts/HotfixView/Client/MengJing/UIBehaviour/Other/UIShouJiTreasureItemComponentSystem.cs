@@ -80,17 +80,16 @@ namespace ET.Client
                     {
                         float fvalue = float.Parse(attributeInfo[1]);
                         string svalue = fvalue.ToString("0.#####");
-                        attributeStr = zstring.Format("{0}{1} {2}%", attributeStr, ItemViewHelp.GetAttributeName(numericType), svalue);
+                        attributeStr += zstring.Format("{0} {1}% ", ItemViewHelp.GetAttributeName(numericType), svalue);
                     }
                     else
                     {
-                        attributeStr = zstring.Format("{0}提升{1}{2}点", attributeStr, ItemViewHelp.GetAttributeName(numericType),
-                            int.Parse(attributeInfo[1]));
+                        attributeStr += zstring.Format("提升{0}{1}点", ItemViewHelp.GetAttributeName(numericType), int.Parse(attributeInfo[1]));
                     }
 
                     if (i < attributeInfoList.Length - 1)
                     {
-                        attributeStr = zstring.Format("{0}{1}", attributeStr, "\n");
+                        attributeStr += (zstring)"\n";
                     }
                 }
             }
