@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [MessageHandler(SceneType.Rank)]
+    [MessageHandler(SceneType.Map)]
     public class R2M_RankUpdateHandler : MessageHandler<Unit, R2M_RankUpdateMessage>
     {
         protected override async ETTask Run(Unit unit, R2M_RankUpdateMessage message)
