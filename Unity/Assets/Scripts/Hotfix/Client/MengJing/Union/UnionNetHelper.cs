@@ -49,8 +49,11 @@
             return response;
         }
 
+
+       
         public static async ETTask<U2C_UnionMyInfoResponse> UnionMyInfo(Scene root, long unionId)
         {
+            Log.Debug(("UnionMyInfo.C2U_UnionMyInfoRequest"));
             C2U_UnionMyInfoRequest request = C2U_UnionMyInfoRequest.Create();
             request.UnionId = unionId;
 
