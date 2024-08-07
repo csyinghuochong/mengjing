@@ -526,16 +526,15 @@ namespace ET.Client
                 // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGivePet);
                 // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskId);
                 // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
-                // UIHelper.Remove(self.ZoneScene(), UIType.UITaskGet);
             }
             else
             {
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGiveTask);
-                // ui.GetComponent<UIGiveTaskComponent>().InitTask(self.TaskId);
-                // UIHelper.Remove(self.ZoneScene(), UIType.UITaskGet);
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+                DlgGiveTask dlgGiveTask = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>();
+                dlgGiveTask.InitTask(self.TaskId);
             }
 
-            await ETTask.CompletedTask;
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GiveTask);
         }
 
         public static void OnButtonGetTask(this DlgTaskGet self)
