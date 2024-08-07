@@ -232,6 +232,9 @@ namespace ET
                 Console.WriteLine("去试炼之地");
                 await RobotHelper.MoveToNpc(root, 20000030);
 
+                Console.WriteLine("去神秘人");
+                await RobotHelper.TaskGet(root, 20000031);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
