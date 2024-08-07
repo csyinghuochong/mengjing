@@ -241,9 +241,12 @@ namespace ET
                 Console.WriteLine("去节日使者");
                 await RobotHelper.TaskGet(root, 20000033);
 
-                Console.WriteLine("珍宝商人");
+                Console.WriteLine("去珍宝商人");
                 await RobotHelper.Store(root, 20000036);
 
+                Console.WriteLine("去经验老头");
+                await RobotHelper.TaskGet(root, 20000037);
+                
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 

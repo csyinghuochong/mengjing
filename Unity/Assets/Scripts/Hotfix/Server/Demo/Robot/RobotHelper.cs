@@ -1860,172 +1860,271 @@ namespace ET.Client
             TaskComponentC taskComponent = root.GetComponent<TaskComponentC>();
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
 
-            //获取npc任务
-            List<int> taskids = new List<int>();
-
-            List<TaskPro> taskProCompleted = taskComponent.GetCompltedTaskByNpc(npcid);
-            for (int i = 0; i < taskProCompleted.Count; i++)
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
+            switch (npcConfig.NpcType)
             {
-                taskids.Add(taskProCompleted[i].taskID);
-            }
+                case 1: //神兽兑换
+                case 2: //挑戰之地
+                    // self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    // if (npcConfig.NpcPar != null)
+                    // {
+                    //     List<int> fubenList = new List<int>(npcConfig.NpcPar);
+                    //     self.AddUIScrollItems(ref self.ScrollItemTaskFubenItems, fubenList.Count);
+                    //     self.View.E_TaskFubenItemsLoopVerticalScrollRect.SetVisible(true, fubenList.Count);
+                    // }
 
-            taskids.AddRange(taskComponent.GetOpenTaskIds(npcid));
+                    break;
+                case 3: //循环任务 周任务 支线任务 藏宝图任务
 
-            List<int> addTaskids = new List<int>();
-            if (npcid == 20000024) //任务使者：赛利
-            {
-                int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
-                if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
-                {
-                    addTaskids.Add(weeklyTask);
-                }
+                    # region 任务
 
-                int dailyTaskId = numericComponent.GetAsInt(NumericType.DailyTaskID);
-                if (dailyTaskId > 0 && taskComponent.GetTaskById(dailyTaskId) == null)
-                {
-                    addTaskids.Add(dailyTaskId);
-                }
-            }
+                    //获取npc任务
+                    List<int> taskids = new List<int>();
 
-            if (npcid == 20000102) //家族任务
-            {
-                int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
-                if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)
-                {
-                    addTaskids.Add(unionTaskId);
-                }
-
-                int ringTaskId = numericComponent.GetAsInt(NumericType.RingTaskId);
-                if (ringTaskId > 0 && taskComponent.GetTaskById(ringTaskId) == null)
-                {
-                    addTaskids.Add(ringTaskId);
-                }
-            }
-
-            taskids.AddRange(addTaskids);
-
-            //给予任务
-            List<TaskPro> taskPros = taskComponent.RoleTaskList;
-            for (int i = 0; i < taskPros.Count; i++)
-            {
-                if (taskids.Contains(taskPros[i].taskID))
-                {
-                    continue;
-                }
-
-                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
-                if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
-                    && taskConfig.CompleteNpcID == npcid)
-                {
-                    taskids.Add(taskPros[i].taskID);
-                }
-                else if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25) &&
-                         taskConfig.TaskType == TaskTypeEnum.Ring && npcid == 20000102)
-                {
-                    // 家族给予任务可以CompleteNpcID==0，找家族任务NPC提交
-                    taskids.Add(taskPros[i].taskID);
-                }
-            }
-
-            foreach (int taskid in taskids)
-            {
-                TaskPro taskPro = taskComponent.GetTaskById(taskid);
-                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
-                if (taskConfig.TargetType == TaskTargetType.GiveItem_10 || taskConfig.TargetType == TaskTargetType.GivePet_25)
-                {
-                    if (taskPro == null)
+                    List<TaskPro> taskProCompleted = taskComponent.GetCompltedTaskByNpc(npcid);
+                    for (int i = 0; i < taskProCompleted.Count; i++)
                     {
-                        await TaskClientNetHelper.RequestGetTask(root, taskid);
+                        taskids.Add(taskProCompleted[i].taskID);
                     }
-                    else
+
+                    taskids.AddRange(taskComponent.GetOpenTaskIds(npcid));
+
+                    List<int> addTaskids = new List<int>();
+                    if (npcid == 20000024) //任务使者：赛利
                     {
-                        if (taskConfig.TargetType == TaskTargetType.GivePet_25)
+                        int weeklyTask = numericComponent.GetAsInt(NumericType.WeeklyTaskId);
+                        if (weeklyTask > 0 && taskComponent.GetTaskTypeList(TaskTypeEnum.Weekly).Count == 0)
                         {
-                            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+                            addTaskids.Add(weeklyTask);
+                        }
 
-                            List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
-                            for (int i = 0; i < rolePetInfos.Count; i++)
+                        int dailyTaskId = numericComponent.GetAsInt(NumericType.DailyTaskID);
+                        if (dailyTaskId > 0 && taskComponent.GetTaskById(dailyTaskId) == null)
+                        {
+                            addTaskids.Add(dailyTaskId);
+                        }
+                    }
+
+                    if (npcid == 20000102) //家族任务
+                    {
+                        int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
+                        if (unionTaskId > 0 && taskComponent.GetTaskById(unionTaskId) == null)
+                        {
+                            addTaskids.Add(unionTaskId);
+                        }
+
+                        int ringTaskId = numericComponent.GetAsInt(NumericType.RingTaskId);
+                        if (ringTaskId > 0 && taskComponent.GetTaskById(ringTaskId) == null)
+                        {
+                            addTaskids.Add(ringTaskId);
+                        }
+                    }
+
+                    taskids.AddRange(addTaskids);
+
+                    //给予任务
+                    List<TaskPro> taskPros = taskComponent.RoleTaskList;
+                    for (int i = 0; i < taskPros.Count; i++)
+                    {
+                        if (taskids.Contains(taskPros[i].taskID))
+                        {
+                            continue;
+                        }
+
+                        TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
+                        if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
+                            && taskConfig.CompleteNpcID == npcid)
+                        {
+                            taskids.Add(taskPros[i].taskID);
+                        }
+                        else if ((taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 ||
+                                     taskConfig.TargetType == (int)TaskTargetType.GivePet_25) &&
+                                 taskConfig.TaskType == TaskTypeEnum.Ring && npcid == 20000102)
+                        {
+                            // 家族给予任务可以CompleteNpcID==0，找家族任务NPC提交
+                            taskids.Add(taskPros[i].taskID);
+                        }
+                    }
+
+                    foreach (int taskid in taskids)
+                    {
+                        TaskPro taskPro = taskComponent.GetTaskById(taskid);
+                        TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
+                        if (taskConfig.TargetType == TaskTargetType.GiveItem_10 || taskConfig.TargetType == TaskTargetType.GivePet_25)
+                        {
+                            if (taskPro == null)
                             {
-                                if (rolePetInfos[i].IsProtect)
+                                await TaskClientNetHelper.RequestGetTask(root, taskid);
+                            }
+                            else
+                            {
+                                if (taskConfig.TargetType == TaskTargetType.GivePet_25)
                                 {
-                                    // 宠物已锁定！
-                                    continue;
+                                    PetComponentC petComponent = root.GetComponent<PetComponentC>();
+
+                                    List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
+                                    for (int i = 0; i < rolePetInfos.Count; i++)
+                                    {
+                                        if (rolePetInfos[i].IsProtect)
+                                        {
+                                            // 宠物已锁定！
+                                            continue;
+                                        }
+
+                                        if (rolePetInfos[i].PetStatus == 1)
+                                        {
+                                            // 出战宠物不能提交！
+                                            continue;
+                                        }
+
+                                        if (rolePetInfos[i].PetStatus == 2)
+                                        {
+                                            // 请先停止家园散步！
+                                            continue;
+                                        }
+
+                                        if (rolePetInfos[i].PetStatus == 3)
+                                        {
+                                            // 请先从仓库取出！
+                                            continue;
+                                        }
+
+                                        if (petComponent.TeamPetList.Contains(rolePetInfos[i].Id))
+                                        {
+                                            // 当前宠物存在于宠物天梯上阵中,不能提交！
+                                            continue;
+                                        }
+
+                                        if (petComponent.PetFormations.Contains(rolePetInfos[i].Id))
+                                        {
+                                            // 当前宠物存在于宠物副本上阵中,不能提交！
+                                            continue;
+                                        }
+
+                                        if (petComponent.PetMingList.Contains(rolePetInfos[i].Id))
+                                        {
+                                            // 当前宠物存在于宠物矿场队伍中,不能提交！
+                                            continue;
+                                        }
+
+                                        if (TaskHelper.IsTaskGivePet(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue,
+                                                rolePetInfos[i]))
+                                        {
+                                            taskPro.taskStatus = (int)TaskStatuEnum.Completed; // 手动修改
+
+                                            await TaskClientNetHelper.RequestCommitTask(root, taskid, rolePetInfos[i].Id);
+
+                                            return;
+                                        }
+                                    }
                                 }
-
-                                if (rolePetInfos[i].PetStatus == 1)
+                                else
                                 {
-                                    // 出战宠物不能提交！
-                                    continue;
-                                }
+                                    BagComponentC bagComponent = root.GetComponent<BagComponentC>();
 
-                                if (rolePetInfos[i].PetStatus == 2)
-                                {
-                                    // 请先停止家园散步！
-                                    continue;
-                                }
-
-                                if (rolePetInfos[i].PetStatus == 3)
-                                {
-                                    // 请先从仓库取出！
-                                    continue;
-                                }
-
-                                if (petComponent.TeamPetList.Contains(rolePetInfos[i].Id))
-                                {
-                                    // 当前宠物存在于宠物天梯上阵中,不能提交！
-                                    continue;
-                                }
-
-                                if (petComponent.PetFormations.Contains(rolePetInfos[i].Id))
-                                {
-                                    // 当前宠物存在于宠物副本上阵中,不能提交！
-                                    continue;
-                                }
-
-                                if (petComponent.PetMingList.Contains(rolePetInfos[i].Id))
-                                {
-                                    // 当前宠物存在于宠物矿场队伍中,不能提交！
-                                    continue;
-                                }
-
-                                if (TaskHelper.IsTaskGivePet(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, rolePetInfos[i]))
-                                {
-                                    taskPro.taskStatus = (int)TaskStatuEnum.Completed; // 手动修改
-
-                                    await TaskClientNetHelper.RequestCommitTask(root, taskid, rolePetInfos[i].Id);
-
-                                    return;
+                                    foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+                                    {
+                                        if (TaskHelper.IsTaskGiveItem(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, bagInfo))
+                                        {
+                                            taskPro.taskStatus = (int)TaskStatuEnum.Completed;
+                                            await TaskClientNetHelper.RequestCommitTask(root, taskid, bagInfo.BagInfoID);
+                                            return;
+                                        }
+                                    }
                                 }
                             }
                         }
                         else
                         {
-                            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
-
-                            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+                            bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
+                            if (isCompleted)
                             {
-                                if (TaskHelper.IsTaskGiveItem(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, bagInfo))
-                                {
-                                    taskPro.taskStatus = (int)TaskStatuEnum.Completed;
-                                    await TaskClientNetHelper.RequestCommitTask(root, taskid, bagInfo.BagInfoID);
-                                    return;
-                                }
+                                await TaskClientNetHelper.RequestCommitTask(root, taskid, 0);
+                            }
+                            else
+                            {
+                                await TaskClientNetHelper.RequestGetTask(root, taskid);
                             }
                         }
                     }
-                }
-                else
-                {
-                    bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
-                    if (isCompleted)
-                    {
-                        await TaskClientNetHelper.RequestCommitTask(root, taskid, 0);
-                    }
-                    else
-                    {
-                        await TaskClientNetHelper.RequestGetTask(root, taskid);
-                    }
-                }
+
+                    # endregion
+
+                    break;
+                case 4: //魔能老人
+                    // int costItemID = 12000006;
+                    // long itemNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(costItemID);
+                    // self.View.EG_EnergySkillRectTransform.gameObject.SetActive(true);
+                    // //获取
+                    // using (zstring.Block())
+                    // {
+                    //     self.View.E_Lab_MoNnengHintText.text =
+                    //             zstring.Format("{0}  {1}/5", ItemConfigCategory.Instance.Get(costItemID).ItemName, itemNum);
+                    // }
+
+                    break;
+                case 5: //补偿大师
+                    // self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    // PlayerComponent accountInfo = self.Root().GetComponent<PlayerComponent>();
+                    // int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.CurrentRoleId);
+                    // GameObject go = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    //         .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_TaskFubenItem.prefab");
+                    // if (buchangNumber > 0)
+                    // {
+                    //     GameObject goitem = UnityEngine.Object.Instantiate(go);
+                    //     goitem.SetActive(true);
+                    //     CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                    //     Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
+                    //     uIBuChangItem.uiTransform = goitem.transform;
+                    //     uIBuChangItem.OnInitUI_2((long userid) => { self.OnClickBuChangItem(userid); }, buchangNumber);
+                    // }
+                    // else
+                    // {
+                    //     for (int i = 0; i < accountInfo.PlayerInfo.DeleteUserList.Count; i++)
+                    //     {
+                    //         GameObject goitem = UnityEngine.Object.Instantiate(go);
+                    //         goitem.SetActive(true);
+                    //         CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                    //         Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
+                    //         uIBuChangItem.uiTransform = goitem.transform;
+                    //         uIBuChangItem.OnInitUI((long userid) => { self.OnClickBuChangItem(userid); }, accountInfo.PlayerInfo.DeleteUserList[i]);
+                    //     }
+                    // }
+
+                    break;
+                case 6: //节日使者
+                    // int activityId = ActivityHelper.GetJieRiActivityId();
+                    // ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+                    // self.View.E_ButtonJieRiRewardButton.gameObject.SetActive(activityId > 0 &&
+                    //     !activityComponent.ActivityReceiveIds.Contains(activityId));
+                    //
+                    // if (activityId == 0)
+                    // {
+                    //     int nextid = ActivityHelper.GetNextRiActivityId();
+                    //     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(nextid);
+                    //     string[] riqi = activityConfig.Par_1.Split(';');
+                    //     string speek = self.View.E_Lab_NpcSpeakText.text;
+                    //     using (zstring.Block())
+                    //     {
+                    //         self.View.E_Lab_NpcSpeakText.text =
+                    //                 zstring.Format("{0} 下次领取时间:{1}月{2}日 {3}", speek, riqi[0], riqi[1], activityConfig.Par_4);
+                    //     }
+                    // }
+
+                    break;
+                case 8: //经验兑换
+                    await UserInfoNetHelper.ExpToGold(root, 1);
+                    break;
+                case 9:
+                    // self.View.E_ButtonPetFragmentButton.gameObject.SetActive(true);
+                    break;
+                case 10: //神秘之门
+                    // self.View.E_ButtonMysteryButton.gameObject.SetActive(true);
+                    break;
+                default:
+                    // self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    // self.UpdataTask();
+                    break;
             }
 
             await ETTask.CompletedTask;
