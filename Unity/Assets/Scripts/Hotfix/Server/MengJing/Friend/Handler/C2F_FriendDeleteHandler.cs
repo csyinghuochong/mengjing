@@ -30,6 +30,7 @@ namespace  ET.Server
             if (dbFriendInfosOther.Count > 0)
             {
                 DBFriendInfo dBFriendInfo_2 = dbFriendInfosOther[0];
+                dBFriendInfo_2.FriendList.Remove(request.FriendID);
                 await dbComponent.Save(scene.Zone(), dBFriendInfo_2);
             }
             await ETTask.CompletedTask;
