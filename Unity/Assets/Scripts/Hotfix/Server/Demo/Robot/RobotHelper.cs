@@ -2075,5 +2075,25 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask ZuoQi(Scene root)
+        {
+            await RobotHelper.TaskGet(root, 20000031);
+
+            List<ZuoQiShowConfig> showZuoQiShowConfigs = new List<ZuoQiShowConfig>();
+            showZuoQiShowConfigs.AddRange(ZuoQiShowConfigCategory.Instance.GetAll().Values.ToList());
+            showZuoQiShowConfigs.Sort((a, b) => b.Quality - a.Quality);
+
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+
+            foreach (ZuoQiShowConfig showZuoQiShowConfig in showZuoQiShowConfigs)
+            {
+                if (userInfo.HorseIds.Contains(showZuoQiShowConfig.Id))
+                {
+                    await BagClientNetHelper.HorseFight(root, showZuoQiShowConfig.Id);
+                    return;
+                }
+            }
+        }
     }
 }
