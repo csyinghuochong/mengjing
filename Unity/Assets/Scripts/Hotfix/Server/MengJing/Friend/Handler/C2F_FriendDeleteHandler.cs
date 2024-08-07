@@ -25,8 +25,7 @@ namespace  ET.Server
 
             dBFriendInfo.FriendList.Remove(request.FriendID);
             await dbComponent.Save(scene.Zone(), dBFriendInfo);
-
-          
+            
             List<DBFriendInfo> dbFriendInfosOther = await dbComponent.Query<DBFriendInfo>( scene.Zone(), d=> d.Id == request.FriendID);
             if (dbFriendInfosOther.Count > 0)
             {

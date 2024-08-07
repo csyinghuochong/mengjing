@@ -27,19 +27,10 @@ namespace  ET.Server
                 dBFriendInfo.ApplyList.Add(request.FriendInfo.UserId);
                 
                 await dbComponent.Save(scene.Zone(), dBFriendInfo);
-
-                ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
-                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                T2G_GateUnitInfoRequest.UserID = request.UnitId;
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse_3 = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                (gateServerId, T2G_GateUnitInfoRequest);
                 
-                if (g2M_UpdateUnitResponse_3.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse_3.SessionInstanceId > 0)
-                {
-                    M2C_FriendApplyResult m2C_FriendApplyResult = M2C_FriendApplyResult.Create();
-                    m2C_FriendApplyResult.FriendInfo = request.FriendInfo;
-                    scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(g2M_UpdateUnitResponse_3.SessionInstanceId, m2C_FriendApplyResult);
-                }
+                M2C_FriendApplyResult m2C_FriendApplyResult = M2C_FriendApplyResult.Create();
+                m2C_FriendApplyResult.FriendInfo = request.FriendInfo;
+                scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(request.UnitId, m2C_FriendApplyResult);
             }
             
             await ETTask.CompletedTask;
