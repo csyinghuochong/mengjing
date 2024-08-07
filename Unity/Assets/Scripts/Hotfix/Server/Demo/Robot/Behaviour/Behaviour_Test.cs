@@ -181,7 +181,7 @@ namespace ET
                 await RobotHelper.OccTwo(root);
 
                 Console.WriteLine("去补偿大使");
-                await RobotHelper.MoveToNpc(root, 20000016);
+                await RobotHelper.TaskGet(root, 20000016);
 
                 Console.WriteLine("去拍卖行商人");
                 await RobotHelper.MoveToNpc(root, 20000017);
@@ -237,6 +237,9 @@ namespace ET
 
                 Console.WriteLine("去坐骑训练师");
                 await RobotHelper.ZuoQi(root);
+
+                Console.WriteLine("去节日使者");
+                await RobotHelper.TaskGet(root, 20000033);
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
