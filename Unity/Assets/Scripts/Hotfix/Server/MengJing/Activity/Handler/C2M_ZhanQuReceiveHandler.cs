@@ -51,7 +51,7 @@
                         }
 
                       
-                        ActorId paimaiServerId =   UnitCacheHelper.GetPaiMaiServerId(unit.Zone());
+                        ActorId paimaiServerId =   UnitCacheHelper.GetActivityServerId(unit.Zone());
                         M2A_ZhanQuReceiveRequest M2A_ZhanQuReceiveRequest = M2A_ZhanQuReceiveRequest.Create();
                         M2A_ZhanQuReceiveRequest.ActivityId = request.ActivityId;
                         M2A_ZhanQuReceiveRequest.ActivityType = request.ActivityType;
