@@ -10,7 +10,7 @@ namespace ET.Server
             root.AddComponent<TimerComponent>();
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
-            root.AddComponent<MessageSender>()
+            root.AddComponent<MessageSender>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
             root.AddComponent<ChatSceneComponent>();

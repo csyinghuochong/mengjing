@@ -1824,7 +1824,7 @@ namespace ET.Client
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             for (int i = 0; i < 7; i++)
             {
-                for (int j = chapterMakeids[i].Count; j >= 0; j--)
+                for (int j = chapterMakeids[i].Count - 1; j >= 0; j--)
                 {
                     long cdEndTime = userInfoComponent.GetMakeTime(chapterMakeids[i][j]);
                     if (cdEndTime > TimeHelper.ServerNow())
