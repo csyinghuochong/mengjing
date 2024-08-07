@@ -11,6 +11,8 @@ namespace ET.Server
         public long DBInterval{ get; set; }
         public long NoFindPath{ get; set; }
 
+        public PlayerState PlayerState { get; set; }
+
         public HashSet<Type> EntityChangeTypeSet { get; } = new HashSet<Type>();
     }
 }

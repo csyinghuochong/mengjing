@@ -49,8 +49,8 @@ namespace ET.Server
                 LogHelper.LoginInfo(offLineInfo);
                 Log.Debug(offLineInfo);
             }
+            self.PlayerState = PlayerState.Game;
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-           
             numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false); 
         }
 
@@ -76,13 +76,14 @@ namespace ET.Server
                 LogHelper.LogDebug(offLineInfo);
             }
 
+            self.PlayerState = PlayerState.None;
             TransferHelper.BeforeTransfer(unit);
             unit.GetParent<UnitComponent>().Remove(unit.Id);
 
             EventSystem.Instance.Publish( scene, new UnitDisconnect() { UnitId = unit.Id }  );
         }
         
-        public static void OnRelogin(this DBSaveComponent self, long gateSessionId)
+        public static void OnRelogin(this DBSaveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
             string offLineInfo = $"{unit.Zone()}区： " +
@@ -96,9 +97,10 @@ namespace ET.Server
                 //需要通知其他服务器吗？
                 Log.Debug(offLineInfo);
             }
-            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.Game;
+            self.PlayerState = PlayerState.Game;
         }
         
+        //离线
         public static  void OnOffLine(this DBSaveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
@@ -119,9 +121,7 @@ namespace ET.Server
             }
 
             numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false);
-            // unit.GetComponent<UserInfoComponentS>().OnOffLine();
-            // unit.GetComponent<DataCollationComponent>().OnOffLine();
-            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.None;
+            self.PlayerState = PlayerState.Disconnect;
             if (!unit.IsRobot())
             {
                 LogHelper.LoginInfo(offLineInfo);

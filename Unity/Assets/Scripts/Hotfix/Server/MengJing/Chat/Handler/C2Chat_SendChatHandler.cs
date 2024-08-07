@@ -104,17 +104,16 @@
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        G2M_SecondLogin g2MSecondLogin = G2M_SecondLogin.Create();
-                        M2G_SecondLogin reqEnter = await chatInfoUnit.Root().GetComponent<MessageLocationSenderComponent>()
-                                .Get(LocationType.Unit).Call(request.ChatInfo.ParamId, g2MSecondLogin) as M2G_SecondLogin;
-                        if (reqEnter.Error == ErrorCode.ERR_Success)
+                        A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
+                        M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = (M2A_GetUnitInfoResponse) await  chatInfoUnit.Root().GetComponent<MessageLocationSenderComponent>()
+                                .Get(LocationType.Unit).Call(request.ChatInfo.ParamId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
+                        if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success)
                         {
                             MapMessageHelper.SendToClient(chatInfoUnit.Root(), request.ChatInfo.ParamId, m2C_SyncChatInfo);
                         }
                         else
                         {
                             //存入到离线消息
-                           
                             DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponentCache<DBFriendInfo>(chatInfoUnit.Root(), request.ChatInfo.ParamId);
                             if (dBFriendInfo != null && dBFriendInfo.FriendChats.Count < 10)
                             {

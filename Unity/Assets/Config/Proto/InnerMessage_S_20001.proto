@@ -148,11 +148,6 @@ message G2R_GetLoginKey // IResponse
 	int64 GateId = 5;
 }
 
-message G2M_SessionDisconnect // ILocationMessage
-{
-	int32 RpcId = 1;
-}
-
 message ObjectQueryResponse // IResponse
 {
 	int32 RpcId = 1;
@@ -257,6 +252,10 @@ message L2G_RemoveLoginRecord // IResponse
 }
 
 
+message G2M_SessionDisconnect // ILocationMessage
+{
+	int32 RpcId = 1;
+}
 
 
 //ResponseType M2G_SecondLogin
