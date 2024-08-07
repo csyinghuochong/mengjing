@@ -2193,5 +2193,15 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask Protect(Scene root)
+        {
+            await RobotHelper.MoveToNpc(root, 30000011);
+
+            // 好装备加锁
+
+            // 好宠物加锁
+            
+        }
     }
 }

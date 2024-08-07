@@ -246,7 +246,10 @@ namespace ET
 
                 Console.WriteLine("去经验老头");
                 await RobotHelper.TaskGet(root, 20000037);
-                
+
+                Console.WriteLine("去装备宠物加锁");
+                await RobotHelper.Protect(root);
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
