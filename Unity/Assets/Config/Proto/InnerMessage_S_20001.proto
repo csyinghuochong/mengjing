@@ -473,7 +473,7 @@ message Chat2G_RequestExitChat // IResponse
 }
 
 //排行榜刷新
-message R2M_RankUpdateMessage // IMessage
+message R2M_RankUpdateMessage // ILocationMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;

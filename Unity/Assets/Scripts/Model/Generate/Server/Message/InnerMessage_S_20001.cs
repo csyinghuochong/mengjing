@@ -2030,6 +2030,54 @@ namespace ET
         }
     }
 
+    // 排行榜刷新
+    [MemoryPackable]
+    [Message(InnerMessage.R2M_RankUpdateMessage)]
+    public partial class R2M_RankUpdateMessage : MessageObject, ILocationMessage
+    {
+        public static R2M_RankUpdateMessage Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(R2M_RankUpdateMessage), isFromPool) as R2M_RankUpdateMessage;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        /// <summary>
+        /// 1 战力 2天梯 3捐献
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public int RankType { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int RankId { get; set; }
+
+        /// <summary>
+        /// 目前只有战力有职业排行
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public int OccRankId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.RankType = default;
+            this.RankId = default;
+            this.OccRankId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     [MemoryPackable]
     [Message(InnerMessage.M2R_RankUnionRaceRequest)]
     [ResponseType(nameof(R2M_RankUnionRaceResponse))]
@@ -8926,186 +8974,187 @@ namespace ET
         public const ushort Chat2G_EnterChat = 20056;
         public const ushort G2Chat_RequestExitChat = 20057;
         public const ushort Chat2G_RequestExitChat = 20058;
-        public const ushort M2R_RankUnionRaceRequest = 20059;
-        public const ushort R2M_RankUnionRaceResponse = 20060;
-        public const ushort M2R_PetRankUpdateRequest = 20061;
-        public const ushort R2M_PetRankUpdateResponse = 20062;
-        public const ushort M2A_PetMingBattleWinRequest = 20063;
-        public const ushort A2M_PetMingBattleWinResponse = 20064;
-        public const ushort M2A_PetMingPlayerInfoRequest = 20065;
-        public const ushort A2M_PetMingPlayerInfoResponse = 20066;
-        public const ushort M2A_ActivityFeedRequest = 20067;
-        public const ushort A2M_ActivityFeedResponse = 20068;
-        public const ushort M2A_ActivityGuessRequest = 20069;
-        public const ushort A2M_ActivityGuessResponse = 20070;
-        public const ushort M2A_ActivitySelfInfo = 20071;
-        public const ushort A2M_ActivitySelfInfo = 20072;
-        public const ushort M2A_FirstWinInfoMessage = 20073;
-        public const ushort M2A_MysteryBuyRequest = 20074;
-        public const ushort A2M_MysteryBuyResponse = 20075;
-        public const ushort M2A_TurtleRecordRequest = 20076;
-        public const ushort A2M_TurtleRecordResponse = 20077;
-        public const ushort M2A_TurtleReportRequest = 20078;
-        public const ushort A2M_TurtleReportResponse = 20079;
-        public const ushort M2A_TurtleSupportRequest = 20080;
-        public const ushort A2M_TurtleSupportResponse = 20081;
-        public const ushort M2A_ZhanQuInfoRequest = 20082;
-        public const ushort A2M_ZhanQuInfoResponse = 20083;
-        public const ushort M2A_ZhanQuReceiveRequest = 20084;
-        public const ushort A2M_ZhanQuReceiveResponse = 20085;
-        public const ushort M2E_EMailSendRequest = 20086;
-        public const ushort E2M_EMailSendResponse = 20087;
-        public const ushort A2M_PetMingRecordRequest = 20088;
-        public const ushort M2A_PetMingRecordResponse = 20089;
-        public const ushort Mail2M_SendServerMailItem = 20090;
-        public const ushort A2A_ServerMessageRequest = 20091;
-        public const ushort A2A_ServerMessageRResponse = 20092;
-        public const ushort M2U_DonationRequest = 20093;
-        public const ushort U2M_DonationResponse = 20094;
-        public const ushort M2U_UnionCreateRequest = 20095;
-        public const ushort U2M_UnionCreateResponse = 20096;
-        public const ushort M2Chat_UpdateUnion = 20097;
-        public const ushort Chat2M_UpdateUnion = 20098;
-        public const ushort M2U_UnionOperationRequest = 20099;
-        public const ushort U2M_UnionOperationResponse = 20100;
-        public const ushort M2U_UnionInviteReplyMessage = 20101;
-        public const ushort M2U_UnionKeJiLearnRequest = 20102;
-        public const ushort U2M_UnionKeJiLearnResponse = 20103;
-        public const ushort M2U_UnionLeaveRequest = 20104;
-        public const ushort U2M_UnionLeaveResponse = 20105;
-        public const ushort M2U_UnionMysteryBuyRequest = 20106;
-        public const ushort U2M_UnionMysteryBuyResponse = 20107;
-        public const ushort U2M_UnionTransferResult = 20108;
-        public const ushort M2U_UnionTransferResult = 20109;
-        public const ushort M2U_UnionTransferRequest = 20110;
-        public const ushort U2M_UnionTransferResponse = 20111;
-        public const ushort U2M_UnionApplyRequest = 20112;
-        public const ushort M2U_UnionApplyResponse = 20113;
-        public const ushort A2M_GetUnitInfoRequest = 20114;
-        public const ushort M2A_GetUnitInfoResponse = 20115;
-        public const ushort U2M_UnionKeJiQuickRequest = 20116;
-        public const ushort M2U_UnionKeJiQuickResponse = 20117;
-        public const ushort U2M_UnionKickOutRequest = 20118;
-        public const ushort M2U_UnionKickOutResponse = 20119;
-        public const ushort G2Union_EnterUnion = 20120;
-        public const ushort Union2G_EnterUnion = 20121;
-        public const ushort M2U_UnionEnterRequest = 20122;
-        public const ushort U2M_UnionEnterResponse = 20123;
-        public const ushort A2A_ActivityUpdateRequest = 20124;
-        public const ushort A2A_ActivityUpdateResponse = 20125;
-        public const ushort G2M_ActivityUpdate = 20126;
-        public const ushort R2F_WorldLvUpdateRequest = 20127;
-        public const ushort F2R_WorldLvUpdateResponse = 20128;
-        public const ushort A2A_BroadcastRequest = 20129;
-        public const ushort A2A_BroadcastResponse = 20130;
-        public const ushort G2Robot_MessageRequest = 20131;
-        public const ushort M2LocalDungeon_ExitRequest = 20132;
-        public const ushort LocalDungeon2M_ExitResponse = 20133;
-        public const ushort P2M_PaiMaiAuctionOverRequest = 20134;
-        public const ushort M2P_PaiMaiAuctionOverResponse = 20135;
-        public const ushort P2E_PaiMaiOverTimeRequest = 20136;
-        public const ushort E2P_PaiMaiOverTimeResponse = 20137;
-        public const ushort S2R_SoloResultRequest = 20138;
-        public const ushort R2S_SoloResultResponse = 20139;
-        public const ushort M2R_RankRunRaceRequest = 20140;
-        public const ushort R2M_RankRunRaceResponse = 20141;
-        public const ushort M2R_RankDemonRequest = 20142;
-        public const ushort R2M_RankDemonResponse = 20143;
-        public const ushort T2M_TeamUpdateRequest = 20144;
-        public const ushort A2Center_RechargeRequest = 20145;
-        public const ushort Center2A_RechargeResponse = 20146;
-        public const ushort A2Center_SaveAccount = 20147;
-        public const ushort Center2A_SaveAccount = 20148;
-        public const ushort C2C_CenterServerInfoReuest = 20149;
-        public const ushort C2C_CenterServerInfoRespone = 20150;
-        public const ushort C2Center_DeleteAccountRequest = 20151;
-        public const ushort Center2C_DeleteAccountResponse = 20152;
-        public const ushort M2Center_SerialReardRequest = 20153;
-        public const ushort Center2M_SerialReardResponse = 20154;
-        public const ushort M2Center_ShareSucessRequest = 20155;
-        public const ushort Center2M_ShareSucessResponse = 20156;
-        public const ushort C2T_GetTeamInfoRequest = 20157;
-        public const ushort T2C_GetTeamInfoResponse = 20158;
-        public const ushort M2Chat_UpdateLevel = 20159;
-        public const ushort Chat2M_UpdateLevel = 20160;
-        public const ushort Mail2Chat_GetUnitList = 20161;
-        public const ushort Chat2Mail_GetUnitList = 20162;
-        public const ushort G2Mail_EnterMail = 20163;
-        public const ushort Mail2G_EnterMail = 20164;
-        public const ushort M2E_EMailReceiveRequest = 20165;
-        public const ushort E2M_EMailReceiveResponse = 20166;
-        public const ushort M2F_FubenCenterListRequest = 20167;
-        public const ushort F2M_FubenCenterListResponse = 20168;
-        public const ushort M2F_FubenCenterOperateRequest = 20169;
-        public const ushort F2M_FubenCenterOpenResponse = 20170;
-        public const ushort M2F_FubenSceneIdRequest = 20171;
-        public const ushort F2M_FubenSceneIdResponse = 20172;
-        public const ushort F2M_ServerInfoUpdateRequest = 20173;
-        public const ushort M2F_ServerInfoUpdateResponse = 20174;
-        public const ushort M2P_PaiMaiAuctionJoinRequest = 20175;
-        public const ushort P2M_PaiMaiAuctionJoinResponse = 20176;
-        public const ushort M2P_PaiMaiAuctionPriceRequest = 20177;
-        public const ushort P2M_PaiMaiAuctionPriceResponse = 20178;
-        public const ushort M2P_PaiMaiBuyRequest = 20179;
-        public const ushort P2M_PaiMaiBuyResponse = 20180;
-        public const ushort M2M_PaiMaiBuyInfoRequest = 20181;
-        public const ushort M2M_PaiMaiBuyInfoResponse = 20182;
-        public const ushort M2R_DBServerInfoRequest = 20183;
-        public const ushort R2M_DBServerInfoResponse = 20184;
-        public const ushort M2P_PaiMaiSellRequest = 20185;
-        public const ushort P2M_PaiMaiSellResponse = 20186;
-        public const ushort M2P_PaiMaiShopRequest = 20187;
-        public const ushort P2M_PaiMaiShopResponse = 20188;
-        public const ushort M2P_PaiMaiXiaJiaRequest = 20189;
-        public const ushort P2M_PaiMaiXiaJiaResponse = 20190;
-        public const ushort M2P_StallBuyRequest = 20191;
-        public const ushort P2M_StallBuyResponse = 20192;
-        public const ushort M2P_StallSellRequest = 20193;
-        public const ushort P2M_StallSellResponse = 20194;
-        public const ushort M2P_StallXiaJiaRequest = 20195;
-        public const ushort P2M_StallXiaJiaResponse = 20196;
-        public const ushort G2M_KickPlayerRequest = 20197;
-        public const ushort G2M_RechargeResultRequest = 20198;
-        public const ushort M2G_RechargeResultResponse = 20199;
-        public const ushort M2M_AllPlayerListRequest = 20200;
-        public const ushort M2M_AllPlayerListResponse = 20201;
-        public const ushort Popularize2M_RewardRequest = 20202;
-        public const ushort M2Popularize_RewardResponse = 20203;
-        public const ushort A2R_DeleteRoleData = 20204;
-        public const ushort R2A_DeleteRoleData = 20205;
-        public const ushort G2Rank_EnterRank = 20206;
-        public const ushort Rank2G_EnterRank = 20207;
-        public const ushort M2R_RankSeasonTowerRequest = 20208;
-        public const ushort R2M_RankSeasonTowerResponse = 20209;
-        public const ushort M2R_RankShowLieRequest = 20210;
-        public const ushort R2M_RankShowLieResponse = 20211;
-        public const ushort M2R_RankTrialRequest = 20212;
-        public const ushort R2M_RankTrialResponse = 20213;
-        public const ushort M2R_RankUpdateRequest = 20214;
-        public const ushort R2M_RankUpdateResponse = 20215;
-        public const ushort M2S_SoloMatchRequest = 20216;
-        public const ushort S2M_SoloMatchResponse = 20217;
-        public const ushort M2S_SoloEnterRequest = 20218;
-        public const ushort S2M_SoloEnterResponse = 20219;
-        public const ushort M2T_TeamDungeonCreateRequest = 20220;
-        public const ushort T2M_TeamDungeonCreateResponse = 20221;
-        public const ushort M2T_TeamDungeonOpenRequest = 20222;
-        public const ushort T2M_TeamDungeonOpenResponse = 20223;
-        public const ushort M2T_TeamDungeonPrepareRequest = 20224;
-        public const ushort T2M_TeamDungeonPrepareResponse = 20225;
-        public const ushort M2T_TeamDungeonEnterRequest = 20226;
-        public const ushort T2M_TeamDungeonEnterResponse = 20227;
-        public const ushort A2M_PetMingChanChuRequest = 20228;
-        public const ushort M2A_PetMingChanChuResponse = 20229;
-        public const ushort A2M_PetMingLoginRequest = 20230;
-        public const ushort M2A_PetMingLoginResponse = 20231;
-        public const ushort M2J_JiaYuanEnterRequest = 20232;
-        public const ushort J2M_JiaYuanEnterResponse = 20233;
-        public const ushort J2M_JiaYuanOperateRequest = 20234;
-        public const ushort M2J_JiaYuanOperateResponse = 20235;
-        public const ushort M2R_RechargeRequest = 20236;
-        public const ushort R2M_RechargeResponse = 20237;
-        public const ushort R2G_RechargeResultRequest = 20238;
-        public const ushort G2R_RechargeResultResponse = 20239;
+        public const ushort R2M_RankUpdateMessage = 20059;
+        public const ushort M2R_RankUnionRaceRequest = 20060;
+        public const ushort R2M_RankUnionRaceResponse = 20061;
+        public const ushort M2R_PetRankUpdateRequest = 20062;
+        public const ushort R2M_PetRankUpdateResponse = 20063;
+        public const ushort M2A_PetMingBattleWinRequest = 20064;
+        public const ushort A2M_PetMingBattleWinResponse = 20065;
+        public const ushort M2A_PetMingPlayerInfoRequest = 20066;
+        public const ushort A2M_PetMingPlayerInfoResponse = 20067;
+        public const ushort M2A_ActivityFeedRequest = 20068;
+        public const ushort A2M_ActivityFeedResponse = 20069;
+        public const ushort M2A_ActivityGuessRequest = 20070;
+        public const ushort A2M_ActivityGuessResponse = 20071;
+        public const ushort M2A_ActivitySelfInfo = 20072;
+        public const ushort A2M_ActivitySelfInfo = 20073;
+        public const ushort M2A_FirstWinInfoMessage = 20074;
+        public const ushort M2A_MysteryBuyRequest = 20075;
+        public const ushort A2M_MysteryBuyResponse = 20076;
+        public const ushort M2A_TurtleRecordRequest = 20077;
+        public const ushort A2M_TurtleRecordResponse = 20078;
+        public const ushort M2A_TurtleReportRequest = 20079;
+        public const ushort A2M_TurtleReportResponse = 20080;
+        public const ushort M2A_TurtleSupportRequest = 20081;
+        public const ushort A2M_TurtleSupportResponse = 20082;
+        public const ushort M2A_ZhanQuInfoRequest = 20083;
+        public const ushort A2M_ZhanQuInfoResponse = 20084;
+        public const ushort M2A_ZhanQuReceiveRequest = 20085;
+        public const ushort A2M_ZhanQuReceiveResponse = 20086;
+        public const ushort M2E_EMailSendRequest = 20087;
+        public const ushort E2M_EMailSendResponse = 20088;
+        public const ushort A2M_PetMingRecordRequest = 20089;
+        public const ushort M2A_PetMingRecordResponse = 20090;
+        public const ushort Mail2M_SendServerMailItem = 20091;
+        public const ushort A2A_ServerMessageRequest = 20092;
+        public const ushort A2A_ServerMessageRResponse = 20093;
+        public const ushort M2U_DonationRequest = 20094;
+        public const ushort U2M_DonationResponse = 20095;
+        public const ushort M2U_UnionCreateRequest = 20096;
+        public const ushort U2M_UnionCreateResponse = 20097;
+        public const ushort M2Chat_UpdateUnion = 20098;
+        public const ushort Chat2M_UpdateUnion = 20099;
+        public const ushort M2U_UnionOperationRequest = 20100;
+        public const ushort U2M_UnionOperationResponse = 20101;
+        public const ushort M2U_UnionInviteReplyMessage = 20102;
+        public const ushort M2U_UnionKeJiLearnRequest = 20103;
+        public const ushort U2M_UnionKeJiLearnResponse = 20104;
+        public const ushort M2U_UnionLeaveRequest = 20105;
+        public const ushort U2M_UnionLeaveResponse = 20106;
+        public const ushort M2U_UnionMysteryBuyRequest = 20107;
+        public const ushort U2M_UnionMysteryBuyResponse = 20108;
+        public const ushort U2M_UnionTransferResult = 20109;
+        public const ushort M2U_UnionTransferResult = 20110;
+        public const ushort M2U_UnionTransferRequest = 20111;
+        public const ushort U2M_UnionTransferResponse = 20112;
+        public const ushort U2M_UnionApplyRequest = 20113;
+        public const ushort M2U_UnionApplyResponse = 20114;
+        public const ushort A2M_GetUnitInfoRequest = 20115;
+        public const ushort M2A_GetUnitInfoResponse = 20116;
+        public const ushort U2M_UnionKeJiQuickRequest = 20117;
+        public const ushort M2U_UnionKeJiQuickResponse = 20118;
+        public const ushort U2M_UnionKickOutRequest = 20119;
+        public const ushort M2U_UnionKickOutResponse = 20120;
+        public const ushort G2Union_EnterUnion = 20121;
+        public const ushort Union2G_EnterUnion = 20122;
+        public const ushort M2U_UnionEnterRequest = 20123;
+        public const ushort U2M_UnionEnterResponse = 20124;
+        public const ushort A2A_ActivityUpdateRequest = 20125;
+        public const ushort A2A_ActivityUpdateResponse = 20126;
+        public const ushort G2M_ActivityUpdate = 20127;
+        public const ushort R2F_WorldLvUpdateRequest = 20128;
+        public const ushort F2R_WorldLvUpdateResponse = 20129;
+        public const ushort A2A_BroadcastRequest = 20130;
+        public const ushort A2A_BroadcastResponse = 20131;
+        public const ushort G2Robot_MessageRequest = 20132;
+        public const ushort M2LocalDungeon_ExitRequest = 20133;
+        public const ushort LocalDungeon2M_ExitResponse = 20134;
+        public const ushort P2M_PaiMaiAuctionOverRequest = 20135;
+        public const ushort M2P_PaiMaiAuctionOverResponse = 20136;
+        public const ushort P2E_PaiMaiOverTimeRequest = 20137;
+        public const ushort E2P_PaiMaiOverTimeResponse = 20138;
+        public const ushort S2R_SoloResultRequest = 20139;
+        public const ushort R2S_SoloResultResponse = 20140;
+        public const ushort M2R_RankRunRaceRequest = 20141;
+        public const ushort R2M_RankRunRaceResponse = 20142;
+        public const ushort M2R_RankDemonRequest = 20143;
+        public const ushort R2M_RankDemonResponse = 20144;
+        public const ushort T2M_TeamUpdateRequest = 20145;
+        public const ushort A2Center_RechargeRequest = 20146;
+        public const ushort Center2A_RechargeResponse = 20147;
+        public const ushort A2Center_SaveAccount = 20148;
+        public const ushort Center2A_SaveAccount = 20149;
+        public const ushort C2C_CenterServerInfoReuest = 20150;
+        public const ushort C2C_CenterServerInfoRespone = 20151;
+        public const ushort C2Center_DeleteAccountRequest = 20152;
+        public const ushort Center2C_DeleteAccountResponse = 20153;
+        public const ushort M2Center_SerialReardRequest = 20154;
+        public const ushort Center2M_SerialReardResponse = 20155;
+        public const ushort M2Center_ShareSucessRequest = 20156;
+        public const ushort Center2M_ShareSucessResponse = 20157;
+        public const ushort C2T_GetTeamInfoRequest = 20158;
+        public const ushort T2C_GetTeamInfoResponse = 20159;
+        public const ushort M2Chat_UpdateLevel = 20160;
+        public const ushort Chat2M_UpdateLevel = 20161;
+        public const ushort Mail2Chat_GetUnitList = 20162;
+        public const ushort Chat2Mail_GetUnitList = 20163;
+        public const ushort G2Mail_EnterMail = 20164;
+        public const ushort Mail2G_EnterMail = 20165;
+        public const ushort M2E_EMailReceiveRequest = 20166;
+        public const ushort E2M_EMailReceiveResponse = 20167;
+        public const ushort M2F_FubenCenterListRequest = 20168;
+        public const ushort F2M_FubenCenterListResponse = 20169;
+        public const ushort M2F_FubenCenterOperateRequest = 20170;
+        public const ushort F2M_FubenCenterOpenResponse = 20171;
+        public const ushort M2F_FubenSceneIdRequest = 20172;
+        public const ushort F2M_FubenSceneIdResponse = 20173;
+        public const ushort F2M_ServerInfoUpdateRequest = 20174;
+        public const ushort M2F_ServerInfoUpdateResponse = 20175;
+        public const ushort M2P_PaiMaiAuctionJoinRequest = 20176;
+        public const ushort P2M_PaiMaiAuctionJoinResponse = 20177;
+        public const ushort M2P_PaiMaiAuctionPriceRequest = 20178;
+        public const ushort P2M_PaiMaiAuctionPriceResponse = 20179;
+        public const ushort M2P_PaiMaiBuyRequest = 20180;
+        public const ushort P2M_PaiMaiBuyResponse = 20181;
+        public const ushort M2M_PaiMaiBuyInfoRequest = 20182;
+        public const ushort M2M_PaiMaiBuyInfoResponse = 20183;
+        public const ushort M2R_DBServerInfoRequest = 20184;
+        public const ushort R2M_DBServerInfoResponse = 20185;
+        public const ushort M2P_PaiMaiSellRequest = 20186;
+        public const ushort P2M_PaiMaiSellResponse = 20187;
+        public const ushort M2P_PaiMaiShopRequest = 20188;
+        public const ushort P2M_PaiMaiShopResponse = 20189;
+        public const ushort M2P_PaiMaiXiaJiaRequest = 20190;
+        public const ushort P2M_PaiMaiXiaJiaResponse = 20191;
+        public const ushort M2P_StallBuyRequest = 20192;
+        public const ushort P2M_StallBuyResponse = 20193;
+        public const ushort M2P_StallSellRequest = 20194;
+        public const ushort P2M_StallSellResponse = 20195;
+        public const ushort M2P_StallXiaJiaRequest = 20196;
+        public const ushort P2M_StallXiaJiaResponse = 20197;
+        public const ushort G2M_KickPlayerRequest = 20198;
+        public const ushort G2M_RechargeResultRequest = 20199;
+        public const ushort M2G_RechargeResultResponse = 20200;
+        public const ushort M2M_AllPlayerListRequest = 20201;
+        public const ushort M2M_AllPlayerListResponse = 20202;
+        public const ushort Popularize2M_RewardRequest = 20203;
+        public const ushort M2Popularize_RewardResponse = 20204;
+        public const ushort A2R_DeleteRoleData = 20205;
+        public const ushort R2A_DeleteRoleData = 20206;
+        public const ushort G2Rank_EnterRank = 20207;
+        public const ushort Rank2G_EnterRank = 20208;
+        public const ushort M2R_RankSeasonTowerRequest = 20209;
+        public const ushort R2M_RankSeasonTowerResponse = 20210;
+        public const ushort M2R_RankShowLieRequest = 20211;
+        public const ushort R2M_RankShowLieResponse = 20212;
+        public const ushort M2R_RankTrialRequest = 20213;
+        public const ushort R2M_RankTrialResponse = 20214;
+        public const ushort M2R_RankUpdateRequest = 20215;
+        public const ushort R2M_RankUpdateResponse = 20216;
+        public const ushort M2S_SoloMatchRequest = 20217;
+        public const ushort S2M_SoloMatchResponse = 20218;
+        public const ushort M2S_SoloEnterRequest = 20219;
+        public const ushort S2M_SoloEnterResponse = 20220;
+        public const ushort M2T_TeamDungeonCreateRequest = 20221;
+        public const ushort T2M_TeamDungeonCreateResponse = 20222;
+        public const ushort M2T_TeamDungeonOpenRequest = 20223;
+        public const ushort T2M_TeamDungeonOpenResponse = 20224;
+        public const ushort M2T_TeamDungeonPrepareRequest = 20225;
+        public const ushort T2M_TeamDungeonPrepareResponse = 20226;
+        public const ushort M2T_TeamDungeonEnterRequest = 20227;
+        public const ushort T2M_TeamDungeonEnterResponse = 20228;
+        public const ushort A2M_PetMingChanChuRequest = 20229;
+        public const ushort M2A_PetMingChanChuResponse = 20230;
+        public const ushort A2M_PetMingLoginRequest = 20231;
+        public const ushort M2A_PetMingLoginResponse = 20232;
+        public const ushort M2J_JiaYuanEnterRequest = 20233;
+        public const ushort J2M_JiaYuanEnterResponse = 20234;
+        public const ushort J2M_JiaYuanOperateRequest = 20235;
+        public const ushort M2J_JiaYuanOperateResponse = 20236;
+        public const ushort M2R_RechargeRequest = 20237;
+        public const ushort R2M_RechargeResponse = 20238;
+        public const ushort R2G_RechargeResultRequest = 20239;
+        public const ushort G2R_RechargeResultResponse = 20240;
     }
 }
