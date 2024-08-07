@@ -46,24 +46,15 @@ namespace ET.Server
         
         public static async ETTask NoticeUnionLeader(Scene root, long unitid, int leader)
         {
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(root.Zone());
-            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-            T2G_GateUnitInfoRequest.UserID = unitid;
-            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse_3 = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call
-            (gateServerId, T2G_GateUnitInfoRequest);
-            if (g2M_UpdateUnitResponse_3.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse_3.SessionInstanceId > 0)
-            {
-                M2M_UnionTransferMessage M2M_UnionTransferMessage = M2M_UnionTransferMessage.Create();
-                M2M_UnionTransferMessage.UnionLeader = leader;
-                root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, M2M_UnionTransferMessage);
-            }
-            else
+            U2M_UnionTransferResult u2M_UnionTransferMessage = U2M_UnionTransferResult.Create();
+            u2M_UnionTransferMessage.UnionLeader = leader;
+            M2U_UnionTransferResult m2UUnionTransferResult = (M2U_UnionTransferResult)await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(unitid, u2M_UnionTransferMessage);
+            if (m2UUnionTransferResult.Error != ErrorCode.ERR_Success)
             {
                 NumericComponentS numericComponent_3 = await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, unitid);
                 numericComponent_3.ApplyValue(NumericType.UnionLeader, leader, false);
                 UnitCacheHelper.SaveComponentCache(root, numericComponent_3).Coroutine();
             }
-
         }
         
     }

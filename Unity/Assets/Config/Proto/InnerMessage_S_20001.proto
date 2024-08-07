@@ -898,7 +898,23 @@ message U2M_UnionMysteryBuyResponse // IResponse
 	string Message = 92;
 }
 
-//转让族长
+///转让族长成功后通知玩家
+//ResponseType M2U_UnionTransferResult
+message U2M_UnionTransferResult // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 UnionLeader = 1;
+}
+
+message M2U_UnionTransferResult // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//转让族长请求
 //ResponseType U2M_UnionTransferResponse
 message M2U_UnionTransferRequest // IRequest
 {
@@ -983,13 +999,6 @@ message M2U_UnionKickOutResponse // IResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-}
-
-///转让族长
-message M2M_UnionTransferMessage // IMessage
-{
-	int32 RpcId = 90;
-	int32 UnionLeader = 1;
 }
 
 //ResponseType Union2G_EnterUnion
