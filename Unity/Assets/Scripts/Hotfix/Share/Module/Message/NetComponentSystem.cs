@@ -74,6 +74,7 @@ namespace ET
             
             (ActorId _, object message) = MessageSerializeHelper.ToMessage(self.AService, memoryBuffer);
             
+            
             LogMsg.Instance.Debug(self.Fiber(), message);
             
             EventSystem.Instance.Invoke((long)self.IScene.SceneType, new NetComponentOnRead() {Session = session, Message = message});

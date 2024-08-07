@@ -10,4 +10,4 @@ namespace ET.Server
             await scene.GetComponent<LocationManagerComoponent>().Get(request.Type).Add(request.Key, request.ActorId);
         }
     }
-}
+}  
