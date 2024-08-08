@@ -11,13 +11,13 @@ namespace  ET
         //版号专区
         public static bool IsBanHaoZone(int zone)
         {
-            return zone == 201;
+            return zone == 1003;
         }
 
         //内部专区
         public static bool IsAlphaZone(int zone)
         {
-            return zone == 200;
+            return zone == 1004;
         }
         
         public const int Version = 20240130;

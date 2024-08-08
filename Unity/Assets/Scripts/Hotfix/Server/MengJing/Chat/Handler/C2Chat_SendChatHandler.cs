@@ -23,11 +23,11 @@
                     return;
                 }
 
-                if (!CommonHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
-                {
-                    response.Error = ErrorCode.ERR_LevelIsNot;
-                    return;
-                }
+                // if (!CommonHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
+                // {
+                //     response.Error = ErrorCode.ERR_LevelIsNot;
+                //     return;
+                // }
 
                 chatInfoUnit.LastSendChat = serverTime;
                 M2C_SyncChatInfo m2C_SyncChatInfo = M2C_SyncChatInfo.Create();
