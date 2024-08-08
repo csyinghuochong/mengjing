@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
     [FriendOf(typeof (ES_UnionMy))]
@@ -52,7 +54,7 @@ namespace ET.Client
 
             self.ClickEnabled = true;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
             if (unionId > 0)
             {
                 self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(4);
@@ -89,7 +91,7 @@ namespace ET.Client
                     break;
                 case 4:
                     Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                    long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+                    long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
                     if (unionId == 0)
                     {
                         FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");

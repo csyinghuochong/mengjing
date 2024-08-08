@@ -76,12 +76,12 @@ namespace ET.Client
             if (teamInfo == null || teamInfo.SceneId == 0)
             {
                 //无副本队伍
-                self.View.E_FunctionSetBtnToggleGroup.SetToggleSelected(0);
+                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
             }
             else
             {
                 //有副本队伍
-                self.View.E_FunctionSetBtnToggleGroup.SetToggleSelected(1);
+                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
             }
         }
 

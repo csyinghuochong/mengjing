@@ -41,7 +41,7 @@ namespace ET.Client
                 return;
             }
 
-            uiBehaviour.transform.localScale = isVisible? Vector3.one : Vector3.zero;
+            uiBehaviour.transform.localScale = isVisible ? Vector3.one : Vector3.zero;
         }
 
         public static void SetVisible(this UIBehaviour uiBehaviour, bool isVisible)
@@ -87,7 +87,7 @@ namespace ET.Client
                 return;
             }
 
-            transform.localScale = isVisible? Vector3.one : Vector3.zero;
+            transform.localScale = isVisible ? Vector3.one : Vector3.zero;
         }
 
         public static void SetVisible(this Transform transform, bool isVisible)
@@ -136,28 +136,21 @@ namespace ET.Client
             return (-1, null);
         }
 
-        public static void SetToggleSelected(this ToggleGroup toggleGroup, int index)
-        {
-            var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
-            for (int i = 0; i < togglesList.Length; i++)
-            {
-                if (i != index)
-                {
-                    continue;
-                }
-
-                togglesList[i].IsSelected(true);
-            }
-        }
-
         public static void IsSelected(this Toggle toggle, bool isSelected)
         {
+            // Toggle Group 的 Allow Switch Off 默认设置为false时，会自动设置一个Toggle.isOn = true，不触发回调
+            // Toggle.isOn 只有改变才会触发回调，如果Toggle.isOn原本为true，那么isSelected=true不会触发回调
+            // 所以这里要主动去触发下，但是要避免一种情况，Toggle.isOn由false->ture的时候不要主动触发，否则会触发2次
+            if (toggle.isOn && isSelected)
+            {
+                toggle.onValueChanged?.Invoke(true);
+            }
+
             toggle.isOn = isSelected;
-            toggle.onValueChanged?.Invoke(isSelected);
         }
 
         public static void RemoveUIScrollItems<K, T>(this K self, ref Dictionary<int, EntityRef<T>> dictionary) where K : Entity, IUILogic
-                where T : Entity,IAwake,IUIScrollItem<T>
+                where T : Entity, IAwake, IUIScrollItem<T>
         {
             if (dictionary == null)
             {
@@ -317,7 +310,15 @@ namespace ET.Client
         public static void OnSelectIndex(this ToggleGroup toggleGroup, int index)
         {
             var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
-            togglesList[index].IsSelected(true);
+            for (int i = 0; i < togglesList.Length; i++)
+            {
+                if (i != index)
+                {
+                    continue;
+                }
+
+                togglesList[i].IsSelected(true);
+            }
         }
 
         public static void SetClickEnabled(this ToggleGroup toggleGroup, bool enabled)

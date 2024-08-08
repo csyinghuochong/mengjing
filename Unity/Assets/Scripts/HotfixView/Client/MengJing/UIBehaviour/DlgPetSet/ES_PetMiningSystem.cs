@@ -136,7 +136,7 @@ namespace ET.Client
             if (self.E_FunctionSetBtnToggleGroup.GetSelectedToggle().Item1 == 0)
             {
                 self.E_FunctionSetBtnToggleGroup.enabled = true;
-                self.E_FunctionSetBtnToggleGroup.SetToggleSelected(0);
+                self.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
             }
             else
             {
