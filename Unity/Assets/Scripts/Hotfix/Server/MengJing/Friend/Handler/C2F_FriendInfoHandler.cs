@@ -69,24 +69,7 @@ namespace  ET.Server
             }
 
             response.FriendChats = dBFriendInfo.FriendChats;
-
-            if (response.FriendList.Count == 0)
-            {
-                FriendInfo FriendInfo_a = FriendInfo.Create();
-                FriendInfo_a.PlayerName = "玩家1";
-                FriendInfo_a.Occ = 1;
-                FriendInfo_a.PlayerLevel = 1;
-                FriendInfo_a.UserId = IdGenerater.Instance.GenerateId();
-                response.FriendList.Add(FriendInfo_a);
-
-                FriendInfo FriendInfo_b = FriendInfo.Create();
-                FriendInfo_b.PlayerName = "玩家2";
-                FriendInfo_b.Occ = 1;
-                FriendInfo_b.PlayerLevel = 1;
-                FriendInfo_b.UserId = IdGenerater.Instance.GenerateId();
-                response.FriendList.Add(FriendInfo_b);
-                
-            }
+            
             await ETTask.CompletedTask;
         }
     }
