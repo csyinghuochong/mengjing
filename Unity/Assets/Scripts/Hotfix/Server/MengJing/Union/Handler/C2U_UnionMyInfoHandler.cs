@@ -51,14 +51,14 @@ namespace ET.Server
                 }
                 else
                 {
-                    A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                    M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
-                            .Get(LocationType.Unit).Call(userId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-
-                    if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
-                    {
-                        response.OnLinePlayer.Add(userId);
-                    }
+                    // A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
+                    // M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
+                    //         .Get(LocationType.Unit).Call(userId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
+                    //
+                    // if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
+                    // {
+                    //     response.OnLinePlayer.Add(userId);
+                    // }
                 }
                 
                 if (dBUnionInfo.UnionInfo.LeaderId == userId)
