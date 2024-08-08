@@ -67,7 +67,7 @@
                 if (uiComponent.OpenUIList[0] == WindowID.WindowID_Setting)
                 {
                     DlgSetting dlgSetting = uiComponent.GetDlgLogic<DlgSetting>();
-                    dlgSetting.OnBeforeClose();
+                    dlgSetting?.OnBeforeClose();
                 }
 
                 if (uiComponent.OpenUIList[0] == WindowID.WindowID_Role)

@@ -19,6 +19,7 @@
 
         public static void OnBeforeClose(this DlgSetting self)
         {
+            Log.Debug("关闭Setting前保存设置");
             self.View.ES_SettingGame.OnBeforeClose();
         }
 
