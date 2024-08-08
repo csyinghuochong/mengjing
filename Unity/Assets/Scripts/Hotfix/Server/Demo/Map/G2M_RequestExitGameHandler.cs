@@ -9,23 +9,30 @@ namespace ET.Server
         {
 
             //Unit角色下线业务逻辑，然后保存Unit及组件数据至数据库
-            
+            Scene root = unit.Root();
+            long untid = unit.Id;
             //正式释放Unit
-            await  RemoveUnit(unit);
+            await RemoveUnit(unit);
+            await RemoveLocation(root, untid);
             await ETTask.CompletedTask;
+        }
+
+        private async ETTask RemoveLocation( Scene root,  long untid)
+        {
+            await root.GetComponent<TimerComponent>().WaitFrameAsync();
+            root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(untid);
         }
 
         private async ETTask RemoveUnit(Unit unit)
         {
             Console.WriteLine("RemoveUnit");
-            Scene root = unit.Root();
+          
             await unit.Fiber().WaitFrameFinish();
             
             await unit.RemoveLocation(LocationType.Unit);
             
             unit.GetComponent<DBSaveComponent>().OnDisconnect();
-            
-            root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(unit.Id);
+
         }
         
     }

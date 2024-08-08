@@ -49,7 +49,6 @@ namespace ET.Server
                     if (allonlines.Contains(request.UnitId))
                     {
                         response.OnLinePlayer.Add(userId);
-                        Console.WriteLine($"在线玩家：{userId}");
                     }
 
                     if (dBUnionInfo.UnionInfo.LeaderId == userId)
