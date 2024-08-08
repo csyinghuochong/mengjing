@@ -9,7 +9,6 @@ namespace  ET.Server
 
         protected override async ETTask Run(Scene scene, C2F_FriendInfoRequest request, F2C_FriendInfoResponse response)
         {
-            Log.Debug("1111111111111:C2A_ActivityInfoRequest");
             DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
             List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>( scene.Zone(), d=> d.Id == request.UnitId);
             if (dbFriendInfos == null || dbFriendInfos.Count == 0)
