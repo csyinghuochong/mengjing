@@ -14,7 +14,7 @@ namespace ET.Server
 		{
             if (session.Root().SceneType != SceneType.Realm)
             {
-                Log.Error($"LoginTest C2A_LoginAccount请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+                Log.Error($"LoginTest C2R_LoginAccount请求的Scene错误，当前Scene为：{session.Root().SceneType}");
                 session.Dispose();
                 return;
             }

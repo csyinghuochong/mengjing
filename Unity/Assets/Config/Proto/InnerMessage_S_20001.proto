@@ -187,6 +187,21 @@ message G2L_DisconnectGateUnit // IResponse
 	string Message = 3;
 }
 
+//ResponseType A2G_GetOnLineUnit
+message A2G_GetOnLineUnit // IRequest
+{
+	int32 RpcId = 1;
+
+}
+
+message G2A_GetOnLineUnit // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	repeated int64 OnLineUnits = 4;
+}
+
 //ResponseType Q2R_EnterQueue
 message R2Q_EnterQueue // IRequest
 {
