@@ -912,7 +912,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.A2G_GetOnLineUnit)]
-    [ResponseType(nameof(A2G_GetOnLineUnit))]
+    [ResponseType(nameof(G2A_GetOnLineUnit))]
     public partial class A2G_GetOnLineUnit : MessageObject, IRequest
     {
         public static A2G_GetOnLineUnit Create(bool isFromPool = false)

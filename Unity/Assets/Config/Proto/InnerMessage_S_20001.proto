@@ -206,7 +206,7 @@ message L2A_GetUnitInfoResponse // IResponse
 }
 
 
-//ResponseType A2G_GetOnLineUnit
+//ResponseType G2A_GetOnLineUnit
 message A2G_GetOnLineUnit // IRequest
 {
 	int32 RpcId = 1;
