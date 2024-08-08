@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Scene scene, M2Chat_UpdateLevel request, Chat2M_UpdateLevel response)
         {
-            ChatSceneComponent chatInfoUnitsComponent = scene.GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = scene.Root().GetComponent<ChatSceneComponent>();
             ChatInfoUnit chatInfoUnit = chatInfoUnitsComponent.Get(request.UnitId);
             if(chatInfoUnit != null ) 
             {

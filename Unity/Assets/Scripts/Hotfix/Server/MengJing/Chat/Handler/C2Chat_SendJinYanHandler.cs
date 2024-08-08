@@ -8,7 +8,7 @@
         protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_ChatJinYanRequest request, C2C_ChatJinYanResponse response)
         {
 
-            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
 
             BeReportedInfo bePortedNumber;
             chatInfoUnitsComponent.BeReportedNumber.TryGetValue(request.JinYanId, out bePortedNumber);

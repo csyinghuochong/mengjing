@@ -6,33 +6,7 @@ namespace  ET.Server
     [FriendOf(typeof(DBFriendInfo))]
     public class C2F_FriendInfoHandler: MessageHandler<Scene,C2F_FriendInfoRequest,  F2C_FriendInfoResponse>
     {
-        
-        public static async ETTask<List<FriendInfo>> GetFriendInfos(Scene root, List<long> friends)
-        {
-            List<FriendInfo> friendInfos = new List < FriendInfo >();
-            for (int i = 0; i < friends.Count; i++)
-            {
-                long friendId = friends[i];
-                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, friendId);
-                if (userInfoComponent == null)
-                {
-                    continue;
-                }
 
-                //await  root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(friendId, new ILocationRequest());
-                ChatSceneComponent chatSceneComponent = root.GetComponent<ChatSceneComponent>();
-                FriendInfo FriendInfo = FriendInfo.Create();
-                FriendInfo.UserId = friendId;
-                FriendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-                FriendInfo.OnLineTime = chatSceneComponent.GetChild<ChatInfoUnit>(friendId)!=null ? 1 : 0;
-                FriendInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                FriendInfo.Occ = userInfoComponent.UserInfo.Occ;
-                friendInfos.Add(FriendInfo);
-            }
-
-            return friendInfos;
-        }
-        
         protected override async ETTask Run(Scene scene, C2F_FriendInfoRequest request, F2C_FriendInfoResponse response)
         {
             Log.Debug("1111111111111:C2A_ActivityInfoRequest");
@@ -45,10 +19,12 @@ namespace  ET.Server
             }
 
             DBFriendInfo dBFriendInfo = dbFriendInfos[0];
+
+            List<long> allonline = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
             
-            response.FriendList = await GetFriendInfos( scene, dBFriendInfo.FriendList);
-            response.ApplyList = await GetFriendInfos( scene,dBFriendInfo.ApplyList);
-            response.Blacklist = await GetFriendInfos( scene,dBFriendInfo.Blacklist);
+            response.FriendList = await GetFriendInfos( scene.Root(), dBFriendInfo.FriendList, allonline);
+            response.ApplyList = await GetFriendInfos( scene.Root(),dBFriendInfo.ApplyList, allonline);
+            response.Blacklist = await GetFriendInfos( scene.Root(),dBFriendInfo.Blacklist, allonline);
 
 
             ListComponent<long> friendids = ListComponent<long>.Create();
@@ -69,5 +45,33 @@ namespace  ET.Server
             
             await ETTask.CompletedTask;
         }
+        
+        public static async ETTask<List<FriendInfo>> GetFriendInfos(Scene root, List<long> friends, List<long> onlines)
+        {
+            List<FriendInfo> friendInfos = new List < FriendInfo >();
+            for (int i = 0; i < friends.Count; i++)
+            {
+                long friendId = friends[i];
+                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, friendId);
+                if (userInfoComponent == null)
+                {
+                    continue;
+                }
+
+                //await  root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(friendId, new ILocationRequest());
+               
+                FriendInfo FriendInfo = FriendInfo.Create();
+                FriendInfo.UserId = friendId;
+                FriendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+                FriendInfo.OnLineTime = onlines.Contains(friendId) ? 1 : 0;
+                FriendInfo.PlayerName = userInfoComponent.UserInfo.Name;
+                FriendInfo.Occ = userInfoComponent.UserInfo.Occ;
+                friendInfos.Add(FriendInfo);
+            }
+
+            return friendInfos;
+        }
+
+        
     }
 }

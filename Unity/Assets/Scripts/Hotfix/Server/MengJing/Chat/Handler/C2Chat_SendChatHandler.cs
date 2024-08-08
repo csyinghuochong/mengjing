@@ -38,7 +38,7 @@
                 {
                     case (int)ChannelEnum.PaiMai:
                     case (int)ChannelEnum.Word:
-                        ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+                        ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
 
                         if (request.ChatInfo.ChannelId == ChannelEnum.Word)
                         {
@@ -93,7 +93,7 @@
                         {
                             return;
                         }
-                        chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+                        chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
                         foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                         {
                             if (otherUnit.UnionId == unionid)
@@ -104,7 +104,7 @@
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+                        chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
                         if (chatInfoUnitsComponent.GetChild<ChatInfoUnit>(request.ChatInfo.ParamId)!=null)
                         {
                             MapMessageHelper.SendToClient(chatInfoUnit.Root(), request.ChatInfo.ParamId, m2C_SyncChatInfo);

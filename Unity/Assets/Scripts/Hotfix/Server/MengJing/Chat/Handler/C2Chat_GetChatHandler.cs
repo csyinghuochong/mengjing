@@ -7,7 +7,7 @@
         protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2Chat_GetChatRequest request, Chat2C_GetChatResponse response)
         {
             long serverTime = TimeHelper.ServerNow();
-            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
 
             for (int i = 0; i < chatInfoUnitsComponent.WordChatInfos.Count; i++)
             {

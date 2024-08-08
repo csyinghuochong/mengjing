@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, Mail2Chat_GetUnitList request, Chat2Mail_GetUnitList response)
         {
-            ChatSceneComponent chatInfoUnitsComponent = scene.GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = scene.Root().GetComponent<ChatSceneComponent>();
             List<long> onlineunitids = chatInfoUnitsComponent.ChatInfoUnitsDict.Keys.ToList();
             response.OnlineUnitIdList = onlineunitids;
 
