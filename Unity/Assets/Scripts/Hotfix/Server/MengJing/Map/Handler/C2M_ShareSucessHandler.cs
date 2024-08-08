@@ -39,9 +39,9 @@
 
             ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-            M2Center_ShareSucessRequest M2Center_ShareSucessRequest = M2Center_ShareSucessRequest.Create();
+            M2L_ShareSucessRequest M2Center_ShareSucessRequest = M2L_ShareSucessRequest.Create();
             M2Center_ShareSucessRequest.AccountId = userInfoComponent.UserInfo.AccInfoID;
-            Center2M_ShareSucessResponse centerAccount = (Center2M_ShareSucessResponse)await unit.Root().GetComponent<MessageSender>().Call(accountZone,M2Center_ShareSucessRequest);
+            L2M_ShareSucessResponse centerAccount = (L2M_ShareSucessResponse)await unit.Root().GetComponent<MessageSender>().Call(accountZone,M2Center_ShareSucessRequest);
             if (centerAccount.Error != ErrorCode.ERR_Success)
             {
                 response.Error = centerAccount.Error;

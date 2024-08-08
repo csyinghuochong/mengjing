@@ -3,9 +3,9 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.LoginCenter)]
-    public class M2Center_ShareSucessHandler : MessageHandler<Scene, M2Center_ShareSucessRequest, Center2M_ShareSucessResponse>
+    public class M2L_ShareSucessHandler : MessageHandler<Scene, M2L_ShareSucessRequest, L2M_ShareSucessResponse>
     {
-        protected override async ETTask Run(Scene scene, M2Center_ShareSucessRequest request, Center2M_ShareSucessResponse response)
+        protected override async ETTask Run(Scene scene, M2L_ShareSucessRequest request, L2M_ShareSucessResponse response)
         {
             Log.Warning($"M2Center_ShareSucessRequest:{request.AccountId}");
             DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();

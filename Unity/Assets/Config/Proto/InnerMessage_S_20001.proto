@@ -1192,6 +1192,63 @@ message T2M_TeamUpdateRequest // IMessage
 	int64 TeamId = 3;
 }
 
+
+//ResponseType L2M_PhoneBinging
+//手机号绑定
+message M2L_PhoneBinging // IRequest
+{
+	int32 RpcId = 90;
+	string PhoneNumber = 1;
+	int64 AccountId  = 2;	// 帐号Id
+	string Account  = 3;	// 帐号
+	string  Password = 4;	// 密码
+}
+
+message L2M_PhoneBinging // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType L2M_BlackAccountResponse
+message M2L_BlackAccountRequest // IRequest
+{
+	int32 RpcId = 90;
+	string Account = 1;
+	string Password = 2;
+}
+
+message L2M_BlackAccountResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType L2M_BuChangeResponse
+message M2L_BuChangeRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 BuChangId = 1;
+	int64 UserId = 2;
+	int64 AccountId = 3;
+}
+
+message L2M_BuChangeResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PlayerInfo PlayerInfo = 1;
+	int32 BuChangRecharge = 2;
+	int32 BuChangDiamond = 3;
+}
+
+
 //ResponseType L2M_CenterServerInfoRespone
 message M2L_CenterServerInfoReuest // IRequest
 {
@@ -1209,9 +1266,9 @@ message L2M_CenterServerInfoRespone // IResponse
 	string Value = 1;
 }
 
-//ResponseType Center2M_SerialReardResponse
+//ResponseType L2M_SerialReardResponse
 //序列号奖励
-message M2Center_SerialReardRequest // IRequest
+message M2L_SerialReardRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1219,16 +1276,15 @@ message M2Center_SerialReardRequest // IRequest
 	string SerialNumber = 1;
 }
 
-message Center2M_SerialReardResponse // IResponse
+message L2M_SerialReardResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
 }
 
-
-//ResponseType Center2M_ShareSucessResponse
-message M2Center_ShareSucessRequest // IRequest
+//ResponseType L2M_ShareSucessResponse
+message M2L_ShareSucessRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1237,7 +1293,7 @@ message M2Center_ShareSucessRequest // IRequest
 	int64 AccountId = 3;
 }
 
-message Center2M_ShareSucessResponse // IResponse
+message L2M_ShareSucessResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

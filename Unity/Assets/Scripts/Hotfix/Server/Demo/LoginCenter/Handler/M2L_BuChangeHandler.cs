@@ -4,10 +4,10 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.LoginCenter)]
-    public class M2Center_BuChangeHandler : MessageHandler<Scene, M2Center_BuChangeRequest, Center2M_BuChangeResponse>
+    public class M2L_BuChangeHandler : MessageHandler<Scene, M2L_BuChangeRequest, L2M_BuChangeResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2Center_BuChangeRequest request, Center2M_BuChangeResponse response)
+        protected override async ETTask Run(Scene scene, M2L_BuChangeRequest request, L2M_BuChangeResponse response)
         {
             Log.Warning($"M2Center_BuChangeRequest:{request.AccountId}");
             DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();

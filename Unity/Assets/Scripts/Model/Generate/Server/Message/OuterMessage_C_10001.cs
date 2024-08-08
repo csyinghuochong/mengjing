@@ -17750,13 +17750,13 @@ namespace ET
 
     // 手机号绑定
     [MemoryPackable]
-    [Message(OuterMessage.C2Center_PhoneBinging)]
-    [ResponseType(nameof(Center2C_PhoneBinging))]
-    public partial class C2Center_PhoneBinging : MessageObject, IRequest
+    [Message(OuterMessage.C2M_PhoneBinging)]
+    [ResponseType(nameof(M2C_PhoneBinging))]
+    public partial class C2M_PhoneBinging : MessageObject, IRequest
     {
-        public static C2Center_PhoneBinging Create(bool isFromPool = false)
+        public static C2M_PhoneBinging Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2Center_PhoneBinging), isFromPool) as C2Center_PhoneBinging;
+            return ObjectPool.Instance.Fetch(typeof(C2M_PhoneBinging), isFromPool) as C2M_PhoneBinging;
         }
 
         [MemoryPackOrder(89)]
@@ -17801,12 +17801,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.Center2C_PhoneBinging)]
-    public partial class Center2C_PhoneBinging : MessageObject, IResponse
+    [Message(OuterMessage.M2C_PhoneBinging)]
+    public partial class M2C_PhoneBinging : MessageObject, IResponse
     {
-        public static Center2C_PhoneBinging Create(bool isFromPool = false)
+        public static M2C_PhoneBinging Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(Center2C_PhoneBinging), isFromPool) as Center2C_PhoneBinging;
+            return ObjectPool.Instance.Fetch(typeof(M2C_PhoneBinging), isFromPool) as M2C_PhoneBinging;
         }
 
         [MemoryPackOrder(89)]
@@ -17834,84 +17834,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.C2Center_Register)]
-    [ResponseType(nameof(Center2C_Register))]
-    public partial class C2Center_Register : MessageObject, IRequest
+    [Message(OuterMessage.C2M_BlackAccountRequest)]
+    [ResponseType(nameof(M2C_BlackAccountResponse))]
+    public partial class C2M_BlackAccountRequest : MessageObject, IRequest
     {
-        public static C2Center_Register Create(bool isFromPool = false)
+        public static C2M_BlackAccountRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2Center_Register), isFromPool) as C2Center_Register;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(92)]
-        public long ActorId { get; set; }
-
-        [MemoryPackOrder(0)]
-        public string Account { get; set; }
-
-        [MemoryPackOrder(1)]
-        public string Password { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.ActorId = default;
-            this.Account = default;
-            this.Password = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.Center2C_Register)]
-    public partial class Center2C_Register : MessageObject, IResponse
-    {
-        public static Center2C_Register Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(Center2C_Register), isFromPool) as Center2C_Register;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(90)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(91)]
-        public string Message { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.C2Center_BlackAccountRequest)]
-    [ResponseType(nameof(Center2C_BlackAccountResponse))]
-    public partial class C2Center_BlackAccountRequest : MessageObject, IRequest
-    {
-        public static C2Center_BlackAccountRequest Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2Center_BlackAccountRequest), isFromPool) as C2Center_BlackAccountRequest;
+            return ObjectPool.Instance.Fetch(typeof(C2M_BlackAccountRequest), isFromPool) as C2M_BlackAccountRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -17939,12 +17868,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.Center2C_BlackAccountResponse)]
-    public partial class Center2C_BlackAccountResponse : MessageObject, IResponse
+    [Message(OuterMessage.M2C_BlackAccountResponse)]
+    public partial class M2C_BlackAccountResponse : MessageObject, IResponse
     {
-        public static Center2C_BlackAccountResponse Create(bool isFromPool = false)
+        public static M2C_BlackAccountResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(Center2C_BlackAccountResponse), isFromPool) as Center2C_BlackAccountResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2C_BlackAccountResponse), isFromPool) as M2C_BlackAccountResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -17966,93 +17895,6 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.M2Center_BuChangeRequest)]
-    [ResponseType(nameof(Center2M_BuChangeResponse))]
-    public partial class M2Center_BuChangeRequest : MessageObject, IRequest
-    {
-        public static M2Center_BuChangeRequest Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(M2Center_BuChangeRequest), isFromPool) as M2Center_BuChangeRequest;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(92)]
-        public long ActorId { get; set; }
-
-        [MemoryPackOrder(0)]
-        public long BuChangId { get; set; }
-
-        [MemoryPackOrder(1)]
-        public long UserId { get; set; }
-
-        [MemoryPackOrder(2)]
-        public long AccountId { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.ActorId = default;
-            this.BuChangId = default;
-            this.UserId = default;
-            this.AccountId = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.Center2M_BuChangeResponse)]
-    public partial class Center2M_BuChangeResponse : MessageObject, IResponse
-    {
-        public static Center2M_BuChangeResponse Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(Center2M_BuChangeResponse), isFromPool) as Center2M_BuChangeResponse;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(90)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(91)]
-        public string Message { get; set; }
-
-        [MemoryPackOrder(0)]
-        public PlayerInfo PlayerInfo { get; set; }
-
-        [MemoryPackOrder(1)]
-        public int BuChangRecharge { get; set; }
-
-        [MemoryPackOrder(2)]
-        public int BuChangDiamond { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
-            this.PlayerInfo = default;
-            this.BuChangRecharge = default;
-            this.BuChangDiamond = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31128,366 +30970,362 @@ namespace ET
         public const ushort M2C_TeamPickMessage = 10451;
         public const ushort M2C_CreateDropItems = 10452;
         public const ushort M2C_TeamDungeonSettlement = 10453;
-        public const ushort C2Center_PhoneBinging = 10454;
-        public const ushort Center2C_PhoneBinging = 10455;
-        public const ushort C2Center_Register = 10456;
-        public const ushort Center2C_Register = 10457;
-        public const ushort C2Center_BlackAccountRequest = 10458;
-        public const ushort Center2C_BlackAccountResponse = 10459;
-        public const ushort M2Center_BuChangeRequest = 10460;
-        public const ushort Center2M_BuChangeResponse = 10461;
-        public const ushort C2C_ChatJinYanRequest = 10462;
-        public const ushort C2C_ChatJinYanResponse = 10463;
-        public const ushort C2M_ReceiveMailRequest = 10464;
-        public const ushort M2C_ReceiveMailResponse = 10465;
-        public const ushort C2E_ReceiveMailRequest = 10466;
-        public const ushort E2C_ReceiveMailResponse = 10467;
-        public const ushort C2E_GetAllMailRequest = 10468;
-        public const ushort E2C_GetAllMailResponse = 10469;
-        public const ushort C2F_WatchPetRequest = 10470;
-        public const ushort F2C_WatchPetResponse = 10471;
-        public const ushort M2C_HappyInfoResult = 10472;
-        public const ushort M2C_UpdateMailInfo = 10473;
-        public const ushort C2M_HappyMoveRequest = 10474;
-        public const ushort M2C_HappyMoveResponse = 10475;
-        public const ushort C2M_HongBaoOpenRequest = 10476;
-        public const ushort M2C_HongBaoOpenResponse = 10477;
-        public const ushort C2M_PaiMaiAuctionJoinRequest = 10478;
-        public const ushort M2C_PaiMaiAuctionJoinResponse = 10479;
-        public const ushort C2M_PaiMaiAuctionPriceRequest = 10480;
-        public const ushort M2C_PaiMaiAuctionPriceResponse = 10481;
-        public const ushort C2M_PaiMaiBuyRequest = 10482;
-        public const ushort M2C_PaiMaiBuyResponse = 10483;
-        public const ushort C2M_PaiMaiDuiHuanRequest = 10484;
-        public const ushort M2C_PaiMaiDuiHuanResponse = 10485;
-        public const ushort C2M_PaiMaiSellRequest = 10486;
-        public const ushort M2C_PaiMaiSellResponse = 10487;
-        public const ushort C2M_PaiMaiShopRequest = 10488;
-        public const ushort M2C_PaiMaiShopResponse = 10489;
-        public const ushort C2M_PaiMaiXiaJiaRequest = 10490;
-        public const ushort M2C_PaiMaiXiaJiaResponse = 10491;
-        public const ushort C2M_StallBuyRequest = 10492;
-        public const ushort M2C_StallBuyResponse = 10493;
-        public const ushort C2M_StallOperationRequest = 10494;
-        public const ushort M2C_StallOperationResponse = 10495;
-        public const ushort C2M_StallSellRequest = 10496;
-        public const ushort M2C_StallSellResponse = 10497;
-        public const ushort C2M_StallXiaJiaRequest = 10498;
-        public const ushort M2C_StallXiaJiaResponse = 10499;
-        public const ushort C2P_PaiMaiAuctionInfoRequest = 10500;
-        public const ushort P2C_PaiMaiAuctionInfoResponse = 10501;
-        public const ushort C2P_PaiMaiAuctionRecordRequest = 10502;
-        public const ushort P2C_PaiMaiAuctionRecordResponse = 10503;
-        public const ushort C2P_PaiMaiFindRequest = 10504;
-        public const ushort P2C_PaiMaiFindResponse = 10505;
-        public const ushort C2P_PaiMaiListRequest = 10506;
-        public const ushort P2C_PaiMaiListResponse = 10507;
-        public const ushort C2P_PaiMaiSearchRequest = 10508;
-        public const ushort P2C_PaiMaiSearchResponse = 10509;
-        public const ushort C2P_PaiMaiShopShowListRequest = 10510;
-        public const ushort P2C_PaiMaiShopShowListResponse = 10511;
-        public const ushort C2P_StallListRequest = 10512;
-        public const ushort P2C_StallListResponse = 10513;
-        public const ushort C2M_BuChangeRequest = 10514;
-        public const ushort M2C_BuChangeResponse = 10515;
-        public const ushort C2M_CreateSpiling = 10516;
-        public const ushort C2M_DungeonHappyMoveRequest = 10517;
-        public const ushort M2C_DungeonHappyMoveResponse = 10518;
-        public const ushort C2M_FindJingLingRequest = 10519;
-        public const ushort M2C_FindJingLingResponse = 10520;
-        public const ushort C2M_FindNearMonsterRequest = 10521;
-        public const ushort M2C_FindNearMonsterResponse = 10522;
-        public const ushort C2M_FirstWinSelfRewardRequest = 10523;
-        public const ushort M2C_FirstWinSelfRewardResponse = 10524;
-        public const ushort C2M_FubenMessageRequest = 10525;
-        public const ushort M2C_FubenMessageResponse = 10526;
-        public const ushort C2M_FubenTimesResetRequest = 10527;
-        public const ushort M2C_FubenTimesResetResponse = 10528;
-        public const ushort C2M_GameSettingRequest = 10529;
-        public const ushort M2C_GameSettingResponse = 10530;
-        public const ushort C2M_GMCustomRequest = 10531;
-        public const ushort M2C_GMCustomResponse = 10532;
-        public const ushort C2M_GuideUpdateRequest = 10533;
-        public const ushort M2C_GuideUpdateResponse = 10534;
-        public const ushort C2M_KillMonsterRewardRequest = 10535;
-        public const ushort M2C_KillMonsterRewardResponse = 10536;
-        public const ushort C2M_LeavlRewardRequest = 10537;
-        public const ushort M2C_LeavlRewardResponse = 10538;
-        public const ushort C2M_ModifyNameRequest = 10539;
-        public const ushort M2C_ModifyNameResponse = 10540;
-        public const ushort C2M_MysteryBuyRequest = 10541;
-        public const ushort M2C_MysteryBuyResponse = 10542;
-        public const ushort C2M_OneChallengeRequest = 10543;
-        public const ushort M2C_OneChallengeResponse = 10544;
-        public const ushort M2C_OneChallenge = 10545;
-        public const ushort C2M_ReddotReadRequest = 10546;
-        public const ushort M2C_ReddotReadResponse = 10547;
-        public const ushort C2M_RefreshUnitRequest = 10548;
-        public const ushort C2M_SerialReardRequest = 10549;
-        public const ushort M2C_SerialReardResponse = 10550;
-        public const ushort C2M_ShareSucessRequest = 10551;
-        public const ushort M2C_ShareSucessResponse = 10552;
-        public const ushort C2M_UnitInfoRequest = 10553;
-        public const ushort M2C_UnitInfoResponse = 10554;
-        public const ushort C2M_XiuLianCenterRequest = 10555;
-        public const ushort M2C_XiuLianCenterResponse = 10556;
-        public const ushort C2Popularize_ListRequest = 10557;
-        public const ushort Popularize2C_ListResponse = 10558;
-        public const ushort C2Popularize_PlayerRequest = 10559;
-        public const ushort Popularize2C_PlayerResponse = 10560;
-        public const ushort C2R_CampRankListRequest = 10561;
-        public const ushort R2C_CampRankListResponse = 10562;
-        public const ushort C2R_DBServerInfoRequest = 10563;
-        public const ushort R2C_DBServerInfoResponse = 10564;
-        public const ushort C2R_RankDemonRequest = 10565;
-        public const ushort R2C_RankDemonResponse = 10566;
-        public const ushort C2R_RankListRequest = 10567;
-        public const ushort R2C_RankListResponse = 10568;
-        public const ushort C2R_RankPetListRequest = 10569;
-        public const ushort R2C_RankPetListResponse = 10570;
-        public const ushort C2R_RankRunRaceRequest = 10571;
-        public const ushort R2C_RankRunRaceResponse = 10572;
-        public const ushort C2R_RankSeasonTowerRequest = 10573;
-        public const ushort R2C_RankSeasonTowerResponse = 10574;
-        public const ushort C2R_RankShowLieRequest = 10575;
-        public const ushort R2C_RankShowLieResponse = 10576;
-        public const ushort C2R_RankTrialListRequest = 10577;
-        public const ushort R2C_RankTrialListResponse = 10578;
-        public const ushort C2R_RankUnionRaceRequest = 10579;
-        public const ushort R2C_RankUnionRaceResponse = 10580;
-        public const ushort C2R_WorldLvRequest = 10581;
-        public const ushort R2C_WorldLvResponse = 10582;
-        public const ushort C2M_SoloMatchRequest = 10583;
-        public const ushort M2C_SoloMatchResponse = 10584;
-        public const ushort C2S_SoloMyInfoRequest = 10585;
-        public const ushort S2C_SoloMyInfoResponse = 10586;
-        public const ushort C2M_TeamDungeonBoxRewardRequest = 10587;
-        public const ushort M2C_TeamDungeonBoxRewardResponse = 10588;
-        public const ushort C2M_TeamDungeonCreateRequest = 10589;
-        public const ushort M2C_TeamDungeonCreateResponse = 10590;
-        public const ushort C2M_TeamDungeonOpenRequest = 10591;
-        public const ushort M2C_TeamDungeonOpenResponse = 10592;
-        public const ushort C2M_TeamDungeonPrepareRequest = 10593;
-        public const ushort M2C_TeamDungeonPrepareResponse = 10594;
-        public const ushort C2M_TeamerPositionRequest = 10595;
-        public const ushort M2C_TeamerPositionResponse = 10596;
-        public const ushort C2M_TeamPickRequest = 10597;
-        public const ushort M2C_TeamDungeonBoxRewardResult = 10598;
-        public const ushort C2T_TeamAgreeRequest = 10599;
-        public const ushort T2C_TeamAgreeResponse = 10600;
-        public const ushort C2T_TeamDungeonAgreeRequest = 10601;
-        public const ushort T2C_TeamDungeonAgreeResponse = 10602;
-        public const ushort C2T_TeamDungeonApplyRequest = 10603;
-        public const ushort T2C_TeamDungeonApplyResponse = 10604;
-        public const ushort M2C_TeamDungeonApplyResult = 10605;
-        public const ushort C2T_TeamDungeonInfoRequest = 10606;
-        public const ushort T2C_TeamDungeonInfoResponse = 10607;
-        public const ushort C2T_TeamInviteRequest = 10608;
-        public const ushort T2C_TeamInviteResponse = 10609;
-        public const ushort M2C_TeamInviteResult = 10610;
-        public const ushort C2T_TeamKickOutRequest = 10611;
-        public const ushort T2C_TeamKickOutResponse = 10612;
-        public const ushort C2T_TeamLeaveRequest = 10613;
-        public const ushort T2C_TeamLeaveResponse = 10614;
-        public const ushort C2T_TeamRobotRequest = 10615;
-        public const ushort T2C_TeamRobotResponse = 10616;
-        public const ushort M2C_TeamDungeonOpenResult = 10617;
-        public const ushort M2C_TeamDungeonPrepareResult = 10618;
-        public const ushort C2M_ActivityChouKaRequest = 10619;
-        public const ushort M2C_ActivityChouKaResponse = 10620;
-        public const ushort C2M_ActivityFeedRequest = 10621;
-        public const ushort M2C_ActivityFeedResponse = 10622;
-        public const ushort C2M_ActivityGuessRequest = 10623;
-        public const ushort M2C_ActivityGuessResponse = 10624;
-        public const ushort C2M_ActivityInfoRequest = 10625;
-        public const ushort M2C_ActivityInfoResponse = 10626;
-        public const ushort C2M_ActivityReceiveRequest = 10627;
-        public const ushort M2C_ActivityReceiveResponse = 10628;
-        public const ushort C2M_ActivityRechargeSignRequest = 10629;
-        public const ushort M2C_ActivityRechargeSignResponse = 10630;
-        public const ushort C2M_ActivityRewardRequest = 10631;
-        public const ushort M2C_ActivityRewardResponse = 10632;
-        public const ushort C2M_ChouKa2RefreshRequest = 10633;
-        public const ushort M2C_ChouKa2RefreshResponse = 10634;
-        public const ushort C2M_SingleRechargeRewardRequest = 10635;
-        public const ushort M2C_SingleRechargeRewardResponse = 10636;
-        public const ushort C2M_ZhanQuInfoRequest = 10637;
-        public const ushort M2C_ZhanQuInfoResponse = 10638;
-        public const ushort C2M_ZhanQuReceiveRequest = 10639;
-        public const ushort M2C_ZhanQuReceiveResponse = 10640;
-        public const ushort C2M_JingHeActivateRequest = 10641;
-        public const ushort M2C_JingHeActivateResponse = 10642;
-        public const ushort C2M_JingHePlanRequest = 10643;
-        public const ushort M2C_JingHePlanResponse = 10644;
-        public const ushort C2M_JingHeWearRequest = 10645;
-        public const ushort M2C_JingHeWearResponse = 10646;
-        public const ushort C2M_JingHeZhuruRequest = 10647;
-        public const ushort M2C_JingHeZhuruResponse = 10648;
-        public const ushort C2M_MakeLearnRequest = 10649;
-        public const ushort M2C_MakeLearnResponse = 10650;
-        public const ushort C2E_AccountWarehousInfoRequest = 10651;
-        public const ushort E2C_AccountWarehousInfoResponse = 10652;
-        public const ushort C2M_BattleSummonRecord = 10653;
-        public const ushort M2C_BattleSummonRecord = 10654;
-        public const ushort C2M_BattleSummonRequest = 10655;
-        public const ushort M2C_BattleSummonResponse = 10656;
-        public const ushort C2M_CampRankSelectRequest = 10657;
-        public const ushort M2C_CampRankSelectResponse = 10658;
-        public const ushort Actor_FubenEnergySkillRequest = 10659;
-        public const ushort Actor_FubenEnergySkillResponse = 10660;
-        public const ushort FubenInfo = 10661;
-        public const ushort SonFubenInfo = 10662;
-        public const ushort Actor_EnterFubenRequest = 10663;
-        public const ushort Actor_EnterFubenResponse = 10664;
-        public const ushort Actor_EnterSonFubenRequest = 10665;
-        public const ushort Actor_EnterSonFubenResponse = 10666;
-        public const ushort Actor_GetFubenInfoRequest = 10667;
-        public const ushort Actor_GetFubenInfoResponse = 10668;
-        public const ushort Actor_GetFubenRewardRequest = 10669;
-        public const ushort Actor_GetFubenRewardReponse = 10670;
-        public const ushort Actor_FubenMoNengRequest = 10671;
-        public const ushort Actor_FubenMoNengResponse = 10672;
-        public const ushort Actor_SendReviveRequest = 10673;
-        public const ushort Actor_SendReviveResponse = 10674;
-        public const ushort C2M_ChouKaRequest = 10675;
-        public const ushort M2C_ChouKaResponse = 10676;
-        public const ushort C2M_ChouKaRewardRequest = 10677;
-        public const ushort M2C_ChouKaRewardResponse = 10678;
-        public const ushort C2M_EnergyAnswerRequest = 10679;
-        public const ushort M2C_EnergyAnswerResponse = 10680;
-        public const ushort C2M_EnergyInfoRequest = 10681;
-        public const ushort M2C_EnergyInfoResponse = 10682;
-        public const ushort C2M_EnergyReceiveRequest = 10683;
-        public const ushort M2C_EnergyReceiveResponse = 10684;
-        public const ushort C2M_HorseRideRequest = 10685;
-        public const ushort M2C_HorseRideResponse = 10686;
-        public const ushort C2M_HorseFightRequest = 10687;
-        public const ushort M2C_HorseFightResponse = 10688;
-        public const ushort C2M_JiaYuanPickRequest = 10689;
-        public const ushort M2C_JiaYuanPickResponse = 10690;
-        public const ushort C2M_JiaYuanCangKuOpenRequest = 10691;
-        public const ushort M2C_JiaYuanCangKuOpenResponse = 10692;
-        public const ushort C2M_JiaYuanCookBookOpen = 10693;
-        public const ushort M2C_JiaYuanCookBookOpen = 10694;
-        public const ushort C2M_JiaYuanCookRequest = 10695;
-        public const ushort M2C_JiaYuanCookResponse = 10696;
-        public const ushort C2M_JiaYuanDaShiRequest = 10697;
-        public const ushort M2C_JiaYuanDaShiResponse = 10698;
-        public const ushort C2M_JiaYuanExchangeRequest = 10699;
-        public const ushort M2C_JiaYuanExchangeResponse = 10700;
-        public const ushort C2M_JiaYuanGatherRequest = 10701;
-        public const ushort M2C_JiaYuanGatherResponse = 10702;
-        public const ushort C2M_JiaYuanGatherOtherRequest = 10703;
-        public const ushort M2C_JiaYuanGatherOtherResponse = 10704;
-        public const ushort C2M_JiaYuanInitRequest = 10705;
-        public const ushort M2C_JiaYuanInitResponse = 10706;
-        public const ushort C2M_JiaYuanMysteryBuyRequest = 10707;
-        public const ushort M2C_JiaYuanMysteryBuyResponse = 10708;
-        public const ushort C2M_JiaYuanMysteryListRequest = 10709;
-        public const ushort M2C_JiaYuanMysteryListResponse = 10710;
-        public const ushort C2M_JiaYuanPastureBuyRequest = 10711;
-        public const ushort M2C_JiaYuanPastureBuyResponse = 10712;
-        public const ushort C2M_JiaYuanPastureListRequest = 10713;
-        public const ushort M2C_JiaYuanPastureListResponse = 10714;
-        public const ushort C2M_JiaYuanPetFeedRequest = 10715;
-        public const ushort M2C_JiaYuanPetFeedResponse = 10716;
-        public const ushort C2M_JiaYuanPetOperateRequest = 10717;
-        public const ushort M2C_JiaYuanPetOperateResponse = 10718;
-        public const ushort C2M_JiaYuanPetPositionRequest = 10719;
-        public const ushort M2C_JiaYuanPetPositionResponse = 10720;
-        public const ushort C2M_JiaYuanPetWalkRequest = 10721;
-        public const ushort M2C_JiaYuanPetWalkResponse = 10722;
-        public const ushort C2M_JiaYuanPlanOpenRequest = 10723;
-        public const ushort M2C_JiaYuanPlanOpenResponse = 10724;
-        public const ushort C2M_JiaYuanPlantRequest = 10725;
-        public const ushort M2C_JiaYuanPlantResponse = 10726;
-        public const ushort C2M_JiaYuanPurchaseRequest = 10727;
-        public const ushort M2C_JiaYuanPurchaseResponse = 10728;
-        public const ushort C2M_JiaYuanPurchaseRefresh = 10729;
-        public const ushort M2C_JiaYuanPurchaseRefresh = 10730;
-        public const ushort C2M_JiaYuanRecordListRequest = 10731;
-        public const ushort M2C_JiaYuanRecordListResponse = 10732;
-        public const ushort C2M_JiaYuanStoreRequest = 10733;
-        public const ushort M2C_JiaYuanStoreResponse = 10734;
-        public const ushort C2M_JiaYuanUpLvRequest = 10735;
-        public const ushort M2C_JiaYuanUpLvResponse = 10736;
-        public const ushort C2M_JiaYuanUprootRequest = 10737;
-        public const ushort M2C_JiaYuanUprootResponse = 10738;
-        public const ushort C2M_JiaYuanVisitListRequest = 10739;
-        public const ushort JiaYuanVisit = 10740;
-        public const ushort M2C_JiaYuanVisitListResponse = 10741;
-        public const ushort C2M_JiaYuanWatchRequest = 10742;
-        public const ushort M2C_JiaYuanWatchResponse = 10743;
-        public const ushort C2M_TakeOutAllRequest = 10744;
-        public const ushort M2C_TakeOutAllResponse = 10745;
-        public const ushort C2M_LingDiRewardRequest = 10746;
-        public const ushort M2C_LingDiRewardResponse = 10747;
-        public const ushort C2M_LingDiUpRequest = 10748;
-        public const ushort M2C_LingDiUpResponse = 10749;
-        public const ushort C2M_RandomTowerBeginRequest = 10750;
-        public const ushort M2C_RandomTowerBeginResponse = 10751;
-        public const ushort C2M_RandomTowerRewardRequest = 10752;
-        public const ushort M2C_RandomTowerRewardResponse = 10753;
-        public const ushort C2M_IOSPayVerifyRequest = 10754;
-        public const ushort M2C_IOSPayVerifyResponse = 10755;
-        public const ushort C2M_RechargeRequest = 10756;
-        public const ushort M2C_RechargeResponse = 10757;
-        public const ushort C2M_RechargeRewardRequest = 10758;
-        public const ushort M2C_RechargeRewardResponse = 10759;
-        public const ushort C2M_ExpToGoldRequest = 10760;
-        public const ushort M2C_ExpToGoldResponse = 10761;
-        public const ushort C2M_RealNameRewardRequest = 10762;
-        public const ushort M2C_RealNameRewardResponse = 10763;
-        public const ushort C2M_RolePetChouKaRequest = 10764;
-        public const ushort M2C_RolePetChouKaResponse = 10765;
-        public const ushort C2M_SeasonLevelRewardRequest = 10766;
-        public const ushort M2C_SeasonLevelRewardResponse = 10767;
-        public const ushort C2M_SeasonOpenJingHeRequest = 10768;
-        public const ushort M2C_SeasonOpenJingHeResponse = 10769;
-        public const ushort C2M_SeasonUseFruitRequest = 10770;
-        public const ushort M2C_SeasonUseFruitResponse = 10771;
-        public const ushort C2M_ShoujiRewardRequest = 10772;
-        public const ushort M2C_ShoujiRewardResponse = 10773;
-        public const ushort C2M_ShouJiTreasureRequest = 10774;
-        public const ushort M2C_ShouJiTreasureResponse = 10775;
-        public const ushort C2M_TitleUseRequest = 10776;
-        public const ushort M2C_TitleUseResponse = 10777;
-        public const ushort M2C_TitleUpdateResult = 10778;
-        public const ushort C2M_TowerFightBeginRequest = 10779;
-        public const ushort M2C_TowerFightBeginResponse = 10780;
-        public const ushort C2M_TowerExitRequest = 10781;
-        public const ushort M2C_TowerExitResponse = 10782;
-        public const ushort C2M_TowerOfSealNextRequest = 10783;
-        public const ushort M2C_TowerOfSealNextResponse = 10784;
-        public const ushort C2M_TrialDungeonBeginRequest = 10785;
-        public const ushort M2C_TrialDungeonBeginResponse = 10786;
-        public const ushort C2M_TrialDungeonFinishRequest = 10787;
-        public const ushort M2C_TrialDungeonFinishResponse = 10788;
-        public const ushort C2M_TurtleRecordRequest = 10789;
-        public const ushort M2C_TurtleRecordResponse = 10790;
-        public const ushort C2M_TurtleSupportRequest = 10791;
-        public const ushort M2C_TurtleSupportResponse = 10792;
-        public const ushort C2M_WelfareDraw2Request = 10793;
-        public const ushort M2C_WelfareDraw2Response = 10794;
-        public const ushort C2M_WelfareDraw2RewardRequest = 10795;
-        public const ushort M2C_WelfareDraw2RewardResponse = 10796;
-        public const ushort C2M_WelfareDrawRequest = 10797;
-        public const ushort M2C_WelfareDrawResponse = 10798;
-        public const ushort C2M_WelfareDrawRewardRequest = 10799;
-        public const ushort M2C_WelfareDrawRewardResponse = 10800;
-        public const ushort C2M_WelfareInvestRequest = 10801;
-        public const ushort M2C_WelfareInvestResponse = 10802;
-        public const ushort C2M_WelfareInvestRewardRequest = 10803;
-        public const ushort M2C_WelfareInvestRewardResponse = 10804;
-        public const ushort C2M_WelfareTaskRewardRequest = 10805;
-        public const ushort M2C_WelfareTaskRewardResponse = 10806;
-        public const ushort C2M_YueKaOpenRequest = 10807;
-        public const ushort M2C_YueKaOpenResponse = 10808;
-        public const ushort C2M_YueKaRewardRequest = 10809;
-        public const ushort M2C_YueKaRewardResponse = 10810;
-        public const ushort C2Popularize_UploadRequest = 10811;
-        public const ushort Popularize2C_UploadResponse = 10812;
-        public const ushort C2Popularize_RewardRequest = 10813;
-        public const ushort Popularize2C_RewardResponse = 10814;
+        public const ushort C2M_PhoneBinging = 10454;
+        public const ushort M2C_PhoneBinging = 10455;
+        public const ushort C2M_BlackAccountRequest = 10456;
+        public const ushort M2C_BlackAccountResponse = 10457;
+        public const ushort C2C_ChatJinYanRequest = 10458;
+        public const ushort C2C_ChatJinYanResponse = 10459;
+        public const ushort C2M_ReceiveMailRequest = 10460;
+        public const ushort M2C_ReceiveMailResponse = 10461;
+        public const ushort C2E_ReceiveMailRequest = 10462;
+        public const ushort E2C_ReceiveMailResponse = 10463;
+        public const ushort C2E_GetAllMailRequest = 10464;
+        public const ushort E2C_GetAllMailResponse = 10465;
+        public const ushort C2F_WatchPetRequest = 10466;
+        public const ushort F2C_WatchPetResponse = 10467;
+        public const ushort M2C_HappyInfoResult = 10468;
+        public const ushort M2C_UpdateMailInfo = 10469;
+        public const ushort C2M_HappyMoveRequest = 10470;
+        public const ushort M2C_HappyMoveResponse = 10471;
+        public const ushort C2M_HongBaoOpenRequest = 10472;
+        public const ushort M2C_HongBaoOpenResponse = 10473;
+        public const ushort C2M_PaiMaiAuctionJoinRequest = 10474;
+        public const ushort M2C_PaiMaiAuctionJoinResponse = 10475;
+        public const ushort C2M_PaiMaiAuctionPriceRequest = 10476;
+        public const ushort M2C_PaiMaiAuctionPriceResponse = 10477;
+        public const ushort C2M_PaiMaiBuyRequest = 10478;
+        public const ushort M2C_PaiMaiBuyResponse = 10479;
+        public const ushort C2M_PaiMaiDuiHuanRequest = 10480;
+        public const ushort M2C_PaiMaiDuiHuanResponse = 10481;
+        public const ushort C2M_PaiMaiSellRequest = 10482;
+        public const ushort M2C_PaiMaiSellResponse = 10483;
+        public const ushort C2M_PaiMaiShopRequest = 10484;
+        public const ushort M2C_PaiMaiShopResponse = 10485;
+        public const ushort C2M_PaiMaiXiaJiaRequest = 10486;
+        public const ushort M2C_PaiMaiXiaJiaResponse = 10487;
+        public const ushort C2M_StallBuyRequest = 10488;
+        public const ushort M2C_StallBuyResponse = 10489;
+        public const ushort C2M_StallOperationRequest = 10490;
+        public const ushort M2C_StallOperationResponse = 10491;
+        public const ushort C2M_StallSellRequest = 10492;
+        public const ushort M2C_StallSellResponse = 10493;
+        public const ushort C2M_StallXiaJiaRequest = 10494;
+        public const ushort M2C_StallXiaJiaResponse = 10495;
+        public const ushort C2P_PaiMaiAuctionInfoRequest = 10496;
+        public const ushort P2C_PaiMaiAuctionInfoResponse = 10497;
+        public const ushort C2P_PaiMaiAuctionRecordRequest = 10498;
+        public const ushort P2C_PaiMaiAuctionRecordResponse = 10499;
+        public const ushort C2P_PaiMaiFindRequest = 10500;
+        public const ushort P2C_PaiMaiFindResponse = 10501;
+        public const ushort C2P_PaiMaiListRequest = 10502;
+        public const ushort P2C_PaiMaiListResponse = 10503;
+        public const ushort C2P_PaiMaiSearchRequest = 10504;
+        public const ushort P2C_PaiMaiSearchResponse = 10505;
+        public const ushort C2P_PaiMaiShopShowListRequest = 10506;
+        public const ushort P2C_PaiMaiShopShowListResponse = 10507;
+        public const ushort C2P_StallListRequest = 10508;
+        public const ushort P2C_StallListResponse = 10509;
+        public const ushort C2M_BuChangeRequest = 10510;
+        public const ushort M2C_BuChangeResponse = 10511;
+        public const ushort C2M_CreateSpiling = 10512;
+        public const ushort C2M_DungeonHappyMoveRequest = 10513;
+        public const ushort M2C_DungeonHappyMoveResponse = 10514;
+        public const ushort C2M_FindJingLingRequest = 10515;
+        public const ushort M2C_FindJingLingResponse = 10516;
+        public const ushort C2M_FindNearMonsterRequest = 10517;
+        public const ushort M2C_FindNearMonsterResponse = 10518;
+        public const ushort C2M_FirstWinSelfRewardRequest = 10519;
+        public const ushort M2C_FirstWinSelfRewardResponse = 10520;
+        public const ushort C2M_FubenMessageRequest = 10521;
+        public const ushort M2C_FubenMessageResponse = 10522;
+        public const ushort C2M_FubenTimesResetRequest = 10523;
+        public const ushort M2C_FubenTimesResetResponse = 10524;
+        public const ushort C2M_GameSettingRequest = 10525;
+        public const ushort M2C_GameSettingResponse = 10526;
+        public const ushort C2M_GMCustomRequest = 10527;
+        public const ushort M2C_GMCustomResponse = 10528;
+        public const ushort C2M_GuideUpdateRequest = 10529;
+        public const ushort M2C_GuideUpdateResponse = 10530;
+        public const ushort C2M_KillMonsterRewardRequest = 10531;
+        public const ushort M2C_KillMonsterRewardResponse = 10532;
+        public const ushort C2M_LeavlRewardRequest = 10533;
+        public const ushort M2C_LeavlRewardResponse = 10534;
+        public const ushort C2M_ModifyNameRequest = 10535;
+        public const ushort M2C_ModifyNameResponse = 10536;
+        public const ushort C2M_MysteryBuyRequest = 10537;
+        public const ushort M2C_MysteryBuyResponse = 10538;
+        public const ushort C2M_OneChallengeRequest = 10539;
+        public const ushort M2C_OneChallengeResponse = 10540;
+        public const ushort M2C_OneChallenge = 10541;
+        public const ushort C2M_ReddotReadRequest = 10542;
+        public const ushort M2C_ReddotReadResponse = 10543;
+        public const ushort C2M_RefreshUnitRequest = 10544;
+        public const ushort C2M_SerialReardRequest = 10545;
+        public const ushort M2C_SerialReardResponse = 10546;
+        public const ushort C2M_ShareSucessRequest = 10547;
+        public const ushort M2C_ShareSucessResponse = 10548;
+        public const ushort C2M_UnitInfoRequest = 10549;
+        public const ushort M2C_UnitInfoResponse = 10550;
+        public const ushort C2M_XiuLianCenterRequest = 10551;
+        public const ushort M2C_XiuLianCenterResponse = 10552;
+        public const ushort C2Popularize_ListRequest = 10553;
+        public const ushort Popularize2C_ListResponse = 10554;
+        public const ushort C2Popularize_PlayerRequest = 10555;
+        public const ushort Popularize2C_PlayerResponse = 10556;
+        public const ushort C2R_CampRankListRequest = 10557;
+        public const ushort R2C_CampRankListResponse = 10558;
+        public const ushort C2R_DBServerInfoRequest = 10559;
+        public const ushort R2C_DBServerInfoResponse = 10560;
+        public const ushort C2R_RankDemonRequest = 10561;
+        public const ushort R2C_RankDemonResponse = 10562;
+        public const ushort C2R_RankListRequest = 10563;
+        public const ushort R2C_RankListResponse = 10564;
+        public const ushort C2R_RankPetListRequest = 10565;
+        public const ushort R2C_RankPetListResponse = 10566;
+        public const ushort C2R_RankRunRaceRequest = 10567;
+        public const ushort R2C_RankRunRaceResponse = 10568;
+        public const ushort C2R_RankSeasonTowerRequest = 10569;
+        public const ushort R2C_RankSeasonTowerResponse = 10570;
+        public const ushort C2R_RankShowLieRequest = 10571;
+        public const ushort R2C_RankShowLieResponse = 10572;
+        public const ushort C2R_RankTrialListRequest = 10573;
+        public const ushort R2C_RankTrialListResponse = 10574;
+        public const ushort C2R_RankUnionRaceRequest = 10575;
+        public const ushort R2C_RankUnionRaceResponse = 10576;
+        public const ushort C2R_WorldLvRequest = 10577;
+        public const ushort R2C_WorldLvResponse = 10578;
+        public const ushort C2M_SoloMatchRequest = 10579;
+        public const ushort M2C_SoloMatchResponse = 10580;
+        public const ushort C2S_SoloMyInfoRequest = 10581;
+        public const ushort S2C_SoloMyInfoResponse = 10582;
+        public const ushort C2M_TeamDungeonBoxRewardRequest = 10583;
+        public const ushort M2C_TeamDungeonBoxRewardResponse = 10584;
+        public const ushort C2M_TeamDungeonCreateRequest = 10585;
+        public const ushort M2C_TeamDungeonCreateResponse = 10586;
+        public const ushort C2M_TeamDungeonOpenRequest = 10587;
+        public const ushort M2C_TeamDungeonOpenResponse = 10588;
+        public const ushort C2M_TeamDungeonPrepareRequest = 10589;
+        public const ushort M2C_TeamDungeonPrepareResponse = 10590;
+        public const ushort C2M_TeamerPositionRequest = 10591;
+        public const ushort M2C_TeamerPositionResponse = 10592;
+        public const ushort C2M_TeamPickRequest = 10593;
+        public const ushort M2C_TeamDungeonBoxRewardResult = 10594;
+        public const ushort C2T_TeamAgreeRequest = 10595;
+        public const ushort T2C_TeamAgreeResponse = 10596;
+        public const ushort C2T_TeamDungeonAgreeRequest = 10597;
+        public const ushort T2C_TeamDungeonAgreeResponse = 10598;
+        public const ushort C2T_TeamDungeonApplyRequest = 10599;
+        public const ushort T2C_TeamDungeonApplyResponse = 10600;
+        public const ushort M2C_TeamDungeonApplyResult = 10601;
+        public const ushort C2T_TeamDungeonInfoRequest = 10602;
+        public const ushort T2C_TeamDungeonInfoResponse = 10603;
+        public const ushort C2T_TeamInviteRequest = 10604;
+        public const ushort T2C_TeamInviteResponse = 10605;
+        public const ushort M2C_TeamInviteResult = 10606;
+        public const ushort C2T_TeamKickOutRequest = 10607;
+        public const ushort T2C_TeamKickOutResponse = 10608;
+        public const ushort C2T_TeamLeaveRequest = 10609;
+        public const ushort T2C_TeamLeaveResponse = 10610;
+        public const ushort C2T_TeamRobotRequest = 10611;
+        public const ushort T2C_TeamRobotResponse = 10612;
+        public const ushort M2C_TeamDungeonOpenResult = 10613;
+        public const ushort M2C_TeamDungeonPrepareResult = 10614;
+        public const ushort C2M_ActivityChouKaRequest = 10615;
+        public const ushort M2C_ActivityChouKaResponse = 10616;
+        public const ushort C2M_ActivityFeedRequest = 10617;
+        public const ushort M2C_ActivityFeedResponse = 10618;
+        public const ushort C2M_ActivityGuessRequest = 10619;
+        public const ushort M2C_ActivityGuessResponse = 10620;
+        public const ushort C2M_ActivityInfoRequest = 10621;
+        public const ushort M2C_ActivityInfoResponse = 10622;
+        public const ushort C2M_ActivityReceiveRequest = 10623;
+        public const ushort M2C_ActivityReceiveResponse = 10624;
+        public const ushort C2M_ActivityRechargeSignRequest = 10625;
+        public const ushort M2C_ActivityRechargeSignResponse = 10626;
+        public const ushort C2M_ActivityRewardRequest = 10627;
+        public const ushort M2C_ActivityRewardResponse = 10628;
+        public const ushort C2M_ChouKa2RefreshRequest = 10629;
+        public const ushort M2C_ChouKa2RefreshResponse = 10630;
+        public const ushort C2M_SingleRechargeRewardRequest = 10631;
+        public const ushort M2C_SingleRechargeRewardResponse = 10632;
+        public const ushort C2M_ZhanQuInfoRequest = 10633;
+        public const ushort M2C_ZhanQuInfoResponse = 10634;
+        public const ushort C2M_ZhanQuReceiveRequest = 10635;
+        public const ushort M2C_ZhanQuReceiveResponse = 10636;
+        public const ushort C2M_JingHeActivateRequest = 10637;
+        public const ushort M2C_JingHeActivateResponse = 10638;
+        public const ushort C2M_JingHePlanRequest = 10639;
+        public const ushort M2C_JingHePlanResponse = 10640;
+        public const ushort C2M_JingHeWearRequest = 10641;
+        public const ushort M2C_JingHeWearResponse = 10642;
+        public const ushort C2M_JingHeZhuruRequest = 10643;
+        public const ushort M2C_JingHeZhuruResponse = 10644;
+        public const ushort C2M_MakeLearnRequest = 10645;
+        public const ushort M2C_MakeLearnResponse = 10646;
+        public const ushort C2E_AccountWarehousInfoRequest = 10647;
+        public const ushort E2C_AccountWarehousInfoResponse = 10648;
+        public const ushort C2M_BattleSummonRecord = 10649;
+        public const ushort M2C_BattleSummonRecord = 10650;
+        public const ushort C2M_BattleSummonRequest = 10651;
+        public const ushort M2C_BattleSummonResponse = 10652;
+        public const ushort C2M_CampRankSelectRequest = 10653;
+        public const ushort M2C_CampRankSelectResponse = 10654;
+        public const ushort Actor_FubenEnergySkillRequest = 10655;
+        public const ushort Actor_FubenEnergySkillResponse = 10656;
+        public const ushort FubenInfo = 10657;
+        public const ushort SonFubenInfo = 10658;
+        public const ushort Actor_EnterFubenRequest = 10659;
+        public const ushort Actor_EnterFubenResponse = 10660;
+        public const ushort Actor_EnterSonFubenRequest = 10661;
+        public const ushort Actor_EnterSonFubenResponse = 10662;
+        public const ushort Actor_GetFubenInfoRequest = 10663;
+        public const ushort Actor_GetFubenInfoResponse = 10664;
+        public const ushort Actor_GetFubenRewardRequest = 10665;
+        public const ushort Actor_GetFubenRewardReponse = 10666;
+        public const ushort Actor_FubenMoNengRequest = 10667;
+        public const ushort Actor_FubenMoNengResponse = 10668;
+        public const ushort Actor_SendReviveRequest = 10669;
+        public const ushort Actor_SendReviveResponse = 10670;
+        public const ushort C2M_ChouKaRequest = 10671;
+        public const ushort M2C_ChouKaResponse = 10672;
+        public const ushort C2M_ChouKaRewardRequest = 10673;
+        public const ushort M2C_ChouKaRewardResponse = 10674;
+        public const ushort C2M_EnergyAnswerRequest = 10675;
+        public const ushort M2C_EnergyAnswerResponse = 10676;
+        public const ushort C2M_EnergyInfoRequest = 10677;
+        public const ushort M2C_EnergyInfoResponse = 10678;
+        public const ushort C2M_EnergyReceiveRequest = 10679;
+        public const ushort M2C_EnergyReceiveResponse = 10680;
+        public const ushort C2M_HorseRideRequest = 10681;
+        public const ushort M2C_HorseRideResponse = 10682;
+        public const ushort C2M_HorseFightRequest = 10683;
+        public const ushort M2C_HorseFightResponse = 10684;
+        public const ushort C2M_JiaYuanPickRequest = 10685;
+        public const ushort M2C_JiaYuanPickResponse = 10686;
+        public const ushort C2M_JiaYuanCangKuOpenRequest = 10687;
+        public const ushort M2C_JiaYuanCangKuOpenResponse = 10688;
+        public const ushort C2M_JiaYuanCookBookOpen = 10689;
+        public const ushort M2C_JiaYuanCookBookOpen = 10690;
+        public const ushort C2M_JiaYuanCookRequest = 10691;
+        public const ushort M2C_JiaYuanCookResponse = 10692;
+        public const ushort C2M_JiaYuanDaShiRequest = 10693;
+        public const ushort M2C_JiaYuanDaShiResponse = 10694;
+        public const ushort C2M_JiaYuanExchangeRequest = 10695;
+        public const ushort M2C_JiaYuanExchangeResponse = 10696;
+        public const ushort C2M_JiaYuanGatherRequest = 10697;
+        public const ushort M2C_JiaYuanGatherResponse = 10698;
+        public const ushort C2M_JiaYuanGatherOtherRequest = 10699;
+        public const ushort M2C_JiaYuanGatherOtherResponse = 10700;
+        public const ushort C2M_JiaYuanInitRequest = 10701;
+        public const ushort M2C_JiaYuanInitResponse = 10702;
+        public const ushort C2M_JiaYuanMysteryBuyRequest = 10703;
+        public const ushort M2C_JiaYuanMysteryBuyResponse = 10704;
+        public const ushort C2M_JiaYuanMysteryListRequest = 10705;
+        public const ushort M2C_JiaYuanMysteryListResponse = 10706;
+        public const ushort C2M_JiaYuanPastureBuyRequest = 10707;
+        public const ushort M2C_JiaYuanPastureBuyResponse = 10708;
+        public const ushort C2M_JiaYuanPastureListRequest = 10709;
+        public const ushort M2C_JiaYuanPastureListResponse = 10710;
+        public const ushort C2M_JiaYuanPetFeedRequest = 10711;
+        public const ushort M2C_JiaYuanPetFeedResponse = 10712;
+        public const ushort C2M_JiaYuanPetOperateRequest = 10713;
+        public const ushort M2C_JiaYuanPetOperateResponse = 10714;
+        public const ushort C2M_JiaYuanPetPositionRequest = 10715;
+        public const ushort M2C_JiaYuanPetPositionResponse = 10716;
+        public const ushort C2M_JiaYuanPetWalkRequest = 10717;
+        public const ushort M2C_JiaYuanPetWalkResponse = 10718;
+        public const ushort C2M_JiaYuanPlanOpenRequest = 10719;
+        public const ushort M2C_JiaYuanPlanOpenResponse = 10720;
+        public const ushort C2M_JiaYuanPlantRequest = 10721;
+        public const ushort M2C_JiaYuanPlantResponse = 10722;
+        public const ushort C2M_JiaYuanPurchaseRequest = 10723;
+        public const ushort M2C_JiaYuanPurchaseResponse = 10724;
+        public const ushort C2M_JiaYuanPurchaseRefresh = 10725;
+        public const ushort M2C_JiaYuanPurchaseRefresh = 10726;
+        public const ushort C2M_JiaYuanRecordListRequest = 10727;
+        public const ushort M2C_JiaYuanRecordListResponse = 10728;
+        public const ushort C2M_JiaYuanStoreRequest = 10729;
+        public const ushort M2C_JiaYuanStoreResponse = 10730;
+        public const ushort C2M_JiaYuanUpLvRequest = 10731;
+        public const ushort M2C_JiaYuanUpLvResponse = 10732;
+        public const ushort C2M_JiaYuanUprootRequest = 10733;
+        public const ushort M2C_JiaYuanUprootResponse = 10734;
+        public const ushort C2M_JiaYuanVisitListRequest = 10735;
+        public const ushort JiaYuanVisit = 10736;
+        public const ushort M2C_JiaYuanVisitListResponse = 10737;
+        public const ushort C2M_JiaYuanWatchRequest = 10738;
+        public const ushort M2C_JiaYuanWatchResponse = 10739;
+        public const ushort C2M_TakeOutAllRequest = 10740;
+        public const ushort M2C_TakeOutAllResponse = 10741;
+        public const ushort C2M_LingDiRewardRequest = 10742;
+        public const ushort M2C_LingDiRewardResponse = 10743;
+        public const ushort C2M_LingDiUpRequest = 10744;
+        public const ushort M2C_LingDiUpResponse = 10745;
+        public const ushort C2M_RandomTowerBeginRequest = 10746;
+        public const ushort M2C_RandomTowerBeginResponse = 10747;
+        public const ushort C2M_RandomTowerRewardRequest = 10748;
+        public const ushort M2C_RandomTowerRewardResponse = 10749;
+        public const ushort C2M_IOSPayVerifyRequest = 10750;
+        public const ushort M2C_IOSPayVerifyResponse = 10751;
+        public const ushort C2M_RechargeRequest = 10752;
+        public const ushort M2C_RechargeResponse = 10753;
+        public const ushort C2M_RechargeRewardRequest = 10754;
+        public const ushort M2C_RechargeRewardResponse = 10755;
+        public const ushort C2M_ExpToGoldRequest = 10756;
+        public const ushort M2C_ExpToGoldResponse = 10757;
+        public const ushort C2M_RealNameRewardRequest = 10758;
+        public const ushort M2C_RealNameRewardResponse = 10759;
+        public const ushort C2M_RolePetChouKaRequest = 10760;
+        public const ushort M2C_RolePetChouKaResponse = 10761;
+        public const ushort C2M_SeasonLevelRewardRequest = 10762;
+        public const ushort M2C_SeasonLevelRewardResponse = 10763;
+        public const ushort C2M_SeasonOpenJingHeRequest = 10764;
+        public const ushort M2C_SeasonOpenJingHeResponse = 10765;
+        public const ushort C2M_SeasonUseFruitRequest = 10766;
+        public const ushort M2C_SeasonUseFruitResponse = 10767;
+        public const ushort C2M_ShoujiRewardRequest = 10768;
+        public const ushort M2C_ShoujiRewardResponse = 10769;
+        public const ushort C2M_ShouJiTreasureRequest = 10770;
+        public const ushort M2C_ShouJiTreasureResponse = 10771;
+        public const ushort C2M_TitleUseRequest = 10772;
+        public const ushort M2C_TitleUseResponse = 10773;
+        public const ushort M2C_TitleUpdateResult = 10774;
+        public const ushort C2M_TowerFightBeginRequest = 10775;
+        public const ushort M2C_TowerFightBeginResponse = 10776;
+        public const ushort C2M_TowerExitRequest = 10777;
+        public const ushort M2C_TowerExitResponse = 10778;
+        public const ushort C2M_TowerOfSealNextRequest = 10779;
+        public const ushort M2C_TowerOfSealNextResponse = 10780;
+        public const ushort C2M_TrialDungeonBeginRequest = 10781;
+        public const ushort M2C_TrialDungeonBeginResponse = 10782;
+        public const ushort C2M_TrialDungeonFinishRequest = 10783;
+        public const ushort M2C_TrialDungeonFinishResponse = 10784;
+        public const ushort C2M_TurtleRecordRequest = 10785;
+        public const ushort M2C_TurtleRecordResponse = 10786;
+        public const ushort C2M_TurtleSupportRequest = 10787;
+        public const ushort M2C_TurtleSupportResponse = 10788;
+        public const ushort C2M_WelfareDraw2Request = 10789;
+        public const ushort M2C_WelfareDraw2Response = 10790;
+        public const ushort C2M_WelfareDraw2RewardRequest = 10791;
+        public const ushort M2C_WelfareDraw2RewardResponse = 10792;
+        public const ushort C2M_WelfareDrawRequest = 10793;
+        public const ushort M2C_WelfareDrawResponse = 10794;
+        public const ushort C2M_WelfareDrawRewardRequest = 10795;
+        public const ushort M2C_WelfareDrawRewardResponse = 10796;
+        public const ushort C2M_WelfareInvestRequest = 10797;
+        public const ushort M2C_WelfareInvestResponse = 10798;
+        public const ushort C2M_WelfareInvestRewardRequest = 10799;
+        public const ushort M2C_WelfareInvestRewardResponse = 10800;
+        public const ushort C2M_WelfareTaskRewardRequest = 10801;
+        public const ushort M2C_WelfareTaskRewardResponse = 10802;
+        public const ushort C2M_YueKaOpenRequest = 10803;
+        public const ushort M2C_YueKaOpenResponse = 10804;
+        public const ushort C2M_YueKaRewardRequest = 10805;
+        public const ushort M2C_YueKaRewardResponse = 10806;
+        public const ushort C2Popularize_UploadRequest = 10807;
+        public const ushort Popularize2C_UploadResponse = 10808;
+        public const ushort C2Popularize_RewardRequest = 10809;
+        public const ushort Popularize2C_RewardResponse = 10810;
     }
 }
