@@ -1881,13 +1881,15 @@ message C2C_SendChatResponse // IChatActorResponse
 	int32 ChannelId = 2;	//0世界 1帮派 2队伍
 }
 
-message C2C_SyncChatInfo // IMessage
+
+message M2C_SyncChatInfo // IMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	
+
 	ChatInfo ChatInfo = 1;
 }
+
 
 //成就进度
 message ChengJiuInfo
@@ -4060,14 +4062,6 @@ message M2C_TeamDungeonSettlement // IMessage
 	repeated RewardItem ReardList = 5;		//奖励列表
 	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
 	int32 Star = 7;
-}
-
-message M2C_SyncChatInfo // IMessage
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	ChatInfo ChatInfo = 1;
 }
 
 
