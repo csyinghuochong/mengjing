@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class C2U_UnionApplyHandler : MessageHandler<Scene, C2U_UnionApplyRequest, U2C_UnionApplyResponse>
@@ -10,11 +12,9 @@
             {
                 dBUnionInfo.UnionInfo.ApplyList.Add(request.UserId);
             }
-            
-            A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-            M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
-                    .Get(LocationType.Unit).Call(dBUnionInfo.UnionInfo.LeaderId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-            if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success &&  m2AGetUnitInfoResponse.PlayerState == 0)
+
+            List<long> allonlines = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
+            if (allonlines.Contains(dBUnionInfo.UnionInfo.LeaderId))
             {
                 M2C_UnionApplyResult m2C_HorseNoticeInfo = M2C_UnionApplyResult.Create();
                 MapMessageHelper.SendToClient(scene.Root(), dBUnionInfo.UnionInfo.LeaderId, m2C_HorseNoticeInfo);

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.EMail)]
     public class M2E_EMailSendHandler: MessageHandler<Scene, M2E_EMailSendRequest, E2M_EMailSendResponse>
@@ -35,13 +37,11 @@
 
                     return;
                 }
-                
-                A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
-                        .Get(LocationType.Unit).Call(request.Id, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-                
+
+                List<long> onlist = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
+               
                 //在线直接推送
-                if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
+                if (onlist.Contains(request.Id) )
                 {
                     M2C_UpdateMailInfo m2C_HorseNoticeInfo = M2C_UpdateMailInfo.Create();
                     MapMessageHelper.SendToClient( scene.Root(), request.Id, m2C_HorseNoticeInfo);

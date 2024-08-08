@@ -19,6 +19,8 @@ namespace ET.Server
                 return;
             }
 
+            List<long> allonlines = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
+            
             ///1族长 2副族长  ///3长老
             for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
             {
@@ -45,20 +47,10 @@ namespace ET.Server
                 unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
 
-                if (request.UnitId == userId)
+                if (allonlines.Contains( request.UnitId)  )
                 {
                     response.OnLinePlayer.Add(userId);
-                }
-                else
-                {
-                    // A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                    // M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
-                    //         .Get(LocationType.Unit).Call(userId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-                    //
-                    // if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
-                    // {
-                    //     response.OnLinePlayer.Add(userId);
-                    // }
+                    Console.WriteLine($"在线玩家：{userId}");
                 }
                 
                 if (dBUnionInfo.UnionInfo.LeaderId == userId)

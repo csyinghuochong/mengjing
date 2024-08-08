@@ -212,14 +212,6 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Chat.ToString()).ActorId;
         }
         
-        public static List<ActorId> GetGateServerId(int zone)
-        {
-            List<ActorId> actorIds = new List<ActorId>();
-            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate1").ActorId);
-            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate2").ActorId);
-            return actorIds;
-        }
-
         public static ActorId GetPaiMaiServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.PaiMai.ToString()).ActorId;
@@ -271,5 +263,28 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.JiaYuan.ToString()).ActorId;
         }
         
+        public static List<ActorId> GetGateServerId(int zone)
+        {
+            List<ActorId> actorIds = new List<ActorId>();
+            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate1").ActorId);
+            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate2").ActorId);
+            return actorIds;
+        }
+
+        public static async ETTask<List<long>> GetOnLineUnits(Scene root,  int zone)
+        {           
+            await ETTask.CompletedTask;
+            List<long> onlines = new List<long>();
+            List<ActorId> allactorids = GetGateServerId(zone);
+
+            for (int i = 0; i < allactorids.Count; i++)
+            {
+                A2G_GetOnLineUnit a2GGetOnLineUnit = A2G_GetOnLineUnit.Create();
+                G2A_GetOnLineUnit aGetOnLineUnit = (G2A_GetOnLineUnit)await root.GetComponent<MessageSender>().Call(allactorids[i], a2GGetOnLineUnit);
+                onlines.AddRange(aGetOnLineUnit.OnLineUnits);
+            }
+            
+            return onlines;
+        }
     }
 }

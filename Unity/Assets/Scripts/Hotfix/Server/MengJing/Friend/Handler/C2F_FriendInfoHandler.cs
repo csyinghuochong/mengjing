@@ -20,14 +20,11 @@ namespace  ET.Server
                 }
 
                 //await  root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(friendId, new ILocationRequest());
-                A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await root.Root().GetComponent<MessageLocationSenderComponent>()
-                        .Get(LocationType.Unit).Call(friendId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-
+                ChatSceneComponent chatSceneComponent = root.GetComponent<ChatSceneComponent>();
                 FriendInfo FriendInfo = FriendInfo.Create();
                 FriendInfo.UserId = friendId;
                 FriendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-                FriendInfo.OnLineTime = m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game ? 1 : 0;
+                FriendInfo.OnLineTime = chatSceneComponent.GetChild<ChatInfoUnit>(friendId)!=null ? 1 : 0;
                 FriendInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 FriendInfo.Occ = userInfoComponent.UserInfo.Occ;
                 friendInfos.Add(FriendInfo);

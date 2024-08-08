@@ -104,10 +104,8 @@
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                        M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = (M2A_GetUnitInfoResponse) await  chatInfoUnit.Root().GetComponent<MessageLocationSenderComponent>()
-                                .Get(LocationType.Unit).Call(request.ChatInfo.ParamId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-                        if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success)
+                        chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
+                        if (chatInfoUnitsComponent.GetChild<ChatInfoUnit>(request.ChatInfo.ParamId)!=null)
                         {
                             MapMessageHelper.SendToClient(chatInfoUnit.Root(), request.ChatInfo.ParamId, m2C_SyncChatInfo);
                         }
