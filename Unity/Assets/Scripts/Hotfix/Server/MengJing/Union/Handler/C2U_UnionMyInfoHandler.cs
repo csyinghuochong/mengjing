@@ -8,164 +8,170 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, C2U_UnionMyInfoRequest request, U2C_UnionMyInfoResponse response)
         {
-
             using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId))
             {
-                
-                 DBUnionInfo dBUnionInfo =await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
-            if (dBUnionInfo == null)
-            {
-                response.Error = ErrorCode.ERR_Union_Not_Exist;
-                return;
-            }
-
-            List<long> allonlines = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
-            
-            ///1族长 2副族长  ///3长老
-            for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
-            {
-                UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
-                long userId = unionPlayerInfo.UserID;
-                
-                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), userId);
-                if (userInfoComponent == null)
+                DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
+                if (dBUnionInfo == null)
                 {
-                    dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
-                    continue;
+                    response.Error = ErrorCode.ERR_Union_Not_Exist;
+                    return;
                 }
 
-                if (unionPlayerInfo.Position == 1 && unionPlayerInfo.UserID != dBUnionInfo.UnionInfo.LeaderId)
-                {
-                    unionPlayerInfo.Position = 0;
-                }
-                if (unionPlayerInfo.UserID == dBUnionInfo.UnionInfo.LeaderId)
-                {
-                    unionPlayerInfo.Position = 1;
-                }
+                List<long> allonlines = await UnitCacheHelper.GetOnLineUnits(scene.Root(), scene.Zone());
 
-                unionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-                unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
-
-                if (allonlines.Contains( request.UnitId)  )
-                {
-                    response.OnLinePlayer.Add(userId);
-                    Console.WriteLine($"在线玩家：{userId}");
-                }
-                
-                if (dBUnionInfo.UnionInfo.LeaderId == userId)
-                {
-                    dBUnionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
-                }
-            }
-
-            long timeNow = TimeHelper.ServerNow();
-
-            if (dBUnionInfo.UnionInfo.Level == 0)
-            {
-                dBUnionInfo.UnionInfo.Level = 1;
-            }
-
-            dBUnionInfo.MysteryFreshTime = 0;
-
-            if (dBUnionInfo.UnionInfo.UnionKeJiList.Count < UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count)
-            {
-                int curNumber = dBUnionInfo.UnionInfo.UnionKeJiList.Count;
-                int maxNumber = UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count;
-                for (int keji = curNumber; keji < maxNumber; keji++)
-                {
-                    dBUnionInfo.UnionInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
-                }
-            }
-
-            //检测是否有科技可以升级
-            if (dBUnionInfo.UnionInfo.KeJiActiteTime > 0)
-            {
-                int keijiId = dBUnionInfo.UnionInfo.UnionKeJiList[dBUnionInfo.UnionInfo.KeJiActitePos];
-                UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(keijiId);
-                long passTime = (timeNow -  dBUnionInfo.UnionInfo.KeJiActiteTime ) / 1000;
-                //Log.Console($"科技升级 {passTime} {unionKeJiConfig.NeedTime}");
-                if (unionKeJiConfig.NextID > 0 && passTime >= unionKeJiConfig.NeedTime)
-                {
-                    dBUnionInfo.UnionInfo.UnionKeJiList[dBUnionInfo.UnionInfo.KeJiActitePos] = unionKeJiConfig.NextID;
-                    dBUnionInfo.UnionInfo.KeJiActitePos = -1;
-                    dBUnionInfo.UnionInfo.KeJiActiteTime = 0;
-                }
-            }
-
-            ///判断族长离线时间
-            NumericComponentS numericComponent =
-                    await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);
-
-            if (dBUnionInfo.UnionInfo.JingXuanEndTime == 0 && numericComponent != null && timeNow - numericComponent.GetAsLong(NumericType.LastGameTime) > TimeHelper.OneDay * 5)
-            {
-                dBUnionInfo.UnionInfo.JingXuanEndTime = timeNow + TimeHelper.OneDay * 3;
-            }
-            ///判断竞选是否结束
-            if(dBUnionInfo.UnionInfo.JingXuanEndTime != 0 && timeNow >= dBUnionInfo.UnionInfo.JingXuanEndTime )
-            {
-                ///分配新族长
-                Log.Console("分配新族长！！");
-                List<UnionPlayerInfo> jingxuanPlayers = new List<UnionPlayerInfo>();    
+                ///1族长 2副族长  ///3长老
                 for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
                 {
                     UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
                     long userId = unionPlayerInfo.UserID;
-                    if (dBUnionInfo.UnionInfo.JingXuanList.Contains(userId))
+
+                    UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), userId);
+                    if (userInfoComponent == null)
                     {
-                        jingxuanPlayers.Add(unionPlayerInfo);
+                        dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
+                        continue;
+                    }
+
+                    if (unionPlayerInfo.Position == 1 && unionPlayerInfo.UserID != dBUnionInfo.UnionInfo.LeaderId)
+                    {
+                        unionPlayerInfo.Position = 0;
+                    }
+
+                    if (unionPlayerInfo.UserID == dBUnionInfo.UnionInfo.LeaderId)
+                    {
+                        unionPlayerInfo.Position = 1;
+                    }
+
+                    unionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+                    unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
+                    unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
+
+                    if (allonlines.Contains(request.UnitId))
+                    {
+                        response.OnLinePlayer.Add(userId);
+                        Console.WriteLine($"在线玩家：{userId}");
+                    }
+
+                    if (dBUnionInfo.UnionInfo.LeaderId == userId)
+                    {
+                        dBUnionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
                     }
                 }
-                jingxuanPlayers.Sort(delegate (UnionPlayerInfo a, UnionPlayerInfo b)
-                {
-                    int positiona = a.Position == 0 ? 10 : a.Position;
-                    int positionb = b.Position == 0 ? 10 : b.Position;
-                    int combata = a.Combat;
-                    int combatb = b.Combat;
 
-                    if (positiona == positionb)
-                    {
-                        return combatb - combata;
-                    }
-                    else
-                    { 
-                        return positiona - positionb;   
-                    }
-                });
-                dBUnionInfo.UnionInfo.JingXuanList.Clear();
-                dBUnionInfo.UnionInfo.JingXuanEndTime = 0;
+                long timeNow = TimeHelper.ServerNow();
 
-                long newLeaderId = 0;
-                if (jingxuanPlayers.Count > 0)
+                if (dBUnionInfo.UnionInfo.Level == 0)
                 {
-                    newLeaderId = jingxuanPlayers[0].UserID;
+                    dBUnionInfo.UnionInfo.Level = 1;
                 }
-                if (newLeaderId!= 0 && newLeaderId != dBUnionInfo.UnionInfo.LeaderId)
+
+                dBUnionInfo.MysteryFreshTime = 0;
+
+                if (dBUnionInfo.UnionInfo.UnionKeJiList.Count < UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count)
                 {
-                    UnionPlayerInfo unionPlayerInfo_old = UnionHelper.GetUnionPlayerInfo(dBUnionInfo.UnionInfo.UnionPlayerList, dBUnionInfo.UnionInfo.LeaderId);
-                    UnionPlayerInfo unionPlayerInfo_new = UnionHelper.GetUnionPlayerInfo(dBUnionInfo.UnionInfo.UnionPlayerList, newLeaderId);
-
-                    if (unionPlayerInfo_old != null && unionPlayerInfo_new != null)
+                    int curNumber = dBUnionInfo.UnionInfo.UnionKeJiList.Count;
+                    int maxNumber = UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count;
+                    for (int keji = curNumber; keji < maxNumber; keji++)
                     {
-                        long oldLeaderid = dBUnionInfo.UnionInfo.LeaderId;
-                        dBUnionInfo.UnionInfo.LeaderId = newLeaderId;
-                        unionPlayerInfo_new.Position = 1;
-                        unionPlayerInfo_old.Position = 0;
-                        dBUnionInfo.UnionInfo.LeaderName = unionPlayerInfo_new.PlayerName;
-                        BroadMessageHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
-
-                        //通知旧族长
-                        BroadMessageHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
+                        dBUnionInfo.UnionInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
                     }
                 }
+
+                //检测是否有科技可以升级
+                if (dBUnionInfo.UnionInfo.KeJiActiteTime > 0)
+                {
+                    int keijiId = dBUnionInfo.UnionInfo.UnionKeJiList[dBUnionInfo.UnionInfo.KeJiActitePos];
+                    UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(keijiId);
+                    long passTime = (timeNow - dBUnionInfo.UnionInfo.KeJiActiteTime) / 1000;
+                    //Log.Console($"科技升级 {passTime} {unionKeJiConfig.NeedTime}");
+                    if (unionKeJiConfig.NextID > 0 && passTime >= unionKeJiConfig.NeedTime)
+                    {
+                        dBUnionInfo.UnionInfo.UnionKeJiList[dBUnionInfo.UnionInfo.KeJiActitePos] = unionKeJiConfig.NextID;
+                        dBUnionInfo.UnionInfo.KeJiActitePos = -1;
+                        dBUnionInfo.UnionInfo.KeJiActiteTime = 0;
+                    }
+                }
+
+                ///判断族长离线时间
+                NumericComponentS numericComponent =
+                        await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);
+
+                if (dBUnionInfo.UnionInfo.JingXuanEndTime == 0 && numericComponent != null &&
+                    timeNow - numericComponent.GetAsLong(NumericType.LastGameTime) > TimeHelper.OneDay * 5)
+                {
+                    dBUnionInfo.UnionInfo.JingXuanEndTime = timeNow + TimeHelper.OneDay * 3;
+                }
+
+                ///判断竞选是否结束
+                if (dBUnionInfo.UnionInfo.JingXuanEndTime != 0 && timeNow >= dBUnionInfo.UnionInfo.JingXuanEndTime)
+                {
+                    ///分配新族长
+                    Log.Console("分配新族长！！");
+                    List<UnionPlayerInfo> jingxuanPlayers = new List<UnionPlayerInfo>();
+                    for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
+                    {
+                        UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
+                        long userId = unionPlayerInfo.UserID;
+                        if (dBUnionInfo.UnionInfo.JingXuanList.Contains(userId))
+                        {
+                            jingxuanPlayers.Add(unionPlayerInfo);
+                        }
+                    }
+
+                    jingxuanPlayers.Sort(delegate(UnionPlayerInfo a, UnionPlayerInfo b)
+                    {
+                        int positiona = a.Position == 0 ? 10 : a.Position;
+                        int positionb = b.Position == 0 ? 10 : b.Position;
+                        int combata = a.Combat;
+                        int combatb = b.Combat;
+
+                        if (positiona == positionb)
+                        {
+                            return combatb - combata;
+                        }
+                        else
+                        {
+                            return positiona - positionb;
+                        }
+                    });
+                    dBUnionInfo.UnionInfo.JingXuanList.Clear();
+                    dBUnionInfo.UnionInfo.JingXuanEndTime = 0;
+
+                    long newLeaderId = 0;
+                    if (jingxuanPlayers.Count > 0)
+                    {
+                        newLeaderId = jingxuanPlayers[0].UserID;
+                    }
+
+                    if (newLeaderId != 0 && newLeaderId != dBUnionInfo.UnionInfo.LeaderId)
+                    {
+                        UnionPlayerInfo unionPlayerInfo_old =
+                                UnionHelper.GetUnionPlayerInfo(dBUnionInfo.UnionInfo.UnionPlayerList, dBUnionInfo.UnionInfo.LeaderId);
+                        UnionPlayerInfo unionPlayerInfo_new = UnionHelper.GetUnionPlayerInfo(dBUnionInfo.UnionInfo.UnionPlayerList, newLeaderId);
+
+                        if (unionPlayerInfo_old != null && unionPlayerInfo_new != null)
+                        {
+                            long oldLeaderid = dBUnionInfo.UnionInfo.LeaderId;
+                            dBUnionInfo.UnionInfo.LeaderId = newLeaderId;
+                            unionPlayerInfo_new.Position = 1;
+                            unionPlayerInfo_old.Position = 0;
+                            dBUnionInfo.UnionInfo.LeaderName = unionPlayerInfo_new.PlayerName;
+                            BroadMessageHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
+
+                            //通知旧族长
+                            BroadMessageHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
+                        }
+                    }
+                }
+
+
+                dBUnionInfo.UnionInfo.Level = 8;
+                dBUnionInfo.UnionInfo.UnionGold = 90000000;
+                Console.WriteLine($"C2U_UnionMyInfoHandler  测试数据");
+
+                response.UnionMyInfo = dBUnionInfo.UnionInfo;
+                UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             }
-           
-            response.UnionMyInfo = dBUnionInfo.UnionInfo;
-            UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
-
-                
-            }
-            
         }
     }
 }
