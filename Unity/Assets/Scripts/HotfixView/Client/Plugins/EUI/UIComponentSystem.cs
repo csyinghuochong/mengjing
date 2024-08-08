@@ -479,6 +479,7 @@ namespace ET.Client
             self.VisibleWindowsDic.Clear();
             self.StackWindowsQueue.Clear();
             self.UIBaseWindowlistCached.Clear();
+            self.OpenUIList.Clear();
         }
         
         /// <summary>
