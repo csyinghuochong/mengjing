@@ -1,11 +1,13 @@
-﻿namespace ET.Client
+﻿using System;
+
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class UpdateUserData_HuoBiSetRefresh : AEvent<Scene, UpdateUserData>
     {
         protected override async ETTask Run(Scene root, UpdateUserData args)
         {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>()?.Refresh();
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>()?.InitShow();
             await ETTask.CompletedTask;
         }
     }
@@ -25,7 +27,7 @@
 
         public static void ShowWindow(this DlgHuoBiSet self, Entity contextData = null)
         {
-            self.Refresh();
+            self.InitShow();
         }
 
         private static void OnAddGoldButton(this DlgHuoBiSet self)
@@ -48,11 +50,24 @@
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
-        public static void Refresh(this DlgHuoBiSet self)
+        public static void InitShow(this DlgHuoBiSet self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.E_GoldText.text = userInfo.Gold.ToString();
             self.View.E_ZuanShiText.text = userInfo.Diamond.ToString();
+            self.View.E_Lab_RongYuText.text = userInfo.RongYu.ToString();
+            self.View.E_Lab_ZiJinText.text = userInfo.JiaYuanFund.ToString();
+            self.View.E_JiaZu_ZiJinText.text = userInfo.UnionZiJin.ToString();
+            // self.View.E_WeiJing_ZiJinText.text = userInfo.WeiJingGold.ToString();
+
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            if (uiComponent.OpenUIList.Count > 0)
+            {
+                self.OnUpdateTitle(uiComponent.OpenUIList[0]);
+                self.View.EG_ZiJinSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("JiaYuan"));
+                self.View.EG_JiaZuSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("Union"));
+                self.View.EG_WeiJingSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("PaiMai"));
+            }
         }
 
         private static void OnClose(this DlgHuoBiSet self)
