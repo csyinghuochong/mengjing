@@ -33,6 +33,7 @@
         public static async ETTask<U2C_UnionOperatateResponse> UnionOperatate(Scene root, long unionId, int operatate, string value)
         {
             C2U_UnionOperatateRequest request = C2U_UnionOperatateRequest.Create();
+            request.UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id;
             request.UnionId = unionId;
             request.Operatate = operatate;
             request.Value = value;
@@ -48,7 +49,7 @@
             M2C_UnionLeaveResponse response = (M2C_UnionLeaveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
-        
+
         public static async ETTask<U2C_UnionMyInfoResponse> UnionMyInfo(Scene root, long unionId)
         {
             Log.Debug(("UnionMyInfo.C2U_UnionMyInfoRequest"));
@@ -192,6 +193,14 @@
             C2M_UnionInviteReplyRequest request = C2M_UnionInviteReplyRequest.Create();
             request.UnionId = unionId;
             request.ReplyCode = replyCode;
+
+            root.GetComponent<ClientSenderCompnent>().Send(request);
+        }
+
+        public static void UnionInviteRequest(Scene root, long inviteId)
+        {
+            C2M_UnionInviteRequest request = C2M_UnionInviteRequest.Create();
+            request.InviteId = inviteId;
 
             root.GetComponent<ClientSenderCompnent>().Send(request);
         }

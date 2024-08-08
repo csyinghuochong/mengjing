@@ -16,7 +16,7 @@
             return ErrorCode.ERR_Success;
         }
 
-        public static  async ETTask RequestFreshUnit(Scene root)
+        public static async ETTask RequestFreshUnit(Scene root)
         {
             C2M_RefreshUnitRequest refreshUnitRequest = C2M_RefreshUnitRequest.Create();
             root.GetComponent<ClientSenderCompnent>().Send(refreshUnitRequest);
@@ -101,6 +101,16 @@
 
             M2C_ReddotReadResponse response = (M2C_ReddotReadResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             root.GetComponent<ReddotComponentC>().RemoveReddont(reddotType);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> OneChallengeRequest(Scene root, int operatate, long otherId)
+        {
+            C2M_OneChallengeRequest request = C2M_OneChallengeRequest.Create();
+            request.Operatate = operatate;
+            request.OtherId = otherId;
+            M2C_OneChallengeResponse response = (M2C_OneChallengeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }

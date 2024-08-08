@@ -58,5 +58,15 @@
             C2C_SendBroadcastResponse response = (C2C_SendBroadcastResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> ChatJinYanRequest(Scene root, long jinYanId, string jinYanPlayer, long unitId)
+        {
+            C2C_ChatJinYanRequest reuqest = C2C_ChatJinYanRequest.Create();
+            reuqest.JinYanId = jinYanId;
+            reuqest.JinYanPlayer = jinYanPlayer;
+            reuqest.UnitId = unitId;
+            C2C_ChatJinYanResponse response = (C2C_ChatJinYanResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+            return response.Error;
+        }
     }
 }

@@ -31,8 +31,8 @@ namespace ET.Client
         public const int JinYan = 16;
     }
 
-    [FriendOf(typeof (DlgWatchMenuViewComponent))]
-    [FriendOf(typeof (DlgWatchMenu))]
+    [FriendOf(typeof(DlgWatchMenuViewComponent))]
+    [FriendOf(typeof(DlgWatchMenu))]
     public static class DlgWatchMenuSystem
     {
         public static void RegisterUIEvent(this DlgWatchMenu self)
@@ -67,28 +67,25 @@ namespace ET.Client
 
         public static void OnButton_Leave(this DlgWatchMenu self)
         {
-            // bool isLeader = self.ZoneScene().GetComponent<TeamComponent>().IsTeamLeader();
-            //
-            // PopupTipHelp.OpenPopupTip(self.DomainScene(), "我的队伍", isLeader? "是否离开队伍" : "是否离开队伍？",
-            //     () =>
-            //     {
-            //         self.ZoneScene().GetComponent<TeamComponent>().SendLeaveRequest().Coroutine();
-            //         self.OnClickImageBg();
-            //     }).Coroutine();
+            bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader ? "是否离开队伍" : "是否离开队伍？",
+                () =>
+                {
+                    TeamNetHelper.SendLeaveRequest(self.Root()).Coroutine();
+                    self.OnClickImageBg();
+                }).Coroutine();
         }
 
         public static void OnButton_InviteUnion(this DlgWatchMenu self)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // UserInfo userInfo = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo;
-            //
-            // Unit watchUnit = unit.GetParent<UnitComponent>().Get(self.UserId);
-            // string playName = watchUnit.GetComponent<UnitInfoComponent>().MasterName;
-            // PopupTipHelp.OpenPopupTip(self.ZoneScene(), "邀请加入", $"邀请玩家{playName}加入{userInfo.UnionName}家族?", () =>
-            // {
-            //     C2M_UnionInviteRequest request = new C2M_UnionInviteRequest() { InviteId = self.UserId };
-            //     self.ZoneScene().GetComponent<SessionComponent>().Session.Send(request);
-            // }, null).Coroutine();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+
+            Unit watchUnit = unit.GetParent<UnitComponent>().Get(self.UserId);
+            string playName = watchUnit.GetComponent<UnitInfoComponent>().MasterName;
+            PopupTipHelp.OpenPopupTip(self.Root(), "邀请加入", $"邀请玩家{playName}加入{userInfo.UnionName}家族?",
+                () => { UnionNetHelper.UnionInviteRequest(self.Root(), self.UserId); }, null).Coroutine();
         }
 
         public static void OnButton_KickUnion(this DlgWatchMenu self)
@@ -103,68 +100,50 @@ namespace ET.Client
                 return;
             }
 
-            // C2C_ChatJinYanRequest reuqest = new C2C_ChatJinYanRequest()
-            // {
-            //     JinYanId = self.UserId,
-            //     JinYanPlayer = self.UserName,
-            //     UnitId = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.UserId,
-            // };
-            // C2C_ChatJinYanResponse response = (C2C_ChatJinYanResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(reuqest);
+            await ChatNetHelper.ChatJinYanRequest(self.Root(), self.UserId, self.UserName,
+                self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId);
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_ServerBlack(this DlgWatchMenu self)
         {
-            // int zone = self.ZoneScene().GetComponent<AccountInfoComponent>().ServerId;
-            // if (string.IsNullOrEmpty(self.UserName))
-            // {
-            //     self.OnClickImageBg();
-            //     return;
-            // }
-            //
-            // for (int i = 1; i <= 5; i++)
-            // {
-            //     C2C_ChatJinYanRequest reuqest = new C2C_ChatJinYanRequest()
-            //     {
-            //         JinYanId = self.UserId, JinYanPlayer = self.UserName, UnitId = i + 100000,
-            //     };
-            //     C2C_ChatJinYanResponse response =
-            //             (C2C_ChatJinYanResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(reuqest);
-            // }
-            //
-            // C2C_GMCommonRequest request = new C2C_GMCommonRequest()
-            // {
-            //     Account = self.ZoneScene().GetComponent<AccountInfoComponent>().Account, Context = $"black {zone} {self.UserName}"
-            // };
-            // C2C_GMCommonResponse repose = (C2C_GMCommonResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            self.OnClickImageBg();
+            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
+            if (string.IsNullOrEmpty(self.UserName))
+            {
+                self.OnClickImageBg();
+                return;
+            }
 
-            await ETTask.CompletedTask;
+            for (int i = 1; i <= 5; i++)
+            {
+                await ChatNetHelper.ChatJinYanRequest(self.Root(), self.UserId, self.UserName, i + 100000);
+            }
+
+            await UserInfoNetHelper.GMCommon(self.Root(), $"black {zone} {self.UserName}");
+
+            self.OnClickImageBg();
         }
 
         public static async ETTask OnButton_OneChallenge(this DlgWatchMenu self)
         {
-            // BattleMessageComponent battleMessageComponent = self.ZoneScene().GetComponent<BattleMessageComponent>();
-            // if (!battleMessageComponent.OneChallengeTime.ContainsKey(self.UserId))
-            // {
-            //     battleMessageComponent.OneChallengeTime.Add(self.UserId, TimeHelper.ServerNow());
-            // }
-            // else
-            // {
-            //     if (TimeHelper.ServerNow() - battleMessageComponent.OneChallengeTime[self.UserId] < TimeHelper.Minute)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTip("一分钟内不能向该玩家再次发起挑战！");
-            //         return;
-            //     }
-            //
-            //     battleMessageComponent.OneChallengeTime[self.UserId] = TimeHelper.ServerNow();
-            // }
-            //
-            // C2M_OneChallengeRequest request = new C2M_OneChallengeRequest() { Operatate = 1, OtherId = self.UserId };
-            // M2C_OneChallengeResponse response =
-            //         (M2C_OneChallengeResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
+            BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
+            if (!battleMessageComponent.OneChallengeTime.ContainsKey(self.UserId))
+            {
+                battleMessageComponent.OneChallengeTime.Add(self.UserId, TimeHelper.ServerNow());
+            }
+            else
+            {
+                if (TimeHelper.ServerNow() - battleMessageComponent.OneChallengeTime[self.UserId] < TimeHelper.Minute)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("一分钟内不能向该玩家再次发起挑战！");
+                    return;
+                }
+
+                battleMessageComponent.OneChallengeTime[self.UserId] = TimeHelper.ServerNow();
+            }
+
+            await UserInfoNetHelper.OneChallengeRequest(self.Root(), 1, self.UserId);
+
             self.OnClickImageBg();
 
             await ETTask.CompletedTask;
@@ -172,15 +151,11 @@ namespace ET.Client
 
         public static async ETTask OnButton_UnionOperate(this DlgWatchMenu self, int postion)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new C2U_UnionOperatateRequest()
-            // {
-            //     UnitId = unit.Id, Operatate = 3, UnionId = unit.GetUnionId(), Value = $"{self.UserId}_{postion}"
-            // };
-            // U2C_UnionOperatateResponse r2c_roleEquip =
-            //         (U2C_UnionOperatateResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
-            // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIFriend);
-            // uI?.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            await UnionNetHelper.UnionOperatate(self.Root(), unit.GetUnionId(), 3, $"{self.UserId}_{postion}");
+
+            // TODO .....
+            // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
             self.OnClickImageBg();
 
             await ETTask.CompletedTask;
@@ -349,7 +324,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit watchUnit = unit.GetParent<UnitComponent>().Get(userId);
             long myunionid = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-            long wathunion = watchUnit != null? watchUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) : 0;
+            long wathunion = watchUnit != null ? watchUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) : 0;
 
             // self.TeamId = f2CWatchPlayerResponse.TeamId;
             int friendType = self.Root().GetComponent<FriendComponent>().GetFriendType(userId);
