@@ -399,46 +399,6 @@ message UnitCache2Other_GetComponent // IResponse
 
 //----------玩家缓存相关----------------
 
-//ResponseType Center2A_CheckAccount
-message A2Center_CheckAccount // IRequest
-{
-    int32 RpcId = 90;
-    int64 ActorId = 93;
-    string AccountName = 1;
-    string Password = 2;
-    string ThirdLogin = 4;
-}
-
-message Center2A_CheckAccount // IResponse
-{
-    int32 RpcId = 90;
-    int32 Error = 91;
-    string Message = 92;
-    PlayerInfo PlayerInfo = 1;
-    int64 AccountId = 2;
-	bool IsHoliday = 3;
-	bool StopServer = 4;
-}
-
-//ResponseType Center2A_RegisterAccount
-message A2Center_RegisterAccount // IRequest
-{
-    int32 RpcId = 90;
-    int64 ActorId = 93;
-    string AccountName = 1;
-    string Password = 2;
-	int32 LoginType = 3;
-	int32 age_type = 4;
-}
-
-message Center2A_RegisterAccount // IResponse
-{
-    int32 RpcId = 90;
-    int32 Error = 91;
-    string Message = 92;
-    int64 AccountId = 1;
-}
-
 //ResponseType L2A_LoginAccountResponse
 message A2L_LoginAccountRequest // IRequest
 {
