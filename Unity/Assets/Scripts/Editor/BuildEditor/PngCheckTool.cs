@@ -17,6 +17,8 @@ namespace ET
                 return;
             }
 
+            Log.Debug("检测开始");
+
             string[] files = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
                     .Where(file => file.EndsWith(".PNG", System.StringComparison.OrdinalIgnoreCase)
                             && !file.EndsWith(".png"))
@@ -30,7 +32,8 @@ namespace ET
             }
 
             AssetDatabase.Refresh();
-            Debug.Log("Renaming completed.");
+
+            Log.Debug("检测结束");
         }
     }
 }
