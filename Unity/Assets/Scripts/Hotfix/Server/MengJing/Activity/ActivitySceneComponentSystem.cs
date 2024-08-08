@@ -47,7 +47,7 @@ namespace ET.Server
             self.MapIdList.Clear();
             Log.Debug($"self.Zone:  {self.Zone()}");
 
-            self.MapIdList.Add(UnitCacheHelper.GetGateServerId(self.Zone()));
+            self.MapIdList.AddRange(UnitCacheHelper.GetGateServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetPaiMaiServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetRankServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetFubenCenterId(self.Zone()));

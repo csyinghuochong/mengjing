@@ -212,9 +212,12 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Chat.ToString()).ActorId;
         }
         
-        public static ActorId GetGateServerId(int zone)
+        public static List<ActorId> GetGateServerId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate1").ActorId;
+            List<ActorId> actorIds = new List<ActorId>();
+            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate1").ActorId);
+            actorIds.Add(StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate2").ActorId);
+            return actorIds;
         }
 
         public static ActorId GetPaiMaiServerId(int zone)

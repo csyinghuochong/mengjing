@@ -123,8 +123,6 @@ namespace ET.Server
 
         public static async ETTask OnAuctionOver(this PaiMaiSceneComponent self)
         {
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
-
             if (self.AuctioUnitId != 0)
             {
 

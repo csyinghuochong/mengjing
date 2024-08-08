@@ -305,7 +305,6 @@ namespace ET.Server
             Dictionary<long, long> fubenids = new Dictionary<long, long>();
 
             //通知玩家
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
             List<SoloPlayerInfo> playerlist = new List<SoloPlayerInfo>();
             for (int i = self.MatchList.Count - 1; i >= 0; i--)
             {

@@ -86,14 +86,14 @@ namespace ET.Server
 
         public static async ETTask OnPaySucessToGate(Scene scene, int zone, long userId, int rechargeNumber, string orderInfo, int rechargeType)
         {
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(zone);
-
-            R2G_RechargeResultRequest r2M_RechargeRequest = R2G_RechargeResultRequest.Create();
-            r2M_RechargeRequest.RechargeNumber = rechargeNumber;
-            r2M_RechargeRequest.UserID = userId;
-            r2M_RechargeRequest.OrderInfo = orderInfo;
-            G2R_RechargeResultResponse m2G_RechargeResponse =
-                    (G2R_RechargeResultResponse)await scene.GetComponent<MessageSender>().Call(gateServerId, r2M_RechargeRequest);
+            //直接发送actorlocation消息
+            await ETTask.CompletedTask;
+            // R2G_RechargeResultRequest r2M_RechargeRequest = R2G_RechargeResultRequest.Create();
+            // r2M_RechargeRequest.RechargeNumber = rechargeNumber;
+            // r2M_RechargeRequest.UserID = userId;
+            // r2M_RechargeRequest.OrderInfo = orderInfo;
+            // G2R_RechargeResultResponse m2G_RechargeResponse =
+            //         (G2R_RechargeResultResponse)await scene.GetComponent<MessageSender>().Call(gateServerId, r2M_RechargeRequest);
         }
     }
 }
