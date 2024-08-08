@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ET
 {
+    /// <summary>
+    /// 检测UI是否引用了Bundles中非UI的文件，请引用Bundles外的图片资源
+    /// </summary>
     public class UIRefCheckTool : MonoBehaviour
     {
         private const string prefabFolderPath = "Assets/Bundles/UI";

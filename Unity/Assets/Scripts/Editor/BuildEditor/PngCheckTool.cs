@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ET
 {
+    /// <summary>
+    /// 将png的文件名称改为小写
+    /// </summary>
     public class PngCheckTool : MonoBehaviour
     {
         [MenuItem("Tools/检测png")]
