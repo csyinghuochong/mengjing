@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -7,7 +8,11 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, C2U_UnionMyInfoRequest request, U2C_UnionMyInfoResponse response)
         {
-            DBUnionInfo dBUnionInfo =await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
+
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId))
+            {
+                
+                 DBUnionInfo dBUnionInfo =await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
@@ -15,7 +20,6 @@ namespace ET.Server
             }
 
             ///1族长 2副族长  ///3长老
-            ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
             for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
             {
                 UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
@@ -41,13 +45,22 @@ namespace ET.Server
                 unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
 
-                A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
-                M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
-                        .Get(LocationType.Unit).Call(userId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
-                if (m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
+                if (request.UnitId == userId)
                 {
                     response.OnLinePlayer.Add(userId);
                 }
+                else
+                {
+                    A2M_GetUnitInfoRequest a2MGetUnitInfoRequest = A2M_GetUnitInfoRequest.Create();
+                    M2A_GetUnitInfoResponse m2AGetUnitInfoResponse = await scene.Root().GetComponent<MessageLocationSenderComponent>()
+                            .Get(LocationType.Unit).Call(userId, a2MGetUnitInfoRequest) as M2A_GetUnitInfoResponse;
+
+                    if (m2AGetUnitInfoResponse.Error == ErrorCode.ERR_Success && m2AGetUnitInfoResponse.PlayerState == (int)PlayerState.Game )
+                    {
+                        response.OnLinePlayer.Add(userId);
+                    }
+                }
+                
                 if (dBUnionInfo.UnionInfo.LeaderId == userId)
                 {
                     dBUnionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
@@ -158,6 +171,9 @@ namespace ET.Server
             response.UnionMyInfo = dBUnionInfo.UnionInfo;
             UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
 
+                
+            }
+            
         }
     }
 }

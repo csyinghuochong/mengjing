@@ -666,31 +666,6 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.G2M_SessionDisconnect)]
-    public partial class G2M_SessionDisconnect : MessageObject, ILocationMessage
-    {
-        public static G2M_SessionDisconnect Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(G2M_SessionDisconnect), isFromPool) as G2M_SessionDisconnect;
-        }
-
-        [MemoryPackOrder(0)]
-        public int RpcId { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
     [Message(InnerMessage.ObjectQueryResponse)]
     public partial class ObjectQueryResponse : MessageObject, IResponse
     {
@@ -1128,6 +1103,31 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.G2M_SessionDisconnect)]
+    public partial class G2M_SessionDisconnect : MessageObject, ILocationMessage
+    {
+        public static G2M_SessionDisconnect Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(G2M_SessionDisconnect), isFromPool) as G2M_SessionDisconnect;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -8936,20 +8936,20 @@ namespace ET
         public const ushort ObjectGetResponse = 20018;
         public const ushort R2G_GetLoginKey = 20019;
         public const ushort G2R_GetLoginKey = 20020;
-        public const ushort G2M_SessionDisconnect = 20021;
-        public const ushort ObjectQueryResponse = 20022;
-        public const ushort R2L_LoginAccountRequest = 20023;
-        public const ushort L2R_LoginAccountRequest = 20024;
-        public const ushort L2G_DisconnectGateUnit = 20025;
-        public const ushort G2L_DisconnectGateUnit = 20026;
-        public const ushort R2Q_EnterQueue = 20027;
-        public const ushort Q2R_EnterQueue = 20028;
-        public const ushort G2Q_ExitGame = 20029;
-        public const ushort Q2G_ExitGame = 20030;
-        public const ushort G2L_AddLoginRecord = 20031;
-        public const ushort L2G_AddLoginRecord = 20032;
-        public const ushort G2L_RemoveLoginRecord = 20033;
-        public const ushort L2G_RemoveLoginRecord = 20034;
+        public const ushort ObjectQueryResponse = 20021;
+        public const ushort R2L_LoginAccountRequest = 20022;
+        public const ushort L2R_LoginAccountRequest = 20023;
+        public const ushort L2G_DisconnectGateUnit = 20024;
+        public const ushort G2L_DisconnectGateUnit = 20025;
+        public const ushort R2Q_EnterQueue = 20026;
+        public const ushort Q2R_EnterQueue = 20027;
+        public const ushort G2Q_ExitGame = 20028;
+        public const ushort Q2G_ExitGame = 20029;
+        public const ushort G2L_AddLoginRecord = 20030;
+        public const ushort L2G_AddLoginRecord = 20031;
+        public const ushort G2L_RemoveLoginRecord = 20032;
+        public const ushort L2G_RemoveLoginRecord = 20033;
+        public const ushort G2M_SessionDisconnect = 20034;
         public const ushort G2M_SecondLogin = 20035;
         public const ushort M2G_SecondLogin = 20036;
         public const ushort G2M_RequestExitGame = 20037;
