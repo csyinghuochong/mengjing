@@ -187,25 +187,6 @@ message G2L_DisconnectGateUnit // IResponse
 	string Message = 3;
 }
 
-//ResponseType L2A_GetUnitInfoResponse
-message A2L_GetUnitInfoRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	int64 UserID = 1;
-}
-
-message L2A_GetUnitInfoResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-
-	int32 PlayerState = 2;  // 0 正常 1 离线
-}
-
-
 //ResponseType G2A_GetOnLineUnit
 message A2G_GetOnLineUnit // IRequest
 {
