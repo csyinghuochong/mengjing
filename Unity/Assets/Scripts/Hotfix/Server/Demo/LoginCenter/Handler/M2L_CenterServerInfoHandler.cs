@@ -3,10 +3,10 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.LoginCenter)]
-    public class C2C_CenterServerInfoHandler : MessageHandler<Scene, C2C_CenterServerInfoReuest, C2C_CenterServerInfoRespone>
+    public class M2L_CenterServerInfoHandler : MessageHandler<Scene, M2L_CenterServerInfoReuest, L2M_CenterServerInfoRespone>
     {
 
-        protected override async ETTask Run(Scene scene, C2C_CenterServerInfoReuest request, C2C_CenterServerInfoRespone response)
+        protected override async ETTask Run(Scene scene, M2L_CenterServerInfoReuest request, L2M_CenterServerInfoRespone response)
         {
             Log.Warning($"C2C_CenterServerInfoReuest:{request.Zone}");
             DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();

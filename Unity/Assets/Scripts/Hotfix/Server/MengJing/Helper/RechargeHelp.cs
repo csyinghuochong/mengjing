@@ -41,17 +41,25 @@ namespace ET.Server
 
         public static async ETTask SendToAccountCenter(Scene root, long accountId, long userId, int rechargeNumber, string ordinfo)
         {
-            A2Center_RechargeRequest rechargeRequest = A2Center_RechargeRequest.Create();
-            rechargeRequest.AccountId = accountId;
-            rechargeRequest.RechargeInfo = RechargeInfo.Create();
-            rechargeRequest.RechargeInfo.Amount = rechargeNumber;
-            rechargeRequest.RechargeInfo.Time = TimeHelper.ServerNow();
-            rechargeRequest.RechargeInfo.UnitId = userId; 
-            rechargeRequest.RechargeInfo.OrderInfo = ordinfo;
-            
-            ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
-            Center2A_RechargeResponse saveAccount =
-                    (Center2A_RechargeResponse)await root.GetComponent<MessageSender>().Call(accountZone, rechargeRequest);
+            await ETTask.CompletedTask;
+            // rechargeRequest.AccountId = accountId;
+            // rechargeRequest.RechargeInfo = RechargeInfo.Create();
+            // rechargeRequest.RechargeInfo.Amount = rechargeNumber;
+            // rechargeRequest.RechargeInfo.Time = TimeHelper.ServerNow();
+            // rechargeRequest.RechargeInfo.UnitId = userId; 
+            // rechargeRequest.RechargeInfo.OrderInfo = ordinfo;
+            //
+            // using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, request.AccountId))
+            // {
+            //     int zone = scene.Zone();
+            //     Log.Warning($"A2Center_RechargeRequest: {scene.Zone()}");
+            //     DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            //     DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            //     
+            //     List<DBCenterAccountInfo> resulets = await dbComponent.Query<DBCenterAccountInfo>(zone, d => d.Id == request.AccountId);
+            //     resulets[0].PlayerInfo.RechargeInfos.Add(request.RechargeInfo);
+            //     dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), resulets[0]).Coroutine();
+            // }
         }
 
         public static async ETTask OnPaySucessToUnit(Scene scene, long userId, int rechargeNumber, string orderInfo)

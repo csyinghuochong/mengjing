@@ -11,10 +11,10 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, unit.Id))
             {
                 ActorId dbCacheId = UnitCacheHelper.GetLoginCenterId();
-                C2C_CenterServerInfoReuest C2C_CenterServerInfoReuest = C2C_CenterServerInfoReuest.Create();
+                M2L_CenterServerInfoReuest C2C_CenterServerInfoReuest = M2L_CenterServerInfoReuest.Create();
                 C2C_CenterServerInfoReuest.Zone = unit.Zone();
                 C2C_CenterServerInfoReuest.infoType = 1;
-                C2C_CenterServerInfoRespone d2GGetUnit = (C2C_CenterServerInfoRespone)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, C2C_CenterServerInfoReuest);
+                L2M_CenterServerInfoRespone d2GGetUnit = (L2M_CenterServerInfoRespone)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, C2C_CenterServerInfoReuest);
                 //Log.ILog.Info("d2GGetUnit.Value = " + d2GGetUnit.Value);
                 if (int.Parse(d2GGetUnit.Value) != 1)
                 {

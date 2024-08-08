@@ -3,10 +3,10 @@
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.LoginCenter)]
-    public class C2Center_DeleteAccountHandler : MessageHandler<Session, C2Center_DeleteAccountRequest, Center2C_DeleteAccountResponse>
+    [MessageHandler(SceneType.Realm)]
+    public class C2R_DeleteAccountHandler : MessageHandler<Session, C2R_DeleteAccountRequest, R2C_DeleteAccountResponse>
     {
-        protected override async ETTask Run(Session session, C2Center_DeleteAccountRequest request, Center2C_DeleteAccountResponse response)
+        protected override async ETTask Run(Session session, C2R_DeleteAccountRequest request, R2C_DeleteAccountResponse response)
         {
             Log.Warning($"C2Center_DeleteAccountRequest: { session.Zone()}");
             DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();

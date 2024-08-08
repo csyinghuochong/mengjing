@@ -1192,43 +1192,8 @@ message T2M_TeamUpdateRequest // IMessage
 	int64 TeamId = 3;
 }
 
-//ResponseType Center2A_RechargeResponse
-message A2Center_RechargeRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	int64 AccountId = 1;
-	RechargeInfo RechargeInfo = 2;
-}
-
-message Center2A_RechargeResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
-
-//ResponseType Center2A_SaveAccount
-message A2Center_SaveAccount // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	string AccountName = 1;
-	string Password = 2;
-	PlayerInfo PlayerInfo = 3;
-	int64 AccountId = 4;
-}
-
-message Center2A_SaveAccount // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
-//ResponseType C2C_CenterServerInfoRespone
-message C2C_CenterServerInfoReuest // IRequest
+//ResponseType L2M_CenterServerInfoRespone
+message M2L_CenterServerInfoReuest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1236,29 +1201,13 @@ message C2C_CenterServerInfoReuest // IRequest
 	int Zone = 2;
 }
 
-message C2C_CenterServerInfoRespone // IResponse
+message L2M_CenterServerInfoRespone // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
 	string Value = 1;
 }
-
-//ResponseType Center2C_DeleteAccountResponse
-message C2Center_DeleteAccountRequest // IRequest
-{
-	int32 RpcId = 90;
-	string Account = 1;
-	string Password = 2;
-}
-
-message Center2C_DeleteAccountResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 
 //ResponseType Center2M_SerialReardResponse
 //序列号奖励

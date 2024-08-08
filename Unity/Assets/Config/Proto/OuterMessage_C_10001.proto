@@ -280,6 +280,22 @@ message ServerItem
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
 }
 
+//ResponseType R2C_DeleteAccountResponse
+message C2R_DeleteAccountRequest // ISessionRequest
+{
+	int32 RpcId = 90;
+	string Account = 1;
+	string Password = 2;
+}
+
+message R2C_DeleteAccountResponse // ISessionResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
 //ResponseType R2C_ServerList
 message C2R_ServerList // ISessionRequest
 {
