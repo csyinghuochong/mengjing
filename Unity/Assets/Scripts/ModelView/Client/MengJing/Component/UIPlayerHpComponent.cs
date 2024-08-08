@@ -3,11 +3,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    
-    [ComponentOf(typeof(Unit))]
     /// <summary>
     /// 头部血条组件，负责血条的密度以及血条与人物的同步
     /// </summary>
+    [ComponentOf(typeof(Unit))]
     public class UIPlayerHpComponent: Entity, IAwake, IDestroy
     {
         public GameObject DialogText;

@@ -10,7 +10,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Animation/{0}.fbx", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Animation/{0}.fbx", fileName).Intern();
             }
 
             return prefabPath;
@@ -21,7 +21,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Material/{0}.mat", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Material/{0}.mat", fileName).Intern();
             }
 
             return prefabPath;
@@ -32,7 +32,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Altas/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Altas/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -43,7 +43,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/UI/{0}.prefab", name);
+                prefabPath = zstring.Format("Assets/Bundles/UI/{0}.prefab", name).Intern();
             }
 
             return prefabPath;
@@ -54,7 +54,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Config/{0}.bytes", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Config/{0}.bytes", fileName).Intern();
             }
 
             return prefabPath;
@@ -65,7 +65,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Independent/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Independent/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -76,7 +76,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.mp3", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.mp3", fileName).Intern();
             }
 
             return prefabPath;
@@ -87,7 +87,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.ogg", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.ogg", fileName).Intern();
             }
 
             return prefabPath;
@@ -98,7 +98,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Sound/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Sound/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -109,7 +109,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Unit/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Unit/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -120,7 +120,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Unit/ItemModel/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Unit/ItemModel/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -131,7 +131,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Scenes/{0}.unity", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Scenes/{0}.unity", fileName).Intern();
             }
 
             return prefabPath;
@@ -142,7 +142,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Effect/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Effect/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -154,7 +154,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -166,7 +166,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillHitEffect/{0}.prefab", fileName);
+                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillHitEffect/{0}.prefab", fileName).Intern();
             }
 
             return prefabPath;
@@ -192,7 +192,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Icon/{0}/{1}.png", path, name);
+                prefabPath = zstring.Format("Assets/Bundles/Icon/{0}/{1}.png", path, name).Intern();
             }
 
             return prefabPath;
@@ -204,7 +204,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Atlas/{0}.prefab", path);
+                prefabPath = zstring.Format("Assets/Bundles/Atlas/{0}.prefab", path).Intern();
             }
 
             return prefabPath;
@@ -216,7 +216,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Jpg/{0}.jpg", path);
+                prefabPath = zstring.Format("Assets/Bundles/Jpg/{0}.jpg", path).Intern();
             }
 
             return prefabPath;
@@ -228,7 +228,7 @@
             string prefabPath;
             using (zstring.Block())
             {
-                prefabPath = zstring.Format("Assets/Bundles/Text/{0}.txt", text);
+                prefabPath = zstring.Format("Assets/Bundles/Text/{0}.txt", text).Intern();
             }
 
             return prefabPath;
