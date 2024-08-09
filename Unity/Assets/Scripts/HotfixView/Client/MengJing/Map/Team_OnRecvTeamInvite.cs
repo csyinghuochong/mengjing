@@ -53,6 +53,7 @@
                 tip = "<color=#FDFB47>队伍内有人机,副本掉率将降低!</color>\n建议:和其他玩家组队爆率将获得大幅度提升\n";
             }
 
+            Log.Debug($"ShowWindowAsync(WindowID.WindowID_TeamDungeonPrepare)");
             await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonPrepare);
             DlgTeamDungeonPrepare dlgTeamDungeonPrepare = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonPrepare>();
             dlgTeamDungeonPrepare.OnUpdateUI(args.TeamInfo, ErrorCode.Err_HaveNotPrepare);
