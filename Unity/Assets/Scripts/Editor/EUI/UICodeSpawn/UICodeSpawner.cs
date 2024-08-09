@@ -104,7 +104,7 @@ public partial class UICodeSpawner
 									continue;
 								}
 
-								if (trimmedLine.StartsWith($"self.{view}{widgetName}.AddListener"))
+								if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
 								{
 									Path2WidgetCachedDict.Remove(key);
 									break;
