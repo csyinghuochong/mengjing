@@ -51,7 +51,7 @@ namespace ET.Client
             
             if (playerComponent.CreateRoleList.Count == 0)
             {
-                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1,  playerComponent.Account);
+                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, root.Name);
             }
 
             playerComponent.Account = root.Name;
