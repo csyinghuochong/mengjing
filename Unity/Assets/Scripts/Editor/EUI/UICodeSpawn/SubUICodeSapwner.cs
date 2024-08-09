@@ -98,7 +98,7 @@ public partial class UICodeSpawner
         }
         else
         {
-            strFilePath = strFilePath + strDlgName + ".cs";
+            strFilePath = strFilePath + "/" + strDlgName + ".cs";
         }
 	    
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
