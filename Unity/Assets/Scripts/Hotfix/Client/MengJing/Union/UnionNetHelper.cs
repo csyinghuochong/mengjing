@@ -204,5 +204,22 @@
 
             root.GetComponent<ClientSenderCompnent>().Send(request);
         }
+
+        public static async ETTask<int> UnionTransferRequest(Scene root, long newLeader)
+        {
+            C2M_UnionTransferRequest request = C2M_UnionTransferRequest.Create();
+            request.NewLeader = newLeader;
+            M2C_UnionTransferResponse response = (M2C_UnionTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> UnionKickOutRequest(Scene root, long unionId, long UserId)
+        {
+            C2U_UnionKickOutRequest request = C2U_UnionKickOutRequest.Create();
+            request.UnionId = unionId;
+            request.UserId = UserId;
+            U2C_UnionKickOutResponse response = (U2C_UnionKickOutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

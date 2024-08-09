@@ -54,14 +54,14 @@
 
         public static async ETTask OnButtonAgree(this Scroll_Item_TeamApplyItem self)
         {
-            await TeamNetHelper.AgreeTeamApply(self.Root(), self.TeamPlayerInfo, 1);
+            await TeamNetHelper.TeamDungeonAgreeRequest(self.Root(), self.TeamPlayerInfo, 1);
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamApplyList>().OnUpdateUI();
         }
 
         public static async ETTask OnButtonRefuse(this Scroll_Item_TeamApplyItem self)
         {
-            await TeamNetHelper.AgreeTeamApply(self.Root(), self.TeamPlayerInfo, 0);
+            await TeamNetHelper.TeamDungeonAgreeRequest(self.Root(), self.TeamPlayerInfo, 0);
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamApplyList>().OnUpdateUI();
         }

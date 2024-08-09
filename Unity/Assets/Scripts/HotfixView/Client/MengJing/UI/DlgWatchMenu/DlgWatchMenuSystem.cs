@@ -154,11 +154,8 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             await UnionNetHelper.UnionOperatate(self.Root(), unit.GetUnionId(), 3, $"{self.UserId}_{postion}");
 
-            // TODO .....
-            // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static void OnButton_UnionTransfer(this DlgWatchMenu self)
@@ -168,40 +165,31 @@ namespace ET.Client
 
         public static async ETTask RequestUnionTransfer(this DlgWatchMenu self)
         {
-            // C2M_UnionTransferRequest request = new C2M_UnionTransferRequest() { NewLeader = self.UserId };
-            // M2C_UnionTransferResponse response =
-            //         (M2C_UnionTransferResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIFriend);
-            // uI?.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
+            await UnionNetHelper.UnionTransferRequest(self.Root(), self.UserId);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestKickUnion(this DlgWatchMenu self)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // long unionId = (unit.GetComponent<NumericComponent>().GetAsLong(NumericType.UnionId_0));
-            // C2U_UnionKickOutRequest c2M_SkillSet = new C2U_UnionKickOutRequest() { UnionId = unionId, UserId = self.UserId };
-            // U2C_UnionKickOutResponse m2C_SkillSet =
-            //         (U2C_UnionKickOutResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-            //
-            // UI uifreind = UIHelper.GetUI(self.ZoneScene(), UIType.UIFriend);
-            // uifreind.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+
+            await UnionNetHelper.UnionKickOutRequest(self.Root(), unionId, self.UserId);
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
 
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static void OnButton_KickOut(this DlgWatchMenu self)
         {
-            // PopupTipHelp.OpenPopupTip(self.DomainScene(), "我的队伍", "是否踢出队伍？",
-            //     () =>
-            //     {
-            //         self.ZoneScene().GetComponent<TeamComponent>().SendKickOutRequest(self.UserId).Coroutine();
-            //         self.OnClickImageBg();
-            //     }).Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", "是否踢出队伍？",
+                () =>
+                {
+                    TeamNetHelper.TeamKickOutRequest(self.Root(), self.UserId).Coroutine();
+                    self.OnClickImageBg();
+                }).Coroutine();
         }
 
         public static async ETTask OnButton_AddFriend(this DlgWatchMenu self)
@@ -226,22 +214,15 @@ namespace ET.Client
 
         public static async ETTask OnButton_InviteTeam(this DlgWatchMenu self)
         {
-            // C2T_TeamInviteRequest c2M_SkillSet = new C2T_TeamInviteRequest()
-            // {
-            //     UserID = self.UserId, TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(self.ZoneScene())
-            // };
-            // T2C_TeamInviteResponse m2C_SkillSet =
-            //         (T2C_TeamInviteResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
+            await TeamNetHelper.TeamInviteRequest(self.Root(), self.UserId, UnitHelper.GetSelfTeamPlayerInfo(self.Root()));
 
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static void OnButton_ApplyTeam(this DlgWatchMenu self)
         {
-            // TeamComponent teamComponent = self.ZoneScene().GetComponent<TeamComponent>();
-            // teamComponent.SendTeamApply(self.TeamId, 0, 0, 0, false).Coroutine();
+            TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamId, 0, 0, 0, false).Coroutine();
+
             self.OnClickImageBg();
         }
 
@@ -326,11 +307,11 @@ namespace ET.Client
             long myunionid = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
             long wathunion = watchUnit != null ? watchUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) : 0;
 
-            // self.TeamId = f2CWatchPlayerResponse.TeamId;
+            self.TeamId = f2CWatchPlayerResponse.TeamId;
             int friendType = self.Root().GetComponent<FriendComponent>().GetFriendType(userId);
-            // TeamInfo teamInfo = self.ZoneScene().GetComponent<TeamComponent>().GetSelfTeam();
-            // long myUserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            // bool isLeader = teamInfo != null && teamInfo.PlayerList[0].UserID == myUserId;
+            TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
+            long myUserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            bool isLeader = teamInfo != null && teamInfo.PlayerList[0].UserID == myUserId;
 
             self.View.E_Button_ApplyTeamButton.gameObject.SetActive(false); // 申请入队
             self.View.E_Button_LeaveTeamButton.gameObject.SetActive(false); // 离开队伍
@@ -339,13 +320,13 @@ namespace ET.Client
             self.View.E_Button_InviteTeamButton.gameObject.SetActive(false); // 邀请组队
             self.View.E_Button_WatchButton.gameObject.SetActive(false); // 观察
 
-            // self.View.E_Button_ApplyTeamButton.gameObject.SetActive(teamInfo == null && userId != myUserId && f2CWatchPlayerResponse.TeamId != 0);
-            // self.View.E_Button_LeaveTeamButton.gameObject.SetActive(teamInfo != null && userId == myUserId);
-            // self.View.E_Button_KickTeamButton.gameObject.SetActive(isLeader && userId != myUserId && f2CWatchPlayerResponse.TeamId == myUserId);
+            self.View.E_Button_ApplyTeamButton.gameObject.SetActive(teamInfo == null && userId != myUserId && f2CWatchPlayerResponse.TeamId != 0);
+            self.View.E_Button_LeaveTeamButton.gameObject.SetActive(teamInfo != null && userId == myUserId);
+            self.View.E_Button_KickTeamButton.gameObject.SetActive(isLeader && userId != myUserId && f2CWatchPlayerResponse.TeamId == myUserId);
             self.View.E_Button_AddFriendButton.gameObject.SetActive(friendType == 0);
             self.View.E_Button_BlackAddButton.gameObject.SetActive(friendType == 0);
             self.View.E_Button_BlackRemoveButton.gameObject.SetActive(friendType == 2);
-            // self.View.E_Button_InviteTeamButton.gameObject.SetActive(userId != myUserId && (isLeader || teamInfo == null) && f2CWatchPlayerResponse.TeamId == 0);
+            self.View.E_Button_InviteTeamButton.gameObject.SetActive(userId != myUserId && (isLeader || teamInfo == null) && f2CWatchPlayerResponse.TeamId == 0);
             self.View.E_Button_WatchButton.gameObject.SetActive(true);
             self.View.E_Button_KickUnionButton.gameObject.SetActive(false);
             self.View.E_Button_InviteUnionButton.gameObject.SetActive(myunionid > 0 && wathunion == 0);

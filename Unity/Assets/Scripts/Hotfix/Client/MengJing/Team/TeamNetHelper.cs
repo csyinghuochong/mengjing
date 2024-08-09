@@ -12,7 +12,7 @@
             return response.Error;
         }
 
-        public static async ETTask<int> SendTeamApply(Scene root, long teamId, int fubenId, int fubenType, int leaderLv, bool checkfuben)
+        public static async ETTask<int> TeamDungeonApplyRequest(Scene root, long teamId, int fubenId, int fubenType, int leaderLv, bool checkfuben)
         {
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
 
@@ -167,7 +167,7 @@
             return response.Error;
         }
 
-        public static async ETTask<int> AgreeTeamApply(Scene root, TeamPlayerInfo m2C_Team, int code)
+        public static async ETTask<int> TeamDungeonAgreeRequest(Scene root, TeamPlayerInfo m2C_Team, int code)
         {
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
 
@@ -229,8 +229,31 @@
             request.BoxIndex = boxIndex;
             request.RewardItem = rewardItem;
 
-            M2C_TeamDungeonBoxRewardResponse response = (M2C_TeamDungeonBoxRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_TeamDungeonBoxRewardResponse response =
+                    (M2C_TeamDungeonBoxRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
+        }
+
+        public static async ETTask TeamKickOutRequest(Scene root, long userId)
+        {
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+            if (mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
+            {
+                HintHelp.ShowHint(root, "副本中不能踢人");
+                return;
+            }
+
+            C2T_TeamKickOutRequest request = C2T_TeamKickOutRequest.Create();
+            request.UserId = userId;
+            T2C_TeamKickOutResponse response = (T2C_TeamKickOutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+        }
+
+        public static async ETTask TeamInviteRequest(Scene root, long userID, TeamPlayerInfo teamPlayerInfo)
+        {
+            C2T_TeamInviteRequest request = C2T_TeamInviteRequest.Create();
+            request.UserID = userID;
+            request.TeamPlayerInfo = teamPlayerInfo;
+            T2C_TeamInviteResponse response = (T2C_TeamInviteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
         }
     }
 }

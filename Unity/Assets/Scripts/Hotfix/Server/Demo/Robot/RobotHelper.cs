@@ -1122,7 +1122,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    error = await TeamNetHelper.SendTeamApply(root, teamList[i].TeamId, teamList[i].SceneId, teamList[i].FubenType,
+                    error = await TeamNetHelper.TeamDungeonApplyRequest(root, teamList[i].TeamId, teamList[i].SceneId, teamList[i].FubenType,
                         teamList[i].PlayerList[0].PlayerLv, true);
 
                     if (error == 0)
@@ -1143,7 +1143,7 @@ namespace ET.Client
                 // 同意申请加入队伍
                 for (int i = teamComponent.ApplyList.Count - 1; i >= 0; i--)
                 {
-                    await TeamNetHelper.AgreeTeamApply(root, teamComponent.ApplyList[i], 1);
+                    await TeamNetHelper.TeamDungeonAgreeRequest(root, teamComponent.ApplyList[i], 1);
                 }
 
                 // 自己是队长，人满了就开

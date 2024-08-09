@@ -113,5 +113,10 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
+        
+        public static void OnUpdateMyUnion(this DlgFriend self)
+        {
+            self.View.ES_UnionMy.OnUpdateUI().Coroutine();
+        }
     }
 }
