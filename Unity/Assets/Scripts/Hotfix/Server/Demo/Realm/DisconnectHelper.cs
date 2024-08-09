@@ -43,6 +43,8 @@ namespace ET.Server
                     var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
                             .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
 
+                    await ExitWorldChatServer(player.Scene(), player.ChatInfoInstanceId);
+                    
                     //通知移除账号角色登录信息
                     G2L_RemoveLoginRecord g2LRemoveLoginRecord = G2L_RemoveLoginRecord.Create();
                     g2LRemoveLoginRecord.AccountName = player.Account;
@@ -60,6 +62,13 @@ namespace ET.Server
             player?.Dispose();
     
             await timerComponent.WaitAsync(300);
+        }
+        
+        private static async ETTask<long> ExitWorldChatServer(Scene root,  long chatUnitId)
+        {
+            G2Chat_RequestExitChat g2ChatEnterChat = G2Chat_RequestExitChat.Create(); 
+            IResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Call(chatUnitId, g2ChatEnterChat);
+            return iResponse.Error;
         }
         
         public static async ETTask KickPlayer(Player player, bool isException = false)

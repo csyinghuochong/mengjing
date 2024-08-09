@@ -7,7 +7,7 @@ namespace ET.Client
     {
         
         // 注册router
-        public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password)
+        public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password, int sceneTpe)
         {
             uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
             
@@ -22,7 +22,8 @@ namespace ET.Client
 
             Log.Debug($"CreateRouterSession.localConn: AddComponent<PingComponent>");
             Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
-            routerSession.AddComponent<PingComponent>();
+            
+            routerSession.AddComponent<PingComponent>().SceneType  =sceneTpe;
             routerSession.AddComponent<RouterCheckComponent>();
             
             return routerSession;

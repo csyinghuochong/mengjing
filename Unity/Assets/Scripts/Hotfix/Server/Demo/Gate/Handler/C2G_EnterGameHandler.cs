@@ -159,7 +159,7 @@ namespace ET.Server
         private async ETTask<long> EnterWorldChatServer(Unit unit)
         {
             ActorId chatServerId = UnitCacheHelper.GetChatId(unit.Zone());
-            G2Chat_EnterChat g2ChatEnterChat = G2Chat_EnterChat.Create();
+            G2Chat_EnterChat g2ChatEnterChat = G2Chat_EnterChat.Create(); 
             g2ChatEnterChat.UnitId = unit.Id;
             g2ChatEnterChat.Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
             g2ChatEnterChat.UnionId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);

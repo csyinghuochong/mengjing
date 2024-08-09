@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -202,6 +203,11 @@ namespace ET.Server
 
         public static void NoticeUnitRemove(Unit unit, Unit sendUnit)
         {
+            if (unit.GetComponent<DBSaveComponent>().PlayerState!=PlayerState.Game)
+            {
+                return;
+            }
+            
             M2C_RemoveUnits removeUnits = M2C_RemoveUnits.Create();
             removeUnits.Units.Add(sendUnit.Id);
             SendToClient(unit, removeUnits);

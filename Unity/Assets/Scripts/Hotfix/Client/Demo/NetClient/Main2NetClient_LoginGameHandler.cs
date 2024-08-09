@@ -8,7 +8,7 @@ namespace ET.Client
              string account  = request.Account;
              // 创建一个gate Session,并且保存到SessionComponent中
              NetComponent netComponent = root.GetComponent<NetComponent>();
-             Session gateSession = await netComponent.CreateRouterSession(NetworkHelper.ToIPEndPoint(request.GateAddress), account, account);
+             Session gateSession = await netComponent.CreateRouterSession(NetworkHelper.ToIPEndPoint(request.GateAddress), account, account, SceneTypeEnum.MainCityScene);
              gateSession.AddComponent<ClientSessionErrorComponent>();
              root.GetComponent<SessionComponent>().Session = gateSession;
              

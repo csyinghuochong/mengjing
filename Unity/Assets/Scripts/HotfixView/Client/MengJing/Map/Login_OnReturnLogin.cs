@@ -10,24 +10,22 @@
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             mapComponent.SceneType = SceneTypeEnum.LoginScene;
 
-            if (args.ErrorCode == ErrorCode.ERR_OtherAccountLogin)
+            switch (args.ErrorCode)
             {
-                FlyTipComponent.Instance.ShowFlyTip("账号异地登录");
-                RunAsync2(scene, args, 100).Coroutine();
+                case ErrorCode.ERR_OtherAccountLogin:
+                    FlyTipComponent.Instance.ShowFlyTip("账号异地登录");
+                    RunAsync2(scene, args, 100).Coroutine();
+                    break;
+                case ErrorCode.ERR_KickOutPlayer:
+                    PopupTipHelp.OpenPopupTip(scene, "重新登录", "由于您长时间未操作，请重新登录！", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine(); 
+                    break;
+                case ErrorCode.ERR_PackageFrequent:
+                    PopupTipHelp.OpenPopupTip(scene, "消息异常", "请重新登录", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine();
+                    break;
+                default:
+                    RunAsync2(scene, args, 100).Coroutine();
+                    break;
             }
-            else if (args.ErrorCode == ErrorCode.ERR_KickOutPlayer)
-            {
-                PopupTipHelp.OpenPopupTip(scene, "重新登录", "由于您长时间未操作，请重新登录！", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine();
-            }
-            else if (args.ErrorCode == ErrorCode.ERR_PackageFrequent)
-            {
-                PopupTipHelp.OpenPopupTip(scene, "消息异常", "请重新登录", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine();
-            }
-            else
-            {
-                RunAsync2(scene, args, 100).Coroutine();
-            }
-
             await ETTask.CompletedTask;
         }
 
@@ -36,7 +34,6 @@
             long instanceId = scene.InstanceId;
 
             TimerComponent timerComponent = scene.GetComponent<TimerComponent>();
-
             await timerComponent.WaitAsync(waitTime);
             if (instanceId != scene.InstanceId)
             {

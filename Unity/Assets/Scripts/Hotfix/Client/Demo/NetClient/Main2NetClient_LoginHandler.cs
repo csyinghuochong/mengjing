@@ -25,8 +25,7 @@ namespace ET.Client
 
             IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account, request.ServerId);
 
-            Session session = await netComponent.CreateRouterSession(realmAddress, account, password);
-            
+            Session session = await netComponent.CreateRouterSession(realmAddress, account, password, SceneTypeEnum.LoginScene);
             C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
             c2RLoginAccount.Account = account;
             c2RLoginAccount.Password = password;

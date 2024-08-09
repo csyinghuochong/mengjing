@@ -249,6 +249,20 @@ message G2C_Ping // ISessionResponse
 	int64 Time = 4;
 }
 
+//ResponseType R2C_Ping
+message C2R_Ping // ISessionRequest
+{
+	int32 RpcId = 1;
+}
+
+message R2C_Ping // ISessionResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int64 Time = 4;
+}
+
 
 message G2C_Test // ISessionMessage
 {

@@ -7,7 +7,6 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, G2M_RequestExitGame request, M2G_RequestExitGame response)
         {
-
             //Unit角色下线业务逻辑，然后保存Unit及组件数据至数据库
             Scene root = unit.Root();
             long untid = unit.Id;
@@ -32,7 +31,6 @@ namespace ET.Server
             await unit.RemoveLocation(LocationType.Unit);
             
             unit.GetComponent<DBSaveComponent>().OnDisconnect();
-
         }
         
     }

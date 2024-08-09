@@ -7,7 +7,6 @@ namespace ET.Server
         protected override async ETTask Run(Scene scene, G2Q_ExitGame request, Q2G_ExitGame response)
         {
 
-            
             await ETTask.CompletedTask;
         }
 
