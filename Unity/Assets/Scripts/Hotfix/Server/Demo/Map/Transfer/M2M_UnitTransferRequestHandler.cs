@@ -45,6 +45,9 @@ namespace ET.Server
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
             
+            ///////
+            scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(unit.Id);
+            
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);

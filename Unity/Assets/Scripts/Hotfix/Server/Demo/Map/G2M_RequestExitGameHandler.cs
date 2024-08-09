@@ -12,7 +12,7 @@ namespace ET.Server
             long untid = unit.Id;
             //正式释放Unit
             await RemoveUnit(unit);
-            await RemoveLocation(root, untid);
+            //await RemoveLocation(root, untid);
             await ETTask.CompletedTask;
         }
 
