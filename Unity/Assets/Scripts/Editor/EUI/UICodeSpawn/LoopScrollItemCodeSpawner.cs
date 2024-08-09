@@ -26,11 +26,19 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour";
 
-        if ( !Directory.Exists(strFilePath) )
+        if (!Directory.Exists(strFilePath))
         {
             Directory.CreateDirectory(strFilePath);
         }
-        strFilePath     = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour/" + strDlgName + "ViewSystem.cs";
+        
+        string[] files = Directory.GetFiles(Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour", strDlgName + "ViewSystem.cs", SearchOption.AllDirectories);
+        if (files.Length != 0)
+        {
+            // 存在的话，就不用再从新生成
+            return;
+        }
+
+        strFilePath = strFilePath + strDlgName + "ViewSystem.cs";
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
 
         StringBuilder strBuilder = new StringBuilder();
