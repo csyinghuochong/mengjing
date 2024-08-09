@@ -12,7 +12,7 @@ namespace ClientEditor
             UICodeSpawner.SpawnEUICode(go);
         }
         
-        [MenuItem("GameObject/UI组件自动生成", false, -1)]
+        [MenuItem("GameObject/UI组件自动生成(为Button自动注册方法)", false, -1)]
         static public void CreateUICode()
         {
             GameObject go = Selection.activeObject as GameObject;
