@@ -38,7 +38,7 @@ public partial class UICodeSpawner
             return;
         }
 
-        strFilePath = strFilePath + strDlgName + "ViewSystem.cs";
+        strFilePath = strFilePath + "/" + strDlgName + "ViewSystem.cs";
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
 
         StringBuilder strBuilder = new StringBuilder();
