@@ -10,8 +10,7 @@
             {
                 return;
             }
-
-            FlyTipComponent.Instance.ShowFlyTip("未创建 UITeamDungeonPrepare");
+            
             DlgTeamDungeonPrepare dlgTeamDungeonPrepare = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeonPrepare>();
 
             if (dlgTeamDungeonPrepare == null)
