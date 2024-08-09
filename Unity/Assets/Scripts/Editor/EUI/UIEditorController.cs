@@ -6,14 +6,14 @@ namespace ClientEditor
     class UIEditorController
     {
         [MenuItem("GameObject/SpawnEUICode", false, -2)]
-        static public void CreateNewCode()
+        public static void CreateNewCode()
         {
             GameObject go = Selection.activeObject as GameObject;
             UICodeSpawner.SpawnEUICode(go);
         }
         
         [MenuItem("GameObject/UI组件自动生成(为Button自动注册方法)", false, -1)]
-        static public void CreateUICode()
+        public static void CreateUICode()
         {
             GameObject go = Selection.activeObject as GameObject;
             UICodeSpawner.SpawnUICode(go);

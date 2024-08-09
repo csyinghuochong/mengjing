@@ -8,7 +8,7 @@ using UnityEngine;
 
 public partial class UICodeSpawner
 {
-	static public void SpawnUICode(GameObject gameObject)
+	public static void SpawnUICode(GameObject gameObject)
 	{
 		if (null == gameObject)
 		{
