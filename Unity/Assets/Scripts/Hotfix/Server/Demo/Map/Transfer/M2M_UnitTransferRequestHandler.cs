@@ -45,7 +45,7 @@ namespace ET.Server
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
             
-            ///////
+            ///暂时写在这 没想到好的解决方案。
             scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(unit.Id);
             
             // 通知客户端开始切场景
@@ -259,7 +259,18 @@ namespace ET.Server
 
                     break;
                 case SceneTypeEnum.MainCityScene:
-                    unit.Position = new float3(-10, 0, -10);
+                    float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);
+                    float last_y = numericComponent.GetAsFloat(NumericType.MainCity_Y);
+                    float last_z = numericComponent.GetAsFloat(NumericType.MainCity_Z);
+                    if (last_x ==0f)
+                    {
+                        unit.Position = new float3(-10, 0, -10);
+                    }
+                    else
+                    {
+                        unit.Position = new float3(last_x, last_y, last_z);
+                    }
+
                     unit.AddComponent<PathfindingComponent, int>(101);
                     unit.GetComponent<HeroDataComponentS>().OnReturn();
                     break;

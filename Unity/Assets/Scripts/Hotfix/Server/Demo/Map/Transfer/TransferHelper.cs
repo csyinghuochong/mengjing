@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -24,8 +25,14 @@ namespace ET.Server
             RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
             if (fightId != null)
             {
+                Console.WriteLine("移除宠物！！");
                 unitComponent.Remove(fightId.Id);
             }
+            else
+            {
+                Console.WriteLine("没有宠物！！");
+            }
+
             long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
             if (jinglingUnitId != 0 && unitComponent.Get(jinglingUnitId) != null)
             {
@@ -68,7 +75,7 @@ namespace ET.Server
                     }
                     userInfoComponent.AddSceneFubenTimes(request.SceneId);
                 }
-                if (oldScene == SceneTypeEnum.MainCityScene && request.SceneType > SceneTypeEnum.MainCityScene)
+                if (oldScene == SceneTypeEnum.MainCityScene && request.SceneType != SceneTypeEnum.MainCityScene)
                 {
                     unit.RecordPostion(request.SceneType, request.SceneId);
                 }
