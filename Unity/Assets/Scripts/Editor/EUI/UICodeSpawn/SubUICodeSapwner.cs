@@ -24,16 +24,23 @@ public partial class UICodeSpawner
             return;
         }
         string strDlgName = objPanel.name;
-
-        string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/CommonUI" +
-                             "";
-
-        if ( !Directory.Exists(strFilePath) )
+        
+        string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/CommonUI";
+        if (!Directory.Exists(strFilePath))
         {
             Directory.CreateDirectory(strFilePath);
         }
-        strFilePath     = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/CommonUI/" + strDlgName + "ViewSystem.cs";
-	    
+        
+        // 有些ES移动到对应的Dlg下了，所以不一定在CommonUI文件夹下
+        string[] files = Directory.GetFiles(Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour", strDlgName + "ViewSystem.cs", SearchOption.AllDirectories);
+        if ( files.Length  != 0)
+        {
+            // 存在的话，就不用再从新生成
+            return;
+        }
+
+        strFilePath = strFilePath + strDlgName + "ViewSystem.cs";
+        
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
 
         StringBuilder strBuilder = new StringBuilder();
@@ -78,11 +85,21 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/CommonUI";
 
-        if ( !Directory.Exists(strFilePath) )
+        if (!Directory.Exists(strFilePath))
         {
             Directory.CreateDirectory(strFilePath);
         }
-        strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/CommonUI/" + strDlgName + ".cs";
+
+        // 有些ES移动到对应的Dlg下了，所以不一定在CommonUI文件夹下
+        string[] files = Directory.GetFiles(Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour", strDlgName + ".cs", SearchOption.AllDirectories);
+        if ( files.Length  != 0)
+        {
+            strFilePath = files[0];
+        }
+        else
+        {
+            strFilePath = strFilePath + strDlgName + ".cs";
+        }
 	    
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
 
