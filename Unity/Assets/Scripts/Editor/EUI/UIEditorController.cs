@@ -11,6 +11,13 @@ namespace ClientEditor
             GameObject go = Selection.activeObject as GameObject;
             UICodeSpawner.SpawnEUICode(go);
         }
+        
+        [MenuItem("GameObject/UI组件自动生成", false, -1)]
+        static public void CreateUICode()
+        {
+            GameObject go = Selection.activeObject as GameObject;
+            UICodeSpawner.SpawnUICode(go);
+        }
 
         [MenuItem("Assets/AssetBundle/NameUIPrefab")]
         public static void NameAllUIPrefab()

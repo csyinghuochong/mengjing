@@ -8,6 +8,174 @@ using UnityEngine;
 
 public partial class UICodeSpawner
 {
+	static public void SpawnUICode(GameObject gameObject)
+	{
+		if (null == gameObject)
+		{
+			Debug.LogError("UICode Select GameObject is null!");
+			return;
+		}
+
+		try
+		{
+			string folderPath = string.Empty;
+			string uiName = gameObject.name;
+			string csName = string.Empty;
+			string startStr = string.Empty;
+			string view = string.Empty;
+			string scroll = string.Empty;
+			if (uiName.StartsWith(UIPanelPrefix))
+			{
+				Debug.LogWarning($"----------开始生成Dlg{uiName} 相关代码 ----------");
+
+				folderPath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UI/";
+				csName = $"{gameObject.name}System.cs";
+				startStr = "public static void RegisterUIEvent";
+				view = "View.";
+
+				Debug.LogWarning($"生成Dlg{uiName} 完毕!!!");
+			}
+			else if (uiName.StartsWith(CommonUIPrefix))
+			{
+				Debug.LogWarning($"-------- 开始生成子UI: {uiName} 相关代码 -------------");
+
+				folderPath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/";
+				csName = $"{gameObject.name}ViewSystem.cs";
+				startStr = "private static void Awake";
+
+				Debug.LogWarning($"生成子UI: {uiName} 完毕!!!");
+			}
+			else if (uiName.StartsWith(UIItemPrefix))
+			{
+				Debug.LogWarning($"-------- 开始生成滚动列表项: {uiName} 相关代码 -------------");
+
+				folderPath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour/";
+				csName = $"{gameObject.name}ViewSystem.cs";
+				startStr = "private static void Awake";
+				scroll = "Scroll_";
+
+				Debug.LogWarning($" 开始生成滚动列表项: {uiName} 完毕！！！");
+			}
+			else
+			{
+				Debug.LogError($"选择的预设物不属于 Dlg, 子UI，滚动列表项，请检查 {uiName}！！！！！！");
+				return;
+			}
+
+			string[] files = Directory.GetFiles(folderPath, csName, SearchOption.AllDirectories);
+
+			if (files.Length == 0)
+			{
+				Debug.LogError($"{folderPath} 中不存在 {csName} ！！！！！！");
+				return;
+			}
+
+			Path2WidgetCachedDict?.Clear();
+			Path2WidgetCachedDict = new Dictionary<string, List<Component>>();
+
+			FindAllWidgets(gameObject.transform, "");
+
+
+			string[] lines = File.ReadAllLines(files[0]);
+			bool start = false;
+			using (StreamWriter writer = new StreamWriter(files[0]))
+			{
+				for (int i = 0; i < lines.Length; i++)
+				{
+					string trimmedLine = lines[i].TrimStart();
+
+					if (!start && trimmedLine.StartsWith(startStr))
+					{
+						start = true;
+					}
+
+					if (start)
+					{
+						foreach (var key in Path2WidgetCachedDict.Keys.ToList())
+						{
+							foreach (var info in Path2WidgetCachedDict[key])
+							{
+								Component widget = info;
+								string strClassType = widget.GetType().ToString();
+								string widgetName = widget.name + strClassType.Split('.').ToList().Last();
+
+								if (strClassType != "UnityEngine.UI.Button")
+								{
+									continue;
+								}
+
+								if (trimmedLine.StartsWith($"self.{view}{widgetName}.AddListener"))
+								{
+									Path2WidgetCachedDict.Remove(key);
+									break;
+								}
+							}
+						}
+
+						if (trimmedLine == "}")
+						{
+							if (scroll != string.Empty)
+							{
+								writer.WriteLine($"            注意item的初始化放在Awake无效中，请放在刷新的方法中！！！");
+							}
+							
+							foreach (var key in Path2WidgetCachedDict.Keys.ToList())
+							{
+								foreach (var info in Path2WidgetCachedDict[key])
+								{
+									Component widget = info;
+									string strClassType = widget.GetType().ToString();
+									string widgetName = widget.name + strClassType.Split('.').ToList().Last();
+
+									if (strClassType != "UnityEngine.UI.Button")
+									{
+										continue;
+									}
+
+									writer.WriteLine($"            self.{view}{widgetName}.AddListener(self.On{key}Button);");
+									break;
+								}
+							}
+
+							start = false;
+						}
+					}
+
+					if (i == lines.Length - 2)
+					{
+						foreach (var key in Path2WidgetCachedDict.Keys.ToList())
+						{
+							foreach (var info in Path2WidgetCachedDict[key])
+							{
+								Component widget = info;
+								string strClassType = widget.GetType().ToString();
+								string widgetName = widget.name + strClassType.Split('.').ToList().Last();
+
+								if (strClassType != "UnityEngine.UI.Button")
+								{
+									continue;
+								}
+
+								writer.WriteLine($"        public static void On{key}Button(this {scroll}{gameObject.name} self)");
+								writer.WriteLine("        {");
+								writer.WriteLine("        }");
+								break;
+							}
+						}
+					}
+					
+					writer.WriteLine(lines[i]);
+				}
+			}
+
+		}
+		finally
+		{
+			Path2WidgetCachedDict?.Clear();
+			Path2WidgetCachedDict = null;
+		}
+	}
+
 	static public void SpawnEUICode(GameObject gameObject)
 	{
 		if (null == gameObject)
