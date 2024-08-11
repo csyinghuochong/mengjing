@@ -10,26 +10,16 @@
             {
                 return;
             }
-            bool have = false;
-            for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count -1; i >= 0; i--)
-            {
-                if (dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID == request.UserId)
-                {
-                    have = true;
-                    dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
-                }
-            }
-
-            if (!have)
-            {
-                return;
-            }
-
-            UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+            
+            //1212275342967491 欧阳 18319670288
+            //1212275342967491 寒桑 tcg01   被踢的玩家
+            
             //通知玩家
-
             U2M_UnionKickOutRequest r2M_RechargeRequest = U2M_UnionKickOutRequest.Create();
             r2M_RechargeRequest.UserId = request.UserId;
+
+            //scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Remove(request.UserId);
+            
             M2U_UnionKickOutResponse m2G_RechargeResponse = (M2U_UnionKickOutResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.UserId, r2M_RechargeRequest);
             if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
             {
@@ -41,6 +31,18 @@
                 userInfoComponent.UserInfo.UnionName = string.Empty;
                 await UnitCacheHelper.SaveComponentCache(scene.Root(), userInfoComponent);
             }
+            else
+            {
+                for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count -1; i >= 0; i--)
+                {
+                    if (dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID == request.UserId)
+                    {
+                        dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
+                    }
+                }
+            }
+            
+            UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
         }
     }
 }
