@@ -1604,6 +1604,12 @@ namespace ET.Client
 
             self.CheckMailReddot().Coroutine();
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
+
+            if (sceneTypeEnum > SceneTypeEnum.MainCityScene)
+            {       
+                MoveHelper.Stop(self.Root());
+            }
+
         }
 
         public static void OnUpdateUserData(this DlgMain self, string updateType)

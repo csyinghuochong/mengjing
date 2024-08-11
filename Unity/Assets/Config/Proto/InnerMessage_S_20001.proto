@@ -1500,6 +1500,7 @@ message M2P_PaiMaiBuyRequest // IRequest
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 	int64 Gold = 2;
 	int32 BuyNum = 3;
+	int64 UnitId = 4;
 }
 
 message P2M_PaiMaiBuyResponse // IResponse
@@ -1510,8 +1511,8 @@ message P2M_PaiMaiBuyResponse // IResponse
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 }
 
-//ResponseType M2M_PaiMaiBuyInfoResponse
-message M2M_PaiMaiBuyInfoRequest // IRequest
+//ResponseType M2P_PaiMaiBuyInfoResponse
+message P2M_PaiMaiBuyInfoRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1519,7 +1520,7 @@ message M2M_PaiMaiBuyInfoRequest // IRequest
 	int64 CostGold = 2;
 }
 
-message M2M_PaiMaiBuyInfoResponse // IResponse
+message M2P_PaiMaiBuyInfoResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -1979,14 +1980,14 @@ message J2M_JiaYuanEnterResponse // IResponse
 	ActorId FubenActorId = 3;
 }
 
-//ResponseType M2J_JiaYuanOperateResponse
-message J2M_JiaYuanOperateRequest // ILocationRequest
+//ResponseType J2M_JiaYuanOperateResponse
+message M2J_JiaYuanOperateRequest // IRequest
 {
 	int32 RpcId = 90;
 	JiaYuanOperate  JiaYuanOperate = 1;
 }
 
-message M2J_JiaYuanOperateResponse // ILocationResponse
+message J2M_JiaYuanOperateResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

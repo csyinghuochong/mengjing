@@ -85,6 +85,36 @@ namespace ET.Server
                 response.PaiMaiItemInfo = paiMaiItemInfo2;
             }
 
+            
+            if (request.UnitId != request.PaiMaiItemInfo.UserId)
+            {
+                long locationactor = request.PaiMaiItemInfo.UserId;
+
+                P2M_PaiMaiBuyInfoRequest r2M_RechargeRequest = P2M_PaiMaiBuyInfoRequest.Create();
+                r2M_RechargeRequest.PlayerId = request.UnitId ;
+                r2M_RechargeRequest.CostGold = (long)(needGold * 0.95f);
+                M2P_PaiMaiBuyInfoResponse m2G_RechargeResponse = (M2P_PaiMaiBuyInfoResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(locationactor, r2M_RechargeRequest);
+
+                if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
+                {
+                    DataCollationComponent dataCollationComponent =
+                            await UnitCacheHelper.GetComponentCache<DataCollationComponent>(scene.Root(),
+                                locationactor);
+                    if (dataCollationComponent != null)
+                    {
+                        dataCollationComponent.UpdateBuySelfPlayerList((long)(needGold * 0.95f), request.UnitId , false);
+                        UnitCacheHelper.SaveComponentCache(scene.Root(),dataCollationComponent).Coroutine();
+                    }
+
+                    NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), locationactor);
+                    if (numericComponent != null)
+                    {
+                        long paimaigold = numericComponent.GetAsLong(NumericType.PaiMaiTodayGold) + (long)(needGold * 0.95f);
+                        numericComponent.ApplyValue(NumericType.PaiMaiTodayGold, paimaigold, false);
+                        UnitCacheHelper.SaveComponentCache(scene.Root(),numericComponent).Coroutine();
+                    }
+                }
+            
             await ETTask.CompletedTask;
         }
     }

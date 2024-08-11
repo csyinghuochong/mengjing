@@ -67,8 +67,8 @@
 
                         jiaYuanOperate = JiaYuanOperate.Create();
                         jiaYuanOperate.OperateType = JiaYuanOperateType.GatherPlant;
-                        jiaYuanOperate.UnitId = request.UnitId;
-                        jiaYuanOperate.PlayerId = unit.Id;
+                        jiaYuanOperate.UnitId = unit.Id;
+                        jiaYuanOperate.MasterId = request.MasterId;
                         jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
 
                         JiaYuanRecord jiaYuanRecord = JiaYuanRecord.Create();
@@ -120,14 +120,10 @@
                 }
 
                 //玩家在线
-                J2M_JiaYuanOperateRequest opmessage = J2M_JiaYuanOperateRequest.Create();
+                ActorId jiayuanactorid = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
+                M2J_JiaYuanOperateRequest opmessage = M2J_JiaYuanOperateRequest.Create();
                 opmessage.JiaYuanOperate = jiaYuanOperate;
-                M2J_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (M2J_JiaYuanOperateResponse)await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.MasterId, opmessage);
-                if (m2JJiaYuanOperateResponse.Error != ErrorCode.ERR_Success)
-                {
-                    await UnitCacheHelper.SaveComponentCache(unit.Root(),  jiaYuanComponent);
-                }
-
+                J2M_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (J2M_JiaYuanOperateResponse)await unit.Root().GetComponent<MessageSender>().Call(jiayuanactorid, opmessage);
                 unit.GetComponent<NumericComponentS>().ApplyChange( null, NumericType.JiaYuanGatherOther,1, 0 );
             }
 

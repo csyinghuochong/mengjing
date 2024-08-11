@@ -149,37 +149,6 @@ namespace ET.Server
                         $" \t账号:{userInfoComponent.Account}   \t钻石:{userInfoComponent.UserInfo.Diamond}  \t金币:{userInfoComponent.UserInfo.Gold} \n";
                     LogHelper.PaiMaiInfo(levelInfo);
                 }
-
-                
-                if (unit.Id != r_GameStatusResponse.PaiMaiItemInfo.UserId)
-                {
-                    long locationactor = r_GameStatusResponse.PaiMaiItemInfo.UserId;
-
-                    M2M_PaiMaiBuyInfoRequest r2M_RechargeRequest = M2M_PaiMaiBuyInfoRequest.Create();
-                    r2M_RechargeRequest.PlayerId = unit.Id;
-                    r2M_RechargeRequest.CostGold = (long)(needGold * 0.95f);
-                    M2M_PaiMaiBuyInfoResponse m2G_RechargeResponse = (M2M_PaiMaiBuyInfoResponse)await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(locationactor, r2M_RechargeRequest);
-
-                    if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
-                    {
-                        DataCollationComponent dataCollationComponent =
-                                await UnitCacheHelper.GetComponentCache<DataCollationComponent>(unit.Root(),
-                                    r_GameStatusResponse.PaiMaiItemInfo.UserId);
-                        if (dataCollationComponent != null)
-                        {
-                            dataCollationComponent.UpdateBuySelfPlayerList((long)(needGold * 0.95f), unit.Id, false);
-                            UnitCacheHelper.SaveComponentCache(unit.Root(),dataCollationComponent).Coroutine();
-                        }
-
-                        NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(unit.Root(), r_GameStatusResponse.PaiMaiItemInfo.UserId);
-                        if (numericComponent != null)
-                        {
-                            long paimaigold = numericComponent.GetAsLong(NumericType.PaiMaiTodayGold) + (long)(needGold * 0.95f);
-                            numericComponent.ApplyValue(NumericType.PaiMaiTodayGold, paimaigold, false);
-                            UnitCacheHelper.SaveComponentCache(unit.Root(),numericComponent).Coroutine();
-                        }
-                    }
-                }
                 else
                 {
                     DataCollationComponent dataCollationComponent = unit.GetComponent<DataCollationComponent>();

@@ -2290,10 +2290,10 @@ message JiaYuanOperate
 	int64 Time = 1;
 	string PlayerName = 2;
 	int32 OperateType = 3;   //1进入家园 2收获植物 3收获动物  4清理 
-	int32 OperateId = 4;
+	int32 OperateId = 4;		//行为id
 	string OperatePar = 5;
 	int64 UnitId = 6;
-	int64 PlayerId = 7;        //玩家id
+	int64 MasterId = 7;      
 }
 
 message JiaYuanPurchaseItem

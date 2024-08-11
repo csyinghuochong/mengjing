@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [Invoke((long)MailBoxType.GateSession)]
     public class MailBoxType_GateSessionHandler: AInvokeHandler<MailBoxInvoker>
@@ -12,6 +14,7 @@
             
             if (mailBoxComponent.Parent is PlayerSessionComponent playerSessionComponent)
             {
+                
                 playerSessionComponent.Session?.Send(messageObject);
             }
         }

@@ -48,9 +48,10 @@
                 jiaYuanOperate.UnitId = request.UnitId;
                 jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
                 jiaYuanOperate.OperateId = boxUnit.ConfigId;
-                J2M_JiaYuanOperateRequest opmessage = J2M_JiaYuanOperateRequest.Create();
+                ActorId jiayuanactor = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
+                M2J_JiaYuanOperateRequest opmessage = M2J_JiaYuanOperateRequest.Create();
                 opmessage.JiaYuanOperate = jiaYuanOperate;
-                M2J_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (M2J_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.MasterId, opmessage);
+                J2M_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (J2M_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageSender>().Call(jiayuanactor, opmessage);
                 if (m2JJiaYuanOperateResponse.Error != ErrorCode.ERR_Success)
                 {
                     jiaYuanComponent_2.OnRemoveUnit(request.UnitId);

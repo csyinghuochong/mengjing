@@ -6441,6 +6441,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public int BuyNum { get; set; }
 
+        [MemoryPackOrder(3)]
+        public long UnitId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -6453,6 +6456,7 @@ namespace ET
             this.PaiMaiItemInfo = default;
             this.Gold = default;
             this.BuyNum = default;
+            this.UnitId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -6496,13 +6500,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2M_PaiMaiBuyInfoRequest)]
-    [ResponseType(nameof(M2M_PaiMaiBuyInfoResponse))]
-    public partial class M2M_PaiMaiBuyInfoRequest : MessageObject, IRequest
+    [Message(InnerMessage.P2M_PaiMaiBuyInfoRequest)]
+    [ResponseType(nameof(M2P_PaiMaiBuyInfoResponse))]
+    public partial class P2M_PaiMaiBuyInfoRequest : MessageObject, IRequest
     {
-        public static M2M_PaiMaiBuyInfoRequest Create(bool isFromPool = false)
+        public static P2M_PaiMaiBuyInfoRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2M_PaiMaiBuyInfoRequest), isFromPool) as M2M_PaiMaiBuyInfoRequest;
+            return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiBuyInfoRequest), isFromPool) as P2M_PaiMaiBuyInfoRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -6534,12 +6538,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2M_PaiMaiBuyInfoResponse)]
-    public partial class M2M_PaiMaiBuyInfoResponse : MessageObject, IResponse
+    [Message(InnerMessage.M2P_PaiMaiBuyInfoResponse)]
+    public partial class M2P_PaiMaiBuyInfoResponse : MessageObject, IResponse
     {
-        public static M2M_PaiMaiBuyInfoResponse Create(bool isFromPool = false)
+        public static M2P_PaiMaiBuyInfoResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2M_PaiMaiBuyInfoResponse), isFromPool) as M2M_PaiMaiBuyInfoResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiBuyInfoResponse), isFromPool) as M2P_PaiMaiBuyInfoResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8508,13 +8512,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.J2M_JiaYuanOperateRequest)]
-    [ResponseType(nameof(M2J_JiaYuanOperateResponse))]
-    public partial class J2M_JiaYuanOperateRequest : MessageObject, ILocationRequest
+    [Message(InnerMessage.M2J_JiaYuanOperateRequest)]
+    [ResponseType(nameof(J2M_JiaYuanOperateResponse))]
+    public partial class M2J_JiaYuanOperateRequest : MessageObject, IRequest
     {
-        public static J2M_JiaYuanOperateRequest Create(bool isFromPool = false)
+        public static M2J_JiaYuanOperateRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(J2M_JiaYuanOperateRequest), isFromPool) as J2M_JiaYuanOperateRequest;
+            return ObjectPool.Instance.Fetch(typeof(M2J_JiaYuanOperateRequest), isFromPool) as M2J_JiaYuanOperateRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -8538,12 +8542,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2J_JiaYuanOperateResponse)]
-    public partial class M2J_JiaYuanOperateResponse : MessageObject, ILocationResponse
+    [Message(InnerMessage.J2M_JiaYuanOperateResponse)]
+    public partial class J2M_JiaYuanOperateResponse : MessageObject, IResponse
     {
-        public static M2J_JiaYuanOperateResponse Create(bool isFromPool = false)
+        public static J2M_JiaYuanOperateResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2J_JiaYuanOperateResponse), isFromPool) as M2J_JiaYuanOperateResponse;
+            return ObjectPool.Instance.Fetch(typeof(J2M_JiaYuanOperateResponse), isFromPool) as J2M_JiaYuanOperateResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8930,8 +8934,8 @@ namespace ET
         public const ushort P2M_PaiMaiAuctionPriceResponse = 20175;
         public const ushort M2P_PaiMaiBuyRequest = 20176;
         public const ushort P2M_PaiMaiBuyResponse = 20177;
-        public const ushort M2M_PaiMaiBuyInfoRequest = 20178;
-        public const ushort M2M_PaiMaiBuyInfoResponse = 20179;
+        public const ushort P2M_PaiMaiBuyInfoRequest = 20178;
+        public const ushort M2P_PaiMaiBuyInfoResponse = 20179;
         public const ushort M2R_DBServerInfoRequest = 20180;
         public const ushort R2M_DBServerInfoResponse = 20181;
         public const ushort M2P_PaiMaiSellRequest = 20182;
@@ -8983,8 +8987,8 @@ namespace ET
         public const ushort M2A_PetMingLoginResponse = 20228;
         public const ushort M2J_JiaYuanEnterRequest = 20229;
         public const ushort J2M_JiaYuanEnterResponse = 20230;
-        public const ushort J2M_JiaYuanOperateRequest = 20231;
-        public const ushort M2J_JiaYuanOperateResponse = 20232;
+        public const ushort M2J_JiaYuanOperateRequest = 20231;
+        public const ushort J2M_JiaYuanOperateResponse = 20232;
         public const ushort M2R_RechargeRequest = 20233;
         public const ushort R2M_RechargeResponse = 20234;
         public const ushort R2G_RechargeResultRequest = 20235;

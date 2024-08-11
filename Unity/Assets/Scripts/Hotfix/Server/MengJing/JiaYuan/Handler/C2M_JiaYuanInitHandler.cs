@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanInitHandler : MessageLocationHandler<Unit, C2M_JiaYuanInitRequest, M2C_JiaYuanInitResponse>
@@ -9,25 +11,19 @@
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(unit.Root(), request.MasterId);
             if (unit.Id != request.MasterId)
             {
-                
                 JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
                 jiaYuanOperate = JiaYuanOperate.Create();
                 jiaYuanOperate.OperateType = JiaYuanOperateType.Visit;
                 jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-                J2M_JiaYuanOperateRequest opmessage = J2M_JiaYuanOperateRequest.Create();
+                jiaYuanOperate.UnitId = unit.Id;
+                jiaYuanOperate.MasterId = request.MasterId;
+                M2J_JiaYuanOperateRequest opmessage = M2J_JiaYuanOperateRequest.Create();
                 opmessage.JiaYuanOperate = jiaYuanOperate;
-                M2J_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (M2J_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.MasterId, opmessage);
-                //玩家在线
-                if (m2JJiaYuanOperateResponse.Error != ErrorCode.ERR_Success)
-                {
-                    JiaYuanRecord JiaYuanRecord = JiaYuanRecord.Create();
-                    JiaYuanRecord.OperateType = JiaYuanOperateType.Visit;
-                    JiaYuanRecord.OperateId = 0;
-                    JiaYuanRecord.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-                    JiaYuanRecord.Time = TimeHelper.ServerNow();
-                    jiaYuanComponent.AddJiaYuanRecord(JiaYuanRecord);
-                    await UnitCacheHelper.SaveComponentCache(unit.Root(),  jiaYuanComponent);
-                }
+
+                ActorId jiayuanactorid = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
+                J2M_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (J2M_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageSender>().Call(jiayuanactorid, opmessage);
+                Console.WriteLine($"M2J_JiaYuanOperateResponse:  {request.MasterId}  {m2JJiaYuanOperateResponse.Error}");
+                
             }
             jiaYuanComponent.InitOpenList();
             response.PlanOpenList .AddRange(jiaYuanComponent.PlanOpenList_7);

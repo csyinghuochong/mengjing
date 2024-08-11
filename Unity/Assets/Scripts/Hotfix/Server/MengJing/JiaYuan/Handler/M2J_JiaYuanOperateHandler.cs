@@ -1,11 +1,14 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
-    [MessageHandler(SceneType.Map)]
-    public class J2M_JiaYuanOperateHandler : MessageLocationHandler<Unit, J2M_JiaYuanOperateRequest, M2J_JiaYuanOperateResponse>
+    [MessageHandler(SceneType.JiaYuan)]
+    public class M2J_JiaYuanOperateHandler : MessageHandler<Scene, M2J_JiaYuanOperateRequest, J2M_JiaYuanOperateResponse>
     {
-        protected override async ETTask Run(Unit unit, J2M_JiaYuanOperateRequest request, M2J_JiaYuanOperateResponse response)
+        protected override async ETTask Run(Scene scene, M2J_JiaYuanOperateRequest request, J2M_JiaYuanOperateResponse response)
         {
-            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
+            JiaYuanComponentS jiaYuanComponent =
+                    await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(scene.Root(), request.JiaYuanOperate.MasterId);
             JiaYuanOperate jiaYuanOperate = request.JiaYuanOperate;
             switch (jiaYuanOperate.OperateType)
             {
@@ -31,7 +34,7 @@
                     jiaYuanRecord.OperateId = jiaYuanPlan.ItemId;
                     jiaYuanRecord.PlayerName = jiaYuanOperate.PlayerName;
                     jiaYuanRecord.Time = TimeHelper.ServerNow();
-                    jiaYuanRecord.PlayerId = jiaYuanOperate.PlayerId;
+                    jiaYuanRecord.PlayerId = jiaYuanOperate.UnitId;
                     jiaYuanComponent.AddJiaYuanRecord(jiaYuanRecord);
                     break;
                 case JiaYuanOperateType.GatherPasture:
@@ -51,7 +54,7 @@
                     jiaYuanComponent.AddJiaYuanRecord(JiaYuanRecord);
                     break;
                 case JiaYuanOperateType.Pick:
-                    unit.GetComponent<JiaYuanComponentS>().OnRemoveUnit(jiaYuanOperate.UnitId);
+                    jiaYuanComponent.OnRemoveUnit(jiaYuanOperate.UnitId);
                     JiaYuanRecord = JiaYuanRecord.Create();
                     JiaYuanRecord.OperateType = JiaYuanOperateType.Pick;
                     JiaYuanRecord.OperateId = jiaYuanOperate.OperateId;
@@ -61,7 +64,8 @@
                     break;
             }
 
-            await  UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent );
+            await  UnitCacheHelper.SaveComponentCache( scene.Root(), jiaYuanComponent );
+            Console.WriteLine("J2M_JiaYuanOperateHandler await  UnitCacheHelper.SaveComponentCache ");
         }
     }
 }

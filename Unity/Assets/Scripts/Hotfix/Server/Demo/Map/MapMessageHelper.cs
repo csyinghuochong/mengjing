@@ -215,6 +215,7 @@ namespace ET.Server
 
         public static void Broadcast(Unit unit, IMessage message)
         {
+            
             (message as MessageObject).IsFromPool = false;
             Dictionary<long, EntityRef<AOIEntity>> dict = unit.GetBeSeePlayers();
             // 网络底层做了优化，同一个消息不会多次序列化

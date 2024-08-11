@@ -55,8 +55,7 @@ namespace ET.Server
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
                         Console.WriteLine($"player.PlayerState == PlayerState.Game:  {TimeHelper.ServerNow()}");
-                        var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
-                                .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
+                        var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();
                         player.PlayerState = PlayerState.Gate;
                     }
@@ -67,8 +66,7 @@ namespace ET.Server
                             Console.WriteLine("player.PlayerState == PlayerState.Game");
                             
                             G2M_SecondLogin g2MSecondLogin = G2M_SecondLogin.Create();
-                            M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>()
-                                    .Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin) as M2G_SecondLogin;
+                            M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin) as M2G_SecondLogin;
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
                                 

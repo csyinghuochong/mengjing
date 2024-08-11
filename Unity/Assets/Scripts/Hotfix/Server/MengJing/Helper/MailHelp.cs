@@ -34,7 +34,6 @@ namespace ET.Server
 
         public static void SendServerMail(Scene root, long userID, ServerMailItem serverMailItem)
         {
-            // (M2A_PetMingRecordResponse) await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(oldUnitid, a2M_PetMing);
             Mail2M_SendServerMailItem mail2M_SendServer = Mail2M_SendServerMailItem.Create();
             mail2M_SendServer.ServerMailItem = serverMailItem;
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userID, mail2M_SendServer);

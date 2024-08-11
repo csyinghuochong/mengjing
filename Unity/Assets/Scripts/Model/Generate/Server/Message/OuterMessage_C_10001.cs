@@ -9889,6 +9889,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public int OperateType { get; set; }
 
+        /// <summary>
+        /// 行为id
+        /// </summary>
         [MemoryPackOrder(3)]
         public int OperateId { get; set; }
 
@@ -9898,11 +9901,8 @@ namespace ET
         [MemoryPackOrder(5)]
         public long UnitId { get; set; }
 
-        /// <summary>
-        /// 玩家id
-        /// </summary>
         [MemoryPackOrder(6)]
-        public long PlayerId { get; set; }
+        public long MasterId { get; set; }
 
         public override void Dispose()
         {
@@ -9917,7 +9917,7 @@ namespace ET
             this.OperateId = default;
             this.OperatePar = default;
             this.UnitId = default;
-            this.PlayerId = default;
+            this.MasterId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -57,6 +57,7 @@ namespace ET.Server
                 {
                     long unitId = session.GetComponent<SessionPlayerComponent>().Player.UnitId;
                     Log.Debug($"actorLocationMessageactorLocationMessage: { unitId}");
+
                     root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitId, actorLocationMessage);
                     break;
                 }

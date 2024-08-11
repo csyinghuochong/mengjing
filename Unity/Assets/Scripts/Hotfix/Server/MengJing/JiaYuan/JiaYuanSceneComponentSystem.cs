@@ -26,14 +26,12 @@ namespace ET.Server
                 return;
             }
 
+            ActorId fubeninstanceid  =default;
             long unitid = scene.GetComponent<JiaYuanDungeonComponent>().MasterId;
-
-            long fubeninstanceid = 0;
             self.JiaYuanFubens.TryGetValue(unitid, out fubeninstanceid);
-
             TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
             scene.Dispose();
-            if (fubeninstanceid != 0)
+            if (fubeninstanceid != default)
             {
                 self.JiaYuanFubens.Remove(unitid);
             }
@@ -76,11 +74,9 @@ namespace ET.Server
             {
                 UnitFactory.CreateJiaYuanPet(fubnescene, masterid, jiaYuanComponent.JiaYuanPetList_2[i]);
             }
-            
-            Log.Debug("1111111111111");
         }
 
-        public static async ETTask<long> GetJiaYuanFubenId(this JiaYuanSceneComponent self, long masterid, long unitid)
+        public static async ETTask<ActorId> GetJiaYuanFubenId(this JiaYuanSceneComponent self, long masterid, long unitid)
         {
             using (await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.JiaYuan, masterid))
             {
@@ -100,8 +96,10 @@ namespace ET.Server
                 await self.CreateJiaYuanUnit(fubnescene, masterid, unitid);
                 FubenHelp.CreateNpc(fubnescene, jiayuansceneid);
                 TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
-                self.JiaYuanFubens.Add(masterid, fubenInstanceId);
-                return fubenInstanceId;
+                
+                ActorId jiayuanActorid =  new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
+                self.JiaYuanFubens.Add(masterid, jiayuanActorid);
+                return jiayuanActorid;
             }
         }
     }

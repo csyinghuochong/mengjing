@@ -1,10 +1,10 @@
 ﻿namespace ET.Server
 {
 
-    [MessageHandler(SceneType.PaiMai)]
-    public class M2M_PaiMaiBuyInfoHandler: MessageHandler<Unit, M2M_PaiMaiBuyInfoRequest, M2M_PaiMaiBuyInfoResponse>
+    [MessageHandler(SceneType.Map)]
+    public class P2M_PaiMaiBuyInfoHandler: MessageHandler<Unit, P2M_PaiMaiBuyInfoRequest, M2P_PaiMaiBuyInfoResponse>
     {
-        protected override async ETTask Run(Unit unit, M2M_PaiMaiBuyInfoRequest request, M2M_PaiMaiBuyInfoResponse response)
+        protected override async ETTask Run(Unit unit, P2M_PaiMaiBuyInfoRequest request, M2P_PaiMaiBuyInfoResponse response)
         {
             unit.GetComponent<DataCollationComponent>().UpdateBuySelfPlayerList( request.CostGold,request.PlayerId, true );
 
