@@ -16292,13 +16292,13 @@ namespace ET
 
     // 加速完成
     [MemoryPackable]
-    [Message(OuterMessage.C2U_UnionKeJiQuickRequest)]
-    [ResponseType(nameof(U2C_UnionKeJiQuickResponse))]
-    public partial class C2U_UnionKeJiQuickRequest : MessageObject, IUnionActorRequest
+    [Message(OuterMessage.C2M_UnionKeJiQuickRequest)]
+    [ResponseType(nameof(M2C_UnionKeJiQuickResponse))]
+    public partial class C2M_UnionKeJiQuickRequest : MessageObject, ILocationRequest
     {
-        public static C2U_UnionKeJiQuickRequest Create(bool isFromPool = false)
+        public static C2M_UnionKeJiQuickRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2U_UnionKeJiQuickRequest), isFromPool) as C2U_UnionKeJiQuickRequest;
+            return ObjectPool.Instance.Fetch(typeof(C2M_UnionKeJiQuickRequest), isFromPool) as C2M_UnionKeJiQuickRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -16334,12 +16334,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.U2C_UnionKeJiQuickResponse)]
-    public partial class U2C_UnionKeJiQuickResponse : MessageObject, IUnionActorResponse
+    [Message(OuterMessage.M2C_UnionKeJiQuickResponse)]
+    public partial class M2C_UnionKeJiQuickResponse : MessageObject, ILocationResponse
     {
-        public static U2C_UnionKeJiQuickResponse Create(bool isFromPool = false)
+        public static M2C_UnionKeJiQuickResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(U2C_UnionKeJiQuickResponse), isFromPool) as U2C_UnionKeJiQuickResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2C_UnionKeJiQuickResponse), isFromPool) as M2C_UnionKeJiQuickResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -31000,8 +31000,8 @@ namespace ET
         public const ushort U2C_UnionJingXuanResponse = 10414;
         public const ushort C2U_UnionKeJiActiteRequest = 10415;
         public const ushort U2C_UnionKeJiActiteResponse = 10416;
-        public const ushort C2U_UnionKeJiQuickRequest = 10417;
-        public const ushort U2C_UnionKeJiQuickResponse = 10418;
+        public const ushort C2M_UnionKeJiQuickRequest = 10417;
+        public const ushort M2C_UnionKeJiQuickResponse = 10418;
         public const ushort C2U_UnionKickOutRequest = 10419;
         public const ushort U2C_UnionKickOutResponse = 10420;
         public const ushort C2U_UnionMyInfoRequest = 10421;

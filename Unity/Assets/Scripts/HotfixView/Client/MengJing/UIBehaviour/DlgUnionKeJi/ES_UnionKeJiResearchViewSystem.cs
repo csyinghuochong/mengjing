@@ -199,7 +199,7 @@ namespace ET.Client
                         Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                         long unionId = unit.GetUnionId();
 
-                        U2C_UnionKeJiQuickResponse response = await UnionNetHelper.UnionKeJiQuickRequest(self.Root(), unionId, self.Position);
+                        M2C_UnionKeJiQuickResponse response = await UnionNetHelper.UnionKeJiQuickRequest(self.Root(), unionId, self.Position);
 
                         if (response.Error != ErrorCode.ERR_Success)
                         {

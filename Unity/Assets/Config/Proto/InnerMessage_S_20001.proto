@@ -933,15 +933,15 @@ message M2U_UnionApplyResponse // ILocationResponse
 }
 
 //加速完成
-//ResponseType M2U_UnionKeJiQuickResponse
-message U2M_UnionKeJiQuickRequest // IRequest
+//ResponseType U2M_UnionKeJiQuickResponse
+message M2U_UnionKeJiQuickRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int32 Cost = 1;
 }
 
-message M2U_UnionKeJiQuickResponse // IResponse
+message U2M_UnionKeJiQuickResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

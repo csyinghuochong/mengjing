@@ -3750,8 +3750,8 @@ message U2C_UnionKeJiActiteResponse // IUnionActorResponse
 }
 
 //加速完成
-//ResponseType U2C_UnionKeJiQuickResponse
-message C2U_UnionKeJiQuickRequest // IUnionActorRequest
+//ResponseType M2C_UnionKeJiQuickResponse
+message C2M_UnionKeJiQuickRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -3760,7 +3760,7 @@ message C2U_UnionKeJiQuickRequest // IUnionActorRequest
 	int64 UnitId = 3;
 }
 
-message U2C_UnionKeJiQuickResponse // IUnionActorResponse
+message M2C_UnionKeJiQuickResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
