@@ -4251,13 +4251,13 @@ namespace ET
 
     // 进入家族地图
     [MemoryPackable]
-    [Message(InnerMessage.M2U_UnionEnterRequest)]
-    [ResponseType(nameof(U2M_UnionEnterResponse))]
-    public partial class M2U_UnionEnterRequest : MessageObject, IRequest
+    [Message(InnerMessage.M2F_UnionEnterRequest)]
+    [ResponseType(nameof(F2M_UnionEnterResponse))]
+    public partial class M2F_UnionEnterRequest : MessageObject, IRequest
     {
-        public static M2U_UnionEnterRequest Create(bool isFromPool = false)
+        public static M2F_UnionEnterRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2U_UnionEnterRequest), isFromPool) as M2U_UnionEnterRequest;
+            return ObjectPool.Instance.Fetch(typeof(M2F_UnionEnterRequest), isFromPool) as M2F_UnionEnterRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -4300,12 +4300,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.U2M_UnionEnterResponse)]
-    public partial class U2M_UnionEnterResponse : MessageObject, IResponse
+    [Message(InnerMessage.F2M_UnionEnterResponse)]
+    public partial class F2M_UnionEnterResponse : MessageObject, IResponse
     {
-        public static U2M_UnionEnterResponse Create(bool isFromPool = false)
+        public static F2M_UnionEnterResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(U2M_UnionEnterResponse), isFromPool) as U2M_UnionEnterResponse;
+            return ObjectPool.Instance.Fetch(typeof(F2M_UnionEnterResponse), isFromPool) as F2M_UnionEnterResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8425,13 +8425,13 @@ namespace ET
 
     // 进入家园
     [MemoryPackable]
-    [Message(InnerMessage.M2J_JiaYuanEnterRequest)]
-    [ResponseType(nameof(J2M_JiaYuanEnterResponse))]
-    public partial class M2J_JiaYuanEnterRequest : MessageObject, IRequest
+    [Message(InnerMessage.M2F_JiaYuanEnterRequest)]
+    [ResponseType(nameof(F2M_JiaYuanEnterResponse))]
+    public partial class M2F_JiaYuanEnterRequest : MessageObject, IRequest
     {
-        public static M2J_JiaYuanEnterRequest Create(bool isFromPool = false)
+        public static M2F_JiaYuanEnterRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2J_JiaYuanEnterRequest), isFromPool) as M2J_JiaYuanEnterRequest;
+            return ObjectPool.Instance.Fetch(typeof(M2F_JiaYuanEnterRequest), isFromPool) as M2F_JiaYuanEnterRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -8467,12 +8467,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.J2M_JiaYuanEnterResponse)]
-    public partial class J2M_JiaYuanEnterResponse : MessageObject, IResponse
+    [Message(InnerMessage.F2M_JiaYuanEnterResponse)]
+    public partial class F2M_JiaYuanEnterResponse : MessageObject, IResponse
     {
-        public static J2M_JiaYuanEnterResponse Create(bool isFromPool = false)
+        public static F2M_JiaYuanEnterResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(J2M_JiaYuanEnterResponse), isFromPool) as J2M_JiaYuanEnterResponse;
+            return ObjectPool.Instance.Fetch(typeof(F2M_JiaYuanEnterResponse), isFromPool) as F2M_JiaYuanEnterResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8875,8 +8875,8 @@ namespace ET
         public const ushort M2U_UnionKickOutResponse = 20116;
         public const ushort G2Union_EnterUnion = 20117;
         public const ushort Union2G_EnterUnion = 20118;
-        public const ushort M2U_UnionEnterRequest = 20119;
-        public const ushort U2M_UnionEnterResponse = 20120;
+        public const ushort M2F_UnionEnterRequest = 20119;
+        public const ushort F2M_UnionEnterResponse = 20120;
         public const ushort A2A_ActivityUpdateRequest = 20121;
         public const ushort A2A_ActivityUpdateResponse = 20122;
         public const ushort G2M_ActivityUpdate = 20123;
@@ -8985,8 +8985,8 @@ namespace ET
         public const ushort M2A_PetMingChanChuResponse = 20226;
         public const ushort A2M_PetMingLoginRequest = 20227;
         public const ushort M2A_PetMingLoginResponse = 20228;
-        public const ushort M2J_JiaYuanEnterRequest = 20229;
-        public const ushort J2M_JiaYuanEnterResponse = 20230;
+        public const ushort M2F_JiaYuanEnterRequest = 20229;
+        public const ushort F2M_JiaYuanEnterResponse = 20230;
         public const ushort M2J_JiaYuanOperateRequest = 20231;
         public const ushort J2M_JiaYuanOperateResponse = 20232;
         public const ushort M2R_RechargeRequest = 20233;

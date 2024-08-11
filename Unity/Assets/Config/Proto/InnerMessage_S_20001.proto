@@ -983,8 +983,8 @@ message Union2G_EnterUnion //IResponse
 }
 
 //进入家族地图
-//ResponseType U2M_UnionEnterResponse
-message M2U_UnionEnterRequest // IRequest
+//ResponseType F2M_UnionEnterResponse
+message M2F_UnionEnterRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -994,7 +994,7 @@ message M2U_UnionEnterRequest // IRequest
 	int32 OperateType = 4;   ///0默认 1家族争霸赛
 }
 
-message U2M_UnionEnterResponse // IResponse
+message F2M_UnionEnterResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -1959,8 +1959,8 @@ message M2A_PetMingLoginResponse // IResponse
 }
 
 //进入家园
-//ResponseType J2M_JiaYuanEnterResponse
-message M2J_JiaYuanEnterRequest // IRequest
+//ResponseType F2M_JiaYuanEnterResponse
+message M2F_JiaYuanEnterRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1969,7 +1969,7 @@ message M2J_JiaYuanEnterRequest // IRequest
 	int32 SceneId = 4;
 }
 
-message J2M_JiaYuanEnterResponse // IResponse
+message F2M_JiaYuanEnterResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

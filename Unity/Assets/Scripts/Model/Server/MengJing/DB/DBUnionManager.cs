@@ -31,11 +31,30 @@ namespace ET.Server
         /// <summary>
         /// 家族争霸赛次数
         /// </summary>
-        public int UnionRaceTime{ get; set; }  = 0;
+        public int UnionRaceTime { get; set; } = 0;
 
         /// <summary>
         /// 胜利家族
         /// </summary>
-        public long WinUnionId{ get; set; } 
+        public long WinUnionId { get; set; }
+
+        public long GetBaseJiangJin
+        {
+            get
+            {
+                if (UnionRaceTime == 0)
+                {
+                    return 10000000;
+                }
+
+                if (UnionRaceTime == 1)
+                {
+                    return 5000000;
+                }
+
+                return 3000000;
+            }
+        }
+
     }
 }

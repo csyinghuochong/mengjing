@@ -69,6 +69,23 @@ namespace ET.Server
         /// </summary>
         public bool ArenaOpen = false;
         public List<BattleInfo> ArenaInfos { get; set; } = new List<BattleInfo>();
+        
+        
+        /// <summary>
+        /// 家族争霸
+        /// </summary>
+        public BattleInfo UnionRaceScene { get; set; } 
+
+     
+        /// <summary>
+        /// 家族地图
+        /// </summary>
+        public Dictionary<long, ActorId> UnionFubens = new Dictionary<long, ActorId>();   //unionid->actorid
+
+        /// <summary>
+        /// 家园地图
+        /// </summary>
+        public Dictionary<long, ActorId> JiaYuanFubens = new Dictionary<long, ActorId>();
     }
     
 }

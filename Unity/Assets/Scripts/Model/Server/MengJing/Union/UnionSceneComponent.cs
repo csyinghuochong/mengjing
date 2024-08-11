@@ -7,22 +7,9 @@ namespace ET.Server
     public class UnionSceneComponent: Entity, IAwake, IDestroy
     {
         public long Timer;
-
-        public long WinUnionId;
-
-        public long UnionRaceSceneId;
-        public ActorId UnionRaceSceneInstanceId{ get; set; } 
-
+        
         public DBUnionManager DBUnionManager { get; set; } = new DBUnionManager();
 
-        public Dictionary<long, List<long>> UnionRaceUnits = new Dictionary<long, List<long>>();
-
-        public Dictionary<long, long> UnionBossList = new Dictionary<long, long>(); 
-
-        public Dictionary<long, ActorId> UnionFubens = new Dictionary<long, ActorId>();   //fubenid->fubeninstanceid
-
-
-        public Dictionary<long, DBUnionInfo> DBUnionInfos { get; set; }
     }
     
 }

@@ -11,7 +11,7 @@ namespace ET.Server
             
             UnionSceneComponent unionSceneComponent = scene.GetComponent<UnionSceneComponent>();
             
-            response.TotalDonation = unionSceneComponent.GetBaseJiangJin() + (int)(unionSceneComponent.DBUnionManager.TotalDonation);
+            response.TotalDonation = unionSceneComponent.DBUnionManager.GetBaseJiangJin + (int)(unionSceneComponent.DBUnionManager.TotalDonation);
 
             DBManagerComponent dbManagerComponent = scene.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());

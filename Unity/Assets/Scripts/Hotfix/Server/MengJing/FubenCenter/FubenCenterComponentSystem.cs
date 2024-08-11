@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (FubenCenterComponent))]
-    [FriendOf(typeof (FubenCenterComponent))]
+    [EntitySystemOf(typeof(FubenCenterComponent))]
+    [FriendOf(typeof(FubenCenterComponent))]
     public static partial class FubenCenterComponentSystem
     {
         [EntitySystem]
@@ -118,14 +119,17 @@ namespace ET.Server
                 battleInfos = self.ArenaInfos;
                 playerLimit = 1000000;
             }
+
             if (functionId == 1055)
             {
                 battleInfos = self.HappyInfos;
             }
+
             if (functionId == 1058)
             {
                 battleInfos = self.RunRaceInfos;
             }
+
             if (functionId == 1059)
             {
                 battleInfos = self.DemonInfos;
@@ -164,14 +168,17 @@ namespace ET.Server
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Arena);
             }
+
             if (functionId == 1055)
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy);
             }
+
             if (functionId == 1058)
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.RunRace);
             }
+
             if (functionId == 1059)
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Demon);
@@ -198,7 +205,7 @@ namespace ET.Server
             fubnescene.GetComponent<ServerInfoComponent>().ServerInfo = self.ServerInfo;
             YeWaiRefreshComponent yeWaiRefreshComponen = fubnescene.AddComponent<YeWaiRefreshComponent>();
             yeWaiRefreshComponen.SceneId = sceneConfig.Id;
-            
+
             ActorId actorId = new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
             BattleInfo battleInfo = new BattleInfo() { SceneId = sceneid, FubenId = fubenid, FubenInstanceId = fubenInstanceId, ActorId = actorId };
             battleInfo.PlayerList.Add(unitId, new ArenaPlayerStatu() { UnitId = unitId });
@@ -222,6 +229,12 @@ namespace ET.Server
                     fubnescene.AddComponent<DemonDungeonComponent>();
                     fubnescene.GetComponent<DemonDungeonComponent>().OnBegin();
                     break;
+                case SceneTypeEnum.Union:
+
+                    break;
+                case SceneTypeEnum.UnionRace:
+
+                    break;
                 default:
                     break;
             }
@@ -229,7 +242,7 @@ namespace ET.Server
             FubenHelp.CreateNpc(fubnescene, sceneid);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonsterPosi);
-            
+
             return battleInfo;
         }
 
@@ -237,7 +250,7 @@ namespace ET.Server
         {
             for (int i = 0; i < self.ArenaInfos.Count; i++)
             {
-                if (fubenId!= self.ArenaInfos[i].FubenId)
+                if (fubenId != self.ArenaInfos[i].FubenId)
                 {
                     continue;
                 }
@@ -305,8 +318,10 @@ namespace ET.Server
                             Log.Error($"scene == null");
                             break;
                         }
+
                         scene.GetComponent<ArenaDungeonComponent>().OnArenaClose();
                     }
+
                     FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(1031);
                     string[] openTimes = funtionConfig.OpenTime.Split('@');
 
@@ -351,13 +366,13 @@ namespace ET.Server
                     funtionConfig = FuntionConfigCategory.Instance.Get(1058);
                     openTimes = funtionConfig.OpenTime.Split('@');
 
-                     closeTime_1 = int.Parse(openTimes[1].Split(';')[0]);
-                     closeTime_2 = int.Parse(openTimes[1].Split(';')[1]);
-                     closeTime = (closeTime_1 * 60 + closeTime_2) * 60;
+                    closeTime_1 = int.Parse(openTimes[1].Split(';')[0]);
+                    closeTime_2 = int.Parse(openTimes[1].Split(';')[1]);
+                    closeTime = (closeTime_1 * 60 + closeTime_2) * 60;
 
-                     endTime_1 = int.Parse(openTimes[2].Split(';')[0]);
-                     endTime_2 = int.Parse(openTimes[2].Split(';')[1]);
-                     endTime = (endTime_1 * 60 + endTime_2) * 60;
+                    endTime_1 = int.Parse(openTimes[2].Split(';')[0]);
+                    endTime_2 = int.Parse(openTimes[2].Split(';')[1]);
+                    endTime = (endTime_1 * 60 + endTime_2) * 60;
 
                     waitDisposeTime = (endTime - closeTime) * 1000;
                     break;
@@ -434,9 +449,9 @@ namespace ET.Server
 
             battleInfos.Clear();
         }
-        
 
         #region YeWai
+
         public static async ETTask InitYeWaiScene(this FubenCenterComponent self)
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(0, 1000));
@@ -478,13 +493,15 @@ namespace ET.Server
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonster);
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonsterPosi);
 
-                int openDay = ServerHelper.GetServeOpenrDay( self.Zone());
+                int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
                 yeWaiRefreshComponen.OnZeroClockUpdate(openDay);
             }
         }
+
         #endregion
 
         #region Battle
+
         public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterComponent self, long unitid, int sceneId)
         {
             //动态创建副本
@@ -591,7 +608,7 @@ namespace ET.Server
             G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
             G2Robot_MessageRequest.Zone = self.Zone();
             G2Robot_MessageRequest.MessageType = NoticeType.BattleOver;
-            self.Root().GetComponent<MessageSender>().Send(robotSceneId,G2Robot_MessageRequest);
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 20000));
             for (int i = 0; i < self.BattleInfos.Count; i++)
@@ -613,6 +630,153 @@ namespace ET.Server
 
             self.BattleInfos.Clear();
         }
+
+        #endregion
+
+        #region Union
+
+        public static ActorId GetUnionFubenId(this FubenCenterComponent self, long unionid, long unitid)
+        {
+            //需要判读一下unitid 是否属于这个家族！
+            if (self.UnionFubens.ContainsKey(unionid))
+            {
+                return self.UnionFubens[unionid];
+            }
+
+            int unionsceneid = 2000009;
+            long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+            Scene fubnescene = GateMapFactory.Create(self, unionid, fubenInstanceId, "Union" + unionid.ToString());
+
+            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+            mapComponent.SetMapInfo((int)SceneTypeEnum.Union, unionsceneid, 0);
+            mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(unionsceneid).MapID;
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
+            fubnescene.AddComponent<UnionDungeonComponet>().GenerateUnionBoss();
+            FubenHelp.CreateNpc(fubnescene, unionsceneid);
+            TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+
+            ActorId actorId_2 = new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
+
+            Log.Debug($"GetUnionFubenI: {fubnescene.GetActorId().ToString()}");
+            Log.Debug($"GetUnionFuben2: {actorId_2.ToString()}");
+            self.UnionFubens.Add(unionid, fubnescene.GetActorId());
+
+            return fubnescene.GetActorId();
+        }
+
+        public static void OnUnionBoss(this FubenCenterComponent self)
+        {
+            foreach ((long unionid, ActorId actorId) in self.UnionFubens)
+            {
+                Scene scene = self.GetChild<Scene>(unionid);
+                if (scene == null)
+                {
+                    Log.Debug($"{self.Zone()} {unionid} scene == null");
+                    continue;
+                }
+
+                scene.GetComponent<UnionDungeonComponet>().GenerateUnionBoss();
+            }
+        }
+
+        #endregion
+
+        #region UnionRace
+        public static void GenerateUnionRace(this FubenCenterComponent self)
+        {
+            if (self.UnionRaceScene != null)
+            {
+                self.UnionRaceScene.Dispose();
+                self.UnionRaceScene = null;
+            }
+
+            long fubenid = IdGenerater.Instance.GenerateId();
+            long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+
+            SceneConfig sceneConfigs = SceneConfigCategory.Instance.Get(2000008);
+            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "UnionRace" + sceneConfigs.Id.ToString());
+            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+            mapComponent.SetMapInfo(sceneConfigs.MapType, sceneConfigs.Id, 0);
+            mapComponent.NavMeshId = sceneConfigs.MapID;
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
+            fubnescene.AddComponent<YeWaiRefreshComponent>().SceneId = 2000008;
+            fubnescene.AddComponent<UnionRaceDungeonComponent>();
+            FubenHelp.CreateMonsterList(fubnescene, sceneConfigs.CreateMonster);
+            FubenHelp.CreateMonsterList(fubnescene, sceneConfigs.CreateMonsterPosi);
+            TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+            self.UnionRaceScene = self.AddChild<BattleInfo>();
+            self.UnionRaceScene.ActorId =  fubnescene.GetActorId();
+            
+            fubnescene.GetComponent<UnionRaceDungeonComponent>().OnUnionRaceBegin().Coroutine();
+        }
+
+        public static void OnJoinUnionRace(this FubenCenterComponent self, long unionid, long unitid)
+        {
+            Scene racescene = self.GetChild<Scene>(self.UnionRaceScene.FubenId);
+            racescene.GetComponent<UnionRaceDungeonComponent>().OnJoinUnionRace(unionid, unitid);
+        }
+
+        public static  void OnUnionRaceBegin(this FubenCenterComponent self)
+        {
+            self.GenerateUnionRace();
+        }
+
+        public static void OnUnionRaceOver(this FubenCenterComponent self)
+        {
+            
+        }
+
+        #endregion
+
+
+        #region JiaYuan
+        public static void OnUnitLeave(this FubenCenterComponent self, Scene scene)
+        {
+            List<Unit> units = UnitHelper.GetUnitList(scene, UnitType.Player);
+            if (units.Count > 0)
+            {
+                return;
+            }
+
+            ActorId fubeninstanceid  =default;
+            long unitid = scene.GetComponent<JiaYuanDungeonComponent>().MasterId;
+            self.JiaYuanFubens.TryGetValue(unitid, out fubeninstanceid);
+            TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+            scene.Dispose();
+            if (fubeninstanceid != default)
+            {
+                self.JiaYuanFubens.Remove(unitid);
+            }
+        }
+        
+        public static async ETTask<ActorId> GetJiaYuanFubenId(this FubenCenterComponent self, long masterid, long unitid)
+        {
+            using (await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.JiaYuan, masterid))
+            {
+                if (self.JiaYuanFubens.ContainsKey(masterid))
+                {
+                    return self.JiaYuanFubens[masterid];
+                }
+
+                int jiayuansceneid = 2000011;
+                long fubenid = IdGenerater.Instance.GenerateId();
+                long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+                Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "JiaYuan" + masterid.ToString());
+                fubnescene.AddComponent<JiaYuanDungeonComponent>().MasterId = masterid;
+                MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+                mapComponent.SetMapInfo((int)SceneTypeEnum.JiaYuan, jiayuansceneid, 0);
+                mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(jiayuansceneid).MapID;
+                JiaYuanDungeonComponent jiaYuanDungeonComponent = fubnescene.GetComponent<JiaYuanDungeonComponent>();
+                await jiaYuanDungeonComponent.CreateJiaYuanUnit( masterid, unitid);
+                FubenHelp.CreateNpc(fubnescene, jiayuansceneid);
+                TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+                
+                ActorId jiayuanActorid =  new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
+                self.JiaYuanFubens.Add(masterid, jiayuanActorid);
+                return jiayuanActorid;
+            }
+        }
+        
         #endregion
     }
 }

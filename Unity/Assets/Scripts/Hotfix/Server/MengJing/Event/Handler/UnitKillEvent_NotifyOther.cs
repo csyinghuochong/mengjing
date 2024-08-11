@@ -261,7 +261,7 @@ namespace ET.Server
                     domainScene.GetComponent<ArenaDungeonComponent>().OnKillEvent(defendUnit, mainAttack);
                     break;
                 case SceneTypeEnum.Union:
-                    domainScene.GetParent<UnionSceneComponent>().OnKillEvent(domainScene, defendUnit);
+                    domainScene.GetComponent<UnionDungeonComponet>().OnKillEvent(defendUnit);
                     break;
                 case SceneTypeEnum.TrialDungeon:
                     domainScene.GetComponent<TrialDungeonComponent>().OnKillEvent(defendUnit);

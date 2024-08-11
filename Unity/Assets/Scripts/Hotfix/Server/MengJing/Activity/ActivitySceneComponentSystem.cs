@@ -5,7 +5,7 @@ using System.Linq;
 namespace ET.Server
 {
     [Invoke(TimerInvokeType.ActivityServerTimer)]
-    public class ActivityServerTimer: ATimer<ActivitySceneComponent>
+    public class ActivityServerTimer : ATimer<ActivitySceneComponent>
     {
         protected override void Run(ActivitySceneComponent self)
         {
@@ -21,7 +21,7 @@ namespace ET.Server
     }
 
     [Invoke(TimerInvokeType.ActivityTipTimer)]
-    public class ActivityTipTimer: ATimer<ActivitySceneComponent>
+    public class ActivityTipTimer : ATimer<ActivitySceneComponent>
     {
         protected override void Run(ActivitySceneComponent self)
         {
@@ -36,9 +36,9 @@ namespace ET.Server
         }
     }
 
-    [EntitySystemOf(typeof (ActivitySceneComponent))]
-    [FriendOf(typeof (ActivitySceneComponent))]
-    [FriendOf(typeof (DBDayActivityInfo))]
+    [EntitySystemOf(typeof(ActivitySceneComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
+    [FriendOf(typeof(DBDayActivityInfo))]
     public static partial class ActivitySceneComponentSystem
     {
         [EntitySystem]
@@ -83,7 +83,7 @@ namespace ET.Server
             DayOfWeek dayOfWeek = dateTime.DayOfWeek;
             //int yeardate = dateTime.Year * 10000 + dateTime.Month * 100 + dateTime.Day;  //20230412
             int hour = dateTime.Hour;
-            int openServerDay = ServerHelper.GetServeOpenrDay( self.Zone());
+            int openServerDay = ServerHelper.GetServeOpenrDay(self.Zone());
             Log.Warning($"NoticeActivityUpdate_Hour: zone: {self.Zone()} openday: {openServerDay}  {hour}");
             for (int i = 0; i < self.MapIdList.Count; i++)
             {
@@ -91,7 +91,8 @@ namespace ET.Server
                 A2A_ActivityUpdateRequest.Hour = hour;
                 A2A_ActivityUpdateRequest.OpenDay = openServerDay;
                 A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
-                        (A2A_ActivityUpdateResponse) await self.Root().GetComponent<MessageSender>().Call(self.MapIdList[i],A2A_ActivityUpdateRequest);
+                        (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
+                                .Call(self.MapIdList[i], A2A_ActivityUpdateRequest);
             }
 
             if (hour == 0)
@@ -215,7 +216,7 @@ namespace ET.Server
             self.CheckIndex++;
             if (self.CheckIndex >= 1)
             {
-                int openDay = ServerHelper.GetServeOpenrDay( self.Zone());
+                int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
 
                 List<PetMingPlayerInfo> petMingPlayers = self.DBDayActivityInfo.PetMingList;
 
@@ -278,7 +279,7 @@ namespace ET.Server
                 self.DBDayActivityInfo = dbDayActivityInfos[0];
             }
 
-            int openServerDay = ServerHelper.GetServeOpenrDay( zone);
+            int openServerDay = ServerHelper.GetServeOpenrDay(zone);
             Log.Debug($"InitDayActivity: {zone}  {openServerDay}");
             self.DBDayActivityInfo.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
 
@@ -308,12 +309,6 @@ namespace ET.Server
                 ActorId sceneserverid = new ActorId();
                 switch (functionId)
                 {
-                    case 1043: //家族Boss
-                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
-                        break;
-                    case 1044: //家族争霸
-                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
-                        break;
                     case 1045:
                         sceneserverid = UnitCacheHelper.GetSoloServerId(self.Zone());
                         break;
@@ -328,6 +323,9 @@ namespace ET.Server
                     case 1058: //奔跑比赛
                     case 1059: //恶魔活动
                     case 1055: //喜从天降
+                    case 1043: //家族Boss
+                    case 1044: //家族争霸
+                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
                         break;
                     default:
@@ -367,7 +365,7 @@ namespace ET.Server
 
                 self.ActivityTimerList.RemoveAt(0);
             }
-            
+
             self.StartActivityTipTimer();
         }
 
@@ -379,7 +377,7 @@ namespace ET.Server
             long serverTime = TimeHelper.ServerNow();
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
             long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
-           
+
             ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
             List<int> functonIds = new List<int>()
             {
@@ -428,7 +426,7 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.ActivityTimer);
             if (self.ActivityTimerList.Count <= 0)
             {
-               return;
+                return;
             }
 
             if (self.ActivityTimerList[0].BeginTime <= TimeHelper.ServerNow())
