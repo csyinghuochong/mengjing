@@ -14,6 +14,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ItemNotExist;
                 return;
             }
+
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(request.PaiMaiItemInfo.BagInfo.ItemID);
             int itemType = itemCof.ItemType;
             DBPaiMainInfo dBPaiMainInfo = scene.GetComponent<PaiMaiSceneComponent>().GetPaiMaiDBByType(itemType);
@@ -23,7 +24,7 @@ namespace ET.Server
                 return;
             }
 
-            long needGold = 0 ;
+            long needGold = 0;
             PaiMaiItemInfo paiMaiItemInfo = null;
             List<PaiMaiItemInfo> paiMaiItemInfos = dBPaiMainInfo.PaiMaiItemInfos;
             for (int i = paiMaiItemInfos.Count - 1; i >= 0; i--)
@@ -40,13 +41,13 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ItemNotExist;
                 return;
             }
-            
+
             if (request.BuyNum < 0 || request.BuyNum > paiMaiItemInfo.BagInfo.ItemNum)
             {
                 response.Error = ErrorCode.ERR_Parameter;
                 return;
             }
-            
+
             needGold = (long)paiMaiItemInfo.Price * request.BuyNum;
             if (request.Gold < needGold)
             {
@@ -74,26 +75,27 @@ namespace ET.Server
                 useBagInfo.GemIDNew = ConfigData.DefaultGem;
                 useBagInfo.GetWay = bagInfo.GetWay;
                 useBagInfo.isBinging = bagInfo.isBinging;
-                
+
                 paiMaiItemInfo2.Id = IdGenerater.Instance.GenerateId();
                 paiMaiItemInfo2.BagInfo = useBagInfo;
                 paiMaiItemInfo2.UserId = paiMaiItemInfo.UserId;
                 paiMaiItemInfo2.Price = paiMaiItemInfo.Price;
                 paiMaiItemInfo2.PlayerName = paiMaiItemInfo.PlayerName;
                 paiMaiItemInfo2.SellTime = paiMaiItemInfo.SellTime;
-                
+
                 response.PaiMaiItemInfo = paiMaiItemInfo2;
             }
 
-            
+
             if (request.UnitId != request.PaiMaiItemInfo.UserId)
             {
                 long locationactor = request.PaiMaiItemInfo.UserId;
 
                 P2M_PaiMaiBuyInfoRequest r2M_RechargeRequest = P2M_PaiMaiBuyInfoRequest.Create();
-                r2M_RechargeRequest.PlayerId = request.UnitId ;
+                r2M_RechargeRequest.PlayerId = request.UnitId;
                 r2M_RechargeRequest.CostGold = (long)(needGold * 0.95f);
-                M2P_PaiMaiBuyInfoResponse m2G_RechargeResponse = (M2P_PaiMaiBuyInfoResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(locationactor, r2M_RechargeRequest);
+                M2P_PaiMaiBuyInfoResponse m2G_RechargeResponse = (M2P_PaiMaiBuyInfoResponse)await scene.Root()
+                        .GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(locationactor, r2M_RechargeRequest);
 
                 if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
                 {
@@ -102,8 +104,8 @@ namespace ET.Server
                                 locationactor);
                     if (dataCollationComponent != null)
                     {
-                        dataCollationComponent.UpdateBuySelfPlayerList((long)(needGold * 0.95f), request.UnitId , false);
-                        UnitCacheHelper.SaveComponentCache(scene.Root(),dataCollationComponent).Coroutine();
+                        dataCollationComponent.UpdateBuySelfPlayerList((long)(needGold * 0.95f), request.UnitId, false);
+                        UnitCacheHelper.SaveComponentCache(scene.Root(), dataCollationComponent).Coroutine();
                     }
 
                     NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), locationactor);
@@ -111,11 +113,12 @@ namespace ET.Server
                     {
                         long paimaigold = numericComponent.GetAsLong(NumericType.PaiMaiTodayGold) + (long)(needGold * 0.95f);
                         numericComponent.ApplyValue(NumericType.PaiMaiTodayGold, paimaigold, false);
-                        UnitCacheHelper.SaveComponentCache(scene.Root(),numericComponent).Coroutine();
+                        UnitCacheHelper.SaveComponentCache(scene.Root(), numericComponent).Coroutine();
                     }
                 }
-            
-            await ETTask.CompletedTask;
+
+                await ETTask.CompletedTask;
+            }
         }
     }
 }
