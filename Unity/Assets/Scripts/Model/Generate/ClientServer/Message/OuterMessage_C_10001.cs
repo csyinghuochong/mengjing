@@ -16313,6 +16313,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public int Position { get; set; }
 
+        [MemoryPackOrder(2)]
+        public long UnitId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -16324,6 +16327,7 @@ namespace ET
             this.ActorId = default;
             this.UnionId = default;
             this.Position = default;
+            this.UnitId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

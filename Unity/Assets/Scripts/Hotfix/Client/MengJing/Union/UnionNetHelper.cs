@@ -127,7 +127,7 @@
             C2U_UnionKeJiQuickRequest request = C2U_UnionKeJiQuickRequest.Create();
             request.UnionId = unionId;
             request.Position = position;
-
+            request.UnitId = UnitHelper.GetMyUnitId(root);
             U2C_UnionKeJiQuickResponse response = (U2C_UnionKeJiQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }

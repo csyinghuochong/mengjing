@@ -3757,6 +3757,7 @@ message C2U_UnionKeJiQuickRequest // IUnionActorRequest
 	int64 ActorId = 93;
 	int64 UnionId = 1;
 	int32 Position = 2;
+	int64 UnitId = 3;
 }
 
 message U2C_UnionKeJiQuickResponse // IUnionActorResponse

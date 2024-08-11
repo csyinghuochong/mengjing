@@ -11,7 +11,6 @@
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
                 return;
             }
-
             if (dBUnionInfo.UnionInfo.KeJiActiteTime == 0)
             {
                 response.Error = ErrorCode.ERR_Union_NotActive;
@@ -31,7 +30,7 @@
             ////需要向游戏服发送协议扣除钻石
             U2M_UnionKeJiQuickRequest r2M_RechargeRequest = U2M_UnionKeJiQuickRequest.Create();
             r2M_RechargeRequest.Cost = cost;
-            M2U_UnionKeJiQuickResponse m2G_RechargeResponse = (M2U_UnionKeJiQuickResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.ActorId, r2M_RechargeRequest);
+            M2U_UnionKeJiQuickResponse m2G_RechargeResponse = (M2U_UnionKeJiQuickResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.UnitId, r2M_RechargeRequest);
             if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
             {
                 response.Error = m2G_RechargeResponse.Error;

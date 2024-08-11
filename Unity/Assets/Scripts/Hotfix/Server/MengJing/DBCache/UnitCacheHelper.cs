@@ -222,9 +222,9 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Rank.ToString()).ActorId;
         }
         
-        public static ActorId GetFubenCenterId(int zone)
+        public static ActorId GetFubenCenterId(int zone, int index = 1)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.FubenCenter.ToString()).ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "FubenCenter" + index).ActorId;
         }
         
         public static ActorId GetUnionServerId(int zone)
