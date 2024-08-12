@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_PetInfoShow))]
-    [EntitySystemOf(typeof (ES_PetXiLian))]
-    [FriendOfAttribute(typeof (ES_PetXiLian))]
+    [FriendOf(typeof(ES_PetInfoShow))]
+    [EntitySystemOf(typeof(ES_PetXiLian))]
+    [FriendOfAttribute(typeof(ES_PetXiLian))]
     public static partial class ES_PetXiLianSystem
     {
         [EntitySystem]
@@ -50,8 +50,8 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 136)
             {
-                // UI ui1 = await UIHelper.Create(self.ZoneScene(), UIType.UIPetXiLianLockSkill);
-                // ui1.GetComponent<UIPetXiLianLockSkillComponent>().UpdateSkillList(self.RolePetInfo, self.CostItemInfo).Coroutine();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetXiLianLockSkill);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetXiLianLockSkill>().UpdateSkillList(self.RolePetInfo, self.CostItemInfo);
                 return;
             }
 

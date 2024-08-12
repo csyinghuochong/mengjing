@@ -83,23 +83,26 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new PetFenJieUpdate());
         }
 
-        public static async ETTask<int> RequestXiLian(Scene root, long itemId, long petId)
+        public static async ETTask<M2C_RolePetXiLian> RequestXiLian(Scene root, long bagInfoID, long petInfoId, int costItemNum = 0,
+        string paramInfo = null)
         {
             C2M_RolePetXiLian request = C2M_RolePetXiLian.Create();
-            request.BagInfoID = itemId;
-            request.PetInfoId = petId;
+            request.BagInfoID = bagInfoID;
+            request.PetInfoId = petInfoId;
+            request.CostItemNum = costItemNum;
+            request.ParamInfo = paramInfo;
 
             M2C_RolePetXiLian response = (M2C_RolePetXiLian)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponentC>().RequestXiLian(itemId, petId, response.rolePetInfo);
+                root.GetComponent<PetComponentC>().RequestXiLian(bagInfoID, petInfoId, response.rolePetInfo);
             }
 
             HintHelp.ShowHint(root, "道具在宠物身上发生了作用！");
             EventSystem.Instance.Publish(root, new PetXiLianUpdate());
 
-            return response.Error;
+            return response;
         }
 
         public static async ETTask<int> RequestChangePos(Scene root, int index1, int index2)
