@@ -76,20 +76,22 @@ public partial class UICodeSpawner
 			FindAllWidgets(gameObject.transform, "");
 
 
+			Dictionary<string, string> reNameMap = new();
+			
 			string[] lines = File.ReadAllLines(files[0]);
-			bool start = false;
+			bool registerStart = false;
 			using (StreamWriter writer = new StreamWriter(files[0]))
 			{
 				for (int i = 0; i < lines.Length; i++)
 				{
 					string trimmedLine = lines[i].TrimStart();
 
-					if (!start && trimmedLine.StartsWith(startStr))
+					if (!registerStart && trimmedLine.StartsWith(startStr))
 					{
-						start = true;
+						registerStart = true;
 					}
 
-					if (start)
+					if (registerStart)
 					{
 						foreach (var key in Path2WidgetCachedDict.Keys.ToList())
 						{
@@ -104,11 +106,35 @@ public partial class UICodeSpawner
 									continue;
 								}
 
-								// if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
-								// {
-								// 	Path2WidgetCachedDict.Remove(key);
-								// 	break;
-								// }
+								if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
+								{
+									Path2WidgetCachedDict.Remove(key);
+									
+									string pattern = @"AddListener(?:Async)?\(([^;]+)\);";
+									
+									Match match = Regex.Match(lines[i], pattern);
+
+									if (match.Success)
+									{
+										string innerContent = match.Groups[1].Value;
+
+										Match methodMatch = Regex.Match(innerContent, @"self\.(\w+)");
+										if (methodMatch.Success)
+										{
+											string methodName = methodMatch.Groups[1].Value;
+
+											if (methodName != $"On{key.Substring(2)}Button")
+											{
+												reNameMap.Add(methodName, $"On{key.Substring(2)}Button");
+
+												string replace = lines[i].Replace(methodName, $"On{key.Substring(2)}Button");
+												lines[i] = replace;
+											}
+										}
+									}
+
+									break;
+								}
 							}
 						}
 
@@ -132,12 +158,23 @@ public partial class UICodeSpawner
 										continue;
 									}
 
-									writer.WriteLine($"            self.{view}{widgetName}.AddListener(self.On{key}Button);");
+									writer.WriteLine($"            self.{view}{widgetName}.AddListener(self.On{key.Substring(2)}Button);");
 									break;
 								}
 							}
 
-							start = false;
+							registerStart = false;
+						}
+					}
+
+					foreach (var key in reNameMap.Keys.ToList())
+					{
+						if (lines[i].Contains($"{key}(this"))
+						{
+							string replace = lines[i].Replace(key, reNameMap[key]);
+							lines[i] = replace;
+
+							reNameMap.Remove(key);
 						}
 					}
 
@@ -156,7 +193,7 @@ public partial class UICodeSpawner
 									continue;
 								}
 
-								writer.WriteLine($"        public static void On{key}Button(this {scroll}{gameObject.name} self)");
+								writer.WriteLine($"        public static void On{key.Substring(2)}Button(this {scroll}{gameObject.name} self)");
 								writer.WriteLine("        {");
 								writer.WriteLine("        }");
 								break;
