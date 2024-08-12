@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class Fuben_OnFubenSettlement: AEvent<Scene, FubenSettlement>
+    public class Fuben_OnFubenSettlement : AEvent<Scene, FubenSettlement>
     {
         protected override async ETTask Run(Scene scene, FubenSettlement args)
         {
@@ -53,7 +53,6 @@ namespace ET.Client
                 case SceneTypeEnum.PetTianTi:
                     FlyTipComponent.Instance.ShowFlyTip("宠物天梯对战结束！！！");
 
-                    // UIHelper.GetUI(args.Scene, UIType.UIPetMain).GetComponent<UIPetMainComponent>().OnFubenResult(args.m2C_FubenSettlement);
                     uiComponent.GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
@@ -64,7 +63,7 @@ namespace ET.Client
                     break;
                 case SceneTypeEnum.TrialDungeon:
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().StopTimer();
-                    PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win? "胜利" : "失败",
+                    PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
                         "恭喜你赢得了本场试炼的胜利！",
                         () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
                     break;

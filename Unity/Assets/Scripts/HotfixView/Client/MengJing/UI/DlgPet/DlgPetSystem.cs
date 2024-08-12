@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnPetFightSet_DlgPetRefresh: AEvent<Scene, OnPetFightSet>
+    public class DataUpdate_OnPetFightSet_DlgPetRefresh : AEvent<Scene, OnPetFightSet>
     {
         protected override async ETTask Run(Scene scene, OnPetFightSet args)
         {
@@ -9,9 +9,9 @@
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
-    public class DataUpdate_PetItemSelect_Refresh: AEvent<Scene, PetItemSelect>
+    public class DataUpdate_PetItemSelect_Refresh : AEvent<Scene, PetItemSelect>
     {
         protected override async ETTask Run(Scene scene, PetItemSelect args)
         {
@@ -21,7 +21,7 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_PetHeChengUpdate_Refresh: AEvent<Scene, PetHeChengUpdate>
+    public class DataUpdate_PetHeChengUpdate_Refresh : AEvent<Scene, PetHeChengUpdate>
     {
         protected override async ETTask Run(Scene scene, PetHeChengUpdate args)
         {
@@ -31,7 +31,7 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DDataUpdate_PetXiLianUpdate_Refresh: AEvent<Scene, PetXiLianUpdate>
+    public class DDataUpdate_PetXiLianUpdate_Refresh : AEvent<Scene, PetXiLianUpdate>
     {
         protected override async ETTask Run(Scene scene, PetXiLianUpdate args)
         {
@@ -40,11 +40,11 @@
         }
     }
 
-    [FriendOf(typeof (ES_PetList))]
-    [FriendOf(typeof (ES_PetHeCheng))]
-    [FriendOf(typeof (ES_PetXiLian))]
-    [FriendOf(typeof (ES_PetShouHu))]
-    [FriendOf(typeof (DlgPet))]
+    [FriendOf(typeof(ES_PetList))]
+    [FriendOf(typeof(ES_PetHeCheng))]
+    [FriendOf(typeof(ES_PetXiLian))]
+    [FriendOf(typeof(ES_PetShouHu))]
+    [FriendOf(typeof(DlgPet))]
     public static class DlgPetSystem
     {
         public static void RegisterUIEvent(this DlgPet self)
@@ -135,7 +135,7 @@
                 self.View.ES_PetXiLian.OnXiLianUpdate();
             }
         }
-        
+
         public static void OnPetFightSet(this DlgPet self)
         {
             if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
@@ -143,7 +143,7 @@
                 self.View.ES_PetList.OnPetFightingSet();
             }
         }
-        
+
         public static async ETTask RequestPetEquipSelect(this DlgPet self)
         {
             await self.View.ES_PetList.OnButtonEquipHeXin();

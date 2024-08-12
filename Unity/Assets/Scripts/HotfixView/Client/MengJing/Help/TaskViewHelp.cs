@@ -1329,17 +1329,17 @@ namespace ET.Client
 
         private static async ETTask OpenUIGivePet(Scene root, TaskPro taskPro)
         {
-            // UI ui = await UIHelper.Create(zoneScene, UIType.UIGivePet);
-            // ui.GetComponent<UIGivePetComponent>().InitTask(taskPro.taskID, 1);
-            // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
-            await ETTask.CompletedTask;
+            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GivePet);
+
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().InitTask(taskPro.taskID);
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnUpdateUI();
         }
 
         private static async ETTask OpenUIGiveTask(Scene root, TaskPro taskPro)
         {
-            // UI ui = await UIHelper.Create(zoneScene, UIType.UIGiveTask);
-            // ui.GetComponent<UIGiveTaskComponent>().InitTask(taskPro.taskID, 1);
-            await ETTask.CompletedTask;
+            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().InitTask(taskPro.taskID);
         }
 
         public static int GetFubenByNpc(int npcId)

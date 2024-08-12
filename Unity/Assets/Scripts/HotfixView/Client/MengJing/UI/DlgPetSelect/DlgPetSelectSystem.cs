@@ -69,11 +69,11 @@ namespace ET.Client
 
             if (self.OperationType == PetOperationType.JiaYuan_Walk)
             {
-                // JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-                // for (int i = 0; i < jiaYuanComponent.JiaYuanPetList_2.Count; i++)
-                // {
-                //     selected.Add(jiaYuanComponent.JiaYuanPetList_2[i].unitId);
-                // }
+                JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
+                for (int i = 0; i < jiaYuanComponent.JiaYuanPetList_2.Count; i++)
+                {
+                    selected.Add(jiaYuanComponent.JiaYuanPetList_2[i].unitId);
+                }
             }
 
             for (int i = 0; i < petComponent.RolePetInfos.Count; i++)

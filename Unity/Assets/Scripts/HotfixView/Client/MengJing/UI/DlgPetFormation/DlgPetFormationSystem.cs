@@ -81,7 +81,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFormation);
             if (self.SceneTypeEnum == SceneTypeEnum.PetDungeon)
             {
-                // UIHelper.Create(scene, UIType.UIPetSet).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetSet).Coroutine();
                 return;
             }
 
