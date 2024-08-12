@@ -355,7 +355,15 @@ namespace ET.Client
             UILayerScript uILayerScript = baseWindow.UIPrefabGameObject.GetComponent<UILayerScript>();
             if (uILayerScript.ShowHuoBi)
             {
-                self.OpenUIList.Insert(0, id);
+                if (self.OpenUIList.Contains(id))
+                {
+                    Log.Debug($"UI {id} 已经打开 OpenUIList");
+                }
+                else
+                {
+                    self.OpenUIList.Insert(0, id);
+                }
+
                 DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
                 if (dlgHuoBiSet != null)
                 {
