@@ -18,7 +18,6 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgUnionJingXuan self, Entity contextData = null)
         {
-            self.View.EG_ItemNodeListRectTransform.gameObject.SetActive(false);
         }
 
         public static void OnImageButtonButton(this DlgUnionJingXuan self)
@@ -46,8 +45,6 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_UnionJingXuan);
             }
-
-            await ETTask.CompletedTask;
         }
 
         public static UnionPlayerInfo GetUnionPlayerInfo(this DlgUnionJingXuan self, long playerid)

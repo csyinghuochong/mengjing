@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ItemNodeListRectTransform
+		public UnityEngine.UI.LoopVerticalScrollRect E_JingXuanItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -50,28 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_ItemNodeListRectTransform == null )
+     			if( this.m_E_JingXuanItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_EG_ItemNodeListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_ItemNodeList");
+		    		this.m_E_JingXuanItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JingXuanItems");
      			}
-     			return this.m_EG_ItemNodeListRectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_JingXuanItemRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_JingXuanItemRectTransform == null )
-     			{
-		    		this.m_EG_JingXuanItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_ItemNodeList/EG_JingXuanItem");
-     			}
-     			return this.m_EG_JingXuanItemRectTransform;
+     			return this.m_E_JingXuanItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -181,8 +164,7 @@ namespace ET.Client
 		{
 			this.m_E_ImageButtonButton = null;
 			this.m_E_ImageButtonImage = null;
-			this.m_EG_ItemNodeListRectTransform = null;
-			this.m_EG_JingXuanItemRectTransform = null;
+			this.m_E_JingXuanItemsLoopVerticalScrollRect = null;
 			this.m_EG_ButtonListRectTransform = null;
 			this.m_E_ButtonCancelButton = null;
 			this.m_E_ButtonCancelImage = null;
@@ -194,8 +176,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
 		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.RectTransform m_EG_ItemNodeListRectTransform = null;
-		private UnityEngine.RectTransform m_EG_JingXuanItemRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_JingXuanItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_ButtonListRectTransform = null;
 		private UnityEngine.UI.Button m_E_ButtonCancelButton = null;
 		private UnityEngine.UI.Image m_E_ButtonCancelImage = null;
