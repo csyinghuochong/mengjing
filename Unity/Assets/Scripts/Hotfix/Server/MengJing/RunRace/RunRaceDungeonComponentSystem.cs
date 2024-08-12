@@ -133,7 +133,7 @@ namespace ET.Server
         {
             if (!self.Close)
             {
-                if (self.CheckTime >= 10)
+                if (self.CheckTime >= 30)
                 {
                     self.CheckTime = 0;
                     self.OnPullBack();

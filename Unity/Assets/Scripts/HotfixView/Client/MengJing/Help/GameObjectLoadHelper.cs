@@ -14,8 +14,14 @@ namespace ET.Client
                 return;
             }
 
+          
             if (GameObjectPoolHelper.HaveObject(path))
             {
+                if (path.Contains("sets/Bundles/Unit/Monster/700010"))
+                {
+                    Log.Debug($"GameObjectPoolHelper.HaveObject(path):  {path}");
+                }
+                
                 GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
                 action(gameObject, formId);
                 return;
@@ -26,10 +32,21 @@ namespace ET.Client
 
         public static async ETTask LoadAssetSync(Scene root, string path, long formId, Action<GameObject, long> action)
         {
+            if (path.Contains("sets/Bundles/Unit/Monster/700010"))
+            {
+                Log.Debug($"GameObjectPoolHelper.LoadAssetSync:  {path}");
+            }
+            
             ResourcesLoaderComponent resourcesLoaderComponent = root.GetComponent<ResourcesLoaderComponent>();
             GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
             await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
             GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
+            
+            if (path.Contains("sets/Bundles/Unit/Monster/700010"))
+            {
+                Log.Debug($"GameObjectPoolHelper.GetObjectFromPool:  {path}   {gameObject != null}");
+            }
+            
             if (gameObject != null)
             {
                 action(gameObject, formId);

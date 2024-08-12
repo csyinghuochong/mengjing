@@ -93,7 +93,6 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             int unitType = unit.Type;
-            var path = string.Empty;
 
             switch (unitType)
             {
@@ -110,27 +109,25 @@ namespace ET.Client
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-
-                    if (runmonsterId > 0)
+                    
+                    if (cardtransform > 0)
                     {
-                        self.OnRunRaceMonster(0, runmonsterId, false);
+                        self.OnCardTranfer(cardtransform, false);
                     }
                     else
                     {
-                        self.OnRunRaceMonster(runmonsterId, cardtransform, false);
+                        self.OnRunRaceTranfer(runmonsterId, false);
                     }
-
+                    
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
-                        path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
-                        self.UnitAssetsPath = string.Empty;
+                        self.UnitAssetsPath  = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
                     }
 
+                    Log.Debug($"runmonsterId:  {runmonsterId}   cardtransform:{cardtransform}     id:{unit.Id}    instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
                     break;
                 case UnitType.Stall:
-                    path = ABPathHelper.GetUnitPath("Player/BaiTan");
-                    GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/BaiTan");;
                     break;
                 case UnitType.Monster:
                     int monsterId = unit.ConfigId;
@@ -152,20 +149,17 @@ namespace ET.Client
                         int itemid = monsterCof.Parameter[1];
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
                         int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
-                        path = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
-                        self.UnitAssetsPath = path;
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);;
                     }
                     else if (monsterCof.MonsterSonType == 59)
                     {
-                        path = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
-                        self.UnitAssetsPath = path;
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);;
                     }
                     else
                     {
-                        path = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
-                        self.UnitAssetsPath = path;
+                        self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);;
                     }
-
+                    Log.Debug($"monster: id:{unit.Id}   instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
                     break;
                 case UnitType.Pet:
                     int skinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
@@ -177,52 +171,47 @@ namespace ET.Client
                     }
 
                     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
-                    path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());;
                     break;
                 case UnitType.Bullet: //从特效里面加载
                     int skillid = unit.ConfigId;
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
                     self.DelayShow = (long)(1000 * effectConfig.SkillEffectDelayTime);
-                    path = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);;
                     break;
                 case UnitType.Npc:
                     int npcId = unit.ConfigId;
                     NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
-                    path = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Npc/" + config.Asset);;
                     break;
                 case UnitType.DropItem:
                     // DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
                     // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                    path = ABPathHelper.GetUnitPath($"Player/DropICoin");
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/DropICoin");;
                     break;
                 case UnitType.Chuansong:
-                    path = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
+                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
                     break;
                 case UnitType.JingLing:
                     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
                     // path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
-                    path = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
-                    self.UnitAssetsPath = path;
+                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
                     break;
                 case UnitType.Plant:
                     self.OnUpdatePlan();
                     break;
                 case UnitType.Pasture:
                     JiaYuanPastureConfig jiaYuanPastureConfig = JiaYuanPastureConfigCategory.Instance.Get(unit.ConfigId);
-                    path = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
+                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
                     break;
                 default:
                     break;
             }
 
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+                GameObjectLoadHelper.AddLoadQueue(self.Root(), self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
             }
         }
 
@@ -455,6 +444,8 @@ namespace ET.Client
 
         public static void OnLoadGameObject(this GameObjectComponent self, GameObject go, long formId)
         {
+            Log.Debug($"OnLoadGameObject:  {formId}    {self.UnitAssetsPath}");
+            
             if (self.IsDisposed)
             {
                 GameObject.Destroy(go);
@@ -497,6 +488,8 @@ namespace ET.Client
                     List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
                     go.transform.name = unit.Id.ToString();
 
+                    Log.Debug($"UnitType.Player.go.transform.name:  {go.transform.name}");
+                    
                     if (SettingData.AnimController == 0)
                     {
                         unit.AddComponent<AnimatorComponent>();
@@ -1107,8 +1100,44 @@ namespace ET.Client
             }
         }
 
-        public static void OnRunRaceMonster(this GameObjectComponent self, int runraceid, int cardmonsterid, bool remove)
+        /// <summary>
+        /// 变身卡
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="monsterid"></param>
+        /// <param name="remove"></param>
+        public static void OnCardTranfer(this GameObjectComponent self, int monsterid, bool remove)
         {
+            Unit unit = self.GetParent<Unit>();
+                                     
+            self.OnTranferHandler(monsterid, remove );
+                                     
+            if (unit.MainHero)
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnCardTranfer(monsterid);
+            }
+        }
+
+        /// <summary>
+        /// 奔跑大赛变身
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="monsterid"></param>
+        /// <param name="remove"></param>
+        public static void OnRunRaceTranfer(this GameObjectComponent self, int monsterid, bool remove)
+        {
+            Unit unit = self.GetParent<Unit>();
+                                     
+            self.OnTranferHandler(monsterid, remove );
+                                     
+            if (unit.MainHero)
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnRunRaceTranfer(monsterid);
+            }
+        }
+
+        public static void OnTranferHandler(this GameObjectComponent self, int monsterid, bool remove)
+        { 
             self.RecoverGameObject();
             self.Material = null;
             Unit unit = self.GetParent<Unit>();
@@ -1124,9 +1153,8 @@ namespace ET.Client
                 unit.RemoveComponent<UIPlayerHpComponent>();
             }
 
-            if (runraceid > 0 || cardmonsterid > 0)
+            if (monsterid > 0 )
             {
-                int monsterid = runraceid > 0 ? runraceid : cardmonsterid;
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
                 self.UnitAssetsPath = path;
@@ -1136,15 +1164,10 @@ namespace ET.Client
                 //string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
                 self.UnitAssetsPath = string.Empty;
             }
-
-            if (unit.MainHero)
-            {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnTransform(runraceid, cardmonsterid);
-            }
-
+            
             self.BianShenEffect = unit.MainHero && remove;
         }
-
+        
         public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
         {
             if (stallType > 0)

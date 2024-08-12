@@ -179,8 +179,13 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_Button_Switch_0Image.sprite = sp;
         }
-
-        public static void OnTransform(this ES_MainSkill self, int runraceid, int cardmonsterid)
+        
+        public static void OnCardTranfer(this ES_MainSkill self, int runraceid)
+        { 
+                    
+        }
+        
+        public static void OnRunRaceTranfer(this ES_MainSkill self, int runraceid)
         {
             //切换技能按钮。。 变身后只有一个技能按钮，读取monsterconfig.ActSkillID.. 
             if (runraceid > 0)

@@ -3,6 +3,7 @@
     [Event(SceneType.Current)]
     public class Unit_OnNumericUpdate: AEvent<Scene, NumbericChange>
     {
+        
         protected override async ETTask Run(Scene scene, NumbericChange args)
         {
             Scene root = scene.Root();
@@ -46,16 +47,19 @@
                     break;
                 case NumericType.RunRaceTransform:
                     int runraceMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.RunRaceTransform);
-                    args.Defend.GetComponent<GameObjectComponent>()?.OnRunRaceMonster(runraceMonster, 0, true);
+                    args.Defend.GetComponent<GameObjectComponent>()?.OnRunRaceTranfer(runraceMonster,  true);
                     if (args.Defend.MainHero)
                     {
                         args.Defend.Root().GetComponent<AttackComponent>().OnTransformId(args.Defend.ConfigId, runraceMonster);
                     }
-
                     break;
                 case NumericType.CardTransform:
                     int cardMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.CardTransform);
-                    args.Defend.GetComponent<GameObjectComponent>().OnRunRaceMonster(0, cardMonster, true);
+                    args.Defend.GetComponent<GameObjectComponent>().OnCardTranfer( cardMonster, true);
+                    if (args.Defend.MainHero)
+                    {
+                        args.Defend.Root().GetComponent<AttackComponent>().OnTransformId(args.Defend.ConfigId, cardMonster);
+                    }
                     break;
                 case NumericType.HappyCellIndex:
                     if (args.Defend.MainHero)
