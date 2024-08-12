@@ -83,19 +83,11 @@ namespace ET.Client
 
                 self.TitleList[chatInfo.ChannelId].SetActive(true);
 
-                //if (chatInfo.ChannelId == ChannelEnum.Word)
-                //{
-                //    self.Obj_ImgHeadIcon.SetActive(false);
-                //    self.Obj_ImgHeadIconXiTong.SetActive(true);
-                //}
-                //else
-                {
-                    self.E_HeadIconButton.gameObject.SetActive(true);
-                    self.E_HeadIconXiTongImage.gameObject.SetActive(false);
+                self.E_HeadIconButton.gameObject.SetActive(true);
+                self.E_HeadIconXiTongImage.gameObject.SetActive(false);
 
-                    self.E_HeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, chatInfo.Occ.ToString()));
-                }
+                self.E_HeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, chatInfo.Occ.ToString()));
 
                 self.uiTransform.gameObject.SetActive(true);
             }
@@ -109,9 +101,8 @@ namespace ET.Client
             }
 
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIWatchMenu);
-            // uI.GetComponent<UIWatchMenuComponent>().OnUpdateUI_1(MenuEnumType.Chat, self.mChatInfo.UserId, self.mChatInfo.PlayerName).Coroutine();
-            await ETTask.CompletedTask;
+            await uiComponent.ShowWindowAsync(WindowID.WindowID_WatchMenu);
+            uiComponent.GetDlgLogic<DlgWatchMenu>().OnUpdateUI_1(MenuEnumType.Chat, self.ChatInfo.UserId, self.ChatInfo.PlayerName, true).Coroutine();
         }
     }
 }

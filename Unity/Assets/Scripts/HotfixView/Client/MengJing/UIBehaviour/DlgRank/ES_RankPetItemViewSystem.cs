@@ -19,6 +19,11 @@ namespace ET.Client
             self.ImageIconList[2] = self.E_ImageIcon3Image.gameObject;
             self.ImageIconList[3] = self.E_ImageIcon4Image.gameObject;
             self.ImageIconList[4] = self.E_ImageIcon5Image.gameObject;
+            self.ImageIconList[4].GetComponent<Button>().AddListener(() => { self.OnImageIconList(4).Coroutine(); });
+            self.ImageIconList[3].GetComponent<Button>().AddListener(() => { self.OnImageIconList(3).Coroutine(); });
+            self.ImageIconList[2].GetComponent<Button>().AddListener(() => { self.OnImageIconList(2).Coroutine(); });
+            self.ImageIconList[1].GetComponent<Button>().AddListener(() => { self.OnImageIconList(1).Coroutine(); });
+            self.ImageIconList[0].GetComponent<Button>().AddListener(() => { self.OnImageIconList(0).Coroutine(); });
 
             self.E_Btn_PVPButton.AddListener(self.OnClickBtn_PVP);
         }
@@ -62,13 +67,9 @@ namespace ET.Client
                 return;
             }
 
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPetInfo);
-            // if (instanceid != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // uI.GetComponent<UIPetInfoComponent>().OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetInfo);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetInfo>()
+                    .OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
         }
 
         public static void OnInitUI(this ES_RankPetItem self, RankPetInfo rankPetInfo)

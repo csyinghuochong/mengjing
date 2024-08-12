@@ -51,18 +51,6 @@ namespace ET.Client
             self.E_Button_Cancle.GetComponent<Button>().onClick.RemoveAllListeners();
         }
 
-        public static async ETTask SkillInfoShow(this ES_MainSkillGrid self)
-        {
-            // UI skillTips = await UIHelper.Create(self.DomainScene(), UIType.UISkillTips);
-            //
-            // Vector2 localPoint;
-            // RectTransform canvas = UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject.GetComponent<RectTransform>();
-            // Camera uiCamera = self.DomainScene().GetComponent<UIComponent>().UICamera;
-            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
-            // skillTips.GetComponent<UISkillTipsComponent>().OnUpdateData(self.SkillPro.SkillID, new Vector3(localPoint.x, localPoint.y, 0f));
-            await ETTask.CompletedTask;
-        }
-
         public static void OnCancel(this ES_MainSkillGrid self, PointerEventData eventData)
         {
         }
