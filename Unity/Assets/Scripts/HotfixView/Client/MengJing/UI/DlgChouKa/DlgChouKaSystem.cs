@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,9 +45,9 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaProbExplain).Coroutine();
             });
-            self.View.E_Btn_WarehouseButton.AddListener(self.OnBtn_Warehouse);
-            self.View.E_Btn_ZhangJieXuanZeButton.AddListener(self.OnBtn_ZhangJieXuanZe);
-            self.View.E_Btn_ChouKaNumRewardButton.AddListener(self.OnBtn_ChouKaNumReward);
+            self.View.E_Btn_WarehouseButton.AddListener(self.OnBtn_WarehouseButton);
+            self.View.E_Btn_ZhangJieXuanZeButton.AddListener(self.OnBtn_ZhangJieXuanZeButton);
+            self.View.E_Btn_ChouKaNumRewardButton.AddListener(self.OnBtn_ChouKaNumRewardButton);
             self.View.E_Btn_ChouKaTenButton.AddListener(() => { self.OnBtn_ChouKaOne(10).Coroutine(); });
             self.View.E_Btn_ChouKaOneButton.AddListener(() => { self.OnBtn_ChouKaOne(1).Coroutine(); });
             self.View.ES_ChouKaChapterSelect.uiTransform.gameObject.SetActive(false);
@@ -86,7 +86,7 @@ namespace ET.Client
             return takeCardId;
         }
 
-        public static void OnBtn_Warehouse(this DlgChouKa self)
+        public static void OnBtn_WarehouseButton(this DlgChouKa self)
         {
             self.SetRedDot(false);
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaWarehouse).Coroutine();
@@ -122,12 +122,12 @@ namespace ET.Client
             self.View.ES_RewardList.Refresh(itemList, 0.8f);
         }
 
-        public static void OnBtn_ZhangJieXuanZe(this DlgChouKa self)
+        public static void OnBtn_ZhangJieXuanZeButton(this DlgChouKa self)
         {
             self.View.ES_ChouKaChapterSelect.uiTransform.gameObject.SetActive(true);
         }
 
-        public static void OnBtn_ChouKaNumReward(this DlgChouKa self)
+        public static void OnBtn_ChouKaNumRewardButton(this DlgChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaReward).Coroutine();
         }
