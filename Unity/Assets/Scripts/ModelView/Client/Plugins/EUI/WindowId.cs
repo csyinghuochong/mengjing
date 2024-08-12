@@ -186,5 +186,6 @@ namespace ET.Client
 		WindowID_TeamDungeonSettlement,
 		WindowID_GiveTask,
 		WindowID_GivePet,
+		WindowID_WearWeapon,
 	}
 }
