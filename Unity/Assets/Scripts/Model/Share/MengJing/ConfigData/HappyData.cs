@@ -17,8 +17,15 @@ namespace ET
         [StaticField]
         public static List<float3> PositionList = new List<float3>()
         {
-            new float3(25.59f, 0.00f, -7.07f),
-            new float3(18.02f, 0.00f, -12.53f),
+            new float3(22.73f, 0.00f, -4.37f),
+            new float3(22.73f, 0.00f, -7.37f),
+            new float3(22.73f, 0.00f, -10.37f),
+            new float3(22.73f, 0.00f, -13.37f),
+            new float3(19.78f, 0.00f, -4.37f),
+            new float3(19.78f, 0.00f, -4.37f),
+            new float3(19.78f, 0.00f, -7.37f),
+            new float3(19.78f, 0.00f, -10.37f),
+            new float3(19.78f, 0.00f, -13.37f),
         };
     }
 }

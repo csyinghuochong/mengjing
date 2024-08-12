@@ -167,7 +167,6 @@ namespace ET.Server
                 }
 
                 self.HaveArrived = true;
-
                 ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
                 RankingInfo rankPetInfo = RankingInfo.Create();
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();

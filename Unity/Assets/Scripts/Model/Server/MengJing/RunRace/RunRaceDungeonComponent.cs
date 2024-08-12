@@ -17,7 +17,7 @@ namespace ET.Server
 
         public bool HaveArrived;
 
-        public float3 EndPosition = new float3(-25.59f, 0f, -7.07f);
+        public float3 EndPosition = new float3(26f, 0f, -6.5f);
     }
     
 }
