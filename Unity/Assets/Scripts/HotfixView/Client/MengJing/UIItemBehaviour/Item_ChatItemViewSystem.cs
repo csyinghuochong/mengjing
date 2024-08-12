@@ -22,6 +22,7 @@ namespace ET.Client
         {
             self.E_HeadIconButton.AddListenerAsync(self.OnWatchNemu);
             self.E_NameButton.AddListenerAsync(self.OnWatchNemu);
+            self.E_TextButton.AddListener(self.OnText_TMP);
             for (int i = 0; i < ChannelEnum.Number; i++)
             {
                 using (zstring.Block())
@@ -103,6 +104,47 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             await uiComponent.ShowWindowAsync(WindowID.WindowID_WatchMenu);
             uiComponent.GetDlgLogic<DlgWatchMenu>().OnUpdateUI_1(MenuEnumType.Chat, self.ChatInfo.UserId, self.ChatInfo.PlayerName, true).Coroutine();
+        }
+
+        public static async ETTask OnClickRickText(this Scroll_Item_ChatItem self, string text)
+        {
+            string[] paramss = text.Split('_');
+            if (paramss[0] == "team" && paramss.Length >= 5)
+            {
+                TeamNetHelper.TeamDungeonApplyRequest(self.Root(), long.Parse(paramss[1]), int.Parse(paramss[2]), int.Parse(paramss[3]),
+                    int.Parse(paramss[4]), true).Coroutine();
+            }
+
+            if (paramss[0] == "paimai")
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMai);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>().OnClickGoToPaiMai(int.Parse(paramss[1]), long.Parse(paramss[2]));
+            }
+        }
+
+        public static void OnText_TMP(this Scroll_Item_ChatItem self)
+        {
+            ChatInfo chatInfo = self.ChatInfo;
+
+            int startindex = chatInfo.ChatMsg.IndexOf("<link=", StringComparison.Ordinal);
+            int endindex = chatInfo.ChatMsg.IndexOf("></link>", StringComparison.Ordinal);
+
+            if (startindex == -1 || endindex == -1)
+            {
+                return;
+            }
+
+            startindex += 6;
+            int lenght = endindex - startindex;
+            if (lenght <= 0)
+            {
+                return;
+            }
+
+            string showValue = string.Empty;
+            showValue = chatInfo.ChatMsg.Substring(startindex, lenght);
+
+            self.OnClickRickText(showValue).Coroutine();
         }
     }
 }

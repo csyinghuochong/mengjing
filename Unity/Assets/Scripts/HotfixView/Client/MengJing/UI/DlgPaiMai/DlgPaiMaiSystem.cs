@@ -1,10 +1,10 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (ES_PaiMaiShop))]
-    [FriendOf(typeof (ES_PaiMaiBuy))]
-    [FriendOf(typeof (ES_PaiMaiSell))]
-    [FriendOf(typeof (ES_PaiMaiDuiHuan))]
-    [FriendOf(typeof (DlgPaiMai))]
+    [FriendOf(typeof(ES_PaiMaiShop))]
+    [FriendOf(typeof(ES_PaiMaiBuy))]
+    [FriendOf(typeof(ES_PaiMaiSell))]
+    [FriendOf(typeof(ES_PaiMaiDuiHuan))]
+    [FriendOf(typeof(DlgPaiMai))]
     public static class DlgPaiMaiSystem
     {
         public static void RegisterUIEvent(this DlgPaiMai self)
@@ -38,6 +38,12 @@
                 case 4:
                     break;
             }
+        }
+
+        public static void OnClickGoToPaiMai(this DlgPaiMai self, int itemType, long paimaiItemId)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
+            self.View.ES_PaiMaiBuy.OnClickGoToPaiMai(itemType, paimaiItemId).Coroutine();
         }
     }
 }
