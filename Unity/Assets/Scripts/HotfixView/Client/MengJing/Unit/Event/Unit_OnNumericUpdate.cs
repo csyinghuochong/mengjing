@@ -201,11 +201,11 @@
                     break;
                 case NumericType.JiaYuanPickOther:
                 case NumericType.JiaYuanGatherOther:
-                    // uI = UIHelper.GetUI(args.Unit.ZoneScene(), UIType.UIJiaYuanMain);
-                    // if (uI != null)
-                    // {
-                    //     uI.GetComponent<UIJiaYuanMainComponent>().UIJiaYuaVisitComponent.UpdateGatherTimes();
-                    // }
+                    DlgJiaYuanMain dlgJiaYuanMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>();
+                    if (dlgJiaYuanMain != null)
+                    {
+                        dlgJiaYuanMain.View.ES_JiaYuaVisit.UpdateGatherTimes();
+                    }
 
                     break;
                 case NumericType.BattleTodayKill:

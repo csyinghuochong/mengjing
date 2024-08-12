@@ -488,16 +488,16 @@ namespace ET.Client
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
                 if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10)
                 {
-                    // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGiveTask);
-                    // ui.GetComponent<UIGiveTaskComponent>().InitTask(self.TaskPro.taskID, 1);
-                    // ui.GetComponent<UIGiveTaskComponent>().OnGiveAction = self.UpdateSeasonTask;
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().InitTask(self.TaskPro.taskID);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().OnGiveAction = self.UpdateSeasonTask;
                 }
                 else if (taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGivePet);
-                    // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskPro.taskID, 1);
-                    // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
-                    // ui.GetComponent<UIGivePetComponent>().OnGiveAction = self.UpdateSeasonTask;
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GivePet);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().InitTask(self.TaskPro.taskID);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnUpdateUI();
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnGiveAction = self.UpdateSeasonTask;
                 }
             }
             else
@@ -505,20 +505,18 @@ namespace ET.Client
                 TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.GiveItem_10)
                 {
-                    // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGiveTask);
-                    // ui.GetComponent<UIGiveTaskComponent>().InitTask(self.TaskPro.taskID, 2);
-                    // ui.GetComponent<UIGiveTaskComponent>().OnGiveAction = self.UpdateSeasonDayTask;
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().InitTask(self.TaskPro.taskID);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().OnGiveAction = self.UpdateSeasonDayTask;
                 }
                 else if (taskCountryConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGivePet);
-                    // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskPro.taskID, 2);
-                    // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
-                    // ui.GetComponent<UIGivePetComponent>().OnGiveAction = self.UpdateSeasonDayTask;
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GivePet);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().InitTask(self.TaskPro.taskID);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnUpdateUI();
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnGiveAction = self.UpdateSeasonDayTask;
                 }
             }
-
-            await ETTask.CompletedTask;
         }
 
         public static void UpdateSeasonTask(this ES_SeasonTask self)
