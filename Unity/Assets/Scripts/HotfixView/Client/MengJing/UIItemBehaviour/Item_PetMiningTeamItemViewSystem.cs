@@ -97,13 +97,13 @@ namespace ET.Client
                     GameObject goItem = GameObject.Instantiate(bundleGameObject);
                     CommonViewHelper.SetParent(goItem, self.PetIcon_di_List[i]);
                     goItem.transform.localScale = Vector3.one * 0.6f;
-                    Scroll_Item_PetFormationItem FormationItem = self.AddChild<Scroll_Item_PetFormationItem>();
-                    FormationItem.uiTransform = goItem.transform;
-                    self.FormationItemComponents[i] = FormationItem;
-                    FormationItem.BeginDragHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-                    FormationItem.DragingHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-                    FormationItem.EndDragHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
-                    FormationItem.SetDragEnable(true);
+                    item = self.AddChild<Scroll_Item_PetFormationItem>();
+                    item.uiTransform = goItem.transform;
+                    self.FormationItemComponents[i] = item;
+                    item.BeginDragHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+                    item.DragingHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+                    item.EndDragHandler = (RolePetInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+                    item.SetDragEnable(true);
                 }
 
                 if (rolePetInfo == null && item != null)
