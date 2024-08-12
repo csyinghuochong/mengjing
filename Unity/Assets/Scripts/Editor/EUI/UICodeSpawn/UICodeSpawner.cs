@@ -104,11 +104,11 @@ public partial class UICodeSpawner
 									continue;
 								}
 
-								if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
-								{
-									Path2WidgetCachedDict.Remove(key);
-									break;
-								}
+								// if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
+								// {
+								// 	Path2WidgetCachedDict.Remove(key);
+								// 	break;
+								// }
 							}
 						}
 
