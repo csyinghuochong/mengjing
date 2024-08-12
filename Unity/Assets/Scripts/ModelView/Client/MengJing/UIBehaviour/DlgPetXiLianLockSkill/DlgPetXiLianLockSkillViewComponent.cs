@@ -1,0 +1,112 @@
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[ComponentOf(typeof(DlgPetXiLianLockSkill))]
+	[EnableMethod]
+	public  class DlgPetXiLianLockSkillViewComponent : Entity,IAwake,IDestroy 
+	{
+		public UnityEngine.UI.Button E_Btn_CloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_CloseButton == null )
+     			{
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
+     			}
+     			return this.m_E_Btn_CloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_CloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_CloseImage == null )
+     			{
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
+     			}
+     			return this.m_E_Btn_CloseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
+     			}
+     			return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_LockBtnButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LockBtnButton == null )
+     			{
+		    		this.m_E_LockBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_LockBtn");
+     			}
+     			return this.m_E_LockBtnButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_LockBtnImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LockBtnImage == null )
+     			{
+		    		this.m_E_LockBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LockBtn");
+     			}
+     			return this.m_E_LockBtnImage;
+     		}
+     	}
+
+		public void DestroyWidget()
+		{
+			this.m_E_Btn_CloseButton = null;
+			this.m_E_Btn_CloseImage = null;
+			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+			this.m_E_LockBtnButton = null;
+			this.m_E_LockBtnImage = null;
+			this.uiTransform = null;
+		}
+
+		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_LockBtnButton = null;
+		private UnityEngine.UI.Image m_E_LockBtnImage = null;
+		public Transform uiTransform = null;
+	}
+}

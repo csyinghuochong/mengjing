@@ -187,5 +187,6 @@ namespace ET.Client
 		WindowID_GiveTask,
 		WindowID_GivePet,
 		WindowID_WearWeapon,
+		WindowID_PetXiLianLockSkill,
 	}
 }
