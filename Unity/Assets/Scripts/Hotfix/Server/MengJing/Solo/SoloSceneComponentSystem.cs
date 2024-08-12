@@ -260,7 +260,11 @@ namespace ET.Server
             }
 
             self.MatchList.Add(teamPlayerInfo);
-            
+            if (ComHelperS.IsInnerNet())
+            {
+                self.MatchList.Add(teamPlayerInfo);
+            }
+
             //添加积分列表
             if (!self.PlayerIntegralList.ContainsKey(teamPlayerInfo.UnitId))
             {
