@@ -655,7 +655,7 @@ namespace ET.Server
              if (sceneType == SceneTypeEnum.TeamDungeon)
              {
                  //副本的怪物难度提升（类似不难度的个人副本 给个配置即可）
-                 int realplayerNumber = nowUnit.Scene().GetComponent<TeamDungeonComponent>().InitPlayerNumber();
+                 int realplayerNumber = nowUnit.Scene().GetComponent<TeamDungeonComponent>().GetRealPlayerNumber();
                  fubenDifficulty = mapComponent.FubenDifficulty;
                  //深渊BOSSS属性加成
                  if (fubenDifficulty == TeamFubenType.ShenYuan && monsterConfig.MonsterType == MonsterTypeEnum.Boss)

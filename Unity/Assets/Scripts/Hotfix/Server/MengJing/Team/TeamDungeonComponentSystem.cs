@@ -3,15 +3,14 @@ using System.Linq;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (TeamDungeonComponent))]
-    [FriendOf(typeof (TeamDungeonComponent))]
+    [EntitySystemOf(typeof(TeamDungeonComponent))]
+    [FriendOf(typeof(TeamDungeonComponent))]
     public static partial class TeamDungeonComponentSystem
     {
         [EntitySystem]
         private static void Awake(this TeamDungeonComponent self)
         {
             self.EnterTime = 0;
-            self.TeamInfo = null;
             self.BoxReward.Clear();
             self.ItemFlags.Clear();
             self.TeamDropItems.Clear();
@@ -24,31 +23,12 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void InitPlayerList(this TeamDungeonComponent self)
+        public static void AddPlayerList(this TeamDungeonComponent self, long unitid)
         {
-            for (int i = 0; i < self.TeamInfo.PlayerList.Count; i++)
-            {
-                if (self.TeamPlayers.ContainsKey(self.TeamInfo.PlayerList[i].UserID))
-                {
-                    Log.Warning($"InitPlayerList.Error: {self.TeamInfo.PlayerList[i].UserID}");
-                    continue;
-                }
-
-                self.TeamPlayers.Add(self.TeamInfo.PlayerList[i].UserID, self.TeamInfo.PlayerList[i]);
-            }
+            self.TeamPlayers[unitid] = TeamPlayerInfo.Create();
+            
         }
-
-        public static int InitPlayerNumber(this TeamDungeonComponent self)
-        {
-            int InitPlayerNumber = 0;
-            for (int i = 0; i < self.TeamInfo.PlayerList.Count; i++)
-            {
-                InitPlayerNumber += (self.TeamInfo.PlayerList[i].RobotId == 0? 1 : 0);
-            }
-
-            return InitPlayerNumber;
-        }
-
+        
         public static void Check(this TeamDungeonComponent self)
         {
             if (self.TeamDropItems.Count == 0)
@@ -210,6 +190,11 @@ namespace ET.Server
             return haveplayer;
         }
 
+        public static int GetRealPlayerNumber(this TeamDungeonComponent self)
+        {
+            return 1;
+        }
+
         public static void OnUpdateDamage(this TeamDungeonComponent self, Unit attack, Unit defend, long damage)
         {
             if (defend.Type != UnitType.Monster)
@@ -217,7 +202,7 @@ namespace ET.Server
                 return;
             }
 
-            List<TeamPlayerInfo> vs = self.TeamInfo.PlayerList;
+            List<TeamPlayerInfo> vs = self.TeamPlayers.Values.ToList();
             for (int i = 0; i < vs.Count; i++)
             {
                 if (vs[i].UserID == attack.Id)
@@ -236,7 +221,7 @@ namespace ET.Server
             for (int i = 0; i < allPlayer.Count; i++)
             {
                 M2C_SyncMiJingDamage m2C_SyncMiJingDamage = M2C_SyncMiJingDamage.Create();
-                m2C_SyncMiJingDamage.DamageList.AddRange(self.TeamInfo.PlayerList);
+                m2C_SyncMiJingDamage.DamageList.AddRange(self.TeamPlayers.Values.ToList());
                 MapMessageHelper.SendToClient(allPlayer[i], m2C_SyncMiJingDamage);
             }
         }
@@ -291,7 +276,7 @@ namespace ET.Server
 
             if (unit.IsBoss())
             {
-                Unit leader = unit.GetParent<UnitComponent>().Get(self.TeamInfo.TeamId);
+                Unit leader = unit.GetParent<UnitComponent>().Get(self.TeamId);
                 if (leader != null && self.FubenType == TeamFubenType.XieZhu)
                 {
                     //协助副本掉落
@@ -309,7 +294,8 @@ namespace ET.Server
                 self.BossDeadPosition = unit.Position;
             }
 
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(self.TeamInfo.SceneId);
+            int sceneid = self.Scene().GetComponent<MapComponent>().SceneId;
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
             if (unit.ConfigId != sceneConfig.BossId)
             {
                 return false;
@@ -317,7 +303,7 @@ namespace ET.Server
 
             M2C_TeamDungeonSettlement m2C_FubenSettlement = M2C_TeamDungeonSettlement.Create();
             m2C_FubenSettlement.PassTime = 5 * 60 * 1000;
-            m2C_FubenSettlement.PlayerList = self.TeamInfo.PlayerList;
+            m2C_FubenSettlement.PlayerList = self.TeamPlayers.Values.ToList();
 
             DropHelper.DropIDToDropItem_2(sceneConfig.BoxDropID, m2C_FubenSettlement.RewardExtraItem);
 
@@ -365,7 +351,7 @@ namespace ET.Server
                 int hurtvalue = 0;
                 hurtList.TryGetValue(unititem.Id, out hurtvalue);
                 int hurtRate = (int)(hurtvalue * 100f / damageTotal);
-                unititem.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
+                unititem.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TeamDungeonHurt_136, sceneid, hurtRate);
 
                 unititem.GetComponent<TaskComponentS>().OnPassTeamFuben();
                 unititem.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PassTeamFubenNumber_20, 0, 1);
@@ -382,7 +368,68 @@ namespace ET.Server
 
                 MapMessageHelper.SendToClient(unititem, m2C_FubenSettlement);
             }
+
             return true;
+        }
+
+        /// <summary>
+        /// 组队副本返回主城
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public static void OnUnitReturn(this TeamDungeonComponent self, long unitId)
+        {
+            M2C_TeamDungeonQuitMessage m2CTeamDungeonQuitMessage = M2C_TeamDungeonQuitMessage.Create();
+            List<Unit> allunits = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
+                {
+                    continue;
+                }
+
+                MapMessageHelper.SendToClient(allunits[i], m2CTeamDungeonQuitMessage);
+            }
+
+            if (allunits.Count > 0)
+            {
+                return;
+            }
+
+            self.OnDungeonOver(unitId);
+        }
+
+        /// <summary>
+        /// 玩家离线， unit已经移除了
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public static void OnUnitDisconnect(this TeamDungeonComponent self, long unitId)
+        {
+            if (self.IsHavePlayer())
+            {
+                return;
+            }
+
+            self.OnDungeonOver(self.TeamId);
+        }
+
+        public static void OnDungeonOver(this TeamDungeonComponent self, long teamId)
+        {
+            // TeamInfo teamInfo = self.GetTeamInfo(teamId);
+            // if (teamInfo != null)
+            // {
+            //     for (int i = 0; i < teamInfo.PlayerList.Count; i++)
+            //     {
+            //         teamInfo.PlayerList[i].Damage = 0;
+            //     }
+            //
+            //     teamInfo.FubenUUId = 0;
+            //     teamInfo.FubenInstanceId = 0;
+            // }
+            
         }
     }
 }

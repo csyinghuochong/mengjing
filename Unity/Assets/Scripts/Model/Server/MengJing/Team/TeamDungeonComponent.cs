@@ -20,14 +20,14 @@ namespace ET.Server
         public long Timer;
         public int FubenType { get; set; }
         public long EnterTime { get; set; }
-        public TeamInfo TeamInfo { get; set; }
-
-        public List<long> EnterPlayers { get; set; } = new List<long> { };    
-
+        
+        public long TeamId { get; set; }
+        
         public Dictionary<long, TeamPlayerInfo> TeamPlayers  { get; set; }= new Dictionary<long, TeamPlayerInfo>();
 
         public List<int> BoxReward  { get; set; }= new List<int>();
         public List<int> KillBossList  { get; set; }= new List<int>();
+        
         public List<TeamDropItem> TeamDropItems { get; set; } = new List<TeamDropItem>();
         public Dictionary<long, long> ItemFlags  { get; set; }= new Dictionary<long, long>();
 

@@ -124,11 +124,11 @@ namespace ET.Server
                     {
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
                         int fubenType = teamDungeonComponent.FubenType;
-                        bool firstEnter = !teamDungeonComponent.EnterPlayers.Contains(unit.Id);
+                        bool firstEnter = !teamDungeonComponent.TeamPlayers.ContainsKey(unit.Id);
                         if (firstEnter)
                         {
-                            teamDungeonComponent.EnterPlayers.Add(unit.Id);
-                            if (fubenType == TeamFubenType.XieZhu && unit.Id == teamDungeonComponent.TeamInfo.TeamId)
+                            teamDungeonComponent.AddPlayerList( unit.Id );
+                            if (fubenType == TeamFubenType.XieZhu && unit.Id == teamDungeonComponent.TeamId)
                             {
                                 int times_2 = unit.GetTeamDungeonXieZhu();
                                 int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
@@ -146,7 +146,7 @@ namespace ET.Server
                                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() + 1);
                             }
 
-                            if (fubenType == TeamFubenType.ShenYuan && unit.Id == teamDungeonComponent.TeamInfo.TeamId)
+                            if (fubenType == TeamFubenType.ShenYuan && unit.Id == teamDungeonComponent.TeamId)
                             {
                                 unit.GetComponent<BagComponentS>().OnCostItemData($"{CommonHelp.ShenYuanCostId};1");
                             }

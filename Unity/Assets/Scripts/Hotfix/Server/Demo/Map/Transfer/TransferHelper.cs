@@ -488,12 +488,12 @@ namespace ET.Server
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.SceneType;
-                        mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Team").ActorId;
+                        mapInstanceId = UnitCacheHelper.GetFubenCenterId(unit.Zone());
                         //[创建副本Scene]
 
-                        M2T_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2T_TeamDungeonEnterRequest.Create();
+                        M2F_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2F_TeamDungeonEnterRequest.Create();
                         M2T_TeamDungeonEnterRequest.UserID = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId;
-                        T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        F2M_TeamDungeonEnterResponse createUnit = (F2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2T_TeamDungeonEnterRequest);
                         if (createUnit.Error != ErrorCode.ERR_Success)
                         {

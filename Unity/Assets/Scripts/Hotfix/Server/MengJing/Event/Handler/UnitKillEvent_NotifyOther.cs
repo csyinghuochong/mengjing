@@ -229,7 +229,7 @@ namespace ET.Server
                     bool dungeonover = TeamDungeonComponent.OnKillEvent(defendUnit);
                     if (dungeonover)
                     {
-                        (domainScene.Parent as TeamSceneComponent).OnDungeonOver(TeamDungeonComponent.TeamInfo.TeamId);
+                        TeamDungeonComponent.OnDungeonOver(TeamDungeonComponent.TeamId);
                     }
 
                     break;

@@ -86,6 +86,12 @@ namespace ET.Server
         /// 家园地图
         /// </summary>
         public Dictionary<long, ActorId> JiaYuanFubens = new Dictionary<long, ActorId>();
+        
+
+        /// <summary>
+        /// 组队副本
+        /// </summary>
+        public Dictionary<long, ActorId> TeamFubens { get; set; } = new Dictionary<long, ActorId>(); //组队副本 teamid->actorid
     }
     
 }

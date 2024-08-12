@@ -1904,16 +1904,18 @@ message T2M_TeamDungeonPrepareResponse // IResponse
 }
 
 //进入组队副本
-//ResponseType T2M_TeamDungeonEnterResponse
-message M2T_TeamDungeonEnterRequest // IRequest
+//ResponseType F2M_TeamDungeonEnterResponse
+message M2F_TeamDungeonEnterRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int64 TeamId = 1;
 	int64 UserID = 2;
+	int32 SceneId = 3;
+	int32 FubenType = 4;
 }
 
-message T2M_TeamDungeonEnterResponse // IResponse
+message F2M_TeamDungeonEnterResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

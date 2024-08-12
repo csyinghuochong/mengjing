@@ -8191,13 +8191,13 @@ namespace ET
 
     // 进入组队副本
     [MemoryPackable]
-    [Message(InnerMessage.M2T_TeamDungeonEnterRequest)]
-    [ResponseType(nameof(T2M_TeamDungeonEnterResponse))]
-    public partial class M2T_TeamDungeonEnterRequest : MessageObject, IRequest
+    [Message(InnerMessage.M2F_TeamDungeonEnterRequest)]
+    [ResponseType(nameof(F2M_TeamDungeonEnterResponse))]
+    public partial class M2F_TeamDungeonEnterRequest : MessageObject, IRequest
     {
-        public static M2T_TeamDungeonEnterRequest Create(bool isFromPool = false)
+        public static M2F_TeamDungeonEnterRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonEnterRequest), isFromPool) as M2T_TeamDungeonEnterRequest;
+            return ObjectPool.Instance.Fetch(typeof(M2F_TeamDungeonEnterRequest), isFromPool) as M2F_TeamDungeonEnterRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -8212,6 +8212,12 @@ namespace ET
         [MemoryPackOrder(1)]
         public long UserID { get; set; }
 
+        [MemoryPackOrder(2)]
+        public int SceneId { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int FubenType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8223,18 +8229,20 @@ namespace ET
             this.ActorId = default;
             this.TeamId = default;
             this.UserID = default;
+            this.SceneId = default;
+            this.FubenType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.T2M_TeamDungeonEnterResponse)]
-    public partial class T2M_TeamDungeonEnterResponse : MessageObject, IResponse
+    [Message(InnerMessage.F2M_TeamDungeonEnterResponse)]
+    public partial class F2M_TeamDungeonEnterResponse : MessageObject, IResponse
     {
-        public static T2M_TeamDungeonEnterResponse Create(bool isFromPool = false)
+        public static F2M_TeamDungeonEnterResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonEnterResponse), isFromPool) as T2M_TeamDungeonEnterResponse;
+            return ObjectPool.Instance.Fetch(typeof(F2M_TeamDungeonEnterResponse), isFromPool) as F2M_TeamDungeonEnterResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8979,8 +8987,8 @@ namespace ET
         public const ushort T2M_TeamDungeonOpenResponse = 20220;
         public const ushort M2T_TeamDungeonPrepareRequest = 20221;
         public const ushort T2M_TeamDungeonPrepareResponse = 20222;
-        public const ushort M2T_TeamDungeonEnterRequest = 20223;
-        public const ushort T2M_TeamDungeonEnterResponse = 20224;
+        public const ushort M2F_TeamDungeonEnterRequest = 20223;
+        public const ushort F2M_TeamDungeonEnterResponse = 20224;
         public const ushort A2M_PetMingChanChuRequest = 20225;
         public const ushort M2A_PetMingChanChuResponse = 20226;
         public const ushort A2M_PetMingLoginRequest = 20227;
