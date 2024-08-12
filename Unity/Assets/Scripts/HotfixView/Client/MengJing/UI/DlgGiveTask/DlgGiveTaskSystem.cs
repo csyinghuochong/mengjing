@@ -22,7 +22,7 @@ namespace ET.Client
             self.OnBagListUpdate();
         }
 
-        public static void InitTask(this DlgGiveTask self, int taskId, int taskType = 1)
+        public static void InitTask(this DlgGiveTask self, int taskId)
         {
             self.TaskId = taskId;
 

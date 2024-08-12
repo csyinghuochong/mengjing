@@ -285,23 +285,18 @@ namespace ET.Client
         public static async ETTask OnGiveBtn(this ES_TaskGrowUp self)
         {
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
-            if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10)
+            if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
             {
-                Log.Debug("打开给东西UI");
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGiveTask);
-                // ui.GetComponent<UIGiveTaskComponent>().InitTask(self.TaskPro.taskID, 1);
-                // ui.GetComponent<UIGiveTaskComponent>().OnGiveAction = self.UpdateTaskB;
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().InitTask(self.TaskPro.taskID);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGiveTask>().OnGiveAction = self.UpdateTaskB;
             }
-            else if (taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
+            else if (taskConfig.TargetType == TaskTargetType.GivePet_25)
             {
-                Log.Debug("打开给宠物UI");
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGivePet);
-                // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskPro.taskID, 1);
-                // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
-                // ui.GetComponent<UIGivePetComponent>().OnGiveAction = self.UpdateTaskB;
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GiveTask);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().InitTask(self.TaskPro.taskID);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGivePet>().OnGiveAction = self.UpdateTaskB;
             }
-
-            await ETTask.CompletedTask;
         }
 
         public static void UpdateTaskB(this ES_TaskGrowUp self)

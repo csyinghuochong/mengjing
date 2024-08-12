@@ -13,6 +13,6 @@ namespace ET.Client
         public BagInfo BagInfo;
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
         public List<BagInfo> ShowBagInfos = new();
-        public Action OnGiveAction;
+        public Action OnGiveAction { get; set; }
     }
 }

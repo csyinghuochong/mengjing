@@ -13,7 +13,7 @@ namespace ET.Client
         public int PetSkinId;
         public RolePetInfo LastSelectItem;
 
-        public Action OnGiveAction;
+        public Action OnGiveAction { get; set; }
 
         public Dictionary<int, EntityRef<Scroll_Item_PetListItem>> ScrollItemPetListItems;
         public List<RolePetInfo> ShowRolePetInfos = new();
