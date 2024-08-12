@@ -160,6 +160,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_AlreadyJingXuanRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AlreadyJingXuanRectTransform == null )
+     			{
+		    		this.m_EG_AlreadyJingXuanRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_AlreadyJingXuan");
+     			}
+     			return this.m_EG_AlreadyJingXuanRectTransform;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_ImageButtonButton = null;
@@ -171,6 +188,7 @@ namespace ET.Client
 			this.m_E_ButtonCancelImage = null;
 			this.m_E_ButtonConfirmButton = null;
 			this.m_E_ButtonConfirmImage = null;
+			this.m_EG_AlreadyJingXuanRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -183,6 +201,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonCancelImage = null;
 		private UnityEngine.UI.Button m_E_ButtonConfirmButton = null;
 		private UnityEngine.UI.Image m_E_ButtonConfirmImage = null;
+		private UnityEngine.RectTransform m_EG_AlreadyJingXuanRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
