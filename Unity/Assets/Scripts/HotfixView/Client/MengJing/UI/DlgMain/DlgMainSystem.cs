@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -372,54 +372,54 @@ namespace ET.Client
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
 
-            self.View.E_OpenChatButton.AddListener(self.OnOpenChat);
+            self.View.E_OpenChatButton.AddListener(self.OnOpenChatButton);
 
-            self.View.E_Button_ZhanKaiButton.AddListener(self.OnButtonZhanKai);
+            self.View.E_Button_ZhanKaiButton.AddListener(self.OnButton_ZhanKaiButton);
 
-            self.View.E_Button_RunRaceButton.AddListener(self.OnButton_RunRace);
-            self.View.E_Button_HappyButton.AddListener(self.OnButton_Happy);
-            self.View.E_Button_HuntButton.AddListener(self.OnButton_Hunt);
-            self.View.E_Button_SoloButton.AddListener(self.OnButton_Solo);
-            self.View.E_Btn_BattleButton.AddListener(self.OnButton_Battle);
-            self.View.E_Button_DonationButton.AddListener(self.OnButton_Donation);
-            self.View.E_Button_FenXiangButton.AddListener(self.OnButton_FenXiang);
-            self.View.E_Btn_EveryTaskButton.AddListener(self.OnButton_EveryTask);
-            self.View.E_Button_RechargeButton.AddListener(self.OnButton_Recharge);
-            self.View.E_Btn_HuoDongButton.AddListener(self.OnButton_HuoDong);
+            self.View.E_Button_RunRaceButton.AddListener(self.OnButton_RunRaceButton);
+            self.View.E_Button_HappyButton.AddListener(self.OnButton_HappyButton);
+            self.View.E_Button_HuntButton.AddListener(self.OnButton_HuntButton);
+            self.View.E_Button_SoloButton.AddListener(self.OnButton_SoloButton);
+            self.View.E_Btn_BattleButton.AddListener(self.OnBtn_BattleButton);
+            self.View.E_Button_DonationButton.AddListener(self.OnButton_DonationButton);
+            self.View.E_Button_FenXiangButton.AddListener(self.OnButton_FenXiangButton);
+            self.View.E_Btn_EveryTaskButton.AddListener(self.OnBtn_EveryTaskButton);
+            self.View.E_Button_RechargeButton.AddListener(self.OnButton_RechargeButton);
+            self.View.E_Btn_HuoDongButton.AddListener(self.OnBtn_HuoDongButton);
             // self.View.E_Button_ZhenYingButton.AddListener();
             // self.View.E_Button_EnergyButton.AddListener();
             // self.View.E_Button_FashionButton.AddListener();
             // self.View.E_Button_DemonButton.AddListener();
-            self.View.E_Button_SeasonButton.AddListener(self.OnButton_Season);
+            self.View.E_Button_SeasonButton.AddListener(self.OnButton_SeasonButton);
 
             // self.View.E_Button_ActivityV1Button.AddListener();
-            self.View.E_Btn_AuctionButton.AddListener(self.OnButton_PaiMaiAuction);
-            self.View.E_Button_HongBaoButton.AddListener(self.OnButton_HongBao);
-            self.View.E_Button_ZhanQuButton.AddListener(self.OnButton_ZhanQu);
-            self.View.E_Button_NewYearButton.AddListener(self.OnButton_NewYear);
-            self.View.E_Button_RechargeRewardButton.AddListener(self.OnButton_RechargeReward);
-            self.View.E_Button_WelfareButton.AddListener(self.OnButton_Welfare);
-            self.View.E_Btn_GMButton.AddListener(self.OnBtn_GM);
-            self.View.E_Btn_RankButton.AddListener(self.OnBtn_Rank);
-            self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLv);
-            self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHang);
+            self.View.E_Btn_AuctionButton.AddListener(self.OnBtn_AuctionButton);
+            self.View.E_Button_HongBaoButton.AddListener(self.OnButton_HongBaoButton);
+            self.View.E_Button_ZhanQuButton.AddListener(self.OnButton_ZhanQuButton);
+            self.View.E_Button_NewYearButton.AddListener(self.OnButton_NewYearButton);
+            self.View.E_Button_RechargeRewardButton.AddListener(self.OnButton_RechargeRewardButton);
+            self.View.E_Button_WelfareButton.AddListener(self.OnButton_WelfareButton);
+            self.View.E_Btn_GMButton.AddListener(self.OnBtn_GMButton);
+            self.View.E_Btn_RankButton.AddListener(self.OnBtn_RankButton);
+            self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
+            self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
 
             self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
             self.View.EG_Btn_LvRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_LvReward);
-            self.View.E_MailHintTipButton.AddListener(self.OnMailHintTip);
-            self.View.E_E_Btn_MapTransferButton.AddListener(() => { self.OnBtn_MapTransfer().Coroutine(); });
-            self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeon);
-            self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
+            self.View.E_MailHintTipButton.AddListener(self.OnMailHintTipButton);
+            self.View.E_E_Btn_MapTransferButton.AddListener(() => { self.OnE_Btn_MapTransferButton().Coroutine(); });
+            self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeonButton);
+            self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnBtn_RerurnBuildingButton);
 
-            self.View.E_Btn_StopGuaJiButton.AddListener(self.OnStopGuaJi);
+            self.View.E_Btn_StopGuaJiButton.AddListener(self.OnBtn_StopGuaJiButton);
 
             self.View.E_LeftTypeSetToggleGroup.AddListener(self.OnLeftTypeSet);
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.View.E_MainTeamItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTeamItemsRefresh);
-            self.View.E_RoseTeamButton.AddListener(self.OnBtn_RoseTeam);
+            self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
         }
@@ -724,7 +724,7 @@ namespace ET.Client
             scrollItemMainTeamItem.OnUpdateItem(self.ShowTeamInfo.PlayerList[index]);
         }
 
-        private static void OnBtn_RoseTeam(this DlgMain self)
+        private static void OnRoseTeamButton(this DlgMain self)
         {
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             if (teamInfo == null || teamInfo.PlayerList.Count == 0)
@@ -920,7 +920,7 @@ namespace ET.Client
 
         #region 聊天
 
-        private static void OnOpenChat(this DlgMain self)
+        private static void OnOpenChatButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
         }
@@ -985,7 +985,7 @@ namespace ET.Client
 
         # region 右上角按钮
 
-        private static void OnButtonZhanKai(this DlgMain self)
+        private static void OnButton_ZhanKaiButton(this DlgMain self)
         {
             bool active = self.View.EG_Btn_TopRight_1RectTransform.gameObject.activeSelf;
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(!active);
@@ -995,82 +995,82 @@ namespace ET.Client
             self.View.E_Button_ZhanKaiButton.transform.localScale = active ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
         }
 
-        private static void OnButton_RunRace(this DlgMain self)
+        private static void OnButton_RunRaceButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RunRace).Coroutine();
         }
 
-        private static void OnButton_Happy(this DlgMain self)
+        private static void OnButton_HappyButton(this DlgMain self)
         {
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Happy, BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy)).Coroutine();
         }
 
-        private static void OnButton_Hunt(this DlgMain self)
+        private static void OnButton_HuntButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Hunt).Coroutine();
         }
 
-        private static void OnButton_Solo(this DlgMain self)
+        private static void OnButton_SoloButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Solo).Coroutine();
         }
 
-        private static void OnButton_Battle(this DlgMain self)
+        private static void OnBtn_BattleButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Battle).Coroutine();
         }
 
-        private static void OnButton_Donation(this DlgMain self)
+        private static void OnButton_DonationButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Donation).Coroutine();
         }
 
-        private static void OnButton_FenXiang(this DlgMain self)
+        private static void OnButton_FenXiangButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FenXiang).Coroutine();
         }
 
-        private static void OnButton_EveryTask(this DlgMain self)
+        private static void OnBtn_EveryTaskButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Country).Coroutine();
         }
 
-        private static void OnButton_Recharge(this DlgMain self)
+        private static void OnButton_RechargeButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
-        private static void OnButton_HuoDong(this DlgMain self)
+        private static void OnBtn_HuoDongButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Activity).Coroutine();
         }
 
-        private static void OnButton_Season(this DlgMain self)
+        private static void OnButton_SeasonButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Season).Coroutine();
         }
 
-        private static void OnButton_PaiMaiAuction(this DlgMain self)
+        private static void OnBtn_AuctionButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMaiAuction).Coroutine();
         }
 
-        private static void OnButton_HongBao(this DlgMain self)
+        private static void OnButton_HongBaoButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_HongBao).Coroutine();
         }
 
-        private static void OnButton_ZhanQu(this DlgMain self)
+        private static void OnButton_ZhanQuButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhanQu).Coroutine();
         }
 
-        private static void OnButton_NewYear(this DlgMain self)
+        private static void OnButton_NewYearButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_NewYear).Coroutine();
         }
 
-        private static void OnButton_RechargeReward(this DlgMain self)
+        private static void OnButton_RechargeRewardButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RechargeReward).Coroutine();
         }
@@ -1092,27 +1092,27 @@ namespace ET.Client
             self.View.E_Button_RechargeRewardButton.gameObject.SetActive(showButton);
         }
 
-        private static void OnButton_Welfare(this DlgMain self)
+        private static void OnButton_WelfareButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Welfare).Coroutine();
         }
 
-        private static void OnBtn_GM(this DlgMain self)
+        private static void OnBtn_GMButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GM).Coroutine();
         }
 
-        public static void OnBtn_Rank(this DlgMain self)
+        public static void OnBtn_RankButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Rank).Coroutine();
         }
 
-        private static void OnButton_WorldLv(this DlgMain self)
+        private static void OnButton_WorldLvButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WorldLv).Coroutine();
         }
 
-        private static void OnBtn_PaiMaiHang(this DlgMain self)
+        private static void OnBtn_PaiMaiHangButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMai).Coroutine();
         }
@@ -1359,7 +1359,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnMailHintTip(this DlgMain self)
+        private static void OnMailHintTipButton(this DlgMain self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != (int)SceneTypeEnum.MainCityScene)
@@ -1371,13 +1371,13 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(20000006).Coroutine();
         }
 
-        private static async ETTask OnBtn_MapTransfer(this DlgMain self)
+        private static async ETTask OnE_Btn_MapTransferButton(this DlgMain self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapTransfer);
             DlgDungeonMapTransfer dlgDungeonMapTransfer = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapTransfer>();
         }
 
-        public static void OnBtn_RerurnDungeon(this DlgMain self)
+        public static void OnBtn_RerurnDungeonButton(this DlgMain self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.Instance.LoadLocalization("移动次数消耗完毕,请返回副本!"),
                 () =>
@@ -1395,7 +1395,7 @@ namespace ET.Client
                 null).Coroutine();
         }
 
-        private static void OnClickReturnButton(this DlgMain self)
+        private static void OnBtn_RerurnBuildingButton(this DlgMain self)
         {
             Scene zoneScene = self.Root();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
@@ -1852,7 +1852,7 @@ namespace ET.Client
             // OpcodeHelper.OneTotalNumber = 0;
         }
 
-        public static void OnStopGuaJi(this DlgMain self)
+        public static void OnBtn_StopGuaJiButton(this DlgMain self)
         {
             if (self.Root().GetComponent<UnitGuaJiComponent>() != null)
             {

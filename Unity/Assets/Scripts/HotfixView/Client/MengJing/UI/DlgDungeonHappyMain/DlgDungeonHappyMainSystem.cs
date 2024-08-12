@@ -243,7 +243,7 @@ namespace ET.Client
                     return;
                 }
 
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnBtn_RerurnDungeon();
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnBtn_RerurnDungeonButton();
             }
         }
     }
