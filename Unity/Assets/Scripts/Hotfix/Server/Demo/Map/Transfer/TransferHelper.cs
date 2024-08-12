@@ -492,7 +492,10 @@ namespace ET.Server
                         //[创建副本Scene]
 
                         M2F_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2F_TeamDungeonEnterRequest.Create();
-                        M2T_TeamDungeonEnterRequest.UserID = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId;
+                        M2T_TeamDungeonEnterRequest.UserID = unit.Id;
+                        M2T_TeamDungeonEnterRequest.SceneId = request.SceneId == 0 ? 110001 : request.SceneId;
+                        M2T_TeamDungeonEnterRequest.TeamId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.TeamId);
+                        request.SceneId = M2T_TeamDungeonEnterRequest.SceneId;
                         F2M_TeamDungeonEnterResponse createUnit = (F2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2T_TeamDungeonEnterRequest);
                         if (createUnit.Error != ErrorCode.ERR_Success)

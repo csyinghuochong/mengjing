@@ -808,8 +808,10 @@ namespace ET.Server
                 FubenHelp.CreateMonsterByPos(fubnescene, postionid);
             }
 
-            TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+            //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.TeamFubens[teamid] = fubnescene.GetActorId();
+            
+            Console.WriteLine(($"CreateTeamDungeon:  {teamid}   {fubnescene.GetActorId()}"));
         }
 
         #endregion

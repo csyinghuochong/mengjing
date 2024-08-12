@@ -1,11 +1,13 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class T2M_TeamUpdateHandler : MessageHandler<Unit, T2M_TeamUpdateRequest>
     {
         protected override async ETTask Run(Unit unit, T2M_TeamUpdateRequest message)
         {
-            Log.Debug($"T2M_TeamUpdate  {unit.Id}  {message.TeamId}");
+            Console.WriteLine($"T2M_TeamUpdate  {unit.Id}  {message.TeamId}");
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamId, message.TeamId);
 
             long rolePetId = unit.GetComponent<PetComponentS>().GetFightPetId();
