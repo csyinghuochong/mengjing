@@ -44,10 +44,6 @@ namespace ET.Client
 
         public static void OnOpenMap(this ES_MapMini self)
         {
-            // 测试
-            self.Root().GetComponent<MapComponent>().SceneType = (int)SceneTypeEnum.MainCityScene;
-            self.Root().GetComponent<MapComponent>().SceneId = 101;
-
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             switch (sceneType)
