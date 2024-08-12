@@ -188,5 +188,6 @@ namespace ET.Client
 		WindowID_GivePet,
 		WindowID_WearWeapon,
 		WindowID_PetXiLianLockSkill,
+		WindowID_UnionJingXuan,
 	}
 }
