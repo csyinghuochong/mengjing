@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, OnRecvChat>
+    public class DataUpdate_OnRecvChat_ChatItemsRefresh : AEvent<Scene, OnRecvChat>
     {
         protected override async ETTask Run(Scene root, OnRecvChat args)
         {
@@ -15,8 +15,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (PlayerComponent))]
-    [FriendOf(typeof (DlgChat))]
+    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(DlgChat))]
     public static class DlgChatSystem
     {
         public static void RegisterUIEvent(this DlgChat self)
@@ -61,68 +61,68 @@ namespace ET.Client
             if (!ET.GMHelp.IsGmAccount(playerComponent.Account))
             {
                 // 替换敏感词
-                // mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+                mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
             }
 
             if (text.Equals("#etgm"))
             {
-                // UIHelper.Create(self.DomainScene(), UIType.UIGM).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_GM).Coroutine();
                 return;
             }
 
             if (text.Equals("#blood"))
             {
-                // SettingHelper.ShowBlood = !SettingHelper.ShowBlood;
+                SettingData.ShowBlood = !SettingData.ShowBlood;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#guanghuan"))
             {
-                // SettingHelper.ShowGuangHuan = !SettingHelper.ShowGuangHuan;
+                SettingData.ShowGuangHuan = !SettingData.ShowGuangHuan;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#animation"))
             {
-                // SettingHelper.ShowAnimation = !SettingHelper.ShowAnimation;
+                SettingData.ShowAnimation = !SettingData.ShowAnimation;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#sound"))
             {
-                // SettingHelper.PlaySound = !SettingHelper.PlaySound;
+                SettingData.PlaySound = !SettingData.PlaySound;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#pool"))
             {
-                // SettingHelper.UsePool = !SettingHelper.UsePool;
+                SettingData.UsePool = !SettingData.UsePool;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#openall"))
             {
-                // SettingHelper.ShowBlood = true;
-                // SettingHelper.ShowEffect = true;
-                // SettingHelper.ShowGuangHuan = true;
-                // SettingHelper.ShowAnimation = true;
-                // SettingHelper.PlaySound = true;
+                SettingData.ShowBlood = true;
+                SettingData.ShowEffect = true;
+                SettingData.ShowGuangHuan = true;
+                SettingData.ShowAnimation = true;
+                SettingData.PlaySound = true;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
 
             if (text.Equals("#resetall"))
             {
-                // SettingHelper.ShowBlood = false;
-                // SettingHelper.ShowEffect = false;
-                // SettingHelper.ShowGuangHuan = false;
-                // SettingHelper.ShowAnimation = false;
-                // SettingHelper.PlaySound = false;
+                SettingData.ShowBlood = false;
+                SettingData.ShowEffect = false;
+                SettingData.ShowGuangHuan = false;
+                SettingData.ShowAnimation = false;
+                SettingData.PlaySound = false;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
@@ -134,11 +134,11 @@ namespace ET.Client
             }
 
             int itemType = self.CurrentChatType;
-            // if (itemType == (int)ChannelEnum.Team && !self.Root().GetComponent<TeamComponent>().IsHaveTeam())
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("没有队伍！");
-            //     return;
-            // }
+            if (itemType == ChannelEnum.Team && !self.Root().GetComponent<TeamComponentC>().IsHaveTeam())
+            {
+                FlyTipComponent.Instance.ShowFlyTip("没有队伍！");
+                return;
+            }
 
             if (text.Contains("#"))
             {

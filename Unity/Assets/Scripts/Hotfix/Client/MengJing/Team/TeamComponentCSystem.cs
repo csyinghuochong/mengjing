@@ -28,6 +28,11 @@
             return null;
         }
 
+        public static bool IsHaveTeam(this TeamComponentC self)
+        {
+            return self.GetSelfTeam() != null;
+        }
+
         public static bool IsTeamLeader(this TeamComponentC self)
         {
             TeamInfo teamInfo = self.GetSelfTeam();
