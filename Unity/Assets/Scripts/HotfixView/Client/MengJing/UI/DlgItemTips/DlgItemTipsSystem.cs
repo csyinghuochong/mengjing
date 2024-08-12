@@ -584,8 +584,6 @@ namespace ET.Client
                 //注销Tips
                 self.OnCloseTips();
             }
-
-            self.OnCloseTips();
         }
 
         public static async ETTask OnItemFumoUse(this DlgItemTips self, ItemConfig itemConfig)
