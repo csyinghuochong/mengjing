@@ -35,23 +35,6 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestPetSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
-        {
-            C2M_RolePetFormationSet request = C2M_RolePetFormationSet.Create();
-            request.SceneType = sceneType;
-            request.PetFormat = petList;
-            request.PetPosition = positionList;
-
-            M2C_RolePetFormationSet response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetFormationSet;
-            if (response.Error != ErrorCode.ERR_Success)
-            {
-                return response.Error;
-            }
-
-            root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, positionList);
-            return ErrorCode.ERR_Success;
-        }
-
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
             C2M_RolePetFight request = C2M_RolePetFight.Create();
@@ -376,7 +359,7 @@ namespace ET.Client
                 return response.Error;
             }
 
-            root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, null);
+            root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, positionList);
 
             return response.Error;
         }
@@ -399,7 +382,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-               root.GetComponent<PetComponentC>().OnPetProtect(petInfoId, isProtect);
+                root.GetComponent<PetComponentC>().OnPetProtect(petInfoId, isProtect);
             }
 
             return response.Error;
