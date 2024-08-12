@@ -221,5 +221,17 @@
             U2C_UnionKickOutResponse response = (U2C_UnionKickOutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<U2C_UnionJingXuanResponse> UnionJingXuanRequest(Scene root, long unitId, long unionId, int operateType)
+        {
+            C2U_UnionJingXuanRequest request = C2U_UnionJingXuanRequest.Create();
+
+            request.UnitId = unitId;
+            request.UnionId = unionId;
+            request.OperateType = operateType;
+
+            U2C_UnionJingXuanResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as U2C_UnionJingXuanResponse;
+            return response;
+        }
     }
 }

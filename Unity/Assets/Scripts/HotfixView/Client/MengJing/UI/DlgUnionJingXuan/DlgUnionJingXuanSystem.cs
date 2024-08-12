@@ -35,17 +35,18 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            // U2C_UnionJingXuanResponse response = await UnionNetHelper.UnionJingXuanRequest(self.Root(), unit.Id,
-            //     unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0), operateType);
-            //
-            // self.UnionInfo.JingXuanList = response.JingXuanList;
-            // self.UnionInfo.JingXuanEndTime = response.JingXuanEndTime;
-            // self.OnUpdateUI(self.UnionInfo);
-            //
-            // if (response.JingXuanList.Count == 0)
-            // {
-            //     self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_UnionJingXuan);
-            // }
+            U2C_UnionJingXuanResponse response = await UnionNetHelper.UnionJingXuanRequest(self.Root(), unit.Id,
+                unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0), operateType);
+
+            self.UnionInfo.JingXuanList = response.JingXuanList;
+            self.UnionInfo.JingXuanEndTime = response.JingXuanEndTime;
+            self.OnUpdateUI(self.UnionInfo);
+
+            if (response.JingXuanList.Count == 0)
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_UnionJingXuan);
+            }
+
             await ETTask.CompletedTask;
         }
 
