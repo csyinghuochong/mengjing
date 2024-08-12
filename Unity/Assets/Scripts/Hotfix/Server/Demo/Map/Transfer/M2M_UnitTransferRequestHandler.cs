@@ -122,6 +122,8 @@ namespace ET.Server
                     unit.Rotation = quaternion.identity;
                     if (!unit.IsRobot() && request.SceneType == SceneTypeEnum.TeamDungeon)
                     {
+                        Console.WriteLine($"SceneTypeEnum.TeamDungeon:{request.SceneType}");
+                        
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
                         int fubenType = teamDungeonComponent.FubenType;
                         bool firstEnter = !teamDungeonComponent.TeamPlayers.ContainsKey(unit.Id);

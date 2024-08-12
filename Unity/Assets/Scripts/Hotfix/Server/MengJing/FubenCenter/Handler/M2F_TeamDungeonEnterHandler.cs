@@ -19,7 +19,7 @@
                 scene.GetComponent<FubenCenterComponent>().CreateTeamDungeon(request.TeamId, request.SceneId, request.FubenType);
             }
 
-            response.FubenActorId = fubenActorId;
+            response.FubenActorId = scene.GetComponent<FubenCenterComponent>().TeamFubens[request.TeamId];
             await ETTask.CompletedTask;
         }
     }

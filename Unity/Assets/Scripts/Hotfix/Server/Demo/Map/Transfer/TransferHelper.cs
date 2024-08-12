@@ -500,6 +500,9 @@ namespace ET.Server
                             return ErrorCode.ERR_TransferFailError;
                         }
                         BeforeTransfer(unit);
+                        
+                        Console.WriteLine($"F2M_TeamDungeonEnterResponse:{createUnit.FubenActorId}");
+                        
                         await Transfer(unit, createUnit.FubenActorId, (int)SceneTypeEnum.TeamDungeon, createUnit.FubenId, createUnit.FubenType, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
