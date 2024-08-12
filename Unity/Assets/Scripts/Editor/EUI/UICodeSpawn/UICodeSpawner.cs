@@ -109,20 +109,54 @@ public partial class UICodeSpawner
 								if (lines[i].Contains($"self.{view}{widgetName}.AddListener"))
 								{
 									Path2WidgetCachedDict.Remove(key);
-									
-									string pattern = @"AddListener(?:Async)?\(([^;]+)\);";
-									
+
+									string pattern = @"AddListener(?:Async)?\(([^;]+)\);?";
+
 									Match match = Regex.Match(lines[i], pattern);
 
 									if (match.Success)
 									{
-										string innerContent = match.Groups[1].Value;
+										// 获取括号内的内容
+										string innerContent = match.Groups[1].Value.Trim();
+										string methodName = null;
+										string arguments = null;
 
-										Match methodMatch = Regex.Match(innerContent, @"self\.(\w+)");
-										if (methodMatch.Success)
+										// 检查是否为直接传递方法名的形式 self.OnButtonActivty
+										if (Regex.IsMatch(innerContent, @"^self\.\w+$"))
 										{
-											string methodName = methodMatch.Groups[1].Value;
+											methodName = Regex.Match(innerContent, @"self\.(\w+)").Groups[1].Value;
+										}
+										else
+										{
+											// 匹配带有 lambda 表达式的情况
+											Match methodMatch = Regex.Match(innerContent, @"self\.(\w+)\(([^)]*)\)");
 
+											if (methodMatch.Success)
+											{
+												// 提取参数部分
+												arguments = methodMatch.Groups[2].Value;
+
+												// 检查方法是否后面有其他链式调用
+												bool hasChainedCall = innerContent.Contains(").");
+
+												if (string.IsNullOrWhiteSpace(arguments))
+												{
+													// 如果没有参数提取方法名
+													methodName = methodMatch.Groups[1].Value;
+												}
+												else
+												{
+													break;
+												}
+											}
+											else
+											{
+												break;
+											}
+										}
+
+										if (string.IsNullOrWhiteSpace(arguments))
+										{
 											if (methodName != $"On{key.Substring(2)}Button")
 											{
 												reNameMap.Add(methodName, $"On{key.Substring(2)}Button");
