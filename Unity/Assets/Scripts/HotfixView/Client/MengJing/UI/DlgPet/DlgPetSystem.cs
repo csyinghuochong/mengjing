@@ -143,5 +143,10 @@
                 self.View.ES_PetList.OnPetFightingSet();
             }
         }
+        
+        public static async ETTask RequestPetEquipSelect(this DlgPet self)
+        {
+            await self.View.ES_PetList.OnButtonEquipHeXin();
+        }
     }
 }

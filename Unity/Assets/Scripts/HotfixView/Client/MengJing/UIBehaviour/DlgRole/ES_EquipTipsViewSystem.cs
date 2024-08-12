@@ -701,7 +701,6 @@ namespace ET.Client
 
         private static async ETTask OnUseButton(this ES_EquipTips self)
         {
-            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int occTwo = userInfo.OccTwo;
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
@@ -709,17 +708,18 @@ namespace ET.Client
             {
                 if (self.ItemOpetateType != ItemOperateEnum.PetEquipBag)
                 {
-                    flyTipComponent.ShowFlyTip("请到宠物界面操作");
+                    FlyTipComponent.Instance.ShowFlyTip("请到宠物界面操作");
                     return;
                 }
 
-                // if (UIHelper.GetUI(self.ZoneScene(), UIType.UIPet) == null)
-                // {
-                //     flyTipComponent.SpawnFlyTipDi("请到宠物界面操作");
-                //     return;
-                // }
-                //
-                // UIHelper.GetUI(self.ZoneScene(), UIType.UIPet)?.GetComponent<UIPetComponent>().RequestPetEquipSelect().Coroutine();
+                DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
+
+                if (dlgPet == null)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("请到宠物界面操作");
+                    return;
+                }
+                dlgPet.RequestPetEquipSelect().Coroutine();
             }
             else
             {
@@ -731,15 +731,15 @@ namespace ET.Client
                         {
                             //战士
                             case 1:
-                                flyTipComponent.ShowFlyTip("请选择武器类型为：刀 剑！");
+                                FlyTipComponent.Instance.ShowFlyTip("请选择武器类型为：刀 剑！");
                                 break;
                             //法师
                             case 2:
-                                flyTipComponent.ShowFlyTip("请选择武器类型为：法杖 魔法书！！");
+                                FlyTipComponent.Instance.ShowFlyTip("请选择武器类型为：法杖 魔法书！！");
                                 break;
                             //猎人
                             case 3:
-                                flyTipComponent.ShowFlyTip("本职业无法穿戴此武器");
+                                FlyTipComponent.Instance.ShowFlyTip("本职业无法穿戴此武器");
                                 break;
                         }
 
@@ -757,15 +757,15 @@ namespace ET.Client
                         {
                             //布甲
                             case 11:
-                                flyTipComponent.ShowFlyTip("转职后请选择布甲进行装备！");
+                                FlyTipComponent.Instance.ShowFlyTip("转职后请选择布甲进行装备！");
                                 break;
                             //轻甲
                             case 12:
-                                flyTipComponent.ShowFlyTip("转职后请选择轻甲进行装备！");
+                                FlyTipComponent.Instance.ShowFlyTip("转职后请选择轻甲进行装备！");
                                 break;
                             //重甲
                             case 13:
-                                flyTipComponent.ShowFlyTip("转职后请选择重甲进行装备！");
+                                FlyTipComponent.Instance.ShowFlyTip("转职后请选择重甲进行装备！");
                                 break;
                         }
 
