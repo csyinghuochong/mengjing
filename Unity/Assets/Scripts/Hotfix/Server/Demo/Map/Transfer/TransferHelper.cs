@@ -504,7 +504,7 @@ namespace ET.Server
                         }
                         BeforeTransfer(unit);
                         
-                        Console.WriteLine($"F2M_TeamDungeonEnterResponse:{createUnit.FubenActorId}");
+                        Console.WriteLine($"F2M_TeamDungeonEnterResponse:{createUnit.FubenActorId}  {request.SceneId}  {request.Difficulty}");
                         
                         await Transfer(unit, createUnit.FubenActorId, (int)SceneTypeEnum.TeamDungeon, request.SceneId, request.Difficulty, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))

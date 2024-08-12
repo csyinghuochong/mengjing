@@ -39,7 +39,6 @@ namespace ET.Server
              }
 
              //先查找真实玩家。再查找
-             ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(self.Zone());
              PetComponentS petComponent_enemy =  await UnitCacheHelper.GetComponentCache<PetComponentS>(self.Root(), self.EnemyId);
              if (petComponent_enemy!= null)
              {

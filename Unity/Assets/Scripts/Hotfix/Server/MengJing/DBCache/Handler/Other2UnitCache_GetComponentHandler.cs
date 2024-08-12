@@ -8,7 +8,11 @@ namespace ET.Server
         {
             UnitCacheComponent db = scene.Root().GetComponent<UnitCacheComponent>();
             Entity entity = await db.Get(request.UnitId, request.Component);
-            response.Component = entity.ToBson();
+            if (entity != null)
+            {
+                response.Component = entity.ToBson();
+            }
+
             await ETTask.CompletedTask;
         }
     }

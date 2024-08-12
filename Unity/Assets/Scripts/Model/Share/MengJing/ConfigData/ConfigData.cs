@@ -1055,17 +1055,17 @@ namespace ET
                 new List<float3>()
                 {
                     //前排
-                    new float3(22.36f, 0f, -17.13f),
-                    new float3(25.63f, 0f, -17.13f),
-                    new float3(29.53f, 0f, -17.13f),
+                    new float3(14.89f, 0f, -9.25f),
+                    new float3(14.89f, 0f, -12.3f),
+                    new float3(14.89f, 0f, -15.42f),
                     //中排
-                    new float3(22.36f, 0f, -12.95f),
-                    new float3(25.63f, 0f, -12.95f),
-                    new float3(29.53f, 0f, -12.95f),
+                    new float3(14.89f - 2f, 0f, -9.25f),
+                    new float3(14.89f- 2f, 0f, -12.3f),
+                    new float3(14.89f- 2f, 0f, -15.42f),
                     //后排
-                    new float3(22.36f, 0f, -6.79f),
-                    new float3(25.63f, 0f, -6.79f),
-                    new float3(29.53f, 0f, -6.79f),
+                    new float3(14.89f -4f, 0f, -9.25f),
+                    new float3(14.89f- 4f, 0f, -12.3f),
+                    new float3(14.89f- 4f, 0f, -15.42f),
                 };
 
         //对方位置
@@ -1074,17 +1074,17 @@ namespace ET
                 new List<float3>()
                 {
                     //前排
-                    new float3(22.36f - 10f, 0f, -17.13f),
-                    new float3(25.63f - 10f, 0f, -17.13f),
-                    new float3(29.53f - 10f, 0f, -17.13f),
+                    new float3(21.16f , 0f, -9.25f),
+                    new float3(21.16f , 0f, -12.3f),
+                    new float3(21.16f , 0f, -15.42f),
                     //中排 
-                    new float3(22.36f - 10f, 0f, -12.95f),
-                    new float3(25.63f - 10f, 0f, -12.95f),
-                    new float3(29.53f - 10f, 0f, -12.95f),
+                    new float3(21.16f + 2f, 0f, -9.25f),
+                    new float3(21.16f + 2f, 0f, -12.3f),
+                    new float3(21.16f + 2f, 0f, -15.42f),
                     //后排 
-                    new float3(22.36f - 10f, 0f, -6.79f),
-                    new float3(25.63f - 10f, 0f, -6.79f),
-                    new float3(29.53f - 10f, 0f, -6.79f),
+                    new float3(21.16f + 4f, 0f, -9.25f),
+                    new float3(21.16f + 4f, 0f, -12.3f),
+                    new float3(21.16f + 4f, 0f, -15.42f),
                 };
 
         /// <summary>
