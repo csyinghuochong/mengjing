@@ -277,6 +277,7 @@ namespace ET.Client
                 self.PetHeXinItemList[i].transform.Find("ImageSelect").gameObject.SetActive(i == position);
             }
 
+            self.Position = position;
             self.UpdatePetHexinItem(self.PetHeXinList);
         }
 
