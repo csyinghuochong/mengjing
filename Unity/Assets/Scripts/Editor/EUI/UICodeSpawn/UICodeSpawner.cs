@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using NLog.Fluent;
 using UnityEditor;
 using UnityEngine;
 
@@ -77,7 +78,7 @@ public partial class UICodeSpawner
 
 
 			Dictionary<string, string> reNameMap = new();
-			
+
 			string[] lines = File.ReadAllLines(files[0]);
 			bool registerStart = false;
 			using (StreamWriter writer = new StreamWriter(files[0]))
@@ -178,7 +179,7 @@ public partial class UICodeSpawner
 							{
 								writer.WriteLine($"            注意item的初始化放在Awake无效中，请放在刷新的方法中！！！");
 							}
-							
+
 							foreach (var key in Path2WidgetCachedDict.Keys.ToList())
 							{
 								foreach (var info in Path2WidgetCachedDict[key])
@@ -234,11 +235,15 @@ public partial class UICodeSpawner
 							}
 						}
 					}
-					
+
 					writer.WriteLine(lines[i]);
 				}
 			}
 
+		}
+		catch
+		{
+			Log.Error($"生成 {gameObject.name} 错误");
 		}
 		finally
 		{

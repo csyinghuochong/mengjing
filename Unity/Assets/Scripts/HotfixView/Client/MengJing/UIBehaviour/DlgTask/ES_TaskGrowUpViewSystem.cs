@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -14,8 +14,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TaskGrowUpItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGrowUpItemsRefresh);
-            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtn);
-            self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtn);
+            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtnButton);
+            self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
 
             self.UpdateTask();
         }
@@ -264,7 +264,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnGetBtn(this ES_TaskGrowUp self)
+        public static async ETTask OnGetBtnButton(this ES_TaskGrowUp self)
         {
             if (self.TaskPro.taskStatus < (int)TaskStatuEnum.Completed)
             {
@@ -282,7 +282,7 @@ namespace ET.Client
             self.UpdateTask();
         }
 
-        public static async ETTask OnGiveBtn(this ES_TaskGrowUp self)
+        public static async ETTask OnGiveBtnButton(this ES_TaskGrowUp self)
         {
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
             if (taskConfig.TargetType == TaskTargetType.GiveItem_10)

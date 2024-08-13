@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ReceiveBtnButton.AddListenerAsync(self.OnReceiveBtn);
+            self.E_ReceiveBtnButton.AddListenerAsync(self.OnReceiveBtnButton);
             self.EndTime = TimeInfo.Instance.ToDateTime(self.Root().GetComponent<UserInfoComponentC>().UserInfo.CreateTime).AddDays(6);
             self.E_WelfareInvestItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnWelfareInvestItemsRefresh);
 
@@ -64,7 +64,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnReceiveBtn(this ES_WelfareInvest self)
+        public static async ETTask OnReceiveBtnButton(this ES_WelfareInvest self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestReward) == 1)

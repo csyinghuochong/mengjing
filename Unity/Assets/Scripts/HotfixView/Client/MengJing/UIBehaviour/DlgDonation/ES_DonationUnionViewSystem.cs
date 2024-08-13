@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,8 +12,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_SignupButton.AddListenerAsync(self.OnButton_Signup);
-            self.E_Button_RaceButton.AddListener(self.OnButton_Race);
+            self.E_Button_SignupButton.AddListenerAsync(self.OnButton_SignupButton);
+            self.E_Button_RaceButton.AddListener(self.OnButton_RaceButton);
 
             self.E_Button_RaceButton.gameObject.SetActive(false);
             self.OnUpdateUI().Coroutine();
@@ -53,7 +53,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButton_Race(this ES_DonationUnion self)
+        public static void OnButton_RaceButton(this ES_DonationUnion self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
@@ -79,7 +79,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButton_Signup(this ES_DonationUnion self)
+        public static async ETTask OnButton_SignupButton(this ES_DonationUnion self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();

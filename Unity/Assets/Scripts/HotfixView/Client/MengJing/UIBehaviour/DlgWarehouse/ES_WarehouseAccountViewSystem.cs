@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -14,7 +14,7 @@ namespace ET.Client
 
             self.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.E_ButtonPackButton.AddListenerAsync(self.OnBtn_ZhengLi);
+            self.E_ButtonPackButton.AddListenerAsync(self.OnButtonPackButton);
 
             self.Init().Coroutine();
             self.RefreshBagItems();
@@ -26,7 +26,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnBtn_ZhengLi(this ES_WarehouseAccount self)
+        public static async ETTask OnButtonPackButton(this ES_WarehouseAccount self)
         {
             await BagClientNetHelper.RequestAccountWarehousOperate(self.Root(), 3, 0);
             ItemHelper.ItemLitSort(self.AccountBagInfos);

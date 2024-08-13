@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,11 +11,12 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_OpenYueKaButton.AddListener(self.OpenYueKa);
-            self.E_Btn_GetRewardButton.AddListenerAsync(self.ReceiveReward);
+            self.E_Btn_OpenYueKaButton.AddListener(self.OnBtn_OpenYueKaButton);
+            self.E_Btn_GetRewardButton.AddListenerAsync(self.OnBtn_GetRewardButton);
 
             self.OnUpdateUI();
             self.InitReward();
+            self.E_Btn_GoPayButton.AddListener(self.OnBtn_GoPayButton);
         }
 
         [EntitySystem]
@@ -60,7 +61,7 @@ namespace ET.Client
             self.E_TextYueKaCostText.text = GlobalValueConfigCategory.Instance.Get(37).Value;
         }
 
-        public static async ETTask ReceiveReward(this ES_ActivityYueKa self)
+        public static async ETTask OnBtn_GetRewardButton(this ES_ActivityYueKa self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) == 0)
@@ -95,7 +96,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask ReqestOpenYueKa(this ES_ActivityYueKa self)
+        public static async ETTask ReqestOnBtn_OpenYueKaButton(this ES_ActivityYueKa self)
         {
             int error = await ActivityNetHelper.YueKaOpen(self.Root());
             if (error == 0)
@@ -112,15 +113,18 @@ namespace ET.Client
         }
 
         // 开启月卡
-        public static void OpenYueKa(this ES_ActivityYueKa self)
+        public static void OnBtn_OpenYueKaButton(this ES_ActivityYueKa self)
         {
             // 判断自身是否有钻石
             string cost = GlobalValueConfigCategory.Instance.Get(37).Value;
             using (zstring.Block())
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", zstring.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOpenYueKa().Coroutine(); },
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", zstring.Format("是否花费{0}钻石开启月卡?", cost), () => { self.ReqestOnBtn_OpenYueKaButton().Coroutine(); },
                     null).Coroutine();
             }
+        }
+        public static void OnBtn_GoPayButton(this ES_ActivityYueKa self)
+        {
         }
     }
 }

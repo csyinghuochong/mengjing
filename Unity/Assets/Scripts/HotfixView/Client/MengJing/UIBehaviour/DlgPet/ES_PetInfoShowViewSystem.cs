@@ -23,8 +23,8 @@ namespace ET.Client
             self.PetZiZhiItemList[4] = self.EG_PetZiZhiItem5RectTransform.gameObject;
             self.PetZiZhiItemList[5] = self.EG_PetZiZhiItem6RectTransform.gameObject;
 
-            self.E_Img_PeteroQualityButton.AddListenerAsync(self.OnClickSelect);
-            self.E_Btn_QieHuanButton.AddListenerAsync(self.OnClickSelect);
+            self.E_Img_PeteroQualityButton.AddListenerAsync(self.OnImg_PeteroQualityButton);
+            self.E_Btn_QieHuanButton.AddListenerAsync(self.OnImg_PeteroQualityButton);
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
@@ -34,7 +34,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static async ETTask OnClickSelect(this ES_PetInfoShow self)
+        private static async ETTask OnImg_PeteroQualityButton(this ES_PetInfoShow self)
         {
             DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
             dlgPet.PetItemWeizhi = self.Weizhi;

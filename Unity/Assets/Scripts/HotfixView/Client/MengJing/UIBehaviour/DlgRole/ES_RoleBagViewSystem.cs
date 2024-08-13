@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -16,7 +16,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.E_OpenOneSellSetButton.AddListenerAsync(self.OnButton_OpenOneSellSet);
+            self.E_OpenOneSellSetButton.AddListenerAsync(self.OnOpenOneSellSetButton);
             self.E_OneGemButton.AddListener(self.OnOneGemButton);
             self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
             self.E_OneSellButton.AddListener(self.OnOneSellButton);
@@ -202,7 +202,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnButton_OpenOneSellSet(this ES_RoleBag self)
+        private static async ETTask OnOpenOneSellSetButton(this ES_RoleBag self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_OneSellSet);
         }

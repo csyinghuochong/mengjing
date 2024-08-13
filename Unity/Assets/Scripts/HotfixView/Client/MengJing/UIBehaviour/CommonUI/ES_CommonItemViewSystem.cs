@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +14,10 @@ namespace ET.Client
         private static void Awake(this ES_CommonItem self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ItemDiButton.AddListener(self.OnItemDiButton);
+            self.E_ItemClickButton.AddListener(self.OnItemClickButton);
+            self.E_ItemDragButton.AddListener(self.OnItemDragButton);
+            self.E_LockButton.AddListener(self.OnLockButton);
         }
 
         [EntitySystem]
@@ -172,6 +176,18 @@ namespace ET.Client
             {
                 self.E_ItemDiImage.gameObject.SetActive(true);
             }
+        }
+        public static void OnItemDiButton(this ES_CommonItem self)
+        {
+        }
+        public static void OnItemClickButton(this ES_CommonItem self)
+        {
+        }
+        public static void OnItemDragButton(this ES_CommonItem self)
+        {
+        }
+        public static void OnLockButton(this ES_CommonItem self)
+        {
         }
     }
 }

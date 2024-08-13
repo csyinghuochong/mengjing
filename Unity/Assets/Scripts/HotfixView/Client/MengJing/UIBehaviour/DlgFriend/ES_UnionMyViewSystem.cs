@@ -35,17 +35,20 @@ namespace ET.Client
 
             self.E_UnionMyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionMyItemsRefresh);
 
-            self.E_UnionRecordsBtnButton.AddListenerAsync(self.UnionRecordsBtn);
+            self.E_UnionRecordsBtnButton.AddListenerAsync(self.OnUnionRecordsBtnButton);
             self.E_Text_Button_1Button.AddListener(() => { self.OnShowModify(true); });
-            self.E_ButtonModifyButton.AddListenerAsync(self.OnButtonModify);
-            self.E_ButtonJingXuanButton.AddListenerAsync(self.OnButtonJingXuan);
+            self.E_ButtonModifyButton.AddListenerAsync(self.OnButtonModifyButton);
+            self.E_ButtonJingXuanButton.AddListenerAsync(self.OnButtonJingXuanButton);
             self.E_ButtonJingXuanButton.gameObject.SetActive(false);
             self.E_InputFieldPurposeInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords_2(); });
-            self.E_ButtonApplyListButton.AddListenerAsync(self.OnButtonApplyList);
+            self.E_ButtonApplyListButton.AddListenerAsync(self.OnButtonApplyListButton);
             self.E_ButtonApplyListButton.gameObject.SetActive(false);
-            self.E_ButtonLeaveButton.AddListener(self.OnButtonLeave);
-            self.E_ButtonNameButton.AddListenerAsync(self.OnButtonName);
+            self.E_ButtonLeaveButton.AddListener(self.OnButtonLeaveButton);
+            self.E_ButtonNameButton.AddListenerAsync(self.OnButtonNameButton);
             self.E_InputFieldNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
+            self.E_Text_EnterUnionButton.AddListener(self.OnText_EnterUnionButton);
+            self.E_Text_LevelButton.AddListener(self.OnText_LevelButton);
+            self.E_Text_ExpButton.AddListener(self.OnText_ExpButton);
         }
 
         [EntitySystem]
@@ -64,7 +67,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Friend);
         }
 
-        public static async ETTask UnionRecordsBtn(this ES_UnionMy self)
+        public static async ETTask OnUnionRecordsBtnButton(this ES_UnionMy self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionRecords);
             DlgUnionRecords dlgUnionRecords = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionRecords>();
@@ -77,7 +80,7 @@ namespace ET.Client
             self.E_ButtonModifyButton.gameObject.SetActive(val);
         }
 
-        public static async ETTask OnButtonJingXuan(this ES_UnionMy self)
+        public static async ETTask OnButtonJingXuanButton(this ES_UnionMy self)
         {
             if (self.UnionInfo == null)
             {
@@ -90,7 +93,7 @@ namespace ET.Client
             // uI.GetComponent<UIUnionJingXuanComponent>().OnUpdateUI(self.UnionInfo);
         }
 
-        public static async ETTask OnButtonModify(this ES_UnionMy self)
+        public static async ETTask OnButtonModifyButton(this ES_UnionMy self)
         {
             string text = self.E_InputFieldPurposeInputField.text;
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
@@ -136,7 +139,7 @@ namespace ET.Client
             self.E_ButtonModifyButton.gameObject.SetActive(true);
         }
 
-        public static async ETTask OnButtonName(this ES_UnionMy self)
+        public static async ETTask OnButtonNameButton(this ES_UnionMy self)
         {
             string text = self.E_InputFieldNameInputField.text;
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
@@ -151,7 +154,7 @@ namespace ET.Client
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;
         }
 
-        public static void OnButtonLeave(this ES_UnionMy self)
+        public static void OnButtonLeaveButton(this ES_UnionMy self)
         {
             if (self.UnionInfo == null)
             {
@@ -174,7 +177,7 @@ namespace ET.Client
             await UnionNetHelper.UnionLeave(self.Root());
         }
 
-        public static async ETTask OnButtonApplyList(this ES_UnionMy self)
+        public static async ETTask OnButtonApplyListButton(this ES_UnionMy self)
         {
             if (self.UnionInfo == null)
             {
@@ -301,6 +304,15 @@ namespace ET.Client
         {
             Scroll_Item_UnionMyItem scrollItemUnionMyItem = self.ScrollItemUnionMyItems[index].BindTrans(transform);
             scrollItemUnionMyItem.OnUpdateUI(self.UnionInfo, self.ShowUnionPlayerInfos[index]);
+        }
+        public static void OnText_EnterUnionButton(this ES_UnionMy self)
+        {
+        }
+        public static void OnText_LevelButton(this ES_UnionMy self)
+        {
+        }
+        public static void OnText_ExpButton(this ES_UnionMy self)
+        {
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +14,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Text_Button_CopyButton.AddListener(self.OnText_Button_Copy);
-            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGet);
-            self.E_ButtonOkButton.AddListenerAsync(self.OnButtonOk);
+            self.E_Text_Button_CopyButton.AddListener(self.OnText_Button_CopyButton);
+            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
+            self.E_ButtonOkButton.AddListenerAsync(self.OnButtonOkButton);
             self.EG_UIPopularizeItemRectTransform.gameObject.SetActive(false);
 
             self.OnUpdateUI().Coroutine();
@@ -28,12 +28,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnText_Button_Copy(this ES_Popularize self)
+        public static void OnText_Button_CopyButton(this ES_Popularize self)
         {
             GUIUtility.systemCopyBuffer = self.E_Text_My_CodeText.text;
         }
 
-        public static async ETTask OnButtonGet(this ES_Popularize self)
+        public static async ETTask OnButtonGetButton(this ES_Popularize self)
         {
             await ActivityNetHelper.Popularize_RewardRequest(self.Root());
             if (self.IsDisposed)
@@ -44,7 +44,7 @@ namespace ET.Client
             self.E_ButtonGetButton.gameObject.SetActive(false);
         }
 
-        public static async ETTask OnButtonOk(this ES_Popularize self)
+        public static async ETTask OnButtonOkButton(this ES_Popularize self)
         {
             if (self.BePopularize)
             {

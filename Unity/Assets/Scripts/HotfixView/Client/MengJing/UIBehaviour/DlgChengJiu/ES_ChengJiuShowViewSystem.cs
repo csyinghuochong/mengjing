@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -25,6 +25,7 @@ namespace ET.Client
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuShowItemsRefresh);
 
             self.InitChengJiuList();
+            self.E_Ima_DiButton.AddListener(self.OnIma_DiButton);
         }
 
         [EntitySystem]
@@ -76,6 +77,9 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemChengJiuShowItems, self.ShowTask.Count);
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTask.Count);
+        }
+        public static void OnIma_DiButton(this ES_ChengJiuShow self)
+        {
         }
     }
 }

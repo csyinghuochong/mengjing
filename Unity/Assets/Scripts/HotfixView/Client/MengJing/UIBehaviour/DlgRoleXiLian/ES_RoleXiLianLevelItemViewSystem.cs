@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
-            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGet);
+            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
         }
 
         [EntitySystem]
@@ -29,7 +29,7 @@ namespace ET.Client
                 ItemViewHelp.XiLianWeiZhiTip(self.ShowSkill[index].KeyId));
         }
 
-        public static async ETTask OnButtonGet(this ES_RoleXiLianLevelItem self)
+        public static async ETTask OnButtonGetButton(this ES_RoleXiLianLevelItem self)
         {
             int error = await BagClientNetHelper.RquestItemXiLianReward(self.Root(), self.XiLianLevelId);
             if (error != ErrorCode.ERR_Success)

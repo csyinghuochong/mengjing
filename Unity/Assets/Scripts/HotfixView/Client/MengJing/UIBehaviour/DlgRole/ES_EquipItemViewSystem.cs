@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -11,6 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_EquipItem self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_EquipButton.AddListener(self.OnEquipButton);
         }
 
         [EntitySystem]
@@ -39,8 +40,6 @@ namespace ET.Client
         public static void Refresh(this ES_EquipItem self, BagInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
         List<BagInfo> equipList)
         {
-            self.E_EquipButton.AddListener(self.OnEquipButton);
-
             self.Occ = occ;
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,7 +11,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ButtonEnterButton.AddListenerAsync(self.OnButtonEnter);
+            self.E_ButtonEnterButton.AddListenerAsync(self.OnButtonEnterButton);
 
             GlobalValueConfig globalValue = GlobalValueConfigCategory.Instance.Get(56);
             self.ES_RewardList.Refresh(globalValue.Value);
@@ -23,7 +23,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonEnter(this ES_BattleEnter self)
+        public static async ETTask OnButtonEnterButton(this ES_BattleEnter self)
         {
             int errorCode = await ActivityNetHelper.RequstBattleEnter(self.Root());
             if (errorCode == ErrorCode.ERR_Success)

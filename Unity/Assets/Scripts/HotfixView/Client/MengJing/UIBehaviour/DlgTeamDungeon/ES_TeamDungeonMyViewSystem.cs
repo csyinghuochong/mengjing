@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,11 +12,11 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_EnterButton.AddListener(() => { self.OnButton_Enter().Coroutine(); });
-            self.E_Button_CallButton.AddListener(self.OnButton_Call);
-            self.E_Button_LeaveButton.AddListener(self.OnButton_Leave);
-            self.E_ButtonApplyListButton.AddListener(self.OnButtonApplyList);
-            self.E_Button_RobotButton.AddListener(() => { self.OnButton_Robot().Coroutine(); });
+            self.E_Button_EnterButton.AddListener(() => { self.OnButton_EnterButton().Coroutine(); });
+            self.E_Button_CallButton.AddListener(self.OnButton_CallButton);
+            self.E_Button_LeaveButton.AddListener(self.OnButton_LeaveButton);
+            self.E_ButtonApplyListButton.AddListener(self.OnButtonApplyListButton);
+            self.E_Button_RobotButton.AddListener(() => { self.OnButton_RobotButton().Coroutine(); });
 
             self.UITeamNodeList[0] = self.ES_TeamItem1.uiTransform.gameObject;
             self.UITeamNodeList[1] = self.ES_TeamItem2.uiTransform.gameObject;
@@ -48,7 +48,7 @@ namespace ET.Client
             self.TeamUIList.Add(self.ES_TeamItem3);
         }
 
-        public static async ETTask OnButton_Robot(this ES_TeamDungeonMy self)
+        public static async ETTask OnButton_RobotButton(this ES_TeamDungeonMy self)
         {
             BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
             long lastcallTime = battleMessageComponent.CallTeamRobotTime;
@@ -61,7 +61,7 @@ namespace ET.Client
             battleMessageComponent.CallTeamRobotTime = TimeHelper.ServerNow();
         }
 
-        public static void OnButtonApplyList(this ES_TeamDungeonMy self)
+        public static void OnButtonApplyListButton(this ES_TeamDungeonMy self)
         {
             ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
             redPointComponent.RemoveReddont(ReddotType.TeamApply);
@@ -69,7 +69,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamApplyList).Coroutine();
         }
 
-        public static void OnButton_Leave(this ES_TeamDungeonMy self)
+        public static void OnButton_LeaveButton(this ES_TeamDungeonMy self)
         {
             bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
 
@@ -77,7 +77,7 @@ namespace ET.Client
                 () => { TeamNetHelper.SendLeaveRequest(self.Root()).Coroutine(); }).Coroutine();
         }
 
-        public static void OnButton_Call(this ES_TeamDungeonMy self)
+        public static void OnButton_CallButton(this ES_TeamDungeonMy self)
         {
             TeamComponentC teamComponent = self.Root().GetComponent<TeamComponentC>();
             TeamInfo teamInfo = teamComponent.GetSelfTeam();
@@ -106,7 +106,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButton_Enter(this ES_TeamDungeonMy self)
+        public static async ETTask OnButton_EnterButton(this ES_TeamDungeonMy self)
         {
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);

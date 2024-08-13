@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         private static void Awake(this ES_RoleGemHole self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_SelectButton.AddListener(self.OnBtn_Select);
+            self.E_SelectButton.AddListener(self.OnSelectButton);
         }
 
         [EntitySystem]
@@ -21,7 +21,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnBtn_Select(this ES_RoleGemHole self)
+        public static void OnSelectButton(this ES_RoleGemHole self)
         {
             if (self.Index == -1)
             {

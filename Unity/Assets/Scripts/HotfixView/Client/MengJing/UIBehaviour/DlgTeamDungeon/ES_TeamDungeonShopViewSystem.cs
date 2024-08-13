@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -13,7 +13,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_BattleShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBattleShopItemsRefresh);
-            self.E_ButtonBuyButton.AddListener(self.OnButtonBuy);
+            self.E_ButtonBuyButton.AddListener(self.OnButtonBuyButton);
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnClickChangeBuyNum(-1); });
@@ -28,7 +28,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnButtonBuy(this ES_TeamDungeonShop self)
+        public static void OnButtonBuyButton(this ES_TeamDungeonShop self)
         {
             if (self.SellId == 0)
             {

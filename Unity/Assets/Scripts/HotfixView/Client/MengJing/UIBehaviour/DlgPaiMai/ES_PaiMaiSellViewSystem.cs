@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -17,8 +17,8 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_PaiMaiSellItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiSellItemsRefresh);
 
-            self.E_Btn_XiaJiaButton.AddListenerAsync(self.OnBtn_XiaJia);
-            self.E_Btn_ShangJiaButton.AddListenerAsync(self.OnBtn_ShangJia);
+            self.E_Btn_XiaJiaButton.AddListenerAsync(self.OnBtn_XiaJiaButton);
+            self.E_Btn_ShangJiaButton.AddListenerAsync(self.OnBtn_ShangJiaButton);
         }
 
         [EntitySystem]
@@ -94,7 +94,7 @@ namespace ET.Client
             self.UpdateSellItemUILIist(page);
         }
 
-        private static async ETTask OnBtn_XiaJia(this ES_PaiMaiSell self)
+        private static async ETTask OnBtn_XiaJiaButton(this ES_PaiMaiSell self)
         {
             if (self.PaiMaiItemInfoId == 0)
             {
@@ -137,7 +137,7 @@ namespace ET.Client
             self.UpdateSellItemUILIist(self.CurrentItemType);
         }
 
-        public static async ETTask OnBtn_ShangJia(this ES_PaiMaiSell self)
+        public static async ETTask OnBtn_ShangJiaButton(this ES_PaiMaiSell self)
         {
             if (self.BagInfo == null)
             {

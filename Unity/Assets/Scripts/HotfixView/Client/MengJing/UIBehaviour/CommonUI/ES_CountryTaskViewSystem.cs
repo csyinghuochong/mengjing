@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -53,6 +53,10 @@ namespace ET.Client
                 (pdata) => { self.EndDrag(pdata as PointerEventData, 1); });
 
             self.E_CountryTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCountryTaskItemsRefresh);
+            self.E_Button_1Button.AddListener(self.OnButton_1Button);
+            self.E_Button_2Button.AddListener(self.OnButton_2Button);
+            self.E_Button_3Button.AddListener(self.OnButton_3Button);
+            self.E_Button_4Button.AddListener(self.OnButton_4Button);
         }
 
         [EntitySystem]
@@ -202,6 +206,18 @@ namespace ET.Client
         {
             self.UpdateTaskCountrys();
             self.UpdateHuoYueReward();
+        }
+        public static void OnButton_1Button(this ES_CountryTask self)
+        {
+        }
+        public static void OnButton_2Button(this ES_CountryTask self)
+        {
+        }
+        public static void OnButton_3Button(this ES_CountryTask self)
+        {
+        }
+        public static void OnButton_4Button(this ES_CountryTask self)
+        {
         }
     }
 }

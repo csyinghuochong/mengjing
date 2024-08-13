@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -22,8 +22,8 @@ namespace ET.Client
             self.NoLockList.Add(self.E_NoLock_4Image.gameObject);
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet, self.CheckPageButton_1);
-            self.E_ButtonPackButton.AddListener(self.OnBtn_ZhengLi);
-            self.E_ButtonQuickButton.AddListenerAsync(self.OnButtonQuick);
+            self.E_ButtonPackButton.AddListener(self.OnButtonPackButton);
+            self.E_ButtonQuickButton.AddListenerAsync(self.OnButtonQuickButton);
 
             self.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -73,13 +73,13 @@ namespace ET.Client
             self.OnItemTypeSet(cangkuNumber - 1);
         }
 
-        private static async ETTask OnButtonQuick(this ES_WarehouseRole self)
+        private static async ETTask OnButtonQuickButton(this ES_WarehouseRole self)
         {
             int currentHouse = self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1;
             await BagClientNetHelper.RquestQuickPut(self.Root(), currentHouse);
         }
 
-        private static void OnBtn_ZhengLi(this ES_WarehouseRole self)
+        private static void OnButtonPackButton(this ES_WarehouseRole self)
         {
             int currentHouse = self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1;
             BagClientNetHelper.RequestSortByLoc(self.Root(), currentHouse).Coroutine();

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +26,8 @@ namespace ET.Client
             self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
 
             self.InitModelShowView_1();
+            self.E_Image_ItemButtonButton.AddListener(self.OnImage_ItemButtonButton);
+            self.E_Image_EventTriggerButton.AddListener(self.OnImage_EventTriggerButton);
         }
 
         [EntitySystem]
@@ -273,6 +275,12 @@ namespace ET.Client
         }
 
         public static void OnSelectSkinHandler(this ES_PetTuJian self, int skinId)
+        {
+        }
+        public static void OnImage_ItemButtonButton(this ES_PetTuJian self)
+        {
+        }
+        public static void OnImage_EventTriggerButton(this ES_PetTuJian self)
         {
         }
     }

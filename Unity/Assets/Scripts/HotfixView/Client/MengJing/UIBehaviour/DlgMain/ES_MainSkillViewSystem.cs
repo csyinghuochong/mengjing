@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,25 +17,25 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_HorseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnCityHorseButton(true); });
+            self.E_Button_HorseButton.AddListener(self.OnButton_HorseButton);
             
-            self.E_Btn_TargetButton.AddListener(self.OnLockTargetUnit);
+            self.E_Btn_TargetButton.AddListener(self.OnBtn_TargetButton);
 
             self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(3f); });
 
-            self.E_Btn_NpcDuiHuaButton.AddListener(self.OnBtn_NpcDuiHua);
+            self.E_Btn_NpcDuiHuaButton.AddListener(self.OnBtn_NpcDuiHuaButton);
 
-            self.E_Button_ZhuaPuButton.AddListener(self.OnButton_ZhuaPu);
+            self.E_Button_ZhuaPuButton.AddListener(self.OnButton_ZhuaPuButton);
             self.E_Button_ZhuaPuButton.gameObject.SetActive(false);
 
-            self.E_Btn_PetTargetButton.AddListenerAsync(self.OnBtn_PetTarget);
+            self.E_Btn_PetTargetButton.AddListenerAsync(self.OnBtn_PetTargetButton);
 
             self.E_Btn_CancleSkillEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.OnEnterCancelButton(); });
             self.E_Btn_CancleSkillEventTrigger.gameObject.SetActive(false);
 
-            self.E_Btn_JingLingButton.AddListenerAsync(self.OnBtn_JingLing);
+            self.E_Btn_JingLingButton.AddListenerAsync(self.OnBtn_JingLingButton);
 
-            self.E_Button_Switch_0Button.AddListenerAsync(self.OnButton_Switch);
+            self.E_Button_Switch_0Button.AddListenerAsync(self.OnButton_Switch_0Button);
 
             self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_0);
             self.ES_SkillGrid_Normal_0.SkillCancelHandler = self.ShowCancelButton;
@@ -64,6 +64,7 @@ namespace ET.Client
             self.ES_AttackGrid.uiTransform.gameObject.SetActive(true);
 
             self.ES_FangunSkill.uiTransform.gameObject.SetActive(true);
+            self.E_Btn_CancleSkillButton.AddListener(self.OnBtn_CancleSkillButton);
         }
 
         [EntitySystem]
@@ -72,6 +73,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void OnButton_HorseButton(this ES_MainSkill self)
+        {
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnCityHorseButton(true);
+        }
+        
         private static void OnCityHorseButton(this ES_MainSkill self, bool showtip)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -101,7 +107,7 @@ namespace ET.Client
             UserInfoNetHelper.HorseRideRequest(self.Root()).Coroutine();
         }
         
-        public static async ETTask OnBtn_PetTarget(this ES_MainSkill self)
+        public static async ETTask OnBtn_PetTargetButton(this ES_MainSkill self)
         {
             long lockId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
             if (lockId == 0)
@@ -112,7 +118,7 @@ namespace ET.Client
             await BagClientNetHelper.PetTargetLock(self.Root(), lockId);
         }
 
-        public static async ETTask OnButton_Switch(this ES_MainSkill self)
+        public static async ETTask OnButton_Switch_0Button(this ES_MainSkill self)
         {
             if (self.SwitchCDEndTime != 0)
             {
@@ -256,7 +262,7 @@ namespace ET.Client
             self.E_Btn_JingLingButton.gameObject.SetActive(showButton);
         }
 
-        public static async ETTask OnBtn_JingLing(this ES_MainSkill self)
+        public static async ETTask OnBtn_JingLingButton(this ES_MainSkill self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             if (chengJiuComponent.JingLingId == 0)
@@ -301,7 +307,7 @@ namespace ET.Client
             self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59);
         }
 
-        public static void OnButton_ZhuaPu(this ES_MainSkill self)
+        public static void OnButton_ZhuaPuButton(this ES_MainSkill self)
         {
             long lockTargetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
             if (lockTargetId == 0)
@@ -383,7 +389,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
         }
 
-        public static void OnBtn_NpcDuiHua(this ES_MainSkill self)
+        public static void OnBtn_NpcDuiHuaButton(this ES_MainSkill self)
         {
             DuiHuaHelper.MoveToNpcDialog(self.Root());
         }
@@ -600,7 +606,7 @@ namespace ET.Client
             self.ES_FangunSkill.OnUpdate(0);
         }
 
-        public static void OnLockTargetUnit(this ES_MainSkill self)
+        public static void OnBtn_TargetButton(this ES_MainSkill self)
         {
             LockTargetComponent lockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             if (Time.time - self.LastLockTime > 5)
@@ -660,6 +666,9 @@ namespace ET.Client
             int juexingid = occupationConfigCategory.JueXingSkill[7];
             self.ES_SkillGrid_Normal_juexing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
             self.JueXingSkillId = juexingid;
+        }
+        public static void OnBtn_CancleSkillButton(this ES_MainSkill self)
+        {
         }
     }
 }

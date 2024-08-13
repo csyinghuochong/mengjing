@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +15,7 @@ namespace ET.Client
 
             self.E_ReceiveBtnButton.gameObject.SetActive(false);
             self.E_ReceivedImgImage.gameObject.SetActive(false);
-            self.E_ReceiveBtnButton.AddListenerAsync(self.OnReceiveBtn);
+            self.E_ReceiveBtnButton.AddListenerAsync(self.OnReceiveBtnButton);
             self.E_WelfareTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnWelfareTaskItemsRefresh);
 
             int currentDay = self.Root().GetComponent<UserInfoComponentC>().GetCrateDay() - 1;
@@ -142,7 +142,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnReceiveBtn(this ES_WelfareTask self)
+        public static async ETTask OnReceiveBtnButton(this ES_WelfareTask self)
         {
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
 

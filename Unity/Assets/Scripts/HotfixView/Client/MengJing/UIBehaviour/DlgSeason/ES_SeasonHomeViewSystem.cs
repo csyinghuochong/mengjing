@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtn);
+            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtnButton);
             self.E_ShowBtnButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonLordDetail).Coroutine();
@@ -160,7 +160,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnGetBtn(this ES_SeasonHome self)
+        public static async ETTask OnGetBtnButton(this ES_SeasonHome self)
         {
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 5)
             {

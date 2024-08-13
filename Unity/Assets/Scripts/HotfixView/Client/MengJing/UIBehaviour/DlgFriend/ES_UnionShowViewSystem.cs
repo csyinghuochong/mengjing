@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -29,7 +29,7 @@ namespace ET.Client
                 self.CheckSensitiveWords(self.E_InputFieldNameInputField.gameObject);
             });
 
-            self.E_Btn_CreateButton.AddListenerAsync(self.RequestCreateUnion);
+            self.E_Btn_CreateButton.AddListenerAsync(self.OnBtn_CreateButton);
 
             self.E_InputFieldPurposeInputField.onValueChanged.AddListener((string text) =>
             {
@@ -128,7 +128,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask RequestCreateUnion(this ES_UnionShow self)
+        public static async ETTask OnBtn_CreateButton(this ES_UnionShow self)
         {
             string unionName = self.E_InputFieldNameInputField.text;
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);

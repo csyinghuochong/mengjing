@@ -15,12 +15,12 @@ namespace ET.Client
 
             self.EG_SkillIconItemRectTransform.gameObject.SetActive(false);
 
-            self.E_Btn_EditSkillButton.AddListenerAsync(self.OnBtn_EditSkill);
-            self.E_Btn_StartGuajIButton.AddListener(self.OpenGuaJi);
-            self.E_Btn_StopGuaJiButton.AddListener(self.StopGuaJi);
-            self.E_Btn_Click_0Button.AddListener(self.ClickSell);
-            self.E_Btn_GuaJiRangeButton.AddListener(self.ClickGuaJiRange);
-            self.E_Btn_GuaJiAutoUseItemButton.AddListener(self.ClickGuaJiAutoUseItem);
+            self.E_Btn_EditSkillButton.AddListenerAsync(self.OnBtn_EditSkillButton);
+            self.E_Btn_StartGuajIButton.AddListener(self.OnBtn_StartGuajIButton);
+            self.E_Btn_StopGuaJiButton.AddListener(self.OnBtn_StopGuaJiButton);
+            self.E_Btn_Click_0Button.AddListener(self.OnBtn_Click_0Button);
+            self.E_Btn_GuaJiRangeButton.AddListener(self.OnBtn_GuaJiRangeButton);
+            self.E_Btn_GuaJiAutoUseItemButton.AddListener(self.OnBtn_GuaJiAutoUseItemButton);
 
             self.Init();
             self.UpdateGuaJiSell();
@@ -103,7 +103,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnBtn_EditSkill(this ES_SettingGuaJi self)
+        public static async ETTask OnBtn_EditSkillButton(this ES_SettingGuaJi self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingSkill);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSettingSkill>().CloseAction = self.UpdataSkillSet;
@@ -170,7 +170,7 @@ namespace ET.Client
             }
         }
 
-        public static void OpenGuaJi(this ES_SettingGuaJi self)
+        public static void OnBtn_StartGuajIButton(this ES_SettingGuaJi self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
@@ -210,7 +210,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
-        public static void StopGuaJi(this ES_SettingGuaJi self)
+        public static void OnBtn_StopGuaJiButton(this ES_SettingGuaJi self)
         {
             if (self.Root().GetComponent<UnitGuaJiComponent>() != null)
             {
@@ -221,7 +221,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
         }
 
-        public static void ClickSell(this ES_SettingGuaJi self)
+        public static void OnBtn_Click_0Button(this ES_SettingGuaJi self)
         {
             string acttype = self.Root().GetComponent<UserInfoComponentC>().GetGameSettingValue(GameSettingEnum.GuaJiSell);
             acttype = acttype == "0"? "1" : "0";
@@ -243,7 +243,7 @@ namespace ET.Client
             self.UpdateGuaJiSell();
         }
 
-        public static void ClickGuaJiRange(this ES_SettingGuaJi self)
+        public static void OnBtn_GuaJiRangeButton(this ES_SettingGuaJi self)
         {
             string acttype = self.Root().GetComponent<UserInfoComponentC>().GetGameSettingValue(GameSettingEnum.GuaJiRang);
             if (acttype == "0")
@@ -272,7 +272,7 @@ namespace ET.Client
             self.UpdateGuaJiRange();
         }
 
-        public static void ClickGuaJiAutoUseItem(this ES_SettingGuaJi self)
+        public static void OnBtn_GuaJiAutoUseItemButton(this ES_SettingGuaJi self)
         {
             string acttype = self.Root().GetComponent<UserInfoComponentC>().GetGameSettingValue(GameSettingEnum.GuaJiAutoUseItem);
             if (acttype == "0")

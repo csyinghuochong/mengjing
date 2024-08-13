@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -15,12 +15,12 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PetEggChouKaProbExplain);
             });
-            self.E_Btn_RolePetBagButton.AddListener(self.OnBtn_RolePetBag);
-            self.E_PetEggLucklyExplainBtnButton.AddListener(self.OnPetEggLucklyExplainBtn);
-            self.E_Btn_ChouKaNumRewardButton.AddListener(self.OnBtn_ChouKaNumReward);
+            self.E_Btn_RolePetBagButton.AddListener(self.OnBtn_RolePetBagButton);
+            self.E_PetEggLucklyExplainBtnButton.AddListener(self.OnPetEggLucklyExplainBtnButton);
+            self.E_Btn_ChouKaNumRewardButton.AddListener(self.OnBtn_ChouKaNumRewardButton);
             self.E_Btn_ChouKaTenButton.AddListener(() => { self.OnBtn_ChouKa(10).Coroutine(); });
             self.E_Btn_ChouKaButton.AddListener(() => { self.OnBtn_ChouKa(1).Coroutine(); });
-            self.E_Btn_RolePetHeXinButton.AddListener(self.OnBtn_RolePetHeXin);
+            self.E_Btn_RolePetHeXinButton.AddListener(self.OnBtn_RolePetHeXinButton);
 
             self.EG_PetLuckyRectTransform.gameObject.SetActive(true);
 
@@ -40,17 +40,17 @@ namespace ET.Client
             self.ES_RewardList.Refresh(ConfigData.PetChouKaRewardItemShow, 0.8f);
         }
 
-        public static void OnBtn_RolePetBag(this ES_PetEggChouKa self)
+        public static void OnBtn_RolePetBagButton(this ES_PetEggChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RolePetBag).Coroutine();
         }
 
-        public static void OnPetEggLucklyExplainBtn(this ES_PetEggChouKa self)
+        public static void OnPetEggLucklyExplainBtnButton(this ES_PetEggChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetEggLucklyExplain).Coroutine();
         }
 
-        public static void OnBtn_ChouKaNumReward(this ES_PetEggChouKa self)
+        public static void OnBtn_ChouKaNumRewardButton(this ES_PetEggChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetEggChouKaReward).Coroutine();
         }
@@ -100,7 +100,7 @@ namespace ET.Client
             self.E_Text_CostNumberText.color = haveNumber >= int.Parse(itemInfo[1]) ? Color.white : Color.red;
         }
 
-        public static void OnBtn_RolePetHeXin(this ES_PetEggChouKa self)
+        public static void OnBtn_RolePetHeXinButton(this ES_PetEggChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
         }

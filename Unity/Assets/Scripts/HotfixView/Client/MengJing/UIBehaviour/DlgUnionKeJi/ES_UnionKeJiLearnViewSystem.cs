@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_UnionKeJiLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionKeJiLearnItemsRefresh);
-            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtn);
+            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtnButton);
 
             self.InitItemList().Coroutine();
         }
@@ -99,7 +99,7 @@ namespace ET.Client
             self.ES_CostList.Refresh(unionKeJiConfig.LearnCost);
         }
 
-        public static async ETTask OnStartBtn(this ES_UnionKeJiLearn self)
+        public static async ETTask OnStartBtnButton(this ES_UnionKeJiLearn self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[self.Position]);
             if (unionKeJiConfig.NextID == 0)

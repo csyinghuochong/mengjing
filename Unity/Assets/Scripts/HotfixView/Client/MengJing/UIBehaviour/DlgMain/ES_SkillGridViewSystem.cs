@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -39,7 +39,7 @@ namespace ET.Client
 
             self.RemoveEventTriggers();
 
-            self.E_Button_CancleButton.AddListener(self.SendCancleSkill);
+            self.E_Button_CancleButton.AddListener(self.OnButton_CancleButton);
 
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
@@ -50,6 +50,7 @@ namespace ET.Client
 
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
+            self.E_Btn_SkillStartButton.AddListener(self.OnBtn_SkillStartButton);
         }
 
         [EntitySystem]
@@ -351,7 +352,7 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, number == 0);
         }
 
-        public static void SendCancleSkill(this ES_SkillGrid self)
+        public static void OnButton_CancleButton(this ES_SkillGrid self)
         {
             C2M_SkillInterruptRequest request = new() { SkillID = self.SkillPro.SkillID };
             self.Root().GetComponent<ClientSenderCompnent>().Send(request);
@@ -513,6 +514,9 @@ namespace ET.Client
             self.E_Text_SkillCDText.text = string.Empty;
             self.E_Text_SkillItemNumText.gameObject.SetActive(false);
             self.UpdateItemNumber();
+        }
+        public static void OnBtn_SkillStartButton(this ES_SkillGrid self)
+        {
         }
     }
 }

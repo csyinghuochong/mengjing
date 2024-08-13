@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_EquipButton.AddListener(self.OnClickEquip);
+            self.E_EquipButton.AddListener(self.OnEquipButton);
         }
 
         [EntitySystem]
@@ -22,7 +22,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnClickEquip(this ES_EquipSetItem self)
+        public static void OnEquipButton(this ES_EquipSetItem self)
         {
             if (self.BagInfo == null)
                 return;

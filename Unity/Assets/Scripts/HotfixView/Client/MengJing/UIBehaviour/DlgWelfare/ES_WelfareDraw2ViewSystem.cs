@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_DrawBtnButton.AddListenerAsync(self.StartDraw);
+            self.E_DrawBtnButton.AddListenerAsync(self.OnDrawBtnButton);
 
             self.Init();
         }
@@ -82,7 +82,7 @@ namespace ET.Client
                 numericComponent.GetAsLong(NumericType.WelfareChouKaNumber)).ToString();
         }
 
-        public static async ETTask StartDraw(this ES_WelfareDraw2 self)
+        public static async ETTask OnDrawBtnButton(this ES_WelfareDraw2 self)
         {
             self.Init();
 

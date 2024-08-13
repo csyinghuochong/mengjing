@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_LingQuButton.AddListenerAsync(self.OnBtn_LingQu);
+            self.E_Btn_LingQuButton.AddListenerAsync(self.OnBtn_LingQuButton);
 
             self.E_ChengJiuRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuRewardItemsRefresh);
 
@@ -78,7 +78,7 @@ namespace ET.Client
             self.OnUdapteItemList(rewardId);
         }
 
-        private static async ETTask OnBtn_LingQu(this ES_ChengJiuReward self)
+        private static async ETTask OnBtn_LingQuButton(this ES_ChengJiuReward self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             ChengJiuRewardConfig chengJiuConfig = ChengJiuRewardConfigCategory.Instance.Get(self.RewardId);

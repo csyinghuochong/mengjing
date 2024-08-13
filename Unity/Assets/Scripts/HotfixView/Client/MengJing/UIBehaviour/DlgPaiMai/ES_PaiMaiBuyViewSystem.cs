@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -14,9 +14,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_SearchButton.AddListenerAsync(self.OnClickBtn_Search);
-            self.E_NextPageBtnButton.AddListener(self.OnNextPageBtn);
-            self.E_PrePageBtnButton.AddListener(self.OnPrePageBtn);
+            self.E_Btn_SearchButton.AddListenerAsync(self.OnBtn_SearchButton);
+            self.E_NextPageBtnButton.AddListener(self.OnNextPageBtnButton);
+            self.E_PrePageBtnButton.AddListener(self.OnPrePageBtnButton);
 
             self.E_PaiMaiBuyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiBuyItemsRefresh);
 
@@ -27,10 +27,6 @@ namespace ET.Client
 
             self.UITypeViewComponent.TypeButtonInfos = self.InitTypeButtonInfos();
             self.UITypeViewComponent.OnInitUI().Coroutine();
-
-            self.E_Btn_SearchButton.AddListenerAsync(self.OnClickBtn_Search);
-            self.E_NextPageBtnButton.AddListener(self.OnNextPageBtn);
-            self.E_PrePageBtnButton.AddListener(self.OnPrePageBtn);
         }
 
         [EntitySystem]
@@ -274,7 +270,7 @@ namespace ET.Client
             return paiMaiItemInfos;
         }
 
-        public static void OnPrePageBtn(this ES_PaiMaiBuy self)
+        public static void OnPrePageBtnButton(this ES_PaiMaiBuy self)
         {
             if (self.PageIndex <= 1)
             {
@@ -285,7 +281,7 @@ namespace ET.Client
             self.OnClickTypeItem(self.ItemType, self.ItemSubType, self.PageIndex).Coroutine();
         }
 
-        public static void OnNextPageBtn(this ES_PaiMaiBuy self)
+        public static void OnNextPageBtnButton(this ES_PaiMaiBuy self)
         {
             switch (self.ItemType)
             {
@@ -330,7 +326,7 @@ namespace ET.Client
             self.OnClickTypeItem(self.ItemType, self.ItemSubType, self.PageIndex).Coroutine();
         }
 
-        public static async ETTask OnClickBtn_Search(this ES_PaiMaiBuy self)
+        public static async ETTask OnBtn_SearchButton(this ES_PaiMaiBuy self)
         {
             string text = self.E_InputFieldInputField.text;
 

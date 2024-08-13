@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,7 +11,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ButtonGetButton.AddListener(self.OnButtonGet);
+            self.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
         }
 
         [EntitySystem]
@@ -20,7 +20,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnButtonGet(this ES_LunTan self)
+        public static void OnButtonGetButton(this ES_LunTan self)
         {
             Application.OpenURL("https://l.tapdb.net/jYTd08hD?channel=rep-rep_6t3lta8ujdb_h5url65");
         }

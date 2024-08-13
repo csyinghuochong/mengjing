@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -18,8 +18,8 @@ namespace ET.Client
             self.E_SeasonDayTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSeasonDayTaskItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnFunctionSetBtn);
 
-            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtn);
-            self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtn);
+            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtnButton);
+            self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
@@ -452,7 +452,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnGetBtn(this ES_SeasonTask self)
+        public static async ETTask OnGetBtnButton(this ES_SeasonTask self)
         {
             if (self.TaskPro.taskStatus < (int)TaskStatuEnum.Completed)
             {
@@ -481,7 +481,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnGiveBtn(this ES_SeasonTask self)
+        public static async ETTask OnGiveBtnButton(this ES_SeasonTask self)
         {
             if (self.TaskType == 1)
             {

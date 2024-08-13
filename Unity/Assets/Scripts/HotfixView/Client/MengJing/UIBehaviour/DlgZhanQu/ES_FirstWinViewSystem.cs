@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,8 +18,8 @@ namespace ET.Client
 
             self.SkillDescriptionList.Add(self.E_SkillDescriptionItemTextText.gameObject);
 
-            self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWin);
-            self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelf);
+            self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWinButton);
+            self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
 
             self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 115, 394f);
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
@@ -38,14 +38,14 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButton_FirstWin(this ES_FirstWin self)
+        public static async ETTask OnButton_FirstWinButton(this ES_FirstWin self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FirstWinReward);
             DlgFirstWinReward dlgFirstWinReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFirstWinReward>();
             dlgFirstWinReward.OnUpdateUI(self.FirstWinId);
         }
 
-        public static async ETTask OnButton_FirstWinSelf(this ES_FirstWin self)
+        public static async ETTask OnButton_FirstWinSelfButton(this ES_FirstWin self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FirstWinReward);
             DlgFirstWinReward dlgFirstWinReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFirstWinReward>();

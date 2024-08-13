@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,10 +14,10 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_TrialDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTrialDungeonItemsRefresh);
-            self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_Enter);
-            self.E_Btn_ReceiveButton.AddListenerAsync(self.OnBtn_Receive);
-            self.E_Btn_AddButton.AddListener(self.OnBtn_Add);
-            self.E_Btn_SubButton.AddListener(self.OnBtn_Sub);
+            self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_EnterButton);
+            self.E_Btn_ReceiveButton.AddListenerAsync(self.OnBtn_ReceiveButton);
+            self.E_Btn_AddButton.AddListener(self.OnBtn_AddButton);
+            self.E_Btn_SubButton.AddListener(self.OnBtn_SubButton);
 
             self.OnUpdateUI(self.GetShowCengNum());
         }
@@ -75,7 +75,7 @@ namespace ET.Client
             return maxCeng;
         }
 
-        public static void OnBtn_Add(this ES_TrialDungeon self)
+        public static void OnBtn_AddButton(this ES_TrialDungeon self)
         {
             TowerConfig towerConfig = TowerConfigCategory.Instance.Get(self.TowerId);
             if (towerConfig.CengNum >= self.GetMaxCengNum())
@@ -86,7 +86,7 @@ namespace ET.Client
             self.OnUpdateUI(towerConfig.CengNum + 1);
         }
 
-        public static void OnBtn_Sub(this ES_TrialDungeon self)
+        public static void OnBtn_SubButton(this ES_TrialDungeon self)
         {
             TowerConfig towerConfig = TowerConfigCategory.Instance.Get(self.TowerId);
             if (towerConfig.CengNum == 1)
@@ -204,7 +204,7 @@ namespace ET.Client
             self.ES_RewardList.Refresh(towerConfig.DropShow);
         }
 
-        public static async ETTask OnBtn_Receive(this ES_TrialDungeon self)
+        public static async ETTask OnBtn_ReceiveButton(this ES_TrialDungeon self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 2)
@@ -218,7 +218,7 @@ namespace ET.Client
             self.UpdateButtons();
         }
 
-        public static async ETTask OnBtn_Enter(this ES_TrialDungeon self)
+        public static async ETTask OnBtn_EnterButton(this ES_TrialDungeon self)
         {
             if (self.TowerId == 0)
             {

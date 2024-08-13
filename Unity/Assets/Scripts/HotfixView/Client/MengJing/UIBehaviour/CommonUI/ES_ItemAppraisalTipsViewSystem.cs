@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -21,6 +21,7 @@ namespace ET.Client
             self.E_JingHeActivateButton.AddListenerAsync(self.OnJingHeActivateButton);
             self.E_SaveStoreHouseButton.AddListenerAsync(self.OnSaveStoreHouseButton);
             self.E_TakeStoreHouseButton.AddListenerAsync(self.OnTakeStoreHouseButton);
+            self.E_XieXiaGemButton.AddListener(self.OnXieXiaGemButton);
         }
 
         [EntitySystem]
@@ -494,6 +495,9 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
+        }
+        public static void OnXieXiaGemButton(this ES_ItemAppraisalTips self)
+        {
         }
     }
 }

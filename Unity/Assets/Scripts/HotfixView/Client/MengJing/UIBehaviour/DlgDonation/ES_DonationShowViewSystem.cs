@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,11 +11,11 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_Donation_2Button.AddListenerAsync(self.OnButton_Donation2);
+            self.E_Btn_Donation_2Button.AddListenerAsync(self.OnBtn_Donation_2Button);
             self.E_ImageButtonButton.AddListener(() => { self.EG_UIDonationPriceRectTransform.gameObject.SetActive(false); });
             self.E_BtnCloseButton.AddListener(() => { self.EG_UIDonationPriceRectTransform.gameObject.SetActive(false); });
             self.EG_UIDonationPriceRectTransform.gameObject.SetActive(false);
-            self.E_Btn_Donation_1Button.AddListener(self.On_Button_Donation);
+            self.E_Btn_Donation_1Button.AddListener(self.OnBtn_Donation_1Button);
             self.E_DonationShowItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDonationShowItemsRefresh);
 
             self.OnUpdateUI().Coroutine();
@@ -27,7 +27,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void On_Button_Donation(this ES_DonationShow self)
+        public static void OnBtn_Donation_1Button(this ES_DonationShow self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.Lv < 12)
@@ -39,7 +39,7 @@ namespace ET.Client
             self.EG_UIDonationPriceRectTransform.gameObject.SetActive(!self.EG_UIDonationPriceRectTransform.gameObject.activeSelf);
         }
 
-        public static async ETTask OnButton_Donation2(this ES_DonationShow self)
+        public static async ETTask OnBtn_Donation_2Button(this ES_DonationShow self)
         {
             string text = self.E_InputFieldNumberInputField.text;
             int number = int.Parse(text);

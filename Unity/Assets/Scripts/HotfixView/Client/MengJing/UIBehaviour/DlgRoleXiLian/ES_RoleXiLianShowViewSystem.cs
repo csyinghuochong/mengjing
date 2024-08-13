@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -40,6 +40,7 @@ namespace ET.Client
 
             self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
             self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
+            self.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         [EntitySystem]
@@ -307,6 +308,9 @@ namespace ET.Client
             }
 
             self.EG_XiLianEffectRectTransform.gameObject.SetActive(false);
+        }
+        public static void OnImageButtonButton(this ES_RoleXiLianShow self)
+        {
         }
     }
 }

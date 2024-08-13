@@ -17,11 +17,11 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_ClickButton.AddListener(self.OnBtn_Click);
+            self.E_Btn_ClickButton.AddListener(self.OnBtn_ClickButton);
 
-            self.E_ButtonSkillSetButton.AddListener(self.OnButtonSkillSet);
+            self.E_ButtonSkillSetButton.AddListener(self.OnButtonSkillSetButton);
 
-            self.E_Btn_YinYingButton.AddListener(self.OnBtn_Shadow);
+            self.E_Btn_YinYingButton.AddListener(self.OnBtn_YinYingButton);
 
             self.EG_RandomHoreseRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RandomHorese);
 
@@ -29,7 +29,7 @@ namespace ET.Client
 
             self.EG_RotaAngleSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RotaAngle);
 
-            self.E_ReSetCameraBtnButton.AddListener(self.OnReSetCameraBtn);
+            self.E_ReSetCameraBtnButton.AddListener(self.OnReSetCameraBtnButton);
 
             self.EG_ZhuBoSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_ZhuBo);
 
@@ -41,7 +41,7 @@ namespace ET.Client
 
             self.EG_AutoAttackRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_AutoAttack);
 
-            self.E_NoMovingButton.AddListener(self.OnBtn_NoMoving);
+            self.E_NoMovingButton.AddListener(self.OnNoMovingButton);
 
             self.EG_HideNodeRectTransform.gameObject.SetActive(GlobalHelp.GetPlatform() != 5 && GlobalHelp.GetPlatform() != 6);
 
@@ -65,21 +65,21 @@ namespace ET.Client
 
             self.E_SliderMusicSlider.onValueChanged.AddListener((float value) => { self.OnSliderMusicChange(value); });
 
-            self.E_Btn_FpsButton.AddListener(self.OnBtn_Fps);
+            self.E_Btn_FpsButton.AddListener(self.OnBtn_FpsButton);
 
             self.E_Image_fpsImage.gameObject.SetActive(self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_FpsRectTransform
                     .gameObject.activeSelf);
 
             self.E_InputFieldCNameInputField.onValueChanged.AddListener((text) => { self.CheckSensitiveWords(); });
 
-            self.E_Btn_CloseGameButton.AddListener(self.OnCloseGame);
-            self.E_Btn_ReturnDengLuButton.AddListener(self.OnReturnLogin);
+            self.E_Btn_CloseGameButton.AddListener(self.OnBtn_CloseGameButton);
+            self.E_Btn_ReturnDengLuButton.AddListener(self.OnBtn_ReturnDengLuButton);
 
-            self.E_Btn_SoundButton.AddListener(self.OnBtn_Sound);
-            self.E_Btn_YinYueButton.AddListener(self.OnBtn_YinYue);
-            self.E_ButtonRnameButton.AddListenerAsync(self.OnButtonRname);
+            self.E_Btn_SoundButton.AddListener(self.OnBtn_SoundButton);
+            self.E_Btn_YinYueButton.AddListener(self.OnBtn_YinYueButton);
+            self.E_ButtonRnameButton.AddListenerAsync(self.OnButtonRnameButton);
 
-            self.E_ButtonPhoneButton.AddListener(self.OnButtonPhone);
+            self.E_ButtonPhoneButton.AddListener(self.OnButtonPhoneButton);
 
             self.EG_HighFpsRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnHighFps);
 
@@ -87,9 +87,9 @@ namespace ET.Client
 
             self.EG_NoShowOtherRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnNoShowOther);
 
-            self.E_GameMemoryButton.AddListener(self.OnGameMemory);
+            self.E_GameMemoryButton.AddListener(self.OnGameMemoryButton);
 
-            self.E_Btn_FixedButton.AddListener(self.OnBtn_Fixed);
+            self.E_Btn_FixedButton.AddListener(self.OnBtn_FixedButton);
 
             self.E_ScreenToggle0Toggle.AddListener(self.OnScreenToggle0_Ex);
             self.E_ScreenToggle1Toggle.AddListener(self.OnScreenToggle1_Ex);
@@ -132,7 +132,7 @@ namespace ET.Client
             SoundComponent.Instance.ChangeMusicVolume(value);
         }
 
-        public static void OnButtonSkillSet(this ES_SettingGame self)
+        public static void OnButtonSkillSetButton(this ES_SettingGame self)
         {
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
@@ -145,7 +145,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
-        public static void OnBtn_Click(this ES_SettingGame self)
+        public static void OnBtn_ClickButton(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click);
             self.E_Image_ClickImage.gameObject.SetActive(value == "0");
@@ -153,7 +153,7 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
         }
 
-        public static void OnBtn_Shadow(this ES_SettingGame self)
+        public static void OnBtn_YinYingButton(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
             self.E_Image_YinYingImage.gameObject.SetActive(value == "0");
@@ -246,7 +246,7 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = va;
         }
 
-        public static void OnReSetCameraBtn(this ES_SettingGame self)
+        public static void OnReSetCameraBtnButton(this ES_SettingGame self)
         {
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, 1f);
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = 1f;
@@ -282,7 +282,7 @@ namespace ET.Client
             self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst = int.Parse(value == "0" ? "1" : "0");
         }
 
-        public static void OnBtn_NoMoving(this ES_SettingGame self)
+        public static void OnNoMovingButton(this ES_SettingGame self)
         {
             SettingData.ShowNoMoving = !SettingData.ShowNoMoving;
         }
@@ -399,7 +399,7 @@ namespace ET.Client
             self.SendGameSetting().Coroutine();
         }
 
-        public static void OnBtn_Fps(this ES_SettingGame self)
+        public static void OnBtn_FpsButton(this ES_SettingGame self)
         {
             self.E_Image_fpsImage.gameObject.SetActive(!self.E_Image_fpsImage.gameObject.activeSelf);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
@@ -413,12 +413,12 @@ namespace ET.Client
             }
         }
 
-        public static void OnCloseGame(this ES_SettingGame self)
+        public static void OnBtn_CloseGameButton(this ES_SettingGame self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "设置", "是否退出游戏?", () => { Application.Quit(); }).Coroutine();
         }
 
-        public static void OnReturnLogin(this ES_SettingGame self)
+        public static void OnBtn_ReturnDengLuButton(this ES_SettingGame self)
         {
             self.E_HideDiImage.gameObject.SetActive(true);
             //加载登录场景
@@ -446,19 +446,19 @@ namespace ET.Client
             self.Root().GetComponent<UserInfoComponentC>().UpdateGameSetting(self.GameSettingInfos);
         }
 
-        public static void OnBtn_Sound(this ES_SettingGame self)
+        public static void OnBtn_SoundButton(this ES_SettingGame self)
         {
             self.E_Image_SoundImage.gameObject.SetActive(!self.E_Image_SoundImage.gameObject.activeSelf);
             self.SaveSettings(GameSettingEnum.Sound, self.E_Image_SoundImage.gameObject.activeSelf ? "1" : "0");
         }
 
-        public static void OnBtn_YinYue(this ES_SettingGame self)
+        public static void OnBtn_YinYueButton(this ES_SettingGame self)
         {
             self.E_Image_yinyuImage.gameObject.SetActive(!self.E_Image_yinyuImage.gameObject.activeSelf);
             self.SaveSettings(GameSettingEnum.Music, self.E_Image_yinyuImage.gameObject.activeSelf ? "1" : "0");
         }
 
-        public static void OnBtn_Fixed(this ES_SettingGame self)
+        public static void OnBtn_FixedButton(this ES_SettingGame self)
         {
             string value = self.E_Image_FixedImage.gameObject.activeSelf ? "1" : "0";
             self.SaveSettings(GameSettingEnum.YanGan, value);
@@ -496,7 +496,7 @@ namespace ET.Client
             SettingHelper.OnSmooth(oldValue == "0" ? "1" : "0");
         }
 
-        public static void OnGameMemory(this ES_SettingGame self)
+        public static void OnGameMemoryButton(this ES_SettingGame self)
         {
             self.SendGameMemory().Coroutine();
         }
@@ -587,7 +587,7 @@ namespace ET.Client
             self.E_InputFieldCNameInputField.text = text_old;
         }
 
-        public static void OnButtonPhone(this ES_SettingGame self)
+        public static void OnButtonPhoneButton(this ES_SettingGame self)
         {
             PlayerInfo playerInfo = self.Root().GetComponent<PlayerComponent>().PlayerInfo;
             if (!string.IsNullOrEmpty(playerInfo.PhoneNumber))
@@ -603,7 +603,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PhoneCode).Coroutine();
         }
 
-        public static async ETTask OnButtonRname(this ES_SettingGame self)
+        public static async ETTask OnButtonRnameButton(this ES_SettingGame self)
         {
             string text = self.E_InputFieldCNameInputField.text;
 

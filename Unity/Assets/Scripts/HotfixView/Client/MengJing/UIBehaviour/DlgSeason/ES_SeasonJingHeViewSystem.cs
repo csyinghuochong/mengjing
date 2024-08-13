@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,9 +18,9 @@ namespace ET.Client
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_SeasonJingHeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSeasonJingHeItemsRefresh);
-            self.E_OpenBtnButton.AddListenerAsync(self.OnOpenBtn);
-            self.E_EquipBtnButton.AddListenerAsync(self.OnEquipBtn);
-            self.E_TakeOffBtnButton.AddListenerAsync(self.OnTakeOffBtn);
+            self.E_OpenBtnButton.AddListenerAsync(self.OnOpenBtnButton);
+            self.E_EquipBtnButton.AddListenerAsync(self.OnEquipBtnButton);
+            self.E_TakeOffBtnButton.AddListenerAsync(self.OnTakeOffBtnButton);
             self.E_TakeOffBtnButton.gameObject.SetActive(false);
 
             self.E_Btn_TianFu_2Button.AddListener(() => { self.OnBtn_TianFuPlan(1).Coroutine(); });
@@ -217,7 +217,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnOpenBtn(this ES_SeasonJingHe self)
+        public static async ETTask OnOpenBtnButton(this ES_SeasonJingHe self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OpenJingHeIds.Contains(self.JingHeId))
@@ -256,7 +256,7 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static async ETTask OnTakeOffBtn(this ES_SeasonJingHe self)
+        public static async ETTask OnTakeOffBtnButton(this ES_SeasonJingHe self)
         {
             if (self.JingHeId == 0)
             {
@@ -278,7 +278,7 @@ namespace ET.Client
             self.UpdateInfo(self.JingHeId);
         }
 
-        public static async ETTask OnEquipBtn(this ES_SeasonJingHe self)
+        public static async ETTask OnEquipBtnButton(this ES_SeasonJingHe self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (self.BagInfo == null || self.JingHeId == 0)

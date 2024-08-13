@@ -22,10 +22,10 @@ namespace ET.Client
             self.ShouhuInfos.Add(self.ES_ShouhuInfo2);
             self.ShouhuInfos.Add(self.ES_ShouhuInfo3);
             self.E_PetShouHuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetShouHuItemsRefresh);
-            self.E_ButtonSetButton.AddListenerAsync(self.OnButtonSet);
+            self.E_ButtonSetButton.AddListenerAsync(self.OnButtonSetButton);
 
             ES_ShouhuInfo esShouhuInfo = self.ShouhuInfos[0];
-            esShouhuInfo.OnClickButton();
+            esShouhuInfo.OnImageButtonButton();
             self.OnUpdateUI();
         }
 
@@ -35,7 +35,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonSet(this ES_PetShouHu self)
+        public static async ETTask OnButtonSetButton(this ES_PetShouHu self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             int error = await PetNetHelper.RequestPetShouHuActive(self.Root(), self.SelectIndex + 1);

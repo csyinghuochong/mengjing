@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,19 +39,19 @@ namespace ET.Client
 
             self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_Plan(1); });
             self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_Plan(2); });
-            self.E_Btn_MakeButton.AddListener(() => { self.OnBtn_Make().Coroutine(); });
-            self.E_Btn_MeltButton.AddListener(self.OnBtn_Melt);
+            self.E_Btn_MakeButton.AddListener(() => { self.OnBtn_MakeButton().Coroutine(); });
+            self.E_Btn_MeltButton.AddListener(self.OnBtn_MeltButton);
             self.E_Button_Select_1Button.AddListener(() => { self.RequestMakeSelect(1).Coroutine(); });
             self.E_Button_Select_2Button.AddListener(() => { self.RequestMakeSelect(3).Coroutine(); });
             self.E_Button_Select_3Button.AddListener(() => { self.RequestMakeSelect(3).Coroutine(); });
             self.E_Button_Select_4Button.AddListener(() => { self.RequestMakeSelect(6).Coroutine(); });
-            self.E_Btn_ResetButton.AddListener(self.OnBtn_Reset);
-            self.E_Btn_LearnButton.AddListener(self.OnBtn_Learn);
+            self.E_Btn_ResetButton.AddListener(self.OnBtn_ResetButton);
+            self.E_Btn_LearnButton.AddListener(self.OnBtn_LearnButton);
 
             self.E_MakeNeedItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeNeedItemsRefresh);
             self.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
 
-            self.E_Btn_MeltBeginButton.AddListenerAsync(self.OnBtn_MeltBegin);
+            self.E_Btn_MeltBeginButton.AddListenerAsync(self.OnBtn_MeltBeginButton);
             self.E_CommonItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
 
             self.HuiShouUIList[0] = self.ES_CommonItem_1;
@@ -61,6 +61,7 @@ namespace ET.Client
             self.HuiShouUIList[4] = self.ES_CommonItem_5;
 
             self.OnBtn_Plan(1);
+            self.E_Btn_TianFu_2Button.AddListener(self.OnBtn_TianFu_2Button);
         }
 
         [EntitySystem]
@@ -70,7 +71,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnBtn_Reset(this ES_SkillMake self)
+        public static void OnBtn_ResetButton(this ES_SkillMake self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置,请谨慎选择", () =>
             {
@@ -81,7 +82,7 @@ namespace ET.Client
             }, null).Coroutine();
         }
 
-        public static void OnBtn_Learn(this ES_SkillMake self)
+        public static void OnBtn_LearnButton(this ES_SkillMake self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "学习技能", "可以在主城对应的各职业学习大师处学习当前等级最新的生活技能喔!", () =>
             {
@@ -148,7 +149,7 @@ namespace ET.Client
             self.UpdateMakeList(makeType);
         }
 
-        public static void OnBtn_Melt(this ES_SkillMake self)
+        public static void OnBtn_MeltButton(this ES_SkillMake self)
         {
             self.EG_RightRectTransform.gameObject.SetActive(false);
             self.EG_SelectRectTransform.gameObject.SetActive(false);
@@ -226,7 +227,7 @@ namespace ET.Client
             self.UpdateShuLianDu();
         }
 
-        public static async ETTask OnBtn_Make(this ES_SkillMake self)
+        public static async ETTask OnBtn_MakeButton(this ES_SkillMake self)
         {
             if (self.MakeId == 0)
             {
@@ -560,7 +561,7 @@ namespace ET.Client
             return huishouList;
         }
 
-        public static async ETTask OnBtn_MeltBegin(this ES_SkillMake self)
+        public static async ETTask OnBtn_MeltBeginButton(this ES_SkillMake self)
         {
             List<long> huishouList = self.GetHuiShouList();
             if (huishouList.Count == 0)
@@ -693,6 +694,9 @@ namespace ET.Client
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+        }
+        public static void OnBtn_TianFu_2Button(this ES_SkillMake self)
+        {
         }
     }
 }

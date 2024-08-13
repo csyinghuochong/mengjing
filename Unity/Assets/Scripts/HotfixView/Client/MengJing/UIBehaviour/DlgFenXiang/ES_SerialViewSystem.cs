@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,8 +11,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGet);
-            self.E_ButtonOkButton.AddListener(self.OnButtonOk);
+            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
+            self.E_ButtonOkButton.AddListener(self.OnButtonOkButton);
 
             if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) == 1)
             {
@@ -33,7 +33,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonGet(this ES_Serial self)
+        public static async ETTask OnButtonGetButton(this ES_Serial self)
         {
             if (Time.time - self.LastTime < 2f)
             {
@@ -76,7 +76,7 @@ namespace ET.Client
         //     return JsonHelper.FromJson<HotVersion>(textAsset3.text);
         // }
 
-        public static void OnButtonOk(this ES_Serial self)
+        public static void OnButtonOkButton(this ES_Serial self)
         {
             //             HotVersion hotVersion = self.GetHotVersion();
             //

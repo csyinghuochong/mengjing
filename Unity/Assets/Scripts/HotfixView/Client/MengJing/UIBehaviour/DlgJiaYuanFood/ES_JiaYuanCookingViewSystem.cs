@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,7 +14,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.E_ButtonMakeButton.AddListenerAsync(self.OnButtonMake);
+            self.E_ButtonMakeButton.AddListenerAsync(self.OnButtonMakeButton);
             self.CostItemList[0] = self.ES_CommonItem_0;
             self.CostItemList[1] = self.ES_CommonItem_1;
             self.CostItemList[2] = self.ES_CommonItem_2;
@@ -29,7 +29,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonMake(this ES_JiaYuanCooking self)
+        public static async ETTask OnButtonMakeButton(this ES_JiaYuanCooking self)
         {
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
             {

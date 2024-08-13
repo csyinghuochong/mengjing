@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -19,8 +19,8 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
             });
-            self.E_Btn_HeChengButton.AddListener(self.OnClickHeCheng);
-            self.E_Btn_PreviewButton.AddListenerAsync(self.OnBtn_Preview);
+            self.E_Btn_HeChengButton.AddListener(self.OnBtn_HeChengButton);
+            self.E_Btn_PreviewButton.AddListenerAsync(self.OnBtn_PreviewButton);
 
             self.OnInitSubView();
         }
@@ -62,7 +62,7 @@ namespace ET.Client
             self.ES_PetInfoShow_2.OnInitData(null);
         }
 
-        public static void OnClickHeCheng(this ES_PetHeCheng self)
+        public static void OnBtn_HeChengButton(this ES_PetHeCheng self)
         {
             if (self.Root().GetComponent<PetComponentC>().RolePetInfos.Count < 3)
             {
@@ -118,7 +118,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnBtn_Preview(this ES_PetHeCheng self)
+        private static async ETTask OnBtn_PreviewButton(this ES_PetHeCheng self)
         {
             if (self.HeChengPet_Left == null || self.HeChengPet_Right == null)
             {

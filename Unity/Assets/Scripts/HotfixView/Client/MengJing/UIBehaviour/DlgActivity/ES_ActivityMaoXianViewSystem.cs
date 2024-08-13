@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -14,8 +14,8 @@ namespace ET.Client
             self.E_ButtonRightButton.AddListener(() => { self.OnButtonActivty(1); });
             self.E_ButtonLeftButton.AddListener(() => { self.OnButtonActivty(-1); });
 
-            self.E_Btn_GoToSupportButton.AddListener(self.OnBtn_GoToSupport);
-            self.E_Btn_GetRewardButton.AddListenerAsync(self.OnBtn_GetReward);
+            self.E_Btn_GoToSupportButton.AddListener(self.OnBtn_GoToSupportButton);
+            self.E_Btn_GetRewardButton.AddListenerAsync(self.OnBtn_GetRewardButton);
 
             self.OnInitUI();
         }
@@ -26,12 +26,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnBtn_GoToSupport(this ES_ActivityMaoXian self)
+        public static void OnBtn_GoToSupportButton(this ES_ActivityMaoXian self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
-        public static async ETTask OnBtn_GetReward(this ES_ActivityMaoXian self)
+        public static async ETTask OnBtn_GetRewardButton(this ES_ActivityMaoXian self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 

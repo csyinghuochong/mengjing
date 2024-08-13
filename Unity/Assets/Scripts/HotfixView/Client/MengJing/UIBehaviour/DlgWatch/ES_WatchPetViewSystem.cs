@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -57,13 +57,13 @@ namespace ET.Client
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
             // self.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.E_ButtonEquipHeXinButton.AddListenerAsync(self.OnButtonEquipHeXin);
-            self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeCheng);
+            self.E_ButtonEquipHeXinButton.AddListenerAsync(self.OnButtonEquipHeXinButton);
+            self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeChengButton);
             self.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
-            self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPoint);
-            self.E_Btn_ConfirmButton.AddListenerAsync(self.OnBtn_Confirm);
-            self.E_ButtonCloseAddPointButton.AddListener(self.OnButtonCloseAddPoint);
-            self.E_PetHeXinSuitButton.AddListenerAsync(self.OnPetHeXinSuitBtn);
+            self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPointButton);
+            self.E_Btn_ConfirmButton.AddListenerAsync(self.OnBtn_ConfirmButton);
+            self.E_ButtonCloseAddPointButton.AddListener(self.OnButtonCloseAddPointButton);
+            self.E_PetHeXinSuitButton.AddListenerAsync(self.OnPetHeXinSuitButton);
 
             // EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             // EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
@@ -92,6 +92,15 @@ namespace ET.Client
             // NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
             // NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
             // NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            self.E_ButtonRNameButton.AddListener(self.OnButtonRNameButton);
+            self.E_Btn_ChuZhanButton.AddListener(self.OnBtn_ChuZhanButton);
+            self.E_Btn_XiuXiButton.AddListener(self.OnBtn_XiuXiButton);
+            self.E_Btn_FangShengButton.AddListener(self.OnBtn_FangShengButton);
+            self.E_PetSkinRawImageButton.AddListener(self.OnPetSkinRawImageButton);
+            self.E_ButtonUseSkinButton.AddListener(self.OnButtonUseSkinButton);
+            self.E_ButtonEquipXieXiaButton.AddListener(self.OnButtonEquipXieXiaButton);
+            self.E_ImageJinHuaButton.AddListener(self.OnImageJinHuaButton);
+            self.E_JiBanButton.AddListener(self.OnJiBanButton);
         }
 
         [EntitySystem]
@@ -117,7 +126,7 @@ namespace ET.Client
             self.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
         }
 
-        public static async ETTask OnPetHeXinSuitBtn(this ES_WatchPet self)
+        public static async ETTask OnPetHeXinSuitButton(this ES_WatchPet self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinSuit);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetHeXinSuit>().UpdateInfo(self.PetHeXinSuit);
@@ -585,7 +594,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonEquipHeXin(this ES_WatchPet self)
+        public static async ETTask OnButtonEquipHeXinButton(this ES_WatchPet self)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             if (itemConfig.ItemType != (int)ItemTypeEnum.PetHeXin)
@@ -605,7 +614,7 @@ namespace ET.Client
             self.OnEquipPetHeXin();
         }
 
-        public static void OnButtonHeXinHeCheng(this ES_WatchPet self)
+        public static void OnButtonHeXinHeChengButton(this ES_WatchPet self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
         }
@@ -635,13 +644,13 @@ namespace ET.Client
 
         # region 加点
 
-        private static void OnButtonAddPoint(this ES_WatchPet self)
+        private static void OnButtonAddPointButton(this ES_WatchPet self)
         {
             self.OnChangeNode(3);
             self.OnInitAddPointUI();
         }
 
-        private static void OnButtonCloseAddPoint(this ES_WatchPet self)
+        private static void OnButtonCloseAddPointButton(this ES_WatchPet self)
         {
             self.OnChangeNode(1);
         }
@@ -734,7 +743,7 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        private static async ETTask OnBtn_Confirm(this ES_WatchPet self)
+        private static async ETTask OnBtn_ConfirmButton(this ES_WatchPet self)
         {
             self.LastSelectItem = await PetNetHelper.RequestRolePetJiadian(self.Root(), self.LastSelectItem.Id, self.PointList);
             self.OnInitAddPointUI();
@@ -1223,6 +1232,33 @@ namespace ET.Client
             PetNetHelper.RequestChangePos(self.Root(), petIndex1, petIndex2).Coroutine();
 
             self.OnUpdateUI();
+        }
+        public static void OnButtonRNameButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnBtn_ChuZhanButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnBtn_XiuXiButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnBtn_FangShengButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnPetSkinRawImageButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnButtonUseSkinButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnButtonEquipXieXiaButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnImageJinHuaButton(this ES_WatchPet self)
+        {
+        }
+        public static void OnJiBanButton(this ES_WatchPet self)
+        {
         }
     }
 }

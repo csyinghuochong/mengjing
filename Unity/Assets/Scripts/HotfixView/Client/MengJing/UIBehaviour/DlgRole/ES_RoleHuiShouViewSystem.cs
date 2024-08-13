@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,8 +18,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.E_YiJianInputButton.AddListener(self.OnButton_YiJianInput);
-            self.E_HuiShouButton.AddListener(self.OnButton_HuiShou);
+            self.E_YiJianInputButton.AddListener(self.OnYiJianInputButton);
+            self.E_HuiShouButton.AddListener(self.OnHuiShouButton);
 
             self.HuiShouUIList[0] = self.ES_CommonItem_1;
             self.ES_CommonItem_1.UpdateItem(null, ItemOperateEnum.None);
@@ -185,7 +185,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
-        private static void OnButton_YiJianInput(this ES_RoleHuiShou self)
+        private static void OnYiJianInputButton(this ES_RoleHuiShou self)
         {
             //最多选取五个
             self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
@@ -292,7 +292,7 @@ namespace ET.Client
             self.ES_RewardList.Refresh(rewardItems);
         }
 
-        private static void OnButton_HuiShou(this ES_RoleHuiShou self)
+        private static void OnHuiShouButton(this ES_RoleHuiShou self)
         {
             using (zstring.Block())
             {

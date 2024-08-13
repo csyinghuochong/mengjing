@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -31,7 +31,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ImageButtonButton.AddListenerAsync(self.OnButtonActivity);
+            self.E_ImageButtonButton.AddListenerAsync(self.OnImageButtonButton);
 
             self.uiTransform.gameObject.SetActive(false);
 
@@ -126,7 +126,7 @@ namespace ET.Client
             self.StartTimer();
         }
 
-        public static async ETTask OnButtonActivity(this ES_MainActivityTip self)
+        public static async ETTask OnImageButtonButton(this ES_MainActivityTip self)
         {
             if (self.ActivtyCur.UIType != 0)
             {

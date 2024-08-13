@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,8 +14,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_ComButton.AddListenerAsync(self.OnBtn_Com_Sign);
-            self.E_Btn_Com2Button.AddListenerAsync(self.OnBtn_Com_Sign2);
+            self.E_Btn_ComButton.AddListenerAsync(self.OnBtn_ComButton);
+            self.E_Btn_Com2Button.AddListenerAsync(self.OnBtn_Com2Button);
             self.E_ActivitySingInItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnActivitySingInItemsRefresh);
 
             self.OnInitUI();
@@ -120,7 +120,7 @@ namespace ET.Client
             self.E_Btn_Com2Button.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 2);
         }
 
-        public static async ETTask OnBtn_Com_Sign2(this ES_ActivitySingIn self)
+        public static async ETTask OnBtn_Com2Button(this ES_ActivitySingIn self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 1)
@@ -142,7 +142,7 @@ namespace ET.Client
             self.E_Img_lingQu2Image.gameObject.SetActive(true);
         }
 
-        public static async ETTask OnBtn_Com_Sign(this ES_ActivitySingIn self)
+        public static async ETTask OnBtn_ComButton(this ES_ActivitySingIn self)
         {
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.TotalSignNumber == 30)

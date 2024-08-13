@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +25,12 @@ namespace ET.Client
             self.ImageIconList[1].GetComponent<Button>().AddListener(() => { self.OnImageIconList(1).Coroutine(); });
             self.ImageIconList[0].GetComponent<Button>().AddListener(() => { self.OnImageIconList(0).Coroutine(); });
 
-            self.E_Btn_PVPButton.AddListener(self.OnClickBtn_PVP);
+            self.E_Btn_PVPButton.AddListener(self.OnBtn_PVPButton);
+            self.E_ImageIcon1Button.AddListener(self.OnImageIcon1Button);
+            self.E_ImageIcon2Button.AddListener(self.OnImageIcon2Button);
+            self.E_ImageIcon3Button.AddListener(self.OnImageIcon3Button);
+            self.E_ImageIcon4Button.AddListener(self.OnImageIcon4Button);
+            self.E_ImageIcon5Button.AddListener(self.OnImageIcon5Button);
         }
 
         [EntitySystem]
@@ -116,7 +121,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnClickBtn_PVP(this ES_RankPetItem self)
+        public static void OnBtn_PVPButton(this ES_RankPetItem self)
         {
             int teamNumber = 0;
             List<long> teamList = self.Root().GetComponent<PetComponentC>().TeamPetList;
@@ -134,6 +139,21 @@ namespace ET.Client
             EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.PetTianTi, BattleHelper.GetPetTianTiId(), 0,
                 self.RankPetInfo.UserId.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Rank);
+        }
+        public static void OnImageIcon1Button(this ES_RankPetItem self)
+        {
+        }
+        public static void OnImageIcon2Button(this ES_RankPetItem self)
+        {
+        }
+        public static void OnImageIcon3Button(this ES_RankPetItem self)
+        {
+        }
+        public static void OnImageIcon4Button(this ES_RankPetItem self)
+        {
+        }
+        public static void OnImageIcon5Button(this ES_RankPetItem self)
+        {
         }
     }
 }

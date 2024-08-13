@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +18,7 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_EquipItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnEquipItemsRefresh);
             self.E_ReelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnReelItemsRefresh);
-            self.E_IncreaseButtonButton.AddListenerAsync(self.OnIncreaseButton);
+            self.E_IncreaseButtonButton.AddListenerAsync(self.OnIncreaseButtonButton);
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -211,7 +211,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnIncreaseButton(this ES_EquipmentIncreaseShow self)
+        public static async ETTask OnIncreaseButtonButton(this ES_EquipmentIncreaseShow self)
         {
             if (self.EquipmentBagInfo == null)
             {

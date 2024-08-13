@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -35,7 +35,7 @@ namespace ET.Client
             self.ES_Shield_6.SetClickHandler(self.OnClickShieldHandler);
 
             ES_Shield esShield = self.ShieldUIList[0];
-            esShield.OnButtonClick();
+            esShield.OnImageIconButton();
 
             self.HuiShoulist.Add(self.ES_CommonItem_1);
             self.HuiShoulist.Add(self.ES_CommonItem_2);
@@ -45,7 +45,7 @@ namespace ET.Client
 
             self.E_CommonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
 
-            self.E_Btn_ZhuRuButton.AddListenerAsync(self.OnBtn_ZhuRu);
+            self.E_Btn_ZhuRuButton.AddListenerAsync(self.OnBtn_ZhuRuButton);
         }
 
         [EntitySystem]
@@ -258,7 +258,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnBtn_ZhuRu(this ES_SkillLifeShield self)
+        public static async ETTask OnBtn_ZhuRuButton(this ES_SkillLifeShield self)
         {
             List<long> costs = self.GetConstItems();
             if (costs.Count == 0 || self.ShieldType == 0)

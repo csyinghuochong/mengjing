@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ImageButtonButton.AddListener(self.OnClickButton);
+            self.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
+            self.E_ImageSelectButton.AddListener(self.OnImageSelectButton);
         }
 
         [EntitySystem]
@@ -21,7 +22,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnClickButton(this ES_ShouhuInfo self)
+        public static void OnImageButtonButton(this ES_ShouhuInfo self)
         {
             self.SelectHandler?.Invoke(self.Index);
         }
@@ -104,6 +105,9 @@ namespace ET.Client
                         break;
                 }
             }
+        }
+        public static void OnImageSelectButton(this ES_ShouhuInfo self)
+        {
         }
     }
 }

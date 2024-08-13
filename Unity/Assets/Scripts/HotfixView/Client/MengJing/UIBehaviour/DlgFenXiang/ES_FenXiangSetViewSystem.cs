@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -20,6 +20,8 @@ namespace ET.Client
                 self.EG_FenXiang_QQRectTransform.localPosition = new Vector3(0f, 112f, 0f);
                 self.E_Text_tip1Text.gameObject.SetActive(false);
                 self.E_Button_AddQQButton.gameObject.SetActive(false);
+            self.E_Button_AddQQButton.AddListener(self.OnButton_AddQQButton);
+            self.E_Button_supportButton.AddListener(self.OnButton_supportButton);
             }
             else
             {
@@ -200,6 +202,12 @@ namespace ET.Client
             //     "https://img.71acg.net/kbdev/opensj/20230109/15243214265", "https://l.tapdb.net/08MLKXV5?channel=rep-rep_d2ves97egb7"
             // };
             // EventSystem.Instance.PublishClass(EventType.TikTokShare.Instance);
+        }
+        public static void OnButton_AddQQButton(this ES_FenXiangSet self)
+        {
+        }
+        public static void OnButton_supportButton(this ES_FenXiangSet self)
+        {
         }
     }
 }

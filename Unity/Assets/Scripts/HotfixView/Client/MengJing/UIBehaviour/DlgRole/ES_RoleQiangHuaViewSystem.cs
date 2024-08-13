@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_QiangHuaButton.AddListenerAsync(self.OnButtonQiangHua);
+            self.E_QiangHuaButton.AddListenerAsync(self.OnQiangHuaButton);
 
             self.ES_RoleQiangHuaItem_1.OnInitUI(1);
             self.ES_RoleQiangHuaItem_1.SetClickHandler(self.OnBtn_EquipHandler);
@@ -66,7 +66,7 @@ namespace ET.Client
             }
 
             ES_RoleQiangHuaItem item = self.QiangHuaItemList[0];
-            item.OnBtn_Equip();
+            item.OnEquipButton();
         }
 
         public static void OnBtn_EquipHandler(this ES_RoleQiangHua self, int index)
@@ -135,7 +135,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonQiangHua(this ES_RoleQiangHua self)
+        public static async ETTask OnQiangHuaButton(this ES_RoleQiangHua self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             int qianghuaLevel = bagComponent.QiangHuaLevel[self.ItemSubType];

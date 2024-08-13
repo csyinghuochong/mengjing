@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_DonationButton.AddListenerAsync(self.OnButton_Donation);
+            self.E_Button_DonationButton.AddListenerAsync(self.OnButton_DonationButton);
 
             self.ES_UnionXiuLianItem_0.Position = 0;
             self.ES_UnionXiuLianItem_0.ClickHandler = self.OnClickHandler;
@@ -95,7 +95,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButton_Donation(this ES_UnionPetXiuLian self)
+        public static async ETTask OnButton_DonationButton(this ES_UnionPetXiuLian self)
         {
             //家族等级
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

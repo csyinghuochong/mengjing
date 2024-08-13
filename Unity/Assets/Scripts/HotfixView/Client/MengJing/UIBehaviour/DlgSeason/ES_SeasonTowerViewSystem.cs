@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,8 +12,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_SeasonTowerRankItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSeasonTowerRankItemsRefresh);
-            self.E_RewardShowBtnButton.AddListenerAsync(self.OnRewardShowBtn);
-            self.E_EnterBtnButton.AddListener(self.OnEnterBtn);
+            self.E_RewardShowBtnButton.AddListenerAsync(self.OnRewardShowBtnButton);
+            self.E_EnterBtnButton.AddListener(self.OnEnterBtnButton);
 
             self.UpdateInfo().Coroutine();
         }
@@ -30,13 +30,13 @@ namespace ET.Client
             scrollItemSeasonTowerRankItem.UpdateInfo(index + 1, self.ShowRankSeasonTowerInfos[index]);
         }
 
-        public static async ETTask OnRewardShowBtn(this ES_SeasonTower self)
+        public static async ETTask OnRewardShowBtnButton(this ES_SeasonTower self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonTowerReward);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSeasonTowerReward>().OnInitUI(7);
         }
 
-        public static void OnEnterBtn(this ES_SeasonTower self)
+        public static void OnEnterBtnButton(this ES_SeasonTower self)
         {
             int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.SeasonTower);
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.SeasonTower, sceneId, 0, "0").Coroutine();

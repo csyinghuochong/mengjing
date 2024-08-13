@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,9 +11,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ImagePetHeadIconButton.AddListener(self.OnImagePetHeadIcon);
+            self.E_ImagePetHeadIconButton.AddListener(self.OnImagePetHeadIconButton);
 
-            self.E_SetButton.AddListener(self.OnOpenSettingUI);
+            self.E_SetButton.AddListener(self.OnSetButton);
 
             self.UserInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
@@ -46,12 +46,12 @@ namespace ET.Client
             }
         }
 
-        public static void OnImagePetHeadIcon(this ES_RoleHead self)
+        public static void OnImagePetHeadIconButton(this ES_RoleHead self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight).Coroutine();
         }
 
-        public static void OnOpenSettingUI(this ES_RoleHead self)
+        public static void OnSetButton(this ES_RoleHead self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Setting).Coroutine();
         }

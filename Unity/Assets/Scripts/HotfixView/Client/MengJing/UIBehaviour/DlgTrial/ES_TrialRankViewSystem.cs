@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -14,7 +14,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_RankItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRankItemsRefresh);
-            self.E_Button_RewardButton.AddListenerAsync(self.Button_Reward);
+            self.E_Button_RewardButton.AddListenerAsync(self.OnButton_RewardButton);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             self.E_HeadIcomImage1Image.sprite =
@@ -88,7 +88,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask Button_Reward(this ES_TrialRank self)
+        public static async ETTask OnButton_RewardButton(this ES_TrialRank self)
         {
             self.EG_UISetRectTransform.gameObject.SetActive(false);
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TrialReward);

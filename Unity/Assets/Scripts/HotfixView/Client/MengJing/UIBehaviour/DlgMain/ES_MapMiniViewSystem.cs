@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_MiniMapButtonButton.AddListener(self.OnOpenMap);
+            self.E_MiniMapButtonButton.AddListener(self.OnMiniMapButtonButton);
         }
 
         [EntitySystem]
@@ -42,7 +42,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnOpenMap(this ES_MapMini self)
+        public static void OnMiniMapButtonButton(this ES_MapMini self)
         {
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;

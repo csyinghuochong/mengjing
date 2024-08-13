@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,12 +11,12 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_HuoDong_LingzhuButton.AddListener(self.Btn_HuoDong_Lingzhu);
-            self.E_Btn_HuoDong_BaozangButton.AddListener(self.Btn_HuoDong_Baozang);
-            self.E_Btn_HuoDong_LingzhuJieShaoButton.AddListener(self.Btn_HuoDong_LingzhuJieShao);
-            self.E_Btn_HuoDong_ArenaButton.AddListener(self.On_Btn_HuoDong_Arena);
-            self.E_Btn_HuoDong_ArenaJieShaoButton.AddListenerAsync(self.On_Btn_HuoDong_ArenaJieShao);
-            self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.Btn_HuoDong_XiaoGui);
+            self.E_Btn_HuoDong_LingzhuButton.AddListener(self.OnBtn_HuoDong_LingzhuButton);
+            self.E_Btn_HuoDong_BaozangButton.AddListener(self.OnBtn_HuoDong_BaozangButton);
+            self.E_Btn_HuoDong_LingzhuJieShaoButton.AddListener(self.OnBtn_HuoDong_LingzhuJieShaoButton);
+            self.E_Btn_HuoDong_ArenaButton.AddListener(self.OnBtn_HuoDong_ArenaButton);
+            self.E_Btn_HuoDong_ArenaJieShaoButton.AddListenerAsync(self.OnBtn_HuoDong_ArenaJieShaoButton);
+            self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.OnBtn_HuoDong_XiaoGuiButton);
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
             int openDay = ServerHelper.GetServeOpenrDay( zone);
@@ -29,24 +29,24 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Btn_HuoDong_Lingzhu(this ES_CountryHuoDong self)
+        public static void OnBtn_HuoDong_LingzhuButton(this ES_CountryHuoDong self)
         {
             TaskViewHelp.OnGoToNpc(self.Root(), 20000028);
             self.OnBtn_Close();
         }
 
-        public static void Btn_HuoDong_XiaoGui(this ES_CountryHuoDong self)
+        public static void OnBtn_HuoDong_XiaoGuiButton(this ES_CountryHuoDong self)
         {
             TaskViewHelp.OnGoToNpc(self.Root(), 20099007);
             self.OnBtn_Close();
         }
 
-        public static void Btn_HuoDong_LingzhuJieShao(this ES_CountryHuoDong self)
+        public static void OnBtn_HuoDong_LingzhuJieShaoButton(this ES_CountryHuoDong self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CountryHuoDongJieShao).Coroutine();
         }
 
-        public static async ETTask On_Btn_HuoDong_ArenaJieShao(this ES_CountryHuoDong self)
+        public static async ETTask OnBtn_HuoDong_ArenaJieShaoButton(this ES_CountryHuoDong self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CountryHuoDongJieShao);
 
@@ -54,7 +54,7 @@ namespace ET.Client
                 " 1.活动开启后,所有12级以上玩家均可进入。\n 2.活动开启10分钟后将禁止所有玩家进入此地图。\n 3.在角斗场内,玩家将互相发起挑战,坚持到最后1名的玩家将会\n 获得丰厚奖励。\n 4.在同一个角斗场内,人数最多达到20人。\n 5.20:00活动结束,如果场内剩余多人,则按照当前最低排名发放奖励。");
         }
 
-        public static void On_Btn_HuoDong_Arena(this ES_CountryHuoDong self)
+        public static void OnBtn_HuoDong_ArenaButton(this ES_CountryHuoDong self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "角斗场", "是否立即前往角斗场？", () => { self.RequestEnterArena().Coroutine(); }, null).Coroutine();
         }
@@ -68,7 +68,7 @@ namespace ET.Client
             }
         }
 
-        public static void Btn_HuoDong_Baozang(this ES_CountryHuoDong self)
+        public static void OnBtn_HuoDong_BaozangButton(this ES_CountryHuoDong self)
         {
             TaskViewHelp.OnGoToNpc(self.Root(), 20000027);
             self.OnBtn_Close();

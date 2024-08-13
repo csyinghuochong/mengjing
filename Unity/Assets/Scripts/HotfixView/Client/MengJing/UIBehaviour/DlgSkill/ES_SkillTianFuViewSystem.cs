@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +19,7 @@ namespace ET.Client
             self.E_TextDesc1Text.gameObject.SetActive(false);
             self.E_Btn_TianFu_2Button.AddListener(() => { self.OnBtn_TianFuPlan(1).Coroutine(); });
             self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_TianFuPlan(0).Coroutine(); });
-            self.E_Btn_ActiveTianFuButton.AddListener(self.OnBtn_ActiveTianFu);
+            self.E_Btn_ActiveTianFuButton.AddListener(self.OnBtn_ActiveTianFuButton);
 
             self.InitTianFuList();
         }
@@ -182,7 +182,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_ActiveTianFu(this ES_SkillTianFu self)
+        public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);

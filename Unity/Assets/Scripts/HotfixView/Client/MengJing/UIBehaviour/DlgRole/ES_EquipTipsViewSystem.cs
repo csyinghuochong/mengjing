@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +20,7 @@ namespace ET.Client
             self.E_HuiShouFangZhiButton.AddListenerAsync(self.OnHuiShouFangZhiButton);
             self.E_TakeButton.AddListenerAsync(self.OnTakeButton);
             self.E_SaveStoreHouseButton.AddListener(self.OnSaveStoreHouseButton);
-            self.E_StoreHouseSetButton.AddListener(self.OnBtn_PutBag);
+            self.E_StoreHouseSetButton.AddListener(self.OnStoreHouseSetButton);
 
             self.TitleBigHeight_160 = 160f; //标题底框高度
             self.TitleMiniHeight_50 = 50; //条目标题高度
@@ -43,6 +43,7 @@ namespace ET.Client
             self.Obj_UIEquipGemHoleIconList[1] = self.E_UIEquipGemHoleIcon_2Image.gameObject;
             self.Obj_UIEquipGemHoleIconList[2] = self.E_UIEquipGemHoleIcon_3Image.gameObject;
             self.Obj_UIEquipGemHoleIconList[3] = self.E_UIEquipGemHoleIcon_4Image.gameObject;
+            self.E_ShowEquipSuitButton.AddListener(self.OnShowEquipSuitButton);
         }
 
         [EntitySystem]
@@ -846,7 +847,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
-        public static void OnBtn_PutBag(this ES_EquipTips self)
+        public static void OnStoreHouseSetButton(this ES_EquipTips self)
         {
             if (self.ItemOpetateType == ItemOperateEnum.AccountCangku)
             {
@@ -880,6 +881,9 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
+        }
+        public static void OnShowEquipSuitButton(this ES_EquipTips self)
+        {
         }
     }
 }

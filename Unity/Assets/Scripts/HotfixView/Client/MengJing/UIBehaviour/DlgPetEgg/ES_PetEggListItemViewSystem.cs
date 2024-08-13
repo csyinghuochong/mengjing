@@ -42,9 +42,9 @@ namespace ET.Client
             self.E_PetEggIconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
             self.E_PetEggIconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
 
-            self.E_ButtonOpenButton.AddListener(self.OnButtonOpen);
-            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGet);
-            self.E_ButtonFuHuaButton.AddListenerAsync(self.OnButtonFuHua);
+            self.E_ButtonOpenButton.AddListener(self.OnButtonOpenButton);
+            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
+            self.E_ButtonFuHuaButton.AddListenerAsync(self.OnButtonFuHuaButton);
         }
 
         [EntitySystem]
@@ -69,7 +69,7 @@ namespace ET.Client
             self.EndDragHandler?.Invoke(self.Index, pdata);
         }
 
-        public static void OnButtonOpen(this ES_PetEggListItem self)
+        public static void OnButtonOpenButton(this ES_PetEggListItem self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
@@ -85,12 +85,12 @@ namespace ET.Client
             int costValue = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
             using (zstring.Block())
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue), () => { self.OnButtonGet().Coroutine(); })
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue), () => { self.OnButtonGetButton().Coroutine(); })
                         .Coroutine();
             }
         }
 
-        public static async ETTask OnButtonFuHua(this ES_PetEggListItem self)
+        public static async ETTask OnButtonFuHuaButton(this ES_PetEggListItem self)
         {
             int error = await PetNetHelper.RequestPetEggHatch(self.Root(), self.Index);
 
@@ -103,7 +103,7 @@ namespace ET.Client
             dlgPetEgg.OnRolePetEggOpen();
         }
 
-        public static async ETTask OnButtonGet(this ES_PetEggListItem self)
+        public static async ETTask OnButtonGetButton(this ES_PetEggListItem self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int maxNum = PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, userInfo.Lv);

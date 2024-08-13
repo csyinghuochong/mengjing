@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ImageIconButton.AddListener(self.OnButtonClick);
+            self.E_ImageIconButton.AddListener(self.OnImageIconButton);
         }
 
         [EntitySystem]
@@ -31,7 +31,7 @@ namespace ET.Client
             self.EG_SelectShowRectTransform.gameObject.SetActive(self.ShieldType == stype);
         }
 
-        public static void OnButtonClick(this ES_Shield self)
+        public static void OnImageIconButton(this ES_Shield self)
         {
             self.ClickHandler?.Invoke(self.ShieldType);
         }

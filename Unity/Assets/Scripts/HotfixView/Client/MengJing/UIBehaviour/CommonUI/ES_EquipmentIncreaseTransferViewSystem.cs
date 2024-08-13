@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,7 +20,7 @@ namespace ET.Client
             self.IsHoldDown = false;
             self.BagInfo_Transfer = new BagInfo[2];
             self.UIItem_Transfer = new ES_CommonItem[2];
-            self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransfer);
+            self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransferButton);
             self.E_EquipItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnEquipItemsRefresh);
 
             self.UIItem_Transfer[0] = self.ES_CommonItem_1;
@@ -36,7 +36,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonTransfer(this ES_EquipmentIncreaseTransfer self)
+        public static async ETTask OnButtonTransferButton(this ES_EquipmentIncreaseTransfer self)
         {
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItem))

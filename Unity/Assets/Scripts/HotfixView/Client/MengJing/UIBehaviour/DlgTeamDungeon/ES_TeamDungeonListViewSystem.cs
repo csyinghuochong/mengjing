@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TeamDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
-            self.E_Button_CreateButton.AddListener(self.OnButton_Create);
+            self.E_Button_CreateButton.AddListener(self.OnButton_CreateButton);
         }
 
         [EntitySystem]
@@ -22,7 +22,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnButton_Create(this ES_TeamDungeonList self)
+        public static void OnButton_CreateButton(this ES_TeamDungeonList self)
         {
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             if (teamInfo != null && teamInfo.SceneId != 0)

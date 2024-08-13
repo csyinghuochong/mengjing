@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ButtonActiveButton.AddListenerAsync(self.OnButtonActive);
+            self.E_ButtonActiveButton.AddListenerAsync(self.OnButtonActiveButton);
 
             self.OnInitUI();
         }
@@ -52,7 +52,7 @@ namespace ET.Client
             self.UIJueXingShowItems[0].OnClickImageIcon();
         }
 
-        public static async ETTask OnButtonActive(this ES_JueXingShow self)
+        public static async ETTask OnButtonActiveButton(this ES_JueXingShow self)
         {
             if (self.JueXingId == 0)
             {

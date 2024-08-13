@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +12,7 @@ namespace ET.Client
         private static void Awake(this ES_JueXingShowItem self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ImageIconButton.AddListener(self.OnImageIconButton);
         }
 
         [EntitySystem]
@@ -51,6 +52,9 @@ namespace ET.Client
             self.E_TextSkillNameText.text = skillConfig.SkillName;
 
             self.OnUpdateUI();
+        }
+        public static void OnImageIconButton(this ES_JueXingShowItem self)
+        {
         }
     }
 }

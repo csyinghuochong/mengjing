@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_XiLianButton.AddListenerAsync(self.OnClickXiLian);
+            self.E_Btn_XiLianButton.AddListenerAsync(self.OnBtn_XiLianButton);
             self.E_CommonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
             self.OnInitUI();
         }
@@ -31,7 +31,7 @@ namespace ET.Client
             self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
         }
 
-        public static async ETTask OnClickXiLian(this ES_PetXiLian self)
+        public static async ETTask OnBtn_XiLianButton(this ES_PetXiLian self)
         {
             if (self.RolePetInfo == null)
             {

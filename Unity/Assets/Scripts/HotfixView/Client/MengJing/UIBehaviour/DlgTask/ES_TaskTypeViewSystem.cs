@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TaskTypeItem))]
-    [EntitySystemOf(typeof (ES_TaskType))]
-    [FriendOf(typeof (ES_TaskType))]
+    [FriendOf(typeof(Scroll_Item_TaskTypeItem))]
+    [EntitySystemOf(typeof(ES_TaskType))]
+    [FriendOf(typeof(ES_TaskType))]
     public static partial class ES_TaskTypeSystem
     {
         [EntitySystem]
@@ -17,6 +17,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
+            self.E_SelectButton.AddListener(self.OnSelectButton);
         }
 
         [EntitySystem]
@@ -115,8 +116,8 @@ namespace ET.Client
             self.ShowTaskPros = taskComponentC.GetTaskTypeList(self.TaskType);
             if (self.TaskType == TaskTypeEnum.Branch)
             {
-                
             }
+
             if (self.TaskType == TaskTypeEnum.Daily)
             {
                 self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Treasure));

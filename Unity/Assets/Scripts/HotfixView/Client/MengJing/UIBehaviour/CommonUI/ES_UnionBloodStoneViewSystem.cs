@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,7 +11,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_UpBtnButton.AddListenerAsync(self.OnUpBtn);
+            self.E_UpBtnButton.AddListenerAsync(self.OnUpBtnButton);
             self.UpdateInfo();
         }
 
@@ -56,7 +56,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnUpBtn(this ES_UnionBloodStone self)
+        public static async ETTask OnUpBtnButton(this ES_UnionBloodStone self)
         {
             NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.Bloodstone));

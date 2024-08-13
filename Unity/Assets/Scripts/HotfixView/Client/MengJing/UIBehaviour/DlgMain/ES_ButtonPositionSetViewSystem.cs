@@ -16,11 +16,11 @@ namespace ET.Client
 
             self.E_SkillPositionSetImage.gameObject.SetActive(false);
 
-            self.E_Btn_SkilPositionResetButton.AddListener(self.OnBtn_SkilPositionReset);
+            self.E_Btn_SkilPositionResetButton.AddListener(self.OnBtn_SkilPositionResetButton);
 
-            self.E_Btn_SkilPositionCancelButton.AddListener(self.OnBtn_SkilPositionCancel);
+            self.E_Btn_SkilPositionCancelButton.AddListener(self.OnBtn_SkilPositionCancelButton);
 
-            self.E_Btn_SkilPositionSaveButton.AddListener(self.OnBtn_SkilPositionSave);
+            self.E_Btn_SkilPositionSaveButton.AddListener(self.OnBtn_SkilPositionSaveButton);
         }
 
         [EntitySystem]
@@ -147,7 +147,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_SkilPositionReset(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionResetButton(this ES_ButtonPositionSet self)
         {
             self.TempPositionList.Clear();
             self.SkillPositionList.Clear();
@@ -158,7 +158,7 @@ namespace ET.Client
             }
 
             self.UpdateSkillPosition();
-            self.OnBtn_SkilPositionSave();
+            self.OnBtn_SkilPositionSaveButton();
 
             self.uiTransform.gameObject.SetActive(false);
             self.E_SkillPositionSetImage.gameObject.SetActive(false);
@@ -169,7 +169,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_SkilPositionCancel(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionCancelButton(this ES_ButtonPositionSet self)
         {
             self.TempPositionList.Clear();
             for (int i = 0; i < self.SkillPositionList.Count; i++)
@@ -197,7 +197,7 @@ namespace ET.Client
             rc_skill.Get<GameObject>("UI_MainRoseSkill_item_juexing").SetActive(false);
         }
 
-        public static void OnBtn_SkilPositionSave(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionSaveButton(this ES_ButtonPositionSet self)
         {
             string positonlist = string.Empty;
             self.SkillPositionList.Clear();

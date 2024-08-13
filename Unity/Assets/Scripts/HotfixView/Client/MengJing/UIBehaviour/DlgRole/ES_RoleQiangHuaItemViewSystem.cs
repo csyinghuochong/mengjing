@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -11,7 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_RoleQiangHuaItem self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_EquipButton.AddListener(self.OnBtn_Equip);
+            self.E_EquipButton.AddListener(self.OnEquipButton);
         }
 
         [EntitySystem]
@@ -25,7 +25,7 @@ namespace ET.Client
             self.ItemSubType = index;
         }
 
-        public static void OnBtn_Equip(this ES_RoleQiangHuaItem self)
+        public static void OnEquipButton(this ES_RoleQiangHuaItem self)
         {
             self.ClickHandler(self.ItemSubType);
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -31,7 +31,7 @@ namespace ET.Client
         private static void Awake(this ES_JiaYuanPurchase self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_ButtonRefreshButton.AddListener(self.OnButtonRefresh);
+            self.E_ButtonRefreshButton.AddListener(self.OnButtonRefreshButton);
             self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJiaYuanPurchaseItemsRefresh);
 
             self.JiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
@@ -48,7 +48,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnButtonRefresh(this ES_JiaYuanPurchase self)
+        public static void OnButtonRefreshButton(this ES_JiaYuanPurchase self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long jiayuanzijin = self.Root().GetComponent<UserInfoComponentC>().UserInfo.JiaYuanFund;

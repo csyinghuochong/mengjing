@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_GoPayButton.AddListener(self.OnBtn_GoPay);
+            self.E_Btn_GoPayButton.AddListener(self.OnBtn_GoPayButton);
             self.E_ActivityTokenItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnActivityTokenItemsRefresh);
 
             self.OnInitUI();
@@ -31,7 +31,7 @@ namespace ET.Client
             scrollItemActivityTokenItem.OnInitUI(self.ShowActivityConfigs[index]);
         }
 
-        public static void OnBtn_GoPay(this ES_ActivityToken self)
+        public static void OnBtn_GoPayButton(this ES_ActivityToken self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Activity);

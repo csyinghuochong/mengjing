@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,7 +20,7 @@ namespace ET.Client
             self.BagInfo_Transfer = new BagInfo[2];
             self.UIItem_Transfer = new EntityRef<ES_CommonItem>[2];
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransfer);
+            self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransferButton);
 
             self.OnInitUI();
         }
@@ -46,7 +46,7 @@ namespace ET.Client
             scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
         }
 
-        public static async ETTask OnButtonTransfer(this ES_RoleXiLianTransfer self)
+        public static async ETTask OnButtonTransferButton(this ES_RoleXiLianTransfer self)
         {
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItem))

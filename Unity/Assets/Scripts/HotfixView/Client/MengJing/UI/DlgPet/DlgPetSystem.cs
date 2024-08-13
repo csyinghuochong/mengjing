@@ -1,4 +1,4 @@
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class DataUpdate_OnPetFightSet_DlgPetRefresh : AEvent<Scene, OnPetFightSet>
@@ -116,7 +116,7 @@ namespace ET.Client
         {
             if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
             {
-                await self.View.ES_PetList.OnButtonEquipHeXin();
+                await self.View.ES_PetList.OnButtonEquipHeXinButton();
             }
         }
 
@@ -146,7 +146,7 @@ namespace ET.Client
 
         public static async ETTask RequestPetEquipSelect(this DlgPet self)
         {
-            await self.View.ES_PetList.OnButtonEquipHeXin();
+            await self.View.ES_PetList.OnButtonEquipHeXinButton();
         }
     }
 }

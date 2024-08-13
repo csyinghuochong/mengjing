@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -14,7 +14,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_SkillInfoLearnBtnButton.AddListener(self.OnSkillInfoLearnBtn);
+            self.E_SkillInfoLearnBtnButton.AddListener(self.OnSkillInfoLearnBtnButton);
             self.E_ButtonResetButton.AddListener(() => { self.OnButtonReset(1); });
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
@@ -22,6 +22,7 @@ namespace ET.Client
             self.E_SkillLearnSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSkillLearnSkillItemsRefresh);
 
             self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+            self.E_SkillInfoconImgButton.AddListener(self.OnSkillInfoconImgButton);
         }
 
         [EntitySystem]
@@ -313,7 +314,7 @@ namespace ET.Client
         /// 升级强化技能
         /// </summary>
         /// <param name="self"></param>
-        public static void OnSkillInfoLearnBtn(this ES_SkillLearn self)
+        public static void OnSkillInfoLearnBtnButton(this ES_SkillLearn self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillPro.SkillID);
@@ -411,6 +412,9 @@ namespace ET.Client
             }
 
             self.UpdateLeftSp();
+        }
+        public static void OnSkillInfoconImgButton(this ES_SkillLearn self)
+        {
         }
     }
 }

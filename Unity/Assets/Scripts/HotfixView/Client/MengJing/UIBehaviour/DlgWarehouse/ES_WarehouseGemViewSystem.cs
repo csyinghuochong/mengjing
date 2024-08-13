@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,8 +13,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ButtonPackButton.AddListener(self.OnBtn_ZhengLi);
-            self.E_ButtonHeChengButton.AddListenerAsync(self.OnButtonHeCheng);
+            self.E_ButtonPackButton.AddListener(self.OnButtonPackButton);
+            self.E_ButtonHeChengButton.AddListenerAsync(self.OnButtonHeChengButton);
 
             self.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -26,7 +26,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnButtonHeCheng(this ES_WarehouseGem self)
+        public static async ETTask OnButtonHeChengButton(this ES_WarehouseGem self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)
@@ -42,7 +42,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_ZhengLi(this ES_WarehouseGem self)
+        public static void OnButtonPackButton(this ES_WarehouseGem self)
         {
             BagClientNetHelper.RequestSortByLoc(self.Root(), ItemLocType.GemWareHouse1).Coroutine();
             FlyTipComponent.Instance.ShowFlyTip("宝石仓库已整理完毕");

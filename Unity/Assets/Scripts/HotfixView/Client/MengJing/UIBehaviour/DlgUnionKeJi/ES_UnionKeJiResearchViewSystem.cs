@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,8 +13,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_ProgressBarImgImage.fillAmount = 0;
-            self.E_QuickBtnButton.AddListener(self.OnQuickBtn);
-            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtn);
+            self.E_QuickBtnButton.AddListener(self.OnQuickBtnButton);
+            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtnButton);
             self.E_UnionKeJiResearchItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionKeJiResearchItemsRefresh);
 
             self.InitItemList().Coroutine();
@@ -168,7 +168,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnQuickBtn(this ES_UnionKeJiResearch self)
+        public static void OnQuickBtnButton(this ES_UnionKeJiResearch self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.Position]);
             if (self.UnionMyInfo.KeJiActiteTime == 0)
@@ -212,7 +212,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnStartBtn(this ES_UnionKeJiResearch self)
+        public static async ETTask OnStartBtnButton(this ES_UnionKeJiResearch self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.Position]);
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_DrawBtnButton.AddListenerAsync(self.StartDraw);
+            self.E_DrawBtnButton.AddListenerAsync(self.OnDrawBtnButton);
             self.Init();
         }
 
@@ -110,7 +110,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask StartDraw(this ES_WelfareDraw self)
+        public static async ETTask OnDrawBtnButton(this ES_WelfareDraw self)
         {
             NumericComponentC numericComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             int drawReward = numericComponent.GetAsInt(NumericType.DrawReward);

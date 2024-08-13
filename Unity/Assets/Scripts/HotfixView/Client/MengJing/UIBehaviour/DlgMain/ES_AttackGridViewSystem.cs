@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ET.Client
@@ -15,6 +15,7 @@ namespace ET.Client
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.OnEndDrag(pdata as PointerEventData); });
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
+            self.E_Btn_SkillStartButton.AddListener(self.OnBtn_SkillStartButton);
         }
 
         [EntitySystem]
@@ -89,6 +90,9 @@ namespace ET.Client
         public static void OnMoveStart(this ES_AttackGrid self)
         {
             self.Root().GetComponent<AttackComponent>().RemoveTimer();
+        }
+        public static void OnBtn_SkillStartButton(this ES_AttackGrid self)
+        {
         }
     }
 }

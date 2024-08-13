@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -13,7 +13,7 @@ namespace ET.Client
             self.E_ButtonSelect_3Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.DiYu); });
             self.E_ButtonSelect_2Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.TiaoZhan); });
             self.E_ButtonSelect_1Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.Normal); });
-            self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_Enter);
+            self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_EnterButton);
             GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(63);
             string[] jianyiLevel = globalValueConfig.Value.Split(';');
             using (zstring.Block())
@@ -44,7 +44,7 @@ namespace ET.Client
             self.FubenDifficulty = difficulty;
         }
 
-        public static async ETTask OnBtn_Enter(this ES_TowerDungeon self)
+        public static async ETTask OnBtn_EnterButton(this ES_TowerDungeon self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(62);

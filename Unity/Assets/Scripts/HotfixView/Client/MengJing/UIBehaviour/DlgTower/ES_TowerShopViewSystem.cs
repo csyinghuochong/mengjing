@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,7 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_TowerShop self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuy);
+            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuyButton);
             self.E_Btn_BuyNum_jian10Button.AddListener(() => { self.OnBtn_BuyNum_jia(-10); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnBtn_BuyNum_jia(-1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnBtn_BuyNum_jia(10); });
@@ -40,7 +40,7 @@ namespace ET.Client
             scrollItemWeiJingShopItem.E_Text_leftText.gameObject.SetActive(false);
         }
 
-        public static async ETTask OnButtonBuy(this ES_TowerShop self)
+        public static async ETTask OnButtonBuyButton(this ES_TowerShop self)
         {
             if (self.SellId == 0)
             {

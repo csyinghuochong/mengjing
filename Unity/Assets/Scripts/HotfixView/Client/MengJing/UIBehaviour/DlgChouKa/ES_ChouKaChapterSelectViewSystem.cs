@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            self.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
             self.E_Btn_ZhangJie5Button.AddListener(() => { self.OnBtn_ZhangJie5(1005); });
             self.E_Btn_ZhangJie4Button.AddListener(() => { self.OnBtn_ZhangJie5(1004); });
             self.E_Btn_ZhangJie3Button.AddListener(() => { self.OnBtn_ZhangJie5(1003); });
@@ -45,7 +45,7 @@ namespace ET.Client
             self.uiTransform.gameObject.SetActive(false);
         }
 
-        public static void OnBtn_Close(this ES_ChouKaChapterSelect self)
+        public static void OnBtn_CloseButton(this ES_ChouKaChapterSelect self)
         {
             self.uiTransform.gameObject.SetActive(false);
         }

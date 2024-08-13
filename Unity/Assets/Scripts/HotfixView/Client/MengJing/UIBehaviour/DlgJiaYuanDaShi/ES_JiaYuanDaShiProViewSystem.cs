@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -15,7 +15,7 @@ namespace ET.Client
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
             self.E_JiaYuanDaShiProItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJiaYuanDaShiProItemsRefresh);
-            self.E_ButtonEatButton.AddListenerAsync(self.OnButtonEat);
+            self.E_ButtonEatButton.AddListenerAsync(self.OnButtonEatButton);
         }
 
         [EntitySystem]
@@ -122,7 +122,7 @@ namespace ET.Client
             self.E_Label_TipsText.text = itemCof.ItemBlackDes;
         }
 
-        public static async ETTask OnButtonEat(this ES_JiaYuanDaShiPro self)
+        public static async ETTask OnButtonEatButton(this ES_JiaYuanDaShiPro self)
         {
             BagInfo bagInfo = self.ES_CommonItem.Baginfo;
             if (bagInfo == null)

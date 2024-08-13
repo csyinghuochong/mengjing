@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,8 +33,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_RightButton.AddListener(self.OnButton_Right);
-            self.E_Button_LeftButton.AddListener(self.OnButton_Left);
+            self.E_Button_RightButton.AddListener(self.OnButton_RightButton);
+            self.E_Button_LeftButton.AddListener(self.OnButton_LeftButton);
 
             self.UIRoleXiLianLevels.Add(self.ES_RoleXiLianLevelItem_0);
             self.UIRoleXiLianLevels.Add(self.ES_RoleXiLianLevelItem_1);
@@ -124,7 +124,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButton_Left(this ES_RoleXiLianLevel self)
+        public static void OnButton_LeftButton(this ES_RoleXiLianLevel self)
         {
             if (self.Timer != 0)
             {
@@ -142,7 +142,7 @@ namespace ET.Client
             self.SetPosition();
         }
 
-        public static void OnButton_Right(this ES_RoleXiLianLevel self)
+        public static void OnButton_RightButton(this ES_RoleXiLianLevel self)
         {
             if (self.Timer != 0)
             {

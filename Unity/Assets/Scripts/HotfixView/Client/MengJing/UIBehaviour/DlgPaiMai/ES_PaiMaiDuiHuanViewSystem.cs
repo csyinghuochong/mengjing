@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -11,13 +11,13 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_DuiHuanButton.AddListenerAsync(self.OnBtn_DuiHuan);
+            self.E_Btn_DuiHuanButton.AddListenerAsync(self.OnBtn_DuiHuanButton);
             self.E_Btn_BuyNum_jian10Button.AddListener(() => { self.OnBtn_BuyNum_jia(-1000); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnBtn_BuyNum_jia(-100); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnBtn_BuyNum_jia(1000); });
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnBtn_BuyNum_jia(100); });
             self.E_Lab_RmbNumInputField.onValueChanged.AddListener((str) => { self.OnBtn_BuyNum_jia(0); });
-            self.E_Btn_ShopButton.AddListenerAsync(self.OnBtn_Shop);
+            self.E_Btn_ShopButton.AddListenerAsync(self.OnBtn_ShopButton);
 
             self.Init().Coroutine();
         }
@@ -46,7 +46,7 @@ namespace ET.Client
             self.E_Lab_RmbNumInputField.text = self.ExchangeZuanShi.ToString();
         }
 
-        public static async ETTask OnBtn_Shop(this ES_PaiMaiDuiHuan self)
+        public static async ETTask OnBtn_ShopButton(this ES_PaiMaiDuiHuan self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WeiJingShop);
         }
@@ -78,7 +78,7 @@ namespace ET.Client
             self.E_Lab_WeiJingGoldText.text = $"{diamondsNumber / 100}";
         }
 
-        public static async ETTask OnBtn_DuiHuan(this ES_PaiMaiDuiHuan self)
+        public static async ETTask OnBtn_DuiHuanButton(this ES_PaiMaiDuiHuan self)
         {
             long diamondsNumber = long.Parse(self.E_Lab_RmbNumInputField.text);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < diamondsNumber)

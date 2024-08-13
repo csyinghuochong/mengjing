@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,6 +18,7 @@ namespace ET.Client
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
 
             self.AddComponent<ChangeEquipComponent>();
+            self.E_RenderButton.AddListener(self.OnRenderButton);
         }
 
         [EntitySystem]
@@ -283,6 +284,9 @@ namespace ET.Client
         public static void SetShow(this ES_ModelShow self, bool isShow)
         {
             self.uiTransform.gameObject.SetActive(isShow);
+        }
+        public static void OnRenderButton(this ES_ModelShow self)
+        {
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_BuyItemButton.AddListener(() => { self.OnBtn_BuyItem().Coroutine(); });
+            self.E_Btn_BuyItemButton.AddListener(() => { self.OnBtn_BuyItemButton().Coroutine(); });
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnClickChangeBuyNum(-1); });
@@ -81,7 +81,7 @@ namespace ET.Client
             uiPaiMaiShopTypeComponent.OnClickTypeButton();
         }
 
-        public static async ETTask OnBtn_BuyItem(this ES_PaiMaiShop self)
+        public static async ETTask OnBtn_BuyItemButton(this ES_PaiMaiShop self)
         {
             if (self.PaiMaiSellId == 0)
             {

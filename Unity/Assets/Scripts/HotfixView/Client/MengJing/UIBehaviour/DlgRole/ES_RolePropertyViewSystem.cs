@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -52,6 +52,16 @@ namespace ET.Client
             self.InitShowPropertyList();
             self.RefreshRoleProperty();
             self.InitAddProperty();
+            self.E_Add_LiLiangButton.AddListener(self.OnAdd_LiLiangButton);
+            self.E_Cost_LiLiangButton.AddListener(self.OnCost_LiLiangButton);
+            self.E_Add_ZhiLiButton.AddListener(self.OnAdd_ZhiLiButton);
+            self.E_Cost_ZhiLiButton.AddListener(self.OnCost_ZhiLiButton);
+            self.E_Add_TiZhiButton.AddListener(self.OnAdd_TiZhiButton);
+            self.E_Cost_TiZhiButton.AddListener(self.OnCost_TiZhiButton);
+            self.E_Add_NaiLiButton.AddListener(self.OnAdd_NaiLiButton);
+            self.E_Cost_NaiLiButton.AddListener(self.OnCost_NaiLiButton);
+            self.E_Add_MingJieButton.AddListener(self.OnAdd_MingJieButton);
+            self.E_Cost_MingJieButton.AddListener(self.OnCost_MingJieButton);
         }
 
         [EntitySystem]
@@ -320,5 +330,35 @@ namespace ET.Client
         }
 
         #endregion
+        public static void OnAdd_LiLiangButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnCost_LiLiangButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnAdd_ZhiLiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnCost_ZhiLiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnAdd_TiZhiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnCost_TiZhiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnAdd_NaiLiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnCost_NaiLiButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnAdd_MingJieButton(this ES_RoleProperty self)
+        {
+        }
+        public static void OnCost_MingJieButton(this ES_RoleProperty self)
+        {
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -12,10 +12,10 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Button_AddButton.AddListener(self.OnButton_Add);
-            self.E_Button_RefreshButton.AddListener(self.OnButton_Refresh);
-            self.E_Button_RewardButton.AddListener(self.OnButton_Reward);
-            self.E_Button_TeamButton.AddListenerAsync(self.OnButton_Team);
+            self.E_Button_AddButton.AddListener(self.OnButton_AddButton);
+            self.E_Button_RefreshButton.AddListener(self.OnButton_RefreshButton);
+            self.E_Button_RewardButton.AddListener(self.OnButton_RewardButton);
+            self.E_Button_TeamButton.AddListenerAsync(self.OnButton_TeamButton);
 
             self.PetUIList.Add(self.ES_RankPetItem_0);
             self.PetUIList.Add(self.ES_RankPetItem_1);
@@ -63,7 +63,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButton_Add(this ES_RankPet self)
+        public static void OnButton_AddButton(this ES_RankPet self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "重置次数",
                 "是否花费200钻石重置次数",
@@ -93,16 +93,16 @@ namespace ET.Client
             self.OnUpdateTimes();
         }
 
-        public static void OnButton_Refresh(this ES_RankPet self)
+        public static void OnButton_RefreshButton(this ES_RankPet self)
         {
             self.OnUpdateUI().Coroutine();
         }
 
-        public static void OnButton_Reward(this ES_RankPet self)
+        public static void OnButton_RewardButton(this ES_RankPet self)
         {
         }
 
-        public static async ETTask OnButton_Team(this ES_RankPet self)
+        public static async ETTask OnButton_TeamButton(this ES_RankPet self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFormation);
             DlgPetFormation dlgPetFormation = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetFormation>();

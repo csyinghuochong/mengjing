@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -13,7 +13,7 @@ namespace ET.Client
 
             self.E_Btn_ChouKaTenButton.AddListener(() => { self.OnBtn_ChouKa(10).Coroutine(); });
             self.E_Btn_ChouKaButton.AddListener(() => { self.OnBtn_ChouKa(1).Coroutine(); });
-            self.E_Btn_RolePetHeXinButton.AddListener(self.OnBtn_RolePetHeXin);
+            self.E_Btn_RolePetHeXinButton.AddListener(self.OnBtn_RolePetHeXinButton);
 
             self.UpdateMoney();
         }
@@ -67,7 +67,7 @@ namespace ET.Client
             self.E_Text_CostNumberText.color = (haveNumber1 >= int.Parse(itemInfo1[1])) ? Color.white : Color.red;
         }
 
-        public static void OnBtn_RolePetHeXin(this ES_PetHeXinChouKa self)
+        public static void OnBtn_RolePetHeXinButton(this ES_PetHeXinChouKa self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
         }
