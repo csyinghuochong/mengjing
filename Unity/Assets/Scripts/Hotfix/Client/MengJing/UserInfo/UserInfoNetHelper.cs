@@ -114,5 +114,15 @@
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_UnitInfoResponse> UnitInfoRequest(Scene root, long unitID)
+        {
+            C2M_UnitInfoRequest request = C2M_UnitInfoRequest.Create();
+            request.UnitID = unitID;
+
+            M2C_UnitInfoResponse response = (M2C_UnitInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }
