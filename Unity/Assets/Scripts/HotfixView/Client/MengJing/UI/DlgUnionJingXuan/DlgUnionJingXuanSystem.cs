@@ -14,6 +14,7 @@ namespace ET.Client
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
             self.View.E_ButtonConfirmButton.AddListener(() => { self.OnButtonConfirmButton(1).Coroutine(); });
             self.View.E_ButtonCancelButton.AddListener(self.OnButtonCancelButton);
+            self.View.E_JingXuanItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJingXuanItemsRefresh);
         }
 
         public static void ShowWindow(this DlgUnionJingXuan self, Entity contextData = null)
@@ -60,47 +61,35 @@ namespace ET.Client
             return null;
         }
 
+        private static void OnJingXuanItemsRefresh(this DlgUnionJingXuan self, Transform transform, int index)
+        {
+            Scroll_Item_JingXuanItem scrollItemJingXuanItem = self.ScrollItemJingXuanItems[index].BindTrans(transform);
+            scrollItemJingXuanItem.OnUpdateUI(self.UnionPlayerInfos[index].Item1, self.UnionPlayerInfos[index].Item2);
+        }
+
         public static void OnUpdateUI(this DlgUnionJingXuan self, UnionInfo unionInfo)
         {
             self.UnionInfo = unionInfo;
 
-            // int number = 0;
-            // for (int i = 0; i < unionInfo.JingXuanList.Count; i++)
-            // {
-            //     UnionPlayerInfo unionPlayerInfo = self.GetUnionPlayerInfo(unionInfo.JingXuanList[i]);
-            //     if (unionPlayerInfo == null)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     UIUnionJingXuanItemComponent ui_1 = null;
-            //     if (number < self.JingXuanItemList.Count)
-            //     {
-            //         ui_1 = self.JingXuanItemList[number];
-            //         ui_1.GameObject.SetActive(true);
-            //     }
-            //     else
-            //     {
-            //         GameObject storeItem = GameObject.Instantiate(self.JingXuanItem);
-            //         UICommonHelper.SetParent(storeItem, self.ItemNodeList);
-            //         storeItem.SetActive(true);
-            //         ui_1 = self.AddChild<UIUnionJingXuanItemComponent, GameObject>(storeItem);
-            //         self.JingXuanItemList.Add(ui_1);
-            //     }
-            //
-            //     ui_1.OnUpdateUI(i, unionPlayerInfo);
-            //     number++;
-            // }
-            //
-            // for (int i = number; i < self.JingXuanItemList.Count; i++)
-            // {
-            //     self.JingXuanItemList[i].GameObject.SetActive(false);
-            // }
-            //
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // bool haveself = unionInfo.JingXuanList.Contains(unit.Id);
-            // self.View.E_ButtonConfirmButton.gameObject.SetActive(!haveself);
-            // self.View.E_AlreadyJingXuan.SetActive(haveself);
+            self.UnionPlayerInfos.Clear();
+            for (int i = 0; i < unionInfo.JingXuanList.Count; i++)
+            {
+                UnionPlayerInfo unionPlayerInfo = self.GetUnionPlayerInfo(unionInfo.JingXuanList[i]);
+                if (unionPlayerInfo == null)
+                {
+                    continue;
+                }
+
+                self.UnionPlayerInfos.Add(new(i, unionPlayerInfo));
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemJingXuanItems, self.UnionPlayerInfos.Count);
+            self.View.E_JingXuanItemsLoopVerticalScrollRect.SetVisible(true, self.UnionPlayerInfos.Count);
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            bool haveself = unionInfo.JingXuanList.Contains(unit.Id);
+            self.View.E_ButtonConfirmButton.gameObject.SetActive(!haveself);
+            self.View.EG_AlreadyJingXuanRectTransform.gameObject.SetActive(haveself);
         }
     }
 }
