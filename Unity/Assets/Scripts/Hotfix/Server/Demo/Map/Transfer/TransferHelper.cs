@@ -40,7 +40,6 @@ namespace ET.Server
             }
             unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = 0;
         }
-
         
         public static async ETTask<int> TransferUnit(Unit unit, C2M_TransferMap request)
         {

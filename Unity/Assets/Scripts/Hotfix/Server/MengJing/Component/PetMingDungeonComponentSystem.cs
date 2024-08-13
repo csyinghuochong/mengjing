@@ -137,7 +137,7 @@ namespace ET.Server
                      int position = petComponent.PetMingPosition.IndexOf(petinfoid);
                      position = position != -1 ? position %= 9 : i;   
 
-                     Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), unit.Id,
+                     Unit petunit = UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id,
                          CampEnum.CampPlayer_1, rolePetInfo, ConfigData.Formation_1[ position ], 0f, position);
                      petunit.GetComponent<AIComponent>().Stop();
                  }
@@ -160,7 +160,7 @@ namespace ET.Server
                          petComponent.PetXiLian(petInfo, 2, 0, 0 );
                          petComponent.UpdatePetAttribute(petInfo, false);
                          petInfo.PlayerName = "机器人";
-                         Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), 0,
+                         Unit petunit = UnitFactory.CreateTianTiPet(unit.Scene(), 0,
                             CampEnum.CampPlayer_2, petInfo, ConfigData.Formation_2[k], 180f, k);
                      }
                  }
@@ -197,7 +197,7 @@ namespace ET.Server
                              int position = petComponent_enemy.PetMingPosition.IndexOf(petinfoid);
                              position = position != -1 ? position %= 9 : i;
                              petComponent_enemy.UpdatePetAttributeWithData( bagComponentS, numericComponentS, rolePetInfo, false);
-                             Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), 0,
+                             Unit petunit = UnitFactory.CreateTianTiPet(unit.Scene(), 0,
                                 CampEnum.CampPlayer_2, rolePetInfo, ConfigData.Formation_2[position], 180f,position);
                          }
                      }
