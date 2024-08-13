@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using NLog.Fluent;
 using UnityEditor;
 using UnityEngine;
 
@@ -243,7 +242,7 @@ public partial class UICodeSpawner
 		}
 		catch
 		{
-			Log.Error($"生成 {gameObject.name} 错误");
+			Debug.LogError($"生成 {gameObject.name} 错误");
 		}
 		finally
 		{
