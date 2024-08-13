@@ -9,7 +9,10 @@ namespace ET.Server
     [FriendOf(typeof(DBDayActivityInfo))]
     public class ActivitySceneComponent:        Entity, IAwake, IDestroy
     {
+
+        public long Timer;
         public long ActivityTimer;
+
         public List<ActivityTimer> ActivityTimerList = new List<ActivityTimer>();
 
         //map进程ID，用来给进程广播消息，以后可能需要拆分出去
@@ -23,8 +26,6 @@ namespace ET.Server
         public long PetMingLastTime = 0;
 
         public int CheckIndex = 0;
-
-        public long Timer;
     }
     
 }

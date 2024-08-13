@@ -16,16 +16,15 @@ namespace ET.Server
                 chanchu = activitySceneComponent.DBDayActivityInfo.PetMingChanChu[request.ActorId];
                 activitySceneComponent.DBDayActivityInfo.PetMingChanChu[request.ActorId] = 0;
             }
-            // A2M_PetMingChanChuRequest a2M_PetMing  = new A2M_PetMingChanChuRequest()
-            // {
-            //     UnitID = request.ActorId,
-            //     ChanChu = chanchu,   
-            // };
-            //
-            // M2A_PetMingChanChuResponse m2G_RechargeResponse = (M2A_PetMingChanChuResponse)await ActorLocationSenderComponent.Instance.Call(request.ActorId, a2M_PetMing);
-            // if (m2G_RechargeResponse.Error == ErrorCode.ERR_Success)
-            // {
-            // }
+
+            A2M_PetMingChanChuRequest a2M_PetMing = A2M_PetMingChanChuRequest.Create();
+            a2M_PetMing.UnitID = request.ActorId;
+            a2M_PetMing.ChanChu = chanchu;
+            
+            M2A_PetMingChanChuResponse m2G_RechargeResponse = (M2A_PetMingChanChuResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.ActorId, a2M_PetMing);
+            if (m2G_RechargeResponse.Error == ErrorCode.ERR_Success)
+            {
+            }
             await ETTask.CompletedTask;
         }
     }

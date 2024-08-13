@@ -11,7 +11,7 @@ namespace ET.Server
         {
             try
             {
-                self.SaveDB();
+                self.OnCheck();
             }
             catch (Exception e)
             {
@@ -72,9 +72,13 @@ namespace ET.Server
                 self.DBDayActivityInfo.LastHour = dateTime.Hour;
                 self.NoticeActivityUpdate_Hour(dateTime).Coroutine();
             }
-
-            self.SaveDB();
-            self.CheckPetMine();
+            
+            if (self.CheckIndex >= 600)
+            { 
+                self.CheckIndex++;
+                self.CheckPetMine(self.CheckIndex);
+                self.SaveDB();
+            }
         }
 
         public static async ETTask NoticeActivityUpdate_Hour(this ActivitySceneComponent self, DateTime dateTime)
@@ -211,10 +215,8 @@ namespace ET.Server
             }
         }
 
-        public static void CheckPetMine(this ActivitySceneComponent self)
+        public static void CheckPetMine(this ActivitySceneComponent self, int checkindex)
         {
-            self.CheckIndex++;
-            if (self.CheckIndex >= 1)
             {
                 int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
 
@@ -242,7 +244,7 @@ namespace ET.Server
                         self.DBDayActivityInfo.PetMingHexinList);
 
                     MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
-                    int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi * (self.CheckIndex / 60f));
+                    int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi * (checkindex / 3600f));
 
                     if (!self.DBDayActivityInfo.PetMingChanChu.ContainsKey(petMingPlayers[i].UnitId))
                     {
@@ -257,8 +259,6 @@ namespace ET.Server
                         self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId] = oldValue;
                     }
                 }
-
-                self.CheckIndex = 0;
             }
         }
 
@@ -291,7 +291,7 @@ namespace ET.Server
             self.SaveDB();
 
             //每日活动
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.ActivityServerTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.ActivityServerTimer, self);
         }
 
         public static async ETTask OnCheckFuntionButton(this ActivitySceneComponent self)
