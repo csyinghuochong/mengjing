@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -8,9 +8,9 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRechargeReward self)
         {
             self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
-            self.View.E_ButtonGoToPayButton.AddListener(self.OnButtonGoToPay);
-            self.View.E_ButtonRewardButton.AddListenerAsync(self.OnButtonReward);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
+            self.View.E_ButtonGoToPayButton.AddListener(self.OnButtonGoToPayButton);
+            self.View.E_ButtonRewardButton.AddListenerAsync(self.OnButtonRewardButton);
         }
 
         public static void ShowWindow(this DlgRechargeReward self, Entity contextData = null)
@@ -25,12 +25,12 @@ namespace ET.Client
             self.UpdateUI(index);
         }
 
-        public static void OnButtonClose(this DlgRechargeReward self)
+        public static void OnButtonCloseButton(this DlgRechargeReward self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RechargeReward);
         }
 
-        public static async ETTask OnButtonReward(this DlgRechargeReward self)
+        public static async ETTask OnButtonRewardButton(this DlgRechargeReward self)
         {
             int page = self.CurrentIndex;
             int rechargeNumber = page == 0 ? 50 : 98;
@@ -69,7 +69,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().CheckRechargeRewardButton();
         }
 
-        public static void OnButtonGoToPay(this DlgRechargeReward self)
+        public static void OnButtonGoToPayButton(this DlgRechargeReward self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }

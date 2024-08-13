@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ET.Client
 {
@@ -21,8 +21,9 @@ namespace ET.Client
             self.View.E_AddGoldButton.AddListener(self.OnAddGoldButton);
             self.View.E_AddZuanShiButton.AddListener(self.OnAddZuanShiButton);
 
-            self.View.E_CloseButton.AddListener(self.OnClose);
-            self.View.E_Close2Button.AddListener(self.OnClose);
+            self.View.E_CloseButton.AddListener(self.OnCloseButton);
+            self.View.E_Close2Button.AddListener(self.OnCloseButton);
+            self.View.E_Btn_AddGoldButton.AddListener(self.OnBtn_AddGoldButton);
         }
 
         public static void ShowWindow(this DlgHuoBiSet self, Entity contextData = null)
@@ -70,7 +71,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnClose(this DlgHuoBiSet self)
+        private static void OnCloseButton(this DlgHuoBiSet self)
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
@@ -111,6 +112,9 @@ namespace ET.Client
             // }
             //
             // self.Img_Back_Title.GetComponent<Image>().sprite = sp;
+        }
+        public static void OnBtn_AddGoldButton(this DlgHuoBiSet self)
+        {
         }
     }
 }

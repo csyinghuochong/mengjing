@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -10,20 +10,20 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetEggFuLing self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
-            self.View.E_FuLingBtnButton.AddListenerAsync(self.OnFuLingBtn);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.View.E_FuLingBtnButton.AddListenerAsync(self.OnFuLingBtnButton);
         }
 
         public static void ShowWindow(this DlgPetEggFuLing self, Entity contextData = null)
         {
         }
 
-        public static void OnBtn_Close(this DlgPetEggFuLing self)
+        public static void OnBtn_CloseButton(this DlgPetEggFuLing self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetEggFuLing);
         }
 
-        public static async ETTask OnFuLingBtn(this DlgPetEggFuLing self)
+        public static async ETTask OnFuLingBtnButton(this DlgPetEggFuLing self)
         {
             if (self.EggId == 0)
             {

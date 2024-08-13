@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -33,11 +33,12 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMapBig self)
         {
-            self.View.E_Btn_CloseButton.AddListener(self.OnCloseMiniMap);
-            self.View.E_Btn_ShowMonsterButton.AddListener(self.OnBtn_ShowMonster);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.View.E_Btn_ShowMonsterButton.AddListener(self.OnBtn_ShowMonsterButton);
 
             self.View.E_RawImageEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
             self.View.E_MapBigNpcItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMapBigNpcItemsRefresh);
+            self.View.E_RawImageButton.AddListener(self.OnRawImageButton);
         }
 
         public static void ShowWindow(this DlgMapBig self, Entity contextData = null)
@@ -552,7 +553,7 @@ namespace ET.Client
             return vector3;
         }
 
-        public static void OnCloseMiniMap(this DlgMapBig self)
+        public static void OnBtn_CloseButton(this DlgMapBig self)
         {
             // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIGuide);
             // if (ui != null)
@@ -564,7 +565,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MapBig);
         }
 
-        public static void OnBtn_ShowMonster(this DlgMapBig self)
+        public static void OnBtn_ShowMonsterButton(this DlgMapBig self)
         {
             if (self.MonsterPointList.Count > 0)
             {
@@ -673,6 +674,9 @@ namespace ET.Client
             {
                 self.PathPointList[i].transform.localPosition = self.InvisiblePosition;
             }
+        }
+        public static void OnRawImageButton(this DlgMapBig self)
+        {
         }
     }
 }

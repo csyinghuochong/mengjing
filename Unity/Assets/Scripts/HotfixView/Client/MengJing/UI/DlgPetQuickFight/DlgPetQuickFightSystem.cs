@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +30,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetQuickFight self)
         {
             self.View.E_PetQuickFightItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetQuickFightItemsRefresh);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgPetQuickFight self, Entity contextData = null)
@@ -171,6 +172,9 @@ namespace ET.Client
             self.View.E_PetQuickFightItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
 
             self.OnUpdateUI();
+        }
+        public static void OnImageButtonButton(this DlgPetQuickFight self)
+        {
         }
     }
 }

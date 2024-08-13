@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class DataUpdate_TeamUpdate_DlgTeamRefresh : AEvent<Scene, TeamUpdate>

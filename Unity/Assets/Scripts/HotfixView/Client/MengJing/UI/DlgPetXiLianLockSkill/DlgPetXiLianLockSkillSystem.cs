@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -12,8 +12,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetXiLianLockSkill self)
         {
-            self.View.E_LockBtnButton.AddListenerAsync(self.OnLockBtn);
-            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            self.View.E_LockBtnButton.AddListenerAsync(self.OnLockBtnButton);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
@@ -78,7 +78,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnLockBtn(this DlgPetXiLianLockSkill self)
+        public static async ETTask OnLockBtnButton(this DlgPetXiLianLockSkill self)
         {
             if (self.RolePetInfo.PetSkill.Count < 2)
             {
@@ -114,10 +114,10 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().View.ES_PetXiLian.OnXiLianSelect(rolePetInfo);
 
-            self.OnBtn_Close();
+            self.OnBtn_CloseButton();
         }
 
-        public static void OnBtn_Close(this DlgPetXiLianLockSkill self)
+        public static void OnBtn_CloseButton(this DlgPetXiLianLockSkill self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetXiLianLockSkill);
         }

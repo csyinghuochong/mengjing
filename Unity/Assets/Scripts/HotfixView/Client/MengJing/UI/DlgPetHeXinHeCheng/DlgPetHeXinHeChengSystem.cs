@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +13,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetHeXinHeCheng self)
         {
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.View.E_Button_OneKeyButton.AddListener(self.OnButton_OneKeyButton);
         }
 
         public static void ShowWindow(this DlgPetHeXinHeCheng self, Entity contextData = null)
@@ -191,6 +193,12 @@ namespace ET.Client
             self.OnUpdateItemList();
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnEquipPetHeXin();
+        }
+        public static void OnBtn_CloseButton(this DlgPetHeXinHeCheng self)
+        {
+        }
+        public static void OnButton_OneKeyButton(this DlgPetHeXinHeCheng self)
+        {
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -8,6 +8,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgSelectReward self)
         {
             self.View.E_SelectRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectRewardItemsRefresh);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgSelectReward self, Entity contextData = null)
@@ -94,6 +95,9 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectReward);
+        }
+        public static void OnBtn_CloseButton(this DlgSelectReward self)
+        {
         }
     }
 }

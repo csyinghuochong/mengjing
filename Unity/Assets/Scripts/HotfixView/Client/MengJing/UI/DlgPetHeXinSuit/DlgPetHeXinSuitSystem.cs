@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetHeXinSuit self)
         {
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgPetHeXinSuit self, Entity contextData = null)
@@ -82,6 +83,9 @@ namespace ET.Client
                 rc.Get<GameObject>("JiHuo").SetActive(false);
                 rc.Get<GameObject>("WeiJiHuo").SetActive(true);
             }
+        }
+        public static void OnBtn_CloseButton(this DlgPetHeXinSuit self)
+        {
         }
     }
 }

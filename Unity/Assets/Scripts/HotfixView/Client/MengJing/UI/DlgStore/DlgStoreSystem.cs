@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgStore self)
         {
-            self.View.E_closeButtonButton.AddListener(self.OnCloseStore);
+            self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
             self.View.E_StoreItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnStoreItemsRefresh);
         }
 
@@ -24,7 +24,7 @@ namespace ET.Client
             self.View.ES_ModelShow.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>().fieldOfView = 50;
         }
 
-        public static void OnCloseStore(this DlgStore self)
+        public static void OncloseButtonButton(this DlgStore self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Store);
         }

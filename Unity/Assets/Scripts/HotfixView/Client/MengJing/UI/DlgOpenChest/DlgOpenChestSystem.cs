@@ -1,18 +1,23 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgOpenChest))]
     public static class DlgOpenChestSystem
     {
         public static void RegisterUIEvent(this DlgOpenChest self)
         {
-            self.View.E_OpenBtnButton.AddListener(self.OnOpenBtn);
-            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OpenChest); });
+            self.View.E_OpenBtnButton.AddListener(self.OnOpenBtnButton);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgOpenChest self, Entity contextData = null)
         {
         }
 
+        public static void OnBtn_CloseButton(this DlgOpenChest self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OpenChest);
+        }
+        
         public static void UpdateInfo(this DlgOpenChest self, Unit Box)
         {
             self.Box = Box;
@@ -22,7 +27,7 @@
                 ItemOperateEnum.None);
         }
 
-        public static void OnOpenBtn(this DlgOpenChest self)
+        public static void OnOpenBtnButton(this DlgOpenChest self)
         {
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_OpenBox.OnOpenBox(self.Box);
             self.Room().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OpenChest);

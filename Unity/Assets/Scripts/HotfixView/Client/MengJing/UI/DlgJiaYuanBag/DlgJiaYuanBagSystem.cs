@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,9 +21,9 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgJiaYuanBag self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanBag); });
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
 
-            self.View.E_Btn_PlanButton.AddListenerAsync(self.OnBtn_Plan);
+            self.View.E_Btn_PlanButton.AddListenerAsync(self.OnBtn_PlanButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanBag self, Entity contextData = null)
@@ -31,7 +31,12 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        public static async ETTask OnBtn_Plan(this DlgJiaYuanBag self)
+        public static void OnButtonCloseButton(this DlgJiaYuanBag self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanBag);
+        }
+        
+        public static async ETTask OnBtn_PlanButton(this DlgJiaYuanBag self)
         {
             Scene curScene = self.Root().CurrentScene();
             if (self.BagInfo == null)

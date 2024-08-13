@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetMiningRecord self)
         {
-            self.View.E_ImageCloseButton.AddListener(self.OnImageClose);
+            self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
         }
 
         public static void ShowWindow(this DlgPetMiningRecord self, Entity contextData = null)
@@ -18,7 +18,7 @@ namespace ET.Client
             self.OnInitUI().Coroutine();
         }
 
-        public static void OnImageClose(this DlgPetMiningRecord self)
+        public static void OnImageCloseButton(this DlgPetMiningRecord self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningRecord);
         }

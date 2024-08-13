@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,8 +7,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgCellDungeonRevive self)
         {
-            self.View.E_Button_ReviveButton.AddListener(self.OnButton_Revive);
-            self.View.E_Button_ExitButton.AddListener(self.OnButton_Exit);
+            self.View.E_Button_ReviveButton.AddListener(self.OnButton_ReviveButton);
+            self.View.E_Button_ExitButton.AddListener(self.OnButton_ExitButton);
         }
 
         public static void ShowWindow(this DlgCellDungeonRevive self, Entity contextData = null)
@@ -89,7 +89,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButton_Revive(this DlgCellDungeonRevive self)
+        public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)
         {
             string reviveCost = GlobalValueConfigCategory.Instance.Get(5).Value;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
@@ -128,7 +128,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonRevive);
         }
 
-        public static void OnButton_Exit(this DlgCellDungeonRevive self)
+        public static void OnButton_ExitButton(this DlgCellDungeonRevive self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (self.IsNoAutoExit(mapComponent.SceneType))

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -13,7 +13,7 @@ namespace ET.Client
             self.View.E_NanDu_2_ButtonButton.AddListener(() => { self.OnNanDu_Button(2); });
             self.View.E_NanDu_3_ButtonButton.AddListener(() => { self.OnNanDu_Button(3); });
 
-            self.View.E_ButtonCloseButton.AddListenerAsync(self.OnCloseChapter);
+            self.View.E_ButtonCloseButton.AddListenerAsync(self.OnButtonCloseButton);
             self.View.E_DungeonLevelItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonLevelItemsRefresh);
         }
 
@@ -60,7 +60,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnCloseChapter(this DlgDungeonLevel self)
+        public static async ETTask OnButtonCloseButton(this DlgDungeonLevel self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Dungeon);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonLevel);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -14,8 +14,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgGivePet self)
         {
             self.View.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
-            self.View.E_CloseBtnButton.AddListener(self.OnCloseBtn);
-            self.View.E_GiveBtnButton.AddListener(self.OnGiveBtn);
+            self.View.E_CloseBtnButton.AddListener(self.OnCloseBtnButton);
+            self.View.E_GiveBtnButton.AddListener(self.OnGiveBtnButton);
         }
 
         public static void ShowWindow(this DlgGivePet self, Entity contextData = null)
@@ -31,7 +31,7 @@ namespace ET.Client
             self.View.E_TaskDesTextText.text = taskConfig.TaskDes;
         }
 
-        public static void OnCloseBtn(this DlgGivePet self)
+        public static void OnCloseBtnButton(this DlgGivePet self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GivePet);
         }
@@ -181,7 +181,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnGiveBtn(this DlgGivePet self)
+        public static void OnGiveBtnButton(this DlgGivePet self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
 

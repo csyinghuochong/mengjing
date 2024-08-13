@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ET.Client
 {
@@ -26,8 +26,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPaiMaiAuction self)
         {
-            self.View.E_Btn_AuctionButton.AddListenerAsync(self.OnBtn_Auction);
-            self.View.E_Btn_CanYuButton.AddListener(self.OnBtn_CanYu);
+            self.View.E_Btn_AuctionButton.AddListenerAsync(self.OnBtn_AuctionButton);
+            self.View.E_Btn_CanYuButton.AddListener(self.OnBtn_CanYuButton);
             self.View.E_Btn_RecordButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AuctionRecord).Coroutine();
@@ -111,7 +111,7 @@ namespace ET.Client
             self.View.E_Lab_RmbNumInputField.text = curprice.ToString();
         }
 
-        public static async ETTask OnBtn_Auction(this DlgPaiMaiAuction self)
+        public static async ETTask OnBtn_AuctionButton(this DlgPaiMaiAuction self)
         {
             string text = self.View.E_Lab_RmbNumInputField.text;
             if (string.IsNullOrEmpty(text))
@@ -135,7 +135,7 @@ namespace ET.Client
             await ActivityNetHelper.PaiMaiAuctionPrice(self.Root(), price);
         }
 
-        public static void OnBtn_CanYu(this DlgPaiMaiAuction self)
+        public static void OnBtn_CanYuButton(this DlgPaiMaiAuction self)
         {
             int returngold = (int)(self.AuctionStart * 0.1f);
             if (returngold <= 0)

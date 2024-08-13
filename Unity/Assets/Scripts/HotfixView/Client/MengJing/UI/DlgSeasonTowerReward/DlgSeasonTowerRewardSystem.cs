@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSeasonTowerReward self)
         {
-            self.View.E_CloseButtonButton.AddListener(self.OnCloseButton);
+            self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
 
             self.View.E_RankRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRankRewardItemsRefresh);
         }
@@ -22,7 +22,7 @@ namespace ET.Client
             scrollItemRankRewardItem.OnUpdateUI(self.ShowRankRewardConfigs[index]);
         }
 
-        public static void OnCloseButton(this DlgSeasonTowerReward self)
+        public static void OnCloseButtonButton(this DlgSeasonTowerReward self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonTowerReward);
         }

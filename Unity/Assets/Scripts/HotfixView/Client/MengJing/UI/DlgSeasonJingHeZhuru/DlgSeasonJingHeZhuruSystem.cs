@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -10,7 +10,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgSeasonJingHeZhuru self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_ZhuRuBtnButton.AddListenerAsync(self.OnZhuRuBtn);
+            self.View.E_ZhuRuBtnButton.AddListenerAsync(self.OnZhuRuBtnButton);
             self.View.E_CloseBtnButton.AddListener(
                 () => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonJingHeZhuru); });
         }
@@ -19,7 +19,7 @@ namespace ET.Client
         {
         }
 
-        public static async ETTask OnZhuRuBtn(this DlgSeasonJingHeZhuru self)
+        public static async ETTask OnZhuRuBtnButton(this DlgSeasonJingHeZhuru self)
         {
             if (self.CostIds.Count <= 0)
             {

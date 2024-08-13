@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +13,11 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanOneKeyPlant);
             });
-            self.View.E_Btn_OnePlantButton.AddListenerAsync(self.OnBtn_OnePlant);
+            self.View.E_Btn_OnePlantButton.AddListenerAsync(self.OnBtn_OnePlantButton);
+            self.View.E_ItemDiButton.AddListener(self.OnItemDiButton);
+            self.View.E_ItemClickButton.AddListener(self.OnItemClickButton);
+            self.View.E_ItemDragButton.AddListener(self.OnItemDragButton);
+            self.View.E_LockButton.AddListener(self.OnLockButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanOneKeyPlant self, Entity contextData = null)
@@ -109,7 +113,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnBtn_OnePlant(this DlgJiaYuanOneKeyPlant self)
+        public static async ETTask OnBtn_OnePlantButton(this DlgJiaYuanOneKeyPlant self)
         {
             if (self.Seeds.Count <= 0)
             {
@@ -133,6 +137,18 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanOneKeyPlant);
+        }
+        public static void OnItemDiButton(this DlgJiaYuanOneKeyPlant self)
+        {
+        }
+        public static void OnItemClickButton(this DlgJiaYuanOneKeyPlant self)
+        {
+        }
+        public static void OnItemDragButton(this DlgJiaYuanOneKeyPlant self)
+        {
+        }
+        public static void OnLockButton(this DlgJiaYuanOneKeyPlant self)
+        {
         }
     }
 }

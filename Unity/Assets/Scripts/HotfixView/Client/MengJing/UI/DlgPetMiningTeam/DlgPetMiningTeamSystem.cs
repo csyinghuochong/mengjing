@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetMiningTeam self)
         {
             self.View.E_PetFormationItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetFormationItemsRefresh);
-            self.View.E_ButtonCloseButton.AddListenerAsync(self.OnButtonClose);
+            self.View.E_ButtonCloseButton.AddListenerAsync(self.OnButtonCloseButton);
         }
 
         public static void ShowWindow(this DlgPetMiningTeam self, Entity contextData = null)
@@ -160,7 +160,7 @@ namespace ET.Client
             PetHelper.CheckPetPosition(self.PetTeamList, self.PetMingPosition);
         }
 
-        public static async ETTask OnButtonClose(this DlgPetMiningTeam self)
+        public static async ETTask OnButtonCloseButton(this DlgPetMiningTeam self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             long instanceid = self.InstanceId;

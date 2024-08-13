@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace ET.Client
             self.View.E_ImageSelect1Image.gameObject.SetActive(false);
             self.View.E_ImageSelect2Image.gameObject.SetActive(true);
 
-            self.View.E_ImageButtonButton.AddListener(self.OnBtn_Close);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
 
             self.View.E_RechargeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRechargeItemsRefresh);
         }
@@ -179,7 +179,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        public static void OnBtn_Close(this DlgRecharge self)
+        public static void OnImageButtonButton(this DlgRecharge self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Recharge);
         }

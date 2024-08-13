@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -9,6 +9,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPopupTip self)
         {
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
+            self.View.E_TrueButton.AddListener(self.OnTrueButton);
+            self.View.E_FalseButton.AddListener(self.OnFalseButton);
         }
 
         public static void ShowWindow(this DlgPopupTip self, Entity contextData = null)
@@ -49,6 +51,12 @@ namespace ET.Client
                 cancelHandle?.Invoke();
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PopupTip);
             });
+        }
+        public static void OnTrueButton(this DlgPopupTip self)
+        {
+        }
+        public static void OnFalseButton(this DlgPopupTip self)
+        {
         }
     }
 }

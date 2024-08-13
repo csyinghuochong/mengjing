@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine.EventSystems;
 
 namespace ET.Client
@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgItemExpBox self)
         {
-            self.View.E_ImageButtonButton.AddListener(self.ImageButton);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
             self.View.E_Btn_ZuanShiOpenButton.AddListener(() => { self.OnButtonOpen(1).Coroutine(); });
             self.View.E_Btn_MianFeiOpenButton.AddListener(() => { self.OnButtonOpen(2).Coroutine(); });
             self.View.E_PriceInputFieldInputField.onValueChanged.AddListener((string value) => { self.OnChange(value); });
@@ -208,11 +208,11 @@ namespace ET.Client
 
             if (self.UpdateNumber() <= 0)
             {
-                self.ImageButton();
+                self.OnImageButtonButton();
             }
         }
 
-        public static void ImageButton(this DlgItemExpBox self)
+        public static void OnImageButtonButton(this DlgItemExpBox self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemExpBox);
         }

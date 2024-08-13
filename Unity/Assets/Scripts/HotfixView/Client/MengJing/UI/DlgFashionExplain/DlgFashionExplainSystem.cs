@@ -1,18 +1,18 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgFashionExplain))]
     public static class DlgFashionExplainSystem
     {
         public static void RegisterUIEvent(this DlgFashionExplain self)
         {
-            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgFashionExplain self, Entity contextData = null)
         {
         }
 
-        public static void OnBtn_Close(this DlgFashionExplain self)
+        public static void OnBtn_CloseButton(this DlgFashionExplain self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_FashionExplain);
         }

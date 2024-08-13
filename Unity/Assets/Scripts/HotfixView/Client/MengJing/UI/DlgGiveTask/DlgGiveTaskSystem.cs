@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -13,8 +13,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgGiveTask self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_CloseBtnButton.AddListener(self.OnCloseBtn);
-            self.View.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtn);
+            self.View.E_CloseBtnButton.AddListener(self.OnCloseBtnButton);
+            self.View.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
         }
 
         public static void ShowWindow(this DlgGiveTask self, Entity contextData = null)
@@ -30,7 +30,7 @@ namespace ET.Client
             self.View.E_TaskDesTextText.text = taskConfig.TaskDes;
         }
 
-        public static void OnCloseBtn(this DlgGiveTask self)
+        public static void OnCloseBtnButton(this DlgGiveTask self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GiveTask);
         }
@@ -70,7 +70,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnGiveBtn(this DlgGiveTask self)
+        public static async ETTask OnGiveBtnButton(this DlgGiveTask self)
         {
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
 

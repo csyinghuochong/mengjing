@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +13,7 @@ namespace ET.Client
             self.View.E_Button_XieZhuButton.AddListener(() => { self.OnButton_Create(TeamFubenType.XieZhu).Coroutine(); });
             self.View.E_Button_CreateButton.AddListener(() => { self.OnButton_Create(TeamFubenType.Normal).Coroutine(); });
             self.View.E_ShenYuanButtonButton.AddListener(() => { self.OnShenYuanMode(); });
+            self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
         }
 
         public static void ShowWindow(this DlgTeamDungeonCreate self, Entity contextData = null)
@@ -206,6 +207,9 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
+        }
+        public static void OnCloseButtonButton(this DlgTeamDungeonCreate self)
+        {
         }
     }
 }

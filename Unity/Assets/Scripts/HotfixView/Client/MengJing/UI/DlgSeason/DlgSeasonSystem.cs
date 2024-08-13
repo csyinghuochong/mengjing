@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (ES_SeasonHome))]
     [FriendOf(typeof (ES_SeasonTask))]

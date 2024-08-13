@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +16,8 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningChallenge);
             });
 
-            self.View.E_ButtonConfirmButton.AddListener(self.OnButtonConfirm);
-            self.View.E_ButtonResetButton.AddListener(self.OnButtonReset);
+            self.View.E_ButtonConfirmButton.AddListener(self.OnButtonConfirmButton);
+            self.View.E_ButtonResetButton.AddListener(self.OnButtonResetButton);
 
             GameObject gameObject_0 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_0").gameObject;
             gameObject_0.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(0).Coroutine(); });
@@ -58,7 +58,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButtonReset(this DlgPetMiningChallenge self)
+        public static void OnButtonResetButton(this DlgPetMiningChallenge self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "重置挑战", "是否花费350钻石重置5次挑战次数？/n提示:挑战次数上限为10", () => { self.RequestPetMingReset().Coroutine(); },
                 null).Coroutine();
@@ -240,7 +240,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButtonConfirm(this DlgPetMiningChallenge self)
+        public static void OnButtonConfirmButton(this DlgPetMiningChallenge self)
         {
             if (self.TeamId == -1)
             {

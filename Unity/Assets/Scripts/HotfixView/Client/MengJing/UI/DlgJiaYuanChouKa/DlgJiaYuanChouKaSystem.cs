@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgJiaYuanChouKa))]
     public static class DlgJiaYuanChouKaSystem

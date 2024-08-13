@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -9,7 +9,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgItemFumoSelect self)
         {
-            self.View.E_BtnCloseButton.AddListener(self.OnCloseTips);
+            self.View.E_BtnCloseButton.AddListener(self.OnBtnCloseButton);
         }
 
         public static void ShowWindow(this DlgItemFumoSelect self, Entity contextData = null)
@@ -64,7 +64,7 @@ namespace ET.Client
             self.BagInfos = equipinfos;
         }
 
-        public static void OnCloseTips(this DlgItemFumoSelect self)
+        public static void OnBtnCloseButton(this DlgItemFumoSelect self)
         {
             if (self.IsDisposed)
             {

@@ -11,7 +11,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgItemTips self)
         {
-            self.View.E_BGButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips); });
+            self.View.E_BGButton.AddListener(self.OnBGButton);
             self.View.E_SellButton.AddListenerAsync(self.OnSellButton);
             self.View.E_UseButton.AddListenerAsync(self.OnUseButton);
             self.View.E_SplitButton.AddListenerAsync(self.OnSplitButton);
@@ -29,6 +29,11 @@ namespace ET.Client
             self.Lab_ItemNameWidth = self.View.E_ItemNameText.GetComponent<RectTransform>().sizeDelta.x;
         }
 
+        public static void OnBGButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+        
         public static void SetPosition(this DlgItemTips self, Vector2 vector2)
         {
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;

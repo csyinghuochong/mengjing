@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine.EventSystems;
 
 namespace ET.Client
@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgItemBatchUse self)
         {
-            self.View.E_ImageButtonButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemBatchUse); });
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
             self.View.E_PriceInputFieldInputField.onValueChanged.AddListener((string value) => { self.OnChange(value); });
 
             self.View.E_Btn_CostEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
@@ -20,7 +20,7 @@ namespace ET.Client
             self.View.E_Btn_AddEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
                 (pdata) => { self.PointerUp_Btn_AddNum(pdata as PointerEventData); });
 
-            self.View.E_Btn_OpenButton.AddListener(self.OnBtn_Open);
+            self.View.E_Btn_OpenButton.AddListener(self.OnBtn_OpenButton);
         }
 
         public static void ShowWindow(this DlgItemBatchUse self, Entity contextData = null)
@@ -32,6 +32,11 @@ namespace ET.Client
             self.BagInfo = bagInfo;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.UpdateNumber();
+        }
+
+        public static void OnImageButtonButton(this DlgItemBatchUse self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemBatchUse);
         }
 
         public static void OnChange(this DlgItemBatchUse self, string str)
@@ -141,7 +146,7 @@ namespace ET.Client
             self.View.E_PriceInputFieldInputField.text = self.BagInfo.ItemNum.ToString();
         }
 
-        public static void OnBtn_Open(this DlgItemBatchUse self)
+        public static void OnBtn_OpenButton(this DlgItemBatchUse self)
         {
             if (self.UseNum > self.BagInfo.ItemNum || self.UseNum < 1)
             {

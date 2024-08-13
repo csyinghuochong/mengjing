@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,8 +15,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetFormation self)
         {
             self.View.E_PetFormationItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetFormationItemRefresh);
-            self.View.E_ButtonConfirmButton.AddListenerAsync(self.OnButtonConfirm);
-            self.View.E_ButtonChallengeButton.AddListener(self.OnButtonChallenge);
+            self.View.E_ButtonConfirmButton.AddListenerAsync(self.OnButtonConfirmButton);
+            self.View.E_ButtonChallengeButton.AddListener(self.OnButtonChallengeButton);
             self.View.E_CloseButtonButton.AddListener(() =>
             {
                 self.SetHandler?.Invoke();
@@ -63,7 +63,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonConfirm(this DlgPetFormation self)
+        public static async ETTask OnButtonConfirmButton(this DlgPetFormation self)
         {
             long instanceid = self.InstanceId;
             int errorCode = await PetNetHelper.RequestRolePetFormationSet(self.Root(), self.SceneTypeEnum, self.PetTeamList, null);
@@ -76,7 +76,7 @@ namespace ET.Client
             self.UpdateFighting(self.SceneTypeEnum);
         }
 
-        public static void OnButtonChallenge(this DlgPetFormation self)
+        public static void OnButtonChallengeButton(this DlgPetFormation self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFormation);
             if (self.SceneTypeEnum == SceneTypeEnum.PetDungeon)

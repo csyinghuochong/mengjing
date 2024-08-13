@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -8,16 +8,17 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgJiaYuanMenu self)
         {
-            self.View.E_ImageBgButton.AddListener(self.OnBtn_ImageBg);
-            self.View.E_ImageBg_1Button.AddListener(self.OnBtn_ImageBg);
-            self.View.E_Button_PlanButton.AddListener(self.OnButton_Plan);
-            self.View.E_Button_WatchButton.AddListener(self.OnButton_Watch);
-            self.View.E_Button_GatherButton.AddListenerAsync(self.OnButton_Gather);
-            self.View.E_Button_UprootButton.AddListener(self.OnButton_Uproot);
-            self.View.E_Button_SellButton.AddListenerAsync(self.OnButton_Sell);
+            self.View.E_ImageBgButton.AddListener(self.OnImageBgButton);
+            self.View.E_ImageBg_1Button.AddListener(self.OnImageBgButton);
+            self.View.E_Button_PlanButton.AddListener(self.OnButton_PlanButton);
+            self.View.E_Button_WatchButton.AddListener(self.OnButton_WatchButton);
+            self.View.E_Button_GatherButton.AddListenerAsync(self.OnButton_GatherButton);
+            self.View.E_Button_UprootButton.AddListener(self.OnButton_UprootButton);
+            self.View.E_Button_SellButton.AddListenerAsync(self.OnButton_SellButton);
             self.View.E_Button_OpenButton.gameObject.SetActive(false);
-            self.View.E_Button_CleanButton.AddListenerAsync(self.OnButton_Clean);
+            self.View.E_Button_CleanButton.AddListenerAsync(self.OnButton_CleanButton);
             self.View.E_Button_CleanButton.gameObject.SetActive(false);
+            self.View.E_Button_OpenButton.AddListener(self.OnButton_OpenButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanMenu self, Entity contextData = null)
@@ -36,7 +37,7 @@ namespace ET.Client
             self.View.E_Button_CleanButton.gameObject.SetActive(true);
         }
 
-        public static async ETTask OnButton_Clean(this DlgJiaYuanMenu self)
+        public static async ETTask OnButton_CleanButton(this DlgJiaYuanMenu self)
         {
             long masterid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
@@ -119,18 +120,18 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_ImageBg(this DlgJiaYuanMenu self)
+        public static void OnImageBgButton(this DlgJiaYuanMenu self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
         }
 
-        public static void OnButton_Watch(this DlgJiaYuanMenu self)
+        public static void OnButton_WatchButton(this DlgJiaYuanMenu self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPlanWatch).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
         }
 
-        public static async ETTask OnButton_Sell(this DlgJiaYuanMenu self)
+        public static async ETTask OnButton_SellButton(this DlgJiaYuanMenu self)
         {
             M2C_JiaYuanUprootResponse response = await JiaYuanNetHelper.JiaYuanUprootRequest(self.Root(), 0, self.UnitId, 2);
 
@@ -146,7 +147,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
         }
 
-        public static void OnButton_Uproot(this DlgJiaYuanMenu self)
+        public static void OnButton_UprootButton(this DlgJiaYuanMenu self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否移除农作物?", () => { self.RequestUproot().Coroutine(); }, null).Coroutine();
         }
@@ -164,7 +165,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
         }
 
-        public static async ETTask OnButton_Gather(this DlgJiaYuanMenu self)
+        public static async ETTask OnButton_GatherButton(this DlgJiaYuanMenu self)
         {
             long masterid = self.Root().GetComponent<JiaYuanComponentC>().MasterId;
 
@@ -209,10 +210,13 @@ namespace ET.Client
             }
         }
 
-        public static void OnButton_Plan(this DlgJiaYuanMenu self)
+        public static void OnButton_PlanButton(this DlgJiaYuanMenu self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanBag).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
+        }
+        public static void OnButton_OpenButton(this DlgJiaYuanMenu self)
+        {
         }
     }
 }

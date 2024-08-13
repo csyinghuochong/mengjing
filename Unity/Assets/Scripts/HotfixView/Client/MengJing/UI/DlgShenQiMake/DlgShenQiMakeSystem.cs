@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,7 +30,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgShenQiMake self)
         {
-            self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_Make);
+            self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
         }
 
         public static void ShowWindow(this DlgShenQiMake self, Entity contextData = null)
@@ -50,7 +50,7 @@ namespace ET.Client
             self.UpateMakeItemUI();
         }
 
-        public static async ETTask OnBtn_Make(this DlgShenQiMake self)
+        public static async ETTask OnBtn_MakeButton(this DlgShenQiMake self)
         {
             if (self.MakeId == 0)
             {

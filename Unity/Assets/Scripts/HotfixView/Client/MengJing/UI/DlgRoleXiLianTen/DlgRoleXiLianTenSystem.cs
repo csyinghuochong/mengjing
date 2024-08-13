@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
             ReferenceCollector rc = self.View.uiTransform.GetComponent<ReferenceCollector>();
             self.UIRoleXiLianTenItem = rc.Get<GameObject>("UIRoleXiLianTenItem");
 
-            self.View.E_ImageButtonCloseButton.AddListener(self.OnClose);
+            self.View.E_ImageButtonCloseButton.AddListener(self.OnImageButtonCloseButton);
         }
 
         public static void ShowWindow(this DlgRoleXiLianTen self, Entity contextData = null)
@@ -36,7 +36,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnClose(this DlgRoleXiLianTen self)
+        private static void OnImageButtonCloseButton(this DlgRoleXiLianTen self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleXiLianTen);
         }

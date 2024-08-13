@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -67,7 +67,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRole self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-            self.View.E_ZodiacButton.AddListenerAsync(self.OnButtonZodiac);
+            self.View.E_ZodiacButton.AddListenerAsync(self.OnZodiacButton);
         }
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
@@ -171,7 +171,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonZodiac(this DlgRole self)
+        public static async ETTask OnZodiacButton(this DlgRole self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Lv < 30)

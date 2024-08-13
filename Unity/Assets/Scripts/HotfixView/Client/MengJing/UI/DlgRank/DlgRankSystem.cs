@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (ES_RankShow))]
     [FriendOf(typeof (ES_RankPet))]

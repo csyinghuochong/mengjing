@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -18,6 +18,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgJiaYuanWarehouse self)
         {
+            self.View.E_OneKeyButton.AddListener(self.OnOneKeyButton);
+            self.View.E_ButtonPackButton.AddListener(self.OnButtonPackButton);
+            self.View.E_ButtonTakeOutAllButton.AddListener(self.OnButtonTakeOutAllButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanWarehouse self, Entity contextData = null)
@@ -210,6 +213,15 @@ namespace ET.Client
                 self.LockList[i].SetActive(cangkuNumber - 1 < i);
                 self.NoLockList[i].SetActive(cangkuNumber - 1 >= i && i != page);
             }
+        }
+        public static void OnOneKeyButton(this DlgJiaYuanWarehouse self)
+        {
+        }
+        public static void OnButtonPackButton(this DlgJiaYuanWarehouse self)
+        {
+        }
+        public static void OnButtonTakeOutAllButton(this DlgJiaYuanWarehouse self)
+        {
         }
     }
 }

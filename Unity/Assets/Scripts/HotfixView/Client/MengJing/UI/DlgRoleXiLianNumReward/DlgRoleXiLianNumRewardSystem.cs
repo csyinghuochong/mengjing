@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -9,7 +9,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRoleXiLianNumReward self)
         {
             self.View.E_RoleXiLianNumRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRoleXiLianNumRewardItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnClose);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgRoleXiLianNumReward self, Entity contextData = null)
@@ -43,7 +43,7 @@ namespace ET.Client
             scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.ShowInfo[index]);
         }
 
-        private static void OnClose(this DlgRoleXiLianNumReward self)
+        private static void OnBtn_CloseButton(this DlgRoleXiLianNumReward self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleXiLianNumReward);
         }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -19,13 +19,18 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgJingLingGet self)
         {
-            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JingLingGet); });
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgJingLingGet self, Entity contextData = null)
         {
         }
 
+        public static void OnBtn_CloseButton(this DlgJingLingGet self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JingLingGet);
+        }
+        
         public static void OnInitUI(this DlgJingLingGet self, int jinglingid)
         {
             self.View.ES_ModelShow.Camera.localPosition = new Vector3(0f, 40, 250f);

@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof(DlgArenaMain))]
     public static class DlgArenaMainSystem

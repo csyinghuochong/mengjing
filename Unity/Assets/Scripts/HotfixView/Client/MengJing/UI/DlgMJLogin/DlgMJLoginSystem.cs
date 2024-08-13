@@ -7,8 +7,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMJLogin self)
         {
-            self.View.E_LoginButton.AddListenerAsync(self.OnLogin);
-            self.View.E_SelectBtnButton.AddListener(self.OnSelectServerList);
+            self.View.E_LoginButton.AddListenerAsync(self.OnLoginButton);
+            self.View.E_SelectBtnButton.AddListener(self.OnSelectBtnButton);
 
             self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true); });
             self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
@@ -81,7 +81,7 @@ namespace ET.Client
             test.ELabel_ContentText.text = index.ToString();
         }
 
-        public static async ETTask OnLogin(this DlgMJLogin self)
+        public static async ETTask OnLoginButton(this DlgMJLogin self)
         {
             if (self.ServerInfo == null)
             {
@@ -108,7 +108,7 @@ namespace ET.Client
             self.View.E_SelectServerNameText.text = serverId.ServerName;
         }
 
-        private static void OnSelectServerList(this DlgMJLogin self)
+        private static void OnSelectBtnButton(this DlgMJLogin self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SelectServer).Coroutine();
         }

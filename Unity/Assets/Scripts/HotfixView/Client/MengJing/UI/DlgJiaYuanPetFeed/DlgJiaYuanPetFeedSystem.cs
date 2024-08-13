@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,9 +21,9 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgJiaYuanPetFeed self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_ImageCloseButton.AddListener(self.OnImageClose);
-            self.View.E_Btn_CloseDiButton.AddListener(self.OnImageClose);
-            self.View.E_ButtonEatButton.AddListenerAsync(self.OnButtonEat);
+            self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
+            self.View.E_Btn_CloseDiButton.AddListener(self.OnImageCloseButton);
+            self.View.E_ButtonEatButton.AddListenerAsync(self.OnButtonEatButton);
 
             self.MoodList[0] = self.View.E_Image_Mood_0Image.gameObject;
             self.MoodList[1] = self.View.E_Image_Mood_1Image.gameObject;
@@ -40,7 +40,7 @@ namespace ET.Client
         {
         }
 
-        public static void OnImageClose(this DlgJiaYuanPetFeed self)
+        public static void OnImageCloseButton(this DlgJiaYuanPetFeed self)
         {
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().WaitPetWalk(self.JiaYuanPet);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanPetFeed);
@@ -177,7 +177,7 @@ namespace ET.Client
             self.UpdateSelected();
         }
 
-        public static async ETTask OnButtonEat(this DlgJiaYuanPetFeed self)
+        public static async ETTask OnButtonEatButton(this DlgJiaYuanPetFeed self)
         {
             List<long> idslist = new List<long>();
             for (int h = 0; h < self.CostItemList.Length; h++)

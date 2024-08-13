@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -20,8 +20,9 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMail self)
         {
             self.View.E_MailItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMailItemsRefresh);
-            self.View.E_ButtonGetButton.AddListener(self.OnButtonGet);
-            self.View.E_ButtonOneKeyButton.AddListenerAsync(self.OnButtonOneKey);
+            self.View.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
+            self.View.E_ButtonOneKeyButton.AddListenerAsync(self.OnButtonOneKeyButton);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgMail self, Entity contextData = null)
@@ -35,12 +36,12 @@ namespace ET.Client
             // NetHelper.SendReddotRead(self.ZoneScene(), ReddotType.Email).Coroutine();
         }
 
-        public static void OnButtonGet(this DlgMail self)
+        public static void OnButtonGetButton(this DlgMail self)
         {
             MailNetHelper.SendReceiveMail(self.Root()).Coroutine();
         }
 
-        public static async ETTask OnButtonOneKey(this DlgMail self)
+        public static async ETTask OnButtonOneKeyButton(this DlgMail self)
         {
             long instanceid = self.InstanceId;
             MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
@@ -155,6 +156,9 @@ namespace ET.Client
 
             scrollItemMailItem.OnUpdateUI(mailComponent.MailInfoList[index]);
             scrollItemMailItem.SetClickHandler(() => { self.OnSelectMail(); });
+        }
+        public static void OnBtn_CloseButton(this DlgMail self)
+        {
         }
     }
 }

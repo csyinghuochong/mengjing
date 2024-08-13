@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -12,7 +12,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetSelect self)
         {
             self.View.E_PetSelectItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSelectItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnClickCoseButton);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgPetSelect self, Entity contextData = null)
@@ -124,7 +124,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnClickCoseButton(this DlgPetSelect self)
+        public static void OnBtn_CloseButton(this DlgPetSelect self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSelect);
         }

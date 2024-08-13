@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgTeamApplyList self)
         {
-            self.View.E_Img_ButtonButton.AddListener(self.OnImg_Button);
+            self.View.E_Img_ButtonButton.AddListener(self.OnImg_ButtonButton);
             self.View.E_TeamApplyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamApplyItemsRefresh);
         }
 
@@ -16,7 +16,7 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        public static void OnImg_Button(this DlgTeamApplyList self)
+        public static void OnImg_ButtonButton(this DlgTeamApplyList self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamApplyList);
         }

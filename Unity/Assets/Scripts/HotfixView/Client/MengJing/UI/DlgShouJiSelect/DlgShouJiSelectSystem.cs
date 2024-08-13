@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +11,19 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgShouJiSelect self)
         {
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            self.View.E_ButtonTunShiButton.AddListenerAsync(self.OnButtonTunShi);
-            self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ShouJiSelect); });
+            self.View.E_ButtonTunShiButton.AddListenerAsync(self.OnButtonTunShiButton);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
         }
 
         public static void ShowWindow(this DlgShouJiSelect self, Entity contextData = null)
         {
         }
 
+        public static void OnButtonCloseButton(this DlgShouJiSelect self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ShouJiSelect);
+        }
+        
         private static void OnBagItemsRefresh(this DlgShouJiSelect self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
@@ -49,7 +54,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static async ETTask OnButtonTunShi(this DlgShouJiSelect self)
+        public static async ETTask OnButtonTunShiButton(this DlgShouJiSelect self)
         {
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(self.ShouJIId);
 

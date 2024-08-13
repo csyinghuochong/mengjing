@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,14 +7,14 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSkillTips self)
         {
-            self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgSkillTips self, Entity contextData = null)
         {
         }
 
-        private static void OnImageButton(this DlgSkillTips self)
+        private static void OnImageButtonButton(this DlgSkillTips self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
         }

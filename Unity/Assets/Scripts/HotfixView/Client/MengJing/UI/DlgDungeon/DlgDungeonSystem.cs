@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,9 +27,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgDungeon self)
         {
-            self.View.E_ButtonCloseButton.AddListener(self.OnCloseChapter);
-            self.View.E_BossRefreshSettingBtnButton.AddListener(self.OnBossRefreshSetting);
-            self.View.E_CloseBossRefreshSettingBtnButton.AddListener(self.OnCloseBossRefreshSetting);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
+            self.View.E_BossRefreshSettingBtnButton.AddListener(self.OnBossRefreshSettingBtnButton);
+            self.View.E_CloseBossRefreshSettingBtnButton.AddListener(self.OnCloseBossRefreshSettingBtnButton);
 
             self.View.E_DungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonItemsRefresh);
             self.View.E_BossRefreshTimeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBossRefreshTimeItemsRefresh);
@@ -142,7 +142,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnCloseChapter(this DlgDungeon self)
+        private static void OnButtonCloseButton(this DlgDungeon self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Dungeon);
         }
@@ -157,7 +157,7 @@ namespace ET.Client
             });
         }
 
-        public static void OnBossRefreshSetting(this DlgDungeon self)
+        public static void OnBossRefreshSettingBtnButton(this DlgDungeon self)
         {
             self.View.EG_BossRefreshSettingPanelRectTransform.gameObject.SetActive(true);
 
@@ -185,7 +185,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnCloseBossRefreshSetting(this DlgDungeon self)
+        private static void OnCloseBossRefreshSettingBtnButton(this DlgDungeon self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 

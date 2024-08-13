@@ -1,13 +1,13 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof(DlgPhoneCode))]
     public static class DlgPhoneCodeSystem
     {
         public static void RegisterUIEvent(this DlgPhoneCode self)
         {
-            self.View.E_ImageCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PhoneCode); });
-            self.View.E_ButtonCommitCodeButton.AddListener(self.OnButtonCommitCode);
-            self.View.E_ButtonGetCodeButton.AddListener(self.OnButtonGetCode);
+            self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
+            self.View.E_ButtonCommitCodeButton.AddListener(self.OnButtonCommitCodeButton);
+            self.View.E_ButtonGetCodeButton.AddListener(self.OnButtonGetCodeButton);
         }
 
         public static void ShowWindow(this DlgPhoneCode self, Entity contextData = null)
@@ -18,7 +18,12 @@
             // GameObject.Find("Global").GetComponent<SMSSDemo>().CommitCodeSucessHandler = (string text) => { self.OnCommitCodeHandler(text); };
         }
 
-        public static void OnButtonGetCode(this DlgPhoneCode self)
+        public static void OnImageCloseButton(this DlgPhoneCode self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PhoneCode);
+        }
+        
+        public static void OnButtonGetCodeButton(this DlgPhoneCode self)
         {
             string phoneNum = self.View.E_PhoneNumberInputField.text;
             // GlobalHelp.OnButtonGetCode(phoneNum);
@@ -31,7 +36,7 @@
             self.View.EG_YanZhengRectTransform.gameObject.SetActive(true);
         }
 
-        public static void OnButtonCommitCode(this DlgPhoneCode self)
+        public static void OnButtonCommitCodeButton(this DlgPhoneCode self)
         {
             string phoneNum = self.View.E_PhoneNumberInputField.text;
             string code = self.View.E_TextPhoneCodeInputField.text;

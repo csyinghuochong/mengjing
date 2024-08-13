@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +16,10 @@ namespace ET.Client
             self.PetZiZhiItemList[4] = self.View.EG_PetZiZhiItem5RectTransform.gameObject;
             self.PetZiZhiItemList[5] = self.View.EG_PetZiZhiItem6RectTransform.gameObject;
 
-            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
+            self.View.E_BianYiDiButton.AddListener(self.OnBianYiDiButton);
+            self.View.E_LucklyButton.AddListener(self.OnLucklyButton);
         }
 
         public static void ShowWindow(this DlgPetChouKaGet self, Entity contextData = null)
@@ -35,7 +37,7 @@ namespace ET.Client
             }
         }
 
-        private static void OnBtn_Close(this DlgPetChouKaGet self)
+        private static void OnBtn_CloseButton(this DlgPetChouKaGet self)
         {
             self.Root().GetComponent<BattleMessageComponent>().ShowPetChouKaGet = false;
             // self.Root().GetComponent<BattleMessageComponent>().ShowRolePetAdd();
@@ -187,6 +189,12 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             startObj.GetComponent<Image>().sprite = sp;
+        }
+        public static void OnBianYiDiButton(this DlgPetChouKaGet self)
+        {
+        }
+        public static void OnLucklyButton(this DlgPetChouKaGet self)
+        {
         }
     }
 }

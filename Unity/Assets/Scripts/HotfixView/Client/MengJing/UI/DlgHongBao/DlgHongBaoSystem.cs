@@ -1,19 +1,24 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
-    [FriendOf(typeof (DlgHongBao))]
+    [FriendOf(typeof(DlgHongBao))]
     public static class DlgHongBaoSystem
     {
         public static void RegisterUIEvent(this DlgHongBao self)
         {
-            self.View.E_Button_OpenButton.AddListenerAsync(self.OnButton_Open);
-            self.View.E_Button_BackButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HongBao); });
+            self.View.E_Button_OpenButton.AddListenerAsync(self.OnButton_OpenButton);
+            self.View.E_Button_BackButton.AddListener(self.OnButton_BackButton);
         }
 
         public static void ShowWindow(this DlgHongBao self, Entity contextData = null)
         {
         }
 
-        public static async ETTask OnButton_Open(this DlgHongBao self)
+        public static void OnButton_BackButton(this DlgHongBao self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HongBao);
+        }
+
+        public static async ETTask OnButton_OpenButton(this DlgHongBao self)
         {
             M2C_HongBaoOpenResponse response = await ActivityNetHelper.HongBaoOpen(self.Root());
 

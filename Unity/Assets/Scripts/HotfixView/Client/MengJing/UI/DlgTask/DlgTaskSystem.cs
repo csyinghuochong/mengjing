@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class TaskTypeItemClick_RefreshTaskInfo: AEvent<Scene, TaskTypeItemClick>

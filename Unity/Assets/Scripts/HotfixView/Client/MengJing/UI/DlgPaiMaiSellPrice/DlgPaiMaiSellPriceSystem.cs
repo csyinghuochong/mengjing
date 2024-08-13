@@ -1,4 +1,4 @@
-﻿using UnityEngine.EventSystems;
+using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
@@ -7,10 +7,10 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPaiMaiSellPrice self)
         {
-            self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
-            self.View.E_Btn_ChuShouButton.AddListenerAsync(self.OnBtn_ChuShou);
-            self.View.E_Btn_CostButton.AddListener(self.OnCostPrice);
-            self.View.E_Btn_AddButton.AddListener(self.OnAddPrice);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
+            self.View.E_Btn_ChuShouButton.AddListenerAsync(self.OnBtn_ChuShouButton);
+            self.View.E_Btn_CostButton.AddListener(self.OnBtn_CostButton);
+            self.View.E_Btn_AddButton.AddListener(self.OnBtn_AddButton);
             self.View.E_PriceInputFieldInputField.onValueChanged.AddListener((value) => { self.OnChange(value); });
 
             self.View.E_Btn_CostNumEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
@@ -22,6 +22,8 @@ namespace ET.Client
                 (pdata) => { self.PointerDown_Btn_AddNum(pdata as PointerEventData).Coroutine(); });
             self.View.E_Btn_AddNumEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
                 (pdata) => { self.PointerUp_Btn_AddNum(pdata as PointerEventData); });
+            self.View.E_Btn_AddNumButton.AddListener(self.OnBtn_AddNumButton);
+            self.View.E_Btn_CostNumButton.AddListener(self.OnBtn_CostNumButton);
         }
 
         public static void ShowWindow(this DlgPaiMaiSellPrice self, Entity contextData = null)
@@ -84,12 +86,12 @@ namespace ET.Client
             self.IsHoldDown = false;
         }
 
-        public static void OnImageButton(this DlgPaiMaiSellPrice self)
+        public static void OnImageButtonButton(this DlgPaiMaiSellPrice self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiSellPrice);
         }
 
-        public static async ETTask OnBtn_ChuShou(this DlgPaiMaiSellPrice self)
+        public static async ETTask OnBtn_ChuShouButton(this DlgPaiMaiSellPrice self)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
 
@@ -173,10 +175,10 @@ namespace ET.Client
             self.View.E_Text_NumText.text = self.SellNum.ToString();
 
             self.priceProNum = 1;
-            self.OnCostPrice();
+            self.OnBtn_CostButton();
         }
 
-        public static void OnAddPrice(this DlgPaiMaiSellPrice self)
+        public static void OnBtn_AddButton(this DlgPaiMaiSellPrice self)
         {
             self.priceProNum += 1;
             if (self.priceProNum >= 10)
@@ -190,7 +192,7 @@ namespace ET.Client
             self.View.E_PriceInputFieldInputField.text = self.nowPrice.ToString();
         }
 
-        public static void OnCostPrice(this DlgPaiMaiSellPrice self)
+        public static void OnBtn_CostButton(this DlgPaiMaiSellPrice self)
         {
             self.priceProNum -= 1;
             if (self.priceProNum <= -10)
@@ -230,6 +232,12 @@ namespace ET.Client
         public static void OnChange(this DlgPaiMaiSellPrice self, string str)
         {
             self.nowPrice = int.Parse(str);
+        }
+        public static void OnBtn_AddNumButton(this DlgPaiMaiSellPrice self)
+        {
+        }
+        public static void OnBtn_CostNumButton(this DlgPaiMaiSellPrice self)
+        {
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,9 +28,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgDungeonMapTransfer self)
         {
-            self.View.E_ButtonCloseButton.AddListener(self.OnCloseChapter);
-            self.View.E_BossRefreshSettingBtnButton.AddListener(self.OnBossRefreshSetting);
-            self.View.E_CloseBossRefreshSettingBtnButton.AddListener(self.OnCloseBossRefreshSetting);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
+            self.View.E_BossRefreshSettingBtnButton.AddListener(self.OnBossRefreshSettingBtnButton);
+            self.View.E_CloseBossRefreshSettingBtnButton.AddListener(self.OnCloseBossRefreshSettingBtnButton);
 
             self.View.E_DungeonLevelItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonLevelItemsRefresh);
             self.View.E_BossRefreshTimeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBossRefreshTimeItemsRefresh);
@@ -169,12 +169,12 @@ namespace ET.Client
             }
         }
 
-        public static void OnCloseChapter(this DlgDungeonMapTransfer self)
+        public static void OnButtonCloseButton(this DlgDungeonMapTransfer self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMapTransfer);
         }
 
-        public static void OnBossRefreshSetting(this DlgDungeonMapTransfer self)
+        public static void OnBossRefreshSettingBtnButton(this DlgDungeonMapTransfer self)
         {
             self.View.EG_BossRefreshSettingPanelRectTransform.gameObject.SetActive(true);
 
@@ -202,7 +202,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnCloseBossRefreshSetting(this DlgDungeonMapTransfer self)
+        public static void OnCloseBossRefreshSettingBtnButton(this DlgDungeonMapTransfer self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 

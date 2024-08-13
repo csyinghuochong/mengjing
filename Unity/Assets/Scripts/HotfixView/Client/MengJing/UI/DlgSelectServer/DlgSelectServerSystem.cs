@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -11,7 +11,7 @@ namespace ET.Client
             self.View.E_SelectServerItem1LoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectServerItems1Refresh);
             self.View.E_SelectServerItem2LoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectServerItems2Refresh);
 
-            self.View.E_ButtonCloseButton.AddListener(self.CloseUI);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
         }
 
         public static void ShowWindow(this DlgSelectServer self, Entity contextData = null)
@@ -111,7 +111,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectServer);
         }
 
-        public static void CloseUI(this DlgSelectServer self)
+        public static void OnButtonCloseButton(this DlgSelectServer self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectServer);
         }

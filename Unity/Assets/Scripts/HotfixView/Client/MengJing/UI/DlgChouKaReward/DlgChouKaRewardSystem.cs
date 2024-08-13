@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 
 namespace ET.Client
@@ -9,7 +9,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgChouKaReward self)
         {
             self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChouKaRewardItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnClose);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgChouKaReward self, Entity contextData = null)
@@ -37,7 +37,7 @@ namespace ET.Client
             scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.TakeCardRewardConfigs[index]);
         }
 
-        private static void OnClose(this DlgChouKaReward self)
+        private static void OnBtn_CloseButton(this DlgChouKaReward self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ChouKaReward);
         }

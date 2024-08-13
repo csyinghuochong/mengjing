@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,6 +12,7 @@ namespace ET.Client
             self.View.E_CostButton.AddListener(self.OnCostButton);
             self.View.E_CancelButton.AddListener(self.OnCancelButton);
             self.View.E_ChuShouButton.AddListenerAsync(self.OnChuShouButton);
+            self.View.E_CloseButton.AddListener(self.OnCloseButton);
         }
 
         public static void ShowWindow(this DlgItemSellTip self, Entity contextData = null)
@@ -95,6 +96,9 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemSellTip);
+        }
+        public static void OnCloseButton(this DlgItemSellTip self)
+        {
         }
     }
 }

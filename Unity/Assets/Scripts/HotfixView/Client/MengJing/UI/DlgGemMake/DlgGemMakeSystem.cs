@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -31,7 +31,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgGemMake self)
         {
-            self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_Make);
+            self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
             self.View.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
         }
 
@@ -52,7 +52,7 @@ namespace ET.Client
             self.UpateMakeItemUI();
         }
 
-        public static async ETTask OnBtn_Make(this DlgGemMake self)
+        public static async ETTask OnBtn_MakeButton(this DlgGemMake self)
         {
             if (self.MakeId == 0)
             {

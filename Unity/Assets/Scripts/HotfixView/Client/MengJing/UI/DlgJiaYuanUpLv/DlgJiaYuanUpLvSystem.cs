@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -8,9 +8,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgJiaYuanUpLv self)
         {
-            self.View.E_Btn_UpLvButton.AddListenerAsync(self.OnBtn_UpLv);
-            self.View.E_Btn_ExchangeExpButton.AddListenerAsync(self.OnBtn_ExchangeExp);
-            self.View.E_Btn_ExchangeZiJinButton.AddListenerAsync(self.OnBtn_ExchangeZiJin);
+            self.View.E_Btn_UpLvButton.AddListenerAsync(self.OnBtn_UpLvButton);
+            self.View.E_Btn_ExchangeExpButton.AddListenerAsync(self.OnBtn_ExchangeExpButton);
+            self.View.E_Btn_ExchangeZiJinButton.AddListenerAsync(self.OnBtn_ExchangeZiJinButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanUpLv self, Entity contextData = null)
@@ -24,7 +24,7 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        public static async ETTask OnBtn_UpLv(this DlgJiaYuanUpLv self)
+        public static async ETTask OnBtn_UpLvButton(this DlgJiaYuanUpLv self)
         {
             await JiaYuanNetHelper.JiaYuanUpLvRequest(self.Root());
 
@@ -36,7 +36,7 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static async ETTask OnBtn_ExchangeExp(this DlgJiaYuanUpLv self)
+        public static async ETTask OnBtn_ExchangeExpButton(this DlgJiaYuanUpLv self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
@@ -60,7 +60,7 @@ namespace ET.Client
             self.OnUpdateUI();
         }
 
-        public static async ETTask OnBtn_ExchangeZiJin(this DlgJiaYuanUpLv self)
+        public static async ETTask OnBtn_ExchangeZiJinButton(this DlgJiaYuanUpLv self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();

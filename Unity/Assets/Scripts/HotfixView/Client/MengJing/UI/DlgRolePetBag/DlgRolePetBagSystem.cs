@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +12,9 @@ namespace ET.Client
         {
             self.View.E_RolePetBagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePetBagItemsRefresh);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.View.E_FenjieBtnButton.AddListener(self.OnFenjieBtnButton);
+            self.View.E_TakeOutBagBtnButton.AddListener(self.OnTakeOutBagBtnButton);
         }
 
         public static void ShowWindow(this DlgRolePetBag self, Entity contextData = null)
@@ -235,6 +238,15 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.ShowSkills.Count);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkills.Count);
+        }
+        public static void OnBtn_CloseButton(this DlgRolePetBag self)
+        {
+        }
+        public static void OnFenjieBtnButton(this DlgRolePetBag self)
+        {
+        }
+        public static void OnTakeOutBagBtnButton(this DlgRolePetBag self)
+        {
         }
     }
 }

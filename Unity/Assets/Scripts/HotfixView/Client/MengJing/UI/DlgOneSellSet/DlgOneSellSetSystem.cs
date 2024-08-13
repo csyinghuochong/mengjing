@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -11,8 +11,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgOneSellSet self)
         {
-            self.View.E_Btn_OneSellButton.AddListener(self.OnBtn_OneSell);
-            self.View.E_Btn_CloseButton.AddListener(() => { self.OnClose().Coroutine(); });
+            self.View.E_Btn_OneSellButton.AddListener(self.OnBtn_OneSellButton);
+            self.View.E_Btn_CloseButton.AddListener(() => { self.OnBtn_CloseButton().Coroutine(); });
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet2);
@@ -60,7 +60,7 @@ namespace ET.Client
             self.SaveSettings(GameSettingEnum.OneSellSet2, value);
         }
 
-        public static void OnBtn_OneSell(this DlgOneSellSet self)
+        public static void OnBtn_OneSellButton(this DlgOneSellSet self)
         {
             BagClientNetHelper.RequestOneSell2(self.Root(), ItemLocType.ItemLocBag).Coroutine();
         }
@@ -86,7 +86,7 @@ namespace ET.Client
             self.Root().GetComponent<UserInfoComponentC>().UpdateGameSetting(self.GameSettingInfos);
         }
 
-        public static async ETTask OnClose(this DlgOneSellSet self)
+        public static async ETTask OnBtn_CloseButton(this DlgOneSellSet self)
         {
             if (self.GameSettingInfos.Count > 0)
             {

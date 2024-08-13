@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSolo self)
         {
-            self.View.E_ButtonMatchButton.AddListenerAsync(self.OnButtonMatch);
+            self.View.E_ButtonMatchButton.AddListenerAsync(self.OnButtonMatchButton);
         }
 
         public static void ShowWindow(this DlgSolo self, Entity contextData = null)
@@ -24,7 +24,7 @@ namespace ET.Client
             self.ShowPiPeiTime().Coroutine();
         }
 
-        public static async ETTask OnButtonMatch(this DlgSolo self)
+        public static async ETTask OnButtonMatchButton(this DlgSolo self)
         {
             if (self.PipeiStatus && self.Root().GetComponent<BattleMessageComponent>().SoloPiPeiStartTime > 0)
             {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -19,8 +19,8 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgJiaYuanTreasureMapStorage self)
         {
             self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.View.E_TakeOutAllButton.AddListenerAsync(self.OnButtonTakeOutAll);
-            self.View.E_OneKeyButton.AddListenerAsync(self.OnButtonOneKey);
+            self.View.E_TakeOutAllButton.AddListenerAsync(self.OnTakeOutAllButton);
+            self.View.E_OneKeyButton.AddListenerAsync(self.OnOneKeyButton);
 
             self.View.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.View.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -37,13 +37,13 @@ namespace ET.Client
             self.UpdateBagList();
         }
 
-        public static async ETTask OnButtonTakeOutAll(this DlgJiaYuanTreasureMapStorage self)
+        public static async ETTask OnTakeOutAllButton(this DlgJiaYuanTreasureMapStorage self)
         {
             await BagClientNetHelper.RquestTakeOutAll(self.Root(),
                 self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);
         }
 
-        public static async ETTask OnButtonOneKey(this DlgJiaYuanTreasureMapStorage self)
+        public static async ETTask OnOneKeyButton(this DlgJiaYuanTreasureMapStorage self)
         {
             await JiaYuanNetHelper.JiaYuanStoreRequest(self.Root(),
                 self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);

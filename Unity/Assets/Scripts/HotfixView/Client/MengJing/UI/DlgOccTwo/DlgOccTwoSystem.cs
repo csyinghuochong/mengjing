@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +16,12 @@ namespace ET.Client
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_1Button.gameObject);
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_2Button.gameObject);
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_3Button.gameObject);
-            self.View.E_ButtonOccTwoButton.AddListener(self.OnClickOccTwo);
-            self.View.E_ButtonOccResetButton.AddListener(self.OnButtonOccReset);
+            self.View.E_ButtonOccTwoButton.AddListener(self.OnButtonOccTwoButton);
+            self.View.E_ButtonOccResetButton.AddListener(self.OnButtonOccResetButton);
+            self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
+            self.View.E_Button_ZhiYeSelect_1Button.AddListener(self.OnButton_ZhiYeSelect_1Button);
+            self.View.E_Button_ZhiYeSelect_2Button.AddListener(self.OnButton_ZhiYeSelect_2Button);
+            self.View.E_Button_ZhiYeSelect_3Button.AddListener(self.OnButton_ZhiYeSelect_3Button);
         }
 
         public static void ShowWindow(this DlgOccTwo self, Entity contextData = null)
@@ -25,7 +29,7 @@ namespace ET.Client
             self.OnInitUI();
         }
 
-        public static void OnClickOccTwo(this DlgOccTwo self)
+        public static void OnButtonOccTwoButton(this DlgOccTwo self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OccTwo != 0)
@@ -191,7 +195,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButtonOccReset(this DlgOccTwo self)
+        public static void OnButtonOccResetButton(this DlgOccTwo self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OccTwo == 0)
@@ -228,6 +232,18 @@ namespace ET.Client
             userInfoComponent.UserInfo.OccTwo = 0;
             self.View.E_ButtonOccResetButton.gameObject.SetActive(false);
             EventSystem.Instance.Publish(self.Root(), new SkillReset());
+        }
+        public static void OncloseButtonButton(this DlgOccTwo self)
+        {
+        }
+        public static void OnButton_ZhiYeSelect_1Button(this DlgOccTwo self)
+        {
+        }
+        public static void OnButton_ZhiYeSelect_2Button(this DlgOccTwo self)
+        {
+        }
+        public static void OnButton_ZhiYeSelect_3Button(this DlgOccTwo self)
+        {
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgJiaYuanRecord self)
         {
-            self.View.E_ImageCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanRecord); });
+            self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
         }
 
         public static void ShowWindow(this DlgJiaYuanRecord self, Entity contextData = null)
@@ -17,6 +17,11 @@ namespace ET.Client
             self.OnInitUI().Coroutine();
         }
 
+        public static void OnImageCloseButton(this DlgJiaYuanRecord self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanRecord);
+        }
+        
         public static async ETTask OnInitUI(this DlgJiaYuanRecord self)
         {
             M2C_JiaYuanRecordListResponse response = await JiaYuanNetHelper.JiaYuanRecordListRequest(self.Root());

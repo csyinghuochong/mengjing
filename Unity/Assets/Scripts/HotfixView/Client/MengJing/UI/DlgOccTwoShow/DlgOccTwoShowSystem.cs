@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgOccTwoShow self)
         {
-            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OccTwoShow); });
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
         }
 
         public static void ShowWindow(this DlgOccTwoShow self, Entity contextData = null)
@@ -16,6 +16,11 @@ namespace ET.Client
             self.OnInitUI();
         }
 
+        public static void OnBtn_CloseButton(this DlgOccTwoShow self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OccTwoShow);
+        }
+        
         public static void OnInitUI(this DlgOccTwoShow self)
         {
             int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;

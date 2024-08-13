@@ -157,7 +157,7 @@ public partial class UICodeSpawner
 
 										if (string.IsNullOrWhiteSpace(arguments))
 										{
-											if (methodName != $"On{key.Substring(2)}Button")
+											if (!reNameMap.ContainsKey(methodName) && methodName != $"On{key.Substring(2)}Button")
 											{
 												reNameMap.Add(methodName, $"On{key.Substring(2)}Button");
 

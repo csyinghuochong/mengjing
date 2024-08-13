@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSeasonLordDetail self)
         {
-            self.View.E_UseItemBtnButton.AddListenerAsync(self.OnUseItemBtn);
+            self.View.E_UseItemBtnButton.AddListenerAsync(self.OnUseItemBtnButton);
             self.View.E_CloseBtnButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonLordDetail);
@@ -27,7 +27,7 @@ namespace ET.Client
             self.UpdateTime().Coroutine();
         }
 
-        public static async ETTask OnUseItemBtn(this DlgSeasonLordDetail self)
+        public static async ETTask OnUseItemBtnButton(this DlgSeasonLordDetail self)
         {
             if (self.BagInfo == null)
             {

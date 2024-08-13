@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace ET.Client
@@ -8,8 +8,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetMiningFormation self)
         {
-            self.View.E_ButtonConfirmButton.AddListenerAsync(self.OnButtonConfirm);
-            self.View.E_ButtonChallengeButton.AddListener(self.OnButtonChallenge);
+            self.View.E_ButtonConfirmButton.AddListenerAsync(self.OnButtonConfirmButton);
+            self.View.E_ButtonChallengeButton.AddListener(self.OnButtonChallengeButton);
             self.View.E_CloseButtonButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningFormation);
@@ -20,12 +20,12 @@ namespace ET.Client
         {
         }
 
-        public static async ETTask OnButtonConfirm(this DlgPetMiningFormation self)
+        public static async ETTask OnButtonConfirmButton(this DlgPetMiningFormation self)
         {
             await ETTask.CompletedTask;
         }
 
-        public static void OnButtonChallenge(this DlgPetMiningFormation self)
+        public static void OnButtonChallengeButton(this DlgPetMiningFormation self)
         {
         }
 

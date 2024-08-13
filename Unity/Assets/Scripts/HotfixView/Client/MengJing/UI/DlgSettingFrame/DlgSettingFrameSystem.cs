@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSettingFrame self)
         {
-            self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SettingFrame); });
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
             self.View.E_ImageDiCloseButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SettingFrame);
@@ -20,6 +20,11 @@ namespace ET.Client
         {
         }
 
+        public static void OnButtonCloseButton(this DlgSettingFrame self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SettingFrame);
+        }
+        
         public static async ETTask OnButtonSetting(this DlgSettingFrame self, string setvalue)
         {
             List<KeyValuePair> gameSettingInfos = new List<KeyValuePair>();

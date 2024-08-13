@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgRunRace self)
         {
-            self.View.E_EnterBtnButton.AddListenerAsync(self.OnEnterBtn);
+            self.View.E_EnterBtnButton.AddListenerAsync(self.OnEnterBtnButton);
 
             self.View.E_RunRaceItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRunRaceItemsRefresh);
         }
@@ -31,7 +31,7 @@ namespace ET.Client
             self.View.E_RunRaceItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankRewardConfigs.Count);
         }
 
-        public static async ETTask OnEnterBtn(this DlgRunRace self)
+        public static async ETTask OnEnterBtnButton(this DlgRunRace self)
         {
             int errorCode =
                     await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.RunRace, BattleHelper.GetSceneIdByType(SceneTypeEnum.RunRace));

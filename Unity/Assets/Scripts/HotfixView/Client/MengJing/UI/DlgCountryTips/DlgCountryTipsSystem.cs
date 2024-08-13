@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,13 +7,18 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgCountryTips self)
         {
-            self.View.E_ImageButtonButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryTips); });
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgCountryTips self, Entity contextData = null)
         {
         }
 
+        public static void OnImageButtonButton(this DlgCountryTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryTips);
+        }
+        
         public static void OnUpdateUI(this DlgCountryTips self, string rewards, Vector3 vector3, int showType = 0)
         {
             self.View.ES_RewardList.Refresh(rewards);

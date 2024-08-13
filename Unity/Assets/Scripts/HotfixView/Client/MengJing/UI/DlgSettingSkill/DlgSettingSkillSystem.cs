@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,8 +10,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSettingSkill self)
         {
-            self.View.E_CloseBtnButton.AddListenerAsync(self.OnCloseBtn);
-            self.View.E_ResetBtnButton.AddListener(self.OnResetBtn);
+            self.View.E_CloseBtnButton.AddListenerAsync(self.OnCloseBtnButton);
+            self.View.E_ResetBtnButton.AddListener(self.OnResetBtnButton);
         }
 
         public static void ShowWindow(this DlgSettingSkill self, Entity contextData = null)
@@ -293,7 +293,7 @@ namespace ET.Client
             self.UpdataSkillSetRight();
         }
 
-        public static async ETTask OnCloseBtn(this DlgSettingSkill self)
+        public static async ETTask OnCloseBtnButton(this DlgSettingSkill self)
         {
             string skillSet = string.Empty;
             if (self.SkillSet.Count > 0)
@@ -316,7 +316,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SettingSkill);
         }
 
-        public static void OnResetBtn(this DlgSettingSkill self)
+        public static void OnResetBtnButton(this DlgSettingSkill self)
         {
             for (int i = 0; i < self.SkillSet.Count; i++)
             {

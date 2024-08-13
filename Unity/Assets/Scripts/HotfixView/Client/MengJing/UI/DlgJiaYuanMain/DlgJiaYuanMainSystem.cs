@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,14 +45,14 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanWarehouse).Coroutine();
             });
 
-            self.View.E_ButtonReturnButton.AddListener(() => { self.OnButtonReturn().Coroutine(); });
+            self.View.E_ButtonReturnButton.AddListener(() => { self.OnButtonReturnButton().Coroutine(); });
 
             self.View.E_ButtonMyJiaYuanButton.gameObject.SetActive(false);
-            self.View.E_ButtonMyJiaYuanButton.AddListener(self.OnButtonMyJiaYuan);
+            self.View.E_ButtonMyJiaYuanButton.AddListener(self.OnButtonMyJiaYuanButton);
 
             self.View.ES_JiaYuaVisit.uiTransform.gameObject.SetActive(false);
 
-            self.View.E_Btn_ShouSuoButton.AddListener(self.OnBtn_ShouSuo);
+            self.View.E_Btn_ShouSuoButton.AddListener(self.OnBtn_ShouSuoButton);
 
             self.View.E_ButtonOneKeyPlantButton.AddListener(() =>
             {
@@ -93,7 +93,7 @@ namespace ET.Client
             await JiaYuanNetHelper.JiaYuanPetOperateRequest(self.Root(), jiaYuanPet.unitId, 1);
         }
 
-        public static void OnBtn_ShouSuo(this DlgJiaYuanMain self)
+        public static void OnBtn_ShouSuoButton(this DlgJiaYuanMain self)
         {
             bool activeSelf = self.View.ES_JiaYuaVisit.uiTransform.gameObject.activeSelf;
             self.View.ES_JiaYuaVisit.uiTransform.gameObject.SetActive(!activeSelf);
@@ -102,7 +102,7 @@ namespace ET.Client
             self.View.E_Btn_ShouSuoButton.transform.localScale = activeSelf ? new Vector3(-1f, 1f, 1f) : new Vector3(1f, 1f, 1f);
         }
 
-        public static void OnButtonMyJiaYuan(this DlgJiaYuanMain self)
+        public static void OnButtonMyJiaYuanButton(this DlgJiaYuanMain self)
         {
             if (self.MyJiaYuan)
             {
@@ -112,12 +112,12 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnJiaYuanButton();
         }
 
-        public static async ETTask OnButtonReturn(this DlgJiaYuanMain self)
+        public static async ETTask OnButtonReturnButton(this DlgJiaYuanMain self)
         {
             string tipStr = "请选择返回主城或自己家园？";
             await PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization(tipStr),
                 () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
-                self.OnButtonMyJiaYuan);
+                self.OnButtonMyJiaYuanButton);
             DlgPopupTip dlgPopupTip = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPopupTip>();
             dlgPopupTip.View.E_FalseButton.transform.Find("Text").GetComponent<Text>().text = "返回家园";
             dlgPopupTip.View.E_TrueButton.transform.Find("Text").GetComponent<Text>().text = "返回主城";

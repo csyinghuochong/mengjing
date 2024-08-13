@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -23,15 +23,15 @@ namespace ET.Client
             self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
 
-            self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.RequestEnergySkill);
-            self.View.E_ButtonGetButton.AddListener(self.OnButtonGetTask);
-            self.View.E_BtnCommitTask1Button.AddListenerAsync(self.OnBtn_CommitTask);
-            self.View.E_ButtonJieRiRewardButton.AddListener(self.OnButtonJieRiReward);
-            self.View.E_ButtonExpDuiHuanButton.AddListenerAsync(self.OnButtonExpDuiHuan);
-            self.View.E_Img_buttonButton.AddListener(self.OnCloseNpcTask);
-            self.View.E_ButtonPetFragmentButton.AddListener(self.OnButtonFragmentHuan);
-            self.View.E_ButtonGiveTaskButton.AddListenerAsync(self.OnButtonGiveTask);
-            self.View.E_ButtonMysteryButton.AddListener(self.OnButtonMystery);
+            self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.OnBtn_EnergyDuihuanButton);
+            self.View.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
+            self.View.E_BtnCommitTask1Button.AddListenerAsync(self.OnBtnCommitTask1Button);
+            self.View.E_ButtonJieRiRewardButton.AddListener(self.OnButtonJieRiRewardButton);
+            self.View.E_ButtonExpDuiHuanButton.AddListenerAsync(self.OnButtonExpDuiHuanButton);
+            self.View.E_Img_buttonButton.AddListener(self.OnImg_buttonButton);
+            self.View.E_ButtonPetFragmentButton.AddListener(self.OnButtonPetFragmentButton);
+            self.View.E_ButtonGiveTaskButton.AddListenerAsync(self.OnButtonGiveTaskButton);
+            self.View.E_ButtonMysteryButton.AddListener(self.OnButtonMysteryButton);
         }
 
         public static void ShowWindow(this DlgTaskGet self, Entity contextData = null)
@@ -60,23 +60,23 @@ namespace ET.Client
             bool update = self.UpdataTask();
             if (!update)
             {
-                self.OnCloseNpcTask();
+                self.OnImg_buttonButton();
             }
         }
 
-        public static void OnCloseNpcTask(this DlgTaskGet self)
+        public static void OnImg_buttonButton(this DlgTaskGet self)
         {
             //UIHelper.Remove(self.ZoneScene(), UIType.UIGuide);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 
-        public static async ETTask OnButtonExpDuiHuan(this DlgTaskGet self)
+        public static async ETTask OnButtonExpDuiHuanButton(this DlgTaskGet self)
         {
             await UserInfoNetHelper.ExpToGoldRequest(self.Root(), 2);
             await ETTask.CompletedTask;
         }
 
-        public static void OnButtonJieRiReward(this DlgTaskGet self)
+        public static void OnButtonJieRiRewardButton(this DlgTaskGet self)
         {
             int activityId = ActivityHelper.GetJieRiActivityId();
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
@@ -224,7 +224,7 @@ namespace ET.Client
 
         public static void OnButtonWeeklyCommit(this DlgTaskGet self)
         {
-            self.OnBtn_CommitTask().Coroutine();
+            self.OnBtnCommitTask1Button().Coroutine();
         }
 
         public static void OnButtonWeeklyGet(this DlgTaskGet self)
@@ -232,7 +232,7 @@ namespace ET.Client
             TaskClientNetHelper.RequestGetTask(self.Root(), self.TaskId).Coroutine();
         }
 
-        public static void OnButtonFragmentHuan(this DlgTaskGet self)
+        public static void OnButtonPetFragmentButton(this DlgTaskGet self)
         {
             if (!PetHelper.IsShenShouFull(self.Root().GetComponent<PetComponentC>().RolePetInfos))
             {
@@ -353,7 +353,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        public static async ETTask RequestEnergySkill(this DlgTaskGet self)
+        public static async ETTask OnBtn_EnergyDuihuanButton(this DlgTaskGet self)
         {
             Actor_FubenEnergySkillRequest request = new();
             Actor_FubenEnergySkillResponse response =
@@ -500,7 +500,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnButtonMystery(this DlgTaskGet self)
+        public static void OnButtonMysteryButton(this DlgTaskGet self)
         {
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             int chapterid = DungeonConfigCategory.Instance.DungeonToChapter[sceneId];
@@ -513,7 +513,7 @@ namespace ET.Client
         /// 给予道具任务
         /// </summary>
         /// <param name="self"></param>
-        public static async ETTask OnButtonGiveTask(this DlgTaskGet self)
+        public static async ETTask OnButtonGiveTaskButton(this DlgTaskGet self)
         {
             //打开界面选择道具。
             //给予道具和给予宠物界面分开
@@ -538,7 +538,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GiveTask);
         }
 
-        public static void OnButtonGetTask(this DlgTaskGet self)
+        public static void OnButtonGetButton(this DlgTaskGet self)
         {
             if (self.TaskId == 0)
             {
@@ -549,7 +549,7 @@ namespace ET.Client
             TaskClientNetHelper.RequestGetTask(self.Root(), self.TaskId).Coroutine();
         }
 
-        public static async ETTask OnBtn_CommitTask(this DlgTaskGet self)
+        public static async ETTask OnBtnCommitTask1Button(this DlgTaskGet self)
         {
             long instanceid = self.InstanceId;
             Scene root = self.Root();

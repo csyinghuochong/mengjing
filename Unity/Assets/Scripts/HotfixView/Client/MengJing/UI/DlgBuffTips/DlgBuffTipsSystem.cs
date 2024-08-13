@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgBuffTips self)
         {
-            self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgBuffTips self, Entity contextData = null)
@@ -15,7 +15,7 @@ namespace ET.Client
             self.View.E_ImageButtonButton.gameObject.SetActive(false);
         }
 
-        public static void OnImageButton(this DlgBuffTips self)
+        public static void OnImageButtonButton(this DlgBuffTips self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
         }

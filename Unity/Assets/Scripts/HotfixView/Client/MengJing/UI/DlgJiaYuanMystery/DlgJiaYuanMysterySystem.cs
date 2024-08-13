@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (ES_JiaYuanMystery_A))]
     [FriendOf(typeof (ES_JiaYuanMystery_B))]

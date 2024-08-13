@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgFirstWinReward))]
     public static class DlgFirstWinRewardSystem

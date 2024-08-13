@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgPetFubenResult))]
     public static class DlgPetFubenResultSystem

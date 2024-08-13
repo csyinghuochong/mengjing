@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ET.Client
 {
@@ -7,18 +7,23 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPaiMaiBuyTip self)
         {
-            self.View.E_ImageButtonButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiBuyTip); });
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
             self.View.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.View.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
             self.View.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnClickChangeBuyNum(-1); });
             self.View.E_Btn_BuyNum_jian10Button.AddListener(() => { self.OnClickChangeBuyNum(-10); });
-            self.View.E_Btn_BuyButton.AddListenerAsync(self.OnBtn_Buy);
+            self.View.E_Btn_BuyButton.AddListenerAsync(self.OnBtn_BuyButton);
         }
 
         public static void ShowWindow(this DlgPaiMaiBuyTip self, Entity contextData = null)
         {
         }
 
+        public static void OnImageButtonButton(this DlgPaiMaiBuyTip self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiBuyTip);
+        }
+        
         public static void InitInfo(this DlgPaiMaiBuyTip self, PaiMaiItemInfo paiMaiItemInfo, Action<int> buyAction)
         {
             self.PaiMaiItemInfo = paiMaiItemInfo;
@@ -53,7 +58,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnBtn_Buy(this DlgPaiMaiBuyTip self)
+        public static async ETTask OnBtn_BuyButton(this DlgPaiMaiBuyTip self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)

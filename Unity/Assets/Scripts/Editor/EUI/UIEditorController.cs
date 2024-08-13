@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 namespace ClientEditor
@@ -17,6 +18,32 @@ namespace ClientEditor
         {
             GameObject go = Selection.activeObject as GameObject;
             UICodeSpawner.SpawnUICode(go);
+        }
+        
+        [MenuItem("Assets/UI组件自动生成(为文件夹或Prefab中的所有Button自动注册方法)", false, -1)]
+        public static void CreateUICodeForFolderOrPrefab()
+        {
+            string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+            if (Directory.Exists(assetPath))
+            {
+                string[] prefabPaths = Directory.GetFiles(assetPath, "*.prefab", SearchOption.AllDirectories);
+                foreach (string prefabPath in prefabPaths)
+                {
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+                    if (prefab != null)
+                    {
+                        UICodeSpawner.SpawnUICode(prefab);
+                    }
+                }
+            }
+            else if (PrefabUtility.IsPartOfAnyPrefab(Selection.activeObject))
+            {
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
+                if (prefab != null)
+                {
+                    UICodeSpawner.SpawnUICode(prefab);
+                }
+            }
         }
 
         [MenuItem("Assets/AssetBundle/NameUIPrefab")]

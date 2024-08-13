@@ -1,4 +1,4 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof(DlgGM))]
     public static class DlgGMSystem
@@ -8,10 +8,10 @@
             self.View.E_Button_Broadcast_1Button.AddListener(() => { self.OnButton_Broadcast_1(0).Coroutine(); });
             self.View.E_Button_Broadcast_2Button.AddListener(() => { self.OnButton_Broadcast_1(1).Coroutine(); });
 
-            self.View.E_Button_EmailButton.AddListenerAsync(self.OnButton_Email);
-            self.View.E_Button_CloseButton.AddListener(self.OnButton_Close);
-            self.View.E_Button_ReLoadButton.AddListenerAsync(self.OnButton_ReLoad);
-            self.View.E_Button_CommonButton.AddListenerAsync(self.OnButton_Common);
+            self.View.E_Button_EmailButton.AddListenerAsync(self.OnButton_EmailButton);
+            self.View.E_Button_CloseButton.AddListener(self.OnButton_CloseButton);
+            self.View.E_Button_ReLoadButton.AddListenerAsync(self.OnButton_ReLoadButton);
+            self.View.E_Button_CommonButton.AddListenerAsync(self.OnButton_CommonButton);
         }
 
         public static void ShowWindow(this DlgGM self, Entity contextData = null)
@@ -38,7 +38,7 @@
             await ChatNetHelper.SendBroadcast(self.Root(), boradType, chatInfo);
         }
 
-        public static async ETTask OnButton_Email(this DlgGM self)
+        public static async ETTask OnButton_EmailButton(this DlgGM self)
         {
             string itemlist = self.View.E_InputField_EmailItemInputField.text;
             if (string.IsNullOrEmpty(itemlist))
@@ -54,12 +54,12 @@
             }
         }
 
-        public static void OnButton_Close(this DlgGM self)
+        public static void OnButton_CloseButton(this DlgGM self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GM);
         }
 
-        public static async ETTask OnButton_Common(this DlgGM self)
+        public static async ETTask OnButton_CommonButton(this DlgGM self)
         {
             string content = self.View.E_InputField_CommonInputField.text;
             if (content.Length < 1)
@@ -70,7 +70,7 @@
             await UserInfoNetHelper.GMCommon(self.Root(), content);
         }
 
-        public static async ETTask OnButton_ReLoad(this DlgGM self)
+        public static async ETTask OnButton_ReLoadButton(this DlgGM self)
         {
             string reload = self.View.E_InputField_ReLoadValueInputField.text;
             if (reload.Length < 1)
@@ -100,7 +100,7 @@
             }
             else
             {
-                self.OnButton_Close();
+                self.OnButton_CloseButton();
             }
         }
     }

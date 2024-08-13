@@ -1,15 +1,15 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgRoleBagSplit))]
     public static class DlgRoleBagSplitSystem
     {
         public static void RegisterUIEvent(this DlgRoleBagSplit self)
         {
-            self.View.E_Btn_AddNumButton.AddListener(self.OnAddNumButton);
+            self.View.E_Btn_AddNumButton.AddListener(self.OnBtn_AddNumButton);
             self.View.E_InputFieldInputField.onValueChanged.AddListener(self.OnOnNumInputField);
-            self.View.E_Btn_CostNumButton.AddListener(self.OnCostNumButton);
-            self.View.E_ButtonCloseButton.AddListener(self.OnCloseButton);
-            self.View.E_Btn_SplitButton.AddListenerAsync(self.OnSplitButton);
+            self.View.E_Btn_CostNumButton.AddListener(self.OnBtn_CostNumButton);
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
+            self.View.E_Btn_SplitButton.AddListenerAsync(self.OnBtn_SplitButton);
         }
 
         public static void ShowWindow(this DlgRoleBagSplit self, Entity contextData = null)
@@ -24,7 +24,7 @@
             self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
-        private static void OnAddNumButton(this DlgRoleBagSplit self)
+        private static void OnBtn_AddNumButton(this DlgRoleBagSplit self)
         {
             if (self.Num >= self.BagInfo.ItemNum)
             {
@@ -47,7 +47,7 @@
             }
         }
 
-        private static void OnCostNumButton(this DlgRoleBagSplit self)
+        private static void OnBtn_CostNumButton(this DlgRoleBagSplit self)
         {
             if (self.Num <= 1)
             {
@@ -58,12 +58,12 @@
             self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
-        private static void OnCloseButton(this DlgRoleBagSplit self)
+        private static void OnButtonCloseButton(this DlgRoleBagSplit self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleBagSplit);
         }
 
-        private static async ETTask OnSplitButton(this DlgRoleBagSplit self)
+        private static async ETTask OnBtn_SplitButton(this DlgRoleBagSplit self)
         {
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             int errorCode = await BagClientNetHelper.RequestSplitItem(self.Root(), self.BagInfo, (int)self.Num);

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -13,8 +13,9 @@ namespace ET.Client
             self.View.E_Button_Select_2Button.AddListener(() => { self.On_Button_Select(2); });
             self.View.E_Button_Select_3Button.AddListener(() => { self.On_Button_Select(3); });
             self.View.E_Button_Select_6Button.AddListener(() => { self.On_Button_Select(6); });
-            self.View.E_ButtonLearnButton.AddListenerAsync(self.OnButtonLearn);
+            self.View.E_ButtonLearnButton.AddListenerAsync(self.OnButtonLearnButton);
             self.View.E_MakeLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeLearnItemsRefresh);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgMakeLearn self, Entity contextData = null)
@@ -244,7 +245,7 @@ namespace ET.Client
             self.View.ES_RewardList.Refresh(equipMakeConfig.NeedItems);
         }
 
-        public static async ETTask OnButtonLearn(this DlgMakeLearn self)
+        public static async ETTask OnButtonLearnButton(this DlgMakeLearn self)
         {
             if (self.MakeId == 0)
             {
@@ -264,6 +265,9 @@ namespace ET.Client
                 self.InitData(self.MakeType);
                 FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("学习配方成功!"));
             }
+        }
+        public static void OnImageButtonButton(this DlgMakeLearn self)
+        {
         }
     }
 }

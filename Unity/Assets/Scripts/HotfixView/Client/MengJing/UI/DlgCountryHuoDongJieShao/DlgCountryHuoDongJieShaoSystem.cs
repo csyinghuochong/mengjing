@@ -1,18 +1,18 @@
-﻿namespace ET.Client
+namespace ET.Client
 {
     [FriendOf(typeof (DlgCountryHuoDongJieShao))]
     public static class DlgCountryHuoDongJieShaoSystem
     {
         public static void RegisterUIEvent(this DlgCountryHuoDongJieShao self)
         {
-            self.View.E_BtnCloseButton.AddListener(self.OnBtn_Close);
+            self.View.E_BtnCloseButton.AddListener(self.OnBtnCloseButton);
         }
 
         public static void ShowWindow(this DlgCountryHuoDongJieShao self, Entity contextData = null)
         {
         }
 
-        public static void OnBtn_Close(this DlgCountryHuoDongJieShao self)
+        public static void OnBtnCloseButton(this DlgCountryHuoDongJieShao self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryHuoDongJieShao);
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -7,14 +7,14 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgCommonReward self)
         {
-            self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
         }
 
         public static void ShowWindow(this DlgCommonReward self, Entity contextData = null)
         {
         }
 
-        public static void OnImageButton(this DlgCommonReward self)
+        public static void OnImageButtonButton(this DlgCommonReward self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CommonReward);
         }

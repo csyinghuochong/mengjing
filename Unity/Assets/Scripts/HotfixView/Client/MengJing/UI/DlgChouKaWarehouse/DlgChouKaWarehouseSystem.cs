@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -18,9 +18,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgChouKaWarehouse self)
         {
-            self.View.E_ButtonTakeOutAllButton.AddListenerAsync(self.OnButtonTakeOutAll);
-            self.View.E_ButtonSellButton.AddListener(self.OnButtonSell);
-            self.View.E_ButtonZhengLiButton.AddListenerAsync(self.OnButtonZhengLi);
+            self.View.E_ButtonTakeOutAllButton.AddListenerAsync(self.OnButtonTakeOutAllButton);
+            self.View.E_ButtonSellButton.AddListener(self.OnButtonSellButton);
+            self.View.E_ButtonZhengLiButton.AddListenerAsync(self.OnButtonZhengLiButton);
 
             self.View.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.View.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -69,18 +69,18 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonTakeOutAll(this DlgChouKaWarehouse self)
+        public static async ETTask OnButtonTakeOutAllButton(this DlgChouKaWarehouse self)
         {
             await BagClientNetHelper.RquestTakeOutAll(self.Root(), (int)ItemLocType.ChouKaWarehouse);
         }
 
-        public static void OnButtonSell(this DlgChouKaWarehouse self)
+        public static void OnButtonSellButton(this DlgChouKaWarehouse self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "一键出售", "是否一键出售低品质装备和宝石,出售品质可以在设置中进行选择",
                 () => { BagClientNetHelper.RequestOneSell(self.Root(), ItemLocType.ChouKaWarehouse).Coroutine(); }, null).Coroutine();
         }
 
-        public static async ETTask OnButtonZhengLi(this DlgChouKaWarehouse self)
+        public static async ETTask OnButtonZhengLiButton(this DlgChouKaWarehouse self)
         {
             await BagClientNetHelper.RequestSortByLoc(self.Root(), ItemLocType.ChouKaWarehouse);
             self.RefreshHouse();
