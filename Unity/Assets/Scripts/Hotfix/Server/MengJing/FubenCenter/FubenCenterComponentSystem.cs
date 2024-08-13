@@ -39,13 +39,15 @@ namespace ET.Server
             {
                 self.BattleOpen = true;
                 self.BattleInfos.Clear();
-                LogHelper.LogWarning($"OnBattleOpen : {self.Zone()}", true);
-                // if (ServerHelper.GetOpenServerDay(false, self.Zone()) > 0 && !ComHelperS.IsInnerNet())
-                // {
-                //     ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-                //     self.Root().GetComponent<MessageSender>().Send(robotSceneId,
-                //         new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.BattleOpen });
-                // }
+                Console.WriteLine($"OnBattleOpen : {self.Zone()}");
+                if (ServerHelper.GetServeOpenrDay( self.Zone()) > 0)
+                {
+                    ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
+                    G2Robot_MessageRequest g2RobotMessageRequest = G2Robot_MessageRequest.Create();
+                    g2RobotMessageRequest.Zone = self.Zone();
+                    g2RobotMessageRequest.MessageType = NoticeType.BattleOpen;
+                    self.Root().GetComponent<MessageSender>().Send(robotSceneId,g2RobotMessageRequest);
+                }
             }
 
             if (functionId == 1031)
@@ -603,7 +605,7 @@ namespace ET.Server
             self.BattleOpen = false;
             LogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
             //Console.WriteLine($"OnBattleOver : {self.DomainZone()}");
-            ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+            ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
 
             G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
             G2Robot_MessageRequest.Zone = self.Zone();

@@ -254,7 +254,7 @@ namespace ET.Server
         
         public static ActorId GetRobotServerId()
         {
-            ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+            ActorId robotSceneId = StartSceneConfigCategory.Instance.RobotManagerConfig.ActorId;
             return robotSceneId;
         }
 

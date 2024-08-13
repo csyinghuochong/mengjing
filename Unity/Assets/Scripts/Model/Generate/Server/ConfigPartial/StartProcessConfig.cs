@@ -17,7 +17,7 @@ namespace ET
             {
                 if (ipEndPoint == null)
                 {
-                    this.ipEndPoint = NetworkHelper.ToIPEndPoint(this.InnerIP, this.Port);
+                    this.ipEndPoint = NetworkHelper.ToIPEndPoint(this.InnerIP, this.InnerPort);
                 }
 
                 return this.ipEndPoint;

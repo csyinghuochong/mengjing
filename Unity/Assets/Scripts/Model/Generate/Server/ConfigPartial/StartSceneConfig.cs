@@ -35,6 +35,8 @@ namespace ET
 
         public StartSceneConfig BigCenterConfig;
         
+        public StartSceneConfig RobotManagerConfig;
+        
         public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
         
         public List<StartSceneConfig> GetByProcess(int process)
@@ -95,6 +97,9 @@ namespace ET
                         break;
                     case SceneType.LoginCenter:
                         this.LoginCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.RobotManager:
+                        this.RobotManagerConfig = startSceneConfig;
                         break;
                     case SceneType.Chat:
                         this.ChatConfig = startSceneConfig;

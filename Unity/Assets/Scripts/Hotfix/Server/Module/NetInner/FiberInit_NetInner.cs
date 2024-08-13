@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace ET.Server
 {
@@ -15,6 +16,7 @@ namespace ET.Server
             root.AddComponent<ProcessOuterSender, IPEndPoint>(startProcessConfig.IPEndPoint);
             root.AddComponent<ProcessInnerSender>();
 
+            Console.WriteLine($"FiberInit_NetInner:  {startProcessConfig.IPEndPoint}");
             await ETTask.CompletedTask;
         }
     }

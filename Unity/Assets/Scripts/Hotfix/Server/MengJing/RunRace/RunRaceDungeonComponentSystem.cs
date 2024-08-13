@@ -51,7 +51,7 @@ namespace ET.Server
         {
             if (self.Zone() == 5)
             {
-                ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+                ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
                 G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
                 G2Robot_MessageRequest.Zone = self.Zone();
                 G2Robot_MessageRequest.MessageType = NoticeType.RunRace;

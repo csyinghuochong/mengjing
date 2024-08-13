@@ -25,7 +25,7 @@ namespace ET.Server
                 G2Robot_MessageRequest.Zone = self.Zone();
                 G2Robot_MessageRequest.MessageType = NoticeType.Demon;
                 G2Robot_MessageRequest.Message = string.Empty;
-                ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+                ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
                 self.Root().GetComponent<MessageSender>().Send(robotSceneId,G2Robot_MessageRequest);
             }
         }

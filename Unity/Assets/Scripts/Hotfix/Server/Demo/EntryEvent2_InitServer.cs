@@ -15,7 +15,7 @@ namespace ET.Server
                         int process = root.Fiber.Process;
                         root.AddComponent<DBManagerComponent>();
                         StartProcessConfig startProcessConfig = StartProcessConfigCategory.Instance.Get(process);
-                        if (startProcessConfig.Port != 0)
+                        if (startProcessConfig.InnerPort != 0)
                         {
                             await FiberManager.Instance.Create(SchedulerType.ThreadPool, ConstFiberId.NetInner, 0, SceneType.NetInner, "NetInner");
                         }
