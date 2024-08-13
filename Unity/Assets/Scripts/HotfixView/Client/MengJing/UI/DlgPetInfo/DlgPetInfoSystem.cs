@@ -53,6 +53,7 @@ namespace ET.Client
             self.View.E_ButtonEquipXieXiaButton.AddListener(self.OnButtonEquipXieXiaButton);
             self.View.E_ImageJinHuaButton.AddListener(self.OnImageJinHuaButton);
             self.View.E_JiBanButton.AddListener(self.OnJiBanButton);
+            self.View.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
 
             self.View.EG_EquipSetRectTransform.gameObject.SetActive(false);
             self.View.E_ButtonRNameButton.gameObject.SetActive(false);
