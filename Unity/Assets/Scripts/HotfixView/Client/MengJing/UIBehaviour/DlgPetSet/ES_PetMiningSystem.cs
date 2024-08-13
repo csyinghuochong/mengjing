@@ -74,8 +74,8 @@ namespace ET.Client
         {
             self.E_PetMiningTeam.gameObject.SetActive(!self.E_PetMiningTeam.gameObject.activeSelf);
 
-            self.E_ButtonTeamToggle.GetComponent<RectTransform>().anchoredPosition =
-                    self.E_PetMiningTeam.gameObject.activeSelf ? new Vector2(-471.8f, -252.2f) : new Vector2(-198f, -252.2f);
+            // self.E_ButtonTeamToggle.GetComponent<RectTransform>().anchoredPosition =
+            //         self.E_PetMiningTeam.gameObject.activeSelf ? new Vector2(-471.8f, -252.2f) : new Vector2(-198f, -252.2f);
             self.E_ButtonTeamToggle.transform.localScale = self.E_PetMiningTeam.gameObject.activeSelf ? Vector3.one : new Vector3(-1f, 1f, 1f);
         }
 
