@@ -119,7 +119,6 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_PetMining self)
         {
             self.RequestMingList().Coroutine();
-            ;
         }
 
         public static async ETTask RequestMingList(this ES_PetMining self)

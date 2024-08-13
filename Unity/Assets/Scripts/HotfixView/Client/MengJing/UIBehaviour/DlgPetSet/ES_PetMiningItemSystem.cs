@@ -37,7 +37,7 @@ namespace ET.Client
         {
             self.MineType = mingType;
             self.Position = index;
-            self.E_ImageIcon.gameObject.SetActive(hexin);
+            self.E_ImHeXinShow.gameObject.SetActive(hexin);
             MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(mingType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, mineBattleConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
