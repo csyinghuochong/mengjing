@@ -29,6 +29,8 @@ namespace ET.Client
                 self.MiningTeamList.Add(TeamItem);
             }
 
+            self.View.E_IconItemDragImage.gameObject.SetActive(false);
+
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             self.PetTeamList.Clear();
             self.PetTeamList.AddRange(petComponent.PetMingList);

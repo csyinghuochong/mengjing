@@ -27,8 +27,7 @@ namespace ET.Client
         {
             long instanceid = self.InstanceId;
             C2M_PetMingRecordRequest request = new();
-            M2C_PetMingRecordResponse response =
-                    (M2C_PetMingRecordResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_PetMingRecordResponse response = (M2C_PetMingRecordResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
             if (instanceid != self.InstanceId)
             {
                 return;
