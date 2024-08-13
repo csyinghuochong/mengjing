@@ -87,10 +87,8 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTip("UIUnionJingXuan 暂未开放");
-            await ETTask.CompletedTask;
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIUnionJingXuan);
-            // uI.GetComponent<UIUnionJingXuanComponent>().OnUpdateUI(self.UnionInfo);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionJingXuan);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionJingXuan>().OnUpdateUI(self.UnionInfo);
         }
 
         public static async ETTask OnButtonModifyButton(this ES_UnionMy self)
@@ -204,7 +202,7 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-            
+
             U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root(), unionId);
 
             self.UnionInfo = response.UnionMyInfo;
@@ -305,12 +303,15 @@ namespace ET.Client
             Scroll_Item_UnionMyItem scrollItemUnionMyItem = self.ScrollItemUnionMyItems[index].BindTrans(transform);
             scrollItemUnionMyItem.OnUpdateUI(self.UnionInfo, self.ShowUnionPlayerInfos[index]);
         }
+
         public static void OnText_EnterUnionButton(this ES_UnionMy self)
         {
         }
+
         public static void OnText_LevelButton(this ES_UnionMy self)
         {
         }
+
         public static void OnText_ExpButton(this ES_UnionMy self)
         {
         }
