@@ -20,8 +20,8 @@ namespace ET.Client
         Building,
     }
 
-    [EntitySystemOf(typeof (OperaComponent))]
-    [FriendOf(typeof (OperaComponent))]
+    [EntitySystemOf(typeof(OperaComponent))]
+    [FriendOf(typeof(OperaComponent))]
     public static partial class OperaComponentSystem
     {
         [EntitySystem]
@@ -412,8 +412,8 @@ namespace ET.Client
 
             if (unitmonster.Type == UnitType.Monster && unitmonster.MasterId == UnitHelper.GetMyUnitId(self.Root()))
             {
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UICommonProperty);
-                // ui.GetComponent<UICommonPropertyComponent>().InitPropertyShow(unitmonster).Coroutine();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonProperty);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonProperty>().InitPropertyShow(unitmonster).Coroutine();
                 return;
             }
 
