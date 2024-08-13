@@ -21,9 +21,26 @@ namespace ET.Client
             self.E_ButtonTeamToggle.AddListener(() => { self.OnButtonTeamToggle(); });
             self.E_ButtonEditorTeam.AddListener(() => { self.OnPetMiningTeamButton().Coroutine(); });
 
+            self.TeamTipList.Clear();
+            self.TeamIconList.Clear();  
+            ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject gamego = rc.Get<GameObject>($"Team_tip_{i}");
+                self.TeamTipList.Add(gamego.GetComponent<Text>());
+
+                GameObject gameicon = rc.Get<GameObject>($"PetTeam_{i}");
+                self.TeamIconList.Add(gameicon.transform.GetChild(0).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(1).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(2).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(3).Find("Icon").GetComponent<Image>());
+                self.TeamIconList.Add(gameicon.transform.GetChild(4).Find("Icon").GetComponent<Image>());
+            }
+            
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnClickPageButton);
 
             self.E_PetMiningItem.gameObject.SetActive(false);
+            self.E_UIPetOccupyItem.gameObject.SetActive(false);
         }
 
         [EntitySystem]
