@@ -10,8 +10,7 @@
         /// 挑战者的队伍
         /// </summary>
         public int TeamId{ get; set; }
-
-        public Unit MainUnit { get; set; }
+        
         public long Timer;
 
         public int CombatResultEnum;

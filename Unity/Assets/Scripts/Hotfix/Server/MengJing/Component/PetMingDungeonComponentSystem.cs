@@ -18,12 +18,13 @@ namespace ET.Server
 
         }
         
-         public static async ETTask OnPetMingOccupy(this PetMingDungeonComponent self)
+         public static async ETTask OnPetMingOccupy(this PetMingDungeonComponent self, Unit mainUnit)
          {
-             if (self.CombatResultEnum == CombatResultEnum.Win && self.MainUnit != null)
+             
+             if (self.CombatResultEnum == CombatResultEnum.Win && mainUnit != null)
              {
                  string logInfo = string.Empty;
-                 string unitName = self.MainUnit.GetComponent<UserInfoComponentS>().GetName();
+                 string unitName = mainUnit.GetComponent<UserInfoComponentS>().GetName();
                  MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(self.MineType);
                  logInfo = $"玩家 {unitName} 队伍{self.TeamId + 1} 占领了第{self.Position+1} {mineBattleConfig.Name}";
                  
@@ -31,7 +32,7 @@ namespace ET.Server
                  M2A_PetMingBattleWinRequest M2A_PetMingBattleWinRequest = M2A_PetMingBattleWinRequest.Create();
                  M2A_PetMingBattleWinRequest.MingType = self.MineType;
                  M2A_PetMingBattleWinRequest.Postion = self.Position;
-                 M2A_PetMingBattleWinRequest.UnitID = self.MainUnit.Id;
+                 M2A_PetMingBattleWinRequest.UnitID = mainUnit.Id;
                  M2A_PetMingBattleWinRequest.TeamId = self.TeamId;
                  M2A_PetMingBattleWinRequest.WinPlayer = unitName;
                  A2M_PetMingBattleWinResponse r_GameStatusResponse = (A2M_PetMingBattleWinResponse)await self.Root().GetComponent<MessageSender>().Call
@@ -41,22 +42,27 @@ namespace ET.Server
 
          public static async ETTask OnGameOver(this PetMingDungeonComponent self, int result)
          {
+             Unit mainUnit = UnitHelper.GetUnitList(self.Scene(), UnitType.Player)[0];
              self.CombatResultEnum = result;
 
-             self.OnPetMingOccupy().Coroutine();
-
+             self.OnPetMingOccupy(mainUnit).Coroutine();
              long cdTime = result == CombatResultEnum.Win ? TimeHelper.Hour : TimeHelper.Minute * 10;
+             if (ComHelperS.IsInnerNet())
+             {
+                 cdTime = TimeHelper.Second * 10;
+             }
+             
              M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
              m2C_FubenSettlement.BattleResult = result;
              m2C_FubenSettlement.StarInfos = result == CombatResultEnum.Win ?  new List<int>() { 1, 1, 1 } : new List<int>() { 0,0,0};
-             MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);
-             self.MainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineBattle,1, true  );
-             self.MainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
+             MapMessageHelper.SendToClient(mainUnit, m2C_FubenSettlement);
+             mainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineBattle,1, true  );
+             mainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
 
-             self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
+             mainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
              if (result == CombatResultEnum.Win)
              {
-                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineWinNumber_403, 0, 1);
+                 mainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineWinNumber_403, 0, 1);
              }
 
              await ETTask.CompletedTask;
@@ -71,7 +77,7 @@ namespace ET.Server
          {
              int number_self = 0;
              int number_enemy = 0;
-             List<EntityRef<Unit>> unitList = self.Root().GetComponent<UnitComponent>().GetAll();
+             List<EntityRef<Unit>> unitList = self.Scene().GetComponent<UnitComponent>().GetAll();
              for (int i = 0; i < unitList.Count; i++)
              {
                  Unit unit = unitList[i];
@@ -120,7 +126,7 @@ namespace ET.Server
                  }
 
                  //己方队伍
-                 Unit unit = self.MainUnit;
+                 Unit unit = UnitHelper.GetUnitList(self.Scene(), UnitType.Player)[0];
                  unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
                  PetComponentS petComponent = unit.GetComponent<PetComponentS>();
                  petComponent.CheckSkin();
@@ -162,6 +168,12 @@ namespace ET.Server
                          petInfo.PlayerName = "机器人";
                          Unit petunit = UnitFactory.CreateTianTiPet(unit.Scene(), 0,
                             CampEnum.CampPlayer_2, petInfo, ConfigData.Formation_2[k], 180f, k);
+                         petunit.GetComponent<AIComponent>().Stop();
+
+                         if (ComHelperS.IsInnerNet())
+                         {
+                             break;
+                         }
                      }
                  }
                  else
@@ -199,6 +211,7 @@ namespace ET.Server
                              petComponent_enemy.UpdatePetAttributeWithData( bagComponentS, numericComponentS, rolePetInfo, false);
                              Unit petunit = UnitFactory.CreateTianTiPet(unit.Scene(), 0,
                                 CampEnum.CampPlayer_2, rolePetInfo, ConfigData.Formation_2[position], 180f,position);
+                             petunit.GetComponent<AIComponent>().Stop();
                          }
                      }
 

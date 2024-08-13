@@ -97,7 +97,6 @@ namespace ET.Server
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMing)
                     {
-                        scene.GetComponent<PetMingDungeonComponent>().MainUnit = unit;
                         scene.GetComponent<PetMingDungeonComponent>().GeneratePetFuben().Coroutine();
                     }
                     break;

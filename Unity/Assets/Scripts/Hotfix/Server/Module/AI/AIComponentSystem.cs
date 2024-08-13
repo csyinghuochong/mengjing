@@ -36,7 +36,6 @@ namespace ET
             self.TargetPoint.Clear();
             self.TargetZhuiJi = float3.zero;
             self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.AITimer, self);
         }
 
         [EntitySystem]
@@ -316,7 +315,7 @@ namespace ET
             {
                 return;
             }
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.AITimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.AITimer, self);
         }
 
         public static void Stop(this AIComponent self)
