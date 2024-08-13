@@ -22,21 +22,25 @@ namespace ET.Client
             self.E_ButtonEditorTeam.AddListener(() => { self.OnPetMiningTeamButton().Coroutine(); });
 
             self.TeamTipList.Clear();
-            self.TeamIconList.Clear();  
+            self.TeamIconList.Clear();
             ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
             for (int i = 0; i < 3; i++)
             {
-                GameObject gamego = rc.Get<GameObject>($"Team_tip_{i}");
-                self.TeamTipList.Add(gamego.GetComponent<Text>());
+                using (zstring.Block())
+                {
+                    GameObject gamego = rc.Get<GameObject>($"Team_tip_{i}");
+                    self.TeamTipList.Add(gamego.GetComponent<Text>());
 
-                GameObject gameicon = rc.Get<GameObject>($"PetTeam_{i}");
-                self.TeamIconList.Add(gameicon.transform.GetChild(0).Find("Icon").GetComponent<Image>());
-                self.TeamIconList.Add(gameicon.transform.GetChild(1).Find("Icon").GetComponent<Image>());
-                self.TeamIconList.Add(gameicon.transform.GetChild(2).Find("Icon").GetComponent<Image>());
-                self.TeamIconList.Add(gameicon.transform.GetChild(3).Find("Icon").GetComponent<Image>());
-                self.TeamIconList.Add(gameicon.transform.GetChild(4).Find("Icon").GetComponent<Image>());
+                    GameObject gameicon = rc.Get<GameObject>($"PetTeam_{i}");
+
+                    self.TeamIconList.Add(gameicon.transform.GetChild(0).Find("Icon").GetComponent<Image>());
+                    self.TeamIconList.Add(gameicon.transform.GetChild(1).Find("Icon").GetComponent<Image>());
+                    self.TeamIconList.Add(gameicon.transform.GetChild(2).Find("Icon").GetComponent<Image>());
+                    self.TeamIconList.Add(gameicon.transform.GetChild(3).Find("Icon").GetComponent<Image>());
+                    self.TeamIconList.Add(gameicon.transform.GetChild(4).Find("Icon").GetComponent<Image>());
+                }
             }
-            
+
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnClickPageButton);
 
             self.E_PetMiningItem.gameObject.SetActive(false);
@@ -156,7 +160,7 @@ namespace ET.Client
             }
             else
             {
-                self.OnClickPageButton(self.E_FunctionSetBtnToggleGroup.GetSelectedToggle().Item1);
+                self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.E_FunctionSetBtnToggleGroup.GetSelectedToggle().Item1);
             }
 
             self.E_Text_Chanchu_2.text = response.ChanChu.ToString();
