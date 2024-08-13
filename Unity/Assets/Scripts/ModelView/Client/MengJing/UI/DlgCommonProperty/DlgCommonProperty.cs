@@ -8,5 +8,8 @@ namespace ET.Client
         public DlgCommonPropertyViewComponent View { get => this.GetComponent<DlgCommonPropertyViewComponent>(); }
 
         public List<ShowPropertyList> ShowPropertyList = new();
+        
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
+        public List<int> ShowPetSkills = new();
     }
 }

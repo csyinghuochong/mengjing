@@ -12,6 +12,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgCommonProperty self)
         {
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
+            self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
         public static void ShowWindow(this DlgCommonProperty self, Entity contextData = null)
@@ -25,6 +26,12 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CommonProperty);
         }
 
+        private static void OnCommonSkillItemsRefresh(this DlgCommonProperty self, Transform transform, int index)
+        {
+            Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon);
+        }
+
         public static void ShowSkillList(this DlgCommonProperty self, Unit unit)
         {
             if (unit.Type != UnitType.Monster)
@@ -32,40 +39,20 @@ namespace ET.Client
                 return;
             }
 
-            List<int> skillids = new List<int>();
-
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
 
-            skillids.Add(monsterConfig.ActSkillID);
+            self.ShowPetSkills.Clear();
+            self.ShowPetSkills.Add(monsterConfig.ActSkillID);
             if (monsterConfig.SkillID != null)
             {
                 for (int i = 0; i < monsterConfig.SkillID.Length; i++)
                 {
-                    skillids.Add(monsterConfig.SkillID[i]);
+                    self.ShowPetSkills.Add(monsterConfig.SkillID[i]);
                 }
             }
 
-            // for (int i = 0; i < skillids.Count; i++)
-            // {
-            //     if (skillids[i] == 0)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillids[i]);
-            //     if (CommonHelp.IfNull(skillConfig.SkillIcon))
-            //     {
-            //         return;
-            //     }
-            //
-            //     GameObject skillItem = GameObject.Instantiate(bundleGameObject);
-            //     UICommonHelper.SetParent(skillItem, self.SkillListNode);
-            //     skillItem.SetActive(true);
-            //     skillItem.transform.localScale = Vector3.one * 1f;
-            //
-            //     UICommonSkillItemComponent ui_item = self.AddChild<UICommonSkillItemComponent, GameObject>(skillItem);
-            //     ui_item.OnUpdateUI(skillids[i]);
-            // }
+            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.ShowPetSkills.Count);
+            self.View.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetSkills.Count);
         }
 
         public static async ETTask InitPropertyShow(this DlgCommonProperty self, Unit unit)
@@ -90,7 +77,10 @@ namespace ET.Client
 
             self.ShowSkillList(unit);
             self.View.E_NameTextText.text = MonsterConfigCategory.Instance.Get(unit.ConfigId).MonsterName;
-            self.View.E_LvTextText.text = $"当前等级：{numericComponent.GetAsInt(NumericType.Now_Lv).ToString()}";
+            using (zstring.Block())
+            {
+                self.View.E_LvTextText.text = zstring.Format("当前等级：{0}", numericComponent.GetAsInt(NumericType.Now_Lv).ToString());
+            }
 
             for (int i = 0; i < self.ShowPropertyList.Count; i++)
             {
