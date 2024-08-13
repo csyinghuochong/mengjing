@@ -298,7 +298,7 @@ namespace ET.Client
             }
 
             self.View.E_ImageIconImage.gameObject.SetActive(bagInfo != null);
-            self.View.E_ButtonEquipXieXiaButton.gameObject.SetActive(bagInfo != null);
+            self.View.E_ButtonEquipXieXiaButton.gameObject.SetActive(false);
             if (bagInfo == null)
             {
                 self.View.E_TextNameText.text = "空";
