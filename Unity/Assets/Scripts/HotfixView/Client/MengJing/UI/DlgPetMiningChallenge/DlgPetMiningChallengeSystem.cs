@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -216,6 +217,11 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long cdTime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.PetMineCDTime) - TimeHelper.ServerNow();
 
+            if (cdTime <= 0)
+            {
+                self.View.E_TextChallengeCDText.text = string.Empty;
+            }
+            
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             while (cdTime > 0)
             {

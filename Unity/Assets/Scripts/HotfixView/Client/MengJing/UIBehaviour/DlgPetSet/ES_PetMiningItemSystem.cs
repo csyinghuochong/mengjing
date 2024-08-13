@@ -29,8 +29,7 @@ namespace ET.Client
         public static async ETTask OnImageIcon(this ES_PetMiningItem self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMiningChallenge);
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningChallenge>()
-                    .OnInitUI(self.MineType, self.Position, self.PetMingPlayerInfo);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningChallenge>().OnInitUI(self.MineType, self.Position, self.PetMingPlayerInfo);
         }
 
         public static void OnInitUI(this ES_PetMiningItem self, int mingType, int index, bool hexin, List<KeyValuePairInt> petMineExtend)
