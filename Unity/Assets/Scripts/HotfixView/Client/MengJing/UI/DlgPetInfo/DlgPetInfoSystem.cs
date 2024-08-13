@@ -20,9 +20,21 @@ namespace ET.Client
             self.PetZiZhiItemList[4] = self.View.EG_PetZiZhiItem5RectTransform.gameObject;
             self.PetZiZhiItemList[5] = self.View.EG_PetZiZhiItem6RectTransform.gameObject;
 
-            self.View.E_PetHeXinItem0Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() => { self.OnChangeNode(2); });
-            self.View.E_PetHeXinItem1Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() => { self.OnChangeNode(2); });
-            self.View.E_PetHeXinItem2Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() => { self.OnChangeNode(2); });
+            self.View.E_PetHeXinItem0Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
+            {
+                self.OnChangeNode(2);
+                self.OnButtonPetHeXinItem(0);
+            });
+            self.View.E_PetHeXinItem1Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
+            {
+                self.OnChangeNode(2);
+                self.OnButtonPetHeXinItem(1);
+            });
+            self.View.E_PetHeXinItem2Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
+            {
+                self.OnChangeNode(2);
+                self.OnButtonPetHeXinItem(2);
+            });
 
             self.View.E_PetHeXinItem0Image.transform.Find("ImageSelect").gameObject.SetActive(false);
             self.View.E_PetHeXinItem1Image.transform.Find("ImageSelect").gameObject.SetActive(false);
@@ -32,9 +44,6 @@ namespace ET.Client
             self.PetHeXinItemList[1] = self.View.E_PetHeXinItem1Image.gameObject;
             self.PetHeXinItemList[2] = self.View.E_PetHeXinItem2Image.gameObject;
 
-            self.View.E_Btn_XiuXiButton.AddListener(self.OnBtn_XiuXiButton);
-            self.View.E_Btn_FangShengButton.AddListener(self.OnBtn_FangShengButton);
-            self.View.E_Btn_ChuZhanButton.AddListener(self.OnBtn_XiuXiButton);
             self.View.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
             self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
@@ -44,6 +53,11 @@ namespace ET.Client
             self.View.E_ButtonEquipXieXiaButton.AddListener(self.OnButtonEquipXieXiaButton);
             self.View.E_ImageJinHuaButton.AddListener(self.OnImageJinHuaButton);
             self.View.E_JiBanButton.AddListener(self.OnJiBanButton);
+
+            self.View.EG_EquipSetRectTransform.gameObject.SetActive(false);
+            self.View.E_ButtonRNameButton.gameObject.SetActive(false);
+            self.View.E_Btn_FangShengButton.gameObject.SetActive(false);
+            self.View.E_ButtonUseSkinButton.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgPetInfo self, Entity contextData = null)
@@ -73,99 +87,6 @@ namespace ET.Client
             self.View.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
 
             self.View.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
-        }
-
-        private static void OnBtn_FangShengButton(this DlgPetInfo self)
-        {
-            if (self.LastSelectItem == null)
-            {
-                return;
-            }
-
-            if (self.LastSelectItem.IsProtect)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("宠物已锁定！");
-                return;
-            }
-
-            if (self.LastSelectItem.PetStatus == 1)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("出战宠物不能分解！");
-                return;
-            }
-
-            if (self.LastSelectItem.PetStatus == 2)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请先停止家园散步！");
-                return;
-            }
-
-            if (self.LastSelectItem.PetStatus == 3)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请先从仓库取出！");
-                return;
-            }
-
-            if (self.Root().GetComponent<PetComponentC>().TeamPetList.Contains(self.LastSelectItem.Id))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中,不能分解！");
-                return;
-            }
-
-            if (self.Root().GetComponent<PetComponentC>().PetFormations.Contains(self.LastSelectItem.Id))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中,不能分解！");
-                return;
-            }
-
-            if (PetHelper.IsShenShou(self.LastSelectItem.ConfigId))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("神兽不能放生");
-                return;
-            }
-
-            if (PetHelper.HavePetHeXin(self.LastSelectItem))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请先卸下宠物之核！");
-                return;
-            }
-
-            //if (self.PetComponent.PetMingList.Contains(self.LastSelectItem.Id))
-            //{
-            //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中,不能分解！");
-            //    return;
-            //}
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization("确定放生?"),
-                () => { PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id).Coroutine(); },
-                null).Coroutine();
-        }
-
-        private static void OnBtn_XiuXiButton(this DlgPetInfo self)
-        {
-            RolePetInfo rolePetInfo = self.LastSelectItem;
-            if (rolePetInfo == null)
-            {
-                return;
-            }
-
-            if (rolePetInfo.PetStatus == 2)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("先停止散步！");
-                return;
-            }
-
-            Dictionary<long, long> PetFightTime = self.Root().GetComponent<BattleMessageComponent>().PetFightCD;
-            long cdTime = 0;
-            //出战
-            PetFightTime.TryGetValue(rolePetInfo.Id, out cdTime);
-
-            if (TimeHelper.ClientNow() - cdTime < 180 * TimeHelper.Second)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("出战冷却中！");
-                return;
-            }
-
-            PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0).Coroutine();
         }
 
         public static async ETTask OnPetHeXinSuitButton(this DlgPetInfo self)
@@ -227,29 +148,6 @@ namespace ET.Client
             {
                 self.View.E_PropertyShowTextText.gameObject.SetActive(false);
             }
-        }
-
-        private static int NextPetNumber(this DlgPetInfo self)
-        {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int level = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
-            int curNumber = PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos);
-            if (curNumber < PetHelper.GetPetMaxNumber(level, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber)))
-            {
-                return 0;
-            }
-
-            string[] petInfos = GlobalValueConfigCategory.Instance.Get(34).Value.Split('@');
-            for (int i = 0; i < petInfos.Length; i++)
-            {
-                string[] petNumber = petInfos[i].Split(';');
-                if (level < int.Parse(petNumber[0]))
-                {
-                    return int.Parse(petNumber[0]);
-                }
-            }
-
-            return 0;
         }
 
         private static void OnClickPetHandler(this DlgPetInfo self)
@@ -371,6 +269,16 @@ namespace ET.Client
             self.View.EG_PetAddPointRectTransform.gameObject.SetActive(nodetype == 3);
         }
 
+        public static void OnButtonPetHeXinItem(this DlgPetInfo self, int position)
+        {
+            for (int i = 0; i < self.PetHeXinItemList.Length; i++)
+            {
+                self.PetHeXinItemList[i].transform.Find("ImageSelect").gameObject.SetActive(i == position);
+            }
+
+            self.UpdatePetHexinItem(self.PetHeXinList);
+        }
+
         private static void UpdatePetHexinItem(this DlgPetInfo self, List<BagInfo> bagInfos)
         {
             self.View.E_ButtonHeXinHeChengButton.gameObject.SetActive(false);
@@ -466,8 +374,8 @@ namespace ET.Client
         private static void OnUpdatePetInfo(this DlgPetInfo self, RolePetInfo rolePetInfo)
         {
             self.View.E_InputFieldNameInputField.text = rolePetInfo.PetName;
-            self.View.E_Btn_XiuXiButton.gameObject.SetActive(rolePetInfo.PetStatus == 1);
-            self.View.E_Btn_ChuZhanButton.gameObject.SetActive(rolePetInfo.PetStatus == 0);
+            self.View.E_Btn_XiuXiButton.gameObject.SetActive(false);
+            self.View.E_Btn_ChuZhanButton.gameObject.SetActive(false);
 
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);
@@ -518,28 +426,24 @@ namespace ET.Client
 
         private static void UpdateAttribute(this DlgPetInfo self, RolePetInfo rolePetInfo)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-            long petAllAct = numericComponentC.GetAsLong(NumericType.Now_PetAllAct);
-            long petAllMageact = numericComponentC.GetAsLong(NumericType.Now_PetAllMageAct);
-            long petAllAdf = numericComponentC.GetAsLong(NumericType.Now_PetAllAdf);
-            long petAllDef = numericComponentC.GetAsLong(NumericType.Now_PetAllDef);
-            long petAllHp = numericComponentC.GetAsLong(NumericType.Now_PetAllHp);
-
-            //self.GetAttributeShow(rolePetInfo, NumericType.Now_MaxAct, 0);
+            long petAllAct = self.GetAsLong(NumericType.Now_PetAllAct);
+            long petAllMageact = self.GetAsLong(NumericType.Now_PetAllMageAct);
+            long petAllAdf = self.GetAsLong(NumericType.Now_PetAllAdf);
+            long petAllDef = self.GetAsLong(NumericType.Now_PetAllDef);
+            long petAllHp = self.GetAsLong(NumericType.Now_PetAllHp);
 
             petAllAct += (int)(NumericHelp.GetAttributeValue(rolePetInfo, NumericType.Now_MaxAct) *
-                (1 + numericComponentC.GetAsFloat(NumericType.Now_PetAllActPro)));
+                (1 + self.GetAsFloat(NumericType.Now_PetAllActPro)));
             petAllMageact += (int)(NumericHelp.GetAttributeValue(rolePetInfo, NumericType.Now_Mage) *
-                (1 + numericComponentC.GetAsFloat(NumericType.Now_PetAllMageActPro)));
+                (1 + self.GetAsFloat(NumericType.Now_PetAllMageActPro)));
             petAllDef += (int)(NumericHelp.GetAttributeValue(rolePetInfo, NumericType.Now_MaxDef) *
-                (1 + numericComponentC.GetAsFloat(NumericType.Now_PetAllDefPro)));
+                (1 + self.GetAsFloat(NumericType.Now_PetAllDefPro)));
             petAllAdf += (int)(NumericHelp.GetAttributeValue(rolePetInfo, NumericType.Now_MaxAdf) *
-                (1 + numericComponentC.GetAsFloat(NumericType.Now_PetAllAdfPro)));
+                (1 + self.GetAsFloat(NumericType.Now_PetAllAdfPro)));
 
-            float petAllCri = numericComponentC.GetAsFloat(NumericType.Now_PetAllCri);
-            float petAllHit = numericComponentC.GetAsFloat(NumericType.Now_PetAllHit);
-            float petAllDodge = numericComponentC.GetAsFloat(NumericType.Now_PetAllDodge);
+            float petAllCri = self.GetAsFloat(NumericType.Now_PetAllCri);
+            float petAllHit = self.GetAsFloat(NumericType.Now_PetAllHit);
+            float petAllDodge = self.GetAsFloat(NumericType.Now_PetAllDodge);
 
             //基础属性
             self.UpdateAttributeItem(0, self.View.EG_PetProSetItem_1RectTransform.gameObject, self.View.E_PetProSetNode_1Image.gameObject,
@@ -566,6 +470,26 @@ namespace ET.Client
                 self.GetAttributeShow(rolePetInfo, NumericType.Now_Hit, petAllHit));
             self.UpdateAttributeItem(3, self.View.EG_PetProSetItem_2RectTransform.gameObject, self.View.E_PetProSetNode_2Image.gameObject, "",
                 self.GetAttributeShow(rolePetInfo, NumericType.Now_Dodge, petAllDodge));
+        }
+
+        public static long GetAsLong(this DlgPetInfo self, int numericType)
+        {
+            if (self.Keys.Contains(numericType))
+            {
+                return self.Values[self.Keys.IndexOf(numericType)];
+            }
+
+            return 0;
+        }
+
+        public static float GetAsFloat(this DlgPetInfo self, int numericType)
+        {
+            if (self.Keys.Contains(numericType))
+            {
+                return (float)self.Values[self.Keys.IndexOf(numericType)] / 10000;
+            }
+
+            return 0f;
         }
 
         private static void UpdateExpAndLv(this DlgPetInfo self, RolePetInfo rolePetInfo)
