@@ -255,5 +255,14 @@
             request.TeamPlayerInfo = teamPlayerInfo;
             T2C_TeamInviteResponse response = (T2C_TeamInviteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
         }
+
+        public static async ETTask<M2C_TeamerPositionResponse> TeamerPositionRequest(Scene root)
+        {
+            C2M_TeamerPositionRequest request = C2M_TeamerPositionRequest.Create();
+
+            M2C_TeamerPositionResponse response = (M2C_TeamerPositionResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

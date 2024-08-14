@@ -184,9 +184,8 @@ namespace ET.Client
                     name = petConfig.MonsterName;
                 }
 
-                self.InstantiateIcon(
-                    unitInfo.Type == UnitType.Pet ? self.View.EG_jiayuanPetRectTransform.gameObject
-                            : self.View.EG_jiayuanRubshRectTransform.gameObject, new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0), name);
+                self.InstantiateIcon(unitInfo.Type == UnitType.Pet ? self.View.EG_jiayuanPetRectTransform.gameObject
+                        : self.View.EG_jiayuanRubshRectTransform.gameObject, new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0), name);
             }
 
             await ETTask.CompletedTask;
@@ -205,38 +204,38 @@ namespace ET.Client
 
         public static async ETTask RequestLocalUnitPosition(this DlgMapBig self)
         {
-            // long instanceid = self.InstanceId;
-            // C2M_TeamerPositionRequest request = new C2M_TeamerPositionRequest();
-            // M2C_TeamerPositionResponse response =
-            //         (M2C_TeamerPositionResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // if (instanceid != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // if (response.UnitList.Count == 0)
-            // {
-            //     return;
-            // }
-            //
-            // foreach (UnitInfo unitInfo in response.UnitList)
-            // {
-            //     Vector3 vector3 = new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0);
-            //     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId);
-            //
-            //     // 赛季boss
-            //     if (unitInfo.ConfigId == SeasonHelper.SeasonBossId)
-            //     {
-            //         self.InstantiateIcon(self.View.EG_bossIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
-            //     }
-            //
-            //     // 野生精灵
-            //     int sonType = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId).MonsterSonType;
-            //     if (unitInfo.Type == UnitType.Monster && (sonType == 58 || sonType == 59))
-            //     {
-            //         self.InstantiateIcon(self.View.EG_jinglingIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
-            //     }
-            // }
+            long instanceid = self.InstanceId;
+
+            M2C_TeamerPositionResponse response = await TeamNetHelper.TeamerPositionRequest(self.Root());
+
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            if (response.UnitList.Count == 0)
+            {
+                return;
+            }
+
+            foreach (UnitInfo unitInfo in response.UnitList)
+            {
+                Vector3 vector3 = new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0);
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId);
+
+                // 赛季boss
+                if (unitInfo.ConfigId == SeasonHelper.SeasonBossId)
+                {
+                    self.InstantiateIcon(self.View.EG_bossIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
+                }
+
+                // 野生精灵
+                int sonType = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId).MonsterSonType;
+                if (unitInfo.Type == UnitType.Monster && (sonType == 58 || sonType == 59))
+                {
+                    self.InstantiateIcon(self.View.EG_jinglingIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
+                }
+            }
 
             await ETTask.CompletedTask;
         }
