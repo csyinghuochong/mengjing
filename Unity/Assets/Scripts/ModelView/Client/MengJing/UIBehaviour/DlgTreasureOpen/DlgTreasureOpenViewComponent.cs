@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RewardList ES_RewardList
+		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -50,14 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RewardList es = this.m_es_rewardlist;
-     			if( es == null )
-
+     			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
-     			return this.m_es_rewardlist;
+     			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -184,7 +181,7 @@ namespace ET.Client
 		{
 			this.m_E_ButtonDiButton = null;
 			this.m_E_ButtonDiImage = null;
-			this.m_es_rewardlist = null;
+			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonStopButton = null;
 			this.m_E_ButtonStopImage = null;
 			this.m_E_ButtonOpenButton = null;
@@ -197,7 +194,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_ButtonDiButton = null;
 		private UnityEngine.UI.Image m_E_ButtonDiImage = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ButtonStopButton = null;
 		private UnityEngine.UI.Image m_E_ButtonStopImage = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
