@@ -10,7 +10,8 @@
 - 拼好UI预设物，选择UI物体右键点击SpawnEUICode选项生成UI绑定代码
 
 图例：
-![img.png](img.png)
+
+![屏幕截图 2024-08-14 135301](Images\屏幕截图 2024-08-14 135301.png)
 
 ```C#
    // 假设UI名为DlgXXX
@@ -41,12 +42,40 @@
        // 打开UI时执行的
        self.View.E_TestButton.gameObject.SetActive(true);
    }
+   
+   public static void OnTestButton(this DlgXXX self)
+   {
+       Log.Debug("111");
+   }
 ```
 
 # 公共UI
 
 - 以ES_为开头，放入Assets/Bundles/UI/Common目录
 - 拼好UI预设物，选择UI物体右键点击SpawnEUICode选项生成UI绑定代码
+
+图例：
+![屏幕截图 2024-08-14 142238](Images\屏幕截图 2024-08-14 142238.png)
+
+```C#
+   // 假设UI名为ES_XXX
+    
+   // 代码结构
+   // ES_XXX.cs 中定义字段
+   
+   // ES_XXXSystem.cs 中写逻辑
+   // 如：
+   public static void Awake(this ES_XXX self, Transform transform)
+   {
+       self.E_TestButton.AddListener(self.OnTestButton);
+       self.E_TestButton.gameObject.SetActive(true);
+   }
+
+   public static void OnTestButton(this ES_XXX self)
+   {
+       Log.Debug("111");
+   }
+```
 
 # 循环列表
 
