@@ -1,0 +1,48 @@
+using System;
+using ET.Client;
+
+namespace ET
+{
+    //战场
+    public class Behaviour_Battle : BehaviourHandler
+    {
+        public override int BehaviourId()
+        {
+            return BehaviourType.Behaviour_Battle;
+        }
+
+        public override bool Check(BehaviourComponent aiComponent, AIConfig aiConfig)
+        {
+            return aiComponent.NewBehaviour == BehaviourId();
+        }
+
+        public override async ETTask Execute(BehaviourComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
+        {
+            Scene root = aiComponent.Root();
+            TimerComponent timerComponent = root.GetComponent<TimerComponent>();
+            
+            Console.WriteLine("检测背包有可替换的装备 直接穿戴");
+            await RobotHelper.WearEquip(root);
+
+            //Console.WriteLine("Behaviour_Battle");
+            while (true)
+            {
+                int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);
+                int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
+
+                if (errorCode != 0)
+                {
+                    Log.Debug($"Behaviour_Battle: errorCode {errorCode}");
+                }
+                
+                // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
+                await timerComponent.WaitAsync(20000, cancellationToken);
+                if (cancellationToken.IsCancel())
+                {
+                    Log.Debug("Behaviour_Battle: Exit1");
+                    return;
+                }
+            }
+        }
+    }
+}

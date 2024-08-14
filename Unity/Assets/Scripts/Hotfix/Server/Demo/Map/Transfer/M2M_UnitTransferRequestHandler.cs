@@ -119,44 +119,12 @@ namespace ET.Server
                     sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
                     unit.Rotation = quaternion.identity;
-                    if (!unit.IsRobot() && request.SceneType == SceneTypeEnum.TeamDungeon)
+                    if ( request.SceneType == SceneTypeEnum.TeamDungeon)
                     {
                         Console.WriteLine($"SceneTypeEnum.TeamDungeon:{request.SceneType}");
                         
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
-                        int fubenType = teamDungeonComponent.FubenType;
-                        bool firstEnter = !teamDungeonComponent.TeamPlayers.ContainsKey(unit.Id);
-                        if (firstEnter)
-                        {
-                            teamDungeonComponent.AddPlayerList( unit.Id );
-                            if (fubenType == TeamFubenType.XieZhu && unit.Id == teamDungeonComponent.TeamId)
-                            {
-                                int times_2 = unit.GetTeamDungeonXieZhu();
-                                int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
-                                if (totalTimes_2 > times_2)
-                                {
-                                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonXieZhu, unit.GetTeamDungeonXieZhu() + 1);
-                                }
-                                else
-                                {
-                                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() + 1);
-                                }
-                            }
-                            else
-                            {
-                                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() + 1);
-                            }
-
-                            if (fubenType == TeamFubenType.ShenYuan && unit.Id == teamDungeonComponent.TeamId)
-                            {
-                                unit.GetComponent<BagComponentS>().OnCostItemData($"{CommonHelp.ShenYuanCostId};1");
-                            }
-
-                            if (fubenType == TeamFubenType.ShenYuan)
-                            {
-                                unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ShenYuanNumber_135, 0, 1);
-                            }
-                        }
+                        teamDungeonComponent.OnEnterDungeon(unit);
                     }
 
                     if (request.SceneType == (int)SceneTypeEnum.Tower)
@@ -258,7 +226,7 @@ namespace ET.Server
                     int startIndex = todayCamp == 1 ? 0 : 3;
                     unit.Position = new float3(sceneConfig.InitPos[startIndex+0] * 0.01f, sceneConfig.InitPos[startIndex + 1] * 0.01f, sceneConfig.InitPos[startIndex + 2] * 0.01f);
                     unit.Rotation = quaternion.identity;
-
+                    Console.WriteLine($"unitid:  {unit.Id}    todayCamp:  {todayCamp}");
                     break;
                 case SceneTypeEnum.MainCityScene:
                     float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);

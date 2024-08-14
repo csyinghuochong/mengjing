@@ -21,6 +21,8 @@ namespace ET.Server
             (serverid, A2A_ServerMessageRequest);
         }
 
+        
+        
         /// <summary>
         /// 一般是做全服操作
         /// </summary>

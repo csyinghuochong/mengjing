@@ -23,6 +23,48 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
+        public static void OnEnterDungeon(this TeamDungeonComponent self, Unit unit)
+        {
+            if(unit.IsRobot())
+            {
+                return;
+            }
+            int fubenType = self.FubenType;
+            bool firstEnter = !self.TeamPlayers.ContainsKey(unit.Id);
+            if (firstEnter)
+            {
+                self.AddPlayerList( unit.Id );
+                if (fubenType == TeamFubenType.XieZhu && unit.Id == self.TeamId)
+                {
+                    int times_2 = unit.GetTeamDungeonXieZhu();
+                    int totalTimes_2 = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+                    if (totalTimes_2 > times_2)
+                    {
+                        unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonXieZhu, unit.GetTeamDungeonXieZhu() + 1);
+                    }
+                    else
+                    {
+                        unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() + 1);
+                    }
+                }
+                else
+                {
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() + 1);
+                }
+
+                if (fubenType == TeamFubenType.ShenYuan && unit.Id == self.TeamId)
+                {
+                    unit.GetComponent<BagComponentS>().OnCostItemData($"{CommonHelp.ShenYuanCostId};1");
+                }
+
+                if (fubenType == TeamFubenType.ShenYuan)
+                {
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ShenYuanNumber_135, 0, 1);
+                }
+            }
+            
+        }
+
         public static void AddPlayerList(this TeamDungeonComponent self, long unitid)
         {
             self.TeamPlayers[unitid] = TeamPlayerInfo.Create();
