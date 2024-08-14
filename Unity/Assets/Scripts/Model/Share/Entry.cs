@@ -49,6 +49,7 @@
             World.Instance.AddSingleton<NetServices>();
             World.Instance.AddSingleton<NavmeshComponent>();
             World.Instance.AddSingleton<LogMsg>();
+            World.Instance.AddSingleton<RandNameComponent>();
             
             Log.Warning($"Debug...AddSingleton: {TimeHelper.ClientNow()}");
             

@@ -102,7 +102,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask RequestCreateRole(Scene root, long accountId, int occ, string name)
+        public static async ETTask<int> RequestCreateRole(Scene root, long accountId, int occ, string name)
         {
             PlayerComponent PlayerComponent = root.GetComponent<PlayerComponent>();
             C2R_CreateRoleData request = C2R_CreateRoleData.Create();
@@ -112,7 +112,12 @@ namespace ET.Client
             request.ServerId = PlayerComponent.ServerItem.ServerId;
 
             R2C_CreateRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_CreateRoleData;
-            PlayerComponent.CreateRoleList.Add(response.createRoleInfo);
+            if(response.Error == ErrorCode.ERR_Success)
+            {       
+                PlayerComponent.CreateRoleList.Add(response.createRoleInfo);
+            }
+
+            return response.Error;
         }
 
         public static async ETTask RequestDeleteRole(Scene root, long accountId, long userId, CreateRoleInfo createRoleInfo)

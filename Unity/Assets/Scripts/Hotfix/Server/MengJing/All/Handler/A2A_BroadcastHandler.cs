@@ -20,7 +20,7 @@ namespace ET.Server
                         break;
                     case 2:  //世界等级
                         ConfigData.ServerInfo = request.ServerInfo;
-                        Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
+                        //Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
                         break;
                 }
 

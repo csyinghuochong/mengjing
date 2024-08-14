@@ -49,10 +49,17 @@ namespace ET.Client
             Console.WriteLine($"root.Name:  {root.Name}");
             await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord, 0,versionMode );
             //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
-            
+
+            int errorcode = ErrorCode.ERR_Success;
             if (playerComponent.CreateRoleList.Count == 0)
             {
-                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, root.Name);
+                errorcode = await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, RandNameComponent.Instance.GetRandomName());
+            }
+
+            if (errorcode != ErrorCode.ERR_Success)
+            {
+                Console.WriteLine("FiberInit_Robot.Error  应该销毁！");
+                return;
             }
 
             playerComponent.Account = root.Name;
