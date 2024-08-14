@@ -10,7 +10,6 @@
 - 拼好UI预设物，选择UI物体右键点击SpawnEUICode选项生成UI绑定代码
 
 图例：
-
 ![屏幕截图 2024-08-14 135301](Images\屏幕截图 2024-08-14 135301.png)
 
 ```C#
@@ -81,3 +80,89 @@
 
 - Item以Item_为开头，放入Assets/Bundles/UI/Item目录
 - 拼好UI预设物，选择UI物体右键点击SpawnEUICode选项生成UI绑定代码
+
+图例：
+![屏幕截图 2024-08-14 143423](Images\屏幕截图 2024-08-14 143423.png)
+
+```C#
+   // 假设UI名为Item_XXX
+    
+   // 代码结构
+   // Scroll_Item_ItemXXX.cs 中定义字段
+   
+   // Scroll_Item_XXXSystem.cs 中写逻辑
+   // ！！！ Item中的初始逻辑不要写在Awake中，Awake暂时用不到！！！
+   // 如：
+   private static void Awake(this Scroll_Item_XXXItem self)
+   {
+   }
+
+   public static void Refresh(this Scroll_Item_XXXItem self)
+   {
+       self.E_TestButton.AddListener(self.OnTestButton);
+       self.E_TestButton.gameObject.SetActive(true);
+   }
+   
+   public static void OnTestButton(this Scroll_Item_XXXItem self)
+   {
+       Log.Debug("111");
+   }
+```
+
+-- 选择UI物体右键点击EUI/...ScrollRect选项生成滚动组件
+-- 在脚本 Loop ... Scroll Rect中PrefabName中填写Item的Prefab名字
+
+图例：
+![屏幕截图 2024-08-14 144618](Images\屏幕截图 2024-08-14 144618.png)
+
+```C#
+   // 假设
+   // ScrollRect 名为 E_BagItems  注意！！！ES 的话要在ES_XXX.cs加上接口 IUILogic ！！！
+   // Item 名为 Item_CommonItem
+   private static void Awake(this ES_RoleBag self, Transform transform)
+   {
+        self.uiTransform = transform;
+
+        // 注册刷新回调
+        self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+   }
+   
+   private static void OnBagItemsRefresh(this ES_RoleBag self, Transform transform, int index)
+   {
+       // 刷新
+       Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+       scrollItemCommonItem.Refresh(...)
+   }
+   
+   public static void RefreshBagItems(this ES_RoleBag self)
+   {
+       BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+
+       self.ShowBagInfos.Clear();
+
+       int itemTypeEnum = ItemTypeEnum.ALL;
+       switch (self.CurrentItemType)
+       {
+            case 0:
+                itemTypeEnum = ItemTypeEnum.ALL;
+                break;
+            case 1:
+                itemTypeEnum = ItemTypeEnum.Equipment;
+                break;
+            case 2:
+                itemTypeEnum = ItemTypeEnum.Material;
+                break;
+            case 3:
+                itemTypeEnum = ItemTypeEnum.Consume;
+                break;
+       }
+
+       int allNumber = bagComponentC.GetBagShowCell();
+       self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(itemTypeEnum));
+       // 生成
+       self.AddUIScrollItems(ref self.ScrollItemCommonItems, allNumber);
+       self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, allNumber);
+       }
+   }
+   
+```
