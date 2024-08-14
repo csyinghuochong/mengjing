@@ -138,6 +138,7 @@
 # 循环列表
 
 - Item以Item_为开头，放入Assets/Bundles/UI/Item目录
+- 非Grid的话要加上Layout Element组件，设置宽高
 - 拼好UI预设物，选择UI物体右键点击SpawnEUICode选项生成UI绑定代码
 
 图例：
