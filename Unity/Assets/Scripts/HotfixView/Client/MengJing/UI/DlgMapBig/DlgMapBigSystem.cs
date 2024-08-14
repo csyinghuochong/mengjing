@@ -555,6 +555,7 @@ namespace ET.Client
 
         public static void OnBtn_CloseButton(this DlgMapBig self)
         {
+            DlgGuide dlgGuide = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGuide>();
             // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIGuide);
             // if (ui != null)
             // {

@@ -190,5 +190,6 @@ namespace ET.Client
 		WindowID_PetXiLianLockSkill,
 		WindowID_UnionJingXuan,
 		WindowID_CommonProperty,
+		WindowID_Guide,
 	}
 }
