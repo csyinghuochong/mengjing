@@ -258,7 +258,7 @@ namespace ET.Client
             }
 
             await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
-            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UISkill);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Main/Skill/UISkill");
         }
 
         /// <summary>
@@ -413,6 +413,7 @@ namespace ET.Client
 
             self.UpdateLeftSp();
         }
+
         public static void OnSkillInfoconImgButton(this ES_SkillLearn self)
         {
         }

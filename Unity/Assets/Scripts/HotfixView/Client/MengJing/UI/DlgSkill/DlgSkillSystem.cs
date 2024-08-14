@@ -123,7 +123,7 @@ namespace ET.Client
                 self.View.ES_SkillLearn.OnSkillUpgrade(DataParams);
             }
 
-            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.SkillUp, "0");
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.SkillUp, "0");
         }
 
         public static void OnSkillSetUpdate(this DlgSkill self)

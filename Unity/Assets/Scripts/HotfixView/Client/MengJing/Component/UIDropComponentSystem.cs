@@ -257,7 +257,7 @@ namespace ET.Client
             float distance = PositionHelper.Distance2D(UnitHelper.GetMyUnitFromClientScene(self.Root()).Position, self.MyUnit.Position);
             if (distance < 3f)
             {
-                // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.DropItem, "0");
+                self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.DropItem, "0");
             }
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();

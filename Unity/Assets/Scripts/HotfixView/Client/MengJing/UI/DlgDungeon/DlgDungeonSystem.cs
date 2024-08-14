@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UIDungenBossRefreshTimer)]
-    public class UIDungenBossRefreshTimer: ATimer<DlgDungeon>
+    public class UIDungenBossRefreshTimer : ATimer<DlgDungeon>
     {
         protected override void Run(DlgDungeon self)
         {
@@ -21,8 +21,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_BossRefreshTimeItem))]
-    [FriendOf(typeof (DlgDungeon))]
+    [FriendOf(typeof(Scroll_Item_BossRefreshTimeItem))]
+    [FriendOf(typeof(DlgDungeon))]
     public static class DlgDungeonSystem
     {
         public static void RegisterUIEvent(this DlgDungeon self)
@@ -76,7 +76,7 @@ namespace ET.Client
             }
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
-            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UIDungeon);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Dungeon/UIDungeon");
         }
 
         private static void OnBossRefreshTimeItemsRefresh(this DlgDungeon self, Transform transform, int index)

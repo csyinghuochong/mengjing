@@ -125,7 +125,7 @@ namespace ET.Client
             self.View.E_DungeonLevelItemLoopVerticalScrollRect.SetVisible(true, self.ShowLevel.Count);
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
-            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UIDungeonLevel);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Dungeon/UIDungeonLevel");
         }
     }
 }

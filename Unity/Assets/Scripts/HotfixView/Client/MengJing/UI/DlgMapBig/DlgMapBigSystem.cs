@@ -115,7 +115,7 @@ namespace ET.Client
             }
 
             camera.enabled = false;
-            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, WindowID.WindowID_MapBig);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Main/MiniMap/UIMapBig");
         }
 
         public static void ShowStallArea(this DlgMapBig self)
@@ -187,8 +187,6 @@ namespace ET.Client
                 self.InstantiateIcon(unitInfo.Type == UnitType.Pet ? self.View.EG_jiayuanPetRectTransform.gameObject
                         : self.View.EG_jiayuanRubshRectTransform.gameObject, new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0), name);
             }
-
-            await ETTask.CompletedTask;
         }
 
         public static GameObject InstantiateIcon(this DlgMapBig self, GameObject go, Vector3 position, string name)
@@ -236,33 +234,28 @@ namespace ET.Client
                     self.InstantiateIcon(self.View.EG_jinglingIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
                 }
             }
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestTeamerPosition(this DlgMapBig self)
         {
-            // long instanceid = self.InstanceId;
-            // while (true)
-            // {
-            //     C2M_TeamerPositionRequest request = new C2M_TeamerPositionRequest();
-            //     M2C_TeamerPositionResponse response =
-            //             (M2C_TeamerPositionResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            //     if (instanceid != self.InstanceId)
-            //     {
-            //         break;
-            //     }
-            //
-            //     self.OnUpdateTeamerList(response.UnitList);
-            //
-            //     await TimerComponent.Instance.WaitAsync(TimeHelper.Second * 2);
-            //     if (instanceid != self.InstanceId)
-            //     {
-            //         break;
-            //     }
-            // }
+            long instanceid = self.InstanceId;
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (true)
+            {
+                M2C_TeamerPositionResponse response = await TeamNetHelper.TeamerPositionRequest(self.Root());
+                if (instanceid != self.InstanceId)
+                {
+                    break;
+                }
 
-            await ETTask.CompletedTask;
+                self.OnUpdateTeamerList(response.UnitList);
+
+                await timerComponent.WaitAsync(TimeHelper.Second * 2);
+                if (instanceid != self.InstanceId)
+                {
+                    break;
+                }
+            }
         }
 
         public static void OnUpdateTeamerList(this DlgMapBig self, List<UnitInfo> unitInfos)
@@ -288,7 +281,7 @@ namespace ET.Client
                 }
 
                 go.transform.localPosition = vector31;
-                // go.transform.Find("Text").GetComponent<Text>().text = unitInfo.UnitName;
+                go.transform.Find("Text").GetComponent<Text>().text = unitInfo.UnitName;
             }
 
             for (int i = unitInfos.Count; i < self.TeamerPointList.Count; i++)

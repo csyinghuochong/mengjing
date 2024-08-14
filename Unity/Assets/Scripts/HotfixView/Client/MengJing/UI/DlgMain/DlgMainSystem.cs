@@ -1580,7 +1580,7 @@ namespace ET.Client
             self.View.E_UnionButton.gameObject.SetActive(self.MainUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) > 0);
             if (sceneTypeEnum == SceneTypeEnum.LocalDungeon)
             {
-                // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.EnterFuben, sceneid.ToString());
+                self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.EnterFuben, sceneid.ToString());
                 bool shenmizhimen =
                         DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(self.Root().GetComponent<MapComponent>().SceneId);
                 self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(shenmizhimen);
@@ -1633,7 +1633,7 @@ namespace ET.Client
                     self.View.ES_RoleHead.UpdateShowRoleExp();
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
-                    // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
+                    self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
                     using (zstring.Block())
                     {
                         FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:"),

@@ -212,14 +212,13 @@ namespace ET.Client
 
         public static async ETTask ShowGuide(this DlgTaskGet self)
         {
-            // await TimerComponent.Instance.WaitAsync(100);
-            // if (self.IsDisposed)
-            // {
-            //     return;
-            // }
-            //
-            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UITaskGet);
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, "Main/Task/UITaskGet");
         }
 
         public static void OnButtonWeeklyCommit(this DlgTaskGet self)
