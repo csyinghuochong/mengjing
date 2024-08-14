@@ -13,14 +13,14 @@ namespace ClientEditor
             UICodeSpawner.SpawnEUICode(go);
         }
         
-        [MenuItem("GameObject/UI组件自动生成(为Button自动注册方法)", false, -1)]
+        [MenuItem("GameObject/SpawnEUICode-UI组件自动生成(为Button自动注册方法)", false, -1)]
         public static void CreateUICode()
         {
             GameObject go = Selection.activeObject as GameObject;
             UICodeSpawner.SpawnUICode(go);
         }
         
-        [MenuItem("Assets/UI组件自动生成(为文件夹或Prefab中的所有Button自动注册方法)", false, -1)]
+        [MenuItem("Assets/EUITool/所有UI组件自动生成(为文件夹或Prefab中的所有Button自动注册方法)", false)]
         public static void CreateUICodeForFolderOrPrefab()
         {
             string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
