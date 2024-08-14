@@ -6,20 +6,32 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgGuide))]
-	public static  class DlgGuideSystem
-	{
+    [FriendOf(typeof(DlgGuideViewComponent))]
+    [FriendOf(typeof(DlgGuide))]
+    public static class DlgGuideSystem
+    {
+        public static void RegisterUIEvent(this DlgGuide self)
+        {
+        }
 
-		public static void RegisterUIEvent(this DlgGuide self)
-		{
-		 
-		}
+        public static void ShowWindow(this DlgGuide self, Entity contextData = null)
+        {
+            self.View.EG_PositionSetRectTransform.gameObject.SetActive(false);
+        }
 
-		public static void ShowWindow(this DlgGuide self, Entity contextData = null)
-		{
-		}
+        public static void SetPosition(this DlgGuide self, GameObject gameObject)
+        {
+            CommonViewHelper.SetParent(self.View.uiTransform.gameObject, gameObject);
 
-		 
-
-	}
+            if (self.guidCof != null)
+            {
+                self.View.E_ShowLabSetImage.gameObject.SetActive(true);
+                self.View.E_ShowLabText.text = self.guidCof.Text;
+            }
+            else
+            {
+                self.View.E_ShowLabSetImage.gameObject.SetActive(false);
+            }
+        }
+    }
 }
