@@ -36,13 +36,32 @@ namespace ET
 
             RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
             self.RobotConfig = robotConfig;
+            
+            //0   测试机器人
+            //1   任务机器人
+            //2   组队副本机器人
+            //3   战场机器人
+            //4   世界boos机器人
+            //5   角斗场机器人
+            //6   solo场机器人
+            //7   副本机器人
+            //8   塔防机器人
+            //9   奔跑大赛机器人
+            //10  恶魔活动机器人
             switch (robotConfig.Behaviour)
             {
                 case 0:
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Test, Value = "Behaviour_Test" });
                     self.NewBehaviour = BehaviourType.Behaviour_Test;
                     break;
-
+                case 3:
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Battle, Value = "Behaviour_Battle" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_ZhuiJi, Value = "Behaviour_ZhuiJi" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Attack, Value = "Behaviour_Attack" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Target, Value = "Behaviour_Target" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Retreat, Value = "Behaviour_Retreat" });
+                    self.NewBehaviour = BehaviourType.Behaviour_Battle;
+                    break;
                 default:
                     break;
             }

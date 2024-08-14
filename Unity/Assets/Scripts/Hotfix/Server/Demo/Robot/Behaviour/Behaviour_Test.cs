@@ -22,8 +22,6 @@ namespace ET
         public override async ETTask Execute(BehaviourComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Scene root = aiComponent.Root();
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
 
             Log.Debug($"Behaviour_Arena: Execute");

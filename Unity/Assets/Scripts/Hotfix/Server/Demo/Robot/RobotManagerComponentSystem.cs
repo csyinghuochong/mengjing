@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [EntitySystemOf(typeof(RobotManagerComponent))]
     [FriendOf(typeof(RobotManagerComponent))]
@@ -17,16 +19,33 @@
                 await FiberManager.Instance.Remove(f);
             }
             
-            foreach (int fiberId in self.robots)
+            foreach (int fiberId in self.robots.Keys)
             {
                 Remove(fiberId).Coroutine();
             }
         }
 
-        public static async ETTask NewRobot(this RobotManagerComponent self, string account)
+        public static int GetRobotNumber(this RobotManagerComponent self, int zone, int robotid)
         {
+            int number = 0;
+            foreach (var infos in self.robots.Values)
+            {
+                if (infos.Key == zone && infos.Value == robotid)
+                {
+                    number++;
+                }
+            }
+
+            return number;
+        }
+        
+        public static async ETTask NewRobot(this RobotManagerComponent self, int zone, int robotid)
+        {
+            int robotNumber = self.GetRobotNumber(zone, robotid);
+            string account = $"{zone}_{robotid}_{robotNumber}_0001";   //服务器
             int robot = await FiberManager.Instance.Create(SchedulerType.ThreadPool, self.Zone(), SceneType.Robot, account);
-            self.robots.Add(robot);
+            KeyValuePair<int, int> infos = new KeyValuePair<int, int>(zone, robotid);
+            self.robots.Add(robot, infos);
         }
     }
 }

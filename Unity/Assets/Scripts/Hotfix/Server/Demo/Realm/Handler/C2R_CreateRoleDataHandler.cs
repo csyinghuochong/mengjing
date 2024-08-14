@@ -62,9 +62,9 @@ namespace ET.Server
 			        DBCenterAccountInfo newAccount = newAccountList[0];
 
 					int robotId = 0;
-					if (newAccount.Password == CommonHelp.RobotPassWord)
+					if (newAccount.Password == ConfigData.RobotPassWord)
 					{
-						robotId = int.Parse(newAccount.Account.Split('_')[0]);
+						robotId = int.Parse(newAccount.Account.Split('_')[1]);
 					}
 
 					//存储账号信息
