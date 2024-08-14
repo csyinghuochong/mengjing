@@ -3,6 +3,65 @@
 - 需要绑定的UI组件（Image、Button等）以E_开头
 - 需要绑定的空组件（没有添加任何UI组件）以EG_开头
 
+# ToggleGroup
+
+- Toggle 的父物体要添加 ToggleGroup
+
+![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
+
+- Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong
+
+- Toggle 组件添加引用
+
+![屏幕截图 2024-08-14 151717](Images\屏幕截图 2024-08-14 151717.png)
+
+```C#
+
+    public static void RegisterUIEvent(this DlgPet self)
+    {
+        // 注册点击回调
+        self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+    }
+
+    public static void ShowWindow(this DlgPet self, Entity contextData = null)
+    {
+        // 点击第一个Toggle
+        self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+    }
+
+    private static void OnFunctionSetBtn(this DlgPet self, int index)
+    {
+        // 隐藏所有子物体
+        CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
+        switch (index)
+        {
+            case 0:
+                self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
+                self.View.ES_PetList.OnUpdateUI();
+                break;
+            case 1:
+                self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
+                self.View.ES_PetHeCheng.OnUpdateUI();
+                break;
+        }
+    }
+```
+
+# Button
+
+```C#
+    // 注册 区别：AddListenerAsync注册异步方法，方法没执行完的话所有注册了异步方法的按钮点击无效
+    self.View.E_ShrinkButton.AddListener(self.OnShrinkButton);
+    self.View.E_RoseEquipButton.AddListenerAsync(self.OnRoseEquipButton);
+```
+
+# EventTrigger
+
+```C#
+    // 注册
+    self.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+```
+
 # 窗口UI
 
 - 以Dlg为开头，放入Assets/Bundles/UI/Dlg目录
@@ -165,48 +224,4 @@
        }
    }
    
-```
-
-# ToggleGroup
-
-- Toggle 的父物体要添加 ToggleGroup
-
-![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
-
-- Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong
-
-- Toggle 组件添加引用
-
-![屏幕截图 2024-08-14 151717](Images\屏幕截图 2024-08-14 151717.png)
-
-```C#
-
-    public static void RegisterUIEvent(this DlgPet self)
-    {
-        // 注册点击回调
-        self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-    }
-
-    public static void ShowWindow(this DlgPet self, Entity contextData = null)
-    {
-        // 点击第一个Toggle
-        self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-    }
-
-    private static void OnFunctionSetBtn(this DlgPet self, int index)
-    {
-        // 隐藏所有子物体
-        CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
-        switch (index)
-        {
-            case 0:
-                self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
-                self.View.ES_PetList.OnUpdateUI();
-                break;
-            case 1:
-                self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
-                self.View.ES_PetHeCheng.OnUpdateUI();
-                break;
-        }
-    }
 ```
