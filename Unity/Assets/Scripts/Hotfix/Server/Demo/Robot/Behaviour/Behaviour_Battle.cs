@@ -28,6 +28,8 @@ namespace ET
             while (true)
             {
                 int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);
+                
+                Console.WriteLine($"GetBattFubenId   {root.GetComponent<UserInfoComponentC>().UserInfo.Lv}   {sceneId}");
                 int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
 
                 if (errorCode != 0)

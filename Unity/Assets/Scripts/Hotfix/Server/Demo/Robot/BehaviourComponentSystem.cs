@@ -25,7 +25,6 @@ namespace ET
                 }
             }
         }
-
         
         [EntitySystem]
         private static void Awake(this ET.BehaviourComponent self, int robotId)

@@ -149,10 +149,9 @@ namespace ET.Server
                     self.UserInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
                 }
             }
-
+            
             if (self.UserInfo.RobotId > 0)
             { 
-                self.UserInfo.Lv = math.max(self.UserInfo.Lv, 100000);
                 self.UserInfo.Gold = math.max(self.UserInfo.Gold, 100000000);
                 self.UserInfo.Diamond = math.max(self.UserInfo.Diamond, 100000);
             }

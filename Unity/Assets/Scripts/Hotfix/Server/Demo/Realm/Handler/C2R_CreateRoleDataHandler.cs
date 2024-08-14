@@ -23,7 +23,7 @@ namespace ET.Server
 		        return;
 	        }
 	        
-	        Log.Debug("C2A_CreateRoleData.server1");
+	        Log.Debug("C2R_CreateRoleDataHandler.server1");
             //判断名字是否符合要求
             if (string.IsNullOrEmpty(request.CreateName))
             {
