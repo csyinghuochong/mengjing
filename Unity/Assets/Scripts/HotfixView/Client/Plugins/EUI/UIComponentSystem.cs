@@ -492,6 +492,9 @@ namespace ET.Client
             self.VisibleWindowsDic.Clear();
             self.StackWindowsQueue.Clear();
             self.UIBaseWindowlistCached.Clear();
+            self.CurrentNpcId = 0;
+            self.CurrentNpcUI = WindowID.WindowID_Invaild;
+            self.GuideUISet = WindowID.WindowID_Invaild;
             self.OpenUIList.Clear();
         }
         
