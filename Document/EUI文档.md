@@ -109,8 +109,8 @@
    }
 ```
 
--- 选择UI物体右键点击EUI/...ScrollRect选项生成滚动组件
--- 在脚本 Loop ... Scroll Rect中PrefabName中填写Item的Prefab名字
+- 选择UI物体右键点击EUI/...ScrollRect选项生成滚动组件
+- 在脚本 Loop ... Scroll Rect中PrefabName中填写Item的Prefab名字
 
 图例：
 ![屏幕截图 2024-08-14 144618](Images\屏幕截图 2024-08-14 144618.png)
@@ -165,4 +165,47 @@
        }
    }
    
+```
+
+# ToggleGroup
+
+- Toggle 的父物体要添加 ToggleGroup
+  ![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
+
+- Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong
+
+- Toggle 组件添加引用
+
+  ![屏幕截图 2024-08-14 151717](Images\屏幕截图 2024-08-14 151717.png)
+
+```C#
+
+    public static void RegisterUIEvent(this DlgPet self)
+    {
+        // 注册点击回调
+        self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+    }
+
+    public static void ShowWindow(this DlgPet self, Entity contextData = null)
+    {
+        // 点击第一个Toggle
+        self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+    }
+
+    private static void OnFunctionSetBtn(this DlgPet self, int index)
+    {
+        // 隐藏所有子物体
+        CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
+        switch (index)
+        {
+            case 0:
+                self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
+                self.View.ES_PetList.OnUpdateUI();
+                break;
+            case 1:
+                self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
+                self.View.ES_PetHeCheng.OnUpdateUI();
+                break;
+        }
+    }
 ```
