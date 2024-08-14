@@ -392,7 +392,7 @@ namespace ET.Client
         /// <param name="self"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        private static UIBaseWindow GetUIBaseWindow(this UIComponent self,WindowID id)
+        public static UIBaseWindow GetUIBaseWindow(this UIComponent self,WindowID id)
         {
             if (self.AllWindowsDic.ContainsKey((int)id))
             {
@@ -444,6 +444,11 @@ namespace ET.Client
                 dlgMain?.ShowMainUI(true);
             }
             
+            if (self.GuideUISet.Equals(windowId))
+            {
+                self.CloseWindow(WindowID.WindowID_Guide);
+                self.GuideUISet = WindowID.WindowID_Invaild;
+            }
 
             self.HideWindow(windowId);
             self.UnLoadWindow(windowId);
