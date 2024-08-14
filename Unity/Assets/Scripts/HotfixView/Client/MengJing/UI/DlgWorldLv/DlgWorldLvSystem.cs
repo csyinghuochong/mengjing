@@ -61,25 +61,25 @@
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
 
-            if (userInfo.Lv < self.ServerInfo.WorldLv)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("低于世界等级无法兑换");
-                return;
-            }
+            // if (userInfo.Lv < self.ServerInfo.WorldLv)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("低于世界等级无法兑换");
+            //     return;
+            // }
+            //
+            // //低于20%经验无法兑换
+            // ExpConfig expCof = ExpConfigCategory.Instance.Get(userInfo.Lv);
+            // int costExp = (int)(expCof.UpExp * 0.2f);
+            // if (userInfo.Exp < costExp)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("低于20%经验无法兑换");
+            //     return;
+            // }
 
-            //低于20%经验无法兑换
-            ExpConfig expCof = ExpConfigCategory.Instance.Get(userInfo.Lv);
-            int costExp = (int)(expCof.UpExp * 0.2f);
-            if (userInfo.Exp < costExp)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("低于20%经验无法兑换");
-                return;
-            }
-
-            int sendGold = 10000 + expCof.RoseGoldPro * 10;
+            int sendGold = 10000;/// + expCof.RoseGoldPro * 10;
             using (zstring.Block())
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "兑换金币", zstring.Format("是否消耗{0}经验兑换{1}金币", costExp, sendGold),
+                PopupTipHelp.OpenPopupTip(self.Root(), "兑换金币", zstring.Format("是否消耗{0}经验兑换{1}金币", 1, sendGold),
                             () => { self.RequestExpToGold().Coroutine(); }, null)
                         .Coroutine();
             }

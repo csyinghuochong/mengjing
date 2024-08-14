@@ -34,7 +34,6 @@ namespace ET
                 // 功能函数写在system，收发协议写在helper
 
                 // ！！！有问题的协议！！！
-                // C2M_ExpToGoldHandler
 
                 Console.WriteLine("检测背包有可鉴定装备 直接鉴定");
                 await RobotHelper.JianDing(root);

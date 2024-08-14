@@ -340,18 +340,13 @@ namespace ET.Server
         public static void Role_AddExp(this UserInfoComponentS self, long addValue, bool notice)
         {
             Scene scene = self.Scene();
-            ServerInfoComponent serverInfoComponent = scene.GetComponent<ServerInfoComponent>();
-            if (serverInfoComponent == null)
+            if (ConfigData.ServerInfo == null)
             {
                 Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
                 return;
             }
-            if (serverInfoComponent.ServerInfo == null)
-            {
-                Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
-                return;
-            }
-            ServerInfo serverInfo = serverInfoComponent.ServerInfo;
+
+            ServerInfo serverInfo = ConfigData.ServerInfo;
 
             float expAdd = CommonHelp.GetExpAdd(self.UserInfo.Lv, serverInfo);
 

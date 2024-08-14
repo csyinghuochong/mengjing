@@ -695,10 +695,6 @@ namespace ET.Server
             request.OperateType = operateType;
             request.FubenInstanceId = scene.InstanceId;
             F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await scene.Root().GetComponent<MessageSender>().Call(fubencenterId, request);
-            if (operateType == 1)
-            { 
-                scene.GetComponent<ServerInfoComponent>().ServerInfo = response.ServerInfo;
-            }
             await ETTask.CompletedTask;
         }
     }

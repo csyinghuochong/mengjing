@@ -39,7 +39,9 @@ namespace ET
             //new ActivityTipConfig(){ OpenTime = 1516, CloseTime = 1517, Conent = "活动333" , UIType = "Main/Chat/UIChat"  },
         };
 
-
+        [StaticField]
+        public static ServerInfo ServerInfo =null;
+        
         [StaticField]
         public static bool ShowLieOpen = false;
 

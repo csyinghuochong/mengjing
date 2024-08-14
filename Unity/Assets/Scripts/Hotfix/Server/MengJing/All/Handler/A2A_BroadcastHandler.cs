@@ -18,6 +18,10 @@ namespace ET.Server
                         ConfigData.ShowLieOpen = request.LoadValue == "1";
                         Console.WriteLine($" ConfigData.ShowLieOpen:  {ConfigData.ShowLieOpen}");
                         break;
+                    case 2:  //世界等级
+                        ConfigData.ServerInfo = request.ServerInfo;
+                        Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
+                        break;
                 }
 
                 await ETTask.CompletedTask;

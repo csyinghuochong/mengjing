@@ -5,6 +5,5 @@ namespace ET.Server
     
     public class ServerInfoComponent: Entity, IAwake
     {
-        public ServerInfo ServerInfo { get; set; }
     }
 }

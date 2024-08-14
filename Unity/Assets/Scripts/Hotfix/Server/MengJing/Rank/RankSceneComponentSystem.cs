@@ -85,10 +85,25 @@ namespace ET.Server
         {
             //延迟刷新，以免有些服务器还没启动
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
-            ActorId fubenCenterId = UnitCacheHelper.GetFubenCenterId(self.Zone());
-            R2F_WorldLvUpdateRequest request = R2F_WorldLvUpdateRequest.Create();
-            request.ServerInfo = self.DBServerInfo.ServerInfo;
-            F2R_WorldLvUpdateResponse response = (F2R_WorldLvUpdateResponse)await self.Root().GetComponent<MessageSender>().Call(fubenCenterId, request);
+
+            List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < listprogress.Count; i++)
+            {
+
+                List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
+                if (processScenes.Count == 0 ) //机器人进程
+                {
+                    continue;
+                }
+
+                StartSceneConfig startSceneConfig = processScenes[0];
+                ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
+                A2A_BroadcastRequest A2A_BroadcastRequest = A2A_BroadcastRequest.Create();
+                A2A_BroadcastRequest.LoadType = 2;
+                A2A_BroadcastRequest.ServerInfo = self.DBServerInfo.ServerInfo;
+                A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
+            }
+            
         }
 
         public static void ClearRankingTrial(this RankSceneComponent self)

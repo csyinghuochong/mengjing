@@ -1030,22 +1030,6 @@ message G2M_ActivityUpdate // IMessage
 	int32 ActivityType = 1;
 }
 
-//通知其他服务进程刷新肝帝
-//ResponseType F2R_WorldLvUpdateResponse
-message R2F_WorldLvUpdateRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	ServerInfo ServerInfo = 1;
-}
-
-message F2R_WorldLvUpdateResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 //广播
 //ResponseType A2A_BroadcastResponse
 message A2A_BroadcastRequest // IRequest
@@ -1055,6 +1039,7 @@ message A2A_BroadcastRequest // IRequest
 
 	int32 LoadType = 3;
 	string LoadValue = 4;
+	ServerInfo ServerInfo = 5;
 }
 
 message A2A_BroadcastResponse // IResponse
@@ -1434,26 +1419,6 @@ message F2M_FubenSceneIdResponse // IResponse
 	ActorId FubenActorId = 3;
 	int32 Camp = 4;
 	int32 Position = 5;
-}
-
-
-//通知其他服务进程刷新肝帝
-//ResponseType M2F_ServerInfoUpdateResponse
-message F2M_ServerInfoUpdateRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	ServerInfo ServerInfo = 1;
-
-	int32 operareType = 2;
-	string operateValue = 3;
-}
-
-message M2F_ServerInfoUpdateResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
 }
 
 //ResponseType P2M_PaiMaiAuctionJoinResponse

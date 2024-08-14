@@ -204,7 +204,6 @@ namespace ET.Server
             mapComponent.SetMapInfo(sceneConfig.MapType, sceneConfig.Id, 0);
             mapComponent.NavMeshId = sceneConfig.MapID;
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
-            fubnescene.GetComponent<ServerInfoComponent>().ServerInfo = self.ServerInfo;
             YeWaiRefreshComponent yeWaiRefreshComponen = fubnescene.AddComponent<YeWaiRefreshComponent>();
             yeWaiRefreshComponen.SceneId = sceneConfig.Id;
 
@@ -479,7 +478,6 @@ namespace ET.Server
                 MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
                 mapComponent.SetMapInfo(sceneConfigs[i].MapType, sceneConfigs[i].Id, 0);
                 mapComponent.NavMeshId = sceneConfigs[i].MapID;
-                fubnescene.GetComponent<ServerInfoComponent>().ServerInfo = self.ServerInfo;
                 YeWaiRefreshComponent yeWaiRefreshComponen = fubnescene.AddComponent<YeWaiRefreshComponent>();
                 yeWaiRefreshComponen.SceneId = sceneConfigs[i].Id;
 

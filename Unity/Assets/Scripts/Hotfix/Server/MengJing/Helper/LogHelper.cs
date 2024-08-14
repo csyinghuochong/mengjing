@@ -399,7 +399,7 @@ namespace ET.Server
             }
 
             //等级线
-            ServerInfo serverInfo = unit.Scene().GetComponent<ServerInfoComponent>().ServerInfo;
+            ServerInfo serverInfo = ConfigData.ServerInfo;
             if (userInfo.UserInfo.Lv > serverInfo.WorldLv) 
             {
                 ZuobiInfo("玩家等级超过服务器等级限制:" + userInfo.UserInfo.Lv + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));

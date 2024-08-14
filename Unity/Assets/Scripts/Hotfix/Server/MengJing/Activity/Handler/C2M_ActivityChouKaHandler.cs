@@ -33,7 +33,7 @@ namespace ET.Server
             ServerInfoComponent serverInfoComponent = unit.Scene().GetComponent<ServerInfoComponent>();
             if (serverInfoComponent != null)
             {
-                dropId = serverInfoComponent.ServerInfo.ChouKaDropId;
+                dropId = ConfigData.ServerInfo.ChouKaDropId;
             }
 
             List<RewardItem> rewardItems = new List<RewardItem>();  
