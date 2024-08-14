@@ -191,5 +191,6 @@ namespace ET.Client
 		WindowID_UnionJingXuan,
 		WindowID_CommonProperty,
 		WindowID_Guide,
+		WindowID_TreasureOpen,
 	}
 }
