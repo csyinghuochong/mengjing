@@ -14,11 +14,11 @@ namespace ET.Server
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
-            root.AddComponent<PlayerComponent>();
-            root.AddComponent<GateSessionKeyComponent>();
+            root.AddComponent<DBManagerComponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
-            root.AddComponent<DBManagerComponent>();
+            root.AddComponent<PlayerComponent>();
+            root.AddComponent<GateSessionKeyComponent>();
             
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get((int)root.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
