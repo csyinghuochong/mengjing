@@ -66,7 +66,7 @@ namespace ET.Client
 
         public static void OnImg_buttonButton(this DlgTaskGet self)
         {
-            //UIHelper.Remove(self.ZoneScene(), UIType.UIGuide);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Guide);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 

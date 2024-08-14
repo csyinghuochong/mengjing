@@ -115,7 +115,7 @@ namespace ET.Client
             }
 
             camera.enabled = false;
-            // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UIMapBig);
+            self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, WindowID.WindowID_MapBig);
         }
 
         public static void ShowStallArea(this DlgMapBig self)
@@ -160,36 +160,34 @@ namespace ET.Client
 
         public static async ETTask RequestJiaYuanInfo(this DlgMapBig self)
         {
-            // JiaYuanComponent jiaYuanComponent = self.ZoneScene().GetComponent<JiaYuanComponent>();
-            // C2M_JiaYuanPetPositionRequest request = new C2M_JiaYuanPetPositionRequest() { MasterId = jiaYuanComponent.MasterId };
-            // M2C_JiaYuanPetPositionResponse response =
-            //         (M2C_JiaYuanPetPositionResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // if (self.IsDisposed)
-            // {
-            //     return;
-            // }
-            //
-            // for (int i = 0; i < response.PetList.Count; i++)
-            // {
-            //     UnitInfo unitInfo = response.PetList[i];
-            //     string name = string.Empty;
-            //     if (unitInfo.Type == UnitType.Pet)
-            //     {
-            //         PetConfig petConfig = PetConfigCategory.Instance.Get(unitInfo.ConfigId);
-            //         name = petConfig.PetName;
-            //     }
-            //
-            //     if (unitInfo.Type == UnitType.Monster)
-            //     {
-            //         MonsterConfig petConfig = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId);
-            //         name = petConfig.MonsterName;
-            //     }
-            //
-            //     self.InstantiateIcon(unitInfo.Type == UnitType.Pet? self.View.EG_jiayuanPetRectTransform.gameObject
-            //                 : self.View.EG_jiayuanRubshRectTransform.gameObject,
-            //         new Vector3(unitInfo.X, unitInfo.Z, 0),
-            //         name);
-            // }
+            JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
+            M2C_JiaYuanPetPositionResponse response = await JiaYuanNetHelper.JiaYuanPetPositionRequest(self.Root(), jiaYuanComponent.MasterId);
+
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            for (int i = 0; i < response.PetList.Count; i++)
+            {
+                UnitInfo unitInfo = response.PetList[i];
+                string name = string.Empty;
+                if (unitInfo.Type == UnitType.Pet)
+                {
+                    PetConfig petConfig = PetConfigCategory.Instance.Get(unitInfo.ConfigId);
+                    name = petConfig.PetName;
+                }
+
+                if (unitInfo.Type == UnitType.Monster)
+                {
+                    MonsterConfig petConfig = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId);
+                    name = petConfig.MonsterName;
+                }
+
+                self.InstantiateIcon(
+                    unitInfo.Type == UnitType.Pet ? self.View.EG_jiayuanPetRectTransform.gameObject
+                            : self.View.EG_jiayuanRubshRectTransform.gameObject, new Vector3(unitInfo.Position.x, unitInfo.Position.z, 0), name);
+            }
 
             await ETTask.CompletedTask;
         }

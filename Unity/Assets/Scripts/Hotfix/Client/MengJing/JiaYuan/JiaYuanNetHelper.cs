@@ -253,5 +253,14 @@ namespace ET.Client
             M2C_JiaYuanVisitListResponse response = (M2C_JiaYuanVisitListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanPetPositionResponse> JiaYuanPetPositionRequest(Scene root, long masterId)
+        {
+            C2M_JiaYuanPetPositionRequest request = C2M_JiaYuanPetPositionRequest.Create();
+            request.MasterId = masterId;
+
+            M2C_JiaYuanPetPositionResponse response = (M2C_JiaYuanPetPositionResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

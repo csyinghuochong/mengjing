@@ -55,7 +55,7 @@ namespace ET.Client
         {
         }
 
-        public static void OnTrigger(this GuideComponent self, int triggerType, string triggeParasm)
+        public static void OnTrigger(this GuideComponent self, int triggerType, WindowID triggeParasm)
         {
             if (self.GuideInfoList.Count == 0)
             {
@@ -68,7 +68,7 @@ namespace ET.Client
             {
                 GuideConfig guideConfig = GuideConfigCategory.Instance.Get(item.Value);
                 //Log.Debug($"GuideComponent_OnTrigger : {guideConfig.Id}  {triggeParasm}");
-                if (triggerType != guideConfig.TrigerType || triggeParasm != guideConfig.TrigerParams)
+                if (triggerType != guideConfig.TrigerType || triggeParasm != FunctionUI.GetUIPath(guideConfig.TrigerParams))
                 {
                     continue;
                 }
