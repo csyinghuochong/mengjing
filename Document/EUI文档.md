@@ -170,13 +170,14 @@
 # ToggleGroup
 
 - Toggle 的父物体要添加 ToggleGroup
-  ![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
+
+![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
 
 - Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong
 
 - Toggle 组件添加引用
 
-  ![屏幕截图 2024-08-14 151717](Images\屏幕截图 2024-08-14 151717.png)
+![屏幕截图 2024-08-14 151717](Images\屏幕截图 2024-08-14 151717.png)
 
 ```C#
 
