@@ -23,10 +23,10 @@ namespace ET.Client
         {
             CommonViewHelper.SetParent(self.View.uiTransform.gameObject, gameObject);
 
-            if (self.guidCof != null)
+            if (self.GuideConfig != null)
             {
                 self.View.E_ShowLabSetImage.gameObject.SetActive(true);
-                self.View.E_ShowLabText.text = self.guidCof.Text;
+                self.View.E_ShowLabText.text = self.GuideConfig.Text;
             }
             else
             {

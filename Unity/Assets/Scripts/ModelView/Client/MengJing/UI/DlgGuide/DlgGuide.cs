@@ -5,6 +5,6 @@
     {
         public DlgGuideViewComponent View { get => this.GetComponent<DlgGuideViewComponent>(); }
 
-        public GuideConfig guidCof;
+        public GuideConfig GuideConfig { get; set; }
     }
 }

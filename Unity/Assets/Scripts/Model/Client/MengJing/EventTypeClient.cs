@@ -490,4 +490,10 @@ namespace ET.Client
     {
         public M2C_UnionRaceInfoResult m2C_Battle;
     }
+
+    public struct ShowGuide
+    {
+        public int GuideId;
+        public int GroupId;
+    }
 }

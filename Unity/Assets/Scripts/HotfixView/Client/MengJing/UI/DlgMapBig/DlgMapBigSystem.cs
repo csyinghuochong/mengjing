@@ -556,12 +556,10 @@ namespace ET.Client
         public static void OnBtn_CloseButton(this DlgMapBig self)
         {
             DlgGuide dlgGuide = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgGuide>();
-            // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIGuide);
-            // if (ui != null)
-            // {
-            //     UIGuideComponent uIGuideComponent = ui.GetComponent<UIGuideComponent>();
-            //     self.ZoneScene().GetComponent<GuideComponent>().OnNext(uIGuideComponent.guidCof.GroupId);
-            // }
+            if (dlgGuide != null)
+            {
+                self.Root().GetComponent<GuideComponent>().OnNext(dlgGuide.GuideConfig.GroupId);
+            }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MapBig);
         }
@@ -676,6 +674,7 @@ namespace ET.Client
                 self.PathPointList[i].transform.localPosition = self.InvisiblePosition;
             }
         }
+
         public static void OnRawImageButton(this DlgMapBig self)
         {
         }
