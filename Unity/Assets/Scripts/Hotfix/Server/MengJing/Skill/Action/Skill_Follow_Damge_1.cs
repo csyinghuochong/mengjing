@@ -23,7 +23,7 @@
         public void GetTheUnitTarget(SkillS skillS)
         {
             //寻找最近的可攻击对象
-            skillS.TheUnitTarget = GetTargetHelp.GetNearestEnemyByPosition(skillS.TheUnitFrom, skillS.BulletUnit.Position, 10);
+            skillS.TheUnitTarget = GetTargetHelpS.GetNearestEnemyByPosition(skillS.TheUnitFrom, skillS.BulletUnit.Position, 10);
         }
 
         public override void OnUpdate(SkillS skillS, int updateMode)

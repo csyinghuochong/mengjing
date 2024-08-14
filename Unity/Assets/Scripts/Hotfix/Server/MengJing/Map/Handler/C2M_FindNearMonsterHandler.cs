@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_FindNearMonsterRequest request, M2C_FindNearMonsterResponse response)
         {
-            Unit listUnit = GetTargetHelp.GetNearestEnemy(unit,  50f, true);
+            Unit listUnit = GetTargetHelpS.GetNearestEnemy(unit,  50f, true);
             if (listUnit !=null)
             {
                 response.IfFindStatus = true;

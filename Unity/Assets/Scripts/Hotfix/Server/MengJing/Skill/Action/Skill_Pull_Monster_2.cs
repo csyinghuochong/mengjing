@@ -33,7 +33,7 @@ namespace ET.Server
 
         public void UpdatePullPlayer(SkillS skillS)
         {
-            List<Unit> players = GetTargetHelp.GetEnemyUnit(skillS.TheUnitFrom, UnitType.Player, skillS.NowPosition, (float)(2f * skillS.SkillConf.DamgeRange[0]));
+            List<Unit> players = GetTargetHelpS.GetEnemyUnit(skillS.TheUnitFrom, UnitType.Player, skillS.NowPosition, (float)(2f * skillS.SkillConf.DamgeRange[0]));
             for (int i = players.Count - 1; i >= 0; i--)
             {
                 Unit unit = players[i];
@@ -82,7 +82,7 @@ namespace ET.Server
 
         public void UpdatePullMonster(SkillS skillS)
         {
-            List<Unit> monsters = GetTargetHelp.GetEnemyMonsters(skillS.TheUnitFrom, skillS.NowPosition, (float)(2f *skillS.SkillConf.DamgeRange[0]));
+            List<Unit> monsters = GetTargetHelpS.GetEnemyMonsters(skillS.TheUnitFrom, skillS.NowPosition, (float)(2f *skillS.SkillConf.DamgeRange[0]));
             for (int i = monsters.Count - 1; i >= 0; i--)
             {
                 Unit unit = monsters[i];

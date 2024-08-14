@@ -41,7 +41,7 @@ namespace ET.Server
             //玩家死亡，怪物技能清空
             if (defendUnit.Type == UnitType.Player && mainAttack != null && mainAttack.Type == UnitType.Monster)
             {
-                Unit nearest = GetTargetHelp.GetNearestEnemy(mainAttack, mainAttack.GetComponent<AIComponent>().GetActRange());
+                Unit nearest = GetTargetHelpS.GetNearestEnemy(mainAttack, mainAttack.GetComponent<AIComponent>().GetActRange());
                 if (nearest == null)
                 {
                     mainAttack.GetComponent<AIComponent>().ChangeTarget(0);

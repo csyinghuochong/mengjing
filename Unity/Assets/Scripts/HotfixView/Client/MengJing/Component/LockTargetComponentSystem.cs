@@ -157,7 +157,7 @@ namespace ET.Client
                 if (targetUnit == null || (PositionHelper.Distance2D(targetUnit.Position, main.Position) + 4) > skillConfig.SkillRangeSize)
                 {
                     //获取当前最近的单位
-                    Unit enemy = UnitHelper.GetNearestEnemy_Client(main, (float)skillConfig.SkillRangeSize + 4);
+                    Unit enemy = GetTargetHelperc.GetNearestEnemy_Client(main, (float)skillConfig.SkillRangeSize + 4);
                     //设置目标
                     if (targetUnit == null && enemy != null)
                     {

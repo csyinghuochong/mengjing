@@ -22,7 +22,7 @@ namespace ET
 
         public string MessageValue;
 
-        public float3 TargetPosition;
+        public float3 TargetPosition{ get; set; }
 
         public RobotConfig RobotConfig;
 

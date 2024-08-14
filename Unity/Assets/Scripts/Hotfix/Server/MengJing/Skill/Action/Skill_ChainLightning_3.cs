@@ -52,7 +52,7 @@ namespace ET.Server
 
             if (skillS.HurtIds.Count == 0)
             {
-                skillS.TheUnitTarget = GetTargetHelp.GetNearestEnemy(skillS.TheUnitFrom, (float)skillS.SkillConf.DamgeRange[0], true);
+                skillS.TheUnitTarget = GetTargetHelpS.GetNearestEnemy(skillS.TheUnitFrom, (float)skillS.SkillConf.DamgeRange[0], true);
                 if (skillS.TheUnitTarget == null || skillS.TheUnitTarget.IsDisposed)
                 {
                     skillS.SetSkillState(SkillState.Finished);
@@ -85,7 +85,7 @@ namespace ET.Server
             lastTarget = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(skillS.HurtIds[^1]);
             // this.OnCollisionUnit(lastTarget);
 
-            skillS.TheUnitTarget = GetTargetHelp.GetNearestUnit(skillS.TheUnitFrom, lastTarget.Position, (float)skillS.SkillConf.DamgeRange[0], skillS.HurtIds);
+            skillS.TheUnitTarget = GetTargetHelpS.GetNearestUnit(skillS.TheUnitFrom, lastTarget.Position, (float)skillS.SkillConf.DamgeRange[0], skillS.HurtIds);
             if (skillS.TheUnitTarget == null)
             {
                 BroadcastSkill(skillS, lastTarget.Id, lastTarget.Id, 0f, 0f, 0f);

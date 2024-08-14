@@ -20,7 +20,7 @@ namespace ET.Server
             long instanceId = aiComponent.InstanceId;
             for (int i = 0; i < 100000; ++i)
             {
-                Unit target = GetTargetHelp.GetNearestEnemy(unit, (float)skillConfig.SkillRangeSize, true);
+                Unit target = GetTargetHelpS.GetNearestEnemy(unit, (float)skillConfig.SkillRangeSize, true);
 
                 //检测目标是否在技能范围
                 if (!remove &&  target != null )
