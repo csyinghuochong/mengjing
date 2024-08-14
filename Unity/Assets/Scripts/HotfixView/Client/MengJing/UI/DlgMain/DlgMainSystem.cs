@@ -1606,10 +1606,9 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
 
             if (sceneTypeEnum > SceneTypeEnum.MainCityScene)
-            {       
+            {
                 MoveHelper.Stop(self.Root());
             }
-
         }
 
         public static void OnUpdateUserData(this DlgMain self, string updateType)
@@ -1656,38 +1655,50 @@ namespace ET.Client
                     break;
 
                 case UserDataType.UnionContri:
-                    // if (UIHelper.GetUI(self.ZoneScene(), UIType.UITreasureOpen) != null)
-                    // {
-                    //     return;
-                    // }
-                    //
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 家族捐献");
-                    // }
-                    //
-                    // if (int.Parse(updateValue) < 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 家族捐献");
-                    // }
+                    if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTreasureOpen>() != null)
+                    {
+                        return;
+                    }
+
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 家族捐献", updateValue));
+                        }
+                    }
+
+                    if (int.Parse(updateValue) < 0)
+                    {
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 家族捐献", int.Parse(updateValue) * -1));
+                        }
+                    }
 
                     break;
 
                 case UserDataType.Gold:
-                    // if (UIHelper.GetUI(self.ZoneScene(), UIType.UITreasureOpen) != null)
-                    // {
-                    //     return;
-                    // }
-                    //
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 金币");
-                    // }
-                    //
-                    // if (int.Parse(updateValue) < 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 金币");
-                    // }
+                    if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTreasureOpen>() != null)
+                    {
+                        return;
+                    }
+
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 金币", updateValue));
+                        }
+                    }
+
+                    if (int.Parse(updateValue) < 0)
+                    {
+                        using (zstring.Block())
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("消耗{0} 金币", int.Parse(updateValue) * -1));
+                        }
+                    }
 
                     break;
                 case UserDataType.WeiJingGold:
