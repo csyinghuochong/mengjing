@@ -252,7 +252,29 @@ namespace ET
 
                 Console.WriteLine("去封印之塔");
                 await RobotHelper.MoveToNpc(root, 20000041);
+                
+                
+                Console.WriteLine("活动 签到");
+                await RobotHelper.ActivitySingIn(root);
 
+                Console.WriteLine("活动 月卡");
+                await RobotHelper.YueKa(root);
+
+                Console.WriteLine("活动 探险家奖励");
+                await RobotHelper.ActivityMaoXian(root);
+
+                Console.WriteLine("活动 令牌领取");
+                await RobotHelper.ActivityToken(root);
+                
+                Console.WriteLine("活动 每日特惠");
+                await RobotHelper.ActivityTeHui(root);
+                
+                
+                
+                
+                Console.WriteLine("活动 拍卖会");
+                await RobotHelper.PaiMaiAuction(root);
+                
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
@@ -264,21 +286,6 @@ namespace ET
 
                 Console.WriteLine("活动 登录奖励");
                 await RobotHelper.ActivityLogin(root);
-
-                Console.WriteLine("活动 令牌领取");
-                await RobotHelper.ActivityToken(root);
-
-                Console.WriteLine("活动 签到");
-                await RobotHelper.ActivitySingIn(root);
-
-                Console.WriteLine("活动 拍卖会");
-                await RobotHelper.PaiMaiAuction(root);
-
-                Console.WriteLine("活动 月卡");
-                await RobotHelper.YueKa(root);
-
-                Console.WriteLine("活动 探险家奖励");
-                await RobotHelper.ActivityMaoXian(root);
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);

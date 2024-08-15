@@ -2505,5 +2505,19 @@ namespace ET.Client
 
             await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
         }
+
+        public static async ETTask ActivityTeHui(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            foreach (int activityId in activityComponent.DayTeHui)
+            {
+                if (!activityComponent.ActivityReceiveIds.Contains(activityId))
+                {
+                    ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
+                    await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
+                }
+            }
+        }
     }
 }

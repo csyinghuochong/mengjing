@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ActivityTeHui))]
-    [FriendOfAttribute(typeof (ES_ActivityTeHui))]
+    [EntitySystemOf(typeof(ES_ActivityTeHui))]
+    [FriendOfAttribute(typeof(ES_ActivityTeHui))]
     public static partial class ES_ActivityTeHuiSystem
     {
         [EntitySystem]
@@ -31,11 +31,6 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_ActivityTeHui self)
         {
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            // 测试数据
-            if (activityComponent.DayTeHui.Count == 0)
-            {
-                activityComponent.DayTeHui = DayTeHuiHelper.GetDayTeHuiList(2, 60);
-            }
 
             self.AddUIScrollItems(ref self.ScrollItemActivityTeHuiItems, activityComponent.DayTeHui.Count);
             self.E_ActivityTeHuiItemsLoopHorizontalScrollRect.SetVisible(true, activityComponent.DayTeHui.Count);
