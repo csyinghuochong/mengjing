@@ -226,5 +226,8 @@
    }
    
 ```
+
 # EUITool
+
 1. Button自动注册工具：选中Dlg或ES物体，右键 SpawnEUICode-UI组件自动生成(为Button自动注册方法)
+2. Button自动注册工具（批量）：选中文件夹，右键 EUITool/所有UI组件自动生成(为文件夹或Prefab中的所有Button自动注册方法)
