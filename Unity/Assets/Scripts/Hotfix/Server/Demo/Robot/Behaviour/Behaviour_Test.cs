@@ -258,6 +258,9 @@ namespace ET
 
                 Console.WriteLine("活动 等级奖励");
                 await RobotHelper.ZhanQuLevel(root);
+                
+                Console.WriteLine("活动 战斗力奖励");
+                await RobotHelper.ZhanQuCombat(root);
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
