@@ -9,7 +9,7 @@
 
 ![屏幕截图 2024-08-14 151602](Images\屏幕截图 2024-08-14 151602.png)
 
-- Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong
+- Toggle 的子物体必须有 Background/XuanZhong 和 Background/WeiXuanZhong （选中时激活XuanZhong，未选中时激活WeiXuanZhong）
 
 - Toggle 组件添加引用
 
