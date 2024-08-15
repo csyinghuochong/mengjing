@@ -17,7 +17,7 @@ namespace ET.Client
         public List<int> SkillList = new();
         public List<int> SkillCDs = new();
         public readonly C2M_SkillCmd c2mSkillCmd = new();
-        public long CDTime = 800;
+        public long CDTime{ get; set; } = 800;
         public long CDEndTime;
 
         public long MoveAttackTime { get; set; } = 0;

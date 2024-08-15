@@ -6,7 +6,7 @@ namespace ET.Client
     public static class GetTargetHelperc
     {
         //己方位置
-        public static Unit GetNearestEnemy_Client(Unit main, float maxdis)
+        public static Unit GetNearestEnemy(Unit main, float maxdis)
         {
             Unit nearest = null;
             float distance = -1f;

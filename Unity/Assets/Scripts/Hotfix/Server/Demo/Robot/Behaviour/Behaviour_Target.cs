@@ -1,4 +1,5 @@
 using System;
+using ET.Client;
 using Unity.Mathematics;
 using UnitHelper = ET.Client.UnitHelper;
 
@@ -26,16 +27,16 @@ namespace ET
             //Console.WriteLine("Behaviour_Battle");
             while (true)
             {
-                // Unit target = GetTargetHelpC.GetNearestEnemy(unit, 10);
-                // if (target!=null && aiComponent.HaveHaviour(BehaviourType.Behaviour_ZhuiJi))
-                // {
-                //     aiComponent.TargetID = target.Id;
-                //     aiComponent.ChangeBehaviour(BehaviourType.Behaviour_ZhuiJi);
-                //     return;
-                // }
+                Unit target = GetTargetHelperc.GetNearestEnemy(unit, 10);
+                if (target!=null && aiComponent.HaveHaviour(BehaviourType.Behaviour_ZhuiJi))
+                {
+                    aiComponent.TargetID = target.Id;
+                    aiComponent.ChangeBehaviour(BehaviourType.Behaviour_ZhuiJi);
+                    return;
+                }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                await timerComponent.WaitAsync(20000, cancellationToken);
+                await timerComponent.WaitAsync(1000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     Log.Debug("Behaviour_Battle: Exit1");
