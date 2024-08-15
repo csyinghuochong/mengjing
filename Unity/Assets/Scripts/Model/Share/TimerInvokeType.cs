@@ -87,5 +87,6 @@
         public const int JiaYuanPurchaseTimer = 354;
         public const int PetQuickFightTimer = 355;
         public const int JiaYuanPlanTimer = 356;
+        public const int UIDigTreasureTimer = 357;
     }
 }

@@ -329,6 +329,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_DigTreasure))]
     [FriendOf(typeof(ES_MainActivityTip))]
     [FriendOf(typeof(Scroll_Item_MainTeamItem))]
     [FriendOf(typeof(ES_RoleHead))]
@@ -435,6 +436,7 @@ namespace ET.Client
             self.View.ES_OpenBox.uiTransform.gameObject.SetActive(false);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
             self.View.ES_MainActivityTip.uiTransform.gameObject.SetActive(false);
+            self.View.ES_DigTreasure.uiTransform.gameObject.SetActive(false);
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 

@@ -8,7 +8,7 @@
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(args.BagInfo.ItemID);
             if (itemConfig.ItemSubType == 113)
             {
-                // scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.UIDigTreasureComponent.OnInitUI(args.BagInfo);
+                scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_DigTreasure.OnInitUI(args.BagInfo);
             }
 
             if (itemConfig.ItemSubType == 127)
