@@ -2584,5 +2584,10 @@ namespace ET.Client
                 await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
             }
         }
+        
+        public static async ETTask RechargeRequest(Scene root)
+        {
+            await ETTask.CompletedTask;
+        }
     }
 }
