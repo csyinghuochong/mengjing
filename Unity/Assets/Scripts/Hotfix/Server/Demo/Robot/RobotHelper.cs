@@ -2460,5 +2460,25 @@ namespace ET.Client
 
             await ActivityNetHelper.PaiMaiAuctionPrice(root, price);
         }
+
+        public static async ETTask YueKa(Scene root)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0)
+            {
+                if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaAward) == 1)
+                {
+                    //当天已领取
+                    // "当天奖励已领取！"
+                    return;
+                }
+
+                await ActivityNetHelper.YueKaReward(root);
+            }
+            else
+            {
+                await ActivityNetHelper.YueKaOpen(root);
+            }
+        }
     }
 }
