@@ -2386,5 +2386,58 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask ActivitySingIn(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            List<ActivityConfig> showActivityConfigs = new List<ActivityConfig>();
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            foreach (ActivityConfig activityConfig in activityConfigs)
+            {
+                if (activityConfig.ActivityType != 23)
+                {
+                    continue;
+                }
+
+                if (activityComponent.ActivityReceiveIds.Contains(activityConfig.Id))
+                {
+                    await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
+                }
+
+                showActivityConfigs.Add(activityConfig);
+            }
+
+            int curDay = 0;
+            long serverNow = TimeHelper.ServerNow();
+            bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
+            curDay = activityComponent.TotalSignNumber;
+            if (activityComponent.TotalSignNumber < 30 && !isSign)
+            {
+                curDay++;
+            }
+
+            if (activityComponent.TotalSignNumber == 30)
+            {
+                // "已领完全部奖励！"
+                return;
+            }
+
+            if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
+            {
+                // "当日奖励已领取！"
+                return;
+            }
+
+            int ActivityId = showActivityConfigs[curDay - 1].Id;
+
+            if (activityComponent.ActivityReceiveIds.Contains(ActivityId))
+            {
+                // "当日奖励已领取！"
+                return;
+            }
+
+            await ActivityNetHelper.ActivityReceive(root, 23, ActivityId);
+        }
     }
 }
