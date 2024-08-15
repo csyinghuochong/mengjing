@@ -2305,5 +2305,24 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask ActivityLogin(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            foreach (ActivityConfig activityConfig in activityConfigs)
+            {
+                if (activityConfig.ActivityType != 31)
+                {
+                    continue;
+                }
+
+                if (activityComponent.ActivityReceiveIds.Contains(activityConfig.Id))
+                {
+                    await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
+                }
+            }
+        }
     }
 }
