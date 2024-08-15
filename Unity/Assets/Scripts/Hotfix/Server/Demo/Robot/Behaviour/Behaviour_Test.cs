@@ -265,6 +265,9 @@ namespace ET
                 Console.WriteLine("活动 登录奖励");
                 await RobotHelper.ActivityLogin(root);
 
+                Console.WriteLine("活动 令牌领取");
+                await RobotHelper.ActivityToken(root);
+
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())

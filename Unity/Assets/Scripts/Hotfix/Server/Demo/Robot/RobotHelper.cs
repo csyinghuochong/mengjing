@@ -2324,5 +2324,67 @@ namespace ET.Client
                 }
             }
         }
+
+        public static async ETTask ActivityToken(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            {
+                // 背包已满！
+                return;
+            }
+
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            foreach (ActivityConfig activityConfig in activityConfigs)
+            {
+                if (activityConfig.ActivityType != 24)
+                {
+                    continue;
+                }
+
+                int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
+
+                if (userInfoComponent.UserInfo.Lv < int.Parse(activityConfig.Par_1))
+                {
+                    // "等级不足！"
+                    break;
+                }
+
+                List<TokenRecvive> zhanQuTokenRecvives = activityComponent.QuTokenRecvive;
+
+                if (selfRechage >= 298)
+                {
+                    for (int i = 0; i < zhanQuTokenRecvives.Count; i++)
+                    {
+                        if (zhanQuTokenRecvives[i].ActivityId == activityConfig.Id && zhanQuTokenRecvives[i].ReceiveIndex == 3)
+                        {
+                            await ActivityNetHelper.ActivityReceive(root, 24, activityConfig.Id, 3);
+                        }
+                    }
+                }
+
+                if (selfRechage >= 98)
+                {
+                    for (int i = 0; i < zhanQuTokenRecvives.Count; i++)
+                    {
+                        if (zhanQuTokenRecvives[i].ActivityId == activityConfig.Id && zhanQuTokenRecvives[i].ReceiveIndex == 2)
+                        {
+                            await ActivityNetHelper.ActivityReceive(root, 24, activityConfig.Id, 2);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < zhanQuTokenRecvives.Count; i++)
+                {
+                    if (zhanQuTokenRecvives[i].ActivityId == activityConfig.Id && zhanQuTokenRecvives[i].ReceiveIndex == 1)
+                    {
+                        await ActivityNetHelper.ActivityReceive(root, 24, activityConfig.Id, 1);
+                    }
+                }
+            }
+        }
     }
 }
