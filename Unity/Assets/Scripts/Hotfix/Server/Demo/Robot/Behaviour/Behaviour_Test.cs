@@ -284,7 +284,10 @@ namespace ET
 
                 Console.WriteLine("活动 战斗力奖励");
                 await RobotHelper.ZhanQuCombat(root);
-
+                
+                Console.WriteLine("活动 新年集字");
+                await RobotHelper.NewYearCollectionWord(root);
+                
                 Console.WriteLine("活动 登录奖励");
                 await RobotHelper.ActivityLogin(root);
 

@@ -2553,5 +2553,36 @@ namespace ET.Client
                 await ActivityNetHelper.SingleRechargeReward(root, key);
             }
         }
+
+        public static async ETTask NewYearCollectionWord(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < activityConfigs.Count; i++)
+            {
+                if (activityConfigs[i].ActivityType != 32)
+                {
+                    continue;
+                }
+
+                ActivityConfig activityConfig = activityConfigs[i];
+
+                bool receiveMax = ActivityHelper.HaveReceiveTimes(activityComponent.ActivityReceiveIds, activityConfig.Id);
+                if (!receiveMax)
+                {
+                    // "已达到最大领取上限！"
+                    continue;
+                }
+
+                if (!root.GetComponent<BagComponentC>().CheckNeedItem(activityConfig.Par_2))
+                {
+                    // "道具不足！"
+                    continue;
+                }
+
+                await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
+            }
+        }
     }
 }
