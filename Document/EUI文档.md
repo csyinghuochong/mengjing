@@ -2,6 +2,7 @@
 
 - 需要绑定的UI组件（Image、Button等）以E_开头
 - 需要绑定的空组件（没有添加任何UI组件）以EG_开头
+- 回调方法命名 On + 名字(不要E_)
 
 # ToggleGroup
 
