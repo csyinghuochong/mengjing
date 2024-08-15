@@ -2439,5 +2439,26 @@ namespace ET.Client
 
             await ActivityNetHelper.ActivityReceive(root, 23, ActivityId);
         }
+
+        public static async ETTask PaiMaiAuction(Scene root)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            P2C_PaiMaiAuctionInfoResponse response = await ActivityNetHelper.PaiMaiAuctionInfo(root, unit.Id);
+            if (response.AuctionItem == 0)
+            {
+                // "已结束";
+                return;
+            }
+
+            int price = (int)(response.AuctionPrice * 1.1f);
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            if (userInfo.Gold < price)
+            {
+                // "金币不足！"
+                return;
+            }
+
+            await ActivityNetHelper.PaiMaiAuctionPrice(root, price);
+        }
     }
 }
