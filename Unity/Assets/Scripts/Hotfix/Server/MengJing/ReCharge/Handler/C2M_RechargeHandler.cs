@@ -8,6 +8,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RechargeRequest request, M2C_RechargeResponse response)
         {
+            // 测试
+            RechargeHelp.SendDiamondToUnit(unit, request.RechargeNumber, "版号服");
+            await ETTask.CompletedTask;
+            return;
+            
+            /*
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, unit.Id))
             {
                 ActorId dbCacheId = UnitCacheHelper.GetLoginCenterId();
@@ -85,6 +91,7 @@ namespace ET.Server
                 response.Message = r2M_RechargeResponse.Message;
             }
             await ETTask.CompletedTask;
+            */
         }
     }
 }
