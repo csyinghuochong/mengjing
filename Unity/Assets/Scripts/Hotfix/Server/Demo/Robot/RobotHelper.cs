@@ -2480,5 +2480,30 @@ namespace ET.Client
                 await ActivityNetHelper.YueKaOpen(root);
             }
         }
+
+        public static async ETTask ActivityMaoXian(Scene root)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            int rechargeNum = unit.GetMaoXianExp();
+            int curActivityId = activityComponent.GetCurActivityId(rechargeNum);
+
+            ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(curActivityId);
+            int needNumber = int.Parse(activityConfig.Par_2);
+            if (rechargeNum < needNumber)
+            {
+                // "冒险家积分不足！"
+                return;
+            }
+
+            if (activityComponent.ActivityReceiveIds.Contains(curActivityId))
+            {
+                // "当前奖励已领取！"
+                return;
+            }
+
+            await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
+        }
     }
 }
