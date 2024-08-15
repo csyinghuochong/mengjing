@@ -124,5 +124,14 @@
 
             return response;
         }
+
+        public static async ETTask<M2C_RechargeResponse> RechargeRequest(Scene root, string riskControlInfo, int rechargeNumber, long payType)
+        {
+            C2M_RechargeRequest request = new() { RiskControlInfo = riskControlInfo, RechargeNumber = rechargeNumber, PayType = payType };
+
+            M2C_RechargeResponse response = (M2C_RechargeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

@@ -2584,10 +2584,14 @@ namespace ET.Client
                 await ActivityNetHelper.ActivityReceive(root, activityConfig.ActivityType, activityConfig.Id);
             }
         }
-        
+
         public static async ETTask RechargeRequest(Scene root)
         {
-            await ETTask.CompletedTask;
+            List<int> recharge = new List<int>() { 6, 30, 50, 98, 198, 298, 298, 488, 648 };
+
+            int index = RandomHelper.RandomNumber(0, recharge.Count);
+
+            await UserInfoNetHelper.RechargeRequest(root, "", recharge[index], PayTypeEnum.AliPay);
         }
     }
 }

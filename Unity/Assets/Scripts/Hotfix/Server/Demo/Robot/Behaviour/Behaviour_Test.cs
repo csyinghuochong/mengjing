@@ -252,10 +252,12 @@ namespace ET
 
                 Console.WriteLine("去封印之塔");
                 await RobotHelper.MoveToNpc(root, 20000041);
-                
-                
+
                 Console.WriteLine("活动 签到");
                 await RobotHelper.ActivitySingIn(root);
+
+                Console.WriteLine("！！！氪金！！！ 狠狠的充");
+                await RobotHelper.RechargeRequest(root);
 
                 Console.WriteLine("活动 月卡");
                 await RobotHelper.YueKa(root);
@@ -265,17 +267,16 @@ namespace ET
 
                 Console.WriteLine("活动 令牌领取");
                 await RobotHelper.ActivityToken(root);
-                
+
                 Console.WriteLine("活动 每日特惠");
                 await RobotHelper.ActivityTeHui(root);
-                
+
                 Console.WriteLine("活动 单笔充值奖励");
                 await RobotHelper.ActivitySingleRecharge(root);
-                
-                
+
                 Console.WriteLine("活动 拍卖会");
                 await RobotHelper.PaiMaiAuction(root);
-                
+
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
 
@@ -284,10 +285,10 @@ namespace ET
 
                 Console.WriteLine("活动 战斗力奖励");
                 await RobotHelper.ZhanQuCombat(root);
-                
+
                 Console.WriteLine("活动 新年集字");
                 await RobotHelper.NewYearCollectionWord(root);
-                
+
                 Console.WriteLine("活动 登录奖励");
                 await RobotHelper.ActivityLogin(root);
 

@@ -55,8 +55,7 @@ namespace ET.Client
         private static void OnRechargeItemsRefresh(this DlgRecharge self, Transform transform, int index)
         {
             var item = ConfigData.RechargeGive.ToList()[index];
-            Scroll_Item_RechargeItem scrollItemRechargeItem =
-                    self.ScrollItemRechargeItems[index].BindTrans(transform);
+            Scroll_Item_RechargeItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
             scrollItemRechargeItem.OnInitData(item.Key, item.Value);
             scrollItemRechargeItem.SetClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
         }
@@ -75,9 +74,7 @@ namespace ET.Client
 
         public static async ETTask RequestRecharge(this DlgRecharge self, string riskControl = "")
         {
-            C2M_RechargeRequest request = new() { RiskControlInfo = riskControl, RechargeNumber = self.ReChargeNumber, PayType = self.PayType };
-
-            M2C_RechargeResponse response = (M2C_RechargeResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_RechargeResponse response = await UserInfoNetHelper.RechargeRequest(self.Root(), riskControl, self.ReChargeNumber, self.PayType);
 
             if (response.Error != ErrorCode.ERR_Success)
             {
