@@ -2243,5 +2243,36 @@ namespace ET.Client
                 await PetNetHelper.RolePetProtect(root, rolePetInfo.Id, true);
             }
         }
+
+        public static async ETTask ZhanQuLevel(Scene root)
+        {
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            foreach (ActivityConfig activityConfig in activityConfigs)
+            {
+                if (activityConfig.ActivityType != 21)
+                {
+                    continue;
+                }
+
+                int receiveNum = 0;
+                int leftNumber = 0;
+                for (int i = 0; i < activityComponent.ZhanQuReceiveNumbers.Count; i++)
+                {
+                    if (activityComponent.ZhanQuReceiveNumbers[i].ActivityId == activityConfig.Id)
+                    {
+                        receiveNum = activityComponent.ZhanQuReceiveNumbers[i].ReceiveNum;
+                    }
+                }
+
+                leftNumber = int.Parse(activityConfig.Par_2) - receiveNum;
+
+                if (!activityComponent.ZhanQuReceiveIds.Contains(activityConfig.Id) && leftNumber > 0)
+                {
+                    await ActivityNetHelper.ZhanQuReceive(root, activityConfig.ActivityType, activityConfig.Id);
+                }
+            }
+        }
     }
 }

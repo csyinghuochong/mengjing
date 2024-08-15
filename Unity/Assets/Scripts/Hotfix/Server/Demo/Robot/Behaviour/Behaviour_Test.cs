@@ -255,8 +255,9 @@ namespace ET
 
                 Console.WriteLine("活动 领红包");
                 await ActivityNetHelper.HongBaoOpen(root);
-                
-                Console.WriteLine("活动");
+
+                Console.WriteLine("活动 等级奖励");
+                await RobotHelper.ZhanQuLevel(root);
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
