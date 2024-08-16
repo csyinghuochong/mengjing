@@ -60,9 +60,9 @@ namespace ET.Client
                     case SceneTypeEnum.TrialDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TrialMain);
                         break;
-                    // case SceneTypeEnum.TowerOfSeal:
-                    //     UIHelper.Remove(args.ZoneScene, UIType.UITowerOfSealMain);
-                    //     break;
+                    case SceneTypeEnum.SealTower:
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSealMain);
+                        break;
                     case SceneTypeEnum.JiaYuan:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMain);
                         break;

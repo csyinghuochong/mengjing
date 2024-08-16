@@ -192,5 +192,6 @@ namespace ET.Client
 		WindowID_CommonProperty,
 		WindowID_Guide,
 		WindowID_TreasureOpen,
+		WindowID_TowerOfSealMain,
 	}
 }
