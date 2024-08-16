@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,11 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_BattleRecruitItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_BattleRecruitItem> 
 	{
+		public long SummonTime;
+		public int CostGold;
+		public BattleSummonConfig BattleSummonConfig;
+		public Action<int, int> OnRecruitAction;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
