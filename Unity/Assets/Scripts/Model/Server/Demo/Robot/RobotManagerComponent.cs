@@ -6,5 +6,7 @@ namespace ET.Server
     public class RobotManagerComponent: Entity, IAwake, IDestroy
     {
         public Dictionary<int,KeyValuePair<int,int>> robots = new();
+
+        public Dictionary<long, long> TeamRobot { get; set; } = new Dictionary<long, long>();
     }
 }

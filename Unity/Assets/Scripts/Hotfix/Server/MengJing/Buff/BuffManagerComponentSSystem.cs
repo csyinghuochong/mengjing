@@ -487,6 +487,12 @@ namespace ET.Server
                 buffHandler = self.AddChild<BuffS>();
                 buffHandler.BuffData = buffData;
                 buffHandler.mBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
+
+                if (buffHandler.mBuffConfig == null)
+                {
+                    Console.WriteLine($"buffHandler.mBuffConfig == null:  {buffData.BuffId}");
+                }
+
                 buffHandler.OnInit( from, unit, skillHandler);
                 self.m_Buffs.Insert(0, buffHandler); //添加至buff列表中
                 self.AddTimer();

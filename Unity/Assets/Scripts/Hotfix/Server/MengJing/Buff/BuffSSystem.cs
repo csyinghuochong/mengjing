@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -85,7 +86,18 @@ namespace ET.Server
 
         public static void OnInit(this BuffS self, Unit from, Unit to, SkillS skillS)
         {
+            if (self == null)
+            {
+                Console.WriteLine("BuffS self == null");
+            }
+
             BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
+            
+            if (aaiHandler == null)
+            {
+                Console.WriteLine($"aaiHandler == null:  {self.mBuffConfig.BuffScript}");
+            }
+            
             aaiHandler.OnInit(self, from, to, skillS);
         }
 

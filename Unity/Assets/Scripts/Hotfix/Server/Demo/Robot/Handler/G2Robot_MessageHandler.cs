@@ -14,8 +14,36 @@ namespace ET.Server
             RobotManagerComponent robotManagerComponent = scene.Root().GetComponent<RobotManagerComponent>();
             switch (message.MessageType)
             {
-                case NoticeType.BattleOpen:
+                case NoticeType.TeamDungeon:
+                    int robotnumber = 0;
+                    long lastteamtime = 0;
+                    string[] teamInfo = message.Message.Split('_');
+                    int fubenId = int.Parse(teamInfo[0]);
+                    long teamId = long.Parse(teamInfo[1]);
+                    robotManagerComponent.TeamRobot.TryGetValue(teamId, out lastteamtime);
+                    if(TimeHelper.ServerNow() - lastteamtime < 10000)
+                    {
+                        return;
+                    }
+                    robotManagerComponent.TeamRobot[teamId] = TimeHelper.ServerNow();
 
+                    int totalnumber = 0;
+                    while (robotnumber < 1)
+                    {
+                        totalnumber++ ;
+                        if (totalnumber >= 2)
+                        {
+                            break;
+                        }
+                        
+                        //message.Message   sceneid_teamid
+                        int  robotId = BattleHelper.GetTeamRobotId(fubenId);
+                        string fibername = await robotManagerComponent.NewRobot(message.Zone, robotId);
+                        robotnumber++;
+                    }
+                    break;
+                
+                case NoticeType.BattleOpen:
                     if (message.Zone!= 1)
                     {
                         return;
@@ -24,7 +52,7 @@ namespace ET.Server
                     using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))
                     {
                         int robotNumber = 0;
-                        while (robotNumber < 3)
+                        while (robotNumber < 1)
                         {
                             int robotId = BattleHelper.GetBattleRobotId(3, 0);
 
