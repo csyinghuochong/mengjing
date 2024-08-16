@@ -171,8 +171,6 @@ namespace ET
                 return monsterid;
             }
 
-
-            monsterid.AddRange(CreateMonsterList(sceneConfig.CreateMonster));
             monsterid.AddRange(CreateMonsterList(sceneConfig.CreateMonsterPosi));
             return monsterid;
         }

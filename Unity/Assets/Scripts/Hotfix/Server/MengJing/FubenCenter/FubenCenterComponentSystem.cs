@@ -248,7 +248,6 @@ namespace ET.Server
             }
 
             FubenHelp.CreateNpc(fubnescene, sceneid);
-            FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonsterPosi);
 
             return battleInfo;
@@ -496,8 +495,7 @@ namespace ET.Server
                     default:
                         break;
                 }
-
-                FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonster);
+                
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonsterPosi);
 
                 int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
@@ -524,7 +522,6 @@ namespace ET.Server
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             fubnescene.AddComponent<YeWaiRefreshComponent>().SceneId = sceneId;
             FubenHelp.CreateNpc(fubnescene, sceneId);
-            FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(sceneId).CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(sceneId).CreateMonsterPosi);
 
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
@@ -708,7 +705,6 @@ namespace ET.Server
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             fubnescene.AddComponent<YeWaiRefreshComponent>().SceneId = 2000008;
             fubnescene.AddComponent<UnionRaceDungeonComponent>();
-            FubenHelp.CreateMonsterList(fubnescene, sceneConfigs.CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfigs.CreateMonsterPosi);
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.UnionRaceScene = self.AddChild<BattleInfo>();
@@ -806,7 +802,6 @@ namespace ET.Server
                     new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
 
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
-            FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(sceneId).CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(sceneId).CreateMonsterPosi);
 
             if (fubentype == TeamFubenType.ShenYuan)

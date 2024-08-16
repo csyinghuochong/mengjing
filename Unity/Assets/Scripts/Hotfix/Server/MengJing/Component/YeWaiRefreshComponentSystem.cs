@@ -422,7 +422,6 @@ namespace ET.Server
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
 
-            FubenHelp.CreateMonsterList(self.Scene(), sceneConfig.CreateMonster);
             FubenHelp.CreateMonsterList(self.Scene(), sceneConfig.CreateMonsterPosi);
         }
 

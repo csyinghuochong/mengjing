@@ -104,8 +104,6 @@ namespace ET
 		/// <summary>章节BossId</summary>
 		public int BossId { get; set; }
 		/// <summary>怪物生成坐标点</summary>
-		public string CreateMonster { get; set; }
-		/// <summary>怪物生成坐标点</summary>
 		public int[] CreateMonsterPosi { get; set; }
 		/// <summary>章节文本描述</summary>
 		public string ChapterDes { get; set; }

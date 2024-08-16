@@ -293,8 +293,6 @@ namespace ET.Client
         public static void ShowTeamBossList(this DlgMapBig self)
         {
             SceneConfig chapterSonConfig = SceneConfigCategory.Instance.Get(self.SceneId);
-            self.CreateMonsterList(chapterSonConfig.CreateMonster);
-
             if (chapterSonConfig.CreateMonsterPosi != null)
             {
                 for (int i = 0; i < chapterSonConfig.CreateMonsterPosi.Length; i++)
