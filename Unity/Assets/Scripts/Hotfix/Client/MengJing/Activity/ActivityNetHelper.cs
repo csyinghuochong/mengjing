@@ -441,5 +441,22 @@ namespace ET.Client
             M2C_TowerOfSealNextResponse response = (M2C_TowerOfSealNextResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<M2C_BattleSummonRecord> BattleSummonRecord(Scene root)
+        {
+            C2M_BattleSummonRecord request = C2M_BattleSummonRecord.Create();
+
+            M2C_BattleSummonRecord response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_BattleSummonRecord;
+            return response;
+        }
+
+        public static async ETTask<M2C_BattleSummonResponse> BattleSummonRequest(Scene root, int summonId)
+        {
+            C2M_BattleSummonRequest request = C2M_BattleSummonRequest.Create();
+            request.SummonId = summonId;
+
+            M2C_BattleSummonResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_BattleSummonResponse;
+            return response;
+        }
     }
 }
