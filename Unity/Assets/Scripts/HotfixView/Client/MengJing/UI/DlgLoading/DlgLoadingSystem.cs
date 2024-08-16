@@ -309,7 +309,7 @@ namespace ET.Client
                             dlgMain.View.uiTransform.localScale = Vector3.one;
                             break;
                         default:
-                            // UIHelper.Create(zoneScene, UIType.UIEnterMapHint).Coroutine();
+                            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();
                             break;
                     }
 
