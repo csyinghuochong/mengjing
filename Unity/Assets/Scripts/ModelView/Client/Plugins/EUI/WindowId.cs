@@ -194,5 +194,6 @@ namespace ET.Client
 		WindowID_TreasureOpen,
 		WindowID_TowerOfSealMain,
 		WindowID_TowerOfSealCost,
+		WindowID_TowerOfSealJump,
 	}
 }
