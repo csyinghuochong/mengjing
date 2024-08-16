@@ -2,8 +2,8 @@
 
 - 需要绑定的UI组件（Image、Button等）以E_开头
 - 需要绑定的空组件（没有添加任何UI组件）以EG_开头
-- 组件命名要不要带Txt、Btn、Input、Img、Tgl、Panel等前缀或后缀词？有这些词在界面上确实会更好区分，但是EUI生成代码后会自动在后面加上Button、Image等后缀，这样又显得重复了。。。后面我看看要不改下EUI,不再自动生成后缀
-- 回调方法命名 On + 名字(不要E_)
+- UI组件命名：E_ + 名字 + 后缀（Txt、Btn、Input、Img、Tgl、Panel等），如 E_EnterBtn、E_IconImg
+- 回调方法命名：On + 组件名(不要前缀E_) + 行为(可加)，如 OnEnterBtn、OnIconImgBeginDrag、OnIconImgDrag
 
 # ToggleGroup
 
