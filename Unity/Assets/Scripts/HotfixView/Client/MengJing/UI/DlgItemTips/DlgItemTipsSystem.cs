@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +34,7 @@ namespace ET.Client
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
-        
+
         public static void SetPosition(this DlgItemTips self, Vector2 vector2)
         {
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;
@@ -135,7 +136,14 @@ namespace ET.Client
                 string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
+                    if (string.IsNullOrEmpty(bagInfo.ItemPar))
+                    {
+                        self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:无？？", itemDes);
+                    }
+                    else
+                    {
+                        self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
+                    }
                 }
             }
 

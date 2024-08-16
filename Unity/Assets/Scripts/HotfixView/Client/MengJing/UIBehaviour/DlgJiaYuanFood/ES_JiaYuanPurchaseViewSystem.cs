@@ -100,9 +100,14 @@ namespace ET.Client
             long removeid = 0;
             if (self.ScrollItemJiaYuanPurchaseItems != null)
             {
-                for (int i = self.ScrollItemJiaYuanPurchaseItems.Count - 2; i >= 0; i--)
+                for (int i = self.ScrollItemJiaYuanPurchaseItems.Count - 1; i >= 0; i--)
                 {
                     Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[i];
+
+                    if (scrollItemJiaYuanPurchaseItem.uiTransform == null)
+                    {
+                        continue;
+                    }
 
                     bool leftTime = scrollItemJiaYuanPurchaseItem.UpdateLeftTime();
                     if (leftTime)
