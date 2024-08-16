@@ -47,7 +47,7 @@ namespace ET.Client
             }
 
             // 打开花费道具继续挑战UI
-            // UIHelper.Create(self.ZoneScene(), UIType.UITowerOfSealCost).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOfSealCost).Coroutine();
         }
     }
 }

@@ -1538,8 +1538,7 @@ namespace ET.Client
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.SealTower:
-                    self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
-                    self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(false);
+                    self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
