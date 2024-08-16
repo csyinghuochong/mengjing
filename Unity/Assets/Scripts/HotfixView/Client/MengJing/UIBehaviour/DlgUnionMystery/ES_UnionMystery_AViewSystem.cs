@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_UnionMystery_A))]
-    [FriendOfAttribute(typeof (ES_UnionMystery_A))]
+    [EntitySystemOf(typeof(ES_UnionMystery_A))]
+    [FriendOfAttribute(typeof(ES_UnionMystery_A))]
     public static partial class ES_UnionMystery_ASystem
     {
         [EntitySystem]
         private static void Awake(this ES_UnionMystery_A self, Transform transform)
         {
             self.uiTransform = transform;
-            self.ELoopScrollList_LoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionMysteryItemsRefresh);
+            self.E_UnionMysteryItemAsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionMysteryItemsRefresh);
 
             self.RequestMystery().Coroutine();
         }
@@ -32,7 +32,7 @@ namespace ET.Client
         {
             self.ShowMysteryItemInfos = mysteryItemInfos;
             self.AddUIScrollItems(ref self.ScrollItemUnionMysteryItemAs, self.ShowMysteryItemInfos.Count);
-            self.ELoopScrollList_LoopVerticalScrollRect.SetVisible(true, self.ShowMysteryItemInfos.Count);
+            self.E_UnionMysteryItemAsLoopVerticalScrollRect.SetVisible(true, self.ShowMysteryItemInfos.Count);
         }
 
         public static async ETTask RequestMystery(this ES_UnionMystery_A self)
