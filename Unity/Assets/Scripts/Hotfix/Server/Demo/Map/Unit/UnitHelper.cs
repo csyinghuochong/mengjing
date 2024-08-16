@@ -446,7 +446,12 @@ namespace ET.Server
         {
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
         }
-        
+
+        public static bool ISGM(this Unit self)
+        {
+            return self.Type == UnitType.Player && GMHelp.IsGmAccount(self.GetComponent<UserInfoComponentS>().Account);
+        }
+
         public static void UpdateYueKaTimes(this Unit self)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
