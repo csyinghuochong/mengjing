@@ -325,7 +325,6 @@ namespace ET.Server
                     case 1055: //喜从天降
                     case 1043: //家族Boss
                     case 1044: //家族争霸
-                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
                         break;
                     default:

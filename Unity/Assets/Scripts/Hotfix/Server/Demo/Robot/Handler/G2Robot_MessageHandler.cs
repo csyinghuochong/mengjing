@@ -15,11 +15,16 @@ namespace ET.Server
             switch (message.MessageType)
             {
                 case NoticeType.BattleOpen:
-                  
+
+                    if (message.Zone!= 1)
+                    {
+                        return;
+                    }
+
                     using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))
                     {
                         int robotNumber = 0;
-                        while (robotNumber < 12)
+                        while (robotNumber < 3)
                         {
                             int robotId = BattleHelper.GetBattleRobotId(3, 0);
 

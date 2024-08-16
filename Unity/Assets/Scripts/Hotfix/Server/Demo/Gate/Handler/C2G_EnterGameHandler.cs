@@ -131,6 +131,7 @@ namespace ET.Server
                         player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
                         player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;
+                        Console.WriteLine($"C2G_EnterGameHandler:  {player.UnitId}");
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;

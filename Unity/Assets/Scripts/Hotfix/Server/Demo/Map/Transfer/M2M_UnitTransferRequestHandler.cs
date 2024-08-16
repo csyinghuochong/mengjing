@@ -9,10 +9,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
-            //Console.WriteLine($"M2M_UnitTransferRequest:1");
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             Unit unit = MongoHelper.Deserialize<Unit>(request.Unit);
-
+            Console.WriteLine($"M2M_UnitTransferRequestHandler:  {unit.Id}");
             unitComponent.AddChild(unit);
             unitComponent.Add(unit);
             foreach (byte[] bytes in request.Entitys)

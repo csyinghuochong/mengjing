@@ -1,4 +1,5 @@
 ﻿
+using System;
 using ET.Server;
 
 namespace ET
@@ -10,6 +11,8 @@ namespace ET
 
         protected override async ETTask Run(Unit unit, G2M_ActivityUpdate message)
         {
+            Console.WriteLine($"G2M_ActivityUpdateHandler:{unit.Id}   {message.ActivityType}");
+            
             switch (message.ActivityType)
             {
                 case 0:

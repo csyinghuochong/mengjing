@@ -14,6 +14,7 @@ namespace ET.Server
             {
                 case SceneType.Gate:
                     Log.Warning($"Gate定时刷新: {scene.Zone()} {hour} ");
+                    Console.WriteLine($"Gate定时刷新: {scene.Zone()} {hour} ");
                     if (hour == 0)
                     {
                         PrintAllEntity();
@@ -28,7 +29,7 @@ namespace ET.Server
                         {
                             continue;
                         }
-                       
+                        Console.WriteLine($"G2M_ActivityUpdate.Create: {scene.Zone()} {player.Id} ");
                         scene.Root().GetComponent<MessageLocationSenderComponent>().Get( LocationType.Unit).Send(player.UnitId, g2MActivityUpdate);
                     }
 
