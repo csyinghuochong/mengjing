@@ -20,8 +20,6 @@ namespace ET
 
         public long TargetID{ get; set; }
 
-        public string MessageValue;
-
         public float3 TargetPosition{ get; set; }
 
         public RobotConfig RobotConfig;

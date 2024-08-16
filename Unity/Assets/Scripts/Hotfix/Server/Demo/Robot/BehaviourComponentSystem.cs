@@ -31,7 +31,6 @@ namespace ET
         {
             self.TargetID = 0;
             self.Behaviours.Clear();
-            self.MessageValue = string.Empty;
 
             RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
             self.RobotConfig = robotConfig;
@@ -52,6 +51,13 @@ namespace ET
                 case 0:
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Test, Value = "Behaviour_Test" });
                     self.NewBehaviour = BehaviourType.Behaviour_Test;
+                    break;
+                case 2:
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_TeamDungeon, Value = "Behaviour_TeamDungeon" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_ZhuiJi, Value = "Behaviour_ZhuiJi" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Attack, Value = "Behaviour_Attack" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Target, Value = "Behaviour_Target" });
+                    self.NewBehaviour = BehaviourType.Behaviour_TeamDungeon;
                     break;
                 case 3:
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Battle, Value = "Behaviour_Battle" });

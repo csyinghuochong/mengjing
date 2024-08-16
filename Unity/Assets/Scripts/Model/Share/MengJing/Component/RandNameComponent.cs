@@ -10,7 +10,8 @@ namespace ET
       
         public List<string> RandNameNameList = new List<string>();
         public List<string> RandNameXing = new List<string>();
-        
+        public Dictionary<string, string> TeamDungeonMessage { get; set; } = new Dictionary<string, string>();
+
         public void Awake()
         { 
             this.RandNameXing = this.ReadFile("../Config/Name/RandName_Xing.txt");

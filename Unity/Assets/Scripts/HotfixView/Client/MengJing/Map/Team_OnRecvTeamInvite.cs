@@ -22,7 +22,7 @@
     }
 
     [Event(SceneType.Demo)]
-    public class Team_OnTeamDungeonOpen : AEvent<Scene, RecvTeamDungeonOpen>
+    public class Team_OnRecvTeamDungeonOpen : AEvent<Scene, RecvTeamDungeonOpen>
     {
         protected override async ETTask Run(Scene scene, RecvTeamDungeonOpen args)
         {

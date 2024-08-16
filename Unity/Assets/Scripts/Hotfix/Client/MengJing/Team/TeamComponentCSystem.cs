@@ -9,6 +9,19 @@
         {
         }
 
+        public static TeamInfo GetTeamInfo(this TeamComponentC self, long teamId)
+        {
+            for (int i = 0; i < self.TeamList.Count; i++)
+            {
+                TeamInfo teamInfo = self.TeamList[i];
+                if (teamInfo.TeamId == teamId)
+                {
+                    return teamInfo;
+                }
+            }
+            return null;
+        }
+        
         public static TeamInfo GetSelfTeam(this TeamComponentC self)
         {
             long userId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
