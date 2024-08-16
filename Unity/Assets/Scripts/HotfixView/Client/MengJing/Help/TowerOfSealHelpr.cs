@@ -27,8 +27,10 @@ namespace ET.Client
             rb.AddTorque(torque, ForceMode.Impulse);
 
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
+
+            long startTime = TimeInfo.Instance.ServerNow();
             await timerComponent.WaitAsync(1000);
-            while (rb.angularVelocity.magnitude > 0.1f)
+            while (TimeInfo.Instance.ServerNow() - startTime < 5000 && rb.angularVelocity.magnitude > 0.1f)
             {
                 await timerComponent.WaitAsync(1000);
             }
