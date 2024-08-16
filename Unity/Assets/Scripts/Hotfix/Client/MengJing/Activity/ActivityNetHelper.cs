@@ -431,5 +431,15 @@ namespace ET.Client
             M2C_TurtleRecordResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_TurtleRecordResponse;
             return response;
         }
+
+        public static async ETTask<int> TowerOfSealNextRequest(Scene root, int diceResult, int costType)
+        {
+            C2M_TowerOfSealNextRequest request = C2M_TowerOfSealNextRequest.Create();
+            request.DiceResult = diceResult;
+            request.CostType = costType;
+
+            M2C_TowerOfSealNextResponse response = (M2C_TowerOfSealNextResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

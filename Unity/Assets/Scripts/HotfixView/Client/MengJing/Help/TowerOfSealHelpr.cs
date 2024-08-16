@@ -111,13 +111,16 @@ namespace ET.Client
             // 销毁骰子
             UnityEngine.Object.Destroy(gameObject);
 
-            FlyTipComponent.Instance.ShowFlyTip("骰子点数是:" + diceResult);
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("骰子点数是:{0}", diceResult));
+            }
 
             int finished = myUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerFinished);
             if (finished % 10 + diceResult > 10 && finished + diceResult <= 100)
             {
-                // UI ui = await UIHelper.Create(root, UIType.UITowerOfSealJump);
-                // ui.GetComponent<UITowerOfSealJumpComponent>().InitUI(diceResult, costType);
+                await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOfSealJump);
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgTowerOfSealJump>().InitUI(diceResult, costType);
             }
             else
             {
@@ -125,8 +128,8 @@ namespace ET.Client
                 request.DiceResult = diceResult;
                 request.CostType = costType;
 
-                M2C_TowerOfSealNextResponse response = (M2C_TowerOfSealNextResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-                if (response.Error != ErrorCode.ERR_Success)
+                int error = await ActivityNetHelper.TowerOfSealNextRequest(root, diceResult, costType);
+                if (error != ErrorCode.ERR_Success)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("操作错误！！");
                     return;
