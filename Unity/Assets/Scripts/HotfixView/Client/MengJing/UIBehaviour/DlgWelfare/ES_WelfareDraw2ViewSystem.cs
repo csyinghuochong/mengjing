@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_WelfareDraw2))]
-    [FriendOfAttribute(typeof (ES_WelfareDraw2))]
+    [EntitySystemOf(typeof(ES_WelfareDraw2))]
+    [FriendOfAttribute(typeof(ES_WelfareDraw2))]
     public static partial class ES_WelfareDraw2System
     {
         [EntitySystem]
@@ -111,7 +111,7 @@ namespace ET.Client
                     return;
                 }
 
-                // self.Root().GetComponent<ReddotComponent>().UpdateReddont(ReddotType.WelfareDraw);
+                self.Root().GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.WelfareDraw);
                 drawIndex = numericComponent.GetAsInt(NumericType.DrawIndex2);
                 self.StartRotation(drawIndex - 1).Coroutine();
             }
