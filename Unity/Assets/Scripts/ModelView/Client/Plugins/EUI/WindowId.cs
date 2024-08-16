@@ -195,5 +195,6 @@ namespace ET.Client
 		WindowID_TowerOfSealMain,
 		WindowID_TowerOfSealCost,
 		WindowID_TowerOfSealJump,
+		WindowID_BattleRecruit,
 	}
 }
