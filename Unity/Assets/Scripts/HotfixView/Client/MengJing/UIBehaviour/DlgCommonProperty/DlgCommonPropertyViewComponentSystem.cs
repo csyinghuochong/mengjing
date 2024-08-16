@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgCommonPropertyViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgCommonPropertyViewComponent))]
+	[FriendOfAttribute(typeof(DlgCommonPropertyViewComponent))]
 	public static partial class DlgCommonPropertyViewComponentSystem
 	{
 		[EntitySystem]

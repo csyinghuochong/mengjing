@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof(Scroll_Item_CountryTaskItem))]
     [EntitySystemOf(typeof(Scroll_Item_CountryTaskItem))]

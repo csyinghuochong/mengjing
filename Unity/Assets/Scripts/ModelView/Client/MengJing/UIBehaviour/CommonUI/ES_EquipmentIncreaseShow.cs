@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipmentIncreaseShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_EquipmentIncreaseShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEquipItems;
 		public List<BagInfo> ShowEquipBagInfos = new();
@@ -17,7 +17,7 @@ namespace ET.Client
 		public BagInfo ReelBagInfo;
 		public int Page;
 		
-		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
+		public ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -28,13 +28,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Left/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -45,7 +45,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_EquipItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_EquipItems");
+		    		this.m_E_EquipItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_EquipItems");
      			}
      			return this.m_E_EquipItemsLoopVerticalScrollRect;
      		}
@@ -71,7 +71,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_Obj_EquipPropertyTextText
+		public Text E_Obj_EquipPropertyTextText
      	{
      		get
      		{
@@ -82,13 +82,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Obj_EquipPropertyTextText == null )
      			{
-		    		this.m_E_Obj_EquipPropertyTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Obj_EquipPropertyText");
+		    		this.m_E_Obj_EquipPropertyTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Obj_EquipPropertyText");
      			}
      			return this.m_E_Obj_EquipPropertyTextText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_EquipBaseSetListRectTransform
+		public RectTransform EG_EquipBaseSetListRectTransform
      	{
      		get
      		{
@@ -99,7 +99,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_EquipBaseSetListRectTransform == null )
      			{
-		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_EquipBaseSetList");
+		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_EquipBaseSetList");
      			}
      			return this.m_EG_EquipBaseSetListRectTransform;
      		}
@@ -125,7 +125,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ReelItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ReelItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -136,13 +136,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ReelItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ReelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_ReelItems");
+		    		this.m_E_ReelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_ReelItems");
      			}
      			return this.m_E_ReelItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_IncreaseButtonButton
+		public Button E_IncreaseButtonButton
      	{
      		get
      		{
@@ -153,13 +153,13 @@ namespace ET.Client
      			}
      			if( this.m_E_IncreaseButtonButton == null )
      			{
-		    		this.m_E_IncreaseButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_IncreaseButton");
+		    		this.m_E_IncreaseButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_IncreaseButton");
      			}
      			return this.m_E_IncreaseButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_IncreaseButtonImage
+		public Image E_IncreaseButtonImage
      	{
      		get
      		{
@@ -170,13 +170,13 @@ namespace ET.Client
      			}
      			if( this.m_E_IncreaseButtonImage == null )
      			{
-		    		this.m_E_IncreaseButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_IncreaseButton");
+		    		this.m_E_IncreaseButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_IncreaseButton");
      			}
      			return this.m_E_IncreaseButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_NumText
+		public Text E_Lab_NumText
      	{
      		get
      		{
@@ -187,13 +187,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_NumText == null )
      			{
-		    		this.m_E_Lab_NumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/Text_2 (1)/E_Lab_Num");
+		    		this.m_E_Lab_NumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/Text_2 (1)/E_Lab_Num");
      			}
      			return this.m_E_Lab_NumText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_IncreaseEffectRectTransform
+		public RectTransform EG_IncreaseEffectRectTransform
      	{
      		get
      		{
@@ -204,7 +204,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_IncreaseEffectRectTransform == null )
      			{
-		    		this.m_EG_IncreaseEffectRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_IncreaseEffect");
+		    		this.m_EG_IncreaseEffectRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_IncreaseEffect");
      			}
      			return this.m_EG_IncreaseEffectRectTransform;
      		}
@@ -238,17 +238,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
+		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_EquipSet> m_es_equipset = null;
-		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;
-		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
+		private Text m_E_Obj_EquipPropertyTextText = null;
+		private RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ReelItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_IncreaseButtonButton = null;
-		private UnityEngine.UI.Image m_E_IncreaseButtonImage = null;
-		private UnityEngine.UI.Text m_E_Lab_NumText = null;
-		private UnityEngine.RectTransform m_EG_IncreaseEffectRectTransform = null;
+		private LoopVerticalScrollRect m_E_ReelItemsLoopVerticalScrollRect = null;
+		private Button m_E_IncreaseButtonButton = null;
+		private Image m_E_IncreaseButtonImage = null;
+		private Text m_E_Lab_NumText = null;
+		private RectTransform m_EG_IncreaseEffectRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

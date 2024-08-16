@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace ET.Client
 {
     [FriendOf(typeof(ES_JueXingShow))]

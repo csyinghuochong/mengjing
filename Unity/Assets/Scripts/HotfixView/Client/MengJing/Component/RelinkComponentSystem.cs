@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof(RelinkComponent))]
     [EntitySystemOf(typeof(RelinkComponent))]

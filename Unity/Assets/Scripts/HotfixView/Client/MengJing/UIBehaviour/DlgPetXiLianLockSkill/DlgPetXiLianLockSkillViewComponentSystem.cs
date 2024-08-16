@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetXiLianLockSkillViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetXiLianLockSkillViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetXiLianLockSkillViewComponent))]
 	public static partial class DlgPetXiLianLockSkillViewComponentSystem
 	{
 		[EntitySystem]

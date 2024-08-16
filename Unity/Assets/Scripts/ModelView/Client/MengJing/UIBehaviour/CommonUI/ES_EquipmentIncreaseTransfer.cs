@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipmentIncreaseTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_EquipmentIncreaseTransfer : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public GameObject UICommonItem_Copy;
 		public BagInfo[] BagInfo_Transfer;
@@ -17,7 +17,7 @@ namespace ET.Client
 		public Vector2 localPoint;
 		public bool IsHoldDown;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -28,7 +28,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_EquipItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_EquipItems");
+		    		this.m_E_EquipItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_EquipItems");
      			}
      			return this.m_E_EquipItemsLoopVerticalScrollRect;
      		}
@@ -94,7 +94,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonTransferButton
+		public Button E_ButtonTransferButton
      	{
      		get
      		{
@@ -105,13 +105,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTransferButton == null )
      			{
-		    		this.m_E_ButtonTransferButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonTransfer");
+		    		this.m_E_ButtonTransferButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonTransfer");
      			}
      			return this.m_E_ButtonTransferButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonTransferImage
+		public Image E_ButtonTransferImage
      	{
      		get
      		{
@@ -122,7 +122,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTransferImage == null )
      			{
-		    		this.m_E_ButtonTransferImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonTransfer");
+		    		this.m_E_ButtonTransferImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonTransfer");
      			}
      			return this.m_E_ButtonTransferImage;
      		}
@@ -151,12 +151,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
-		private UnityEngine.UI.Button m_E_ButtonTransferButton = null;
-		private UnityEngine.UI.Image m_E_ButtonTransferImage = null;
+		private Button m_E_ButtonTransferButton = null;
+		private Image m_E_ButtonTransferImage = null;
 		public Transform uiTransform = null;
 	}
 }

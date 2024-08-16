@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgGuideViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgGuideViewComponent))]
+	[FriendOfAttribute(typeof(DlgGuideViewComponent))]
 	public static partial class DlgGuideViewComponentSystem
 	{
 		[EntitySystem]

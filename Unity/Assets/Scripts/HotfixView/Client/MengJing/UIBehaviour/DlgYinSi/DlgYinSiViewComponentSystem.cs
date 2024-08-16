@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgYinSiViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgYinSiViewComponent))]
+	[FriendOfAttribute(typeof(DlgYinSiViewComponent))]
 	public static partial class DlgYinSiViewComponentSystem
 	{
 		[EntitySystem]

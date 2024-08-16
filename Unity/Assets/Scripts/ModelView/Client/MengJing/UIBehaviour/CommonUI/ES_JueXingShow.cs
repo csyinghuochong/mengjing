@@ -1,12 +1,13 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JueXingShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_JueXingShow : Entity,IAwake<Transform>,IDestroy
 	{
 		public List<ES_JueXingShowItem> UIJueXingShowItems { get; set; } = new();
 		public int JueXingId;
@@ -171,7 +172,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSkillIconImage
+		public Image E_ImageSkillIconImage
      	{
      		get
      		{
@@ -182,13 +183,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSkillIconImage == null )
      			{
-		    		this.m_E_ImageSkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/SkillItem/ImageMask/E_ImageSkillIcon");
+		    		this.m_E_ImageSkillIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/SkillItem/ImageMask/E_ImageSkillIcon");
      			}
      			return this.m_E_ImageSkillIconImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_ImageSkillIconEventTrigger
+		public EventTrigger E_ImageSkillIconEventTrigger
      	{
      		get
      		{
@@ -199,13 +200,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSkillIconEventTrigger == null )
      			{
-		    		this.m_E_ImageSkillIconEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/SkillItem/ImageMask/E_ImageSkillIcon");
+		    		this.m_E_ImageSkillIconEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/SkillItem/ImageMask/E_ImageSkillIcon");
      			}
      			return this.m_E_ImageSkillIconEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextSkillNameText
+		public Text E_TextSkillNameText
      	{
      		get
      		{
@@ -216,7 +217,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextSkillNameText == null )
      			{
-		    		this.m_E_TextSkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/SkillItem/E_TextSkillName");
+		    		this.m_E_TextSkillNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/SkillItem/E_TextSkillName");
      			}
      			return this.m_E_TextSkillNameText;
      		}
@@ -242,7 +243,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonActiveButton
+		public Button E_ButtonActiveButton
      	{
      		get
      		{
@@ -253,13 +254,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonActiveButton == null )
      			{
-		    		this.m_E_ButtonActiveButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonActive");
+		    		this.m_E_ButtonActiveButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ButtonActive");
      			}
      			return this.m_E_ButtonActiveButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonActiveImage
+		public Image E_ButtonActiveImage
      	{
      		get
      		{
@@ -270,13 +271,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonActiveImage == null )
      			{
-		    		this.m_E_ButtonActiveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonActive");
+		    		this.m_E_ButtonActiveImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ButtonActive");
      			}
      			return this.m_E_ButtonActiveImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageJueXingExpImage
+		public Image E_ImageJueXingExpImage
      	{
      		get
      		{
@@ -287,13 +288,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageJueXingExpImage == null )
      			{
-		    		this.m_E_ImageJueXingExpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ImageJueXingExp");
+		    		this.m_E_ImageJueXingExpImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ImageJueXingExp");
      			}
      			return this.m_E_ImageJueXingExpImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_11Text
+		public Text E_Text_11Text
      	{
      		get
      		{
@@ -304,13 +305,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_11Text == null )
      			{
-		    		this.m_E_Text_11Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_11");
+		    		this.m_E_Text_11Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_11");
      			}
      			return this.m_E_Text_11Text;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_GoldText
+		public Text E_Text_GoldText
      	{
      		get
      		{
@@ -321,13 +322,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_GoldText == null )
      			{
-		    		this.m_E_Text_GoldText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Gold");
+		    		this.m_E_Text_GoldText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_Gold");
      			}
      			return this.m_E_Text_GoldText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_JueXingExpText
+		public Text E_Text_JueXingExpText
      	{
      		get
      		{
@@ -338,7 +339,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_JueXingExpText == null )
      			{
-		    		this.m_E_Text_JueXingExpText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_JueXingExp");
+		    		this.m_E_Text_JueXingExpText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_JueXingExp");
      			}
      			return this.m_E_Text_JueXingExpText;
      		}
@@ -387,16 +388,16 @@ namespace ET.Client
 		private EntityRef<ES_JueXingShowItem> m_es_juexingshowitem_5 = null;
 		private EntityRef<ES_JueXingShowItem> m_es_juexingshowitem_6 = null;
 		private EntityRef<ES_JueXingShowItem> m_es_juexingshowitem_7 = null;
-		private UnityEngine.UI.Image m_E_ImageSkillIconImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_ImageSkillIconEventTrigger = null;
-		private UnityEngine.UI.Text m_E_TextSkillNameText = null;
+		private Image m_E_ImageSkillIconImage = null;
+		private EventTrigger m_E_ImageSkillIconEventTrigger = null;
+		private Text m_E_TextSkillNameText = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
-		private UnityEngine.UI.Button m_E_ButtonActiveButton = null;
-		private UnityEngine.UI.Image m_E_ButtonActiveImage = null;
-		private UnityEngine.UI.Image m_E_ImageJueXingExpImage = null;
-		private UnityEngine.UI.Text m_E_Text_11Text = null;
-		private UnityEngine.UI.Text m_E_Text_GoldText = null;
-		private UnityEngine.UI.Text m_E_Text_JueXingExpText = null;
+		private Button m_E_ButtonActiveButton = null;
+		private Image m_E_ButtonActiveImage = null;
+		private Image m_E_ImageJueXingExpImage = null;
+		private Text m_E_Text_11Text = null;
+		private Text m_E_Text_GoldText = null;
+		private Text m_E_Text_JueXingExpText = null;
 		public Transform uiTransform = null;
 	}
 }

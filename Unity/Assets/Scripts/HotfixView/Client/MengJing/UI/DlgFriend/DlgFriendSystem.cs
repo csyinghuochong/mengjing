@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ET.Client
 {
     [FriendOf(typeof (ES_UnionMy))]

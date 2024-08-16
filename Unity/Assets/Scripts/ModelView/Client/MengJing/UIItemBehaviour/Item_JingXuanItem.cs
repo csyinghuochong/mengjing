@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text E_Lab_IndexText
+		public Text E_Lab_IndexText
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_IndexText == null )
      				{
-		    			this.m_E_Lab_IndexText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Index");
+		    			this.m_E_Lab_IndexText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Index");
      				}
      				return this.m_E_Lab_IndexText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Index");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Index");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_NameText
+		public Text E_Lab_NameText
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_NameText == null )
      				{
-		    			this.m_E_Lab_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Name");
+		    			this.m_E_Lab_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Name");
      				}
      				return this.m_E_Lab_NameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Name");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Name");
      			}
      		}
      	}
@@ -75,8 +75,8 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_E_Lab_IndexText = null;
-		private UnityEngine.UI.Text m_E_Lab_NameText = null;
+		private Text m_E_Lab_IndexText = null;
+		private Text m_E_Lab_NameText = null;
 		public Transform uiTransform = null;
 	}
 }

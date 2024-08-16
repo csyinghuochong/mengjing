@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgWearWeaponViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgWearWeaponViewComponent))]
+	[FriendOfAttribute(typeof(DlgWearWeaponViewComponent))]
 	public static partial class DlgWearWeaponViewComponentSystem
 	{
 		[EntitySystem]

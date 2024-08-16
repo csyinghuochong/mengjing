@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTeamDungeonSettlement))]
 	[EnableMethod]
 	public  class DlgTeamDungeonSettlementViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_Img_back2Button
+		public Button E_Img_back2Button
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_back2Button == null )
      			{
-		    		this.m_E_Img_back2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_back2");
+		    		this.m_E_Img_back2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_back2");
      			}
      			return this.m_E_Img_back2Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_back2Image
+		public Image E_Img_back2Image
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_back2Image == null )
      			{
-		    		this.m_E_Img_back2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_back2");
+		    		this.m_E_Img_back2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_back2");
      			}
      			return this.m_E_Img_back2Image;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SelectEffectSetRectTransform
+		public RectTransform EG_SelectEffectSetRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SelectEffectSetRectTransform == null )
      			{
-		    		this.m_EG_SelectEffectSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SelectEffectSet");
+		    		this.m_EG_SelectEffectSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SelectEffectSet");
      			}
      			return this.m_EG_SelectEffectSetRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_exitButton
+		public Button E_Button_exitButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitButton == null )
      			{
-		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_exit");
+		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_exit");
      			}
      			return this.m_E_Button_exitButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_exitImage
+		public Image E_Button_exitImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitImage == null )
      			{
-		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_exit");
+		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_exit");
      			}
      			return this.m_E_Button_exitImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_LeftTimeText
+		public Text E_Text_LeftTimeText
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_LeftTimeText == null )
      			{
-		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_LeftTime");
+		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_LeftTime");
      			}
      			return this.m_E_Text_LeftTimeText;
      		}
@@ -120,12 +120,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Img_back2Button = null;
-		private UnityEngine.UI.Image m_E_Img_back2Image = null;
-		private UnityEngine.RectTransform m_EG_SelectEffectSetRectTransform = null;
-		private UnityEngine.UI.Button m_E_Button_exitButton = null;
-		private UnityEngine.UI.Image m_E_Button_exitImage = null;
-		private UnityEngine.UI.Text m_E_Text_LeftTimeText = null;
+		private Button m_E_Img_back2Button = null;
+		private Image m_E_Img_back2Image = null;
+		private RectTransform m_EG_SelectEffectSetRectTransform = null;
+		private Button m_E_Button_exitButton = null;
+		private Image m_E_Button_exitImage = null;
+		private Text m_E_Text_LeftTimeText = null;
 		public Transform uiTransform = null;
 	}
 }
