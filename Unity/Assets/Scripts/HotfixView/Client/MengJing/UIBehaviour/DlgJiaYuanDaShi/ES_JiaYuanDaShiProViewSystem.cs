@@ -196,14 +196,17 @@ namespace ET.Client
             self.E_Label_TipsText.text = "";
 
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index];
-            Scroll_Item_CommonItem scrollItemCommonItem1 = self.ScrollItemCommonItems[index - 1];
             if (scrollItemCommonItem.uiTransform.gameObject.activeSelf)
             {
                 self.OnSelectItem(scrollItemCommonItem.ES_CommonItem.Baginfo);
             }
-            else if (index > 0 && scrollItemCommonItem1.uiTransform.gameObject.activeSelf)
+            else if (index > 0)
             {
-                self.OnSelectItem(scrollItemCommonItem1.ES_CommonItem.Baginfo);
+                Scroll_Item_CommonItem scrollItemCommonItem1 = self.ScrollItemCommonItems[index - 1];
+                if (scrollItemCommonItem1.uiTransform.gameObject.activeSelf)
+                {
+                    self.OnSelectItem(scrollItemCommonItem1.ES_CommonItem.Baginfo);
+                }
             }
         }
     }

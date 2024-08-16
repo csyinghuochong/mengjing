@@ -20,7 +20,7 @@ namespace ET.Client
         public static void OnInitUI(this Scroll_Item_JiaYuanPastureItem self, JiaYuanPastureConfig zuoQiConfig, int index)
         {
             // self.ES_ModelShow.ShowOtherModel("Pasture/" + zuoQiConfig.Assets).Coroutine();
-            self.ES_ModelShow.ShowOtherModel("Pasture/1000101").Coroutine();
+            self.ES_ModelShow.ShowOtherModel("Pasture/10001").Coroutine();
             self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 100f, 450f);
             self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
             self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));
