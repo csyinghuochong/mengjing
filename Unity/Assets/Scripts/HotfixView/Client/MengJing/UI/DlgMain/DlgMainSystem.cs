@@ -440,6 +440,8 @@ namespace ET.Client
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
+            self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(false);
+            
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
             self.RefreshMainTaskItems();
 
