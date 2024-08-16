@@ -38,7 +38,7 @@ namespace ET.Client
             }
 
             // 摇骰子
-            // TowerOfSealHelpr.StartPlayDice(self.ZoneScene(), 0).Coroutine();
+            TowerOfSealHelpr.StartPlayDice(self.Root(), 0).Coroutine();
 
             // 隐藏开始挑战按钮
             DlgTowerOfSealMain dlgTowerOfSealMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTowerOfSealMain>();
@@ -60,7 +60,7 @@ namespace ET.Client
             }
 
             // 摇骰子
-            // TowerOfSealHelpr.StartPlayDice(self.ZoneScene(), 1).Coroutine();
+            TowerOfSealHelpr.StartPlayDice(self.Root(), 1).Coroutine();
 
             // 隐藏开始挑战按钮
             DlgTowerOfSealMain dlgTowerOfSealMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTowerOfSealMain>();
