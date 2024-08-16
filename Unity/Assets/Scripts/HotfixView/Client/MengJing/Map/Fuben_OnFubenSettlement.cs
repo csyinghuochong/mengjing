@@ -67,14 +67,13 @@ namespace ET.Client
                         "恭喜你赢得了本场试炼的胜利！",
                         () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
                     break;
-                // case SceneTypeEnum.TowerOfSeal:
-                //     UI uITowerOfSealMain = UIHelper.GetUI(args.Scene, UIType.UITowerOfSealMain);
-                //     uITowerOfSealMain.GetComponent<UITowerOfSealMainComponent>().StartBtn.SetActive(true);
-                //     Unit myUnit = UnitHelper.GetMyUnitFromZoneScene(args.Scene);
-                //     myUnit.GetComponent<SkillManagerComponent>().ClearSkillAndCd();
-                //     UI uiMain = UIHelper.GetUI(args.Scene, UIType.UIMain);
-                //     uimain.GetComponent<UIMainComponent>().BeginEnterScene(sceneTypeEnum);
-                //     break;
+                case SceneTypeEnum.SealTower:
+                    DlgTowerOfSealMain dlgTowerOfSealMain = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTowerOfSealMain>();
+                    dlgTowerOfSealMain.ShowStartBtn();
+                    Unit myUnit = UnitHelper.GetMyUnitFromClientScene(scene);
+                    myUnit.GetComponent<SkillManagerComponentC>().ClearSkillAndCd();
+                    dlgMain.BeginEnterScene(sceneTypeEnum);
+                    break;
                 case SceneTypeEnum.SeasonTower:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);

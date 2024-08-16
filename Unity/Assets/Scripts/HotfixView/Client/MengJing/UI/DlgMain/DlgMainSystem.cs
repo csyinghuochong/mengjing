@@ -1537,13 +1537,13 @@ namespace ET.Client
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     break;
-                // case SceneTypeEnum.TowerOfSeal:
-                //     self.UIMainTask.GameObject.SetActive(false);
-                //     self.FunctionSetBtn.SetActive(false);
-                //     self.HomeButton.SetActive(false);
-                //     self.UIMainSkill.SetActive(true);
-                //     self.UIJoystickMoveComponent.GameObject.SetActive(true);
-                //     break;
+                case SceneTypeEnum.SealTower:
+                    self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
+                    self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(false);
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    break;
                 case SceneTypeEnum.LocalDungeon:
                     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(sceneid);
                     switch (dungeonConfig.MapType)
