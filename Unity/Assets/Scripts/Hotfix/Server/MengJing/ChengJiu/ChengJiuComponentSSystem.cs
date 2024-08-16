@@ -72,7 +72,7 @@ namespace ET.Server
                 int unitconfigId = defend.ConfigId;
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitconfigId);
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
-                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
                 int fubenDifficulty = (int)FubenDifficulty.None;
                 if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
                 {

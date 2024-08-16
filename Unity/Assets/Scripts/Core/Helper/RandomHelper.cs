@@ -62,7 +62,7 @@ namespace ET
         }
 
         /// <summary>
-        /// ��ȡlower��Upper֮��������,�������ޣ�����������
+        /// 获取lower与Upper之间的随机数,包含下限，不包含上限
         /// </summary>
         /// <param name="lower"></param>
         /// <param name="upper"></param>
@@ -73,18 +73,7 @@ namespace ET
             return value;
         }
 
-        /// <summary>
-        /// ��ȡlower��Upper֮��������,�������޺�����
-        /// </summary>
-        /// <param name="lower"></param>
-        /// <param name="upper"></param>
-        /// <returns></returns>
-        //public static int RandomNumber2(int lower, int upper)
-        //{
-        //    int value = random.Next(lower, upper+1);
-        //    return value;
-        //}
-        
+
         //传入随机范围,生成一个随机数(平均概率)
         public static int ReturnRamdomValue_Int(int randomMinValue, int randomMaxValue)
         {

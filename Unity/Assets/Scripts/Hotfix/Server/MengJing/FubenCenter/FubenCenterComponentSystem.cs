@@ -33,6 +33,20 @@ namespace ET.Server
             return 0;
         }
 
+        public static async ETTask NoticeBattleOpen(this FubenCenterComponent self)
+        {
+            if (ServerHelper.GetServeOpenrDay( self.Zone()) <= 0)
+            {
+                  return;
+            }
+            await self.Root().GetComponent<TimerComponent>().WaitAsync( RandomHelper.RandomNumber(5,10)*1000 );
+            ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
+            G2Robot_MessageRequest g2RobotMessageRequest = G2Robot_MessageRequest.Create();
+            g2RobotMessageRequest.Zone = self.Zone();
+            g2RobotMessageRequest.MessageType = NoticeType.BattleOpen;
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId,g2RobotMessageRequest);
+        }
+
         public static void OnActivityOpen(this FubenCenterComponent self, int functionId)
         {
             if (functionId == 1025)
@@ -40,14 +54,7 @@ namespace ET.Server
                 self.BattleOpen = true;
                 self.BattleInfos.Clear();
                 Console.WriteLine($"OnBattleOpen : {self.Zone()}");
-                if (ServerHelper.GetServeOpenrDay( self.Zone()) > 0)
-                {
-                    ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
-                    G2Robot_MessageRequest g2RobotMessageRequest = G2Robot_MessageRequest.Create();
-                    g2RobotMessageRequest.Zone = self.Zone();
-                    g2RobotMessageRequest.MessageType = NoticeType.BattleOpen;
-                    self.Root().GetComponent<MessageSender>().Send(robotSceneId,g2RobotMessageRequest);
-                }
+                self.NoticeBattleOpen().Coroutine();
             }
 
             if (functionId == 1031)

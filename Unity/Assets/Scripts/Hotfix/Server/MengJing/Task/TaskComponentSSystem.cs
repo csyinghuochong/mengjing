@@ -815,9 +815,8 @@ namespace ET.Server
                 int unitconfigId = bekill.ConfigId;
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitconfigId);
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
-                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
                 int fubenDifficulty = FubenDifficulty.None;
-                Scene DomainScene = self.GetParent<Unit>().Root();
                 if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;

@@ -1,4 +1,5 @@
 using Unity.Mathematics;
+using System;
 
 namespace ET.Client
 {
@@ -6,6 +7,24 @@ namespace ET.Client
     [FriendOf(typeof (SingingComponent))]
     public static partial class SingingComponentSystem
     {
+        
+          
+        [Invoke(TimerInvokeType.PlayerSingingTimer)]
+        public class PlayerSingingTimer: ATimer<SingingComponent>
+        {
+            protected override void Run(SingingComponent self)
+            {
+                try
+                {
+                    self.OnTimer();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this SingingComponent self)
         {
