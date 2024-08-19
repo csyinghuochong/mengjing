@@ -232,7 +232,7 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skilllist[i]);
                 using (zstring.Block())
                 {
-                    skilldesc = zstring.Format("{0}{1} {2}\n", skilldesc, skillConfig.SkillName, skillConfig.SkillDescribe);
+                    skilldesc += zstring.Format("{1} {2}\n", skillConfig.SkillName, skillConfig.SkillDescribe);
                 }
             }
 

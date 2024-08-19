@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -38,10 +39,12 @@ namespace ET.Client
                     taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
             }
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-            self.E_ImageIconImage.sprite = sp;
+            if (!string.IsNullOrEmpty(taskConfig.TaskIcon))
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_ImageIconImage.sprite = sp;
+            }
 
             using (zstring.Block())
             {
