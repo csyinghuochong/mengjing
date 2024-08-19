@@ -26,8 +26,8 @@ namespace ET.Client
             self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
 
             self.InitModelShowView_1();
-            self.E_Image_ItemButtonButton.AddListener(self.OnImage_ItemButtonButton);
-            self.E_Image_EventTriggerButton.AddListener(self.OnImage_EventTriggerButton);
+            // self.E_Image_ItemButtonButton.AddListener(self.OnImage_ItemButtonButton);
+            // self.E_Image_EventTriggerButton.AddListener(self.OnImage_EventTriggerButton);
         }
 
         [EntitySystem]
