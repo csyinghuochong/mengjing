@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgJiaYuanMenuViewComponent))]
-    [FriendOf(typeof (DlgJiaYuanMenu))]
+    [FriendOf(typeof(DlgJiaYuanMenuViewComponent))]
+    [FriendOf(typeof(DlgJiaYuanMenu))]
     public static class DlgJiaYuanMenuSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanMenu self)
@@ -55,7 +55,7 @@ namespace ET.Client
             Unit mainunit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool ismyJiayuan = self.Root().GetComponent<JiaYuanComponentC>().IsMyJiaYuan(mainunit.Id);
 
-            self.OperateType = ismyJiayuan? 2 : 4;
+            self.OperateType = ismyJiayuan ? 2 : 4;
 
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             Camera mainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
@@ -97,7 +97,7 @@ namespace ET.Client
             Unit mainunit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool ismyJiayuan = self.Root().GetComponent<JiaYuanComponentC>().IsMyJiaYuan(mainunit.Id);
 
-            self.OperateType = ismyJiayuan? 1 : 3;
+            self.OperateType = ismyJiayuan ? 1 : 3;
             self.View.E_Button_WatchButton.gameObject.SetActive(ismyJiayuan && unit != null);
             self.View.E_Button_UprootButton.gameObject.SetActive(ismyJiayuan && unit != null);
             self.View.E_Button_PlanButton.gameObject.SetActive(ismyJiayuan && unit == null);
@@ -215,6 +215,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanBag).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
         }
+
         public static void OnButton_OpenButton(this DlgJiaYuanMenu self)
         {
         }

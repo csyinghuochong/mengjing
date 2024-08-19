@@ -441,7 +441,7 @@ namespace ET.Client
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
             self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(false);
-            
+
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
             self.RefreshMainTaskItems();
 
@@ -515,29 +515,29 @@ namespace ET.Client
 
         public static void ShowMainUI(this DlgMain self, bool show)
         {
-            // MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            // int sceneType = mapComponent.SceneTypeEnum;
-            // self.DoMoveLeft.SetActive(show);
-            // self.DoMoveRight.SetActive(show);
-            // self.DoMoveBottom.SetActive(show );
-            // if (show)
-            // {
-            //     self.UIMainChat.UpdatePosition().Coroutine();
-            // }
-            // else
-            // {
-            //     self.ZoneScene().GetComponent<SkillIndicatorComponent>()?.RecoveryEffect();
-            //     //self.UIJoystickMoveComponent.ResetUI(); //防止打开其他界面摇杆接受不到ui事件
-            // }
-            //
-            // switch (sceneType)
-            // {
-            //     case SceneTypeEnum.JiaYuan:
-            //         UIHelper.GetUI(self.ZoneScene(), UIType.UIJiaYuanMain).GameObject.SetActive(show);
-            //         break;
-            //     default:
-            //         break;
-            // }
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            int sceneType = mapComponent.SceneType;
+            self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(show);
+            self.View.EG_LeftSetRectTransform.gameObject.SetActive(show);
+            self.View.EG_LeftBottomSetRectTransform.gameObject.SetActive(show);
+            self.View.EG_RightSetRectTransform.gameObject.SetActive(show);
+            if (show)
+            {
+                // self.View.ES_UIMainChat.UpdatePosition().Coroutine();
+            }
+            else
+            {
+                self.Root().GetComponent<SkillIndicatorComponent>()?.RecoveryEffect();
+            }
+
+            switch (sceneType)
+            {
+                case SceneTypeEnum.JiaYuan:
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().SetShow(show);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public static void AutoHorse(this DlgMain self)

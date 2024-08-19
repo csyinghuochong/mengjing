@@ -34,6 +34,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(DlgJiaYuanMainViewComponent))]
     [FriendOf(typeof(ES_JiaYuaVisit))]
     [FriendOf(typeof(DlgJiaYuanMain))]
     public static class DlgJiaYuanMainSystem
@@ -80,6 +81,11 @@ namespace ET.Client
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             timerComponent.Remove(ref self.PetTimer);
+        }
+
+        public static void SetShow(this DlgJiaYuanMain self, bool value)
+        {
+            self.View.uiTransform.gameObject.SetActive(value);
         }
 
         public static async ETTask ReqestStartPet(this DlgJiaYuanMain self)
