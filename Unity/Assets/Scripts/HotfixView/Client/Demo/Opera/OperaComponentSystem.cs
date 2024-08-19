@@ -42,17 +42,17 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this OperaComponent self)
         {
-            if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+            if (InputHelper.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
             {
                 self.OnGetMouseButtonDown_0();
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (InputHelper.GetMouseButtonDown(1))
             {
                 self.OnGetMouseButtonDown_1();
             }
 
-            if (Input.GetKeyDown(KeyCode.W))
+            if (InputHelper.GetKeyDown((int)KeyCode.W))
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
@@ -64,16 +64,41 @@ namespace ET.Client
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
             }
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (InputHelper.GetKeyDown((int)KeyCode.R))
             {
                 // CodeLoader.Instance.Reload();
                 // return;
             }
 
-            if (Input.GetKeyDown(KeyCode.T))
+            if (InputHelper.GetKeyDown((int)KeyCode.T))
             {
                 //C2M_TransferMap c2MTransferMap = new();
                 //self.Root().GetComponent<ClientSenderCompnent>().Call(c2MTransferMap).Coroutine();
+            }
+
+            if (InputHelper.GetKeyDown(257))
+            {
+                self.OnGetKeyHandler(257);
+            }
+
+            if (InputHelper.GetKey(119))
+            {
+                self.OnGetKeyHandler(119);
+            }
+
+            if (InputHelper.GetKey(97))
+            {
+                self.OnGetKeyHandler(97);
+            }
+
+            if (InputHelper.GetKey(115))
+            {
+                self.OnGetKeyHandler(115);
+            }
+
+            if (InputHelper.GetKey(100))
+            {
+                self.OnGetKeyHandler(100);
             }
         }
 
@@ -102,7 +127,7 @@ namespace ET.Client
                 //     return;
                 // }
                 // 测试技能
-                List<int> skillids = new List<int>() { 62000503 };
+                List<int> skillids = new List<int>() { 63011201 };
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 long targetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
 
@@ -630,7 +655,11 @@ namespace ET.Client
             if (obstruct != 0)
             {
                 string monsterName = MonsterConfigCategory.Instance.Get(obstruct).MonsterName;
-                FlyTipComponent.Instance.ShowFlyTip($"请先消灭{monsterName}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请先消灭{0}", monsterName));
+                }
+
                 return -1;
             }
 
