@@ -4106,7 +4106,7 @@ namespace ET
     [MemoryPackable]
     [Message(InnerMessage.U2M_UnionKickOutRequest)]
     [ResponseType(nameof(M2U_UnionKickOutResponse))]
-    public partial class U2M_UnionKickOutRequest : MessageObject, IRequest
+    public partial class U2M_UnionKickOutRequest : MessageObject, ILocationRequest
     {
         public static U2M_UnionKickOutRequest Create(bool isFromPool = false)
         {
@@ -4139,7 +4139,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.M2U_UnionKickOutResponse)]
-    public partial class M2U_UnionKickOutResponse : MessageObject, IResponse
+    public partial class M2U_UnionKickOutResponse : MessageObject, ILocationResponse
     {
         public static M2U_UnionKickOutResponse Create(bool isFromPool = false)
         {

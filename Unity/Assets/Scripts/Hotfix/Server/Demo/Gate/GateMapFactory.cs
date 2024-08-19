@@ -11,7 +11,6 @@ namespace ET.Server
             scene.AddComponent<AOIManagerComponent>();
             scene.AddComponent<RoomManagerComponent>();
             scene.AddComponent<MapComponent>();
-            scene.AddComponent<ServerInfoComponent>();
             scene.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             
             return scene;

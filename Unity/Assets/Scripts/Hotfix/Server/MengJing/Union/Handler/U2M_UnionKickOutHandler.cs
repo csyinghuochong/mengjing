@@ -7,7 +7,7 @@ namespace ET.Server
     /// 踢出家族， 在家族地图直接退出
     /// </summary>
     [MessageHandler(SceneType.Map)]
-    public class U2M_UnionKickOutHandler : MessageHandler<Unit, U2M_UnionKickOutRequest, M2U_UnionKickOutResponse>
+    public class U2M_UnionKickOutHandler : MessageLocationHandler<Unit, U2M_UnionKickOutRequest, M2U_UnionKickOutResponse>
     {
         protected override async ETTask Run(Unit unit, U2M_UnionKickOutRequest request, M2U_UnionKickOutResponse response)
         {

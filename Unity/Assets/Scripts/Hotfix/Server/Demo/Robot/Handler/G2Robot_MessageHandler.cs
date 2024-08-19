@@ -39,6 +39,8 @@ namespace ET.Server
                         //message.Message   sceneid_teamid
                         int  robotId = BattleHelper.GetTeamRobotId(fubenId);
                         string fibername = await robotManagerComponent.NewRobot(message.Zone, robotId);
+                        
+                        //应该发送消息给Robot纤程，初始化
                         RandNameComponent.Instance.TeamDungeonMessage[fibername] = message.Message;
                         robotnumber++;
                     }

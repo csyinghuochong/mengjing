@@ -20,8 +20,6 @@ namespace ET.Server
             U2M_UnionKickOutRequest r2M_RechargeRequest = U2M_UnionKickOutRequest.Create();
             r2M_RechargeRequest.UserId = request.UserId;
 
-            scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Remove(request.UserId);
-
             MessageLocationSenderOneType messageLocationSender = scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit);
             //1212275342967491 寒桑 tcg01   被踢的玩家
             Console.WriteLine($"Call.U2M_UnionKickOutRequest:  {request.UserId}");

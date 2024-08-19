@@ -39,8 +39,6 @@ namespace ET.Server
         }
     }
     
-    
-    
     public abstract class MessageLocationHandler<E, Request, Response>: HandlerObject, IMHandler where E : Entity where Request : MessageObject, ILocationRequest where Response : MessageObject, ILocationResponse
     {
         protected abstract ETTask Run(E unit, Request request, Response response);

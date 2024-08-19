@@ -950,14 +950,14 @@ message U2M_UnionKeJiQuickResponse // IResponse
 
 //公会踢人
 //ResponseType M2U_UnionKickOutResponse
-message U2M_UnionKickOutRequest // IRequest
+message U2M_UnionKickOutRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int64 UserId = 1;
 }
 
-message M2U_UnionKickOutResponse // IResponse
+message M2U_UnionKickOutResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

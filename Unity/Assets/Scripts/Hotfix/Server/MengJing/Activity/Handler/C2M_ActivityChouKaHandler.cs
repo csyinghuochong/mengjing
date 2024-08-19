@@ -30,11 +30,7 @@ namespace ET.Server
             unit.GetComponent<NumericComponentS>().ApplyChange( null,NumericType.V1ChouKaNumber, 1, 0 );
 
             int dropId = ConfigData.ChouKaDropId[0];
-            ServerInfoComponent serverInfoComponent = unit.Scene().GetComponent<ServerInfoComponent>();
-            if (serverInfoComponent != null)
-            {
-                dropId = ConfigData.ServerInfo.ChouKaDropId;
-            }
+            dropId = ConfigData.ServerInfo.ChouKaDropId;
 
             List<RewardItem> rewardItems = new List<RewardItem>();  
             DropHelper.DropIDToDropItem_2(dropId, rewardItems);
