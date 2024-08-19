@@ -7,7 +7,7 @@ namespace ET.Server
         {
             if (unit == null || unit.IsDisposed)
             {
-                Log.TraceInfo("NumericType.Now_Hp == null");
+                Log.Error("NumericType.Now_Hp == null");
             }
 
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();

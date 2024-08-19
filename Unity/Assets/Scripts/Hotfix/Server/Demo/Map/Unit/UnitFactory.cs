@@ -191,7 +191,6 @@ namespace ET.Server
                 switch (mapComponent.SceneType)
                 {
                     case SceneTypeEnum.LocalDungeon:
-                        aIComponent.LocalDungeonUnit = mainUnit;
                         aIComponent.InitMonster(monsterConfig.Id);
                         aIComponent.Begin();
                         break;

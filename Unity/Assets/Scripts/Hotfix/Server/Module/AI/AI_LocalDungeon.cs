@@ -1,9 +1,8 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
-
-
     /// <summary>
     /// 单人副本怪物AI
     /// </summary>
@@ -17,19 +16,22 @@ namespace ET.Server
             }
             Unit nearest = null;
             Unit unit = aiComponent.GetParent<Unit>();
-            if (aiComponent.LocalDungeonUnit == null)
+            List<Unit> unitlist = UnitHelper.GetUnitList(aiComponent.Scene(), UnitType.Player);
+            if (unitlist.Count == 0)
             {
                 aiComponent.Stop();
                 Log.Error($"aiComponent.LocalDungeonUnit == null: scenetype:{ aiComponent.SceneType}  confidid: {unit.ConfigId}");
                 return 0;
             }
-            if (math.distance(unit.Position, aiComponent.LocalDungeonUnit.Position) <= aiComponent.ActRange)
+
+            Unit playe = unitlist[0];
+            if (math.distance(unit.Position, playe.Position) <= aiComponent.ActRange)
             {
-                nearest = aiComponent.LocalDungeonUnit;
+                nearest = playe;
             }
             if (nearest == null)
             {
-                RolePetInfo rolePetInfo = aiComponent.LocalDungeonUnit.GetComponent<PetComponentS>().GetFightPet();
+                RolePetInfo rolePetInfo = playe.GetComponent<PetComponentS>().GetFightPet();
                 if (rolePetInfo != null)
                 {
                     Unit pet = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
