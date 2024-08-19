@@ -1429,7 +1429,7 @@ namespace ET.Client
             int unitType = defend.Type;
             if (unitType == UnitType.Player && sceneType == SceneTypeEnum.TeamDungeon)
             {
-                // self.UIMainTeam.OnUpdateHP(defend);
+                self.OnUpdateTeamHP(defend);
             }
 
             if (unitType == UnitType.Monster)
