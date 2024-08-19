@@ -276,7 +276,7 @@ namespace ET.Client
 
         public static void AddListener(this ToggleGroup toggleGroup, UnityAction<int> selectEventHandler, Func<int, bool> checkHandler = null)
         {
-            var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
+            var togglesList = toggleGroup.GetComponentsInChildren<Toggle>(true);
             for (int i = 0; i < togglesList.Length; i++)
             {
                 int index = i;
