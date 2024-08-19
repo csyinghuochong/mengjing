@@ -30,6 +30,8 @@ namespace ET.Client
             self.ESEquipItems_1.Add(self.ES_EquipItemXianglian_1);
 
             self.ESEquipItems_2.Add(self.ES_EquipItemWuqi_2);
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+            self.ES_EquipItemWuqi_2.uiTransform.gameObject.SetActive(occ == 3);
         }
 
         [EntitySystem]
