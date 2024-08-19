@@ -503,7 +503,8 @@ namespace ET.Client
                         string showColor = "1";
                         if (NumericHelp.GetNumericValueType(hidePro.PropertyType) == 2)
                         {
-                            proStr = hidePro.Name + GameSettingLanguge.Instance.LoadLocalization("提升") + ((float)hidePropertyValue / 100.0f).ToString("0.##") +
+                            proStr = hidePro.Name + GameSettingLanguge.Instance.LoadLocalization("提升") +
+                                    ((float)hidePropertyValue / 100.0f).ToString("0.##") +
                                     "%"; // 0.82   0.80
                         }
                         else
@@ -526,7 +527,7 @@ namespace ET.Client
             //显示隐藏技能
             if (baginfo.HideSkillLists != null)
             {
-                string skillTip = itemConfig.EquipType == 301? "套装效果，附加技能：" : "隐藏技能：";
+                string skillTip = itemConfig.EquipType == 301 ? "套装效果，附加技能：" : "隐藏技能：";
                 for (int i = 0; i < baginfo.HideSkillLists.Count; i++)
                 {
                     int skillID = baginfo.HideSkillLists[i];
@@ -872,6 +873,9 @@ namespace ET.Client
 
                 case 4:
                     return "魔法书";
+
+                case 5:
+                    return "弓";
 
                 case 11:
                     return "布甲";
