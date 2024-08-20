@@ -1,11 +1,28 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (BuffManagerComponentC))]
-    [FriendOf(typeof (BuffManagerComponentC))]
+    [EntitySystemOf(typeof(BuffManagerComponentC))]
+    [FriendOf(typeof(BuffManagerComponentC))]
     public static partial class BuffManagerComponentCSystem
     {
+        [Invoke(TimerInvokeType.BuffTimerC)]
+        public class BuffTimer : ATimer<BuffManagerComponentC>
+        {
+            protected override void Run(BuffManagerComponentC self)
+            {
+                try
+                {
+                    self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this BuffManagerComponentC self)
         {
@@ -24,7 +41,7 @@ namespace ET.Client
             for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
             {
                 BuffC buffHandler = self.m_Buffs[i];
-                
+
                 BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
                 aaiHandler.OnFinished(buffHandler);
                 buffHandler.Clear();
@@ -45,6 +62,7 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
                 aaiHandler.OnFinished(buffHandler);
                 buffHandler.Clear();
@@ -58,16 +76,16 @@ namespace ET.Client
             }
         }
 
-        public static void OnUpdate(this BuffManagerComponentC self)
+        public static void Check(this BuffManagerComponentC self)
         {
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
                 BuffC buffHandler = self.m_Buffs[i];
-               
+
                 BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
                 aaiHandler.OnUpdate(buffHandler);
-                
+
                 if (buffHandler.BuffState == BuffState.Finished)
                 {
                     aaiHandler.OnFinished(buffHandler);
@@ -118,7 +136,7 @@ namespace ET.Client
             string BuffClassScript = skillBuffConfig.BuffScript;
             BuffC buffHandler = self.AddChild<BuffC>();
             self.m_Buffs.Add(buffHandler); //给buff目标添加buff管理器
-            
+
             BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(skillBuffConfig.BuffScript);
             aaiHandler.OnInit(buffHandler, buffData, self.GetParent<Unit>());
 
