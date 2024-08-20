@@ -535,5 +535,29 @@ namespace ET.Client
 
             return canEquipList;
         }
+
+        public static void OnResetSeason(this BagComponentC self, bool notice)
+        {
+            self.SeasonJingHePlan = 0;
+
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.ItemLocBag]);
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.ItemWareHouse1]);
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.ItemWareHouse2]);
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.ItemWareHouse3]);
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.ItemWareHouse4]);
+            self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.SeasonJingHe]);
+        }
+
+        public static void ClearJingHeItem(this BagComponentC self, List<BagInfo> bagInfos)
+        {
+            for (int i = bagInfos.Count - 1; i >= 0; i--)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.EquipType == 201)
+                {
+                    bagInfos.RemoveAt(i);
+                }
+            }
+        }
     }
 }

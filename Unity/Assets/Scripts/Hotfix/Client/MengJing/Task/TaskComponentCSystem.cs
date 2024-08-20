@@ -3,8 +3,8 @@ using System.Linq;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (TaskComponentC))]
-    [EntitySystemOf(typeof (TaskComponentC))]
+    [FriendOf(typeof(TaskComponentC))]
+    [EntitySystemOf(typeof(TaskComponentC))]
     public static partial class TaskComponentCSystem
     {
         [EntitySystem]
@@ -220,6 +220,27 @@ namespace ET.Client
             }
 
             return false;
+        }
+
+        public static void OnResetSeason(this TaskComponentC self, bool notice)
+        {
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskConfig.TaskType == TaskTypeEnum.Season)
+                {
+                    self.RoleTaskList.RemoveAt(i);
+                }
+            }
+
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskConfig.TaskType == TaskTypeEnum.Season)
+                {
+                    self.RoleTaskList.RemoveAt(i);
+                }
+            }
         }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (UserInfoComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(UserInfoComponentC))]
     public static partial class UserInfoComponentCSystem
     {
         [EntitySystem]
@@ -306,6 +306,27 @@ namespace ET.Client
             self.UserInfo.PetExploreRewardIds.Clear();
             self.UserInfo.PetHeXinExploreRewardIds.Clear();
             self.UserInfo.ItemXiLianNumRewardIds.Clear();
+        }
+
+        public static void OnHorseActive(this UserInfoComponentC self, int horseId, bool active)
+        {
+            if (active && !self.UserInfo.HorseIds.Contains(horseId))
+            {
+                self.UserInfo.HorseIds.Add(horseId);
+            }
+
+            if (!active && self.UserInfo.HorseIds.Contains(horseId))
+            {
+                self.UserInfo.HorseIds.Remove(horseId);
+            }
+        }
+
+        public static void OnResetSeason(this UserInfoComponentC self, bool notice)
+        {
+            self.UserInfo.SeasonLevel = 1;
+            self.UserInfo.SeasonExp = 0;
+            self.UserInfo.SeasonCoin = 0;
+            self.UserInfo.OpenJingHeIds.Clear();
         }
     }
 }
