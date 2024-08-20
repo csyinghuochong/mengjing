@@ -48,6 +48,11 @@ namespace UnityEngine.UI
         /// </summary>
         protected int itemTypeStart = 0;
 
+        public int ItemTypeStart
+        {
+            get { return itemTypeStart; }
+        }
+
         /// <summary>
         /// The last item id in LoopScroll.
         /// </summary>

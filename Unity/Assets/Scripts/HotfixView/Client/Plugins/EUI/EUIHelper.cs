@@ -66,11 +66,17 @@ namespace ET.Client
             uiBehaviour.gameObject.SetActive(isVisible);
         }
 
-        public static void SetVisible(this LoopScrollRect loopScrollRect, bool isVisible, int count = 0)
+        public static void SetVisible(this LoopScrollRect loopScrollRect, bool isVisible, int count, bool reStart = false)
         {
+            int startItem = 0;
+            if (!reStart)
+            {
+                startItem = loopScrollRect.ItemTypeStart;
+            }
+
             loopScrollRect.gameObject.SetActive(isVisible);
             loopScrollRect.totalCount = count;
-            loopScrollRect.RefillCells();
+            loopScrollRect.RefillCells(startItem);
         }
 
         public static void SetVisibleWithScale(this Transform transform, bool isVisible)
