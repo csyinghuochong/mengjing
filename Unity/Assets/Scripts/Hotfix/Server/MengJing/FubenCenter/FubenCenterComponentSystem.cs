@@ -594,7 +594,7 @@ namespace ET.Server
                 }
             }
 
-            if (battleInfo == null)
+            if (camp == 0)
             {
                 return self.GenerateBattleInstanceId(unitid, sceneId);
             }

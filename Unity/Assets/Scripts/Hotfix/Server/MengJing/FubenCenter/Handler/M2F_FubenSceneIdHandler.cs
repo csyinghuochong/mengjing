@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.FubenCenter)]
     public class M2F_FubenSceneIdHandler : MessageHandler<Scene, M2F_FubenSceneIdRequest, F2M_FubenSceneIdResponse>
@@ -18,6 +20,8 @@
                 response.FubenActorId = iteminfo.Item2.ActorId;
                 response.Camp = iteminfo.Item1;
                 response.Message = "0";
+                
+                Console.WriteLine($"response.Camp:     {request.UnitId}   {response.Camp}");
             }
             else 
             {
