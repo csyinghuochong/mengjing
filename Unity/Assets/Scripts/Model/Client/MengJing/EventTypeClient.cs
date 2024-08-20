@@ -496,4 +496,9 @@ namespace ET.Client
         public int GuideId;
         public int GroupId;
     }
+
+    public struct SkillChainLight
+    {
+        public M2C_ChainLightning M2C_ChainLightning;
+    }
 }
