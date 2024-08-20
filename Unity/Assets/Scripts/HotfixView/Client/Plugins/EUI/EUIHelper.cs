@@ -74,9 +74,17 @@ namespace ET.Client
                 startItem = loopScrollRect.ItemTypeStart;
             }
 
+            RectTransform rectTransform = loopScrollRect.transform.Find("Content").GetComponent<RectTransform>();
+            Vector2 pos = rectTransform.anchoredPosition;
+
             loopScrollRect.gameObject.SetActive(isVisible);
             loopScrollRect.totalCount = count;
             loopScrollRect.RefillCells(startItem);
+
+            if (!reStart)
+            {
+                loopScrollRect.transform.Find("Content").GetComponent<RectTransform>().anchoredPosition = pos;
+            }
         }
 
         public static void SetVisibleWithScale(this Transform transform, bool isVisible)
