@@ -49,7 +49,7 @@ namespace ET.Client
             self.View.E_Image_SkillIconImage.sprite = sp;
 
             self.View.E_Lab_SkillNameText.text = skillConfig.SkillName;
-            self.View.E_Lab_SkillDesText.text = skillConfig.SkillDescribe + addTip;
+            self.View.E_Lab_SkillDesText.text = skillConfig.SkillDescribe.Replace("\\n", "\n") + addTip;
 
             if (skillConfig.SkillType == 1)
             {
