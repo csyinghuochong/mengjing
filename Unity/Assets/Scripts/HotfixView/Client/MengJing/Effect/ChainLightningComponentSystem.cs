@@ -1,12 +1,30 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ChainLightningComponent))]
-    [FriendOf(typeof (ChainLightningComponent))]
+    [EntitySystemOf(typeof(ChainLightningComponent))]
+    [FriendOf(typeof(ChainLightningComponent))]
     public static partial class ChainLightningComponentSystem
     {
+        [Invoke(TimerInvokeType.ChainLightningTimer)]
+        public class ChainLightningTimer : ATimer<ChainLightningComponent>
+        {
+            protected override void Run(ChainLightningComponent self)
+            {
+                try
+                {
+                    self.OnUpdate();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this ChainLightningComponent self, GameObject go)
         {

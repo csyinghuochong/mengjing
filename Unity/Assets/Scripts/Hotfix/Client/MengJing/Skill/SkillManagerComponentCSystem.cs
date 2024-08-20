@@ -467,11 +467,11 @@ namespace ET.Client
 
             //检查魔法值
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-            // int skillMp = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SkillUseMP);
-            // if (skillConfig.SkillUseMP > 0 && skillMp < skillConfig.SkillUseMP)
-            // {
-            //     return ErrorCode.ERR_CanNotUseSkill_MP;
-            // }
+            int skillMp = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SkillUseMP);
+            if (skillConfig.SkillUseMP > 0 && skillMp < skillConfig.SkillUseMP)
+            {
+                return ErrorCode.ERR_CanNotUseSkill_MP;
+            }
 
             //普攻不检测CD
             if (skillConfig.SkillActType != 0)
