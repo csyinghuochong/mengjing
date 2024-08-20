@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -115,6 +116,8 @@ namespace ET.Server
 
         public static void SetBornPosition(this Unit self, float3 vector3, bool notice)
         {
+            Console.WriteLine($"SetBornPosition:  {vector3}");
+            
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.Born_X, (long)(vector3.x * 10000), notice);
             numericComponent.ApplyValue(NumericType.Born_Y, (long)(vector3.y * 10000), notice);

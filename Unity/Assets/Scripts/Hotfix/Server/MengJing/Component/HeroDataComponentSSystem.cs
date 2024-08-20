@@ -429,17 +429,14 @@ namespace ET.Server
              NumericComponentS numericComponent  = unit.GetComponent<NumericComponentS>();
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
 
-             numericComponent.Set(NumericType.Now_Dead, 0);
-             numericComponent.Set(NumericType.Now_Hp, 0);
-             numericComponent.Set(NumericType.Now_Hp, max_hp);
-             numericComponent.Set(NumericType.ReviveTime, 0);
+             numericComponent.ApplyValue(NumericType.Now_Dead, 0);
+             numericComponent.ApplyValue(NumericType.Now_Hp, 0);
+             numericComponent.ApplyValue(NumericType.Now_Hp, max_hp);
+             numericComponent.ApplyValue(NumericType.ReviveTime, 0);
              unit.GetComponent<SkillPassiveComponent>()?.Activeted();
 
              unit.Position = unit.GetBornPostion();
-             if (unit.Type == UnitType.Monster)
-             {
-                 unit.GetComponent<AIComponent>().Begin();
-             }
+             unit.GetComponent<AIComponent>()?.Begin();
          }
 
          public static void InitTempFollower(this HeroDataComponentS self, Unit matster, int monster)
