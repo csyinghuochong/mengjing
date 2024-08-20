@@ -16,7 +16,7 @@ namespace ET.Client
 
             long nowHpValue = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
             long costHp = (nowHpValue - args.OldValue);
-            EventSystem.Instance.Publish(unit.Root(), new UnitHpUpdate()
+            EventSystem.Instance.Publish(unit.Root(), new Now_Hp_Update()
             {
                 Defend = unit,
                 ChangeHpValue = costHp,

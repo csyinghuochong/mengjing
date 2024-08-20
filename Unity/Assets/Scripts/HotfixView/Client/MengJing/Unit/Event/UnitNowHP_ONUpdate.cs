@@ -3,9 +3,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitNowHP_ONUpdate: AEvent<Scene, UnitHpUpdate>
+    public class UnitNowHP_ONUpdate: AEvent<Scene, Now_Hp_Update>
     {
-        protected override async ETTask Run(Scene scene, UnitHpUpdate args)
+        protected override async ETTask Run(Scene scene, Now_Hp_Update args)
         {
             Log.Debug($"UnitHpUpdate:   {args.Defend.Id} {args.ChangeHpValue} ");
 
