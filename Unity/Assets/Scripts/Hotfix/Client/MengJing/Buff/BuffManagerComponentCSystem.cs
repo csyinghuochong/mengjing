@@ -43,7 +43,14 @@ namespace ET.Client
                 BuffC buffHandler = self.m_Buffs[i];
 
                 BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
+                if (buffHandler.Scene() == null)
+                {
+                    Log.Error($"buffHandler.Scene() == null");
+                }
+
                 aaiHandler.OnFinished(buffHandler);
+                
+                
                 buffHandler.Clear();
                 self.m_Buffs.RemoveAt(i);
                 ObjectPool.Instance.Recycle(buffHandler);

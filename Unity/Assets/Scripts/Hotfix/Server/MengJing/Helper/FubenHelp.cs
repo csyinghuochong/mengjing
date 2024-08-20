@@ -38,7 +38,7 @@ namespace ET.Server
 				return;
 			}
 
-			List<EntityRef<Unit>> entities = self.Root().GetComponent<UnitComponent>().GetAll();
+			List<EntityRef<Unit>> entities = self.Scene().GetComponent<UnitComponent>().GetAll();
 			for (int i = entities.Count - 1; i >= 0; i--)
 			{
 				Unit unit = entities[i];
