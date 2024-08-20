@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitDead_PlayDeadAnimate: AEvent<Scene, UnitDead>
+    public class UnitDead_OnPlayDead: AEvent<Scene, UnitDead>
     {
         protected override async ETTask Run(Scene root, UnitDead args)
         {
