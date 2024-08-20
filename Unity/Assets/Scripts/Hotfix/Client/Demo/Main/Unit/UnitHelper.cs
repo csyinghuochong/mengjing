@@ -199,9 +199,9 @@ namespace ET.Client
             return ItemHelper.GetEquipType(unit.ConfigId, itemId);
         }
 
-        public static bool IsRobot(this Unit self)
+        public static bool IsSelfRobot(this Unit self)
         {
-            return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
+            return   self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
         }
 
         public static int GetMonsterType(this Unit self)

@@ -347,7 +347,7 @@ namespace ET.Client
                 moveComponent.Stop(true);
             }
 
-            if (unit.MainHero && !unit.IsRobot())
+            if (unit.MainHero && !unit.IsSelfRobot())
             {
                 self.AddSkillCD(skillcmd.SkillID, skillcmd.CDEndTime, skillcmd.PublicCDTime);
 
