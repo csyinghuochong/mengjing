@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System;
+
+namespace ET.Client
 {
     //接受属性改变消息
     [MessageHandler(SceneType.Demo)]

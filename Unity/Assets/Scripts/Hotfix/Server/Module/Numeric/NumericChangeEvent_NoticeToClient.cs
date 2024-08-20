@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [Event(SceneType.Map)]
     public class NumericChangeEvent_NoticeToClient : AEvent<Scene, NumbericChange>

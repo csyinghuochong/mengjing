@@ -79,9 +79,8 @@ namespace ET.Server
                 }
             }
 
-            numericComponent.ApplyValue(NumericType.Now_Dead, 1);
-            Console.WriteLine($"NumericType.Now_Dead:  {numericComponent.Id}");
-
+           
+            
             bool selfDeath = defendUnit == mainAttack;
             if (selfDeath)
             {

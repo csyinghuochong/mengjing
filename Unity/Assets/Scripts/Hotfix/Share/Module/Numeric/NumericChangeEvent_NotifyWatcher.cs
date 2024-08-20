@@ -1,4 +1,6 @@
-﻿namespace ET
+﻿using System;
+
+namespace ET
 {
 	// 分发数值监听
 	[Event(SceneType.All)]  // 服务端Map需要分发, 客户端CurrentScene也要分发

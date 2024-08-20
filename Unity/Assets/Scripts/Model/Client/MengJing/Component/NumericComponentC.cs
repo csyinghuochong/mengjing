@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
@@ -104,6 +105,11 @@ namespace ET.Client
                 numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
             {
                 return;
+            }
+
+            if ( (self.Parent as Unit).Type == UnitType.Player && numericType == NumericType.Now_Dead)
+            {
+                Console.WriteLine($"NumericComponentC.ApplyValue  NumericType.Now_Dead:{self.Parent.Id}");
             }
 
             if (notice)
