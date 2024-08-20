@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -9,6 +10,22 @@ namespace ET.Client
     [FriendOf(typeof(UIPlayerHpComponent))]
     public static partial class UIPlayerHpComponentSystem
     {
+        [Invoke(TimerInvokeType.DialogTimer)]
+        public class DialogTimer : ATimer<UIPlayerHpComponent>
+        {
+            protected override void Run(UIPlayerHpComponent self)
+            {
+                try
+                {
+                    self.HideDialog();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this UIPlayerHpComponent self)
         {
@@ -306,7 +323,8 @@ namespace ET.Client
                 }
 
                 self.Lal_JiaZuName.GetComponent<Text>().text = unionname;
-                Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
+                Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f)
+                        : new Vector3(0f, 75f, 0f);
                 self.Img_ChengHao.transform.localPosition = vector3_pos;
             }
         }

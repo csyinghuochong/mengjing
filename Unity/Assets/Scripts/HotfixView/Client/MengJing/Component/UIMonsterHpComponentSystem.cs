@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,22 @@ namespace ET.Client
     [FriendOf(typeof(UIMonsterHpComponent))]
     public static partial class UIMonsterHpComponentSystem
     {
+        [Invoke(TimerInvokeType.UIUnitReviveTime)]
+        public class UIUnitReviveTime : ATimer<UIMonsterHpComponent>
+        {
+            protected override void Run(UIMonsterHpComponent self)
+            {
+                try
+                {
+                    self.OnTimer();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this UIMonsterHpComponent self)
         {
