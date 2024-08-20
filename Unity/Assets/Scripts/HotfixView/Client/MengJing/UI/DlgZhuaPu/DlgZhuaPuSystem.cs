@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -7,6 +8,22 @@ namespace ET.Client
     [FriendOf(typeof(DlgZhuaPu))]
     public static class DlgZhuaPuSystem
     {
+        [Invoke(TimerInvokeType.UIZhuaPuTimer)]
+        public class UIZhuaPuTimer : ATimer<DlgZhuaPu>
+        {
+            protected override void Run(DlgZhuaPu self)
+            {
+                try
+                {
+                    self.OnTimer();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         public static void RegisterUIEvent(this DlgZhuaPu self)
         {
             self.View.E_ButtonDigButton.AddListenerAsync(self.OnButtonDig);
