@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -424,6 +425,7 @@ namespace ET.Server
          public static void OnRevive(this HeroDataComponentS self, bool bornPostion = false)
          {
              Unit unit = self.GetParent<Unit>();
+             Console.WriteLine($"HeroDataComponentS.OnRevive:  {unit.Id}");
              NumericComponentS numericComponent  = unit.GetComponent<NumericComponentS>();
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
 

@@ -16,6 +16,9 @@ namespace ET.Client
             {
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
                 root.GetComponent<BehaviourComponent>().Stop();
+                
+                Console.WriteLine("BehaviourComponent.Stop");
+                
                 switch (mapComponent.SceneType)
                 {
                     case SceneTypeEnum.Battle:
@@ -30,8 +33,8 @@ namespace ET.Client
                         }
                         
                         EnterMapHelper.SendReviveRequest(root, false).Coroutine();
-                        root.GetComponent<BehaviourComponent>().Start();
                         root.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
+                        root.GetComponent<BehaviourComponent>().Start();
                         break;
                     case SceneTypeEnum.Arena:
                         await root.GetComponent<TimerComponent>().WaitAsync(20000);

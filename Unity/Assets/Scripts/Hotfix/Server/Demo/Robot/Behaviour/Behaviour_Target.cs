@@ -39,7 +39,7 @@ namespace ET
                 await timerComponent.WaitAsync(1000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
-                    Log.Debug("Behaviour_Battle: Exit1");
+                    Console.WriteLine("Behaviour_Target.Exit: IsCancel");
                     return;
                 }
             }

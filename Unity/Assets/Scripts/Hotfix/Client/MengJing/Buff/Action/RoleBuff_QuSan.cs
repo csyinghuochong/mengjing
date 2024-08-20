@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public class RoleBuffQuSan : RoleBuff_Base
+    public class RoleBuff_QuSan : RoleBuff_Base
     {
         public override void OnInit(BuffC buffc, BuffData buffData, Unit theUnitBelongto)
         {

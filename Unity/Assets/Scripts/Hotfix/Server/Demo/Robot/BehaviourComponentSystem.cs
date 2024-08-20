@@ -85,7 +85,7 @@ namespace ET
             }
 
             self.ActDistance = self.Root().GetComponent<AttackComponent>().AttackDistance;
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BehaviourTimer, self);
+            self.Start();
         }
         
 
@@ -161,11 +161,14 @@ namespace ET
 
         public static void Start(this BehaviourComponent self)
         {
+            Console.WriteLine("BehaviourComponent.Start");
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BehaviourTimer, self);
         }
 
         public static void Stop(this BehaviourComponent self)
         {
+            Console.WriteLine("BehaviourComponent.Stop");
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.TargetID = 0;
             self.NewBehaviour = 0;
             self.Cancel();
