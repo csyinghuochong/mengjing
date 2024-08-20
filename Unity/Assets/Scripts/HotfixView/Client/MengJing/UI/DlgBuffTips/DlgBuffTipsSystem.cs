@@ -20,8 +20,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
         }
 
-        public static void OnUpdateData(this DlgBuffTips self, int buffid, Vector3 vector3, string showStr, string spellcast, string aBAtlasTypes,
-        string bufficon)
+        public static void OnUpdateData(this DlgBuffTips self, int buffid, Vector3 vector3, string spellcast, string aBAtlasTypes, string bufficon)
         {
             self.BuffId = buffid;
             SkillBuffConfig skillBufConfig = SkillBuffConfigCategory.Instance.Get(buffid);
@@ -36,10 +35,15 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.View.E_Lab_BuffTimeText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("剩余时间"), showStr);
-
                 self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
-                self.View.E_Lab_SpellcasterText.text = zstring.Format("施法者：{0}", spellcast);
+                if (!string.IsNullOrEmpty(spellcast))
+                {
+                    self.View.E_Lab_SpellcasterText.text = zstring.Format("施法者：{0}", spellcast);
+                }
+                else
+                {
+                    self.View.E_Lab_SpellcasterText.text = "";
+                }
             }
         }
     }

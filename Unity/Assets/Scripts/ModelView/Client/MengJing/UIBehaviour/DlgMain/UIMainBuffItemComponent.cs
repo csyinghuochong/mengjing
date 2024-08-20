@@ -17,7 +17,6 @@ namespace ET.Client
         public long BuffTime;
         public long EndTime;
         public string SpellCast;
-        public string showTimeStr;
         public string BuffIcon;
         public string aBAtlasTypes;
 

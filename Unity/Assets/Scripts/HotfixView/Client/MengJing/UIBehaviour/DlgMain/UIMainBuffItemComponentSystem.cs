@@ -55,7 +55,7 @@ namespace ET.Client
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgBuffTips>().OnUpdateData(self.BuffID, new Vector3(localPoint.x, localPoint.y, 0f),
-                self.showTimeStr, self.SpellCast, self.aBAtlasTypes, self.BuffIcon);
+                self.SpellCast, self.aBAtlasTypes, self.BuffIcon);
         }
 
         public static void BeforeRemove(this UIMainBuffItemComponent self)
@@ -78,7 +78,6 @@ namespace ET.Client
 
             self.Img_BuffCD.GetComponent<Image>().fillAmount = (self.BuffTime - leftTime) * 1f / self.BuffTime;
             leftTime = leftTime / 1000;
-            self.TextLeftTime.GetComponent<Text>().text = self.showTimeStr;
             return leftTime > 0;
         }
 
