@@ -79,8 +79,7 @@ namespace ET.Server
                 }
             }
 
-           
-            
+            numericComponent.ApplyValue( NumericType.Now_Dead, 1 );
             bool selfDeath = defendUnit == mainAttack;
             if (selfDeath)
             {
