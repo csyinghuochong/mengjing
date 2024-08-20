@@ -3,31 +3,31 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    public class BuffDispatcherComponentC: Singleton<BuffDispatcherComponentC>, ISingletonAwake
+    [Code]
+    public class BuffDispatcherComponentC : Singleton<BuffDispatcherComponentC>, ISingletonAwake
     {
-        private readonly Dictionary<string, BuffHandlerC> aiHandlers = new();
-        
+        private readonly Dictionary<string, BuffHandlerC> handlers = new();
+
         public void Awake()
         {
-            var types = CodeTypes.Instance.GetTypes(typeof (BuffHandlerCAttribute));
+            var types = CodeTypes.Instance.GetTypes(typeof(BuffHandlerCAttribute));
             foreach (Type type in types)
             {
-                BuffHandlerC aaiHandler = Activator.CreateInstance(type) as BuffHandlerC;
-                if (aaiHandler == null)
+                BuffHandlerC handler = Activator.CreateInstance(type) as BuffHandlerC;
+                if (handler == null)
                 {
-                    Log.Error($"robot ai is not AAIHandler: {type.Name}");
+                    Log.Error($"not BuffHandlerC: {type.Name}");
                     continue;
                 }
-                this.aiHandlers.Add(type.Name, aaiHandler);
+
+                this.handlers.Add(type.Name, handler);
             }
         }
 
         public BuffHandlerC Get(string key)
         {
-            this.aiHandlers.TryGetValue(key, out var aaiHandler);
-            return aaiHandler;
+            this.handlers.TryGetValue(key, out var handler);
+            return handler;
         }
-    
     }
-    
 }

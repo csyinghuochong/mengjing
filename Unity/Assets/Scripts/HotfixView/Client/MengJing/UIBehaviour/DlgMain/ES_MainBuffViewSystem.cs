@@ -3,30 +3,30 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.MainBuffTimer)]
-    public class MainBuffTimer : ATimer<ES_MainBuff>
-    {
-        protected override void Run(ES_MainBuff self)
-        {
-            try
-            {
-                self.OnUpdate();
-            }
-            catch (Exception e)
-            {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
-            }
-        }
-    }
-
     [FriendOf(typeof(UIMainBuffItemComponent))]
     [EntitySystemOf(typeof(ES_MainBuff))]
     [FriendOfAttribute(typeof(ES_MainBuff))]
     public static partial class ES_MainBuffSystem
     {
+        [Invoke(TimerInvokeType.MainBuffTimer)]
+        public class MainBuffTimer : ATimer<ES_MainBuff>
+        {
+            protected override void Run(ES_MainBuff self)
+            {
+                try
+                {
+                    self.OnUpdate();
+                }
+                catch (Exception e)
+                {
+                    using (zstring.Block())
+                    {
+                        Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                    }
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this ES_MainBuff self, Transform transform)
         {
