@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace ET.Client
 {
-    [MessageHandler(SceneType.Robot)]
+    [MessageHandler(SceneType.Demo)]
     public class Main2RobotClient_MessageHandler : MessageHandler<Scene, Main2RobotClient_Message, RobotClient2Main_Message>
     {
         protected override async ETTask Run(Scene root, Main2RobotClient_Message request, RobotClient2Main_Message response)
