@@ -26,7 +26,6 @@ namespace ET.Client
 
             self.View.E_ButtonLeaveButton.AddListener(() => { self.On_ButtonLeave(); });
             self.View.E_ButtonApplyListButton.AddListener(() => { self.On_ButtonApplyList(); });
-            self.TeamUIList.Clear();
         }
 
         public static void ShowWindow(this DlgTeam self, Entity contextData = null)
