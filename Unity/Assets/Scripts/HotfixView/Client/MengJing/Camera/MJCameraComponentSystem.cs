@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (MJCameraComponent))]
-    [FriendOf(typeof (MJCameraComponent))]
+    [EntitySystemOf(typeof(MJCameraComponent))]
+    [FriendOf(typeof(MJCameraComponent))]
     public static partial class MJCameraComponentSystem
     {
         [EntitySystem]
@@ -70,7 +70,7 @@ namespace ET.Client
 
         public static void BuildEnterMove(this MJCameraComponent self)
         {
-            if (self.CameraMoveTime > 0.8f && self.OnBuildEnter!= null)
+            if (self.CameraMoveTime > 0.8f && self.OnBuildEnter != null)
             {
                 self.OnBuildEnter();
                 self.OnBuildEnter = null;
@@ -116,6 +116,12 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(lookPosition);
         }
 
+        public static void SetPullCamera(this MJCameraComponent self)
+        {
+            self.PullRate = 1f;
+            self.CameraMoveType = CameraMoveType.Pull;
+        }
+
         public static void PullCameraMove(this MJCameraComponent self)
         {
             if (self.PullRate >= 1.5f) // 最大距离
@@ -154,7 +160,7 @@ namespace ET.Client
         {
             self.NpcUnit = npc;
             self.CameraMoveTime = 0f;
-            self.CameraMoveType = (npc != null)? CameraMoveType.NpcEnter : CameraMoveType.Normal;
+            self.CameraMoveType = (npc != null) ? CameraMoveType.NpcEnter : CameraMoveType.Normal;
 
             self.TargetPosition = npc.Position + npc.Forward * 4f;
             self.TargetPosition.y += 2f;
@@ -218,8 +224,8 @@ namespace ET.Client
             if (y != 0)
             {
                 self.OffsetAngleY += y;
-                self.OffsetAngleY = self.OffsetAngleY > self.MAX_ANGLE_Y? self.MAX_ANGLE_Y : self.OffsetAngleY;
-                self.OffsetAngleY = self.OffsetAngleY < self.MIN_ANGLE_Y? self.MIN_ANGLE_Y : self.OffsetAngleY;
+                self.OffsetAngleY = self.OffsetAngleY > self.MAX_ANGLE_Y ? self.MAX_ANGLE_Y : self.OffsetAngleY;
+                self.OffsetAngleY = self.OffsetAngleY < self.MIN_ANGLE_Y ? self.MIN_ANGLE_Y : self.OffsetAngleY;
             }
         }
 
