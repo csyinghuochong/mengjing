@@ -198,5 +198,6 @@ namespace ET.Client
 		WindowID_BattleRecruit,
 		WindowID_ChengJiuActivite,
 		WindowID_Relink,
+		WindowID_SoloReward,
 	}
 }
