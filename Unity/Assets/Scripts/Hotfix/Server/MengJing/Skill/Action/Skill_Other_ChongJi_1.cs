@@ -1,11 +1,9 @@
-﻿
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 
 namespace ET.Server
 {
     public class Skill_Other_ChongJi_1 : SkillHandlerS
     {
-        
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
             skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
@@ -49,10 +47,11 @@ namespace ET.Server
             {
                 skillS.SpeedAddValue = 0f;
             }
+
             skillS.TheUnitFrom.GetComponent<StateComponentS>().SetRigidityEndTime(0);
             float moveDistance = ((float)skillS.SkillConf.SkillMoveSpeed * skillS.SkillConf.SkillLiveTime * 0.001f);
-            quaternion rotation =  quaternion.Euler(0, skillS.SkillInfo.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
-            skillS.TargetPosition = skillS.TheUnitFrom.Position + math.mul(rotation , new float3(0,1,0)) * moveDistance;
+            quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0); //按照Z轴旋转30度的Quaterion
+            skillS.TargetPosition = skillS.TheUnitFrom.Position + math.mul(rotation, new float3(0, 0, 1)) * moveDistance;
 
             int navmeshid = skillS.TheUnitFrom.Scene().GetComponent<MapComponent>().NavMeshId;
             skillS.TargetPosition = MoveHelper.GetCanChongJiPath(navmeshid, skillS.TheUnitFrom.Position, skillS.TargetPosition);
@@ -74,12 +73,13 @@ namespace ET.Server
         public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
-        
+
             //根据技能效果延迟触发伤害
             if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
+
             //只触发一次，需要多次触发的重写
             if (!skillS.IsExcuteHurt)
             {
@@ -87,11 +87,13 @@ namespace ET.Server
                 MoveToSync(skillS);
                 //MoveToAsync().Coroutine();
             }
+
             if (serverNow > skillS.SkillEndTime)
             {
                 skillS.SetSkillState(SkillState.Finished);
                 return;
             }
+
             if (skillS.ICheckShape.Count > 0)
             {
                 //分成五份计算
@@ -101,7 +103,7 @@ namespace ET.Server
 
                 for (int i = 0; i < 5; i++)
                 {
-                    skillS.UpdateCheckPoint(oldpos + inteva * ( i + 1 ) );
+                    skillS.UpdateCheckPoint(oldpos + inteva * (i + 1));
                     skillS.ExcuteSkillAction();
                 }
             }
