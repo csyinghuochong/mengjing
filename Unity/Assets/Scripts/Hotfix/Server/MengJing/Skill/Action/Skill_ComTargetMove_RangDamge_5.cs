@@ -83,9 +83,8 @@ namespace ET.Server
             float3 target = this.GetBulletTargetPoint(skillS, skillS.SkillInfo.TargetAngle);
             unit.BulletMoveToAsync(target).Coroutine();
             skillS.SkillExcuteNum--;
-
-            int navmeshid = skillS.TheUnitFrom.Scene().GetComponent<MapComponent>().NavMeshId;
-            skillS.TargetPosition = MoveHelper.GetCanChongJiPath(navmeshid, skillS.TheUnitFrom.Position, target);
+            
+            skillS.TargetPosition = skillS.TheUnitFrom.GetComponent<PathfindingComponent>().GetCanChongJiPath(skillS.TheUnitFrom.Position, target);
             if (skillS.isChonFeng == 1)
             {
                 this.PushUnit(skillS, skillS.TheUnitFrom);

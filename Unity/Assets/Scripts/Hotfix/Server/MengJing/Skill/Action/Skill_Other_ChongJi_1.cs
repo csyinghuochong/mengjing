@@ -53,8 +53,7 @@ namespace ET.Server
             quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0); //按照Z轴旋转30度的Quaterion
             skillS.TargetPosition = skillS.TheUnitFrom.Position + math.mul(rotation, new float3(0, 0, 1)) * moveDistance;
 
-            int navmeshid = skillS.TheUnitFrom.Scene().GetComponent<MapComponent>().NavMeshId;
-            skillS.TargetPosition = MoveHelper.GetCanChongJiPath(navmeshid, skillS.TheUnitFrom.Position, skillS.TargetPosition);
+            skillS.TargetPosition = skillS.TheUnitFrom.GetComponent<PathfindingComponent>().GetCanChongJiPath(skillS.TheUnitFrom.Position, skillS.TargetPosition);
             skillS.TheUnitFrom.FindPathMoveToAsync(skillS.TargetPosition).Coroutine();
             skillS.NowPosition = skillS.TheUnitFrom.Position;
             skillS.TheUnitFrom.GetComponent<BuffManagerComponentS>().AddBuffRecord(1, 1);

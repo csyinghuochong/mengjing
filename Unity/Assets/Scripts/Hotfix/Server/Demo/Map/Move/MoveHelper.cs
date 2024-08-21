@@ -22,13 +22,13 @@ namespace ET.Server
                 unit.SendStop(3);
                 return;
             }
-                
+
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-            
+
             bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
@@ -56,14 +56,14 @@ namespace ET.Server
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-            
+
             bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
                 unit.SendStop(0);
             }
         }
-        
+
         public static float3 GetCanReachPath(int navMeshId, float3 start, float3 target)
         {
             // using var list = ListComponent<Vector3>.Create();
@@ -84,14 +84,7 @@ namespace ET.Server
             // }
             return target;
         }
-        
-        
-        public static float3 GetCanChongJiPath(int navmeshid , float3 start, float3 target)
-        {
-            return target;
-        }
-        
-        
+
         public static void Stop(this Unit unit, int error)
         {
             unit.GetComponent<MoveComponent>().Stop(error == 0);

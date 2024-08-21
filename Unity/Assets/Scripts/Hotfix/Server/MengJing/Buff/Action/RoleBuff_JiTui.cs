@@ -27,8 +27,7 @@ namespace ET.Server
             float3 vector3 = theUnitBelongto.Position + dir * distance;
             buffS.BeginTime = TimeHelper.ServerNow();
             buffS.StartPosition = theUnitBelongto.Position;
-            int navmeshid = theUnitBelongto.Scene().GetComponent<MapComponent>().NavMeshId;
-            buffS.TargetPosition =  MoveHelper.GetCanChongJiPath(navmeshid, theUnitBelongto.Position, vector3);
+            buffS.TargetPosition =  theUnitBelongto.GetComponent<PathfindingComponent>().GetCanChongJiPath(theUnitBelongto.Position, vector3);
 
             theUnitBelongto.Stop(-1);
             theUnitBelongto.GetComponent<NumericComponentS>().Set(NumericType.Extra_Buff_Speed_Add, newSpeed - oldSpeed);

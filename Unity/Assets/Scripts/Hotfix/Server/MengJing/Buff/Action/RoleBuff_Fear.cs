@@ -18,8 +18,7 @@ namespace ET.Server
                     buffS.TheUnitBelongto.Position.z + RandomHelper.RandomNumberFloat(-10, 10)
                 );
             buffS.TargetPosition = targetpos;
-            int navmeshid = buffS.TheUnitBelongto.Scene().GetComponent<MapComponent>().NavMeshId;
-            buffS.TargetPosition = MoveHelper.GetCanChongJiPath(navmeshid, buffS.TheUnitBelongto.Position, buffS.TargetPosition);
+            buffS.TargetPosition = buffS.TheUnitBelongto.GetComponent<PathfindingComponent>().GetCanChongJiPath(buffS.TheUnitBelongto.Position, buffS.TargetPosition);
             buffS.TheUnitBelongto.FindPathMoveToAsync(buffS.TargetPosition).Coroutine();
         }
 
