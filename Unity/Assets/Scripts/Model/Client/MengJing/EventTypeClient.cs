@@ -506,4 +506,9 @@ namespace ET.Client
     {
         public M2C_OneChallenge m2C_OneChallenge;
     }
+
+    public struct ChengJiuActive
+    {
+        public M2C_ChengJiuActiveMessage m2C_ChengJiu;
+    }
 }
