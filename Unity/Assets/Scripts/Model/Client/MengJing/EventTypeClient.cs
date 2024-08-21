@@ -516,4 +516,18 @@ namespace ET.Client
     {
         public int ErrorCode;
     }
+
+    public struct UISoloQuit
+    {
+    }
+
+    public struct UISoloReward
+    {
+        public M2C_SoloDungeon m2C_SoloDungeon;
+    }
+
+    public struct UISoloEnter
+    {
+        public M2C_SoloMatchResult m2C_SoloMatch;
+    }
 }
