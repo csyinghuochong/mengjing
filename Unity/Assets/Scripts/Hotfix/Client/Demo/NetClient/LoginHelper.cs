@@ -15,15 +15,12 @@ namespace ET.Client
 
         public static async ETTask LoginOld(Scene root, string account, string password)
         {
-            Log.Debug("Login.......");
             PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
             C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
             c2RLoginAccount.Account = account;
             c2RLoginAccount.Password = password;
             c2RLoginAccount.ServerId = playerComponent.ServerItem.ServerId;
-            Log.Debug("Login22222.......");
             R2C_LoginAccount response = (R2C_LoginAccount)await root.GetComponent<ClientSenderCompnent>().Call(c2RLoginAccount);
-            Log.Debug("Login33333.......");
             playerComponent.Account = account;
             playerComponent.Token = response.Token;
             playerComponent.AccountId = response.AccountId;

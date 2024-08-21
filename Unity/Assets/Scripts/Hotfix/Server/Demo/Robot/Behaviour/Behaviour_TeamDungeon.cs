@@ -27,7 +27,7 @@ namespace ET
             {
                 //获取队伍列表
                 int errorCode = await TeamNetHelper.RequestTeamDungeonList(root);
-                string messagevalue = RandNameComponent.Instance.TeamDungeonMessage[root.Name];
+                string messagevalue = aiComponent.Message;
                 string[] teamId = messagevalue.Split('_');
                 TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
                 if (teamInfo != null)

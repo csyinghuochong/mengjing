@@ -68,3 +68,18 @@ message NetClient2Main_LoginGame // IResponse
 
 	int64 PlayerId = 4;
 }
+
+//ResponseType RobotClient2Main_Message
+message Main2RobotClient_Message // IRequest
+{
+	int32 RpcId = 1;
+	string Message = 2;
+}
+
+message RobotClient2Main_Message // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+}

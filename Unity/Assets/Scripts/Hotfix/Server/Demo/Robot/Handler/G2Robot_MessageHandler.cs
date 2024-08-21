@@ -38,10 +38,14 @@ namespace ET.Server
                         
                         //message.Message   sceneid_teamid
                         int  robotId = BattleHelper.GetTeamRobotId(fubenId);
-                        string fibername = await robotManagerComponent.NewRobot(message.Zone, robotId);
+                        int fiberId= await robotManagerComponent.NewRobot(message.Zone, robotId);
+                        ActorId roborActorId = new ActorId(scene.Fiber().Process, fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+                        Main2RobotClient_Message main2RobotClientMessage = Main2RobotClient_Message.Create();
+                        main2RobotClientMessage.Message = message.Message;
+                        RobotClient2Main_Message respone =
+                                await scene.Root().GetComponent<ProcessInnerSender>().Call(roborActorId, main2RobotClientMessage) as
+                                        RobotClient2Main_Message;
                         
-                        //应该发送消息给Robot纤程，初始化
-                        RandNameComponent.Instance.TeamDungeonMessage[fibername] = message.Message;
                         robotnumber++;
                     }
                     break;

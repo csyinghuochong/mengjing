@@ -425,12 +425,10 @@ namespace ET.Server
          public static void OnRevive(this HeroDataComponentS self, bool bornPostion = false)
          {
              Unit unit = self.GetParent<Unit>();
-             Console.WriteLine($"HeroDataComponentS.OnRevive:  {unit.Id}");
              NumericComponentS numericComponent  = unit.GetComponent<NumericComponentS>();
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
 
              numericComponent.ApplyValue(NumericType.Now_Dead, 0);
-             numericComponent.ApplyValue(NumericType.Now_Hp, 0);
              numericComponent.ApplyValue(NumericType.Now_Hp, max_hp);
              numericComponent.ApplyValue(NumericType.ReviveTime, 0);
              unit.GetComponent<SkillPassiveComponent>()?.Activeted();

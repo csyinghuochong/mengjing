@@ -26,6 +26,8 @@ namespace ET
 
         public long CreateTime;
 
+        public string Message { get; set; }
+
         /// <summary>
         /// 攻击范围，范围内攻击
         /// </summary>

@@ -101,11 +101,6 @@ namespace ET.Server
                         unitCache = refunitCache;
                     }
                     
-                    if (key.Contains("BagComponentS"))
-                    {
-                        Console.WriteLine($"AddOrUpdate.Bag:  id：{entity.Id}  {id}   {(entity as BagComponentS).AllItemList[0].Count}");
-                    }
-
                     unitCache.AddOrUpdate(entity);
                     list.Add(entity);
                 }

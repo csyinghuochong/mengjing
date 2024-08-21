@@ -39,14 +39,14 @@ namespace ET.Server
             return number;
         }
         
-        public static async ETTask<string> NewRobot(this RobotManagerComponent self, int zone, int robotid)
+        public static async ETTask<int> NewRobot(this RobotManagerComponent self, int zone, int robotid)
         {
             int robotNumber = self.GetRobotNumber(zone, robotid);
             string account = $"{zone}_{robotid}_{robotNumber}_0001";   //服务器
             int fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, self.Zone(), SceneType.Robot, account);
             KeyValuePair<int, int> infos = new KeyValuePair<int, int>(zone, robotid);
             self.robots.Add(fiberId, infos);
-            return account;
+            return fiberId;
         }
     }
 }
