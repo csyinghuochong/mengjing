@@ -68,50 +68,61 @@ namespace ET.Server
 
 		public static void Set(this NumericComponentS self, int nt, float value)
 		{
-			self[nt] = (long)(value * 10000);
+			self.Update(nt, (long)(value * 10000));
 		}
 
 		public static void Set(this NumericComponentS self, int nt, int value)
 		{
-			self[nt] = value;
+			self.Update(nt, value);
 		}
 
 		public static void Set(this NumericComponentS self, int nt, long value)
 		{
-			self[nt] = value;
+			self.Update(nt, value);
 		}
 
 		public static void SetNoEvent(this NumericComponentS self, int numericType, long value)
 		{
-			self.Insert(numericType, value, false);
+			self.Update(numericType, value, false);
 		}
 
 		public static void SetNoEvent(this NumericComponentS self, int numericType, double value)
 		{
-			self.Insert(numericType,  (long)(value * 10000), false);
+			self.Update(numericType,  (long)(value * 10000), false);
 		}
-		
-		public static void Insert(this NumericComponentS self, int numericType, long value, bool isPublicEvent = true)
+
+		public static void Update(this NumericComponentS self, int numericType, long value, bool isPublicEvent = true)
 		{
-			long oldValue = self.GetByKey(numericType);
-			if (oldValue == value)
+			if (numericType < (int)NumericType.Max)
 			{
+				Log.Error($"设置 NumericType：{numericType} （类型小于 NumericType.Max），不能用Set方法走公式，请仔细检查");
 				return;
 			}
-
+			
 			self.NumericDic[numericType] = value;
+			
+			int nowValue = (int)numericType / 100;
 
-			if (numericType >= NumericType.Max)
+			int add = nowValue * 100 + 1;
+			int mul = nowValue * 100 + 2;
+			int finalAdd = nowValue * 100 + 3;
+			int buffAdd = nowValue * 100 + 11;
+			int buffMul = nowValue * 100 + 12;
+			long old = self.GetByKey(nowValue);
+			long nowPropertyValue = (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) + self.GetByKey(buffAdd));
+			self.NumericDic[nowValue] = nowPropertyValue;
+
+			if (isPublicEvent && old != nowPropertyValue)
 			{
-				self.Update(numericType, isPublicEvent);
-				return;
-			}
+				//发送改变属性的相关消息
+				NumbericChange args = new();
+				args.Defend = self.Parent as Unit;
+				args.NumericType = nowValue;
+				args.OldValue = old;
+				args.NewValue = nowPropertyValue;
+				EventSystem.Instance.Publish(self.Scene(), args);
 
-			// if (isPublicEvent)
-			// {
-			// 	EventSystem.Instance.Publish(self.Scene(),
-			// 		new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
-			// }
+			}
 		}
 
 		public static long GetByKey(this NumericComponentS self, int key)
@@ -119,22 +130,6 @@ namespace ET.Server
 			long value = 0;
 			self.NumericDic.TryGetValue(key, out value);
 			return value;
-		}
-
-		public static void Update(this NumericComponentS self, int numericType, bool isPublicEvent)
-		{
-			int final = (int)numericType / 100;
-			int bas = final * 100 + 1;
-			int add = final * 100 + 2;
-			int pct = final * 100 + 3;
-			int finalAdd = final * 100 + 4;
-			int finalPct = final * 100 + 5;
-
-			// 一个数值可能会多种情况影响，比如速度,加个buff可能增加速度绝对值100，也有些buff增加10%速度，所以一个值可以由5个值进行控制其最终结果
-			// final = (((base + add) * (100 + pct) / 100) + finalAdd) * (100 + finalPct) / 100;
-			long result = (long)(((self.GetByKey(bas) + self.GetByKey(add)) * (100 + self.GetAsFloat(pct)) / 100f + self.GetByKey(finalAdd)) *
-				(100 + self.GetAsFloat(finalPct)) / 100f);
-			self.Insert(final, result, isPublicEvent);
 		}
 
 		public static long ReturnGetFightNumLong(this NumericComponentS self, int numericType, bool notice = true)
@@ -179,7 +174,7 @@ namespace ET.Server
 		public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false)
 		{
 			long old = self.GetByKey(numericType);
-			self[numericType] = value;
+			self.NumericDic[numericType] = value;
 
 			if (check && old == value)
 			{
@@ -215,7 +210,7 @@ namespace ET.Server
 		{
 			//是否超过指定上限值
 			long old = self.GetByKey(numericType);
-			self[numericType] = value;
+			self.NumericDic[numericType] = value;
 
 			//血量特殊处理
 			if (old == value && numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
@@ -279,7 +274,7 @@ namespace ET.Server
 
 			long old = self.GetByKey((int)numericType);
 			long newvalue = self.GetAsLong(numericType) + changedValue;
-			self[(int)numericType] = newvalue;
+			self.NumericDic[(int)numericType] = newvalue;
 
 			if (notice)
 			{
@@ -311,7 +306,7 @@ namespace ET.Server
 			}
 			set
 			{
-				this.Insert(numericType, value);
+				this.Update(numericType, value);
 			}
 		}
 	}
