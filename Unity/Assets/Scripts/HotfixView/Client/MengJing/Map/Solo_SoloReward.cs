@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
@@ -18,15 +16,13 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, UISoloReward args)
         {
-            // EventType.UISoloReward args = cls as EventType.UISoloReward;
-            //
-            // UI uisoloReward = UIHelper.GetUI(args.ZoneScene, UIType.UISoloReward);
-            // if (uisoloReward == null)
-            // {
-            //     UI ui = await UIHelper.Create(args.ZoneScene, UIType.UISoloReward);
-            //
-            //     ui.GetComponent<UISoloRewardComponent>().OnInit(args.m2C_SoloDungeon.SoloResult, args.m2C_SoloDungeon.RewardItem);
-            // }
+            DlgSoloReward dlgSoloReward = scene.GetComponent<UIComponent>().GetDlgLogic<DlgSoloReward>();
+            if (dlgSoloReward == null)
+            {
+                await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SoloReward);
+                dlgSoloReward = scene.GetComponent<UIComponent>().GetDlgLogic<DlgSoloReward>();
+                dlgSoloReward.OnInit(args.m2C_SoloDungeon.SoloResult, args.m2C_SoloDungeon.RewardItem);
+            }
 
             await ETTask.CompletedTask;
         }
