@@ -34,12 +34,16 @@ namespace ET.Client
         {
             if (args.NewValue == 0) //复活
             {
+                Console.WriteLine($"NumericWatcher_Now_Dead == 0 :  {unit.Id}");
+                
                 unit.Position = unit.GetBornPostion();
                 EventSystem.Instance.Publish(unit.Root(), new UnitRevive() { Unit = unit });
             }
 
             if (args.NewValue == 1) //死亡
             {
+                Console.WriteLine($"NumericWatcher_Now_Dead == 1 :  {unit.Id}");
+                
                 unit.GetComponent<HeroDataComponentC>().OnDead(args.Attack);
                 EventSystem.Instance.Publish(unit.Root(), new UnitDead() { Unit = unit });
             }

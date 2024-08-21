@@ -10,8 +10,7 @@ namespace ET.Server
         {
             Unit defendUnit = args.UnitDefend;
             Unit mainAttack = args.UnitAttack;
-
-            int attackconfid = mainAttack.ConfigId;
+            
             Scene domainScene = defendUnit.Scene();
             MapComponent mapComponent = domainScene.GetComponent<MapComponent>();
             int sceneId = mapComponent.SceneId;
@@ -278,7 +277,7 @@ namespace ET.Server
                     break;
             }
 
-            OnRemoveUnit(mainAttack.Root(), args, waittime).Coroutine();
+            OnRemoveUnit(defendUnit.Root(), args, waittime).Coroutine();
             await ETTask.CompletedTask;
         }
 

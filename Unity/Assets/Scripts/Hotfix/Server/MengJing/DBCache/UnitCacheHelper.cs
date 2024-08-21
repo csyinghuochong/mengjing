@@ -156,6 +156,11 @@ namespace ET.Server
                 {
                     continue;
                 }
+
+                if (key.FullName.Contains("BagComponentS"))
+                {
+                    Console.WriteLine($"AddOrUpdateUnitAllCache.Bag:  id：{message.UnitId}  {id}   {(entity as BagComponentS).AllItemList[0].Count}");
+                }
                 
                 message.EntityTypes.Add(key.FullName);
                 message.EntityBytes.Add(entity.ToBson());

@@ -134,7 +134,7 @@ namespace ET.Server
         public static void Activeted(this DBSaveComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(10000, TimerInvokeType.DBSaveTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.DBSaveTimer, self);
         }
 
         public static void UpdateCacheDB(this DBSaveComponent self)

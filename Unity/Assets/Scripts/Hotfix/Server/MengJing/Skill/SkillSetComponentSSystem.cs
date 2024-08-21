@@ -1262,18 +1262,16 @@ namespace ET.Server
         public static void UpdateSkillSet(this SkillSetComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
-            if (self.M2C_SkillSetMessage.SkillSetInfo == null)
-            {
-                self.M2C_SkillSetMessage.SkillSetInfo = ET.SkillSetInfo.Create();
-            }
+            M2C_SkillSetMessage M2C_SkillSetMessage = M2C_SkillSetMessage.Create();
+            M2C_SkillSetMessage.SkillSetInfo = ET.SkillSetInfo.Create();
 
-            SkillSetInfo SkillSetInfo = self.M2C_SkillSetMessage.SkillSetInfo;
+            SkillSetInfo SkillSetInfo = M2C_SkillSetMessage.SkillSetInfo;
             SkillSetInfo.TianFuPlan = self.TianFuPlan;
             SkillSetInfo.TianFuList = self.TianFuList;
             SkillSetInfo.TianFuList1 = self.TianFuList1;
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
-            MapMessageHelper.SendToClient(unit, self.M2C_SkillSetMessage);
+            MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
 
 

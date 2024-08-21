@@ -47,9 +47,10 @@ namespace ET.Client
                 {
                     Log.Error($"buffHandler.Scene() == null");
                 }
-
-                aaiHandler.OnFinished(buffHandler);
-                
+                else
+                {
+                    aaiHandler.OnFinished(buffHandler);
+                }
                 
                 buffHandler.Clear();
                 self.m_Buffs.RemoveAt(i);

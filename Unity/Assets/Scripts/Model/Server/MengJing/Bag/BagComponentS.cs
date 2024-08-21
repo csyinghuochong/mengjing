@@ -31,34 +31,11 @@ namespace ET.Server
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, List<BagInfo>> AllItemList { get; set; } = new();
-        
-        /*
-        public List<BagInfo> BagItemList { get; set; } = new();
-        public List<BagInfo> BagItemPetHeXin { get; set; } = new();
-        public List<BagInfo> EquipList { get; set; } = new();
-        public List<BagInfo> GemList { get; set; } = new();
-        public List<BagInfo> PetHeXinList { get; set; } = new();
-        public List<BagInfo> Warehouse1 { get; set; } = new();
-        public List<BagInfo> Warehouse2 { get; set; } = new();
-        public List<BagInfo> Warehouse3 { get; set; } = new();
-        public List<BagInfo> Warehouse4 { get; set; } = new();
-        public List<BagInfo> JianYuanWareHouse1 { get; set; } = new();
-        public List<BagInfo> JianYuanWareHouse2 { get; set; } = new();
-        public List<BagInfo> JianYuanWareHouse3 { get; set; } = new();
-        public List<BagInfo> JianYuanWareHouse4 { get; set; } = new();
-        public List<BagInfo> JianYuanTreasureMapStorage1 { get; set; } = new();
-        public List<BagInfo> JianYuanTreasureMapStorage2 { get; set; } = new();
-        public List<BagInfo> ChouKaWarehouse { get; set; } = new();
-        public List<BagInfo> EquipList_2 { get; set; } = new();
-        public List<BagInfo> SeasonJingHe { get; set; } = new();
-        public List<BagInfo> PetEquipList { get; set; } = new();
-        public List<BagInfo> GemWareHouse1 { get; set; } = new(); */
-        
+       
         /// <summary>
         /// 可以放在unitinfocomponent
         /// </summary>
         public int FuMoItemId { get; set; }
-
         
         /// <summary>
         /// 激活的时装

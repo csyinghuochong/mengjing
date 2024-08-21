@@ -59,8 +59,6 @@ namespace ET.Server
 
         public static async ETTask InitServerInfo(this UnionSceneComponent self)
         {
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(2000, 4000));
-
             DBUnionManager dBServerInfo = await UnitCacheHelper.GetComponent<DBUnionManager>(self.Root(), self.Zone());
             if (dBServerInfo == null)
             {

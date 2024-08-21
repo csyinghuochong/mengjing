@@ -44,7 +44,8 @@
             scene.Root().RemoveComponent<ClientSenderCompnent>();
             oldroot.CurrentScene().Dispose();
             oldroot.GetComponent<UIComponent>().CloseAllWindow();
-            await EventSystem.Instance.PublishAsync(oldroot, new AppStartInitFinish());
+            await FiberManager.Instance.Remove(oldroot.Fiber.Id);
+            await FiberManager.Instance.Create(SchedulerType.Main, ConstFiberId.Main, 0, SceneType.Main, "");
         }
     }
 }

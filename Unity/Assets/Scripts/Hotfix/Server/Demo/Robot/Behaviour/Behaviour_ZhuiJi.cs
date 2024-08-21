@@ -20,6 +20,8 @@ namespace ET
 
         public override async ETTask Execute(BehaviourComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
+            
+            Console.WriteLine("Behaviour_ZhuiJi.Execute");
             Unit unit = UnitHelper.GetMyUnitFromClientScene(aiComponent.Root());
             TimerComponent timerComponent = aiComponent.Root().GetComponent<TimerComponent>();
             long instanceId = unit.InstanceId;

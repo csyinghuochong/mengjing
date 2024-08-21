@@ -7,8 +7,7 @@ namespace ET.Client
             Log.Debug($"C2A_ActivityInfoRequest: client0");
             C2A_ActivityInfoRequest request = C2A_ActivityInfoRequest.Create();
             A2C_ActivityInfoResponse response = (A2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-
-            Log.Debug($"C2M_BagInitHandler: client1");
+            
             return ErrorCode.ERR_Success;
         }
 

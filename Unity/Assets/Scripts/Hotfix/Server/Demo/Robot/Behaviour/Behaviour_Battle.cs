@@ -21,10 +21,9 @@ namespace ET
             Scene root = aiComponent.Root();
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
             
-            Console.WriteLine("检测背包有可替换的装备 直接穿戴");
             await RobotHelper.WearEquip(root);
 
-            //Console.WriteLine("Behaviour_Battle");
+            Console.WriteLine("Behaviour_Battle.Execute");
             while (true)
             {
                 int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);

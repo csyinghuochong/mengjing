@@ -24,7 +24,7 @@ namespace ET
             TimerComponent timerComponent = aiComponent.Root().GetComponent<TimerComponent>();
             float3 targetPosition = aiComponent.TargetPosition;
 
-            //Console.WriteLine("Behaviour_Battle");
+            Console.WriteLine("Behaviour_Target.Execute");
             while (true)
             {
                 Unit target = GetTargetHelperc.GetNearestEnemy(unit, 10);

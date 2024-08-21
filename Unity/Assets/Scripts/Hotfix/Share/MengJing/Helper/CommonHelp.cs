@@ -13,6 +13,11 @@ namespace  ET
         {
             return zone == 1003;
         }
+        
+        public static bool IsRobotZone(int zone)
+        {
+            return zone == 1001;
+        }
 
         //内部专区
         public static bool IsAlphaZone(int zone)
