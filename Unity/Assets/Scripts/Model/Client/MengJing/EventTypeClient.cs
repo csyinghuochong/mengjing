@@ -511,4 +511,9 @@ namespace ET.Client
     {
         public M2C_ChengJiuActiveMessage m2C_ChengJiu;
     }
+
+    public struct RelinkSucess
+    {
+        public int ErrorCode;
+    }
 }

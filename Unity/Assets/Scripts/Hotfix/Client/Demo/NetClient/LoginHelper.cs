@@ -5,7 +5,6 @@ namespace ET.Client
     [FriendOf(typeof(PlayerComponent))]
     public static class LoginHelper
     {
-        
         public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
         {
             await ETTask.CompletedTask;
@@ -13,7 +12,7 @@ namespace ET.Client
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             return await clientSenderCompnent.GetServerList(versionMode);
         }
-        
+
         public static async ETTask LoginOld(Scene root, string account, string password)
         {
             Log.Debug("Login.......");
@@ -32,7 +31,7 @@ namespace ET.Client
             playerComponent.CreateRoleList = response.RoleLists;
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());
         }
-        
+
         public static async ETTask Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderCompnent>();
@@ -43,6 +42,11 @@ namespace ET.Client
             if (reLink == 0)
             {
                 await EventSystem.Instance.PublishAsync(root, new LoginFinish());
+            }
+
+            if (reLink != 0)
+            {
+                EventSystem.Instance.Publish(root, new RelinkSucess());
             }
         }
 
@@ -100,6 +104,11 @@ namespace ET.Client
             {
                 Log.Error(e);
             }
+
+            if (reLink != 0)
+            {
+                EventSystem.Instance.Publish(root, new RelinkSucess());
+            }
         }
 
         public static async ETTask<int> RequestCreateRole(Scene root, long accountId, int occ, string name)
@@ -112,8 +121,8 @@ namespace ET.Client
             request.ServerId = PlayerComponent.ServerItem.ServerId;
 
             R2C_CreateRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_CreateRoleData;
-            if(response.Error == ErrorCode.ERR_Success)
-            {       
+            if (response.Error == ErrorCode.ERR_Success)
+            {
                 PlayerComponent.CreateRoleList.Add(response.createRoleInfo);
             }
 

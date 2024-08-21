@@ -66,28 +66,30 @@
             }
         }
 
-        // public static async ETTask OnApplicationQuitHandler(this RelinkComponent self)
-        // {
-        //     SessionComponent sessionComponent = self.DomainScene().GetComponent<SessionComponent>();
-        //     if (sessionComponent == null)
-        //     {
-        //         return;
-        //     }
-        //     
-        //     if (sessionComponent.Session == null || sessionComponent.Session.IsDisposed)
-        //     {
-        //         return;
-        //     }
-        //     
-        //     try
-        //     {
-        //         await ETTask.CompletedTask;
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         Log.Debug(e.ToString());
-        //     }
-        // }
+        public static async ETTask OnApplicationQuitHandler(this RelinkComponent self)
+        {
+            // SessionComponent sessionComponent = self.DomainScene().GetComponent<SessionComponent>();
+            // if (sessionComponent == null)
+            // {
+            //     return;
+            // }
+            //
+            // if (sessionComponent.Session == null || sessionComponent.Session.IsDisposed)
+            // {
+            //     return;
+            // }
+            //
+            // try
+            // {
+            //     await ETTask.CompletedTask;
+            // }
+            // catch (Exception e)
+            // {
+            //     Log.Debug(e.ToString());
+            // }
+
+            await ETTask.CompletedTask;
+        }
 
         public static void OnApplicationFocusHandler(this RelinkComponent self, bool value)
         {
@@ -120,47 +122,47 @@
             // }
         }
 
-        // public static async ETTask CheckRelink(this RelinkComponent self)
-        // {
-        //     if (self.Relink)
-        //     {
-        //         return;
-        //     }
-        //     
-        //     self.Relink = true;
-        //     Log.Debug($"重连请求！！");
-        //     UIHelper.Create(self.DomainScene(), UIType.UIRelink).Coroutine();
-        //     for (int i = 0; i < 5; i++)
-        //     {
-        //         long instanceid = self.InstanceId;
-        //         Log.Debug($"重连请求11！！ {self.Relink}");
-        //         if (TimerComponent.Instance == null || !self.Relink)
-        //         {
-        //             break;
-        //         }
-        //     
-        //         await TimerComponent.Instance.WaitAsync(3000);
-        //         if (instanceid != self.InstanceId)
-        //         {
-        //             break;
-        //         }
-        //     
-        //         if (TimerComponent.Instance == null || !self.Relink)
-        //         {
-        //             break;
-        //         }
-        //     
-        //         Log.ILog.Debug($"重连请求22！！ {self.Relink}");
-        //         self.SendLogin().Coroutine();
-        //         if (i == 4)
-        //         {
-        //             UIHelper.Remove(self.DomainScene(), UIType.UIRelink);
-        //             EventType.ReturnLogin.Instance.ZoneScene = self.DomainScene();
-        //             Game.EventSystem.PublishClass(EventType.ReturnLogin.Instance);
-        //             break;
-        //         }
-        //     }
-        // }
+        public static async ETTask CheckRelink(this RelinkComponent self)
+        {
+            if (self.Relink)
+            {
+                return;
+            }
+
+            self.Relink = true;
+            Log.Debug($"重连请求！！");
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Relink).Coroutine();
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            for (int i = 0; i < 5; i++)
+            {
+                long instanceid = self.InstanceId;
+                Log.Debug($"重连请求11！！ {self.Relink}");
+                if (timerComponent == null || !self.Relink)
+                {
+                    break;
+                }
+
+                await timerComponent.WaitAsync(3000);
+                if (instanceid != self.InstanceId)
+                {
+                    break;
+                }
+
+                if (timerComponent == null || !self.Relink)
+                {
+                    break;
+                }
+
+                Log.Debug($"重连请求22！！ {self.Relink}");
+                self.SendLogin().Coroutine();
+                if (i == 4)
+                {
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Relink);
+                    EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
+                    break;
+                }
+            }
+        }
 
         public static void OnModifyData(this RelinkComponent self)
         {
@@ -179,90 +181,93 @@
             // }
         }
 
-        // public static async ETTask OnRelinkSucess(this RelinkComponent self)
-        // {
-        //     self.Relink = false;
-        //     Log.ILog.Debug($"重连成功！！ {self.Relink}");
-        //     Scene zoneScene = self.ZoneScene();
-        //     UIHelper.Remove(self.DomainScene(), UIType.UIRelink);
-        //     
-        //     zoneScene.GetComponent<SessionComponent>().Session.Send(new C2M_RefreshUnitRequest());
-        //     await NetHelper.RequestUserInfo(zoneScene, true);
-        //     await NetHelper.RequestUnitInfo(zoneScene, true);
-        //     await NetHelper.RequestAllPets(zoneScene);
-        //     await NetHelper.RequestFriendInfo(zoneScene);
-        //     
-        //     AccountInfoComponent accountInfoComponent = zoneScene.GetComponent<AccountInfoComponent>();
-        //     string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString());
-        //     if (!string.IsNullOrEmpty(info))
-        //     {
-        //         NetHelper.SendIOSPayVerifyRequest(zoneScene, info);
-        //         PlayerPrefsHelp.SetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString(), string.Empty);
-        //         FloatTipManager.Instance.ShowFloatTip("重连成功_IOS！");
-        //     }
-        //     else
-        //     {
-        //         FloatTipManager.Instance.ShowFloatTip("重连成功！");
-        //     }
-        //     
-        //     UI uIMain = UIHelper.GetUI(zoneScene, UIType.UIMain);
-        //     if (uIMain != null)
-        //     {
-        //         uIMain.GetComponent<UIMainComponent>().OnRelinkUpdate();
-        //     }
-        //     
-        //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(zoneScene);
-        //     
-        //     NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-        //     int nowhp = numericComponent.GetAsInt(NumericType.Now_Hp);
-        //     int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
-        //     
-        //     if (nowdead == 1)
-        //     {
-        //         unit.GetComponent<UIUnitHpComponent>().UpdateBlood();
-        //         unit.GetComponent<HeroDataComponent>().OnDead(null);
-        //         EventType.UnitDead.Instance.Unit = unit;
-        //         Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
-        //     }
-        // }
+        public static async ETTask OnRelinkSucess(this RelinkComponent self)
+        {
+            // self.Relink = false;
+            // Log.ILog.Debug($"重连成功！！ {self.Relink}");
+            // Scene zoneScene = self.ZoneScene();
+            // UIHelper.Remove(self.DomainScene(), UIType.UIRelink);
+            //
+            // zoneScene.GetComponent<SessionComponent>().Session.Send(new C2M_RefreshUnitRequest());
+            // await NetHelper.RequestUserInfo(zoneScene, true);
+            // await NetHelper.RequestUnitInfo(zoneScene, true);
+            // await NetHelper.RequestAllPets(zoneScene);
+            // await NetHelper.RequestFriendInfo(zoneScene);
+            //
+            // AccountInfoComponent accountInfoComponent = zoneScene.GetComponent<AccountInfoComponent>();
+            // string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString());
+            // if (!string.IsNullOrEmpty(info))
+            // {
+            //     NetHelper.SendIOSPayVerifyRequest(zoneScene, info);
+            //     PlayerPrefsHelp.SetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString(), string.Empty);
+            //     FloatTipManager.Instance.ShowFloatTip("重连成功_IOS！");
+            // }
+            // else
+            // {
+            //     FloatTipManager.Instance.ShowFloatTip("重连成功！");
+            // }
+            //
+            // UI uIMain = UIHelper.GetUI(zoneScene, UIType.UIMain);
+            // if (uIMain != null)
+            // {
+            //     uIMain.GetComponent<UIMainComponent>().OnRelinkUpdate();
+            // }
+            //
+            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(zoneScene);
+            //
+            // NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            // int nowhp = numericComponent.GetAsInt(NumericType.Now_Hp);
+            // int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
+            //
+            // if (nowdead == 1)
+            // {
+            //     unit.GetComponent<UIUnitHpComponent>().UpdateBlood();
+            //     unit.GetComponent<HeroDataComponent>().OnDead(null);
+            //     EventType.UnitDead.Instance.Unit = unit;
+            //     Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
+            // }
+            await ETTask.CompletedTask;
+        }
 
-//         /// <summary>
-//         /// 断线重连，重新走登录流程
-//         /// </summary>
-//         /// <param name="self"></param>
-//         public static async ETTask<int> SendLogin(this RelinkComponent self)
-//         {
-//             long instanceid = self.InstanceId;
-//             AccountInfoComponent PlayerComponent = self.DomainScene().GetComponent<AccountInfoComponent>();
-//
-//             int code = await LoginHelper.Login(self.DomainScene(),
-//                 PlayerComponent.ServerIp,
-//                 PlayerComponent.Account,
-//                 PlayerComponent.Password, true, string.Empty, PlayerComponent.LoginType);
-//             if (code != ErrorCode.ERR_Success)
-//             {
-//                 return code;
-//             }
-//
-//             code = await LoginHelper.GetRealmKey(self.DomainScene());
-//             if (code != ErrorCode.ERR_Success)
-//             {
-//                 return code;
-//             }
-//
-//             await TimerComponent.Instance.WaitAsync(1500);
-//             if (instanceid != self.InstanceId)
-//             {
-//                 return ErrorCode.ERR_NetWorkError;
-//             }
-//
-// #if TikTok5
-//             string deviveInfo = $"tiktok";
-// #else
-//             string deviveInfo = $"{UnityEngine.SystemInfo.deviceModel}_{UnityEngine.Screen.width}:{UnityEngine.Screen.height}";
-// #endif
-//             code = await LoginHelper.EnterGame(self.ZoneScene(), deviveInfo, true, GlobalHelp.GetPlatform());
-//             return code;
-//         }
+        /// <summary>
+        /// 断线重连，重新走登录流程
+        /// </summary>
+        /// <param name="self"></param>
+        public static async ETTask<int> SendLogin(this RelinkComponent self)
+        {
+            //             long instanceid = self.InstanceId;
+            //             AccountInfoComponent PlayerComponent = self.DomainScene().GetComponent<AccountInfoComponent>();
+            //
+            //             int code = await LoginHelper.Login(self.DomainScene(),
+            //                 PlayerComponent.ServerIp,
+            //                 PlayerComponent.Account,
+            //                 PlayerComponent.Password, true, string.Empty, PlayerComponent.LoginType);
+            //             if (code != ErrorCode.ERR_Success)
+            //             {
+            //                 return code;
+            //             }
+            //
+            //             code = await LoginHelper.GetRealmKey(self.DomainScene());
+            //             if (code != ErrorCode.ERR_Success)
+            //             {
+            //                 return code;
+            //             }
+            //
+            //             await TimerComponent.Instance.WaitAsync(1500);
+            //             if (instanceid != self.InstanceId)
+            //             {
+            //                 return ErrorCode.ERR_NetWorkError;
+            //             }
+            //
+            // #if TikTok5
+            //                     string deviveInfo = $"tiktok";
+            // #else
+            //             string deviveInfo = $"{UnityEngine.SystemInfo.deviceModel}_{UnityEngine.Screen.width}:{UnityEngine.Screen.height}";
+            // #endif
+            //             code = await LoginHelper.EnterGame(self.ZoneScene(), deviveInfo, true, GlobalHelp.GetPlatform());
+            //             return code;
+            await ETTask.CompletedTask;
+            return 0;
+        }
     }
 }
