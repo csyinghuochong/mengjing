@@ -530,4 +530,9 @@ namespace ET.Client
     {
         public M2C_SoloMatchResult m2C_SoloMatch;
     }
+    
+    public struct SkillInterrup
+    {
+        public Unit Unit;
+    }
 }

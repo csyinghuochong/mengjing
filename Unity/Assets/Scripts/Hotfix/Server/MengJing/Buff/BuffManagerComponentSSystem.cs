@@ -601,13 +601,10 @@ namespace ET.Server
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
-                self.m_Buffs[i].OnUpdate();
-                if (self.m_Buffs.Count == 0)
-                {
-                    break;
-                }
-
-                if (self.m_Buffs[i].BuffState == BuffState.Finished)
+                BuffS buffS =  self.m_Buffs[i];
+                buffS.OnUpdate();
+                
+                if (buffS.BuffState == BuffState.Finished)
                 {
                     BuffS buffHandler = self.m_Buffs[i];
                     ObjectPool.Instance.Recycle(buffHandler);

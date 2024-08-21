@@ -51,15 +51,10 @@ namespace ET.Server
                     break;
                 
                 case NoticeType.BattleOpen:
-                    if (message.Zone!= 1)
-                    {
-                        return;
-                    }
-
                     using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))
                     {
                         int robotNumber = 0;
-                        while (robotNumber < 1)
+                        while (robotNumber < 10)
                         {
                             int robotId = BattleHelper.GetBattleRobotId(3, 0);
 

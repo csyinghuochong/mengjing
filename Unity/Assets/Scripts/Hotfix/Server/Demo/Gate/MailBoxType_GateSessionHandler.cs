@@ -14,8 +14,17 @@ namespace ET.Server
             
             if (mailBoxComponent.Parent is PlayerSessionComponent playerSessionComponent)
             {
-                
-                playerSessionComponent.Session?.Send(messageObject);
+                try
+                {
+                    playerSessionComponent.Session?.Send(messageObject);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error:  " +  messageObject.ToString());
+                    Console.WriteLine(e);
+                    throw;
+                }
+               
             }
         }
     }
