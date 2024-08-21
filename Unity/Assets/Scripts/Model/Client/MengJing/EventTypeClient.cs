@@ -501,4 +501,9 @@ namespace ET.Client
     {
         public M2C_ChainLightning M2C_ChainLightning;
     }
+
+    public struct UIOneChallenge
+    {
+        public M2C_OneChallenge m2C_OneChallenge;
+    }
 }

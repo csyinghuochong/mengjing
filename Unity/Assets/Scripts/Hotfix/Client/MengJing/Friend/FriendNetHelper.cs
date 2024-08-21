@@ -139,5 +139,15 @@ namespace ET.Client
             F2C_WatchPetResponse response = (F2C_WatchPetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> OneChallengeRequest(Scene root, int operatate, long otherId)
+        {
+            C2M_OneChallengeRequest request = C2M_OneChallengeRequest.Create();
+            request.Operatate = operatate;
+            request.OtherId = otherId;
+
+            M2C_OneChallengeResponse response = (M2C_OneChallengeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

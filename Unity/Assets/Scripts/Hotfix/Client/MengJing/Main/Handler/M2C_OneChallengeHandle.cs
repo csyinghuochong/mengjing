@@ -5,9 +5,8 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, M2C_OneChallenge message)
         {
-            // EventType.UIOneChallenge.Instance.ZoneScene = session.ZoneScene();
-            // EventType.UIOneChallenge.Instance.m2C_OneChallenge = message;
-            // EventSystem.Instance.PublishClass(EventType.UIOneChallenge.Instance);
+            EventSystem.Instance.Publish(root, new UIOneChallenge() { m2C_OneChallenge = message });
+
             await ETTask.CompletedTask;
         }
     }
