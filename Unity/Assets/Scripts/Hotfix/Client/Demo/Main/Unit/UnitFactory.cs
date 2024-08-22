@@ -56,7 +56,7 @@ namespace ET.Client
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
             foreach (var kv in unitInfo.KV)
             {
-                numericComponentC.Set(kv.Key, kv.Value);
+                numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
 
             unit.MasterId = numericComponentC.GetAsLong(NumericType.MasterId);
@@ -100,7 +100,7 @@ namespace ET.Client
             NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>(true);
             for (int i = 0; i < unitInfo.Ks.Count; ++i)
             {
-                numericComponent.Set(unitInfo.Ks[i], unitInfo.Vs[i]);
+                numericComponent.ApplyValue(unitInfo.Ks[i], unitInfo.Vs[i], false);
             }
 
             unit.MasterId = numericComponent.GetAsLong(NumericType.MasterId);
@@ -130,7 +130,7 @@ namespace ET.Client
         public static Unit CreateDropItem(Scene currentScene, DropInfo dropInfo)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            long unitId = dropInfo.UnitId == 0? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
+            long unitId = dropInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
             if (unitComponent.Get(unitId) != null)
             {
                 return null;

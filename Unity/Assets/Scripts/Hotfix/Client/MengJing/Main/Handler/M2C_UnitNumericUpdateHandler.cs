@@ -4,7 +4,7 @@ namespace ET.Client
 {
     //接受属性改变消息
     [MessageHandler(SceneType.Demo)]
-    public class M2C_UnitNumericUpdateHandler : MessageHandler<Scene,M2C_UnitNumericUpdate>
+    public class M2C_UnitNumericUpdateHandler : MessageHandler<Scene, M2C_UnitNumericUpdate>
     {
         protected override async ETTask Run(Scene root, M2C_UnitNumericUpdate message)
         {

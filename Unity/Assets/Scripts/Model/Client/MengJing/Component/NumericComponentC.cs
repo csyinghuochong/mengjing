@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Options;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (NumericComponentC))]
+    [FriendOf(typeof(NumericComponentC))]
     public static class NumericComponentClientSystem
     {
         public static float GetAsFloat(this NumericComponentC self, int numericType)
@@ -23,44 +23,6 @@ namespace ET.Client
             return self.GetByKey(numericType);
         }
 
-        public static void Set(this NumericComponentC self, int nt, float value)
-        {
-            self[nt] = (long)(value * 10000);
-        }
-
-        public static void Set(this NumericComponentC self, int nt, int value)
-        {
-            self[nt] = value;
-        }
-
-        public static void Set(this NumericComponentC self, int nt, long value)
-        {
-            self[nt] = value;
-        }
-        
-        public static void Insert(this NumericComponentC self, int numericType, long value, bool isPublicEvent = true)
-        {
-            long oldValue = self.GetByKey(numericType);
-            if (oldValue == value)
-            {
-                return;
-            }
-
-            self.NumericDic[numericType] = value;
-
-            if (numericType >= NumericType.Max)
-            {
-                self.Update(numericType, isPublicEvent);
-                return;
-            }
-
-            // if (isPublicEvent)
-            // {
-            //     EventSystem.Instance.Publish(self.Scene(),
-            //         new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
-            // }
-        }
-
         public static long GetByKey(this NumericComponentC self, int key)
         {
             long value = 0;
@@ -68,37 +30,83 @@ namespace ET.Client
             return value;
         }
 
-        public static void Update(this NumericComponentC self, int numericType, bool isPublicEvent)
+        private static void Update(this NumericComponentC self, int numericType, long value, bool notice = true)
         {
-            int final = (int)numericType / 100;
-            int bas = final * 100 + 1;
-            int add = final * 100 + 2;
-            int pct = final * 100 + 3;
-            int finalAdd = final * 100 + 4;
-            int finalPct = final * 100 + 5;
+            if (numericType < NumericType.Max)
+            {
+                return;
+            }
 
-            // 一个数值可能会多种情况影响，比如速度,加个buff可能增加速度绝对值100，也有些buff增加10%速度，所以一个值可以由5个值进行控制其最终结果
-            // final = (((base + add) * (100 + pct) / 100) + finalAdd) * (100 + finalPct) / 100;
-            long result = (long)(((self.GetByKey(bas) + self.GetByKey(add)) * (100 + self.GetAsFloat(pct)) / 100f + self.GetByKey(finalAdd)) *
-                (100 + self.GetAsFloat(finalPct)) / 100f);
-            self.Insert(final, result, isPublicEvent);
+            int nowValue = numericType / 100;
+
+            int add = nowValue * 100 + 1;
+            int mul = nowValue * 100 + 2;
+            int finalAdd = nowValue * 100 + 3;
+            int buffAdd = nowValue * 100 + 11;
+            int buffMul = nowValue * 100 + 12;
+
+            long old = self.GetByKey(nowValue);
+            long nowPropertyValue =
+                    (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
+                        self.GetByKey(buffAdd));
+
+            self.NumericDic[nowValue] = nowPropertyValue;
+
+            if (notice && old != nowPropertyValue)
+            {
+                //发送改变属性的相关消息
+                NumbericChange args = new();
+                args.Defend = self.Parent as Unit;
+                args.NumericType = nowValue;
+                args.OldValue = old;
+                args.NewValue = nowPropertyValue;
+                EventSystem.Instance.Publish(self.Scene(), args);
+            }
         }
-        
+
+        public static void ApplyValue(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = false)
+        {
+            long old = self.GetByKey(numericType);
+            self.NumericDic[numericType] = value;
+
+            if (check && old == value)
+            {
+                return;
+            }
+
+            if (notice)
+            {
+                //发送改变属性的相关消息
+                NumbericChange args = new();
+                args.Defend = self.Parent as Unit;
+                args.NumericType = numericType;
+                args.OldValue = old;
+                args.NewValue = self.GetByKey(numericType);
+                args.SkillId = 0;
+                args.DamgeType = 0;
+                EventSystem.Instance.Publish(self.Scene(), args);
+            }
+
+            self.Update(numericType, value, notice);
+        }
+
         /// <summary>
-        /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
+        /// 传入改变值,设置当前的属性值, 不走公式
         /// </summary>
-        /// <param name="attack"></param>
+        /// <param name="self"></param>
+        /// <param name="attackId"></param>
         /// <param name="numericType"></param>
-        /// <param name="changedValue">变化值</param>
+        /// <param name="value"></param>
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
-        /// <param name="compare">是否比较变化值</param>
         public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
+        public static void ApplyValue(this NumericComponentC self, Unit attack, int numericType, long value, int skillID, bool notice = true,
+        int DamgeType = 0)
         {
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
-            self[numericType] = value;
+            self.NumericDic[numericType] = value;
 
             //血量特殊处理
             if (old == value && numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
@@ -107,7 +115,7 @@ namespace ET.Client
                 return;
             }
 
-            if ( (self.Parent as Unit).Type == UnitType.Player && numericType == NumericType.Now_Dead)
+            if ((self.Parent as Unit).Type == UnitType.Player && numericType == NumericType.Now_Dead)
             {
                 Console.WriteLine($"NumericComponentC.ApplyValue  NumericType.Now_Dead:{self.Parent.Id}");
             }
@@ -120,30 +128,18 @@ namespace ET.Client
                 args.AttackId = attackId;
                 args.NumericType = numericType;
                 args.OldValue = old;
-                args.NewValue = self[numericType];
+                args.NewValue = self.NumericDic[numericType];
                 args.SkillId = skillID;
                 args.DamgeType = DamgeType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
     }
-    
-    [ComponentOf(typeof (Unit))]
-    public class NumericComponentC: Entity, IAwake, ITransfer
+
+    [ComponentOf(typeof(Unit))]
+    public class NumericComponentC : Entity, IAwake, ITransfer
     {
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<int, long> NumericDic = new Dictionary<int, long>();
-
-        public long this[int numericType]
-        {
-            get
-            {
-                return this.GetByKey(numericType);
-            }
-            set
-            {
-                this.Insert(numericType, value);
-            }
-        }
+        public Dictionary<int, long> NumericDic = new();
     }
 }

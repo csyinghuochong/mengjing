@@ -69,7 +69,7 @@ namespace ET.Client
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             for (int i = 0; i < response.Ks.Count; ++i)
             {
-                numericComponent.Set(response.Ks[i], response.Vs[i]);
+                numericComponent.ApplyValue(response.Ks[i], response.Vs[i]);
             }
 
             self.ShowSkillList(unit);
