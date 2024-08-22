@@ -2259,6 +2259,12 @@ namespace ET.Server
                 }
                 long setValue = numericComponent.GetAsLong(key) + UpdateProDicListCopy[key];
                 
+                long numType = key;
+                if (key > NumericType.Max)
+                {
+                    numType = key / 100;
+                }
+
                 if (!notice)
                 {
                     numericComponent.ApplyValue(key, setValue, false);
@@ -2266,12 +2272,10 @@ namespace ET.Server
                 }
                 if (NumericData.BroadcastType.Contains(key))
                 {
-                    long numType = key / 100;
                     numericComponent.ApplyValue(key, setValue, true);
                 }
                 else
                 {
-                    long numType = key / 100;
                     numericComponent.ApplyValue(key, setValue, false);
                     keys.Add(key);
                 }
