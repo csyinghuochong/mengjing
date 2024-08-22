@@ -29,6 +29,11 @@ namespace ET.Client
 
         public static async ETTask MoveToAsync(this Unit unit, List<float3> path)
         {
+            if (path.Count < 2)
+            {
+                Log.Error($"MoveToAsync：{path.Count}");
+            }
+
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             await moveComponent.MoveToAsync(path, speed);

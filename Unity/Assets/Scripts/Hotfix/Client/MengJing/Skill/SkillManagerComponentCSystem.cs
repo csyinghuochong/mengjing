@@ -344,7 +344,7 @@ namespace ET.Client
 
             if (moveComponent != null && !moveComponent.IsArrived() && skillConfig.IfStopMove == 0)
             {
-                moveComponent.Stop(true);
+                moveComponent.Stop(false);
             }
 
             if (unit.MainHero && !unit.IsSelfRobot())
