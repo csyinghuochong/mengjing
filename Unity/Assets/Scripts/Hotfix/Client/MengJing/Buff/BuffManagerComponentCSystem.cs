@@ -33,11 +33,12 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this BuffManagerComponentC self)
         {
-            self.OnFinish();
+            self.OnDispose();
         }
 
-        public static void OnFinish(this BuffManagerComponentC self)
+        public static void OnDispose(this BuffManagerComponentC self)
         {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
             {
                 BuffC buffHandler = self.m_Buffs[i];
@@ -49,11 +50,10 @@ namespace ET.Client
                 }
                 
                 buffHandler.Clear();
+                buffHandler.Dispose();
                 self.m_Buffs.RemoveAt(i);
-                ObjectPool.Instance.Recycle(buffHandler);
             }
-
-            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.m_Buffs.Clear();
         }
 
         //DeadNoRemove 0移除   1 不移除
@@ -67,16 +67,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
-                aaiHandler.OnFinished(buffHandler);
-                buffHandler.Clear();
-                self.m_Buffs.RemoveAt(i);
-                ObjectPool.Instance.Recycle(buffHandler);
-            }
-
-            if (self.m_Buffs.Count == 0)
-            {
-                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+                buffHandler.BuffState = BuffState.Finished;
             }
         }
 
@@ -94,9 +85,8 @@ namespace ET.Client
                 {
                     aaiHandler.OnFinished(buffHandler);
                     buffHandler.Clear();
+                    buffHandler.Dispose();
                     self.m_Buffs.RemoveAt(i);
-                    ObjectPool.Instance.Recycle(buffHandler);
-                    continue;
                 }
             }
 
@@ -166,14 +156,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (buffHandler.mSkillBuffConf.Id == buffId)
-                {
-                    BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
-                    aaiHandler.OnFinished(buffHandler);
-                    buffHandler.Clear();
-                    self.m_Buffs.RemoveAt(i);
-                    buffHandler.Dispose();
-                }
+                buffHandler.BuffState = BuffState.Finished;
             }
         }
 
