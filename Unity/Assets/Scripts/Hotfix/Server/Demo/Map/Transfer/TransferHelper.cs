@@ -339,7 +339,6 @@ namespace ET.Server
 
                         LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                         request.Difficulty = localDungeon != null ? localDungeon.FubenDifficulty : request.Difficulty;
-                        unit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
                          int errorCode = await LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
                          if (errorCode != ErrorCode.ERR_Success)
                          {
@@ -614,9 +613,9 @@ namespace ET.Server
             // 删除Mailbox,让发给Unit的ActorLocation消息重发
             unit.RemoveComponent<MailBoxComponent>();
             unit.GetComponent<SkillPassiveComponent>()?.Stop();
-            unit.GetComponent<BuffManagerComponentS>().BeforeTransfer();
             unit.GetComponent<BuffManagerComponentS>().OnTransfer();
             unit.GetComponent<HeroDataComponentS>().OnKillZhaoHuan(null);
+            unit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
             RemovePetAndJingLing(unit);
         }
 

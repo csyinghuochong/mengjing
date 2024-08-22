@@ -303,19 +303,20 @@ namespace ET.Server
 
           public static void OnDispose(this SkillManagerComponentS self)
           {
+              self.Root().GetComponent<TimerComponent>() ?.Remove(ref self.Timer);
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i--)
               {
                   SkillS skillHandler = self.Skills[i];
+                  skillHandler.Dispose();
                   self.Skills.RemoveAt(i);
-                  ObjectPool.Instance.Recycle(skillHandler);
               }
               self.SkillCDs.Clear();
-              self.Root().GetComponent<TimerComponent>() ?.Remove(ref self.Timer);
           }
 
           public static void OnFinish(this SkillManagerComponentS self, bool notice)
           {
+              self.Root().GetComponent<TimerComponent>() ?.Remove(ref self.Timer);
               Unit unit = self.GetParent<Unit>();
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i--)
@@ -323,8 +324,8 @@ namespace ET.Server
                   SkillS skillHandler = self.Skills[i];
                   SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(skillHandler.SkillConf.GameObjectName);
                   aaiHandler.OnFinished( skillHandler );
+                  skillHandler.Dispose();
                   self.Skills.RemoveAt(i);
-                  ObjectPool.Instance.Recycle(skillHandler);
               }
 
               if (notice && unit!=null && !unit.IsDisposed)

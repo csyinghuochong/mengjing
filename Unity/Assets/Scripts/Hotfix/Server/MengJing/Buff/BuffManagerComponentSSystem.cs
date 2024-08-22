@@ -46,6 +46,19 @@ namespace ET.Server
         public static void OnTransfer(this BuffManagerComponentS self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            
+            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>(); 
+            unitInfoComponent.Buffs.Clear();
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                BuffS buffHandler = self.m_Buffs[i];
+                if (buffHandler.mBuffConfig.Transfer == 1)
+                {
+                    unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
+                }
+            }
+            
             for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
             {
                 self.m_Buffs[i].Dispose();
@@ -181,21 +194,6 @@ namespace ET.Server
         public static void AddBuffRecord(this BuffManagerComponentS self, int operate, int buffId)
         {
             
-        }
-        
-        public static void BeforeTransfer(this BuffManagerComponentS self)
-        {
-            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>(); 
-            unitInfoComponent.Buffs.Clear();
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                BuffS buffHandler = self.m_Buffs[i];
-                if (buffHandler.mBuffConfig.Transfer == 1)
-                {
-                    unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
-                }
-            }
         }
         
         public static void OnRevive(this BuffManagerComponentS self)
