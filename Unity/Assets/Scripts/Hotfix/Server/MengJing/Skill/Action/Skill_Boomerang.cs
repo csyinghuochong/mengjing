@@ -7,7 +7,6 @@ namespace ET.Server
     /// </summary>
     public class Skill_Boomerang : SkillHandlerS
     {
-        
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
             skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
@@ -18,13 +17,15 @@ namespace ET.Server
         {
             int angle = skillS.SkillInfo.TargetAngle;
             float3 sourcePoint = skillS.TheUnitFrom.Position;
-            quaternion rotation = quaternion.Euler(0, angle, 0);
-            float3 TargetPoint = sourcePoint + math.mul(rotation, new float3(0,1,0)) * skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
-            skillS.BulletUnit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.NowPosition, new CreateMonsterInfo());
+            quaternion rotation = quaternion.Euler(0, math.radians(angle), 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation, new float3(0, 0, 1)) * skillS.SkillConf.SkillLiveTime *
+                    (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
+            skillS.BulletUnit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0,
+                skillS.NowPosition, new CreateMonsterInfo());
             skillS.TargetPosition = TargetPoint;
             skillS.BulletUnit.BulletMoveToAsync(TargetPoint).Coroutine();
 
-            OnUpdate(skillS, 0);    
+            OnUpdate(skillS, 0);
         }
 
         public override void OnUpdate(SkillS skillS, int updateMode)
@@ -44,6 +45,7 @@ namespace ET.Server
                 skillS.Return = PositionHelper.Distance2D(skillS.BulletUnit.Position, skillS.TargetPosition) < 0.5f;
                 skillS.HurtIds.Clear();
             }
+
             if (skillS.Return)
             {
                 skillS.BulletUnit.BulletMoveToAsync(skillS.TheUnitFrom.Position).Coroutine();
@@ -52,13 +54,13 @@ namespace ET.Server
                     skillS.SetSkillState(SkillState.Finished);
                 }
             }
+
             //防止不销毁
             if (serverNow > skillS.SkillEndTime + TimeHelper.Minute)
             {
                 skillS.SetSkillState(SkillState.Finished);
             }
         }
-
 
         public override void OnFinished(SkillS skillS)
         {
@@ -67,8 +69,8 @@ namespace ET.Server
             {
                 skillS.BulletUnit.GetParent<UnitComponent>().Remove(skillS.BulletUnit.Id);
             }
+
             skillS.Clear();
         }
-        
     }
 }

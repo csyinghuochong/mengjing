@@ -224,7 +224,7 @@ namespace ET.Server
             unit.Position = vector3;
             unit.Type = UnitType.Bullet; //子弹Unity,根据这个类型会实例化出特效
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            numericComponent.ApplyValue(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
+            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed);
             numericComponent.ApplyValue(NumericType.MasterId, masterid, false);
             numericComponent.ApplyValue(NumericType.StartAngle, starangle, false);
             numericComponent.ApplyValue(NumericType.StartTime, TimeHelper.ServerNow(), false);
