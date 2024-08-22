@@ -39,7 +39,7 @@ namespace ET.Client
 
         [EntitySystem]
         private static void Destroy(this SkillManagerComponentC self)
-        {
+        {          
             self.SkillCDs.Clear();
             self.OnFinish();
         }
@@ -119,12 +119,11 @@ namespace ET.Client
                 if (skill.IsSkillFinied())
                 {
                     aaiHandler.OnFinished(skill);
+                    skill.Dispose();
                     self.Skills.RemoveAt(i);
-                    ObjectPool.Instance.Recycle(skill);
                     continue;
                 }
-
-                //self.Skills[i].OnUpdate();
+                
                 aaiHandler.OnUpdate(skill);
             }
 
@@ -155,8 +154,8 @@ namespace ET.Client
 
                 SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skill.SkillConf.GameObjectName);
                 aaiHandler.OnFinished(skill);
+                skill.Dispose();
                 self.Skills.RemoveAt(i);
-                ObjectPool.Instance.Recycle(skill);
             }
 
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0)
