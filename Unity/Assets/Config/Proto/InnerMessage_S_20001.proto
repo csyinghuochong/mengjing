@@ -1031,8 +1031,8 @@ message G2M_ActivityUpdate // IMessage
 }
 
 //广播
-//ResponseType A2A_BroadcastResponse
-message A2A_BroadcastRequest // IRequest
+//ResponseType A2A_BroadcastProcessResponse
+message A2A_BroadcastProcessRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1042,7 +1042,7 @@ message A2A_BroadcastRequest // IRequest
 	ServerInfo ServerInfo = 5;
 }
 
-message A2A_BroadcastResponse // IResponse
+message A2A_BroadcastProcessResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -2003,4 +2003,16 @@ message G2R_RechargeResultResponse // IResponse
 	string Message = 92;
 }
 
+//ResponseType A2A_BroadcastSceneResponse
+message A2A_BroadcastSceneRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
 
+message A2A_BroadcastSceneResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

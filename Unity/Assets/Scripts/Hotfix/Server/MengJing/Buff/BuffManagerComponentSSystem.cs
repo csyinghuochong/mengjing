@@ -39,6 +39,7 @@ namespace ET.Server
 
         public static void OnDispose(this BuffManagerComponentS self)
         {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
@@ -46,10 +47,39 @@ namespace ET.Server
                 ObjectPool.Instance.Recycle(buffHandler);
                 self.m_Buffs.RemoveAt(i);
             }
-
-            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }
 
+        public static void Check(this BuffManagerComponentS self)
+        {
+
+            self.Checking = true;
+            
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                BuffS buffS =  self.m_Buffs[i];
+                buffS.OnUpdate();
+                
+                if (buffS.BuffState == BuffState.Finished)
+                {
+                    BuffS buffHandler = self.m_Buffs[i];
+                    ObjectPool.Instance.Recycle(buffHandler);
+                    buffHandler.OnFinished();
+                    self.m_Buffs.RemoveAt(i);
+                    self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
+                    continue;
+                }
+            }
+
+            if (self.m_Buffs.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            }
+            
+            self.Checking = false;
+        }
+
+        
         public static void OnDeadRemoveBuffBy(this BuffManagerComponentS self, long unitId)
         {
             int buffcnt = self.m_Buffs.Count;
@@ -60,7 +90,7 @@ namespace ET.Server
                     self.OnRemoveBuffItem(self.m_Buffs[i]);
                     self.m_Buffs.RemoveAt(i);
                 }
-            }
+            } 
         }
 
         public static void OnRetreatRemoveBuff(this BuffManagerComponentS self, long unitId)
@@ -89,6 +119,44 @@ namespace ET.Server
             buffHandler.OnFinished();
 
             self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
+        }
+        
+        //移除状态的所有buff 
+        public static void OnRemoveBuffByState(this BuffManagerComponentS self, long state)
+        {
+            //移除buff要保持倒序移除
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                //判断当前状态是否为暴击状态的buff
+                if (self.m_Buffs[i].mBuffConfig.BuffType != 2)
+                {
+                    continue;
+                }
+
+                long curState = 1 << self.m_Buffs[i].mBuffConfig.buffParameterType;
+                if (state == curState)
+                {
+                    self.OnRemoveBuffItem(self.m_Buffs[i]);
+                    self.m_Buffs.RemoveAt(i);
+                }
+            }
+        }
+
+        //移除暴击状态的所有buff 
+        public static void OnRemoveBuffCriState(this BuffManagerComponentS self)
+        {
+            //移除buff要保持倒序移除
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                //判断当前状态是否为暴击状态的buff
+                if (self.m_Buffs[i].mBuffConfig.BuffType == 2 && self.m_Buffs[i].mBuffConfig.buffParameterType == 13)
+                {
+                    self.OnRemoveBuffItem(self.m_Buffs[i]);
+                    self.m_Buffs.RemoveAt(i);
+                }
+            }
         }
 
         /// <summary>
@@ -171,45 +239,7 @@ namespace ET.Server
                 }
             }
         }
-
-        //移除状态的所有buff 
-        public static void OnRemoveBuffByState(this BuffManagerComponentS self, long state)
-        {
-            //移除buff要保持倒序移除
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                //判断当前状态是否为暴击状态的buff
-                if (self.m_Buffs[i].mBuffConfig.BuffType != 2)
-                {
-                    continue;
-                }
-
-                long curState = 1 << self.m_Buffs[i].mBuffConfig.buffParameterType;
-                if (state == curState)
-                {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
-                }
-            }
-        }
-
-        //移除暴击状态的所有buff 
-        public static void OnRemoveBuffCriState(this BuffManagerComponentS self)
-        {
-            //移除buff要保持倒序移除
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                //判断当前状态是否为暴击状态的buff
-                if (self.m_Buffs[i].mBuffConfig.BuffType == 2 && self.m_Buffs[i].mBuffConfig.buffParameterType == 13)
-                {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
-                }
-            }
-        }
-
+        
         public static void OnRevive(this BuffManagerComponentS self)
         {
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
@@ -595,32 +625,7 @@ namespace ET.Server
 
             return buffnumber;
         }
-
-        public static void Check(this BuffManagerComponentS self)
-        {
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                BuffS buffS =  self.m_Buffs[i];
-                buffS.OnUpdate();
-                
-                if (buffS.BuffState == BuffState.Finished)
-                {
-                    BuffS buffHandler = self.m_Buffs[i];
-                    ObjectPool.Instance.Recycle(buffHandler);
-                    buffHandler.OnFinished();
-                    self.m_Buffs.RemoveAt(i);
-                    self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
-                    continue;
-                }
-            }
-
-            if (self.m_Buffs.Count == 0)
-            {
-                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            }
-        }
-
+        
         public static void OnMaoXianJiaUpdate(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();

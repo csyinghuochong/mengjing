@@ -4458,13 +4458,13 @@ namespace ET
 
     // 广播
     [MemoryPackable]
-    [Message(InnerMessage.A2A_BroadcastRequest)]
-    [ResponseType(nameof(A2A_BroadcastResponse))]
-    public partial class A2A_BroadcastRequest : MessageObject, IRequest
+    [Message(InnerMessage.A2A_BroadcastProcessRequest)]
+    [ResponseType(nameof(A2A_BroadcastProcessResponse))]
+    public partial class A2A_BroadcastProcessRequest : MessageObject, IRequest
     {
-        public static A2A_BroadcastRequest Create(bool isFromPool = false)
+        public static A2A_BroadcastProcessRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastRequest), isFromPool) as A2A_BroadcastRequest;
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastProcessRequest), isFromPool) as A2A_BroadcastProcessRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -4500,12 +4500,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.A2A_BroadcastResponse)]
-    public partial class A2A_BroadcastResponse : MessageObject, IResponse
+    [Message(InnerMessage.A2A_BroadcastProcessResponse)]
+    public partial class A2A_BroadcastProcessResponse : MessageObject, IResponse
     {
-        public static A2A_BroadcastResponse Create(bool isFromPool = false)
+        public static A2A_BroadcastProcessResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastResponse), isFromPool) as A2A_BroadcastResponse;
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastProcessResponse), isFromPool) as A2A_BroadcastProcessResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8624,6 +8624,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.A2A_BroadcastSceneRequest)]
+    [ResponseType(nameof(A2A_BroadcastSceneResponse))]
+    public partial class A2A_BroadcastSceneRequest : MessageObject, IRequest
+    {
+        public static A2A_BroadcastSceneRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastSceneRequest), isFromPool) as A2A_BroadcastSceneRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.A2A_BroadcastSceneResponse)]
+    public partial class A2A_BroadcastSceneResponse : MessageObject, IResponse
+    {
+        public static A2A_BroadcastSceneResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastSceneResponse), isFromPool) as A2A_BroadcastSceneResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -8748,8 +8811,8 @@ namespace ET
         public const ushort A2A_ActivityUpdateRequest = 20121;
         public const ushort A2A_ActivityUpdateResponse = 20122;
         public const ushort G2M_ActivityUpdate = 20123;
-        public const ushort A2A_BroadcastRequest = 20124;
-        public const ushort A2A_BroadcastResponse = 20125;
+        public const ushort A2A_BroadcastProcessRequest = 20124;
+        public const ushort A2A_BroadcastProcessResponse = 20125;
         public const ushort G2Robot_MessageRequest = 20126;
         public const ushort M2LocalDungeon_ExitRequest = 20127;
         public const ushort LocalDungeon2M_ExitResponse = 20128;
@@ -8857,5 +8920,7 @@ namespace ET
         public const ushort R2M_RechargeResponse = 20230;
         public const ushort R2G_RechargeResultRequest = 20231;
         public const ushort G2R_RechargeResultResponse = 20232;
+        public const ushort A2A_BroadcastSceneRequest = 20233;
+        public const ushort A2A_BroadcastSceneResponse = 20234;
     }
 }

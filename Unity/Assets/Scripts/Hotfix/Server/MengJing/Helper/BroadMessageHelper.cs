@@ -21,8 +21,21 @@ namespace ET.Server
             (serverid, A2A_ServerMessageRequest);
         }
 
-        
-        
+        public static List<StartSceneConfig> GetAllScene(int zone)
+        {
+            List<StartSceneConfig> zonescenes = new List<StartSceneConfig>();
+            List<StartSceneConfig> listallscene = StartSceneConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < listallscene.Count; i++)
+            {
+                if ( ServerHelper.GetNewServerId(listallscene[i].Zone) == zone)
+                {
+                    zonescenes.Add( listallscene[i] );
+                }
+            }
+
+            return zonescenes;
+        }
+
         /// <summary>
         /// 一般是做全服操作
         /// </summary>
