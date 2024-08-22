@@ -11,7 +11,6 @@ namespace ET.Server
         {
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             Unit unit = MongoHelper.Deserialize<Unit>(request.Unit);
-            Console.WriteLine($"M2M_UnitTransferRequestHandler:  {unit.Id}");
             unitComponent.AddChild(unit);
             unitComponent.Add(unit);
             foreach (byte[] bytes in request.Entitys)
@@ -116,8 +115,6 @@ namespace ET.Server
                     unit.Rotation = quaternion.identity;
                     if ( request.SceneType == SceneTypeEnum.TeamDungeon)
                     {
-                        Console.WriteLine($"SceneTypeEnum.TeamDungeon:{request.SceneType}");
-                        
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
                         teamDungeonComponent.OnEnterDungeon(unit);
                     }
@@ -220,7 +217,6 @@ namespace ET.Server
                     int startIndex = todayCamp == 1 ? 0 : 3;
                     unit.Position = new float3(sceneConfig.InitPos[startIndex+0] * 0.01f, sceneConfig.InitPos[startIndex + 1] * 0.01f, sceneConfig.InitPos[startIndex + 2] * 0.01f);
                     unit.Rotation = quaternion.identity;
-                    Console.WriteLine($"unitid:  {unit.Id}    todayCamp:  {todayCamp}");
                     break;
                 case SceneTypeEnum.MainCityScene:
                     float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);

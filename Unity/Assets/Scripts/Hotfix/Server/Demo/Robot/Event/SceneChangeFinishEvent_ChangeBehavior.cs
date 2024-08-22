@@ -7,9 +7,6 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, SceneChangeFinish args)
         {
-            Log.Debug($"SceneChangeFinishEvent_ChangeBehavior:  {args.SceneType}");
-            Console.WriteLine($"SceneChangeFinishEvent_ChangeBehavior:  {args.SceneType}");
-
             TimerComponent timerComponent = scene.Root().GetComponent<TimerComponent>();
             switch (args.SceneType)
             {

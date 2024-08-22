@@ -65,7 +65,6 @@ namespace ET.Server
             }
 
             await  UnitCacheHelper.SaveComponentCache( scene.Root(), jiaYuanComponent );
-            Console.WriteLine("J2M_JiaYuanOperateHandler await  UnitCacheHelper.SaveComponentCache ");
         }
     }
 }

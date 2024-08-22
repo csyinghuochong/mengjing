@@ -54,7 +54,6 @@ namespace ET.Server
 
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
-                        Console.WriteLine($"player.PlayerState == PlayerState.Game:  {TimeHelper.ServerNow()}");
                         var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();
                         player.PlayerState = PlayerState.Gate;
@@ -63,8 +62,6 @@ namespace ET.Server
                     {
                         try
                         {
-                            Console.WriteLine("player.PlayerState == PlayerState.Game");
-                            
                             G2M_SecondLogin g2MSecondLogin = G2M_SecondLogin.Create();
                             M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin) as M2G_SecondLogin;
                             if (reqEnter.Error == ErrorCode.ERR_Success)
@@ -96,8 +93,6 @@ namespace ET.Server
 
                     try
                     {
-                        Console.WriteLine("player.PlayerState != PlayerState.Game");
-                        
                         DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(1000);
                         List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(1000, d => d.Id == request.AccountId); 
                         if (newAccountList == null || newAccountList.Count == 0)
@@ -131,7 +126,6 @@ namespace ET.Server
                         player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
                         player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;
-                        Console.WriteLine($"C2G_EnterGameHandler:  {player.UnitId}");
                         Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;

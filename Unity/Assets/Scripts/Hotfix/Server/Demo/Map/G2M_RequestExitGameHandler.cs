@@ -24,8 +24,6 @@ namespace ET.Server
 
         private async ETTask RemoveUnit(Unit unit)
         {
-            Console.WriteLine("RemoveUnit");
-          
             await unit.Fiber().WaitFrameFinish();
             
             await unit.RemoveLocation(LocationType.Unit);

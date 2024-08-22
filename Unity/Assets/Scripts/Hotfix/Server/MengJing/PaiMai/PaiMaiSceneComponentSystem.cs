@@ -449,8 +449,6 @@ namespace ET.Server
                     || oldDBPaiMainInfo.PaiMaiItemInfos.Count > 0
                     || oldDBPaiMainInfo.StallItemInfos.Count > 0)
                 {
-                    Console.WriteLine($"拍卖有旧数据:  {zone}   {oldDBPaiMainInfo.PaiMaiItemInfos.Count}");
-
                     oldPaiMaiShop = oldDBPaiMainInfo.PaiMaiShopItemInfos;
                     oldPaiMaiAll = oldDBPaiMainInfo.PaiMaiItemInfos;
                     oldPaiMaiStall = oldDBPaiMainInfo.StallItemInfos;

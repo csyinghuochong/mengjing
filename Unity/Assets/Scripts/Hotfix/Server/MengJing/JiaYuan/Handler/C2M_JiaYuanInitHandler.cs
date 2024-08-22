@@ -22,8 +22,6 @@ namespace ET.Server
 
                 ActorId jiayuanactorid = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
                 J2M_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (J2M_JiaYuanOperateResponse) await unit.Root().GetComponent<MessageSender>().Call(jiayuanactorid, opmessage);
-                Console.WriteLine($"M2J_JiaYuanOperateResponse:  {request.MasterId}  {m2JJiaYuanOperateResponse.Error}");
-                
             }
             jiaYuanComponent.InitOpenList();
             response.PlanOpenList .AddRange(jiaYuanComponent.PlanOpenList_7);

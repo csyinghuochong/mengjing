@@ -34,7 +34,6 @@ namespace ET.Server
                             && (monsterid[i].ConfigId == 70005012 || monsterid[i].ConfigId == 70005013))
                         {
                             removeIds.Add(monsterid[i].Id);
-                            Console.WriteLine($"umericType.Now_Dead: {monsterid[i].ConfigId}");
                         }
                     }
                 }

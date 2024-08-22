@@ -26,7 +26,6 @@ namespace ET.Server
 
         public static async ETTask KickPlayerNoLock(Player player)
         { 
-            Console.WriteLine("KickPlayerNoLock");
             if (player == null || player.IsDisposed)
             {
                 return;
@@ -39,7 +38,6 @@ namespace ET.Server
                 case PlayerState.Gate:
                     break;
                 case PlayerState.Game:
-                    Console.WriteLine("G2M_RequestExitGame");
                     //通知游戏逻辑服下线Unit角色逻辑，并将数据存入数据库
                     var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
                             .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
@@ -86,7 +84,6 @@ namespace ET.Server
         
         public static async ETTask KickPlayer(Player player, bool isException = false)
         {
-            Console.WriteLine("KickPlayer");
             if (player == null || player.IsDisposed)
             {
                 return;

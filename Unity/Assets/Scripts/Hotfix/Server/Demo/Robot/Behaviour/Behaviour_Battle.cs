@@ -22,25 +22,23 @@ namespace ET
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
             
             await RobotHelper.WearEquip(root);
-
-            Console.WriteLine("Behaviour_Battle.Execute");
+            //Console.WriteLine("Behaviour_Battle.Execute");
             while (true)
             {
                 int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);
                 
-                Console.WriteLine($"GetBattFubenId   {root.GetComponent<UserInfoComponentC>().UserInfo.Lv}   {sceneId}");
+                //Console.WriteLine($"GetBattFubenId   {root.GetComponent<UserInfoComponentC>().UserInfo.Lv}   {sceneId}");
                 int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
-
                 if (errorCode != 0)
                 {
-                    Log.Debug($"Behaviour_Battle: errorCode {errorCode}");
+                    Console.WriteLine($"Behaviour_Battle: errorCode {errorCode}");
                 }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
-                    Console.WriteLine("Behaviour_Battle.Exit: IsCancel");
+                    //Console.WriteLine("Behaviour_Battle.Exit: IsCancel");
                     return;
                 }
             }

@@ -30,7 +30,6 @@ namespace ET.Server
             {
                 if (self.PetShouHuList.Count == 0)
                 {
-                    Console.WriteLine("self.PetShouHuList.Count == 0");
                     break;
                 }
 

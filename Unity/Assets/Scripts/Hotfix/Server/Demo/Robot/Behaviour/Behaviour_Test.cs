@@ -23,12 +23,9 @@ namespace ET
         {
             Scene root = aiComponent.Root();
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
-
-            Log.Debug($"Behaviour_Arena: Execute");
+            
             while (true)
             {
-                Console.WriteLine("Behaviour_Test");
-
                 // 副本（需要切场景）类型的玩法除外... 所有协议都要测试到， 可以按照移植顺序或者自定义
                 // 尽量模拟真实玩家的行为测试所有外围系统协议
                 // 功能函数写在system，收发协议写在helper

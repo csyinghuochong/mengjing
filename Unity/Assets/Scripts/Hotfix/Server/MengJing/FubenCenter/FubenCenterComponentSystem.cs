@@ -812,8 +812,6 @@ namespace ET.Server
 
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.TeamFubens[teamid] = fubnescene.GetActorId();
-            
-            Console.WriteLine(($"CreateTeamDungeon:  {teamid}   {fubnescene.GetActorId()}"));
         }
 
         #endregion

@@ -1001,8 +1001,6 @@ namespace ET.Server
             }
 
             Log.Debug($"发放赛季之塔排行榜奖励： {zone}");
-            Console.WriteLine($"发放赛季之塔排行榜奖励： {zone}");
-
             long serverTime = TimeHelper.ServerNow();
             List<KeyValuePairLong> rankingInfos = self.DBRankInfo.rankSeasonTower;
             ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;

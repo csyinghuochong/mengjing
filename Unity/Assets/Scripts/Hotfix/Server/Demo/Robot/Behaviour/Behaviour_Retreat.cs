@@ -19,8 +19,7 @@ namespace ET
 
         public override async ETTask Execute(BehaviourComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
-            
-            Console.WriteLine("Behaviour_Retreat.Execute");
+            //WriteLine("Behaviour_Retreat.Execute");
             Scene root = aiComponent.Root();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
@@ -46,7 +45,7 @@ namespace ET
                 await timerComponent.WaitAsync(1000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
-                    Console.WriteLine("Behaviour_Retreat.Exit: IsCancel");
+                    //Console.WriteLine("Behaviour_Retreat.Exit: IsCancel");
                     return;
                 }
             }

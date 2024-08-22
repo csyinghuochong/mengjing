@@ -22,12 +22,9 @@ namespace ET.Server
 
             MessageLocationSenderOneType messageLocationSender = scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit);
             //1212275342967491 寒桑 tcg01   被踢的玩家
-            Console.WriteLine($"Call.U2M_UnionKickOutRequest:  {request.UserId}");
-            
+
             M2U_UnionKickOutResponse m2G_RechargeResponse = (M2U_UnionKickOutResponse)await messageLocationSender.Call(request.UserId, r2M_RechargeRequest);
-            
-            Console.WriteLine($"Repose.M2U_UnionKickOutResponse:  {m2G_RechargeResponse.Error}");
-            
+
             if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
             {
                 NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UserId);

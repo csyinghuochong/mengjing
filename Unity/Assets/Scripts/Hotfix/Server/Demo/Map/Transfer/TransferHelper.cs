@@ -25,12 +25,10 @@ namespace ET.Server
             RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
             if (fightId != null)
             {
-                Console.WriteLine("移除宠物！！");
                 unitComponent.Remove(fightId.Id);
             }
             else
             {
-                Console.WriteLine("没有宠物！！");
             }
 
             long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
@@ -501,9 +499,7 @@ namespace ET.Server
                             return ErrorCode.ERR_TransferFailError;
                         }
                         BeforeTransfer(unit);
-                        
-                        Console.WriteLine($"F2M_TeamDungeonEnterResponse:{createUnit.FubenActorId}  {request.SceneId}  {request.Difficulty}");
-                        
+
                         await Transfer(unit, createUnit.FubenActorId, (int)SceneTypeEnum.TeamDungeon, request.SceneId, request.Difficulty, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {

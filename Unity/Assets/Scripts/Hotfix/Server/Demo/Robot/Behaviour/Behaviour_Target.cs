@@ -23,8 +23,7 @@ namespace ET
             Unit unit = UnitHelper.GetMyUnitFromClientScene(aiComponent.Root());
             TimerComponent timerComponent = aiComponent.Root().GetComponent<TimerComponent>();
             float3 targetPosition = aiComponent.TargetPosition;
-
-            Console.WriteLine("Behaviour_Target.Execute");
+            //Console.WriteLine("Behaviour_Target.Execute");
             while (true)
             {
                 Unit target = GetTargetHelperc.GetNearestEnemy(unit, 10);
@@ -34,12 +33,16 @@ namespace ET
                     aiComponent.ChangeBehaviour(BehaviourType.Behaviour_ZhuiJi);
                     return;
                 }
+                if (math.distance(unit.Position, targetPosition) > 1f)
+                {
+                    MoveHelper.MoveToAsync( unit,  targetPosition, cancellationToken).Coroutine();
+                }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(1000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
-                    Console.WriteLine("Behaviour_Target.Exit: IsCancel");
+                    //Console.WriteLine("Behaviour_Target.Exit: IsCancel");
                     return;
                 }
             }

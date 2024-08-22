@@ -11,7 +11,6 @@ namespace ET.Server
             if (unit != null)
             {
                 //MessageHelper.SendToClient(unit, new M2C_KickPlayerMessage());
-                Console.WriteLine($"G2M_KickPlayerRequest: !=null  Disposed: {unit.Id} {unit.IsDisposed}");
                 //await unit.RemoveLocation();
                 //DBSaveComponent dBSaveComponent = unit.GetComponent<DBSaveComponent>();
                 //if (dBSaveComponent != null)

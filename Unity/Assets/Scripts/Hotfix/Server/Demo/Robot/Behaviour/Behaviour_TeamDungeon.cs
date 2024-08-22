@@ -36,14 +36,14 @@ namespace ET
                 }
                 if (errorCode != 0)
                 {
-                    Log.Debug($"Behaviour_TeamDungeon: Execute {errorCode}");
+                    Console.WriteLine($"Behaviour_TeamDungeon: Execute {errorCode}");
                 }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
-                    Console.WriteLine("Behaviour_TeamDungeon.Exit: IsCancel");
+                    //Console.WriteLine("Behaviour_TeamDungeon.Exit: IsCancel");
                     return;
                 }
             }
