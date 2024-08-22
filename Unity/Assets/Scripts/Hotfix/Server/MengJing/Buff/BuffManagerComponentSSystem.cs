@@ -40,15 +40,36 @@ namespace ET.Server
         public static void OnDispose(this BuffManagerComponentS self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.m_Buffs.Clear();
+        }
+
+        public static void OnTransfer(this BuffManagerComponentS self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
+            {
+                self.m_Buffs[i].Dispose();
+            }
+
+            self.m_Buffs.Clear();
+        }
+
+        //DeadNoRemove 0移除   1 不移除
+        public static void OnDead(this BuffManagerComponentS self, Unit attack)
+        {
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
                 BuffS buffHandler = self.m_Buffs[i];
-                ObjectPool.Instance.Recycle(buffHandler);
-                self.m_Buffs.RemoveAt(i);
+                if (buffHandler.mBuffConfig.DeadNoRemove == 1)
+                {
+                    continue;
+                }
+
+                buffHandler.BuffState = BuffState.WaitRemove;
             }
         }
-
+        
         public static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
         {
             M2C_UnitBuffRemove m2C_UnitBuffUpdate = self.m2C_UnitBuffRemove;
@@ -76,6 +97,7 @@ namespace ET.Server
                 if (buffS.BuffState == BuffState.Finished)
                 {
                     BuffS buffHandler = self.m_Buffs[i];
+                    buffHandler.BuffState = BuffState.None;
                     ObjectPool.Instance.Recycle(buffHandler);
                     buffHandler.OnFinished();
                     self.m_Buffs.RemoveAt(i);
@@ -173,15 +195,10 @@ namespace ET.Server
             for (int i = buffcnt - 1; i >= 0; i--)
             {
                 BuffS buffHandler = self.m_Buffs[i];
-                buffHandler.OnFinished();
-                ObjectPool.Instance.Recycle(buffHandler);
-                self.m_Buffs.RemoveAt(i);
-                if (buffHandler.mBuffConfig.Transfer != 1)
+                if (buffHandler.mBuffConfig.Transfer == 1)
                 {
-                    continue;
+                    unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
                 }
-
-                unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
             }
         }
         
@@ -202,28 +219,7 @@ namespace ET.Server
                 self.BuffFactory(buffData_2, self.GetParent<Unit>(), null);
             }
         }
-
-        //DeadNoRemove 0移除   1 不移除
-        public static void OnDead(this BuffManagerComponentS self, Unit attack)
-        {
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                BuffS buffHandler = self.m_Buffs[i];
-                if (buffHandler.mBuffConfig.DeadNoRemove == 1)
-                {
-                    continue;
-                }
-
-                buffHandler.BuffState = BuffState.WaitRemove;
-            }
-
-            if (self.m_Buffs.Count == 0)
-            {
-                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            }
-        }
-
+        
         public static void BuffRemoveList(this BuffManagerComponentS self, List<int> buffIist)
         {
             //判断玩家身上是否有相同的buff,如果有就注销此Buff

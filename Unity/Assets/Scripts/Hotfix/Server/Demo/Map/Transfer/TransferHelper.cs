@@ -615,6 +615,7 @@ namespace ET.Server
             unit.RemoveComponent<MailBoxComponent>();
             unit.GetComponent<SkillPassiveComponent>()?.Stop();
             unit.GetComponent<BuffManagerComponentS>().BeforeTransfer();
+            unit.GetComponent<BuffManagerComponentS>().OnTransfer();
             unit.GetComponent<HeroDataComponentS>().OnKillZhaoHuan(null);
             RemovePetAndJingLing(unit);
         }
