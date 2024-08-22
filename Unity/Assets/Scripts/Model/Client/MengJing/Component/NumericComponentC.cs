@@ -30,43 +30,11 @@ namespace ET.Client
             return value;
         }
 
-        private static void Update(this NumericComponentC self, int numericType, long value, bool notice = true)
-        {
-            if (numericType < NumericType.Max)
-            {
-                return;
-            }
-
-            int nowValue = numericType / 100;
-
-            int add = nowValue * 100 + 1;
-            int mul = nowValue * 100 + 2;
-            int finalAdd = nowValue * 100 + 3;
-            int buffAdd = nowValue * 100 + 11;
-            int buffMul = nowValue * 100 + 12;
-
-            long old = self.GetByKey(nowValue);
-            long nowPropertyValue =
-                    (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
-                        self.GetByKey(buffAdd));
-
-            self.NumericDic[nowValue] = nowPropertyValue;
-
-            if (notice && old != nowPropertyValue)
-            {
-                //发送改变属性的相关消息
-                NumbericChange args = new();
-                args.Defend = self.Parent as Unit;
-                args.NumericType = nowValue;
-                args.OldValue = old;
-                args.NewValue = nowPropertyValue;
-                EventSystem.Instance.Publish(self.Scene(), args);
-            }
-        }
-
-        public static void ApplyValue(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = false)
+        public static void ApplyValue(this NumericComponentC self, int numericType, long value, bool notice = true, bool check = true,
+        long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = self.GetByKey(numericType);
+
             self.NumericDic[numericType] = value;
 
             if (check && old == value)
@@ -77,17 +45,16 @@ namespace ET.Client
             if (notice)
             {
                 //发送改变属性的相关消息
-                NumbericChange args = new();
+                NumbericChange args = new NumbericChange();
                 args.Defend = self.Parent as Unit;
+                args.AttackId = attackid;
                 args.NumericType = numericType;
                 args.OldValue = old;
-                args.NewValue = self.GetByKey(numericType);
-                args.SkillId = 0;
-                args.DamgeType = 0;
+                args.NewValue = self.NumericDic[numericType];
+                args.SkillId = skillId;
+                args.DamgeType = damgeType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
-
-            self.Update(numericType, value, notice);
         }
 
         /// <summary>
@@ -99,8 +66,9 @@ namespace ET.Client
         /// <param name="value"></param>
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
-        /// <param name="DamgeType"></param>
-        public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
+        /// <param name="damgeType"></param>
+        public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true,
+        int damgeType = 0)
         {
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
@@ -128,7 +96,7 @@ namespace ET.Client
                 args.OldValue = old;
                 args.NewValue = self.NumericDic[numericType];
                 args.SkillId = skillID;
-                args.DamgeType = DamgeType;
+                args.DamgeType = damgeType;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
