@@ -64,7 +64,7 @@ namespace ET.Server
             return self.GetByKey(numericType);
         }
 
-        private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true)
+        private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = 0;
             int nowValue = 0;
@@ -101,6 +101,9 @@ namespace ET.Server
                 args.NumericType = nowValue;
                 args.OldValue = old;
                 args.NewValue = nowPropertyValue;
+                args.AttackId = attackid;
+                args.DamgeType = damgeType;
+                args.SkillId = skillId;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
         }
@@ -151,7 +154,7 @@ namespace ET.Server
             self.ApplyValue(numericType, (long)(value * 10000), notice);
         }
 
-        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0)
+        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = self.GetByKey(numericType);
            
@@ -173,8 +176,7 @@ namespace ET.Server
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
-        public static void ApplyChange(this NumericComponentS self, long attackId, int numericType, long changedValue, int skillID, bool notice = true,
-        int DamgeType = 0)
+        public static void ApplyChange(this NumericComponentS self, int numericType, long changedValue, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             //改变值为0不做任何处理
             if (changedValue == 0)
@@ -202,7 +204,7 @@ namespace ET.Server
             }
             
             long newvalue = self.GetAsLong(numericType) + changedValue;
-            self.ApplyValue( numericType, newvalue, notice,  true, attackId, skillID);
+            self.ApplyValue( numericType, newvalue, notice,  true, attackid, skillId, damgeType);
         }
     }
 
