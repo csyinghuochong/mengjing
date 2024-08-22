@@ -27,7 +27,7 @@ namespace ET.Server
                 return;
             }
 
-            unit.GetComponent<NumericComponentS>().ApplyChange( null,NumericType.V1ChouKaNumber, 1, 0 );
+            unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.V1ChouKaNumber, 1);
 
             int dropId = ConfigData.ChouKaDropId[0];
             dropId = ConfigData.ServerInfo.ChouKaDropId;

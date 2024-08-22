@@ -23,7 +23,7 @@ namespace ET.Server
                 return;
             }
 
-            Unit attack = args.Attack;
+            Unit attack = unit.GetParent<UnitComponent>().Get(args.AttackId);
             if (args.NewValue <= 0 && numericComponentDefend.GetAsInt(NumericType.Now_Dead) == 0)
             {
                 if (attack == null || attack.IsDisposed)

@@ -30,7 +30,7 @@ namespace ET
             m2C_UnitNumericUpdate.OldValue = args.OldValue;
             m2C_UnitNumericUpdate.SkillId = args.SkillId;
             m2C_UnitNumericUpdate.DamgeType = args.DamgeType;
-            m2C_UnitNumericUpdate.AttackId = args.Attack != null ? args.Attack.Id : 0;
+            m2C_UnitNumericUpdate.AttackId = args.AttackId;
             MapMessageHelper.Broadcast(args.Defend, m2C_UnitNumericUpdate);
         }
 

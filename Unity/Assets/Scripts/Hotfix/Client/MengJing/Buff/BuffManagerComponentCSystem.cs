@@ -57,7 +57,7 @@ namespace ET.Client
         }
 
         //DeadNoRemove 0移除   1 不移除
-        public static void OnDead(this BuffManagerComponentC self, Unit attack)
+        public static void OnDead(this BuffManagerComponentC self)
         {
             for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
             {

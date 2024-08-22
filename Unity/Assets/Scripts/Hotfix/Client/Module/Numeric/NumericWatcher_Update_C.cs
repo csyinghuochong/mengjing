@@ -22,7 +22,7 @@ namespace ET.Client
                 ChangeHpValue = costHp,
                 DamgeType = args.DamgeType,
                 SkillID = args.SkillId,
-                Attack = args.Attack
+                AttackId = args.AttackId
             });
         }
     }
@@ -44,7 +44,7 @@ namespace ET.Client
             {
                 Console.WriteLine($"NumericWatcher_Now_Dead == 1 :  {unit.Id}");
                 
-                unit.GetComponent<HeroDataComponentC>().OnDead(args.Attack);
+                unit.GetComponent<HeroDataComponentC>().OnDead();
                 EventSystem.Instance.Publish(unit.Root(), new UnitDead() { Unit = unit });
             }
         }
