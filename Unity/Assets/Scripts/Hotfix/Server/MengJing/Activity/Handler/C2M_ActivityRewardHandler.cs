@@ -81,7 +81,7 @@ namespace ET.Server
                         return;
                     }
                     unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.ItemBox_9}_{TimeHelper.ServerNow()}");
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.V1HongBaoNumber, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.V1HongBaoNumber, 1);
                     break;
                 case ActivityConfigHelper.ActivityV1_DuiHuanWord:
                     if (bagComponent.GetBagLeftCell() < 1)

@@ -40,7 +40,7 @@
 
                     int unionID = int.Parse(responseUnionEnter.Par);
                     UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionID);
-                    unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.UnionDonationNumber, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.UnionDonationNumber, 1);
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
                     userInfoComponent.UpdateRoleMoneySub(UserDataType.Gold, (unionCof.DonateGold * -1).ToString(), true, ItemGetWay.Donation);

@@ -31,8 +31,8 @@
             string reward = ConfigData.WelfareInvestList[request.Index].Value;
             unit.GetComponent<BagComponentS>().OnAddItemData(reward, $"{ItemGetWay.Welfare}_{TimeHelper.ServerNow()}");
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub( UserDataType.Gold,(ment * -1).ToString(), true, ItemGetWay.Welfare );
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestMent, ment, 0);
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestTotal, ment, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.InvestMent, ment);
+            unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.InvestTotal, ment);
             unit.GetComponent<UserInfoComponentS>().UserInfo.WelfareInvestList.Add(request.Index);
             await ETTask.CompletedTask;
         }

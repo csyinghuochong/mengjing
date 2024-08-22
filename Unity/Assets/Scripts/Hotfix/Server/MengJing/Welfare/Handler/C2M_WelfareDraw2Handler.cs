@@ -27,7 +27,7 @@
             int index = RandomHelper.RandomNumber(0, ConfigData.WelfareChouKaList.Count) + 1;
 
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.DrawIndex2, index);
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.WelfareChouKaNumber, 1, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.WelfareChouKaNumber, 1);
             await ETTask.CompletedTask;
         }
     }

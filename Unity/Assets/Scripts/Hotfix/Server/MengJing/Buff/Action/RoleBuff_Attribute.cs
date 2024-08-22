@@ -122,15 +122,15 @@ namespace ET.Server
                             nowdamgeType = 0;
                         }
 
-                        heroCom.ApplyChange(buffS.TheUnitFrom, NumericType.Now_Hp, (long)buffS.NowBuffValue, 0, true, nowdamgeType);
+                        heroCom.ApplyChange(NumericType.Now_Hp, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0, nowdamgeType);
                     }
                     else if (NowBuffParameterType == 3164)
                     {
-                        heroCom.ApplyChange(buffS.TheUnitFrom, NumericType.CardTransform, (int)(buffS.mBuffConfig.buffParameterValue), 0, true, 0);
+                        heroCom.ApplyChange(NumericType.CardTransform, (int)(buffS.mBuffConfig.buffParameterValue), true, true, buffS.TheUnitFrom.Id,0, 0);
                     }
                     else if (NowBuffParameterType == 3134)
                     {
-                        heroCom.ApplyChange(buffS.TheUnitFrom, NumericType.SkillUseMP, (long)buffS.NowBuffValue, 0, true, 0);
+                        heroCom.ApplyChange(NumericType.SkillUseMP, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0);
                     }
                     else
                     {

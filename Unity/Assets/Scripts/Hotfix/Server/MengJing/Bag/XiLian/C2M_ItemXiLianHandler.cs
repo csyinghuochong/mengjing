@@ -89,7 +89,7 @@ namespace ET.Server
 
                 if (ifZuanShi)
                 {
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ItemXiLianNumber, request.Times, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.ItemXiLianNumber, request.Times);
                 }
 
                 if (request.Times == 1 && (itemLocType == ItemLocType.ItemLocEquip || itemLocType == ItemLocType.ItemLocEquip_2))
@@ -147,7 +147,7 @@ namespace ET.Server
                 {
                     addXilian = (int)(addXilian * 0.7f);
                 }
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ItemXiLianDu, addXilian * request.Times, 0, true);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.ItemXiLianDu, addXilian * request.Times);
 
                 await ETTask.CompletedTask;
             }

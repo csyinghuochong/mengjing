@@ -39,7 +39,7 @@
                 response.Error = d2GGetUnit.Error;
                 return;
             }
-            unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.RaceDonationNumber, request.Price, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.RaceDonationNumber, request.Price);
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub( UserDataType.Gold,  (request.Price * -1).ToString(),true, ItemGetWay.Donation );
 
             await ETTask.CompletedTask;

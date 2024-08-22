@@ -40,7 +40,7 @@
             else
             {
                 level = publicQiangHuaConfig.Id;
-                numericComponent.ApplyChange(null, NumericType.BloodstoneFail, 1, 0);
+                numericComponent.ApplyChange(NumericType.BloodstoneFail, 1);
             }
 
             response.Level = level;

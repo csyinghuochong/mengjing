@@ -117,7 +117,7 @@ namespace ET.Server
                 Log.Error($"addItemError == false2 {bagComponent.GetBagLeftCell()}:{bagComponent.GetChouKaLeftSpace()}");
             }
 
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ChouKa, request.ChouKaType, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.ChouKa, request.ChouKaType);
             if (mianfei)
             {
                 unit.GetComponent<NumericComponentS>().ApplyValue(request.ChouKaType == 1 ? NumericType.ChouKaOneTime : NumericType.ChouKaTenTime, TimeHelper.ServerNow());

@@ -48,7 +48,7 @@ namespace ET.Server
 
             if (attack != null && attack.Type == UnitType.Player)
             {
-                attack.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.BattleTodayKill, 1, 0);
+                attack.GetComponent<NumericComponentS>().ApplyChange(NumericType.BattleTodayKill, 1);
             }
         }
 
