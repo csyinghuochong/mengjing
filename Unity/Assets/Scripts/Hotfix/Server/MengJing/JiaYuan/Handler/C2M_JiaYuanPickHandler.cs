@@ -38,7 +38,7 @@
             }
             else
             {
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.JiaYuanPickOther, 1, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.JiaYuanPickOther, 1);
 
                 JiaYuanComponentS jiaYuanComponent_2 = await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(unit.Root(), request.MasterId);
 

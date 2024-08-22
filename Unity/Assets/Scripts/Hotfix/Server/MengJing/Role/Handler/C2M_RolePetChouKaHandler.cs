@@ -37,7 +37,7 @@ namespace ET.Server
                     return;
                 }
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, (-1 * needDimanond).ToString(), true,ItemGetWay.PetChouKa);
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetChouKa, 1, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetChouKa, 1);
                 unit.GetComponent<DataCollationComponent>().OnPetChouKa(1);
             }
 

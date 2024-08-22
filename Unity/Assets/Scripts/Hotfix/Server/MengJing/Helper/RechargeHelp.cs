@@ -24,8 +24,8 @@ namespace ET.Server
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Diamond, number.ToString(), notice, ItemGetWay.Recharge);
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-            numericComponent.ApplyChange(null, NumericType.RechargeNumber, rechargeNumber, 1, notice);
-            numericComponent.ApplyChange(null, NumericType.V1RechageNumber, rechargeNumber, 0, notice);
+            numericComponent.ApplyChange(NumericType.RechargeNumber, rechargeNumber, notice);
+            numericComponent.ApplyChange(NumericType.V1RechageNumber, rechargeNumber, notice);
             //已经领取的不充值
             if (numericComponent.GetAsInt(NumericType.RechargeSign) != 2)
             {

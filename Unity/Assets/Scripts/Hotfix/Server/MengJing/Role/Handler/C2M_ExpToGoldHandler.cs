@@ -73,7 +73,7 @@ namespace ET.Server
                     break;
             }
             userInfoComponent.UpdateRoleData(UserDataType.Exp, (costExp * -1).ToString());
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ExpToGoldTimes, 1, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.ExpToGoldTimes, 1);
             await ETTask.CompletedTask;
         }
     }

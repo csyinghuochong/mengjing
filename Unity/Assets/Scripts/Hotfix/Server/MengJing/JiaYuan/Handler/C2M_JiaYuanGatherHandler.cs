@@ -38,7 +38,7 @@
                     unit.GetComponent<BagComponentS>().OnAddItemData($"{jiaYuanFarmConfig.GetItemID};1", $"{ItemGetWay.JiaYuanGather}_{TimeHelper.ServerNow()}");
 
                     unitplan.GetComponent<NumericComponentS>().ApplyValue(NumericType.GatherLastTime, TimeHelper.ServerNow());
-                    unitplan.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.GatherNumber, 1, 0);
+                    unitplan.GetComponent<NumericComponentS>().ApplyChange(NumericType.GatherNumber, 1);
 
                     jiaYuanPlan.GatherNumber += 1;
                     jiaYuanPlan.GatherLastTime = TimeHelper.ServerNow();
@@ -68,7 +68,7 @@
                     unit.GetComponent<BagComponentS>().OnAddItemData($"{jiaYuanPastureConfig.GetItemID};1", $"{ItemGetWay.JiaYuanGather}_{TimeHelper.ServerNow()}");
 
                     unitplan.GetComponent<NumericComponentS>().ApplyValue(NumericType.GatherLastTime, TimeHelper.ServerNow());
-                    unitplan.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.GatherNumber, 1, 0);
+                    unitplan.GetComponent<NumericComponentS>().ApplyChange(NumericType.GatherNumber, 1);
 
                     jiaYuanPasture.GatherNumber += 1;
                     jiaYuanPasture.GatherLastTime = TimeHelper.ServerNow();

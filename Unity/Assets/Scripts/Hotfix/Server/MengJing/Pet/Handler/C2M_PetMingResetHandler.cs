@@ -20,7 +20,7 @@
                 return;
             }
             int sceneid = BattleHelper.GetSceneIdByType( SceneTypeEnum.PetMing );
-            numericComponent.ApplyChange( null, NumericType.PetMineReset, 1, 0 );
+            numericComponent.ApplyChange( NumericType.PetMineReset, 1);
             userInfoComponent.UpdateRoleData( UserDataType.Diamond,  "-350");
             userInfoComponent.AddFubenTimes(sceneid, 5);
             

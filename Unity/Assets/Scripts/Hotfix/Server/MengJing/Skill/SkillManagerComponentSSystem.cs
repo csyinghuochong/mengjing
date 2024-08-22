@@ -527,7 +527,7 @@ namespace ET.Server
               }
               if (unit.Type == UnitType.Player && weaponSkillConfig.SkillUseMP > 0)
               {
-                  unit.GetComponent<NumericComponentS>().ApplyChange( null, NumericType.SkillUseMP, weaponSkillConfig.SkillUseMP * -1, 0 );
+                  unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.SkillUseMP, weaponSkillConfig.SkillUseMP * -1);
               }
 
               Unit unitTarget = unit.GetParent<UnitComponent>().Get(skillcmd.TargetID);

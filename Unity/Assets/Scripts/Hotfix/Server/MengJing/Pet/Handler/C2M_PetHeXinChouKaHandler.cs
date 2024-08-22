@@ -53,7 +53,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetHeXinExploreNumber, 10, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetHeXinExploreNumber, 10);
             }
 
             List<RewardItem> rewardItems = new List<RewardItem>();

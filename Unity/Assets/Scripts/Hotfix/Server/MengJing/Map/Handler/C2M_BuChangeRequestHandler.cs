@@ -15,7 +15,7 @@
             M2Center_BuChangeRequest.AccountId = userInfoComponent.UserInfo.AccInfoID;
             L2M_BuChangeResponse centerAccount = (L2M_BuChangeResponse)await unit.Root().GetComponent<MessageSender>().Call(accountZone, M2Center_BuChangeRequest);
  
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.RechargeNumber, centerAccount.BuChangRecharge, 0,true);
+            unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.RechargeNumber, centerAccount.BuChangRecharge);
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd( UserDataType.Diamond, centerAccount.BuChangDiamond.ToString(), true, ItemGetWay.BuChang);
             response.PlayerInfo = centerAccount.PlayerInfo;
 

@@ -478,21 +478,21 @@ namespace ET.Server
                     if (addDiamond < 0)
                     {
                         unit.GetComponent<ChengJiuComponentS>().OnCostDiamond(addDiamond);
-                        unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.V1DayCostDiamond, addDiamond * -1, 0);
+                        unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.V1DayCostDiamond, addDiamond * -1);
                     }
 
                     break;
                 case UserDataType.Occ:
                     break;
                 case UserDataType.InvestMent:
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestMent, long.Parse(value), 0);
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestTotal, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.InvestMent, long.Parse(value));
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.InvestTotal, long.Parse(value));
                     break;
                 case UserDataType.JueXingExp:
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.JueXingExp, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.JueXingExp, long.Parse(value));
                     break;
                 case UserDataType.MaoXianExp:
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.MaoXianExp, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.MaoXianExp, long.Parse(value));
                     break;
                 case UserDataType.Recharge:
                     RechargeHelp.SendDiamondToUnit(unit, int.Parse(value), "道具");
@@ -1287,7 +1287,7 @@ namespace ET.Server
             }
 
             NumericComponentS numericComponent = main.GetComponent<NumericComponentS>();
-            numericComponent.ApplyChange(null, NumericType.KillMonsterNumber, 1, 0);
+            numericComponent.ApplyChange(NumericType.KillMonsterNumber, 1);
 
             int tiliKillNumber = numericComponent.GetAsInt(NumericType.TiLiKillNumber);
             if (sceneType == SceneTypeEnum.LocalDungeon && !showlieopen && self.UserInfo.PiLao > 0)
@@ -1296,12 +1296,12 @@ namespace ET.Server
                 {
                     numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, false);
 
-                    numericComponent.ApplyChange(null, NumericType.CostTiLi, 1, 0);
+                    numericComponent.ApplyChange( NumericType.CostTiLi, 1);
                     self.UpdateRoleData(UserDataType.PiLao, "-1", true);
                 }
                 else
                 {
-                    numericComponent.ApplyChange(null, NumericType.TiLiKillNumber, 1, 0);
+                    numericComponent.ApplyChange(NumericType.TiLiKillNumber, 1);
                 }
             }
 
@@ -1328,7 +1328,7 @@ namespace ET.Server
                 {
                     if (numericComponent.GetAsInt(NumericType.JueXingExp) < 5000)
                     {
-                        numericComponent.ApplyChange(null, NumericType.JueXingExp, 1, 0);
+                        numericComponent.ApplyChange(NumericType.JueXingExp, 1);
                     }
                 }
 

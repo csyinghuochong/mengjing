@@ -35,7 +35,7 @@ namespace ET.Server
 
                 long mianfeicd = TimeHelper.Second * 5 ;
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.HappyMoveNumber,1, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.HappyMoveNumber,1);
             }
             if (request.OperatateType == 2)
             {

@@ -42,7 +42,7 @@ namespace ET.Server
                     return;
                 }
 
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetExploreNumber, 1, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetExploreNumber, 1);
             }
             else if (request.ChouKaType == 10)
             {
@@ -54,7 +54,7 @@ namespace ET.Server
                     return;
                 }
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, (-1 * (int)(needDimanond * discount)).ToString(), true,ItemGetWay.PetChouKa);
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetExploreNumber, 10, 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetExploreNumber, 10);
             }
 
             int oldValue = exlporeNumber / 10;
@@ -62,7 +62,7 @@ namespace ET.Server
 
             if (newValue > oldValue)
             {
-                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetExploreLuckly, RandomHelper.RandomNumber(5,16), 0);
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetExploreLuckly, RandomHelper.RandomNumber(5,16));
             }
             int exploreLuck = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExploreLuckly);
             List <RewardItem> rewardItems = new List<RewardItem>();

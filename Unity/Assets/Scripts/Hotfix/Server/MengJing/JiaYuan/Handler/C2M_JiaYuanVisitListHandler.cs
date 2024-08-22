@@ -46,7 +46,7 @@ namespace ET.Server
                     {
                         return;
                     }
-                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.JiaYuanVisitRefresh, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.JiaYuanVisitRefresh, 1);
                     jiaYuanComponent.JiaYuanFuJinTime_3 = 0;
                 }
 

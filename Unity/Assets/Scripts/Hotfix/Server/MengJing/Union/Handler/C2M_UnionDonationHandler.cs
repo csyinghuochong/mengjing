@@ -77,7 +77,7 @@
 
                     int unionID = int.Parse(responseUnionEnter.Par);
                     UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionID);
-                    unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.UnionDiamondDonationNumber, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.UnionDiamondDonationNumber, 1);
                     // 花费250钻石，暂时写死，M2U_UnionOperationRequest也是
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 

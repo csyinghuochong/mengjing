@@ -32,7 +32,7 @@
                     int serialIndex = int.Parse(m2m_TrasferUnitResponse.Message);
                     string reward = ConfigData.SerialReward[serialIndex];
                     unit.GetComponent<BagComponentS>().OnAddItemData(reward, $"{ItemGetWay.Serial}_{TimeHelper.ServerNow()}");
-                    numericComponent.ApplyChange( null, NumericType.SerialNumber,  1, 0);
+                    numericComponent.ApplyChange(NumericType.SerialNumber,  1);
                 }
             }
             await ETTask.CompletedTask;

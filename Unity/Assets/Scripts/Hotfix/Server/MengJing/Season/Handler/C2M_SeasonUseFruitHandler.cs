@@ -37,7 +37,7 @@ namespace ET.Server
             reduceTime += long.Parse(itemConfig.ItemUsePar);
 
             bagComponent.OnCostItemData(request.BagInfoIDs[0], 1);
-            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.SeasonBossRefreshTime, -1 * reduceTime, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.SeasonBossRefreshTime, -1 * reduceTime);
             await ETTask.CompletedTask;
         }
     }
