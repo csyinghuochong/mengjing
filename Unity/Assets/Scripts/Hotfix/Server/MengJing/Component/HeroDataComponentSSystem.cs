@@ -40,40 +40,40 @@ namespace ET.Server
              {
                  int leftDay = (int)math.ceil(yuekeEndTime * 1f / TimeHelper.OneDay);
                  leftDay = math.min(7, leftDay);
-                 numericComponent.Set(NumericType.YueKaEndTime, 0);
-                 numericComponent.Set(NumericType.YueKaRemainTimes, leftDay);
+                 numericComponent.ApplyValue(NumericType.YueKaEndTime, 0, false);
+                 numericComponent.ApplyValue(NumericType.YueKaRemainTimes, leftDay, false);
              }
              if (numericComponent.GetAsFloat(NumericType.ChouKaTenTime) == 0)
              {
-                 numericComponent.Set(NumericType.ChouKaTenTime, TimeHelper.ServerNow());
+                 numericComponent.ApplyValue(NumericType.ChouKaTenTime, TimeHelper.ServerNow(), false);
              }
              if (numericComponent.GetAsFloat(NumericType.ChouKaOneTime) == 0)
              {
-                 numericComponent.Set(NumericType.ChouKaOneTime, TimeHelper.ServerNow());
+                 numericComponent.ApplyValue(NumericType.ChouKaOneTime, TimeHelper.ServerNow(), false);
              }
              if (numericComponent.GetAsInt(NumericType.HorseRide) == 1)
              {
-                 numericComponent.Set(NumericType.HorseRide, numericComponent.GetAsInt(NumericType.HorseFightID));
+                 numericComponent.ApplyValue(NumericType.HorseRide, numericComponent.GetAsInt(NumericType.HorseFightID), false);
              }
              if (numericComponent.GetAsInt(NumericType.UnionXiuLian_0) == 0)
              {
                  Dictionary<int, List<UnionQiangHuaConfig>> keyValuePairs = UnionQiangHuaConfigCategory.Instance.UnionQiangHuaList;
-                 numericComponent.Set(NumericType.UnionXiuLian_0, keyValuePairs[0][0].Id);
-                 numericComponent.Set(NumericType.UnionXiuLian_1, keyValuePairs[1][0].Id);
-                 numericComponent.Set(NumericType.UnionXiuLian_2, keyValuePairs[2][0].Id);
-                 numericComponent.Set(NumericType.UnionXiuLian_3, keyValuePairs[3][0].Id);
+                 numericComponent.ApplyValue(NumericType.UnionXiuLian_0, keyValuePairs[0][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionXiuLian_1, keyValuePairs[1][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionXiuLian_2, keyValuePairs[2][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionXiuLian_3, keyValuePairs[3][0].Id, false);
              }
              if (numericComponent.GetAsInt(NumericType.UnionPetXiuLian_0) == 0)
              {
                  Dictionary<int, List<UnionQiangHuaConfig>> keyValuePairs = UnionQiangHuaConfigCategory.Instance.UnionQiangHuaList;
-                 numericComponent.Set(NumericType.UnionPetXiuLian_0, keyValuePairs[4][0].Id);
-                 numericComponent.Set(NumericType.UnionPetXiuLian_1, keyValuePairs[5][0].Id);
-                 numericComponent.Set(NumericType.UnionPetXiuLian_2, keyValuePairs[6][0].Id);
-                 numericComponent.Set(NumericType.UnionPetXiuLian_3, keyValuePairs[7][0].Id);
+                 numericComponent.ApplyValue(NumericType.UnionPetXiuLian_0, keyValuePairs[4][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionPetXiuLian_1, keyValuePairs[5][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionPetXiuLian_2, keyValuePairs[6][0].Id, false);
+                 numericComponent.ApplyValue(NumericType.UnionPetXiuLian_3, keyValuePairs[7][0].Id, false);
              }
              if (numericComponent.GetAsInt(NumericType.Bloodstone) == 0)
              {
-                 numericComponent.Set(NumericType.Bloodstone, 10100);
+                 numericComponent.ApplyValue(NumericType.Bloodstone, 10100, false);
              }
 
              UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
@@ -99,12 +99,12 @@ namespace ET.Server
                  {
 
                      Log.Debug($"{PointLiLiang} {PointZhiLi} {PointTiZhi} {PointNaiLi} {PointMinJie}  {PointRemain}  totalPoint: {totalPoint}");
-                     numericComponent.Set(NumericType.PointLiLiang, 0);
-                     numericComponent.Set(NumericType.PointZhiLi, 0);
-                     numericComponent.Set(NumericType.PointTiZhi, 0);
-                     numericComponent.Set(NumericType.PointNaiLi, 0);
-                     numericComponent.Set(NumericType.PointMinJie, 0);
-                     numericComponent.Set(NumericType.PointRemain, totalPoint);
+                     numericComponent.ApplyValue(NumericType.PointLiLiang, 0, false);
+                     numericComponent.ApplyValue(NumericType.PointZhiLi, 0, false);
+                     numericComponent.ApplyValue(NumericType.PointTiZhi, 0, false);
+                     numericComponent.ApplyValue(NumericType.PointNaiLi, 0, false);
+                     numericComponent.ApplyValue(NumericType.PointMinJie, 0, false);
+                     numericComponent.ApplyValue(NumericType.PointRemain, totalPoint, false);
                  }
              }
          }

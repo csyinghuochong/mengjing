@@ -24,7 +24,7 @@ namespace ET.Server
 
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
             
-            Console.Write($"SessionPlayerComponent.Destroy:  self.Player  {self.Player.Id}");
+            Console.WriteLine($"SessionPlayerComponent.Destroy:  self.Player  {self.Player.Id}");
             // Session playerSession = playerSessionComponent ?.Session;
             // if ( playerSession == null)
             // {

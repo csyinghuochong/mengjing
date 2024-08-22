@@ -12,7 +12,7 @@ namespace ET.Server
         {
             try
             {
-                Console.Write($"A2A_BroadcastSceneRequest:  {scene.Root().Name}");
+                Console.WriteLine($"A2A_BroadcastSceneRequest:  {scene.Root().Name}");
                 
                 ///暂时写在这 没想到好的解决方案。
                 scene.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(request.UnitId);

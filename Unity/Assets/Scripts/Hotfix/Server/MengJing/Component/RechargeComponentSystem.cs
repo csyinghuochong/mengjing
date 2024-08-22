@@ -21,7 +21,7 @@ namespace ET.Server
         {
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             int rechageBuchang = numericComponent.GetAsInt(NumericType.RechargeBuChang);
-            numericComponent.Set(NumericType.RechargeBuChang, 0);
+            numericComponent.ApplyValue(NumericType.RechargeBuChang, 0, false);
             RechargeHelp.OnRechage(self.GetParent<Unit>(), rechageBuchang, false);
         }
     }

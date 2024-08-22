@@ -49,8 +49,8 @@ namespace ET.Server
                     if (unit.GetComponent<NumericComponentS>() == null)
                     {
                         NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                        numericComponentS.Set(NumericType.Now_Speed, 60000, false); // 速度是6米每秒
-                        numericComponentS.Set(NumericType.AOI, 15000, false); // 视野15米
+                        numericComponentS.ApplyValue(NumericType.Now_Speed, 60000, false); // 速度是6米每秒
+                        numericComponentS.ApplyValue(NumericType.AOI, 15000, false); // 视野15米
                     }
 
                     unit.AddDataComponent<TaskComponentS>();
@@ -125,11 +125,11 @@ namespace ET.Server
             unit.Position = vector3;
             unit.ConfigId = monsterConfig.Id;
             unit.Rotation = quaternion.Euler(0, createMonsterInfo.Rotation, 0);
-            numericComponent.Set(NumericType.BattleCamp, createMonsterInfo.Camp, false);
-            numericComponent.Set(NumericType.TeamId, master != null ? master.GetTeamId() : 0, false);
-            numericComponent.Set(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
-            numericComponent.Set(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
-            numericComponent.Set(NumericType.PetSkin, createMonsterInfo.SkinId, false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, createMonsterInfo.Camp, false);
+            numericComponent.ApplyValue(NumericType.TeamId, master != null ? master.GetTeamId() : 0, false);
+            numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
+            numericComponent.ApplyValue(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
+            numericComponent.ApplyValue(NumericType.PetSkin, createMonsterInfo.SkinId, false);
 
             unit.SetBornPosition(unit.Position, false);
             unit.MasterId = createMonsterInfo.MasterID;
@@ -150,8 +150,8 @@ namespace ET.Server
             if (mainUnit != null && TimeHelper.ServerNow() < revetime)
             {
                 unit.AddComponent<ReviveTimeComponent, long>(revetime);
-                numericComponent.Set(NumericType.ReviveTime, revetime, false);
-                numericComponent.Set(NumericType.Now_Dead, 1, false);
+                numericComponent.ApplyValue(NumericType.ReviveTime, revetime, false);
+                numericComponent.ApplyValue(NumericType.Now_Dead, 1, false);
             }
 
             //51 场景怪
@@ -185,7 +185,7 @@ namespace ET.Server
                 unit.AddComponent<BuffManagerComponentS>(); //添加Buff管理器
                 unit.GetComponent<SkillPassiveComponent>().UpdateMonsterPassiveSkill();
                 unit.GetComponent<SkillPassiveComponent>().Activeted();
-                numericComponent.Set(NumericType.MasterId, createMonsterInfo.MasterID);
+                numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID);
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
                 switch (mapComponent.SceneType)
                 {
@@ -248,7 +248,7 @@ namespace ET.Server
             {
                 unit.AddComponent<MoveComponent>();
                 unit.AddComponent<StateComponentS>();
-                numericComponent.Set(NumericType.Now_Speed, npcConfig.NpcPar[0]);
+                numericComponent.ApplyValue(NumericType.Now_Speed, npcConfig.NpcPar[0], false);
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                 unit.AddComponent<AIComponent, int>(npcConfig.AI); //AI行为树序号	
                 unit.GetComponent<AIComponent>().InitNpc(npcId);
@@ -293,7 +293,7 @@ namespace ET.Server
             ;
             numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.Set(NumericType.Now_Hp, max_hp, false);
+            numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base),
                 false);
 
@@ -333,8 +333,8 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPasture(jiaYuanPastures, false);
-            numericComponent.Set(NumericType.MasterId, unitid, false);
-            numericComponent.Set(NumericType.Base_Speed_Base, 30000, false);
+            numericComponent.ApplyValue(NumericType.MasterId, unitid, false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 30000, false);
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
@@ -375,11 +375,11 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
-            numericComponent.Set(NumericType.BattleCamp, roleCamp);
-            numericComponent.Set(NumericType.MasterId, masterId);
-            numericComponent.Set(NumericType.UnitPositon, cell);
+            numericComponent.ApplyValue(NumericType.BattleCamp, roleCamp);
+            numericComponent.ApplyValue(NumericType.MasterId, masterId);
+            numericComponent.ApplyValue(NumericType.UnitPositon, cell);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.Set(NumericType.Now_Hp, max_hp, false);
+            numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
             unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
             unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
             unit.GetComponent<SkillPassiveComponent>().Activeted();
@@ -438,7 +438,7 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = master.GetComponent<UserInfoComponentS>().UserInfo.StallName;
-            unit.GetComponent<NumericComponentS>().Set(NumericType.MasterId, master.Id);
+            numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
             unit.MasterId = master.Id;
             unit.Type = UnitType.Stall;
             unit.Position = master.Position;
@@ -464,7 +464,7 @@ namespace ET.Server
                 unit.AddComponent<MoveComponent>();
                 unit.AddComponent<StateComponentS>();
                 NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
-                numericComponent.Set(NumericType.Now_Speed, npcConfig.NpcPar[0]);
+                numericComponent.ApplyValue(NumericType.Now_Speed, npcConfig.NpcPar[0], false);
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                 unit.AddComponent<AIComponent, int>(npcConfig.AI); //AI行为树序号	
                 unit.GetComponent<AIComponent>().InitNpc(npcId);
@@ -493,8 +493,8 @@ namespace ET.Server
             unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = ConfigData.JiaYuanPetPosition[1];
             unit.Type = UnitType.Pet;
-            numericComponent.Set(NumericType.MasterId, masterid, false);
-            numericComponent.Set(NumericType.Base_Speed_Base, 10000, false);
+            numericComponent.ApplyValue(NumericType.MasterId, masterid, false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 10000, false);
             AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11); //AI行为树序号
             aIComponent.InitJiaYuanPet();
             aIComponent.Begin();
@@ -527,7 +527,7 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPlan(jiaYuanPlant, false);
-            numericComponent.Set(NumericType.MasterId, unitid, false);
+            numericComponent.ApplyValue(NumericType.MasterId, unitid, false);
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
