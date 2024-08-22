@@ -76,8 +76,8 @@ namespace ET.Server
                       break;
                   case (int)SkillTargetType.FixedPosition:            //定点位置
                       float3 sourcePoint = unit.Position;
-                      quaternion rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
-                      float3 targetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillcmd.TargetDistance;
+                      quaternion rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
+                      float3 targetPoint = sourcePoint + math.mul(rotation , new float3(0,0,1)) * skillcmd.TargetDistance;
                       skillInfo = SkillInfo.Create();
                       skillInfo.WeaponSkillID = weaponSkill;
                       skillInfo.PosX = targetPoint.x;
@@ -156,8 +156,8 @@ namespace ET.Server
                       randomRange = int.Parse(randomInfos[2]);
                       skillNumber = RandomHelper.RandomNumber(1, randomNumber);
                       sourcePoint = unit.Position;
-                      rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
-                      targetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillcmd.TargetDistance;
+                      rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
+                      targetPoint = sourcePoint + math.mul(rotation , new float3(0,0,1)) * skillcmd.TargetDistance;
 
                       if (skillNumber > 100)
                       {

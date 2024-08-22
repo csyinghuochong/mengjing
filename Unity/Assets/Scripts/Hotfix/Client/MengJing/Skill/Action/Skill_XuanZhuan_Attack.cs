@@ -68,7 +68,8 @@ namespace ET.Client
                 });
                 
             }
-            skils.TheUnitFrom.Rotation = quaternion.Euler(0, angle + addrangle, 0);
+
+            skils.TheUnitFrom.Rotation = quaternion.Euler(0, math.radians(angle + addrangle), 0);
             skils.BaseOnUpdate();
         }
 

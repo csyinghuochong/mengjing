@@ -403,7 +403,7 @@ namespace ET.Server
                  case 3:
                      ishape = new Fan();
                      (ishape as Fan).s_position = self.TargetPosition;
-                     (ishape as Fan).s_rotation = quaternion.Euler(0, targetAngle, 0);
+                     (ishape as Fan).s_rotation = quaternion.Euler(0, math.radians(targetAngle), 0);
                      (ishape as Fan).skill_distance = (float)(self.SkillConf.DamgeRange[0]) + addRange;
                      (ishape as Fan).skill_angle = (float)(self.SkillConf.DamgeRange[1]);
                      break;

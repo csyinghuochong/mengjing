@@ -9,8 +9,8 @@ namespace ET.Server
         {
             Unit unit = args.UnitDefend;
             C2M_SkillCmd skillcmd = args.skillcmd;
-          
-            unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+
+            unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
             SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
             if (weaponSkillConfig.IfStopMove == 0 && !unit.GetComponent<MoveComponent>().IsArrived())
             {

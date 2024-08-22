@@ -33,7 +33,7 @@ namespace ET.Server
                     float3 dir = unit.Position - targetPosition;
                     float ange = math.radians(math.atan2(dir.x, dir.z));
                     float addg = unit.Id % 10 * (unit.Id % 2 == 0 ? 2 : -2);
-                    quaternion rotation = quaternion.Euler(0, ange + addg, 0);
+                    quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
                     float3 ttt = targetPosition + math.mul(rotation, math.forward()) * (limitDis);
                     unit.FindPathMoveToAsync(ttt).Coroutine();
                 }

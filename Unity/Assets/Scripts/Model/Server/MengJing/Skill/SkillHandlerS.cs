@@ -57,7 +57,7 @@ namespace ET.Server
                 return false;
             }
             
-            float3 newVec = math.mul(quaternion.Euler(0f, 90f, 0f) , s_forward) ;
+            float3 newVec = math.mul(quaternion.Euler(0f, math.radians(90f), 0f) , s_forward) ;
             float rightDistance = math.dot(direction, newVec);
             
             return math.abs(rightDistance) <= x_range;
