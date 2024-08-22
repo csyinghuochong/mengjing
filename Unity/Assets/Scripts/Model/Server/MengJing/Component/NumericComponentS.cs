@@ -163,7 +163,7 @@ namespace ET.Server
                 return;
             }
             
-            self.Update(numericType, value, notice);
+            self.Update(numericType, value, notice, check, attackid, skillId, damgeType);
         }
         
         /// <summary>
