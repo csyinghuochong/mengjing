@@ -9,11 +9,11 @@ namespace ET.Server
         {
             if (NumericData.BroadcastType.Contains(args.NumericType))
             {
-                SendNumbericChange.Broadcast(args);
+                NumbericChangeBroadcastHelper.Broadcast(args);
             }
             else
             {
-                SendNumbericChange.SendToClient(args);
+                NumbericChangeBroadcastHelper.SendToClient(args);
             }
             await ETTask.CompletedTask;
         }

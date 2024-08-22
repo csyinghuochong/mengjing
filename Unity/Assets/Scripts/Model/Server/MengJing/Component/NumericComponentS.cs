@@ -71,7 +71,6 @@ namespace ET.Server
             long nowPropertyValue = 0;
             if (numericType > NumericType.Max)
             {
-                
                 ///注意下 客户端应该是不需要这个逻辑的。
                 
                 nowValue = numericType / 100;

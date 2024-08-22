@@ -5,7 +5,7 @@ namespace ET
 
     // 所有属性都会进来这个事件
     // 发送客户端数值更新消息   EventType.NumericApplyChangeValue
-    public static class SendNumbericChange
+    public static class NumbericChangeBroadcastHelper
     {
         public static  void Broadcast(NumbericChange args)
         {
