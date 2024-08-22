@@ -58,7 +58,7 @@
                         unit.GetComponent<BagComponentS>().OnAddItemData($"{jiaYuanFarmConfig.GetItemID};1", $"{ItemGetWay.JiaYuanGather}_{TimeHelper.ServerNow()}");
 
                         unitplan.GetComponent<NumericComponentS>().ApplyValue(NumericType.GatherLastTime, TimeHelper.ServerNow());
-                        unitplan.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.GatherNumber, 1, 0);
+                        unitplan.GetComponent<NumericComponentS>().ApplyChange(NumericType.GatherNumber, 1);
                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanGatherPlant_401, 0, 1);
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanGatherPlant_93, 0, 1);
                         jiaYuanPlan.GatherNumber += 1;
@@ -98,7 +98,7 @@
                         unit.GetComponent<BagComponentS>().OnAddItemData($"{jiaYuanPastureConfig.GetItemID};1", $"{ItemGetWay.JiaYuanGather}_{TimeHelper.ServerNow()}");
 
                         unitplan.GetComponent<NumericComponentS>().ApplyValue(NumericType.GatherLastTime, TimeHelper.ServerNow());
-                        unitplan.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.GatherNumber, 1, 0);
+                        unitplan.GetComponent<NumericComponentS>().ApplyChange(NumericType.GatherNumber, 1);
 
                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanGatherPasture_402, 0, 1);
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanGatherPasture_95, 0, 1);
@@ -124,7 +124,7 @@
                 M2J_JiaYuanOperateRequest opmessage = M2J_JiaYuanOperateRequest.Create();
                 opmessage.JiaYuanOperate = jiaYuanOperate;
                 J2M_JiaYuanOperateResponse m2JJiaYuanOperateResponse = (J2M_JiaYuanOperateResponse)await unit.Root().GetComponent<MessageSender>().Call(jiayuanactorid, opmessage);
-                unit.GetComponent<NumericComponentS>().ApplyChange( null, NumericType.JiaYuanGatherOther,1, 0 );
+                unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.JiaYuanGatherOther,1 );
             }
 
             await ETTask.CompletedTask;

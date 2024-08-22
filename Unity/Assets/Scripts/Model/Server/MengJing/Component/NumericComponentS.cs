@@ -154,7 +154,7 @@ namespace ET.Server
             self.ApplyValue(numericType, (long)(value * 10000), notice);
         }
 
-        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0, int damgeType = 0)
+        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = true, long attackid = 0, int skillId = 0, int damgeType = 0)
         {
             long old = self.GetByKey(numericType);
            

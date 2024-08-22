@@ -1027,7 +1027,7 @@ namespace ET.Server
                         int dunDamge = (int)((float)damge * shield_pro);
                         damge -= dunDamge;
                         damge = Math.Max(0, damge);
-                        numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Shield_HP, -1 * dunDamge, skillconfig.Id, true, DamgeType);
+                        numericComponentDefend.ApplyChange( NumericType.Now_Shield_HP, -1 * dunDamge, true, true, attackUnit.Id, skillconfig.Id,  DamgeType);
                     }
 
                     //吸血处理(普通攻击触发吸血)
@@ -1037,7 +1037,7 @@ namespace ET.Server
                         if (hushi > 0f)
                         {
                             int addHp = (int)((float)damge * hushi);
-                            numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
+                            numericComponentDefend.ApplyChange( NumericType.Now_Hp, addHp, true, true, attackUnit.Id, 0, 0);
                         }
                     }
 
@@ -1046,7 +1046,7 @@ namespace ET.Server
                     if (xixueAll > 0f)
                     {
                         int addHp = (int)((float)damge * xixueAll);
-                        numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
+                        numericComponentAttack.ApplyChange(NumericType.Now_Hp, addHp, true, true, attackUnit.Id, 0, 0);
                     }
 
                     damge *= -1;
@@ -1073,13 +1073,13 @@ namespace ET.Server
                     {
                         //复活存在30%的血量
                         defendUnit.GetComponent<BuffManagerComponentS>().UpdateFuHuoStatus();
-                        numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 0.3f), 0);
+                        numericComponentDefend.ApplyChange( NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 0.3f));
                     }
                     else if (RandomHelper.RandFloat01() < numericComponentDefend.GetAsFloat(NumericType.Now_ShenYouPro))
                     {
                         //神佑存在100%的血量
                         defendUnit.GetComponent<BuffManagerComponentS>().UpdateFuHuoStatus();
-                        numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 1f), 0);
+                        numericComponentDefend.ApplyChange( NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 1f));
                     }
                     else
                     {
@@ -1090,12 +1090,12 @@ namespace ET.Server
                 if (numericComponentDefend.GetAsFloat(NumericType.Now_ActReboundDamgePro) > 0 && skillconfig.DamgeType == 1)
                 {
                     int fantanValue = (int)((float)damge * numericComponentDefend.GetAsFloat(NumericType.Now_ActReboundDamgePro));
-                    numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, fantanValue, skillconfig.Id, true, DamgeType);
+                    numericComponentAttack.ApplyChange( NumericType.Now_Hp, fantanValue, true, true, attackUnit.Id,  skillconfig.Id, DamgeType);
                 }
                 if (attackUnit.IsDisposed == false)
                 {
                     //设置目标当前
-                    numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Hp, damge, skillconfig.Id, true, DamgeType);
+                    numericComponentDefend.ApplyChange( NumericType.Now_Hp, damge, true, true, attackUnit.Id, skillconfig.Id, DamgeType);
 
                     //攻击方反弹即将死亡
                     if (numericComponentAttack.GetAsInt(NumericType.Now_Hp) <= 0)

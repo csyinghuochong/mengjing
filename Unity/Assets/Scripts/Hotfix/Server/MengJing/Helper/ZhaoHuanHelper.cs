@@ -10,8 +10,14 @@ namespace ET.Server
             // 攻击者创建召唤怪。属性也是复制攻击者
             // '1;90000102;1;1;1;0.5,0.5,0.5,0.5,0.5;0,0,0,0,0;5
             // 时间间隔；召唤ID,召唤ID(随机从中召唤一个)；是否复刻玩家形象（0不是，1是）；范围；数量；血量比例,攻击比例,魔法比例,物防比例，魔防比例；血量固定值,攻击固定值，魔法固定值，物防固定值，魔防固定值;数量上限
-            UnitInfoComponent unitInfoComponentAttack = args.Attack.GetComponent<UnitInfoComponent>();
-            UnitComponent unitComponent = args.Attack.GetParent<UnitComponent>();
+            Unit attack = args.Defend.GetParent<UnitComponent>().Get(args.AttackId);
+            if (attack == null)
+            {
+                return;
+            }
+
+            UnitInfoComponent unitInfoComponentAttack = attack.GetComponent<UnitInfoComponent>();
+            UnitComponent unitComponent = attack.GetParent<UnitComponent>();
             if (unitInfoComponentAttack.GetZhaoHuanNumber(unitComponent) >= 100)
             {
                 Log.Error("Skill_Com_Summon_5:Error:  死亡召唤数量超过100！！！");
@@ -44,10 +50,10 @@ namespace ET.Server
             }
 
             List<Unit> haved = new List<Unit>();
-            List<EntityRef<Unit>> all = args.Attack.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> all = attack.GetParent<UnitComponent>().GetAll();
             foreach (Unit uu in all)
             {
-                if (uu.Type == UnitType.Monster && monsterIds.Contains(uu.ConfigId) && uu.MasterId == args.Attack.Id)
+                if (uu.Type == UnitType.Monster && monsterIds.Contains(uu.ConfigId) && uu.MasterId == attack.Id)
                 {
                     haved.Add(uu);
                 }
@@ -67,11 +73,11 @@ namespace ET.Server
             }
 
             monsterId = monsterIds[RandomHelper.RandomNumber(0, monsterIds.Count)];
-            Unit unitMonster = UnitFactory.CreateMonster(args.Attack.Scene(), monsterId, args.Defend.Position,
+            Unit unitMonster = UnitFactory.CreateMonster(attack.Scene(), monsterId, args.Defend.Position,
                 new CreateMonsterInfo()
                 {
-                    Camp = args.Attack.GetBattleCamp(),
-                    MasterID = args.Attack.Id,
+                    Camp = attack.GetBattleCamp(),
+                    MasterID = attack.Id,
                     AttributeParams = summonParList[1] + ";" + summonParList[4] + ";" + summonParList[5]
                 });
             unitInfoComponentAttack.ZhaohuanIds.Add(unitMonster.Id);

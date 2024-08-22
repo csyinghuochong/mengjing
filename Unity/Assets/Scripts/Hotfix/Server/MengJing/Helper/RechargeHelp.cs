@@ -81,7 +81,7 @@ namespace ET.Server
                 //直接存数据库
                 //int number = ComHelp.GetDiamondNumber(rechargeNumber);
                 NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene, userId);
-                numericComponent.ApplyChange(null, NumericType.RechargeBuChang, rechargeNumber, 1, false);
+                numericComponent.ApplyChange(NumericType.RechargeBuChang, rechargeNumber, false);
                 await UnitCacheHelper.SaveComponentCache(scene, numericComponent);
                 
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, userId);
