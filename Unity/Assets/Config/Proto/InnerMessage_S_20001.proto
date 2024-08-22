@@ -2008,6 +2008,8 @@ message A2A_BroadcastSceneRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
+	
+	int64 UnitId = 1;
 }
 
 message A2A_BroadcastSceneResponse // IResponse

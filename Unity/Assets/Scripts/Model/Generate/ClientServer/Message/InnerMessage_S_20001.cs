@@ -8640,6 +8640,9 @@ namespace ET
         [MemoryPackOrder(92)]
         public long ActorId { get; set; }
 
+        [MemoryPackOrder(0)]
+        public long UnitId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8649,6 +8652,7 @@ namespace ET
 
             this.RpcId = default;
             this.ActorId = default;
+            this.UnitId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
