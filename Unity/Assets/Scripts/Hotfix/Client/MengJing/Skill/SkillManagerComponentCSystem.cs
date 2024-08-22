@@ -157,7 +157,8 @@ namespace ET.Client
                 skill.Dispose();
                 self.Skills.RemoveAt(i);
             }
-
+            self.Skills.Clear();
+            
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
