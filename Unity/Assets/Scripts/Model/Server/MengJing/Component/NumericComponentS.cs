@@ -64,37 +64,10 @@ namespace ET.Server
             return self.GetByKey(numericType);
         }
 
-        public static void Set(this NumericComponentS self, int nt, double value, bool notice = true)
-        {
-            self.Update(nt, (long)(value * 10000), notice);
-        }
-
-        public static void Set(this NumericComponentS self, int nt, float value, bool notice = true)
-        {
-            self.Update(nt, (long)(value * 10000), notice);
-        }
-
-        public static void Set(this NumericComponentS self, int nt, int value, bool notice = true)
-        {
-            self.Update(nt, value, notice);
-        }
-
-        public static void Set(this NumericComponentS self, int nt, long value, bool notice = true)
-        {
-            self.Update(nt, value, notice);
-        }
-
         private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true)
         {
-            self.NumericDic[numericType] = value;
-
             if (numericType < NumericType.Max)
             {
-                if (notice)
-                {
-                    Log.Warning($"设置 NumericType：{numericType} （类型小于 NumericType.Max），用Set方法走公式 不会广播，请检查");
-                }
-
                 return;
             }
 
@@ -193,6 +166,8 @@ namespace ET.Server
                 args.DamgeType = 0;
                 EventSystem.Instance.Publish(self.Scene(), args);
             }
+            
+            self.Update(numericType, value, notice);
         }
 
         /// <summary>

@@ -116,13 +116,13 @@ namespace ET.Server
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.TrialDungeonId) < maxTowerId)
             {
-                numericComponent.Set(NumericType.TrialDungeonId, maxTowerId, false);
+                numericComponent.ApplyValue(NumericType.TrialDungeonId, maxTowerId, false);
             }
 
             if (numericComponent.GetAsInt(NumericType.UpdateActivty) == 0)
             {
                 self.GetParent<Unit>().GetComponent<ActivityComponentS>().ClearJieRiActivty();
-                numericComponent.Set(NumericType.UpdateActivty, 1, false);
+                numericComponent.ApplyValue(NumericType.UpdateActivty, 1, false);
             }
 
             DataCollationComponent dataCollationComponent = self.GetParent<Unit>().GetComponent<DataCollationComponent>();
@@ -448,8 +448,8 @@ namespace ET.Server
                     self.UserInfo.Lv += int.Parse(value);
                     saveValue = self.UserInfo.Lv.ToString();
                     long maxHp = unit.GetComponent<NumericComponentS>().GetAsLong((int)NumericType.Now_MaxHp);
-                    unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, maxHp);
-                    unit.GetComponent<NumericComponentS>().Set(NumericType.PointRemain, int.Parse(value) * 10);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Hp, maxHp);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PointRemain, int.Parse(value) * 10);
                     unit.GetComponent<TaskComponentS>().OnUpdateLevel(self.UserInfo.Lv);
                     unit.GetComponent<ChengJiuComponentS>().OnUpdateLevel(self.UserInfo.Lv);
                     unit.GetComponent<HeroDataComponentS>().CheckSeasonOpen(true);

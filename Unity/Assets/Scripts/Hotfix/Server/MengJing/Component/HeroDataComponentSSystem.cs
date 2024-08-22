@@ -272,15 +272,15 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-             numericComponent.Set(NumericType.Now_Dead, 0, false);
-             numericComponent.Set(NumericType.Now_Damage, 0, false);
-             numericComponent.Set(NumericType.BossBelongID, 0, false);
-             numericComponent.Set(NumericType.Now_Shield_HP, 0, false);
-             numericComponent.Set(NumericType.Now_Shield_MaxHP, 0, false);
-             numericComponent.Set(NumericType.Now_Shield_DamgeCostPro, 0, false);
+             numericComponent.ApplyValue(NumericType.Now_Dead, 0, false);
+             numericComponent.ApplyValue(NumericType.Now_Damage, 0, false);
+             numericComponent.ApplyValue(NumericType.BossBelongID, 0, false);
+             numericComponent.ApplyValue(NumericType.Now_Shield_HP, 0, false);
+             numericComponent.ApplyValue(NumericType.Now_Shield_MaxHP, 0, false);
+             numericComponent.ApplyValue(NumericType.Now_Shield_DamgeCostPro, 0, false);
 
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-             unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, max_hp, false);
+             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Hp, max_hp, false);
          }
 
          public static void OnResetPoint(this HeroDataComponentS self)
@@ -363,7 +363,7 @@ namespace ET.Server
                      if (mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
                      {
                          resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                         unit.GetComponent<NumericComponentS>().Set(NumericType.ReviveTime, resurrectionTime);
+                         unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
 
                          unit.RemoveComponent<ReviveTimeComponent>();
                          unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
@@ -502,18 +502,18 @@ namespace ET.Server
          public static void InitPlan(this HeroDataComponentS self, JiaYuanPlant jiaYuanPlant, bool notice)
          {
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime, false);
-             numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
-             numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
-             numericComponent.Set(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex, false);
+             numericComponent.ApplyValue(NumericType.StartTime, jiaYuanPlant.StartTime, false);
+             numericComponent.ApplyValue(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
+             numericComponent.ApplyValue(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
+             numericComponent.ApplyValue(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex, false);
          }
 
          public static void InitPasture(this HeroDataComponentS self, JiaYuanPastures jiaYuanPlant, bool notice)
          {
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime, false);
-             numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
-             numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
+             numericComponent.ApplyValue(NumericType.StartTime, jiaYuanPlant.StartTime, false);
+             numericComponent.ApplyValue(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
+             numericComponent.ApplyValue(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
          }
 
          public static void InitJingLing(this HeroDataComponentS self, Unit master, int jinglingid, bool notice)
@@ -723,7 +723,7 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.Set(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
+             numericComponent.ApplyValue(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
              //Log.Debug("初始化当前怪物血量:" + numericComponent.GetAsLong(NumericType.Now_Hp));
          }
 
@@ -736,7 +736,7 @@ namespace ET.Server
              Unit nowUnit = self.GetParent<Unit>();
              NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
              long newvalue = numericComponent.GetAsLong(numericType) + NumericTypeValue;
-             numericComponent.Set(numericType, newvalue);
+             numericComponent.ApplyValue(numericType, newvalue);
 
              /*
              //获取是暴击等级等二次属性 需要二次计算
@@ -761,7 +761,7 @@ namespace ET.Server
              Unit nowUnit = self.GetParent<Unit>();
              NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
              float newvalue = numericComponent.GetAsFloat(numericType) + NumericTypeValue;
-             numericComponent.Set(numericType, newvalue);
+             numericComponent.ApplyValue(numericType, newvalue);
          }
 
 

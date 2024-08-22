@@ -223,7 +223,7 @@ namespace ET.Server
             unit.Position = vector3;
             unit.Type = UnitType.Bullet; //子弹Unity,根据这个类型会实例化出特效
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            numericComponent.Set(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
             numericComponent.ApplyValue(NumericType.MasterId, masterid, false);
             numericComponent.ApplyValue(NumericType.StartAngle, starangle, false);
             numericComponent.ApplyValue(NumericType.StartTime, TimeHelper.ServerNow(), false);
@@ -290,12 +290,11 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
             numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
             numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
-            ;
+            
             numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
             numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
-            numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base),
-                false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false);
 
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             if (scene.GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.MainCityScene)

@@ -104,7 +104,7 @@ namespace ET.Server
             if (newSpeed > oldSpeed && newspeedAdd > oldspeedAdd)
             {
                 skillS.SpeedAddValue = newspeedAdd - oldspeedAdd;
-                numericComponent.Set(NumericType.Extra_Buff_Speed_Add, newspeedAdd);
+                numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, newspeedAdd);
             }
             else
             {
@@ -126,7 +126,7 @@ namespace ET.Server
             unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             float curspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add) - skillS.SpeedAddValue;
-            numericComponent.Set(NumericType.Extra_Buff_Speed_Add, math.max(0, curspeedAdd));
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, math.max(0, curspeedAdd));
         }
 
         public float3 GetBulletTargetPoint(SkillS skillS, int angle)

@@ -214,7 +214,7 @@ namespace ET.Server
                     //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);
                     //todayCamp = todayCamp > 0 ? todayCamp : int.Parse(request.ParamInfo);
                     int todayCamp = int.Parse(request.ParamInfo);
-                    numericComponent.Set(NumericType.BattleCamp, todayCamp); //1 2
+                    numericComponent.ApplyValue(NumericType.BattleCamp, todayCamp); //1 2
                     //numericComponent.Set(NumericType.BattleTodayCamp, todayCamp); //1 2
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                     sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);

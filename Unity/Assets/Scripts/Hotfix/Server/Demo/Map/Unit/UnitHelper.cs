@@ -39,15 +39,15 @@ namespace ET.Server
 
             if (record)
             {
-                numericComponent.Set(NumericType.MainCity_X, self.Position.x);
-                numericComponent.Set(NumericType.MainCity_Y, self.Position.y);
-                numericComponent.Set(NumericType.MainCity_Z, self.Position.z);
+                numericComponent.ApplyValue(NumericType.MainCity_X, self.Position.x);
+                numericComponent.ApplyValue(NumericType.MainCity_Y, self.Position.y);
+                numericComponent.ApplyValue(NumericType.MainCity_Z, self.Position.z);
             }
             else
             {
-                numericComponent.Set(NumericType.MainCity_X, 0f);
-                numericComponent.Set(NumericType.MainCity_Y, 0f);
-                numericComponent.Set(NumericType.MainCity_Z, 0f);
+                numericComponent.ApplyValue(NumericType.MainCity_X, 0f);
+                numericComponent.ApplyValue(NumericType.MainCity_Y, 0f);
+                numericComponent.ApplyValue(NumericType.MainCity_Z, 0f);
             }
         }
 

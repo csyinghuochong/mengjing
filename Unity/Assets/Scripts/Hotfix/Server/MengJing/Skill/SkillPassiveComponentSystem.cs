@@ -199,11 +199,11 @@ namespace ET.Server
                 int huifuspeed = equipIndex == 0 ? 1 : 2;
                 if (addMp == 0f && nowMp < maxMp)
                 {
-                    numericComponent.Set(NumericType.SkillUseMP, 10 * huifuspeed);
+                    numericComponent.ApplyValue(NumericType.SkillUseMP, 10 * huifuspeed);
                 }
                 if (addMp > 0f && nowMp < maxMp)
                 {
-                    numericComponent.Set(NumericType.SkillUseMP, 10 * huifuspeed);
+                    numericComponent.ApplyValue(NumericType.SkillUseMP, 10 * huifuspeed);
                 }
             }
         }

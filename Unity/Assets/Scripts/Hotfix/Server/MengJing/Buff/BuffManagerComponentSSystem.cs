@@ -801,7 +801,7 @@ namespace ET.Server
             //恢复血量
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.Set(NumericType.Now_Hp , 0);
+            numericComponent.ApplyValue(NumericType.Now_Hp , 0);
             numericComponent.ApplyChange(null, NumericType.Now_Hp, max_hp, 0);
         }
 

@@ -80,8 +80,8 @@ namespace ET.Server
 						
 						break;
 					case 8:
-						unit.GetComponent<NumericComponentS>().Set(NumericType.Ling_DiLv, int.Parse(commands[1]), false);
-						unit.GetComponent<NumericComponentS>().Set(NumericType.Ling_DiExp, 0, false);
+						unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Ling_DiLv, int.Parse(commands[1]), false);
+						unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Ling_DiExp, 0, false);
 						break;
 					case 9:
                         

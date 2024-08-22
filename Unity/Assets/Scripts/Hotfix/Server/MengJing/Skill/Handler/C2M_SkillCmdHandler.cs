@@ -70,7 +70,7 @@ namespace ET.Server
                  }
                  if (juexingid == request.SkillID)
                  {
-                     unit.GetComponent<NumericComponentS>().Set(NumericType.JueXingAnger, 0);
+                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.JueXingAnger, 0);
                  }
              }
              

@@ -30,7 +30,7 @@ namespace ET.Server
             buffS.TargetPosition =  theUnitBelongto.GetComponent<PathfindingComponent>().GetCanChongJiPath(theUnitBelongto.Position, vector3);
 
             theUnitBelongto.Stop(-1);
-            theUnitBelongto.GetComponent<NumericComponentS>().Set(NumericType.Extra_Buff_Speed_Add, newSpeed - oldSpeed);
+            theUnitBelongto.GetComponent<NumericComponentS>().ApplyValue(NumericType.Extra_Buff_Speed_Add, newSpeed - oldSpeed);
             theUnitBelongto.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.JiTui);
             theUnitBelongto.FindPathMoveToAsync(buffS.TargetPosition ).Coroutine();
         }
@@ -46,7 +46,7 @@ namespace ET.Server
         public override void OnFinished(BuffS buffS)
         {
             buffS.TheUnitBelongto.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.JiTui);
-            buffS.TheUnitBelongto.GetComponent<NumericComponentS>().Set(NumericType.Extra_Buff_Speed_Add, 0);
+            buffS.TheUnitBelongto.GetComponent<NumericComponentS>().ApplyValue(NumericType.Extra_Buff_Speed_Add, 0);
         }
     }
 }

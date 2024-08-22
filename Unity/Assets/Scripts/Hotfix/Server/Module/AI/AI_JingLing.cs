@@ -47,7 +47,7 @@ namespace ET.Server
                 if (nowspeed > 0)
                 {
                     float3 nextTarget = GetFollowPosition(unit, master);
-                    unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Speed, nowspeed);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Speed, nowspeed);
                     unit.FindPathMoveToAsync(nextTarget).Coroutine();
                 }
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
