@@ -398,10 +398,10 @@ namespace ET.Client
     //更新血量
     public struct Now_Hp_Update
     {
-        public Unit Attack;
         public Unit Defend;
         public int SkillID;
         public int DamgeType;
+        public long AttackId;
         public long ChangeHpValue;
     }
 
