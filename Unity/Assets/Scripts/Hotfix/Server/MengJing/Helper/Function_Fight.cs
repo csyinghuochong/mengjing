@@ -2272,7 +2272,7 @@ namespace ET.Server
                 }
                 if (NumericData.BroadcastType.Contains(key))
                 {
-                    numericComponent.ApplyValue(key, setValue, true);
+                    numericComponent.ApplyValue(key, setValue, notice);
                 }
                 else
                 {

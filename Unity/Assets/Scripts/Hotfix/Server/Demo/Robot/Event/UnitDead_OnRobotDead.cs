@@ -8,8 +8,6 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, UnitDead args)
         {
-            Console.WriteLine("UnitDead_OnRobotDead");
-
             Unit unit = args.Unit;
             long InstanceId = unit.InstanceId;
             if (unit.MainHero && unit.IsSelfRobot())

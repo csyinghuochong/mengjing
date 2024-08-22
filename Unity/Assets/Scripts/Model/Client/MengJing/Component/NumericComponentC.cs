@@ -80,12 +80,7 @@ namespace ET.Client
             {
                 return;
             }
-
-            if ((self.Parent as Unit).Type == UnitType.Player && numericType == NumericType.Now_Dead)
-            {
-                Console.WriteLine($"NumericComponentC.ApplyValue  NumericType.Now_Dead:{self.Parent.Id}");
-            }
-
+            
             if (notice)
             {
                 //发送改变属性的相关消息

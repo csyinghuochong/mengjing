@@ -44,11 +44,13 @@ namespace ET
             if (args.Defend.IsDisposed)
             {
                 Log.Debug($"NumericChangeEvent args.Parent.IsDisposed {args.Defend.Id}");
+                return;
             }
-            // if (args.Defend.GetComponent<UnitGateComponent>() == null)
-            // {
-            //     return;
-            // }
+
+            if (args.Defend.Type != UnitType.Player)
+            {
+                return;
+            }
 
             M2C_UnitNumericUpdate m2C_UnitNumericUpdate = M2C_UnitNumericUpdate.Create();
             m2C_UnitNumericUpdate.UnitId = args.Defend.Id;

@@ -5,9 +5,13 @@ namespace ET
     public enum BuffState
     {
         /// <summary>
-        /// 等待执行
+        /// 回收
         /// </summary>
-        Waiting,
+        None,
+        /// <summary>
+        /// 等待移除
+        /// </summary>
+        WaitRemove,
         /// <summary>
         /// 正在执行
         /// </summary>

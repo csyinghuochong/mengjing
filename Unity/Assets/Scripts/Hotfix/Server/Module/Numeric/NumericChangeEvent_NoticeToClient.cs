@@ -7,6 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, NumbericChange args)
         {
+            
             if (NumericData.BroadcastType.Contains(args.NumericType))
             {
                 NumbericChangeBroadcastHelper.Broadcast(args);

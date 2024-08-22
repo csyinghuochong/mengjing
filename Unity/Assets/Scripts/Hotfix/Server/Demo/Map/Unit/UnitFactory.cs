@@ -374,9 +374,9 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
-            numericComponent.ApplyValue(NumericType.BattleCamp, roleCamp);
-            numericComponent.ApplyValue(NumericType.MasterId, masterId);
-            numericComponent.ApplyValue(NumericType.UnitPositon, cell);
+            numericComponent.ApplyValue(NumericType.BattleCamp, roleCamp, false);
+            numericComponent.ApplyValue(NumericType.MasterId, masterId, false);
+            numericComponent.ApplyValue(NumericType.UnitPositon, cell, false);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
             numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
             unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);

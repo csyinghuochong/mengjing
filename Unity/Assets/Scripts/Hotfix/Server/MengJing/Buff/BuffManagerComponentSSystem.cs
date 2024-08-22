@@ -49,17 +49,30 @@ namespace ET.Server
             }
         }
 
+        public static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
+        {
+            M2C_UnitBuffRemove m2C_UnitBuffUpdate = self.m2C_UnitBuffRemove;
+            m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
+            m2C_UnitBuffUpdate.BuffID = buffHandler.mBuffConfig.Id;
+            MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, buffHandler.mBuffConfig, self.SceneType);
+
+        }
+        
         public static void Check(this BuffManagerComponentS self)
         {
-
             self.Checking = true;
             
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
                 BuffS buffS =  self.m_Buffs[i];
-                buffS.OnUpdate();
-                
+
+                if (buffS.BuffState == BuffState.WaitRemove)
+                {
+                    self.OnRemoveBuffItem(buffS);
+                    buffS.BuffState = BuffState.Finished;
+                }
+
                 if (buffS.BuffState == BuffState.Finished)
                 {
                     BuffS buffHandler = self.m_Buffs[i];
@@ -69,6 +82,7 @@ namespace ET.Server
                     self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
                     continue;
                 }
+                buffS.OnUpdate();
             }
 
             if (self.m_Buffs.Count == 0)
@@ -87,8 +101,7 @@ namespace ET.Server
             {
                 if (self.m_Buffs[i].TheUnitFrom.Id == unitId)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             } 
         }
@@ -100,25 +113,9 @@ namespace ET.Server
             {
                 if (self.m_Buffs[i].TheUnitFrom.Id == unitId)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
-        }
-
-        public static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
-        {
-            M2C_UnitBuffRemove m2C_UnitBuffUpdate = self.m2C_UnitBuffRemove;
-            m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
-            m2C_UnitBuffUpdate.BuffID = buffHandler.mBuffConfig.Id;
-            MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, buffHandler.mBuffConfig, self.SceneType);
-
-            //移除目标buff
-            buffHandler.BuffState = BuffState.Finished;
-            ObjectPool.Instance.Recycle(buffHandler);
-            buffHandler.OnFinished();
-
-            self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
         }
         
         //移除状态的所有buff 
@@ -137,8 +134,7 @@ namespace ET.Server
                 long curState = 1 << self.m_Buffs[i].mBuffConfig.buffParameterType;
                 if (state == curState)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -153,8 +149,7 @@ namespace ET.Server
                 //判断当前状态是否为暴击状态的buff
                 if (self.m_Buffs[i].mBuffConfig.BuffType == 2 && self.m_Buffs[i].mBuffConfig.buffParameterType == 13)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -167,76 +162,26 @@ namespace ET.Server
         /// <param name="buffHandler"></param>
         public static void AddBuffRecord(this BuffManagerComponentS self, int operate, int buffId)
         {
-            if (buffId > 0)
+            
+        }
+        
+        public static void BeforeTransfer(this BuffManagerComponentS self)
+        {
+            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>(); 
+            unitInfoComponent.Buffs.Clear();
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
             {
-                ////先屏蔽掉
-                return;
-            }
-
-            Unit unit = self.GetParent<Unit>();
-            if (unit.Type != UnitType.Player)
-            {
-                return;
-            }
-
-            if (self.m_BuffRecord.Count >= 100)
-            {
-                self.m_BuffRecord.RemoveAt(0);
-            }
-
-            long speed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
-            self.m_BuffRecord.Add(new KeyValuePairLong() { KeyId = buffId, Value = operate, Value2 = speed });
-
-            if (operate == 0 && speed >= 100000)
-            {
-                bool haveSpeedBuff = false;
-                for (int i = 0; i < self.m_Buffs.Count; i++)
+                BuffS buffHandler = self.m_Buffs[i];
+                buffHandler.OnFinished();
+                ObjectPool.Instance.Recycle(buffHandler);
+                self.m_Buffs.RemoveAt(i);
+                if (buffHandler.mBuffConfig.Transfer != 1)
                 {
-                    SkillBuffConfig skillBuffConfig = self.m_Buffs[i].mBuffConfig;
-                    if (skillBuffConfig.BuffType == 1 && (skillBuffConfig.buffParameterType == 100911 || skillBuffConfig.buffParameterType == 100912))
-                    {
-                        haveSpeedBuff = true;
-                        break;
-                    }
-
-                    if (skillBuffConfig.BuffScript.Equals("RoleBuff_JiTui"))
-                    {
-                        haveSpeedBuff = true;
-                        break;
-                    }
+                    continue;
                 }
 
-                if (!haveSpeedBuff)
-                {
-                    for (int i = 0; i < self.m_BuffRecord.Count; i++)
-                    {
-                        if (self.m_BuffRecord[i].KeyId == 1)
-                        {
-                            haveSpeedBuff = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!haveSpeedBuff)
-                {
-                    string strLog = $"玩家{unit.Id}速度异常: ";
-                    for (int i = 0; i < self.m_BuffRecord.Count; i++)
-                    {
-                        KeyValuePairLong keyValuePair = self.m_BuffRecord[i];
-                        string operateType = keyValuePair.Value == 1? "增加" : "移除";
-                        strLog += $"{operateType}:{keyValuePair.KeyId}  速度:{keyValuePair.Value2}  ";
-                    }
-
-                    strLog += "当前buff： ";
-                    for (int i = 0; i < self.m_Buffs.Count; i++)
-                    {
-                        strLog += $"{self.m_Buffs[i].mBuffConfig.Id}  ";
-                    }
-
-                    self.m_BuffRecord.Clear();
-                    Log.Warning(strLog);
-                }
+                unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
             }
         }
         
@@ -270,11 +215,7 @@ namespace ET.Server
                     continue;
                 }
 
-                buffHandler.OnFinished();
-                ObjectPool.Instance.Recycle(buffHandler);
-                self.m_Buffs.RemoveAt(i);
-                self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
-                ;
+                buffHandler.BuffState = BuffState.WaitRemove;
             }
 
             if (self.m_Buffs.Count == 0)
@@ -493,15 +434,7 @@ namespace ET.Server
 
                 if (remove)
                 {
-                    M2C_UnitBuffRemove m2C_UnitBuffUpdate = self.m2C_UnitBuffRemove;
-                    m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
-                    m2C_UnitBuffUpdate.BuffID = tempBuffConfig.Id;
-                    MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, tempBuffConfig, self.SceneType);
-                    buffHandler.BuffState = BuffState.Finished;
-                    ObjectPool.Instance.Recycle(buffHandler);
-                    buffHandler.OnFinished();
-                    self.m_Buffs.RemoveAt(i);
-                    self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
 
@@ -932,24 +865,5 @@ namespace ET.Server
             return Buffs;
         }
 
-        public static void BeforeTransfer(this BuffManagerComponentS self)
-        {
-            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>(); 
-            unitInfoComponent.Buffs.Clear();
-            int buffcnt = self.m_Buffs.Count;
-            for (int i = buffcnt - 1; i >= 0; i--)
-            {
-                BuffS buffHandler = self.m_Buffs[i];
-                buffHandler.OnFinished();
-                ObjectPool.Instance.Recycle(buffHandler);
-                self.m_Buffs.RemoveAt(i);
-                if (buffHandler.mBuffConfig.Transfer != 1)
-                {
-                    continue;
-                }
-
-                unitInfoComponent.Buffs.Add(new KeyValuePair() { KeyId = buffHandler.mBuffConfig.Id, Value2 = buffHandler.BuffEndTime.ToString() });
-            }
-        }
     }
 }
