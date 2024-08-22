@@ -192,7 +192,7 @@ namespace ET.Client
         {
             if (taretUnit == null || taretUnit.IsDisposed)
             {
-                return (int)unit.Rotation.ToEulerAngles().y;
+                return (int)MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
             }
             else
             {

@@ -20,30 +20,66 @@ namespace ET
             return math.degrees(y); // 转换为度
         }
 
-        public static float3 ToEulerAngles(this quaternion q)
+        public static float3 QuaternionToEuler(quaternion quat)
         {
-            return math.degrees(ToEulerRad(q));
+            float3x3 matrix = QuaternionToMatrix(quat);
+
+            float3 euler = MatrixToEuler(matrix);
+
+            return math.degrees(euler);
         }
 
-        private static float3 ToEulerRad(quaternion q)
+        private static float3x3 QuaternionToMatrix(quaternion q)
         {
-            // 计算旋转矩阵的各个元素
-            float sinr_cosp = 2 * (q.value.w * q.value.x + q.value.y * q.value.z);
-            float cosr_cosp = 1 - 2 * (q.value.x * q.value.x + q.value.y * q.value.y);
-            float roll = math.atan2(sinr_cosp, cosr_cosp);
+            float x = q.value.x * 2.0f;
+            float y = q.value.y * 2.0f;
+            float z = q.value.z * 2.0f;
+            float xx = q.value.x * x;
+            float yy = q.value.y * y;
+            float zz = q.value.z * z;
+            float xy = q.value.x * y;
+            float xz = q.value.x * z;
+            float yz = q.value.y * z;
+            float wx = q.value.w * x;
+            float wy = q.value.w * y;
+            float wz = q.value.w * z;
 
-            float sinp = 2 * (q.value.w * q.value.y - q.value.z * q.value.x);
-            float pitch;
-            if (math.abs(sinp) >= 1)
-                pitch = math.PI / 2 * math.sign(sinp); // 使用90度，如果超出范围
+            float3x3 m = new float3x3
+            {
+                c0 = new float3(1.0f - (yy + zz), xy + wz, xz - wy),
+                c1 = new float3(xy - wz, 1.0f - (xx + zz), yz + wx),
+                c2 = new float3(xz + wy, yz - wx, 1.0f - (xx + yy))
+            };
+
+            return m;
+        }
+
+        private static float3 MatrixToEuler(float3x3 matrix)
+        {
+            float3 v = float3.zero;
+            if (matrix.c2.y < 0.999f)
+            {
+                if (matrix.c2.y > -0.999f)
+                {
+                    v.x = math.asin(-matrix.c2.y);
+                    v.y = math.atan2(matrix.c2.x, matrix.c2.z);
+                    v.z = math.atan2(matrix.c0.y, matrix.c1.y);
+                }
+                else
+                {
+                    v.x = math.PI / 2f;
+                    v.y = math.atan2(matrix.c0.z, matrix.c0.x);
+                    v.z = 0.0f;
+                }
+            }
             else
-                pitch = math.asin(sinp);
+            {
+                v.x = -math.PI / 2f;
+                v.y = math.atan2(-matrix.c0.z, matrix.c0.x);
+                v.z = 0.0f;
+            }
 
-            float siny_cosp = 2 * (q.value.w * q.value.z + q.value.x * q.value.y);
-            float cosy_cosp = 1 - 2 * (q.value.y * q.value.y + q.value.z * q.value.z);
-            float yaw = math.atan2(siny_cosp, cosy_cosp);
-
-            return new float3(roll, pitch, yaw);
+            return v;
         }
     }
 }
