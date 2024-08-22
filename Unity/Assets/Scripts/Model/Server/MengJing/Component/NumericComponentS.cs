@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson.Serialization.Attributes;
@@ -69,10 +70,11 @@ namespace ET.Server
             long old = 0;
             int nowValue = 0;
             long nowPropertyValue = 0;
+
             if (numericType > NumericType.Max)
             {
                 ///注意下 客户端应该是不需要这个逻辑的。
-                
+                self.NumericDic[numericType] = value;
                 nowValue = numericType / 100;
                 int add = nowValue * 100 + 1;
                 int mul = nowValue * 100 + 2;
@@ -86,7 +88,6 @@ namespace ET.Server
                             self.GetByKey(buffAdd));
 
                 self.NumericDic[nowValue] = nowPropertyValue;
-                self.NumericDic[numericType] = value;
             }
             else
             {
