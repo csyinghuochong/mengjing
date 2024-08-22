@@ -14,7 +14,7 @@
 
             int total = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.InvestTotal);
             unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, total.ToString(), true, ItemGetWay.Welfare);
-            unit.GetComponent<NumericComponentS>().ApplyValue(null, NumericType.InvestReward, 1, 0);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.InvestReward, 1);
             await ETTask.CompletedTask;
         }
     }

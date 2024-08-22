@@ -144,7 +144,7 @@ namespace ET.Server
             self.ApplyValue(numericType, (long)(value * 10000), notice);
         }
 
-        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false)
+        public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0)
         {
             long old = self.GetByKey(numericType);
             self.NumericDic[numericType] = value;
@@ -169,46 +169,7 @@ namespace ET.Server
             
             self.Update(numericType, value, notice);
         }
-
-        /// <summary>
-        /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="attack"></param>
-        /// <param name="numericType"></param>
-        /// <param name="value"></param>
-        /// <param name="skillID"></param>
-        /// <param name="notice"></param>
-        /// <param name="DamgeType"></param>
-        public static void ApplyValue(this NumericComponentS self, Unit attack, int numericType, long value, int skillID, bool notice = true,
-        int DamgeType = 0)
-        {
-            //是否超过指定上限值
-            long old = self.GetByKey(numericType);
-            self.NumericDic[numericType] = value;
-
-            //血量特殊处理
-            if (old == value && numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
-                numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
-            {
-                return;
-            }
-
-            if (notice)
-            {
-                //发送改变属性的相关消息
-                NumbericChange args = new();
-                args.Defend = self.Parent as Unit;
-                args.Attack = attack;
-                args.NumericType = numericType;
-                args.OldValue = old;
-                args.NewValue = self.GetByKey(numericType);
-                args.SkillId = skillID;
-                args.DamgeType = DamgeType;
-                EventSystem.Instance.Publish(self.Scene(), args);
-            }
-        }
-
+        
         /// <summary>
         /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
         /// </summary>
@@ -256,7 +217,7 @@ namespace ET.Server
                 //发送改变属性的相关消息
                 NumbericChange args = new();
                 args.Defend = self.Parent as Unit;
-                args.Attack = attack;
+                args.AttackId = 0;
                 args.NumericType = numericType;
                 args.OldValue = old;
                 args.NewValue = self.GetByKey(numericType);

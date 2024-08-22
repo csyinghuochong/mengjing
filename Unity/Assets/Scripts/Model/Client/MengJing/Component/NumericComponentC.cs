@@ -94,7 +94,7 @@ namespace ET.Client
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
         /// <param name="compare">是否比较变化值</param>
-        public static void ApplyValue(this NumericComponentC self, Unit attack, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
+        public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
         {
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
@@ -117,7 +117,7 @@ namespace ET.Client
                 //发送改变属性的相关消息
                 NumbericChange args = new NumbericChange();
                 args.Defend = self.Parent as Unit;
-                args.Attack = attack;
+                args.AttackId = attackId;
                 args.NumericType = numericType;
                 args.OldValue = old;
                 args.NewValue = self[numericType];

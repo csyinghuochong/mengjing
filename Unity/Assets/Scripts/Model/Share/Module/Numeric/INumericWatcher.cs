@@ -8,7 +8,7 @@
 	public struct NumbericChange
 	{
 		public Unit Defend;
-		public Unit Attack;
+		public long AttackId;
 		public int NumericType;
 		public long OldValue;
 		public long NewValue;
