@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.AutoAttackGridTimer)]
-    public class AutoAttackGridTimer: ATimer<AttackComponent>
+    public class AutoAttackGridTimer : ATimer<AttackComponent>
     {
         protected override void Run(AttackComponent self)
         {
@@ -19,8 +21,8 @@ namespace ET.Client
         }
     }
 
-    [EntitySystemOf(typeof (AttackComponent))]
-    [FriendOf(typeof (AttackComponent))]
+    [EntitySystemOf(typeof(AttackComponent))]
+    [FriendOf(typeof(AttackComponent))]
     public static partial class AttackComponentSystem
     {
         [EntitySystem]
@@ -115,7 +117,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             float attackSpped = 1f + numericComponent.GetAsFloat(NumericType.Now_ActSpeedPro);
-            self.SkillCDs = EquipType == (int)ItemEquipType.Knife? new List<int>() { 500, 1000, 1000 } : new List<int>() { 700, 700, 700 };
+            self.SkillCDs = EquipType == (int)ItemEquipType.Knife ? new List<int>() { 500, 1000, 1000 } : new List<int>() { 700, 700, 700 };
             for (int i = 0; i < self.SkillCDs.Count; i++)
             {
                 self.SkillCDs[i] = (int)(self.SkillCDs[i] / attackSpped);
@@ -190,16 +192,13 @@ namespace ET.Client
         {
             if (taretUnit == null || taretUnit.IsDisposed)
             {
-                //return (int)quaternion.QuaternionToEuler(unit.Rotation).y;
-                return 0;
+                return (int)unit.Rotation.ToEulerAngles().y;
             }
             else
             {
-                // Vector3 direction = taretUnit.Position - unit.Position;
-                // float ange = Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
-                // return Mathf.FloorToInt(ange);
-
-                return 0;
+                float3 direction = taretUnit.Position - unit.Position;
+                float ange = math.degrees(math.atan2(direction.x, direction.z));
+                return (int)math.floor(ange);
             }
         }
 
@@ -214,7 +213,8 @@ namespace ET.Client
             self.SetAttackSpeed();
             self.SetComboSkill(timeNow);
             int targetAngle = self.GetTargetAnagle(unit, taretUnit);
-            unit.GetComponent<SkillManagerComponentC>().SendUseSkill(self.ComboSkillId, 0, targetAngle, taretUnit != null? taretUnit.Id : 0, 0, false)
+            unit.GetComponent<SkillManagerComponentC>()
+                    .SendUseSkill(self.ComboSkillId, 0, targetAngle, taretUnit != null ? taretUnit.Id : 0, 0, false)
                     .Coroutine();
             self.LastSkillTime = TimeHelper.ServerNow();
             self.CDEndTime = self.LastSkillTime + self.CDTime;
