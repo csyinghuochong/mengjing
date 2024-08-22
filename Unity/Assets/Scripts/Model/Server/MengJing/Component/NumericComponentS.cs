@@ -66,27 +66,34 @@ namespace ET.Server
 
         private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true)
         {
-            if (numericType < NumericType.Max)
+            long old = 0;
+            int nowValue = 0;
+            long nowPropertyValue = 0;
+            if (numericType > NumericType.Max)
             {
-                return;
+                nowValue = numericType / 100;
+                int add = nowValue * 100 + 1;
+                int mul = nowValue * 100 + 2;
+                int finalAdd = nowValue * 100 + 3;
+                int buffAdd = nowValue * 100 + 11;
+                int buffMul = nowValue * 100 + 12;
+
+                old = self.GetByKey(nowValue);
+                nowPropertyValue =
+                        (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
+                            self.GetByKey(buffAdd));
+
+                self.NumericDic[nowValue] = nowPropertyValue;
+            }
+            else
+            {
+                old = self.GetAsLong(numericType);
+                nowValue = numericType;
+                self.NumericDic[numericType] = value;
+                nowPropertyValue = value;
             }
 
-            int nowValue = numericType / 100;
-
-            int add = nowValue * 100 + 1;
-            int mul = nowValue * 100 + 2;
-            int finalAdd = nowValue * 100 + 3;
-            int buffAdd = nowValue * 100 + 11;
-            int buffMul = nowValue * 100 + 12;
-
-            long old = self.GetByKey(nowValue);
-            long nowPropertyValue =
-                    (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
-                        self.GetByKey(buffAdd));
-
-            self.NumericDic[nowValue] = nowPropertyValue;
-
-            if (notice && old != nowPropertyValue)
+            if (notice && old!= nowPropertyValue)
             {
                 //发送改变属性的相关消息
                 NumbericChange args = new();
@@ -147,26 +154,14 @@ namespace ET.Server
         public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false, long attackid = 0, int skillId = 0)
         {
             long old = self.GetByKey(numericType);
-            self.NumericDic[numericType] = value;
-
+           
             if (check && old == value)
             {
                 return;
             }
-
-            if (notice)
-            {
-                //发送改变属性的相关消息
-                NumbericChange args = new();
-                args.Defend = self.Parent as Unit;
-                args.NumericType = numericType;
-                args.OldValue = old;
-                args.NewValue = self.GetByKey(numericType);
-                args.SkillId = 0;
-                args.DamgeType = 0;
-                EventSystem.Instance.Publish(self.Scene(), args);
-            }
             
+            self.NumericDic[numericType] = value;
+
             self.Update(numericType, value, notice);
         }
         
@@ -180,7 +175,7 @@ namespace ET.Server
         /// <param name="skillID"></param>
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
-        public static void ApplyChange(this NumericComponentS self, Unit attack, int numericType, long changedValue, int skillID, bool notice = true,
+        public static void ApplyChange(this NumericComponentS self, long attackId, int numericType, long changedValue, int skillID, bool notice = true,
         int DamgeType = 0)
         {
             //改变值为0不做任何处理
@@ -207,24 +202,9 @@ namespace ET.Server
                     changedValue = nowCostHp;
                 }
             }
-
-            long old = self.GetByKey(numericType);
+            
             long newvalue = self.GetAsLong(numericType) + changedValue;
-            self.NumericDic[numericType] = newvalue;
-
-            if (notice)
-            {
-                //发送改变属性的相关消息
-                NumbericChange args = new();
-                args.Defend = self.Parent as Unit;
-                args.AttackId = 0;
-                args.NumericType = numericType;
-                args.OldValue = old;
-                args.NewValue = self.GetByKey(numericType);
-                args.SkillId = skillID;
-                args.DamgeType = DamgeType;
-                EventSystem.Instance.Publish(self.Scene(), args);
-            }
+            self.ApplyValue( numericType, newvalue, notice,  true, attackId, skillID);
         }
     }
 
