@@ -96,12 +96,8 @@ namespace ET.Server
 
                 if (buffS.BuffState == BuffState.Finished)
                 {
-                    BuffS buffHandler = self.m_Buffs[i];
-                    buffHandler.BuffState = BuffState.None;
-                    ObjectPool.Instance.Recycle(buffHandler);
-                    buffHandler.OnFinished();
+                    buffS.Dispose();
                     self.m_Buffs.RemoveAt(i);
-                    self.AddBuffRecord(0, buffHandler.BuffData.BuffId);
                     continue;
                 }
                 buffS.OnUpdate();
