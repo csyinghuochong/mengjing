@@ -769,6 +769,7 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
             
+             unit.GetComponent<MoveComponent>()?.Stop(false);
              int waitRevive = self.OnWaitRevive();
 
              EventSystem.Instance.Publish( self.Scene(), new UnitKillEvent()

@@ -109,6 +109,7 @@ namespace ET.Server
 
                 if (buffS.BuffState == BuffState.Finished)
                 {
+                    buffS.OnFinished();
                     buffS.Dispose();
                     self.m_Buffs.RemoveAt(i);
                     continue;

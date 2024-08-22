@@ -13,7 +13,7 @@
         {
             Unit unit = self.GetParent<Unit>();
             unit.GetComponent<StateComponentC>().Reset();
-            unit.GetComponent<MoveComponent>()?.Stop(true);
+            unit.GetComponent<MoveComponent>()?.Stop(false);
             unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
             unit.GetComponent<BuffManagerComponentC>()?.OnDead();
             int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().SceneType;
