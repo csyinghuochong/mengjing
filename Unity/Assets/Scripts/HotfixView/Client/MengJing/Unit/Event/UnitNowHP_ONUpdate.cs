@@ -10,7 +10,7 @@ namespace ET.Client
             Log.Debug($"UnitHpUpdate:   {args.Defend.Id} {args.ChangeHpValue} ");
 
             Unit unitDefend = args.Defend;
-            Unit unitAttack = args.Attack;
+            Unit unitAttack = unitDefend.GetParent<UnitComponent>().Get(args.AttackId);
             if (unitDefend.IsDisposed)
             {
                 return;
