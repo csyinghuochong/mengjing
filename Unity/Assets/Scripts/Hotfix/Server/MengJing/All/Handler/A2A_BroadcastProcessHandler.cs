@@ -5,10 +5,10 @@ namespace ET.Server
 
     //服务器之间通用通信协议
     [MessageHandler(SceneType.All)]
-    public class A2A_BroadcastHandler : MessageHandler<Scene, A2A_BroadcastRequest, A2A_BroadcastResponse>
+    public class A2A_BroadcastProcessHandler : MessageHandler<Scene, A2A_BroadcastProcessRequest, A2A_BroadcastProcessResponse>
     {
 
-        protected override async ETTask Run(Scene scene, A2A_BroadcastRequest request, A2A_BroadcastResponse response)
+        protected override async ETTask Run(Scene scene, A2A_BroadcastProcessRequest request, A2A_BroadcastProcessResponse response)
         {
             try
             {
