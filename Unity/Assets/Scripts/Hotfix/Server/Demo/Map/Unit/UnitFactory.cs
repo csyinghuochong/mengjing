@@ -124,7 +124,7 @@ namespace ET.Server
             unit.Type = UnitType.Monster;
             unit.Position = vector3;
             unit.ConfigId = monsterConfig.Id;
-            unit.Rotation = quaternion.Euler(0, createMonsterInfo.Rotation, 0);
+            unit.Rotation = quaternion.Euler(0, math.radians(createMonsterInfo.Rotation), 0);
             numericComponent.ApplyValue(NumericType.BattleCamp, createMonsterInfo.Camp, false);
             numericComponent.ApplyValue(NumericType.TeamId, master != null ? master.GetTeamId() : 0, false);
             numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
@@ -241,7 +241,7 @@ namespace ET.Server
             unit.AddComponent<UnitInfoComponent>();
             unit.ConfigId = npcId;
             unit.Position = new float3(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
-            unit.Rotation = quaternion.Euler(0, npcConfig.Rotation, 0);
+            unit.Rotation = quaternion.Euler(0, math.radians(npcConfig.Rotation), 0);
             unit.Type = UnitType.Npc;
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             if (npcConfig.AI > 0)
@@ -357,7 +357,7 @@ namespace ET.Server
             unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = postion;
             unit.Type = UnitType.Pet;
-            unit.Rotation = quaternion.Euler(0f, rotation, 0f);
+            unit.Rotation = quaternion.Euler(0f, math.radians(rotation), 0f);
             AIComponent aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             switch (mapComponent.SceneType)
