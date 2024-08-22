@@ -91,13 +91,12 @@ namespace ET.Server
 
         private static void Update(this NumericComponentS self, int numericType, long value, bool isPublicEvent = true)
         {
+            self.NumericDic[numericType] = value;
+            
             if (numericType < (int)NumericType.Max)
             {
-                Log.Error($"设置 NumericType：{numericType} （类型小于 NumericType.Max），不能用Set方法走公式，请仔细检查");
                 return;
             }
-
-            self.NumericDic[numericType] = value;
 
             int nowValue = (int)numericType / 100;
 
