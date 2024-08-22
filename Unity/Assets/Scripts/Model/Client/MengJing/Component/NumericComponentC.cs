@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Options;
 namespace ET.Client
 {
     [FriendOf(typeof(NumericComponentC))]
-    public static class NumericComponentClientSystem
+    public static class NumericComponentCSystem
     {
         public static float GetAsFloat(this NumericComponentC self, int numericType)
         {
