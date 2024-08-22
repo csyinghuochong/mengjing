@@ -86,6 +86,7 @@ namespace ET.Server
                             self.GetByKey(buffAdd));
 
                 self.NumericDic[nowValue] = nowPropertyValue;
+                self.NumericDic[numericType] = value;
             }
             else
             {
