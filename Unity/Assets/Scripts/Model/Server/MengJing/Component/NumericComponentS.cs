@@ -160,8 +160,6 @@ namespace ET.Server
                 return;
             }
             
-            self.NumericDic[numericType] = value;
-
             self.Update(numericType, value, notice);
         }
         
