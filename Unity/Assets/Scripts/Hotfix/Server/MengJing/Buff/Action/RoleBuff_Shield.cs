@@ -1,6 +1,6 @@
 namespace ET.Server
 {
-    public class RoleBuff_Shield: BuffHandlerS
+    public class RoleBuff_Shield : BuffHandlerS
     {
         public override void OnInit(BuffS buffS, Unit theUnitFrom, Unit theUnitBelongto, SkillS skillHandler)
         {
@@ -23,7 +23,7 @@ namespace ET.Server
 
             numericComponent.ApplyValue(NumericType.Now_Shield_HP, totalValue, true);
             numericComponent.ApplyValue(NumericType.Now_Shield_MaxHP, totalValue, true);
-            numericComponent.SetNoEvent(NumericType.Now_Shield_DamgeCostPro, buffS.mBuffConfig.DamgePro);
+            numericComponent.ApplyValue(NumericType.Now_Shield_DamgeCostPro, buffS.mBuffConfig.DamgePro, false);
         }
 
         public override void OnUpdate(BuffS buffS)

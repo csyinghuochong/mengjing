@@ -272,15 +272,15 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-             numericComponent.SetNoEvent(NumericType.Now_Dead, 0);
-             numericComponent.SetNoEvent(NumericType.Now_Damage, 0);
-             numericComponent.SetNoEvent(NumericType.BossBelongID, 0);
-             numericComponent.SetNoEvent(NumericType.Now_Shield_HP, 0);
-             numericComponent.SetNoEvent(NumericType.Now_Shield_MaxHP, 0);
-             numericComponent.SetNoEvent(NumericType.Now_Shield_DamgeCostPro, 0);
+             numericComponent.Set(NumericType.Now_Dead, 0, false);
+             numericComponent.Set(NumericType.Now_Damage, 0, false);
+             numericComponent.Set(NumericType.BossBelongID, 0, false);
+             numericComponent.Set(NumericType.Now_Shield_HP, 0, false);
+             numericComponent.Set(NumericType.Now_Shield_MaxHP, 0, false);
+             numericComponent.Set(NumericType.Now_Shield_DamgeCostPro, 0, false);
 
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-             unit.GetComponent<NumericComponentS>().SetNoEvent(NumericType.Now_Hp, max_hp);
+             unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, max_hp, false);
          }
 
          public static void OnResetPoint(this HeroDataComponentS self)
@@ -502,18 +502,18 @@ namespace ET.Server
          public static void InitPlan(this HeroDataComponentS self, JiaYuanPlant jiaYuanPlant, bool notice)
          {
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             numericComponent.SetNoEvent(NumericType.StartTime, jiaYuanPlant.StartTime);
-             numericComponent.SetNoEvent(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
-             numericComponent.SetNoEvent(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
-             numericComponent.SetNoEvent(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex);
+             numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime, false);
+             numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
+             numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
+             numericComponent.Set(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex, false);
          }
 
          public static void InitPasture(this HeroDataComponentS self, JiaYuanPastures jiaYuanPlant, bool notice)
          {
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             numericComponent.SetNoEvent(NumericType.StartTime, jiaYuanPlant.StartTime);
-             numericComponent.SetNoEvent(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
-             numericComponent.SetNoEvent(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
+             numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime, false);
+             numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber, false);
+             numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime, false);
          }
 
          public static void InitJingLing(this HeroDataComponentS self, Unit master, int jinglingid, bool notice)
@@ -723,7 +723,7 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.SetNoEvent(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
+             numericComponent.Set(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
              //Log.Debug("初始化当前怪物血量:" + numericComponent.GetAsLong(NumericType.Now_Hp));
          }
 

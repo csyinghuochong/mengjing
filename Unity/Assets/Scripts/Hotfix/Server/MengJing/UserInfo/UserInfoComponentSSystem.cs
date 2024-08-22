@@ -116,13 +116,13 @@ namespace ET.Server
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.TrialDungeonId) < maxTowerId)
             {
-                numericComponent.SetNoEvent(NumericType.TrialDungeonId, maxTowerId);
+                numericComponent.Set(NumericType.TrialDungeonId, maxTowerId, false);
             }
 
             if (numericComponent.GetAsInt(NumericType.UpdateActivty) == 0)
             {
                 self.GetParent<Unit>().GetComponent<ActivityComponentS>().ClearJieRiActivty();
-                numericComponent.SetNoEvent(NumericType.UpdateActivty, 1);
+                numericComponent.Set(NumericType.UpdateActivty, 1, false);
             }
 
             DataCollationComponent dataCollationComponent = self.GetParent<Unit>().GetComponent<DataCollationComponent>();

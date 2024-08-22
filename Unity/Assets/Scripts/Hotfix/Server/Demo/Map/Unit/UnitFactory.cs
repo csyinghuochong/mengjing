@@ -26,7 +26,6 @@ namespace ET.Server
             return unit;
         }
 
-        
         public static async ETTask Create(Scene scene, Unit unit, long id, int unitType, CreateRoleInfo createRoleInfo, string account,
         long accountId)
         {
@@ -50,8 +49,8 @@ namespace ET.Server
                     if (unit.GetComponent<NumericComponentS>() == null)
                     {
                         NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
-                        numericComponentS.SetNoEvent(NumericType.Now_Speed, 60000); // 速度是6米每秒
-                        numericComponentS.SetNoEvent(NumericType.AOI, 15000); // 视野15米
+                        numericComponentS.Set(NumericType.Now_Speed, 60000, false); // 速度是6米每秒
+                        numericComponentS.Set(NumericType.AOI, 15000, false); // 视野15米
                     }
 
                     unit.AddDataComponent<TaskComponentS>();
@@ -71,7 +70,6 @@ namespace ET.Server
                     unit.AddDataComponent<EnergyComponentS>();
                     unit.AddDataComponent<HeroDataComponentS>();
                     unit.AddDataComponent<SkillPassiveComponent>();
-                    
 
                     DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
                     List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>(scene.Zone(), d => d.Id == id);
@@ -81,6 +79,7 @@ namespace ET.Server
                         await dbComponent.Save(scene.Zone(), dbFriendInfo);
                         dbFriendInfo.Dispose();
                     }
+
                     List<DBMailInfo> dbMailInfos = await dbComponent.Query<DBMailInfo>(scene.Zone(), d => d.Id == id);
                     if (dbMailInfos == null || dbMailInfos.Count == 0)
                     {
@@ -101,7 +100,7 @@ namespace ET.Server
 
         public static Unit CreateMonster(Scene scene, int monsterID, float3 vector3, CreateMonsterInfo createMonsterInfo)
         {
-            int openDay = ServerHelper.GetServeOpenrDay( scene.Zone());
+            int openDay = ServerHelper.GetServeOpenrDay(scene.Zone());
             monsterID = MonsterConfigCategory.Instance.GetNewMonsterId(openDay, monsterID);
 
             //精灵不能作为主人
@@ -114,7 +113,7 @@ namespace ET.Server
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterID);
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
 
-            long unitid = createMonsterInfo.UnitId > 0? createMonsterInfo.UnitId : IdGenerater.Instance.GenerateId();
+            long unitid = createMonsterInfo.UnitId > 0 ? createMonsterInfo.UnitId : IdGenerater.Instance.GenerateId();
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(unitid, 1001);
             unit.AddComponent<AttackRecordComponent>();
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
@@ -126,11 +125,11 @@ namespace ET.Server
             unit.Position = vector3;
             unit.ConfigId = monsterConfig.Id;
             unit.Rotation = quaternion.Euler(0, createMonsterInfo.Rotation, 0);
-            numericComponent.SetNoEvent(NumericType.BattleCamp, createMonsterInfo.Camp);
-            numericComponent.SetNoEvent(NumericType.TeamId, master != null? master.GetTeamId() : 0);
-            numericComponent.SetNoEvent(NumericType.AttackMode, master != null? master.GetAttackMode() : 0);
-            numericComponent.SetNoEvent(NumericType.UnionId_0, master != null? master.GetUnionId() : 0);
-            numericComponent.SetNoEvent(NumericType.PetSkin, createMonsterInfo.SkinId);
+            numericComponent.Set(NumericType.BattleCamp, createMonsterInfo.Camp, false);
+            numericComponent.Set(NumericType.TeamId, master != null ? master.GetTeamId() : 0, false);
+            numericComponent.Set(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
+            numericComponent.Set(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
+            numericComponent.Set(NumericType.PetSkin, createMonsterInfo.SkinId, false);
 
             unit.SetBornPosition(unit.Position, false);
             unit.MasterId = createMonsterInfo.MasterID;
@@ -151,8 +150,8 @@ namespace ET.Server
             if (mainUnit != null && TimeHelper.ServerNow() < revetime)
             {
                 unit.AddComponent<ReviveTimeComponent, long>(revetime);
-                numericComponent.SetNoEvent(NumericType.ReviveTime, revetime);
-                numericComponent.SetNoEvent(NumericType.Now_Dead, 1);
+                numericComponent.Set(NumericType.ReviveTime, revetime, false);
+                numericComponent.Set(NumericType.Now_Dead, 1, false);
             }
 
             //51 场景怪
@@ -174,7 +173,7 @@ namespace ET.Server
 
             if (monsterConfig.AI != 0)
             {
-                int ai = createMonsterInfo.AI > 0? createMonsterInfo.AI : monsterConfig.AI;
+                int ai = createMonsterInfo.AI > 0 ? createMonsterInfo.AI : monsterConfig.AI;
                 unit.AI = ai;
                 unit.AddComponent<ObjectWait>();
                 unit.AddComponent<MoveComponent>();
@@ -224,7 +223,7 @@ namespace ET.Server
             unit.Position = vector3;
             unit.Type = UnitType.Bullet; //子弹Unity,根据这个类型会实例化出特效
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed);
+            numericComponent.Set(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
             numericComponent.ApplyValue(NumericType.MasterId, masterid, false);
             numericComponent.ApplyValue(NumericType.StartAngle, starangle, false);
             numericComponent.ApplyValue(NumericType.StartTime, TimeHelper.ServerNow(), false);
@@ -289,12 +288,12 @@ namespace ET.Server
             unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
-            numericComponent.ApplyValue(NumericType.AttackMode, master != null? master.GetAttackMode() : 0, false);
+            numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
             numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
             ;
             numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.SetNoEvent(NumericType.Now_Hp, max_hp);
+            numericComponent.Set(NumericType.Now_Hp, max_hp, false);
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base),
                 false);
 
@@ -334,8 +333,8 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPasture(jiaYuanPastures, false);
-            numericComponent.SetNoEvent(NumericType.MasterId, unitid);
-            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, 30000);
+            numericComponent.Set(NumericType.MasterId, unitid, false);
+            numericComponent.Set(NumericType.Base_Speed_Base, 30000, false);
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
@@ -380,7 +379,7 @@ namespace ET.Server
             numericComponent.Set(NumericType.MasterId, masterId);
             numericComponent.Set(NumericType.UnitPositon, cell);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.SetNoEvent(NumericType.Now_Hp, max_hp);
+            numericComponent.Set(NumericType.Now_Hp, max_hp, false);
             unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
             unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
             unit.GetComponent<SkillPassiveComponent>().Activeted();
@@ -418,7 +417,7 @@ namespace ET.Server
             unit.AddComponent<HeroDataComponentS>().InitJingLing(master, jinglingId, false);
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
-            numericComponent.ApplyValue(NumericType.AttackMode, master != null? master.GetAttackMode() : 0, false);
+            numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
             numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
             numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
             //numericComponent.Set(NumericType.Base_Speed_Base, 50000, false);
@@ -494,8 +493,8 @@ namespace ET.Server
             unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = ConfigData.JiaYuanPetPosition[1];
             unit.Type = UnitType.Pet;
-            numericComponent.SetNoEvent(NumericType.MasterId, masterid);
-            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, 10000);
+            numericComponent.Set(NumericType.MasterId, masterid, false);
+            numericComponent.Set(NumericType.Base_Speed_Base, 10000, false);
             AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11); //AI行为树序号
             aIComponent.InitJiaYuanPet();
             aIComponent.Begin();
@@ -528,12 +527,11 @@ namespace ET.Server
 
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPlan(jiaYuanPlant, false);
-            numericComponent.SetNoEvent(NumericType.MasterId, unitid);
+            numericComponent.Set(NumericType.MasterId, unitid, false);
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
 
-        
         public static List<RewardItem> AI_MonsterDrop(Unit unit, int monsterID, float dropProValue, bool all)
         {
             //根据怪物ID获得掉落ID
@@ -553,7 +551,8 @@ namespace ET.Server
                     DropHelper.DropIDToDropItem(dropID[i], dropItemList_2, monsterID, dropProValue, all);
                     if (dropConfig.ifEnterBag == 1)
                     {
-                        unit.GetComponent<BagComponentS>().OnAddItemData(dropItemList_2, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
+                        unit.GetComponent<BagComponentS>()
+                                .OnAddItemData(dropItemList_2, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
                     }
                     else
                     {
@@ -561,9 +560,10 @@ namespace ET.Server
                     }
                 }
             }
+
             return dropItemList;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -752,7 +752,7 @@ namespace ET.Server
                 || monsterCof.DropType == 3)
             {
                 long serverTime = TimeHelper.ServerNow();
-                Scene DomainScene = main != null? main.Scene() : bekill.Scene();
+                Scene DomainScene = main != null ? main.Scene() : bekill.Scene();
                 for (int i = 0; i < droplist.Count; i++)
                 {
                     if (sceneType == SceneTypeEnum.TeamDungeon && (droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019))
@@ -772,7 +772,7 @@ namespace ET.Server
                     dropComponent.BeKillId = bekill.Id;
                     //掉落归属问题 掉落类型为2 原来为： 最后一刀 修改为 第一拾取权限为优先攻击他的人,如果这个人死了，那么拾取权限清空，下一次伤害是谁归属权就是谁。
 
-                    long ownderId = main != null? main.Id : 0;
+                    long ownderId = main != null ? main.Id : 0;
                     switch (monsterCof.DropType)
                     {
                         case 2:
@@ -781,8 +781,8 @@ namespace ET.Server
                                 ownderId = beattackIds[0];
                             }
 
-                            dropComponent.OwnerId = monsterCof.DropType == 0? 0 : ownderId;
-                            dropComponent.ProtectTime = monsterCof.DropType == 0? 0 : serverTime + 30000;
+                            dropComponent.OwnerId = monsterCof.DropType == 0 ? 0 : ownderId;
+                            dropComponent.ProtectTime = monsterCof.DropType == 0 ? 0 : serverTime + 30000;
                             break;
                         case 3:
                             long belongid = bekill.GetComponent<NumericComponentS>().GetAsLong(NumericType.BossBelongID);
@@ -792,7 +792,7 @@ namespace ET.Server
                             }
 
                             dropComponent.OwnerId = ownderId;
-                            dropComponent.ProtectTime = monsterCof.DropType == 0? 0 : serverTime + 30000;
+                            dropComponent.ProtectTime = monsterCof.DropType == 0 ? 0 : serverTime + 30000;
                             break;
                     }
 
@@ -944,7 +944,6 @@ namespace ET.Server
                     {
                         Log.Error($"掉落装备.字: {droplist[k].ItemID}  {par}   {sceneType}");
                     }
-
 
                     DropInfo dropInfo = DropInfo.Create();
                     dropInfo.DropType = 1;

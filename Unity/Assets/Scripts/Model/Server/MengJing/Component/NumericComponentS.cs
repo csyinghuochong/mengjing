@@ -64,54 +64,56 @@ namespace ET.Server
             return self.GetByKey(numericType);
         }
 
-        public static void Set(this NumericComponentS self, int nt, float value)
+        public static void Set(this NumericComponentS self, int nt, double value, bool notice = true)
         {
-            self.Update(nt, (long)(value * 10000));
+            self.Update(nt, (long)(value * 10000), notice);
         }
 
-        public static void Set(this NumericComponentS self, int nt, int value)
+        public static void Set(this NumericComponentS self, int nt, float value, bool notice = true)
         {
-            self.Update(nt, value);
+            self.Update(nt, (long)(value * 10000), notice);
         }
 
-        public static void Set(this NumericComponentS self, int nt, long value)
+        public static void Set(this NumericComponentS self, int nt, int value, bool notice = true)
         {
-            self.Update(nt, value);
+            self.Update(nt, value, notice);
         }
 
-        public static void SetNoEvent(this NumericComponentS self, int numericType, long value)
+        public static void Set(this NumericComponentS self, int nt, long value, bool notice = true)
         {
-            self.Update(numericType, value, false);
+            self.Update(nt, value, notice);
         }
 
-        public static void SetNoEvent(this NumericComponentS self, int numericType, double value)
-        {
-            self.Update(numericType, (long)(value * 10000), false);
-        }
-
-        private static void Update(this NumericComponentS self, int numericType, long value, bool isPublicEvent = true)
+        private static void Update(this NumericComponentS self, int numericType, long value, bool notice = true)
         {
             self.NumericDic[numericType] = value;
-            
-            if (numericType < (int)NumericType.Max)
+
+            if (numericType < NumericType.Max)
             {
+                if (notice)
+                {
+                    Log.Warning($"设置 NumericType：{numericType} （类型小于 NumericType.Max），用Set方法走公式 不会广播，请检查");
+                }
+
                 return;
             }
 
-            int nowValue = (int)numericType / 100;
+            int nowValue = numericType / 100;
 
             int add = nowValue * 100 + 1;
             int mul = nowValue * 100 + 2;
             int finalAdd = nowValue * 100 + 3;
             int buffAdd = nowValue * 100 + 11;
             int buffMul = nowValue * 100 + 12;
+
             long old = self.GetByKey(nowValue);
             long nowPropertyValue =
                     (long)((self.GetByKey(add) * (1 + self.GetAsFloat(mul)) + self.GetByKey(finalAdd)) * (1 + self.GetAsFloat(buffMul)) +
                         self.GetByKey(buffAdd));
+
             self.NumericDic[nowValue] = nowPropertyValue;
 
-            if (isPublicEvent && old != nowPropertyValue)
+            if (notice && old != nowPropertyValue)
             {
                 //发送改变属性的相关消息
                 NumbericChange args = new();
