@@ -19,6 +19,9 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_RolePropertyBaseItem self, ShowPropertyList showPropertyList)
         {
+            self.E_ProTypeValueText.gameObject.SetActive(true);
+            self.E_ProTypeValueRightText.gameObject.SetActive(false);
+            
             NumericComponentC numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
