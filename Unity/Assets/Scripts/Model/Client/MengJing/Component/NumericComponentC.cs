@@ -101,8 +101,6 @@ namespace ET.Client
         /// <param name="notice"></param>
         /// <param name="DamgeType"></param>
         public static void ApplyValue(this NumericComponentC self, long attackId, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
-        public static void ApplyValue(this NumericComponentC self, Unit attack, int numericType, long value, int skillID, bool notice = true,
-        int DamgeType = 0)
         {
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
