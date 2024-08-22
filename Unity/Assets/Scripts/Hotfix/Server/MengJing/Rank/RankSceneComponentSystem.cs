@@ -97,10 +97,10 @@ namespace ET.Server
 
                 StartSceneConfig startSceneConfig = processScenes[0];
                 ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                A2A_BroadcastRequest A2A_BroadcastRequest = A2A_BroadcastRequest.Create();
+                A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
                 A2A_BroadcastRequest.LoadType = 2;
                 A2A_BroadcastRequest.ServerInfo = self.DBServerInfo.ServerInfo;
-                A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
+                A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
             }
             
         }
@@ -770,10 +770,10 @@ namespace ET.Server
 
                     StartSceneConfig startSceneConfig = processScenes[0];
                     ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                    A2A_BroadcastRequest A2A_BroadcastRequest = A2A_BroadcastRequest.Create();
+                    A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
                     A2A_BroadcastRequest.LoadType = 1;
                     A2A_BroadcastRequest.LoadValue = loadvalue;
-                    A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
+                    A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
                 }
             }
         }
