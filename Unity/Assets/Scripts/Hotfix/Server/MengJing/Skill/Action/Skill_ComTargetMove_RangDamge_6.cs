@@ -57,8 +57,8 @@ namespace ET.Server
                 new CreateMonsterInfo());
             //unit.AddComponent<RoleBullet6Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id, this.IsStop);
             float3 sourcePoint = skillS.TheUnitFrom.Position;
-            quaternion rotation = quaternion.Euler(0, skillS.SkillInfo.TargetAngle, 0);
-            float3 TargetPoint = sourcePoint + math.mul(rotation ,new float3(0,1,0)) * skillS.MoveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
+            quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation ,new float3(0,0,1)) * skillS.MoveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             unit.BulletMoveToAsync(TargetPoint).Coroutine();
             skillS.SkillExcuteNum--;
         }

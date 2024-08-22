@@ -132,8 +132,8 @@ namespace ET.Server
         public float3 GetBulletTargetPoint(SkillS skillS, int angle)
         {
             float3 sourcePoint = skillS.TheUnitFrom.Position;
-            quaternion rotation = quaternion.Euler(0, angle, 0);
-            float3 TargetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
+            quaternion rotation = quaternion.Euler(0, math.radians(angle), 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation , new float3(0,0,1)) * skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             return TargetPoint;
         }
     }

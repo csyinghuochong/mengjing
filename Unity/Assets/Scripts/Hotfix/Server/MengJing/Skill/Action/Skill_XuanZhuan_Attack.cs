@@ -63,9 +63,9 @@ namespace ET.Server
             for (int i = 0; i < skillS.ICheckShape.Count; i++)
             {
                 int anglea_1 = starAngle + i * delta + addrangle;
-                (skillS.ICheckShape[i] as Rectangle).s_forward = math.mul(quaternion.Euler(0, anglea_1, 0), new float3(0, 1, 0));
+                (skillS.ICheckShape[i] as Rectangle).s_forward = math.mul(quaternion.Euler(0, math.radians(anglea_1), 0), new float3(0, 0, 1));
             }
-            skillS.TheUnitFrom.Rotation = quaternion.Euler(0, angle + addrangle, 0);
+            skillS.TheUnitFrom.Rotation = quaternion.Euler(0, math.radians(angle + addrangle), 0);
 
             skillS.ExcuteSkillAction();
             skillS.CheckChiXuHurt();

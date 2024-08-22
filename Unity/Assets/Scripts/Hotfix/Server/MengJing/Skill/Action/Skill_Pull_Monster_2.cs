@@ -18,8 +18,8 @@ namespace ET.Server
             else
             {
                 skillS.NowPosition = theUnitFrom.Position;
-                quaternion rotation = quaternion.Euler(0, skillS.SkillInfo.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
-                float3 movePosition = math.mul( rotation , new float3(0,1,0)  )* (skillS.SkillConf.SkillLiveTime * (float)(skillS.SkillConf.SkillMoveSpeed) * 0.001f);
+                quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0); //按照Z轴旋转30度的Quaterion
+                float3 movePosition = math.mul( rotation , new float3(0,0,1)  )* (skillS.SkillConf.SkillLiveTime * (float)(skillS.SkillConf.SkillMoveSpeed) * 0.001f);
                 skillS.TargetPosition = skillS.NowPosition + movePosition;
             }
             OnExecute(skillS);
