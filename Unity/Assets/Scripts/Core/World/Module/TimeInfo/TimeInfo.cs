@@ -29,6 +29,8 @@ namespace ET
 
         public long FrameTime { get; private set; }
         
+        public float DeltaTime { get; private set; }
+        
         public void Awake()
         {
             this.dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -39,7 +41,9 @@ namespace ET
         public void Update()
         {
             // 赋值long型是原子操作，线程安全
-            this.FrameTime = this.ClientNow();
+            long now = this.ClientNow();
+            this.DeltaTime = (now - this.FrameTime) * 0.001f;
+            this.FrameTime = now;
         }
         
         /// <summary> 
