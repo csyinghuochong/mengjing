@@ -41,7 +41,7 @@ namespace ET.Client
         private static void Destroy(this SkillManagerComponentC self)
         {          
             self.SkillCDs.Clear();
-            self.OnFinish();
+            self.OnDispose();
         }
 
         public static bool IsSkillMoveTime(this SkillManagerComponentC self)
@@ -136,6 +136,13 @@ namespace ET.Client
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
+        }
+
+        public static void OnDispose(this SkillManagerComponentC self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.Skills.Clear();
+            self.SkillCDs.Clear();
         }
 
         public static void OnFinish(this SkillManagerComponentC self)

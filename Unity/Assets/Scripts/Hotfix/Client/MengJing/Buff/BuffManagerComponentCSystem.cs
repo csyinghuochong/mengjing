@@ -39,20 +39,6 @@ namespace ET.Client
         public static void OnDispose(this BuffManagerComponentC self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
-            {
-                BuffC buffHandler = self.m_Buffs[i];
-
-                BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
-                if (buffHandler.Scene() != null)
-                {
-                    aaiHandler.OnFinished(buffHandler);
-                }
-                
-                buffHandler.Clear();
-                buffHandler.Dispose();
-                self.m_Buffs.RemoveAt(i);
-            }
             self.m_Buffs.Clear();
         }
 

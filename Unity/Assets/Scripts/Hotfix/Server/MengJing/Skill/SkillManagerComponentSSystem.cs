@@ -304,13 +304,14 @@ namespace ET.Server
           public static void OnDispose(this SkillManagerComponentS self)
           {
               self.Root().GetComponent<TimerComponent>() ?.Remove(ref self.Timer);
-              int skillcnt = self.Skills.Count;
-              for (int i = skillcnt - 1; i >= 0; i--)
-              {
-                  SkillS skillHandler = self.Skills[i];
-                  skillHandler.Dispose();
-                  self.Skills.RemoveAt(i);
-              }
+              // int skillcnt = self.Skills.Count;
+              // for (int i = skillcnt - 1; i >= 0; i--)
+              // {
+              //     SkillS skillHandler = self.Skills[i];
+              //     skillHandler.Dispose();
+              //     self.Skills.RemoveAt(i);
+              // }
+              self.Skills.Clear();
               self.SkillCDs.Clear();
           }
 

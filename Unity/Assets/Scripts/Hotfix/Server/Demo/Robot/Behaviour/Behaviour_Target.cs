@@ -35,7 +35,7 @@ namespace ET
                 }
                 if (math.distance(unit.Position, targetPosition) > 1f)
                 {
-                    MoveHelper.MoveToAsync( unit,  targetPosition, cancellationToken).Coroutine();
+                    MoveHelper.MoveToAsync( unit,  targetPosition).Coroutine();
                 }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
