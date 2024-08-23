@@ -61,11 +61,12 @@ namespace ET.Client
                 //    effectAngle = Mathf.Atan2(dire2.x, dire2.z) * 180 / 3.141592653589793f;
                 //}
                 //this.PlaySkillEffects(this.NowPosition, effectAngle);
+                Log.Warning("逻辑层抛出事件");
                 skils.PlaySkillEffects(skils.NowPosition, effectAngle);
             }
 
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
-            float move = (float)skils.SkillConf.SkillMoveSpeed * 0.033f; /// //Time.deltaTime;
+            float move = (float)skils.SkillConf.SkillMoveSpeed *  0.01f; // Time.deltaTime ?
             
             move = math.min(dis, move);
             skils.NowPosition = skils.NowPosition + (move * dir);
