@@ -54,6 +54,10 @@ namespace ET.Client
             UnityEngine.Object.Destroy(self.outlineFillMaterial);
         }
 
+        /// <summary>
+        /// 显示描边
+        /// </summary>
+        /// <param name="self"></param>
         public static void OnEnable(this OutlineComponent self)
         {
             foreach (var renderer in self.renderers)
@@ -68,6 +72,10 @@ namespace ET.Client
             }
         }
 
+        /// <summary>
+        /// 取消描边
+        /// </summary>
+        /// <param name="self"></param>
         public static void OnDisable(this OutlineComponent self)
         {
             foreach (var renderer in self.renderers)
