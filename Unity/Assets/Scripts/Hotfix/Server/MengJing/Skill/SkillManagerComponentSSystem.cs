@@ -264,7 +264,7 @@ namespace ET.Server
                           skillInfo = SkillInfo.Create();
                           skillInfo.TargetAngle = (int)math.forward(unit.Rotation).y;
                           SkillConfig skillConfig1 = SkillConfigCategory.Instance.Get(weaponSkill);
-                          float3 targetPosition = unit.Position + math.mul(unit.Rotation , new float3(0,1,0)) * (float)skillConfig1.SkillRangeSize;
+                          float3 targetPosition = unit.Position + math.mul(unit.Rotation, new float3(0, 0, 1)) * (float)skillConfig1.SkillRangeSize;
                           skillInfo.WeaponSkillID = weaponSkill;
                           skillInfo.PosX = targetPosition.x;
                           skillInfo.PosY = targetPosition.y;
