@@ -42,14 +42,12 @@ namespace ET.Client
 
             float3 dir = math.normalize(skils.TargetPosition - skils.NowPosition);
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
-            float move = (float)skils.SkillConf.SkillMoveSpeed * 0.033f;
+            float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime;
             move = math.min(dis, move);
 
             float3 nowPosition = skils.NowPosition + (move * dir);
 
-            skils.NowPosition = new float3(nowPosition.x,
-                skils.TargetPosition.y + 0.5f,
-                nowPosition.z);
+            skils.NowPosition = new float3(nowPosition.x, skils.TargetPosition.y + 0.5f, nowPosition.z);
 
             EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()
             {
