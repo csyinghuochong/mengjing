@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgSkillViewComponent))]
-    [FriendOf(typeof (Scroll_Item_SkillSetItem))]
-    [EntitySystemOf(typeof (Scroll_Item_SkillSetItem))]
+    [FriendOf(typeof(DlgSkillViewComponent))]
+    [FriendOf(typeof(Scroll_Item_SkillSetItem))]
+    [EntitySystemOf(typeof(Scroll_Item_SkillSetItem))]
     public static partial class Scroll_Item_SkillSetItemSystem
     {
         [EntitySystem]
@@ -37,8 +37,8 @@ namespace ET.Client
                 return;
             }
 
-            self.Img_SkillIconDi_Copy = GameObject.Instantiate(self.E_Img_SkillIconDiImage.gameObject);
-            self.Img_SkillIconDi_Copy.transform.SetParent(self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkill>().View.uiTransform);
+            self.Img_SkillIconDi_Copy = UnityEngine.Object.Instantiate(self.E_Img_SkillIconDiImage.gameObject,
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkill>().View.uiTransform, true);
             self.Img_SkillIconDi_Copy.transform.localScale = Vector3.one;
         }
 
@@ -96,6 +96,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_SkillSetItem self, SkillPro skillPro)
         {
+            self.E_Img_SkillIconEventTrigger.triggers.Clear();
             self.E_Img_SkillIconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.E_Img_SkillIconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
             self.E_Img_SkillIconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
