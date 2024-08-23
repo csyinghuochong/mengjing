@@ -18,7 +18,6 @@ namespace ET.Client
 		public Vector2 StartPosition;
 		public bool Draged = false;
 		public Action ClickHandler { get; set; }
-		private ChangeEquipHelper ChangeEquipHelper { get; set; }
 		
 		public Button E_RenderButton
      	{

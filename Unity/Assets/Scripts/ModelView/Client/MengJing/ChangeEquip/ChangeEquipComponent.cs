@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [ComponentOf(typeof(Unit))]
-    public class ChangeEquipComponent : Entity, IAwake
+    public class ChangeEquipComponent : Entity, IAwake, IDestroy
     {
         public GameObject target;
         public string lianPaths;

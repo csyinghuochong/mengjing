@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace ET.Client
 {
@@ -35,6 +34,11 @@ namespace ET.Client
         public static void ChangeWeapon(this ChangeEquipComponent self, int weaponId)
         {
             self.GetComponent<ChangeEquipHelper>().ChangeWeapon(weaponId);
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.Client.ChangeEquipComponent self)
+        {
+
         }
     }
 }
