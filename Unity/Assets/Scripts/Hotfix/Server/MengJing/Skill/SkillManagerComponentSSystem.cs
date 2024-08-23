@@ -292,7 +292,7 @@ namespace ET.Server
               //90010909
               if (skillConfig.GameObjectName == "Skill_ShanXian_2" && skillInfos.Count > 0 && target!=null)
               {
-                  float3 dir =  math.mul(target.Rotation, new float3(0,-1,0));
+                  float3 dir = math.mul(target.Rotation, new float3(0, 0, -1));
                   float3 vector3 = target.Position + dir * 1f;
                   skillInfos[0].PosX = vector3.x;
                   skillInfos[0].PosY = vector3.y;

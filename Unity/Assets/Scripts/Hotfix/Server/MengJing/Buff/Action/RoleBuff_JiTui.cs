@@ -22,7 +22,7 @@ namespace ET.Server
             float3 dir = math.normalize(theUnitBelongto.Position - theUnitFrom.Position);
             if (theUnitBelongto.Id == theUnitFrom.Id)
             {
-                dir = math.mul( theUnitBelongto.Rotation,new float3(0,-1,0)) ;
+                dir = math.mul(theUnitBelongto.Rotation, new float3(0, 0, -1));
             }
             float3 vector3 = theUnitBelongto.Position + dir * distance;
             buffS.BeginTime = TimeHelper.ServerNow();
