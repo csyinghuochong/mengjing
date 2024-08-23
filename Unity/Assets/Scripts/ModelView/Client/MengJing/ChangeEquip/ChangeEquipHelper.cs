@@ -4,16 +4,16 @@ using UnityEngine;
 namespace ET.Client
 {
     [ComponentOf]
-    public class ChangeEquipComponent: Entity, IAwake, IDestroy
+    public class ChangeEquipHelper : Entity, IAwake, IDestroy
     {
         //找到满足新贴图大小最合适的值,是2的倍数,这里限制了贴图分辨率最大为2的10次方,即1024*1024
         public int Occ;
 
         public bool UseLayer;
 
-        public int EquipIndex;
+        public int EquipIndex { get; set; }
 
-        public int WeaponId;
+        public int WeaponId { get; set; }
 
         public bool LoadCompleted;
 

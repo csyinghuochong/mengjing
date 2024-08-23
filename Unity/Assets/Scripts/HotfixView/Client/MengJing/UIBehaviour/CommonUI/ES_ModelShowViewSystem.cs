@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(ChangeEquipComponent))]
+    [FriendOf(typeof(ChangeEquipHelper))]
     [EntitySystemOf(typeof(ES_ModelShow))]
     [FriendOf(typeof(ES_ModelShow))]
     public static partial class ES_ModelShowSystem
@@ -17,7 +17,7 @@ namespace ET.Client
             self.Camera = self.EG_RootRectTransform.transform.Find("Camera");
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
 
-            self.AddComponent<ChangeEquipComponent>();
+            self.AddComponent<ChangeEquipHelper>();
             self.E_RenderButton.AddListener(self.OnRenderButton);
         }
 
@@ -92,7 +92,7 @@ namespace ET.Client
 
         public static void ChangeWeapon(this ES_ModelShow self, BagInfo bagInfo, int occ)
         {
-            self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
+            self.GetComponent<ChangeEquipHelper>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
         public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
@@ -116,11 +116,11 @@ namespace ET.Client
                 GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 
                 GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-                ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
-                changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
-                changeEquipComponent.EquipIndex = equipIndex;
-                changeEquipComponent.UseLayer = true;
-                changeEquipComponent.LoadEquipment(go, fashionids, occ);
+                ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
+                changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+                changeEquipHelper.EquipIndex = equipIndex;
+                changeEquipHelper.UseLayer = true;
+                changeEquipHelper.LoadEquipment(go, fashionids, occ);
                 Animator animator = go.GetComponentInChildren<Animator>();
                 if (animator != null)
                 {
@@ -155,11 +155,11 @@ namespace ET.Client
                 var path = ABPathHelper.GetUnitPath(zstring.Format("Player/{0}", OccupationConfigCategory.Instance.Get(occ).ModelAsset));
                 GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                 GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-                ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
-                changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
-                changeEquipComponent.EquipIndex = 0;
-                changeEquipComponent.UseLayer = true;
-                changeEquipComponent.LoadEquipment(go, fashionids, occ);
+                ChangeEquipHelper changeEquipHelper = self.GetComponent<ChangeEquipHelper>();
+                changeEquipHelper.WeaponId = self.GetWeaponId(bagInfo, occ);
+                changeEquipHelper.EquipIndex = 0;
+                changeEquipHelper.UseLayer = true;
+                changeEquipHelper.LoadEquipment(go, fashionids, occ);
 
                 Animator animator = go.GetComponentInChildren<Animator>();
                 if (animator != null)

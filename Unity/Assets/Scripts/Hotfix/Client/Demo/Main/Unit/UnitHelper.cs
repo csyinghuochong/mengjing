@@ -59,9 +59,9 @@ namespace ET.Client
             return sonType == 58 || sonType == 59;
         }
 
-        public static long GetMyUnitId(Scene zoneScene)
+        public static long GetMyUnitId(Scene root)
         {
-            PlayerComponent playerComponent = zoneScene.GetComponent<PlayerComponent>();
+            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
             return playerComponent.CurrentRoleId;
         }
 

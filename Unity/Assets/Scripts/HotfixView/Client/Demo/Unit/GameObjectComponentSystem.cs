@@ -108,7 +108,7 @@ namespace ET.Client
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-                    
+
                     if (cardtransform > 0)
                     {
                         self.OnCardTranfer(cardtransform, false);
@@ -117,16 +117,18 @@ namespace ET.Client
                     {
                         self.OnRunRaceTranfer(runmonsterId, false);
                     }
-                    
+
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
-                        self.UnitAssetsPath  = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
                     }
 
-                    Log.Debug($"runmonsterId:  {runmonsterId}   cardtransform:{cardtransform}     id:{unit.Id}    instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
+                    Log.Debug(
+                        $"runmonsterId:  {runmonsterId}   cardtransform:{cardtransform}     id:{unit.Id}    instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
                     break;
                 case UnitType.Stall:
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/BaiTan");;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/BaiTan");
+                    ;
                     break;
                 case UnitType.Monster:
                     int monsterId = unit.ConfigId;
@@ -148,16 +150,20 @@ namespace ET.Client
                         int itemid = monsterCof.Parameter[1];
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
                         int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);;
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
+                        ;
                     }
                     else if (monsterCof.MonsterSonType == 59)
                     {
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);;
+                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
+                        ;
                     }
                     else
                     {
-                        self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);;
+                        self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
+                        ;
                     }
+
                     Log.Debug($"monster: id:{unit.Id}   instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
                     break;
                 case UnitType.Pet:
@@ -170,39 +176,43 @@ namespace ET.Client
                     }
 
                     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
+                    ;
                     break;
                 case UnitType.Bullet: //从特效里面加载
                     int skillid = unit.ConfigId;
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
                     self.DelayShow = (long)(1000 * effectConfig.SkillEffectDelayTime);
-                    self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);;
+                    self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
+                    ;
                     break;
                 case UnitType.Npc:
                     int npcId = unit.ConfigId;
                     NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Npc/" + config.Asset);;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
+                    ;
                     break;
                 case UnitType.DropItem:
                     // DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
                     // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/DropICoin");;
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/DropICoin");
+                    ;
                     break;
                 case UnitType.Chuansong:
-                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
                     break;
                 case UnitType.JingLing:
                     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
                     // path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
-                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
                     break;
                 case UnitType.Plant:
                     self.OnUpdatePlan();
                     break;
                 case UnitType.Pasture:
                     JiaYuanPastureConfig jiaYuanPastureConfig = JiaYuanPastureConfigCategory.Instance.Get(unit.ConfigId);
-                    self.UnitAssetsPath  = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
                     break;
                 default:
                     break;
@@ -444,7 +454,7 @@ namespace ET.Client
         public static void OnLoadGameObject(this GameObjectComponent self, GameObject go, long formId)
         {
             Log.Debug($"OnLoadGameObject:  {formId}    {self.UnitAssetsPath}");
-            
+
             if (self.IsDisposed)
             {
                 GameObject.Destroy(go);
@@ -488,14 +498,14 @@ namespace ET.Client
                     go.transform.name = unit.Id.ToString();
 
                     Log.Debug($"UnitType.Player.go.transform.name:  {go.transform.name}");
-                    
+
                     if (SettingData.AnimController == 0)
                     {
                         unit.AddComponent<AnimatorComponent>();
                     }
                     else
                     {
-                       unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
 
                     unit.AddComponent<FsmComponent>(); //当前状态组建
@@ -510,8 +520,8 @@ namespace ET.Client
                     if (numericComponent.GetAsInt(NumericType.RunRaceTransform) == 0
                         && numericComponent.GetAsInt(NumericType.CardTransform) == 0)
                     {
-                        //unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
-                        //self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
+                        unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
+                        self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
                     }
 
                     StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
@@ -558,6 +568,7 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
+
                     unit.AddComponent<HeroTransformComponent>();
                     unit.AddComponent<UIStallHpComponent>(true);
                     break;
@@ -673,6 +684,7 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
+
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIPetHpComponent>(); //血条UI组件
@@ -694,6 +706,7 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
+
                     unit.AddComponent<HeroTransformComponent>();
                     unit.AddComponent<UINpcHpComponent>();
                     unit.AddComponent<FsmComponent>();
@@ -748,6 +761,7 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
+
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIJingLingHpComponent>(); //血条UI组件
@@ -768,6 +782,7 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
                     }
+
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<UIJiaYuanPastureComponent>(); //血条UI组件
@@ -812,30 +827,33 @@ namespace ET.Client
                 }
 
                 Material[] materials = skinnedMeshRenderer.materials;
-                // for (int i = 0; i < materials.Length; i++)
-                // {
-                //     if (materials[i].shader == null)
-                //     {
-                //         continue;
-                //     }
-                //     if (materials[i].shader.name.Equals(StringBuilderHelper.ToonBasic))
-                //     {
-                //         self.Material = materials[i];
-                //         self.OldShader = StringBuilderHelper.ToonBasic;
-                //         break;
-                //     }
-                //     if (materials[i].shader.name.Equals(StringBuilderHelper.ToonBasicOutline))
-                //     {
-                //         self.Material = materials[i];
-                //         self.OldShader = StringBuilderHelper.ToonBasicOutline;
-                //         break;
-                //     }
-                //     // if (materials[i].shader.name.Equals("Toon/BasicOutlineNew"))
-                //     // {
-                //     //     self.Material = materials[i];
-                //     //     break;
-                //     // }
-                // }
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    if (materials[i].shader == null)
+                    {
+                        continue;
+                    }
+
+                    if (materials[i].shader.name.Equals(StringBuilderData.ToonBasic))
+                    {
+                        self.Material = materials[i];
+                        self.OldShader = StringBuilderData.ToonBasic;
+                        break;
+                    }
+
+                    if (materials[i].shader.name.Equals(StringBuilderData.ToonBasicOutline))
+                    {
+                        self.Material = materials[i];
+                        self.OldShader = StringBuilderData.ToonBasicOutline;
+                        break;
+                    }
+                    //     // if (materials[i].shader.name.Equals("Toon/BasicOutlineNew"))
+                    //     // {
+                    //     //     self.Material = materials[i];
+                    //     //     break;
+                    //     // }
+                    // }
+                }
             }
         }
 
@@ -860,38 +878,40 @@ namespace ET.Client
         }
 
         /// <summary>
-        // public static string ToonBasic = "Toon/Basic";  
-        // public static string ToonBasicOutline = "Toon/BasicOutline";
+        /// public static string ToonBasic = "Toon/Basic";  
+        /// public static string ToonBasicOutline = "Toon/BasicOutline";
         /// </summary>
         /// <param name="self"></param>
         public static void OnHighLight(this GameObjectComponent self)
         {
-            // if (GlobalHelp.GetBigVersion() < 15)
-            // {
-            //     return;
-            // }
-            //
-            // if (self.Material != null)
-            // {
-            //     self.Material.shader = GlobalHelp.Find(StringBuilderHelper.Ill_HighLight);
-            //     // self.Material.SetInt("_Type", 1);
-            //     //self.Material.shader = GlobalHelp.Find(StringBuilderHelper.Ill_RimLight);     //第二种效果  高亮
-            //     TimerComponent.Instance.Remove(ref self.HighLightTimer);
-            //     self.HighLightTimer = TimerComponent.Instance.NewOnceTimer(TimeHelper.ServerNow() + 120, TimerType.HighLightTimer, self);
-            // }
+            if (GlobalHelp.GetBigVersion() < 15)
+            {
+                return;
+            }
+
+            if (self.Material != null)
+            {
+                self.Material.shader = GlobalHelp.Find(StringBuilderData.Ill_HighLight);
+                // self.Material.SetInt("_Type", 1);
+                //self.Material.shader = GlobalHelp.Find(StringBuilderHelper.Ill_RimLight);     //第二种效果  高亮
+                TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+                timerComponent.Remove(ref self.HighLightTimer);
+                self.HighLightTimer = timerComponent.NewOnceTimer(TimeHelper.ServerNow() + 120, TimerInvokeType.HighLightTimer, self);
+            }
         }
 
         public static void OnResetShader(this GameObjectComponent self)
         {
-            // if (GlobalHelp.GetBigVersion() < 15)
-            // {
-            //     return;
-            // }
-            // if (self.Material != null)
-            // {
-            //     self.Material.shader = GlobalHelp.Find(self.OldShader);
-            //     // self.Material.SetInt("_Type", 0);
-            // }
+            if (GlobalHelp.GetBigVersion() < 15)
+            {
+                return;
+            }
+
+            if (self.Material != null)
+            {
+                self.Material.shader = GlobalHelp.Find(self.OldShader);
+                // self.Material.SetInt("_Type", 0);
+            }
         }
 
         public static void EnterHide(this GameObjectComponent self)
@@ -905,46 +925,49 @@ namespace ET.Client
             {
                 self.ObjectHorse.SetActive(false);
             }
-            // self.GetParent<Unit>().GetComponent<UIUnitHpComponent>()?.EnterHide();
+
+            self.GetParent<Unit>().GetComponent<UIPlayerHpComponent>()?.EnterHide();
         }
 
         public static void EnterBaTi(this GameObjectComponent self)
         {
-            // if (self.GameObject == null || self.Material == null)
-            // {
-            //     return;
-            // }
-            // if (self.Material.shader.name.Equals(StringBuilderHelper.ToonBasicOutline))
-            // {
-            //     self.Material.SetFloat("_Factor", 0.02f);
-            //     self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
-            // }
-            // else
-            // {
-            //     Shader shader = GlobalHelp.Find(StringBuilderHelper.Outline);
-            //     if (shader == null)
-            //     {
-            //         return;
-            //     }
-            //
-            //     self.Material.shader = shader;
-            //     self.Material.SetFloat("_Factor", 0.02f);
-            //     self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
-            // }
+            if (self.GameObject == null || self.Material == null)
+            {
+                return;
+            }
+
+            if (self.Material.shader.name.Equals(StringBuilderData.ToonBasicOutline))
+            {
+                self.Material.SetFloat("_Factor", 0.02f);
+                self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
+            }
+            else
+            {
+                Shader shader = GlobalHelp.Find(StringBuilderData.Outline);
+                if (shader == null)
+                {
+                    return;
+                }
+
+                self.Material.shader = shader;
+                self.Material.SetFloat("_Factor", 0.02f);
+                self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
+            }
         }
 
         public static void ExitBaTi(this GameObjectComponent self)
         {
-            // if (self.GameObject == null || self.Material == null)
-            // {
-            //     return;
-            // }
-            // self.Material.shader = GlobalHelp.Find(self.OldShader);
-            // if (self.Material.shader.name.Equals(StringBuilderHelper.ToonBasicOutline))
-            // {
-            //     self.Material.SetFloat("_Factor", 0);
-            //     self.Material.SetColor("_OutLineColor", new Color(0f, 0f, 0f, 1f));
-            // }
+            if (self.GameObject == null || self.Material == null)
+            {
+                return;
+            }
+
+            self.Material.shader = GlobalHelp.Find(self.OldShader);
+            if (self.Material.shader.name.Equals(StringBuilderData.ToonBasicOutline))
+            {
+                self.Material.SetFloat("_Factor", 0);
+                self.Material.SetColor("_OutLineColor", new Color(0f, 0f, 0f, 1f));
+            }
         }
 
         public static void ExitHide(this GameObjectComponent self)
@@ -969,56 +992,57 @@ namespace ET.Client
         /// <param name="self"></param>
         public static void EnterStealth(this GameObjectComponent self)
         {
-            // Shader shader = GlobalHelp.Find(StringBuilderHelper.SimpleAlpha);
-            // if (shader == null)
-            // {
-            //     return;
-            // }
-            // Unit unit = self.GetParent<Unit>();
-            // float alpha = 1f;
-            // // 对自己半透明
-            // if (unit.Id == UnitHelper.GetMyUnitId(unit.ZoneScene()))
-            // {
-            //     alpha = 0.3f;
-            // }
-            // // 对别人透明
-            // else
-            // {
-            //     alpha = 0f;
-            // }
-            // // 身体隐形
-            // self.Material.shader = shader;
-            // self.Material.SetFloat("_Alpha", alpha);
-            //
-            // // 脚底阴影隐形
-            // if (self.GameObject.transform.Find("fake shadow (5)") != null)
-            // {
-            //     GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
-            //     Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
-            //     di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, alpha);
-            // }
-            //
-            // // 脚底Buff隐形
-            // foreach (AEffectHandler aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
-            // {
-            //     if (aEffectHandler.EffectConfig.Id >= 80000001 && aEffectHandler.EffectConfig.Id <= 80000006)
-            //     {
-            //         ParticleSystem particleSystem = aEffectHandler.EffectObj.GetComponentInChildren<ParticleSystem>();
-            //         if (particleSystem != null)
-            //         {
-            //             Material material = particleSystem.GetComponent<Renderer>().material;
-            //             if (material.HasProperty("_TintColor"))
-            //             {
-            //                 Color oldColor = material.GetColor("_TintColor");
-            //                 oldColor.a = alpha;
-            //                 material.SetColor("_TintColor", oldColor);
-            //             }
-            //            
-            //         }
-            //     }
-            // }
-            //
-            // unit.GetComponent<UIUnitHpComponent>().EnterStealth(alpha);
+            Shader shader = GlobalHelp.Find(StringBuilderData.SimpleAlpha);
+            if (shader == null)
+            {
+                return;
+            }
+
+            Unit unit = self.GetParent<Unit>();
+            float alpha = 1f;
+            // 对自己半透明
+            if (unit.Id == UnitHelper.GetMyUnitId(unit.Root()))
+            {
+                alpha = 0.3f;
+            }
+            // 对别人透明
+            else
+            {
+                alpha = 0f;
+            }
+
+            // 身体隐形
+            self.Material.shader = shader;
+            self.Material.SetFloat("_Alpha", alpha);
+
+            // 脚底阴影隐形
+            if (self.GameObject.transform.Find("fake shadow (5)") != null)
+            {
+                GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
+                Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
+                di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, alpha);
+            }
+
+            // 脚底Buff隐形
+            foreach (Effect aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
+            {
+                if (aEffectHandler.EffectConfig.Id >= 80000001 && aEffectHandler.EffectConfig.Id <= 80000006)
+                {
+                    ParticleSystem particleSystem = aEffectHandler.EffectObj.GetComponentInChildren<ParticleSystem>();
+                    if (particleSystem != null)
+                    {
+                        Material material = particleSystem.GetComponent<Renderer>().material;
+                        if (material.HasProperty("_TintColor"))
+                        {
+                            Color oldColor = material.GetColor("_TintColor");
+                            oldColor.a = alpha;
+                            material.SetColor("_TintColor", oldColor);
+                        }
+                    }
+                }
+            }
+
+            unit.GetComponent<UIPlayerHpComponent>().EnterStealth(alpha);
         }
 
         /// <summary>
@@ -1027,57 +1051,57 @@ namespace ET.Client
         /// <param name="self"></param>
         public static void ExitStealth(this GameObjectComponent self)
         {
-            // Unit unit = self.GetParent<Unit>();
-            //
-            // Log.ILog.Debug($"ExitStealth: {unit.Id}");
-            //
-            // //退出隐身
-            // self.Material.shader = GlobalHelp.Find(self.OldShader);
-            //
-            // // 脚底阴影恢复
-            // GameObject di = null;
-            // if (self.GameObject.transform.Find("fake shadow (5)") != null)
-            // {
-            //     di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
-            //     Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
-            //     di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, 0.5f);
-            // }
-            //
-            // // 脚底Buff恢复
-            // foreach (AEffectHandler aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
-            // {
-            //     if (aEffectHandler.EffectConfig.Id >= 80000001 && aEffectHandler.EffectConfig.Id <= 80000006)
-            //     {
-            //         ParticleSystem particleSystem = aEffectHandler.EffectObj.GetComponentInChildren<ParticleSystem>();
-            //         if (particleSystem != null)
-            //         {
-            //             Material material = particleSystem.GetComponent<Renderer>().material;
-            //             if (material.HasProperty("_TintColor"))
-            //             {
-            //                 Color oldColor = material.GetColor("_TintColor");
-            //                 oldColor.a = 0.5f;
-            //                 material.SetColor("_TintColor", oldColor);
-            //             }
-            //         }
-            //     }
-            // }
-            //
-            //
-            // // 血条恢复
-            // unit.GetComponent<UIUnitHpComponent>().ExitStealth();
+            Unit unit = self.GetParent<Unit>();
+
+            Log.Debug($"ExitStealth: {unit.Id}");
+
+            //退出隐身
+            self.Material.shader = GlobalHelp.Find(self.OldShader);
+
+            // 脚底阴影恢复
+            GameObject di = null;
+            if (self.GameObject.transform.Find("fake shadow (5)") != null)
+            {
+                di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
+                Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
+                di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, 0.5f);
+            }
+
+            // 脚底Buff恢复
+            foreach (Effect aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
+            {
+                if (aEffectHandler.EffectConfig.Id >= 80000001 && aEffectHandler.EffectConfig.Id <= 80000006)
+                {
+                    ParticleSystem particleSystem = aEffectHandler.EffectObj.GetComponentInChildren<ParticleSystem>();
+                    if (particleSystem != null)
+                    {
+                        Material material = particleSystem.GetComponent<Renderer>().material;
+                        if (material.HasProperty("_TintColor"))
+                        {
+                            Color oldColor = material.GetColor("_TintColor");
+                            oldColor.a = 0.5f;
+                            material.SetColor("_TintColor", oldColor);
+                        }
+                    }
+                }
+            }
+
+            // 血条恢复
+            unit.GetComponent<UIPlayerHpComponent>().ExitStealth();
         }
 
         public static void OnHui(this GameObjectComponent self)
         {
-            // Transform transform = self.GameObject.transform;
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     if (transform.GetChild(i).name.Equals(StringBuilderHelper.RoleBoneSet))
-            //     {
-            //         continue;
-            //     }
-            //     transform.GetChild(i).gameObject.SetActive(false);
-            // }
+            Transform transform = self.GameObject.transform;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).name.Equals(StringBuilderData.RoleBoneSet))
+                {
+                    continue;
+                }
+
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
 
         public static void OnRevive(this GameObjectComponent self)
@@ -1108,9 +1132,9 @@ namespace ET.Client
         public static void OnCardTranfer(this GameObjectComponent self, int monsterid, bool remove)
         {
             Unit unit = self.GetParent<Unit>();
-                                     
-            self.OnTranferHandler(monsterid, remove );
-                                     
+
+            self.OnTranferHandler(monsterid, remove);
+
             if (unit.MainHero)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnCardTranfer(monsterid);
@@ -1120,15 +1144,12 @@ namespace ET.Client
         /// <summary>
         /// 奔跑大赛变身
         /// </summary>
-        /// <param name="self"></param>
-        /// <param name="monsterid"></param>
-        /// <param name="remove"></param>
         public static void OnRunRaceTranfer(this GameObjectComponent self, int monsterid, bool remove)
         {
             Unit unit = self.GetParent<Unit>();
-                                     
-            self.OnTranferHandler(monsterid, remove );
-                                     
+
+            self.OnTranferHandler(monsterid, remove);
+
             if (unit.MainHero)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnRunRaceTranfer(monsterid);
@@ -1136,13 +1157,13 @@ namespace ET.Client
         }
 
         public static void OnTranferHandler(this GameObjectComponent self, int monsterid, bool remove)
-        { 
+        {
             self.RecoverGameObject();
             self.Material = null;
             Unit unit = self.GetParent<Unit>();
             if (remove)
             {
-                unit.RemoveComponent<ChangeEquipComponent>();
+                unit.RemoveComponent<ChangeEquipHelper>();
                 unit.RemoveComponent<HeroTransformComponent>(); //获取角色绑点组件
                 unit.RemoveComponent<AnimatorComponent>();
                 unit.RemoveComponent<AnimationComponent>();
@@ -1152,7 +1173,7 @@ namespace ET.Client
                 unit.RemoveComponent<UIPlayerHpComponent>();
             }
 
-            if (monsterid > 0 )
+            if (monsterid > 0)
             {
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
@@ -1163,10 +1184,10 @@ namespace ET.Client
                 //string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
                 self.UnitAssetsPath = string.Empty;
             }
-            
+
             self.BianShenEffect = unit.MainHero && remove;
         }
-        
+
         public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
         {
             if (stallType > 0)

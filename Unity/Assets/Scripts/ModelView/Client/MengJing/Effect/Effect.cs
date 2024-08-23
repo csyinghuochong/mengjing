@@ -32,7 +32,7 @@ namespace ET.Client
 
         public float HideObjTime;          //隐藏物体间隔时间    
 
-        public GameObject EffectObj;
+        public GameObject EffectObj { get; set; }
         public string EffectPath;
     }
 }
