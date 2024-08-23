@@ -44,7 +44,7 @@ namespace ET.Client
             }
 
             float3 dir =  math.normalize(skils.TargetPosition - skils.NowPosition);
-            float effectAngle = math.atan2(dir.x, dir.z) * 180f / 3.1415926535897931f;
+            float effectAngle = math.degrees(math.atan2(dir.x, dir.z));
             if (skils.EffectInstanceId.Count == 0)
             {
                 //Vector3 newestPositon = this.TheUnitFrom.Position;
