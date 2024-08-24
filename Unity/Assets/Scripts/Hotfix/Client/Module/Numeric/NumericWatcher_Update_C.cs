@@ -110,8 +110,8 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-            args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+            //float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            //args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
 }

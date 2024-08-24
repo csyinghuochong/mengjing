@@ -85,7 +85,7 @@ namespace ET.Server
         
         public static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
         {
-            M2C_UnitBuffRemove m2C_UnitBuffUpdate = self.m2C_UnitBuffRemove;
+            M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create();
             m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
             m2C_UnitBuffUpdate.BuffID = buffHandler.mBuffConfig.Id;
             MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, buffHandler.mBuffConfig, self.SceneType);
@@ -458,7 +458,7 @@ namespace ET.Server
             //buffData.BuffConfig==null 是子弹之类的buff不广播
             if (notice)
             {
-                M2C_UnitBuffUpdate m2C_UnitBuffUpdate = self.m2C_UnitBuffUpdate;
+                M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
                 m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
                 m2C_UnitBuffUpdate.BuffID = skillBuffConfig.Id;
                 m2C_UnitBuffUpdate.BuffOperateType = addBufStatus;
@@ -513,7 +513,7 @@ namespace ET.Server
                 }
             }
 
-            M2C_UnitBuffUpdate m2C_UnitBuffUpdate = self.m2C_UnitBuffUpdate;
+            M2C_UnitBuffUpdate m2C_UnitBuffUpdate = M2C_UnitBuffUpdate.Create();
             m2C_UnitBuffUpdate.UnitIdBelongTo = unit.Id;
             m2C_UnitBuffUpdate.BuffID = skillBuffConfig.Id;
             m2C_UnitBuffUpdate.BuffOperateType = 3;

@@ -79,4 +79,16 @@ namespace ET.Server
             }
         }
     }
+    
+    
+    
+    [NumericWatcher(SceneType.Current, NumericType.Now_Speed)]
+    public class NumericWatcher_Now_Speed : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            //float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            //args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+        }
+    }
 }
