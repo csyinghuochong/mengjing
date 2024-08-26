@@ -841,12 +841,6 @@ namespace ET.Client
                         break;
                     }
 
-                    if (materials[i].shader.name.Equals(StringBuilderData.ToonBasicOutline))
-                    {
-                        self.Material = materials[i];
-                        self.OldShader = StringBuilderData.ToonBasicOutline;
-                        break;
-                    }
                     //     // if (materials[i].shader.name.Equals("Toon/BasicOutlineNew"))
                     //     // {
                     //     //     self.Material = materials[i];
@@ -936,22 +930,15 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Material.shader.name.Equals(StringBuilderData.ToonBasicOutline))
+            Unit unit = self.GetParent<Unit>();
+            OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
+            if (outlineComponent != null)
             {
-                self.Material.SetFloat("_Factor", 0.02f);
-                self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
+                outlineComponent.OnEnable();
             }
             else
             {
-                Shader shader = GlobalHelp.Find(StringBuilderData.Outline);
-                if (shader == null)
-                {
-                    return;
-                }
-
-                self.Material.shader = shader;
-                self.Material.SetFloat("_Factor", 0.02f);
-                self.Material.SetColor("_OutLineColor", new Color(1f, 0f, 0f, 1f));
+                outlineComponent = unit.AddComponent<OutlineComponent>();
             }
         }
 
@@ -962,11 +949,11 @@ namespace ET.Client
                 return;
             }
 
-            self.Material.shader = GlobalHelp.Find(self.OldShader);
-            if (self.Material.shader.name.Equals(StringBuilderData.ToonBasicOutline))
+            Unit unit = self.GetParent<Unit>();
+            OutlineComponent outlineComponent = unit.GetComponent<OutlineComponent>();
+            if (outlineComponent != null)
             {
-                self.Material.SetFloat("_Factor", 0);
-                self.Material.SetColor("_OutLineColor", new Color(0f, 0f, 0f, 1f));
+                outlineComponent.OnDisable();
             }
         }
 
