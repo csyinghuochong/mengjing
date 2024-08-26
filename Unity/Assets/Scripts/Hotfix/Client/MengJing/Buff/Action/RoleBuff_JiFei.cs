@@ -28,7 +28,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    buffc.TheUnitBelongto.Position = buffc.StartPosition + math.normalize(buffc.BuffData.TargetPostion - buffc.StartPosition) * (float)buffc.mSkillBuffConf.buffParameterValue * buffc.PassTime;
+                    buffc.TheUnitBelongto.Position = buffc.StartPosition + (buffc.BuffData.TargetPostion - buffc.StartPosition).normalize() * (float)buffc.mSkillBuffConf.buffParameterValue * buffc.PassTime;
                 }
                 await  buffc.Root().GetComponent<TimerComponent>().WaitFrameAsync();
                 if (buffc.BuffState != BuffState.Running)

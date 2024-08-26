@@ -43,7 +43,7 @@ namespace ET.Client
                 skils.TargetPosition = targetPosition;
             }
 
-            float3 dir =  math.normalize(skils.TargetPosition - skils.NowPosition);
+            float3 dir =  (skils.TargetPosition - skils.NowPosition).normalize();
             float effectAngle = math.degrees(math.atan2(dir.x, dir.z));
             if (skils.EffectInstanceId.Count == 0)
             {

@@ -13,7 +13,7 @@ namespace ET.Server
 
         public static float3 GetFollowPosition(Unit unit, Unit master)
         {
-            float3 dir = math.normalize(unit.Position - master.Position);
+            float3 dir = (unit.Position - master.Position).normalize();
             float3 tar = master.Position + dir * math.forward() * 1.5f;
             return tar;
         }

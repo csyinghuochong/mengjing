@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 
 namespace ET
@@ -80,6 +81,13 @@ namespace ET
             }
 
             return v;
+        }
+
+        public static float3 normalize(this float3 value)
+        {
+            float num = (float)Math.Sqrt((double)value.x * (double)value.x + (double)value.y * (double)value.y +
+                (double)value.z * (double)value.z);
+            return (double)num > 9.999999747378752E-06 ? value / num : float3.zero;
         }
     }
 }

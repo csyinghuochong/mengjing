@@ -31,7 +31,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                float3 dir = math.normalize(unit.Position - skillS.TargetPosition);
+                float3 dir = (unit.Position - skillS.TargetPosition).normalize();
                 unit.GetComponent<MoveComponent>().Stop(true);
                 unit.Position = skillS.TargetPosition + math.mul(dir , new float3(1,1,1));
                 unit.Stop(-2);

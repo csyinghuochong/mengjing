@@ -75,7 +75,7 @@ namespace ET.Server
             float distance = math.distance(s_position, t_point); //距离
             float3 norVec = math.mul(s_rotation, math.forward());
             float3 temVec = t_point - s_position;
-            float dot_len = math.dot(math.normalize(norVec), math.normalize(temVec));
+            float dot_len = math.dot((norVec).normalize(), (temVec).normalize());
 
             float jiajiao = math.degrees(math.acos(dot_len)); //计算两个向量间的夹角
 

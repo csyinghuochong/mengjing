@@ -89,7 +89,7 @@ namespace ET
         public static float3 GetCanChongJiPath(this PathfindingComponent self, float3 start, float3 target)
         {
             using var list = ListComponent<float3>.Create();
-            float3 dir = math.normalize(target - start);
+            float3 dir = (target - start).normalize();
             float3 tmm = start;
 
             int max = 0;

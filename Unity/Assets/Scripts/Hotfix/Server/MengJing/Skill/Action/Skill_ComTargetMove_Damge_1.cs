@@ -44,7 +44,7 @@ namespace ET.Server
                 return;
             }
             
-            float3 dir = math.normalize(skillS.TargetPosition - skillS.NowPosition);
+            float3 dir = (skillS.TargetPosition - skillS.NowPosition).normalize();
             float dis = PositionHelper.Distance2D(skillS.NowPosition, skillS.TargetPosition);
             float move = (float)skillS.SkillConf.SkillMoveSpeed * 0.1f;            //服务器0.1秒一帧
             move = math.min(dis, move);

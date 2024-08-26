@@ -19,7 +19,7 @@ namespace ET.Server
             float oldSpeed = theUnitFrom.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
             float newSpeed = (float)buffS.mBuffConfig.buffParameterValue;
             float distance = (buff_time * newSpeed) * 0.001f;
-            float3 dir = math.normalize(theUnitBelongto.Position - theUnitFrom.Position);
+            float3 dir = (theUnitBelongto.Position - theUnitFrom.Position).normalize();
             if (theUnitBelongto.Id == theUnitFrom.Id)
             {
                 dir = math.mul(theUnitBelongto.Rotation, new float3(0, 0, -1));

@@ -17,7 +17,7 @@ namespace ET.Server
             buffS.OnBaseBuffInit(buffS.BuffData, theUnitFrom, theUnitBelongto);
             float speed = (float)buffS.mBuffConfig.buffParameterValue;
             float distance = (buffS.mBuffConfig.buffParameterType * speed) * 0.001f;
-            float3 dir = math.normalize(theUnitBelongto.Position - theUnitFrom.Position);
+            float3 dir = (theUnitBelongto.Position - theUnitFrom.Position).normalize();
             float3 vector3 = theUnitBelongto.Position + dir * distance;
             theUnitBelongto.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.JiTui);
             buffS.BeginTime = TimeHelper.ServerNow();

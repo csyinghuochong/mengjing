@@ -17,7 +17,7 @@ namespace ET.Server
         {
             skillS.InitSelfBuff();
 
-            float3 dir = math.normalize(skillS.TheUnitTarget.Position - skillS.TheUnitFrom.Position );
+            float3 dir = (skillS.TheUnitTarget.Position - skillS.TheUnitFrom.Position).normalize();
 
             skillS.TheUnitTarget.GetComponent<MoveComponent>().Stop(true);
             skillS.TheUnitTarget.Position =  math.mul(dir, new float3(1,1,1)) + skillS.TheUnitFrom.Position;

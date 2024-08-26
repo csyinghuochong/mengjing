@@ -40,12 +40,7 @@ namespace ET.Client
                 return;
             }
 
-            float3 dir = math.normalize(skils.TargetPosition - skils.NowPosition);
-            if (float.IsNaN(dir.x) || float.IsNaN(dir.y) || float.IsNaN(dir.z))
-            {
-                // math.normalize 当2个点相同时，计算会出错。。先临时处理，
-                dir = float3.zero;
-            }
+            float3 dir = (skils.TargetPosition - skils.NowPosition).normalize();
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
             float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime;
             move = math.min(dis, move);
