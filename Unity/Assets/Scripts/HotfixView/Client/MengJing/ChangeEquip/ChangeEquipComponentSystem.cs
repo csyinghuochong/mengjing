@@ -12,6 +12,11 @@ namespace ET.Client
             self.target = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
         }
 
+        [EntitySystem]
+        private static void Destroy(this ChangeEquipComponent self)
+        {
+        }
+
         public static void InitWeapon(this ChangeEquipComponent self, List<int> fashions, int occ, int equipId = 0)
         {
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
@@ -34,11 +39,6 @@ namespace ET.Client
         public static void ChangeWeapon(this ChangeEquipComponent self, int weaponId)
         {
             self.GetComponent<ChangeEquipHelper>().ChangeWeapon(weaponId);
-        }
-        [EntitySystem]
-        private static void Destroy(this ET.Client.ChangeEquipComponent self)
-        {
-
         }
     }
 }
