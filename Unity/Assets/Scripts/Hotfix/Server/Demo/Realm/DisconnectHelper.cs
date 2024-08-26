@@ -42,8 +42,6 @@ namespace ET.Server
                     var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
                             .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
 
-                    await ExitOtherServer(  player.Scene(), player.UnitId);
-                    await ExitWorldChatServer(player.Scene(), player.ChatInfoInstanceId);
                     
                     //通知移除账号角色登录信息
                     G2L_RemoveLoginRecord g2LRemoveLoginRecord = G2L_RemoveLoginRecord.Create();
@@ -51,6 +49,10 @@ namespace ET.Server
                     g2LRemoveLoginRecord.ServerId = player.Zone();
                     var L2G_RemoveLoginRecord = (L2G_RemoveLoginRecord) await player.Root().GetComponent<MessageSender>()
                             .Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LRemoveLoginRecord);
+                    
+                    await ExitWorldChatServer(player.Scene(), player.ChatInfoInstanceId);
+                    await ExitOtherServer(  player.Scene(), player.UnitId);
+
                     break;
             }
     
@@ -67,6 +69,7 @@ namespace ET.Server
         public static async ETTask ExitOtherServer(Scene root,  long chatUnitId)
         {
             A2A_BroadcastSceneRequest broadcastSceneRequest = A2A_BroadcastSceneRequest.Create();
+            broadcastSceneRequest.UnitId = chatUnitId;
             List<StartSceneConfig> otherscenes = BroadMessageHelper.GetAllScene(root.Zone());
             
             for (int i = 0; i < otherscenes.Count; i++)

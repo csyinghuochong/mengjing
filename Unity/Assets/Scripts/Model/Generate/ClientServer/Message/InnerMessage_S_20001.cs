@@ -1863,7 +1863,7 @@ namespace ET
     [MemoryPackable]
     [Message(InnerMessage.G2Chat_RequestExitChat)]
     [ResponseType(nameof(Chat2G_RequestExitChat))]
-    public partial class G2Chat_RequestExitChat : MessageObject, IRequest
+    public partial class G2Chat_RequestExitChat : MessageObject, ILocationRequest
     {
         public static G2Chat_RequestExitChat Create(bool isFromPool = false)
         {
@@ -1888,7 +1888,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.Chat2G_RequestExitChat)]
-    public partial class Chat2G_RequestExitChat : MessageObject, IResponse
+    public partial class Chat2G_RequestExitChat : MessageObject, ILocationResponse
     {
         public static Chat2G_RequestExitChat Create(bool isFromPool = false)
         {

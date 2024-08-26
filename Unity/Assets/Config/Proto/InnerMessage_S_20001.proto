@@ -433,12 +433,12 @@ message Chat2G_EnterChat // IResponse
 }
 
 //ResponseType Chat2G_RequestExitChat
-message G2Chat_RequestExitChat // IRequest
+message G2Chat_RequestExitChat // ILocationRequest
 {
 	int32 RpcId = 90;
 }
 
-message Chat2G_RequestExitChat // IResponse
+message Chat2G_RequestExitChat // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
