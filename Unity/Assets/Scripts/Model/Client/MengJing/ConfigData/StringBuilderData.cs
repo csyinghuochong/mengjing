@@ -9,9 +9,6 @@ namespace ET.Client
         public static string ToonBasic = "Toon/Basic";
 
         [StaticField]
-        public static string ToonBasicOutline = "Toon/BasicOutline";
-
-        [StaticField]
         public static string Ill_HighLight = "Custom/Ill_HighLight";
 
         [StaticField]
