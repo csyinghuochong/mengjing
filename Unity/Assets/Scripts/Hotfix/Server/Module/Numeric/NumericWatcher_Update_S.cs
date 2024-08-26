@@ -5,11 +5,6 @@ namespace ET.Server
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            if (unit == null || unit.IsDisposed)
-            {
-                Log.Error("NumericType.Now_Hp == null");
-            }
-
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
             NumericComponentS numericComponentDefend = unit.GetComponent<NumericComponentS>();
 
@@ -82,13 +77,13 @@ namespace ET.Server
     
     
     
-    [NumericWatcher(SceneType.Current, NumericType.Now_Speed)]
+    [NumericWatcher(SceneType.Map, NumericType.Now_Speed)]
     public class NumericWatcher_Now_Speed : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            //float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-            //args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+            float speed = args.Defend.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
+            args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
 }

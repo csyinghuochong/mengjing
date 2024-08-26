@@ -7,11 +7,6 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            if (unit == null || unit.IsDisposed)
-            {
-                Log.Debug("NumericType.Now_Hp == null");
-            }
-
             NumericComponentC numericComponentDefend = unit.GetComponent<NumericComponentC>();
 
             long nowHpValue = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
@@ -110,8 +105,8 @@ namespace ET.Client
     {
         public void Run(Unit unit, NumbericChange args)
         {
-            //float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-            //args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
+            float speed = args.Defend.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
 }
