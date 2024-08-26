@@ -8999,6 +8999,7 @@ GameObject:
   - component: {fileID: 4111987937732038622}
   - component: {fileID: 3206305464008239703}
   - component: {fileID: 5985030867898414877}
+  - component: {fileID: 5817236620273563314}
   m_Layer: 5
   m_Name: Particle_Whirlwind_Dust (3)
   m_TagString: Untagged
@@ -13825,6 +13826,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805443097593900620}
   m_CullTransparentMesh: 0
+--- !u!114 &5817236620273563314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805443097593900620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6c26686c050414eb1d71a523983e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: a386e8dc185cf4764a4f11a6981b785c, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  fixedTime: 1
+  use3dRotation: 0
 --- !u!1 &5907857765871637004
 GameObject:
   m_ObjectHideFlags: 0
@@ -19338,6 +19361,7 @@ GameObject:
   - component: {fileID: 6896187584043153525}
   - component: {fileID: 6896187584043153524}
   - component: {fileID: 6896187584043153515}
+  - component: {fileID: 7362812119135928330}
   m_Layer: 5
   m_Name: Particle System
   m_TagString: Untagged
@@ -24164,6 +24188,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6896187584043153512}
   m_CullTransparentMesh: 0
+--- !u!114 &7362812119135928330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896187584043153512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6c26686c050414eb1d71a523983e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 15e1554a23dae49ba928deb6dfebdeb2, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  fixedTime: 1
+  use3dRotation: 0
 --- !u!1 &6918041713960773432
 GameObject:
   m_ObjectHideFlags: 0
@@ -24748,6 +24794,7 @@ GameObject:
   - component: {fileID: 3175111151283894177}
   - component: {fileID: 961591906732920325}
   - component: {fileID: 4439617795793931697}
+  - component: {fileID: 4794631714313731267}
   m_Layer: 5
   m_Name: Particle_Whirlwind_Dust (1)
   m_TagString: Untagged
@@ -29574,6 +29621,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7467848390874010324}
   m_CullTransparentMesh: 0
+--- !u!114 &4794631714313731267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467848390874010324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6c26686c050414eb1d71a523983e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: a386e8dc185cf4764a4f11a6981b785c, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  fixedTime: 1
+  use3dRotation: 0
 --- !u!1 &7469158182542025643
 GameObject:
   m_ObjectHideFlags: 0
