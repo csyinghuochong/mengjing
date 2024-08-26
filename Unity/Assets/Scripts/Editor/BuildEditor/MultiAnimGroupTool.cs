@@ -91,6 +91,11 @@ namespace ET
 
             foreach (string prefabPath in prefabPaths)
             {
+                if (prefabPath.Contains("Unit\\Parts\\"))
+                {
+                    continue;
+                }
+
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
                 Animator animator = prefab.GetComponent<Animator>();
 
