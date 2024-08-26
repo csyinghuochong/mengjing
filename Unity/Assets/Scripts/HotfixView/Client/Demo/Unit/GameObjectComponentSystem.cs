@@ -983,7 +983,7 @@ namespace ET.Client
             }
 
             self.CheckRunState();
-            // self.GetParent<Unit>().GetComponent<UIUnitHpComponent>().ExitHide();
+            self.GetParent<Unit>().GetComponent<UIPlayerHpComponent>().ExitHide();
         }
 
         /// <summary>
