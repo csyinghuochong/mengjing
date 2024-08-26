@@ -15,7 +15,9 @@ namespace ET
 
         public NLogger(string name, int process, int fiber)
         {
-            this.logger = LogManager.GetLogger($"{(uint)process:000000}.{(uint)fiber:0000000000}.{name}");
+            //this.logger = LogManager.GetLogger($"{(uint)process:000000}.{(uint)fiber:0000000000}.{name}");
+            this.logger = LogManager.GetLogger(name);
+            LogManager.Configuration.Variables["appIdFormat"] = $"{Options.Instance.Process:000000}";
         }
 
         public void Trace(string message)
