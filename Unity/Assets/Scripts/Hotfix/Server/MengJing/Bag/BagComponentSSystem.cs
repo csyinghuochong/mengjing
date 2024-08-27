@@ -35,6 +35,17 @@ namespace ET.Server
                     self.AllItemList.Add(i, new List<BagInfo>());
                 }
             }
+            
+            for (int i = self.BagBuyCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            {
+                self.BagBuyCellNumber.Add(0);
+            }
+
+            for (int i = self.BagAddCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            {
+                self.BagAddCellNumber.Add(0);
+            }
+
         }
 
         public static List<PropertyValue> GetGemProLists(this BagComponentS self)
@@ -563,17 +574,7 @@ namespace ET.Server
             //        self.WarehouseAddedCell.Add(0);
             //    }
             //}
-
-            for (int i = self.BagBuyCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
-            {
-                self.BagBuyCellNumber.Add(0);
-            }
-
-            for (int i = self.BagAddCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
-            {
-                self.BagAddCellNumber.Add(0);
-            }
-
+            
             if (self.QiangHuaLevel.Count == 0)
             {
                 for (int i = 0; i <= 11; i++)
