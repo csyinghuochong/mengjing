@@ -227,7 +227,7 @@
             //     Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
             // }
             
-            UIEventComponent.Instance?.SetUIClicked(false);
+            //UIEventComponent.Instance?.SetUIClicked(false);
             await ETTask.CompletedTask;
         }
 
