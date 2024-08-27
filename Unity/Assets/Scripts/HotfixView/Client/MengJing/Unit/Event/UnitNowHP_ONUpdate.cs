@@ -7,8 +7,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, Now_Hp_Update args)
         {
-            Log.Debug($"UnitHpUpdate:   {args.Defend.Id} {args.ChangeHpValue} ");
-
+            
             Unit unitDefend = args.Defend;
             Unit unitAttack = unitDefend.GetParent<UnitComponent>().Get(args.AttackId);
             if (unitDefend.IsDisposed)
