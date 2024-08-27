@@ -903,7 +903,7 @@ namespace ET.Server
             }
             
             //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
-            if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > CommonHelp.PetHeXinMax) &&
+            if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
                 UseLocType == ItemLocType.ItemLocBag)
             {
                 return false;
