@@ -1,10 +1,8 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Toon/BasicOutline"
 {
     Properties
     {
-        _BaseMap ("Texture", 2D) = "white" {}
+        _MainTex ("Texture", 2D) = "white" {}
         _BaseColor ("Color", Color) = (0.5, 0.5, 0.5, 1)
         [Space]
         _OutlineWidth ("Outline Width", Range(0.0, 1.0)) = 0.15
@@ -33,8 +31,8 @@ Shader "Toon/BasicOutline"
             #pragma multi_compile_instancing
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            TEXTURE2D(_BaseMap); 
-            SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_MainTex); 
+            SAMPLER(sampler_MainTex);
 
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseColor;
@@ -69,8 +67,8 @@ Shader "Toon/BasicOutline"
 
             float4 frag(Varyings input) : SV_Target
             {
-                float4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
-                return baseMap * _BaseColor;
+                float4 mainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+                return mainTex * _BaseColor;
             }
             ENDHLSL
         }
