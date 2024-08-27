@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -27,9 +28,24 @@ namespace ET.Server
                     }
                     else
                     {
-                        int tiliTimes = userInfoComponentS.GetTiLiTimes(lastdateTime.Hour, 24) + userInfoComponentS.GetTiLiTimes(0, dateTime.Hour);
-                        tiliTimes = Math.Min(tiliTimes, 4);
-                        userInfoComponentS.RecoverPiLao(tiliTimes * 30 + userInfoComponentS.GetAddPiLao(userInfo.MakeList.Count), false);
+                        List<int> indexids_1 = userInfoComponentS.GetTiLiIndexsNew(lastdateTime.Hour, 23);
+                        List<int> indexids_2 = userInfoComponentS.GetTiLiIndexsNew(0, dateTime.Hour);
+                        List<int> indexids = new List<int>();
+                        indexids.Add(0);
+                        indexids.AddRange(indexids_1);
+                        indexids.AddRange(indexids_2);
+                        if (indexids.Count > 0)
+                        {
+                            int recoverTili = userInfoComponentS.GetTiliRecover(indexids);
+                            userInfoComponentS.RecoverPiLao(recoverTili, false);
+                            string indexstr = $"{unit.Id}  two day : hour_1: {lastdateTime.Hour}  hour_2:{dateTime.Hour}   indexs: ";
+                            for (int index = 0; index < indexids.Count; index++)
+                            {
+                                indexstr = indexstr + indexids[index].ToString() + "   ";
+                            }
+                            indexstr = indexstr + $"recover: {recoverTili}";
+                            Log.Debug(indexstr);
+                        }
                     }
 
                     userInfoComponentS.OnZeroClockUpdate(false);
@@ -47,6 +63,21 @@ namespace ET.Server
                     int hour_1, hour_2 = 0;
                     hour_1 = lastdateTime.Hour;
                     hour_2 = dateTime.Hour;
+                  
+                    List<int> indexids = userInfoComponentS.GetTiLiIndexsNew(hour_1, hour_2);
+                    if (indexids.Count > 0)
+                    { 
+                        int recoverTili = userInfoComponentS.GetTiliRecover(indexids);
+                        userInfoComponentS.RecoverPiLao(recoverTili, false);
+                        string indexstr = $"{unit.Id}  one day  hour_1: {hour_1}  hour_2:{hour_2}   indexs: ";
+                        for (int index = 0; index < indexids.Count; index++)
+                        {
+                            indexstr = indexstr + indexids[index].ToString() + "   ";
+                        }
+                        indexstr = indexstr + $"recover: {recoverTili}";
+                        Log.Debug(indexstr);
+                    }
+                    
                     unit.GetComponent<JiaYuanComponentS>().OnLoginCheck(hour_1, hour_2);
                 }
             }

@@ -10230,7 +10230,7 @@ namespace ET
         /// 正在孵化的宠物蛋
         /// </summary>
         [MemoryPackOrder(2)]
-        public List<KeyValuePairInt> RolePetEggs { get; set; } = new();
+        public List<KeyValuePairLong> RolePetEggs { get; set; } = new();
 
         [MemoryPackOrder(3)]
         public List<long> PetFormations { get; set; } = new();
@@ -12388,8 +12388,8 @@ namespace ET
         [MemoryPackOrder(91)]
         public int Error { get; set; }
 
-        [MemoryPackOrder(0)]
-        public KeyValuePairInt RolePetEgg { get; set; }
+        [MemoryPackOrder(1)]
+        public KeyValuePairLong RolePetEgg { get; set; }
 
         public override void Dispose()
         {
@@ -12525,7 +12525,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public KeyValuePairInt RolePetEgg { get; set; }
+        public KeyValuePairLong RolePetEgg { get; set; }
 
         public override void Dispose()
         {
@@ -13100,7 +13100,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public KeyValuePairInt RolePetEgg { get; set; }
+        public KeyValuePairLong RolePetEgg { get; set; }
 
         public override void Dispose()
         {

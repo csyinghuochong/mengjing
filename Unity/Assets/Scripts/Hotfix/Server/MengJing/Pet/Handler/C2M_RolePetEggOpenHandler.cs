@@ -9,15 +9,15 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_RolePetEggOpen request, M2C_RolePetEggOpen response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId == 0)
             {
                 return;
             }
 
-            ItemConfig itemConf = ItemConfigCategory.Instance.Get(rolePetEgg.KeyId);
+            ItemConfig itemConf = ItemConfigCategory.Instance.Get((int)rolePetEgg.KeyId);
             string[] petinfos = itemConf.ItemUsePar.Split('@');
-            int needCost = CommonHelp.ReturnPetOpenTimeDiamond(rolePetEgg.KeyId,rolePetEgg.Value);
+            int needCost = CommonHelp.ReturnPetOpenTimeDiamond((int)rolePetEgg.KeyId,rolePetEgg.Value);
             
             if (unit.GetComponent<UserInfoComponentS>().GetDiamond() < needCost)
             {
@@ -44,7 +44,7 @@ namespace ET.Server
             }
            
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent( TaskTargetType.PetFuHuaNumber_34, 0, 1 );
-            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetFuHuaId_35, (int)rolePetEgg.KeyId, 1);
           
             rolePetEgg.KeyId = 0;
             rolePetEgg.Value = 0;

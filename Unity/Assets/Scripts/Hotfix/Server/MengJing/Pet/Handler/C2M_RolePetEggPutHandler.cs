@@ -7,7 +7,7 @@
         protected override async ETTask Run(Unit unit, C2M_RolePetEggPut request, M2C_RolePetEggPut response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId != 0)
             {
                 return;
@@ -21,8 +21,10 @@
             }
             
             bagComponent.OnCostItemData(request.BagInfoId, 1);
-            rolePetEgg.KeyId = useBagInfo.ItemID;
-            rolePetEgg.Value = 0;
+            rolePetEgg.KeyId = useBagInfo.ItemID;   //道具Id
+            rolePetEgg.Value = 0;                   //孵化時間
+            rolePetEgg.Value2 = useBagInfo.FuLing;  //附灵
+  
             response.RolePetEgg = rolePetEgg;
             await ETTask.CompletedTask;
         }

@@ -82,7 +82,7 @@ namespace ET.Client
                 return;
             }
 
-            int costValue = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
+            int costValue = CommonHelp.ReturnPetOpenTimeDiamond((int)self.RolePetEgg.KeyId, self.RolePetEgg.Value);
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue), () => { self.OnButtonGetButton().Coroutine(); })
@@ -114,7 +114,7 @@ namespace ET.Client
                 return;
             }
 
-            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[self.Index];
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[self.Index];
             if (rolePetEgg.KeyId == 0)
             {
                 return;
@@ -123,7 +123,7 @@ namespace ET.Client
             int needCost = 0;
             if (TimeHelper.ServerNow() < rolePetEgg.Value)
             {
-                needCost = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
+                needCost = CommonHelp.ReturnPetOpenTimeDiamond((int)self.RolePetEgg.KeyId, self.RolePetEgg.Value);
             }
 
             if (userInfo.Diamond < needCost)
@@ -161,7 +161,7 @@ namespace ET.Client
         {
             self.E_ButtonFuHuaButton.gameObject.SetActive(true);
 
-            string[] useparams = ItemConfigCategory.Instance.Get(self.RolePetEgg.KeyId).ItemUsePar.Split('@');
+            string[] useparams = ItemConfigCategory.Instance.Get((int)self.RolePetEgg.KeyId).ItemUsePar.Split('@');
             long timeNow = long.Parse(useparams[0]);
             using (zstring.Block())
             {
@@ -188,7 +188,7 @@ namespace ET.Client
             self.E_ButtonGetButton.gameObject.SetActive(true);
         }
 
-        public static void OnUpdateUI(this ES_PetEggListItem self, KeyValuePairInt rolePetEgg, int index)
+        public static void OnUpdateUI(this ES_PetEggListItem self, KeyValuePairLong rolePetEgg, int index)
         {
             self.Index = index;
             self.RolePetEgg = rolePetEgg;
@@ -200,7 +200,7 @@ namespace ET.Client
                 return;
             }
 
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(rolePetEgg.KeyId);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get((int)rolePetEgg.KeyId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 

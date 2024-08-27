@@ -457,6 +457,7 @@ namespace ET.Server
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.YueKaRemainTimes, 7);
+            numericComponent.ApplyValue(NumericType.YueKaEndTime, 7);
         }
         
         public static bool IsJingLingMonster(this Unit self)

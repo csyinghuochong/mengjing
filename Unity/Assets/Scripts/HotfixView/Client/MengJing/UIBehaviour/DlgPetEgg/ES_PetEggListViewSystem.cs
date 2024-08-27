@@ -102,7 +102,7 @@ namespace ET.Client
         public static async ETTask RequestHatch(this ES_PetEggList self, int index, BagInfo bagInfo)
         {
             ES_PetEggListItem esPetEggListItem = self.PetList[index];
-            KeyValuePairInt oldEgg = esPetEggListItem.RolePetEgg;
+            KeyValuePairLong oldEgg = esPetEggListItem.RolePetEgg;
             if (oldEgg != null && oldEgg.KeyId > 0)
             {
                 return;
@@ -147,7 +147,7 @@ namespace ET.Client
             self.EG_IconItemDargRectTransform.gameObject.SetActive(true);
             self.EG_IconItemDargRectTransform.localScale = Vector3.one * 2f;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(petComponent.RolePetEggs[binfo].KeyId);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get((int)petComponent.RolePetEggs[binfo].KeyId);
             GameObject icon = self.EG_IconItemDargRectTransform.Find("ImageIcon").gameObject;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

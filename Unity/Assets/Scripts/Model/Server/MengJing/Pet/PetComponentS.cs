@@ -17,7 +17,7 @@ namespace ET.Server
         public List<int>  PetCangKuOpen { get; set; }= new List<int>(); 
 
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
-        public List<KeyValuePairInt> RolePetEggs { get; set; }= new List<KeyValuePairInt>(); 
+        public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 
         public List<PetFubenInfo> PetFubenInfos{ get; set; }= new List<PetFubenInfo>(); 
         public List<KeyValuePair> PetSkinList { get; set; }= new List<KeyValuePair>(); 
 

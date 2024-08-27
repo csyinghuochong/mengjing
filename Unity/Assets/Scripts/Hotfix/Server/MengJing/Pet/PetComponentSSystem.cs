@@ -85,7 +85,7 @@ namespace ET.Server
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    self.RolePetEggs.Add(new KeyValuePairInt());
+                    self.RolePetEggs.Add(new KeyValuePairLong());
                 }
             }
             if (self.PetFormations.Count != 9)

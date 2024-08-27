@@ -7,7 +7,7 @@
         protected override async ETTask Run(Unit unit, C2M_RolePetEggPutOut request, M2C_RolePetEggPutOut response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             bagComponent.OnAddItemData($"{rolePetEgg.KeyId};1", $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
             rolePetEgg.KeyId = 0;

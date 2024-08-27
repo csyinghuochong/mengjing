@@ -34,15 +34,7 @@ namespace ET.Server
              {
                  numericComponent.ApplyValue(NumericType.JianYuanCangKu, 1, false);
              }
-
-             long yuekeEndTime = numericComponent.GetAsLong(NumericType.YueKaEndTime) - TimeHelper.ServerNow();
-             if (yuekeEndTime > 0)
-             {
-                 int leftDay = (int)math.ceil(yuekeEndTime * 1f / TimeHelper.OneDay);
-                 leftDay = math.min(7, leftDay);
-                 numericComponent.ApplyValue(NumericType.YueKaEndTime, 0, false);
-                 numericComponent.ApplyValue(NumericType.YueKaRemainTimes, leftDay, false);
-             }
+             
              if (numericComponent.GetAsFloat(NumericType.ChouKaTenTime) == 0)
              {
                  numericComponent.ApplyValue(NumericType.ChouKaTenTime, TimeHelper.ServerNow(), false);

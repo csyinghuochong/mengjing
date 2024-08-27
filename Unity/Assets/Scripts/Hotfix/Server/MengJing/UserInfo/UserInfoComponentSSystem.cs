@@ -177,6 +177,60 @@ namespace ET.Server
             }
             return 5;
         }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="hour_1"></param>
+        /// <param name="hour_2"></param>  0 6 12 20
+        /// <returns></returns>
+        public static List<int> GetTiLiIndexsNew(this UserInfoComponentS self, int hour_1, int hour_2)
+        {
+            List<int> indexs = new  List<int>();    
+            if (hour_1 >= hour_2)
+            {
+
+                return indexs;
+            }
+            if (hour_1 < 6 && hour_2 >= 6)
+            {
+                indexs.Add(6);
+            }
+            if (hour_1 < 12 && hour_2 >= 12)
+            {
+                indexs.Add(12);
+            }
+            if (hour_1 < 20 && hour_2 >= 20)
+            {
+                indexs.Add(20);
+            }
+
+            return indexs;
+        }
+
+        public static int GetTiliRecover(this UserInfoComponentS self, List<int> indexids)
+        {
+            int totalTili = 0;
+            int totalindex = indexids.Count;
+            if (totalindex >= 1 && indexids.Contains(6))
+            {
+                totalTili += 50;
+                totalindex--;
+            }
+            if (totalindex >= 1 && indexids.Contains(20))
+            {
+                totalTili += 50;
+                totalindex--;
+            }
+            if (totalindex >= 1)
+            {
+                totalTili = totalTili + totalindex * 30;
+                totalindex = 0;
+            }
+            return totalTili;
+        }
+
         
         public static int GetTiLiTimes(this UserInfoComponentS self, int hour_1, int hour_2)
         {

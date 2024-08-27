@@ -7,10 +7,10 @@
         protected override async ETTask Run(Unit unit, C2M_RolePetEggHatch request, M2C_RolePetEggHatch response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
+            KeyValuePairLong rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.Value == 0 && rolePetEgg.KeyId!= 0)
             {
-                string[] useparams = ItemConfigCategory.Instance.Get(rolePetEgg.KeyId).ItemUsePar.Split('@');
+                string[] useparams = ItemConfigCategory.Instance.Get((int)rolePetEgg.KeyId).ItemUsePar.Split('@');
                 long needTime = long.Parse(useparams[0]);
                 rolePetEgg.Value = TimeHelper.ServerNow() + needTime * 1000;
             }

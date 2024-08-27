@@ -9,7 +9,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetEggListItem : Entity,IAwake<Transform>,IDestroy 
 	{
-		public KeyValuePairInt RolePetEgg;
+		public KeyValuePairLong RolePetEgg;
 		public Action<int, PointerEventData> BeginDragHandler;
 		public Action<int, PointerEventData> DragingHandler;
 		public Action<int, PointerEventData> EndDragHandler;
