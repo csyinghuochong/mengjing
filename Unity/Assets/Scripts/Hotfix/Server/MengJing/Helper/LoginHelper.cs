@@ -6,6 +6,61 @@ namespace ET.Server
     
     public static class LoginHelper
     {
+        
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="hour_1"></param>
+        /// <param name="hour_2"></param>  0 6 12 20
+        /// <returns></returns>
+        public static List<int> GetTiLiIndexsNew( int hour_1, int hour_2)
+        {
+            List<int> indexs = new  List<int>();    
+            if (hour_1 >= hour_2)
+            {
+
+                return indexs;
+            }
+            if (hour_1 < 6 && hour_2 >= 6)
+            {
+                indexs.Add(6);
+            }
+            if (hour_1 < 12 && hour_2 >= 12)
+            {
+                indexs.Add(12);
+            }
+            if (hour_1 < 20 && hour_2 >= 20)
+            {
+                indexs.Add(20);
+            }
+
+            return indexs;
+        }
+
+        public static int GetTiliRecover(List<int> indexids)
+        {
+            int totalTili = 0;
+            int totalindex = indexids.Count;
+            if (totalindex >= 1 && indexids.Contains(6))
+            {
+                totalTili += 50;
+                totalindex--;
+            }
+            if (totalindex >= 1 && indexids.Contains(20))
+            {
+                totalTili += 50;
+                totalindex--;
+            }
+            if (totalindex >= 1)
+            {
+                totalTili = totalTili + totalindex * 30;
+                totalindex = 0;
+            }
+            return totalTili;
+        }
+
+        
         public static void OnLogin(this Unit unit, string remoteIp, string deviceName)
         {
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
@@ -28,15 +83,15 @@ namespace ET.Server
                     }
                     else
                     {
-                        List<int> indexids_1 = userInfoComponentS.GetTiLiIndexsNew(lastdateTime.Hour, 23);
-                        List<int> indexids_2 = userInfoComponentS.GetTiLiIndexsNew(0, dateTime.Hour);
+                        List<int> indexids_1 = GetTiLiIndexsNew(lastdateTime.Hour, 23);
+                        List<int> indexids_2 = GetTiLiIndexsNew(0, dateTime.Hour);
                         List<int> indexids = new List<int>();
                         indexids.Add(0);
                         indexids.AddRange(indexids_1);
                         indexids.AddRange(indexids_2);
                         if (indexids.Count > 0)
                         {
-                            int recoverTili = userInfoComponentS.GetTiliRecover(indexids);
+                            int recoverTili = GetTiliRecover(indexids);
                             userInfoComponentS.RecoverPiLao(recoverTili, false);
                             string indexstr = $"{unit.Id}  two day : hour_1: {lastdateTime.Hour}  hour_2:{dateTime.Hour}   indexs: ";
                             for (int index = 0; index < indexids.Count; index++)
@@ -64,10 +119,10 @@ namespace ET.Server
                     hour_1 = lastdateTime.Hour;
                     hour_2 = dateTime.Hour;
                   
-                    List<int> indexids = userInfoComponentS.GetTiLiIndexsNew(hour_1, hour_2);
+                    List<int> indexids = GetTiLiIndexsNew(hour_1, hour_2);
                     if (indexids.Count > 0)
                     { 
-                        int recoverTili = userInfoComponentS.GetTiliRecover(indexids);
+                        int recoverTili = GetTiliRecover(indexids);
                         userInfoComponentS.RecoverPiLao(recoverTili, false);
                         string indexstr = $"{unit.Id}  one day  hour_1: {hour_1}  hour_2:{hour_2}   indexs: ";
                         for (int index = 0; index < indexids.Count; index++)
@@ -86,7 +141,7 @@ namespace ET.Server
                 Log.Debug($"OnZeroClockUpdate [数据初始化]: {unit.Id}");
                 unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
             }
-            userInfoComponentS.OnLogin( remoteIp,  deviceName);
+            userInfoComponentS.OnLogin( remoteIp,  deviceName, currentTime);
             unit.GetComponent<BagComponentS>().OnLogin(userInfo.RobotId);
             unit.GetComponent<TaskComponentS>().OnLogin(userInfo.RobotId);
             unit.GetComponent<HeroDataComponentS>().OnLogin(userInfo.RobotId);
