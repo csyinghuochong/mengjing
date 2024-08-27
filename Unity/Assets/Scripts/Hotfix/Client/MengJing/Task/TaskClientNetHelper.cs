@@ -48,7 +48,7 @@ namespace ET.Client
 
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
             List<RewardItem> rewardItems = TaskHelper.GetTaskRewards(taskid, taskConfig);
-            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < rewardItems.Count)
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewardItems.Count)
             {
                 return ErrorCode.ERR_BagIsFull;
             }

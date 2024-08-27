@@ -34,7 +34,7 @@ namespace ET.Client
                 return;
             }
 
-            int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell();
+            int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag);
             if (leftSpace < 1)
             {
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);

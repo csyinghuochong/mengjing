@@ -134,7 +134,7 @@ namespace ET.Client
         public static async ETTask GemHeCheng(Scene root)
         {
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 // 请至少预留一个格子
                 return;
@@ -1349,7 +1349,7 @@ namespace ET.Client
                     return;
                 }
 
-                if (bagComponent.GetBagLeftCell() <= 1)
+                if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) <= 1)
                 {
                     // 背包空间不足！
                     return;
@@ -1360,13 +1360,13 @@ namespace ET.Client
 
             // 抽卡
             int choukaType = 1;
-            if (bagComponent.GetBagLeftCell() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < choukaType)
             {
                 // 请预留足够的背包空间！
                 return;
             }
 
-            if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemPetHeXinBag) < choukaType)
             {
                 // 请清理一下宠物之核背包！
                 return;
@@ -1410,13 +1410,13 @@ namespace ET.Client
 
             // 核心抽卡
             choukaType = 1;
-            if (bagComponent.GetBagLeftCell() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < choukaType)
             {
                 // 请预留足够的背包空间！
                 return;
             }
 
-            if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemPetHeXinBag) < choukaType)
             {
                 // 请清理一下宠物之核背包！
                 return;
@@ -1559,7 +1559,7 @@ namespace ET.Client
                 return;
             }
 
-            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 // "背包已满！"
                 return;
@@ -2331,7 +2331,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
 
-            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 // 背包已满！
                 return;
@@ -2531,7 +2531,7 @@ namespace ET.Client
                 }
 
                 string[] rewarditemlist = ConfigData.SingleRechargeReward[key].Split('@');
-                if (root.GetComponent<BagComponentC>().GetBagLeftCell() < rewarditemlist.Length)
+                if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
                 {
                     // "背包空间不足"
                     continue;

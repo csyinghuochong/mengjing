@@ -100,7 +100,7 @@ namespace ET.Client
                 }
             }
 
-            int allNumber = bagComponentC.GetBagShowCell();
+            int allNumber = bagComponentC.GetBagShowCell(ItemLocType.ItemLocBag);
 
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
             self.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);

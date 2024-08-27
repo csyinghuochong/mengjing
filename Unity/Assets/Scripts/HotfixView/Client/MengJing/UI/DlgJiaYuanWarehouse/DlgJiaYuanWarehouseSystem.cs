@@ -135,7 +135,7 @@ namespace ET.Client
                 (int)ItemLocType.JianYuanWareHouse1)));
 
             int allNumber =
-                    bagComponentC.GetHouseShowCell(self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
+                    bagComponentC.GetBagLeftCell(self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, allNumber);
             self.View.E_BagItems1LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
@@ -146,7 +146,7 @@ namespace ET.Client
 
             self.ShowBagBagInfos.Clear();
             self.ShowBagBagInfos.AddRange(bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag));
-            int allNumber = bagComponentC.GetBagShowCell();
+            int allNumber = bagComponentC.GetBagShowCell(ItemLocType.ItemLocBag);
 
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
             self.View.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);

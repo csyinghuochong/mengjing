@@ -56,7 +56,7 @@ namespace ET.Client
                 }
             }
 
-            return self.GetBagLeftCell() >= cellNumber;
+            return self.GetBagLeftCell(ItemLocType.ItemLocBag) >= cellNumber;
         }
 
         public static List<BagInfo> GetCurJingHeList(this BagComponentC self)
@@ -393,27 +393,7 @@ namespace ET.Client
         {
             return self.AllItemList[(int)ItemLocType.ItemLocBag];
         }
-
-        public static int GetBagLeftCell(this BagComponentC self)
-        {
-            return self.GetBagTotalCell() - self.GetBagList().Count;
-        }
-
-        public static int GetBagTotalCell(this BagComponentC self)
-        {
-            if (self.WarehouseAddedCell.Count == 0 || self.AdditionalCellNum.Count == 0)
-            {
-                return GlobalValueConfigCategory.Instance.BagInitCapacity;
-            }
-
-            return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity;
-        }
-
-        public static int GetBagShowCell(this BagComponentC self)
-        {
-            return self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity + GlobalValueConfigCategory.Instance.Get(84).Value2;
-        }
-
+        
         public static List<BagInfo> GetEquipListByWeizhi(this BagComponentC self, int position)
         {
             List<BagInfo> bagInfos = new List<BagInfo>();
@@ -435,22 +415,42 @@ namespace ET.Client
             return self.AllItemList[(int)ItemLocType.ItemLocEquip];
         }
 
-        public static int GetHouseTotalCell(this BagComponentC self, int houseId)
+        public static int GetBagLeftCell(this BagComponentC self, int hourseId)
         {
-            return self.WarehouseAddedCell[houseId] + self.AdditionalCellNum[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity;
+            List<BagInfo> ItemTypeList = self.AllItemList[hourseId];
+            return self.GetBagTotalCell(hourseId) - ItemTypeList.Count;
+        }
+        
+        public static int GetBagTotalCell(this BagComponentC self, int hourseId)
+        {
+            int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity;  //仓库
+            if (hourseId == (int)ItemLocType.GemWareHouse1)
+            {
+                storeCapacity = GlobalValueConfigCategory.Instance.GemStoreInitCapacity; //宝石仓库
+            }
+            if (hourseId == (int)ItemLocType.ItemLocBag)
+            {
+                storeCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity; //背包
+            }
+            if (hourseId == (int)ItemLocType.ItemPetHeXinBag)
+            {
+                storeCapacity = GlobalValueConfigCategory.Instance.PetHeXinMax; //宠物之核背包
+            }
+
+            return storeCapacity + self.BagBuyCellNumber[hourseId] + self.BagAddCellNumber[hourseId];
         }
 
-        public static int GetHouseShowCell(this BagComponentC self, int houseId)
+        public static int GetBagShowCell(this BagComponentC self, int houseId)
         {
-            return self.AdditionalCellNum[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
+            if (houseId == ItemLocType.ItemLocBag)
+            {
+                return self.BagAddCellNumber[0] + GlobalValueConfigCategory.Instance.BagInitCapacity + GlobalValueConfigCategory.Instance.Get(84).Value2;
+            }
+
+            return self.BagAddCellNumber[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
                     GlobalValueConfigCategory.Instance.Get(85).Value2;
         }
-
-        public static int GetPetHeXinLeftSpace(this BagComponentC self)
-        {
-            return CommonHelp.PetHeXinMax - self.GetItemsByLoc(ItemLocType.ItemPetHeXinBag).Count;
-        }
-
+        
         public static List<BagInfo> GetCanJianDing(this BagComponentC self)
         {
             List<BagInfo> bagInfos = new List<BagInfo>();

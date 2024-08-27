@@ -29,7 +29,7 @@ namespace ET.Client
         public static async ETTask OnButtonHeChengButton(this ES_WarehouseGem self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请至少预留一个格子");
                 return;
@@ -81,7 +81,7 @@ namespace ET.Client
                 }
             }
 
-            int allNumber = bagComponentC.GetBagShowCell();
+            int allNumber = bagComponentC.GetBagShowCell(ItemLocType.ItemLocBag);
 
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
             self.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);

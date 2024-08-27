@@ -61,7 +61,7 @@ namespace ET.Client
         public static async ETTask OnBtn_BuyButton(this DlgPaiMaiBuyTip self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足");
                 return;

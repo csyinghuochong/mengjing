@@ -131,7 +131,7 @@ namespace ET.Client
 
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityId);
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < ItemHelper.GetNeedCell(activityConfig.Par_2))
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < ItemHelper.GetNeedCell(activityConfig.Par_2))
             {
                 FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
                 return;

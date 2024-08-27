@@ -19,7 +19,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonBuy(this Scroll_Item_UnionMysteryItem_A self)
         {
-            int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell();
+            int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag);
             if (leftSpace < 1)
             {
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);

@@ -47,7 +47,7 @@ namespace ET.Client
                 return;
             }
 
-            if (bagComponent.GetBagLeftCell() <= 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) <= 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;

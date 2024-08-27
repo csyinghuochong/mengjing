@@ -42,7 +42,7 @@
             }
 
             string[] rewarditemlist = ConfigData.SingleRechargeReward[self.Key].Split('@');
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < rewarditemlist.Length)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足");
                 return;

@@ -168,7 +168,7 @@ namespace ET.Client
 
         public static async ETTask RequestXieXia(this ES_PetEggList self, int binfo)
         {
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;

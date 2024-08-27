@@ -108,7 +108,7 @@ namespace ET.Client
             self.ShowBagBagInfos.Clear();
             self.ShowBagBagInfos.AddRange(self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag));
 
-            int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell();
+            int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell(ItemLocType.ItemLocBag);
             self.AddUIScrollItems(ref self.ScrollItemBagItems, bagcellNumber);
             self.View.E_BagItems2LoopVerticalScrollRect.SetVisible(true, bagcellNumber);
         }

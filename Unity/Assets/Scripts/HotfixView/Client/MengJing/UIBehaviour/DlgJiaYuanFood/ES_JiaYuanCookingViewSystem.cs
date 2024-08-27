@@ -31,7 +31,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonMakeButton(this ES_JiaYuanCooking self)
         {
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;
@@ -148,7 +148,7 @@ namespace ET.Client
                 }
             }
 
-            int max = bagComponent.GetBagTotalCell();
+            int max = bagComponent.GetBagTotalCell(ItemLocType.ItemLocBag);
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, max);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, max);
         }

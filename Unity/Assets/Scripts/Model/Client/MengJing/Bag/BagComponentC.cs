@@ -15,12 +15,12 @@ namespace ET.Client
         /// <summary>
         /// ItemLocType.ItemLocBag 
         /// </summary>
-        public List<int> WarehouseAddedCell { get; set; } = new();
+        public List<int> BagBuyCellNumber { get; set; } = new();
 
         /// <summary>
         /// 附加格子，ItemLocType.ItemLocBag
         /// </summary>
-        public List<int> AdditionalCellNum { get; set; } = new();
+        public List<int> BagAddCellNumber { get; set; } = new();
 
         /// <summary>
         /// 激活的时装

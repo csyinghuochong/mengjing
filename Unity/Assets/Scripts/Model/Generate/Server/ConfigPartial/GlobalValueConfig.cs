@@ -27,6 +27,7 @@ namespace ET
 
         public int BagInitCapacity = 0;
         public int BagMaxCapacity = 0;
+        public int PetHeXinMax = 200;
 
         public int HourseInitCapacity = 0;
         public int HourseMaxCapacity = 0;

@@ -396,7 +396,7 @@ namespace ET.Client
 
         public static void OnShiquItem(this ES_MainSkill self, float distance)
         {
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <= 0)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) <= 0)
             {
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);
                 return;

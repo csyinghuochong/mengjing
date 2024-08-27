@@ -33,7 +33,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) <
                 ConfigData.ItemXiLianNumReward[self.RewardKey].Split('@').Length - 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");

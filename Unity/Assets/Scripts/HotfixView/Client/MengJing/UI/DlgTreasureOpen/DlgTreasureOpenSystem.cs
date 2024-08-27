@@ -228,7 +228,7 @@ namespace ET.Client
         public static void OnButtonOpen(this DlgTreasureOpen self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;

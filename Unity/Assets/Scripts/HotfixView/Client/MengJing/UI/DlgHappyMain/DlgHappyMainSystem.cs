@@ -141,7 +141,7 @@ namespace ET.Client
 
         public static void OnButtonPick(this DlgHappyMain self)
         {
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <= 0)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) <= 0)
             {
                 HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);
                 return;

@@ -162,7 +162,7 @@ namespace ET.Client
 
         public static async ETTask OnGetBtnButton(this ES_SeasonHome self)
         {
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 5)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 5)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;

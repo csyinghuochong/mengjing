@@ -108,13 +108,13 @@ namespace ET.Client
         public static async ETTask OnBtn_ChouKa(this ES_PetEggChouKa self, int choukaType)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < choukaType)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请预留足够的背包空间！");
                 return;
             }
 
-            if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < choukaType)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请清理一下宠物之核背包！");
                 return;

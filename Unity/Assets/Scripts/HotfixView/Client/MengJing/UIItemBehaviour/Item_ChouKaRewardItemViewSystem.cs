@@ -31,7 +31,7 @@
                 return;
             }
 
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < self.TakeCardRewardConfig.RewardItems.Split('@').Length)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < self.TakeCardRewardConfig.RewardItems.Split('@').Length)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;

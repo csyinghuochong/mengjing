@@ -207,7 +207,7 @@ namespace ET.Client
         public static async ETTask OnBtn_ReceiveButton(this ES_TrialDungeon self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 2)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 2)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请清理一下背包！");
                 return;

@@ -35,7 +35,7 @@ namespace ET.Client
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            int openell = bagComponent.GetBagTotalCell();
+            int openell = bagComponent.GetBagTotalCell(ItemLocType.ItemLocBag);
             if (index < openell)
             {
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
@@ -44,7 +44,7 @@ namespace ET.Client
             }
             else
             {
-                int addcell = bagComponent.WarehouseAddedCell[0] + (index - openell);
+                int addcell = bagComponent.BagBuyCellNumber[0] + (index - openell);
                 BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
@@ -142,7 +142,7 @@ namespace ET.Client
         public static void OnClickImage_Lock(this ES_RoleBag self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.WarehouseAddedCell[0]];
+            BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.BagBuyCellNumber[0]];
 
             using (zstring.Block())
             {
@@ -183,7 +183,7 @@ namespace ET.Client
                     break;
             }
 
-            int allNumber = bagComponentC.GetBagShowCell();
+            int allNumber = bagComponentC.GetBagShowCell(ItemLocType.ItemLocBag);
             // int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
             self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, allNumber);
@@ -210,7 +210,7 @@ namespace ET.Client
         private static void OnOneGemButton(this ES_RoleBag self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请至少预留一个格子");
                 return;

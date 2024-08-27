@@ -472,7 +472,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 113 || itemConfig.ItemSubType == 127)
             {
-                if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+                if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("背包格子不够！");
                     return;
@@ -548,7 +548,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 139)
             {
-                if (self.Root().GetComponent<BagComponentC>().AdditionalCellNum[0] >= 10)
+                if (self.Root().GetComponent<BagComponentC>().BagAddCellNumber[0] >= 10)
                 {
                     FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
                     return;
@@ -557,7 +557,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 140)
             {
-                if (self.Root().GetComponent<BagComponentC>().AdditionalCellNum[5] >= 10)
+                if (self.Root().GetComponent<BagComponentC>().BagAddCellNumber[5] >= 10)
                 {
                     FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
                     return;

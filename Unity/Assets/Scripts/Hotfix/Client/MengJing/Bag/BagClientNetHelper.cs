@@ -20,11 +20,11 @@ namespace ET.Client
             }
             bagComponentC.QiangHuaLevel = response.QiangHuaLevel;
             bagComponentC.QiangHuaFails = response.QiangHuaFails;
-            bagComponentC.WarehouseAddedCell = response.WarehouseAddedCell;
+            bagComponentC.BagBuyCellNumber = response.WarehouseAddedCell;
             bagComponentC.FashionActiveIds = response.FashionActiveIds;
             bagComponentC.FashionEquipList = response.FashionEquipList;
             bagComponentC.SeasonJingHePlan = response.SeasonJingHePlan;
-            bagComponentC.AdditionalCellNum = response.AdditionalCellNum;
+            bagComponentC.BagAddCellNumber = response.AdditionalCellNum;
             return ErrorCode.ERR_Success;
         }
 
@@ -579,7 +579,7 @@ namespace ET.Client
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(sellId);
             int needCell = ItemHelper.GetNeedCell($"{storeSellConfig.SellItemID};{storeSellConfig.SellItemNum * buyNum}");
-            if (bagComponent.GetBagLeftCell() < needCell)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < needCell)
             {
                 HintHelp.ShowHint(root, "背包已经满");
                 return;

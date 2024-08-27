@@ -40,7 +40,7 @@ namespace ET.Client
                 needcell += (int)Math.Ceiling(bagInfo.ItemNum * 1f / itemConfig.ItemPileSum);
             }
 
-            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < needcell)
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < needcell)
             {
                 return ErrorCode.ERR_BagIsFull;
             }

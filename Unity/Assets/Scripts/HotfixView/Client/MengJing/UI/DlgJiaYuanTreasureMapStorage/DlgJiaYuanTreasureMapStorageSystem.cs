@@ -92,7 +92,7 @@ namespace ET.Client
 
         public static void UpdateBagList(this DlgJiaYuanTreasureMapStorage self)
         {
-            int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell();
+            int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell(ItemLocType.ItemLocBag);
 
             List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
 

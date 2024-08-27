@@ -390,6 +390,10 @@ namespace ET.Server
             {
                 storeCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity; //背包
             }
+            if (hourseId == (int)ItemLocType.ItemPetHeXinBag)
+            {
+                storeCapacity = GlobalValueConfigCategory.Instance.PetHeXinMax; //宠物之核背包
+            }
 
             return storeCapacity + self.BagBuyCellNumber[hourseId] + self.BagAddCellNumber[hourseId];
         }

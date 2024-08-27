@@ -101,7 +101,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包已满！");
                 return;
