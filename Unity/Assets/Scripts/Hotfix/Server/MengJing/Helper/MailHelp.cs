@@ -81,12 +81,12 @@ namespace ET.Server
                         return false;
                     }
 
-                    if (bagComponent.WarehouseAddedCell.Count < 10)
+                    if (bagComponent.BagBuyCellNumber.Count < 10)
                     {
                         return false;
                     }
 
-                    if (bagComponent.WarehouseAddedCell[6] >= 10)
+                    if (bagComponent.BagBuyCellNumber[6] >= 10)
                     {
                         return false;
                     }

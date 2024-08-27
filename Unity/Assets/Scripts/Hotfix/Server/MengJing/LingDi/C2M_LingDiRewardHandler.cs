@@ -15,7 +15,7 @@
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
             }
-            if (unit.GetComponent<BagComponentS>().IsBagFull())
+            if (unit.GetComponent<BagComponentS>().IsBagFullByLoc(ItemLocType.ItemLocBag))
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

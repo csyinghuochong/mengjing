@@ -8,7 +8,7 @@
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.XiaJia, unit.Id))
             {
-                if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
+                if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                 {
                     return;
                 }

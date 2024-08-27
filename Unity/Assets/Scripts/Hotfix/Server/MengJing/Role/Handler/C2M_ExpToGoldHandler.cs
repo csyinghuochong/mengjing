@@ -18,7 +18,7 @@ namespace ET.Server
             }
 
             //背包已满
-            if (unit.GetComponent<BagComponentS>().IsBagFull()) {
+            if (unit.GetComponent<BagComponentS>().IsBagFullByLoc(ItemLocType.ItemLocBag)) {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }

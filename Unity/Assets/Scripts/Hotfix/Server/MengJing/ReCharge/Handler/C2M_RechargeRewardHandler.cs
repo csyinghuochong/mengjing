@@ -29,7 +29,7 @@
 
             string rewarditem = ConfigData.RechargeReward[request.RechargeNumber];
             string[] rewardList = rewarditem.Split('@');
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewardList.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewardList.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

@@ -26,7 +26,7 @@ namespace ET.Server
             }
             List<RewardItem> droplist = new List<RewardItem>();
             DropHelper.DropIDToDropItem_2(dropId, droplist);
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < droplist.Count)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < droplist.Count)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

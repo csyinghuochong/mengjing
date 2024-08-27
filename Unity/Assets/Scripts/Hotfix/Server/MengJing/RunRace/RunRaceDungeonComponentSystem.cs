@@ -230,7 +230,7 @@ namespace ET.Server
                         mailInfo.ItemList.Add(BagInfo);
                     }
 
-                    if (itemList.Length <= bagComponent.GetBagLeftCell())
+                    if (itemList.Length <= bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag))
                     {
                         bagComponent.OnAddItemData(rankRewardConfig.RewardItems, $"{ItemGetWay.RunRace}_{serverTime}");
                     }

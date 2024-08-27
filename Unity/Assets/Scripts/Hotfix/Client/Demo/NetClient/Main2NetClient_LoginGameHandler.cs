@@ -38,7 +38,6 @@ namespace ET.Client
                  return;
              }
              
-             Log.Debug("登陆Map成功!");
              response.PlayerId = g2CEnterGame.MyId;
         }
     }

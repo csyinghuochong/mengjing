@@ -38,7 +38,7 @@ namespace ET.Server
             if (monsterConfig.MonsterSonType == 57) 
             {
                 //背包是否满
-                if (unit.GetComponent<BagComponentS>().IsBagFull())
+                if (unit.GetComponent<BagComponentS>().IsBagFullByLoc(ItemLocType.ItemLocBag))
                 {
                     response.Error = ErrorCode.ERR_BagIsFull;
                     return;

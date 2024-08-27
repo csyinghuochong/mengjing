@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanGatherOtherRequest request, M2C_JiaYuanGatherOtherResponse response)
         {
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

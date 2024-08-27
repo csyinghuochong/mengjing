@@ -6,5 +6,7 @@ namespace ET.Client
         public long Ping { get; set; } //延迟值
 
         public int SceneType { get; set; }
+
+        public long Timer { get; set; }
     }
 }

@@ -17,7 +17,7 @@
             }
             string reward = GlobalValueConfigCategory.Instance.Get(28).Value;
             int itemNumber = reward.Split('@').Length;
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < itemNumber)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < itemNumber)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

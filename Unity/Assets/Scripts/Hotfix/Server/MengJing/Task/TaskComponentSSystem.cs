@@ -514,7 +514,7 @@ namespace ET.Server
 
             }
 
-            if (bagComponent.GetBagLeftCell() + 1 < rewardItems.Count)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) + 1 < rewardItems.Count)
             {
                 return ErrorCode.ERR_BagIsFull;
             }

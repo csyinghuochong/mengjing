@@ -16,7 +16,7 @@ namespace ET.Server
                 return;
             }
 
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

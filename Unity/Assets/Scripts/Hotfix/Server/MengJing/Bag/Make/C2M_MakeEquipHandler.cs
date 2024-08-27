@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_MakeEquipRequest request, M2C_MakeEquipResponse response)
         {
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() == 0)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) == 0)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

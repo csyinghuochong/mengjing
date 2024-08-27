@@ -25,7 +25,7 @@
                 return;
             }
             string[] rewarditemlist = rewardConfig.RewardItems.Split('@');
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewarditemlist.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

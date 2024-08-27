@@ -33,7 +33,7 @@ namespace ET.Server
             teamDungeonComponent.BoxReward.Add(request.BoxIndex);
 
             ////背包已经直接发邮件，response加一个状态。 客户端弹窗提示“由于您背包已满通关宝箱的奖励已经自动发放进您的邮箱中,请注意查收”
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Mail = 1;
                 List<BagInfo> bagInfos = new List<BagInfo>();

@@ -14,7 +14,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ModifyData;    
                 return;
             }
-            int leftCell = unit.GetComponent<BagComponentS>().GetHourseLeftCell(hourseId);
+            int leftCell = unit.GetComponent<BagComponentS>().GetBagLeftCell(hourseId);
             if (leftCell<= 0)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;     //错误码:仓库已满

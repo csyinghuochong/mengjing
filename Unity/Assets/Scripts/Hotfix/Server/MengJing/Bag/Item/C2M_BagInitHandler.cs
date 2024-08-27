@@ -10,10 +10,10 @@ namespace ET.Server
             response.BagInfos = bagComponentS.GetAllItems();
             response.QiangHuaLevel .AddRange(bagComponentS.QiangHuaLevel); 
             response.QiangHuaFails .AddRange(bagComponentS.QiangHuaFails);
-            response.WarehouseAddedCell .AddRange( bagComponentS.WarehouseAddedCell);
+            response.WarehouseAddedCell .AddRange( bagComponentS.BagBuyCellNumber);
             response.FashionActiveIds .AddRange( bagComponentS.FashionActiveIds);
             response.FashionEquipList .AddRange( bagComponentS.FashionEquipList);
-            response.AdditionalCellNum .AddRange( bagComponentS.AdditionalCellNum);
+            response.AdditionalCellNum .AddRange( bagComponentS.BagAddCellNumber);
             response.SeasonJingHePlan = bagComponentS.SeasonJingHePlan;
             await ETTask.CompletedTask;
         }

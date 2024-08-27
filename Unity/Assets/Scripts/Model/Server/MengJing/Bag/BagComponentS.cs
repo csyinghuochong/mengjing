@@ -22,12 +22,12 @@ namespace ET.Server
         /// <summary>
         /// ItemLocType.ItemLocBag 之后的所有仓库（购买格子数量）
         /// </summary>
-        public List<int> WarehouseAddedCell { get; set; } = new();
+        public List<int> BagBuyCellNumber { get; set; } = new();
 
         /// <summary>
         /// 附加格子，ItemLocType.ItemLocBag
         /// </summary>
-        public List<int> AdditionalCellNum { get; set; } = new();
+        public List<int> BagAddCellNumber { get; set; } = new();
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, List<BagInfo>> AllItemList { get; set; } = new();

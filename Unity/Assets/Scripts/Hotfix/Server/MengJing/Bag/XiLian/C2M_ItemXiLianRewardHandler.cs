@@ -15,7 +15,7 @@
 
             EquipXiLianConfig equipXiLianConfig = EquipXiLianConfigCategory.Instance.Get(request.XiLianId);
             string[] rewarditems = equipXiLianConfig.RewardList.Split('@');
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewarditems.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditems.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

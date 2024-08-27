@@ -28,7 +28,7 @@
             string[] reward = ConfigData.PetHeXinExploreReward[request.RewardId].Split('$');
             string[] items = reward[0].Split('@');
             string[] diamond = reward[1].Split(';')[1].Split(',');
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < items.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < items.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

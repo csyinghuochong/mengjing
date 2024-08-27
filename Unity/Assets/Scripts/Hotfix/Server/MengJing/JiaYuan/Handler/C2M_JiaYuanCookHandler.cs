@@ -10,7 +10,7 @@ namespace ET.Server
         {
             List<long> huishouList = request.BagInfoIds;
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

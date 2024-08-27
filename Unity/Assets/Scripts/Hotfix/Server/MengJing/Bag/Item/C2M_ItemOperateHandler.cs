@@ -92,7 +92,7 @@ namespace ET.Server
                     string[] rewardInfos = itemConfig.ItemUsePar.Split(';');
                     DropHelper.DropIDToDropItem(int.Parse(rewardInfos[1]), droplist);
 
-                    if (bagComponent.GetBagLeftCell() < ItemHelper.GetNeedCell(droplist))
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < ItemHelper.GetNeedCell(droplist))
                     {
                         bagIsFull = true;
                     }
@@ -100,7 +100,7 @@ namespace ET.Server
 
                 if (itemConfig.ItemSubType == 102 || (itemConfig.ItemSubType == 103)) //宠物蛋(点击使用直接获得1个宠物)
                 {
-                    if (bagComponent.GetBagLeftCell() < 1)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                     {
                         bagIsFull = true;
                     }
@@ -111,7 +111,7 @@ namespace ET.Server
                     int dropid = int.Parse(itemConfig.ItemUsePar);
                     droplist = new List<RewardItem>();
                     DropHelper.DropIDToDropItem(dropid, droplist);
-                    if (bagComponent.GetBagLeftCell() < droplist.Count)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < droplist.Count)
                     {
                         bagIsFull = true;
                     }
@@ -150,7 +150,7 @@ namespace ET.Server
 
                 if (itemConfig.ItemSubType == 127)
                 {
-                    if (bagComponent.GetBagLeftCell() < 1)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                     {
                         bagIsFull = true;
                     }
@@ -509,13 +509,13 @@ namespace ET.Server
                             break;
                         case 139:
                             //增加背包格子
-                            bagComponent.AdditionalCellNum[0]++;
+                            bagComponent.BagAddCellNumber[ItemLocType.ItemLocBag]++;
                             break;
                         case 140:
-                            bagComponent.AdditionalCellNum[5]++;
-                            bagComponent.AdditionalCellNum[6]++;
-                            bagComponent.AdditionalCellNum[7]++;
-                            bagComponent.AdditionalCellNum[8]++;
+                            bagComponent.BagAddCellNumber[ItemLocType.ItemWareHouse1]++;
+                            bagComponent.BagAddCellNumber[ItemLocType.ItemWareHouse2]++;
+                            bagComponent.BagAddCellNumber[ItemLocType.ItemWareHouse3]++;
+                            bagComponent.BagAddCellNumber[ItemLocType.ItemWareHouse4]++;
                             //增加仓库格子
                             break;
                     }
@@ -683,7 +683,7 @@ namespace ET.Server
             if (request.OperateType == 4)
             {
                 //判断背包格子是否足够
-                bool full = bagComponent.IsBagFull();
+                bool full = bagComponent.IsBagFullByLoc(ItemLocType.ItemLocBag);
                 if (full)
                 {
                     response.Error = ErrorCode.ERR_BagIsFull;
@@ -793,7 +793,7 @@ namespace ET.Server
             if (request.OperateType == 6)
             {
                 int hourseId = int.Parse(request.OperatePar);
-                if (bagComponent.IsHourseFullByLoc(hourseId))
+                if (bagComponent.IsBagFullByLoc(hourseId))
                 {
                     response.Error = ErrorCode.ERR_BagIsFull; //错误码:仓库已满
                     return;
@@ -813,7 +813,7 @@ namespace ET.Server
             if (request.OperateType == 7)
             {
                 int hourseId = useBagInfo.Loc;
-                if (bagComponent.IsBagFull())
+                if (bagComponent.IsBagFullByLoc(ItemLocType.ItemLocBag))
                 {
                     response.Error = ErrorCode.ERR_BagIsFull; //错误码:仓库已满
                     return;

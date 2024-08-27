@@ -10,7 +10,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ActivityRewardRequest request, M2C_ActivityRewardResponse response)
         {
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            if (bagComponent.GetBagLeftCell() < 1)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -75,7 +75,7 @@ namespace ET.Server
                     }
                     List<RewardItem> rewardItems = new List<RewardItem>();  
                     DropHelper.DropIDToDropItem_2(ConfigData.HongBaoDropId, rewardItems);
-                    if (bagComponent.GetBagLeftCell() < rewardItems.Count)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < rewardItems.Count)
                     {
                         response.Error = ErrorCode.ERR_BagIsFull;
                         return;
@@ -84,7 +84,7 @@ namespace ET.Server
                     unit.GetComponent<NumericComponentS>().ApplyChange(NumericType.V1HongBaoNumber, 1);
                     break;
                 case ActivityConfigHelper.ActivityV1_DuiHuanWord:
-                    if (bagComponent.GetBagLeftCell() < 1)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                     {
                         response.Error = ErrorCode.ERR_BagIsFull;
                         return;
@@ -119,7 +119,7 @@ namespace ET.Server
                     bagComponent.OnAddItemData(rewardItem, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                     break;
                 case ActivityConfigHelper.ActivityV1_ChouKa2:
-                    if (bagComponent.GetBagLeftCell() < 1)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
                     {
                         response.Error = ErrorCode.ERR_BagIsFull;
                         return;
@@ -143,7 +143,7 @@ namespace ET.Server
                     }
                     break;
                 case ActivityConfigHelper.ActivityV1_LiBao:
-                    if (bagComponent.GetBagLeftCell() < 6)
+                    if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 6)
                     {
                         response.Error = ErrorCode.ERR_BagIsFull;
                         return;

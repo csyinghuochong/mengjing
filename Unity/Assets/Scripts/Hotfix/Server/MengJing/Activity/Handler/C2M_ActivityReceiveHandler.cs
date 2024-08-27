@@ -38,7 +38,7 @@ namespace ET.Server
                 {
                     case 2: //每日特惠
                         string[] needList = activityConfig.Par_3.Split('@');
-                        if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < needList.Length)
+                        if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < needList.Length)
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -74,7 +74,7 @@ namespace ET.Server
                             return;
                         }
                         string[] rewarditems = activityConfig.Par_3.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                   
@@ -119,7 +119,7 @@ namespace ET.Server
                         if (request.ReceiveIndex == 3) rewards = activityConfig.Par_4;
 
                         rewarditems = rewards.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -145,7 +145,7 @@ namespace ET.Server
                         }
 
                         rewarditems = activityConfig.Par_3.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -157,7 +157,7 @@ namespace ET.Server
                         break;
                     case 32:    //新年集字
                         rewarditems = activityConfig.Par_3.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -179,7 +179,7 @@ namespace ET.Server
                             return;
                         }
                         string rewardItemlist = ActivityHelper.GetJieRiReward(unit.GetComponent<UserInfoComponentS>().UserInfo.Lv);
-                        if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewardItemlist.Split('@').Length)
+                        if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewardItemlist.Split('@').Length)
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -208,7 +208,7 @@ namespace ET.Server
                         }
 
                         rewarditems = activityConfig.Par_3.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;
@@ -230,7 +230,7 @@ namespace ET.Server
                             return;
                         }
                         rewarditems = activityConfig.Par_3.Split('@');
-                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell())
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
                             return;

@@ -8,7 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TakeOutAllRequest request, M2C_TakeOutAllResponse response)
         {
             int hourseId = request.HorseId;
-            int leftBagSpace = unit.GetComponent<BagComponentS>().GetBagLeftCell();
+            int leftBagSpace = unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag);
             if (leftBagSpace <= 0)
             {
                 response.Error = ErrorCode.ERR_BagIsFull; //错误码:仓库已满

@@ -7,7 +7,7 @@
 		protected override async ETTask Run(Unit unit, C2M_RolePetFenjie request, M2C_RolePetFenjie response)
 		{
 			//判断背包是否满
-			if (unit.GetComponent<BagComponentS>().GetBagLeftCell() <= 1)
+			if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) <= 1)
 			{
 				response.Error = ErrorCode.ERR_BagIsFull;       //提示背包已满
 				return;

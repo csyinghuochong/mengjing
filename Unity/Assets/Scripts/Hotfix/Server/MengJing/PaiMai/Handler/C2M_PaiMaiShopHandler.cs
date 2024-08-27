@@ -25,7 +25,7 @@ namespace ET.Server
 
 			ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiSellConfig.ItemID);
 			int cell = (int)math.ceil(request.BuyNum * 1f / itemConfig.ItemPileSum);
-			if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < cell)
+			if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < cell)
 			{
 				response.Error = ErrorCode.ERR_BagIsFull;
 				return;

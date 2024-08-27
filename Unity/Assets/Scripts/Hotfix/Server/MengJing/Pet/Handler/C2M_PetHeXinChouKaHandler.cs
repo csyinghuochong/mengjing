@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetHeXinChouKaRequest request, M2C_PetHeXinChouKaResponse response)
         {
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < request.ChouKaType)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < request.ChouKaType)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

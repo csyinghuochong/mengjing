@@ -15,7 +15,7 @@
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(request.ActivityId);
             int itemNumber = ItemHelper.GetNeedCell(activityConfig.Par_2);
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            if (bagComponent.GetBagLeftCell() < itemNumber)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < itemNumber)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

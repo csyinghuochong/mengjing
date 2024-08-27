@@ -14,8 +14,6 @@ namespace ET.Server
             self.CheckAllItemList();
 
             self.OnAddItemData(GlobalValueConfigCategory.Instance.Get(9).Value, $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
-            self.OnAddItemData($"10030001;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
-            self.OnAddItemData($"14100005;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
         }
 
         [EntitySystem]
@@ -368,48 +366,32 @@ namespace ET.Server
 
             return null;
         }
-
-        public static bool IsBagFull(this BagComponentS self)
-        {
-            return self.GetBagLeftCell() <= 0;
-        }
-
-        public static int GetBagLeftCell(this BagComponentS self)
-        {
-            return self.GetBagTotalCell() - self.GetItemByLoc(ItemLocType.ItemLocBag).Count;
-        }
-
-        public static int GetBagTotalCell(this BagComponentS self)
-        {
-            if (self.WarehouseAddedCell.Count == 0 || self.AdditionalCellNum.Count == 0)
-            {
-                return GlobalValueConfigCategory.Instance.BagInitCapacity;
-            }
-
-            return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + +GlobalValueConfigCategory.Instance.BagInitCapacity;
-        }
-
-        public static bool IsHourseFullByLoc(this BagComponentS self, int hourseId)
+        
+        public static bool IsBagFullByLoc(this BagComponentS self, int hourseId)
         {
             List<BagInfo> ItemTypeList = self.GetItemByLoc(hourseId);
-            return ItemTypeList.Count >= self.GetHourseTotalCell(hourseId);
+            return ItemTypeList.Count >= self.GetBagTotalCell(hourseId);
         }
 
-        public static int GetHourseLeftCell(this BagComponentS self, int hourseId)
+        public static int GetBagLeftCell(this BagComponentS self, int hourseId)
         {
             List<BagInfo> ItemTypeList = self.GetItemByLoc(hourseId);
-            return self.GetHourseTotalCell(hourseId) - ItemTypeList.Count;
+            return self.GetBagTotalCell(hourseId) - ItemTypeList.Count;
         }
 
-        public static int GetHourseTotalCell(this BagComponentS self, int hourseId)
+        public static int GetBagTotalCell(this BagComponentS self, int hourseId)
         {
-            int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity;
+            int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity;  //仓库
             if (hourseId == (int)ItemLocType.GemWareHouse1)
             {
-                storeCapacity = GlobalValueConfigCategory.Instance.GemStoreInitCapacity;
+                storeCapacity = GlobalValueConfigCategory.Instance.GemStoreInitCapacity; //宝石仓库
+            }
+            if (hourseId == (int)ItemLocType.ItemLocBag)
+            {
+                storeCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity; //背包
             }
 
-            return storeCapacity + self.WarehouseAddedCell[hourseId] + self.AdditionalCellNum[hourseId];
+            return storeCapacity + self.BagBuyCellNumber[hourseId] + self.BagAddCellNumber[hourseId];
         }
 
         /// <summary>
@@ -578,14 +560,14 @@ namespace ET.Server
             //    }
             //}
 
-            for (int i = self.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            for (int i = self.BagBuyCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
             {
-                self.WarehouseAddedCell.Add(0);
+                self.BagBuyCellNumber.Add(0);
             }
 
-            for (int i = self.AdditionalCellNum.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            for (int i = self.BagAddCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
             {
-                self.AdditionalCellNum.Add(0);
+                self.BagAddCellNumber.Add(0);
             }
 
             if (self.QiangHuaLevel.Count == 0)
@@ -788,7 +770,7 @@ namespace ET.Server
         {
             if (itemLocType == ItemLocType.GemWareHouse1)
             {
-                if (self.IsHourseFullByLoc((int)itemLocType))
+                if (self.IsBagFullByLoc((int)itemLocType))
                 {
                     List<BagInfo> bagInfoList = self.GetItemByLoc(itemLocType);
                     for (int i = 0; i < bagInfoList.Count; i++)
@@ -818,11 +800,29 @@ namespace ET.Server
             }
         }
 
+        public static int GetRealNeedCell(this BagComponentS self, RewardItem itemids, int itemLocType)
+        {
+            int needcell = 0;
+            
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemids.ItemID);
+            long curNumber = self.GetItemNumber(itemids.ItemID, itemLocType);
+
+            if (curNumber > 0 && curNumber + itemids.ItemNum <= itemConfig.ItemPileSum)
+            {
+                return 0;
+            }
+
+            needcell += (int)(1f * itemids.ItemNum / itemConfig.ItemPileSum);
+            needcell += (itemids.ItemNum % itemConfig.ItemPileSum > 0 ? 1 : 0); 
+
+            return needcell;
+        }
+        
         //添加背包道具道具[支持同时添加多个]
         public static bool OnAddItemData(this BagComponentS self, List<RewardItem> rewardItems_init, string makeUserID, string getWay,
         bool notice = true, bool gm = false, int UseLocType = ItemLocType.ItemLocBag)
         {
-            int bagCellNumber = 0;
+            int needCellNumber = 0;
             int petHeXinNumber = 0;
             string[] getWayInfo = getWay.Split('_');
             int getType = int.Parse(getWayInfo[0]);
@@ -836,6 +836,11 @@ namespace ET.Server
             List<RewardItem> rewardItems = new List<RewardItem>();
             for (int i = rewardItems_init.Count - 1; i >= 0; i--)
             {
+                if (rewardItems_init[i].ItemID == 0 || !ItemConfigCategory.Instance.Contain(rewardItems_init[i].ItemID))
+                {
+                    continue;
+                }
+                
                 bool have = false;
                 for (int bb = rewardItems.Count - 1; bb >= 0; bb--)
                 {
@@ -855,14 +860,9 @@ namespace ET.Server
                     rewardItems.Add(item);
                 }
             }
-
+            
             for (int i = rewardItems.Count - 1; i >= 0; i--)
             {
-                if (rewardItems[i].ItemID == 0 || !ItemConfigCategory.Instance.Contain(rewardItems[i].ItemID))
-                {
-                    continue;
-                }
-
                 ItemConfig itemCof = ItemConfigCategory.Instance.Get(rewardItems[i].ItemID);
                 int userDataType = ItemHelper.GetItemToUserDataType(rewardItems[i].ItemID);
                 if (userDataType != UserDataType.None)
@@ -882,23 +882,14 @@ namespace ET.Server
                     continue;
                 }
 
-                if (itemCof.ItemType == ItemTypeEnum.Equipment)
-                {
-                    ItemPileSum = itemCof.ItemPileSum;
-                }
-
+                ItemPileSum = itemCof.ItemPileSum;
                 if (ItemPileSum == 1)
                 {
-                    bagCellNumber += rewardItems[i].ItemNum;
-                }
-                else if (rewardItems[i].ItemNum <= ItemPileSum)
-                {
-                    bagCellNumber += 1;
+                    needCellNumber += rewardItems[i].ItemNum;
                 }
                 else
                 {
-                    bagCellNumber += (int)(1f * rewardItems[i].ItemNum / ItemPileSum);
-                    bagCellNumber += (rewardItems[i].ItemNum % ItemPileSum > 0 ? 1 : 0);
+                    needCellNumber += self.GetRealNeedCell( rewardItems[i] , UseLocType);
                 }
             }
 
@@ -906,18 +897,19 @@ namespace ET.Server
             {
                 return true;
             }
-
-            if (bagCellNumber > self.GetBagLeftCell() && UseLocType == ItemLocType.ItemLocBag)
-            {
-                return false;
-            }
-
+            
+            //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
             if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > CommonHelp.PetHeXinMax) &&
                 UseLocType == ItemLocType.ItemLocBag)
             {
                 return false;
             }
+            if (needCellNumber > self.GetBagLeftCell(ItemLocType.ItemLocBag) && UseLocType == ItemLocType.ItemLocBag)
+            {
+                return false;
+            }
 
+            
             //通知客户端背包刷新
             M2C_RoleBagUpdate m2c_bagUpdate = self.message;
             m2c_bagUpdate.BagInfoAdd.Clear();

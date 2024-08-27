@@ -40,11 +40,6 @@ namespace ET.Client
             {
                 await EventSystem.Instance.PublishAsync(root, new LoginFinish());
             }
-
-            if (reLink != 0)
-            {
-                EventSystem.Instance.Publish(root, new RelinkSucess());
-            }
         }
 
         public static async ETTask LoginGameAsync(Scene root, int reLink)
@@ -75,36 +70,40 @@ namespace ET.Client
                     playerComponent.CurrentRoleId,
                     r2CGetRealmKey.Address,
                     reLink);
+                
+                Log.Debug($"NetClient2Main_LoginGame.  {netClient2MainLoginGame.Error}");
                 if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
                 {
                     Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");
                     return;
                 }
+              
+                if (reLink == 0)
+                {
+                    // 等待场景切换完成
+                    await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
-                // 等待场景切换完成
-                await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
+                    await UserInfoNetHelper.RequestUserInfoInit(root);
+                    await BagClientNetHelper.RequestBagInit(root);
+                    await PetNetHelper.RequestPetInfo(root);
+                    await TaskClientNetHelper.RequestTaskInit(root);
+                    await SkillNetHelper.RequestSkillSet(root);
+                    await FriendNetHelper.RequestFriendInfo(root);
+                    await ActivityNetHelper.RequestActivityInfo(root);
+                    await ChengJiuNetHelper.GetChengJiuList(root);
 
-                await UserInfoNetHelper.RequestUserInfoInit(root);
-                await BagClientNetHelper.RequestBagInit(root);
-                await PetNetHelper.RequestPetInfo(root);
-                await TaskClientNetHelper.RequestTaskInit(root);
-                await SkillNetHelper.RequestSkillSet(root);
-                await FriendNetHelper.RequestFriendInfo(root);
-                await ActivityNetHelper.RequestActivityInfo(root);
-                await ChengJiuNetHelper.GetChengJiuList(root);
-
+                    EventSystem.Instance.Publish(root, new EnterMapFinish());
+                }
+                if (reLink != 0)
+                {
+                    //G2C_SecondLogin 处理
+                    //断线重连 走一下登录流程 刷一下数据
+                }
                 Log.Debug("进入游戏成功！！！");
-
-                EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
             catch (Exception e)
             {
                 Log.Error(e);
-            }
-
-            if (reLink != 0)
-            {
-                EventSystem.Instance.Publish(root, new RelinkSucess());
             }
         }
 

@@ -35,7 +35,7 @@
 
             string[] rewarditemlist = ConfigData.SingleRechargeReward[request.RewardId].Split('@');
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            if (bagComponent.GetBagLeftCell() < rewarditemlist.Length)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -52,7 +52,7 @@
             }
             else
             {
-                Log.Error($"领取失败: {bagComponent.GetBagLeftCell()} {request.RewardId}");
+                Log.Error($"领取失败: {bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag)} {request.RewardId}");
             }
             await ETTask.CompletedTask;
         }

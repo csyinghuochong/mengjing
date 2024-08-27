@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_SerialReardRequest request, M2C_SerialReardResponse response )
         {
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 5)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 5)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

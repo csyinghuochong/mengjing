@@ -30,7 +30,7 @@ namespace ET.Server
             // }
 
             int needCell = ItemHelper.GetNeedCell($"{storeSellConfig.SellItemID};{storeSellConfig.SellItemNum * request.SellItemNum}");
-            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < needCell)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < needCell)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;

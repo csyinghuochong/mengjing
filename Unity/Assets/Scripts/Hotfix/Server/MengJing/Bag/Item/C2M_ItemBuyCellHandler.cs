@@ -15,12 +15,12 @@ namespace ET.Server
            
             if (request.OperateType == (int)ItemLocType.ItemLocBag)
             {
-                if (bagComponent.GetBagTotalCell() >= GlobalValueConfigCategory.Instance.BagMaxCapacity)
+                if (bagComponent.GetBagTotalCell(ItemLocType.ItemLocBag) >= GlobalValueConfigCategory.Instance.BagMaxCapacity)
                 {
                     response.Error = ErrorCode.ERR_AleardyMaxCell;
                     return;
                 }
-                BuyCellCost buyCellCost = ConfigHelper.BuyBagCellCosts()[bagComponent.WarehouseAddedCell[0]];
+                BuyCellCost buyCellCost = ConfigHelper.BuyBagCellCosts()[bagComponent.BagBuyCellNumber[0]];
                 if (!bagComponent.OnCostItemData(buyCellCost.Cost))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
@@ -30,7 +30,7 @@ namespace ET.Server
 
                 string[] iteminfo = buyCellCost.Get.Split(';');
                 response.GetItem = buyCellCost.Get;
-                bagComponent.WarehouseAddedCell[0] += 1;
+                bagComponent.BagBuyCellNumber[0] += 1;
 
                 RewardItem rewardItem = new RewardItem()
                 {
@@ -54,13 +54,13 @@ namespace ET.Server
                 }
 
 
-                if (bagComponent.GetHourseTotalCell(request.OperateType) >= GlobalValueConfigCategory.Instance.HourseMaxCapacity)
+                if (bagComponent.GetBagTotalCell(request.OperateType) >= GlobalValueConfigCategory.Instance.HourseMaxCapacity)
                 {
                     response.Error = ErrorCode.ERR_AleardyMaxCell;
                     return;
                 }
 
-                int addcell = bagComponent.WarehouseAddedCell[storeindex];
+                int addcell = bagComponent.BagBuyCellNumber[storeindex];
                 BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[(storeindex - 5) * 10 + addcell];
                 if (!bagComponent.OnCostItemData(buyCellCost.Cost))
                 {
@@ -70,7 +70,7 @@ namespace ET.Server
 
                 string[] iteminfo = buyCellCost.Get.Split(';');
                 response.GetItem = buyCellCost.Get;
-                bagComponent.WarehouseAddedCell[storeindex] += 1;
+                bagComponent.BagBuyCellNumber[storeindex] += 1;
 
                 RewardItem rewardItem = new RewardItem()
                 {
@@ -81,7 +81,7 @@ namespace ET.Server
                 bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, request.OperateType);
             }
 
-            response.WarehouseAddedCell .AddRange(bagComponent.WarehouseAddedCell); 
+            response.WarehouseAddedCell .AddRange(bagComponent.BagBuyCellNumber); 
             await ETTask.CompletedTask;
         }
     }

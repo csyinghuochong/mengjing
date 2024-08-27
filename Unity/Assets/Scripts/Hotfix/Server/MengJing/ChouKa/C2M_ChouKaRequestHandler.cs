@@ -13,7 +13,7 @@ namespace ET.Server
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
             // 判断背包和仓库是否能够装满
-            if (bagComponent.GetBagLeftCell() + bagComponent.GetChouKaLeftSpace() < request.ChouKaType)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) + bagComponent.GetChouKaLeftSpace() < request.ChouKaType)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -69,7 +69,7 @@ namespace ET.Server
             LogHelper.LogWarning($"抽卡： {unit.Id} {droplist.Count}", true);
             
             // 判断背包是否能装下，不能的话剩下的放抽卡仓库
-            int bagLeftSpace = bagComponent.GetBagLeftCell();
+            int bagLeftSpace = bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag);
             bool addItemError = false; 
             if (bagLeftSpace < droplist.Count)
             {
@@ -100,7 +100,7 @@ namespace ET.Server
                 }
                 else
                 {
-                    Log.Error($"addItemError == false0 {bagComponent.GetBagLeftCell()}:{bagComponent.GetChouKaLeftSpace()}");
+                    Log.Error($"addItemError == false0 {bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag)}:{bagComponent.GetChouKaLeftSpace()}");
                 }
             }
             else
@@ -114,7 +114,7 @@ namespace ET.Server
                 {
                     Log.Error($"addItemError == false1 {droplist[i].ItemID}:{droplist[i].ItemNum}");
                 }
-                Log.Error($"addItemError == false2 {bagComponent.GetBagLeftCell()}:{bagComponent.GetChouKaLeftSpace()}");
+                Log.Error($"addItemError == false2 {bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag)}:{bagComponent.GetChouKaLeftSpace()}");
             }
 
             unit.GetComponent<NumericComponentS>().ApplyChange( NumericType.ChouKa, request.ChouKaType);

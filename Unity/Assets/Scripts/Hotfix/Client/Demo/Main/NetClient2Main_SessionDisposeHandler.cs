@@ -10,6 +10,7 @@
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             if (mapComponent.SceneType >= SceneTypeEnum.MainCityScene)
             {
+                Log.Debug("NetClient2Main_SessionDispose");
                 await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
                 PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
                 await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
