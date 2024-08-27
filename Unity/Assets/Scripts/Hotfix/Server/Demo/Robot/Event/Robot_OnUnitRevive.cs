@@ -3,7 +3,7 @@ using System;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitRevive_OnRobotRevive: AEvent<Scene, UnitRevive>
+    public class Robot_OnUnitRevive: AEvent<Scene, UnitRevive>
     {
         protected override async ETTask Run(Scene root, UnitRevive args)
         {

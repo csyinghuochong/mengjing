@@ -339,6 +339,77 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(ClientMessage.Main2RobotManager_Message)]
+    [ResponseType(nameof(RobotManager2Main_Message))]
+    public partial class Main2RobotManager_Message : MessageObject, IRequest
+    {
+        public static Main2RobotManager_Message Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2RobotManager_Message), isFromPool) as Main2RobotManager_Message;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int OpType { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string OpParam { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.OpType = default;
+            this.OpParam = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(ClientMessage.RobotManager2Main_Message)]
+    public partial class RobotManager2Main_Message : MessageObject, IResponse
+    {
+        public static RobotManager2Main_Message Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(RobotManager2Main_Message), isFromPool) as RobotManager2Main_Message;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class ClientMessage
     {
         public const ushort Main2NetClient_ServerList = 1001;
@@ -349,5 +420,7 @@ namespace ET
         public const ushort NetClient2Main_LoginGame = 1006;
         public const ushort Main2RobotClient_Message = 1007;
         public const ushort RobotClient2Main_Message = 1008;
+        public const ushort Main2RobotManager_Message = 1009;
+        public const ushort RobotManager2Main_Message = 1010;
     }
 }

@@ -81,5 +81,20 @@ message RobotClient2Main_Message // IResponse
 	int32 RpcId = 1;
 	int32 Error = 2;
 	string Message = 3;
+}
 
+//ResponseType RobotManager2Main_Message
+message Main2RobotManager_Message // IRequest
+{
+	int32 RpcId = 1;
+	string Message = 2;
+	int32 OpType = 3;
+	string OpParam = 4;
+}
+
+message RobotManager2Main_Message // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 }

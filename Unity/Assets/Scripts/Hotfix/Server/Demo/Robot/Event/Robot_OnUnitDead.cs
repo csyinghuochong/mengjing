@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitDead_OnRobotDead : AEvent<Scene, UnitDead>
+    public class Robot_OnUnitDead : AEvent<Scene, UnitDead>
     {
         protected override async ETTask Run(Scene root, UnitDead args)
         {

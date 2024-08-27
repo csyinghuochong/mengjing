@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -55,7 +56,40 @@ namespace ET.Server
             if (infos != null && infos.KeyId != -1 )
             {
                 infos.KeyId = -1;
+                Console.WriteLine($"移除机器人: {infos.Value2}");
                 FiberManager.Instance.Remove(fiberid).Coroutine();
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        public static async ETTask RemoveBattleRobot(this RobotManagerComponent self, int zone)
+        {
+            List<int> battlefibers = new List<int>();
+            foreach (var infos in self.robots)
+            {
+                if (infos.Value.KeyId == -1)
+                {
+                    Console.WriteLine($"机器人重复移除:  {infos.Value.Value2}");
+                    continue;
+                }
+
+                if (infos.Value.KeyId != zone)
+                {
+                    continue;
+                }
+
+                int robotid = int.Parse(infos.Value.Value);
+                RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotid);
+                if (robotConfig.Behaviour == 3)
+                {
+                    battlefibers.Add(infos.Key);
+                }
+            }
+
+            for (int i = 0; i < battlefibers.Count; i++)
+            {
+                await self.RemoveRobot(battlefibers[i]);
             }
 
             await ETTask.CompletedTask;

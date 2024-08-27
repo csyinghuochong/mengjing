@@ -63,9 +63,13 @@ namespace ET.Server
                             robotNumber++;
                         }
                     }
-                    
                     break;
-                
+                case NoticeType.BattleOver:
+                    using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))
+                    {
+                       await  robotManagerComponent.RemoveBattleRobot(message.Zone);
+                    }
+                    break;
                 default:
                     break;
             }
