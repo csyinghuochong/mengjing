@@ -38,7 +38,13 @@ namespace ET.Server
 
             return number;
         }
-        
+
+        public static async ETTask RemoveRobot(this RobotManagerComponent self, int fiberid)
+        {
+            
+            await ETTask.CompletedTask;
+        }
+
         public static async ETTask<int> NewRobot(this RobotManagerComponent self, int zone, int robotid)
         {
             int robotNumber = self.GetRobotNumber(zone, robotid);
