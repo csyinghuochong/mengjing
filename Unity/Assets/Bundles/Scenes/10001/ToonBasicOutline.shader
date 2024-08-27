@@ -1,91 +1,121 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Toon/BasicOutline" 
+Shader "Toon/BasicOutline"
 {
     Properties
     {
-        _MainTex("main tex",2D) = ""{}
-        _Factor("factor",Range(0,0.1)) = 0.01//描边粗细因子
-        _OutLineColor("outline color",Color) = (0,0,0,1)//描边颜色
-		_Color ("Main Tint", Color) = (1,1,1,0.1)
+        _BaseMap ("Texture", 2D) = "white" {}
+        _BaseColor ("Color", Color) = (0.5, 0.5, 0.5, 1)
+        [Space]
+        _OutlineWidth ("Outline Width", Range(0.0, 1.0)) = 0.15
+        _OutlineColor ("Outline Color", Color) = (0.0, 0.0, 0.0, 1)
     }
- 
-    SubShader 
+    SubShader
     {
+        Tags
+        {
+            "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"
+        }
+
         Pass
         {
-            Cull Front //剔除前面
-            CGPROGRAM
+            Name "MainPass"
+            Tags
+            {
+                "LightMode" = "UniversalForward"
+            }
+            HLSLPROGRAM
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+
             #pragma vertex vert
             #pragma fragment frag
-            #include "UnityCG.cginc"
- 
-            struct v2f
+            #pragma multi_compile_instancing
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            TEXTURE2D(_BaseMap); 
+            SAMPLER(sampler_BaseMap);
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseColor;
+            CBUFFER_END
+
+            struct Attributes
             {
-                float4 vertex :POSITION;
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
- 
-            float _Factor;
-            half4 _OutLineColor;
-			fixed4 _Color;
- 
-            v2f vert(appdata_full v)
+
+            struct Varyings
             {
-                v2f o;
-                //v.vertex.xyz += v.normal * _Factor;
-                //o.vertex = mul(UNITY_MATRIX_MVP,v.vertex);
- 
-                //变换到视坐标空间下，再对顶点沿法线方向进行扩展
-                float4 view_vertex = mul(UNITY_MATRIX_MV,v.vertex);
-                float3 view_normal = mul((float3x3)UNITY_MATRIX_IT_MV,v.normal);
-                view_vertex.xyz += normalize(view_normal) * _Factor; //记得normalize
-                o.vertex = mul(UNITY_MATRIX_P,view_vertex);
-				//fixed4 texColor = tex2D(_MainTex, i.uv);
-                return o;
-            }
- 
-            half4 frag(v2f IN):COLOR
+                float2 uv : TEXCOORD0;
+                float4 positionCS : SV_POSITION;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            Varyings vert(Attributes input)
             {
-                //return half4(0,0,0,1);
-                return _OutLineColor;
+                Varyings output;
+                UNITY_SETUP_INSTANCE_ID(input);
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
+
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
+                output.positionCS = vertexInput.positionCS;
+                output.uv = input.uv;
+                return output;
             }
 
-
-            ENDCG
+            float4 frag(Varyings input) : SV_Target
+            {
+                float4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
+                return baseMap * _BaseColor;
+            }
+            ENDHLSL
         }
- 
+
+        // Outline
         Pass
         {
-            Cull Back //剔除后面
-            CGPROGRAM
+            Name "Outline"
+            Cull Front
+            Tags
+            {
+                "LightMode" = "SRPDefaultUnlit"
+            }
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "UnityCG.cginc"
- 
+            #pragma multi_compile_instancing
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+            };
+
             struct v2f
             {
-                float4 vertex :POSITION;
-                float4 uv:TEXCOORD0;
+                float4 pos : SV_POSITION;
             };
- 
-            sampler2D _MainTex;
- 
-            v2f vert(appdata_full v)
+
+            float _OutlineWidth;
+            float4 _OutlineColor;
+
+            v2f vert(appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord;
+                o.pos = TransformObjectToHClip(float4(v.vertex.xyz + v.normal * _OutlineWidth * 0.1, 1));
                 return o;
             }
- 
-            half4 frag(v2f IN) :COLOR
+
+            float4 frag(v2f i) : SV_Target
             {
-                //return half4(1,1,1,1);
-                half4 c = tex2D(_MainTex,IN.uv);
-                return c;
+                return _OutlineColor;
             }
-            ENDCG
+            ENDHLSL
         }
-    } 
-    FallBack "Diffuse"
+    }
 }
