@@ -2317,7 +2317,7 @@ namespace ET.Server
             //攻击部分
             foreach (var Item in NumericData.ZhanLi_Act)
             {
-                //ShiLi_Act += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Act += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
             }
 
             //隐藏技能算在攻击部分
@@ -2325,7 +2325,7 @@ namespace ET.Server
 
             foreach (var Item in NumericData.ZhanLi_ActPro)
             {
-                //ShiLi_ActPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_ActPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
             }
 
             //幸运副本附加
@@ -2371,42 +2371,42 @@ namespace ET.Server
             //防御部分
             foreach (var Item in NumericData.ZhanLi_Def)
             {
-                //ShiLi_Def += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Def += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
             }
 
             foreach (var Item in NumericData.ZhanLi_DefPro)
             {
-                //ShiLi_DefPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_DefPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
             }
 
             //血量部分
             foreach (var Item in NumericData.ZhanLi_Hp)
             {
-                //ShiLi_Hp += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Hp += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
             }
 
             foreach (var Item in NumericData.ZhanLi_HpPro)
             {
-                //ShiLi_HpPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_HpPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
             }
 
             //宠物守护附加战力
             int fightNum = 0;
-            // PetComponentServer petCom = unit.GetComponent<PetComponentServer>();
-            // for (int i = 0; i < 4; i++)
-            // {
-            //     if (petCom.PetShouHuList.Count < 4)
-            //     {
-            //         break;
-            //     }
-            //
-            //     RolePetInfo rolePetInfoNow = petCom.GetPetInfo(petCom.PetShouHuList[i]);
-            //     if (rolePetInfoNow == null)
-            //     {
-            //         continue;
-            //     }
-            //     fightNum = fightNum + rolePetInfoNow.PetPingFen;
-            // }
+            PetComponentS petCom = unit.GetComponent<PetComponentS>();
+            for (int i = 0; i < 4; i++)
+            {
+                if (petCom.PetShouHuList.Count < 4)
+                {
+                    break;
+                }
+            
+                RolePetInfo rolePetInfoNow = petCom.GetPetInfo(petCom.PetShouHuList[i]);
+                if (rolePetInfoNow == null)
+                {
+                    continue;
+                }
+                fightNum = fightNum + rolePetInfoNow.PetPingFen;
+            }
 
             int addShouHuFight = (int)fightNum / 10;
 
@@ -2414,32 +2414,40 @@ namespace ET.Server
             int addZhanLi = numericComponent.GetAsInt(NumericType.Now_FightValue);
 
             //觉醒战力附加
-            // List<int> juexingSkillList = null;// unit.GetComponent<SkillSetComponent>().GetJueSkillIds();
+            List<int> juexingSkillList = unit.GetComponent<SkillSetComponentS>().GetJueSkillIds();
             int addJueXingZhanLi = 0;
-            // if (juexingSkillList.Count >= 1)
-            // {
-            //     addJueXingZhanLi = Math.Min(juexingSkillList.Count, 3) * 300;
-            // }
-            // if (juexingSkillList.Count >= 4)
-            // {
-            //     addJueXingZhanLi += (Math.Min(juexingSkillList.Count, 7) - 3) * 400;
-            // }
-            // if (juexingSkillList.Count >= 8)
-            // {
-            //     addJueXingZhanLi += 500;
-            // }
+            if (juexingSkillList.Count >= 1)
+            {
+                addJueXingZhanLi = Math.Min(juexingSkillList.Count, 3) * 300;
+            }
+            if (juexingSkillList.Count >= 4)
+            {
+                addJueXingZhanLi += (Math.Min(juexingSkillList.Count, 7) - 3) * 400;
+            }
+            if (juexingSkillList.Count >= 8)
+            {
+                addJueXingZhanLi += 500;
+            }
 
             addZhanLi += addJueXingZhanLi;
 
             //加点属性,每个1级属性6个战力
-            int OneProAddValue = 6;
-            long OneProvalueNaiLi = (long)((Stamina_value + PointNaiLi) * OneProAddValue * (1 + ShiLi_DefPro));
-            long OneProvalueZhiLi = (long)((Intellect_value + PointZhiLi) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
-            long OneProvalueMinJie = (long)((Agility_value + PointMinJie) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
-            long OneProvalueLiLiang = (long)((Power_value + PointLiLiang) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
-            long OneProvalueTiZhi = (long)((Constitution_value + PointTiZhi) * OneProAddValue * (1 + ShiLi_HpPro));
-            addZhanLi += (int)(OneProvalueNaiLi + OneProvalueZhiLi + OneProvalueMinJie + OneProvalueLiLiang + OneProvalueTiZhi);
-
+            // int OneProAddValue = 6;
+            // long OneProvalueNaiLi = (long)((Stamina_value + PointNaiLi) * OneProAddValue * (1 + ShiLi_DefPro));
+            // long OneProvalueZhiLi = (long)((Intellect_value + PointZhiLi) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
+            // long OneProvalueMinJie = (long)((Agility_value + PointMinJie) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
+            // long OneProvalueLiLiang = (long)((Power_value + PointLiLiang) * OneProAddValue * (1 + ShiLi_ActPro * 0.5f));
+            // long OneProvalueTiZhi = (long)((Constitution_value + PointTiZhi) * OneProAddValue * (1 + ShiLi_HpPro));
+            // addZhanLi += (int)(OneProvalueNaiLi + OneProvalueZhiLi + OneProvalueMinJie + OneProvalueLiLiang + OneProvalueTiZhi);
+            
+            int OneProAddValue = 10;
+            long OneProvalueNaiLi = (long)((Stamina_value + PointNaiLi) * OneProAddValue );
+            long OneProvalueZhiLi = (long)((Intellect_value + PointZhiLi) * OneProAddValue);
+            long OneProvalueMinJie = (long)((Agility_value + PointMinJie) * OneProAddValue );
+            long OneProvalueLiLiang = (long)((Power_value + PointLiLiang) * OneProAddValue );
+            long OneProvalueTiZhi = (long)((Constitution_value + PointTiZhi) * OneProAddValue );
+            addZhanLi = (int)((OneProvalueNaiLi + OneProvalueZhiLi + OneProvalueMinJie + OneProvalueLiLiang + OneProvalueTiZhi));   //属性点放大系数
+            
             //技能属性点附加战力
             int skillPointFight = (roleLv - userInfo.Sp);  //剩余属性点
 
@@ -2453,8 +2461,17 @@ namespace ET.Server
             {
                 skillPointFight = 5000;
             }
-            
-            int zhanliValue = (int)(ShiLi_Act * (1 + ShiLi_ActPro) + ShiLi_Def * (1 + ShiLi_DefPro) + (ShiLi_Hp * 0.1f) * (1 + ShiLi_HpPro)) + roleLv * 60 + (int)proLvAdd + addZhanLi + addShouHuFight + chuanchengProAdd + skillPointFight;
+
+            int zhanliValue = (int)(ShiLi_Act * (1 + ShiLi_ActPro) + ShiLi_Def * (1 + ShiLi_DefPro) + (ShiLi_Hp * 0.1f) * (1 + ShiLi_HpPro)) +
+                    roleLv * 60 + (int)proLvAdd + addZhanLi + addShouHuFight + chuanchengProAdd + skillPointFight;
+
+            long oneProSum = Stamina_value + PointNaiLi + Intellect_value + PointZhiLi + Agility_value + PointMinJie + Power_value + PointLiLiang +
+                    Constitution_value + PointTiZhi;
+            int addZhanliValue = (int)(zhanliValue * (oneProSum / 30000f));
+            if (addZhanliValue > 0)
+            {
+                zhanliValue = zhanliValue + addZhanliValue;
+            }
 
             //更新战力
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
