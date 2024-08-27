@@ -243,10 +243,11 @@ namespace ET.Client
                     return;
                 }
 
-                if (UIEventComponent.Instance.IsClicked)
-                {
-                    return;
-                }
+                // 防止客户端短时间内频繁的发RPC消息
+                // if (UIEventComponent.Instance.IsClicked)
+                // {
+                //     return;
+                // }
 
                 clickActionAsync().Coroutine();
             });
