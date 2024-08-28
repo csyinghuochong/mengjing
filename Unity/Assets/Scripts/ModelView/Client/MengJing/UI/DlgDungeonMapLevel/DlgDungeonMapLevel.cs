@@ -9,6 +9,7 @@ namespace ET.Client
 
         public int Difficulty;
         public int ChapterId;
+        public int LevelId;
         public List<int> ShowLevel = new();
         public Dictionary<int, EntityRef<Scroll_Item_DungeonMapLevelItem>> ScrollItemDungeonMapLevelItems;
         public DungeonSectionConfig DungeonSectionConfig;

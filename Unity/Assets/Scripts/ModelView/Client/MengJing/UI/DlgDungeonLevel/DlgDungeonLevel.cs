@@ -10,7 +10,7 @@ namespace ET.Client
             get => this.GetComponent<DlgDungeonLevelViewComponent>();
         }
 
-        public int Difficulty;
+        public int Difficulty { get; set; }
         public int ChapterId;
         public List<int> ShowLevel = new();
         public Dictionary<int, EntityRef<Scroll_Item_DungeonLevelItem>> ScrollItemDungeonLevelItems;

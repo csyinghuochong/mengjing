@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,15 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgDungeonMap self)
         {
-            self.View.E_Map0Button.AddListener(() => { self.Enlarge(self.View.E_Map0Button); });
-            self.View.E_Map1Button.AddListener(() => { self.Enlarge(self.View.E_Map1Button); });
-            self.View.E_Map2Button.AddListener(() => { self.Enlarge(self.View.E_Map2Button); });
-            self.View.E_Map3Button.AddListener(() => { self.Enlarge(self.View.E_Map3Button); });
-            self.View.E_Map4Button.AddListener(() => { self.Enlarge(self.View.E_Map4Button); });
-            self.View.E_Map5Button.AddListener(() => { self.Enlarge(self.View.E_Map5Button); });
-            self.View.E_Map6Button.AddListener(() => { self.Enlarge(self.View.E_Map6Button); });
-            self.View.E_Map7Button.AddListener(() => { self.Enlarge(self.View.E_Map7Button); });
-            self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button); });
+            self.View.E_Map0Button.AddListener(() => { self.Enlarge(self.View.E_Map0Button, 0); });
+            self.View.E_Map1Button.AddListener(() => { self.Enlarge(self.View.E_Map1Button, 1); });
+            self.View.E_Map2Button.AddListener(() => { self.Enlarge(self.View.E_Map2Button, 2); });
+            self.View.E_Map3Button.AddListener(() => { self.Enlarge(self.View.E_Map3Button, 3); });
+            self.View.E_Map4Button.AddListener(() => { self.Enlarge(self.View.E_Map4Button, 4); });
+            self.View.E_Map5Button.AddListener(() => { self.Enlarge(self.View.E_Map5Button, 5); });
+            self.View.E_Map6Button.AddListener(() => { self.Enlarge(self.View.E_Map6Button, 6); });
+            self.View.E_Map7Button.AddListener(() => { self.Enlarge(self.View.E_Map7Button, 7); });
+            self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button, 8); });
 
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
         }
@@ -42,7 +43,7 @@ namespace ET.Client
             self.View.E_Map8Button.enabled = enable;
         }
 
-        private static void Enlarge(this DlgDungeonMap self, Button clickedButton)
+        private static void Enlarge(this DlgDungeonMap self, Button clickedButton, int index)
         {
             self.EnableBtns(false);
 
@@ -56,8 +57,16 @@ namespace ET.Client
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.OutBounce).onComplete = () =>
             {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapLevel).Coroutine();
+                List<DungeonSectionConfig> dungeonSectionConfigs = DungeonSectionConfigCategory.Instance.GetAll().Values.ToList();
+                self.ShowLevel(dungeonSectionConfigs[index].Id).Coroutine();
             };
+        }
+
+        private static async ETTask ShowLevel(this DlgDungeonMap self, int chapterId)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapLevel);
+            DlgDungeonMapLevel dlgDungeonMapLevel = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapLevel>();
+            dlgDungeonMapLevel.Init(chapterId);
         }
 
         public static void ReEnlarge(this DlgDungeonMap self)

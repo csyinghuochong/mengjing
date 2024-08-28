@@ -92,6 +92,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_RightBGImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RightBGImage == null )
+     			{
+		    		this.m_E_RightBGImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG");
+     			}
+     			return this.m_E_RightBGImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_LevelNameText
      	{
      		get
@@ -103,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LevelNameText == null )
      			{
-		    		this.m_E_LevelNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"RightBG/LevelInfo/E_LevelName");
+		    		this.m_E_LevelNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_RightBG/LevelInfo/E_LevelName");
      			}
      			return this.m_E_LevelNameText;
      		}
@@ -120,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LevelDesText == null )
      			{
-		    		this.m_E_LevelDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"RightBG/E_LevelDes");
+		    		this.m_E_LevelDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_RightBG/E_LevelDes");
      			}
      			return this.m_E_LevelDesText;
      		}
@@ -137,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterLevelText == null )
      			{
-		    		this.m_E_EnterLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"RightBG/E_EnterLevel");
+		    		this.m_E_EnterLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_RightBG/E_EnterLevel");
      			}
      			return this.m_E_EnterLevelText;
      		}
@@ -154,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_E_IsMetImage == null )
      			{
-		    		this.m_E_IsMetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/E_IsMet");
+		    		this.m_E_IsMetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/E_IsMet");
      			}
      			return this.m_E_IsMetImage;
      		}
@@ -171,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_1_SelectImage == null )
      			{
-		    		this.m_E_NanDu_1_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_1/E_NanDu_1_Select");
+		    		this.m_E_NanDu_1_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_1/E_NanDu_1_Select");
      			}
      			return this.m_E_NanDu_1_SelectImage;
      		}
@@ -188,7 +205,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_1_ButtonButton == null )
      			{
-		    		this.m_E_NanDu_1_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightBG/NanDu_1/E_NanDu_1_Button");
+		    		this.m_E_NanDu_1_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RightBG/NanDu_1/E_NanDu_1_Button");
      			}
      			return this.m_E_NanDu_1_ButtonButton;
      		}
@@ -205,7 +222,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_1_ButtonImage == null )
      			{
-		    		this.m_E_NanDu_1_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_1/E_NanDu_1_Button");
+		    		this.m_E_NanDu_1_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_1/E_NanDu_1_Button");
      			}
      			return this.m_E_NanDu_1_ButtonImage;
      		}
@@ -222,7 +239,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_2_SelectImage == null )
      			{
-		    		this.m_E_NanDu_2_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_2/E_NanDu_2_Select");
+		    		this.m_E_NanDu_2_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_2/E_NanDu_2_Select");
      			}
      			return this.m_E_NanDu_2_SelectImage;
      		}
@@ -239,7 +256,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_2_ButtonButton == null )
      			{
-		    		this.m_E_NanDu_2_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightBG/NanDu_2/E_NanDu_2_Button");
+		    		this.m_E_NanDu_2_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RightBG/NanDu_2/E_NanDu_2_Button");
      			}
      			return this.m_E_NanDu_2_ButtonButton;
      		}
@@ -256,7 +273,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_2_ButtonImage == null )
      			{
-		    		this.m_E_NanDu_2_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_2/E_NanDu_2_Button");
+		    		this.m_E_NanDu_2_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_2/E_NanDu_2_Button");
      			}
      			return this.m_E_NanDu_2_ButtonImage;
      		}
@@ -273,7 +290,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_3_SelectImage == null )
      			{
-		    		this.m_E_NanDu_3_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_3/E_NanDu_3_Select");
+		    		this.m_E_NanDu_3_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_3/E_NanDu_3_Select");
      			}
      			return this.m_E_NanDu_3_SelectImage;
      		}
@@ -290,7 +307,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_3_ButtonButton == null )
      			{
-		    		this.m_E_NanDu_3_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightBG/NanDu_3/E_NanDu_3_Button");
+		    		this.m_E_NanDu_3_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RightBG/NanDu_3/E_NanDu_3_Button");
      			}
      			return this.m_E_NanDu_3_ButtonButton;
      		}
@@ -307,7 +324,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDu_3_ButtonImage == null )
      			{
-		    		this.m_E_NanDu_3_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/NanDu_3/E_NanDu_3_Button");
+		    		this.m_E_NanDu_3_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/NanDu_3/E_NanDu_3_Button");
      			}
      			return this.m_E_NanDu_3_ButtonImage;
      		}
@@ -324,7 +341,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapButton == null )
      			{
-		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightBG/E_EnterMap");
+		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RightBG/E_EnterMap");
      			}
      			return this.m_E_EnterMapButton;
      		}
@@ -341,7 +358,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapImage == null )
      			{
-		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightBG/E_EnterMap");
+		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/E_EnterMap");
      			}
      			return this.m_E_EnterMapImage;
      		}
@@ -354,6 +371,7 @@ namespace ET.Client
 			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_ReturnButton = null;
 			this.m_E_ReturnImage = null;
+			this.m_E_RightBGImage = null;
 			this.m_E_LevelNameText = null;
 			this.m_E_LevelDesText = null;
 			this.m_E_EnterLevelText = null;
@@ -377,6 +395,7 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ReturnButton = null;
 		private UnityEngine.UI.Image m_E_ReturnImage = null;
+		private UnityEngine.UI.Image m_E_RightBGImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
 		private UnityEngine.UI.Text m_E_LevelDesText = null;
 		private UnityEngine.UI.Text m_E_EnterLevelText = null;

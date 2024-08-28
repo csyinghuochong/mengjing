@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -18,10 +19,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_DungeonMapLevelItem self, int levelIndex, int levelId, int diff)
+        public static void Refresh(this Scroll_Item_DungeonMapLevelItem self, int levelIndex, int levelId, int diff, Action<int> OnClick)
         {
             self.LevelIndex = levelIndex;
             self.LevelId = levelId;
+            self.E_ClickButton.AddListener(() => OnClick?.Invoke(levelId));
 
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(levelId);
             self.E_LevelNameText.text = dungeonConfig.ChapterName;
