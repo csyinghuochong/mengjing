@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -50,11 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_DungeonMapItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_DungeonMapItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DungeonMapItems");
+		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DungeonMapLevelItems");
      			}
-     			return this.m_E_DungeonMapItemsLoopVerticalScrollRect;
+     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -351,7 +351,7 @@ namespace ET.Client
 		{
 			this.m_E_ChapterNameText = null;
 			this.m_E_OpenNumShowText = null;
-			this.m_E_DungeonMapItemsLoopVerticalScrollRect = null;
+			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_ReturnButton = null;
 			this.m_E_ReturnImage = null;
 			this.m_E_LevelNameText = null;
@@ -374,7 +374,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Text m_E_ChapterNameText = null;
 		private UnityEngine.UI.Text m_E_OpenNumShowText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ReturnButton = null;
 		private UnityEngine.UI.Image m_E_ReturnImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
