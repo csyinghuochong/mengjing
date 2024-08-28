@@ -23,12 +23,10 @@ namespace ET.Client
             self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button); });
 
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
-            self.View.E_ReturnButton.AddListener(self.OnReturnButtonClick);
         }
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
         {
-            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
         }
 
         private static void EnableBtns(this DlgDungeonMap self, bool enable)
@@ -58,25 +56,16 @@ namespace ET.Client
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.OutBounce).onComplete = () =>
             {
-                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapLevel).Coroutine();
             };
         }
 
-        private static void ReEnlarge(this DlgDungeonMap self)
+        public static void ReEnlarge(this DlgDungeonMap self)
         {
             RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
 
-            rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear);
-
-            self.EnableBtns(true);
-        }
-
-        private static void OnReturnButtonClick(this DlgDungeonMap self)
-        {
-            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
-
-            self.ReEnlarge();
+            rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () => { self.EnableBtns(true); };
         }
     }
 }
