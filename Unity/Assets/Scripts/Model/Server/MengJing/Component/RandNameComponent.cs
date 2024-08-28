@@ -5,6 +5,7 @@ using System.IO;
 namespace ET
 {
     
+    [Code]
     public class RandNameComponent : Singleton<RandNameComponent>, ISingletonAwake
     {
       

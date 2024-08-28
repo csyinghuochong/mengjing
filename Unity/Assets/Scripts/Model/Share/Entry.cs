@@ -49,11 +49,9 @@
             World.Instance.AddSingleton<NetServices>();
             World.Instance.AddSingleton<NavmeshComponent>();
             World.Instance.AddSingleton<LogMsg>();
-            World.Instance.AddSingleton<RandNameComponent>();
             
             Log.Warning($"Debug...AddSingleton: {TimeHelper.ClientNow()}");
-            
-            
+
             TimeInfo.Instance.TimeZone = 8;
             // 创建需要reload的code singleton
             CodeTypes.Instance.CreateCode();
