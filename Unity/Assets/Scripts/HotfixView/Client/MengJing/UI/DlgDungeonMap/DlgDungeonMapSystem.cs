@@ -13,30 +13,37 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgDungeonMap self)
         {
-            self.View.E_Map0Button.AddListener(() => { self.Enlarge(self.View.E_Map0Button, 1); });
-            self.View.E_Map1Button.AddListener(() => { self.Enlarge(self.View.E_Map1Button, 2); });
-            self.View.E_Map2Button.AddListener(() => { self.Enlarge(self.View.E_Map2Button, 3); });
-            self.View.E_Map3Button.AddListener(() => { self.Enlarge(self.View.E_Map3Button, 4); });
-            self.View.E_Map4Button.AddListener(() => { self.Enlarge(self.View.E_Map4Button, 5); });
-            self.View.E_Map5Button.AddListener(() => { self.Enlarge(self.View.E_Map5Button, 6); });
-            self.View.E_Map6Button.AddListener(() => { self.Enlarge(self.View.E_Map6Button, 7); });
-            self.View.E_Map7Button.AddListener(() => { self.Enlarge(self.View.E_Map7Button, 8); });
-            self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button, 9); });
+            // UI中的地图块Id 对应的 ChapterId
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            dic.Add(0, 2);
+            dic.Add(1, 1);
+            dic.Add(2, 3);
+            dic.Add(3, 4);
+            dic.Add(4, 5);
+            dic.Add(5, 6);
+            dic.Add(6, 7);
+            dic.Add(7, 8);
+            dic.Add(8, 9);
 
-            self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
-        }
+            self.View.E_Map0Button.AddListener(() => { self.Enlarge(self.View.E_Map0Button, dic[0]); });
+            self.View.E_Map1Button.AddListener(() => { self.Enlarge(self.View.E_Map1Button, dic[1]); });
+            self.View.E_Map2Button.AddListener(() => { self.Enlarge(self.View.E_Map2Button, dic[2]); });
+            self.View.E_Map3Button.AddListener(() => { self.Enlarge(self.View.E_Map3Button, dic[3]); });
+            self.View.E_Map4Button.AddListener(() => { self.Enlarge(self.View.E_Map4Button, dic[4]); });
+            self.View.E_Map5Button.AddListener(() => { self.Enlarge(self.View.E_Map5Button, dic[5]); });
+            self.View.E_Map6Button.AddListener(() => { self.Enlarge(self.View.E_Map6Button, dic[6]); });
+            self.View.E_Map7Button.AddListener(() => { self.Enlarge(self.View.E_Map7Button, dic[7]); });
+            self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button, dic[8]); });
 
-        public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
-        {
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map0Button.gameObject, !self.CanOpen(1));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map1Button.gameObject, !self.CanOpen(2));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map2Button.gameObject, !self.CanOpen(3));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map3Button.gameObject, !self.CanOpen(4));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map4Button.gameObject, !self.CanOpen(5));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map5Button.gameObject, !self.CanOpen(6));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map6Button.gameObject, !self.CanOpen(7));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map7Button.gameObject, !self.CanOpen(8));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map8Button.gameObject, !self.CanOpen(9));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map0Button.gameObject, !self.CanOpen(dic[0]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map1Button.gameObject, !self.CanOpen(dic[1]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map2Button.gameObject, !self.CanOpen(dic[2]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map3Button.gameObject, !self.CanOpen(dic[3]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map4Button.gameObject, !self.CanOpen(dic[4]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map5Button.gameObject, !self.CanOpen(dic[5]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map6Button.gameObject, !self.CanOpen(dic[6]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map7Button.gameObject, !self.CanOpen(dic[7]));
+            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map8Button.gameObject, !self.CanOpen(dic[8]));
 
             // alphaHitTestMinimumThreshold 属性用于指定 Image 组件在进行 alpha 值命中测试时的透明度阈值。
             // 默认情况下，该属性值为 0，表示所有不透明像素都可以通过 alpha 值命中测试。
@@ -50,6 +57,12 @@ namespace ET.Client
             self.View.E_Map6Image.alphaHitTestMinimumThreshold = 0.5f;
             self.View.E_Map7Image.alphaHitTestMinimumThreshold = 0.5f;
             self.View.E_Map8Image.alphaHitTestMinimumThreshold = 0.5f;
+
+            self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
+        }
+
+        public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
