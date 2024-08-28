@@ -1,33 +1,59 @@
-Shader "Transparent/DiffuseDetachAlpha" {
-Properties {
-	_MainTex ("LigthMap Base (RGB) A", 2D) = "white" {}
-	_MainTexLM ("Base (RGB)", 2D) = "white" {}
-	_AlphaTexLM ("Trans (A)", 2D) = "white" {}
-}
+Shader "Universal Render Pipeline/Transparent/DiffuseDetachAlpha" {
+    Properties {
+        _MainTex ("LigthMap Base (RGB) A", 2D) = "white" {}
+        _MainTexLM ("Base (RGB)", 2D) = "white" {}
+        _AlphaTexLM ("Trans (A)", 2D) = "white" {}
+    }
 
-SubShader {
-	Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
-	LOD 200
+    SubShader {
+        Tags { "Queue" = "Transparent" "RenderType" = "Transparent" "IgnoreProjector" = "True" }
+        LOD 200
 
-CGPROGRAM
-#pragma surface surf Lambert alpha
+        Pass {
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #pragma target 2.0
 
-sampler2D _MainTexLM;
-sampler2D _AlphaTexLM;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
-struct Input {
-	float2 uv_MainTexLM;
-	float2 uv_AlphaTexLM;
-};
+            TEXTURE2D(_MainTexLM);
+            SAMPLER(sampler_MainTexLM);
 
-void surf (Input IN, inout SurfaceOutput o) {
-	fixed4 c = tex2D(_MainTexLM, IN.uv_MainTexLM);
-	fixed4 a = tex2D(_AlphaTexLM, IN.uv_AlphaTexLM);
-	o.Albedo = c.rgb;
-	o.Alpha = a;
-}
-ENDCG
-}
+            TEXTURE2D(_AlphaTexLM);
+            SAMPLER(sampler_AlphaTexLM);
 
-Fallback "Transparent/VertexLit"
+            struct Attributes {
+                float4 positionOS : POSITION;
+                float2 uv_MainTexLM : TEXCOORD0;
+                float2 uv_AlphaTexLM : TEXCOORD1;
+            };
+
+            struct Varyings {
+                float4 positionHCS : SV_POSITION;
+                float2 uv_MainTexLM : TEXCOORD0;
+                float2 uv_AlphaTexLM : TEXCOORD1;
+            };
+
+            Varyings vert(Attributes IN) {
+                Varyings OUT;
+                OUT.positionHCS = TransformObjectToHClip(IN.positionOS);
+                OUT.uv_MainTexLM = IN.uv_MainTexLM;
+                OUT.uv_AlphaTexLM = IN.uv_AlphaTexLM;
+                return OUT;
+            }
+
+            half4 frag(Varyings IN) : SV_Target {
+                half4 color = SAMPLE_TEXTURE2D(_MainTexLM, sampler_MainTexLM, IN.uv_MainTexLM);
+                half4 alpha = SAMPLE_TEXTURE2D(_AlphaTexLM, sampler_AlphaTexLM, IN.uv_AlphaTexLM);
+                half4 outputColor = half4(color.rgb, alpha.a);
+                return outputColor;
+            }
+
+            ENDHLSL
+        }
+    }
+
+    Fallback "Universal Render Pipeline/Unlit"
 }
