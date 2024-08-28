@@ -1301,8 +1301,7 @@ namespace ET.Server
 
             //初始化属性
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            //numericComponent.ResetProperty();
-            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 0, false);
+            numericComponent.ResetProperty();
 
             //缓存列表
             Dictionary<int, long> UpdateProDicList = new Dictionary<int, long>();
@@ -2068,7 +2067,6 @@ namespace ET.Server
             AddUpdateProDicList((int)NumericType.Base_CriLv_Add, criLv, UpdateProDicList);
             AddUpdateProDicList((int)NumericType.Base_HitLv_Add, hitLv, UpdateProDicList);
             AddUpdateProDicList((int)NumericType.Base_DodgeLv_Add, dodgeLv, UpdateProDicList);
-            // ??? 这么大？
             AddUpdateProDicList((int)NumericType.Base_ResLv_Add, resLv, UpdateProDicList);
             AddUpdateProDicList((int)NumericType.Base_ZhongJiPro_Add, zhongjiLv, UpdateProDicList);
 
