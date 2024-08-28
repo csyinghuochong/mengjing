@@ -57,13 +57,13 @@ namespace ET.Client
             for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
             {
                 //只显示满足进入等级的关卡
-                DungeonConfig chapterCof = DungeonConfigCategory.Instance.Get(dungeonSectionConfig.RandomArea[i]);
-                if (userInfo.Lv < chapterCof.EnterLv)
+                DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonSectionConfig.RandomArea[i]);
+                if (userInfo.Lv < dungeonConfig.EnterLv)
                 {
                     break;
                 }
 
-                if (chapterCof.Id >= ConfigData.GMDungeonId)
+                if (dungeonConfig.Id >= ConfigData.GMDungeonId)
                 {
                     break;
                 }
@@ -142,6 +142,9 @@ namespace ET.Client
             {
                 self.View.E_EnterLevelText.text = zstring.Format("挑战等级：{0}", dungeonConfig.EnterLv);
             }
+
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            self.View.E_IsMetImage.gameObject.SetActive(userInfo.Lv >= dungeonConfig.EnterLv);
 
             if (self.ScrollItemDungeonMapLevelItems != null)
             {
