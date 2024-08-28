@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 409, y: -1}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 381, y: -1}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7897856913980858791
 CanvasRenderer:
@@ -238,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3242393186547562197}
   - component: {fileID: 7433560185303120526}
+  - component: {fileID: 3181009904706007420}
   m_Layer: 5
   m_Name: Item_DungeonMapLevelItem
   m_TagString: Untagged
@@ -273,7 +274,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 200}
+  m_SizeDelta: {x: 900, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7433560185303120526
 MonoBehaviour:
@@ -304,6 +305,26 @@ MonoBehaviour:
     gameObject: {fileID: 0}
   - key: Lab_ChapIndex
     gameObject: {fileID: 6889513760756286251}
+--- !u!114 &3181009904706007420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242393186559436585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 900
+  m_PreferredHeight: 180
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3242393186559524159
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -405, y: -6.6}
+  m_AnchoredPosition: {x: -377, y: -6.6}
   m_SizeDelta: {x: 124, y: 127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7913587854612096608
@@ -593,7 +614,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3646023692860178485}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -632,8 +653,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 101, y: -1}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 134, y: -1}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3379956513151424843
 CanvasRenderer:
@@ -708,8 +729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 258, y: -1}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 259, y: -1}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8651101051006406122
 CanvasRenderer:

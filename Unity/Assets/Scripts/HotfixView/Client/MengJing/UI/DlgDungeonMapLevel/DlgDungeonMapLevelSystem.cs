@@ -130,6 +130,19 @@ namespace ET.Client
             {
                 self.View.E_EnterLevelText.text = zstring.Format("挑战等级：{0}", dungeonConfig.EnterLv);
             }
+
+            if (self.ScrollItemDungeonMapLevelItems != null)
+            {
+                foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.UpdateSelect(self.LevelId);
+                }
+            }
         }
 
         private static async ETTask OnEnterMapButtonClick(this DlgDungeonMapLevel self)

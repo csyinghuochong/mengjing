@@ -24,6 +24,7 @@ namespace ET.Client
             self.LevelIndex = levelIndex;
             self.LevelId = levelId;
             self.E_ClickButton.AddListener(() => OnClick?.Invoke(levelId));
+            self.E_SelectImage.gameObject.SetActive(false);
 
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(levelId);
             self.E_LevelNameText.text = dungeonConfig.ChapterName;
@@ -42,6 +43,11 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_1Image.gameObject, value != 1);
             CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_2Image.gameObject, value != 2);
             CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_3Image.gameObject, value != 3);
+        }
+
+        public static void UpdateSelect(this Scroll_Item_DungeonMapLevelItem self, int levelId)
+        {
+            self.E_SelectImage.gameObject.SetActive(self.LevelId == levelId);
         }
     }
 }
