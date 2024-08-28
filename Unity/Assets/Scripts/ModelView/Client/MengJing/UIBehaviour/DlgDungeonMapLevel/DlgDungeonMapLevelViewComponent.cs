@@ -24,6 +24,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_ChapterImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ChapterImage == null )
+     			{
+		    		this.m_E_ChapterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ChapterInfo/E_Chapter");
+     			}
+     			return this.m_E_ChapterImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_OpenNumShowText
      	{
      		get
@@ -367,6 +384,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_ChapterNameText = null;
+			this.m_E_ChapterImage = null;
 			this.m_E_OpenNumShowText = null;
 			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_ReturnButton = null;
@@ -391,6 +409,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Text m_E_ChapterNameText = null;
+		private UnityEngine.UI.Image m_E_ChapterImage = null;
 		private UnityEngine.UI.Text m_E_OpenNumShowText = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ReturnButton = null;

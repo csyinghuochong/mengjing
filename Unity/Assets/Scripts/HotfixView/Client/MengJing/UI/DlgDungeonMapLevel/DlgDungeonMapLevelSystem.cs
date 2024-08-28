@@ -33,6 +33,12 @@ namespace ET.Client
 
             using (zstring.Block())
             {
+                self.View.E_ChapterImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("mapText{0}", chapterId)));
+            }
+
+            using (zstring.Block())
+            {
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
             }
