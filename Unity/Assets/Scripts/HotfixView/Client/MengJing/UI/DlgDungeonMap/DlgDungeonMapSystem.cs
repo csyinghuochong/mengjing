@@ -39,6 +39,11 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map8Button.gameObject, !self.CanOpen(9));
         }
 
+        public static void BeforeUnload(this DlgDungeonMap self)
+        {
+            self.View.E_MapPanelImage.GetComponent<RectTransform>().DOKill();
+        }
+
         private static bool CanOpen(this DlgDungeonMap self, int chapterId)
         {
             if (!DungeonSectionConfigCategory.Instance.Contain(chapterId))
