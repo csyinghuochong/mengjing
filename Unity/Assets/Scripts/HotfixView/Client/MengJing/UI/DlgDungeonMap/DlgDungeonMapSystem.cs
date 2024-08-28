@@ -37,6 +37,19 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map6Button.gameObject, !self.CanOpen(7));
             CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map7Button.gameObject, !self.CanOpen(8));
             CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map8Button.gameObject, !self.CanOpen(9));
+
+            // alphaHitTestMinimumThreshold 属性用于指定 Image 组件在进行 alpha 值命中测试时的透明度阈值。
+            // 默认情况下，该属性值为 0，表示所有不透明像素都可以通过 alpha 值命中测试。
+            // 如果将该属性设置为大于 0 的值，则只有当图像中的像素透明度大于等于该阈值时，该像素才会被视为不透明像素，并且图像才会通过 alpha 值命中测试。
+            self.View.E_Map0Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map1Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map2Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map3Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map4Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map5Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map6Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map7Image.alphaHitTestMinimumThreshold = 0.5f;
+            self.View.E_Map8Image.alphaHitTestMinimumThreshold = 0.5f;
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
