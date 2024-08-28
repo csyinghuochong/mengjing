@@ -200,5 +200,6 @@ namespace ET.Client
 		WindowID_Relink,
 		WindowID_SoloReward,
 		WindowID_DungeonMap,
+		WindowID_DungeonMapLevel,
 	}
 }
