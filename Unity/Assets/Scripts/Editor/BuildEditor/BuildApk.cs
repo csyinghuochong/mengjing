@@ -169,7 +169,7 @@ public class MyEditorScript
     {
         int version = -1;
 
-        Scene curScene = EditorSceneManager.GetSceneByPath("Assets/Init.unity");
+        Scene curScene = EditorSceneManager.GetSceneByPath("Assets/Scenes/Init.unity");
         GameObject[] gos = curScene.GetRootGameObjects();
         foreach (var go in gos)
         {
