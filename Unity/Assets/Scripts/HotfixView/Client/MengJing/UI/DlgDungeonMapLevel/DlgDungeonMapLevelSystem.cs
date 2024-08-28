@@ -31,7 +31,6 @@ namespace ET.Client
         {
             self.ChapterId = chapterId;
 
-            int[] openLv = DungeonSectionConfigCategory.Instance.Get(self.ChapterId).OpenLevel;
             using (zstring.Block())
             {
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -48,6 +47,7 @@ namespace ET.Client
             self.DungeonSectionConfig = dungeonSectionConfig;
             self.ShowLevel.Clear();
 
+            self.View.E_ChapterNameText.text = dungeonSectionConfig.Name;
             for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
             {
                 //只显示满足进入等级的关卡
@@ -63,6 +63,12 @@ namespace ET.Client
                 }
 
                 self.ShowLevel.Add(i);
+
+                using (zstring.Block())
+                {
+                    self.View.E_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", GameSettingLanguge.Instance.LoadLocalization("冒险进度"),
+                        (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
+                }
             }
 
             self.AddUIScrollItems(ref self.ScrollItemDungeonMapLevelItems, self.ShowLevel.Count);

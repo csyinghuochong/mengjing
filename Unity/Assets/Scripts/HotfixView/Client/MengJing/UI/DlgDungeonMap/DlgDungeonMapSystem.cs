@@ -58,7 +58,15 @@ namespace ET.Client
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.OutBounce).onComplete = () =>
             {
                 List<DungeonSectionConfig> dungeonSectionConfigs = DungeonSectionConfigCategory.Instance.GetAll().Values.ToList();
-                self.ShowLevel(dungeonSectionConfigs[index].Id).Coroutine();
+                if (index < dungeonSectionConfigs.Count)
+                {
+                    self.ShowLevel(dungeonSectionConfigs[index].Id).Coroutine();
+                }
+                else
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("该章节未配置");
+                    self.ReEnlarge();
+                }
             };
         }
 
