@@ -843,7 +843,7 @@ namespace ET.Client
 
         private static void OnAdventureButton(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Dungeon);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_DungeonMap);
         }
 
         private static void OnPetFormationButton(this DlgMain self)
