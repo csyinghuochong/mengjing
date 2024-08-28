@@ -199,5 +199,6 @@ namespace ET.Client
 		WindowID_ChengJiuActivite,
 		WindowID_Relink,
 		WindowID_SoloReward,
+		WindowID_DungeonMap,
 	}
 }
