@@ -7042,6 +7042,7 @@ message Popularize2C_RewardResponse // IPopularizeActorResponse
 }
 
 //单独的message消息体， 以Proto结尾，需要生成对应的entity和转换方法（代码放在model hotfix。 shader目录下）
+//只处理outmessage即可
 message ServerInfoProto
 {
 	int32 Id = 1;
