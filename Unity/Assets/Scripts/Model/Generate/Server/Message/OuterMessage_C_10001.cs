@@ -30583,6 +30583,40 @@ namespace ET
         }
     }
 
+    // 单独的message消息体， 以Proto结尾，需要生成对应的entity和转换方法
+    [MemoryPackable]
+    [Message(OuterMessage.ServerInfoProto)]
+    public partial class ServerInfoProto : MessageObject
+    {
+        public static ServerInfoProto Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(ServerInfoProto), isFromPool) as ServerInfoProto;
+        }
+
+        [MemoryPackOrder(0)]
+        public int Id { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Status { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string ServerName { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.Status = default;
+            this.ServerName = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -31396,5 +31430,6 @@ namespace ET
         public const ushort Popularize2C_UploadResponse = 10810;
         public const ushort C2Popularize_RewardRequest = 10811;
         public const ushort Popularize2C_RewardResponse = 10812;
+        public const ushort ServerInfoProto = 10813;
     }
 }
