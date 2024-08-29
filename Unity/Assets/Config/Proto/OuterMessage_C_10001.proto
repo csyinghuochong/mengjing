@@ -7041,7 +7041,7 @@ message Popularize2C_RewardResponse // IPopularizeActorResponse
 	int32 Error = 92;
 }
 
-//单独的message消息体， 以Proto结尾，需要生成对应的entity和转换方法（代码放在model hotfix。 Share/ProtboToEntity目录下）
+//单独的message消息体， 以Proto结尾，需要生成对应的entity和转换方法（代码放在Server/ProtboToEntity目录下）
 //只处理outmessage即可
 message ServerInfoProto
 {
