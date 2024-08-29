@@ -2051,17 +2051,12 @@ namespace ET.Server
             AddUpdateProDicList((int)NumericType.Base_ResLv_Add, resLv, UpdateProDicList);
             AddUpdateProDicList((int)NumericType.Base_ZhongJiPro_Add, zhongjiLv, UpdateProDicList);
 
+            // 更新战力
             UnitUpdateCombat(unit, notice, rank, UpdateProDicList);
             
-            //复制属性  --- 以下方法不加入战力计算
-            Dictionary<int, long> UpdateProDicListCopy = new Dictionary<int, long>();
-            //UpdateProDicListCopy = ComHelp.DeepCopy_2(UpdateProDicList);
-            foreach (int key in UpdateProDicList.Keys)
-            {
-                UpdateProDicListCopy.Add(key, UpdateProDicList[key]);
-            }
+            // --- 以下方法不加入战力计算 ---
 
-            ///晶核列表
+            //晶核列表
             List<BagInfo> jingHeList = unit.GetComponent<BagComponentS>().GetCurJingHeList();
             for (int i = 0; i < jingHeList.Count; i++)
             {
@@ -2071,7 +2066,7 @@ namespace ET.Server
                     for (int y = 0; y < jingHeList[i].XiLianHideProLists.Count; y++)
                     {
                         HideProList hidePro = jingHeList[i].XiLianHideProLists[y];
-                        AddUpdateProDicList(hidePro.HideID, hidePro.HideValue, UpdateProDicListCopy);
+                        AddUpdateProDicList(hidePro.HideID, hidePro.HideValue, UpdateProDicList);
                     }
                 }
             }
@@ -2080,14 +2075,14 @@ namespace ET.Server
             List<PropertyValue> shouhuPros = unit.GetComponent<PetComponentS>().GetPetShouHuPro();
             for (int i = 0; i < shouhuPros.Count; i++)
             {
-                AddUpdateProDicList(shouhuPros[i].HideID, shouhuPros[i].HideValue, UpdateProDicListCopy);
+                AddUpdateProDicList(shouhuPros[i].HideID, shouhuPros[i].HideValue, UpdateProDicList);
             }
 
             //天赋系统
             List<PropertyValue> tianfuProList = unit.GetComponent<SkillSetComponentS>().GetTianfuRoleProLists();
             for (int i = 0; i < tianfuProList.Count; i++)
             {
-                AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicListCopy);
+                AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicList);
             }
 
             List<PropertyValue> skillProList_8 = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists_8();
@@ -2111,17 +2106,17 @@ namespace ET.Server
                         Constitution_value_add += skillProList_8[i].HideValue;
                         break;
                     default:
-                        AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicListCopy);
+                        AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicList);
                         break;
                 }
             }
 
             //缓存一级属性
-            Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicListCopy);
-            Agility_value = GetOnePro(NumericType.Now_Agility, UpdateProDicListCopy);
-            Intellect_value = GetOnePro(NumericType.Now_Intellect, UpdateProDicListCopy);
-            Stamina_value = GetOnePro(NumericType.Now_Stamina, UpdateProDicListCopy);
-            Constitution_value = GetOnePro(NumericType.Now_Constitution, UpdateProDicListCopy);
+            Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicList);
+            Agility_value = GetOnePro(NumericType.Now_Agility, UpdateProDicList);
+            Intellect_value = GetOnePro(NumericType.Now_Intellect, UpdateProDicList);
+            Stamina_value = GetOnePro(NumericType.Now_Stamina, UpdateProDicList);
+            Constitution_value = GetOnePro(NumericType.Now_Constitution, UpdateProDicList);
 
 
             //---加点属性---  加点和1级属性战力做平均
@@ -2129,11 +2124,11 @@ namespace ET.Server
             if (Power_value > 0 || PointLiLiang > 0)
             {
                 long value = Power_value + PointLiLiang + Power_value_add;
-                AddUpdateProDicList((int)NumericType.Base_MaxAct_Base, value * 4, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinAct_Base, value * 1, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_MaxAct_Base, value * 4, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinAct_Base, value * 1, UpdateProDicList);
 
-                AddUpdateProDicList((int)NumericType.Base_MaxDef_Base, value * 2, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinDef_Base, value * 1, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_MaxDef_Base, value * 2, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinDef_Base, value * 1, UpdateProDicList);
                 //AddUpdateProDicList((int)NumericType.Base_HitLv_Base, Power_value * 3, UpdateProDicList);
             }
 
@@ -2141,8 +2136,8 @@ namespace ET.Server
             if (Agility_value > 0 || PointMinJie > 0)
             {
                 long value = Agility_value + PointMinJie + Agility_value_add;
-                AddUpdateProDicList((int)NumericType.Base_MaxAct_Base, value * 5, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinAct_Base, value * 2, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_MaxAct_Base, value * 5, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinAct_Base, value * 2, UpdateProDicList);
 
                 //额外战力附加(因为冷却CD附加的战力少)
             }
@@ -2151,95 +2146,95 @@ namespace ET.Server
             if (Intellect_value > 0 || PointZhiLi > 0)
             {
                 long value = Intellect_value + PointZhiLi + Intellect_value_add;
-                AddUpdateProDicList((int)NumericType.Base_Mage_Base, value * 10, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MaxAdf_Base, value * 2, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinAdf_Base, value * 1, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_Mage_Base, value * 10, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MaxAdf_Base, value * 2, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinAdf_Base, value * 1, UpdateProDicList);
             }
 
             //耐力换算
             if (Stamina_value > 0 || PointNaiLi > 0)
             {
                 long value = Stamina_value + PointNaiLi + Stamina_value_add;
-                AddUpdateProDicList((int)NumericType.Base_MaxDef_Base, value * 3, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MaxAdf_Base, value * 3, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinDef_Base, value * 2, UpdateProDicListCopy);
-                AddUpdateProDicList((int)NumericType.Base_MinAdf_Base, value * 2, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_MaxDef_Base, value * 3, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MaxAdf_Base, value * 3, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinDef_Base, value * 2, UpdateProDicList);
+                AddUpdateProDicList((int)NumericType.Base_MinAdf_Base, value * 2, UpdateProDicList);
             }
 
             //体质换算
             if (Constitution_value > 0 || PointTiZhi > 0)
             {
                 long value = Constitution_value + PointTiZhi + Constitution_value_add;
-                AddUpdateProDicList((int)NumericType.Base_MaxHp_Base, value * 60, UpdateProDicListCopy);
+                AddUpdateProDicList((int)NumericType.Base_MaxHp_Base, value * 60, UpdateProDicList);
             }
 
             //更新属性的额外加点属性
             //力量加攻速
             int actSpeedTouLv = (PointLiLiang + (int)Power_value + (int)Power_value_add) * 2;
             float actSpeedChuanTou = LvProChange(actSpeedTouLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_ActSpeedPro_Add, (int)(actSpeedChuanTou * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_ActSpeedPro_Add, (int)(actSpeedChuanTou * 10000), UpdateProDicList);
 
             //敏捷加攻速
             int actSpeedTouLv2 = (PointLiLiang + (int)Agility_value + (int)Agility_value_add) * 2;
             float actSpeedChuanTou2 = LvProChange(actSpeedTouLv2, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_ActSpeedPro_Add, (int)(actSpeedChuanTou2 * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_ActSpeedPro_Add, (int)(actSpeedChuanTou2 * 10000), UpdateProDicList);
 
             //耐力加抗暴
             int kangbaoLv = (PointNaiLi + (int)Stamina_value + (int)Stamina_value_add) * 4;
             float kangbaoPro = LvProChange(kangbaoLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_Res_Add, (int)(kangbaoPro * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_Res_Add, (int)(kangbaoPro * 10000), UpdateProDicList);
 
             //体力加闪避
             int dodgeLv2 = (PointTiZhi + (int)Constitution_value + (int)Constitution_value_add) * 2;
             float dodgePro = LvProChange(dodgeLv2, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_Dodge_Add, (int)(dodgePro * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_Dodge_Add, (int)(dodgePro * 10000), UpdateProDicList);
 
             //更新基础强化属性
             //攻击加物理穿透
             wuliChuanTouLv = (int)Power_value_add * 5;
             adddWuLiChuanTou = LvProChange(wuliChuanTouLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_HuShiActPro_Add, (int)(adddWuLiChuanTou * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_HuShiActPro_Add, (int)(adddWuLiChuanTou * 10000), UpdateProDicList);
 
             //智力加魔法穿透
             mageChuanTouLv = (int)Intellect_value_add * 5;
             adddMageChuanTou = LvProChange(mageChuanTouLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_HuShiMagePro_Add, (int)(adddMageChuanTou * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_HuShiMagePro_Add, (int)(adddMageChuanTou * 10000), UpdateProDicList);
 
             //敏捷冷却时间
             cdTimeLv = (int)Agility_value_add * 2;
             addMinJie = LvProChange(cdTimeLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_SkillCDTimeCostPro_Add, (int)(addMinJie * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_SkillCDTimeCostPro_Add, (int)(addMinJie * 10000), UpdateProDicList);
 
             //耐力
             huixueLv = (int)Stamina_value_add;
-            AddUpdateProDicList((int)NumericType.Base_HuiXue_Add, huixueLv, UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_HuiXue_Add, huixueLv, UpdateProDicList);
 
             //体力
             damgeProCostLv = (int)Constitution_value_add * 2;
             damgeProCost = LvProChange(damgeProCostLv, roleLv);
-            AddUpdateProDicList((int)NumericType.Base_DamgeSubPro_Add, (int)(damgeProCost * 10000), UpdateProDicListCopy);
+            AddUpdateProDicList((int)NumericType.Base_DamgeSubPro_Add, (int)(damgeProCost * 10000), UpdateProDicList);
 
             // 移除鉴定技能后，因为在技能列表中不存在了，技能改变的属性不会触发通知客户端，所以在这重新触发下这些属性，通知一下客户端
             List<int> jianDingPro = new List<int>() { 200503, 200703, 200603, 200803, 203603, 100902, 105101, 105201, 105301, 105401, 105501 };
 
             for (int i = 0; i < jianDingPro.Count; i++)
             {
-                if (!UpdateProDicListCopy.ContainsKey(jianDingPro[i]))
+                if (!UpdateProDicList.ContainsKey(jianDingPro[i]))
                 {
-                    UpdateProDicListCopy.Add(jianDingPro[i], 0);
+                    UpdateProDicList.Add(jianDingPro[i], 0);
                 }
             }
 
             List<int> keys = new List<int>();
 
             //更新属性
-            foreach (int key in UpdateProDicListCopy.Keys)
+            foreach (int key in UpdateProDicList.Keys)
             {
                 if (jianDingPro.Contains(key))
                 {
                     jianDingPro.Remove(key);
                 }
-                long setValue = numericComponent.GetAsLong(key) + UpdateProDicListCopy[key];
+                long setValue = numericComponent.GetAsLong(key) + UpdateProDicList[key];
                 
                 long numType = key;
                 if (key > NumericType.Max)
