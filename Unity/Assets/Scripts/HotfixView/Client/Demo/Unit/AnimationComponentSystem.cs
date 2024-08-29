@@ -27,7 +27,6 @@ namespace ET.Client
         public static void UpdateAnimData(this AnimationComponent self, GameObject go)
         {
             self.Animancer = null;
-            self.AnimGroup = null;
             self.ClipTransitions.Clear();
             self.CurrentAnimation = string.Empty;
 
