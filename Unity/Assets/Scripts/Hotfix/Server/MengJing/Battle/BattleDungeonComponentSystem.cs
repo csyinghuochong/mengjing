@@ -112,7 +112,7 @@ namespace ET.Server
                 }
 
                 LogHelper.LogWarning($"发送战场奖励: {self.Zone()} {winPlayers[i]}", true);
-                MailHelp.SendUserMail(self.Root(), winPlayers[i], mailInfo).Coroutine();
+                MailHelp.SendUserMail(self.Root(), winPlayers[i], mailInfo,ItemGetWay.BattleWin).Coroutine();
             }
         }
 

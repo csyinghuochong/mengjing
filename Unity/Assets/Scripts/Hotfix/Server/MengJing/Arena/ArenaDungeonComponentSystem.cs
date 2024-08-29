@@ -161,7 +161,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(BagInfo);
                 }
 
-                MailHelp.SendUserMail(self.Root(), players[i].UnitId, mailInfo).Coroutine();
+                MailHelp.SendUserMail(self.Root(), players[i].UnitId, mailInfo, ItemGetWay.ArenaWin).Coroutine();
             }
         }
 

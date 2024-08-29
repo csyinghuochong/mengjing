@@ -40,7 +40,7 @@ namespace ET.Server
                 BagInfo.GetWay = $"{ItemGetWay.UnionBoss}_{serverTime}";
 
                 mailInfo.ItemList.Add(BagInfo);
-                MailHelp.SendUserMail(self.Root(), players[i].Id, mailInfo).Coroutine();
+                MailHelp.SendUserMail(self.Root(), players[i].Id, mailInfo,ItemGetWay.UnionBoss).Coroutine();
             }
         }
 

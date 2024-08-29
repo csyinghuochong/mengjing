@@ -48,7 +48,7 @@ namespace ET.Server
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
                 mailInfo.ItemList.AddRange(bagInfos);
 
-                MailHelp.SendUserMail( unit.Root(), unit.Id, mailInfo).Coroutine();
+                MailHelp.SendUserMail( unit.Root(), unit.Id, mailInfo, ItemGetWay.FubenGetReward).Coroutine();
             }
             else
             {

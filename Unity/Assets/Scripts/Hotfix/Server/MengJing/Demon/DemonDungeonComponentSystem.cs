@@ -77,7 +77,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailHelp.SendUserMail(self.Root(), sourcelist[i].Id, mailInfo).Coroutine();
+                MailHelp.SendUserMail(self.Root(), sourcelist[i].Id, mailInfo, ItemGetWay.PaiMaiBuy).Coroutine();
             }
         }
 

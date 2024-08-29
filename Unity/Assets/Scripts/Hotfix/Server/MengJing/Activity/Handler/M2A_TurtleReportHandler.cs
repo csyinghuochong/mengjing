@@ -50,7 +50,7 @@ namespace ET.Server
 
                 for (int i = 0; i < playerids.Count; i++)
                 {
-                    MailHelp.SendUserMail(scene.Root(), playerids[i].Value, mailInfo).Coroutine();
+                    MailHelp.SendUserMail(scene.Root(), playerids[i].Value, mailInfo,ItemGetWay.Turtle).Coroutine();
                 }
             }
             

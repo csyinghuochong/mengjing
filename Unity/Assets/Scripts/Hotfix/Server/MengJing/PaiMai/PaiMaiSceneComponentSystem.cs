@@ -187,7 +187,7 @@ namespace ET.Server
                     BagInfo.ItemNum = self.AuctionItemNum;
                     BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";
                     mailInfo.ItemList.Add(BagInfo);
-                    await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo);
+                    await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo, ItemGetWay.Auction);
                 }
                 else
                 {
@@ -196,7 +196,7 @@ namespace ET.Server
                     mailInfo.Context = "竞拍失败";
                     mailInfo.Title = $"金币小于{self.AuctionPrice},竞拍失败";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                    await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo);
+                    await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo, ItemGetWay.Auction);
                 }
             }
 
@@ -215,7 +215,7 @@ namespace ET.Server
                 BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";
                 mailInfo.ItemList.Add(BagInfo);
 
-                await MailHelp.SendUserMail(self.Root(), self.AuctionJoinList[i], mailInfo);
+                await MailHelp.SendUserMail(self.Root(), self.AuctionJoinList[i], mailInfo, ItemGetWay.Auction);
             }
 
             //其他玩家退还保证金
@@ -623,7 +623,7 @@ namespace ET.Server
                     {
                         Log.Info("拍卖行系统购买 概率:" + buyPro + "出售价格:" + paiMaiItem.Price * costNum + "玩家名称:" + paiMaiItem.PlayerName + "出售道具:" +
                             paiMaiItem.BagInfo.ItemID + "出售单价:" + paiMaiItem.Price + "道具拥有数量:" + paiMaiItem.BagInfo.ItemNum);
-                        MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0).Coroutine();
+                        MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0);
                         
                         paiMaiItem.BagInfo.ItemNum -= costNum;
                         if (paiMaiItem.BagInfo.ItemNum <= 0)

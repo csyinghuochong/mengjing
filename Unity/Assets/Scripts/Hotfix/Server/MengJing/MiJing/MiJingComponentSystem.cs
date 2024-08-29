@@ -85,7 +85,7 @@ namespace ET.Server
                 }
 
                 Log.Warning($"世界Boss排名奖励1: {self.Zone()}  {players[i].UserID}");
-                MailHelp.SendUserMail(self.Root(),  players[i].UserID, mailInfo, ItemGetWay.MiJingBoss).Coroutine();
+                await MailHelp.SendUserMail(self.Root(),  players[i].UserID, mailInfo, ItemGetWay.MiJingBoss);
             }
         }
 

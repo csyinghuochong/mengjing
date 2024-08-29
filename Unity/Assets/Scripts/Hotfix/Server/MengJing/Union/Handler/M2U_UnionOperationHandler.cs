@@ -59,7 +59,7 @@ namespace ET.Server
 
                                 for (int i = 0; i < dBUnionInfo.UnionInfo.UnionPlayerList.Count; i++)
                                 {
-                                    MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo).Coroutine();
+                                    MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo,ItemGetWay.UnionUpLv).Coroutine();
                                 }
 
                                 string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
