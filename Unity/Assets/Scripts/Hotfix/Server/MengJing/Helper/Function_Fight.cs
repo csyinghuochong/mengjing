@@ -1283,6 +1283,12 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, (long)(10000 * monsterConfig.MoveSpeed), notice);
         }
 
+        private static int GetPoint(int basic, int roleLv)
+        {
+            //每升一级属性+1所以这里有加成
+            return basic + roleLv * 2;
+        }
+
         /// <summary>
         /// 更新基础的属性
         /// </summary>
@@ -1307,18 +1313,11 @@ namespace ET.Server
             Dictionary<int, long> UpdateProDicList = new Dictionary<int, long>();
 
             //属性点
-            int PointLiLiang = numericComponent.GetAsInt(NumericType.PointLiLiang);
-            int PointZhiLi = numericComponent.GetAsInt(NumericType.PointZhiLi);
-            int PointTiZhi = numericComponent.GetAsInt(NumericType.PointTiZhi);
-            int PointNaiLi = numericComponent.GetAsInt(NumericType.PointNaiLi);
-            int PointMinJie = numericComponent.GetAsInt(NumericType.PointMinJie);
-
-            //每升一级属性+1所以这里有加成
-            PointLiLiang += roleLv * 2;
-            PointZhiLi += roleLv * 2;
-            PointTiZhi += roleLv * 2;
-            PointNaiLi += roleLv * 2;
-            PointMinJie += roleLv * 2;
+            int PointLiLiang = GetPoint(numericComponent.GetAsInt(NumericType.PointLiLiang), roleLv);
+            int PointZhiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointZhiLi), roleLv);
+            int PointTiZhi = GetPoint(numericComponent.GetAsInt(NumericType.PointTiZhi), roleLv);
+            int PointNaiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointNaiLi), roleLv);
+            int PointMinJie = GetPoint(numericComponent.GetAsInt(NumericType.PointMinJie), roleLv);
 
             OccupationConfig mOccupationConfig = OccupationConfigCategory.Instance.Get(userInfo.Occ);
           
@@ -1645,10 +1644,7 @@ namespace ET.Server
                     }
                 }
             }
-
-            //隐藏技能战力
-            int skillFightValue = 0;
-
+            
             int equipHpSum = 0;
             int equipMinActSum = 0;
             int equipMaxActSum = 0;
@@ -1708,21 +1704,6 @@ namespace ET.Server
                 if (equipList[i].HideSkillLists.Contains(68000105) || equipList[i].IncreaseSkillLists.Contains(3904))
                 {
                     mEquipCon.Equip_MinAct = mEquipCon.Equip_MaxAct;
-                }
-
-                for (int z = 0; z < equipList[i].HideSkillLists.Count; z++)
-                {
-                 
-                    Dictionary<int, HideProListConfig> hideCof = new Dictionary<int, HideProListConfig>();
-                    hideCof = HideProListConfigCategory.Instance.GetAll();
-
-                    foreach (HideProListConfig hideProConfig in hideCof.Values)
-                    {
-                        if (hideProConfig.PropertyType == equipList[i].HideSkillLists[z])
-                        {
-                            skillFightValue += hideProConfig.AddFightValue;
-                        }
-                    }
                 }
 
                 //强化登录（List长度13， 13个位置）
@@ -2070,6 +2051,8 @@ namespace ET.Server
             AddUpdateProDicList((int)NumericType.Base_ResLv_Add, resLv, UpdateProDicList);
             AddUpdateProDicList((int)NumericType.Base_ZhongJiPro_Add, zhongjiLv, UpdateProDicList);
 
+            UnitUpdateCombat(unit, notice, rank, UpdateProDicList);
+            
             //复制属性  --- 以下方法不加入战力计算
             Dictionary<int, long> UpdateProDicListCopy = new Dictionary<int, long>();
             //UpdateProDicListCopy = ComHelp.DeepCopy_2(UpdateProDicList);
@@ -2280,17 +2263,101 @@ namespace ET.Server
                 }
             }
             
-            //---------------
-            NumericComponentS numericComponent_1 = new NumericComponentS();
-
-            //更新属性,算战力
-            foreach (int key in UpdateProDicList.Keys)
+            if (notice)
             {
-                long setValue = numericComponent_1.GetAsLong(key) + UpdateProDicList[key];
-                //Log.Info("key = " + key + ":" + setValue);
-                numericComponent_1.ApplyValue(key, setValue, false);
+                List<int> ks = new List<int>();
+                List<long> vs = new List<long>();
+
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    int nowValue = (int)keys[i] / 100;
+                    if (!ks.Contains(nowValue))
+                    {
+                        ks.Add(nowValue);
+                        vs.Add(numericComponent.GetAsLong(nowValue));
+                    }
+                }
+
+                M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
+                //通知自己
+                m2C_UnitNumericListUpdate.UnitID = unit.Id;
+                m2C_UnitNumericListUpdate.Vs = vs;
+                m2C_UnitNumericListUpdate.Ks = ks;
+                MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
+            }
+        }
+
+        private static long ReturnGetFightNumLong(int numericType, Dictionary<int, long> dic)
+        {
+            if (numericType < NumericType.Max)
+            {
+                numericType = numericType * 100;
             }
 
+            int nowValue = numericType / 100;
+            int add = nowValue * 100 + 1;
+            int mul = nowValue * 100 + 2;
+            int finalAdd = nowValue * 100 + 3;
+
+            long addValue = 0;
+            dic.TryGetValue(add, out addValue);
+            long mulValue = 0;
+            dic.TryGetValue(mul, out mulValue);
+            long finalAddValue = 0;
+            dic.TryGetValue(finalAdd, out finalAddValue);
+
+            long nowPropertyValue = (long)(addValue * (1 + (float)mulValue / 10000) + finalAddValue);
+
+            return nowPropertyValue;
+        }
+
+        private static float ReturnGetFightNumfloat(int numericType, Dictionary<int, long> dic)
+        {
+            if (numericType < NumericType.Max)
+            {
+                numericType = numericType * 100;
+            }
+
+            int nowValue = numericType / 100;
+            int add = nowValue * 100 + 1;
+            int mul = nowValue * 100 + 2;
+            int finalAdd = nowValue * 100 + 3;
+
+            long addValue = 0;
+            dic.TryGetValue(add, out addValue);
+            long mulValue = 0;
+            dic.TryGetValue(mul, out mulValue);
+            long finalAddValue = 0;
+            dic.TryGetValue(finalAdd, out finalAddValue);
+            
+            long nowPropertyValue = (long)(addValue * (1 + (float)mulValue / 10000) + finalAddValue);
+
+            return nowPropertyValue / 10000f;
+        }
+        
+        private static void UnitUpdateCombat(Unit unit, bool notice, bool rank, Dictionary<int, long> UpdateProDicList)
+        {
+            //基础职业属性
+            UserInfoComponentS unitInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+            UserInfo userInfo = unitInfoComponentS.UserInfo;
+            int roleLv = userInfo.Lv;
+            
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            
+            //属性点
+            int PointLiLiang = GetPoint(numericComponent.GetAsInt(NumericType.PointLiLiang), roleLv);
+            int PointZhiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointZhiLi), roleLv);
+            int PointTiZhi = GetPoint(numericComponent.GetAsInt(NumericType.PointTiZhi), roleLv);
+            int PointNaiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointNaiLi), roleLv);
+            int PointMinJie = GetPoint(numericComponent.GetAsInt(NumericType.PointMinJie), roleLv);
+            
+            List<BagInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
+            
+            long Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicList);
+            long Agility_value = GetOnePro(NumericType.Now_Agility, UpdateProDicList);
+            long Intellect_value = GetOnePro(NumericType.Now_Intellect, UpdateProDicList);
+            long Stamina_value = GetOnePro(NumericType.Now_Stamina, UpdateProDicList);
+            long Constitution_value = GetOnePro(NumericType.Now_Constitution, UpdateProDicList);
 
             //战力计算
             long ShiLi_Act = 0;
@@ -2316,7 +2383,28 @@ namespace ET.Server
             //攻击部分
             foreach (var Item in NumericData.ZhanLi_Act)
             {
-                ShiLi_Act += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Act += (int)((float)ReturnGetFightNumLong(Item.Key, UpdateProDicList) * Item.Value);
+            }
+
+            //隐藏技能战力
+            int skillFightValue = 0;
+
+            for (int i = 0; i < equipList.Count; i++)
+            {
+                for (int z = 0; z < equipList[i].HideSkillLists.Count; z++)
+                {
+
+                    Dictionary<int, HideProListConfig> hideCof = new Dictionary<int, HideProListConfig>();
+                    hideCof = HideProListConfigCategory.Instance.GetAll();
+
+                    foreach (HideProListConfig hideProConfig in hideCof.Values)
+                    {
+                        if (hideProConfig.PropertyType == equipList[i].HideSkillLists[z])
+                        {
+                            skillFightValue += hideProConfig.AddFightValue;
+                        }
+                    }
+                }
             }
 
             //隐藏技能算在攻击部分
@@ -2324,11 +2412,12 @@ namespace ET.Server
 
             foreach (var Item in NumericData.ZhanLi_ActPro)
             {
-                ShiLi_ActPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_ActPro += ((float)ReturnGetFightNumfloat(Item.Key, UpdateProDicList) * Item.Value);
             }
 
             //幸运副本附加
-            int luck = numericComponent_1.GetAsInt(NumericType.Now_Luck);
+            long luck = 0;
+            UpdateProDicList.TryGetValue(NumericType.Now_Luck, out luck);
             switch (luck)
             {
                 case 0:
@@ -2370,23 +2459,23 @@ namespace ET.Server
             //防御部分
             foreach (var Item in NumericData.ZhanLi_Def)
             {
-                ShiLi_Def += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Def += (int)((float)ReturnGetFightNumLong(Item.Key, UpdateProDicList) * Item.Value);
             }
 
             foreach (var Item in NumericData.ZhanLi_DefPro)
             {
-                ShiLi_DefPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_DefPro += ((float)ReturnGetFightNumfloat(Item.Key, UpdateProDicList) * Item.Value);
             }
 
             //血量部分
             foreach (var Item in NumericData.ZhanLi_Hp)
             {
-                ShiLi_Hp += (int)((float)numericComponent_1.ReturnGetFightNumLong(Item.Key) * Item.Value);
+                ShiLi_Hp += (int)((float)ReturnGetFightNumLong(Item.Key, UpdateProDicList) * Item.Value);
             }
 
             foreach (var Item in NumericData.ZhanLi_HpPro)
             {
-                ShiLi_HpPro += ((float)numericComponent_1.ReturnGetFightNumfloat(Item.Key) * Item.Value);
+                ShiLi_HpPro += ((float)ReturnGetFightNumfloat(Item.Key, UpdateProDicList) * Item.Value);
             }
 
             //宠物守护附加战力
@@ -2475,36 +2564,11 @@ namespace ET.Server
             //更新战力
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
 
-            if (notice)
-            {
-                List<int> ks = new List<int>();
-                List<long> vs = new List<long>();
-
-                for (int i = 0; i < keys.Count; i++)
-                {
-                    int nowValue = (int)keys[i] / 100;
-                    if (!ks.Contains(nowValue))
-                    {
-                        ks.Add(nowValue);
-                        vs.Add(numericComponent.GetAsLong(nowValue));
-                    }
-                }
-
-                M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
-                //通知自己
-                m2C_UnitNumericListUpdate.UnitID = unit.Id;
-                m2C_UnitNumericListUpdate.Vs = vs;
-                m2C_UnitNumericListUpdate.Ks = ks;
-                MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
-            }
-
             //排行榜
             if (rank)
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRankInfo();
             }
-
-            numericComponent_1 = null;
         }
     }
 }
