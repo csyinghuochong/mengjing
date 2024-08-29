@@ -30583,14 +30583,15 @@ namespace ET
         }
     }
 
-    // 单独的message消息体， 以Proto结尾，需要生成对应的entity和转换方法
+    // 单独的message消息体， 以Proto结尾，需要生成对应的entity (TestServerInfo) 和转换方法（代码放在Server/ProtboToEntity目录下）
+    // 只处理outmessage即可
     [MemoryPackable]
-    [Message(OuterMessage.ServerInfoProto)]
-    public partial class ServerInfoProto : MessageObject
+    [Message(OuterMessage.TestServerInfoProto)]
+    public partial class TestServerInfoProto : MessageObject
     {
-        public static ServerInfoProto Create(bool isFromPool = false)
+        public static TestServerInfoProto Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(ServerInfoProto), isFromPool) as ServerInfoProto;
+            return ObjectPool.Instance.Fetch(typeof(TestServerInfoProto), isFromPool) as TestServerInfoProto;
         }
 
         [MemoryPackOrder(0)]
@@ -31430,6 +31431,6 @@ namespace ET
         public const ushort Popularize2C_UploadResponse = 10810;
         public const ushort C2Popularize_RewardRequest = 10811;
         public const ushort Popularize2C_RewardResponse = 10812;
-        public const ushort ServerInfoProto = 10813;
+        public const ushort TestServerInfoProto = 10813;
     }
 }
