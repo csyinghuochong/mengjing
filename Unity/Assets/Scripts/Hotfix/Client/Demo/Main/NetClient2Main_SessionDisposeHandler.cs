@@ -5,12 +5,13 @@
     {
         protected override async ETTask Run(Scene entity, NetClient2Main_SessionDispose message)
         {
+            Log.Console($"NetClient2Main_SessionDispose:{entity.Root().Name}");
+            
             //先简单做一下断线重连
             Scene root = entity.Root();
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             if (mapComponent.SceneType >= SceneTypeEnum.MainCityScene)
             {
-                Log.Debug("NetClient2Main_SessionDispose");
                 await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
                 PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
                 await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
