@@ -915,7 +915,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                await MailHelp.SendUserMail(self.Root(),  rankingInfos[i].UnitID,  mailInfo,ItemGetWay.RankReward )
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].UnitID, mailInfo, ItemGetWay.RankReward);
             }
         }
 
