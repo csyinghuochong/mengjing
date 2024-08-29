@@ -264,4 +264,26 @@ public class CustomEditorScript
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+    
+    // [MenuItem("Asset / ), false, 1]
+    [MenuItem("Assets/Custom/Check  Dependencies", false, 1)]//路径
+    public static void CheckDependencies()
+    {
+        string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+        UnityEngine.Debug.Log("fontPath: " + fontPath);
+        UnityEngine.Debug.Log("KCheckDependencies: Begin");
+
+        string[] dependPathList = AssetDatabase.GetDependencies(new string[] { fontPath });
+        foreach (string path in dependPathList)
+        {
+            using (var stream = File.OpenRead(path))
+            {
+                long fileSize = stream.Length;
+                UnityEngine.Debug.Log(fileSize + "   " + path);
+            }
+        }
+
+        UnityEngine.Debug.Log("KCheckDependencies: End");
+    }
+    
 }
