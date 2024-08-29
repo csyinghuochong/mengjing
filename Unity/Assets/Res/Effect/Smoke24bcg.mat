@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Smoke24bcg
-  m_Shader: {fileID: 4800000, guid: 8d2bcfc0858c93d469218991bd7f548a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4509922185c0db246983daba8a7c9c6e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _USEDEPTH_ON
@@ -86,6 +86,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _InvFade: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -104,4 +105,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutLineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpeedMainTexUVNoiseZW: {r: 0, g: 0, b: 0, a: 0}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
