@@ -821,10 +821,8 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new () { });
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                MailHelp.SendUserMail( self.Root(),  rankingInfos[i].UserId, mailInfo, ItemGetWay.Demon).Coroutine();
+                await ETTask.CompletedTask;
             }
         }
 
@@ -872,10 +870,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(BagInfo);
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].UnitID;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].UnitID, mailInfo, ItemGetWay.ShowLie);
             }
         }
 
@@ -920,10 +915,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].UnitID;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail(self.Root(),  rankingInfos[i].UnitID,  mailInfo,ItemGetWay.RankReward )
             }
         }
 
@@ -981,10 +973,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].KeyId;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail( self.Root(), rankingInfos[i].KeyId, mailInfo, ItemGetWay.RankReward)
             }
 
             self.DBRankInfo.rankingTrial.Clear();
@@ -1038,10 +1027,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(  ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].KeyId;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].KeyId, mailInfo, ItemGetWay.RankReward);
             }
 
             self.DBRankInfo.rankSeasonTower.Clear();
@@ -1101,10 +1087,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].UserId, mailInfo, ItemGetWay.RankReward);
             }
         }
 
@@ -1166,10 +1149,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].UserId, mailInfo, ItemGetWay.RankReward);
             }
         }
     }

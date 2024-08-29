@@ -50,15 +50,9 @@
                 BagInfo.GetWay = $"{ItemGetWay.FirstWin}_{serverTime}";
                 mailInfo.ItemList.Add(BagInfo);
             }
-
             dBFirstWinInfo.FirstWinInfos.Add(message.FirstWinInfo);
-            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "EMail").ActorId;
-            M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-            M2E_EMailSendRequest.Id = message.FirstWinInfo.UserId;
-            M2E_EMailSendRequest.MailInfo = mailInfo;
-            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
-                     (mailServerId, M2E_EMailSendRequest);
 
+            MailHelp.SendUserMail( scene.Root(),  message.FirstWinInfo.UserId,mailInfo, ItemGetWay.FirstWin ).Coroutine();
             await ETTask.CompletedTask;
         }
     }

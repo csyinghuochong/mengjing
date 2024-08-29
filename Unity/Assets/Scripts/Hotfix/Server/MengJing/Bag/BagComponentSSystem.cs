@@ -822,7 +822,7 @@ namespace ET.Server
 
             return needcell;
         }
-        
+
         //添加背包道具道具[支持同时添加多个]
         public static bool OnAddItemData(this BagComponentS self, List<RewardItem> rewardItems_init, string makeUserID, string getWay,
         bool notice = true, bool gm = false, int UseLocType = ItemLocType.ItemLocBag)

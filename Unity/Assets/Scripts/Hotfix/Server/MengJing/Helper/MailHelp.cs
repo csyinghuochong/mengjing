@@ -2,12 +2,9 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-
-
-
     public static class MailHelp
     {
-        public static async ETTask SendPaiMaiEmail(Scene root, PaiMaiItemInfo paiMaiItemInfo, int costNum, long unitid)
+        public static  void SendPaiMaiEmail(Scene root, PaiMaiItemInfo paiMaiItemInfo, int costNum, long unitid)
         {
             MailInfo mailInfo = MailInfo.Create();
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
@@ -25,11 +22,86 @@ namespace ET.Server
             mailInfo.BuyPlayerId = unitid;
 
             //发送到邮件服
-            ActorId mailServerId = UnitCacheHelper.GetMailServerId(root.Zone());
-            M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-            M2E_EMailSendRequest.Id = paiMaiItemInfo.UserId;
-            M2E_EMailSendRequest.MailInfo = mailInfo;
-            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await root.GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
+            SendUserMail(root, unitid, mailInfo, ItemGetWay.PaiMaiSell).Coroutine();
+        }
+
+        //指定玩家发送邮件
+        public static async ETTask<int> SendUserMail(Scene root, long userID, MailInfo mailInfo, int getWay)
+        {
+            using (await root.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.EMail, userID))
+            {
+                DBMailInfo dBMainInfo = await UnitCacheHelper.GetComponent<DBMailInfo>(root, userID);
+                if (dBMainInfo == null)
+                {
+                    return ErrorCode.ERR_NotFindAccount;
+                }
+
+                List<MailInfo> mailinfolist = dBMainInfo.MailInfoList;
+                for (int i = mailinfolist.Count - 1; i >= 0; i--)
+                {
+                    if (mailinfolist[i].ItemList.Count != 1)
+                    {
+                        continue;
+                    }
+
+                    if (mailinfolist[i].ItemList[0].ItemID == 10000151) //之前有一次全服误发精灵龟 /羽毛
+                    {
+                        mailinfolist.RemoveAt(i);
+                        continue;
+                    }
+
+                    if (mailinfolist[i].ItemList.Count >= 1 && !ItemConfigCategory.Instance.Contain(mailinfolist[i].ItemList[0].ItemID)) //
+                    {
+                        mailinfolist.RemoveAt(i);
+                        continue;
+                    }
+
+                    if (mailinfolist[i].ItemList.Count >= 2 && !ItemConfigCategory.Instance.Contain(mailinfolist[i].ItemList[1].ItemID))
+                    {
+                        mailinfolist.RemoveAt(i);
+                        continue;
+                    }
+                }
+
+                //存储邮件
+                if (mailinfolist.Count > 100)
+                {
+                    mailinfolist.RemoveAt(0);
+                }
+
+                mailinfolist.Add(mailInfo);
+
+               //  M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                // M2E_EMailSendRequest.Id = unitid;
+                // M2E_EMailSendRequest.MailInfo = mailInfo;
+                // M2E_EMailSendRequest.GetWay = ItemGetWay.Activity;
+                // E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
+                //         (mailServerId, M2E_EMailSendRequest);
+
+                await UnitCacheHelper.SaveComponent(root, userID, dBMainInfo);
+
+                //存储邮件
+
+                List<long> onlist = await UnitCacheHelper.GetOnLineUnits(root, root.Zone());
+
+                //在线直接推送
+                if (onlist.Contains(userID))
+                {
+                    M2C_UpdateMailInfo m2C_HorseNoticeInfo = M2C_UpdateMailInfo.Create();
+                    MapMessageHelper.SendToClient(root, userID, m2C_HorseNoticeInfo);
+                }
+                else
+                {
+                    ReddotComponentS reddotComponent = await UnitCacheHelper.GetComponentCache<ReddotComponentS>(root, userID);
+                    if (reddotComponent != null)
+                    {
+                        reddotComponent.AddReddont((int)ReddotType.Email);
+                        await UnitCacheHelper.SaveComponentCache(root, reddotComponent);
+                    }
+                }
+            }
+
+            return ErrorCode.ERR_Success;
         }
 
         public static void SendServerMail(Scene root, long userID, ServerMailItem serverMailItem)
@@ -39,7 +111,8 @@ namespace ET.Server
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userID, mail2M_SendServer);
         }
 
-        public static bool CheckSendMail(int MailType, string Title, NumericComponentS numericComponent, UserInfoComponentS userInfoComponent,  BagComponentS bagComponent)
+        public static bool CheckSendMail(int MailType, string Title, NumericComponentS numericComponent, UserInfoComponentS userInfoComponent,
+        BagComponentS bagComponent)
         {
             if (numericComponent == null || userInfoComponent == null || bagComponent == null)
             {
@@ -104,7 +177,7 @@ namespace ET.Server
         {
             //判断条件
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, userID);
-            NumericComponentS numericComponent =await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, userID);
+            NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, userID);
             BagComponentS bagComponent = await UnitCacheHelper.GetComponentCache<BagComponentS>(root, userID);
             bool cansendMail = CheckSendMail(serverMailItem.MailType, serverMailItem.ParasmNew, numericComponent, userInfoComponent,
                 bagComponent);
@@ -119,54 +192,7 @@ namespace ET.Server
             mailInfo.Context = "全服补偿邮件";
             mailInfo.ItemList = serverMailItem.ItemList;
             mailInfo.MailId = IdGenerater.Instance.GenerateId();
-            await SendUserMail(root, userID, mailInfo);
-        }
-
-        //指定玩家发送邮件
-        public static async ETTask<int> SendUserMail(Scene root, long userID, MailInfo mailInfo)
-        {
-            DBMailInfo dBMainInfo = await UnitCacheHelper.GetComponent<DBMailInfo>(root, userID);
-            if (dBMainInfo == null)
-            {
-                return ErrorCode.ERR_NotFindAccount;
-            }
-
-            List<MailInfo> mailinfolist = dBMainInfo.MailInfoList;
-            for (int i = mailinfolist.Count - 1; i >= 0; i--)
-            {
-                if (mailinfolist[i].ItemList.Count != 1)
-                {
-                    continue;
-                }
-
-                if (mailinfolist[i].ItemList[0].ItemID == 10000151) //之前有一次全服误发精灵龟 /羽毛
-                {
-                    mailinfolist.RemoveAt(i);
-                    continue;
-                }
-
-                if (mailinfolist[i].ItemList.Count >= 1 && !ItemConfigCategory.Instance.Contain(mailinfolist[i].ItemList[0].ItemID)) //
-                {
-                    mailinfolist.RemoveAt(i);
-                    continue;
-                }
-
-                if (mailinfolist[i].ItemList.Count >= 2 && !ItemConfigCategory.Instance.Contain(mailinfolist[i].ItemList[1].ItemID))
-                {
-                    mailinfolist.RemoveAt(i);
-                    continue;
-                }
-            }
-
-            //存储邮件
-            if (mailinfolist.Count > 100)
-            {
-                mailinfolist.RemoveAt(0);
-            }
-
-            mailinfolist.Add(mailInfo);
-            await UnitCacheHelper.SaveComponent(root, userID ,dBMainInfo);
-            return ErrorCode.ERR_Success;
+            await SendUserMail(root, userID, mailInfo, ItemGetWay.Activity);
         }
     }
 }

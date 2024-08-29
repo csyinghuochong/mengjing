@@ -247,11 +247,7 @@ namespace ET.Server
                         mailInfo.Context = $"恭喜您获得赛跑大赛排行榜第{Response.RankId}名奖励";
                         mailInfo.Title = "赛跑大赛排行榜奖励";
                         mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                        M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                        M2E_EMailSendRequest.Id = userInfoComponent.UserInfo.UserId;
-                        M2E_EMailSendRequest.MailInfo = mailInfo;
-                        E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(
-                            mailServerId,M2E_EMailSendRequest);
+                        await MailHelp.SendUserMail(self.Root(), userInfoComponent.UserInfo.UserId, mailInfo, ItemGetWay.ShowLie);
                     }
 
                     M2C_RankRunRaceReward m2C_RankRunRace = M2C_RankRunRaceReward.Create();

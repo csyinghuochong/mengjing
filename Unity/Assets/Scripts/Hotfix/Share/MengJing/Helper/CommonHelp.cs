@@ -8,21 +8,28 @@ namespace  ET
     {
 
         public const int MaxZone = 1024;
-        //版号专区
-        public static bool IsBanHaoZone(int zone)
+
+        public static int GetCenterZone( )
         {
-            return zone == 1003;
+            return 1000;
         }
-        
+
         public static bool IsRobotZone(int zone)
         {
             return zone == 1001;
+        }
+        
+        
+        //版号专区
+        public static bool IsBanHaoZone(int zone)
+        {
+            return zone == 1011;
         }
 
         //内部专区
         public static bool IsAlphaZone(int zone)
         {
-            return zone == 1004;
+            return zone == 1013;
         }
         
         public const int Version = 20240130;

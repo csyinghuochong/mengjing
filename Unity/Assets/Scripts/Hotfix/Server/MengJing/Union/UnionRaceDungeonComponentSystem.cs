@@ -219,17 +219,17 @@ namespace ET.Server
                         mailInfo.ItemList.Add(BagInfo);
                     }
 
-                    //MailHelp.SendUserMail(self.DomainZone(), unitids[i], mailInfo).Coroutine();
-                    M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                    M2E_EMailSendRequest.Id = unitids[i];
-                    M2E_EMailSendRequest.MailInfo = mailInfo;
-                    M2E_EMailSendRequest.GetWay = ItemGetWay.UnionRace;
-                    E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>()
-                            .Call(mailServerId, M2E_EMailSendRequest);
-                    if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
-                    {
-                        Log.Warning($"家族战发送奖励失败: {unitids[i]}");
-                    }
+                    MailHelp.SendUserMail(self.Root(), unitids[i], mailInfo,ItemGetWay.UnionRace ).Coroutine();
+                    // M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                    // M2E_EMailSendRequest.Id = unitids[i];
+                    // M2E_EMailSendRequest.MailInfo = mailInfo;
+                    // M2E_EMailSendRequest.GetWay = ItemGetWay.UnionRace;
+                    // E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>()
+                    //         .Call(mailServerId, M2E_EMailSendRequest);
+                    // if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
+                    // {
+                    //     Log.Warning($"家族战发送奖励失败: {unitids[i]}");
+                    // }
                 }
             }
 

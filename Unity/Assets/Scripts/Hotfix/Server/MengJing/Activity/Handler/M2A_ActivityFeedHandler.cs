@@ -44,12 +44,7 @@ namespace ET.Server
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
                     mailInfo.ItemList.AddRange(itemList);
 
-                    M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                    M2E_EMailSendRequest.Id = unitid;
-                    M2E_EMailSendRequest.MailInfo = mailInfo;
-                    M2E_EMailSendRequest.GetWay = ItemGetWay.Activity;
-                    E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
-                                       (mailServerId, M2E_EMailSendRequest);
+                    MailHelp.SendUserMail( scene.Root(), unitid,  mailInfo, ItemGetWay.Activity).Coroutine();
                 }
             }
             

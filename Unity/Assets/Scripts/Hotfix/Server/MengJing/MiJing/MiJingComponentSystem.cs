@@ -85,17 +85,7 @@ namespace ET.Server
                 }
 
                 Log.Warning($"世界Boss排名奖励1: {self.Zone()}  {players[i].UserID}");
-
-                // MailHelp.SendUserMail(self.DomainZone(),  players[i].UserID, mailInfo).Coroutine();
-                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
-                M2E_EMailSendRequest.Id = players[i].UserID;
-                M2E_EMailSendRequest.MailInfo = mailInfo;
-                M2E_EMailSendRequest.GetWay = ItemGetWay.MiJingBoss;
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
-                if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
-                {
-                    Log.Warning($"世界Boss排名奖励失败: {players[i].UserID}");
-                }
+                MailHelp.SendUserMail(self.Root(),  players[i].UserID, mailInfo, ItemGetWay.MiJingBoss).Coroutine();
             }
         }
 
