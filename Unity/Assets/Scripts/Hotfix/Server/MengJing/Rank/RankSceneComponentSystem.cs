@@ -90,7 +90,7 @@ namespace ET.Server
             for (int i = 0; i < listprogress.Count; i++)
             {
                 List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
-                if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Id)) //机器人进程
+                if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
                 {
                     continue;
                 }
@@ -763,7 +763,7 @@ namespace ET.Server
                     }
 
                     List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
-                    if (processScenes.Count == 0 ) //机器人进程
+                    if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
                     {
                         continue;
                     }
