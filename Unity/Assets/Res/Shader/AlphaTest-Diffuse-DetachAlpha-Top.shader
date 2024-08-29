@@ -16,6 +16,8 @@ Shader "Custom/URP/TransparentDiffuseDetachAlphaTop"
         {
             Name "ForwardPass"
             Tags { "LightMode" = "UniversalForward" }
+            
+            Blend SrcAlpha OneMinusSrcAlpha
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -51,7 +53,7 @@ Shader "Custom/URP/TransparentDiffuseDetachAlphaTop"
             {
                 half4 color = SAMPLE_TEXTURE2D(_MainTexLM, sampler_MainTexLM, i.uv);
                 half4 alpha = SAMPLE_TEXTURE2D(_AlphaTexLM, sampler_AlphaTexLM, i.uv);
-                return half4(color.rgb, alpha.a);
+                return half4(color.rgb, alpha.x);
             }
             ENDHLSL
         }
