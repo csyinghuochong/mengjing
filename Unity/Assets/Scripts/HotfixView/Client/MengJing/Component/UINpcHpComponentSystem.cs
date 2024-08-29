@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,23 @@ namespace ET.Client
     [EntitySystemOf(typeof(UINpcHpComponent))]
     public static partial class UINpcHpComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.TurtleSpeak)]
+        public class BuffTimer : ATimer<UINpcHpComponent>
+        {
+            protected override void Run(UINpcHpComponent self)
+            {
+                try
+                {
+                    self.OnTurtleSpeakFinish();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this UINpcHpComponent self)
         {
