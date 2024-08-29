@@ -973,7 +973,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                await MailHelp.SendUserMail( self.Root(), rankingInfos[i].KeyId, mailInfo, ItemGetWay.RankReward)
+                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].KeyId, mailInfo, ItemGetWay.RankReward);
             }
 
             self.DBRankInfo.rankingTrial.Clear();
