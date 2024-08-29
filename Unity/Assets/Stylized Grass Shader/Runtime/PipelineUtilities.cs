@@ -153,7 +153,7 @@ namespace StylizedGrass
             
             #if UNITY_2021_2_OR_NEWER && !UNITY_6000_0_OR_NEWER
             rendererData.debugShaders = r.debugShaders;
-            rendererData.xrSystemData = r.xrSystemData;
+            //rendererData.xrSystemData = r.xrSystemData;
             #endif
 
             return rendererData;
