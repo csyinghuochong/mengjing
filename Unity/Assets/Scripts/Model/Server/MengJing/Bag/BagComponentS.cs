@@ -31,6 +31,9 @@ namespace ET.Server
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, List<BagInfo>> AllItemList { get; set; } = new();
+        
+        // [BsonIgnore]   //不需要存库， Deserialize 再添加进来
+        // public Dictionary<int, List<ItemInfo>> AllItemList { get; set; } = new();
        
         /// <summary>
         /// 可以放在unitinfocomponent
