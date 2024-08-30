@@ -35,7 +35,7 @@ namespace ET.Server
                 KeyValuePairInt keyValuePairInt = BuChangHelper.GetBuChangRecharge(playerInfo);
                 response.BuChangRecharge = keyValuePairInt.KeyId;
                 response.BuChangDiamond = (int)keyValuePairInt.Value;
-                playerInfo.BuChangZone.Add(UnitIdStruct.GetUnitZone(request.UserId));
+                playerInfo.BuChangZone.Add(UnitIdStruct.GetUnitPhysicsZone(request.UserId));
             }
 
             dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), centerAccountInfoList[0]).Coroutine();

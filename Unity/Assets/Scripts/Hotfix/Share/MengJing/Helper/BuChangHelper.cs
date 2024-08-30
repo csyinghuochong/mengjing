@@ -4,7 +4,12 @@ namespace ET
 {
     public static class UnitIdStruct
     {
-        public static int GetUnitZone(long unitid)
+        public static int GetUnitLogicZone(long unitid, int zone = 1)
+        {
+            return 1;
+        }
+        
+        public static int GetUnitPhysicsZone(long unitid, int zone = 1)
         {
             return 1;
         }
@@ -20,7 +25,7 @@ namespace ET
             for (int i = 0; i < playerInfo.RechargeInfos.Count; i++)
             {
                 RechargeInfo rechargeInfo = playerInfo.RechargeInfos[i];    
-                int zone = UnitIdStruct.GetUnitZone(rechargeInfo.UnitId);
+                int zone = UnitIdStruct.GetUnitPhysicsZone(rechargeInfo.UnitId);
                 if (zone >= ConfigData.BuChangZone)
                 {
                     continue;
@@ -34,7 +39,7 @@ namespace ET
 
         public static int ShowNewBuChang(PlayerInfo playerInfo, long unitid)
         {
-            int zone = UnitIdStruct.GetUnitZone(unitid);
+            int zone = UnitIdStruct.GetUnitPhysicsZone(unitid);
             if (zone != ConfigData.BuChangZone)
             {
                 return 0;
