@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Setup for the Built-In Render Pipeline
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Tropical Island requires the following packages, which need to be installed via the package manager to work properly in the Build-In Render Pipeline:
+- Post Processing 
+- Shader Graph
+
+To install the packages, click Window->Package Manager and select "Packages: Unity Registry" in the top menu. Select each package and click the install button.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Setup for the Universal Render Pipeline (URP)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+If you want to use Tropical Island with the Universal Render Pipeline (URP), double click the Assets/Ilumisoft/Tropical Island/URP.unitypackage and select import.
+This will overwrite all shaders, materials and demo assets to work properly in a URP project.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Support
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+If you have any question or need support, feel free to get in touch with us via support@ilumisoft.de
