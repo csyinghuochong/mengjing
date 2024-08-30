@@ -27,6 +27,9 @@ namespace ET
         private const string clientMessagePath = "../Unity/Assets/Scripts/Model/Generate/Client/Message/";
         private const string serverMessagePath = "../Unity/Assets/Scripts/Model/Generate/Server/Message/";
         private const string clientServerMessagePath = "../Unity/Assets/Scripts/Model/Generate/ClientServer/Message/";
+        
+        private const string serverMessageEntityPath = "../Unity/Assets/Scripts/Model/Generate/Server/ProtoToEntity/";
+
         private static readonly char[] splitChars = [' ', '\t'];
         private static readonly List<OpcodeInfo> msgOpcode = [];
 
@@ -37,6 +40,8 @@ namespace ET
             RemoveAllFilesExceptMeta(clientMessagePath);
             RemoveAllFilesExceptMeta(serverMessagePath);
             RemoveAllFilesExceptMeta(clientServerMessagePath);
+            
+            RemoveAllFilesExceptMeta(serverMessageEntityPath);
 
             List<string> list = FileHelper.GetAllFiles(protoDir, "*proto");
             foreach (string s in list)
@@ -51,12 +56,19 @@ namespace ET
                 string protoName = ss2[0];
                 string cs = ss2[1];
                 int startOpcode = int.Parse(ss2[2]);
+
                 ProtoFile2CS(fileName, protoName, cs, startOpcode);
+                if (protoName == "OuterMessage")
+                {
+                    ProtoFile2Entity(fileName);
+                }
             }
 
             RemoveUnusedMetaFiles(clientMessagePath);
             RemoveUnusedMetaFiles(serverMessagePath);
             RemoveUnusedMetaFiles(clientServerMessagePath);
+            
+            RemoveUnusedMetaFiles(serverMessageEntityPath);
         }
 
         private static void ProtoFile2CS(string fileName, string protoName, string cs, int startOpcode)
@@ -236,6 +248,195 @@ namespace ET
             }
         }
 
+        private static void ProtoFile2Entity(string fileName)
+        {
+            string proto = Path.Combine(protoDir, $"{fileName}.proto");
+            string s = File.ReadAllText(proto);
+
+            Dictionary<string, string> name_type = new();
+
+            bool isMsgStart = false;
+            string msgName = "";
+            Regex responseTypeRegex = ResponseTypeRegex();
+
+            foreach (string line in s.Split('\n'))
+            {
+                string newline = line.Trim();
+                if (string.IsNullOrEmpty(newline))
+                {
+                    continue;
+                }
+
+                if (responseTypeRegex.IsMatch(newline))
+                {
+                    continue;
+                }
+
+                if (!isMsgStart && newline.StartsWith("//"))
+                {
+                    continue;
+                }
+
+                if (newline.StartsWith("message"))
+                {
+                    string parentClass = "";
+                    msgName = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries)[1];
+                    string[] ss = newline.Split(["//"], StringSplitOptions.RemoveEmptyEntries);
+                    if (ss.Length == 2)
+                    {
+                        parentClass = ss[1].Trim();
+                    }
+
+                    if (parentClass == "" && msgName.EndsWith("Proto"))
+                    {
+                        msgName = msgName.Substring(0, msgName.Length - "Proto".Length);
+                        isMsgStart = true;
+                    }
+
+                    continue;
+                }
+
+                if (isMsgStart)
+                {
+                    if (newline.StartsWith('{'))
+                    {
+                        continue;
+                    }
+
+                    if (newline.StartsWith('}'))
+                    {
+                        // 开始生成代码
+                        StringBuilder sb = new();
+                        sb.AppendLine("using MemoryPack;");
+                        sb.AppendLine("using System.Collections.Generic;");
+                        sb.AppendLine("");
+                        sb.AppendLine($"namespace ET");
+                        sb.AppendLine("{");
+                        sb.AppendLine($"\t[ChildOf]");
+                        sb.AppendLine($"\tpublic class {msgName} : Entity, IAwake");
+                        sb.AppendLine("\t{");
+                        foreach (KeyValuePair<string, string> keyValuePair in name_type)
+                        {
+                            if (keyValuePair.Key == "Id")
+                            {
+                                continue;
+                            }
+
+                            sb.AppendLine($"\t\tpublic {keyValuePair.Value} {keyValuePair.Key} {{ get; set; }}");
+                        }
+
+                        sb.AppendLine("\t}");
+
+                        sb.AppendLine("");
+                        // System
+                        sb.AppendLine($"\t[EntitySystemOf(typeof({msgName}))]");
+                        sb.AppendLine($"\t[FriendOf(typeof({msgName}))]");
+                        sb.AppendLine($"\tpublic static partial class {msgName}System");
+                        sb.AppendLine("\t{");
+                        sb.AppendLine("\t\t[EntitySystem]");
+                        sb.AppendLine($"\t\tprivate static void Awake(this {msgName} self)");
+                        sb.AppendLine("\t\t{");
+                        sb.AppendLine("\t\t}");
+                        sb.AppendLine("");
+                        sb.AppendLine($"\t\tprivate static void FromMessage(this {msgName} self, {msgName}Proto proto)");
+                        sb.AppendLine("\t\t{");
+                        foreach (KeyValuePair<string, string> keyValuePair in name_type)
+                        {
+                            if (keyValuePair.Key == "Id")
+                            {
+                                continue;
+                            }
+
+                            sb.AppendLine($"\t\t\tself.{keyValuePair.Key} = proto.{keyValuePair.Key};");
+                        }
+
+                        sb.AppendLine("\t\t}");
+                        sb.AppendLine("");
+                        sb.AppendLine($"\t\tprivate static {msgName}Proto ToMessage(this {msgName} self)");
+                        sb.AppendLine("\t\t{");
+                        sb.AppendLine($"\t\t\t{msgName}Proto proto = {msgName}Proto.Create();");
+                        foreach (KeyValuePair<string, string> keyValuePair in name_type)
+                        {
+                            if (keyValuePair.Key == "Id")
+                            {
+                                sb.AppendLine($"\t\t\tproto.{keyValuePair.Key} = (int)self.{keyValuePair.Key};");
+                                continue;
+                            }
+                            sb.AppendLine($"\t\t\tproto.{keyValuePair.Key} = self.{keyValuePair.Key};");
+                        }
+
+                        sb.AppendLine("\t\t\treturn proto;");
+                        sb.AppendLine("\t\t}");
+                        sb.AppendLine("\t}");
+                        sb.AppendLine("}");
+
+
+                        GenerateCS(sb.ToString(), serverMessageEntityPath, msgName);
+                           
+                        
+                        isMsgStart = false;
+                        msgName = "";
+                        name_type = new();
+
+                        continue;
+                    }
+
+                    if (newline.StartsWith("//"))
+                    {
+                        continue;
+                    }
+
+                    string memberStr;
+                    if (newline.Contains("//"))
+                    {
+                        string[] lineSplit = newline.Split("//");
+                        memberStr = lineSplit[0].Trim();
+                    }
+                    else
+                    {
+                        memberStr = newline;
+                    }
+
+                    if (memberStr.StartsWith("map<"))
+                    {
+                        int start = newline.IndexOf('<') + 1;
+                        int end = newline.IndexOf('>');
+                        string types = newline.Substring(start, end - start);
+                        string[] ss = types.Split(',');
+                        string keyType = ConvertType(ss[0].Trim());
+                        string valueType = ConvertType(ss[1].Trim());
+                        string tail = newline[(end + 1)..];
+                        ss = tail.Trim().Replace(";", "").Split(' ');
+                        string v = ss[0];
+
+                        name_type.Add(v, $"Dictionary<{keyType}, {valueType}>");
+                    }
+                    else if (memberStr.StartsWith("repeated"))
+                    {
+                        int index = newline.IndexOf(';');
+                        newline = newline.Remove(index);
+                        string[] ss = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
+                        string type = ss[1];
+                        type = ConvertType(type);
+                        string name = ss[2];
+
+                        name_type.Add(name, $"List<{type}>");
+                    }
+                    else
+                    {
+                        int index = newline.IndexOf(';');
+                        newline = newline.Remove(index);
+                        string[] ss = newline.Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
+                        string type = ss[0];
+                        string name = ss[1];
+                        string typeCs = ConvertType(type);
+
+                        name_type.Add(name, typeCs);
+                    }
+                }
+            }
+        }
+        
         private static void GenerateCS(string result, string path, string proto)
         {
             if (!Directory.Exists(path))
