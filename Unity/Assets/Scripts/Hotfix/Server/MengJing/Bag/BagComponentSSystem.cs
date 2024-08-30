@@ -21,6 +21,15 @@ namespace ET.Server
         {
         }
 
+        [EntitySystem]
+        private static void Deserialize(this ET.Server.BagComponentS self)
+        {
+            foreach (Entity entity in self.Children.Values)
+            {
+                //ItemInfo aa = entity as ItemInfo;
+            }
+        }
+
         public static void CheckAllItemList(this BagComponentS self)
         {
             if (self.AllItemList == null)
@@ -35,7 +44,7 @@ namespace ET.Server
                     self.AllItemList.Add(i, new List<BagInfo>());
                 }
             }
-            
+
             for (int i = self.BagBuyCellNumber.Count; i < (int)ItemLocType.ItemLocMax; i++)
             {
                 self.BagBuyCellNumber.Add(0);
@@ -377,7 +386,7 @@ namespace ET.Server
 
             return null;
         }
-        
+
         public static bool IsBagFullByLoc(this BagComponentS self, int hourseId)
         {
             List<BagInfo> ItemTypeList = self.GetItemByLoc(hourseId);
@@ -574,7 +583,7 @@ namespace ET.Server
             //        self.WarehouseAddedCell.Add(0);
             //    }
             //}
-            
+
             if (self.QiangHuaLevel.Count == 0)
             {
                 for (int i = 0; i <= 11; i++)
@@ -808,7 +817,7 @@ namespace ET.Server
         public static int GetRealNeedCell(this BagComponentS self, RewardItem itemids, int itemLocType)
         {
             int needcell = 0;
-            
+
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemids.ItemID);
             long curNumber = self.GetItemNumber(itemids.ItemID, itemLocType);
 
@@ -818,7 +827,7 @@ namespace ET.Server
             }
 
             needcell += (int)(1f * itemids.ItemNum / itemConfig.ItemPileSum);
-            needcell += (itemids.ItemNum % itemConfig.ItemPileSum > 0 ? 1 : 0); 
+            needcell += (itemids.ItemNum % itemConfig.ItemPileSum > 0 ? 1 : 0);
 
             return needcell;
         }
@@ -845,7 +854,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                
+
                 bool have = false;
                 for (int bb = rewardItems.Count - 1; bb >= 0; bb--)
                 {
@@ -865,7 +874,7 @@ namespace ET.Server
                     rewardItems.Add(item);
                 }
             }
-            
+
             for (int i = rewardItems.Count - 1; i >= 0; i--)
             {
                 ItemConfig itemCof = ItemConfigCategory.Instance.Get(rewardItems[i].ItemID);
@@ -894,7 +903,7 @@ namespace ET.Server
                 }
                 else
                 {
-                    needCellNumber += self.GetRealNeedCell( rewardItems[i] , UseLocType);
+                    needCellNumber += self.GetRealNeedCell(rewardItems[i], UseLocType);
                 }
             }
 
@@ -902,7 +911,7 @@ namespace ET.Server
             {
                 return true;
             }
-            
+
             //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
             if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
                 UseLocType == ItemLocType.ItemLocBag)
@@ -914,9 +923,9 @@ namespace ET.Server
                 return false;
             }
 
-            
+
             //通知客户端背包刷新
-            M2C_RoleBagUpdate m2c_bagUpdate = self.message;
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             m2c_bagUpdate.BagInfoAdd.Clear();
             m2c_bagUpdate.BagInfoUpdate.Clear();
             m2c_bagUpdate.BagInfoDelete.Clear();
@@ -1040,6 +1049,7 @@ namespace ET.Server
                 //还没有插入完，需要开启新格子
                 while (leftNum > 0)
                 {
+                    //self.AddChild<ItemInfo>();
                     BagInfo useBagInfo = BagInfo.Create();
                     useBagInfo.ItemID = itemID;
                     useBagInfo.ItemNum = (leftNum > maxPileSum) ? maxPileSum : leftNum;
@@ -1551,5 +1561,6 @@ namespace ET.Server
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
             //Function_Fight.GetInstance().UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
         }
+       
     }
 }

@@ -89,7 +89,7 @@ Shader "URP/Custom/TransparentDiffuseDetachAlphaTop"
 //	fixed4 c = tex2D(_MainTexLM, IN.uv_MainTexLM);
 //	fixed4 a = tex2D(_AlphaTexLM, IN.uv_AlphaTexLM);
 //	o.Albedo = c.rgb;
-//	o.Alpha = a.x;
+//	o.Alpha = a;   //o.Alpha = a.x;
 //}
 //ENDCG
 //}

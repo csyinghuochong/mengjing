@@ -4,9 +4,9 @@ using MongoDB.Bson.Serialization.Options;
 
 namespace ET.Server
 {
-
+    
     [ComponentOf(typeof(Unit))]
-    public class BagComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache
+    public class BagComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         
         /// <summary>
@@ -48,10 +48,6 @@ namespace ET.Server
         /// </summary>
         public List<int> FashionEquipList { get; set; } = new();
         
-        
-        [BsonIgnore]
-        public M2C_RoleBagUpdate message = M2C_RoleBagUpdate.Create();
-
         [BsonIgnore]
         public List<HideProList> FuMoProList { get; set; } = new();
         

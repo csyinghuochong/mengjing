@@ -28,7 +28,7 @@ namespace ET
         private const string serverMessagePath = "../Unity/Assets/Scripts/Model/Generate/Server/Message/";
         private const string clientServerMessagePath = "../Unity/Assets/Scripts/Model/Generate/ClientServer/Message/";
         
-        private const string serverMessageEntityPath = "../Unity/Assets/Scripts/Model/Generate/Server/ProtoToEntity/";
+        private const string serverMessageEntityPath = "../Unity/Assets/Scripts/Model/Share/ProtoToEntity/";
 
         private static readonly char[] splitChars = [' ', '\t'];
         private static readonly List<OpcodeInfo> msgOpcode = [];
@@ -313,7 +313,7 @@ namespace ET
                         sb.AppendLine($"namespace ET");
                         sb.AppendLine("{");
                         sb.AppendLine($"\t[ChildOf]");
-                        sb.AppendLine($"\tpublic class {msgName} : Entity, IAwake");
+                        sb.AppendLine($"\tpublic class {msgName} : Entity, IAwake, ISerializeToEntity");
                         sb.AppendLine("\t{");
                         foreach (KeyValuePair<string, string> keyValuePair in name_type)
                         {

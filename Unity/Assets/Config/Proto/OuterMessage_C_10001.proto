@@ -7049,3 +7049,34 @@ message TestServerInfoProto
 	int32 Status = 2;
 	string ServerName = 3;
 }
+
+//BagComponentS   
+//生成的iteminfo x需要加标签 [ChildOf(typeof(BagComponentS))]
+message ItemInfoProto    
+{
+	int64 BagInfoID = 1;
+	int32 ItemID = 2;
+	int32 ItemNum = 3;
+	string ItemPar = 4;
+	int32 HideID = 5;
+	string GemHole = 6;	//对应的孔位颜色
+	int32 Loc = 8; //0背包 1装备
+	bool IfJianDing = 9;
+	repeated HideProList HideProLists = 10;					//鉴定属性
+	repeated HideProList XiLianHideProLists = 11;           //洗练属性
+	repeated int32 HideSkillLists = 12;
+	bool isBinging = 13;
+	repeated HideProList XiLianHideTeShuProLists = 14;		//洗练特殊属性
+	string GetWay = 16; //来源方式
+	string GemIDNew = 17;	//对应的宝石ID
+	string MakePlayer = 18;					//制作玩家名字
+	repeated HideProList FumoProLists = 20; //附魔属性
+	int32 InheritTimes = 21;
+	repeated int32 InheritSkills = 22;
+	bool IsProtect = 23;						///装备锁 宠物锁 功能 npc打开
+	repeated HideProList IncreaseProLists = 24; // 增幅属性
+	repeated int32 IncreaseSkillLists = 25; // 增幅技能
+	int32 EquipPlan = 26;
+	int32 EquipIndex = 27;
+	int32 FuLing = 28;    //0未附灵 1附灵
+}

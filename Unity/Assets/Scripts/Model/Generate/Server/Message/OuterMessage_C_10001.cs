@@ -30618,6 +30618,168 @@ namespace ET
         }
     }
 
+    // BagComponentS
+    // 生成的iteminfo x需要加标签 [ChildOf(typeof(BagComponentS))]
+    [MemoryPackable]
+    [Message(OuterMessage.ItemInfoProto)]
+    public partial class ItemInfoProto : MessageObject
+    {
+        public static ItemInfoProto Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(ItemInfoProto), isFromPool) as ItemInfoProto;
+        }
+
+        [MemoryPackOrder(0)]
+        public long BagInfoID { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ItemID { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int ItemNum { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string ItemPar { get; set; }
+
+        [MemoryPackOrder(4)]
+        public int HideID { get; set; }
+
+        /// <summary>
+        /// 对应的孔位颜色
+        /// </summary>
+        [MemoryPackOrder(5)]
+        public string GemHole { get; set; }
+
+        /// <summary>
+        /// 0背包 1装备
+        /// </summary>
+        [MemoryPackOrder(7)]
+        public int Loc { get; set; }
+
+        [MemoryPackOrder(8)]
+        public bool IfJianDing { get; set; }
+
+        /// <summary>
+        /// 鉴定属性
+        /// </summary>
+        [MemoryPackOrder(9)]
+        public List<HideProList> HideProLists { get; set; } = new();
+
+        /// <summary>
+        /// 洗练属性
+        /// </summary>
+        [MemoryPackOrder(10)]
+        public List<HideProList> XiLianHideProLists { get; set; } = new();
+
+        [MemoryPackOrder(11)]
+        public List<int> HideSkillLists { get; set; } = new();
+
+        [MemoryPackOrder(12)]
+        public bool isBinging { get; set; }
+
+        /// <summary>
+        /// 洗练特殊属性
+        /// </summary>
+        [MemoryPackOrder(13)]
+        public List<HideProList> XiLianHideTeShuProLists { get; set; } = new();
+
+        /// <summary>
+        /// 来源方式
+        /// </summary>
+        [MemoryPackOrder(15)]
+        public string GetWay { get; set; }
+
+        /// <summary>
+        /// 对应的宝石ID
+        /// </summary>
+        [MemoryPackOrder(16)]
+        public string GemIDNew { get; set; }
+
+        /// <summary>
+        /// 制作玩家名字
+        /// </summary>
+        [MemoryPackOrder(17)]
+        public string MakePlayer { get; set; }
+
+        /// <summary>
+        /// 附魔属性
+        /// </summary>
+        [MemoryPackOrder(19)]
+        public List<HideProList> FumoProLists { get; set; } = new();
+
+        [MemoryPackOrder(20)]
+        public int InheritTimes { get; set; }
+
+        [MemoryPackOrder(21)]
+        public List<int> InheritSkills { get; set; } = new();
+
+        /// <summary>
+        /// /装备锁 宠物锁 功能 npc打开
+        /// </summary>
+        [MemoryPackOrder(22)]
+        public bool IsProtect { get; set; }
+
+        /// <summary>
+        /// 增幅属性
+        /// </summary>
+        [MemoryPackOrder(23)]
+        public List<HideProList> IncreaseProLists { get; set; } = new();
+
+        /// <summary>
+        /// 增幅技能
+        /// </summary>
+        [MemoryPackOrder(24)]
+        public List<int> IncreaseSkillLists { get; set; } = new();
+
+        [MemoryPackOrder(25)]
+        public int EquipPlan { get; set; }
+
+        [MemoryPackOrder(26)]
+        public int EquipIndex { get; set; }
+
+        /// <summary>
+        /// 0未附灵 1附灵
+        /// </summary>
+        [MemoryPackOrder(27)]
+        public int FuLing { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.BagInfoID = default;
+            this.ItemID = default;
+            this.ItemNum = default;
+            this.ItemPar = default;
+            this.HideID = default;
+            this.GemHole = default;
+            this.Loc = default;
+            this.IfJianDing = default;
+            this.HideProLists.Clear();
+            this.XiLianHideProLists.Clear();
+            this.HideSkillLists.Clear();
+            this.isBinging = default;
+            this.XiLianHideTeShuProLists.Clear();
+            this.GetWay = default;
+            this.GemIDNew = default;
+            this.MakePlayer = default;
+            this.FumoProLists.Clear();
+            this.InheritTimes = default;
+            this.InheritSkills.Clear();
+            this.IsProtect = default;
+            this.IncreaseProLists.Clear();
+            this.IncreaseSkillLists.Clear();
+            this.EquipPlan = default;
+            this.EquipIndex = default;
+            this.FuLing = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -31432,5 +31594,6 @@ namespace ET
         public const ushort C2Popularize_RewardRequest = 10811;
         public const ushort Popularize2C_RewardResponse = 10812;
         public const ushort TestServerInfoProto = 10813;
+        public const ushort ItemInfoProto = 10814;
     }
 }
