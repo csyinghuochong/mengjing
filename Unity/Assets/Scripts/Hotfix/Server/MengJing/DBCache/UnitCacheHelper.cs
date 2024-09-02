@@ -15,7 +15,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<Unit> GetUnitCache(Scene scene, long unitId)
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unitId);
+            int zone = scene.Zone();
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
