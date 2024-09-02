@@ -15,6 +15,7 @@ namespace Suntail
         private void Awake()
         {
             _light = GetComponent<Light>();
+            this.playerCamera = Camera.main.gameObject;
         }
 
         private void Update()
