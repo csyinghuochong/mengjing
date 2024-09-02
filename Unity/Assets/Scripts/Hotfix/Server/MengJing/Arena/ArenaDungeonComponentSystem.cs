@@ -154,7 +154,7 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    BagInfo BagInfo = BagInfo.Create();
+                    ItemInfoProto BagInfo = ItemInfoProto.Create();
                     BagInfo.ItemID = itemId;
                     BagInfo.ItemNum = itemNum;
                     BagInfo.GetWay = $"{ItemGetWay.ArenaWin}_{serverTime}";

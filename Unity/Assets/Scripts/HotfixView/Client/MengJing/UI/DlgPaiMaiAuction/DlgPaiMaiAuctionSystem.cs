@@ -211,7 +211,7 @@ namespace ET.Client
             self.View.E_TextPriceText.text = price.ToString();
             self.View.E_Lab_RmbNumInputField.text = price.ToString();
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = itemid;
             bagInfo.ItemNum = number;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

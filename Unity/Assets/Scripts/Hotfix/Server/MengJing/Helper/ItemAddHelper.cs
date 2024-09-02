@@ -10,12 +10,12 @@ namespace ET.Server
     public static class ItemAddHelper
     {
 
-        public static void OnItemUpdate(Unit self, BagInfo bagInfo)
+        public static void OnItemUpdate(Unit self, ItemInfo bagInfo)
         {
             //通知客户端背包道具发生改变
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
-            m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+            m2c_bagUpdate.BagInfoUpdate = new();
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
             MapMessageHelper.SendToClient(self, m2c_bagUpdate);
         }
 
@@ -41,7 +41,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="bagInf0"></param>
         /// <param name="getType">1购买</param>
-        public static void JianDingFuItem(BagInfo bagInf0, int shulianValue, int getType)
+        public static void JianDingFuItem(ItemInfo bagInf0, int shulianValue, int getType)
         {
             if (ItemHelper.IsBuyItem(getType))
             {
@@ -76,7 +76,7 @@ namespace ET.Server
             bagInf0.ItemPar = randValue.ToString();
         }
 
-        public static void TreasureItem(Unit unit, BagInfo bagInfo)
+        public static void TreasureItem(Unit unit, ItemInfo bagInfo)
         {
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);

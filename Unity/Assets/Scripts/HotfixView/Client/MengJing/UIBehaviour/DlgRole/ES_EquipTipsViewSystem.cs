@@ -52,8 +52,8 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RefreshInfo(this ES_EquipTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse, int occTwoValue,
-        List<BagInfo> equipItemList)
+        public static void RefreshInfo(this ES_EquipTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse, int occTwoValue,
+        List<ItemInfo> equipItemList)
         {
             using (zstring.Block())
             {
@@ -377,7 +377,7 @@ namespace ET.Client
                 icon.GetComponent<Image>().sprite = sp;
 
                 int equipShiShiGemNum = 0;
-                List<BagInfo> equipList = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocEquip);
+                List<ItemInfo> equipList = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocEquip);
                 for (int i = 0; i < equipList.Count; i++)
                 {
                     string[] gemList = equipList[i].GemIDNew.Split('_');
@@ -412,7 +412,7 @@ namespace ET.Client
         }
 
         public static int ShowSuitEquipInfo(this ES_EquipTips self, ItemConfig itemConfig, int equipSuitID, float startPostionY,
-        List<BagInfo> itemList)
+        List<ItemInfo> itemList)
         {
             int properShowNum = 0;
             if (equipSuitID != 0)

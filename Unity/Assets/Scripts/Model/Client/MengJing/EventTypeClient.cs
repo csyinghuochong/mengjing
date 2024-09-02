@@ -5,11 +5,11 @@ namespace ET.Client
 {
     public struct ShowItemTips
     {
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo;
         public ItemOperateEnum ItemOperateEnum;
         public float3 InputPoint;
         public int Occ;
-        public List<BagInfo> EquipList;
+        public List<ItemInfo> EquipList;
         public int CurrentHouse;
     }
 
@@ -478,7 +478,7 @@ namespace ET.Client
 
     public struct DigForTreasure
     {
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo;
     }
 
     public struct UnionInvite

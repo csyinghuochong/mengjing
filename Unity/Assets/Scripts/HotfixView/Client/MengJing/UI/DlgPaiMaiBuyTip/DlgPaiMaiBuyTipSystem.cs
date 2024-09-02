@@ -23,12 +23,14 @@ namespace ET.Client
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiBuyTip);
         }
-        
+
         public static void InitInfo(this DlgPaiMaiBuyTip self, PaiMaiItemInfo paiMaiItemInfo, Action<int> buyAction)
         {
             self.PaiMaiItemInfo = paiMaiItemInfo;
             self.BuyAction = buyAction;
-            self.View.ES_CommonItem.UpdateItem(self.PaiMaiItemInfo.BagInfo, ItemOperateEnum.None);
+            ItemInfo itemInfo = new ItemInfo();
+            itemInfo.FromMessage(self.PaiMaiItemInfo.BagInfo);
+            self.View.ES_CommonItem.UpdateItem(itemInfo, ItemOperateEnum.None);
             self.BuyNum = 1;
             self.View.E_Lab_RmbNumInputField.text = self.BuyNum.ToString();
             using (zstring.Block())

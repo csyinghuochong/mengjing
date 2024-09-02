@@ -125,7 +125,7 @@ namespace ET.Client
             self.UpdateConsume();
         }
 
-        private static void OnSelectItem(this ES_PetXiLian self, BagInfo bagInfo)
+        private static void OnSelectItem(this ES_PetXiLian self, ItemInfo bagInfo)
         {
             self.CostItemInfo = bagInfo;
             if (bagInfo == null)
@@ -169,7 +169,7 @@ namespace ET.Client
         private static void UpdateConsume(this ES_PetXiLian self)
         {
             self.ShowBagInfos.Clear();
-            List<BagInfo> bagList = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagList = self.Root().GetComponent<BagComponentC>().GetBagList();
 
             for (int i = 0; i < bagList.Count; i++)
             {

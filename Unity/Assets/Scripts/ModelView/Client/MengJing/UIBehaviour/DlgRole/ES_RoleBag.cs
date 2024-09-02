@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RoleBag : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public int CurrentItemType;
 
 		public ToggleGroup E_ItemTypeSetToggleGroup

@@ -10,10 +10,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_EquipSetItem : Entity,IAwake<Transform>,IDestroy 
 	{
-		public List<BagInfo> EquipIdList = new List<BagInfo>();
-		public BagInfo BagInfo;
+		public List<ItemInfo> EquipIdList { get; set; } = new List<ItemInfo>();
+		public ItemInfo BagInfo { get; set; }
 		public int Occ;
-		public Action<BagInfo> OnClickAction;
+		public Action<ItemInfo> OnClickAction { get; set; }
 
 		public ItemOperateEnum itemOperateEnum = ItemOperateEnum.Juese;
 		

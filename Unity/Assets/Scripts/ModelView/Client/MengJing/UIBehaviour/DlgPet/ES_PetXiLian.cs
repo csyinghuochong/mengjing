@@ -8,11 +8,11 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetXiLian : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public BagInfo CostItemInfo;
+		public ItemInfo CostItemInfo { get; set; }
 		public RolePetInfo RolePetInfo;
 
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		
 		public ES_PetInfoShow ES_PetInfoShow
      	{

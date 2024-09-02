@@ -19,7 +19,7 @@ namespace ET.Client
         {
         }
 
-        public static void Init(this DlgItemSellTip self, BagInfo bagInfo)
+        public static void Init(this DlgItemSellTip self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             self.Num = bagInfo.ItemNum;

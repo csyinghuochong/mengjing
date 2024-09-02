@@ -95,9 +95,9 @@ namespace ET.Client
 
             scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
         }
 
         public static void UpdateSkillListUI(this ES_SkillSet self)
@@ -136,7 +136,7 @@ namespace ET.Client
         private static void UpdateItemSkillUI(this ES_SkillSet self)
         {
             self.ShowBagInfos.Clear();
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 int itemID = bagInfos[i].ItemID;
@@ -153,7 +153,7 @@ namespace ET.Client
             self.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void BeginDrag(this ES_SkillSet self, BagInfo binfo, PointerEventData pdata)
+        public static void BeginDrag(this ES_SkillSet self, ItemInfo binfo, PointerEventData pdata)
         {
             self.SkillIconItemCopy = UnityEngine.Object.Instantiate(self.EG_SkillIconItemRectTransform.gameObject);
             self.SkillIconItemCopy.SetActive(true);
@@ -166,7 +166,7 @@ namespace ET.Client
             self.SkillIconItemCopy.transform.Find("Img_Mask/Img_SkillIcon").GetComponent<Image>().sprite = sp;
         }
 
-        public static void Draging(this ES_SkillSet self, BagInfo binfo, PointerEventData pdata)
+        public static void Draging(this ES_SkillSet self, ItemInfo binfo, PointerEventData pdata)
         {
             RectTransform canvas = self.SkillIconItemCopy.transform.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
@@ -175,7 +175,7 @@ namespace ET.Client
             self.SkillIconItemCopy.transform.localPosition = new Vector3(self.localPoint.x, self.localPoint.y, 0f);
         }
 
-        public static void EndDrag(this ES_SkillSet self, BagInfo binfo, PointerEventData pdata)
+        public static void EndDrag(this ES_SkillSet self, ItemInfo binfo, PointerEventData pdata)
         {
             RectTransform canvas = self.SkillIconItemCopy.transform.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();

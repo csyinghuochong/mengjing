@@ -10,8 +10,8 @@ namespace ET.Client
             get => this.GetComponent<DlgJiaYuanBagViewComponent>();
         }
 
-        public BagInfo BagInfo;
-        public List<BagInfo> ShowBagInfos = new();
+        public ItemInfo BagInfo { get; set; }
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

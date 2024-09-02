@@ -9,12 +9,12 @@ namespace ET.Client
 	public  class ES_EquipmentIncreaseShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEquipItems;
-		public List<BagInfo> ShowEquipBagInfos = new();
+		public List<ItemInfo> ShowEquipBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemReelItems;
-		public List<BagInfo> ShowReelBagInfos = new();
+		public List<ItemInfo> ShowReelBagInfos { get; set; } = new();
 		
-		public BagInfo EquipmentBagInfo;
-		public BagInfo ReelBagInfo;
+		public ItemInfo EquipmentBagInfo { get; set; }
+		public ItemInfo ReelBagInfo { get; set; }
 		public int Page;
 		
 		public ToggleGroup E_ItemTypeSetToggleGroup

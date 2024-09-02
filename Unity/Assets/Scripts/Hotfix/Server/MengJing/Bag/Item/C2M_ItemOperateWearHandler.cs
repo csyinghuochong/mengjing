@@ -16,7 +16,7 @@ namespace ET.Server
             {
 
                 int locType = ItemLocType.ItemLocBag;
-                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, bagInfoID);
+                ItemInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, bagInfoID);
                 if (useBagInfo == null)
                 {
                     return;
@@ -60,7 +60,7 @@ namespace ET.Server
 
                 //获取之前的位置是否有装备
                 int toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
-                BagInfo beforeequip = unit.GetComponent<BagComponentS>().GetEquipBySubType(toLocType, weizhi);
+                ItemInfo beforeequip = unit.GetComponent<BagComponentS>().GetEquipBySubType(toLocType, weizhi);
 
                 if (beforeequip != null)
                 {
@@ -69,7 +69,7 @@ namespace ET.Server
 
                     unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(toLocType, beforeequip);
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
-                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
+                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip.ToMessage());
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace ET.Server
 
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
 
                 //if (weizhi == (int)ItemSubTypeEnum.Wuqi)
                 //{
@@ -96,7 +96,7 @@ namespace ET.Server
             {
 
                 int beloc = ItemLocType.ItemLocEquip;
-                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(beloc, bagInfoID);
+                ItemInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(beloc, bagInfoID);
                 if (useBagInfo == null)
                 {
                     beloc = ItemLocType.ItemLocEquip_2;
@@ -113,11 +113,11 @@ namespace ET.Server
                 unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
                 unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(beloc, useBagInfo);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                 MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             }
 
-            BagInfo equip_0 = unit.GetComponent<BagComponentS  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo equip_0 = unit.GetComponent<BagComponentS  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
 
             await ETTask.CompletedTask;

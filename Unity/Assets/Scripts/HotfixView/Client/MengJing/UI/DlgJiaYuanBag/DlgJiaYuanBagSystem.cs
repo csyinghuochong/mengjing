@@ -96,7 +96,7 @@ namespace ET.Client
             int maxCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity;
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByType(2);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByType(2);
             self.ShowBagInfos.Clear();
 
             for (int i = 0; i < bagInfos.Count; i++)
@@ -114,7 +114,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count > maxCapacity? self.ShowBagInfos.Count : maxCapacity);
         }
 
-        public static void OnClickHandler(this DlgJiaYuanBag self, BagInfo bagInfo)
+        public static void OnClickHandler(this DlgJiaYuanBag self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             if (self.ScrollItemCommonItems != null)

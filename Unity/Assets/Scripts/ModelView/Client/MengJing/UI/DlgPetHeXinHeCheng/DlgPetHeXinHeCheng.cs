@@ -12,10 +12,10 @@ namespace ET.Client
         }
 
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-        public List<BagInfo> ShowBagInfos = new();
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public ETCancellationToken cancellationToken;
         public bool IsHoldDown;
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public GameObject BagItemCopy;
     }
 }

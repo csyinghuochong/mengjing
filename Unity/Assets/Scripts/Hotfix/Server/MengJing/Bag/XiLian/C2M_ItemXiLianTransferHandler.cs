@@ -8,8 +8,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemXiLianTransferRequest request, M2C_ItemXiLianTransferResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
+            ItemInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
+            ItemInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
                 return;
@@ -70,9 +70,9 @@ namespace ET.Server
 
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             //通知客户端背包道具发生改变
-            m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_1);
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_2);
+            m2c_bagUpdate.BagInfoUpdate = new List<ItemInfoProto>();
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_1.ToMessage());
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_2.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             await ETTask.CompletedTask;
         }

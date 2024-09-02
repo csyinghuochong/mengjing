@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_EquipTips : Entity,IAwake<Transform>,IDestroy
 	{
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public ItemOperateEnum ItemOpetateType;
 		public int CurrentHouse;
 		public float TitleBigHeight_160;      //底图头部的宽度

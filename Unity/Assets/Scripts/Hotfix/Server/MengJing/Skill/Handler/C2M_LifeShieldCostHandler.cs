@@ -16,7 +16,7 @@ namespace ET.Server
         
             for (int i = 0; i < request.OperateBagID.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID[i]);
                 if (bagInfo == null)
                 {
                     continue;

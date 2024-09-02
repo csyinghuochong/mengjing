@@ -34,7 +34,7 @@ namespace ET.Client
 
         //public List<BagInfo>[] AllItemList { get; set; }
         
-        public Dictionary<int, List<BagInfo>> AllItemList { get; set; } = new();
+        public Dictionary<int, List<ItemInfo>> AllItemList { get; set; } = new();
 
         public bool RealAddItem;
     }

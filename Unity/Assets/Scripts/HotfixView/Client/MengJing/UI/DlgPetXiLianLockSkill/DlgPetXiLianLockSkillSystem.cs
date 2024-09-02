@@ -25,7 +25,7 @@ namespace ET.Client
             scrollItemCommonSkillItem.SelectAction = self.OnSelectSkill;
         }
 
-        public static void UpdateSkillList(this DlgPetXiLianLockSkill self, RolePetInfo rolePetInfo, BagInfo bagInfo)
+        public static void UpdateSkillList(this DlgPetXiLianLockSkill self, RolePetInfo rolePetInfo, ItemInfo bagInfo)
         {
             self.RolePetInfo = rolePetInfo;
             self.CostItemInfo = bagInfo;

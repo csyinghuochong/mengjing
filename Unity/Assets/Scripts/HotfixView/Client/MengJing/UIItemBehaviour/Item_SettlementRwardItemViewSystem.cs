@@ -22,7 +22,7 @@ namespace ET.Client
         {
             if (self.RewardItem != null)
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = self.RewardItem.ItemID;
                 bagInfo.ItemNum = self.RewardItem.ItemNum;
                 self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
@@ -39,7 +39,7 @@ namespace ET.Client
             self.RewardItem = rewardItem;
             if (self.ES_CommonItem != null)
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = self.RewardItem.ItemID;
                 bagInfo.ItemNum = self.RewardItem.ItemNum;
                 self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

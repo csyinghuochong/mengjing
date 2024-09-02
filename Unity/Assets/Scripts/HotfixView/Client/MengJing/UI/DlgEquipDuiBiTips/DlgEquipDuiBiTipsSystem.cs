@@ -33,12 +33,12 @@ namespace ET.Client
             self.View.ES_ItemAppraisalTips_1.RefreshInfo(args.BagInfo, args.ItemOperateEnum, args.CurrentHouse);
         }
 
-        public static void OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, BagInfo bagInfo_1, ShowItemTips args, int weight,
+        public static void OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, ItemInfo bagInfo_1, ShowItemTips args, int weight,
         ItemOperateEnum itemOperateEnum)
         {
             float height_1 = 0;
             float height_2 = 0;
-            BagInfo bagInfo_2 = args.BagInfo;
+            ItemInfo bagInfo_2 = args.BagInfo;
 
             height_1 = self.View.ES_EquipTips_1.E_BackImage.GetComponent<RectTransform>().sizeDelta.y;
             self.View.ES_EquipTips_1.RefreshInfo(bagInfo_1, ItemOperateEnum.None, args.CurrentHouse, 0, args.EquipList);

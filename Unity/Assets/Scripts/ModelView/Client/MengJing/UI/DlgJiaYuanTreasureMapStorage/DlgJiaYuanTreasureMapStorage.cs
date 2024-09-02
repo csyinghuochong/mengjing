@@ -11,8 +11,8 @@ namespace ET.Client
         }
 
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
-        public List<BagInfo> ShowHouseBagInfos;
+        public List<ItemInfo> ShowHouseBagInfos { get; set; }
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
-        public List<BagInfo> ShowBagBagInfos;
+        public List<ItemInfo> ShowBagBagInfos { get; set; }
     }
 }

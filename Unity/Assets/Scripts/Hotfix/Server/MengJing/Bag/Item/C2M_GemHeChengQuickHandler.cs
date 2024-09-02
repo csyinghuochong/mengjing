@@ -17,9 +17,9 @@ namespace ET.Server
                 return;
             }
 
-            List<BagInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc(request.LocType);
+            List<ItemInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc(request.LocType);
 
-            List<BagInfo> gemList = new List<BagInfo>();
+            List<ItemInfo> gemList = new List<ItemInfo>();
             for (int i = 0; i < bagItemList.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagItemList[i].ItemID);

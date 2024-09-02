@@ -17,7 +17,7 @@ namespace ET.Server
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             for (int i = request.BagInfoIDs.Count - 1; i >= 0; i--)
             {
-                BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[i]);
+                ItemInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[i]);
                 if (useBagInfo == null)
                 {
                     request.BagInfoIDs.RemoveAt(i);

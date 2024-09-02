@@ -134,12 +134,12 @@ namespace ET.Server
                     playerIds = new List<long>();
                 }
 
-                List<BagInfo> itemList = new List<BagInfo>();
+                List<ItemInfoProto> itemList = new List<ItemInfoProto>();
                 string[] rewardItem = ActivityConfigHelper.GuessRewardList()[hour].Split('@');
                 for (int i = 0; i < rewardItem.Length; i++)
                 {
                     string[] itemInfo = rewardItem[i].Split(';');
-                    BagInfo BagInfo = BagInfo.Create();
+                    ItemInfoProto BagInfo = ItemInfoProto.Create();
                     BagInfo.ItemID = int.Parse(itemInfo[0]);
                     BagInfo.ItemNum = int.Parse(itemInfo[1]);
                     itemList.Add(BagInfo);

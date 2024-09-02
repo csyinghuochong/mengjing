@@ -69,7 +69,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetInfo);
         }
 
-        public static void OnUpdateUI(this DlgPetInfo self, RolePetInfo rolePetInfo, List<BagInfo> bagInfos, List<int> keys, List<long> values)
+        public static void OnUpdateUI(this DlgPetInfo self, RolePetInfo rolePetInfo, List<ItemInfoProto> bagInfos, List<int> keys, List<long> values)
         {
             self.PetSkinId = 0;
             self.PetHeXinList = bagInfos;
@@ -175,7 +175,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
+                ItemInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 Transform itemTransform = self.PetHeXinItemList[i].transform;
                 itemTransform.Find("Node_2").gameObject.SetActive(true);
@@ -280,7 +280,7 @@ namespace ET.Client
             self.UpdatePetHexinItem(self.PetHeXinList);
         }
 
-        private static void UpdatePetHexinItem(this DlgPetInfo self, List<BagInfo> bagInfos)
+        private static void UpdatePetHexinItem(this DlgPetInfo self, List<ItemInfoProto> bagInfos)
         {
             self.View.E_ButtonHeXinHeChengButton.gameObject.SetActive(false);
             // self.View.E_ButtonEquipXieXiaButton.AddListenerAsync(self.OnButtonEquipXieXia);
@@ -289,7 +289,7 @@ namespace ET.Client
 
             CommonViewHelper.DestoryChild(self.View.EG_AttributeListNodeRectTransform.gameObject);
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
-            BagInfo bagInfo = null;
+            ItemInfoProto bagInfo = null;
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].BagInfoID == baginfoId)

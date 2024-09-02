@@ -7,9 +7,9 @@ namespace ET.Client
     {
         public DlgPetEggFuLingViewComponent View { get => this.GetComponent<DlgPetEggFuLingViewComponent>(); }
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public long EggId;
-        public List<BagInfo> ShowBagInfos = new();
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

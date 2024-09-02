@@ -322,7 +322,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
+                ItemInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 Transform itemTransform = self.PetHeXinItemList[i].transform;
                 itemTransform.Find("Node_2").gameObject.SetActive(true);
@@ -435,8 +435,8 @@ namespace ET.Client
 
         public static void OnButtonPetHeXinItem(this ES_WatchPet self, int position)
         {
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
-            List<BagInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
+            List<ItemInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
             for (int i = 0; i < self.PetHeXinItemList.Length; i++)
             {
                 self.PetHeXinItemList[i].transform.Find("ImageSelect").gameObject.SetActive(i == position);
@@ -448,7 +448,7 @@ namespace ET.Client
             // self.OnUpdateItemList(bagInfos);
         }
 
-        private static void UpdatePetHexinItem(this ES_WatchPet self, List<BagInfo> bagInfos)
+        private static void UpdatePetHexinItem(this ES_WatchPet self, List<ItemInfo> bagInfos)
         {
             self.E_ButtonHeXinHeChengButton.gameObject.SetActive(true);
             self.E_ButtonEquipXieXiaButton.AddListenerAsync(self.OnButtonEquipXieXia);
@@ -457,7 +457,7 @@ namespace ET.Client
 
             CommonViewHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
-            BagInfo bagInfo = null;
+            ItemInfo bagInfo = null;
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].BagInfoID == baginfoId)
@@ -581,7 +581,7 @@ namespace ET.Client
             }
         }
 
-        private static void SelectItemHandlder(this ES_WatchPet self, BagInfo bagInfo)
+        private static void SelectItemHandlder(this ES_WatchPet self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
@@ -623,7 +623,7 @@ namespace ET.Client
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
-            BagInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
+            ItemInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
 
             self.LastSelectItem = await PetNetHelper.RequestRolePetHeXin(self.Root(), 2, bagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
             self.OnEquipPetHeXin();
@@ -631,8 +631,8 @@ namespace ET.Client
 
         public static void OnEquipPetHeXin(this ES_WatchPet self)
         {
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
-            List<BagInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
+            List<ItemInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
             self.UpdatePetHeXin(self.LastSelectItem);
             self.UpdateAttribute(self.LastSelectItem);
             self.SelectItemHandlder(null);

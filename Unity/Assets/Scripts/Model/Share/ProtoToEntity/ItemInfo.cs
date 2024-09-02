@@ -14,20 +14,20 @@ namespace ET
 		public string GemHole { get; set; }
 		public int Loc { get; set; }
 		public bool IfJianDing { get; set; }
-		public List<HideProList> HideProLists { get; set; }
-		public List<HideProList> XiLianHideProLists { get; set; }
-		public List<int> HideSkillLists { get; set; }
+		public List<HideProList> HideProLists { get; set; } = new();
+		public List<HideProList> XiLianHideProLists { get; set; } = new();
+		public List<int> HideSkillLists { get; set; } = new();
 		public bool isBinging { get; set; }
-		public List<HideProList> XiLianHideTeShuProLists { get; set; }
+		public List<HideProList> XiLianHideTeShuProLists { get; set; } = new();
 		public string GetWay { get; set; }
 		public string GemIDNew { get; set; }
 		public string MakePlayer { get; set; }
-		public List<HideProList> FumoProLists { get; set; }
+		public List<HideProList> FumoProLists { get; set; } = new();
 		public int InheritTimes { get; set; }
-		public List<int> InheritSkills { get; set; }
+		public List<int> InheritSkills { get; set; } = new();
 		public bool IsProtect { get; set; }
-		public List<HideProList> IncreaseProLists { get; set; }
-		public List<int> IncreaseSkillLists { get; set; }
+		public List<HideProList> IncreaseProLists { get; set; } = new();
+		public List<int> IncreaseSkillLists { get; set; } = new();
 		public int EquipPlan { get; set; }
 		public int EquipIndex { get; set; }
 		public int FuLing { get; set; }
@@ -42,7 +42,7 @@ namespace ET
 		{
 		}
 
-		private static void FromMessage(this ItemInfo self, ItemInfoProto proto)
+		public static void FromMessage(this ItemInfo self, ItemInfoProto proto)
 		{
 			self.BagInfoID = proto.BagInfoID;
 			self.ItemID = proto.ItemID;
@@ -71,7 +71,7 @@ namespace ET
 			self.FuLing = proto.FuLing;
 		}
 
-		private static ItemInfoProto ToMessage(this ItemInfo self)
+		public static ItemInfoProto ToMessage(this ItemInfo self)
 		{
 			ItemInfoProto proto = ItemInfoProto.Create();
 			proto.BagInfoID = self.BagInfoID;

@@ -30,7 +30,7 @@ namespace ET.Client
             self.E_Image_goldImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();

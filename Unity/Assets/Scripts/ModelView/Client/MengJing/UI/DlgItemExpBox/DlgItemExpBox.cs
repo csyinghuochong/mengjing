@@ -5,7 +5,7 @@
     {
         public DlgItemExpBoxViewComponent View { get => this.GetComponent<DlgItemExpBoxViewComponent>(); }
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public int WorldPlayerLv;
         public int Price;
         public int UseNum;

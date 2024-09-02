@@ -426,7 +426,7 @@ namespace ET
         //105401.装备鉴定属性耐力
         //105501.装备鉴定属性体质
 
-        public static bool IsTaskGiveItem(int TargetType, int[] Target, int[] TargetValue, BagInfo bagInfo)
+        public static bool IsTaskGiveItem(int TargetType, int[] Target, int[] TargetValue, ItemInfo bagInfo)
         {
             if (bagInfo == null)
             {
@@ -521,7 +521,7 @@ namespace ET
             return true;
         }
 
-        public static long GetJianDingValue(BagInfo bagInfo, int type)
+        public static long GetJianDingValue(ItemInfo bagInfo, int type)
         {
             long value = 0;
             for (int i = 0; i < bagInfo.HideProLists.Count; i++)

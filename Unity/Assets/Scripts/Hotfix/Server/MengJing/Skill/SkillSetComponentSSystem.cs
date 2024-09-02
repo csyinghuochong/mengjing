@@ -870,7 +870,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
-        public static void OnTakeOffEquip(this SkillSetComponentS self, int ItemLocBag, BagInfo bagInfo, long baginfoid = 0)
+        public static void OnTakeOffEquip(this SkillSetComponentS self, int ItemLocBag, ItemInfo bagInfo, long baginfoid = 0)
         {
             if (ItemLocBag != ItemLocType.ItemLocEquip
                 && ItemLocBag != ItemLocType.ItemLocEquip_2
@@ -895,7 +895,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
-        public static void OnWearEquip(this SkillSetComponentS self, BagInfo bagInfo)
+        public static void OnWearEquip(this SkillSetComponentS self, ItemInfo bagInfo)
         {
             if (bagInfo.Loc != (int)ItemLocType.ItemLocEquip
                 && bagInfo.Loc != (int)ItemLocType.ItemLocEquip_2

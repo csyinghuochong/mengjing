@@ -85,17 +85,17 @@ namespace ET.Client
                 self.E_TextNameText.text = zstring.Format("{0}级", activityConfig.Par_1);
             }
 
-            BagInfo bagInfo1 = BagInfo.Create();
+            ItemInfo bagInfo1 = new ItemInfo();
             bagInfo1.ItemID = int.Parse(activityConfig.Par_2.Split(';')[0]);
             bagInfo1.ItemNum = int.Parse(activityConfig.Par_2.Split(';')[1]);
             self.ES_CommonItem_1.UpdateItem(bagInfo1, ItemOperateEnum.None);
 
-            BagInfo bagInfo2 = BagInfo.Create();
+            ItemInfo bagInfo2 = new ItemInfo();
             bagInfo2.ItemID = int.Parse(activityConfig.Par_3.Split(';')[0]);
             bagInfo2.ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]);
             self.ES_CommonItem_2.UpdateItem(bagInfo2, ItemOperateEnum.None);
 
-            BagInfo bagInfo3 = BagInfo.Create();
+            ItemInfo bagInfo3 = new ItemInfo();
             bagInfo3.ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]);
             bagInfo3.ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]);
             self.ES_CommonItem_3.UpdateItem(bagInfo3, ItemOperateEnum.None);

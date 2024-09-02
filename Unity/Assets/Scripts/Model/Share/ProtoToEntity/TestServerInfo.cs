@@ -19,13 +19,13 @@ namespace ET
 		{
 		}
 
-		private static void FromMessage(this TestServerInfo self, TestServerInfoProto proto)
+		public static void FromMessage(this TestServerInfo self, TestServerInfoProto proto)
 		{
 			self.Status = proto.Status;
 			self.ServerName = proto.ServerName;
 		}
 
-		private static TestServerInfoProto ToMessage(this TestServerInfo self)
+		public static TestServerInfoProto ToMessage(this TestServerInfo self)
 		{
 			TestServerInfoProto proto = TestServerInfoProto.Create();
 			proto.Id = (int)self.Id;

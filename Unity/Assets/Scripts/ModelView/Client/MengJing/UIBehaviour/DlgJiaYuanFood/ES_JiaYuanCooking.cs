@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public EntityRef<ES_CommonItem>[] CostItemList = new EntityRef<ES_CommonItem>[4];
 		public bool IsHoldDown = false;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public ES_CommonItem ES_CommonItem_0

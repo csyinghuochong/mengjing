@@ -13,7 +13,7 @@ namespace ET.Server
             {
                 int itemLocType = ItemLocType.ItemLocBag;
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
 
                 if (bagInfo == null)
                 {
@@ -106,7 +106,7 @@ namespace ET.Server
 
                     M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
                     //通知客户端背包道具发生改变
-                    m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
                     MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
                 }
 

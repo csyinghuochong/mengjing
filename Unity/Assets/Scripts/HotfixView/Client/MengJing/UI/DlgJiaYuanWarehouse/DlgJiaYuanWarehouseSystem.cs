@@ -174,7 +174,7 @@ namespace ET.Client
                 self.UpdateBagSelect, self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
         }
 
-        private static void UpdateHouseSelect(this DlgJiaYuanWarehouse self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this DlgJiaYuanWarehouse self, ItemInfo bagInfo)
         {
             if (self.ScrollItemHouseItems != null)
             {
@@ -189,7 +189,7 @@ namespace ET.Client
             }
         }
 
-        private static void UpdateBagSelect(this DlgJiaYuanWarehouse self, BagInfo bagInfo)
+        private static void UpdateBagSelect(this DlgJiaYuanWarehouse self, ItemInfo bagInfo)
         {
             if (self.ScrollItemBagItems != null)
             {

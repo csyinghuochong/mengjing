@@ -10,7 +10,7 @@ namespace ET.Server
         {
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 
-            BagInfo bagInfoJinHe = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
+            ItemInfo bagInfoJinHe = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
             if (bagInfoJinHe == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -24,7 +24,7 @@ namespace ET.Server
             List<int> qulitylist = new List<int> { };
             for (int i = 0; i < huishouList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
                 if (bagInfo == null)
                 {
                     continue;
@@ -52,7 +52,7 @@ namespace ET.Server
             }
 
             bagInfoJinHe.ItemPar = oldqulity.ToString();
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfoJinHe);
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfoJinHe.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
             bagComponent.OnCostItemData(bagsList, ItemLocType.ItemLocBag);

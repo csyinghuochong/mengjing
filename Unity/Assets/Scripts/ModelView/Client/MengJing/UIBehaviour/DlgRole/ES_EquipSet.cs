@@ -12,7 +12,7 @@ namespace ET.Client
 		public ItemOperateEnum ItemOperateEnum;
 		public List<EntityRef<ES_EquipItem>> ESEquipItems_1 = new();
 		public List<EntityRef<ES_EquipItem>> ESEquipItems_2 = new();
-		public List<BagInfo> EquipInfoList = new();
+		public List<ItemInfo> EquipInfoList { get; set; } = new();
 		
 		public RectTransform EG_EquipSetHideRectTransform
      	{

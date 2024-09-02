@@ -45,7 +45,7 @@ namespace ET.Client
                 self.UpdateBagSelect, (int)ItemLocType.ChouKaWarehouse);
         }
 
-        private static void UpdateHouseSelect(this DlgChouKaWarehouse self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this DlgChouKaWarehouse self, ItemInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
             {
@@ -57,7 +57,7 @@ namespace ET.Client
             }
         }
 
-        private static void UpdateBagSelect(this DlgChouKaWarehouse self, BagInfo bagInfo)
+        private static void UpdateBagSelect(this DlgChouKaWarehouse self, ItemInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {

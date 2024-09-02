@@ -29,7 +29,7 @@ namespace ET.Client
 
             self.PaiMaiItemInfo = paiMaiItemInfo;
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = paiMaiItemInfo.BagInfo.ItemID;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.text = paiMaiItemInfo.BagInfo.ItemNum.ToString();
@@ -41,7 +41,9 @@ namespace ET.Client
 
             self.E_TextNameText.text = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID).ItemName;
 
-            self.ES_CommonItem.Baginfo = self.PaiMaiItemInfo.BagInfo;
+            ItemInfo itemInfo = new ItemInfo();
+            itemInfo.FromMessage(self.PaiMaiItemInfo.BagInfo);
+            self.ES_CommonItem.Baginfo = itemInfo;
         }
 
         public static void SetClickHandler(this Scroll_Item_PaiMaiSellItem self, Action<PaiMaiItemInfo> action)

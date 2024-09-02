@@ -1342,11 +1342,11 @@ namespace ET.Server
             //装备属性
             List<int> equipIDList = new List<int>();
             List<int> equipSuitIDList = new List<int>();
-            List<BagInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
+            List<ItemInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
 
             for (int i = equipList.Count - 1; i >= 0; i--)
             {
-                BagInfo userBagInfo = equipList[i];
+                ItemInfo userBagInfo = equipList[i];
                 if (!ItemConfigCategory.Instance.Contain(userBagInfo.ItemID))
                 {
                     equipList.RemoveAt(i);
@@ -2057,7 +2057,7 @@ namespace ET.Server
             // --- 以下方法不加入战力计算 ---
 
             //晶核列表
-            List<BagInfo> jingHeList = unit.GetComponent<BagComponentS>().GetCurJingHeList();
+            List<ItemInfo> jingHeList = unit.GetComponent<BagComponentS>().GetCurJingHeList();
             for (int i = 0; i < jingHeList.Count; i++)
             {
                 //存储装备精炼数值
@@ -2346,7 +2346,7 @@ namespace ET.Server
             int PointNaiLi = GetPoint(numericComponent.GetAsInt(NumericType.PointNaiLi), roleLv);
             int PointMinJie = GetPoint(numericComponent.GetAsInt(NumericType.PointMinJie), roleLv);
             
-            List<BagInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
+            List<ItemInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
             
             long Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicList);
             long Agility_value = GetOnePro(NumericType.Now_Agility, UpdateProDicList);

@@ -98,7 +98,7 @@ namespace ET.Client
 
                 for (int i = 0; i < costs.Count; i++)
                 {
-                    BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(costs[i]);
+                    ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(costs[i]);
                     if (bagInfo == null)
                     {
                         continue;
@@ -139,7 +139,7 @@ namespace ET.Client
         public static void UpdateHuiShouInfo(this ES_SkillLifeShield self, string dataparams)
         {
             string[] huishouInfo = dataparams.Split('_');
-            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
+            ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
             if (bagInfo == null)
             {
                 return;
@@ -202,7 +202,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
+                ItemInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
                 if (bagInfo == null)
                 {
                     continue;
@@ -299,19 +299,19 @@ namespace ET.Client
             scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.ES_CommonItem.HideItemName();
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnBeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnDraging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnEndDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnBeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnDraging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnEndDrag(binfo, pdata); };
         }
 
         public static void UpdateBagUI(this ES_SkillLifeShield self)
         {
-            List<BagInfo> allInfos = new List<BagInfo>();
+            List<ItemInfo> allInfos = new List<ItemInfo>();
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             //allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Consume));
             allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Material));
@@ -332,25 +332,25 @@ namespace ET.Client
             self.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void OnBeginDrag(this ES_SkillLifeShield self, BagInfo bagInfo, PointerEventData pdata)
+        public static void OnBeginDrag(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
         {
             self.E_CommonItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
             self.IsDrag = true;
         }
 
-        public static void OnDraging(this ES_SkillLifeShield self, BagInfo bagInfo, PointerEventData pdata)
+        public static void OnDraging(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
         {
             self.E_CommonItemsLoopVerticalScrollRect.OnDrag(pdata);
             self.IsDrag = true;
         }
 
-        public static void OnEndDrag(this ES_SkillLifeShield self, BagInfo bagInfo, PointerEventData pdata)
+        public static void OnEndDrag(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
         {
             self.E_CommonItemsLoopVerticalScrollRect.OnEndDrag(pdata);
             self.IsDrag = false;
         }
 
-        public static async ETTask OnPointerDown(this ES_SkillLifeShield self, BagInfo binfo, PointerEventData pdata)
+        public static async ETTask OnPointerDown(this ES_SkillLifeShield self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
             self.ClickTime = TimeHelper.ClientNow();
@@ -365,11 +365,11 @@ namespace ET.Client
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                    EquipList = new List<BagInfo>()
+                    EquipList = new List<ItemInfo>()
                 });
         }
 
-        public static void OnPointerUp(this ES_SkillLifeShield self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerUp(this ES_SkillLifeShield self, ItemInfo binfo, PointerEventData pdata)
         {
             if (TimeHelper.ClientNow() - self.ClickTime < 200)
             {

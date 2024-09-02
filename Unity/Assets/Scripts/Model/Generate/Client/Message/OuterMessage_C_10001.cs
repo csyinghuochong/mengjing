@@ -2791,10 +2791,10 @@ namespace ET
         public string Title { get; set; }
 
         [MemoryPackOrder(6)]
-        public List<BagInfo> ItemList { get; set; } = new();
+        public List<ItemInfoProto> ItemList { get; set; } = new();
 
         [MemoryPackOrder(7)]
-        public BagInfo ItemSell { get; set; }
+        public ItemInfoProto ItemSell { get; set; }
 
         [MemoryPackOrder(8)]
         public long BuyPlayerId { get; set; }
@@ -2834,7 +2834,7 @@ namespace ET
         public long UserId { get; set; }
 
         [MemoryPackOrder(2)]
-        public BagInfo BagInfo { get; set; }
+        public ItemInfoProto BagInfo { get; set; }
 
         [MemoryPackOrder(4)]
         public int Price { get; set; }
@@ -3156,7 +3156,7 @@ namespace ET
         public string ParasmNew { get; set; }
 
         [MemoryPackOrder(2)]
-        public List<BagInfo> ItemList { get; set; } = new();
+        public List<ItemInfoProto> ItemList { get; set; } = new();
 
         [MemoryPackOrder(3)]
         public long EndTime { get; set; }
@@ -4789,13 +4789,13 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public List<BagInfo> BagInfoAdd { get; set; } = new();
+        public List<ItemInfoProto> BagInfoAdd { get; set; } = new();
 
         [MemoryPackOrder(1)]
-        public List<BagInfo> BagInfoUpdate { get; set; } = new();
+        public List<ItemInfoProto> BagInfoUpdate { get; set; } = new();
 
         [MemoryPackOrder(2)]
-        public List<BagInfo> BagInfoDelete { get; set; } = new();
+        public List<ItemInfoProto> BagInfoDelete { get; set; } = new();
 
         public override void Dispose()
         {
@@ -4861,7 +4861,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<BagInfo> BagInfos { get; set; } = new();
+        public List<ItemInfoProto> BagInfos { get; set; } = new();
 
         [MemoryPackOrder(1)]
         public List<int> QiangHuaLevel { get; set; } = new();
@@ -5180,13 +5180,13 @@ namespace ET
         /// 待增幅的装备
         /// </summary>
         [MemoryPackOrder(0)]
-        public BagInfo EquipmentBagInfo { get; set; }
+        public ItemInfoProto EquipmentBagInfo { get; set; }
 
         /// <summary>
         /// 所使用的卷轴
         /// </summary>
         [MemoryPackOrder(1)]
-        public BagInfo ReelBagInfo { get; set; }
+        public ItemInfoProto ReelBagInfo { get; set; }
 
         public override void Dispose()
         {
@@ -7652,7 +7652,7 @@ namespace ET
         /// 装备
         /// </summary>
         [MemoryPackOrder(2)]
-        public List<BagInfo> EquipList { get; set; } = new();
+        public List<ItemInfoProto> EquipList { get; set; } = new();
 
         [MemoryPackOrder(3)]
         public long TeamId { get; set; }
@@ -7667,7 +7667,7 @@ namespace ET
         public List<KeyValuePair> PetSkinList { get; set; } = new();
 
         [MemoryPackOrder(8)]
-        public List<BagInfo> PetHeXinList { get; set; } = new();
+        public List<ItemInfoProto> PetHeXinList { get; set; } = new();
 
         [MemoryPackOrder(10)]
         public List<int> Ks { get; set; } = new();
@@ -14225,7 +14225,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(1)]
-        public BagInfo BagInfo { get; set; }
+        public ItemInfoProto BagInfo { get; set; }
 
         public override void Dispose()
         {
@@ -18303,7 +18303,7 @@ namespace ET
         public RolePetInfo RolePetInfos { get; set; }
 
         [MemoryPackOrder(7)]
-        public List<BagInfo> PetHeXinList { get; set; } = new();
+        public List<ItemInfoProto> PetHeXinList { get; set; } = new();
 
         [MemoryPackOrder(8)]
         public List<int> Ks { get; set; } = new();
@@ -24835,7 +24835,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<BagInfo> BagInfos { get; set; } = new();
+        public List<ItemInfoProto> BagInfos { get; set; } = new();
 
         public override void Dispose()
         {

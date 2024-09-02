@@ -1204,7 +1204,7 @@ namespace ET.Server
             PetHelper.UpdatePetNumeric( rolePetInfo );
         }
 
-        public static void RemoveEquipSkill(this PetComponentS self, RolePetInfo rolePetInfom, BagInfo bagInfo)
+        public static void RemoveEquipSkill(this PetComponentS self, RolePetInfo rolePetInfom, ItemInfo bagInfo)
         {
             for (int i = rolePetInfom.PetSkill.Count - 1; i >= 0; i--)
             {

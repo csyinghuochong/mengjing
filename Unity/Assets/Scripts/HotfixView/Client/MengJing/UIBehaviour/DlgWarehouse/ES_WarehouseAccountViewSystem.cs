@@ -73,7 +73,14 @@ namespace ET.Client
         private static async ETTask Init(this ES_WarehouseAccount self)
         {
             E2C_AccountWarehousInfoResponse response = await BagClientNetHelper.RequestAccountWarehousInfo(self.Root());
-            self.AccountBagInfos = response.BagInfos;
+            self.AccountBagInfos.Clear();
+            foreach (ItemInfoProto proto in response.BagInfos)
+            {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.FromMessage(proto);
+                self.AccountBagInfos.Add(itemInfo);
+            }
+
             self.RefreshHouseItems();
         }
 
@@ -91,7 +98,7 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagBagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponentC.GetItemsByType(ItemLocType.ItemLocBag))
+            foreach (ItemInfo bagInfo in bagComponentC.GetItemsByType(ItemLocType.ItemLocBag))
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
@@ -127,7 +134,7 @@ namespace ET.Client
                 self.UpdateBagSelect);
         }
 
-        private static void UpdateHouseSelect(this ES_WarehouseAccount self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this ES_WarehouseAccount self, ItemInfo bagInfo)
         {
             if (self.ScrollItemHouseItems != null)
             {
@@ -142,7 +149,7 @@ namespace ET.Client
             }
         }
 
-        private static void UpdateBagSelect(this ES_WarehouseAccount self, BagInfo bagInfo)
+        private static void UpdateBagSelect(this ES_WarehouseAccount self, ItemInfo bagInfo)
         {
             if (self.ScrollItemBagItems != null)
             {

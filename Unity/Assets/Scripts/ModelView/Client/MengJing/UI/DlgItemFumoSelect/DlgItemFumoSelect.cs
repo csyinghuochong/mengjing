@@ -8,9 +8,9 @@ namespace ET.Client
     {
         public DlgItemFumoSelectViewComponent View { get => this.GetComponent<DlgItemFumoSelectViewComponent>(); }
 
-        public BagInfo FumoItemInfo;
+        public ItemInfo FumoItemInfo { get; set; }
         public List<Text> TextFomoPro = new();
         public List<EntityRef<ES_CommonItem>> ItemList = new();
-        public List<BagInfo> BagInfos = new();
+        public List<ItemInfo> BagInfos { get; set; } = new();
     }
 }

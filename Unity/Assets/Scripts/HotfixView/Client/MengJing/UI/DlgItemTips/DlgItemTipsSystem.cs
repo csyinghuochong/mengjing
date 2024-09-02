@@ -40,7 +40,7 @@ namespace ET.Client
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;
         }
 
-        public static void RefreshInfo(this DlgItemTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
+        public static void RefreshInfo(this DlgItemTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -604,7 +604,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
             string[] itemparams = itemConfig.ItemUsePar.Split('@');
             int weizhi = int.Parse(itemparams[0]);
-            BagInfo equipinfo = self.Root().GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, weizhi);
+            ItemInfo equipinfo = self.Root().GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, weizhi);
             if (equipinfo == null)
             {
                 FlyTipComponent.Instance.ShowFlyTip("对应的位置没有装备！");

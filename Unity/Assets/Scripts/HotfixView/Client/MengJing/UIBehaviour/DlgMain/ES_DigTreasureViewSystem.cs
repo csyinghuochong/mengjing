@@ -38,7 +38,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnInitUI(this ES_DigTreasure self, BagInfo bagInfo)
+        public static void OnInitUI(this ES_DigTreasure self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             self.uiTransform.gameObject.SetActive(true);

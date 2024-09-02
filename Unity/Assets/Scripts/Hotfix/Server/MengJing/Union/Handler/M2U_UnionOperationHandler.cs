@@ -50,7 +50,7 @@ namespace ET.Server
                                 {
                                     string[] rewardList = rewardStrList[i].Split(',');
 
-                                    BagInfo BagInfo = BagInfo.Create();
+                                    ItemInfoProto BagInfo = ItemInfoProto.Create();
                                     BagInfo.ItemID = int.Parse(rewardList[0]);
                                     BagInfo.ItemNum = int.Parse(rewardList[1]);
                                     BagInfo. GetWay =$"{ItemGetWay.UnionUpLv}_{serverTime}";

@@ -19,7 +19,7 @@ namespace ET.Server
             List<long> petHexin = new List<long>();
             for (int i = 0; i < huishouList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
                 if (bagInfo != null)
                 {
                     bagsList.Add(huishouList[i]);

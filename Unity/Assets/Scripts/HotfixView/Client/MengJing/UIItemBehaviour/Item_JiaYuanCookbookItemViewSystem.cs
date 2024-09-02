@@ -89,10 +89,10 @@ namespace ET.Client
 
                 go.SetActive(true);
 
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = needitmeid;
                 bagInfoNew.ItemNum = 1;
-                BagInfo bagInfo = active ? bagInfoNew : null;
+                ItemInfo bagInfo = active ? bagInfoNew : null;
                 uIItemComponent.UpdateItem(bagInfo, ItemOperateEnum.None);
                 uIItemComponent.E_ItemQualityImage.gameObject.SetActive(true);
                 if (active)

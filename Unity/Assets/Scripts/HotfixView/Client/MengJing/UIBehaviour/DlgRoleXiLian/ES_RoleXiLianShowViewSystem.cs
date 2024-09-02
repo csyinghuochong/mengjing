@@ -32,7 +32,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.ES_EquipSet.PlayerLv(userInfo.Lv);
             self.ES_EquipSet.PlayerName(userInfo.Name);
             self.ES_EquipSet.ShowPlayerModel(bagInfo, userInfo.Occ, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex),
@@ -69,7 +69,7 @@ namespace ET.Client
                     self.E_EquipItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
                     self.ShowBagInfos.Clear();
-                    List<BagInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+                    List<ItemInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
                     for (int i = 0; i < equipInfos.Count; i++)
                     {
                         if (equipInfos[i].IfJianDing)
@@ -120,7 +120,7 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectItem);
         }
 
-        private static void OnSelectItem(this ES_RoleXiLianShow self, BagInfo bagInfo)
+        private static void OnSelectItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
             self.XilianBagInfo = bagInfo;
 
@@ -140,7 +140,7 @@ namespace ET.Client
             self.OnUpdateXinLian();
         }
 
-        public static void UpdateAttribute(this ES_RoleXiLianShow self, BagInfo bagInfo)
+        public static void UpdateAttribute(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
             CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (bagInfo == null)
@@ -155,7 +155,7 @@ namespace ET.Client
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(bagInfo != null);
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
@@ -178,7 +178,7 @@ namespace ET.Client
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo bagInfoNeed = BagInfo.Create();
+            ItemInfo bagInfoNeed = new ItemInfo();
             bagInfoNeed.ItemID = itemCost[0];
             bagInfoNeed.ItemNum = itemCost[1];
             self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
@@ -206,7 +206,7 @@ namespace ET.Client
                 return;
             }
 
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             if (times == 1)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);

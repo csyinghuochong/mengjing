@@ -14,7 +14,7 @@ namespace ET.Server
                 //通知客户端背包刷新
                 M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
                 //通知客户端背包道具发生改变
-                m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
+                m2c_bagUpdate.BagInfoUpdate = new List<ItemInfoProto>();
 
                 PetComponentS petComponent = unit.GetComponent<PetComponentS>();
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
@@ -29,18 +29,18 @@ namespace ET.Server
                 long oldItemId = rolePetInfo.PetHeXinList[request.Position];
                 if (oldItemId != 0)
                 {
-                    BagInfo oldBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemPetHeXinEquip, oldItemId);
+                    ItemInfo oldBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemPetHeXinEquip, oldItemId);
                     if (oldBagInfo != null)
                     {
                         bagComponent.OnChangeItemLoc(oldBagInfo, ItemLocType.ItemPetHeXinBag, ItemLocType.ItemPetHeXinEquip);
-                        m2c_bagUpdate.BagInfoUpdate.Add(oldBagInfo);
+                        m2c_bagUpdate.BagInfoUpdate.Add(oldBagInfo.ToMessage());
                         rolePetInfo.PetHeXinList[request.Position] = 0;
                     }
                 }
                 if (request.OperateType == 1) //1 装备  2卸下[前面已经处理过了]
                 {
                     int itemLocType = request.OperateType == 1 ? ItemLocType.ItemPetHeXinBag : ItemLocType.ItemPetHeXinEquip;
-                    BagInfo bagInfo = bagComponent.GetItemByLoc(itemLocType, request.BagInfoId);
+                    ItemInfo bagInfo = bagComponent.GetItemByLoc(itemLocType, request.BagInfoId);
                     if (bagInfo == null)
                     {
                         return;
@@ -48,7 +48,7 @@ namespace ET.Server
 
                     //新的装备给宠物
                     bagComponent.OnChangeItemLoc(bagInfo, ItemLocType.ItemPetHeXinEquip, ItemLocType.ItemPetHeXinBag);
-                    m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
                     rolePetInfo.PetHeXinList[request.Position] = request.BagInfoId;
                 }
                 petComponent.UpdatePetAttribute(rolePetInfo, true);

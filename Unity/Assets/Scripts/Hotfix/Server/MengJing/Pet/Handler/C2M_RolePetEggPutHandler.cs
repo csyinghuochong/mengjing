@@ -14,7 +14,7 @@
             }
 
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
+            ItemInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
             if (useBagInfo == null)
             {
                 return;

@@ -6,7 +6,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemInheritSelectRequest request, M2C_ItemInheritSelectResponse response)
         {
-            BagInfo bagInfo = unit.GetComponent<BagComponentS  >().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+            ItemInfo bagInfo = unit.GetComponent<BagComponentS  >().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -16,7 +16,7 @@ namespace ET.Server
 
             //通知客户端背包道具发生改变
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
             await ETTask.CompletedTask;

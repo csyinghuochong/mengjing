@@ -50,7 +50,7 @@ namespace ET.Client
 
             PaiMaiSellConfig paiMaiSellConfig = PaiMaiSellConfigCategory.Instance.Get(paimaiId);
 
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.BagInfoID = paimaiId;
             bagInfoNew.ItemID = paiMaiSellConfig.ItemID;
             self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);

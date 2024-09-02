@@ -8,7 +8,7 @@
             get => this.GetComponent<DlgPaiMaiSellPriceViewComponent>();
         }
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public int oldPrice;
         public int nowPrice;
         public int priceProNum;

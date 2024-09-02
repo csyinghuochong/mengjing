@@ -9,14 +9,14 @@ namespace ET.Client
 	public  class ES_PaiMaiSell : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_PaiMaiSellItem>> ScrollItemPaiMaiSellItems;
 		public List<PaiMaiItemInfo> ShowPaiMaiItemInfos = new();
 		public int CurrentItemType;
 
 		public List<PaiMaiItemInfo> PaiMaiItemInfos = new();
 		public long PaiMaiItemInfoId;
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public bool IsHoldDown;
 
 		public ToggleGroup E_ItemTypeSetToggleGroup

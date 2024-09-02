@@ -27,7 +27,7 @@ namespace ET.Server
             Dictionary<int,int> itemNumber = new Dictionary<int,int>(); 
             for (int i = 0; i < huishouList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
                 //查看背包是否为空
                 if (bagInfo == null)
                 {

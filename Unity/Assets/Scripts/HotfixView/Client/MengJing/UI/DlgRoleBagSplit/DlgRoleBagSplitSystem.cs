@@ -16,7 +16,7 @@ namespace ET.Client
         {
         }
 
-        public static void Init(this DlgRoleBagSplit self, BagInfo bagInfo)
+        public static void Init(this DlgRoleBagSplit self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             self.Num = 1;

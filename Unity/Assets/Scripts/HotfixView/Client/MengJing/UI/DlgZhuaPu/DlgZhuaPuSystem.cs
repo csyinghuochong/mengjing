@@ -49,7 +49,7 @@ namespace ET.Client
             self.ShowBagInfos.Clear();
             foreach (var item in GlobalValueConfigCategory.Instance.ZhuaPuItem)
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = item.Key;
                 self.ShowBagInfos.Add(bagInfo);
             }
@@ -96,7 +96,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnClickItem(this DlgZhuaPu self, BagInfo bagInfo)
+        public static void OnClickItem(this DlgZhuaPu self, ItemInfo bagInfo)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             long leftnumber = bagComponent.GetItemNumber(bagInfo.ItemID);

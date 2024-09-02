@@ -427,7 +427,7 @@ namespace ET.Server
             if (TargetType == (int)TaskTargetType.GiveItem_10)
             {
                 BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, BagInfoID);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, BagInfoID);
                 if (bagInfo == null)
                 {
                     return ErrorCode.ERR_ItemNotExist;

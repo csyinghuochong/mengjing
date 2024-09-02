@@ -58,14 +58,14 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
 
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.PointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.PointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.PointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
 
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
 
@@ -80,7 +80,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask PointerDown(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        private static async ETTask PointerDown(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
             self.BagInfo = binfo;
@@ -102,19 +102,19 @@ namespace ET.Client
                         ItemOperateEnum = ItemOperateEnum.None,
                         InputPoint = Input.mousePosition,
                         Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                        EquipList = new List<BagInfo>()
+                        EquipList = new List<ItemInfo>()
                     });
             }
         }
 
-        private static void PointerUp(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        private static void PointerUp(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.BagInfo = null;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
-        private static void BeginDrag(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        private static void BeginDrag(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.BagInfo = null;
@@ -129,7 +129,7 @@ namespace ET.Client
             self.BagItemCopy.GetComponent<Image>().sprite = sp;
         }
 
-        private static void Draging(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        private static void Draging(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.BagInfo = null;
@@ -141,7 +141,7 @@ namespace ET.Client
             self.BagItemCopy.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
         }
 
-        private static void EndDrag(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        private static void EndDrag(this DlgPetHeXinHeCheng self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.BagInfo = null;
@@ -170,7 +170,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask RequestPetHeXinHeCheng(this DlgPetHeXinHeCheng self, BagInfo bagInfo1, BagInfo bagInfo2)
+        private static async ETTask RequestPetHeXinHeCheng(this DlgPetHeXinHeCheng self, ItemInfo bagInfo1, ItemInfo bagInfo2)
         {
             if (bagInfo1.BagInfoID == bagInfo2.BagInfoID)
             {

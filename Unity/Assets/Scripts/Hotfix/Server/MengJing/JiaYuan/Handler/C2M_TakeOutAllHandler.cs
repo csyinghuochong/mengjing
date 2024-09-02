@@ -15,7 +15,7 @@ namespace ET.Server
                 return;
             }
 
-            List<BagInfo> storeLists = new List<BagInfo>();
+            List<ItemInfo> storeLists = new List<ItemInfo>();
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             
             storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc(hourseId));
@@ -23,7 +23,7 @@ namespace ET.Server
             for (int i = 0; i < storeLists.Count; i++)
             {
                 unit.GetComponent<BagComponentS>().OnChangeItemLoc(storeLists[i], ItemLocType.ItemLocBag, hourseId);
-                m2c_bagUpdate.BagInfoUpdate.Add(storeLists[i]);
+                m2c_bagUpdate.BagInfoUpdate.Add(storeLists[i].ToMessage());
                 leftBagSpace--;
                 if (leftBagSpace <= 0)
                 {

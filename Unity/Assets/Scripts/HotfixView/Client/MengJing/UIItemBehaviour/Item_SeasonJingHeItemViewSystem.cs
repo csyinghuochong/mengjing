@@ -33,7 +33,7 @@ namespace ET.Client
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> equiplist = bagComponent.GetCurJingHeList();
+            List<ItemInfo> equiplist = bagComponent.GetCurJingHeList();
 
             self.E_IconImgImage.gameObject.SetActive(false);
             self.BagInfo = null;

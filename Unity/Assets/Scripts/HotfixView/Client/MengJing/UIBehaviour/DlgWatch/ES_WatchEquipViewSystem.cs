@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgWatch))]
-    [EntitySystemOf(typeof (ES_WatchEquip))]
-    [FriendOfAttribute(typeof (ES_WatchEquip))]
+    [FriendOf(typeof(DlgWatch))]
+    [EntitySystemOf(typeof(ES_WatchEquip))]
+    [FriendOfAttribute(typeof(ES_WatchEquip))]
     public static partial class ES_WatchEquipSystem
     {
         [EntitySystem]
@@ -25,11 +25,19 @@ namespace ET.Client
         {
             DlgWatch dlgWatch = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatch>();
             F2C_WatchPlayerResponse m2C_WatchPlayerResponse = dlgWatch.F2C_WatchPlayerResponse;
+            List<ItemInfo> itemInfos = new List<ItemInfo>();
+            foreach (ItemInfoProto proto in m2C_WatchPlayerResponse.EquipList)
+            {
+                ItemInfo itemInfo = new ItemInfo();
+                itemInfo.FromMessage(proto);
+                itemInfos.Add(itemInfo);
+            }
+
             self.ES_EquipSet1.PlayerLv(m2C_WatchPlayerResponse.Lv);
             self.ES_EquipSet1.PlayerName(m2C_WatchPlayerResponse.Name);
-            self.ES_EquipSet1.RefreshEquip(m2C_WatchPlayerResponse.EquipList, new List<BagInfo>(), m2C_WatchPlayerResponse.Occ,
+            self.ES_EquipSet1.RefreshEquip(itemInfos, new List<ItemInfo>(), m2C_WatchPlayerResponse.Occ,
                 ItemOperateEnum.Watch);
-            BagInfo bagInfo = ItemHelper.GetEquipByWeizhi(m2C_WatchPlayerResponse.EquipList, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = ItemHelper.GetEquipByWeizhi(itemInfos, (int)ItemSubTypeEnum.Wuqi);
             self.ES_EquipSet1.ShowPlayerModel(bagInfo, m2C_WatchPlayerResponse.Occ, 0, new List<int>(), 4);
 
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
@@ -37,8 +45,8 @@ namespace ET.Client
             int selfOcc = userInfoComponentC.UserInfo.Occ;
             self.ES_EquipSet2.PlayerLv(userInfoComponentC.UserInfo.Lv);
             self.ES_EquipSet2.PlayerName(userInfoComponentC.UserInfo.Name);
-            self.ES_EquipSet2.RefreshEquip(bagComponentC.GetEquipList(), new List<BagInfo>(), selfOcc, ItemOperateEnum.Watch);
-            BagInfo bagInfo2 = bagComponentC.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            self.ES_EquipSet2.RefreshEquip(bagComponentC.GetEquipList(), new List<ItemInfo>(), selfOcc, ItemOperateEnum.Watch);
+            ItemInfo bagInfo2 = bagComponentC.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.ES_EquipSet2.ShowPlayerModel(bagInfo2, selfOcc, 0, new List<int>(), 5);
         }
     }

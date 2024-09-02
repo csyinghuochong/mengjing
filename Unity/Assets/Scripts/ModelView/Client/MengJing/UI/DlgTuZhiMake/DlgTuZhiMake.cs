@@ -5,7 +5,7 @@
     {
         public DlgTuZhiMakeViewComponent View { get => this.GetComponent<DlgTuZhiMakeViewComponent>(); }
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public int MakeId;
     }
 }

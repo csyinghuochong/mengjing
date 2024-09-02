@@ -86,7 +86,7 @@ namespace ET.Client
             return (num / 10000.0f).ToString("0.##") + "万";
         }
 
-        public static void AccountCangkuPutIn(Scene root, BagInfo bagInfo)
+        public static void AccountCangkuPutIn(Scene root, ItemInfo bagInfo)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
@@ -208,7 +208,7 @@ namespace ET.Client
         }
 
         //装备基础属性
-        public static int ShowBaseAttribute(List<BagInfo> equipItemList, BagInfo baginfo, GameObject propertyGO,
+        public static int ShowBaseAttribute(List<ItemInfo> equipItemList, ItemInfo baginfo, GameObject propertyGO,
         GameObject parentGO)
         {
             int properShowNum = 0;
@@ -890,7 +890,7 @@ namespace ET.Client
             return "";
         }
 
-        public static string GetItemDesc(BagInfo baginfo)
+        public static string GetItemDesc(ItemInfo baginfo)
         {
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(baginfo.ItemID);
             string Text_ItemDes = itemconf.ItemDes;

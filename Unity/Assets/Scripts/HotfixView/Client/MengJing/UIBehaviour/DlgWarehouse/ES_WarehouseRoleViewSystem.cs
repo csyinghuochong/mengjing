@@ -173,7 +173,7 @@ namespace ET.Client
                 BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() * 10 + addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = itemid;
                 bagInfoNew.ItemNum = itemnum;
                 scrollItemCommonItem.Refresh(bagInfoNew, ItemOperateEnum.None);
@@ -189,7 +189,7 @@ namespace ET.Client
                 self.UpdateBagSelect, self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
         }
 
-        private static void UpdateHouseSelect(this ES_WarehouseRole self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this ES_WarehouseRole self, ItemInfo bagInfo)
         {
             if (self.ScrollItemHouseItems != null)
             {
@@ -204,7 +204,7 @@ namespace ET.Client
             }
         }
 
-        private static void UpdateBagSelect(this ES_WarehouseRole self, BagInfo bagInfo)
+        private static void UpdateBagSelect(this ES_WarehouseRole self, ItemInfo bagInfo)
         {
             if (self.ScrollItemBagItems != null)
             {

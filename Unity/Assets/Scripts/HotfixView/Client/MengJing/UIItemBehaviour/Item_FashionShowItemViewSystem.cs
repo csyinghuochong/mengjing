@@ -132,7 +132,7 @@ namespace ET.Client
                 }
 
                 int havenumber = (int)bagComponent.GetItemNumber(int.Parse(costitem[0]));
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = int.Parse(costitem[0]);
                 bagInfo.ItemNum = havenumber;
                 self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

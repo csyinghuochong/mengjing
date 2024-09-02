@@ -10,7 +10,7 @@ namespace ET.Server
 		{
 			//读取数据库
 			RolePetInfo petInfo = unit.GetComponent<PetComponentS>().GetPetInfo(request.PetInfoId);
-			BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoID);
+			ItemInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoID);
 
 			//判断是否有足够的道具
 			if (bagInfo == null || petInfo == null)

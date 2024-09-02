@@ -27,7 +27,7 @@ namespace ET.Client
         {
         }
 
-        public static void OnInitUI(this DlgItemBatchUse self, BagInfo bagInfo)
+        public static void OnInitUI(this DlgItemBatchUse self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

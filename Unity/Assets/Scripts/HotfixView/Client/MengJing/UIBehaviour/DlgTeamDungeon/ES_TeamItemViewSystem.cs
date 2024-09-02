@@ -27,7 +27,7 @@ namespace ET.Client
             self.ES_ModelShow.ClickHandler = () => { self.OnClickTeamItem().Coroutine(); };
             if (self.TeamPlayerInfo != null)
             {
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = self.TeamPlayerInfo.WeaponId;
                 self.ES_ModelShow.ShowPlayerModel(bagInfoNew, self.TeamPlayerInfo.Occ, 0, self.TeamPlayerInfo.FashionIds);
             }
@@ -89,7 +89,7 @@ namespace ET.Client
 
             if (teamPlayerInfo != null && self.ES_ModelShow != null)
             {
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = teamPlayerInfo.WeaponId;
                 self.ES_ModelShow.ShowPlayerModel(bagInfoNew, self.TeamPlayerInfo.Occ, 0, teamPlayerInfo.FashionIds);
             }

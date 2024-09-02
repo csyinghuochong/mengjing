@@ -216,7 +216,7 @@ namespace ET.Client
 
             self.View.E_Lab_LearnItemCostText.text = equipMakeConfig.LearnGoldValue.ToString();
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = itemConfig.Id;
             bagInfo.ItemNum = 1;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

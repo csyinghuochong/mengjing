@@ -41,8 +41,16 @@
                         response.Vs.Add(value);
                     }
 
-                    response.EquipList.AddRange(bagComponents.GetItemByLoc(ItemLocType.ItemLocEquip));
-                    response.PetHeXinList.AddRange(bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip));
+                    foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemLocEquip))  
+                    {
+                        response.EquipList.Add(itemInfo.ToMessage());
+                    }
+
+                    foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip))
+                    {
+                        response.PetHeXinList.Add(itemInfo.ToMessage());
+                    }
+                    
                     response.Occ = userinfo.UserInfo.Occ;
                     response.RolePetInfos.AddRange(petComponent.RolePetInfos);
                     response.PetSkinList.AddRange(petComponent.PetSkinList);

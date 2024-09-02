@@ -42,7 +42,7 @@ namespace ET.Server
                 int getItemid = monsterConfig.Parameter[1];
                 unit.GetComponent<BagComponentS>().OnAddItemData($"{getItemid};1",$"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
 
-                List<BagInfo> bagInfolist = unit.GetComponent<BagComponentS>().GetIdItemList(getItemid);
+                List<ItemInfo> bagInfolist = unit.GetComponent<BagComponentS>().GetIdItemList(getItemid);
                 if (bagInfolist.Count > 0)
                 {
                     bagInfolist[bagInfolist.Count - 1].ItemPar = skinId.ToString();

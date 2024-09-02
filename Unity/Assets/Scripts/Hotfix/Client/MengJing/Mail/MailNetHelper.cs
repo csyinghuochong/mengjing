@@ -30,7 +30,7 @@ namespace ET.Client
             int needcell = 1;
             for (int i = 0; i < mailComponent.SelectMail.ItemList.Count; i++)
             {
-                BagInfo bagInfo = mailComponent.SelectMail.ItemList[i];
+                ItemInfoProto bagInfo = mailComponent.SelectMail.ItemList[i];
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.ItemPileSum == 999999)
                 {

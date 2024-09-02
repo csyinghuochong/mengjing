@@ -89,7 +89,7 @@ namespace ET.Client
 
             self.E_HoleNameText.gameObject.SetActive(false);
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = gemId;
             bagInfo.ItemNum = 1;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);

@@ -13,7 +13,7 @@ namespace ET.Client
 		public Vector2 localPoint;
 		public List<SkillPro> ShowSkillPros = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SkillSetItem>> ScrollItemSkillSetItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public RectTransform EG_SkillIPositionSetRectTransform

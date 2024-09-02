@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_JiaYuanDaShiPro : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<string> ShowProlist = new();
 		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanDaShiProItem>> ScrollItemJiaYuanDaShiProItems;

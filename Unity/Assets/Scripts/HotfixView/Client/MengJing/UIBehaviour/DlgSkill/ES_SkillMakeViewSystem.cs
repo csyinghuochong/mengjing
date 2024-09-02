@@ -298,7 +298,7 @@ namespace ET.Client
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = equipMakeConfig.MakeItemID;
             self.ES_CommonItem_0.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem_0.E_ItemNumText.gameObject.SetActive(false);
@@ -490,7 +490,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2);
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = XiLianHelper.ReturnMeltingItem(makeType);
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
@@ -498,7 +498,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_SkillMake self)
         {
-            self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
+            self.HuiShouInfos = new ItemInfo[self.HuiShouInfos.Length];
             self.UpdateBagUI();
             self.UpdateHuiShouUI();
             self.UpdateSelected();
@@ -514,7 +514,7 @@ namespace ET.Client
         public static void UpdateHuiShouInfo(this ES_SkillMake self, string dataparams)
         {
             string[] huishouInfo = dataparams.Split('_');
-            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
+            ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
             if (huishouInfo[0] == "1")
             {
                 for (int i = 0; i < self.HuiShouInfos.Length; i++)
@@ -589,7 +589,7 @@ namespace ET.Client
                 }
 
                 Scroll_Item_CommonItem uIItemComponent = self.ScrollItemCommonItems[i];
-                BagInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
+                ItemInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
                 if (bagInfo == null)
                 {
                     continue;
@@ -622,8 +622,8 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
             scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
         }
 
@@ -631,7 +631,7 @@ namespace ET.Client
         {
             self.ShowBagInfos.Clear();
 
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].IsProtect)
@@ -652,7 +652,7 @@ namespace ET.Client
             self.E_CommonItemLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static async ETTask OnPutInItem(this ES_SkillMake self, BagInfo binfo)
+        public static async ETTask OnPutInItem(this ES_SkillMake self, ItemInfo binfo)
         {
             self.IsHoldDown = true;
             EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
@@ -667,11 +667,11 @@ namespace ET.Client
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                    EquipList = new List<BagInfo>()
+                    EquipList = new List<ItemInfo>()
                 });
         }
 
-        public static void OnPointerDown(this ES_SkillMake self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerDown(this ES_SkillMake self, ItemInfo binfo, PointerEventData pdata)
         {
             if (ItemHelper.GetGemIdList(binfo).Count > 0)
             {
@@ -690,7 +690,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnPointerUp(this ES_SkillMake self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerUp(this ES_SkillMake self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);

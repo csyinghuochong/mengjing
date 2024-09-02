@@ -22,7 +22,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.ES_EquipSet.PlayerLv(userInfo.Lv);
             self.ES_EquipSet.PlayerName(userInfo.Name);
             self.ES_EquipSet.ShowPlayerModel(bagInfo, userInfo.Occ, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex),
@@ -53,7 +53,7 @@ namespace ET.Client
             self.OnReelListUpdate();
         }
 
-        public static void UpdateAttribute(this ES_EquipmentIncreaseShow self, BagInfo bagInfo)
+        public static void UpdateAttribute(this ES_EquipmentIncreaseShow self, ItemInfo bagInfo)
         {
             CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (bagInfo == null)
@@ -69,7 +69,7 @@ namespace ET.Client
         public static void OnUpdateIncrease(this ES_EquipmentIncreaseShow self)
         {
             self.EquipmentBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.EquipmentBagInfo.BagInfoID);
-            BagInfo bagInfo = self.EquipmentBagInfo;
+            ItemInfo bagInfo = self.EquipmentBagInfo;
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
             {
@@ -107,7 +107,7 @@ namespace ET.Client
                 self.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                 self.E_EquipItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
-                List<BagInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+                List<ItemInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
                 self.ShowEquipBagInfos.Clear();
                 for (int i = 0; i < equipInfos.Count; i++)
                 {
@@ -153,7 +153,7 @@ namespace ET.Client
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             self.ShowReelBagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponent.GetBagList())
+            foreach (ItemInfo bagInfo in bagComponent.GetBagList())
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.ItemType == ItemTypeEnum.Consume && itemConfig.ItemSubType == 17)
@@ -166,7 +166,7 @@ namespace ET.Client
             self.E_ReelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowReelBagInfos.Count);
         }
 
-        public static void OnSelectReel(this ES_EquipmentIncreaseShow self, BagInfo bagInfo)
+        public static void OnSelectReel(this ES_EquipmentIncreaseShow self, ItemInfo bagInfo)
         {
             self.ReelBagInfo = bagInfo;
             if (self.ScrollItemReelItems != null)
@@ -182,7 +182,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnSelectEquip(this ES_EquipmentIncreaseShow self, BagInfo bagInfo)
+        public static void OnSelectEquip(this ES_EquipmentIncreaseShow self, ItemInfo bagInfo)
         {
             self.EquipmentBagInfo = bagInfo;
             if (self.ScrollItemEquipItems != null)
@@ -202,7 +202,7 @@ namespace ET.Client
 
         public static void InitSubItemUI(this ES_EquipmentIncreaseShow self)
         {
-            BagInfo bagInfo = self.EquipmentBagInfo;
+            ItemInfo bagInfo = self.EquipmentBagInfo;
             if (bagInfo != null)
             {
                 self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

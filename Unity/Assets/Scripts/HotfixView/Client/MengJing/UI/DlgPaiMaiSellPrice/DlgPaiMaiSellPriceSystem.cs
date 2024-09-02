@@ -102,7 +102,7 @@ namespace ET.Client
             }
 
             PaiMaiItemInfo paiMaiItemInfo = new();
-            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(self.BagInfo);
+            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(self.BagInfo.ToMessage());
             paiMaiItemInfo.BagInfo.ItemNum = self.SellNum;
             paiMaiItemInfo.Price = self.nowPrice;
             DlgPaiMai dlgPaiMai = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>();
@@ -152,7 +152,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiSellPrice);
         }
 
-        public static void InitPriceUI(this DlgPaiMaiSellPrice self, BagInfo bagInfo)
+        public static void InitPriceUI(this DlgPaiMaiSellPrice self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
 

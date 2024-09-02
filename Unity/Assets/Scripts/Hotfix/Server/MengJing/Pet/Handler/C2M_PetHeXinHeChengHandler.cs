@@ -7,8 +7,8 @@
 
         protected override async ETTask Run(Unit unit, C2M_PetHeXinHeChengRequest request, M2C_PetHeXinHeChengResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_2);
+            ItemInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_1);
+            ItemInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
                 return;

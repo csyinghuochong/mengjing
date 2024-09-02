@@ -179,7 +179,7 @@ namespace ET.Client
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
 
                 self.ShowBagInfos.Clear();
-                List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
+                List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
                 for (int i = 0; i < bagInfos.Count; i++)
                 {
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -200,7 +200,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnSelect(this ES_SeasonJingHe self, BagInfo bagInfo)
+        public static void OnSelect(this ES_SeasonJingHe self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             if (self.ScrollItemCommonItems != null)
@@ -263,7 +263,7 @@ namespace ET.Client
                 return;
             }
 
-            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetJingHeByWeiZhi(self.JingHeId);
+            ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetJingHeByWeiZhi(self.JingHeId);
             if (bagInfo == null)
             {
                 return;

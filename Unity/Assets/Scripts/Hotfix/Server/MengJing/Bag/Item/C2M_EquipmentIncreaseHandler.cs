@@ -11,14 +11,14 @@ namespace ET.Server
         {
             await ETTask.CompletedTask;
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-             BagInfo reelBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.ReelBagInfo.BagInfoID);
+             ItemInfo reelBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.ReelBagInfo.BagInfoID);
              if (reelBagInfo == null)
              {
                  response.Error = ErrorCode.ERR_ItemNotEnoughError;
                  return;
              }
 
-             BagInfo equipmentBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.EquipmentBagInfo.BagInfoID);
+             ItemInfo equipmentBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.EquipmentBagInfo.BagInfoID);
              if(equipmentBagInfo == null)
              {
                  equipmentBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, request.EquipmentBagInfo.BagInfoID);
@@ -142,7 +142,7 @@ namespace ET.Server
              //通知客户端背包刷新
              equipmentBagInfo.isBinging = true;
              M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
-             m2c_bagUpdate.BagInfoUpdate.Add(equipmentBagInfo);
+             m2c_bagUpdate.BagInfoUpdate.Add(equipmentBagInfo.ToMessage());
              MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
              // 更新角色属性

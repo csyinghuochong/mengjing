@@ -6,7 +6,7 @@
         protected override async ETTask Run(Unit unit, C2M_ItemXiLianSelectRequest request, M2C_ItemXiLianSelectResponse response)
         {
             int itemLocType = ItemLocType.ItemLocBag;
-            BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+            ItemInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {
                 bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, request.OperateBagID);
@@ -38,7 +38,7 @@
 
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             //通知客户端背包道具发生改变
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
             Function_Fight.UnitUpdateProperty_Base(unit, true, true);

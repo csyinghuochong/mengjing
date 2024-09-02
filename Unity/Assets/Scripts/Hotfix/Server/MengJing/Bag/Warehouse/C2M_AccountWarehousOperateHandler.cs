@@ -29,7 +29,7 @@ namespace ET.Server
                             return;
                         }
 
-                        BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+                        ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
                         if (bagInfo == null)
                         {
                             response.Error = ErrorCode.ERR_ItemNotExist;

@@ -171,7 +171,7 @@ namespace ET.Client
 
         private static void UpdateBagItemUIList(this ES_PaiMaiSell self)
         {
-            List<BagInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             self.ShowBagInfos.Clear();
             for (int i = 0; i < equipInfos.Count; i++)
             {
@@ -196,7 +196,7 @@ namespace ET.Client
             self.UpdateSellItemUILIist(self.CurrentItemType);
         }
 
-        public static void OnSelectItem(this ES_PaiMaiSell self, BagInfo bagInfo)
+        public static void OnSelectItem(this ES_PaiMaiSell self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
 

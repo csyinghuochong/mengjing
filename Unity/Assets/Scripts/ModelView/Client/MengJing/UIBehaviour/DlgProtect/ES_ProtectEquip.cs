@@ -8,9 +8,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ProtectEquip : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public BagInfo XilianBagInfo;
+		public ItemInfo XilianBagInfo { get; set; }
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		
 		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{

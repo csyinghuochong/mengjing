@@ -14,6 +14,6 @@ namespace ET.Client
         public int ShouJIId;
         public Action UpdateRedDotAction;
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-        public List<BagInfo> ShowBagInfos = new();
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
     }
 }

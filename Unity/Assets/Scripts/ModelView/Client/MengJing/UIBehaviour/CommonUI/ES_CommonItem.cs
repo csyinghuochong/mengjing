@@ -10,17 +10,17 @@ namespace ET.Client
 	public  class ES_CommonItem : Entity,IAwake<Transform>,IDestroy
 	{
 		public int CurrentHouse { get; set; }
-		public BagInfo Baginfo { get; set; }
+		public ItemInfo Baginfo { get; set; }
 		public string ItemNum { get; set; }
 		public int ItemID { get; set; }
 		public bool ShowTip { get; set; }
 		public ItemOperateEnum ItemOperateEnum { get; set; }
-		public Action<BagInfo> ClickItemHandler { get; set; }
-		public Action<BagInfo, PointerEventData> BeginDragHandler { get; set; }
-		public Action<BagInfo, PointerEventData> DragingHandler { get; set; }
-		public Action<BagInfo, PointerEventData> EndDragHandler { get; set; }
-		public Action<BagInfo, PointerEventData> PointerDownHandler { get; set; }
-		public Action<BagInfo, PointerEventData> PointerUpHandler { get; set; }
+		public Action<ItemInfo> ClickItemHandler { get; set; }
+		public Action<ItemInfo, PointerEventData> BeginDragHandler { get; set; }
+		public Action<ItemInfo, PointerEventData> DragingHandler { get; set; }
+		public Action<ItemInfo, PointerEventData> EndDragHandler { get; set; }
+		public Action<ItemInfo, PointerEventData> PointerDownHandler { get; set; }
+		public Action<ItemInfo, PointerEventData> PointerUpHandler { get; set; }
 		
 		public Button E_ItemDiButton
      	{

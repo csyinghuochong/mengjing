@@ -16,7 +16,10 @@
             
             BagComponentS bagComponents = await UnitCacheHelper.GetComponentCache<BagComponentS>(scene.Root(), request.UnitID);
             response.RolePetInfos = petComponent.GetPetInfo( request.PetId );
-            response.PetHeXinList .AddRange(bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip)); 
+            foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip))
+            {
+                response.PetHeXinList.Add(itemInfo.ToMessage());
+            }
 
             NumericComponentS numericComponent =  await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UnitID);
             foreach ((int key, long value) in numericComponent.NumericDic)

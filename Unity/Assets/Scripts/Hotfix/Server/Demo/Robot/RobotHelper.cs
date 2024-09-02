@@ -10,10 +10,10 @@ namespace ET.Client
         public static async ETTask JianDing(Scene root)
         {
             //可以鉴定的装备
-            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanJianDing();
+            List<ItemInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanJianDing();
 
             //鉴定装备
-            foreach (BagInfo bagInfo in bagInfos)
+            foreach (ItemInfo bagInfo in bagInfos)
             {
                 await BagClientNetHelper.RequestAppraisalItem(root, bagInfo);
             }
@@ -22,10 +22,10 @@ namespace ET.Client
         public static async ETTask WearEquip(Scene root)
         {
             //可以穿戴的装备
-            List<BagInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanEquipList();
+            List<ItemInfo> bagInfos = root.GetComponent<BagComponentC>().GetCanEquipList();
 
             //穿戴装备
-            foreach (BagInfo bagInfo in bagInfos)
+            foreach (ItemInfo bagInfo in bagInfos)
             {
                 await BagClientNetHelper.RequestTakeoffEquip(root, bagInfo);
             }
@@ -33,10 +33,10 @@ namespace ET.Client
 
         public static async ETTask XiangQianGem(Scene root)
         {
-            List<BagInfo> gemstones = root.GetComponent<BagComponentC>().GetItemsByType((int)ItemTypeEnum.Gemstone);
-            List<BagInfo> equips = root.GetComponent<BagComponentC>().GetEquipList();
+            List<ItemInfo> gemstones = root.GetComponent<BagComponentC>().GetItemsByType((int)ItemTypeEnum.Gemstone);
+            List<ItemInfo> equips = root.GetComponent<BagComponentC>().GetEquipList();
 
-            foreach (BagInfo equip in equips)
+            foreach (ItemInfo equip in equips)
             {
                 string[] gemHoles = equip.GemHole.Split('_');
                 string[] gemIDNews = equip.GemIDNew.Split('_');
@@ -48,7 +48,7 @@ namespace ET.Client
 
                     for (int i = gemstones.Count - 1; i >= 0; i--)
                     {
-                        BagInfo gemstone = gemstones[i];
+                        ItemInfo gemstone = gemstones[i];
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(gemstone.ItemID);
                         if (gemHole != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
                         {
@@ -140,8 +140,8 @@ namespace ET.Client
                 return;
             }
 
-            List<BagInfo> bagItemList = bagComponent.GetBagList();
-            List<BagInfo> gemList = new List<BagInfo>();
+            List<ItemInfo> bagItemList = bagComponent.GetBagList();
+            List<ItemInfo> gemList = new List<ItemInfo>();
             for (int i = 0; i < bagItemList.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagItemList[i].ItemID);
@@ -185,7 +185,7 @@ namespace ET.Client
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
 
-            List<BagInfo> bagInfos = new List<BagInfo>();
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
 
             bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Equipment));
             bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
@@ -193,7 +193,7 @@ namespace ET.Client
             bagInfos.AddRange(bagComponentC.GetItemsByTypeAndSubType(ItemTypeEnum.Consume, 5));
 
             List<long> huishouList = new List<long>();
-            foreach (BagInfo bagInfo in bagInfos)
+            foreach (ItemInfo bagInfo in bagInfos)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
 
@@ -298,9 +298,9 @@ namespace ET.Client
             {
                 for (int position = 0; position < 3; position++)
                 {
-                    List<BagInfo> bagInfos = new List<BagInfo>();
+                    List<ItemInfo> bagInfos = new List<ItemInfo>();
 
-                    foreach (BagInfo item in root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag))
+                    foreach (ItemInfo item in root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag))
                     {
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(item.ItemID);
 
@@ -324,10 +324,10 @@ namespace ET.Client
                         return itemConfig2.UseLv - itemConfig1.UseLv;
                     });
 
-                    List<BagInfo> eqipInfos = root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+                    List<ItemInfo> eqipInfos = root.GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
 
                     long baginfoId = rolePetInfo.PetHeXinList[position];
-                    BagInfo bagInfo = null;
+                    ItemInfo bagInfo = null;
                     for (int i = 0; i < eqipInfos.Count; i++)
                     {
                         if (eqipInfos[i].BagInfoID == baginfoId)
@@ -428,9 +428,9 @@ namespace ET.Client
         public static async ETTask RolePetXiLian(Scene root)
         {
             PetComponentC petComponent = root.GetComponent<PetComponentC>();
-            List<BagInfo> ShowBagInfos = new List<BagInfo>();
+            List<ItemInfo> ShowBagInfos = new List<ItemInfo>();
 
-            List<BagInfo> bagList = root.GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagList = root.GetComponent<BagComponentC>().GetBagList();
             for (int i = 0; i < bagList.Count; i++)
             {
                 int itemID = bagList[i].ItemID;
@@ -776,12 +776,12 @@ namespace ET.Client
 
         public static async ETTask LifeShieldCost(Scene root)
         {
-            List<BagInfo> allInfos = new List<BagInfo>();
+            List<ItemInfo> allInfos = new List<ItemInfo>();
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Material));
             allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Equipment));
 
-            List<BagInfo> showBagInfos = new List<BagInfo>();
+            List<ItemInfo> showBagInfos = new List<ItemInfo>();
             for (int i = 0; i < allInfos.Count; i++)
             {
                 if (!ConfigData.ItemAddShieldExp.ContainsKey(allInfos[i].ItemID))
@@ -823,7 +823,7 @@ namespace ET.Client
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
 
             List<long> huishouList = new List<long>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].IsProtect)
@@ -1046,7 +1046,7 @@ namespace ET.Client
             await RobotHelper.MoveToNpc(root, 20000003);
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             // 存普通仓库
-            List<BagInfo> bagInfos = bagComponent.GetItemsByType(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByType(ItemLocType.ItemLocBag);
             if (bagInfos.Count > 0)
             {
                 await BagClientNetHelper.RquestPutStoreHouse(root, bagInfos[0], ItemLocType.ItemWareHouse1);
@@ -1054,7 +1054,7 @@ namespace ET.Client
 
             // 存账号仓库
             bagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
+            foreach (ItemInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
@@ -1072,7 +1072,7 @@ namespace ET.Client
             await BagClientNetHelper.RquestGemHeCheng(root, 19);
             // 存宝石仓库
             bagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
+            foreach (ItemInfo bagInfo in bagComponent.GetItemsByType(ItemLocType.ItemLocBag))
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.ItemType == ItemTypeEnum.Gemstone)
@@ -1238,7 +1238,7 @@ namespace ET.Client
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
 
             // 洗练
-            List<BagInfo> equips = bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip);
+            List<ItemInfo> equips = bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip);
             if (equips.Count == 0)
             {
                 return;
@@ -1249,7 +1249,7 @@ namespace ET.Client
             await BagClientNetHelper.RquestItemXiLian(root, equips[random].BagInfoID, 1);
 
             // 传承
-            List<BagInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
 
             equips.Clear();
             for (int i = 0; i < equipInfos.Count; i++)
@@ -1325,7 +1325,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    List<BagInfo> bagInfos = bagComponent.GetBagList();
+                    List<ItemInfo> bagInfos = bagComponent.GetBagList();
                     for (int j = 0; j < bagInfos.Count; j++)
                     {
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[j].ItemID);
@@ -1585,8 +1585,8 @@ namespace ET.Client
 
         public static async ETTask PaiMaiSell(Scene root)
         {
-            List<BagInfo> equipInfos = root.GetComponent<BagComponentC>().GetBagList();
-            List<BagInfo> showBagInfos = new List<BagInfo>();
+            List<ItemInfo> equipInfos = root.GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> showBagInfos = new List<ItemInfo>();
 
             P2C_PaiMaiListResponse response = await PaiMaiNetHelper.PaiMaiList(root, 0, 0, root.GetComponent<UserInfoComponentC>().UserInfo.UserId);
 
@@ -1647,7 +1647,7 @@ namespace ET.Client
             int sellNum = showBagInfos[index].ItemNum;
 
             PaiMaiItemInfo paiMaiItemInfo = new();
-            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(showBagInfos[index]);
+            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(showBagInfos[index].ToMessage());
             paiMaiItemInfo.BagInfo.ItemNum = sellNum;
             paiMaiItemInfo.Price = price;
             await PaiMaiNetHelper.PaiMaiSell(root, paiMaiItemInfo);
@@ -2023,7 +2023,7 @@ namespace ET.Client
                                 {
                                     BagComponentC bagComponent = root.GetComponent<BagComponentC>();
 
-                                    foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+                                    foreach (ItemInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
                                     {
                                         if (TaskHelper.IsTaskGiveItem(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, bagInfo))
                                         {
@@ -2147,8 +2147,8 @@ namespace ET.Client
                 bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
                 if (!actived)
                 {
-                    List<BagInfo> showBagInfos = new List<BagInfo>();
-                    foreach (BagInfo bagInfo in bagComponent.GetBagList())
+                    List<ItemInfo> showBagInfos = new List<ItemInfo>();
+                    foreach (ItemInfo bagInfo in bagComponent.GetBagList())
                     {
                         if (bagInfo.ItemID != shouJiItemConfig.ItemID)
                         {
@@ -2201,7 +2201,7 @@ namespace ET.Client
 
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
             // 橙色装备加锁
-            foreach (BagInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+            foreach (ItemInfo bagInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (itemConfig.EquipType == 101)

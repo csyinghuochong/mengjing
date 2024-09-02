@@ -53,7 +53,7 @@ namespace ET.Client
         public static void UpdateEggItemUI(this ES_PetEggList self)
         {
             self.ShowBagInfos.Clear();
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -77,7 +77,7 @@ namespace ET.Client
             }
         }
 
-        public static void BeginDrag(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
+        public static void BeginDrag(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
         {
             self.EG_IconItemDargRectTransform.gameObject.SetActive(true);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
@@ -89,7 +89,7 @@ namespace ET.Client
             CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
         }
 
-        public static void Draging(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
+        public static void Draging(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
         {
             Vector2 localPoint;
             RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
@@ -99,7 +99,7 @@ namespace ET.Client
             self.EG_IconItemDargRectTransform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
         }
 
-        public static async ETTask RequestHatch(this ES_PetEggList self, int index, BagInfo bagInfo)
+        public static async ETTask RequestHatch(this ES_PetEggList self, int index, ItemInfo bagInfo)
         {
             ES_PetEggListItem esPetEggListItem = self.PetList[index];
             KeyValuePairLong oldEgg = esPetEggListItem.RolePetEgg;
@@ -118,7 +118,7 @@ namespace ET.Client
             self.UpdatePetEggUI();
         }
 
-        public static void EndDrag(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
+        public static void EndDrag(this ES_PetEggList self, ItemInfo binfo, PointerEventData pdata)
         {
             RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();

@@ -30,7 +30,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RefreshInfo(this ES_ItemAppraisalTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
+        public static void RefreshInfo(this ES_ItemAppraisalTips self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             using (zstring.Block())
             {
@@ -404,7 +404,7 @@ namespace ET.Client
                 int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
 
                 BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-                BagInfo costbaginfo = bagComponentC.GetBagInfo(appraisalItem);
+                ItemInfo costbaginfo = bagComponentC.GetBagInfo(appraisalItem);
                 if (costbaginfo == null)
                 {
                     self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("道具不足！");

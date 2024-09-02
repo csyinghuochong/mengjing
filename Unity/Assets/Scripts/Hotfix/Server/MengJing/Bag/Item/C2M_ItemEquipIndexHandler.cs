@@ -9,8 +9,8 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ItemEquipIndexRequest request, M2C_ItemEquipIndexResponse response)
         {
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            BagInfo equip_0 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            BagInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo equip_0 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_0 == null || equip_1 == null)
             {
                 response.Error = ErrorCode.ERR_EquipType;
@@ -31,8 +31,8 @@ namespace ET.Server
             //unit.GetComponent<SkillSetComponentServer>().OnWearEquip(equip_1);
 
 
-            m2c_bagUpdate.BagInfoUpdate.Add(equip_0);
-            m2c_bagUpdate.BagInfoUpdate.Add(equip_1);
+            m2c_bagUpdate.BagInfoUpdate.Add(equip_0.ToMessage());
+            m2c_bagUpdate.BagInfoUpdate.Add(equip_1.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.EquipIndex, request.EquipIndex, true);

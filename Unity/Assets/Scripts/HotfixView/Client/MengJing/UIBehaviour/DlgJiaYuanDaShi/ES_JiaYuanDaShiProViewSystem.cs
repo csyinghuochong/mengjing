@@ -76,7 +76,7 @@ namespace ET.Client
         public static void OnUpdateItemList(this ES_JiaYuanDaShiPro self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetBagList();
+            List<ItemInfo> bagInfos = bagComponent.GetBagList();
             self.ShowBagInfos.Clear();
 
             for (int i = 0; i < bagInfos.Count; i++)
@@ -99,7 +99,7 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void OnSelectItem(this ES_JiaYuanDaShiPro self, BagInfo bagInfo)
+        public static void OnSelectItem(this ES_JiaYuanDaShiPro self, ItemInfo bagInfo)
         {
             if (self.ScrollItemCommonItems != null)
             {
@@ -124,7 +124,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonEatButton(this ES_JiaYuanDaShiPro self)
         {
-            BagInfo bagInfo = self.ES_CommonItem.Baginfo;
+            ItemInfo bagInfo = self.ES_CommonItem.Baginfo;
             if (bagInfo == null)
             {
                 return;

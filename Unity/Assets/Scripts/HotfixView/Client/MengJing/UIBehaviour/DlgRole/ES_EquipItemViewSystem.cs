@@ -37,8 +37,8 @@ namespace ET.Client
             }
         }
 
-        public static void Refresh(this ES_EquipItem self, BagInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
-        List<BagInfo> equipList)
+        public static void Refresh(this ES_EquipItem self, ItemInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
+        List<ItemInfo> equipList)
         {
             self.Occ = occ;
             self.BagInfo = bagInfo;

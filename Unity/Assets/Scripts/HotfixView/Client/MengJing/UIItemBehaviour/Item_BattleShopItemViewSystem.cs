@@ -44,7 +44,7 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, costType.ToString());
             self.E_Image_goldImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
-            BagInfo bagInfo = new();
+            ItemInfo bagInfo = new();
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();

@@ -119,8 +119,8 @@ namespace ET.Server
                         }
 						break;
                     case 15:
-                        List<BagInfo> itemList = new List<BagInfo>();
-                        BagInfo BagInfo_1 = BagInfo.Create();
+                        List<ItemInfoProto> itemList = new List<ItemInfoProto>();
+                        ItemInfoProto BagInfo_1 = ItemInfoProto.Create();
                         BagInfo_1.ItemID = 1;
                         BagInfo_1.ItemNum = 100;
                         itemList.Add(BagInfo_1);

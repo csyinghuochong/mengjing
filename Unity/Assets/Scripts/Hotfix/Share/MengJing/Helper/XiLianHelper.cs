@@ -619,7 +619,7 @@ namespace ET
         /// xilianType  洗炼类型   0 普通掉落  1 装备洗炼功能   2 (不显示广播消息)
         /// diamondXilian(0道具1钻石)
         /// /洗炼装备属性传入一个参数，这个参数表示他是用道具洗炼还是钻石洗炼 传入第二个参数 当前钻石的洗炼次数（用来做一些保底属性处理）
-        public static ItemXiLianResult XiLianItem(Unit unit, BagInfo bagInfo, int xilianType, int xilianLv, int diamondXilian, int diamondNumber, int ItemXiLianDu, string name)
+        public static ItemXiLianResult XiLianItem(Unit unit, ItemInfo bagInfo, int xilianType, int xilianLv, int diamondXilian, int diamondNumber, int ItemXiLianDu, string name)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             //获取装备等级和装备类型
@@ -1007,7 +1007,7 @@ namespace ET
         }
 
         //生肖洗炼
-        public static ItemXiLianResult XiLianShengXiao(BagInfo bagInfo)
+        public static ItemXiLianResult XiLianShengXiao(ItemInfo bagInfo)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);

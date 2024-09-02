@@ -59,13 +59,13 @@ namespace ET.Client
 
             self.StoreSellConfig = storeSellConfig;
             int costType = self.StoreSellConfig.SellType;
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.ItemID = costType;
             self.ES_CommonItem_Gold.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem_Gold.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem_Gold.E_ItemQualityImage.gameObject.SetActive(false);
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();

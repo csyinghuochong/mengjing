@@ -163,7 +163,7 @@ namespace ET.Client
         public static bool UseItem(this UnitGuaJiComponent self, int itemID)
         {
             BagComponentC bagCompont = self.Root().GetComponent<BagComponentC>();
-            BagInfo baginfo = bagCompont.GetBagInfo(itemID);
+            ItemInfo baginfo = bagCompont.GetBagInfo(itemID);
             if (baginfo != null)
             {
                 BagClientNetHelper.RequestUseItem(self.Root(), baginfo).Coroutine();
@@ -317,7 +317,7 @@ namespace ET.Client
                     {
                         ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[8];
                         int itemId = uiSkillGridComponent.SkillPro?.SkillID ?? 0;
-                        BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(itemId);
+                        ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(itemId);
                         if (bagInfo != null)
                         {
                             uiSkillGridComponent.OnPointDown(null);

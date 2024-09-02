@@ -45,7 +45,7 @@ namespace ET.Client
 
             self.E_ItemButtonButton.AddListener(() =>
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = itemId;
                 bagInfo.ItemNum = itemNum;
                 EventSystem.Instance.Publish(self.Root(),
@@ -55,7 +55,7 @@ namespace ET.Client
                         ItemOperateEnum = ItemOperateEnum.None,
                         InputPoint = Input.mousePosition,
                         Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                        EquipList = new List<BagInfo>()
+                        EquipList = new List<ItemInfo>()
                     });
             });
         }

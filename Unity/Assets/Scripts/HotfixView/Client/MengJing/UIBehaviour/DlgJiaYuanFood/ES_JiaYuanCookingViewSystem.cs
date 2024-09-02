@@ -95,7 +95,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo bagInfo = bagComponent.GetBagInfo(esCommonItem.Baginfo.BagInfoID);
+                ItemInfo bagInfo = bagComponent.GetBagInfo(esCommonItem.Baginfo.BagInfoID);
                 if (bagInfo == null)
                 {
                     esCommonItem.UpdateItem(null, ItemOperateEnum.None);
@@ -122,11 +122,11 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.HuishouBag);
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
 
             scrollItemCommonItem.ES_CommonItem.E_ItemDragEventTrigger.gameObject.SetActive(index < self.ShowBagInfos.Count);
@@ -138,7 +138,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
-            List<BagInfo> baglist = bagComponent.GetBagList();
+            List<ItemInfo> baglist = bagComponent.GetBagList();
             for (int i = 0; i < baglist.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baglist[i].ItemID);
@@ -164,7 +164,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    BagInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    ItemInfo bagInfo = item.ES_CommonItem.Baginfo;
                     if (bagInfo == null)
                     {
                         continue;
@@ -189,7 +189,7 @@ namespace ET.Client
         {
             long curNumber = 0;
             string[] huishouInfo = dataparams.Split('_');
-            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
+            ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
 
             long totalNumber = bagInfo.ItemNum;
 
@@ -198,7 +198,7 @@ namespace ET.Client
                 for (int i = 0; i < self.CostItemList.Length; i++)
                 {
                     ES_CommonItem esCommonItem = self.CostItemList[i];
-                    BagInfo bagInfo1 = esCommonItem.Baginfo;
+                    ItemInfo bagInfo1 = esCommonItem.Baginfo;
                     if (bagInfo1 != null && bagInfo1.ItemID == bagInfo.ItemID)
                     {
                         curNumber++;
@@ -218,11 +218,11 @@ namespace ET.Client
                         continue;
                     }
 
-                    BagInfo bagInfo1 = BagInfo.Create();
+                    ItemInfo bagInfo1 = new ItemInfo();
                     bagInfo1.ItemID = bagInfo.ItemID;
                     bagInfo1.BagInfoID = bagInfo.BagInfoID;
                     bagInfo1.ItemNum = 1;
-                    bagInfo1.RpcId = i;
+                    // bagInfo1.RpcId = i;
                     esCommonItem.UpdateItem(bagInfo1, ItemOperateEnum.HuishouShow);
                     esCommonItem.E_ItemNumText.text = "1";
                     esCommonItem.E_ItemNameText.gameObject.SetActive(false);
@@ -234,7 +234,7 @@ namespace ET.Client
                 for (int i = self.CostItemList.Length - 1; i >= 0; i--)
                 {
                     ES_CommonItem esCommonItem = self.CostItemList[i];
-                    BagInfo bagInfo1 = esCommonItem.Baginfo;
+                    ItemInfo bagInfo1 = esCommonItem.Baginfo;
                     if (bagInfo1 == null)
                     {
                         continue;
@@ -253,7 +253,7 @@ namespace ET.Client
             self.UpdateSelected();
         }
 
-        public static async ETTask OnPointerDown(this ES_JiaYuanCooking self, BagInfo binfo, PointerEventData pdata)
+        public static async ETTask OnPointerDown(this ES_JiaYuanCooking self, ItemInfo binfo, PointerEventData pdata)
         {
             if (binfo == null)
             {
@@ -280,7 +280,7 @@ namespace ET.Client
                 });
         }
 
-        public static void OnPointerUp(this ES_JiaYuanCooking self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerUp(this ES_JiaYuanCooking self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);

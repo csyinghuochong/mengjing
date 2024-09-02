@@ -19,17 +19,17 @@ namespace ET.Server
 
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 
-            List<BagInfo> warehourselist = bagComponent.GetItemByLoc(hourseId);
+            List<ItemInfo> warehourselist = bagComponent.GetItemByLoc(hourseId);
 
-            List<BagInfo> bagList = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagList = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag);
 
             for (int w = 0; w < warehourselist.Count; w++)
             {
-                BagInfo warehourseInfo = warehourselist[w];
+                ItemInfo warehourseInfo = warehourselist[w];
 
                 for (int b = bagList.Count - 1; b >= 0; b--)
                 {
-                    BagInfo bagInfo = bagList[b];
+                    ItemInfo bagInfo = bagList[b];
 
                     if (warehourseInfo.ItemID != bagInfo.ItemID)
                     {
@@ -43,8 +43,8 @@ namespace ET.Server
                     }
 
                     warehourseInfo.ItemNum = warehourseInfo.ItemNum + bagInfo.ItemNum;
-                    m2c_bagUpdate.BagInfoUpdate.Add(warehourseInfo);
-                    m2c_bagUpdate.BagInfoDelete.Add(bagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(warehourseInfo.ToMessage());
+                    m2c_bagUpdate.BagInfoDelete.Add(bagInfo.ToMessage());
                     bagList.RemoveAt(b);
                 }
             }

@@ -160,7 +160,9 @@
             if (paiMaiItemInfo == null || self.ES_CommonItem == null)
                 return;
 
-            self.ES_CommonItem.UpdateItem(paiMaiItemInfo.BagInfo, ItemOperateEnum.PaiMaiBuy);
+            ItemInfo itemInfo = new ItemInfo();
+            itemInfo.FromMessage(paiMaiItemInfo.BagInfo);
+            self.ES_CommonItem.UpdateItem(itemInfo, ItemOperateEnum.PaiMaiBuy);
             self.E_Text_OwnerText.text = paiMaiItemInfo.PlayerName;
 
             FunctionUI.ItemObjShowName(self.E_Text_NameText.gameObject, self.PaiMaiItemInfo.BagInfo.ItemID);

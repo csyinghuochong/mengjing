@@ -105,7 +105,7 @@ namespace ET.Client
             self.View.E_TextMailContentText.text = mailInfos.Context;
 
             List<RewardItem> rewardItems = new();
-            foreach (BagInfo bagInfo in mailInfos.ItemList)
+            foreach (ItemInfoProto bagInfo in mailInfos.ItemList)
             {
                 rewardItems.Add(new RewardItem() { ItemID = bagInfo.ItemID, ItemNum = bagInfo.ItemNum });
             }

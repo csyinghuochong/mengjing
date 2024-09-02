@@ -23,7 +23,7 @@ namespace ET.Server
 
             int locType = request.OperateType == 1 ? ItemLocType.ItemLocBag : ItemLocType.SeasonJingHe;
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            BagInfo useBagInfo = bagComponent.GetItemByLoc(locType, request.OperateBagID);
+            ItemInfo useBagInfo = bagComponent.GetItemByLoc(locType, request.OperateBagID);
             if (useBagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -53,7 +53,7 @@ namespace ET.Server
                 }
 
                 //穿戴 获取当前位置是否有装备
-                BagInfo beforeequip = bagComponent.GetJingHeByWeiZhi(equipIndex);
+                ItemInfo beforeequip = bagComponent.GetJingHeByWeiZhi(equipIndex);
                 if (beforeequip != null)
                 {
                     beforeequip.EquipPlan = 0;
@@ -65,7 +65,7 @@ namespace ET.Server
 
                     unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.SeasonJingHe, beforeequip);
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
-                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
+                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip.ToMessage());
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace ET.Server
 
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
             }
             if (request.OperateType == 2)
             {
@@ -92,7 +92,7 @@ namespace ET.Server
                 unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, ItemLocType.SeasonJingHe);
                 unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.SeasonJingHe, useBagInfo);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
             }
 
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

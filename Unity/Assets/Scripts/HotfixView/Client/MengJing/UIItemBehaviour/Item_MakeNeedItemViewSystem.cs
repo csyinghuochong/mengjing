@@ -20,7 +20,7 @@ namespace ET.Client
 
         public static void OnClickUIItem(this Scroll_Item_MakeNeedItem self)
         {
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = self.ItemId;
             //弹出Tips
             EventSystem.Instance.Publish(self.Root(),
@@ -30,7 +30,7 @@ namespace ET.Client
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                    EquipList = new List<BagInfo>()
+                    EquipList = new List<ItemInfo>()
                 });
         }
 

@@ -38,7 +38,7 @@ namespace ET.Client
             self.ShouJIId = shouiId;
             ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(shouiId);
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> allInfos = bagComponent.GetBagList();
+            List<ItemInfo> allInfos = bagComponent.GetBagList();
             self.ShowBagInfos.Clear();
             for (int i = 0; i < allInfos.Count; i++)
             {
@@ -120,7 +120,7 @@ namespace ET.Client
             return ids;
         }
 
-        public static void OnSelectItem(this DlgShouJiSelect self, BagInfo bagInfo)
+        public static void OnSelectItem(this DlgShouJiSelect self, ItemInfo bagInfo)
         {
             if (self.ScrollItemCommonItems != null)
             {

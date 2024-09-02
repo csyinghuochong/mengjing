@@ -12,7 +12,7 @@ namespace ET.Server
 
             for (int i = 0; i < request.BagInfoIds.Count; i++)
             {
-                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(request.OperateType, request.BagInfoIds[i]);
+                ItemInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(request.OperateType, request.BagInfoIds[i]);
                 if (useBagInfo == null)
                 {
                     continue;
@@ -46,11 +46,11 @@ namespace ET.Server
 
                 if (useBagInfo.ItemNum == 0)
                 {
-                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo.ToMessage());
                 }
                 else
                 {
-                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                 }
             }
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

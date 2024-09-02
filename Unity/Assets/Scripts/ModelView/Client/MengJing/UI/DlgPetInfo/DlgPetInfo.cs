@@ -21,7 +21,7 @@ namespace ET.Client
         public int UnactiveNum;
 
         public int Position;
-        public List<BagInfo> PetHeXinList = new List<BagInfo>();
+        public List<ItemInfoProto> PetHeXinList = new();
         public List<int> Keys = new List<int>();
         public List<long> Values = new List<long>();
     }

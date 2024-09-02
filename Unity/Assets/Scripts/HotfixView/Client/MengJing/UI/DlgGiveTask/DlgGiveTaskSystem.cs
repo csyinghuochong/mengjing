@@ -48,7 +48,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void OnSelect(this DlgGiveTask self, BagInfo bagInfo)
+        public static void OnSelect(this DlgGiveTask self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

@@ -40,7 +40,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void SetCallBack(this ES_EquipSet self, Action<BagInfo> action)
+        public static void SetCallBack(this ES_EquipSet self, Action<ItemInfo> action)
         {
             foreach (ES_EquipItem item in self.ESEquipItems_1)
             {
@@ -63,13 +63,13 @@ namespace ET.Client
             self.E_RoseNameText.text = playerName;
         }
 
-        public static void ShowPlayerModel(this ES_EquipSet self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashonids, int position = 0)
+        public static void ShowPlayerModel(this ES_EquipSet self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashonids, int position = 0)
         {
             self.ES_ModelShow.SetPosition(new Vector3(position * 2000, 2000, 0), new Vector3(0f, 70f, 150f));
             self.ES_ModelShow.ShowPlayerModel(bagInfo, occ, equipIndex, fashonids);
         }
 
-        public static void RefreshEquip(this ES_EquipSet self, List<BagInfo> equiplist_1, List<BagInfo> equiplist_2, int occ,
+        public static void RefreshEquip(this ES_EquipSet self, List<ItemInfo> equiplist_1, List<ItemInfo> equiplist_2, int occ,
         ItemOperateEnum itemOperateEnum)
         {
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
@@ -98,12 +98,12 @@ namespace ET.Client
             self.ES_ModelShow.PlayShowIdelAnimate();
         }
 
-        public static void ChangeWeapon(this ES_EquipSet self, BagInfo bagInfo, int occ)
+        public static void ChangeWeapon(this ES_EquipSet self, ItemInfo bagInfo, int occ)
         {
             self.ES_ModelShow.ChangeWeapon(bagInfo, occ);
         }
 
-        private static void RefreshEquip_1(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        private static void RefreshEquip_1(this ES_EquipSet self, List<ItemInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
         {
             int shipingIndex = 0;
             self.Occ = occ;
@@ -149,7 +149,7 @@ namespace ET.Client
             }
         }
 
-        private static void RefreshEquip_2(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        private static void RefreshEquip_2(this ES_EquipSet self, List<ItemInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
         {
             for (int i = 0; i < equiplist.Count; i++)
             {

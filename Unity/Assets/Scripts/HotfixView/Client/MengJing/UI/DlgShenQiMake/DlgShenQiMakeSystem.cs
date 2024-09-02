@@ -101,7 +101,7 @@ namespace ET.Client
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
             if (self.View.ES_CommonItem.uiTransform.gameObject != null)
             {
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = equipMakeConfig.MakeItemID;
                 self.View.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.MakeItem);
                 self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);

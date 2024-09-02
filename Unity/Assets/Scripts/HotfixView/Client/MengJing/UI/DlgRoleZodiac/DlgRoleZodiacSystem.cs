@@ -88,7 +88,7 @@ namespace ET.Client
                 }
             }
 
-            List<BagInfo> equiplist = self.EquipInfoList;
+            List<ItemInfo> equiplist = self.EquipInfoList;
             for (int i = 0; i < equiplist.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equiplist[i].ItemID);
@@ -162,7 +162,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnInitUI(this DlgRoleZodiac self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        public static void OnInitUI(this DlgRoleZodiac self, List<ItemInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
         {
             self.EquipInfoList = equiplist;
             self.ItemOperateEnum = itemOperateEnum;
@@ -171,7 +171,7 @@ namespace ET.Client
             self.View.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
-        public static void UpdateBagUI(this DlgRoleZodiac self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        public static void UpdateBagUI(this DlgRoleZodiac self, List<ItemInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
         {
             self.EquipInfoList = equiplist;
             self.ItemOperateEnum = itemOperateEnum;

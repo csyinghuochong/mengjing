@@ -17,7 +17,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.IsHoldDown = false;
-            self.BagInfo_Transfer = new BagInfo[2];
+            self.BagInfo_Transfer = new ItemInfo[2];
             self.UIItem_Transfer = new ES_CommonItem[2];
             self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransferButton);
             self.E_EquipItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnEquipItemsRefresh);
@@ -110,8 +110,8 @@ namespace ET.Client
         public static void UpdateSelect(this ES_EquipmentIncreaseTransfer self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo bagInfo_1 = bagComponent.GetBagInfo(self.BagInfo_Transfer[0].BagInfoID);
-            BagInfo bagInfo_2 = bagComponent.GetBagInfo(self.BagInfo_Transfer[1].BagInfoID);
+            ItemInfo bagInfo_1 = bagComponent.GetBagInfo(self.BagInfo_Transfer[0].BagInfoID);
+            ItemInfo bagInfo_2 = bagComponent.GetBagInfo(self.BagInfo_Transfer[1].BagInfoID);
             self.UIItem_Transfer[0].UpdateItem(bagInfo_1, ItemOperateEnum.None);
             self.UIItem_Transfer[1].UpdateItem(bagInfo_2, ItemOperateEnum.None);
         }
@@ -122,19 +122,19 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowEquipBagInfos[index], ItemOperateEnum.SkillSet);
 
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (ItemInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
-            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
         }
 
         public static void UpdateEquipItemUI(this ES_EquipmentIncreaseTransfer self)
         {
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             self.ShowEquipBagInfos.Clear();
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -162,7 +162,7 @@ namespace ET.Client
             self.E_EquipItemsLoopVerticalScrollRect.SetVisible(true, self.ShowEquipBagInfos.Count);
         }
 
-        public static async ETTask OnPointerDown(this ES_EquipmentIncreaseTransfer self, BagInfo binfo, PointerEventData pdata)
+        public static async ETTask OnPointerDown(this ES_EquipmentIncreaseTransfer self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
             EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
@@ -176,17 +176,17 @@ namespace ET.Client
                 ItemOperateEnum = ItemOperateEnum.None,
                 InputPoint = Input.mousePosition,
                 Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                EquipList = new List<BagInfo>(),
+                EquipList = new List<ItemInfo>(),
             });
         }
 
-        public static void OnPointerUp(this ES_EquipmentIncreaseTransfer self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerUp(this ES_EquipmentIncreaseTransfer self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
-        public static void BeginDrag(this ES_EquipmentIncreaseTransfer self, BagInfo binfo, PointerEventData pdata)
+        public static void BeginDrag(this ES_EquipmentIncreaseTransfer self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.UICommonItem_Copy = UnityEngine.Object.Instantiate(self.ES_CommonItem_1.uiTransform.gameObject);
@@ -203,7 +203,7 @@ namespace ET.Client
             self.UICommonItem_Copy.transform.Find("E_Binding").gameObject.SetActive(false);
         }
 
-        public static void Draging(this ES_EquipmentIncreaseTransfer self, BagInfo binfo, PointerEventData pdata)
+        public static void Draging(this ES_EquipmentIncreaseTransfer self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             RectTransform canvas = self.UICommonItem_Copy.transform.parent.GetComponent<RectTransform>();
@@ -237,7 +237,7 @@ namespace ET.Client
             }
         }
 
-        public static void EndDrag(this ES_EquipmentIncreaseTransfer self, BagInfo binfo, PointerEventData pdata)
+        public static void EndDrag(this ES_EquipmentIncreaseTransfer self, ItemInfo binfo, PointerEventData pdata)
         {
             RectTransform canvas = self.UICommonItem_Copy.transform.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();

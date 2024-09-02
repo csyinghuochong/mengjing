@@ -58,7 +58,7 @@ namespace ET.Client
                     ET.JiaYuanHelper.TimeToShow(TimeInfo.Instance.ToDateTime(shouhuoTime).ToString("f")));
             }
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = jiaYuanFarmConfig.GetItemID;
             bagInfo.ItemNum = 1;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

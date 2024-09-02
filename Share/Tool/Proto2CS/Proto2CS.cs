@@ -322,7 +322,14 @@ namespace ET
                                 continue;
                             }
 
-                            sb.AppendLine($"\t\tpublic {keyValuePair.Value} {keyValuePair.Key} {{ get; set; }}");
+                            if (keyValuePair.Value.Contains("List") || keyValuePair.Value.Contains("Map"))
+                            {
+                                sb.AppendLine($"\t\tpublic {keyValuePair.Value} {keyValuePair.Key} {{ get; set; }} = new();");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"\t\tpublic {keyValuePair.Value} {keyValuePair.Key} {{ get; set; }}");
+                            }
                         }
 
                         sb.AppendLine("\t}");
@@ -338,7 +345,7 @@ namespace ET
                         sb.AppendLine("\t\t{");
                         sb.AppendLine("\t\t}");
                         sb.AppendLine("");
-                        sb.AppendLine($"\t\tprivate static void FromMessage(this {msgName} self, {msgName}Proto proto)");
+                        sb.AppendLine($"\t\tpublic static void FromMessage(this {msgName} self, {msgName}Proto proto)");
                         sb.AppendLine("\t\t{");
                         foreach (KeyValuePair<string, string> keyValuePair in name_type)
                         {
@@ -352,7 +359,7 @@ namespace ET
 
                         sb.AppendLine("\t\t}");
                         sb.AppendLine("");
-                        sb.AppendLine($"\t\tprivate static {msgName}Proto ToMessage(this {msgName} self)");
+                        sb.AppendLine($"\t\tpublic static {msgName}Proto ToMessage(this {msgName} self)");
                         sb.AppendLine("\t\t{");
                         sb.AppendLine($"\t\t\t{msgName}Proto proto = {msgName}Proto.Create();");
                         foreach (KeyValuePair<string, string> keyValuePair in name_type)

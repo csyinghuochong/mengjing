@@ -16,6 +16,6 @@ namespace ET.Client
         public JiaYuanPet JiaYuanPet;
         public bool IsHoldDown;
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-        public List<BagInfo> ShowBagInfos = new();
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
     }
 }

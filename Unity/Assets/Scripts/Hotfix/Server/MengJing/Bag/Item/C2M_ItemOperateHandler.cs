@@ -37,7 +37,7 @@ namespace ET.Server
 
             int weizhi = -1;
             ItemConfig itemConfig = null;
-            BagInfo useBagInfo = bagComponent.GetItemByLoc(locType, bagInfoID);
+            ItemInfo useBagInfo = bagComponent.GetItemByLoc(locType, bagInfoID);
             if (useBagInfo == null && request.OperateType != 8)
             {
                 return;
@@ -160,7 +160,7 @@ namespace ET.Server
                 {
                     //检测要附灵的宠物蛋是否存在
                     long chongwudanId = long.Parse(request.OperatePar);
-                    BagInfo chongwudan = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, chongwudanId);
+                    ItemInfo chongwudan = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, chongwudanId);
                     if (chongwudan == null)
                     {
                         response.Error = ErrorCode.ERR_ItemNotExist;
@@ -498,9 +498,9 @@ namespace ET.Server
                         case 137:
                             //宠物蛋附灵
                             long chongwudanId = long.Parse(request.OperatePar);
-                            BagInfo chongwudan = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, chongwudanId);
+                            ItemInfo chongwudan = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, chongwudanId);
                             chongwudan.FuLing = 1;
-                            m2c_bagUpdate.BagInfoUpdate.Add(chongwudan);
+                            m2c_bagUpdate.BagInfoUpdate.Add(chongwudan.ToMessage());
                             break;
                         case 138:
                             // 增加副本次数
@@ -525,11 +525,11 @@ namespace ET.Server
                     {
                         if (useBagInfo.ItemNum <= 0)
                         {
-                            m2c_bagUpdate.BagInfoDelete.Add(useBagInfo);
+                            m2c_bagUpdate.BagInfoDelete.Add(useBagInfo.ToMessage());
                         }
                         else
                         {
-                            m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                            m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                         }
                     }
 
@@ -590,11 +590,11 @@ namespace ET.Server
                 bagComponent.OnCostItemData(useBagInfo, locType, sellNum);
                 if (useBagInfo.ItemNum <= 0)
                 {
-                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo.ToMessage());
                 }
                 else
                 {
-                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                 }
             }
 
@@ -613,11 +613,11 @@ namespace ET.Server
                 bagComponent.OnCostItemData(useBagInfo, locType, sellNum);
                 if (useBagInfo.ItemNum == 0)
                 {
-                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoDelete.Add(useBagInfo.ToMessage());
                 }
                 else
                 {
-                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                 }
             }
 
@@ -639,10 +639,10 @@ namespace ET.Server
                 }
 
                 //获取之前的位置是否有装备
-                BagInfo beforeequip = null;
+                ItemInfo beforeequip = null;
                 if (weizhi == (int) ItemSubTypeEnum.Shiping && !CommonHelp.IsBanHaoZone(unit.Zone()))
                 {
-                    List<BagInfo> equipList = bagComponent.GetEquipListByWeizhi(ItemLocType.ItemLocEquip, weizhi);
+                    List<ItemInfo> equipList = bagComponent.GetEquipListByWeizhi(ItemLocType.ItemLocEquip, weizhi);
                     beforeequip = equipList.Count < 3? null : equipList[0];
                 }
                 else
@@ -657,7 +657,7 @@ namespace ET.Server
 
                     unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.ItemLocEquip, beforeequip);
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
-                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
+                    m2c_bagUpdate.BagInfoUpdate.Add(beforeequip.ToMessage());
                 }
                 else
                 {
@@ -669,7 +669,7 @@ namespace ET.Server
                 unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
 
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
@@ -698,7 +698,7 @@ namespace ET.Server
                 bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, ItemLocType.ItemLocEquip);
                 unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.ItemLocEquip, useBagInfo);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
                     unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, 0);
@@ -723,7 +723,7 @@ namespace ET.Server
                 }
                 else
                 {
-                    BagInfo baginfoCost = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, baginfoId);
+                    ItemInfo baginfoCost = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, baginfoId);
                     if (baginfoCost != null)
                     {
                         //道具鉴定，扣除道具
@@ -753,7 +753,7 @@ namespace ET.Server
                         useBagInfo.HideProLists =XiLianHelper.GetEquipZhuanJingHidePro(itemConfig.ItemEquipID, itemConfig.Id, int.Parse(qulitylv), unit, ifItem);
                     }
 
-                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                    m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
                     //如果当前有隐藏技能一起飘出
                     if (useBagInfo.HideSkillLists.Count > 0)
                     {
@@ -806,7 +806,7 @@ namespace ET.Server
                 }
 
                 bagComponent.OnChangeItemLoc(useBagInfo, hourseId, ItemLocType.ItemLocBag);
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
             }
 
             //放回背包
@@ -827,7 +827,7 @@ namespace ET.Server
 
                 bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, hourseId);
                 unit.GetComponent<TaskComponentS>().OnGetItemForWarehouse(useBagInfo.ItemID);
-                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
+                m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo.ToMessage());
             }
 
             //整理背包

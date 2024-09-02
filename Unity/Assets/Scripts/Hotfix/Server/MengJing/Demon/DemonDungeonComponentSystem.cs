@@ -63,7 +63,7 @@ namespace ET.Server
             for (int i = 0; i < rewardList.Length; i++)
             {
                 string[] rewardItem = rewardList[i].Split(';');
-                BagInfo BagInfo = BagInfo.Create();
+                ItemInfoProto BagInfo = ItemInfoProto.Create();
                 BagInfo.ItemID = int.Parse(rewardItem[0]);
                 BagInfo.ItemNum = int.Parse(rewardItem[1]);
                 mailInfo.ItemList.Add(BagInfo);

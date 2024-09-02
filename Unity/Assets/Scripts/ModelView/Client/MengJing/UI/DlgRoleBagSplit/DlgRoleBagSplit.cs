@@ -9,6 +9,6 @@
         }
 
         public long Num;
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
     }
 }

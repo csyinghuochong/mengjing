@@ -20,11 +20,11 @@ namespace ET.Client
             self.UIRoleXiLianTenItem.SetActive(false);
         }
 
-        public static void OnInitUI(this DlgRoleXiLianTen self, BagInfo bagInfo, List<ItemXiLianResult> itemXiLians)
+        public static void OnInitUI(this DlgRoleXiLianTen self, ItemInfo bagInfo, List<ItemXiLianResult> itemXiLians)
         {
             for (int i = 0; i < itemXiLians.Count; i++)
             {
-                BagInfo bagInfoTemp = CommonHelp.DeepCopy(bagInfo);
+                ItemInfo bagInfoTemp = CommonHelp.DeepCopy(bagInfo);
                 bagInfoTemp.XiLianHideTeShuProLists = itemXiLians[i].XiLianHideTeShuProLists;
                 bagInfoTemp.XiLianHideProLists = itemXiLians[i].XiLianHideProLists;
                 bagInfoTemp.HideSkillLists = itemXiLians[i].HideSkillLists;

@@ -1,6 +1,5 @@
 ﻿namespace ET.Server
 {
-
     [MessageHandler(SceneType.EMail)]
     public class C2E_AccountWarehousInfoHandler : MessageHandler<Scene, C2E_AccountWarehousInfoRequest, E2C_AccountWarehousInfoResponse>
     {
@@ -11,15 +10,23 @@
                 DBAccountBagInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountBagInfo>(scene.Root(), request.AccInfoID);
                 if (dBAccountWarehouse != null)
                 {
-                    response.BagInfos = dBAccountWarehouse.BagInfoList;
+                    foreach (ItemInfo itemInfo in dBAccountWarehouse.BagInfoList)
+                    {
+                        response.BagInfos.Add(itemInfo.ToMessage());
+                    }
                 }
                 else
                 {
                     DBAccountBagInfo dBAccountBagInfo = scene.AddChildWithId<DBAccountBagInfo>(request.AccInfoID);
-                    UnitCacheHelper.SaveComponent(scene.Root(),request.AccInfoID, dBAccountBagInfo).Coroutine();
-                    response.BagInfos = dBAccountWarehouse.BagInfoList;
+                    UnitCacheHelper.SaveComponent(scene.Root(), request.AccInfoID, dBAccountBagInfo).Coroutine();
+
+                    foreach (ItemInfo itemInfo in dBAccountWarehouse.BagInfoList)
+                    {
+                        response.BagInfos.Add(itemInfo.ToMessage());
+                    }
                 }
             }
+
             await ETTask.CompletedTask;
         }
     }

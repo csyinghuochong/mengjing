@@ -8,12 +8,12 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianTransfer : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public BagInfo[] BagInfo_Transfer;
+		public ItemInfo[] BagInfo_Transfer { get; set; }
 		public EntityRef<ES_CommonItem>[] UIItem_Transfer;
 		public Vector2 localPoint;
 		public bool IsHoldDown;
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 
 		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{

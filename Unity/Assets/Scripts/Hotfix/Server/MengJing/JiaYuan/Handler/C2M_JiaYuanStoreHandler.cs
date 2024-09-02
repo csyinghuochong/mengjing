@@ -23,9 +23,9 @@ namespace ET.Server
 
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
-            List <BagInfo> bagInfos = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag);
+            List <ItemInfo> bagInfos = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag);
 
-            List<BagInfo> itemList = new List<BagInfo>();
+            List<ItemInfo> itemList = new List<ItemInfo>();
             
             // 家园种子仓库
             if (hourseId >= ItemLocType.JianYuanWareHouse1 && hourseId <= ItemLocType.JianYuanWareHouse4)
@@ -46,7 +46,7 @@ namespace ET.Server
             for (int i = 0; i < itemList.Count; i++)
             {
                 unit.GetComponent<BagComponentS>().OnChangeItemLoc(itemList[i], hourseId, ItemLocType.ItemLocBag);
-                m2c_bagUpdate.BagInfoUpdate.Add(itemList[i]);
+                m2c_bagUpdate.BagInfoUpdate.Add(itemList[i].ToMessage());
                 leftCell--;
                 if (leftCell <= 0)
                 {

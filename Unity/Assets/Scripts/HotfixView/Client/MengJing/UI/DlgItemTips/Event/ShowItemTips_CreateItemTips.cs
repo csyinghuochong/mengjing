@@ -45,7 +45,7 @@ namespace ET.Client
 
             if (itemConfig.ItemType == (int)ItemTypeEnum.Equipment)
             {
-                BagInfo haveEquip = null;
+                ItemInfo haveEquip = null;
                 if (itemConfig.EquipType == 301)
                 {
                     // UI uI1 = UIHelper.GetUI(args.ZoneScene, UIType.UIPet);

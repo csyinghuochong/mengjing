@@ -10,10 +10,10 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this BagComponentC self)
         {
-            self.AllItemList = new Dictionary<int, List<BagInfo>>();
+            self.AllItemList = new Dictionary<int, List<ItemInfo>>();
             for (int i = 0; i < (int)ItemLocType.ItemLocMax; i++)
             {
-                self.AllItemList[i] = new List<BagInfo>();
+                self.AllItemList[i] = new List<ItemInfo>();
             }
 
             self.RealAddItem = true;
@@ -59,10 +59,10 @@ namespace ET.Client
             return self.GetBagLeftCell(ItemLocType.ItemLocBag) >= cellNumber;
         }
 
-        public static List<BagInfo> GetCurJingHeList(this BagComponentC self)
+        public static List<ItemInfo> GetCurJingHeList(this BagComponentC self)
         {
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            List<BagInfo> jingheList = self.GetItemsByLoc(ItemLocType.SeasonJingHe);
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
+            List<ItemInfo> jingheList = self.GetItemsByLoc(ItemLocType.SeasonJingHe);
             for (int i = 0; i < jingheList.Count; i++)
             {
                 if (jingheList[i].EquipPlan == self.SeasonJingHePlan)
@@ -74,9 +74,9 @@ namespace ET.Client
             return bagInfos;
         }
 
-        public static BagInfo GetJingHeByWeiZhi(this BagComponentC self, int subType)
+        public static ItemInfo GetJingHeByWeiZhi(this BagComponentC self, int subType)
         {
-            List<BagInfo> bagInfos = self.GetCurJingHeList();
+            List<ItemInfo> bagInfos = self.GetCurJingHeList();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].EquipIndex == subType)
@@ -90,7 +90,7 @@ namespace ET.Client
 
         public static void OnRecvItemSort(this BagComponentC self, int itemEquipType)
         {
-            List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
+            List<ItemInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
             ItemHelper.ItemLitSort(ItemTypeList);
             EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
         }
@@ -105,8 +105,9 @@ namespace ET.Client
             {
                 for (int i = 0; i < bagUpdate.Count; i++)
                 {
-                    BagInfo newInfo = bagUpdate[i];
-                    BagInfo oldInfo = self.GetBagInfo(bagUpdate[i].BagInfoID);
+                    ItemInfo newInfo = self.AddChild<ItemInfo>();
+                    newInfo.FromMessage(bagUpdate[i]);
+                    ItemInfo oldInfo = self.GetBagInfo(bagUpdate[i].BagInfoID);
                     if (oldInfo == null)
                     {
                         continue;
@@ -124,26 +125,28 @@ namespace ET.Client
 
                     if (oldInfo.Loc != newInfo.Loc)
                     {
-                        List<BagInfo> oldTemp = self.GetItemsByLoc(oldInfo.Loc);
+                        List<ItemInfo> oldTemp = self.GetItemsByLoc(oldInfo.Loc);
                         for (int k = oldTemp.Count - 1; k >= 0; k--)
                         {
                             if (oldTemp[k].BagInfoID == newInfo.BagInfoID)
                             {
+                                oldTemp[k].Dispose();
                                 oldTemp.RemoveAt(k);
                                 break;
                             }
                         }
 
-                        List<BagInfo> temp = self.GetItemsByLoc(newInfo.Loc);
-                        temp.Add(bagUpdate[i]);
+                        List<ItemInfo> temp = self.GetItemsByLoc(newInfo.Loc);
+                        temp.Add(newInfo);
                     }
                     else
                     {
-                        List<BagInfo> temp = self.GetItemsByLoc(newInfo.Loc);
+                        List<ItemInfo> temp = self.GetItemsByLoc(newInfo.Loc);
                         for (int k = 0; k < temp.Count; k++)
                         {
                             if (temp[k].BagInfoID == newInfo.BagInfoID)
                             {
+                                temp[k].Dispose();
                                 temp[k] = newInfo;
                                 break;
                             }
@@ -156,7 +159,8 @@ namespace ET.Client
             {
                 for (int i = 0; i < bagAdd.Count; i++)
                 {
-                    BagInfo bagInfo = bagAdd[i];
+                    ItemInfo bagInfo = self.AddChild<ItemInfo>();
+                    bagInfo.FromMessage(bagAdd[i]);
                     if (bagInfo.Loc == (int)ItemLocType.ItemLocBag)
                     {
                         self.ShowGetItemTip(bagInfo, bagInfo.ItemNum);
@@ -167,7 +171,7 @@ namespace ET.Client
                         EventSystem.Instance.Publish(self.Root(), new ChouKaWarehouseAddItem());
                     }
 
-                    List<BagInfo> temp = self.GetItemsByLoc(bagInfo.Loc);
+                    List<ItemInfo> temp = self.GetItemsByLoc(bagInfo.Loc);
                     temp.Add(bagInfo);
                 }
             }
@@ -176,11 +180,12 @@ namespace ET.Client
             {
                 for (int i = 0; i < bagDelete.Count; i++)
                 {
-                    List<BagInfo> temp = self.GetItemsByLoc(bagDelete[i].Loc);
+                    List<ItemInfo> temp = self.GetItemsByLoc(bagDelete[i].Loc);
                     for (int k = temp.Count - 1; k >= 0; k--)
                     {
                         if (temp[k].BagInfoID == bagDelete[i].BagInfoID)
                         {
+                            temp[k].Dispose();
                             temp.RemoveAt(k);
                             break;
                         }
@@ -191,7 +196,7 @@ namespace ET.Client
             EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
         }
 
-        private static void ShowGetItemTip(this BagComponentC self, BagInfo bagInfo, int addNum)
+        private static void ShowGetItemTip(this BagComponentC self, ItemInfo bagInfo, int addNum)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (itemConfig.IfAutoUse == 1)
@@ -253,7 +258,7 @@ namespace ET.Client
             switch (userDataType)
             {
                 case UserDataType.None:
-                    List<BagInfo> bagInfos = self.GetBagList();
+                    List<ItemInfo> bagInfos = self.GetBagList();
                     for (int i = 0; i < bagInfos.Count; i++)
                     {
                         if (bagInfos[i].ItemID == itemId)
@@ -286,18 +291,18 @@ namespace ET.Client
             return number;
         }
 
-        public static List<BagInfo> GetItemsByLoc(this BagComponentC self, int loc)
+        public static List<ItemInfo> GetItemsByLoc(this BagComponentC self, int loc)
         {
             return self.AllItemList[loc];
         }
 
-        public static List<BagInfo> GetItemsByType(this BagComponentC self, int itemType)
+        public static List<ItemInfo> GetItemsByType(this BagComponentC self, int itemType)
         {
-            List<BagInfo> bagInfos = self.GetItemsByLoc((int)ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = self.GetItemsByLoc((int)ItemLocType.ItemLocBag);
             if (itemType == ItemTypeEnum.ALL)
                 return bagInfos;
 
-            List<BagInfo> typeList = new List<BagInfo>();
+            List<ItemInfo> typeList = new List<ItemInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -310,13 +315,13 @@ namespace ET.Client
             return typeList;
         }
 
-        public static List<BagInfo> GetItemsByTypeAndSubType(this BagComponentC self, int itemType, int itemSubType)
+        public static List<ItemInfo> GetItemsByTypeAndSubType(this BagComponentC self, int itemType, int itemSubType)
         {
-            List<BagInfo> bagInfos = self.GetBagList();
+            List<ItemInfo> bagInfos = self.GetBagList();
             if (itemType == ItemTypeEnum.ALL)
                 return bagInfos;
 
-            List<BagInfo> typeList = new List<BagInfo>();
+            List<ItemInfo> typeList = new List<ItemInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -329,11 +334,11 @@ namespace ET.Client
             return typeList;
         }
 
-        public static BagInfo GetBagInfoByConfigId(this BagComponentC self, int itemId)
+        public static ItemInfo GetBagInfoByConfigId(this BagComponentC self, int itemId)
         {
             for (int i = 0; i < self.AllItemList.Count; i++)
             {
-                List<BagInfo> baglist = self.AllItemList[i];
+                List<ItemInfo> baglist = self.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)
                 {
                     if (baglist[k].ItemID == itemId)
@@ -346,11 +351,11 @@ namespace ET.Client
             return null;
         }
 
-        public static BagInfo GetBagInfo(this BagComponentC self, long id)
+        public static ItemInfo GetBagInfo(this BagComponentC self, long id)
         {
             for (int i = 0; i < self.AllItemList.Count; i++)
             {
-                List<BagInfo> baglist = self.AllItemList[i];
+                List<ItemInfo> baglist = self.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)
                 {
                     if (baglist[k].BagInfoID == id)
@@ -363,10 +368,10 @@ namespace ET.Client
             return null;
         }
 
-        public static List<BagInfo> GetAllItems(this BagComponentC self)
+        public static List<ItemInfo> GetAllItems(this BagComponentC self)
         {
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            foreach (List<BagInfo> list in self.AllItemList.Values)
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
+            foreach (List<ItemInfo> list in self.AllItemList.Values)
             {
                 bagInfos.AddRange(list);
             }
@@ -374,9 +379,9 @@ namespace ET.Client
             return bagInfos;
         }
 
-        public static BagInfo GetEquipBySubType(this BagComponentC self, int itemLocType, int subType)
+        public static ItemInfo GetEquipBySubType(this BagComponentC self, int itemLocType, int subType)
         {
-            List<BagInfo> bagInfos = self.GetItemsByLoc(itemLocType);
+            List<ItemInfo> bagInfos = self.GetItemsByLoc(itemLocType);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -389,15 +394,15 @@ namespace ET.Client
             return null;
         }
 
-        public static List<BagInfo> GetBagList(this BagComponentC self)
+        public static List<ItemInfo> GetBagList(this BagComponentC self)
         {
             return self.AllItemList[(int)ItemLocType.ItemLocBag];
         }
-        
-        public static List<BagInfo> GetEquipListByWeizhi(this BagComponentC self, int position)
+
+        public static List<ItemInfo> GetEquipListByWeizhi(this BagComponentC self, int position)
         {
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            List<BagInfo> equipList = self.GetEquipList();
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
+            List<ItemInfo> equipList = self.GetEquipList();
             for (int i = 0; i < equipList.Count; i++)
             {
                 ItemConfig itemCof = ItemConfigCategory.Instance.Get(equipList[i].ItemID);
@@ -410,28 +415,30 @@ namespace ET.Client
             return bagInfos;
         }
 
-        public static List<BagInfo> GetEquipList(this BagComponentC self)
+        public static List<ItemInfo> GetEquipList(this BagComponentC self)
         {
             return self.AllItemList[(int)ItemLocType.ItemLocEquip];
         }
 
         public static int GetBagLeftCell(this BagComponentC self, int hourseId)
         {
-            List<BagInfo> ItemTypeList = self.AllItemList[hourseId];
+            List<ItemInfo> ItemTypeList = self.AllItemList[hourseId];
             return self.GetBagTotalCell(hourseId) - ItemTypeList.Count;
         }
-        
+
         public static int GetBagTotalCell(this BagComponentC self, int hourseId)
         {
-            int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity;  //仓库
+            int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity; //仓库
             if (hourseId == (int)ItemLocType.GemWareHouse1)
             {
                 storeCapacity = GlobalValueConfigCategory.Instance.GemStoreInitCapacity; //宝石仓库
             }
+
             if (hourseId == (int)ItemLocType.ItemLocBag)
             {
                 storeCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity; //背包
             }
+
             if (hourseId == (int)ItemLocType.ItemPetHeXinBag)
             {
                 storeCapacity = GlobalValueConfigCategory.Instance.PetHeXinMax; //宠物之核背包
@@ -444,17 +451,18 @@ namespace ET.Client
         {
             if (houseId == ItemLocType.ItemLocBag)
             {
-                return self.BagAddCellNumber[0] + GlobalValueConfigCategory.Instance.BagInitCapacity + GlobalValueConfigCategory.Instance.Get(84).Value2;
+                return self.BagAddCellNumber[0] + GlobalValueConfigCategory.Instance.BagInitCapacity +
+                        GlobalValueConfigCategory.Instance.Get(84).Value2;
             }
 
             return self.BagAddCellNumber[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
                     GlobalValueConfigCategory.Instance.Get(85).Value2;
         }
-        
-        public static List<BagInfo> GetCanJianDing(this BagComponentC self)
+
+        public static List<ItemInfo> GetCanJianDing(this BagComponentC self)
         {
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            List<BagInfo> equipList = self.GetItemsByType((int)ItemTypeEnum.Equipment);
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
+            List<ItemInfo> equipList = self.GetItemsByType((int)ItemTypeEnum.Equipment);
             for (int i = 0; i < equipList.Count; i++)
             {
                 ItemConfig itemconf = ItemConfigCategory.Instance.Get(equipList[i].ItemID);
@@ -473,15 +481,15 @@ namespace ET.Client
             return bagInfos;
         }
 
-        public static List<BagInfo> GetCanEquipList(this BagComponentC self)
+        public static List<ItemInfo> GetCanEquipList(this BagComponentC self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             UserInfo useInfo = userInfoComponent.UserInfo;
 
-            List<BagInfo> canEquipList = new List<BagInfo>();
+            List<ItemInfo> canEquipList = new List<ItemInfo>();
 
             // 检测是否有可以穿戴的装备
-            List<BagInfo> bagInfos = self.GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = self.GetItemsByLoc(ItemLocType.ItemLocBag);
             for (int i = bagInfos.Count - 1; i >= 0; i--)
             {
                 if (bagInfos.Count <= i)
@@ -489,7 +497,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo baginfo1 = bagInfos[i];
+                ItemInfo baginfo1 = bagInfos[i];
                 if (baginfo1 == null)
                 {
                     continue;
@@ -508,10 +516,10 @@ namespace ET.Client
 
                 int weizhi = itemConfig.ItemSubType;
                 //获取之前的位置是否有装备
-                BagInfo beforeequip = null;
+                ItemInfo beforeequip = null;
                 if (weizhi == (int)ItemSubTypeEnum.Shiping)
                 {
-                    List<BagInfo> equipList = self.GetEquipListByWeizhi(weizhi);
+                    List<ItemInfo> equipList = self.GetEquipListByWeizhi(weizhi);
                     beforeequip = equipList.Count < 3 ? null : equipList[0];
                 }
                 else
@@ -548,13 +556,14 @@ namespace ET.Client
             self.ClearJingHeItem(self.AllItemList[(int)ItemLocType.SeasonJingHe]);
         }
 
-        public static void ClearJingHeItem(this BagComponentC self, List<BagInfo> bagInfos)
+        public static void ClearJingHeItem(this BagComponentC self, List<ItemInfo> bagInfos)
         {
             for (int i = bagInfos.Count - 1; i >= 0; i--)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
                 if (itemConfig.EquipType == 201)
                 {
+                    bagInfos[i].Dispose();
                     bagInfos.RemoveAt(i);
                 }
             }

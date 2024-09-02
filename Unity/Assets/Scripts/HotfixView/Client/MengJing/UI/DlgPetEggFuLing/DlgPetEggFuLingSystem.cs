@@ -47,12 +47,12 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnSelect);
         }
 
-        public static void UpdateItemList(this DlgPetEggFuLing self, BagInfo bagInfo)
+        public static void UpdateItemList(this DlgPetEggFuLing self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
             self.ShowBagInfos.Clear();
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -67,7 +67,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnSelect(this DlgPetEggFuLing self, BagInfo bagInfo)
+        public static void OnSelect(this DlgPetEggFuLing self, ItemInfo bagInfo)
         {
             self.EggId = bagInfo.BagInfoID;
             if (self.ScrollItemCommonItems != null)

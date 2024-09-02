@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_DigTreasure : Entity,IAwake<Transform>,IDestroy 
 	{
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public float PassTime = 0f;
 		public float MoveSpeed = 50f;
 		public long Timer;

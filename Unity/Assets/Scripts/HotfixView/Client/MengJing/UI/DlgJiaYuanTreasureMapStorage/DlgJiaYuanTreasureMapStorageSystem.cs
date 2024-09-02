@@ -94,7 +94,7 @@ namespace ET.Client
         {
             int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell(ItemLocType.ItemLocBag);
 
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag);
 
             if (self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() == 0)
             {

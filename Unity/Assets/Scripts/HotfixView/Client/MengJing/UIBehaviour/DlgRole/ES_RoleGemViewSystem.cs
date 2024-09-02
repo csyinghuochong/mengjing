@@ -84,12 +84,12 @@ namespace ET.Client
 
             if (self.XiangQianItem != null)
             {
-                BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XiangQianItem.BagInfoID);
+                ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XiangQianItem.BagInfoID);
                 self.OnClickXiangQianItem(bagInfo);
             }
         }
 
-        private static void UpdateSelect(this ES_RoleGem self, BagInfo bagInfo)
+        private static void UpdateSelect(this ES_RoleGem self, ItemInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
@@ -110,7 +110,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnClickXiangQianItem(this ES_RoleGem self, BagInfo info)
+        public static void OnClickXiangQianItem(this ES_RoleGem self, ItemInfo info)
         {
             self.XiangQianItem = info;
             if (info == null)

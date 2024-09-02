@@ -45,7 +45,7 @@ namespace ET.Server
 
             for (int i = 0; i < huishouIdList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouIdList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouIdList[i]);
                 if (bagInfo == null)
                 {
                     Log.Info("C2M_ItemMelting无效的物品ID: " + huishouIdList[i]);

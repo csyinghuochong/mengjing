@@ -73,7 +73,7 @@ namespace ET.Client
 
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.ItemID = self.MysteryItemInfo.ItemID;
             self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);

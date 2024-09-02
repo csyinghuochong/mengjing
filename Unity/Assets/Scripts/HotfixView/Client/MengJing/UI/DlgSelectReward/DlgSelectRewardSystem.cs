@@ -20,7 +20,7 @@ namespace ET.Client
         {
             Scroll_Item_SelectRewardItem scrollItemSelectRewardItem = self.ScrollItemSelectRewardItems[index].BindTrans(transform);
             string[] item = self.Items[index].Split(';');
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.ItemID = int.Parse(item[0]);
             bagInfoNew.ItemNum = int.Parse(item[1]);
             scrollItemSelectRewardItem.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);

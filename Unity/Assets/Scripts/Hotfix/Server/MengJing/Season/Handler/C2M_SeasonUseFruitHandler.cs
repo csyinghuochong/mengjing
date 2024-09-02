@@ -19,7 +19,7 @@ namespace ET.Server
             }
             
            
-            BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[0]);
+            ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[0]);
             if (bagInfo == null)
             {
                 response.Error = ErrorCode.ERR_Parameter;

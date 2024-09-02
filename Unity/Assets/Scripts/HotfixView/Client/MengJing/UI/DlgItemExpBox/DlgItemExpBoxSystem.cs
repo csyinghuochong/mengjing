@@ -27,7 +27,7 @@ namespace ET.Client
         {
         }
 
-        public static void OnInitUI(this DlgItemExpBox self, BagInfo bagInfo)
+        public static void OnInitUI(this DlgItemExpBox self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);

@@ -7,7 +7,10 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_BagInitRequest request, M2C_BagInitResponse response)
         {
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
-            response.BagInfos = bagComponentS.GetAllItems();
+            foreach (ItemInfo itemInfo in bagComponentS.GetAllItems())
+            {
+                response.BagInfos.Add(itemInfo.ToMessage());
+            }
             response.QiangHuaLevel .AddRange(bagComponentS.QiangHuaLevel); 
             response.QiangHuaFails .AddRange(bagComponentS.QiangHuaFails);
             response.WarehouseAddedCell .AddRange( bagComponentS.BagBuyCellNumber);

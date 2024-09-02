@@ -9,11 +9,11 @@ namespace ET.Client
 	public  class ES_EquipmentIncreaseTransfer : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public GameObject UICommonItem_Copy;
-		public BagInfo[] BagInfo_Transfer;
+		public ItemInfo[] BagInfo_Transfer { get; set; }
 		public ES_CommonItem[] UIItem_Transfer { get; set; }
 
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEquipItems;
-		public List<BagInfo> ShowEquipBagInfos = new();
+		public List<ItemInfo> ShowEquipBagInfos { get; set; } = new();
 		public Vector2 localPoint;
 		public bool IsHoldDown;
 		

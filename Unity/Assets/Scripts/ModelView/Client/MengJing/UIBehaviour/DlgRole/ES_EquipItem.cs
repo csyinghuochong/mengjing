@@ -11,10 +11,10 @@ namespace ET.Client
 	public  class ES_EquipItem : Entity,IAwake<Transform>,IDestroy
 	{
 		public int Occ;
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public ItemOperateEnum ItemOperateEnum;
-		public List<BagInfo> EquipList = new();
-		public Action<BagInfo> OnClickAction;
+		public List<ItemInfo> EquipList { get; set; } = new();
+		public Action<ItemInfo> OnClickAction { get; set; }
 		
 		public Image E_EquipBackImage
      	{

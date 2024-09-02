@@ -34,7 +34,7 @@ namespace ET.Server
                 mailInfo.Title = "家族入侵怪物奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
-                BagInfo BagInfo = BagInfo.Create();
+                ItemInfoProto BagInfo = ItemInfoProto.Create();
                 BagInfo.ItemID = 1;
                 BagInfo.ItemNum = 100;
                 BagInfo.GetWay = $"{ItemGetWay.UnionBoss}_{serverTime}";

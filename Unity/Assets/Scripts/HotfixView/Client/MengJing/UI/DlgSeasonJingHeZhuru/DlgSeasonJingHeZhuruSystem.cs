@@ -41,7 +41,7 @@ namespace ET.Client
             }
         }
 
-        public static void InitInfo(this DlgSeasonJingHeZhuru self, BagInfo bagInfo)
+        public static void InitInfo(this DlgSeasonJingHeZhuru self, ItemInfo bagInfo)
         {
             self.MainBagInfo = bagInfo;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
@@ -68,7 +68,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].BagInfoID == self.MainBagInfo.BagInfoID)
@@ -87,7 +87,7 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void OnSelect(this DlgSeasonJingHeZhuru self, BagInfo bagInfo)
+        public static void OnSelect(this DlgSeasonJingHeZhuru self, ItemInfo bagInfo)
         {
             bool selected = false;
 

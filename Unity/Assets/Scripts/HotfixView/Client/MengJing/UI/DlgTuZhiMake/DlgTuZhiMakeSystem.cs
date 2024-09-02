@@ -15,13 +15,13 @@ namespace ET.Client
         {
         }
 
-        public static void OnInitUI(this DlgTuZhiMake self, BagInfo bagInfo)
+        public static void OnInitUI(this DlgTuZhiMake self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.MakeId = int.Parse(itemConfig.ItemUsePar);
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.ItemID = equipMakeConfig.MakeItemID;
             self.View.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.MakeItem);
             self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
@@ -71,7 +71,7 @@ namespace ET.Client
                     continue;
                 }
 
-                BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(costItems[i].ItemID);
+                ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(costItems[i].ItemID);
                 string[] gemids = bagInfo.GemIDNew.Split('_');
 
                 for (int g = 0; g < gemids.Length; g++)

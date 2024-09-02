@@ -223,7 +223,7 @@ namespace ET.Server
                         int itemId = int.Parse(itemInfo[0]);
                         int itemNum = int.Parse(itemInfo[1]);
                         rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
-                        BagInfo BagInfo = BagInfo.Create();
+                        ItemInfoProto BagInfo = ItemInfoProto.Create();
                         BagInfo.ItemID = itemId;
                         BagInfo.ItemNum = itemNum;
                         BagInfo.GetWay = $"{ItemGetWay.ShowLie}_{serverTime}";

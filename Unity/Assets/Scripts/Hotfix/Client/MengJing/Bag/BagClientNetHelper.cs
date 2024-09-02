@@ -15,9 +15,14 @@ namespace ET.Client
             for (int i = 0; i < response.BagInfos.Count; i++)
             {
                 int Loc = response.BagInfos[i].Loc;
-                List<BagInfo> bagList = bagComponentC.AllItemList[Loc];
-                bagList.Add(response.BagInfos[i]);
+
+                ItemInfo itemInfo = bagComponentC.AddChild<ItemInfo>();
+                itemInfo.FromMessage(response.BagInfos[i]);
+
+                List<ItemInfo> bagList = bagComponentC.AllItemList[Loc];
+                bagList.Add(itemInfo);
             }
+
             bagComponentC.QiangHuaLevel = response.QiangHuaLevel;
             bagComponentC.QiangHuaFails = response.QiangHuaFails;
             bagComponentC.BagBuyCellNumber = response.WarehouseAddedCell;
@@ -28,7 +33,7 @@ namespace ET.Client
             return ErrorCode.ERR_Success;
         }
 
-        public static async ETTask<int> RequestSellItem(Scene root, BagInfo bagInfo, string parinfo)
+        public static async ETTask<int> RequestSellItem(Scene root, ItemInfo bagInfo, string parinfo)
         {
             if (bagInfo.IsProtect)
             {
@@ -45,7 +50,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo = "")
+        public static async ETTask<int> RequestUseItem(Scene root, ItemInfo bagInfo, string parinfo = "")
         {
             UserInfoComponentC infoComponent = root.GetComponent<UserInfoComponentC>();
 
@@ -128,7 +133,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask RequestWearEquip(Scene root, BagInfo bagInfo)
+        public static async ETTask RequestWearEquip(Scene root, ItemInfo bagInfo)
         {
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             // if (self.GetEquipByItemId(bagInfo.ItemID)!=null && itemCof.ItemSubType == 5)
@@ -172,7 +177,7 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new EquipWear());
         }
 
-        public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
+        public static async ETTask RequestTakeoffEquip(Scene root, ItemInfo bagInfo)
         {
             //猎人单独处理
             int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
@@ -203,7 +208,7 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new EquipWear());
         }
 
-        public static async ETTask<int> RequestSplitItem(Scene root, BagInfo bagInfo, int splitnumber)
+        public static async ETTask<int> RequestSplitItem(Scene root, ItemInfo bagInfo, int splitnumber)
         {
             C2M_ItemSplitRequest request = C2M_ItemSplitRequest.Create();
             request.OperateBagID = bagInfo.BagInfoID;
@@ -233,7 +238,7 @@ namespace ET.Client
         }
 
         // 鉴定
-        public static async ETTask<int> RequestAppraisalItem(Scene root, BagInfo bagInfo, long appID = 0)
+        public static async ETTask<int> RequestAppraisalItem(Scene root, ItemInfo bagInfo, long appID = 0)
         {
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
             request.OperateType = 5;
@@ -256,7 +261,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestXiangQianGem(Scene root, BagInfo bagInfo, string par = "")
+        public static async ETTask<int> RequestXiangQianGem(Scene root, ItemInfo bagInfo, string par = "")
         {
             C2M_ItemOperateGemRequest request = C2M_ItemOperateGemRequest.Create();
             request.OperateType = 9;
@@ -268,7 +273,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestXieXiaGem(Scene root, BagInfo bagInfo, string par = "")
+        public static async ETTask<int> RequestXieXiaGem(Scene root, ItemInfo bagInfo, string par = "")
         {
             C2M_ItemOperateGemRequest request = C2M_ItemOperateGemRequest.Create();
             request.OperateType = 10;
@@ -304,7 +309,7 @@ namespace ET.Client
         {
             List<long> baginfoids = new List<long>();
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
 
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet);
@@ -379,7 +384,7 @@ namespace ET.Client
         {
             List<long> baginfoids = new List<long>();
             BagComponentC bagComponent = root.GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
 
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             string[] set2Values = userInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet2).Split('@'); // 低级、中级、高级
@@ -429,7 +434,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo, int houseId)
+        public static async ETTask<int> RquestPutStoreHouse(Scene root, ItemInfo bagInfo, int houseId)
         {
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
             request.OperateType = 6;
@@ -441,7 +446,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestPutBag(Scene root, BagInfo bagInfo)
+        public static async ETTask<int> RquestPutBag(Scene root, ItemInfo bagInfo)
         {
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
             request.OperateType = 7;
@@ -460,7 +465,7 @@ namespace ET.Client
 
             for (int i = 0; i < bagComponent.AllItemList.Count; i++)
             {
-                List<BagInfo> baglist = bagComponent.AllItemList[i];
+                List<ItemInfo> baglist = bagComponent.AllItemList[i];
                 for (int k = 0; k < baglist.Count; k++)
                 {
                     if (idlist.Contains(baglist[k].BagInfoID))
@@ -898,7 +903,7 @@ namespace ET.Client
             return response;
         }
 
-        public static async ETTask<int> SendFumoUse(Scene root, BagInfo bagInfo, List<HideProList> hideProLists)
+        public static async ETTask<int> SendFumoUse(Scene root, ItemInfo bagInfo, List<HideProList> hideProLists)
         {
             C2M_ItemFumoUseRequest request = C2M_ItemFumoUseRequest.Create();
             request.OperateBagID = bagInfo.BagInfoID;
@@ -917,17 +922,17 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> SendEquipmentIncrease(Scene root, BagInfo equipmentBagInfo, BagInfo reelBagInfo)
+        public static async ETTask<int> SendEquipmentIncrease(Scene root, ItemInfo equipmentBagInfo, ItemInfo reelBagInfo)
         {
             C2M_EquipmentIncreaseRequest request = C2M_EquipmentIncreaseRequest.Create();
-            request.EquipmentBagInfo = equipmentBagInfo;
-            request.ReelBagInfo = reelBagInfo;
+            request.EquipmentBagInfo = equipmentBagInfo.ToMessage();
+            request.ReelBagInfo = reelBagInfo.ToMessage();
 
             M2C_EquipmentIncreaseResponse response = (M2C_EquipmentIncreaseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
-        public static async ETTask<int> ItemIncreaseTransferRequest(Scene root, BagInfo equipmentBagInfo, BagInfo reelBagInfo)
+        public static async ETTask<int> ItemIncreaseTransferRequest(Scene root, ItemInfo equipmentBagInfo, ItemInfo reelBagInfo)
         {
             C2M_ItemIncreaseTransferRequest request = C2M_ItemIncreaseTransferRequest.Create();
             request.OperateBagID_1 = equipmentBagInfo.BagInfoID;

@@ -47,7 +47,7 @@ namespace ET.Client
 
             self.SeedToggles.Clear();
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByType(2);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByType(2);
             int num = 0;
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -64,7 +64,7 @@ namespace ET.Client
                     int index = num;
                     ES_CommonItem uI = null;
                     uI = self.AddChild<ES_CommonItem, Transform>(go.GetComponent<ReferenceCollector>().Get<GameObject>("UICommonItem").transform);
-                    BagInfo bagInfo = BagInfo.Create();
+                    ItemInfo bagInfo = new ItemInfo();
                     bagInfo.ItemID = bagInfos[i].ItemID;
                     bagInfo.ItemNum = 1;
                     uI.UpdateItem(bagInfo, ItemOperateEnum.None);

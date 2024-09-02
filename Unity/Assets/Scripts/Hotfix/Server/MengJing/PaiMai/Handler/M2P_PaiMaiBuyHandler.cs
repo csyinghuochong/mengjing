@@ -55,7 +55,7 @@ namespace ET.Server
                 return;
             }
 
-            BagInfo bagInfo = paiMaiItemInfo.BagInfo;
+            ItemInfoProto bagInfo = paiMaiItemInfo.BagInfo;
             if (request.BuyNum == bagInfo.ItemNum)
             {
                 response.PaiMaiItemInfo = paiMaiItemInfo;
@@ -66,7 +66,7 @@ namespace ET.Server
                 bagInfo.ItemNum -= request.BuyNum;
                 PaiMaiItemInfo paiMaiItemInfo2 = PaiMaiItemInfo.Create();
 
-                BagInfo useBagInfo = BagInfo.Create();
+                ItemInfoProto useBagInfo = ItemInfoProto.Create();
                 useBagInfo.ItemID = bagInfo.ItemID;
                 useBagInfo.ItemNum = request.BuyNum;
                 useBagInfo.Loc = itemCof.ItemType == (int)ItemTypeEnum.PetHeXin ? (int)ItemLocType.ItemPetHeXinBag : (int)ItemLocType.ItemLocBag;

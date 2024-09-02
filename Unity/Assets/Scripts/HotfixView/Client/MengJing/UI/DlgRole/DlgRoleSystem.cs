@@ -125,7 +125,7 @@ namespace ET.Client
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.View.ES_EquipSet.ChangeWeapon(bagInfo, userInfoComponent.UserInfo.Occ);
         }
 
@@ -134,7 +134,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.ES_EquipSet.PlayerLv(userInfo.Lv);
             self.View.ES_EquipSet.PlayerName(userInfo.Name);
-            self.View.ES_EquipSet.ShowPlayerModel(BagInfo.Create(), userInfo.Occ, 0, new List<int>());
+            self.View.ES_EquipSet.ShowPlayerModel(new ItemInfo(), userInfo.Occ, 0, new List<int>());
 
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
@@ -142,7 +142,7 @@ namespace ET.Client
                 bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentC.UserInfo.Occ, ItemOperateEnum.Juese);
         }
 
-        public static bool OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
+        public static bool OnClickXiangQianItem(this DlgRole self, ItemInfo bagInfo)
         {
             if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
             {

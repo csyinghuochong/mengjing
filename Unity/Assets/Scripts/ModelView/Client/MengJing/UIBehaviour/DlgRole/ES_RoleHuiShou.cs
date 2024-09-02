@@ -8,10 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleHuiShou : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public BagInfo[] HuiShouInfos = new BagInfo[8];
+		public ItemInfo[] HuiShouInfos { get; set; } = new ItemInfo[8];
 		public EntityRef<ES_CommonItem>[] HuiShouUIList = new EntityRef<ES_CommonItem>[8];
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public bool IsHoldDown;
 		
 		public ES_CommonItem ES_CommonItem_1

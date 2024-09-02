@@ -93,7 +93,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
-            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
+            List<ItemInfo> bagInfos = bagComponent.GetItemsByLoc(ItemLocType.ItemLocBag);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -107,10 +107,10 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count >= 10 ? self.ShowBagInfos.Count : 10);
         }
 
-        public static void OnSelect(this DlgSeasonLordDetail self, BagInfo bagInfo)
+        public static void OnSelect(this DlgSeasonLordDetail self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
-            BagInfo bagInfoNew = BagInfo.Create();
+            ItemInfo bagInfoNew = new ItemInfo();
             bagInfoNew.ItemID = bagInfo.ItemID;
             bagInfoNew.ItemNum = 1;
             self.View.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);

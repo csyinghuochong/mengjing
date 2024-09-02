@@ -28,7 +28,7 @@
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(ConfigData.WelfareInvestList[day].Value.Split(';')[0]));
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = itemConfig.Id;
             bagInfo.ItemNum = 1;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

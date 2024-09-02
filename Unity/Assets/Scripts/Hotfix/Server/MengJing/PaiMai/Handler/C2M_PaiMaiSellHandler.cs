@@ -36,7 +36,7 @@
 
 				//对比出售数量和道具是否匹配
 				long bagInfoId = request.PaiMaiItemInfo.BagInfo.BagInfoID;
-				BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoId);
+				ItemInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoId);
 				if (bagInfo == null)
 				{
 					response.Error = ErrorCode.ERR_ItemNotEnoughError;      //道具不足

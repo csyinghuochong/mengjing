@@ -90,12 +90,12 @@ namespace ET.Client
             self.Model.Clear();
         }
 
-        public static void ChangeWeapon(this ES_ModelShow self, BagInfo bagInfo, int occ)
+        public static void ChangeWeapon(this ES_ModelShow self, ItemInfo bagInfo, int occ)
         {
             self.GetComponent<ChangeEquipHelper>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
-        public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
+        public static void ShowPlayerModel(this ES_ModelShow self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
         bool canDrag = true)
         {
             self.RemoveModel();
@@ -136,7 +136,7 @@ namespace ET.Client
             }
         }
 
-        public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
+        public static void ShowPlayerPreviewModel(this ES_ModelShow self, ItemInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
         {
             self.RemoveModel();
 
@@ -176,7 +176,7 @@ namespace ET.Client
             }
         }
 
-        private static int GetWeaponId(this ES_ModelShow self, BagInfo bagInfo, int occ)
+        private static int GetWeaponId(this ES_ModelShow self, ItemInfo bagInfo, int occ)
         {
             int weaponId = 0;
             if (bagInfo != null && bagInfo.ItemID != 0)

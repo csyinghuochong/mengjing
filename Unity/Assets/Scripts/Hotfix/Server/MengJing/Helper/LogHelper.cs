@@ -430,7 +430,7 @@ namespace ET.Server
             }
 
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            List<BagInfo> bagInfos =  bagComponent.GetAllItems();
+            List<ItemInfo> bagInfos =  bagComponent.GetAllItems();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].ItemID > 100 && bagInfos[i].ItemNum >= 10000)

@@ -38,7 +38,7 @@ namespace ET.Client
             self.OnEquiListUpdate();
         }
 
-        public static void UpdateAttribute(this ES_ProtectEquip self, BagInfo bagInfo)
+        public static void UpdateAttribute(this ES_ProtectEquip self, ItemInfo bagInfo)
         {
             CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (!bagInfo.IfJianDing)
@@ -51,7 +51,7 @@ namespace ET.Client
 
         public static void OnUpdateXinLian(this ES_ProtectEquip self)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             self.UpdateAttribute(bagInfo);
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.E_ButtonUnLockButton.gameObject.SetActive(bagInfo.IsProtect);
@@ -66,7 +66,7 @@ namespace ET.Client
 
         public static void OnEquiListUpdate(this ES_ProtectEquip self)
         {
-            List<BagInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
 
             self.ShowBagInfos.Clear();
             for (int i = 0; i < equipInfos.Count; i++)
@@ -97,7 +97,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnSelectItem(this ES_ProtectEquip self, BagInfo bagInfo)
+        public static void OnSelectItem(this ES_ProtectEquip self, ItemInfo bagInfo)
         {
             self.XilianBagInfo = bagInfo;
             if (self.ScrollItemCommonItems != null)
@@ -118,14 +118,14 @@ namespace ET.Client
 
         public static void InitSubItemUI(this ES_ProtectEquip self)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
         }
 
         public static async ETTask OnXiLianButton(this ES_ProtectEquip self, bool isprotectd)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             if (bagInfo == null)
             {
                 return;

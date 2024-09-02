@@ -18,15 +18,15 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_CommonItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum,
-        Action<BagInfo> onClickAction = null, int currentHouse = -1)
+        public static void Refresh(this Scroll_Item_CommonItem self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum,
+        Action<ItemInfo> onClickAction = null, int currentHouse = -1)
         {
             self.ES_CommonItem.UpdateItem(bagInfo, itemOperateEnum);
             self.ES_CommonItem.SetClickHandler(onClickAction);
             self.ES_CommonItem.SetCurrentHouse(currentHouse);
         }
 
-        public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, BagInfo bagInfo)
+        public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, ItemInfo bagInfo)
         {
             self.ES_CommonItem.SetSelected(bagInfo);
         }

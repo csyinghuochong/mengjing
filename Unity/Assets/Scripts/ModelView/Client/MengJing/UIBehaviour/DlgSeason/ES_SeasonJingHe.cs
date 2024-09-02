@@ -9,11 +9,11 @@ namespace ET.Client
 	public  class ES_SeasonJingHe : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Sprite OldSprite;
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public int JingHeId;
 		public List<SeasonJingHeConfig> ShowSeasonJingHeConfigs;
 		public Dictionary<int, EntityRef<Scroll_Item_SeasonJingHeItem>> ScrollItemSeasonJingHeItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public Button E_Btn_TianFu_1Button

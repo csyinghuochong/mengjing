@@ -126,8 +126,8 @@ namespace ET.Client
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            BagInfo equip_2 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo equip_2 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_1 == null || equip_2 == null)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请先在对应位置装备武器！");

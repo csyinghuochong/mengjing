@@ -13,7 +13,7 @@ namespace ET.Server
                 return;
             }
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[0]);
+            ItemInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[0]);
             if (useBagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;

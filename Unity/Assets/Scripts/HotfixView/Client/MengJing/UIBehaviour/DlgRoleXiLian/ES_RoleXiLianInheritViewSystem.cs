@@ -38,7 +38,7 @@ namespace ET.Client
             self.OnEquiListUpdate();
         }
 
-        public static void UpdateAttribute(this ES_RoleXiLianInherit self, BagInfo bagInfo)
+        public static void UpdateAttribute(this ES_RoleXiLianInherit self, ItemInfo bagInfo)
         {
             CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (bagInfo == null)
@@ -53,7 +53,7 @@ namespace ET.Client
 
         public static void OnUpdateXinLian(this ES_RoleXiLianInherit self)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(bagInfo != null);
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
@@ -68,7 +68,7 @@ namespace ET.Client
             string[] costitem = ItemHelper.GetInheritCost(bagInfo.InheritTimes).Split(';');
             int costitemid = int.Parse(costitem[0]);
             int constitemnumber = int.Parse(costitem[1]);
-            BagInfo bagInfoNeed = new() { ItemID = costitemid, ItemNum = constitemnumber };
+            ItemInfo bagInfoNeed = new() { ItemID = costitemid, ItemNum = constitemnumber };
 
             self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
@@ -105,7 +105,7 @@ namespace ET.Client
 
         public static void OnEquiListUpdate(this ES_RoleXiLianInherit self)
         {
-            List<BagInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
 
             self.ShowBagInfos.Clear();
             for (int i = 0; i < equipInfos.Count; i++)
@@ -152,7 +152,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnSelectItem(this ES_RoleXiLianInherit self, BagInfo bagInfo)
+        public static void OnSelectItem(this ES_RoleXiLianInherit self, ItemInfo bagInfo)
         {
             self.XilianBagInfo = bagInfo;
             if (self.ScrollItemCommonItems != null)
@@ -176,7 +176,7 @@ namespace ET.Client
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem_Cost.E_ItemNameText.gameObject.SetActive(false);
 
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(bagInfo != null);
             if (bagInfo != null)
             {
@@ -187,7 +187,7 @@ namespace ET.Client
 
         public static async ETTask OnXiLianButton(this ES_RoleXiLianInherit self, int times)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             if (bagInfo == null)
             {
                 return;
@@ -227,7 +227,7 @@ namespace ET.Client
 
         public static async ETTask RequestInheritSelect(this ES_RoleXiLianInherit self)
         {
-            BagInfo bagInfo = self.XilianBagInfo;
+            ItemInfo bagInfo = self.XilianBagInfo;
             if (bagInfo == null)
             {
                 return;

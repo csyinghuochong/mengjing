@@ -6,7 +6,7 @@
         protected override async ETTask Run(Unit unit, C2M_JingHeActivateRequest request, M2C_JingHeActivateResponse response)
         {
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
-            BagInfo bagInfoJinHe = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
+            ItemInfo bagInfoJinHe = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
             if (bagInfoJinHe == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -26,7 +26,7 @@
                 Log.Console($"晶核激活失败: {bagInfoJinHe.ItemID}");
             }
             bagInfoJinHe.IfJianDing = false;
-            m2c_bagUpdate.BagInfoUpdate.Add(bagInfoJinHe);
+            m2c_bagUpdate.BagInfoUpdate.Add(bagInfoJinHe.ToMessage());
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             await ETTask.CompletedTask;
         }

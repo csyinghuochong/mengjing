@@ -69,7 +69,7 @@ namespace ET.Client
             int itemid = jiaYuanPurchaseItem.ItemID;
             int makeid = EquipMakeConfigCategory.Instance.GetMakeId(itemid);
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeid);
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = itemid;
             bagInfo.ItemNum = jiaYuanPurchaseItem.LeftNum;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);

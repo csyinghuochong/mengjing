@@ -28,8 +28,8 @@ namespace ET.Client
             self.Draws.Clear();
             self.OutLines.Clear();
 
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            foreach (List<BagInfo> infos in self.Root().GetComponent<BagComponentC>().AllItemList.Values)
+            List<ItemInfo> bagInfos = new List<ItemInfo>();
+            foreach (List<ItemInfo> infos in self.Root().GetComponent<BagComponentC>().AllItemList.Values)
             {
                 bagInfos.AddRange(infos);
             }

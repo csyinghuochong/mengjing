@@ -182,7 +182,7 @@ namespace ET.Server
                     mailInfo.Context = "竞拍道具";
                     mailInfo.Title = "竞拍道具";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                    BagInfo BagInfo = BagInfo.Create();
+                    ItemInfoProto BagInfo = ItemInfoProto.Create();
                     BagInfo.ItemID = self.AuctionItem;
                     BagInfo.ItemNum = self.AuctionItemNum;
                     BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";
@@ -209,7 +209,7 @@ namespace ET.Server
                 mailInfo.Context = "退还保证金";
                 mailInfo.Title = "退还保证金";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                BagInfo BagInfo = BagInfo.Create();
+                ItemInfoProto BagInfo = ItemInfoProto.Create();
                 BagInfo.ItemID = 1;
                 BagInfo.ItemNum = returnggold;
                 BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";

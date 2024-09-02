@@ -36,11 +36,11 @@ namespace ET.Server
             if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < 1)
             {
                 response.Mail = 1;
-                List<BagInfo> bagInfos = new List<BagInfo>();
-                BagInfo BagInfo = BagInfo.Create();
+                List<ItemInfoProto> bagInfos = new List<ItemInfoProto>();
+                ItemInfoProto BagInfo = ItemInfoProto.Create();
                 BagInfo.ItemID = request.RewardItem.ItemID;
                 BagInfo. ItemNum = request.RewardItem.ItemNum;
-                bagInfos.Add(BagInfo );
+                bagInfos.Add(BagInfo);
                 MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = "副本奖励";

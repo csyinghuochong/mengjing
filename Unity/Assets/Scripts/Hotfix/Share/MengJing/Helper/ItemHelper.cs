@@ -5,7 +5,7 @@ namespace ET
     [FriendOf(typeof(RewardItem))]
     public static class ItemHelper
     {
-        public static int CanEquip(BagInfo bagInfo, UserInfo userInfo)
+        public static int CanEquip(ItemInfo bagInfo, UserInfo userInfo)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
 
@@ -75,7 +75,7 @@ namespace ET
         /// </summary>
         /// <param name="info"></param>
         /// <returns></returns>
-        public static bool IsHaveMovePro(BagInfo info)
+        public static bool IsHaveMovePro(ItemInfo info)
         {
             bool canTrans = false;
             foreach (HideProList hideProList in info.IncreaseProLists)
@@ -101,9 +101,9 @@ namespace ET
             return canTrans;
         }
 
-        public static BagInfo GetBagInfo(int itemId, int itemNum, int getWay)
+        public static ItemInfoProto GetBagInfo(int itemId, int itemNum, int getWay)
         {
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfoProto bagInfo = ItemInfoProto.Create();
             bagInfo.ItemID = itemId;
             bagInfo.ItemNum = itemNum;
             bagInfo.GetWay = $"{getWay}_{TimeHelper.ServerNow()}";
@@ -297,7 +297,7 @@ namespace ET
         /// <param name="bagInfos"></param>
         /// <param name="qulity"></param>
         /// <returns></returns>
-        public static int GetNumberByQulity(List<BagInfo> bagInfos, int qulity)
+        public static int GetNumberByQulity(List<ItemInfo> bagInfos, int qulity)
         {
             int number = 0;
             for (int i = 0; i < bagInfos.Count; i++)
@@ -312,9 +312,9 @@ namespace ET
             return number;
         }
 
-        public static List<BagInfo> GetSeedList(List<BagInfo> bagInfos)
+        public static List<ItemInfo> GetSeedList(List<ItemInfo> bagInfos)
         {
-            List<BagInfo> seedlist = new List<BagInfo>();
+            List<ItemInfo> seedlist = new List<ItemInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -339,9 +339,9 @@ namespace ET
         /// </summary>
         /// <param name="bagInfos"></param>
         /// <returns></returns>
-        public static List<BagInfo> GetTreasureMapList(List<BagInfo> bagInfos)
+        public static List<ItemInfo> GetTreasureMapList(List<ItemInfo> bagInfos)
         {
-            List<BagInfo> treasureMapList = new List<BagInfo>();
+            List<ItemInfo> treasureMapList = new List<ItemInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -360,9 +360,9 @@ namespace ET
         /// </summary>
         /// <param name="bagInfos"></param>
         /// <returns></returns>
-        public static List<BagInfo> GetTreasureMapList2(List<BagInfo> bagInfos)
+        public static List<ItemInfo> GetTreasureMapList2(List<ItemInfo> bagInfos)
         {
-            List<BagInfo> treasureMapList = new List<BagInfo>();
+            List<ItemInfo> treasureMapList = new List<ItemInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
@@ -479,7 +479,7 @@ namespace ET
             return costItems;
         }
 
-        public static List<int> GetGemIdList(BagInfo bagInfo)
+        public static List<int> GetGemIdList(ItemInfo bagInfo)
         {
             string[] gemIdInfos = bagInfo.GemIDNew.Split('_');
             List<int> getIds = new List<int>();
@@ -535,7 +535,7 @@ namespace ET
             return getType == ItemGetWay.StoreBuy || getType == ItemGetWay.MysteryBuy || getType == ItemGetWay.PaiMaiShop;
         }
 
-        public static BagInfo GetEquipByWeizhi(List<BagInfo> bagInfos, int pos)
+        public static ItemInfo GetEquipByWeizhi(List<ItemInfo> bagInfos, int pos)
         {
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -550,7 +550,7 @@ namespace ET
         }
 
         //客户端线条用的
-        public static bool IfShengXiaoActiveLine(string shengXiaoItemID, List<BagInfo> equipList)
+        public static bool IfShengXiaoActiveLine(string shengXiaoItemID, List<ItemInfo> equipList)
         {
             List<int> idList = new List<int>();
             for (int i = 0; i < equipList.Count; i++)
@@ -661,7 +661,7 @@ namespace ET
         }
 
         //生肖激活前缀
-        public static bool IfShengXiaoActive(int shengXiaoItemID, List<BagInfo> equipList)
+        public static bool IfShengXiaoActive(int shengXiaoItemID, List<ItemInfo> equipList)
         {
             List<int> idList = new List<int>();
             for (int i = 0; i < equipList.Count; i++)
@@ -961,9 +961,9 @@ namespace ET
             return getname;
         }
 
-        public static void ItemLitSort(List<BagInfo> ItemTypeList)
+        public static void ItemLitSort(List<ItemInfo> ItemTypeList)
         {
-            ItemTypeList.Sort(delegate(BagInfo a, BagInfo b)
+            ItemTypeList.Sort(delegate(ItemInfo a, ItemInfo b)
             {
                 int itemIda = a.ItemID;
                 int itemIdb = b.ItemID;

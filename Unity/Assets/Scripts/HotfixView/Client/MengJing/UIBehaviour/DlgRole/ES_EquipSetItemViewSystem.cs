@@ -62,8 +62,8 @@ namespace ET.Client
             }
         }
 
-        public static void UpdateData(this ES_EquipSetItem self, BagInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
-        List<BagInfo> equipIdList)
+        public static void UpdateData(this ES_EquipSetItem self, ItemInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
+        List<ItemInfo> equipIdList)
         {
             try
             {

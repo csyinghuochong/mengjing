@@ -10,8 +10,8 @@ namespace ET.Client
 	{
 		public List<EntityRef<ES_PetEggListItem>> PetList = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-		public List<BagInfo> ShowBagInfos = new();
-		
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
+
 		public RectTransform EG_PetNodeListRectTransform
      	{
      		get

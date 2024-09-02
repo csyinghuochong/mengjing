@@ -8,6 +8,6 @@ namespace ET.Server
     [BsonIgnoreExtraElements]
     public class DBAccountBagInfo : Entity, IAwake
     {
-        public List<BagInfo> BagInfoList { get; set; } = new List<BagInfo>();
+        public List<ItemInfo> BagInfoList { get; set; } = new();
     }
 }

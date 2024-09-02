@@ -31,7 +31,7 @@ namespace ET.Client
             self.View.EG_JianDingSetRectTransform.gameObject.SetActive(false);
         }
 
-        public static void OnInitUI(this DlgAppraisalSelect self, BagInfo bagInfo)
+        public static void OnInitUI(this DlgAppraisalSelect self, ItemInfo bagInfo)
         {
             self.BagInfo_Equip = bagInfo;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
@@ -58,7 +58,7 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag, self.OnSelectItem);
         }
 
-        private static void OnSelectItem(this DlgAppraisalSelect self, BagInfo bagInfo)
+        private static void OnSelectItem(this DlgAppraisalSelect self, ItemInfo bagInfo)
         {
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.BagInfo_Equip.ItemID);
             self.BagInfo_Appri = bagInfo;
@@ -137,7 +137,7 @@ namespace ET.Client
         {
             self.ShowBagInfos.Clear();
 
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            List<ItemInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             //鉴定符
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -149,7 +149,7 @@ namespace ET.Client
                 self.ShowBagInfos.Add(bagInfos[i]);
             }
 
-            self.ShowBagInfos.Sort(delegate(BagInfo a, BagInfo b)
+            self.ShowBagInfos.Sort(delegate(ItemInfo a, ItemInfo b)
             {
                 ItemConfig itemConfig_a = ItemConfigCategory.Instance.Get(a.ItemID);
                 ItemConfig itemConfig_b = ItemConfigCategory.Instance.Get(b.ItemID);
@@ -162,7 +162,7 @@ namespace ET.Client
             self.View.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        private static void UpdateSelect(this DlgAppraisalSelect self, BagInfo bagInfo)
+        private static void UpdateSelect(this DlgAppraisalSelect self, ItemInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {

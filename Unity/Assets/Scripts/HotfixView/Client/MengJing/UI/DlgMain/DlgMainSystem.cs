@@ -1213,7 +1213,7 @@ namespace ET.Client
             string[] item = items[0].Split(';');
             if (numericComponent.GetAsInt(NumericType.KillMonsterNumber) < self.KillMonsterRewardKey)
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = int.Parse(item[0]);
                 bagInfo.ItemNum = int.Parse(item[1]);
 
@@ -1334,7 +1334,7 @@ namespace ET.Client
             string[] item = items[0].Split(';');
             if (userInfoComponent.UserInfo.Lv < self.LevelRewardKey)
             {
-                BagInfo bagInfo = BagInfo.Create();
+                ItemInfo bagInfo = new ItemInfo();
                 bagInfo.ItemID = int.Parse(item[0]);
                 bagInfo.ItemNum = int.Parse(item[1]);
                 ShowItemTips showItemTips = new()

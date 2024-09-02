@@ -202,7 +202,7 @@ namespace ET.Server
                     {
                         mailInfo.Context = "发送家族争霸赛胜利奖励";
                         Log.Warning($"发送奖励胜利！！: {self.Zone()} {unitids[i]}");
-                        BagInfo BagInfo = BagInfo.Create();
+                        ItemInfoProto BagInfo = ItemInfoProto.Create();
                         BagInfo.ItemID = 1;
                         BagInfo.ItemNum = winJingJin;
                         BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";
@@ -212,7 +212,7 @@ namespace ET.Server
                     {
                         mailInfo.Context = "发送家族争霸赛失败奖励";
                         Log.Warning($"发送奖励失败！！: {self.Zone()} {unitids[i]}");
-                        BagInfo BagInfo = BagInfo.Create();
+                        ItemInfoProto BagInfo = ItemInfoProto.Create();
                         BagInfo.ItemID = 1;
                         BagInfo.ItemNum = failJiangJin;
                         BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";

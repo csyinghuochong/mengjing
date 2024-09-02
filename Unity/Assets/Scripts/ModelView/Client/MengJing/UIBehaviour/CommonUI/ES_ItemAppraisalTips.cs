@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ItemAppraisalTips : Entity,IAwake<Transform>,IDestroy 
 	{
-		public BagInfo BagInfo;
+		public ItemInfo BagInfo { get; set; }
 		public ItemOperateEnum ItemOpetateType;
 		public int CurrentHouse;
 		

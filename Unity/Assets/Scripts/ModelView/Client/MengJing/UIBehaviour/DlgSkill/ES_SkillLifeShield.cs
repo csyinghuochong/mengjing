@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public List<EntityRef<ES_Shield>> ShieldUIList = new();
 		public List<EntityRef<ES_CommonItem>> HuiShoulist = new ();
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsDrag;
 		public long ClickTime;

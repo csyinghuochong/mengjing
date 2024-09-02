@@ -20,7 +20,7 @@ namespace ET.Server
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             for (int i = 0; i < huishouList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
                 if (bagInfo == null)
                 {
                     response.Error = ErrorCode.ERR_ItemUseError;
@@ -33,7 +33,7 @@ namespace ET.Server
             
             for (int i = 0; i < huishouList.Count; i++)
             {
-                BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
+                ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
                 if (bagInfo == null)
                 {
                     continue;

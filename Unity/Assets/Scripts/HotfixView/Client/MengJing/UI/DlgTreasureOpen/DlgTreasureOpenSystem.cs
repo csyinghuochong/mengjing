@@ -52,13 +52,13 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this DlgTreasureOpen self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = self.RewardShowItems[index];
             scrollItemCommonItem.Refresh(bagInfo, ItemOperateEnum.None);
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
         }
 
-        public static void OnInitUI(this DlgTreasureOpen self, BagInfo bagInfo)
+        public static void OnInitUI(this DlgTreasureOpen self, ItemInfo bagInfo)
         {
             self.BagInfo = bagInfo;
 

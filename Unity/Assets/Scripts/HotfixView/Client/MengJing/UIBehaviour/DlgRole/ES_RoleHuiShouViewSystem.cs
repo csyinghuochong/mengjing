@@ -69,7 +69,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_RoleHuiShou self)
         {
-            self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
+            self.HuiShouInfos = new ItemInfo[self.HuiShouInfos.Length];
             self.RefreshBagItems();
             self.UpdateHuiShouUI();
             self.OnUpdateGetList();
@@ -79,7 +79,7 @@ namespace ET.Client
         private static void UpdateHuiShouInfo(this ES_RoleHuiShou self, string dataparams)
         {
             string[] huishouInfo = dataparams.Split('_');
-            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
+            ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
             if (huishouInfo[0] == "1")
             {
                 for (int i = 0; i < self.HuiShouInfos.Length; i++)
@@ -156,7 +156,7 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        private static async ETTask OnPointerDown(this ES_RoleHuiShou self, BagInfo binfo, PointerEventData pdata)
+        private static async ETTask OnPointerDown(this ES_RoleHuiShou self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
             using (zstring.Block())
@@ -175,11 +175,11 @@ namespace ET.Client
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                    EquipList = new List<BagInfo>()
+                    EquipList = new List<ItemInfo>()
                 });
         }
 
-        private static void OnPointerUp(this ES_RoleHuiShou self, BagInfo binfo, PointerEventData pdata)
+        private static void OnPointerUp(this ES_RoleHuiShou self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
@@ -188,11 +188,11 @@ namespace ET.Client
         private static void OnYiJianInputButton(this ES_RoleHuiShou self)
         {
             //最多选取五个
-            self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
+            self.HuiShouInfos = new ItemInfo[self.HuiShouInfos.Length];
 
             int number = 0;
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponentC.GetItemsByType(ItemTypeEnum.Equipment);
+            List<ItemInfo> bagInfos = bagComponentC.GetItemsByType(ItemTypeEnum.Equipment);
             bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
             for (int i = 0; i < bagInfos.Count; i++)
             {

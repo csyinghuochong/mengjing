@@ -64,7 +64,7 @@ namespace ET.Client
             List<int> fashionids = self.Root().GetComponent<BagComponentC>().FashionEquipList;
 
             ////////把拼装后的模型显示在RawImages
-            BagInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
+            ItemInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
             self.ES_ModelShow.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
 
             if (self.ScrollItemFashionShowItems != null)
@@ -110,7 +110,7 @@ namespace ET.Client
             }
 
             ////////把拼装后的模型显示在RawImages
-            BagInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
+            ItemInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
             self.ES_ModelShow.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
         }
 

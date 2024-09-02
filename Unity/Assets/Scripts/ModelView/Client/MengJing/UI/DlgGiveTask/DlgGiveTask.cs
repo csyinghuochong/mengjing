@@ -10,9 +10,9 @@ namespace ET.Client
 
         public int TaskId;
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
-        public List<BagInfo> ShowBagInfos = new();
+        public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public Action OnGiveAction { get; set; }
     }
 }

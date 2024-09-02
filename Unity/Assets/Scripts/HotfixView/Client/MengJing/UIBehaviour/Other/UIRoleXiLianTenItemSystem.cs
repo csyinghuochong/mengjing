@@ -21,7 +21,7 @@ namespace ET.Client
             self.EquipBaseSetList = rc.Get<GameObject>("EquipBaseSetList");
         }
 
-        public static void OnInitUI(this UIRoleXiLianTenItem self, BagInfo bagInfo, ItemXiLianResult index)
+        public static void OnInitUI(this UIRoleXiLianTenItem self, ItemInfo bagInfo, ItemXiLianResult index)
         {
             self.BagInfo = bagInfo;
             self.ItemXiLianResult = index;

@@ -53,7 +53,7 @@ namespace ET.Client
             self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfo.Occ, 0, bagComponent.FashionEquipList);
         }
     }

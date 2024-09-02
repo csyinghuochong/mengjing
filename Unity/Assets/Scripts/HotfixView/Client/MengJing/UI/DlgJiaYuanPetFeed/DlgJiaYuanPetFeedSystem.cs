@@ -103,7 +103,7 @@ namespace ET.Client
         public static void OnUpdateItemList(this DlgJiaYuanPetFeed self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            List<BagInfo> bagInfos = bagComponent.GetBagList();
+            List<ItemInfo> bagInfos = bagComponent.GetBagList();
 
             self.ShowBagInfos.Clear();
             for (int i = 0; i < bagInfos.Count; i++)
@@ -137,7 +137,7 @@ namespace ET.Client
         {
             string[] huishouInfo = dataparams.Split('_');
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo bagInfo = bagComponent.GetBagInfo(long.Parse(huishouInfo[1]));
+            ItemInfo bagInfo = bagComponent.GetBagInfo(long.Parse(huishouInfo[1]));
             if (bagInfo == null)
             {
                 return;
@@ -233,7 +233,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    BagInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    ItemInfo bagInfo = item.ES_CommonItem.Baginfo;
                     if (bagInfo == null)
                     {
                         continue;
@@ -254,7 +254,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnPointerDown(this DlgJiaYuanPetFeed self, BagInfo binfo, PointerEventData pdata)
+        public static async ETTask OnPointerDown(this DlgJiaYuanPetFeed self, ItemInfo binfo, PointerEventData pdata)
         {
             if (binfo == null)
             {
@@ -284,7 +284,7 @@ namespace ET.Client
                 });
         }
 
-        public static void OnPointerUp(this DlgJiaYuanPetFeed self, BagInfo binfo, PointerEventData pdata)
+        public static void OnPointerUp(this DlgJiaYuanPetFeed self, ItemInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);

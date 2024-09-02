@@ -48,7 +48,7 @@ namespace ET.Client
                 BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
-                BagInfo bagInfoNew = BagInfo.Create();
+                ItemInfo bagInfoNew = new ItemInfo();
                 bagInfoNew.ItemID = itemid;
                 bagInfoNew.BagInfoID = index;
                 bagInfoNew.ItemNum = itemnum;
@@ -57,7 +57,7 @@ namespace ET.Client
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
             }
 
-            BagInfo bagInfo = scrollItemCommonItem.ES_CommonItem.Baginfo;
+            ItemInfo bagInfo = scrollItemCommonItem.ES_CommonItem.Baginfo;
             if (bagInfo == null)
             {
                 return;
@@ -71,7 +71,7 @@ namespace ET.Client
 
             int curQulity = 0;
             int curLevel = 0;
-            List<BagInfo> curEquiplist = bagComponent.GetEquipListByWeizhi(itemConfig.ItemSubType);
+            List<ItemInfo> curEquiplist = bagComponent.GetEquipListByWeizhi(itemConfig.ItemSubType);
             for (int e = 0; e < curEquiplist.Count; e++)
             {
                 ItemConfig curEquipConfig = ItemConfigCategory.Instance.Get(curEquiplist[e].ItemID);
@@ -190,7 +190,7 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, allNumber);
         }
 
-        private static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)
+        private static void UpdateSelect(this ES_RoleBag self, ItemInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
@@ -216,8 +216,8 @@ namespace ET.Client
                 return;
             }
 
-            List<BagInfo> bagItemList = bagComponent.GetBagList();
-            List<BagInfo> gemList = new List<BagInfo>();
+            List<ItemInfo> bagItemList = bagComponent.GetBagList();
+            List<ItemInfo> gemList = new List<ItemInfo>();
             for (int i = 0; i < bagItemList.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagItemList[i].ItemID);

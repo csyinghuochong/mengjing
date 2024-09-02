@@ -71,7 +71,7 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagBagInfos.Clear();
-            List<BagInfo> allItems = bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag);
+            List<ItemInfo> allItems = bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag);
             for (int i = 0; i < allItems.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(allItems[i].ItemID);
@@ -109,7 +109,7 @@ namespace ET.Client
                 self.UpdateBagSelect, (int)ItemLocType.GemWareHouse1);
         }
 
-        private static void UpdateHouseSelect(this ES_WarehouseGem self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this ES_WarehouseGem self, ItemInfo bagInfo)
         {
             if (self.ScrollItemHouseItems != null)
             {
@@ -124,7 +124,7 @@ namespace ET.Client
             }
         }
 
-        private static void UpdateBagSelect(this ES_WarehouseGem self, BagInfo bagInfo)
+        private static void UpdateBagSelect(this ES_WarehouseGem self, ItemInfo bagInfo)
         {
             if (self.ScrollItemBagItems != null)
             {

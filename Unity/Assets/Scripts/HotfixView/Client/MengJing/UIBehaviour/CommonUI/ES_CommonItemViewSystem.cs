@@ -26,7 +26,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void SetSelected(this ES_CommonItem self, BagInfo bagInfo)
+        public static void SetSelected(this ES_CommonItem self, ItemInfo bagInfo)
         {
             if (null == bagInfo || null == self.Baginfo)
             {
@@ -73,7 +73,7 @@ namespace ET.Client
             self.E_ItemDragEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
         }
 
-        public static void SetClickHandler(this ES_CommonItem self, Action<BagInfo> action)
+        public static void SetClickHandler(this ES_CommonItem self, Action<ItemInfo> action)
         {
             self.ClickItemHandler = action;
         }
@@ -99,7 +99,7 @@ namespace ET.Client
                         ItemOperateEnum = self.ItemOperateEnum,
                         InputPoint = Input.mousePosition,
                         Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                        EquipList = new List<BagInfo>(),
+                        EquipList = new List<ItemInfo>(),
                         CurrentHouse =  self.CurrentHouse
                     });
             }
@@ -127,7 +127,7 @@ namespace ET.Client
             self.CurrentHouse = currentHouse;
         }
         
-        public static void UpdateItem(this ES_CommonItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
+        public static void UpdateItem(this ES_CommonItem self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.Baginfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;

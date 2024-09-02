@@ -80,7 +80,7 @@ namespace ET.Client
         public static TeamPlayerInfo GetSelfTeamPlayerInfo(Scene root)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            BagInfo bagInfo = root.GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            ItemInfo bagInfo = root.GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             TeamPlayerInfo TeamPlayerInfo = TeamPlayerInfo.Create();
 
             TeamPlayerInfo.UserID = userInfoComponent.UserInfo.UserId;

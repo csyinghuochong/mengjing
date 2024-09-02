@@ -12,7 +12,7 @@ namespace ET.Server
             mailInfo.Context = "你拍卖行出售的道具:" + itemCof.ItemName + ",已经被其他玩家购买" + costNum + "个。";
             mailInfo.Title = "拍卖行邮件";
             mailInfo.MailId = IdGenerater.Instance.GenerateId();
-            BagInfo reward = BagInfo.Create();
+            ItemInfoProto reward = ItemInfoProto.Create();
             reward.ItemID = 1;
             int sellPrice = (int)(paiMaiItemInfo.Price * 0.95f) * costNum; //5%手续费
             reward.ItemNum = sellPrice;

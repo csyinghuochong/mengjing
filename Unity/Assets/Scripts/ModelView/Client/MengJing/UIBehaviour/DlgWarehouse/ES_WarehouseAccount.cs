@@ -8,11 +8,11 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_WarehouseAccount : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public BagInfo BagInfoPutIn { get; set; }
+		public ItemInfo BagInfoPutIn { get; set; }
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
-		public List<BagInfo> AccountBagInfos = new();
+		public List<ItemInfo> AccountBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
-		public List<BagInfo> ShowBagBagInfos = new();
+		public List<ItemInfo> ShowBagBagInfos { get; set; } = new();
 		public LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
      	{
      		get

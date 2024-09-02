@@ -626,8 +626,8 @@ message MailInfo
 	string Context = 3;
 	int64 MailId = 5;
 	string Title = 6;
-	repeated BagInfo ItemList = 7;	
-	BagInfo ItemSell = 8;
+	repeated ItemInfoProto ItemList = 7;	
+	ItemInfoProto ItemSell = 8;
 	int64  BuyPlayerId = 9;
 }
 
@@ -635,7 +635,7 @@ message PaiMaiItemInfo
 {
 	int64 Id = 1;
 	int64 UserId = 2;
-	BagInfo BagInfo = 3;			
+	ItemInfoProto BagInfo = 3;			
 	int32 Price = 5;
 	string PlayerName = 6;
 	int64 SellTime = 7;
@@ -703,7 +703,7 @@ message ServerMailItem
 {
 	int32 MailType = 1;		 //1全服邮件     2充值邮件   3等级邮件   4开启格子   5充值区间
 	string ParasmNew = 2;		//(Title == mailInfo[5])//0  充值金额    等级   开启第二个仓库并且格子没有开完的 
-	repeated BagInfo ItemList = 3;
+	repeated ItemInfoProto ItemList = 3;
 	int64  EndTime = 4;
 	int32 ServerMailIId = 5;
 	int32 Parasm = 6;   //(作废)
@@ -1112,9 +1112,9 @@ message M2C_PetDataBroadcast // IMessage
 //道具[装备]更新
 message M2C_RoleBagUpdate // IMessage
 {
-	repeated BagInfo BagInfoAdd = 1;
-	repeated BagInfo BagInfoUpdate = 2;
-	repeated BagInfo BagInfoDelete = 3;
+	repeated ItemInfoProto BagInfoAdd = 1;
+	repeated ItemInfoProto BagInfoUpdate = 2;
+	repeated ItemInfoProto BagInfoDelete = 3;
 }
 
 
@@ -1130,7 +1130,7 @@ message M2C_BagInitResponse  // ILocationResponse
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	repeated BagInfo BagInfos = 1;
+	repeated ItemInfoProto BagInfos = 1;
 	repeated int32 QiangHuaLevel = 2;
 	repeated int32 QiangHuaFails = 3;
 	//int32 BagAddedCell = 4;
@@ -1204,8 +1204,8 @@ message M2C_PickItemResponse // ILocationResponse
 message C2M_EquipmentIncreaseRequest // ILocationRequest
 {
 	int32 RpcId = 90;
-	BagInfo EquipmentBagInfo = 1; // 待增幅的装备 
-	BagInfo ReelBagInfo = 2; // 所使用的卷轴 
+	ItemInfoProto EquipmentBagInfo = 1; // 待增幅的装备 
+	ItemInfoProto ReelBagInfo = 2; // 所使用的卷轴 
 }
 
 message M2C_EquipmentIncreaseResponse // ILocationResponse
@@ -1775,12 +1775,12 @@ message F2C_WatchPlayerResponse // IFriendActorResponse
 	string Message = 92;
 	string Name = 1;
 	int32 Lv = 2;
-	repeated BagInfo EquipList = 3;	//装备 
+	repeated ItemInfoProto EquipList = 3;	//装备 
 	int64 TeamId = 4;
 	int32 Occ = 5;
 	repeated RolePetInfo RolePetInfos = 7;
 	repeated KeyValuePair PetSkinList = 8;
-	repeated BagInfo PetHeXinList = 9;
+	repeated ItemInfoProto PetHeXinList = 9;
 	repeated int32 Ks = 11;
 	repeated int64 Vs = 12;
 	repeated int32 FashionIds = 13;
@@ -3276,7 +3276,7 @@ message M2C_AccountWarehousOperateResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	BagInfo BagInfo = 2;
+	ItemInfoProto BagInfo = 2;
 }
 
 //ResponseType M2C_ItemXiLianResponse
@@ -4207,7 +4207,7 @@ message F2C_WatchPetResponse // IFriendActorResponse
 	string Message = 92;
 
 	RolePetInfo RolePetInfos = 7;
-	repeated BagInfo PetHeXinList = 8;
+	repeated ItemInfoProto PetHeXinList = 8;
 	repeated int32 Ks = 9;
 	repeated int64 Vs = 10;
 }
@@ -5708,7 +5708,7 @@ message E2C_AccountWarehousInfoResponse // IMailActorResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	repeated BagInfo BagInfos = 1;
+	repeated ItemInfoProto BagInfos = 1;
 }
 
 //ResponseType M2C_BattleSummonRecord

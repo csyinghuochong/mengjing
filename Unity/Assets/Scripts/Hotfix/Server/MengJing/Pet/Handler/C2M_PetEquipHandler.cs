@@ -19,12 +19,12 @@ namespace ET.Server
              //通知客户端背包刷新
              M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
              //通知客户端背包道具发生改变
-             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
+             m2c_bagUpdate.BagInfoUpdate = new List<ItemInfoProto>();
 
              long takeOffId = 0;
              if (request.OperateType == 1) //穿戴
              {
-                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
+                 ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
                  if (bagInfo == null)
                  {
                      response.Error = ErrorCode.ERR_ItemNotExist;
@@ -34,7 +34,7 @@ namespace ET.Server
                  int itemSubType = ItemConfigCategory.Instance.Get(bagInfo.ItemID).ItemSubType;
                  for (int i = rolePetInfo.PetEquipList.Count - 1; i >= 0; i--)
                  { 
-                     BagInfo petequipInfo = bagComponent.GetItemByLoc(ItemLocType.PetLocEquip, rolePetInfo.PetEquipList[i]);
+                     ItemInfo petequipInfo = bagComponent.GetItemByLoc(ItemLocType.PetLocEquip, rolePetInfo.PetEquipList[i]);
                      if (petequipInfo == null)
                      {
                          rolePetInfo.PetEquipList.RemoveAt(i);   
@@ -54,11 +54,11 @@ namespace ET.Server
              //先卸下
              if (takeOffId != 0)
              {
-                 BagInfo oldBagInfo = bagComponent.GetItemByLoc(ItemLocType.PetLocEquip, takeOffId);
+                 ItemInfo oldBagInfo = bagComponent.GetItemByLoc(ItemLocType.PetLocEquip, takeOffId);
                  if (oldBagInfo != null)
                  {
                      bagComponent.OnChangeItemLoc(oldBagInfo, ItemLocType.ItemLocBag, ItemLocType.PetLocEquip);
-                     m2c_bagUpdate.BagInfoUpdate.Add(oldBagInfo);
+                     m2c_bagUpdate.BagInfoUpdate.Add(oldBagInfo.ToMessage());
                      rolePetInfo.PetEquipList.Remove(takeOffId);
                  }
 
@@ -67,11 +67,11 @@ namespace ET.Server
 
              if (request.OperateType == 1) //穿戴
              {
-                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
+                 ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
 
                  //新的装备给宠物
                  bagComponent.OnChangeItemLoc(bagInfo, ItemLocType.PetLocEquip, ItemLocType.ItemLocBag);
-                 m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
+                 m2c_bagUpdate.BagInfoUpdate.Add(bagInfo.ToMessage());
                  rolePetInfo.PetEquipList.Add(request.BagInfoId);
              }
              petComponent.UpdatePetAttribute(rolePetInfo, false);

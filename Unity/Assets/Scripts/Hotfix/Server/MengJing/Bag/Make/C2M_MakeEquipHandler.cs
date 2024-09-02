@@ -25,7 +25,7 @@ namespace ET.Server
             int costItemId = 0;
             if (request.BagInfoID != 0)
             {
-                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, request.BagInfoID);
+                ItemInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, request.BagInfoID);
                 if (useBagInfo != null)
                 {
                     costItemId = useBagInfo.ItemID;

@@ -17,9 +17,9 @@ namespace ET.Client
 		public List<int> ShowMake = new();
 		public Dictionary<int, EntityRef<Scroll_Item_MakeItem>> ScrollItemMakeItems;
 		
-		public BagInfo[] HuiShouInfos = new BagInfo[5];
+		public ItemInfo[] HuiShouInfos { get; set; } = new ItemInfo[5];
 		public EntityRef<ES_CommonItem>[] HuiShouUIList = new EntityRef<ES_CommonItem>[5];
-		public List<BagInfo> ShowBagInfos = new();
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsHoldDown = false;
 		public int PlanMelt = 1;

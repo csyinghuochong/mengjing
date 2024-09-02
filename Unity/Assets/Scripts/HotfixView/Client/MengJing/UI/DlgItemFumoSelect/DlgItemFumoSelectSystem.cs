@@ -20,15 +20,15 @@ namespace ET.Client
 
             ES_CommonItem item = self.View.ES_CommonItem_0;
             item.uiTransform.gameObject.SetActive(false);
-            item.SetClickHandler((BagInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
+            item.SetClickHandler((ItemInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
 
             item = self.View.ES_CommonItem_1;
             item.uiTransform.gameObject.SetActive(false);
-            item.SetClickHandler((BagInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
+            item.SetClickHandler((ItemInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
 
             item = self.View.ES_CommonItem_2;
             item.uiTransform.gameObject.SetActive(false);
-            item.SetClickHandler((BagInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
+            item.SetClickHandler((ItemInfo bagInfo) => { self.OnSetClickHandler(bagInfo).Coroutine(); });
 
             Text text = self.View.E_Label_ItemFumo_0Text;
             text.text = string.Empty;
@@ -43,13 +43,13 @@ namespace ET.Client
             self.TextFomoPro.Add(text);
         }
 
-        public static void OnInitUI(this DlgItemFumoSelect self, BagInfo fumoitem)
+        public static void OnInitUI(this DlgItemFumoSelect self, ItemInfo fumoitem)
         {
             self.FumoItemInfo = fumoitem;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(fumoitem.ItemID);
             string[] itemparams = itemConfig.ItemUsePar.Split('@');
             int weizhi = int.Parse(itemparams[0]);
-            List<BagInfo> equipinfos = self.Root().GetComponent<BagComponentC>().GetEquipListByWeizhi(weizhi);
+            List<ItemInfo> equipinfos = self.Root().GetComponent<BagComponentC>().GetEquipListByWeizhi(weizhi);
 
             for (int i = 0; i < equipinfos.Count; i++)
             {
@@ -74,7 +74,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect);
         }
 
-        public static async ETTask OnSetClickHandler(this DlgItemFumoSelect self, BagInfo bagInfo)
+        public static async ETTask OnSetClickHandler(this DlgItemFumoSelect self, ItemInfo bagInfo)
         {
             int index = self.BagInfos.IndexOf(bagInfo);
             if (index == -1)
@@ -82,7 +82,7 @@ namespace ET.Client
                 index = 0;
             }
 
-            BagInfo equipinfo = self.BagInfos[index];
+            ItemInfo equipinfo = self.BagInfos[index];
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.FumoItemInfo.ItemID);
             List<HideProList> hideProLists = XiLianHelper.GetItemFumoPro(itemConfig.Id);
             string itemfumo = ItemViewHelp.GetFumpProDesc(hideProLists);

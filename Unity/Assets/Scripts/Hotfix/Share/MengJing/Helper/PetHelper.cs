@@ -6,7 +6,7 @@ namespace ET
     public static class PetHelper
     {
 
-        public static Dictionary<int, int> GetEquipSkillList(RolePetInfo rolePetInfo, List<BagInfo> bagInfos)
+        public static Dictionary<int, int> GetEquipSkillList(RolePetInfo rolePetInfo, List<ItemInfo> bagInfos)
         {
             Dictionary<int, int> hideSkillId = new Dictionary<int, int>();
             for (int i = 0; i < rolePetInfo.PetEquipList.Count; i++)
@@ -17,8 +17,8 @@ namespace ET
                     continue;
                 }
 
-                BagInfo bagInfo = null;
-                foreach (BagInfo info in bagInfos)
+                ItemInfo bagInfo = null;
+                foreach (ItemInfo info in bagInfos)
                 {
                     if (info.BagInfoID == baginfoId)
                     {

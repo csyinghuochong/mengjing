@@ -61,7 +61,7 @@ namespace ET.Client
             self.ShoujiId = shouijId;
             ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(shouijId);
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = shouJiItemConfig.ItemID;
             self.UIItemComponent.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.UIItemComponent.E_ItemNumText.gameObject.SetActive(false);

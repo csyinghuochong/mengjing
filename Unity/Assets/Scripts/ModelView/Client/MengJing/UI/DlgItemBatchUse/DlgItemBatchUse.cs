@@ -5,7 +5,7 @@
     {
         public DlgItemBatchUseViewComponent View { get => this.GetComponent<DlgItemBatchUseViewComponent>(); }
 
-        public BagInfo BagInfo;
+        public ItemInfo BagInfo { get; set; }
         public int UseNum;
         public bool IsHoldDown;
     }

@@ -42,7 +42,7 @@ namespace ET.Client
             self.StoreSellConfigId = id;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID);
 
-            BagInfo bagInfo = BagInfo.Create();
+            ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
