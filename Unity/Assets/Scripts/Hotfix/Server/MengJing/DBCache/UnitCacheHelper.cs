@@ -70,7 +70,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unitId);
+            int zone = root.Zone();
             ActorId dbCacheId = GetDbCacheId(zone);
 
             Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
@@ -88,7 +88,7 @@ namespace ET.Server
         
         public static async ETTask SaveComponentCache(Scene root,  Entity entity)
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(entity.Id);
+            int zone = root.Zone();
             Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = Other2UnitCache_AddOrUpdateUnit.Create();
             addOrUpdateUnit.UnitId = entity.Id;
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
@@ -100,7 +100,7 @@ namespace ET.Server
                 
         public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unitId);
+            int zone = root.Zone();
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
@@ -114,7 +114,7 @@ namespace ET.Server
 
         public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unitId);
+            int zone = root.Zone();
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
             DBComponent dbComponent = dbManagerComponent.GetZoneDB(zone);
             await dbComponent.Save(root.Zone(), entity);
@@ -127,7 +127,7 @@ namespace ET.Server
         /// <param name="unitId"></param>
         public static async ETTask DeleteUnitCache(Scene scene, long unitId)
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unitId);
+            int zone = scene.Zone();
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             Other2UnitCache_DeleteUnit message = Other2UnitCache_DeleteUnit.Create();
@@ -142,7 +142,7 @@ namespace ET.Server
         /// <param name="unit"></param>
         public static void AddOrUpdateUnitAllCache(Unit unit)
         {
-            int zone =  UnitIdStruct.GetUnitPhysicsZone(unit.Id);
+            int zone = unit.Zone();
             Other2UnitCache_AddOrUpdateUnit message = Other2UnitCache_AddOrUpdateUnit.Create();
             message.UnitId = unit.Id;
 

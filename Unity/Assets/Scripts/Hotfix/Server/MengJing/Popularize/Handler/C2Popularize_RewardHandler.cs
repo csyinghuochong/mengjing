@@ -18,12 +18,7 @@ namespace ET.Server
                 for (int i = 0; i < dBPopularizeInfo.MyPopularizeList.Count; i++)
                 {
                     long unitid = dBPopularizeInfo.MyPopularizeList[i].UnitId;
-                    int oldZone = UnitIdStruct.GetUnitPhysicsZone(unitid);
-                    int newZone = ServerHelper.GetNewServerId(oldZone);
-                    if (newZone < 5)
-                    {
-                        continue;
-                    }
+                   
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponent<UserInfoComponentS>(scene.Root(), unitid);
                     if (userInfoComponent == null)
                     {

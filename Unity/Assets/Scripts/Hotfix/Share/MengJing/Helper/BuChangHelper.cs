@@ -2,19 +2,6 @@ using System;
 
 namespace ET
 {
-    public static class UnitIdStruct
-    {
-        public static int GetUnitLogicZone(long unitid, int zone = 1)
-        {
-            return 1;
-        }
-        
-        public static int GetUnitPhysicsZone(long unitid, int zone = 1)
-        {
-            return 1;
-        }
-    }
-
     public static class BuChangHelper
     {
       
@@ -24,8 +11,8 @@ namespace ET
             KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
             for (int i = 0; i < playerInfo.RechargeInfos.Count; i++)
             {
-                RechargeInfo rechargeInfo = playerInfo.RechargeInfos[i];    
-                int zone = UnitIdStruct.GetUnitPhysicsZone(rechargeInfo.UnitId);
+                RechargeInfo rechargeInfo = playerInfo.RechargeInfos[i];
+                int zone = rechargeInfo.PhysicsZone;
                 if (zone >= ConfigData.BuChangZone)
                 {
                     continue;
@@ -37,9 +24,8 @@ namespace ET
             return keyValuePairInt;  
         }
 
-        public static int ShowNewBuChang(PlayerInfo playerInfo, long unitid)
+        public static int ShowNewBuChang(PlayerInfo playerInfo, long unitid, int zone)
         {
-            int zone = UnitIdStruct.GetUnitPhysicsZone(unitid);
             if (zone != ConfigData.BuChangZone)
             {
                 return 0;

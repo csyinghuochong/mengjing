@@ -1583,6 +1583,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public string OrderInfo { get; set; }
 
+        [MemoryPackOrder(4)]
+        public int PhysicsZone { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1594,6 +1597,7 @@ namespace ET
             this.Time = default;
             this.UnitId = default;
             this.OrderInfo = default;
+            this.PhysicsZone = default;
 
             ObjectPool.Instance.Recycle(this);
         }

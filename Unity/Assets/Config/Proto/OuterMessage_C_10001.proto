@@ -362,6 +362,7 @@ message RechargeInfo
 	int64 Time = 2;
 	int64 UnitId = 3;
 	string OrderInfo = 4;
+	int32 PhysicsZone = 5;
 }
 
 message PlayerInfo
