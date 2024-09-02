@@ -430,7 +430,7 @@ namespace ET.Client
                 int effctId = skillConfig1.SkillEffectID[0];
                 if (effctId != 0 && !EffectConfigCategory.Instance.Contain(effctId))
                 {
-                    Log.Error($"无效的effectid {effctId}");
+                    Log.Error($"SkillId {skillcmd.SkillInfos[i].WeaponSkillID} 中配置了无效的effectid {effctId}");
                     continue;
                 }
 
