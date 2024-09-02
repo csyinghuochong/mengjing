@@ -22,15 +22,11 @@ namespace ET.Client
 
         public static async ETTask OnLoginOut(this FangChenMiComponentC self)
         {
-            // EventType.CommonPopup.Instance.ZoneScene = self.ZoneScene();
-            // EventType.CommonPopup.Instance.HintText = "防沉迷提示:当前可游玩时间结束,请安心休息吧！将立即退出游戏";
-            // Game.EventSystem.PublishClass(EventType.CommonPopup.Instance);
-            //
-            // await TimerComponent.Instance.WaitAsync(10000);
-            //
-            // EventType.ReturnLogin.Instance.ZoneScene = self.DomainScene();
-            // Game.EventSystem.PublishClass(EventType.ReturnLogin.Instance);
-            await ETTask.CompletedTask;
+            EventSystem.Instance.Publish(self.Root(), new CommonPopup() { HintText = "防沉迷提示:当前可游玩时间结束,请安心休息吧！将立即退出游戏" });
+
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10000);
+
+            EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
         }
 
         public static async ETTask OnLogin(this FangChenMiComponentC self)

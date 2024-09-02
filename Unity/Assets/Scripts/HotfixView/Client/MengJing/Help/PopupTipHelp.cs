@@ -3,6 +3,17 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class CommonPopupEvent : AEvent<Scene, CommonPopup>
+    {
+        protected override async ETTask Run(Scene scene, CommonPopup args)
+        {
+            PopupTipHelp.OpenPopupTip(scene, "系统提示", args.HintText, null, null).Coroutine();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     public static class PopupTipHelp
     {
         public static async ETTask OpenPopupTip(Scene root, string title, string content, Action okhandle, Action cancelHandle = null)
@@ -37,7 +48,5 @@ namespace ET.Client
             dlgPopupTip.View.E_FalseButton.gameObject.SetActive(false);
             dlgPopupTip.View.E_TrueButton.transform.localPosition = new Vector3(0f, -169f, 0f);
         }
-        
-        
     }
 }

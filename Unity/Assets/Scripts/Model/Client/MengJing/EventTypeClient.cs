@@ -540,4 +540,9 @@ namespace ET.Client
     {
         public Unit Unit;
     }
+
+    public struct CommonPopup
+    {
+        public string HintText;
+    }
 }
