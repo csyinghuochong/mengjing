@@ -1,14 +1,50 @@
-﻿namespace ET.Client
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class LoginFinish_CreateLobbyUI: AEvent<Scene, LoginFinish>
+    public class LoginFinish_CreateLobbyUI : AEvent<Scene, LoginFinish>
     {
         protected override async ETTask Run(Scene scene, LoginFinish args)
         {
-            
-            
-            scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_MJLobby);
+            FangChenMiComponentC fangChenMiComponent = scene.GetComponent<FangChenMiComponentC>();
+            if (fangChenMiComponent.GetPlayerAge() < 18)
+            {
+                DateTime dateTime = TimeHelper.DateTimeNow();
+                string minute = (60 - dateTime.Minute).ToString();
+                string content = HintHelp.GetErrorHint(ErrorCode.ERR_FangChengMi_Tip1);
+                content = content.Replace("{0}", minute);
+                PopupTipHelp.OpenPopupTip_2(scene, "防沉迷提示",
+                    content,
+                    () => { OnLoginSucess(scene, args).Coroutine(); }).Coroutine();
+            }
+            else
+            {
+                OnLoginSucess(scene, args).Coroutine();
+            }
+
             await ETTask.CompletedTask;
+        }
+
+        public static async ETTask OnLoginSucess(Scene scene, LoginFinish args)
+        {
+            FlyTipComponent.Instance.ShowFlyTip("登录成功!");
+            var path = ABPathHelper.GetScenePath("CreateRole");
+            await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+            await scene.GetComponent<TimerComponent>().WaitAsync(500);
+
+            GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(22.36f, 2.84f, 11.14f);
+            GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(8.805f, 0f, 0f);
+
+            FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
+            await scene.GetComponent<TimerComponent>().WaitAsync(500);
+
+            PlayerComponent PlayerComponent = scene.GetComponent<PlayerComponent>();
+            await scene.GetComponent<UIComponent>()
+                    .ShowWindowAsync(PlayerComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
+            scene.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
         }
     }
 }

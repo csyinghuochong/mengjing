@@ -15,7 +15,7 @@ namespace ET.Client
 
         public PlayerInfo PlayerInfo { get; set; }
 
-        public int Age_Type = -1;
+        public int Age_Type { get; set; } = -1;
 
         public long AccountId { get; set; } = 0;
         
