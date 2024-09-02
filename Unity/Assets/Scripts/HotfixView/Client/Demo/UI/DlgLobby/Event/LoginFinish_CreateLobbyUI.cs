@@ -35,8 +35,8 @@ namespace ET.Client
             await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
 
-            GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(22.36f, 2.84f, 11.14f);
-            GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(8.805f, 0f, 0f);
+            GlobalComponent.Instance.MainCamera.transform.localPosition = new Vector3(23f, 2f, 13f);
+            GlobalComponent.Instance.MainCamera.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
