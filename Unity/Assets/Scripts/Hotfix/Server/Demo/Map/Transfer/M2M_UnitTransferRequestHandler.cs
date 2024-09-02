@@ -222,9 +222,10 @@ namespace ET.Server
                     float last_x = numericComponent.GetAsFloat(NumericType.MainCity_X);
                     float last_y = numericComponent.GetAsFloat(NumericType.MainCity_Y);
                     float last_z = numericComponent.GetAsFloat(NumericType.MainCity_Z);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     if (last_x ==0f)
                     {
-                        unit.Position = new float3(-10, 0, -10);
+                        unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
                     }
                     else
                     {
