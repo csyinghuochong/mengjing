@@ -69,7 +69,7 @@ namespace ET.Client
                     paramss = "Init";
                     break;
                 case (int)SceneTypeEnum.LoginScene:
-                    paramss = "Login";
+                    paramss = "CreateRole";
                     break;
                 case (int)SceneTypeEnum.MainCityScene:
                     PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
