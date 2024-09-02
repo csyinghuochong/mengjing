@@ -487,7 +487,7 @@ namespace ET.Client
                         self.SkillPro = null;
                         using (zstring.Block())
                         {
-                            Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
+                            Log.Error(zstring.Format("skillid == null: 药剂道具ID： {0}   技能ID：{1}", skillpro.SkillID, skillid));
                         }
 
                         return;
