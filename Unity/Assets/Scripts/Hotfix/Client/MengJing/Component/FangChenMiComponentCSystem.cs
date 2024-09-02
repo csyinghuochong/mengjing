@@ -4,6 +4,7 @@ using ET.Client;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(PlayerComponent))]
     [FriendOf(typeof(FangChenMiComponentC))]
     [EntitySystemOf(typeof(FangChenMiComponentC))]
     public static partial class FangChenMiComponentCSystem
