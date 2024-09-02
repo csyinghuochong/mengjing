@@ -97,31 +97,31 @@ namespace ET.Client
             unitComponent.Add(unit);
             unit.Type = UnitType.Monster;
             unit.ConfigId = unitInfo.MonsterID;
-            NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>(true);
+            NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>();
             for (int i = 0; i < unitInfo.Ks.Count; ++i)
             {
                 numericComponent.ApplyValue(unitInfo.Ks[i], unitInfo.Vs[i], false);
             }
 
             unit.MasterId = numericComponent.GetAsLong(NumericType.MasterId);
-            unit.AddComponent<ObjectWait>(true);
-            unit.AddComponent<HeroDataComponentC>(true);
-            unit.AddComponent<StateComponentC>(true);
-            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>(true);
+            unit.AddComponent<ObjectWait>();
+            unit.AddComponent<HeroDataComponentC>();
+            unit.AddComponent<StateComponentC>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.EnergySkillId = unitInfo.SkillId;
 
             MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unitInfo.MonsterID);
             if (monsterCof.AI != 0)
             {
-                unit.AddComponent<BuffManagerComponentC>(true); //buff管理器组建
-                unit.AddComponent<SkillManagerComponentC>(true);
+                unit.AddComponent<BuffManagerComponentC>(); //buff管理器组建
+                unit.AddComponent<SkillManagerComponentC>();
                 unit.GetComponent<BuffManagerComponentC>().t_Buffs = unitInfo.Buffs;
                 unit.GetComponent<SkillManagerComponentC>().t_Skills = unitInfo.Skills;
             }
 
             unit.Position = new(unitInfo.X, unitInfo.Y, unitInfo.Z);
             unit.Forward = new(unitInfo.ForwardX, unitInfo.ForwardY, unitInfo.ForwardZ);
-            unit.AddComponent<MoveComponent>(true);
+            unit.AddComponent<MoveComponent>();
 
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
