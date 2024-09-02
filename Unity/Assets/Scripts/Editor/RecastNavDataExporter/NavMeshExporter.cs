@@ -513,6 +513,12 @@ namespace ETEditor
             int count = 0;
             foreach (MeshFilter mf in meshes)
             {
+                if (mf.sharedMesh == null)
+                {
+                    Log.Debug($"mf.sharedMesh == null:  {mf.name}");
+                    continue;
+                }
+
                 sw.Write("mtllib ./" + filename + ".mtl\n");
                 string strMes = MeshToString(mf, materialList);
                 sw.Write(strMes);
@@ -605,6 +611,7 @@ namespace ETEditor
             // foreach(Vector3 v in m.vertices) {
             // 	sb.Append(string.Format("v {0} {1} {2}\n",v.x,v.y,v.z));
             // }
+            
             foreach (Vector3 lv in m.vertices)
             {
                 Vector3 wv = mf.transform.TransformPoint(lv);
