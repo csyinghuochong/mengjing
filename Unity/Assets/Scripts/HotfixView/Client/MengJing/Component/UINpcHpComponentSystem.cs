@@ -213,8 +213,8 @@ namespace ET.Client
             List<int> canGets = taskComponent.GetOpenTaskIds(self.NpcId);
             canGets.AddRange(self.GetAddtionTaskId(self.NpcId));
 
-            self.ShowNpcEffect(0, ABPathHelper.GetEffetPath("UIEffect/10000001"), canGets.Count > 0 && taskProCompleted.Count == 0);
-            self.ShowNpcEffect(1, ABPathHelper.GetEffetPath("UIEffect/10000001"), taskProCompleted.Count > 0);
+            self.ShowNpcEffect(0, ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_Task_Get"), canGets.Count > 0 && taskProCompleted.Count == 0);
+            self.ShowNpcEffect(1, ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_Task_Complate"), taskProCompleted.Count > 0);
         }
 
         public static List<int> GetAddtionTaskId(this UINpcHpComponent self, int npcId)

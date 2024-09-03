@@ -37,35 +37,35 @@ namespace ET.Client
 
         public static void OnMainHeroMove(Unit self)
         {
-            float curTime = Time.time;
+            long curTime = TimeInfo.Instance.ServerNow();
             List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
-                //if (curTime <= unit.UpdateUITime)
-                //{
-                //     continue;
-                //}
+                if (curTime <= unit.UpdateUITime)
+                {
+                     continue;
+                }
                 if (unit.Type == UnitType.Npc)
                 {
-                    //unit.UpdateUITime = curTime;
-                    //NpcHeadBarComponent npcHeadBarComponent = unit.GetComponent<NpcHeadBarComponent>();
-                    //npcHeadBarComponent?.OnUpdateNpcTalk(self);
+                    unit.UpdateUITime = curTime;
+                    UINpcHpComponent npcHeadBarComponent = unit.GetComponent<UINpcHpComponent>();
+                    npcHeadBarComponent?.OnUpdateNpcTalk(self);
                     continue;
                 }
 
                 if (unit.Type == UnitType.Pasture)
                 {
-                    //unit.UpdateUITime = curTime;
-                    //JiaYuanPastureUIComponent npcHeadBarComponent = unit.GetComponent<JiaYuanPastureUIComponent>();
-                    //npcHeadBarComponent?.OnUpdateNpcTalk(self);
+                    unit.UpdateUITime = curTime;
+                    UIJiaYuanPastureComponent npcHeadBarComponent = unit.GetComponent<UIJiaYuanPastureComponent>();
+                    // npcHeadBarComponent?.OnUpdateNpcTalk(self);
                     continue;
                 }
 
                 if (unit.Type == UnitType.Chuansong)
                 {
-                    //unit.UpdateUITime = curTime;
-                    //unit.GetComponent<TransferUIComponent>()?.OnCheckChuanSong(self);
+                    unit.UpdateUITime = curTime;
+                    // unit.GetComponent<TransferUIComponent>()?.OnCheckChuanSong(self);
                     continue;
                 }
             }
