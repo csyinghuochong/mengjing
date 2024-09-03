@@ -8,8 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 10001 Splatmap
-  m_Shader: {fileID: 4800000, guid: e96f2ed4879dc5d48b327216506f6078, type: 3}
-  m_ValidKeywords:
+  m_Shader: {fileID: 4800000, guid: dcad05f175c6f5b4bb8c35842aa5a96b, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _T2M_LAYER_0_MASK
   - _T2M_LAYER_0_NORMAL
   - _T2M_LAYER_1_MASK
@@ -17,7 +18,6 @@ Material:
   - _T2M_LAYER_2_MASK
   - _T2M_LAYER_2_NORMAL
   - _T2M_LAYER_COUNT_4
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -33,6 +33,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: cd42596b375305345aad2b079e80d2a6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _T2M_DiffuseMaps2DArray:
@@ -260,6 +264,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _T2M_SplatMaps2DArray:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
