@@ -103,7 +103,7 @@ namespace ET.Client
                 self.CurrentAnimation = name;
                 self.Animancer.Playable.Speed = speed;
 
-                self.Animancer.Play(self.ClipTransitions[name]);
+                self.Animancer.Play(self.ClipTransitions[name], 0.25f, FadeMode.FromStart);
                 using (zstring.Block())
                 {
                     Log.Debug(zstring.Format("播放动画 {0}", name));
