@@ -40,41 +40,42 @@ namespace ET.Server
             }
             
             float buffHurtValueAdd = 0f;
-            ///Buff层数触发技能  buffid 1 技能ID 触发间隔
+            // Buff层数触发技能  buffid 1 技能ID 触发间隔
             if (SkillConfigCategory.Instance.BuffTriggerSkill.ContainsKey(skillconfig.Id))
             {
                 KeyValuePairLong keyValuePairLong = SkillConfigCategory.Instance.BuffTriggerSkill[skillconfig.Id];
                 List<EntityRef<Unit>> allDefend = attackUnit.GetParent<UnitComponent>().GetAll();
                 for ( int defend = 0; defend < allDefend.Count; defend++  )
                 {
-                    // BuffManagerComponent buffManagerComponent = allDefend[defend].GetComponent<BuffManagerComponent>();
-                    // if (buffManagerComponent == null)
-                    // {
-                    //     continue;
-                    // }
-                    // int buffNum = buffManagerComponent.GetBuffSourceNumber(attackUnit.Id, (int)keyValuePairLong.KeyId);
-                    // if (buffNum <= 0)
-                    // {
-                    //     continue;
-                    // }
-                    // allDefend[defend].GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
-                    // attackUnit.GetComponent<SkillManagerComponent>().TriggerBuffSkill(keyValuePairLong, allDefend[defend].Id, buffNum).Coroutine();
+                    Unit dUnit = allDefend[defend];
+                    BuffManagerComponentS buffManagerComponent = dUnit.GetComponent<BuffManagerComponentS>();
+                    if (buffManagerComponent == null)
+                    {
+                        continue;
+                    }
+                    int buffNum = buffManagerComponent.GetBuffSourceNumber(attackUnit.Id, (int)keyValuePairLong.KeyId);
+                    if (buffNum <= 0)
+                    {
+                        continue;
+                    }
+                    dUnit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
+                    attackUnit.GetComponent<SkillManagerComponentS>().TriggerBuffSkill(keyValuePairLong, dUnit.Id, buffNum).Coroutine();
                 }
             }
 
-            ///Buff层数叠加伤害  buffid 2 层数  附加伤害系数
+            // Buff层数叠加伤害  buffid 2 层数  附加伤害系数
             if (SkillConfigCategory.Instance.BuffAddHurt.ContainsKey(skillconfig.Id))
             {
                 KeyValuePairLong keyValuePairLong = SkillConfigCategory.Instance.BuffAddHurt[skillconfig.Id];
                 int buffId = (int)keyValuePairLong.KeyId;
-                // int buffNum = defendUnit.GetComponent<BuffManagerComponent>().GetBuffSourceNumber(0, buffId);
-                // if(buffNum > 0)
-                // {
-                //     defendUnit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
-                //     buffHurtValueAdd = keyValuePairLong.Value2 * 0.001f * buffNum;
-                //
-                //     singingvalue += buffHurtValueAdd;
-                // }
+                int buffNum = defendUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, buffId);
+                if(buffNum > 0)
+                {
+                    defendUnit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
+                    buffHurtValueAdd = keyValuePairLong.Value2 * 0.001f * buffNum;
+                
+                    singingvalue += buffHurtValueAdd;
+                }
                 singingvalue += buffHurtValueAdd;
             }
 
@@ -101,31 +102,38 @@ namespace ET.Server
             }
             //无敌buff，不受伤害
           
-            // if (defendUnit.GetComponent<StateComponent>().StateTypeGet(StateTypeEnum.WuDi))
-            // {
-            //     return false;
-            // }
-            // // 悬空buff，不受伤害
-            // if (defendUnit.GetComponent<StateComponent>().StateTypeGet(StateTypeEnum.Hung))
-            // {
-            //     return false;
-            // }
-            // //对怪无敌
-            // if (defendUnit.GetComponent<StateComponent>().StateTypeGet(StateTypeEnum.WuDiMonster) && playerPKStatus == false)
-            // {
-            //     return false;
-            // }
-            //
-            // if (attackUnit.GetComponent<StateComponent>().StateTypeGet(StateTypeEnum.MiaoSha))
-            // {
-            //     long hp = defendUnit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Hp) + 1;
-            //     defendUnit.GetComponent<NumericComponent>().ApplyChange(attackUnit, NumericType.Now_Hp, hp * -1, skillconfig.Id);
-            //     return true;
-            // }
+            if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.WuDi))
+            {
+                return false;
+            }
+            // 悬空buff，不受伤害
+            if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Hung))
+            {
+                return false;
+            }
+            //对怪无敌
+            if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.WuDiMonster) && playerPKStatus == false)
+            {
+                return false;
+            }
+            
+            //99002002 角斗场免伤状态
+            int sceneType = defendUnit.Scene().GetComponent<MapComponent>().SceneType;
+            if (sceneType == SceneTypeEnum.Arena && attackUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, 99002002) > 0)
+            {
+                return false;
+            }
+            
+            if (attackUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.MiaoSha))
+            {
+                long hp = defendUnit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Hp) + 1;
+                defendUnit.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, hp * -1, skillId: skillconfig.Id, attackid: attackUnit.Id);
+                return true;
+            }
 
             int DamgeType = 0;      //伤害类型
-            //defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.BeHurt_3, attackUnit.Id);
-            //defendUnit.GetComponent<BuffManagerComponent>()?.BuffRemoveType(2);
+            defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.BeHurt_3, attackUnit.Id);
+            defendUnit.GetComponent<BuffManagerComponentS>()?.BuffRemoveType(2);
             
             //获取攻击方属性
             NumericComponentS numericComponentAttack = attackUnit.GetComponent<NumericComponentS>();
@@ -248,18 +256,21 @@ namespace ET.Server
             bool ifMonsterBoss_Act = false;
             bool ifMonsterBoss_Def = false;
 
-            int sceneType = 0;// defendUnit.Root().GetComponent<MapComponent>().SceneTypeEnum;
-
             //当前是否在宠物副本
             bool petfuben = sceneType == SceneTypeEnum.PetDungeon || sceneType == SceneTypeEnum.PetTianTi;
-
+            if (sceneType == SceneTypeEnum.RunRace)
+            {
+                Log.Warning($"变身大赛触发技能伤害： sceneType == SceneTypeEnum.RunRace  {skillconfig.Id}");
+                return false;
+            }
+            
             //计算是否闪避
             int defendUnitLv = 0;
             switch (defendUnit.Type)
             {
                 //怪物
                 case UnitType.Monster:
-                    //defendUnit.GetComponent<AIComponent>()?.BeAttacking(attackUnit);
+                    defendUnit.GetComponent<AIComponent>()?.BeAttacking(attackUnit);
                     MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(defendUnit.ConfigId);
                     defendUnitLv = monsterCof.Lv;
                     if (monsterCof.MonsterType == (int)MonsterTypeEnum.Boss)
@@ -269,7 +280,7 @@ namespace ET.Server
                     break;
                 //宠物
                 case UnitType.Pet:
-                    //defendUnit.GetComponent<AIComponent>()?.BeAttacking(attackUnit);
+                    defendUnit.GetComponent<AIComponent>()?.BeAttacking(attackUnit);
                     PetConfig petCof = PetConfigCategory.Instance.Get(defendUnit.ConfigId);
                     defendUnitLv = petCof.PetLv;
                     defend_def += numericComponentDefend.GetAsLong(NumericType.Now_PetAllDef);
@@ -282,10 +293,10 @@ namespace ET.Server
                 case UnitType.Player:
                     defendUnitLv = defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
                     //受击增加怒气值
-                    // if (defendUnit.GetComponent<SkillSetComponent>().IfJuexXingSkill())
-                    // {
-                    //     numericComponentDefend.ApplyChange(null, NumericType.JueXingAnger, 1, 0);
-                    // }
+                    if (defendUnit.GetComponent<SkillSetComponentS>().IfJuexXingSkill())
+                    {
+                        numericComponentDefend.ApplyChange(NumericType.JueXingAnger, 1);
+                    }
                     break;
             }
 
@@ -323,10 +334,10 @@ namespace ET.Server
                     attackUnitLv = attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
                    
                     //攻击者增加怒气值
-                    // if (attackUnit.GetComponent<SkillSetComponent>().IfJuexXingSkill())
-                    // {
-                    //     numericComponentAttack.ApplyChange(null, NumericType.JueXingAnger, 10, 0);
-                    // }
+                    if (attackUnit.GetComponent<SkillSetComponentS>().IfJuexXingSkill())
+                    {
+                        numericComponentAttack.ApplyChange(NumericType.JueXingAnger, 10);
+                    }
                     break;
             }
             
@@ -342,13 +353,13 @@ namespace ET.Server
 
             //等级差命中
             float HitLvPro = (attackUnitLv - defendUnitLv) * 0.03f;
-            if (HitLvPro <= 0)
+            if (HitLvPro <= -0.1f)
             {
-                HitLvPro = 0;
+                HitLvPro = -0.1f;
             }
-            if (HitLvPro >= 0.1f)
+            if (HitLvPro >= 0.2f)
             {
-                HitLvPro = 0.1f;
+                HitLvPro = 0.2f;
             }
 
             //等级差闪避
@@ -362,8 +373,10 @@ namespace ET.Server
                 DodgeLvPro = 0.1f;
             }
 
+            //初始化命中
             float initHitPro = 0.9f;
             float dodgeSum = addDodgePro + DodgeLvPro + defendPet_dodge;
+            float hitAdd = HitLvPro + addHitPro + attackPet_hit - dodgeSum;     //附加部分的命中属性
             float HitPro = initHitPro + HitLvPro + addHitPro + attackPet_hit - dodgeSum;
 
             //pk命中
@@ -373,84 +386,98 @@ namespace ET.Server
             }
 
             //最低命中
-            if (HitPro <= 0.5f)
+            if (HitPro <= 0.6f)
             {
-                HitPro = 0.5f;
+                HitPro = 0.6f;
+            }
+            
+            //根据双方战力增加命中
+            if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Player)
+            {
+                HitPro += GetFightValueActProValue(attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat, defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat) * 0.66f;
             }
 
             //百发百中(只有玩家对怪物有效)
             if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Monster && skillconfig.SkillActType == 0)
             {
-                // if (attackUnit.GetComponent<SkillSetComponent>().GetBySkillID(68000009) != null)
-                // {
-                //     HitPro = 1;
-                // }
+                if (attackUnit.GetComponent<SkillSetComponentS>().GetBySkillID(68000009) != null)
+                {
+                    HitPro = 1;
+                }
             }
 
             //闪避概率
             bool ifHit = true;
-            if (RandomHelper.RandFloat() >= HitPro)
+
+            if (skillconfig.IfMustAct != 1)
             {
-                ifHit = false;
-            }
 
-            //技能闪避
-            if (skillconfig.SkillActType == 1)
-            {
-                float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_SkillDodgePro);
-
-                //玩家闪避最多不超过60%
-                if (defendUnit.Type == UnitType.Player)
-                {
-                    if (dodgeNowValue >= 0.5)
-                    {
-                        dodgeNowValue = 0.5f;
-                    }
-                }
-
-                if (RandomHelper.RandFloat() <= dodgeNowValue)
+                if (RandomHelper.RandFloat() >= HitPro)
                 {
                     ifHit = false;
                 }
-            }
 
-            //物理闪避
-            if (skillconfig.DamgeType == 1)
-            {
-                float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_ActDodgePro);
-
-                //玩家闪避最多不超过60%
-                if (defendUnit.Type == UnitType.Player)
+                //技能闪避
+                if (skillconfig.SkillActType == 1)
                 {
-                    if (dodgeNowValue >= 0.5)
+                    float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_SkillDodgePro);
+
+                    //玩家命中的20%抵消对应闪避
+                    dodgeNowValue = dodgeNowValue - hitAdd * 0.2f;
+
+                    //玩家闪避最多不超过60%
+                    if (defendUnit.Type == UnitType.Player)
                     {
-                        dodgeNowValue = 0.5f;
+                        if (dodgeNowValue >= 0.5)
+                        {
+                            dodgeNowValue = 0.5f;
+                        }
+                    }
+
+                    if (RandomHelper.RandFloat() <= dodgeNowValue)
+                    {
+                        ifHit = false;
                     }
                 }
 
-                if (RandomHelper.RandFloat() <= dodgeNowValue)
+                //物理闪避
+                if (skillconfig.DamgeType == 1)
                 {
-                    ifHit = false;
-                }
-            }
+                    float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_ActDodgePro);
 
-            //魔法闪避
-            if (skillconfig.DamgeType == 2)
-            {
-                float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_MageDodgePro);
-
-                //玩家闪避最多不超过60%
-                if (defendUnit.Type == UnitType.Player)
-                {
-                    if (dodgeNowValue >= 0.5)
+                    //玩家闪避最多不超过60%
+                    if (defendUnit.Type == UnitType.Player)
                     {
-                        dodgeNowValue = 0.5f;
+                        if (dodgeNowValue >= 0.5)
+                        {
+                            dodgeNowValue = 0.5f;
+                        }
+                    }
+
+                    if (RandomHelper.RandFloat() <= dodgeNowValue)
+                    {
+                        ifHit = false;
                     }
                 }
 
-                if (RandomHelper.RandFloat() <= dodgeNowValue)
+                //魔法闪避
+                if (skillconfig.DamgeType == 2)
                 {
-                    ifHit = false;
+                    float dodgeNowValue = numericComponentDefend.GetAsFloat(NumericType.Now_MageDodgePro);
+
+                    //玩家闪避最多不超过60%
+                    if (defendUnit.Type == UnitType.Player)
+                    {
+                        if (dodgeNowValue >= 0.5)
+                        {
+                            dodgeNowValue = 0.5f;
+                        }
+                    }
+
+                    if (RandomHelper.RandFloat() <= dodgeNowValue)
+                    {
+                        ifHit = false;
+                    }
                 }
             }
 
@@ -544,19 +571,18 @@ namespace ET.Server
                     actValue = (int)(actValue * (1 + GetFightValueActProValue(attackPingfen, defPingfen)));
 
                     //判断对方是否有神佑技能
-                    // bool haveshenyou = defendUnit.GetComponent<AIComponent>().HaveSkillId(80001014) || defendUnit.GetComponent<SkillPassiveComponent>().HaveSkillId(80002014);
-                    // if (haveshenyou) {
-                    //     //低级破咒
-                    //     if (attackUnit.GetComponent<AIComponent>().HaveSkillId(80001015)) {
-                    //         actValue = (long)((float)actValue * 1.1f);
-                    //     }
-                    //     else if (attackUnit.GetComponent<SkillPassiveComponent>().HaveSkillId(80002015))
-                    //     {
-                    //         //高级破咒
-                    //         actValue = (long)((float)actValue * 1.2f);
-                    //     }
-                    // }
-                   
+                    bool haveshenyou = defendUnit.GetComponent<AIComponent>().HaveSkillId(80001014) || defendUnit.GetComponent<SkillPassiveComponent>().HaveSkillId(80002014);
+                    if (haveshenyou) {
+                        //低级破咒
+                        if (attackUnit.GetComponent<AIComponent>().HaveSkillId(80001015)) {
+                            actValue = (long)((float)actValue * 1.1f);
+                        }
+                        else if (attackUnit.GetComponent<SkillPassiveComponent>().HaveSkillId(80002015))
+                        {
+                            //高级破咒
+                            actValue = (long)((float)actValue * 1.2f);
+                        }
+                    }
                 }
 
                 //计算战斗公式
@@ -632,10 +658,10 @@ namespace ET.Server
 
                     }
 
-                    // if (attackUnit.MasterIsPlayer())
-                    // {
-                    //     damge = (int)((float)damge * 0.4f);
-                    // }
+                    if (attackUnit.MasterIsPlayer())
+                    {
+                        damge = (int)((float)damge * 0.4f);
+                    }
                 }
 
               
@@ -956,7 +982,7 @@ namespace ET.Server
                 //真实伤害
                 damge += numericComponentAttack.GetAsLong(NumericType.Now_ZhenShi);
 
-                //damge += (long)skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageValue);
+                damge += (long)skillHandlerS.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageValue);
 
                 //二次限定
                 if (damge < 1)

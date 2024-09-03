@@ -98,7 +98,21 @@ namespace ET.Server
             long teamid_2 = other.GetTeamId();
             return teamid_1 == teamid_2 && teamid_1 != 0;
         }
-
+        
+        public static bool MasterIsPlayer(this Unit self)
+        {
+            if (self.MasterId == 0)
+            {
+                return false;
+            }
+            Unit master = self.GetParent<UnitComponent>().Get(self.MasterId);
+            if (master == null)
+            {
+                return false;
+            }
+            return master.Type == UnitType.Player;
+        }
+        
         public static long GetTeamId(this Unit self)
         {
             return self.GetComponent<NumericComponentS>().GetAsInt(NumericType.TeamId);
