@@ -30,7 +30,7 @@ namespace ET.Client
 
         public static async ETTask OnLoginSucess(Scene scene, LoginFinish args)
         {
-            FlyTipComponent.Instance.ShowFlyTip("登录成功!");
+            // FlyTipComponent.Instance.ShowFlyTip("登录成功!");
             var path = ABPathHelper.GetScenePath("CreateRole");
             await scene.GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
