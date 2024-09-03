@@ -985,7 +985,12 @@ namespace ET.Server
                     {
                         CriPro -= numericComponentDefend.GetAsFloat(NumericType.Now_PlayerCriSubPro);
                     }
-
+                    
+                    //根据双方战力调整暴击系数
+                    if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Player)
+                    {
+                        CriPro += GetFightValueCriAndHitProValue(attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat, defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat);
+                    }
 
                     if (CriPro <= 0f)
                     {
@@ -993,11 +998,18 @@ namespace ET.Server
                     }
 
                     //判断当前是否时暴击状态
-                    // if (attackUnit.GetComponent<StateComponent>().StateTypeGet(StateTypeEnum.CriStatus) == true)
-                    // {
-                    //     CriPro = 1;
-                    //     attackUnit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.CriStatus);
-                    // }
+                    if (attackUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.CriStatus) == true)
+                    {
+                        CriPro = 1;
+
+                        BuffManagerComponentS buffManagerComponent = attackUnit.GetComponent<BuffManagerComponentS>();
+
+                        if (buffManagerComponent.GetCritBuffNumber() <= 1)
+                        {
+                            attackUnit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.CriStatus);
+                        }
+                        buffManagerComponent.RemoveFirstCritBuff();
+                    }
 
                     //暴击概率..
                     if (RandomHelper.RandFloat() <= CriPro)
@@ -1008,6 +1020,12 @@ namespace ET.Server
                         
                         //闪避触发被动技能
                         attackUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Critical_4, defendUnit.Id);
+                        
+                        // 普通攻击暴击触发19
+                        if (skillconfig.SkillActType == 0)
+                        {
+                            attackUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.AckCritical_19, defendUnit.Id);
+                        }
                     }
                     
                     //是否触发秒杀
@@ -1113,6 +1131,32 @@ namespace ET.Server
                 defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.ShanBi_5, attackUnit.Id);
             }
             return ifHit;
+        }
+
+        /// <summary>
+        /// 根据双方战力比调整攻击系数，攻击者打弱势有额外的命中和攻击
+        /// </summary>
+        /// <param name="actFightValue"></param>
+        /// <param name="defFightValue"></param>
+        /// <returns></returns>
+        private static float GetFightValueCriAndHitProValue(int actFightValue, int defFightValue)
+        {
+
+            float addPro = (actFightValue / defFightValue) - 1;
+
+            //范围限制
+            if (addPro < 0)
+            {
+                addPro = 0;
+            }
+
+            //addPro = addPro + 0.05f;
+            if (addPro > 0.2f)
+            {
+                addPro = 0.2f;
+            }
+
+            return addPro;
         }
 
         //暴击等级等属性转换成实际暴击率的方法

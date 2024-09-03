@@ -856,5 +856,39 @@ namespace ET.Server
             return Buffs;
         }
 
+        public static int GetCritBuffNumber(this BuffManagerComponentS self)
+        {
+            int buffnumber = 0;
+            int bufflist = self.m_Buffs.Count;
+
+            for (int i = bufflist - 1; i >= 0; i--)
+            {
+                int buffId = self.m_Buffs[i].BuffData.BuffId;
+                SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffId);
+                if (skillBuffConfig.BuffType == 2 && skillBuffConfig.buffParameterType == 13)
+                {
+                    buffnumber++;
+                }
+            }
+
+            return buffnumber;
+        }
+
+        public static void RemoveFirstCritBuff(this BuffManagerComponentS self)
+        {
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = 0; i < buffcnt; i++)
+            {
+                int buffId = self.m_Buffs[i].BuffData.BuffId;
+                SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffId);
+                if (skillBuffConfig.BuffType == 2 && skillBuffConfig.buffParameterType == 13)
+                {
+                    self.OnRemoveBuffItem(self.m_Buffs[i]);
+                    self.m_Buffs.RemoveAt(i);
+
+                    break;
+                }
+            }
+        }
     }
 }
