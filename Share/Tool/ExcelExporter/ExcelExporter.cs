@@ -542,45 +542,162 @@ namespace ET
                         fieldN = "_id";
                     }
 
-                    sb.Append($",\"{fieldN}\":{Convert(headInfo.FieldType, worksheet.Cells[row, col].Text.Trim())}");
+                    sb.Append($",\"{fieldN}\":{Convert(headInfo.FieldType, worksheet.Cells[row, col].Text.Trim(), name, row, col)}");
                 }
 
                 sb.Append("}],\n");
             }
         }
 
-        private static string Convert(string type, string value)
+        private static string Convert(string type, string value, string name, int row, int col)
         {
+            string cStr = string.Empty;
+            int c = col;
+            while (c > 0)
+            {
+                c--;
+                int remainder = c % 26;
+                cStr = (char)(remainder + 'A') + cStr;
+                c /= 26;
+            }
+
+            string hint = $"------------!!!!!!!!!!!!!!! {name} have an error in row:{row} col:{col} ({cStr}) !!!!!!!!!!!!!!!------------";
             switch (type)
             {
-                case "uint[]":
                 case "int[]":
-                case "int32[]":
-                case "long[]":
-                case "double[]":
+                {
                     value = value.Replace("{", "").Replace("}", "");
+                    if (value != "")
+                    {
+                        foreach (string s in value.Split(','))
+                        {
+                            if (!int.TryParse(s, out int result))
+                            {
+                                throw new Exception(hint);
+                            }
+                        }
+                    }
+
                     return $"[{value}]";
+                }
+                case "long[]":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value != "")
+                    {
+                        foreach (string s in value.Split(','))
+                        {
+                            if (!long.TryParse(s, out long result))
+                            {
+                                throw new Exception(hint);
+                            }
+                        }
+                    }
+
+                    return $"[{value}]";
+                }
+                case "float[]":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value != "")
+                    {
+                        foreach (string s in value.Split(','))
+                        {
+                            if (!float.TryParse(s, out float result))
+                            {
+                                throw new Exception(hint);
+                            }
+                        }
+                    }
+
+                    return $"[{value}]";
+                }
+                case "double[]":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value != "")
+                    {
+                        foreach (string s in value.Split(','))
+                        {
+                            if (!double.TryParse(s, out double result))
+                            {
+                                throw new Exception(hint);
+                            }
+                        }
+                    }
+
+                    return $"[{value}]";
+                }
                 case "string[]":
-                case "int[][]":
+                {
                     return $"[{value}]";
+                }
                 case "int":
-                case "uint":
-                case "int32":
-                case "int64":
-                case "long":
-                case "float":
-                case "double":
+                {
                     value = value.Replace("{", "").Replace("}", "");
                     if (value == "")
                     {
                         return "0";
                     }
+
+                    if (!int.TryParse(value, out int result))
+                    {
+                        throw new Exception(hint);
+                    }
+
                     return value;
+                }
+                case "long":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value == "")
+                    {
+                        return "0";
+                    }
+
+                    if (!long.TryParse(value, out long result))
+                    {
+                        throw new Exception(hint);
+                    }
+
+                    return value;
+                }
+                case "float":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value == "")
+                    {
+                        return "0";
+                    }
+
+                    if (!float.TryParse(value, out float result))
+                    {
+                        throw new Exception(hint);
+                    }
+
+                    return value;
+                }
+                case "double":
+                {
+                    value = value.Replace("{", "").Replace("}", "");
+                    if (value == "")
+                    {
+                        return "0";
+                    }
+
+                    if (!double.TryParse(value, out double result))
+                    {
+                        throw new Exception(hint);
+                    }
+
+                    return value;
+                }
                 case "string":
                     if (value.Contains("{") && value.Contains("}"))
                     {
                         Log.Console($"value: {value}");
                     }
+
                     value = value.Replace("\\", "\\\\");
                     value = value.Replace("\"", "\\\"");
                     return $"\"{value}\"";
