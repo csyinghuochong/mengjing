@@ -404,6 +404,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgDungeonHappyMainSystem.<OnButtonMove>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgDungeonLevelSystem.<OnButtonCloseButton>d__4>
 	// ET.StateMachineWrap<ET.Client.DlgDungeonLevelSystem.<UpdateLevelList>d__7>
+	// ET.StateMachineWrap<ET.Client.DlgDungeonMapLevelSystem.<OnEnterMapButtonClick>d__7>
+	// ET.StateMachineWrap<ET.Client.DlgDungeonMapSystem.<ShowLevel>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgDungeonMapTransferSystem.<UpdateBossRefreshTimeList>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgDungeonSystem.<UpdateBossRefreshTimeList>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>
@@ -929,6 +931,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.M2C_TeamInviteHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_TeamPickMessageHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_TeamUpdateHandler.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.M2C_TurtleRewardHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_UnionApplyHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_UnionInviteHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_UnitBuffRemoveHandler.<Run>d__0>
@@ -1175,7 +1178,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>
 	// ET.StateMachineWrap<ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>
 	// ET.StateMachineWrap<ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>
-	// ET.StateMachineWrap<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__5>
+	// ET.StateMachineWrap<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>
 	// ET.StateMachineWrap<ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>
 	// ET.StateMachineWrap<ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2>
 	// ET.StateMachineWrap<ET.Client.UIShouJiChapterComponentSystem.<BeginDrag>d__1>
@@ -2254,6 +2257,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_TeamInviteHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_TeamInviteHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_TeamPickMessageHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_TeamPickMessageHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_TeamUpdateHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_TeamUpdateHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_TurtleRewardHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_TurtleRewardHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_UnionApplyHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_UnionApplyHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_UnionInviteHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_UnionInviteHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_UnitBuffRemoveHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_UnitBuffRemoveHandler.<Run>d__0&)
@@ -2347,6 +2351,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonHappyMainSystem.<OnButtonMove>d__6>(object&,ET.Client.DlgDungeonHappyMainSystem.<OnButtonMove>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonLevelSystem.<OnButtonCloseButton>d__4>(object&,ET.Client.DlgDungeonLevelSystem.<OnButtonCloseButton>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonLevelSystem.<UpdateLevelList>d__7>(object&,ET.Client.DlgDungeonLevelSystem.<UpdateLevelList>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonMapLevelSystem.<OnEnterMapButtonClick>d__7>(object&,ET.Client.DlgDungeonMapLevelSystem.<OnEnterMapButtonClick>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonMapSystem.<ShowLevel>d__6>(object&,ET.Client.DlgDungeonMapSystem.<ShowLevel>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonMapTransferSystem.<UpdateBossRefreshTimeList>d__6>(object&,ET.Client.DlgDungeonMapTransferSystem.<UpdateBossRefreshTimeList>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonSystem.<UpdateBossRefreshTimeList>d__6>(object&,ET.Client.DlgDungeonSystem.<UpdateBossRefreshTimeList>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>(object&,ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4&)
@@ -2867,7 +2873,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>(object&,ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>(object&,ET.Client.UIDropComponentSystem.<AutoPickItem>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>(object&,ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__5>(object&,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>(object&,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2>(object&,ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIShouJiChapterComponentSystem.<BeginDrag>d__1>(object&,ET.Client.UIShouJiChapterComponentSystem.<BeginDrag>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIShouJiChapterComponentSystem.<OnInitUI>d__5>(object&,ET.Client.UIShouJiChapterComponentSystem.<OnInitUI>d__5&)
@@ -3287,6 +3293,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonHappyMainSystem.<OnButtonMove>d__6>(ET.Client.DlgDungeonHappyMainSystem.<OnButtonMove>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonLevelSystem.<OnButtonCloseButton>d__4>(ET.Client.DlgDungeonLevelSystem.<OnButtonCloseButton>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonLevelSystem.<UpdateLevelList>d__7>(ET.Client.DlgDungeonLevelSystem.<UpdateLevelList>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonMapLevelSystem.<OnEnterMapButtonClick>d__7>(ET.Client.DlgDungeonMapLevelSystem.<OnEnterMapButtonClick>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonMapSystem.<ShowLevel>d__6>(ET.Client.DlgDungeonMapSystem.<ShowLevel>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonMapTransferSystem.<UpdateBossRefreshTimeList>d__6>(ET.Client.DlgDungeonMapTransferSystem.<UpdateBossRefreshTimeList>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonSystem.<UpdateBossRefreshTimeList>d__6>(ET.Client.DlgDungeonSystem.<UpdateBossRefreshTimeList>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>(ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4&)
@@ -3766,6 +3774,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_TeamInviteHandler.<Run>d__0>(ET.Client.M2C_TeamInviteHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_TeamPickMessageHandler.<Run>d__0>(ET.Client.M2C_TeamPickMessageHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_TeamUpdateHandler.<Run>d__0>(ET.Client.M2C_TeamUpdateHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_TurtleRewardHandler.<Run>d__0>(ET.Client.M2C_TurtleRewardHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_UnionApplyHandler.<Run>d__0>(ET.Client.M2C_UnionApplyHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_UnionInviteHandler.<Run>d__0>(ET.Client.M2C_UnionInviteHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_UnitBuffRemoveHandler.<Run>d__0>(ET.Client.M2C_UnitBuffRemoveHandler.<Run>d__0&)
@@ -3918,7 +3927,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>(ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>(ET.Client.UIDropComponentSystem.<AutoPickItem>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>(ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__5>(ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>(ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>(ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2>(ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIShouJiChapterComponentSystem.<BeginDrag>d__1>(ET.Client.UIShouJiChapterComponentSystem.<BeginDrag>d__1&)

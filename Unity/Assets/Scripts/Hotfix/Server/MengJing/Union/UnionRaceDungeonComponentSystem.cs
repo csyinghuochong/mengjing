@@ -38,9 +38,8 @@ namespace ET.Server
 
         public static async ETTask OnUnionRaceBegin(this UnionRaceDungeonComponent self)
         {
-            self.OnCheckWinUnion().Coroutine();
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(0, 1000));
-
+            self.OnCheckWinUnion().Coroutine();
             ///////
             //long chatServerId = DBHelper.GetChatServerId(self.DomainZone());
             //A2A_ServerMessageRResponse g_SendChatRequest = (A2A_ServerMessageRResponse)await ActorMessageSenderComponent.Instance.Call

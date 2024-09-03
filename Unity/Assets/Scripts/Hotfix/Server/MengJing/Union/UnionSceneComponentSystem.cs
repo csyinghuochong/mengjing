@@ -67,6 +67,7 @@ namespace ET.Server
             }
 
             self.DBUnionManager = dBServerInfo;
+            self.SaveDB();
         }
 
         public static async ETTask<DBUnionInfo> GetDBUnionInfo(this UnionSceneComponent self, long unionId)
