@@ -78,5 +78,10 @@ namespace ET
         public quaternion From;
 
         public quaternion To;
+        
+        //0 摇杆移动 1点击移动
+        public bool MoveWait;
+        public bool YaoganMove;
+        public float3 TargetPosition;
     }
 }

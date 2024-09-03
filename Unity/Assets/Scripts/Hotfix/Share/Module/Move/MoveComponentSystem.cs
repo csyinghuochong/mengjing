@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ET.Client;
 using Unity.Mathematics;
 
 namespace ET
@@ -293,6 +294,42 @@ namespace ET
                 self.tcs = null;
                 tcs.SetResult(ret);
             }
+        }
+        
+        /// 0:中断
+        /// 1:不中断
+        public static async ETTask SkillStop(this MoveComponent self, Unit unit, SkillConfig skillConfig)
+        {
+            self.MoveWait = false;
+            int targetCount = self.Targets.Count;
+            if (self.IsArrived() || targetCount == 0)
+            {
+                return;
+            }
+            if (!unit.MainHero || self.YaoganMove)
+            {
+                return;
+            }
+            if (math.distance(unit.Position, self.Targets[targetCount - 1]) < 2f)
+            {
+                return;
+            }
+            if (skillConfig.IfStopMove == 0)
+            {
+                HintHelp.ShowHint(self.Root(),skillConfig.SkillName + "释放打断寻路状态");
+                return;
+            }
+
+            self.MoveWait = true;
+            self.TargetPosition = self.Targets[targetCount - 1];
+            unit.GetComponent<StateComponentC>().SetNetWaitEndTime(0);
+            unit.GetComponent<StateComponentC>().SetRigidityEndTime(0);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync((long)(skillConfig.SkillRigidity * 1000));
+            if (unit.IsDisposed || !self.MoveWait)
+            {
+                return;
+            }
+            MoveHelper.MoveToAsync(unit, self.TargetPosition).Coroutine();
         }
     }
 }
