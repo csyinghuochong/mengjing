@@ -695,7 +695,7 @@ namespace ET
                 case "string":
                     if (value.Contains("{") && value.Contains("}"))
                     {
-                        Log.Console($"value: {value}");
+                        // Log.Console($"value: {value}");
                     }
 
                     value = value.Replace("\\", "\\\\");
