@@ -72,8 +72,19 @@ namespace ET.Client
                 //设置字体
                 ObjFlyText = rc.Get<GameObject>("FlyText_Add");
             }
+            
+            //恢复暴击/重击
+            if (unit.MainHero == false && type == 1 || type == 3)
+            {
+                //设置字体
+                ObjFlyText = rc.Get<GameObject>("FlyText_Special");
+            }
 
             string addStr = "";
+            
+            //初始化,因为是对象池所有之前可能有不同大小的缓存
+            ObjFlyText.GetComponent<Text>().transform.localScale = Vector3.one;
+            
             if (targetValue >= 0 && type == 2)
             {
                 addStr = "+";
@@ -83,28 +94,30 @@ namespace ET.Client
             {
                 //addStr = "AJ";  //暴击
                 addStr = "暴击"; //暴击
+                ObjFlyText.GetComponent<Text>().transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
             }
 
             if (type != 2 && type != 11 && type != 12 && targetValue == 0)
             {
                 //addStr = "SB";  //闪避
                 addStr = "闪避"; //闪避
+                ObjFlyText.GetComponent<Text>().text = addStr;
             }
             else if (type == 11)
             {
                 addStr = "抵抗";
+                ObjFlyText.GetComponent<Text>().text = addStr;
             }
             else if (type == 12)
             {
                 addStr = "免疫";
-
+                ObjFlyText.GetComponent<Text>().text = addStr;
             }
             else
             {
-                addStr = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
+                ObjFlyText.GetComponent<Text>().text = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
             }
             ObjFlyText.SetActive(true);
-            ObjFlyText.GetComponent<Text>().text = addStr;
             self.ObjFlyText = ObjFlyText;
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             ObjFlyText.transform.localPosition = Vector3.zero;
