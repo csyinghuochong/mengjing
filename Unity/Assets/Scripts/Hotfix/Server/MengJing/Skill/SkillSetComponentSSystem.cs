@@ -22,32 +22,22 @@ namespace ET.Server
                 {
                     if (i == 0)
                     {
-                        SkillPro SkillPro = SkillPro.Create();
-                        SkillPro.SkillID = SkillList[i];
-                        SkillPro.SkillPosition = 1;
-                        SkillPro.SkillSetType = (int)SkillSetEnum.Skill;
+                        SkillPro SkillPro = self.InitSkillPro(SkillList[i], 1,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
                         self.SkillList.Add(  SkillPro  );
                     }
                     else
                     {
-                        SkillPro SkillPro = SkillPro.Create();
-                        SkillPro.SkillID = SkillList[i];
+                        SkillPro SkillPro = self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
                         self.SkillList.Add(SkillPro);
                     }
                 }
 
                 string initItem = GlobalValueConfigCategory.Instance.Get(9).Value;
                 string[] needList = initItem.Split('@');
-                SkillPro SkillPro_1 = SkillPro.Create();
-                SkillPro_1.SkillID = int.Parse(needList[0].Split(';')[0]);
-                SkillPro_1.SkillPosition = 9;
-                SkillPro_1.SkillSetType = (int)SkillSetEnum.Item;
+                SkillPro SkillPro_1 = self.InitSkillPro(int.Parse(needList[0].Split(';')[0]), 9, SkillSetEnum.Item, SkillSourceEnum.Skill);
                 self.SkillList.Add(SkillPro_1);
 
-                SkillPro SkillPro_2 = SkillPro.Create();
-                SkillPro_2.SkillID = int.Parse(needList[1].Split(';')[0]);
-                SkillPro_2.SkillPosition = 10;
-                SkillPro_2.SkillSetType = (int)SkillSetEnum.Item;
+                SkillPro SkillPro_2 = self.InitSkillPro(int.Parse(needList[1].Split(';')[0]), 10, SkillSetEnum.Item, SkillSourceEnum.Skill);
                 self.SkillList.Add(SkillPro_2);
             }
 
@@ -58,6 +48,7 @@ namespace ET.Server
                 self.OnChangeOccTwoRequest(robotConfig.OccTwo);
             }
         }
+        
         [EntitySystem]
         private static void Destroy(this SkillSetComponentS self)
         {
@@ -236,9 +227,7 @@ namespace ET.Server
             }
             if (add && index == -1)
             {
-                SkillPro SkillPro = SkillPro.Create();
-                SkillPro.SkillID = skillId;
-                SkillPro.SkillSource = (int)SkillSourceEnum.TianFu ;
+                SkillPro SkillPro = self.InitSkillPro(skillId, 0,  SkillSetEnum.Skill,SkillSourceEnum.TianFu );
                 self.SkillList.Add(SkillPro);
             }
             if (!add && index >= 0)
@@ -607,7 +596,17 @@ namespace ET.Server
             }
             return HideProList;
         }
-        
+
+        public static SkillPro InitSkillPro(this SkillSetComponentS self, int skillid, int position, int skillsetenum, int skillsource)
+        {
+            SkillPro skillPro = SkillPro.Create();
+            skillPro.SkillID = skillid;
+            skillPro.SkillPosition = position;
+            skillPro.SkillSetType = skillsetenum;
+            skillPro.SkillSource = skillsource;
+            return skillPro;
+        }
+
         public static void OnChangeOccTwoRequest(this SkillSetComponentS self, int occTwo)
         {
             if (occTwo == 0)
@@ -621,10 +620,7 @@ namespace ET.Server
             int[] addSkills = occupationTwoConfig.SkillID;
             for (int i = 0; i < addSkills.Length; i++)
             {
-                SkillPro skillPro = SkillPro.Create();
-                skillPro.SkillID = addSkills[i];
-                skillPro.SkillPosition = 0;
-
+                SkillPro skillPro = self.InitSkillPro( addSkills[i], 0, SkillSetEnum.Skill,  SkillSourceEnum.Skill );
                 self.SkillList.Add(skillPro);
             }
 
@@ -676,28 +672,13 @@ namespace ET.Server
                     continue;
                 }
 
-                SkillPro skillPro = SkillPro.Create();
-                skillPro.SkillID = skillId;
-                skillPro.SkillPosition = 0;
-                skillPro.SkillSetType = (int)SkillSetEnum.Skill;
-                skillPro.SkillSource = (int)SkillSourceEnum.Equip;
+                SkillPro skillPro = self.InitSkillPro(skillId, 0, SkillSetEnum.Skill, SkillSourceEnum.Equip);
+               
                 self.SkillList.Add(skillPro);
                 unit.GetComponent<SkillPassiveComponent>().AddPassiveSkill(skillId);
                 self.CheckSkillTianFu(skillId, true);
             }
-            for (int i = 0; i < itemSkills.Count; i++)
-            {
-                //int key = itemSkills[i];	
-
-                //for( int s = 0; s < self.SkillList.Count; s++ )
-                //{
-                //	int newskillid = SkillConfigCategory.Instance.GetNewSkill(key, self.SkillList[s].SkillID);
-                //	if (newskillid != 0)
-                //	{
-                //		self.SkillList[s].SkillID = newskillid;
-                //	}
-                //}
-            }
+            
 
             self.UpdateSkillSet();
         }
@@ -803,6 +784,25 @@ namespace ET.Server
             self.OnAddItemSkill(new List<int>() { skillid });
         }
 
+        public static void CheckInitSkill(this SkillSetComponentS self, int occ)
+        {
+            int[] SkillList = OccupationConfigCategory.Instance.Get(occ).InitSkillID;
+            for (int i = SkillList.Length - 1; i >= 0 ; i--)
+            {
+                if (!SkillConfigCategory.Instance.Contain(SkillList[i]))
+                {
+                    Console.WriteLine($"技能未配置：ID{SkillList[i]}");
+                    continue;
+                }
+
+                if (self.GetBySkillID(SkillList[i])  == null)
+                {
+                    SkillPro SkillPro = self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
+                    self.SkillList.Add(SkillPro);
+                }
+            }            
+        }
+
         public static void OnLogin(this SkillSetComponentS self, int occ)
         {
             for (int k = self.SkillList.Count - 1; k >= 0; k--)
@@ -847,15 +847,12 @@ namespace ET.Server
                 List<int> addskills = equipIndex == 0 ? ConfigHelper.HunterFarSkill() : ConfigHelper.HunterNearSkill();
                 for (int i = 0; i < addskills.Count; i++)
                 {
-                    SkillPro skillPro = SkillPro.Create();
-                    skillPro.SkillID = addskills[i];
-                    skillPro.SkillPosition = 0;
-                    skillPro.SkillSetType = (int)SkillSetEnum.Skill;
-                    skillPro.SkillSource = (int)SkillSourceEnum.Equip;
+                    SkillPro skillPro = self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
                     self.SkillList.Add(skillPro);
                 }
             }
 
+            self.CheckInitSkill(occ);
         }
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
@@ -918,7 +915,7 @@ namespace ET.Server
         public static int SetSkillIdByPosition(this SkillSetComponentS self, C2M_SkillSet request)
         {
             SkillPro newSkill = null;
-            if (request.SkillType == 1) //����
+            if (request.SkillType == 1) //
             {
                 SkillPro oldSkill = self.GetByPosition(request.Position);
                 if (oldSkill != null)
@@ -946,6 +943,7 @@ namespace ET.Server
                 {
                     newSkill = SkillPro.Create();
                     self.SkillList.Add(newSkill);
+                    Console.WriteLine($"SetSkillIdByPosition== null:  {request.SkillID}");
                 }
             }
             newSkill.SkillID = request.SkillID;
@@ -999,11 +997,7 @@ namespace ET.Server
                 return;
             }
 
-            SkillPro skillPro = SkillPro.Create();
-            skillPro.SkillID = skillId;
-            skillPro.SkillPosition = 0;
-            skillPro.SkillSetType = (int)SkillSetEnum.Skill;
-            skillPro.SkillSource = (int)skillSourceEnum;
+            SkillPro skillPro = self.InitSkillPro(skillId, 0, SkillSetEnum.Skill, skillSourceEnum);
             self.SkillList.Add(skillPro);
 
             self.UpdateSkillSet();
