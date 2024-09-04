@@ -7,7 +7,7 @@
         {
             unit.GetComponent<ShoujiComponentS>().UpdateShouJIStar();
 
-            response.UserInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+            response.UserInfoProto = unit.GetComponent<UserInfoComponentS>().UserInfo.ToMessage();
             response.ReddontList .AddRange( unit.GetComponent<ReddotComponentS>().ReddontList);
             response.TreasureInfo .AddRange(unit.GetComponent<ShoujiComponentS>().TreasureInfo); 
             response.ShouJiChapterInfos .AddRange( unit.GetComponent<ShoujiComponentS>().ShouJiChapterInfos);

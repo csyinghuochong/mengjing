@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public int Position;
 		public UnionInfo UnionMyInfo;
-		public UserInfo UserInfo;
+		public UserInfo UserInfo { get; set; }
 		public Dictionary<int, EntityRef<Scroll_Item_UnionKeJiLearnItem>> ScrollItemUnionKeJiLearnItems;
 		
 		public LoopVerticalScrollRect E_UnionKeJiLearnItemsLoopVerticalScrollRect

@@ -3454,12 +3454,12 @@ namespace ET
 
     // 等级 经验 货币 或者不变的数值都放在这。
     [MemoryPackable]
-    [Message(OuterMessage.UserInfo)]
-    public partial class UserInfo : MessageObject
+    [Message(OuterMessage.UserInfoProto)]
+    public partial class UserInfoProto : MessageObject
     {
-        public static UserInfo Create(bool isFromPool = false)
+        public static UserInfoProto Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(UserInfo), isFromPool) as UserInfo;
+            return ObjectPool.Instance.Fetch(typeof(UserInfoProto), isFromPool) as UserInfoProto;
         }
 
         [MemoryPackOrder(0)]
@@ -7051,7 +7051,7 @@ namespace ET
         public int Error { get; set; }
 
         [MemoryPackOrder(0)]
-        public UserInfo UserInfo { get; set; }
+        public UserInfoProto UserInfoProto { get; set; }
 
         [MemoryPackOrder(2)]
         public List<KeyValuePair> ReddontList { get; set; } = new();
@@ -7075,7 +7075,7 @@ namespace ET
             this.RpcId = default;
             this.Message = default;
             this.Error = default;
-            this.UserInfo = default;
+            this.UserInfoProto = default;
             this.ReddontList.Clear();
             this.TreasureInfo.Clear();
             this.ShouJiChapterInfos.Clear();
@@ -30869,7 +30869,7 @@ namespace ET
         public const ushort DonationRecord = 10082;
         public const ushort A2C_Disconnect = 10083;
         public const ushort G2C_SecondLogin = 10084;
-        public const ushort UserInfo = 10085;
+        public const ushort UserInfoProto = 10085;
         public const ushort M2C_RoleDataUpdate = 10086;
         public const ushort M2C_RoleDataBroadcast = 10087;
         public const ushort SkillPro = 10088;

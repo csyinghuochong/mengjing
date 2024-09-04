@@ -380,6 +380,11 @@ namespace ET
         [BsonElement("Children")]
         [BsonIgnoreIfNull]
         protected List<Entity> childrenDB;
+        
+        public List<Entity> ChildrenDB
+        {
+            get => this.childrenDB;
+        }
 
         [BsonIgnore]
         private SortedDictionary<long, Entity> children;

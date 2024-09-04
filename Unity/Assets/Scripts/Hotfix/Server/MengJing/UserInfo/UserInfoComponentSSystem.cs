@@ -4,8 +4,8 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (UserInfoComponentS))]
-    [EntitySystemOf(typeof (UserInfoComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
+    [EntitySystemOf(typeof(UserInfoComponentS))]
     public static partial class UserInfoComponentSSystem
     {
         [EntitySystem]
@@ -18,6 +18,17 @@ namespace ET.Server
         {
         }
 
+        [EntitySystem]
+        private static void Deserialize(this UserInfoComponentS self)
+        {
+            foreach (Entity entity in self.Children.Values)
+            {
+                UserInfo userInfo = entity as UserInfo;
+
+                self.UserInfo = userInfo;
+            }
+        }
+        
         public static void Check(this UserInfoComponentS self)
         {
             self.TodayOnLine++;
@@ -49,7 +60,7 @@ namespace ET.Server
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
             self.Account = account;
-            self.UserInfo = UserInfo.Create();
+            self.UserInfo = self.AddChild<UserInfo>();
             UserInfo userInfo = self.UserInfo;
             userInfo.Sp = 1;
             userInfo.UserId = id;
@@ -69,8 +80,8 @@ namespace ET.Server
             {
                 int robotId = createRoleInfo.RobotId;
                 RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
-                userInfo.Lv = robotConfig.Behaviour == 1? RandomHelper.RandomNumber(10, 19) : robotConfig.Level;
-                userInfo.Occ = robotConfig.Behaviour == 1? RandomHelper.RandomNumber(1, 3) : robotConfig.Occ;
+                userInfo.Lv = robotConfig.Behaviour == 1 ? RandomHelper.RandomNumber(10, 19) : robotConfig.Level;
+                userInfo.Occ = robotConfig.Behaviour == 1 ? RandomHelper.RandomNumber(1, 3) : robotConfig.Occ;
                 userInfo.Gold = 100000;
                 userInfo.RobotId = robotId;
                 //userInfo.OccTwo = robotConfig.OccTwo;
@@ -149,9 +160,10 @@ namespace ET.Server
                     self.UserInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
                 }
             }
+
             //
             if (self.UserInfo.RobotId > 0)
-            { 
+            {
                 self.UserInfo.Gold = math.max(self.UserInfo.Gold, 100000000);
                 self.UserInfo.Diamond = math.max(self.UserInfo.Diamond, 100000);
             }
@@ -163,27 +175,31 @@ namespace ET.Server
             {
                 return 1;
             }
+
             if (hour_1 < 12)
             {
                 return 2;
             }
+
             if (hour_1 < 20)
             {
                 return 3;
             }
+
             if (hour_1 < 24)
             {
                 return 4;
             }
+
             return 5;
         }
-        
+
         public static void OnLogin(this UserInfoComponentS self, string remoteIp, string deviceName, long currentTime)
         {
             self.CheckData();
             self.RemoteAddress = remoteIp;
             self.DeviceName = deviceName;
-          
+
             self.LastLoginTime = currentTime;
             self.UserName = self.UserInfo.Name;
             self.ShouLieSendTime = 0;
@@ -299,10 +315,10 @@ namespace ET.Server
             long upNeedExp = xiulianconf1.UpExp;
 
             //等级达到上限,则无法获得经验. 经验最多200%
-            if (addValue > 0 &&self.UserInfo.Lv >= GlobalValueConfigCategory.Instance.MaxLevel)
+            if (addValue > 0 && self.UserInfo.Lv >= GlobalValueConfigCategory.Instance.MaxLevel)
             {
                 long maxExp = upNeedExp * 2;
-                if (self.UserInfo.Exp > maxExp) 
+                if (self.UserInfo.Exp > maxExp)
                 {
                     self.UpdateRoleData(UserDataType.Message, "当前经验超过200%，请前往主城经验老头处用多余的经验兑换奖励喔!");
                     return;
@@ -323,7 +339,7 @@ namespace ET.Server
                 self.UpdateRoleData(UserDataType.Lv, "1", notice);
             }
         }
-        
+
         public static void UpdateRoleData(this UserInfoComponentS self, int Type, string value, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
@@ -449,7 +465,7 @@ namespace ET.Server
                         return;
                     }
 
-                    int maxValue = unit.IsYueKaStates()? int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value)
+                    int maxValue = unit.IsYueKaStates() ? int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value)
                             : int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
                     long newValue = long.Parse(value) + self.UserInfo.PiLao;
                     newValue = Math.Min(Math.Max(0, newValue), maxValue);
@@ -491,7 +507,7 @@ namespace ET.Server
                     break;
                 case UserDataType.Vitality:
                     NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-                    int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+                    int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
                     maxValue = unit.GetMaxHuoLi(skillNumber);
                     addValue = long.Parse(value);
                     newValue = self.UserInfo.Vitality + (int)addValue;
@@ -622,7 +638,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
             int updatevalue = unit.GetMaxHuoLi(skillNumber) - self.UserInfo.Vitality;
             self.UpdateRoleData(UserDataType.Vitality, updatevalue.ToString(), notice);
             //updatevalue = ComHelp.GetMaxBaoShiDu() - self.UserInfo.BaoShiDu;
@@ -671,7 +687,7 @@ namespace ET.Server
 
         public static int GetMaxPiLao(this Unit self)
         {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates()? 26 : 10).Value);
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates() ? 26 : 10).Value);
         }
 
         public static bool IsYueKaStates(this Unit self)
@@ -1242,7 +1258,7 @@ namespace ET.Server
                 {
                     numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, false);
 
-                    numericComponent.ApplyChange( NumericType.CostTiLi, 1);
+                    numericComponent.ApplyChange(NumericType.CostTiLi, 1);
                     self.UpdateRoleData(UserDataType.PiLao, "-1", true);
                 }
                 else
@@ -1307,7 +1323,8 @@ namespace ET.Server
             M2R_RankUpdateRequest M2R_RankUpdateRequest = M2R_RankUpdateRequest.Create();
             M2R_RankUpdateRequest.CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp);
             M2R_RankUpdateRequest.RankingInfo = rankPetInfo;
-            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId,M2R_RankUpdateRequest);
+            R2M_RankUpdateResponse Response =
+                    (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, M2R_RankUpdateRequest);
             if (unit.IsDisposed)
             {
                 return;

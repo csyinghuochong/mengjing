@@ -4,12 +4,14 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Unit))]
-    public class UserInfoComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache
+    public class UserInfoComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         public string Account { get; set; }
+
+        [BsonIgnore]
         public UserInfo UserInfo { get; set; }
 
-          /// <summary>
+        /// <summary>
         /// 登录或者零点刷新的时候会改变.主要用来体力恢复，刷新数据
         /// </summary>
         public long LastLoginTime { get; set; }
@@ -27,7 +29,7 @@ namespace ET.Server
         public long LastJiaYuanExpTime = 0;
         public string RemoteAddress { get; set; }
         public string DeviceName;
-        public string UserName  { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// 狩猎击杀野怪数量
@@ -44,5 +46,4 @@ namespace ET.Server
         [BsonIgnore]
         public long ShouLieUpLoadTimer;
     }
-
 }

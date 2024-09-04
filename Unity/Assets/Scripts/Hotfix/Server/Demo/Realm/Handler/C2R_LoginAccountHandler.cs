@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ET.Server
@@ -209,7 +210,7 @@ namespace ET.Server
                             continue;
                         }
 
-                        CreateRoleInfo roleList = GetRoleListInfo(userinfolist[0].UserInfo, centerAccountInfo.RoleList[i].UnitId);
+                        CreateRoleInfo roleList = GetRoleListInfo(userinfolist[0].ChildrenDB[0] as UserInfo, centerAccountInfo.RoleList[i].UnitId);
                         List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId,d=> d.Id ==centerAccountInfo.RoleList[i].UnitId);
                         if (numericComponentlist == null || numericComponentlist.Count == 0)
                         {

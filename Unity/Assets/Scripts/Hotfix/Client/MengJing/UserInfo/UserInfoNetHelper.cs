@@ -8,7 +8,9 @@
             M2C_UserInfoInitResponse response =
                     (M2C_UserInfoInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_UserInfoInitRequest.Create());
 
-            root.GetComponent<UserInfoComponentC>().UserInfo = response.UserInfo;
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().AddChild<UserInfo>();
+            userInfo.FromMessage(response.UserInfoProto);
+            root.GetComponent<UserInfoComponentC>().UserInfo = userInfo;
             root.GetComponent<ReddotComponentC>().ReddontList = response.ReddontList;
             root.GetComponent<ShoujiComponentC>().TreasureInfo = response.TreasureInfo;
             root.GetComponent<ShoujiComponentC>().ShouJiChapterInfos = response.ShouJiChapterInfos;

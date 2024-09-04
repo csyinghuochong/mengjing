@@ -6,7 +6,7 @@
     {
         protected override async ETTask Run(Unit unit, C2M_UserInfoInitRequest request, M2C_UserInfoInitResponse response)
         {
-            response.UserInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+            response.UserInfoProto = unit.GetComponent<UserInfoComponentS>().UserInfo.ToMessage();
             await ETTask.CompletedTask;
         }
     }
