@@ -84,6 +84,11 @@ namespace ET.Client
 
         #region 添加，移除Buff
 
+        public static void InitData(this BuffManagerComponentC self, UnitInfo unitInfo)
+        {
+            self.t_Buffs = unitInfo.Buffs;
+        }
+        
         public static void InitBuff(this BuffManagerComponentC self)
         {
             List<KeyValuePair> buffs = self.t_Buffs;

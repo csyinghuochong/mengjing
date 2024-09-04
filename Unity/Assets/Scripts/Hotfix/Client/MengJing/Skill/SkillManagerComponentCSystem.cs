@@ -320,6 +320,11 @@ namespace ET.Client
             }
         }
 
+        public static void InitData(this SkillManagerComponentC self,  UnitInfo unitInfo)
+        {
+            self.t_Skills = unitInfo.Skills;
+        }
+        
         public static void InitSkill(this SkillManagerComponentC self)
         {
             List<SkillInfo> skillInfos = self.t_Skills;

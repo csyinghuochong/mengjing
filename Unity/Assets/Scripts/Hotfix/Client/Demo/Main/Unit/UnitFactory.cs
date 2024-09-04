@@ -74,10 +74,8 @@ namespace ET.Client
             bool noSkill = unit.Type == UnitType.Npc && NpcConfigCategory.Instance.Get(unit.ConfigId).AI == 0;
             if (!noSkill)
             {
-                unit.AddComponent<SkillManagerComponentC>();
-                unit.AddComponent<BuffManagerComponentC>();
-                unit.GetComponent<BuffManagerComponentC>().t_Buffs = unitInfo.Buffs;
-                unit.GetComponent<SkillManagerComponentC>().t_Skills = unitInfo.Skills;
+                unit.AddComponent<SkillManagerComponentC>().InitData(unitInfo);
+                unit.AddComponent<BuffManagerComponentC>().InitData(unitInfo);
             }
 
             if (mainHero)
