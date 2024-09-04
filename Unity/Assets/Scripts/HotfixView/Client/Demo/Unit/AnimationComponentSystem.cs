@@ -62,6 +62,8 @@ namespace ET.Client
             }
 
             self.AnimGroup = animData.AnimGroup;
+
+            self.Play("Idle");
         }
 
         public static void Play(this AnimationComponent self, string name, float speed = 1f)
