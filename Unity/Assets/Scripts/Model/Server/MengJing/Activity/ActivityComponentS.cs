@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace ET.Server
 {
     
     
     [ComponentOf(typeof(Unit))]
-    public class ActivityComponentS : Entity , IAwake, ITransfer, IUnitCache, IDestroy
+    public class ActivityComponentS : Entity , IAwake, ITransfer, IUnitCache, IDestroy, IDeserialize
     {
         /// <summary>
         /// 上次签到时间
@@ -29,6 +30,7 @@ namespace ET.Server
 
         public List<int> ZhanQuReceiveIds { get; set; }= new List<int>();
 
-        public ActivityV1Info ActivityV1Info { get; set; } = ActivityV1Info.Create();
+        [BsonIgnore]
+        public ActivityV1Info ActivityV1Info { get; set; }
     }
 }

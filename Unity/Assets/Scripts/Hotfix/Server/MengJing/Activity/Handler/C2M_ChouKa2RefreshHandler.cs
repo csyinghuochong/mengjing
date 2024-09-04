@@ -10,7 +10,7 @@
 
             activityComponent.ActivityV1Info.ChouKa2ItemList = ActivityConfigHelper.GetChouKa2RewardList();
             activityComponent.ActivityV1Info.ChouKa2RewardIds.Clear();
-            response.ActivityV1Info = activityComponent.ActivityV1Info;
+            response.ActivityV1InfoProto = activityComponent.ActivityV1Info.ToMessage();
             await ETTask.CompletedTask;
         }
     }

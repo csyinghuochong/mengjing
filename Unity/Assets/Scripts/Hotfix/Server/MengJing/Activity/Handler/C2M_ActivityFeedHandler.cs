@@ -35,8 +35,8 @@
             A2M_ActivityFeedResponse r_GameStatusResponse = (A2M_ActivityFeedResponse)await unit.Root().GetComponent<MessageSender>().Call
                  (activitySceneid, M2A_ActivityFeedRequest);
 
-            response.ActivityV1Info = unit.GetComponent<ActivityComponentS>().ActivityV1Info;
-            response.ActivityV1Info.BaoShiDu = r_GameStatusResponse.BaoShiDu;
+            response.ActivityV1InfoProto = unit.GetComponent<ActivityComponentS>().ActivityV1Info.ToMessage();
+            response.ActivityV1InfoProto.BaoShiDu = r_GameStatusResponse.BaoShiDu;
 
             await ETTask.CompletedTask;
         }

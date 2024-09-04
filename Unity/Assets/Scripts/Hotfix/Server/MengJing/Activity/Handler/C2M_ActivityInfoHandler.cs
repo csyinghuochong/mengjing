@@ -42,7 +42,7 @@
             response.LastLoginTime = activityComponent.LastLoginTime;
             response.DayTeHui .AddRange(activityComponent.DayTeHui); 
 
-            response.ActivityV1Info = activityV1Info;
+            response.ActivityV1InfoProto = activityV1Info.ToMessage();
 
             await ETTask.CompletedTask;
         }

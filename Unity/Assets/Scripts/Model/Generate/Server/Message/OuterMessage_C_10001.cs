@@ -13942,12 +13942,12 @@ namespace ET
 
     // 第一版的活动
     [MemoryPackable]
-    [Message(OuterMessage.ActivityV1Info)]
-    public partial class ActivityV1Info : MessageObject
+    [Message(OuterMessage.ActivityV1InfoProto)]
+    public partial class ActivityV1InfoProto : MessageObject
     {
-        public static ActivityV1Info Create(bool isFromPool = false)
+        public static ActivityV1InfoProto Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(ActivityV1Info), isFromPool) as ActivityV1Info;
+            return ObjectPool.Instance.Fetch(typeof(ActivityV1InfoProto), isFromPool) as ActivityV1InfoProto;
         }
 
         /// <summary>
@@ -23694,7 +23694,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public ActivityV1Info ActivityV1Info { get; set; }
+        public ActivityV1InfoProto ActivityV1InfoProto { get; set; }
 
         public override void Dispose()
         {
@@ -23706,7 +23706,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.ActivityV1Info = default;
+            this.ActivityV1InfoProto = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -23861,7 +23861,7 @@ namespace ET
         public List<int> DayTeHui { get; set; } = new();
 
         [MemoryPackOrder(7)]
-        public ActivityV1Info ActivityV1Info { get; set; }
+        public ActivityV1InfoProto ActivityV1InfoProto { get; set; }
 
         public override void Dispose()
         {
@@ -23879,7 +23879,7 @@ namespace ET
             this.QuTokenRecvive.Clear();
             this.LastLoginTime = default;
             this.DayTeHui.Clear();
-            this.ActivityV1Info = default;
+            this.ActivityV1InfoProto = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -24108,7 +24108,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public ActivityV1Info ActivityV1Info { get; set; }
+        public ActivityV1InfoProto ActivityV1InfoProto { get; set; }
 
         public override void Dispose()
         {
@@ -24120,7 +24120,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.ActivityV1Info = default;
+            this.ActivityV1InfoProto = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -24176,7 +24176,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public ActivityV1Info ActivityV1Info { get; set; }
+        public ActivityV1InfoProto ActivityV1InfoProto { get; set; }
 
         public override void Dispose()
         {
@@ -24188,7 +24188,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.ActivityV1Info = default;
+            this.ActivityV1InfoProto = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31139,7 +31139,7 @@ namespace ET
         public const ushort M2C_UnitBuffStatus = 10352;
         public const ushort M2C_SkillSecondResult = 10353;
         public const ushort TokenRecvive = 10354;
-        public const ushort ActivityV1Info = 10355;
+        public const ushort ActivityV1InfoProto = 10355;
         public const ushort M2C_ChainLightning = 10356;
         public const ushort C2M_StoreBuyRequest = 10357;
         public const ushort M2C_StoreBuyResponse = 10358;

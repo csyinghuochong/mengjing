@@ -171,7 +171,7 @@ namespace ET.Server
                 default:
                     break;
             }
-            response.ActivityV1Info = activityComponent.ActivityV1Info;
+            response.ActivityV1InfoProto = activityComponent.ActivityV1Info.ToMessage();
             await ETTask.CompletedTask;
         }
     }

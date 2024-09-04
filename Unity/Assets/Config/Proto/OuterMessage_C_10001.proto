@@ -3215,7 +3215,7 @@ message TokenRecvive
 }
 
 //第一版的活动
-message ActivityV1Info
+message ActivityV1InfoProto
 {
 	repeated int32 GuessIds = 1;			//竞猜的数值	
 	repeated int32 LastGuessReward = 2;		//每日清空，中奖的时间段(0 ，14，18， 21)
@@ -5451,7 +5451,7 @@ message M2C_ActivityFeedResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	ActivityV1Info ActivityV1Info = 1;
+	ActivityV1InfoProto ActivityV1InfoProto = 1;
 }
 
 //ResponseType M2C_ActivityGuessResponse
@@ -5491,7 +5491,7 @@ message M2C_ActivityInfoResponse // ILocationResponse
 	repeated TokenRecvive QuTokenRecvive = 5;
 	int64 LastLoginTime = 6;
 	repeated int32 DayTeHui = 7;
-	ActivityV1Info ActivityV1Info = 8;
+	ActivityV1InfoProto ActivityV1InfoProto = 8;
 }
 
 //领取奖励
@@ -5544,7 +5544,7 @@ message M2C_ActivityRewardResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	ActivityV1Info ActivityV1Info = 1;
+	ActivityV1InfoProto ActivityV1InfoProto = 1;
 }
 
 //刷新奖励
@@ -5560,7 +5560,7 @@ message M2C_ChouKa2RefreshResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	ActivityV1Info ActivityV1Info = 1;
+	ActivityV1InfoProto ActivityV1InfoProto = 1;
 }
 
 

@@ -19,7 +19,23 @@ namespace ET.Server
 
         }
         
-                /// <summary>
+        [EntitySystem]
+        private static void Deserialize(this ActivityComponentS self)
+        {
+            foreach (Entity entity in self.Children.Values)
+            {
+                ActivityV1Info activityV1Info = entity as ActivityV1Info;
+
+                self.ActivityV1Info = activityV1Info;
+            }
+            
+            if (self.ActivityV1Info == null)
+            {
+                self.ActivityV1Info = self.AddChild<ActivityV1Info>();
+            }
+        }
+        
+        /// <summary>
         /// 取到当前可以领取的最小等级
         /// </summary>
         /// <param name="self"></param>
