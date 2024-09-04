@@ -545,4 +545,18 @@ namespace ET.Client
     {
         public string HintText;
     }
+    
+    public struct LoginError
+    {
+        public int ErrorCore;
+        public long AccountId;
+        public string Value;
+    }
+    
+    public struct NotRealName
+    {
+        public int ErrorCore;
+        public long AccountId;
+        public string Value;
+    }
 }
