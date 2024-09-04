@@ -234,6 +234,11 @@ namespace ET.Server
         public static Unit CreateNpc(Scene scene, int npcId)
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);
+            if (npcConfig.Position == null || npcConfig.Position.Length != 3)
+            {
+                Log.Console($"npcConfig.Position.Length != 3:  {npcId}");
+                return null;
+            }
 
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), npcId);
             scene.GetComponent<UnitComponent>().Add(unit);
