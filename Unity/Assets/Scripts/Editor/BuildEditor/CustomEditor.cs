@@ -25,7 +25,7 @@ public class ClipBoard
 
 public class CustomEditorScript
 {
-    [MenuItem("Custom/生成坐标点")]
+    [MenuItem("Custom/生成坐标点XZ到文件")]
     static void ExportPositions()
     {
         string postionList = "";
@@ -62,7 +62,7 @@ public class CustomEditorScript
         UnityEngine.Debug.Log("生成坐标点成功！生成:" + gameObject.transform.childCount + "个");
     }
 
-    [MenuItem("Custom/生成怪物ID和坐标")]
+    [MenuItem("Custom/获取怪物ID和坐标")]
     static void ExportMonsterIdAndPositions()
     {
         string postionList = "";
@@ -171,7 +171,7 @@ public class CustomEditorScript
         Debug.Log(string.Format("The gameobject:{0}'s path has been copied to the clipboard!", obj.name));
     }
     
-    [MenuItem("Custom/获取所有格子的坐标点")]
+    [MenuItem("Custom/获取喜从天降所有格子的坐标点")]
     static void GetAllBoxPositions()
     {
         var objs = Resources.FindObjectsOfTypeAll(typeof (GameObject)) as GameObject[];
