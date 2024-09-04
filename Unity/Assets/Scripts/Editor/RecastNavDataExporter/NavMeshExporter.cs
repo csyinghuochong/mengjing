@@ -4,10 +4,12 @@ using System.IO;
 using System.Text;
 using ET;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Scene = ET.Scene;
 
 namespace ETEditor
 {
@@ -80,6 +82,7 @@ namespace ETEditor
                 return;
             }
 
+            InitScene();
             vertList.Clear();
             faceList.Clear();
             pairList.Clear();
@@ -98,8 +101,72 @@ namespace ETEditor
             WriteRecastObjFile();
             // 拷贝Obj和Bytes文件到服务器目录下 TODO 暂不需要
             //CopyObjFiles();
-
+            
+            ResetScene();
             Debug.Log($"NavMesh Output Info - Vertices:[{vertList.Count}] - Faces:[{faceList.Count}]");
+        }
+
+        private static void InitScene()
+        {
+            //UnityEngine.SceneManagement.Scene curScene = UnityEditor.SceneManagement.EditorSceneManager.GetSceneByPath("Assets/Scenes/Init.unity");
+            //GameObject[] gos = curScene.GetRootGameObjects();
+            GameObject mesh = GetTerrainMesh();
+            if (mesh== null)
+            {
+                return;
+            }
+
+            SetStatic(mesh);
+            SetLayer(mesh, "NavMesh");
+        }
+        
+        private static void SetStatic(GameObject obj)
+        {
+            // 设置当前对象为静态
+            GameObjectUtility.SetStaticEditorFlags(obj, StaticEditorFlags.BatchingStatic);
+ 
+            // 递归设置所有子对象为静态
+            foreach (Transform child in obj.transform)
+            {
+                SetStatic(child.gameObject);
+            }
+        }
+
+        private static void SetLayer(GameObject gos, string layer)
+        {
+ 
+            //遍历更改所有子物体layer
+            gos.tag = layer;
+            foreach (Transform child in gos.transform)
+            {
+                SetLayer(child.gameObject, layer);
+            }
+        }
+        
+        private static GameObject GetTerrainMesh()
+        { 
+            UnityEngine.SceneManagement.Scene curScene = EditorSceneManager.GetActiveScene();
+            GameObject[] gos = curScene.GetRootGameObjects();
+            string sceneName = curScene.name;
+            for (int i = 0; i < gos.Length; i++)
+            {
+                if (gos[i].name.Equals(sceneName) && gos[i].transform.Find("Mesh")!=null)
+                {
+                    return gos[i];
+                }
+            }
+
+            return null;
+        }
+
+        private static void ResetScene()
+        {
+            GameObject mesh = GetTerrainMesh();
+            if (mesh== null)
+            {
+                return;
+            }
+            GameObject.DestroyImmediate(mesh);
         }
 
         #endregion
