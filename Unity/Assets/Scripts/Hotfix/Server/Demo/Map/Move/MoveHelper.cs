@@ -10,7 +10,7 @@ namespace ET.Server
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
             if (speed < 0.01)
             {
-                unit.SendStop(2);
+                unit.SendStop(-1);
                 return;
             }
 
@@ -19,7 +19,7 @@ namespace ET.Server
 
             if (m2CPathfindingResult.Points.Count < 2)
             {
-                unit.SendStop(3);
+                unit.SendStop(-1);
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace ET.Server
             if (speed < 0.01)
             {
                 Log.Error("Bullet move speed is less than 0.1");
-                unit.SendStop(2);
+                unit.SendStop(-1);
                 return;
             }
 

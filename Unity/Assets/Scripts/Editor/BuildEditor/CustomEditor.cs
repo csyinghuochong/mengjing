@@ -118,7 +118,7 @@ public class CustomEditorScript
         UnityEngine.Debug.Log("导出坐标点成功！生成:" + gameObject.transform.childCount + "个");
     }
 
-    [MenuItem("Custom/获取坐标点")]
+    [MenuItem("Custom/获取坐标点和缩放")]
     static void GetPositions()
     {
         string postionList = "";
@@ -126,12 +126,20 @@ public class CustomEditorScript
         if (Selection.gameObjects.Length != 1)
             return;
 
-        GameObject gameObject = Selection.gameObjects[0];
-        Vector3 vector3 = gameObject.transform.position;
+        GameObject gameObjects  =  Selection.gameObjects[0];
+        for (int i = 0; i < gameObjects.transform.childCount; i++)
+        {
+             GameObject gameObject = gameObjects.transform.GetChild(i).gameObject;
+            Vector3 vector3 = gameObject.transform.position;
+            Vector3 sceleV = gameObject.transform.localScale;
+    
+            postionList +=  gameObject.name + "    "+   vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
+                    "  " + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2") ;
+            postionList += "\r\n";
+        }
 
-        postionList = vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2");
-        ClipBoard.Copy(postionList);
-        UnityEngine.Debug.Log("导出坐标点成功！");
+       ClipBoard.Copy(postionList);
+       UnityEngine.Debug.Log("导出坐标点成功！");
     }
 
     [MenuItem("Custom/拷贝GameObjectPath")]
@@ -173,6 +181,7 @@ public class CustomEditorScript
             if (obj.name.StartsWith("Box"))
             {
                 Vector3 vector3 = obj.transform.position;
+                Vector3 scelev = obj.transform.localScale;
                 postionList += "new Vector3(" + vector3.x.ToString("F2") + "f," + vector3.y.ToString("F2") + "f," + vector3.z.ToString("F2") +
                         "f),\n";
             }
