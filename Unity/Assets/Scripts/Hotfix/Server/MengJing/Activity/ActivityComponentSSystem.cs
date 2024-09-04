@@ -11,7 +11,10 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this ActivityComponentS self)
         {
-
+            if (self.ActivityV1Info == null)
+            {
+                self.ActivityV1Info = self.AddChild<ActivityV1Info>();
+            }
         }
         [EntitySystem]
         private static void Destroy(this ActivityComponentS self)
