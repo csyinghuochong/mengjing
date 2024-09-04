@@ -24,6 +24,12 @@ namespace ET.Server
                     return;
                 }
 
+                if (message.GMMsg == "#completetask")
+                {
+                    unit.GetComponent<TaskComponentS>().CompletCurrentTask();
+                    return;
+                }
+                
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】
