@@ -58,14 +58,14 @@ namespace ET.Client
                 {
                     unit.UpdateUITime = curTime;
                     UIJiaYuanPastureComponent npcHeadBarComponent = unit.GetComponent<UIJiaYuanPastureComponent>();
-                    // npcHeadBarComponent?.OnUpdateNpcTalk(self);
+                    npcHeadBarComponent?.OnUpdateNpcTalk(self);
                     continue;
                 }
 
                 if (unit.Type == UnitType.Chuansong)
                 {
                     unit.UpdateUITime = curTime;
-                    // unit.GetComponent<TransferUIComponent>()?.OnCheckChuanSong(self);
+                    // unit.GetComponent<UITransferHpComponent>()?.OnCheckChuanSong(self);
                     continue;
                 }
             }
