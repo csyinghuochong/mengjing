@@ -133,8 +133,8 @@ public class CustomEditorScript
             Vector3 vector3 = gameObject.transform.position;
             Vector3 sceleV = gameObject.transform.localScale;
     
-            postionList +=  gameObject.name + "    "+   vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
-                    "  " + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2") ;
+            postionList +=  gameObject.name + "|"+   vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
+                    "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2") ;
             postionList += "\r\n";
         }
 
