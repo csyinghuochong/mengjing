@@ -145,16 +145,16 @@ namespace ET
                         }
 
                         var states = animatorController.layers[0].stateMachine.states;
-                        animGroup.Animations = new MotionTransition[states.Length];
+                        animGroup.AnimInfos = new AnimInfo[states.Length];
 
                         for (int i = 0; i < states.Length; i++)
                         {
                             var state = states[i].state;
-                            animGroup.Animations[i] = new MotionTransition()
+                            animGroup.AnimInfos[i] = new AnimInfo()
                             {
-                                NextStateName = GetNextStateName(state),
                                 StateName = state.name,
-                                Clip = state.motion as AnimationClip
+                                AnimationClip = state.motion as AnimationClip,
+                                NextStateName = GetNextStateName(state)
                             };
                         }
 
