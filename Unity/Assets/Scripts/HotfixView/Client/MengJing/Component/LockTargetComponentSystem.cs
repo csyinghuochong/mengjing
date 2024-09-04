@@ -22,11 +22,13 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this LockTargetComponent self)
         {
-            if (self.LockUnitEffect != null)
+            foreach (GameObject go in self.EffectMap.Values)
             {
-                GameObject.Destroy(self.LockUnitEffect);
-                self.LockUnitEffect = null;
+                UnityEngine.Object.Destroy(go);
             }
+
+            self.EffectMap.Clear();
+            self.LockUnitEffect = null;
         }
 
         public static void OnMainHeroMove(this LockTargetComponent self)
@@ -100,14 +102,27 @@ namespace ET.Client
             }
         }
 
-        public static void CheckLockEffect(this LockTargetComponent self)
+        public static void CheckLockEffect(this LockTargetComponent self, int type = 0)
         {
-            if (self.LockUnitEffect == null)
+            self.Type = type;
+            if (!self.EffectMap.ContainsKey(type))
             {
-                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<GameObject>(ABPathHelper.GetEffetPath("SkillZhishi/RoseSelectTarget"));
-                self.LockUnitEffect = GameObject.Instantiate(prefab);
+                ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+                string path = "";
+                if (type == 0)
+                {
+                    path = ABPathHelper.GetEffetPath("SkillZhishi/RoseSelectTarget");
+                }
+                else if (type == 1)
+                {
+                    path = ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_Npc_Select");
+                }
+
+                GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                self.EffectMap.Add(type, UnityEngine.Object.Instantiate(prefab));
             }
+
+            self.LockUnitEffect = self.EffectMap[type];
         }
 
         public static void LockTargetUnitId(this LockTargetComponent self, long unitId)
@@ -295,15 +310,24 @@ namespace ET.Client
 
         public static void SetEffectSize(this LockTargetComponent self, float size)
         {
-            GameObject RedCircle = self.LockUnitEffect.transform.Find("Efx_Click_Red/RedCircle").gameObject;
-            ParticleSystem ps = RedCircle.GetComponent<ParticleSystem>();
+            GameObject go = null;
+            if (self.Type == 0)
+            {
+                go = self.LockUnitEffect.transform.Find("Efx_Click_Red/RedCircle").gameObject;
+            }
+            else if (self.Type == 1)
+            {
+                go = self.LockUnitEffect.transform.Find("circle_floor").gameObject;
+            }
+            
+            ParticleSystem ps = go.GetComponent<ParticleSystem>();
             var main = ps.main;
             main.startSize = new ParticleSystem.MinMaxCurve(3 * size);
         }
 
         public static void OnLockNpc(this LockTargetComponent self, Unit unitTarget)
         {
-            self.CheckLockEffect();
+            self.CheckLockEffect(1);
             if (unitTarget != null)
             {
                 CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
