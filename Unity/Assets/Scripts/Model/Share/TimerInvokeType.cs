@@ -89,5 +89,6 @@
         public const int JiaYuanPlanTimer = 356;
         public const int UIDigTreasureTimer = 357;
         public const int JiaYuanPastureTimer = 358;
+        public const int TransferUITimer = 359;
     }
 }

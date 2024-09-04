@@ -201,7 +201,7 @@ namespace ET.Client
 
         public static bool IsSelfRobot(this Unit self)
         {
-            return   self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
+            return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
         }
 
         public static int GetMonsterType(this Unit self)
@@ -306,7 +306,6 @@ namespace ET.Client
             return self.Id == defend.Id;
         }
 
-     
         public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkdead = true)
         {
             if (self.Id == defend.Id)
@@ -418,6 +417,27 @@ namespace ET.Client
             int camp_1 = self.GetBattleCamp();
             int camp_2 = defend.GetBattleCamp();
             return camp_1 != camp_2 && !self.IsSameTeam(defend);
+        }
+
+        public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)
+        {
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                Unit unit = allunits[i];
+                if (unit.Type != UnitType.Monster)
+                {
+                    continue;
+                }
+
+                if (unit.IsBoss() && unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 0 &&
+                    PositionHelper.Distance2D(vector3, unit.Position) < dis)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
