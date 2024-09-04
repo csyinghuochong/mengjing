@@ -26,10 +26,7 @@ namespace ET.Client
 
 		public static void OnLogin(this DlgLogin self)
 		{
-			LoginHelper.Login(
-				self.Root(), 
-				self.View.EAccountInputField.text, 
-				self.View.EPasswordInputField.text, 0, GlobalHelp.GetVersionMode()).Coroutine();
+			
 		}
 		 
 

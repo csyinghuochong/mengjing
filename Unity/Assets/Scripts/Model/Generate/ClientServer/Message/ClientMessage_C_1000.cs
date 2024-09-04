@@ -190,6 +190,108 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_RealName)]
+    [ResponseType(nameof(NetClient2Main_RealName))]
+    public partial class Main2NetClient_RealName : MessageObject, IRequest
+    {
+        public static Main2NetClient_RealName Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_RealName), isFromPool) as Main2NetClient_RealName;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int OwnerFiberId { get; set; }
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 身份证号码
+        /// </summary>
+        [MemoryPackOrder(3)]
+        public string IdCardNO { get; set; }
+
+        /// <summary>
+        /// 1认证 2查询 3上报
+        /// </summary>
+        [MemoryPackOrder(4)]
+        public int AiType { get; set; }
+
+        /// <summary>
+        /// 帐号Id
+        /// </summary>
+        [MemoryPackOrder(5)]
+        public long AccountId { get; set; }
+
+        [MemoryPackOrder(6)]
+        public int VersionMode { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OwnerFiberId = default;
+            this.Name = default;
+            this.IdCardNO = default;
+            this.AiType = default;
+            this.AccountId = default;
+            this.VersionMode = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_RealName)]
+    public partial class NetClient2Main_RealName : MessageObject, IResponse
+    {
+        public static NetClient2Main_RealName Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_RealName), isFromPool) as NetClient2Main_RealName;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// 实名认证返回
+        /// </summary>
+        [MemoryPackOrder(3)]
+        public int ErrorCode { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ErrorCode = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(ClientMessage.Main2NetClient_LoginGame)]
     [ResponseType(nameof(NetClient2Main_LoginGame))]
     public partial class Main2NetClient_LoginGame : MessageObject, IRequest
@@ -416,11 +518,13 @@ namespace ET
         public const ushort NetClient2Main_ServerList = 1002;
         public const ushort Main2NetClient_Login = 1003;
         public const ushort NetClient2Main_Login = 1004;
-        public const ushort Main2NetClient_LoginGame = 1005;
-        public const ushort NetClient2Main_LoginGame = 1006;
-        public const ushort Main2RobotClient_Message = 1007;
-        public const ushort RobotClient2Main_Message = 1008;
-        public const ushort Main2RobotManager_Message = 1009;
-        public const ushort RobotManager2Main_Message = 1010;
+        public const ushort Main2NetClient_RealName = 1005;
+        public const ushort NetClient2Main_RealName = 1006;
+        public const ushort Main2NetClient_LoginGame = 1007;
+        public const ushort NetClient2Main_LoginGame = 1008;
+        public const ushort Main2RobotClient_Message = 1009;
+        public const ushort RobotClient2Main_Message = 1010;
+        public const ushort Main2RobotManager_Message = 1011;
+        public const ushort RobotManager2Main_Message = 1012;
     }
 }

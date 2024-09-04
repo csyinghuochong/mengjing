@@ -47,6 +47,27 @@ message NetClient2Main_Login // IResponse
 	repeated CreateRoleInfo RoleLists = 12;
 }
 
+//ResponseType NetClient2Main_RealName
+message Main2NetClient_RealName // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	
+	string Name = 3;		//姓名
+	string IdCardNO = 4;		//身份证号码
+	int32 AiType = 5;			//1认证 2查询 3上报
+	int64 AccountId	 = 6;	// 帐号Id
+	int32 VersionMode = 7;
+}
+
+message NetClient2Main_RealName // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+
+	int32 ErrorCode = 4;		//实名认证返回
+}
 
 //ResponseType NetClient2Main_LoginGame
 message Main2NetClient_LoginGame // IRequest

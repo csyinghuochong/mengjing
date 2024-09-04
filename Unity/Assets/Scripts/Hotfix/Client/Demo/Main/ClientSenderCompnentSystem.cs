@@ -52,7 +52,7 @@ namespace ET.Client
             return r2CServerList;
         }
 
-        public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
+        public static async ETTask<int> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -72,9 +72,11 @@ namespace ET.Client
             playerComponent.PlayerInfo = response.PlayerInfo;
             playerComponent.CreateRoleList = response.RoleLists;
             
-            return response.PlayerId;
+            return response.Error;
         }
 
+        
+        
         public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long accountId, long key,long roleId,string address,int reLink)
         {
             Main2NetClient_LoginGame main2NetClientLoginGame = Main2NetClient_LoginGame.Create();

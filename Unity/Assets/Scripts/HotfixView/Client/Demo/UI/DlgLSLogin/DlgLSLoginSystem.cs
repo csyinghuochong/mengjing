@@ -17,10 +17,7 @@
 		 
 		public static void OnLogin(this DlgLSLogin self)
 		{
-			LoginHelper.Login(
-				self.Root(),
-				self.View.EAccountInputField.text,
-				self.View.EPasswordInputField.text, 0, GlobalHelp.GetVersionMode()).Coroutine();
+			
 		}
 	}
 }
