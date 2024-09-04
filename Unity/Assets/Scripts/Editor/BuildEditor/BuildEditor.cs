@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
 using UnityEngine;
 using YooAsset;
 
@@ -93,7 +94,9 @@ namespace ET
 
                 if (platformType != activePlatform)
                 {
-                    switch (EditorUtility.DisplayDialogComplex("Warning!", $"current platform is {activePlatform}, if change to {platformType}, may be take a long time", "change", "cancel", "no change"))
+                    switch (EditorUtility.DisplayDialogComplex("Warning!",
+                                $"current platform is {activePlatform}, if change to {platformType}, may be take a long time", "change", "cancel",
+                                "no change"))
                     {
                         case 0:
                             activePlatform = platformType;
@@ -116,6 +119,12 @@ namespace ET
                 return;
             }
 
+            if (GUILayout.Button("ExcelExporterSingle"))
+            {
+                ExcelFileWindow.ShowWindow();
+                return;
+            }
+
             if (GUILayout.Button("Proto2CS"))
             {
                 ToolsEditor.Proto2CS();
@@ -123,6 +132,58 @@ namespace ET
             }
 
             GUILayout.Space(5);
+        }
+    }
+
+    public class ExcelFileWindow : EditorWindow
+    {
+        private string[] excelFiles;
+        private Vector2 scrollPosition;
+
+        public static void ShowWindow()
+        {
+            ExcelFileWindow window = GetWindow<ExcelFileWindow>("Excel Files");
+            var mainEditorWindowPos = EditorWindow.GetWindow<BuildEditor>().position;
+            window.position =
+                    new Rect(mainEditorWindowPos.xMax, mainEditorWindowPos.y, 300, mainEditorWindowPos.height); // Position next to the main window
+            window.Show();
+        }
+
+        private void OnEnable()
+        {
+            string directoryPath = "../Unity/Assets/Config/Excel/";
+            if (Directory.Exists(directoryPath))
+            {
+                excelFiles = Directory.GetFiles(directoryPath, "*.xlsx");
+            }
+            else
+            {
+                excelFiles = new string[0];
+                Debug.LogWarning($"Directory not found: {directoryPath}");
+            }
+        }
+
+        private void OnGUI()
+        {
+            EditorGUILayout.LabelField("Excel Files", EditorStyles.boldLabel);
+
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
+            foreach (var file in excelFiles)
+            {
+                string fileName = Path.GetFileName(file);
+                if (GUILayout.Button(fileName))
+                {
+                    HandleExcelFile(fileName);
+                }
+            }
+
+            EditorGUILayout.EndScrollView();
+        }
+
+        private void HandleExcelFile(string fileName)
+        {
+            Debug.Log($"Handling Excel file: {fileName}");
         }
     }
 }
