@@ -1,40 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET
 {
     public partial class DungeonConfigCategory
     {
-
         public Dictionary<int, int> DungeonToChapter = new Dictionary<int, int>();
 
         Dictionary<int, List<KeyValuePairInt>> AutoPathList = new Dictionary<int, List<KeyValuePairInt>>();
 
         public override void EndInit()
         {
-            foreach (DungeonConfig functionConfig in this.GetAll().Values)
+            try
             {
-                int dungeonid = functionConfig.Id;
-
-                if (!string.IsNullOrEmpty(functionConfig.AutoPath))
+                foreach (DungeonConfig functionConfig in this.GetAll().Values)
                 {
-                    string[] autoPathList = functionConfig.AutoPath.Split(';');
-                    for (int i = 0; i < autoPathList.Length; i++)
+                    int dungeonid = functionConfig.Id;
+                    if (!string.IsNullOrEmpty(functionConfig.AutoPath))
                     {
-                        string[] AutoPathItem = autoPathList[i].Split(',');
-
-                        int targetdungeon = int.Parse(AutoPathItem[0]);
-                        int transfomid = int.Parse(AutoPathItem[1]);
-
-                        if (!AutoPathList.ContainsKey(dungeonid))
+                        string[] autoPathList = functionConfig.AutoPath.Split(';');
+                        
+                        for (int i = 0; i < autoPathList.Length; i++)
                         {
-                            AutoPathList.Add(dungeonid, new List<KeyValuePairInt>());
+                            string[] AutoPathItem = autoPathList[i].Split(',');
+                            if (AutoPathItem.Length != 2)
+                            {
+                                Log.Console($"Error  dungeonid: {dungeonid}    autoPathList:{functionConfig.AutoPath}");
+                                continue;
+                            }
+
+                            int targetdungeon = int.Parse(AutoPathItem[0]);
+                            int transfomid = int.Parse(AutoPathItem[1]);
+
+                            if (!AutoPathList.ContainsKey(dungeonid))
+                            {
+                                AutoPathList.Add(dungeonid, new List<KeyValuePairInt>());
+                            }
+
+                            AutoPathList[dungeonid].Add(new KeyValuePairInt() { KeyId = targetdungeon, Value = transfomid });
                         }
-
-                        AutoPathList[dungeonid].Add(new KeyValuePairInt() { KeyId = targetdungeon, Value = transfomid });
                     }
-                }
 
-                DungeonToChapter.Add(dungeonid, functionConfig.ChapterId);
+                    DungeonToChapter.Add(dungeonid, functionConfig.ChapterId);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
 
@@ -53,6 +66,7 @@ namespace ET
             {
                 return 0;
             }
+
             for (int i = 0; i < keyValuePairInts.Count; i++)
             {
                 if (keyValuePairInts[i].KeyId == targetdungoen)
@@ -60,6 +74,7 @@ namespace ET
                     return (int)keyValuePairInts[i].Value;
                 }
             }
+
             return 0;
         }
     }

@@ -27,11 +27,7 @@ namespace ET.Client
     public struct AppStartInitFinish
     {
     }
-
-    public struct LoginFinish
-    {
-    }
-
+    
     public struct EnterMapFinish
     {
     }
@@ -54,5 +50,9 @@ namespace ET.Client
     public struct UnitRevive
     {
         public Unit Unit;
+    }
+    
+    public struct LoginFinish
+    {
     }
 }

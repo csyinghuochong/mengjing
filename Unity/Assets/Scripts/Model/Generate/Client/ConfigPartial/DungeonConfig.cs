@@ -21,7 +21,12 @@ namespace ET
                     for (int i = 0; i < autoPathList.Length; i++)
                     {
                         string[] AutoPathItem = autoPathList[i].Split(',');
-
+                        if (AutoPathItem.Length != 2)
+                        {
+                            Log.Console($"Error  dungeonid: {dungeonid}    autoPathList:{functionConfig.AutoPath}");
+                            continue;
+                        }
+                        
                         int targetdungeon = int.Parse(AutoPathItem[0]);
                         int transfomid = int.Parse(AutoPathItem[1]);
 
