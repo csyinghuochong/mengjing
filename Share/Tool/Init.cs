@@ -39,7 +39,7 @@ namespace ET.Server
                     case AppType.ExcelExporter:
                     {
                         Options.Instance.Console = 1;
-                        ExcelExporter.Export();
+                        ExcelExporter.Export(Options.Instance.StartConfig);
                         return 0;
                     }
                     case AppType.Proto2CS:

@@ -183,7 +183,7 @@ namespace ET
 
         private void HandleExcelFile(string fileName)
         {
-            Debug.Log($"Handling Excel file: {fileName}");
+            ToolsEditor.ExcelExporter(fileName);
         }
     }
 }
