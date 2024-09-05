@@ -1,4 +1,5 @@
 using System;
+using Animancer;
 using UnityEngine;
 
 namespace ET.Client
@@ -304,7 +305,7 @@ namespace ET.Client
             else
             {
                 AnimationComponent animationComponent = unit.GetComponent<AnimationComponent>();
-                animationComponent.Play(skillConfig.SkillAnimation);
+                animationComponent.Play(skillConfig.SkillAnimation, FadeMode.FromStart);
             }
         }
 
@@ -443,7 +444,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        animationComponent.Play(skillConfig.SkillAnimation);
+                        animationComponent.Play(skillConfig.SkillAnimation, FadeMode.FromStart);
                     }
                 }
                 else if (curAckAnimation == string.Empty)
@@ -457,7 +458,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        animationComponent.Play(skillConfig.SkillAnimation);
+                        animationComponent.Play(skillConfig.SkillAnimation, FadeMode.FromStart);
                     }
                 }
                 else
@@ -472,7 +473,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        animationComponent.Play(boolAnimation);
+                        animationComponent.Play(boolAnimation, FadeMode.FromStart);
                     }
                 }
 
@@ -489,7 +490,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    animationComponent.Play(skillConfig.SkillAnimation);
+                    animationComponent.Play(skillConfig.SkillAnimation, FadeMode.FromStart);
                 }
             }
         }
