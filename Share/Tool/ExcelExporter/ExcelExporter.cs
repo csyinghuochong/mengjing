@@ -102,54 +102,63 @@ namespace ET
             {
                 template = File.ReadAllText("Template.txt");
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                
+
+
+                string nameWithoutCS = null;
                 
                 if (name != "All")
                 {
-                    if (Directory.Exists(ClientClassDir + "/" + name.Substring(0, name.Length - ".xlsx".Length) + ".cs"))
+                    nameWithoutCS = Path.GetFileNameWithoutExtension(name);
+                    if (name.Contains("@"))
                     {
-                        Directory.Delete(ClientClassDir + "/" + name.Substring(0, name.Length - ".xlsx".Length) + ".cs", true);
-                    }
-
-                    if (Directory.Exists(ServerClassDir +"/"+  name.Substring(0, name.Length - ".xlsx".Length) + ".cs"))
-                    {
-                        Directory.Delete(ServerClassDir +"/"+  name.Substring(0, name.Length - ".xlsx".Length) + ".cs", true);
-                    }
-
-                    if (Directory.Exists(CSClassDir +"/"+  name.Substring(0, name.Length - ".xlsx".Length) + ".cs"))
-                    {
-                        Directory.Delete(CSClassDir +"/"+  name.Substring(0, name.Length - ".xlsx".Length) + ".cs", true);
+                        string[] ss = name.Split("@");
+                        nameWithoutCS = ss[0];
                     }
                     
-                    string jsonProtoDirParentC = "../Config/Json/c/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    if (Directory.Exists(ClientClassDir + "/" + nameWithoutCS + ".cs"))
+                    {
+                        Directory.Delete(ClientClassDir + "/" + nameWithoutCS + ".cs", true);
+                    }
+
+                    if (Directory.Exists(ServerClassDir +"/"+  nameWithoutCS + ".cs"))
+                    {
+                        Directory.Delete(ServerClassDir +"/"+  nameWithoutCS + ".cs", true);
+                    }
+
+                    if (Directory.Exists(CSClassDir +"/"+  nameWithoutCS + ".cs"))
+                    {
+                        Directory.Delete(CSClassDir +"/"+  nameWithoutCS + ".cs", true);
+                    }
+                    
+                    string jsonProtoDirParentC = "../Config/Json/c/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(jsonProtoDirParentC))
                     {
                         Directory.Delete(jsonProtoDirParentC, true);
                     }
-                    string jsonProtoDirParentCS = "../Config/Json/cs/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    string jsonProtoDirParentCS = "../Config/Json/cs/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(jsonProtoDirParentCS))
                     {
                         Directory.Delete(jsonProtoDirParentCS, true);
                     }
-                    string jsonProtoDirParentS = "../Config/Json/s/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    string jsonProtoDirParentS = "../Config/Json/s/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(jsonProtoDirParentS))
                     {
                         Directory.Delete(jsonProtoDirParentS, true);
                     }
                     
-                    string serverProtoDirParentC = "../Config/Excel/c/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    string serverProtoDirParentC = "../Config/Excel/c/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(serverProtoDirParentC))
                     {
                         Directory.Delete(serverProtoDirParentC, true);
                     }
                     
-                    string serverProtoDirParentCS = "../Config/Excel/cs/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    string serverProtoDirParentCS = "../Config/Excel/cs/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(serverProtoDirParentCS))
                     {
                         Directory.Delete(serverProtoDirParentCS, true);
                     }
                     
-                    string serverProtoDirParentS = "../Config/Excel/s/" + name.Substring(0, name.Length - ".xlsx".Length) + ".txt";
+                    string serverProtoDirParentS = "../Config/Excel/s/" + nameWithoutCS + ".txt";
                     if (Directory.Exists(serverProtoDirParentS))
                     {
                         Directory.Delete(serverProtoDirParentS, true);
@@ -280,13 +289,15 @@ namespace ET
                 
                 if (name != "All")
                 {
-                    if (Directory.Exists(clientProtoDir +"/"+ name.Substring(0, name.Length - ".xlsx".Length) + "Category.bytes"))
+                    if (Directory.Exists(clientProtoDir +"/"+ nameWithoutCS + "Category.bytes"))
                     {
-                        Directory.Delete(clientProtoDir +"/"+  name.Substring(0, name.Length - ".xlsx".Length) + "Category.bytes", true);
+                        Directory.Delete(clientProtoDir +"/"+  nameWithoutCS + "Category.bytes", true);
                     }
 
-                    File.Copy("../Config/Excel/c/" + name.Substring(0, name.Length - ".xlsx".Length) + "Category.bytes",
-                        clientProtoDir + name.Substring(0, name.Length - ".xlsx".Length) + "Category.bytes");
+                    if (Directory.Exists("../Config/Excel/c/" + nameWithoutCS + "Category.bytes"))
+                    {
+                        File.Copy("../Config/Excel/c/" + nameWithoutCS + "Category.bytes", clientProtoDir + nameWithoutCS + "Category.bytes");
+                    }
                 }
                 else
                 {
