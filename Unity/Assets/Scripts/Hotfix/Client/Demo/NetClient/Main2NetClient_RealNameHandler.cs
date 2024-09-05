@@ -35,21 +35,20 @@ namespace ET.Client
             c2RRealNameRequest.IdCardNO = request.IdCardNO;
             c2RRealNameRequest.Name = request.Name;
             R2C_RealNameResponse realNameResponse = (R2C_RealNameResponse)await session.Call(c2RRealNameRequest);
-            
             Log.Debug("Main2NetClient_RealNameHandler   33333" );
-            
-            
-            if (realNameResponse.Error == ErrorCode.ERR_Success)
-            {
-                root.AddComponent<SessionComponent>().Session = session;
-            }
-            else
-            {
-                session?.Dispose();
-                Log.Warning($"C2R_RealNameRequest: session?.Dispose");
-            }
+            // if (realNameResponse.Error == ErrorCode.ERR_Success)
+            // {
+            //     root.AddComponent<SessionComponent>().Session = session;
+            // }
+            // else
+            // {
+            //     
+            // }
 
             response.Error = realNameResponse.Error;
+            
+            session?.Dispose();
+            Log.Warning($"C2R_RealNameRequest: session?.Dispose");
         }
     }
 }

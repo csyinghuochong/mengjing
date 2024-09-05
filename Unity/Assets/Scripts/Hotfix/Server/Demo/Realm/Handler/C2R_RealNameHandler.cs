@@ -8,6 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Session session, C2R_RealNameRequest request, R2C_RealNameResponse response)
         {
+            //session.RemoveComponent<SessionAcceptTimeoutComponent>();  5秒后自动销毁
             int zone = session.Root().Zone();
             if (request.AccountId == 0 ||  string.IsNullOrEmpty(request.IdCardNO) || string.IsNullOrEmpty(request.Name))
             {
