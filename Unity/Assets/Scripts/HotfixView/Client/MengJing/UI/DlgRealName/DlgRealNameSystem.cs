@@ -17,6 +17,10 @@ namespace ET.Client
 
 		public static void ShowWindow(this DlgRealName self, Entity contextData = null)
 		{
+			
+			DlgMJLogin dlg =  self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLogin>();
+			dlg.HideLoadingView();
+			
 		}
 
 		public static async ETTask OnRealName_Btn(this DlgRealName self)

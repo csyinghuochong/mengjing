@@ -81,6 +81,11 @@ namespace ET.Client
             test.ELabel_ContentText.text = index.ToString();
         }
 
+        public static void HideLoadingView(this DlgMJLogin self)
+        {
+            self.View.EG_LoadingRectTransform.gameObject.SetActive(false);
+        }
+
         public static async ETTask OnLoginButton(this DlgMJLogin self)
         {
             if (self.ServerInfo == null)
