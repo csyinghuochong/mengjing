@@ -29,13 +29,33 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());
         }
 
+        public static async ETTask<int> RealName(Scene root, string name, string idcard)
+        {
+            root.RemoveComponent<ClientSenderCompnent>();
+            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
+            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            NetClient2Main_RealName netClient2MainRealName =   (NetClient2Main_RealName ) await clientSenderCompnent.RealNameAsync(playerComponent.AccountId, name, idcard, playerComponent.VersionMode);
+            return netClient2MainRealName.Error;
+        }
+
         public static async ETTask Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
-            //登陆成功之后才有session.  才能call
-            await clientSenderCompnent.LoginAsync(account, password, reLink, versionmode);
+            
+            int errCode =  await clientSenderCompnent.LoginAsync(account, password, reLink, versionmode);
+            if (errCode == ErrorCode.ERR_NotRealName)
+            {
+                Log.Debug("LoginAsync->NotRealName");
+                EventSystem.Instance.Publish(root, new NotRealName() {   });
+                return;
+            }
 
+            if (errCode != ErrorCode.ERR_Success)
+            {
+                EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: 错误吗{errCode}" });
+                return;
+            }
             if (reLink == 0)
             {
                 await EventSystem.Instance.PublishAsync(root, new LoginFinish());

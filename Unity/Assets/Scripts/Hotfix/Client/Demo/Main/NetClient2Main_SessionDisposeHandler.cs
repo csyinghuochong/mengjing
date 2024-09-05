@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Scene entity, NetClient2Main_SessionDispose message)
         {
-            Log.Console($"NetClient2Main_SessionDispose:{entity.Root().Name}");
+            Log.Debug($"NetClient2Main_SessionDispose:{entity.Root().Name}");
             
             //先简单做一下断线重连
             Scene root = entity.Root();

@@ -17,9 +17,7 @@
             {
                 return;
             }
-#if DOTNET
-            Log.Console($"SessionPlayerComponent.Destroy: ");
-#endif
+            Log.Debug($"SessionPlayerComponent.Destroy: ");
             
             NetClient2Main_SessionDispose message = NetClient2Main_SessionDispose.Create();
             message.Error = self.GetParent<Session>().Error;

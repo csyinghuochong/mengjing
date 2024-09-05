@@ -78,8 +78,7 @@ namespace ET.Server
                             centerAccountInfo?.Dispose();
                             return;
                         }
-
-
+                        
                         if (!centerAccountInfo.Password.Equals(request.Password))
                         {
                             response.Error = ErrorCode.ERR_LoginInfoIsNull;
@@ -96,6 +95,12 @@ namespace ET.Server
                         centerAccountInfo.Password = request.Password;
                         centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
                         centerAccountInfo.AccountType = (int)AccountType.Normal;
+                        if (ConfigData.RobotPassWord.Equals(request.Password))
+                        {
+                            centerAccountInfo.PlayerInfo.RealName = 1;
+                            centerAccountInfo.PlayerInfo.Name = request.Account;
+                            centerAccountInfo.PlayerInfo.IdCardNo = "429001198010232399";
+                        }
                         await dBComponent.Save<DBCenterAccountInfo>(centerAccountInfo);
                     }
 
@@ -104,6 +109,7 @@ namespace ET.Server
                         Log.Console($"session.IsDisposed: {request.Account}");
                         response.Error = ErrorCode.ERR_LoginInfoIsNull;
                         session.Disconnect().Coroutine();
+                        centerAccountInfo.Dispose();
                         return;
                     }
 
@@ -114,23 +120,26 @@ namespace ET.Server
                     {
                         response.Error = ErrorCode.ERR_StopServer;
                         session.Disconnect().Coroutine();
+                        centerAccountInfo.Dispose();
                         return;
                     }
                     
                     //防沉迷相关
-                    // if (centerAccountInfo.PlayerInfo.RealName == 0)
-                    // {
-                    //     response.Error = ErrorCode.ERR_NotRealName;
-                    //     response.AccountId = centerAccountInfo.Id;
-                    //     session.Disconnect().Coroutine();
-                    //     centerAccountInfo?.Dispose();
-                    //     return;
-                    // }
+                    if (centerAccountInfo.PlayerInfo.RealName == 0)
+                    {
+                        response.Error = ErrorCode.ERR_NotRealName;
+                        response.AccountId = centerAccountInfo.Id;
+                        response.PlayerInfo = centerAccountInfo.PlayerInfo;
+                        session.Disconnect().Coroutine();
+                        centerAccountInfo?.Dispose();
+                        return;
+                    }
                     // string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;
                     // int canLogin = CanLogin(idCardNo, IsHoliday, request.age_type);
                     // if (canLogin != ErrorCode.ERR_Success)
                     // {
                     //     response.Error = canLogin;
+                    //     response.PlayerInfo = centerAccountInfo.PlayerInfo;
                     //     session.Disconnect().Coroutine();
                     //     centerAccountInfo?.Dispose();
                     //     return;

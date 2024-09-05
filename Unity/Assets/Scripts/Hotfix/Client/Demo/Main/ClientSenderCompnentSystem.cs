@@ -52,6 +52,20 @@ namespace ET.Client
             return r2CServerList;
         }
 
+        public static async ETTask<NetClient2Main_RealName> RealNameAsync(this ClientSenderCompnent self, long accountId,string name,  string idcard, int versionmode)
+        {
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
+            self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+
+            Main2NetClient_RealName main2NetClientRealName = Main2NetClient_RealName.Create();
+            main2NetClientRealName.AccountId = accountId;
+            main2NetClientRealName.IdCardNO = idcard;
+            main2NetClientRealName.Name = name;
+            
+            NetClient2Main_RealName netClient2MainRealName = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientRealName) as NetClient2Main_RealName;
+            return netClient2MainRealName;
+        }
+
         public static async ETTask<int> LoginAsync(this ClientSenderCompnent self, string account, string password, int relink, int versionmode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");

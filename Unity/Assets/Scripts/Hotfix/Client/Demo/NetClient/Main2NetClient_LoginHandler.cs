@@ -35,10 +35,12 @@ namespace ET.Client
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
                 root.AddComponent<SessionComponent>().Session = session;
+                Log.Debug($"r2CLoginAccount.Error == ErrorCode.ERR_Success  Session = session");
             }
             else
             {
                 session?.Dispose();
+                Log.Debug($"r2CLoginAccount.Error != ErrorCode.ERR_Success   session?.Dispose");
             }
 
             response.AccountId = r2CLoginAccount.AccountId;
