@@ -409,9 +409,9 @@ namespace ET.Client
                 }
 
                 string curAckAnimation = String.Empty;
+                AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
                 if (SettingData.AnimController == 0)
                 {
-                    AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
                     foreach (var item in SkillData.AckExitTime)
                     {
                         if (animatorStateInfo.IsName(item.Key))
@@ -433,28 +433,23 @@ namespace ET.Client
                     }
                 }
 
-                if (self.LastAnimator == skillConfig.SkillAnimation)
+                
+                if (curAckAnimation == string.Empty)
                 {
                     if (SettingData.AnimController == 0)
                     {
-                        animatorComponent.SetBoolValue("Act_1", false);
-                        animatorComponent.SetBoolValue("Act_2", false);
-                        animatorComponent.SetBoolValue("Act_3", false);
-                        animatorComponent.Play(skillConfig.SkillAnimation);
+                        animatorComponent.Play(skillConfig.SkillAnimation, skillConfig.Id);
                     }
                     else
                     {
                         animationComponent.Play(skillConfig.SkillAnimation, FadeMode.FromStart);
                     }
                 }
-                else if (curAckAnimation == string.Empty)
+                else if (curAckAnimation == skillConfig.SkillAnimation)
                 {
                     if (SettingData.AnimController == 0)
                     {
-                        animatorComponent.SetBoolValue("Act_1", false);
-                        animatorComponent.SetBoolValue("Act_2", false);
-                        animatorComponent.SetBoolValue("Act_3", false);
-                        animatorComponent.Play(skillConfig.SkillAnimation);
+                        animatorComponent.Play(skillConfig.SkillAnimation, skillConfig.Id, replay: true);
                     }
                     else
                     {
@@ -466,10 +461,7 @@ namespace ET.Client
                     Log.Debug("连续击打");
                     if (SettingData.AnimController == 0)
                     {
-                        animatorComponent.SetBoolValue("Act_1", false);
-                        animatorComponent.SetBoolValue("Act_2", false);
-                        animatorComponent.SetBoolValue("Act_3", false);
-                        animatorComponent.SetBoolValue(boolAnimation, true);
+                        animatorComponent.SetTrigger(boolAnimation);
                     }
                     else
                     {

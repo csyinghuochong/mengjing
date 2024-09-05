@@ -29,6 +29,7 @@ namespace ET.Client
         public float MontionSpeed;
         public bool isStop;
         public float stopSpeed;
+        public int UnitType;
 
         public Animator Animator { get; set; }
         public int Speed = 1;

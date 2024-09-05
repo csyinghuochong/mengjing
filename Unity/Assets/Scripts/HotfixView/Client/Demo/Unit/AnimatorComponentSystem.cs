@@ -30,6 +30,7 @@ namespace ET.Client
         public static void InitController(this AnimatorComponent self, GameObject gameObject)
         {
             Unit unit = self.GetParent<Unit>();
+            self.UnitType = unit.Type;
             if (unit.Type != UnitType.Player || unit.ConfigId != 3)
             {
                 return;
@@ -167,7 +168,7 @@ namespace ET.Client
             return animatorStateInfo.normalizedTime;
         }
 
-        public static void Play(this AnimatorComponent self, string motionType, float motionSpeed = 1f)
+        public static void Play(this AnimatorComponent self, string motionType, int skillid = 0, float motionSpeed = 1f, bool replay = false)
         {
             self.MotionType = motionType;
             self.MontionSpeed = motionSpeed;
@@ -178,12 +179,28 @@ namespace ET.Client
 
             if (self.MissParameter.Contains(motionType))
             {
-                return;
+                if (self.UnitType == UnitType.Player)
+                {
+                    Log.Debug($"缺失动作: {motionType}  技能ID:{skillid}  强制改为动作:Skill_1");
+                    motionType = "Skill_1";
+                    self.MotionType = motionType;
+                }
+                else
+                {
+                    return;
+                }
             }
 
             if (self.HasParameter(motionType.ToString()))
             {
-                self.Animator.Play(motionType);
+                if (replay)
+                {
+                    self.Animator.Play(motionType, 0, 0);
+                }
+                else
+                {
+                    self.Animator.Play(motionType);
+                }
                 return;
             }
 
