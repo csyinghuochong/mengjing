@@ -144,8 +144,7 @@ namespace ET
         {
             ExcelFileWindow window = GetWindow<ExcelFileWindow>("Excel Files");
             var mainEditorWindowPos = EditorWindow.GetWindow<BuildEditor>().position;
-            window.position =
-                    new Rect(mainEditorWindowPos.xMax, mainEditorWindowPos.y, 300, mainEditorWindowPos.height); // Position next to the main window
+            window.position = new Rect(mainEditorWindowPos.xMax, mainEditorWindowPos.y, 400, mainEditorWindowPos.height);
             window.Show();
         }
 
@@ -154,7 +153,13 @@ namespace ET
             string directoryPath = "../Unity/Assets/Config/Excel/";
             if (Directory.Exists(directoryPath))
             {
-                excelFiles = Directory.GetFiles(directoryPath, "*.xlsx");
+                excelFiles = Directory.GetFiles(directoryPath, "*.xlsx", SearchOption.AllDirectories);
+                
+                for (int i = 0; i < excelFiles.Length; i++)
+                {
+                    string relativePath = Path.GetRelativePath(directoryPath, excelFiles[i]);
+                    excelFiles[i] = relativePath;
+                }
             }
             else
             {
@@ -167,9 +172,8 @@ namespace ET
         {
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
-            foreach (var file in excelFiles)
+            foreach (var fileName in excelFiles)
             {
-                string fileName = Path.GetFileName(file);
                 if (GUILayout.Button(fileName))
                 {
                     HandleExcelFile(fileName);
