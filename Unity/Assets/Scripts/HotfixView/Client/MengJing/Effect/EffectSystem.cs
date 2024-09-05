@@ -178,9 +178,9 @@ namespace ET.Client
                 case 2:
                     effectFileName = "SkillHitEffect/";
                     break;
-                //技能特效
+                //场景特效
                 case 3:
-                    effectFileName = "SkillEffect/";
+                    effectFileName = "ScenceEffect/";
                     break;
             }
 
