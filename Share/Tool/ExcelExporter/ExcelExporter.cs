@@ -296,7 +296,6 @@ namespace ET
 
                     if (File.Exists("../Config/Excel/c/" + nameWithoutCS + "Category.bytes"))
                     {
-                        Log.Console("复制.bytes");
                         File.Copy("../Config/Excel/c/" + nameWithoutCS + "Category.bytes", clientProtoDir + "/" + nameWithoutCS + "Category.bytes");
                     }
                 }
