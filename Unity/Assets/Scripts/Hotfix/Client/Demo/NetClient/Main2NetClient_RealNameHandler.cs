@@ -11,8 +11,8 @@ namespace ET.Client
         {
             
             Log.Debug("Main2NetClient_RealNameHandler 11111");
-            string account = "aaa";
-            string password = "111";
+            string account = request.Account;
+            string password = request.Password;
             string httphost = request.VersionMode == VersionMode.Alpha ? ConstValue.RouterHttpHostInter : ConstValue.RouterHttpHostOuter;
             root.RemoveComponent<RouterAddressComponent>();
             RouterAddressComponent routerAddressComponent =

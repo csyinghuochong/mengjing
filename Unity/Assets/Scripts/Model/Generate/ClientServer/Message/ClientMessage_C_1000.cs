@@ -232,6 +232,12 @@ namespace ET
         [MemoryPackOrder(6)]
         public int VersionMode { get; set; }
 
+        [MemoryPackOrder(7)]
+        public string Account { get; set; }
+
+        [MemoryPackOrder(8)]
+        public string Password { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -246,6 +252,8 @@ namespace ET
             this.AiType = default;
             this.AccountId = default;
             this.VersionMode = default;
+            this.Account = default;
+            this.Password = default;
 
             ObjectPool.Instance.Recycle(this);
         }

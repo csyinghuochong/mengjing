@@ -57,11 +57,14 @@ namespace ET.Client
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
 
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             Main2NetClient_RealName main2NetClientRealName = Main2NetClient_RealName.Create();
+            main2NetClientRealName.Account = playerComponent.Account;
+            main2NetClientRealName.Password = playerComponent.Password;
             main2NetClientRealName.AccountId = accountId;
             main2NetClientRealName.IdCardNO = idcard;
             main2NetClientRealName.Name = name;
-            
+
             NetClient2Main_RealName netClient2MainRealName = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientRealName) as NetClient2Main_RealName;
             return netClient2MainRealName;
         }
