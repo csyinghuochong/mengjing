@@ -15,7 +15,12 @@ namespace ET.Server
             self.FubenInstanceList.Clear();
             self.YeWaiFubenList.Clear();
 
-            self.InitYeWaiScene().Coroutine();
+            Scene root = self.Root();
+            //野外场景都放在FubenCenter1  其他玩法根据规则放在不同的
+            if (root.Name.Equals("FubenCenter1"))
+            {
+                self.InitYeWaiScene().Coroutine();
+            }
         }
 
         public static int GetScenePlayer(this FubenCenterComponent self, long instanced)
