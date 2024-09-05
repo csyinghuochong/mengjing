@@ -99,6 +99,7 @@ namespace ET
                 {
                     StateName = state.name,
                     AnimationClip = state.motion as AnimationClip,
+                    Speed = state.speed,
                     NextStateName = GetNextStateName(state),
                 };
             }

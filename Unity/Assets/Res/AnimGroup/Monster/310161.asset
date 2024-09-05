@@ -16,36 +16,45 @@ MonoBehaviour:
   - StateName: Idle
     AnimationClip: {fileID: -9157724340726142629, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Walk
     AnimationClip: {fileID: 4688763821548780317, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Attack_1
     AnimationClip: {fileID: 771669089995666903, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 2
     NextStateName: Idle
   - StateName: Hit
     AnimationClip: {fileID: -9157724340726142629, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: Attack_1
   - StateName: Run
     AnimationClip: {fileID: 6862590863617244936, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Death
     AnimationClip: {fileID: -7614083816372732888, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Skill_2
     AnimationClip: {fileID: 771669089995666903, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: Idle
   - StateName: Skill_3
     AnimationClip: {fileID: 771669089995666903, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: Idle
   - StateName: Skill_1
     AnimationClip: {fileID: 771669089995666903, guid: b7f70efda28719e42a803a9e725b0b8b,
       type: 3}
+    Speed: 1
     NextStateName: Idle

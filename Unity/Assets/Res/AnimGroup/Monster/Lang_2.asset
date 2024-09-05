@@ -15,19 +15,25 @@ MonoBehaviour:
   AnimInfos:
   - StateName: Idle
     AnimationClip: {fileID: 7400000, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Walk
     AnimationClip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Attack_1
     AnimationClip: {fileID: 7400004, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 1
     NextStateName: Idle
   - StateName: Hit
     AnimationClip: {fileID: 7400008, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 3
     NextStateName: Attack_1
   - StateName: Run
     AnimationClip: {fileID: 7400002, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 1
     NextStateName: 
   - StateName: Death
     AnimationClip: {fileID: 7400012, guid: cd5f6cebd34195e46b66e6da3ba24afb, type: 3}
+    Speed: 1
     NextStateName: 

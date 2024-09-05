@@ -10,6 +10,7 @@ namespace ET
     {
         public string StateName;
         public AnimationClip AnimationClip;
+        public float Speed;
         public string NextStateName;
     }
 
