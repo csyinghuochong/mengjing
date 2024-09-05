@@ -181,7 +181,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (self.Effects[i].EffectData.BuffId == effectData.BuffId)
+                if (self.Effects[i].EffectData.EffectId == effectData.EffectId)
                 {
                     Effect aEffectHandler = self.Effects[i];
                     aEffectHandler.OnFinished();

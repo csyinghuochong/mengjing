@@ -200,12 +200,8 @@ namespace ET
 
     public struct EffectData
     {
-        //必填项
         public int EffectTypeEnum;
-
-        //相关配置表
-        public int BuffId;
-
+        
         public int EffectId { get; set; }
 
         public float3 EffectPosition;
