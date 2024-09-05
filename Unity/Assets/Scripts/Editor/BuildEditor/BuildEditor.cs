@@ -165,8 +165,6 @@ namespace ET
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("Excel Files", EditorStyles.boldLabel);
-
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
             foreach (var file in excelFiles)
