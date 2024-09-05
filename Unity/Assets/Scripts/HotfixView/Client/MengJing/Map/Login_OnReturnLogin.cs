@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class Login_OnReturnLogin: AEvent<Scene, ReturnLogin>
@@ -44,8 +46,10 @@
             scene.Root().RemoveComponent<ClientSenderCompnent>();
             oldroot.CurrentScene().Dispose();
             oldroot.GetComponent<UIComponent>().CloseAllWindow();
+            GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(true);
             await FiberManager.Instance.Remove(oldroot.Fiber.Id);
             await FiberManager.Instance.Create(SchedulerType.Main, ConstFiberId.Main, 0, SceneType.Main, "");
+            GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
         }
     }
 }

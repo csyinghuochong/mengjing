@@ -63,9 +63,9 @@ namespace ET
 			yield return operation;
 		}
 
-		public void HidePatchWindow()
+		public void TogglePatchWindow(bool show)
 		{
-			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(false);
+			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(show);
 		}
 
 		public async ETTask OnUpdaterDone()
