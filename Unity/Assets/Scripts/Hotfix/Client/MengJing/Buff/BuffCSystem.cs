@@ -60,11 +60,6 @@ namespace ET.Client
                 return 0;
             }
 
-            if (self.mSkillConf != null)
-            {
-                playEffectBuffData.SkillId = self.mSkillConf.Id; //技能相关配置
-            }
-
             playEffectBuffData.EffectId = self.mEffectConf.Id;
             playEffectBuffData.TargetAngle = self.BuffData.TargetAngle;
             playEffectBuffData.EffectTypeEnum = EffectTypeEnum.BuffEffect;

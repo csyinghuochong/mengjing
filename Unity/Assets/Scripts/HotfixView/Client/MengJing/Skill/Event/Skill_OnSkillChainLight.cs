@@ -24,8 +24,7 @@
                 {
                     EffectData playEffectBuffData = new EffectData();
                     playEffectBuffData.TargetID = args.M2C_ChainLightning.TargetID;
-                    playEffectBuffData.SkillId = args.M2C_ChainLightning.SkillID; //技能相关配置
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(playEffectBuffData.SkillId);
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.M2C_ChainLightning.SkillID);
                     playEffectBuffData.EffectId = skillConfig.SkillEffectID[0]; //特效相关配置
                     playEffectBuffData.EffectPosition =
                             new UnityEngine.Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY, args.M2C_ChainLightning.PosZ); //技能目标点
@@ -50,8 +49,7 @@
                     {
                         EffectData playEffectBuffData = new EffectData();
                         playEffectBuffData.TargetID = args.M2C_ChainLightning.TargetID;
-                        playEffectBuffData.SkillId = args.M2C_ChainLightning.SkillID; //技能相关配置
-                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(playEffectBuffData.SkillId);
+                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.M2C_ChainLightning.SkillID);
                         playEffectBuffData.EffectId = skillConfig.SkillEffectID[0]; //特效相关配置
                         playEffectBuffData.EffectPosition =
                                 new UnityEngine.Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY,

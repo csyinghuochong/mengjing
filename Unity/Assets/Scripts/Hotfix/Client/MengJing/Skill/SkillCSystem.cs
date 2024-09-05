@@ -118,7 +118,6 @@ namespace ET.Client
 
             EffectData playEffectBuffData = new EffectData();
             playEffectBuffData.TargetID = self.SkillInfo.TargetID;
-            playEffectBuffData.SkillId = self.SkillConf.Id; //技能相关配置
             playEffectBuffData.EffectId = self.EffectId; //特效相关配置
             playEffectBuffData.EffectPosition = effectPostion; //技能目标点
             playEffectBuffData.EffectAngle = effectAngle;

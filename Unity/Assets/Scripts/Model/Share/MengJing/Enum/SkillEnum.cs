@@ -204,7 +204,6 @@ namespace ET
         public int EffectTypeEnum;
 
         //相关配置表
-        public int SkillId;
         public int BuffId;
 
         public int EffectId { get; set; }
