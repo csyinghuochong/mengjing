@@ -201,5 +201,6 @@ namespace ET.Client
 		WindowID_SoloReward,
 		WindowID_DungeonMap,
 		WindowID_DungeonMapLevel,
+		WindowID_RealName,
 	}
 }
