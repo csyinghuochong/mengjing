@@ -231,6 +231,11 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPro.SkillID);
                 if (skillConfig.SkillEffectID.Length > 0 && skillConfig.SkillEffectID[0] != 0)
                 {
+                    if (!EffectConfigCategory.Instance.Contain(skillConfig.SkillEffectID[0]))
+                    {
+                        continue;
+                    }
+
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
                     effects.Add(ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName));
                 }
