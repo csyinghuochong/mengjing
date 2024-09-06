@@ -15,5 +15,7 @@ namespace ET.Client
         public CreateRoleInfo SeletRoleInfo;
         public Dictionary<int, EntityRef<Scroll_Item_CreateRoleItem>> ScrollItemCreateRoleItems;
         public List<CreateRoleInfo> ShowCreateRoleInfos = new();
+        
+        public float LastLoginTime;
     }
 }

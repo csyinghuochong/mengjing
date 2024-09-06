@@ -30,7 +30,23 @@ namespace ET.Client
         private static void Refresh(this DlgMJLobby self)
         {
             self.RefreshCreateRoleItems();
-            self.UpdateSelect(self.ShowCreateRoleInfos[0]);
+            
+            string lastUserID = PlayerPrefsHelp.GetString(PlayerPrefsHelp.LastUserID);
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            if (!string.IsNullOrEmpty(lastUserID))
+            {
+                long useid = long.Parse(lastUserID);
+                for (int i = 0; i < playerComponent.CreateRoleList.Count; i++)
+                {
+                    if (playerComponent.CreateRoleList[i].UnitId == useid)
+                    {
+                        self.SeletRoleInfo = playerComponent.CreateRoleList[i];
+                        self.PageIndex = i / self.PageCount;
+                        break;
+                    }
+                }
+            }
+            self.UpdateSelect(self.SeletRoleInfo ?? self.ShowCreateRoleInfos[0]);
         }
 
         public static void SelectNewCreateRole(this DlgMJLobby self)
@@ -122,8 +138,13 @@ namespace ET.Client
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)
         {
-            PlayerComponent accountInfoComponentClient = self.Root().GetComponent<PlayerComponent>();
-            if (accountInfoComponentClient.CreateRoleList.Count == 0)
+            if (Time.time - self.LastLoginTime < 4f)
+            {
+                return;
+            }
+            
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            if (playerComponent.CreateRoleList.Count == 0)
             {
                 Log.Debug("需要先创建角色！");
                 return;
@@ -135,7 +156,9 @@ namespace ET.Client
                 return;
             }
 
-            accountInfoComponentClient.CurrentRoleId = self.SeletRoleInfo.UnitId;
+            self.LastLoginTime = Time.time;
+            PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, self.SeletRoleInfo.UnitId.ToString());
+            playerComponent.CurrentRoleId = self.SeletRoleInfo.UnitId;
             await LoginHelper.LoginGameAsync(self.Root(), 0);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
