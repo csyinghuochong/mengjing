@@ -13,6 +13,13 @@ namespace ET.Server
                 unit.SendStop(-1);
                 return;
             }
+            
+            StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
+            int errorCode = stateComponent.CanMove();
+            if (ErrorCode.ERR_Success != errorCode)
+            {
+                return;
+            }
 
             M2C_PathfindingResult m2CPathfindingResult = new();
             unit.GetComponent<PathfindingComponent>().Find(unit.Position, target, m2CPathfindingResult.Points);

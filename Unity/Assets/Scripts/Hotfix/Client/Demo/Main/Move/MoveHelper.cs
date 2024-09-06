@@ -8,6 +8,22 @@ namespace ET.Client
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null)
         {
+            StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
+            stateComponent.ObstructStatus = 0;
+            int errorCode = stateComponent.CanMove();
+            if (ErrorCode.ERR_Success != errorCode)
+            {
+                HintHelp.ShowErrorHint(unit.Root(), errorCode);
+                stateComponent.CheckSilence();
+                return -1;
+            }
+
+            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            if (speed <= 0.1f)
+            {
+                HintHelp.ShowHint(unit.Root(), "速度异常,请重新登录");
+            }
+
             C2M_PathfindingResult msg = C2M_PathfindingResult.Create();
             msg.Position = targetPos;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
