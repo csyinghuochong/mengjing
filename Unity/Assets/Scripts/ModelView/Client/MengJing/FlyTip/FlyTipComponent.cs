@@ -13,7 +13,7 @@ namespace ET.Client
         public Queue<string> FlyTipDiQueue = new();
         public long LastSpawnFlyTipDiTime;
 
-        public long Interval = 400;
+        public long Interval = 300;
 
         [StaticField]
         public static FlyTipComponent Instance;

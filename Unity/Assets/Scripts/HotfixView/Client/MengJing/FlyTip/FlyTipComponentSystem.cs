@@ -115,6 +115,11 @@ namespace ET.Client
 
         public static void ShowFlyTip(this FlyTipComponent self, string str)
         {
+            if (self.FlyTipQueue.Contains(str))
+            {
+                return;
+            }
+
             self.FlyTipQueue.Enqueue(str);
         }
 
@@ -144,6 +149,11 @@ namespace ET.Client
 
         public static void ShowFlyTipDi(this FlyTipComponent self, string str)
         {
+            if (self.FlyTipDiQueue.Contains(str))
+            {
+                return;
+            }
+
             self.FlyTipDiQueue.Enqueue(str);
         }
 
