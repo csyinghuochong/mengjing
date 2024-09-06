@@ -95,7 +95,17 @@ namespace ET.Server
                     }
                     break;
                 case  SceneTypeEnum.LocalDungeon:
-                    unit.Position = new float3(-0.72f, 0, -2.57f);
+                    DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(request.SceneId);
+                    int transferId = int.Parse(request.ParamInfo);
+                    if (transferId != 0)
+                    {
+                        DungeonTransferConfig transferConfig = DungeonTransferConfigCategory.Instance.Get(transferId);
+                        unit.Position = new float3(transferConfig.BornPos[0] * 0.01f, transferConfig.BornPos[1] * 0.01f, transferConfig.BornPos[2] * 0.01f);
+                    }
+                    else
+                    {
+                        unit.Position = new float3(dungeonConfig.BornPosLeft[0] * 0.01f, dungeonConfig.BornPosLeft[1] * 0.01f, dungeonConfig.BornPosLeft[2] * 0.01f);
+                    }
                     unit.AddComponent<PathfindingComponent, int>(10001);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
                     scene.GetComponent<LocalDungeonComponent>().GenerateFubenScene(request.SceneId);
