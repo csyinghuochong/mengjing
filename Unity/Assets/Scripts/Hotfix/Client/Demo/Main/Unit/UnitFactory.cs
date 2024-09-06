@@ -166,9 +166,9 @@ namespace ET.Client
             unit.ConfigId = transferInfo.TransferId;
             unitComponent.Add(unit);
 
-            // ChuansongComponentC chuansongComponent = unit.AddComponent<ChuansongComponentC>();
-            // chuansongComponent.CellIndex = transferInfo.CellIndex;
-            // chuansongComponent.DirectionType = transferInfo.Direction;
+            ChuansongComponent chuansongComponent = unit.AddComponent<ChuansongComponent>();
+            chuansongComponent.CellIndex = transferInfo.CellIndex;
+            chuansongComponent.DirectionType = transferInfo.Direction;
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = new(transferInfo.X, transferInfo.Y, transferInfo.Z);
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
