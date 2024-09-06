@@ -9800,6 +9800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5461242568420679388}
+  - component: {fileID: 945505321933496827}
   m_Layer: 0
   m_Name: SceneEffect_Npc_Select
   m_TagString: Untagged
@@ -9823,6 +9824,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945505321933496827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2292975610560402154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+  - key: circle_floor
+    gameObject: {fileID: 915981563444408828}
 --- !u!1 &4848268919594993933
 GameObject:
   m_ObjectHideFlags: 0

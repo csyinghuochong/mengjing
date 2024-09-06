@@ -317,7 +317,7 @@ namespace ET.Client
             }
             else if (self.Type == 1)
             {
-                go = self.LockUnitEffect.transform.Find("circle_floor").gameObject;
+                go = self.LockUnitEffect.GetComponent<ReferenceCollector>().Get<GameObject>("circle_floor");
             }
             
             ParticleSystem ps = go.GetComponent<ParticleSystem>();
