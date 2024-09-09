@@ -21,6 +21,11 @@ namespace ET.Client
                     continue;
                 }
 
+                if (!SettingData.ShowMonster)
+                {
+                    continue;
+                }
+                
                 UnitFactory.CreateUnit(currentScene, unitInfo);
             }
 
