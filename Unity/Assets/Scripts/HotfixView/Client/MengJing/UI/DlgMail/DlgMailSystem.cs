@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnMailUpdate_DlgMailRefresh: AEvent<Scene, OnMailUpdate>
+    public class DataUpdate_OnMailUpdate_DlgMailRefresh : AEvent<Scene, OnMailUpdate>
     {
         protected override async ETTask Run(Scene scene, OnMailUpdate args)
         {
@@ -13,8 +13,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_MailItem))]
-    [FriendOf(typeof (DlgMail))]
+    [FriendOf(typeof(Scroll_Item_MailItem))]
+    [FriendOf(typeof(DlgMail))]
     public static class DlgMailSystem
     {
         public static void RegisterUIEvent(this DlgMail self)
@@ -33,7 +33,7 @@ namespace ET.Client
         public static void RequestMaiList(this DlgMail self)
         {
             MailNetHelper.SendGetMailList(self.Root()).Coroutine();
-            // NetHelper.SendReddotRead(self.ZoneScene(), ReddotType.Email).Coroutine();
+            UserInfoNetHelper.ReddotReadRequest(self.Root(), ReddotType.Email).Coroutine();
         }
 
         public static void OnButtonGetButton(this DlgMail self)
@@ -157,6 +157,7 @@ namespace ET.Client
             scrollItemMailItem.OnUpdateUI(mailComponent.MailInfoList[index]);
             scrollItemMailItem.SetClickHandler(() => { self.OnSelectMail(); });
         }
+
         public static void OnBtn_CloseButton(this DlgMail self)
         {
         }
