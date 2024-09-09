@@ -34,9 +34,9 @@ namespace ET.Client
             root.AddComponent<SoundComponent>();
             root.AddComponent<TitleComponentC>();
             root.AddComponent<ReddotComponentC>();
+            root.AddComponent<ReddotViewComponent>();
             root.AddComponent<AttackComponent>();
             root.AddComponent<ActivityComponentC>();
-            root.AddComponent<ReddotViewComponent>();
             root.AddComponent<SceneManagerComponent>();
             root.AddComponent<JiaYuanComponentC>();
             root.AddComponent<TeamComponentC>();

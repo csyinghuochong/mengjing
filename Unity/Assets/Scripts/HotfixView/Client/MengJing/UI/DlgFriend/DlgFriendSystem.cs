@@ -40,8 +40,28 @@ namespace ET.Client
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)
         {
             self.RequestFriendInfo().Coroutine();
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
+            redPointComponent.RegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
         }
 
+        public static void BeforeUnload(this DlgFriend self)
+        {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
+            redPointComponent.UnRegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
+        }
+
+        public static void Reddot_FriendChat(this DlgFriend self, int num)
+        {
+            self.View.E_Type_0Toggle.gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_FriendApply(this DlgFriend self, int num)
+        {
+            self.View.E_Type_1Toggle.gameObject.SetActive(num > 0);
+        }
         public static async ETTask RequestFriendInfo(this DlgFriend self)
         {
             await FriendNetHelper.RequestFriendInfo(self.Root());
