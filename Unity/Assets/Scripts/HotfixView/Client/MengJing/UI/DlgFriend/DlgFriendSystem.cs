@@ -55,12 +55,12 @@ namespace ET.Client
 
         public static void Reddot_FriendChat(this DlgFriend self, int num)
         {
-            self.View.E_Type_0Toggle.gameObject.SetActive(num > 0);
+            self.View.E_Type_0Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         public static void Reddot_FriendApply(this DlgFriend self, int num)
         {
-            self.View.E_Type_1Toggle.gameObject.SetActive(num > 0);
+            self.View.E_Type_1Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
         public static async ETTask RequestFriendInfo(this DlgFriend self)
         {
