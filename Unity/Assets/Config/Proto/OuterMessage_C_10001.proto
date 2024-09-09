@@ -161,29 +161,9 @@ message UnitInfo
 	repeated int32 FashionEquipList = 26;
 }
 
-message SpilingInfo
-{
-	int64 UnitId = 1;
-	float X = 2;
-	float Y = 3;
-	float Z = 4;
-	repeated int32 Ks = 5;
-	repeated int64 Vs = 6;
-	int32 RoleCamp = 8;
-	int32 MonsterID = 9;
-	int32 SkillId = 10;	//目前只有能量台子用到，可以作为通常参数
-	float ForwardX = 12;
-	float ForwardY = 13;
-	float ForwardZ = 14;
-	repeated KeyValuePair Buffs = 19;
-	repeated SkillInfo Skills = 20;
-}
-
-
 message M2C_CreateUnits // IMessage
 {
 	repeated UnitInfo Units = 1;
-	repeated SpilingInfo Spilings = 2;
 	repeated DropInfo Drops = 3;
 	repeated TransferInfo Transfers = 4;
 	int32 UpdateAll = 8;

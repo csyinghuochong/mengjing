@@ -87,44 +87,7 @@ namespace ET.Client
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }
-
-        public static Unit CreateSpiling(Scene currentScene, SpilingInfo unitInfo)
-        {
-            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, 1);
-            unitComponent.Add(unit);
-            unit.Type = UnitType.Monster;
-            unit.ConfigId = unitInfo.MonsterID;
-            NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>();
-            for (int i = 0; i < unitInfo.Ks.Count; ++i)
-            {
-                numericComponent.ApplyValue(unitInfo.Ks[i], unitInfo.Vs[i], false);
-            }
-
-            unit.MasterId = numericComponent.GetAsLong(NumericType.MasterId);
-            unit.AddComponent<ObjectWait>();
-            unit.AddComponent<HeroDataComponentC>();
-            unit.AddComponent<StateComponentC>();
-            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-            unitInfoComponent.EnergySkillId = unitInfo.SkillId;
-
-            MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unitInfo.MonsterID);
-            if (monsterCof.AI != 0)
-            {
-                unit.AddComponent<BuffManagerComponentC>(); //buff管理器组建
-                unit.AddComponent<SkillManagerComponentC>();
-                unit.GetComponent<BuffManagerComponentC>().t_Buffs = unitInfo.Buffs;
-                unit.GetComponent<SkillManagerComponentC>().t_Skills = unitInfo.Skills;
-            }
-
-            unit.Position = new(unitInfo.X, unitInfo.Y, unitInfo.Z);
-            unit.Forward = new(unitInfo.ForwardX, unitInfo.ForwardY, unitInfo.ForwardZ);
-            unit.AddComponent<MoveComponent>();
-
-            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
-            return unit;
-        }
-
+        
         public static Unit CreateDropItem(Scene currentScene, DropInfo dropInfo)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();

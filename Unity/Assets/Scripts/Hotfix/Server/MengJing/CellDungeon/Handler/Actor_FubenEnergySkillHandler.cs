@@ -17,7 +17,7 @@ namespace ET.Server
                 foreach ((long id, Entity value) in unit.GetParent<UnitComponent>().Children)
                 {
                     Unit unititem = value as Unit;
-                    int e_skillid = unititem.GetComponent<UnitInfoComponent>().EnergySkillId;
+                    int e_skillid = unititem.GetComponent<NumericComponentS>().GetAsInt(NumericType.EnergySkillId);
                     if (e_skillid != 0)
                     {
                         skills.Add(e_skillid);

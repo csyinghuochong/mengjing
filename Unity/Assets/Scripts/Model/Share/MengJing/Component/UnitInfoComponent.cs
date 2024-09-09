@@ -8,9 +8,7 @@ namespace ET
     [ComponentOf(typeof(Unit))]
     public class UnitInfoComponent : Entity, IAwake, ITransfer, IDestroy
     {
-
-        public int EnergySkillId { get; set; }
-
+        
         public List<long> ZhaohuanIds { get; set; }= new List<long>();
 
         public string UnitName { get; set; }    //自身名字

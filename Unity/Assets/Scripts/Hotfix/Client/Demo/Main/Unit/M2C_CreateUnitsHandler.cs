@@ -24,18 +24,7 @@ namespace ET.Client
                 UnitFactory.CreateUnit(currentScene, unitInfo);
             }
 
-            foreach (SpilingInfo unitInfo in message.Spilings)
-            {
-                allunitids.Add(unitInfo.UnitId);
-
-                if (CheckUnitExist(unitComponent, unitInfo.UnitId, unitInfo.X, unitInfo.Y, unitInfo.Z))
-                {
-                    continue;
-                }
-
-                UnitFactory.CreateSpiling(currentScene, unitInfo);
-            }
-
+  
             foreach (DropInfo unitInfo in message.Drops)
             {
                 allunitids.Add(unitInfo.UnitId);

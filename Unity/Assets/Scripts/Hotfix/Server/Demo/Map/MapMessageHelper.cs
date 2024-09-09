@@ -21,10 +21,8 @@ namespace ET.Server
                 case UnitType.Bullet:
                 case UnitType.Npc:
                 case UnitType.Stall:
-                    createUnits.Units.Add(CreateUnitInfo(sendUnit));
-                    break;
                 case UnitType.Monster:
-                    createUnits.Spilings.Add(CreateSpilingInfo(sendUnit));
+                    createUnits.Units.Add(CreateUnitInfo(sendUnit));
                     break;
                 case UnitType.DropItem:
                     createUnits.Drops.Add(CreateDropInfo(sendUnit));
@@ -105,49 +103,13 @@ namespace ET.Server
                     break;
                 case UnitType.Npc:
                     break;
+                case UnitType.Monster:
+                    break;
                 default:
                     break;
             }
 
             return unitInfo;
-        }
-
-        public static SpilingInfo CreateSpilingInfo(Unit unit)
-        {
-            SpilingInfo spilingInfo = SpilingInfo.Create();
-            unit.GetComponent<UnitInfoComponent>();
-            spilingInfo.X = unit.Position.x;
-            spilingInfo.Y = unit.Position.y;
-            spilingInfo.Z = unit.Position.z;
-            float3 forward = unit.Forward;
-            spilingInfo.ForwardX = forward.x;
-            spilingInfo.ForwardY = forward.y;
-            spilingInfo.ForwardZ = forward.z;
-            spilingInfo.UnitId = unit.Id;
-
-            NumericComponentS nc = unit.GetComponent<NumericComponentS>();
-            if (nc != null)
-            {
-                foreach ((int key, long value) in nc.NumericDic)
-                {
-                    if (key >= (int)NumericType.Max)
-                    {
-                        continue;
-                    }
-                    spilingInfo.Ks.Add(key);
-                    spilingInfo.Vs.Add(value);
-                }
-            }
-
-            // if (unit.GetComponent<BuffManagerComponentS>() != null)
-            // {
-            //     spilingInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
-            //     spilingInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
-            // }
-            //广播创建的是那个怪物ID
-            spilingInfo.SkillId = unit.GetComponent<UnitInfoComponent>().EnergySkillId;
-            spilingInfo.MonsterID = unit.ConfigId;
-            return spilingInfo;
         }
         
         public static DropInfo CreateDropInfo(Unit unit)

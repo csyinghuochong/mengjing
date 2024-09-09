@@ -119,7 +119,6 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             HeroDataComponentS heroDataComponent = unit.AddComponent<HeroDataComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-            unitInfoComponent.EnergySkillId = createMonsterInfo.SkillId;
             unitInfoComponent.UnitName = monsterConfig.MonsterName;
             unit.Type = UnitType.Monster;
             unit.Position = vector3;
@@ -130,7 +129,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
             numericComponent.ApplyValue(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
             numericComponent.ApplyValue(NumericType.PetSkin, createMonsterInfo.SkinId, false);
-
+            numericComponent.ApplyValue(NumericType.EnergySkillId, createMonsterInfo.SkillId, false);
             unit.SetBornPosition(unit.Position, false);
             unit.MasterId = createMonsterInfo.MasterID;
 
