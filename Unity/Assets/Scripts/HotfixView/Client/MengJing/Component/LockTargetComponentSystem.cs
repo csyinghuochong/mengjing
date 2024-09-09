@@ -104,6 +104,11 @@ namespace ET.Client
 
         public static void CheckLockEffect(this LockTargetComponent self, int type = 0)
         {
+            if (self.LockUnitEffect != null)
+            {
+                self.LockUnitEffect.gameObject.SetActive(false);
+            }
+            
             self.Type = type;
             if (!self.EffectMap.ContainsKey(type))
             {
