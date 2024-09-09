@@ -284,7 +284,7 @@ namespace ET.Client
 
         public static void OnNoMovingButton(this ES_SettingGame self)
         {
-            SettingData.ShowNoMoving = !SettingData.ShowNoMoving;
+            SettingData.HideNoMoving = !SettingData.HideNoMoving;
         }
 
         public static void OnBtn_HideLeftBottom(this ES_SettingGame self)

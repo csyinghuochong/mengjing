@@ -635,7 +635,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_YinYingButton == null )
      			{
-		    		this.m_E_Btn_YinYingButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/YinYing/E_Btn_YinYing");
+		    		this.m_E_Btn_YinYingButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_YinYing/E_Btn_YinYing");
      			}
      			return this.m_E_Btn_YinYingButton;
      		}

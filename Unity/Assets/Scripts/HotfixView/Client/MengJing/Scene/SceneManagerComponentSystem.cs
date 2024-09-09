@@ -81,6 +81,12 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(chapterId).MapID.ToString();
+
+                    playerComponent = self.Root().GetComponent<PlayerComponent>();
+                    if (playerComponent.Account.Equals("tcg01"))
+                    {
+                        paramss = "10001_test";
+                    }
                     break;
                 default:
                     paramss = SceneConfigCategory.Instance.Get(chapterId).MapID.ToString();

@@ -8,12 +8,7 @@ namespace ET
         //qqUID_84E70C11CC937F72EE508CD43D7DD4DA һֱ��ͷ��
         public static bool IsGmAccount(string account)
         {
-            return account.Equals("tcg01")
-            || account.Equals("test01")
-            || account.Equals("testcn01")
-            || account.Equals("18319670288")        
-            || account.Equals("18652422521")
-            || account.Equals("qqUID_9925F6D139D96D68D5B5657D2CFF0863");
+            return GMData.GmAccount.Contains(account);
         }
 
         public static bool BanChatPlayer (string account)

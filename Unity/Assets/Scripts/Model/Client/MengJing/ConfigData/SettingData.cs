@@ -69,7 +69,11 @@
         public static bool UsePool = true;
 
         [StaticField]
-        public static bool ShowNoMoving = false; 
+        public static bool HideNoMoving = true; 
+        
+        
+        [StaticField]
+        public static bool ShowMonster = true; 
     }
 }
 
