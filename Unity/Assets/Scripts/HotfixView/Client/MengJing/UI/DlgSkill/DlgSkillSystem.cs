@@ -1,7 +1,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillReset_Refresh: AEvent<Scene, SkillReset>
+    public class DataUpdate_SkillReset_Refresh : AEvent<Scene, SkillReset>
     {
         protected override async ETTask Run(Scene scene, SkillReset args)
         {
@@ -11,7 +11,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillUpgrade_Refresh: AEvent<Scene, SkillUpgrade>
+    public class DataUpdate_SkillUpgrade_Refresh : AEvent<Scene, SkillUpgrade>
     {
         protected override async ETTask Run(Scene scene, SkillUpgrade args)
         {
@@ -21,7 +21,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillSetting_Refresh: AEvent<Scene, SkillSetting>
+    public class DataUpdate_SkillSetting_Refresh : AEvent<Scene, SkillSetting>
     {
         protected override async ETTask Run(Scene scene, SkillSetting args)
         {
@@ -31,7 +31,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnActiveTianFu_Refresh: AEvent<Scene, OnActiveTianFu>
+    public class DataUpdate_OnActiveTianFu_Refresh : AEvent<Scene, OnActiveTianFu>
     {
         protected override async ETTask Run(Scene scene, OnActiveTianFu args)
         {
@@ -41,7 +41,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_Refresh: AEvent<Scene, HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_Refresh : AEvent<Scene, HuiShouSelect>
     {
         protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
@@ -50,12 +50,12 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_SkillLearn))]
-    [FriendOf(typeof (ES_SkillSet))]
-    [FriendOf(typeof (ES_SkillMake))]
-    [FriendOf(typeof (ES_SkillTianFu))]
-    [FriendOf(typeof (ES_SkillLifeShield))]
-    [FriendOf(typeof (DlgSkill))]
+    [FriendOf(typeof(ES_SkillLearn))]
+    [FriendOf(typeof(ES_SkillSet))]
+    [FriendOf(typeof(ES_SkillMake))]
+    [FriendOf(typeof(ES_SkillTianFu))]
+    [FriendOf(typeof(ES_SkillLifeShield))]
+    [FriendOf(typeof(DlgSkill))]
     public static class DlgSkillSystem
     {
         public static void RegisterUIEvent(this DlgSkill self)
@@ -66,6 +66,15 @@ namespace ET.Client
         public static void ShowWindow(this DlgSkill self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
+        }
+
+        public static void BeforeUnload(this DlgSkill self)
+        {
+            ReddotViewComponent redPointComponent = self.Root()?.GetComponent<ReddotViewComponent>();
+            redPointComponent?.UnRegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
         }
 
         private static void OnFunctionSetBtn(this DlgSkill self, int index)
@@ -97,7 +106,7 @@ namespace ET.Client
 
         public static void Reddot_SkillUp(this DlgSkill self, int num)
         {
-            // self.UIPageButton.SetButtonReddot((int)SkillPageEnum.SkillLearn, num > 0);
+            self.View.E_Type_0Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         public static void OnActiveTianFu(this DlgSkill self)

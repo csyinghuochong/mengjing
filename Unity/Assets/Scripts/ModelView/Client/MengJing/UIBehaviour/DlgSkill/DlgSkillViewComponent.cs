@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSkill))]
 	[EnableMethod]
 	public  class DlgSkillViewComponent : Entity,IAwake,IDestroy 
 	{
-		public RectTransform EG_SubViewNodeRectTransform
+		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewNodeRectTransform == null )
      			{
-		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
+		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
      			}
      			return this.m_EG_SubViewNodeRectTransform;
      		}
@@ -33,9 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_SkillLearn es = this.m_es_skilllearn;
+     			ES_SkillLearn es = this.m_es_skilllearn;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillLearn");
 		    	   this.m_es_skilllearn = this.AddChild<ES_SkillLearn,Transform>(subTrans);
@@ -53,9 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_SkillSet es = this.m_es_skillset;
+     			ES_SkillSet es = this.m_es_skillset;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillSet");
 		    	   this.m_es_skillset = this.AddChild<ES_SkillSet,Transform>(subTrans);
@@ -73,9 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_SkillTianFu es = this.m_es_skilltianfu;
+     			ES_SkillTianFu es = this.m_es_skilltianfu;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillTianFu");
 		    	   this.m_es_skilltianfu = this.AddChild<ES_SkillTianFu,Transform>(subTrans);
@@ -93,9 +93,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_SkillMake es = this.m_es_skillmake;
+     			ES_SkillMake es = this.m_es_skillmake;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillMake");
 		    	   this.m_es_skillmake = this.AddChild<ES_SkillMake,Transform>(subTrans);
@@ -113,9 +113,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_SkillLifeShield es = this.m_es_skilllifeshield;
+     			ES_SkillLifeShield es = this.m_es_skilllifeshield;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillLifeShield");
 		    	   this.m_es_skilllifeshield = this.AddChild<ES_SkillLifeShield,Transform>(subTrans);
@@ -124,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public ToggleGroup E_FunctionSetBtnToggleGroup
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -135,9 +135,26 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_0Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_0Toggle == null )
+     			{
+		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
+     			}
+     			return this.m_E_Type_0Toggle;
      		}
      	}
 
@@ -150,16 +167,18 @@ namespace ET.Client
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_Type_0Toggle = null;
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_SubViewNodeRectTransform = null;
+		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
 		private EntityRef<ES_SkillLearn> m_es_skilllearn = null;
 		private EntityRef<ES_SkillSet> m_es_skillset = null;
 		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
-		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
 		public Transform uiTransform = null;
 	}
 }
