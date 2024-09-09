@@ -35,7 +35,7 @@ namespace ET
 			Options.Instance.StartConfig = $"StartConfig/Localhost";
             
 			Options.Instance.Develop = VersionMode == ET.VersionMode.Beta ?0 : 1;
-			//Options.Instance.LogLevel = VersionMode == ET.VersionMode.Beta ?6 : 1;
+			Options.Instance.LogLevel = VersionMode == ET.VersionMode.Beta ?6 : 1;
 			
 			World.Instance.AddSingleton<Logger>().Log = new UnityLogger();
 			ETTask.ExceptionHandler += Log.Error;

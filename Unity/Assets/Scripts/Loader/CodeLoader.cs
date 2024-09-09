@@ -46,7 +46,7 @@ namespace ET
 
                 if (Define.EnableIL2CPP)
                 {
-                    foreach (var kv in this.aotDlls)
+                    foreach (var kv in this.aotDlls)  //aotDlls - > mscorlib.dll  System.dll  
                     {
                         TextAsset textAsset = kv.Value;
                         RuntimeApi.LoadMetadataForAOTAssembly(textAsset.bytes, HomologousImageMode.SuperSet);

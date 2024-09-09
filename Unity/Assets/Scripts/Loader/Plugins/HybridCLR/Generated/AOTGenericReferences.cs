@@ -26,7 +26,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
-	// Animancer.AnimancerTransition<object>
 	// ET.AEvent<object,ET.ChangePosition>
 	// ET.AEvent<object,ET.ChangeRotation>
 	// ET.AEvent<object,ET.Client.AfterCreateClientScene>
@@ -45,6 +44,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.ChengJiuUpdate>
 	// ET.AEvent<object,ET.Client.ChouKaWarehouseAddItem>
 	// ET.AEvent<object,ET.Client.CommonHintError>
+	// ET.AEvent<object,ET.Client.CommonPopup>
 	// ET.AEvent<object,ET.Client.DataUpdate_UpdateRoleProper>
 	// ET.AEvent<object,ET.Client.DigForTreasure>
 	// ET.AEvent<object,ET.Client.EnterMapFinish>
@@ -65,6 +65,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.LoadSceneFinished>
 	// ET.AEvent<object,ET.Client.LoginFinish>
 	// ET.AEvent<object,ET.Client.MainHeroMove>
+	// ET.AEvent<object,ET.Client.NotRealName>
 	// ET.AEvent<object,ET.Client.Now_Hp_Update>
 	// ET.AEvent<object,ET.Client.OnAccountWarehous>
 	// ET.AEvent<object,ET.Client.OnActiveTianFu>
@@ -165,7 +166,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETAsyncTaskMethodBuilder<System.ValueTuple<uint,object>>
 	// ET.ETAsyncTaskMethodBuilder<byte>
 	// ET.ETAsyncTaskMethodBuilder<int>
-	// ET.ETAsyncTaskMethodBuilder<long>
 	// ET.ETAsyncTaskMethodBuilder<object>
 	// ET.ETAsyncTaskMethodBuilder<uint>
 	// ET.ETTask<ET.Client.WaitType.Wait_Room2C_Start>
@@ -176,7 +176,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETTask<System.ValueTuple<uint,object>>
 	// ET.ETTask<byte>
 	// ET.ETTask<int>
-	// ET.ETTask<long>
 	// ET.ETTask<object>
 	// ET.ETTask<uint>
 	// ET.EntityRef<object>
@@ -332,12 +331,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.ChengJiuNetHelper.<GetChengJiuList>d__1>
 	// ET.StateMachineWrap<ET.Client.ChengJiuNetHelper.<ReceivedReward>d__0>
 	// ET.StateMachineWrap<ET.Client.ChengJiu_OnChengJiuActive.<Run>d__0>
-	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<Call>d__7>
+	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<Call>d__8>
 	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<GetServerList>d__3>
-	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__4>
-	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__5>
+	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__5>
+	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__6>
+	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<RealNameAsync>d__4>
 	// ET.StateMachineWrap<ET.Client.ClientSenderCompnentSystem.<RemoveFiberAsync>d__2>
 	// ET.StateMachineWrap<ET.Client.CommonHintErrorEvent.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.CommonPopupEvent.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.CommonViewHelper.<DOLocalMove>d__15>
 	// ET.StateMachineWrap<ET.Client.DDataUpdate_PetXiLianUpdate_Refresh.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh.<Run>d__0>
@@ -411,7 +412,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>
 	// ET.StateMachineWrap<ET.Client.DlgEnterMapHintSystem.<OnInitUI>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgFirstWinRewardSystem.<RequestGetFirstWinSelf>d__3>
-	// ET.StateMachineWrap<ET.Client.DlgFriendSystem.<RequestFriendInfo>d__4>
+	// ET.StateMachineWrap<ET.Client.DlgFriendSystem.<RequestFriendInfo>d__7>
 	// ET.StateMachineWrap<ET.Client.DlgFriendSystem.DataUpdate_FriendChat_Refresh.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.DlgFriendSystem.DataUpdate_FriendUpdate_FriendItemsRefresh.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.DlgGMSystem.<OnButton_Broadcast_1>d__2>
@@ -469,18 +470,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgLobbySystem.<EnterMap>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>
 	// ET.StateMachineWrap<ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>
-	// ET.StateMachineWrap<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__4>
+	// ET.StateMachineWrap<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>
 	// ET.StateMachineWrap<ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<CheckMailReddot>d__78>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__67>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnBtn_LvReward>d__69>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__71>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnPetButton>d__25>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnRoseEquipButton>d__24>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnRoseSkillButton>d__26>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnTaskButton>d__27>
-	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<UpdatePosition>d__42>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<CheckMailReddot>d__86>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__75>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnBtn_LvReward>d__77>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__79>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnPetButton>d__33>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnRoseEquipButton>d__32>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnRoseSkillButton>d__34>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<OnTaskButton>d__35>
+	// ET.StateMachineWrap<ET.Client.DlgMainSystem.<UpdatePosition>d__50>
 	// ET.StateMachineWrap<ET.Client.DlgMakeLearnSystem.<OnButtonLearnButton>d__11>
 	// ET.StateMachineWrap<ET.Client.DlgMakeLearnSystem.<RequestMakeSelect>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgMapBigSystem.<OnAwake>d__3>
@@ -519,13 +520,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgPetXiLianLockSkillSystem.<OnLockBtnButton>d__5>
 	// ET.StateMachineWrap<ET.Client.DlgPhoneCodeSystem.<OnRquestBingPhone>d__7>
 	// ET.StateMachineWrap<ET.Client.DlgRandomOpenSystem.<OnInitUI>d__2>
+	// ET.StateMachineWrap<ET.Client.DlgRealNameSystem.<OnRealName_Btn>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgRechargeRewardSystem.<OnButtonRewardButton>d__4>
 	// ET.StateMachineWrap<ET.Client.DlgRechargeSystem.<OnClickRechargeItem>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgRechargeSystem.<RequestRecharge>d__5>
 	// ET.StateMachineWrap<ET.Client.DlgRoleBagSplitSystem.<OnBtn_SplitButton>d__7>
 	// ET.StateMachineWrap<ET.Client.DlgRolePetBagSystem.<OnFenjieBtn>d__5>
 	// ET.StateMachineWrap<ET.Client.DlgRolePetBagSystem.<OnTakeOutBagBtn>d__4>
-	// ET.StateMachineWrap<ET.Client.DlgRoleSystem.<OnZodiacButton>d__8>
+	// ET.StateMachineWrap<ET.Client.DlgRoleSystem.<OnZodiacButton>d__10>
 	// ET.StateMachineWrap<ET.Client.DlgRunRaceMainSystem.<ShoweEndTime>d__6>
 	// ET.StateMachineWrap<ET.Client.DlgRunRaceMainSystem.<UpdateRanking>d__8>
 	// ET.StateMachineWrap<ET.Client.DlgRunRaceMainSystem.<WaitExitFuben>d__9>
@@ -714,9 +716,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.ES_RoleBagSystem.<OnOpenOneSellSetButton>d__7>
 	// ET.StateMachineWrap<ET.Client.ES_RoleBagSystem.<OnZhengLiButton>d__9>
 	// ET.StateMachineWrap<ET.Client.ES_RoleHuiShouSystem.<OnPointerDown>d__9>
-	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__15>
-	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__8>
-	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__9>
+	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__16>
+	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__9>
+	// ET.StateMachineWrap<ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__10>
 	// ET.StateMachineWrap<ET.Client.ES_RoleQiangHuaSystem.<OnQiangHuaButton>d__5>
 	// ET.StateMachineWrap<ET.Client.ES_RoleXiLianInheritSystem.<OnXiLianButton>d__10>
 	// ET.StateMachineWrap<ET.Client.ES_RoleXiLianInheritSystem.<RequestInheritSelect>d__11>
@@ -808,6 +810,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.EnterMapHelper.<RequestTransfer>d__0>
 	// ET.StateMachineWrap<ET.Client.EnterMapHelper.<SendReviveRequest>d__3>
 	// ET.StateMachineWrap<ET.Client.EntryEvent3_InitClient.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.FangChenMiComponentCSystem.<OnLogin>d__3>
+	// ET.StateMachineWrap<ET.Client.FangChenMiComponentCSystem.<OnLoginOut>d__2>
 	// ET.StateMachineWrap<ET.Client.Fashion_FashionUpdate.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.FiberInit_NetClient.<Handle>d__0>
 	// ET.StateMachineWrap<ET.Client.FlyTipComponentSystem.<OnAwake>d__3>
@@ -872,16 +876,17 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.LSSceneInitFinish_Finish.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.LSUnitViewComponentSystem.<InitAsync>d__2>
 	// ET.StateMachineWrap<ET.Client.LoadSceneFinished_DlgLoadingRefesh.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.LoginFinish_CreateLobbyUI.<OnLoginSucess>d__1>
 	// ET.StateMachineWrap<ET.Client.LoginFinish_CreateLobbyUI.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.LoginFinish_CreateUILSLobby.<Run>d__0>
-	// ET.StateMachineWrap<ET.Client.LoginFinish_RemoveLoginUI.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.LoginFinish_RemoveUILSLogin.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.LoginHelper.<GetServerList>d__0>
-	// ET.StateMachineWrap<ET.Client.LoginHelper.<Login>d__2>
-	// ET.StateMachineWrap<ET.Client.LoginHelper.<LoginGameAsync>d__3>
+	// ET.StateMachineWrap<ET.Client.LoginHelper.<Login>d__3>
+	// ET.StateMachineWrap<ET.Client.LoginHelper.<LoginGameAsync>d__4>
 	// ET.StateMachineWrap<ET.Client.LoginHelper.<LoginOld>d__1>
-	// ET.StateMachineWrap<ET.Client.LoginHelper.<RequestCreateRole>d__4>
-	// ET.StateMachineWrap<ET.Client.LoginHelper.<RequestDeleteRole>d__5>
+	// ET.StateMachineWrap<ET.Client.LoginHelper.<RealName>d__2>
+	// ET.StateMachineWrap<ET.Client.LoginHelper.<RequestCreateRole>d__5>
+	// ET.StateMachineWrap<ET.Client.LoginHelper.<RequestDeleteRole>d__6>
 	// ET.StateMachineWrap<ET.Client.Login_OnRelinkSucess.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Login_OnReturnLogin.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Login_OnReturnLogin.<RunAsync2>d__1>
@@ -947,6 +952,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.MailNetHelper.<SendReceiveMail>d__1>
 	// ET.StateMachineWrap<ET.Client.Main2NetClient_LoginGameHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Main2NetClient_LoginHandler.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.Main2NetClient_RealNameHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.Main2NetClient_ServerListHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.MapHelper.<RequestTowerReward>d__7>
 	// ET.StateMachineWrap<ET.Client.MapHelper.<SendShiquItem>d__6>
@@ -959,6 +965,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.MoveStart_PlayMoveAnimate.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.MoveStop_PlayIdleAnimate.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.NotRealName_OpenRealNameUI.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.OnSkillUse_DlgRunRaceMainRefresh.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.OneChallenge_OnApply.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.OneChallenge_OnApply.<RunAsync>d__1>
@@ -1177,6 +1184,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.UIComponentSystem.<ShowWindowAsync>d__11>
 	// ET.StateMachineWrap<ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>
 	// ET.StateMachineWrap<ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>
+	// ET.StateMachineWrap<ET.Client.UIJiaYuanPastureComponentSystem.<OnInitUI>d__3>
 	// ET.StateMachineWrap<ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>
 	// ET.StateMachineWrap<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>
 	// ET.StateMachineWrap<ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>
@@ -1186,7 +1194,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.UIShouJiTreasureItemComponentSystem.<OnButtonActive>d__1>
 	// ET.StateMachineWrap<ET.Client.UISoloEnterEvent.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.UISoloQuitEvent.<Run>d__0>
-	// ET.StateMachineWrap<ET.Client.UITransferHpComponentSystem.<OnInitUI>d__2>
+	// ET.StateMachineWrap<ET.Client.UITransferHpComponentSystem.<OnInitUI>d__3>
 	// ET.StateMachineWrap<ET.Client.UITypeButtonComponentSystem.<SetSelected>d__1>
 	// ET.StateMachineWrap<ET.Client.UITypeViewComponentSystem.<OnInitUI>d__1>
 	// ET.StateMachineWrap<ET.Client.UIXuLieZhenComponentSystem.<OnUpdateTitle>d__2>
@@ -1257,6 +1265,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.MessageSessionHandler.<HandleAsync>d__2<object,object>>
 	// ET.StateMachineWrap<ET.MessageSessionHandler.<HandleAsync>d__2<object>>
 	// ET.StateMachineWrap<ET.MoveComponentSystem.<MoveToAsync>d__5>
+	// ET.StateMachineWrap<ET.MoveComponentSystem.<SkillStop>d__13>
 	// ET.StateMachineWrap<ET.NumericChangeEvent_NotifyWatcher.<Run>d__0>
 	// ET.StateMachineWrap<ET.ObjectWaitSystem.<>c__DisplayClass5_0.<<Wait>g__WaitTimeout|0>d<object>>
 	// ET.StateMachineWrap<ET.ObjectWaitSystem.<Wait>d__4<object>>
@@ -2111,6 +2120,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.ChangePosition_SyncGameObjectPos.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.ChangePosition_SyncGameObjectPos.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.ChangeRotation_SyncGameObjectRotation.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.ChangeRotation_SyncGameObjectRotation.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.CommonHintErrorEvent.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.CommonHintErrorEvent.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.CommonPopupEvent.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.CommonPopupEvent.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.DDataUpdate_PetXiLianUpdate_Refresh.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.DDataUpdate_PetXiLianUpdate_Refresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.DataUpdate_BagItemUpdate_DlgJiaYuanBagRefresh.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.DataUpdate_BagItemUpdate_DlgJiaYuanBagRefresh.<Run>d__0&)
@@ -2210,7 +2220,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoadSceneFinished_DlgLoadingRefesh.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.LoadSceneFinished_DlgLoadingRefesh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoginFinish_CreateLobbyUI.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.LoginFinish_CreateLobbyUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoginFinish_CreateUILSLobby.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.LoginFinish_CreateUILSLobby.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoginFinish_RemoveLoginUI.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.LoginFinish_RemoveLoginUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoginFinish_RemoveUILSLogin.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.LoginFinish_RemoveUILSLogin.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Login_OnRelinkSucess.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Login_OnRelinkSucess.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Login_OnReturnLogin.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Login_OnReturnLogin.<Run>d__0&)
@@ -2272,6 +2281,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.MoveStart_PlayMoveAnimate.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.MoveStart_PlayMoveAnimate.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.MoveStop_PlayIdleAnimate.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.MoveStop_PlayIdleAnimate.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.NotRealName_OpenRealNameUI.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.NotRealName_OpenRealNameUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.OnSkillUse_DlgRunRaceMainRefresh.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.OnSkillUse_DlgRunRaceMainRefresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.OneChallenge_OnApply.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.OneChallenge_OnApply.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.OneFrameInputsHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.OneFrameInputsHandler.<Run>d__0&)
@@ -2303,7 +2313,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Team_TeamPickNotice.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Team_TeamPickNotice.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>(ET.ETTaskCompleted&,ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.UISoloQuitEvent.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.UISoloQuitEvent.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.UITransferHpComponentSystem.<OnInitUI>d__2>(ET.ETTaskCompleted&,ET.Client.UITransferHpComponentSystem.<OnInitUI>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Union_OnUnionInvite.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Union_OnUnionInvite.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Union_OnUnionRaceInfo.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Union_OnUnionRaceInfo.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.UnitDead_OnPlayDead.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.UnitDead_OnPlayDead.<Run>d__0&)
@@ -2358,7 +2367,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>(object&,ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgEnterMapHintSystem.<OnInitUI>d__2>(object&,ET.Client.DlgEnterMapHintSystem.<OnInitUI>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgFirstWinRewardSystem.<RequestGetFirstWinSelf>d__3>(object&,ET.Client.DlgFirstWinRewardSystem.<RequestGetFirstWinSelf>d__3&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgFriendSystem.<RequestFriendInfo>d__4>(object&,ET.Client.DlgFriendSystem.<RequestFriendInfo>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgFriendSystem.<RequestFriendInfo>d__7>(object&,ET.Client.DlgFriendSystem.<RequestFriendInfo>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgGMSystem.<OnButton_Broadcast_1>d__2>(object&,ET.Client.DlgGMSystem.<OnButton_Broadcast_1>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgGMSystem.<OnButton_CommonButton>d__5>(object&,ET.Client.DlgGMSystem.<OnButton_CommonButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgGMSystem.<OnButton_EmailButton>d__3>(object&,ET.Client.DlgGMSystem.<OnButton_EmailButton>d__3&)
@@ -2413,18 +2422,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgLobbySystem.<EnterMap>d__2>(object&,ET.Client.DlgLobbySystem.<EnterMap>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>(object&,ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>(object&,ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__4>(object&,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>(object&,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>(object&,ET.Client.DlgMJLoginSystem.<RequestServerList>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>(object&,ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<CheckMailReddot>d__78>(object&,ET.Client.DlgMainSystem.<CheckMailReddot>d__78&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__67>(object&,ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__67&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnBtn_LvReward>d__69>(object&,ET.Client.DlgMainSystem.<OnBtn_LvReward>d__69&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__71>(object&,ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__71&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnPetButton>d__25>(object&,ET.Client.DlgMainSystem.<OnPetButton>d__25&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnRoseEquipButton>d__24>(object&,ET.Client.DlgMainSystem.<OnRoseEquipButton>d__24&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnRoseSkillButton>d__26>(object&,ET.Client.DlgMainSystem.<OnRoseSkillButton>d__26&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnTaskButton>d__27>(object&,ET.Client.DlgMainSystem.<OnTaskButton>d__27&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<UpdatePosition>d__42>(object&,ET.Client.DlgMainSystem.<UpdatePosition>d__42&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<CheckMailReddot>d__86>(object&,ET.Client.DlgMainSystem.<CheckMailReddot>d__86&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__75>(object&,ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__75&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnBtn_LvReward>d__77>(object&,ET.Client.DlgMainSystem.<OnBtn_LvReward>d__77&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__79>(object&,ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__79&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnPetButton>d__33>(object&,ET.Client.DlgMainSystem.<OnPetButton>d__33&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnRoseEquipButton>d__32>(object&,ET.Client.DlgMainSystem.<OnRoseEquipButton>d__32&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnRoseSkillButton>d__34>(object&,ET.Client.DlgMainSystem.<OnRoseSkillButton>d__34&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<OnTaskButton>d__35>(object&,ET.Client.DlgMainSystem.<OnTaskButton>d__35&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMainSystem.<UpdatePosition>d__50>(object&,ET.Client.DlgMainSystem.<UpdatePosition>d__50&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMakeLearnSystem.<OnButtonLearnButton>d__11>(object&,ET.Client.DlgMakeLearnSystem.<OnButtonLearnButton>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMakeLearnSystem.<RequestMakeSelect>d__6>(object&,ET.Client.DlgMakeLearnSystem.<RequestMakeSelect>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMapBigSystem.<OnAwake>d__3>(object&,ET.Client.DlgMapBigSystem.<OnAwake>d__3&)
@@ -2461,12 +2470,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgPetSystem.<RequestPetHeXinSelect>d__5>(object&,ET.Client.DlgPetSystem.<RequestPetHeXinSelect>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgPetXiLianLockSkillSystem.<OnLockBtnButton>d__5>(object&,ET.Client.DlgPetXiLianLockSkillSystem.<OnLockBtnButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRandomOpenSystem.<OnInitUI>d__2>(object&,ET.Client.DlgRandomOpenSystem.<OnInitUI>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRealNameSystem.<OnRealName_Btn>d__2>(object&,ET.Client.DlgRealNameSystem.<OnRealName_Btn>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRechargeRewardSystem.<OnButtonRewardButton>d__4>(object&,ET.Client.DlgRechargeRewardSystem.<OnButtonRewardButton>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRechargeSystem.<RequestRecharge>d__5>(object&,ET.Client.DlgRechargeSystem.<RequestRecharge>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRoleBagSplitSystem.<OnBtn_SplitButton>d__7>(object&,ET.Client.DlgRoleBagSplitSystem.<OnBtn_SplitButton>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRolePetBagSystem.<OnFenjieBtn>d__5>(object&,ET.Client.DlgRolePetBagSystem.<OnFenjieBtn>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRolePetBagSystem.<OnTakeOutBagBtn>d__4>(object&,ET.Client.DlgRolePetBagSystem.<OnTakeOutBagBtn>d__4&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRoleSystem.<OnZodiacButton>d__8>(object&,ET.Client.DlgRoleSystem.<OnZodiacButton>d__8&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRoleSystem.<OnZodiacButton>d__10>(object&,ET.Client.DlgRoleSystem.<OnZodiacButton>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRunRaceMainSystem.<ShoweEndTime>d__6>(object&,ET.Client.DlgRunRaceMainSystem.<ShoweEndTime>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRunRaceMainSystem.<UpdateRanking>d__8>(object&,ET.Client.DlgRunRaceMainSystem.<UpdateRanking>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgRunRaceMainSystem.<WaitExitFuben>d__9>(object&,ET.Client.DlgRunRaceMainSystem.<WaitExitFuben>d__9&)
@@ -2644,9 +2654,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleBagSystem.<OnOpenOneSellSetButton>d__7>(object&,ET.Client.ES_RoleBagSystem.<OnOpenOneSellSetButton>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleBagSystem.<OnZhengLiButton>d__9>(object&,ET.Client.ES_RoleBagSystem.<OnZhengLiButton>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleHuiShouSystem.<OnPointerDown>d__9>(object&,ET.Client.ES_RoleHuiShouSystem.<OnPointerDown>d__9&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__15>(object&,ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__15&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__8>(object&,ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__8&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__9>(object&,ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__16>(object&,ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__16&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__9>(object&,ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__10>(object&,ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleQiangHuaSystem.<OnQiangHuaButton>d__5>(object&,ET.Client.ES_RoleQiangHuaSystem.<OnQiangHuaButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleXiLianInheritSystem.<OnXiLianButton>d__10>(object&,ET.Client.ES_RoleXiLianInheritSystem.<OnXiLianButton>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.ES_RoleXiLianInheritSystem.<RequestInheritSelect>d__11>(object&,ET.Client.ES_RoleXiLianInheritSystem.<RequestInheritSelect>d__11&)
@@ -2737,6 +2747,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.EnterMapHelper.<Match>d__1>(object&,ET.Client.EnterMapHelper.<Match>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.EnterMapHelper.<SendReviveRequest>d__3>(object&,ET.Client.EnterMapHelper.<SendReviveRequest>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.EntryEvent3_InitClient.<Run>d__0>(object&,ET.Client.EntryEvent3_InitClient.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.FangChenMiComponentCSystem.<OnLogin>d__3>(object&,ET.Client.FangChenMiComponentCSystem.<OnLogin>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.FangChenMiComponentCSystem.<OnLoginOut>d__2>(object&,ET.Client.FangChenMiComponentCSystem.<OnLoginOut>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.FlyTipComponentSystem.<OnAwake>d__3>(object&,ET.Client.FlyTipComponentSystem.<OnAwake>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Fuben_OnFubenSettlement.<Run>d__0>(object&,ET.Client.Fuben_OnFubenSettlement.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.FunctionUI.<OpenFunctionUI>d__1>(object&,ET.Client.FunctionUI.<OpenFunctionUI>d__1&)
@@ -2753,16 +2765,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LSSceneChangeStart_AddComponent.<Run>d__0>(object&,ET.Client.LSSceneChangeStart_AddComponent.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LSSceneInitFinish_Finish.<Run>d__0>(object&,ET.Client.LSSceneInitFinish_Finish.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LSUnitViewComponentSystem.<InitAsync>d__2>(object&,ET.Client.LSUnitViewComponentSystem.<InitAsync>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<Login>d__2>(object&,ET.Client.LoginHelper.<Login>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<LoginGameAsync>d__3>(object&,ET.Client.LoginHelper.<LoginGameAsync>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginFinish_CreateLobbyUI.<OnLoginSucess>d__1>(object&,ET.Client.LoginFinish_CreateLobbyUI.<OnLoginSucess>d__1&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<Login>d__3>(object&,ET.Client.LoginHelper.<Login>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<LoginGameAsync>d__4>(object&,ET.Client.LoginHelper.<LoginGameAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<LoginOld>d__1>(object&,ET.Client.LoginHelper.<LoginOld>d__1&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<RequestDeleteRole>d__5>(object&,ET.Client.LoginHelper.<RequestDeleteRole>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<RequestDeleteRole>d__6>(object&,ET.Client.LoginHelper.<RequestDeleteRole>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Login_OnReturnLogin.<RunAsync2>d__1>(object&,ET.Client.Login_OnReturnLogin.<RunAsync2>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.M2C_PathfindingResultHandler.<Run>d__0>(object&,ET.Client.M2C_PathfindingResultHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.M2C_StartSceneChangeHandler.<Run>d__0>(object&,ET.Client.M2C_StartSceneChangeHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.M2C_TeamDungeonPrepareHandler.<Run>d__0>(object&,ET.Client.M2C_TeamDungeonPrepareHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Main2NetClient_LoginGameHandler.<Run>d__0>(object&,ET.Client.Main2NetClient_LoginGameHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Main2NetClient_LoginHandler.<Run>d__0>(object&,ET.Client.Main2NetClient_LoginHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Main2NetClient_RealNameHandler.<Run>d__0>(object&,ET.Client.Main2NetClient_RealNameHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Main2NetClient_ServerListHandler.<Run>d__0>(object&,ET.Client.Main2NetClient_ServerListHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.MapHelper.<SendShiquItem>d__6>(object&,ET.Client.MapHelper.<SendShiquItem>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.MaskWordHelperSystem.<InitMaskWord>d__1>(object&,ET.Client.MaskWordHelperSystem.<InitMaskWord>d__1&)
@@ -2770,6 +2784,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.Match2G_NotifyMatchSuccessHandler.<Run>d__0>(object&,ET.Client.Match2G_NotifyMatchSuccessHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.MoveHelper.<MoveToAsync>d__1>(object&,ET.Client.MoveHelper.<MoveToAsync>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0>(object&,ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.NotRealName_OpenRealNameUI.<Run>d__0>(object&,ET.Client.NotRealName_OpenRealNameUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.OneChallenge_OnApply.<RunAsync>d__1>(object&,ET.Client.OneChallenge_OnApply.<RunAsync>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.OperaComponentSystem.<MoveToChest>d__9>(object&,ET.Client.OperaComponentSystem.<MoveToChest>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.OperaComponentSystem.<OnClickMonsterItem>d__15>(object&,ET.Client.OperaComponentSystem.<OnClickMonsterItem>d__15&)
@@ -2872,6 +2887,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<ShowWindowAsync>d__11>(object&,ET.Client.UIComponentSystem.<ShowWindowAsync>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>(object&,ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>(object&,ET.Client.UIDropComponentSystem.<AutoPickItem>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIJiaYuanPastureComponentSystem.<OnInitUI>d__3>(object&,ET.Client.UIJiaYuanPastureComponentSystem.<OnInitUI>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>(object&,ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>(object&,ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2>(object&,ET.Client.UIRoleXiLianTenItemSystem.<OnButtonSelect>d__2&)
@@ -2879,6 +2895,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIShouJiChapterComponentSystem.<OnInitUI>d__5>(object&,ET.Client.UIShouJiChapterComponentSystem.<OnInitUI>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIShouJiTreasureItemComponentSystem.<OnButtonActive>d__1>(object&,ET.Client.UIShouJiTreasureItemComponentSystem.<OnButtonActive>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UISoloEnterEvent.<Run>d__0>(object&,ET.Client.UISoloEnterEvent.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UITransferHpComponentSystem.<OnInitUI>d__3>(object&,ET.Client.UITransferHpComponentSystem.<OnInitUI>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UITypeButtonComponentSystem.<SetSelected>d__1>(object&,ET.Client.UITypeButtonComponentSystem.<SetSelected>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UITypeViewComponentSystem.<OnInitUI>d__1>(object&,ET.Client.UITypeViewComponentSystem.<OnInitUI>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.UIXuLieZhenComponentSystem.<OnUpdateTitle>d__2>(object&,ET.Client.UIXuLieZhenComponentSystem.<OnUpdateTitle>d__2&)
@@ -2898,6 +2915,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.MessageHandler.<Handle>d__1<object,object>>(object&,ET.MessageHandler.<Handle>d__1<object,object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.MessageSessionHandler.<HandleAsync>d__2<object,object>>(object&,ET.MessageSessionHandler.<HandleAsync>d__2<object,object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.MessageSessionHandler.<HandleAsync>d__2<object>>(object&,ET.MessageSessionHandler.<HandleAsync>d__2<object>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.MoveComponentSystem.<SkillStop>d__13>(object&,ET.MoveComponentSystem.<SkillStop>d__13&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.ObjectWaitSystem.<>c__DisplayClass5_0.<<Wait>g__WaitTimeout|0>d<object>>(object&,ET.ObjectWaitSystem.<>c__DisplayClass5_0.<<Wait>g__WaitTimeout|0>d<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.ReloadConfigConsoleHandler.<Run>d__0>(object&,ET.ReloadConfigConsoleHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.SessionSystem.<>c__DisplayClass4_0.<<Call>g__Timeout|0>d>(object&,ET.SessionSystem.<>c__DisplayClass4_0.<<Call>g__Timeout|0>d&)
@@ -2965,6 +2983,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.ChatNetHelper.<ChatJinYanRequest>d__2>(object&,ET.Client.ChatNetHelper.<ChatJinYanRequest>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.ChatNetHelper.<RequestSendChat>d__0>(object&,ET.Client.ChatNetHelper.<RequestSendChat>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.ChatNetHelper.<SendBroadcast>d__1>(object&,ET.Client.ChatNetHelper.<SendBroadcast>d__1&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__5>(object&,ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanMainSystem.<LockTargetPasture>d__18>(object&,ET.Client.DlgJiaYuanMainSystem.<LockTargetPasture>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.EnterMapHelper.<RequestTransfer>d__0>(object&,ET.Client.EnterMapHelper.<RequestTransfer>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.FriendNetHelper.<OneChallengeRequest>d__9>(object&,ET.Client.FriendNetHelper.<OneChallengeRequest>d__9&)
@@ -2986,7 +3005,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<PetOpenCangKu>d__22>(object&,ET.Client.JiaYuanNetHelper.<PetOpenCangKu>d__22&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<PetPutCangKu>d__21>(object&,ET.Client.JiaYuanNetHelper.<PetPutCangKu>d__21&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.JingLingNetHelper.<RequestJingLingUse>d__0>(object&,ET.Client.JingLingNetHelper.<RequestJingLingUse>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<RequestCreateRole>d__4>(object&,ET.Client.LoginHelper.<RequestCreateRole>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<RealName>d__2>(object&,ET.Client.LoginHelper.<RealName>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.LoginHelper.<RequestCreateRole>d__5>(object&,ET.Client.LoginHelper.<RequestCreateRole>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.MailNetHelper.<SendReceiveMail>d__1>(object&,ET.Client.MailNetHelper.<SendReceiveMail>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.MapHelper.<RequestTowerReward>d__7>(object&,ET.Client.MapHelper.<RequestTowerReward>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.MoveHelper.<MoveToAsync>d__0>(object&,ET.Client.MoveHelper.<MoveToAsync>d__0&)
@@ -3049,7 +3069,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.UserInfoNetHelper.<OneChallengeRequest>d__11>(object&,ET.Client.UserInfoNetHelper.<OneChallengeRequest>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.UserInfoNetHelper.<ReddotReadRequest>d__10>(object&,ET.Client.UserInfoNetHelper.<ReddotReadRequest>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,ET.Client.UserInfoNetHelper.<RequestUserInfoInit>d__0>(object&,ET.Client.UserInfoNetHelper.<RequestUserInfoInit>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<long>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__4>(object&,ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.LoginHelper.<GetServerList>d__0>(ET.ETTaskCompleted&,ET.Client.LoginHelper.<GetServerList>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,ET.Client.ResourcesLoaderComponentSystem.<LoadAllAssetsAsync>d__7<object>>(System.Runtime.CompilerServices.TaskAwaiter&,ET.Client.ResourcesLoaderComponentSystem.<LoadAllAssetsAsync>d__7<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,ET.Client.ResourcesLoaderComponentSystem.<LoadAssetAsync>d__6<object>>(System.Runtime.CompilerServices.TaskAwaiter&,ET.Client.ResourcesLoaderComponentSystem.<LoadAssetAsync>d__6<object>&)
@@ -3101,9 +3120,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.BagClientNetHelper.<SeasonOpenJingHe>d__52>(object&,ET.Client.BagClientNetHelper.<SeasonOpenJingHe>d__52&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.BagClientNetHelper.<TitleUse>d__47>(object&,ET.Client.BagClientNetHelper.<TitleUse>d__47&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.BagClientNetHelper.<Upload>d__45>(object&,ET.Client.BagClientNetHelper.<Upload>d__45&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<Call>d__7>(object&,ET.Client.ClientSenderCompnentSystem.<Call>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<Call>d__8>(object&,ET.Client.ClientSenderCompnentSystem.<Call>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<GetServerList>d__3>(object&,ET.Client.ClientSenderCompnentSystem.<GetServerList>d__3&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__5>(object&,ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__6>(object&,ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__6&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.ClientSenderCompnentSystem.<RealNameAsync>d__4>(object&,ET.Client.ClientSenderCompnentSystem.<RealNameAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.FriendNetHelper.<RequestWatchPet>d__8>(object&,ET.Client.FriendNetHelper.<RequestWatchPet>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.FriendNetHelper.<RequestWatchPlayer>d__2>(object&,ET.Client.FriendNetHelper.<RequestWatchPlayer>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.IconHelper.<LoadIconSpriteAsync>d__1>(object&,ET.Client.IconHelper.<LoadIconSpriteAsync>d__1&)
@@ -3227,6 +3247,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ChengJiu_OnChengJiuActive.<Run>d__0>(ET.Client.ChengJiu_OnChengJiuActive.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ClientSenderCompnentSystem.<RemoveFiberAsync>d__2>(ET.Client.ClientSenderCompnentSystem.<RemoveFiberAsync>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.CommonHintErrorEvent.<Run>d__0>(ET.Client.CommonHintErrorEvent.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.CommonPopupEvent.<Run>d__0>(ET.Client.CommonPopupEvent.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.CommonViewHelper.<DOLocalMove>d__15>(ET.Client.CommonViewHelper.<DOLocalMove>d__15&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DDataUpdate_PetXiLianUpdate_Refresh.<Run>d__0>(ET.Client.DDataUpdate_PetXiLianUpdate_Refresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh.<Run>d__0>(ET.Client.DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh.<Run>d__0&)
@@ -3300,7 +3321,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4>(ET.Client.DlgDungeonSystem.<UpdateChapterList>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgEnterMapHintSystem.<OnInitUI>d__2>(ET.Client.DlgEnterMapHintSystem.<OnInitUI>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgFirstWinRewardSystem.<RequestGetFirstWinSelf>d__3>(ET.Client.DlgFirstWinRewardSystem.<RequestGetFirstWinSelf>d__3&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgFriendSystem.<RequestFriendInfo>d__4>(ET.Client.DlgFriendSystem.<RequestFriendInfo>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgFriendSystem.<RequestFriendInfo>d__7>(ET.Client.DlgFriendSystem.<RequestFriendInfo>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgFriendSystem.DataUpdate_FriendChat_Refresh.<Run>d__0>(ET.Client.DlgFriendSystem.DataUpdate_FriendChat_Refresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgFriendSystem.DataUpdate_FriendUpdate_FriendItemsRefresh.<Run>d__0>(ET.Client.DlgFriendSystem.DataUpdate_FriendUpdate_FriendItemsRefresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgGMSystem.<OnButton_Broadcast_1>d__2>(ET.Client.DlgGMSystem.<OnButton_Broadcast_1>d__2&)
@@ -3357,18 +3378,18 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgLobbySystem.<EnterMap>d__2>(ET.Client.DlgLobbySystem.<EnterMap>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>(ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>(ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__4>(ET.Client.DlgMJLoginSystem.<OnLoginButton>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>(ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>(ET.Client.DlgMJLoginSystem.<RequestServerList>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>(ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<CheckMailReddot>d__78>(ET.Client.DlgMainSystem.<CheckMailReddot>d__78&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__67>(ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__67&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnBtn_LvReward>d__69>(ET.Client.DlgMainSystem.<OnBtn_LvReward>d__69&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__71>(ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__71&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnPetButton>d__25>(ET.Client.DlgMainSystem.<OnPetButton>d__25&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnRoseEquipButton>d__24>(ET.Client.DlgMainSystem.<OnRoseEquipButton>d__24&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnRoseSkillButton>d__26>(ET.Client.DlgMainSystem.<OnRoseSkillButton>d__26&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnTaskButton>d__27>(ET.Client.DlgMainSystem.<OnTaskButton>d__27&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<UpdatePosition>d__42>(ET.Client.DlgMainSystem.<UpdatePosition>d__42&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<CheckMailReddot>d__86>(ET.Client.DlgMainSystem.<CheckMailReddot>d__86&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__75>(ET.Client.DlgMainSystem.<OnBtn_KillMonsterReward>d__75&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnBtn_LvReward>d__77>(ET.Client.DlgMainSystem.<OnBtn_LvReward>d__77&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__79>(ET.Client.DlgMainSystem.<OnE_Btn_MapTransferButton>d__79&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnPetButton>d__33>(ET.Client.DlgMainSystem.<OnPetButton>d__33&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnRoseEquipButton>d__32>(ET.Client.DlgMainSystem.<OnRoseEquipButton>d__32&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnRoseSkillButton>d__34>(ET.Client.DlgMainSystem.<OnRoseSkillButton>d__34&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<OnTaskButton>d__35>(ET.Client.DlgMainSystem.<OnTaskButton>d__35&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMainSystem.<UpdatePosition>d__50>(ET.Client.DlgMainSystem.<UpdatePosition>d__50&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMakeLearnSystem.<OnButtonLearnButton>d__11>(ET.Client.DlgMakeLearnSystem.<OnButtonLearnButton>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMakeLearnSystem.<RequestMakeSelect>d__6>(ET.Client.DlgMakeLearnSystem.<RequestMakeSelect>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMapBigSystem.<OnAwake>d__3>(ET.Client.DlgMapBigSystem.<OnAwake>d__3&)
@@ -3407,13 +3428,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgPetXiLianLockSkillSystem.<OnLockBtnButton>d__5>(ET.Client.DlgPetXiLianLockSkillSystem.<OnLockBtnButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgPhoneCodeSystem.<OnRquestBingPhone>d__7>(ET.Client.DlgPhoneCodeSystem.<OnRquestBingPhone>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRandomOpenSystem.<OnInitUI>d__2>(ET.Client.DlgRandomOpenSystem.<OnInitUI>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRealNameSystem.<OnRealName_Btn>d__2>(ET.Client.DlgRealNameSystem.<OnRealName_Btn>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRechargeRewardSystem.<OnButtonRewardButton>d__4>(ET.Client.DlgRechargeRewardSystem.<OnButtonRewardButton>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRechargeSystem.<OnClickRechargeItem>d__6>(ET.Client.DlgRechargeSystem.<OnClickRechargeItem>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRechargeSystem.<RequestRecharge>d__5>(ET.Client.DlgRechargeSystem.<RequestRecharge>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRoleBagSplitSystem.<OnBtn_SplitButton>d__7>(ET.Client.DlgRoleBagSplitSystem.<OnBtn_SplitButton>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRolePetBagSystem.<OnFenjieBtn>d__5>(ET.Client.DlgRolePetBagSystem.<OnFenjieBtn>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRolePetBagSystem.<OnTakeOutBagBtn>d__4>(ET.Client.DlgRolePetBagSystem.<OnTakeOutBagBtn>d__4&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRoleSystem.<OnZodiacButton>d__8>(ET.Client.DlgRoleSystem.<OnZodiacButton>d__8&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRoleSystem.<OnZodiacButton>d__10>(ET.Client.DlgRoleSystem.<OnZodiacButton>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRunRaceMainSystem.<ShoweEndTime>d__6>(ET.Client.DlgRunRaceMainSystem.<ShoweEndTime>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRunRaceMainSystem.<UpdateRanking>d__8>(ET.Client.DlgRunRaceMainSystem.<UpdateRanking>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgRunRaceMainSystem.<WaitExitFuben>d__9>(ET.Client.DlgRunRaceMainSystem.<WaitExitFuben>d__9&)
@@ -3602,9 +3624,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleBagSystem.<OnOpenOneSellSetButton>d__7>(ET.Client.ES_RoleBagSystem.<OnOpenOneSellSetButton>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleBagSystem.<OnZhengLiButton>d__9>(ET.Client.ES_RoleBagSystem.<OnZhengLiButton>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleHuiShouSystem.<OnPointerDown>d__9>(ET.Client.ES_RoleHuiShouSystem.<OnPointerDown>d__9&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__15>(ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__15&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__8>(ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__8&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__9>(ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__16>(ET.Client.ES_RolePropertySystem.<OnAddPointConfirmButton>d__16&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__9>(ET.Client.ES_RolePropertySystem.<PointerDown_AddNum>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__10>(ET.Client.ES_RolePropertySystem.<PointerDown_CostNum>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleQiangHuaSystem.<OnQiangHuaButton>d__5>(ET.Client.ES_RoleQiangHuaSystem.<OnQiangHuaButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleXiLianInheritSystem.<OnXiLianButton>d__10>(ET.Client.ES_RoleXiLianInheritSystem.<OnXiLianButton>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.ES_RoleXiLianInheritSystem.<RequestInheritSelect>d__11>(ET.Client.ES_RoleXiLianInheritSystem.<RequestInheritSelect>d__11&)
@@ -3695,6 +3717,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.EnterMapHelper.<Match>d__1>(ET.Client.EnterMapHelper.<Match>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.EnterMapHelper.<SendReviveRequest>d__3>(ET.Client.EnterMapHelper.<SendReviveRequest>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.EntryEvent3_InitClient.<Run>d__0>(ET.Client.EntryEvent3_InitClient.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.FangChenMiComponentCSystem.<OnLogin>d__3>(ET.Client.FangChenMiComponentCSystem.<OnLogin>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.FangChenMiComponentCSystem.<OnLoginOut>d__2>(ET.Client.FangChenMiComponentCSystem.<OnLoginOut>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Fashion_FashionUpdate.<Run>d__0>(ET.Client.Fashion_FashionUpdate.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.FiberInit_NetClient.<Handle>d__0>(ET.Client.FiberInit_NetClient.<Handle>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.FlyTipComponentSystem.<OnAwake>d__3>(ET.Client.FlyTipComponentSystem.<OnAwake>d__3&)
@@ -3717,14 +3741,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LSSceneInitFinish_Finish.<Run>d__0>(ET.Client.LSSceneInitFinish_Finish.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LSUnitViewComponentSystem.<InitAsync>d__2>(ET.Client.LSUnitViewComponentSystem.<InitAsync>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoadSceneFinished_DlgLoadingRefesh.<Run>d__0>(ET.Client.LoadSceneFinished_DlgLoadingRefesh.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginFinish_CreateLobbyUI.<OnLoginSucess>d__1>(ET.Client.LoginFinish_CreateLobbyUI.<OnLoginSucess>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginFinish_CreateLobbyUI.<Run>d__0>(ET.Client.LoginFinish_CreateLobbyUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginFinish_CreateUILSLobby.<Run>d__0>(ET.Client.LoginFinish_CreateUILSLobby.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginFinish_RemoveLoginUI.<Run>d__0>(ET.Client.LoginFinish_RemoveLoginUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginFinish_RemoveUILSLogin.<Run>d__0>(ET.Client.LoginFinish_RemoveUILSLogin.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<Login>d__2>(ET.Client.LoginHelper.<Login>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<LoginGameAsync>d__3>(ET.Client.LoginHelper.<LoginGameAsync>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<Login>d__3>(ET.Client.LoginHelper.<Login>d__3&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<LoginGameAsync>d__4>(ET.Client.LoginHelper.<LoginGameAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<LoginOld>d__1>(ET.Client.LoginHelper.<LoginOld>d__1&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<RequestDeleteRole>d__5>(ET.Client.LoginHelper.<RequestDeleteRole>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.LoginHelper.<RequestDeleteRole>d__6>(ET.Client.LoginHelper.<RequestDeleteRole>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Login_OnRelinkSucess.<Run>d__0>(ET.Client.Login_OnRelinkSucess.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Login_OnReturnLogin.<Run>d__0>(ET.Client.Login_OnReturnLogin.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Login_OnReturnLogin.<RunAsync2>d__1>(ET.Client.Login_OnReturnLogin.<RunAsync2>d__1&)
@@ -3787,6 +3811,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_UnitUseSkillHandler.<Run>d__0>(ET.Client.M2C_UnitUseSkillHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Main2NetClient_LoginGameHandler.<Run>d__0>(ET.Client.Main2NetClient_LoginGameHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Main2NetClient_LoginHandler.<Run>d__0>(ET.Client.Main2NetClient_LoginHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Main2NetClient_RealNameHandler.<Run>d__0>(ET.Client.Main2NetClient_RealNameHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Main2NetClient_ServerListHandler.<Run>d__0>(ET.Client.Main2NetClient_ServerListHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.MapHelper.<SendShiquItem>d__6>(ET.Client.MapHelper.<SendShiquItem>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.MaskWordHelperSystem.<InitMaskWord>d__1>(ET.Client.MaskWordHelperSystem.<InitMaskWord>d__1&)
@@ -3797,6 +3822,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.MoveStart_PlayMoveAnimate.<Run>d__0>(ET.Client.MoveStart_PlayMoveAnimate.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.MoveStop_PlayIdleAnimate.<Run>d__0>(ET.Client.MoveStop_PlayIdleAnimate.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0>(ET.Client.NetClient2Main_SessionDisposeHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.NotRealName_OpenRealNameUI.<Run>d__0>(ET.Client.NotRealName_OpenRealNameUI.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.OnSkillUse_DlgRunRaceMainRefresh.<Run>d__0>(ET.Client.OnSkillUse_DlgRunRaceMainRefresh.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.OneChallenge_OnApply.<Run>d__0>(ET.Client.OneChallenge_OnApply.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.OneChallenge_OnApply.<RunAsync>d__1>(ET.Client.OneChallenge_OnApply.<RunAsync>d__1&)
@@ -3926,6 +3952,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIComponentSystem.<ShowWindowAsync>d__11>(ET.Client.UIComponentSystem.<ShowWindowAsync>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>>(ET.Client.UIComponentSystem.<ShowWindowAsync>d__12<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIDropComponentSystem.<AutoPickItem>d__9>(ET.Client.UIDropComponentSystem.<AutoPickItem>d__9&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIJiaYuanPastureComponentSystem.<OnInitUI>d__3>(ET.Client.UIJiaYuanPastureComponentSystem.<OnInitUI>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2>(ET.Client.UIMainBuffItemComponentSystem.<BeginDrag>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6>(ET.Client.UINpcHpComponentSystem.<WuGuiSay>d__6&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1>(ET.Client.UIPaiMaiShopTypeComponentSystem.<SetSelected>d__1&)
@@ -3935,7 +3962,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIShouJiTreasureItemComponentSystem.<OnButtonActive>d__1>(ET.Client.UIShouJiTreasureItemComponentSystem.<OnButtonActive>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UISoloEnterEvent.<Run>d__0>(ET.Client.UISoloEnterEvent.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UISoloQuitEvent.<Run>d__0>(ET.Client.UISoloQuitEvent.<Run>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UITransferHpComponentSystem.<OnInitUI>d__2>(ET.Client.UITransferHpComponentSystem.<OnInitUI>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UITransferHpComponentSystem.<OnInitUI>d__3>(ET.Client.UITransferHpComponentSystem.<OnInitUI>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UITypeButtonComponentSystem.<SetSelected>d__1>(ET.Client.UITypeButtonComponentSystem.<SetSelected>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UITypeViewComponentSystem.<OnInitUI>d__1>(ET.Client.UITypeViewComponentSystem.<OnInitUI>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.UIXuLieZhenComponentSystem.<OnUpdateTitle>d__2>(ET.Client.UIXuLieZhenComponentSystem.<OnUpdateTitle>d__2&)
@@ -3972,6 +3999,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.MessageHandler.<Handle>d__1<object,object>>(ET.MessageHandler.<Handle>d__1<object,object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.MessageSessionHandler.<HandleAsync>d__2<object,object>>(ET.MessageSessionHandler.<HandleAsync>d__2<object,object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.MessageSessionHandler.<HandleAsync>d__2<object>>(ET.MessageSessionHandler.<HandleAsync>d__2<object>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.MoveComponentSystem.<SkillStop>d__13>(ET.MoveComponentSystem.<SkillStop>d__13&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.NumericChangeEvent_NotifyWatcher.<Run>d__0>(ET.NumericChangeEvent_NotifyWatcher.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.ObjectWaitSystem.<>c__DisplayClass5_0.<<Wait>g__WaitTimeout|0>d<object>>(ET.ObjectWaitSystem.<>c__DisplayClass5_0.<<Wait>g__WaitTimeout|0>d<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.ReloadConfigConsoleHandler.<Run>d__0>(ET.ReloadConfigConsoleHandler.<Run>d__0&)
@@ -4044,6 +4072,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.ChatNetHelper.<ChatJinYanRequest>d__2>(ET.Client.ChatNetHelper.<ChatJinYanRequest>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.ChatNetHelper.<RequestSendChat>d__0>(ET.Client.ChatNetHelper.<RequestSendChat>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.ChatNetHelper.<SendBroadcast>d__1>(ET.Client.ChatNetHelper.<SendBroadcast>d__1&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__5>(ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.DlgJiaYuanMainSystem.<LockTargetPasture>d__18>(ET.Client.DlgJiaYuanMainSystem.<LockTargetPasture>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.EnterMapHelper.<RequestTransfer>d__0>(ET.Client.EnterMapHelper.<RequestTransfer>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.FriendNetHelper.<OneChallengeRequest>d__9>(ET.Client.FriendNetHelper.<OneChallengeRequest>d__9&)
@@ -4065,7 +4094,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.JiaYuanNetHelper.<PetOpenCangKu>d__22>(ET.Client.JiaYuanNetHelper.<PetOpenCangKu>d__22&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.JiaYuanNetHelper.<PetPutCangKu>d__21>(ET.Client.JiaYuanNetHelper.<PetPutCangKu>d__21&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.JingLingNetHelper.<RequestJingLingUse>d__0>(ET.Client.JingLingNetHelper.<RequestJingLingUse>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.LoginHelper.<RequestCreateRole>d__4>(ET.Client.LoginHelper.<RequestCreateRole>d__4&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.LoginHelper.<RealName>d__2>(ET.Client.LoginHelper.<RealName>d__2&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.LoginHelper.<RequestCreateRole>d__5>(ET.Client.LoginHelper.<RequestCreateRole>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.MailNetHelper.<SendReceiveMail>d__1>(ET.Client.MailNetHelper.<SendReceiveMail>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.MapHelper.<RequestTowerReward>d__7>(ET.Client.MapHelper.<RequestTowerReward>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.MoveHelper.<MoveToAsync>d__0>(ET.Client.MoveHelper.<MoveToAsync>d__0&)
@@ -4129,7 +4159,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.UserInfoNetHelper.<OneChallengeRequest>d__11>(ET.Client.UserInfoNetHelper.<OneChallengeRequest>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.UserInfoNetHelper.<ReddotReadRequest>d__10>(ET.Client.UserInfoNetHelper.<ReddotReadRequest>d__10&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<ET.Client.UserInfoNetHelper.<RequestUserInfoInit>d__0>(ET.Client.UserInfoNetHelper.<RequestUserInfoInit>d__0&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<long>.Start<ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__4>(ET.Client.ClientSenderCompnentSystem.<LoginAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ActivityNetHelper.<BattleSummonRecord>d__42>(ET.Client.ActivityNetHelper.<BattleSummonRecord>d__42&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ActivityNetHelper.<BattleSummonRequest>d__43>(ET.Client.ActivityNetHelper.<BattleSummonRequest>d__43&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ActivityNetHelper.<FirstWinInfo>d__10>(ET.Client.ActivityNetHelper.<FirstWinInfo>d__10&)
@@ -4174,9 +4203,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.BagClientNetHelper.<SeasonOpenJingHe>d__52>(ET.Client.BagClientNetHelper.<SeasonOpenJingHe>d__52&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.BagClientNetHelper.<TitleUse>d__47>(ET.Client.BagClientNetHelper.<TitleUse>d__47&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.BagClientNetHelper.<Upload>d__45>(ET.Client.BagClientNetHelper.<Upload>d__45&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<Call>d__7>(ET.Client.ClientSenderCompnentSystem.<Call>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<Call>d__8>(ET.Client.ClientSenderCompnentSystem.<Call>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<GetServerList>d__3>(ET.Client.ClientSenderCompnentSystem.<GetServerList>d__3&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__5>(ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__5&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__6>(ET.Client.ClientSenderCompnentSystem.<LoginGameAsync>d__6&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.ClientSenderCompnentSystem.<RealNameAsync>d__4>(ET.Client.ClientSenderCompnentSystem.<RealNameAsync>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.FriendNetHelper.<RequestWatchPet>d__8>(ET.Client.FriendNetHelper.<RequestWatchPet>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.FriendNetHelper.<RequestWatchPlayer>d__2>(ET.Client.FriendNetHelper.<RequestWatchPlayer>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.HttpClientHelper.<Get>d__0>(ET.Client.HttpClientHelper.<Get>d__0&)
@@ -4269,6 +4299,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.HttpHelper.<HttpClientDoGet>d__11>(ET.HttpHelper.<HttpClientDoGet>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.ObjectWaitSystem.<Wait>d__4<object>>(ET.ObjectWaitSystem.<Wait>d__4<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.ObjectWaitSystem.<Wait>d__5<object>>(ET.ObjectWaitSystem.<Wait>d__5<object>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.ResourcesComponent.<LoadAssetAsync>d__5<object>>(ET.ResourcesComponent.<LoadAssetAsync>d__5<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.RpcInfo.<Wait>d__7>(ET.RpcInfo.<Wait>d__7&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.SessionSystem.<Call>d__3>(ET.SessionSystem.<Call>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.SessionSystem.<Call>d__4>(ET.SessionSystem.<Call>d__4&)
@@ -4323,6 +4354,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ChengJiuUpdate>(object,ET.Client.ChengJiuUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ChouKaWarehouseAddItem>(object,ET.Client.ChouKaWarehouseAddItem)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.CommonHintError>(object,ET.Client.CommonHintError)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.CommonPopup>(object,ET.Client.CommonPopup)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_UpdateRoleProper>(object,ET.Client.DataUpdate_UpdateRoleProper)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DigForTreasure>(object,ET.Client.DigForTreasure)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.EnterMapFinish>(object,ET.Client.EnterMapFinish)
@@ -4341,6 +4373,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LSSceneInitFinish>(object,ET.Client.LSSceneInitFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LoadSceneFinished>(object,ET.Client.LoadSceneFinished)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.MainHeroMove>(object,ET.Client.MainHeroMove)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.NotRealName>(object,ET.Client.NotRealName)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.Now_Hp_Update>(object,ET.Client.Now_Hp_Update)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnAccountWarehous>(object,ET.Client.OnAccountWarehous)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnActiveTianFu>(object,ET.Client.OnActiveTianFu)
@@ -4425,6 +4458,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ObjectHelper.Swap<object>(object&,object&)
 		// System.Void ET.RandomGenerator.BreakRank<object>(System.Collections.Generic.List<object>)
 		// bool ET.RandomHelper.GetRandListByCount<int>(System.Collections.Generic.List<int>,System.Collections.Generic.List<int>,int)
+		// ET.ETTask<object> ET.ResourcesComponent.LoadAssetAsync<object>(string)
 		// object ET.World.AddSingleton<object>()
 		// System.Collections.Generic.List<object> MemoryPack.Formatters.ListFormatter.DeserializePackable<object>(MemoryPack.MemoryPackReader&)
 		// System.Void MemoryPack.Formatters.ListFormatter.DeserializePackable<object>(MemoryPack.MemoryPackReader&,System.Collections.Generic.List<object>&)
@@ -4448,6 +4482,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<ET.ActorId>(ET.ActorId&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<ET.LSInput>(ET.LSInput&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<TrueSync.TSQuaternion>(TrueSync.TSQuaternion&)
+		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<TrueSync.TSVector,TrueSync.TSQuaternion>(TrueSync.TSVector&,TrueSync.TSQuaternion&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<TrueSync.TSVector>(TrueSync.TSVector&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<Unity.Mathematics.float3>(Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<Unity.Mathematics.quaternion,int>(Unity.Mathematics.quaternion&,int&)
@@ -4487,7 +4522,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,Unity.Mathematics.float3>(byte&,long&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,byte,int>(byte&,long&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,float,float,float,long,int>(byte&,long&,float&,float&,float&,long&,int&)
-		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,float,float,float>(byte&,long&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,Unity.Mathematics.float3,Unity.Mathematics.float3>(byte&,long&,int&,int&,Unity.Mathematics.float3&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,float,float,float,int,int,long>(byte&,long&,int&,int&,float&,float&,float&,int&,int&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,float,float,float,int>(byte&,long&,int&,int&,float&,float&,float&,int&)
@@ -4520,7 +4554,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,byte,int>(int&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,byte>(int&,byte&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,byte>(int&,int&,byte&)
-		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,float,float,float>(int&,int&,int&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,int,int,int,int,float>(int&,int&,int&,int&,int&,int&,int&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,int,int>(int&,int&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,int>(int&,int&,int&,int&)
@@ -4535,8 +4568,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,long,long>(int&,long&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,long>(int&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int>(int&)
-		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,ET.LSInput>(long&,ET.LSInput&)
-		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,TrueSync.TSVector,TrueSync.TSQuaternion>(long&,TrueSync.TSVector&,TrueSync.TSQuaternion&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,byte,int,int>(long&,byte&,int&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,int,int,int>(long&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,int,int>(long&,int&,int&)
@@ -4562,13 +4593,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// MemoryPack.IMemoryPackFormatter<object> MemoryPack.MemoryPackWriter.GetFormatter<object>()
 		// System.Void MemoryPack.MemoryPackWriter.WritePackable<object>(object&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<ET.LSInput>(ET.LSInput&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<TrueSync.TSVector,TrueSync.TSQuaternion>(TrueSync.TSVector&,TrueSync.TSQuaternion&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<Unity.Mathematics.quaternion,int>(Unity.Mathematics.quaternion&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<byte,int>(byte&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<byte>(byte&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,byte,int>(int&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,byte>(int&,byte&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,byte>(int&,int&,byte&)
-		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,float,float,float>(int&,int&,int&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,int,int,int,int,float>(int&,int&,int&,int&,int&,int&,int&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,int,int>(int&,int&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,int>(int&,int&,int&,int&)
@@ -4583,8 +4614,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,long,long>(int&,long&,long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,long>(int&,long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int>(int&)
-		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<long,ET.LSInput>(long&,ET.LSInput&)
-		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<long,TrueSync.TSVector,TrueSync.TSQuaternion>(long&,TrueSync.TSVector&,TrueSync.TSQuaternion&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<long,byte,int,int>(long&,byte&,int&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<long,int,int,int>(long&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<long,int,int>(long&,int&,int&)
@@ -4632,7 +4661,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,Unity.Mathematics.float3>(byte,byte&,long&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,byte,int>(byte,byte&,long&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,float,float,float,long,int>(byte,byte&,long&,float&,float&,float&,long&,int&)
-		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,float,float,float>(byte,byte&,long&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,Unity.Mathematics.float3,Unity.Mathematics.float3>(byte,byte&,long&,int&,int&,Unity.Mathematics.float3&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,float,float,float,int,int,long>(byte,byte&,long&,int&,int&,float&,float&,float&,int&,int&,long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,float,float,float,int>(byte,byte&,long&,int&,int&,float&,float&,float&,int&)
