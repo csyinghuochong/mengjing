@@ -89,7 +89,7 @@ namespace ET.Client
         
         public static void Reddot_RolePoint(this DlgRole self, int num)
         {
-            self.View.E_Type_PropertyToggle.gameObject.SetActive(num > 0);
+            self.View.E_Type_PropertyToggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
         
         private static void OnFunctionSetBtn(this DlgRole self, int index)
