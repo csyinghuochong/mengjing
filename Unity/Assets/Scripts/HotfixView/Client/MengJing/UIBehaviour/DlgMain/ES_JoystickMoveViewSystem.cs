@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -52,7 +53,7 @@ namespace ET.Client
 
             self.ObstructLayer = 1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString());
             self.BuildingLayer = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
-
+            self.MapLayer = 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString());
             self.ResetJoystick();
             self.AfterEnterScene();
         }
@@ -239,17 +240,11 @@ namespace ET.Client
             }
 
             Unit unit = self.MainUnit;
-            Quaternion rotation = Quaternion.Euler(0, direction, 0);
-            float distance = self.CanMoveDistance(unit, rotation);
-            distance = Mathf.Max(distance, 2f);
-            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-            speed = Mathf.Max(speed, 4f);
-            float needTime = distance / speed;
-            self.checkTime = (int)(1000 * needTime) - 200;
+            quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
+            ;// Quaternion.Euler(0, direction, 0);
 
-            Vector3 unitPosition = unit.Position;
-
-            int obstruct = self.CheckObstruct(unit, unitPosition + rotation * Vector3.forward * 2f);
+            float3 unitPosition = unit.Position;
+            int obstruct = self.CheckObstruct(unit, unitPosition + math.forward( rotation )  * 2f);
             if (obstruct != 0)
             {
                 unit.GetComponent<StateComponentC>().ObstructStatus = 1;
@@ -257,10 +252,25 @@ namespace ET.Client
                 return;
             }
 
+            // float distance = self.CanMoveDistance(unit, rotation);
+            // distance = Mathf.Max(distance, 2f);
+            // float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            // speed = Mathf.Max(speed, 4f);
+            // float needTime = distance / speed;
+            // self.checkTime = (int)(1000 * needTime) - 200;
+            
+            float3 newv3 = self.CanMovePosition(unit, rotation);
+            float distance = Vector3.Distance(newv3, unit.Position);
+            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            speed = Mathf.Max(speed, 4f);
+            float needTime = distance / speed;
+            self.checkTime = (int)(1000 * needTime) - 200;
+
+            //GameObject.Find("Global/Target").transform.position = newv3;
+            //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
+            
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
-
-            Vector3 newv3 = unitPosition + rotation * Vector3.forward * distance;
-
+            
             self.MainUnit.MoveToAsync(newv3).Coroutine();
 
             self.lastSendTime = clientNow;
@@ -297,11 +307,6 @@ namespace ET.Client
                 Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
                 {
-                    using (zstring.Block())
-                    {
-                        Log.Debug(zstring.Format(" hit.collider != null: i : {0}   x: {1}  z:{2} ", i, target.x, target.z));
-                    }
-
                     break;
                 }
             }
@@ -309,6 +314,29 @@ namespace ET.Client
             return distance * intveral;
         }
 
+        private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
+        {
+            float3 unitPosi = unit.Position;
+            float3 targetpositon = unitPosi +  math.forward(rotation) * 2;
+            for (int i = 0; i < 5; i++)
+            {
+                Vector3 target = unitPosi + math.forward(rotation) * (i + 3);
+                RaycastHit hit;
+
+                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+                if (hit.collider == null)
+                {
+                    break;
+                }
+                else
+                {
+                    targetpositon = hit.point;
+                }
+            }
+
+            return targetpositon;
+        }
+        
         private static int CheckObstruct(this ES_JoystickMove self, Unit unit, Vector3 target)
         {
             RaycastHit hit;

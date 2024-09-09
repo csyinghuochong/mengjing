@@ -27,6 +27,7 @@ namespace ET.Client
 
         public int ObstructLayer;
         public int BuildingLayer;
+        public int MapLayer;
         public long JoystickTimer;
 
         public int OperateMode;
