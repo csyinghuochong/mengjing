@@ -45,18 +45,24 @@ namespace ET.Client
 
             self.E_PetMiningItem.gameObject.SetActive(false);
             self.E_UIPetOccupyItem.gameObject.SetActive(false);
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.PetMine, self.Reddot_PetMine);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_PetMining self)
         {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.PetMine, self.Reddot_PetMine);
+            
             self.DestroyWidget();
         }
 
         public static async ETTask OnButtonRecord(this ES_PetMining self)
         {
             long instanceid = self.InstanceId;
-            //await NetHelper.SendReddotRead( self.ZoneScene(), ReddotType.PetMine );
+            await UserInfoNetHelper.ReddotReadRequest(self.Root(), ReddotType.PetMine);
             if (instanceid != self.InstanceId)
             {
                 return;

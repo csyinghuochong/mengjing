@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgWelfare))]
 	[EnableMethod]
 	public  class DlgWelfareViewComponent : Entity,IAwake,IDestroy 
 	{
-		public RectTransform EG_SubViewRectTransform
+		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -33,9 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_ActivityLogin es = this.m_es_activitylogin;
+     			ES_ActivityLogin es = this.m_es_activitylogin;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityLogin");
 		    	   this.m_es_activitylogin = this.AddChild<ES_ActivityLogin,Transform>(subTrans);
@@ -53,9 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_WelfareTask es = this.m_es_welfaretask;
+     			ES_WelfareTask es = this.m_es_welfaretask;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareTask");
 		    	   this.m_es_welfaretask = this.AddChild<ES_WelfareTask,Transform>(subTrans);
@@ -73,9 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_WelfareDraw es = this.m_es_welfaredraw;
+     			ES_WelfareDraw es = this.m_es_welfaredraw;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareDraw");
 		    	   this.m_es_welfaredraw = this.AddChild<ES_WelfareDraw,Transform>(subTrans);
@@ -93,9 +93,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_WelfareInvest es = this.m_es_welfareinvest;
+     			ES_WelfareInvest es = this.m_es_welfareinvest;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareInvest");
 		    	   this.m_es_welfareinvest = this.AddChild<ES_WelfareInvest,Transform>(subTrans);
@@ -113,9 +113,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_WelfareDraw2 es = this.m_es_welfaredraw2;
+     			ES_WelfareDraw2 es = this.m_es_welfaredraw2;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareDraw2");
 		    	   this.m_es_welfaredraw2 = this.AddChild<ES_WelfareDraw2,Transform>(subTrans);
@@ -124,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public ToggleGroup E_FunctionSetBtnToggleGroup
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -135,9 +135,60 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_0Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_0Toggle == null )
+     			{
+		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
+     			}
+     			return this.m_E_Type_0Toggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_1Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_1Toggle == null )
+     			{
+		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_1");
+     			}
+     			return this.m_E_Type_1Toggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_2Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_2Toggle == null )
+     			{
+		    		this.m_E_Type_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_2");
+     			}
+     			return this.m_E_Type_2Toggle;
      		}
      	}
 
@@ -150,16 +201,22 @@ namespace ET.Client
 			this.m_es_welfareinvest = null;
 			this.m_es_welfaredraw2 = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_Type_0Toggle = null;
+			this.m_E_Type_1Toggle = null;
+			this.m_E_Type_2Toggle = null;
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_SubViewRectTransform = null;
+		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ActivityLogin> m_es_activitylogin = null;
 		private EntityRef<ES_WelfareTask> m_es_welfaretask = null;
 		private EntityRef<ES_WelfareDraw> m_es_welfaredraw = null;
 		private EntityRef<ES_WelfareInvest> m_es_welfareinvest = null;
 		private EntityRef<ES_WelfareDraw2> m_es_welfaredraw2 = null;
-		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
+		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
+		private UnityEngine.UI.Toggle m_E_Type_2Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

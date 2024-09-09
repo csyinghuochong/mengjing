@@ -31,6 +31,7 @@ namespace ET.Client
 
         public void BeforeUnload(UIBaseWindow uiBaseWindow)
         {
+            uiBaseWindow.GetComponent<DlgPetSet>().BeforeUnload(); 
         }
     }
     

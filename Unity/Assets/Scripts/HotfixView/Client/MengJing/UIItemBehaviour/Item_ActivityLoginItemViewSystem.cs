@@ -75,7 +75,7 @@ namespace ET.Client
                 self.SetReceived(true);
             }
 
-            // self.Root().GetComponent<ReddotComponent>().UpdateReddont(ReddotType.WelfareLogin);
+            self.Root().GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.WelfareLogin);
         }
 
         public static void OnUpdateUI(this Scroll_Item_ActivityLoginItem self, ActivityConfig activityConfig)
