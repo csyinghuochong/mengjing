@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (ReddotComponentC))]
-    [EntitySystemOf(typeof (ReddotComponentC))]
+    [FriendOf(typeof(ReddotComponentC))]
+    [EntitySystemOf(typeof(ReddotComponentC))]
     public static partial class ReddotComponentCSystem
     {
         [EntitySystem]
@@ -79,6 +79,19 @@
             }
 
             EventSystem.Instance.Publish(self.Root(), new ReddotChange() { ReddotType = reddotType, Number = 1 });
+        }
+
+        public static int GetReddot(this ReddotComponentC self, int reddotType)
+        {
+            for (int i = self.ReddontList.Count - 1; i >= 0; i--)
+            {
+                if (self.ReddontList[i].KeyId == reddotType)
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
         }
 
         public static void RemoveReddont(this ReddotComponentC self, int reddotType)

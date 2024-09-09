@@ -487,13 +487,97 @@ namespace ET.Client
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
             userInfoComponent.PickSet = userInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet).Split('@');
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
+            redPointComponent.RegisterReddot(ReddotType.Team, self.Reddot_Team);
+            redPointComponent.RegisterReddot(ReddotType.Email, self.Reddot_Email);
+            redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
+            redPointComponent.RegisterReddot(ReddotType.PetSet, self.Reddot_PetSet);
+            redPointComponent.RegisterReddot(ReddotType.Welfare, self.Reddot_Welfare);
+            redPointComponent.RegisterReddot(ReddotType.Activity, self.Reddot_Activity);
+
+            ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
+            if (reddotComponent.GetReddot(ReddotType.UnionApply) > 0)
+            {
+                reddotComponent.AddReddont(ReddotType.UnionApply);
+            }
+
+            if (reddotComponent.GetReddot(ReddotType.Email) > 0)
+            {
+                reddotComponent.AddReddont(ReddotType.Email);
+            }
+
+            if (reddotComponent.GetReddot(ReddotType.PetMine) > 0)
+            {
+                reddotComponent.AddReddont(ReddotType.PetMine);
+            }
+
+            reddotComponent.UpdateReddont(ReddotType.RolePoint);
+            reddotComponent.UpdateReddont(ReddotType.SkillUp);
+            reddotComponent.UpdateReddont(ReddotType.WelfareDraw);
+            reddotComponent.UpdateReddont(ReddotType.WelfareLogin);
+            reddotComponent.UpdateReddont(ReddotType.WelfareTask);
+            reddotComponent.UpdateReddont(ReddotType.FriendApply);
+            reddotComponent.UpdateReddont(ReddotType.FriendChat);
+            reddotComponent.UpdateReddont(ReddotType.SingleRecharge);
         }
 
         public static void BeforeUnload(this DlgMain self)
         {
-            Log.Debug("DlgMain.BeforeUnload");
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.Friend, self.Reddot_Frined);
+            redPointComponent.UnRegisterReddot(ReddotType.Team, self.Reddot_Team);
+            redPointComponent.UnRegisterReddot(ReddotType.Email, self.Reddot_Email);
+            redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            redPointComponent.UnRegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
+            redPointComponent.UnRegisterReddot(ReddotType.PetSet, self.Reddot_PetSet);
+            redPointComponent.UnRegisterReddot(ReddotType.Welfare, self.Reddot_Welfare);
         }
 
+        public static void Reddot_PetSet(this DlgMain self, int num)
+        {
+            self.View.E_PetFormationButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_Frined(this DlgMain self, int num)
+        {
+            self.View.E_FriendButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_Welfare(this DlgMain self, int num)
+        {
+            self.View.E_Button_WelfareButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_Activity(this DlgMain self, int num)
+        { 
+            self.View.E_Btn_HuoDongButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_Team(this DlgMain self, int num)
+        {
+            self.View.E_Team_Type_1Toggle.gameObject.SetActive(num > 0);
+            self.View.E_TeamDungeonButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_RolePoint(this DlgMain self, int num)
+        { 
+            self.View.E_RoseEquipButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_SkillUp(this DlgMain self, int num)
+        {
+            self.View.E_RoseSkillButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_Email(this DlgMain self, int num)
+        {
+            self.View.E_MailHintTipButton.gameObject.SetActive(num > 0);
+        }
+
+        
         public static void BeginDrag(this DlgMain self, PointerEventData pdata)
         {
             self.PreviousPressPosition = pdata.position;

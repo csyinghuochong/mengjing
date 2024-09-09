@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (FriendComponent))]
-    [FriendOf(typeof (FriendComponent))]
+    [EntitySystemOf(typeof(FriendComponent))]
+    [FriendOf(typeof(FriendComponent))]
     public static partial class FriendComponentSystem
     {
         [EntitySystem]
@@ -44,7 +44,7 @@ namespace ET.Client
 
             if (othertoself)
             {
-                // self.ZoneScene().GetComponent<ReddotComponent>().AddReddont(ReddotType.FriendChat);
+                self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.FriendChat);
             }
 
             if (!self.ChatMsgList.ContainsKey(friendId))
@@ -108,6 +108,26 @@ namespace ET.Client
             }
 
             return 0;
+        }
+
+        public static void OnRecvFriendApplyResult(this FriendComponent self, M2C_FriendApplyResult message)
+        {
+            bool have = false;
+            for (int i = 0; i < self.ApplyList.Count; i++)
+            {
+                if (self.ApplyList[i].UserId == message.FriendInfo.UserId)
+                {
+                    have = true;
+                    break;
+                }
+            }
+
+            if (!have)
+            {
+                self.ApplyList.Add(message.FriendInfo);
+            }
+
+            self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.FriendApply);
         }
     }
 }
