@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRole))]
@@ -16,9 +16,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_EquipSet es = this.m_es_equipset;
+     			ES_EquipSet es = this.m_es_equipset;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_EquipSet");
 		    	   this.m_es_equipset = this.AddChild<ES_EquipSet,Transform>(subTrans);
@@ -27,7 +27,7 @@ namespace ET.Client
      		}
      	}
 
-		public Button E_ZodiacButton
+		public UnityEngine.UI.Button E_ZodiacButton
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ZodiacButton == null )
      			{
-		    		this.m_E_ZodiacButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Zodiac");
+		    		this.m_E_ZodiacButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Zodiac");
      			}
      			return this.m_E_ZodiacButton;
      		}
      	}
 
-		public Image E_ZodiacImage
+		public UnityEngine.UI.Image E_ZodiacImage
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ZodiacImage == null )
      			{
-		    		this.m_E_ZodiacImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Zodiac");
+		    		this.m_E_ZodiacImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Zodiac");
      			}
      			return this.m_E_ZodiacImage;
      		}
      	}
 
-		public RectTransform EG_SubViewRectTransform
+		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -87,9 +87,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleBag es = this.m_es_rolebag;
+     			ES_RoleBag es = this.m_es_rolebag;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleBag");
 		    	   this.m_es_rolebag = this.AddChild<ES_RoleBag,Transform>(subTrans);
@@ -107,9 +107,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleProperty es = this.m_es_roleproperty;
+     			ES_RoleProperty es = this.m_es_roleproperty;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleProperty");
 		    	   this.m_es_roleproperty = this.AddChild<ES_RoleProperty,Transform>(subTrans);
@@ -127,9 +127,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleGem es = this.m_es_rolegem;
+     			ES_RoleGem es = this.m_es_rolegem;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleGem");
 		    	   this.m_es_rolegem = this.AddChild<ES_RoleGem,Transform>(subTrans);
@@ -147,9 +147,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleHuiShou es = this.m_es_rolehuishou;
+     			ES_RoleHuiShou es = this.m_es_rolehuishou;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleHuiShou");
 		    	   this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou,Transform>(subTrans);
@@ -167,9 +167,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_RoleQiangHua es = this.m_es_roleqianghua;
+     			ES_RoleQiangHua es = this.m_es_roleqianghua;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleQiangHua");
 		    	   this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua,Transform>(subTrans);
@@ -178,7 +178,7 @@ namespace ET.Client
      		}
      	}
 
-		public ToggleGroup E_FunctionSetBtnToggleGroup
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -189,9 +189,26 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_PropertyToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_PropertyToggle == null )
+     			{
+		    		this.m_E_Type_PropertyToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_Property");
+     			}
+     			return this.m_E_Type_PropertyToggle;
      		}
      	}
 
@@ -207,19 +224,21 @@ namespace ET.Client
 			this.m_es_rolehuishou = null;
 			this.m_es_roleqianghua = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_Type_PropertyToggle = null;
 			this.uiTransform = null;
 		}
 
 		private EntityRef<ES_EquipSet> m_es_equipset = null;
-		private Button m_E_ZodiacButton = null;
-		private Image m_E_ZodiacImage = null;
-		private RectTransform m_EG_SubViewRectTransform = null;
+		private UnityEngine.UI.Button m_E_ZodiacButton = null;
+		private UnityEngine.UI.Image m_E_ZodiacImage = null;
+		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_RoleBag> m_es_rolebag = null;
 		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
 		private EntityRef<ES_RoleGem> m_es_rolegem = null;
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
-		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Type_PropertyToggle = null;
 		public Transform uiTransform = null;
 	}
 }

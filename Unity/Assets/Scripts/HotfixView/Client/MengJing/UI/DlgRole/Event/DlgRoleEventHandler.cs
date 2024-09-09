@@ -30,6 +30,7 @@
 
         public void BeforeUnload(UIBaseWindow uiBaseWindow)
         {
+            uiBaseWindow.GetComponent<DlgRole>().BeforeUnload();
         }
     }
 }

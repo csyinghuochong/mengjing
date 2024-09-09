@@ -73,8 +73,25 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            
+            ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
+            reddotComponent.UpdateReddont(ReddotType.RolePoint);
         }
 
+        public static void BeforeUnload(this DlgRole self)
+        {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+        }
+        
+        public static void Reddot_RolePoint(this DlgRole self, int num)
+        {
+            self.View.E_Type_PropertyToggle.gameObject.SetActive(num > 0);
+        }
+        
         private static void OnFunctionSetBtn(this DlgRole self, int index)
         {
             CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);

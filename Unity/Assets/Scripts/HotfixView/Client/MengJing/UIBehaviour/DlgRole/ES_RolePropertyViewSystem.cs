@@ -62,12 +62,23 @@ namespace ET.Client
             self.E_Cost_NaiLiButton.AddListener(self.OnCost_NaiLiButton);
             self.E_Add_MingJieButton.AddListener(self.OnAdd_MingJieButton);
             self.E_Cost_MingJieButton.AddListener(self.OnCost_MingJieButton);
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_RoleProperty self)
         {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            
             self.DestroyWidget();
+        }
+        
+        public static void Reddot_RolePoint(this ES_RoleProperty self, int num)
+        {
+            self.E_AddPointButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         # region 人物属性
