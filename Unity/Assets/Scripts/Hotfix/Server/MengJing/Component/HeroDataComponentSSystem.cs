@@ -333,7 +333,7 @@ namespace ET.Server
                  long resurrectionTime = 0;
                  if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
                  {
-                     LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
+                     LocalDungeonComponent localDungeon = unit.Scene().GetComponent<LocalDungeonComponent>();
                      UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
                      int killNumber = userInfoComponent.GetMonsterKillNumber(unit.ConfigId)  +  1;
                      int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
