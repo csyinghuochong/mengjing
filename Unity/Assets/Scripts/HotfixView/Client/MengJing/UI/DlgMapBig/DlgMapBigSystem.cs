@@ -630,18 +630,55 @@ namespace ET.Client
             return go;
         }
 
+        private static List<Vector3> GeneratePointsAtInterval(this DlgMapBig self, List<Vector3> originalPath, float intervalDistance)
+        {
+            List<Vector3> newPath = new List<Vector3>();
+
+            if (originalPath == null || originalPath.Count < 2 || intervalDistance <= 0)
+            {
+                return newPath;
+            }
+
+            newPath.Add(originalPath[0]);
+
+            for (int i = 1; i < originalPath.Count; i++)
+            {
+                Vector3 startPoint = originalPath[i - 1];
+                Vector3 endPoint = originalPath[i];
+
+                float distanceBetweenPoints = Vector3.Distance(startPoint, endPoint);
+
+                Vector3 direction = (endPoint - startPoint).normalized;
+                float currentDistance = 0;
+
+                while (currentDistance + intervalDistance <= distanceBetweenPoints)
+                {
+                    currentDistance += intervalDistance;
+                    Vector3 newPoint = startPoint + direction * currentDistance;
+                    newPath.Add(newPoint);
+                }
+
+                newPath.Add(endPoint);
+            }
+
+            return newPath;
+        }
+
         public static void UpdatePathPoint(this DlgMapBig self)
         {
             int N = self.MoveComponent.N;
             List<Vector3> target = new List<Vector3>();
-            foreach (float3 float3 in self.MoveComponent.Targets)
+            target.Add(UnitHelper.GetMyUnitFromClientScene(self.Root()).Position);
+            for (int i = N; i < self.MoveComponent.Targets.Count; i++)
             {
-                target.Add(float3);
+                target.Add(self.MoveComponent.Targets[i]);
             }
+
+            target = self.GeneratePointsAtInterval(target, 1f);// 点的间距
 
             Vector3 lastVector = new Vector3(-1000, -1000, 0);
             int showNumber = 0;
-            for (int i = target.Count - 1; i >= N; i--)
+            for (int i = target.Count - 1; i >= 0; i--)
             {
                 Vector3 temp = target[i];
                 Vector3 vector31 = new Vector3(temp.x, temp.z, 0f);
