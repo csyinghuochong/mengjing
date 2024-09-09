@@ -51,7 +51,13 @@ namespace ET.Client
             {
                 friendComponent.FriendChatId.Remove(friendInfo.UserId);
             }
-
+            
+            if (friendComponent.FriendChatId.Count == 0)
+            {
+                ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
+                redPointComponent.RemoveReddont(ReddotType.FriendChat);
+            }
+            
             FriendNetHelper.RequestFriendChatRead(self.Root(), friendInfo.UserId).Coroutine();
         }
 

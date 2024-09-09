@@ -49,6 +49,9 @@ namespace ET.Client
             self.E_Text_EnterUnionButton.AddListener(self.OnText_EnterUnionButton);
             self.E_Text_LevelButton.AddListener(self.OnText_LevelButton);
             self.E_Text_ExpButton.AddListener(self.OnText_ExpButton);
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
         }
 
         [EntitySystem]
@@ -56,8 +59,8 @@ namespace ET.Client
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.UnionJingXuanTimer);
 
-            // ReddotViewComponent redPointComponent = self.DomainScene().GetComponent<ReddotViewComponent>();
-            // redPointComponent.UnRegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
             self.DestroyWidget();
         }
 
