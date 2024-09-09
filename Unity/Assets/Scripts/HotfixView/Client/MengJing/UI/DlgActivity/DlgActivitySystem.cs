@@ -16,6 +16,20 @@ namespace ET.Client
         public static void ShowWindow(this DlgActivity self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+            
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.SingleRecharge, self.Reddot_SingleRecharge);
+        }
+
+        public static void BeforeUnload(this DlgActivity self)
+        {
+            ReddotViewComponent redPointComponent = self.Root()?.GetComponent<ReddotViewComponent>();
+            redPointComponent?.UnRegisterReddot(ReddotType.SingleRecharge, self.Reddot_SingleRecharge);
+        }
+        
+        public static void Reddot_SingleRecharge(this DlgActivity self, int num)
+        {
+            self.View.E_Type_4Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         private static void OnFunctionSetBtn(this DlgActivity self, int index)

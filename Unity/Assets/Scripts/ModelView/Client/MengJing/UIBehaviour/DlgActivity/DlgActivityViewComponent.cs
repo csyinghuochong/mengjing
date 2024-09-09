@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgActivity))]
 	[EnableMethod]
 	public  class DlgActivityViewComponent : Entity,IAwake,IDestroy 
 	{
-		public RectTransform EG_SubViewRectTransform
+		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -33,8 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ActivityYueKa es = this.m_es_activityyueka;
+     			ES_ActivityYueKa es = this.m_es_activityyueka;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityYueKa");
 		    	   this.m_es_activityyueka = this.AddChild<ES_ActivityYueKa,Transform>(subTrans);
@@ -52,8 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ActivityMaoXian es = this.m_es_activitymaoxian;
+     			ES_ActivityMaoXian es = this.m_es_activitymaoxian;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityMaoXian");
 		    	   this.m_es_activitymaoxian = this.AddChild<ES_ActivityMaoXian,Transform>(subTrans);
@@ -71,8 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ActivityToken es = this.m_es_activitytoken;
+     			ES_ActivityToken es = this.m_es_activitytoken;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityToken");
 		    	   this.m_es_activitytoken = this.AddChild<ES_ActivityToken,Transform>(subTrans);
@@ -90,8 +93,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ActivityTeHui es = this.m_es_activitytehui;
+     			ES_ActivityTeHui es = this.m_es_activitytehui;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityTeHui");
 		    	   this.m_es_activitytehui = this.AddChild<ES_ActivityTeHui,Transform>(subTrans);
@@ -109,8 +113,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-		        ES_ActivitySingleRecharge es = this.m_es_activitysinglerecharge;
+     			ES_ActivitySingleRecharge es = this.m_es_activitysinglerecharge;
      			if( es == null )
+
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivitySingleRecharge");
 		    	   this.m_es_activitysinglerecharge = this.AddChild<ES_ActivitySingleRecharge,Transform>(subTrans);
@@ -119,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public ToggleGroup E_FunctionSetBtnToggleGroup
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -130,9 +135,26 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Type_4Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Type_4Toggle == null )
+     			{
+		    		this.m_E_Type_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_4");
+     			}
+     			return this.m_E_Type_4Toggle;
      		}
      	}
 
@@ -145,16 +167,18 @@ namespace ET.Client
 			this.m_es_activitytehui = null;
 			this.m_es_activitysinglerecharge = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_Type_4Toggle = null;
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_SubViewRectTransform = null;
+		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ActivityYueKa> m_es_activityyueka = null;
 		private EntityRef<ES_ActivityMaoXian> m_es_activitymaoxian = null;
 		private EntityRef<ES_ActivityToken> m_es_activitytoken = null;
 		private EntityRef<ES_ActivityTeHui> m_es_activitytehui = null;
 		private EntityRef<ES_ActivitySingleRecharge> m_es_activitysinglerecharge = null;
-		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Type_4Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

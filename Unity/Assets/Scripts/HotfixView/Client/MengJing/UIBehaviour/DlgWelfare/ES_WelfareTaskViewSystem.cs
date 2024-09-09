@@ -162,7 +162,7 @@ namespace ET.Client
 
             await TaskClientNetHelper.WelfareTaskReward(self.Root(), self.Day);
 
-            // self.Root().GetComponent<ReddotComponent>().UpdateReddont(ReddotType.WelfareTask);
+            self.Root().GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.WelfareTask);
             self.UpdateInfo(self.Day);
         }
     }

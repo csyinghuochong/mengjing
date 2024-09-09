@@ -69,8 +69,8 @@
             }
 
             userInfo.SingleRewardIds = response.RewardIds;
-            // ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
-            // redPointComponent.UpdateReddont(ReddotType.SingleRecharge);
+            ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
+            redPointComponent.UpdateReddont(ReddotType.SingleRecharge);
 
             self.E_ReddotImage.gameObject.SetActive(false);
             self.E_ReceiveBtnButton.gameObject.SetActive(false);
