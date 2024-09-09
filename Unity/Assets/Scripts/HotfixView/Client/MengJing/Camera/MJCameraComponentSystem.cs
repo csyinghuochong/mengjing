@@ -171,6 +171,15 @@ namespace ET.Client
             UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
         }
 
+        public static void SetBuildExit(this MJCameraComponent self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.CameraMoveTime = 0f;
+            self.CameraMoveType = CameraMoveType.NpcExit;
+            self.OldCameraPostion = self.MainCamera.transform.localPosition;
+            self.TargetPosition = unit.Position + self.OffsetPostion;
+        }
+        
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
         {
             switch (sceneTypeEnum)
