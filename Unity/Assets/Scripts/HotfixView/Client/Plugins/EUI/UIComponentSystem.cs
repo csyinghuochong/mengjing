@@ -416,6 +416,7 @@ namespace ET.Client
 
             if (self.CurrentNpcUI == windowId)
             {
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit();
                 self.CurrentNpcId = 0;
                 self.CurrentNpcUI = 0;
             }
