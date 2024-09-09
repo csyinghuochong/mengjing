@@ -182,11 +182,11 @@ namespace ET
                 return string.Empty;
             }
 
-            DungeonConfig chapterSonConfig = DungeonConfigCategory.Instance.Get(mapid);
+            DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapid);
             string allmonster = string.Empty;
-            if (chapterSonConfig.MonsterPosition != 0)
+            if (dungeonConfig.MonsterPosition != 0)
             {
-                int posid = chapterSonConfig.MonsterPosition;
+                int posid = dungeonConfig.MonsterPosition;
                 while (posid != 0)
                 {
                     MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(posid);

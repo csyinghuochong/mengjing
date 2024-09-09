@@ -448,7 +448,7 @@ namespace ET.Client
             }
             else
             {
-                scrollItemMapBigNpcItem.SetClickHandler(UnitType.Monster, self.ShowBoss[index],
+                scrollItemMapBigNpcItem.SetClickHandler(UnitType.Monster, self.ShowBoss[index-self.ShowNpc.Count],
                     (int unitype, int npcid) => { self.OnClickNpcItem(unitype, npcid); });
             }
         }
