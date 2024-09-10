@@ -669,7 +669,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Image_YinYingImage == null )
      			{
-		    		this.m_E_Image_YinYingImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/YinYing/E_Image_YinYing");
+		    		this.m_E_Image_YinYingImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_YinYing/E_Image_YinYing");
      			}
      			return this.m_E_Image_YinYingImage;
      		}
