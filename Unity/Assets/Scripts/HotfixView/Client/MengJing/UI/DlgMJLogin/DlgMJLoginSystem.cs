@@ -97,6 +97,7 @@ namespace ET.Client
             playerComponent.ServerItem = self.ServerInfo;
             playerComponent.Account = self.View.E_AccountInputField.text;
             playerComponent.Password = self.View.E_PasswordInputField.text;
+            playerComponent.VersionMode = GlobalHelp.GetVersionMode();
             self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);

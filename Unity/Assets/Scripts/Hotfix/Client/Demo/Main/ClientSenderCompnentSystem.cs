@@ -64,6 +64,7 @@ namespace ET.Client
             main2NetClientRealName.AccountId = accountId;
             main2NetClientRealName.IdCardNO = idcard;
             main2NetClientRealName.Name = name;
+            main2NetClientRealName.VersionMode = versionmode;
 
             NetClient2Main_RealName netClient2MainRealName = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientRealName) as NetClient2Main_RealName;
             return netClient2MainRealName;

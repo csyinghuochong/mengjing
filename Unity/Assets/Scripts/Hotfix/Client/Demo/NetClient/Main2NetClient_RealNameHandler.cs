@@ -9,8 +9,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, Main2NetClient_RealName request, NetClient2Main_RealName response)
         {
-            
-            Log.Debug("Main2NetClient_RealNameHandler 11111");
+
             string account = request.Account;
             string password = request.Password;
             string httphost = request.VersionMode == VersionMode.Alpha ? ConstValue.RouterHttpHostInter : ConstValue.RouterHttpHostOuter;
