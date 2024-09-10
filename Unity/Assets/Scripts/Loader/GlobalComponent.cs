@@ -13,6 +13,7 @@ namespace ET
             self.Global = GameObject.Find("/Global").transform;
             self.Unit = GameObject.Find("/Global/Unit").transform;
             self.UI = GameObject.Find("/Global/UI").transform;
+            self.BloodRoot = GameObject.Find("/Global/UI/BloodRoot").transform;
             self.NormalRoot = GameObject.Find("/Global/UI/NormalRoot").transform;
             self.PopUpRoot = GameObject.Find("/Global/UI/PopUpRoot").transform;
             self.FixedRoot = GameObject.Find("/Global/UI/FixedRoot").transform;
@@ -25,13 +26,13 @@ namespace ET
             GameObject uiRoot = GameObject.Find("/Global/UI");
             self.BloodPlayer = new GameObject("BloodPlayer");
             self.BloodPlayer.AddComponent<RectTransform>();
-            SetParent(self.BloodPlayer, self.NormalRoot.gameObject);
+            SetParent(self.BloodPlayer, self.BloodRoot.gameObject);
             self.BloodMonster = new GameObject("BloodMonster");
             self.BloodMonster.AddComponent<RectTransform>();
-            SetParent(self.BloodMonster, self.NormalRoot.gameObject);
+            SetParent(self.BloodMonster, self.BloodRoot.gameObject);
             self.BloodText = new GameObject("BloodText");
             self.BloodText.AddComponent<RectTransform>();
-            SetParent(self.BloodText, self.NormalRoot.gameObject);
+            SetParent(self.BloodText, self.BloodRoot.gameObject);
         }
 
         public static void SetParent(GameObject son, GameObject parent)
@@ -56,6 +57,7 @@ namespace ET
 
         public GlobalConfig GlobalConfig { get; set; }
 
+        public Transform BloodRoot { get; set; }
         public Transform NormalRoot { get; set; }
         public Transform PopUpRoot { get; set; }
         public Transform FixedRoot { get; set; }
