@@ -1904,6 +1904,7 @@ namespace ET.Client
                 foreach (Light light in lights)
                 {
                     light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
+                    Log.Debug($"UpdateShadow:  {value}");
                 }
             }
         }
