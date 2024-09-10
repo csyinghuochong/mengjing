@@ -45,6 +45,11 @@ namespace ET
 			
 			GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 			EPlayMode ePlayMode = globalConfig.EPlayMode;
+			
+#if !UNITY_EDITOR
+			ePlayMode = EPlayMode.HostPlayMode;
+#endif
+
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
 			// 游戏管理器
