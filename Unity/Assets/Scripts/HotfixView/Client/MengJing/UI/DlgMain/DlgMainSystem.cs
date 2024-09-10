@@ -1912,6 +1912,30 @@ namespace ET.Client
                     Log.Console($"UpdateShadow:  {light.name}  {light.transform.parent.name}  {value}");
                 }
             }
+
+            GameObject  Fence_5 = GameObject.Find("AdditiveHide/ScenceModelSet/SceneSet/Fence_5_Test_0910");
+            if (Fence_5 != null)
+            {
+                Renderer rendererFence_5 = Fence_5.GetComponent<Renderer>();
+
+                // 获取游戏对象上第一个材质的Shader
+                Shader shaderFence_5 = rendererFence_5.material.shader;
+                // 输出Shader的名称
+                Log.Console("Fence_5,  Shader Name: " + shaderFence_5.name);
+            }
+            
+            GameObject  T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Terrain");
+            if (T1errain != null)
+            {
+                // 获取当前游戏对象上的Terrain组件
+                Terrain terrain = T1errain.GetComponent<Terrain>();
+                // 获取Terrain的材质
+                Material mat = terrain.materialTemplate;
+ 
+                // 获取并打印Shader
+                Shader shader = mat.shader;
+                Debug.Log("Terrain ,  Shader Name: " + shader.name);
+            }
         }
 
         public static void ShowPing(this DlgMain self)
