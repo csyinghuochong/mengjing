@@ -1893,16 +1893,19 @@ namespace ET.Client
 
         public static void UpdateShadow(this DlgMain self, string usevalue = "")
         {
-            GameObject gameObject = GameObject.Find("Directional Light");
-            if (gameObject == null)
-            {
-                return;
-            }
-
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = usevalue != "" ? usevalue : userInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
-            Light light = gameObject.GetComponent<Light>();
-            light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
+            
+            // 获取所有的Light组件
+            Light[] lights = GameObject.FindObjectsOfType<Light>();
+            if (lights != null)
+            {
+                // 遍历所有灯光
+                foreach (Light light in lights)
+                {
+                    light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
+                }
+            }
         }
 
         public static void ShowPing(this DlgMain self)
