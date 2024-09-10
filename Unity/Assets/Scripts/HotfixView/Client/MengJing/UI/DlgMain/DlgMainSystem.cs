@@ -1903,8 +1903,13 @@ namespace ET.Client
                 // 遍历所有灯光
                 foreach (Light light in lights)
                 {
+                    if (!light.name.Contains("Directional Lig"))
+                    {
+                        continue;
+                    }
+
                     light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
-                   Log.Console($"UpdateShadow:  {value}");
+                    Log.Console($"UpdateShadow:  {light.name}  {light.transform.parent.name}  {value}");
                 }
             }
         }
