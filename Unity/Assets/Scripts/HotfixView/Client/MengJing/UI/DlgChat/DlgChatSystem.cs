@@ -107,7 +107,13 @@ namespace ET.Client
                 SettingData.ShowTerrain = !SettingData.ShowTerrain;
                 return;
             }
-            
+
+            if (text.Equals("#light"))
+            {
+                GameObject  T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
+                T1errain.gameObject.SetActive(!T1errain.gameObject.activeSelf);
+            }
+
             if (text.Equals("#openall"))
             {
                 SettingData.ShowBlood = true;
