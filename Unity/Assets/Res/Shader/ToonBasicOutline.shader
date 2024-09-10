@@ -114,6 +114,44 @@ Shader "Toon/BasicOutline"
                 return _OutlineColor;
             }
             ENDHLSL
+
         }
+
+
+        pass {
+			Tags{ "LightMode" = "ShadowCaster" }
+			HLSLPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+ 
+			struct appdata
+			{
+				float4 vertex : POSITION;
+			};
+ 
+			struct v2f
+			{
+				float4 pos : SV_POSITION;
+			};
+ 
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
+ 
+			v2f vert(appdata v)
+			{
+				v2f o;
+				o.pos = mul(UNITY_MATRIX_MVP,v.vertex);
+				return o;
+			}
+			float4 frag(v2f i) : SV_Target
+			{
+				float4 color;
+				color.xyz = float3(0.0, 0.0, 0.0);
+				return color;
+			}
+			ENDHLSL
+		}
+
     }
 }
