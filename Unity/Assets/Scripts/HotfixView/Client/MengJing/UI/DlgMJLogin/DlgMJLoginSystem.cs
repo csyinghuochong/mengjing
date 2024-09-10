@@ -42,18 +42,7 @@ namespace ET.Client
         {
             //获取服务器列表
             R2C_ServerList r2CServerList = await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
-
-            using (zstring.Block())
-            {
-                Debug.Log(zstring.Format("RequestServerList:  {0}", r2CServerList.ToString()));
-            }
-
             ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
-
-            using (zstring.Block())
-            {
-                Debug.Log(zstring.Format("RequestServerList2:  {0}", serverItem.ToString()));
-            }
 
             int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
             myserver = ServerHelper.GetNewServerId(myserver);
