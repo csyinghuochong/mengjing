@@ -46,7 +46,9 @@ namespace ET
 			GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
 			EPlayMode ePlayMode = globalConfig.EPlayMode;
 			
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
+			ePlayMode = EPlayMode.EditorSimulateMode;
+#else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
 
