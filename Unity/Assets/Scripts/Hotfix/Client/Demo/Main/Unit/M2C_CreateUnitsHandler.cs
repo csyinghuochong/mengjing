@@ -21,7 +21,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (!SettingData.ShowMonster)
+                if (unitInfo.Type == UnitType.Monster &&  !SettingData.ShowMonster)
                 {
                     continue;
                 }

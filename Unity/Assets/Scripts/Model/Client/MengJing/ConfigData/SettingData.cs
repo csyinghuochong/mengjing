@@ -74,6 +74,10 @@
         
         [StaticField]
         public static bool ShowMonster = true; 
+        
+        
+        [StaticField]
+        public static bool ShowTerrain = true; 
     }
 }
 

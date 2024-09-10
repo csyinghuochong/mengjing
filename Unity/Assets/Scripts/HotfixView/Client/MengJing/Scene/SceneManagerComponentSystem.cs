@@ -83,7 +83,7 @@ namespace ET.Client
                     paramss = DungeonConfigCategory.Instance.Get(chapterId).MapID.ToString();
 
                     playerComponent = self.Root().GetComponent<PlayerComponent>();
-                    if (playerComponent.Account.Equals("tcg01"))
+                    if (playerComponent.Account.Equals("tcg01") || !SettingData.ShowTerrain)
                     {
                         paramss = "10001_test";
                     }

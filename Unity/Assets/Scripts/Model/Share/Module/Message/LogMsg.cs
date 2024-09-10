@@ -21,6 +21,7 @@ namespace ET
             OuterMessage.C2M_SkillCmd,
             OuterMessage.M2C_SkillCmd,
             OuterMessage.M2C_UnitUseSkill,
+            OuterMessage.M2C_HorseNoticeInfo,
         };
 
         public void Awake()

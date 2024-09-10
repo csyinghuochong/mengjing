@@ -102,6 +102,12 @@ namespace ET.Client
                 return;
             }
             
+            if (text.Equals("#showterrain"))
+            {
+                SettingData.ShowTerrain = !SettingData.ShowTerrain;
+                return;
+            }
+            
             if (text.Equals("#openall"))
             {
                 SettingData.ShowBlood = true;
