@@ -68,22 +68,34 @@ namespace ET.Client
 
         public static void OnUpdate(this FallingFontComponent self)
         {
-            for (int i = self.FallingFontShows.Count - 1; i >= 0; i--)
+            if (self.Index < 0)
             {
-                FallingFontShowComponent fallingFontShowComponent = self.FallingFontShows[i];
+                self.Index = self.FallingFontShows.Count - 1;
+            }
+
+            // 分帧执行
+            for (int i = self.BatchSize; i > 0; i--)
+            {
+                if (self.Index < 0)
+                {
+                    break;
+                }
+
+                FallingFontShowComponent fallingFontShowComponent = self.FallingFontShows[self.Index];
                 bool remove = fallingFontShowComponent.LateUpdate();
                 if (remove)
                 {
-                    self.FallingFontShows.RemoveAt(i);
+                    self.FallingFontShows.RemoveAt(self.Index);
                     fallingFontShowComponent.Dispose();
                 }
+
+                self.Index--;
             }
 
-            if (self.FallingFontShows.Count == 0 && self.Timer!=0)
+            if (self.FallingFontShows.Count == 0 && self.Timer != 0)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
         }
     }
-
 }

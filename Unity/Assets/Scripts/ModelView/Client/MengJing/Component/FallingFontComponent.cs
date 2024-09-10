@@ -7,5 +7,8 @@ namespace ET.Client
     {
         public long Timer;
         public List<EntityRef<FallingFontShowComponent>> FallingFontShows = new();
+        
+        public int BatchSize = 50; // 每帧处理的任务数
+        public int Index = -1;
     }
 }
