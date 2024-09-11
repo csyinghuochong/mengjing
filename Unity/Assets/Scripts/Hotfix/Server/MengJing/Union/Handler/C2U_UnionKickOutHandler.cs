@@ -32,7 +32,8 @@ namespace ET.Server
                 await UnitCacheHelper.SaveComponentCache(scene.Root(), numericComponent);
                 
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserId);
-                userInfoComponent.UserInfo.UnionName = string.Empty;
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
+                unionInfoCache.UnionName = string.Empty;
                 await UnitCacheHelper.SaveComponentCache(scene.Root(), userInfoComponent);
             }
             else

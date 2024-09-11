@@ -23,13 +23,14 @@ namespace ET.Server
                 }
                 
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), dBUnionInfo.UnionInfo.ApplyList[i]);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 UnionPlayerInfo UnionPlayerInfo = UnionPlayerInfo.Create();
-                UnionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-                UnionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                UnionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
-                UnionPlayerInfo.UserID = userInfoComponent.UserInfo.UserId;
-                UnionPlayerInfo.Occ = userInfoComponent.UserInfo.Occ;
-                UnionPlayerInfo.OccTwo = userInfoComponent.UserInfo.OccTwo;
+                UnionPlayerInfo.PlayerLevel = unionInfoCache.Lv;
+                UnionPlayerInfo.PlayerName = unionInfoCache.Name;
+                UnionPlayerInfo.Combat = unionInfoCache.Combat;
+                UnionPlayerInfo.UserID = unionInfoCache.UserId;
+                UnionPlayerInfo.Occ = unionInfoCache.Occ;
+                UnionPlayerInfo.OccTwo = unionInfoCache.OccTwo;
                 unionPlayers.Add( UnionPlayerInfo);
             }
 

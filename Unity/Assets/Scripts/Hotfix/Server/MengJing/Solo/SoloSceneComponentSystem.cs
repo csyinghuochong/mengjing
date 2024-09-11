@@ -87,6 +87,7 @@ namespace ET.Server
 
                 UserInfoComponentS userInfoComponent =
                         await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), soloPlayerList[i].UnitId);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent == null)
                 {
                     continue;
@@ -96,13 +97,13 @@ namespace ET.Server
                 string occName = occupationConfig.OccupationName;
                 
 
-                if (userInfoComponent.UserInfo.OccTwo > 0)
+                if (unionInfoCache.OccTwo > 0)
                 {
-                    occName = OccupationTwoConfigCategory.Instance.Get(userInfoComponent.UserInfo.OccTwo).OccupationName;
+                    occName = OccupationTwoConfigCategory.Instance.Get(unionInfoCache.OccTwo).OccupationName;
                 }
 
                 string soloInfo =
-                        $"玩家: {soloPlayerList[i].Name}  击杀:{soloPlayerList[i].WinNum} 等级:{userInfoComponent.UserInfo.Lv} 职业:{occName}  战力:{combat}";
+                        $"玩家: {soloPlayerList[i].Name}  击杀:{soloPlayerList[i].WinNum} 等级:{unionInfoCache.Lv} 职业:{occName}  战力:{combat}";
                 sololist.Add(soloInfo);
             }
 

@@ -26,6 +26,7 @@ namespace ET.Server
                     long userId = unionPlayerInfo.UserID;
 
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), userId);
+                    UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                     if (userInfoComponent == null)
                     {
                         dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
@@ -42,9 +43,9 @@ namespace ET.Server
                         unionPlayerInfo.Position = 1;
                     }
 
-                    unionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-                    unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                    unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
+                    unionPlayerInfo.PlayerLevel = unionInfoCache.Lv;
+                    unionPlayerInfo.PlayerName = unionInfoCache.Name;
+                    unionPlayerInfo.Combat = unionInfoCache.Combat;
 
                     if (allonlines.Contains(request.UnitId))
                     {
@@ -53,7 +54,7 @@ namespace ET.Server
 
                     if (dBUnionInfo.UnionInfo.LeaderId == userId)
                     {
-                        dBUnionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
+                        dBUnionInfo.UnionInfo.LeaderName = unionInfoCache.Name;
                     }
                 }
 

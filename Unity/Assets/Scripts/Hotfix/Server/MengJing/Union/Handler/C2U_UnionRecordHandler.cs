@@ -15,13 +15,14 @@
             {
                 DonationRecord donationRecord = dBUnionInfo.UnionInfo.DonationRecords[i];
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), donationRecord.UnitId);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent == null)
                 {
                     dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
                     continue;
                 }
-                donationRecord.Name = userInfoComponent.UserInfo.Name;
-                donationRecord.Occ = userInfoComponent.UserInfo.Occ;    
+                donationRecord.Name = unionInfoCache.Name;
+                donationRecord.Occ = unionInfoCache.Occ;    
             }
             response.DonationRecords .AddRange(dBUnionInfo.UnionInfo.DonationRecords); 
             await ETTask.CompletedTask;

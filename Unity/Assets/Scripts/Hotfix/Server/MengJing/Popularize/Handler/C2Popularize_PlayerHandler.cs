@@ -16,6 +16,7 @@ namespace ET.Server
                     return;
                 }
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.ActorId);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent == null)
                 {
                     return;
@@ -46,13 +47,14 @@ namespace ET.Server
 
                 long puserid = dBPopularizeInfoList[0].Id;
                 UserInfoComponentS userInfoComponent_2 = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), puserid);
+                UserInfo unionInfoCache_2 = userInfoComponent_2.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent_2 == null)
                 {
                     response.Error = ErrorCode.ERR_PopularizeNot;
  
                     return;
                 }
-                if (userInfoComponent.UserInfo.AccInfoID == userInfoComponent_2.UserInfo.AccInfoID)
+                if (unionInfoCache.AccInfoID == unionInfoCache_2.AccInfoID)
                 {
                     response.Error = ErrorCode.ERR_PopularizeThe;
                     return;

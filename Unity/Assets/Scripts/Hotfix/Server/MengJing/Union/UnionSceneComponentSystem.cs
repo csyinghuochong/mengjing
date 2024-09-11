@@ -154,7 +154,8 @@ namespace ET.Server
                     await UnitCacheHelper.SaveComponentCache(self.Root(), numericComponent);
 
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), unitid);
-                    userInfoComponent.UserInfo.UnionName = dBUnionInfo.UnionInfo.UnionName;
+                    UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
+                    unionInfoCache.UnionName = dBUnionInfo.UnionInfo.UnionName;
                     await UnitCacheHelper.SaveComponentCache(self.Root(), userInfoComponent);
                 }
 
