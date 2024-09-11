@@ -53,7 +53,7 @@ namespace ET.Client
             UIBaseWindow baseWindow = self.GetUIBaseWindow(windowsId);
             if ( null == baseWindow )
             {
-                Log.Warning($"{windowsId} is not created!");
+                // Log.Warning($"{windowsId} is not created!");
                 return null;
             }
             if ( !baseWindow.IsPreLoad )
