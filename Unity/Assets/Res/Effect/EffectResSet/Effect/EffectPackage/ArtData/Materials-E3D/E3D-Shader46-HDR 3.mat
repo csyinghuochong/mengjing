@@ -2,14 +2,18 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: E3D-Shader46-HDR 3
-  m_Shader: {fileID: 4800000, guid: 3ccaf622a77ebc14ba2f29b451380656, type: 3}
-  m_ShaderKeywords: ZQLTGLOW_GLOW_MAINTEX ZQLTGLOW_MULTIPLY_GLOWCOLOR _EMISSION
+  m_Shader: {fileID: 4800000, guid: 76f8a8247a9952a4393b35768748ecaa, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - ZQLTGLOW_GLOW_MAINTEX
+  - ZQLTGLOW_MULTIPLY_GLOWCOLOR
+  - _EMISSION
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -75,6 +79,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Alpha: 1
     - _BumpScale: 1
