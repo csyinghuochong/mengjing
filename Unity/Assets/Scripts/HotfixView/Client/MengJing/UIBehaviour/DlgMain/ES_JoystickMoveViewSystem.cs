@@ -318,21 +318,21 @@ namespace ET.Client
         {
             float3 unitPosi = unit.Position;
             float3 targetpositon = unitPosi +  math.forward(rotation) * 2;
-            for (int i = 0; i < 5; i++)
-            {
-                Vector3 target = unitPosi + math.forward(rotation) * (i + 3);
-                RaycastHit hit;
+            //for (int i = 0; i < 5; i++)
+            //{
+             //   Vector3 target = unitPosi + math.forward(rotation) * (i + 3);
+             //   RaycastHit hit;
 
-                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
-                if (hit.collider == null)
-                {
-                    break;
-                }
-                else
-                {
-                    targetpositon = hit.point;
-                }
-            }
+             //   Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+             //   if (hit.collider == null)
+             //   {
+            //        break;
+            //    }
+           //     else
+           //     {
+           //         targetpositon = hit.point;
+          //      }
+          //  }
 
             return targetpositon;
         }
