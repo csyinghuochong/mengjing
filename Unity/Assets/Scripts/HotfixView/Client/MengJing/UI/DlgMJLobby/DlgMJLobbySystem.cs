@@ -46,7 +46,16 @@ namespace ET.Client
                     }
                 }
             }
+            
             self.UpdateSelect(self.SeletRoleInfo ?? self.ShowCreateRoleInfos[0]);
+
+            if (self.PageIndex == 0 && self.ShowCreateRoleInfos.Count == 1)
+            {
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
+                uiComponent.HideWindow(WindowID.WindowID_MJLobby);
+                return;
+            }
         }
 
         public static void SelectNewCreateRole(this DlgMJLobby self)
@@ -121,10 +130,12 @@ namespace ET.Client
             if (self.SeletRoleInfo != null)
             {
                 self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
+                self.View.E_NameText.gameObject.SetActive(true);
                 using (zstring.Block())
                 {
                     self.View.E_LvText.text = zstring.Format("{0}级", self.SeletRoleInfo.PlayerLv);
                 }
+                self.View.E_LvText.gameObject.SetActive(true);
 
                 self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
                 self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
@@ -132,6 +143,8 @@ namespace ET.Client
             }
             else
             {
+                self.View.E_NameText.gameObject.SetActive(false);
+                self.View.E_LvText.gameObject.SetActive(false);
                 self.View.ES_ModelShow.SetShow(false);
             }
         }
@@ -167,12 +180,13 @@ namespace ET.Client
         {
             if (self.SeletRoleInfo == null)
             {
-                Log.Error("请选择要删除的角色!");
+                FlyTipComponent.Instance.ShowFlyTip("请选择要删除的角色!");
                 return;
             }
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             await LoginHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
+            self.SeletRoleInfo = null;
             self.Refresh();
         }
 
