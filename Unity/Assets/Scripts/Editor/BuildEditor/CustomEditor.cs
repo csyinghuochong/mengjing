@@ -25,6 +25,22 @@ public class ClipBoard
 
 public class CustomEditorScript
 {
+    [MenuItem("Custom/查找Tag==NavMesh")]
+    static void FindTagNavMesh()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NavMesh");
+        foreach (GameObject gameObject in gameObjects)
+        {
+            if (gameObject.transform.parent.name.Equals("NavMesh"))
+            {
+                continue;
+            }
+
+            Debug.Log(gameObject.name);
+        }
+        Debug.Log("查找完成！！");
+    }
+
     [MenuItem("Custom/生成坐标点XZ到文件")]
     static void ExportPositions()
     {
