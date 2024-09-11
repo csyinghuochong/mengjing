@@ -173,7 +173,6 @@ namespace ET.Client
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, self.SeletRoleInfo.UnitId.ToString());
             playerComponent.CurrentRoleId = self.SeletRoleInfo.UnitId;
             await LoginHelper.LoginGameAsync(self.Root(), 0);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
 
         private static void OnDeleteRoleButton(this DlgMJLobby self)

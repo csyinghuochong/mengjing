@@ -6,6 +6,7 @@
         protected override async ETTask Run(Scene root, EnterMapFinish args)
         {
             await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Main);
+            root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
     }
 }
