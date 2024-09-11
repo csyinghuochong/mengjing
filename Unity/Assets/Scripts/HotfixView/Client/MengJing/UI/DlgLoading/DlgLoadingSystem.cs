@@ -454,7 +454,7 @@ namespace ET.Client
                 //播放传送特效
                 if (sceneType != SceneTypeEnum.MainCityScene)
                 {
-                    FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 30000002);
+                    FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 }
 
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Loading);
