@@ -43,6 +43,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgLoading self, Entity contextData = null)
         {
+            self.LoadSceneFinished = false;
         }
 
         public static void BeforeUnload(this DlgLoading self)
