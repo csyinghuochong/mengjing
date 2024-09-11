@@ -4,6 +4,7 @@ using Vector3 = System.Numerics.Vector3;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_JoystickMove))]
     public static class FunctionUI
     {
         //传入道具ID显示名称及品质颜色
@@ -35,11 +36,6 @@ namespace ET.Client
                 return;
             }
 
-            //if (functionid != 1003 && functionid != 1004)
-            //{
-            //    await UIHelper.Create(zoneScene, uipath);
-            //    return true;
-            //}
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
             Unit npc = TaskHelper.GetNpcByConfigId(root, unitPosi, npcid);
@@ -47,9 +43,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            // UIHelper.CurrentNpcId = npcid;
-            // UIHelper.CurrentNpcUI = GetUIPath(funtionOpenConfig.Name);
 
             WindowID windowID = GetUIPath(funtionOpenConfig.Name);
             if (windowID == WindowID.WindowID_Invaild)
@@ -61,12 +54,20 @@ namespace ET.Client
             UIComponent uiComponent = root.GetComponent<UIComponent>();
             uiComponent.CurrentNpcId = npcid;
             uiComponent.CurrentNpcUI = windowID;
-            await root.GetComponent<UIComponent>().ShowWindowAsync(windowID);
-            // DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            // dlgMain.View.EG_JoystickMoveRectTransform.gameObject.SetActive(false);
-            //
-            // MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
-            // cameraComponent.SetBuildEnter(npc, () => { OnBuildEnter(npcid); });
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+
+            MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
+            cameraComponent.SetBuildEnter(npc, () => { OnBuildEnter(root, npcid, windowID); });
+        }
+
+        public static void OnBuildEnter(Scene root, int npcid, WindowID windowID)
+        {
+            int FunctionId = NpcConfigCategory.Instance.Get(npcid).NpcType;
+            FuntionConfig funtionOpenConfig = FuntionConfigCategory.Instance.Get(FunctionId);
+
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+
+            root.GetComponent<UIComponent>().ShowWindowAsync(windowID).Coroutine();
         }
 
         public static WindowID GetUIPath(string uitype)
