@@ -213,8 +213,8 @@ namespace ET.Client
             List<int> canGets = taskComponent.GetOpenTaskIds(self.NpcId);
             canGets.AddRange(self.GetAddtionTaskId(self.NpcId));
 
-            self.ShowNpcEffect(0, ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_Task_Get"), canGets.Count > 0 && taskProCompleted.Count == 0);
-            self.ShowNpcEffect(1, ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_Task_Complate"), taskProCompleted.Count > 0);
+            self.ShowNpcEffect(0, 200001, canGets.Count > 0 && taskProCompleted.Count == 0);
+            self.ShowNpcEffect(1, 200002, taskProCompleted.Count > 0);
         }
 
         public static List<int> GetAddtionTaskId(this UINpcHpComponent self, int npcId)
@@ -235,18 +235,22 @@ namespace ET.Client
             return addTaskids;
         }
 
-        public static void ShowNpcEffect(this UINpcHpComponent self, int type, string path, bool show)
+        public static void ShowNpcEffect(this UINpcHpComponent self, int type, int effectConfigId, bool show)
         {
             GameObject go = self.EffectComTask[type];
             if (show)
             {
                 if (go == null)
                 {
-                    GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                    go = UnityEngine.Object.Instantiate(prefab);
-                    CommonViewHelper.SetParent(go,
-                        self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).gameObject);
-                    go.transform.localPosition = new Vector3(0f, 1f, 0f);
+                    EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectConfigId);
+                    Transform tParent = self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(effectConfig.SkillParentPosition);
+                    using (zstring.Block())
+                    {
+                        string path = ABPathHelper.GetEffetPath(zstring.Format("ScenceEffect/{0}", effectConfig.EffectName));
+                        GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                        go = UnityEngine.Object.Instantiate(prefab, tParent, true);
+                    }
+                    go.transform.localPosition = new Vector3(0f, 0f, 0f);
                     self.EffectComTask[type] = go;
                 }
 
