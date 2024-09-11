@@ -96,8 +96,10 @@ namespace ET.Client
             int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
             GameObjectLoadHelper.DisposeAll();
 
-            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Empty"), LoadSceneMode.Single);
-            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            // 不太明白这俩行的目的
+            // await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Empty"), LoadSceneMode.Single);
+            // await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            
             var path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
             Log.Warning("切换场景" + path);
