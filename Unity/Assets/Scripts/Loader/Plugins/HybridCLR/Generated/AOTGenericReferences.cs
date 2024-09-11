@@ -468,8 +468,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgLSLobbySystem.<EnterMap>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgLoadingSystem.<StartPreLoadAssets>d__9>
 	// ET.StateMachineWrap<ET.Client.DlgLobbySystem.<EnterMap>d__2>
-	// ET.StateMachineWrap<ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>
 	// ET.StateMachineWrap<ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>
+	// ET.StateMachineWrap<ET.Client.DlgMJLobbySystem.<RequestDeleteRole>d__9>
 	// ET.StateMachineWrap<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>
 	// ET.StateMachineWrap<ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>
 	// ET.StateMachineWrap<ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>
@@ -2420,8 +2420,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgLSLobbySystem.<EnterMap>d__2>(object&,ET.Client.DlgLSLobbySystem.<EnterMap>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgLoadingSystem.<StartPreLoadAssets>d__9>(object&,ET.Client.DlgLoadingSystem.<StartPreLoadAssets>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgLobbySystem.<EnterMap>d__2>(object&,ET.Client.DlgLobbySystem.<EnterMap>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>(object&,ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>(object&,ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLobbySystem.<RequestDeleteRole>d__9>(object&,ET.Client.DlgMJLobbySystem.<RequestDeleteRole>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>(object&,ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>(object&,ET.Client.DlgMJLoginSystem.<RequestServerList>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>(object&,ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4&)
@@ -3376,8 +3376,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgLSLobbySystem.<EnterMap>d__2>(ET.Client.DlgLSLobbySystem.<EnterMap>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgLoadingSystem.<StartPreLoadAssets>d__9>(ET.Client.DlgLoadingSystem.<StartPreLoadAssets>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgLobbySystem.<EnterMap>d__2>(ET.Client.DlgLobbySystem.<EnterMap>d__2&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8>(ET.Client.DlgMJLobbySystem.<OnDeleteRoleButton>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7>(ET.Client.DlgMJLobbySystem.<OnEnterMapButton>d__7&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLobbySystem.<RequestDeleteRole>d__9>(ET.Client.DlgMJLobbySystem.<RequestDeleteRole>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5>(ET.Client.DlgMJLoginSystem.<OnLoginButton>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMJLoginSystem.<RequestServerList>d__2>(ET.Client.DlgMJLoginSystem.<RequestServerList>d__2&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4>(ET.Client.DlgMailSystem.<OnButtonOneKeyButton>d__4&)
