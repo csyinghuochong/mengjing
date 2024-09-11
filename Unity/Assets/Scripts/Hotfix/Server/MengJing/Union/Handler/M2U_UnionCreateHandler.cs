@@ -34,10 +34,11 @@ namespace ET.Server
             unionInfo.UnionInfo.UnionPurpose = request.UnionPurpose;
 
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserID);
-            unionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
+            UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
+            unionInfo.UnionInfo.LeaderName = unionInfoCache.Name;
             UnionPlayerInfo UnionPlayerInfo = UnionPlayerInfo.Create();
-            UnionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
-            UnionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
+            UnionPlayerInfo.PlayerLevel = unionInfoCache.Lv;
+            UnionPlayerInfo.PlayerName = unionInfoCache.Name;
             UnionPlayerInfo.UserID = request.UserID;
             unionInfo.UnionInfo.UnionPlayerList.Add(UnionPlayerInfo);
             UnitCacheHelper.SaveComponentCache(scene.Root(), unionInfo).Coroutine();
