@@ -47,7 +47,8 @@ namespace ET
 			EPlayMode ePlayMode = globalConfig.EPlayMode;
 			
 #if UNITY_EDITOR
-			ePlayMode = EPlayMode.EditorSimulateMode;
+			ePlayMode = globalConfig.EPlayMode;
+			//ePlayMode = EPlayMode.EditorSimulateMode;
 #else
 			ePlayMode = EPlayMode.HostPlayMode;
 #endif
