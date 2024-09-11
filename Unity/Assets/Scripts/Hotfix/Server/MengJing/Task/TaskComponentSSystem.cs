@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -11,16 +12,7 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this TaskComponentS self)
         {
-            if (self.RoleTaskList.Count == 0)
-            {
-                int initTask = int.Parse(GlobalValueConfigCategory.Instance.Get(1).Value);
-                TaskPro TaskPro = TaskPro.Create();
-                TaskPro.taskID = initTask;
-                TaskPro.TrackStatus = 1;
-                TaskPro.taskStatus = (int)TaskStatuEnum.Completed;
-                TaskPro.taskTargetNum_1 = 1;
-                self.RoleTaskList.Add(TaskPro);
-            }
+            self.CheckInitTask();
         }
         [EntitySystem]
         private static void Destroy(this TaskComponentS self)
@@ -31,6 +23,21 @@ namespace ET.Server
         private static void Deserialize(this TaskComponentS self)
         {
 
+        }
+
+        private static void CheckInitTask(this TaskComponentS self)
+        {
+            int initTask = int.Parse(GlobalValueConfigCategory.Instance.Get(1).Value);
+            if (!self.IsHaveTask(initTask))
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(initTask);
+                TaskPro TaskPro = TaskPro.Create();
+                TaskPro.taskID = initTask;
+                TaskPro.TrackStatus = 1;
+                TaskPro.taskStatus = taskConfig.TargetType == TaskTargetType.LookingFor_3 ? (int)TaskStatuEnum.Completed : (int)TaskStatuEnum.Accepted;
+                TaskPro.taskTargetNum_1 = 1;
+                self.RoleTaskList.Add(TaskPro);
+            }
         }
 
         public static bool ShowPaiMai(this TaskComponentS self, int lv, int simulator)
@@ -882,6 +889,8 @@ namespace ET.Server
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
 
+            self.CheckInitTask();
+            
             if (self.RoleTaskList.Count == 0)
             {
                 Log.Debug($"self.RoleTaskList.Count: {self.Zone()} {self.GetParent<Unit>().Id}");
