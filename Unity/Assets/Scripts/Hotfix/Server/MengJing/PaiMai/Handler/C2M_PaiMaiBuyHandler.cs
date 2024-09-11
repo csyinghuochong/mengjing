@@ -178,10 +178,11 @@ namespace ET.Server
                     string sellPlayerName = r_GameStatusResponse.PaiMaiItemInfo.PlayerName;
                     string sellAccoount = r_GameStatusResponse.PaiMaiItemInfo.Account;
                     UserInfoComponentS userInfoComponentSell = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(unit.Root(), r_GameStatusResponse.PaiMaiItemInfo.UserId);
+                    UserInfo unionInfoCache = userInfoComponentSell.ChildrenDB[0] as UserInfo;
                     if (userInfoComponentSell != null)
                     {
-                        int sellPlayerLv = userInfoComponentSell.UserInfo.Lv;
-                        long sellNowGold = userInfoComponentSell.UserInfo.Gold;
+                        int sellPlayerLv = unionInfoCache.Lv;
+                        long sellNowGold = unionInfoCache.Gold;
 
                         string paimaiInfo = $"服务器:{serverName}   \t道具名称:{itemName}   \t数量:{itemNumber}   \t价格:{price}  \t购买者名称:{buyPlayerName}   \t购买者等级:{buyPlayerLv}    " +
                             $"\t购买者充值:{buyPlayerRecharge}   \t购买者当前金币:{buyNowGold}   \t购买者账号:{buyAccount}    \t出售者名称:{sellPlayerName}   \t出售者账号:{sellAccoount}   \t出售者等级:{sellPlayerLv}    \t出售者当前金币:{sellNowGold} ";

@@ -85,8 +85,9 @@ namespace ET.Server
                 await UnitCacheHelper.SaveComponentCache(scene, numericComponent);
                 
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene, userId);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
 
-                long accountId = userInfoComponent.UserInfo.AccInfoID;
+                long accountId = unionInfoCache.AccInfoID;
                 SendToAccountCenter(scene, accountId, userId, rechargeNumber, orderInfo).Coroutine();
                 await ETTask.CompletedTask;
             }

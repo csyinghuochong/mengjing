@@ -41,15 +41,16 @@ namespace ET.Server
                     long unitid = dBPopularizeInfo.MyPopularizeList[i].UnitId;
                     
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), unitid);
+                    UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                     if (userInfoComponent == null)
                     {
                         continue;
                     }
 
-                    dBPopularizeInfo.MyPopularizeList[i].Nmae = userInfoComponent.UserInfo.Name;
-                    dBPopularizeInfo.MyPopularizeList[i].Level = userInfoComponent.UserInfo.Lv;
-                    dBPopularizeInfo.MyPopularizeList[i].Occ = userInfoComponent.UserInfo.Occ;
-                    dBPopularizeInfo.MyPopularizeList[i].OccTwo = userInfoComponent.UserInfo.OccTwo;
+                    dBPopularizeInfo.MyPopularizeList[i].Nmae = unionInfoCache.Name;
+                    dBPopularizeInfo.MyPopularizeList[i].Level = unionInfoCache.Lv;
+                    dBPopularizeInfo.MyPopularizeList[i].Occ = unionInfoCache.Occ;
+                    dBPopularizeInfo.MyPopularizeList[i].OccTwo = unionInfoCache.OccTwo;
                 }
 
                 response.PopularizeCode = dBPopularizeInfo.PopularizeCode;

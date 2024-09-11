@@ -9,6 +9,7 @@ namespace ET.Server
         {
             JiaYuanComponentS jiaYuanComponent = await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(unit.Root(), request.MasterId);
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(unit.Root(), request.MasterId);
+            UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
             if (unit.Id != request.MasterId)
             {
                 JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
@@ -31,8 +32,8 @@ namespace ET.Server
             response.JiaYuanProList .AddRange(jiaYuanComponent.JiaYuanProList_7); 
             response.JiaYuanPetList .AddRange(jiaYuanComponent.JiaYuanPetList_2); 
             response.JiaYuanDaShiTime = jiaYuanComponent.JiaYuanDaShiTime_1;
-            response.JiaYuanLv = userInfoComponent.UserInfo.JiaYuanLv;
-            response.MasterName = userInfoComponent.UserInfo.Name;
+            response.JiaYuanLv = unionInfoCache.JiaYuanLv;
+            response.MasterName = unionInfoCache.Name;
         }
     }
 }

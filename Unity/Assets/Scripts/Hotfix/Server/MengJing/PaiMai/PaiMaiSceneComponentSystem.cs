@@ -153,9 +153,10 @@ namespace ET.Server
                         
                         Log.Warning($"OnAuctionOver[离线]:  {self.Zone()}  {self.AuctioUnitId}  {self.AuctionPlayer}");
                         UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), self.AuctioUnitId);
-                        if (userInfoComponent.UserInfo.Gold >= self.AuctionPrice)
+                        UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
+                        if (unionInfoCache.Gold >= self.AuctionPrice)
                         {
-                            userInfoComponent.UserInfo.Gold -= self.AuctionPrice;
+                            unionInfoCache.Gold -= self.AuctionPrice;
                             UnitCacheHelper.SaveComponentCache(self.Root(),  userInfoComponent).Coroutine();
 
                             //发送道具

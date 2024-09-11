@@ -6,8 +6,9 @@
     {
         protected override async ETTask Run(Scene scene, C2F_WatchPlayerRequest request, F2C_WatchPlayerResponse response)
         {
-            UserInfoComponentS userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserId);
-            if (userinfo == null)
+            UserInfoComponentS userInfoComponentS = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserId);
+            UserInfo unionInfoCache = userInfoComponentS.ChildrenDB[0] as UserInfo;
+            if (userInfoComponentS == null)
             {
                 response.Error = ErrorCode.ERR_Error;
                 return;
@@ -18,8 +19,8 @@
             {
                 //全部
                 case 0:
-                    response.Lv = userinfo.UserInfo.Lv;
-                    response.Name = userinfo.UserInfo.Name;
+                    response.Lv = unionInfoCache.Lv;
+                    response.Name = unionInfoCache.Name;
                     BagComponentS bagComponents = await UnitCacheHelper.GetComponentCache<BagComponentS>(scene.Root(), request.UserId);
                     if (bagComponents == null)
                     {
@@ -51,14 +52,14 @@
                         response.PetHeXinList.Add(itemInfo.ToMessage());
                     }
                     
-                    response.Occ = userinfo.UserInfo.Occ;
+                    response.Occ = unionInfoCache.Occ;
                     response.RolePetInfos.AddRange(petComponent.RolePetInfos);
                     response.PetSkinList.AddRange(petComponent.PetSkinList);
                     response.FashionIds.AddRange(bagComponents.FashionEquipList);
                     break;
                 //只返回名字
                 case 1:
-                    response.Name = userinfo.UserInfo.Name;
+                    response.Name = unionInfoCache.Name;
                     break;
                 case 2:
                     ActorId teamServerId = UnitCacheHelper.GetTeamServerId(scene.Zone());

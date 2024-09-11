@@ -52,6 +52,7 @@ namespace  ET.Server
             {
                 long friendId = friends[i];
                 UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, friendId);
+                UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                 if (userInfoComponent == null)
                 {
                     continue;
@@ -61,10 +62,10 @@ namespace  ET.Server
                
                 FriendInfo FriendInfo = FriendInfo.Create();
                 FriendInfo.UserId = friendId;
-                FriendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+                FriendInfo.PlayerLevel = unionInfoCache.Lv;
                 FriendInfo.OnLineTime = onlines.Contains(friendId) ? 1 : 0;
-                FriendInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                FriendInfo.Occ = userInfoComponent.UserInfo.Occ;
+                FriendInfo.PlayerName = unionInfoCache.Name;
+                FriendInfo.Occ = unionInfoCache.Occ;
                 friendInfos.Add(FriendInfo);
             }
 

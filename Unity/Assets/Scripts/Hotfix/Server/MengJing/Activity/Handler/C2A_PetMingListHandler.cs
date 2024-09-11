@@ -30,6 +30,7 @@ namespace ET.Server
                     {
                         long enemyId = minglist[i].UnitId;
                         UserInfoComponentS userInfoComponentS = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), enemyId);
+                        UserInfo unionInfoCache = userInfoComponentS.ChildrenDB[0] as UserInfo;
                         if (userInfoComponentS == null)
                         {
                             continue;
@@ -63,7 +64,7 @@ namespace ET.Server
                         PetMingPlayerInfo.MineType = minglist[i].MineType;
                         PetMingPlayerInfo.Postion = minglist[i].Postion;
                         PetMingPlayerInfo.TeamId = teamid;
-                        PetMingPlayerInfo.PlayerName = userInfoComponentS.UserInfo.Name;
+                        PetMingPlayerInfo.PlayerName = unionInfoCache.Name;
                         PetMingPlayerInfo.PetConfig = petconfidds;
                         PetMingPlayerInfo.PetIdList = petidlist;
                         PetMingPlayerInfo.UnitId = minglist[i].UnitId;

@@ -114,6 +114,7 @@ namespace ET.Server
         public static bool CheckSendMail(int MailType, string Title, NumericComponentS numericComponent, UserInfoComponentS userInfoComponent,
         BagComponentS bagComponent)
         {
+            UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
             if (numericComponent == null || userInfoComponent == null || bagComponent == null)
             {
                 return false;
@@ -142,7 +143,7 @@ namespace ET.Server
 
                     break;
                 case 3: //20级以上 补
-                    if (userInfoComponent.UserInfo.Lv < int.Parse(Title))
+                    if (unionInfoCache.Lv < int.Parse(Title))
                     {
                         return false;
                     }
