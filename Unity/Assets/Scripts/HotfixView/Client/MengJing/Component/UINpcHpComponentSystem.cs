@@ -244,12 +244,11 @@ namespace ET.Client
                 {
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectConfigId);
                     Transform tParent = self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(effectConfig.SkillParentPosition);
-                    using (zstring.Block())
-                    {
-                        string path = ABPathHelper.GetEffetPath(zstring.Format("ScenceEffect/{0}", effectConfig.EffectName));
-                        GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                        go = UnityEngine.Object.Instantiate(prefab, tParent, true);
-                    }
+
+                    string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
+                    GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                    go = UnityEngine.Object.Instantiate(prefab, tParent, true);
+
                     go.transform.localPosition = new Vector3(0f, 0f, 0f);
                     self.EffectComTask[type] = go;
                 }

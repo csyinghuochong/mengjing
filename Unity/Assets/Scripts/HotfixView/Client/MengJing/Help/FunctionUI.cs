@@ -15,7 +15,7 @@ namespace ET.Client
             itemObj.GetComponent<Text>().color = QualityReturnColor(itemCof.ItemQuality);
         }
 
-        public static async ETTask OpenFunctionUI(Scene root, int npcid, int functionid)
+        public static void OpenFunctionUI(Scene root, int npcid, int functionid)
         {
             if (functionid < 10)
             {

@@ -167,26 +167,7 @@ namespace ET.Client
                 return;
             }
 
-            string effectFileName = "";
-            switch (self.EffectConfig.EffectType)
-            {
-                //技能特效
-                case 1:
-                    effectFileName = "SkillEffect/";
-                    break;
-                //受击特效
-                case 2:
-                    effectFileName = "SkillHitEffect/";
-                    break;
-                //场景特效
-                case 3:
-                    effectFileName = "ScenceEffect/";
-                    break;
-            }
-
-            string effectNamePath = effectFileName + self.EffectConfig.EffectName;
-            self.EffectPath = StringBuilderHelper.GetEffetPath(effectNamePath);
-            
+            self.EffectPath = StringBuilderHelper.GetEffectPathByConfig(self.EffectConfig);
             GameObjectLoadHelper.AddLoadQueue(self.Root(), self.EffectPath, self.InstanceId, self.OnLoadGameObject);
         }
 
