@@ -10,7 +10,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMJLobby self)
         {
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButton);
-            self.View.E_DeleteRoleButton.AddListenerAsync(self.OnDeleteRoleButton);
+            self.View.E_DeleteRoleButton.AddListener(self.OnDeleteRoleButton);
             self.View.E_PrevButton.AddListener(self.OnPrevButton);
             self.View.E_NextButton.AddListener(self.OnNextButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
@@ -176,7 +176,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
 
-        private static async ETTask OnDeleteRoleButton(this DlgMJLobby self)
+        private static void OnDeleteRoleButton(this DlgMJLobby self)
         {
             if (self.SeletRoleInfo == null)
             {
@@ -184,6 +184,15 @@ namespace ET.Client
                 return;
             }
 
+            PopupTipHelp.OpenPopupTip(self.Root(),
+                        "删除角色",
+                        "是否删除当前角色？",
+                        () => { self.RequestDeleteRole().Coroutine(); })
+                    .Coroutine();
+        }
+
+        private static async ETTask RequestDeleteRole(this DlgMJLobby self)
+        {
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             await LoginHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
             self.SeletRoleInfo = null;
