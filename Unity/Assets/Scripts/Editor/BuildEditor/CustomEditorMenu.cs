@@ -23,9 +23,40 @@ public class ClipBoard
     }
 }
 
-public class CustomEditorScript
+public class CustomEditorMenu
 {
-    [MenuItem("Custom/查找Tag==NavMesh")]
+    
+    [MenuItem("Custom/修改子对象Tag")]
+    static void ChangeChildTag()
+    {
+        if (Selection.gameObjects.Length == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < Selection.gameObjects.Length; i++)
+        {
+            GameObject go = Selection.gameObjects[i];
+            SetChildTags(go.transform, go.tag);
+        }
+    }
+
+    private static void SetChildTags(Transform target, string tag)
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        foreach (Transform item in target)
+        {
+            item.tag = tag;
+            SetChildTags(item, tag);
+        }
+    }
+
+    
+    [MenuItem("Custom/查找Tag==NavMesh 清除场景NavMesh")]
     static void FindTagNavMesh()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NavMesh");
