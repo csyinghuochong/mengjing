@@ -1909,7 +1909,7 @@ namespace ET.Client
                     }
 
                     light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
-                    Log.Console($"UpdateShadow:  {light.name}  {light.transform.parent.name}  {value}");
+                    Log.Console($"UpdateShadow:  {light.name}    {value}");
                 }
             }
 
