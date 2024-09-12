@@ -27,6 +27,7 @@ namespace ET.Client
             if (!isCompleted)
             {
                 self.E_TextTaskNameText.text = taskConfig.TaskName;
+                self.E_TextTaskNameText.color = Color.white;
             }
             else
             {
