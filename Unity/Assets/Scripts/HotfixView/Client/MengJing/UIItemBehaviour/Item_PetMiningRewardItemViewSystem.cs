@@ -23,7 +23,7 @@
                 return;
             }
 
-            int errorCode = await TaskClientNetHelper.SendCommitTaskCountry(self.Root(), self.TaskPro.taskID);
+            int errorCode = await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
             if (errorCode == ErrorCode.ERR_Success)
             {
                 self.E_ImageReceivedImage.gameObject.SetActive(true);

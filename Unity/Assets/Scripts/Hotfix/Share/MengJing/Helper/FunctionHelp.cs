@@ -159,21 +159,7 @@ namespace ET
         {
             return completes.Contains(parame);
         }
-
-        public static bool CheckFuncitonOn(Scene zongScene, FuntionConfig funtionOpenConfig)
-        {
-            int[] contion_1 = funtionOpenConfig.ConditionType;
-            int[] contion_2 = funtionOpenConfig.ConditionParam;
-            for (int i = 0; i < contion_1.Length; i++)
-            {
-                if (!CheckTaskOn( contion_1[i], contion_2[i]))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
+        
         public static string GetFunctionContion(Scene zongScene, FuntionConfig funtionOpenConfig, int lv, List<int> taskids1)
         {
             string tip = string.Empty;
@@ -207,7 +193,7 @@ namespace ET
             return tip;
         }
 
-        public static bool CheckTaskOn( int triggerType, int triggerValue)
+        public static bool CheckTaskOn( int triggerType, int triggerValue, List<int> completeids, int playerlv)
         {
             bool open = false;
             switch (triggerType)
@@ -216,10 +202,10 @@ namespace ET
                     open = DonotCheck();
                     break;
                 case FunctionContionEnum.PlayerLv:
-                    open = CheckPlayerLv(1, triggerValue);
+                    open = CheckPlayerLv(playerlv, triggerValue);
                     break;
                 case FunctionContionEnum.TaskId:
-                    open = CheckTaskID(new List<int>(), triggerValue);
+                    open = CheckTaskID(completeids, triggerValue);
                     break;
             }
             return open;

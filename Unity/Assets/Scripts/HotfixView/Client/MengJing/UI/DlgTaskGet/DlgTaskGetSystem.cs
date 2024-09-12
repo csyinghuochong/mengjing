@@ -561,13 +561,12 @@ namespace ET.Client
             if (errorCode == ErrorCode.ERR_Success)
             {
                 FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(root), 91000201);
+                self.OnTaskGet();
             }
             else
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);
             }
-
-            self.OnTaskGet();
         }
     }
 }

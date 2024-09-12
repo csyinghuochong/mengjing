@@ -70,7 +70,7 @@ namespace ET.Client
                 return;
             }
 
-            TaskClientNetHelper.SendCommitTaskCountry(self.Root(), self.TaskPro.taskID).Coroutine();
+            TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0).Coroutine();
 
             self.E_ButtonCompleteButton.gameObject.SetActive(true);
             self.E_ButtonReceiveButton.gameObject.SetActive(false);

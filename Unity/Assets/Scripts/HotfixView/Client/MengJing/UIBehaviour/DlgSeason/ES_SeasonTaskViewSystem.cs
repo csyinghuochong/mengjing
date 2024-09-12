@@ -473,7 +473,7 @@ namespace ET.Client
             }
             else
             {
-                int error = await TaskClientNetHelper.SendCommitTaskCountry(self.Root(), self.TaskPro.taskID);
+                int error = await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
                 if (error == ErrorCode.ERR_Success)
                 {
                     self.OnClickPageButton(1);

@@ -138,8 +138,12 @@ namespace ET.Client
             {
                 return openTaskids;
             }
-
+            
             Scene root = self.Root();
+
+            int playerlv = root.GetComponent<UserInfoComponentC>().UserInfo.Lv;
+            List<int> comtaskid = self.RoleComoleteTaskList;
+
             for (int i = 0; i < taskid.Length; i++)
             {
                 if (taskid[i] == 0)
@@ -165,7 +169,7 @@ namespace ET.Client
                     }
                 }
 
-                if (FunctionHelp.CheckTaskOn(taskConfig.TriggerType, taskConfig.TriggerValue))
+                if (FunctionHelp.CheckTaskOn(taskConfig.TriggerType, taskConfig.TriggerValue, comtaskid, playerlv))
                 {
                     openTaskids.Add(taskid[i]);
                 }

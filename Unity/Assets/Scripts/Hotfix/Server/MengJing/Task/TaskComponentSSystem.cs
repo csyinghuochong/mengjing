@@ -138,7 +138,10 @@ namespace ET.Server
                 return (null, ErrorCode.ERR_TaskCanNotGet);
             }
             Unit unit = self.GetParent<Unit>();
-            bool canget = FunctionHelp.CheckTaskOn(taskId, 1);
+            int playerlv = unit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+            List<int> comtaskids = self.RoleComoleteTaskList;
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskId);
+            bool canget = FunctionHelp.CheckTaskOn(taskConfig.TriggerType, taskConfig.TriggerValue, comtaskids, playerlv);
             if (!canget)
             {
                 Log.Debug($"CanNotGetTask: {unit.Zone()} {unit.Id} {taskId}");

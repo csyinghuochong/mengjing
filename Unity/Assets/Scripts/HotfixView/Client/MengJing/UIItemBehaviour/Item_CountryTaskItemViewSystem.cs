@@ -75,7 +75,7 @@
             }
 
             long instanceid = self.InstanceId;
-            int errorCode = await TaskClientNetHelper.SendCommitTaskCountry(self.Root(), self.TaskPro.taskID);
+            int errorCode = await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
             if (instanceid != self.InstanceId)
             {
                 return;
