@@ -31,7 +31,8 @@ public class CustomEditorScript
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NavMesh");
         foreach (GameObject gameObject in gameObjects)
         {
-            if (gameObject.transform.parent.name.Equals("NavMesh"))
+            if (gameObject.name.Equals("NavMesh") ||
+                gameObject.transform.parent.name.Equals("NavMesh"))
             {
                 continue;
             }
