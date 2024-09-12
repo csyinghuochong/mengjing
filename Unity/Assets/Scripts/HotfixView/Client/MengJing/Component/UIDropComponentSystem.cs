@@ -194,17 +194,20 @@ namespace ET.Client
         public static void OnUpdate(this UIDropComponent self)
         {
             self.PositionIndex++;
-            //快速下落处理
+
+            /*
+            //快速下落处理  超过40%的进度掉落+快
             if (self.PositionIndex >= (int)(self.Resolution * 0.4f))
             {
                 self.PositionIndex++;
             }
 
-            //快速下落处理
+            //快速下落处理  超过60%的进度掉落+快
             if (self.PositionIndex >= (int)(self.Resolution * 0.6f))
             {
                 self.PositionIndex++;
             }
+            */
 
             if (self.PositionIndex >= self.Resolution)
             {

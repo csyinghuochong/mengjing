@@ -560,7 +560,7 @@ namespace ET.Client
 
             if (errorCode == ErrorCode.ERR_Success)
             {
-                FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(root), 91000201);
+                FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(root), 200006);
                 self.OnTaskGet();
             }
             else
