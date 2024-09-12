@@ -318,16 +318,15 @@ namespace ET.Client
             GameObject go = null;
             if (self.Type == 0)
             {
-                go = self.LockUnitEffect.transform.Find("Efx_Click_Red/RedCircle").gameObject;
+                self.LockUnitEffect.transform.localScale = Vector3.one * size;
             }
-            else if (self.Type == 1)
+            if (self.Type == 1)
             {
                 go = self.LockUnitEffect.GetComponent<ReferenceCollector>().Get<GameObject>("circle_floor");
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+                var main = ps.main;
+                main.startSize = new ParticleSystem.MinMaxCurve(3 * size);
             }
-            
-            ParticleSystem ps = go.GetComponent<ParticleSystem>();
-            var main = ps.main;
-            main.startSize = new ParticleSystem.MinMaxCurve(3 * size);
         }
 
         public static void OnLockNpc(this LockTargetComponent self, Unit unitTarget)

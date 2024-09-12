@@ -343,6 +343,7 @@ namespace AmplifyShaderEditor
 			AssetDatabase.importPackageCancelled += CancelledPackageImport;
 			AssetDatabase.importPackageCompleted += CompletedPackageImport;
 			AssetDatabase.importPackageFailed += FailedPackageImport;
+			UnityEngine.Debug.Log($"packagePath:  {packagePath}");
 			AssetDatabase.ImportPackage( packagePath, false );
 			//AssetDatabaseEX.ImportPackageImmediately( packagePath );
 		}
