@@ -194,10 +194,9 @@ namespace ET.Client
                     ;
                     break;
                 case UnitType.DropItem:
-                    // DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
-                    // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                    self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/DropICoin");
-                    ;
+                    DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
+                    string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/" + assetPath);
                     break;
                 case UnitType.Chuansong:
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
@@ -713,7 +712,6 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>();
                     break;
                 case UnitType.DropItem:
-                    FlyTipComponent.Instance.ShowFlyTip("生成掉落物");
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;

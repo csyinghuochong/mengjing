@@ -222,12 +222,12 @@ namespace ET.Client
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.DropInfo.ItemID);
                         if (itemConfig.ItemQuality == 4)
                         {
-                            FunctionEffect.PlayDropEffect(self.MyUnit, 91000104);
+                            FunctionEffect.PlayDropEffect(self.MyUnit, 200011);
                         }
 
                         if (itemConfig.ItemQuality == 5)
                         {
-                            FunctionEffect.PlayDropEffect(self.MyUnit, 91000105);
+                            FunctionEffect.PlayDropEffect(self.MyUnit, 200012);
                         }
                     }
                 }
