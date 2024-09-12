@@ -161,12 +161,13 @@ namespace ETEditor
 
         private static void ResetScene()
         {
+            GameObject.Find("NavMesh")?.SetActive(false);
+            
             GameObject mesh = GetTerrainMesh();
-            if (mesh== null)
+            if (mesh != null)
             {
-                return;
+                GameObject.DestroyImmediate(mesh);
             }
-            GameObject.DestroyImmediate(mesh);
         }
 
         #endregion

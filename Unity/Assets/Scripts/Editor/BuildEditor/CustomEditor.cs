@@ -36,6 +36,7 @@ public class CustomEditorScript
                 continue;
             }
 
+            gameObject.layer = LayerMask.NameToLayer("NavMesh");
             Debug.Log(gameObject.name);
         }
         Debug.Log("查找完成！！");
