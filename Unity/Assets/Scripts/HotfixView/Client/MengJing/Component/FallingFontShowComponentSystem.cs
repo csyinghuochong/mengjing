@@ -60,6 +60,9 @@ namespace ET.Client
             };
 
             ObjFlyText.GetComponent<Text>().text = self.ShowText;
+            
+            //初始化,因为是对象池所有之前可能有不同大小的缓存
+            ObjFlyText.GetComponent<Text>().transform.localScale = self.StartScale;
 
             ObjFlyText.SetActive(true);
             self.ObjFlyText = ObjFlyText;
