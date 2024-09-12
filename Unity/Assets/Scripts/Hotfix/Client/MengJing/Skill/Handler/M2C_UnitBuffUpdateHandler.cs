@@ -21,7 +21,7 @@ namespace ET.Client
                 case 1: //增加
                     BuffData buffData = new BuffData();
                     buffData.TargetAngle = 0;
-                    buffData.BuffId = (int)message.BuffID;
+                    buffData.BuffId = message.BuffID;
                     buffData.Spellcaster = message.Spellcaster;
                     buffData.BuffEndTime = message.BuffEndTime;
                     buffData.UnitType = message.UnitType;
@@ -29,6 +29,8 @@ namespace ET.Client
                     buffData.SkillId = message.SkillId;
                     buffData.TargetPostion = new float3(message.TargetPostion[0], message.TargetPostion[1], message.TargetPostion[2]);
                     msgUnitBelongTo.GetComponent<BuffManagerComponentC>().BuffFactory(buffData);
+
+                    EventSystem.Instance.Publish(root, new AddBuff() { Unit = msgUnitBelongTo, BuffId = message.BuffID });
                     break;
                 case 2: //移除
                     msgUnitBelongTo.GetComponent<BuffManagerComponentC>().RemoveBuff(message.BuffID);

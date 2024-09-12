@@ -271,6 +271,12 @@ namespace ET.Client
         public long UpdateValue;
     }
 
+    public struct AddBuff
+    {
+        public Unit Unit;
+        public int BuffId;
+    }
+
     public struct OnSkillUse
     {
         public int SkillId;
