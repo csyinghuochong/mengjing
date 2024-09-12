@@ -128,7 +128,6 @@ namespace ET.Client
                     if (heroHeadBarComponent != null)
                     {
                         HpGameObject = heroHeadBarComponent.GameObject;
-                        heroHeadBarComponent.UpdateBlood();
                     }
 
                     break;
@@ -137,7 +136,6 @@ namespace ET.Client
                     if (monsterHpComponent != null)
                     {
                         HpGameObject = monsterHpComponent.GameObject;
-                        monsterHpComponent.UpdateBlood();
                     }
 
                     break;
@@ -146,7 +144,6 @@ namespace ET.Client
                     if (petHpComponent != null)
                     {
                         HpGameObject = petHpComponent.GameObject;
-                        petHpComponent.UpdateBlood();
                     }
 
                     break;
