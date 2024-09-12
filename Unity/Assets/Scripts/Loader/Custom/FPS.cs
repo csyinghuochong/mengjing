@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using ET;
 
 [Obfuscation(Exclude = true)]
 class FPS : MonoBehaviour
@@ -10,6 +11,12 @@ class FPS : MonoBehaviour
     void Update()
     {
         UpdateTick();
+    }
+
+    private void Awake()
+    {
+        TextFps = this.gameObject.GetComponent<Text>();
+        mLastFrameTime = TimeHelper.ClientNow();
     }
 
     //void OnGUI()
@@ -26,19 +33,17 @@ class FPS : MonoBehaviour
     private long mFrameCount = 0;
     private long mLastFrameTime = 0;
     static long mLastFps = 0;
-    private static string fpsText = "帧数: {0}";
+    private static string fpsText_1 = "平均帧数: {0} ";
+    private static string fpsText_2 = "帧数: {0}";
+    private Text TextFps;
 
     private List<long> TickCount = new List<long>(); //三百帧取一个平均数
 
     private void UpdateTick()
     {
         mFrameCount++;
-        long nCurTime = TickToMilliSec(DateTime.Now.Ticks);
-        if (mLastFrameTime == 0)
-        {
-            mLastFrameTime = TickToMilliSec(DateTime.Now.Ticks);
-        }
-
+        long nCurTime = TimeHelper.ClientNow();
+       
         if ((nCurTime - mLastFrameTime) >= 1000)
         {
             long fps = (long)(mFrameCount * 1.0f / ((nCurTime - mLastFrameTime) / 1000.0f));
@@ -62,12 +67,17 @@ class FPS : MonoBehaviour
             totalFps = totalFps / TickCount.Count;
             TickCount.Clear();
 
-            this.gameObject.GetComponent<Text>().text = "平均帧数: " + totalFps;
-
+            using (zstring.Block())
+            {
+                this.TextFps.text = zstring.Format(fpsText_1, totalFps);
+            }
         }
         else
         {
-            this.gameObject.GetComponent<Text>().text = string.Format(fpsText, mLastFps);
+            using (zstring.Block())
+            {
+                this.TextFps.text  = zstring.Format(fpsText_2, mLastFps);
+            }
         }
     }
 
