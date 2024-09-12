@@ -171,12 +171,12 @@ namespace ET.Client
                 }
 
                 teamNumber++;
-                headItem.transform.Find("1").gameObject.SetActive(showType == "1");
-                headItem.transform.Find("2").gameObject.SetActive(showType == "2");
-                headItem.transform.Find("3").gameObject.SetActive(showType == "3");
-                headItem.transform.Find("4").gameObject.SetActive(showType == "4");
-                headItem.transform.Find("5").gameObject.SetActive(showType == "5");
-                headItem.transform.Find("6").gameObject.SetActive(showType == "6");
+                for (int icontype = 0; icontype < GlobalData.ES_MapMiniType.Count; icontype++)
+                {
+                    headItem.Get<GameObject>(showType).transform.localPosition =  
+                            GlobalData.ES_MapMiniType[icontype] == showType ?  Vector3.zero : GlobalData.ES_MapMiniNoVisie;
+                }
+                
                 headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
             }
 
@@ -350,7 +350,7 @@ namespace ET.Client
 
                 self.EG_HeadListRectTransform.gameObject.SetActive(true);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-                self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
+                self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
 
                 DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
                 self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
