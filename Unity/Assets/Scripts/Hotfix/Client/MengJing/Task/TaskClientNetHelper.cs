@@ -73,7 +73,7 @@ namespace ET.Client
             }
 
             taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
-            EventSystem.Instance.Publish(root, new TaskComplete());
+            EventSystem.Instance.Publish(root, new TaskComplete() { TaskConfigId = taskid });
             return response.Error;
         }
 
@@ -91,7 +91,7 @@ namespace ET.Client
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList.Add(response.TaskPro);
-            EventSystem.Instance.Publish(root, new TaskGet());
+            EventSystem.Instance.Publish(root, new TaskGet() { TaskConfigId = taskId });
             return response.Error;
         }
 
@@ -112,7 +112,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(root, new TaskGet());
+            EventSystem.Instance.Publish(root, new TaskGiveUp());
             return response.Error;
         }
 

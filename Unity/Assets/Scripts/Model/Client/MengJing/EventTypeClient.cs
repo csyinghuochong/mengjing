@@ -111,11 +111,13 @@ namespace ET.Client
     // 接取任务
     public struct TaskGet
     {
+        public int TaskConfigId;
     }
 
     // 完成任务
     public struct TaskComplete
     {
+        public int TaskConfigId;
     }
 
     public struct TaskGiveUp
@@ -255,6 +257,7 @@ namespace ET.Client
     // 更新玩家身上货币属性
     public struct UpdateUserDataExp
     {
+        public long ChangeValue;
         public long UpdateValue;
     }
 

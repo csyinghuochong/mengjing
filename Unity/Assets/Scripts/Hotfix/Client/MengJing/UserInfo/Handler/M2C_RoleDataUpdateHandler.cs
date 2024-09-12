@@ -8,7 +8,7 @@
         {
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             string updateValue = "0";
-            long longValue = 0;
+            long changeValue = 0;
 
             switch (message.UpdateType)
             {
@@ -22,14 +22,14 @@
                     break;
                 case (int)UserDataType.Exp:
                     long curExp = message.UpdateValueLong;
-                    longValue = curExp - userInfo.Exp;
+                    changeValue = curExp - userInfo.Exp;
                     userInfo.Exp = curExp;
-                    EventSystem.Instance.Publish(root, new UpdateUserDataExp() { UpdateValue = message.UpdateValueLong });
+                    EventSystem.Instance.Publish(root, new UpdateUserDataExp() { ChangeValue = changeValue, UpdateValue = message.UpdateValueLong });
                     updateValue = string.Empty;
                     break;
                 case (int)UserDataType.PiLao:
                     long curpilao = long.Parse(message.UpdateTypeValue);
-                    longValue = curpilao - userInfo.PiLao;
+                    changeValue = curpilao - userInfo.PiLao;
                     userInfo.PiLao = curpilao;
 
                     EventSystem.Instance.Publish(root, new UpdateUserDataPiLao() { UpdateValue = message.UpdateValueLong });

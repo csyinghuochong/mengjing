@@ -86,7 +86,7 @@ namespace ET.Client
             {
                 FallingFontComponent fallingFontComponent = unitDefend.Root().GetComponent<FallingFontComponent>();
                 //触发飘字
-                fallingFontComponent.Play(HpGameObject, args.ChangeHpValue, unitDefend, args.DamgeType);
+                fallingFontComponent.PlayBattle(HpGameObject, unitDefend, args.ChangeHpValue, args.DamgeType);
 
                 //触发受击特效
                 FunctionEffect.PlayHitEffect(unitAttack, unitDefend, args.SkillID);
