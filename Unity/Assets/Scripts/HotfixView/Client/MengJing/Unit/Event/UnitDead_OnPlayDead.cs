@@ -159,8 +159,10 @@ namespace ET.Client
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnStopAction();
 
             DlgCellDungeonRevive dungeonRevive = root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>();
-            if (dungeonRevive != null)
+            if (dungeonRevive  == null)
             {
+                await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellDungeonRevive);
+                dungeonRevive = root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>();
                 dungeonRevive.OnInitUI(mapComponent.SceneType);
             }
         }

@@ -27,7 +27,11 @@ namespace ET.Client
         public static void Check(this DlgCellDungeonRevive self, int leftTime)
         {
             self.LeftTime = leftTime;
-            self.View.E_Text_ExitTipText.text = zstring.Format("{0}秒后退出副本", leftTime);
+            using (zstring.Block())
+            {
+                self.View.E_Text_ExitTipText.text = zstring.Format("{0}秒后退出副本", leftTime);
+            }
+
             if (leftTime <= 0)
             {
                 self.OnAuto_Exit();
@@ -74,12 +78,20 @@ namespace ET.Client
             long needNum = int.Parse(needList[1]);
             if (selfNum >= needNum)
             {
-                self.View.E_Text_CostText.text = zstring.Format("{0}/{1}", selfNum, needNum);
+                using (zstring.Block())
+                {
+                    self.View.E_Text_CostText.text = zstring.Format("{0}/{1}", selfNum, needNum);
+                }
+
                 self.View.E_Text_CostText.color = Color.green;
             }
             else
             {
-                self.View.E_Text_CostText.text = zstring.Format("{0}/{1}(道具不足)", selfNum, needNum);
+                using (zstring.Block())
+                {
+                    self.View.E_Text_CostText.text = zstring.Format("{0}/{1}(道具不足)", selfNum, needNum);
+                }
+
                 self.View.E_Text_CostText.color = Color.yellow;
             }
 
