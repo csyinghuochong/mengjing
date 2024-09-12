@@ -138,6 +138,11 @@ namespace ET.Client
                 {
                     self.AssetPath.Add(path);
                 }
+                self.ModelMesh.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.ModelMesh.gameObject.SetActive(false);
             }
 
             if (sprite == null || instanceid != self.InstanceId)
