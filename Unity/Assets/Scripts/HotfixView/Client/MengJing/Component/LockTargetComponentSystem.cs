@@ -116,7 +116,7 @@ namespace ET.Client
                 string path = "";
                 if (type == 0)
                 {
-                    path = ABPathHelper.GetEffetPath("SkillZhishi/RoseSelectTarget");
+                    path = ABPathHelper.GetEffetPath("ScenceEffect/RoseSelectTarget");
                 }
                 else if (type == 1)
                 {
