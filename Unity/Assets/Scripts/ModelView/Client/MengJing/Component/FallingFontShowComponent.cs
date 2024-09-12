@@ -7,8 +7,9 @@ namespace ET.Client
     public class FallingFontShowComponent: Entity, IAwake, IDestroy
     {
         public Unit Unit { get; set; }
-        public int FontType;
-        public long TargetValue;
+        public string ShowText;
+        public FallingFontType FontType;
+        public Vector3 StartScale;
         public Transform Transform;
         public GameObject GameObject;
         public GameObject ObjFlyText;
