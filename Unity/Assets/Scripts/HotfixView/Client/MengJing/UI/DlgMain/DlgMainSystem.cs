@@ -1718,7 +1718,7 @@ namespace ET.Client
                     self.UpdateShowRoleExp();
                     self.View.ES_RoleHead.UpdateShowRoleExp();
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
-                    FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
+                    FunctionEffect.PlaySelfEffect(self.MainUnit, 200005); //升级特效
                     self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
                     using (zstring.Block())
                     {
