@@ -88,6 +88,78 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class AddBuff_ShowFallingFont : AEvent<Scene, AddBuff>
+    {
+        protected override async ETTask Run(Scene scene, AddBuff args)
+        {
+            if (args.Unit.IsDisposed)
+            {
+                return;
+            }
+
+            SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(args.BuffId);
+
+            if (!SkillData.BuffFallingFont.ContainsKey(skillBuffConfig.buffParameterType))
+            {
+                return;
+            }
+
+            string showText = string.Empty;
+            if (skillBuffConfig.buffParameterValue > 0)
+            {
+                showText = SkillData.BuffFallingFont[skillBuffConfig.buffParameterType].Item1;
+            }
+            else
+            {
+                showText = SkillData.BuffFallingFont[skillBuffConfig.buffParameterType].Item2;
+            }
+
+            if (showText == string.Empty)
+            {
+                return;
+            }
+
+            GameObject HpGameObject = null;
+            switch (args.Unit.Type)
+            {
+                case UnitType.Player:
+                    UIPlayerHpComponent heroHeadBarComponent = args.Unit.GetComponent<UIPlayerHpComponent>();
+                    if (heroHeadBarComponent != null)
+                    {
+                        HpGameObject = heroHeadBarComponent.GameObject;
+                        heroHeadBarComponent.UpdateBlood();
+                    }
+
+                    break;
+                case UnitType.Monster:
+                    UIMonsterHpComponent monsterHpComponent = args.Unit.GetComponent<UIMonsterHpComponent>();
+                    if (monsterHpComponent != null)
+                    {
+                        HpGameObject = monsterHpComponent.GameObject;
+                        monsterHpComponent.UpdateBlood();
+                    }
+
+                    break;
+                case UnitType.Pet:
+                    UIPetHpComponent petHpComponent = args.Unit.GetComponent<UIPetHpComponent>();
+                    if (petHpComponent != null)
+                    {
+                        HpGameObject = petHpComponent.GameObject;
+                        petHpComponent.UpdateBlood();
+                    }
+
+                    break;
+                default:
+                    return;
+            }
+
+            scene.GetComponent<FallingFontComponent>()?.Play(HpGameObject, args.Unit, showText, FallingFontType.Special, Vector3.one);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     # endregion
 
     [EntitySystemOf(typeof(FallingFontComponent))]

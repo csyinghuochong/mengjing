@@ -14,5 +14,13 @@ namespace ET.Client
             { "Act_12", 900 },
             { "Act_13", 900 }
         };
+
+        [StaticField]
+        public static Dictionary<int, (string, string)> BuffFallingFont = new()
+        {
+            { 100912, ("加速", "减速") },
+            { 100612, ("物防增加", "物防减低") },
+            { 1, (string.Empty, string.Empty) }
+        };
     }
 }
