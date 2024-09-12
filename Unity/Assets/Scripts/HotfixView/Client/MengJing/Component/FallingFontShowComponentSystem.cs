@@ -121,9 +121,10 @@ namespace ET.Client
             self.ObjFlyText = ObjFlyText;
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             ObjFlyText.transform.localPosition = Vector3.zero;
+            ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
             FlyFontObj.transform.SetParent(globalComponent.BloodText.transform);
             FlyFontObj.transform.localScale = Vector3.one;
-            FlyFontObj.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 80f, 0);
+            FlyFontObj.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
             
             Log.Debug($"addStr:  {addStr}");
         }
@@ -146,16 +147,18 @@ namespace ET.Client
                 if (self.DamgeFlyTimeSum < 0.15f)
                 {
                     self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
+                    self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.DamgeFlyTimeSum * 100f, 0);
                 }
                 else
                 {
                     self.Transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 }
 
-                self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 80f + self.DamgeFlyTimeSum * 10f, 0);
+                self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.DamgeFlyTimeSum * 100f, 0);
             }
 
-            return self.DamgeFlyTimeSum >= 0.3f || !self.HeadBar.activeSelf;
+            return self.DamgeFlyTimeSum >= 0.5f || !self.HeadBar.activeSelf;
+            //return self.DamgeFlyTimeSum >= 0.3f || !self.HeadBar.activeSelf;
         }
     }
 }
