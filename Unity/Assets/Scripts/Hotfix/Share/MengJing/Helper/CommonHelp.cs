@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.IO;
+using ET.Client;
 
 namespace  ET
 { 
@@ -869,6 +871,29 @@ namespace  ET
             float retunrnValue = (float)(randomMinValue + randomChaValue * randomRangeValue_Now);
             retunrnValue = (float)(Math.Round(retunrnValue, 3));
             return retunrnValue;
+        }
+        
+        public static void ClearPathFindLog()
+        {
+            SettingData.FindPathLog.Clear();
+        }
+
+        public static void WritePathFindLog( )
+        {
+            string filePath = "H://FindPath.txt";
+            if (!File.Exists(filePath))
+            	File.Create(filePath);
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
+            StreamWriter sw = new StreamWriter(fs);
+            fs.SetLength(0); //首先把文件清空了。
+            for (int i = 0; i < SettingData.FindPathLog.Count; i++)
+            {
+                sw.WriteLine(SettingData.FindPathLog[i]);//写你的字符串。
+            }
+
+            sw.Close();
+            
+            SettingData.FindPathLog.Clear();
         }
         
         //宠物守护

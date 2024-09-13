@@ -1,7 +1,12 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public static class SettingData
     {
+        
+        [StaticField]
+        public static List<string> FindPathLog = new List<string>();
         
         [StaticField]
         public static bool ShowFindPath = false;

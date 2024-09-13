@@ -174,6 +174,11 @@ namespace ET.Client
                 return;
             }
 
+            if (SettingData.ShowFindPath)
+            {
+                CommonHelp.ClearPathFindLog();
+            }
+
             self.lastSendTime = 0;
             self.direction = self.GetDirection(pdata);
             self.SendMove(self.direction);
@@ -397,6 +402,11 @@ namespace ET.Client
                 return;
             }
 
+            if (SettingData.ShowFindPath)
+            {
+                CommonHelp.WritePathFindLog();
+            }
+            
             Unit unit = self.MainUnit;
             if (unit == null || unit.IsDisposed)
             {
