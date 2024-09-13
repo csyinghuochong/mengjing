@@ -922,7 +922,7 @@ namespace ET.Server
                     }
 
                     bool jueXinSkill = false;
-                    if (ConfigHelper.JueXingSkillIDList().Contains(skillHandlerS.SkillConf.Id))
+                    if (ConfigData.JueXingSkillIDList.Contains(skillHandlerS.SkillConf.Id))
                     {
                         jueXinSkill = true;
                     }
@@ -2009,7 +2009,7 @@ namespace ET.Server
              // 神兽羁绊属性
              int shenshouNumber = unit.GetComponent<PetComponentS>().GetShenShouNumber();
              List<PropertyValue> shenshoujiban = new List<PropertyValue>();
-             foreach ((int petnumber, List<PropertyValue> prolist) in ConfigHelper.ShenShouJiBan())
+             foreach ((int petnumber, List<PropertyValue> prolist) in ConfigData.ShenShouJiBan)
              {
                  if (shenshouNumber >= petnumber)
                  {

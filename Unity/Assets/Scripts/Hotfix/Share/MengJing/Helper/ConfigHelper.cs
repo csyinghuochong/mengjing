@@ -57,44 +57,14 @@ namespace ET
             }
         }
 
-        //觉醒技能ID
-        public static List<int> JueXingSkillIDList()
-        {
-            return new List<int>() {
-                60031111,
-                60031121,
-                60031131,
-                60031132,
-                60031141,
-                60031151,
-                60031161,
-                60031162,
-            };
-        }
-
-        
-        //赠送钻石数量
-        public static Dictionary<int, int> RechargeGive()
-        {
-            return new Dictionary<int, int>(8){
-                { 6,        0},
-                { 30,       300},
-                { 50,       600},
-                { 98,       1200},
-                { 198,      2888},
-                { 298,      4888},
-                { 488,      8888},
-                { 648,      12888},
-            };
-        }
-
+       
         public static int GetDiamondNumber(int key)
         {
-            if (!RechargeGive().ContainsKey(key))
+            if (!ConfigData.RechargeGive.ContainsKey(key))
             {
                 return 0;
             }
-            int number = RechargeGive()[key];
+            int number = ConfigData.RechargeGive[key];
             return key * 100 + number;
         }
 
@@ -108,157 +78,7 @@ namespace ET
         //    "版本更新内容\r\n1.更新家族系统,可以创建家族邀请其他玩家加入。\r\n2.开启游戏第六章第一个地图,60级可进入。\r\n3.新增宠物守护系统,根据宠物评分可以增加暴击等相关属性。\r\n4.增加家园访问，其他玩家可以互相访问家园。\r\n5.家园小地图显示石块和树叶方便玩家快速查询。\r\n6.赏金任务需要的怪物数量缩减。\r\n7.创建角色增加随机姓名。\r\n8.修复牧师技能不加攻击的问题。\r\n9.增加天气系统。\r\n10.增加野外碰到精灵和宠物的几率。";
 
 
-        //类型对应部位
-        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkill()
-        {
-            return new Dictionary<int, List<EquipChuanChengList>>()
-            {
-                //攻击
-                { 1, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69031001, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031002, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031003, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031004, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031005, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031006, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031007, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031008, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031009, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031010, RandPro = 100 },
-                }},
-
-                //防御
-                { 2, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69032001, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032002, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032003, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032004, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032005, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032006, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032007, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032008, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032009, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032010, RandPro = 100 },
-                }},
-
-                //技能_战士
-                { 11, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69033101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033104, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033105, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033106, RandPro = 100 },
-                }},
-
-                //技能_法师
-                { 12, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69033201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033204, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033205, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033206, RandPro = 100 },
-                }},
-            };
-        }
-        
-        //装备传承职业对应激活技能
-        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo()
-        {
-            return new Dictionary<int, List<EquipChuanChengList>>()
-            {
-
-                { 11, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69011101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011104, RandPro = 100 },
-                }},
-
-                { 12, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69011201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011204, RandPro = 100 },
-                }},
-
-                { 13, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69011301, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011302, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011303, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011304, RandPro = 100 },
-                }},
-
-                { 21, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012104, RandPro = 100 },
-                }},
-
-                { 22, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012204, RandPro = 100 },
-                }},
-
-                { 23, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012301, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012302, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012303, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012304, RandPro = 100 },
-                }},
-
-            };
-        }
-        
-        //装备传承部位对应激活技能
-        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOcc()
-        {
-            return new Dictionary<int, List<EquipChuanChengList>>()
-            {
-                {
-                    1, new List<EquipChuanChengList>()
-                    {
-                        new EquipChuanChengList() { SkillID = 69011001, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69011002, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69011003, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69011004, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69011005, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69011006, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69021011, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69021012, RandPro = 100 },
-
-                    }
-                },
-                {
-                    2, new List<EquipChuanChengList>()
-                    {
-                        new EquipChuanChengList() { SkillID = 69012001, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69012002, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69012003, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69012004, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69012005, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69012006, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69021013, RandPro = 100 },
-                        new EquipChuanChengList() { SkillID = 69021014, RandPro = 100 },
-                    }
-                },
-            };
-        }
-
+      
         //装备传承部位通用
             //技能id，权重概率
         public static List<EquipChuanChengList> EquipChuanChengSkillCom()
@@ -401,72 +221,7 @@ namespace ET
 
         }
 
-        public static Dictionary<int, string> PropertyHint()
-        {
-            return new Dictionary<int, string>()
-        {
-            { NumericType.Now_MaxHp, "自身的生命值上限,当生命值为0时便意味着自身的挑战失败" },
-            { NumericType.Now_MaxAct, "伤害基础值,对目标造成伤害的主要属性" },
-            { NumericType.Now_MaxDef, "物理防御,可以抵扣物理攻击带来的伤害" },
-            { NumericType.Now_MaxAdf, "法术防御,可以抵扣魔法攻击带来的伤害" },
-            { NumericType.Now_Mage, "会额外提升你所有的技能造成的伤害" },
-            { NumericType.Now_Constitution, "提升生命和闪避，伤害减免属性" },
-            { NumericType.Now_Power, "提升攻击，物防和物穿攻速属性" },
-            { NumericType.Now_Intellect, "提升技能伤害，魔防和魔穿属性" },
-            { NumericType.Now_Stamina, "提升双防，抗暴，战斗回血属性" },
-            { NumericType.Now_Agility, "提升攻速，攻击，冷却缩减属性" },
-            { NumericType.Now_Cri, "本次攻击触发暴击的概率" },
-            { NumericType.Now_MageDamgeSubPro, "降低受到魔法类技能的伤害" },
-            { NumericType.Now_Res, "抵抗对方暴击的概率和抵抗眩晕等控制类技能" },
-            { NumericType.Now_ZhongJiPro, "攻击有概率使目标的防御降低为0,无视对方防御进行攻击" },
-            { NumericType.Now_Hit, "命中敌人的附加概率，和闪避概率进行抵消" },
-            { NumericType.Now_ZhongJi, "触发重击后额外附加的伤害值" },
-            { NumericType.Now_Dodge, "受到敌人攻击闪避本次攻击的概率，可闪避普攻和技能" },
-            { NumericType.Now_HuShiActPro, "攻击中降低敌人物理防御值百分比" },
-            { NumericType.Now_HuShiMagePro, "攻击中降低敌人魔法防御值百分比" },
-            { NumericType.Now_DamgeSubPro, "受到敌人攻击的伤害后，降低本次受到的伤害" },
-            { NumericType.Now_HuShiDef, "攻击中降低敌人物理防御值固定值" },
-            { NumericType.Now_Speed, "自身在地图中移动的速度" },
-            { NumericType.Now_SkillCDTimeCostPro, "降低释放技能的冷却时间" },
-            { NumericType.Now_CriLv, "根据当前的暴击等级换算成暴击概率附加到自身属性" },
-            { NumericType.Now_MageDodgePro, "受到魔法技能伤害时,可以躲避本次魔法伤害的概率" },
-            { NumericType.Now_ResLv, "根据当前的韧性等级换算成韧性概率附加到自身属性" },
-            { NumericType.Now_ActDodgePro, "受到物理技能伤害时,可以躲避本次魔法伤害的概率" },
-            { NumericType.Now_HitLv, "根据当前的命中等级换算成命中概率附加到自身属性" },
-            { NumericType.Now_GeDang, "受到伤害可以减免对应的伤害值" },
-            { NumericType.Now_DodgeLv, "根据当前的闪避等级换算成闪避概率附加到自身属性" },
-            { NumericType.Now_ZhenShi, "每次攻击额外增加的固定伤害" },
-            { NumericType.Now_ActDamgeAddPro, "使用物理攻击目标时额外造成的伤害" },
-            { NumericType.Now_ActSpeedPro, "可以加快自身普通攻击的攻击频率" },
-            { NumericType.Now_MageDamgeAddPro, "使用魔法攻击目标时额外造成的伤害" },
-            { NumericType.Now_ShenNongPro, "使用药剂和技能为自身恢复生命值时,可以获得额外恢复的能力" },
-            { NumericType.Now_ActDamgeSubPro, "受到物理伤害可以降低自身受到的伤害值" },
-            { NumericType.Now_HuiXue, "战斗中提升额外的生命恢复" },
-            { NumericType.Now_HuShiAdf, "攻击中降低敌人魔法防御值固定值" },
-            { NumericType.Now_Luck, "当幸运达到10点时,你将刀刀发挥最高攻击!" }
-        };
         
-        }
-        
-
-
-        /// <summary>
-        /// 神兽羁绊属性
-        /// </summary>
-        public static Dictionary<int, List<PropertyValue>> ShenShouJiBan()
-        {
-            return new Dictionary<int, List<PropertyValue>>()
-            {
-                { 1, new List<PropertyValue>(){ new PropertyValue() { HideID = 201003,  HideValue = 1000 } } },
-                { 2, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1000 }/*, new PropertyValue() { HideID = 105201, HideValue = 0 }*/ } },
-                { 3, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1500 } } },
-            };
-        }
-
-
-
-
-
         public static List<BossDevelopment> BossDevelopmentList_5()
         {
             return new List<BossDevelopment>()

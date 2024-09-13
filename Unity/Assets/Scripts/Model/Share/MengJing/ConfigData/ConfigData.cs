@@ -7,6 +7,183 @@ namespace ET
     public static class ConfigData
     {
         
+          //装备传承职业对应激活技能
+       [StaticField]
+          public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo = 
+       new Dictionary<int, List<EquipChuanChengList>>()
+            {
+
+                { 11, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69011101, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011102, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011103, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011104, RandPro = 100 },
+                }},
+
+                { 12, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69011201, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011202, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011203, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011204, RandPro = 100 },
+                }},
+
+                { 13, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69011301, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011302, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011303, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69011304, RandPro = 100 },
+                }},
+
+                { 21, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69012101, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012102, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012103, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012104, RandPro = 100 },
+                }},
+
+                { 22, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69012201, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012202, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012203, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012204, RandPro = 100 },
+                }},
+
+                { 23, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69012301, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012302, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012303, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69012304, RandPro = 100 },
+                }},
+
+            };
+        
+        
+        
+        //装备传承部位对应激活技能
+        [StaticField]
+        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOcc = 
+                new Dictionary<int, List<EquipChuanChengList>>()
+                {
+                    {
+                        1, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69011001, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011002, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011003, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011004, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011005, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011006, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69021011, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69021012, RandPro = 100 },
+
+                        }
+                    },
+                    {
+                        2, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69012001, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012002, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012003, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012004, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012005, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012006, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69021013, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69021014, RandPro = 100 },
+                        }
+                    },
+                };
+        
+        
+        //类型对应部位
+        [StaticField]
+        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkill = 
+         new Dictionary<int, List<EquipChuanChengList>>()
+            {
+                //攻击
+                { 1, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69031001, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031002, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031003, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031004, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031005, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031006, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031007, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031008, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031009, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69031010, RandPro = 100 },
+                }},
+
+                //防御
+                { 2, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69032001, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032002, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032003, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032004, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032005, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032006, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032007, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032008, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032009, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69032010, RandPro = 100 },
+                }},
+
+                //技能_战士
+                { 11, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69033101, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033102, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033103, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033104, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033105, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033106, RandPro = 100 },
+                }},
+
+                //技能_法师
+                { 12, new List<EquipChuanChengList>()
+                {
+                     new EquipChuanChengList() { SkillID = 69033201, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033202, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033203, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033204, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033205, RandPro = 100 },
+                     new EquipChuanChengList() { SkillID = 69033206, RandPro = 100 },
+                }},
+            };
+        
+        
+        //觉醒技能ID
+        [StaticField]
+        public static List<int> JueXingSkillIDList = 
+                new List<int>() {
+                    60031111,
+                    60031121,
+                    60031131,
+                    60031132,
+                    60031141,
+                    60031151,
+                    60031161,
+                    60031162,
+                };
+        
+        /// <summary>
+        /// 神兽羁绊属性
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, List<PropertyValue>> ShenShouJiBan =
+                new Dictionary<int, List<PropertyValue>>()
+                {
+                    { 1, new List<PropertyValue>(){ new PropertyValue() { HideID = 201003,  HideValue = 1000 } } },
+                    { 2, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1000 }/*, new PropertyValue() { HideID = 105201, HideValue = 0 }*/ } },
+                    { 3, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1500 } } },
+                };
 
         /// <summary>
         /// 支持批量使用的道具.  目前服务器只支持ItemSubType = 111 的道具批量使用

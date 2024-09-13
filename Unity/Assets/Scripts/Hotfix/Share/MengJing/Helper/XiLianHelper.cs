@@ -1045,12 +1045,12 @@ namespace ET
 
                 //攻击
                 if (itemCof.ItemSubType == 1 || itemCof.ItemSubType == 10 || itemCof.ItemSubType == 11) {
-                    EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkill()[1]);
+                    EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkill[1]);
                 }
 
                 //防御
                 if (itemCof.ItemSubType == 2 || itemCof.ItemSubType == 6 || itemCof.ItemSubType == 7 || itemCof.ItemSubType == 8) {
-                    EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkill()[2]);
+                    EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkill[2]);
                 }
 
                 //技能
@@ -1060,34 +1060,34 @@ namespace ET
                     //战士
                     if (occ == 1)
                     {
-                        EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkill()[11]);
-                        EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOcc()[1]);
+                        EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkill[11]);
+                        EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOcc[1]);
                     }
                     //法师
                     if (occ == 2)
                     {
-                        EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkill()[12]);
-                        EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOcc()[2]);
+                        EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkill[12]);
+                        EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOcc[2]);
                     }
 
                     switch (occTwo) {
                         case 11:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                         case 12:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                         case 13:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                         case 21:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                         case 22:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                         case 23:
-                            EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillOccTwo()[occTwo]);
+                            EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillOccTwo[occTwo]);
                             break;
                     }
                 }
