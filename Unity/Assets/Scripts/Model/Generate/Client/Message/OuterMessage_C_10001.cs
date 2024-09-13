@@ -833,6 +833,15 @@ namespace ET
         [MemoryPackOrder(1)]
         public Unity.Mathematics.float3 Position { get; set; }
 
+        [MemoryPackOrder(2)]
+        public long NeedTime { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int direction_new { get; set; }
+
+        [MemoryPackOrder(4)]
+        public int direction_old { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -842,6 +851,9 @@ namespace ET
 
             this.RpcId = default;
             this.Position = default;
+            this.NeedTime = default;
+            this.direction_new = default;
+            this.direction_old = default;
 
             ObjectPool.Instance.Recycle(this);
         }

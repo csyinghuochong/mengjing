@@ -193,6 +193,9 @@ message C2M_PathfindingResult // ILocationMessage
 {
 	int32 RpcId = 1;
 	Unity.Mathematics.float3 Position = 2;
+	int64 NeedTime = 3;
+	int32 direction_new = 4;
+	int32 direction_old = 5;
 }
 
 message C2M_Stop // ILocationMessage

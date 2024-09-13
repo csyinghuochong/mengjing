@@ -207,6 +207,9 @@ namespace ET.Client
 
             Vector2 indicator = self.NewPoint - self.OldPoint;
             int angle = 90 - (int)(Mathf.Atan2(indicator.y, indicator.x) * Mathf.Rad2Deg) + (int)self.MainCamera.transform.eulerAngles.y;
+            
+            angle = ( angle  - angle % 10 );
+            
             return angle;
         }
 
@@ -224,7 +227,7 @@ namespace ET.Client
         {
             long clientNow = TimeHelper.ClientNow();
 
-            if (clientNow - self.lastSendTime < 30)
+            if (clientNow - self.lastSendTime < 100)
             {
                 return;
             }
@@ -264,14 +267,18 @@ namespace ET.Client
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             float needTime = distance / speed;
-            self.checkTime = (int)(1000 * needTime) - 200;
+            self.checkTime = (long)(1000 * needTime) - 200;
 
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
-            
+            if (SettingData.ShowFindPath)
+            {
+                Transform gameObject = GameObject.Find("Global/FindPath/10").transform;
+                gameObject.localPosition = newv3;
+            }
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
             
-            self.MainUnit.MoveToAsync(newv3).Coroutine();
+            self.MainUnit.MoveToAsync(newv3, null, self.checkTime, direction, self.lastDirection).Coroutine();
 
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
@@ -317,22 +324,26 @@ namespace ET.Client
         private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
         {
             float3 unitPosi = unit.Position;
-            float3 targetpositon = unitPosi +  math.forward(rotation) * 2;
-            //for (int i = 0; i < 5; i++)
-            //{
-             //   Vector3 target = unitPosi + math.forward(rotation) * (i + 3);
-             //   RaycastHit hit;
+            float3 targetpositon = unitPosi;//// +  math.forward(rotation) * 2;
+            for (int i = 0; i < 5; i++)
+            {
+                Vector3 target = unitPosi + math.forward(rotation) * (i + 2);
+                RaycastHit hit;
 
-             //   Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
-             //   if (hit.collider == null)
-             //   {
-            //        break;
-            //    }
-           //     else
-           //     {
-           //         targetpositon = hit.point;
-          //      }
-          //  }
+                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+                if (hit.collider == null)
+                {
+                    if (i == 0)
+                    {
+                        targetpositon = target;
+                    }
+                    break;
+                }
+                else
+                {
+                    targetpositon = hit.point;
+                }
+            }
 
             return targetpositon;
         }

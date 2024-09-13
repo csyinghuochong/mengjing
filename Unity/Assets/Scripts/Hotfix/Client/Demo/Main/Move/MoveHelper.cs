@@ -6,7 +6,7 @@ namespace ET.Client
     public static partial class MoveHelper
     {
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null)
+        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null, long needTime = 0,int direction_new = 0 , int direction_old = 0)
         {
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             stateComponent.ObstructStatus = 0;
@@ -26,6 +26,9 @@ namespace ET.Client
 
             C2M_PathfindingResult msg = C2M_PathfindingResult.Create();
             msg.Position = targetPos;
+            msg.NeedTime = needTime;
+            msg.direction_new = direction_new;
+            msg.direction_old = direction_old;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
 
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();

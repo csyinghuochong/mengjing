@@ -32,6 +32,9 @@ namespace ET
             {
                 float3 oldPos = this.position;
                 this.position = value;
+                
+                Log.Debug($"新坐标:{value}   旧坐标:{oldPos}   移动距离:{math.distance(oldPos, value)}   当前时间:{TimeHelper.ServerNow()}");
+                
                 EventSystem.Instance.Publish(this.Scene(), new ChangePosition() { Unit = this, OldPos = oldPos });
             }
         }

@@ -97,7 +97,7 @@ namespace ET
             self.Speed = speed;
             self.tcs = ETTask<bool>.Create(true);
 
-            EventSystem.Instance.Publish(self.Scene(), new MoveStart() {Unit = self.GetParent<Unit>()});
+            EventSystem.Instance.Publish(self.Scene(), new MoveStart() {Unit = self.GetParent<Unit>(), targes =  self.Targets});
             
             self.StartMove();
             
