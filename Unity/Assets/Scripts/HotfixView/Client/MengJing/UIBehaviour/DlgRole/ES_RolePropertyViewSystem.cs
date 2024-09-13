@@ -49,20 +49,14 @@ namespace ET.Client
 
             self.EG_AttributeNodeRectTransform.gameObject.SetActive(true);
             self.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
+
             self.InitShowPropertyList();
             self.RefreshRoleProperty();
             self.InitAddProperty();
-            self.E_Add_LiLiangButton.AddListener(self.OnAdd_LiLiangButton);
-            self.E_Cost_LiLiangButton.AddListener(self.OnCost_LiLiangButton);
-            self.E_Add_ZhiLiButton.AddListener(self.OnAdd_ZhiLiButton);
-            self.E_Cost_ZhiLiButton.AddListener(self.OnCost_ZhiLiButton);
-            self.E_Add_TiZhiButton.AddListener(self.OnAdd_TiZhiButton);
-            self.E_Cost_TiZhiButton.AddListener(self.OnCost_TiZhiButton);
-            self.E_Add_NaiLiButton.AddListener(self.OnAdd_NaiLiButton);
-            self.E_Cost_NaiLiButton.AddListener(self.OnCost_NaiLiButton);
-            self.E_Add_MingJieButton.AddListener(self.OnAdd_MingJieButton);
-            self.E_Cost_MingJieButton.AddListener(self.OnCost_MingJieButton);
-            
+
+            self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
         }
@@ -72,16 +66,32 @@ namespace ET.Client
         {
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
-            
+
             self.DestroyWidget();
         }
-        
+
         public static void Reddot_RolePoint(this ES_RoleProperty self, int num)
         {
             self.E_AddPointButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         # region 人物属性
+
+        private static void OnItemTypeSet(this ES_RoleProperty self, int index)
+        {
+            if (index == 0)
+            {
+            }
+            else if (index == 1)
+            {
+            }
+            else
+            {
+            }
+
+            self.E_RolePropertyBaseItemsLoopVerticalScrollRect.gameObject.SetActive(index == 0);
+            self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.gameObject.SetActive(index == 1);
+        }
 
         private static void OnAddPointButton(this ES_RoleProperty self)
         {
@@ -341,35 +351,5 @@ namespace ET.Client
         }
 
         #endregion
-        public static void OnAdd_LiLiangButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnCost_LiLiangButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnAdd_ZhiLiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnCost_ZhiLiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnAdd_TiZhiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnCost_TiZhiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnAdd_NaiLiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnCost_NaiLiButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnAdd_MingJieButton(this ES_RoleProperty self)
-        {
-        }
-        public static void OnCost_MingJieButton(this ES_RoleProperty self)
-        {
-        }
     }
 }
