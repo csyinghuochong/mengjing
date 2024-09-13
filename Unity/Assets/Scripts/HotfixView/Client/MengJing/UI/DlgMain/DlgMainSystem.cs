@@ -2004,8 +2004,8 @@ namespace ET.Client
             // self.OnTianQiChange(self.ZoneScene().GetComponent<AccountInfoComponent>().TianQiValue);
 
             PlayerComponent playerComponent = self.Scene().GetComponent<PlayerComponent>();
-            GameObject.Find("Global/FindPath").SetActive(playerComponent.Account.Equals("testcn01"));
-            SettingData.ShowFindPath = playerComponent.Account.Equals("testcn01");
+            SettingData.ShowFindPath = playerComponent.Account.Equals("18319670288");
+            GameObject.Find("Global/FindPath").SetActive(SettingData.ShowFindPath );
         }
 
         public static void OnSettingUpdate(this DlgMain self)

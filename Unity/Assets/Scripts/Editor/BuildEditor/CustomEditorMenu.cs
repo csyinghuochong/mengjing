@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using ET;
 using UnityEditor;
 using UnityEngine;
 
@@ -78,25 +79,166 @@ public class CustomEditorMenu
     {
         if (Selection.gameObjects.Length != 2)
         {
-            Debug.LogError("必须选择两个Cube或者Plane");
+            Debug.LogError("必须选择两个Cube");
             return;
         }
 
         GameObject gameObject_1 = Selection.gameObjects[0];
         GameObject gameObject_2 = Selection.gameObjects[1];
 
-        if (!gameObject_1.name.Contains("Cube") ||  !gameObject_1.name.Contains("Plane")
-            ||!gameObject_2.name.Contains("Cube") ||  !gameObject_2.name.Contains("Plane") )
+        if (!gameObject_1.name.Contains("Cube") ||!gameObject_2.name.Contains("Cube")  )
         {
-            Debug.LogError("必须选择两个Cube或者Plane");
-             return;
+            Debug.LogError("必须选择两个Cube");
+            return;
         }
 
-        
-        
-        Debug.LogError("必须选择两个Cube或者Plane");
-    }
+        Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
+        Vector3 eulerAngles_2 = gameObject_2.transform.eulerAngles;
 
+        if (!eulerAngles_1.Equals(Vector3.zero) || !eulerAngles_2.Equals(Vector3.zero))
+        {
+            Debug.LogError("Cube有旋转 无法自动生成");
+            return;
+        }
+        
+        Vector3 position_1 =  gameObject_1.transform.localPosition;
+        Vector3 position_2 =  gameObject_2.transform.localPosition;
+
+        Vector3 scale_1 = gameObject_1.transform.localScale;
+        Vector3 scale_2 = gameObject_2.transform.localScale;
+
+        // 获取Cube组件
+        float obj1_y = position_1.y + scale_1.y * 0.5f;
+        Vector3 obj1_postion_1 = new Vector3( position_1.x - scale_1.x * 0.5f, obj1_y, position_1.z - scale_1.z * 0.5f );
+        Vector3 obj1_postion_2 = new Vector3( position_1.x + scale_1.x * 0.5f, obj1_y, position_1.z - scale_1.z * 0.5f );
+        Vector3 obj1_postion_3 = new Vector3( position_1.x - scale_1.x * 0.5f, obj1_y, position_1.z + scale_1.z * 0.5f );
+        Vector3 obj1_postion_4 = new Vector3( position_1.x + scale_1.x * 0.5f, obj1_y, position_1.z + scale_1.z * 0.5f );
+        
+        float obj2_y = position_2.y + scale_2.y * 0.5f;
+        Vector3 obj2_postion_1 = new Vector3( position_2.x - scale_2.x * 0.5f, obj2_y, position_2.z - scale_2.z * 0.5f );
+        Vector3 obj2_postion_2 = new Vector3( position_2.x + scale_2.x * 0.5f, obj2_y, position_2.z - scale_2.z * 0.5f );
+        Vector3 obj2_postion_3 = new Vector3( position_2.x - scale_2.x * 0.5f, obj2_y, position_2.z + scale_2.z * 0.5f );
+        Vector3 obj2_postion_4 = new Vector3( position_2.x + scale_2.x * 0.5f, obj2_y, position_2.z + scale_2.z * 0.5f );
+
+        bool Up= false, down= false, left= false, right = false;
+        if (obj2_postion_1.z > obj1_postion_1.z && obj2_postion_2.z > obj1_postion_2.z
+            && obj2_postion_3.z > obj1_postion_3.z && obj2_postion_4.z > obj1_postion_4.z)
+        {
+            Up = true;
+        }
+        if (obj2_postion_1.z < obj1_postion_1.z && obj2_postion_2.z < obj1_postion_2.z
+            && obj2_postion_3.z < obj1_postion_3.z && obj2_postion_4.z < obj1_postion_4.z)
+        {
+            down = true;
+        }
+        if (obj2_postion_1.x < obj1_postion_1.x && obj2_postion_2.x < obj1_postion_2.x
+            && obj2_postion_3.x < obj1_postion_3.x && obj2_postion_4.x < obj1_postion_4.x)
+        {
+            left = true;
+        }
+        if (obj2_postion_1.x > obj1_postion_1.x && obj2_postion_2.x > obj1_postion_2.x
+            && obj2_postion_3.x > obj1_postion_3.x && obj2_postion_4.x > obj1_postion_4.x)
+        {
+            right = true;
+        }
+        
+        float  distance = 0; 
+        Vector3 vector3_init =Vector3.zero;
+        Vector3 vector3_dire =Vector3.zero;
+        if (Up)
+        {
+            vector3_init = new Vector3(position_1.x, obj1_y, obj1_postion_3.z);
+            Vector3 vector3_end = new Vector3(vector3_init.x, obj2_y, obj2_postion_1.z);
+            vector3_dire = (vector3_end - vector3_init).normalized; 
+            distance = Vector3.Distance( vector3_init, vector3_end );
+        }
+        if (down)
+        {
+            vector3_init = new Vector3(position_1.x, obj1_y, obj1_postion_1.z);
+            Vector3 vector3_end = new Vector3(vector3_init.x, obj2_y, obj2_postion_3.z);
+            vector3_dire = (vector3_end - vector3_init).normalized; 
+            distance = Vector3.Distance( vector3_init, vector3_end );
+        }
+        if (left)
+        {
+            vector3_init = new Vector3(obj1_postion_1.x, obj1_y, position_1.z);
+            Vector3 vector3_end = new Vector3(obj2_postion_4.x, obj2_y, vector3_init.z);
+            vector3_dire = (vector3_end - vector3_init).normalized; 
+            distance = Vector3.Distance( vector3_init, vector3_end );
+        }
+        if (right)
+        {
+            vector3_init = new Vector3(obj1_postion_2.x, obj1_y, position_1.z);
+            Vector3 vector3_end = new Vector3(obj2_postion_1.x, obj2_y, vector3_init.z);
+            vector3_dire = (vector3_end - vector3_init).normalized; 
+            distance = Vector3.Distance( vector3_init, vector3_end );
+        }
+
+        if (distance == 0)
+        {
+            return;
+        }
+
+        string cube_name = gameObject_1.name + "_" + gameObject_2.gameObject;
+        if(GameObject.Find($"NavMesh/{cube_name}")!=null)
+        {
+            GameObject.DestroyImmediate(GameObject.Find($"NavMesh/{cube_name}").gameObject);
+        }
+        
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.name = cube_name;
+        cube.gameObject.name = cube_name;
+        cube.transform.SetParent( GameObject.Find("NavMesh").transform );
+        cube.transform.localPosition = vector3_init + (vector3_dire * distance * 0.5f);
+        cube.transform.localScale = new Vector3(distance, 0.01f, distance);
+        cube.transform.LookAt( vector3_dire * 10 +  cube.transform.localPosition );
+        Log.Debug("生成完毕！！");
+    }
+    
+    private static void ConnectCubes(Transform cube1, Transform cube2)
+    {
+        Mesh mesh1 = cube1.GetComponent<MeshFilter>().mesh;
+        Mesh mesh2 = cube2.GetComponent<MeshFilter>().mesh;
+ 
+        Vector3[] vertices1 = mesh1.vertices;
+        Vector3[] vertices2 = mesh2.vertices;
+ 
+        // 移动第二个立方体的顶点位置，使其与第一个立方体对齐
+        for (int i = 0; i < vertices2.Length; i++)
+        {
+            vertices2[i] += cube1.position - cube2.position;
+        }
+ 
+        // 合并两个立方体的顶点数组
+        Vector3[] combinedVertices = new Vector3[vertices1.Length + vertices2.Length];
+        vertices1.CopyTo(combinedVertices, 0);
+        vertices2.CopyTo(combinedVertices, vertices1.Length);
+ 
+        // 创建新的三角形索引来连接两个立方体的面
+        int[] triangles1 = mesh1.triangles;
+        int[] triangles2 = mesh2.triangles;
+        int[] combinedTriangles = new int[triangles1.Length + triangles2.Length];
+        triangles1.CopyTo(combinedTriangles, 0);
+ 
+        // 为第二个立方体的面添加偏移量，以匹配新的顶点数组
+        for (int i = 0; i < triangles2.Length; i++)
+        {
+            combinedTriangles[triangles1.Length + i] = vertices2.Length + triangles2[i];
+        }
+ 
+        // 创建新的Mesh并应用到一个新的GameObject上
+        Mesh combinedMesh = new Mesh();
+        combinedMesh.vertices = combinedVertices;
+        combinedMesh.triangles = combinedTriangles;
+        combinedMesh.RecalculateNormals();
+ 
+        GameObject combinedObject = new GameObject("ConnectedCubes");
+        MeshFilter meshFilter = combinedObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = combinedMesh;
+        MeshRenderer meshRenderer = combinedObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = cube1.GetComponent<MeshRenderer>().material; // 使用第一个立方体的材质
+    }
+    
     [MenuItem("Custom/生成坐标点XZ到文件")]
     static void ExportPositions()
     {
