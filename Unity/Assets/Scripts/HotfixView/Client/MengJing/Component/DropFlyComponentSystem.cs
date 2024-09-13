@@ -57,7 +57,7 @@ namespace ET.Client
         private static async ETTask SendShiquItem(this DropFlyComponent self)
         {
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            bagComponentC.RealAddItem = false;
+            bagComponentC.RealAddItem--;
 
             // 提前获取，消息返回后Drop会销毁
             Scene root = self.Root();
@@ -70,7 +70,7 @@ namespace ET.Client
                 EventSystem.Instance.Publish(root, new ShowFallingFont() { ShowText = itemConfig.ItemName });
             }
 
-            bagComponentC.RealAddItem = true;
+            bagComponentC.RealAddItem++;
         }
 
         private static void OnLoadGameObject(this DropFlyComponent self, GameObject gameObject, long formId)

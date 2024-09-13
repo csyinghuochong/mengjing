@@ -16,7 +16,7 @@ namespace ET.Client
                 self.AllItemList[i] = new List<ItemInfo>();
             }
 
-            self.RealAddItem = true;
+            self.RealAddItem = 0;
         }
 
         [EntitySystem]
@@ -205,7 +205,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.RealAddItem)
+            if (self.RealAddItem >= 0)
             {
                 // self.Root().GetComponent<ShoujiComponentC>().OnGetItem(bagInfo.ItemID);
                 HintHelp.ShowHint(self.Root(), $"获得 {itemConfig.ItemName} {addNum}");

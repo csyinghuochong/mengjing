@@ -36,6 +36,9 @@ namespace ET.Client
         
         public Dictionary<int, List<ItemInfo>> AllItemList { get; set; } = new();
 
-        public bool RealAddItem { get; set; }
+        /// <summary>
+        /// 小于0，不用弹出tip
+        /// </summary>
+        public int RealAddItem { get; set; } 
     }
 }

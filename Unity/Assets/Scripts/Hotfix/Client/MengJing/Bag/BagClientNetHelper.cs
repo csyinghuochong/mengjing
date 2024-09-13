@@ -222,7 +222,7 @@ namespace ET.Client
         public static async ETTask<int> RequestSortByLoc(Scene root, int loc)
         {
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
-            bagComponentC.RealAddItem = false;
+            bagComponentC.RealAddItem--;
             int loctype = (int)loc;
 
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
@@ -231,7 +231,7 @@ namespace ET.Client
             request.OperatePar = loctype.ToString();
 
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            bagComponentC.RealAddItem = true;
+            bagComponentC.RealAddItem++;
             bagComponentC.OnRecvItemSort(loc);
 
             return response.Error;
