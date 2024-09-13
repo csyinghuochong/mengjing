@@ -26,7 +26,7 @@ public class ClipBoard
 public class CustomEditorMenu
 {
     
-    [MenuItem("Custom/修改子对象Tag")]
+    [MenuItem("Custom/修改Tag 子对象的Tag同步为父对象")]
     static void ChangeChildTag()
     {
         if (Selection.gameObjects.Length == 0)
@@ -54,9 +54,8 @@ public class CustomEditorMenu
             SetChildTags(item, tag);
         }
     }
-
     
-    [MenuItem("Custom/查找Tag==NavMesh 清除场景NavMesh")]
+    [MenuItem("Custom/清除Tag 场景的NavMesh会清除")]
     static void FindTagNavMesh()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NavMesh");
@@ -72,6 +71,30 @@ public class CustomEditorMenu
             Debug.Log(gameObject.name + "   set tag Untagged");
         }
         Debug.Log("查找完成！！");
+    }
+
+    [MenuItem("Custom/生成连接坡体")]
+    static void GenerateConnectSlope()
+    {
+        if (Selection.gameObjects.Length != 2)
+        {
+            Debug.LogError("必须选择两个Cube或者Plane");
+            return;
+        }
+
+        GameObject gameObject_1 = Selection.gameObjects[0];
+        GameObject gameObject_2 = Selection.gameObjects[1];
+
+        if (!gameObject_1.name.Contains("Cube") ||  !gameObject_1.name.Contains("Plane")
+            ||!gameObject_2.name.Contains("Cube") ||  !gameObject_2.name.Contains("Plane") )
+        {
+            Debug.LogError("必须选择两个Cube或者Plane");
+             return;
+        }
+
+        
+        
+        Debug.LogError("必须选择两个Cube或者Plane");
     }
 
     [MenuItem("Custom/生成坐标点XZ到文件")]
