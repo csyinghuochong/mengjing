@@ -95,9 +95,9 @@ namespace ET.Client
             return unit != null ? unit.Id : 0;
         }
 
-        public static List<DropInfo> GetCanShiQuByCell(Scene zoneScene, int cell)
+        public static List<Unit> GetCanShiQuByCell(Scene zoneScene, int cell)
         {
-            List<DropInfo> ids = new List<DropInfo>();
+            List<Unit> ids = new List<Unit>();
             List<Entity> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().Children.Values.ToList();
             for (int i = 0; i < units.Count; i++)
             {
@@ -110,7 +110,7 @@ namespace ET.Client
                 int dropcell = uu.GetComponent<DropComponentC>().CellIndex;
                 if (dropcell == cell)
                 {
-                    ids.Add(uu.GetComponent<DropComponentC>().DropInfo);
+                    ids.Add(uu);
                 }
 
                 if (ids.Count >= 20)
@@ -122,9 +122,9 @@ namespace ET.Client
             return ids;
         }
 
-        public static List<DropInfo> GetCanShiQu(Scene zoneScene, float distance)
+        public static List<Unit> GetCanShiQu(Scene zoneScene, float distance)
         {
-            List<DropInfo> ids = new List<DropInfo>();
+            List<Unit> drops = new List<Unit>();
             List<Entity> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().Children.Values.ToList();
             Unit main = UnitHelper.GetMyUnitFromClientScene(zoneScene);
             for (int i = 0; i < units.Count; i++)
@@ -137,40 +137,35 @@ namespace ET.Client
 
                 if (PositionHelper.Distance2D(main.Position, uu.Position) < distance)
                 {
-                    ids.Add(uu.GetComponent<DropComponentC>().DropInfo);
+                    drops.Add(uu);
                 }
 
-                if (ids.Count >= 20)
+                if (units.Count >= 20)
                 {
                     break;
                 }
             }
 
-            return ids;
+            return drops;
         }
 
-        public static async ETTask SendShiquItem(Scene zoneScene, List<DropInfo> ids)
+        public static async ETTask<int> SendShiquItem(Scene zoneScene, List<DropInfo> ids)
         {
-            try
+            C2M_PickItemRequest request = C2M_PickItemRequest.Create();
+            request.ItemIds = ids;
+
+            M2C_PickItemResponse response = await zoneScene.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
+
+            for (int i = 0; i < ids.Count; i++)
             {
-                C2M_PickItemRequest request = C2M_PickItemRequest.Create();
-                request.ItemIds = ids;
-
-                M2C_PickItemResponse response = await zoneScene.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
-
-                for (int i = 0; i < ids.Count; i++)
+                if (ids[i].DropType == 1)
                 {
-                    if (ids[i].DropType == 1)
-                    {
-                        //私有掉落，本地移除
-                        zoneScene.CurrentScene().GetComponent<UnitComponent>().Remove(ids[i].UnitId);
-                    }
+                    //私有掉落，本地移除
+                    zoneScene.CurrentScene().GetComponent<UnitComponent>().Remove(ids[i].UnitId);
                 }
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex.ToString());
-            }
+
+            return response.Error;
         }
 
         public static async ETTask<int> RequestTowerReward(Scene root, int towerid, int sceneType)

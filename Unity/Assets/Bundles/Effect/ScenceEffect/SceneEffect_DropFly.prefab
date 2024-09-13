@@ -4893,9 +4893,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6087883997281577042}
-  - component: {fileID: 3492264197071676274}
-  - component: {fileID: 6960522328686872596}
-  - component: {fileID: 8966521784866971330}
   m_Layer: 0
   m_Name: SceneEffect_DropFly
   m_TagString: Untagged
@@ -4919,53 +4916,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3492264197071676274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169170365103240384}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8b9d85d920bc042a7f4ad66be17a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  fireRate: 10
-  muzzlePrefab: {fileID: 3661185807493288774, guid: ebae62d1a45b1724a986eef517e5938b,
-    type: 3}
-  hitPrefab: {fileID: 9034931375999670547, guid: 65dec5b8440b7f84da7096f12cb9b5fb,
-    type: 3}
---- !u!65 &6960522328686872596
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169170365103240384}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8966521784866971330
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169170365103240384}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5659729596841254900
 GameObject:
   m_ObjectHideFlags: 0

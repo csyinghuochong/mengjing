@@ -568,4 +568,9 @@ namespace ET.Client
         public long AccountId;
         public string Value;
     }
+
+    public struct ShowFallingFont
+    {
+        public string ShowText;
+    }
 }

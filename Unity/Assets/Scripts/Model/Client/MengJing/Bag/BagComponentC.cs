@@ -36,6 +36,6 @@ namespace ET.Client
         
         public Dictionary<int, List<ItemInfo>> AllItemList { get; set; } = new();
 
-        public bool RealAddItem;
+        public bool RealAddItem { get; set; }
     }
 }

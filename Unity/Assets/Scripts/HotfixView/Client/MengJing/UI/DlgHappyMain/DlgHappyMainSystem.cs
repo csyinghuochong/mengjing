@@ -150,10 +150,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int cellindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HappyCellIndex);
 
-            List<DropInfo> ids = MapHelper.GetCanShiQuByCell(self.Root(), cellindex);
-            if (ids.Count > 0)
+            List<Unit> units = MapHelper.GetCanShiQuByCell(self.Root(), cellindex);
+            if (units.Count > 0)
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.RequestShiQu(ids).Coroutine();
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.RequestShiQu(units).Coroutine();
 
                 //播放音效
                 CommonViewHelper.PlayUIMusic("10004");

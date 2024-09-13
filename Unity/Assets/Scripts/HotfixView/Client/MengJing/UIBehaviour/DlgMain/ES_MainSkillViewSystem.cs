@@ -21,7 +21,7 @@ namespace ET.Client
             
             self.E_Btn_TargetButton.AddListener(self.OnBtn_TargetButton);
 
-            self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(3f); });
+            self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(6f); });
 
             self.E_Btn_NpcDuiHuaButton.AddListener(self.OnBtn_NpcDuiHuaButton);
 
@@ -408,34 +408,34 @@ namespace ET.Client
                 return;
             }
 
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), distance);
+            List<Unit> units = MapHelper.GetCanShiQu(self.Root(), distance);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            if (ids.Count > 0)
+            if (units.Count > 0)
             {
-                for (int i = ids.Count - 1; i >= 0; i--)
+                for (int i = units.Count - 1; i >= 0; i--)
                 {
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(ids[i].ItemID);
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(units[i].GetComponent<DropComponentC>().DropInfo.ItemID);
 
                     if (userInfoComponent.PickSet[0] == "1" && itemConfig.ItemQuality == 2)
                     {
-                        ids.RemoveAt(i);
+                        units.RemoveAt(i);
                         continue;
                     }
 
                     // 蓝色 金币除外
                     if (userInfoComponent.PickSet[1] == "1" && itemConfig.ItemQuality == 3 && itemConfig.Id != 1)
                     {
-                        ids.RemoveAt(i);
+                        units.RemoveAt(i);
                         continue;
                     }
                 }
 
-                if (ids.Count <= 0)
+                if (units.Count <= 0)
                 {
                     return;
                 }
 
-                self.RequestShiQu(ids).Coroutine();
+                self.RequestShiQu(units).Coroutine();
 
                 //播放音效
                 CommonViewHelper.PlayUIMusic("10004");
@@ -462,7 +462,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask RequestShiQu(this ES_MainSkill self, List<DropInfo> ids)
+        public static async ETTask RequestShiQu(this ES_MainSkill self, List<Unit> units)
         {
             if (Time.time - self.LastPickTime < 1f)
             {
@@ -477,7 +477,15 @@ namespace ET.Client
             }
 
             unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmShiQuItem);
-            MapHelper.SendShiquItem(self.Root(), ids).Coroutine();
+
+            foreach (Unit u in units)
+            {
+                DropFlyComponent dropFlyComponent = u.GetComponent<DropFlyComponent>();
+                if (dropFlyComponent == null)
+                {
+                    u.AddComponent<DropFlyComponent>();
+                }
+            }
 
             unit.GetComponent<StateComponentC>().SetNetWaitEndTime(TimeHelper.ClientNow() + 200);
             long instancId = self.InstanceId;
@@ -494,10 +502,10 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int value = await unit.MoveToAsync(position);
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), 3f);
-            if (value == 0 && ids.Count > 0)
+            List<Unit> units = MapHelper.GetCanShiQu(self.Root(), 3f);
+            if (value == 0 && units.Count > 0)
             {
-                self.RequestShiQu(ids).Coroutine();
+                self.RequestShiQu(units).Coroutine();
             }
         }
 

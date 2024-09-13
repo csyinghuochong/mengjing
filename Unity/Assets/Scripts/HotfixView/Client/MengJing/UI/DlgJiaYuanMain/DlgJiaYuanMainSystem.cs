@@ -238,8 +238,8 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), self.GatherRange);
-            if (ids.Count > 0)
+            List<Unit> units = MapHelper.GetCanShiQu(self.Root(), self.GatherRange);
+            if (units.Count > 0)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.OnShiquItem(self.GatherRange);
                 return;
@@ -338,8 +338,8 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), self.GatherRange);
-            if (ids.Count > 0)
+            List<Unit> units = MapHelper.GetCanShiQu(self.Root(), self.GatherRange);
+            if (units.Count > 0)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.OnShiquItem(self.GatherRange);
                 return;

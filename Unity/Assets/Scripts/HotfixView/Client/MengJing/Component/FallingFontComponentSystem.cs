@@ -6,6 +6,29 @@ namespace ET.Client
     # region 注册事件
 
     [Event(SceneType.Demo)]
+    public class ShowFallingFont_ShowFallingFont : AEvent<Scene, ShowFallingFont>
+    {
+        protected override async ETTask Run(Scene scene, ShowFallingFont args)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
+
+            if (unit.IsDisposed)
+            {
+                return;
+            }
+
+            UIPlayerHpComponent heroHeadBarComponent = unit.GetComponent<UIPlayerHpComponent>();
+            if (heroHeadBarComponent != null)
+            {
+                scene.GetComponent<FallingFontComponent>()
+                        ?.Play1(heroHeadBarComponent.GameObject, unit, args.ShowText, FallingFont1Type.Type_0, Vector3.one);
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class UpdateUserDataExp_ShowFallingFont : AEvent<Scene, UpdateUserDataExp>
     {
         protected override async ETTask Run(Scene scene, UpdateUserDataExp args)
