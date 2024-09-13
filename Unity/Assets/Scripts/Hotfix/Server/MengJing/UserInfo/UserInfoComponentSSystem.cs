@@ -630,7 +630,7 @@ namespace ET.Server
             }
 
             self.GetParent<Unit>().GetComponent<JiaYuanComponentS>().OnHourUpdate(hour, notice);
-            LogHelper.CheckZuoBi(self.GetParent<Unit>());
+            ServerLogHelper.CheckZuoBi(self.GetParent<Unit>());
             //LogHelper.CheckBlackRoom(self.GetParent<Unit>());
         }
 

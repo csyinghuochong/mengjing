@@ -32,7 +32,7 @@ namespace ET.Server
                         }
                     }
                     
-                    string[] stringxxx = LogHelper.GetNoticeNew().Split('@');
+                    string[] stringxxx = ServerLogHelper.GetNoticeNew().Split('@');
                     response.NoticeVersion = stringxxx[0];
                     response.NoticeText = stringxxx[1];
                 }

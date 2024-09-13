@@ -91,7 +91,7 @@ namespace ET.Server
                         if (messagevalue[0] == "0")
                         {
                             scene.GetComponent<FangChenMiComponentS>().StopServer = true;
-                            LogHelper.OnStopServer();
+                            ServerLogHelper.OnStopServer();
                             Log.Warning("StopServer = true");
                         }
                         if(messagevalue[0] == "1")

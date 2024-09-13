@@ -25,7 +25,7 @@
                 }
                 else
                 {
-                    LogHelper.LogWarning($"C2M_PaiMaiXiaJiaHandler==null  {unit.Id} {request.PaiMaiItemInfoId}");
+                    ServerLogHelper.LogWarning($"C2M_PaiMaiXiaJiaHandler==null  {unit.Id} {request.PaiMaiItemInfoId}");
                 }
                 
                 await ETTask.CompletedTask;

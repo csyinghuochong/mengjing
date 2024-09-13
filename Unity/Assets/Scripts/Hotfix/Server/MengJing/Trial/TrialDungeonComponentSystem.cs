@@ -98,19 +98,19 @@ namespace ET.Server
 
                 if (attack.Type == UnitType.Player)
                 {
-                    LogHelper.TrialBattleInfo(44, $"南宫灵蓝 使用{skillName} 造成了{damage}伤害");
+                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 使用{skillName} 造成了{damage}伤害");
                 }
 
                 if (attack.Type == UnitType.Pet)
                 {
                     PetConfig petConfig = PetConfigCategory.Instance.Get(attack.ConfigId);
-                    LogHelper.TrialBattleInfo(44, $"南宫灵蓝 宠物{petConfig.PetName} 使用{skillName} 造成了{damage}伤害");
+                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 宠物{petConfig.PetName} 使用{skillName} 造成了{damage}伤害");
                 }
 
                 if (attack.Type == UnitType.Monster)
                 {
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(attack.ConfigId);
-                    LogHelper.TrialBattleInfo(44, $"南宫灵蓝 召唤怪{monsterConfig.MonsterName} 使用{skillName} 造成了{damage}伤害");
+                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 召唤怪{monsterConfig.MonsterName} 使用{skillName} 造成了{damage}伤害");
                 }
             }
         }

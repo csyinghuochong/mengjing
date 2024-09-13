@@ -107,7 +107,7 @@ namespace ET.Server
                 sololist.Add(soloInfo);
             }
 
-            LogHelper.WriteLogList(sololist, $"../Logs/WJ_Solo/Rank_{self.Zone()}.txt", false);
+            ServerLogHelper.WriteLogList(sololist, $"../Logs/WJ_Solo/Rank_{self.Zone()}.txt", false);
         }
         
         //竞技场结束

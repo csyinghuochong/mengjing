@@ -11,25 +11,25 @@ namespace ET.Server
             Scene scene = unit.Scene();
             if (scene.InstanceId == 0 || scene.IsDisposed)
             {
-                LogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
+                ServerLogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
                 return;
             }
 
             TeamDungeonComponent teamDungeonComponent = scene.GetComponent<TeamDungeonComponent>();
             if (teamDungeonComponent == null)
             {
-                LogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
+                ServerLogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
                 return;
             }
 
             if (teamDungeonComponent.BoxReward.Contains(request.BoxIndex))
             {
-                LogHelper.LogDebug($"TeamDungeonBoxReward[已翻牌]: {unit.Id} {request.BoxIndex}");
+                ServerLogHelper.LogDebug($"TeamDungeonBoxReward[已翻牌]: {unit.Id} {request.BoxIndex}");
                 response.Error = ErrorCode.ERR_AlreadyReceived;
                 return;
             }
 
-            LogHelper.LogDebug($"TeamDungeonBoxReward[可翻牌]: {unit.Id} {request.BoxIndex} {request.RewardItem.ItemID} {request.RewardItem.ItemNum}");
+            ServerLogHelper.LogDebug($"TeamDungeonBoxReward[可翻牌]: {unit.Id} {request.BoxIndex} {request.RewardItem.ItemID} {request.RewardItem.ItemNum}");
             teamDungeonComponent.BoxReward.Add(request.BoxIndex);
 
             ////背包已经直接发邮件，response加一个状态。 客户端弹窗提示“由于您背包已满通关宝箱的奖励已经自动发放进您的邮箱中,请注意查收”

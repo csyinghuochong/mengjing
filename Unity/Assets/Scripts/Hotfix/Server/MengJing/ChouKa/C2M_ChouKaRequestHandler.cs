@@ -66,7 +66,7 @@ namespace ET.Server
                 }
             }
             
-            LogHelper.LogWarning($"抽卡： {unit.Id} {droplist.Count}", true);
+            ServerLogHelper.LogWarning($"抽卡： {unit.Id} {droplist.Count}", true);
             
             // 判断背包是否能装下，不能的话剩下的放抽卡仓库
             int bagLeftSpace = bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag);

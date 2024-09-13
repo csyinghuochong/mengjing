@@ -28,7 +28,7 @@
             M2S_SoloMatchRequest.SoloPlayerInfo = soloPlayerInfo;
             S2M_SoloMatchResponse d2GGetUnit = (S2M_SoloMatchResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId,M2S_SoloMatchRequest);
 
-            LogHelper.LogWarning("发送竞技场匹配地图消息" + soloPlayerInfo.UnitId, true);
+            ServerLogHelper.LogWarning("发送竞技场匹配地图消息" + soloPlayerInfo.UnitId, true);
             await ETTask.CompletedTask;
         }
     }

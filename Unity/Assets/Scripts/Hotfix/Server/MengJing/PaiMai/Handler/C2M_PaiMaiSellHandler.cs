@@ -84,7 +84,7 @@
 					unit.GetComponent<BagComponentS>().OnCostItemData(request.PaiMaiItemInfo.BagInfo.BagInfoID, request.PaiMaiItemInfo.BagInfo.ItemNum);
 					unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PaiMaiSell_1015, 0, 1);
 					response.PaiMaiItemInfo = request.PaiMaiItemInfo;
-					LogHelper.LogWarning(response.PaiMaiItemInfo.PlayerName + "上架道具：" + request.PaiMaiItemInfo.BagInfo.ItemID + "数量" + request.PaiMaiItemInfo.BagInfo.ItemNum + "时间戳:" + currentTime.ToString(), true);
+					ServerLogHelper.LogWarning(response.PaiMaiItemInfo.PlayerName + "上架道具：" + request.PaiMaiItemInfo.BagInfo.ItemID + "数量" + request.PaiMaiItemInfo.BagInfo.ItemNum + "时间戳:" + currentTime.ToString(), true);
                 }
                 response.Error = r_GameStatusResponse.Error;
 				await ETTask.CompletedTask;

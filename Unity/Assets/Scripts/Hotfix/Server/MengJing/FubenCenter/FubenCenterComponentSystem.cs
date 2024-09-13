@@ -610,7 +610,7 @@ namespace ET.Server
         public static async ETTask OnBattleOver(this FubenCenterComponent self)
         {
             self.BattleOpen = false;
-            LogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
+            ServerLogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
             //Console.WriteLine($"OnBattleOver : {self.DomainZone()}");
             ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
 

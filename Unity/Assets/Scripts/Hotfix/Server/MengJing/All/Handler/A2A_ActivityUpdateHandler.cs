@@ -48,10 +48,10 @@ namespace ET.Server
 
                         //清理今日拍卖
                         string filePath = "../Logs/WJ_PaiMai.txt";
-                        LogHelper.WriteLogList(new List<string>() { "" }, filePath, false);
+                        ServerLogHelper.WriteLogList(new List<string>() { "" }, filePath, false);
 
                         string filePath_2 = "../Logs/WJ_Chat.txt";
-                        LogHelper.WriteLogList(new List<string>() { "" }, filePath_2, false);
+                        ServerLogHelper.WriteLogList(new List<string>() { "" }, filePath_2, false);
                     }
                     if (request.Hour == 10 && scene.Zone() == 3)
                     {
@@ -157,7 +157,7 @@ namespace ET.Server
                     if (hour == 0)
                     {
                         //Log.Console($"FubenCenter定时刷新: {scene.DomainZone()} {hour}");
-                        LogHelper.LogWarning($"FubenCenter定时刷新: {scene.Zone()} {hour}", true);
+                        ServerLogHelper.LogWarning($"FubenCenter定时刷新: {scene.Zone()} {hour}", true);
                         FubenCenterComponent fubenCenter = scene.GetComponent<FubenCenterComponent>();
                         foreach (var item in fubenCenter.Children)
                         {
@@ -199,7 +199,7 @@ namespace ET.Server
                         scene.GetComponent<FangChenMiComponentS>().CheckHoliday().Coroutine();
                     }
 
-                    LogHelper.CheckLogSize();
+                    ServerLogHelper.CheckLogSize();
                     break;
                 default:
                     break;

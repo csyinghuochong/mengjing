@@ -54,7 +54,7 @@
                                 chatInfoUnitsComponent.BeReportedNumber.Remove(request.ChatInfo.UserId);
                             }
 
-                            LogHelper.ChatInfo( $"区:{chatInfoUnit.Zone()}    {request.ChatInfo.PlayerName}:  {request.ChatInfo.ChatMsg} ");
+                            ServerLogHelper.ChatInfo( $"区:{chatInfoUnit.Zone()}    {request.ChatInfo.PlayerName}:  {request.ChatInfo.ChatMsg} ");
                         }
 
                         foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)

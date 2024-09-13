@@ -146,7 +146,7 @@ namespace ET.Server
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     string levelInfo = $"区： {unit.Zone()}  {userInfoComponent.UserInfo.Name}   \t拍卖消耗金币:{unit.GetComponent<DataCollationComponent>().PaiMaiCostGoldToday}  " +
                         $" \t账号:{userInfoComponent.Account}   \t钻石:{userInfoComponent.UserInfo.Diamond}  \t金币:{userInfoComponent.UserInfo.Gold} \n";
-                    LogHelper.PaiMaiInfo(levelInfo);
+                    ServerLogHelper.PaiMaiInfo(levelInfo);
                 }
                 else
                 {
@@ -186,7 +186,7 @@ namespace ET.Server
 
                         string paimaiInfo = $"服务器:{serverName}   \t道具名称:{itemName}   \t数量:{itemNumber}   \t价格:{price}  \t购买者名称:{buyPlayerName}   \t购买者等级:{buyPlayerLv}    " +
                             $"\t购买者充值:{buyPlayerRecharge}   \t购买者当前金币:{buyNowGold}   \t购买者账号:{buyAccount}    \t出售者名称:{sellPlayerName}   \t出售者账号:{sellAccoount}   \t出售者等级:{sellPlayerLv}    \t出售者当前金币:{sellNowGold} ";
-                        LogHelper.PaiMaiInfo(paimaiInfo);
+                        ServerLogHelper.PaiMaiInfo(paimaiInfo);
                     }
                 }
             }

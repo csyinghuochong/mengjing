@@ -28,10 +28,10 @@
                 return;
             }
 
-            LogHelper.LogDebug($"充值签到成功1：{unit.Id} { bagComponent.GetItemNumber(10010043)}");
+            ServerLogHelper.LogDebug($"充值签到成功1：{unit.Id} { bagComponent.GetItemNumber(10010043)}");
             numericComponent.ApplyValue(NumericType.RechargeSign, 2);
             unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
-            LogHelper.LogDebug($"充值签到成功2：{unit.Id} { bagComponent.GetItemNumber(10010043)}");
+            ServerLogHelper.LogDebug($"充值签到成功2：{unit.Id} { bagComponent.GetItemNumber(10010043)}");
             await ETTask.CompletedTask;
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ET.Server
 {
-    public static class LogHelper
+    public static class ServerLogHelper
     {
 
         /// 每小时执行一次

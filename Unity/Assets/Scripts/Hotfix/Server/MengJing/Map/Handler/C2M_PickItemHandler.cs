@@ -137,7 +137,7 @@ namespace ET.Server
             long debugId = 1231456;
             if (unit.Id == debugId)
             {
-                LogHelper.LogDebug($"OnTeamPick1: {debugId} {unit.GetComponent<UserInfoComponentS>().UserName}");
+                ServerLogHelper.LogDebug($"OnTeamPick1: {debugId} {unit.GetComponent<UserInfoComponentS>().UserName}");
             }
 
             List<DropInfo> drops = request.ItemIds;

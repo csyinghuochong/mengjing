@@ -116,7 +116,7 @@ namespace ET.Server
             BroadMessageHelper.SendServerMessage(self.Root(), UnitCacheHelper.GetChatServerId(self.Zone()), NoticeType.PaiMaiAuction,
                 $"{self.AuctionItem}_{self.AuctionItemNum}_{self.AuctionPrice}_{self.AuctionPlayer}_1").Coroutine();
 
-            LogHelper.LogWarning($"拍卖会开始:  {self.Zone()}  {self.AuctioUnitId} {self.AuctionPlayer}", true);
+            ServerLogHelper.LogWarning($"拍卖会开始:  {self.Zone()}  {self.AuctioUnitId} {self.AuctionPlayer}", true);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(time);
             self.OnAuctionOver().Coroutine();
         }

@@ -46,7 +46,7 @@ namespace ET.Server
                     $"{  TimeHelper.DateTimeNow().ToString()}   登录";
             if (!unit.IsRobot())
             {
-                LogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LoginInfo(offLineInfo);
                 Log.Debug(offLineInfo);
             }
             self.PlayerState = PlayerState.Game;
@@ -72,8 +72,8 @@ namespace ET.Server
             if (!unit.IsRobot())
             {
                 self.UpdateCacheDB();
-                LogHelper.LoginInfo(offLineInfo);
-                LogHelper.LogDebug(offLineInfo);
+                ServerLogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LogDebug(offLineInfo);
             }
 
             self.PlayerState = PlayerState.None;
@@ -93,7 +93,7 @@ namespace ET.Server
 
             if (!unit.IsRobot())
             {
-                LogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LoginInfo(offLineInfo);
                 //需要通知其他服务器吗？
                 Log.Debug(offLineInfo);
             }
@@ -124,7 +124,7 @@ namespace ET.Server
             self.PlayerState = PlayerState.Disconnect;
             if (!unit.IsRobot())
             {
-                LogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LoginInfo(offLineInfo);
                 Log.Warning(offLineInfo);
                 self.UpdateCacheDB();
             }

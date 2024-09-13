@@ -13,7 +13,7 @@
 
             if (createResponse.Error != ErrorCode.ERR_Success)
             {
-                LogHelper.LogDebug($"T2M_TeamDungeonOpenResponse:{createResponse.Error}");
+                ServerLogHelper.LogDebug($"T2M_TeamDungeonOpenResponse:{createResponse.Error}");
                 response.Error = createResponse.Error;
 
                 return;
