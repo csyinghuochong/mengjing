@@ -1720,11 +1720,11 @@ namespace ET.Client
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 200005); //升级特效
                     self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
-                    using (zstring.Block())
-                    {
-                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:"),
-                            userInfo.Lv));
-                    }
+                    // using (zstring.Block())
+                    // {
+                    //     FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:"),
+                    //         userInfo.Lv));
+                    // }
 
                     self.UpdateLvReward();
                     // self.CheckCanEquip().Coroutine();
@@ -1771,13 +1771,13 @@ namespace ET.Client
                         return;
                     }
 
-                    if (int.Parse(updateValue) > 0)
-                    {
-                        using (zstring.Block())
-                        {
-                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 金币", updateValue));
-                        }
-                    }
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     using (zstring.Block())
+                    //     {
+                    //         FlyTipComponent.Instance.ShowFlyTip(zstring.Format("获得{0} 金币", updateValue));
+                    //     }
+                    // }
 
                     if (int.Parse(updateValue) < 0)
                     {

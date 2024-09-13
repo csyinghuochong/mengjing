@@ -55,6 +55,32 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class UpdateUserDataLv_ShowFallingFont : AEvent<Scene, UpdateUserDataLv>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserDataLv args)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
+
+            if (unit.IsDisposed)
+            {
+                return;
+            }
+
+            UIPlayerHpComponent heroHeadBarComponent = unit.GetComponent<UIPlayerHpComponent>();
+            if (heroHeadBarComponent != null)
+            {
+                using (zstring.Block())
+                {
+                    scene.GetComponent<FallingFontComponent>()?.Play1(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("升到{0}级", args.UpdateValue), FallingFont1Type.Type_0, Vector3.one);
+                }
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_TaskGet_ShowFallingFont : AEvent<Scene, TaskGet>
     {
         protected override async ETTask Run(Scene scene, TaskGet args)

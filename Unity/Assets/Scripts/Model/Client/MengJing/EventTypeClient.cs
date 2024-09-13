@@ -260,6 +260,11 @@ namespace ET.Client
         public long ChangeValue;
         public long UpdateValue;
     }
+    
+    public struct UpdateUserDataLv
+    {
+        public long UpdateValue;
+    }
 
     public struct UpdateUserDataPiLao
     {

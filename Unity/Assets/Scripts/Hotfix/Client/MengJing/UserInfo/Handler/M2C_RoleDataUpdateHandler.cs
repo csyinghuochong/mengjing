@@ -31,7 +31,6 @@
                     long curpilao = long.Parse(message.UpdateTypeValue);
                     changeValue = curpilao - userInfo.PiLao;
                     userInfo.PiLao = curpilao;
-
                     EventSystem.Instance.Publish(root, new UpdateUserDataPiLao() { UpdateValue = message.UpdateValueLong });
                     updateValue = string.Empty;
                     break;
@@ -46,6 +45,7 @@
                     break;
                 case (int)UserDataType.Lv:
                     userInfo.Lv = int.Parse(message.UpdateTypeValue);
+                    EventSystem.Instance.Publish(root, new UpdateUserDataLv() { UpdateValue = userInfo.Lv });
                     break;
                 case (int)UserDataType.Gold:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Gold).ToString();
