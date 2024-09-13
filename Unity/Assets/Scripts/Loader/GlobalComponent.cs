@@ -30,12 +30,16 @@ namespace ET
             self.BloodMonster = new GameObject("BloodMonster");
             self.BloodMonster.AddComponent<RectTransform>();
             SetParent(self.BloodMonster, self.BloodRoot.gameObject);
+
             self.BloodText = new GameObject("BloodText");
             self.BloodText.AddComponent<RectTransform>();
             SetParent(self.BloodText, self.BloodRoot.gameObject);
-            self.BloodText1 = new GameObject("BloodText1");
-            self.BloodText1.AddComponent<RectTransform>();
-            SetParent(self.BloodText1, self.BloodRoot.gameObject);
+            self.BloodText_Layer0 = new GameObject("BloodText_Layer0");
+            self.BloodText_Layer0.AddComponent<RectTransform>();
+            SetParent(self.BloodText_Layer0, self.BloodText);
+            self.BloodText_Layer1 = new GameObject("BloodText_Layer1");
+            self.BloodText_Layer1.AddComponent<RectTransform>();
+            SetParent(self.BloodText_Layer1, self.BloodText);
         }
 
         public static void SetParent(GameObject son, GameObject parent)
@@ -73,8 +77,9 @@ namespace ET
 
         public GameObject BloodPlayer { get; set; }
         public GameObject BloodMonster { get; set; }
+
         public GameObject BloodText { get; set; }
-        
-        public GameObject BloodText1 { get; set; }
+        public GameObject BloodText_Layer0 { get; set; }
+        public GameObject BloodText_Layer1 { get; set; }
     }
 }

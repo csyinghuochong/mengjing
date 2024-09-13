@@ -67,7 +67,7 @@ namespace ET.Client
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             ObjFlyText.transform.localPosition = Vector3.zero;
             ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
-            FlyFontObj.transform.SetParent(globalComponent.BloodText1.transform);
+            FlyFontObj.transform.SetParent(globalComponent.BloodText_Layer1.transform);
             FlyFontObj.transform.localScale = Vector3.one;
             FlyFontObj.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
         }

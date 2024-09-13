@@ -202,7 +202,7 @@ namespace ET.Client
 
             self.UIPlayerHpText = rc.Get<GameObject>("UIPlayerHpText");
 
-            self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText.transform);
+            self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText_Layer0.transform);
             self.UIPlayerHpText.transform.localScale = Vector3.one;
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             // HeadBarUI_1.enabled = !unit.MainHero;
