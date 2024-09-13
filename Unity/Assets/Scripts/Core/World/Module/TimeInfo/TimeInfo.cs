@@ -31,6 +31,8 @@ namespace ET
         
         public float DeltaTime { get; private set; }
         
+        public long FrameIndex { get; private set; }
+        
         public void Awake()
         {
             this.dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -44,6 +46,7 @@ namespace ET
             long now = this.ClientNow();
             this.DeltaTime = (now - this.FrameTime) * 0.001f;
             this.FrameTime = now;
+            this.FrameIndex++;
         }
         
         /// <summary> 
