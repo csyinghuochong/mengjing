@@ -95,6 +95,9 @@ namespace ET.Client
 
         [StaticField]
         public static string UIBattleFly = "Assets/Bundles/UI/Blood/UIBattleFly.prefab";
+        
+        [StaticField]
+        public static string UIBattleFly1 = "Assets/Bundles/UI/Blood/UIBattleFly1.prefab";
 
         [StaticField]
         public static string UnitEffectPath = "Assets/Bundles/Effect/";

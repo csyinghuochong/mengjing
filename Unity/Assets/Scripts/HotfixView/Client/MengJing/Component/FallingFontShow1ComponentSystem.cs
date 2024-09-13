@@ -1,14 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(FallingFontShowComponent))]
-    [FriendOf(typeof(FallingFontShowComponent))]
-    public static partial class FallingFontShowComponentSystem
+    [EntitySystemOf(typeof(FallingFontShow1Component))]
+    [FriendOf(typeof(FallingFontShow1Component))]
+    public static partial class FallingFontShow1ComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this FallingFontShowComponent self)
+        private static void Awake(this FallingFontShow1Component self)
         {
             self.Transform = null;
             self.GameObject = null;
@@ -17,12 +17,12 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this FallingFontShowComponent self)
+        private static void Destroy(this FallingFontShow1Component self)
         {
             self.RecoveryGameObject(self.GameObject);
         }
 
-        private static void RecoveryGameObject(this FallingFontShowComponent self, GameObject FlyFontObj)
+        private static void RecoveryGameObject(this FallingFontShow1Component self, GameObject FlyFontObj)
         {
             if (FlyFontObj == null)
             {
@@ -34,12 +34,12 @@ namespace ET.Client
                 self.ObjFlyText.transform.localPosition = new Vector3(-5000f, 0f, 0f);
             }
 
-            string uIBattleFly = StringBuilderData.UIBattleFly;
+            string uIBattleFly = StringBuilderData.UIBattleFly1;
             GameObjectLoadHelper.RecoverGameObject(uIBattleFly, FlyFontObj, true);
             FlyFontObj.transform.localPosition = new Vector2(-2000f, -2000f);
         }
 
-        private static void OnLoadGameObject(this FallingFontShowComponent self, GameObject FlyFontObj, long formId)
+        private static void OnLoadGameObject(this FallingFontShow1Component self, GameObject FlyFontObj, long formId)
         {
             if (self.IsDisposed || formId != self.InstanceId || self.Unit.IsDisposed)
             {
@@ -52,11 +52,8 @@ namespace ET.Client
             ReferenceCollector rc = FlyFontObj.GetComponent<ReferenceCollector>();
             GameObject ObjFlyText = self.FontType switch
             {
-                FallingFontType.Normal => rc.Get<GameObject>("FlyText"),
-                FallingFontType.Self => rc.Get<GameObject>("FlyText_Self"),
-                FallingFontType.Target => rc.Get<GameObject>("FlyText_Target"),
-                FallingFontType.Add => rc.Get<GameObject>("FlyText_Add"),
-                FallingFontType.Special => rc.Get<GameObject>("FlyText_Special"),
+                FallingFont1Type.Type_0 => rc.Get<GameObject>("FlyText_0"),
+                FallingFont1Type.Type_1 => rc.Get<GameObject>("FlyText_1"),
                 _ => null
             };
 
@@ -70,12 +67,12 @@ namespace ET.Client
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             ObjFlyText.transform.localPosition = Vector3.zero;
             ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
-            FlyFontObj.transform.SetParent(globalComponent.BloodText.transform);
+            FlyFontObj.transform.SetParent(globalComponent.BloodText1.transform);
             FlyFontObj.transform.localScale = Vector3.one;
             FlyFontObj.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
         }
 
-        public static void OnInitData(this FallingFontShowComponent self, GameObject HeadBar, Unit unit, string showText, FallingFontType fontType,
+        public static void OnInitData(this FallingFontShow1Component self, GameObject HeadBar, Unit unit, string showText, FallingFont1Type fontType,
         Vector3 startScale)
         {
             self.HeadBar = HeadBar;
@@ -84,11 +81,11 @@ namespace ET.Client
             self.FontType = fontType;
             self.StartScale = startScale;
 
-            string uIBattleFly = StringBuilderData.UIBattleFly;
+            string uIBattleFly = StringBuilderData.UIBattleFly1;
             GameObjectLoadHelper.AddLoadQueue(self.Root(), uIBattleFly, self.InstanceId, self.OnLoadGameObject);
         }
 
-        public static bool LateUpdate(this FallingFontShowComponent self)
+        public static bool LateUpdate(this FallingFontShow1Component self)
         {
             self.DamgeFlyTimeSum = self.DamgeFlyTimeSum + Time.deltaTime;
             if (self.Transform != null)

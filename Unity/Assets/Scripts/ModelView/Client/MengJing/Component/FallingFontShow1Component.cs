@@ -1,22 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
-    public enum FallingFontType
+    public enum FallingFont1Type
     {
-        Normal = 0,
-        Self = 1,
-        Target = 2,
-        Add = 3,
-        Special = 4
+        Type_0 = 0,
+        Type_1 = 1,
     }
 
     [ChildOf(typeof(FallingFontComponent))]
-    public class FallingFontShowComponent : Entity, IAwake, IDestroy
+    public class FallingFontShow1Component : Entity, IAwake, IDestroy
     {
         public Unit Unit { get; set; }
         public string ShowText;
-        public FallingFontType FontType;
+        public FallingFont1Type FontType;
         public Vector3 StartScale;
         public Transform Transform;
         public GameObject GameObject;
