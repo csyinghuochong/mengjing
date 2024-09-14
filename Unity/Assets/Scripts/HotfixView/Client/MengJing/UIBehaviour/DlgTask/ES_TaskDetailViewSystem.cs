@@ -44,14 +44,14 @@ namespace ET.Client
 
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
-            if (taskConfig.CompleteNpcID > 0)
-            {
-                string npcName = NpcConfigCategory.Instance.Get(taskConfig.CompleteNpcID).Name;
-                using (zstring.Block())
-                {
-                    self.E_ComTaskNpcText.text = zstring.Format("完成任务请找:<color=#5C7B32>{0}</color>", npcName);
-                }
-            }
+            // if (taskConfig.CompleteNpcID > 0)
+            // {
+            //     string npcName = NpcConfigCategory.Instance.Get(taskConfig.CompleteNpcID).Name;
+            //     using (zstring.Block())
+            //     {
+            //         self.E_ComTaskNpcText.text = zstring.Format("完成任务请找:<color=#5C7B32>{0}</color>", npcName);
+            //     }
+            // }
 
             self.E_TeskDesText.text = taskConfig.TaskDes;
 
@@ -130,7 +130,7 @@ namespace ET.Client
 
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
 
-            self.ES_RewardList.Refresh(rewardItems);
+            self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
 
             self.EG_RightRectTransform.gameObject.SetActive(true);
         }
