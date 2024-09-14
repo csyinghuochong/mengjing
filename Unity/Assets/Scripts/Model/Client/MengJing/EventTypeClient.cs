@@ -574,7 +574,7 @@ namespace ET.Client
         public string Value;
     }
 
-    public struct ShowFallingFont
+    public struct GetDrop
     {
         public string ShowText;
     }

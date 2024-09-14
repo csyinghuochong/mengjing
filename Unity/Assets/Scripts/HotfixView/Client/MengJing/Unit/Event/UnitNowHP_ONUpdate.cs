@@ -3,11 +3,10 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitNowHP_ONUpdate: AEvent<Scene, Now_Hp_Update>
+    public class UnitNowHP_ONUpdate : AEvent<Scene, Now_Hp_Update>
     {
         protected override async ETTask Run(Scene scene, Now_Hp_Update args)
         {
-            
             Unit unitDefend = args.Defend;
             Unit unitAttack = unitDefend.GetParent<UnitComponent>().Get(args.AttackId);
             if (unitDefend.IsDisposed)
@@ -86,7 +85,9 @@ namespace ET.Client
             {
                 FallingFontComponent fallingFontComponent = unitDefend.Root().GetComponent<FallingFontComponent>();
                 //触发飘字
-                fallingFontComponent.Play(HpGameObject, unitDefend, args.ChangeHpValue, args.DamgeType);
+                (string, FallingFontType, Vector3) showText = GetBattleShowText(args.ChangeHpValue, unitDefend, args.DamgeType);
+                fallingFontComponent.Play(HpGameObject, unitDefend, showText.Item1, showText.Item2, showText.Item3, BloodTextLayer.Layer_0,
+                    FallingFontExecuteType.Type_0);
 
                 //触发受击特效
                 FunctionEffect.PlayHitEffect(unitAttack, unitDefend, args.SkillID);
@@ -121,6 +122,66 @@ namespace ET.Client
             }
 
             await ETTask.CompletedTask;
+        }
+
+        private static (string, FallingFontType, Vector3) GetBattleShowText(long targetValue, Unit unit, int type)
+        {
+            FallingFontType fallingFontType = FallingFontType.Target;
+            string showText = string.Empty;
+
+            //根据目标Unit设定飘字字体
+            string selfNull = "";
+            if (unit.MainHero)
+            {
+                fallingFontType = FallingFontType.Self;
+                selfNull = " ";
+            }
+
+            //恢复血量
+            if (type == 2 || type == 11 || type == 12 || targetValue > 0)
+            {
+                fallingFontType = FallingFontType.Add;
+            }
+
+            //恢复暴击/重击
+            if (unit.MainHero == false && type == 1 || type == 3)
+            {
+                fallingFontType = FallingFontType.Special;
+            }
+
+            string addStr = "";
+
+            Vector3 startScale = Vector3.one;
+
+            if (targetValue >= 0 && type == 2)
+            {
+                addStr = "+";
+            }
+
+            if (type == 1)
+            {
+                addStr = "暴击";
+                startScale = new Vector3(1.4f, 1.4f, 1.4f);
+            }
+
+            if (type != 2 && type != 11 && type != 12 && targetValue == 0)
+            {
+                showText = "闪避";
+            }
+            else if (type == 11)
+            {
+                showText = "抵抗";
+            }
+            else if (type == 12)
+            {
+                showText = "免疫";
+            }
+            else
+            {
+                showText = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
+            }
+
+            return (showText, fallingFontType, startScale);
         }
     }
 }

@@ -2,15 +2,6 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    public enum FallingFontType
-    {
-        Normal = 0,
-        Self = 1,
-        Target = 2,
-        Add = 3,
-        Special = 4
-    }
-
     [ChildOf(typeof(FallingFontComponent))]
     public class FallingFontShowComponent : Entity, IAwake, IDestroy
     {
@@ -18,6 +9,9 @@ namespace ET.Client
         public string ShowText;
         public FallingFontType FontType;
         public Vector3 StartScale;
+        public BloodTextLayer BloodTextLayer;
+        public FallingFontExecuteType FallingFontExecuteType;
+        public string FallingFontPath;
         public Transform Transform;
         public GameObject GameObject;
         public GameObject ObjFlyText;

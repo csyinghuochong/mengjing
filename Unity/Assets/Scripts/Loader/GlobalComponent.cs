@@ -40,6 +40,9 @@ namespace ET
             self.BloodText_Layer1 = new GameObject("BloodText_Layer1");
             self.BloodText_Layer1.AddComponent<RectTransform>();
             SetParent(self.BloodText_Layer1, self.BloodText);
+            self.BloodText_Layer2 = new GameObject("BloodText_Layer1");
+            self.BloodText_Layer2.AddComponent<RectTransform>();
+            SetParent(self.BloodText_Layer2, self.BloodText);
         }
 
         public static void SetParent(GameObject son, GameObject parent)
@@ -81,5 +84,6 @@ namespace ET
         public GameObject BloodText { get; set; }
         public GameObject BloodText_Layer0 { get; set; }
         public GameObject BloodText_Layer1 { get; set; }
+        public GameObject BloodText_Layer2 { get; set; }
     }
 }

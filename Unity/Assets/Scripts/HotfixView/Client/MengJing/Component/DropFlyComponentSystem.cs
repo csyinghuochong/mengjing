@@ -67,7 +67,7 @@ namespace ET.Client
 
             if (error == ErrorCode.ERR_Success)
             {
-                EventSystem.Instance.Publish(root, new ShowFallingFont() { ShowText = itemConfig.ItemName });
+                EventSystem.Instance.Publish(root, new GetDrop() { ShowText = itemConfig.ItemName });
             }
 
             bagComponentC.RealAddItem++;

@@ -6,9 +6,9 @@ namespace ET.Client
     # region 注册事件
 
     [Event(SceneType.Demo)]
-    public class ShowFallingFont_ShowFallingFont : AEvent<Scene, ShowFallingFont>
+    public class GetDrop_ShowFallingFont : AEvent<Scene, GetDrop>
     {
-        protected override async ETTask Run(Scene scene, ShowFallingFont args)
+        protected override async ETTask Run(Scene scene, GetDrop args)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
 
@@ -20,8 +20,9 @@ namespace ET.Client
             UIPlayerHpComponent heroHeadBarComponent = unit.GetComponent<UIPlayerHpComponent>();
             if (heroHeadBarComponent != null)
             {
+                // 获取掉落物品、金币
                 scene.GetComponent<FallingFontComponent>()
-                        ?.Play1(heroHeadBarComponent.GameObject, unit, args.ShowText, FallingFont1Type.Type_0, Vector3.one);
+                        ?.Play(heroHeadBarComponent.GameObject, unit, args.ShowText, FallingFontType.Yellow, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_1);
             }
 
             await ETTask.CompletedTask;
@@ -45,8 +46,9 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    scene.GetComponent<FallingFontComponent>()?.Play1(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("经验+ {0}", args.ChangeValue), FallingFont1Type.Type_0, Vector3.one);
+                    // 获得经验
+                    scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("经验+ {0}", args.ChangeValue), FallingFontType.Yellow, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_1);
                 }
             }
 
@@ -71,8 +73,8 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    scene.GetComponent<FallingFontComponent>()?.Play1(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("升到{0}级", args.UpdateValue), FallingFont1Type.Type_0, Vector3.one);
+                    scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("升到{0}级", args.UpdateValue), FallingFontType.Orange, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_2);
                 }
             }
 
@@ -98,8 +100,8 @@ namespace ET.Client
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(args.TaskConfigId);
                 using (zstring.Block())
                 {
-                    scene.GetComponent<FallingFontComponent>()?.Play1(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("接取任务：{0}", taskConfig.TaskName), FallingFont1Type.Type_0, Vector3.one);
+                    scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("接取任务：{0}", taskConfig.TaskName), FallingFontType.Orange, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_2);
                 }
             }
 
@@ -125,8 +127,8 @@ namespace ET.Client
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(args.TaskConfigId);
                 using (zstring.Block())
                 {
-                    scene.GetComponent<FallingFontComponent>()?.Play1(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("完成任务：{0}", taskConfig.TaskName), FallingFont1Type.Type_0, Vector3.one);
+                    scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("完成任务：{0}", taskConfig.TaskName), FallingFontType.Orange, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_2);
                 }
             }
 
@@ -197,7 +199,8 @@ namespace ET.Client
                     return;
             }
 
-            scene.GetComponent<FallingFontComponent>()?.Play1(HpGameObject, args.Unit, showText, FallingFont1Type.Type_1, Vector3.one);
+            // buff
+            scene.GetComponent<FallingFontComponent>()?.Play(HpGameObject, args.Unit, showText, FallingFontType.Purple, Vector3.one,BloodTextLayer.Layer_0,FallingFontExecuteType.Type_0);
 
             await ETTask.CompletedTask;
         }
@@ -245,90 +248,28 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }
 
-        public static void OnAwake(this FallingFontComponent self)
+        private static void OnAwake(this FallingFontComponent self)
         {
             self.FallingFontShows = new();
         }
 
-        private static (string, FallingFontType, Vector3) GetBattleShowText(this FallingFontComponent self, long targetValue, Unit unit, int type)
-        {
-            FallingFontType fallingFontType = FallingFontType.Target;
-            string showText = string.Empty;
-
-            //根据目标Unit设定飘字字体
-            string selfNull = "";
-            if (unit.MainHero)
-            {
-                fallingFontType = FallingFontType.Self;
-                selfNull = " ";
-            }
-
-            //恢复血量
-            if (type == 2 || type == 11 || type == 12 || targetValue > 0)
-            {
-                fallingFontType = FallingFontType.Add;
-            }
-
-            //恢复暴击/重击
-            if (unit.MainHero == false && type == 1 || type == 3)
-            {
-                fallingFontType = FallingFontType.Special;
-            }
-
-            string addStr = "";
-
-            Vector3 startScale = Vector3.one;
-
-            if (targetValue >= 0 && type == 2)
-            {
-                addStr = "+";
-            }
-
-            if (type == 1)
-            {
-                addStr = "暴击";
-                startScale = new Vector3(1.4f, 1.4f, 1.4f);
-            }
-
-            if (type != 2 && type != 11 && type != 12 && targetValue == 0)
-            {
-                showText = "闪避";
-            }
-            else if (type == 11)
-            {
-                showText = "抵抗";
-            }
-            else if (type == 12)
-            {
-                showText = "免疫";
-            }
-            else
-            {
-                showText = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
-            }
-
-            return (showText, fallingFontType, startScale);
-        }
-
-        public static void Play(this FallingFontComponent self, GameObject HeadBar, Unit unit, long targetValue, int type)
+        /// <summary>
+        /// 播放飘字
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="HeadBar"></param>
+        /// <param name="unit"></param>
+        /// <param name="showText">内容</param>
+        /// <param name="fontType">字体类型</param>
+        /// <param name="startScale">开始的大小</param>
+        /// <param name="bloodTextLayer">层级</param>
+        /// <param name="fallingFontExecuteType">执行逻辑</param>
+        public static void Play(this FallingFontComponent self, GameObject HeadBar, Unit unit, string showText, FallingFontType fontType,
+        Vector3 startScale, BloodTextLayer bloodTextLayer, FallingFontExecuteType fallingFontExecuteType)
         {
             FallingFontShowComponent fallingFont = self.AddChild<FallingFontShowComponent>();
-            (string, FallingFontType, Vector3) showText = GetBattleShowText(self, targetValue, unit, type);
-            fallingFont.OnInitData(HeadBar, unit, showText.Item1, showText.Item2, showText.Item3);
+            fallingFont.OnInitData(HeadBar, unit, showText, fontType, startScale, bloodTextLayer, fallingFontExecuteType);
             self.FallingFontShows.Add(fallingFont);
-
-            if (self.Timer == 0)
-            {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.FallingFont, self);
-            }
-        }
-
-        public static void Play1(this FallingFontComponent self, GameObject HeadBar, Unit unit, string showText,
-        FallingFont1Type fallingFont1Type, Vector3 startScale)
-        {
-            FallingFontShow1Component fallingFont = self.AddChild<FallingFontShow1Component>();
-            fallingFont.OnInitData(HeadBar, unit, showText, fallingFont1Type, startScale);
-            self.FallingFontShow1s.Add(fallingFont);
 
             if (self.Timer == 0)
             {
@@ -349,18 +290,7 @@ namespace ET.Client
                 }
             }
 
-            for (int i = self.FallingFontShow1s.Count - 1; i >= 0; i--)
-            {
-                FallingFontShow1Component fallingFontShow1Component = self.FallingFontShow1s[i];
-                bool remove = fallingFontShow1Component.LateUpdate();
-                if (remove)
-                {
-                    self.FallingFontShow1s.RemoveAt(i);
-                    fallingFontShow1Component.Dispose();
-                }
-            }
-
-            if (self.FallingFontShows.Count == 0 && self.FallingFontShow1s.Count == 0 && self.Timer != 0)
+            if (self.FallingFontShows.Count == 0 && self.Timer != 0)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }
