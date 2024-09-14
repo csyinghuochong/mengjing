@@ -17,25 +17,12 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
-            self.E_SelectButton.AddListener(self.OnSelectButton);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_TaskType self)
         {
             self.DestroyWidget();
-        }
-
-        private static void OnSelectButton(this ES_TaskType self)
-        {
-            if (self.IsExpand)
-            {
-                self.TalkUp();
-            }
-            else
-            {
-                self.Expand();
-            }
         }
 
         public static void InitData(this ES_TaskType self, int taskType, Action<int> onClickAction)
@@ -55,11 +42,7 @@ namespace ET.Client
                     break;
             }
 
-            self.E_SelectButton.AddListener(() =>
-            {
-                onClickAction?.Invoke(self.TaskType);
-                self.OnSelectButton();
-            });
+            self.E_SelectButton.AddListener(() => { onClickAction?.Invoke(self.TaskType); });
         }
 
         public static void Expand(this ES_TaskType self)

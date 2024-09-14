@@ -30,7 +30,7 @@ namespace ET.Client
             self.E_ClickButton.AddListener(() =>
             {
                 onClickAction?.Invoke(self.TaskPro.taskID);
-                EventSystem.Instance.Publish(self.Root(), new TaskTypeItemClick() { TaskPro = self.TaskPro });
+                EventSystem.Instance.Publish(self.Root(), new TaskTypeItemClick() { TaskPro = self.TaskPro});
             });
         }
 

@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_TaskTypeItem>> ScrollItemTaskTypeItems;
 		public List<TaskPro> ShowTaskPros = new();
-		public bool IsExpand;
+		public bool IsExpand { get; set; }
 		public int TaskType;
 		
 		public UnityEngine.UI.Image E_HighlightImage

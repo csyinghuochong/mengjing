@@ -1,8 +1,59 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskGet_TaskDetailRefresh : AEvent<Scene, TaskGet>
+    {
+        protected override async ETTask Run(Scene scene, TaskGet args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.SetExpand(TaskTypeEnum.Daily);
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskUpdate_TaskDetailRefresh : AEvent<Scene, TaskUpdate>
+    {
+        protected override async ETTask Run(Scene scene, TaskUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.OnRecvTaskUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskComplete_TaskDetailRefresh : AEvent<Scene, TaskComplete>
+    {
+        protected override async ETTask Run(Scene scene, TaskComplete args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.OnRecvTaskUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskGiveUp_TaskDetailRefresh : AEvent<Scene, TaskGiveUp>
+    {
+        protected override async ETTask Run(Scene scene, TaskGiveUp args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.ReExpand();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class TaskTypeItemClick_RefreshTaskInfo : AEvent<Scene, TaskTypeItemClick>
+    {
+        protected override async ETTask Run(Scene scene, TaskTypeItemClick args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.RefreshTaskInfo(args.TaskPro);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(ES_TaskDetail))]
     [FriendOf(typeof(ES_TaskDetail))]
@@ -13,9 +64,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.ES_TaskType_0.InitData(TaskTypeEnum.Main, self.SetTalkUp);
-            self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetTalkUp);
-            self.ES_TaskType_2.InitData(TaskTypeEnum.Daily, self.SetTalkUp);
+            self.ES_TaskType_0.InitData(TaskTypeEnum.Main, self.SetExpand);
+            self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetExpand);
+            self.ES_TaskType_2.InitData(TaskTypeEnum.Daily, self.SetExpand);
 
             self.E_ZhuizongButton.AddListener(() => { self.OnTrackTask(true); });
             self.E_CancelZhuizongButton.AddListener(() => { self.OnTrackTask(false); });
@@ -32,6 +83,38 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void ReExpand(this ES_TaskDetail self)
+        {
+            if (self.ES_TaskType_0.IsExpand)
+            {
+                self.ES_TaskType_0.Expand();
+            }
+
+            if (self.ES_TaskType_1.IsExpand)
+            {
+                self.ES_TaskType_1.Expand();
+            }
+
+            if (self.ES_TaskType_2.IsExpand)
+            {
+                self.ES_TaskType_2.Expand();
+            }
+        }
+
+        public static void OnRecvTaskUpdate(this ES_TaskDetail self)
+        {
+            TaskPro taskPro = self.Root().GetComponent<TaskComponentC>().GetTaskById(self.TaskId);
+
+            if (taskPro == null)
+            {
+                self.ReExpand();
+            }
+            else
+            {
+                self.RefreshTaskInfo(taskPro);
+            }
+        }
+
         public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
         {
             self.TaskPro = taskPro;
@@ -39,8 +122,11 @@ namespace ET.Client
             if (taskPro == null)
             {
                 self.EG_RightRectTransform.gameObject.SetActive(false);
+
                 return;
             }
+
+            self.TaskId = taskPro.taskID;
 
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
@@ -91,7 +177,7 @@ namespace ET.Client
 
             // 跑环任务显示对应的环数奖励
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int taskType = TaskConfigCategory.Instance.Get(taskPro.taskID).TaskType;
+            int taskType = taskConfig.TaskType;
             int nowNum = 0;
             if (taskType == 5)
             {
@@ -131,6 +217,23 @@ namespace ET.Client
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
 
             self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+            
+            self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "前往任务";
+            if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
+            {
+                self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "上交装备";
+            }
+            else if(taskConfig.TargetType == TaskTargetType.GivePet_25)
+            {
+                self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "上交宠物";
+            }
+
+            if ((taskConfig.TaskType == TaskTypeEnum.Ring || taskConfig.TaskType == TaskTypeEnum.Union ||
+                    taskConfig.TaskType == TaskTypeEnum.Daily || taskConfig.TaskType == TaskTypeEnum.Treasure) &&
+                self.TaskPro.taskStatus == (int)TaskStatuEnum.Completed)
+            {
+                self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "完成任务";
+            }
 
             self.EG_RightRectTransform.gameObject.SetActive(true);
         }
@@ -173,19 +276,31 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Task);
         }
 
-        private static void SetTalkUp(this ES_TaskDetail self, int taskType)
+        public static void SetExpand(this ES_TaskDetail self, int taskType)
         {
-            if (taskType != TaskTypeEnum.Main)
+            if (taskType == TaskTypeEnum.Main)
+            {
+                self.ES_TaskType_0.Expand();
+            }
+            else
             {
                 self.ES_TaskType_0.TalkUp();
             }
 
-            if (taskType != TaskTypeEnum.Branch)
+            if (taskType == TaskTypeEnum.Branch)
+            {
+                self.ES_TaskType_1.Expand();
+            }
+            else
             {
                 self.ES_TaskType_1.TalkUp();
             }
 
-            if (taskType != TaskTypeEnum.Daily)
+            if (taskType == TaskTypeEnum.Daily)
+            {
+                self.ES_TaskType_2.Expand();
+            }
+            else
             {
                 self.ES_TaskType_2.TalkUp();
             }
