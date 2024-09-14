@@ -1,57 +1,19 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillLearn : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_SkillLearn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic 
 	{
-		public int CurrentItemType;
 		public bool LinShiSkillStatus;
 		public SkillPro SkillPro;
 		public List<SkillPro> ShowLearnSkillPros = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnItem>> ScrollItemSkillLearnItems;
-		public List<SkillPro> ShowLearnSkillSkillPros = new();
-		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnSkillItem>> ScrollItemSkillLearnSkillItems;
-
-		public Button E_ButtonResetButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ButtonResetButton == null )
-     			{
-		    		this.m_E_ButtonResetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ButtonReset");
-     			}
-     			return this.m_E_ButtonResetButton;
-     		}
-     	}
-
-		public Image E_ButtonResetImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ButtonResetImage == null )
-     			{
-		    		this.m_E_ButtonResetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ButtonReset");
-     			}
-     			return this.m_E_ButtonResetImage;
-     		}
-     	}
-
-		public ToggleGroup E_BtnItemTypeSetToggleGroup
+		
+		public UnityEngine.UI.ToggleGroup E_BtnItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -62,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet");
+		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet");
      			}
      			return this.m_E_BtnItemTypeSetToggleGroup;
      		}
      	}
 
-		public RectTransform EG_SkillInfoPanelRectTransform
+		public UnityEngine.RectTransform EG_SkillInfoPanelRectTransform
      	{
      		get
      		{
@@ -79,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SkillInfoPanelRectTransform == null )
      			{
-		    		this.m_EG_SkillInfoPanelRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel");
+		    		this.m_EG_SkillInfoPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel");
      			}
      			return this.m_EG_SkillInfoPanelRectTransform;
      		}
      	}
 
-		public Button E_SkillInfoconImgButton
+		public UnityEngine.UI.Image E_SkillIconImage
      	{
      		get
      		{
@@ -94,15 +56,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoconImgButton == null )
+     			if( this.m_E_SkillIconImage == null )
      			{
-		    		this.m_E_SkillInfoconImgButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Img_SkillIconDi/E_SkillInfoconImg");
+		    		this.m_E_SkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Mask/E_SkillIcon");
      			}
-     			return this.m_E_SkillInfoconImgButton;
+     			return this.m_E_SkillIconImage;
      		}
      	}
 
-		public Image E_SkillInfoconImgImage
+		public UnityEngine.UI.Text E_SkillNameText
      	{
      		get
      		{
@@ -111,15 +73,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoconImgImage == null )
+     			if( this.m_E_SkillNameText == null )
      			{
-		    		this.m_E_SkillInfoconImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Img_SkillIconDi/E_SkillInfoconImg");
+		    		this.m_E_SkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillName");
      			}
-     			return this.m_E_SkillInfoconImgImage;
+     			return this.m_E_SkillNameText;
      		}
      	}
 
-		public EventTrigger E_SkillInfoconImgEventTrigger
+		public UnityEngine.UI.Text E_SkillTypeText
      	{
      		get
      		{
@@ -128,15 +90,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoconImgEventTrigger == null )
+     			if( this.m_E_SkillTypeText == null )
      			{
-		    		this.m_E_SkillInfoconImgEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Img_SkillIconDi/E_SkillInfoconImg");
+		    		this.m_E_SkillTypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillType");
      			}
-     			return this.m_E_SkillInfoconImgEventTrigger;
+     			return this.m_E_SkillTypeText;
      		}
      	}
 
-		public Text E_SkillInfoNameTextText
+		public UnityEngine.UI.Text E_SkillLvText
      	{
      		get
      		{
@@ -145,15 +107,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoNameTextText == null )
+     			if( this.m_E_SkillLvText == null )
      			{
-		    		this.m_E_SkillInfoNameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillInfoNameText");
+		    		this.m_E_SkillLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillLv");
      			}
-     			return this.m_E_SkillInfoNameTextText;
+     			return this.m_E_SkillLvText;
      		}
      	}
 
-		public Text E_NowTextText
+		public UnityEngine.UI.Text E_SkillDesText
      	{
      		get
      		{
@@ -162,15 +124,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_NowTextText == null )
+     			if( this.m_E_SkillDesText == null )
      			{
-		    		this.m_E_NowTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_NowText");
+		    		this.m_E_SkillDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillDes");
      			}
-     			return this.m_E_NowTextText;
+     			return this.m_E_SkillDesText;
      		}
      	}
 
-		public Text E_NextTextText
+		public UnityEngine.UI.Text E_SkillCoinText
      	{
      		get
      		{
@@ -179,15 +141,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_NextTextText == null )
+     			if( this.m_E_SkillCoinText == null )
      			{
-		    		this.m_E_NextTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_NextText");
+		    		this.m_E_SkillCoinText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillCoin");
      			}
-     			return this.m_E_NextTextText;
+     			return this.m_E_SkillCoinText;
      		}
      	}
 
-		public Text E_ConsumeTextText
+		public UnityEngine.UI.Text E_SkillPointText
      	{
      		get
      		{
@@ -196,15 +158,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ConsumeTextText == null )
+     			if( this.m_E_SkillPointText == null )
      			{
-		    		this.m_E_ConsumeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_ConsumeText");
+		    		this.m_E_SkillPointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillPoint");
      			}
-     			return this.m_E_ConsumeTextText;
+     			return this.m_E_SkillPointText;
      		}
      	}
 
-		public Button E_SkillInfoLearnBtnButton
+		public UnityEngine.UI.Button E_SkillLearnButton
      	{
      		get
      		{
@@ -213,15 +175,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoLearnBtnButton == null )
+     			if( this.m_E_SkillLearnButton == null )
      			{
-		    		this.m_E_SkillInfoLearnBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillInfoLearnBtn");
+		    		this.m_E_SkillLearnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillLearn");
      			}
-     			return this.m_E_SkillInfoLearnBtnButton;
+     			return this.m_E_SkillLearnButton;
      		}
      	}
 
-		public Image E_SkillInfoLearnBtnImage
+		public UnityEngine.UI.Image E_SkillLearnImage
      	{
      		get
      		{
@@ -230,15 +192,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillInfoLearnBtnImage == null )
+     			if( this.m_E_SkillLearnImage == null )
      			{
-		    		this.m_E_SkillInfoLearnBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillInfoLearnBtn");
+		    		this.m_E_SkillLearnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillLearn");
      			}
-     			return this.m_E_SkillInfoLearnBtnImage;
+     			return this.m_E_SkillLearnImage;
      		}
      	}
 
-		public Image E_SkillLearnItemsImage
+		public UnityEngine.UI.Image E_SkillLearnItemsImage
      	{
      		get
      		{
@@ -249,13 +211,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillLearnItemsImage == null )
      			{
-		    		this.m_E_SkillLearnItemsImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
+		    		this.m_E_SkillLearnItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
      			}
      			return this.m_E_SkillLearnItemsImage;
      		}
      	}
 
-		public LoopVerticalScrollRect E_SkillLearnItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_SkillLearnItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -266,13 +228,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillLearnItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SkillLearnItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
+		    		this.m_E_SkillLearnItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_SkillLearnItems");
      			}
      			return this.m_E_SkillLearnItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public Text E_Text_LeftSpText
+		public UnityEngine.UI.Text E_Text_LeftSpText
      	{
      		get
      		{
@@ -283,13 +245,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_LeftSpText == null )
      			{
-		    		this.m_E_Text_LeftSpText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/E_Text_LeftSp");
+		    		this.m_E_Text_LeftSpText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_Text_LeftSp");
      			}
      			return this.m_E_Text_LeftSpText;
      		}
      	}
 
-		public Image E_SkillLearnSkillItemsImage
+		public UnityEngine.UI.Button E_ButtonResetButton
      	{
      		get
      		{
@@ -298,15 +260,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillLearnSkillItemsImage == null )
+     			if( this.m_E_ButtonResetButton == null )
      			{
-		    		this.m_E_SkillLearnSkillItemsImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_SkillLearnSkillItems");
+		    		this.m_E_ButtonResetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ButtonReset");
      			}
-     			return this.m_E_SkillLearnSkillItemsImage;
+     			return this.m_E_ButtonResetButton;
      		}
      	}
 
-		public LoopVerticalScrollRect E_SkillLearnSkillItemsLoopVerticalScrollRect
+		public UnityEngine.UI.Image E_ButtonResetImage
      	{
      		get
      		{
@@ -315,11 +277,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillLearnSkillItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ButtonResetImage == null )
      			{
-		    		this.m_E_SkillLearnSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_SkillLearnSkillItems");
+		    		this.m_E_ButtonResetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ButtonReset");
      			}
-     			return this.m_E_SkillLearnSkillItemsLoopVerticalScrollRect;
+     			return this.m_E_ButtonResetImage;
      		}
      	}
 
@@ -337,45 +299,41 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ButtonResetButton = null;
-			this.m_E_ButtonResetImage = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
 			this.m_EG_SkillInfoPanelRectTransform = null;
-			this.m_E_SkillInfoconImgButton = null;
-			this.m_E_SkillInfoconImgImage = null;
-			this.m_E_SkillInfoconImgEventTrigger = null;
-			this.m_E_SkillInfoNameTextText = null;
-			this.m_E_NowTextText = null;
-			this.m_E_NextTextText = null;
-			this.m_E_ConsumeTextText = null;
-			this.m_E_SkillInfoLearnBtnButton = null;
-			this.m_E_SkillInfoLearnBtnImage = null;
+			this.m_E_SkillIconImage = null;
+			this.m_E_SkillNameText = null;
+			this.m_E_SkillTypeText = null;
+			this.m_E_SkillLvText = null;
+			this.m_E_SkillDesText = null;
+			this.m_E_SkillCoinText = null;
+			this.m_E_SkillPointText = null;
+			this.m_E_SkillLearnButton = null;
+			this.m_E_SkillLearnImage = null;
 			this.m_E_SkillLearnItemsImage = null;
 			this.m_E_SkillLearnItemsLoopVerticalScrollRect = null;
 			this.m_E_Text_LeftSpText = null;
-			this.m_E_SkillLearnSkillItemsImage = null;
-			this.m_E_SkillLearnSkillItemsLoopVerticalScrollRect = null;
+			this.m_E_ButtonResetButton = null;
+			this.m_E_ButtonResetImage = null;
 			this.uiTransform = null;
 		}
 
-		private Button m_E_ButtonResetButton = null;
-		private Image m_E_ButtonResetImage = null;
-		private ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
-		private RectTransform m_EG_SkillInfoPanelRectTransform = null;
-		private Button m_E_SkillInfoconImgButton = null;
-		private Image m_E_SkillInfoconImgImage = null;
-		private EventTrigger m_E_SkillInfoconImgEventTrigger = null;
-		private Text m_E_SkillInfoNameTextText = null;
-		private Text m_E_NowTextText = null;
-		private Text m_E_NextTextText = null;
-		private Text m_E_ConsumeTextText = null;
-		private Button m_E_SkillInfoLearnBtnButton = null;
-		private Image m_E_SkillInfoLearnBtnImage = null;
-		private Image m_E_SkillLearnItemsImage = null;
-		private LoopVerticalScrollRect m_E_SkillLearnItemsLoopVerticalScrollRect = null;
-		private Text m_E_Text_LeftSpText = null;
-		private Image m_E_SkillLearnSkillItemsImage = null;
-		private LoopVerticalScrollRect m_E_SkillLearnSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
+		private UnityEngine.RectTransform m_EG_SkillInfoPanelRectTransform = null;
+		private UnityEngine.UI.Image m_E_SkillIconImage = null;
+		private UnityEngine.UI.Text m_E_SkillNameText = null;
+		private UnityEngine.UI.Text m_E_SkillTypeText = null;
+		private UnityEngine.UI.Text m_E_SkillLvText = null;
+		private UnityEngine.UI.Text m_E_SkillDesText = null;
+		private UnityEngine.UI.Text m_E_SkillCoinText = null;
+		private UnityEngine.UI.Text m_E_SkillPointText = null;
+		private UnityEngine.UI.Button m_E_SkillLearnButton = null;
+		private UnityEngine.UI.Image m_E_SkillLearnImage = null;
+		private UnityEngine.UI.Image m_E_SkillLearnItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SkillLearnItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_Text_LeftSpText = null;
+		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
+		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
 		public Transform uiTransform = null;
 	}
 }

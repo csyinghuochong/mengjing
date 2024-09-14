@@ -85,7 +85,7 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_SkillLearn.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_SkillLearn.OnUpdateUI();
+                    self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
                     break;
                 case 1:
                     self.View.ES_SkillSet.uiTransform.gameObject.SetActive(true);
@@ -121,7 +121,7 @@ namespace ET.Client
         {
             if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.UpdateLeftSp();
+                self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             }
         }
 
@@ -139,7 +139,7 @@ namespace ET.Client
         {
             if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.InitSkillList(0).Coroutine();
+                self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             }
 
             if (self.View.ES_SkillSet.uiTransform.gameObject.activeSelf)
