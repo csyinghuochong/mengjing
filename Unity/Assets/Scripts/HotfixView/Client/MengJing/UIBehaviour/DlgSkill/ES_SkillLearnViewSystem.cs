@@ -118,7 +118,7 @@ namespace ET.Client
             scrollItemSkillLearnItem.OnUpdateUI(self.ShowLearnSkillPros[index]);
         }
 
-        public static void OnItemTypeSet(this ES_SkillLearn self, int page)
+        private static void OnItemTypeSet(this ES_SkillLearn self, int page)
         {
             self.EG_SkillInfoPanelRectTransform.gameObject.SetActive(false);
             self.E_SkillLearnItemsLoopVerticalScrollRect.gameObject.SetActive(true);
