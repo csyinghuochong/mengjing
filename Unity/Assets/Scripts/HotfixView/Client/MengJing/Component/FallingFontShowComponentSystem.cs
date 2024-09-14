@@ -63,6 +63,9 @@ namespace ET.Client
                     break;
             }
 
+            self.ObjFlyText = rc.Get<GameObject>("FlyText");
+            self.ObjFlyText.GetComponent<Text>().text = self.ShowText;
+            
             // 这里可以根据要求进行一些初始化设置，如一开始飘字位置的偏移
             switch (self.FallingFontExecuteType)
             {
@@ -87,9 +90,7 @@ namespace ET.Client
             }
 
             self.GameObject.transform.localScale = Vector3.one;
-
-            self.ObjFlyText = rc.Get<GameObject>("FlyText");
-            self.ObjFlyText.GetComponent<Text>().text = self.ShowText;
+            
             self.ObjFlyText.GetComponent<Text>().transform.localScale = self.StartScale;
             self.ObjFlyText.SetActive(true);
         }
