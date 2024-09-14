@@ -34,7 +34,7 @@ namespace ET
                 float3 oldPos = this.position;
                 this.position = value;
 
-                if (SettingData.ShowFindPath)
+                if (SettingData.ShowFindPath && this.MainHero)
                 {
                     Log.Debug($"新坐标:{value}   旧坐标:{oldPos}   移动距离:{math.distance(oldPos, value)}   当前时间:{TimeHelper.ServerNow()}");
                 }
