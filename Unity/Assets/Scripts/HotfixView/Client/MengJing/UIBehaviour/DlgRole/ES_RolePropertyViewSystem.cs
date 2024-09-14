@@ -14,7 +14,6 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_RolePropertyBaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyBaseItemsRefresh);
             self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyTeShuItemsRefresh);
             self.E_AddPointButton.AddListener(self.OnAddPointButton);
 
@@ -51,7 +50,6 @@ namespace ET.Client
             self.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
 
             self.InitShowPropertyList();
-            self.RefreshRoleProperty();
             self.InitAddProperty();
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
@@ -81,16 +79,18 @@ namespace ET.Client
         {
             if (index == 0)
             {
+                self.ShowPropertyLists = self.ShowPropertyList_Base;
             }
             else if (index == 1)
             {
+                self.ShowPropertyLists = self.ShowPropertyList_TeShu;
             }
             else
             {
+                self.ShowPropertyLists = self.ShowPropertyList_KangXing;
             }
 
-            self.E_RolePropertyBaseItemsLoopVerticalScrollRect.gameObject.SetActive(index == 0);
-            self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.gameObject.SetActive(index == 1);
+            self.RefreshRoleProperty();
         }
 
         private static void OnAddPointButton(this ES_RoleProperty self)
@@ -100,16 +100,10 @@ namespace ET.Client
             self.InitAddProperty();
         }
 
-        private static void OnRolePropertyBaseItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
-        {
-            Scroll_Item_RolePropertyBaseItem scrollItemRolePropertyBaseItem = self.ScrollItemRolePropertyBaseItems[index].BindTrans(transform);
-            scrollItemRolePropertyBaseItem.Refresh(self.ShowPropertyList_Base[index]);
-        }
-
         private static void OnRolePropertyTeShuItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
         {
             Scroll_Item_RolePropertyTeShuItem scrollItemRolePropertyTeShuItem = self.ScrollItemRolePropertyTeShuItems[index].BindTrans(transform);
-            scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyList_TeShu[index]);
+            scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyLists[index]);
         }
 
         private static ShowPropertyList AddShowProperList(this ES_RoleProperty self, int numericType, string name, string iconID, int type)
@@ -125,16 +119,16 @@ namespace ET.Client
         private static void InitShowPropertyList(this ES_RoleProperty self)
         {
             //添加基础属性
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxHp, "生命", "Pro_4", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxAct, "攻击", "Pro_5", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxDef, "防御", "Pro_3", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxAdf, "魔御", "Pro_9", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Mage, "技能伤害", "Pro_2", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Power, "力量", "Pro_8", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Intellect, "智力", "Pro_2", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Constitution, "体质", "Pro_6", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Stamina, "耐力", "Pro_7", 1));
-            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Agility, "敏捷", "Pro_9", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxHp, "生命", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxAct, "攻击", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxDef, "防御", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_MaxAdf, "魔御", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Mage, "技能伤害", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Power, "力量", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Intellect, "智力", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Constitution, "体质", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Stamina, "耐力", "", 1));
+            self.ShowPropertyList_Base.Add(self.AddShowProperList(NumericType.Now_Agility, "敏捷", "", 1));
 
             //特殊属性
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_Cri, "暴击概率", "", 2));
@@ -172,6 +166,9 @@ namespace ET.Client
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_MageBossPro, "魔攻领主加成", "", 2));
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_ActBossSubPro, "领主物攻减免", "", 2));
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_MageBossSubPro, "领主魔攻减免", "", 2));
+
+            // 抗性属性
+            self.ShowPropertyList_KangXing.Add(self.AddShowProperList(NumericType.Now_MageBossSubPro, "领主魔攻减免", "", 2));
         }
 
         public static void RefreshRoleProperty(this ES_RoleProperty self)
@@ -180,18 +177,22 @@ namespace ET.Client
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
-            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10).Value);
+            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0 ? 26 : 10)
+                    .Value);
             self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
-            self.E_PiLaoTextText.text = userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
+            using (zstring.Block())
+            {
+                self.E_PiLaoTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.PiLao, maxPiLao);
+            }
+
             self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / CommonHelp.GetMaxBaoShiDu();
-            self.E_BaoShiDuTextText.text = userInfoComponentC.UserInfo.BaoShiDu + "/" + CommonHelp.GetMaxBaoShiDu();
+            using (zstring.Block())
+            {
+                self.E_BaoShiDuTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.BaoShiDu, CommonHelp.GetMaxBaoShiDu());
+            }
 
-            self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyList_Base.Count);
-            self.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_Base.Count);
-
-            self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyList_TeShu.Count);
-            self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_TeShu.Count);
+            self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyLists.Count);
+            self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyLists.Count, true);
         }
 
         #endregion

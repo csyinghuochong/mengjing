@@ -12,15 +12,17 @@ namespace ET.Client
 		public string IconID;
 		public int Type;
 	}
+
 	
 	[ChildOf]
 	[EnableMethod]
 	public  class ES_RoleProperty : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_RolePropertyBaseItem>> ScrollItemRolePropertyBaseItems;
 		public Dictionary<int, EntityRef<Scroll_Item_RolePropertyTeShuItem>> ScrollItemRolePropertyTeShuItems;
 		public List<ShowPropertyList> ShowPropertyList_Base = new();
 		public List<ShowPropertyList> ShowPropertyList_TeShu = new();
+		public List<ShowPropertyList> ShowPropertyList_KangXing = new();
+		public List<ShowPropertyList> ShowPropertyLists;
 		public List<int> PointList = new();
 		public List<int> PointInit = new();
 		public int PointRemain;
@@ -125,23 +127,6 @@ namespace ET.Client
 		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_BtnItemTypeSet");
      			}
      			return this.m_E_BtnItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.LoopVerticalScrollRect E_RolePropertyBaseItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyBaseItems");
-     			}
-     			return this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -947,7 +932,6 @@ namespace ET.Client
 			this.m_E_BaoShiDuImgImage = null;
 			this.m_E_BaoShiDuTextText = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
-			this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
 			this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
 			this.m_E_AddPointButton = null;
 			this.m_E_AddPointImage = null;
@@ -1003,7 +987,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_BaoShiDuImgImage = null;
 		private UnityEngine.UI.Text m_E_BaoShiDuTextText = null;
 		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_AddPointButton = null;
 		private UnityEngine.UI.Image m_E_AddPointImage = null;
