@@ -63,12 +63,33 @@ namespace ET.Client
                     break;
             }
 
+            // 这里可以根据要求进行一些初始化设置，如一开始飘字位置的偏移
+            switch (self.FallingFontExecuteType)
+            {
+                case FallingFontExecuteType.Type_0:
+                {
+                    self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+                    break;
+                }
+                case FallingFontExecuteType.Type_1:
+                {
+                    self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+                    break;
+                }
+                case FallingFontExecuteType.Type_2:
+                {
+                    self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+                    break;
+                }
+            }
+
             self.GameObject.transform.localScale = Vector3.one;
-            self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
 
             self.ObjFlyText = rc.Get<GameObject>("FlyText");
             self.ObjFlyText.GetComponent<Text>().text = self.ShowText;
-            self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
             self.ObjFlyText.GetComponent<Text>().transform.localScale = self.StartScale;
             self.ObjFlyText.SetActive(true);
         }
