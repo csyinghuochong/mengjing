@@ -43,6 +43,18 @@ namespace ET
         }
 
         [BsonIgnore]
+        public float3 Position_2
+        {
+            get => this.position;
+            set
+            {
+                float3 oldPos = this.position;
+                this.position = value;
+                EventSystem.Instance.Publish(this.Scene(), new ChangePosition() { Unit = this, OldPos = oldPos });
+            }
+        }
+        
+        [BsonIgnore]
         public float3 Forward
         {
             get => math.mul(this.Rotation, math.forward());

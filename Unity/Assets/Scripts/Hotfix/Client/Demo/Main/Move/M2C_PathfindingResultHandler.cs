@@ -7,7 +7,11 @@
 		{
 			if (SettingData.ShowFindPath)
 			{
-				SettingData.FindPathLog.Add(TimeHelper.ServerNow() + "  "  + message.ToString());
+				long number = TimeInfo.Instance.FrameIndex;
+				string formattedNumber = number.ToString().PadLeft(10, '0');
+				SettingData.FindPathLog.Add(formattedNumber + "   "  + "/t" +  message.ToString());
+				SettingData.FindPathList.Add(number, message);
+				Log.Debug($"FrameIndex.Add:    {number}");
 			}
 
 			Unit unit = root.CurrentScene().GetComponent<UnitComponent>().Get(message.Id);

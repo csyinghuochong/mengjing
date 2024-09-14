@@ -90,5 +90,6 @@
         public const int UIDigTreasureTimer = 357;
         public const int JiaYuanPastureTimer = 358;
         public const int TransferUITimer = 359;
+        public const int FindPathTimer = 360;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,40 @@ namespace ET.Client
         }
     }
 
+    [Invoke(TimerInvokeType.FindPathTimer)]
+    [FriendOf(typeof(DlgChat))]
+    public class FindPathTimer : ATimer<DlgChat>
+    {
+        protected override void Run(DlgChat self)
+        {
+            try
+            {
+                if(SettingData.ShowFindPath)
+                {
+                    if (SettingData.FindPathList.ContainsKey(self.FindPathIndex))
+                    {
+                        Log.Debug($"FrameIndex.ShowFindPath:    {self.FindPathIndex}");
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+                        if (unit == null)
+                        {
+                            return;
+                        }
+                        float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+                        unit.GetComponent<MoveComponent>().MoveToAsync(SettingData.FindPathList[self.FindPathIndex].Points, speed).Coroutine();
+                    }
+                    self.FindPathIndex++;
+                }
+            }
+            catch (Exception e)
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
+            }
+        }
+    }
+    
     [FriendOf(typeof(PlayerComponent))]
     [FriendOf(typeof(DlgChat))]
     public static class DlgChatSystem
@@ -34,7 +69,24 @@ namespace ET.Client
 
         private static void OnCloseButton(this DlgChat self)
         {
+            if(SettingData.ShowFindPath)
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+                unit.Position_2 = SettingData.FindPathEnd;
+            }
+            
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.FindPathTimer);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
+        }
+
+        private static void ShowFindPath(this DlgChat self)
+        {
+            self.FindPathIndex = SettingData.FindPathList.Keys.ToList()[0];
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            SettingData.FindPathEnd = unit.Position;
+            unit.Position_2 = SettingData.FindPathInit;
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.FindPathTimer);
+            self.FindPathTimer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.FindPathTimer, self);
         }
 
         private static async ETTask OnSendButton(this DlgChat self)
@@ -112,8 +164,15 @@ namespace ET.Client
             {
                 GameObject  T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
                 T1errain.gameObject.SetActive(!T1errain.gameObject.activeSelf);
+                return;
             }
-
+            
+            if (text.Equals("#showpath"))
+            {
+                self.ShowFindPath();
+                return;
+            }
+            
             if (text.Equals("#openall"))
             {
                 SettingData.ShowBlood = true;

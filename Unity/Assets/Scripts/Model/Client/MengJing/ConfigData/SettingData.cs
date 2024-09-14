@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -7,6 +8,15 @@ namespace ET.Client
         
         [StaticField]
         public static List<string> FindPathLog = new List<string>();
+        
+        [StaticField]
+        public static Dictionary<long, M2C_PathfindingResult> FindPathList = new Dictionary<long, M2C_PathfindingResult>();
+
+        [StaticField]
+        public static float3 FindPathInit;
+        [StaticField]
+        public static float3 FindPathEnd;
+        
         
         [StaticField]
         public static bool ShowFindPath = false;

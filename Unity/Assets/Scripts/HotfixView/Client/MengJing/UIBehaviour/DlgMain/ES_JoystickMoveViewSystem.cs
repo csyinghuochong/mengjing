@@ -177,6 +177,8 @@ namespace ET.Client
             if (SettingData.ShowFindPath)
             {
                 CommonHelp.ClearPathFindLog();
+                SettingData.FindPathInit = unit.Position;
+                SettingData.FindPathList.Clear();
             }
 
             self.lastSendTime = 0;
