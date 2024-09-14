@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -232,21 +233,21 @@ namespace ET.Client
                 int itemEquipType = UnitHelper.GetEquipType(self.Root());
                 SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(baseskill);
 
-                string[] skillDesc = Regex.Split(skillConfig_base.SkillDescribe, "\n\n", RegexOptions.IgnoreCase);
+                string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
 
                 if (skillDesc.Length == 1)
                 {
-                    self.E_SkillDesText.text = skillDesc[0];
+                    self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
                 }
                 else
                 {
                     if (itemEquipType == ItemEquipType.Sword || itemEquipType == ItemEquipType.Wand)
                     {
-                        self.E_SkillDesText.text = skillDesc[0];
+                        self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
                     }
                     else
                     {
-                        self.E_SkillDesText.text = skillDesc[1];
+                        self.E_SkillDesText.text = skillDesc[1].Replace("\\n", "\n");
                     }
                 }
 
