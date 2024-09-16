@@ -254,7 +254,7 @@ namespace ET.Client
                 // }
 
                 self.E_SkillCoinText.text = zstring.Format("需要金币：{0}", skillBaseConfig.CostGoldValue);
-                self.E_SkillPointText.text = zstring.Format("技能点数: {0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
+                self.E_SkillPointText.text = zstring.Format("技能点数：{0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
             }
         }
 
