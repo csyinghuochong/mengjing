@@ -16,6 +16,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.Height = self.uiTransform.GetComponent<RectTransform>().rect.height;
+            self.E_HighlightImage.gameObject.SetActive(false);
 
             self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
         }
