@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -23,7 +24,6 @@ namespace ET.Client
 
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_Close2Button.AddListener(self.OnCloseButton);
-            self.View.E_Btn_AddGoldButton.AddListener(self.OnBtn_AddGoldButton);
         }
 
         public static void ShowWindow(this DlgHuoBiSet self, Entity contextData = null)
@@ -65,9 +65,11 @@ namespace ET.Client
             if (uiComponent.OpenUIList.Count > 0)
             {
                 self.OnUpdateTitle(uiComponent.OpenUIList[0]);
-                self.View.EG_ZiJinSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("JiaYuan"));
+                self.View.EG_ZiJinSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0])
+                        .Contains("JiaYuan"));
                 self.View.EG_JiaZuSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("Union"));
-                self.View.EG_WeiJingSetRectTransform.gameObject.SetActive(Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("PaiMai"));
+                self.View.EG_WeiJingSetRectTransform.gameObject.SetActive(
+                    Enum.GetName(typeof(WindowID), uiComponent.OpenUIList[0]).Contains("PaiMai"));
             }
         }
 
@@ -104,17 +106,9 @@ namespace ET.Client
             //     titlePath = "UITeamDungeon";
             // }
             //
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_" + titlePath);
-            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAsset<Sprite>(path);
-            // if (!self.AssetPath.Contains(path))
-            // {
-            //     self.AssetPath.Add(path);
-            // }
-            //
-            // self.Img_Back_Title.GetComponent<Image>().sprite = sp;
-        }
-        public static void OnBtn_AddGoldButton(this DlgHuoBiSet self)
-        {
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_UIActivity");
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.View.E_TitleImage.sprite = sp;
         }
     }
 }
