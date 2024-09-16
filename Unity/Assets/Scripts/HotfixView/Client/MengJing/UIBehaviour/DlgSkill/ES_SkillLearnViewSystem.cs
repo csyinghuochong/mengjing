@@ -233,26 +233,28 @@ namespace ET.Client
                 int itemEquipType = UnitHelper.GetEquipType(self.Root());
                 SkillConfig skillConfig_base = SkillConfigCategory.Instance.Get(baseskill);
 
-                string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
-
-                if (skillDesc.Length == 1)
-                {
-                    self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
-                }
-                else
-                {
-                    if (itemEquipType == ItemEquipType.Sword || itemEquipType == ItemEquipType.Wand)
-                    {
-                        self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
-                    }
-                    else
-                    {
-                        self.E_SkillDesText.text = skillDesc[1].Replace("\\n", "\n");
-                    }
-                }
+                self.E_SkillDesText.text = skillConfig_base.SkillDescribe.Replace("\\n", "\n");
+                
+                // string[] skillDesc = skillConfig_base.SkillDescribe.Split(new[] { "\\n\\n" }, StringSplitOptions.None);
+                //
+                // if (skillDesc.Length == 1)
+                // {
+                //     self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
+                // }
+                // else
+                // {
+                //     if (itemEquipType == ItemEquipType.Sword || itemEquipType == ItemEquipType.Wand)
+                //     {
+                //         self.E_SkillDesText.text = skillDesc[0].Replace("\\n", "\n");
+                //     }
+                //     else
+                //     {
+                //         self.E_SkillDesText.text = skillDesc[1].Replace("\\n", "\n");
+                //     }
+                // }
 
                 self.E_SkillCoinText.text = zstring.Format("需要金币：{0}", skillBaseConfig.CostGoldValue);
-                self.E_SkillPointText.text = zstring.Format("需要技能点: {0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
+                self.E_SkillPointText.text = zstring.Format("技能点数: {0}/{1}", skillBaseConfig.CostSPValue, userInfo.Sp);
             }
         }
 
