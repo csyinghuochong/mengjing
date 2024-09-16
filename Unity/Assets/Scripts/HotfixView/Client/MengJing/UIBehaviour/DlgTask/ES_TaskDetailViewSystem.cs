@@ -54,6 +54,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_TaskType))]
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(ES_TaskDetail))]
     [FriendOf(typeof(ES_TaskDetail))]
@@ -63,6 +64,11 @@ namespace ET.Client
         private static void Awake(this ES_TaskDetail self, Transform transform)
         {
             self.uiTransform = transform;
+
+            GameObject go1 = UnityEngine.Object.Instantiate(self.ES_TaskType_0.uiTransform.gameObject, self.ES_TaskType_0.uiTransform.parent);
+            go1.name = "ES_TaskType_1";
+            GameObject go2 = UnityEngine.Object.Instantiate(self.ES_TaskType_0.uiTransform.gameObject, self.ES_TaskType_0.uiTransform.parent);
+            go2.name = "ES_TaskType_2";
 
             self.ES_TaskType_0.InitData(TaskTypeEnum.Main, self.SetExpand);
             self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetExpand);
@@ -217,13 +223,13 @@ namespace ET.Client
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
 
             self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
-            
+
             self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "前往任务";
             if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
             {
                 self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "上交装备";
             }
-            else if(taskConfig.TargetType == TaskTargetType.GivePet_25)
+            else if (taskConfig.TargetType == TaskTargetType.GivePet_25)
             {
                 self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "上交宠物";
             }

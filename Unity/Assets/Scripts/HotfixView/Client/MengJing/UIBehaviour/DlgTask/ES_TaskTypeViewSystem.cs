@@ -15,6 +15,7 @@ namespace ET.Client
         private static void Awake(this ES_TaskType self, Transform transform)
         {
             self.uiTransform = transform;
+            self.Height = self.uiTransform.GetComponent<RectTransform>().rect.height;
 
             self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
         }
@@ -67,7 +68,7 @@ namespace ET.Client
         {
             self.IsExpand = false;
             self.E_HighlightImage.gameObject.SetActive(false);
-            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, 130f);
+            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, self.Height);
             self.E_TaskTypeItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, 1f);
             // 刷新一下父物体
             LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
@@ -113,7 +114,7 @@ namespace ET.Client
             self.E_TaskTypeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
 
             // 设置高度
-            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, 130f + 90 * self.ShowTaskPros.Count);
+            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, self.Height + 90 * self.ShowTaskPros.Count);
             self.E_TaskTypeItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta =
                     new Vector2(700, 1f + 90 * self.ShowTaskPros.Count);
             // 刷新一下父物体
