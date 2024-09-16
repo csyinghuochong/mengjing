@@ -38,6 +38,11 @@ namespace ET.Client
                         ShowRevive(unit, mapComponent).Coroutine();
                     }
                 }
+                else if (unit.Type == UnitType.Monster)
+                {
+                    unit.GetComponent<EffectViewComponent>()?.OnDispose();
+                    // TODO 消失特效，导入的插件不支持URP，待解决
+                }
                 else
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
