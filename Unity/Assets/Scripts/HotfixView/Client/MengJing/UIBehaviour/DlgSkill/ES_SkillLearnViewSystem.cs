@@ -179,7 +179,7 @@ namespace ET.Client
             }
 
             self.AddUIScrollItems(ref self.ScrollItemSkillLearnItems, self.ShowLearnSkillPros.Count);
-            self.E_SkillLearnItemsLoopVerticalScrollRect.SetVisible(true, self.ShowLearnSkillPros.Count, reStart: false);
+            self.E_SkillLearnItemsLoopVerticalScrollRect.SetVisible(true, self.ShowLearnSkillPros.Count, reStart: true);
 
             if (self.ScrollItemSkillLearnItems.Count > 0)
             {
