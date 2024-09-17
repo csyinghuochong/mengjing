@@ -80,13 +80,20 @@ namespace ET.Client
                 case FallingFontExecuteType.Type_1:
                 {
                     self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
-                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(- 200f, -50f, 0);
                     break;
                 }
                 case FallingFontExecuteType.Type_2:
                 {
                     self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
-                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(0f, 30f, 0);
+                    break;
+                }
+
+                case FallingFontExecuteType.Type_3:
+                {
+                    self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(0f, 30f, 0);
                     break;
                 }
             }
@@ -113,9 +120,13 @@ namespace ET.Client
                 FallingFontType.Target => "Assets/Bundles/UI/Blood/UIBattleFly_Target.prefab",
                 FallingFontType.Add => "Assets/Bundles/UI/Blood/UIBattleFly_Add.prefab",
                 FallingFontType.Special => "Assets/Bundles/UI/Blood/UIBattleFly_Special.prefab",
-                FallingFontType.Yellow => "Assets/Bundles/UI/Blood/UIBattleFly_Yellow.prefab",
-                FallingFontType.Purple => "Assets/Bundles/UI/Blood/UIBattleFly_Purple.prefab",
-                FallingFontType.Orange => "Assets/Bundles/UI/Blood/UIBattleFly_Orange.prefab",
+                FallingFontType.UpLv => "Assets/Bundles/UI/Blood/UIBattleFly_UpLv.prefab",
+                FallingFontType.TaskGet => "Assets/Bundles/UI/Blood/UIBattleFly_TaskGet.prefab",
+                FallingFontType.TaskComplete => "Assets/Bundles/UI/Blood/UIBattleFly_TaskComplete.prefab",
+                FallingFontType.Drop_Exp => "Assets/Bundles/UI/Blood/UIBattleFly_Drop_Exp.prefab",
+                FallingFontType.Drop_Gold => "Assets/Bundles/UI/Blood/UIBattleFly_Drop_Gold.prefab",
+                FallingFontType.Drop_Item => "Assets/Bundles/UI/Blood/UIBattleFly_Drop_Item.prefab",
+
                 _ => null
             };
 
@@ -142,7 +153,7 @@ namespace ET.Client
                             self.Fly_Y_Sum += Time.deltaTime * 100f;
                         }
 
-                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
+                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(self.ObjFlyText.transform.localPosition.x, 40f + self.Fly_Y_Sum, 0);
                     }
 
                     return self.DamgeFlyTimeSum >= 0.6f || !self.HeadBar.activeSelf;
@@ -154,29 +165,30 @@ namespace ET.Client
                     {
                         if (self.DamgeFlyTimeSum < 0.2f)
                         {
-                            self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
-                            self.Fly_Y_Sum += Time.deltaTime * 200f;
+                            //self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
+                            //self.Fly_Y_Sum += Time.deltaTime * 200f;
                         }
                         else
                         {
-                            self.Transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                            //self.Transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                             self.Fly_Y_Sum += Time.deltaTime * 100f;
                         }
 
-                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
+                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(self.ObjFlyText.transform.localPosition.x, 40f + self.Fly_Y_Sum, 0);
                     }
 
-                    return self.DamgeFlyTimeSum >= 0.6f || !self.HeadBar.activeSelf;
+                    return self.DamgeFlyTimeSum >= 0.8f || !self.HeadBar.activeSelf;
                 }
-                case FallingFontExecuteType.Type_2: // 完成任务 升级
+                //升级
+                case FallingFontExecuteType.Type_2: //升级
                 {
                     self.DamgeFlyTimeSum = self.DamgeFlyTimeSum + Time.deltaTime;
                     if (self.Transform != null)
                     {
-                        if (self.DamgeFlyTimeSum < 0.2f)
+                        if (self.DamgeFlyTimeSum < 0.35f)
                         {
                             self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
-                            self.Fly_Y_Sum += Time.deltaTime * 200f;
+                            //self.Fly_Y_Sum += Time.deltaTime * 200f;
                         }
                         else
                         {
@@ -187,8 +199,33 @@ namespace ET.Client
                         self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
                     }
 
-                    return self.DamgeFlyTimeSum >= 0.6f || !self.HeadBar.activeSelf;
+                    return self.DamgeFlyTimeSum >= 1.2f || !self.HeadBar.activeSelf;
                 }
+
+                //任务
+                case FallingFontExecuteType.Type_3: // 完成任务
+                    {
+                        self.DamgeFlyTimeSum = self.DamgeFlyTimeSum + Time.deltaTime;
+                        if (self.Transform != null)
+                        {
+                            /*
+                            if (self.DamgeFlyTimeSum < 0.35f)
+                            {
+                                self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
+                                //self.Fly_Y_Sum += Time.deltaTime * 200f;
+                            }
+                            else
+                            {
+                                self.Transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                                self.Fly_Y_Sum += Time.deltaTime * 100f;
+                            }
+                            */
+                            self.Fly_Y_Sum += Time.deltaTime * 100f;
+                            self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
+                        }
+
+                        return self.DamgeFlyTimeSum >= 1.2f || !self.HeadBar.activeSelf;
+                    }
 
                 default:
                     return true;
