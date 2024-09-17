@@ -12,9 +12,14 @@ namespace ET.Client
         Target = 2,
         Add = 3,
         Special = 4,
-        Yellow = 5,
-        Purple = 6,
-        Orange = 7,
+        //Yellow = 5,
+        UpLv = 6,
+        TaskGet = 7,
+        TaskComplete = 8,
+        Drop_Exp = 9,
+        Drop_Gold = 10,
+        Drop_Item = 11,
+        BuffAdd = 12,
     }
 
     /// <summary>
@@ -43,9 +48,15 @@ namespace ET.Client
         Type_1 = 1,
 
         /// <summary>
-        /// 完成任务 升级
+        /// 完成 升级
         /// </summary>
         Type_2 = 2,
+
+        /// <summary>
+        /// 完成任务 
+        /// </summary>
+        Type_3 = 3,
+
     }
 
     [ComponentOf(typeof(Scene))]
