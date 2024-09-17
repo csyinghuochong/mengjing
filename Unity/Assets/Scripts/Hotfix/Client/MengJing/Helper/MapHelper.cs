@@ -140,7 +140,7 @@ namespace ET.Client
                     drops.Add(uu);
                 }
 
-                if (units.Count >= 20)
+                if (drops.Count >= 20)
                 {
                     break;
                 }
