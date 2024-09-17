@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTowerOfSealJumpViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgTowerOfSealJumpViewComponent))]
+	[FriendOfAttribute(typeof(DlgTowerOfSealJumpViewComponent))]
 	public static partial class DlgTowerOfSealJumpViewComponentSystem
 	{
 		[EntitySystem]

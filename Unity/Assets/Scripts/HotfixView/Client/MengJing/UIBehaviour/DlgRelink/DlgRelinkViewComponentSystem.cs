@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRelinkViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRelinkViewComponent))]
+	[FriendOfAttribute(typeof(DlgRelinkViewComponent))]
 	public static partial class DlgRelinkViewComponentSystem
 	{
 		[EntitySystem]

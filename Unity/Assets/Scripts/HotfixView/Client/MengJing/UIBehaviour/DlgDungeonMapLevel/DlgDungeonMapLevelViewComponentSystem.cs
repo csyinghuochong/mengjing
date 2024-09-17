@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgDungeonMapLevelViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgDungeonMapLevelViewComponent))]
+	[FriendOfAttribute(typeof(DlgDungeonMapLevelViewComponent))]
 	public static partial class DlgDungeonMapLevelViewComponentSystem
 	{
 		[EntitySystem]

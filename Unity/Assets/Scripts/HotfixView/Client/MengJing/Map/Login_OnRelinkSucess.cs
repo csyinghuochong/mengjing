@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class Login_OnRelinkSucess : AEvent<Scene, RelinkSucess>

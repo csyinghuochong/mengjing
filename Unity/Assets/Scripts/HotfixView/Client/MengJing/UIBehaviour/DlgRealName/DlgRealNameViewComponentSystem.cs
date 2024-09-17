@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRealNameViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRealNameViewComponent))]
+	[FriendOfAttribute(typeof(DlgRealNameViewComponent))]
 	public static partial class DlgRealNameViewComponentSystem
 	{
 		[EntitySystem]

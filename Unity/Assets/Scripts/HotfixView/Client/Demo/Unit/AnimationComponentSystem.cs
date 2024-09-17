@@ -1,5 +1,4 @@
-﻿using System;
-using Animancer;
+﻿using Animancer;
 using UnityEngine;
 
 namespace ET.Client

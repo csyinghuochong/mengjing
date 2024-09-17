@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class Skill_OnSkillChainLight : AEvent<Scene, SkillChainLight>
@@ -27,7 +29,7 @@
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.M2C_ChainLightning.SkillID);
                     playEffectBuffData.EffectId = skillConfig.SkillEffectID[0]; //特效相关配置
                     playEffectBuffData.EffectPosition =
-                            new UnityEngine.Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY, args.M2C_ChainLightning.PosZ); //技能目标点
+                            new Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY, args.M2C_ChainLightning.PosZ); //技能目标点
                     playEffectBuffData.TargetAngle = 0; //技能角度
                     playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型
                     playEffectBuffData.InstanceId = target.InstanceId;
@@ -52,7 +54,7 @@
                         SkillConfig skillConfig = SkillConfigCategory.Instance.Get(args.M2C_ChainLightning.SkillID);
                         playEffectBuffData.EffectId = skillConfig.SkillEffectID[0]; //特效相关配置
                         playEffectBuffData.EffectPosition =
-                                new UnityEngine.Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY,
+                                new Vector3(args.M2C_ChainLightning.PosX, args.M2C_ChainLightning.PosY,
                                     args.M2C_ChainLightning.PosZ); //技能目标点
                         playEffectBuffData.TargetAngle = 0; //技能角度
                         playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect; //特效类型

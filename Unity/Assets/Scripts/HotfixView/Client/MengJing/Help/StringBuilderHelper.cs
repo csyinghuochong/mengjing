@@ -29,7 +29,7 @@ namespace ET.Client
             }
 
             string effectNamePath = effectFileName + effectConfig.EffectName;
-            return StringBuilderHelper.GetEffetPath(effectNamePath);
+            return GetEffetPath(effectNamePath);
         }
 
         public static string GetMonsterUnitPath(int modelID)
