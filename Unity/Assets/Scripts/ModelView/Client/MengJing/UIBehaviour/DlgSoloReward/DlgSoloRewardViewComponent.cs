@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSoloReward))]
 	[EnableMethod]
 	public  class DlgSoloRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_Btn_ReturnButton
+		public Button E_Btn_ReturnButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnButton == null )
      			{
-		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Return");
+		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ReturnImage
+		public Image E_Btn_ReturnImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnImage == null )
      			{
-		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Return");
+		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnImage;
      		}
@@ -61,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_CengText
+		public Text E_Text_CengText
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_CengText == null )
      			{
-		    		this.m_E_Text_CengText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Ceng");
+		    		this.m_E_Text_CengText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Ceng");
      			}
      			return this.m_E_Text_CengText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_ReturnTimeText
+		public Text E_Text_ReturnTimeText
      	{
      		get
      		{
@@ -89,7 +89,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_ReturnTimeText == null )
      			{
-		    		this.m_E_Text_ReturnTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_ReturnTime");
+		    		this.m_E_Text_ReturnTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_ReturnTime");
      			}
      			return this.m_E_Text_ReturnTimeText;
      		}
@@ -105,11 +105,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Btn_ReturnButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ReturnImage = null;
+		private Button m_E_Btn_ReturnButton = null;
+		private Image m_E_Btn_ReturnImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Text m_E_Text_CengText = null;
-		private UnityEngine.UI.Text m_E_Text_ReturnTimeText = null;
+		private Text m_E_Text_CengText = null;
+		private Text m_E_Text_ReturnTimeText = null;
 		public Transform uiTransform = null;
 	}
 }

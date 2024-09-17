@@ -1,7 +1,8 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableClass]
@@ -16,7 +17,7 @@ namespace ET.Client
 	
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleProperty : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleProperty : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_RolePropertyTeShuItem>> ScrollItemRolePropertyTeShuItems;
 		public List<ShowPropertyList> ShowPropertyList_Base = new();
@@ -28,7 +29,7 @@ namespace ET.Client
 		public int PointRemain;
 		public bool IsHoldDown;
 		
-		public UnityEngine.RectTransform EG_AttributeNodeRectTransform
+		public RectTransform EG_AttributeNodeRectTransform
      	{
      		get
      		{
@@ -39,13 +40,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_AttributeNodeRectTransform == null )
      			{
-		    		this.m_EG_AttributeNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_AttributeNode");
+		    		this.m_EG_AttributeNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_AttributeNode");
      			}
      			return this.m_EG_AttributeNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PiLaoImgImage
+		public Image E_PiLaoImgImage
      	{
      		get
      		{
@@ -56,13 +57,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PiLaoImgImage == null )
      			{
-		    		this.m_E_PiLaoImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/TiLi/E_PiLaoImg");
+		    		this.m_E_PiLaoImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/TiLi/E_PiLaoImg");
      			}
      			return this.m_E_PiLaoImgImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_PiLaoTextText
+		public Text E_PiLaoTextText
      	{
      		get
      		{
@@ -73,13 +74,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PiLaoTextText == null )
      			{
-		    		this.m_E_PiLaoTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/TiLi/E_PiLaoText");
+		    		this.m_E_PiLaoTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/TiLi/E_PiLaoText");
      			}
      			return this.m_E_PiLaoTextText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_BaoShiDuImgImage
+		public Image E_BaoShiDuImgImage
      	{
      		get
      		{
@@ -90,13 +91,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BaoShiDuImgImage == null )
      			{
-		    		this.m_E_BaoShiDuImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/Satiety/E_BaoShiDuImg");
+		    		this.m_E_BaoShiDuImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/Satiety/E_BaoShiDuImg");
      			}
      			return this.m_E_BaoShiDuImgImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_BaoShiDuTextText
+		public Text E_BaoShiDuTextText
      	{
      		get
      		{
@@ -107,13 +108,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BaoShiDuTextText == null )
      			{
-		    		this.m_E_BaoShiDuTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/Satiety/E_BaoShiDuText");
+		    		this.m_E_BaoShiDuTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_AttributeNode/ProSet/Satiety/E_BaoShiDuText");
      			}
      			return this.m_E_BaoShiDuTextText;
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_BtnItemTypeSetToggleGroup
+		public ToggleGroup E_BtnItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -124,13 +125,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_BtnItemTypeSet");
+		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_BtnItemTypeSet");
      			}
      			return this.m_E_BtnItemTypeSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RolePropertyTeShuItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RolePropertyTeShuItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -141,13 +142,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyTeShuItems");
+		    		this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_RolePropertyTeShuItems");
      			}
      			return this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_AddPointButton
+		public Button E_AddPointButton
      	{
      		get
      		{
@@ -158,13 +159,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddPointButton == null )
      			{
-		    		this.m_E_AddPointButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_AddPoint");
+		    		this.m_E_AddPointButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_AddPoint");
      			}
      			return this.m_E_AddPointButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AddPointImage
+		public Image E_AddPointImage
      	{
      		get
      		{
@@ -175,13 +176,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddPointImage == null )
      			{
-		    		this.m_E_AddPointImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_AddPoint");
+		    		this.m_E_AddPointImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_AttributeNode/E_AddPoint");
      			}
      			return this.m_E_AddPointImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_RoleAddPointRectTransform
+		public RectTransform EG_RoleAddPointRectTransform
      	{
      		get
      		{
@@ -192,13 +193,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_RoleAddPointRectTransform == null )
      			{
-		    		this.m_EG_RoleAddPointRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint");
+		    		this.m_EG_RoleAddPointRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint");
      			}
      			return this.m_EG_RoleAddPointRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Text E_ShengYuNumText
+		public Text E_ShengYuNumText
      	{
      		get
      		{
@@ -209,13 +210,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ShengYuNumText == null )
      			{
-		    		this.m_E_ShengYuNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_ShengYuNum");
+		    		this.m_E_ShengYuNumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_ShengYuNum");
      			}
      			return this.m_E_ShengYuNumText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_AddPointConfirmButton
+		public Button E_AddPointConfirmButton
      	{
      		get
      		{
@@ -226,13 +227,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddPointConfirmButton == null )
      			{
-		    		this.m_E_AddPointConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_AddPointConfirm");
+		    		this.m_E_AddPointConfirmButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_AddPointConfirm");
      			}
      			return this.m_E_AddPointConfirmButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AddPointConfirmImage
+		public Image E_AddPointConfirmImage
      	{
      		get
      		{
@@ -243,13 +244,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddPointConfirmImage == null )
      			{
-		    		this.m_E_AddPointConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_AddPointConfirm");
+		    		this.m_E_AddPointConfirmImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_AddPointConfirm");
      			}
      			return this.m_E_AddPointConfirmImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CloseAddPointButton
+		public Button E_CloseAddPointButton
      	{
      		get
      		{
@@ -260,13 +261,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseAddPointButton == null )
      			{
-		    		this.m_E_CloseAddPointButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_CloseAddPoint");
+		    		this.m_E_CloseAddPointButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_CloseAddPoint");
      			}
      			return this.m_E_CloseAddPointButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseAddPointImage
+		public Image E_CloseAddPointImage
      	{
      		get
      		{
@@ -277,13 +278,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseAddPointImage == null )
      			{
-		    		this.m_E_CloseAddPointImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_CloseAddPoint");
+		    		this.m_E_CloseAddPointImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_CloseAddPoint");
      			}
      			return this.m_E_CloseAddPointImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Value_LiLiangText
+		public Text E_Value_LiLiangText
      	{
      		get
      		{
@@ -294,13 +295,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Value_LiLiangText == null )
      			{
-		    		this.m_E_Value_LiLiangText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Value_LiLiang");
+		    		this.m_E_Value_LiLiangText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Value_LiLiang");
      			}
      			return this.m_E_Value_LiLiangText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Add_LiLiangButton
+		public Button E_Add_LiLiangButton
      	{
      		get
      		{
@@ -311,13 +312,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_LiLiangButton == null )
      			{
-		    		this.m_E_Add_LiLiangButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
+		    		this.m_E_Add_LiLiangButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
      			}
      			return this.m_E_Add_LiLiangButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Add_LiLiangImage
+		public Image E_Add_LiLiangImage
      	{
      		get
      		{
@@ -328,13 +329,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_LiLiangImage == null )
      			{
-		    		this.m_E_Add_LiLiangImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
+		    		this.m_E_Add_LiLiangImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
      			}
      			return this.m_E_Add_LiLiangImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Add_LiLiangEventTrigger
+		public EventTrigger E_Add_LiLiangEventTrigger
      	{
      		get
      		{
@@ -345,13 +346,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_LiLiangEventTrigger == null )
      			{
-		    		this.m_E_Add_LiLiangEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
+		    		this.m_E_Add_LiLiangEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Add_LiLiang");
      			}
      			return this.m_E_Add_LiLiangEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Cost_LiLiangButton
+		public Button E_Cost_LiLiangButton
      	{
      		get
      		{
@@ -362,13 +363,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_LiLiangButton == null )
      			{
-		    		this.m_E_Cost_LiLiangButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
+		    		this.m_E_Cost_LiLiangButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
      			}
      			return this.m_E_Cost_LiLiangButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Cost_LiLiangImage
+		public Image E_Cost_LiLiangImage
      	{
      		get
      		{
@@ -379,13 +380,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_LiLiangImage == null )
      			{
-		    		this.m_E_Cost_LiLiangImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
+		    		this.m_E_Cost_LiLiangImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
      			}
      			return this.m_E_Cost_LiLiangImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Cost_LiLiangEventTrigger
+		public EventTrigger E_Cost_LiLiangEventTrigger
      	{
      		get
      		{
@@ -396,13 +397,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_LiLiangEventTrigger == null )
      			{
-		    		this.m_E_Cost_LiLiangEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
+		    		this.m_E_Cost_LiLiangEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_LiLiang/E_Cost_LiLiang");
      			}
      			return this.m_E_Cost_LiLiangEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Value_ZhiLiText
+		public Text E_Value_ZhiLiText
      	{
      		get
      		{
@@ -413,13 +414,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Value_ZhiLiText == null )
      			{
-		    		this.m_E_Value_ZhiLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Value_ZhiLi");
+		    		this.m_E_Value_ZhiLiText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Value_ZhiLi");
      			}
      			return this.m_E_Value_ZhiLiText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Add_ZhiLiButton
+		public Button E_Add_ZhiLiButton
      	{
      		get
      		{
@@ -430,13 +431,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_ZhiLiButton == null )
      			{
-		    		this.m_E_Add_ZhiLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
+		    		this.m_E_Add_ZhiLiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
      			}
      			return this.m_E_Add_ZhiLiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Add_ZhiLiImage
+		public Image E_Add_ZhiLiImage
      	{
      		get
      		{
@@ -447,13 +448,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_ZhiLiImage == null )
      			{
-		    		this.m_E_Add_ZhiLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
+		    		this.m_E_Add_ZhiLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
      			}
      			return this.m_E_Add_ZhiLiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Add_ZhiLiEventTrigger
+		public EventTrigger E_Add_ZhiLiEventTrigger
      	{
      		get
      		{
@@ -464,13 +465,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_ZhiLiEventTrigger == null )
      			{
-		    		this.m_E_Add_ZhiLiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
+		    		this.m_E_Add_ZhiLiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Add_ZhiLi");
      			}
      			return this.m_E_Add_ZhiLiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Cost_ZhiLiButton
+		public Button E_Cost_ZhiLiButton
      	{
      		get
      		{
@@ -481,13 +482,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_ZhiLiButton == null )
      			{
-		    		this.m_E_Cost_ZhiLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
+		    		this.m_E_Cost_ZhiLiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
      			}
      			return this.m_E_Cost_ZhiLiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Cost_ZhiLiImage
+		public Image E_Cost_ZhiLiImage
      	{
      		get
      		{
@@ -498,13 +499,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_ZhiLiImage == null )
      			{
-		    		this.m_E_Cost_ZhiLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
+		    		this.m_E_Cost_ZhiLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
      			}
      			return this.m_E_Cost_ZhiLiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Cost_ZhiLiEventTrigger
+		public EventTrigger E_Cost_ZhiLiEventTrigger
      	{
      		get
      		{
@@ -515,13 +516,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_ZhiLiEventTrigger == null )
      			{
-		    		this.m_E_Cost_ZhiLiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
+		    		this.m_E_Cost_ZhiLiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_ZhiLi/E_Cost_ZhiLi");
      			}
      			return this.m_E_Cost_ZhiLiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Value_TiZhiText
+		public Text E_Value_TiZhiText
      	{
      		get
      		{
@@ -532,13 +533,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Value_TiZhiText == null )
      			{
-		    		this.m_E_Value_TiZhiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Value_TiZhi");
+		    		this.m_E_Value_TiZhiText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Value_TiZhi");
      			}
      			return this.m_E_Value_TiZhiText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Add_TiZhiButton
+		public Button E_Add_TiZhiButton
      	{
      		get
      		{
@@ -549,13 +550,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_TiZhiButton == null )
      			{
-		    		this.m_E_Add_TiZhiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
+		    		this.m_E_Add_TiZhiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
      			}
      			return this.m_E_Add_TiZhiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Add_TiZhiImage
+		public Image E_Add_TiZhiImage
      	{
      		get
      		{
@@ -566,13 +567,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_TiZhiImage == null )
      			{
-		    		this.m_E_Add_TiZhiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
+		    		this.m_E_Add_TiZhiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
      			}
      			return this.m_E_Add_TiZhiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Add_TiZhiEventTrigger
+		public EventTrigger E_Add_TiZhiEventTrigger
      	{
      		get
      		{
@@ -583,13 +584,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_TiZhiEventTrigger == null )
      			{
-		    		this.m_E_Add_TiZhiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
+		    		this.m_E_Add_TiZhiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Add_TiZhi");
      			}
      			return this.m_E_Add_TiZhiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Cost_TiZhiButton
+		public Button E_Cost_TiZhiButton
      	{
      		get
      		{
@@ -600,13 +601,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_TiZhiButton == null )
      			{
-		    		this.m_E_Cost_TiZhiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
+		    		this.m_E_Cost_TiZhiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
      			}
      			return this.m_E_Cost_TiZhiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Cost_TiZhiImage
+		public Image E_Cost_TiZhiImage
      	{
      		get
      		{
@@ -617,13 +618,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_TiZhiImage == null )
      			{
-		    		this.m_E_Cost_TiZhiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
+		    		this.m_E_Cost_TiZhiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
      			}
      			return this.m_E_Cost_TiZhiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Cost_TiZhiEventTrigger
+		public EventTrigger E_Cost_TiZhiEventTrigger
      	{
      		get
      		{
@@ -634,13 +635,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_TiZhiEventTrigger == null )
      			{
-		    		this.m_E_Cost_TiZhiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
+		    		this.m_E_Cost_TiZhiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_TiZhi/E_Cost_TiZhi");
      			}
      			return this.m_E_Cost_TiZhiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Value_NaiLiText
+		public Text E_Value_NaiLiText
      	{
      		get
      		{
@@ -651,13 +652,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Value_NaiLiText == null )
      			{
-		    		this.m_E_Value_NaiLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Value_NaiLi");
+		    		this.m_E_Value_NaiLiText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Value_NaiLi");
      			}
      			return this.m_E_Value_NaiLiText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Add_NaiLiButton
+		public Button E_Add_NaiLiButton
      	{
      		get
      		{
@@ -668,13 +669,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_NaiLiButton == null )
      			{
-		    		this.m_E_Add_NaiLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
+		    		this.m_E_Add_NaiLiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
      			}
      			return this.m_E_Add_NaiLiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Add_NaiLiImage
+		public Image E_Add_NaiLiImage
      	{
      		get
      		{
@@ -685,13 +686,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_NaiLiImage == null )
      			{
-		    		this.m_E_Add_NaiLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
+		    		this.m_E_Add_NaiLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
      			}
      			return this.m_E_Add_NaiLiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Add_NaiLiEventTrigger
+		public EventTrigger E_Add_NaiLiEventTrigger
      	{
      		get
      		{
@@ -702,13 +703,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_NaiLiEventTrigger == null )
      			{
-		    		this.m_E_Add_NaiLiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
+		    		this.m_E_Add_NaiLiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Add_NaiLi");
      			}
      			return this.m_E_Add_NaiLiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Cost_NaiLiButton
+		public Button E_Cost_NaiLiButton
      	{
      		get
      		{
@@ -719,13 +720,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_NaiLiButton == null )
      			{
-		    		this.m_E_Cost_NaiLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
+		    		this.m_E_Cost_NaiLiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
      			}
      			return this.m_E_Cost_NaiLiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Cost_NaiLiImage
+		public Image E_Cost_NaiLiImage
      	{
      		get
      		{
@@ -736,13 +737,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_NaiLiImage == null )
      			{
-		    		this.m_E_Cost_NaiLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
+		    		this.m_E_Cost_NaiLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
      			}
      			return this.m_E_Cost_NaiLiImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Cost_NaiLiEventTrigger
+		public EventTrigger E_Cost_NaiLiEventTrigger
      	{
      		get
      		{
@@ -753,13 +754,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_NaiLiEventTrigger == null )
      			{
-		    		this.m_E_Cost_NaiLiEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
+		    		this.m_E_Cost_NaiLiEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_NaiLi/E_Cost_NaiLi");
      			}
      			return this.m_E_Cost_NaiLiEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Value_MingJieText
+		public Text E_Value_MingJieText
      	{
      		get
      		{
@@ -770,13 +771,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Value_MingJieText == null )
      			{
-		    		this.m_E_Value_MingJieText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Value_MingJie");
+		    		this.m_E_Value_MingJieText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Value_MingJie");
      			}
      			return this.m_E_Value_MingJieText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Add_MingJieButton
+		public Button E_Add_MingJieButton
      	{
      		get
      		{
@@ -787,13 +788,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_MingJieButton == null )
      			{
-		    		this.m_E_Add_MingJieButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
+		    		this.m_E_Add_MingJieButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
      			}
      			return this.m_E_Add_MingJieButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Add_MingJieImage
+		public Image E_Add_MingJieImage
      	{
      		get
      		{
@@ -804,13 +805,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_MingJieImage == null )
      			{
-		    		this.m_E_Add_MingJieImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
+		    		this.m_E_Add_MingJieImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
      			}
      			return this.m_E_Add_MingJieImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Add_MingJieEventTrigger
+		public EventTrigger E_Add_MingJieEventTrigger
      	{
      		get
      		{
@@ -821,13 +822,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Add_MingJieEventTrigger == null )
      			{
-		    		this.m_E_Add_MingJieEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
+		    		this.m_E_Add_MingJieEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Add_MingJie");
      			}
      			return this.m_E_Add_MingJieEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Cost_MingJieButton
+		public Button E_Cost_MingJieButton
      	{
      		get
      		{
@@ -838,13 +839,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_MingJieButton == null )
      			{
-		    		this.m_E_Cost_MingJieButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
+		    		this.m_E_Cost_MingJieButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
      			}
      			return this.m_E_Cost_MingJieButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Cost_MingJieImage
+		public Image E_Cost_MingJieImage
      	{
      		get
      		{
@@ -855,13 +856,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_MingJieImage == null )
      			{
-		    		this.m_E_Cost_MingJieImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
+		    		this.m_E_Cost_MingJieImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
      			}
      			return this.m_E_Cost_MingJieImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Cost_MingJieEventTrigger
+		public EventTrigger E_Cost_MingJieEventTrigger
      	{
      		get
      		{
@@ -872,13 +873,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Cost_MingJieEventTrigger == null )
      			{
-		    		this.m_E_Cost_MingJieEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
+		    		this.m_E_Cost_MingJieEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/AddProperty_MingJie/E_Cost_MingJie");
      			}
      			return this.m_E_Cost_MingJieEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_RecommendAddPointButton
+		public Button E_RecommendAddPointButton
      	{
      		get
      		{
@@ -889,13 +890,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RecommendAddPointButton == null )
      			{
-		    		this.m_E_RecommendAddPointButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_RecommendAddPoint");
+		    		this.m_E_RecommendAddPointButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_RecommendAddPoint");
      			}
      			return this.m_E_RecommendAddPointButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_RecommendAddPointImage
+		public Image E_RecommendAddPointImage
      	{
      		get
      		{
@@ -906,7 +907,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RecommendAddPointImage == null )
      			{
-		    		this.m_E_RecommendAddPointImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_RecommendAddPoint");
+		    		this.m_E_RecommendAddPointImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_RoleAddPoint/E_RecommendAddPoint");
      			}
      			return this.m_E_RecommendAddPointImage;
      		}
@@ -981,58 +982,58 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_AttributeNodeRectTransform = null;
-		private UnityEngine.UI.Image m_E_PiLaoImgImage = null;
-		private UnityEngine.UI.Text m_E_PiLaoTextText = null;
-		private UnityEngine.UI.Image m_E_BaoShiDuImgImage = null;
-		private UnityEngine.UI.Text m_E_BaoShiDuTextText = null;
-		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_AddPointButton = null;
-		private UnityEngine.UI.Image m_E_AddPointImage = null;
-		private UnityEngine.RectTransform m_EG_RoleAddPointRectTransform = null;
-		private UnityEngine.UI.Text m_E_ShengYuNumText = null;
-		private UnityEngine.UI.Button m_E_AddPointConfirmButton = null;
-		private UnityEngine.UI.Image m_E_AddPointConfirmImage = null;
-		private UnityEngine.UI.Button m_E_CloseAddPointButton = null;
-		private UnityEngine.UI.Image m_E_CloseAddPointImage = null;
-		private UnityEngine.UI.Text m_E_Value_LiLiangText = null;
-		private UnityEngine.UI.Button m_E_Add_LiLiangButton = null;
-		private UnityEngine.UI.Image m_E_Add_LiLiangImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Add_LiLiangEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Cost_LiLiangButton = null;
-		private UnityEngine.UI.Image m_E_Cost_LiLiangImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Cost_LiLiangEventTrigger = null;
-		private UnityEngine.UI.Text m_E_Value_ZhiLiText = null;
-		private UnityEngine.UI.Button m_E_Add_ZhiLiButton = null;
-		private UnityEngine.UI.Image m_E_Add_ZhiLiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Add_ZhiLiEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Cost_ZhiLiButton = null;
-		private UnityEngine.UI.Image m_E_Cost_ZhiLiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Cost_ZhiLiEventTrigger = null;
-		private UnityEngine.UI.Text m_E_Value_TiZhiText = null;
-		private UnityEngine.UI.Button m_E_Add_TiZhiButton = null;
-		private UnityEngine.UI.Image m_E_Add_TiZhiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Add_TiZhiEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Cost_TiZhiButton = null;
-		private UnityEngine.UI.Image m_E_Cost_TiZhiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Cost_TiZhiEventTrigger = null;
-		private UnityEngine.UI.Text m_E_Value_NaiLiText = null;
-		private UnityEngine.UI.Button m_E_Add_NaiLiButton = null;
-		private UnityEngine.UI.Image m_E_Add_NaiLiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Add_NaiLiEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Cost_NaiLiButton = null;
-		private UnityEngine.UI.Image m_E_Cost_NaiLiImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Cost_NaiLiEventTrigger = null;
-		private UnityEngine.UI.Text m_E_Value_MingJieText = null;
-		private UnityEngine.UI.Button m_E_Add_MingJieButton = null;
-		private UnityEngine.UI.Image m_E_Add_MingJieImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Add_MingJieEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Cost_MingJieButton = null;
-		private UnityEngine.UI.Image m_E_Cost_MingJieImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Cost_MingJieEventTrigger = null;
-		private UnityEngine.UI.Button m_E_RecommendAddPointButton = null;
-		private UnityEngine.UI.Image m_E_RecommendAddPointImage = null;
+		private RectTransform m_EG_AttributeNodeRectTransform = null;
+		private Image m_E_PiLaoImgImage = null;
+		private Text m_E_PiLaoTextText = null;
+		private Image m_E_BaoShiDuImgImage = null;
+		private Text m_E_BaoShiDuTextText = null;
+		private ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
+		private LoopVerticalScrollRect m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
+		private Button m_E_AddPointButton = null;
+		private Image m_E_AddPointImage = null;
+		private RectTransform m_EG_RoleAddPointRectTransform = null;
+		private Text m_E_ShengYuNumText = null;
+		private Button m_E_AddPointConfirmButton = null;
+		private Image m_E_AddPointConfirmImage = null;
+		private Button m_E_CloseAddPointButton = null;
+		private Image m_E_CloseAddPointImage = null;
+		private Text m_E_Value_LiLiangText = null;
+		private Button m_E_Add_LiLiangButton = null;
+		private Image m_E_Add_LiLiangImage = null;
+		private EventTrigger m_E_Add_LiLiangEventTrigger = null;
+		private Button m_E_Cost_LiLiangButton = null;
+		private Image m_E_Cost_LiLiangImage = null;
+		private EventTrigger m_E_Cost_LiLiangEventTrigger = null;
+		private Text m_E_Value_ZhiLiText = null;
+		private Button m_E_Add_ZhiLiButton = null;
+		private Image m_E_Add_ZhiLiImage = null;
+		private EventTrigger m_E_Add_ZhiLiEventTrigger = null;
+		private Button m_E_Cost_ZhiLiButton = null;
+		private Image m_E_Cost_ZhiLiImage = null;
+		private EventTrigger m_E_Cost_ZhiLiEventTrigger = null;
+		private Text m_E_Value_TiZhiText = null;
+		private Button m_E_Add_TiZhiButton = null;
+		private Image m_E_Add_TiZhiImage = null;
+		private EventTrigger m_E_Add_TiZhiEventTrigger = null;
+		private Button m_E_Cost_TiZhiButton = null;
+		private Image m_E_Cost_TiZhiImage = null;
+		private EventTrigger m_E_Cost_TiZhiEventTrigger = null;
+		private Text m_E_Value_NaiLiText = null;
+		private Button m_E_Add_NaiLiButton = null;
+		private Image m_E_Add_NaiLiImage = null;
+		private EventTrigger m_E_Add_NaiLiEventTrigger = null;
+		private Button m_E_Cost_NaiLiButton = null;
+		private Image m_E_Cost_NaiLiImage = null;
+		private EventTrigger m_E_Cost_NaiLiEventTrigger = null;
+		private Text m_E_Value_MingJieText = null;
+		private Button m_E_Add_MingJieButton = null;
+		private Image m_E_Add_MingJieImage = null;
+		private EventTrigger m_E_Add_MingJieEventTrigger = null;
+		private Button m_E_Cost_MingJieButton = null;
+		private Image m_E_Cost_MingJieImage = null;
+		private EventTrigger m_E_Cost_MingJieEventTrigger = null;
+		private Button m_E_RecommendAddPointButton = null;
+		private Image m_E_RecommendAddPointImage = null;
 		public Transform uiTransform = null;
 	}
 }

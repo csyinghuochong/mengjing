@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Animancer;
+﻿using Animancer;
 
 namespace ET.Client
 {

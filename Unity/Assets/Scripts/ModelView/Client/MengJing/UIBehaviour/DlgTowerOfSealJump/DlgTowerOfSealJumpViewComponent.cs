@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTowerOfSealJump))]
 	[EnableMethod]
 	public  class DlgTowerOfSealJumpViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_TipTextText
+		public Text E_TipTextText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TipTextText == null )
      			{
-		    		this.m_E_TipTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"CostPanel/E_TipText");
+		    		this.m_E_TipTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"CostPanel/E_TipText");
      			}
      			return this.m_E_TipTextText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_NoBtnButton
+		public Button E_NoBtnButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NoBtnButton == null )
      			{
-		    		this.m_E_NoBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"CostPanel/E_NoBtn");
+		    		this.m_E_NoBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"CostPanel/E_NoBtn");
      			}
      			return this.m_E_NoBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_NoBtnImage
+		public Image E_NoBtnImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NoBtnImage == null )
      			{
-		    		this.m_E_NoBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"CostPanel/E_NoBtn");
+		    		this.m_E_NoBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostPanel/E_NoBtn");
      			}
      			return this.m_E_NoBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_YesBtnButton
+		public Button E_YesBtnButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YesBtnButton == null )
      			{
-		    		this.m_E_YesBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"CostPanel/E_YesBtn");
+		    		this.m_E_YesBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"CostPanel/E_YesBtn");
      			}
      			return this.m_E_YesBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_YesBtnImage
+		public Image E_YesBtnImage
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_YesBtnImage == null )
      			{
-		    		this.m_E_YesBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"CostPanel/E_YesBtn");
+		    		this.m_E_YesBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostPanel/E_YesBtn");
      			}
      			return this.m_E_YesBtnImage;
      		}
@@ -102,11 +102,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_TipTextText = null;
-		private UnityEngine.UI.Button m_E_NoBtnButton = null;
-		private UnityEngine.UI.Image m_E_NoBtnImage = null;
-		private UnityEngine.UI.Button m_E_YesBtnButton = null;
-		private UnityEngine.UI.Image m_E_YesBtnImage = null;
+		private Text m_E_TipTextText = null;
+		private Button m_E_NoBtnButton = null;
+		private Image m_E_NoBtnImage = null;
+		private Button m_E_YesBtnButton = null;
+		private Image m_E_YesBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

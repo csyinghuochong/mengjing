@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgFriend))]
 	[EnableMethod]
 	public  class DlgFriendViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
+		public RectTransform EG_SubViewNodeRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewNodeRectTransform == null )
      			{
-		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
+		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
      			}
      			return this.m_EG_SubViewNodeRectTransform;
      		}
@@ -124,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -135,13 +135,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_0Toggle
+		public Toggle E_Type_0Toggle
      	{
      		get
      		{
@@ -152,13 +152,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_0Toggle == null )
      			{
-		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
+		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
      			}
      			return this.m_E_Type_0Toggle;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_1Toggle
+		public Toggle E_Type_1Toggle
      	{
      		get
      		{
@@ -169,7 +169,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_1Toggle == null )
      			{
-		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_1");
+		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_1");
      			}
      			return this.m_E_Type_1Toggle;
      		}
@@ -189,15 +189,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
+		private RectTransform m_EG_SubViewNodeRectTransform = null;
 		private EntityRef<ES_FriendList> m_es_friendlist = null;
 		private EntityRef<ES_FriendApply> m_es_friendapply = null;
 		private EntityRef<ES_FriendBlack> m_es_friendblack = null;
 		private EntityRef<ES_UnionShow> m_es_unionshow = null;
 		private EntityRef<ES_UnionMy> m_es_unionmy = null;
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private Toggle m_E_Type_0Toggle = null;
+		private Toggle m_E_Type_1Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

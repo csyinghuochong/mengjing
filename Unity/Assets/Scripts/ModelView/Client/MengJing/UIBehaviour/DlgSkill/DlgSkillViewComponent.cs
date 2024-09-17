@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSkill))]
 	[EnableMethod]
 	public  class DlgSkillViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
+		public RectTransform EG_SubViewNodeRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewNodeRectTransform == null )
      			{
-		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
+		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
      			}
      			return this.m_EG_SubViewNodeRectTransform;
      		}
@@ -124,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -135,13 +135,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_0Toggle
+		public Toggle E_Type_0Toggle
      	{
      		get
      		{
@@ -152,7 +152,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_0Toggle == null )
      			{
-		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
+		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
      			}
      			return this.m_E_Type_0Toggle;
      		}
@@ -171,14 +171,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
+		private RectTransform m_EG_SubViewNodeRectTransform = null;
 		private EntityRef<ES_SkillLearn> m_es_skilllearn = null;
 		private EntityRef<ES_SkillSet> m_es_skillset = null;
 		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
 		private EntityRef<ES_SkillMake> m_es_skillmake = null;
 		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private Toggle m_E_Type_0Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

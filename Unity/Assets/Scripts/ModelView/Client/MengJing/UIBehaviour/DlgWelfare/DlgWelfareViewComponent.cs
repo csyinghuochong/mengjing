@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgWelfare))]
 	[EnableMethod]
 	public  class DlgWelfareViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_SubViewRectTransform
+		public RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -124,7 +124,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -135,13 +135,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_0Toggle
+		public Toggle E_Type_0Toggle
      	{
      		get
      		{
@@ -152,13 +152,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_0Toggle == null )
      			{
-		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
+		    		this.m_E_Type_0Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_0");
      			}
      			return this.m_E_Type_0Toggle;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_1Toggle
+		public Toggle E_Type_1Toggle
      	{
      		get
      		{
@@ -169,13 +169,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_1Toggle == null )
      			{
-		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_1");
+		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_1");
      			}
      			return this.m_E_Type_1Toggle;
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_2Toggle
+		public Toggle E_Type_2Toggle
      	{
      		get
      		{
@@ -186,7 +186,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type_2Toggle == null )
      			{
-		    		this.m_E_Type_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_2");
+		    		this.m_E_Type_2Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type_2");
      			}
      			return this.m_E_Type_2Toggle;
      		}
@@ -207,16 +207,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ActivityLogin> m_es_activitylogin = null;
 		private EntityRef<ES_WelfareTask> m_es_welfaretask = null;
 		private EntityRef<ES_WelfareDraw> m_es_welfaredraw = null;
 		private EntityRef<ES_WelfareInvest> m_es_welfareinvest = null;
 		private EntityRef<ES_WelfareDraw2> m_es_welfaredraw2 = null;
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Type_2Toggle = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private Toggle m_E_Type_0Toggle = null;
+		private Toggle m_E_Type_1Toggle = null;
+		private Toggle m_E_Type_2Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

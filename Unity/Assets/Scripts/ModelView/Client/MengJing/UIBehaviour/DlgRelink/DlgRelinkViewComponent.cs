@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRelink))]
 	[EnableMethod]
 	public  class DlgRelinkViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Image E_Img_LoadingImage
+		public Image E_Img_LoadingImage
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_LoadingImage == null )
      			{
-		    		this.m_E_Img_LoadingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Loading");
+		    		this.m_E_Img_LoadingImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Loading");
      			}
      			return this.m_E_Img_LoadingImage;
      		}
@@ -30,7 +30,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_Img_LoadingImage = null;
+		private Image m_E_Img_LoadingImage = null;
 		public Transform uiTransform = null;
 	}
 }
