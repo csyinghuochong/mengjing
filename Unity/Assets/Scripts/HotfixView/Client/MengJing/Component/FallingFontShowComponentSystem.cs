@@ -74,13 +74,18 @@ namespace ET.Client
                 case FallingFontExecuteType.Type_0:
                 {
                     self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
-                    self.ObjFlyText.transform.localPosition = new Vector3(Random.value * 150f - 50f, 0f, 0);
+
+                    float randValue_x = Random.value * 150f - 75f;
+                    if (self.FontType == FallingFontType.Self) {
+                        randValue_x = 0;
+                    }
+                    self.ObjFlyText.transform.localPosition = new Vector3(randValue_x, 0f, 0);
                     break;
                 }
                 case FallingFontExecuteType.Type_1:
                 {
                     self.GameObject.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0f, 80f, 0);
-                    self.ObjFlyText.transform.localPosition = new Vector3(- 200f, -50f, 0);
+                    self.ObjFlyText.transform.localPosition = new Vector3(-350f, -200f, 0);
                     break;
                 }
                 case FallingFontExecuteType.Type_2:
@@ -153,7 +158,7 @@ namespace ET.Client
                             self.Fly_Y_Sum += Time.deltaTime * 100f;
                         }
 
-                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(self.ObjFlyText.transform.localPosition.x, 40f + self.Fly_Y_Sum, 0);
+                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
                     }
 
                     return self.DamgeFlyTimeSum >= 0.6f || !self.HeadBar.activeSelf;
@@ -163,18 +168,18 @@ namespace ET.Client
                     self.DamgeFlyTimeSum = self.DamgeFlyTimeSum + Time.deltaTime;
                     if (self.Transform != null)
                     {
-                        if (self.DamgeFlyTimeSum < 0.2f)
+                        if (self.DamgeFlyTimeSum < 0.15f)
                         {
-                            //self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1.5f, 1.5f, 1.5f);
+                            //self.Transform.localScale = self.DamgeFlyTimeSum < 0.03f ? new Vector3(1f, 1f, 1f) : new Vector3(1.2f, 1.2f, 1.2f);
                             //self.Fly_Y_Sum += Time.deltaTime * 200f;
                         }
                         else
                         {
                             //self.Transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                            self.Fly_Y_Sum += Time.deltaTime * 100f;
+                            self.Fly_Y_Sum += Time.deltaTime * 250f;
                         }
 
-                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(self.ObjFlyText.transform.localPosition.x, 40f + self.Fly_Y_Sum, 0);
+                        self.Transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 40f + self.Fly_Y_Sum, 0);
                     }
 
                     return self.DamgeFlyTimeSum >= 0.8f || !self.HeadBar.activeSelf;
