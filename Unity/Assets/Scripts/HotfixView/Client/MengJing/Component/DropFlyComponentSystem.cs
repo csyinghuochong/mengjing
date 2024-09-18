@@ -61,13 +61,15 @@ namespace ET.Client
 
             // 提前获取，消息返回后Drop会销毁
             Scene root = self.Root();
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.DropInfo.ItemID);
+            
+            int itemId = self.DropInfo.ItemID;
+            int itemNum = self.DropInfo.ItemNum;
 
             int error = await MapHelper.SendShiquItem(self.Root(), new() { self.DropInfo });
 
             if (error == ErrorCode.ERR_Success)
             {
-                EventSystem.Instance.Publish(root, new GetDrop() { ShowText = itemConfig.ItemName });
+                EventSystem.Instance.Publish(root, new GetDrop() { ItemId = itemId, ItemNum = itemNum });
             }
 
             bagComponentC.RealAddItem++;

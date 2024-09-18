@@ -21,8 +21,13 @@ namespace ET.Client
             if (heroHeadBarComponent != null)
             {
                 // 获取掉落物品、金币
-                scene.GetComponent<FallingFontComponent>()
-                        ?.Play(heroHeadBarComponent.GameObject, unit, args.ShowText, FallingFontType.Drop_Item, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_1);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(args.ItemId);
+                using (zstring.Block())
+                {
+                    scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
+                        zstring.Format("{0}x{1}", itemConfig.ItemName, args.ItemNum), FallingFontType.Drop_Item, Vector3.one, BloodTextLayer.Layer_1,
+                        FallingFontExecuteType.Type_1);
+                }
             }
 
             await ETTask.CompletedTask;
@@ -48,7 +53,8 @@ namespace ET.Client
                 {
                     // 获得经验
                     scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("经验+ {0}", args.ChangeValue), FallingFontType.Drop_Exp, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_1);
+                        zstring.Format("经验+ {0}", args.ChangeValue), FallingFontType.Drop_Exp, Vector3.one, BloodTextLayer.Layer_1,
+                        FallingFontExecuteType.Type_1);
                 }
             }
 
@@ -74,7 +80,8 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("升到{0}级", args.UpdateValue), FallingFontType.UpLv, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_2);
+                        zstring.Format("升到{0}级", args.UpdateValue), FallingFontType.UpLv, Vector3.one, BloodTextLayer.Layer_1,
+                        FallingFontExecuteType.Type_2);
                 }
             }
 
@@ -101,7 +108,8 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("接取任务：{0}", taskConfig.TaskName), FallingFontType.TaskGet, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_3);
+                        zstring.Format("接取任务：{0}", taskConfig.TaskName), FallingFontType.TaskGet, Vector3.one, BloodTextLayer.Layer_1,
+                        FallingFontExecuteType.Type_3);
                 }
             }
 
@@ -128,7 +136,8 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
-                        zstring.Format("完成任务：{0}", taskConfig.TaskName), FallingFontType.TaskComplete, Vector3.one,BloodTextLayer.Layer_1,FallingFontExecuteType.Type_2);
+                        zstring.Format("完成任务：{0}", taskConfig.TaskName), FallingFontType.TaskComplete, Vector3.one, BloodTextLayer.Layer_1,
+                        FallingFontExecuteType.Type_2);
                 }
             }
 
@@ -200,7 +209,8 @@ namespace ET.Client
             }
 
             // buff
-            scene.GetComponent<FallingFontComponent>()?.Play(HpGameObject, args.Unit, showText, FallingFontType.BuffAdd, Vector3.one,BloodTextLayer.Layer_0,FallingFontExecuteType.Type_0);
+            scene.GetComponent<FallingFontComponent>()?.Play(HpGameObject, args.Unit, showText, FallingFontType.BuffAdd, Vector3.one,
+                BloodTextLayer.Layer_0, FallingFontExecuteType.Type_0);
 
             await ETTask.CompletedTask;
         }

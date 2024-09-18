@@ -576,6 +576,7 @@ namespace ET.Client
 
     public struct GetDrop
     {
-        public string ShowText;
+        public int ItemId;
+        public int ItemNum;
     }
 }
