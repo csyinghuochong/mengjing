@@ -2420,6 +2420,21 @@ message M2C_RolePetFight // ILocationResponse
 	int32 Error = 92;
 }
 
+//ResponseType M2C_PetFightSwitch
+//宠物切换出战
+message C2M_PetFightSwitch // ILocationRequest
+{
+	int32 RpcId = 90;  
+	int32 PetFightIndex = 1;  //0玩家自身  123对应的宠物
+}
+
+message M2C_PetFightSwitch // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
 //ResponseType M2C_RolePetUpStar
 //宠物合成
 message C2M_RolePetUpStar // ILocationRequest

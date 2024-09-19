@@ -347,7 +347,7 @@ namespace ET.Client
 
             return response.Error;
         }
-
+        
         public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet request = C2M_RolePetFormationSet.Create();
