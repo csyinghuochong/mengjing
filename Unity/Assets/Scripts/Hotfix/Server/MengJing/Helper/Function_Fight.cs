@@ -2054,6 +2054,11 @@ namespace ET.Server
              for ( int unionattri = 0;  unionattri < unionAttributes.Count; unionattri++ )
              {
                  int unionattriid = numericComponent.GetAsInt(unionAttributes[unionattri]);
+                 if (unionattriid == 0)
+                 {
+                     continue;
+                 }
+
                  PublicQiangHuaConfig publicQiangHuaConfig_2 = PublicQiangHuaConfigCategory.Instance.Get(unionattriid);
                  List<PropertyValue>  publicqianghuaProList_2 = new List<PropertyValue>();
                  NumericHelp.GetProList(publicQiangHuaConfig_2.EquipPropreAdd, publicqianghuaProList_2);
