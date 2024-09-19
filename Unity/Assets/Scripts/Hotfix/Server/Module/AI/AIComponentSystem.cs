@@ -60,7 +60,6 @@ namespace ET
 
             foreach (AIConfig aiConfig in oneAI.Values)
             {
-
                 AAIHandler aaiHandler = AIDispatcherComponent.Instance.Get(aiConfig.Name);
 
                 if (aaiHandler == null)

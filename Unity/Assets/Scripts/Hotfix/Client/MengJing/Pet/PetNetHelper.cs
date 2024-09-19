@@ -42,6 +42,20 @@ namespace ET.Client
             M2C_PetFightSwitch m2CPetFightSwitch =   (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
             return m2CPetFightSwitch.Error;
         }
+        
+        /// <summary>
+        /// 释放宠物技能
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="petId"></param>
+        /// <returns></returns>
+        public static async ETTask<int> RequestPetSkillCmd(Scene root, long petId)
+        {
+            C2M_PetSkillCmd c2MPetSkillCmd = C2M_PetSkillCmd.Create();
+            c2MPetSkillCmd.PetId = petId;
+            M2C_PetSkillCmd m2CPetFightSwitch =   (M2C_PetSkillCmd)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetSkillCmd);
+            return m2CPetFightSwitch.Error;
+        }
 
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
