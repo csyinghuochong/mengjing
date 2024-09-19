@@ -54,8 +54,5 @@ namespace ET.Server
         public long AIDelay;
 
         public List<float3> TargetPoint  { get; set; }= new List<float3>();
-        
-
-        //public PetComponentServer LocalDungeonUnitPetComponent { get; set; }
     }
 }
