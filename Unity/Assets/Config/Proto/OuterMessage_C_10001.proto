@@ -2435,6 +2435,35 @@ message M2C_PetFightSwitch // ILocationResponse
 	int32 Error = 92;
 }
 
+message C2M_PetPathfindingResult // ILocationMessage
+{
+	int32 RpcId = 1;
+	Unity.Mathematics.float3 Position = 3;
+	int64 PetId = 10;
+}
+
+//ResponseType M2C_PetSkillCmd
+message C2M_PetSkillCmd // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SkillID = 1;
+	int64 TargetID = 2;
+	int32 TargetAngle = 3;
+	float TargetDistance = 4;
+	float SingValue = 7;
+	int64 PetId = 10;
+}
+
+message M2C_PetSkillCmd // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 CDEndTime = 1;
+	int64 PublicCDTime = 2;
+}
+
 //ResponseType M2C_RolePetUpStar
 //宠物合成
 message C2M_RolePetUpStar // ILocationRequest

@@ -177,6 +177,11 @@ namespace ET.Client
             {
                 //宠物出战列表 后期需要通过布阵界面去设置
                 List<long> fightpets = self.Root().GetComponent<PetComponentC>().GetCanFightPetList();
+                for (int i = fightpets.Count; i < 3; i++)
+                {
+                    fightpets.Add(0);
+                }
+
                 await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
                 //刷新主界面下方的出战ui
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
@@ -185,7 +190,8 @@ namespace ET.Client
             if (text.Equals("#petfightswitch"))
             {
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随, 右下角也需要显示宠物的技能，被动技能不显示，主动技能超过格子数也不显示)  
-                
+                await PetNetHelper.RequestPetFightSwitch(self.Root(), 1);  //切换到第二个宠物
+                //0自身 123对应的宠物， 切换后需要刷新技能
                 return;
             }
             

@@ -104,6 +104,15 @@ namespace ET.Server
                     self.TeamPetList.Add(0);
                 }
             }
+
+            if (self.PetFightList.Count != 3)
+            {
+                self.PetFightList.Clear();
+                self.PetFightList.Add(0);
+                self.PetFightList.Add(0);
+                self.PetFightList.Add(0);
+            }
+
             if ( self.PetShouHuList.Count != 4)
             {
                 self.PetShouHuList.Clear();
@@ -141,6 +150,7 @@ namespace ET.Server
             }
             self.CheckPetList(self.PetFormations);
             self.CheckPetList(self.TeamPetList);
+            self.CheckPetList(self.PetFightList);
             self.CheckPetList(self.PetShouHuList);
             self.CheckPetList(self.PetMingList);
             self.CheckPetList(self.PetMingPosition);

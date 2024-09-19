@@ -109,4 +109,14 @@ namespace ET.Client
             args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
+    
+    [NumericWatcher(SceneType.Current, NumericType.PetFightIndex)]
+    public class NumericWatcher_PetFightIndex : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            /////切换出战宠物。   0自身 123对应位置的宠物
+        }
+    }
+    
 }
