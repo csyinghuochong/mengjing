@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ET.Client
 {
     public class MaterialManager : MonoBehaviour
     {
-        private Renderer renderer;
-        private Material[] originalMaterials;
+        public Renderer Renderer;
+        public Material[] OriginalMaterials;
         public List<MaterialGroup> MaterialGroups = new();
 
         private void Start()
         {
-            this.renderer = GetComponent<Renderer>();
-            originalMaterials = this.renderer.materials;
+            this.Renderer = GetComponent<Renderer>();
+            // this.OriginalMaterials = this.Renderer.materials;// 访问时自动生成材质的实例
+            this.OriginalMaterials = this.Renderer.sharedMaterials;
         }
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace ET.Client
                     continue;
                 }
 
-                this.renderer.materials = materialGroup.Materials;
+                this.Renderer.materials = materialGroup.Materials;
             }
         }
 
@@ -37,7 +39,7 @@ namespace ET.Client
         /// </summary>
         public void RestoreOriginalMaterials()
         {
-            this.renderer.materials = this.originalMaterials;
+            this.Renderer.materials = this.OriginalMaterials;
         }
     }
 
