@@ -8,6 +8,9 @@ namespace ET
     {
 
         [StaticField]
+        public static int MaxPetFightNumber = 3;
+
+        [StaticField]
         public static List<int> NOPassiveSkill = new List<int>() { };
         
           //装备传承职业对应激活技能

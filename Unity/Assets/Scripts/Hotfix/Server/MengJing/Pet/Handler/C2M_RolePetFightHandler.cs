@@ -12,12 +12,14 @@
                 response.Error = ErrorCode.ERR_Pet_NoExist;
 				return;
 			}
+			
             if (petinfo.PetStatus == 2 || petinfo.PetStatus == 3)
             {
+	            response.Error = ErrorCode.ERR_Pet_NotFight;
                 return;
             }
-
-
+            
+            //最多出战三个
             if (request.PetStatus == 1)
             {
                 //出战要清掉之前的

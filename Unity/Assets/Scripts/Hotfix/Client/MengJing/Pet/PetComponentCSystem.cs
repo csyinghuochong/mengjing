@@ -107,6 +107,26 @@ namespace ET.Client
             }
         }
 
+        
+        /// <summary>
+        /// PetStatus = 0休息  1出战 2散步 3仓库
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static int GetFightNumber(this PetComponentC self)
+        {
+            int fightnumber = 0;
+            for (int i = 0; i < self.RolePetInfos.Count; i++)
+            {
+                if (self.RolePetInfos[i].PetStatus == 1)
+                {
+                    fightnumber += 1;
+                }
+            }
+
+            return fightnumber;
+        }
+
         public static void RequestPetFight(this PetComponentC self, long petId, int fight)
         {
             //出战要清掉之前的
