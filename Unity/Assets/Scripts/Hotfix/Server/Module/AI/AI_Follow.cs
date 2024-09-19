@@ -64,7 +64,7 @@ namespace ET.Server
             float ange = math.degrees(math.atan2(dir.x, dir.z));
             // float addg = unit.Id % 100 * (unit.Id % 2 == 0 ? 5 : -5);
             // addg += RandomHelper.RandFloat() * 5f;
-            float addg = unit.Id % 1000;
+            float addg = unit.Id % 100;
             quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
             float3 tar = master.Position + math.mul(rotation , math.forward()) * 2f;
             return tar;

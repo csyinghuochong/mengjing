@@ -189,8 +189,11 @@ namespace ET.Client
             }
             if (text.Equals("#petfightswitch"))
             {
+                //模拟点击下方的三个宠物头像111
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随, 右下角也需要显示宠物的技能，被动技能不显示，主动技能超过格子数也不显示)  
                 await PetNetHelper.RequestPetFightSwitch(self.Root(), 1);  //切换到第二个宠物
+                //播放切换特效
+                FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 //0自身 123对应的宠物， 切换后需要刷新技能
                 return;
             }
