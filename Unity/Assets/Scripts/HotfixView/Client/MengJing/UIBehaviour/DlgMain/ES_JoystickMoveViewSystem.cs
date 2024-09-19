@@ -234,7 +234,7 @@ namespace ET.Client
         {
             long clientNow = TimeHelper.ClientNow();
 
-            if (clientNow - self.lastSendTime < 100)
+            if (clientNow - self.lastSendTime < 30)
             {
                 return;
             }
@@ -274,7 +274,7 @@ namespace ET.Client
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             float needTime = distance / speed;
-            self.checkTime = (long)(1000 * needTime) - 200;
+            self.checkTime =(long)(1000 * needTime) - 400;
 
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
