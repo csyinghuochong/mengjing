@@ -2435,13 +2435,6 @@ message M2C_PetFightSwitch // ILocationResponse
 	int32 Error = 92;
 }
 
-message C2M_PetPathfindingResult // ILocationMessage
-{
-	int32 RpcId = 1;
-	Unity.Mathematics.float3 Position = 3;
-	int64 PetId = 10;
-}
-
 //ResponseType M2C_PetSkillCmd
 message C2M_PetSkillCmd // ILocationRequest
 {
