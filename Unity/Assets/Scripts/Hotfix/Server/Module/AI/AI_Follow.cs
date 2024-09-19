@@ -110,7 +110,7 @@ namespace ET.Server
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
-                if (errorCode == ErrorCode.ERR_Success && distacne > 2f)
+                if (errorCode == ErrorCode.ERR_Success && distacne > 3f)
                 {
                     nowspeed = (long)(nowspeed * distacne / 2f);
                 }
