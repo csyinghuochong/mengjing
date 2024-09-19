@@ -62,10 +62,11 @@ namespace ET.Server
             //tar = tar + (1f * dir);
             float3 dir = unit.Position - master.Position;
             float ange = math.degrees(math.atan2(dir.x, dir.z));
-            float addg = unit.Id % 10 * (unit.Id % 2 == 0 ? 5 : -5);
-            addg += RandomHelper.RandFloat() * 5f;
+            // float addg = unit.Id % 100 * (unit.Id % 2 == 0 ? 5 : -5);
+            // addg += RandomHelper.RandFloat() * 5f;
+            float addg = unit.Id % 1000;
             quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
-            float3 tar = master.Position + math.mul(rotation , math.forward());
+            float3 tar = master.Position + math.mul(rotation , math.forward()) * 2f;
             return tar;
         }
 
@@ -109,7 +110,7 @@ namespace ET.Server
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
-                if (errorCode == ErrorCode.ERR_Success && distacne > 1.5f)
+                if (errorCode == ErrorCode.ERR_Success && distacne > 2f)
                 {
                     nowspeed = (long)(nowspeed * distacne / 2f);
                 }

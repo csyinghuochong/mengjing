@@ -10,6 +10,7 @@
 			
 			response.RolePetInfos .AddRange(petComponent.RolePetInfos); 
 			response.TeamPetList .AddRange( petComponent.TeamPetList);
+			response.PetFightList .AddRange( petComponent.PetFightList);
 			response.PetFormations .AddRange( petComponent.PetFormations);
 			response.PetShouHuList .AddRange( petComponent.PetShouHuList);
 			response.PetMingList .AddRange( petComponent.PetMingList);

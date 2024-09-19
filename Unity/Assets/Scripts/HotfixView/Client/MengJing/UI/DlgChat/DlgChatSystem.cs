@@ -173,6 +173,21 @@ namespace ET.Client
                 return;
             }
             
+            if (text.Equals("#petfight"))
+            {
+                //宠物出战列表 后期需要通过布阵界面去设置
+                List<long> fightpets = self.Root().GetComponent<PetComponentC>().GetCanFightPetList();
+                await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+                //刷新主界面下方的出战ui
+                //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
+                return;
+            }
+            if (text.Equals("#petfightswitch"))
+            {
+                //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
+                return;
+            }
+            
             if (text.Equals("#openall"))
             {
                 SettingData.ShowBlood = true;

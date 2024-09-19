@@ -23,12 +23,13 @@ namespace ET.Server
             NumericComponentS numericComponent = defendUnit.GetComponent<NumericComponentS>();
             if (defendUnit.Type == UnitType.Player)
             {
-                RolePetInfo rolePetInfo = defendUnit.GetComponent<PetComponentS>().GetFightPet();
-                if (rolePetInfo != null)
-                {
-                    defendUnit.GetParent<UnitComponent>().Remove(rolePetInfo.Id);
-                    defendUnit.GetComponent<PetComponentS>().OnPetDead(rolePetInfo.Id);
-                }
+                // RolePetInfo rolePetInfo = defendUnit.GetComponent<PetComponentS>().GetFightPet();
+                // if (rolePetInfo != null)
+                // {
+                //     defendUnit.GetParent<UnitComponent>().Remove(rolePetInfo.Id);
+                //     defendUnit.GetComponent<PetComponentS>().OnPetDead(rolePetInfo.Id);
+                // }
+                TransferHelper.RemoveFightPetList(defendUnit);
 
                 int now_horse = numericComponent.GetAsInt(NumericType.HorseRide);
                 if (now_horse > 0)

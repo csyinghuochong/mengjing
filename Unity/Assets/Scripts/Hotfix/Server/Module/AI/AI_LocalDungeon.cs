@@ -31,14 +31,10 @@ namespace ET.Server
             }
             if (nearest == null)
             {
-                RolePetInfo rolePetInfo = playe.GetComponent<PetComponentS>().GetFightPet();
-                if (rolePetInfo != null)
+                List<Unit> petlist = UnitHelper.GetUnitList(aiComponent.Scene(), UnitType.Pet);
+                if (petlist.Count > 0  && math.distance(unit.Position, petlist[0].Position) <= aiComponent.ActRange)
                 {
-                    Unit pet = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
-                    if (pet != null && math.distance(unit.Position, pet.Position) <= aiComponent.ActRange)
-                    {
-                        nearest = pet;
-                    }
+                    nearest = petlist[0];
                 }
             }
             

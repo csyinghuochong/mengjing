@@ -10294,6 +10294,9 @@ namespace ET
         [MemoryPackOrder(12)]
         public List<RolePetInfo> RolePetBag { get; set; } = new();
 
+        [MemoryPackOrder(13)]
+        public List<long> PetFightList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -10317,6 +10320,7 @@ namespace ET
             this.PetMingList.Clear();
             this.PetMingPosition.Clear();
             this.RolePetBag.Clear();
+            this.PetFightList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

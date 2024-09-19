@@ -48,13 +48,7 @@ namespace ET.Server
             unit.Rotation = quaternion.identity;
 
             CellDungeonComponentSystem.RemoveAllNoSelf(unit);
-
-            RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
-            if (fightId != null)
-            {
-                UnitFactory.CreatePet(unit, fightId);
-            }
-
+            
             //创建副本内的各种Unit
             fubenComponent.GenerateFubenScene( fubenCellInfoNext.pass);
 

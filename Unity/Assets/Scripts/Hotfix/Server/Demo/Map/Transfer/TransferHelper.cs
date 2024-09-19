@@ -6,39 +6,6 @@ namespace ET.Server
 {
     public static partial class TransferHelper
     {
-
-        public static void RemoveStall(Unit unit)
-        {
-            List<Unit> stallList = UnitHelper.GetUnitList( unit.Scene(), UnitType.Stall );
-            for (int i = stallList.Count - 1; i>= 0; i--)
-            {
-                if (stallList[i].MasterId == unit.Id)
-                {
-                    unit.GetParent<UnitComponent>().Remove(stallList[i].Id);
-                }
-            }
-        }
-        
-        public static void RemovePetAndJingLing(Unit unit)
-        {
-            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
-            RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
-            if (fightId != null)
-            {
-                unitComponent.Remove(fightId.Id);
-            }
-            else
-            {
-            }
-
-            long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
-            if (jinglingUnitId != 0 && unitComponent.Get(jinglingUnitId) != null)
-            {
-                unitComponent.Remove(jinglingUnitId);
-            }
-            unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = 0;
-        }
-        
         public static async ETTask<int> TransferUnit(Unit unit, C2M_TransferMap request)
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Transfer, unit.Id))
@@ -615,6 +582,50 @@ namespace ET.Server
             RemovePetAndJingLing(unit);
         }
 
+        public static void RemoveStall(Unit unit)
+        {
+            List<Unit> stallList = UnitHelper.GetUnitList( unit.Scene(), UnitType.Stall );
+            for (int i = stallList.Count - 1; i>= 0; i--)
+            {
+                if (stallList[i].MasterId == unit.Id)
+                {
+                    unit.GetParent<UnitComponent>().Remove(stallList[i].Id);
+                }
+            }
+        }
+        
+        public static void RemovePetAndJingLing(Unit unit)
+        {
+ 
+            RemoveFightPetList(unit);
+            RemoveJingLing(unit);
+        }
+
+        public static void RemoveFightPetList(Unit unit)
+        {
+            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
+            List<long> petfightlist = unit.GetComponent<PetComponentS>().PetFightList;
+            for (int i = 0; i < petfightlist.Count; i++)
+            {
+                if (unitComponent.Get(petfightlist[i]) == null)
+                {
+                    continue;
+                }
+                unitComponent.Remove(petfightlist[i]);
+            }
+        }
+        
+        public static void RemoveJingLing(Unit unit)
+        { 
+            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
+            long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
+            if (jinglingUnitId != 0 && unitComponent.Get(jinglingUnitId) != null)
+            {
+                unitComponent.Remove(jinglingUnitId);
+            }
+            unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = 0;
+        }
+        
         public static void AfterTransfer(Unit unit, int sceneType)
         {
             if (sceneType == SceneTypeEnum.PetDungeon
@@ -626,12 +637,13 @@ namespace ET.Server
              return;   
             }
 
-            RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
-            if (fightId != null)
-            {
-                unit.GetComponent<PetComponentS>().UpdatePetAttribute(fightId, false);
-                UnitFactory.CreatePet(unit, fightId);
-            }
+
+            CreateFightPetList(unit);
+            CreateJingLing(unit);
+        }
+
+        public static void CreateJingLing(Unit unit)
+        {
             int jinglingid  = unit.GetComponent<ChengJiuComponentS>().JingLingId;
             if (jinglingid != 0)
             {
@@ -639,7 +651,23 @@ namespace ET.Server
                 unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = JingLingUnitId;
             }
         }
+
+        public static void CreateFightPetList(Unit unit)
+        {
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            List<long> petfightlist =petComponentS .PetFightList;
+            for (int i = 0; i < petfightlist.Count; i++)
+            {
+                RolePetInfo fightId = petComponentS.GetPetInfo(petfightlist[i]);
+                if (fightId != null)
+                {
+                    petComponentS.UpdatePetAttribute(fightId, false);
+                    UnitFactory.CreatePet(unit, fightId);
+                }
+            }
+        }
         
+
         public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty,  string paramInfo)
         {
             Scene root = unit.Root();

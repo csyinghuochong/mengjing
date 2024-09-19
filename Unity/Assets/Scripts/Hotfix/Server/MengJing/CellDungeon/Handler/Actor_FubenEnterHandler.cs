@@ -46,11 +46,7 @@ namespace ET.Server
 				unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
 				unit.Rotation = quaternion.identity;
 				fubenComponent.GenerateFubenScene( false);
-				RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
-				if (fightId != null)
-				{
-					UnitFactory.CreatePet(unit, fightId);
-				}
+				
 				//UnitHelper.BroadcastCreateUnit(unit.DomainScene(), unit);
 			}
 

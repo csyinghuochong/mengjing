@@ -34,7 +34,7 @@ namespace ET.Client
             M2C_PetFubenRewardResponse response = (M2C_PetFubenRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
-
+        
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
             C2M_RolePetFight request = C2M_RolePetFight.Create();
@@ -356,7 +356,6 @@ namespace ET.Client
             request.PetPosition = positionList;
 
             M2C_RolePetFormationSet response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetFormationSet;
-
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return response.Error;

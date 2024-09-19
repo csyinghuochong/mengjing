@@ -90,6 +90,25 @@ namespace ET.Client
             return null;
         }
 
+        public static List<long> GetCanFightPetList(this PetComponentC self)
+        {
+            List<long> fightlist = new List<long>();
+            for (int i = 0; i < self.RolePetInfos.Count; i++)
+            {
+                if (self.RolePetInfos[i].PetStatus == 0)
+                {
+                    fightlist.Add( self.RolePetInfos[i].Id );
+                }
+
+                if (fightlist.Count >= 3)
+                {
+                    break;
+                }
+            }
+            
+            return fightlist;
+        }
+
         public static void RequestPetFormationSet(this PetComponentC self, int sceneType, List<long> petList, List<long> positionList)
         {
             switch (sceneType)
@@ -103,6 +122,9 @@ namespace ET.Client
                 case SceneTypeEnum.PetMing:
                     self.PetMingList = petList;
                     self.PetMingPosition = positionList;
+                    break;
+                case SceneTypeEnum.MainCityScene:
+                    self.PetFightList = petList;
                     break;
             }
         }

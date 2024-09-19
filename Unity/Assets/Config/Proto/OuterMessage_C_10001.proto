@@ -2380,6 +2380,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated int64 PetMingList = 11;
 	repeated int64 PetMingPosition = 12;
 	repeated RolePetInfo RolePetBag = 13;
+	repeated int64 PetFightList = 14;
 }
 
 //ResponseType M2C_RolePetFormationSet
