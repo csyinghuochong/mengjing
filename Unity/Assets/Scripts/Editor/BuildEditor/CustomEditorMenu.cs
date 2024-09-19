@@ -75,8 +75,40 @@ public class CustomEditorMenu
         Debug.Log("查找完成！！");
     }
 
-    [MenuItem("Custom/生成连接坡体")]
-    static void GenerateConnectSlope()
+    [MenuItem("Custom/生成连接坡体 距离最近的边")]
+    static void GenerateConnectSlope_3()
+    {
+        if (Selection.gameObjects.Length != 2)
+        {
+            Debug.LogError("必须选择两个Cube");
+            return;
+        }
+
+        GameObject gameObject_1 = Selection.gameObjects[0];
+        GameObject gameObject_2 = Selection.gameObjects[1];
+
+        if (!gameObject_1.name.Contains("Cube") || !gameObject_2.name.Contains("Cube"))
+        {
+            Debug.LogError("必须选择两个Cube");
+            return;
+        }
+
+        Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
+        Vector3 eulerAngles_2 = gameObject_2.transform.eulerAngles;
+
+        if (!eulerAngles_1.Equals(Vector3.zero) || !eulerAngles_2.Equals(Vector3.zero))
+        {
+            Debug.LogError("Cube有旋转 ");
+            GenerateConnectSlope_3(gameObject_1, gameObject_2);
+        }
+        else
+        {
+            GenerateConnectSlope_1(gameObject_1, gameObject_2);
+        }
+    }
+    
+    [MenuItem("Custom/生成连接坡体 相对方向需要和朝向一致")]
+    static void GenerateConnectSlope_2()
     {
         if (Selection.gameObjects.Length != 2)
         {
@@ -106,7 +138,332 @@ public class CustomEditorMenu
             GenerateConnectSlope_1(gameObject_1, gameObject_2);
         }
     }
+    
+    private static void GenerateConnectSlope_3(GameObject gameObject_1, GameObject gameObject_2)
+    {
+        Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
+        Vector3 eulerAngles_2 = gameObject_2.transform.eulerAngles;
+        Vector3 scale_1 = gameObject_1.transform.localScale;
+        Vector3 scale_2 = gameObject_2.transform.localScale;
 
+        if (Math.Abs(eulerAngles_1.y - eulerAngles_2.y) > 0.001f)
+        {
+            Log.Error("Y方向有旋转 无法生成！");
+            return;
+        }
+        
+        string cube_name = gameObject_1.name + "_" + gameObject_2.gameObject;
+        if (GameObject.Find($"NavMesh/{cube_name}") != null)
+        {
+            GameObject.DestroyImmediate(GameObject.Find($"NavMesh/{cube_name}").gameObject);
+        }
+
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.name = cube_name;
+        cube.gameObject.name = cube_name;
+        cube.transform.SetParent(GameObject.Find("NavMesh").transform);
+        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        Vector3 position_top_1 = new Vector3(gameObject_1.transform.localPosition.x,
+            gameObject_1.transform.localPosition.y + scale_1.y * 0.5f,
+            gameObject_1.transform.localPosition.z);
+        Vector3 position_top_1_a = position_top_1
+                + gameObject_1.transform.forward * scale_1.z * 0.5f
+                + gameObject_1.transform.right * scale_1.x * -0.5f;
+        Vector3 position_top_1_b = position_top_1
+                + gameObject_1.transform.forward * scale_1.z * 0.5f
+                + gameObject_1.transform.right * scale_1.x * 0.5f;
+        Vector3 position_top_1_c = position_top_1
+                + gameObject_1.transform.forward * scale_1.z * -0.5f
+                + gameObject_1.transform.right * scale_1.x * 0.5f;
+        Vector3 position_top_1_d = position_top_1
+                + gameObject_1.transform.forward * scale_1.z * -0.5f
+                + gameObject_1.transform.right * scale_1.x * -0.5f;
+
+        Vector3 position_top_2 = new Vector3(gameObject_2.transform.localPosition.x,
+            gameObject_2.transform.localPosition.y + scale_2.y * 0.5f,
+            gameObject_2.transform.localPosition.z);
+        Vector3 position_top_2_a = position_top_2
+                + gameObject_2.transform.forward * scale_2.z * 0.5f
+                + gameObject_2.transform.right * scale_2.x * -0.5f;
+        Vector3 position_top_2_b = position_top_2
+                + gameObject_2.transform.forward * scale_2.z * 0.5f
+                + gameObject_2.transform.right * scale_2.x * 0.5f;
+        Vector3 position_top_2_c = position_top_2
+                + gameObject_2.transform.forward * scale_2.z * -0.5f
+                + gameObject_2.transform.right * scale_2.x * 0.5f;
+        Vector3 position_top_2_d = position_top_2
+                + gameObject_2.transform.forward * scale_2.z * -0.5f
+                + gameObject_2.transform.right * scale_2.x * -0.5f;
+        
+        //找出距离最短的两条边
+        float distance_1_ab_2_ab = DistanceToLineSegment(position_top_1_a, position_top_2_a, position_top_2_b);
+        float distance_1_ab_2_cd = DistanceToLineSegment(position_top_1_a, position_top_2_c, position_top_2_d);
+        float distance_1_bc_2_ad = DistanceToLineSegment(position_top_1_b, position_top_2_a, position_top_2_d);
+        float distance_1_bc_2_bc = DistanceToLineSegment(position_top_1_b, position_top_2_b, position_top_2_c);
+        float distance_1_cd_2_ab = DistanceToLineSegment(position_top_1_c, position_top_2_a, position_top_2_b);
+        float distance_1_cd_2_cd = DistanceToLineSegment(position_top_1_c, position_top_2_c, position_top_2_d);
+        float distance_1_da_2_da = DistanceToLineSegment(position_top_1_d, position_top_2_d, position_top_2_a);
+        float distance_1_da_2_bc = DistanceToLineSegment(position_top_1_d, position_top_2_b, position_top_2_c);
+        List<float> distancelist = new List<float>();
+        distancelist.Add(distance_1_ab_2_ab);
+        distancelist.Add(distance_1_ab_2_cd);
+        distancelist.Add(distance_1_bc_2_ad);
+        distancelist.Add(distance_1_bc_2_bc);
+        distancelist.Add(distance_1_cd_2_ab);
+        distancelist.Add(distance_1_cd_2_cd);
+        distancelist.Add(distance_1_da_2_da);
+        distancelist.Add(distance_1_da_2_bc);
+
+        int miniIndex = -1;
+        float distancemini = -1;
+        for (int i = 0; i < distancelist.Count; i++)
+        {
+            if (distancelist[i] < distancemini || distancemini < 0)
+            {
+                distancemini = distancelist[i];
+                miniIndex = i;
+            }
+        }
+        
+        Vector3 postion_init = Vector3.zero;
+        Vector3 postion_end1 = Vector3.zero;
+        Vector3 postion_end2 = Vector3.zero;
+        switch (miniIndex)
+        {
+            case 0: //distance_1_ab_2_ab
+                postion_init = (position_top_1_a + position_top_1_b) * 0.5f;
+                postion_end1 = position_top_2_a;
+                postion_end2 = position_top_2_b;
+                break;
+            case 1: //distance_1_ab_2_cd
+                postion_init = (position_top_1_a + position_top_1_b) * 0.5f;
+                postion_end1 = position_top_2_c;
+                postion_end2 = position_top_2_d;
+                break;
+            case 2:  //distance_1_bc_2_ad
+                postion_init = (position_top_1_b + position_top_1_c) * 0.5f;
+                postion_end1 = position_top_2_a;
+                postion_end2 = position_top_2_d;
+                break;
+            case 3:  //distance_1_bc_2_bc
+                postion_init = (position_top_1_b + position_top_1_c) * 0.5f;
+                postion_end1 = position_top_2_b;
+                postion_end2 = position_top_2_c;
+                break;
+            case 4:  //distance_1_cd_2_ab
+                postion_init = (position_top_1_c+ position_top_1_d) * 0.5f;
+                postion_end1 = position_top_2_a;
+                postion_end2 = position_top_2_b;
+                break;
+            case 5:  //distance_1_cd_2_cd
+                postion_init = (position_top_1_c+ position_top_1_d) * 0.5f;
+                postion_end1 = position_top_2_c;
+                postion_end2 = position_top_2_d;
+                break;
+            case 6:  //distance_1_da_2_da
+                postion_init = (position_top_1_d + position_top_1_a) * 0.5f;
+                postion_end1 = position_top_2_d;
+                postion_end2 = position_top_2_a;
+                break; 
+            case 7:  //distance_1_da_2_bc
+                postion_init = (position_top_1_d + position_top_1_a) * 0.5f;
+                postion_end1 = position_top_2_b;
+                postion_end2 = position_top_2_c;
+                break;
+            default:
+                break;
+        }
+        
+        Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(postion_init, postion_end1, postion_end2);
+        cube.transform.localPosition = (postion_init + position_top_1_ac) * 0.5f;
+        cube.transform.localScale = new Vector3(Vector3.Distance(postion_init, position_top_1_ac), 0.1f,
+            Vector3.Distance(postion_init, position_top_1_ac));
+        cube.transform.LookAt(position_top_1_ac);
+    }
+
+    private static float DistanceToLineSegment(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        // Vector3 dir = lineEnd - lineStart;
+        // Vector3 dir_normalized = dir.normalized;
+        // Vector3 v = Vector3.Cross(dir_normalized, point - lineStart).normalized;
+        // Vector3 point_to_start = point - lineStart;
+        //
+        // if (Vector3.Dot(point_to_start, dir_normalized) < 0)
+        //     return point_to_start.magnitude;
+        // else if (Vector3.Dot(point_to_start, dir_normalized) > dir.magnitude)
+        //     return (point_to_start - dir_normalized).magnitude;
+        // else
+        //     return Mathf.Abs(Vector3.Distance(point, lineStart) - Vector3.Distance(point, lineEnd));
+        
+        Vector3 lineDir = (lineEnd - lineStart).normalized;
+        Vector3 pointDir = point - lineStart;
+
+        float dotProduct = Vector3.Dot(pointDir, lineDir);
+        Vector3 pointOnLine = lineDir * dotProduct;
+
+        // Vector3 projectionDir = pointOnLine - pointDir;
+        // return lineStart + projectionDir;
+
+        Vector3  point2 =  lineStart + lineDir * dotProduct;
+        return Vector3.Distance(point, point2);
+    }
+    
+      private static void GenerateConnectSlope_2(GameObject gameObject_1, GameObject gameObject_2)
+    {
+        Vector3 position_1 = gameObject_1.transform.localPosition;
+        Vector3 position_2 = gameObject_2.transform.localPosition;
+
+        Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
+        Vector3 eulerAngles_2 = gameObject_2.transform.eulerAngles;
+        Vector3 scale_1 = gameObject_1.transform.localScale;
+        Vector3 scale_2 = gameObject_2.transform.localScale;
+
+        if (Math.Abs(eulerAngles_1.y - eulerAngles_2.y) > 0.001f)
+        {
+            Log.Error("Y方向有旋转 无法生成！");
+            return;
+        }
+
+        string cube_name = gameObject_1.name + "_" + gameObject_2.gameObject;
+        if (GameObject.Find($"NavMesh/{cube_name}") != null)
+        {
+            GameObject.DestroyImmediate(GameObject.Find($"NavMesh/{cube_name}").gameObject);
+        }
+
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.name = cube_name;
+        cube.gameObject.name = cube_name;
+        cube.transform.SetParent(GameObject.Find("NavMesh").transform);
+        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        float angle = math.degrees(math.atan2(position_2.z - position_1.z, position_2.x - position_1.x));
+        angle = (angle + 360) % 360;
+        int direction = GetDirection(angle);
+
+        float eulerAngles_1_y = eulerAngles_1.y;
+        eulerAngles_1_y = (eulerAngles_1_y + 360) % 360;
+        int eulerAngles_1_y_direction = GetEulerDirection(eulerAngles_1_y);
+
+        int generatetype = 0;
+        //左右可以绕YZ   [y必须是一样  z可以不一样 x必须为0]
+        if (direction == 2 || direction == 4)
+        {
+            if (Math.Abs(eulerAngles_1.x) > 0.01f || Math.Abs(eulerAngles_2.x) > 0.01f)
+            {
+                Log.Error("X方向有旋转 无法生成！");
+                return;
+            }
+
+            if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
+            {
+                generatetype = 1;
+            }
+            if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
+            {
+                generatetype = 2;
+            }
+        }
+
+        //上下可以绕XZ  [y必须是一样  x可以不一样 z必须为0]
+        if (direction == 1 || direction == 3)
+        {
+            if (Math.Abs(eulerAngles_1.z) > 0.01f || Math.Abs(eulerAngles_2.z) > 0.01f)
+            {
+                Log.Error("Z方向有旋转 无法生成！");
+                return;
+            }
+            
+             if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
+             {
+                 generatetype = 2;
+            }
+
+            if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
+            {
+                generatetype = 1;
+
+            }
+        }
+
+        if (generatetype == 1)
+        {
+             Vector3 position_top_1_a = gameObject_1.transform.localPosition
+                        + gameObject_1.transform.right * scale_1.x * 0.5f
+                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+                Vector3 position_top_1_b = gameObject_1.transform.localPosition
+                        + gameObject_1.transform.right * scale_1.x * -0.5f
+                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+
+                Vector3 position_top_2_a = gameObject_2.transform.localPosition
+                        + gameObject_2.transform.right * scale_2.x * 0.5f
+                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+                Vector3 position_top_2_b = gameObject_2.transform.localPosition
+                        + gameObject_2.transform.right * scale_2.x * -0.5f
+                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+
+                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
+                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
+                if (distance_1 < distance_2)
+                {
+                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.forward * 1;
+                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
+                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
+                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
+                        Vector3.Distance(position_top_2_b, position_top_1_ac));
+                    cube.transform.LookAt(position_top_1_ac);
+                }
+                else
+                {
+                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.forward * 1;
+                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
+
+                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
+                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
+                        Vector3.Distance(position_top_1_b, position_top_2_ac));
+                    cube.transform.LookAt(position_top_2_ac);
+                }
+        }
+        else
+        {
+             Vector3 position_top_1_a = gameObject_1.transform.localPosition
+                        + gameObject_1.transform.forward * scale_1.z * 0.5f
+                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+                Vector3 position_top_1_b = gameObject_1.transform.localPosition
+                        + gameObject_1.transform.forward * scale_1.z * -0.5f
+                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+
+                Vector3 position_top_2_a = gameObject_2.transform.localPosition
+                        + gameObject_2.transform.forward * scale_2.z * 0.5f
+                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+                Vector3 position_top_2_b = gameObject_2.transform.localPosition
+                        + gameObject_2.transform.forward * scale_2.z * -0.5f
+                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+
+                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
+                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
+                if (distance_1 < distance_2)
+                {
+                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.right * 1;
+                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
+                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
+                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
+                        Vector3.Distance(position_top_2_b, position_top_1_ac));
+                    cube.transform.LookAt(position_top_1_ac);
+                }
+                else
+                {
+                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.right * 1;
+                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
+
+                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
+                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
+                        Vector3.Distance(position_top_1_b, position_top_2_ac));
+                    cube.transform.LookAt(position_top_2_ac);
+                }
+        }
+    }
+      
     private static void GenerateConnectSlope_1(GameObject gameObject_1, GameObject gameObject_2)
     {
         Vector3 position_1 = gameObject_1.transform.localPosition;
@@ -267,161 +624,6 @@ public class CustomEditorMenu
         }
     }
     
-    private static void GenerateConnectSlope_2(GameObject gameObject_1, GameObject gameObject_2)
-    {
-        Vector3 position_1 = gameObject_1.transform.localPosition;
-        Vector3 position_2 = gameObject_2.transform.localPosition;
-
-        Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
-        Vector3 eulerAngles_2 = gameObject_2.transform.eulerAngles;
-        Vector3 scale_1 = gameObject_1.transform.localScale;
-        Vector3 scale_2 = gameObject_2.transform.localScale;
-
-        if (Math.Abs(eulerAngles_1.y - eulerAngles_2.y) > 0.001f)
-        {
-            Log.Error("Y方向有旋转 无法生成！");
-            return;
-        }
-
-        string cube_name = gameObject_1.name + "_" + gameObject_2.gameObject;
-        if (GameObject.Find($"NavMesh/{cube_name}") != null)
-        {
-            GameObject.DestroyImmediate(GameObject.Find($"NavMesh/{cube_name}").gameObject);
-        }
-
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.name = cube_name;
-        cube.gameObject.name = cube_name;
-        cube.transform.SetParent(GameObject.Find("NavMesh").transform);
-        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
-        float angle = math.degrees(math.atan2(position_2.z - position_1.z, position_2.x - position_1.x));
-        angle = (angle + 360) % 360;
-        int direction = GetDirection(angle);
-
-        float eulerAngles_1_y = eulerAngles_1.y;
-        eulerAngles_1_y = (eulerAngles_1_y + 360) % 360;
-        int eulerAngles_1_y_direction = GetEulerDirection(eulerAngles_1_y);
-
-        int generatetype = 0;
-        //左右可以绕YZ   [y必须是一样  z可以不一样 x必须为0]
-        if (direction == 2 || direction == 4)
-        {
-            if (Math.Abs(eulerAngles_1.x) > 0.01f || Math.Abs(eulerAngles_2.x) > 0.01f)
-            {
-                Log.Error("X方向有旋转 无法生成！");
-                return;
-            }
-
-            if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
-            {
-                generatetype = 1;
-            }
-            if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
-            {
-                generatetype = 2;
-            }
-        }
-
-        //上下可以绕XZ  [y必须是一样  x可以不一样 z必须为0]
-        if (direction == 1 || direction == 3)
-        {
-            if (Math.Abs(eulerAngles_1.z) > 0.01f || Math.Abs(eulerAngles_2.z) > 0.01f)
-            {
-                Log.Error("Z方向有旋转 无法生成！");
-                return;
-            }
-            
-             if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
-             {
-                 generatetype = 2;
-            }
-
-            if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
-            {
-                generatetype = 1;
-
-            }
-        }
-
-        if (generatetype == 1)
-        {
-             Vector3 position_top_1_a = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.right * scale_1.x * 0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-                Vector3 position_top_1_b = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.right * scale_1.x * -0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-
-                Vector3 position_top_2_a = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.right * scale_2.x * 0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-                Vector3 position_top_2_b = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.right * scale_2.x * -0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-
-                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
-                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
-                if (distance_1 < distance_2)
-                {
-                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.forward * 1;
-                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
-                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
-                        Vector3.Distance(position_top_2_b, position_top_1_ac));
-                    cube.transform.LookAt(position_top_1_ac);
-                }
-                else
-                {
-                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.forward * 1;
-                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
-
-                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
-                        Vector3.Distance(position_top_1_b, position_top_2_ac));
-                    cube.transform.LookAt(position_top_2_ac);
-                }
-        }
-        else
-        {
-             Vector3 position_top_1_a = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.forward * scale_1.z * 0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-                Vector3 position_top_1_b = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.forward * scale_1.z * -0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-
-                Vector3 position_top_2_a = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.forward * scale_2.z * 0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-                Vector3 position_top_2_b = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.forward * scale_2.z * -0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-
-                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
-                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
-                if (distance_1 < distance_2)
-                {
-                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.right * 1;
-                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
-                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
-                        Vector3.Distance(position_top_2_b, position_top_1_ac));
-                    cube.transform.LookAt(position_top_1_ac);
-                }
-                else
-                {
-                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.right * 1;
-                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
-
-                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
-                        Vector3.Distance(position_top_1_b, position_top_2_ac));
-                    cube.transform.LookAt(position_top_2_ac);
-                }
-        }
-    }
-
     public static Vector3 GetVerticalProjectionOnLineSegment(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
     {
         Vector3 lineDir = (lineEnd - lineStart).normalized;
