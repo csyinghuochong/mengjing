@@ -2038,12 +2038,15 @@ namespace ET.Server
 
              //血石
              int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
-             PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
-             List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
-             NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
-             for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
+             if (bloodstone > 0)
              {
-                 AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
+                 PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
+                 List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
+                 NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
+                 for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
+                 {
+                     AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
+                 }
              }
              
              //家族属性
