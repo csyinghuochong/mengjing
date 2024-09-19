@@ -224,7 +224,7 @@ namespace ET.Client
             bool show_old = self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.activeSelf;
             bool show_new = numericComponent.GetAsInt(NumericType.JueXingAnger) >= 500;
             self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(show_new);
-            if (!show_old && show_new)
+            if (show_old != show_new)
             {
                 self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
             }
@@ -509,6 +509,21 @@ namespace ET.Client
             }
         }
 
+        public static void CheckSkillSecond(this ES_MainSkill self)
+        {
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                if (self.UISkillGirdList[i].SkillPro == null)
+                {
+                    continue;
+                }
+                if (self.UISkillGirdList[i].SkillSecond == 1)
+                {
+                    self.UISkillGirdList[i].CheckSkillSecond();
+                }
+            }
+        }
+        
         public static void OnSkillSecond(this ES_MainSkill self, M2C_SkillSecondResult message)
         {
             for (int i = 0; i < self.UISkillGirdList.Count; i++)
@@ -595,6 +610,7 @@ namespace ET.Client
             for (int i = 0; i < self.UISkillGirdList.Count; i++)
             {
                 self.UISkillGirdList[i].RemoveSkillInfoShow();
+                self.UISkillGirdList[i].ResetSkillSecond();
             }
 
             self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
@@ -608,7 +624,6 @@ namespace ET.Client
                 uISkillGridComponent.RemoveSkillInfoShow();
                 uISkillGridComponent.OnUpdate(0, 0);
                 uISkillGridComponent.UseSkill = false;
-                uISkillGridComponent.SkillSecond = 0;
             }
 
             self.ES_FangunSkill.OnUpdate(0);

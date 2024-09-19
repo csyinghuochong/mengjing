@@ -27,7 +27,7 @@
                 skils.OnShowSkillIndicator(skillInfo);
             }
         }
-
+        
         public override void OnExecute(SkillC skils)
         {
             this.PlayBullet_1(skils);     //播放特效

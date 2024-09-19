@@ -70,5 +70,21 @@ namespace ET
         public long Value2 ;
     }
 
-    
+    [MemoryPackable]
+    [EnableClass]
+    public partial class KeyValuePairLong4
+    {
+       
+        [MemoryPackOrder(0)]
+        public long KeyId;	
+        
+        [MemoryPackOrder(1)]
+        public long Value ;
+        
+        [MemoryPackOrder(2)]
+        public long Value2 ;
+        
+        [MemoryPackOrder(2)]
+        public long Value3 ;
+    }
 }

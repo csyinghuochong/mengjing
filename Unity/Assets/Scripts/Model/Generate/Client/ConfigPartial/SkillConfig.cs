@@ -15,17 +15,17 @@ namespace ET
         /// <summary>
         /// 给该buff的玩家触发一个技能
         /// </summary>
-        public Dictionary<int , KeyValuePairLong> BuffTriggerSkill = new Dictionary<int , KeyValuePairLong>();
+        public Dictionary<int , KeyValuePairLong4> BuffTriggerSkill = new Dictionary<int , KeyValuePairLong4>();
 
         /// <summary>
         /// 给该buff的玩家触发额外伤害
         /// </summary>
-        public Dictionary<int, KeyValuePairLong> BuffAddHurt = new Dictionary<int, KeyValuePairLong>();
+        public Dictionary<int, KeyValuePairLong4> BuffAddHurt = new Dictionary<int, KeyValuePairLong4>();
 
         /// <summary>
         /// 给该buff的玩家触发二段技能
         /// </summary>
-        public Dictionary<int, KeyValuePairLong> BuffSecondSkill = new Dictionary<int, KeyValuePairLong>();
+        public Dictionary<int, KeyValuePairLong4> BuffSecondSkill = new Dictionary<int, KeyValuePairLong4>();
 
         /// <summary>
         /// 获取是技能的一级基础技能
@@ -56,17 +56,18 @@ namespace ET
                     string[] buffInfoParam = buffToSkill.Split(',');
                     if (buffInfoParam[1] == "1")
                     {
-                        BuffTriggerSkill.Add(skillconfig.Id, new KeyValuePairLong()
+                        BuffTriggerSkill.Add(skillconfig.Id, new KeyValuePairLong4()
                         {
                             KeyId = int.Parse(buffInfoParam[0]),
                             Value = int.Parse(buffInfoParam[2]),
-                            Value2 = (long)(float.Parse(buffInfoParam[3]) * 1000)
+                            Value2 = (long)(float.Parse(buffInfoParam[3]) * 1000),
+                            Value3 = int.Parse(buffInfoParam[4])                        //移除受击者Buff
                         });
                     }
                     //97050001,2,1.5    buffid/类型/伤害系数
                     if (buffInfoParam[1] == "2")
                     {
-                        BuffAddHurt.Add(skillconfig.Id, new KeyValuePairLong()
+                        BuffAddHurt.Add(skillconfig.Id, new KeyValuePairLong4()
                         {
                             KeyId = int.Parse(buffInfoParam[0]),
                             Value = int.Parse(buffInfoParam[0]),
@@ -76,7 +77,7 @@ namespace ET
                     //97050203,3,77008007  buffid/类型/二段技能0
                     if (buffInfoParam[1] == "3")
                     {
-                        BuffSecondSkill.Add(skillconfig.Id, new KeyValuePairLong()
+                        BuffSecondSkill.Add(skillconfig.Id, new KeyValuePairLong4()
                         {
                             KeyId = int.Parse(buffInfoParam[0]),
                             Value = int.Parse(buffInfoParam[0]),

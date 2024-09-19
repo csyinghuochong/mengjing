@@ -13808,6 +13808,9 @@ namespace ET
         [MemoryPackOrder(9)]
         public int SkillId { get; set; }
 
+        [MemoryPackOrder(10)]
+        public long UnitIdFrom { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -13824,6 +13827,7 @@ namespace ET
             this.UnitType = default;
             this.UnitConfigId = default;
             this.SkillId = default;
+            this.UnitIdFrom = default;
 
             ObjectPool.Instance.Recycle(this);
         }

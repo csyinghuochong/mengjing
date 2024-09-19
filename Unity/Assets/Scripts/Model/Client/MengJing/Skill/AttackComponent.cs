@@ -5,7 +5,7 @@ namespace ET.Client
     [ComponentOf(typeof (Scene))]
     public class AttackComponent: Entity, IAwake, IDestroy
     {
-        public int SkillId;
+        public int SkillId{ get; set; }
         public int ComboSkillId;
         public long LastSkillTime;
         public long ComboStartTime;

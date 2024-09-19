@@ -169,31 +169,6 @@ namespace ET.Server
             }
         }
 
-        public static int GetTiLiIndex(this UserInfoComponentS self, int hour_1)
-        {
-            if (hour_1 < 6)
-            {
-                return 1;
-            }
-
-            if (hour_1 < 12)
-            {
-                return 2;
-            }
-
-            if (hour_1 < 20)
-            {
-                return 3;
-            }
-
-            if (hour_1 < 24)
-            {
-                return 4;
-            }
-
-            return 5;
-        }
-
         public static void OnLogin(this UserInfoComponentS self, string remoteIp, string deviceName, long currentTime)
         {
             self.CheckData();

@@ -16,6 +16,8 @@ namespace ET.Server
 
         public SkillConfig SkillConf { get; set; }
 
+        public List<long> OnlyOnceBuffUnitID = new List<long>();
+
         public long SkillBeginTime{ get; set; }
         public long SkillEndTime{ get; set; }
         /// <summary>

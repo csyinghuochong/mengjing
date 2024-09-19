@@ -101,6 +101,8 @@ namespace ET
 		public int BuffAddClass { get; set; }
 		/// <summary>Buff是叠加层数上限</summary>
 		public int BuffAddClassMax { get; set; }
+		/// <summary>buff叠加后时间统一</summary>
+		public int BuffAddSync { get; set; }
 		/// <summary>唯一buffID</summary>
 		public string WeiYiBuffID { get; set; }
 		/// <summary>伤害类型</summary>

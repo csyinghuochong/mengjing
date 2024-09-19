@@ -145,6 +145,8 @@ namespace ET
 		public int[] InitBuffID { get; set; }
 		/// <summary>释放BUFFID</summary>
 		public int[] BuffID { get; set; }
+		/// <summary>只释放一次buff</summary>
+		public int[] OnlyOnceBuffID { get; set; }
 		/// <summary>施法动作名称</summary>
 		public string SkillAnimation { get; set; }
 		/// <summary>技能音效</summary>
@@ -193,6 +195,8 @@ namespace ET
 		public int EndSkillId { get; set; }
 		/// <summary>触发技能</summary>
 		public string BuffToSkill { get; set; }
+		/// <summary>技能伤害增加</summary>
+		public string SkillDamgeAddValue { get; set; }
 
 	}
 }

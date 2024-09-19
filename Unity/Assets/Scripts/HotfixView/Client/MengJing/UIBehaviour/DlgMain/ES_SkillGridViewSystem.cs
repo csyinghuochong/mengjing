@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -362,6 +363,38 @@ namespace ET.Client
             self.E_Button_CancleButton.gameObject.SetActive(false);
         }
 
+        public static void CheckSkillSecond(this ES_SkillGrid self)
+        {
+            Unit main = UnitHelper.GetMyUnitFromClientScene( self.Root() );
+            //有对应的buff才能触发二段斩
+            int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[self.SkillPro.SkillID].KeyId;
+
+            bool havebuff  = false;
+            List<EntityRef<Unit>> allunits = main.GetParent<UnitComponent>().GetAll();
+            for (int defend = 0; defend < allunits.Count; defend++)
+            {
+                Unit unititem = allunits[defend];
+                BuffManagerComponentC buffManagerComponent = unititem.GetComponent<BuffManagerComponentC>();
+                if (buffManagerComponent == null || unititem.Id == main.Id) //|| allDefend[defend].Id == request.TargetID 
+                {
+                    continue;
+                }
+                int buffNum = buffManagerComponent.GetBuffSourceNumber(main.Id, buffId);
+                if (buffNum <= 0)
+                {
+                    continue;
+                }
+
+                havebuff = true;
+                break;
+            }
+
+            if (!havebuff)
+            {
+                self.OnSkillSecondResult(null);
+            }
+        }
+        
         public static void OnSkillSecondResult(this ES_SkillGrid self, M2C_SkillSecondResult message)
         {
             if (self.SkillPro == null)
@@ -389,14 +422,20 @@ namespace ET.Client
                 self.E_SkillSecondCDImage.gameObject.SetActive(false);
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillPro.SkillID);
-                unit.GetComponent<SkillManagerComponentC>().AddSkillCD(self.SkillPro.SkillID, TimeHelper.ServerNow() + (skillConfig.SkillLiveTime),
+                unit.GetComponent<SkillManagerComponentC>().AddSkillCD(self.SkillPro.SkillID, TimeHelper.ServerNow() + (long)(skillConfig.SkillCD * 1000),
                     TimeHelper.ServerNow() + 500);
             }
         }
 
+        public static void ResetSkillSecond(this ES_SkillGrid self)
+        {
+            self.SkillSecond = 0;
+            self.E_SkillSecondCDImage.gameObject.SetActive(false);
+        }
+        
         public static async ETTask ShowSkillSecondCD(this ES_SkillGrid self, int skillId)
         {
-            KeyValuePairLong keyValuePairLong = null;
+            KeyValuePairLong4 keyValuePairLong = null;
             SkillConfigCategory.Instance.BuffSecondSkill.TryGetValue(skillId, out keyValuePairLong);
             if (keyValuePairLong == null)
             {

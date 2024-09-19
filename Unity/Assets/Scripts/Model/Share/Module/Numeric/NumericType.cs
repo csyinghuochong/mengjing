@@ -188,7 +188,11 @@
         public const int MasterPlayerId = 3188;                                          //主人【玩家】
         public const int PaiMaiTodayGold = 3189;
         public const int ShenMiDungeonNumber = 3190;
-        public const int BlackRoom = 3192;
+        public const int BlackRoom = 3191;
+        public const int UnionAttribute_1 = 3192;
+        public const int UnionAttribute_2 = 3193;
+        public const int UnionAttributeFail_1 = 3194;
+        public const int UnionAttributeFail_2 = 3195;
         public const int EnergySkillId = 3193;
         public const int Max = 10000;
 
@@ -1159,5 +1163,11 @@
         public const int Extra__SkillUseMP_Add = Max_SkillUseMP * 100 + 11;              //属性Buff附加加法
         public const int Extra__SkillUseMP_Mul = Max_SkillUseMP * 100 + 12;              //属性Buff附加乘法
         
+        public const int Now_PlayerHitAddPro = 2445;          //增加受到玩家暴击概率的比例
+        public const int Now_PlayerHitAddPro_Base = Now_PlayerHitAddPro * 100 + 1;              //属性累加
+        public const int Now_PlayerHitAddPro_Mul = Now_PlayerHitAddPro * 100 + 2;               //属性乘法
+        public const int Now_PlayerHitAddPro_Add = Now_PlayerHitAddPro * 100 + 3;                   //属性附加
+        public const int Extra_Buff_PlayerCriAddPro_Add = Now_PlayerHitAddPro * 100 + 11;            //属性Buff附加加法
+        public const int Extra_Buff_PlayerCriAddPro_Mul = Now_PlayerHitAddPro * 100 + 12;            //属性Buff附加乘法
     }
 }

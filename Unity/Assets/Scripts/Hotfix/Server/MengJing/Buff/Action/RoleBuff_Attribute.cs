@@ -68,12 +68,27 @@ namespace ET.Server
             //Log.Info("触发Buff" + this.BuffData.BuffConfig.BuffName);
 
             buffS.IsTrigger = true;
+            
+            int buffNumber = 1;
+            int buffindex = 0;
+
+            BuffManagerComponentS buffManagerComponent = buffS.TheUnitBelongto.GetComponent<BuffManagerComponentS>();
+            if ( buffS.mBuffConfig.BuffAddSync == 1 &&  buffS.mBuffConfig.buffParameterType == 3001 )
+            {
+                buffNumber = buffManagerComponent.GetBuffSourceNumber(0, buffS.mBuffConfig.Id);
+                buffindex = buffManagerComponent.GetBuffIndexById(buffS);
+                if (buffindex > 0)
+                {
+                    return;
+                }
+            }
+            
             switch (buffS.mBuffConfig.BuffType)
             {
                 //属性类buff
                 case 1:
                     int NowBuffParameterType = buffS.mBuffConfig.buffParameterType;
-                    float NowBuffParameterValue = (float)buffS.mBuffConfig.buffParameterValue +
+                    float NowBuffParameterValue = (float)buffS.mBuffConfig.buffParameterValue  * buffNumber +
                             buffS.GetTianfuProAdd((int)BuffAttributeEnum.AddParameterValue);
                     int NowBuffParameterValueType = buffS.mBuffConfig.buffParameterValueType;
 
@@ -215,7 +230,8 @@ namespace ET.Server
                             buffS.TheUnitBelongto.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.BuffSkill, skillid.ToString());
                         }
                     }
-
+                    break;
+                case 7:
                     break;
                 default:
                     break;

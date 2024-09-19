@@ -73,11 +73,13 @@ namespace ET.Client
                     unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmDeathState);
                 }
 
+                DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
                 if (unit.Type == UnitType.Monster && unit.GetMonsterType() == (int)MonsterTypeEnum.Boss)
                 {
                     unit.GetComponent<MonsterActRangeComponent>()?.OnDead();
-                    root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainHpBar.OnUnitDead(unit.Id);
+                    dlgMain.View.ES_MainHpBar.OnUnitDead(unit.Id);
                 }
+                dlgMain.View.ES_MainSkill.CheckJingLingFunction();
 
                 if (unit.Type == UnitType.Monster && mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
                 {

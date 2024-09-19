@@ -558,14 +558,14 @@ namespace ET.Server
                     int weaponType = targetId == 0 ? ItemEquipType.Common : (int)ItemConfigCategory.Instance.Get((int)targetId).EquipType;
                     if (weaponType != weapontype)
                     {
-                        //unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, buffId);
+                        unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, buffId);
                     }
                     if (weaponType == weapontype && buffId != 0)
                     {
                         BuffData buffData_1 = new BuffData();
                         buffData_1.SkillId = skillIfo.SkillId;
                         buffData_1.BuffId = buffId;
-                        //unit.GetComponent<BuffManagerComponent>().BuffFactory(buffData_1, unit, null);
+                        unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_1, unit, null);
                     }
                     continue;
                 }
@@ -609,6 +609,8 @@ namespace ET.Server
                     case SkillPassiveTypeEnum.IdleStill_14:
                     case SkillPassiveTypeEnum.EquipIndex_15:
                     case SkillPassiveTypeEnum.AllSkill_17:
+                    case SkillPassiveTypeEnum.AckCritical_19:
+                    case SkillPassiveTypeEnum.FanGunCD_20:
                         trigger = skillproValue >= RandomHelper.RandFloat01();
                         break;
                     case SkillPassiveTypeEnum.TeamerEnter_12:

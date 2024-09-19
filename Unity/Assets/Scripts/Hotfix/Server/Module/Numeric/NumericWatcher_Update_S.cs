@@ -75,7 +75,112 @@ namespace ET.Server
         }
     }
     
+    [NumericWatcher(SceneType.Map,(int)NumericType.SoloRankId)]
+    public class NumericWatcher_SoloRankId : INumericWatcher
+    {
+	    public void Run(Unit unit, NumbericChange args)
+        {
+            int no1_horse = 10009;
+            if (args.NewValue == 1) //排行第一
+            {
+	            unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
+            }
+            else
+            {
+	            unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
+	            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+	            if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse
+	                || numericComponent.GetAsInt(NumericType.HorseRide) == no1_horse)
+	            {
+		            numericComponent.ApplyValue(NumericType.HorseFightID, 0);
+		            numericComponent.ApplyValue(NumericType.HorseRide, 0);
+	            }
+            }
+        }
+    }
+
+	[NumericWatcher(SceneType.Map,(int)NumericType.CombatRankID)]
+	public class NumericWatcher_CombatRankID : INumericWatcher
+	{
+		public void Run(Unit unit, NumbericChange args)
+		{
+			int no1_horse = 10004;
+			if (args.NewValue == 1) //排行第一
+			{
+				unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, true);
+			}
+			else
+			{
+				unit.GetComponent<UserInfoComponentS>().OnHorseActive(no1_horse, false);
+				NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+				if (numericComponent.GetAsInt(NumericType.HorseFightID) == no1_horse)
+				{
+					numericComponent.ApplyValue(NumericType.HorseFightID, 0);
+					numericComponent.ApplyValue(NumericType.HorseRide, 0);
+				}
+			}
+		}
+	}
+
     
+    [NumericWatcher(SceneType.Map,(int)NumericType.SeasonOpenTime)]
+    public class NumericWatcher_SeasonOpenTime : INumericWatcher
+    {
+	    public void Run(Unit unit, NumbericChange args)
+        {
+           
+        }
+    }
+
+    [NumericWatcher(SceneType.Map,(int)NumericType.OccCombatRankID)]
+    public class NumericWatcher_OccCombatRankID : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+	        unit.GetComponent<BuffManagerComponentS>().InitCombatRankBuff();
+        }
+    }
+
+
+    [NumericWatcher(SceneType.Map,(int)NumericType.RaceDonationRankID)]
+	public class NumericWatcher_DonationRankID : INumericWatcher
+	{
+		public void Run(Unit unit, NumbericChange args)
+		{
+			unit.GetComponent<BuffManagerComponentS>().InitDonationBuff();
+		}
+	}
+	
+	/// <summary>
+	/// 出战状态
+	/// </summary>
+	[NumericWatcher(SceneType.Map,(int)NumericType.HorseRide)]
+	public class NumericWatcher_HorseRide : INumericWatcher
+	{
+		public void Run(Unit unit, NumbericChange args)
+		{
+			unit.OnUpdateHorseRide((int)args.OldValue);
+		}
+	}
+
+
+    [NumericWatcher(SceneType.Map,NumericType.RechargeNumber)]
+    public class NumericWatcher_RechargeNumber : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+	        unit.GetComponent<BuffManagerComponentS>().OnMaoXianJiaUpdate();
+        }
+    }
+    
+    [NumericWatcher(SceneType.Map,NumericType.MaoXianExp)]
+    public class NumericWatcher_MaoXianExp : INumericWatcher
+    {
+	    public void Run(Unit unit, NumbericChange args)
+	    {
+		    unit.GetComponent<BuffManagerComponentS>().OnMaoXianJiaUpdate();
+	    }
+    }
     
     [NumericWatcher(SceneType.Map, NumericType.Now_Speed)]
     public class NumericWatcher_Now_Speed : INumericWatcher

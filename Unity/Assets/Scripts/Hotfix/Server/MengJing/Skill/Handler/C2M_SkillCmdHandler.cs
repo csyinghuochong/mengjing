@@ -31,31 +31,7 @@ namespace ET.Server
              unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HorseRide, 0, true);
              SkillManagerComponentS skillManagerManagerComponent = unit.GetComponent<SkillManagerComponentS>();   
              M2C_SkillCmd m2C_SkillCmd = skillManagerManagerComponent.OnUseSkill(request, true);
-
-             if (skillManagerManagerComponent.SkillSecond.ContainsKey(request.SkillID))
-             {
-                 int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[skillManagerManagerComponent.SkillSecond[request.SkillID]].KeyId;
-
-                 List<EntityRef<Unit>> allDefend = unit.GetParent<UnitComponent>().GetAll();
-                 for (int defend = 0; defend < allDefend.Count; defend++)
-                 {
-                     Unit unitdefend = allDefend[defend];
-                     BuffManagerComponentS buffManagerManagerComponent = unitdefend.GetComponent<BuffManagerComponentS>();
-                     if (buffManagerManagerComponent == null || unitdefend.Id == request.TargetID ||unitdefend.Id == unit.Id)
-                     {
-                         continue;
-                     }
-                     int buffNum = buffManagerManagerComponent.GetBuffSourceNumber(unit.Id, buffId);
-                     if (buffNum <= 0)
-                     {
-                         continue;
-                     }
-                     request.TargetID =unitdefend.Id;
-                     buffManagerManagerComponent.BuffRemoveByUnit(0, buffId);
-                     unit.GetComponent<SkillManagerComponentS>().OnUseSkill(request, false);
-                 }
-             }
-
+             
              if (m2C_SkillCmd.Error == ErrorCode.ERR_Success)
              {
                  if (request.ItemId > 0)

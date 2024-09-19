@@ -43,7 +43,7 @@ namespace ET.Server
             // Buff层数触发技能  buffid 1 技能ID 触发间隔
             if (SkillConfigCategory.Instance.BuffTriggerSkill.ContainsKey(skillconfig.Id))
             {
-                KeyValuePairLong keyValuePairLong = SkillConfigCategory.Instance.BuffTriggerSkill[skillconfig.Id];
+                KeyValuePairLong4 keyValuePairLong = SkillConfigCategory.Instance.BuffTriggerSkill[skillconfig.Id];
                 List<EntityRef<Unit>> allDefend = attackUnit.GetParent<UnitComponent>().GetAll();
                 for ( int defend = 0; defend < allDefend.Count; defend++  )
                 {
@@ -58,7 +58,11 @@ namespace ET.Server
                     {
                         continue;
                     }
-                    dUnit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
+
+                    if (keyValuePairLong.Value3 == 0)
+                    {
+                        dUnit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, (int)keyValuePairLong.KeyId);
+                    }
                     attackUnit.GetComponent<SkillManagerComponentS>().TriggerBuffSkill(keyValuePairLong, dUnit.Id, buffNum).Coroutine();
                 }
             }
@@ -66,7 +70,7 @@ namespace ET.Server
             // Buff层数叠加伤害  buffid 2 层数  附加伤害系数
             if (SkillConfigCategory.Instance.BuffAddHurt.ContainsKey(skillconfig.Id))
             {
-                KeyValuePairLong keyValuePairLong = SkillConfigCategory.Instance.BuffAddHurt[skillconfig.Id];
+                KeyValuePairLong4 keyValuePairLong = SkillConfigCategory.Instance.BuffAddHurt[skillconfig.Id];
                 int buffId = (int)keyValuePairLong.KeyId;
                 int buffNum = defendUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, buffId);
                 if(buffNum > 0)
@@ -219,6 +223,9 @@ namespace ET.Server
                     //猎人
                     case 3:
                         attack_Act += numericComponentAttack.GetAsLong(NumericType.Now_ActQiangDuAdd);
+                        break;
+                    case 4:
+                        attack_Act += numericComponentAttack.GetAsLong(NumericType.Now_MageQiangDuAdd);
                         break;
                 }
             }
@@ -494,10 +501,22 @@ namespace ET.Server
                 //获取重击等级  判定是否触发重击
                 int zhongjiLvValue = numericComponentAttack.GetAsInt(NumericType.Now_ZhongJiLv);
                 float zhongJiPro = numericComponentAttack.GetAsFloat(NumericType.Now_ZhongJiPro) + LvProChange(zhongjiLvValue, attackUnitLv);
+                
+                //重击阈值
+                if (zhongJiPro > 0.75f) {
+                    zhongJiPro = 0.75f;
+                }
+                
                 if (RandomHelper.RandFloat() <= zhongJiPro)
                 {
                     defValue = 0;
                     actValue += numericComponentAttack.GetAsLong(NumericType.Now_ZhongJi);
+                    DamgeType = 3;
+                    
+                    //重击对于怪物会额外附加一些伤害
+                    if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Monster) {
+                        actValue =(long)(actValue * 1.2f);
+                    }
                 }
 
                 //判定是否无视防御
@@ -690,7 +709,14 @@ namespace ET.Server
                     //普攻保留50%
                     if (skillconfig.SkillActType == 0)
                     {
-                        damge = (int)((float)damge * 0.5f);
+                        //猎人保留40%普攻伤害
+                        if (attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Occ == 3)
+                        {
+                            damge = (int)((float)damge * 0.4f);
+                        }
+                        else {
+                            damge = (int)((float)damge * 0.5f);
+                        }
                     }
                 }
 
@@ -785,6 +811,52 @@ namespace ET.Server
                     damgePro += numericComponentAttack.GetAsFloat(NumericType.Now_ZhanShaPro);
                 }
 
+            //技能附加伤害
+                if (!CommonHelp.IfNull(skillconfig.SkillDamgeAddValue))
+                {
+                    string[] skillAddValue = skillconfig.SkillDamgeAddValue.Split(',');
+                    if (skillAddValue.Length >= 1)
+                    {
+                        switch (skillAddValue[0])
+                        {
+
+                            //当目标血量低于多少,技能伤害额外提升
+                            case "1":
+                                if (defHpPro <= float.Parse(skillAddValue[1])) {
+                                    damgePro += float.Parse(skillAddValue[2]);
+                                }
+                                break;
+
+                            //当自身血量低于多少,技能伤害额外提升
+                            case "2":
+
+                                float acthpPro = (float)numericComponentAttack.GetAsInt(NumericType.Now_Hp) / (float)numericComponentAttack.GetAsInt(NumericType.Now_MaxHp);
+                                if (acthpPro <= float.Parse(skillAddValue[1]))
+                                {
+                                    damgePro += float.Parse(skillAddValue[2]);
+                                }
+                                break;
+
+                            //当血量高于多少,技能伤害额外提升
+                            case "3":
+                                if (defHpPro >= float.Parse(skillAddValue[1]))
+                                {
+                                    damgePro += float.Parse(skillAddValue[2]);
+                                }
+                                break;
+
+                            //当自身血量高于多少,技能伤害额外提升
+                            case "4":
+
+                                acthpPro = (float)numericComponentAttack.GetAsInt(NumericType.Now_Hp) / (float)numericComponentAttack.GetAsInt(NumericType.Now_MaxHp);
+                                if (acthpPro >= float.Parse(skillAddValue[1]))
+                                {
+                                    damgePro += float.Parse(skillAddValue[2]);
+                                }
+                                break;
+                        }
+                    }
+                }
 
                 //普攻加成
                 if (skillconfig.SkillActType == 0)
@@ -1010,6 +1082,7 @@ namespace ET.Server
                     if (playerPKStatus)
                     {
                         CriPro -= numericComponentDefend.GetAsFloat(NumericType.Now_PlayerCriSubPro);
+                        HitPro += numericComponentAttack.GetAsFloat(NumericType.Now_PlayerHitAddPro);
                     }
                     
                     //根据双方战力调整暴击系数
@@ -1168,7 +1241,7 @@ namespace ET.Server
         private static float GetFightValueCriAndHitProValue(int actFightValue, int defFightValue)
         {
 
-            float addPro = (actFightValue / defFightValue) - 1;
+            float addPro = ((actFightValue / defFightValue) - 1) * 1.5f;
 
             //范围限制
             if (addPro < 0)
@@ -1204,7 +1277,7 @@ namespace ET.Server
         public static float GetFightValueActProValue(int actFightValue, int defFightValue)
         {
 
-            float addPro = (actFightValue / defFightValue) - 1;
+            float addPro = ((actFightValue / defFightValue) - 1) * 1.5f;
 
             //范围限制
             if (addPro < 0)
@@ -1213,9 +1286,9 @@ namespace ET.Server
             }
 
             //addPro = addPro + 0.05f;
-            if (addPro > 0.3f)
+            if (addPro > 0.75f)
             {
-                addPro = 0.3f;
+                addPro = 0.75f;
             }
 
             return addPro;
@@ -1747,7 +1820,7 @@ namespace ET.Server
 
                 //职业专精
                 float occMastery = 0f;
-                if (userInfo.OccTwo != 0)
+                if (userInfo.Occ != 0)
                 {
                     //if (OccupationTwoConfigCategory.Instance.Get(userInfo.OccTwo).ArmorMastery == ItemConfigCategory.Instance.Get(equipIDList[i]).EquipType)
                     //{
@@ -1971,6 +2044,20 @@ namespace ET.Server
              for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
              {
                  AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
+             }
+             
+             //家族属性
+             List<int> unionAttributes = new List<int>() {  NumericType.UnionAttribute_1, NumericType.UnionAttribute_2 };
+             for ( int unionattri = 0;  unionattri < unionAttributes.Count; unionattri++ )
+             {
+                 int unionattriid = numericComponent.GetAsInt(unionAttributes[unionattri]);
+                 PublicQiangHuaConfig publicQiangHuaConfig_2 = PublicQiangHuaConfigCategory.Instance.Get(unionattriid);
+                 List<PropertyValue>  publicqianghuaProList_2 = new List<PropertyValue>();
+                 NumericHelp.GetProList(publicQiangHuaConfig_2.EquipPropreAdd, publicqianghuaProList_2);
+                 for (int pro = 0; pro < publicqianghuaProList_2.Count; pro++)
+                 {
+                     AddUpdateProDicList(publicqianghuaProList_2[pro].HideID, publicqianghuaProList_2[pro].HideValue, UpdateProDicList);
+                 }
              }
 
              //宠物修炼属性。 玩家数值

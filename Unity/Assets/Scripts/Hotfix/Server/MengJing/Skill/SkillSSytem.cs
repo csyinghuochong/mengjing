@@ -34,6 +34,7 @@ namespace ET.Server
              self.SkillFirstHurtTime = 0;
              self.SkillTriggerInvelTime = 0;
              self.SkillTriggerLastTime = 0;
+             self.OnlyOnceBuffUnitID.Clear();
              self.SkillState = SkillState.Running;
              self.SkillBeginTime = TimeHelper.ServerNow();
              self.DamgeChiXuLastTime = TimeHelper.ServerNow();
@@ -287,6 +288,14 @@ namespace ET.Server
                      self.SkillBuff(self.SkillConf.BuffID[y], uu);
                  }
              }
+             if (!self.OnlyOnceBuffUnitID.Contains(uu.Id) )
+             {
+                 self.OnlyOnceBuffUnitID.Add(uu.Id);
+                 for (int y = 0; y < self.SkillConf.OnlyOnceBuffID.Length; y++) //int[]  AT
+                 {
+                     self.SkillBuff(self.SkillConf.OnlyOnceBuffID[y], uu);
+                 }
+             }
 
              SkillSetComponentS skillSetComponent = self.TheUnitFrom.GetComponent<SkillSetComponentS>();
              List<int> buffInitAdd = skillSetComponent != null ? skillSetComponent.GetBuffIdAdd(self.SkillConf.Id) : null;
@@ -360,6 +369,11 @@ namespace ET.Server
                          }
                      }
                  }
+             }
+
+             if (uu.GetComponent<BuffManagerComponentS>().IsSkillImmune(self.SkillConf.Id))
+             {
+                 return false;
              }
 
              bool ishit =  Function_Fight.Fight(self.TheUnitFrom, uu, self, hurtMode);

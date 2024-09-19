@@ -381,7 +381,7 @@ namespace ET.Client
 
         public static async ETTask ShowSkillSecondCD(this ES_MainSkillGrid self, int skillId)
         {
-            KeyValuePairLong keyValuePairLong = null;
+            KeyValuePairLong4 keyValuePairLong = null;
             SkillConfigCategory.Instance.BuffSecondSkill.TryGetValue(skillId, out keyValuePairLong);
             if (keyValuePairLong == null)
             {

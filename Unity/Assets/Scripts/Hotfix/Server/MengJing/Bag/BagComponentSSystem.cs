@@ -72,6 +72,31 @@ namespace ET.Server
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static bool HaveOccEquip(this BagComponentS self)
+        {
+            List<ItemInfo> allequiplist = new List<ItemInfo>();
+            allequiplist.AddRange(self.AllItemList[ItemLocType.ItemLocEquip]);
+            allequiplist.AddRange(self.AllItemList[ItemLocType.ItemLocEquip_2]);
+
+            for (int i = 0; i < allequiplist.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(allequiplist[i].ItemID);
+                if (itemConfig.ItemType == 3
+                    && itemConfig.EquipType >= 0 && itemConfig.EquipType <= 100
+                    && itemConfig.ItemSubType >= 0 && itemConfig.ItemSubType <= 12)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
         public static List<PropertyValue> GetGemProLists(this BagComponentS self)
         {
             List<PropertyValue> list = new List<PropertyValue>();
@@ -143,7 +168,7 @@ namespace ET.Server
                 needGrid += (totalNum % itemCof.ItemPileSum > 0 ? 1 : 0);
                 finalNum = totalNum - (needGrid - 1) * itemCof.ItemPileSum;
 
-                if (needGrid <= 0 || needGrid >= bagInfos.Count)
+                if (needGrid <= 0 || needGrid > bagInfos.Count)
                 {
                     Log.Debug($"RecvItemSortError: {self.GetParent<Unit>().Id} {bagInfos[0].ItemID}   {totalNum}   {needGrid}  {bagInfos.Count}");
                     continue;
@@ -345,6 +370,36 @@ namespace ET.Server
             return baginfo;
         }
 
+        public static int GetNeedCell(this BagComponentS self, List<RewardItem> itemids, int itemLocType)
+        {
+            int needcell = 0;
+            for  ( int i =0; i < itemids.Count; i++ )
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemids[i].ItemID);
+                long curNumber = self.GetItemNumber(itemids[i].ItemID, itemLocType);
+
+                if (curNumber > 0 && curNumber + itemids[i].ItemNum < itemConfig.ItemPileSum)
+                {
+                    needcell = 0;
+                }
+                else
+                {
+                    int temp = 0;
+                    temp += (int)(1f * itemids[i].ItemNum / itemConfig.ItemPileSum);
+                    temp += (itemids[i].ItemNum % itemConfig.ItemPileSum > 0 ? 1 : 0);
+
+                    needcell += temp;
+
+                    if (temp != 1)
+                    {
+                        Console.WriteLine($"needcell:{needcell}  ItemNum:{itemids[i].ItemNum}   ItemPileSum:{itemConfig.ItemPileSum}");
+                    }
+                }
+            }
+
+            return needcell;
+        }
+        
         //获取某个道具的数量
         public static long GetItemNumber(this BagComponentS self, int itemId, int itemLocType = ItemLocType.ItemLocBag)
         {
@@ -497,6 +552,25 @@ namespace ET.Server
             return false;
         }
 
+        public static void OnResetSeason(this BagComponentS self)
+        { 
+            self.SeasonJingHePlan = 0;
+           //self.SeasonJingHe.Clear();
+            //self.ClearJingHeItem(self.BagItemList);
+        }
+
+        public static void ClearJingHeItem(this BagComponentS self, List<ItemInfo> bagInfos)
+        {
+            for (int i = bagInfos.Count - 1; i >= 0; i--)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.EquipType == 201)
+                {
+                    bagInfos.RemoveAt(i);
+                }
+            }
+        }
+        
         public static List<ItemInfo> GetCurJingHeList(this BagComponentS self)
         {
             List<ItemInfo> bagInfos = new List<ItemInfo>();
@@ -525,6 +599,40 @@ namespace ET.Server
             return false;
         }
 
+        public static List<int> GetEquipTianFuIds(this BagComponentS self)
+        {
+            List<int> equiptianfuids = new List<int>(); 
+            List<ItemInfo> equiplist = new List<ItemInfo>();
+            equiplist.AddRange(self.AllItemList[ItemLocType.ItemLocEquip] );
+            equiplist.AddRange(self.AllItemList[ItemLocType.ItemLocEquip_2]);
+            equiplist.AddRange(self.AllItemList[ItemLocType.SeasonJingHe]);
+
+            
+            for (int i = 0; i < equiplist.Count; i++)
+            {
+                if (!ItemConfigCategory.Instance.Contain(equiplist[i].ItemID))
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equiplist[i].ItemID);
+
+                if (!EquipConfigCategory.Instance.Contain(itemConfig.ItemEquipID))
+                {
+                    continue;
+                }
+                EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
+                
+
+                if (equipConfig.TianFuId != 0)
+                {
+                    equiptianfuids.Add(equipConfig.TianFuId);
+                }
+            }
+
+            return equiptianfuids;
+        }
+        
         public static ItemInfo GetJingHeByWeiZhi(this BagComponentS self, int subType)
         {
             List<ItemInfo> bagInfos = self.GetCurJingHeList();
@@ -956,18 +1064,20 @@ namespace ET.Server
                 return true;
             }
 
-            //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
-            if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
-                UseLocType == ItemLocType.ItemLocBag)
+            if (getType != ItemGetWay.GemHeCheng) //宝石合成在对应的协议有判断
             {
-                return false;
+                //宠物之核都是通过ItemLocType.ItemLocBag进入背包的
+                if ((petHeXinNumber + self.GetItemByLoc(ItemLocType.ItemPetHeXinBag).Count > GlobalValueConfigCategory.Instance.PetHeXinMax) &&
+                    UseLocType == ItemLocType.ItemLocBag)
+                {
+                    return false;
+                }
+                if (needCellNumber > self.GetBagLeftCell(ItemLocType.ItemLocBag) && UseLocType == ItemLocType.ItemLocBag)
+                {
+                    return false;
+                }
             }
-            if (needCellNumber > self.GetBagLeftCell(ItemLocType.ItemLocBag) && UseLocType == ItemLocType.ItemLocBag)
-            {
-                return false;
-            }
-
-
+            
             //通知客户端背包刷新
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             m2c_bagUpdate.BagInfoAdd.Clear();

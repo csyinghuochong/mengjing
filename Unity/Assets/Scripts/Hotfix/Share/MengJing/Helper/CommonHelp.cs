@@ -59,7 +59,12 @@ namespace  ET
         {
             return 120;
         }
-        
+
+        public static int GetSkillCdRate(int sceneType)
+        {
+            return 1;
+        }
+
         public static bool IsCanPaiMai_KillBoss(List<KeyValuePair> monsterlist, int lv)
         {
             int number = 0;

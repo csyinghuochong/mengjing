@@ -92,6 +92,23 @@ namespace ET.Server
 
         }
         
+        public static int GetBuffIndexById(this BuffManagerComponentS self, BuffS buffHandler)
+        {
+            int buffindex = -1;
+            int bufflist = self.m_Buffs.Count;
+
+            for (int i = bufflist - 1; i >= 0; i--)
+            {
+                if (self.m_Buffs[i] != buffHandler)
+                {
+                    continue;
+                }
+                buffindex = i;
+                break;
+            }
+            return buffindex;
+        }
+        
         public static void Check(this BuffManagerComponentS self)
         {
             self.Checking = true;
@@ -321,23 +338,7 @@ namespace ET.Server
             {
                 return;
             }
-
-            //霸体状态和无敌状态免疫眩晕和沉默的buff
-            if (stateComponent.StateTypeGet(StateTypeEnum.BaTi) || stateComponent.StateTypeGet(StateTypeEnum.WuDi))
-            {
-                if (newState == StateTypeEnum.Shackle || newState == StateTypeEnum.Dizziness || newState == StateTypeEnum.Shackle)
-                {
-                    //免疫
-                    M2C_UnitBuffStatus m2C_UnitBuffStatus = M2C_UnitBuffStatus.Create();
-                    m2C_UnitBuffStatus.UnitID = unit.Id;
-                    m2C_UnitBuffStatus.FlyType = 12;
-                    m2C_UnitBuffStatus.BuffID = buffData.BuffId;
-                    //当前场景内的玩家全部广播
-                    MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffStatus);
-                    return;
-                }
-            }
-
+            
             //眩晕抵抗
             float now_DizzinessPro = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Resistance_Dizziness_Pro);
             if (RandomHelper.RandFloat01() < now_DizzinessPro)
@@ -353,6 +354,29 @@ namespace ET.Server
                     MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffStatus);
                     return;
                 }
+            }
+            
+            //霸体状态和无敌状态免疫眩晕和沉默的buff
+            if (stateComponent.StateTypeGet(StateTypeEnum.BaTi) || stateComponent.StateTypeGet(StateTypeEnum.WuDi))
+            {
+                if (newState == StateTypeEnum.Shackle || newState == StateTypeEnum.Dizziness || newState == StateTypeEnum.Shackle)
+                {
+                    //免疫
+                    M2C_UnitBuffStatus m2C_UnitBuffStatus = M2C_UnitBuffStatus.Create();
+                    m2C_UnitBuffStatus.UnitID = unit.Id;
+                    m2C_UnitBuffStatus.FlyType = 12;
+                    m2C_UnitBuffStatus.BuffID = buffData.BuffId;
+                    //当前场景内的玩家全部广播
+                    MapMessageHelper.Broadcast(self.GetParent<Unit>(), m2C_UnitBuffStatus);
+                    return;
+                }
+            }
+            
+            //霸体状态驱散禁锢效果
+            if (newState == StateTypeEnum.BaTi)
+            {
+                self.OnRemoveBuffByState(StateTypeEnum.Shackle);
+                self.OnRemoveBuffByState(StateTypeEnum.Dizziness);
             }
 
             int addBufStatus = 1; //1新增buff  2 移除 3 重置 4同状态返回
@@ -447,8 +471,8 @@ namespace ET.Server
                     Console.WriteLine($"buffHandler.mBuffConfig == null:  {buffData.BuffId}");
                 }
 
-                buffHandler.OnInit( from, unit, skillHandler);
                 self.m_Buffs.Insert(0, buffHandler); //添加至buff列表中
+                buffHandler.OnInit( from, unit, skillHandler);
                 self.AddTimer();
 
                 self.AddBuffRecord(1, buffHandler.BuffData.BuffId);
@@ -471,6 +495,7 @@ namespace ET.Server
                 m2C_UnitBuffUpdate.UnitType = from.Type;
                 m2C_UnitBuffUpdate.UnitConfigId = from.ConfigId;
                 m2C_UnitBuffUpdate.SkillId = buffData.SkillId;
+                m2C_UnitBuffUpdate.UnitIdFrom = from.Id;
                 if (unit.GetComponent<AOIEntity>() == null)
                 {
                     Log.Error($"unit.GetComponent<AOIEntity>() == null  {unit.Type} {unit.ConfigId}  {unit.Id}  {unit.IsDisposed}");
@@ -494,10 +519,10 @@ namespace ET.Server
                 self.BuffRemoveByUnit(from.Id, buffData.BuffId);
             }
 
-            // if (notice && addBufStatus == 1 && skillBuffConfig.BuffAddSync == 1)
-            // {
-            //     self.BuffAddSyncTime(buffHandler.BuffEndTime, skillBuffConfig);
-            // }
+            if (notice && addBufStatus == 1 && skillBuffConfig.BuffAddSync == 1)
+            {
+                self.BuffAddSyncTime(buffHandler.BuffEndTime, skillBuffConfig);
+            }
         }
 
         public static void BuffAddSyncTime(this BuffManagerComponentS self, long endTime, SkillBuffConfig skillBuffConfig)
@@ -526,7 +551,27 @@ namespace ET.Server
 
             MapMessageHelper.BroadcastBuff(unit, m2C_UnitBuffUpdate, skillBuffConfig, self.SceneType);
         }
+        
+        public static bool IsSkillImmune(this BuffManagerComponentS self, int skillid)
+        {
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = 0; i < buffcnt; i++)
+            {
+                SkillBuffConfig buffConfig = self.m_Buffs[i].mBuffConfig;
+                if (buffConfig.BuffType != 7)
+                {
+                    continue;
+                }
+                if(buffConfig.buffParameterValue2.Contains(skillid.ToString()))
+                { 
+                    return true;        
+                }
+            }
 
+
+            return false;
+        }
+        
         public static int GetBuffSourceNumber(this BuffManagerComponentS self, long formId, int buffId)
         {
             int buffnumber = 0;

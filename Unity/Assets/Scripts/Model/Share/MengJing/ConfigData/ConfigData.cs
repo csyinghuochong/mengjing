@@ -6,6 +6,9 @@ namespace ET
 {
     public static class ConfigData
     {
+
+        [StaticField]
+        public static List<int> NOPassiveSkill = new List<int>() { };
         
           //装备传承职业对应激活技能
        [StaticField]

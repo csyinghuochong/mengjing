@@ -130,25 +130,39 @@ namespace ET.Client
                 switch (skillIndicatorItem.SkillZhishiType)
                 {
                     case SkillZhishiType.CommonAttack:
-                        int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
-                        float[] scaleList = new float[3] { 6f, 12f, 6f };
-
-                        //法师加长
-                        if (occ == 2)
+                        AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
+                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(attackComponent.SkillId);
+                        if (skillConfig.SkillRangeSize > 0f)
                         {
-                            scaleList = new float[3] { 12f, 12f, 12f };
+                            skillIndicatorItem.GameObject.Get<GameObject>("Skill_Area").transform.localScale = Vector3.one * (float)skillConfig.SkillRangeSize;
                         }
-
-                        //猎人加长
-                        if (occ == 3)
+                        else
                         {
-                            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                            int equipIndex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex);
-                            //equipIndex 0弓   1剑
-                            scaleList = equipIndex == 0 ? new float[3] { 15f, 15f, 15f } : new float[3] { 6f, 12f, 6f };
-                        }
+                            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+                            float[] scaleList = new float[4] { 6f, 12f, 6f, 6f };
 
-                        skillIndicatorItem.GameObject.Get<GameObject>("Skill_Area").transform.localScale = Vector3.one * scaleList[occ - 1];
+                            //法师加长
+                            if (occ == 2)
+                            {
+                                scaleList = new float[4] { 12f, 12f, 12f, 12f };
+                            }
+
+                            //猎人加长
+                            if (occ == 3)
+                            {
+                                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                                int equipIndex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex);
+                                //equipIndex 0弓   1剑
+                                scaleList = equipIndex == 0 ? new float[4] { 15f, 15f, 15f, 15f } : new float[4] { 6f, 12f, 6f, 6f };
+                            }
+                            
+                            //法师加长
+                            if (occ == 4)
+                            {
+                                scaleList = new float[4] { 12f, 12f, 12f, 12f };
+                            }
+                            skillIndicatorItem.GameObject.Get<GameObject>("Skill_Area").transform.localScale = Vector3.one * scaleList[occ - 1];
+                        }
                         break;
                     case SkillZhishiType.Position:
                         float innerRadius = (float)self.mSkillConfig.DamgeRange[0] * 2f;

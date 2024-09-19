@@ -12,7 +12,7 @@ namespace ET.Server
 
             unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
             SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
-            if (weaponSkillConfig.IfStopMove == 0 && !unit.GetComponent<MoveComponent>().IsArrived())
+            if (!unit.GetComponent<MoveComponent>().IsArrived())  /// &&  weaponSkillConfig.IfStopMove == 0
             {
                 unit.Stop(-2);
             }

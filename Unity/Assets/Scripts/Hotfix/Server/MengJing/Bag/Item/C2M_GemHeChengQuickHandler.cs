@@ -16,6 +16,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
+            int leftCell = unit.GetComponent<BagComponentS>().GetBagLeftCell(request.LocType);
 
             List<ItemInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc(request.LocType);
 
@@ -106,6 +107,18 @@ namespace ET.Server
 
                 rewardItems.Add(new RewardItem() { ItemID = itemid, ItemNum = number });
             }
+            
+            int needCell = unit.GetComponent<BagComponentS>().GetNeedCell(rewardItems,request.LocType);
+            if (needCell < 1)
+            {
+                needCell = 1;
+            }
+            if (leftCell < needCell)
+            {
+                response.Error = request.LocType == 0 ? ErrorCode.ERR_BagIsFull :  ErrorCode.ERR_WarehouseIsFull;
+                return;
+            }
+            
             unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GemHeCheng}_{TimeHelper.ServerNow()}",
                 UseLocType: request.LocType);
 

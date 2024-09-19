@@ -114,7 +114,7 @@ namespace ET.Client
 
             self.t_Buffs.Clear();
         }
-
+        
         public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData)
         {
             SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
@@ -170,6 +170,26 @@ namespace ET.Client
             return number;
         }
 
+        public static int GetBuffSourceNumber(this BuffManagerComponentC self, long formId, int buffId)
+        {
+            int buffnumber = 0;
+            int bufflist = self.m_Buffs.Count;
+
+            for (int i = bufflist - 1; i >= 0; i--)
+            {
+                if (self.m_Buffs[i].BuffData.BuffId != buffId)
+                {
+                    continue;
+                }
+                if (formId != 0 && formId != self.m_Buffs[i].BuffData.UnitIdFrom)
+                {
+                    continue;
+                }
+                buffnumber++;
+            }
+            return buffnumber;
+        }
+        
         /// <summary>
         /// 通过标识ID获得Buff
         /// </summary>

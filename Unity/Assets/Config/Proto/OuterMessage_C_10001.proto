@@ -3184,6 +3184,7 @@ message M2C_UnitBuffUpdate // IMessage
 	int32 UnitType = 8;
 	int32 UnitConfigId = 9;
 	int32 SkillId = 10;
+	int64 UnitIdFrom = 11;
 }
 
 message M2C_UnitBuffRemove // IMessage
