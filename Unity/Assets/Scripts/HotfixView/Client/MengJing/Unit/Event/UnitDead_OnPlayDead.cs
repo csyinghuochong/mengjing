@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UnitDead_OnPlayDead: AEvent<Scene, UnitDead>
+    public class UnitDead_OnPlayDead : AEvent<Scene, UnitDead>
     {
         protected override async ETTask Run(Scene root, UnitDead args)
         {
@@ -38,10 +38,10 @@ namespace ET.Client
                         ShowRevive(unit, mapComponent).Coroutine();
                     }
                 }
-                else if (unit.Type == UnitType.Monster)
+                else if (unit.Type == UnitType.Monster && !unit.IsBoss())
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
-                    // TODO 消失特效，导入的插件不支持URP，待解决
+                    unit.GetComponent<GameObjectComponent>().Dissolve = true;
                 }
                 else
                 {

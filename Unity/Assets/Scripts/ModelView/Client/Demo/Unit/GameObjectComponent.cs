@@ -17,5 +17,6 @@ namespace ET.Client
         public string OldShader;
 
         public bool BianShenEffect;
+        public bool Dissolve { get; set; }
     }
 }

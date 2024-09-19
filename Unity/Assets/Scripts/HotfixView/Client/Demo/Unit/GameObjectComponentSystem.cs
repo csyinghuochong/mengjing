@@ -82,10 +82,60 @@ namespace ET.Client
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
                 self.OnRevive();
-                GameObjectLoadHelper.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
+
+                if (self.Dissolve)
+                {
+                    self.ShowDissolve().Coroutine();
+                }
+                else
+                {
+                    GameObjectLoadHelper.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
+                }
             }
 
             self.GameObject = null;
+        }
+
+        private static async ETTask ShowDissolve(this GameObjectComponent self)
+        {
+            string unitAssetsPath = self.UnitAssetsPath;
+            GameObject gameObject = self.GameObject;
+
+            MaterialManager[] materialManagers = gameObject.transform.GetComponentsInChildren<MaterialManager>();
+            foreach (MaterialManager materialManager in materialManagers)
+            {
+                materialManager.Switch("Dissolve");
+            }
+
+            long duration = 1500;// 持续时间
+            List<SkinnedMeshRenderer> renderers = new List<SkinnedMeshRenderer>(gameObject.GetComponentsInChildren<SkinnedMeshRenderer>());
+            List<Material> materials = new List<Material>();
+            foreach (var renderer in renderers)
+            {
+                materials.AddRange(renderer.materials);
+            }
+
+            long elapsedTime = 0;
+            long interval = 100;
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (elapsedTime < duration)
+            {
+                elapsedTime += interval;
+                float m_DissolveAmount = elapsedTime * 1f / duration;
+                foreach (var mat in materials)
+                {
+                    mat.SetFloat("_DissolveAmount", m_DissolveAmount);
+                }
+
+                await timerComponent.WaitAsync(interval);
+            }
+
+            foreach (MaterialManager materialManager in materialManagers)
+            {
+                materialManager.RestoreOriginalMaterials();
+            }
+
+            GameObjectLoadHelper.RecoverGameObject(unitAssetsPath, gameObject);
         }
 
         public static void LoadGameObject(this GameObjectComponent self)
