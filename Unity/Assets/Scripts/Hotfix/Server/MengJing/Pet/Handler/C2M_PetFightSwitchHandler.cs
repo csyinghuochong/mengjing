@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     
@@ -21,6 +23,7 @@ namespace ET.Server
                 if ( petfightindex - 1 == i )
                 {
                     petunit.GetComponent<AIComponent>().Stop_2();
+                    Console.WriteLine($"切换到宠物:  {petunit.Id}");
                 }
                 else
                 {
