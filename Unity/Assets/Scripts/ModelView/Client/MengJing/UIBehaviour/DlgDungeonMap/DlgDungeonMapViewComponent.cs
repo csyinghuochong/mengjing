@@ -704,6 +704,142 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_LeftRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_LeftRectTransform == null )
+     			{
+		    		this.m_EG_LeftRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left");
+     			}
+     			return this.m_EG_LeftRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_RefreshTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RefreshTimeText == null )
+     			{
+		    		this.m_E_RefreshTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_RefreshTime");
+     			}
+     			return this.m_E_RefreshTimeText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_BossRefreshButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshButton == null )
+     			{
+		    		this.m_E_BossRefreshButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_BossRefresh");
+     			}
+     			return this.m_E_BossRefreshButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BossRefreshImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshImage == null )
+     			{
+		    		this.m_E_BossRefreshImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_BossRefresh");
+     			}
+     			return this.m_E_BossRefreshImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_DungeonMapLevelItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DungeonMapLevelItemsImage == null )
+     			{
+		    		this.m_E_DungeonMapLevelItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_DungeonMapLevelItems");
+     			}
+     			return this.m_E_DungeonMapLevelItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_DungeonMapLevelItems");
+     			}
+     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_BossRefreshCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshCloseButton == null )
+     			{
+		    		this.m_E_BossRefreshCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_BossRefreshClose");
+     			}
+     			return this.m_E_BossRefreshCloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BossRefreshCloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshCloseImage == null )
+     			{
+		    		this.m_E_BossRefreshCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_BossRefreshClose");
+     			}
+     			return this.m_E_BossRefreshCloseImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_LevelReturnButton
      	{
      		get
@@ -735,125 +871,6 @@ namespace ET.Client
 		    		this.m_E_LevelReturnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_LevelReturn");
      			}
      			return this.m_E_LevelReturnImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_RefreshTimeText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RefreshTimeText == null )
-     			{
-		    		this.m_E_RefreshTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RefreshTime");
-     			}
-     			return this.m_E_RefreshTimeText;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_BossRefreshButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BossRefreshButton == null )
-     			{
-		    		this.m_E_BossRefreshButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefresh");
-     			}
-     			return this.m_E_BossRefreshButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_BossRefreshImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BossRefreshImage == null )
-     			{
-		    		this.m_E_BossRefreshImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefresh");
-     			}
-     			return this.m_E_BossRefreshImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_DungeonMapLevelItemsImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_DungeonMapLevelItemsImage == null )
-     			{
-		    		this.m_E_DungeonMapLevelItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_DungeonMapLevelItems");
-     			}
-     			return this.m_E_DungeonMapLevelItemsImage;
-     		}
-     	}
-
-		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/E_DungeonMapLevelItems");
-     			}
-     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_BossRefreshCloseButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BossRefreshCloseButton == null )
-     			{
-		    		this.m_E_BossRefreshCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefreshClose");
-     			}
-     			return this.m_E_BossRefreshCloseButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_BossRefreshCloseImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BossRefreshCloseImage == null )
-     			{
-		    		this.m_E_BossRefreshCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefreshClose");
-     			}
-     			return this.m_E_BossRefreshCloseImage;
      		}
      	}
 
@@ -951,8 +968,7 @@ namespace ET.Client
 			this.m_E_NanDu_3_ButtonImage = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
-			this.m_E_LevelReturnButton = null;
-			this.m_E_LevelReturnImage = null;
+			this.m_EG_LeftRectTransform = null;
 			this.m_E_RefreshTimeText = null;
 			this.m_E_BossRefreshButton = null;
 			this.m_E_BossRefreshImage = null;
@@ -960,6 +976,8 @@ namespace ET.Client
 			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_BossRefreshCloseButton = null;
 			this.m_E_BossRefreshCloseImage = null;
+			this.m_E_LevelReturnButton = null;
+			this.m_E_LevelReturnImage = null;
 			this.m_E_Type0Image = null;
 			this.m_E_Type1Image = null;
 			this.m_E_Type2Image = null;
@@ -1007,8 +1025,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_NanDu_3_ButtonImage = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
-		private UnityEngine.UI.Button m_E_LevelReturnButton = null;
-		private UnityEngine.UI.Image m_E_LevelReturnImage = null;
+		private UnityEngine.RectTransform m_EG_LeftRectTransform = null;
 		private UnityEngine.UI.Text m_E_RefreshTimeText = null;
 		private UnityEngine.UI.Button m_E_BossRefreshButton = null;
 		private UnityEngine.UI.Image m_E_BossRefreshImage = null;
@@ -1016,6 +1033,8 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_BossRefreshCloseButton = null;
 		private UnityEngine.UI.Image m_E_BossRefreshCloseImage = null;
+		private UnityEngine.UI.Button m_E_LevelReturnButton = null;
+		private UnityEngine.UI.Image m_E_LevelReturnImage = null;
 		private UnityEngine.UI.Image m_E_Type0Image = null;
 		private UnityEngine.UI.Image m_E_Type1Image = null;
 		private UnityEngine.UI.Image m_E_Type2Image = null;
