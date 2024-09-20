@@ -112,16 +112,16 @@ namespace ET
                 BuildHelper.Build(this.platformType, this.buildOptions);
                 return;
             }
-
-            if (GUILayout.Button("ExcelExporter"))
-            {
-                ToolsEditor.ExcelExporter();
-                return;
-            }
-
+            
             if (GUILayout.Button("ExcelExporterSingle"))
             {
                 ExcelFileWindow.ShowWindow();
+                return;
+            }
+            
+            if (GUILayout.Button("ExcelExporter"))
+            {
+                ToolsEditor.ExcelExporter();
                 return;
             }
 
