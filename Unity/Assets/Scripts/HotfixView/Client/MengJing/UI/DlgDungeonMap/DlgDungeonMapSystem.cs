@@ -451,6 +451,22 @@ namespace ET.Client
             self.View.E_NanDu_2_SelectImage.gameObject.SetActive(diff == 2);
             self.View.E_NanDu_3_SelectImage.gameObject.SetActive(diff == 3);
 
+            switch (diff)
+            {
+                case 1:
+                    self.View.E_NanDuTipText.text = "适合刚进入的探险者";
+                    self.View.E_AdditionText.text = string.Empty;
+                    break;
+                case 2:
+                    self.View.E_NanDuTipText.text = "适合经常冒险";
+                    self.View.E_AdditionText.text = "爆率提升20%";
+                    break;
+                case 3:
+                    self.View.E_NanDuTipText.text = "不容一丝懈怠爆率提升50%";
+                    self.View.E_AdditionText.text = "爆率提升50%";
+                    break;
+            }
+
             UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             using (zstring.Block())
             {
