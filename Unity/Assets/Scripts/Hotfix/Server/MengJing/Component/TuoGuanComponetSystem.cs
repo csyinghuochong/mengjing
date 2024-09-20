@@ -7,9 +7,9 @@ namespace ET.Server
     [FriendOf(typeof(TuoGuanComponet))]
     public static partial class TuoGuanComponetSystem
     {
-        
+
         [Invoke(TimerInvokeType.TuoGuanTimer)]
-        public class TuoGuanTimer: ATimer<TuoGuanComponet>
+        public class TuoGuanTimer : ATimer<TuoGuanComponet>
         {
             protected override void Run(TuoGuanComponet self)
             {
@@ -23,23 +23,35 @@ namespace ET.Server
                 }
             }
         }
-        
+
         [EntitySystem]
         private static void Awake(this ET.Server.TuoGuanComponet self)
         {
-
+            self.AIConfigId = 14;
+            self.PatrolRange = 0f;
+            self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
         }
-        
+
         [EntitySystem]
         private static void Deserialize(this ET.Server.TuoGuanComponet self)
         {
 
         }
 
+        [EntitySystem]
+        private static void Destroy(this ET.Server.TuoGuanComponet self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.CancellationToken?.Cancel();
+            self.CancellationToken = null;
+            self.Current = 0;
+        }
+        
         private static void Check(this TuoGuanComponet self)
         {
-            
+
         }
+        
     }
 
 }

@@ -2,7 +2,7 @@ namespace ET.Server
 {
 
     [ComponentOf(typeof(Unit))]
-    public class TuoGuanComponet : Entity, IAwake, ITransfer, IDeserialize
+    public class TuoGuanComponet : Entity, IAwake, IDestroy, ITransfer, IDeserialize
     {
         public int AIConfigId
         {

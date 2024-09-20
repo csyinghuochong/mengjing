@@ -19,13 +19,7 @@ namespace ET.Server
 			else
 			{
 				PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-				if (petfightindex < 0 || petfightindex >= petComponentS.PetFightList.Count)
-				{
-					return;
-				}
-
-				RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex]);
-				Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
+				Unit petunit = petComponentS.GetFightPetByIndex(petfightindex);
 				if (petunit == null)
 				{
 					return;

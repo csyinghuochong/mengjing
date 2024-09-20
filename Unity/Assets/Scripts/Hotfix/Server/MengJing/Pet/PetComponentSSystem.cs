@@ -1306,6 +1306,19 @@ namespace ET.Server
             return self.RolePetInfos;
         }
 
+        public static Unit GetFightPetByIndex(this PetComponentS self,  int petfightindex)
+        {
+            Unit unit = self.GetParent<Unit>();
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            if (petfightindex < 0 || petfightindex >= petComponentS.PetFightList.Count)
+            {
+                return null;
+            }
+
+            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex]);
+            Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
+            return petunit;
+        }
 
         /// <summary>
         /// Get可以取缓存数据，不用读缓存数据库
