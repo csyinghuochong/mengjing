@@ -83,27 +83,31 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
             self.View.E_LevelReturnButton.AddListener(self.ReEnlarge);
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButtonClick);
-            self.View.E_BossRefreshButton.AddListenerAsync(self.OnBoosRefresh);
+            self.View.E_BossRefreshButton.AddListener(() =>
+            {
+                self.View.E_BossRefreshButton.gameObject.SetActive(false);
+                self.View.E_BossRefreshCloseButton.gameObject.SetActive(true);
+                self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            });
             self.View.E_BossRefreshCloseButton.AddListener(self.OnBoosRefreshClose);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonMapLevelItemsRefresh);
         }
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
         {
+            self.View.E_RefreshTimeText.text = string.Empty;
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
+            self.OnBoosRefresh().Coroutine();
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
         {
             self.View.E_MapPanelImage.GetComponent<RectTransform>().DOKill();
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static async ETTask OnBoosRefresh(this DlgDungeonMap self)
         {
-            self.View.E_BossRefreshButton.gameObject.SetActive(false);
-            self.View.E_BossRefreshCloseButton.gameObject.SetActive(true);
-            self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(true);
-
             await UserInfoNetHelper.RequestUserInfoInit(self.Root());
 
             var bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
