@@ -119,11 +119,6 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemDungeonMapLevelItems, self.ShowBoosRefreshTime.Count);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBoosRefreshTime.Count);
 
-            if (self.Timer != 0)
-            {
-                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            }
-
             if (self.ShowBoosRefreshTime.Count > 0)
             {
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.DungeonMapTimer, self);
@@ -241,10 +236,19 @@ namespace ET.Client
                 List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
                 self.CurrentMap.transform.Find("Title").gameObject.SetActive(false);
 
-                Transform[] levels = new Transform[dungeonSectionConfig.RandomArea.Length];
-                for (int i = 0; i < levels.Length; i++)
+                List<Transform> levels = new();
+                for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
                 {
-                    levels[i] = self.CurrentMap.transform.Find("Levels/Level_" + i);
+                    Transform transform = self.CurrentMap.transform.Find("Levels/Level_" + i);
+                    if (transform != null)
+                    {
+                        levels.Add(transform);
+                    }
+                    else
+                    {
+                        Log.Error($"地图图片上没有添加关卡 Levels/Level_{i}");
+                        return;
+                    }
                 }
 
                 for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
