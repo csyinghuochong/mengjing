@@ -178,16 +178,10 @@ namespace ET.Client
         {
             try
             {
-                //宠物释放技能
-                
+                //宠物释放技能 ->获取当前主动的宠物id
                 
                 Unit unit = self.GetParent<Unit>();
-                if (self.SkillCmd == null)
-                {
-                    self.SkillCmd = C2M_SkillCmd.Create();
-                }
-
-                C2M_SkillCmd skillCmd = self.SkillCmd;
+                C2M_SkillCmd skillCmd = C2M_SkillCmd.Create();
                 skillCmd.SkillID = skillid;
                 skillCmd.TargetAngle = angle;
                 skillCmd.TargetID = targetId;

@@ -13,7 +13,7 @@ namespace ET.Client
         public List<SkillInfo> t_Skills { get; set; } = new();
         public List<EntityRef<SkillC>> Skills = new List<EntityRef<SkillC>>();
         public List<SkillCDItem> SkillCDs = new List<SkillCDItem>(); //冷却时间列表
-        public C2M_SkillCmd SkillCmd = null;
+
         public long SkillPublicCDTime { get; set; } //技能公共CD
         public int FangunSkillId { get; set; }
         public long FangunLastTime;
