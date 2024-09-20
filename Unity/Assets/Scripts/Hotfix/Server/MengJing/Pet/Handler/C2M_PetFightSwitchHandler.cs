@@ -23,7 +23,7 @@ namespace ET.Server
                 if ( petfightindex - 1 == i )
                 {
                     petunit.GetComponent<AIComponent>().Stop_2();
-                    Console.WriteLine($"切换到宠物:  {petunit.Id}");
+                    Log.Console($"切换到宠物:  {petunit.Id}");
                 }
                 else
                 {
@@ -31,6 +31,8 @@ namespace ET.Server
                 }
             }
 
+            //主控切换到玩家。则停止玩家托管
+            //主动切换到宠物。则停止该宠物的AI.  
             if (request.PetFightIndex == 0)
             {
                 unit.GetComponent<AIComponent>().Stop_2();   
