@@ -178,6 +178,9 @@ namespace ET.Client
         {
             try
             {
+                //宠物释放技能
+                
+                
                 Unit unit = self.GetParent<Unit>();
                 if (self.SkillCmd == null)
                 {

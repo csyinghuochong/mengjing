@@ -1814,7 +1814,8 @@ message C2M_SkillCmd // ILocationRequest
     float TargetDistance = 4;
     int32 WeaponSkillID = 5;
     int32 ItemId = 6;
-	float SingValue = 7;
+	  float SingValue = 7;
+		int64 PetId = 10;
 }
 
 message M2C_SkillCmd // ILocationResponse
@@ -2449,28 +2450,6 @@ message M2C_RolePetSkillCD // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 	repeated KeyValuePairInt SkillCDs = 1;
-}
-
-//ResponseType M2C_PetSkillCmd
-message C2M_PetSkillCmd // ILocationRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	int32 SkillID = 1;
-	int64 TargetID = 2;
-	int32 TargetAngle = 3;
-	float TargetDistance = 4;
-	float SingValue = 7;
-	int64 PetId = 10;
-}
-
-message M2C_PetSkillCmd // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	int64 CDEndTime = 1;
-	int64 PublicCDTime = 2;
 }
 
 //ResponseType M2C_RolePetUpStar

@@ -189,6 +189,8 @@ namespace ET.Client
             }
             if (text.Equals("#petfightswitch"))
             {
+                //宠物没有前冲技能  两个药瓶栏需要保留
+                //其他逻辑都需要跟玩家一直，  需要测试一下吟唱技能之类的看看表现有没有问题。
                 //模拟点击下方的三个宠物头像111
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随, 右下角也需要显示宠物的技能，被动技能不显示，主动技能超过格子数也不显示)  
                 await PetNetHelper.RequestPetFightSwitch(self.Root(), RandomHelper.RandomNumber(0, 4) );  //切换到第二个宠物
