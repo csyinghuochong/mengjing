@@ -603,7 +603,7 @@ namespace ET.Client
             int sceneType = mapComponent.SceneType;
             self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(show);
             self.View.EG_LeftSetRectTransform.gameObject.SetActive(show);
-            self.View.EG_LeftBottomSetRectTransform.gameObject.SetActive(show);
+            self.View.EG_RightBottomSetRectTransform.gameObject.SetActive(show);
             self.View.EG_RightSetRectTransform.gameObject.SetActive(show);
             if (show)
             {
