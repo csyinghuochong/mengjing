@@ -2435,20 +2435,20 @@ message M2C_PetFightSwitch // ILocationResponse
 	int32 Error = 92;
 }
 
-//ResponseType M2C_PetSkillCD
+//ResponseType M2C_RolePetSkillCD
 //获取玩家和宠物的技能CD
-message C2M_PetSkillCD // ILocationRequest
+message C2M_RolePetSkillCD // ILocationRequest
 {
 	int32 RpcId = 90;
-	int32 PetId = 1;    //0玩家自身  ID>0对应的宠物
+	int64 PetId = 1;    //0玩家自身  ID>0对应的宠物
 }
 
-message M2C_PetSkillCD // ILocationResponse
+message M2C_RolePetSkillCD // ILocationResponse
 {
 	int32 RpcId = 90;
 	string Message = 91;
 	int32 Error = 92;
-	
+	repeated KeyValuePairInt SkillCDs = 1;
 }
 
 //ResponseType M2C_PetSkillCmd

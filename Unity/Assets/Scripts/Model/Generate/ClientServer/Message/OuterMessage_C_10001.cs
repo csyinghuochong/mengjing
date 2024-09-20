@@ -10550,13 +10550,13 @@ namespace ET
 
     // 获取玩家和宠物的技能CD
     [MemoryPackable]
-    [Message(OuterMessage.C2M_PetSkillCD)]
-    [ResponseType(nameof(M2C_PetSkillCD))]
-    public partial class C2M_PetSkillCD : MessageObject, ILocationRequest
+    [Message(OuterMessage.C2M_RolePetSkillCD)]
+    [ResponseType(nameof(M2C_RolePetSkillCD))]
+    public partial class C2M_RolePetSkillCD : MessageObject, ILocationRequest
     {
-        public static C2M_PetSkillCD Create(bool isFromPool = false)
+        public static C2M_RolePetSkillCD Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2M_PetSkillCD), isFromPool) as C2M_PetSkillCD;
+            return ObjectPool.Instance.Fetch(typeof(C2M_RolePetSkillCD), isFromPool) as C2M_RolePetSkillCD;
         }
 
         [MemoryPackOrder(89)]
@@ -10566,7 +10566,7 @@ namespace ET
         /// 0玩家自身  ID>0对应的宠物
         /// </summary>
         [MemoryPackOrder(0)]
-        public int PetId { get; set; }
+        public long PetId { get; set; }
 
         public override void Dispose()
         {
@@ -10583,12 +10583,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.M2C_PetSkillCD)]
-    public partial class M2C_PetSkillCD : MessageObject, ILocationResponse
+    [Message(OuterMessage.M2C_RolePetSkillCD)]
+    public partial class M2C_RolePetSkillCD : MessageObject, ILocationResponse
     {
-        public static M2C_PetSkillCD Create(bool isFromPool = false)
+        public static M2C_RolePetSkillCD Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2C_PetSkillCD), isFromPool) as M2C_PetSkillCD;
+            return ObjectPool.Instance.Fetch(typeof(M2C_RolePetSkillCD), isFromPool) as M2C_RolePetSkillCD;
         }
 
         [MemoryPackOrder(89)]
@@ -10600,6 +10600,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public int Error { get; set; }
 
+        [MemoryPackOrder(0)]
+        public List<KeyValuePairInt> SkillCDs { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -10610,6 +10613,7 @@ namespace ET
             this.RpcId = default;
             this.Message = default;
             this.Error = default;
+            this.SkillCDs.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31303,8 +31307,8 @@ namespace ET
         public const ushort M2C_RolePetFight = 10257;
         public const ushort C2M_PetFightSwitch = 10258;
         public const ushort M2C_PetFightSwitch = 10259;
-        public const ushort C2M_PetSkillCD = 10260;
-        public const ushort M2C_PetSkillCD = 10261;
+        public const ushort C2M_RolePetSkillCD = 10260;
+        public const ushort M2C_RolePetSkillCD = 10261;
         public const ushort C2M_PetSkillCmd = 10262;
         public const ushort M2C_PetSkillCmd = 10263;
         public const ushort C2M_RolePetUpStar = 10264;

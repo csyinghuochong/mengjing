@@ -35,12 +35,32 @@ namespace ET.Client
             return response.Error;
         }
 
+        /// <summary>
+        /// 切换主站宠物。 切换后镜头跟随改宠物 右下角刷新为改宠物的技能 并且可以主动释放该宠物的技能
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="fightindex"></param>
+        /// <returns></returns>
         public static async ETTask<int> RequestPetFightSwitch(Scene root, int fightindex)
         {
             C2M_PetFightSwitch c2MPetFightSwitch = C2M_PetFightSwitch.Create();
             c2MPetFightSwitch.PetFightIndex = fightindex;
             M2C_PetFightSwitch m2CPetFightSwitch =   (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
             return m2CPetFightSwitch.Error;
+        }
+        
+        /// <summary>
+        /// 获取玩家或者宠物的技能CD
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="petId">0获取玩家的技能cd,>获取对应宠物的技能CD</param>
+        /// <returns></returns>
+        public static async ETTask<M2C_RolePetSkillCD> RequestRolePetSkillCD(Scene root, long petId)
+        {
+            C2M_RolePetSkillCD c2MRolePetSkillCd = C2M_RolePetSkillCD.Create();
+            c2MRolePetSkillCd.PetId = petId;
+            M2C_RolePetSkillCD m2CRolePetSkillCd =  (M2C_RolePetSkillCD)await root.GetComponent<ClientSenderCompnent>().Call(c2MRolePetSkillCd);
+            return m2CRolePetSkillCd;
         }
         
         /// <summary>

@@ -7,7 +7,7 @@ namespace ET.Server
     {
         public List<EntityRef<SkillS>> Skills = new List<EntityRef<SkillS>>();
         public List<SkillInfo> DelaySkillList = new List<SkillInfo>();
-        public Dictionary<int, SkillCDItem> SkillCDs = new Dictionary<int, SkillCDItem>();  //技能CD列表
+        public Dictionary<int, SkillCDItem> SkillCDs { get; set; } = new Dictionary<int, SkillCDItem>(); //技能CD列表
         public Dictionary<int, int> SkillSecond { get; set; } = new Dictionary<int, int>();
         public long SkillPublicCDTime;      //公共CD
         public int FangunComboNumber;
