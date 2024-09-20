@@ -1306,16 +1306,23 @@ namespace ET.Server
             return self.RolePetInfos;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="petfightindex">0玩家 123</param>
+        /// <returns></returns>
         public static Unit GetFightPetByIndex(this PetComponentS self,  int petfightindex)
         {
             Unit unit = self.GetParent<Unit>();
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            if (petfightindex < 0 || petfightindex >= petComponentS.PetFightList.Count)
+            //petfightindex 123
+            if (petfightindex <= 0 || petfightindex > petComponentS.PetFightList.Count)
             {
                 return null;
             }
 
-            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex]);
+            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex - 1]);
             Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
             return petunit;
         }

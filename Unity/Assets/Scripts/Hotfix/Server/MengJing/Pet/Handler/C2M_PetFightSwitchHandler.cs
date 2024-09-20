@@ -28,6 +28,15 @@ namespace ET.Server
                 }
             }
 
+            if (request.PetFightIndex == 0)
+            {
+                unit.GetComponent<AIComponent>().Stop_2();   
+            }
+            else
+            {
+                unit.GetComponent<AIComponent>().Begin();   
+            }
+
             unit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetFightIndex, request.PetFightIndex );
            
             await ETTask.CompletedTask;

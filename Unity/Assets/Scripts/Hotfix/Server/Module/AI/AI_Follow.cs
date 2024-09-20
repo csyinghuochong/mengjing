@@ -54,7 +54,7 @@ namespace ET.Server
             return (aiComponent.TargetID > 0) ? 1 : 0;
         }
 
-        public static float3 GetFollowPosition(Unit unit, Unit master)
+        private static float3 GetFollowPosition(Unit unit, Unit master)
         {
             //Vector3 cur = unit.Position;
             //Vector3 tar = master.Position;

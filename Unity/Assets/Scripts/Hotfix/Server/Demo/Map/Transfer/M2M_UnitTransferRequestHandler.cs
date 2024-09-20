@@ -32,6 +32,7 @@ namespace ET.Server
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<BuffManagerComponentS>();
             unit.AddComponent<AttackRecordComponent>();
+            unit.AddComponent<AIComponent, int>(14);
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
             
