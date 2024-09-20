@@ -55,11 +55,18 @@ namespace ET.Client
             self.View.E_Map7Image.alphaHitTestMinimumThreshold = 0.5f;
             self.View.E_Map8Image.alphaHitTestMinimumThreshold = 0.5f;
 
+            self.View.E_NanDu_1_ButtonButton.AddListener(() => { self.OnNanDu_Button(1); });
+            self.View.E_NanDu_2_ButtonButton.AddListener(() => { self.OnNanDu_Button(2); });
+            self.View.E_NanDu_3_ButtonButton.AddListener(() => { self.OnNanDu_Button(3); });
+
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
+            self.View.E_LevelReturnButton.AddListener(self.ReEnlarge);
+            self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButtonClick);
         }
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
         {
+            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
@@ -105,8 +112,17 @@ namespace ET.Client
 
         private static void Enlarge(this DlgDungeonMap self, Button clickedButton, int chapterId)
         {
+            if (!self.CanOpen(chapterId))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("未开启");
+                return;
+            }
+
+            self.ChapterId = chapterId;
+
             self.EnableBtns(false);
 
+            self.CurrentMap = clickedButton.gameObject;
             RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
             RectTransform buttonRectTransform = clickedButton.GetComponent<RectTransform>();
 
@@ -117,23 +133,158 @@ namespace ET.Client
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
-                if (self.CanOpen(chapterId))
+                UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+                DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
+                List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
+                self.CurrentMap.transform.Find("Title").gameObject.SetActive(false);
+
+                Transform[] levels = new Transform[dungeonSectionConfig.RandomArea.Length];
+                for (int i = 0; i < levels.Length; i++)
                 {
-                    self.ShowLevel(chapterId).Coroutine();
+                    levels[i] = self.CurrentMap.transform.Find("Levels/Level_" + i);
                 }
-                else
+
+                for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("未开启");
-                    self.ReEnlarge();
+                    DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonSectionConfig.RandomArea[i]);
+
+                    List<int> bossIds = SceneConfigHelper.GetLocalDungeonMonsters(dungeonConfig.Id);
+                    for (int j = bossIds.Count - 1; j >= 0; j--)
+                    {
+                        MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossIds[j]);
+                        if (monsterConfig.MonsterType != MonsterTypeEnum.Boss)
+                        {
+                            bossIds.RemoveAt(j);
+                        }
+                    }
+
+                    Transform level = levels[i].transform;
+                    level.Find("Text").GetComponent<Text>().text = dungeonConfig.ChapterName;
+
+                    if (userInfo.Lv < dungeonConfig.EnterLv)
+                    {
+                        // 等级不足 灰色 不可选择
+                        level.GetComponent<Image>().sprite = self.View.E_Type0Image.sprite;
+                        foreach (Image image in level.GetComponentsInChildren<Image>())
+                        {
+                            image.color = self.View.E_Type0Image.color;
+                        }
+
+                        levels[i].GetComponent<Button>().AddListener(() => { FlyTipComponent.Instance.ShowFlyTip("等级不足"); });
+                    }
+                    else
+                    {
+                        int i1 = i;
+                        levels[i].GetComponent<Button>().AddListener(() =>
+                        {
+                            // 选择关卡
+                            self.OnSelect(dungeonConfig.Id, levels[i1]);
+                        });
+
+                        bool bossRevive = false;
+                        long nowTime = TimeHelper.ServerNow();
+                        foreach (int bossId in bossIds)
+                        {
+                            foreach (KeyValuePair pair in bossRevivesTime)
+                            {
+                                if (pair.KeyId == bossId || long.Parse(pair.Value) > nowTime)
+                                {
+                                    bossRevive = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (bossRevive)
+                        {
+                            // boss刷新 绿色 可以选择
+                            level.GetComponent<Image>().sprite = self.View.E_Type2Image.sprite;
+                            foreach (Image image in level.GetComponentsInChildren<Image>())
+                            {
+                                image.color = Color.white;
+                            }
+                        }
+                        else
+                        {
+                            bool compele = true;
+                            foreach (int bossId in bossIds)
+                            {
+                                bool contain = false;
+                                foreach (KeyValuePair pair in bossRevivesTime)
+                                {
+                                    if (pair.KeyId == bossId)
+                                    {
+                                        contain = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!contain)
+                                {
+                                    compele = false;
+                                    break;
+                                }
+                            }
+
+                            if (compele)
+                            {
+                                // 已通关 黄色 可以选择
+                                level.GetComponent<Image>().sprite = self.View.E_Type1Image.sprite;
+                                foreach (Image image in level.GetComponentsInChildren<Image>())
+                                {
+                                    image.color = Color.white;
+                                }
+                            }
+                            else
+                            {
+                                // 未通关 灰色 可以选择
+                                level.GetComponent<Image>().sprite = self.View.E_Type0Image.sprite;
+                                foreach (Image image in level.GetComponentsInChildren<Image>())
+                                {
+                                    image.color = self.View.E_Type0Image.color;
+                                }
+                            }
+                        }
+                    }
                 }
+
+                // 默认选第一个
+                self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
+
+                self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
+
+                UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+                using (zstring.Block())
+                {
+                    self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
+                }
+
+                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
+                self.View.E_CloseButton.gameObject.SetActive(false);
             };
         }
 
-        private static async ETTask ShowLevel(this DlgDungeonMap self, int chapterId)
+        private static void OnSelect(this DlgDungeonMap self, int dungeonConfigId, Transform transform)
         {
-            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapLevel);
-            DlgDungeonMapLevel dlgDungeonMapLevel = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapLevel>();
-            dlgDungeonMapLevel.Init(chapterId);
+            self.LevelId = dungeonConfigId;
+            self.ShowSelect(transform);
+
+            DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonConfigId);
+            self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
+            self.View.E_LevelDesText.text = dungeonConfig.ChapterDes;
+            using (zstring.Block())
+            {
+                self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", dungeonConfig.EnterLv);
+            }
+        }
+
+        private static void ShowSelect(this DlgDungeonMap self, Transform transform)
+        {
+            self.View.E_SelectImage.gameObject.SetActive(true);
+            RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
+            Vector3 position = rectTransform.InverseTransformPoint(transform.position);
+            position.y += 40;
+            self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
         }
 
         public static void ReEnlarge(this DlgDungeonMap self)
@@ -141,7 +292,63 @@ namespace ET.Client
             RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
 
-            rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () => { self.EnableBtns(true); };
+            self.View.E_SelectImage.gameObject.SetActive(false);
+            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
+            self.View.E_CloseButton.gameObject.SetActive(true);
+
+            rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () =>
+            {
+                self.EnableBtns(true);
+
+                self.CurrentMap.transform.Find("Title").gameObject.SetActive(true);
+                self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
+            };
+        }
+
+        private static void OnNanDu_Button(this DlgDungeonMap self, int diff)
+        {
+            int openLv = DungeonSectionConfigCategory.Instance.Get(self.ChapterId).OpenLevel[diff - 1];
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            if (userInfo.Lv < openLv)
+            {
+                self.Difficulty = 1;
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}级开启", openLv));
+                }
+
+                return;
+            }
+
+            self.Difficulty = diff;
+            self.View.E_NanDu_1_SelectImage.gameObject.SetActive(diff == 1);
+            self.View.E_NanDu_2_SelectImage.gameObject.SetActive(diff == 2);
+            self.View.E_NanDu_3_SelectImage.gameObject.SetActive(diff == 3);
+
+            UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            using (zstring.Block())
+            {
+                PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
+            }
+        }
+
+        private static async ETTask OnEnterMapButtonClick(this DlgDungeonMap self)
+        {
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
+            }
+
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
+
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(self.Root(), errorCode);
+                return;
+            }
+
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
         }
     }
 }
