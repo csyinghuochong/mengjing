@@ -79,9 +79,9 @@ namespace ET.Client
 
         private static void OnDungeonMapLevelItemsRefresh(this DlgDungeonMapLevel self, Transform transform, int index)
         {
-            Scroll_Item_DungeonMapLevelItem scrollItemDungeonMapLevelItem = self.ScrollItemDungeonMapLevelItems[index].BindTrans(transform);
-            scrollItemDungeonMapLevelItem.Refresh(self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]],
-                self.Difficulty, self.OnSelectLevel);
+            // Scroll_Item_DungeonMapLevelItem scrollItemDungeonMapLevelItem = self.ScrollItemDungeonMapLevelItems[index].BindTrans(transform);
+            // scrollItemDungeonMapLevelItem.Refresh(self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]],
+            //     self.Difficulty, self.OnSelectLevel);
         }
 
         private static void OnNanDu_Button(this DlgDungeonMapLevel self, int diff)
@@ -110,18 +110,18 @@ namespace ET.Client
                 PlayerPrefsHelp.SetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId), diff);
             }
 
-            if (self.ScrollItemDungeonMapLevelItems != null)
-            {
-                foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.SetNanDu(self.Difficulty);
-                }
-            }
+            // if (self.ScrollItemDungeonMapLevelItems != null)
+            // {
+            //     foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
+            //     {
+            //         if (item.uiTransform == null)
+            //         {
+            //             continue;
+            //         }
+            //
+            //         item.SetNanDu(self.Difficulty);
+            //     }
+            // }
         }
 
         private static void OnSelectLevel(this DlgDungeonMapLevel self, int levelId)
@@ -142,18 +142,18 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.E_IsMetImage.gameObject.SetActive(userInfo.Lv >= dungeonConfig.EnterLv);
 
-            if (self.ScrollItemDungeonMapLevelItems != null)
-            {
-                foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.UpdateSelect(self.LevelId);
-                }
-            }
+            // if (self.ScrollItemDungeonMapLevelItems != null)
+            // {
+            //     foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
+            //     {
+            //         if (item.uiTransform == null)
+            //         {
+            //             continue;
+            //         }
+            //
+            //         item.UpdateSelect(self.LevelId);
+            //     }
+            // }
         }
 
         private static async ETTask OnEnterMapButtonClick(this DlgDungeonMapLevel self)

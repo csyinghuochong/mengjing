@@ -92,5 +92,6 @@
         public const int JiaYuanPastureTimer = 358;
         public const int TransferUITimer = 359;
         public const int FindPathTimer = 360;
+        public const int DungeonMapTimer = 361;
     }
 }

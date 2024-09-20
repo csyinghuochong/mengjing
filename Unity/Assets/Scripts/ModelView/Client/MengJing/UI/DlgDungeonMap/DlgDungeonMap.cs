@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,6 +13,9 @@ namespace ET.Client
         public GameObject CurrentMap;
         public int Difficulty;
         public int ChapterId;
-        public int LevelId;
+        public int LevelId { get; set; }
+        public Dictionary<int, EntityRef<Scroll_Item_DungeonMapLevelItem>> ScrollItemDungeonMapLevelItems;
+        public List<KeyValuePair> ShowBoosRefreshTime = new();
+        public long Timer;
     }
 }

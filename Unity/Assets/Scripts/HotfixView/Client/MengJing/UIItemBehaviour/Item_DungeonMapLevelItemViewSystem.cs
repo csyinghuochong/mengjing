@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -17,35 +18,52 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_DungeonMapLevelItem self, int levelIndex, int levelId, int diff, Action<int> OnClick)
+        public static void Refresh(this Scroll_Item_DungeonMapLevelItem self, int monsterConfigId, long refreshTime)
         {
-            self.LevelIndex = levelIndex;
-            self.LevelId = levelId;
-            self.E_ClickButton.AddListener(() => OnClick?.Invoke(levelId));
-            self.E_SelectImage.gameObject.SetActive(false);
+            self.E_EnterMapButton.AddListener(self.OnEnterMap);
 
-            DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(levelId);
-            self.E_LevelNameText.text = dungeonConfig.ChapterName;
+            self.MonsterConfigId = monsterConfigId;
+            self.RefreshTime = refreshTime;
 
-            using (zstring.Block())
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterConfigId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, monsterConfig.MonsterHeadIcon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_IconImage.sprite = sp;
+            self.E_NameText.text = monsterConfig.MonsterName;
+
+            self.LevelId = SceneConfigHelper.GetFubenByMonster(monsterConfig.Id);
+            // self.E_MapText.text = DungeonConfigCategory.Instance.Get(self.LevelId).ChapterName;
+
+            self.RefreshTime();
+        }
+
+        private static void OnEnterMap(this Scroll_Item_DungeonMapLevelItem self)
+        {
+            DlgDungeonMap dlgDungeonMap = self.GetParent<DlgDungeonMap>();
+            dlgDungeonMap.LevelId = self.LevelId;
+            dlgDungeonMap.OnEnterMapButtonClick().Coroutine();
+        }
+
+        public static void RefreshTime(this Scroll_Item_DungeonMapLevelItem self)
+        {
+            long time = self.RefreshTime;
+            if (time > TimeHelper.ServerNow())
             {
-                // self.E_EnterLevelText.text = zstring.Format("第{0}关", levelIndex + 1);
-                self.E_EnterLevelText.text = zstring.Format("挑战等级：{0}", dungeonConfig.EnterLv);
+                time -= TimeHelper.ServerNow();
+                time /= 1000;
+                int hour = (int)time / 3600;
+                int min = (int)((time - (hour * 3600)) / 60);
+                int sec = (int)(time - (hour * 3600) - (min * 60));
+                using (zstring.Block())
+                {
+                    self.E_TimeText.text = zstring.Format("刷新时间:{0}时{1}分", hour, min);
+                }
             }
-
-            self.SetNanDu(diff);
-        }
-
-        public static void SetNanDu(this Scroll_Item_DungeonMapLevelItem self, int value)
-        {
-            CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_1Image.gameObject, value != 1);
-            CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_2Image.gameObject, value != 2);
-            CommonViewHelper.SetImageGray(self.Root(), self.E_NanDu_3Image.gameObject, value != 3);
-        }
-
-        public static void UpdateSelect(this Scroll_Item_DungeonMapLevelItem self, int levelId)
-        {
-            self.E_SelectImage.gameObject.SetActive(self.LevelId == levelId);
+            else
+            {
+                self.E_TimeText.text = "已刷新";
+            }
         }
     }
 }

@@ -415,23 +415,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/E_DungeonMapLevelItems");
-     			}
-     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_RightBGImage
      	{
      		get
@@ -497,23 +480,6 @@ namespace ET.Client
 		    		this.m_E_EnterLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_EnterLevel");
      			}
      			return this.m_E_EnterLevelText;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_IsMetImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_IsMetImage == null )
-     			{
-		    		this.m_E_IsMetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_IsMet");
-     			}
-     			return this.m_E_IsMetImage;
      		}
      	}
 
@@ -738,6 +704,108 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_RefreshTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RefreshTimeText == null )
+     			{
+		    		this.m_E_RefreshTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RefreshTime");
+     			}
+     			return this.m_E_RefreshTimeText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_BossRefreshButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshButton == null )
+     			{
+		    		this.m_E_BossRefreshButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefresh");
+     			}
+     			return this.m_E_BossRefreshButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BossRefreshImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshImage == null )
+     			{
+		    		this.m_E_BossRefreshImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefresh");
+     			}
+     			return this.m_E_BossRefreshImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/E_DungeonMapLevelItems");
+     			}
+     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_BossRefreshCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshCloseButton == null )
+     			{
+		    		this.m_E_BossRefreshCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefreshClose");
+     			}
+     			return this.m_E_BossRefreshCloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BossRefreshCloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BossRefreshCloseImage == null )
+     			{
+		    		this.m_E_BossRefreshCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_BossRefreshClose");
+     			}
+     			return this.m_E_BossRefreshCloseImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_Type0Image
      	{
      		get
@@ -815,12 +883,10 @@ namespace ET.Client
 			this.m_E_CloseButton = null;
 			this.m_E_CloseImage = null;
 			this.m_EG_LevelPanelRectTransform = null;
-			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_RightBGImage = null;
 			this.m_E_LevelNameText = null;
 			this.m_E_LevelDesText = null;
 			this.m_E_EnterLevelText = null;
-			this.m_E_IsMetImage = null;
 			this.m_E_NanDu_1_SelectImage = null;
 			this.m_E_NanDu_1_ButtonButton = null;
 			this.m_E_NanDu_1_ButtonImage = null;
@@ -834,6 +900,12 @@ namespace ET.Client
 			this.m_E_EnterMapImage = null;
 			this.m_E_LevelReturnButton = null;
 			this.m_E_LevelReturnImage = null;
+			this.m_E_RefreshTimeText = null;
+			this.m_E_BossRefreshButton = null;
+			this.m_E_BossRefreshImage = null;
+			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
+			this.m_E_BossRefreshCloseButton = null;
+			this.m_E_BossRefreshCloseImage = null;
 			this.m_E_Type0Image = null;
 			this.m_E_Type1Image = null;
 			this.m_E_Type2Image = null;
@@ -864,12 +936,10 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.RectTransform m_EG_LevelPanelRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Image m_E_RightBGImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
 		private UnityEngine.UI.Text m_E_LevelDesText = null;
 		private UnityEngine.UI.Text m_E_EnterLevelText = null;
-		private UnityEngine.UI.Image m_E_IsMetImage = null;
 		private UnityEngine.UI.Image m_E_NanDu_1_SelectImage = null;
 		private UnityEngine.UI.Button m_E_NanDu_1_ButtonButton = null;
 		private UnityEngine.UI.Image m_E_NanDu_1_ButtonImage = null;
@@ -883,6 +953,12 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
 		private UnityEngine.UI.Button m_E_LevelReturnButton = null;
 		private UnityEngine.UI.Image m_E_LevelReturnImage = null;
+		private UnityEngine.UI.Text m_E_RefreshTimeText = null;
+		private UnityEngine.UI.Button m_E_BossRefreshButton = null;
+		private UnityEngine.UI.Image m_E_BossRefreshImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_BossRefreshCloseButton = null;
+		private UnityEngine.UI.Image m_E_BossRefreshCloseImage = null;
 		private UnityEngine.UI.Image m_E_Type0Image = null;
 		private UnityEngine.UI.Image m_E_Type1Image = null;
 		private UnityEngine.UI.Image m_E_Type2Image = null;

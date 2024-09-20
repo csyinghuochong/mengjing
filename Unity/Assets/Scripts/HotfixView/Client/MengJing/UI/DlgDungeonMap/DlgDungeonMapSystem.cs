@@ -1,10 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Invoke(TimerInvokeType.DungeonMapTimer)]
+    public class DungeonMapTimer : ATimer<DlgDungeonMap>
+    {
+        protected override void Run(DlgDungeonMap self)
+        {
+            try
+            {
+                self.UpdateBossRefreshTimer();
+            }
+            catch (Exception e)
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
+            }
+        }
+    }
+
+    [FriendOf(typeof(Scroll_Item_DungeonMapLevelItem))]
     [FriendOf(typeof(DlgDungeonMap))]
     public static class DlgDungeonMapSystem
     {
@@ -62,6 +83,9 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
             self.View.E_LevelReturnButton.AddListener(self.ReEnlarge);
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButtonClick);
+            self.View.E_BossRefreshButton.AddListenerAsync(self.OnBoosRefresh);
+            self.View.E_BossRefreshCloseButton.AddListener(self.OnBoosRefreshClose);
+            self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonMapLevelItemsRefresh);
         }
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
@@ -72,6 +96,81 @@ namespace ET.Client
         public static void BeforeUnload(this DlgDungeonMap self)
         {
             self.View.E_MapPanelImage.GetComponent<RectTransform>().DOKill();
+        }
+
+        private static async ETTask OnBoosRefresh(this DlgDungeonMap self)
+        {
+            self.View.E_BossRefreshButton.gameObject.SetActive(false);
+            self.View.E_BossRefreshCloseButton.gameObject.SetActive(true);
+            self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+
+            await UserInfoNetHelper.RequestUserInfoInit(self.Root());
+
+            var bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
+
+            bossRevivesTime.Sort((s1, s2) => long.Parse(s1.Value).CompareTo(long.Parse(s2.Value)));
+            self.ShowBoosRefreshTime.Clear();
+            self.ShowBoosRefreshTime.AddRange(bossRevivesTime);
+
+            self.AddUIScrollItems(ref self.ScrollItemDungeonMapLevelItems, self.ShowBoosRefreshTime.Count);
+            self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBoosRefreshTime.Count);
+
+            if (self.Timer != 0)
+            {
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            }
+
+            if (self.ShowBoosRefreshTime.Count > 0)
+            {
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.DungeonMapTimer, self);
+            }
+        }
+
+        public static void UpdateBossRefreshTimer(this DlgDungeonMap self)
+        {
+            long time = long.Parse(self.ShowBoosRefreshTime[0].Value);
+            if (time > TimeHelper.ServerNow())
+            {
+                time -= TimeHelper.ServerNow();
+                time /= 1000;
+                int hour = (int)time / 3600;
+                int min = (int)((time - (hour * 3600)) / 60);
+                int sec = (int)(time - (hour * 3600) - (min * 60));
+                using (zstring.Block())
+                {
+                    self.View.E_RefreshTimeText.text = zstring.Format("最近领主刷新：{0}时{1}分", hour, min);
+                }
+            }
+            else
+            {
+                self.View.E_RefreshTimeText.text = "最近领主刷新：已刷新";
+            }
+
+            if (self.ScrollItemDungeonMapLevelItems != null)
+            {
+                foreach (Scroll_Item_DungeonMapLevelItem item in self.ScrollItemDungeonMapLevelItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.RefreshTime();
+                }
+            }
+        }
+
+        private static void OnDungeonMapLevelItemsRefresh(this DlgDungeonMap self, Transform transform, int index)
+        {
+            Scroll_Item_DungeonMapLevelItem scrollItemDungeonMapLevelItem = self.ScrollItemDungeonMapLevelItems[index].BindTrans(transform);
+            scrollItemDungeonMapLevelItem.Refresh(self.ShowBoosRefreshTime[index].KeyId, long.Parse(self.ShowBoosRefreshTime[index].Value));
+        }
+
+        private static void OnBoosRefreshClose(this DlgDungeonMap self)
+        {
+            self.View.E_BossRefreshButton.gameObject.SetActive(true);
+            self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
+            self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(false);
         }
 
         private static bool CanOpen(this DlgDungeonMap self, int chapterId)
@@ -164,10 +263,14 @@ namespace ET.Client
                     if (userInfo.Lv < dungeonConfig.EnterLv)
                     {
                         // 等级不足 灰色 不可选择
-                        level.GetComponent<Image>().sprite = self.View.E_Type0Image.sprite;
-                        foreach (Image image in level.GetComponentsInChildren<Image>())
+                        level.GetComponent<Image>().color = self.View.E_Type0Image.color;
+                        for (int j = 0; j < level.childCount; j++)
                         {
-                            image.color = self.View.E_Type0Image.color;
+                            Image image = level.GetChild(j).GetComponent<Image>();
+                            if (image != null)
+                            {
+                                image.color = self.View.E_Type0Image.color;
+                            }
                         }
 
                         levels[i].GetComponent<Button>().AddListener(() => { FlyTipComponent.Instance.ShowFlyTip("等级不足"); });
@@ -198,10 +301,14 @@ namespace ET.Client
                         if (bossRevive)
                         {
                             // boss刷新 绿色 可以选择
-                            level.GetComponent<Image>().sprite = self.View.E_Type2Image.sprite;
-                            foreach (Image image in level.GetComponentsInChildren<Image>())
+                            level.GetComponent<Image>().color = self.View.E_Type2Image.color;
+                            for (int j = 0; j < level.childCount; j++)
                             {
-                                image.color = Color.white;
+                                Image image = level.GetChild(j).GetComponent<Image>();
+                                if (image != null)
+                                {
+                                    image.color = Color.white;
+                                }
                             }
                         }
                         else
@@ -229,19 +336,27 @@ namespace ET.Client
                             if (compele)
                             {
                                 // 已通关 黄色 可以选择
-                                level.GetComponent<Image>().sprite = self.View.E_Type1Image.sprite;
-                                foreach (Image image in level.GetComponentsInChildren<Image>())
+                                level.GetComponent<Image>().color = self.View.E_Type1Image.color;
+                                for (int j = 0; j < level.childCount; j++)
                                 {
-                                    image.color = Color.white;
+                                    Image image = level.GetChild(j).GetComponent<Image>();
+                                    if (image != null)
+                                    {
+                                        image.color = Color.white;
+                                    }
                                 }
                             }
                             else
                             {
                                 // 未通关 灰色 可以选择
-                                level.GetComponent<Image>().sprite = self.View.E_Type0Image.sprite;
-                                foreach (Image image in level.GetComponentsInChildren<Image>())
+                                level.GetComponent<Image>().color = self.View.E_Type0Image.color;
+                                for (int j = 0; j < level.childCount; j++)
                                 {
-                                    image.color = self.View.E_Type0Image.color;
+                                    Image image = level.GetChild(j).GetComponent<Image>();
+                                    if (image != null)
+                                    {
+                                        image.color = self.View.E_Type0Image.color;
+                                    }
                                 }
                             }
                         }
@@ -261,6 +376,9 @@ namespace ET.Client
 
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
+                self.View.E_BossRefreshButton.gameObject.SetActive(true);
+                self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
+                self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             };
         }
 
@@ -332,7 +450,7 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnEnterMapButtonClick(this DlgDungeonMap self)
+        public static async ETTask OnEnterMapButtonClick(this DlgDungeonMap self)
         {
             using (zstring.Block())
             {
