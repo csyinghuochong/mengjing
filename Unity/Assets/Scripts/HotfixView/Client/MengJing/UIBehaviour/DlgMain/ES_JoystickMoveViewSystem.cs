@@ -331,7 +331,6 @@ namespace ET.Client
         private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
         {
             float3 unitPosi = unit.Position;
-            float3 targetpositon = unitPosi;  //// +  math.forward(rotation) * 2;
             for (int i = 0; i < 30; i++)
             {
                 Vector3 target = unitPosi + math.forward(rotation) * ( 0.2f);
@@ -354,7 +353,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    targetpositon = hit.point;
+                    unitPosi = hit.point;
                 }
 
                 unitPosi = target;
