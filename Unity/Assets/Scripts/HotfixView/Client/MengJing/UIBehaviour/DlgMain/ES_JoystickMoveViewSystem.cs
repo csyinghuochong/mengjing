@@ -215,7 +215,7 @@ namespace ET.Client
             Vector2 indicator = self.NewPoint - self.OldPoint;
             int angle = 90 - (int)(Mathf.Atan2(indicator.y, indicator.x) * Mathf.Rad2Deg) + (int)self.MainCamera.transform.eulerAngles.y;
             
-            angle = ( angle  - angle % 10 );
+            angle = ( angle  - angle % 15 );
             
             return angle;
         }
@@ -330,10 +330,10 @@ namespace ET.Client
 
         private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
         {
-            float3 unitPosi = unit.Position;
+            float3 targetPosi = unit.Position;
             for (int i = 0; i < 30; i++)
             {
-                Vector3 target = unitPosi + math.forward(rotation) * ( 0.2f);
+                Vector3 target = targetPosi + math.forward(rotation) * ( 0.2f);
                 RaycastHit hit;
 
                 Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
@@ -353,13 +353,13 @@ namespace ET.Client
                 }
                 else
                 {
-                    unitPosi = hit.point;
+                    targetPosi = hit.point;
                 }
 
-                unitPosi = target;
+                targetPosi = target;
             }
 
-            return unitPosi;
+            return targetPosi;
         }
         
         private static int CheckObstruct(this ES_JoystickMove self, Unit unit, Vector3 target)
