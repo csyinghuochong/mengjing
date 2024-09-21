@@ -331,28 +331,36 @@ namespace ET.Client
         private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
         {
             float3 unitPosi = unit.Position;
-            float3 targetpositon = unitPosi;//// +  math.forward(rotation) * 2;
-            for (int i = 0; i < 5; i++)
+            float3 targetpositon = unitPosi;  //// +  math.forward(rotation) * 2;
+            for (int i = 0; i < 30; i++)
             {
-                Vector3 target = unitPosi + math.forward(rotation) * (i + 2);
+                Vector3 target = unitPosi + math.forward(rotation) * ( 0.2f);
                 RaycastHit hit;
+
+                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
+                if (hit.collider != null)
+                {
+                    break;
+                }
 
                 Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
                 if (hit.collider == null)
                 {
-                    if (i == 0)
-                    {
-                        targetpositon = target;
-                    }
+                    // if (i == 0)
+                    // {
+                    //     targetpositon = target;
+                    // }
                     break;
                 }
                 else
                 {
                     targetpositon = hit.point;
                 }
+
+                unitPosi = target;
             }
 
-            return targetpositon;
+            return unitPosi;
         }
         
         private static int CheckObstruct(this ES_JoystickMove self, Unit unit, Vector3 target)
