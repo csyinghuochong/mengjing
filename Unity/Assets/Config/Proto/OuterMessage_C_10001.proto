@@ -198,6 +198,13 @@ message C2M_PathfindingRequest // ILocationMessage
 	int32 direction_old = 5;
 }
 
+///客户端寻路
+message C2M_PathfindingResult // ILocationMessage
+{
+	int32 RpcId = 1;
+  repeated	Unity.Mathematics.float3 Position = 2;
+}
+
 message C2M_Stop // ILocationMessage
 {
 	int32 RpcId = 1;
