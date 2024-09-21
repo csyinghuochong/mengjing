@@ -107,20 +107,20 @@ namespace ET.Server
             }
 
             List<int> tianfulist = new List<int>();
-            for (int i = 0; i < skillSetComponent.TianFuList.Count; i++)
+            for (int i = 0; i < skillSetComponent.TianFuList1.Count; i++)
             {
-                if (!tianfulist.Contains(skillSetComponent.TianFuList[i]))
+                if (!tianfulist.Contains(skillSetComponent.TianFuList1[i]))
                 {
-                    tianfulist.Add(skillSetComponent.TianFuList[i]);
+                    tianfulist.Add(skillSetComponent.TianFuList1[i]);
                 }
             }
 
             List<int> tianfulist1 = new List<int>();
-            for (int i = 0; i < skillSetComponent.TianFuList1.Count; i++)
+            for (int i = 0; i < skillSetComponent.TianFuList2.Count; i++)
             {
-                if (!tianfulist1.Contains(skillSetComponent.TianFuList1[i]))
+                if (!tianfulist1.Contains(skillSetComponent.TianFuList2[i]))
                 {
-                    tianfulist1.Add(skillSetComponent.TianFuList1[i]);
+                    tianfulist1.Add(skillSetComponent.TianFuList2[i]);
                 }
             }
             
@@ -131,10 +131,10 @@ namespace ET.Server
             response.SkillSetInfo.TianFuPlan = skillSetComponent.TianFuPlan;
             
             response.SkillSetInfo.TianFuList .AddRange(tianfulist); 
-            skillSetComponent.TianFuList = tianfulist;
+            skillSetComponent.TianFuList1 = tianfulist;
             
             response.SkillSetInfo.TianFuList1 .AddRange(tianfulist1); 
-            skillSetComponent.TianFuList1 = tianfulist1;
+            skillSetComponent.TianFuList2 = tianfulist1;
             
             await ETTask.CompletedTask;
 

@@ -7,12 +7,15 @@ namespace ET.Client
     {
         public int TianFuPlan { get; set; } = 0;
 
-        public List<int> TianFuList { get; set; } = new(); //第一套天賦方案
+        public List<int> TianFuList1 { get; set; } = new(); //第一套天赋 只记录每个位置当前激活的天赋id.  
 
-        public List<int> TianFuList1 { get; set; } = new(); //第二套天賦方案
+        public List<int> TianFuList2 { get; set; } = new(); //第二套天賦方案
 
         public List<int> TianFuAddition { get; set; } = new(); //附加天赋
-
+        
+        /// <summary>
+        /// 玩家携带的技能列表
+        /// </summary>
         public List<SkillPro> SkillList { get; set; } = new();
 
         //生命之盾

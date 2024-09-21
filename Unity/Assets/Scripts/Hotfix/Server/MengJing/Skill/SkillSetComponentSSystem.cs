@@ -12,8 +12,8 @@ namespace ET.Server
         private static void Awake(this SkillSetComponentS self)
         {
             self.TianFuPlan = 0;
-            self.TianFuList.Clear();
             self.TianFuList1.Clear();
+            self.TianFuList2.Clear();
 
             if (self.SkillList.Count == 0)
             {
@@ -78,14 +78,14 @@ namespace ET.Server
 
         public static List<int> TianFuList(this SkillSetComponentS self)
         {
-            return self.TianFuPlan == 0 ? self.TianFuList : self.TianFuList1;
+            return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
         }
 
         public static List<int> TianFuListAll(this SkillSetComponentS self)
         {
             List<int> list = new List<int>();
 
-            List<int> tianfulist = self.TianFuPlan == 0 ? self.TianFuList : self.TianFuList1;
+            List<int> tianfulist = self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
             for (int i = 0; i < tianfulist.Count; i++)
             {
                 list.Add(tianfulist[i]);
@@ -116,13 +116,13 @@ namespace ET.Server
 
         public static void TianFuRemove(this SkillSetComponentS self, int tianFuid)
         {
-            List<int> tianfuIds = self.TianFuList;
+            List<int> tianfuIds = self.TianFuList1;
             if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
             {
                 tianfuIds.Remove(tianFuid);
                 self.AddTianFuAttribute(tianFuid, false);
             }
-            tianfuIds = self.TianFuList1;
+            tianfuIds = self.TianFuList2;
             if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
             {
                 tianfuIds.Remove(tianFuid);
@@ -158,12 +158,12 @@ namespace ET.Server
         {
             self.TianFuPlan = plan;
 
-            List<int> oldtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList;
+            List<int> oldtianfus = plan == 0 ? self.TianFuList2 : self.TianFuList1;
             for (int i = 0; i < oldtianfus.Count; i++)
             {
                 self.AddTianFuAttribute(oldtianfus[i], false);
             }
-            List<int> newtianfus = plan == 0 ? self.TianFuList : self.TianFuList1;
+            List<int> newtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList2;
             for (int i = 0; i < newtianfus.Count; i++)
             {
                 self.AddTianFuAttribute(newtianfus[i], true);
@@ -1261,8 +1261,8 @@ namespace ET.Server
 
             SkillSetInfo SkillSetInfo = M2C_SkillSetMessage.SkillSetInfo;
             SkillSetInfo.TianFuPlan = self.TianFuPlan;
-            SkillSetInfo.TianFuList = self.TianFuList;
-            SkillSetInfo.TianFuList1 = self.TianFuList1;
+            SkillSetInfo.TianFuList = self.TianFuList1;
+            SkillSetInfo.TianFuList1 = self.TianFuList2;
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);

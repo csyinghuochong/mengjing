@@ -22,15 +22,15 @@ namespace ET.Client
 		public static void UpdateSkillSet(this SkillSetComponentC self, SkillSetInfo skillSetInfo)
 		{
 			self.SkillList = skillSetInfo.SkillList;
-			self.TianFuList = skillSetInfo.TianFuList;
+			self.TianFuList1 = skillSetInfo.TianFuList;
 			self.LifeShieldList = skillSetInfo.LifeShieldList;
-			self.TianFuList1 = skillSetInfo.TianFuList1;
+			self.TianFuList2 = skillSetInfo.TianFuList1;
 			self.TianFuPlan = skillSetInfo.TianFuPlan;
 		}
 
 		public static List<int> TianFuList(this SkillSetComponentC self)
 		{
-			return self.TianFuPlan == 0 ? self.TianFuList : self.TianFuList1;
+			return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
 		}
 
 		public static int HaveSameTianFu(this SkillSetComponentC self, int tianfuId)
@@ -67,13 +67,13 @@ namespace ET.Client
 		public static void TianFuRemove(this SkillSetComponentC self, int tianFuid)
 		{
 			//可以判断一下装备是否还有此天赋
-			List<int> tianfuIds = self.TianFuList;
+			List<int> tianfuIds = self.TianFuList1;
 			if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
 			{
 				tianfuIds.Remove(tianFuid);
 				self.AddTianFuAttribute(tianFuid, false);
 			}
-			tianfuIds = self.TianFuList1;
+			tianfuIds = self.TianFuList2;
 			if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
 			{
 				tianfuIds.Remove(tianFuid);
@@ -94,12 +94,12 @@ namespace ET.Client
 		{
 			self.TianFuPlan = plan;
 
-			List<int> oldtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList;
+			List<int> oldtianfus = plan == 0 ? self.TianFuList2 : self.TianFuList1;
 			for (int i = 0; i < oldtianfus.Count; i++)
 			{
 				self.AddTianFuAttribute(oldtianfus[i], false);
 			}
-			List<int> newtianfus = plan == 0 ? self.TianFuList : self.TianFuList1;
+			List<int> newtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList2;
 			for (int i = 0; i < newtianfus.Count; i++)
 			{
 				self.AddTianFuAttribute(newtianfus[i], true);

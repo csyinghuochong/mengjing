@@ -63,10 +63,20 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>天赋名称</summary>
 		public string Name { get; set; }
-		/// <summary>Icon</summary>
-		public int Icon { get; set; }
+		/// <summary>职业</summary>
+		public int Occ { get; set; }
+		/// <summary>天赋类型</summary>
+		public int TalentType { get; set; }
+		/// <summary>天赋位置</summary>
+		public int Position { get; set; }
+		/// <summary>前置id</summary>
+		public int PreId { get; set; }
+		/// <summary>需要当前类型已使用天赋点</summary>
+		public int NeedUseNumber { get; set; }
 		/// <summary>学习等级</summary>
 		public int LearnRoseLv { get; set; }
+		/// <summary>Icon</summary>
+		public int Icon { get; set; }
 		/// <summary>天赋描述</summary>
 		public string talentDes { get; set; }
 		/// <summary>附加</summary>

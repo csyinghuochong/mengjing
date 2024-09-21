@@ -67,8 +67,6 @@ namespace ET
 		public string OccDes { get; set; }
 		/// <summary>初始化技能ID</summary>
 		public int[] SkillID { get; set; }
-		/// <summary>天赋1级</summary>
-		public int[] Talent { get; set; }
 		/// <summary>转职显示技能</summary>
 		public int[] ShowTalentSkill { get; set; }
 		/// <summary>职业能力</summary>
