@@ -41,7 +41,7 @@ namespace ET.Server
                         unit.GetComponent<BagComponentS>()
                                  .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
                         break;
-                    case 2:       //72009041死亡技能      //2#0#0#-6#70001001#50 70001001 90000005-爆炸怪 72002013-脱战技能没移除2#-78#0#0.7#72004002#1  70001001  72009001
+                    case 2:       //72009041死亡技能      //2#0#0#-6#310161#1 70001001 90000005-爆炸怪 72002013-脱战技能没移除2#-78#0#0.7#72004002#1  70001001  72009001
                         float posX = float.Parse(commands[1]);
                         float posY = float.Parse(commands[2]); 
                         float posZ = float.Parse(commands[3]);

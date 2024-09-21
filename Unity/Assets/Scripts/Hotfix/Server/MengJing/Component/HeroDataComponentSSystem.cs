@@ -309,8 +309,8 @@ namespace ET.Server
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                  UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
-                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
-                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()));
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000);
                  resurrection = 0;
              }
              if (resurrection == 0)
@@ -341,7 +341,7 @@ namespace ET.Server
                      resurrection = (int)(resurrection * bossDevelopment.ReviveTimeAdd);
 
                      resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime, false);
+                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
                      userInfoComponent.OnAddRevive(unit.ConfigId, resurrectionTime);
                      unit.RemoveComponent<ReviveTimeComponent>();
                      unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);

@@ -41,11 +41,15 @@ namespace ET.Client
                 else if (unit.Type == UnitType.Monster && !unit.IsBoss())
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
-                    unit.GetComponent<GameObjectComponent>().Dissolve = true;
                 }
                 else
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
+                }
+
+                if (unit.Type == UnitType.Monster)
+                {
+                    unit.GetComponent<GameObjectComponent>().Dissolve = true;
                 }
 
                 //播放开启宝箱特效
@@ -204,9 +208,10 @@ namespace ET.Client
                 return;
             }
 
-            unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmHui);
-            unit.GetComponent<UIMonsterHpComponent>()?.OnDead();
+            //unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmHui);
+            await unit.GetComponent<GameObjectComponent>().ShowDissolve(false);
             unit.GetComponent<GameObjectComponent>().OnHui();
+            unit.GetComponent<UIMonsterHpComponent>()?.OnDead();
         }
     }
 }

@@ -707,6 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4193679160390034106}
   - component: {fileID: 3035558003466661223}
+  - component: {fileID: 1431514474553750947}
   m_Layer: 0
   m_Name: Club
   m_TagString: Untagged
@@ -783,6 +784,22 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.18538101, y: -0.39884964, z: -0.18088517}
     m_Extent: {x: 0.35704356, y: 0.6710926, z: 0.36807916}
   m_DirtyAABB: 0
+--- !u!114 &1431514474553750947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281998141127693262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07dca68b5021534c953275f87ca9267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialGroups:
+  - Name: Dissolve
+    Materials:
+    - {fileID: 2100000, guid: 0657fcb331df1a446b7ed10db2739ad6, type: 2}
 --- !u!1 &2573246426335389340
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2654709162021195351}
   - component: {fileID: 3545783435639072587}
+  - component: {fileID: 4814118438007293532}
   m_Layer: 0
   m_Name: Troll
   m_TagString: Untagged
@@ -944,6 +962,22 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.12622559, y: -0.0024028122, z: 0.75599205}
     m_Extent: {x: 0.8648263, y: 0.7083936, z: 0.93454576}
   m_DirtyAABB: 0
+--- !u!114 &4814118438007293532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669577292897716669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07dca68b5021534c953275f87ca9267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialGroups:
+  - Name: Dissolve
+    Materials:
+    - {fileID: 2100000, guid: 0657fcb331df1a446b7ed10db2739ad6, type: 2}
 --- !u!1 &2690657083589209708
 GameObject:
   m_ObjectHideFlags: 0

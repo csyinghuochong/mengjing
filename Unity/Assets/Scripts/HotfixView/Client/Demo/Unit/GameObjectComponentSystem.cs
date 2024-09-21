@@ -85,7 +85,7 @@ namespace ET.Client
 
                 if (self.Dissolve)
                 {
-                    self.ShowDissolve().Coroutine();
+                    self.ShowDissolve(true).Coroutine();
                 }
                 else
                 {
@@ -96,8 +96,9 @@ namespace ET.Client
             self.GameObject = null;
         }
 
-        private static async ETTask ShowDissolve(this GameObjectComponent self)
+        public static async ETTask ShowDissolve(this GameObjectComponent self, bool recover)
         {
+            self.Dissolve = false;
             string unitAssetsPath = self.UnitAssetsPath;
             GameObject gameObject = self.GameObject;
 
@@ -135,7 +136,10 @@ namespace ET.Client
                 materialManager.RestoreOriginalMaterials();
             }
 
-            GameObjectLoadHelper.RecoverGameObject(unitAssetsPath, gameObject);
+            if (recover)
+            {
+                GameObjectLoadHelper.RecoverGameObject(unitAssetsPath, gameObject);
+            }
         }
 
         public static void LoadGameObject(this GameObjectComponent self)
