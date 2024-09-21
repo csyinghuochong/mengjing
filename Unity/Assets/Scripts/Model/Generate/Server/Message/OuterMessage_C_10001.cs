@@ -8019,13 +8019,13 @@ namespace ET
         public List<SkillPro> SkillList { get; set; } = new();
 
         [MemoryPackOrder(1)]
-        public List<int> TianFuList { get; set; } = new();
+        public List<int> TianFuList1 { get; set; } = new();
 
         [MemoryPackOrder(2)]
-        public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
+        public List<int> TianFuList2 { get; set; } = new();
 
         [MemoryPackOrder(3)]
-        public List<int> TianFuList1 { get; set; } = new();
+        public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
 
         [MemoryPackOrder(4)]
         public int TianFuPlan { get; set; }
@@ -8038,9 +8038,9 @@ namespace ET
             }
 
             this.SkillList.Clear();
-            this.TianFuList.Clear();
-            this.LifeShieldList.Clear();
             this.TianFuList1.Clear();
+            this.TianFuList2.Clear();
+            this.LifeShieldList.Clear();
             this.TianFuPlan = default;
 
             ObjectPool.Instance.Recycle(this);

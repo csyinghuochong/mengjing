@@ -1854,9 +1854,9 @@ message LifeShieldInfo
 message SkillSetInfo
 {
 	repeated SkillPro SkillList = 1;
-	repeated int32 TianFuList = 2;
-	repeated LifeShieldInfo LifeShieldList = 3;
-	repeated int32 TianFuList1 = 4;
+	repeated int32 TianFuList1 = 2;
+	repeated int32 TianFuList2 = 3;
+	repeated LifeShieldInfo LifeShieldList = 4;
 	int32 TianFuPlan = 5;
 }
 

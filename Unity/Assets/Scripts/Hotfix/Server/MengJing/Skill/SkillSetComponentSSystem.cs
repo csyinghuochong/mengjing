@@ -1261,14 +1261,13 @@ namespace ET.Server
 
             SkillSetInfo SkillSetInfo = M2C_SkillSetMessage.SkillSetInfo;
             SkillSetInfo.TianFuPlan = self.TianFuPlan;
-            SkillSetInfo.TianFuList = self.TianFuList1;
-            SkillSetInfo.TianFuList1 = self.TianFuList2;
+            SkillSetInfo.TianFuList1 = self.TianFuList1;
+            SkillSetInfo.TianFuList2 = self.TianFuList2;
             SkillSetInfo.SkillList = self.SkillList;
             SkillSetInfo.LifeShieldList = self.LifeShieldList;
             MapMessageHelper.SendToClient(unit, M2C_SkillSetMessage);
         }
-
-
+        
         public static List<SkillPro> GetSkillList(this SkillSetComponentS self)
         {
             return self.SkillList;

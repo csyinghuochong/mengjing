@@ -568,28 +568,23 @@ public class CustomEditorMenu
 
     private static int GetDirection(float angle)
     {
-        bool Up = false, down = false, left = false, right = false;
         if (angle > 45 && angle <= 135)
         {
-            Up = true;
             Log.Debug("Up = true");
             return 1;
         }
         else if (angle > 135 && angle <= 225)
         {
-            left = true;
             Log.Debug("left = true");
             return 2;
         }
         else if (angle > 225 && angle <= 315)
         {
-            down = true;
             Log.Debug("down = true");
             return 3;
         }
         else
         {
-            right = true;
             Log.Debug("right = true");
             return 4;
         }
@@ -597,25 +592,20 @@ public class CustomEditorMenu
 
     private static int GetEulerDirection(float angle)
     {
-        bool Up = false, down = false, left = false, right = false;
         if (angle > 0 && angle <= 45)
         {
-            Up = true;
             return 1;
         }
         else if (angle > 45 && angle <= 135)
         {
-            left = true;
             return 2;
         }
         else if (angle > 135 && angle <= 225)
         {
-            down = true;
             return 3;
         }
         else if (angle > 225 && angle <= 315)
         {
-            right = true;
             return 4;
         }
         else

@@ -106,36 +106,34 @@ namespace ET.Server
                 }
             }
 
-            List<int> tianfulist = new List<int>();
+            List<int> tianfulist1 = new List<int>();
             for (int i = 0; i < skillSetComponent.TianFuList1.Count; i++)
             {
-                if (!tianfulist.Contains(skillSetComponent.TianFuList1[i]))
+                if (!tianfulist1.Contains(skillSetComponent.TianFuList1[i]))
                 {
-                    tianfulist.Add(skillSetComponent.TianFuList1[i]);
+                    tianfulist1.Add(skillSetComponent.TianFuList1[i]);
                 }
             }
 
-            List<int> tianfulist1 = new List<int>();
+            List<int> tianfulist2 = new List<int>();
             for (int i = 0; i < skillSetComponent.TianFuList2.Count; i++)
             {
-                if (!tianfulist1.Contains(skillSetComponent.TianFuList2[i]))
+                if (!tianfulist2.Contains(skillSetComponent.TianFuList2[i]))
                 {
-                    tianfulist1.Add(skillSetComponent.TianFuList2[i]);
+                    tianfulist2.Add(skillSetComponent.TianFuList2[i]);
                 }
             }
+            skillSetComponent.TianFuList1 = tianfulist1;
+            skillSetComponent.TianFuList2 = tianfulist2;
+            
             
             response.SkillSetInfo = SkillSetInfo.Create();
-
             response.SkillSetInfo.SkillList .AddRange( skillSetComponent.SkillList);
             response.SkillSetInfo.LifeShieldList .AddRange(skillSetComponent.LifeShieldList); 
             response.SkillSetInfo.TianFuPlan = skillSetComponent.TianFuPlan;
             
-            response.SkillSetInfo.TianFuList .AddRange(tianfulist); 
-            skillSetComponent.TianFuList1 = tianfulist;
-            
             response.SkillSetInfo.TianFuList1 .AddRange(tianfulist1); 
-            skillSetComponent.TianFuList2 = tianfulist1;
-            
+            response.SkillSetInfo.TianFuList2 .AddRange(tianfulist2); 
             await ETTask.CompletedTask;
 
         }

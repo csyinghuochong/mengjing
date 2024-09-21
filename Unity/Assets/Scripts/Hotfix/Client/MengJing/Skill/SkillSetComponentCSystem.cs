@@ -22,9 +22,9 @@ namespace ET.Client
 		public static void UpdateSkillSet(this SkillSetComponentC self, SkillSetInfo skillSetInfo)
 		{
 			self.SkillList = skillSetInfo.SkillList;
-			self.TianFuList1 = skillSetInfo.TianFuList;
+			self.TianFuList1 = skillSetInfo.TianFuList1;
 			self.LifeShieldList = skillSetInfo.LifeShieldList;
-			self.TianFuList2 = skillSetInfo.TianFuList1;
+			self.TianFuList2 = skillSetInfo.TianFuList2;
 			self.TianFuPlan = skillSetInfo.TianFuPlan;
 		}
 
