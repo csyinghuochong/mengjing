@@ -17,8 +17,7 @@ namespace ET.Client
         {
 
         }
-        
-        
+
 		public static void UpdateSkillSet(this SkillSetComponentC self, SkillSetInfo skillSetInfo)
 		{
 			self.SkillList = skillSetInfo.SkillList;
