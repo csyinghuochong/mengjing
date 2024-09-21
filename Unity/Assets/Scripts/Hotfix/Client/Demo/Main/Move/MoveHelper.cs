@@ -24,7 +24,7 @@ namespace ET.Client
                 HintHelp.ShowHint(unit.Root(), "速度异常,请重新登录");
             }
 
-            C2M_PathfindingResult msg = C2M_PathfindingResult.Create();
+            C2M_PathfindingRequest msg = C2M_PathfindingRequest.Create();
             msg.Position = targetPos;
             msg.NeedTime = needTime;
             msg.direction_new = direction_new;

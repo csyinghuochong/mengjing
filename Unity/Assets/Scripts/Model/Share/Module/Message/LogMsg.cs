@@ -10,7 +10,7 @@ namespace ET
             OuterMessage.G2C_Ping, 
             OuterMessage.C2G_Benchmark, 
             OuterMessage.G2C_Benchmark,
-            //OuterMessage.C2M_PathfindingResult,
+            //OuterMessage.C2M_PathfindingRequest,
             //OuterMessage.M2C_PathfindingResult,
             //OuterMessage.M2C_Stop,
             //OuterMessage.M2C_UnitNumericUpdate,

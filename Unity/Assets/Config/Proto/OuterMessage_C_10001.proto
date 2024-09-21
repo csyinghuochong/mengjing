@@ -189,7 +189,7 @@ message M2C_RemoveUnits // IMessage
 	repeated int64 Units = 1;
 }
 
-message C2M_PathfindingResult // ILocationMessage
+message C2M_PathfindingRequest // ILocationMessage
 {
 	int32 RpcId = 1;
 	Unity.Mathematics.float3 Position = 2;

@@ -819,12 +819,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.C2M_PathfindingResult)]
-    public partial class C2M_PathfindingResult : MessageObject, ILocationMessage
+    [Message(OuterMessage.C2M_PathfindingRequest)]
+    public partial class C2M_PathfindingRequest : MessageObject, ILocationMessage
     {
-        public static C2M_PathfindingResult Create(bool isFromPool = false)
+        public static C2M_PathfindingRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2M_PathfindingResult), isFromPool) as C2M_PathfindingResult;
+            return ObjectPool.Instance.Fetch(typeof(C2M_PathfindingRequest), isFromPool) as C2M_PathfindingRequest;
         }
 
         [MemoryPackOrder(0)]
@@ -30980,7 +30980,7 @@ namespace ET
         public const ushort M2C_CreateMyUnit = 10021;
         public const ushort M2C_StartSceneChange = 10022;
         public const ushort M2C_RemoveUnits = 10023;
-        public const ushort C2M_PathfindingResult = 10024;
+        public const ushort C2M_PathfindingRequest = 10024;
         public const ushort C2M_Stop = 10025;
         public const ushort M2C_PathfindingResult = 10026;
         public const ushort M2C_Stop = 10027;
