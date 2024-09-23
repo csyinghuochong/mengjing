@@ -118,6 +118,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Btn_ShouSuoButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ShouSuoButton == null )
+     			{
+		    		this.m_E_Btn_ShouSuoButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PhoneLeft/E_Btn_ShouSuo");
+     			}
+     			return this.m_E_Btn_ShouSuoButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_ShouSuoImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ShouSuoImage == null )
+     			{
+		    		this.m_E_Btn_ShouSuoImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PhoneLeft/E_Btn_ShouSuo");
+     			}
+     			return this.m_E_Btn_ShouSuoImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_MainTaskRectTransform
      	{
      		get
@@ -200,23 +234,6 @@ namespace ET.Client
 		    		this.m_E_LeftTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"EG_PhoneLeft/E_LeftTypeSet");
      			}
      			return this.m_E_LeftTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_LeftTypeSetImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_LeftTypeSetImage == null )
-     			{
-		    		this.m_E_LeftTypeSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PhoneLeft/E_LeftTypeSet");
-     			}
-     			return this.m_E_LeftTypeSetImage;
      		}
      	}
 
@@ -532,23 +549,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_ShrinkEventTrigger
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ShrinkEventTrigger == null )
-     			{
-		    		this.m_E_ShrinkEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_RightBottomSet/E_Shrink");
-     			}
-     			return this.m_E_ShrinkEventTrigger;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_LeftBottomBtnsRectTransform
      	{
      		get
@@ -835,6 +835,40 @@ namespace ET.Client
 		    		this.m_E_ChengJiuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightBottomSet/EG_LeftBottomBtns/E_ChengJiu");
      			}
      			return this.m_E_ChengJiuImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_BagButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BagButton == null )
+     			{
+		    		this.m_E_BagButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightBottomSet/E_Bag");
+     			}
+     			return this.m_E_BagButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BagImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BagImage == null )
+     			{
+		    		this.m_E_BagImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightBottomSet/E_Bag");
+     			}
+     			return this.m_E_BagImage;
      		}
      	}
 
@@ -2513,12 +2547,13 @@ namespace ET.Client
 			this.m_es_joystickmove = null;
 			this.m_es_rolehead = null;
 			this.m_EG_PhoneLeftRectTransform = null;
+			this.m_E_Btn_ShouSuoButton = null;
+			this.m_E_Btn_ShouSuoImage = null;
 			this.m_EG_MainTaskRectTransform = null;
 			this.m_E_RoseTaskButton = null;
 			this.m_E_RoseTaskImage = null;
 			this.m_E_MainTaskItemsLoopVerticalScrollRect = null;
 			this.m_E_LeftTypeSetToggleGroup = null;
-			this.m_E_LeftTypeSetImage = null;
 			this.m_E_Team_Type_1Toggle = null;
 			this.m_EG_MainTeamRectTransform = null;
 			this.m_E_MainTeamItemsLoopVerticalScrollRect = null;
@@ -2537,7 +2572,6 @@ namespace ET.Client
 			this.m_EG_RightBottomSetRectTransform = null;
 			this.m_E_ShrinkButton = null;
 			this.m_E_ShrinkImage = null;
-			this.m_E_ShrinkEventTrigger = null;
 			this.m_EG_LeftBottomBtnsRectTransform = null;
 			this.m_E_RoseEquipButton = null;
 			this.m_E_RoseEquipImage = null;
@@ -2555,6 +2589,8 @@ namespace ET.Client
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
+			this.m_E_BagButton = null;
+			this.m_E_BagImage = null;
 			this.m_EG_RightSetRectTransform = null;
 			this.m_es_mapmini = null;
 			this.m_es_mainactivitytip = null;
@@ -2661,12 +2697,13 @@ namespace ET.Client
 		private EntityRef<ES_JoystickMove> m_es_joystickmove = null;
 		private EntityRef<ES_RoleHead> m_es_rolehead = null;
 		private UnityEngine.RectTransform m_EG_PhoneLeftRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_ShouSuoButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ShouSuoImage = null;
 		private UnityEngine.RectTransform m_EG_MainTaskRectTransform = null;
 		private UnityEngine.UI.Button m_E_RoseTaskButton = null;
 		private UnityEngine.UI.Image m_E_RoseTaskImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTaskItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.ToggleGroup m_E_LeftTypeSetToggleGroup = null;
-		private UnityEngine.UI.Image m_E_LeftTypeSetImage = null;
 		private UnityEngine.UI.Toggle m_E_Team_Type_1Toggle = null;
 		private UnityEngine.RectTransform m_EG_MainTeamRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTeamItemsLoopVerticalScrollRect = null;
@@ -2685,7 +2722,6 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_RightBottomSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_ShrinkButton = null;
 		private UnityEngine.UI.Image m_E_ShrinkImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_ShrinkEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_LeftBottomBtnsRectTransform = null;
 		private UnityEngine.UI.Button m_E_RoseEquipButton = null;
 		private UnityEngine.UI.Image m_E_RoseEquipImage = null;
@@ -2703,6 +2739,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		private UnityEngine.UI.Button m_E_BagButton = null;
+		private UnityEngine.UI.Image m_E_BagImage = null;
 		private UnityEngine.RectTransform m_EG_RightSetRectTransform = null;
 		private EntityRef<ES_MapMini> m_es_mapmini = null;
 		private EntityRef<ES_MainActivityTip> m_es_mainactivitytip = null;

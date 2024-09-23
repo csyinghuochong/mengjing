@@ -452,6 +452,7 @@ namespace ET.Client
 
             self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(false);
 
+            self.View.E_Btn_ShouSuoButton.AddListener(self.OnShouSuo);
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
             self.RefreshMainTaskItems();
 
@@ -497,7 +498,7 @@ namespace ET.Client
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
             userInfoComponent.PickSet = userInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet).Split('@');
-            
+
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.RegisterReddot(ReddotType.Team, self.Reddot_Team);
@@ -562,7 +563,7 @@ namespace ET.Client
         }
 
         public static void Reddot_Activity(this DlgMain self, int num)
-        { 
+        {
             self.View.E_Btn_HuoDongButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
@@ -573,7 +574,7 @@ namespace ET.Client
         }
 
         public static void Reddot_RolePoint(this DlgMain self, int num)
-        { 
+        {
             self.View.E_RoseEquipButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
@@ -588,7 +589,6 @@ namespace ET.Client
             self.View.E_MailHintTipButton.gameObject.SetActive(false);
         }
 
-        
         public static void BeginDrag(this DlgMain self, PointerEventData pdata)
         {
             self.PreviousPressPosition = pdata.position;
@@ -698,6 +698,16 @@ namespace ET.Client
         }
 
         #region 左边
+
+        private static void OnShouSuo(this DlgMain self)
+        {
+            bool active = self.View.E_LeftTypeSetToggleGroup.gameObject.activeSelf;
+            self.View.EG_MainTaskRectTransform.gameObject.SetActive(!active);
+            self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(!active);
+            self.View.EG_MainTeamRectTransform.gameObject.SetActive(!active);
+
+            self.View.E_Btn_ShouSuoButton.transform.localScale = active ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
 
         public static void OnRecvTaskUpdate(this DlgMain self)
         {
@@ -1906,7 +1916,7 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = usevalue != "" ? usevalue : userInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
-            
+
             // 获取所有的Light组件
             Light[] lights = GameObject.FindObjectsOfType<Light>();
             if (lights != null)
@@ -1924,7 +1934,7 @@ namespace ET.Client
                 }
             }
 
-            GameObject  Fence_5 = GameObject.Find("AdditiveHide/ScenceModelSet/SceneSet/Fence_5_Test_0910");
+            GameObject Fence_5 = GameObject.Find("AdditiveHide/ScenceModelSet/SceneSet/Fence_5_Test_0910");
             if (Fence_5 != null)
             {
                 Renderer rendererFence_5 = Fence_5.GetComponent<Renderer>();
@@ -1934,15 +1944,15 @@ namespace ET.Client
                 // 输出Shader的名称
                 Log.Console("Fence_5,  Shader Name: " + shaderFence_5.name);
             }
-            
-            GameObject  T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Terrain");
+
+            GameObject T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Terrain");
             if (T1errain != null)
             {
                 // 获取当前游戏对象上的Terrain组件
                 Terrain terrain = T1errain.GetComponent<Terrain>();
                 // 获取Terrain的材质
                 Material mat = terrain.materialTemplate;
- 
+
                 // 获取并打印Shader
                 Shader shader = mat.shader;
                 Debug.Log("Terrain ,  Shader Name: " + shader.name);
@@ -2016,7 +2026,7 @@ namespace ET.Client
 
             PlayerComponent playerComponent = self.Scene().GetComponent<PlayerComponent>();
             SettingData.ShowFindPath = playerComponent.Account.Equals("18319670288");
-            GameObject.Find("Global/FindPath").SetActive(SettingData.ShowFindPath );
+            GameObject.Find("Global/FindPath").SetActive(SettingData.ShowFindPath);
         }
 
         public static void OnSettingUpdate(this DlgMain self)
