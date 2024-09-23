@@ -93,5 +93,6 @@
         public const int TransferUITimer = 359;
         public const int FindPathTimer = 360;
         public const int DungeonMapTimer = 361;
+        public const int ReviveTimer = 362;
     }
 }
