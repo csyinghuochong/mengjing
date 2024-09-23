@@ -103,11 +103,7 @@ namespace ET.Client
         //角色经验更新
         public static void UpdateShowRoleExp(this ES_RoleHead self)
         {
-            using (zstring.Block())
-            {
-                self.E_RoleLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization(""),
-                    self.UserInfoComponent.UserInfo.Lv);
-            }
+            self.E_RoleLvText.text = self.UserInfoComponent.UserInfo.Lv.ToString();
         }
 
         //角色疲劳更新
