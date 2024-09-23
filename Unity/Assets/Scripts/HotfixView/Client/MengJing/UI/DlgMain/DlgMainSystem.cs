@@ -574,7 +574,8 @@ namespace ET.Client
 
         public static void Reddot_Email(this DlgMain self, int num)
         {
-            self.View.E_MailHintTipButton.gameObject.SetActive(num > 0);
+            // self.View.E_MailHintTipButton.gameObject.SetActive(num > 0);
+            self.View.E_MailHintTipButton.gameObject.SetActive(false);
         }
 
         
@@ -1271,7 +1272,8 @@ namespace ET.Client
                             zstring.Format("<color=#{0}>{1}/{2}</color>", color, numericComponent.GetAsInt(NumericType.KillMonsterNumber), newNum);
                 }
 
-                self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(true);
+                // self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(true);
+                self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(false);
             }
             else
             {
@@ -1393,7 +1395,8 @@ namespace ET.Client
                     rc.Get<GameObject>("LvText").GetComponent<Text>().text = zstring.Format("<color=#{0}>{1}级领取</color>", color, newLv);
                 }
 
-                self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(true);
+                // self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(true);
+                self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(false);
             }
             else
             {
@@ -1561,7 +1564,8 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&
                 sceneTypeEnum != SceneTypeEnum.JiaYuan);
-            self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.LocalDungeon);
+            // self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.LocalDungeon);
+            self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(false);
             // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
@@ -1671,7 +1675,8 @@ namespace ET.Client
                 bool shenmizhimen =
                         DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(self.Root().GetComponent<MapComponent>().SceneId);
                 self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(shenmizhimen);
-                self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(!shenmizhimen);
+                // self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(!shenmizhimen);
+                self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(false);
                 self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(!shenmizhimen);
             }
 
