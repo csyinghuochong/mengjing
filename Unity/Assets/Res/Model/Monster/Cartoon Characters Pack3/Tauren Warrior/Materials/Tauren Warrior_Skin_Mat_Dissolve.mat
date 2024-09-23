@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 9f7e299f202797a4cb234938560347b2, type: 3}
   m_ValidKeywords:
   - _2SIDESSECONDEDGE_ON
-  - _AXIS_X
+  - _AXIS_Z
   - _EDGESAFFECT_ALBEDO
   - _GUIDEAFFECTSEDGESBLENDING_ON
   m_InvalidKeywords: []
@@ -93,7 +93,7 @@ Material:
     - _0AmountOffsetMin: 0
     - _2SidesSecondEdge: 1
     - _AlphaCutoff: 0.5
-    - _Axis: 0
+    - _Axis: 2
     - _DisplacementGuideTilling: 1
     - _DisplacementGuideTillingSpeed: 0
     - _DissolveAmount: 0
@@ -111,11 +111,11 @@ Material:
     - _MainEdgePatternTilling: 8.81
     - _MainEdgeWidth: 0.062
     - _MaxHeightWhenAmount1: -1.23
-    - _MaxValueWhenAmount1: -0.03
+    - _MaxValueWhenAmount1: 1.09
     - _MaxY: 17.1
     - _MetallicValue: 0
     - _MinHeightWhenAmount0: 16.37
-    - _MinValueWhenAmount0: -1.51
+    - _MinValueWhenAmount0: -0.53
     - _MinY: -2.1
     - _NoiseStrength: 0.67
     - _SecondEdgePatternTilling: 11
