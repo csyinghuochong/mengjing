@@ -558,7 +558,7 @@ namespace ET.Client
 
         public static void Reddot_Team(this DlgMain self, int num)
         {
-            self.View.E_Team_Type_1Toggle.gameObject.SetActive(num > 0);
+            self.View.E_Team_Type_1Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
             self.View.E_TeamDungeonButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
