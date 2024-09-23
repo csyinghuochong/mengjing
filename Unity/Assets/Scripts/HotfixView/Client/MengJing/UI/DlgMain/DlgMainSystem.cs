@@ -1699,7 +1699,7 @@ namespace ET.Client
 
             if (sceneTypeEnum > SceneTypeEnum.MainCityScene)
             {
-                MoveHelper.Stop(self.Root());
+                MoveHelper.Stop(self.Root(), false);
             }
         }
 
