@@ -12,6 +12,7 @@ namespace ET.Client
         public float Duration = 0.5f; // 动画持续时间
         public GameObject[] MapGameObjects;
         public GameObject CurrentMap;
+        public int OriginalIndex;
         public int Difficulty;
         public int ChapterId;
         public int LevelId { get; set; }

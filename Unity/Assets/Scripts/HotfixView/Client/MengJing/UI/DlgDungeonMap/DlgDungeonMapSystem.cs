@@ -208,6 +208,7 @@ namespace ET.Client
             self.EnableBtns(false);
 
             self.CurrentMap = self.MapGameObjects[map];
+            self.OriginalIndex = self.CurrentMap.transform.GetSiblingIndex();
             RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             RectTransform buttonRectTransform = self.CurrentMap.GetComponent<RectTransform>();
 
@@ -363,6 +364,7 @@ namespace ET.Client
                 // 默认选第一个
                 self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
 
+                self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
 
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -396,7 +398,7 @@ namespace ET.Client
         private static void ShowSelect(this DlgDungeonMap self, Transform transform)
         {
             self.View.E_SelectImage.gameObject.SetActive(true);
-            RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
+            RectTransform rectTransform = self.View.EG_LevelPanelRectTransform;
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
             self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
@@ -410,13 +412,14 @@ namespace ET.Client
             self.View.E_SelectImage.gameObject.SetActive(false);
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.View.E_CloseButton.gameObject.SetActive(true);
+            self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
+            self.CurrentMap.transform.SetSiblingIndex(self.OriginalIndex);
+            self.SetTitle(true);
+            self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
 
             rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
                 self.EnableBtns(true);
-
-                self.SetTitle(true);
-                self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
             };
         }
 
