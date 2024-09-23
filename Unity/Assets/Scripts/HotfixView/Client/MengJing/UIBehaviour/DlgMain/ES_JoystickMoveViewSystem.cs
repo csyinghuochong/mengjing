@@ -233,12 +233,7 @@ namespace ET.Client
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
             long clientNow = TimeHelper.ClientNow();
-
-            if (clientNow - self.lastSendTime < 30)
-            {
-                return;
-            }
-
+            
             if (clientNow - self.AttackComponent.MoveAttackTime < 200)
             {
                 return;
@@ -254,50 +249,51 @@ namespace ET.Client
             ;// Quaternion.Euler(0, direction, 0);
 
             List<float3> pathfind = new List<float3>();
-            float3 newv3 = self.CanMovePosition_2(unit, rotation, pathfind);
+            float3 newv3 = self.CanMovePosition(unit, rotation, pathfind);
             if (pathfind.Count < 2)
             {
                 return;
             }
 
-            // float3 initpos = pathfind[0];
-            // List<float3> pathfind_2 = new List<float3>();
-            // pathfind_2.Add(initpos);
-            //
-            // float3 vector_pre = float3.zero;
-            // for (int i = 1; i <pathfind.Count; i++)
-            // {
-            //     float3 vector_cur = (pathfind[i] - pathfind[i - 1]).normalize();
-            //     if (!vector_cur.Equals(vector_pre) )
-            //     {
-            //         vector_pre = vector_cur;
-            //         pathfind_2.Add(pathfind[i]);
-            //     }
-            // }
-            //
-            // pathfind.Clear();
-            // pathfind.Add(pathfind_2[0]);
-            //
-            // int distance_init = 0;
-            // for (int i = 1; i <pathfind_2.Count; i++)
-            // {
-            //     float distance_cur = math.distance(pathfind_2[i] , pathfind_2[distance_init]);
-            //     if (distance_cur < 1f)
-            //     {
-            //         continue;
-            //     }
-            //     else
-            //     {
-            //         pathfind.Add(pathfind_2[i]);
-            //         distance_init = i;
-            //     }
-            // }
-            //
-            // if (pathfind.Count < 2)
-            // {
-            //     pathfind.Add(pathfind_2[pathfind_2.Count - 1]);
-            // }
+            float3 initpos = pathfind[0];
+            List<float3> pathfind_2 = new List<float3>();
+            pathfind_2.Add(initpos);
 
+            for (int i = 1; i <pathfind.Count; i++)
+            {
+                //if (!pathfind[i].y.Equals(pathfind[i-1].y))
+                if (math.abs(pathfind[i].y - pathfind[i-1].y) > 0.05f)
+                {
+                    pathfind_2.Add(pathfind[i]);
+                }
+            }
+
+            if (pathfind_2.Count > 2)
+            {
+                int distance_init = 0;
+                for (int i = 1; i <pathfind_2.Count; )
+                {
+                    float distance_cur = math.distance(pathfind_2[i] , pathfind_2[distance_init]);
+                    if (distance_cur < 0.5f)
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        pathfind_2.RemoveAt(i);
+                        distance_init = i;
+                    }
+                }
+            }
+            
+            
+            if (pathfind_2.Count < 2)
+            {
+                pathfind_2.Add(pathfind[pathfind.Count - 1]);
+            }
+
+            newv3 = pathfind_2[pathfind_2.Count - 1];
+            
             float distance = Vector3.Distance(newv3, unit.Position);
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
@@ -313,8 +309,8 @@ namespace ET.Client
             }
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
             
-            self.MainUnit.MoveResultToAsync(pathfind).Coroutine();
-            //unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
+            self.MainUnit.MoveResultToAsync(pathfind_2, null, self.checkTime, direction,  self.lastDirection ).Coroutine();
+            unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
 
             self.lastSendTime = clientNow;
             self.lastDirection = direction;

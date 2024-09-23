@@ -48,7 +48,7 @@ namespace ET.Client
 
         
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask<int> MoveResultToAsync(this Unit unit, List<float3> pathlist,  ETCancellationToken cancellationToken = null)
+        public static async ETTask<int> MoveResultToAsync(this Unit unit, List<float3> pathlist,  ETCancellationToken cancellationToken = null ,long needTime = 0,int direction_new = 0 , int direction_old = 0)
         {
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             stateComponent.ObstructStatus = 0;
@@ -67,8 +67,10 @@ namespace ET.Client
             }
 
             C2M_PathfindingResult msg = C2M_PathfindingResult.Create();
-
             msg.Position = pathlist;
+            msg.NeedTime = needTime;
+            msg.direction_old = direction_old;
+            msg.direction_new = direction_new;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
 

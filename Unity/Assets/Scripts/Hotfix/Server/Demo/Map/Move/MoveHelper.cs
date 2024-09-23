@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -50,6 +51,7 @@ namespace ET.Server
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
+                Console.WriteLine($"PathResultToAsync  unit.SendStop(0):  {TimeHelper.ServerNow()}");
                 unit.SendStop(0);
             }
             await ETTask.CompletedTask;
@@ -119,6 +121,18 @@ namespace ET.Server
             m2CStop.Id = unit.Id;
             m2CStop.Position = unit.Position;
             m2CStop.Rotation = unit.Rotation;
+            MapMessageHelper.Broadcast(unit, m2CStop);
+        }
+        
+        public static void StopYaoGan(this Unit unit, int error)
+        {
+            unit.GetComponent<MoveComponent>().Stop(error == 0);
+            M2C_Stop m2CStop = M2C_Stop.Create();
+            m2CStop.Error = error;
+            m2CStop.Id = unit.Id;
+            m2CStop.Position = unit.Position;
+            m2CStop.Rotation = unit.Rotation;
+            m2CStop.YaoGan = true;
             MapMessageHelper.Broadcast(unit, m2CStop);
         }
     }

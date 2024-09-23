@@ -9,7 +9,14 @@
 
             if (petfightindex == 0)
             {
-                unit.Stop(0);
+                if (message.YaoGan)
+                {
+                    unit.StopYaoGan(0);
+                }
+                else
+                {
+                    unit.Stop(0);
+                } 
             }
             else
             {
