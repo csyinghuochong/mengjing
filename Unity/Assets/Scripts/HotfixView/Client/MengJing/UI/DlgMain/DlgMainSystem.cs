@@ -2026,7 +2026,7 @@ namespace ET.Client
 
             PlayerComponent playerComponent = self.Scene().GetComponent<PlayerComponent>();
             SettingData.ShowFindPath = playerComponent.Account.Equals("18319670288");
-            GameObject.Find("Global/FindPath").SetActive(SettingData.ShowFindPath);
+            GameObject.Find("Global/FindPath")?.SetActive(SettingData.ShowFindPath);
         }
 
         public static void OnSettingUpdate(this DlgMain self)

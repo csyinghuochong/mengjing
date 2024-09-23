@@ -82,12 +82,14 @@ namespace ET.Client
             self.View.E_RefreshTimeText.text = string.Empty;
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.OnBoosRefresh().Coroutine();
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Main);
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)
         {
             self.View.EG_MapPanelRectTransform.DOKill();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Main);
         }
 
         private static async ETTask OnBoosRefresh(this DlgDungeonMap self)
