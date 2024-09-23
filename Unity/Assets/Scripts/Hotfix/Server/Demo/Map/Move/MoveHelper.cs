@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -43,6 +44,17 @@ namespace ET.Server
             }
         }
 
+        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent)
+        {
+            float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
+            bool ret = await moveComponent.MoveToAsync(positonsss, speed);
+            if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
+            {
+                unit.SendStop(0);
+            }
+            await ETTask.CompletedTask;
+        }
+        
         // 可以多次调用，多次调用的话会取消上一次的协程
         public static async ETTask BulletMoveToAsync(this Unit unit, float3 target)
         {

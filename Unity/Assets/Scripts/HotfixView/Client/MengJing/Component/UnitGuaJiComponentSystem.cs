@@ -123,7 +123,7 @@ namespace ET.Client
                 return;
             }
 
-            MoveHelper.Stop(self.Root());
+            MoveHelper.Stop(self.Root(), false);
             self.Root().GetComponent<AttackComponent>().BeginAutoAttack(unit.Id);
         }
 

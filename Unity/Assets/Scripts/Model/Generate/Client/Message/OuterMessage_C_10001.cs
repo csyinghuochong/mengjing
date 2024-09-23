@@ -903,6 +903,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
+        [MemoryPackOrder(3)]
+        public bool YaoGan { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -911,6 +914,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.YaoGan = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -934,6 +938,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public List<Unity.Mathematics.float3> Points { get; set; } = new();
 
+        [MemoryPackOrder(3)]
+        public bool YaoGan { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -944,6 +951,7 @@ namespace ET
             this.Id = default;
             this.Position = default;
             this.Points.Clear();
+            this.YaoGan = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -970,6 +978,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public Unity.Mathematics.quaternion Rotation { get; set; }
 
+        [MemoryPackOrder(4)]
+        public bool YaoGan { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -981,6 +992,7 @@ namespace ET
             this.Id = default;
             this.Position = default;
             this.Rotation = default;
+            this.YaoGan = default;
 
             ObjectPool.Instance.Recycle(this);
         }

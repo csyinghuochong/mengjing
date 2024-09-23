@@ -253,28 +253,56 @@ namespace ET.Client
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             ;// Quaternion.Euler(0, direction, 0);
 
-            float3 unitPosition = unit.Position;
-            int obstruct = self.CheckObstruct(unit, unitPosition + math.forward( rotation )  * 2f);
-            if (obstruct != 0)
+            List<float3> pathfind = new List<float3>();
+            float3 newv3 = self.CanMovePosition_2(unit, rotation, pathfind);
+            if (pathfind.Count < 2)
             {
-                unit.GetComponent<StateComponentC>().ObstructStatus = 1;
-                self.ShowObstructTip(obstruct);
                 return;
             }
 
-            // float distance = self.CanMoveDistance(unit, rotation);
-            // distance = Mathf.Max(distance, 2f);
-            // float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-            // speed = Mathf.Max(speed, 4f);
-            // float needTime = distance / speed;
-            // self.checkTime = (int)(1000 * needTime) - 200;
-            
-            float3 newv3 = self.CanMovePosition(unit, rotation);
+            // float3 initpos = pathfind[0];
+            // List<float3> pathfind_2 = new List<float3>();
+            // pathfind_2.Add(initpos);
+            //
+            // float3 vector_pre = float3.zero;
+            // for (int i = 1; i <pathfind.Count; i++)
+            // {
+            //     float3 vector_cur = (pathfind[i] - pathfind[i - 1]).normalize();
+            //     if (!vector_cur.Equals(vector_pre) )
+            //     {
+            //         vector_pre = vector_cur;
+            //         pathfind_2.Add(pathfind[i]);
+            //     }
+            // }
+            //
+            // pathfind.Clear();
+            // pathfind.Add(pathfind_2[0]);
+            //
+            // int distance_init = 0;
+            // for (int i = 1; i <pathfind_2.Count; i++)
+            // {
+            //     float distance_cur = math.distance(pathfind_2[i] , pathfind_2[distance_init]);
+            //     if (distance_cur < 1f)
+            //     {
+            //         continue;
+            //     }
+            //     else
+            //     {
+            //         pathfind.Add(pathfind_2[i]);
+            //         distance_init = i;
+            //     }
+            // }
+            //
+            // if (pathfind.Count < 2)
+            // {
+            //     pathfind.Add(pathfind_2[pathfind_2.Count - 1]);
+            // }
+
             float distance = Vector3.Distance(newv3, unit.Position);
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             float needTime = distance / speed;
-            self.checkTime =(long)(1000 * needTime) - 400;
+            self.checkTime =(long)(1000 * needTime) - 200;
 
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
@@ -285,7 +313,8 @@ namespace ET.Client
             }
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
             
-            self.MainUnit.MoveToAsync(newv3, null, self.checkTime, direction, self.lastDirection).Coroutine();
+            self.MainUnit.MoveResultToAsync(pathfind).Coroutine();
+            //unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
 
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
@@ -328,21 +357,21 @@ namespace ET.Client
             return distance * intveral;
         }
 
-        private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation)
+        private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
         {
             float3 targetPosi = unit.Position;
             for (int i = 0; i < 30; i++)
             {
-                Vector3 target = targetPosi + math.forward(rotation) * ( 0.2f);
+                targetPosi = targetPosi + math.forward(rotation) * ( 0.2f);
                 RaycastHit hit;
 
-                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
                 {
                     break;
                 }
 
-                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
                 if (hit.collider == null)
                 {
                     // if (i == 0)
@@ -355,8 +384,42 @@ namespace ET.Client
                 {
                     targetPosi = hit.point;
                 }
+                
+                pathfind.Add(targetPosi);
+            }
 
-                targetPosi = target;
+            return targetPosi;
+        }
+        
+        private static float3 CanMovePosition_2(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
+        {
+            float3 targetPosi = unit.Position;
+            for (int i = 0; i < 10; i++)
+            {
+                targetPosi = targetPosi + math.forward(rotation) * ( 0.5f);
+                RaycastHit hit;
+
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
+                if (hit.collider != null)
+                {
+                    break;
+                }
+
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+                if (hit.collider == null)
+                {
+                    // if (i == 0)
+                    // {
+                    //     targetpositon = target;
+                    // }
+                    break;
+                }
+                else
+                {
+                    targetPosi = hit.point;
+                }
+                
+                pathfind.Add(targetPosi);
             }
 
             return targetPosi;
@@ -427,7 +490,7 @@ namespace ET.Client
                 return;
             }
 
-            MoveHelper.Stop(self.Root());
+            MoveHelper.Stop(self.Root(), true);
         }
     }
 }
