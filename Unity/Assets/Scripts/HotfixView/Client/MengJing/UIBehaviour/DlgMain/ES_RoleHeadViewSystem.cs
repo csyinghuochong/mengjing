@@ -105,7 +105,7 @@ namespace ET.Client
         {
             using (zstring.Block())
             {
-                self.E_RoleLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("等级"),
+                self.E_RoleLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization(""),
                     self.UserInfoComponent.UserInfo.Lv);
             }
         }
