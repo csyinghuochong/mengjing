@@ -130,6 +130,16 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class UpdateUserDataExp_DlgMainRefresh : AEvent<Scene, UpdateUserDataExp>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserDataExp args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.UpdateShowRoleExp();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_SettingUpdate_Refresh : AEvent<Scene, SettingUpdate>
     {
         protected override async ETTask Run(Scene scene, SettingUpdate args)
@@ -988,7 +998,7 @@ namespace ET.Client
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
         }
 
-        private static void UpdateShowRoleExp(this DlgMain self)
+        public static void UpdateShowRoleExp(this DlgMain self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (!ExpConfigCategory.Instance.Contain(userInfo.Lv))
@@ -1712,10 +1722,6 @@ namespace ET.Client
 
             switch (userDataType)
             {
-                case UserDataType.Exp:
-                    self.View.ES_RoleHead.UpdateShowRoleExp();
-                    self.UpdateShowRoleExp();
-                    break;
                 case UserDataType.PiLao:
                     self.View.ES_RoleHead.UpdateShowRolePiLao();
                     break;
