@@ -27,6 +27,7 @@ namespace ET.Client
 
     [FriendOf(typeof(Scroll_Item_DungeonMapLevelItem))]
     [FriendOf(typeof(DlgDungeonMap))]
+    [FriendOf(typeof(DlgDungeonMapViewComponent))]
     public static class DlgDungeonMapSystem
     {
         public static void RegisterUIEvent(this DlgDungeonMap self)
@@ -43,38 +44,21 @@ namespace ET.Client
             dic.Add(7, 8);
             dic.Add(8, 9);
 
-            self.View.E_Map0Button.AddListener(() => { self.Enlarge(self.View.E_Map0Button, dic[0]); });
-            self.View.E_Map1Button.AddListener(() => { self.Enlarge(self.View.E_Map1Button, dic[1]); });
-            self.View.E_Map2Button.AddListener(() => { self.Enlarge(self.View.E_Map2Button, dic[2]); });
-            self.View.E_Map3Button.AddListener(() => { self.Enlarge(self.View.E_Map3Button, dic[3]); });
-            self.View.E_Map4Button.AddListener(() => { self.Enlarge(self.View.E_Map4Button, dic[4]); });
-            self.View.E_Map5Button.AddListener(() => { self.Enlarge(self.View.E_Map5Button, dic[5]); });
-            self.View.E_Map6Button.AddListener(() => { self.Enlarge(self.View.E_Map6Button, dic[6]); });
-            self.View.E_Map7Button.AddListener(() => { self.Enlarge(self.View.E_Map7Button, dic[7]); });
-            self.View.E_Map8Button.AddListener(() => { self.Enlarge(self.View.E_Map8Button, dic[8]); });
+            self.MapGameObjects = new GameObject[dic.Count];
+            for (int i = 0; i < self.MapGameObjects.Length; i++)
+            {
+                GameObject go = self.View.EG_MapPanelRectTransform.Find("Map" + i).gameObject;
+                self.MapGameObjects[i] = go;
 
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map0Button.gameObject, !self.CanOpen(dic[0]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map1Button.gameObject, !self.CanOpen(dic[1]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map2Button.gameObject, !self.CanOpen(dic[2]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map3Button.gameObject, !self.CanOpen(dic[3]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map4Button.gameObject, !self.CanOpen(dic[4]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map5Button.gameObject, !self.CanOpen(dic[5]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map6Button.gameObject, !self.CanOpen(dic[6]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map7Button.gameObject, !self.CanOpen(dic[7]));
-            CommonViewHelper.SetImageGray(self.Root(), self.View.E_Map8Button.gameObject, !self.CanOpen(dic[8]));
+                int i1 = i;
+                go.GetComponent<Button>().AddListener(() => { self.Enlarge(i1, dic[i1]); });
+                CommonViewHelper.SetImageGray(self.Root(), go, !self.CanOpen(dic[i]));
 
-            // alphaHitTestMinimumThreshold 属性用于指定 Image 组件在进行 alpha 值命中测试时的透明度阈值。
-            // 默认情况下，该属性值为 0，表示所有不透明像素都可以通过 alpha 值命中测试。
-            // 如果将该属性设置为大于 0 的值，则只有当图像中的像素透明度大于等于该阈值时，该像素才会被视为不透明像素，并且图像才会通过 alpha 值命中测试。
-            self.View.E_Map0Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map1Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map2Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map3Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map4Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map5Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map6Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map7Image.alphaHitTestMinimumThreshold = 0.5f;
-            self.View.E_Map8Image.alphaHitTestMinimumThreshold = 0.5f;
+                // alphaHitTestMinimumThreshold 属性用于指定 Image 组件在进行 alpha 值命中测试时的透明度阈值。
+                // 默认情况下，该属性值为 0，表示所有不透明像素都可以通过 alpha 值命中测试。
+                // 如果将该属性设置为大于 0 的值，则只有当图像中的像素透明度大于等于该阈值时，该像素才会被视为不透明像素，并且图像才会通过 alpha 值命中测试。
+                go.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
+            }
 
             self.View.E_NanDu_1_ButtonButton.AddListener(() => { self.OnNanDu_Button(1); });
             self.View.E_NanDu_2_ButtonButton.AddListener(() => { self.OnNanDu_Button(2); });
@@ -102,7 +86,7 @@ namespace ET.Client
 
         public static void BeforeUnload(this DlgDungeonMap self)
         {
-            self.View.E_MapPanelImage.GetComponent<RectTransform>().DOKill();
+            self.View.EG_MapPanelRectTransform.DOKill();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
@@ -197,18 +181,21 @@ namespace ET.Client
 
         private static void EnableBtns(this DlgDungeonMap self, bool enable)
         {
-            self.View.E_Map0Button.enabled = enable;
-            self.View.E_Map1Button.enabled = enable;
-            self.View.E_Map2Button.enabled = enable;
-            self.View.E_Map3Button.enabled = enable;
-            self.View.E_Map4Button.enabled = enable;
-            self.View.E_Map5Button.enabled = enable;
-            self.View.E_Map6Button.enabled = enable;
-            self.View.E_Map7Button.enabled = enable;
-            self.View.E_Map8Button.enabled = enable;
+            foreach (GameObject go in self.MapGameObjects)
+            {
+                go.GetComponent<Button>().enabled = enable;
+            }
         }
 
-        private static void Enlarge(this DlgDungeonMap self, Button clickedButton, int chapterId)
+        private static void SetTitle(this DlgDungeonMap self, bool enable)
+        {
+            foreach (GameObject go in self.MapGameObjects)
+            {
+                go.transform.Find("Title")?.gameObject.SetActive(enable);
+            }
+        }
+
+        private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
             if (!self.CanOpen(chapterId))
             {
@@ -220,21 +207,23 @@ namespace ET.Client
 
             self.EnableBtns(false);
 
-            self.CurrentMap = clickedButton.gameObject;
-            RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
-            RectTransform buttonRectTransform = clickedButton.GetComponent<RectTransform>();
+            self.CurrentMap = self.MapGameObjects[map];
+            RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
+            RectTransform buttonRectTransform = self.CurrentMap.GetComponent<RectTransform>();
 
             Vector3 targetScale = Vector3.one * self.ScaleFactor;
             rectTransform.DOScale(targetScale, self.Duration).SetEase(Ease.Linear);
 
-            Vector3 buttonLocalPosition = rectTransform.InverseTransformPoint(buttonRectTransform.position);
+            Vector3 buttonLocalPosition = self.View.uiTransform.InverseTransformPoint(buttonRectTransform.position);
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
+            targetPosition *= self.ScaleFactor;
+            targetPosition.x -= 250f;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
                 List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
-                self.CurrentMap.transform.Find("Title").gameObject.SetActive(false);
+                self.SetTitle(false);
 
                 List<Transform> levels = new();
                 for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
@@ -407,7 +396,7 @@ namespace ET.Client
         private static void ShowSelect(this DlgDungeonMap self, Transform transform)
         {
             self.View.E_SelectImage.gameObject.SetActive(true);
-            RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
+            RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
             self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
@@ -415,7 +404,7 @@ namespace ET.Client
 
         public static void ReEnlarge(this DlgDungeonMap self)
         {
-            RectTransform rectTransform = self.View.E_MapPanelImage.GetComponent<RectTransform>();
+            RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
 
             self.View.E_SelectImage.gameObject.SetActive(false);
@@ -426,7 +415,7 @@ namespace ET.Client
             {
                 self.EnableBtns(true);
 
-                self.CurrentMap.transform.Find("Title").gameObject.SetActive(true);
+                self.SetTitle(true);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
             };
         }

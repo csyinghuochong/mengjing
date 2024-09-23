@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgDungeonMapViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Image E_MapPanelImage
+		public UnityEngine.RectTransform EG_MapPanelRectTransform
      	{
      		get
      		{
@@ -16,11 +16,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MapPanelImage == null )
+     			if( this.m_EG_MapPanelRectTransform == null )
      			{
-		    		this.m_E_MapPanelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel");
+		    		this.m_EG_MapPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MapPanel");
      			}
-     			return this.m_E_MapPanelImage;
+     			return this.m_EG_MapPanelRectTransform;
      		}
      	}
 
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MapPanelDiImage == null )
      			{
-		    		this.m_E_MapPanelDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_MapPanelDi");
+		    		this.m_E_MapPanelDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_MapPanelDi");
      			}
      			return this.m_E_MapPanelDiImage;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map0Button == null )
      			{
-		    		this.m_E_Map0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map0");
+		    		this.m_E_Map0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map0");
      			}
      			return this.m_E_Map0Button;
      		}
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map0Image == null )
      			{
-		    		this.m_E_Map0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map0");
+		    		this.m_E_Map0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map0");
      			}
      			return this.m_E_Map0Image;
      		}
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map1Button == null )
      			{
-		    		this.m_E_Map1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map1");
+		    		this.m_E_Map1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map1");
      			}
      			return this.m_E_Map1Button;
      		}
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map1Image == null )
      			{
-		    		this.m_E_Map1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map1");
+		    		this.m_E_Map1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map1");
      			}
      			return this.m_E_Map1Image;
      		}
@@ -120,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map2Button == null )
      			{
-		    		this.m_E_Map2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map2");
+		    		this.m_E_Map2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map2");
      			}
      			return this.m_E_Map2Button;
      		}
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map2Image == null )
      			{
-		    		this.m_E_Map2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map2");
+		    		this.m_E_Map2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map2");
      			}
      			return this.m_E_Map2Image;
      		}
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map4Button == null )
      			{
-		    		this.m_E_Map4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map4");
+		    		this.m_E_Map4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map4");
      			}
      			return this.m_E_Map4Button;
      		}
@@ -171,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map4Image == null )
      			{
-		    		this.m_E_Map4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map4");
+		    		this.m_E_Map4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map4");
      			}
      			return this.m_E_Map4Image;
      		}
@@ -188,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map3Button == null )
      			{
-		    		this.m_E_Map3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map3");
+		    		this.m_E_Map3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map3");
      			}
      			return this.m_E_Map3Button;
      		}
@@ -205,7 +205,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map3Image == null )
      			{
-		    		this.m_E_Map3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map3");
+		    		this.m_E_Map3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map3");
      			}
      			return this.m_E_Map3Image;
      		}
@@ -222,7 +222,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map5Button == null )
      			{
-		    		this.m_E_Map5Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map5");
+		    		this.m_E_Map5Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map5");
      			}
      			return this.m_E_Map5Button;
      		}
@@ -239,7 +239,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map5Image == null )
      			{
-		    		this.m_E_Map5Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map5");
+		    		this.m_E_Map5Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map5");
      			}
      			return this.m_E_Map5Image;
      		}
@@ -256,7 +256,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map6Button == null )
      			{
-		    		this.m_E_Map6Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map6");
+		    		this.m_E_Map6Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map6");
      			}
      			return this.m_E_Map6Button;
      		}
@@ -273,7 +273,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map6Image == null )
      			{
-		    		this.m_E_Map6Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map6");
+		    		this.m_E_Map6Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map6");
      			}
      			return this.m_E_Map6Image;
      		}
@@ -290,7 +290,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map7Button == null )
      			{
-		    		this.m_E_Map7Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map7");
+		    		this.m_E_Map7Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map7");
      			}
      			return this.m_E_Map7Button;
      		}
@@ -307,7 +307,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map7Image == null )
      			{
-		    		this.m_E_Map7Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map7");
+		    		this.m_E_Map7Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map7");
      			}
      			return this.m_E_Map7Image;
      		}
@@ -324,7 +324,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map8Button == null )
      			{
-		    		this.m_E_Map8Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MapPanel/E_Map8");
+		    		this.m_E_Map8Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_Map8");
      			}
      			return this.m_E_Map8Button;
      		}
@@ -341,7 +341,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Map8Image == null )
      			{
-		    		this.m_E_Map8Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Map8");
+		    		this.m_E_Map8Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Map8");
      			}
      			return this.m_E_Map8Image;
      		}
@@ -358,7 +358,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectImage == null )
      			{
-		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MapPanel/E_Select");
+		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MapPanel/E_Select");
      			}
      			return this.m_E_SelectImage;
      		}
@@ -927,7 +927,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_MapPanelImage = null;
+			this.m_EG_MapPanelRectTransform = null;
 			this.m_E_MapPanelDiImage = null;
 			this.m_E_Map0Button = null;
 			this.m_E_Map0Image = null;
@@ -984,7 +984,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_MapPanelImage = null;
+		private UnityEngine.RectTransform m_EG_MapPanelRectTransform = null;
 		private UnityEngine.UI.Image m_E_MapPanelDiImage = null;
 		private UnityEngine.UI.Button m_E_Map0Button = null;
 		private UnityEngine.UI.Image m_E_Map0Image = null;

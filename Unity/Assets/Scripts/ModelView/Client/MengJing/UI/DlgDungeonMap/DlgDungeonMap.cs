@@ -10,6 +10,7 @@ namespace ET.Client
 
         public float ScaleFactor = 1.5f; // 缩放系数
         public float Duration = 0.5f; // 动画持续时间
+        public GameObject[] MapGameObjects;
         public GameObject CurrentMap;
         public int Difficulty;
         public int ChapterId;
