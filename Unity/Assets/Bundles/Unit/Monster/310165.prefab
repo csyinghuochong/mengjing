@@ -359,6 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8280522574227734901}
   - component: {fileID: 3062457160228686244}
+  - component: {fileID: 2546822009093597806}
   m_Layer: 0
   m_Name: Terrell_Body
   m_TagString: Untagged
@@ -405,7 +406,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: 2d8944eadad08d54e9491103c9f18022, type: 2}
   - {fileID: 2100000, guid: 2d8944eadad08d54e9491103c9f18022, type: 2}
   - {fileID: 2100000, guid: e5b26080d8d5cbc4f864c9af6e323adb, type: 2}
-  - {fileID: 2100000, guid: 360b6a7ad55155840a472143fe4041dd, type: 2}
+  - {fileID: 2100000, guid: 620b3114f65d20a4fb12977931bd59cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -488,6 +489,26 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3005645, y: 0.092737675, z: 0.0047546625}
     m_Extent: {x: 1.1316267, y: 1.1770818, z: 1.5044322}
   m_DirtyAABB: 0
+--- !u!114 &2546822009093597806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971360433635282160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07dca68b5021534c953275f87ca9267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialGroups:
+  - Name: Dissolve
+    Materials:
+    - {fileID: 2100000, guid: eddabc211c23f0d49b94050223141ced, type: 2}
+    - {fileID: 2100000, guid: e66aa2f0291f15f44afb1c3f916b0a67, type: 2}
+    - {fileID: 2100000, guid: 5c9c884acf7c0414083eca9443ee0b6f, type: 2}
+    - {fileID: 2100000, guid: 93136c9702e540a49aed02fb3bd171a7, type: 2}
+    - {fileID: 2100000, guid: 620b3114f65d20a4fb12977931bd59cd, type: 2}
 --- !u!1 &973392361983204821
 GameObject:
   m_ObjectHideFlags: 0
