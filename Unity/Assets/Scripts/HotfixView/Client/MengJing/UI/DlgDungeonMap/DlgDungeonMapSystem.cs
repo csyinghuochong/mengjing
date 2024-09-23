@@ -366,6 +366,7 @@ namespace ET.Client
 
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
+                self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
 
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 using (zstring.Block())
@@ -412,6 +413,7 @@ namespace ET.Client
             self.View.E_SelectImage.gameObject.SetActive(false);
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.View.E_CloseButton.gameObject.SetActive(true);
+            self.View.EG_MapPanelRectTransform.gameObject.SetActive(true);
             self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
             self.CurrentMap.transform.SetSiblingIndex(self.OriginalIndex);
             self.SetTitle(true);
