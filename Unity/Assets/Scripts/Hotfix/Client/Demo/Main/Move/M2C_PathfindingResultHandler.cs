@@ -20,9 +20,11 @@
 				Log.Debug($"FrameIndex.Add:    {number}");
 			}
 
-			
-			float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-			await unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed);
+			if (!unit.MainHero || !message.YaoGan)
+			{
+				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+				await unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed);
+			}
 		}
 	}
 }
