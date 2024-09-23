@@ -214,9 +214,7 @@ namespace ET.Client
 
             Vector2 indicator = self.NewPoint - self.OldPoint;
             int angle = 90 - (int)(Mathf.Atan2(indicator.y, indicator.x) * Mathf.Rad2Deg) + (int)self.MainCamera.transform.eulerAngles.y;
-            
-            angle = ( angle  - angle % 15 );
-            
+            angle = ( angle  - angle % 20 );
             return angle;
         }
 
@@ -234,6 +232,11 @@ namespace ET.Client
         {
             long clientNow = TimeHelper.ClientNow();
             
+            if ( clientNow - self.lastSendTime < 30)
+            {
+                return;
+            }
+            
             if (clientNow - self.AttackComponent.MoveAttackTime < 200)
             {
                 return;
@@ -243,7 +246,7 @@ namespace ET.Client
             {
                 return;
             }
-
+          
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             ;// Quaternion.Euler(0, direction, 0);
@@ -258,7 +261,37 @@ namespace ET.Client
             float3 initpos = pathfind[0];
             List<float3> pathfind_2 = new List<float3>();
             pathfind_2.Add(initpos);
-
+            
+            
+            ////////-------------------------------------
+            // int distance_init = 0;
+            // for (int i = 1; i < pathfind.Count; i++)
+            // {
+            //     float distance_cur = math.distance(pathfind[i] , pathfind[distance_init]);
+            //     if (distance_cur < 0.5f)
+            //     {
+            //         continue;
+            //     }
+            //     else
+            //     {
+            //         distance_init = i;
+            //         pathfind_2.Add(pathfind[i]);
+            //     }
+            // }
+            //
+            // distance_init = 0;
+            // for (int i = 1; i <pathfind_2.Count;)
+            // {
+            //     if (math.abs(pathfind_2[i].y - pathfind_2[i-1].y) < 0.02f)
+            //     {
+            //         pathfind_2.RemoveAt(i);
+            //     }
+            //     else
+            //     {
+            //         i++;
+            //     }
+            // }
+            /////////--------------------------------
             for (int i = 1; i <pathfind.Count; i++)
             {
                 //if (!pathfind[i].y.Equals(pathfind[i-1].y))
@@ -285,6 +318,7 @@ namespace ET.Client
                     }
                 }
             }
+            /////////--------------------------------
             
             
             if (pathfind_2.Count < 2)
@@ -293,7 +327,6 @@ namespace ET.Client
             }
 
             newv3 = pathfind_2[pathfind_2.Count - 1];
-            
             float distance = Vector3.Distance(newv3, unit.Position);
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);

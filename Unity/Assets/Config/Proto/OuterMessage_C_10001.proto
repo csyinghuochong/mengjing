@@ -214,14 +214,6 @@ message C2M_Stop // ILocationMessage
 	bool YaoGan = 4;
 }
 
-message M2C_PathfindingResult // IMessage
-{
-	int64 Id = 1;
-	Unity.Mathematics.float3 Position = 2;
-	repeated Unity.Mathematics.float3 Points = 3;
-	bool YaoGan = 4;
-}
-
 message M2C_Stop // IMessage
 {
 	int32 Error = 1;
@@ -229,6 +221,21 @@ message M2C_Stop // IMessage
 	Unity.Mathematics.float3 Position = 3;
 	Unity.Mathematics.quaternion Rotation = 4;
 	bool YaoGan = 5;
+}
+
+message C2M_StopResult // ILocationMessage
+{
+	int32 RpcId = 1;
+	Unity.Mathematics.float3 Position = 3;
+	bool YaoGan = 4;
+}
+
+message M2C_PathfindingResult // IMessage
+{
+	int64 Id = 1;
+	Unity.Mathematics.float3 Position = 2;
+	repeated Unity.Mathematics.float3 Points = 3;
+	bool YaoGan = 4;
 }
 
 //ResponseType G2C_Ping
