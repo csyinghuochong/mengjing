@@ -282,17 +282,27 @@ namespace ET.Client
                 blood = 0;
             }
 
-            self.Vector3.x = blood;
+            
             if (self.LockTargetComponent.LastLockId == unit.Id)
             {
                 //更新怪物血条
-                self.E_Img_MonsterHpImage.transform.localScale = self.Vector3;
+                self.E_Img_MonsterHpImage.fillAmount = blood;
             }
 
             if (self.LockBossId == unit.Id)
             {
                 //更新Boss血条
-                self.E_Img_BossHpImage.transform.localScale = self.Vector3;
+                self.E_Img_BossHpImage.fillAmount = blood;
+                if (blood <= 0)
+                {
+                    self.E_Img_BoosHpRightImage.gameObject.SetActive(false);
+                }
+                else
+                {
+                    self.E_Img_BoosHpRightImage.gameObject.SetActive(true);
+                    self.E_Img_BoosHpRightImage.rectTransform.localPosition =
+                            new Vector3(self.E_Img_BossHpImage.rectTransform.sizeDelta.x * blood - 26f, 0.5f, 0);
+                }
             }
         }
 
