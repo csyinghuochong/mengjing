@@ -71,6 +71,7 @@ namespace ET.Client
                 if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) > 0)
                 {
                     OnBossDead(unit).Coroutine();
+                    unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmDeathState);
                 }
                 else
                 {
