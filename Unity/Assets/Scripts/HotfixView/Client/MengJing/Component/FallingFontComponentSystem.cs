@@ -26,7 +26,7 @@ namespace ET.Client
                 {
                     scene.GetComponent<FallingFontComponent>()?.Play(heroHeadBarComponent.GameObject, unit,
                         zstring.Format("{0}x{1}", itemConfig.ItemName, args.ItemNum), FallingFontType.Drop_Item, Vector3.one, BloodTextLayer.Layer_1,
-                        FallingFontExecuteType.Type_1);
+                        FallingFontExecuteType.Type_1, true);
                 }
             }
 
@@ -223,7 +223,7 @@ namespace ET.Client
     public static partial class FallingFontComponentSystem
     {
         [Invoke(TimerInvokeType.FallingFont)]
-        public class FallingFont : ATimer<FallingFontComponent>
+        public class FallingFontTimer : ATimer<FallingFontComponent>
         {
             protected override void Run(FallingFontComponent self)
             {
@@ -274,12 +274,29 @@ namespace ET.Client
         /// <param name="startScale">开始的大小</param>
         /// <param name="bloodTextLayer">层级</param>
         /// <param name="fallingFontExecuteType">执行逻辑</param>
+        /// <param name="addQueue">依次出现</param>
         public static void Play(this FallingFontComponent self, GameObject HeadBar, Unit unit, string showText, FallingFontType fontType,
-        Vector3 startScale, BloodTextLayer bloodTextLayer, FallingFontExecuteType fallingFontExecuteType)
+        Vector3 startScale, BloodTextLayer bloodTextLayer, FallingFontExecuteType fallingFontExecuteType, bool addQueue = false)
         {
-            FallingFontShowComponent fallingFont = self.AddChild<FallingFontShowComponent>();
-            fallingFont.OnInitData(HeadBar, unit, showText, fontType, startScale, bloodTextLayer, fallingFontExecuteType);
-            self.FallingFontShows.Add(fallingFont);
+            if (addQueue)
+            {
+                self.FallingFontQueue.Enqueue(new FallingFont()
+                {
+                    HeadBar = HeadBar,
+                    Unit = unit,
+                    ShowText = showText,
+                    FallingFontType = fontType,
+                    StartScale = startScale,
+                    BloodTextLayer = bloodTextLayer,
+                    FallingFontExecuteType = fallingFontExecuteType
+                });
+            }
+            else
+            {
+                FallingFontShowComponent fallingFont = self.AddChild<FallingFontShowComponent>();
+                fallingFont.OnInitData(HeadBar, unit, showText, fontType, startScale, bloodTextLayer, fallingFontExecuteType);
+                self.FallingFontShows.Add(fallingFont);
+            }
 
             if (self.Timer == 0)
             {
@@ -300,7 +317,20 @@ namespace ET.Client
                 }
             }
 
-            if (self.FallingFontShows.Count == 0 && self.Timer != 0)
+            long time = TimeInfo.Instance.ClientNow();
+
+            if (self.FallingFontQueue.Count > 0)
+            {
+                if (time - self.LastTime >= self.Interval)
+                {
+                    self.LastTime = time;
+                    FallingFont fallingFont = self.FallingFontQueue.Dequeue();
+                    self.Play(fallingFont.HeadBar, fallingFont.Unit, fallingFont.ShowText, fallingFont.FallingFontType, fallingFont.StartScale,
+                        fallingFont.BloodTextLayer, fallingFont.FallingFontExecuteType);
+                }
+            }
+
+            if (self.FallingFontShows.Count == 0 && self.FallingFontQueue.Count == 0 && self.Timer != 0)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             }

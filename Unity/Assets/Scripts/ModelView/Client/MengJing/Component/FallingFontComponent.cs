@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,6 +13,7 @@ namespace ET.Client
         Target = 2,
         Add = 3,
         Special = 4,
+
         //Yellow = 5,
         UpLv = 6,
         TaskGet = 7,
@@ -56,13 +58,26 @@ namespace ET.Client
         /// 完成任务 
         /// </summary>
         Type_3 = 3,
+    }
 
+    public struct FallingFont
+    {
+        public GameObject HeadBar;
+        public Unit Unit;
+        public string ShowText;
+        public FallingFontType FallingFontType;
+        public Vector3 StartScale;
+        public BloodTextLayer BloodTextLayer;
+        public FallingFontExecuteType FallingFontExecuteType;
     }
 
     [ComponentOf(typeof(Scene))]
     public class FallingFontComponent : Entity, IAwake, IDestroy
     {
         public long Timer;
+        public long LastTime;
+        public long Interval = 200; // 延迟
+        public Queue<FallingFont> FallingFontQueue = new();
         public List<EntityRef<FallingFontShowComponent>> FallingFontShows = new();
     }
 }
