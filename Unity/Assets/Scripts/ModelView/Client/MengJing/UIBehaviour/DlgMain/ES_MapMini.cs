@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MapMini : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_MapMini : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int Lab_TimeIndex = 0;
 		public GameObject MapCamera;
@@ -17,7 +17,7 @@ namespace ET.Client
 		public List<GameObject> AllPointList = new();
 		public Vector3 NoVector3 = new(-10000, -10000, 0);
 		
-		public Image E_MainCityShowImage
+		public UnityEngine.RectTransform EG_MainCityShowRectTransform
      	{
      		get
      		{
@@ -26,15 +26,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MainCityShowImage == null )
+     			if( this.m_EG_MainCityShowRectTransform == null )
      			{
-		    		this.m_E_MainCityShowImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_MainCityShow");
+		    		this.m_EG_MainCityShowRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MainCityShow");
      			}
-     			return this.m_E_MainCityShowImage;
+     			return this.m_EG_MainCityShowRectTransform;
      		}
      	}
 
-		public RawImage E_RawImageRawImage
+		public UnityEngine.UI.RawImage E_RawImageRawImage
      	{
      		get
      		{
@@ -45,13 +45,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RawImageRawImage == null )
      			{
-		    		this.m_E_RawImageRawImage = UIFindHelper.FindDeepChild<RawImage>(this.uiTransform.gameObject,"E_MainCityShow/ImageDi_1/E_RawImage");
+		    		this.m_E_RawImageRawImage = UIFindHelper.FindDeepChild<UnityEngine.UI.RawImage>(this.uiTransform.gameObject,"EG_MainCityShow/ImageDi_1/E_RawImage");
      			}
      			return this.m_E_RawImageRawImage;
      		}
      	}
 
-		public RectTransform EG_HeadListRectTransform
+		public UnityEngine.RectTransform EG_HeadListRectTransform
      	{
      		get
      		{
@@ -62,13 +62,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_HeadListRectTransform == null )
      			{
-		    		this.m_EG_HeadListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"E_MainCityShow/ImageDi_1/EG_HeadList");
+		    		this.m_EG_HeadListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MainCityShow/ImageDi_1/EG_HeadList");
      			}
      			return this.m_EG_HeadListRectTransform;
      		}
      	}
 
-		public RectTransform EG_HeadItemRectTransform
+		public UnityEngine.RectTransform EG_HeadItemRectTransform
      	{
      		get
      		{
@@ -79,13 +79,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_HeadItemRectTransform == null )
      			{
-		    		this.m_EG_HeadItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"E_MainCityShow/ImageDi_1/EG_HeadList/EG_HeadItem");
+		    		this.m_EG_HeadItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MainCityShow/ImageDi_1/EG_HeadList/EG_HeadItem");
      			}
      			return this.m_EG_HeadItemRectTransform;
      		}
      	}
 
-		public Text E_MapNameText
+		public UnityEngine.UI.Text E_MapNameText
      	{
      		get
      		{
@@ -96,13 +96,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MapNameText == null )
      			{
-		    		this.m_E_MapNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_MapName");
+		    		this.m_E_MapNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_MapName");
      			}
      			return this.m_E_MapNameText;
      		}
      	}
 
-		public Text E_TianQiText
+		public UnityEngine.UI.Text E_TianQiText
      	{
      		get
      		{
@@ -113,13 +113,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TianQiText == null )
      			{
-		    		this.m_E_TianQiText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TianQi");
+		    		this.m_E_TianQiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TianQi");
      			}
      			return this.m_E_TianQiText;
      		}
      	}
 
-		public Text E_TimeText
+		public UnityEngine.UI.Text E_TimeText
      	{
      		get
      		{
@@ -130,13 +130,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TimeText == null )
      			{
-		    		this.m_E_TimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Time");
+		    		this.m_E_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Time");
      			}
      			return this.m_E_TimeText;
      		}
      	}
 
-		public Button E_MiniMapButtonButton
+		public UnityEngine.UI.Button E_MiniMapButtonButton
      	{
      		get
      		{
@@ -147,13 +147,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MiniMapButtonButton == null )
      			{
-		    		this.m_E_MiniMapButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_MiniMapButton");
+		    		this.m_E_MiniMapButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_MiniMapButton");
      			}
      			return this.m_E_MiniMapButtonButton;
      		}
      	}
 
-		public Image E_MiniMapButtonImage
+		public UnityEngine.UI.Image E_MiniMapButtonImage
      	{
      		get
      		{
@@ -164,7 +164,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MiniMapButtonImage == null )
      			{
-		    		this.m_E_MiniMapButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_MiniMapButton");
+		    		this.m_E_MiniMapButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MiniMapButton");
      			}
      			return this.m_E_MiniMapButtonImage;
      		}
@@ -184,7 +184,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_MainCityShowImage = null;
+			this.m_EG_MainCityShowRectTransform = null;
 			this.m_E_RawImageRawImage = null;
 			this.m_EG_HeadListRectTransform = null;
 			this.m_EG_HeadItemRectTransform = null;
@@ -196,15 +196,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private Image m_E_MainCityShowImage = null;
-		private RawImage m_E_RawImageRawImage = null;
-		private RectTransform m_EG_HeadListRectTransform = null;
-		private RectTransform m_EG_HeadItemRectTransform = null;
-		private Text m_E_MapNameText = null;
-		private Text m_E_TianQiText = null;
-		private Text m_E_TimeText = null;
-		private Button m_E_MiniMapButtonButton = null;
-		private Image m_E_MiniMapButtonImage = null;
+		private UnityEngine.RectTransform m_EG_MainCityShowRectTransform = null;
+		private UnityEngine.UI.RawImage m_E_RawImageRawImage = null;
+		private UnityEngine.RectTransform m_EG_HeadListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_HeadItemRectTransform = null;
+		private UnityEngine.UI.Text m_E_MapNameText = null;
+		private UnityEngine.UI.Text m_E_TianQiText = null;
+		private UnityEngine.UI.Text m_E_TimeText = null;
+		private UnityEngine.UI.Button m_E_MiniMapButtonButton = null;
+		private UnityEngine.UI.Image m_E_MiniMapButtonImage = null;
 		public Transform uiTransform = null;
 	}
 }

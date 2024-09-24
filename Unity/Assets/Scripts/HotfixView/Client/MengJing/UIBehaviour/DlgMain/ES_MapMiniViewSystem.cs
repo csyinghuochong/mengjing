@@ -290,7 +290,7 @@ namespace ET.Client
             int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
             int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
-            self.E_MainCityShowImage.gameObject.SetActive(true);
+            self.EG_MainCityShowRectTransform.gameObject.SetActive(true);
 
             using (zstring.Block())
             {
