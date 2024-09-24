@@ -571,14 +571,7 @@ namespace ET.Client
 
         public static void Reddot_MainChat(this DlgMain self, int num)
         {
-            if (num > 0 && !self.View.EG_MainChatRectTransform.gameObject.activeSelf)
-            {
-                self.View.E_OpenChatButton.transform.Find("Reddot").gameObject.SetActive(true);
-            }
-            else
-            {
-                self.View.E_OpenChatButton.transform.Find("Reddot").gameObject.SetActive(false);
-            }
+            self.View.E_OpenChatButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         public static void Reddot_Team(this DlgMain self, int num)
