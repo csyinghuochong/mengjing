@@ -1,0 +1,283 @@
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[ComponentOf(typeof(DlgFunction))]
+	[EnableMethod]
+	public  class DlgFunctionViewComponent : Entity,IAwake,IDestroy 
+	{
+		public UnityEngine.UI.Button E_CloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseButton == null )
+     			{
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseImage == null )
+     			{
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_TaskButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskButton == null )
+     			{
+		    		this.m_E_TaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Task");
+     			}
+     			return this.m_E_TaskButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_TaskImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskImage == null )
+     			{
+		    		this.m_E_TaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Task");
+     			}
+     			return this.m_E_TaskImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_RoseEquipButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseEquipButton == null )
+     			{
+		    		this.m_E_RoseEquipButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_RoseEquip");
+     			}
+     			return this.m_E_RoseEquipButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RoseEquipImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseEquipImage == null )
+     			{
+		    		this.m_E_RoseEquipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_RoseEquip");
+     			}
+     			return this.m_E_RoseEquipImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_PetButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetButton == null )
+     			{
+		    		this.m_E_PetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Pet");
+     			}
+     			return this.m_E_PetButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetImage == null )
+     			{
+		    		this.m_E_PetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Pet");
+     			}
+     			return this.m_E_PetImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_RoseSkillButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseSkillButton == null )
+     			{
+		    		this.m_E_RoseSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_RoseSkill");
+     			}
+     			return this.m_E_RoseSkillButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RoseSkillImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseSkillImage == null )
+     			{
+		    		this.m_E_RoseSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_RoseSkill");
+     			}
+     			return this.m_E_RoseSkillImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_FriendButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FriendButton == null )
+     			{
+		    		this.m_E_FriendButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Friend");
+     			}
+     			return this.m_E_FriendButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_FriendImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FriendImage == null )
+     			{
+		    		this.m_E_FriendImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_Friend");
+     			}
+     			return this.m_E_FriendImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ChengJiuButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ChengJiuButton == null )
+     			{
+		    		this.m_E_ChengJiuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_ChengJiu");
+     			}
+     			return this.m_E_ChengJiuButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ChengJiuImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ChengJiuImage == null )
+     			{
+		    		this.m_E_ChengJiuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_ChengJiu");
+     			}
+     			return this.m_E_ChengJiuImage;
+     		}
+     	}
+
+		public void DestroyWidget()
+		{
+			this.m_E_CloseButton = null;
+			this.m_E_CloseImage = null;
+			this.m_E_TaskButton = null;
+			this.m_E_TaskImage = null;
+			this.m_E_RoseEquipButton = null;
+			this.m_E_RoseEquipImage = null;
+			this.m_E_PetButton = null;
+			this.m_E_PetImage = null;
+			this.m_E_RoseSkillButton = null;
+			this.m_E_RoseSkillImage = null;
+			this.m_E_FriendButton = null;
+			this.m_E_FriendImage = null;
+			this.m_E_ChengJiuButton = null;
+			this.m_E_ChengJiuImage = null;
+			this.uiTransform = null;
+		}
+
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.UI.Button m_E_TaskButton = null;
+		private UnityEngine.UI.Image m_E_TaskImage = null;
+		private UnityEngine.UI.Button m_E_RoseEquipButton = null;
+		private UnityEngine.UI.Image m_E_RoseEquipImage = null;
+		private UnityEngine.UI.Button m_E_PetButton = null;
+		private UnityEngine.UI.Image m_E_PetImage = null;
+		private UnityEngine.UI.Button m_E_RoseSkillButton = null;
+		private UnityEngine.UI.Image m_E_RoseSkillImage = null;
+		private UnityEngine.UI.Button m_E_FriendButton = null;
+		private UnityEngine.UI.Image m_E_FriendImage = null;
+		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
+		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		public Transform uiTransform = null;
+	}
+}

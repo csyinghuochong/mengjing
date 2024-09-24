@@ -202,5 +202,6 @@ namespace ET.Client
 		WindowID_DungeonMap,
 		WindowID_DungeonMapLevel,
 		WindowID_RealName,
+		WindowID_Function,
 	}
 }
