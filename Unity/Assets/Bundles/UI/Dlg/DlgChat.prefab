@@ -1325,6 +1325,7 @@ GameObject:
   - component: {fileID: 8565519377925778355}
   - component: {fileID: 7257208655811263450}
   - component: {fileID: 8532181961645026052}
+  - component: {fileID: 7222640834285604769}
   m_Layer: 5
   m_Name: Translucent Image
   m_TagString: Untagged
@@ -1395,6 +1396,18 @@ MonoBehaviour:
   brightness: 0
   flatten: 0.15
   m_spriteBlending: 0.65
+--- !u!114 &7222640834285604769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198290036791172672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa2ce57df6241345acdc45f1610464a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1222685185853970429
 GameObject:
   m_ObjectHideFlags: 0
