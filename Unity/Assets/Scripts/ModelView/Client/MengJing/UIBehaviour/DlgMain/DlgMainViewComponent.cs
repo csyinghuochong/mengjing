@@ -379,6 +379,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_OpenChatButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenChatButton == null )
+     			{
+		    		this.m_E_OpenChatButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_OpenChat");
+     			}
+     			return this.m_E_OpenChatButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_OpenChatImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenChatImage == null )
+     			{
+		    		this.m_E_OpenChatImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_OpenChat");
+     			}
+     			return this.m_E_OpenChatImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_MainChatRectTransform
      	{
      		get
@@ -410,40 +444,6 @@ namespace ET.Client
 		    		this.m_E_MainChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_MainChat/E_MainChatItems");
      			}
      			return this.m_E_MainChatItemsLoopVerticalScrollRect;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_OpenChatButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_OpenChatButton == null )
-     			{
-		    		this.m_E_OpenChatButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MainChat/E_OpenChat");
-     			}
-     			return this.m_E_OpenChatButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_OpenChatImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_OpenChatImage == null )
-     			{
-		    		this.m_E_OpenChatImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MainChat/E_OpenChat");
-     			}
-     			return this.m_E_OpenChatImage;
      		}
      	}
 
@@ -2562,10 +2562,10 @@ namespace ET.Client
 			this.m_EG_LeftSetRectTransform = null;
 			this.m_es_mainhpbar = null;
 			this.m_es_mainbuff = null;
-			this.m_EG_MainChatRectTransform = null;
-			this.m_E_MainChatItemsLoopVerticalScrollRect = null;
 			this.m_E_OpenChatButton = null;
 			this.m_E_OpenChatImage = null;
+			this.m_EG_MainChatRectTransform = null;
+			this.m_E_MainChatItemsLoopVerticalScrollRect = null;
 			this.m_EG_RoseExpRectTransform = null;
 			this.m_E_ExpProImage = null;
 			this.m_E_ExpValueText = null;
@@ -2712,10 +2712,10 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_LeftSetRectTransform = null;
 		private EntityRef<ES_MainHpBar> m_es_mainhpbar = null;
 		private EntityRef<ES_MainBuff> m_es_mainbuff = null;
-		private UnityEngine.RectTransform m_EG_MainChatRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_OpenChatButton = null;
 		private UnityEngine.UI.Image m_E_OpenChatImage = null;
+		private UnityEngine.RectTransform m_EG_MainChatRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_RoseExpRectTransform = null;
 		private UnityEngine.UI.Image m_E_ExpProImage = null;
 		private UnityEngine.UI.Text m_E_ExpValueText = null;

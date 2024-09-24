@@ -508,6 +508,7 @@ namespace ET.Client
             redPointComponent.RegisterReddot(ReddotType.PetSet, self.Reddot_PetSet);
             redPointComponent.RegisterReddot(ReddotType.Welfare, self.Reddot_Welfare);
             redPointComponent.RegisterReddot(ReddotType.Activity, self.Reddot_Activity);
+            redPointComponent.RegisterReddot(ReddotType.Chat, self.Reddot_MainChat);
 
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             if (reddotComponent.GetReddot(ReddotType.UnionApply) > 0)
@@ -545,6 +546,7 @@ namespace ET.Client
             redPointComponent.UnRegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
             redPointComponent.UnRegisterReddot(ReddotType.PetSet, self.Reddot_PetSet);
             redPointComponent.UnRegisterReddot(ReddotType.Welfare, self.Reddot_Welfare);
+            redPointComponent.UnRegisterReddot(ReddotType.Chat, self.Reddot_MainChat);
         }
 
         public static void Reddot_PetSet(this DlgMain self, int num)
@@ -565,6 +567,18 @@ namespace ET.Client
         public static void Reddot_Activity(this DlgMain self, int num)
         {
             self.View.E_Btn_HuoDongButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void Reddot_MainChat(this DlgMain self, int num)
+        {
+            if (num > 0 && !self.View.EG_MainChatRectTransform.gameObject.activeSelf)
+            {
+                self.View.E_OpenChatButton.transform.Find("Reddot").gameObject.SetActive(true);
+            }
+            else
+            {
+                self.View.E_OpenChatButton.transform.Find("Reddot").gameObject.SetActive(false);
+            }
         }
 
         public static void Reddot_Team(this DlgMain self, int num)

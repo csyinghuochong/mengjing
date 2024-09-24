@@ -29,6 +29,7 @@ namespace ET.Client
                     children = new int[3] { ReddotType.WelfareLogin, ReddotType.WelfareTask, ReddotType.WelfareDraw }
                 },
                 new ReddotData { key = ReddotType.Activity, children = new int[1] { ReddotType.SingleRecharge } },
+                new ReddotData { key = ReddotType.Chat, children = new int[0] { } },
             };
 
             self.Init(reddot);

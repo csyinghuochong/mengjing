@@ -24,7 +24,7 @@ namespace ET.Client
         {
             try
             {
-                if(SettingData.ShowFindPath)
+                if (SettingData.ShowFindPath)
                 {
                     if (SettingData.FindPathList.ContainsKey(self.FindPathIndex))
                     {
@@ -34,9 +34,11 @@ namespace ET.Client
                         {
                             return;
                         }
+
                         float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
                         unit.GetComponent<MoveComponent>().MoveToAsync(SettingData.FindPathList[self.FindPathIndex].Points, speed).Coroutine();
                     }
+
                     self.FindPathIndex++;
                 }
             }
@@ -49,7 +51,7 @@ namespace ET.Client
             }
         }
     }
-    
+
     [FriendOf(typeof(PlayerComponent))]
     [FriendOf(typeof(DlgChat))]
     public static class DlgChatSystem
@@ -65,16 +67,19 @@ namespace ET.Client
         public static void ShowWindow(this DlgChat self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+
+            ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
+            redPointComponent.RemoveReddont(ReddotType.Chat);
         }
 
         private static void OnCloseButton(this DlgChat self)
         {
-            if(SettingData.ShowFindPath)
+            if (SettingData.ShowFindPath)
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
                 unit.Position_2 = SettingData.FindPathEnd;
             }
-            
+
             self.Root().GetComponent<TimerComponent>().Remove(ref self.FindPathTimer);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
         }
@@ -153,7 +158,7 @@ namespace ET.Client
                 SettingData.ShowMonster = !SettingData.ShowMonster;
                 return;
             }
-            
+
             if (text.Equals("#showterrain"))
             {
                 SettingData.ShowTerrain = !SettingData.ShowTerrain;
@@ -162,17 +167,17 @@ namespace ET.Client
 
             if (text.Equals("#light"))
             {
-                GameObject  T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
+                GameObject T1errain = GameObject.Find("AdditiveHide/ScenceModelSet/Directional Light (1)");
                 T1errain.gameObject.SetActive(!T1errain.gameObject.activeSelf);
                 return;
             }
-            
+
             if (text.Equals("#showpath"))
             {
                 self.ShowFindPath();
                 return;
             }
-            
+
             if (text.Equals("#petfight"))
             {
                 //宠物出战列表 后期需要通过布阵界面去设置
@@ -187,22 +192,23 @@ namespace ET.Client
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
                 return;
             }
+
             if (text.Equals("#petfightswitch"))
             {
                 //宠物没有前冲技能  两个药瓶栏需要保留
                 //其他逻辑都需要跟玩家一直，  需要测试一下吟唱技能之类的看看表现有没有问题。
                 //模拟点击下方的三个宠物头像111
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随, 右下角也需要显示宠物的技能，被动技能不显示，主动技能超过格子数也不显示)  
-                await PetNetHelper.RequestPetFightSwitch(self.Root(), RandomHelper.RandomNumber(0, 4) );  //切换到第二个宠物
+                await PetNetHelper.RequestPetFightSwitch(self.Root(), RandomHelper.RandomNumber(0, 4)); //切换到第二个宠物
 
                 //获取玩家或者宠物技能CD，  也可以保存在本地
-                await PetNetHelper.RequestRolePetSkillCD(self.Root(), 0  );
+                await PetNetHelper.RequestRolePetSkillCD(self.Root(), 0);
                 //播放切换特效
                 FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 //0自身 123对应的宠物， 切换后需要刷新技能
                 return;
             }
-            
+
             if (text.Equals("#openall"))
             {
                 SettingData.ShowBlood = true;

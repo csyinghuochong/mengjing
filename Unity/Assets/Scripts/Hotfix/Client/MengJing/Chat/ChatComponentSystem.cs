@@ -68,6 +68,8 @@ namespace ET.Client
             }
 
             chatInfos.Add(chatInfo);
+            
+            self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.Chat);
             EventSystem.Instance.Publish(self.Root(), new OnRecvChat());
         }
     }

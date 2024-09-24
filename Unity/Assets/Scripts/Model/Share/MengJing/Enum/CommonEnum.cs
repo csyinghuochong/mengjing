@@ -194,6 +194,12 @@ namespace ET
         //活动
         public const int Activity = 800;
         public const int SingleRecharge = 801;
+
+        public const int Chat = 901;
+        public const int WordChat = 902;// 先预留...
+        public const int TeamChat = 903;
+        public const int UnionChat = 904;
+        public const int PaiMaiChat = 905;
     }
 
     public enum GameSettingEnum
