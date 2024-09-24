@@ -915,8 +915,9 @@ namespace ET.Client
 
         private static void OnShrinkButton(this DlgMain self)
         {
-            bool isShow = !self.View.EG_LeftBottomBtnsRectTransform.gameObject.activeSelf;
-            self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(isShow);
+            // bool isShow = !self.View.EG_LeftBottomBtnsRectTransform.gameObject.activeSelf;
+            // self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(isShow);
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine();
         }
 
         private static async ETTask OnRoseEquipButton(this DlgMain self)
@@ -1600,12 +1601,12 @@ namespace ET.Client
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             if (value == "1")
             {
-                self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
+                // self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             }
             else
             {
-                self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(self.View.EG_LeftBottomBtnsRectTransform.gameObject.activeSelf &&
-                    sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
+                // self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(self.View.EG_LeftBottomBtnsRectTransform.gameObject.activeSelf &&
+                //     sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
             }
 
             self.View.ES_JoystickMove.AfterEnterScene();
