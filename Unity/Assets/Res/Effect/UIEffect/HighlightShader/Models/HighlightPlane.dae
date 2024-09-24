@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Assimp</author>
+      <authoring_tool>Assimp Exporter</authoring_tool>
+    </contributor>
+    <created>2019-10-08T18:22:11</created>
+    <modified>2019-10-08T18:22:11</modified>
+    <unit name="meter" meter="1" />
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="m0mat-fx" name="m0mat">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="m0mat" name="m0mat">
+      <instance_effect url="#m0mat-fx"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="meshId0" name="HighlightRenderRectPlane360_sub0_name" >
+      <mesh>
+        <source id="meshId0-positions" name="meshId0-positions">
+          <float_array id="meshId0-positions-array" count="60"> -0.2549738585948944 8.520091996449704e-017 -0.08270767331123352 -0.499875009059906 0 0 -0.499875009059906 1.102373279135375e-016 -0.4964647889137268 -0.254973828792572 0 0.001655532512813807 -0 0 0.001655532512813807 -0 8.520091996449704e-017 -0.08270767331123352 0.246067613363266 8.667017140340352e-017 -0.08200457692146301 -0 1.109945488986033e-016 -0.499875009059906 0.499875009059906 1.109945488986033e-016 -0.499875009059906 0.499875009059906 0 0 0.2453514933586121 0 0.001655532512813807 -0.499875009059906 1.109945488986033e-016 -0.499875009059906 0.2453515529632568 -8.088121075217771e-017 0.0877189040184021 0.499875009059906 -1.109945488986033e-016 0.499875009059906 -0.2549739181995392 -8.088120413473281e-017 0.08771888911724091 -0 -8.079775815453846e-017 0.08771887421607971 -0.499875009059906 -1.109945488986033e-016 0.499875009059906 -0 -1.109945488986033e-016 0.499875009059906 -0 -8.079775815453846e-017 0.08771887421607971 -0 -1.109945488986033e-016 0.499875009059906 </float_array>
+          <technique_common>
+            <accessor count="20" offset="0" source="#meshId0-positions-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0-normals" name="meshId0-normals">
+          <float_array id="meshId0-normals-array" count="60"> -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 -0 1 0 </float_array>
+          <technique_common>
+            <accessor count="20" offset="0" source="#meshId0-normals-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0-tex0" name="meshId0-tex0">
+          <float_array id="meshId0-tex0-array" count="40"> 0.2449623346328735 0.582728385925293 0 0.5 0 0.996588945388794 0.2449623942375183 0.4983440637588501 0.5 0.4983440637588501 0.5 0.582728385925293 0.7461291551589966 0.5820250511169434 0.5 1 1 1 1 0.5 0.7454128265380859 0.4983440637588501 0 1 0.7454129457473755 0.4122591614723206 1 0 0.2449623346328735 0.4122591614723206 0.5 0.4122591614723206 0 0 0.5 0 0.5 0.4122591614723206 0.5 0 </float_array>
+          <technique_common>
+            <accessor count="20" offset="0" source="#meshId0-tex0-array" stride="2">
+              <param name="S" type="float" />
+              <param name="T" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0-tex1" name="meshId0-tex1">
+          <float_array id="meshId0-tex1-array" count="40"> 0.3436276912689209 0.5 0.2582140564918518 1 0.3436058759689331 1 0.2581239342689514 0.5 0.5 0 0.4989723563194275 0.5 0.6662200689315796 0.5 0.4999023377895355 1 0.6655595898628235 1 0.7418537735939026 1 0.7412749528884888 0.5 0.3436058759689331 1 0.8360678553581238 0.5 0.8342998027801514 1 0.1555832177400589 0.5 0 0.5 0.1566849946975708 1 1 1 1 0.5 0 1 </float_array>
+          <technique_common>
+            <accessor count="20" offset="0" source="#meshId0-tex1-array" stride="2">
+              <param name="S" type="float" />
+              <param name="T" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="meshId0-color0" name="meshId0-color0">
+          <float_array id="meshId0-color0-array" count="60"> 1 0 0 0 0 0 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 </float_array>
+          <technique_common>
+            <accessor count="20" offset="0" source="#meshId0-color0-array" stride="3">
+              <param name="R" type="float" />
+              <param name="G" type="float" />
+              <param name="B" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="meshId0-vertices">
+          <input semantic="POSITION" source="#meshId0-positions" />
+        </vertices>
+        <polylist count="25" material="defaultMaterial">
+          <input offset="0" semantic="VERTEX" source="#meshId0-vertices" />
+          <input offset="0" semantic="NORMAL" source="#meshId0-normals" />
+          <input offset="0" semantic="TEXCOORD" source="#meshId0-tex0" set="0" />
+          <input offset="0" semantic="TEXCOORD" source="#meshId0-tex1" set="1" />
+          <input offset="0" semantic="COLOR" source="#meshId0-color0" set="0" />
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>2 1 0 1 3 0 0 3 4 4 5 0 2 0 5 6 5 4 7 5 6 2 5 7 8 7 6 9 8 6 10 9 6 4 10 6 7 11 2 4 12 10 9 10 13 10 12 13 14 3 1 3 14 4 14 15 4 16 14 1 17 13 12 18 17 12 4 18 12 16 19 14 19 15 14 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="Root" name="Root">
+      <node id="HighlightRenderRectPlane360"  name="HighlightRenderRectPlane360" type="NODE">
+        <matrix sid="matrix">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#meshId0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="defaultMaterial" target="#m0mat">
+                <bind_vertex_input semantic="CHANNEL0" input_semantic="TEXCOORD" input_set="0"/>
+                <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Node_000000000306C380"  name="Node_000000000306C380" type="NODE">
+        <matrix sid="matrix">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Root" />
+  </scene>
+</COLLADA>
