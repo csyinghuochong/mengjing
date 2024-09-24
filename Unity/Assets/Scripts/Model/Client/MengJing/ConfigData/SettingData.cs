@@ -28,7 +28,7 @@ namespace ET.Client
         /// 动画控制方式 0 Animator；1 Animancer
         /// </summary>
         [StaticField]
-        public static int AnimController = 0;
+        public static int AnimController = 1;
 
         /// <summary>
         /// 主城周围超过50个人不再进行显示

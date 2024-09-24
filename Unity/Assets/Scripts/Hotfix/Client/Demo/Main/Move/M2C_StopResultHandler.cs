@@ -32,10 +32,6 @@ namespace ET.Client
                     unit.GetComponent<MoveComponent>().MoveToAsync(list, speed * 1.5f).Coroutine();
                 }
             }
-            else
-            {
-                EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() { Unit = unit });
-            }
             
             await ETTask.CompletedTask;
         }

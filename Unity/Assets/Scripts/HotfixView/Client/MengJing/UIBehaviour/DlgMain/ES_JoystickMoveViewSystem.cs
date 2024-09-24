@@ -180,7 +180,9 @@ namespace ET.Client
                 SettingData.FindPathInit = unit.Position;
                 SettingData.FindPathList.Clear();
             }
-
+            
+            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
+            
             self.lastSendTime = 0;
             self.direction = self.GetDirection(pdata);
             self.SendMove(self.direction);
@@ -511,6 +513,13 @@ namespace ET.Client
 
         private static void EndDrag(this ES_JoystickMove self, PointerEventData pdata)
         {
+            Unit unit = self.MainUnit;
+            if (unit == null || unit.IsDisposed)
+            {
+                return;
+            }
+            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStop() { Unit = unit });
+            
             long lastTimer = self.JoystickTimer;
             self.ResetJoystick();
             if (lastTimer == 0)
@@ -523,12 +532,6 @@ namespace ET.Client
                 CommonHelp.WritePathFindLog();
             }
             
-            Unit unit = self.MainUnit;
-            if (unit == null || unit.IsDisposed)
-            {
-                return;
-            }
-
             if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
             {
                 return;
