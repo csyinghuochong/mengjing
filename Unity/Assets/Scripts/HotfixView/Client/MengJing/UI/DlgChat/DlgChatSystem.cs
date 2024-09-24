@@ -62,14 +62,53 @@ namespace ET.Client
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_SendButton.AddListenerAsync(self.OnSendButton);
             self.View.E_ChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChatItemsRefresh);
+
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.WordChat, self.Reddot_WordChat);
+            redPointComponent.RegisterReddot(ReddotType.TeamChat, self.Reddot_TeamChat);
+            redPointComponent.RegisterReddot(ReddotType.UnionChat, self.Reddot_UnionChat);
+            redPointComponent.RegisterReddot(ReddotType.SystemChat, self.Reddot_SystemChat);
+            redPointComponent.RegisterReddot(ReddotType.PaiMaiChat, self.Reddot_PaiMaiChat);
         }
 
         public static void ShowWindow(this DlgChat self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+        }
 
-            ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
-            redPointComponent.RemoveReddont(ReddotType.Chat);
+        public static void BeforeUnload(this DlgChat self)
+        {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.WordChat, self.Reddot_WordChat);
+            redPointComponent.UnRegisterReddot(ReddotType.TeamChat, self.Reddot_TeamChat);
+            redPointComponent.UnRegisterReddot(ReddotType.UnionChat, self.Reddot_UnionChat);
+            redPointComponent.UnRegisterReddot(ReddotType.SystemChat, self.Reddot_SystemChat);
+            redPointComponent.UnRegisterReddot(ReddotType.PaiMaiChat, self.Reddot_PaiMaiChat);
+        }
+
+        private static void Reddot_WordChat(this DlgChat self, int num)
+        {
+            self.View.E_Type_0Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        private static void Reddot_TeamChat(this DlgChat self, int num)
+        {
+            self.View.E_Type_1Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        private static void Reddot_UnionChat(this DlgChat self, int num)
+        {
+            self.View.E_Type_2Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        private static void Reddot_SystemChat(this DlgChat self, int num)
+        {
+            self.View.E_Type_3Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        private static void Reddot_PaiMaiChat(this DlgChat self, int num)
+        {
+            self.View.E_Type_6Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
 
         private static void OnCloseButton(this DlgChat self)
@@ -300,6 +339,27 @@ namespace ET.Client
         private static void OnFunctionSetBtn(this DlgChat self, int index)
         {
             self.CurrentChatType = index;
+
+            ReddotComponentC reddotComponentC = self.Root().GetComponent<ReddotComponentC>();
+            switch (index)
+            {
+                case 0:
+                    reddotComponentC.RemoveReddont(ReddotType.WordChat);
+                    break;
+                case 1:
+                    reddotComponentC.RemoveReddont(ReddotType.TeamChat);
+                    break;
+                case 2:
+                    reddotComponentC.RemoveReddont(ReddotType.UnionChat);
+                    break;
+                case 3:
+                    reddotComponentC.RemoveReddont(ReddotType.SystemChat);
+                    break;
+                case 6:
+                    reddotComponentC.RemoveReddont(ReddotType.PaiMaiChat);
+                    break;
+            }
+
             self.Refresh();
         }
 

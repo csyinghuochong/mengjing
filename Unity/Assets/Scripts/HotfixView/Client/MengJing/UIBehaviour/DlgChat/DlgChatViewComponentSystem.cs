@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgChatViewComponent))]
-	[FriendOfAttribute(typeof(DlgChatViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgChatViewComponent))]
 	public static partial class DlgChatViewComponentSystem
 	{
 		[EntitySystem]

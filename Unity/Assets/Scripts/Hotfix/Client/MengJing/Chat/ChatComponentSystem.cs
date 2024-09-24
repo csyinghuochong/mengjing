@@ -60,6 +60,25 @@ namespace ET.Client
                 }
             }
 
+            switch (chatInfo.ChannelId)
+            {
+                case ChannelEnum.Word:
+                    self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.WordChat);
+                    break;
+                case ChannelEnum.Team:
+                    self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.TeamChat);
+                    break;
+                case ChannelEnum.Union:
+                    self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.UnionChat);
+                    break;
+                case ChannelEnum.System:
+                    self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.SystemChat);
+                    break;
+                case ChannelEnum.PaiMai:
+                    self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.PaiMaiChat);
+                    break;
+            }
+
             self.LastChatInfo = chatInfo;
             List<ChatInfo> chatInfos = self.ChatTypeList[chatInfo.ChannelId];
             if (chatInfos.Count >= 20)
@@ -69,7 +88,6 @@ namespace ET.Client
 
             chatInfos.Add(chatInfo);
             
-            self.Root().GetComponent<ReddotComponentC>().AddReddont(ReddotType.Chat);
             EventSystem.Instance.Publish(self.Root(), new OnRecvChat());
         }
     }

@@ -17,19 +17,24 @@ namespace ET.Client
                     key = ReddotType.Friend,
                     children = new int[3] { ReddotType.FriendApply, ReddotType.UnionMy, ReddotType.FriendChat }
                 },
-                new ReddotData { key = ReddotType.Team, children = new int[1] { ReddotType.TeamApply } },
-                new ReddotData { key = ReddotType.UnionMy, children = new int[1] { ReddotType.UnionApply } },
-                new ReddotData { key = ReddotType.Email, children = new int[0] { } },
-                new ReddotData { key = ReddotType.RolePoint, children = new int[0] { } },
-                new ReddotData { key = ReddotType.SkillUp, children = new int[0] { } },
-                new ReddotData { key = ReddotType.PetSet, children = new int[1] { ReddotType.PetMine } },
+                new ReddotData { key = ReddotType.Team, children = new int[] { ReddotType.TeamApply } },
+                new ReddotData { key = ReddotType.UnionMy, children = new int[] { ReddotType.UnionApply } },
+                new ReddotData { key = ReddotType.Email, children = new int[] { } },
+                new ReddotData { key = ReddotType.RolePoint, children = new int[] { } },
+                new ReddotData { key = ReddotType.SkillUp, children = new int[] { } },
+                new ReddotData { key = ReddotType.PetSet, children = new int[] { ReddotType.PetMine } },
                 new ReddotData
                 {
                     key = ReddotType.Welfare,
                     children = new int[3] { ReddotType.WelfareLogin, ReddotType.WelfareTask, ReddotType.WelfareDraw }
                 },
-                new ReddotData { key = ReddotType.Activity, children = new int[1] { ReddotType.SingleRecharge } },
-                new ReddotData { key = ReddotType.Chat, children = new int[0] { } },
+                new ReddotData { key = ReddotType.Activity, children = new int[] { ReddotType.SingleRecharge } },
+                new ReddotData
+                {
+                    key = ReddotType.Chat,
+                    children = new int[]
+                            { ReddotType.WordChat, ReddotType.TeamChat, ReddotType.UnionChat, ReddotType.SystemChat, ReddotType.PaiMaiChat }
+                },
             };
 
             self.Init(reddot);
