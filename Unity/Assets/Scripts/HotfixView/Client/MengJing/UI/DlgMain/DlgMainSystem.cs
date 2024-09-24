@@ -2077,6 +2077,11 @@ namespace ET.Client
             // self.CheckCanEquip().Coroutine();
         }
 
+        public static long GetJoystickTimer(this DlgMain self)
+        {
+            return self.View.ES_JoystickMove.JoystickTimer;
+        }
+
         public static void OnRechageSucess(this DlgMain self, int addNumber)
         {
             using (zstring.Block())

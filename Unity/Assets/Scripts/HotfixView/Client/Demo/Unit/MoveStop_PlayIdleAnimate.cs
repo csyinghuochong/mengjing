@@ -17,7 +17,19 @@ namespace ET.Client
             }
             else
             {
-                args.Unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+                if(args.Unit.MainHero)
+                {
+                    DlgMain dlgmain =  unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+                    long JoystickTimer = dlgmain.GetJoystickTimer();
+                    if (JoystickTimer == 0)
+                    {
+                        args.Unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+                    }
+                }
+                else
+                {
+                    args.Unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
+                }
             }
 
             //播放移动特效
