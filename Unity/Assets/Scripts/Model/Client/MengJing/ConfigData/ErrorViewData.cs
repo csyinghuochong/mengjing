@@ -58,6 +58,7 @@ namespace ET.Client
             { ErrorCode.ERR_CanNotMove_Shackle, "禁锢状态无法移动!" },
             { ErrorCode.ERR_CanNotMove_Sleep, "沉睡状态无法移动!" },
             { ErrorCode.ERR_CanNotMove_Fear, "恐惧状态无法移动!" },
+            { ErrorCode.ERR_CanNotMove_Speed, "速度异常无法移动!" },
             { ErrorCode.ERR_UnionXiuLianMax, "已达修炼上限!" },
             { ErrorCode.ERR_Union_Not_Exist, "没找到家族!" },
             { ErrorCode.ERR_UnSafeSqlString, "非法字符串!" },

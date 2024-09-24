@@ -340,6 +340,14 @@ namespace ET.Client
                 Transform gameObject = GameObject.Find("Global/FindPath/10").transform;
                 gameObject.localPosition = newv3;
             }
+
+            int errorCode = MoveHelper.IfCanMove(unit);
+            if (errorCode!= ErrorCode.ERR_Success)
+            {
+                  HintHelp.ShowErrorHint(unit.Root(), errorCode);
+                  return;
+            }
+
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
 
             if (SettingData.MoveMode == 0)
@@ -351,9 +359,7 @@ namespace ET.Client
                 unit.MoveResultToAsync(pathfind_2, null, self.checkTime, direction,  self.lastDirection ).Coroutine();
                 unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
             }
-
             
-
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
         }

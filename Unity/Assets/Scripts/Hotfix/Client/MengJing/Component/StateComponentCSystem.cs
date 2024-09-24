@@ -166,8 +166,7 @@ namespace ET.Client
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             if (numericComponent.GetAsInt(NumericType.Now_Speed) <= 0)
             {
-                // 测试
-                // return ErrorCode.ERR_CanNotMove_Speed;
+                return ErrorCode.ERR_CanNotMove_Speed;
             }
 
             if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)

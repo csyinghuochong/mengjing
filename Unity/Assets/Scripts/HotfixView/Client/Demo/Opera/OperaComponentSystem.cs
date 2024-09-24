@@ -663,7 +663,12 @@ namespace ET.Client
 
                 return -1;
             }
-
+            int errorCode = MoveHelper.IfCanMove(unit);
+            if (errorCode!= ErrorCode.ERR_Success)
+            {
+                HintHelp.ShowErrorHint(unit.Root(), errorCode);
+                return errorCode;
+            }
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = operatetype });
             int ret = await unit.MoveToAsync(position);
             return ret;

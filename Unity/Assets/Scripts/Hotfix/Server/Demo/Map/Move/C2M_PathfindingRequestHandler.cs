@@ -9,7 +9,6 @@ namespace ET.Server
 
 		protected override async ETTask Run(Unit unit, C2M_PathfindingRequest message)
 		{
-
 			int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
 
 			if (petfightindex == 0)
