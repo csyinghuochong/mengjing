@@ -304,17 +304,17 @@ namespace ET.Client
             if (pathfind_2.Count > 2)
             {
                 int distance_init = 0;
-                for (int i = 1; i <pathfind_2.Count; )
+                for (int i = 1; i <pathfind_2.Count;  )
                 {
                     float distance_cur = math.distance(pathfind_2[i] , pathfind_2[distance_init]);
                     if (distance_cur < 0.5f)
                     {
-                        i++;
+                        pathfind_2.RemoveAt(i);
                     }
                     else
                     {
-                        pathfind_2.RemoveAt(i);
                         distance_init = i;
+                        i++;
                     }
                 }
             }

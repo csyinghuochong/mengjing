@@ -314,7 +314,7 @@ namespace ET
             {
                 return;
             }
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.AITimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.AITimer, self);
         }
 
         public static void Stop(this AIComponent self)
