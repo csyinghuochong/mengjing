@@ -102,13 +102,16 @@ namespace ET.Client
             string unitAssetsPath = self.UnitAssetsPath;
             GameObject gameObject = self.GameObject;
 
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            await timerComponent.WaitAsync(1000); // 延迟1秒播放
+
             MaterialManager[] materialManagers = gameObject.transform.GetComponentsInChildren<MaterialManager>();
             foreach (MaterialManager materialManager in materialManagers)
             {
                 materialManager.Switch("Dissolve");
             }
 
-            long duration = 1500;// 持续时间
+            long duration = 1500; // 持续时间
             List<SkinnedMeshRenderer> renderers = new List<SkinnedMeshRenderer>(gameObject.GetComponentsInChildren<SkinnedMeshRenderer>());
             List<Material> materials = new List<Material>();
             foreach (var renderer in renderers)
@@ -118,7 +121,6 @@ namespace ET.Client
 
             long elapsedTime = 0;
             long interval = 100;
-            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             while (elapsedTime < duration)
             {
                 elapsedTime += interval;
