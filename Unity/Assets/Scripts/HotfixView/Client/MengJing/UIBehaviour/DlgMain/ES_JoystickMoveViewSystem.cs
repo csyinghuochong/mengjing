@@ -181,13 +181,14 @@ namespace ET.Client
                 SettingData.FindPathList.Clear();
             }
             
-            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
-            
             self.lastSendTime = 0;
             self.direction = self.GetDirection(pdata);
             self.SendMove(self.direction);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             self.JoystickTimer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.JoystickTimer, self);
+            
+            EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
+            unit.Rotation =  quaternion.Euler(0, math.radians(self.direction ), 0);
         }
 
         private static GameObject GetYaoGanDi(this ES_JoystickMove self)
