@@ -14,7 +14,7 @@ namespace ET.Client
             }
 
             //移动停止，插值同步
-            if (message.Error == 0 && !message.YaoGan)
+            if (message.Error == 0 )
             {
                 if (math.distance(unit.Position, message.Position) < 0.3f)
                 {

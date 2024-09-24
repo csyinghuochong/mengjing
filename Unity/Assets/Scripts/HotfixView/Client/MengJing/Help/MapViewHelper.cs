@@ -9,7 +9,7 @@ namespace ET.Client
         {
             GlobalComponent globalComponent = root.GetComponent<GlobalComponent>();
             Camera camera = globalComponent.MainCamera.GetComponent<Camera>();
-            camera.GetComponent<MyCamera_1>().enabled = false;///sceneTypeEnum == SceneTypeEnum.MainCityScene;
+            camera.GetComponent<MyCamera_1>().enabled = false;
             camera.GetComponent<MyCamera_1>().Target = topTf;
 
             GameObject shiBingSet = GameObject.Find("ShiBingSet");

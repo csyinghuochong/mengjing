@@ -22,6 +22,8 @@ public class MyCamera_1 : MonoBehaviour
     // Update is called once per frame
     public void  OnUpdate()
     {
+        return;
+        
         /*射线可以从头部起始*/
 
         //这里是计算射线的方向，从主角发射方向是射线机方向

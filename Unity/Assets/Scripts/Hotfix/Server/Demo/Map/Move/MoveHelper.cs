@@ -52,7 +52,7 @@ namespace ET.Server
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
                 Console.WriteLine($"PathResultToAsync  unit.SendStop(0):  {TimeHelper.ServerNow()}");
-                unit.SendStop(0);
+                //unit.SendStop(0);
             }
             await ETTask.CompletedTask;
         }
@@ -124,15 +124,15 @@ namespace ET.Server
             MapMessageHelper.Broadcast(unit, m2CStop);
         }
         
-        public static void StopYaoGan(this Unit unit, int error)
+        public static void StopResult(this Unit unit, float3 position,  int error)
         {
             unit.GetComponent<MoveComponent>().Stop(error == 0);
-            M2C_Stop m2CStop = M2C_Stop.Create();
+            unit.Position = position;
+            M2C_StopResult m2CStop = M2C_StopResult.Create();
             m2CStop.Error = error;
             m2CStop.Id = unit.Id;
             m2CStop.Position = unit.Position;
             m2CStop.Rotation = unit.Rotation;
-            m2CStop.YaoGan = true;
             MapMessageHelper.Broadcast(unit, m2CStop);
         }
     }

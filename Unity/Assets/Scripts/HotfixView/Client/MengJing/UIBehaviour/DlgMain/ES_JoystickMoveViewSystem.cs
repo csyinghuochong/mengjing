@@ -341,9 +341,18 @@ namespace ET.Client
                 gameObject.localPosition = newv3;
             }
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
+
+            if (SettingData.MoveMode == 0)
+            {
+                unit.MoveToAsync( newv3,  null,self.checkTime, direction,  self.lastDirection ).Coroutine();
+            }
+            else
+            {
+                unit.MoveResultToAsync(pathfind_2, null, self.checkTime, direction,  self.lastDirection ).Coroutine();
+                unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
+            }
+
             
-            self.MainUnit.MoveResultToAsync(pathfind_2, null, self.checkTime, direction,  self.lastDirection ).Coroutine();
-            unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
 
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
@@ -518,8 +527,17 @@ namespace ET.Client
             {
                 return;
             }
-
-            MoveHelper.Stop(self.Root(), true);
+            
+            if (SettingData.MoveMode == 0)
+            {
+                MoveHelper.Stop(self.Root());
+            }
+            else
+            {
+                MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
+                moveComponent.Stop(false);
+                MoveHelper.StopResult(self.Root(), unit.Position);
+            }
         }
     }
 }

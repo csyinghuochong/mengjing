@@ -95,10 +95,17 @@ namespace ET.Client
             await moveComponent.MoveToAsync(path, speed);
         }
 
-        public static void Stop(Scene root, bool YaoGan)
+        public static void Stop(Scene root)
         {
             C2M_Stop c2MStop = C2M_Stop.Create();
-            c2MStop.YaoGan = YaoGan;
+            root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
+        }
+        
+        public static void StopResult(Scene root, float3 position)
+        {
+            C2M_StopResult c2MStop = C2M_StopResult.Create();
+            c2MStop.YaoGan = true;
+            c2MStop.Position = position;
             root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
         }
     }

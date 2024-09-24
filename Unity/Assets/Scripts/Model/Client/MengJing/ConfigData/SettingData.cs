@@ -5,6 +5,9 @@ namespace ET.Client
 {
     public static class SettingData
     {
+
+        [StaticField]
+        public static int MoveMode = 1;
         
         [StaticField]
         public static List<string> FindPathLog = new List<string>();

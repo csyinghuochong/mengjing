@@ -1,15 +1,15 @@
-﻿namespace ET.Server
+namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    public class C2M_StopHandler: MessageLocationHandler<Unit, C2M_Stop>
+    public class C2M_StopResultHandler: MessageLocationHandler<Unit, C2M_StopResult>
     {
-        protected override async ETTask Run(Unit unit, C2M_Stop message)
+        protected override async ETTask Run(Unit unit, C2M_StopResult message)
         {
             int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
 
             if (petfightindex == 0)
             {
-                unit.Stop(0);
+                unit.StopResult(message.Position, 0);
             }
             else
             {
@@ -20,7 +20,7 @@
                     return;
                 }
                 
-                petunit.Stop(0);
+                petunit.StopResult(message.Position, 0);
             }
             
             await ETTask.CompletedTask;
