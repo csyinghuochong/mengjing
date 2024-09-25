@@ -1122,11 +1122,38 @@ namespace ET.Client
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
             self.View.ES_MainPetFight_0.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0));
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0), 1);
             self.View.ES_MainPetFight_1.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1] : 0));
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1] : 0), 2);
             self.View.ES_MainPetFight_2.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0));
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0), 3);
+        }
+
+        public static async ETTask OnPetFightSwitch(this DlgMain self, long petId, int fightindex)
+        {
+            if (fightindex == self.Fightindex)
+            {
+                fightindex = 0;
+            }
+
+            int error = await PetNetHelper.RequestPetFightSwitch(self.Root(), fightindex);
+
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Fightindex = fightindex;
+
+            if (fightindex > 0)
+            {
+                Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(petId);
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartLookAtPet(pet);
+            }
+            else
+            {
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().EndLookAtPet();
+            }
         }
 
         # endregion

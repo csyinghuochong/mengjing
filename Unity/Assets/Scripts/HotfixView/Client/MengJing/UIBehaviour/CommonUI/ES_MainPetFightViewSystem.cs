@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -21,7 +22,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this ES_MainPetFight self, RolePetInfo rolePetInfo)
+        public static void Refresh(this ES_MainPetFight self, RolePetInfo rolePetInfo, int fightIndex)
         {
             if (rolePetInfo == null)
             {
@@ -29,7 +30,10 @@ namespace ET.Client
                 return;
             }
 
+            self.uiTransform.gameObject.SetActive(true);
+
             self.RolePetInfo = rolePetInfo;
+            self.FightIndex = fightIndex;
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
@@ -52,9 +56,7 @@ namespace ET.Client
                 return;
             }
 
-            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.RolePetInfo.Id);
-
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartLookAtPet(pet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnPetFightSwitch(self.RolePetInfo.Id, self.FightIndex).Coroutine();
         }
     }
 }

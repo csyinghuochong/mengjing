@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -8,6 +9,7 @@ namespace ET.Client
 	public  class ES_MainPetFight : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public RolePetInfo RolePetInfo;
+		public int FightIndex;
 		
 		public UnityEngine.UI.Image E_PetHPImage
      	{

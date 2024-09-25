@@ -35,5 +35,7 @@ namespace ET.Client
         public long TimerPing;
         public int KillMonsterRewardKey;
         public int LevelRewardKey;
+
+        public int Fightindex;
     }
 }
