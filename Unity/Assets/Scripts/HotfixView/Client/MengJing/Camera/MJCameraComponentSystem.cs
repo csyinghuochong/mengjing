@@ -55,6 +55,13 @@ namespace ET.Client
                 return;
             }
 
+            if (self.CameraMoveType == CameraMoveType.LookAtPet)
+            {
+                self.MainCamera.transform.position = self.PetUnit.Position + self.OffsetPostion * self.LenDepth;
+                self.MainCamera.transform.LookAt(self.PetUnit.Position);
+                return;
+            }
+
             //if (self.MainCamera.GetComponent<CameraFollow>() != null)
             //{
             //	self.OffsetPostion = self.MainCamera.GetComponent<CameraFollow>().OffsetPostion;
@@ -179,7 +186,7 @@ namespace ET.Client
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPostion;
         }
-        
+
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
         {
             switch (sceneTypeEnum)
@@ -249,6 +256,17 @@ namespace ET.Client
                 self.OffsetAngleX = self.RecordAngleX;
                 self.CalculateOffset();
             }
+        }
+
+        public static void StartLookAtPet(this MJCameraComponent self, Unit pet)
+        {
+            self.PetUnit = pet;
+            self.CameraMoveType = CameraMoveType.LookAtPet;
+        }
+
+        public static void EndLookAtPet(this MJCameraComponent self)
+        {
+            self.CameraMoveType = CameraMoveType.Normal;
         }
     }
 }

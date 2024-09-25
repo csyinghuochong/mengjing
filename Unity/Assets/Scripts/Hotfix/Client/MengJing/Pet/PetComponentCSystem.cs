@@ -126,6 +126,7 @@ namespace ET.Client
                     break;
                 case SceneTypeEnum.MainCityScene:
                     self.PetFightList = petList;
+                    EventSystem.Instance.Publish(self.Root(), new PetFightUpdate());
                     break;
             }
         }

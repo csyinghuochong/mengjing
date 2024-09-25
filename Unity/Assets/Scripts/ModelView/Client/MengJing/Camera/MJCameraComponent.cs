@@ -12,6 +12,7 @@ namespace ET.Client
         PetFuben = 3,
         Pull = 4,
         Rollback = 5,
+        LookAtPet = 6,
     }
 
     [FriendOf(typeof (Unit))]
@@ -64,6 +65,8 @@ namespace ET.Client
         public Unit MainUnit { get; set; }
 
         public Unit NpcUnit { get; set; }
+        
+        public Unit PetUnit { get; set; }
 
         public Action OnBuildEnter { get; set; }
     }

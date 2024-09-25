@@ -260,7 +260,7 @@ namespace ET.Client
         public long ChangeValue;
         public long UpdateValue;
     }
-    
+
     public struct UpdateUserDataLv
     {
         public long UpdateValue;
@@ -559,14 +559,14 @@ namespace ET.Client
     {
         public string HintText;
     }
-    
+
     public struct LoginError
     {
         public int ErrorCore;
         public long AccountId;
         public string Value;
     }
-    
+
     public struct NotRealName
     {
         public int ErrorCore;
@@ -578,5 +578,9 @@ namespace ET.Client
     {
         public int ItemId;
         public int ItemNum;
+    }
+
+    public struct PetFightUpdate
+    {
     }
 }

@@ -11,6 +11,8 @@ namespace ET.Client
         private static void Awake(this ES_MainPetFight self, Transform transform)
         {
             self.uiTransform = transform;
+
+            self.E_ClickButton.AddListener(self.OnClick);
         }
 
         [EntitySystem]
@@ -41,6 +43,18 @@ namespace ET.Client
             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
             self.E_PetHPImage.fillAmount = blood;
+        }
+
+        private static void OnClick(this ES_MainPetFight self)
+        {
+            if (self.RolePetInfo == null || !self.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.RolePetInfo.Id);
+
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartLookAtPet(pet);
         }
     }
 }
