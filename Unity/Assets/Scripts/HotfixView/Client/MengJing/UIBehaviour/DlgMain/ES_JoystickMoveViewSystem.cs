@@ -258,6 +258,7 @@ namespace ET.Client
             float3 newv3 = self.CanMovePosition(unit, rotation, pathfind);
             if (pathfind.Count < 2)
             {
+                unit.Rotation =  quaternion.Euler(0, math.radians(direction ), 0);
                 return;
             }
 
