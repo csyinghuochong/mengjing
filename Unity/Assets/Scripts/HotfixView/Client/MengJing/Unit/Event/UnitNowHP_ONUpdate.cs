@@ -74,6 +74,7 @@ namespace ET.Client
                         HpGameObject = petHpComponent.GameObject;
                         petHpComponent.UpdateBlood();
                     }
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().RefreshMainPetFights();
 
                     break;
                 default:

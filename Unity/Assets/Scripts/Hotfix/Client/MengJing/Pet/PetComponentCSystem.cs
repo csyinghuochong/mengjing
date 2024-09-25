@@ -31,6 +31,7 @@ namespace ET.Client
             self.PetCangKuOpen = m2C_RolePetList.PetCangKuOpen;
             self.PetMingList = m2C_RolePetList.PetMingList;
             self.PetMingPosition = m2C_RolePetList.PetMingPosition;
+            self.PetFightList = m2C_RolePetList.PetFightList;
             self.RolePetBag = m2C_RolePetList.RolePetBag;
         }
 

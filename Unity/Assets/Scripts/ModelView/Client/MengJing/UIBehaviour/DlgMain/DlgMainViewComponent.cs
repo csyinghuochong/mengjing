@@ -2539,7 +2539,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopHorizontalScrollRect E_MainPetFightItemsLoopHorizontalScrollRect
+		public UnityEngine.RectTransform EG_MainPetFightsRectTransform
      	{
      		get
      		{
@@ -2548,11 +2548,71 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MainPetFightItemsLoopHorizontalScrollRect == null )
+     			if( this.m_EG_MainPetFightsRectTransform == null )
      			{
-		    		this.m_E_MainPetFightItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_MainPetFightItems");
+		    		this.m_EG_MainPetFightsRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MainPetFights");
      			}
-     			return this.m_E_MainPetFightItemsLoopHorizontalScrollRect;
+     			return this.m_EG_MainPetFightsRectTransform;
+     		}
+     	}
+
+		public ES_MainPetFight ES_MainPetFight_0
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_MainPetFight es = this.m_es_mainpetfight_0;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_MainPetFights/ES_MainPetFight_0");
+		    	   this.m_es_mainpetfight_0 = this.AddChild<ES_MainPetFight,Transform>(subTrans);
+     			}
+     			return this.m_es_mainpetfight_0;
+     		}
+     	}
+
+		public ES_MainPetFight ES_MainPetFight_1
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_MainPetFight es = this.m_es_mainpetfight_1;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_MainPetFights/ES_MainPetFight_1");
+		    	   this.m_es_mainpetfight_1 = this.AddChild<ES_MainPetFight,Transform>(subTrans);
+     			}
+     			return this.m_es_mainpetfight_1;
+     		}
+     	}
+
+		public ES_MainPetFight ES_MainPetFight_2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_MainPetFight es = this.m_es_mainpetfight_2;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_MainPetFights/ES_MainPetFight_2");
+		    	   this.m_es_mainpetfight_2 = this.AddChild<ES_MainPetFight,Transform>(subTrans);
+     			}
+     			return this.m_es_mainpetfight_2;
      		}
      	}
 
@@ -2705,7 +2765,10 @@ namespace ET.Client
 			this.m_EG_GuaJiSetRectTransform = null;
 			this.m_E_Btn_StopGuaJiButton = null;
 			this.m_E_Btn_StopGuaJiImage = null;
-			this.m_E_MainPetFightItemsLoopHorizontalScrollRect = null;
+			this.m_EG_MainPetFightsRectTransform = null;
+			this.m_es_mainpetfight_0 = null;
+			this.m_es_mainpetfight_1 = null;
+			this.m_es_mainpetfight_2 = null;
 			this.uiTransform = null;
 		}
 
@@ -2856,7 +2919,10 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_StopGuaJiButton = null;
 		private UnityEngine.UI.Image m_E_Btn_StopGuaJiImage = null;
-		private UnityEngine.UI.LoopHorizontalScrollRect m_E_MainPetFightItemsLoopHorizontalScrollRect = null;
+		private UnityEngine.RectTransform m_EG_MainPetFightsRectTransform = null;
+		private EntityRef<ES_MainPetFight> m_es_mainpetfight_0 = null;
+		private EntityRef<ES_MainPetFight> m_es_mainpetfight_1 = null;
+		private EntityRef<ES_MainPetFight> m_es_mainpetfight_2 = null;
 		public Transform uiTransform = null;
 	}
 }

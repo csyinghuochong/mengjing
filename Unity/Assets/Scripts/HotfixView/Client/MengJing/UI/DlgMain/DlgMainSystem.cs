@@ -339,6 +339,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
     [FriendOf(typeof(ES_MainActivityTip))]
     [FriendOf(typeof(Scroll_Item_MainTeamItem))]
@@ -433,7 +434,6 @@ namespace ET.Client
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
-            self.View.E_MainPetFightItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnMainPetFightItemsRefresh);
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -499,6 +499,8 @@ namespace ET.Client
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
             userInfoComponent.PickSet = userInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet).Split('@');
+
+            self.RefreshMainPetFights();
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
@@ -1103,18 +1105,18 @@ namespace ET.Client
 
         #endregion
 
-        # region 宠物战斗
+        # region 宠物出战
 
-        private static void OnMainPetFightItemsRefresh(this DlgMain self, Transform transform, int index)
+        public static void RefreshMainPetFights(this DlgMain self)
         {
-            // Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[index].BindTrans(transform);
-            // scrollItemMainChatItem.Refresh(self.ShowChatInfos[index]);
-        }
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
-        private static void RefreshPetFightItems(this DlgMain self)
-        {
-            // self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
-            // self.View.E_MainPetFightItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+            self.View.ES_MainPetFight_0.Refresh(
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0));
+            self.View.ES_MainPetFight_1.Refresh(
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1] : 0));
+            self.View.ES_MainPetFight_2.Refresh(
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0));
         }
 
         # endregion
