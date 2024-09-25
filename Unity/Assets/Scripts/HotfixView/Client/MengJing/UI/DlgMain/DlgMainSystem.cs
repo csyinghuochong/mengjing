@@ -1030,7 +1030,9 @@ namespace ET.Client
                 self.View.E_ExpValueText.text = zstring.Format("{0}/{1}", userInfo.Exp, ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp);
             }
 
-            self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            //self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            float ratevalue =  (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            self.View.E_ExpProImage.transform.localScale = new Vector3(ratevalue, 1f, 1f);
         }
 
         #endregion
