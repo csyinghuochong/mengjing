@@ -1149,10 +1149,14 @@ namespace ET.Client
             {
                 Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(petId);
                 self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartLookAtPet(pet);
+
+                self.View.ES_JoystickMove.MainUnit = pet;
             }
             else
             {
                 self.Root().CurrentScene().GetComponent<MJCameraComponent>().EndLookAtPet();
+
+                self.View.ES_JoystickMove.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             }
         }
 
