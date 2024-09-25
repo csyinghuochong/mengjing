@@ -16,6 +16,12 @@ namespace ET.Server
             for (int i = 0; i < petComponentS.PetFightList.Count; i++)
             {
                 RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[i]);
+
+                if (rolePetInfo == null)
+                {
+                    continue;
+                }
+
                 Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
 
                 if (petunit == null)
