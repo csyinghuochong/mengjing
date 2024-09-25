@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetFightItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetFightItem> 
+	public  class Scroll_Item_MainPetFightItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MainPetFightItem> 
 	{
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -13,7 +13,7 @@ namespace ET.Client
 			this.isCacheNode = isCache;
 		}
 
-		public Scroll_Item_PetFightItem BindTrans(Transform trans)
+		public Scroll_Item_MainPetFightItem BindTrans(Transform trans)
 		{
 			this.uiTransform = trans;
 			return this;

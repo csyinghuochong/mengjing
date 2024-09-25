@@ -433,6 +433,7 @@ namespace ET.Client
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
+            self.View.E_MainPetFightItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnMainPetFightItemsRefresh);
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -1031,7 +1032,7 @@ namespace ET.Client
             }
 
             //self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
-            float ratevalue =  (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            float ratevalue = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
             self.View.E_ExpProImage.transform.localScale = new Vector3(ratevalue, 1f, 1f);
         }
 
@@ -1101,6 +1102,22 @@ namespace ET.Client
         }
 
         #endregion
+
+        # region 宠物战斗
+
+        private static void OnMainPetFightItemsRefresh(this DlgMain self, Transform transform, int index)
+        {
+            // Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[index].BindTrans(transform);
+            // scrollItemMainChatItem.Refresh(self.ShowChatInfos[index]);
+        }
+
+        private static void RefreshPetFightItems(this DlgMain self)
+        {
+            // self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
+            // self.View.E_MainPetFightItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+        }
+
+        # endregion
 
         # region 右上角按钮
 

@@ -29,6 +29,8 @@ namespace ET.Client
         public List<ChatInfo> ShowChatInfos = new();
         public Dictionary<int, EntityRef<Scroll_Item_MainChatItem>> ScrollItemMainChatItems;
 
+        public Dictionary<int, EntityRef<Scroll_Item_MainPetFightItem>> ScrollItemMainPetFightItems;
+
         public GameObject TianQiEffectObj;
         public string TianQiEffectPath;
         public long TimerFunctiuon;

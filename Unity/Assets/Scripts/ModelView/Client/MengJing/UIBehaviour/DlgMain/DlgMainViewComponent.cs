@@ -2539,6 +2539,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopHorizontalScrollRect E_MainPetFightItemsLoopHorizontalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MainPetFightItemsLoopHorizontalScrollRect == null )
+     			{
+		    		this.m_E_MainPetFightItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_MainPetFightItems");
+     			}
+     			return this.m_E_MainPetFightItemsLoopHorizontalScrollRect;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_DragPanelImage = null;
@@ -2688,6 +2705,7 @@ namespace ET.Client
 			this.m_EG_GuaJiSetRectTransform = null;
 			this.m_E_Btn_StopGuaJiButton = null;
 			this.m_E_Btn_StopGuaJiImage = null;
+			this.m_E_MainPetFightItemsLoopHorizontalScrollRect = null;
 			this.uiTransform = null;
 		}
 
@@ -2838,6 +2856,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_StopGuaJiButton = null;
 		private UnityEngine.UI.Image m_E_Btn_StopGuaJiImage = null;
+		private UnityEngine.UI.LoopHorizontalScrollRect m_E_MainPetFightItemsLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }
