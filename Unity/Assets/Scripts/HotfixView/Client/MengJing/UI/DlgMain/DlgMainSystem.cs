@@ -511,8 +511,6 @@ namespace ET.Client
 
             userInfoComponent.PickSet = userInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet).Split('@');
 
-            self.RefreshMainPetFights();
-
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.RegisterReddot(ReddotType.Team, self.Reddot_Team);
@@ -1767,6 +1765,7 @@ namespace ET.Client
             self.CheckMailReddot().Coroutine();
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
             self.PetFightSet();
+            self.RefreshMainPetFights();
 
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
         }
