@@ -21,7 +21,7 @@ namespace ET.Client
         public long SkillMoveTime { get; set; } = 0; //1旋风斩之类的技能. 可以移动但是需要保持技能动作
         public long SkillSingTime { get; set; } = 0; //吟唱， 移动会打断施法动作
 
-        public bool MainHero;
+        public bool UpdateCD;
 
         public long Timer;
     }

@@ -1731,7 +1731,6 @@ namespace ET.Client
             self.UpdateShadow();
             self.UpdateNpcTaskUI();
             self.View.ES_MapMini.OnEnterScene();
-            self.View.ES_MainSkill.OnEnterScene(self.MainUnit, sceneTypeEnum);
             self.View.ES_MainSkill.OnSkillSetUpdate();
             self.View.ES_RoleHead.OnEnterScene(sceneTypeEnum);
             // self.ZoneScene().GetComponent<RelinkComponent>().OnApplicationFocusHandler(true);
@@ -1785,26 +1784,28 @@ namespace ET.Client
                 RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
                 Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
 
-                FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
+                FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
+
                 root.GetComponent<LockTargetComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
                 root.GetComponent<SkillIndicatorComponent>().MainUnit = pet;
                 currentScene.GetComponent<MJCameraComponent>().StartLookAtPet(pet);
                 self.View.ES_JoystickMove.MainUnit = pet;
-                self.View.ES_MainSkill.MainUnit = pet;
+                self.View.ES_MainSkill.OnEnterScene(pet);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
+                FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
+
                 root.GetComponent<LockTargetComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
                 root.GetComponent<SkillIndicatorComponent>().MainUnit = unit;
                 currentScene.GetComponent<MJCameraComponent>().EndLookAtPet();
                 self.View.ES_JoystickMove.MainUnit = unit;
-                self.View.ES_MainSkill.MainUnit = unit;
+                self.View.ES_MainSkill.OnEnterScene(unit);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
             }
         }
