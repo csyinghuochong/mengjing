@@ -660,6 +660,13 @@ namespace ET.Client
                     i < 8 ? pulicCd : 0);
             }
 
+            for (int i = 0; i < self.UISkillGirdList_PetFight.Count; i++)
+            {
+                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList_PetFight[i];
+                uISkillGridComponent.OnUpdate(self.SkillManagerComponent.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
+                    i < 8 ? pulicCd : 0);
+            }
+
             if (self.JueXingSkillId > 0)
             {
                 self.ES_SkillGrid_Normal_juexing.OnUpdate(self.SkillManagerComponent.GetCdTime(self.JueXingSkillId, serverTime), pulicCd);
@@ -670,8 +677,9 @@ namespace ET.Client
             self.ES_FangunSkill.OnUpdate(self.SkillManagerComponent.GetCdTime(self.ES_FangunSkill.SkillId, serverTime));
         }
 
-        public static void OnEnterScene(this ES_MainSkill self, Unit unit, int sceneType)
+        public static void OnEnterScene(this ES_MainSkill self, Unit unit)
         {
+            self.MainUnit = unit;
             self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
             self.OnSkillCDUpdate();
             self.CheckJingLingFunction();

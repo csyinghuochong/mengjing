@@ -34,7 +34,7 @@ namespace ET.Client
             self.FangunSkillId = int.Parse(GlobalValueConfigCategory.Instance.Get(2).Value);
 
             Unit unit = self.GetParent<Unit>();
-            self.MainHero = unit.MainHero;
+            self.UpdateCD = unit.MainHero && !unit.IsSelfRobot() || unit.Type == UnitType.Pet;
         }
 
         [EntitySystem]
@@ -127,7 +127,7 @@ namespace ET.Client
                 aaiHandler.OnUpdate(skill);
             }
 
-            if (self.MainHero)
+            if (self.UpdateCD)
             {
                 EventSystem.Instance.Publish(self.Root(), new SkillCDUpdate());
             }
@@ -361,7 +361,7 @@ namespace ET.Client
                 moveComponent.Stop(false);
             }
 
-            if (unit.MainHero && !unit.IsSelfRobot())
+            if (self.UpdateCD)
             {
                 self.AddSkillCD(skillcmd.SkillID, skillcmd.CDEndTime, skillcmd.PublicCDTime);
 
