@@ -1785,7 +1785,7 @@ namespace ET.Client
                 RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
                 Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
 
-                Log.Warning("客户端切换成英雄控制");
+                FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
                 root.GetComponent<LockTargetComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
@@ -1797,7 +1797,7 @@ namespace ET.Client
             }
             else
             {
-                Log.Warning("客户端切换成宠物控制");
+                FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
                 root.GetComponent<LockTargetComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);

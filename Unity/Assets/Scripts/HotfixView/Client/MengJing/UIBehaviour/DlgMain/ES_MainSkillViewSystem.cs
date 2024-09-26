@@ -256,8 +256,6 @@ namespace ET.Client
                     skill.Add(skillId);
                 }
 
-                Log.Warning($"切换宠物控制，宠物主动技能数量：{skill.Count}");
-
                 for (int i = 0; i < 8; i++)
                 {
                     ES_SkillGrid esSkillGrid = self.UISkillGirdList_PetFight[i];
