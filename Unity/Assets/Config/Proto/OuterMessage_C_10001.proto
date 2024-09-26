@@ -1996,7 +1996,7 @@ message C2M_TalentActiveRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	int32 TianFuId = 1;
+	int32 Position = 1;
 }
 
 message M2C_TalentActiveResponse // ILocationResponse

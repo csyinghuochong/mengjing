@@ -6,12 +6,12 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class SkillSetComponentS : Entity, IAwake, ITransfer, IDestroy, IUnitCache, IDeserialize
     {
-        
-        public int TianFuPlan = 0;   //对应TalentConfig.TalentType
 
-        public List<int> TianFuList1 = new List<int>();        //第一套天赋 只记录每个位置当前激活的天赋id.  
+        public int TianFuPlan { get; set; } = 0; //对应TalentConfig.TalentType
 
-        public List<int> TianFuList2 = new List<int>();        //第二套天赋 
+        public List<int> TianFuList1{ get; set; } = new List<int>();        //第一套天赋 只记录每个位置当前激活的天赋id.  
+
+        public List<int> TianFuList2{ get; set; } = new List<int>();        //第二套天赋 
 
         public List<int> TianFuAddition = new List<int>();      //附加天赋
 

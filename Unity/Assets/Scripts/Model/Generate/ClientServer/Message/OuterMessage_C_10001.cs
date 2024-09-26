@@ -8626,7 +8626,7 @@ namespace ET
         public long ActorId { get; set; }
 
         [MemoryPackOrder(0)]
-        public int TianFuId { get; set; }
+        public int Position { get; set; }
 
         public override void Dispose()
         {
@@ -8637,7 +8637,7 @@ namespace ET
 
             this.RpcId = default;
             this.ActorId = default;
-            this.TianFuId = default;
+            this.Position = default;
 
             ObjectPool.Instance.Recycle(this);
         }
