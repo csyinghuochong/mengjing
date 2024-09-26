@@ -86,7 +86,6 @@ namespace ET.Client
         public static void StopResult(Scene root, float3 position)
         {
             C2M_StopResult c2MStop = C2M_StopResult.Create();
-            c2MStop.YaoGan = true;
             c2MStop.Position = position;
             root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
         }
