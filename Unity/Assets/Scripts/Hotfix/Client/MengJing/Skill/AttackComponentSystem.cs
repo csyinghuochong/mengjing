@@ -53,7 +53,7 @@ namespace ET.Client
 
         public static void OnUpdate(this AttackComponent self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             if (self.MoveAttackId == 0 || unit == null || unit.IsDisposed)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
@@ -95,6 +95,18 @@ namespace ET.Client
                 self.InitMonster(runraceMonster);
             }
         }
+        
+        public static void OnPetFightId(this AttackComponent self, int occ, int petConfigId)
+        {
+            if (petConfigId == 0)
+            {
+                self.OnInitOcc(occ);
+            }
+            else
+            {
+                self.InitPet(petConfigId);
+            }
+        }
 
         public static void OnInitOcc(this AttackComponent self, int occ)
         {
@@ -111,10 +123,16 @@ namespace ET.Client
             self.UpdateSkillInfo(monsterConfig.ActSkillID);
         }
 
+        public static void InitPet(this AttackComponent self, int petId)
+        {
+            PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
+            self.UpdateSkillInfo(petConfig.ActSkillID);
+        }
+
         public static void SetAttackSpeed(this AttackComponent self)
         {
             int EquipType = UnitHelper.GetEquipType(self.Root());
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             float attackSpped = 1f + numericComponent.GetAsFloat(NumericType.Now_ActSpeedPro);
             self.SkillCDs = EquipType == (int)ItemEquipType.Knife ? new List<int>() { 500, 1000, 1000 } : new List<int>() { 700, 700, 700 };

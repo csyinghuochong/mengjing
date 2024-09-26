@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -1129,35 +1130,14 @@ namespace ET.Client
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0), 3);
         }
 
-        public static async ETTask OnPetFightSwitch(this DlgMain self, long petId, int fightindex)
+        public static async ETTask OnPetFightSwitch(this DlgMain self, int fightindex)
         {
             if (fightindex == self.Fightindex)
             {
                 fightindex = 0;
             }
 
-            int error = await PetNetHelper.RequestPetFightSwitch(self.Root(), fightindex);
-
-            if (error != ErrorCode.ERR_Success)
-            {
-                return;
-            }
-
-            self.Fightindex = fightindex;
-
-            if (fightindex > 0)
-            {
-                Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(petId);
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartLookAtPet(pet);
-
-                self.View.ES_JoystickMove.MainUnit = pet;
-            }
-            else
-            {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().EndLookAtPet();
-
-                self.View.ES_JoystickMove.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            }
+            await PetNetHelper.RequestPetFightSwitch(self.Root(), fightindex);
         }
 
         # endregion
@@ -1786,8 +1766,48 @@ namespace ET.Client
 
             self.CheckMailReddot().Coroutine();
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
+            self.PetFightSet();
 
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
+        }
+
+        public static void PetFightSet(this DlgMain self)
+        {
+            Scene root = self.Root();
+            Scene currentScene = root.CurrentScene();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+            self.Fightindex = petfightindex;
+
+            if (petfightindex > 0)
+            {
+                PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                long petId = petComponentC.PetFightList[petfightindex - 1];
+                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
+                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
+
+                Log.Warning("客户端切换成英雄控制");
+                root.GetComponent<LockTargetComponent>().MainUnit = pet;
+                root.GetComponent<AttackComponent>().MainUnit = pet;
+                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
+                root.GetComponent<SkillIndicatorComponent>().MainUnit = pet;
+                currentScene.GetComponent<MJCameraComponent>().StartLookAtPet(pet);
+                self.View.ES_JoystickMove.MainUnit = pet;
+                self.View.ES_MainSkill.MainUnit = pet;
+                self.View.ES_MainSkill.OnPetFightSwitch(petId);
+            }
+            else
+            {
+                Log.Warning("客户端切换成宠物控制");
+                root.GetComponent<LockTargetComponent>().MainUnit = unit;
+                root.GetComponent<AttackComponent>().MainUnit = unit;
+                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
+                root.GetComponent<SkillIndicatorComponent>().MainUnit = unit;
+                currentScene.GetComponent<MJCameraComponent>().EndLookAtPet();
+                self.View.ES_JoystickMove.MainUnit = unit;
+                self.View.ES_MainSkill.MainUnit = unit;
+                self.View.ES_MainSkill.OnPetFightSwitch(0);
+            }
         }
 
         public static void OnUpdateUserData(this DlgMain self, string updateType)

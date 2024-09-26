@@ -36,6 +36,6 @@ namespace ET.Client
         public int KillMonsterRewardKey;
         public int LevelRewardKey;
 
-        public int Fightindex;
+        public int Fightindex { get; set; }
     }
 }

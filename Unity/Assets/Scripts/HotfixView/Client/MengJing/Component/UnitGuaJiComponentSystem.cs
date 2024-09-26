@@ -65,7 +65,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    int skillid = self.UIMain.View.ES_MainSkill.UISkillGirdList[index].GetSkillId();
+                    int skillid = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[index].GetSkillId();
                     if (skillid != 0)
                     {
                         self.skillXuHaoList.Add(index);
@@ -290,19 +290,19 @@ namespace ET.Client
                 if (nowHp / maxHp <= 0.3f) // 血量低于30%,俩个道具一起用
                 {
                     //使用第8格
-                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[8].GetSkillId();
+                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[8].GetSkillId();
                     if (self.ifBaseHpSkill(useSkillID))
                     {
-                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[8];
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[8];
                         uiSkillGridComponent.OnPointDown(null);
                         uiSkillGridComponent.PointerUp(null);
                     }
 
                     //使用第9格
-                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[9].GetSkillId();
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[9].GetSkillId();
                     if (self.ifBaseHpSkill(useSkillID))
                     {
-                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[9];
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[9];
                         uiSkillGridComponent.OnPointDown(null);
                         uiSkillGridComponent.PointerUp(null);
                     }
@@ -312,10 +312,10 @@ namespace ET.Client
                     bool ifUse = false;
 
                     //使用第8格
-                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[8].GetSkillId();
+                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[8].GetSkillId();
                     if (self.ifBaseHpSkill(useSkillID))
                     {
-                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[8];
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[8];
                         int itemId = uiSkillGridComponent.SkillPro?.SkillID ?? 0;
                         ItemInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(itemId);
                         if (bagInfo != null)
@@ -327,10 +327,10 @@ namespace ET.Client
                     }
 
                     //使用第9格
-                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[9].GetSkillId();
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[9].GetSkillId();
                     if (ifUse == false && self.ifBaseHpSkill(useSkillID))
                     {
-                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[9];
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[9];
                         uiSkillGridComponent.OnPointDown(null);
                         uiSkillGridComponent.PointerUp(null);
                     }
@@ -347,7 +347,7 @@ namespace ET.Client
                 while (count < self.skillXuHaoList.Count)
                 {
                     grid = self.skillXuHaoList[self.XuHaoNum];
-                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].GetSkillId();
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[grid].GetSkillId();
                     if (skillManagerComponent.CanUseSkill(0, useSkillID) == 0)
                     {
                         break;
@@ -365,9 +365,9 @@ namespace ET.Client
 
                 if (useSkillID != 0)
                 {
-                    self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].OnPointDown(null);
+                    self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[grid].OnPointDown(null);
                     await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
-                    self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].PointerUp(null);
+                    self.UIMain.View.ES_MainSkill.UISkillGirdList_Normal[grid].PointerUp(null);
                 }
 
                 self.XuHaoNum++;

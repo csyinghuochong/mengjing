@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_JoystickMove))]
-    [FriendOf(typeof (ES_AttackGrid))]
-    [FriendOf(typeof (ES_FangunSkill))]
-    [FriendOf(typeof (ES_SkillGrid))]
-    [EntitySystemOf(typeof (ES_MainSkill))]
-    [FriendOfAttribute(typeof (ES_MainSkill))]
+    [FriendOf(typeof(ES_JoystickMove))]
+    [FriendOf(typeof(ES_AttackGrid))]
+    [FriendOf(typeof(ES_FangunSkill))]
+    [FriendOf(typeof(ES_SkillGrid))]
+    [EntitySystemOf(typeof(ES_MainSkill))]
+    [FriendOf(typeof(ES_MainSkill))]
     public static partial class ES_MainSkillSystem
     {
         [EntitySystem]
@@ -18,7 +18,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_Button_HorseButton.AddListener(self.OnButton_HorseButton);
-            
+
             self.E_Btn_TargetButton.AddListener(self.OnBtn_TargetButton);
 
             self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(6f); });
@@ -37,33 +37,51 @@ namespace ET.Client
 
             self.E_Button_Switch_0Button.AddListenerAsync(self.OnButton_Switch_0Button);
 
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_0);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_0);
             self.ES_SkillGrid_Normal_0.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_1);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_1);
             self.ES_SkillGrid_Normal_1.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_2);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_2);
             self.ES_SkillGrid_Normal_2.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_3);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_3);
             self.ES_SkillGrid_Normal_3.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_4);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_4);
             self.ES_SkillGrid_Normal_4.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_5);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_5);
             self.ES_SkillGrid_Normal_5.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_6);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_6);
             self.ES_SkillGrid_Normal_6.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_7);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_7);
             self.ES_SkillGrid_Normal_7.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_8);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_8);
             self.ES_SkillGrid_Normal_8.SkillCancelHandler = self.ShowCancelButton;
-            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_9);
+            self.UISkillGirdList_Normal.Add(self.ES_SkillGrid_Normal_9);
             self.ES_SkillGrid_Normal_9.SkillCancelHandler = self.ShowCancelButton;
 
             self.ES_SkillGrid_Normal_juexing.SkillCancelHandler = self.ShowCancelButton;
             self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(false);
 
+            self.ES_FangunSkill.uiTransform.gameObject.SetActive(true);
+
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_0);
+            self.ES_SkillGrid_PetFight_0.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_1);
+            self.ES_SkillGrid_PetFight_1.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_2);
+            self.ES_SkillGrid_PetFight_2.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_3);
+            self.ES_SkillGrid_PetFight_3.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_4);
+            self.ES_SkillGrid_PetFight_4.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_5);
+            self.ES_SkillGrid_PetFight_5.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_6);
+            self.ES_SkillGrid_PetFight_6.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList_PetFight.Add(self.ES_SkillGrid_PetFight_7);
+            self.ES_SkillGrid_PetFight_7.SkillCancelHandler = self.ShowCancelButton;
+
             self.ES_AttackGrid.uiTransform.gameObject.SetActive(true);
 
-            self.ES_FangunSkill.uiTransform.gameObject.SetActive(true);
             self.E_Btn_CancleSkillButton.AddListener(self.OnBtn_CancleSkillButton);
         }
 
@@ -77,10 +95,10 @@ namespace ET.Client
         {
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnCityHorseButton(true);
         }
-        
+
         private static void OnCityHorseButton(this ES_MainSkill self, bool showtip)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
             if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
             {
@@ -106,7 +124,7 @@ namespace ET.Client
 
             UserInfoNetHelper.HorseRideRequest(self.Root()).Coroutine();
         }
-        
+
         public static async ETTask OnBtn_PetTargetButton(this ES_MainSkill self)
         {
             long lockId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
@@ -134,11 +152,11 @@ namespace ET.Client
                 return;
             }
 
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
 
-            M2C_ItemEquipIndexResponse response = await BagClientNetHelper.ItemEquipIndex(self.Root(), equipIndex == 0? 1 : 0);
+            M2C_ItemEquipIndexResponse response = await BagClientNetHelper.ItemEquipIndex(self.Root(), equipIndex == 0 ? 1 : 0);
             if (self.IsDisposed || response.Error > 0)
             {
                 return;
@@ -181,16 +199,15 @@ namespace ET.Client
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
             int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
             self.E_Button_Switch_0Button.gameObject.SetActive(occ == 3);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, equipIndex == 0? "c12" : "c11");
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, equipIndex == 0 ? "c12" : "c11");
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_Button_Switch_0Image.sprite = sp;
         }
-        
+
         public static void OnCardTranfer(this ES_MainSkill self, int runraceid)
-        { 
-                    
+        {
         }
-        
+
         public static void OnRunRaceTranfer(this ES_MainSkill self, int runraceid)
         {
             //切换技能按钮。。 变身后只有一个技能按钮，读取monsterconfig.ActSkillID.. 
@@ -209,17 +226,70 @@ namespace ET.Client
 
                 self.EG_NormalRectTransform.gameObject.SetActive(false);
                 self.EG_TransformsRectTransform.gameObject.SetActive(true);
+                self.EG_PetFightRectTransform.gameObject.SetActive(false);
             }
             else
             {
                 self.EG_NormalRectTransform.gameObject.SetActive(true);
                 self.EG_TransformsRectTransform.gameObject.SetActive(false);
+                self.EG_PetFightRectTransform.gameObject.SetActive(false);
+            }
+        }
+
+        public static void OnPetFightSwitch(this ES_MainSkill self, long petId)
+        {
+            if (petId > 0)
+            {
+                PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
+                List<int> skill = new List<int>();
+                foreach (int skillId in rolePetInfo.PetSkill)
+                {
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                    if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                    {
+                        continue;
+                    }
+
+                    skill.Add(skillId);
+                }
+
+                Log.Warning($"切换宠物控制，宠物主动技能数量：{skill.Count}");
+
+                for (int i = 0; i < 8; i++)
+                {
+                    ES_SkillGrid esSkillGrid = self.UISkillGirdList_PetFight[i];
+
+                    if (i < skill.Count)
+                    {
+                        SkillPro skillPro = new();
+                        skillPro.SkillID = skill[i];
+                        skillPro.SkillSetType = SkillSetEnum.Skill;
+                        esSkillGrid.UpdateSkillInfo(skillPro);
+                    }
+                    else
+                    {
+                        esSkillGrid.UpdateSkillInfo(null);
+                    }
+                }
+
+                self.EG_NormalRectTransform.gameObject.SetActive(false);
+                self.EG_TransformsRectTransform.gameObject.SetActive(false);
+                self.EG_PetFightRectTransform.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.EG_NormalRectTransform.gameObject.SetActive(true);
+                self.EG_TransformsRectTransform.gameObject.SetActive(false);
+                self.EG_PetFightRectTransform.gameObject.SetActive(false);
             }
         }
 
         public static void OnUpdateAngle(this ES_MainSkill self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             bool show_old = self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.activeSelf;
             bool show_new = numericComponent.GetAsInt(NumericType.JueXingAnger) >= 500;
@@ -315,7 +385,7 @@ namespace ET.Client
                 return;
             }
 
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit main = self.MainUnit;
             Unit target = main.GetParent<UnitComponent>().Get(lockTargetId);
             if (target == null)
             {
@@ -352,7 +422,7 @@ namespace ET.Client
 
         public static async ETTask MoveToNpc(this ES_MainSkill self, Unit target, Vector3 position)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
                 return;
 
@@ -402,7 +472,7 @@ namespace ET.Client
                 return;
             }
 
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit main = self.MainUnit;
             if (main.GetComponent<SkillManagerComponentC>().IsSkillMoveTime())
             {
                 return;
@@ -470,7 +540,7 @@ namespace ET.Client
             }
 
             self.LastPickTime = Time.time;
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             if (!unit.GetComponent<MoveComponent>().IsArrived())
             {
                 self.Root().GetComponent<ClientSenderCompnent>().Send(C2M_Stop.Create());
@@ -500,7 +570,7 @@ namespace ET.Client
 
         public static async ETTask MoveToShiQu(this ES_MainSkill self, Vector3 position)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             int value = await unit.MoveToAsync(position);
             List<Unit> units = MapHelper.GetCanShiQu(self.Root(), 3f);
             if (value == 0 && units.Count > 0)
@@ -511,31 +581,32 @@ namespace ET.Client
 
         public static void CheckSkillSecond(this ES_MainSkill self)
         {
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                if (self.UISkillGirdList[i].SkillPro == null)
-                {
-                    continue;
-                }
-                if (self.UISkillGirdList[i].SkillSecond == 1)
-                {
-                    self.UISkillGirdList[i].CheckSkillSecond();
-                }
-            }
-        }
-        
-        public static void OnSkillSecond(this ES_MainSkill self, M2C_SkillSecondResult message)
-        {
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            {
-                if (self.UISkillGirdList[i].SkillPro == null)
+                if (self.UISkillGirdList_Normal[i].SkillPro == null)
                 {
                     continue;
                 }
 
-                if (self.UISkillGirdList[i].SkillPro.SkillID == message.SkillId)
+                if (self.UISkillGirdList_Normal[i].SkillSecond == 1)
                 {
-                    self.UISkillGirdList[i].OnSkillSecondResult(message);
+                    self.UISkillGirdList_Normal[i].CheckSkillSecond();
+                }
+            }
+        }
+
+        public static void OnSkillSecond(this ES_MainSkill self, M2C_SkillSecondResult message)
+        {
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
+            {
+                if (self.UISkillGirdList_Normal[i].SkillPro == null)
+                {
+                    continue;
+                }
+
+                if (self.UISkillGirdList_Normal[i].SkillPro.SkillID == message.SkillId)
+                {
+                    self.UISkillGirdList_Normal[i].OnSkillSecondResult(message);
                 }
             }
         }
@@ -543,16 +614,16 @@ namespace ET.Client
         public static void OnSkillBeging(this ES_MainSkill self, string dataParams)
         {
             int skillId = int.Parse(dataParams);
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                if (self.UISkillGirdList[i].SkillPro == null)
+                if (self.UISkillGirdList_Normal[i].SkillPro == null)
                 {
                     continue;
                 }
 
-                if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+                if (self.UISkillGirdList_Normal[i].SkillPro.SkillID == skillId)
                 {
-                    self.UISkillGirdList[i].E_Button_CancleButton.gameObject.SetActive(true);
+                    self.UISkillGirdList_Normal[i].E_Button_CancleButton.gameObject.SetActive(true);
                 }
             }
         }
@@ -560,16 +631,16 @@ namespace ET.Client
         public static void OnSkillFinish(this ES_MainSkill self, string dataParams)
         {
             int skillId = int.Parse(dataParams);
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                if (self.UISkillGirdList[i].SkillPro == null)
+                if (self.UISkillGirdList_Normal[i].SkillPro == null)
                 {
                     continue;
                 }
 
-                if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+                if (self.UISkillGirdList_Normal[i].SkillPro.SkillID == skillId)
                 {
-                    self.UISkillGirdList[i].E_Button_CancleButton.gameObject.SetActive(false);
+                    self.UISkillGirdList_Normal[i].E_Button_CancleButton.gameObject.SetActive(false);
                 }
             }
         }
@@ -578,17 +649,17 @@ namespace ET.Client
         {
             if (self.SkillManagerComponent == null)
             {
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                Unit unit = self.MainUnit;
                 self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
             }
 
             long serverTime = TimeHelper.ServerNow();
             long pulicCd = self.SkillManagerComponent.SkillPublicCDTime - serverTime;
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList[i];
+                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList_Normal[i];
                 uISkillGridComponent.OnUpdate(self.SkillManagerComponent.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
-                    i < 8? pulicCd : 0);
+                    i < 8 ? pulicCd : 0);
             }
 
             if (self.JueXingSkillId > 0)
@@ -607,10 +678,10 @@ namespace ET.Client
             self.OnSkillCDUpdate();
             self.CheckJingLingFunction();
             self.OnUpdateButton();
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                self.UISkillGirdList[i].RemoveSkillInfoShow();
-                self.UISkillGirdList[i].ResetSkillSecond();
+                self.UISkillGirdList_Normal[i].RemoveSkillInfoShow();
+                self.UISkillGirdList_Normal[i].ResetSkillSecond();
             }
 
             self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
@@ -618,9 +689,9 @@ namespace ET.Client
 
         public static void ResetUI(this ES_MainSkill self)
         {
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList[i];
+                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList_Normal[i];
                 uISkillGridComponent.RemoveSkillInfoShow();
                 uISkillGridComponent.OnUpdate(0, 0);
                 uISkillGridComponent.UseSkill = false;
@@ -653,9 +724,9 @@ namespace ET.Client
         {
             FlyTipComponent.Instance.ShowFlyTip("取消技能施法");
 
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                self.UISkillGirdList[i].OnEnterCancelButton();
+                self.UISkillGirdList_Normal[i].OnEnterCancelButton();
             }
 
             self.ES_SkillGrid_Normal_juexing.OnEnterCancelButton();
@@ -663,9 +734,9 @@ namespace ET.Client
 
         public static void OnBagItemUpdate(this ES_MainSkill self)
         {
-            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
             {
-                self.UISkillGirdList[i].UpdateItemNumber();
+                self.UISkillGirdList_Normal[i].UpdateItemNumber();
             }
         }
 
@@ -674,7 +745,7 @@ namespace ET.Client
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
             for (int i = 0; i < 10; i++)
             {
-                ES_SkillGrid skillgrid = self.UISkillGirdList[i];
+                ES_SkillGrid skillgrid = self.UISkillGirdList_Normal[i];
                 SkillPro skillid = skillSetComponent.GetByPosition(i + 1);
                 skillgrid.UpdateSkillInfo(skillid);
             }
@@ -690,6 +761,7 @@ namespace ET.Client
             self.ES_SkillGrid_Normal_juexing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
             self.JueXingSkillId = juexingid;
         }
+
         public static void OnBtn_CancleSkillButton(this ES_MainSkill self)
         {
         }

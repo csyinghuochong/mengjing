@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MainSkill : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_MainSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public List<ES_SkillGrid> UISkillGirdList { get; set; } = new();
+		public Unit MainUnit { get; set; }
+		public List<ES_SkillGrid> UISkillGirdList_Normal { get; set; } = new();
+		public List<ES_SkillGrid> UISkillGirdList_PetFight { get; set; } = new();
 		public SkillManagerComponentC SkillManagerComponent { get; set; }
 		public float LastLockTime;
 		public float LastPickTime;
 		public long SwitchCDEndTime;
 		public int JueXingSkillId;
 		
-		public RectTransform EG_NormalRectTransform
+		public UnityEngine.RectTransform EG_NormalRectTransform
      	{
      		get
      		{
@@ -27,7 +28,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_NormalRectTransform == null )
      			{
-		    		this.m_EG_NormalRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Normal");
+		    		this.m_EG_NormalRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Normal");
      			}
      			return this.m_EG_NormalRectTransform;
      		}
@@ -42,9 +43,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_0;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_0;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_0");
 		    	   this.m_es_skillgrid_normal_0 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -62,9 +63,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_1;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_1;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_1");
 		    	   this.m_es_skillgrid_normal_1 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -77,14 +78,14 @@ namespace ET.Client
      	{
      		get
      		{
-     			if (this.uiTransform==null)
+     			if (this.uiTransform == null)
      			{
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_2;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_2;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_2");
 		    	   this.m_es_skillgrid_normal_2 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -102,9 +103,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_3;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_3;
-     			if( es==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_3");
 		    	   this.m_es_skillgrid_normal_3 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -122,9 +123,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_4;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_4;
-     			if( es==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_4");
 		    	   this.m_es_skillgrid_normal_4 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -142,9 +143,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_5;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_5;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_5");
 		    	   this.m_es_skillgrid_normal_5 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -162,9 +163,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_6;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_6;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_6");
 		    	   this.m_es_skillgrid_normal_6 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -182,9 +183,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_7;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_7;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_7");
 		    	   this.m_es_skillgrid_normal_7 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -202,9 +203,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_8;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_8;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_8");
 		    	   this.m_es_skillgrid_normal_8 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -222,9 +223,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_9;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_9;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_9");
 		    	   this.m_es_skillgrid_normal_9 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -242,9 +243,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_normal_juexing;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_normal_juexing;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_juexing");
 		    	   this.m_es_skillgrid_normal_juexing = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -262,9 +263,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_FangunSkill es = this.m_es_fangunskill;
+     			if( es == null )
 
-		        ES_FangunSkill es = this.m_es_fangunskill;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_FangunSkill");
 		    	   this.m_es_fangunskill = this.AddChild<ES_FangunSkill,Transform>(subTrans);
@@ -273,7 +274,7 @@ namespace ET.Client
      		}
      	}
 
-		public RectTransform EG_TransformsRectTransform
+		public UnityEngine.RectTransform EG_TransformsRectTransform
      	{
      		get
      		{
@@ -284,7 +285,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_TransformsRectTransform == null )
      			{
-		    		this.m_EG_TransformsRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Transforms");
+		    		this.m_EG_TransformsRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Transforms");
      			}
      			return this.m_EG_TransformsRectTransform;
      		}
@@ -299,9 +300,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_transforms_0;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_transforms_0;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_0");
 		    	   this.m_es_skillgrid_transforms_0 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -319,9 +320,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_transforms_1;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_transforms_1;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_1");
 		    	   this.m_es_skillgrid_transforms_1 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -339,14 +340,191 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_SkillGrid es = this.m_es_skillgrid_transforms_2;
+     			if( es == null )
 
-		        ES_SkillGrid es = this.m_es_skillgrid_transforms_2;
-     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_2");
 		    	   this.m_es_skillgrid_transforms_2 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
      			}
      			return this.m_es_skillgrid_transforms_2;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_PetFightRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_PetFightRectTransform == null )
+     			{
+		    		this.m_EG_PetFightRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetFight");
+     			}
+     			return this.m_EG_PetFightRectTransform;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_0
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_0;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_0");
+		    	   this.m_es_skillgrid_petfight_0 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_0;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_1
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_1;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_1");
+		    	   this.m_es_skillgrid_petfight_1 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_1;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_2;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_2");
+		    	   this.m_es_skillgrid_petfight_2 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_2;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_3
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_3;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_3");
+		    	   this.m_es_skillgrid_petfight_3 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_3;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_4
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_4;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_4");
+		    	   this.m_es_skillgrid_petfight_4 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_4;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_5
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_5;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_5");
+		    	   this.m_es_skillgrid_petfight_5 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_5;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_6
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_6;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_6");
+		    	   this.m_es_skillgrid_petfight_6 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_6;
+     		}
+     	}
+
+		public ES_SkillGrid ES_SkillGrid_PetFight_7
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillGrid es = this.m_es_skillgrid_petfight_7;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetFight/ES_SkillGrid_PetFight_7");
+		    	   this.m_es_skillgrid_petfight_7 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
+     			}
+     			return this.m_es_skillgrid_petfight_7;
      		}
      	}
 
@@ -359,9 +537,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+     			ES_AttackGrid es = this.m_es_attackgrid;
+     			if( es == null )
 
-		        ES_AttackGrid es = this.m_es_attackgrid;
-     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_AttackGrid");
 		    	   this.m_es_attackgrid = this.AddChild<ES_AttackGrid,Transform>(subTrans);
@@ -370,7 +548,7 @@ namespace ET.Client
      		}
      	}
 
-		public Button E_Btn_CancleSkillButton
+		public UnityEngine.UI.Button E_Btn_CancleSkillButton
      	{
      		get
      		{
@@ -381,13 +559,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CancleSkillButton == null )
      			{
-		    		this.m_E_Btn_CancleSkillButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
+		    		this.m_E_Btn_CancleSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
      			}
      			return this.m_E_Btn_CancleSkillButton;
      		}
      	}
 
-		public Image E_Btn_CancleSkillImage
+		public UnityEngine.UI.Image E_Btn_CancleSkillImage
      	{
      		get
      		{
@@ -398,13 +576,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CancleSkillImage == null )
      			{
-		    		this.m_E_Btn_CancleSkillImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
+		    		this.m_E_Btn_CancleSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
      			}
      			return this.m_E_Btn_CancleSkillImage;
      		}
      	}
 
-		public EventTrigger E_Btn_CancleSkillEventTrigger
+		public UnityEngine.EventSystems.EventTrigger E_Btn_CancleSkillEventTrigger
      	{
      		get
      		{
@@ -415,13 +593,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CancleSkillEventTrigger == null )
      			{
-		    		this.m_E_Btn_CancleSkillEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
+		    		this.m_E_Btn_CancleSkillEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_CancleSkill");
      			}
      			return this.m_E_Btn_CancleSkillEventTrigger;
      		}
      	}
 
-		public Button E_Btn_NpcDuiHuaButton
+		public UnityEngine.UI.Button E_Btn_NpcDuiHuaButton
      	{
      		get
      		{
@@ -432,13 +610,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_NpcDuiHuaButton == null )
      			{
-		    		this.m_E_Btn_NpcDuiHuaButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList/E_Btn_NpcDuiHua");
+		    		this.m_E_Btn_NpcDuiHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/E_Btn_NpcDuiHua");
      			}
      			return this.m_E_Btn_NpcDuiHuaButton;
      		}
      	}
 
-		public Image E_Btn_NpcDuiHuaImage
+		public UnityEngine.UI.Image E_Btn_NpcDuiHuaImage
      	{
      		get
      		{
@@ -449,13 +627,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_NpcDuiHuaImage == null )
      			{
-		    		this.m_E_Btn_NpcDuiHuaImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList/E_Btn_NpcDuiHua");
+		    		this.m_E_Btn_NpcDuiHuaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList/E_Btn_NpcDuiHua");
      			}
      			return this.m_E_Btn_NpcDuiHuaImage;
      		}
      	}
 
-		public Button E_Btn_JingLingButton
+		public UnityEngine.UI.Button E_Btn_JingLingButton
      	{
      		get
      		{
@@ -466,13 +644,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_JingLingButton == null )
      			{
-		    		this.m_E_Btn_JingLingButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList/E_Btn_JingLing");
+		    		this.m_E_Btn_JingLingButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/E_Btn_JingLing");
      			}
      			return this.m_E_Btn_JingLingButton;
      		}
      	}
 
-		public Image E_Btn_JingLingImage
+		public UnityEngine.UI.Image E_Btn_JingLingImage
      	{
      		get
      		{
@@ -483,13 +661,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_JingLingImage == null )
      			{
-		    		this.m_E_Btn_JingLingImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList/E_Btn_JingLing");
+		    		this.m_E_Btn_JingLingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList/E_Btn_JingLing");
      			}
      			return this.m_E_Btn_JingLingImage;
      		}
      	}
 
-		public Button E_Button_HorseButton
+		public UnityEngine.UI.Button E_Button_HorseButton
      	{
      		get
      		{
@@ -500,13 +678,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_HorseButton == null )
      			{
-		    		this.m_E_Button_HorseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList/E_Button_Horse");
+		    		this.m_E_Button_HorseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/E_Button_Horse");
      			}
      			return this.m_E_Button_HorseButton;
      		}
      	}
 
-		public Image E_Button_HorseImage
+		public UnityEngine.UI.Image E_Button_HorseImage
      	{
      		get
      		{
@@ -517,13 +695,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_HorseImage == null )
      			{
-		    		this.m_E_Button_HorseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Horse");
+		    		this.m_E_Button_HorseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Horse");
      			}
      			return this.m_E_Button_HorseImage;
      		}
      	}
 
-		public Button E_Button_Switch_0Button
+		public UnityEngine.UI.Button E_Button_Switch_0Button
      	{
      		get
      		{
@@ -534,13 +712,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Switch_0Button == null )
      			{
-		    		this.m_E_Button_Switch_0Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0");
+		    		this.m_E_Button_Switch_0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0");
      			}
      			return this.m_E_Button_Switch_0Button;
      		}
      	}
 
-		public Image E_Button_Switch_0Image
+		public UnityEngine.UI.Image E_Button_Switch_0Image
      	{
      		get
      		{
@@ -551,13 +729,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Switch_0Image == null )
      			{
-		    		this.m_E_Button_Switch_0Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0");
+		    		this.m_E_Button_Switch_0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0");
      			}
      			return this.m_E_Button_Switch_0Image;
      		}
      	}
 
-		public Image E_Button_Switch_CDImage
+		public UnityEngine.UI.Image E_Button_Switch_CDImage
      	{
      		get
      		{
@@ -568,13 +746,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Switch_CDImage == null )
      			{
-		    		this.m_E_Button_Switch_CDImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0/E_Button_Switch_CD");
+		    		this.m_E_Button_Switch_CDImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList/E_Button_Switch_0/E_Button_Switch_CD");
      			}
      			return this.m_E_Button_Switch_CDImage;
      		}
      	}
 
-		public Button E_Btn_ShiQuButton
+		public UnityEngine.UI.Button E_Btn_ShiQuButton
      	{
      		get
      		{
@@ -585,13 +763,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ShiQuButton == null )
      			{
-		    		this.m_E_Btn_ShiQuButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_ShiQu");
+		    		this.m_E_Btn_ShiQuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_ShiQu");
      			}
      			return this.m_E_Btn_ShiQuButton;
      		}
      	}
 
-		public Image E_Btn_ShiQuImage
+		public UnityEngine.UI.Image E_Btn_ShiQuImage
      	{
      		get
      		{
@@ -602,13 +780,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ShiQuImage == null )
      			{
-		    		this.m_E_Btn_ShiQuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_ShiQu");
+		    		this.m_E_Btn_ShiQuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_ShiQu");
      			}
      			return this.m_E_Btn_ShiQuImage;
      		}
      	}
 
-		public Button E_Button_ZhuaPuButton
+		public UnityEngine.UI.Button E_Button_ZhuaPuButton
      	{
      		get
      		{
@@ -619,13 +797,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_ZhuaPuButton == null )
      			{
-		    		this.m_E_Button_ZhuaPuButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList2/E_Button_ZhuaPu");
+		    		this.m_E_Button_ZhuaPuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList2/E_Button_ZhuaPu");
      			}
      			return this.m_E_Button_ZhuaPuButton;
      		}
      	}
 
-		public Image E_Button_ZhuaPuImage
+		public UnityEngine.UI.Image E_Button_ZhuaPuImage
      	{
      		get
      		{
@@ -636,13 +814,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_ZhuaPuImage == null )
      			{
-		    		this.m_E_Button_ZhuaPuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList2/E_Button_ZhuaPu");
+		    		this.m_E_Button_ZhuaPuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList2/E_Button_ZhuaPu");
      			}
      			return this.m_E_Button_ZhuaPuImage;
      		}
      	}
 
-		public Button E_Btn_TargetButton
+		public UnityEngine.UI.Button E_Btn_TargetButton
      	{
      		get
      		{
@@ -653,13 +831,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_TargetButton == null )
      			{
-		    		this.m_E_Btn_TargetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_Target");
+		    		this.m_E_Btn_TargetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_Target");
      			}
      			return this.m_E_Btn_TargetButton;
      		}
      	}
 
-		public Image E_Btn_TargetImage
+		public UnityEngine.UI.Image E_Btn_TargetImage
      	{
      		get
      		{
@@ -670,13 +848,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_TargetImage == null )
      			{
-		    		this.m_E_Btn_TargetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_Target");
+		    		this.m_E_Btn_TargetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_Target");
      			}
      			return this.m_E_Btn_TargetImage;
      		}
      	}
 
-		public Button E_Btn_PetTargetButton
+		public UnityEngine.UI.Button E_Btn_PetTargetButton
      	{
      		get
      		{
@@ -687,13 +865,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_PetTargetButton == null )
      			{
-		    		this.m_E_Btn_PetTargetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_PetTarget");
+		    		this.m_E_Btn_PetTargetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList2/E_Btn_PetTarget");
      			}
      			return this.m_E_Btn_PetTargetButton;
      		}
      	}
 
-		public Image E_Btn_PetTargetImage
+		public UnityEngine.UI.Image E_Btn_PetTargetImage
      	{
      		get
      		{
@@ -704,7 +882,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_PetTargetImage == null )
      			{
-		    		this.m_E_Btn_PetTargetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_PetTarget");
+		    		this.m_E_Btn_PetTargetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ButtonList2/E_Btn_PetTarget");
      			}
      			return this.m_E_Btn_PetTargetImage;
      		}
@@ -741,6 +919,15 @@ namespace ET.Client
 			this.m_es_skillgrid_transforms_0 = null;
 			this.m_es_skillgrid_transforms_1 = null;
 			this.m_es_skillgrid_transforms_2 = null;
+			this.m_EG_PetFightRectTransform = null;
+			this.m_es_skillgrid_petfight_0 = null;
+			this.m_es_skillgrid_petfight_1 = null;
+			this.m_es_skillgrid_petfight_2 = null;
+			this.m_es_skillgrid_petfight_3 = null;
+			this.m_es_skillgrid_petfight_4 = null;
+			this.m_es_skillgrid_petfight_5 = null;
+			this.m_es_skillgrid_petfight_6 = null;
+			this.m_es_skillgrid_petfight_7 = null;
 			this.m_es_attackgrid = null;
 			this.m_E_Btn_CancleSkillButton = null;
 			this.m_E_Btn_CancleSkillImage = null;
@@ -765,7 +952,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private RectTransform m_EG_NormalRectTransform = null;
+		private UnityEngine.RectTransform m_EG_NormalRectTransform = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_normal_0 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_normal_1 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_normal_2 = null;
@@ -778,31 +965,40 @@ namespace ET.Client
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_normal_9 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_normal_juexing = null;
 		private EntityRef<ES_FangunSkill> m_es_fangunskill = null;
-		private RectTransform m_EG_TransformsRectTransform = null;
+		private UnityEngine.RectTransform m_EG_TransformsRectTransform = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_0 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_1 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_2 = null;
+		private UnityEngine.RectTransform m_EG_PetFightRectTransform = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_0 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_1 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_2 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_3 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_4 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_5 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_6 = null;
+		private EntityRef<ES_SkillGrid> m_es_skillgrid_petfight_7 = null;
 		private EntityRef<ES_AttackGrid> m_es_attackgrid = null;
-		private Button m_E_Btn_CancleSkillButton = null;
-		private Image m_E_Btn_CancleSkillImage = null;
-		private EventTrigger m_E_Btn_CancleSkillEventTrigger = null;
-		private Button m_E_Btn_NpcDuiHuaButton = null;
-		private Image m_E_Btn_NpcDuiHuaImage = null;
-		private Button m_E_Btn_JingLingButton = null;
-		private Image m_E_Btn_JingLingImage = null;
-		private Button m_E_Button_HorseButton = null;
-		private Image m_E_Button_HorseImage = null;
-		private Button m_E_Button_Switch_0Button = null;
-		private Image m_E_Button_Switch_0Image = null;
-		private Image m_E_Button_Switch_CDImage = null;
-		private Button m_E_Btn_ShiQuButton = null;
-		private Image m_E_Btn_ShiQuImage = null;
-		private Button m_E_Button_ZhuaPuButton = null;
-		private Image m_E_Button_ZhuaPuImage = null;
-		private Button m_E_Btn_TargetButton = null;
-		private Image m_E_Btn_TargetImage = null;
-		private Button m_E_Btn_PetTargetButton = null;
-		private Image m_E_Btn_PetTargetImage = null;
+		private UnityEngine.UI.Button m_E_Btn_CancleSkillButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CancleSkillImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Btn_CancleSkillEventTrigger = null;
+		private UnityEngine.UI.Button m_E_Btn_NpcDuiHuaButton = null;
+		private UnityEngine.UI.Image m_E_Btn_NpcDuiHuaImage = null;
+		private UnityEngine.UI.Button m_E_Btn_JingLingButton = null;
+		private UnityEngine.UI.Image m_E_Btn_JingLingImage = null;
+		private UnityEngine.UI.Button m_E_Button_HorseButton = null;
+		private UnityEngine.UI.Image m_E_Button_HorseImage = null;
+		private UnityEngine.UI.Button m_E_Button_Switch_0Button = null;
+		private UnityEngine.UI.Image m_E_Button_Switch_0Image = null;
+		private UnityEngine.UI.Image m_E_Button_Switch_CDImage = null;
+		private UnityEngine.UI.Button m_E_Btn_ShiQuButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ShiQuImage = null;
+		private UnityEngine.UI.Button m_E_Button_ZhuaPuButton = null;
+		private UnityEngine.UI.Image m_E_Button_ZhuaPuImage = null;
+		private UnityEngine.UI.Button m_E_Btn_TargetButton = null;
+		private UnityEngine.UI.Image m_E_Btn_TargetImage = null;
+		private UnityEngine.UI.Button m_E_Btn_PetTargetButton = null;
+		private UnityEngine.UI.Image m_E_Btn_PetTargetImage = null;
 		public Transform uiTransform = null;
 	}
 }

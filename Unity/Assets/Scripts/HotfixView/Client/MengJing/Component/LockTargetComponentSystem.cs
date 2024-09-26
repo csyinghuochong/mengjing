@@ -34,7 +34,7 @@ namespace ET.Client
         public static void OnMainHeroMove(this LockTargetComponent self)
         {
             Unit haveBoss = null;
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit main = self.MainUnit;
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
             {
@@ -195,7 +195,7 @@ namespace ET.Client
         /// <returns></returns>
         public static long LockTargetUnit(this LockTargetComponent self, bool random = false)
         {
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit main = self.MainUnit;
             if (!random && self.AttackTarget == 1)
             {
                 Unit unitTarget = main.GetParent<UnitComponent>().Get(self.LastLockId);

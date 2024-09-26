@@ -6,6 +6,7 @@ namespace ET.Client
     [ComponentOf(typeof (Scene))]
     public class LockTargetComponent: Entity, IAwake, IUpdate, IDestroy
     {
+        public Unit MainUnit { get; set; }
         public GameObject LockUnitEffect { get; set; }
         public int Type { get; set; }
         public Dictionary<int, GameObject> EffectMap { get; set; } = new(); 

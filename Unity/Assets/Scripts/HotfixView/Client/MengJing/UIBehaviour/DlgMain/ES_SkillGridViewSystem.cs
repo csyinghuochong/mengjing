@@ -172,7 +172,7 @@ namespace ET.Client
                 return;
             }
 
-            Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit myUnit = self.GetParent<ES_MainSkill>().MainUnit;
             long targetId = self.LockTargetComponent.LastLockId;
 
             if (self.SkillWuqiConfig.SkillTargetType == (int)SkillTargetType.TargetOnly)
@@ -296,7 +296,7 @@ namespace ET.Client
             }
 
             self.CancelSkill = false;
-            Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit myUnit = self.GetParent<ES_MainSkill>().MainUnit;
 
             //锁定目标
             self.LockTargetComponent.SkillLock(myUnit, self.SkillWuqiConfig);
@@ -357,7 +357,7 @@ namespace ET.Client
         {
             C2M_SkillInterruptRequest request = new() { SkillID = self.SkillPro.SkillID };
             self.Root().GetComponent<ClientSenderCompnent>().Send(request);
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.GetParent<ES_MainSkill>().MainUnit;
             unit.GetComponent<SkillManagerComponentC>()
                     .AddSkillCD(self.SkillPro.SkillID, TimeHelper.ServerNow() + 10000, TimeHelper.ServerNow() + 1000);
             self.E_Button_CancleButton.gameObject.SetActive(false);
@@ -365,7 +365,7 @@ namespace ET.Client
 
         public static void CheckSkillSecond(this ES_SkillGrid self)
         {
-            Unit main = UnitHelper.GetMyUnitFromClientScene( self.Root() );
+            Unit main = self.GetParent<ES_MainSkill>().MainUnit;
             //有对应的buff才能触发二段斩
             int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[self.SkillPro.SkillID].KeyId;
 
@@ -409,7 +409,7 @@ namespace ET.Client
                 {
                     self.SkillSecond = 1;
                     self.E_SkillSecondCDImage.gameObject.SetActive(true);
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                    Unit unit = self.GetParent<ES_MainSkill>().MainUnit;
                     unit.GetComponent<SkillManagerComponentC>().ClearSkillCD(message.SkillId);
                     self.ShowSkillSecondCD(self.SkillPro.SkillID).Coroutine();
                 }
@@ -420,7 +420,7 @@ namespace ET.Client
                 //未及时释放二段斩，进入CD
                 self.SkillSecond = 0;
                 self.E_SkillSecondCDImage.gameObject.SetActive(false);
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                Unit unit = self.GetParent<ES_MainSkill>().MainUnit;
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.SkillPro.SkillID);
                 unit.GetComponent<SkillManagerComponentC>().AddSkillCD(self.SkillPro.SkillID, TimeHelper.ServerNow() + (long)(skillConfig.SkillCD * 1000),
                     TimeHelper.ServerNow() + 500);
@@ -488,6 +488,7 @@ namespace ET.Client
                 self.E_Img_SkillCDImage.fillAmount = 0;
                 self.E_Img_SkillIconImage.gameObject.SetActive(false);
                 self.E_Img_MaskImage.gameObject.SetActive(false);
+                self.E_Text_SkillCDText.text = string.Empty;
                 return;
             }
 

@@ -6,6 +6,7 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class SkillIndicatorComponent: Entity , IAwake, IDestroy
     {
+        public Unit MainUnit { get; set; }
         public long Timer;
         public float SkillRangeSize;
         public Camera MainCamera;

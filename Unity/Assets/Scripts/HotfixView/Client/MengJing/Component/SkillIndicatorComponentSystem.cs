@@ -61,7 +61,7 @@ namespace ET.Client
 
         public static void OnLoadGameObject(this SkillIndicatorComponent self, GameObject gameObject, long instanceId)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             SkillIndicatorItem skillIndicatorItem = self.SkillIndicator;
             if (self.IsDisposed || skillIndicatorItem == null || unit == null)
             {
@@ -150,7 +150,7 @@ namespace ET.Client
                             //猎人加长
                             if (occ == 3)
                             {
-                                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                                Unit unit = self.MainUnit;
                                 int equipIndex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex);
                                 //equipIndex 0弓   1剑
                                 scaleList = equipIndex == 0 ? new float[4] { 15f, 15f, 15f, 15f } : new float[4] { 6f, 12f, 6f, 6f };
@@ -216,7 +216,7 @@ namespace ET.Client
         /// <param name="targetId"></param>
         public static void OnMouseDown(this SkillIndicatorComponent self, long targetId = 0)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = self.MainUnit;
             Unit target = unit.GetParent<UnitComponent>().Get(targetId);
             Vector2 vector2 = Vector2.zero;
             self.StartIndicator = vector2;
@@ -298,7 +298,7 @@ namespace ET.Client
             }
             else
             {
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                Unit unit = self.MainUnit;
                 if (unit != null)
                 {
                     return (int)MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
@@ -327,7 +327,7 @@ namespace ET.Client
         public static void OnMainHeroMove(this SkillIndicatorComponent self)
         {
             SkillIndicatorItem skillIndicatorItem = self.SkillIndicator;
-            Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit myUnit = self.MainUnit;
             if (skillIndicatorItem == null || skillIndicatorItem.GameObject == null || myUnit == null)
             {
                 return;
