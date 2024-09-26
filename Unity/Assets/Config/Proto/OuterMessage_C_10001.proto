@@ -1992,6 +1992,21 @@ message M2C_TaskUpdate // IMessage
 }
 
 //ResponseType M2C_TianFuActiveResponse
+message C2M_TalentActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 TianFuId = 1;
+}
+
+message M2C_TalentActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_TianFuActiveResponse
 message C2M_TianFuActiveRequest // ILocationRequest
 {
 	int32 RpcId = 90;

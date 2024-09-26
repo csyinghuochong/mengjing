@@ -5,7 +5,7 @@ namespace ET
     public partial class TalentConfigCategory
     {
 
-        public Dictionary<int,  Dictionary<int, List<TalentConfig>>> TalentPositionList = new Dictionary<int, Dictionary<int, List<TalentConfig>>>();
+        public Dictionary<int,  Dictionary<int, List<int>>> TalentPositionList = new Dictionary<int, Dictionary<int, List<int>>>();
 
         public override void EndInit()
         {
@@ -15,31 +15,31 @@ namespace ET
 
                 if (!TalentPositionList.ContainsKey(key))
                 {
-                    TalentPositionList.Add(key, new Dictionary<int, List<TalentConfig>>());
+                    TalentPositionList.Add(key, new Dictionary<int, List<int>>());
                 }
 
                 if (!TalentPositionList[key].ContainsKey(talentConfig.Position))
                 {
-                    TalentPositionList[key].Add(talentConfig.Position, new List<TalentConfig>());
+                    TalentPositionList[key].Add(talentConfig.Position, new List<int>());
                 }
                 
-                TalentPositionList[key][talentConfig.Position].Add(talentConfig);
+                TalentPositionList[key][talentConfig.Position].Add(talentConfig.Id);
             }
         }
 
 
-        public Dictionary<int, List<TalentConfig>> GetTalentListByOcc(int occ, int talentType)
+        public Dictionary<int, List<int>> GetTalentListByOcc(int occ, int talentType)
         {
             int key = occ * 100 + talentType;
-            Dictionary<int, List<TalentConfig>> talantlist = null;
+            Dictionary<int, List<int>> talantlist = null;
             TalentPositionList.TryGetValue(key, out talantlist);
             return talantlist;
         }
 
-        public List<TalentConfig> GetTalentIdByPosition(int occ, int talentType, int position)
+        public List<int> GetTalentIdByPosition(int occ, int talentType, int position)
         {
-            Dictionary<int, List<TalentConfig>> talantlist = GetTalentListByOcc(occ, talentType);
-            List<TalentConfig> positionlist = null;
+            Dictionary<int, List<int>> talantlist = GetTalentListByOcc(occ, talentType);
+            List<int> positionlist = null;
             talantlist.TryGetValue(position, out positionlist);
             return positionlist;
         }
