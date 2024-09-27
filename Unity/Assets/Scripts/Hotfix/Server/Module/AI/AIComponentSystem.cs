@@ -176,7 +176,7 @@ namespace ET
         {
             self.ChaseRange = 100;
             self.ActRange = 100;
-            self.ActDistance = 10;
+            self.ActDistance = 5;
 
             self.AISkillIDList.Clear();
 
