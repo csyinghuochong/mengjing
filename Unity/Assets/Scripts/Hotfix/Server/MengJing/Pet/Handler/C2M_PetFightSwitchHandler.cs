@@ -24,6 +24,12 @@ namespace ET.Server
 
                 Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
 
+                if (petunit == null && request.PetFightIndex - 1 == i)
+                {
+                    response.Error = ErrorCode.ERR_Pet_Dead;
+                    return;
+                }
+                
                 if (petunit == null)
                 {
                     continue;
@@ -31,8 +37,8 @@ namespace ET.Server
 
                 if (request.PetFightIndex - 1 == i)
                 {
+                    // 切换到宠物
                     petunit.GetComponent<AIComponent>().Stop_2();
-                    Log.Console($"切换到宠物:  {petunit.Id}");
                 }
                 else
                 {

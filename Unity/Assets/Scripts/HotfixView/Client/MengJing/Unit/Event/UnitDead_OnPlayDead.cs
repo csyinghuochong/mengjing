@@ -117,6 +117,16 @@ namespace ET.Client
                     {
                         PetFightTime[unit.Id] = 0;
                     }
+
+                    Unit myUnit = UnitHelper.GetMyUnitFromClientScene(root);
+                    PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                    NumericComponentC numericComponentC = myUnit.GetComponent<NumericComponentC>();
+                    int petFightIndex = numericComponentC.GetAsInt(NumericType.PetFightIndex);
+                    if (petFightIndex > 0 && unit.Id == petComponentC.PetFightList[petFightIndex - 1])
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip("宠物死亡，自动切换为英雄");
+                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnPetFightSwitch(0).Coroutine();
+                    }
                 }
 
                 //记录tap数据

@@ -43,6 +43,11 @@ namespace ET.Client
             self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
 
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
+            if (pet == null)
+            {
+                self.E_PetHPImage.fillAmount = 0;
+                return;
+            }
             NumericComponentC numericComponent = pet.GetComponent<NumericComponentC>();
             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
