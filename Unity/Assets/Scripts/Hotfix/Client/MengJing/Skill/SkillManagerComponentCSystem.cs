@@ -34,8 +34,7 @@ namespace ET.Client
             self.FangunSkillId = int.Parse(GlobalValueConfigCategory.Instance.Get(2).Value);
 
             Unit unit = self.GetParent<Unit>();
-            self.UpdateCD = (unit.MainHero && !unit.IsSelfRobot()) ||
-                    (unit.Type == UnitType.Pet || unit.MasterId == self.Root().GetComponent<PlayerComponent>().CurrentRoleId);
+            self.UpdateCD = unit.MainHero || (unit.Type == UnitType.Pet && unit.MasterId == self.Root().GetComponent<PlayerComponent>().CurrentRoleId);
         }
 
         [EntitySystem]
