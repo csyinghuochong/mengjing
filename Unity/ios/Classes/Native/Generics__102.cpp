@@ -761,6 +761,8 @@ struct MessageObject_t4C1D756546FC660B8F3EE58A7E43CD8CA4139B22;
 struct MethodInfo_t;
 // System.NotSupportedException
 struct NotSupportedException_t1429765983D409BD2986508963C98D214E4EBF4A;
+// System.Diagnostics.Process
+struct Process_tF74794C64BCE464912BF158980B347CE66AF203B;
 // ET.ProcessInnerSender
 struct ProcessInnerSender_t1AFB54421FBC1E3AAF9B296C02CC93BA6126C462;
 // UnityEngine.RenderTexture
@@ -3933,8 +3935,10 @@ struct U3CWaitExitAsyncU3Ed__1_tF2D3B5C2DA3C5B9B4969C9FF65E538E29C47613C
 	int32_t ___U3CU3E1__state_0;
 	// ET.ETAsyncTaskMethodBuilder ET.ProcessHelper/<WaitExitAsync>d__1::<>t__builder
 	ETAsyncTaskMethodBuilder_t6539D4B6A1CB6F6388453211D928A26188B68B0C ___U3CU3Et__builder_1;
+	// System.Diagnostics.Process ET.ProcessHelper/<WaitExitAsync>d__1::process
+	Process_tF74794C64BCE464912BF158980B347CE66AF203B* ___process_2;
 	// ET.ETTaskCompleted ET.ProcessHelper/<WaitExitAsync>d__1::<>u__1
-	ETTaskCompleted_tC7E784791E37157A69DC06ADE2C07D5F0BD577A1 ___U3CU3Eu__1_2;
+	ETTaskCompleted_tC7E784791E37157A69DC06ADE2C07D5F0BD577A1 ___U3CU3Eu__1_3;
 };
 
 // ET.ResourcesComponent/<CreatePackageAsync>d__2
@@ -23848,6 +23852,9 @@ IL_0014:
 		Il2CppCodeGenWriteBarrier((void**)&((&(((&L_3->___StateMachine_2))->___U3CU3Et__builder_1))->___iStateMachineWrap_0), (void*)NULL);
 		#if IL2CPP_ENABLE_STRICT_WRITE_BARRIERS
 		Il2CppCodeGenWriteBarrier((void**)&((&(((&L_3->___StateMachine_2))->___U3CU3Et__builder_1))->___tcs_1), (void*)NULL);
+		#endif
+		#if IL2CPP_ENABLE_STRICT_WRITE_BARRIERS
+		Il2CppCodeGenWriteBarrier((void**)&(((&L_3->___StateMachine_2))->___process_2), (void*)NULL);
 		#endif
 		// return stateMachineWrap;
 		StateMachineWrap_1_t6A600D6AC02389652F786CA523AB4324C8722D2F* L_6 = V_0;
