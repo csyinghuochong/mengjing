@@ -10,9 +10,8 @@ namespace ET
     [FriendOf(typeof(AIDispatcherComponent))]
     public static partial class AIComponentSystem
     {
-        
         [Invoke(TimerInvokeType.AITimer)]
-        public class AITimer: ATimer<AIComponent>
+        public class AITimer : ATimer<AIComponent>
         {
             protected override void Run(AIComponent self)
             {
@@ -26,7 +25,7 @@ namespace ET
                 }
             }
         }
-    
+
         [EntitySystem]
         private static void Awake(this AIComponent self, int aiConfigId)
         {
@@ -88,7 +87,6 @@ namespace ET
                 aaiHandler.Execute(self, aiConfig, cancellationToken).Coroutine();
                 return;
             }
-            
         }
 
         public static void ChangeTarget(this AIComponent self, long targetId)
@@ -105,15 +103,16 @@ namespace ET
             self.Current = 0;
             self.CancellationToken = null;
         }
-        
-                //初始化
+
+        //初始化
         public static void InitMonster(this AIComponent self, int monsteConfigId)
         {
             MonsterConfig MonsterCof = MonsterConfigCategory.Instance.Get(monsteConfigId);
             //初始化AI组件的一些东西
-            self.ActRange = (float)MonsterCof.ActRange + self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_MonsterDis);        //5-10  与主角距离小于此值时,向主角发动追击
-            self.ChaseRange = (float)MonsterCof.ChaseRange;    //超出会返回到出生点
-            self.ActDistance = (float)MonsterCof.ActDistance;  //2    小于转攻击
+            self.ActRange = (float)MonsterCof.ActRange +
+                    self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_MonsterDis); //5-10  与主角距离小于此值时,向主角发动追击
+            self.ChaseRange = (float)MonsterCof.ChaseRange; //超出会返回到出生点
+            self.ActDistance = (float)MonsterCof.ActDistance; //2    小于转攻击
             self.PatrolRange = (float)MonsterCof.PatrolRange;
             self.AIDelay = MonsterCof.AIDelay;
             self.AISkillIDList.Add(MonsterCof.ActSkillID);
@@ -127,6 +126,7 @@ namespace ET
             {
                 return;
             }
+
             try
             {
                 string[] targetpoints = aIParameter.Split('@');
@@ -149,9 +149,9 @@ namespace ET
         {
             MonsterConfig MonsterCof = MonsterConfigCategory.Instance.Get(monsteConfigId);
             //初始化AI组件的一些东西
-            self.ActRange = (float)MonsterCof.ActRange;        //5-10  与主角距离小于此值时,向主角发动追击
-            self.ChaseRange = (float)MonsterCof.ChaseRange;    //超出会返回到出生点
-            self.ActDistance = (float)MonsterCof.ActDistance;  //2    小于转攻击
+            self.ActRange = (float)MonsterCof.ActRange; //5-10  与主角距离小于此值时,向主角发动追击
+            self.ChaseRange = (float)MonsterCof.ChaseRange; //超出会返回到出生点
+            self.ActDistance = (float)MonsterCof.ActDistance; //2    小于转攻击
             self.AISkillIDList.Add(MonsterCof.ActSkillID);
         }
 
@@ -177,33 +177,21 @@ namespace ET
             self.ChaseRange = 100;
             self.ActRange = 100;
             self.ActDistance = 10;
-            
+
+            self.AISkillIDList.Clear();
+
             OccupationConfig occConfig = OccupationConfigCategory.Instance.Get(unit.ConfigId);
             self.AISkillIDList.Add(occConfig.InitActSkillID);
-            
+
             List<SkillPro> skillPros = unit.GetComponent<SkillSetComponentS>().SkillList;
-            for (int i = 0; i < skillPros.Count; i++)
+            foreach (SkillPro skillPro in skillPros)
             {
-                if (skillPros[i].SkillSetType == SkillSetEnum.Item)
+                if (skillPro.SkillID == 0 || skillPro.SkillPosition == 0)
                 {
                     continue;
                 }
 
-                //没激活的不显示
-                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPros[i].SkillID);
-                if (skillConfig.SkillLv == 0 || skillConfig.IsShow == 1)
-                {
-                    continue;
-                }
-
-                if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill
-                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill
-                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
-                {
-                    continue;
-                }
-
-                self.AISkillIDList.Add(skillPros[i].SkillID);
+                self.AISkillIDList.Add(skillPro.SkillID);
             }
         }
 
@@ -216,9 +204,9 @@ namespace ET
         {
             MonsterConfig MonsterCof = MonsterConfigCategory.Instance.Get(monsteConfigId);
             //初始化AI组件的一些东西
-            self.ActRange = 100;        //5-10  与主角距离小于此值时,向主角发动追击
-            self.ChaseRange = 100;    //超出会返回到出生点
-            self.ActDistance = (float)MonsterCof.ActDistance;  //2    小于转攻击
+            self.ActRange = 100; //5-10  与主角距离小于此值时,向主角发动追击
+            self.ChaseRange = 100; //超出会返回到出生点
+            self.ActDistance = (float)MonsterCof.ActDistance; //2    小于转攻击
 
             self.ActDistance += 1f;
 
@@ -228,12 +216,11 @@ namespace ET
         public static void InitNpc(this AIComponent self, int npcid)
         {
             NpcConfig MonsterCof = NpcConfigCategory.Instance.Get(npcid);
-            self.InitTargetPoints( MonsterCof.MovePosition );
+            self.InitTargetPoints(MonsterCof.MovePosition);
         }
 
         public static void InitPasture(this AIComponent self)
-        { 
-            
+        {
         }
 
         public static void InitJingLing(this AIComponent self, int jinglingid)
@@ -245,8 +232,7 @@ namespace ET
         }
 
         public static void InitJiaYuanPet(this AIComponent self)
-        { 
-            
+        {
         }
 
         /// <summary>
@@ -270,6 +256,7 @@ namespace ET
                     break;
                 }
             }
+
             if (haveMagic > 0)
             {
                 self.AISkillIDList.Add(haveMagic);
@@ -291,21 +278,23 @@ namespace ET
         {
             return self.AISkillIDList[RandomHelper.RandomNumber(0, self.AISkillIDList.Count)];
         }
-        
+
         public static void BeAttacking(this AIComponent self, Unit attack)
         {
             //0.1的概率概率转移仇恨
             float moveActPro = 0.1f;
-            moveActPro = moveActPro * (1+ attack.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_ChaoFengPro));
+            moveActPro = moveActPro * (1 + attack.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_ChaoFengPro));
             if (moveActPro <= 0 && self.TargetID > 0)
             {
                 return;
             }
+
             long serverTime = TimeHelper.ServerNow();
             if (serverTime - self.LastChangeTime < 6000)
             {
                 return;
             }
+
             self.LastChangeTime = serverTime;
 
             if (self.GetParent<Unit>().Type == UnitType.Pet)
@@ -315,6 +304,7 @@ namespace ET
                 {
                     self.ChangeTarget(attack.Id);
                 }
+
                 if (self.TargetID == 0)
                 {
                     self.ChangeTarget(attack.Id);
@@ -331,25 +321,28 @@ namespace ET
                 {
                     self.ChangeTarget(attack.Id);
                 }
+
                 if (self.TargetID != 0 && self.ActDistance > 4 && gaiLv <= 0.05f)
                 {
                     self.ChangeTarget(attack.Id);
                 }
+
                 if (self.TargetID == 0)
                 {
                     self.ChangeTarget(attack.Id);
                 }
             }
         }
-        
+
         public static void Begin(this AIComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-            if (numericComponent.GetAsInt(NumericType.Now_Dead)!=0)
+            if (numericComponent.GetAsInt(NumericType.Now_Dead) != 0)
             {
                 return;
             }
+
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.AITimer, self);
         }
 
@@ -370,6 +363,5 @@ namespace ET
         {
             return self.ActRange;
         }
-
     }
-} 
+}
