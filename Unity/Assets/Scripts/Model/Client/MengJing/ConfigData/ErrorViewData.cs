@@ -142,6 +142,7 @@ namespace ET.Client
             { ErrorCode.ERR_Pet_Hint_3, "出战宠物不能散步" },
             { ErrorCode.ERR_Pet_Hint_4, "出战宠物不能分解" },
             { ErrorCode.ERR_Pet_CanNotLock, "小于两技能宠物不能锁定技能" },
+            { ErrorCode.ERR_Pet_Dead, "宠物已死亡" },
             { ErrorCode.ERR_ItemOnlyUseMiJing, "该道具只能在宝藏之地使用" },
             { ErrorCode.ERR_ItemOnlyUseOcc, "该道具只有{0}可以使用" },
             { ErrorCode.ERR_Union_Same_Name, "已经存在同名的家族" },
