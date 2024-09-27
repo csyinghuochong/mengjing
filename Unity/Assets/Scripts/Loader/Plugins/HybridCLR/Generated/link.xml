@@ -262,6 +262,7 @@
     <type fullname="ET.AnimInfo" preserve="all" />
     <type fullname="ET.AssetBundleHelper" preserve="all" />
     <type fullname="ET.Client.GameObjectPoolHelper" preserve="all" />
+    <type fullname="ET.Client.MaterialManager" preserve="all" />
     <type fullname="ET.Client.PoolInflationType" preserve="all" />
     <type fullname="ET.Client.UILoginHelper" preserve="all" />
     <type fullname="ET.CodeLoader" preserve="all" />
@@ -513,11 +514,16 @@
     <type fullname="System.IDisposable" preserve="all" />
     <type fullname="System.IO.BinaryReader" preserve="all" />
     <type fullname="System.IO.File" preserve="all" />
+    <type fullname="System.IO.FileAccess" preserve="all" />
+    <type fullname="System.IO.FileMode" preserve="all" />
+    <type fullname="System.IO.FileStream" preserve="all" />
     <type fullname="System.IO.MemoryStream" preserve="all" />
     <type fullname="System.IO.SeekOrigin" preserve="all" />
     <type fullname="System.IO.Stream" preserve="all" />
     <type fullname="System.IO.StreamReader" preserve="all" />
+    <type fullname="System.IO.StreamWriter" preserve="all" />
     <type fullname="System.IO.TextReader" preserve="all" />
+    <type fullname="System.IO.TextWriter" preserve="all" />
     <type fullname="System.Int32" preserve="all" />
     <type fullname="System.Int64" preserve="all" />
     <type fullname="System.Math" preserve="all" />
@@ -562,6 +568,7 @@
     <type fullname="System.UInt16" preserve="all" />
     <type fullname="System.UInt32" preserve="all" />
     <type fullname="System.ValueTuple`2" preserve="all" />
+    <type fullname="System.ValueTuple`3" preserve="all" />
     <type fullname="System.ValueType" preserve="all" />
   </assembly>
 </linker>
