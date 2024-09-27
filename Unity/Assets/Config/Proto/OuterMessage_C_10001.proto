@@ -1991,7 +1991,7 @@ message M2C_TaskUpdate // IMessage
 	repeated TaskPro RoleTaskList = 2;
 }
 
-//ResponseType M2C_TianFuActiveResponse
+//ResponseType M2C_TalentActiveResponse
 message C2M_TalentActiveRequest // ILocationRequest
 {
 	int32 RpcId = 90;

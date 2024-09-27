@@ -8611,7 +8611,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(OuterMessage.C2M_TalentActiveRequest)]
-    [ResponseType(nameof(M2C_TianFuActiveResponse))]
+    [ResponseType(nameof(M2C_TalentActiveResponse))]
     public partial class C2M_TalentActiveRequest : MessageObject, ILocationRequest
     {
         public static C2M_TalentActiveRequest Create(bool isFromPool = false)
