@@ -53,7 +53,7 @@ namespace ET.Client
 
         public static void UpdateHp(this ES_MainPetFight self)
         {
-            if (self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
+            if (self.Pet == null || self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
             {
                 return;
             }

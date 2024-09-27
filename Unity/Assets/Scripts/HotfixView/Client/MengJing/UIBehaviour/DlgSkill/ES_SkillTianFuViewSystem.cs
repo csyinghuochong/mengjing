@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(Scroll_Item_SkillTianFuItemTwo))]
     [EntitySystemOf(typeof(ES_SkillTianFu))]
     [FriendOfAttribute(typeof(ES_SkillTianFu))]
     public static partial class ES_SkillTianFuSystem
@@ -21,12 +20,6 @@ namespace ET.Client
             self.E_TitleSetToggleGroup.OnSelectIndex(self.Root().GetComponent<SkillSetComponentC>().TianFuPlan);
 
             ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
-            self.PositionItem = rc.Get<GameObject>("PositionItem");
-            self.PositionItem.SetActive(false);
-            self.ScrollItemSkillTianFuItemTwos.Add(1, new());
-            self.ScrollItemSkillTianFuItemTwos.Add(2, new());
-            self.GameObjectType.Add(1, new());
-            self.GameObjectType.Add(2, new());
             self.RefreshTianFuList();
         }
 
@@ -70,105 +63,88 @@ namespace ET.Client
 
         public static void RefreshTianFuList(this ES_SkillTianFu self)
         {
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-
-            int tianFuType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
-
-            if (self.GameObjectType[tianFuType].Count == 0)
+            if (self.Items.Count == 0)
             {
                 ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
-                Transform tr = rc.Get<GameObject>("Content").transform;
-
-                Dictionary<int, List<int>> talentList = new Dictionary<int, List<int>>();
-                talentList = TalentConfigCategory.Instance.GetTalentListByOcc(userInfo.Occ, tianFuType);
-                foreach (List<int> talentListValue in talentList.Values)
+                Transform content = rc.Get<GameObject>("Content").GetComponent<Transform>();
+                for (int i = 0; i < content.childCount; i++)
                 {
-                    GameObject go = UnityEngine.Object.Instantiate(self.PositionItem, tr, true);
-                    go.SetActive(true);
-                    self.GameObjectType[tianFuType].Add(go);
-
-                    GameObject itemPre = go.transform.GetChild(0).gameObject;
-                    itemPre.SetActive(false);
-                    foreach (int id in talentListValue)
-                    {
-                        GameObject item = UnityEngine.Object.Instantiate(itemPre, go.transform, true);
-                        item.SetActive(true);
-
-                        Scroll_Item_SkillTianFuItemTwo scrollItemSkillTianFuItemTwo = self.AddChild<Scroll_Item_SkillTianFuItemTwo>();
-                        scrollItemSkillTianFuItemTwo.uiTransform = item.transform;
-                        scrollItemSkillTianFuItemTwo.Refresh(id);
-                        self.ScrollItemSkillTianFuItemTwos[tianFuType].Add(scrollItemSkillTianFuItemTwo);
-                    }
+                    Transform subTrans = content.GetChild(i);
+                    ES_SkillTianFuItem item = self.AddChild<ES_SkillTianFuItem, Transform>(subTrans);
+                    item.Init(i + 1);
+                    self.Items.Add(item);
                 }
             }
-            else
+
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int tianFuType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
+            Dictionary<int, List<int>> talentList = TalentConfigCategory.Instance.GetTalentListByOcc(userInfo.Occ, tianFuType);
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            skillSetComponent.TianFuList();
+            
+            foreach (ES_SkillTianFuItem item in self.Items)
             {
-                foreach (Scroll_Item_SkillTianFuItemTwo item in self.ScrollItemSkillTianFuItemTwos[tianFuType])
-                {
-                    item.Refresh();
-                }
+                item.Refresh(tianFuType);
             }
         }
 
         public static void OnClickTianFuItem(this ES_SkillTianFu self, int tianfuId)
         {
-            self.TianFuId = tianfuId;
-
-            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
-
-            string[] descList = talentConfig.talentDes.Split(';');
-            CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
-            for (int i = 0; i < descList.Length; i++)
-            {
-                if (string.IsNullOrEmpty(descList[i]))
-                {
-                    continue;
-                }
-
-                GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
-                CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
-                gameObject.SetActive(true);
-                gameObject.GetComponent<Text>().text = descList[i];
-                gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
-                gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
-            }
-
-            self.E_Lab_SkillNameText.text = talentConfig.Name;
-            self.E_Text_NeedLvText.text = talentConfig.LearnRoseLv.ToString();
-
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-            self.E_TianFuIconImage.sprite = sp;
+            // self.TianFuId = tianfuId;
+            //
+            // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
+            //
+            // string[] descList = talentConfig.talentDes.Split(';');
+            // CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
+            // for (int i = 0; i < descList.Length; i++)
+            // {
+            //     if (string.IsNullOrEmpty(descList[i]))
+            //     {
+            //         continue;
+            //     }
+            //
+            //     GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
+            //     CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
+            //     gameObject.SetActive(true);
+            //     gameObject.GetComponent<Text>().text = descList[i];
+            //     gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
+            //     gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
+            // }
+            //
+            // self.E_Lab_SkillNameText.text = talentConfig.Name;
+            // self.E_Text_NeedLvText.text = talentConfig.LearnRoseLv.ToString();
+            //
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
+            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            //
+            // self.E_TianFuIconImage.sprite = sp;
         }
 
         public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
-            int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
-            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
-            if (playerLv < talentConfig.LearnRoseLv)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
-                return;
-            }
-
-            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            int oldId = skillSetComponent.HaveSameTianFu(self.TianFuId);
-            if (oldId != 0 && oldId != self.TianFuId)
-            {
-                // GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(48);
-                // string itemdesc = UICommonHelper.GetNeedItemDesc(globalValueConfig.Value);
-                using (zstring.Block())
-                {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "重置专精",
-                        zstring.Format("是否花费{0}金币重置专精", 50000 + talentConfig.LearnRoseLv * 100),
-                        () => { SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine(); }).Coroutine();
-                }
-
-                return;
-            }
-
-            SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine();
+            // int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
+            // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
+            // if (playerLv < talentConfig.LearnRoseLv)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("等级不足！");
+            //     return;
+            // }
+            //
+            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            // int oldId = skillSetComponent.HaveSameTianFu(self.TianFuId);
+            // if (oldId != 0 && oldId != self.TianFuId)
+            // {
+            //     using (zstring.Block())
+            //     {
+            //         PopupTipHelp.OpenPopupTip(self.Root(), "重置专精",
+            //             zstring.Format("是否花费{0}金币重置专精", 50000 + talentConfig.LearnRoseLv * 100),
+            //             () => { SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine(); }).Coroutine();
+            //     }
+            //
+            //     return;
+            // }
+            //
+            // SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine();
         }
     }
 }

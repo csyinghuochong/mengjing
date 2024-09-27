@@ -8,10 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillTianFu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public int TianFuId;
-		public Dictionary<int, List<EntityRef<Scroll_Item_SkillTianFuItemTwo>>> ScrollItemSkillTianFuItemTwos = new();
-		public GameObject PositionItem;
-		public Dictionary<int, List<GameObject>> GameObjectType = new();
+		public List<EntityRef<ES_SkillTianFuItem>> Items = new();
 		
 		public UnityEngine.UI.ToggleGroup E_TitleSetToggleGroup
      	{
@@ -64,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageIconButton
+		public ES_SkillTianFuItem ES_SkillTianFuItem_0
      	{
      		get
      		{
@@ -73,15 +70,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ImageIconButton == null )
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_0;
+     			if( es == null )
+
      			{
-		    		this.m_E_ImageIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_ImageIcon");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_0");
+		    	   this.m_es_skilltianfuitem_0 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
      			}
-     			return this.m_E_ImageIconButton;
+     			return this.m_es_skilltianfuitem_0;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageIconImage
+		public ES_SkillTianFuItem ES_SkillTianFuItem_1
      	{
      		get
      		{
@@ -90,15 +90,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ImageIconImage == null )
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_1;
+     			if( es == null )
+
      			{
-		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_ImageIcon");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_1");
+		    	   this.m_es_skilltianfuitem_1 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
      			}
-     			return this.m_E_ImageIconImage;
+     			return this.m_es_skilltianfuitem_1;
      		}
      	}
 
-		public UnityEngine.UI.Text E_PointText
+		public ES_SkillTianFuItem ES_SkillTianFuItem_2
      	{
      		get
      		{
@@ -107,11 +110,94 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PointText == null )
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_2;
+     			if( es == null )
+
      			{
-		    		this.m_E_PointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_Point");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_2");
+		    	   this.m_es_skilltianfuitem_2 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
      			}
-     			return this.m_E_PointText;
+     			return this.m_es_skilltianfuitem_2;
+     		}
+     	}
+
+		public ES_SkillTianFuItem ES_SkillTianFuItem_3
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_3;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_3");
+		    	   this.m_es_skilltianfuitem_3 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
+     			}
+     			return this.m_es_skilltianfuitem_3;
+     		}
+     	}
+
+		public ES_SkillTianFuItem ES_SkillTianFuItem_4
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_4;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_4");
+		    	   this.m_es_skilltianfuitem_4 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
+     			}
+     			return this.m_es_skilltianfuitem_4;
+     		}
+     	}
+
+		public ES_SkillTianFuItem ES_SkillTianFuItem_5
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_5;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_5");
+		    	   this.m_es_skilltianfuitem_5 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
+     			}
+     			return this.m_es_skilltianfuitem_5;
+     		}
+     	}
+
+		public ES_SkillTianFuItem ES_SkillTianFuItem_6
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_SkillTianFuItem es = this.m_es_skilltianfuitem_6;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/ES_SkillTianFuItem_6");
+		    	   this.m_es_skilltianfuitem_6 = this.AddChild<ES_SkillTianFuItem,Transform>(subTrans);
+     			}
+     			return this.m_es_skilltianfuitem_6;
      		}
      	}
 
@@ -285,9 +371,13 @@ namespace ET.Client
 			this.m_E_TitleSetToggleGroup = null;
 			this.m_E_Btn_TianFu_1Toggle = null;
 			this.m_E_Btn_TianFu_2Toggle = null;
-			this.m_E_ImageIconButton = null;
-			this.m_E_ImageIconImage = null;
-			this.m_E_PointText = null;
+			this.m_es_skilltianfuitem_0 = null;
+			this.m_es_skilltianfuitem_1 = null;
+			this.m_es_skilltianfuitem_2 = null;
+			this.m_es_skilltianfuitem_3 = null;
+			this.m_es_skilltianfuitem_4 = null;
+			this.m_es_skilltianfuitem_5 = null;
+			this.m_es_skilltianfuitem_6 = null;
 			this.m_E_Btn_ActiveTianFuButton = null;
 			this.m_E_Btn_ActiveTianFuImage = null;
 			this.m_E_TextDesc1Text = null;
@@ -303,9 +393,13 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_TitleSetToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_Btn_TianFu_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Btn_TianFu_2Toggle = null;
-		private UnityEngine.UI.Button m_E_ImageIconButton = null;
-		private UnityEngine.UI.Image m_E_ImageIconImage = null;
-		private UnityEngine.UI.Text m_E_PointText = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_0 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_1 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_2 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_3 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_4 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_5 = null;
+		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_6 = null;
 		private UnityEngine.UI.Button m_E_Btn_ActiveTianFuButton = null;
 		private UnityEngine.UI.Image m_E_Btn_ActiveTianFuImage = null;
 		private UnityEngine.UI.Text m_E_TextDesc1Text = null;
