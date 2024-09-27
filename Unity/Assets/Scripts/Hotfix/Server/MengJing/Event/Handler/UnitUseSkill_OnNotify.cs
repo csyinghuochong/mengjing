@@ -14,7 +14,7 @@ namespace ET.Server
             SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
             if (!unit.GetComponent<MoveComponent>().IsArrived())  /// &&  weaponSkillConfig.IfStopMove == 0
             {
-                unit.Stop(-2);
+                unit.Stop(weaponSkillConfig.Id);
             }
             
             await ETTask.CompletedTask;

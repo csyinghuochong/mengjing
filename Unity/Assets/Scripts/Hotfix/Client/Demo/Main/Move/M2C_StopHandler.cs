@@ -60,7 +60,7 @@ namespace ET.Client
                 unit.Position = message.Position;
             }
 
-            //message.Error == -3释放技能立即停止
+            //message.Error > 1释放技能立即停止
             if (message.Error > 1)
             {
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(message.Error);
