@@ -44,7 +44,12 @@ namespace ET.Client
                 return;
             }
 
-            await SkillNetHelper.TianFuPlan(self.Root(), plan);
+            int error = await SkillNetHelper.TianFuPlan(self.Root(), plan);
+            if (error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
             skillSetComponent.UpdateTianFuPlan(plan);
 
             self.OnActiveTianFu();
@@ -83,8 +88,8 @@ namespace ET.Client
             //}
             Dictionary<int, List<int>> TianFuToLevel = new Dictionary<int, List<int>>();
             //int[] TalentList = OccupationTwoConfigCategory.Instance.Get(occTwo).Talent;
-            
-            int[] TalentList = new int[]{};
+
+            int[] TalentList = new int[] { };
             for (int i = 0; i < TalentList.Length; i++)
             {
                 int talentId = TalentList[i];
