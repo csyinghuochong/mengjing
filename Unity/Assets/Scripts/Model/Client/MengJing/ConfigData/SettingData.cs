@@ -21,9 +21,6 @@ namespace ET.Client
         public static float3 FindPathEnd;
         
         
-        [StaticField]
-        public static bool ShowFindPath = false;
-        
         /// <summary>
         /// 动画控制方式 0 Animator；1 Animancer
         /// </summary>

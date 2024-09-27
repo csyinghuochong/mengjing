@@ -2122,10 +2122,6 @@ namespace ET.Client
             // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             // self.ShowUIStall(unit.GetComponent<NumericComponent>().GetAsLong((int)NumericType.Now_Stall));
             // self.OnTianQiChange(self.ZoneScene().GetComponent<AccountInfoComponent>().TianQiValue);
-
-            PlayerComponent playerComponent = self.Scene().GetComponent<PlayerComponent>();
-            SettingData.ShowFindPath = playerComponent.Account.Equals("18319670288");
-            GameObject.Find("Global/FindPath")?.SetActive(SettingData.ShowFindPath);
         }
 
         public static void OnSettingUpdate(this DlgMain self)

@@ -11,15 +11,6 @@
 				return;
 			}
 
-			if (SettingData.ShowFindPath && unit.MainHero)
-			{
-				long number = TimeInfo.Instance.FrameIndex;
-				string formattedNumber = number.ToString().PadLeft(10, '0');
-				SettingData.FindPathLog.Add(formattedNumber + "   "  + "/t" +  message.ToString());
-				SettingData.FindPathList.Add(number, message);
-				Log.Debug($"FrameIndex.Add:    {number}");
-			}
-
 			if (!unit.MainHero || !message.YaoGan)
 			{
 				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);

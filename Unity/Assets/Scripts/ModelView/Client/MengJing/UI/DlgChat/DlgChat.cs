@@ -9,9 +9,7 @@ namespace ET.Client
         {
             get => this.GetComponent<DlgChatViewComponent>();
         }
-
-        public long FindPathTimer;
-        public long FindPathIndex;
+        
         public int CurrentChatType;
         public Dictionary<int, EntityRef<Scroll_Item_ChatItem>> ScrollItemChatItems;
         public List<ChatInfo> ShowChatInfos = new();

@@ -173,13 +173,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            if (SettingData.ShowFindPath)
-            {
-                CommonHelp.ClearPathFindLog();
-                SettingData.FindPathInit = unit.Position;
-                SettingData.FindPathList.Clear();
-            }
             
             self.lastSendTime = 0;
             self.direction = self.GetDirection(pdata);
@@ -339,12 +332,6 @@ namespace ET.Client
 
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
-            if (SettingData.ShowFindPath)
-            {
-                Transform gameObject = GameObject.Find("Global/FindPath/10").transform;
-                gameObject.localPosition = newv3;
-            }
-
             int errorCode = MoveHelper.IfCanMove(unit);
             if (errorCode!= ErrorCode.ERR_Success)
             {
@@ -527,11 +514,6 @@ namespace ET.Client
             if (lastTimer == 0)
             {
                 return;
-            }
-
-            if (SettingData.ShowFindPath)
-            {
-                CommonHelp.WritePathFindLog();
             }
             
             if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
