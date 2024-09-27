@@ -65,6 +65,7 @@ namespace ET
 		public List<int> ItemXiLianNumRewardIds { get; set; } = new();
 		public List<int> DefeatedBossIds { get; set; } = new();
 		public List<KeyValuePairInt> BuyStoreItems { get; set; } = new();
+		public int TalentPoints { get; set; }
 	}
 
 	[EntitySystemOf(typeof(UserInfo))]
@@ -137,6 +138,7 @@ namespace ET
 			self.ItemXiLianNumRewardIds = proto.ItemXiLianNumRewardIds;
 			self.DefeatedBossIds = proto.DefeatedBossIds;
 			self.BuyStoreItems = proto.BuyStoreItems;
+			self.TalentPoints = proto.TalentPoints;
 		}
 
 		public static UserInfoProto ToMessage(this UserInfo self)
@@ -201,6 +203,7 @@ namespace ET
 			proto.ItemXiLianNumRewardIds = self.ItemXiLianNumRewardIds;
 			proto.DefeatedBossIds = self.DefeatedBossIds;
 			proto.BuyStoreItems = self.BuyStoreItems;
+			proto.TalentPoints = self.TalentPoints;
 			return proto;
 		}
 	}

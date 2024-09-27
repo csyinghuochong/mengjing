@@ -915,6 +915,9 @@ message UserInfoProto
 	repeated int32 DefeatedBossIds = 60;
 	
 	repeated  KeyValuePairInt BuyStoreItems = 61;
+
+		int32 TalentPoints = 62;
+
 }
 
 message M2C_RoleDataUpdate // IMessage

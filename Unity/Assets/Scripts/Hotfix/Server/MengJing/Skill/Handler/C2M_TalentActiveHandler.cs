@@ -7,10 +7,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_TalentActiveRequest request, M2C_TalentActiveResponse response)
         {
+            
+            //userInfoComponentS.UserInfo.TalentPoints--; 天赋点
+            
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
             int tianfuplan = skillSetComponentS.TianFuPlan;
-            
             int erroCode =  TalentHelpter.OnTalentActive(userInfoComponentS.UserInfo.Occ,
                 tianfuplan,
                 request.Position, 

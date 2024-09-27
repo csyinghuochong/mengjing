@@ -3839,6 +3839,9 @@ namespace ET
         [MemoryPackOrder(60)]
         public List<KeyValuePairInt> BuyStoreItems { get; set; } = new();
 
+        [MemoryPackOrder(61)]
+        public int TalentPoints { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3905,6 +3908,7 @@ namespace ET
             this.ItemXiLianNumRewardIds.Clear();
             this.DefeatedBossIds.Clear();
             this.BuyStoreItems.Clear();
+            this.TalentPoints = default;
 
             ObjectPool.Instance.Recycle(this);
         }
