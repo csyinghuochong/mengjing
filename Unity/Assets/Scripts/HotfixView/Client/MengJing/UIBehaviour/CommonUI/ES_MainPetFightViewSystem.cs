@@ -61,7 +61,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnPetFightSwitch(self.FightIndex).Coroutine();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RequestPetFightSwitch(self.FightIndex).Coroutine();
         }
     }
 }

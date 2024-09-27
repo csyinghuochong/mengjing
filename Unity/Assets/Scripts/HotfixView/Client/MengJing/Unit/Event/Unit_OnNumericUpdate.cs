@@ -56,7 +56,7 @@
                 case NumericType.PetFightIndex:
                     if (args.Defend.MainHero)
                     {
-                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().PetFightSet();
+                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().RefreshFightSet();
                     }
 
                     break;

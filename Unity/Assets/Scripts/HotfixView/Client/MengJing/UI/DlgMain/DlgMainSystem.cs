@@ -14,7 +14,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, PetFightUpdate args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshMainPetFights();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshFightSet();
             await ETTask.CompletedTask;
         }
     }
@@ -1116,9 +1116,13 @@ namespace ET.Client
 
         # region 宠物出战
 
-        public static void RefreshMainPetFights(this DlgMain self)
+        public static void RefreshMainPetFightUI(this DlgMain self)
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+
+            self.View.ES_MainPetFight_0.uiTransform.localScale = self.PetFightindex == 1 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
+            self.View.ES_MainPetFight_1.uiTransform.localScale = self.PetFightindex == 2 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
+            self.View.ES_MainPetFight_2.uiTransform.localScale = self.PetFightindex == 3 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
 
             self.View.ES_MainPetFight_0.Refresh(
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0), 1);
@@ -1128,23 +1132,23 @@ namespace ET.Client
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0), 3);
         }
 
-        public static async ETTask OnPetFightSwitch(this DlgMain self, int fightindex)
+        public static async ETTask RequestPetFightSwitch(this DlgMain self, int fightindex)
         {
-            if (fightindex == self.Fightindex)
+            if (fightindex == self.PetFightindex)
             {
                 fightindex = 0;
             }
 
             await PetNetHelper.RequestPetFightSwitch(self.Root(), fightindex);
         }
-        
-        public static void PetFightSet(this DlgMain self)
+
+        public static void RefreshFightSet(this DlgMain self)
         {
             Scene root = self.Root();
             Scene currentScene = root.CurrentScene();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
-            self.Fightindex = petfightindex;
+            self.PetFightindex = petfightindex;
 
             if (petfightindex > 0)
             {
@@ -1177,6 +1181,8 @@ namespace ET.Client
                 self.View.ES_MainSkill.OnEnterScene(unit);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
             }
+
+            self.RefreshMainPetFightUI();
         }
 
         # endregion
@@ -1804,8 +1810,7 @@ namespace ET.Client
 
             self.CheckMailReddot().Coroutine();
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
-            self.PetFightSet();
-            self.RefreshMainPetFights();
+            self.RefreshFightSet();
 
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
         }

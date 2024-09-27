@@ -125,7 +125,7 @@ namespace ET.Client
                     if (petFightIndex > 0 && unit.Id == petComponentC.PetFightList[petFightIndex - 1])
                     {
                         FlyTipComponent.Instance.ShowFlyTip("宠物死亡，自动切换为英雄");
-                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnPetFightSwitch(0).Coroutine();
+                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().RequestPetFightSwitch(0).Coroutine();
                     }
                 }
 

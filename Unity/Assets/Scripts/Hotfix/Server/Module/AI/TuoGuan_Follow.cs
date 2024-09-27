@@ -16,7 +16,7 @@ namespace ET.Server
                 return 1;
             }
 
-            long masterid = petComponentS.PetFightList[numericComponentS.GetAsInt(NumericType.PetFightIndex) - 1];
+            long masterid = petComponentS.PetFightList[petFightIndex - 1];
             Unit master = unitComponent.Get(masterid);
             if (master == null)
             {

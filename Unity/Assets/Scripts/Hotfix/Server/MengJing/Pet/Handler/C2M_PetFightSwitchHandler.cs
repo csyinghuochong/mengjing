@@ -55,7 +55,7 @@ namespace ET.Server
             }
             else
             {
-                unit.GetComponent<AIComponent>().InitHero(unit);
+                unit.GetComponent<AIComponent>().InitHeroTuoGuan(unit);
                 unit.GetComponent<AIComponent>().Begin();
             }
 

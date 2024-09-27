@@ -172,11 +172,11 @@ namespace ET
             self.AISkillIDList.Add(petConfig.ActSkillID);
         }
 
-        public static void InitHero(this AIComponent self, Unit unit)
+        public static void InitHeroTuoGuan(this AIComponent self, Unit unit)
         {
             self.ChaseRange = 100;
             self.ActRange = 100;
-            self.ActDistance = 5;
+            self.ActDistance = 6;
 
             self.AISkillIDList.Clear();
 
