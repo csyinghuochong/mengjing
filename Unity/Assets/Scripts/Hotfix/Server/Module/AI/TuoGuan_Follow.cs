@@ -2,12 +2,64 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    
-    public class TuoGuan_Follow :AAIHandler
+    public class TuoGuan_Follow : AAIHandler
     {
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-            return 0;
+            Unit unit = aiComponent.GetParent<Unit>();
+            UnitComponent unitComponent = unit.GetParent<UnitComponent>();
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+            int petFightIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
+            if (petFightIndex == 0 || petFightIndex - 1 >= petComponentS.PetFightList.Count)
+            {
+                return 1;
+            }
+
+            long masterid = petComponentS.PetFightList[numericComponentS.GetAsInt(NumericType.PetFightIndex) - 1];
+            Unit master = unitComponent.Get(masterid);
+            if (master == null)
+            {
+                return 1;
+            }
+
+            float distance = math.distance(unit.Position, master.Position);
+            AttackRecordComponent attackRecordComponent = master.GetComponent<AttackRecordComponent>();
+            if (distance > aiComponent.ActRange) //超出追击距离，返回
+            {
+                aiComponent.TargetID = 0;
+                attackRecordComponent.PetLockId = 0;
+                return 0;
+            }
+
+            long mastaerAttackId = attackRecordComponent.PetLockId;
+            Unit enemyUnit = unitComponent.Get(mastaerAttackId);
+            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            {
+                mastaerAttackId = attackRecordComponent.AttackingId;
+                enemyUnit = unitComponent.Get(mastaerAttackId);
+            }
+
+            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            {
+                mastaerAttackId = attackRecordComponent.BeAttackId;
+                enemyUnit = unitComponent.Get(mastaerAttackId);
+            }
+
+            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            {
+                enemyUnit = unitComponent.Get(aiComponent.TargetID);
+            }
+
+            if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))
+            {
+                aiComponent.TargetID = 0;
+                return 0;
+            }
+
+            distance = math.distance(unit.Position, enemyUnit.Position);
+            aiComponent.TargetID = enemyUnit.Id;
+            return (aiComponent.TargetID > 0) ? 1 : 0;
         }
 
         private static float3 GetFollowPosition(Unit unit, Unit master)
@@ -17,19 +69,18 @@ namespace ET.Server
             float addg = unit.Id % 100 * (unit.Id % 2 == 0 ? 5 : -5);
             addg += RandomHelper.RandFloat() * 5f;
             quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
-            float3 tar = master.Position + math.mul(rotation , math.forward()) * 2f;
+            float3 tar = master.Position + math.mul(rotation, math.forward()) * 2f;
             return tar;
         }
 
-        
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             Unit unit = aiComponent.GetParent<Unit>();
             int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            Unit master =  petComponentS.GetFightPetByIndex(petfightindex);
-            
-            while (true) 
+            Unit master = petComponentS.GetFightPetByIndex(petfightindex);
+
+            while (true)
             {
                 long nowspeed = 60000;
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
@@ -56,13 +107,14 @@ namespace ET.Server
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_Speed_Base, nowspeed);
                     unit.FindPathMoveToAsync(nextTarget).Coroutine();
                 }
+
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     break;
                 }
-
             }
+
             await ETTask.CompletedTask;
         }
     }

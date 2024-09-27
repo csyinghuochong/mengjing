@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ET.Server;
 using Unity.Mathematics;
 
@@ -169,6 +170,41 @@ namespace ET
             self.ActDistance += self.ActDistance * 0.5f;
 
             self.AISkillIDList.Add(petConfig.ActSkillID);
+        }
+
+        public static void InitHero(this AIComponent self, Unit unit)
+        {
+            self.ChaseRange = 100;
+            self.ActRange = 100;
+            self.ActDistance = 10;
+            
+            OccupationConfig occConfig = OccupationConfigCategory.Instance.Get(unit.ConfigId);
+            self.AISkillIDList.Add(occConfig.InitActSkillID);
+            
+            List<SkillPro> skillPros = unit.GetComponent<SkillSetComponentS>().SkillList;
+            for (int i = 0; i < skillPros.Count; i++)
+            {
+                if (skillPros[i].SkillSetType == SkillSetEnum.Item)
+                {
+                    continue;
+                }
+
+                //没激活的不显示
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillPros[i].SkillID);
+                if (skillConfig.SkillLv == 0 || skillConfig.IsShow == 1)
+                {
+                    continue;
+                }
+
+                if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill
+                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill
+                    || skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                {
+                    continue;
+                }
+
+                self.AISkillIDList.Add(skillPros[i].SkillID);
+            }
         }
 
         /// <summary>
