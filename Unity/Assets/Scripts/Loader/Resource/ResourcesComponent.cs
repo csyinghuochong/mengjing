@@ -121,7 +121,7 @@ namespace ET
                 if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
                 else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
                 else
