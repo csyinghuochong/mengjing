@@ -115,7 +115,7 @@ namespace ET.Client
             //https://gitee.com/ldr123/HybridCLRXlua/blob/master/Assets/Scripts/Utils/Fps.cs
 #if !UNITY_EDITOR && UNITY_IOS
         string modelStr = UnityEngine.SystemInfo.deviceModel;
-        Log.ILog.Debug("deviceModel:  " + modelStr);
+     
         if (IsHaveLiuHai())
         { 
             return true;

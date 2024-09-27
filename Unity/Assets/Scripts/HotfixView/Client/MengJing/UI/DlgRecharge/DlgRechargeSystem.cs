@@ -134,10 +134,10 @@ namespace ET.Client
             self.ReChargeNumber = chargetNumber;
 
 #if UNITY_IPHONE
-            self.Loading.SetActive(true);
-            GlobalHelp.OnIOSPurchase(chargetNumber);
-            C2M_RechargeRequest c2E_GetAllMailRequest = new C2M_RechargeRequest() { RechargeNumber = chargetNumber, PayType = PayTypeEnum.IOSPay };
-            self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2E_GetAllMailRequest).Coroutine();
+            //self.Loading.SetActive(true);
+            //GlobalHelp.OnIOSPurchase(chargetNumber);
+            //C2M_RechargeRequest c2E_GetAllMailRequest = new C2M_RechargeRequest() { RechargeNumber = chargetNumber, PayType = PayTypeEnum.IOSPay };
+            //self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2E_GetAllMailRequest).Coroutine();
 #else
 
             if (GlobalHelp.GetPlatform() == 5)
