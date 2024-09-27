@@ -53,7 +53,6 @@ namespace ET.Server
             if (request.PetFightIndex == 0)
             {
                 unit.GetComponent<AIComponent>().Stop_2();
-                Function_Fight.UnitUpdateProperty_Base(unit, true, true); // 重置速度
             }
             else
             {

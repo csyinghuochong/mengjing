@@ -73,6 +73,7 @@ namespace ET.Server
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
             Unit master = petComponentS.GetFightPetByIndex(petfightindex);
 
+            long oldSpeed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base);
             while (true)
             {
                 long nowspeed = 60000;
@@ -107,6 +108,8 @@ namespace ET.Server
                     break;
                 }
             }
+
+            unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
 
             await ETTask.CompletedTask;
         }
