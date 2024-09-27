@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(Scroll_Item_SkillTianFuItem))]
+    [FriendOf(typeof(Scroll_Item_SkillTianFuItemTwo))]
     [EntitySystemOf(typeof(ES_SkillTianFu))]
     [FriendOfAttribute(typeof(ES_SkillTianFu))]
     public static partial class ES_SkillTianFuSystem
@@ -14,14 +14,20 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_SkillTianFuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSkillTianFuItemsRefresh);
-
             self.E_TextDesc1Text.gameObject.SetActive(false);
-            self.E_Btn_TianFu_2Button.AddListener(() => { self.OnBtn_TianFuPlan(1).Coroutine(); });
-            self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_TianFuPlan(0).Coroutine(); });
+            self.E_TitleSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_Btn_ActiveTianFuButton.AddListener(self.OnBtn_ActiveTianFuButton);
 
-            self.InitTianFuList();
+            self.E_TitleSetToggleGroup.OnSelectIndex(self.Root().GetComponent<SkillSetComponentC>().TianFuPlan);
+
+            ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
+            self.PositionItem = rc.Get<GameObject>("PositionItem");
+            self.PositionItem.SetActive(false);
+            self.ScrollItemSkillTianFuItemTwos.Add(1, new());
+            self.ScrollItemSkillTianFuItemTwos.Add(2, new());
+            self.GameObjectType.Add(1, new());
+            self.GameObjectType.Add(2, new());
+            self.RefreshTianFuList();
         }
 
         [EntitySystem]
@@ -30,17 +36,23 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask OnBtn_TianFuPlan(this ES_SkillTianFu self, int plan)
+        private static void OnItemTypeSet(this ES_SkillTianFu self, int index)
+        {
+            if (index == 0)
+            {
+                self.OnBtn_TianFuPlan(0).Coroutine();
+            }
+            else
+            {
+                self.OnBtn_TianFuPlan(1).Coroutine();
+            }
+        }
+
+        private static async ETTask OnBtn_TianFuPlan(this ES_SkillTianFu self, int plan)
         {
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
             if (skillSetComponent.TianFuPlan == plan)
             {
-                return;
-            }
-
-            if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv < 35)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("35级开启天赋方案,可自由切换天赋!");
                 return;
             }
 
@@ -51,88 +63,49 @@ namespace ET.Client
             }
 
             skillSetComponent.UpdateTianFuPlan(plan);
-
-            self.OnActiveTianFu();
-            self.UpdatePlanButton();
+            self.RefreshTianFuList();
 
             FlyTipComponent.Instance.ShowFlyTip("已切换为当前天赋!");
         }
 
-        public static void UpdatePlanButton(this ES_SkillTianFu self)
-        {
-            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            self.E_Btn_TianFu_1Button.transform.Find("Image").gameObject.SetActive(skillSetComponent.TianFuPlan == 0);
-            self.E_Btn_TianFu_2Button.transform.Find("Image").gameObject.SetActive(skillSetComponent.TianFuPlan == 1);
-        }
-
-        public static void InitTianFuList(this ES_SkillTianFu self)
+        public static void RefreshTianFuList(this ES_SkillTianFu self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int occTwo = OccupationConfigCategory.Instance.Get(userInfo.Occ).OccTwoID[0];
-            //int occTwo = userInfo.OccTwo;
-            //if (occTwo == 0)
-            //{
-            //    //战士天赋
-            //    occTwo = 101;
 
-            //    //法师天赋
-            //    if (userInfo.Occ == 2)
-            //    {
-            //        occTwo = 201;
-            //    }
-            //    //猎人天赋
-            //    if (userInfo.Occ == 3)
-            //    {
-            //        occTwo = 301;
-            //    }
-            //}
-            Dictionary<int, List<int>> TianFuToLevel = new Dictionary<int, List<int>>();
-            //int[] TalentList = OccupationTwoConfigCategory.Instance.Get(occTwo).Talent;
+            int tianFuType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
 
-            int[] TalentList = new int[] { };
-            for (int i = 0; i < TalentList.Length; i++)
+            if (self.GameObjectType[tianFuType].Count == 0)
             {
-                int talentId = TalentList[i];
-                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
-                if (!TianFuToLevel.ContainsKey(talentConfig.LearnRoseLv))
+                ReferenceCollector rc = self.uiTransform.GetComponent<ReferenceCollector>();
+                Transform tr = rc.Get<GameObject>("Content").transform;
+
+                Dictionary<int, List<int>> talentList = new Dictionary<int, List<int>>();
+                talentList = TalentConfigCategory.Instance.GetTalentListByOcc(userInfo.Occ, tianFuType);
+                foreach (List<int> talentListValue in talentList.Values)
                 {
-                    TianFuToLevel.Add(talentConfig.LearnRoseLv, new List<int>());
+                    GameObject go = UnityEngine.Object.Instantiate(self.PositionItem, tr, true);
+                    go.SetActive(true);
+                    self.GameObjectType[tianFuType].Add(go);
+
+                    GameObject itemPre = go.transform.GetChild(0).gameObject;
+                    itemPre.SetActive(false);
+                    foreach (int id in talentListValue)
+                    {
+                        GameObject item = UnityEngine.Object.Instantiate(itemPre, go.transform, true);
+                        item.SetActive(true);
+
+                        Scroll_Item_SkillTianFuItemTwo scrollItemSkillTianFuItemTwo = self.AddChild<Scroll_Item_SkillTianFuItemTwo>();
+                        scrollItemSkillTianFuItemTwo.uiTransform = item.transform;
+                        scrollItemSkillTianFuItemTwo.Refresh(id);
+                        self.ScrollItemSkillTianFuItemTwos[tianFuType].Add(scrollItemSkillTianFuItemTwo);
+                    }
                 }
-
-                TianFuToLevel[talentConfig.LearnRoseLv].Add(talentId);
             }
-
-            self.ShowTianFu.Clear();
-            foreach (var item in TianFuToLevel)
+            else
             {
-                self.ShowTianFu.Add(item.Value);
-            }
-
-            self.AddUIScrollItems(ref self.ScrollItemSkillTianFuItems, self.ShowTianFu.Count);
-            self.E_SkillTianFuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTianFu.Count);
-
-            self.OnActiveTianFu();
-            self.UpdatePlanButton();
-
-            Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[0];
-            scrollItemSkillTianFuItem.OnClickTianFu(0);
-        }
-
-        private static void OnSkillTianFuItemsRefresh(this ES_SkillTianFu self, Transform transform, int index)
-        {
-            Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[index].BindTrans(transform);
-            scrollItemSkillTianFuItem.SetClickHanlder((int tid) => { self.OnClickTianFuItem(tid); });
-            scrollItemSkillTianFuItem.InitTianFuList(self.ShowTianFu[index]);
-        }
-
-        public static void OnActiveTianFu(this ES_SkillTianFu self)
-        {
-            for (int i = 0; i < self.ScrollItemSkillTianFuItems.Count; i++)
-            {
-                Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
-                if (scrollItemSkillTianFuItem.uiTransform != null)
+                foreach (Scroll_Item_SkillTianFuItemTwo item in self.ScrollItemSkillTianFuItemTwos[tianFuType])
                 {
-                    scrollItemSkillTianFuItem.OnActiveTianFu();
+                    item.Refresh();
                 }
             }
         }
@@ -167,25 +140,6 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_TianFuIconImage.sprite = sp;
-
-            for (int i = 0; i < self.ScrollItemSkillTianFuItems.Count; i++)
-            {
-                Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
-
-                if (scrollItemSkillTianFuItem.uiTransform == null)
-                {
-                    continue;
-                }
-
-                Scroll_Item_SkillTianFuItem uISkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
-                List<int> TianFuList = uISkillTianFuItem.TianFuList;
-                int index = TianFuList.IndexOf(tianfuId);
-                if (index >= 0)
-                {
-                    self.E_ImageSelectImage.gameObject.SetActive(true);
-                    CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, uISkillTianFuItem.GetKuangByIndex(index));
-                }
-            }
         }
 
         public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)

@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillTianFu : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_SkillTianFu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public int TianFuId;
-		public List<List<int>> ShowTianFu = new();
-		public Dictionary<int, EntityRef<Scroll_Item_SkillTianFuItem>> ScrollItemSkillTianFuItems;
-        
-		public LoopVerticalScrollRect E_SkillTianFuItemsLoopVerticalScrollRect
+		public Dictionary<int, List<EntityRef<Scroll_Item_SkillTianFuItemTwo>>> ScrollItemSkillTianFuItemTwos = new();
+		public GameObject PositionItem;
+		public Dictionary<int, List<GameObject>> GameObjectType = new();
+		
+		public UnityEngine.UI.ToggleGroup E_TitleSetToggleGroup
      	{
      		get
      		{
@@ -21,15 +22,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillTianFuItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TitleSetToggleGroup == null )
      			{
-		    		this.m_E_SkillTianFuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_SkillTianFuItems");
+		    		this.m_E_TitleSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_TitleSet");
      			}
-     			return this.m_E_SkillTianFuItemsLoopVerticalScrollRect;
+     			return this.m_E_TitleSetToggleGroup;
      		}
      	}
 
-		public Button E_Btn_TianFu_1Button
+		public UnityEngine.UI.Toggle E_Btn_TianFu_1Toggle
      	{
      		get
      		{
@@ -38,15 +39,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_TianFu_1Button == null )
+     			if( this.m_E_Btn_TianFu_1Toggle == null )
      			{
-		    		this.m_E_Btn_TianFu_1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/TitleSet/E_Btn_TianFu_1");
+		    		this.m_E_Btn_TianFu_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_TitleSet/E_Btn_TianFu_1");
      			}
-     			return this.m_E_Btn_TianFu_1Button;
+     			return this.m_E_Btn_TianFu_1Toggle;
      		}
      	}
 
-		public Image E_Btn_TianFu_1Image
+		public UnityEngine.UI.Toggle E_Btn_TianFu_2Toggle
      	{
      		get
      		{
@@ -55,15 +56,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_TianFu_1Image == null )
+     			if( this.m_E_Btn_TianFu_2Toggle == null )
      			{
-		    		this.m_E_Btn_TianFu_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/TitleSet/E_Btn_TianFu_1");
+		    		this.m_E_Btn_TianFu_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_TitleSet/E_Btn_TianFu_2");
      			}
-     			return this.m_E_Btn_TianFu_1Image;
+     			return this.m_E_Btn_TianFu_2Toggle;
      		}
      	}
 
-		public Button E_Btn_TianFu_2Button
+		public UnityEngine.UI.Button E_ImageIconButton
      	{
      		get
      		{
@@ -72,15 +73,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_TianFu_2Button == null )
+     			if( this.m_E_ImageIconButton == null )
      			{
-		    		this.m_E_Btn_TianFu_2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/TitleSet/E_Btn_TianFu_2");
+		    		this.m_E_ImageIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_ImageIcon");
      			}
-     			return this.m_E_Btn_TianFu_2Button;
+     			return this.m_E_ImageIconButton;
      		}
      	}
 
-		public Image E_Btn_TianFu_2Image
+		public UnityEngine.UI.Image E_ImageIconImage
      	{
      		get
      		{
@@ -89,15 +90,32 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_TianFu_2Image == null )
+     			if( this.m_E_ImageIconImage == null )
      			{
-		    		this.m_E_Btn_TianFu_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/TitleSet/E_Btn_TianFu_2");
+		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_ImageIcon");
      			}
-     			return this.m_E_Btn_TianFu_2Image;
+     			return this.m_E_ImageIconImage;
      		}
      	}
 
-		public Button E_Btn_ActiveTianFuButton
+		public UnityEngine.UI.Text E_PointText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PointText == null )
+     			{
+		    		this.m_E_PointText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/Content/PositionItem/Item_SkillTianFuItemTwo/E_Point");
+     			}
+     			return this.m_E_PointText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_ActiveTianFuButton
      	{
      		get
      		{
@@ -108,13 +126,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ActiveTianFuButton == null )
      			{
-		    		this.m_E_Btn_ActiveTianFuButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_Btn_ActiveTianFu");
+		    		this.m_E_Btn_ActiveTianFuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_ActiveTianFu");
      			}
      			return this.m_E_Btn_ActiveTianFuButton;
      		}
      	}
 
-		public Image E_Btn_ActiveTianFuImage
+		public UnityEngine.UI.Image E_Btn_ActiveTianFuImage
      	{
      		get
      		{
@@ -125,13 +143,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ActiveTianFuImage == null )
      			{
-		    		this.m_E_Btn_ActiveTianFuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_Btn_ActiveTianFu");
+		    		this.m_E_Btn_ActiveTianFuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_ActiveTianFu");
      			}
      			return this.m_E_Btn_ActiveTianFuImage;
      		}
      	}
 
-		public Text E_TextDesc1Text
+		public UnityEngine.UI.Text E_TextDesc1Text
      	{
      		get
      		{
@@ -142,13 +160,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextDesc1Text == null )
      			{
-		    		this.m_E_TextDesc1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_TextDesc1");
+		    		this.m_E_TextDesc1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_TextDesc1");
      			}
      			return this.m_E_TextDesc1Text;
      		}
      	}
 
-		public RectTransform EG_DescListNodeRectTransform
+		public UnityEngine.RectTransform EG_DescListNodeRectTransform
      	{
      		get
      		{
@@ -159,13 +177,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_DescListNodeRectTransform == null )
      			{
-		    		this.m_EG_DescListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_DescListNode");
+		    		this.m_EG_DescListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_DescListNode");
      			}
      			return this.m_EG_DescListNodeRectTransform;
      		}
      	}
 
-		public Image E_ImageSelectImage
+		public UnityEngine.UI.Image E_ImageSelectImage
      	{
      		get
      		{
@@ -176,13 +194,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ImageSelect");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ImageSelect");
      			}
      			return this.m_E_ImageSelectImage;
      		}
      	}
 
-		public Text E_Lab_SkillNameText
+		public UnityEngine.UI.Text E_Lab_SkillNameText
      	{
      		get
      		{
@@ -193,13 +211,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_SkillNameText == null )
      			{
-		    		this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Lab_SkillName");
+		    		this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Lab_SkillName");
      			}
      			return this.m_E_Lab_SkillNameText;
      		}
      	}
 
-		public Image E_TianFuIconImage
+		public UnityEngine.UI.Image E_TianFuIconImage
      	{
      		get
      		{
@@ -210,13 +228,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TianFuIconImage == null )
      			{
-		    		this.m_E_TianFuIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_TianFuIcon");
+		    		this.m_E_TianFuIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_TianFuIcon");
      			}
      			return this.m_E_TianFuIconImage;
      		}
      	}
 
-		public Text E_Text_NeedLvText
+		public UnityEngine.UI.Text E_Text_NeedLvText
      	{
      		get
      		{
@@ -227,9 +245,26 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NeedLvText == null )
      			{
-		    		this.m_E_Text_NeedLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_NeedLv");
+		    		this.m_E_Text_NeedLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_NeedLv");
      			}
      			return this.m_E_Text_NeedLvText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_TianFuLevelText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_TianFuLevelText == null )
+     			{
+		    		this.m_E_Lab_TianFuLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Lab_TianFuLevel");
+     			}
+     			return this.m_E_Lab_TianFuLevelText;
      		}
      	}
 
@@ -247,11 +282,12 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_SkillTianFuItemsLoopVerticalScrollRect = null;
-			this.m_E_Btn_TianFu_1Button = null;
-			this.m_E_Btn_TianFu_1Image = null;
-			this.m_E_Btn_TianFu_2Button = null;
-			this.m_E_Btn_TianFu_2Image = null;
+			this.m_E_TitleSetToggleGroup = null;
+			this.m_E_Btn_TianFu_1Toggle = null;
+			this.m_E_Btn_TianFu_2Toggle = null;
+			this.m_E_ImageIconButton = null;
+			this.m_E_ImageIconImage = null;
+			this.m_E_PointText = null;
 			this.m_E_Btn_ActiveTianFuButton = null;
 			this.m_E_Btn_ActiveTianFuImage = null;
 			this.m_E_TextDesc1Text = null;
@@ -260,22 +296,25 @@ namespace ET.Client
 			this.m_E_Lab_SkillNameText = null;
 			this.m_E_TianFuIconImage = null;
 			this.m_E_Text_NeedLvText = null;
+			this.m_E_Lab_TianFuLevelText = null;
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_SkillTianFuItemsLoopVerticalScrollRect = null;
-		private Button m_E_Btn_TianFu_1Button = null;
-		private Image m_E_Btn_TianFu_1Image = null;
-		private Button m_E_Btn_TianFu_2Button = null;
-		private Image m_E_Btn_TianFu_2Image = null;
-		private Button m_E_Btn_ActiveTianFuButton = null;
-		private Image m_E_Btn_ActiveTianFuImage = null;
-		private Text m_E_TextDesc1Text = null;
-		private RectTransform m_EG_DescListNodeRectTransform = null;
-		private Image m_E_ImageSelectImage = null;
-		private Text m_E_Lab_SkillNameText = null;
-		private Image m_E_TianFuIconImage = null;
-		private Text m_E_Text_NeedLvText = null;
+		private UnityEngine.UI.ToggleGroup m_E_TitleSetToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Btn_TianFu_1Toggle = null;
+		private UnityEngine.UI.Toggle m_E_Btn_TianFu_2Toggle = null;
+		private UnityEngine.UI.Button m_E_ImageIconButton = null;
+		private UnityEngine.UI.Image m_E_ImageIconImage = null;
+		private UnityEngine.UI.Text m_E_PointText = null;
+		private UnityEngine.UI.Button m_E_Btn_ActiveTianFuButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ActiveTianFuImage = null;
+		private UnityEngine.UI.Text m_E_TextDesc1Text = null;
+		private UnityEngine.RectTransform m_EG_DescListNodeRectTransform = null;
+		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+		private UnityEngine.UI.Text m_E_Lab_SkillNameText = null;
+		private UnityEngine.UI.Image m_E_TianFuIconImage = null;
+		private UnityEngine.UI.Text m_E_Text_NeedLvText = null;
+		private UnityEngine.UI.Text m_E_Lab_TianFuLevelText = null;
 		public Transform uiTransform = null;
 	}
 }

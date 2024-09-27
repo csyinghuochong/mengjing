@@ -113,7 +113,7 @@ namespace ET.Client
         {
             if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillTianFu.OnActiveTianFu();
+                self.View.ES_SkillTianFu.RefreshTianFuList();
             }
         }
 
