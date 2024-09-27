@@ -30,25 +30,35 @@ namespace ET.Client
                 return;
             }
 
-            self.uiTransform.gameObject.SetActive(true);
-
-            self.RolePetInfo = rolePetInfo;
-            self.FightIndex = fightIndex;
-
-            PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            self.E_PetIconImage.sprite = sp;
-            self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
-
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
             if (pet == null)
             {
                 self.E_PetHPImage.fillAmount = 0;
                 return;
             }
-            NumericComponentC numericComponent = pet.GetComponent<NumericComponentC>();
+
+            self.uiTransform.gameObject.SetActive(true);
+
+            self.FightIndex = fightIndex;
+            self.Pet = pet;
+
+            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_PetIconImage.sprite = sp;
+            self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
+
+            self.UpdateHp();
+        }
+
+        public static void UpdateHp(this ES_MainPetFight self)
+        {
+            if (self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.Pet.GetComponent<NumericComponentC>();
             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
             self.E_PetHPImage.fillAmount = blood;
@@ -56,7 +66,7 @@ namespace ET.Client
 
         private static void OnClick(this ES_MainPetFight self)
         {
-            if (self.RolePetInfo == null || !self.uiTransform.gameObject.activeSelf)
+            if (self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
             {
                 return;
             }

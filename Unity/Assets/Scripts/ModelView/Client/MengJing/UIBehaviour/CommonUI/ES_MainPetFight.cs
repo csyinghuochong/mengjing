@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_MainPetFight : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public RolePetInfo RolePetInfo;
+		public Unit Pet { get; set; }
 		public int FightIndex;
 		
 		public UnityEngine.UI.Image E_PetHPImage

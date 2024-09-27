@@ -1116,7 +1116,7 @@ namespace ET.Client
 
         # region 宠物出战
 
-        public static void RefreshMainPetFightUI(this DlgMain self)
+        private static void RefreshMainPetFightUI(this DlgMain self)
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
@@ -1130,6 +1130,13 @@ namespace ET.Client
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1] : 0), 2);
             self.View.ES_MainPetFight_2.Refresh(
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0), 3);
+        }
+
+        public static void RefreshMainPetFightHPUI(this DlgMain self)
+        {
+            self.View.ES_MainPetFight_0.UpdateHp();
+            self.View.ES_MainPetFight_1.UpdateHp();
+            self.View.ES_MainPetFight_2.UpdateHp();
         }
 
         public static async ETTask RequestPetFightSwitch(this DlgMain self, int fightindex)

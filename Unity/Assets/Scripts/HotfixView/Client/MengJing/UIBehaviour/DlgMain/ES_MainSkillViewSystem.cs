@@ -265,10 +265,12 @@ namespace ET.Client
                         SkillPro skillPro = new();
                         skillPro.SkillID = skill[i];
                         skillPro.SkillSetType = SkillSetEnum.Skill;
+                        esSkillGrid.uiTransform.gameObject.SetActive(true);
                         esSkillGrid.UpdateSkillInfo(skillPro);
                     }
                     else
                     {
+                        esSkillGrid.uiTransform.gameObject.SetActive(false);
                         esSkillGrid.UpdateSkillInfo(null);
                     }
                 }
