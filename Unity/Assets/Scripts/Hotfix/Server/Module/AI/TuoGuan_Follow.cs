@@ -8,16 +8,9 @@ namespace ET.Server
         {
             Unit unit = aiComponent.GetParent<Unit>();
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
+            int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
-            int petFightIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
-            if (petFightIndex == 0 || petFightIndex - 1 >= petComponentS.PetFightList.Count)
-            {
-                return 1;
-            }
-
-            long masterid = petComponentS.PetFightList[petFightIndex - 1];
-            Unit master = unitComponent.Get(masterid);
+            Unit master = petComponentS.GetFightPetByIndex(petfightindex);
             if (master == null)
             {
                 return 1;

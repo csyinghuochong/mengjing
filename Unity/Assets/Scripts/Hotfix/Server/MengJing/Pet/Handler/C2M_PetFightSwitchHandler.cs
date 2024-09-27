@@ -46,6 +46,8 @@ namespace ET.Server
                 }
             }
 
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, request.PetFightIndex);
+            
             //主控切换到玩家。则停止玩家托管
             //主动切换到宠物。则停止该宠物的AI.  
             if (request.PetFightIndex == 0)
@@ -55,11 +57,10 @@ namespace ET.Server
             }
             else
             {
+                unit.GetComponent<AIComponent>().Stop_2();
                 unit.GetComponent<AIComponent>().InitHeroTuoGuan(unit);
                 unit.GetComponent<AIComponent>().Begin();
             }
-
-            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, request.PetFightIndex);
 
             await ETTask.CompletedTask;
         }
