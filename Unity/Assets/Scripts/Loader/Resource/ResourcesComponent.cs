@@ -130,7 +130,7 @@ namespace ET
 		        if (Application.platform == RuntimePlatform.Android)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
-		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/iOS";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
 		        else
