@@ -25,14 +25,13 @@ namespace ET.Server
             enterFubenInfo.CurrentCell = fubenComponent.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
             
             int sonid = fubenCellInfoNext.sonid;
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             unit.Scene().GetComponent<MapComponent>().SonSceneId = (sonid);
-            unit.Scene().GetComponent<MapComponent>().NavMeshId = ChapterSonConfigCategory.Instance.Get(sonid).MapID;
+            unit.Scene().GetComponent<MapComponent>().NavMeshId = chapterSon.MapID;
 
             //unit.GetComponent<PathfindingComponent>().Update(ChapterSonConfigCategory.Instance.Get(sonid).MapID.ToString());
             //Game.Scene.GetComponent<RecastPathComponent>().Update(ChapterSonConfigCategory.Instance.Get(sonid).MapID);
-
-            ChapterSonConfig chapterSon = ChapterSonConfigCategory.Instance.Get(sonid);
-
+            
             //更新unit出生点坐标
             int[] borpos;
             if (request.DirectionType == 1)

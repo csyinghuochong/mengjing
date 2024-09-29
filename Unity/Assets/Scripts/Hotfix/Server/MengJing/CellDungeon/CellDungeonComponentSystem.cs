@@ -18,11 +18,11 @@ namespace ET.Server
             self.FubenInfo = FubenInfo.Create();
             self.SonFubenInfo = SonFubenInfo.Create();
 
-            self.ChapterConfig = ChapterConfigCategory.Instance.Get(chapterid);
+            self.ChapterConfig = CellChapterConfigCategory.Instance.Get(chapterid);
             self.ChapterId = chapterid;
 
             ////随机生成地图格子
-            ChapterConfig chapterConfig = self.ChapterConfig;
+            CellChapterConfig chapterConfig = self.ChapterConfig;
             int rowTotal = chapterConfig.InitSize[0];
             int lineTotal = chapterConfig.InitSize[1];
 
@@ -77,7 +77,7 @@ namespace ET.Server
                         canWalk.Add(cellIndex);
                     }
 
-                    ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
                     if (chapterSonConfig.NpcList.Contains(1000015))
                     {
                         shenMiNpcCell = cellIndex;
@@ -207,7 +207,7 @@ namespace ET.Server
                 {
                     int cellIndex = canWalk[i];
                     CellDungeonInfo fubenCellInfo = self.GetByCellIndex(cellIndex);
-                    ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
                     string[] createScenceMonsterPro = chapterSonConfig.CreateScenceMonsterPro.Split(';');
                     float rate = float.Parse(createScenceMonsterPro[0]);
                     if (!specialCells.Contains(cellIndex) && rate >= RandomHelper.RandFloat01())
@@ -335,7 +335,7 @@ namespace ET.Server
         public static void GenerateFubenScene(this CellDungeonComponent self, bool pass)
         {
             CellDungeonInfo fubenCellInfo = self.CurrentFubenCell;
-            ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+            CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
 
             //回血道具
             bool huifu = self.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, self.GetCurentIndex());
@@ -445,7 +445,7 @@ namespace ET.Server
                 List<Unit> players = UnitHelper.GetUnitList( self.Scene(), UnitType.Player );
                 
                 long maxHp = players[0].GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MaxHp);
-                ChapterConfig chapterConfig = ChapterConfigCategory.Instance.Get(self.ChapterId);
+                CellChapterConfig chapterConfig = CellChapterConfigCategory.Instance.Get(self.ChapterId);
 
                 M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
 

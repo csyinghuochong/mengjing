@@ -298,7 +298,7 @@ namespace ET.Client
                 switch (sceneTypeEnum)
                 {
                     case (int)SceneTypeEnum.CellDungeon:
-                        self.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
+                        self.E_MapNameText.text = CellChapterConfigCategory.Instance.Get(sceneId).ChapterName;
                         break;
                     case (int)SceneTypeEnum.LocalDungeon:
                         string str = string.Empty;

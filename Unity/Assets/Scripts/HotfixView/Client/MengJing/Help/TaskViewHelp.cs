@@ -547,7 +547,7 @@ namespace ET.Client
         private static string GetDescPassFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
             string progress = GameSettingLanguge.Instance.LoadLocalization("通关副本{0} {1}/{2}");
-            string fubenName = ChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
+            string fubenName = CellChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
             {
@@ -1196,7 +1196,7 @@ namespace ET.Client
         private static string GetDescPassChallengeFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
             string progress = GameSettingLanguge.Instance.LoadLocalization("通关挑战级-{0}副本 {1}/{2}");
-            string chapterName = ChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
+            string chapterName = CellChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
             {
@@ -1209,7 +1209,7 @@ namespace ET.Client
         private static string GetDescPassInfernalFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
             string progress = GameSettingLanguge.Instance.LoadLocalization("通关地狱级-{0}副本 {1}/{2}");
-            string chapterName = ChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
+            string chapterName = CellChapterConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
             {

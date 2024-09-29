@@ -41,11 +41,11 @@ namespace ET
 
         public static int GetChapterByNpc(int npcId)
         {
-            List<ChapterConfig> chapterList = ChapterConfigCategory.Instance.GetAll().Values.ToList();
+            List<CellChapterConfig> chapterList = CellChapterConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < chapterList.Count; i++)
             {
                 int startArea = chapterList[i].StartArea;
-                ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(startArea);
+                CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(startArea);
                 if (chapterSonConfig.NpcList.Contains(npcId))
                 {
                     return chapterList[i].Id;
@@ -102,11 +102,11 @@ namespace ET
 
         public static int GetLevelIdByMonster(int monster)
         {
-            List<ChapterConfig> chapterList = ChapterConfigCategory.Instance.GetAll().Values.ToList();
+            List<CellChapterConfig> chapterList = CellChapterConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < chapterList.Count; i++)
             {
                 int startArea = chapterList[i].StartArea;
-                ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(startArea);
+                CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(startArea);
                 if (chapterSonConfig.CreateMonster.Contains(monster.ToString()))
                 {
                     return chapterList[i].Id;
