@@ -41,7 +41,7 @@ namespace ET
 
         public static int GetChapterByNpc(int npcId)
         {
-            List<CellChapterConfig> chapterList = CellChapterConfigCategory.Instance.GetAll().Values.ToList();
+            List<CellGenerateConfig> chapterList = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < chapterList.Count; i++)
             {
                 int startArea = chapterList[i].StartArea;

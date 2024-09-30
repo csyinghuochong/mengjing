@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class CellChapterConfigCategory : Singleton<CellChapterConfigCategory>, IMerge
+    public partial class CellGenerateConfigCategory : Singleton<CellGenerateConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, CellChapterConfig> dict = new();
+        private Dictionary<int, CellGenerateConfig> dict = new();
 		
         public void Merge(object o)
         {
-            CellChapterConfigCategory s = o as CellChapterConfigCategory;
+            CellGenerateConfigCategory s = o as CellGenerateConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public CellChapterConfig Get(int id)
+        public CellGenerateConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out CellChapterConfig item);
+            this.dict.TryGetValue(id, out CellGenerateConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (CellChapterConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (CellGenerateConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, CellChapterConfig> GetAll()
+        public Dictionary<int, CellGenerateConfig> GetAll()
         {
             return this.dict;
         }
 
-        public CellChapterConfig GetOne()
+        public CellGenerateConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,7 +57,7 @@ namespace ET
         }
     }
 
-	public partial class CellChapterConfig: ProtoObject, IConfig
+	public partial class CellGenerateConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }

@@ -48,7 +48,7 @@ namespace ET.Server
         public int ChapterId { get; set; }
         public long EnterTime { get; set; }
         public long HurtValue { get; set; }
-        public CellChapterConfig ChapterConfig { get; set; }
+        public CellGenerateConfig ChapterConfig { get; set; }
         public int FubenDifficulty { get; set; }
 
         public FubenInfo FubenInfo { get; set; } = FubenInfo.Create();

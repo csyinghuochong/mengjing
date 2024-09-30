@@ -17,11 +17,11 @@ namespace ET.Server
         {
             self.FubenInfo = FubenInfo.Create();
             self.SonFubenInfo = SonFubenInfo.Create();
-            self.ChapterConfig = CellChapterConfigCategory.Instance.Get(chapterid);
+            self.ChapterConfig = CellGenerateConfigCategory.Instance.Get(chapterid);
             self.ChapterId = chapterid;
 
             ////随机生成地图格子
-            CellChapterConfig chapterConfig = self.ChapterConfig;
+            CellGenerateConfig chapterConfig = self.ChapterConfig;
             int rowTotal = chapterConfig.InitSize[0];
             int lineTotal = chapterConfig.InitSize[1];
 
@@ -444,7 +444,7 @@ namespace ET.Server
                 List<Unit> players = UnitHelper.GetUnitList( self.Scene(), UnitType.Player );
                 
                 long maxHp = players[0].GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MaxHp);
-                CellChapterConfig chapterConfig = CellChapterConfigCategory.Instance.Get(self.ChapterId);
+                CellGenerateConfig chapterConfig = CellGenerateConfigCategory.Instance.Get(self.ChapterId);
 
                 M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
 
