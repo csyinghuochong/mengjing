@@ -77,7 +77,7 @@ namespace ET.Client
                     paramss = scenepath;
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
-                    paramss = CellSonDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
+                    paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
                 case (int)SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(chapterId).MapID.ToString();
