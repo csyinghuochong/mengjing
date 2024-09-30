@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class CellSectionConfigCategory : Singleton<CellSectionConfigCategory>, IMerge
+    public partial class CellChapterConfigCategory : Singleton<CellChapterConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, CellSectionConfig> dict = new();
+        private Dictionary<int, CellChapterConfig> dict = new();
 		
         public void Merge(object o)
         {
-            CellSectionConfigCategory s = o as CellSectionConfigCategory;
+            CellChapterConfigCategory s = o as CellChapterConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public CellSectionConfig Get(int id)
+        public CellChapterConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out CellSectionConfig item);
+            this.dict.TryGetValue(id, out CellChapterConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (CellSectionConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (CellChapterConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, CellSectionConfig> GetAll()
+        public Dictionary<int, CellChapterConfig> GetAll()
         {
             return this.dict;
         }
 
-        public CellSectionConfig GetOne()
+        public CellChapterConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,7 +57,7 @@ namespace ET
         }
     }
 
-	public partial class CellSectionConfig: ProtoObject, IConfig
+	public partial class CellChapterConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
