@@ -76,7 +76,7 @@ namespace ET.Server
                         canWalk.Add(cellIndex);
                     }
 
-                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+                    CellSonDungeonConfig chapterSonConfig = CellSonDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
                     if (chapterSonConfig.NpcList.Contains(1000015))
                     {
                         shenMiNpcCell = cellIndex;
@@ -206,7 +206,7 @@ namespace ET.Server
                 {
                     int cellIndex = canWalk[i];
                     CellDungeonInfo fubenCellInfo = self.GetByCellIndex(cellIndex);
-                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+                    CellSonDungeonConfig chapterSonConfig = CellSonDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
                     string[] createScenceMonsterPro = chapterSonConfig.CreateScenceMonsterPro.Split(';');
                     float rate = float.Parse(createScenceMonsterPro[0]);
                     if (!specialCells.Contains(cellIndex) && rate >= RandomHelper.RandFloat01())
@@ -334,7 +334,7 @@ namespace ET.Server
         public static void GenerateFubenScene(this CellDungeonComponentS self, bool pass)
         {
             CellDungeonInfo fubenCellInfo = self.CurrentFubenCell;
-            CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
+            CellSonDungeonConfig chapterSonConfig = CellSonDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
 
             //回血道具
             bool huifu = self.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, self.GetCurentIndex());

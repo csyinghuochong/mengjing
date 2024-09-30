@@ -55,7 +55,7 @@ namespace ET.Server
             {
                 case SceneTypeEnum.CellDungeon:
                     int sonid = scene.GetComponent<CellDungeonComponentS>().CurrentFubenCell.sonid;
-                    CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
+                    CellSonDungeonConfig chapterSon = CellSonDungeonConfigCategory.Instance.Get(sonid);
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                     //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
                     //更新unit坐标

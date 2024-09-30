@@ -45,7 +45,7 @@ namespace ET
             for (int i = 0; i < chapterList.Count; i++)
             {
                 int startArea = chapterList[i].StartArea;
-                CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(startArea);
+                CellSonDungeonConfig chapterSonConfig = CellSonDungeonConfigCategory.Instance.Get(startArea);
                 if (chapterSonConfig.NpcList.Contains(npcId))
                 {
                     return chapterList[i].Id;

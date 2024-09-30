@@ -1030,7 +1030,7 @@ namespace ET.Client
             {
                 string langStr_4 = GameSettingLanguge.Instance.LoadLocalization("挖宝位置");
                 string itemPar = baginfo.ItemPar;
-                string scenceName = CellDungeonConfigCategory.Instance.Get(int.Parse(itemPar)).Name;
+                string scenceName = CellSonDungeonConfigCategory.Instance.Get(int.Parse(itemPar)).Name;
                 Text_ItemDes = Text_ItemDes + "\n" + "\n" + langStr_4 + ":" + scenceName;
                 i1 = i1 + 2;
             }
