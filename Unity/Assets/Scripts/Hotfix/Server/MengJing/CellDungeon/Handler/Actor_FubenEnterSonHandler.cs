@@ -25,7 +25,7 @@ namespace ET.Server
             enterFubenInfo.CurrentCell = fubenComponentS.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
             
             int sonid = fubenCellInfoNext.sonid;
-            CellSonDungeonConfig chapterSon = CellSonDungeonConfigCategory.Instance.Get(sonid);
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             unit.Scene().GetComponent<MapComponent>().SonSceneId = (sonid);
             unit.Scene().GetComponent<MapComponent>().NavMeshId = chapterSon.MapID;
 
