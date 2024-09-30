@@ -81,6 +81,8 @@ namespace ET
 		public string TransmitPosi { get; set; }
 		/// <summary>怪物生成坐标点</summary>
 		public int CreateMonster { get; set; }
+		/// <summary>特殊怪</summary>
+		public string CreateScenceMonsterPro { get; set; }
 
 	}
 }
