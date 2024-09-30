@@ -82,7 +82,7 @@ namespace ET
 
         public static int GetChapterSection(int chapterId)
         {
-            List<ChapterSectionConfig> chapterSectionConfigs = ChapterSectionConfigCategory.Instance.GetAll().Values.ToList();
+            List<CellSectionConfig> chapterSectionConfigs = CellSectionConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < chapterSectionConfigs.Count; i++)
             {
                 List<int> RandomArea = new List<int>(chapterSectionConfigs[i].RandomArea);

@@ -7,28 +7,28 @@ using System.ComponentModel;
 namespace ET
 {
     [Config]
-    public partial class ChapterSectionConfigCategory : Singleton<ChapterSectionConfigCategory>, IMerge
+    public partial class CellSectionConfigCategory : Singleton<CellSectionConfigCategory>, IMerge
     {
         [BsonElement]
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        private Dictionary<int, ChapterSectionConfig> dict = new();
+        private Dictionary<int, CellSectionConfig> dict = new();
 		
         public void Merge(object o)
         {
-            ChapterSectionConfigCategory s = o as ChapterSectionConfigCategory;
+            CellSectionConfigCategory s = o as CellSectionConfigCategory;
             foreach (var kv in s.dict)
             {
                 this.dict.Add(kv.Key, kv.Value);
             }
         }
 		
-        public ChapterSectionConfig Get(int id)
+        public CellSectionConfig Get(int id)
         {
-            this.dict.TryGetValue(id, out ChapterSectionConfig item);
+            this.dict.TryGetValue(id, out CellSectionConfig item);
 
             if (item == null)
             {
-                throw new Exception($"配置找不到，配置表名: {nameof (ChapterSectionConfig)}，配置id: {id}");
+                throw new Exception($"配置找不到，配置表名: {nameof (CellSectionConfig)}，配置id: {id}");
             }
 
             return item;
@@ -39,12 +39,12 @@ namespace ET
             return this.dict.ContainsKey(id);
         }
 
-        public Dictionary<int, ChapterSectionConfig> GetAll()
+        public Dictionary<int, CellSectionConfig> GetAll()
         {
             return this.dict;
         }
 
-        public ChapterSectionConfig GetOne()
+        public CellSectionConfig GetOne()
         {
             if (this.dict == null || this.dict.Count <= 0)
             {
@@ -57,7 +57,7 @@ namespace ET
         }
     }
 
-	public partial class ChapterSectionConfig: ProtoObject, IConfig
+	public partial class CellSectionConfig: ProtoObject, IConfig
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }

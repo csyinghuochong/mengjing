@@ -17,7 +17,6 @@ namespace ET.Server
         {
             self.FubenInfo = FubenInfo.Create();
             self.SonFubenInfo = SonFubenInfo.Create();
-
             self.ChapterConfig = CellChapterConfigCategory.Instance.Get(chapterid);
             self.ChapterId = chapterid;
 
