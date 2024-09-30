@@ -79,12 +79,8 @@ namespace ET
 		public int[] BornPosRight { get; set; }
 		/// <summary>传送门坐标</summary>
 		public string TransmitPosi { get; set; }
-		/// <summary>特殊场景怪物生成坐标点</summary>
-		public string CreateScenceMonsterPro { get; set; }
-		/// <summary>特殊场景怪物生成坐标点</summary>
-		public string CreateScenceMonster { get; set; }
 		/// <summary>怪物生成坐标点</summary>
-		public string CreateMonster { get; set; }
+		public int CreateMonster { get; set; }
 
 	}
 }
