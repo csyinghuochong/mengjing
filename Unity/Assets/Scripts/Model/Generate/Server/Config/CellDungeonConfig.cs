@@ -83,6 +83,8 @@ namespace ET
 		public int CreateMonster { get; set; }
 		/// <summary>特殊怪</summary>
 		public string CreateScenceMonsterPro { get; set; }
+		/// <summary>特殊怪</summary>
+		public string CreateScenceMonster { get; set; }
 
 	}
 }
