@@ -99,23 +99,7 @@ namespace ET
 
             return 0;
         }
-
-        public static int GetLevelIdByMonster(int monster)
-        {
-            List<CellChapterConfig> chapterList = CellChapterConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < chapterList.Count; i++)
-            {
-                int startArea = chapterList[i].StartArea;
-                CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(startArea);
-                if (chapterSonConfig.CreateMonster.Contains(monster.ToString()))
-                {
-                    return chapterList[i].Id;
-                }
-            }
-
-            return 0;
-        }
-
+        
         /// <summary>
         /// 跑环任务
         /// </summary>
