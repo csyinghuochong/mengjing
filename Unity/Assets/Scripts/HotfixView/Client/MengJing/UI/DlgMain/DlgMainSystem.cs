@@ -426,7 +426,8 @@ namespace ET.Client
             self.View.E_Btn_RankButton.AddListener(self.OnBtn_RankButton);
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
-
+            self.View.E_Btn_CellDungeon.AddListener(self.OnBtn_CellDungeon);
+            
             self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
             self.View.EG_Btn_LvRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
@@ -1326,6 +1327,11 @@ namespace ET.Client
         private static void OnBtn_PaiMaiHangButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMai).Coroutine();
+        }
+
+        private static void OnBtn_CellDungeon(this DlgMain self)
+        {
+            Log.Debug("OnBtn_CellDungeon");
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)
