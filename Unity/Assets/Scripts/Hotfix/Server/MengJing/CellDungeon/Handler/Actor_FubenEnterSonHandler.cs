@@ -9,11 +9,11 @@ namespace ET.Server
         {
             unit.GetComponent<MoveComponent>().Stop(false);
             unit.GetComponent<SkillManagerComponentS>().OnDispose();
-            CellDungeonComponent fubenComponent = unit.Scene().GetComponent<CellDungeonComponent>();
-            CellDungeonInfo fubenCellInfoCurt = fubenComponent.GetByCellIndex(request.CurrentCell);
+            CellDungeonComponentS fubenComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
+            CellDungeonInfo fubenCellInfoCurt = fubenComponentS.GetByCellIndex(request.CurrentCell);
             fubenCellInfoCurt.pass = true;
-            CellDungeonInfo fubenCellInfoNext = fubenComponent.GetNextSonCell(request.CurrentCell, request.DirectionType);
-            fubenComponent.CurrentFubenCell = fubenCellInfoNext;
+            CellDungeonInfo fubenCellInfoNext = fubenComponentS.GetNextSonCell(request.CurrentCell, request.DirectionType);
+            fubenComponentS.CurrentFubenCell = fubenCellInfoNext;
             if (!fubenCellInfoNext.pass)
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
@@ -21,8 +21,8 @@ namespace ET.Server
 
             SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
             enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
-            enterFubenInfo.PassableFlag = fubenComponent.GetPassableFlag();
-            enterFubenInfo.CurrentCell = fubenComponent.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
+            enterFubenInfo.PassableFlag = fubenComponentS.GetPassableFlag();
+            enterFubenInfo.CurrentCell = fubenComponentS.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
             
             int sonid = fubenCellInfoNext.sonid;
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
@@ -46,10 +46,10 @@ namespace ET.Server
             unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
             unit.Rotation = quaternion.identity;
 
-            CellDungeonComponentSystem.RemoveAllNoSelf(unit);
+            CellDungeonComponentSSystem.RemoveAllNoSelf(unit);
             
             //创建副本内的各种Unit
-            fubenComponent.GenerateFubenScene( fubenCellInfoNext.pass);
+            fubenComponentS.GenerateFubenScene( fubenCellInfoNext.pass);
 
             //自己通知给周围人
             //UnitHelper.BroadcastCreateUnit(unit.DomainScene(), unit);

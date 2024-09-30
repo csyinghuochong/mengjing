@@ -218,7 +218,7 @@ namespace ET.Server
                     domainScene.GetComponent<PetFubenComponent>().OnKillEvent();
                     break;
                 case SceneTypeEnum.CellDungeon:
-                    domainScene.GetComponent<CellDungeonComponent>().OnKillEvent();
+                    domainScene.GetComponent<CellDungeonComponentS>().OnKillEvent();
                     break;
                 case SceneTypeEnum.PetTianTi:
                     domainScene.GetComponent<PetTianTiComponent>().OnKillEvent();

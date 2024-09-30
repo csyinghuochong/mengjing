@@ -4,16 +4,16 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (CellDungeonComponent))]
-    [FriendOf(typeof (CellDungeonComponent))]
-    public static partial class CellDungeonComponentSystem
+    [EntitySystemOf(typeof (CellDungeonComponentS))]
+    [FriendOf(typeof (CellDungeonComponentS))]
+    public static partial class CellDungeonComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this CellDungeonComponent self)
+        private static void Awake(this CellDungeonComponentS self)
         {
         }
 
-        public static void InitFubenCell(this CellDungeonComponent self, int chapterid)
+        public static void InitFubenCell(this CellDungeonComponentS self, int chapterid)
         {
             self.FubenInfo = FubenInfo.Create();
             self.SonFubenInfo = SonFubenInfo.Create();
@@ -219,7 +219,7 @@ namespace ET.Server
             }
         }
 
-        public static CellDungeonInfo GetNextSonCell(this CellDungeonComponent self, int cellIndex, int directionType)
+        public static CellDungeonInfo GetNextSonCell(this CellDungeonComponentS self, int cellIndex, int directionType)
         {
             int row = cellIndex % self.ChapterConfig.InitSize[0];
             int line = cellIndex / self.ChapterConfig.InitSize[0];
@@ -248,18 +248,18 @@ namespace ET.Server
             return null;
         }
 
-        public static int GetCurentIndex(this CellDungeonComponent self)
+        public static int GetCurentIndex(this CellDungeonComponentS self)
         {
             return self.GetCellIndex(self.CurrentFubenCell.row, self.CurrentFubenCell.line);
         }
 
-        public static int GetCellIndex(this CellDungeonComponent self, int row, int line)
+        public static int GetCellIndex(this CellDungeonComponentS self, int row, int line)
         {
             int rowTotal = self.ChapterConfig.InitSize[0];
             return line * rowTotal + row;
         }
 
-        public static CellDungeonInfo GetByCellIndex(this CellDungeonComponent self, int cellIndex)
+        public static CellDungeonInfo GetByCellIndex(this CellDungeonComponentS self, int cellIndex)
         {
             int row = cellIndex % self.ChapterConfig.InitSize[0];
             int line = cellIndex / self.ChapterConfig.InitSize[0];
@@ -278,7 +278,7 @@ namespace ET.Server
             }
         }
 
-        public static CellDungeonInfo GetFubenCell(this CellDungeonComponent self, int row, int line)
+        public static CellDungeonInfo GetFubenCell(this CellDungeonComponentS self, int row, int line)
         {
             if (row >= 0 && row < self.ChapterConfig.InitSize[0] && line >= 0 && line < self.ChapterConfig.InitSize[1])
             {
@@ -288,13 +288,13 @@ namespace ET.Server
             return null;
         }
 
-        public static bool GetCellPassable(this CellDungeonComponent self, int row, int line)
+        public static bool GetCellPassable(this CellDungeonComponentS self, int row, int line)
         {
             CellDungeonInfo fubenCell = self.GetFubenCell(row, line);
             return fubenCell != null? (fubenCell.ctype != (byte)CellDungeonStatu.Impassable) : false;
         }
 
-        public static List<int> GetPassableFlag(this CellDungeonComponent self, CellDungeonInfo fubenCell = null)
+        public static List<int> GetPassableFlag(this CellDungeonComponentS self, CellDungeonInfo fubenCell = null)
         {
             List<int> flags = new List<int>() { 0, 0, 0, 0 };
             fubenCell = fubenCell != null? fubenCell : self.CurrentFubenCell;
@@ -314,12 +314,12 @@ namespace ET.Server
             return flags;
         }
 
-        public static void OnRecivedHurt(this CellDungeonComponent self, long hurtvalue)
+        public static void OnRecivedHurt(this CellDungeonComponentS self, long hurtvalue)
         {
             self.HurtValue += hurtvalue;
         }
 
-        public static bool HaveFubenCellNpc(this CellDungeonComponent self, int npcType, int cell)
+        public static bool HaveFubenCellNpc(this CellDungeonComponentS self, int npcType, int cell)
         {
             for (int i = 0; i < self.FubenInfo.FubenCellNpcs.Count; i++)
             {
@@ -332,7 +332,7 @@ namespace ET.Server
             return false;
         }
 
-        public static void GenerateFubenScene(this CellDungeonComponent self, bool pass)
+        public static void GenerateFubenScene(this CellDungeonComponentS self, bool pass)
         {
             CellDungeonInfo fubenCellInfo = self.CurrentFubenCell;
             CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
@@ -436,7 +436,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnKillEvent(this CellDungeonComponent self)
+        public static void OnKillEvent(this CellDungeonComponentS self)
         {
             if (self.IsAllMonsterDead() && self.CurrentFubenCell.ctype == (int)CellDungeonStatu.End)
             {
@@ -504,14 +504,14 @@ namespace ET.Server
             }
         }
 
-        public static void InitMysteryItemInfos(this CellDungeonComponent self)
+        public static void InitMysteryItemInfos(this CellDungeonComponentS self)
         {
             self.MysteryItemInfos.Clear();
             int openServerDay = ServerHelper.GetServeOpenrDay( self.Zone());
             self.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
         }
 
-        public static bool IsAllMonsterDead(this CellDungeonComponent self)
+        public static bool IsAllMonsterDead(this CellDungeonComponentS self)
         {
             List<Unit> players = UnitHelper.GetUnitList( self.Scene(), UnitType.Player );
             return FubenHelp.IsAllMonsterDead(self.Scene(), players[0]);

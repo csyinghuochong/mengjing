@@ -54,14 +54,14 @@ namespace ET.Server
             switch (request.SceneType)
             {
                 case SceneTypeEnum.CellDungeon:
-                    int sonid = scene.GetComponent<CellDungeonComponent>().CurrentFubenCell.sonid;
+                    int sonid = scene.GetComponent<CellDungeonComponentS>().CurrentFubenCell.sonid;
                     CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                     //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
                     //更新unit坐标
                     unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
                     unit.Rotation = quaternion.identity;
-                    scene.GetComponent<CellDungeonComponent>().GenerateFubenScene(false);
+                    scene.GetComponent<CellDungeonComponentS>().GenerateFubenScene(false);
                     break;
                 case (int)SceneTypeEnum.PetMing:
                 case (int)SceneTypeEnum.PetDungeon:

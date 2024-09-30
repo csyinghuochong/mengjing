@@ -43,7 +43,7 @@ namespace ET.Server
     /// 副本组件
     /// </summary>
     [ComponentOf(typeof(Scene))]
-    public class CellDungeonComponent : Entity, IAwake
+    public class CellDungeonComponentS : Entity, IAwake
     {
         public int ChapterId { get; set; }
         public long EnterTime { get; set; }

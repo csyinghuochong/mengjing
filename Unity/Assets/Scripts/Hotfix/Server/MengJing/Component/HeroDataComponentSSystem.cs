@@ -609,7 +609,7 @@ namespace ET.Server
                  switch (sceneType)
                  {
                      case SceneTypeEnum.CellDungeon:
-                         fubenDifficulty = nowUnit.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                         fubenDifficulty = nowUnit.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                          break;
                      case SceneTypeEnum.LocalDungeon:
                          if (monsterConfig.MonsterType == MonsterTypeEnum.Boss)

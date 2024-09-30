@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, Actor_EnterFubenRequest request, Actor_EnterFubenResponse response)
         {
 			CellDungeonInfo curCell = null;
-			CellDungeonComponent fubenComponent = null;
+			CellDungeonComponentS fubenComponentS = null;
 			unit.GetComponent<MoveComponent>().Stop(false);
 			unit.GetComponent<UserInfoComponentS>().UpdateRoleData(  UserDataType.PiLao, "-1");
 
@@ -20,11 +20,11 @@ namespace ET.Server
 				long fubenid = IdGenerater.Instance.GenerateId();
 				long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 				Scene fubnescene = GateMapFactory.Create(unit.Scene(), fubenid, fubenInstanceId,  "Fuben" + fubenid.ToString());
-				fubenComponent = fubnescene.AddComponent<CellDungeonComponent>();
-				fubenComponent.FubenDifficulty = request.Difficulty;
-				fubenComponent.InitFubenCell(request.ChapterId);
-				curCell = fubenComponent.CurrentFubenCell;
-				fubenComponent.EnergySkills = new List<int>() { 64000001, 64000002, 64000003, 64000004, 64000005, 64000006, 64000007, 64000008 };
+				fubenComponentS = fubnescene.AddComponent<CellDungeonComponentS>();
+				fubenComponentS.FubenDifficulty = request.Difficulty;
+				fubenComponentS.InitFubenCell(request.ChapterId);
+				curCell = fubenComponentS.CurrentFubenCell;
+				fubenComponentS.EnergySkills = new List<int>() { 64000001, 64000002, 64000003, 64000004, 64000005, 64000006, 64000007, 64000008 };
 				MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
 				mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, request.ChapterId, curCell.sonid);
 				mapComponent.NavMeshId = CellDungeonConfigCategory.Instance.Get(curCell.sonid).MapID;
@@ -34,10 +34,10 @@ namespace ET.Server
 			}
 			else
 			{
-				fubenComponent = unit.Scene().GetComponent<CellDungeonComponent>();
-				CellDungeonComponentSystem.RemoveAllNoSelf(unit);
-				fubenComponent.InitFubenCell(request.ChapterId);
-				curCell = fubenComponent.CurrentFubenCell;
+				fubenComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
+				CellDungeonComponentSSystem.RemoveAllNoSelf(unit);
+				fubenComponentS.InitFubenCell(request.ChapterId);
+				curCell = fubenComponentS.CurrentFubenCell;
 				CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(curCell.sonid);
 				MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
 				mapComponent.SonSceneId = (curCell.sonid);
@@ -45,19 +45,19 @@ namespace ET.Server
 
 				unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
 				unit.Rotation = quaternion.identity;
-				fubenComponent.GenerateFubenScene( false);
+				fubenComponentS.GenerateFubenScene( false);
 				
 				//UnitHelper.BroadcastCreateUnit(unit.DomainScene(), unit);
 			}
 
-			fubenComponent.HurtValue = 0;
-			fubenComponent.EnterTime = TimeHelper.ServerNow();
+			fubenComponentS.HurtValue = 0;
+			fubenComponentS.EnterTime = TimeHelper.ServerNow();
 
-			fubenComponent.SonFubenInfo.SonSceneId = curCell.sonid;
-			fubenComponent.SonFubenInfo.CurrentCell = fubenComponent.FubenInfo.StartCell;
-			fubenComponent.SonFubenInfo.PassableFlag = fubenComponent.GetPassableFlag();
-			response.FubenInfo = fubenComponent.FubenInfo;
-			response.SonFubenInfo = fubenComponent.SonFubenInfo;
+			fubenComponentS.SonFubenInfo.SonSceneId = curCell.sonid;
+			fubenComponentS.SonFubenInfo.CurrentCell = fubenComponentS.FubenInfo.StartCell;
+			fubenComponentS.SonFubenInfo.PassableFlag = fubenComponentS.GetPassableFlag();
+			response.FubenInfo = fubenComponentS.FubenInfo;
+			response.SonFubenInfo = fubenComponentS.SonFubenInfo;
 			await ETTask.CompletedTask;
         }
     }

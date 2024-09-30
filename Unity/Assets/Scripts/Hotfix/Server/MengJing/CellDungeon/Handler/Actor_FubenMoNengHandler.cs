@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Unit unit, Actor_FubenMoNengRequest request, Actor_FubenMoNengResponse response)
         {
-            response.MysteryItemInfos .AddRange(unit.Scene().GetComponent<CellDungeonComponent>().MysteryItemInfos); 
+            response.MysteryItemInfos .AddRange(unit.Scene().GetComponent<CellDungeonComponentS>().MysteryItemInfos); 
             await ETTask.CompletedTask;
         }
     }

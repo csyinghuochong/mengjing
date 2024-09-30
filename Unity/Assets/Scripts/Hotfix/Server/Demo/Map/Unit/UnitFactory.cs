@@ -627,7 +627,7 @@ namespace ET.Server
                 dropAdd_Pro += main.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Base_DropAdd_Pro_Add);
                 if (sceneType == (int)SceneTypeEnum.CellDungeon)
                 {
-                    fubenDifficulty = bekill.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                    fubenDifficulty = bekill.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                 }
 
                 if (sceneType == (int)SceneTypeEnum.LocalDungeon)

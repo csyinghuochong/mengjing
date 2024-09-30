@@ -53,7 +53,7 @@ namespace ET.Server
 
                 if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon) //个人副本接受到的伤害
                 {
-                    DomainScene.GetComponent<CellDungeonComponent>().OnRecivedHurt(args.OldValue - args.NewValue);
+                    DomainScene.GetComponent<CellDungeonComponentS>().OnRecivedHurt(args.OldValue - args.NewValue);
                 }
 
                 if (sceneTypeEnum == (int)SceneTypeEnum.TeamDungeon && player != null) //组队副本输出伤害

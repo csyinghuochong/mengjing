@@ -76,7 +76,7 @@ namespace ET.Server
                 int fubenDifficulty = (int)FubenDifficulty.None;
                 if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
                 {
-                    fubenDifficulty = (int)self.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                    fubenDifficulty = (int)self.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                 }
                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
                 {
