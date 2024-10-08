@@ -27,8 +27,11 @@ namespace ET.Server
                 case UnitType.DropItem:
                     createUnits.Drops.Add(CreateDropInfo(sendUnit));
                     break;
-                case UnitType.Chuansong:
+                case UnitType.Transfers:
+                case UnitType.CellTransfers:
                     createUnits.Transfers.Add(CreateTransferInfo(sendUnit));
+                    break;
+                default:
                     break;
             }
         }
@@ -128,6 +131,7 @@ namespace ET.Server
             dropinfo.Z = unit.Position.z;
             return dropinfo;
         }
+
 
         public static TransferInfo CreateTransferInfo(Unit unit)
         {

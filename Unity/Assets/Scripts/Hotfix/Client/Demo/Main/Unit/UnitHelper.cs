@@ -35,7 +35,7 @@ namespace ET.Client
         public static bool IsCanBeAttack(this Unit self, bool checkdead = true)
         {
             if (self.Type == UnitType.Npc || self.Type == UnitType.DropItem
-                || self.Type == UnitType.Chuansong || self.Type == UnitType.JingLing
+                || self.Type == UnitType.Transfers || self.Type == UnitType.JingLing
                 || self.Type == UnitType.Pasture || self.Type == UnitType.Plant
                 || self.Type == UnitType.Bullet || self.Type == UnitType.Stall)
                 return false;

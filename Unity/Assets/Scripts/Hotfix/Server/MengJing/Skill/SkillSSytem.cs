@@ -186,7 +186,7 @@ namespace ET.Server
                      continue;
                  }
 
-                 if (uu.Type == UnitType.Npc || uu.Type == UnitType.Chuansong)
+                 if (uu.Type == UnitType.Npc || uu.Type == UnitType.Transfers)
                  {
                      continue;
                  }

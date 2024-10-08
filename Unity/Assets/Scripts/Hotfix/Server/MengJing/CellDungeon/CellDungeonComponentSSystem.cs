@@ -426,7 +426,7 @@ namespace ET.Server
                         float.Parse(position[2]) * 0.01f);
                     //创建传送点Unit
                     Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
-                    chuansong.Type = UnitType.Chuansong;
+                    chuansong.Type = UnitType.CellTransfers;
                     self.Scene().GetComponent<UnitComponent>().Add(chuansong);
                     ChuansongComponent chuansongComponent = chuansong.AddComponent<ChuansongComponent>();
                     chuansongComponent.CellIndex = self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line); //走过的格子

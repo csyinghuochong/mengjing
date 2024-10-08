@@ -62,7 +62,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (unit.Type == UnitType.Chuansong)
+                if (unit.Type == UnitType.Transfers)
                 {
                     unit.UpdateUITime = curTime;
                     unit.GetComponent<UITransferHpComponent>()?.OnCheckChuanSong(self);

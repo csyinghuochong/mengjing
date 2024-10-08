@@ -127,7 +127,7 @@ namespace ET.Server
                     chuansong.AddComponent<UnitInfoComponent>();
                     chuansong.AddComponent<NumericComponentS>();
                     chuansong.ConfigId = transferId;
-                    chuansong.Type = UnitType.Chuansong;
+                    chuansong.Type = UnitType.Transfers;
                     chuansong.Position = vector3;
                     chuansong.AddComponent<AOIEntity, int, float3>(9 * 1000, chuansong.Position);
                 }

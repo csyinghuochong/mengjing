@@ -194,7 +194,7 @@ namespace ET.Client
             for(int i = 0; i < entities.Count; i++)
             {
                 Unit unit = entities[i] as Unit;
-                if (unit.Type == UnitType.Chuansong)
+                if (unit.Type == UnitType.Transfers)
                 {
                     unit.GetComponent<ChuansongComponent>().ChuanSongOpen = true;
                 }

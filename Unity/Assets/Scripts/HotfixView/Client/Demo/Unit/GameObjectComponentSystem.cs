@@ -254,7 +254,10 @@ namespace ET.Client
                     string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/" + assetPath);
                     break;
-                case UnitType.Chuansong:
+                case UnitType.Transfers:
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
+                    break;
+                case UnitType.CellTransfers:
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
                     break;
                 case UnitType.JingLing:
@@ -777,7 +780,14 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>();
                     unit.AddComponent<UIDropComponent>().InitData(dropComponent.DropInfo);
                     break;
-                case UnitType.Chuansong:
+                case UnitType.Transfers:
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.name = unit.Id.ToString();
+                    unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
+                    break;
+                case UnitType.CellTransfers:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
@@ -798,15 +808,6 @@ namespace ET.Client
                             break;
                         default:
                             break;
-                    }
-
-                    if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
-                    {
-                        unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
-                    }
-                    if (mapComponent.SceneType == SceneTypeEnum.CellDungeon)
-                    {
-                       
                     }
                     break;
                 case UnitType.JingLing:
