@@ -1218,6 +1218,7 @@ message TransferInfo
      float Y = 6; 
      float Z = 7;
      int32 TransferId = 8;
+	 int32 UnitType = 9;
 }
 
 

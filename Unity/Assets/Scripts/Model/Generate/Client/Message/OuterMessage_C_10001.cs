@@ -5253,6 +5253,9 @@ namespace ET
         [MemoryPackOrder(7)]
         public int TransferId { get; set; }
 
+        [MemoryPackOrder(8)]
+        public int UnitType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -5267,6 +5270,7 @@ namespace ET
             this.Y = default;
             this.Z = default;
             this.TransferId = default;
+            this.UnitType = default;
 
             ObjectPool.Instance.Recycle(this);
         }

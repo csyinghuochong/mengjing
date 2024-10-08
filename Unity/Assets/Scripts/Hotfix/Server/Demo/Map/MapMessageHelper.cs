@@ -132,12 +132,11 @@ namespace ET.Server
             return dropinfo;
         }
 
-
         public static TransferInfo CreateTransferInfo(Unit unit)
         {
             TransferInfo transferinfo = TransferInfo.Create();
             ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
-
+            transferinfo.UnitType = unit.Type;
             transferinfo.UnitId = unit.Id;
             transferinfo.X = unit.Position.x;
             transferinfo.Y = unit.Position.y;

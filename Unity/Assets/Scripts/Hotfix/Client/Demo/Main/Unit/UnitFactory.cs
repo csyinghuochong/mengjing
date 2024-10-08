@@ -125,7 +125,7 @@ namespace ET.Client
 
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
             Unit unit = unitComponent.AddChildWithId<Unit, int>(transferInfo.UnitId, 1);
-            unit.Type = UnitType.Transfers;
+            unit.Type = transferInfo.UnitType;
             unit.ConfigId = transferInfo.TransferId;
             unitComponent.Add(unit);
 
