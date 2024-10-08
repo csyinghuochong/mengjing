@@ -9,6 +9,8 @@ namespace ET.Client
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            unit.GetComponent<StateComponentC>().StateTypeRemove(StateTypeEnum.NoMove);
+
             unit.Position = message.Position;
             fubenComponent.SonFubenInfo = message.SonFubenInfo;
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);

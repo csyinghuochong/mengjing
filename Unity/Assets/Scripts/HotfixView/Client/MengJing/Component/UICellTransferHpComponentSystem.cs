@@ -52,6 +52,11 @@ namespace ET.Client
             {
                 return;
             }
+            MoveHelper.Stop(self.Root());
+
+            Unit mainhero = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            mainhero.GetComponent<StateComponentC>().StateTypeAdd(StateTypeEnum.NoMove);
+
             Unit unit = self.GetParent<Unit>();
             ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
             MapComponent mapComponent = self.Root().GetComponent <MapComponent> ();
