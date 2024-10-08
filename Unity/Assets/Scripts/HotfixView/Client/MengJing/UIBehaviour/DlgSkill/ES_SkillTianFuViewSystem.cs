@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_SkillTianFuItem))]
     [EntitySystemOf(typeof(ES_SkillTianFu))]
     [FriendOfAttribute(typeof(ES_SkillTianFu))]
     public static partial class ES_SkillTianFuSystem
@@ -14,6 +15,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TextDesc1Text.gameObject.SetActive(false);
+            self.E_ImageSelectImage.gameObject.SetActive(false);
             self.E_TitleSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_Btn_ActiveTianFuButton.AddListenerAsync(self.OnBtn_ActiveTianFuButton);
             self.E_ReSetTianFuButton.AddListener(self.OnReSetTianFu);
@@ -165,6 +167,11 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_TianFuIconImage.sprite = sp;
             CommonViewHelper.SetImageGray(self.Root(), self.E_TianFuIconImage.gameObject, !active);
+
+            ES_SkillTianFuItem itemIndex = self.Items[self.Position - 1];
+            self.E_ImageSelectImage.transform.SetParent(itemIndex.uiTransform);
+            self.E_ImageSelectImage.transform.localPosition = Vector3.zero;
+            self.E_ImageSelectImage.gameObject.SetActive(true);
         }
 
         private static async ETTask OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)

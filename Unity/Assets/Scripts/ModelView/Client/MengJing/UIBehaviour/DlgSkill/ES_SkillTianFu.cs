@@ -62,6 +62,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_ImageSelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageSelectImage == null )
+     			{
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ImageSelect");
+     			}
+     			return this.m_E_ImageSelectImage;
+     		}
+     	}
+
 		public ES_SkillTianFuItem ES_SkillTianFuItem_1
      	{
      		get
@@ -270,23 +287,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSelectImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageSelectImage == null )
-     			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ImageSelect");
-     			}
-     			return this.m_E_ImageSelectImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_Lab_SkillNameText
      	{
      		get
@@ -406,6 +406,7 @@ namespace ET.Client
 			this.m_E_TitleSetToggleGroup = null;
 			this.m_E_Btn_TianFu_1Toggle = null;
 			this.m_E_Btn_TianFu_2Toggle = null;
+			this.m_E_ImageSelectImage = null;
 			this.m_es_skilltianfuitem_1 = null;
 			this.m_es_skilltianfuitem_2 = null;
 			this.m_es_skilltianfuitem_3 = null;
@@ -417,7 +418,6 @@ namespace ET.Client
 			this.m_E_Btn_ActiveTianFuImage = null;
 			this.m_E_TextDesc1Text = null;
 			this.m_EG_DescListNodeRectTransform = null;
-			this.m_E_ImageSelectImage = null;
 			this.m_E_Lab_SkillNameText = null;
 			this.m_E_TianFuIconImage = null;
 			this.m_E_Text_NeedLvText = null;
@@ -430,6 +430,7 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_TitleSetToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_Btn_TianFu_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Btn_TianFu_2Toggle = null;
+		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
 		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_1 = null;
 		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_2 = null;
 		private EntityRef<ES_SkillTianFuItem> m_es_skilltianfuitem_3 = null;
@@ -441,7 +442,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Btn_ActiveTianFuImage = null;
 		private UnityEngine.UI.Text m_E_TextDesc1Text = null;
 		private UnityEngine.RectTransform m_EG_DescListNodeRectTransform = null;
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
 		private UnityEngine.UI.Text m_E_Lab_SkillNameText = null;
 		private UnityEngine.UI.Image m_E_TianFuIconImage = null;
 		private UnityEngine.UI.Text m_E_Text_NeedLvText = null;
