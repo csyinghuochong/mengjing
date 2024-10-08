@@ -51,6 +51,16 @@ namespace ET.Client
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
             self.uiTransform.gameObject.SetActive(true);
 
+            GameObject Img_line = self.uiTransform.Find("Img_line")?.gameObject;
+            if (talentConfig.PreId != 0 && !oldtalentlist.Contains(talentConfig.PreId))
+            {
+                Img_line?.SetActive(false);
+            }
+            else
+            {
+                Img_line?.SetActive(true);
+            }
+
             int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentId);
             int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
 
