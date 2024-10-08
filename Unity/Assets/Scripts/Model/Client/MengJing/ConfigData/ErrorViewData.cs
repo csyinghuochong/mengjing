@@ -188,7 +188,8 @@ namespace ET.Client
             { ErrorCode.ERR_PackageFrequent, "消息异常,请稍后再试" },
             { ErrorCode.ERR_PaiMaiBuyMaxPage, "拍卖道具页数已达底部" },
             { ErrorCode.ERR_FenXiangMaxNum, "今日分享次数已达上限,请明日再来" },
-            { ErrorCode.Pre_Condition_Error, "前置条件不足！" }
+            { ErrorCode.Pre_Condition_Error, "前置条件不足！" },
+            { ErrorCode.ERR_TalentNotActivePreId, "未激活前置Id" }
         };
     }
 }

@@ -108,8 +108,6 @@ namespace ET.Client
                 List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
                 if (talentConfigs == null)
                 {
-                    // 这个位置还未配置
-                    self.uiTransform.gameObject.SetActive(false);
                     return;
                 }
 

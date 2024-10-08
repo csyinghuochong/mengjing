@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ET
 {
-    
+
     public static class TalentHelpter
     {
 
@@ -11,10 +11,10 @@ namespace ET
         {
             List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(occ, talentType, 1);
 
-            return talentConfigs.Count > 0 ? talentConfigs[0]: 0;
+            return talentConfigs.Count > 0 ? talentConfigs[0] : 0;
         }
 
-        
+
         /// <summary>
         /// /当前等级
         /// </summary>
@@ -33,7 +33,7 @@ namespace ET
             {
                 return 0;
             }
-            
+
             return talentConfigs.IndexOf(talentid) + 1;
         }
 
@@ -73,11 +73,11 @@ namespace ET
             {
                 return 0;
             }
-            
+
             return talentConfigs.Count;
         }
 
-        public static int GetTalentIdByPosition(int postion,  List<int> oldtalentlist)
+        public static int GetTalentIdByPosition(int postion, List<int> oldtalentlist)
         {
             for (int i = 0; i < oldtalentlist.Count; i++)
             {
@@ -91,9 +91,9 @@ namespace ET
         }
 
         /// <summary>
-        /// 替换对应位置的天赋。  
+        /// 激活对应位置的天赋。  
         /// </summary>
-        public static int OnTalentActive(int occ, int talentType, int postion,  List<int> oldtalentlist)
+        public static int OnTalentActive(int occ, int talentType, int postion, List<int> oldtalentlist)
         {
             int talentid = GetTalentIdByPosition(postion, oldtalentlist);
             int curlv = GetTalentCurLevel(occ, talentType, postion, talentid);
@@ -104,17 +104,26 @@ namespace ET
                 return ErrorCode.ERR_AlreadyLearn;
             }
 
+            bool checkPreId = talentid == 0;
+
             int nextid = GetTalentNextId(occ, talentType, postion, talentid);
             if (nextid == 0)
             {
                 return ErrorCode.ERR_AlreadyLearn;
             }
-            
+
+            if (checkPreId)
+            {
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(nextid);
+                if (talentConfig.PreId != 0 && !oldtalentlist.Contains(talentConfig.PreId))
+                {
+                    return ErrorCode.ERR_TalentNotActivePreId;
+                }
+            }
+
             oldtalentlist.Remove(talentid);
             oldtalentlist.Add(nextid);
             return ErrorCode.ERR_Success;
         }
     }
-    
-    
 }
