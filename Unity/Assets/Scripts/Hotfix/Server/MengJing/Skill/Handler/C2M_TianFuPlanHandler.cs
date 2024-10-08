@@ -7,7 +7,6 @@ namespace ET.Server
         {
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
             skillSetComponent.UpdateTianFuPlan(request.TianFuPlan);
-            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
 
             await ETTask.CompletedTask;
         }

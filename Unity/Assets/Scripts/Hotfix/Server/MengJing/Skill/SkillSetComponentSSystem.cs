@@ -83,6 +83,12 @@ namespace ET.Server
 
         public static void TianFuReSet(this SkillSetComponentS self)
         {
+            List<int> tianfus = self.TianFuList();
+            for (int i = 0; i < tianfus.Count; i++)
+            {
+                self.AddTianFuAttribute(tianfus[i], false);
+            }
+
             if (self.TianFuPlan == 0)
             {
                 self.TianFuList1.Clear();
@@ -91,6 +97,9 @@ namespace ET.Server
             {
                 self.TianFuList2.Clear();
             }
+
+            self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
+            self.UpdateSkillSet();
         }
 
         public static List<int> TianFuListAll(this SkillSetComponentS self)
@@ -254,11 +263,11 @@ namespace ET.Server
             int valueType = NumericHelp.GetNumericValueType(numericKey);
             if (valueType == 1)
             {
-                //self.GetParent<Unit>().GetComponent<HeroDataComponent>().BuffPropertyUpdate_Long(numericKey, long.Parse(properInfo[2]) * rate);
+                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Long(numericKey, long.Parse(properInfo[2]) * rate);
             }
             else
             {
-                //self.GetParent<Unit>().GetComponent<HeroDataComponent>().BuffPropertyUpdate_Float(numericKey, float.Parse(properInfo[2]) * rate);
+                self.GetParent<Unit>().GetComponent<HeroDataComponentS>().BuffPropertyUpdate_Float(numericKey, float.Parse(properInfo[2]) * rate);
             }
         }
 
@@ -756,17 +765,16 @@ namespace ET.Server
         }
 
 
-        public static void OnActiveTianfu(this SkillSetComponentS self, C2M_TianFuActiveRequest request)
+        public static void OnActiveTianfu(this SkillSetComponentS self,int tianfuId)
         {
-            int tianfuId = request.TianFuId;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
-            int learnLv = talentConfig.LearnRoseLv;
+            int position = talentConfig.Position;
             bool exist = false;
             List<int> tianfuList = self.TianFuList();
             for (int i = 0; i < tianfuList.Count; i++)
             {
                 TalentConfig talentConfig2 = TalentConfigCategory.Instance.Get(tianfuList[i]);
-                if (talentConfig2.LearnRoseLv == learnLv)
+                if (talentConfig2.Position == position)
                 {
                     exist = true;
                     self.AddTianFuAttribute(tianfuList[i], false);

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System.Collections.Generic;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_TalentActiveHandler : MessageLocationHandler<Unit, C2M_TalentActiveRequest, M2C_TalentActiveResponse>
@@ -8,18 +10,18 @@
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
             int tianfuplan = skillSetComponentS.TianFuPlan + 1;
-
+            List<int> oldtalentlist = new List<int>();
+            oldtalentlist.AddRange(skillSetComponentS.TianFuList());
             int erroCode = TalentHelpter.OnTalentActive(userInfoComponentS.UserInfo.Occ,
                 tianfuplan,
                 request.Position,
-                skillSetComponentS.TianFuList(),
+                oldtalentlist,
                 userInfoComponentS.UserInfo.Lv,
                 userInfoComponentS.UserInfo.TalentPoints);
 
             if (erroCode == ErrorCode.ERR_Success)
             {
-                skillSetComponentS.UpdateSkillSet();
-                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                skillSetComponentS.OnActiveTianfu(oldtalentlist[^1]);
             }
 
             response.Error = erroCode;
