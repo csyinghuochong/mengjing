@@ -192,6 +192,12 @@ message M2C_CellDungeonInfo // IMessage
 	 int32 Difficulty = 4;
 }
 
+message M2C_CellSonDungeonInfo // IMessage
+{
+	 SonFubenInfo SonFubenInfo = 2;
+	 Unity.Mathematics.float3 Position = 3;
+}
+
 message M2C_RemoveUnits // IMessage
 {
 	repeated int64 Units = 1;

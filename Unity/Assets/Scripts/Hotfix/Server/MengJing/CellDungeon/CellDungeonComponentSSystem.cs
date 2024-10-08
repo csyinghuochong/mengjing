@@ -334,6 +334,88 @@ namespace ET.Server
             return false;
         }
 
+        public static void OnEnterFirstCell(this CellDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
+        {
+            self.InitFubenCell(request.SceneId);
+            CellDungeonInfo curCell = self.CurrentFubenCell;
+            self.HurtValue = 0;
+            self.EnterTime = TimeHelper.ServerNow();
+            self.SonFubenInfo.SonSceneId = curCell.sonid;
+            self.SonFubenInfo.CurrentCell = self.FubenInfo.StartCell;
+            self.SonFubenInfo.PassableFlag = self.GetPassableFlag();
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+            mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, request.SceneId, curCell.sonid);
+
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(curCell.sonid);
+            mapComponent.NavMeshId = chapterSon.MapID;
+            unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
+            //更新unit坐标
+            unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
+            unit.Rotation = quaternion.identity;
+            self.GenerateFubenScene(false);
+
+            // 通知客户端开始切场景
+            string parminfo = self.CurrentFubenCell.sonid.ToString();
+            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = self.Scene().InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = parminfo };
+            MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
+
+            M2C_CellDungeonInfo m2CCellDungeonInfo = M2C_CellDungeonInfo.Create();
+            m2CCellDungeonInfo.SceneId = request.SceneId;
+            m2CCellDungeonInfo.FubenInfo = self.FubenInfo;
+            m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
+            MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+        }
+
+        public static void OnEnterSonCell(this CellDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
+        {
+            string[] cellinfo = request.ParamInfo.Split('_');
+            int CurrentCell = int.Parse(cellinfo[0]);
+            int DirectionType = int.Parse(cellinfo[1]);
+
+            CellDungeonInfo fubenCellInfoCurt = self.GetByCellIndex(CurrentCell);
+            fubenCellInfoCurt.pass = true;
+            CellDungeonInfo fubenCellInfoNext = self.GetNextSonCell(CurrentCell, DirectionType);
+            self.CurrentFubenCell = fubenCellInfoNext;
+            if (!fubenCellInfoNext.pass)
+            {
+                unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
+            }
+
+            SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
+            enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
+            enterFubenInfo.PassableFlag = self.GetPassableFlag();
+            enterFubenInfo.CurrentCell = self.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+            int sonid = fubenCellInfoNext.sonid;
+            mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
+            mapComponent.NavMeshId = chapterSon.MapID;
+            unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+
+            //更新unit出生点坐标
+            int[] borpos;
+            if (DirectionType == 1)
+                borpos = chapterSon.BornPosDwon;
+            else if (DirectionType == 2)
+                borpos = chapterSon.BornPosRight;
+            else if (DirectionType == 3)
+                borpos = chapterSon.BornPosUp;
+            else
+                borpos = chapterSon.BornPosLeft;
+
+            unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+            unit.Rotation = quaternion.identity;
+
+            //创建副本内的各种Unit
+            self.GenerateFubenScene(fubenCellInfoNext.pass);
+
+            M2C_CellSonDungeonInfo m2CCellDungeonInfo = M2C_CellSonDungeonInfo.Create();
+            m2CCellDungeonInfo.Position = unit.Position;
+            m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
+            MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+        }
+
         public static void GenerateFubenScene(this CellDungeonComponentS self, bool pass)
         {
             CellDungeonInfo fubenCellInfo = self.CurrentFubenCell;
