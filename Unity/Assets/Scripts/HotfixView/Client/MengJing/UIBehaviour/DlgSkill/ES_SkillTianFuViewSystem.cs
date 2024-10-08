@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -191,6 +192,24 @@ namespace ET.Client
 
         private static void OnReSetTianFu(this ES_SkillTianFu self)
         {
+            if (self.Position == 0)
+            {
+                return;
+            }
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "重置天赋", "是否重置天赋",
+                () => { Request().Coroutine(); }).Coroutine();
+            return;
+
+            async ETTask Request()
+            {
+                int error = await SkillNetHelper.TalentReSetRequest(self.Root());
+                if (error == ErrorCode.ERR_Success)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("重置成功");
+                    self.RefreshTianFuList();
+                }
+            }
         }
     }
 }

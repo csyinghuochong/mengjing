@@ -2018,6 +2018,20 @@ message M2C_TalentActiveResponse // ILocationResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_TalentReSetResponse
+message C2M_TalentReSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_TalentReSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType M2C_TianFuActiveResponse
 message C2M_TianFuActiveRequest // ILocationRequest
 {

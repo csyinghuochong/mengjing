@@ -81,6 +81,18 @@ namespace ET.Server
             return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
         }
 
+        public static void TianFuReSet(this SkillSetComponentS self)
+        {
+            if (self.TianFuPlan == 0)
+            {
+                self.TianFuList1.Clear();
+            }
+            else
+            {
+                self.TianFuList2.Clear();
+            }
+        }
+
         public static List<int> TianFuListAll(this SkillSetComponentS self)
         {
             List<int> list = new List<int>();

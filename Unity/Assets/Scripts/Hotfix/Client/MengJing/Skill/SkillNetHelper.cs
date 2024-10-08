@@ -223,5 +223,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> TalentReSetRequest(Scene root)
+        {
+            C2M_TalentReSetRequest request = C2M_TalentReSetRequest.Create();
+
+            M2C_TalentReSetResponse response = (M2C_TalentReSetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
