@@ -60,7 +60,16 @@ namespace ET.Client
             dlgMain.AfterEnterScene(sceneTypeEnum);
         }
 
-        public static async ETTask ChangeScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int chapterId)
+        public static async ETTask ChangeCellSonScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
+        {
+            string paramss = CellDungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
+
+            var path = ABPathHelper.GetScenePath(paramss);
+            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Additive);
+            Log.Warning("切换场景" + path);
+        }
+
+        public static async ETTask ChangeScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
         {
             string paramss = "";
             switch (sceneTypeEnum)
@@ -73,14 +82,14 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.MainCityScene:
                     PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-                    string scenepath = chapterId.ToString();
+                    string scenepath = sceneid.ToString();
                     paramss = scenepath;
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
                     paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
                 case (int)SceneTypeEnum.LocalDungeon:
-                    paramss = DungeonConfigCategory.Instance.Get(chapterId).MapID.ToString();
+                    paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
 
                     playerComponent = self.Root().GetComponent<PlayerComponent>();
                     if (!SettingData.ShowTerrain)
@@ -89,11 +98,10 @@ namespace ET.Client
                     }
                     break;
                 default:
-                    paramss = SceneConfigCategory.Instance.Get(chapterId).MapID.ToString();
+                    paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     break;
             }
 
-            int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
             GameObjectLoadHelper.DisposeAll();
 
             // 不太明白这俩行的目的
@@ -111,7 +119,8 @@ namespace ET.Client
 
             self.UpdateChuanSong(sceneTypeEnum);
 
-            self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, chapterId, sousceneid);
+            int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
+            self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, sceneid, sousceneid);
         }
     }
 }

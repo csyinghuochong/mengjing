@@ -7,7 +7,7 @@ namespace ET.Client
         {
             //弹出实名认证窗口。
             await scene.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RealName);
-            
+
             await ETTask.CompletedTask;
         }
     }

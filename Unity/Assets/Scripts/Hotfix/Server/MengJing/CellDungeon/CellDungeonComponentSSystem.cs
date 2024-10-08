@@ -386,6 +386,7 @@ namespace ET.Server
             enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
             enterFubenInfo.PassableFlag = self.GetPassableFlag();
             enterFubenInfo.CurrentCell = self.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
+            self.SonFubenInfo = enterFubenInfo;
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             int sonid = fubenCellInfoNext.sonid;
             mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
