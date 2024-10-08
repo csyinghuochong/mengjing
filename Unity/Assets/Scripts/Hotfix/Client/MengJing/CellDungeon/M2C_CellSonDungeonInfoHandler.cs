@@ -14,8 +14,6 @@ namespace ET.Client
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
             fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
 
-
-
             await ETTask.CompletedTask;
         }
     }
