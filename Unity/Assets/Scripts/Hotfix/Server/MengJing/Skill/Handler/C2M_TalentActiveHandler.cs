@@ -16,7 +16,7 @@ namespace ET.Server
             int erroCode =  TalentHelpter.OnTalentActive(userInfoComponentS.UserInfo.Occ,
                 tianfuplan,
                 request.Position, 
-                tianfuplan == 1 ? skillSetComponentS.TianFuList1 : skillSetComponentS.TianFuList2
+                skillSetComponentS.TianFuList()
                 );
             if (erroCode == ErrorCode.ERR_Success)
             {

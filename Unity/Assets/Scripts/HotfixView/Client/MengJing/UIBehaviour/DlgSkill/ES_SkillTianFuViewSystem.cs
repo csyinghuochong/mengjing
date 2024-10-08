@@ -76,12 +76,8 @@ namespace ET.Client
                 }
             }
 
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int tianFuType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
-            Dictionary<int, List<int>> talentList = TalentConfigCategory.Instance.GetTalentListByOcc(userInfo.Occ, tianFuType);
-            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            skillSetComponent.TianFuList();
-            
+
             foreach (ES_SkillTianFuItem item in self.Items)
             {
                 item.Refresh(tianFuType);
@@ -122,6 +118,44 @@ namespace ET.Client
 
         public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
+            // UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            // List<int> oldtalentlist = skillSetComponent.TianFuList();
+            // int talentid = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
+            // TalentConfig talentConfig = null;
+            // if (talentid == 0)
+            // {
+            //     List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
+            //     if (talentConfigs == null)
+            //     {
+            //         // 这个位置还未配置
+            //         self.uiTransform.gameObject.SetActive(false);
+            //         return;
+            //     }
+            //
+            //     talentConfig = TalentConfigCategory.Instance.Get(talentConfigs[0]);
+            // }
+            // else
+            // {
+            //     talentConfig = TalentConfigCategory.Instance.Get(talentid);
+            // }
+            //
+            // self.uiTransform.gameObject.SetActive(true);
+            //
+            // int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentid);
+            // int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
+            //
+            // if (curlv >= maxlv)
+            // {
+            //     // ErrorCode.ERR_AlreadyLearn;
+            // }
+            //
+            // int nextid = TalentHelpter.GetTalentNextId(userInfo.Occ, talentType, self.Position, talentid);
+            // if (nextid == 0)
+            // {
+            //     // ErrorCode.ERR_AlreadyLearn;
+            // }
+            
             // int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
             // if (playerLv < talentConfig.LearnRoseLv)
