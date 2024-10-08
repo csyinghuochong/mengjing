@@ -66,7 +66,7 @@ namespace ET.Client
             CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, !active);
         }
 
-        private static void OnImageIcon(this ES_SkillTianFuItem self)
+        public static void OnImageIcon(this ES_SkillTianFuItem self)
         {
             self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.Position, self.TalentId);
         }

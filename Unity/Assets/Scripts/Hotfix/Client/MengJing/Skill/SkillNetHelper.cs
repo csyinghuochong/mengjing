@@ -214,5 +214,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> TalentActiveRequest(Scene root, int position)
+        {
+            C2M_TalentActiveRequest request = C2M_TalentActiveRequest.Create();
+            request.Position = position;
+            M2C_TalentActiveResponse response = (M2C_TalentActiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

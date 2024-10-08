@@ -83,6 +83,9 @@ namespace ET.Client
             {
                 item.Refresh();
             }
+
+            ES_SkillTianFuItem item0 = self.Items[0];
+            item0.OnImageIcon();
         }
 
         public static void OnClickTianFuItem(this ES_SkillTianFu self, int position, int talentId)
@@ -137,7 +140,13 @@ namespace ET.Client
 
         private static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
-            SkillNetHelper.ActiveTianFu(self.Root(), self.TalentId).Coroutine();
+            if (self.TalentId == 0)
+            {
+                return;
+            }
+
+            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TalentId);
+            SkillNetHelper.TalentActiveRequest(self.Root(), talentConfig.Position).Coroutine();
         }
     }
 }
