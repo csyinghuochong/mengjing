@@ -48,7 +48,6 @@ namespace ET.Client
                 talentId = talentConfigs[0];
             }
 
-            self.TalentId = talentId;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
             self.uiTransform.gameObject.SetActive(true);
 
@@ -57,7 +56,14 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
+                if (active)
+                {
+                    self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
+                }
+                else
+                {
+                    self.E_PointText.text = zstring.Format("{0}/{1}", 0, maxlv);
+                }
             }
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
@@ -68,7 +74,7 @@ namespace ET.Client
 
         public static void OnImageIcon(this ES_SkillTianFuItem self)
         {
-            self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.Position, self.TalentId);
+            self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.Position);
         }
     }
 }

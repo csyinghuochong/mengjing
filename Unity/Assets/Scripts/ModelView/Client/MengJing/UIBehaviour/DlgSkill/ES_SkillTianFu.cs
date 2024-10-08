@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_SkillTianFu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public List<EntityRef<ES_SkillTianFuItem>> Items = new();
-		public int TalentId;
+		public int Position;
 		
 		public UnityEngine.UI.ToggleGroup E_TitleSetToggleGroup
      	{
@@ -355,6 +355,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ReSetTianFuButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetTianFuButton == null )
+     			{
+		    		this.m_E_ReSetTianFuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ReSetTianFu");
+     			}
+     			return this.m_E_ReSetTianFuButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ReSetTianFuImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetTianFuImage == null )
+     			{
+		    		this.m_E_ReSetTianFuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ReSetTianFu");
+     			}
+     			return this.m_E_ReSetTianFuImage;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -388,6 +422,8 @@ namespace ET.Client
 			this.m_E_TianFuIconImage = null;
 			this.m_E_Text_NeedLvText = null;
 			this.m_E_Lab_TianFuLevelText = null;
+			this.m_E_ReSetTianFuButton = null;
+			this.m_E_ReSetTianFuImage = null;
 			this.uiTransform = null;
 		}
 
@@ -410,6 +446,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_TianFuIconImage = null;
 		private UnityEngine.UI.Text m_E_Text_NeedLvText = null;
 		private UnityEngine.UI.Text m_E_Lab_TianFuLevelText = null;
+		private UnityEngine.UI.Button m_E_ReSetTianFuButton = null;
+		private UnityEngine.UI.Image m_E_ReSetTianFuImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -15,7 +15,8 @@ namespace ET.Client
 
             self.E_TextDesc1Text.gameObject.SetActive(false);
             self.E_TitleSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.E_Btn_ActiveTianFuButton.AddListener(self.OnBtn_ActiveTianFuButton);
+            self.E_Btn_ActiveTianFuButton.AddListenerAsync(self.OnBtn_ActiveTianFuButton);
+            self.E_ReSetTianFuButton.AddListener(self.OnReSetTianFu);
 
             self.E_TitleSetToggleGroup.OnSelectIndex(self.Root().GetComponent<SkillSetComponentC>().TianFuPlan);
 
@@ -84,15 +85,39 @@ namespace ET.Client
                 item.Refresh();
             }
 
-            ES_SkillTianFuItem item0 = self.Items[0];
-            item0.OnImageIcon();
+            ES_SkillTianFuItem itemIndex = self.Items[self.Position > 0 ? self.Position - 1 : 0];
+            itemIndex.OnImageIcon();
         }
 
-        public static void OnClickTianFuItem(this ES_SkillTianFu self, int position, int talentId)
+        public static void OnClickTianFuItem(this ES_SkillTianFu self, int position)
         {
-            self.TalentId = talentId;
+            self.Position = position;
+            int talentType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            List<int> oldtalentlist = skillSetComponent.TianFuList();
+            int talentId = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
+
+            bool active = true;
+            if (talentId == 0)
+            {
+                active = false;
+                List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
+                if (talentConfigs == null)
+                {
+                    // 这个位置还未配置
+                    self.uiTransform.gameObject.SetActive(false);
+                    return;
+                }
+
+                talentId = talentConfigs[0];
+            }
 
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
+            self.uiTransform.gameObject.SetActive(true);
+
+            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentId);
+            int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
 
             string[] descList = talentConfig.talentDes.Split(';');
             CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
@@ -113,13 +138,16 @@ namespace ET.Client
 
             self.E_Lab_SkillNameText.text = talentConfig.Name;
 
-            int talentType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, position, talentId);
-            int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, position);
             using (zstring.Block())
             {
-                self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", curlv, maxlv);
+                if (active)
+                {
+                    self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", curlv, maxlv);
+                }
+                else
+                {
+                    self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", 0, maxlv);
+                }
             }
 
             if (curlv >= maxlv)
@@ -136,17 +164,26 @@ namespace ET.Client
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_TianFuIconImage.sprite = sp;
+            CommonViewHelper.SetImageGray(self.Root(), self.E_TianFuIconImage.gameObject, !active);
         }
 
-        private static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
+        private static async ETTask OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
-            if (self.TalentId == 0)
+            if (self.Position == 0)
             {
                 return;
             }
 
-            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TalentId);
-            SkillNetHelper.TalentActiveRequest(self.Root(), talentConfig.Position).Coroutine();
+            int error = await SkillNetHelper.TalentActiveRequest(self.Root(), self.Position);
+            if (error == ErrorCode.ERR_Success)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("激活成功");
+                self.RefreshTianFuList();
+            }
+        }
+
+        private static void OnReSetTianFu(this ES_SkillTianFu self)
+        {
         }
     }
 }

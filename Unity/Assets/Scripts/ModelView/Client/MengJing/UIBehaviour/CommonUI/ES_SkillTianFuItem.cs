@@ -8,7 +8,6 @@ namespace ET.Client
 	public  class ES_SkillTianFuItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public int Position;
-		public int TalentId;
 		
 		public UnityEngine.UI.Button E_ImageIconButton
      	{
