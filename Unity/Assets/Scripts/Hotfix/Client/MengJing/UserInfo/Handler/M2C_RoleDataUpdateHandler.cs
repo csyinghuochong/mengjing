@@ -104,6 +104,10 @@
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.JiaYuanLv).ToString();
                     userInfo.JiaYuanLv = int.Parse(message.UpdateTypeValue);
                     break;
+                case (int)UserDataType.TalentPoints:
+                    updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.TalentPoints).ToString();
+                    userInfo.TalentPoints = int.Parse(message.UpdateTypeValue);
+                    break;
                 default:
                     updateValue = message.UpdateTypeValue;
                     break;

@@ -51,14 +51,19 @@ namespace ET.Client
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
             self.uiTransform.gameObject.SetActive(true);
 
-            GameObject Img_line = self.uiTransform.Find("Img_line")?.gameObject;
-            if (talentConfig.PreId != 0 && !oldtalentlist.Contains(talentConfig.PreId))
+            for (int i = 0; i < talentConfig.PreId.Length; i++)
             {
-                Img_line?.SetActive(false);
-            }
-            else
-            {
-                Img_line?.SetActive(true);
+                bool havePre = false;
+                int id = talentConfig.PreId[i];
+                if (id != 0 && oldtalentlist.Contains(id))
+                {
+                    havePre = true;
+                }
+
+                using (zstring.Block())
+                {
+                    self.uiTransform.Find(zstring.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
+                }
             }
 
             int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentId);

@@ -53,6 +53,7 @@ namespace ET
         public const int ERR_PaiMaiSellLimit = 200038;
         public const int ERR_HuoYueNot = 200039;
         public const int ERR_TalentNotActivePreId = 200040;
+        public const int ERR_TalentPointNot = 200041;
 
         //登录
         public const int ERR_AccountAlreadyRegister = 200101;                       //表示账号已经被注册

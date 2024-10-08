@@ -493,6 +493,10 @@ namespace ET.Server
                 case UserDataType.BuffSkill:
                     longValue = long.Parse(value);
                     break;
+                case UserDataType.TalentPoints:
+                    self.UserInfo.TalentPoints += int.Parse(value);
+                    saveValue = self.UserInfo.TalentPoints.ToString();
+                    break;
                 default:
                     saveValue = value;
                     break;

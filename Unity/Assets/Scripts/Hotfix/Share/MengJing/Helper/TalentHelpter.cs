@@ -111,11 +111,36 @@ namespace ET
             {
                 return ErrorCode.ERR_AlreadyLearn;
             }
-
+            
+            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(nextid);
             if (checkPreId)
             {
-                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(nextid);
-                if (talentConfig.PreId != 0 && !oldtalentlist.Contains(talentConfig.PreId))
+                // 前置都要激活
+                // foreach (int id in talentConfig.PreId)
+                // {
+                //     if (id != 0 && !oldtalentlist.Contains(id))
+                //     {
+                //         return ErrorCode.ERR_TalentNotActivePreId;
+                //     }
+                // }
+                
+                // 前置只需激活一个
+                bool havePre = false;
+                foreach (int id in talentConfig.PreId)
+                {
+                    if (id == 0)
+                    {
+                        havePre = true;
+                        break;
+                    }
+
+                    if (oldtalentlist.Contains(id))
+                    {
+                        havePre = true;
+                        break;
+                    }
+                }
+                if (!havePre)
                 {
                     return ErrorCode.ERR_TalentNotActivePreId;
                 }
