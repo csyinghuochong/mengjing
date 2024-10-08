@@ -27,6 +27,11 @@ namespace ET.Client
             return self.Type == UnitType.Pasture;
         }
 
+        public static bool IsMonster(this Unit self)
+        {
+            return self.Type == UnitType.Monster;
+        }
+
         public static bool IsCanBeAttack(this Unit self, bool checkdead = true)
         {
             if (self.Type == UnitType.Npc || self.Type == UnitType.DropItem

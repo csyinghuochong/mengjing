@@ -17,14 +17,15 @@
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int lastSceneType = mapComponent.SceneType;
             int lastChapterid = mapComponent.SceneId;
-            if (sceneType == SceneTypeEnum.PetMing)
-            {
-                mapComponent.SetMapInfo(sceneType, sceneId, 0);
-            }
-            else
-            {
-                mapComponent.SetMapInfo(sceneType, sceneId, int.Parse(pagramInfo));
-            }
+            // if (sceneType == SceneTypeEnum.PetMing)
+            // {
+            //     mapComponent.SetMapInfo(sceneType, sceneId, 0);
+            // }
+            // else
+            // {
+            //     
+            // }
+            mapComponent.SetMapInfo(sceneType, sceneId, int.Parse(pagramInfo));
             
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart()

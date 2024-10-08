@@ -537,6 +537,7 @@ namespace ET.Client
             }
 
             Unit unit = self.GetParent<Unit>();
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             switch (unit.Type)
             {
@@ -544,7 +545,7 @@ namespace ET.Client
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
-                    MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                    
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
                     self.OnAddCollider(go);
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
@@ -799,7 +800,14 @@ namespace ET.Client
                             break;
                     }
 
-                    unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
+                    if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
+                    {
+                        unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
+                    }
+                    if (mapComponent.SceneType == SceneTypeEnum.CellDungeon)
+                    {
+                       
+                    }
                     break;
                 case UnitType.JingLing:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

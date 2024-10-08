@@ -208,11 +208,14 @@ namespace ET.Server
                     CellDungeonInfo fubenCellInfo = self.GetByCellIndex(cellIndex);
                     CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(fubenCellInfo.sonid);
                     string[] createScenceMonsterPro = chapterSonConfig.CreateScenceMonsterPro.Split(';');
-                    float rate = float.Parse(createScenceMonsterPro[0]);
-                    if (!specialCells.Contains(cellIndex) && rate >= RandomHelper.RandFloat01())
+                    if (createScenceMonsterPro != null && createScenceMonsterPro.Length > 1)
                     {
-                        specialCells.Add(cellIndex);
-                        self.FubenInfo.FubenCellNpcs.Add(new KeyValuePair() { KeyId = CellDungeonNpc.ChestList, Value = cellIndex.ToString() });
+                        float rate = float.Parse(createScenceMonsterPro[0]);
+                        if (!specialCells.Contains(cellIndex) && rate >= RandomHelper.RandFloat01())
+                        {
+                            specialCells.Add(cellIndex);
+                            self.FubenInfo.FubenCellNpcs.Add(new KeyValuePair() { KeyId = CellDungeonNpc.ChestList, Value = cellIndex.ToString() });
+                        }
                     }
                 }
             }
@@ -428,7 +431,7 @@ namespace ET.Server
                     ChuansongComponent chuansongComponent = chuansong.AddComponent<ChuansongComponent>();
                     chuansongComponent.CellIndex = self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line); //走过的格子
                     chuansongComponent.DirectionType = i + 1;
-                    UnitInfoComponent unitInfoComponent = chuansong.AddComponent<UnitInfoComponent>();
+                    chuansong.AddComponent<UnitInfoComponent>();
                     chuansong.Position = vector3;
                     chuansong.AddComponent<AOIEntity, int, float3>(9 * 1000, chuansong.Position);
                 }

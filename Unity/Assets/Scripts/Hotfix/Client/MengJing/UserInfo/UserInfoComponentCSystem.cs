@@ -320,6 +320,30 @@ namespace ET.Client
                 self.UserInfo.HorseIds.Remove(horseId);
             }
         }
+        
+        public static FubenPassInfo GetPassInfoByID(this UserInfoComponentC self, int levelid)
+        {
+            for (int i = 0; i < self.UserInfo.FubenPassList.Count; i++)
+            {
+                if (self.UserInfo.FubenPassList[i].FubenId == levelid)
+                {
+                    return self.UserInfo.FubenPassList[i];
+                }
+            }
+            return null;
+        }
+        
+        public static bool IsLevelPassed(this UserInfoComponentC self, int levelid)
+        {
+            for (int i = 0; i < self.UserInfo.FubenPassList.Count; i++)
+            {
+                if (self.UserInfo.FubenPassList[i].FubenId == levelid)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public static void OnResetSeason(this UserInfoComponentC self, bool notice)
         {

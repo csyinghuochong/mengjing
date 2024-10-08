@@ -14,7 +14,7 @@ namespace ET.Client
                 UIComponent uiComponent = root.GetComponent<UIComponent>();
 
                 await uiComponent.ShowWindowAsync(WindowID.WindowID_Loading);
-                uiComponent.GetDlgLogic<DlgLoading>().OnInitUI(args.LastSceneType, args.SceneType, args.ChapterId);
+                uiComponent.GetDlgLogic<DlgLoading>().OnInitUI(args.LastSceneType, args.SceneType, args. ChapterId);
 
                 DlgMain dlgMain = uiComponent.GetDlgLogic<DlgMain>();
                 if (dlgMain != null)

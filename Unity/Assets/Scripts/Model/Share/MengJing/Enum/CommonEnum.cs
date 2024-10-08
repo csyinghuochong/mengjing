@@ -3,6 +3,42 @@
 namespace ET
 {
 
+    public static class CellDungeonNpc
+    {
+        public const int HuiFuItem = 1;
+        public const int ShenMiNpc = 2;
+        public const int ChestList = 3;
+        public const int MoLengRoom = 4;
+    }
+
+    public enum CellDungeonStatu : byte
+    {
+        None = 0,
+        Start,          //起点                
+        End,            //终点
+        Passable,       //可以通行
+        Impassable      //不可通行
+    }
+
+    public enum DirectionType : byte
+    {
+        None,
+        Up,
+        Left,
+        Down,
+        Right
+    }
+
+    [EnableClass]
+    public class CellDungeonInfo
+    {
+        public int row;         //行
+        public int line;        //列
+        public int sonid;       //随机地块
+        public byte ctype;      //格子属性
+        public bool pass;       //是否通关
+    }
+
     
     [EnableClass]
     public sealed class TikTokCode

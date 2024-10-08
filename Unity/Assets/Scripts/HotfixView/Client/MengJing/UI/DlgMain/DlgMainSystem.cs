@@ -1332,6 +1332,8 @@ namespace ET.Client
         private static void OnBtn_CellDungeon(this DlgMain self)
         {
             Log.Debug("OnBtn_CellDungeon");
+            //默认进入第一章的第一关
+            EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.CellDungeon, 10001, FubenDifficulty.Normal, "0" ).Coroutine();
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)

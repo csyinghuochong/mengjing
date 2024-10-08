@@ -184,6 +184,14 @@ message M2C_StartSceneChange // IMessage
 	string ParamInfo = 5;
 }
 
+message M2C_CellDungeonInfo // IMessage
+{
+	 FubenInfo FubenInfo = 1;
+	 SonFubenInfo SonFubenInfo = 2;
+	 int32 SceneId = 3;
+	 int32 Difficulty = 4;
+}
+
 message M2C_RemoveUnits // IMessage
 {
 	repeated int64 Units = 1;
