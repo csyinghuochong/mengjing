@@ -9,7 +9,7 @@ namespace ET.Client
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
             ///需要无缝切换 加载新场景 
-            
+            await EventSystem.Instance.PublishAsync(root, new EnterCellDungeon());
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             unit.GetComponent<StateComponentC>().StateTypeRemove(StateTypeEnum.NoMove);

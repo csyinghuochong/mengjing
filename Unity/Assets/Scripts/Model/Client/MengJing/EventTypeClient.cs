@@ -583,4 +583,9 @@ namespace ET.Client
     public struct PetFightUpdate
     {
     }
+
+    public struct EnterCellDungeon
+    {
+
+    }
 }
