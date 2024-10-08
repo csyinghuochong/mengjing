@@ -84,36 +84,36 @@ namespace ET.Client
             }
         }
 
-        public static void OnClickTianFuItem(this ES_SkillTianFu self, int tianfuId)
+        public static void OnClickTianFuItem(this ES_SkillTianFu self, int talentId)
         {
-            // self.TianFuId = tianfuId;
-            //
-            // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
-            //
-            // string[] descList = talentConfig.talentDes.Split(';');
-            // CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
-            // for (int i = 0; i < descList.Length; i++)
-            // {
-            //     if (string.IsNullOrEmpty(descList[i]))
-            //     {
-            //         continue;
-            //     }
-            //
-            //     GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
-            //     CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
-            //     gameObject.SetActive(true);
-            //     gameObject.GetComponent<Text>().text = descList[i];
-            //     gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
-            //     gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
-            // }
-            //
-            // self.E_Lab_SkillNameText.text = talentConfig.Name;
-            // self.E_Text_NeedLvText.text = talentConfig.LearnRoseLv.ToString();
-            //
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
-            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            //
-            // self.E_TianFuIconImage.sprite = sp;
+            self.TalentId = talentId;
+
+            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
+            
+            string[] descList = talentConfig.talentDes.Split(';');
+            CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
+            for (int i = 0; i < descList.Length; i++)
+            {
+                if (string.IsNullOrEmpty(descList[i]))
+                {
+                    continue;
+                }
+            
+                GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
+                gameObject.SetActive(true);
+                gameObject.GetComponent<Text>().text = descList[i];
+                gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
+                gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
+            }
+            
+            self.E_Lab_SkillNameText.text = talentConfig.Name;
+            self.E_Text_NeedLvText.text = talentConfig.LearnRoseLv.ToString();
+            
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            
+            self.E_TianFuIconImage.sprite = sp;
         }
 
         public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
@@ -155,7 +155,7 @@ namespace ET.Client
             // {
             //     // ErrorCode.ERR_AlreadyLearn;
             // }
-            
+
             // int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
             // if (playerLv < talentConfig.LearnRoseLv)

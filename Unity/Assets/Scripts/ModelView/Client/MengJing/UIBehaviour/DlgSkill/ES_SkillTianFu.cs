@@ -9,6 +9,7 @@ namespace ET.Client
 	public  class ES_SkillTianFu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public List<EntityRef<ES_SkillTianFuItem>> Items = new();
+		public int TalentId;
 		
 		public UnityEngine.UI.ToggleGroup E_TitleSetToggleGroup
      	{

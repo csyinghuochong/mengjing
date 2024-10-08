@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -12,6 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_SkillTianFuItem self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ImageIconButton.AddListener(self.OnImageIcon);
         }
 
         [EntitySystem]
@@ -49,6 +49,7 @@ namespace ET.Client
                 talentid = talentConfigs[0];
             }
 
+            self.TalentId = talentid;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentid);
             self.uiTransform.gameObject.SetActive(true);
 
@@ -64,6 +65,11 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageIconImage.sprite = sp;
             CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, !active);
+        }
+
+        private static void OnImageIcon(this ES_SkillTianFuItem self)
+        {
+            self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.TalentId);
         }
     }
 }

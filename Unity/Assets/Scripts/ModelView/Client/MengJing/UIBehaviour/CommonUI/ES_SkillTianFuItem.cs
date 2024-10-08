@@ -9,6 +9,7 @@ namespace ET.Client
 	{
 		public int TalentType;
 		public int Position;
+		public int TalentId;
 		
 		public UnityEngine.UI.Button E_ImageIconButton
      	{
