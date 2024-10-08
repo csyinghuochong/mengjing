@@ -7,7 +7,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene root, M2C_CellDungeonInfo message)
         {
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
-            
+
             fubenComponent.InitFubenCell(message.SceneId);
             fubenComponent.FubenDifficulty = message.Difficulty;
             fubenComponent.FubenInfo = message.FubenInfo;

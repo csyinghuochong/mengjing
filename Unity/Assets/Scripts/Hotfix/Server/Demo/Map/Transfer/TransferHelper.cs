@@ -58,19 +58,7 @@ namespace ET.Server
                         Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "CellDungeon" + fubenid.ToString());
                         CellDungeonComponentS fubenComponentS = fubnescene.AddComponent<CellDungeonComponentS>();
 
-                        //起点
-                        if(request.paramInfo == "0")
-                        {
-                            fubenComponentS.InitFubenCell(request.SceneId);
-                        }
-                        CellDungeonInfo curCell = fubenComponentS.CurrentFubenCell;
-                        fubenComponentS.HurtValue = 0;
-                        fubenComponentS.EnterTime = TimeHelper.ServerNow();
-                        fubenComponentS.SonFubenInfo.SonSceneId = curCell.sonid;
-                        fubenComponentS.SonFubenInfo.CurrentCell = fubenComponentS.FubenInfo.StartCell;
-                        fubenComponentS.SonFubenInfo.PassableFlag = fubenComponentS.GetPassableFlag();
-                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.CellDungeon, curCell.sonid, int.Parse(request.paramInfo));
-
+                      
                         BeforeTransfer(unit);
                         await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
