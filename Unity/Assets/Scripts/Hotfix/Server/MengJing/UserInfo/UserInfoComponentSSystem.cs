@@ -391,6 +391,7 @@ namespace ET.Server
                     unit.GetComponent<ChengJiuComponentS>().OnUpdateLevel(self.UserInfo.Lv);
                     unit.GetComponent<HeroDataComponentS>().CheckSeasonOpen(true);
                     self.UpdateRoleData(UserDataType.Sp, value, notice);
+                    self.UpdateRoleData(UserDataType.TalentPoints, value, notice);
                     Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                     break;
                 case UserDataType.Sp:

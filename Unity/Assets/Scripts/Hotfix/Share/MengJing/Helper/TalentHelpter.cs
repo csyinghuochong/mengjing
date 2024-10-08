@@ -2,18 +2,14 @@ using System.Collections.Generic;
 
 namespace ET
 {
-
     public static class TalentHelpter
     {
-
-
         public static int GetFirstTalent(int occ, int talentType)
         {
             List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(occ, talentType, 1);
 
             return talentConfigs.Count > 0 ? talentConfigs[0] : 0;
         }
-
 
         /// <summary>
         /// /当前等级
@@ -90,10 +86,26 @@ namespace ET
             return 0;
         }
 
+        public static int UsedTalentPoint(int occ, int talentType, List<int> oldtalentlist)
+        {
+            int usedPoint = 0;
+            foreach (int id in oldtalentlist)
+            {
+                List<int> ids = TalentConfigCategory.Instance.GetTalentIdByPosition(occ, talentType, TalentConfigCategory.Instance.Get(id).Position);
+                for (int i = ids.IndexOf(id); i >= 0; i--)
+                {
+                    TalentConfig talentConfig = TalentConfigCategory.Instance.Get(ids[i]);
+                    usedPoint += talentConfig.NeedUseNumber;
+                }
+            }
+
+            return usedPoint;
+        }
+
         /// <summary>
         /// 激活对应位置的天赋。  
         /// </summary>
-        public static int OnTalentActive(int occ, int talentType, int postion, List<int> oldtalentlist)
+        public static int OnTalentActive(int occ, int talentType, int postion, List<int> oldtalentlist, int talentPoints)
         {
             int talentid = GetTalentIdByPosition(postion, oldtalentlist);
             int curlv = GetTalentCurLevel(occ, talentType, postion, talentid);
@@ -111,7 +123,7 @@ namespace ET
             {
                 return ErrorCode.ERR_AlreadyLearn;
             }
-            
+
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(nextid);
             if (checkPreId)
             {
@@ -123,7 +135,7 @@ namespace ET
                 //         return ErrorCode.ERR_TalentNotActivePreId;
                 //     }
                 // }
-                
+
                 // 前置只需激活一个
                 bool havePre = false;
                 foreach (int id in talentConfig.PreId)
@@ -140,10 +152,17 @@ namespace ET
                         break;
                     }
                 }
+
                 if (!havePre)
                 {
                     return ErrorCode.ERR_TalentNotActivePreId;
                 }
+            }
+
+            // 检查天赋点
+            if (talentPoints < UsedTalentPoint(occ, talentType, oldtalentlist) + talentConfig.NeedUseNumber)
+            {
+                return ErrorCode.ERR_TalentPointNot;
             }
 
             oldtalentlist.Remove(talentid);
