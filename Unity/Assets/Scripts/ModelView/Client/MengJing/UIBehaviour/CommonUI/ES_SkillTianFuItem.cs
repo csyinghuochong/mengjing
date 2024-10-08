@@ -7,7 +7,6 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillTianFuItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public int TalentType;
 		public int Position;
 		public int TalentId;
 		

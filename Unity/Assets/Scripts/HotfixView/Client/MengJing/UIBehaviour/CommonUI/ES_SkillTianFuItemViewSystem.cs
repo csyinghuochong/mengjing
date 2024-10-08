@@ -25,17 +25,16 @@ namespace ET.Client
             self.Position = position;
         }
 
-        public static void Refresh(this ES_SkillTianFuItem self, int talentType)
+        public static void Refresh(this ES_SkillTianFuItem self)
         {
-            self.TalentType = talentType;
-
+            int talentType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
             List<int> oldtalentlist = skillSetComponent.TianFuList();
-            int talentid = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
+            int talentId = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
 
             bool active = true;
-            if (talentid == 0)
+            if (talentId == 0)
             {
                 active = false;
                 List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
@@ -46,14 +45,14 @@ namespace ET.Client
                     return;
                 }
 
-                talentid = talentConfigs[0];
+                talentId = talentConfigs[0];
             }
 
-            self.TalentId = talentid;
-            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentid);
+            self.TalentId = talentId;
+            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
             self.uiTransform.gameObject.SetActive(true);
 
-            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentid);
+            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentId);
             int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
 
             using (zstring.Block())
@@ -69,7 +68,7 @@ namespace ET.Client
 
         private static void OnImageIcon(this ES_SkillTianFuItem self)
         {
-            self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.TalentId);
+            self.GetParent<ES_SkillTianFu>().OnClickTianFuItem(self.Position, self.TalentId);
         }
     }
 }

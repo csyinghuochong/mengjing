@@ -58,7 +58,10 @@ namespace ET.Client
             skillSetComponent.UpdateTianFuPlan(plan);
             self.RefreshTianFuList();
 
-            FlyTipComponent.Instance.ShowFlyTip("已切换为当前天赋!");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("切换天赋 {0}", plan));
+            }
         }
 
         public static void RefreshTianFuList(this ES_SkillTianFu self)
@@ -76,20 +79,18 @@ namespace ET.Client
                 }
             }
 
-            int tianFuType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
-
             foreach (ES_SkillTianFuItem item in self.Items)
             {
-                item.Refresh(tianFuType);
+                item.Refresh();
             }
         }
 
-        public static void OnClickTianFuItem(this ES_SkillTianFu self, int talentId)
+        public static void OnClickTianFuItem(this ES_SkillTianFu self, int position, int talentId)
         {
             self.TalentId = talentId;
 
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
-            
+
             string[] descList = talentConfig.talentDes.Split(';');
             CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
             for (int i = 0; i < descList.Length; i++)
@@ -98,7 +99,7 @@ namespace ET.Client
                 {
                     continue;
                 }
-            
+
                 GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
                 CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
                 gameObject.SetActive(true);
@@ -106,79 +107,37 @@ namespace ET.Client
                 gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
                 gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
             }
-            
+
             self.E_Lab_SkillNameText.text = talentConfig.Name;
+
+            int talentType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, position, talentId);
+            int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, position);
+            using (zstring.Block())
+            {
+                self.E_Lab_TianFuLevelText.text = zstring.Format("天赋等级：{0}/{1}", curlv, maxlv);
+            }
+
+            if (curlv >= maxlv)
+            {
+                self.E_Btn_ActiveTianFuButton.GetComponentInChildren<Text>().text = "已满级";
+            }
+            else
+            {
+                self.E_Btn_ActiveTianFuButton.GetComponentInChildren<Text>().text = "激活";
+            }
+
             self.E_Text_NeedLvText.text = talentConfig.LearnRoseLv.ToString();
-            
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            
             self.E_TianFuIconImage.sprite = sp;
         }
 
-        public static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
+        private static void OnBtn_ActiveTianFuButton(this ES_SkillTianFu self)
         {
-            // UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            // List<int> oldtalentlist = skillSetComponent.TianFuList();
-            // int talentid = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
-            // TalentConfig talentConfig = null;
-            // if (talentid == 0)
-            // {
-            //     List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
-            //     if (talentConfigs == null)
-            //     {
-            //         // 这个位置还未配置
-            //         self.uiTransform.gameObject.SetActive(false);
-            //         return;
-            //     }
-            //
-            //     talentConfig = TalentConfigCategory.Instance.Get(talentConfigs[0]);
-            // }
-            // else
-            // {
-            //     talentConfig = TalentConfigCategory.Instance.Get(talentid);
-            // }
-            //
-            // self.uiTransform.gameObject.SetActive(true);
-            //
-            // int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentid);
-            // int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
-            //
-            // if (curlv >= maxlv)
-            // {
-            //     // ErrorCode.ERR_AlreadyLearn;
-            // }
-            //
-            // int nextid = TalentHelpter.GetTalentNextId(userInfo.Occ, talentType, self.Position, talentid);
-            // if (nextid == 0)
-            // {
-            //     // ErrorCode.ERR_AlreadyLearn;
-            // }
-
-            // int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
-            // TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
-            // if (playerLv < talentConfig.LearnRoseLv)
-            // {
-            //     FlyTipComponent.Instance.ShowFlyTip("等级不足！");
-            //     return;
-            // }
-            //
-            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            // int oldId = skillSetComponent.HaveSameTianFu(self.TianFuId);
-            // if (oldId != 0 && oldId != self.TianFuId)
-            // {
-            //     using (zstring.Block())
-            //     {
-            //         PopupTipHelp.OpenPopupTip(self.Root(), "重置专精",
-            //             zstring.Format("是否花费{0}金币重置专精", 50000 + talentConfig.LearnRoseLv * 100),
-            //             () => { SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine(); }).Coroutine();
-            //     }
-            //
-            //     return;
-            // }
-            //
-            // SkillNetHelper.ActiveTianFu(self.Root(), self.TianFuId).Coroutine();
+            SkillNetHelper.ActiveTianFu(self.Root(), self.TalentId).Coroutine();
         }
     }
 }
