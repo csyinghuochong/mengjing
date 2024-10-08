@@ -68,6 +68,13 @@ namespace ET.Client
                     unit.GetComponent<UITransferHpComponent>()?.OnCheckChuanSong(self);
                     continue;
                 }
+
+                if (unit.Type == UnitType.CellTransfers)
+                {
+                    unit.UpdateUITime = curTime;
+                    unit.GetComponent<UICellTransferHpComponent>()?.OnCheckChuanSong(self);
+                    continue;
+                }
             }
         }
     }

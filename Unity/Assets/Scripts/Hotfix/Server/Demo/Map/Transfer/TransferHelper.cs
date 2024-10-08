@@ -56,9 +56,7 @@ namespace ET.Server
                         long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 
                         Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "CellDungeon" + fubenid.ToString());
-                        CellDungeonComponentS fubenComponentS = fubnescene.AddComponent<CellDungeonComponentS>();
-
-                      
+                        fubnescene.AddComponent<CellDungeonComponentS>();
                         BeforeTransfer(unit);
                         await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
                         NoticeFubenCenter(fubnescene, 1).Coroutine();

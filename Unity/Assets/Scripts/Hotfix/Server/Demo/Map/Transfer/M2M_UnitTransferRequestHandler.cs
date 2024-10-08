@@ -73,7 +73,7 @@ namespace ET.Server
                         mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, request.SceneId, curCell.sonid);
 
                         CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(curCell.sonid);
-                        mapComponent.NavMeshId = CellDungeonConfigCategory.Instance.Get(curCell.sonid).MapID;
+                        mapComponent.NavMeshId = chapterSon.MapID;
                         unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
                         //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
                         //更新unit坐标
@@ -83,7 +83,7 @@ namespace ET.Server
 
 
                         // 通知客户端开始切场景
-                        string parminfo = scene.GetComponent<CellDungeonComponentS>().CurrentFubenCell.sonid.ToString();
+                        string parminfo = fubenComponentS.CurrentFubenCell.sonid.ToString();
                         M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = parminfo };
                         MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
@@ -93,7 +93,59 @@ namespace ET.Server
                         m2CCellDungeonInfo.SonFubenInfo = fubenComponentS.SonFubenInfo;
                         MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
                     }
-                   
+                    else
+                    {
+                        string[] cellinfo = request.ParamInfo.Split('_');
+                        int CurrentCell = int.Parse(cellinfo[0]);
+                        int DirectionType = int.Parse(cellinfo[1]);
+
+                        CellDungeonInfo fubenCellInfoCurt = fubenComponentS.GetByCellIndex(CurrentCell);
+                        fubenCellInfoCurt.pass = true;
+                        CellDungeonInfo fubenCellInfoNext = fubenComponentS.GetNextSonCell(CurrentCell, DirectionType);
+                        fubenComponentS.CurrentFubenCell = fubenCellInfoNext;
+                        if (!fubenCellInfoNext.pass)
+                        {
+                            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
+                        }
+
+                        SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
+                        enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
+                        enterFubenInfo.PassableFlag = fubenComponentS.GetPassableFlag();
+                        enterFubenInfo.CurrentCell = fubenComponentS.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
+                       
+                        int sonid = fubenCellInfoNext.sonid;
+                        mapComponent.SetMapInfo( SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
+                        CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
+                        mapComponent.NavMeshId = chapterSon.MapID;
+                        unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+
+                        //更新unit出生点坐标
+                        int[] borpos;
+                        if (DirectionType == 1)
+                            borpos = chapterSon.BornPosDwon;
+                        else if (DirectionType == 2)
+                            borpos = chapterSon.BornPosRight;
+                        else if (DirectionType == 3)
+                            borpos = chapterSon.BornPosUp;
+                        else
+                            borpos = chapterSon.BornPosLeft;
+
+                        unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                        unit.Rotation = quaternion.identity;
+
+                        //创建副本内的各种Unit
+                        fubenComponentS.GenerateFubenScene(fubenCellInfoNext.pass);
+
+                        // 通知客户端开始切场景
+                        string parminfo = fubenComponentS.CurrentFubenCell.sonid.ToString();
+                        M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = parminfo };
+                        MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
+
+                        M2C_CellDungeonInfo m2CCellDungeonInfo = M2C_CellDungeonInfo.Create();
+                        m2CCellDungeonInfo.SceneId = 0;
+                        m2CCellDungeonInfo.SonFubenInfo = fubenComponentS.SonFubenInfo;
+                        MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+                    }
                     break;
                 case (int)SceneTypeEnum.PetMing:
                 case (int)SceneTypeEnum.PetDungeon:

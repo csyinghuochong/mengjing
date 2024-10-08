@@ -8,14 +8,24 @@ namespace ET.Client
         {
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
-            fubenComponent.InitFubenCell(message.SceneId);
-            fubenComponent.FubenDifficulty = message.Difficulty;
-            fubenComponent.FubenInfo = message.FubenInfo;
-            fubenComponent.SonFubenInfo = message.SonFubenInfo;
+            if (message.SceneId > 0)
+            {
+                //进入第一个格子
+                fubenComponent.InitFubenCell(message.SceneId);
+                fubenComponent.FubenDifficulty = message.Difficulty;
+                fubenComponent.FubenInfo = message.FubenInfo;
+                fubenComponent.SonFubenInfo = message.SonFubenInfo;
 
-            fubenComponent.SetStartedFlag(fubenComponent.FubenInfo.StartCell);
-            fubenComponent.SetEndedFlag(fubenComponent.FubenInfo.EndCell);
-            fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
+                fubenComponent.SetStartedFlag(fubenComponent.FubenInfo.StartCell);
+                fubenComponent.SetEndedFlag(fubenComponent.FubenInfo.EndCell);
+                fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
+            }
+            else
+            {
+                fubenComponent.SonFubenInfo = message.SonFubenInfo;
+                fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
+                fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
+            }
 
             await ETTask.CompletedTask;
         }

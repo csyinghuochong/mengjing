@@ -788,11 +788,12 @@ namespace ET.Client
                     unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
                     break;
                 case UnitType.CellTransfers:
+                    ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();   
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    switch (unit.GetComponent<UnitInfoComponent>().DirectionType)
+                    switch (chuansongComponent.DirectionType)
                     {
                         case 1: //上
                             go.transform.localRotation = Quaternion.Euler(-90, 0, 180); //设置旋转
@@ -809,6 +810,7 @@ namespace ET.Client
                         default:
                             break;
                     }
+                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(chuansongComponent.CellIndex, chuansongComponent.DirectionType);
                     break;
                 case UnitType.JingLing:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

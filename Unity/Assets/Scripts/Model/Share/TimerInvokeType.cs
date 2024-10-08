@@ -94,5 +94,6 @@
         public const int FindPathTimer = 360;
         public const int DungeonMapTimer = 361;
         public const int ReviveTimer = 362;
+        public const int CellTransferUITimer = 363;
     }
 }
