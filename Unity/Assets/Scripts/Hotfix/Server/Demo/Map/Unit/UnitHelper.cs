@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -540,5 +541,18 @@ namespace ET.Server
             }
             return units;
         }
+
+        public static void RemoveAllNoSelf(Unit unit)
+        {
+            UnitComponent unitComponent = unit.GetParent<UnitComponent>();
+            List<Entity> allunits = unitComponent.Children.Values.ToList();
+            for (int i = allunits.Count - 1; i >= 0; i--)
+            {
+                if (unit.Id == allunits[i].Id)
+                    continue;
+                unitComponent.Remove(allunits[i].Id);
+            }
+        }
+
     }
 }

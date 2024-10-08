@@ -8,6 +8,8 @@ namespace ET.Client
         {
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            unit.Position = message.Position;
             fubenComponent.SonFubenInfo = message.SonFubenInfo;
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
             fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);

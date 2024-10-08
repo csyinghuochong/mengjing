@@ -49,23 +49,6 @@ namespace ET.Server
                     case SceneTypeEnum.MainCityScene:
                         await MainCityTransfer(unit);
                         break;
-                    case (int)SceneTypeEnum.CellDungeon:
-                        Scene oldscene = unit.Root();
-                        int sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
-                        long fubenid = IdGenerater.Instance.GenerateId();
-                        long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-
-                        Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "CellDungeon" + fubenid.ToString());
-                        fubnescene.AddComponent<CellDungeonComponentS>();
-                        BeforeTransfer(unit);
-                        await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
-                        NoticeFubenCenter(fubnescene, 1).Coroutine();
-                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
-                        {
-                            NoticeFubenCenter(oldscene, 2).Coroutine();
-                            oldscene.Dispose();
-                        }
-                        break;
                     //宠物闯关
                     case (int)SceneTypeEnum.PetDungeon:
                         int petfubenid = int.Parse(request.paramInfo);
@@ -73,12 +56,12 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_ModifyData;
                         }
-                        oldscene = unit.Root();
-                        sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
-                        fubenid = IdGenerater.Instance.GenerateId();
-                        fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                 
-                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
+                        Scene oldscene = unit.Root();
+                        int sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                        long fubenid = IdGenerater.Instance.GenerateId();
+                        long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+
+                        Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetFubenComponent>();
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetDungeon, request.SceneId, int.Parse(request.paramInfo));
                         BeforeTransfer(unit);
@@ -90,6 +73,35 @@ namespace ET.Server
                             oldscene.Dispose();
                         }
                         break;
+                    case (int)SceneTypeEnum.CellDungeon:
+
+                        if (request.SceneId > 0)
+                        {
+                            //第一个格子
+                            oldscene = unit.Root();
+                            sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                            fubenid = IdGenerater.Instance.GenerateId();
+                            fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+
+                            fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "CellDungeon" + fubenid.ToString());
+                            fubnescene.AddComponent<CellDungeonComponentS>();
+                            BeforeTransfer(unit);
+                            await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
+                            NoticeFubenCenter(fubnescene, 1).Coroutine();
+                            if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+                            {
+                                NoticeFubenCenter(oldscene, 2).Coroutine();
+                                oldscene.Dispose();
+                            }
+                        }
+                        else
+                        {
+                            UnitHelper.RemoveAllNoSelf(unit);
+
+                            CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
+                            cellDungeonComponentS.OnEnterSonCell(unit, request.paramInfo);
+                        }
+                        break;
                     case (int)SceneTypeEnum.TrialDungeon:
                         int requestTowerId = int.Parse(request.paramInfo);
                         int passId = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
@@ -98,28 +110,28 @@ namespace ET.Server
                             Log.Error($"试炼之地作弊1:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
                             return ErrorCode.ERR_ModifyData;
                         }
-                        if (TowerConfigCategory.Instance.Get(requestTowerId).MapType!= SceneTypeEnum.TrialDungeon)
+                        if (TowerConfigCategory.Instance.Get(requestTowerId).MapType != SceneTypeEnum.TrialDungeon)
                         {
                             Log.Error($"试炼之地作弊2:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
                             return ErrorCode.ERR_ModifyData;
                         }
-                        
+
                         if (passId == 0 && requestTowerId != 20001)
                         {
                             Log.Error($"试炼之地作弊3:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
                             return ErrorCode.ERR_ModifyData;
                         }
-                        if (passId != 0 && requestTowerId > passId + 1 )
+                        if (passId != 0 && requestTowerId > passId + 1)
                         {
                             Log.Error($"试炼之地作弊4:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
                             return ErrorCode.ERR_ModifyData;
                         }
-                        
+
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "TrialDungeon" + fubenid.ToString());
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "TrialDungeon" + fubenid.ToString());
                         fubnescene.AddComponent<TrialDungeonComponent>();
-                        MapComponent  mapComponent = fubnescene.GetComponent<MapComponent>();
+                        MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.TrialDungeon, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
                         BeforeTransfer(unit);
@@ -144,7 +156,7 @@ namespace ET.Server
 
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "SeasonTower" + fubenid.ToString());
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "SeasonTower" + fubenid.ToString());
                         fubnescene.AddComponent<SeasonTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.SeasonTower, request.SceneId, int.Parse(request.paramInfo));
@@ -163,7 +175,7 @@ namespace ET.Server
 
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene =   GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,"TowerOfSeal" + fubenid.ToString());
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "TowerOfSeal" + fubenid.ToString());
                         fubnescene.AddComponent<SealTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.SealTower, request.SceneId, int.Parse(request.paramInfo));
@@ -176,7 +188,7 @@ namespace ET.Server
                         //2200001
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "RandomTower" + fubenid.ToString());
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "RandomTower" + fubenid.ToString());
                         fubnescene.AddComponent<RandomTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.RandomTower, request.SceneId, 0);
@@ -195,8 +207,8 @@ namespace ET.Server
                         M2F_UnionEnterRequest M2U_UnionEnterRequest = M2F_UnionEnterRequest.Create();
                         M2U_UnionEnterRequest.UnionId = unionid;
                         M2U_UnionEnterRequest.SceneId = request.SceneId;
-                         F2M_UnionEnterResponse responseUnionEnter = (F2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                         mapInstanceId, M2U_UnionEnterRequest);
+                        F2M_UnionEnterResponse responseUnionEnter = (F2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, M2U_UnionEnterRequest);
                         BeforeTransfer(unit);
                         await Transfer(unit, responseUnionEnter.FubenActorId, (int)SceneTypeEnum.Union, request.SceneId, request.Difficulty, "0");
                         break;
@@ -204,7 +216,7 @@ namespace ET.Server
                         //动态创建副本
                         Scene scene = unit.Root();
                         mapInstanceId = UnitCacheHelper.GetFubenCenterId(unit.Zone());
-                        
+
                         ///进入之前先刷新一下
                         if (long.Parse(request.paramInfo) == unit.Id)
                         {
@@ -246,7 +258,7 @@ namespace ET.Server
                         {
                             newdungeon = true;
                             fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                            fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "OneChallenge" + fubenid.ToString());
+                            fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "OneChallenge" + fubenid.ToString());
                             mapComponent = fubnescene.GetComponent<MapComponent>();
                             mapComponent.SetMapInfo((int)SceneTypeEnum.OneChallenge, request.SceneId, 0);
                             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
@@ -285,7 +297,7 @@ namespace ET.Server
                         long enemyId = long.Parse(request.paramInfo);
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "Fuben" + fubenid.ToString());
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "Fuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetTianTiComponent>().EnemyId = enemyId;
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetTianTi, request.SceneId, 0);
                         BeforeTransfer(unit);
@@ -297,7 +309,7 @@ namespace ET.Server
                         {
                             request.Difficulty = 1;
                         }
-                       
+
                         if (request.SceneId > 0)
                         {
                             int chaptierd = 1;
@@ -318,11 +330,11 @@ namespace ET.Server
 
                         LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                         request.Difficulty = localDungeon != null ? localDungeon.FubenDifficulty : request.Difficulty;
-                         int errorCode = await LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
-                         if (errorCode != ErrorCode.ERR_Success)
-                         {
-                             return errorCode;
-                         }
+                        int errorCode = await LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
+                        if (errorCode != ErrorCode.ERR_Success)
+                        {
+                            return errorCode;
+                        }
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
@@ -334,7 +346,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_MapLimit;
                         }
-                        
+
                         SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                         int curPlayerNum = int.Parse(f2M_YeWaiSceneIdResponse.Message);
                         if (sceneConfig.PlayerLimit > 0 && sceneConfig.PlayerLimit <= curPlayerNum)
@@ -348,7 +360,7 @@ namespace ET.Server
                     case SceneTypeEnum.Demon:
                         M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
                         M2F_FubenSceneIdRequest.SceneId = request.SceneId;
-                        M2F_FubenSceneIdRequest.UnitId = unit.Id  ;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id;
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
@@ -364,7 +376,7 @@ namespace ET.Server
                         M2S_SoloEnterRequest M2S_SoloEnterRequest = M2S_SoloEnterRequest.Create();
                         M2S_SoloEnterRequest.FubenId = long.Parse(request.paramInfo);
                         S2M_SoloEnterResponse d2GGetUnit = (S2M_SoloEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId, M2S_SoloEnterRequest);
-                        
+
                         if (d2GGetUnit.Error != ErrorCode.ERR_Success)
                         {
                             return d2GGetUnit.Error;
@@ -373,7 +385,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_ModifyData;
                         }
-                        if ( !FunctionHelp.IsInTime(1045))
+                        if (!FunctionHelp.IsInTime(1045))
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
@@ -429,14 +441,14 @@ namespace ET.Server
                     case SceneTypeEnum.Battle:
                         M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
                         M2F_FubenSceneIdRequest.SceneId = request.SceneId;
-                        M2F_FubenSceneIdRequest.UnitId = unit.Id ;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id;
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
                             UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
-                        
+
                         BeforeTransfer(unit);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Camp.ToString());
                         break;
@@ -451,7 +463,7 @@ namespace ET.Server
                         M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
                         M2F_FubenSceneIdRequest.SceneId = request.SceneId;
                         M2F_FubenSceneIdRequest.UnitId = unit.Id;
-                        
+
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
                             UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
@@ -494,65 +506,65 @@ namespace ET.Server
             }
             return ErrorCode.ERR_Success;
         }
-        
-        
-         public static async ETTask<int> LocalDungeonTransfer(Unit unit, int sceneId, int transferId, int difficulty)
-         {
-             Log.Debug("M2LocalDungeon_EnterRequest_1");
-             if (transferId != 0 && !DungeonTransferConfigCategory.Instance.Contain(transferId))
-             {
-                 return ErrorCode.ERR_ModifyData;
-             }
 
-             //前往神秘之门
-             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
-             {
-                 unit.GetComponent<UnitInfoComponent>().LastDungeonId = unit.Root().GetComponent<MapComponent>().SceneId;
-                 unit.GetComponent<UnitInfoComponent>().LastDungeonPosition = unit.Position;
-             }
 
-             long oldsceneid = unit.Root().Id;
-             sceneId = transferId != 0 ? DungeonTransferConfigCategory.Instance.Get(transferId).MapID : sceneId;
-             if (sceneId == 0)
-             {
-                 Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  transferId: {transferId} sceneId: {sceneId} ");
-                 return ErrorCode.ERR_NotFindLevel;
-             }
-             
-             Log.Debug("M2LocalDungeon_EnterRequest_2");
-             
-             long fubenid = IdGenerater.Instance.GenerateId();
-             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-             Scene fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
-             fubnescene.AddComponent<YeWaiRefreshComponent>();
-             LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
-             localDungeon.FubenDifficulty = difficulty;
-             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-             mapComponent.SetMapInfo((int)SceneTypeEnum.LocalDungeon, sceneId, 0);
-             mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
+        public static async ETTask<int> LocalDungeonTransfer(Unit unit, int sceneId, int transferId, int difficulty)
+        {
+            Log.Debug("M2LocalDungeon_EnterRequest_1");
+            if (transferId != 0 && !DungeonTransferConfigCategory.Instance.Contain(transferId))
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
 
-             NoticeFubenCenter(fubnescene, 1).Coroutine();
-             BeforeTransfer(unit);
-             await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
+            //前往神秘之门
+            if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+            {
+                unit.GetComponent<UnitInfoComponent>().LastDungeonId = unit.Root().GetComponent<MapComponent>().SceneId;
+                unit.GetComponent<UnitInfoComponent>().LastDungeonPosition = unit.Position;
+            }
 
-             //移除旧scene
-             // Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
-             // if (scene.GetComponent<LocalDungeonComponent>() != null)
-             // {
-             //     //动态删除副本
-             //     TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
-             //     scene.Dispose();
-             // }
-             return ErrorCode.ERR_Success;   
-         }
-        
+            long oldsceneid = unit.Root().Id;
+            sceneId = transferId != 0 ? DungeonTransferConfigCategory.Instance.Get(transferId).MapID : sceneId;
+            if (sceneId == 0)
+            {
+                Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  transferId: {transferId} sceneId: {sceneId} ");
+                return ErrorCode.ERR_NotFindLevel;
+            }
+
+            Log.Debug("M2LocalDungeon_EnterRequest_2");
+
+            long fubenid = IdGenerater.Instance.GenerateId();
+            long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+            Scene fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
+            fubnescene.AddComponent<YeWaiRefreshComponent>();
+            LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
+            localDungeon.FubenDifficulty = difficulty;
+            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+            mapComponent.SetMapInfo((int)SceneTypeEnum.LocalDungeon, sceneId, 0);
+            mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
+
+            NoticeFubenCenter(fubnescene, 1).Coroutine();
+            BeforeTransfer(unit);
+            await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
+
+            //移除旧scene
+            // Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
+            // if (scene.GetComponent<LocalDungeonComponent>() != null)
+            // {
+            //     //动态删除副本
+            //     TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+            //     scene.Dispose();
+            // }
+            return ErrorCode.ERR_Success;
+        }
+
         public static async ETTask TransferAtFrameFinish(Unit unit, ActorId sceneInstanceId, string sceneName)
         {
             await unit.Fiber().WaitFrameFinish();
 
-            await Transfer(unit, sceneInstanceId, SceneTypeEnum.MainCityScene, 101,  1, "0");
+            await Transfer(unit, sceneInstanceId, SceneTypeEnum.MainCityScene, 101, 1, "0");
         }
-        
+
         public static async ETTask MainCityTransfer(Unit unit)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
@@ -566,8 +578,8 @@ namespace ET.Server
             await Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
             OnTransfer(scene, userId);
         }
-        
-        public static void OnTransfer( Scene scene, long userId )
+
+        public static void OnTransfer(Scene scene, long userId)
         {
             if (scene.IsDisposed)
             {
@@ -582,7 +594,7 @@ namespace ET.Server
                 scene.Dispose();
             }
         }
-        
+
         public static void BeforeTransfer(Unit unit)
         {
             //删除unit,让其它进程发送过来的消息找不到actor，重发
@@ -598,8 +610,8 @@ namespace ET.Server
 
         public static void RemoveStall(Unit unit)
         {
-            List<Unit> stallList = UnitHelper.GetUnitList( unit.Scene(), UnitType.Stall );
-            for (int i = stallList.Count - 1; i>= 0; i--)
+            List<Unit> stallList = UnitHelper.GetUnitList(unit.Scene(), UnitType.Stall);
+            for (int i = stallList.Count - 1; i >= 0; i--)
             {
                 if (stallList[i].MasterId == unit.Id)
                 {
@@ -607,10 +619,10 @@ namespace ET.Server
                 }
             }
         }
-        
+
         public static void RemovePetAndJingLing(Unit unit)
         {
- 
+
             RemoveFightPetList(unit);
             RemoveJingLing(unit);
         }
@@ -628,9 +640,9 @@ namespace ET.Server
                 unitComponent.Remove(petfightlist[i]);
             }
         }
-        
+
         public static void RemoveJingLing(Unit unit)
-        { 
+        {
             UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
             long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
             if (jinglingUnitId != 0 && unitComponent.Get(jinglingUnitId) != null)
@@ -639,7 +651,7 @@ namespace ET.Server
             }
             unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = 0;
         }
-        
+
         public static void AfterTransfer(Unit unit, int sceneType)
         {
             if (sceneType == SceneTypeEnum.PetDungeon
@@ -648,7 +660,7 @@ namespace ET.Server
                 || sceneType == SceneTypeEnum.RunRace
                 || sceneType == SceneTypeEnum.Demon)
             {
-             return;   
+                return;
             }
 
 
@@ -658,7 +670,7 @@ namespace ET.Server
 
         public static void CreateJingLing(Unit unit)
         {
-            int jinglingid  = unit.GetComponent<ChengJiuComponentS>().JingLingId;
+            int jinglingid = unit.GetComponent<ChengJiuComponentS>().JingLingId;
             if (jinglingid != 0)
             {
                 long JingLingUnitId = UnitFactory.CreateJingLing(unit, jinglingid).Id;
@@ -669,7 +681,7 @@ namespace ET.Server
         public static void CreateFightPetList(Unit unit)
         {
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            List<long> petfightlist =petComponentS .PetFightList;
+            List<long> petfightlist = petComponentS.PetFightList;
             for (int i = 0; i < petfightlist.Count; i++)
             {
                 RolePetInfo fightId = petComponentS.GetPetInfo(petfightlist[i]);
@@ -680,14 +692,14 @@ namespace ET.Server
                 }
             }
         }
-        
 
-        public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty,  string paramInfo)
+
+        public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty, string paramInfo)
         {
             Scene root = unit.Root();
             // location加锁
             long unitId = unit.Id;
-            
+
             M2M_UnitTransferRequest request = M2M_UnitTransferRequest.Create();
             request.OldActorId = unit.GetActorId();
             request.Unit = unit.ToBson();
@@ -695,7 +707,7 @@ namespace ET.Server
             request.SceneId = sceneId;
             request.FubenDifficulty = fubenDifficulty;
             request.ParamInfo = paramInfo;
-            
+
             foreach (Entity entity in unit.Components.Values)
             {
                 if (entity is ITransfer)
@@ -708,11 +720,11 @@ namespace ET.Server
             }
             //unit.Dispose();
             unit.GetParent<UnitComponent>().Remove(unit.Id);
-            
+
             await root.GetComponent<LocationProxyComponent>().Lock(LocationType.Unit, unitId, request.OldActorId);
             await root.GetComponent<MessageSender>().Call(sceneInstanceId, request);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -723,7 +735,7 @@ namespace ET.Server
         {
             ActorId fubencenterId = UnitCacheHelper.GetFubenCenterId(scene.Zone());
             int sceneType = 0;
-            if (scene!=null && scene.GetComponent<MapComponent>()!=null)
+            if (scene != null && scene.GetComponent<MapComponent>() != null)
             {
                 sceneType = scene.GetComponent<MapComponent>().SceneType;
             }

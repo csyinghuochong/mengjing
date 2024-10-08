@@ -367,9 +367,9 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
         }
 
-        public static void OnEnterSonCell(this CellDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
+        public static void OnEnterSonCell(this CellDungeonComponentS self, Unit unit, string ParamInfo)
         {
-            string[] cellinfo = request.ParamInfo.Split('_');
+            string[] cellinfo = ParamInfo.Split('_');
             int CurrentCell = int.Parse(cellinfo[0]);
             int DirectionType = int.Parse(cellinfo[1]);
 
@@ -391,18 +391,27 @@ namespace ET.Server
             mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
+            unit.RemoveComponent<PathfindingComponent>();
             unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
 
             //更新unit出生点坐标
             int[] borpos;
-            if (DirectionType == 1)
-                borpos = chapterSon.BornPosDwon;
-            else if (DirectionType == 2)
-                borpos = chapterSon.BornPosRight;
-            else if (DirectionType == 3)
-                borpos = chapterSon.BornPosUp;
-            else
-                borpos = chapterSon.BornPosLeft;
+            switch (DirectionType)
+            {
+                case 1:
+                    borpos = chapterSon.BornPosDwon;
+                    break;
+
+                case 2:
+                    borpos = chapterSon.BornPosRight;
+                    break;
+                case 3:
+                    borpos = chapterSon.BornPosUp;
+                    break;
+                default:
+                    borpos = chapterSon.BornPosLeft;
+                    break;
+            }
 
             unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
             unit.Rotation = quaternion.identity;
