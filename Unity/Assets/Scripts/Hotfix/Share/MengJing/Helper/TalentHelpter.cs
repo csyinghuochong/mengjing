@@ -105,7 +105,7 @@ namespace ET
         /// <summary>
         /// 激活对应位置的天赋。  
         /// </summary>
-        public static int OnTalentActive(int occ, int talentType, int postion, List<int> oldtalentlist, int talentPoints)
+        public static int OnTalentActive(int occ, int talentType, int postion, List<int> oldtalentlist, int lv, int talentPoints)
         {
             int talentid = GetTalentIdByPosition(postion, oldtalentlist);
             int curlv = GetTalentCurLevel(occ, talentType, postion, talentid);
@@ -159,6 +159,12 @@ namespace ET
                 }
             }
 
+            // 检查等级
+            if (lv < talentConfig.LearnRoseLv)
+            {
+                return ErrorCode.ERR_LvNoHigh;
+            }
+            
             // 检查天赋点
             if (talentPoints < UsedTalentPoint(occ, talentType, oldtalentlist) + talentConfig.NeedUseNumber)
             {

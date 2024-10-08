@@ -13,11 +13,13 @@
                 tianfuplan,
                 request.Position,
                 skillSetComponentS.TianFuList(),
+                userInfoComponentS.UserInfo.Lv,
                 userInfoComponentS.UserInfo.TalentPoints);
 
             if (erroCode == ErrorCode.ERR_Success)
             {
                 skillSetComponentS.UpdateSkillSet();
+                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             }
 
             response.Error = erroCode;

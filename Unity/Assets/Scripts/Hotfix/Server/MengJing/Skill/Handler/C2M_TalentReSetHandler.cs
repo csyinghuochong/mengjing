@@ -10,6 +10,7 @@
 
             skillSetComponentS.TianFuReSet();
             skillSetComponentS.UpdateSkillSet();
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
 
             await ETTask.CompletedTask;
         }
