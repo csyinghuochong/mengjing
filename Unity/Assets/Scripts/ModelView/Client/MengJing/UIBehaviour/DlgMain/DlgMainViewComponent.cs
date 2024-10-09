@@ -1847,23 +1847,23 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_CellDungeon
-		{
-			get
-			{
-				if (this.uiTransform == null)
-				{
-					Log.Error("uiTransform is null.");
-					return null;
-				}
-				if( this.m_E_Btn_CellDungeon == null )
-				{
-					this.m_E_Btn_CellDungeon = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_CellDungeon");
-				}
-				return this.m_E_Btn_CellDungeon;
-			}
-		}
-		
+		public UnityEngine.UI.Button E_Btn_CellDungeonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_CellDungeonButton == null )
+     			{
+		    		this.m_E_Btn_CellDungeonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_CellDungeon");
+     			}
+     			return this.m_E_Btn_CellDungeonButton;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_Btn_TopRight_3RectTransform
      	{
      		get
@@ -2742,7 +2742,7 @@ namespace ET.Client
 			this.m_E_Btn_RankImage = null;
 			this.m_E_Button_WorldLvButton = null;
 			this.m_E_Btn_PaiMaiHangButton = null;
-			this.m_E_Btn_CellDungeon = null;
+			this.m_E_Btn_CellDungeonButton = null;
 			this.m_EG_Btn_TopRight_3RectTransform = null;
 			this.m_EG_Btn_KillMonsterRewardRectTransform = null;
 			this.m_EG_Btn_LvRewardRectTransform = null;
@@ -2897,7 +2897,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Btn_RankImage = null;
 		private UnityEngine.UI.Button m_E_Button_WorldLvButton = null;
 		private UnityEngine.UI.Button m_E_Btn_PaiMaiHangButton = null;
-		private UnityEngine.UI.Button m_E_Btn_CellDungeon = null;
+		private UnityEngine.UI.Button m_E_Btn_CellDungeonButton = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_3RectTransform = null;
 		private UnityEngine.RectTransform m_EG_Btn_KillMonsterRewardRectTransform = null;
 		private UnityEngine.RectTransform m_EG_Btn_LvRewardRectTransform = null;

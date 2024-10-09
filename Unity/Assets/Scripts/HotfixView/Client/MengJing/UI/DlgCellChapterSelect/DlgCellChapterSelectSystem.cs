@@ -45,7 +45,7 @@ namespace ET.Client
             self.View.E_NanDu_2_ButtonButton.AddListener(() => { self.OnNanDu_Button(2); });
             self.View.E_NanDu_3_ButtonButton.AddListener(() => { self.OnNanDu_Button(3); });
 
-            self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonMap); });
+            self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellChapterSelect); });
             self.View.E_LevelReturnButton.AddListener(self.ReEnlarge);
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButtonClick);
             self.View.E_CellDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCellDungeonItemsRefresh);
@@ -157,7 +157,6 @@ namespace ET.Client
                 item.OnClick();
 
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
-                self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
                 self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
 
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -168,15 +167,7 @@ namespace ET.Client
 
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
-                self.View.E_CellDungeonItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             };
-        }
-
-        private static void ShowSelect(this DlgCellChapterSelect self, Transform transform)
-        {
-            RectTransform rectTransform = self.View.EG_LevelPanelRectTransform;
-            Vector3 position = rectTransform.InverseTransformPoint(transform.position);
-            position.y += 40;
         }
 
         public static void ReEnlarge(this DlgCellChapterSelect self)
@@ -190,7 +181,6 @@ namespace ET.Client
             self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
             self.CurrentMap.transform.SetSiblingIndex(self.OriginalIndex);
             self.SetTitle(true);
-            self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
 
             rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () => { self.EnableBtns(true); };
         }
@@ -245,7 +235,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.CellDungeon, self.LevelId, self.Difficulty, "0");
 
             if (errorCode != ErrorCode.ERR_Success)
             {
@@ -254,7 +244,7 @@ namespace ET.Client
             }
 
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+            uiComponent.CloseWindow(WindowID.WindowID_CellChapterSelect);
         }
     }
 }
