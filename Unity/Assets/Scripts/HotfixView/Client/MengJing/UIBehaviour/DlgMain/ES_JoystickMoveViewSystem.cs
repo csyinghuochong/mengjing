@@ -252,6 +252,7 @@ namespace ET.Client
             if (pathfind.Count < 2)
             {
                 unit.Rotation =  quaternion.Euler(0, math.radians(direction ), 0);
+                EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
                 return;
             }
 
