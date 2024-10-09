@@ -398,7 +398,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_DungeonMapLevelItemsImage
+		public UnityEngine.UI.Image E_CellDungeonItemsImage
      	{
      		get
      		{
@@ -407,15 +407,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_DungeonMapLevelItemsImage == null )
+     			if( this.m_E_CellDungeonItemsImage == null )
      			{
-		    		this.m_E_DungeonMapLevelItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_DungeonMapLevelItems");
+		    		this.m_E_CellDungeonItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_CellDungeonItems");
      			}
-     			return this.m_E_DungeonMapLevelItemsImage;
+     			return this.m_E_CellDungeonItemsImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_DungeonMapLevelItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_CellDungeonItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -424,11 +424,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_CellDungeonItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_DungeonMapLevelItems");
+		    		this.m_E_CellDungeonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LevelPanel/EG_Left/E_CellDungeonItems");
      			}
-     			return this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect;
+     			return this.m_E_CellDungeonItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -491,8 +491,8 @@ namespace ET.Client
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
 			this.m_EG_LeftRectTransform = null;
-			this.m_E_DungeonMapLevelItemsImage = null;
-			this.m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
+			this.m_E_CellDungeonItemsImage = null;
+			this.m_E_CellDungeonItemsLoopVerticalScrollRect = null;
 			this.m_E_LevelReturnButton = null;
 			this.m_E_LevelReturnImage = null;
 			this.uiTransform = null;
@@ -521,8 +521,8 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
 		private UnityEngine.RectTransform m_EG_LeftRectTransform = null;
-		private UnityEngine.UI.Image m_E_DungeonMapLevelItemsImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_DungeonMapLevelItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Image m_E_CellDungeonItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CellDungeonItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_LevelReturnButton = null;
 		private UnityEngine.UI.Image m_E_LevelReturnImage = null;
 		public Transform uiTransform = null;

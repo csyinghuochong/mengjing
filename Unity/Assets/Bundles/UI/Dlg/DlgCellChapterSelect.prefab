@@ -1241,10 +1241,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 60
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 10
+  m_Spacing: 100
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -4720,7 +4720,7 @@ GameObject:
   - component: {fileID: 2961044770157392983}
   - component: {fileID: 8372830690271402184}
   m_Layer: 5
-  m_Name: E_DungeonMapLevelItems
+  m_Name: E_CellDungeonItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4744,8 +4744,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -650, y: -77.30768}
-  m_SizeDelta: {x: 900, y: 726.6154}
+  m_AnchoredPosition: {x: -602.34467, y: -79.37964}
+  m_SizeDelta: {x: 995.3107, y: 722.4715}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8747094681088728770
 MonoBehaviour:
@@ -4760,7 +4760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSource:
-    prefabName: Item_DungeonMapLevelItem
+    prefabName: Item_CellDungeonItem
     poolSize: 5
   totalCount: 0
   reverseDirection: 0
