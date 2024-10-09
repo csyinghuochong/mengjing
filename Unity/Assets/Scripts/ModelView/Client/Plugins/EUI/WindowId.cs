@@ -203,5 +203,6 @@ namespace ET.Client
 		WindowID_DungeonMapLevel,
 		WindowID_RealName,
 		WindowID_Function,
+		WindowID_CellChapterSelect,
 	}
 }
