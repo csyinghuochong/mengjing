@@ -64,12 +64,26 @@ namespace ET.Client
         private static void OnCellDungeonItemsRefresh(this DlgCellChapterSelect self, Transform transform, int index)
         {
             Scroll_Item_CellDungeonItem scrollItemDungeonMapLevelItem = self.ScrollItemCellDungeonItems[index].BindTrans(transform);
-            // scrollItemDungeonMapLevelItem.Refresh(self.ShowBoosRefreshTime[index].KeyId, long.Parse(self.ShowBoosRefreshTime[index].Value));
+            CellChapterConfig cellChapterConfig = CellChapterConfigCategory.Instance.Get(self.ChapterId);
+            scrollItemDungeonMapLevelItem.Refresh(cellChapterConfig.RandomArea[index]);
+        }
+
+        public static void OnSelect(this DlgCellChapterSelect self, int levelId)
+        {
+            self.LevelId = levelId;
+
+            CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(levelId);
+            self.View.E_LevelNameText.text = cellGenerateConfig.ChapterName;
+            self.View.E_LevelDesText.text = cellGenerateConfig.ChapterDes;
+            using (zstring.Block())
+            {
+                self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", cellGenerateConfig.EnterLv);
+            }
         }
 
         private static bool CanOpen(this DlgCellChapterSelect self, int chapterId)
         {
-            if (!DungeonSectionConfigCategory.Instance.Contain(chapterId))
+            if (!CellChapterConfigCategory.Instance.Contain(chapterId))
             {
                 return false;
             }
@@ -77,13 +91,13 @@ namespace ET.Client
             int selfLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
 
             int level = 100;
-            int[] chapters = DungeonSectionConfigCategory.Instance.Get(chapterId).RandomArea;
+            int[] chapters = CellChapterConfigCategory.Instance.Get(chapterId).RandomArea;
             for (int i = 0; i < chapters.Length; i++)
             {
-                DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(chapters[i]);
-                if (dungeonConfig.EnterLv < level)
+                CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(chapters[i]);
+                if (cellGenerateConfig.EnterLv < level)
                 {
-                    level = dungeonConfig.EnterLv;
+                    level = cellGenerateConfig.EnterLv;
                 }
             }
 
@@ -132,13 +146,15 @@ namespace ET.Client
             targetPosition.x -= 250f;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
-                UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
-                List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
                 self.SetTitle(false);
 
+                CellChapterConfig cellChapterConfig = CellChapterConfigCategory.Instance.Get(self.ChapterId);
+                self.AddUIScrollItems(ref self.ScrollItemCellDungeonItems, cellChapterConfig.RandomArea.Length);
+                self.View.E_CellDungeonItemsLoopVerticalScrollRect.SetVisible(true, cellChapterConfig.RandomArea.Length);
+
                 // 默认选第一个
-                // self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
+                Scroll_Item_CellDungeonItem item = self.ScrollItemCellDungeonItems[0];
+                item.OnClick();
 
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
@@ -154,20 +170,6 @@ namespace ET.Client
                 self.View.E_CloseButton.gameObject.SetActive(false);
                 self.View.E_CellDungeonItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             };
-        }
-
-        private static void OnSelect(this DlgCellChapterSelect self, int dungeonConfigId, Transform transform)
-        {
-            self.LevelId = dungeonConfigId;
-            self.ShowSelect(transform);
-
-            DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonConfigId);
-            self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
-            self.View.E_LevelDesText.text = dungeonConfig.ChapterDes;
-            using (zstring.Block())
-            {
-                self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", dungeonConfig.EnterLv);
-            }
         }
 
         private static void ShowSelect(this DlgCellChapterSelect self, Transform transform)

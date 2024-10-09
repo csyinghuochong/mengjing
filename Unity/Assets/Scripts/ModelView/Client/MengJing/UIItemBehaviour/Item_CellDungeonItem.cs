@@ -4,8 +4,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_CellDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CellDungeonItem> 
+	public  class Scroll_Item_CellDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CellDungeonItem>
 	{
+		public int LevelId;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
