@@ -204,5 +204,6 @@ namespace ET.Client
 		WindowID_RealName,
 		WindowID_Function,
 		WindowID_CellChapterSelect,
+		WindowID_CellDungeonCell,
 	}
 }

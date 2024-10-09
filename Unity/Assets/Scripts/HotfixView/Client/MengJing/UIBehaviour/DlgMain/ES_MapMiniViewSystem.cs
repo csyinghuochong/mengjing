@@ -53,7 +53,7 @@ namespace ET.Client
                     self.OnOpenBigMap(); //打开主城
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
-                    // self.OnShowFubenIndex(); //打开副本小地图
+                    self.OnShowFubenIndex(); //打开副本小地图
                     break;
                 default:
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
@@ -72,7 +72,12 @@ namespace ET.Client
 
         public static void OnOpenBigMap(this ES_MapMini self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_MapBig);
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MapBig).Coroutine();
+        }
+        
+        public static void OnShowFubenIndex(this ES_MapMini self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellDungeonCell).Coroutine();
         }
 
         private static void UpdateTianQi(this ES_MapMini self, string tianqi)
