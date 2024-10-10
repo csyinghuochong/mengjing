@@ -19,7 +19,7 @@
             int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().SceneType;
             if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon)
             {
-                // unit.ZoneScene().GetComponent<CellDungeonComponent>().CheckChuansongOpen();
+                unit.Root().GetComponent<CellDungeonComponentC>().CheckChuansongOpen();
             }
         }
     }

@@ -586,6 +586,9 @@ namespace ET.Client
 
     public struct EnterCellDungeon
     {
+    }
 
+    public struct ChuanSongOpen
+    {
     }
 }

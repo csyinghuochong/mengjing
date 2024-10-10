@@ -7,9 +7,6 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_CellDungeonCellItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CellDungeonCellItem> 
 	{
-		public Transform Transform;
-		public Image ImagePassAble;
-
 		public CellDungeonInfo fubenCellInfo;
 
 		public bool ShowOpen;

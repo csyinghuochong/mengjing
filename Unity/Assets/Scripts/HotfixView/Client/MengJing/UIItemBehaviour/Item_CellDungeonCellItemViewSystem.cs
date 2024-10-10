@@ -32,9 +32,9 @@ namespace ET.Client
 
         public static void CrossFadeAlpha(this Scroll_Item_CellDungeonCellItem self, float alpha)
         {
-            for (int i = 0; i < self.Transform.childCount; i++)
+            for (int i = 0; i < self.uiTransform.childCount; i++)
             {
-                Image image = self.Transform.GetChild(i).gameObject.GetComponent<Image>();
+                Image image = self.uiTransform.GetChild(i).gameObject.GetComponent<Image>();
 
                 if (image == null)
                 {
@@ -141,28 +141,28 @@ namespace ET.Client
                 fubenCellInfo.ctype != (byte)CellDungeonStatu.Impassable)
             {
                 ifShowJingYingStatus = true;
-            }
 
-            self.E_TeShu_JingYingImage.gameObject.SetActive(ifShowJingYingStatus);
+                self.E_TeShu_JingYingImage.gameObject.SetActive(ifShowJingYingStatus);
 
-            //当前格子
-            if (ifCurCell && cellDungeonComponentC.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, cellIndex))
-            {
-                List<EntityRef<Unit>> unitList = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
-                bool ifCostStatus = true;
-                for (int i = 0; i < unitList.Count; i++)
+                //当前格子
+                if (ifCurCell && cellDungeonComponentC.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, cellIndex))
                 {
-                    Unit unit = unitList[i];
-                    if (unit.Type == UnitType.Monster)
+                    List<EntityRef<Unit>> unitList = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+                    bool ifCostStatus = true;
+                    for (int i = 0; i < unitList.Count; i++)
                     {
-                        if (unit.ConfigId == 80000001)
+                        Unit unit = unitList[i];
+                        if (unit.Type == UnitType.Monster)
                         {
-                            ifCostStatus = false;
-                        }
+                            if (unit.ConfigId == 80000001)
+                            {
+                                ifCostStatus = false;
+                            }
 
-                        if (ifCostStatus)
-                        {
-                            self.E_TeShu_HuiFuImage.gameObject.SetActive(false);
+                            if (ifCostStatus)
+                            {
+                                self.E_TeShu_HuiFuImage.gameObject.SetActive(false);
+                            }
                         }
                     }
                 }

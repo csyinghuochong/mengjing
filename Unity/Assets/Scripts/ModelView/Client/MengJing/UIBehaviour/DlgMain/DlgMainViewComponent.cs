@@ -929,6 +929,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_CellDungeonCellMini ES_CellDungeonCellMini
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_CellDungeonCellMini es = this.m_es_celldungeoncellmini;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_CellDungeonCellMini");
+		    	   this.m_es_celldungeoncellmini = this.AddChild<ES_CellDungeonCellMini,Transform>(subTrans);
+     			}
+     			return this.m_es_celldungeoncellmini;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_Button_ZhanKaiButton
      	{
      		get
@@ -2688,6 +2708,7 @@ namespace ET.Client
 			this.m_EG_RightSetRectTransform = null;
 			this.m_es_mapmini = null;
 			this.m_es_mainactivitytip = null;
+			this.m_es_celldungeoncellmini = null;
 			this.m_E_Button_ZhanKaiButton = null;
 			this.m_E_Button_ZhanKaiImage = null;
 			this.m_EG_Btn_TopRight_1RectTransform = null;
@@ -2843,6 +2864,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_RightSetRectTransform = null;
 		private EntityRef<ES_MapMini> m_es_mapmini = null;
 		private EntityRef<ES_MainActivityTip> m_es_mainactivitytip = null;
+		private EntityRef<ES_CellDungeonCellMini> m_es_celldungeoncellmini = null;
 		private UnityEngine.UI.Button m_E_Button_ZhanKaiButton = null;
 		private UnityEngine.UI.Image m_E_Button_ZhanKaiImage = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_1RectTransform = null;

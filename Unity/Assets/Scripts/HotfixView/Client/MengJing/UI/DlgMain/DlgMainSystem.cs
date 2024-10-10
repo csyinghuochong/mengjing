@@ -427,7 +427,7 @@ namespace ET.Client
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
             self.View.E_Btn_CellDungeonButton.AddListener(self.OnBtn_CellDungeon);
-            
+
             self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
             self.View.EG_Btn_LvRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
@@ -1680,6 +1680,16 @@ namespace ET.Client
             self.Root().RemoveComponent<UnitGuaJiComponent>();
         }
 
+        public static void OnChapterOpen(this DlgMain self)
+        {
+            // var BaseObj = ResourcesComponent.Instance.LoadAsset<GameObject>(ABPathHelper.GetUGUIPath("Chapter/UIChapterOpen"));
+            // UI uiskillButton = self.AddChild<UI, string, GameObject>("UIChapterOpen", GameObject.Instantiate(BaseObj));
+            // uiskillButton.AddComponent<UICellChapterOpenComponent>().OnUpdateUI();
+            // UICommonHelper.SetParent(uiskillButton.GameObject, UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject);
+
+            self.View.ES_CellDungeonCellMini.OnChapterOpen(true);
+        }
+
         /// <summary>
         /// 返回myunit 并且场景加载完成 
         /// </summary>
@@ -1728,7 +1738,7 @@ namespace ET.Client
             switch (sceneTypeEnum)
             {
                 case SceneTypeEnum.CellDungeon:
-                    // self.UILevelGuideMini.GetComponent<UICellDungeonCellMiniComponent>().OnUpdateUI();
+                    self.View.ES_CellDungeonCellMini.OnUpdateUI();
                     break;
                 case SceneTypeEnum.MainCityScene:
                     self.View.ES_MainHpBar.EG_MonsterNodeRectTransform.gameObject.SetActive(false);

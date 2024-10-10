@@ -200,8 +200,7 @@ namespace ET.Client
                 }
             }
             
-            //EventType.ChuanSongOpen.Instance.ZoneScene = self.DomainScene();
-            //Game.EventSystem.PublishClass(EventType.ChuanSongOpen.Instance);
+            EventSystem.Instance.Publish(self.Root(), new ChuanSongOpen());
         }
 
         public static int CheckEnterLevel(this CellDungeonComponentC self, int difficulty, int chapterid)

@@ -95,5 +95,6 @@
         public const int DungeonMapTimer = 361;
         public const int ReviveTimer = 362;
         public const int CellTransferUITimer = 363;
+        public const int UICellDungeonGuide = 364;
     }
 }
