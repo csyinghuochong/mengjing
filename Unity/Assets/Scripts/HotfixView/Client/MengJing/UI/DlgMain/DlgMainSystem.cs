@@ -350,6 +350,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_CellDungeonCellMini))]
     [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
     [FriendOf(typeof(ES_MainActivityTip))]
@@ -1719,6 +1720,7 @@ namespace ET.Client
             // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
+            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             if (value == "1")

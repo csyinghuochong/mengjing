@@ -303,6 +303,7 @@ namespace ET.Client
                 switch (sceneTypeEnum)
                 {
                     case (int)SceneTypeEnum.CellDungeon:
+                        self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
                         self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
                         break;
                     case (int)SceneTypeEnum.LocalDungeon:
