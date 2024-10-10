@@ -74,7 +74,6 @@ namespace ET.Client
             self.fubenCellInfo = fubenCellInfo;
             CellDungeonComponentC cellDungeonComponentC = self.Root().GetComponent<CellDungeonComponentC>();
             CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(cellDungeonComponentC.ChapterId);
-            GameObject cell = self.uiTransform.gameObject;
 
             int[] size = cellGenerateConfig.InitSize;
             int cellIndex = cellDungeonComponentC.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line);
