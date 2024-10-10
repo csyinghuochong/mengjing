@@ -7,10 +7,6 @@ namespace ET.Client
     {
         public DlgCellDungeonEnterShowViewComponent View { get => this.GetComponent<DlgCellDungeonEnterShowViewComponent>(); }
 
-        public GameObject JingYingGuanKaShowSet;
-        public GameObject Lab_ChapterName;
-        public GameObject PostionSet;
-
         public Vector3 chushiVec3 = Vector3.zero;
         public bool stopMoveStart = false;
         public bool stopMoveEnd = false;
@@ -19,8 +15,6 @@ namespace ET.Client
         public float moveDis = 0;
         public float nowDis = 0f;
         public int NanDu;
-        public GameObject ObjNanDu_1;
-        public GameObject ObjNanDu_2;
-        public GameObject ObjNanDu_3;
+        public long Timer;
     }
 }
