@@ -1690,6 +1690,16 @@ namespace ET.Client
             self.View.ES_CellDungeonCellMini.OnChapterOpen(true);
         }
 
+        public static void OnCellDungeonEnterShow(this DlgMain self, int chapterId)
+        {
+            if (chapterId == 0)
+                return;
+
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_CellDungeonEnterShow);
+            DlgCellDungeonEnterShow dlgCellDungeonEnterShow = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonEnterShow>();
+            dlgCellDungeonEnterShow.OnUpdateUI(chapterId);
+        }
+
         /// <summary>
         /// 返回myunit 并且场景加载完成 
         /// </summary>
@@ -2312,18 +2322,6 @@ namespace ET.Client
             self.View.ES_MainSkill.E_Button_HorseButton.gameObject.SetActive(
                 unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
             self.View.E_CityHorseButton.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
-        }
-
-        public static void OnCellDungeonEnterShow(this DlgMain self, int chapterId)
-        {
-            if (chapterId == 0)
-                return;
-
-            // var BaseObj = ResourcesComponent.Instance.LoadAsset<GameObject>(ABPathHelper.GetUGUIPath("CellDungeon/UICellDungeonEnterShow"));
-            // UI uiskillButton = self.AddChild<UI, string, GameObject>("ChapterEnterShow", GameObject.Instantiate(BaseObj));
-            // uiskillButton.AddComponent<UICellDungeonEnterShowComponent>().OnUpdateUI(chapterId);
-            //
-            // UICommonHelper.SetParent(uiskillButton.GameObject, UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject);
         }
     }
 }
