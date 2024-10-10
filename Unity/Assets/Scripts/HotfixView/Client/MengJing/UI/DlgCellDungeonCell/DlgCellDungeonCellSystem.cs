@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_CellDungeonCellItem))]
     [FriendOf(typeof(DlgCellDungeonCell))]
     public static class DlgCellDungeonCellSystem
     {
@@ -32,11 +33,13 @@ namespace ET.Client
                     .LoadAssetSync<GameObject>(ABPathHelper.GetUGUIPath("Item/Item_CellDungeonCellItem"));
             for (int i = 0; i < totalsize; i++)
             {
-                GameObject item = UnityEngine.Object.Instantiate(cellItem, self.View.EG_CellContainerRectTransform, true);
-                item.SetActive(true);
-                item.transform.localScale = Vector3.one;
-                item.transform.localPosition = Vector3.zero;
-                self.AddChild<Scroll_Item_CellDungeonCellItem>().OnUpdateUI(cellDungeonComponentC.GetFubenCell(i));
+                GameObject itemGO = UnityEngine.Object.Instantiate(cellItem, self.View.EG_CellContainerRectTransform, true);
+                itemGO.SetActive(true);
+                itemGO.transform.localScale = Vector3.one;
+                itemGO.transform.localPosition = Vector3.zero;
+                Scroll_Item_CellDungeonCellItem item = self.AddChild<Scroll_Item_CellDungeonCellItem>();
+                item.uiTransform = itemGO.transform;
+                item.OnUpdateUI(cellDungeonComponentC.GetFubenCell(i));
             }
         }
     }
