@@ -141,28 +141,28 @@ namespace ET.Client
                 fubenCellInfo.ctype != (byte)CellDungeonStatu.Impassable)
             {
                 ifShowJingYingStatus = true;
+            }
 
-                self.E_TeShu_JingYingImage.gameObject.SetActive(ifShowJingYingStatus);
+            self.E_TeShu_JingYingImage.gameObject.SetActive(ifShowJingYingStatus);
 
-                //当前格子
-                if (ifCurCell && cellDungeonComponentC.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, cellIndex))
+            // 当前格子
+            if (ifCurCell && cellDungeonComponentC.HaveFubenCellNpc(CellDungeonNpc.HuiFuItem, cellIndex))
+            {
+                List<EntityRef<Unit>> unitList = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+                bool ifCostStatus = true;
+                for (int i = 0; i < unitList.Count; i++)
                 {
-                    List<EntityRef<Unit>> unitList = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
-                    bool ifCostStatus = true;
-                    for (int i = 0; i < unitList.Count; i++)
+                    Unit unit = unitList[i];
+                    if (unit.Type == UnitType.Monster)
                     {
-                        Unit unit = unitList[i];
-                        if (unit.Type == UnitType.Monster)
+                        if (unit.ConfigId == 80000001)
                         {
-                            if (unit.ConfigId == 80000001)
-                            {
-                                ifCostStatus = false;
-                            }
+                            ifCostStatus = false;
+                        }
 
-                            if (ifCostStatus)
-                            {
-                                self.E_TeShu_HuiFuImage.gameObject.SetActive(false);
-                            }
+                        if (ifCostStatus)
+                        {
+                            self.E_TeShu_HuiFuImage.gameObject.SetActive(false);
                         }
                     }
                 }

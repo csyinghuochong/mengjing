@@ -5,12 +5,12 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, EnterCellDungeon args)
         {
-
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             await scene.GetComponent<SceneManagerComponent>().ChangeCellSonScene(mapComponent.SceneType,
                 mapComponent.SceneType,
                 mapComponent.SonSceneId);
 
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_CellDungeonCellMini.OnUpdateUI();
 
             await ETTask.CompletedTask;
         }
