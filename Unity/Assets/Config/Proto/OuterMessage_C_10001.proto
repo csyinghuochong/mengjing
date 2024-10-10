@@ -164,8 +164,8 @@ message UnitInfo
 message M2C_CreateUnits // IMessage
 {
 	repeated UnitInfo Units = 1;
-	repeated DropInfo Drops = 3;
-	repeated TransferInfo Transfers = 4;
+	repeated DropInfo Drops = 3;              //移除掉 全部走Units
+	repeated TransferInfo Transfers = 4;      //移除掉 全部走Units
 	int32 UpdateAll = 8;
 }
 
