@@ -23315,7 +23315,7 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(0)]
-        public DropInfo DropItem { get; set; }
+        public long DropItem { get; set; }
 
         /// <summary>
         /// 1需求 2丢弃

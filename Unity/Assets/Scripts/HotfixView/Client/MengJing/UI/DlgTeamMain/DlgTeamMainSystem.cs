@@ -45,14 +45,21 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void OnTeamPickNotice(this DlgTeamMain self, List<DropInfo> dropInfos)
+        public static void OnTeamPickNotice(this DlgTeamMain self, List<UnitInfo> dropInfos)
         {
+            UnitComponent unitComponent = self.Root().CurrentScene().GetComponent<UnitComponent>();
             for (int i = 0; i < dropInfos.Count; i++)
             {
-                dropInfos[i].BeKillId = TimeHelper.ServerNow() + TimeHelper.Second * 50 + self.DropInfos.Count;
-            }
+                Unit unitDrop = unitComponent.Get(dropInfos[i].UnitId);
+                if (unitDrop == null)
+                {
+                    continue;
+                }
 
-            self.DropInfos.AddRange(dropInfos);
+                unitDrop.GetComponent<NumericComponentC>()
+                        .ApplyValue(NumericType.BeKillId, TimeHelper.ServerNow() + TimeHelper.Second * 50 + self.DropInfos.Count);
+                self.DropInfos.Add(unitDrop);
+            }
 
             if (self.Timer == 0)
             {
@@ -63,17 +70,22 @@ namespace ET.Client
         public static void UpdateDropItem(this DlgTeamMain self)
         {
             self.CurDrop = self.DropInfos[0];
-            self.LeftTime = (int)(self.CurDrop.BeKillId - TimeHelper.ServerNow()) / 1000;
+            Unit unitDrop = self.CurDrop;
+            self.LeftTime = (int)(unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.BeKillId) - TimeHelper.ServerNow()) / 1000;
             self.DropInfos.RemoveAt(0);
             self.View.EG_TeamDropItemRectTransform.gameObject.SetActive(true);
-            self.View.ES_CommonItem.UpdateItem(new() { ItemID = self.CurDrop.ItemID, ItemNum = self.CurDrop.ItemNum }, ItemOperateEnum.None);
+            self.View.ES_CommonItem.UpdateItem(new()
+            {
+                ItemID = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID),
+                ItemNum = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum)
+            }, ItemOperateEnum.None);
             using (zstring.Block())
             {
                 Log.Debug(zstring.Format("self.DropInfos {0}", self.DropInfos.Count));
             }
         }
 
-        public static void SendTeamPick(this DlgTeamMain self, DropInfo dropInfo, int needType)
+        public static void SendTeamPick(this DlgTeamMain self, Unit dropInfo, int needType)
         {
             if (dropInfo == null)
             {
@@ -104,7 +116,8 @@ namespace ET.Client
             long serverTime = TimeHelper.ServerNow();
             for (int i = self.DropInfos.Count - 1; i >= 0; i--)
             {
-                if (serverTime >= self.DropInfos[i].BeKillId)
+                Unit unitDrop = self.DropInfos[i];
+                if (serverTime >= unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.BeKillId))
                 {
                     self.SendTeamPick(self.DropInfos[i], 2);
                     self.DropInfos.RemoveAt(i);
@@ -118,12 +131,13 @@ namespace ET.Client
                 self.View.EG_TeamDropItemRectTransform.gameObject.SetActive(false);
             }
 
-            if (self.CurDrop == null && self.DropInfos.Count == 0)
+            Unit curUnitDrop = self.CurDrop;
+            if (curUnitDrop == null && self.DropInfos.Count == 0)
             {
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             }
 
-            if (self.CurDrop == null && self.DropInfos.Count > 0)
+            if (curUnitDrop == null && self.DropInfos.Count > 0)
             {
                 self.UpdateDropItem();
             }

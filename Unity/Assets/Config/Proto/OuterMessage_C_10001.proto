@@ -5351,7 +5351,7 @@ message M2C_TeamerPositionResponse //ILocationResponse
 message C2M_TeamPickRequest    // ILocationMessage
 {
 	int32 RpcId = 90;
-	DropInfo DropItem = 1;
+	int64 DropItem = 1;
 	int32 Need = 2;      //1需求 2丢弃
 }
 

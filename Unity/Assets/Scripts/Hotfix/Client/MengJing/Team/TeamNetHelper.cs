@@ -193,10 +193,10 @@
             return repose.Error;
         }
 
-        public static void TeamPickRequest(Scene root, DropInfo dropInfo, int need)
+        public static void TeamPickRequest(Scene root, Unit dropInfo, int need)
         {
             C2M_TeamPickRequest request = C2M_TeamPickRequest.Create();
-            request.DropItem = dropInfo;
+            request.DropItem = dropInfo.Id;
             request.Need = need;
 
             root.GetComponent<ClientSenderCompnent>().Send(request);

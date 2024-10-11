@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgTeamMain: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgTeamMain : Entity, IAwake, IUILogic
     {
         public DlgTeamMainViewComponent View
         {
@@ -12,7 +12,7 @@ namespace ET.Client
 
         public long Timer;
         public int LeftTime;
-        public DropInfo CurDrop;
-        public List<DropInfo> DropInfos = new();
+        public EntityRef<Unit> CurDrop;
+        public List<EntityRef<Unit>> DropInfos = new();
     }
 }
