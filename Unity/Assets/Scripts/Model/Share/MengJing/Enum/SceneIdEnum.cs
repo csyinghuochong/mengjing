@@ -67,6 +67,7 @@ namespace ET
         public const int PetMing = 24;      //宠物矿场
         public const int SeasonTower = 25;  //赛季之塔
         public const int OneChallenge = 26;    //1v1挑战
+        public const int PetMelee = 27;      //宠物大混战
     }
 
     public static class SceneSubTypeEnum
