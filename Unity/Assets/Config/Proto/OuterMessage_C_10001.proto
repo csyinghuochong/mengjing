@@ -1200,30 +1200,6 @@ message M2C_OpenBoxResponse // ILocationResponse
 	string Message = 92;
 }
 
-message DropInfo
-{
-	int64 UnitId  = 1;
-	int32 ItemID = 3;
-	int32 ItemNum = 4;
-	float X = 5;
-	float Y = 6;
-	float Z = 7;
-	int32 DropType = 8; //0 公共掉落    1私人掉落
-	int32 CellIndex = 9;
-	int64 BeKillId = 10;
-}
-
-message TransferInfo
-{
-	int64 UnitId  = 1;
-	int32 Direction = 2;
-	int32 CellIndex = 3;
-	float X = 5;
-	float Y = 6;
-	float Z = 7;
-	int32 TransferId = 8;
-	int32 UnitType = 9;
-}
 
 //拾取道具
 //ResponseType M2C_PickItemResponse
