@@ -106,10 +106,10 @@ namespace ET.Client
 
         public static void ShowDropInfo(this UIDropComponent self)
         {
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
             Text textMeshProUGUI = self.HeadBar.transform.Find("Lab_DropName").gameObject.GetComponent<Text>();
             //显示名称
-            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum) == 1)
+            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum) == 1)
             {
                 textMeshProUGUI.text = itemConfig.ItemName;
             }
@@ -117,19 +117,19 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    textMeshProUGUI.text = zstring.Format("{0}{1}", self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum), itemConfig.ItemName);
+                    textMeshProUGUI.text = zstring.Format("{0}{1}", self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum), itemConfig.ItemName);
                 }
             }
 
             //显示品质
             textMeshProUGUI.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
-            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
+            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
             //显示UI
             self.HeadBar.SetActive(true);
 
             Sprite sprite = null;
             long instanceid = self.InstanceId;
-            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) != 1)
+            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId) != 1)
             {
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
                 sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -224,9 +224,9 @@ namespace ET.Client
                 {
                     self.IfPlayEffect = true;
                     //创建特效(排除基础货币)
-                    if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) >= 100)
+                    if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId) >= 100)
                     {
-                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
                         if (itemConfig.ItemQuality == 4)
                         {
                             FunctionEffect.PlayDropEffect(self.MyUnit, 200011);
@@ -275,7 +275,7 @@ namespace ET.Client
 
             bool sendpick = false;
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
-            if (jingLingConfig.FunctionType == JingLingFunctionType.PickGold && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) == 1)
+            if (jingLingConfig.FunctionType == JingLingFunctionType.PickGold && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId) == 1)
             {
                 sendpick = true;
             }
@@ -300,7 +300,7 @@ namespace ET.Client
                 }
 
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
 
                 if (userInfoComponent.PickSet[0] == "1" && itemConfig.ItemQuality == 2)
                 {

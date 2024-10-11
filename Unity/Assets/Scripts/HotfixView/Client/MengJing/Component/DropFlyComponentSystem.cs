@@ -61,8 +61,8 @@ namespace ET.Client
             // 提前获取，消息返回后Drop会销毁
             Scene root = self.Root();
 
-            int itemId = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID);
-            int itemNum = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum);
+            int itemId = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId);
+            int itemNum = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum);
 
             int error = await MapHelper.SendShiquItem(self.Root(), new() { self.MyUnit });
 

@@ -76,8 +76,8 @@ namespace ET.Client
             self.View.EG_TeamDropItemRectTransform.gameObject.SetActive(true);
             self.View.ES_CommonItem.UpdateItem(new()
             {
-                ItemID = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID),
-                ItemNum = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum)
+                ItemID = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId),
+                ItemNum = unitDrop.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum)
             }, ItemOperateEnum.None);
             using (zstring.Block())
             {

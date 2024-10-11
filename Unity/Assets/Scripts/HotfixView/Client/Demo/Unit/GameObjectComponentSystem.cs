@@ -251,7 +251,7 @@ namespace ET.Client
                     break;
                 case UnitType.DropItem:
                     DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
-                    string assetPath = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) == 1 ? "DropICoin" : "DropItem";
+                    string assetPath = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId) == 1 ? "DropICoin" : "DropItem";
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/" + assetPath);
                     break;
                 case UnitType.Transfers:
