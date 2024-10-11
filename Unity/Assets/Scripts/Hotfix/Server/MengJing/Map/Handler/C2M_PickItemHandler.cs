@@ -122,8 +122,8 @@ namespace ET.Server
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             foreach (UnitInfo unitInfo in unitInfos)
             {
-                int addItemID = (int)unitInfo.KV[NumericType.ItemID];
-                int addItemNum = (int)unitInfo.KV[NumericType.ItemNum];
+                int addItemID = (int)unitInfo.KV[NumericType.DropItemId];
+                int addItemNum = (int)unitInfo.KV[NumericType.DropItemNum];
                 List<RewardItem> rewardItems = new List<RewardItem>();
                 rewardItems.Add(new RewardItem() { ItemID = addItemID, ItemNum = addItemNum });
                 bool success = bagComponent.OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
@@ -217,8 +217,8 @@ namespace ET.Server
 
             foreach (UnitInfo unitInfo in unitInfos)
             {
-                int addItemID = (int)unitInfo.KV[NumericType.ItemID];
-                int addItemNum = (int)unitInfo.KV[NumericType.ItemNum];
+                int addItemID = (int)unitInfo.KV[NumericType.DropItemId];
+                int addItemNum = (int)unitInfo.KV[NumericType.DropItemNum];
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(addItemID);
 
                 bool teshuItem = itemConfig.ItemQuality >= 4 && itemConfig.ItemType == 2 && itemConfig.ItemSubType == 1;
@@ -248,7 +248,7 @@ namespace ET.Server
                 string numShow = "";
                 if (itemConfig.Id == 1)
                 {
-                    numShow = unitInfo.KV[NumericType.ItemNum].ToString();
+                    numShow = unitInfo.KV[NumericType.DropItemNum].ToString();
                 }
 
                 Unit owner = null;

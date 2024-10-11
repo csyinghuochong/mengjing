@@ -772,8 +772,8 @@ namespace ET.Server
                     dropComponent.BeAttackPlayerList = beattackIds;
                     
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
-                    numericComponentS.ApplyValue(NumericType.ItemID, droplist[i].ItemID, false);
-                    numericComponentS.ApplyValue(NumericType.ItemNum, droplist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemId, droplist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemNum, droplist[i].ItemNum, false);
                     numericComponentS.ApplyValue(NumericType.DropType, monsterCof.DropType, false);
                     numericComponentS.ApplyValue(NumericType.BeKillId, bekill.Id, false);
                     
@@ -863,8 +863,8 @@ namespace ET.Server
 
                         UnitInfo dropInfo = UnitInfo.Create();
                         dropInfo.KV.Add(NumericType.DropType, 1);
-                        dropInfo.KV.Add(NumericType.ItemID, droplist[k].ItemID);
-                        dropInfo.KV.Add(NumericType.ItemNum, droplist[k].ItemNum);
+                        dropInfo.KV.Add(NumericType.DropItemId, droplist[k].ItemID);
+                        dropInfo.KV.Add(NumericType.DropItemNum, droplist[k].ItemNum);
                         dropInfo.Position = new float3(bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f), bekill.Position.y,
                             bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f));
                         dropInfo.UnitId = IdGenerater.Instance.GenerateId();
@@ -927,8 +927,8 @@ namespace ET.Server
                     dropitem.AddComponent<AOIEntity, int, float3>(9 * 1000, dropitem.Position);
                     
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
-                    numericComponentS.ApplyValue(NumericType.ItemID, droplist[i].ItemID, false);
-                    numericComponentS.ApplyValue(NumericType.ItemNum, droplist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemId, droplist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemNum, droplist[i].ItemNum, false);
                     numericComponentS.ApplyValue(NumericType.DropType, dropType, false);
                     numericComponentS.ApplyValue(NumericType.BeKillId, beKill.Id, false);
                 }
@@ -956,8 +956,8 @@ namespace ET.Server
 
                     UnitInfo dropInfo = UnitInfo.Create();
                     dropInfo.KV.Add(NumericType.DropType, 1);
-                    dropInfo.KV.Add(NumericType.ItemID, droplist[k].ItemID);
-                    dropInfo.KV.Add(NumericType.ItemNum, droplist[k].ItemNum);
+                    dropInfo.KV.Add(NumericType.DropItemId, droplist[k].ItemID);
+                    dropInfo.KV.Add(NumericType.DropItemNum, droplist[k].ItemNum);
                     dropInfo.KV.Add(NumericType.BeKillId, beKill.Id);
                     dropInfo.Position = new float3(beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f), beKill.Position.y,
                         beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f));

@@ -134,7 +134,7 @@ namespace ET.Server
                     List<RewardItem> rewardItems = new List<RewardItem>();
                     rewardItems.Add(new RewardItem()
                     {
-                        ItemID = (int)teamDropItem.DropInfo.KV[NumericType.ItemID], ItemNum = (int)teamDropItem.DropInfo.KV[NumericType.ItemNum]
+                        ItemID = (int)teamDropItem.DropInfo.KV[NumericType.DropItemId], ItemNum = (int)teamDropItem.DropInfo.KV[NumericType.DropItemNum]
                     });
                     bool ret = unit.GetComponent<BagComponentS>()
                             .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");

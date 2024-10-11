@@ -143,8 +143,8 @@ namespace ET.Server
                     dropitem.Type = UnitType.DropItem;
                     DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
                     NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
-                    numericComponentS.ApplyValue(NumericType.ItemID, rewardist[i].ItemID, false);
-                    numericComponentS.ApplyValue(NumericType.ItemNum, rewardist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemId, rewardist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.DropItemNum, rewardist[i].ItemNum, false);
                     numericComponentS.ApplyValue(NumericType.CellIndex, p + 1, false);
                     numericComponentS.ApplyValue(NumericType.DropType, 0, false);
 
