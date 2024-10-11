@@ -22,14 +22,10 @@ namespace ET.Server
                 case UnitType.Npc:
                 case UnitType.Stall:
                 case UnitType.Monster:
-                    createUnits.Units.Add(CreateUnitInfo(sendUnit));
-                    break;
                 case UnitType.DropItem:
-                    createUnits.Drops.Add(CreateDropInfo(sendUnit));
-                    break;
                 case UnitType.Transfers:
                 case UnitType.CellTransfers:
-                    createUnits.Transfers.Add(CreateTransferInfo(sendUnit));
+                    createUnits.Units.Add(CreateUnitInfo(sendUnit));
                     break;
                 default:
                     break;
@@ -38,7 +34,7 @@ namespace ET.Server
 
         public static UnitInfo CreateUnitInfo(Unit unit)
         {
-            UnitInfo unitInfo = new();
+            UnitInfo unitInfo = UnitInfo.Create();
             NumericComponentS nc = unit.GetComponent<NumericComponentS>();
             unitInfo.UnitId = unit.Id;
             unitInfo.ConfigId = unit.ConfigId;
@@ -108,43 +104,26 @@ namespace ET.Server
                     break;
                 case UnitType.Monster:
                     break;
+                case UnitType.DropItem:
+                    //DropType == 0 公共掉落 2保护掉落   1私有掉落
+                    DropComponentS dropComponent = unit.GetComponent<DropComponentS>();
+                    long DropType = dropComponent.OwnerId > 0 ? 2 : 0;
+                    if (unitInfo.KV.ContainsKey(NumericType.DropType))
+                    {
+                        unitInfo.KV[NumericType.DropType] = DropType;
+                    }
+                    else
+                    {
+                        unitInfo.KV.Add(NumericType.DropType, DropType);
+                    }
+                    break;
+                case UnitType.CellTransfers:
+                    break;
                 default:
                     break;
             }
 
             return unitInfo;
-        }
-        
-        public static DropInfo CreateDropInfo(Unit unit)
-        {
-            DropInfo dropinfo = DropInfo.Create();
-            dropinfo.UnitId = unit.Id;
-            //DropType == 0 公共掉落 2保护掉落   1私有掉落
-            DropComponentS dropComponent = unit.GetComponent<DropComponentS>();
-            dropinfo.DropType = dropComponent.OwnerId > 0 ? 2 : 0;
-            dropinfo.ItemID = dropComponent.ItemID;
-            dropinfo.ItemNum = dropComponent.ItemNum;
-            dropinfo.CellIndex = dropComponent.CellIndex;
-            dropinfo.BeKillId = dropComponent.BeKillId;
-            dropinfo.X = unit.Position.x;
-            dropinfo.Y = unit.Position.y;
-            dropinfo.Z = unit.Position.z;
-            return dropinfo;
-        }
-
-        public static TransferInfo CreateTransferInfo(Unit unit)
-        {
-            TransferInfo transferinfo = TransferInfo.Create();
-            ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
-            transferinfo.UnitType = unit.Type;
-            transferinfo.UnitId = unit.Id;
-            transferinfo.X = unit.Position.x;
-            transferinfo.Y = unit.Position.y;
-            transferinfo.Z = unit.Position.z;
-            transferinfo.CellIndex = chuansongComponent.CellIndex;
-            transferinfo.Direction = chuansongComponent.DirectionType;
-            transferinfo.TransferId = unit.ConfigId;
-            return transferinfo;
         }
         
         

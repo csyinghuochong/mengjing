@@ -251,7 +251,7 @@ namespace ET.Client
                     break;
                 case UnitType.DropItem:
                     DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
-                    string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
+                    string assetPath = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) == 1 ? "DropICoin" : "DropItem";
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/" + assetPath);
                     break;
                 case UnitType.Transfers:
@@ -778,7 +778,7 @@ namespace ET.Client
                     go.name = unit.Id.ToString();
                     DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
                     unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<UIDropComponent>().InitData(dropComponent.DropInfo);
+                    unit.AddComponent<UIDropComponent>().InitData();
                     break;
                 case UnitType.Transfers:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
@@ -793,7 +793,7 @@ namespace ET.Client
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    switch (chuansongComponent.DirectionType)
+                    switch (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType))
                     {
                         case 1: //上
                             go.transform.localRotation = Quaternion.Euler(-90, 0, 180); //设置旋转
@@ -810,7 +810,9 @@ namespace ET.Client
                         default:
                             break;
                     }
-                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(chuansongComponent.CellIndex, chuansongComponent.DirectionType);
+
+                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex),
+                        unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType));
                     break;
                 case UnitType.JingLing:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

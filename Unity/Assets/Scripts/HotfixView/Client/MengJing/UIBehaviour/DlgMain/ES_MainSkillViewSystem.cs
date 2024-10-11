@@ -484,7 +484,7 @@ namespace ET.Client
             {
                 for (int i = units.Count - 1; i >= 0; i--)
                 {
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(units[i].GetComponent<DropComponentC>().DropInfo.ItemID);
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(units[i].GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
 
                     if (userInfoComponent.PickSet[0] == "1" && itemConfig.ItemQuality == 2)
                     {

@@ -87,11 +87,11 @@ namespace ET.Client
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }
-        
-        public static Unit CreateDropItem(Scene currentScene, DropInfo dropInfo)
+
+        public static Unit CreateDropItem(Scene currentScene, UnitInfo unitInfo)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            long unitId = dropInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
+            long unitId = unitInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : unitInfo.UnitId;
             if (unitComponent.Get(unitId) != null)
             {
                 return null;
@@ -101,20 +101,24 @@ namespace ET.Client
             unit.Type = UnitType.DropItem;
             unitComponent.Add(unit);
 
-            dropInfo.UnitId = unitId;
-            unit.AddComponent<DropComponentC>().DropInfo = dropInfo;
-            unit.GetComponent<DropComponentC>().CellIndex = dropInfo.CellIndex;
+            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            foreach (var kv in unitInfo.KV)
+            {
+                numericComponentC.ApplyValue(kv.Key, kv.Value, false);
+            }
+
+            unit.AddComponent<DropComponentC>();
             unit.AddComponent<UnitInfoComponent>();
-            unit.Position = new float3(dropInfo.X, dropInfo.Y, dropInfo.Z);
+            unit.Position = unitInfo.Position;
 
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }
 
         //创建传送点
-        public static Unit CreateTransferItem(Scene currentScene, TransferInfo transferInfo)
+        public static Unit CreateTransferItem(Scene currentScene, UnitInfo unitInfo)
         {
-            if (transferInfo.TransferId == 20000040)
+            if (unitInfo.ConfigId == 20000040)
             {
                 PetComponentC petComponent = currentScene.Root().GetComponent<PetComponentC>();
                 if (!PetHelper.IsShenShouFull(petComponent.RolePetInfos))
@@ -124,16 +128,21 @@ namespace ET.Client
             }
 
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            Unit unit = unitComponent.AddChildWithId<Unit, int>(transferInfo.UnitId, 1);
-            unit.Type = transferInfo.UnitType;
-            unit.ConfigId = transferInfo.TransferId;
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, 1);
+            unit.Type = unitInfo.Type;
+
+            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            foreach (var kv in unitInfo.KV)
+            {
+                numericComponentC.ApplyValue(kv.Key, kv.Value, false);
+            }
+
+            unit.ConfigId = unitInfo.ConfigId;
             unitComponent.Add(unit);
 
-            ChuansongComponent chuansongComponent = unit.AddComponent<ChuansongComponent>();
-            chuansongComponent.CellIndex = transferInfo.CellIndex;
-            chuansongComponent.DirectionType = transferInfo.Direction;
+            unit.AddComponent<ChuansongComponent>();
             unit.AddComponent<UnitInfoComponent>();
-            unit.Position = new(transferInfo.X, transferInfo.Y, transferInfo.Z);
+            unit.Position = unitInfo.Position;
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }

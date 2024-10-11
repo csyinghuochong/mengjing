@@ -8,7 +8,8 @@
             DlgTeamMain dlgTeamMain = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamMain>();
             if (dlgTeamMain != null)
             {
-                dlgTeamMain.OnTeamPickNotice(args.M2CTeamPickMessage.DropItems);
+                // TODO 待解决
+                // dlgTeamMain.OnTeamPickNotice(args.M2CTeamPickMessage.DropItems);
             }
 
             await ETTask.CompletedTask;

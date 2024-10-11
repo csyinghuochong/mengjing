@@ -75,29 +75,28 @@ namespace ET.Client
             self.HeadBarUI = self.HeadBar.GetComponent<HeadBarUI>();
             self.HeadBarUI.HeadPos = self.UIPosition;
             self.HeadBarUI.HeadBar = self.HeadBar;
-            Unit parent = self.MyUnit.GetParent<UnitComponent>().Get(self.DropInfo.BeKillId);
+            Unit parent = self.MyUnit.GetParent<UnitComponent>().Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.BeKillId));
             if (parent != null)
             {
                 self.StartPoint = parent.Position;
-                self.EndPoint = new(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z);
+                self.EndPoint = self.MyUnit.Position;
             }
             else
             {
                 self.StartPoint = self.MyUnit.Position;
-                self.EndPoint = new(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z);
+                self.EndPoint = self.MyUnit.Position;
             }
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.DropUITimer, self);
             self.GeneratePositions();
 
-            self.ShowDropInfo(self.DropInfo);
+            self.ShowDropInfo();
             self.LateUpdate();
             self.AutoPickItem().Coroutine();
         }
 
-        public static void InitData(this UIDropComponent self, DropInfo dropinfo)
+        public static void InitData(this UIDropComponent self)
         {
-            self.DropInfo = dropinfo;
             GameObjectComponent gameObjectComponent = self.MyUnit.GetComponent<GameObjectComponent>();
             self.UIPosition = gameObjectComponent.GameObject.transform.Find("UIPosition");
             self.ModelMesh = gameObjectComponent.GameObject.transform.Find("DropModel").GetComponent<MeshRenderer>();
@@ -105,12 +104,12 @@ namespace ET.Client
             GameObjectLoadHelper.AddLoadQueue(self.Root(), StringBuilderData.UIDropUIPath, self.InstanceId, self.OnLoadGameObject);
         }
 
-        public static void ShowDropInfo(this UIDropComponent self, DropInfo dropinfo)
+        public static void ShowDropInfo(this UIDropComponent self)
         {
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(dropinfo.ItemID);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
             Text textMeshProUGUI = self.HeadBar.transform.Find("Lab_DropName").gameObject.GetComponent<Text>();
             //显示名称
-            if (dropinfo.ItemNum == 1)
+            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum) == 1)
             {
                 textMeshProUGUI.text = itemConfig.ItemName;
             }
@@ -118,19 +117,19 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    textMeshProUGUI.text = zstring.Format("{0}{1}", dropinfo.ItemNum, itemConfig.ItemName);
+                    textMeshProUGUI.text = zstring.Format("{0}{1}", self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum), itemConfig.ItemName);
                 }
             }
 
             //显示品质
             textMeshProUGUI.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
-            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(dropinfo.ItemID);
+            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
             //显示UI
             self.HeadBar.SetActive(true);
 
             Sprite sprite = null;
             long instanceid = self.InstanceId;
-            if (dropinfo.ItemID != 1)
+            if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) != 1)
             {
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
                 sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -213,11 +212,11 @@ namespace ET.Client
             {
                 self.MyUnit.Position = self.LinepointList[self.Resolution - 1];
 
-                if (Vector3.Distance(self.MyUnit.Position, new Vector3(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z)) > 0.5f)
-                {
-                    Log.Error("DropUIComponent.Distance >  0.5f ");
-                    self.MyUnit.Position = new Vector3(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z);
-                }
+                // if (Vector3.Distance(self.MyUnit.Position, new Vector3(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z)) > 0.5f)
+                // {
+                //     Log.Error("DropUIComponent.Distance >  0.5f ");
+                //     self.MyUnit.Position = new Vector3(self.DropInfo.X, self.DropInfo.Y, self.DropInfo.Z);
+                // }
 
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
@@ -225,9 +224,9 @@ namespace ET.Client
                 {
                     self.IfPlayEffect = true;
                     //创建特效(排除基础货币)
-                    if (self.DropInfo.ItemID >= 100)
+                    if (self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) >= 100)
                     {
-                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.DropInfo.ItemID);
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
                         if (itemConfig.ItemQuality == 4)
                         {
                             FunctionEffect.PlayDropEffect(self.MyUnit, 200011);
@@ -276,7 +275,7 @@ namespace ET.Client
 
             bool sendpick = false;
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
-            if (jingLingConfig.FunctionType == JingLingFunctionType.PickGold && self.DropInfo.ItemID == 1)
+            if (jingLingConfig.FunctionType == JingLingFunctionType.PickGold && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID) == 1)
             {
                 sendpick = true;
             }
@@ -301,7 +300,7 @@ namespace ET.Client
                 }
 
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.DropInfo.ItemID);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID));
 
                 if (userInfoComponent.PickSet[0] == "1" && itemConfig.ItemQuality == 2)
                 {
@@ -314,7 +313,7 @@ namespace ET.Client
                     return;
                 }
 
-                MapHelper.SendShiquItem(self.Root(), new() { self.DropInfo }).Coroutine();
+                MapHelper.SendShiquItem(self.Root(), new() { self.MyUnit }).Coroutine();
             }
         }
 

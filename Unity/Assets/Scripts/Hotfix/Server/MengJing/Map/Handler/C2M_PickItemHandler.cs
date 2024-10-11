@@ -10,116 +10,131 @@ namespace ET.Server
         {
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
             //DropType ==  0 公共掉落 2保护掉落   1私有掉落
+            List<long> privateIds = new();
+            List<long> publicIds = new();
             for (int i = request.ItemIds.Count - 1; i >= 0; i--)
             {
-                if (request.ItemIds[i].DropType != 1)
-                {
-                    continue;
-                }
-
                 bool have = false;
                 for (int d = unitInfoComponent.Drops.Count - 1; d >= 0; d--)
                 {
-                    if (unitInfoComponent.Drops[d].ItemID == request.ItemIds[i].ItemID
-                        && unitInfoComponent.Drops[d].ItemNum == request.ItemIds[i].ItemNum)
+                    UnitInfo unitInfo = unitInfoComponent.Drops[d];
+                    if (unitInfo.UnitId == request.ItemIds[i])
                     {
                         have = true;
-                        unitInfoComponent.Drops.RemoveAt(d);
+                        privateIds.Add(request.ItemIds[i]);
                         break;
                     }
                 }
 
                 if (!have)
                 {
-                    Log.Warning($"无效的私人掉落: {unit.Zone()}   {unit.Id}   {request.ItemIds[i].ItemID}   {request.ItemIds[i].ItemNum}");
-                    request.ItemIds.RemoveAt(i);
+                    publicIds.Add(request.ItemIds[i]);
                 }
             }
 
-            if (request.ItemIds.Count == 0)
+            if (privateIds.Count == 0 && publicIds.Count == 0)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
                 return;
             }
 
-            List<long> removeIds = new List<long>();
             int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().SceneType;
             if (sceneTypeEnum == SceneTypeEnum.TeamDungeon)
             {
-                response.Error = OnTeamPick(unit, request, sceneTypeEnum, removeIds);
+                response.Error = OnTeamPick(unit, privateIds, publicIds, sceneTypeEnum);
             }
             else
             {
-                response.Error = OnFubenPick(unit, request, sceneTypeEnum, removeIds);
+                response.Error = OnFubenPick(unit, privateIds, publicIds, sceneTypeEnum);
             }
 
             await ETTask.CompletedTask;
         }
 
-        private int OnFubenPick(Unit unit, C2M_PickItemRequest request, int sceneTypeEnum, List<long> removeIds)
+        private int OnFubenPick(Unit unit, List<long> privateIds, List<long> publicIds, int sceneTypeEnum)
         {
-            List<DropInfo> drops = request.ItemIds;
-
             long serverTime = TimeHelper.ServerNow();
             int errorCode = ErrorCode.ERR_Success;
             //DropType ==  0 公共掉落 2保护掉落   1私有掉落 3 归属掉落
 
-            int cellindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.HappyCellIndex);
+            int cellIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.HappyCellIndex);
 
-            for (int i = drops.Count - 1; i >= 0; i--)
+            List<UnitInfo> unitInfos = new();
+            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
+            for (int i = publicIds.Count - 1; i >= 0; i--)
             {
-                Unit unitDrop = unit.GetParent<UnitComponent>().Get(drops[i].UnitId);
-                DropComponentS dropComponent = null;
-                if (drops[i].DropType != 1)
+                Unit unitDrop = unitComponent.Get(publicIds[i]);
+                if (unitDrop == null)
                 {
-                    if (unitDrop == null)
-                    {
-                        errorCode = ErrorCode.ERR_NetWorkError;
-                        continue;
-                    }
+                    errorCode = ErrorCode.ERR_NetWorkError;
+                    continue;
+                }
 
-                    dropComponent = unitDrop.GetComponent<DropComponentS>();
-                    int dropType = dropComponent.DropType;
+                DropComponentS dropComponent = unitDrop.GetComponent<DropComponentS>();
+                NumericComponentS numericComponent = unitDrop.GetComponent<NumericComponentS>();
 
-                    if (dropType == 0 && sceneTypeEnum == SceneTypeEnum.Happy && cellindex != dropComponent.CellIndex)
-                    {
-                        errorCode = ErrorCode.Error_PickErrorCell;
-                        continue;
-                    }
+                int dropType = numericComponent.GetAsInt(NumericType.DropType);
 
-                    if (dropType == 2 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id && serverTime < dropComponent.ProtectTime)
-                    {
-                        errorCode = ErrorCode.ERR_ItemDropProtect;
-                        continue;
-                    }
+                if (dropType == 2 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id && serverTime < dropComponent.ProtectTime)
+                {
+                    errorCode = ErrorCode.ERR_ItemDropProtect;
+                    continue;
+                }
 
-                    if (dropType == 3 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id)
+                if (dropType == 3 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id)
+                {
+                    errorCode = ErrorCode.ERR_ItemBelongOther;
+                    continue;
+                }
+
+                unitInfos.Add(MapMessageHelper.CreateUnitInfo(unitDrop));
+                unitComponent.Remove(unitDrop.Id); //移除掉落Unit
+            }
+
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+            for (int i = privateIds.Count - 1; i >= 0; i--)
+            {
+                UnitInfo unitInfo = null;
+                for (int d = unitInfoComponent.Drops.Count - 1; d >= 0; d--)
+                {
+                    if (unitInfoComponent.Drops[d].UnitId == privateIds[i])
                     {
-                        errorCode = ErrorCode.ERR_ItemBelongOther;
-                        continue;
+                        unitInfo = unitInfoComponent.Drops[d];
+                        unitInfoComponent.Drops.RemoveAt(d); //移除掉落
+                        break;
                     }
                 }
 
-                int addItemID = dropComponent != null ? dropComponent.ItemID : drops[i].ItemID;
-                int addItemNum = dropComponent != null ? dropComponent.ItemNum : drops[i].ItemNum;
+                if (unitInfo == null)
+                {
+                    continue;
+                }
+
+                if (sceneTypeEnum == SceneTypeEnum.Happy && cellIndex != unitInfo.KV[NumericType.CellIndex])
+                {
+                    errorCode = ErrorCode.Error_PickErrorCell;
+                    continue;
+                }
+
+                unitInfos.Add(unitInfo);
+            }
+
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
+            foreach (UnitInfo unitInfo in unitInfos)
+            {
+                int addItemID = (int)unitInfo.KV[NumericType.ItemID];
+                int addItemNum = (int)unitInfo.KV[NumericType.ItemNum];
                 List<RewardItem> rewardItems = new List<RewardItem>();
                 rewardItems.Add(new RewardItem() { ItemID = addItemID, ItemNum = addItemNum });
-                bool success = unit.GetComponent<BagComponentS>()
-                        .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
+                bool success = bagComponent.OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
                 if (!success)
                 {
                     errorCode = ErrorCode.ERR_BagIsFull;
                     continue;
                 }
 
-                //移除非私有掉落
-                if (drops[i].DropType != 1)
-                {
-                    unit.GetParent<UnitComponent>().Remove(unitDrop.Id); //移除掉落ID
-                    removeIds.Add(drops[i].UnitId);
-                }
+                FubenHelp.SendFubenPickMessage(unit, unitInfo);
 
-                FubenHelp.SendFubenPickMessage(unit, drops[i]);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(addItemID);
                 if (sceneTypeEnum == SceneTypeEnum.Happy && itemConfig.ItemQuality >= 5)
                 {
@@ -132,7 +147,7 @@ namespace ET.Server
             return errorCode;
         }
 
-        private int OnTeamPick(Unit unit, C2M_PickItemRequest request, int sceneTypeEnum, List<long> removeIds)
+        private int OnTeamPick(Unit unit, List<long> privateIds, List<long> publicIds, int sceneTypeEnum)
         {
             long debugId = 1231456;
             if (unit.Id == debugId)
@@ -140,56 +155,85 @@ namespace ET.Server
                 ServerLogHelper.LogDebug($"OnTeamPick1: {debugId} {unit.GetComponent<UserInfoComponentS>().UserName}");
             }
 
-            List<DropInfo> drops = request.ItemIds;
             long serverTime = TimeHelper.ServerNow();
             int errorCode = ErrorCode.ERR_Success;
 
             //DropType ==  0 公共掉落 2保护掉落   1私有掉落
             TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
-            for (int i = drops.Count - 1; i >= 0; i--)
+            List<UnitInfo> unitInfos = new();
+
+            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
+            for (int i = publicIds.Count - 1; i >= 0; i--)
             {
-                Unit unitDrop = unit.GetParent<UnitComponent>().Get(drops[i].UnitId);
-                DropComponentS dropComponent = null;
-                if (drops[i].DropType != 1)
+                Unit drop = unitComponent.Get(publicIds[i]);
+                if (drop == null)
                 {
-                    if (unitDrop == null)
-                    {
-                        errorCode = ErrorCode.ERR_ItemNotExist;
-                        continue;
-                    }
+                    errorCode = ErrorCode.ERR_NetWorkError;
+                    continue;
+                }
 
-                    dropComponent = unitDrop.GetComponent<DropComponentS>();
-                    int dropType = dropComponent.DropType;
-                    if (dropType == 2 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id && serverTime < dropComponent.ProtectTime)
-                    {
-                        errorCode = ErrorCode.ERR_ItemDropProtect;
-                        continue;
-                    }
+                DropComponentS dropComponent = drop.GetComponent<DropComponentS>();
+                NumericComponentS numericComponent = drop.GetComponent<NumericComponentS>();
 
-                    if (dropType == 3 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id)
+                int dropType = numericComponent.GetAsInt(NumericType.DropType);
+
+                if (dropType == 2 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id && serverTime < dropComponent.ProtectTime)
+                {
+                    errorCode = ErrorCode.ERR_ItemDropProtect;
+                    continue;
+                }
+
+                if (dropType == 3 && dropComponent.OwnerId != 0 && dropComponent.OwnerId != unit.Id)
+                {
+                    errorCode = ErrorCode.ERR_ItemBelongOther;
+                    continue;
+                }
+
+                unitInfos.Add(MapMessageHelper.CreateUnitInfo(drop));
+                unitComponent.Remove(drop.Id); //移除掉落Unit
+            }
+
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+            for (int i = privateIds.Count - 1; i >= 0; i--)
+            {
+                UnitInfo unitInfo = null;
+                for (int d = unitInfoComponent.Drops.Count - 1; d >= 0; d--)
+                {
+                    if (unitInfoComponent.Drops[d].UnitId == privateIds[i])
                     {
-                        errorCode = ErrorCode.ERR_ItemBelongOther;
-                        continue;
+                        unitInfo = unitInfoComponent.Drops[d];
+                        unitInfoComponent.Drops.RemoveAt(d); //移除掉落
+                        break;
                     }
                 }
 
-                int addItemID = dropComponent != null ? dropComponent.ItemID : drops[i].ItemID;
-                int addItemNum = dropComponent != null ? dropComponent.ItemNum : drops[i].ItemNum;
+                if (unitInfo == null)
+                {
+                    continue;
+                }
+
+                unitInfos.Add(unitInfo);
+            }
+
+            foreach (UnitInfo unitInfo in unitInfos)
+            {
+                int addItemID = (int)unitInfo.KV[NumericType.ItemID];
+                int addItemNum = (int)unitInfo.KV[NumericType.ItemNum];
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(addItemID);
 
                 bool teshuItem = itemConfig.ItemQuality >= 4 && itemConfig.ItemType == 2 && itemConfig.ItemSubType == 1;
                 //紫色品质通知客户端抉择
                 //DropType ==   0 公共掉落 1私有掉落 2保护掉落   3 归属掉落
 
-                if (drops[i].DropType != 1 && teamDungeonComponent.IsInTeamDrop(unitDrop.Id))
+                if (unitInfo.KV[NumericType.DropType] != 1 && teamDungeonComponent.IsInTeamDrop(unitInfo.UnitId))
                 {
                     errorCode = ErrorCode.Error_PickWaitSelect;
                 }
 
-                if (drops[i].DropType == 0 && itemConfig.ItemQuality >= 4 && !teshuItem
-                    && !teamDungeonComponent.ItemFlags.ContainsKey(unitDrop.Id))
+                if (unitInfo.KV[NumericType.DropType] == 0 && itemConfig.ItemQuality >= 4 && !teshuItem
+                    && !teamDungeonComponent.ItemFlags.ContainsKey(unitInfo.UnitId))
                 {
-                    teamDungeonComponent.AddTeamDropItem(drops[i]); //这个地方通知客户端弹窗需求还是放弃
+                    teamDungeonComponent.AddTeamDropItem(unitInfo); //这个地方通知客户端弹窗需求还是放弃
                     continue;
                 }
 
@@ -204,22 +248,22 @@ namespace ET.Server
                 string numShow = "";
                 if (itemConfig.Id == 1)
                 {
-                    numShow = unitDrop.GetComponent<DropComponentS>().ItemNum.ToString();
+                    numShow = unitInfo.KV[NumericType.ItemNum].ToString();
                 }
 
                 Unit owner = null;
-                if (drops[i].DropType == 1)
+                if (unitInfo.KV[NumericType.DropType] == 1)
                 {
                     owner = unit;
                 }
                 else
                 {
                     //已经分配过的
-                    if (teamDungeonComponent.ItemFlags.ContainsKey(unitDrop.Id))
+                    if (teamDungeonComponent.ItemFlags.ContainsKey(unitInfo.UnitId))
                     {
-                        owner = unit.GetParent<UnitComponent>().Get(teamDungeonComponent.ItemFlags[unitDrop.Id]);
+                        owner = unit.GetParent<UnitComponent>().Get(teamDungeonComponent.ItemFlags[unitInfo.UnitId]);
 
-                        string pick_name = teamDungeonComponent.TeamPlayers[teamDungeonComponent.ItemFlags[unitDrop.Id]].PlayerName;
+                        string pick_name = teamDungeonComponent.TeamPlayers[teamDungeonComponent.ItemFlags[unitInfo.UnitId]].PlayerName;
                         pick_name += (owner == null ? "(未在副本中)" : string.Empty);
                         m2C_SyncChatInfo.ChatInfo.ChatMsg = m2C_SyncChatInfo.ChatInfo.ChatMsg + $"{pick_name}拾取{itemConfig.ItemName}";
                     }
@@ -250,7 +294,7 @@ namespace ET.Server
                             m2C_SyncChatInfo.ChatInfo.ChatMsg += "  ";
                         }
 
-                        teamDungeonComponent.ItemFlags.Add(unitDrop.Id, maxPlayerId);
+                        teamDungeonComponent.ItemFlags.Add(unitInfo.UnitId, maxPlayerId);
                         owner = unit.GetParent<UnitComponent>().Get(maxPlayerId);
                         string pick_name = teamDungeonComponent.TeamPlayers[maxPlayerId].PlayerName;
                         pick_name += (owner == null ? "(未在副本中)" : string.Empty);
@@ -273,9 +317,9 @@ namespace ET.Server
                     }
                 }
 
-                if (drops[i].DropType != 1)
+                if (unitInfo.KV[NumericType.DropType] != 1)
                 {
-                    unit.GetParent<UnitComponent>().Remove(unitDrop.Id);
+                    unit.GetParent<UnitComponent>().Remove(unitInfo.UnitId);
                 }
 
                 MapMessageHelper.SendToClient(UnitHelper.GetUnitList(unit.Scene(), UnitType.Player), m2C_SyncChatInfo);

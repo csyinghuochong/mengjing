@@ -107,7 +107,7 @@ namespace ET.Client
                     continue;
                 }
 
-                int dropcell = uu.GetComponent<DropComponentC>().CellIndex;
+                int dropcell = uu.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex);
                 if (dropcell == cell)
                 {
                     ids.Add(uu);
@@ -149,20 +149,31 @@ namespace ET.Client
             return drops;
         }
 
-        public static async ETTask<int> SendShiquItem(Scene zoneScene, List<DropInfo> ids)
+        public static async ETTask<int> SendShiquItem(Scene root, List<Unit> unitDrops)
         {
             C2M_PickItemRequest request = C2M_PickItemRequest.Create();
-            request.ItemIds = ids;
-
-            M2C_PickItemResponse response = await zoneScene.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
-
-            for (int i = 0; i < ids.Count; i++)
+            List<long> unitDropIds = new();
+            foreach (Unit unit in unitDrops)
             {
-                if (ids[i].DropType == 1)
+                unitDropIds.Add(unit.Id);
+            }
+
+            List<long> removeIds = new();
+            foreach (Unit unit in unitDrops)
+            {
+                if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropType) == 1)
                 {
-                    //私有掉落，本地移除
-                    zoneScene.CurrentScene().GetComponent<UnitComponent>().Remove(ids[i].UnitId);
+                    removeIds.Add(unit.Id);
                 }
+            }
+
+            request.ItemIds = unitDropIds;
+            M2C_PickItemResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
+
+            UnitComponent unitComponent = root.CurrentScene().GetComponent<UnitComponent>();
+            foreach (long id in removeIds)
+            {
+                unitComponent.Remove(id);
             }
 
             return response.Error;

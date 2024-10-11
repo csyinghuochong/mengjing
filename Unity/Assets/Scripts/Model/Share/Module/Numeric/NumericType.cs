@@ -195,6 +195,14 @@
         public const int UnionAttributeFail_2 = 3195;
         public const int EnergySkillId = 3196;
         public const int PetFightIndex = 3197;
+        
+        public const int ItemID = 4000;
+        public const int ItemNum = 4001;
+        public const int DropType = 4002; //0 公共掉落    1私人掉落
+        public const int CellIndex = 4003;
+        public const int BeKillId = 4004;
+        public const int DirectionType = 4005;
+        
         public const int Max = 10000;
 
         public const int Now_MaxHp = 1002;                                       //生命总值

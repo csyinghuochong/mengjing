@@ -768,11 +768,15 @@ namespace ET.Server
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
                     DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
-                    dropComponent.SetItemInfo(droplist[i].ItemID, droplist[i].ItemNum);
                     dropComponent.IfDamgeDrop = monsterCof.IfDamgeDrop;
                     dropComponent.BeAttackPlayerList = beattackIds;
-                    dropComponent.DropType = monsterCof.DropType;
-                    dropComponent.BeKillId = bekill.Id;
+                    
+                    NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                    numericComponentS.ApplyValue(NumericType.ItemID, droplist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.ItemNum, droplist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.DropType, monsterCof.DropType, false);
+                    numericComponentS.ApplyValue(NumericType.BeKillId, bekill.Id, false);
+                    
                     //掉落归属问题 掉落类型为2 原来为： 最后一刀 修改为 第一拾取权限为优先攻击他的人,如果这个人死了，那么拾取权限清空，下一次伤害是谁归属权就是谁。
 
                     long ownderId = main != null ? main.Id : 0;
@@ -857,13 +861,12 @@ namespace ET.Server
                             continue;
                         }
 
-                        DropInfo dropInfo = DropInfo.Create();
-                        dropInfo.DropType = 1;
-                        dropInfo.ItemID = droplist[k].ItemID;
-                        dropInfo.ItemNum = droplist[k].ItemNum;
-                        dropInfo.X = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
-                        dropInfo.Y = bekill.Position.y;
-                        dropInfo.Z = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
+                        UnitInfo dropInfo = UnitInfo.Create();
+                        dropInfo.KV.Add(NumericType.DropType, 1);
+                        dropInfo.KV.Add(NumericType.ItemID, droplist[k].ItemID);
+                        dropInfo.KV.Add(NumericType.ItemNum, droplist[k].ItemNum);
+                        dropInfo.Position = new float3(bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f), bekill.Position.y,
+                            bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f));
                         dropInfo.UnitId = IdGenerater.Instance.GenerateId();
                         m2C_CreateDropItems.Drops.Add(dropInfo);
                         beAttack.GetComponent<UnitInfoComponent>().Drops.Add(dropInfo);
@@ -873,7 +876,7 @@ namespace ET.Server
                             Log.Warning($"BOSS掉落道具位置:  {main.Position.x}  {main.Position.z}  {bekill.Position.x} {bekill.Position.z}");
                         }
 
-                        if (math.distance(main.Position, new float3(dropInfo.X, dropInfo.Y, dropInfo.Z)) > 10f)
+                        if (math.distance(main.Position, dropInfo.Position) > 10f)
                         {
                             Log.Warning($"BOSS掉落道具位置过远:  {main.Position.x}  {main.Position.z}  {bekill.Position.x} {bekill.Position.z}");
                         }
@@ -917,14 +920,17 @@ namespace ET.Server
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
                     DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
-                    dropComponent.SetItemInfo(droplist[i].ItemID, droplist[i].ItemNum);
                     float dropX = beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
                     float dropY = beKill.Position.y;
                     float dropZ = beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
                     dropitem.Position = new float3(dropX, dropY, dropZ);
                     dropitem.AddComponent<AOIEntity, int, float3>(9 * 1000, dropitem.Position);
-                    dropComponent.DropType = dropType;
-                    dropComponent.BeKillId = beKill.Id;
+                    
+                    NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                    numericComponentS.ApplyValue(NumericType.ItemID, droplist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.ItemNum, droplist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.DropType, dropType, false);
+                    numericComponentS.ApplyValue(NumericType.BeKillId, beKill.Id, false);
                 }
             }
 
@@ -948,15 +954,14 @@ namespace ET.Server
                         Log.Error($"掉落装备.字: {droplist[k].ItemID}  {par}   {sceneType}");
                     }
 
-                    DropInfo dropInfo = DropInfo.Create();
-                    dropInfo.DropType = 1;
-                    dropInfo.ItemID = droplist[k].ItemID;
-                    dropInfo.ItemNum = droplist[k].ItemNum;
-                    dropInfo.X = beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
-                    dropInfo.Y = beKill.Position.y;
-                    dropInfo.Z = beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
+                    UnitInfo dropInfo = UnitInfo.Create();
+                    dropInfo.KV.Add(NumericType.DropType, 1);
+                    dropInfo.KV.Add(NumericType.ItemID, droplist[k].ItemID);
+                    dropInfo.KV.Add(NumericType.ItemNum, droplist[k].ItemNum);
+                    dropInfo.KV.Add(NumericType.BeKillId, beKill.Id);
+                    dropInfo.Position = new float3(beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f), beKill.Position.y,
+                        beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f));
                     dropInfo.UnitId = IdGenerater.Instance.GenerateId();
-                    dropInfo.BeKillId = beKill.Id;
                     m2C_CreateDropItems.Drops.Add(dropInfo);
                     main.GetComponent<UnitInfoComponent>().Drops.Add(dropInfo);
                 }

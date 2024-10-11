@@ -60,7 +60,9 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
             MapComponent mapComponent = self.Root().GetComponent <MapComponent> ();
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.CellDungeon, 0, mapComponent.FubenDifficulty, $"{chuansongComponent.CellIndex}_{chuansongComponent.DirectionType}").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.CellDungeon, 0, mapComponent.FubenDifficulty,
+                        $"{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex)}_{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType)}")
+                    .Coroutine();
         }
 
         public static void StartTimer(this UICellTransferHpComponent self)

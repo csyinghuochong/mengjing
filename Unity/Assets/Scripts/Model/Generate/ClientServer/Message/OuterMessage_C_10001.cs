@@ -702,12 +702,6 @@ namespace ET
         [MemoryPackOrder(0)]
         public List<UnitInfo> Units { get; set; } = new();
 
-        [MemoryPackOrder(2)]
-        public List<DropInfo> Drops { get; set; } = new();
-
-        [MemoryPackOrder(3)]
-        public List<TransferInfo> Transfers { get; set; } = new();
-
         [MemoryPackOrder(7)]
         public int UpdateAll { get; set; }
 
@@ -719,8 +713,6 @@ namespace ET
             }
 
             this.Units.Clear();
-            this.Drops.Clear();
-            this.Transfers.Clear();
             this.UpdateAll = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -5323,7 +5315,7 @@ namespace ET
         public long ActorId { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<DropInfo> ItemIds { get; set; } = new();
+        public List<long> ItemIds { get; set; } = new();
 
         public override void Dispose()
         {
@@ -18192,7 +18184,7 @@ namespace ET
         public long UnitId { get; set; }
 
         [MemoryPackOrder(2)]
-        public List<DropInfo> DropItems { get; set; } = new();
+        public List<UnitInfo> DropItems { get; set; } = new();
 
         public override void Dispose()
         {
@@ -18228,7 +18220,7 @@ namespace ET
         public long UnitId { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<DropInfo> Drops { get; set; } = new();
+        public List<UnitInfo> Drops { get; set; } = new();
 
         public override void Dispose()
         {

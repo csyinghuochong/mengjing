@@ -8,7 +8,7 @@ namespace ET.Server
     public class TeamDropItem : Entity, IAwake
     {
         public long EndTime{ get; set; } = 0;   //-1已分配好
-        public DropInfo DropInfo{ get; set; }
+        public UnitInfo DropInfo{ get; set; }
         public List<long> NeedPlayers { get; set; } = new List<long>();
         public List<long> GivePlayers { get; set; }= new List<long>();
     }

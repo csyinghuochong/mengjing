@@ -12,7 +12,6 @@ namespace ET.Client
         {
             self.MyUnit = self.GetParent<Unit>();
             self.TargetUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.DropInfo = self.MyUnit.GetComponent<DropComponentC>().DropInfo;
             self.EffectPath = ABPathHelper.GetEffetPath("ScenceEffect/SceneEffect_DropFly");
         }
 
@@ -61,11 +60,11 @@ namespace ET.Client
 
             // 提前获取，消息返回后Drop会销毁
             Scene root = self.Root();
-            
-            int itemId = self.DropInfo.ItemID;
-            int itemNum = self.DropInfo.ItemNum;
 
-            int error = await MapHelper.SendShiquItem(self.Root(), new() { self.DropInfo });
+            int itemId = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemID);
+            int itemNum = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemNum);
+
+            int error = await MapHelper.SendShiquItem(self.Root(), new() { self.MyUnit });
 
             if (error == ErrorCode.ERR_Success)
             {

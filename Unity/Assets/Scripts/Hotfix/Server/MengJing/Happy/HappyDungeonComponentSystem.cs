@@ -102,7 +102,7 @@ namespace ET.Server
             List<Unit> droplist = UnitHelper.GetUnitList(self.Scene(), UnitType.DropItem);
             for (int i = 0; i < droplist.Count; i++)
             {
-                int dropindex = droplist[i].GetComponent<DropComponentS>().CellIndex;
+                int dropindex = droplist[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.CellIndex);
                 if (!dropcells.Contains(dropindex))
                 {
                     dropcells.Add(dropindex);
@@ -142,13 +142,16 @@ namespace ET.Server
                     dropitem.AddComponent<UnitInfoComponent>();
                     dropitem.Type = UnitType.DropItem;
                     DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
-                    dropComponent.SetItemInfo(rewardist[i].ItemID, rewardist[i].ItemNum);
-                    dropComponent.CellIndex = p + 1;
+                    NumericComponentS numericComponentS = dropitem.AddComponent<NumericComponentS>();
+                    numericComponentS.ApplyValue(NumericType.ItemID, rewardist[i].ItemID, false);
+                    numericComponentS.ApplyValue(NumericType.ItemNum, rewardist[i].ItemNum, false);
+                    numericComponentS.ApplyValue(NumericType.CellIndex, p + 1, false);
+                    numericComponentS.ApplyValue(NumericType.DropType, 0, false);
 
                     float3 vector3 = HappyData.PositionList[p];
                     dropitem.Position = vector3;
                     dropitem.AddComponent<AOIEntity, int, float3>(2 * 1000, dropitem.Position);
-                    dropComponent.DropType = 0;
+                    
                 }
             }
 

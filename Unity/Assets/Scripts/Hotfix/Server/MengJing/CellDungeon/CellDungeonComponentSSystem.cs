@@ -521,8 +521,9 @@ namespace ET.Server
                     chuansong.Type = UnitType.CellTransfers;
                     self.Scene().GetComponent<UnitComponent>().Add(chuansong);
                     ChuansongComponent chuansongComponent = chuansong.AddComponent<ChuansongComponent>();
-                    chuansongComponent.CellIndex = self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line); //走过的格子
-                    chuansongComponent.DirectionType = i + 1;
+                    NumericComponentS numericComponentS = chuansong.AddComponent<NumericComponentS>();
+                    numericComponentS.ApplyValue(NumericType.CellIndex, self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line), false); //走过的格子
+                    numericComponentS.ApplyValue(NumericType.DirectionType, i + 1, false);
                     chuansong.AddComponent<UnitInfoComponent>();
                     chuansong.Position = vector3;
                     chuansong.AddComponent<AOIEntity, int, float3>(9 * 1000, chuansong.Position);

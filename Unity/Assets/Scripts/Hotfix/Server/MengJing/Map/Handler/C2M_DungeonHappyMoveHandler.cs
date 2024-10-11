@@ -66,7 +66,7 @@ namespace ET.Server
                 List<Unit> droplist = UnitHelper.GetUnitList(unit.Scene(), UnitType.DropItem);
                 for (int i = 0; i < droplist.Count; i++)
                 {
-                    int itemid = droplist[i].GetComponent<DropComponentS>().ItemID;
+                    int itemid = droplist[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.ItemID);
                     if (ItemConfigCategory.Instance.Get(itemid).ItemQuality >= 5)
                     {
                         haveorange = true;

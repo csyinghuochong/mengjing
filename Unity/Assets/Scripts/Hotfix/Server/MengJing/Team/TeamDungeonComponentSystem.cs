@@ -132,7 +132,10 @@ namespace ET.Server
                 if (unit != null)
                 {
                     List<RewardItem> rewardItems = new List<RewardItem>();
-                    rewardItems.Add(new RewardItem() { ItemID = teamDropItem.DropInfo.ItemID, ItemNum = teamDropItem.DropInfo.ItemNum });
+                    rewardItems.Add(new RewardItem()
+                    {
+                        ItemID = (int)teamDropItem.DropInfo.KV[NumericType.ItemID], ItemNum = (int)teamDropItem.DropInfo.KV[NumericType.ItemNum]
+                    });
                     bool ret = unit.GetComponent<BagComponentS>()
                             .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
                     //Log.Warning($"TeamDungeonComponent.DropInfo：{ret}  {unit.Id} {teamDropItem.DropInfo.ItemID} {teamDropItem.DropInfo.ItemNum}");
@@ -169,7 +172,7 @@ namespace ET.Server
             return false;
         }
 
-        public static TeamDropItem AddTeamDropItem(this TeamDungeonComponent self, DropInfo dropInfo)
+        public static TeamDropItem AddTeamDropItem(this TeamDungeonComponent self, UnitInfo dropInfo)
         {
             for (int i = self.TeamDropItems.Count - 1; i >= 0; i--)
             {

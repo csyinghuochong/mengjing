@@ -7,7 +7,6 @@ namespace ET.Client
     {
         public Unit MyUnit { get; set; }
         public Unit TargetUnit { get; set; }
-        public DropInfo DropInfo;
         public bool Send;
         public string EffectPath;
         public bool IsPlayEffect;

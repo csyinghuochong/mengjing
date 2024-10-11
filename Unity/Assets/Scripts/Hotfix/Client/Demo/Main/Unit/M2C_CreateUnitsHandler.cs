@@ -4,7 +4,7 @@ using Unity.Mathematics;
 namespace ET.Client
 {
     [MessageHandler(SceneType.Demo)]
-    public class M2C_CreateUnitsHandler: MessageHandler<Scene, M2C_CreateUnits>
+    public class M2C_CreateUnitsHandler : MessageHandler<Scene, M2C_CreateUnits>
     {
         protected override async ETTask Run(Scene root, M2C_CreateUnits message)
         {
@@ -21,37 +21,23 @@ namespace ET.Client
                     continue;
                 }
 
-                if (unitInfo.Type == UnitType.Monster &&  !SettingData.ShowMonster)
-                {
-                    continue;
-                }
-                
-                UnitFactory.CreateUnit(currentScene, unitInfo);
-            }
-
-  
-            foreach (DropInfo unitInfo in message.Drops)
-            {
-                allunitids.Add(unitInfo.UnitId);
-
-                if (CheckUnitExist(unitComponent, unitInfo.UnitId, unitInfo.X, unitInfo.Y, unitInfo.Z))
+                if (unitInfo.Type == UnitType.Monster && !SettingData.ShowMonster)
                 {
                     continue;
                 }
 
-                UnitFactory.CreateDropItem(currentScene, unitInfo);
-            }
-
-            foreach (TransferInfo unitInfo in message.Transfers)
-            {
-                allunitids.Add(unitInfo.UnitId);
-
-                if (CheckUnitExist(unitComponent, unitInfo.UnitId, unitInfo.X, unitInfo.Y, unitInfo.Z))
+                if (unitInfo.Type == UnitType.DropItem)
                 {
-                    continue;
+                    UnitFactory.CreateDropItem(currentScene, unitInfo);
                 }
-
-                UnitFactory.CreateTransferItem(currentScene, unitInfo);
+                else if (unitInfo.Type == UnitType.CellTransfers)
+                {
+                    UnitFactory.CreateTransferItem(currentScene, unitInfo);
+                }
+                else
+                {
+                    UnitFactory.CreateUnit(currentScene, unitInfo);
+                }
             }
 
             if (message.UpdateAll == 1)
