@@ -74,7 +74,6 @@ namespace ET.Server
                         }
                         break;
                     case (int)SceneTypeEnum.CellDungeon:
-
                         if (request.SceneId > 0)
                         {
                             //第一个格子
@@ -97,6 +96,7 @@ namespace ET.Server
                         else
                         {
                             UnitHelper.RemoveAllNoSelf(unit);
+                            AfterTransfer(unit, SceneTypeEnum.CellDungeon);
 
                             CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
                             cellDungeonComponentS.OnEnterSonCell(unit, request.paramInfo);
@@ -593,6 +593,26 @@ namespace ET.Server
                 NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();
             }
+            // if (sceneTypeEnum == SceneTypeEnum.TeamDungeon)
+            // {
+            //     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
+            //     teamSceneComponent.OnUnitReturn(scene, userId);
+            // }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.Arena)
+            // {
+            //     ArenaDungeonComponent areneSceneComponent = scene.GetComponent<ArenaDungeonComponent>();
+            //     areneSceneComponent.OnUnitDisconnect(userId);
+            // }
+            // if (sceneTypeEnum == SceneTypeEnum.JiaYuan)
+            // {
+            //     JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
+            //     jiayuanSceneComponent.OnUnitLeave(scene);
+            // }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.OneChallenge)
+            // {
+            //     OneChallengeDungeonComponent jiayuanSceneComponent = scene.GetParent<OneChallengeDungeonComponent>();
+            //     jiayuanSceneComponent.OnUnitLeave(scene);
+            // }
         }
 
         public static void BeforeTransfer(Unit unit)
@@ -622,7 +642,6 @@ namespace ET.Server
 
         public static void RemovePetAndJingLing(Unit unit)
         {
-
             RemoveFightPetList(unit);
             RemoveJingLing(unit);
         }
