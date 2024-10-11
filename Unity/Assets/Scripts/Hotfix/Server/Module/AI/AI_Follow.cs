@@ -2,10 +2,8 @@
 
 namespace ET.Server
 {
-    
     public class AI_Follow : AAIHandler
     {
-
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
             Unit unit = aiComponent.GetParent<Unit>();
@@ -19,7 +17,7 @@ namespace ET.Server
 
             float distance = math.distance(unit.Position, master.Position);
             AttackRecordComponent attackRecordComponent = master.GetComponent<AttackRecordComponent>();
-            if (distance > aiComponent.ActRange)    //超出追击距离，返回
+            if (distance > aiComponent.ActRange) //超出追击距离，返回
             {
                 aiComponent.TargetID = 0;
                 attackRecordComponent.PetLockId = 0;
@@ -33,15 +31,18 @@ namespace ET.Server
                 mastaerAttackId = attackRecordComponent.AttackingId;
                 enemyUnit = unitComponent.Get(mastaerAttackId);
             }
+
             if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
             {
                 mastaerAttackId = attackRecordComponent.BeAttackId;
                 enemyUnit = unitComponent.Get(mastaerAttackId);
             }
+
             if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
             {
                 enemyUnit = unitComponent.Get(aiComponent.TargetID);
             }
+
             if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))
             {
                 aiComponent.TargetID = 0;
@@ -66,7 +67,7 @@ namespace ET.Server
             // addg += RandomHelper.RandFloat() * 5f;
             float addg = unit.Id % 100;
             quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
-            float3 tar = master.Position + math.mul(rotation , math.forward()) * 2f;
+            float3 tar = master.Position + math.mul(rotation, math.forward()) * 2f;
             return tar;
         }
 
@@ -85,14 +86,14 @@ namespace ET.Server
                     unit.GetComponent<NumericComponent>().Set(NumericType.Now_Speed, 60000);
                     unit.FindPathMoveToAsync(nextTarget, cancellationToken, false).Coroutine();
                 }
-                
+
                 else if (distacne > 1.1f)
                 {
                     Vector3 nextTarget = GetFollowPosition(unit, master);
                     unit.GetComponent<NumericComponent>().Set(NumericType.Now_Speed, 30000);
                     unit.FindPathMoveToAsync(nextTarget, cancellationToken, false).Coroutine();
                 }
-                
+
                 bool timeRet = await TimerComponent.Instance.WaitAsync(100, cancellationToken);
                 if (!timeRet)
                 {
@@ -101,13 +102,14 @@ namespace ET.Server
             }
             */
             long oldSpeed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base);
-            while (true) 
+            while (true)
             {
                 long nowspeed = 60000;
-                if (master!=null && !master.IsDisposed)
+                if (master != null && !master.IsDisposed)
                 {
                     nowspeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
                 }
+
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
@@ -132,14 +134,18 @@ namespace ET.Server
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_Speed_Base, nowspeed);
                     unit.FindPathMoveToAsync(nextTarget).Coroutine();
                 }
+
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     break;
                 }
             }
-            
-            unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
+
+            if (!unit.IsDisposed)
+            {
+                unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
+            }
         }
     }
 }

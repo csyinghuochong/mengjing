@@ -49,11 +49,12 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this SkillPassiveComponent self)
         {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static void Stop(this SkillPassiveComponent self)
         {
-            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static void Reset(this SkillPassiveComponent self)
@@ -127,7 +128,17 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
+            Unit unit = self.GetParent<Unit>();
+            if (unit == null)
+            {
+                Log.Info("Unit is null");
+            }
+            
+            NumericComponentS NumericComponent = unit.GetComponent<NumericComponentS>();
+            if (NumericComponent == null)
+            {
+                Log.Info("NumericComponent is null");
+            }
 
             //只有玩家和宠物有回血
             if (self.UnitType == UnitType.Pet)

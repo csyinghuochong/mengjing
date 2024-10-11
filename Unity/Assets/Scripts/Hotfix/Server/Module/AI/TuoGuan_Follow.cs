@@ -109,7 +109,10 @@ namespace ET.Server
                 }
             }
 
-            unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
+            if (!unit.IsDisposed)
+            {
+                unit.GetComponent<NumericComponentS>()?.ApplyValue(NumericType.Base_Speed_Base, oldSpeed);
+            }
 
             await ETTask.CompletedTask;
         }
