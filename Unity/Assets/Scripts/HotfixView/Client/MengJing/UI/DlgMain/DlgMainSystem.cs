@@ -428,6 +428,7 @@ namespace ET.Client
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLvButton);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHangButton);
             self.View.E_Btn_CellDungeonButton.AddListener(self.OnBtn_CellDungeon);
+            self.View.E_Btn_PetMelee.AddListener(self.OnBtn_PetMelee);
 
             self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
                     .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
@@ -1335,6 +1336,11 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterSelect).Coroutine();
             //默认进入第一章的第一关
             // EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.CellDungeon, 10001, FubenDifficulty.Normal, "0" ).Coroutine();
+        }
+
+        private static void OnBtn_PetMelee(this DlgMain self)
+        {
+            Log.Debug("OnBtn_PetMelee");
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)

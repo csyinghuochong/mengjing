@@ -1884,6 +1884,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Btn_PetMelee
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Btn_PetMelee == null )
+				{
+					this.m_E_Btn_PetMelee = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_PetMelee");
+				}
+				return this.m_E_Btn_PetMelee;
+			}
+		}
+		
 		public UnityEngine.RectTransform EG_Btn_TopRight_3RectTransform
      	{
      		get
@@ -2808,6 +2825,8 @@ namespace ET.Client
 			this.m_es_mainpetfight_0 = null;
 			this.m_es_mainpetfight_1 = null;
 			this.m_es_mainpetfight_2 = null;
+			this.m_E_Btn_CellDungeonButton= null;
+			this.m_E_Btn_PetMelee = null;
 			this.uiTransform = null;
 		}
 
@@ -2920,6 +2939,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_Button_WorldLvButton = null;
 		private UnityEngine.UI.Button m_E_Btn_PaiMaiHangButton = null;
 		private UnityEngine.UI.Button m_E_Btn_CellDungeonButton = null;
+		private UnityEngine.UI.Button m_E_Btn_PetMelee = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_3RectTransform = null;
 		private UnityEngine.RectTransform m_EG_Btn_KillMonsterRewardRectTransform = null;
 		private UnityEngine.RectTransform m_EG_Btn_LvRewardRectTransform = null;
