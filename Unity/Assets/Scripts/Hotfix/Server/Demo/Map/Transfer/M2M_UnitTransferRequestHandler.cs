@@ -82,7 +82,7 @@ namespace ET.Server
                     // 加入aoi
                     if (request.SceneType == (int)SceneTypeEnum.PetDungeon)
                     {
-                        scene.GetComponent<PetFubenComponent>().GeneratePetFuben(unit, int.Parse(request.ParamInfo));
+                        scene.GetComponent<PetDungeonComponent>().GeneratePetFuben(unit, int.Parse(request.ParamInfo));
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetTianTi)
                     {

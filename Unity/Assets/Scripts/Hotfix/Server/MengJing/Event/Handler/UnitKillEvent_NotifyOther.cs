@@ -215,7 +215,7 @@ namespace ET.Server
             switch (sceneTypeEnum)
             {
                 case SceneTypeEnum.PetDungeon:
-                    domainScene.GetComponent<PetFubenComponent>().OnKillEvent();
+                    domainScene.GetComponent<PetDungeonComponent>().OnKillEvent();
                     break;
                 case SceneTypeEnum.CellDungeon:
                     domainScene.GetComponent<CellDungeonComponentS>().OnKillEvent();

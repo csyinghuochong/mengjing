@@ -11,7 +11,7 @@
             MapComponent mapComponent = domainScene.GetComponent<MapComponent>();
             if (mapComponent.SceneType == SceneTypeEnum.PetDungeon)
             {
-                domainScene.GetComponent<PetFubenComponent>().OnGameOver();
+                domainScene.GetComponent<PetDungeonComponent>().OnGameOver();
             }
             if (mapComponent.SceneType == SceneTypeEnum.PetTianTi)
             {

@@ -3,21 +3,21 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (PetFubenComponent))]
-    [FriendOf(typeof (PetFubenComponent))]
-    public static partial class PetFubenComponentSystem
+    [EntitySystemOf(typeof (PetDungeonComponent))]
+    [FriendOf(typeof (PetDungeonComponent))]
+    public static partial class PetDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this PetFubenComponent self)
+        private static void Awake(this PetDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this PetFubenComponent self)
+        private static void Destroy(this PetDungeonComponent self)
         {
         }
 
-        public static void OnGameOver(this PetFubenComponent self)
+        public static void OnGameOver(this PetDungeonComponent self)
         {
             List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
             
@@ -81,7 +81,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
         }
 
-        public static void OnKillEvent(this PetFubenComponent self)
+        public static void OnKillEvent(this PetDungeonComponent self)
         {
             List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
             bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(),players[0]);
@@ -94,7 +94,7 @@ namespace ET.Server
             self.OnGameOver();
         }
 
-        public static void GeneratePetFuben(this PetFubenComponent self, Unit unit, int sceneId)
+        public static void GeneratePetFuben(this PetDungeonComponent self, Unit unit, int sceneId)
         {
             unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
 
@@ -126,7 +126,7 @@ namespace ET.Server
             self.GenerateCellMonsters(petFubenConfig.Cell_9, 8);
         }
 
-        public static void GenerateCellMonsters(this PetFubenComponent self, string cellInfo, int index)
+        public static void GenerateCellMonsters(this PetDungeonComponent self, string cellInfo, int index)
         {
             string[] monsters = cellInfo.Split('@');
             float3 position = ConfigData.Formation_2[index];
