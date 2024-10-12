@@ -168,7 +168,7 @@ namespace ET.Server
 			if (mtype == 3)
 			{
 				//定时刷新  YeWaiRefreshComponent
-				//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos(monsterPosition.Id);
+				scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos(monsterPosition.Id);
 			}
 
 			if (mtype == 4)
