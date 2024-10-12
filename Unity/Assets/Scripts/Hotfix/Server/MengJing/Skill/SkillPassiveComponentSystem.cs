@@ -65,7 +65,7 @@ namespace ET.Server
             }
         }
 
-        public static void Activeted(this SkillPassiveComponent self)
+        public static void Begin(this SkillPassiveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
 
@@ -111,6 +111,7 @@ namespace ET.Server
 
             if (xueliangcheck)
             {
+                self.Stop();
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.SkillPassive, self);
             }
         }

@@ -423,10 +423,10 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.Now_Dead, 0);
              numericComponent.ApplyValue(NumericType.Now_Hp, max_hp);
              numericComponent.ApplyValue(NumericType.ReviveTime, 0);
-             unit.GetComponent<SkillPassiveComponent>()?.Activeted();
-
+             
              unit.Position = unit.GetBornPostion();
              unit.GetComponent<AIComponent>()?.Begin();
+             unit.GetComponent<SkillPassiveComponent>()?.Begin();
          }
 
          public static void InitTempFollower(this HeroDataComponentS self, Unit matster, int monster)

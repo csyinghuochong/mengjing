@@ -18,6 +18,7 @@ namespace ET.Server
                     continue;
                 }
                unititem.GetComponent<AIComponent>().Begin();
+               unititem.GetComponent<SkillPassiveComponent>().Begin();
                unititem.GetComponent<SkillPassiveComponent>()?.OnTrigegerPassiveSkill( SkillPassiveTypeEnum.PetBattleBegin_18, 0, 0 );
             }
             await ETTask.CompletedTask;

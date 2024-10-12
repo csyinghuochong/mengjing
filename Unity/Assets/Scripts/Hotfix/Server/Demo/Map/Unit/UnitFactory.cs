@@ -177,13 +177,12 @@ namespace ET.Server
                 unit.AddComponent<ObjectWait>();
                 unit.AddComponent<MoveComponent>();
                 unit.AddComponent<SkillManagerComponentS>();
-                unit.AddComponent<SkillPassiveComponent>();
+                SkillPassiveComponent skillPassiveComponent = unit.AddComponent<SkillPassiveComponent>();
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                 //添加其他组件
                 unit.AddComponent<StateComponentS>(); //添加状态组件
                 unit.AddComponent<BuffManagerComponentS>(); //添加Buff管理器
-                unit.GetComponent<SkillPassiveComponent>().UpdateMonsterPassiveSkill();
-                unit.GetComponent<SkillPassiveComponent>().Activeted();
+                skillPassiveComponent.UpdateMonsterPassiveSkill();
                 numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID);
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
                 switch (mapComponent.SceneType)
@@ -191,6 +190,7 @@ namespace ET.Server
                     case SceneTypeEnum.LocalDungeon:
                         aIComponent.InitMonster(monsterConfig.Id);
                         aIComponent.Begin();
+                        skillPassiveComponent.Begin();
                         break;
                     case SceneTypeEnum.PetDungeon:
                         aIComponent.InitPetFubenMonster(monsterConfig.Id);
@@ -198,6 +198,7 @@ namespace ET.Server
                     default:
                         aIComponent.InitMonster(monsterConfig.Id);
                         aIComponent.Begin();
+                        skillPassiveComponent.Begin();
                         break;
                 }
             }
@@ -304,7 +305,7 @@ namespace ET.Server
             if (scene.GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.MainCityScene)
             {
                 unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
-                unit.GetComponent<SkillPassiveComponent>().Activeted();
+                unit.GetComponent<SkillPassiveComponent>().Begin();
             }
 
             return unit;
@@ -362,20 +363,7 @@ namespace ET.Server
             unit.Position = postion;
             unit.Type = UnitType.Pet;
             unit.Rotation = quaternion.Euler(0f, math.radians(rotation), 0f);
-            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            switch (mapComponent.SceneType)
-            {
-                case (int)SceneTypeEnum.PetDungeon:
-                case (int)SceneTypeEnum.PetTianTi:
-                case (int)SceneTypeEnum.PetMing:
-                    aIComponent.InitTianTiPet(petinfo.ConfigId);
-                    break;
-                default:
-                    aIComponent.InitPet(petinfo);
-                    break;
-            }
-
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
             numericComponent.ApplyValue(NumericType.BattleCamp, roleCamp, false);
@@ -383,9 +371,26 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.UnitPositon, cell, false);
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
             numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
-            unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
             unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
-            unit.GetComponent<SkillPassiveComponent>().Activeted();
+            switch (mapComponent.SceneType)
+            {
+                case SceneTypeEnum.PetDungeon:
+                case SceneTypeEnum.PetTianTi:
+                case SceneTypeEnum.PetMing:
+                    AIComponent aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号  撤退
+                    aIComponent.InitTianTiPet(petinfo.ConfigId);
+                    break;
+                case SceneTypeEnum.PetMelee:
+                    unit.AddComponent<AIComponent, int>(3); //AI行为树序号  不撤退
+                    
+                    break;
+                default:
+                    aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号  撤退
+                    aIComponent.InitPet(petinfo);
+                    break;
+            }
+
+            unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
             return unit;
         }
 
@@ -427,7 +432,7 @@ namespace ET.Server
 
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             unit.AddComponent<SkillPassiveComponent>().UpdateJingLingSkill(jinglingId);
-            unit.GetComponent<SkillPassiveComponent>().Activeted();
+            unit.GetComponent<SkillPassiveComponent>().Begin();
             return unit;
         }
 
