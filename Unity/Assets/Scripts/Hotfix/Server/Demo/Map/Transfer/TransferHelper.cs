@@ -81,6 +81,7 @@ namespace ET.Server
 
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetMelee" + fubenid.ToString());
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetMelee, request.SceneId, int.Parse(request.paramInfo));
+                        fubnescene.AddComponent<YeWaiRefreshComponent>();
                         fubnescene.AddComponent<PetMeleeDungeonComponent>().GenerateFuben();
                         BeforeTransfer(unit);
                         await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetMelee, request.SceneId, FubenDifficulty.None, request.paramInfo);
