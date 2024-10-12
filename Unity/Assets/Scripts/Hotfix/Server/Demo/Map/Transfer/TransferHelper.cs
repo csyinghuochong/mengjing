@@ -73,6 +73,9 @@ namespace ET.Server
                             oldscene.Dispose();
                         }
                         break;
+                    case SceneTypeEnum.PetMelee:
+                        
+                        break;
                     case (int)SceneTypeEnum.CellDungeon:
                         if (request.SceneId > 0)
                         {

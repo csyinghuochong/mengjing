@@ -7162,3 +7162,33 @@ message ItemInfoProto
 	int32 EquipIndex = 27;
 	int32 FuLing = 28;    //0未附灵 1附灵
 }
+
+//ResponseType M2C_PetMeleePlace
+//宠物大战放置位置   前后端 ui命名都要一直 方便查找
+message C2M_PetMeleePlace // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetId = 1;  //宠物id
+	Unity.Mathematics.float3 Position = 2;
+}
+
+message M2C_PetMeleePlace // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetMeleeBegin
+//宠物大战开始战斗
+message C2M_PetMeleeBegin // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_PetMeleeBegin // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}

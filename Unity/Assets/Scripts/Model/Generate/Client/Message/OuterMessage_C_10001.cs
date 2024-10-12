@@ -31157,6 +31157,137 @@ namespace ET
         }
     }
 
+    // 宠物大战放置位置   前后端 ui命名都要一直 方便查找
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleePlace)]
+    [ResponseType(nameof(M2C_PetMeleePlace))]
+    public partial class C2M_PetMeleePlace : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleePlace Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleePlace), isFromPool) as C2M_PetMeleePlace;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        /// <summary>
+        /// 宠物id
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public long PetId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public Unity.Mathematics.float3 Position { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.PetId = default;
+            this.Position = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleePlace)]
+    public partial class M2C_PetMeleePlace : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleePlace Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleePlace), isFromPool) as M2C_PetMeleePlace;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 宠物大战开始战斗
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeBegin)]
+    [ResponseType(nameof(M2C_PetMeleeBegin))]
+    public partial class C2M_PetMeleeBegin : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeBegin Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeBegin), isFromPool) as C2M_PetMeleeBegin;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeBegin)]
+    public partial class M2C_PetMeleeBegin : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeBegin Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeBegin), isFromPool) as M2C_PetMeleeBegin;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -31984,5 +32115,9 @@ namespace ET
         public const ushort Popularize2C_RewardResponse = 10824;
         public const ushort TestServerInfoProto = 10825;
         public const ushort ItemInfoProto = 10826;
+        public const ushort C2M_PetMeleePlace = 10827;
+        public const ushort M2C_PetMeleePlace = 10828;
+        public const ushort C2M_PetMeleeBegin = 10829;
+        public const ushort M2C_PetMeleeBegin = 10830;
     }
 }
