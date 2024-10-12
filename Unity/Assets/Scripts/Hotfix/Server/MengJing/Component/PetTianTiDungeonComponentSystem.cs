@@ -3,23 +3,23 @@
 namespace ET.Server
 {
 
-    [EntitySystemOf(typeof(PetTianTiComponent))]
-    [FriendOf(typeof(PetTianTiComponent))]
-    public static partial class PetTianTiComponentSystem
+    [EntitySystemOf(typeof(PetTianTiDungeonComponent))]
+    [FriendOf(typeof(PetTianTiDungeonComponent))]
+    public static partial class PetTianTiDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this PetTianTiComponent self)
+        private static void Awake(this PetTianTiDungeonComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this PetTianTiComponent self)
+        private static void Destroy(this PetTianTiDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
         
 
-         public static  async ETTask GeneratePetFuben(this PetTianTiComponent self)
+         public static  async ETTask GeneratePetFuben(this PetTianTiDungeonComponent self)
          {
              Unit unit = self.MainUnit;
              unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
@@ -82,7 +82,7 @@ namespace ET.Server
          }
          
 
-         public static void OnKillEvent(this PetTianTiComponent self)
+         public static void OnKillEvent(this PetTianTiDungeonComponent self)
          {
              int result = self.GetCombatResult();
              if (result != CombatResultEnum.None)
@@ -91,7 +91,7 @@ namespace ET.Server
              }
          }
 
-         public static async ETTask OnGameOver(this PetTianTiComponent self, int result)
+         public static async ETTask OnGameOver(this PetTianTiDungeonComponent self, int result)
          {
              List<EntityRef<Unit>> units = self.Root().GetComponent<UnitComponent>().GetAll();
              for (int i = 0; i < units.Count; i++)
@@ -136,7 +136,7 @@ namespace ET.Server
              /// <param name="self"></param>
              /// <param name=""></param>
              /// <returns></returns>
-             public static async ETTask<int> NoticeRankServer(this PetTianTiComponent self, int result)
+             public static async ETTask<int> NoticeRankServer(this PetTianTiDungeonComponent self, int result)
              {
                  //获取传送map的 actorId
                  ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
@@ -169,7 +169,7 @@ namespace ET.Server
              /// </summary>
              /// <param name="self"></param>
              /// <returns></returns>
-             public static int GetCombatResult(this PetTianTiComponent self)
+             public static int GetCombatResult(this PetTianTiDungeonComponent self)
              {
                  int number_self = 0;
                  int number_enemy = 0;

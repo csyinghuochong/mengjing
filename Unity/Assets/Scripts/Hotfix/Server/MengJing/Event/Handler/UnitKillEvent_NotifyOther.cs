@@ -221,7 +221,7 @@ namespace ET.Server
                     domainScene.GetComponent<CellDungeonComponentS>().OnKillEvent();
                     break;
                 case SceneTypeEnum.PetTianTi:
-                    domainScene.GetComponent<PetTianTiComponent>().OnKillEvent();
+                    domainScene.GetComponent<PetTianTiDungeonComponent>().OnKillEvent();
                     break;
                 case SceneTypeEnum.TeamDungeon:
                     TeamDungeonComponent TeamDungeonComponent = domainScene.GetComponent<TeamDungeonComponent>();

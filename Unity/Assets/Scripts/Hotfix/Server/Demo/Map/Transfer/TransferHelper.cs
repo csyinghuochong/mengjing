@@ -316,7 +316,7 @@ namespace ET.Server
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "Fuben" + fubenid.ToString());
-                        fubnescene.AddComponent<PetTianTiComponent>().EnemyId = enemyId;
+                        fubnescene.AddComponent<PetTianTiDungeonComponent>().EnemyId = enemyId;
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetTianTi, request.SceneId, 0);
                         BeforeTransfer(unit);
                         await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetTianTi, request.SceneId, 0, "0");

@@ -88,8 +88,8 @@ namespace ET.Server
                     {
                         aoivalue = 40;
                         
-                        scene.GetComponent<PetTianTiComponent>().MainUnit = unit;
-                        scene.GetComponent<PetTianTiComponent>().GeneratePetFuben().Coroutine();
+                        scene.GetComponent<PetTianTiDungeonComponent>().MainUnit = unit;
+                        scene.GetComponent<PetTianTiDungeonComponent>().GeneratePetFuben().Coroutine();
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiNumber_14,0, 1 );
                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PetTianTiNumber_310, 0, 1);
                     }

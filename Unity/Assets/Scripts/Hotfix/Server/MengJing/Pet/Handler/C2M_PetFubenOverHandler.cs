@@ -15,9 +15,9 @@
             }
             if (mapComponent.SceneType == SceneTypeEnum.PetTianTi)
             {
-                int result = domainScene.GetComponent<PetTianTiComponent>().GetCombatResult();
+                int result = domainScene.GetComponent<PetTianTiDungeonComponent>().GetCombatResult();
                 result = result == CombatResultEnum.None ? CombatResultEnum.Fail : result;
-                domainScene.GetComponent<PetTianTiComponent>().OnGameOver(result).Coroutine();
+                domainScene.GetComponent<PetTianTiDungeonComponent>().OnGameOver(result).Coroutine();
             }
             if (mapComponent.SceneType == SceneTypeEnum.PetMing)
             {
