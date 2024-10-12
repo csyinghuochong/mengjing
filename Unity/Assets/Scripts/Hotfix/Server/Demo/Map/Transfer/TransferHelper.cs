@@ -694,6 +694,7 @@ namespace ET.Server
             if (sceneType == SceneTypeEnum.PetDungeon
                 || sceneType == SceneTypeEnum.PetTianTi
                 || sceneType == SceneTypeEnum.PetMing
+                || sceneType == SceneTypeEnum.PetMelee
                 || sceneType == SceneTypeEnum.RunRace
                 || sceneType == SceneTypeEnum.Demon)
             {
