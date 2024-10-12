@@ -1,7 +1,7 @@
 namespace ET.Server
 {
-    
-    public class PetMeleeDungeonComponent : Entity, IAwake
+    [ComponentOf(typeof(Scene))]
+    public class PetMeleeDungeonComponent : Entity, IAwake, IDestroy
     {
     
     }
