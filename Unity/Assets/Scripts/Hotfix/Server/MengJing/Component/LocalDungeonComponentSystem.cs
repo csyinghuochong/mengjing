@@ -83,7 +83,7 @@ namespace ET.Server
             }
         }
 
-        public static void GenerateFubenScene(this LocalDungeonComponent self, int mapid)
+        public static void GenerateFuben(this LocalDungeonComponent self, int mapid)
         {
             DungeonConfig chapterSonConfig = DungeonConfigCategory.Instance.Get(mapid);
 

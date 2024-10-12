@@ -94,7 +94,7 @@ namespace ET.Server
             self.OnGameOver();
         }
 
-        public static void GeneratePetFuben(this PetDungeonComponent self, Unit unit, int sceneId)
+        public static void GenerateFuben(this PetDungeonComponent self, Unit unit, int sceneId)
         {
             unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
 

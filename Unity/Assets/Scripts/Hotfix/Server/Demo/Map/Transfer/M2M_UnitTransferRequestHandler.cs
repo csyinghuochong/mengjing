@@ -82,20 +82,20 @@ namespace ET.Server
                     // 加入aoi
                     if (request.SceneType == (int)SceneTypeEnum.PetDungeon)
                     {
-                        scene.GetComponent<PetDungeonComponent>().GeneratePetFuben(unit, int.Parse(request.ParamInfo));
+                        scene.GetComponent<PetDungeonComponent>().GenerateFuben(unit, int.Parse(request.ParamInfo));
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetTianTi)
                     {
                         aoivalue = 40;
                         
                         scene.GetComponent<PetTianTiDungeonComponent>().MainUnit = unit;
-                        scene.GetComponent<PetTianTiDungeonComponent>().GeneratePetFuben().Coroutine();
+                        scene.GetComponent<PetTianTiDungeonComponent>().GenerateFuben().Coroutine();
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiNumber_14,0, 1 );
                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PetTianTiNumber_310, 0, 1);
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMing)
                     {
-                        scene.GetComponent<PetMingDungeonComponent>().GeneratePetFuben().Coroutine();
+                        scene.GetComponent<PetMingDungeonComponent>().GenerateFuben().Coroutine();
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMelee)
                     {
@@ -116,7 +116,7 @@ namespace ET.Server
                     }
                     unit.AddComponent<PathfindingComponent, int>(10001);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
-                    scene.GetComponent<LocalDungeonComponent>().GenerateFubenScene(request.SceneId);
+                    scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
                     break;
                 case SceneTypeEnum.JiaYuan:
                 case SceneTypeEnum.Union:

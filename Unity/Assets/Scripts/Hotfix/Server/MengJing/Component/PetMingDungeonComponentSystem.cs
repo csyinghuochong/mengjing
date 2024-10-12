@@ -111,7 +111,7 @@ namespace ET.Server
              }
          }
 
-             public static async ETTask GeneratePetFuben(this PetMingDungeonComponent self)
+             public static async ETTask GenerateFuben(this PetMingDungeonComponent self)
              {
                  ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(self.Zone());
                  M2A_PetMingPlayerInfoRequest M2A_PetMingPlayerInfoRequest = M2A_PetMingPlayerInfoRequest.Create();

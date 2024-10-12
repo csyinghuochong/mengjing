@@ -15,6 +15,12 @@ namespace ET.Server
         {
 
         }
+
+        public static void GenerateFuben(this ET.Server.PetMeleeDungeonComponent self)
+        {
+            
+        }
+
     }
 
 }

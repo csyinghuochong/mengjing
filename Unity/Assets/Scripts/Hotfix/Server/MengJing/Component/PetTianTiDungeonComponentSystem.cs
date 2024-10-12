@@ -19,7 +19,7 @@ namespace ET.Server
         }
         
 
-         public static  async ETTask GeneratePetFuben(this PetTianTiDungeonComponent self)
+         public static  async ETTask GenerateFuben(this PetTianTiDungeonComponent self)
          {
              Unit unit = self.MainUnit;
              unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
