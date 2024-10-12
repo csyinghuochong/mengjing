@@ -18,9 +18,10 @@ namespace ET.Server
 
         public static void GenerateFuben(this ET.Server.PetMeleeDungeonComponent self)
         {
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             
+            FubenHelp.CreateMonsterList(self.Scene(), SceneConfigCategory.Instance.Get(mapComponent.SceneId).CreateMonsterPosi);
         }
-
     }
 
 }
