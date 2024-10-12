@@ -56,7 +56,7 @@ namespace ET.Client
 
             Unit mainhero = UnitHelper.GetMyUnitFromClientScene(self.Root());
             mainhero.GetComponent<StateComponentC>().StateTypeAdd(StateTypeEnum.NoMove);
-
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.ResetJoystick();
             Unit unit = self.GetParent<Unit>();
             ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
             MapComponent mapComponent = self.Root().GetComponent <MapComponent> ();

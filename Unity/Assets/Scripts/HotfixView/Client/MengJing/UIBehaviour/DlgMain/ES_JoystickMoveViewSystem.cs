@@ -168,6 +168,8 @@ namespace ET.Client
 
         private static void BeginDrag(this ES_JoystickMove self, PointerEventData pdata)
         {
+            self.IsDrag = true;
+            
             Unit unit = self.MainUnit;
             if (unit == null || unit.IsDisposed)
             {
@@ -216,6 +218,11 @@ namespace ET.Client
 
         private static void Draging(this ES_JoystickMove self, PointerEventData pdata)
         {
+            if (!self.IsDrag)
+            {
+                return;
+            }
+            
             self.direction = self.GetDirection(pdata);
         }
 
@@ -483,8 +490,9 @@ namespace ET.Client
             return 0;
         }
 
-        private static void ResetJoystick(this ES_JoystickMove self)
+        public static void ResetJoystick(this ES_JoystickMove self)
         {
+            self.IsDrag = false;
             self.SetAlpha(0.3f);
             if (self.OperateMode == 0)
             {
@@ -503,6 +511,8 @@ namespace ET.Client
 
         private static void EndDrag(this ES_JoystickMove self, PointerEventData pdata)
         {
+            self.IsDrag = false;
+            
             Unit unit = self.MainUnit;
             if (unit == null || unit.IsDisposed)
             {
