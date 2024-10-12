@@ -74,7 +74,22 @@ namespace ET.Server
                         }
                         break;
                     case SceneTypeEnum.PetMelee:
-                        
+                        oldscene = unit.Root();
+                        sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                        fubenid = IdGenerater.Instance.GenerateId();
+                        fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetMelee" + fubenid.ToString());
+                        //fubnescene.AddComponent<PetFubenComponent>();
+                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetMelee, request.SceneId, int.Parse(request.paramInfo));
+                        BeforeTransfer(unit);
+                        await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetMelee, request.SceneId, FubenDifficulty.None, request.paramInfo);
+                        NoticeFubenCenter(fubnescene, 1).Coroutine();
+                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+                        {
+                            NoticeFubenCenter(oldscene, 2).Coroutine();
+                            oldscene.Dispose();
+                        }
                         break;
                     case (int)SceneTypeEnum.CellDungeon:
                         if (request.SceneId > 0)

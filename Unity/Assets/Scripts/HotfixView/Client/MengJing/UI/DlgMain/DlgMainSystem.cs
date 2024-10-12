@@ -1334,13 +1334,11 @@ namespace ET.Client
         private static void OnBtn_CellDungeon(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterSelect).Coroutine();
-            //默认进入第一章的第一关
-            // EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.CellDungeon, 10001, FubenDifficulty.Normal, "0" ).Coroutine();
         }
 
         private static void OnBtn_PetMelee(this DlgMain self)
         {
-            Log.Debug("OnBtn_PetMelee");
+            EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0" ).Coroutine();
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)
