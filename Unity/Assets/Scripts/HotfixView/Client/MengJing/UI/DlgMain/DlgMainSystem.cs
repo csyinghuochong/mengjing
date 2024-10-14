@@ -1338,7 +1338,7 @@ namespace ET.Client
 
         private static void OnBtn_PetMelee(this DlgMain self)
         {
-            EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0" ).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)
@@ -1687,10 +1687,7 @@ namespace ET.Client
 
         public static void OnChapterOpen(this DlgMain self)
         {
-            // var BaseObj = ResourcesComponent.Instance.LoadAsset<GameObject>(ABPathHelper.GetUGUIPath("Chapter/UIChapterOpen"));
-            // UI uiskillButton = self.AddChild<UI, string, GameObject>("UIChapterOpen", GameObject.Instantiate(BaseObj));
-            // uiskillButton.AddComponent<UICellChapterOpenComponent>().OnUpdateUI();
-            // UICommonHelper.SetParent(uiskillButton.GameObject, UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject);
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterOpen).Coroutine();
 
             self.View.ES_CellDungeonCellMini.OnChapterOpen(true);
         }

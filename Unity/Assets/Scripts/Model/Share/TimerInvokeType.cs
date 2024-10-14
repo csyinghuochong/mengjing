@@ -97,5 +97,6 @@
         public const int CellTransferUITimer = 363;
         public const int UICellDungeonGuide = 364;
         public const int UICellDungeonEnterShow = 365;
+        public const int UICellChapterOpen = 366;
     }
 }
