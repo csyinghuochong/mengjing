@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,11 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SettlementReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public RewardItem RewardItem;
+		public Action<int> ClickHandler;
+		public int Index = -1;
+		public bool IsSelect;
+		
 		public UnityEngine.UI.Image E_Image_bgOpenImage
      	{
      		get

@@ -111,6 +111,12 @@ namespace ET.Client
             return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0;
         }
 
+        public static bool IsYueKaEndStates(this Unit self)
+        {
+            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
+            return numericComponent.GetAsInt(NumericType.YueKaEndTime) > 0;
+        }
+        
         public static int GetMaoXianExp(this Unit self)
         {
             int rechargeNum = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
