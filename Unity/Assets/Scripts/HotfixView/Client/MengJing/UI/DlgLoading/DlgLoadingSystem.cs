@@ -106,7 +106,6 @@ namespace ET.Client
                     loadResName = backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetLocalDungeonMonsters());
-                    self.ReleaseAssets.AddRange(self.GetLocalDungeonMonsters());
                     break;
                 default:
                     loadResName = backpngs[index];
