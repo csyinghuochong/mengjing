@@ -15,7 +15,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_ImageButtonButton.AddListener(self.OnClickItem);
-            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+            self.EG_UIItemRectTransform.gameObject.SetActive(false);
+            self.E_Image_bgOpenImage.gameObject.SetActive(false);
             self.OnInitUI();
         }
 
@@ -61,6 +62,21 @@ namespace ET.Client
             self.E_ImageButtonButton.gameObject.SetActive(false);
         }
 
+        public static void ShowRewardItem(this ES_SettlementReward self, string name)
+        {
+            // self.TextName.GetComponent<Text>().text = name;
+            if (self.EG_UIItemRectTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            self.EG_UIItemRectTransform.gameObject.SetActive(true);
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
+            self.E_Image_bgOpenImage.gameObject.SetActive(true);
+            self.E_Image_bgImage.gameObject.SetActive(false);
+            self.DisableClick();
+        }
+
         public static void OnClickItem(this ES_SettlementReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -75,7 +91,7 @@ namespace ET.Client
                 return;
             }
 
-            
+            self.ShowRewardItem(string.Empty);
             self.ClickHandler(self.Index);
         }
     }
