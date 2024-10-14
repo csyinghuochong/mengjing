@@ -31,10 +31,21 @@ namespace ET.Client
             self.LockUnitEffect = null;
         }
 
+        private static Unit GetMainUnit(this LockTargetComponent self)
+        {
+            Unit unit = self.MainUnit;
+            if (unit == null || unit.IsDisposed)
+            {
+                unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            }
+
+            return unit;
+        }
+        
         public static void OnMainHeroMove(this LockTargetComponent self)
         {
             Unit haveBoss = null;
-            Unit main = self.MainUnit;
+            Unit main = self.GetMainUnit();
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
             {
@@ -195,7 +206,7 @@ namespace ET.Client
         /// <returns></returns>
         public static long LockTargetUnit(this LockTargetComponent self, bool random = false)
         {
-            Unit main = self.MainUnit;
+            Unit main = self.GetMainUnit();
             if (!random && self.AttackTarget == 1)
             {
                 Unit unitTarget = main.GetParent<UnitComponent>().Get(self.LastLockId);

@@ -51,9 +51,20 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }
 
-        public static void OnUpdate(this AttackComponent self)
+        private static Unit GetMainUnit(this AttackComponent self)
         {
             Unit unit = self.MainUnit;
+            if (unit == null || unit.IsDisposed)
+            {
+                unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            }
+
+            return unit;
+        }
+
+        public static void OnUpdate(this AttackComponent self)
+        {
+            Unit unit = self.GetMainUnit();
             if (self.MoveAttackId == 0 || unit == null || unit.IsDisposed)
             {
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
@@ -95,7 +106,7 @@ namespace ET.Client
                 self.InitMonster(runraceMonster);
             }
         }
-        
+
         public static void OnPetFightId(this AttackComponent self, int occ, int petConfigId)
         {
             if (petConfigId == 0)
@@ -132,7 +143,7 @@ namespace ET.Client
         public static void SetAttackSpeed(this AttackComponent self)
         {
             int EquipType = UnitHelper.GetEquipType(self.Root());
-            Unit unit = self.MainUnit;
+            Unit unit = self.GetMainUnit();
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             float attackSpped = 1f + numericComponent.GetAsFloat(NumericType.Now_ActSpeedPro);
             self.SkillCDs = EquipType == (int)ItemEquipType.Knife ? new List<int>() { 500, 1000, 1000 } : new List<int>() { 700, 700, 700 };
