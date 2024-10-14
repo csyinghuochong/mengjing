@@ -207,5 +207,6 @@ namespace ET.Client
 		WindowID_CellDungeonCell,
 		WindowID_CellDungeonEnterShow,
 		WindowID_CellChapterOpen,
+		WindowID_CellDungeonSettlement,
 	}
 }
