@@ -75,6 +75,7 @@ namespace ET.Client
                 return;
             }
 
+            
             self.ClickHandler(self.Index);
         }
     }

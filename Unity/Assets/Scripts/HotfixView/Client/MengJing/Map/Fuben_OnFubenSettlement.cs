@@ -78,9 +78,11 @@ namespace ET.Client
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                default:
+                case SceneTypeEnum.CellDungeon:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
+                    break;
+                default:
                     break;
             }
 
