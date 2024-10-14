@@ -2,11 +2,10 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    
     [ComponentOf(typeof(Scene))]
-    public class SkillIndicatorComponent: Entity , IAwake, IDestroy
+    public class SkillIndicatorComponent : Entity, IAwake, IDestroy
     {
-        public EntityRef<Unit> MainUnit;
+        public EntityRef<Unit> MainUnit { get; set; }
         public long Timer;
         public float SkillRangeSize;
         public Camera MainCamera;

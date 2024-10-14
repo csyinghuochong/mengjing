@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (Scene))]
-    public class AttackComponent: Entity, IAwake, IDestroy
+    [ComponentOf(typeof(Scene))]
+    public class AttackComponent : Entity, IAwake, IDestroy
     {
-        public EntityRef<Unit> MainUnit;
-        public int SkillId{ get; set; }
+        public EntityRef<Unit> MainUnit { get; set; }
+        public int SkillId { get; set; }
         public int ComboSkillId;
         public long LastSkillTime;
         public long ComboStartTime;
@@ -18,7 +18,7 @@ namespace ET.Client
         public List<int> SkillList = new();
         public List<int> SkillCDs = new();
         public readonly C2M_SkillCmd c2mSkillCmd = new();
-        public long CDTime{ get; set; } = 800;
+        public long CDTime { get; set; } = 800;
         public long CDEndTime;
 
         public long MoveAttackTime { get; set; } = 0;
