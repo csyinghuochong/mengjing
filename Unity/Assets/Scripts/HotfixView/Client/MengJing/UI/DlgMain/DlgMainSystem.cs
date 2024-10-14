@@ -1688,7 +1688,7 @@ namespace ET.Client
         public static void OnChapterOpen(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterOpen).Coroutine();
-
+            
             self.View.ES_CellDungeonCellMini.OnChapterOpen(true);
         }
 

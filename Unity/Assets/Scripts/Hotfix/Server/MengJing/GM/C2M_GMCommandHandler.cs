@@ -30,6 +30,22 @@ namespace ET.Server
                     return;
                 }
                 
+                if (message.GMMsg == "#killall")
+                {
+                    List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
+                    for(int i = units.Count - 1; i >= 0; i--)
+                    {
+                        Unit uunit = units[i];
+                        if (uunit.Type != UnitType.Monster)
+                        {
+                            continue;
+                        }
+
+                        uunit.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, -1000000000, attackid: unit.Id);
+                    }
+                    return;
+                }
+                
                 switch (int.Parse(commands[0]))
                 {
                     case 1: //新增道具1#12000003#200 【添加道具/道具id/道具数量】

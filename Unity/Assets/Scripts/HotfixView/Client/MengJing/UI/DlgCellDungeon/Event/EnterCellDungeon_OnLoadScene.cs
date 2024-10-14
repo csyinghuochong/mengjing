@@ -10,7 +10,7 @@ namespace ET.Client
                 mapComponent.SceneType,
                 mapComponent.SonSceneId);
 
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_CellDungeonCellMini.OnUpdateUI();
+            scene.GetComponent<CellDungeonComponentC>().CheckChuansongOpen();
 
             await ETTask.CompletedTask;
         }

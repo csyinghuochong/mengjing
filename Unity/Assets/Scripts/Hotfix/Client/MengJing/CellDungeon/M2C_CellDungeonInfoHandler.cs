@@ -1,5 +1,4 @@
-﻿
-namespace ET.Client
+﻿namespace ET.Client
 {
     [MessageHandler(SceneType.Demo)]
     public class M2C_CellDungeonInfoHandler : MessageHandler<Scene, M2C_CellDungeonInfo>

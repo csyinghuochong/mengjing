@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ET.Client
 {
@@ -11,6 +12,7 @@ namespace ET.Client
         {
         }
 
+        // 好像已经弃用了
         public static void UpdateChuanSong(this SceneManagerComponent self, int sceneTypeEnum)
         {
             // AdditiveHide[] additiveHides = (AdditiveHide[])UnityEngine.Object.FindObjectsOfType(typeof (AdditiveHide));
@@ -21,12 +23,12 @@ namespace ET.Client
 
             if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon)
             {
-                //显示传送
+                //显示传送 
                 // GameObject ChuanSongPosiSet = GameObject.Find("AdditiveHide/ChuanSongPosiSet");
                 // if (ChuanSongPosiSet == null)
                 //     return;
                 // ChuanSongPosiSet.SetActive(true);
-                // CellDungeonComponent fubenComponent = self.Root().GetComponent<CellDungeonComponent>();
+                // CellDungeonComponentC fubenComponent = self.Root().GetComponent<CellDungeonComponentC>();
                 // bool isEnd = fubenComponent.IsEndCell();
                 // if (isEnd)
                 // {
@@ -46,27 +48,21 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask ChangeSonScene(this SceneManagerComponent self, int sceneTypeEnum, string paramss)
+        public static async ETTask ChangeCellSonScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
         {
             self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
-
-            var path = ABPathHelper.GetScenePath(paramss);
-            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
-
-            self.UpdateChuanSong(sceneTypeEnum);
-            //刷新主界面
-            DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            dlgMain.AfterEnterScene(sceneTypeEnum);
-        }
-
-        public static async ETTask ChangeCellSonScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
-        {
+            
             string paramss = CellDungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
 
             var path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Additive);
             Log.Warning("切换场景" + path);
+            
+            self.UpdateChuanSong(sceneTypeEnum);
+            //刷新主界面
+            DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+            dlgMain.AfterEnterScene(sceneTypeEnum);
         }
 
         public static async ETTask ChangeScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
