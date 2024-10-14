@@ -109,14 +109,35 @@ namespace ET.Client
             args.Defend.GetComponent<MoveComponent>().ChangeSpeed(speed);
         }
     }
-    
+
     [NumericWatcher(SceneType.Current, NumericType.PetFightIndex)]
     public class NumericWatcher_PetFightIndex : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
             /////切换出战宠物。   0自身 123对应位置的宠物
+            if (!unit.MainHero)
+            {
+                return;
+            }
+
+            Scene root = unit.Root();
+            Scene currentScene = root.CurrentScene();
+            int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+
+            if (petfightindex > 0)
+            {
+                PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
+
+                root.GetComponent<AttackComponent>().MainUnit = pet;
+                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
+            }
+            else
+            {
+                root.GetComponent<AttackComponent>().MainUnit = unit;
+                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
+            }
         }
     }
-    
 }

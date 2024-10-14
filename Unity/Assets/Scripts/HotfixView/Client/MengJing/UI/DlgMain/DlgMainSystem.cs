@@ -1156,22 +1156,19 @@ namespace ET.Client
         {
             Scene root = self.Root();
             Scene currentScene = root.CurrentScene();
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
             self.PetFightindex = petfightindex;
 
             if (petfightindex > 0)
             {
-                PetComponentC petComponentC = root.GetComponent<PetComponentC>();
-                long petId = petComponentC.PetFightList[petfightindex - 1];
-                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
-                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
-
                 FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
 
+                PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                long petId = petComponentC.PetFightList[petfightindex - 1];
+                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petId);
+
                 root.GetComponent<LockTargetComponent>().MainUnit = pet;
-                root.GetComponent<AttackComponent>().MainUnit = pet;
-                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
                 root.GetComponent<SkillIndicatorComponent>().MainUnit = pet;
                 currentScene.GetComponent<MJCameraComponent>().StartLookAtPet(pet);
                 self.View.ES_JoystickMove.MainUnit = pet;
@@ -1183,8 +1180,6 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
 
                 root.GetComponent<LockTargetComponent>().MainUnit = unit;
-                root.GetComponent<AttackComponent>().MainUnit = unit;
-                root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
                 root.GetComponent<SkillIndicatorComponent>().MainUnit = unit;
                 currentScene.GetComponent<MJCameraComponent>().EndLookAtPet();
                 self.View.ES_JoystickMove.MainUnit = unit;
@@ -1688,7 +1683,7 @@ namespace ET.Client
         public static void OnChapterOpen(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterOpen).Coroutine();
-            
+
             self.View.ES_CellDungeonCellMini.OnChapterOpen(true);
         }
 
