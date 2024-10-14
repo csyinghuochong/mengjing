@@ -580,7 +580,7 @@ namespace ET.Client
         public int ItemNum;
     }
 
-    public struct PetFightUpdate
+    public struct PetFormationUpdate
     {
     }
 

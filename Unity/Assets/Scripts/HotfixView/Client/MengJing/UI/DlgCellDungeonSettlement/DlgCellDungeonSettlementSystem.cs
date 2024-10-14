@@ -42,12 +42,12 @@ namespace ET.Client
             self.View.E_Star_3_liangImage.gameObject.SetActive(false);
             self.View.EG_SelectEffectSetRectTransform.gameObject.SetActive(false);
 
-            self.View.ES_SettlementReward1.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 1);
-            self.View.ES_SettlementReward2.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 2);
-            self.View.ES_SettlementReward3.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 3);
-            self.View.ES_SettlementReward4.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 4);
-            self.View.ES_SettlementReward5.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 5);
-            self.View.ES_SettlementReward6.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 6);
+            self.View.ES_SettlementReward1.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 0);
+            self.View.ES_SettlementReward2.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 1);
+            self.View.ES_SettlementReward3.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 2);
+            self.View.ES_SettlementReward4.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 3);
+            self.View.ES_SettlementReward5.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 4);
+            self.View.ES_SettlementReward6.SetClickHandler((int index) => { self.OnClickRewardItem(index).Coroutine(); }, 5);
             self.RewardUIList.Add(self.View.ES_SettlementReward1);
             self.RewardUIList.Add(self.View.ES_SettlementReward2);
             self.RewardUIList.Add(self.View.ES_SettlementReward3);
@@ -133,7 +133,7 @@ namespace ET.Client
         public static async ETTask OnClickRewardItem(this DlgCellDungeonSettlement self, int index)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (index > 3 && !unit.IsYueKaEndStates())
+            if (index >= 3 && !unit.IsYueKaEndStates())
             {
                 FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
                 return;
