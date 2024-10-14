@@ -133,7 +133,7 @@ namespace ET.Client
         public static async ETTask OnClickRewardItem(this DlgCellDungeonSettlement self, int index)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (index >= 3 && !unit.IsYueKaEndStates())
+            if (index > 3 && !unit.IsYueKaEndStates())
             {
                 FlyTipComponent.Instance.ShowFlyTip("周卡用户才能开启！");
                 return;
