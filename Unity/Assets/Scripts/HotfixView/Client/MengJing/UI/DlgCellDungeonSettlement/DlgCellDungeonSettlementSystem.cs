@@ -73,10 +73,10 @@ namespace ET.Client
 
         public static void Update(this DlgCellDungeonSettlement self)
         {
-            self.Time += Time.deltaTime;
-            if (self.Timer < 1f)
+            self.Time += TimeInfo.Instance.DeltaTime;
+            if (self.Time < 1f)
                 return;
-            self.Timer = 0;
+            self.Time = 0;
             self.Check();
         }
 
@@ -84,9 +84,16 @@ namespace ET.Client
         {
             self.LeftTime--;
             if (self.LeftTime < 0)
+            {
                 self.OnCheckGetReward();
+            }
             else
-                self.View.E_Text_LeftTimeText.text = string.Format("选择剩余时间:{0}秒", self.LeftTime);
+            {
+                using (zstring.Block())
+                {
+                    self.View.E_Text_LeftTimeText.text = zstring.Format("选择剩余时间:{0}秒", self.LeftTime);
+                }
+            }
 
             if (self.topSelect && self.bottomSelect)
             {
