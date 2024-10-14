@@ -79,8 +79,8 @@ namespace ET.Client
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 default:
-                    // ui = await UIHelper.Create(args.Scene, UIType.UICellDungeonSettlement);
-                    // ui.GetComponent<UICellDungeonSettlementComponent>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
+                    await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
+                    uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
                     break;
             }
 
