@@ -82,7 +82,7 @@ namespace ET.Server
                     continue;
                 }
 
-                if (self.SkillHandler.HurtIds.Contains(uu.Id))
+                if (self.SkillHandler.IfHaveHurtId(uu.Id))
                 {
                     continue;
                 }
@@ -98,7 +98,7 @@ namespace ET.Server
                 }
 
                 //监测到对应碰撞体触发伤害
-                self.SkillHandler.HurtIds.Add(uu.Id);
+                self.SkillHandler.OnAddHurtIds(uu.Id);
                 self.SkillHandler.OnCollisionUnit(uu);
             }
         }

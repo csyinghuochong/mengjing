@@ -68,7 +68,7 @@
 
             if (lastTarget != null && target != null)
             {
-                skillS.HurtIds.Add(target.Id);
+                skillS.OnAddHurtIds(target.Id);
                 skillS.OnCollisionUnit(target);
                 BroadcastSkill(skillS, lastTarget.Id, target.Id, 0f,0f,0f);
             }

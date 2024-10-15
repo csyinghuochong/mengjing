@@ -181,7 +181,7 @@ namespace ET.Server
              for (int i = entities.Count - 1; i >= 0; i--)
              {
                  Unit uu = entities[i];
-                 if (self.HurtIds.Contains(uu.Id))
+                 if (self.IfHaveHurtId(uu.Id))
                  {
                      continue;
                  }
@@ -197,11 +197,21 @@ namespace ET.Server
                      continue;
                  }
 
-                 self.HurtIds.Add(uu.Id);
+                 self.OnAddHurtIds(uu.Id);
                  self.OnCollisionUnit(uu);
              }
          }
 
+         public static bool IfHaveHurtId(this SkillS self, long unitid)
+         {
+             return self.HurtIds.Contains(unitid);
+         }
+
+         public static void OnAddHurtIds(this SkillS self, long unitid)
+         {
+             self.HurtIds.Add(unitid);
+         }
+        
          public static bool CheckMaxAttackNumber(this SkillS self, long unitid)
          {
              //MaxAttackNumber ==0 || -1不限制

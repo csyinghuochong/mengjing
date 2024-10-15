@@ -59,7 +59,7 @@ namespace ET.Server
                     return;
                 }
 
-                skillS.HurtIds.Add(skillS.TheUnitTarget.Id);
+                skillS.OnAddHurtIds(skillS.TheUnitTarget.Id);
                 BroadcastSkill(skillS, skillS.TheUnitFrom.Id, skillS.TheUnitTarget.Id, 0f, 0f, 0f);
                 float3 targetPosition = new float3(
                             skillS.TheUnitTarget.Position.x,
@@ -98,7 +98,7 @@ namespace ET.Server
                 skillS.TheUnitTarget.Position.y + SkillHelp.GetCenterHigh(skillS.TheUnitTarget.Type, skillS.TheUnitTarget.ConfigId),
                 skillS.TheUnitTarget.Position.z);
             skillS.TargetPosition = TargetPosition;
-            skillS.HurtIds.Add(skillS.TheUnitTarget.Id);
+            skillS.OnAddHurtIds(skillS.TheUnitTarget.Id);
             BroadcastSkill(skillS, lastTarget.Id, skillS.TheUnitTarget.Id, 0f, 0f, 0f);
             skillS.OnCollisionUnit(lastTarget);
         }
