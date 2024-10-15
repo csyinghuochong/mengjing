@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -45,10 +46,10 @@ namespace ET.Client
         {
             C2M_PetFightSwitch c2MPetFightSwitch = C2M_PetFightSwitch.Create();
             c2MPetFightSwitch.PetFightIndex = fightindex;
-            M2C_PetFightSwitch m2CPetFightSwitch =   (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
+            M2C_PetFightSwitch m2CPetFightSwitch = (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
             return m2CPetFightSwitch.Error;
         }
-        
+
         /// <summary>
         /// 获取玩家或者宠物的技能CD
         /// </summary>
@@ -59,10 +60,10 @@ namespace ET.Client
         {
             C2M_RolePetSkillCD c2MRolePetSkillCd = C2M_RolePetSkillCD.Create();
             c2MRolePetSkillCd.PetId = petId;
-            M2C_RolePetSkillCD m2CRolePetSkillCd =  (M2C_RolePetSkillCD)await root.GetComponent<ClientSenderCompnent>().Call(c2MRolePetSkillCd);
+            M2C_RolePetSkillCD m2CRolePetSkillCd = (M2C_RolePetSkillCD)await root.GetComponent<ClientSenderCompnent>().Call(c2MRolePetSkillCd);
             return m2CRolePetSkillCd;
         }
-        
+
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
             C2M_RolePetFight request = C2M_RolePetFight.Create();
@@ -375,7 +376,7 @@ namespace ET.Client
 
             return response.Error;
         }
-        
+
         public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet request = C2M_RolePetFormationSet.Create();
@@ -463,6 +464,24 @@ namespace ET.Client
         public static void PetFubenOverRequest(Scene root)
         {
             root.GetComponent<ClientSenderCompnent>().Send(C2M_PetFubenOverRequest.Create());
+        }
+
+        public static async ETTask<int> PetMeleePlaceRequest(Scene root, long petId, float3 position)
+        {
+            C2M_PetMeleePlace request = C2M_PetMeleePlace.Create();
+            request.PetId = petId;
+            request.Position = position;
+
+            M2C_PetMeleePlace response = (M2C_PetMeleePlace)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> PetMeleeBeginRequest(Scene root)
+        {
+            C2M_PetMeleeBegin request = C2M_PetMeleeBegin.Create();
+
+            M2C_PetMeleeBegin response = (M2C_PetMeleeBegin)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
         }
     }
 }

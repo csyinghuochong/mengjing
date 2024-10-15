@@ -85,6 +85,7 @@ namespace ET.Client
 
                 // 发送放置消息
                 FlyTipComponent.Instance.ShowFlyTip($"准备放置宠物 位置：{raycastHit.point}");
+                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, raycastHit.point).Coroutine();
 
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 self.View.E_CancelButton.gameObject.SetActive(false);
@@ -134,6 +135,7 @@ namespace ET.Client
         public static void OnClickItem(this DlgPetMeleeMain self, RolePetInfo rolePetInfo)
         {
             FlyTipComponent.Instance.ShowFlyTip($"选中宠物{rolePetInfo.Id}");
+            self.PetId = rolePetInfo.Id;
 
             if (self.Timer == 0)
             {
