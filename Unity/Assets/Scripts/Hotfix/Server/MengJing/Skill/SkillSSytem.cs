@@ -202,6 +202,17 @@ namespace ET.Server
              }
          }
 
+         public static bool CheckMaxAttackNumber(this SkillS self, long unitid)
+         {
+             //MaxAttackNumber ==0 || -1不限制
+             int MaxAttackNumber = self.SkillConf.MaxAttackNumber;
+             if (MaxAttackNumber > 0 && self.HurtIds.Count >= MaxAttackNumber && !self.HurtIds.Contains(unitid))
+             {
+                 return true;
+             }
+             return false;    
+         }
+        
          public static void OnCollisionUnit(this SkillS self, Unit uu)
          {
              if (!self.SkillCanAttackUnit(uu))

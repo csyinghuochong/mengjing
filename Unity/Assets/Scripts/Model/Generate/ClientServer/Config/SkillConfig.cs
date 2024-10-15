@@ -197,6 +197,8 @@ namespace ET
 		public string BuffToSkill { get; set; }
 		/// <summary>技能伤害增加</summary>
 		public string SkillDamgeAddValue { get; set; }
+		/// <summary>最大攻击数量</summary>
+		public int MaxAttackNumber { get; set; }
 
 	}
 }
