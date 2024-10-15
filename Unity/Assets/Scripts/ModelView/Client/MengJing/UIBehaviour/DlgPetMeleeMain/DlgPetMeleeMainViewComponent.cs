@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgPetMeleeMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Image E_TimeImgImage
+		public UnityEngine.UI.Text E_LeftTimeTextText
      	{
      		get
      		{
@@ -16,11 +16,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TimeImgImage == null )
+     			if( this.m_E_LeftTimeTextText == null )
      			{
-		    		this.m_E_TimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Top/E_TimeImg");
+		    		this.m_E_LeftTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_LeftTimeText");
      			}
-     			return this.m_E_TimeImgImage;
+     			return this.m_E_LeftTimeTextText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_LeftTimeImgImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LeftTimeImgImage == null )
+     			{
+		    		this.m_E_LeftTimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Top/E_LeftTimeImg");
+     			}
+     			return this.m_E_LeftTimeImgImage;
      		}
      	}
 
@@ -111,7 +128,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_TimeImgImage = null;
+			this.m_E_LeftTimeTextText = null;
+			this.m_E_LeftTimeImgImage = null;
 			this.m_E_JingLiImgImage = null;
 			this.m_E_JingLiText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
@@ -120,7 +138,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_TimeImgImage = null;
+		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
+		private UnityEngine.UI.Image m_E_LeftTimeImgImage = null;
 		private UnityEngine.UI.Image m_E_JingLiImgImage = null;
 		private UnityEngine.UI.Text m_E_JingLiText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;

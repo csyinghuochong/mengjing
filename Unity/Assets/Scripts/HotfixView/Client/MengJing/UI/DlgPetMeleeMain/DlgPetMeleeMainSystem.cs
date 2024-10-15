@@ -39,6 +39,10 @@ namespace ET.Client
         {
             self.View.E_CancelButton.gameObject.SetActive(false);
             self.RefreshItems();
+
+            self.StartTime = TimeInfo.Instance.ServerNow();
+            self.ReadyTime = 10000;
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)
@@ -48,6 +52,31 @@ namespace ET.Client
 
         public static void Update(this DlgPetMeleeMain self)
         {
+            long nowTime = TimeInfo.Instance.ServerNow();
+            long leftTime = self.ReadyTime - (nowTime - self.StartTime);
+
+            if (leftTime > 0)
+            {
+                using (zstring.Block())
+                {
+                    self.View.E_LeftTimeTextText.text = zstring.Format("剩余时间：{0}", leftTime / 1000);
+                }
+
+                self.View.E_LeftTimeImgImage.fillAmount = leftTime * 1f / self.ReadyTime;
+            }
+            else
+            {
+                FlyTipComponent.Instance.ShowFlyTip("倒计时开始!!!");
+                PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
+                return;
+            }
+
+            if (!self.IsPlace)
+            {
+                return;
+            }
+
             if (InputHelper.Check_GetMouseButtonDown0())
             {
                 if (GameObject.Find("Global").GetComponent<Init>().EditorMode)
@@ -85,10 +114,10 @@ namespace ET.Client
 
                 // 发送放置消息
                 FlyTipComponent.Instance.ShowFlyTip($"准备放置宠物 位置：{raycastHit.point}");
-                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, raycastHit.point).Coroutine();
-
-                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                self.IsPlace = false;
                 self.View.E_CancelButton.gameObject.SetActive(false);
+
+                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, raycastHit.point).Coroutine();
             }
         }
 
@@ -136,11 +165,7 @@ namespace ET.Client
         {
             FlyTipComponent.Instance.ShowFlyTip($"选中宠物{rolePetInfo.Id}");
             self.PetId = rolePetInfo.Id;
-
-            if (self.Timer == 0)
-            {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
-            }
+            self.IsPlace = true;
 
             self.View.E_CancelButton.gameObject.SetActive(true);
         }
