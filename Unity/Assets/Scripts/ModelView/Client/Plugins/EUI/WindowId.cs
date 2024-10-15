@@ -208,5 +208,6 @@ namespace ET.Client
 		WindowID_CellDungeonEnterShow,
 		WindowID_CellChapterOpen,
 		WindowID_CellDungeonSettlement,
+		WindowID_PetMeleeMain,
 	}
 }

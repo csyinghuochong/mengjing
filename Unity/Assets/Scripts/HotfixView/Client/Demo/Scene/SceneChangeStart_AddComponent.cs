@@ -78,6 +78,9 @@ namespace ET.Client
                     case SceneTypeEnum.SeasonTower:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonMain);
                         break;
+                    case SceneTypeEnum.PetMelee:
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
+                        break;
                     default:
                         break;
                 }

@@ -382,6 +382,10 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
+                case SceneTypeEnum.PetMelee:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                 default:
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;

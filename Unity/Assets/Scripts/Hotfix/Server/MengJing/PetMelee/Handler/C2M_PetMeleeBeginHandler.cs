@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    public class C2M_PetMeleeBeginHandler: MessageLocationHandler<Unit, C2M_PetMeleeBegin, M2C_PetMeleeBegin>
+    public class C2M_PetMeleeBeginHandler : MessageLocationHandler<Unit, C2M_PetMeleeBegin, M2C_PetMeleeBegin>
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleeBegin request, M2C_PetMeleeBegin response)
         {
@@ -12,11 +12,10 @@ namespace ET.Server
             {
                 allpet[i].GetComponent<AIComponent>().Begin();
             }
-            
+
             unit.Scene().GetComponent<PetMeleeDungeonComponent>().GenerateFuben();
 
             await ETTask.CompletedTask;
         }
     }
 }
-
