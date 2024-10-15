@@ -16,5 +16,10 @@ namespace ET.Client
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
         {
         }
+
+        public static void OnClickItem(this DlgPetMeleeMain self, RolePetInfo rolePetInfo)
+        {
+            
+        }
     }
 }
