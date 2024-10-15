@@ -9,5 +9,6 @@ namespace ET.Client
 
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
         public List<RolePetInfo> ShowRolePetInfos = new();
+        public long Timer;
     }
 }

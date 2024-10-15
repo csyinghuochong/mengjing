@@ -99,5 +99,6 @@
         public const int UICellDungeonEnterShow = 365;
         public const int UICellChapterOpen = 366;
         public const int UICellDungeonSettlement = 367;
+        public const int UIPetMeleeMain = 368;
     }
 }
