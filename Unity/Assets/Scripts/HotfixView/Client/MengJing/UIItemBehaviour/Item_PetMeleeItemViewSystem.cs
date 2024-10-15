@@ -22,6 +22,12 @@ namespace ET.Client
         {
             self.RolePetInfo = rolePetInfo;
             self.E_ClickButton.AddListener(self.OnClick);
+
+            PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
+            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_IconImage.sprite = sp;
         }
 
         private static void OnClick(this Scroll_Item_PetMeleeItem self)

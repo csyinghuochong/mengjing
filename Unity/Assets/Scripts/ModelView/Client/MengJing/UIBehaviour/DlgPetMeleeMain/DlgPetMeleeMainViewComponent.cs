@@ -75,12 +75,48 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_CancelButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CancelButton == null )
+     			{
+		    		this.m_E_CancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Cancel");
+     			}
+     			return this.m_E_CancelButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CancelImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CancelImage == null )
+     			{
+		    		this.m_E_CancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Cancel");
+     			}
+     			return this.m_E_CancelImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_TimeImgImage = null;
 			this.m_E_JingLiImgImage = null;
 			this.m_E_JingLiText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
+			this.m_E_CancelButton = null;
+			this.m_E_CancelImage = null;
 			this.uiTransform = null;
 		}
 
@@ -88,6 +124,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_JingLiImgImage = null;
 		private UnityEngine.UI.Text m_E_JingLiText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
+		private UnityEngine.UI.Button m_E_CancelButton = null;
+		private UnityEngine.UI.Image m_E_CancelImage = null;
 		public Transform uiTransform = null;
 	}
 }

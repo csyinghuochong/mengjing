@@ -8,5 +8,6 @@ namespace ET.Client
         public DlgPetMeleeMainViewComponent View { get => this.GetComponent<DlgPetMeleeMainViewComponent>(); }
 
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
+        public List<RolePetInfo> ShowRolePetInfos = new();
     }
 }
