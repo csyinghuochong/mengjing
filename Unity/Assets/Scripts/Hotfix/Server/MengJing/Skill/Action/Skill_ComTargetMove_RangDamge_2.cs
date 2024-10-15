@@ -30,7 +30,7 @@ namespace ET.Server
                 //this.TheUnitFrom.GetComponent<BuffManagerComponent>().BulletFactory(buffData, TheUnitFrom, this);
 
                 Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(),  skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 360 / skillS.SkillExcuteNum * i, skillS.TheUnitFrom.Position, new CreateMonsterInfo());
-                //unit.AddComponent<RoleBullet2Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+                //unit.AddComponent<RoleBullet2Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);  //类似这种注释都要解开并测试
             }
 
             this.OnUpdate(skillS, 0);
