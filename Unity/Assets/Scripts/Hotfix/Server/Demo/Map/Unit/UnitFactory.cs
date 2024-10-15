@@ -377,16 +377,13 @@ namespace ET.Server
                 case SceneTypeEnum.PetDungeon:
                 case SceneTypeEnum.PetTianTi:
                 case SceneTypeEnum.PetMing:
-                    AIComponent aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号  撤退
-                    aIComponent.InitTianTiPet(petinfo.ConfigId);
+                    unit.AddComponent<AIComponent, int>(1).InitTianTiPet(petinfo.ConfigId); //AI行为树序号  撤退
                     break;
                 case SceneTypeEnum.PetMelee:
-                    unit.AddComponent<AIComponent, int>(3); //AI行为树序号  不撤退
-                    
+                    unit.AddComponent<AIComponent, int>(15).InitPet(petinfo); //AI行为树序号  不撤退
                     break;
                 default:
-                    aIComponent = unit.AddComponent<AIComponent, int>(1); //AI行为树序号  撤退
-                    aIComponent.InitPet(petinfo);
+                    unit.AddComponent<AIComponent, int>(1).InitPet(petinfo); //AI行为树序号  撤退
                     break;
             }
 
