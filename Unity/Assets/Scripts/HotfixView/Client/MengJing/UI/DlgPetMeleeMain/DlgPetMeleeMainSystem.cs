@@ -66,7 +66,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTip("倒计时开始!!!");
+                FlyTipComponent.Instance.ShowFlyTip("战斗开始!!!");
                 PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
                 return;
@@ -117,8 +117,14 @@ namespace ET.Client
                 self.IsPlace = false;
                 self.View.E_CancelButton.gameObject.SetActive(false);
 
-                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, raycastHit.point).Coroutine();
+                self.PetMeleePlaceRequest(raycastHit.point).Coroutine();
             }
+        }
+
+        private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 point)
+        {
+            await PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, point);
+            self.RefreshItems();
         }
 
         private static bool IsPointerOverGameObject(this DlgPetMeleeMain self, Vector2 mousePosition)
@@ -143,12 +149,22 @@ namespace ET.Client
         {
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
             self.ShowRolePetInfos.Clear();
+
+            UnitComponent unitComponent = self.Root().CurrentScene().GetComponent<UnitComponent>();
+
             for (int i = 0; i < rolePetInfos.Count; i++)
             {
-                if (rolePetInfos[i].PetStatus == 0)
+                // if (rolePetInfos[i].PetStatus != 0)
+                // {
+                //     continue;
+                // }
+
+                if (unitComponent.Get(rolePetInfos[i].Id) != null)
                 {
-                    self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                    continue;
                 }
+
+                self.ShowRolePetInfos.Add(rolePetInfos[i]);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemPetMeleeItems, self.ShowRolePetInfos.Count);
