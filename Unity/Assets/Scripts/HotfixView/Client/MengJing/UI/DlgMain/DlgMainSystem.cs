@@ -1717,6 +1717,9 @@ namespace ET.Client
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
             self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
+            self.View.E_OpenChatButton.gameObject.SetActive(false);
+            self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(false);
+            self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(false);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             if (value == "1")
@@ -1749,6 +1752,9 @@ namespace ET.Client
                     self.View.ES_CellDungeonCellMini.OnUpdateUI();
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.MainCityScene:
                     self.View.ES_MainHpBar.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
@@ -1758,6 +1764,9 @@ namespace ET.Client
                     self.View.E_MainTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
                     self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.Happy:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
@@ -1776,12 +1785,18 @@ namespace ET.Client
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.SealTower:
                     self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.LocalDungeon:
                     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(sceneid);
@@ -1798,9 +1813,17 @@ namespace ET.Client
                             self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                             self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                            self.View.E_OpenChatButton.gameObject.SetActive(true);
+                            self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                            self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                             break;
                     }
 
+                    break;
+                case SceneTypeEnum.PetMelee:
+                    self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     break;
                 default:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
