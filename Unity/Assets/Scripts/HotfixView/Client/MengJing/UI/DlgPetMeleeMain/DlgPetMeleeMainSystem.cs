@@ -26,6 +26,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(Scroll_Item_PetMeleeItem))]
     [FriendOf(typeof(DlgPetMeleeMain))]
     public static class DlgPetMeleeMainSystem
     {
@@ -41,7 +42,9 @@ namespace ET.Client
             self.RefreshItems();
 
             self.StartTime = TimeInfo.Instance.ServerNow();
-            self.ReadyTime = 10000;
+            self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
+            self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
+            self.MoLi = 300; // 魔力 (暂时，之后根据公式读表)
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
         }
 
@@ -52,25 +55,36 @@ namespace ET.Client
 
         public static void Update(this DlgPetMeleeMain self)
         {
-            long nowTime = TimeInfo.Instance.ServerNow();
-            long leftTime = self.ReadyTime - (nowTime - self.StartTime);
-
-            if (leftTime > 0)
+            if (!self.GameStart)
             {
-                using (zstring.Block())
+                long nowTime = TimeInfo.Instance.ServerNow();
+                long leftTime = self.ReadyTime - (nowTime - self.StartTime);
+
+                if (leftTime > 0)
                 {
-                    self.View.E_LeftTimeTextText.text = zstring.Format("剩余时间：{0}", leftTime / 1000);
-                }
+                    using (zstring.Block())
+                    {
+                        self.View.E_LeftTimeTextText.text = zstring.Format("剩余时间：{0}", leftTime / 1000);
+                    }
 
-                self.View.E_LeftTimeImgImage.fillAmount = leftTime * 1f / self.ReadyTime;
+                    self.View.E_LeftTimeImgImage.fillAmount = leftTime * 1f / self.ReadyTime;
+                }
+                else
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("一大波怪物正在来袭!!!");
+                    PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
+                    self.GameStart = true;
+                }
             }
-            else
+
+            using (zstring.Block())
             {
-                FlyTipComponent.Instance.ShowFlyTip("战斗开始!!!");
-                PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
-                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
-                return;
+                self.View.E_MoLiText.text = zstring.Format("{0}/{1}", self.MoLi, self.MaxMoLi);
             }
+
+            self.View.E_MoLiImgImage.fillAmount = self.MoLi * 1f / self.MaxMoLi;
+
+            self.RefreshItemCD();
 
             if (!self.IsPlace)
             {
@@ -107,24 +121,18 @@ namespace ET.Client
                     return;
                 }
 
-                if (raycastHit.collider == null || raycastHit.collider.gameObject == null)
+                if (raycastHit.collider == null || raycastHit.collider.gameObject == null ||
+                    !raycastHit.collider.gameObject.name.StartsWith("Position"))
                 {
                     return;
                 }
 
-                // 发送放置消息
-                FlyTipComponent.Instance.ShowFlyTip($"准备放置宠物 位置：{raycastHit.point}");
                 self.IsPlace = false;
                 self.View.E_CancelButton.gameObject.SetActive(false);
-
-                self.PetMeleePlaceRequest(raycastHit.point).Coroutine();
+                Vector3 pos = raycastHit.collider.gameObject.transform.position;
+                pos.y += raycastHit.collider.gameObject.GetComponent<BoxCollider>().size.y * 0.5f;
+                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, pos).Coroutine();
             }
-        }
-
-        private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 point)
-        {
-            await PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, point);
-            self.RefreshItems();
         }
 
         private static bool IsPointerOverGameObject(this DlgPetMeleeMain self, Vector2 mousePosition)
@@ -171,19 +179,38 @@ namespace ET.Client
             self.View.E_PetMeleeItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
         }
 
+        private static void RefreshItemCD(this DlgPetMeleeMain self)
+        {
+            foreach (Scroll_Item_PetMeleeItem item in self.ScrollItemPetMeleeItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.RefreshCD();
+            }
+        }
+
         private static void OnPetMeleeItemsRefresh(this DlgPetMeleeMain self, Transform transform, int index)
         {
             Scroll_Item_PetMeleeItem scrollItemPetMeleeItem = self.ScrollItemPetMeleeItems[index].BindTrans(transform);
             scrollItemPetMeleeItem.Refresh(self.ShowRolePetInfos[index]);
         }
 
-        public static void OnClickItem(this DlgPetMeleeMain self, RolePetInfo rolePetInfo)
+        public static bool OnClickItem(this DlgPetMeleeMain self, int costMoLi, long petId)
         {
-            FlyTipComponent.Instance.ShowFlyTip($"选中宠物{rolePetInfo.Id}");
-            self.PetId = rolePetInfo.Id;
-            self.IsPlace = true;
+            if (self.MoLi < costMoLi)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("魔力不足");
+                return false;
+            }
 
+            self.MoLi -= costMoLi;
+            self.PetId = petId;
+            self.IsPlace = true;
             self.View.E_CancelButton.gameObject.SetActive(true);
+            return true;
         }
 
         private static void OnCancel(this DlgPetMeleeMain self)

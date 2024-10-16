@@ -343,9 +343,17 @@ namespace ET.Server
             return unit;
         }
 
-        public static Unit CreateTianTiPet(Scene scene, long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell)
+        public static Unit CreateTianTiPet(Scene scene, long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell , long customId = 0)
         {
-            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
+            Unit unit = null;
+            if (customId != 0)
+            {
+                unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
+            }
+            else
+            {
+                unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(customId, 1);
+            }
             scene.GetComponent<UnitComponent>().Add(unit);
             unit.AddComponent<ObjectWait>();
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();

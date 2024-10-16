@@ -7,6 +7,9 @@ namespace ET.Client
 	public  class Scroll_Item_PetMeleeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeItem>
 	{
 		public RolePetInfo RolePetInfo;
+		public int CostMoLi = 90;// 魔力消耗 (暂时，之后根据公式读表)
+		public long RefreshTime = 3000;// 刷新时间 (暂时，之后根据公式读表)
+		public long EndTime;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

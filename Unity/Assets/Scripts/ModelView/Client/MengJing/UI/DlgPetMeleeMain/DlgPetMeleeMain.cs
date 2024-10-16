@@ -13,6 +13,9 @@ namespace ET.Client
         public bool IsPlace;
         public long StartTime;
         public long ReadyTime;
+        public int MaxMoLi;
+        public int MoLi;
+        public bool GameStart;
         public long Timer;
     }
 }

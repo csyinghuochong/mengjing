@@ -30,9 +30,22 @@ namespace ET.Client
             self.E_IconImage.sprite = sp;
         }
 
+        public static void RefreshCD(this Scroll_Item_PetMeleeItem self)
+        {
+        }
+
         private static void OnClick(this Scroll_Item_PetMeleeItem self)
         {
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().OnClickItem(self.RolePetInfo);
+            if (self.EndTime > TimeHelper.ServerNow())
+            {
+                FlyTipComponent.Instance.ShowFlyTip("冷却中。。。");
+                return;
+            }
+
+            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().OnClickItem(self.CostMoLi, self.RolePetInfo.Id))
+            {
+                self.EndTime = TimeHelper.ServerNow() + self.RefreshTime;
+            }
         }
     }
 }

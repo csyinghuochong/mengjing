@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_JingLiImgImage
+		public UnityEngine.UI.Image E_MoLiImgImage
      	{
      		get
      		{
@@ -50,15 +50,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_JingLiImgImage == null )
+     			if( this.m_E_MoLiImgImage == null )
      			{
-		    		this.m_E_JingLiImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Bottom/E_JingLiImg");
+		    		this.m_E_MoLiImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Bottom/E_MoLiImg");
      			}
-     			return this.m_E_JingLiImgImage;
+     			return this.m_E_MoLiImgImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_JingLiText
+		public UnityEngine.UI.Text E_MoLiText
      	{
      		get
      		{
@@ -67,11 +67,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_JingLiText == null )
+     			if( this.m_E_MoLiText == null )
      			{
-		    		this.m_E_JingLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_JingLi");
+		    		this.m_E_MoLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_MoLi");
      			}
-     			return this.m_E_JingLiText;
+     			return this.m_E_MoLiText;
      		}
      	}
 
@@ -130,8 +130,8 @@ namespace ET.Client
 		{
 			this.m_E_LeftTimeTextText = null;
 			this.m_E_LeftTimeImgImage = null;
-			this.m_E_JingLiImgImage = null;
-			this.m_E_JingLiText = null;
+			this.m_E_MoLiImgImage = null;
+			this.m_E_MoLiText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 			this.m_E_CancelButton = null;
 			this.m_E_CancelImage = null;
@@ -140,8 +140,8 @@ namespace ET.Client
 
 		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
 		private UnityEngine.UI.Image m_E_LeftTimeImgImage = null;
-		private UnityEngine.UI.Image m_E_JingLiImgImage = null;
-		private UnityEngine.UI.Text m_E_JingLiText = null;
+		private UnityEngine.UI.Image m_E_MoLiImgImage = null;
+		private UnityEngine.UI.Text m_E_MoLiText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 		private UnityEngine.UI.Button m_E_CancelButton = null;
 		private UnityEngine.UI.Image m_E_CancelImage = null;

@@ -21,7 +21,8 @@ namespace ET.Server
                 return;
             }
 
-            UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 180, -1);
+            UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
+                IdGenerater.Instance.GenerateId());
 
             await ETTask.CompletedTask;
         }
