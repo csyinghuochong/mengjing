@@ -5,7 +5,7 @@ namespace ET.Server
 {
     [EntitySystemOf(typeof (RoleBullet1Componet))]
     [FriendOf(typeof (RoleBullet1Componet))]
-    public static partial class RoleBullet1ComponetSystem
+    public static partial class RoleBullet1ComponentSystem
     {
         
         [Invoke(TimerInvokeType.RoleBullet1Timer)]

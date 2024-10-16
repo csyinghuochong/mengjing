@@ -79,7 +79,7 @@ namespace ET.Server
 
             Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position,
                 new CreateMonsterInfo());
-            //unit.AddComponent<RoleBullet5Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+            unit.AddComponent<RoleBullet5Componnet>().OnBaseBulletInit(skillS, skillS.TheUnitFrom.Id);
             float3 target = this.GetBulletTargetPoint(skillS, skillS.SkillInfo.TargetAngle);
             unit.BulletMoveToAsync(target).Coroutine();
             skillS.SkillExcuteNum--;

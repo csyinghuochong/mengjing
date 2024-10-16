@@ -40,6 +40,9 @@
         public const int PlayerOfflineOutTime = 228;
         public const int BehaviourTimer = 229;
         public const int TuoGuanTimer = 230;
+        public const int RoleBullet2Timer = 231;
+        public const int RoleBullet5Timer = 232;
+        public const int RoleBullet6Timer = 233;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

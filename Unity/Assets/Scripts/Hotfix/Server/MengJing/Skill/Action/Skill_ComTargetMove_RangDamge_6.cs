@@ -6,9 +6,8 @@ namespace ET.Server
     /// 向前方释放一个火球火球移动过程造成一次伤害，移动x秒后位置固定，并且对周围造成持续伤害持续伤害间隔时间，中途碰撞时是否停下
     /// 参数（移动时间，伤害间隔时间，碰撞是否停下）
     /// </summary>
-    public class Skill_ComTargetMove_RangDamge_6: SkillHandlerS
+    public class Skill_ComTargetMove_RangDamge_6 : SkillHandlerS
     {
-        
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
             skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
@@ -53,12 +52,15 @@ namespace ET.Server
             {
                 return;
             }
-            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position,
+
+            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0,
+                skillS.TheUnitFrom.Position,
                 new CreateMonsterInfo());
-            //unit.AddComponent<RoleBullet6Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id, this.IsStop);
+            unit.AddComponent<RoleBullet6Componnet>().OnBaseBulletInit(skillS, skillS.TheUnitFrom.Id, skillS.IsStop);
             float3 sourcePoint = skillS.TheUnitFrom.Position;
             quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0);
-            float3 TargetPoint = sourcePoint + math.mul(rotation ,new float3(0,0,1)) * skillS.MoveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
+            float3 TargetPoint = sourcePoint +
+                    math.mul(rotation, new float3(0, 0, 1)) * skillS.MoveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             unit.BulletMoveToAsync(TargetPoint).Coroutine();
             skillS.SkillExcuteNum--;
         }

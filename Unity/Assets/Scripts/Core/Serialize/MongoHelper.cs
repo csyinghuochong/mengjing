@@ -12,6 +12,15 @@ namespace ET
         [StaticField]
         private static readonly JsonWriterSettings defaultSettings = new() { OutputMode = JsonOutputMode.RelaxedExtendedJson };
         
+        [StaticField]
+        public static bool NoTimerMonster = true;
+        
+        [StaticField]
+        public static bool WuDiBullet = true;
+        
+        [StaticField]
+        public static bool KeepSession = false;
+        
         public static string ToJson(object obj)
         {
             if (obj is ISupportInitialize supportInitialize)
