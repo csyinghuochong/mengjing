@@ -73,6 +73,7 @@ namespace ET.Client
                 {
                     FlyTipComponent.Instance.ShowFlyTip("一大波怪物正在来袭!!!");
                     PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
+                    self.View.EG_TopRectTransform.gameObject.SetActive(false);
                     self.GameStart = true;
                 }
             }
@@ -131,7 +132,38 @@ namespace ET.Client
                 self.View.E_CancelButton.gameObject.SetActive(false);
                 Vector3 pos = raycastHit.collider.gameObject.transform.position;
                 pos.y += raycastHit.collider.gameObject.GetComponent<BoxCollider>().size.y * 0.5f;
-                PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, pos).Coroutine();
+                self.PetMeleePlaceRequest(pos).Coroutine();
+            }
+        }
+
+        private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 pos)
+        {
+            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, pos);
+
+            if (error == 0)
+            {
+                self.MoLi -= self.CostMoLi;
+
+                foreach (Scroll_Item_PetMeleeItem item in self.ScrollItemPetMeleeItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    if (item.RolePetInfo == null)
+                    {
+                        continue;
+                    }
+
+                    if (self.PetId != item.RolePetInfo.Id)
+                    {
+                        continue;
+                    }
+
+                    item.SetCD();
+                    break;
+                }
             }
         }
 
@@ -153,7 +185,7 @@ namespace ET.Client
             }
         }
 
-        public static void RefreshItems(this DlgPetMeleeMain self)
+        private static void RefreshItems(this DlgPetMeleeMain self)
         {
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
             self.ShowRolePetInfos.Clear();
@@ -198,19 +230,18 @@ namespace ET.Client
             scrollItemPetMeleeItem.Refresh(self.ShowRolePetInfos[index]);
         }
 
-        public static bool OnClickItem(this DlgPetMeleeMain self, int costMoLi, long petId)
+        public static void OnClickItem(this DlgPetMeleeMain self, int costMoLi, long petId)
         {
             if (self.MoLi < costMoLi)
             {
                 FlyTipComponent.Instance.ShowFlyTip("魔力不足");
-                return false;
+                return;
             }
 
-            self.MoLi -= costMoLi;
+            self.CostMoLi = costMoLi;
             self.PetId = petId;
             self.IsPlace = true;
             self.View.E_CancelButton.gameObject.SetActive(true);
-            return true;
         }
 
         private static void OnCancel(this DlgPetMeleeMain self)

@@ -32,8 +32,22 @@ namespace ET.Client
 
         public static void RefreshCD(this Scroll_Item_PetMeleeItem self)
         {
+            long timeNow = TimeInfo.Instance.ServerNow();
+            if (self.EndTime <= timeNow)
+            {
+                self.E_CDImage.fillAmount = 0;
+            }
+            else
+            {
+                self.E_CDImage.fillAmount = (float)(self.EndTime - timeNow) / self.CD;
+            }
         }
 
+        public static void SetCD(this Scroll_Item_PetMeleeItem self)
+        {
+            self.EndTime = TimeHelper.ServerNow() + self.CD;
+        }
+        
         private static void OnClick(this Scroll_Item_PetMeleeItem self)
         {
             if (self.EndTime > TimeHelper.ServerNow())
@@ -42,10 +56,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().OnClickItem(self.CostMoLi, self.RolePetInfo.Id))
-            {
-                self.EndTime = TimeHelper.ServerNow() + self.RefreshTime;
-            }
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().OnClickItem(self.CostMoLi, self.RolePetInfo.Id);
         }
     }
 }

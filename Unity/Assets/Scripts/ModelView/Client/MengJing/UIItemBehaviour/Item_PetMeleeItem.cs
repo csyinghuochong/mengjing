@@ -4,11 +4,11 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetMeleeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeItem>
+	public  class Scroll_Item_PetMeleeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeItem> 
 	{
 		public RolePetInfo RolePetInfo;
 		public int CostMoLi = 90;// 魔力消耗 (暂时，之后根据公式读表)
-		public long RefreshTime = 3000;// 刷新时间 (暂时，之后根据公式读表)
+		public long CD = 3000;// 刷新时间 (暂时，之后根据公式读表)
 		public long EndTime;
 		
 		public long DataId {get;set;}
@@ -120,12 +120,37 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_CDImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_CDImage == null )
+     				{
+		    			this.m_E_CDImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CD");
+     				}
+     				return this.m_E_CDImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CD");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_IconImage = null;
 			this.m_E_MoLiText = null;
 			this.m_E_ClickButton = null;
 			this.m_E_ClickImage = null;
+			this.m_E_CDImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -134,6 +159,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_MoLiText = null;
 		private UnityEngine.UI.Button m_E_ClickButton = null;
 		private UnityEngine.UI.Image m_E_ClickImage = null;
+		private UnityEngine.UI.Image m_E_CDImage = null;
 		public Transform uiTransform = null;
 	}
 }

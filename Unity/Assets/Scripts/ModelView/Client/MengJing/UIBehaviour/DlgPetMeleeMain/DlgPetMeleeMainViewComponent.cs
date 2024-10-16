@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgPetMeleeMainViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.RectTransform EG_TopRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_TopRectTransform == null )
+     			{
+		    		this.m_EG_TopRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Top");
+     			}
+     			return this.m_EG_TopRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_LeftTimeTextText
      	{
      		get
@@ -18,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LeftTimeTextText == null )
      			{
-		    		this.m_E_LeftTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_LeftTimeText");
+		    		this.m_E_LeftTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Top/E_LeftTimeText");
      			}
      			return this.m_E_LeftTimeTextText;
      		}
@@ -35,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LeftTimeImgImage == null )
      			{
-		    		this.m_E_LeftTimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Top/E_LeftTimeImg");
+		    		this.m_E_LeftTimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Top/E_LeftTimeImg");
      			}
      			return this.m_E_LeftTimeImgImage;
      		}
@@ -128,6 +145,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_EG_TopRectTransform = null;
 			this.m_E_LeftTimeTextText = null;
 			this.m_E_LeftTimeImgImage = null;
 			this.m_E_MoLiImgImage = null;
@@ -138,6 +156,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.RectTransform m_EG_TopRectTransform = null;
 		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
 		private UnityEngine.UI.Image m_E_LeftTimeImgImage = null;
 		private UnityEngine.UI.Image m_E_MoLiImgImage = null;
