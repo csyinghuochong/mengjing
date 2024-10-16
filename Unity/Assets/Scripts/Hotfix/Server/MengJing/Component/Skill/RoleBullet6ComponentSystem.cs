@@ -81,11 +81,6 @@ namespace ET.Server
                     continue;
                 }
 
-                if (MongoHelper.WuDiBullet && !ComHelperS.IsInnerNet())
-                {
-                    continue;
-                }
-
                 if (!uu.IsCanBeAttack())
                 {
                     continue;
