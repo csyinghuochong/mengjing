@@ -11,8 +11,9 @@ namespace ET.Server
         /// <param name="main"></param>
         /// <param name="maxdis"></param>
         /// <param name="isMini">是否要最小距离</param>
+        /// <param name="unitType">目标Unit类型</param>
         /// <returns></returns>
-        public static Unit GetNearestEnemy(Unit main, float maxdis, bool isMini = false)
+        public static Unit GetNearestEnemy(Unit main, float maxdis, bool isMini = false, int unitType = 0)
         {
             Unit nearest = null;
             float minDistance = maxdis;
@@ -21,6 +22,11 @@ namespace ET.Server
             {
                 Unit unit = units[i];
                 if (unit.IsDisposed || main.Id == unit.Id)
+                {
+                    continue;
+                }
+
+                if (unitType != 0 && unit.Type != unitType)
                 {
                     continue;
                 }
