@@ -10,10 +10,12 @@ namespace ET.Server
         public static async ETTask FindPathMoveToAsync(this Unit unit, float3 target)
         {
             StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
-            int errorCode = stateComponent.CanMove();
+            
+            // 以防止怪物再引力波的作用下不移动
+            int errorCode = stateComponent.ServerCanMove();
             if (ErrorCode.ERR_Success != errorCode)
             {
-                 unit.SendStop(-1);
+                unit.SendStop(-1);
                 return;
             }
 
