@@ -119,6 +119,20 @@ namespace ET
             self.TargetPoint.Clear();
             self.InitTargetPoints(MonsterCof.AIParameter);
         }
+        
+        public static void InitPetMeleeMonster(this AIComponent self, int monsteConfigId)
+        {
+            MonsterConfig MonsterCof = MonsterConfigCategory.Instance.Get(monsteConfigId);
+            //初始化AI组件的一些东西
+            self.ActRange = (float)MonsterCof.ActDistance; // 在攻击范围内追击
+            self.ChaseRange = (float)MonsterCof.ChaseRange; //超出会返回到出生点
+            self.ActDistance = (float)MonsterCof.ActDistance; //2    小于转攻击
+            self.PatrolRange = (float)MonsterCof.PatrolRange;
+            self.AIDelay = MonsterCof.AIDelay;
+            self.AISkillIDList.Add(MonsterCof.ActSkillID);
+            self.TargetPoint.Clear();
+            self.InitTargetPoints(MonsterCof.AIParameter);
+        }
 
         public static void InitTargetPoints(this AIComponent self, string aIParameter)
         {

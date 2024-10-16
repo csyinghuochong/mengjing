@@ -195,6 +195,11 @@ namespace ET.Server
                     case SceneTypeEnum.PetDungeon:
                         aIComponent.InitPetFubenMonster(monsterConfig.Id);
                         break;
+                    case SceneTypeEnum.PetMelee:
+                        aIComponent.InitPetMeleeMonster(monsterConfig.Id);
+                        aIComponent.Begin();
+                        skillPassiveComponent.Begin();
+                        break;
                     default:
                         aIComponent.InitMonster(monsterConfig.Id);
                         aIComponent.Begin();
