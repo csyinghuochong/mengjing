@@ -40,7 +40,7 @@ namespace ET.Server
             self.PassTime = 0;
             self.Masterid = masterid;
             self.BuffState = BuffState.Running;
-            self.SkillHandler = skillHandler;
+            self.SkillS = skillHandler;
             self.BeginTime = TimeHelper.ServerNow();
             self.DelayTime = (long)(1000 * skillHandler.SkillConf.SkillDelayTime);
             self.DamageRange = skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageRange) + (float)skillHandler.SkillConf.DamgeRange[0];
@@ -59,8 +59,8 @@ namespace ET.Server
             //}
 
             Unit unit = self.GetParent<Unit>();
-            if (unit.IsDisposed || self.SkillHandler.TheUnitFrom.IsDisposed || TimeHelper.ServerNow() > self.BuffEndTime ||
-                self.SkillHandler.IsFinished())
+            SkillS skillS = self.SkillS;
+            if (unit.IsDisposed || skillS == null || skillS.TheUnitFrom.IsDisposed || TimeHelper.ServerNow() > self.BuffEndTime || skillS.IsFinished())
             {
                 //移除Unity
                 unit.GetParent<UnitComponent>().Remove(unit.Id);
@@ -70,7 +70,7 @@ namespace ET.Server
 
             //获取当前全部的unit进行范围监测
             List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
-            self.SkillHandler.UpdateCheckPoint(unit.Position);
+            skillS.UpdateCheckPoint(unit.Position);
 
             //Log.Debug($"子弹位置： x: {unit.Position.x}  z: {unit.Position.z}");
             for (int i = units.Count - 1; i >= 0; i--)
@@ -82,12 +82,12 @@ namespace ET.Server
                     continue;
                 }
 
-                if (self.SkillHandler.IfHaveHurtId(uu.Id))
+                if (skillS.IfHaveHurtId(uu.Id))
                 {
                     continue;
                 }
 
-                if (!self.SkillHandler.CheckShape(uu.Position))
+                if (!skillS.CheckShape(uu.Position))
                 {
                     continue;
                 }
@@ -98,8 +98,8 @@ namespace ET.Server
                 }
 
                 //监测到对应碰撞体触发伤害
-                self.SkillHandler.OnAddHurtIds(uu.Id);
-                self.SkillHandler.OnCollisionUnit(uu);
+                skillS.OnAddHurtIds(uu.Id);
+                skillS.OnCollisionUnit(uu);
             }
         }
     }

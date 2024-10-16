@@ -10,7 +10,7 @@ namespace ET.Server
         public long DelayTime;
         public float DamageRange;
         public long Masterid;
-        public SkillS SkillHandler { get; set; }
+        public EntityRef<SkillS> SkillS;
         public BuffState BuffState;
         public long Timer;
     }

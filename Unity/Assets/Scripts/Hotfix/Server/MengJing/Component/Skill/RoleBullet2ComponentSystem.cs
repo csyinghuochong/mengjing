@@ -64,7 +64,9 @@ namespace ET.Server
 
             Unit unit = self.GetParent<Unit>();
             Unit theUnitBelongto = self.TheUnitBelongto;
-            if (unit.IsDisposed || theUnitBelongto.IsDisposed || unit.Scene() == null || TimeHelper.ServerNow() > self.BuffEndTime)
+            SkillS skillS = self.SkillS;
+            if (unit.IsDisposed || skillS == null || theUnitBelongto.IsDisposed || unit.Scene() == null ||
+                TimeHelper.ServerNow() > self.BuffEndTime)
             {
                 unit.GetParent<UnitComponent>().Remove(unit.Id);
                 self.BuffState = BuffState.Finished;
@@ -72,7 +74,6 @@ namespace ET.Server
                 return;
             }
 
-            SkillS skillS = self.SkillS;
             self.Angle = (self.PassTime * 0.001f) * (float)skillS.SkillConf.SkillMoveSpeed + self.StartAngle;
             if (self.Angle >= (self.InterValTimeSum + 1) * 360)
             {

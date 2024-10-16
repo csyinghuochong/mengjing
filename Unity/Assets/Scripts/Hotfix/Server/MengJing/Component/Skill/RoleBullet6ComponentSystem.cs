@@ -56,7 +56,7 @@ namespace ET.Server
             UnitComponent unitComponent = bullet.GetParent<UnitComponent>();
             long nowTime = TimeHelper.ServerNow();
             SkillS skillS = self.SkillS;
-            if (bullet.IsDisposed || skillS.TheUnitFrom.IsDisposed || nowTime > self.BuffEndTime || skillS.IsFinished())
+            if (bullet.IsDisposed || skillS == null || skillS.TheUnitFrom.IsDisposed || nowTime > self.BuffEndTime || skillS.IsFinished())
             {
                 unitComponent.Remove(bullet.Id);
                 self.BuffState = BuffState.Finished;
