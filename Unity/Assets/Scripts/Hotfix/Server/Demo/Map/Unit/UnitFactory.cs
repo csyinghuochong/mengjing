@@ -346,7 +346,7 @@ namespace ET.Server
         public static Unit CreateTianTiPet(Scene scene, long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell , long customId = 0)
         {
             Unit unit = null;
-            if (customId != 0)
+            if (customId == 0)
             {
                 unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
             }

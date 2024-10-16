@@ -15,11 +15,11 @@ namespace ET.Server
                 return;
             }
 
-            if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
-            {
-                response.Error = ErrorCode.ERR_RequestRepeatedly;
-                return;
-            }
+            // if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
+            // {
+            //     response.Error = ErrorCode.ERR_RequestRepeatedly;
+            //     return;
+            // }
 
             UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
                 IdGenerater.Instance.GenerateId());
