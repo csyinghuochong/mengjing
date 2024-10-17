@@ -2,7 +2,7 @@
 
 namespace ET.Server
 {
-    public class AI_GetTarget : AAIHandler
+    public class AI_PetMelee_PetTarget : AAIHandler
     {
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
@@ -12,7 +12,7 @@ namespace ET.Server
             }
 
             Unit unit = aiComponent.GetParent<Unit>();
-            Unit nearest = GetTargetHelpS.GetNearestEnemy(unit, aiComponent.ActRange, true);
+            Unit nearest = GetTargetHelpS.GetForwardNearestEnemy(unit, (float)aiComponent.ActDistance, 60, true);
             if (nearest != null && !aiComponent.IsRetreat)
             {
                 aiComponent.TargetZhuiJi = unit.Position;

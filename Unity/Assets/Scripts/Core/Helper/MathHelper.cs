@@ -89,5 +89,29 @@ namespace ET
                 (double)value.z * (double)value.z);
             return (double)num > 9.999999747378752E-06 ? value / num : float3.zero;
         }
+
+        /// <summary>
+        /// 两个三维向量之间的夹角
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>度数</returns>
+        public static float Angle(float3 a, float3 b)
+        {
+            // 计算两个向量的单位向量
+            float3 aNorm = math.normalize(a);
+            float3 bNorm = math.normalize(b);
+
+            // 计算点积
+            float dotProduct = math.dot(aNorm, bNorm);
+
+            // 计算夹角 (弧度)
+            float angleRad = math.acos(dotProduct);
+
+            // 将弧度转换为度数
+            float angleDeg = math.degrees(angleRad);
+
+            return angleDeg;
+        }
     }
 }

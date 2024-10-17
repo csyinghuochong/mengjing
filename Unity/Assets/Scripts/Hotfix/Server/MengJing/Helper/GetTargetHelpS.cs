@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -5,6 +6,63 @@ namespace ET.Server
 {
     public static class GetTargetHelpS
     {
+        /// <summary>
+        /// 查找前方的敌人
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="maxdis"></param>
+        /// <param name="isMini"></param>
+        /// <param name="unitType"></param>
+        /// <returns></returns>
+        public static Unit GetForwardNearestEnemy(Unit main, float maxdis, float maxAngle, bool isMini = false, int unitType = 0)
+        {
+            Unit nearest = null;
+            float minDistance = maxdis;
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
+            for (int i = 0; i < units.Count; i++)
+            {
+                Unit unit = units[i];
+                if (unit.IsDisposed || main.Id == unit.Id)
+                {
+                    continue;
+                }
+
+                if (unitType != 0 && unit.Type != unitType)
+                {
+                    continue;
+                }
+
+                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
+                if (dd > maxdis || !main.IsCanAttackUnit(unit))
+                {
+                    continue;
+                }
+
+                float3 direction = unit.Position - main.Position;
+                float3 direction2 = math.mul(main.Rotation, math.forward());
+                float angle = Math.Abs(MathHelper.Angle(direction, direction2));
+                if (angle > maxAngle)
+                {
+                    continue;
+                }
+
+                if (!isMini)
+                {
+                    //找到目标直接跳出来
+                    nearest = unit;
+                    break;
+                }
+
+                if (dd < minDistance)
+                {
+                    minDistance = dd;
+                    nearest = unit;
+                }
+            }
+
+            return nearest;
+        }
+
         /// <summary>
         /// 服务器使用。不需要找最近的
         /// </summary>
