@@ -70,7 +70,8 @@ namespace ET.Server
                 sceneTypeEnum = defendUnit.Scene().GetComponent<MapComponent>().SceneType;
                 if (sceneTypeEnum != (int)SceneTypeEnum.PetTianTi
                     && sceneTypeEnum != (int)SceneTypeEnum.PetDungeon
-                    && sceneTypeEnum != (int)SceneTypeEnum.PetMing)
+                    && sceneTypeEnum != (int)SceneTypeEnum.PetMing
+                    && sceneTypeEnum != SceneTypeEnum.PetMelee)
                 {
                     long manster = numericComponent.GetAsLong(NumericType.MasterId);
                     Unit unit_manster = defendUnit.GetParent<UnitComponent>().Get(manster);
