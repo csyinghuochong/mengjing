@@ -36,7 +36,7 @@ namespace ET.Server
             {
                 if (aiComponent.TargetPoint.Count == 0)
                 {
-                    // 抛出一个事件，怪物已经走到家门口了
+                    // TODO 抛出一个事件，怪物已经走到家门口了
                     return;
                 }
 
