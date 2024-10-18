@@ -5,7 +5,8 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class AttackComponent : Entity, IAwake, IDestroy
     {
-        public EntityRef<Unit> MainUnit { get; set; }
+        private EntityRef<Unit> unit;
+        public Unit MainUnit { get => this.unit; set => this.unit = value; }
         public int SkillId { get; set; }
         public int ComboSkillId;
         public long LastSkillTime;

@@ -5,8 +5,10 @@ namespace ET.Client
     [ComponentOf(typeof(Unit))]
     public class DropFlyComponent : Entity, IAwake, IUpdate, IDestroy
     {
-        public Unit MyUnit { get; set; }
-        public Unit TargetUnit { get; set; }
+        private EntityRef<Unit> myUnit;
+        public Unit MyUnit { get => this.myUnit; set => this.myUnit = value; }
+        private EntityRef<Unit> targetUnit;
+        public Unit TargetUnit { get => this.targetUnit; set => this.targetUnit = value; }
         public bool Send;
         public string EffectPath;
         public bool IsPlayEffect;

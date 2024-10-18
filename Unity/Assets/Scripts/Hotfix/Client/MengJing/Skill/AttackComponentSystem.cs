@@ -53,13 +53,12 @@ namespace ET.Client
 
         private static Unit GetMainUnit(this AttackComponent self)
         {
-            Unit unit = self.MainUnit;
-            if (unit == null || unit.IsDisposed)
+            if (self.MainUnit == null || self.MainUnit.IsDisposed)
             {
-                unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             }
 
-            return unit;
+            return self.MainUnit;
         }
 
         public static void OnUpdate(this AttackComponent self)

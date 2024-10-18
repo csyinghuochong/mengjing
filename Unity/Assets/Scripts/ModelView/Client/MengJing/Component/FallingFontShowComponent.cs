@@ -5,7 +5,8 @@ namespace ET.Client
     [ChildOf(typeof(FallingFontComponent))]
     public class FallingFontShowComponent : Entity, IAwake, IDestroy
     {
-        public Unit Unit { get; set; }
+        private EntityRef<Unit> unit;
+        public Unit Unit { get => this.unit; set => this.unit = value; }
         public string ShowText;
         public FallingFontType FontType;
         public Vector3 StartScale;

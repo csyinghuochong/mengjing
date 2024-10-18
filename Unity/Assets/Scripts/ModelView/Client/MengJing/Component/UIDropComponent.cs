@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (Unit))]
-    public class UIDropComponent: Entity, IAwake, IDestroy
+    [ComponentOf(typeof(Unit))]
+    public class UIDropComponent : Entity, IAwake, IDestroy
     {
-        public Unit MyUnit { get; set; }
+        private EntityRef<Unit> unit;
+        public Unit MyUnit { get => this.unit; set => this.unit = value; }
         public int PositionIndex; //曲线点的索引
         public Vector3 StartPoint;
         public Vector3 EndPoint;

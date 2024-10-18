@@ -15,9 +15,9 @@ namespace ET.Client
         LookAtPet = 6,
     }
 
-    [FriendOf(typeof (Unit))]
-    [ComponentOf(typeof (Scene))]
-    public class MJCameraComponent: Entity, IAwake, ILateUpdate
+    [FriendOf(typeof(Unit))]
+    [ComponentOf(typeof(Scene))]
+    public class MJCameraComponent : Entity, IAwake, ILateUpdate
     {
         // 战斗摄像机
         public Camera MainCamera;
@@ -62,11 +62,14 @@ namespace ET.Client
         public float MAX_ANGLE_Y = 80;
         public float MIN_ANGLE_Y = 10;
 
-        public Unit MainUnit { get; set; }
+        private EntityRef<Unit> mainUnit;
+        public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
 
-        public Unit NpcUnit { get; set; }
-        
-        public Unit PetUnit { get; set; }
+        private EntityRef<Unit> npcUnit;
+        public Unit NpcUnit { get => this.npcUnit; set => this.npcUnit = value; }
+
+        private EntityRef<Unit> petUnit;
+        public Unit PetUnit { get => this.petUnit; set => this.petUnit = value; }
 
         public Action OnBuildEnter { get; set; }
     }

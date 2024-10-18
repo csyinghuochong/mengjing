@@ -2,10 +2,11 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (Unit))]
-    public class UINpcHpComponent: Entity, IAwake, IDestroy
+    [ComponentOf(typeof(Unit))]
+    public class UINpcHpComponent : Entity, IAwake, IDestroy
     {
-        public Unit Unit { get; set; }
+        private EntityRef<Unit> unit;
+        public Unit Unit { get => this.unit; set => this.unit = value; }
         public GameObject UINpcName;
         public Vector3 OldPosition;
         public Vector3 NewPosition;

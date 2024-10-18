@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (Scene))]
-    public class OperaComponent: Entity, IAwake, IUpdate
+    [ComponentOf(typeof(Scene))]
+    public class OperaComponent : Entity, IAwake, IUpdate
     {
         public Vector3 ClickPoint;
 
@@ -24,6 +24,7 @@ namespace ET.Client
         public bool ClickMode;
         public bool EditorMode;
 
-        public Unit MainUnit { get; set; }
+        private EntityRef<Unit> unit;
+        public Unit MainUnit { get => this.unit; set => this.unit = value; }
     }
 }

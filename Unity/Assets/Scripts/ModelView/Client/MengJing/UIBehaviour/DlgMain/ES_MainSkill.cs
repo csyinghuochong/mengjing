@@ -6,9 +6,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MainSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_MainSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public Unit MainUnit { get; set; }
+		private EntityRef<Unit> unit;
+		public Unit MainUnit { get => this.unit; set => this.unit = value; }
 		public List<ES_SkillGrid> UISkillGirdList_Normal { get; set; } = new();
 		public List<ES_SkillGrid> UISkillGirdList_PetFight { get; set; } = new();
 		public SkillManagerComponentC SkillManagerComponent { get; set; }
