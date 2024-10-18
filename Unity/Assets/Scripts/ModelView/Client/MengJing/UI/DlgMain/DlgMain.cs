@@ -16,10 +16,14 @@ namespace ET.Client
         public float AngleX;
         public float AngleY;
 
-        public LockTargetComponent LockTargetComponent { get; set; }
-        public SkillIndicatorComponent SkillIndicatorComponent { get; set; }
+        private EntityRef<LockTargetComponent> lockTargetComponent;
+        public LockTargetComponent LockTargetComponent { get => this.lockTargetComponent; set => this.lockTargetComponent = value; }
 
-        public Unit MainUnit { get; set; }
+        private EntityRef<SkillIndicatorComponent> skillIndicatorComponent;
+        public SkillIndicatorComponent SkillIndicatorComponent { get => this.skillIndicatorComponent; set => this.skillIndicatorComponent = value; }
+
+        public EntityRef<Unit> unit;
+        public Unit MainUnit { get => this.unit; set => this.unit = value; }
 
         public List<TaskPro> ShowTaskPros = new();
         public Dictionary<int, EntityRef<Scroll_Item_MainTask>> ScrollItemMainTasks;
