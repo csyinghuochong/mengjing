@@ -7,8 +7,9 @@ namespace ET.Client
 	public  class Scroll_Item_SeasonJingHeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SeasonJingHeItem>
 	{
 		public int JingHeId;
-		public ItemInfo BagInfo { get; set; }
-		
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
+
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

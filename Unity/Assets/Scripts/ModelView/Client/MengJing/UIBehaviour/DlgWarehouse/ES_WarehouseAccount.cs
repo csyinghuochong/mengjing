@@ -8,7 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_WarehouseAccount : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public ItemInfo BagInfoPutIn { get; set; }
+		private EntityRef<ItemInfo> bagInfoPutIn;
+		public ItemInfo BagInfoPutIn { get => this.bagInfoPutIn; set => this.bagInfoPutIn = value; }
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
 		public List<ItemInfo> AccountBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;

@@ -10,7 +10,8 @@ namespace ET.Client
 	public  class ES_CommonItem : Entity,IAwake<Transform>,IDestroy
 	{
 		public int CurrentHouse { get; set; }
-		public ItemInfo Baginfo { get; set; }
+		private EntityRef<ItemInfo> baginfo;
+		public ItemInfo Baginfo { get => this.baginfo; set => this.baginfo = value; }
 		public string ItemNum { get; set; }
 		public int ItemID { get; set; }
 		public bool ShowTip { get; set; }

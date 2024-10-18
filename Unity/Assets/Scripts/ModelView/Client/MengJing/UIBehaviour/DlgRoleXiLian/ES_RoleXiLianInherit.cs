@@ -8,7 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianInherit : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public ItemInfo XilianBagInfo { get; set; }
+		private EntityRef<ItemInfo> xilianBagInfo;
+		public ItemInfo XilianBagInfo { get => this.xilianBagInfo; set => this.xilianBagInfo = value; }
 		public ETCancellationToken ETCancellationToken;
 		public List<int> InheritSkills = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

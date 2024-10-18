@@ -16,7 +16,8 @@ namespace ET.Client
 
 		public List<PaiMaiItemInfo> PaiMaiItemInfos = new();
 		public long PaiMaiItemInfoId;
-		public ItemInfo BagInfo { get; set; }
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public bool IsHoldDown;
 
 		public ToggleGroup E_ItemTypeSetToggleGroup

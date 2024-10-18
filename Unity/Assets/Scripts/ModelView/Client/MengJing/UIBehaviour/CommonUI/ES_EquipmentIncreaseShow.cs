@@ -12,9 +12,10 @@ namespace ET.Client
 		public List<ItemInfo> ShowEquipBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemReelItems;
 		public List<ItemInfo> ShowReelBagInfos { get; set; } = new();
-		
-		public ItemInfo EquipmentBagInfo { get; set; }
-		public ItemInfo ReelBagInfo { get; set; }
+		private EntityRef<ItemInfo> equipmentBagInfo;
+		public ItemInfo EquipmentBagInfo { get => this.equipmentBagInfo; set => this.equipmentBagInfo = value; }
+		private EntityRef<ItemInfo> reelBagInfo;
+		public ItemInfo ReelBagInfo { get => this.equipmentBagInfo; set => this.equipmentBagInfo = value; }
 		public int Page;
 		
 		public ToggleGroup E_ItemTypeSetToggleGroup

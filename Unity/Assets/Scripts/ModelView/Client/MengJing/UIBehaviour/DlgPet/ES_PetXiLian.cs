@@ -8,7 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetXiLian : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public ItemInfo CostItemInfo { get; set; }
+		private EntityRef<ItemInfo> costItemInfo;
+		public ItemInfo CostItemInfo { get => this.costItemInfo; set => this.costItemInfo = value; }
 		public RolePetInfo RolePetInfo;
 
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

@@ -12,7 +12,8 @@ namespace ET.Client
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public int CurrentItemType;
 		public List<EntityRef<ES_RoleGemHole>> GemHoleList = new();
-		public ItemInfo XiangQianItem { get; set; }
+		private EntityRef<ItemInfo> xiangQianItem;
+		public ItemInfo XiangQianItem { get => this.xiangQianItem; set => this.xiangQianItem = value; }
 		public int XiangQianIndex;
 
 		public ES_RoleGemHole ES_RoleGemHole_0

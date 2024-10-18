@@ -9,7 +9,8 @@ namespace ET.Client
 	public  class ES_SeasonJingHe : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Sprite OldSprite;
-		public ItemInfo BagInfo { get; set; }
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public int JingHeId;
 		public List<SeasonJingHeConfig> ShowSeasonJingHeConfigs;
 		public Dictionary<int, EntityRef<Scroll_Item_SeasonJingHeItem>> ScrollItemSeasonJingHeItems;

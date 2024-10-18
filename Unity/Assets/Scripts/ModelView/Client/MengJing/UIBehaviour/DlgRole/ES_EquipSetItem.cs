@@ -11,7 +11,8 @@ namespace ET.Client
 	public  class ES_EquipSetItem : Entity,IAwake<Transform>,IDestroy 
 	{
 		public List<ItemInfo> EquipIdList { get; set; } = new List<ItemInfo>();
-		public ItemInfo BagInfo { get; set; }
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public int Occ;
 		public Action<ItemInfo> OnClickAction { get; set; }
 

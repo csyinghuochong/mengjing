@@ -5,9 +5,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ItemAppraisalTips : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_ItemAppraisalTips : Entity,IAwake<Transform>,IDestroy
 	{
-		public ItemInfo BagInfo { get; set; }
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public ItemOperateEnum ItemOpetateType;
 		public int CurrentHouse;
 		

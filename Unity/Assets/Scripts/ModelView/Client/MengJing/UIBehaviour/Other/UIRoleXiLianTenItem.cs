@@ -11,6 +11,7 @@ namespace ET.Client
         public GameObject EquipBaseSetList;
 
         public ItemXiLianResult ItemXiLianResult;
-        public ItemInfo BagInfo { get; set; }
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
     }
 }

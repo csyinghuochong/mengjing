@@ -9,7 +9,8 @@ namespace ET.Client
 	public  class ES_RoleXiLianShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public int CurrentItemType;
-		public ItemInfo XilianBagInfo { get; set; }
+		private EntityRef<ItemInfo> xilianBagInfo;
+		public ItemInfo XilianBagInfo { get => this.xilianBagInfo; set => this.xilianBagInfo = value; }
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public ETCancellationToken ETCancellationToken;
