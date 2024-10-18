@@ -25,7 +25,5 @@ namespace ET.Client
         public long MoveAttackTime { get; set; } = 0;
         public long MoveAttackId { get; set; } = 0;
         public long Timer;
-
-        public BagComponentC BagComponent { get; set; }
     }
 }

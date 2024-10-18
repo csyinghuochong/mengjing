@@ -28,7 +28,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this AttackComponent self)
         {
-            self.BagComponent = self.Root().GetComponent<BagComponentC>();
         }
 
         [EntitySystem]
