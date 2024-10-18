@@ -26,10 +26,13 @@ namespace ET.Client
 
         public EffectData EffectData { get; set; }
 
+
+        private EntityRef<Unit> theUnitBelongto;
+
         /// <summary>
         /// 寄生于哪个Unit，并不代表当前Buff实际寄居者，需要通过GetBuffTarget来获取，因为它赋值于Buff链起源的地方，具体值取决于那个起源Buff
         /// </summary>
-        public Unit TheUnitBelongto { get; set; }
+        public Unit TheUnitBelongto { get => this.theUnitBelongto; set => this.theUnitBelongto = value; }
 
         /// <summary>
         /// 执行的时间

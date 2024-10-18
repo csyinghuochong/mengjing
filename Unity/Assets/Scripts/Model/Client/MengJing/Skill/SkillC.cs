@@ -19,10 +19,12 @@ namespace ET.Client
 
         public List<long> EffectInstanceId  { get; set; }= new List<long>();
 
+        private EntityRef<Unit> theUnitFrom;
+
         /// <summary>
         /// 来自哪个Unit
         /// </summary>
-        public Unit TheUnitFrom { get; set; }
+        public Unit TheUnitFrom { get => this.theUnitFrom; set => this.theUnitFrom = value; }
 
         public SkillInfo SkillInfo { get; set; }
         public float3 TargetPosition { get; set; }
