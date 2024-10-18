@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgItemSellTip: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgItemSellTip : Entity, IAwake, IUILogic
     {
         public DlgItemSellTipViewComponent View
         {
@@ -9,6 +9,8 @@
         }
 
         public long Num;
-        public ItemInfo BagInfo { get; set; }
+
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
     }
 }

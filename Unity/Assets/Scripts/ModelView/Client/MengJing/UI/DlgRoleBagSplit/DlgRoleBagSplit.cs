@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgRoleBagSplit: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgRoleBagSplit : Entity, IAwake, IUILogic
     {
         public DlgRoleBagSplitViewComponent View
         {
@@ -9,6 +9,8 @@
         }
 
         public long Num;
-        public ItemInfo BagInfo { get; set; }
+
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
     }
 }

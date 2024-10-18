@@ -5,9 +5,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_DigTreasure : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_DigTreasure : Entity,IAwake<Transform>,IDestroy
 	{
-		public ItemInfo BagInfo { get; set; }
+		private EntityRef<ItemInfo> bagInfo;
+		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public float PassTime = 0f;
 		public float MoveSpeed = 50f;
 		public long Timer;

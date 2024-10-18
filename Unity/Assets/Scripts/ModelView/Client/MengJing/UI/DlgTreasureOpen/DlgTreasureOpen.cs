@@ -10,7 +10,8 @@ namespace ET.Client
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
         public List<int> RewardShowItems = new();
 
-        public ItemInfo BagInfo { get; set; }
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 
         public long Interval = 0; //匀速
         public int TargetIndex = 0;

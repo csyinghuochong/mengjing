@@ -8,7 +8,8 @@ namespace ET.Client
     {
         public DlgItemFumoSelectViewComponent View { get => this.GetComponent<DlgItemFumoSelectViewComponent>(); }
 
-        public ItemInfo FumoItemInfo { get; set; }
+        private EntityRef<ItemInfo> fumoItemInfo;
+        public ItemInfo FumoItemInfo { get => this.fumoItemInfo; set => this.fumoItemInfo = value; }
         public List<Text> TextFomoPro = new();
         public List<EntityRef<ES_CommonItem>> ItemList = new();
         public List<ItemInfo> BagInfos { get; set; } = new();

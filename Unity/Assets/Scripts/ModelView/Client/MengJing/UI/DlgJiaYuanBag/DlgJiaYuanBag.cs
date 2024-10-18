@@ -2,15 +2,16 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgJiaYuanBag: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgJiaYuanBag : Entity, IAwake, IUILogic
     {
         public DlgJiaYuanBagViewComponent View
         {
             get => this.GetComponent<DlgJiaYuanBagViewComponent>();
         }
 
-        public ItemInfo BagInfo { get; set; }
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
         public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }

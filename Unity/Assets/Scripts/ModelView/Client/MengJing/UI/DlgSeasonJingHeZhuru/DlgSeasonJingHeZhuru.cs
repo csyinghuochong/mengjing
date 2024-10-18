@@ -10,7 +10,8 @@ namespace ET.Client
             get => this.GetComponent<DlgSeasonJingHeZhuruViewComponent>();
         }
 
-        public ItemInfo MainBagInfo { get; set; }
+        private EntityRef<ItemInfo> mainBagInfo;
+        public ItemInfo MainBagInfo { get => this.mainBagInfo; set => this.mainBagInfo = value; }
         public List<long> CostIds = new();
         public int MaxAdd;
         public int MinAdd;

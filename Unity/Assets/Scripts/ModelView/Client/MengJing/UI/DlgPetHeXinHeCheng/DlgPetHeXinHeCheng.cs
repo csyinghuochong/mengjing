@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgPetHeXinHeCheng: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgPetHeXinHeCheng : Entity, IAwake, IUILogic
     {
         public DlgPetHeXinHeChengViewComponent View
         {
@@ -15,7 +15,8 @@ namespace ET.Client
         public List<ItemInfo> ShowBagInfos { get; set; } = new();
         public ETCancellationToken cancellationToken;
         public bool IsHoldDown;
-        public ItemInfo BagInfo { get; set; }
+        private EntityRef<ItemInfo> bagInfo;
+        public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
         public GameObject BagItemCopy;
     }
 }

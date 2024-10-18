@@ -8,7 +8,8 @@ namespace ET.Client
         public DlgPetXiLianLockSkillViewComponent View { get => this.GetComponent<DlgPetXiLianLockSkillViewComponent>(); }
 
         public RolePetInfo RolePetInfo;
-        public ItemInfo CostItemInfo { get; set; }
+        private EntityRef<ItemInfo> costItemInfo;
+        public ItemInfo CostItemInfo { get => this.costItemInfo; set => this.costItemInfo = value; }
         public int SkillId;
         public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
         public List<int> ShowPetSkills = new();
