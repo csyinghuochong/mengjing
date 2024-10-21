@@ -432,6 +432,23 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_EnergySkillImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_EnergySkillImage == null )
+				{
+					this.m_E_EnergySkillImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_EnergySkill/E_EnergySkillImage");
+				}
+				return this.m_E_EnergySkillImage;
+			}
+		}
+
 		public Image E_TaskFubenItemsImage
      	{
      		get
@@ -494,6 +511,7 @@ namespace ET.Client
 			this.m_E_ButtonMysteryButton = null;
 			this.m_E_ButtonMysteryImage = null;
 			this.m_E_TaskFubenItemsImage = null;
+			this.m_E_EnergySkillImage = null;
 			this.m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
@@ -524,6 +542,7 @@ namespace ET.Client
 		private Button m_E_ButtonMysteryButton = null;
 		private Image m_E_ButtonMysteryImage = null;
 		private Image m_E_TaskFubenItemsImage = null;
+		private Image m_E_EnergySkillImage;
 		private LoopVerticalScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}

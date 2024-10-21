@@ -172,7 +172,7 @@ namespace ET.Client
 
             int chapterId = self.Root().GetComponent<CellDungeonComponentC>().ChapterId;
             int difficulty = self.Root().GetComponent<CellDungeonComponentC>().FubenDifficulty;
-            EnterMapHelper.RequestTransfer(self.Root(), difficulty, chapterId, 1).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(),  SceneTypeEnum.CellDungeon, chapterId, difficulty, "0").Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonSettlement);
         }
 

@@ -13,5 +13,6 @@ namespace ET.Client
         public HeadBarUI HeadBarUI;
 
         public GameObject GameObject;
+        public string HeadBarPath;
     }
 }

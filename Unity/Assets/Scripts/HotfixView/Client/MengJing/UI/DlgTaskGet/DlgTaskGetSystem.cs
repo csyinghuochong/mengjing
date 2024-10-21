@@ -132,9 +132,12 @@ namespace ET.Client
                     self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(update);
                     break;
                 case 4: //魔能老人
-                    int costItemID = 12000006;
+                    int costItemID = int.Parse(ConfigData.EnergySkillCost.Split(';')[0]);
                     long itemNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(costItemID);
                     self.View.EG_EnergySkillRectTransform.gameObject.SetActive(true);
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(costItemID);
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                    self.View.E_EnergySkillImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     //获取
                     using (zstring.Block())
                     {

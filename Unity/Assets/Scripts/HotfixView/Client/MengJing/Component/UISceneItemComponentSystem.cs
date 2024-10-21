@@ -21,12 +21,23 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ET.Client.UISceneItemComponent self)
         {
-
+            self.RecoverGameObject(self.GameObject);
         }
 
+        public static void RecoverGameObject(this UISceneItemComponent self, GameObject gameobject)
+        {
+            if (gameobject != null)
+            {
+                gameobject.GetComponent<HeadBarUI>().enabled = false;
+                GameObjectLoadHelper.RecoverGameObject(self.HeadBarPath, gameobject);
+                self.GameObject = null;
+            }
+        }
+        
         public static async ETTask OnInitEnergyTableUI(this UISceneItemComponent self)
         {
             string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
+            self.HeadBarPath = path;
             Unit myUnit =self.GetParent<Unit>();
             self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
             GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
@@ -47,6 +58,7 @@ namespace ET.Client
             int energySkillId = numericComponent.GetAsInt(NumericType.EnergySkillId);
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(energySkillId);
             self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = skillConfig.SkillName;
+            self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = skillConfig.SkillDescribe;
         }
     }
 }
