@@ -370,6 +370,9 @@ namespace ET.Server
 
         public static void OnEnterSonCell(this CellDungeonComponentS self, Unit unit, string ParamInfo)
         {
+            unit.GetComponent<MoveComponent>().Stop(true);
+            unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
+            
             string[] cellinfo = ParamInfo.Split('_');
             int CurrentCell = int.Parse(cellinfo[0]);
             int DirectionType = int.Parse(cellinfo[1]);
