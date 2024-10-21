@@ -149,12 +149,14 @@ namespace ET.Client
                 self.ShowBagInfos.Add(bagInfos[i]);
             }
 
-            self.ShowBagInfos.Sort(delegate(ItemInfo a, ItemInfo b)
+            self.ShowBagInfos.Sort(delegate(EntityRef<ItemInfo> a, EntityRef<ItemInfo> b)
             {
-                ItemConfig itemConfig_a = ItemConfigCategory.Instance.Get(a.ItemID);
-                ItemConfig itemConfig_b = ItemConfigCategory.Instance.Get(b.ItemID);
-                int jianDingLva = itemConfig_a.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar) ? int.Parse(a.ItemPar) : 0;
-                int jianDingLvb = itemConfig_b.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar) ? int.Parse(b.ItemPar) : 0;
+                ItemInfo aItem = a;
+                ItemInfo bItem = b;
+                ItemConfig itemConfig_a = ItemConfigCategory.Instance.Get(aItem.ItemID);
+                ItemConfig itemConfig_b = ItemConfigCategory.Instance.Get(bItem.ItemID);
+                int jianDingLva = itemConfig_a.ItemSubType == 121 && !string.IsNullOrEmpty(aItem.ItemPar) ? int.Parse(aItem.ItemPar) : 0;
+                int jianDingLvb = itemConfig_b.ItemSubType == 121 && !string.IsNullOrEmpty(bItem.ItemPar) ? int.Parse(bItem.ItemPar) : 0;
                 return jianDingLvb - jianDingLva;
             });
 
