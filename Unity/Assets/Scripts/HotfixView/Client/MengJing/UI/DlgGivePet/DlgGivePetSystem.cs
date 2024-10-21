@@ -198,7 +198,7 @@ namespace ET.Client
 
             if (TaskHelper.IsTaskGivePet(taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue, self.LastSelectItem))
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "提交宠物任务", GameSettingLanguge.Instance.LoadLocalization("确定提交宠物?"),
+                PopupTipHelp.OpenPopupTip(self.Root(), "提交宠物任务", LanguageComponent.Instance.LoadLocalization("确定提交宠物?"),
                     async () =>
                     {
                         TaskPro taskPro = self.Root().GetComponent<TaskComponentC>().GetTaskById(self.TaskId);

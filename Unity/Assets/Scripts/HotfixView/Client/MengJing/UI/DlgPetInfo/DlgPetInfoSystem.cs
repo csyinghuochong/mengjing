@@ -141,7 +141,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.View.E_PropertyShowTextText.text =
-                            zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
+                            zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
                 }
             }
             else
@@ -495,7 +495,7 @@ namespace ET.Client
 
         private static void UpdateExpAndLv(this DlgPetInfo self, RolePetInfo rolePetInfo)
         {
-            self.View.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
+            self.View.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + LanguageComponent.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
             using (zstring.Block())
             {

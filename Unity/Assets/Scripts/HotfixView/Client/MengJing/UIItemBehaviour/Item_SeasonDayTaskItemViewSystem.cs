@@ -35,14 +35,14 @@
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:1/1", GameSettingLanguge.Instance.LoadLocalization("进度"));
+                        self.E_ProgressTextText.text = zstring.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
                     }
                 }
                 else
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("进度"),
+                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
                             taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                     }
                 }
@@ -56,7 +56,7 @@
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:0/1", GameSettingLanguge.Instance.LoadLocalization("进度"));
+                        self.E_ProgressTextText.text = zstring.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
                     }
                 }
                 else if (taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
@@ -67,14 +67,14 @@
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}:1/1", GameSettingLanguge.Instance.LoadLocalization("进度"));
+                            self.E_ProgressTextText.text = zstring.Format("{0}:1/1", LanguageComponent.Instance.LoadLocalization("进度"));
                         }
                     }
                     else
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}:0/1", GameSettingLanguge.Instance.LoadLocalization("进度"));
+                            self.E_ProgressTextText.text = zstring.Format("{0}:0/1", LanguageComponent.Instance.LoadLocalization("进度"));
                         }
                     }
                 }
@@ -82,7 +82,7 @@
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("进度"),
+                        self.E_ProgressTextText.text = zstring.Format("{0}:{1}/{2}", LanguageComponent.Instance.LoadLocalization("进度"),
                             self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                     }
                 }

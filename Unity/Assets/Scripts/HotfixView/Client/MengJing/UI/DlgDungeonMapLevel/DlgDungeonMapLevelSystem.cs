@@ -68,7 +68,7 @@ namespace ET.Client
 
                 using (zstring.Block())
                 {
-                    self.View.E_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", GameSettingLanguge.Instance.LoadLocalization("冒险进度"),
+                    self.View.E_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
                         (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
                 }
             }

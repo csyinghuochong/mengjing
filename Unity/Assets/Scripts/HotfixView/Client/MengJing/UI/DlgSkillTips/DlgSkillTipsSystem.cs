@@ -53,11 +53,11 @@ namespace ET.Client
 
             if (skillConfig.SkillType == 1)
             {
-                self.View.E_Lab_SkillTypeText.text = GameSettingLanguge.Instance.LoadLocalization("类型：主动技能");
+                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：主动技能");
             }
             else
             {
-                self.View.E_Lab_SkillTypeText.text = GameSettingLanguge.Instance.LoadLocalization("类型：被动技能");
+                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：被动技能");
             }
 
             if (vector3.x > Screen.width * -0.5 + 500)

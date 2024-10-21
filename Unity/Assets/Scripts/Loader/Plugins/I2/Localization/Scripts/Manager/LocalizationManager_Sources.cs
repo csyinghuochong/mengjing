@@ -13,17 +13,33 @@ namespace I2.Loc
         #region Variables: Misc
 
         public static List<LanguageSourceData> Sources = new List<LanguageSourceData>();
-        public static string[] GlobalSources = { "I2Languages" };
+        //public static string[] GlobalSources = { "I2Languages" };
+        public static string[] GlobalSources = {}; //自定义修改 不要全局 全部自行处理
 
         #endregion
 
         #region Sources
 
+        static LocalizationManager()
+        {
+	        Sources.Clear();
+			#if UNITY_EDITOR
+	        m_LastLanguageSourceAsset = null;
+	        #endif
+	        //Debug.Log("I2LocalizationManager 重置初始化");
+        }
+        
         public static bool UpdateSources()
 		{
-			UnregisterDeletededSources();
-			RegisterSourceInResources();
-			RegisterSceneSources();
+			//UnregisterDeletededSources();
+			//RegisterSourceInResources();
+			//RegisterSceneSources();
+			#if UNITY_EDITOR
+			if (!I2Utils.IsPlaying())
+			{
+				RegisterSourceInEditor();
+			}
+			#endif
 			return Sources.Count>0;
 		}
 
@@ -35,6 +51,43 @@ namespace I2.Loc
 					RemoveSource( Sources[i] );
 		}
 
+#if UNITY_EDITOR
+		public static void RegisterSourceInEditor()
+		{
+			var sourceAsset = GetEditorAsset();
+			if (sourceAsset == null) return;
+			
+			if (sourceAsset && !Sources.Contains(sourceAsset.mSource))
+			{
+				if (!sourceAsset.mSource.mIsGlobalSource)
+					sourceAsset.mSource.mIsGlobalSource = true;
+				sourceAsset.mSource.owner = sourceAsset;
+				AddSource(sourceAsset.mSource);
+			}
+		}
+		
+		private static LanguageSourceAsset m_LastLanguageSourceAsset;
+		
+		public static LanguageSourceAsset GetEditorAsset(bool force = false)
+		{
+			if (m_LastLanguageSourceAsset != null && !force)
+			{
+				return m_LastLanguageSourceAsset;
+			}
+			
+			Debug.Log("I2LocalizationManager 加载编辑器资源数据");
+			var sourceAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<LanguageSourceAsset>(I2LocalizeHelper.I2GlobalSourcesEditorPath);
+			if (sourceAsset == null)
+			{
+				Debug.LogError($"错误 没有找到编辑器下的资源 {I2LocalizeHelper.I2GlobalSourcesEditorPath}");
+				return null;
+			}
+
+			m_LastLanguageSourceAsset = sourceAsset;
+			return sourceAsset;
+		}
+		
+#endif
 		static void RegisterSceneSources()
 		{
 			LanguageSource[] sceneSources = (LanguageSource[])Resources.FindObjectsOfTypeAll( typeof(LanguageSource) );
@@ -77,6 +130,17 @@ namespace I2.Loc
 			if (Sources.Contains (Source))
 				return;
 
+			#if UNITY_EDITOR
+
+			Debug.Log($">>----------添加多语言数据----------<<");
+			foreach (var languageName in Source.owner.SourceData.GetLanguages())
+			{
+				Debug.Log(languageName);
+			}
+			Debug.Log($">>----------添加多语言数据----------<<");
+			
+			#endif
+			
             Sources.Add( Source );
 
 			if (Source.HasGoogleSpreadsheet() && Source.GoogleUpdateFrequency != LanguageSourceData.eGoogleUpdateFrequency.Never && AllowSyncFromGoogle(Source))
@@ -112,7 +176,7 @@ namespace I2.Loc
             }
 		}
 
-		internal static void RemoveSource (LanguageSourceData Source )
+		public static void RemoveSource (LanguageSourceData Source )
 		{
 			//Debug.Log ("RemoveSource " + Source+" " + Source.GetInstanceID());
 			Sources.Remove( Source );

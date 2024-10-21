@@ -27,7 +27,7 @@ namespace ET.Client
                 self.E_RoleNameText.text = createRoleInfo.PlayerName;
                 using (zstring.Block())
                 {
-                    self.E_RoleLvText.text = zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("等级:"), createRoleInfo.PlayerLv);
+                    self.E_RoleLvText.text = zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级:"), createRoleInfo.PlayerLv);
                 }
 
                 if (createRoleInfo.OccTwo > 0)

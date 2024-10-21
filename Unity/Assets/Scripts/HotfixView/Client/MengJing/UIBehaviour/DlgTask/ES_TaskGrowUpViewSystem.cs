@@ -161,7 +161,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", GameSettingLanguge.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
                     }
                 }
                 else
@@ -169,7 +169,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
-                            GameSettingLanguge.Instance.LoadLocalization("当前进度值"),
+                            LanguageComponent.Instance.LoadLocalization("当前进度值"),
                             taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
                     }
                 }
@@ -185,7 +185,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", GameSettingLanguge.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -199,7 +199,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", GameSettingLanguge.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -209,7 +209,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", GameSettingLanguge.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -221,7 +221,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
-                            GameSettingLanguge.Instance.LoadLocalization("当前进度值"),
+                            LanguageComponent.Instance.LoadLocalization("当前进度值"),
                             self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                     }
 

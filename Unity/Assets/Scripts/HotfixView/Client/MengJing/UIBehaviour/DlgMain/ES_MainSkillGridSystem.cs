@@ -150,7 +150,7 @@ namespace ET.Client
                 Unit targetUnit = null;
                 if (targetId == 0)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("请选中施法目标"));
+                    FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("请选中施法目标"));
                     return;
                 }
 
@@ -164,7 +164,7 @@ namespace ET.Client
                 //}
                 if (targetUnit == null || PositionHelper.Distance2D(targetUnit.Position, myUnit.Position) > self.SkillWuqiConfig.SkillRangeSize)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("施法距离太远"));
+                    FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("施法距离太远"));
                     return;
                 }
 

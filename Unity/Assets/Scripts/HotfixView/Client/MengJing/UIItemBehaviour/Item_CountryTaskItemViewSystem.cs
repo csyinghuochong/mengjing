@@ -28,7 +28,7 @@
             taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0] ? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
             using (zstring.Block())
             {
-                self.E_TextTaskProgressText.text = zstring.Format("{0}: {1}/{2}", GameSettingLanguge.Instance.LoadLocalization("进度值"),
+                self.E_TextTaskProgressText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("进度值"),
                     taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
             }
 
@@ -53,7 +53,7 @@
             using (zstring.Block())
             {
                 self.E_TextHuoyueValueText.text =
-                        zstring.Format("{0} +{1}", GameSettingLanguge.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
+                        zstring.Format("{0} +{1}", LanguageComponent.Instance.LoadLocalization("活跃度"), taskConfig.EveryTaskRewardNum);
             }
 
             self.E_ButtonCompleteButton.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);

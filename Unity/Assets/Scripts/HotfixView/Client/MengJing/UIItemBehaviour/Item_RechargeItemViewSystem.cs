@@ -25,7 +25,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_Text_giveText.text = zstring.Format("{0} {1}", GameSettingLanguge.Instance.LoadLocalization("赠送"), giveNumber);
+                self.E_Text_giveText.text = zstring.Format("{0} {1}", LanguageComponent.Instance.LoadLocalization("赠送"), giveNumber);
             }
 
             self.EG_ZengSongRectTransform.gameObject.SetActive(giveNumber > 0);

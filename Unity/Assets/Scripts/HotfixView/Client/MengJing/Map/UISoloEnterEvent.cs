@@ -8,7 +8,7 @@ namespace ET.Client
             string tipStr = "竞技场匹配完成,请尽快进入!";
             bool removeStatus = false;
 
-            PopupTipHelp.OpenPopupTip(scene, "", GameSettingLanguge.Instance.LoadLocalization(tipStr),
+            PopupTipHelp.OpenPopupTip(scene, "", LanguageComponent.Instance.LoadLocalization(tipStr),
                 () =>
                 {
                     EnterMapHelper.RequestTransfer(scene, SceneTypeEnum.Solo, 2000010, 0, args.m2C_SoloMatch.FubenId.ToString()).Coroutine();

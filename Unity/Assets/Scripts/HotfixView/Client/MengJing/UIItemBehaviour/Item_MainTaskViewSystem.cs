@@ -32,7 +32,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.E_TaskTargetDesText.text = zstring.Format("{0}({1})", self.E_TaskTargetDesText.text,
-                        GameSettingLanguge.Instance.LoadLocalization("已完成"));
+                        LanguageComponent.Instance.LoadLocalization("已完成"));
                 }
             }
             else

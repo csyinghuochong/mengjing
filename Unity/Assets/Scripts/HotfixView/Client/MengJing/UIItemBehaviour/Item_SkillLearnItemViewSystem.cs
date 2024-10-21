@@ -76,7 +76,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.E_SkillLvText.gameObject.SetActive(true);
-                    self.E_SkillLvText.text = zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
+                    self.E_SkillLvText.text = zstring.Format("{0}{1}", LanguageComponent.Instance.LoadLocalization("等级 "), skillConfig.SkillLv);
                 }
             }
         }

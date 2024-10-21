@@ -224,7 +224,7 @@ namespace ET.Client
             self.E_SkillIconImage.sprite = sp;
             using (zstring.Block())
             {
-                self.E_SkillLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级 ") + skillWeaponConfig.SkillLv;
+                self.E_SkillLvText.text = LanguageComponent.Instance.LoadLocalization("等级 ") + skillWeaponConfig.SkillLv;
                 self.E_SkillNameText.text = skillWeaponConfig.SkillName;
                 self.E_SkillTypeText.text = self.IsZhuDongSkill(skillBaseConfig.SkillType) ? "主动技能" : "被动技能";
 

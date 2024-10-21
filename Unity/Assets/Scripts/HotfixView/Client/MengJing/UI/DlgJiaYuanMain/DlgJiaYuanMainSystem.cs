@@ -121,7 +121,7 @@ namespace ET.Client
         public static async ETTask OnButtonReturnButton(this DlgJiaYuanMain self)
         {
             string tipStr = "请选择返回主城或自己家园？";
-            await PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization(tipStr),
+            await PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization(tipStr),
                 () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
                 self.OnButtonMyJiaYuanButton);
             DlgPopupTip dlgPopupTip = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPopupTip>();

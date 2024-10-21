@@ -88,7 +88,7 @@ namespace ET.Client
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
             using (zstring.Block())
             {
-                self.E_Lab_PetLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("等级"), rolePetInfo.PetLv);
+                self.E_Lab_PetLvText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("等级"), rolePetInfo.PetLv);
             }
 
             self.OnUpdatePetHP(pet);
@@ -113,7 +113,7 @@ namespace ET.Client
             int maxPiLao = unit.GetMaxPiLao();
             using (zstring.Block())
             {
-                self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("体力:"),
+                self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("体力:"),
                     self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
             }
 
@@ -130,7 +130,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_RoleHuoLiText.text = zstring.Format("{0}{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("活力:"),
+                self.E_RoleHuoLiText.text = zstring.Format("{0}{1}/{2}", LanguageComponent.Instance.LoadLocalization("活力:"),
                     self.UserInfoComponent.UserInfo.Vitality, maxPiLao);
             }
 

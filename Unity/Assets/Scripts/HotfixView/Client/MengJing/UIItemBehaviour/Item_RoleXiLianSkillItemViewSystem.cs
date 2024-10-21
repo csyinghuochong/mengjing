@@ -28,7 +28,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_Text_XiLianNameText.text = zstring.Format("{0}{1}", equipXiLianConfig.Title,
-                    GameSettingLanguge.Instance.LoadLocalization("额外增加概率出现的特殊属性"));
+                    LanguageComponent.Instance.LoadLocalization("额外增加概率出现的特殊属性"));
             }
 
             List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);

@@ -457,7 +457,7 @@ namespace ET.Client
 
         private static string GetDescItemId(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("寻找道具{0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("寻找道具{0} {1}/{2}");
             int itemId = taskConfig.Target[0];
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
             string text1;
@@ -482,7 +482,7 @@ namespace ET.Client
 
         private static string GetDescLookingFor(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("找 {0} 谈一谈 {1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("找 {0} 谈一谈 {1}");
 
             int fubenId = GetFubenByNpc(taskConfig.Target[0]);
             string fubenName = fubenId > 0 ? " (地图:" + DungeonConfigCategory.Instance.Get(fubenId).ChapterName + ")" : "";
@@ -505,7 +505,7 @@ namespace ET.Client
 
         private static string GetDescPlayerLv(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("等级提升至{0}级 {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("等级提升至{0}级 {1}/{2}");
             string text1;
             using (zstring.Block())
             {
@@ -522,7 +522,7 @@ namespace ET.Client
 
         private static string GetDescKillMonster(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败任意怪物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败任意怪物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -534,7 +534,7 @@ namespace ET.Client
 
         private static string GetDescKillBOSS(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败任意领主级怪物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败任意领主级怪物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -546,7 +546,7 @@ namespace ET.Client
 
         private static string GetDescPassFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("通关副本{0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("通关副本{0} {1}/{2}");
             string fubenName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
@@ -559,7 +559,7 @@ namespace ET.Client
 
         private static string GetChangeOcc(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("进行转职{0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("进行转职{0} {1}/{2}");
             string fubenName = "";
             string text1;
             using (zstring.Block())
@@ -626,7 +626,7 @@ namespace ET.Client
 
         private static string GetGiveItem(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("给予符合要求的道具 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("给予符合要求的道具 {0}/{1}");
 
             string text1;
             using (zstring.Block())
@@ -639,7 +639,7 @@ namespace ET.Client
 
         private static string PetNumber1_11(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("获得宠物数量 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("获得宠物数量 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -651,7 +651,7 @@ namespace ET.Client
 
         private static string MakeNumber_12(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("制造道具数量 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("制造道具数量 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -663,7 +663,7 @@ namespace ET.Client
 
         private static string EquipXiLian_13(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("装备洗练次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("装备洗练次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -675,7 +675,7 @@ namespace ET.Client
 
         private static string PetTianTiNumber_14(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物天梯次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -687,7 +687,7 @@ namespace ET.Client
 
         private static string DuiHuanGold_15(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("兑换金币次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("兑换金币次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -699,7 +699,7 @@ namespace ET.Client
 
         private static string EquipHuiShou_16(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("装备回收次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("装备回收次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -711,7 +711,7 @@ namespace ET.Client
 
         private static string QiangHuaLevel_17(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("最大强化等级 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("最大强化等级 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -723,7 +723,7 @@ namespace ET.Client
 
         private static string PetNSkill_18(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization(taskConfig.TargetValue[0] + "技能宠物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization(taskConfig.TargetValue[0] + "技能宠物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -735,7 +735,7 @@ namespace ET.Client
 
         private static string PetFubenId_19(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物探险通关{0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物探险通关{0} {1}/{2}");
             string text1;
             using (zstring.Block())
             {
@@ -747,7 +747,7 @@ namespace ET.Client
 
         private static string TotalCostGold_20(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("消耗金币 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("消耗金币 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -759,7 +759,7 @@ namespace ET.Client
 
         private static string KillPlayer_21(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击杀玩家数量 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击杀玩家数量 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -771,7 +771,7 @@ namespace ET.Client
 
         private static string JiaYuanLevel_22(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园等级 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园等级 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -783,7 +783,7 @@ namespace ET.Client
 
         private static string PetHeCheng_23(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物合成次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物合成次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -795,7 +795,7 @@ namespace ET.Client
 
         private static string PetNumber2_24(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("拥有宠物数量 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("拥有宠物数量 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -821,7 +821,7 @@ namespace ET.Client
 
         private static string GivePet_25(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("给予一个宠物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("给予一个宠物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -833,7 +833,7 @@ namespace ET.Client
 
         private static string TreasureMapNormal_26(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("使用普通藏宝图 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("使用普通藏宝图 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -845,7 +845,7 @@ namespace ET.Client
 
         private static string TreasureMapHigh_27(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("使用高级藏宝图 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("使用高级藏宝图 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -857,7 +857,7 @@ namespace ET.Client
 
         private static string TowerOfSeal_28(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("封印之塔挑战 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("封印之塔挑战 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -869,7 +869,7 @@ namespace ET.Client
 
         private static string MakeQulityNumber_29(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("制造道具数量 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("制造道具数量 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -881,7 +881,7 @@ namespace ET.Client
 
         private static string BattleUseItem_30(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("使用药剂或者合剂次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("使用药剂或者合剂次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -893,7 +893,7 @@ namespace ET.Client
 
         private static string PetNumber_31(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("获得X只新的宠物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("获得X只新的宠物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -905,7 +905,7 @@ namespace ET.Client
 
         private static string PetHeChengCombat_32(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("合成1只战力达到X点的宠物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("合成1只战力达到X点的宠物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -917,7 +917,7 @@ namespace ET.Client
 
         private static string PetXiLian10010086_33(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物使用宠之晶洗炼宠物次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物使用宠之晶洗炼宠物次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -929,7 +929,7 @@ namespace ET.Client
 
         private static string PetFuHuaNumber_34(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("在孵化系统中孵化成功宠物 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("在孵化系统中孵化成功宠物 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -941,7 +941,7 @@ namespace ET.Client
 
         private static string PetFuHuaId_35(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("在孵化系统中孵化指定的宠物蛋成功 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("在孵化系统中孵化指定的宠物蛋成功 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -953,7 +953,7 @@ namespace ET.Client
 
         private static string PetUseSkillBook_36(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物使用技能书次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物使用技能书次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -965,7 +965,7 @@ namespace ET.Client
 
         private static string PetTianDiWin_37(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物天梯战斗胜利次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯战斗胜利次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -977,7 +977,7 @@ namespace ET.Client
 
         private static string FuMoQulity_41(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("使用N点品质的鉴定附魔道具给装备附魔 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("使用N点品质的鉴定附魔道具给装备附魔 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -989,7 +989,7 @@ namespace ET.Client
 
         private static string JianDingQulity_42(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("使用N点品质的鉴定道具给装备鉴定 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("使用N点品质的鉴定道具给装备鉴定 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1001,7 +1001,7 @@ namespace ET.Client
 
         private static string JianDingAttrNumber_43(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("鉴定装备时出一个大于N条属性的装备 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("鉴定装备时出一个大于N条属性的装备 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1013,7 +1013,7 @@ namespace ET.Client
 
         private static string XiLianSkillNumber_44(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("洗炼出带有任何隐藏技能的装备 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("洗炼出带有任何隐藏技能的装备 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1025,7 +1025,7 @@ namespace ET.Client
 
         private static string XiLianAttriId_45(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("洗炼出带有指定属性的装备 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("洗炼出带有指定属性的装备 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1037,7 +1037,7 @@ namespace ET.Client
 
         private static string IncreaseNumber_46(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("增幅装备次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("增幅装备次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1049,7 +1049,7 @@ namespace ET.Client
 
         private static string TrialRank_81(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("试炼之地的输出排行榜进入前 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("试炼之地的输出排行榜进入前 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1061,7 +1061,7 @@ namespace ET.Client
 
         private static string PetTianTiRank_82(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("宠物天梯进入排行榜前 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("宠物天梯进入排行榜前 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1073,7 +1073,7 @@ namespace ET.Client
 
         private static string CombatRank_83(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("战力排行榜进入前 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("战力排行榜进入前 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1085,7 +1085,7 @@ namespace ET.Client
 
         private static string JiaYuanCookNumber_91(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园烹饪次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园烹饪次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1097,7 +1097,7 @@ namespace ET.Client
 
         private static string JiaYuanPlantNumber_92(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园种地种植次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园种地种植次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1109,7 +1109,7 @@ namespace ET.Client
 
         private static string JiaYuanGatherPlant_93(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园种地收获次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园种地收获次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1121,7 +1121,7 @@ namespace ET.Client
 
         private static string JiaYuanPastureNumber_94(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园牧场饲养次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园牧场饲养次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1133,7 +1133,7 @@ namespace ET.Client
 
         private static string JiaYuanGatherPasture_95(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园牧场收货次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园牧场收货次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1145,7 +1145,7 @@ namespace ET.Client
 
         private static string JiaYuanDashiNumber_96(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("家园美味品尝次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("家园美味品尝次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1157,7 +1157,7 @@ namespace ET.Client
 
         private static string GetJoinUnion(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("加入家族 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("加入家族 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1169,7 +1169,7 @@ namespace ET.Client
 
         private static string GetDescKillChallengeMonsterID(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败挑战级的 {0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级的 {0} {1}/{2}");
             string monsterName = MonsterConfigCategory.Instance.Get(taskConfig.Target[0]).MonsterName;
             string text1;
             using (zstring.Block())
@@ -1182,7 +1182,7 @@ namespace ET.Client
 
         private static string GetDescKillInfernalMonsterID(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败地狱级的 {0} {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级的 {0} {1}/{2}");
             string monsterName = MonsterConfigCategory.Instance.Get(taskConfig.Target[0]).MonsterName;
             string text1;
             using (zstring.Block())
@@ -1195,7 +1195,7 @@ namespace ET.Client
 
         private static string GetDescPassChallengeFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("通关挑战级-{0}副本 {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("通关挑战级-{0}副本 {1}/{2}");
             string chapterName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
@@ -1208,7 +1208,7 @@ namespace ET.Client
 
         private static string GetDescPassInfernalFubenID(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("通关地狱级-{0}副本 {1}/{2}");
+            string progress = LanguageComponent.Instance.LoadLocalization("通关地狱级-{0}副本 {1}/{2}");
             string chapterName = CellGenerateConfigCategory.Instance.Get(taskConfig.Target[0]).ChapterName;
             string text1;
             using (zstring.Block())
@@ -1221,7 +1221,7 @@ namespace ET.Client
 
         private static string GetDescKillChallengeMonsterNumber(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败挑战级任意怪物{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级任意怪物{0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1233,7 +1233,7 @@ namespace ET.Client
 
         private static string GetDescKillInfernalMonsterNumber(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败地狱级任意怪物{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级任意怪物{0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1245,7 +1245,7 @@ namespace ET.Client
 
         private static string GetDescKillChallengeBossNumber(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败挑战级任意领主怪物{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败挑战级任意领主怪物{0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1257,7 +1257,7 @@ namespace ET.Client
 
         private static string GetDescCombatToValue(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("战力提升至{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("战力提升至{0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1269,7 +1269,7 @@ namespace ET.Client
 
         private static string GetTrialTowerCeng(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("通关试练塔{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("通关试练塔{0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1281,7 +1281,7 @@ namespace ET.Client
 
         private static string ShenYuanNumber_135(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("挑战深渊模式的副本 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("挑战深渊模式的副本 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1293,7 +1293,7 @@ namespace ET.Client
 
         private static string TeamDungeonHurt_136(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("组队副本伤害值 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("组队副本伤害值 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1305,7 +1305,7 @@ namespace ET.Client
 
         private static string MineHaveNumber_401(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("矿场占领次数 {0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("矿场占领次数 {0}/{1}");
             string text1;
             using (zstring.Block())
             {
@@ -1317,7 +1317,7 @@ namespace ET.Client
 
         private static string GetDescKillInfernalBossNumber(TaskPro taskPro, TaskConfig taskConfig)
         {
-            string progress = GameSettingLanguge.Instance.LoadLocalization("击败地狱级任意领主怪物{0}/{1}");
+            string progress = LanguageComponent.Instance.LoadLocalization("击败地狱级任意领主怪物{0}/{1}");
             string text1;
             using (zstring.Block())
             {

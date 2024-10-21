@@ -98,16 +98,16 @@ namespace ET.Client
                 }
 
                 // 部位、类型
-                string textEquipType = GameSettingLanguge.Instance.LoadLocalization(ItemViewHelp.GetItemSubType3Name(itemConfig.ItemSubType));
+                string textEquipType = LanguageComponent.Instance.LoadLocalization(ItemViewHelp.GetItemSubType3Name(itemConfig.ItemSubType));
                 string textEquipTypeSon = self.GetEquipType(itemConfig.EquipType);
                 if (itemConfig.EquipType == 101) // 生肖
                 {
                     textEquipType = self.GetEquipShengXiaoType(itemConfig.ItemSubType % 100);
-                    textEquipTypeSon = GameSettingLanguge.Instance.LoadLocalization("生肖");
+                    textEquipTypeSon = LanguageComponent.Instance.LoadLocalization("生肖");
                 }
 
-                self.E_EquipTypeText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("部位"), textEquipType);
-                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("类型"), textEquipTypeSon);
+                self.E_EquipTypeText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("部位"), textEquipType);
+                self.E_EquipTypeSonText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("类型"), textEquipTypeSon);
 
                 int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
                 if (occTwo != 0)
@@ -124,24 +124,24 @@ namespace ET.Client
                 if (itemConfig.UseLv > self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv)
                 {
                     self.E_EquipNeedLvText.text =
-                            zstring.Format("{0}:{1} (等级不足)", GameSettingLanguge.Instance.LoadLocalization("等级"), itemConfig.UseLv);
+                            zstring.Format("{0}:{1} (等级不足)", LanguageComponent.Instance.LoadLocalization("等级"), itemConfig.UseLv);
                     self.E_EquipNeedLvText.color = new Color(255f / 255f, 200f / 255f, 200f / 255f);
                 }
                 else
                 {
-                    self.E_EquipNeedLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("等级"), itemConfig.UseLv);
+                    self.E_EquipNeedLvText.text = zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("等级"), itemConfig.UseLv);
                 }
 
                 // 绑定
                 if (self.BagInfo.isBinging)
                 {
-                    self.E_EquipBangDingText.text = GameSettingLanguge.Instance.LoadLocalization("已绑定");
+                    self.E_EquipBangDingText.text = LanguageComponent.Instance.LoadLocalization("已绑定");
                     self.E_EquipBangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
                     self.E_EquipBangDingImgImage.gameObject.SetActive(true);
                 }
                 else
                 {
-                    self.E_EquipBangDingText.text = GameSettingLanguge.Instance.LoadLocalization("未绑定");
+                    self.E_EquipBangDingText.text = LanguageComponent.Instance.LoadLocalization("未绑定");
                     self.E_EquipBangDingText.color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
                     self.E_EquipBangDingImgImage.gameObject.SetActive(false);
                 }
@@ -495,7 +495,7 @@ namespace ET.Client
 
                     if (ifShowSuitNum == "0")
                     {
-                        string langStr = GameSettingLanguge.Instance.LoadLocalization("件套");
+                        string langStr = LanguageComponent.Instance.LoadLocalization("件套");
                         using (zstring.Block())
                         {
                             ItemViewHelp.ShowPropertyText(zstring.Format("{0}{1}:{2}", triggerSuitNum, langStr, equipSuitDes), showType,
@@ -549,7 +549,7 @@ namespace ET.Client
                     string skillName = skillconf.SkillName;
                     using (zstring.Block())
                     {
-                        string showHintTxt = zstring.Format("{0}：{1}", GameSettingLanguge.Instance.LoadLocalization("技能"), skillName);
+                        string showHintTxt = zstring.Format("{0}：{1}", LanguageComponent.Instance.LoadLocalization("技能"), skillName);
                         ItemViewHelp.ShowPropertyText(showHintTxt, "4", self.E_EquipPropertyTextText.gameObject,
                             self.EG_EquipHintSkillRectTransform.gameObject);
                     }

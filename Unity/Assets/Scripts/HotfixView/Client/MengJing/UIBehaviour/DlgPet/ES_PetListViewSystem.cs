@@ -186,7 +186,7 @@ namespace ET.Client
             //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中,不能分解！");
             //    return;
             //}
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization("确定放生?"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization("确定放生?"),
                 () => { PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id).Coroutine(); },
                 null).Coroutine();
         }
@@ -367,7 +367,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.E_PropertyShowTextText.text =
-                            zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
+                            zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
                 }
             }
             else
@@ -1008,7 +1008,7 @@ namespace ET.Client
 
         private static void UpdateExpAndLv(this ES_PetList self, RolePetInfo rolePetInfo)
         {
-            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
+            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + LanguageComponent.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
             using (zstring.Block())
             {

@@ -257,20 +257,15 @@ namespace ET.Client
             if (languageName == "Chinese")
             {
                 languageName = "English";
+                FlyTipComponent.Instance.ShowFlyTip("Switch English successfully, please restart the game");
             }
             else
             {
                 languageName = "Chinese";
-            }
-
-            if (LocalizationManager.HasLanguage(languageName))
-            {
-                LocalizationManager.CurrentLanguage = languageName;
+                FlyTipComponent.Instance.ShowFlyTip("切换中文成功，请重新启动游戏");
             }
 
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.Localization, languageName);
-            
-            self.RefreshLocalizationBtn();
         }
 
         public static void RefreshLocalizationBtn(this ES_SettingGame self)

@@ -304,7 +304,7 @@ namespace ET.Client
 
             if (equip_Hp != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("生命");
+                langStr = LanguageComponent.Instance.LoadLocalization("生命");
                 textShow = langStr + "  " + equip_Hp + occShowStr;
 
                 bool ifHideProperty = false;
@@ -337,7 +337,7 @@ namespace ET.Client
 
             if (equip_MinAct != 0 || equip_MaxAct != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("攻击");
+                langStr = LanguageComponent.Instance.LoadLocalization("攻击");
                 textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct;
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
@@ -369,7 +369,7 @@ namespace ET.Client
 
             if (equip_MinDef != 0 || equip_MaxDef != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("防御");
+                langStr = LanguageComponent.Instance.LoadLocalization("防御");
                 textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef;
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
@@ -401,7 +401,7 @@ namespace ET.Client
 
             if (equip_MinAdf != 0 || equip_MaxAdf != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("魔防");
+                langStr = LanguageComponent.Instance.LoadLocalization("魔防");
                 textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf;
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
@@ -433,7 +433,7 @@ namespace ET.Client
 
             if (equip_Cri != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("暴击");
+                langStr = LanguageComponent.Instance.LoadLocalization("暴击");
                 textShow = langStr + "  " + equip_Cri * 100 + "%\n";
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -441,7 +441,7 @@ namespace ET.Client
 
             if (equip_Hit != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("命中");
+                langStr = LanguageComponent.Instance.LoadLocalization("命中");
                 textShow = langStr + "  " + equip_Hit * 100 + "%\n";
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -449,7 +449,7 @@ namespace ET.Client
 
             if (equip_Dodge != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("闪避");
+                langStr = LanguageComponent.Instance.LoadLocalization("闪避");
                 textShow = langStr + "  " + equip_Dodge * 100 + "%\n";
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -457,7 +457,7 @@ namespace ET.Client
 
             if (equip_DamgeAdd != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("伤害加成");
+                langStr = LanguageComponent.Instance.LoadLocalization("伤害加成");
                 textShow = langStr + "  " + equip_DamgeAdd * 100 + "%\n";
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -465,7 +465,7 @@ namespace ET.Client
 
             if (equip_DamgeSub != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("伤害减免");
+                langStr = LanguageComponent.Instance.LoadLocalization("伤害减免");
                 textShow = langStr + "  " + equip_DamgeSub * 100 + "%\n";
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -473,7 +473,7 @@ namespace ET.Client
 
             if (equip_Speed != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("移动速度");
+                langStr = LanguageComponent.Instance.LoadLocalization("移动速度");
                 textShow = langStr + "  " + equip_Dodge;
                 ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
@@ -481,7 +481,7 @@ namespace ET.Client
 
             if (equip_Lucky != 0)
             {
-                langStr = GameSettingLanguge.Instance.LoadLocalization("幸运值");
+                langStr = LanguageComponent.Instance.LoadLocalization("幸运值");
                 textShow = langStr + "  " + equip_Lucky;
                 ShowPropertyText(textShow, "6", propertyGO, parentGO);
                 properShowNum += 1;
@@ -503,14 +503,14 @@ namespace ET.Client
                         string showColor = "1";
                         if (NumericHelp.GetNumericValueType(hidePro.PropertyType) == 2)
                         {
-                            proStr = hidePro.Name + GameSettingLanguge.Instance.LoadLocalization("提升") +
+                            proStr = hidePro.Name + LanguageComponent.Instance.LoadLocalization("提升") +
                                     ((float)hidePropertyValue / 100.0f).ToString("0.##") +
                                     "%"; // 0.82   0.80
                         }
                         else
                         {
-                            proStr = hidePro.Name + GameSettingLanguge.Instance.LoadLocalization("提升") + hidePropertyValue +
-                                    GameSettingLanguge.Instance.LoadLocalization("点");
+                            proStr = hidePro.Name + LanguageComponent.Instance.LoadLocalization("提升") + hidePropertyValue +
+                                    LanguageComponent.Instance.LoadLocalization("点");
 
                             if (hidePro.Name == "幸运值")
                             {
@@ -532,7 +532,7 @@ namespace ET.Client
                 {
                     int skillID = baginfo.HideSkillLists[i];
                     SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
-                    string proStr = GameSettingLanguge.Instance.LoadLocalization(skillTip) + skillCof.SkillName;
+                    string proStr = LanguageComponent.Instance.LoadLocalization(skillTip) + skillCof.SkillName;
                     ShowPropertyText(proStr, "2", propertyGO, parentGO);
                     properShowNum += 1;
                 }
@@ -682,7 +682,7 @@ namespace ET.Client
                     if (skillID != 0)
                     {
                         SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
-                        string proStr = GameSettingLanguge.Instance.LoadLocalization("传承鉴定") + ":" + skillCof.SkillDescribe;
+                        string proStr = LanguageComponent.Instance.LoadLocalization("传承鉴定") + ":" + skillCof.SkillDescribe;
 
                         //获取当前穿戴的装备是否有相同的传承属性
                         bool ifRepeat = false;
@@ -938,19 +938,19 @@ namespace ET.Client
                     switch (holeStrList[i])
                     {
                         case "101":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("黄色");
+                            langStr = LanguageComponent.Instance.LoadLocalization("黄色");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "102":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("紫色");
+                            langStr = LanguageComponent.Instance.LoadLocalization("紫色");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "103":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("蓝色");
+                            langStr = LanguageComponent.Instance.LoadLocalization("蓝色");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "104":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("绿色");
+                            langStr = LanguageComponent.Instance.LoadLocalization("绿色");
                             holeStr = holeStr + langStr + "、";
                             break;
                         /*
@@ -960,11 +960,11 @@ namespace ET.Client
                             break;
                         */
                         case "110":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("任意");
+                            langStr = LanguageComponent.Instance.LoadLocalization("任意");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "111":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("任意");
+                            langStr = LanguageComponent.Instance.LoadLocalization("任意");
                             holeStr = holeStr + langStr + "、";
                             break;
                     }
@@ -977,8 +977,8 @@ namespace ET.Client
 
                 i1 = i1 + 2;
 
-                string langStr_2 = GameSettingLanguge.Instance.LoadLocalization("可镶嵌在");
-                string langStr_3 = GameSettingLanguge.Instance.LoadLocalization("孔位");
+                string langStr_2 = LanguageComponent.Instance.LoadLocalization("可镶嵌在");
+                string langStr_3 = LanguageComponent.Instance.LoadLocalization("孔位");
                 Text_ItemDes = Text_ItemDes + "\n" + "\n" + @"" + langStr_2 + holeStr + @langStr_3 + "";
 
                 if (itemconf.ItemSubType == 110)
@@ -999,15 +999,15 @@ namespace ET.Client
                     switch (holeStrList[i])
                     {
                         case "1":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("进攻能量");
+                            langStr = LanguageComponent.Instance.LoadLocalization("进攻能量");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "2":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("守护能量");
+                            langStr = LanguageComponent.Instance.LoadLocalization("守护能量");
                             holeStr = holeStr + langStr + "、";
                             break;
                         case "3":
-                            langStr = GameSettingLanguge.Instance.LoadLocalization("生命能量");
+                            langStr = LanguageComponent.Instance.LoadLocalization("生命能量");
                             holeStr = holeStr + langStr + "、";
                             break;
                     }
@@ -1020,15 +1020,15 @@ namespace ET.Client
 
                 i1 = i1 + 2;
 
-                string langStr_2 = GameSettingLanguge.Instance.LoadLocalization("可装备在宠物的");
-                string langStr_3 = GameSettingLanguge.Instance.LoadLocalization("槽位");
+                string langStr_2 = LanguageComponent.Instance.LoadLocalization("可装备在宠物的");
+                string langStr_3 = LanguageComponent.Instance.LoadLocalization("槽位");
                 Text_ItemDes = Text_ItemDes + "\n" + "\n" + @"" + langStr_2 + holeStr + @langStr_3 + "";
             }
 
             //藏宝图额外描述
             if (itemType == 1 && itemSubType == 32)
             {
-                string langStr_4 = GameSettingLanguge.Instance.LoadLocalization("挖宝位置");
+                string langStr_4 = LanguageComponent.Instance.LoadLocalization("挖宝位置");
                 string itemPar = baginfo.ItemPar;
                 string scenceName = CellDungeonConfigCategory.Instance.Get(int.Parse(itemPar)).Name;
                 Text_ItemDes = Text_ItemDes + "\n" + "\n" + langStr_4 + ":" + scenceName;
@@ -1038,7 +1038,7 @@ namespace ET.Client
             //牧场道具额外描述
             if (itemType == 6)
             {
-                string langStr_5 = GameSettingLanguge.Instance.LoadLocalization("品质");
+                string langStr_5 = LanguageComponent.Instance.LoadLocalization("品质");
 
                 string itemPar = "0";
                 if (itemSubType == 1)
@@ -1115,7 +1115,7 @@ namespace ET.Client
                 return GetAttributeName(numberType / 100);
             }
 
-            return GameSettingLanguge.Instance.LoadLocalization(name);
+            return LanguageComponent.Instance.LoadLocalization(name);
         }
     }
 }

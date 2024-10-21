@@ -76,13 +76,13 @@ namespace ET.Client
             //显示是否绑定
             if (bagInfo.isBinging)
             {
-                self.View.E_BangDingText.text = GameSettingLanguge.Instance.LoadLocalization("已绑定");
+                self.View.E_BangDingText.text = LanguageComponent.Instance.LoadLocalization("已绑定");
                 self.View.E_BangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
                 self.View.E_BindingImage.gameObject.SetActive(true);
             }
             else
             {
-                self.View.E_BangDingText.GetComponent<Text>().text = GameSettingLanguge.Instance.LoadLocalization("未绑定");
+                self.View.E_BangDingText.GetComponent<Text>().text = LanguageComponent.Instance.LoadLocalization("未绑定");
                 self.View.E_BangDingText.GetComponent<Text>().color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
                 self.View.E_BindingImage.gameObject.SetActive(false);
             }
@@ -167,7 +167,7 @@ namespace ET.Client
                 }
             }
 
-            string langStr = GameSettingLanguge.Instance.LoadLocalization("使用等级");
+            string langStr = LanguageComponent.Instance.LoadLocalization("使用等级");
             if (itemConfig.UseLv > 0)
             {
                 self.View.E_ItemLvText.text = langStr + ":" + itemConfig.UseLv;
@@ -549,7 +549,7 @@ namespace ET.Client
             {
                 if (self.Root().GetComponent<BagComponentC>().BagAddCellNumber[0] >= 10)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
+                    FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("已达到最大购买格子数量!"));
                     return;
                 }
             }
@@ -558,7 +558,7 @@ namespace ET.Client
             {
                 if (self.Root().GetComponent<BagComponentC>().BagAddCellNumber[5] >= 10)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
+                    FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("已达到最大购买格子数量!"));
                     return;
                 }
             }
@@ -568,7 +568,7 @@ namespace ET.Client
 
             if (errorCode == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("道具使用成功!"));
+                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("道具使用成功!"));
             }
 
             if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
@@ -580,7 +580,7 @@ namespace ET.Client
                     tip = zstring.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
                 }
 
-                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization(tip));
+                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization(tip));
             }
 
             //播放音效

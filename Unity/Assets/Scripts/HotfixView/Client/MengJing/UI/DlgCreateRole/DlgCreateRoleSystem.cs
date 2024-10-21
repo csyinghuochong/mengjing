@@ -47,11 +47,11 @@ namespace ET.Client
         private static void OnRandomNameButton(this DlgCreateRole self)
         {
             string randomNameStr = "";
-            int xingXuHaoMax = GameSettingLanguge.Instance.randomName_xing.Length - 1;
-            int nameXuHaoMax = GameSettingLanguge.Instance.randomName_name.Length - 1;
+            int xingXuHaoMax = LanguageComponent.Instance.randomName_xing.Length - 1;
+            int nameXuHaoMax = LanguageComponent.Instance.randomName_name.Length - 1;
             int xingXuHao = RandomHelper.NextInt(0, xingXuHaoMax);
             int nameXuHao = RandomHelper.NextInt(0, nameXuHaoMax);
-            randomNameStr = GameSettingLanguge.Instance.randomName_xing[xingXuHao] + GameSettingLanguge.Instance.randomName_name[nameXuHao];
+            randomNameStr = LanguageComponent.Instance.randomName_xing[xingXuHao] + LanguageComponent.Instance.randomName_name[nameXuHao];
 
             if (randomNameStr != "")
             {

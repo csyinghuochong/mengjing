@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgOccTwo: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgOccTwo : Entity, IAwake, IUILogic
     {
         public DlgOccTwoViewComponent View
         {
@@ -16,14 +16,14 @@ namespace ET.Client
 
         public Dictionary<int, string> showType = new()
         {
-            { 1, GameSettingLanguge.Instance.LoadLocalization("剑类") },
-            { 2, GameSettingLanguge.Instance.LoadLocalization("刀类") },
-            { 3, GameSettingLanguge.Instance.LoadLocalization("法杖") },
-            { 4, GameSettingLanguge.Instance.LoadLocalization("魔法书") },
-            { 5, GameSettingLanguge.Instance.LoadLocalization("弓箭") },
-            { 11, GameSettingLanguge.Instance.LoadLocalization("布甲") },
-            { 12, GameSettingLanguge.Instance.LoadLocalization("轻甲") },
-            { 13, GameSettingLanguge.Instance.LoadLocalization("重甲") },
+            { 1, "剑类" },
+            { 2, "刀类" },
+            { 3, "法杖" },
+            { 4, "魔法书" },
+            { 5, "弓箭" },
+            { 11, "布甲" },
+            { 12, "轻甲" },
+            { 13, "重甲" },
         };
     }
 }

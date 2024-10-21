@@ -15,32 +15,32 @@ namespace ET.Client
         [StaticField]
         public static Dictionary<int, string> ItemSubType1Name = new()
         {
-            { 0, GameSettingLanguge.Instance.LoadLocalization("全部") },
-            { 101, GameSettingLanguge.Instance.LoadLocalization("药剂") },
-            { 15, GameSettingLanguge.Instance.LoadLocalization("附魔") },
-            { 127, GameSettingLanguge.Instance.LoadLocalization("藏宝图") },
+            { 0, "全部" },
+            { 101, "药剂" },
+            { 15, "附魔" },
+            { 127, "藏宝图" },
         };
 
         //材料
         [StaticField]
         public static Dictionary<int, string> ItemSubType2Name = new()
         {
-            { 0, GameSettingLanguge.Instance.LoadLocalization("全部") },
-            { 1, GameSettingLanguge.Instance.LoadLocalization("材料") },
-            { 121, GameSettingLanguge.Instance.LoadLocalization("鉴定符") },
-            { 122, GameSettingLanguge.Instance.LoadLocalization("宠物技能") },
+            { 0, "全部" },
+            { 1, "材料" },
+            { 121, "鉴定符" },
+            { 122, "宠物技能" },
         };
 
         //材料
         [StaticField]
         public static Dictionary<int, string> ItemSubType4Name = new()
         {
-            { 0, GameSettingLanguge.Instance.LoadLocalization("全部") },
-            { 101, GameSettingLanguge.Instance.LoadLocalization("黄色插槽") },
-            { 102, GameSettingLanguge.Instance.LoadLocalization("紫色插槽") },
-            { 103, GameSettingLanguge.Instance.LoadLocalization("蓝色插槽") },
-            { 104, GameSettingLanguge.Instance.LoadLocalization("绿色插槽") },
-            { 105, GameSettingLanguge.Instance.LoadLocalization("橙色插槽") },
+            { 0, "全部" },
+            { 101, "黄色插槽" },
+            { 102, "紫色插槽" },
+            { 103, "蓝色插槽" },
+            { 104, "绿色插槽" },
+            { 105, "橙色插槽" },
         };
 
         [StaticField]
@@ -53,11 +53,11 @@ namespace ET.Client
         [StaticField]
         public static Dictionary<int, string> GemHoleName = new()
         {
-            { 101, GameSettingLanguge.Instance.LoadLocalization("黄色插槽") },
-            { 102, GameSettingLanguge.Instance.LoadLocalization("紫色插槽") },
-            { 103, GameSettingLanguge.Instance.LoadLocalization("蓝色插槽") },
-            { 104, GameSettingLanguge.Instance.LoadLocalization("绿色插槽") },
-            { 105, GameSettingLanguge.Instance.LoadLocalization("橙色插槽") },
+            { 101, "黄色插槽" },
+            { 102, "紫色插槽" },
+            { 103, "蓝色插槽" },
+            { 104, "绿色插槽" },
+            { 105, "橙色插槽" },
         };
 
         //Administrator:
@@ -87,19 +87,19 @@ namespace ET.Client
         [StaticField]
         public static Dictionary<int, string> ItemSubType3Name = new()
         {
-            { 0, GameSettingLanguge.Instance.LoadLocalization("全部") },
-            { 1, GameSettingLanguge.Instance.LoadLocalization("武器") },
-            { 2, GameSettingLanguge.Instance.LoadLocalization("衣服") },
-            { 3, GameSettingLanguge.Instance.LoadLocalization("护符") },
-            { 4, GameSettingLanguge.Instance.LoadLocalization("戒指") },
-            { 5, GameSettingLanguge.Instance.LoadLocalization("饰品") },
-            { 6, GameSettingLanguge.Instance.LoadLocalization("鞋子") },
-            { 7, GameSettingLanguge.Instance.LoadLocalization("裤子") },
-            { 8, GameSettingLanguge.Instance.LoadLocalization("腰带") },
-            { 9, GameSettingLanguge.Instance.LoadLocalization("手镯") },
-            { 10, GameSettingLanguge.Instance.LoadLocalization("头盔") },
-            { 11, GameSettingLanguge.Instance.LoadLocalization("项链") },
-            { 1100, GameSettingLanguge.Instance.LoadLocalization("生肖") },
+            { 0, "全部" },
+            { 1, "武器" },
+            { 2, "衣服" },
+            { 3, "护符" },
+            { 4, "戒指" },
+            { 5, "饰品" },
+            { 6, "鞋子" },
+            { 7, "裤子" },
+            { 8, "腰带" },
+            { 9, "手镯" },
+            { 10, "头盔" },
+            { 11, "项链" },
+            { 1100, "生肖" },
         };
 
         [StaticField]

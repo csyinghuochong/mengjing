@@ -579,7 +579,7 @@ namespace ET.Client
             }
             else if (self.NpcId == 40000004)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.Instance.LoadLocalization("是否返回副本!"),
+                PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", LanguageComponent.Instance.LoadLocalization("是否返回副本!"),
                     () =>
                     {
                         int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;

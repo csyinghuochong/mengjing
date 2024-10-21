@@ -7,13 +7,6 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, AppStartInitFinish args)
         {
-            // 多语言
-            string languageName = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
-            if (LocalizationManager.HasLanguage(languageName))
-            {
-                LocalizationManager.CurrentLanguage = languageName;
-            }
-            
             Log.Warning("AppStartInitFinish_CreateLoginUI");
             //await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
             await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MJLogin);

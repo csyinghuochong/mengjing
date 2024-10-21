@@ -38,7 +38,7 @@ namespace ET.Client
             int error = await BagClientNetHelper.RquestGemHeCheng(self.Root(), 19);
             if (error == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("宝石合成成功！"));
+                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("宝石合成成功！"));
             }
         }
 

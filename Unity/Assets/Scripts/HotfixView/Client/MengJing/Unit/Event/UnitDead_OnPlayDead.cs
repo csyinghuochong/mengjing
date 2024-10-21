@@ -165,7 +165,7 @@ namespace ET.Client
             if (!SceneConfigHelper.IfCanRevive(mapComponent.SceneType, mapComponent.SceneId))
             {
                 long instanceId = unit.InstanceId;
-                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("该地图不支持复活"));
+                FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("该地图不支持复活"));
                 await root.GetComponent<TimerComponent>().WaitAsync(3000);
                 if (instanceId != unit.InstanceId)
                 {

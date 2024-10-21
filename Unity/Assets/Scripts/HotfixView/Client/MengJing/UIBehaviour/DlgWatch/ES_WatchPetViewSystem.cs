@@ -206,7 +206,7 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.E_PropertyShowTextText.text =
-                            zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
+                            zstring.Format("{0}:{1}", LanguageComponent.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
                 }
             }
             else
@@ -863,7 +863,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_Text_PetLevelText.text =
-                        zstring.Format("{0}{1}", rolePetInfo.PetLv.ToString(), GameSettingLanguge.Instance.LoadLocalization("级"));
+                        zstring.Format("{0}{1}", rolePetInfo.PetLv.ToString(), LanguageComponent.Instance.LoadLocalization("级"));
                 ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
                 self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
                 self.E_ImageExpValueImage.transform.localScale = new(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);

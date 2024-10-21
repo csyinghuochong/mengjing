@@ -179,7 +179,7 @@ namespace ET.Client
             {
                 self.E_Lab_FuBenNameText.text = zstring.Format("{0}{1}", sceneConfig.Name, addStr);
                 self.E_Lab_FuBenLvText.text =
-                        zstring.Format("{0}: {1} - 50", GameSettingLanguge.Instance.LoadLocalization("等级"), sceneConfig.EnterLv);
+                        zstring.Format("{0}: {1} - 50", LanguageComponent.Instance.LoadLocalization("等级"), sceneConfig.EnterLv);
             }
         }
     }

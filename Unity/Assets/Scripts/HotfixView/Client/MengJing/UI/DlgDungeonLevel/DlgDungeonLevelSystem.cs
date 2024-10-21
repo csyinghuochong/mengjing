@@ -116,7 +116,7 @@ namespace ET.Client
                 self.View.E_Lab_LevelNameText.text = dungeonSectionConfig.Name;
                 using (zstring.Block())
                 {
-                    self.View.E_Lab_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", GameSettingLanguge.Instance.LoadLocalization("冒险进度"),
+                    self.View.E_Lab_OpenNumShowText.text = zstring.Format("({0}：{1}/{2})", LanguageComponent.Instance.LoadLocalization("冒险进度"),
                         (i + 1).ToString(), dungeonSectionConfig.RandomArea.Length.ToString());
                 }
             }
