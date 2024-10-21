@@ -28,12 +28,15 @@ namespace ET.Client
         {
             string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
             Unit myUnit =self.GetParent<Unit>();
-            self.UIPosition = myUnit.GetComponent<GameObjectComponent>().GameObject.transform.Find("NamePosi");
+            self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
             GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
             self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
             self.GameObject.transform.SetParent(GlobalComponent.Instance.BloodMonster.transform);
             self.GameObject.transform.localScale = Vector3.one;
-
+            if (self.GameObject.GetComponent<HeadBarUI>() == null)
+            {
+                self.GameObject.AddComponent<HeadBarUI>();
+            }
             self.HeadBarUI = self.GameObject.GetComponent<HeadBarUI>();
             self.HeadBarUI.enabled = true;
             self.HeadBarUI.HeadPos = self.UIPosition;
