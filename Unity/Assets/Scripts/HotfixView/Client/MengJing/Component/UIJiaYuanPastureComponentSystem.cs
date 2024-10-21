@@ -53,7 +53,7 @@ namespace ET.Client
 
         public static async ETTask OnInitUI(this UIJiaYuanPastureComponent self)
         {
-            string path = ABPathHelper.GetUGUIPath("Blood/UIEnergyTable");
+            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
             Unit myUnit = self.MyUnit;
             self.UIPosition = myUnit.GetComponent<GameObjectComponent>().GameObject.transform.Find("NamePosi");
             GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);

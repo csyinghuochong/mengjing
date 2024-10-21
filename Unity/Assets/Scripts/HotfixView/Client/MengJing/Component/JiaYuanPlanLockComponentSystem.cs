@@ -76,7 +76,7 @@ namespace ET.Client
         public static void InitHeadBar(this JiaYuanPlanLockComponent self)
         {
             self.UIPosition = self.GameObject.transform;
-            string path = ABPathHelper.GetUGUIPath("Blood/UIEnergyTableNoOpen");
+            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             self.HeadBar = UnityEngine.Object.Instantiate(prefab, self.Root().GetComponent<GlobalComponent>().Unit, true);
             self.HeadBar.transform.SetParent(self.Root().GetComponent<GlobalComponent>().NormalRoot);

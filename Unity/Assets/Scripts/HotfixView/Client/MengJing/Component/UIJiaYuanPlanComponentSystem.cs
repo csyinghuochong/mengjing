@@ -53,7 +53,7 @@ namespace ET.Client
             self.PlanStage = self.GetPlanStage();
 
             self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("Head");
-            string path = ABPathHelper.GetUGUIPath("Blood/UIEnergyTable");
+            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.BloodMonster.transform);
             self.GameObject.transform.localScale = Vector3.one;

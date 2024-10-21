@@ -204,20 +204,16 @@ namespace ET.Client
                     {
                         //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
                         int itemid = monsterCof.Parameter[1];
-                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
                         int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
-                        ;
                     }
                     else if (monsterCof.MonsterSonType == 59)
                     {
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
-                        ;
                     }
                     else
                     {
                         self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
-                        ;
                     }
 
                     Log.Debug($"monster: id:{unit.Id}   instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
