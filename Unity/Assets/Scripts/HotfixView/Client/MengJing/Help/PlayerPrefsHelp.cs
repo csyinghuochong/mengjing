@@ -20,6 +20,7 @@ namespace ET.Client
         public const string LenDepth = "MJ_LenDepth";
         public const string RotaAngle = "MJ_RotaAngle";
         public const string ZhuBo = "MJ_ZhuBo";
+        public const string Localization = "MJ_Localization";
 
         public static string LastAccount(string loginType)
         {

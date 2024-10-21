@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using I2.Loc;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UI;
@@ -29,6 +30,9 @@ namespace ET.Client
 
             self.EG_RotaAngleSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RotaAngle);
 
+            self.E_LocalizationBtnButton.AddListener(self.OnLocalizationBtnButton);
+            
+            self.RefreshLocalizationBtn();
             self.E_ReSetCameraBtnButton.AddListener(self.OnReSetCameraBtnButton);
 
             self.EG_ZhuBoSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_ZhuBo);
@@ -246,6 +250,51 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = va;
         }
 
+        public static void OnLocalizationBtnButton(this ES_SettingGame self)
+        {
+            string languageName =  PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization);
+            if (string.IsNullOrEmpty(languageName))
+            {
+                languageName = "Chinese";
+            }
+
+            if (languageName == "Chinese")
+            {
+                languageName = "English";
+            }
+            else
+            {
+                languageName = "Chinese";
+            }
+
+            if (LocalizationManager.HasLanguage(languageName))
+            {
+                LocalizationManager.CurrentLanguage = languageName;
+            }
+
+            PlayerPrefsHelp.SetString(PlayerPrefsHelp.Localization, languageName);
+            
+            self.RefreshLocalizationBtn();
+        }
+
+        public static void RefreshLocalizationBtn(this ES_SettingGame self)
+        {
+            string languageName =  PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization);
+            if (string.IsNullOrEmpty(languageName))
+            {
+                languageName = "Chinese";
+            }
+            
+            if (languageName == "Chinese")
+            {
+                self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "Change to English";
+            }
+            else
+            {
+                self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "切换成中文";
+            }
+        }
+        
         public static void OnReSetCameraBtnButton(this ES_SettingGame self)
         {
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, 1f);
