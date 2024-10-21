@@ -500,6 +500,8 @@ namespace ET.Client
                 string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
                 CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
             }
+            
+            
 
             string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
             self.Root().GetComponent<LockTargetComponent>().AttackTarget = int.Parse(attackmode);

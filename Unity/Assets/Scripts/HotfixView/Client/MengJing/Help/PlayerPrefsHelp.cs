@@ -57,9 +57,9 @@ namespace ET.Client
             PlayerPrefs.SetString(key, value);
         }
 
-        public static string GetString(string key)
+        public static string GetString(string key,string defaultValue = "")
         {
-            return PlayerPrefs.GetString(key);
+            return PlayerPrefs.GetString(key, defaultValue);
         }
 
         public static List<int> GetOldServerIds()

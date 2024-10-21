@@ -252,11 +252,7 @@ namespace ET.Client
 
         public static void OnLocalizationBtnButton(this ES_SettingGame self)
         {
-            string languageName =  PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization);
-            if (string.IsNullOrEmpty(languageName))
-            {
-                languageName = "Chinese";
-            }
+            string languageName = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
 
             if (languageName == "Chinese")
             {
@@ -279,11 +275,7 @@ namespace ET.Client
 
         public static void RefreshLocalizationBtn(this ES_SettingGame self)
         {
-            string languageName =  PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization);
-            if (string.IsNullOrEmpty(languageName))
-            {
-                languageName = "Chinese";
-            }
+            string languageName = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
             
             if (languageName == "Chinese")
             {
