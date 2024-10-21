@@ -114,6 +114,12 @@ namespace ET.Server
 				return 0;
 			}
 
+			if (!MonsterPositionConfigCategory.Instance.Contain(monsterPos))
+			{
+				Log.Error($"monsterPos: {monsterPos}");
+				return 0;
+			}
+
 			//Id      NextID  Type Position             MonsterID CreateRange CreateNum Create    Par(3代表刷新时间)
 			//10001   10002   2    - 71.46,0.34,-5.35   81000002       0           1       90    30,60
 			MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPos);
