@@ -41,6 +41,11 @@ namespace ET.Server
                             continue;
                         }
 
+                        if (!uunit.IsCanBeAttack())
+                        {
+                            continue;
+                        }
+
                         uunit.GetComponent<NumericComponentS>().ApplyChange(NumericType.Now_Hp, -1000000000, attackid: unit.Id);
                     }
                     return;
