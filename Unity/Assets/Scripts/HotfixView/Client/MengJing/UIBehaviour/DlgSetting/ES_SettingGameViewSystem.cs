@@ -257,12 +257,12 @@ namespace ET.Client
             if (languageName == "Chinese")
             {
                 languageName = "English";
-                FlyTipComponent.Instance.ShowFlyTip("Switch English successfully, please restart the game");
+                LanguageComponent.Instance.SetLanguage("English", true);
             }
             else
             {
                 languageName = "Chinese";
-                FlyTipComponent.Instance.ShowFlyTip("切换中文成功，请重新启动游戏");
+                LanguageComponent.Instance.SetLanguage("Chinese", true);
             }
 
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.Localization, languageName);
