@@ -194,7 +194,7 @@ namespace ET.Client
 
         private static string GetLanguageAssetName(this LanguageComponent self, string language)
         {
-            return $"{I2LocalizeHelper.I2ResAssetNamePrefix}{language}";
+            return $"Assets/Bundles/Text/{I2LocalizeHelper.I2ResAssetNamePrefix}{language}.csv";
         }
 
         private static void UseLocalizationCSV(this LanguageComponent self, string text, bool isLocalizeAll = false)

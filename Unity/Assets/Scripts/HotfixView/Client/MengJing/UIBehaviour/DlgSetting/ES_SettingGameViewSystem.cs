@@ -266,6 +266,7 @@ namespace ET.Client
             }
 
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.Localization, languageName);
+            self.RefreshLocalizationBtn();
         }
 
         public static void RefreshLocalizationBtn(this ES_SettingGame self)
