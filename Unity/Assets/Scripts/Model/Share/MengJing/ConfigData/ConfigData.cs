@@ -7,6 +7,14 @@ namespace ET
     public static class ConfigData
     {
 
+        //随机副本魔能老人兑换消耗
+        [StaticField]
+        public static string EnergySkillCost = "10010031;5";
+
+        //随机副本魔能老人技能列表
+        [StaticField]
+        public static List<int> EnergySkills = new List<int>() { 64000001, 64000002, 64000003, 64000004, 64000005, 64000006, 64000007, 64000008 };
+
         [StaticField]
         public static int MaxPetFightNumber = 3;
 

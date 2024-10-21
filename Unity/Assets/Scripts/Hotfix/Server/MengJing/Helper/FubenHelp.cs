@@ -144,7 +144,27 @@ namespace ET.Server
 					//54 场景怪 有AI 显示名称
 					//55 宝箱类(一次) 无AI
 					//56 宝箱类(无限) 无AI
-					if (monsterConfig.MonsterSonType != 52)
+					
+					//51 场景怪 有AI 不显示名称
+					//52 能量台子 无AI
+					//54 场景怪 有AI 显示名称
+					//55 宝箱类 无AI
+					if (monsterConfig.MonsterSonType == 52)
+					{
+						CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
+						if (cellDungeonComponent!=null)
+						{
+							List<int> EnergySkills = cellDungeonComponent.EnergySkills;
+							int skillId = EnergySkills[RandomHelper.RandomNumber(0, EnergySkills.Count)];
+							EnergySkills.Remove(skillId);
+							UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3, new CreateMonsterInfo()
+							{
+								SkillId = skillId,
+								Camp = monsterConfig.MonsterCamp
+							});
+						}
+					}
+					else
 					{
 						UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3,
 							new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = monsterPosition.Create, });
@@ -414,18 +434,18 @@ namespace ET.Server
 						//55 宝箱类 无AI
 						if (monsterConfig.MonsterSonType == 52)
 						{
-							// CellDungeonComponent cellDungeonComponent = scene.GetComponent<CellDungeonComponent>();
-							// if (cellDungeonComponent!=null)
-							// {
-							// 	List<int> EnergySkills = cellDungeonComponent.EnergySkills;
-							// 	int skillId = EnergySkills[RandomHelper.RandomNumber(0, EnergySkills.Count)];
-							// 	EnergySkills.Remove(skillId);
-							// 	UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3, new CreateMonsterInfo()
-							// 	{
-							// 		SkillId = skillId,
-							// 		Camp = monsterConfig.MonsterCamp
-							// 	});
-							// }
+							CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
+							if (cellDungeonComponent!=null)
+							{
+								List<int> EnergySkills = cellDungeonComponent.EnergySkills;
+								int skillId = EnergySkills[RandomHelper.RandomNumber(0, EnergySkills.Count)];
+								EnergySkills.Remove(skillId);
+								UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3, new CreateMonsterInfo()
+								{
+									SkillId = skillId,
+									Camp = monsterConfig.MonsterCamp
+								});
+							}
 						}
 						else
 						{

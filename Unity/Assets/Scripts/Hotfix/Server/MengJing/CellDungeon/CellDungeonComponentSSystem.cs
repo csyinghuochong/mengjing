@@ -343,6 +343,7 @@ namespace ET.Server
             self.SonFubenInfo.SonSceneId = curCell.sonid;
             self.SonFubenInfo.CurrentCell = self.FubenInfo.StartCell;
             self.SonFubenInfo.PassableFlag = self.GetPassableFlag();
+            self.EnergySkills.AddRange(ConfigData.EnergySkills);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, request.SceneId, curCell.sonid);
 

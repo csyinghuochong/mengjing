@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, Actor_FubenEnergySkillRequest request, Actor_FubenEnergySkillResponse response)
         {
             //扣除对应道具
-            bool costStatus = unit.GetComponent<BagComponentS>().OnCostItemData("12000006;5");
+            bool costStatus = unit.GetComponent<BagComponentS>().OnCostItemData(ConfigData.EnergySkillCost);
 
             if (costStatus)
             {
