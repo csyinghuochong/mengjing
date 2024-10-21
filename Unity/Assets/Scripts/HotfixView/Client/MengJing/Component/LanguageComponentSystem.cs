@@ -139,7 +139,7 @@ namespace ET.Client
                     return true;
                 }
 
-                Debug.LogError($"当前没有这个语言无法切换到此语言 {language}");
+                Log.Error($"当前没有这个语言无法切换到此语言 {language}");
                 return false;
             }
 
@@ -148,7 +148,7 @@ namespace ET.Client
                 return true;
             }
 
-            Debug.Log($"设置当前语言 = {language}");
+            Log.Debug($"设置当前语言 = {language}");
             LocalizationManager.CurrentLanguage = language;
             self.m_CurrentLanguage = language;
             return true;
@@ -160,14 +160,14 @@ namespace ET.Client
 #if UNITY_EDITOR
             if (!self.m_UseRuntimeModule)
             {
-                Debug.LogError($"禁止在此模式下 动态加载语言 {language}");
+                Log.Error($"禁止在此模式下 动态加载语言 {language}");
                 return;
             }
 #endif
 
             if (self.CheckLanguage(language))
             {
-                Debug.LogError($"当前语言已存在 请勿重复加载 {language}");
+                Log.Error($"当前语言已存在 请勿重复加载 {language}");
                 return;
             }
 
@@ -176,11 +176,11 @@ namespace ET.Client
             var assetTextAsset = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(assetName);
             if (assetTextAsset == null)
             {
-                Debug.LogError($"没有加载到目标语言资源 {language}");
+                Log.Error($"没有加载到目标语言资源 {language}");
                 return;
             }
 
-            Debug.Log($"加载语言成功 {language}");
+            Log.Debug($"加载语言成功 {language}");
 
             self.UseLocalizationCSV(assetTextAsset.text, !setCurrent);
             if (setCurrent)
