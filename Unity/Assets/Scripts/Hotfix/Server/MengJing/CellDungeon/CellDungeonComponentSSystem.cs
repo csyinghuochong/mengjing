@@ -476,7 +476,7 @@ namespace ET.Server
             //开始刷怪
             if (!pass)
             {
-                FubenHelp.CreateMonsterByPos(self.Scene(), chapterSonConfig.CreateMonster);
+                FubenHelp.CreateMonsterList(self.Scene(), chapterSonConfig.CreateMonster);
             }
 
             //生成npc

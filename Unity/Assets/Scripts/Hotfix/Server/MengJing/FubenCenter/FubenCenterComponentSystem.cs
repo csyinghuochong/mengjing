@@ -812,7 +812,7 @@ namespace ET.Server
             if (fubentype == TeamFubenType.ShenYuan)
             {
                 int postionid = ConfigData.ShenYuanCreateConfig[sceneId];
-                FubenHelp.CreateMonsterByPos(fubnescene, postionid);
+                FubenHelp.CreateMonsterList(fubnescene, postionid);
             }
 
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();

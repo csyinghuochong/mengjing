@@ -107,7 +107,31 @@ namespace ET.Server
 			}
 		}
 
-		public static int CreateMonsterByPos(Scene scene, int monsterPos)
+		public static void CreateMonsterList(Scene scene, int monsterId)
+		{
+			int whileNumber = 0;
+
+			while (monsterId != 0)
+			{
+				whileNumber++;
+				if (whileNumber >= 100)
+				{
+					Log.Error("whileNumber >= 100");
+					break;
+				}
+
+				try
+				{
+					monsterId = CreateMonsterByPos(scene, monsterId);
+				}
+				catch (Exception ex)
+				{
+					Log.Error(ex.ToString());
+				}
+			}
+		}
+		
+		private static int CreateMonsterByPos(Scene scene, int monsterPos)
 		{
 			if (monsterPos == 0)
 			{
