@@ -26,7 +26,8 @@ namespace ET.Client
     }
 
     [FriendOf(typeof(DlgCellChapterOpen))]
-    public static class DlgCellChapterOpenSystem
+    [EntitySystemOf(typeof(DlgCellChapterOpen))]
+    public static partial class DlgCellChapterOpenSystem
     {
         public static void RegisterUIEvent(this DlgCellChapterOpen self)
         {
@@ -59,6 +60,16 @@ namespace ET.Client
         public static void OnUpdateUI(this DlgCellChapterOpen self)
         {
             //self.Lab_ChapterName.GetComponent<Text>().text = "新关卡开启！";
+        }
+        [EntitySystem]
+        private static void Awake(this ET.Client.DlgCellChapterOpen self)
+        {
+
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.Client.DlgCellChapterOpen self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
     }
 }

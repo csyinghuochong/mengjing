@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [ComponentOf(typeof(UIBaseWindow))]
-    public class DlgCellChapterOpen : Entity, IAwake, IUILogic
+    public class DlgCellChapterOpen : Entity, IAwake, IUILogic, IDestroy
     {
         public DlgCellChapterOpenViewComponent View { get => this.GetComponent<DlgCellChapterOpenViewComponent>(); }
 

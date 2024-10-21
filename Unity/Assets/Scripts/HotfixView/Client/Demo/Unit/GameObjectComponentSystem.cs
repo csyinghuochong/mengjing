@@ -677,7 +677,7 @@ namespace ET.Client
                     else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitEnergyTableUI().Coroutine(); //血条UI组件
                     }
                     else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
                     {
