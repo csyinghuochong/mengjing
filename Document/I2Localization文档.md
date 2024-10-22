@@ -8,7 +8,7 @@
 
 ## 2. 添加、修改、删除需要翻译的内容
 
-![image-20241022110822705](C:\Users\FortuneCat0v0\AppData\Roaming\Typora\typora-user-images\image-20241022110822705.png)
+![屏幕截图 2024-10-22 113648](.\Images\屏幕截图 2024-10-22 113648.png)
 
 ## 3. 为Text添加多语言脚本
 
