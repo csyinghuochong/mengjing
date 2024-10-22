@@ -93,6 +93,7 @@ namespace I2.Loc
             sbTrans.AppendLine();
             sbTrans.AppendLine( "namespace ET.Client" );
             sbTrans.AppendLine( "{" );
+            sbTrans.AppendLine( "   // 该脚本由工具自动生成，请勿修改");
             sbTrans.AppendLine( "	public static class ScriptLocalization" );
             sbTrans.AppendLine( "	{" );
 
