@@ -89,8 +89,9 @@ namespace I2.Loc
             var sbTrans = new StringBuilder();
             var sbTerms = new StringBuilder();
             sbTrans.AppendLine( "using UnityEngine;" );
+            sbTrans.AppendLine( "using I2.Loc;" );
             sbTrans.AppendLine();
-            sbTrans.AppendLine( "namespace I2.Loc" );
+            sbTrans.AppendLine( "namespace ET.Client" );
             sbTrans.AppendLine( "{" );
             sbTrans.AppendLine( "	public static class ScriptLocalization" );
             sbTrans.AppendLine( "	{" );
@@ -132,7 +133,7 @@ namespace I2.Loc
                 { }
             }
             
-			return "Assets/ScriptLocalization.cs";
+			return "Assets//Scripts/ModelView/Client/MengJing/Help/ScriptLocalization.cs";
         }
 
 		void BuildScriptWithSelectedTerms( StringBuilder sbTrans, StringBuilder sbTerms )
@@ -191,6 +192,7 @@ namespace I2.Loc
 			{
                 for (int i = 0; i < Terms.Count; ++i)
                 {
+	                sbTrans.AppendLine("        [StaticField]");
                     sbTrans.AppendLine( "		public static string " + AdjustedTerms[i] + " \t\t{ get{ return LocalizationManager.GetTranslation (\"" + Terms[i] + "\"); } }");
                     sbTerms.AppendLine("		public const string " + AdjustedTerms[i] + " = \"" + Terms[i] + "\";");
                 }
@@ -198,6 +200,7 @@ namespace I2.Loc
 			else
 			for (int i=0; i<Terms.Count; ++i)
 			{
+				sbTrans.AppendLine("            [StaticField]");
 				sbTrans.AppendLine("			public static string "+AdjustedTerms[i]+ " \t\t{ get{ return LocalizationManager.GetTranslation (\"" + Category+"/"+Terms[i]+"\"); } }");
 				sbTerms.AppendLine("		    public const string " + AdjustedTerms[i] + " = \"" + Category + "/" + Terms[i] + "\";");
 			}

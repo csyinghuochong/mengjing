@@ -265,6 +265,8 @@ namespace ET.Client
                 LanguageComponent.Instance.SetLanguage("Chinese", true);
             }
 
+            FlyTipComponent.Instance.ShowFlyTip(ScriptLocalization.成功);
+
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.Localization, languageName);
             self.RefreshLocalizationBtn();
         }
