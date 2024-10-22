@@ -134,7 +134,7 @@ namespace ET
                 return;
             }
 
-            if (GUILayout.Button("L2Localization 配置导出"))
+            if (GUILayout.Button("I2Localization 配置导出"))
             {
                 ExportAllCsv();
                 return;
