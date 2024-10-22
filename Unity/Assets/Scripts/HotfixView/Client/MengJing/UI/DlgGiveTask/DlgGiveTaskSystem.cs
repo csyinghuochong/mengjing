@@ -42,7 +42,10 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
-            self.ShowBagInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Equipment));
+            foreach (ItemInfo itemInfo in bagComponent.GetItemsByType(ItemTypeEnum.Equipment))
+            {
+                self.ShowBagInfos.Add(itemInfo);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);

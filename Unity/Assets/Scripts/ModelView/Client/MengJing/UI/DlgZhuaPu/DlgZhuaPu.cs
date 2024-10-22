@@ -17,7 +17,7 @@ namespace ET.Client
         public int MonsterId;
         public long MonsterUnitid;
 
-        public List<ItemInfo> ShowBagInfos { get; set; } = new();
+        public List<EntityRef<ItemInfo>> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

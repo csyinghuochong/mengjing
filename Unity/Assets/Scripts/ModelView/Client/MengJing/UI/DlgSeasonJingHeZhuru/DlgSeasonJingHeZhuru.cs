@@ -15,7 +15,7 @@ namespace ET.Client
         public List<long> CostIds = new();
         public int MaxAdd;
         public int MinAdd;
-        public List<ItemInfo> ShowBagInfos { get; set; } = new();
+        public List<EntityRef<ItemInfo>> ShowBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }
