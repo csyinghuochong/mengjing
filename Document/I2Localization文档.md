@@ -20,6 +20,12 @@
 
 修改Assets/Editor/I2Localization/I2_AllSource.csv
 
+通过Excel打开
+
+![屏幕截图 2024-10-22 143919](.\Images\屏幕截图 2024-10-22 143919.png)
+
+通过记事本、VSCode打开
+
 ![屏幕截图 2024-10-22 141112](.\Images\屏幕截图 2024-10-22 141112.png)
 
 点击导入
