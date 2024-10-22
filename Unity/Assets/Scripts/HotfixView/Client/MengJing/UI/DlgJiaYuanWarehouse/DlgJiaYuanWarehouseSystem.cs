@@ -131,8 +131,11 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() +
-                (int)ItemLocType.JianYuanWareHouse1)));
+            foreach (ItemInfo itemInfo in bagComponentC.GetItemsByLoc((self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() +
+                         ItemLocType.JianYuanWareHouse1)))
+            {
+                self.ShowHouseBagInfos.Add(itemInfo);
+            }
 
             int allNumber =
                     bagComponentC.GetBagLeftCell(self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
@@ -145,7 +148,11 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagBagInfos.Clear();
-            self.ShowBagBagInfos.AddRange(bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag));
+            foreach (ItemInfo itemInfo in bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag))
+            {
+                self.ShowBagBagInfos.Add(itemInfo);
+            }
+            
             int allNumber = bagComponentC.GetBagShowCell(ItemLocType.ItemLocBag);
 
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
@@ -214,12 +221,15 @@ namespace ET.Client
                 self.NoLockList[i].SetActive(cangkuNumber - 1 >= i && i != page);
             }
         }
+
         public static void OnOneKeyButton(this DlgJiaYuanWarehouse self)
         {
         }
+
         public static void OnButtonPackButton(this DlgJiaYuanWarehouse self)
         {
         }
+
         public static void OnButtonTakeOutAllButton(this DlgJiaYuanWarehouse self)
         {
         }
