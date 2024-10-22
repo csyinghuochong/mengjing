@@ -134,6 +134,12 @@ namespace ET
                 return;
             }
 
+            if (GUILayout.Button("I2Localization 配置导入"))
+            {
+                ImportAllCsv();
+                return;
+            }
+
             if (GUILayout.Button("I2Localization 配置导出"))
             {
                 ExportAllCsv();
@@ -143,11 +149,47 @@ namespace ET
             GUILayout.Space(5);
         }
 
-        #region 导出
-
         public const string UII2SourceResPath = "Assets/Editor/I2Localization"; //这是编辑器下的数据 平台运行时 是不需要的
         public const string UII2SourceResName = "AllSource";
         public const string UII2TargetLanguageResPath = "Assets/Bundles/Text";
+
+        #region 导入
+
+        private void ImportAllCsv()
+        {
+            var editorAsset = LocalizationManager.GetEditorAsset(true);
+            m_LanguageSourceData = editorAsset?.SourceData;
+
+            if (m_LanguageSourceData == null)
+            {
+                Log.Error($"没有找到多语言编辑器下的源数据 请检查 {I2LocalizeHelper.I2GlobalSourcesEditorPath}");
+                return;
+            }
+
+            var path = GetSourceResPath();
+
+            try
+            {
+                var content = LocalizationReader.ReadCSVfile(path, Encoding.UTF8);
+                var sError =
+                        m_LanguageSourceData.Import_CSV(string.Empty, content, eSpreadsheetUpdateMode.Replace, ',');
+                if (!string.IsNullOrEmpty(sError))
+                    Log.Error($"导入全数据时发生错误 请检查 {sError} {path}");
+            }
+            catch (Exception e)
+            {
+                Log.Error($"导入全数据时发生错误 请检查 {path}");
+                Debug.LogError(e);
+                return;
+            }
+
+            Log.Debug($"导入全数据完成 {path}");
+        }
+
+        #endregion
+
+        #region 导出
+
         private LanguageSourceData m_LanguageSourceData;
 
         private string GetSourceResPath()
