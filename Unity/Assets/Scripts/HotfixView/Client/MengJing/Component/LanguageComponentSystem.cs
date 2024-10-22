@@ -93,7 +93,10 @@ namespace ET.Client
         private static async ETTask OnInitL2Localization(this LanguageComponent self)
         {
             self.m_DefaultLanguage = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
-            self.m_LanguageSource = GameObject.Find("/Global/I2LocalizeMgr").transform.GetComponent<LanguageSource>();
+            GameObject go = UnityEngine.Object.Instantiate(new GameObject(), GlobalComponent.Instance.Global);
+            go.name = "I2LocalizeMgr";
+            go.AddComponent<LanguageSource>();
+            self.m_LanguageSource = go.GetComponent<LanguageSource>();
 
 #if UNITY_EDITOR
             if (!self.m_UseRuntimeModule)

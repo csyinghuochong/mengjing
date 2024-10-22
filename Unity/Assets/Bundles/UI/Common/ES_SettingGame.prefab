@@ -4156,7 +4156,7 @@ GameObject:
   - component: {fileID: 3283770240565048432}
   - component: {fileID: 3777218362264218206}
   - component: {fileID: 4514839511709769293}
-  - component: {fileID: 3096586360086197078}
+  - component: {fileID: 1038656579683035873}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -4222,7 +4222,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3096586360086197078
+--- !u!114 &1038656579683035873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4249,8 +4249,8 @@ MonoBehaviour:
   AllowLocalizedParameters: 1
   AllowParameters: 1
   TranslatedObjects:
-  - {fileID: 2800000, guid: 5a8b5e1ae82bd354eb5be78412ba676d, type: 3}
-  - {fileID: 2800000, guid: 4fcd5e7713c334f4585beca19cb8eb02, type: 3}
+  - {fileID: 21300000, guid: 54a6f208c170c6445ab58f2fba1b5af6, type: 3}
+  - {fileID: 21300000, guid: 658af0d91bff98f4c9ba7a3c39914440, type: 3}
   LocalizeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5256,7 +5256,7 @@ GameObject:
   - component: {fileID: 7860064719174182166}
   - component: {fileID: 1578280746627779352}
   - component: {fileID: 6030902961171812543}
-  - component: {fileID: 4118249403490788456}
+  - component: {fileID: 8302620038077168139}
   m_Layer: 5
   m_Name: Text (1)
   m_TagString: Untagged
@@ -5341,7 +5341,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0.45490196, g: 0.29803923, b: 0.14509805, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &4118249403490788456
+--- !u!114 &8302620038077168139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5353,7 +5353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTerm: "\u6D4B\u8BD5"
+  mTerm: Test
   mTermSecondary: 
   PrimaryTermModifier: 0
   SecondaryTermModifier: 0

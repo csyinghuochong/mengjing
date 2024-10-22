@@ -38,7 +38,7 @@ namespace ET.Client
 
         public List<string> m_AllLanguage = new List<string>();
 
-        public bool m_UseRuntimeModule = true; //模拟平台运行时 编辑器资源不加载
+        public bool m_UseRuntimeModule = false; //模拟平台运行时 编辑器资源不加载
 
         public string m_DefaultLanguage;
 

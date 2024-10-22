@@ -61,7 +61,7 @@ namespace ET
         [StaticField]
         public static GlobalComponent Instance { get; set; }
 
-        public Transform Global;
+        public Transform Global { get; set; }
         public Transform Unit { get; set; }
         public Transform UI;
 
