@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgChouKaWarehouse: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgChouKaWarehouse : Entity, IAwake, IUILogic
     {
         public DlgChouKaWarehouseViewComponent View
         {
@@ -11,8 +11,8 @@ namespace ET.Client
         }
 
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
-        public List<ItemInfo> ShowHouseBagInfos { get; set; } = new();
+        public List<EntityRef<ItemInfo>> ShowHouseBagInfos { get; set; } = new();
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
-        public List<ItemInfo> ShowBagBagInfos { get; set; } = new();
+        public List<EntityRef<ItemInfo>> ShowBagBagInfos { get; set; } = new();
     }
 }

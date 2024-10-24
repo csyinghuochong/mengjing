@@ -95,7 +95,10 @@ namespace ET.Client
         private static void RefreshHouse(this DlgChouKaWarehouse self)
         {
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ChouKaWarehouse));
+            foreach (ItemInfo itemInfo in self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ChouKaWarehouse))
+            {
+                self.ShowHouseBagInfos.Add(itemInfo);
+            }
 
             // 上限100
             int storageNumber = 100;
@@ -106,7 +109,10 @@ namespace ET.Client
         private static void RefreshBag(this DlgChouKaWarehouse self)
         {
             self.ShowBagBagInfos.Clear();
-            self.ShowBagBagInfos.AddRange(self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag));
+            foreach (ItemInfo itemInfo in self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocBag))
+            {
+                self.ShowBagBagInfos.Add(itemInfo);
+            }
 
             int bagcellNumber = self.Root().GetComponent<BagComponentC>().GetBagTotalCell(ItemLocType.ItemLocBag);
             self.AddUIScrollItems(ref self.ScrollItemBagItems, bagcellNumber);
