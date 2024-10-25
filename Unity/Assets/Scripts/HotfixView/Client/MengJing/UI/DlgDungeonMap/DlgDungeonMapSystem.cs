@@ -75,6 +75,11 @@ namespace ET.Client
             });
             self.View.E_BossRefreshCloseButton.AddListener(self.OnBoosRefreshClose);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonMapLevelItemsRefresh);
+            self.View.E_MapPanelDiButton.AddListener(() =>
+            {
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+            });
         }
 
         public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)

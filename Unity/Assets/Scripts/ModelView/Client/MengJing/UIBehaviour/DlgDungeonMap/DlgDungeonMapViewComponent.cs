@@ -618,7 +618,24 @@ namespace ET.Client
      			return this.m_E_Type2Image;
      		}
      	}
-
+		
+		public UnityEngine.UI.Button E_MapPanelDiButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_MapPanelDiButton == null )
+				{
+					this.m_E_MapPanelDiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_MapPanel/E_MapPanelDiButton");
+				}
+				return this.m_E_MapPanelDiButton;
+			}
+		}	
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_MapPanelRectTransform = null;
@@ -657,6 +674,7 @@ namespace ET.Client
 			this.m_E_Type0Image = null;
 			this.m_E_Type1Image = null;
 			this.m_E_Type2Image = null;
+			this.m_E_MapPanelDiButton = null;
 			this.uiTransform = null;
 		}
 
@@ -696,6 +714,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Type0Image = null;
 		private UnityEngine.UI.Image m_E_Type1Image = null;
 		private UnityEngine.UI.Image m_E_Type2Image = null;
+		private UnityEngine.UI.Button m_E_MapPanelDiButton = null;
 		public Transform uiTransform = null;
 	}
 }
