@@ -136,22 +136,27 @@ namespace ET.Client
                 Vector3 vector32 = self.GetWordToUIPositon(vector31);
                 GameObject headItem = self.GetTeamPointObj(teamNumber);
 
+                if (unit.Type == UnitType.Monster)
+                {
+                    Log.Debug("11");
+                }
+
                 //1自己 2敌对 3队友  4主城
                 string showType = "4";
-                // if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
-                // {
-                //     showType = "2";
-                // }
-                //
-                // if (main.IsSameTeam(unit))
-                // {
-                //     showType = "3";
-                // }
-                //
-                // if (unit.MainHero)
-                // {
-                //     showType = "1";
-                // }
+                if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
+                {
+                    showType = "2";
+                }
+                
+                if (main.IsSameTeam(unit))
+                {
+                    showType = "3";
+                }
+                
+                if (unit.MainHero)
+                {
+                    showType = "1";
+                }
 
                 if (unit.Type == UnitType.Monster)
                 {
@@ -174,15 +179,17 @@ namespace ET.Client
                         }
                     }
                 }
-
+                
                 teamNumber++;
                 for (int icontype = 0; icontype < GlobalData.ES_MapMiniType.Count; icontype++)
                 {
-                    headItem.Get<GameObject>(showType).transform.localPosition =  
+                    headItem.Get<GameObject>( GlobalData.ES_MapMiniType[icontype] ).transform.localPosition =  
                             GlobalData.ES_MapMiniType[icontype] == showType ?  Vector3.zero : GlobalData.ES_MapMiniNoVisie;
                 }
                 
                 headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
+                
+                Log.Debug($"teamNumber:  {teamNumber}     showType:  {showType}   localPosition:{headItem.transform.localPosition}");
             }
 
             for (int i = teamNumber; i < self.AllPointList.Count; i++)
