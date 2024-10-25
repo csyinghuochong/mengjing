@@ -24,30 +24,6 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_IconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_IconImage == null )
-     				{
-		    			this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
-     				}
-     				return this.m_E_IconImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
-     			}
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_MoLiText
      	{
      		get
@@ -72,7 +48,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ClickButton
+		public UnityEngine.UI.Image E_IconImage
      	{
      		get
      		{
@@ -83,20 +59,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_ClickButton == null )
+     				if( this.m_E_IconImage == null )
      				{
-		    			this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Click");
+		    			this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
      				}
-     				return this.m_E_ClickButton;
+     				return this.m_E_IconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Click");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ClickImage
+		public UnityEngine.EventSystems.EventTrigger E_IconEventTrigger
      	{
      		get
      		{
@@ -107,15 +83,15 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_ClickImage == null )
+     				if( this.m_E_IconEventTrigger == null )
      				{
-		    			this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Click");
+		    			this.m_E_IconEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Icon");
      				}
-     				return this.m_E_ClickImage;
+     				return this.m_E_IconEventTrigger;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Click");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Icon");
      			}
      		}
      	}
@@ -146,19 +122,17 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_IconImage = null;
 			this.m_E_MoLiText = null;
-			this.m_E_ClickButton = null;
-			this.m_E_ClickImage = null;
+			this.m_E_IconImage = null;
+			this.m_E_IconEventTrigger = null;
 			this.m_E_CDImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.UI.Text m_E_MoLiText = null;
-		private UnityEngine.UI.Button m_E_ClickButton = null;
-		private UnityEngine.UI.Image m_E_ClickImage = null;
+		private UnityEngine.UI.Image m_E_IconImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
 		private UnityEngine.UI.Image m_E_CDImage = null;
 		public Transform uiTransform = null;
 	}

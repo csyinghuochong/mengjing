@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -21,13 +22,27 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_PetMeleeItem self, RolePetInfo rolePetInfo)
         {
             self.RolePetInfo = rolePetInfo;
-            self.E_ClickButton.AddListener(self.OnClick);
+            self.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+            self.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+            self.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_IconImage.sprite = sp;
+        }
+
+        private static void BeginDrag(this Scroll_Item_PetMeleeItem self, PointerEventData pdata)
+        {
+        }
+
+        private static void Drag(this Scroll_Item_PetMeleeItem self, PointerEventData pdata)
+        {
+        }
+
+        private static void EndDrag(this Scroll_Item_PetMeleeItem self, PointerEventData pdata)
+        {
         }
 
         public static void RefreshCD(this Scroll_Item_PetMeleeItem self)
@@ -47,7 +62,7 @@ namespace ET.Client
         {
             self.EndTime = TimeHelper.ServerNow() + self.CD;
         }
-        
+
         private static void OnClick(this Scroll_Item_PetMeleeItem self)
         {
             if (self.EndTime > TimeHelper.ServerNow())
