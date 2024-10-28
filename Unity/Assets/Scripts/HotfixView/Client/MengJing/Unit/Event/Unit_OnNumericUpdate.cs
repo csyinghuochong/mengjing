@@ -82,7 +82,7 @@
                         else
                         {
                             // 其他玩家切换成英雄特效
-                            FunctionEffect.PlaySelfEffect(args.Defend, 200004);
+                            // FunctionEffect.PlaySelfEffect(args.Defend, 200004);
                         }
                     }
 
