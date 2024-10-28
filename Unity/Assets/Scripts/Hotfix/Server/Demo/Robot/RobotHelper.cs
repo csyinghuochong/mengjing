@@ -273,7 +273,7 @@ namespace ET.Client
                 return;
             }
 
-            await PetNetHelper.RequestPetFight(root, rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0);
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask RolePetHeXin(Scene root, int score)

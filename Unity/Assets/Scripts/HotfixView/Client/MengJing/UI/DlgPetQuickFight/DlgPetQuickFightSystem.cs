@@ -119,14 +119,16 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petid);
 
-            if (rolePetInfo.PetStatus == 2)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("宠物散步中！");
-                return;
-            }
-
-            await PetNetHelper.RequestPetFight(self.Root(), petid, rolePetInfo.PetStatus == 0 ? 1 : 0);
-            self.OnUpdateUI();
+            FlyTipComponent.Instance.ShowFlyTip("请在下面宠物出战按钮选择出战！");
+            // if (rolePetInfo.PetStatus == 2)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("宠物散步中！");
+            //     return;
+            // }
+            
+            //await PetNetHelper.RequestPetFight(self.Root(), petid, rolePetInfo.PetStatus == 0 ? 1 : 0);
+            //self.OnUpdateUI();
+            await ETTask.CompletedTask;
         }
 
         public static void OnUpdateUI(this DlgPetQuickFight self)

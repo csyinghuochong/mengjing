@@ -198,25 +198,26 @@ namespace ET.Client
             {
                 return;
             }
-
-            if (rolePetInfo.PetStatus == 2)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("先停止散步！");
-                return;
-            }
-
-            Dictionary<long, long> PetFightTime = self.Root().GetComponent<BattleMessageComponent>().PetFightCD;
-            long cdTime = 0;
-            //出战
-            PetFightTime.TryGetValue(rolePetInfo.Id, out cdTime);
-
-            if (TimeHelper.ClientNow() - cdTime < 180 * TimeHelper.Second)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("出战冷却中！");
-                return;
-            }
-
-            PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0).Coroutine();
+            
+            FlyTipComponent.Instance.ShowFlyTip("请在下面宠物出战按钮选择出战！");
+            // if (rolePetInfo.PetStatus == 2)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("先停止散步！");
+            //     return;
+            // }
+            //
+            // Dictionary<long, long> PetFightTime = self.Root().GetComponent<BattleMessageComponent>().PetFightCD;
+            // long cdTime = 0;
+            // //出战
+            // PetFightTime.TryGetValue(rolePetInfo.Id, out cdTime);
+            //
+            // if (TimeHelper.ClientNow() - cdTime < 180 * TimeHelper.Second)
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("出战冷却中！");
+            //     return;
+            // }
+            //
+            // PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0).Coroutine();
         }
 
         public static void OnPetFightingSet(this ES_PetList self)
