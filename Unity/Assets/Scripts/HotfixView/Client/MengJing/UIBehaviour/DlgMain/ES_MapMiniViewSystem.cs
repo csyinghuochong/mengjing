@@ -136,11 +136,6 @@ namespace ET.Client
                 Vector3 vector32 = self.GetWordToUIPositon(vector31);
                 GameObject headItem = self.GetTeamPointObj(teamNumber);
 
-                if (unit.Type == UnitType.Monster)
-                {
-                    Log.Debug("11");
-                }
-
                 //1自己 2敌对 3队友  4主城
                 string showType = "4";
                 if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
