@@ -66,6 +66,10 @@ namespace ET.Client
             if (self.Pet == null)
             {
                 
+                //弹出宠物出战界面。
+                
+                await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+                
                 return;
             }
 

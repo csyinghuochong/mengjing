@@ -685,7 +685,7 @@ namespace ET.Server
             RemoveJingLing(unit);
         }
 
-        public static void RemoveFightPetList(Unit unit)
+        public static void RemoveFightPetList(Unit unit, List<long> newpetids = null)
         {
             UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
             List<long> petfightlist = unit.GetComponent<PetComponentS>().PetFightList;
@@ -695,6 +695,12 @@ namespace ET.Server
                 {
                     continue;
                 }
+
+                if (newpetids != null && newpetids.Contains(petfightlist[i]))
+                {
+                    continue;
+                }
+
                 unitComponent.Remove(petfightlist[i]);
             }
         }
@@ -744,11 +750,18 @@ namespace ET.Server
             for (int i = 0; i < petfightlist.Count; i++)
             {
                 RolePetInfo fightId = petComponentS.GetPetInfo(petfightlist[i]);
-                if (fightId != null)
+                if (fightId == null)
                 {
-                    petComponentS.UpdatePetAttribute(fightId, false);
-                    UnitFactory.CreatePet(unit, fightId);
+                    continue;
                 }
+
+                if (unit.GetParent<UnitComponent>().Get(fightId.Id) != null)
+                {
+                    continue;
+                }
+
+                petComponentS.UpdatePetAttribute(fightId, false);
+                UnitFactory.CreatePet(unit, fightId);
             }
         }
 
