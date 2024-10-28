@@ -43,6 +43,7 @@
         public const int RoleBullet2Timer = 231;
         public const int RoleBullet5Timer = 232;
         public const int RoleBullet6Timer = 233;
+        public const int ResourcesLoaderTimer = 234;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

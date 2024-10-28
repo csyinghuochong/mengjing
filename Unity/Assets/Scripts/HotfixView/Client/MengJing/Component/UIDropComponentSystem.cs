@@ -48,7 +48,7 @@ namespace ET.Client
             {
                 if (!string.IsNullOrEmpty(self.AssetPath[i]))
                 {
-                    self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAssetSync(self.AssetPath[i]);
+                    self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(self.AssetPath[i]);
                 }
             }
 

@@ -270,7 +270,7 @@ namespace ET.Client
             UIEventComponent.Instance.GetUIEventHandler(id).BeforeUnload(baseWindow);
             if(baseWindow.IsPreLoad)
             {
-                self.Scene().GetComponent<ResourcesLoaderComponent>().UnLoadAssetSync(baseWindow.UIPrefabGameObject.name.StringToAB());
+                self.Scene().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(baseWindow.UIPrefabGameObject.name.StringToAB());
                 UnityEngine.Object.Destroy( baseWindow.UIPrefabGameObject);
                 baseWindow.UIPrefabGameObject = null;
             }

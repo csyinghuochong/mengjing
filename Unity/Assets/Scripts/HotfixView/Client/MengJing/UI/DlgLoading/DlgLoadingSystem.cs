@@ -284,7 +284,7 @@ namespace ET.Client
                     continue;
                 }
 
-                self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAssetSync(self.ReleaseAssets[i]);
+                self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(self.ReleaseAssets[i]);
             }
         }
 

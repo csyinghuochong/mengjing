@@ -262,7 +262,7 @@ namespace ET.Client
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < self.m_assetlist.Count; i++)
             {
-                resourcesLoaderComponent.UnLoadAssetSync(self.m_assetlist[i]);
+                resourcesLoaderComponent.UnLoadAsset(self.m_assetlist[i]);
             }
 
             self.m_assetlist.Clear();

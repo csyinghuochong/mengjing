@@ -102,7 +102,7 @@ namespace ET.Client
             GameObjectLoadHelper.DisposeAll();
 
             // 释放前一个场景的所有资源
-            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAssetSync();
+            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
 
             string path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
