@@ -1722,7 +1722,7 @@ namespace ET.Client
             self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_OpenChatButton.gameObject.SetActive(false);
             self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(false);
-            self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(false);
+            self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             if (value == "1")
@@ -1749,6 +1749,7 @@ namespace ET.Client
             }
 
             int sceneid = self.Root().GetComponent<MapComponent>().SceneId;
+            self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(false);
             switch (sceneTypeEnum)
             {
                 case SceneTypeEnum.CellDungeon:

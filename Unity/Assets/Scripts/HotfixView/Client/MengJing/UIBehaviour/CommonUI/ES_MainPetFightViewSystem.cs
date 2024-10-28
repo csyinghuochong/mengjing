@@ -26,7 +26,6 @@ namespace ET.Client
         {
             if (rolePetInfo == null)
             {
-                self.uiTransform.gameObject.SetActive(false);
                 return;
             }
 
@@ -36,8 +35,6 @@ namespace ET.Client
                 self.E_PetHPImage.fillAmount = 0;
                 return;
             }
-
-            self.uiTransform.gameObject.SetActive(true);
 
             self.FightIndex = fightIndex;
             self.Pet = pet;
@@ -66,6 +63,12 @@ namespace ET.Client
 
         private static void OnClick(this ES_MainPetFight self)
         {
+            if (self.Pet == null)
+            {
+                
+                return;
+            }
+
             if (self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
             {
                 return;
