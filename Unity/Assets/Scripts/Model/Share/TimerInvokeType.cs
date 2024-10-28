@@ -104,5 +104,6 @@
         public const int UICellChapterOpen = 366;
         public const int UICellDungeonSettlement = 367;
         public const int UIPetMeleeMain = 368;
+        public const int MainPetFightTimer = 369;
     }
 }

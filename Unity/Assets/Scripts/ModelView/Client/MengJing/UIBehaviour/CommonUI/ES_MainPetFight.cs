@@ -1,16 +1,17 @@
 ﻿
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MainPetFight : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_MainPetFight : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		private EntityRef<Unit> pet;
 		public Unit Pet { get => this.pet; set => this.pet = value; }
 		public int FightIndex;
+		public long Timer;
+		public bool LongPress;
 		
 		public UnityEngine.UI.Image E_PetHPImage
      	{
@@ -63,23 +64,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ClickButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickButton == null )
-     			{
-		    		this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Click");
-     			}
-     			return this.m_E_ClickButton;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_ClickImage
      	{
      		get
@@ -94,6 +78,23 @@ namespace ET.Client
 		    		this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Click");
      			}
      			return this.m_E_ClickImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_ClickEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ClickEventTrigger == null )
+     			{
+		    		this.m_E_ClickEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Click");
+     			}
+     			return this.m_E_ClickEventTrigger;
      		}
      	}
 
@@ -114,16 +115,16 @@ namespace ET.Client
 			this.m_E_PetHPImage = null;
 			this.m_E_PetIconImage = null;
 			this.m_E_PetLvText = null;
-			this.m_E_ClickButton = null;
 			this.m_E_ClickImage = null;
+			this.m_E_ClickEventTrigger = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.Image m_E_PetHPImage = null;
 		private UnityEngine.UI.Image m_E_PetIconImage = null;
 		private UnityEngine.UI.Text m_E_PetLvText = null;
-		private UnityEngine.UI.Button m_E_ClickButton = null;
 		private UnityEngine.UI.Image m_E_ClickImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_ClickEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }

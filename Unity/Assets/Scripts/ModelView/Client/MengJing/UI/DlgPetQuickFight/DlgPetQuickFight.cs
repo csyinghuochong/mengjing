@@ -7,6 +7,7 @@ namespace ET.Client
     {
         public DlgPetQuickFightViewComponent View { get => this.GetComponent<DlgPetQuickFightViewComponent>(); }
 
+        public int FightIndex;
         public long Timer;
         public List<RolePetInfo> ShowRolePetInfos = new();
         public Dictionary<int, EntityRef<Scroll_Item_PetQuickFightItem>> ScrollItemPetQuickFightItems;

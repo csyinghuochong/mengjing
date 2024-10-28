@@ -30,14 +30,11 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetQuickFight self)
         {
             self.View.E_PetQuickFightItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetQuickFightItemsRefresh);
-            self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
-            
+
             self.View.E_ImageButtonButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
             });
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.PetQuickFightTimer, self);
-            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgPetQuickFight self, Entity contextData = null)
@@ -116,23 +113,37 @@ namespace ET.Client
         public static async ETTask RequestPetFight(this DlgPetQuickFight self, long petid)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petid);
+            // RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petid);
 
-            FlyTipComponent.Instance.ShowFlyTip("请在下面宠物出战按钮选择出战！");
+            // FlyTipComponent.Instance.ShowFlyTip("请在下面宠物出战按钮选择出战！");
             // if (rolePetInfo.PetStatus == 2)
             // {
             //     FlyTipComponent.Instance.ShowFlyTip("宠物散步中！");
             //     return;
             // }
-            
+
             //await PetNetHelper.RequestPetFight(self.Root(), petid, rolePetInfo.PetStatus == 0 ? 1 : 0);
-            //self.OnUpdateUI();
-            await ETTask.CompletedTask;
+
+            List<long> fightpets = new();
+            fightpets.AddRange(petComponent.PetFightList);
+            if (fightpets[self.FightIndex - 1] == petid)
+            {
+                fightpets[self.FightIndex - 1] = 0;
+            }
+            else
+            {
+                fightpets[self.FightIndex - 1] = petid;
+            }
+
+            await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
         }
 
         public static void OnUpdateUI(this DlgPetQuickFight self)
         {
-            long fightid = self.Root().GetComponent<PetComponentC>().GetFightPetId();
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            long petId = petComponent.PetFightList[self.FightIndex - 1];
 
             if (self.ScrollItemPetQuickFightItems != null)
             {
@@ -145,7 +156,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    item.OnUpdateUI(fightid);
+                    item.OnUpdateUI(petId);
                 }
             }
         }
@@ -156,26 +167,34 @@ namespace ET.Client
             scrollItemPetQuickFightItem.OnInitUI2(self.ShowRolePetInfos[index], self.OnClickHandler);
         }
 
-        public static void OnInitUI(this DlgPetQuickFight self)
+        public static void OnInitUI(this DlgPetQuickFight self, int index)
         {
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(600, TimerInvokeType.PetQuickFightTimer, self);
+
+            self.FightIndex = index;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            long petId = petComponent.PetFightList[self.FightIndex - 1];
+
             List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
             self.ShowRolePetInfos.Clear();
             for (int i = 0; i < rolePetInfos.Count; i++)
             {
-                if (rolePetInfos[i].PetStatus != 3 && rolePetInfos[i].PetStatus != 2)
+                if (rolePetInfos[i].PetStatus == 3 || rolePetInfos[i].PetStatus == 2)
                 {
-                    self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                    continue;
                 }
+
+                if (rolePetInfos[i].Id != petId && petComponent.PetFightList.Contains(rolePetInfos[i].Id))
+                {
+                    continue;
+                }
+
+                self.ShowRolePetInfos.Add(rolePetInfos[i]);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemPetQuickFightItems, self.ShowRolePetInfos.Count);
             self.View.E_PetQuickFightItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
-
             self.OnUpdateUI();
-        }
-        public static void OnImageButtonButton(this DlgPetQuickFight self)
-        {
         }
     }
 }
