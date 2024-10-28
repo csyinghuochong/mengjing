@@ -395,6 +395,7 @@ namespace ET.Client
             self.View.E_JiaYuanButton.AddListener(self.OnJiaYuanButton);
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
+            self.View.E_BagButton.AddListener(self.OnBagButton);
 
             self.View.E_OpenChatButton.AddListener(self.OnOpenChatButton);
 
@@ -1034,6 +1035,11 @@ namespace ET.Client
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
         }
 
+        private static void OnBagButton(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+        }
+        
         public static void UpdateShowRoleExp(this DlgMain self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -1770,7 +1776,6 @@ namespace ET.Client
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
-                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.Happy:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);

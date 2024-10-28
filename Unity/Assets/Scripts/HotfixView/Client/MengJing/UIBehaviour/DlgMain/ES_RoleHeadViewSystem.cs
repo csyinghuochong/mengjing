@@ -68,11 +68,8 @@ namespace ET.Client
 
         public static void OnPetFightSet(this ES_RoleHead self)
         {
-            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
             RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetFightPet();
-            self.EG_PetIconSetRectTransform.gameObject.SetActive(
-                !CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId) && rolePetInfo != null &&
-                sceneType != SceneTypeEnum.RunRace);
+            self.EG_PetIconSetRectTransform.gameObject.SetActive(false);
             if (rolePetInfo == null)
             {
                 return;
