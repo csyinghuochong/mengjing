@@ -203,6 +203,8 @@ namespace ET.Client
             }
         }
 
+        
+        
         private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
             if (!self.CanOpen(chapterId))
@@ -211,13 +213,16 @@ namespace ET.Client
                 return;
             }
             
-            Log.Debug($"Enlarge:  {map}");
             if (map == 0)  //返回天空之城
             {
-                EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否返回主城出生点？", () =>
+                {
+                    EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
                 
-                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-                uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+                    UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                    uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+
+                }, null).Coroutine();
                 return;
             }
             

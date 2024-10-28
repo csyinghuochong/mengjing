@@ -608,9 +608,14 @@ namespace ET.Server
 
         public static void OnMainToMain(Unit unit)
         {
+            RemovePetAndJingLing(unit);
+            
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(CommonHelp.MainCityID());
             unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
             unit.Stop(-2);
+            
+            CreateFightPetList(unit);
+            CreateJingLing(unit);
         }
 
         public static void OnTransfer(Scene scene, long userId)
