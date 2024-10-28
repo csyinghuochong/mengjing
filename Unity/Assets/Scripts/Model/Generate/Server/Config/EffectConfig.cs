@@ -79,6 +79,8 @@ namespace ET
 		public int SkillEffectLiveTime { get; set; }
 		/// <summary>是否面向施法者播放特效</summary>
 		public int PlayType { get; set; }
+		/// <summary>缩放</summary>
+		public double Scale { get; set; }
 
 	}
 }
