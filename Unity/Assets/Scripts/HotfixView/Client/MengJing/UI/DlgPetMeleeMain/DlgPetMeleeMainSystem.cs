@@ -26,6 +26,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(DlgPetMeleeMainViewComponent))]
     [FriendOf(typeof(Scroll_Item_PetMeleeItem))]
     [FriendOf(typeof(DlgPetMeleeMain))]
     public static class DlgPetMeleeMainSystem
@@ -33,12 +34,10 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetMeleeMain self)
         {
             self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
-            self.View.E_CancelButton.AddListener(self.OnCancel);
         }
 
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
         {
-            self.View.E_CancelButton.gameObject.SetActive(false);
             self.RefreshItems();
 
             self.StartTime = TimeInfo.Instance.ServerNow();
@@ -46,6 +45,7 @@ namespace ET.Client
             self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
             self.MoLi = 300; // 魔力 (暂时，之后根据公式读表)
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
+            self.View.E_IconImage.gameObject.SetActive(false);
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)
@@ -86,54 +86,6 @@ namespace ET.Client
             self.View.E_MoLiImgImage.fillAmount = self.MoLi * 1f / self.MaxMoLi;
 
             self.RefreshItemCD();
-
-            if (!self.IsPlace)
-            {
-                return;
-            }
-
-            if (InputHelper.Check_GetMouseButtonDown0())
-            {
-                if (GameObject.Find("Global").GetComponent<Init>().EditorMode)
-                {
-                    if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                    {
-                        return;
-                    }
-                }
-
-                if (self.IsPointerOverGameObject(Input.mousePosition))
-                {
-                    return;
-                }
-
-                RaycastHit raycastHit;
-                Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-                bool hit = Physics.Raycast(Ray, out raycastHit, 100, 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
-                if (!hit)
-                {
-                    return;
-                }
-
-                if (raycastHit.collider == null || raycastHit.collider.gameObject == null ||
-                    !raycastHit.collider.gameObject.name.StartsWith("Position"))
-                {
-                    return;
-                }
-
-                self.IsPlace = false;
-                self.View.E_CancelButton.gameObject.SetActive(false);
-                Vector3 pos = raycastHit.collider.gameObject.transform.position;
-                pos.y += raycastHit.collider.gameObject.GetComponent<BoxCollider>().size.y * 0.5f;
-                self.PetMeleePlaceRequest(pos).Coroutine();
-            }
         }
 
         private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 pos)
@@ -224,29 +176,96 @@ namespace ET.Client
             }
         }
 
+        private static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
+        {
+            self.CanPlace = true;
+
+            if (item.EndTime > TimeHelper.ServerNow())
+            {
+                FlyTipComponent.Instance.ShowFlyTip("冷却中。。。");
+                self.CanPlace = false;
+                return;
+            }
+
+            if (self.MoLi < item.CostMoLi)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("魔力不足");
+                self.CanPlace = false;
+                return;
+            }
+
+            self.CostMoLi = item.CostMoLi;
+            self.PetId = item.RolePetInfo.Id;
+            self.View.E_IconImage.sprite = item.E_IconImage.sprite;
+            self.View.E_IconImage.gameObject.SetActive(true);
+        }
+
+        private static void Drag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
+        {
+            if (self.CanPlace == false)
+            {
+                return;
+            }
+
+            Vector2 localPoint = new Vector2();
+            RectTransform canvas = self.View.uiTransform.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            self.View.E_IconImage.transform.localPosition = localPoint;
+        }
+
+        private static void EndDrag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
+        {
+            if (self.CanPlace == false)
+            {
+                return;
+            }
+
+            self.View.E_IconImage.gameObject.SetActive(false);
+
+            if (GameObject.Find("Global").GetComponent<Init>().EditorMode)
+            {
+                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    return;
+                }
+            }
+
+            if (self.IsPointerOverGameObject(Input.mousePosition))
+            {
+                return;
+            }
+
+            RaycastHit raycastHit;
+            Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out raycastHit, 100, 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
+            if (!hit)
+            {
+                return;
+            }
+
+            Vector3 pos = raycastHit.point;
+            pos.y += 1f;
+            self.PetMeleePlaceRequest(pos).Coroutine();
+        }
+
         private static void OnPetMeleeItemsRefresh(this DlgPetMeleeMain self, Transform transform, int index)
         {
             Scroll_Item_PetMeleeItem scrollItemPetMeleeItem = self.ScrollItemPetMeleeItems[index].BindTrans(transform);
             scrollItemPetMeleeItem.Refresh(self.ShowRolePetInfos[index]);
-        }
-
-        public static void OnClickItem(this DlgPetMeleeMain self, int costMoLi, long petId)
-        {
-            if (self.MoLi < costMoLi)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("魔力不足");
-                return;
-            }
-
-            self.CostMoLi = costMoLi;
-            self.PetId = petId;
-            self.IsPlace = true;
-            self.View.E_CancelButton.gameObject.SetActive(true);
-        }
-
-        private static void OnCancel(this DlgPetMeleeMain self)
-        {
-            self.View.E_CancelButton.gameObject.SetActive(false);
+            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
+                (pdata) => { self.BeginDrag(pdata as PointerEventData, scrollItemPetMeleeItem); });
+            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
+                (pdata) => { self.Drag(pdata as PointerEventData, scrollItemPetMeleeItem); });
+            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
+                (pdata) => { self.EndDrag(pdata as PointerEventData, scrollItemPetMeleeItem); });
         }
     }
 }

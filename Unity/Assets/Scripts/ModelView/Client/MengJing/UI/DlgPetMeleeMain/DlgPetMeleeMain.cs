@@ -10,7 +10,7 @@ namespace ET.Client
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
         public List<RolePetInfo> ShowRolePetInfos = new();
         public long PetId;
-        public bool IsPlace;
+        public bool CanPlace;
         public long StartTime;
         public long ReadyTime;
         public int MaxMoLi;

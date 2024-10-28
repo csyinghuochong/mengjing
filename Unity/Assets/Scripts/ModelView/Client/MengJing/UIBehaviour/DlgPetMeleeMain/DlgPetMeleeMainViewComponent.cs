@@ -109,7 +109,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_CancelButton
+		public UnityEngine.UI.Image E_IconImage
      	{
      		get
      		{
@@ -118,15 +118,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CancelButton == null )
+     			if( this.m_E_IconImage == null )
      			{
-		    		this.m_E_CancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Cancel");
+		    		this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
      			}
-     			return this.m_E_CancelButton;
+     			return this.m_E_IconImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CancelImage
+		public UnityEngine.EventSystems.EventTrigger E_IconEventTrigger
      	{
      		get
      		{
@@ -135,11 +135,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CancelImage == null )
+     			if( this.m_E_IconEventTrigger == null )
      			{
-		    		this.m_E_CancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Cancel");
+		    		this.m_E_IconEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Icon");
      			}
-     			return this.m_E_CancelImage;
+     			return this.m_E_IconEventTrigger;
      		}
      	}
 
@@ -151,8 +151,8 @@ namespace ET.Client
 			this.m_E_MoLiImgImage = null;
 			this.m_E_MoLiText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
-			this.m_E_CancelButton = null;
-			this.m_E_CancelImage = null;
+			this.m_E_IconImage = null;
+			this.m_E_IconEventTrigger = null;
 			this.uiTransform = null;
 		}
 
@@ -162,8 +162,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_MoLiImgImage = null;
 		private UnityEngine.UI.Text m_E_MoLiText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
-		private UnityEngine.UI.Button m_E_CancelButton = null;
-		private UnityEngine.UI.Image m_E_CancelImage = null;
+		private UnityEngine.UI.Image m_E_IconImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }
