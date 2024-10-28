@@ -14,10 +14,7 @@ namespace ET.Client
             self.View.E_Button_CreateButton.AddListener(() => { self.OnButton_Create(TeamFubenType.Normal).Coroutine(); });
             self.View.E_ShenYuanButtonButton.AddListener(() => { self.OnShenYuanMode(); });
             self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
-        }
-
-        public static void ShowWindow(this DlgTeamDungeonCreate self, Entity contextData = null)
-        {
+            
             self.View.EG_TeamdungeonItemRectTransform.gameObject.SetActive(false);
             List<SceneConfig> sceneConfig = SceneConfigCategory.Instance.GetAll().Values.ToList();
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
@@ -65,6 +62,10 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
             });
+        }
+
+        public static void ShowWindow(this DlgTeamDungeonCreate self, Entity contextData = null)
+        {
         }
 
         public static void OnClickButton(this DlgTeamDungeonCreate self, Transform transform)

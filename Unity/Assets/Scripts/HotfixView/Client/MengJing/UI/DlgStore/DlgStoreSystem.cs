@@ -9,12 +9,13 @@ namespace ET.Client
         {
             self.View.E_closeButtonButton.AddListener(self.OncloseButtonButton);
             self.View.E_StoreItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnStoreItemsRefresh);
+            
+            self.InitModelShowView();
+            self.InitData(self.Root().GetComponent<UIComponent>().CurrentNpcId);
         }
 
         public static void ShowWindow(this DlgStore self, Entity contextData = null)
         {
-            self.InitModelShowView();
-            self.InitData(self.Root().GetComponent<UIComponent>().CurrentNpcId);
         }
 
         private static void InitModelShowView(this DlgStore self)

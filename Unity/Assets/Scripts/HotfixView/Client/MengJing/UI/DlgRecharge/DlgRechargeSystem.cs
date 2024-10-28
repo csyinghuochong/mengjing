@@ -27,10 +27,7 @@ namespace ET.Client
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
 
             self.View.E_RechargeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRechargeItemsRefresh);
-        }
-
-        public static void ShowWindow(this DlgRecharge self, Entity contextData = null)
-        {
+            
             self.View.EG_LoadingRectTransform.gameObject.SetActive(false);
             self.PayType = PayTypeEnum.AliPay;
 
@@ -50,6 +47,10 @@ namespace ET.Client
                 self.View.E_ButtonAliPayButton.gameObject.SetActive(false);
                 self.View.E_ButtonWeiXinButton.gameObject.SetActive(false);
 #endif
+        }
+
+        public static void ShowWindow(this DlgRecharge self, Entity contextData = null)
+        {
         }
 
         private static void OnRechargeItemsRefresh(this DlgRecharge self, Transform transform, int index)

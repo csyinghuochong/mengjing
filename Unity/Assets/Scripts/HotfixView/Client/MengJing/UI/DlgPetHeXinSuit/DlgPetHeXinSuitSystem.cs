@@ -11,12 +11,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetHeXinSuit self)
         {
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            
+            self.View.E_UIPetHeXinSuitItemImage.gameObject.SetActive(false);
+            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetHeXinSuit); });
         }
 
         public static void ShowWindow(this DlgPetHeXinSuit self, Entity contextData = null)
         {
-            self.View.E_UIPetHeXinSuitItemImage.gameObject.SetActive(false);
-            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetHeXinSuit); });
         }
 
         public static void UpdateInfo(this DlgPetHeXinSuit self, int id)

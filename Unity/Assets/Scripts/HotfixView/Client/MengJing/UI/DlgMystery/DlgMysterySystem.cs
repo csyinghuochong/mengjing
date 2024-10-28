@@ -9,12 +9,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMystery self)
         {
             self.View.E_MysteryItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMysteryItemsRefresh);
+            
+            self.InitModelShowView();
+            self.RequestMystery().Coroutine();
         }
 
         public static void ShowWindow(this DlgMystery self, Entity contextData = null)
         {
-            self.InitModelShowView();
-            self.RequestMystery().Coroutine();
         }
 
         private static void OnMysteryItemsRefresh(this DlgMystery self, Transform transform, int index)

@@ -12,16 +12,16 @@ namespace ET.Client
         {
             self.View.E_CloseBtnButton.AddListenerAsync(self.OnCloseBtnButton);
             self.View.E_ResetBtnButton.AddListener(self.OnResetBtnButton);
+            
+            self.View.E_Img_MaskImage.gameObject.SetActive(false);
+            self.View.EG_SkillIconItemRectTransform.gameObject.SetActive(false);
+            self.Init();
+            self.UpdataSkillLeft();
+            self.UpdataSkillSetRight();
         }
 
         public static void ShowWindow(this DlgSettingSkill self, Entity contextData = null)
         {
-            self.View.E_Img_MaskImage.gameObject.SetActive(false);
-            self.View.EG_SkillIconItemRectTransform.gameObject.SetActive(false);
-
-            self.Init();
-            self.UpdataSkillLeft();
-            self.UpdataSkillSetRight();
         }
 
         public static void Init(this DlgSettingSkill self)

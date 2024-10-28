@@ -16,13 +16,14 @@ namespace ET.Client
             self.View.E_ButtonLearnButton.AddListenerAsync(self.OnButtonLearnButton);
             self.View.E_MakeLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeLearnItemsRefresh);
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
+            
+            self.MakeId = 0;
+            self.MakeType = 1;
+            self.OnBtn_Plan(1);
         }
 
         public static void ShowWindow(this DlgMakeLearn self, Entity contextData = null)
         {
-            self.MakeId = 0;
-            self.MakeType = 1;
-            self.OnBtn_Plan(1);
         }
 
         private static void OnMakeLearnItemsRefresh(this DlgMakeLearn self, Transform transform, int index)

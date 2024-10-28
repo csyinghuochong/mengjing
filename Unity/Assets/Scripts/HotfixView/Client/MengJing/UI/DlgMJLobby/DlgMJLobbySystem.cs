@@ -14,11 +14,12 @@ namespace ET.Client
             self.View.E_PrevButton.AddListener(self.OnPrevButton);
             self.View.E_NextButton.AddListener(self.OnNextButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
+            
+            self.Refresh();
         }
 
         public static void ShowWindow(this DlgMJLobby self, Entity contextData = null)
         {
-            self.Refresh();
         }
 
         private static void OnCreateRoleItemsRefresh(this DlgMJLobby self, Transform transform, int index)

@@ -34,18 +34,18 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetMeleeMain self)
         {
             self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
-        }
 
-        public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
-        {
             self.RefreshItems();
-
             self.StartTime = TimeInfo.Instance.ServerNow();
             self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
             self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
             self.MoLi = 300; // 魔力 (暂时，之后根据公式读表)
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
             self.View.E_IconImage.gameObject.SetActive(false);
+        }
+
+        public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)

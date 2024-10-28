@@ -8,12 +8,11 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgSelectReward self)
         {
             self.View.E_SelectRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectRewardItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectReward); });
         }
 
         public static void ShowWindow(this DlgSelectReward self, Entity contextData = null)
         {
-            self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectReward); });
         }
 
         private static void OnSelectRewardItemsRefresh(this DlgSelectReward self, Transform transform, int index)
@@ -95,9 +94,6 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SelectReward);
-        }
-        public static void OnBtn_CloseButton(this DlgSelectReward self)
-        {
         }
     }
 }

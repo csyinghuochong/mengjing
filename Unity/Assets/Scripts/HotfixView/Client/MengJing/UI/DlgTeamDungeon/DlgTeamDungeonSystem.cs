@@ -32,14 +32,14 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn, self.CheckPageButton_1);
             self.View.E_FunctionSetBtnToggleGroup.SetClickEnabled(false);
+            
+            self.RequestTeamDungeonInfo().Coroutine();
+            //IOS适配
+            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(120f, 0));
         }
 
         public static void ShowWindow(this DlgTeamDungeon self, Entity contextData = null)
         {
-            self.RequestTeamDungeonInfo().Coroutine();
-
-            //IOS适配
-            IPHoneHelper.SetPosition(self.View.E_FunctionSetBtnToggleGroup.gameObject, new Vector2(120f, 0));
         }
 
         private static void OnFunctionSetBtn(this DlgTeamDungeon self, int index)

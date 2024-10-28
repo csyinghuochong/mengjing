@@ -22,11 +22,12 @@ namespace ET.Client
             self.View.E_Button_ZhiYeSelect_1Button.AddListener(self.OnButton_ZhiYeSelect_1Button);
             self.View.E_Button_ZhiYeSelect_2Button.AddListener(self.OnButton_ZhiYeSelect_2Button);
             self.View.E_Button_ZhiYeSelect_3Button.AddListener(self.OnButton_ZhiYeSelect_3Button);
+            
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgOccTwo self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         public static void OnButtonOccTwoButton(this DlgOccTwo self)

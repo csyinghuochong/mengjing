@@ -29,12 +29,13 @@ namespace ET.Client
             self.View.E_ButtonDigButton.AddListenerAsync(self.OnButtonDig);
             self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu); });
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            
+            self.InitItemlist();
+            self.UpdateItemList();
         }
 
         public static void ShowWindow(this DlgZhuaPu self, Entity contextData = null)
         {
-            self.InitItemlist();
-            self.UpdateItemList();
         }
 
         private static void OnBagItemsRefresh(this DlgZhuaPu self, Transform transform, int index)

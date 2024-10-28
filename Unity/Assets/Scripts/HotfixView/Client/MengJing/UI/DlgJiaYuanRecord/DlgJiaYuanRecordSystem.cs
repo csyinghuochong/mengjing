@@ -9,12 +9,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgJiaYuanRecord self)
         {
             self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
+            
+            self.View.EG_UIJiaYuanRecordItemRectTransform.gameObject.SetActive(false);
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgJiaYuanRecord self, Entity contextData = null)
         {
-            self.View.EG_UIJiaYuanRecordItemRectTransform.gameObject.SetActive(false);
-            self.OnInitUI().Coroutine();
         }
 
         public static void OnImageCloseButton(this DlgJiaYuanRecord self)

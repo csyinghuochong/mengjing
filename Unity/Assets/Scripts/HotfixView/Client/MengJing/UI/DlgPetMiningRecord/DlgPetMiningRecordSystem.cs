@@ -9,13 +9,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetMiningRecord self)
         {
             self.View.E_ImageCloseButton.AddListener(self.OnImageCloseButton);
+            
+            self.View.EG_UIPetMiningRecordItemRectTransform.gameObject.SetActive(false);
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgPetMiningRecord self, Entity contextData = null)
         {
-            self.View.EG_UIPetMiningRecordItemRectTransform.gameObject.SetActive(false);
-
-            self.OnInitUI().Coroutine();
         }
 
         public static void OnImageCloseButton(this DlgPetMiningRecord self)

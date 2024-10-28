@@ -31,13 +31,14 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgShenQiMake self)
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
+            
+            self.OnInitUI();
+            int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;
+            self.InitMakeList(showValue).Coroutine();
         }
 
         public static void ShowWindow(this DlgShenQiMake self, Entity contextData = null)
         {
-            self.OnInitUI();
-            int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;
-            self.InitMakeList(showValue).Coroutine();
         }
 
         public static void BeforeUnload(this DlgShenQiMake self)

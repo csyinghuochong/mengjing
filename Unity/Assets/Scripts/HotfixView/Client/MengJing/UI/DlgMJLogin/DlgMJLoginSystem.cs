@@ -14,10 +14,7 @@ namespace ET.Client
             self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
             self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
             self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
-        }
-
-        public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
-        {
+            
             Application.targetFrameRate = 60;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
 
@@ -36,6 +33,10 @@ namespace ET.Client
             //     PlayerPrefsHelp.SetString("UIYinSi0627", "1");
             // }
             //self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+        }
+
+        public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
+        {
         }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)

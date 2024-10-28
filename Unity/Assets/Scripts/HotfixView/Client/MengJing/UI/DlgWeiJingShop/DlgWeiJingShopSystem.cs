@@ -15,15 +15,15 @@ namespace ET.Client
             self.View.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnBtn_BuyNum_jia(1); });
             self.View.E_Btn_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_WeiJingShop); });
             self.View.E_WeiJingShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnWeiJingShopItemsRefresh);
+            
+            self.OnUpdateUI();
+            self.OnInitUI();
+            //默认购买数量为1
+            self.View.E_Lab_RmbNumInputField.text = "1";
         }
 
         public static void ShowWindow(this DlgWeiJingShop self, Entity contextData = null)
         {
-            self.OnUpdateUI();
-            self.OnInitUI();
-
-            //默认购买数量为1
-            self.View.E_Lab_RmbNumInputField.text = "1";
         }
 
         private static void OnWeiJingShopItemsRefresh(this DlgWeiJingShop self, Transform transform, int index)

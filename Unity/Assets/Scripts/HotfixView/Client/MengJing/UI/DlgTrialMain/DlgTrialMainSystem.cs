@@ -27,12 +27,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTrialMain self)
         {
             self.View.E_ButtonTiaozhanButton.AddListener(self.OnButtonTiaozhan);
+            
+            self.OnUpdateHurt(0);
+            self.BeginTimer();
         }
 
         public static void ShowWindow(this DlgTrialMain self, Entity contextData = null)
         {
-            self.OnUpdateHurt(0);
-            self.BeginTimer();
         }
 
         public static void BeforeUnload(this DlgTrialMain self)

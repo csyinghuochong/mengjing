@@ -6,11 +6,12 @@
         public static void RegisterUIEvent(this DlgTowerOfSealMain self)
         {
             self.View.E_StartBtnButton.AddListener(self.OnStartBtn);
+            
+            self.UpdateInfo();
         }
 
         public static void ShowWindow(this DlgTowerOfSealMain self, Entity contextData = null)
         {
-            self.UpdateInfo();
         }
 
         public static void UpdateInfo(this DlgTowerOfSealMain self)

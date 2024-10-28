@@ -11,16 +11,16 @@
         public static void RegisterUIEvent(this DlgWelfare self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-        }
-
-        public static void ShowWindow(this DlgWelfare self, Entity contextData = null)
-        {
+            
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.WelfareLogin, self.Reddot_WelfareLogin);
             redPointComponent.RegisterReddot(ReddotType.WelfareTask, self.Reddot_WelfareTask);
             redPointComponent.RegisterReddot(ReddotType.WelfareDraw, self.Reddot_WelfareDraw);
+        }
+
+        public static void ShowWindow(this DlgWelfare self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgWelfare self)

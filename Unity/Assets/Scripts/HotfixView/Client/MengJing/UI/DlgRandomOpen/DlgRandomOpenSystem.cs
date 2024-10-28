@@ -7,11 +7,11 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgRandomOpen self)
         {
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgRandomOpen self, Entity contextData = null)
         {
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgRandomOpen self)

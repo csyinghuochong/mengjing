@@ -14,16 +14,16 @@ namespace ET.Client
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
             self.View.E_ButtonDiButton.AddListener(self.OnButtonClose);
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-        }
-
-        public static void ShowWindow(this DlgTreasureOpen self, Entity contextData = null)
-        {
+            
             self.OnStopTurn = false;
             self.TargetIndex = 0;
             self.CurrentIndex = 0;
             self.Interval = 100;
-
             self.View.E_ImageSelectImage.gameObject.SetActive(false);
+        }
+
+        public static void ShowWindow(this DlgTreasureOpen self, Entity contextData = null)
+        {
         }
 
         public static void OnButtonClose(this DlgTreasureOpen self)

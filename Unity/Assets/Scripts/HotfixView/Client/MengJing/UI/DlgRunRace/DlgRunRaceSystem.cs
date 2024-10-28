@@ -10,11 +10,12 @@ namespace ET.Client
             self.View.E_EnterBtnButton.AddListenerAsync(self.OnEnterBtnButton);
 
             self.View.E_RunRaceItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRunRaceItemsRefresh);
+            
+            self.ShowHuntRewards();
         }
 
         public static void ShowWindow(this DlgRunRace self, Entity contextData = null)
         {
-            self.ShowHuntRewards();
         }
 
         private static void OnRunRaceItemsRefresh(this DlgRunRace self, Transform transform, int index)

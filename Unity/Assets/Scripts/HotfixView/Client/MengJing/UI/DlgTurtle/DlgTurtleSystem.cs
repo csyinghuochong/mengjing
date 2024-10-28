@@ -11,16 +11,16 @@ namespace ET.Client
             self.View.E_Btn1Button.AddListener(() => self.OnTurtleBtn(20099011).Coroutine());
             self.View.E_Btn2Button.AddListener(() => self.OnTurtleBtn(20099012).Coroutine());
             self.View.E_Btn3Button.AddListener(() => self.OnTurtleBtn(20099013).Coroutine());
-        }
-
-        public static void ShowWindow(this DlgTurtle self, Entity contextData = null)
-        {
+            
             self.EndTime = FunctionHelp.GetCloseTime(1057);
-
             self.InitModel();
             self.InitInfo().Coroutine();
             self.ShowTime().Coroutine();
             self.ShowRewards();
+        }
+
+        public static void ShowWindow(this DlgTurtle self, Entity contextData = null)
+        {
         }
 
         public static void InitModel(this DlgTurtle self)

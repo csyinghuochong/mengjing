@@ -40,10 +40,7 @@ namespace ET.Client
                 (pdata) => { self.Draging(pdata as PointerEventData); });
             self.View.E_PetFubenFingerEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
                 (pdata) => { self.EndDrag(pdata as PointerEventData); });
-        }
-
-        public static void ShowWindow(this DlgPetMain self, Entity contextData = null)
-        {
+            
             self.View.E_PetFubenFingerImage.color = new(255, 255, 255, 0);
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
@@ -60,6 +57,10 @@ namespace ET.Client
             self.M2C_FubenSettlement = null;
             self.InitHpList();
             self.OnPlayAnimation().Coroutine();
+        }
+
+        public static void ShowWindow(this DlgPetMain self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgPetMain self)

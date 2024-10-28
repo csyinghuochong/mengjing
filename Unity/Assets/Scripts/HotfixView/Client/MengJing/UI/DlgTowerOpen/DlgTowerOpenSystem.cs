@@ -27,14 +27,14 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgTowerOpen self)
         {
-        }
-
-        public static void ShowWindow(this DlgTowerOpen self, Entity contextData = null)
-        {
             self.PassTime = 0f;
             self.M2C_FubenSettlement = null;
 
             ActivityNetHelper.TowerFightBeginRequest(self.Root()).Coroutine();
+        }
+
+        public static void ShowWindow(this DlgTowerOpen self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgTowerOpen self)

@@ -34,10 +34,7 @@ namespace ET.Client
             });
             self.View.E_Btn_BuyNum_jian1Button.AddListener(() => { self.Btn_BuyNum_jia(-1); });
             self.View.E_Btn_BuyNum_jia1Button.AddListener(() => { self.Btn_BuyNum_jia(1); });
-        }
-
-        public static void ShowWindow(this DlgPaiMaiAuction self, Entity contextData = null)
-        {
+            
             self.RequestPaiMaiAuction().Coroutine();
 
             long serverTime = TimeHelper.ServerNow();
@@ -56,6 +53,10 @@ namespace ET.Client
             {
                 self.View.E_Text_2Text.text = "已结束";
             }
+        }
+
+        public static void ShowWindow(this DlgPaiMaiAuction self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgPaiMaiAuction self)

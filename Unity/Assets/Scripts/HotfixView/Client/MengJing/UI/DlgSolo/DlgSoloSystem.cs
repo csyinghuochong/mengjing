@@ -10,12 +10,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgSolo self)
         {
             self.View.E_ButtonMatchButton.AddListenerAsync(self.OnButtonMatchButton);
+            
+            self.View.EG_UISoloResultShowRectTransform.gameObject.SetActive(false);
+            self.Init();
         }
 
         public static void ShowWindow(this DlgSolo self, Entity contextData = null)
         {
-            self.View.EG_UISoloResultShowRectTransform.gameObject.SetActive(false);
-            self.Init();
         }
 
         public static void Init(this DlgSolo self)

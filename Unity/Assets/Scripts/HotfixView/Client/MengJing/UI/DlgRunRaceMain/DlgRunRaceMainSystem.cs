@@ -64,13 +64,14 @@ namespace ET.Client
             uiSkillGridComponent_2.uiTransform.gameObject.SetActive(false);
             uiSkillGridComponent_2.Index = 1;
             self.UISkillGrids.Add(uiSkillGridComponent_2);
+            
+            self.OnInitUI();
+            self.UpdateRanking().Coroutine();
+            self.ShoweEndTime().Coroutine();
         }
 
         public static void ShowWindow(this DlgRunRaceMain self, Entity contextData = null)
         {
-            self.OnInitUI();
-            self.UpdateRanking().Coroutine();
-            self.ShoweEndTime().Coroutine();
         }
 
         public static void OnUseSkill(this DlgRunRaceMain self, int index)

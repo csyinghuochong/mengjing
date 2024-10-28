@@ -9,11 +9,12 @@ namespace ET.Client
         {
             self.View.E_Img_ButtonButton.AddListener(self.OnImg_ButtonButton);
             self.View.E_TeamApplyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamApplyItemsRefresh);
+            
+            self.OnUpdateUI();
         }
 
         public static void ShowWindow(this DlgTeamApplyList self, Entity contextData = null)
         {
-            self.OnUpdateUI();
         }
 
         public static void OnImg_ButtonButton(this DlgTeamApplyList self)

@@ -11,10 +11,7 @@ namespace ET.Client
             self.View.E_Btn_UpLvButton.AddListenerAsync(self.OnBtn_UpLvButton);
             self.View.E_Btn_ExchangeExpButton.AddListenerAsync(self.OnBtn_ExchangeExpButton);
             self.View.E_Btn_ExchangeZiJinButton.AddListenerAsync(self.OnBtn_ExchangeZiJinButton);
-        }
-
-        public static void ShowWindow(this DlgJiaYuanUpLv self, Entity contextData = null)
-        {
+            
             //放止图标丢失
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, "444");
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -22,6 +19,10 @@ namespace ET.Client
             self.View.E_ImgGengDiIconImage.sprite = sp;
 
             self.OnUpdateUI();
+        }
+
+        public static void ShowWindow(this DlgJiaYuanUpLv self, Entity contextData = null)
+        {
         }
 
         public static async ETTask OnBtn_UpLvButton(this DlgJiaYuanUpLv self)

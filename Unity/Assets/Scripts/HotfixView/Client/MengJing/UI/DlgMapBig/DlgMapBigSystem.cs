@@ -38,10 +38,7 @@ namespace ET.Client
             self.View.E_RawImageEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
             self.View.E_MapBigNpcItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMapBigNpcItemsRefresh);
             self.View.E_RawImageButton.AddListener(self.OnRawImageButton);
-        }
-
-        public static void ShowWindow(this DlgMapBig self, Entity contextData = null)
-        {
+            
             self.View.E_TextStallText.gameObject.SetActive(false);
             self.View.EG_chuansongRectTransform.gameObject.SetActive(false);
             self.View.EG_bossIconRectTransform.gameObject.SetActive(false);
@@ -56,6 +53,10 @@ namespace ET.Client
 
             self.OnAwake().Coroutine();
             self.InitNpcList();
+        }
+
+        public static void ShowWindow(this DlgMapBig self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgMapBig self)

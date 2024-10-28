@@ -15,10 +15,7 @@ namespace ET.Client
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
             self.View.E_FenjieBtnButton.AddListener(self.OnFenjieBtnButton);
             self.View.E_TakeOutBagBtnButton.AddListener(self.OnTakeOutBagBtnButton);
-        }
-
-        public static void ShowWindow(this DlgRolePetBag self, Entity contextData = null)
-        {
+            
             self.PetZiZhiItemList[0] = self.View.EG_PetZiZhiItem1RectTransform.gameObject;
             self.PetZiZhiItemList[1] = self.View.EG_PetZiZhiItem2RectTransform.gameObject;
             self.PetZiZhiItemList[2] = self.View.EG_PetZiZhiItem3RectTransform.gameObject;
@@ -36,6 +33,10 @@ namespace ET.Client
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
 
             self.OnUpdatePetList();
+        }
+
+        public static void ShowWindow(this DlgRolePetBag self, Entity contextData = null)
+        {
         }
 
         private static void OnCommonSkillItemsRefresh(this DlgRolePetBag self, Transform transform, int index)

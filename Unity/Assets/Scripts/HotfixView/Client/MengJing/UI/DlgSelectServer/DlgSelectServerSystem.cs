@@ -12,11 +12,12 @@ namespace ET.Client
             self.View.E_SelectServerItem2LoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectServerItems2Refresh);
 
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
+            
+            self.OnUpdateServerList();
         }
 
         public static void ShowWindow(this DlgSelectServer self, Entity contextData = null)
         {
-            self.OnUpdateServerList();
         }
 
         private static void OnSelectServerItems1Refresh(this DlgSelectServer self, Transform transform, int index)

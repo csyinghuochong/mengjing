@@ -9,11 +9,12 @@ namespace ET.Client
         {
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
             self.View.E_ImgCloseButton.AddListener(self.OnButtonClose);
+            
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgWearWeapon self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         public static void OnButtonClose(this DlgWearWeapon self)

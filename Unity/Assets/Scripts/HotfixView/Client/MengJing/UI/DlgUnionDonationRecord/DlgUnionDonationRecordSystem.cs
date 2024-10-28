@@ -17,11 +17,12 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_UnionDonationRecord);
             });
+            
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgUnionDonationRecord self, Entity contextData = null)
         {
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgUnionDonationRecord self)

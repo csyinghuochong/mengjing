@@ -13,11 +13,12 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningReward);
             });
             self.View.E_PetMiningRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetMiningRewardItemsRefresh);
+            
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgPetMiningReward self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         private static void OnPetMiningRewardItemsRefresh(this DlgPetMiningReward self, Transform transform, int index)

@@ -15,10 +15,7 @@ namespace ET.Client
         {
             self.View.E_PetFormationItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetFormationItemsRefresh);
             self.View.E_ButtonCloseButton.AddListenerAsync(self.OnButtonCloseButton);
-        }
-
-        public static void ShowWindow(this DlgPetMiningTeam self, Entity contextData = null)
-        {
+            
             for (int i = 0; i < 3; i++)
             {
                 GameObject gameObject = self.View.EG_TeamListNodeRectTransform.GetChild(i).gameObject;
@@ -40,6 +37,10 @@ namespace ET.Client
 
             self.OnUpdatePetList();
             self.UpdateTeamList();
+        }
+
+        public static void ShowWindow(this DlgPetMiningTeam self, Entity contextData = null)
+        {
         }
 
         private static void OnPetFormationItemsRefresh(this DlgPetMiningTeam self, Transform transform, int index)

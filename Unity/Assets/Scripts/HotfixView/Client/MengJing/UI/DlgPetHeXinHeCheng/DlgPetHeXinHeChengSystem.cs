@@ -15,10 +15,7 @@ namespace ET.Client
         {
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
             self.View.E_Button_OneKeyButton.AddListener(self.OnButton_OneKeyButton);
-        }
-
-        public static void ShowWindow(this DlgPetHeXinHeCheng self, Entity contextData = null)
-        {
+            
             self.View.E_ImagePetHexinItemIconImage.gameObject.SetActive(false);
 
             self.View.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
@@ -30,6 +27,10 @@ namespace ET.Client
             self.View.E_Button_OneKeyButton.AddListenerAsync(self.Button_OneKey);
 
             self.OnUpdateItemList();
+        }
+
+        public static void ShowWindow(this DlgPetHeXinHeCheng self, Entity contextData = null)
+        {
         }
 
         public static async ETTask Button_OneKey(this DlgPetHeXinHeCheng self)

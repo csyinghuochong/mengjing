@@ -19,10 +19,7 @@
         public static void RegisterUIEvent(this DlgUnionMystery self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-        }
-
-        public static void ShowWindow(this DlgUnionMystery self, Entity contextData = null)
-        {
+            
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
 
             self.View.ES_ModelShow.Camera.localPosition = new(0f, 115, 257f);
@@ -31,6 +28,10 @@
             {
                 self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
             }
+        }
+
+        public static void ShowWindow(this DlgUnionMystery self, Entity contextData = null)
+        {
         }
 
         private static void OnFunctionSetBtn(this DlgUnionMystery self, int index)

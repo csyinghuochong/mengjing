@@ -8,14 +8,14 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetSet self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.PetMine, self.Reddot_PetMine);
         }
 
         public static void ShowWindow(this DlgPetSet self, Entity contextData = null)
         {
-            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-
-            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.RegisterReddot(ReddotType.PetMine, self.Reddot_PetMine);
         }
 
         public static void BeforeUnload(this DlgPetSet self)

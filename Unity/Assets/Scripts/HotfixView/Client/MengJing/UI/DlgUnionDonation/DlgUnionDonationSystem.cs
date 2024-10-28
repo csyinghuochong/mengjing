@@ -8,11 +8,12 @@
             self.View.E_Button_DiamondDonationButton.AddListenerAsync(self.OnButton_DiamondDonation);
             self.View.E_Button_DonationButton.AddListenerAsync(self.OnButton_Donation);
             self.View.E_Button_RecordButton.AddListener(self.OnButton_Record);
+            
+            self.OnUpdateUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgUnionDonation self, Entity contextData = null)
         {
-            self.OnUpdateUI().Coroutine();
         }
 
         public static async ETTask OnUpdateUI(this DlgUnionDonation self)

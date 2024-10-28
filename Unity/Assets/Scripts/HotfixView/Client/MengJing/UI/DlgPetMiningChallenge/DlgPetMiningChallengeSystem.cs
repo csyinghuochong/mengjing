@@ -37,12 +37,8 @@ namespace ET.Client
             GameObject gameObject_4 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_4").gameObject;
             gameObject_4.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(4).Coroutine(); });
             self.PetIconList.Add(gameObject_4.GetComponent<Image>());
-        }
-
-        public static void ShowWindow(this DlgPetMiningChallenge self, Entity contextData = null)
-        {
+            
             self.TeamId = -1;
-
             ES_PetMining esPetMining = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSet>().View.ES_PetMining;
             List<int> defendteamids = esPetMining.GetSelfPetMingTeam();
             for (int i = 0; i < 3; i++)
@@ -55,6 +51,10 @@ namespace ET.Client
                 uIPetMining.OnUpdateUI(defendteamids.Contains(i));
                 self.ChallengeTeamList.Add(uIPetMining);
             }
+        }
+
+        public static void ShowWindow(this DlgPetMiningChallenge self, Entity contextData = null)
+        {
         }
 
         public static void OnButtonResetButton(this DlgPetMiningChallenge self)

@@ -31,18 +31,17 @@ namespace ET.Client
         {
             self.View.E_PetQuickFightItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetQuickFightItemsRefresh);
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
-        }
-
-        public static void ShowWindow(this DlgPetQuickFight self, Entity contextData = null)
-        {
+            
             self.View.E_ImageButtonButton.AddListener(() =>
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
             });
-
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.PetQuickFightTimer, self);
-
             self.OnInitUI();
+        }
+
+        public static void ShowWindow(this DlgPetQuickFight self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgPetQuickFight self)

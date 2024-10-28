@@ -26,13 +26,14 @@ namespace ET.Client
 
             self.View.E_ButtonLeaveButton.AddListener(() => { self.On_ButtonLeave(); });
             self.View.E_ButtonApplyListButton.AddListener(() => { self.On_ButtonApplyList(); });
+            
+            self.OnUpdateUI();
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.TeamApply, self.Reddot_TeamApply);
         }
 
         public static void ShowWindow(this DlgTeam self, Entity contextData = null)
         {
-            self.OnUpdateUI();
-            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.RegisterReddot(ReddotType.TeamApply, self.Reddot_TeamApply);
         }
 
         public static void BeforeUnload(this DlgTeam self)

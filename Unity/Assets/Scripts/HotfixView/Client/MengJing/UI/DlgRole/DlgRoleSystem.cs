@@ -68,10 +68,7 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_ZodiacButton.AddListenerAsync(self.OnZodiacButton);
-        }
-
-        public static void ShowWindow(this DlgRole self, Entity contextData = null)
-        {
+            
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
             
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
@@ -79,6 +76,10 @@ namespace ET.Client
             
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.RolePoint);
+        }
+
+        public static void ShowWindow(this DlgRole self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgRole self)

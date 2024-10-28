@@ -7,11 +7,12 @@
         {
             self.View.E_ButtonDiHuanButton.AddListener(self.OnButtonDiHuan);
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgWorldLv self, Entity contextData = null)
         {
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgWorldLv self)

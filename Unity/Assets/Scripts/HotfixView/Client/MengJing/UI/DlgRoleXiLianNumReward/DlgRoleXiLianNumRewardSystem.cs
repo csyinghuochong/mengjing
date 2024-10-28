@@ -10,11 +10,12 @@ namespace ET.Client
         {
             self.View.E_RoleXiLianNumRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRoleXiLianNumRewardItemsRefresh);
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgRoleXiLianNumReward self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         private static void OnInitUI(this DlgRoleXiLianNumReward self)

@@ -18,13 +18,14 @@ namespace ET.Client
             });
 
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            
+            self.UpdateInfo();
+            self.UpdateItemList();
+            self.UpdateTime().Coroutine();
         }
 
         public static void ShowWindow(this DlgSeasonLordDetail self, Entity contextData = null)
         {
-            self.UpdateInfo();
-            self.UpdateItemList();
-            self.UpdateTime().Coroutine();
         }
 
         public static async ETTask OnUseItemBtnButton(this DlgSeasonLordDetail self)

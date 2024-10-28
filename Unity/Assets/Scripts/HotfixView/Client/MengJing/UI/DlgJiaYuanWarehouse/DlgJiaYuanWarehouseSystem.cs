@@ -21,10 +21,7 @@ namespace ET.Client
             self.View.E_OneKeyButton.AddListener(self.OnOneKeyButton);
             self.View.E_ButtonPackButton.AddListener(self.OnButtonPackButton);
             self.View.E_ButtonTakeOutAllButton.AddListener(self.OnButtonTakeOutAllButton);
-        }
-
-        public static void ShowWindow(this DlgJiaYuanWarehouse self, Entity contextData = null)
-        {
+            
             self.LockList.Add(self.View.E_Lock_1Image.gameObject);
             self.LockList.Add(self.View.E_Lock_2Image.gameObject);
             self.LockList.Add(self.View.E_Lock_3Image.gameObject);
@@ -45,6 +42,10 @@ namespace ET.Client
             self.RefreshBagItems();
             self.View.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.UpdateLockList(0);
+        }
+
+        public static void ShowWindow(this DlgJiaYuanWarehouse self, Entity contextData = null)
+        {
         }
 
         private static void OnItemTypeSet(this DlgJiaYuanWarehouse self, int index)

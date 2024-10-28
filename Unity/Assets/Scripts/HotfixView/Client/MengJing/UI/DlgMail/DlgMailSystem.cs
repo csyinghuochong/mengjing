@@ -23,11 +23,12 @@ namespace ET.Client
             self.View.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
             self.View.E_ButtonOneKeyButton.AddListenerAsync(self.OnButtonOneKeyButton);
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            
+            self.RequestMaiList();
         }
 
         public static void ShowWindow(this DlgMail self, Entity contextData = null)
         {
-            self.RequestMaiList();
         }
 
         public static void RequestMaiList(this DlgMail self)

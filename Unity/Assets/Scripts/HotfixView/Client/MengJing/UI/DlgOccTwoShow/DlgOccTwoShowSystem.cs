@@ -9,11 +9,11 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgOccTwoShow self)
         {
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgOccTwoShow self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         public static void OnBtn_CloseButton(this DlgOccTwoShow self)

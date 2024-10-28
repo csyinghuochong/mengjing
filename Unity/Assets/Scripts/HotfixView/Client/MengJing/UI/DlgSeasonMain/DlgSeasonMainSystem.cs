@@ -26,12 +26,12 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgSeasonMain self)
         {
+            self.CDTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.SeasonTowerTimer, self);
+            self.CDdownTimeNumber = 100;
         }
 
         public static void ShowWindow(this DlgSeasonMain self, Entity contextData = null)
         {
-            self.CDTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.SeasonTowerTimer, self);
-            self.CDdownTimeNumber = 100;
         }
 
         public static void BeforeUnload(this DlgSeasonMain self)

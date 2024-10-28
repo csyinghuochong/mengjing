@@ -11,11 +11,12 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanPlanWatch);
             });
+            
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgJiaYuanPlanWatch self, Entity contextData = null)
         {
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgJiaYuanPlanWatch self)
