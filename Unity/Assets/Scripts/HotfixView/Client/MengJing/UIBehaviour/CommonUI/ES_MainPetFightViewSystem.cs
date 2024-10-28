@@ -65,10 +65,14 @@ namespace ET.Client
         {
             if (self.Pet == null)
             {
-                
                 //弹出宠物出战界面。
                 
-                await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+                //选择出战或者休息， 把新的fightpets传给服务器。
+                //加入之前fightpets是{8， 3， 9}；
+                //      第二个格子选择新宠物4， 新的fightpets就是{8， 4， 9}.  
+                //      第二个格子选择新宠物8， 新的fightpets就是{0， 8， 9}.  
+                //      第二个格子对应的宠物3， 就显示休息按钮，点击休息fightpets就是{8， 0， 9}.  
+                //await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
                 
                 return;
             }
