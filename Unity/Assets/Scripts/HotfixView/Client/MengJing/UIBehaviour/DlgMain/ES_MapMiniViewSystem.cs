@@ -188,8 +188,6 @@ namespace ET.Client
                 }
                 
                 headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
-                
-                Log.Debug($"teamNumber:  {teamNumber}     showType:  {showType}   localPosition:{headItem.transform.localPosition}");
             }
 
             for (int i = teamNumber; i < self.AllPointList.Count; i++)
