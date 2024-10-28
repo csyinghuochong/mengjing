@@ -1349,21 +1349,13 @@ namespace ET.Client
                 return 0;
             }
 
-            List<DungeonConfig> dungeonConfigs = DungeonConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < dungeonConfigs.Count; i++)
+            foreach (var VARIABLE in ConfigData.FubenToNpcList)
             {
-                DungeonConfig dungeonConfig = dungeonConfigs[i];
-                if (dungeonConfig.NpcList == null)
+                if (VARIABLE.Value.Contains(npcId))
                 {
-                    continue;
-                }
-
-                if (dungeonConfig.NpcList.Contains(npcId))
-                {
-                    return dungeonConfig.Id;
+                    return VARIABLE.Key;
                 }
             }
-
             return 0;
         }
 

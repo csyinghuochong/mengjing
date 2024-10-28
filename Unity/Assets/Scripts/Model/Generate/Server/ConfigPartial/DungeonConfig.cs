@@ -7,7 +7,7 @@ namespace ET
     {
         public Dictionary<int, int> DungeonToChapter = new Dictionary<int, int>();
 
-        Dictionary<int, List<KeyValuePairInt>> AutoPathList = new Dictionary<int, List<KeyValuePairInt>>();
+        private Dictionary<int, List<KeyValuePairInt>> AutoPathList = new Dictionary<int, List<KeyValuePairInt>>();
 
         public override void EndInit()
         {
@@ -16,6 +16,16 @@ namespace ET
                 foreach (DungeonConfig functionConfig in this.GetAll().Values)
                 {
                     int dungeonid = functionConfig.Id;
+
+                    if (functionConfig.NpcList != null)
+                    {
+                        ConfigData.FubenToNpcList[dungeonid] =new List<int>(functionConfig.NpcList);
+                    }
+                    else
+                    {
+                        ConfigData.FubenToNpcList[dungeonid] = new List<int>();
+                    }
+
                     if (!string.IsNullOrEmpty(functionConfig.AutoPath))
                     {
                         string[] autoPathList = functionConfig.AutoPath.Split(';');

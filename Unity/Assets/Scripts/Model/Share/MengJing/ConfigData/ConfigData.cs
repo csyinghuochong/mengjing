@@ -21,6 +21,9 @@ namespace ET
         [StaticField]
         public static List<int> NOPassiveSkill = new List<int>() { };
         
+        [StaticField]
+        public static Dictionary<int, List<int>> FubenToNpcList = new  Dictionary<int, List<int>>() { };
+        
           //装备传承职业对应激活技能
        [StaticField]
           public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo = 
