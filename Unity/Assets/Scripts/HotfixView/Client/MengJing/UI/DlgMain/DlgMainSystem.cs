@@ -1776,7 +1776,6 @@ namespace ET.Client
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
-                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.Happy:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
