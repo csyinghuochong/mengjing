@@ -17,6 +17,7 @@ namespace ET
             if (oldScene == newScene
                         && oldScene != SceneTypeEnum.LocalDungeon
                         && oldScene != SceneTypeEnum.JiaYuan
+                        && oldScene != SceneTypeEnum.MainCityScene
                         && oldScene != SceneTypeEnum.PetDungeon
                         && oldScene != SceneTypeEnum.SeasonTower
                         && oldScene != SceneTypeEnum.CellDungeon)

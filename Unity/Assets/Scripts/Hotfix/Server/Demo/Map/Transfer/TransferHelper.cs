@@ -587,15 +587,30 @@ namespace ET.Server
         public static async ETTask MainCityTransfer(Unit unit)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
+            if (mapComponent.SceneType == SceneTypeEnum.MainCityScene)
+            {
+                OnMainToMain(unit);
+                return;
+            }
+            
+            
             unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;
             //传送回主场景
             ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
-            //动态删除副本
             long userId = unit.Id;
             Scene scene = unit.Scene();
             BeforeTransfer(unit);
             await Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
+            
+            //动态删除副本
             OnTransfer(scene, userId);
+        }
+
+        public static void OnMainToMain(Unit unit)
+        {
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(CommonHelp.MainCityID());
+            unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+            unit.Stop(-2);
         }
 
         public static void OnTransfer(Scene scene, long userId)

@@ -209,7 +209,17 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip("未开启");
                 return;
             }
-
+            
+            Log.Debug($"Enlarge:  {map}");
+            if (map == 0)  //返回天空之城
+            {
+                EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
+                
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+                return;
+            }
+            
             self.ChapterId = chapterId;
 
             self.EnableBtns(false);
