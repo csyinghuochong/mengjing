@@ -73,8 +73,6 @@ namespace ET.Client
 
                     break;
             }
-
-            self.Package.UnloadUnusedAssets();
         }
 
         public static void UnLoadAsset(this ResourcesLoaderComponent self, string location)
@@ -95,6 +93,8 @@ namespace ET.Client
             }
 
             self.Handlers.Clear();
+
+            self.Package.UnloadUnusedAssets();
         }
 
         public static void UnloadUnusedAssets(this ResourcesLoaderComponent self)
@@ -103,7 +103,7 @@ namespace ET.Client
             long now = TimeInfo.Instance.ServerNow();
             foreach (var kv in self.Handlers)
             {
-                if (now - kv.Value.lastUsedTime > self.UnUsedTime)
+                if (now >= kv.Value.destroyTime)
                 {
                     keysToRemove.Add(kv.Key);
                 }
@@ -118,125 +118,48 @@ namespace ET.Client
             {
                 self.UnLoadAsset(s);
             }
+
+            self.Package.UnloadUnusedAssets();
         }
 
-        public static T LoadAssetSync<T>(this ResourcesLoaderComponent self, string location) where T : UnityEngine.Object
+        public static T LoadAssetSync<T>(this ResourcesLoaderComponent self, string location, long liveTime = 30 * 1000) where T : UnityEngine.Object
         {
             OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long lastUsedTime) selfHandler))
+            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
             {
                 handler = self.Package.LoadAssetSync<T>(location);
 
-                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow()));
+                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow() + liveTime));
             }
             else
             {
-                selfHandler.lastUsedTime = TimeInfo.Instance.ServerNow();
+                selfHandler.destroyTime = TimeInfo.Instance.ServerNow() + liveTime;
                 handler = selfHandler.handler;
             }
 
             return (T)((AssetOperationHandle)handler).AssetObject;
         }
 
-        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location) where T : UnityEngine.Object
+        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location, long liveTime = 30 * 1000)
+                where T : UnityEngine.Object
         {
             using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
                     .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
 
             OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long lastUsedTime) selfHandler))
+            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
             {
                 handler = self.Package.LoadAssetAsync<T>(location);
                 await handler.Task;
-                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow()));
+                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow() + liveTime));
             }
             else
             {
-                selfHandler.lastUsedTime = TimeInfo.Instance.ServerNow();
+                selfHandler.destroyTime = TimeInfo.Instance.ServerNow() + liveTime;
                 handler = selfHandler.handler;
             }
 
             return (T)((AssetOperationHandle)handler).AssetObject;
-        }
-
-        public static async ETTask<Dictionary<string, T>> LoadAllAssetsAsync<T>(this ResourcesLoaderComponent self, string location)
-                where T : UnityEngine.Object
-        {
-            using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
-                    .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
-
-            OperationHandleBase handler;
-
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long lastUsedTime) selfHandler))
-            {
-                handler = self.Package.LoadAllAssetsAsync<T>(location);
-                await handler.Task;
-                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow()));
-            }
-            else
-            {
-                selfHandler.lastUsedTime = TimeInfo.Instance.ServerNow();
-                handler = selfHandler.handler;
-            }
-
-            Dictionary<string, T> dictionary = new Dictionary<string, T>();
-            foreach (UnityEngine.Object assetObj in ((AllAssetsOperationHandle)handler).AllAssetObjects)
-            {
-                T t = assetObj as T;
-                dictionary.Add(t.name, t);
-            }
-
-            return dictionary;
-        }
-
-        public static async ETTask<Dictionary<string, T>> LoadSubAssetsAsync<T>(this ResourcesLoaderComponent self, string location)
-                where T : UnityEngine.Object
-        {
-            OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long lastUsedTime) selfHandler))
-            {
-                handler = self.Package.LoadSubAssetsAsync<T>(location);
-                await handler.Task;
-                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow()));
-            }
-            else
-            {
-                selfHandler.lastUsedTime = TimeInfo.Instance.ServerNow();
-                handler = selfHandler.handler;
-            }
-
-            Dictionary<string, T> dictionary = new Dictionary<string, T>();
-            foreach (UnityEngine.Object assetObj in ((SubAssetsOperationHandle)handler).AllAssetObjects)
-            {
-                T t = assetObj as T;
-                dictionary.Add(t.name, t);
-            }
-
-            return dictionary;
-        }
-
-        public static Dictionary<string, T> LoadSubAssetsSync<T>(this ResourcesLoaderComponent self, string location) where T : UnityEngine.Object
-        {
-            OperationHandleBase handler;
-            if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long lastUsedTime) selfHandler))
-            {
-                handler = self.Package.LoadSubAssetsSync<T>(location);
-                self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow()));
-            }
-            else
-            {
-                selfHandler.lastUsedTime = TimeInfo.Instance.ServerNow();
-                handler = selfHandler.handler;
-            }
-
-            Dictionary<string, T> dictionary = new Dictionary<string, T>();
-            foreach (UnityEngine.Object assetObj in ((SubAssetsOperationHandle)handler).AllAssetObjects)
-            {
-                T t = assetObj as T;
-                dictionary.Add(t.name, t);
-            }
-
-            return dictionary;
         }
 
         public static async ETTask LoadSceneAsync(this ResourcesLoaderComponent self, string location, LoadSceneMode loadSceneMode)
@@ -269,9 +192,8 @@ namespace ET.Client
     public class ResourcesLoaderComponent : Entity, IAwake, IAwake<string>, IDestroy
     {
         public ResourcePackage Package;
-        public Dictionary<string, (OperationHandleBase handler, long lastUsedTime)> Handlers = new();
+        public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
         public long CheckTime = 10 * 1000; //检测间隔
-        public long UnUsedTime = 30 * 1000; //多久未使用删除
         public long Timer;
     }
 }
