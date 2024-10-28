@@ -10,12 +10,12 @@ namespace ET.Client
         {
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
+            self.View.EG_PropertyListSetRectTransform.gameObject.SetActive(false);
+            self.InitShowPropertyList();
         }
 
         public static void ShowWindow(this DlgCommonProperty self, Entity contextData = null)
         {
-            self.View.EG_PropertyListSetRectTransform.gameObject.SetActive(false);
-            self.InitShowPropertyList();
         }
 
         public static void OnImageButtonButton(this DlgCommonProperty self)

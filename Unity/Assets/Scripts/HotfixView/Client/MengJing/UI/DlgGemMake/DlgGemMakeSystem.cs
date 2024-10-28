@@ -33,13 +33,14 @@ namespace ET.Client
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
             self.View.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
+            
+            self.OnInitUI();
+            int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;
+            self.UpdateMakeList(showValue);
         }
 
         public static void ShowWindow(this DlgGemMake self, Entity contextData = null)
         {
-            self.OnInitUI();
-            int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;
-            self.UpdateMakeList(showValue);
         }
 
         public static void BeforeUnload(this DlgGemMake self)

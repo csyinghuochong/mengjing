@@ -10,10 +10,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgItemFumoSelect self)
         {
             self.View.E_BtnCloseButton.AddListener(self.OnBtnCloseButton);
-        }
-
-        public static void ShowWindow(this DlgItemFumoSelect self, Entity contextData = null)
-        {
+            
             self.ItemList.Add(self.View.ES_CommonItem_0);
             self.ItemList.Add(self.View.ES_CommonItem_1);
             self.ItemList.Add(self.View.ES_CommonItem_2);
@@ -41,6 +38,10 @@ namespace ET.Client
             text = self.View.E_Label_ItemFumo_2Text;
             text.text = string.Empty;
             self.TextFomoPro.Add(text);
+        }
+
+        public static void ShowWindow(this DlgItemFumoSelect self, Entity contextData = null)
+        {
         }
 
         public static void OnInitUI(this DlgItemFumoSelect self, ItemInfo fumoitem)

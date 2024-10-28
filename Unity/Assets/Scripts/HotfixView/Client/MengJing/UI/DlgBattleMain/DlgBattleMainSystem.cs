@@ -23,10 +23,6 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgBattleMain self)
         {
-        }
-
-        public static void ShowWindow(this DlgBattleMain self, Entity contextData = null)
-        {
             DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
             int huor = dateTime.Hour;
             int minute = dateTime.Minute;
@@ -37,6 +33,10 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.BattleMainTimer, self);
 
             self.OnUpdateSelfKill();
+        }
+
+        public static void ShowWindow(this DlgBattleMain self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgBattleMain self)

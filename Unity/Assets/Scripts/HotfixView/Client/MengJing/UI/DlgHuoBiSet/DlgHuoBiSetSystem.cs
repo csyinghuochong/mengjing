@@ -24,11 +24,12 @@ namespace ET.Client
 
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_Close2Button.AddListener(self.OnCloseButton);
+            
+            self.InitShow();
         }
 
         public static void ShowWindow(this DlgHuoBiSet self, Entity contextData = null)
         {
-            self.InitShow();
         }
 
         private static void OnAddGoldButton(this DlgHuoBiSet self)

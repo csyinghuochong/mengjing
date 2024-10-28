@@ -62,11 +62,12 @@ namespace ET.Client
             self.View.E_ButtonGatherButton.AddListener(() => { self.OnButtonGather(); });
             self.View.E_ButtonTalkButton.AddListener(() => { self.OnButtonTalk(); });
             self.View.E_ButtonTargetButton.AddListener(() => { self.OnButtonTarget(); });
+            
+            self.OnInit().Coroutine();
         }
 
         public static void ShowWindow(this DlgJiaYuanMain self, Entity contextData = null)
         {
-            self.OnInit().Coroutine();
         }
 
         public static void WaitPetWalk(this DlgJiaYuanMain self, JiaYuanPet jiaYuanPet)

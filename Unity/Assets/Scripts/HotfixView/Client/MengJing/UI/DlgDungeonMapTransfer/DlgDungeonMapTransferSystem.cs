@@ -35,13 +35,14 @@ namespace ET.Client
             self.View.E_DungeonLevelItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonLevelItemsRefresh);
             self.View.E_BossRefreshTimeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBossRefreshTimeItemsRefresh);
             self.View.E_BossRefreshSettingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBossRefreshSettingItemsRefresh);
+            
+            self.View.EG_BossRefreshSettingPanelRectTransform.gameObject.SetActive(false);
+            self.UpdateChapterList();
+            self.UpdateBossRefreshTimeList().Coroutine();
         }
 
         public static void ShowWindow(this DlgDungeonMapTransfer self, Entity contextData = null)
         {
-            self.View.EG_BossRefreshSettingPanelRectTransform.gameObject.SetActive(false);
-            self.UpdateChapterList();
-            self.UpdateBossRefreshTimeList().Coroutine();
         }
 
         private static void OnDungeonLevelItemsRefresh(this DlgDungeonMapTransfer self, Transform transform, int index)

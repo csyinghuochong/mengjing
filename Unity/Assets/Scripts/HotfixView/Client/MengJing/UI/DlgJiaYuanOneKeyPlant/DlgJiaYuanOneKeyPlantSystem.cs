@@ -18,13 +18,13 @@ namespace ET.Client
             self.View.E_ItemClickButton.AddListener(self.OnItemClickButton);
             self.View.E_ItemDragButton.AddListener(self.OnItemDragButton);
             self.View.E_LockButton.AddListener(self.OnLockButton);
+            
+            self.View.EG_SeedToggleRectTransform.gameObject.SetActive(false);
+            self.UpdateInfo();
         }
 
         public static void ShowWindow(this DlgJiaYuanOneKeyPlant self, Entity contextData = null)
         {
-            self.View.EG_SeedToggleRectTransform.gameObject.SetActive(false);
-
-            self.UpdateInfo();
         }
 
         public static void UpdateInfo(this DlgJiaYuanOneKeyPlant self)

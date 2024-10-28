@@ -31,11 +31,11 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgCellChapterOpen self)
         {
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UICellChapterOpen, self);
         }
 
         public static void ShowWindow(this DlgCellChapterOpen self, Entity contextData = null)
         {
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UICellChapterOpen, self);
         }
 
         public static void BeforeUnload(this DlgCellChapterOpen self)
@@ -61,11 +61,12 @@ namespace ET.Client
         {
             //self.Lab_ChapterName.GetComponent<Text>().text = "新关卡开启！";
         }
+
         [EntitySystem]
         private static void Awake(this ET.Client.DlgCellChapterOpen self)
         {
-
         }
+
         [EntitySystem]
         private static void Destroy(this ET.Client.DlgCellChapterOpen self)
         {

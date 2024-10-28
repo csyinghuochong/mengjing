@@ -13,11 +13,11 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgCellDungeonCell self)
         {
             self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonCell); });
+            self.InitUI();
         }
 
         public static void ShowWindow(this DlgCellDungeonCell self, Entity contextData = null)
         {
-            self.InitUI();
         }
 
         private static void InitUI(this DlgCellDungeonCell self)

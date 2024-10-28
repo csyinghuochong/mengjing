@@ -13,11 +13,12 @@ namespace ET.Client
             self.View.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.View.E_CloseBtnButton.AddListener(self.OnCloseBtnButton);
             self.View.E_GiveBtnButton.AddListener(self.OnGiveBtnButton);
+            
+            self.View.ES_PetInfoShow.uiTransform.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgGivePet self, Entity contextData = null)
         {
-            self.View.ES_PetInfoShow.uiTransform.gameObject.SetActive(false);
         }
 
         public static void InitTask(this DlgGivePet self, int taskId)

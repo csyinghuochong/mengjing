@@ -29,10 +29,7 @@ namespace ET.Client
             self.View.E_ButtonMove_1Button.AddListener(() => { self.OnButtonMove(1).Coroutine(); });
 
             self.View.E_ButtonPickButton.AddListener(() => { self.OnButtonPick(); });
-        }
 
-        public static void ShowWindow(this DlgDungeonHappyMain self, Entity contextData = null)
-        {
             self.View.E_TextTip_3Text.gameObject.SetActive(false);
             self.View.E_TextTip_2Text.gameObject.SetActive(false);
 
@@ -43,6 +40,10 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.DungeonHappyMainTimer, self);
             self.OnUpdateMoney();
             self.OnUpdate();
+        }
+
+        public static void ShowWindow(this DlgDungeonHappyMain self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgDungeonHappyMain self)

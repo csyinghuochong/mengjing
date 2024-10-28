@@ -59,11 +59,12 @@ namespace ET.Client
             self.View.E_Button_exitButton.AddListener(self.OnExitButton);
             self.Time = 0;
             self.LeftTime = 10;
+            
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UICellDungeonSettlement, self);
         }
 
         public static void ShowWindow(this DlgCellDungeonSettlement self, Entity contextData = null)
         {
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UICellDungeonSettlement, self);
         }
 
         public static void BeforeUnload(this DlgCellDungeonSettlement self)

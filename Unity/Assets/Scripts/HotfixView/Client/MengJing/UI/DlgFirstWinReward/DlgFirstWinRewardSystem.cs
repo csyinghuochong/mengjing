@@ -10,16 +10,17 @@ namespace ET.Client
             self.View.E_Button_Get_3Button.AddListener(() => { self.RequestGetFirstWinSelf(3).Coroutine(); });
             self.View.E_ImageButtonButton.AddListener(
                 () => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_FirstWinReward); });
-        }
-
-        public static void ShowWindow(this DlgFirstWinReward self, Entity contextData = null)
-        {
+            
             self.View.E_Button_Get_3Button.gameObject.SetActive(false);
             self.View.E_Button_Get_2Button.gameObject.SetActive(false);
             self.View.E_Button_Get_1Button.gameObject.SetActive(false);
             self.View.E_Button_Complete_3Image.gameObject.SetActive(false);
             self.View.E_Button_Complete_2Image.gameObject.SetActive(false);
             self.View.E_Button_Complete_1Image.gameObject.SetActive(false);
+        }
+
+        public static void ShowWindow(this DlgFirstWinReward self, Entity contextData = null)
+        {
         }
 
         public static void OnUpdateUI(this DlgFirstWinReward self, int firstWinId)

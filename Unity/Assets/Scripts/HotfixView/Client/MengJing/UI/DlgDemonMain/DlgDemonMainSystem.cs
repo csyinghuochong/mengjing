@@ -24,12 +24,13 @@ namespace ET.Client
             string[] openTimes = funtionConfig.OpenTime.Split('@');
             self.ReadyTime = (int.Parse(openTimes[1].Split(';')[0]) * 60 + int.Parse(openTimes[1].Split(';')[1])) * 60;
             self.EndTime = (int.Parse(openTimes[2].Split(';')[0]) * 60 + int.Parse(openTimes[2].Split(';')[1])) * 60;
+            
+            self.UpdateRanking().Coroutine();
+            self.ShoweTime().Coroutine();
         }
 
         public static void ShowWindow(this DlgDemonMain self, Entity contextData = null)
         {
-            self.UpdateRanking().Coroutine();
-            self.ShoweTime().Coroutine();
         }
 
         public static async ETTask ShoweTime(this DlgDemonMain self)

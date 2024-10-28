@@ -33,15 +33,15 @@ namespace ET.Client
             self.View.E_ButtonMove_1Button.AddListener(() => { self.OnButtonMove(1).Coroutine(); });
 
             self.View.E_ButtonPickButton.AddListener(() => { self.OnButtonPick(); });
+            
+            self.EndTime = FunctionHelp.GetCloseTime(1055);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.UIHappyMainTimer, self);
+            self.OnInitUI();
+            self.OnUpdateMoney();
         }
 
         public static void ShowWindow(this DlgHappyMain self, Entity contextData = null)
         {
-            self.EndTime = FunctionHelp.GetCloseTime(1055);
-
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.UIHappyMainTimer, self);
-            self.OnInitUI();
-            self.OnUpdateMoney();
         }
 
         public static void HideWindow(this DlgHappyMain self)

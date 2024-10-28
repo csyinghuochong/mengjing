@@ -57,12 +57,13 @@ namespace ET.Client
             self.OnUpdateUI();
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIChouKaTimer, self);
+            
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
         }
 
         public static void ShowWindow(this DlgChouKa self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
         }
 
         public static void BeforeUnload(this DlgChouKa self)

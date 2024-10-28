@@ -7,12 +7,12 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgEnterMapHint self)
         {
+            CommonViewHelper.CrossFadeAlpha(self.View.EG_LeftRectTransform, 0f, 0.1f);
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgEnterMapHint self, Entity contextData = null)
         {
-            CommonViewHelper.CrossFadeAlpha(self.View.EG_LeftRectTransform, 0f, 0.1f);
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgEnterMapHint self)

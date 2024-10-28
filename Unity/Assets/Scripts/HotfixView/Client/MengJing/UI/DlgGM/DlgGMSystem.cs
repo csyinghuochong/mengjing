@@ -12,12 +12,13 @@ namespace ET.Client
             self.View.E_Button_CloseButton.AddListener(self.OnButton_CloseButton);
             self.View.E_Button_ReLoadButton.AddListenerAsync(self.OnButton_ReLoadButton);
             self.View.E_Button_CommonButton.AddListenerAsync(self.OnButton_CommonButton);
+
+            self.View.E_Text_OnLineNumberText.text = string.Empty;
+            self.RequestGMInfo().Coroutine();
         }
 
         public static void ShowWindow(this DlgGM self, Entity contextData = null)
         {
-            self.View.E_Text_OnLineNumberText.text = string.Empty;
-            self.RequestGMInfo().Coroutine();
         }
 
         /// <summary>

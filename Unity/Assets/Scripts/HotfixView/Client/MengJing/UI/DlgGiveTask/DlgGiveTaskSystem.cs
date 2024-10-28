@@ -11,11 +11,12 @@ namespace ET.Client
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.View.E_CloseBtnButton.AddListener(self.OnCloseBtnButton);
             self.View.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
+
+            self.OnBagListUpdate();
         }
 
         public static void ShowWindow(this DlgGiveTask self, Entity contextData = null)
         {
-            self.OnBagListUpdate();
         }
 
         public static void InitTask(this DlgGiveTask self, int taskId)

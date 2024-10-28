@@ -24,11 +24,11 @@ namespace ET.Client
             self.View.E_ButtonCloseButton.AddListener(self.OnButtonCloseButton);
 
             self.View.E_Btn_PlanButton.AddListenerAsync(self.OnBtn_PlanButton);
+            self.OnUpdateUI();
         }
 
         public static void ShowWindow(this DlgJiaYuanBag self, Entity contextData = null)
         {
-            self.OnUpdateUI();
         }
 
         public static void OnButtonCloseButton(this DlgJiaYuanBag self)

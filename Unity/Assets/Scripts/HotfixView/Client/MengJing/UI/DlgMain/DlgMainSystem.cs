@@ -448,10 +448,7 @@ namespace ET.Client
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
-        }
-
-        public static void ShowWindow(this DlgMain self, Entity contextData = null)
-        {
+            
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
 
@@ -551,6 +548,10 @@ namespace ET.Client
             reddotComponent.UpdateReddont(ReddotType.FriendApply);
             reddotComponent.UpdateReddont(ReddotType.FriendChat);
             reddotComponent.UpdateReddont(ReddotType.SingleRecharge);
+        }
+
+        public static void ShowWindow(this DlgMain self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgMain self)

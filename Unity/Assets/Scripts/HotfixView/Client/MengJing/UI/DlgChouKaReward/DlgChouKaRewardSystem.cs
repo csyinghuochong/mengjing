@@ -10,11 +10,11 @@ namespace ET.Client
         {
             self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChouKaRewardItemsRefresh);
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgChouKaReward self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         public static void OnInitUI(this DlgChouKaReward self)

@@ -8,11 +8,11 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgGuide self)
         {
+            self.View.EG_PositionSetRectTransform.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgGuide self, Entity contextData = null)
         {
-            self.View.EG_PositionSetRectTransform.gameObject.SetActive(false);
         }
 
         public static void SetPosition(this DlgGuide self, GameObject gameObject)

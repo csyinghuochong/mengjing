@@ -21,12 +21,13 @@ namespace ET.Client
             self.View.E_HuiShouCancleButton.AddListener(self.OnHuiShouCancleButton);
             self.View.E_XieXiaGemButton.AddListener(self.OnXieXiaGemButton);
             self.View.E_PutBagButton.AddListener(self.OnPutBagButton);
+            
+            self.Img_backVector2 = self.View.E_BackImage.GetComponent<RectTransform>().sizeDelta;
+            self.Lab_ItemNameWidth = self.View.E_ItemNameText.GetComponent<RectTransform>().sizeDelta.x;
         }
 
         public static void ShowWindow(this DlgItemTips self, Entity contextData = null)
         {
-            self.Img_backVector2 = self.View.E_BackImage.GetComponent<RectTransform>().sizeDelta;
-            self.Lab_ItemNameWidth = self.View.E_ItemNameText.GetComponent<RectTransform>().sizeDelta.x;
         }
 
         public static void OnBGButton(this DlgItemTips self)

@@ -16,11 +16,12 @@ namespace ET.Client
 
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButtonClick);
             self.View.E_ReturnButton.AddListener(self.OnReturnButtonClick);
+            
+            self.View.E_RightBGImage.gameObject.SetActive(false);
         }
 
         public static void ShowWindow(this DlgDungeonMapLevel self, Entity contextData = null)
         {
-            self.View.E_RightBGImage.gameObject.SetActive(false);
         }
 
         public static void Init(this DlgDungeonMapLevel self, int chapterId)

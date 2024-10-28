@@ -24,11 +24,12 @@ namespace ET.Client
 
             self.View.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.View.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+
+            self.Refresh();
         }
 
         public static void ShowWindow(this DlgChouKaWarehouse self, Entity contextData = null)
         {
-            self.Refresh();
         }
 
         private static void OnHouseItemsRefresh(this DlgChouKaWarehouse self, Transform transform, int index)

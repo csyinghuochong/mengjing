@@ -27,10 +27,6 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgCellDungeonEnterShow self)
         {
-        }
-
-        public static void ShowWindow(this DlgCellDungeonEnterShow self, Entity contextData = null)
-        {
             self.stopMoveStart = false;
             self.stopMoveStatus = false;
             self.stopMoveEnd = false;
@@ -65,6 +61,10 @@ namespace ET.Client
             }
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UICellDungeonEnterShow, self);
+        }
+
+        public static void ShowWindow(this DlgCellDungeonEnterShow self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgCellDungeonEnterShow self)

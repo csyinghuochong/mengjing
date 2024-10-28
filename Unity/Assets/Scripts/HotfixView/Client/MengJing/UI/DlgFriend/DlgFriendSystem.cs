@@ -1,18 +1,18 @@
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_UnionMy))]
-    [FriendOf(typeof (ES_UnionShow))]
-    [FriendOf(typeof (ES_FriendList))]
-    [FriendOf(typeof (ES_FriendBlack))]
-    [FriendOf(typeof (ES_FriendApply))]
-    [FriendOf(typeof (DlgFriend))]
-    [FriendOf(typeof (DlgFriendBlack))]
-    [FriendOf(typeof (DlgFriendList))]
-    [FriendOf(typeof (ES_RoleBag))]
+    [FriendOf(typeof(ES_UnionMy))]
+    [FriendOf(typeof(ES_UnionShow))]
+    [FriendOf(typeof(ES_FriendList))]
+    [FriendOf(typeof(ES_FriendBlack))]
+    [FriendOf(typeof(ES_FriendApply))]
+    [FriendOf(typeof(DlgFriend))]
+    [FriendOf(typeof(DlgFriendBlack))]
+    [FriendOf(typeof(DlgFriendList))]
+    [FriendOf(typeof(ES_RoleBag))]
     public static class DlgFriendSystem
     {
         [Event(SceneType.Demo)]
-        public class DataUpdate_FriendUpdate_FriendItemsRefresh: AEvent<Scene, FriendUpdate>
+        public class DataUpdate_FriendUpdate_FriendItemsRefresh : AEvent<Scene, FriendUpdate>
         {
             protected override async ETTask Run(Scene root, FriendUpdate args)
             {
@@ -23,7 +23,7 @@ namespace ET.Client
         }
 
         [Event(SceneType.Demo)]
-        public class DataUpdate_FriendChat_Refresh: AEvent<Scene, FriendChat>
+        public class DataUpdate_FriendChat_Refresh : AEvent<Scene, FriendChat>
         {
             protected override async ETTask Run(Scene root, FriendChat args)
             {
@@ -35,15 +35,16 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgFriend self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+
+            self.RequestFriendInfo().Coroutine();
+
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
+            redPointComponent.RegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
         }
 
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)
         {
-            self.RequestFriendInfo().Coroutine();
-            
-            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.RegisterReddot(ReddotType.FriendApply, self.Reddot_FriendApply);
-            redPointComponent.RegisterReddot(ReddotType.FriendChat, self.Reddot_FriendChat);
         }
 
         public static void BeforeUnload(this DlgFriend self)
@@ -62,6 +63,7 @@ namespace ET.Client
         {
             self.View.E_Type_1Toggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
+
         public static async ETTask RequestFriendInfo(this DlgFriend self)
         {
             await FriendNetHelper.RequestFriendInfo(self.Root());
@@ -131,7 +133,7 @@ namespace ET.Client
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
-        
+
         public static void OnUpdateMyUnion(this DlgFriend self)
         {
             self.View.ES_UnionMy.OnUpdateUI().Coroutine();

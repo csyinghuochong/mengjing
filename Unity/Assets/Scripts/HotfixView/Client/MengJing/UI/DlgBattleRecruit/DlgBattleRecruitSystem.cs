@@ -12,11 +12,11 @@ namespace ET.Client
         {
             self.View.E_Img_buttonButton.AddListener(self.OnClose);
             self.View.E_BattleRecruitItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnBattleRecruitItemsRefresh);
+            self.InitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgBattleRecruit self, Entity contextData = null)
         {
-            self.InitUI().Coroutine();
         }
 
         private static void OnClose(this DlgBattleRecruit self)

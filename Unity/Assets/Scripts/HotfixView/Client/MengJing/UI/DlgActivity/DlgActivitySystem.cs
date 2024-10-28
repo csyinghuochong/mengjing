@@ -11,14 +11,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgActivity self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.SingleRecharge, self.Reddot_SingleRecharge);
         }
 
         public static void ShowWindow(this DlgActivity self, Entity contextData = null)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-            
-            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.RegisterReddot(ReddotType.SingleRecharge, self.Reddot_SingleRecharge);
         }
 
         public static void BeforeUnload(this DlgActivity self)

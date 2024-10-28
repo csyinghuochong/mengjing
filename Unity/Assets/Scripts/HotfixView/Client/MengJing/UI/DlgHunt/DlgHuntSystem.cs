@@ -8,11 +8,11 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgHunt self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         public static void ShowWindow(this DlgHunt self, Entity contextData = null)
         {
-            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgHunt self, int index)

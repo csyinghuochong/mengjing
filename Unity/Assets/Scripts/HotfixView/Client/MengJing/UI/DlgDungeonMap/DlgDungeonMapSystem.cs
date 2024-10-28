@@ -80,14 +80,15 @@ namespace ET.Client
                 UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                 uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
             });
-        }
-
-        public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
-        {
+            
             self.View.E_RefreshTimeText.text = string.Empty;
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.OnBoosRefresh().Coroutine();
             self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_Main);
+        }
+
+        public static void ShowWindow(this DlgDungeonMap self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgDungeonMap self)

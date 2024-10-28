@@ -39,15 +39,16 @@ namespace ET.Client
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
             redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
-        }
-
-        public static void ShowWindow(this DlgFunction self, Entity contextData = null)
-        {
+            
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.FriendApply);
             reddotComponent.UpdateReddont(ReddotType.FriendChat);
             reddotComponent.UpdateReddont(ReddotType.RolePoint);
             reddotComponent.UpdateReddont(ReddotType.SkillUp);
+        }
+
+        public static void ShowWindow(this DlgFunction self, Entity contextData = null)
+        {
         }
 
         public static void BeforeUnload(this DlgFunction self)

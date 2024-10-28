@@ -14,10 +14,7 @@ namespace ET.Client
             self.View.E_RandomNameButton.AddListener(self.OnRandomNameButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_CreateRoleNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
-        }
-
-        public static void ShowWindow(this DlgCreateRole self, Entity contextData = null)
-        {
+            
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             self.View.E_Icon_1_1Image.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "1"));
@@ -33,6 +30,10 @@ namespace ET.Client
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
 
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+        }
+
+        public static void ShowWindow(this DlgCreateRole self, Entity contextData = null)
+        {
         }
 
         public static void CheckSensitiveWords(this DlgCreateRole self)
