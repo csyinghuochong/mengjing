@@ -54,9 +54,36 @@
 
                     break;
                 case NumericType.PetFightIndex:
+                    int petfightindex = (int)args.NewValue;
                     if (args.Defend.MainHero)
                     {
                         root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().RefreshFightSet();
+                        
+                        if (petfightindex > 0)
+                        {
+                            PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                            long petId = petComponentC.PetFightList[petfightindex - 1];
+                            Unit pet = scene.GetComponent<UnitComponent>().Get(petId);
+                            // 切换成宠物特效
+                            FunctionEffect.PlaySelfEffect(pet, 200004);
+                        }
+                        else
+                        {
+                            // 切换成英雄特效
+                            FunctionEffect.PlaySelfEffect(args.Defend, 200004);
+                        }
+                    }
+                    else
+                    {
+                        if (petfightindex > 0)
+                        {
+                            // 其他玩家切换成宠物特效
+                        }
+                        else
+                        {
+                            // 其他玩家切换成英雄特效
+                            FunctionEffect.PlaySelfEffect(args.Defend, 200004);
+                        }
                     }
 
                     break;
