@@ -19,14 +19,11 @@ namespace ET.Client
         {
             self.package = YooAssets.GetPackage(packageName);
         }
-        
+
         [EntitySystem]
         private static void Destroy(this ResourcesLoaderComponent self)
         {
-            foreach (var kv in self.handlers)
-            {
-                self.ReleaseHandler(kv.Value);
-            }
+            self.UnLoadAllAssetSync();
         }
 
 
@@ -65,7 +62,16 @@ namespace ET.Client
             }
         }
 
-        
+        public static void UnLoadAllAssetSync(this ResourcesLoaderComponent self)
+        {
+            foreach (var kv in self.handlers)
+            {
+                self.ReleaseHandler(kv.Value);
+            }
+
+            self.handlers.Clear();
+        }
+
         public static  T LoadAssetSync<T>(this ResourcesLoaderComponent self, string location) where T: UnityEngine.Object
         {
             OperationHandleBase handler;

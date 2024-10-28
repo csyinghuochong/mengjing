@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SceneManagerComponent))]
-    [EntitySystemOf(typeof (SceneManagerComponent))]
+    [FriendOf(typeof(SceneManagerComponent))]
+    [EntitySystemOf(typeof(SceneManagerComponent))]
     public static partial class SceneManagerComponentSystem
     {
         [EntitySystem]
@@ -52,13 +52,13 @@ namespace ET.Client
         {
             self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
-            
+
             string paramss = CellDungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
 
             var path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Additive);
             Log.Warning("切换场景" + path);
-            
+
             self.UpdateChuanSong(sceneTypeEnum);
             //刷新主界面
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
@@ -92,6 +92,7 @@ namespace ET.Client
                     {
                         paramss = "10001_test";
                     }
+
                     break;
                 default:
                     paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();
@@ -100,15 +101,15 @@ namespace ET.Client
 
             GameObjectLoadHelper.DisposeAll();
 
-            // 不太明白这俩行的目的
-            // await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Empty"), LoadSceneMode.Single);
-            // await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
-            
-            var path = ABPathHelper.GetScenePath(paramss);
+            // 释放前一个场景的所有资源
+            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAssetSync();
+
+            string path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+
             Log.Warning("切换场景" + path);
 
-            if (sceneTypeEnum!= SceneTypeEnum.LoginScene)
+            if (sceneTypeEnum != SceneTypeEnum.LoginScene)
             {
                 EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
             }
