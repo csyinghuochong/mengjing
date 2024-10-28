@@ -26,6 +26,9 @@ namespace ET.Client
                 case 3:
                     effectFileName = "ScenceEffect/";
                     break;
+                 case 4:
+                    effectFileName = "UIEffect/";
+                    break;
             }
 
             string effectNamePath = effectFileName + effectConfig.EffectName;

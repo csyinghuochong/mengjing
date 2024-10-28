@@ -67,6 +67,16 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
+        //40000001
+        public static void ShowUIEffect(this ES_RewardList self, int effectid)
+        {
+            foreach (var commonitem in self.ScrollItemCommonItems)
+            {
+                Scroll_Item_CommonItem itemCommonItem = commonitem.Value;
+                itemCommonItem.ShowUIEffect(effectid);
+            }
+        }
+
         public static void Refresh(this ES_RewardList self, string rewarfItems, float scale = 1f, bool showNumber = true, bool showName = false,
         int getWay = 0)
         {

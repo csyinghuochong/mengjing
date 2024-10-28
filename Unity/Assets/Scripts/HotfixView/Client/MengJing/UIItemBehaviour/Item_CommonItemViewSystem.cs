@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -26,6 +27,21 @@ namespace ET.Client
             self.ES_CommonItem.SetCurrentHouse(currentHouse);
         }
 
+        public static void ShowUIEffect(this Scroll_Item_CommonItem self, int effectid)
+        {
+            Transform UIParticle = self.uiTransform.Find("UIParticle");
+            if (UIParticle == null)
+            {
+                return;
+            }
+
+            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
+            string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true); 
+            //go.transform.localScale = effectConfig.
+        }
+        
         public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, ItemInfo bagInfo)
         {
             self.ES_CommonItem.SetSelected(bagInfo);
