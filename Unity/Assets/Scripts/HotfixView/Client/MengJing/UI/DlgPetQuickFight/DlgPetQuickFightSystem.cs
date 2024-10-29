@@ -112,26 +112,25 @@ namespace ET.Client
 
         public static async ETTask RequestPetFight(this DlgPetQuickFight self, long petid)
         {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+            if (petfightindex == self.FightIndex)
+            {
+                // 先切换回英雄
+                await PetNetHelper.RequestPetFightSwitch(self.Root(), 0);
+            }
+
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            // RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petid);
-
-            // FlyTipComponent.Instance.ShowFlyTip("请在下面宠物出战按钮选择出战！");
-            // if (rolePetInfo.PetStatus == 2)
-            // {
-            //     FlyTipComponent.Instance.ShowFlyTip("宠物散步中！");
-            //     return;
-            // }
-
-            //await PetNetHelper.RequestPetFight(self.Root(), petid, rolePetInfo.PetStatus == 0 ? 1 : 0);
-
             List<long> fightpets = new();
             fightpets.AddRange(petComponent.PetFightList);
             if (fightpets[self.FightIndex - 1] == petid)
             {
+                // 休息
                 fightpets[self.FightIndex - 1] = 0;
             }
             else
             {
+                // 出战
                 fightpets[self.FightIndex - 1] = petid;
             }
 

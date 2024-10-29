@@ -44,6 +44,19 @@ namespace ET.Client
         /// <returns></returns>
         public static async ETTask<int> RequestPetFightSwitch(Scene root, int fightindex)
         {
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            if (fightindex != 0 && petComponent.PetFightList[fightindex - 1] == 0)
+            {
+                return ErrorCode.ERR_Pet_NoExist;
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+            if (fightindex == petfightindex)
+            {
+                fightindex = 0;
+            }
+            
             C2M_PetFightSwitch c2MPetFightSwitch = C2M_PetFightSwitch.Create();
             c2MPetFightSwitch.PetFightIndex = fightindex;
             M2C_PetFightSwitch m2CPetFightSwitch = (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);

@@ -123,8 +123,7 @@ namespace ET.Client
         {
             self.LongPress = true;
 
-            // 切换
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RequestPetFightSwitch(self.FightIndex).Coroutine();
+            PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
         }
     }
 }

@@ -449,7 +449,7 @@ namespace ET.Client
             self.View.E_RoseTeamButton.AddListener(self.OnRoseTeamButton);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
-            
+
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
             self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
 
@@ -498,8 +498,6 @@ namespace ET.Client
                 string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
                 CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
             }
-            
-            
 
             string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
             self.Root().GetComponent<LockTargetComponent>().AttackTarget = int.Parse(attackmode);
@@ -1039,7 +1037,7 @@ namespace ET.Client
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
         }
-        
+
         public static void UpdateShowRoleExp(this DlgMain self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -1131,10 +1129,11 @@ namespace ET.Client
         private static void RefreshMainPetFightUI(this DlgMain self)
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-
-            self.View.ES_MainPetFight_0.uiTransform.localScale = self.PetFightindex == 1 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
-            self.View.ES_MainPetFight_1.uiTransform.localScale = self.PetFightindex == 2 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
-            self.View.ES_MainPetFight_2.uiTransform.localScale = self.PetFightindex == 3 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+            self.View.ES_MainPetFight_0.uiTransform.localScale = petfightindex == 1 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
+            self.View.ES_MainPetFight_1.uiTransform.localScale = petfightindex == 2 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
+            self.View.ES_MainPetFight_2.uiTransform.localScale = petfightindex == 3 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
 
             self.View.ES_MainPetFight_0.Refresh(
                 petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0), 1);
@@ -1151,27 +1150,16 @@ namespace ET.Client
             self.View.ES_MainPetFight_2.UpdateHp();
         }
 
-        public static async ETTask RequestPetFightSwitch(this DlgMain self, int fightindex)
-        {
-            if (fightindex == self.PetFightindex)
-            {
-                fightindex = 0;
-            }
-
-            await PetNetHelper.RequestPetFightSwitch(self.Root(), fightindex);
-        }
-
         public static void RefreshFightSet(this DlgMain self)
         {
             Scene root = self.Root();
             Scene currentScene = root.CurrentScene();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
-            self.PetFightindex = petfightindex;
 
             if (petfightindex > 0)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
+                // FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
 
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                 long petId = petComponentC.PetFightList[petfightindex - 1];
@@ -1186,7 +1174,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
+                // FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
 
                 root.GetComponent<LockTargetComponent>().MainUnit = unit;
                 root.GetComponent<SkillIndicatorComponent>().MainUnit = unit;
