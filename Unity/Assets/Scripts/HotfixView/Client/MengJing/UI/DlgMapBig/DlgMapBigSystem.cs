@@ -306,21 +306,26 @@ namespace ET.Client
             }
         }
 
-        public static int CreateMonsterByPos(this DlgMapBig self, int monsterId)
+        public static int CreateMonsterByPos(this DlgMapBig self, int monsterPositionId)
         {
-            MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterId);
-            int monsterid = monsterPosition.MonsterID;
-            string[] position = monsterPosition.Position.Split(',');
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
-            if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
+            MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPositionId);
+
+            for (int i = 0; i < monsterPosition.MonsterID.Length; i++)
             {
-                return monsterPosition.NextID;
+                int monsterid = monsterPosition.MonsterID[i];
+                string[] position = monsterPosition.Position.Split(',');
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+                if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
+                {
+                    return monsterPosition.NextID;
+                }
+
+                Vector3 vector3 = new Vector3(float.Parse(position[0]), float.Parse(position[2]), 0);
+                self.InstantiateIcon(self.View.EG_bossIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
+
+                self.BossList.Add(monsterConfig.Id, new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2])));
+
             }
-
-            Vector3 vector3 = new Vector3(float.Parse(position[0]), float.Parse(position[2]), 0);
-            self.InstantiateIcon(self.View.EG_bossIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
-
-            self.BossList.Add(monsterConfig.Id, new Vector3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2])));
 
             return monsterPosition.NextID;
         }

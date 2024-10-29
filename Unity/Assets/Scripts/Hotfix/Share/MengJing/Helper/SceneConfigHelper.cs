@@ -153,7 +153,7 @@ namespace ET
             }
 
             MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPos);
-            monsterIds.Add(monsterPosition.MonsterID);
+            monsterIds.AddRange(monsterPosition.MonsterID);
 
             return monsterPosition.NextID;
         }
@@ -192,30 +192,35 @@ namespace ET
 
                     string monsterinfo = string.Empty;
                     int mtype = monsterPosition.Type;
-                    int monsterid = monsterPosition.MonsterID;
-                    switch (mtype)
-                    {
-                        case 1:
-                            monsterinfo = $"1;{monsterPosition.Position};{monsterid};{monsterPosition.CreateNum}";
-                            break;
-                        case 2:
-                            monsterinfo = $"2;{monsterPosition.Position};{monsterid};{monsterPosition.CreateNum},{monsterPosition.CreateRange}";
-                            break;
-                        default:
-                            break;
-                    }
 
-                    if (!string.IsNullOrEmpty(monsterinfo))
+                    for (int monster = 0; monster < monsterPosition.MonsterID.Length; monster++)
                     {
-                        if (!string.IsNullOrEmpty(allmonster))
+                        int monsterid = monsterPosition.MonsterID[monster];
+                        switch (mtype)
                         {
-                            allmonster = allmonster + "@" + monsterinfo;
+                            case 1:
+                                monsterinfo = $"1;{monsterPosition.Position};{monsterid};{monsterPosition.CreateNum[monster]}";
+                                break;
+                            case 2:
+                                monsterinfo = $"2;{monsterPosition.Position};{monsterid};{monsterPosition.CreateNum[monster]},{monsterPosition.CreateRange}";
+                                break;
+                            default:
+                                break;
                         }
-                        else
+
+                        if (!string.IsNullOrEmpty(monsterinfo))
                         {
-                            allmonster = monsterinfo;
+                            if (!string.IsNullOrEmpty(allmonster))
+                            {
+                                allmonster = allmonster + "@" + monsterinfo;
+                            }
+                            else
+                            {
+                                allmonster = monsterinfo;
+                            }
                         }
                     }
+                    
                     if (posid == 0)
                     {
                         break;

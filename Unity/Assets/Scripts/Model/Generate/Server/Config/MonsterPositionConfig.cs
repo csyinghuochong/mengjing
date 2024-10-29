@@ -68,11 +68,11 @@ namespace ET
 		/// <summary>坐标点</summary>
 		public string Position { get; set; }
 		/// <summary>怪物ID</summary>
-		public int MonsterID { get; set; }
+		public int[] MonsterID { get; set; }
 		/// <summary>刷怪范围</summary>
 		public double CreateRange { get; set; }
 		/// <summary>刷怪数量</summary>
-		public int CreateNum { get; set; }
+		public int[] CreateNum { get; set; }
 		/// <summary>刷新朝向</summary>
 		public int Create { get; set; }
 		/// <summary>其他参数</summary>

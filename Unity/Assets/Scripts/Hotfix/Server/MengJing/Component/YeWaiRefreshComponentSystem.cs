@@ -131,19 +131,23 @@ namespace ET.Server
             int mtype = monsterPosition.Type;
             string[] position = monsterPosition.Position.Split(',');
             string[] refreshPar = monsterPosition.Par.Split(',');
-            self.RefreshMonsters.Add(new RefreshMonster()
+
+            for (int i = 0; i <monsterPosition.MonsterID.Length; i++ )
             {
-                MonsterId = monsterPosition.MonsterID,
-                //NextTime = TimeHelper.ServerNow() + int.Parse(refreshPar[0]) * 1000,  //下次刷的时间戳
-                NextTime = createTime, //下次刷的时间戳
-                PositionX = float.Parse(position[0]),
-                PositionY = float.Parse(position[1]),
-                PositionZ = float.Parse(position[2]),
-                Number = monsterPosition.CreateNum,
-                Range = (float)monsterPosition.CreateRange,
-                Rotation = monsterPosition.Create,
-                Interval = -1, //-1只刷一次
-            });
+                self.RefreshMonsters.Add(new RefreshMonster()
+                {
+                    MonsterId = monsterPosition.MonsterID[i],
+                    //NextTime = TimeHelper.ServerNow() + int.Parse(refreshPar[0]) * 1000,  //下次刷的时间戳
+                    NextTime = createTime, //下次刷的时间戳
+                    PositionX = float.Parse(position[0]),
+                    PositionY = float.Parse(position[1]),
+                    PositionZ = float.Parse(position[2]),
+                    Number = monsterPosition.CreateNum[i],
+                    Range = (float)monsterPosition.CreateRange,
+                    Rotation = monsterPosition.Create,
+                    Interval = -1, //-1只刷一次
+                });
+            }
         }
 
         /// <summary>
@@ -289,18 +293,21 @@ namespace ET.Server
             string[] refreshPar = monsterPosition.Par.Split(',');
             //Log.Debug($"野外怪定时刷新bbbbbb:  {self.DomainZone()}区：   MonsterID：{monsterPosition.MonsterID} ");
 
-            self.RefreshMonsters.Add(new RefreshMonster()
+            for (int i = 0; i < monsterPosition.MonsterID.Length; i++)
             {
-                MonsterId = monsterPosition.MonsterID,
-                NextTime = TimeHelper.ServerNow() + int.Parse(refreshPar[0]) * 1000,
-                PositionX = float.Parse(position[0]),
-                PositionY = float.Parse(position[1]),
-                PositionZ = float.Parse(position[2]),
-                Number = monsterPosition.CreateNum,
-                Range = (float)monsterPosition.CreateRange,
-                Interval = int.Parse(refreshPar[1]) * 1000,
-                Rotation = monsterPosition.Create,
-            });
+                self.RefreshMonsters.Add(new RefreshMonster()
+                {
+                    MonsterId = monsterPosition.MonsterID[i],
+                    NextTime = TimeHelper.ServerNow() + int.Parse(refreshPar[0]) * 1000,
+                    PositionX = float.Parse(position[0]),
+                    PositionY = float.Parse(position[1]),
+                    PositionZ = float.Parse(position[2]),
+                    Number = monsterPosition.CreateNum[i],
+                    Range = (float)monsterPosition.CreateRange,
+                    Interval = int.Parse(refreshPar[1]) * 1000,
+                    Rotation = monsterPosition.Create,
+                });
+            }
         }
 
         /// <summary>
@@ -385,19 +392,21 @@ namespace ET.Server
                 }
 
                 //Log.Debug($"野外怪定时刷新ddddd  {self.DomainZone()} 区： MonsterID： {monsterPosition.MonsterID} ");
-                self.RefreshMonsters.Add(new RefreshMonster()
+                for (int monster = 0; monster < monsterPosition.MonsterID.Length; monster++)
                 {
-                    MonsterId = monsterPosition.MonsterID,
-                    NextTime = TimeHelper.ServerNow() + leftTime,
-                    PositionX = float.Parse(position[0]),
-                    PositionY = float.Parse(position[1]),
-                    PositionZ = float.Parse(position[2]),
-                    Number = monsterPosition.CreateNum,
-                    Range = (float)monsterPosition.CreateRange,
-                    Interval = mtype == 5? TimeHelper.OneDay : -1,
-                    Rotation = monsterPosition.Create,
-                });
-                ;
+                    self.RefreshMonsters.Add(new RefreshMonster()
+                    {
+                        MonsterId = monsterPosition.MonsterID[monster],
+                        NextTime = TimeHelper.ServerNow() + leftTime,
+                        PositionX = float.Parse(position[0]),
+                        PositionY = float.Parse(position[1]),
+                        PositionZ = float.Parse(position[2]),
+                        Number = monsterPosition.CreateNum[monster],
+                        Range = (float)monsterPosition.CreateRange,
+                        Interval = mtype == 5? TimeHelper.OneDay : -1,
+                        Rotation = monsterPosition.Create,
+                    });
+                }
             }
         }
 

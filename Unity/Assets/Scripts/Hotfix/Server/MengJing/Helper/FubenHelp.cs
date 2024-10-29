@@ -130,37 +130,22 @@ namespace ET.Server
 				}
 			}
 		}
-		
-		private static int CreateMonsterByPos(Scene scene, int monsterPos)
+
+		private static void CreateMonsterById(Scene scene, MonsterPositionConfig monsterPosition, int MonsterID, int CreateNum)
 		{
-			if (monsterPos == 0)
-			{
-				return 0;
-			}
-
-			if (!MonsterPositionConfigCategory.Instance.Contain(monsterPos))
-			{
-				Log.Error($"monsterPos: {monsterPos}");
-				return 0;
-			}
-
-			//Id      NextID  Type Position             MonsterID CreateRange CreateNum Create    Par(3代表刷新时间)
-			//10001   10002   2    - 71.46,0.34,-5.35   81000002       0           1       90    30,60
-			MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPos);
 			int mtype = monsterPosition.Type;
-			int monsterid = monsterPosition.MonsterID;
 			string[] position = monsterPosition.Position.Split(',');
 			if (mtype == 1) //固定位置刷怪
 			{
-				if (monsterPosition.CreateNum > 100)
+				if (CreateNum > 100)
 				{
-					Log.Error($"monsterPosition.CreateNum:  {monsterPos}");
-					return 0;
+					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
+					return;
 				}
 
-				for (int c = 0; c < monsterPosition.CreateNum; c++)
+				for (int c = 0; c < CreateNum; c++)
 				{
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
 					float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
 
 					//51 场景怪 有AI 不显示名称
@@ -198,19 +183,19 @@ namespace ET.Server
 
 			if (mtype == 2)
 			{
-				if (monsterPosition.CreateNum > 100)
+				if (CreateNum > 100)
 				{
-					Log.Error($"monsterPosition.CreateNum:  {monsterPos}");
-					return 0;
+					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
+					return ;
 				}
 		
-				for (int c = 0; c < monsterPosition.CreateNum; c++)
+				for (int c = 0; c < CreateNum; c++)
 				{
 					float range = (float) monsterPosition.CreateRange;
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterPosition.MonsterID);
+					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
 					float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
 						float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
-					UnitFactory.CreateMonster(scene, monsterPosition.MonsterID, vector3,
+					UnitFactory.CreateMonster(scene, MonsterID, vector3,
 						new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = monsterPosition.Create, });
 				}
 			}
@@ -231,19 +216,19 @@ namespace ET.Server
 					//playerLv = mainUnit.GetComponent<UserInfoComponentServer>().GetLv();
 				}
 
-				if (monsterPosition.CreateNum > 100)
+				if (CreateNum > 100)
 				{
-					Log.Error($"monsterPosition.CreateNum:  {monsterPos}");
-					return 0;
+					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
+					return ;
 				}
 
-				for (int c = 0; c < monsterPosition.CreateNum; c++)
+				for (int c = 0; c < CreateNum; c++)
 				{
 					float range = (float) monsterPosition.CreateRange;
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterPosition.MonsterID);
+					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
 					float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
 						float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
-					UnitFactory.CreateMonster(scene, monsterPosition.MonsterID, vector3, new CreateMonsterInfo()
+					UnitFactory.CreateMonster(scene, MonsterID, vector3, new CreateMonsterInfo()
 					{
 						PlayerLevel = playerLv,
 						AttributeParams = monsterPosition.Par,
@@ -258,7 +243,28 @@ namespace ET.Server
 				//固定时间刷新  YeWaiRefreshComponent
 				//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
 			}
+		}
 
+		private static int CreateMonsterByPos(Scene scene, int monsterPos)
+		{
+			if (monsterPos == 0)
+			{
+				return 0;
+			}
+
+			if (!MonsterPositionConfigCategory.Instance.Contain(monsterPos))
+			{
+				Log.Error($"monsterPos: {monsterPos}");
+				return 0;
+			}
+
+			//Id      NextID  Type Position             MonsterID CreateRange CreateNum Create    Par(3代表刷新时间)
+			//10001   10002   2    - 71.46,0.34,-5.35   81000002       0           1       90    30,60
+			MonsterPositionConfig monsterPosition = MonsterPositionConfigCategory.Instance.Get(monsterPos);
+			for (int i = 0; i < monsterPosition.MonsterID.Length; i++)
+			{
+				CreateMonsterById( scene,  monsterPosition, monsterPosition.MonsterID[i], monsterPosition.CreateNum[i] );
+			}
 			return monsterPosition.NextID;
 		}
 
