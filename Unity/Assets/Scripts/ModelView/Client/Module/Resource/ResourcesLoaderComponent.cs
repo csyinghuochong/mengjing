@@ -138,7 +138,6 @@ namespace ET.Client
             if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
             {
                 handler = self.Package.LoadAssetSync<T>(location);
-
                 self.Handlers.Add(location, (handler, TimeInfo.Instance.ServerNow() + liveTime));
             }
             else
@@ -150,12 +149,13 @@ namespace ET.Client
             return (T)((AssetOperationHandle)handler).AssetObject;
         }
 
-        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location, long liveTime = 30 * 1000)
+        public static async ETTask<T> LoadAssetAsync<T>(this ResourcesLoaderComponent self, string location)
                 where T : UnityEngine.Object
         {
             using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>()
                     .Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
-
+            
+            long liveTime = TimeHelper.Hour;
             OperationHandleBase handler;
             if (!self.Handlers.TryGetValue(location, out (OperationHandleBase handler, long destroyTime) selfHandler))
             {
@@ -203,7 +203,7 @@ namespace ET.Client
     {
         public ResourcePackage Package;
         public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
-        public long CheckTime = TimeHelper.Hour * 1000; //检测间隔
+        public long CheckTime = TimeHelper.Minute; //检测间隔
         public long Timer;
 
         public bool ReleaseAsset = false;
