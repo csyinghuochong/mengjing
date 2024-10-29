@@ -212,6 +212,7 @@ message C2M_PathfindingResult // ILocationMessage
 {
 	int32 RpcId = 1;
   repeated	Unity.Mathematics.float3 Position = 2;
+	int32 SpeedRate = 3;
 }
 
 message C2M_Stop // ILocationMessage
@@ -248,6 +249,7 @@ message M2C_PathfindingResult // IMessage
 	Unity.Mathematics.float3 Position = 2;
 	repeated Unity.Mathematics.float3 Points = 3;
 	bool YaoGan = 4;
+	int32 SpeedRate = 5;
 }
 
 //ResponseType G2C_Ping

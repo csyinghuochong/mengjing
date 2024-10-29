@@ -923,6 +923,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public List<Unity.Mathematics.float3> Position { get; set; } = new();
 
+        [MemoryPackOrder(2)]
+        public int SpeedRate { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -932,6 +935,7 @@ namespace ET
 
             this.RpcId = default;
             this.Position.Clear();
+            this.SpeedRate = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -1090,6 +1094,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public bool YaoGan { get; set; }
 
+        [MemoryPackOrder(4)]
+        public int SpeedRate { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1101,6 +1108,7 @@ namespace ET
             this.Position = default;
             this.Points.Clear();
             this.YaoGan = default;
+            this.SpeedRate = default;
 
             ObjectPool.Instance.Recycle(this);
         }

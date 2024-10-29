@@ -290,6 +290,7 @@ namespace ET.Client
             {
                 unit.Rotation =  quaternion.Euler(0, math.radians(direction ), 0);
                 EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
+                //self.MoveSlowly(direction);
                 return;
             }
 
