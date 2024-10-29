@@ -13,13 +13,14 @@ namespace ET.Client
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_AuctionRecord);
             });
+            
+            self.View.EG_UIAuctionRecordItemRectTransform.gameObject.SetActive(false);
+
+            self.OnInitUI().Coroutine();
         }
 
         public static void ShowWindow(this DlgAuctionRecord self, Entity contextData = null)
         {
-            self.View.EG_UIAuctionRecordItemRectTransform.gameObject.SetActive(false);
-
-            self.OnInitUI().Coroutine();
         }
 
         public static async ETTask OnInitUI(this DlgAuctionRecord self)

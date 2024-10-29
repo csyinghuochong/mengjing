@@ -5,11 +5,11 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgArenaMain self)
         {
+            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgArenaMain self, Entity contextData = null)
         {
-            self.OnInitUI();
         }
 
         public static void OnUpdateUI(this DlgArenaMain self, M2C_AreneInfoResult message)
