@@ -86,7 +86,12 @@ namespace ET.Client
 
         public static void UnLoadAllAsset(this ResourcesLoaderComponent self)
         {
-            Log.Debug("清理所有");
+            if (!self.ReleaseAsset)
+            {
+                return;
+            }
+            
+            
             foreach (var kv in self.Handlers)
             {
                 self.ReleaseHandler(kv.Value.handler);
@@ -99,6 +104,11 @@ namespace ET.Client
 
         public static void UnloadUnusedAssets(this ResourcesLoaderComponent self)
         {
+            if (!self.ReleaseAsset)
+            {
+                return;
+            }
+
             List<string> keysToRemove = new List<string>();
             long now = TimeInfo.Instance.ServerNow();
             foreach (var kv in self.Handlers)
@@ -193,7 +203,9 @@ namespace ET.Client
     {
         public ResourcePackage Package;
         public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
-        public long CheckTime = 10 * 1000; //检测间隔
+        public long CheckTime = TimeHelper.Hour * 1000; //检测间隔
         public long Timer;
+
+        public bool ReleaseAsset = false;
     }
 }
