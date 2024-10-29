@@ -8,8 +8,7 @@ namespace ET.Client
     {
         public override async ETTask Handle(FiberInit fiberInit)
         {
-            Console.WriteLine("FiberInit_Robot");
-            
+
             Scene root = fiberInit.Fiber.Root;
             root.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             root.AddComponent<TimerComponent>();
@@ -46,7 +45,7 @@ namespace ET.Client
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
             
             //1_1001_0
-            Console.WriteLine($"root.Name:  {root.Name}");
+            Console.WriteLine($"FiberInit_Robot. root.Name:  {root.Name}");
             await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord, 0,versionMode );
             //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
 
