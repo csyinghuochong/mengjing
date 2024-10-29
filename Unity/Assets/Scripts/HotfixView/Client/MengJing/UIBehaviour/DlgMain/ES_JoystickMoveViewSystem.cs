@@ -240,10 +240,10 @@ namespace ET.Client
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             
-            int speedRate = 10;  //移动速度 10是1/10   100是原始速度
+            int speedRate = 10;  //移动速度 10是原始速度1/10 100是原始速度
             speed *= (speedRate * 0.01f);
             bool sendmove = false;
-            for (int i = 0; i < 80; i++)   //左右80度范围
+            for (int i = 0; i < 80; i++)    //左右80度范围寻找可以移动的点
             {
                 unit.SpeedRate = speedRate;
                 List<float3> pathfind = new List<float3>();
