@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI.Extensions;
 
 namespace ET.Client
 {
@@ -34,12 +35,12 @@ namespace ET.Client
             {
                 return;
             }
-
+            CommonViewHelper.DestoryChild(UIParticle.gameObject);
             EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
             string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true); 
-            //go.transform.localScale = effectConfig.
+            GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true);
+            UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>().scale  = (float)effectConfig.Scale;
         }
         
         public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, ItemInfo bagInfo)

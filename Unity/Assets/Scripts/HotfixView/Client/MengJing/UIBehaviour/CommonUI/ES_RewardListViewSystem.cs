@@ -73,6 +73,11 @@ namespace ET.Client
             foreach (var commonitem in self.ScrollItemCommonItems)
             {
                 Scroll_Item_CommonItem itemCommonItem = commonitem.Value;
+                if (itemCommonItem == null || itemCommonItem.uiTransform == null)
+                {
+                    continue;
+                }
+
                 itemCommonItem.ShowUIEffect(effectid);
             }
         }
