@@ -21,13 +21,10 @@ namespace ET.Client
         }
 
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null, long needTime = 0,int direction_new = 0 , int direction_old = 0)
+        public static async ETTask<int> MoveToAsync(this Unit unit, float3 targetPos, ETCancellationToken cancellationToken = null)
         {
             C2M_PathfindingRequest msg = C2M_PathfindingRequest.Create();
             msg.Position = targetPos;
-            msg.NeedTime = needTime;
-            msg.direction_new = direction_new;
-            msg.direction_old = direction_old;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
 
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
@@ -46,13 +43,10 @@ namespace ET.Client
         }
         
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask<int> MoveResultToAsync(this Unit unit, List<float3> pathlist,  ETCancellationToken cancellationToken = null ,long needTime = 0,int direction_new = 0 , int direction_old = 0)
+        public static async ETTask<int> MoveResultToAsync(this Unit unit, List<float3> pathlist,  ETCancellationToken cancellationToken = null)
         {
             C2M_PathfindingResult msg = C2M_PathfindingResult.Create();
             msg.Position = pathlist;
-            msg.NeedTime = needTime;
-            msg.direction_old = direction_old;
-            msg.direction_new = direction_new;
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
 

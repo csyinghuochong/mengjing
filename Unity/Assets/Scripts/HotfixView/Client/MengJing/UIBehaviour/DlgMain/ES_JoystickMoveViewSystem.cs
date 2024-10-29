@@ -231,6 +231,38 @@ namespace ET.Client
             self.SendMove(self.direction);
         }
 
+        //靠墙慢慢往前蹭
+        public static void MoveSlowly(this ES_JoystickMove self, int direction)
+        {
+            Unit unit = self.MainUnit;
+            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+            speed = Mathf.Max(speed, 4f);
+
+            speed *= 0.3f;
+            for (int i = 0; i < 80; i++)
+            {
+                List<float3> pathfind = new List<float3>();
+                quaternion rotation_1 = quaternion.Euler(0, math.radians(direction + i ), 0);
+                self.CanMovePosition_3(unit, rotation_1, pathfind);
+                if (pathfind.Count >= 2)
+                {
+                     unit.MoveResultToAsync(pathfind, null ).Coroutine();
+                                    unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
+                    break;
+                }
+                
+                pathfind.Clear();
+                quaternion rotation_2 = quaternion.Euler(0, math.radians(direction - i ), 0);
+                self.CanMovePosition_3(unit, rotation_2, pathfind);
+                if (pathfind.Count >= 2)
+                {
+                    unit.MoveResultToAsync(pathfind, null ).Coroutine();
+                    unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
+                    break;
+                }
+            }
+        }
+
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
             long clientNow = TimeHelper.ClientNow();
@@ -252,8 +284,6 @@ namespace ET.Client
           
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
-            ;// Quaternion.Euler(0, direction, 0);
-
             List<float3> pathfind = new List<float3>();
             float3 newv3 = self.CanMovePosition(unit, rotation, pathfind);
             if (pathfind.Count < 2)
@@ -296,6 +326,7 @@ namespace ET.Client
             //         i++;
             //     }
             // }
+            
             /////////--------------------------------
             for (int i = 1; i <pathfind.Count; i++)
             {
@@ -351,11 +382,11 @@ namespace ET.Client
 
             if (SettingData.MoveMode == 0)
             {
-                unit.MoveToAsync( newv3,  null,self.checkTime, direction,  self.lastDirection ).Coroutine();
+                unit.MoveToAsync( newv3,  null).Coroutine();
             }
             else
             {
-                unit.MoveResultToAsync(pathfind_2, null, self.checkTime, direction,  self.lastDirection ).Coroutine();
+                unit.MoveResultToAsync(pathfind_2, null ).Coroutine();
                 unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
             }
             
@@ -466,6 +497,36 @@ namespace ET.Client
             }
 
             return targetPosi;
+        }
+        
+        private static void CanMovePosition_3(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
+        {
+            float3 targetPosi = unit.Position;
+            for (int i = 0; i < 2; i++)
+            {
+                targetPosi = targetPosi + math.forward(rotation) * ( 0.2f);
+                RaycastHit hit;
+
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
+                if (hit.collider != null)
+                {
+                    break;
+                }
+
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+                if (hit.collider == null)
+                {
+                    break;
+                }
+                else
+                {
+                    targetPosi = hit.point;
+                }
+                
+                pathfind.Add(targetPosi);
+            }
+
+            return;
         }
         
         private static int CheckObstruct(this ES_JoystickMove self, Unit unit, Vector3 target)
