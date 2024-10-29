@@ -23,6 +23,11 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_CommonItem self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum,
         Action<ItemInfo> onClickAction = null, int currentHouse = -1)
         {
+            Transform UIParticle = self.uiTransform.Find("UIParticle");
+            if (UIParticle != null)
+            {
+                UIParticle.gameObject.SetActive(false);
+            }
             self.ES_CommonItem.UpdateItem(bagInfo, itemOperateEnum);
             self.ES_CommonItem.SetClickHandler(onClickAction);
             self.ES_CommonItem.SetCurrentHouse(currentHouse);
@@ -35,6 +40,7 @@ namespace ET.Client
             {
                 return;
             }
+            UIParticle.gameObject.SetActive(true);
             CommonViewHelper.DestoryChild(UIParticle.gameObject);
             EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
             string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
