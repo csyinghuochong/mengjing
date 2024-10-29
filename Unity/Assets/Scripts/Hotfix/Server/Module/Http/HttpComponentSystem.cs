@@ -64,7 +64,6 @@ namespace ET.Server
         {
             try
             {
-                Console.WriteLine($"HttpComponent.Handle  {self.IScene.SceneType}  {context.Request.Url.AbsolutePath}");
                 IHttpHandler handler = HttpDispatcher.Instance.Get(self.IScene.SceneType, context.Request.Url.AbsolutePath);
                 await handler.Handle(self.Scene(), context);
             }
