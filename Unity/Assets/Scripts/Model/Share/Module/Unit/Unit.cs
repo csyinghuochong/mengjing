@@ -22,6 +22,9 @@ namespace ET
         
         public int SceneType {get; set; }
 
+        public int SpeedRate{get; set; }
+
+        
         [BsonElement]
         private float3 position; //坐标
 
@@ -34,18 +37,6 @@ namespace ET
                 float3 oldPos = this.position;
                 this.position = value;
 
-                EventSystem.Instance.Publish(this.Scene(), new ChangePosition() { Unit = this, OldPos = oldPos });
-            }
-        }
-
-        [BsonIgnore]
-        public float3 Position_2
-        {
-            get => this.position;
-            set
-            {
-                float3 oldPos = this.position;
-                this.position = value;
                 EventSystem.Instance.Publish(this.Scene(), new ChangePosition() { Unit = this, OldPos = oldPos });
             }
         }

@@ -235,31 +235,40 @@ namespace ET.Client
         public static void MoveSlowly(this ES_JoystickMove self, int direction)
         {
             Unit unit = self.MainUnit;
+            unit.GetComponent<GameObjectComponent>().UpdateRotation(quaternion.Euler(0, math.radians(direction ), 0));
+            
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
-
-            speed *= 0.3f;
-            for (int i = 0; i < 80; i++)
+            
+            int speedRate = 10;  //移动速度 10是1/10   100是原始速度
+            speed *= (speedRate * 0.01f);
+            bool sendmove = false;
+            for (int i = 0; i < 80; i++)   //左右80度范围
             {
+                unit.SpeedRate = speedRate;
                 List<float3> pathfind = new List<float3>();
                 quaternion rotation_1 = quaternion.Euler(0, math.radians(direction + i ), 0);
                 self.CanMovePosition_3(unit, rotation_1, pathfind);
-                if (pathfind.Count >= 2)
+
+                if (pathfind.Count < 2)
                 {
-                     unit.MoveResultToAsync(pathfind, null ).Coroutine();
-                                    unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
-                    break;
+                    pathfind.Clear();
+                    quaternion rotation_2 = quaternion.Euler(0, math.radians(direction - i ), 0);
+                    self.CanMovePosition_3(unit, rotation_2, pathfind);
                 }
                 
-                pathfind.Clear();
-                quaternion rotation_2 = quaternion.Euler(0, math.radians(direction - i ), 0);
-                self.CanMovePosition_3(unit, rotation_2, pathfind);
                 if (pathfind.Count >= 2)
                 {
-                    unit.MoveResultToAsync(pathfind, null ).Coroutine();
+                    sendmove = true;
+                    unit.MoveResultToAsync(pathfind, null , speedRate).Coroutine();
                     unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
                     break;
                 }
+            }
+
+            if (!sendmove)
+            {
+                EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
             }
         }
 
@@ -288,9 +297,7 @@ namespace ET.Client
             float3 newv3 = self.CanMovePosition(unit, rotation, pathfind);
             if (pathfind.Count < 2)
             {
-                unit.Rotation =  quaternion.Euler(0, math.radians(direction ), 0);
-                EventSystem.Instance.Publish(self.Root().CurrentScene(), new MoveStart() { Unit = unit });
-                //self.MoveSlowly(direction);
+                self.MoveSlowly(direction);
                 return;
             }
 
@@ -505,7 +512,7 @@ namespace ET.Client
             float3 targetPosi = unit.Position;
             for (int i = 0; i < 2; i++)
             {
-                targetPosi = targetPosi + math.forward(rotation) * ( 0.2f);
+                targetPosi = targetPosi + math.forward(rotation) * ( 0.1f);
                 RaycastHit hit;
 
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);

@@ -11,7 +11,12 @@ namespace ET.Client
             {
                 return;
             }
-            gameObjectComponent.UpdateRotation(unit.Rotation);
+
+            if (unit.SpeedRate >= 100)
+            {
+                gameObjectComponent.UpdateRotation(unit.Rotation);
+            }
+
             await ETTask.CompletedTask;
         }
     }

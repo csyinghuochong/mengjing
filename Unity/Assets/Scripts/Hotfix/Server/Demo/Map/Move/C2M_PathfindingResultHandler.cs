@@ -14,6 +14,7 @@ namespace ET.Server
             m2CPathfindingResult.Id = unit.Id;
             m2CPathfindingResult.Points = message.Position;
             m2CPathfindingResult.YaoGan = true;
+            m2CPathfindingResult.SpeedRate = message.SpeedRate;
             int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
 
             MoveComponent moveComponent = null;
@@ -22,7 +23,7 @@ namespace ET.Server
                 moveComponent = unit.GetComponent<MoveComponent>();
 
                 MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
-                MoveHelper.PathResultToAsync(unit, message.Position, moveComponent).Coroutine();
+                MoveHelper.PathResultToAsync(unit, message.Position, moveComponent, message.SpeedRate).Coroutine();
             }
             else
             {
@@ -36,7 +37,7 @@ namespace ET.Server
                 moveComponent = petunit.GetComponent<MoveComponent>();
 
                 MapMessageHelper.Broadcast(petunit, m2CPathfindingResult);
-                MoveHelper.PathResultToAsync(petunit, message.Position, moveComponent).Coroutine();
+                MoveHelper.PathResultToAsync(petunit, message.Position, moveComponent ,message.SpeedRate).Coroutine();
             }
 
             await ETTask.CompletedTask;

@@ -30,6 +30,7 @@ namespace ET.Server
 
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;
+            m2CPathfindingResult.SpeedRate = 100;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
@@ -41,9 +42,10 @@ namespace ET.Server
             }
         }
 
-        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent)
+        public static async ETTask PathResultToAsync(Unit unit, List<float3> positonsss, MoveComponent moveComponent, int speedRate)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
+            speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(positonsss, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
