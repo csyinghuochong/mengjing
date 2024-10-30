@@ -28,13 +28,13 @@ namespace ET.Client
             self.E_EquipQualityImage.gameObject.SetActive(false);
             self.E_BangDingImage.gameObject.SetActive(false);
 
-            if (subType < 100)
-            {
-                string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_EquipBackImage.sprite = sp;
-            }
+            // if (subType < 100)
+            // {
+            //     string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
+            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
+            //     Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            //     self.E_EquipBackImage.sprite = sp;
+            // }
         }
 
         public static void Refresh(this ES_EquipItem self, ItemInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
