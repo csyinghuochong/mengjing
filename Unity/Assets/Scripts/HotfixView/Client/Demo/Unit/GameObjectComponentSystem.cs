@@ -120,7 +120,7 @@ namespace ET.Client
             }
 
             long elapsedTime = 0;
-            long interval = 100;
+            long interval = 30;
             while (elapsedTime < duration)
             {
                 elapsedTime += interval;
