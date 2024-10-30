@@ -7,8 +7,8 @@ namespace ET.Client
     public enum CameraMoveType
     {
         Normal = 0,
-        NpcEnter = 1,
-        NpcExit = 2,
+        BuildEnter = 1,
+        BuildExit = 2,
         PetFuben = 3,
         Pull = 4,
         Rollback = 5,
@@ -65,8 +65,8 @@ namespace ET.Client
         private EntityRef<Unit> mainUnit;
         public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
 
-        private EntityRef<Unit> npcUnit;
-        public Unit NpcUnit { get => this.npcUnit; set => this.npcUnit = value; }
+        private EntityRef<Unit> buildUnit;
+        public Unit BuildUnit { get => this.buildUnit; set => this.buildUnit = value; }
 
         private EntityRef<Unit> petUnit;
         public Unit PetUnit { get => this.petUnit; set => this.petUnit = value; }

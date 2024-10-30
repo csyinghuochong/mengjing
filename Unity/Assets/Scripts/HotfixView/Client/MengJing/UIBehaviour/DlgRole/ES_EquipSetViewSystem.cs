@@ -65,8 +65,11 @@ namespace ET.Client
 
         public static void ShowPlayerModel(this ES_EquipSet self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashonids, int position = 0)
         {
-            self.ES_ModelShow.SetPosition(new Vector3(position * 2000, 2000, 0), new Vector3(0f, 70f, 150f));
-            self.ES_ModelShow.ShowPlayerModel(bagInfo, occ, equipIndex, fashonids);
+            if (SettingData.ModelShow == 0)
+            {
+                self.ES_ModelShow.SetPosition(new Vector3(position * 2000, 2000, 0), new Vector3(0f, 70f, 150f));
+                self.ES_ModelShow.ShowPlayerModel(bagInfo, occ, equipIndex, fashonids);
+            }
         }
 
         public static void RefreshEquip(this ES_EquipSet self, List<ItemInfo> equiplist_1, List<ItemInfo> equiplist_2, int occ,

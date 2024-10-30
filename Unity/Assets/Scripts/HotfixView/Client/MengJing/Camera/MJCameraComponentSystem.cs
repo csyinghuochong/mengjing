@@ -29,14 +29,14 @@ namespace ET.Client
                 return;
             }
 
-            if (self.CameraMoveType == CameraMoveType.NpcEnter)
+            if (self.CameraMoveType == CameraMoveType.BuildEnter)
             {
                 self.CameraMoveTime += Time.deltaTime * 2f;
                 self.BuildEnterMove();
                 return;
             }
 
-            if (self.CameraMoveType == CameraMoveType.NpcExit)
+            if (self.CameraMoveType == CameraMoveType.BuildExit)
             {
                 self.CameraMoveTime += Time.deltaTime * 2f;
                 self.BuildExitMove();
@@ -84,21 +84,20 @@ namespace ET.Client
                 //抛出实践
             }
 
-            if (self.CameraMoveTime > 1f)
+            self.MainCamera.transform.position = Vector3.Lerp(self.OldCameraPostion, self.TargetPosition, self.CameraMoveTime);
+
+            if (self.BuildUnit.Type == UnitType.Monster)
             {
-                return;
+                self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 0.5f, 0));
             }
-
-            Vector3 chaV3 = self.OldCameraPostion + (self.TargetPosition - self.OldCameraPostion) * self.CameraMoveTime;
-            self.MainCamera.transform.localPosition = chaV3;
-
-            if (self.NpcUnit.Type == UnitType.Monster)
+            else if (self.BuildUnit.Type == UnitType.Player)
             {
-                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0, 0.5f, 0));
+                self.MainCamera.transform.LookAt(self.BuildUnit.Position + math.mul(self.BuildUnit.Rotation, math.left()) * 1f +
+                    new float3(0, 1f, 0));
             }
             else
             {
-                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0, 1f, 0));
+                self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 1f, 0));
             }
         }
 
@@ -119,7 +118,7 @@ namespace ET.Client
 
             Vector3 chaV3 = self.OldCameraPostion + (self.TargetPosition - self.OldCameraPostion) * self.CameraMoveTime;
             self.MainCamera.transform.position = chaV3;
-            Vector3 lookPosition = self.NpcUnit.Position + (unit.Position - self.NpcUnit.Position) * self.CameraMoveTime;
+            Vector3 lookPosition = self.BuildUnit.Position + (unit.Position - self.BuildUnit.Position) * self.CameraMoveTime;
             self.MainCamera.transform.LookAt(lookPosition);
         }
 
@@ -163,14 +162,27 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
 
-        public static void SetBuildEnter(this MJCameraComponent self, Unit npc, Action action)
+        public static void SetBuildEnter(this MJCameraComponent self, Unit unit, Action action)
         {
-            self.NpcUnit = npc;
-            self.CameraMoveTime = 0f;
-            self.CameraMoveType = (npc != null) ? CameraMoveType.NpcEnter : CameraMoveType.Normal;
+            if (unit == null || unit.IsDisposed)
+            {
+                return;
+            }
 
-            self.TargetPosition = npc.Position + npc.Forward * 4f;
-            self.TargetPosition.y += 2f;
+            self.BuildUnit = unit;
+            self.CameraMoveTime = 0f;
+            self.CameraMoveType = CameraMoveType.BuildEnter;
+
+            if (unit.Type == UnitType.Player)
+            {
+                self.TargetPosition = unit.Position + unit.Forward * 4f;
+                self.TargetPosition.y += 1f;
+            }
+            else
+            {
+                self.TargetPosition = unit.Position + unit.Forward * 4f;
+                self.TargetPosition.y += 2f;
+            }
 
             self.OldCameraPostion = self.MainCamera.transform.position;
             self.OnBuildEnter = action;
@@ -182,7 +194,7 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.CameraMoveTime = 0f;
-            self.CameraMoveType = CameraMoveType.NpcExit;
+            self.CameraMoveType = CameraMoveType.BuildExit;
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPostion;
         }

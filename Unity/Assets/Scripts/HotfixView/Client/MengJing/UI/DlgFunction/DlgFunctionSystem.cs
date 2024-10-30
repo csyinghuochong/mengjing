@@ -11,35 +11,19 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgFunction self)
         {
-            self.View.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Function); });
-
-            self.View.E_TaskButton.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task).Coroutine();
-            });
-            self.View.E_RoseEquipButton.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
-            });
-            self.View.E_PetButton.AddListener(() => { self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Pet).Coroutine(); });
-            self.View.E_RoseSkillButton.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Skill).Coroutine();
-            });
-            self.View.E_FriendButton.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Friend).Coroutine();
-            });
-            self.View.E_ChengJiuButton.AddListener(() =>
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChengJiu).Coroutine();
-            });
+            self.View.E_CloseButton.AddListener(self.OnClose);
+            self.View.E_TaskButton.AddListener(self.OnTask);
+            self.View.E_RoseEquipButton.AddListener(self.OnRoseEquip);
+            self.View.E_PetButton.AddListener(self.OnPet);
+            self.View.E_RoseSkillButton.AddListener(self.OnRoseSkill);
+            self.View.E_FriendButton.AddListener(self.OnFriend);
+            self.View.E_ChengJiuButton.AddListener(self.OnChengJiu);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
             redPointComponent.RegisterReddot(ReddotType.SkillUp, self.Reddot_SkillUp);
-            
+
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.FriendApply);
             reddotComponent.UpdateReddont(ReddotType.FriendChat);
@@ -72,6 +56,58 @@ namespace ET.Client
         private static void Reddot_SkillUp(this DlgFunction self, int num)
         {
             self.View.E_RoseSkillButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        private static void OnClose(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Function);
+        }
+
+        private static void OnTask(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnRoseEquip(this DlgFunction self)
+        {
+            Scene root = self.Root();
+            if (SettingData.ModelShow == 0)
+            {
+                root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+            }
+            else
+            {
+                MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(self.Root()),
+                    () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
+            }
+
+            self.OnClose();
+        }
+
+        private static void OnPet(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Pet).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnRoseSkill(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Skill).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnFriend(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Friend).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnChengJiu(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChengJiu).Coroutine();
+            self.OnClose();
         }
     }
 }

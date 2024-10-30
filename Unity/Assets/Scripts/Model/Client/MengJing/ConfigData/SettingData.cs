@@ -19,7 +19,13 @@ namespace ET.Client
         public static float3 FindPathInit;
         [StaticField]
         public static float3 FindPathEnd;
-        
+
+
+        /// <summary>
+        /// 模型展示方式 0 渲染RenderTexture；1 直接对着场景中的模型
+        /// </summary>
+        [StaticField]
+        public static int ModelShow = 1;
         
         /// <summary>
         /// 动画控制方式 0 Animator；1 Animancer
