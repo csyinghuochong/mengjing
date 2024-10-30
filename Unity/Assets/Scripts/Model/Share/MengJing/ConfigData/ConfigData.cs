@@ -7,6 +7,10 @@ namespace ET
     public static class ConfigData
     {
 
+        //npc对话最大距离
+        [StaticField]
+        public static float NpcDialogDistance = 10f;
+
         //随机副本魔能老人兑换消耗
         [StaticField]
         public static string EnergySkillCost = "10010031;5";

@@ -714,7 +714,7 @@ namespace ET.Client
             self.View.ES_MapMini.OnMainHeroMove();
             self.LockTargetComponent.OnMainHeroMove();
             self.SkillIndicatorComponent.OnMainHeroMove();
-
+            self.View.E_NpcDuiHuaButton.gameObject.SetActive( DuiHuaHelper.GetCanNpcDialog(self.Root())!=null );
             if (self.TianQiEffectObj != null)
             {
                 self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;
@@ -1876,6 +1876,7 @@ namespace ET.Client
             self.CheckMailReddot().Coroutine();
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
             self.RefreshFightSet();
+            self.OnMainHeroMove();
 
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
         }

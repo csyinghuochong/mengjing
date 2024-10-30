@@ -4,10 +4,12 @@ namespace ET.Client
 {
     public static class DuiHuaHelper
     {
-        public static void MoveToNpcDialog(Scene root)
+
+        public static Unit GetCanNpcDialog(Scene root)
         {
-            float distance = 20f;
             Unit npc = null;
+            
+            float distance = ConfigData.NpcDialogDistance;
             Unit main = UnitHelper.GetMyUnitFromClientScene(root);
             List<EntityRef<Unit>> units = root.CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
@@ -24,6 +26,12 @@ namespace ET.Client
                 }
             }
 
+            return npc;
+        }
+
+        public static void MoveToNpcDialog(Scene root)
+        {
+            Unit npc = GetCanNpcDialog(root);
             if (npc == null)
             {
                 return;
