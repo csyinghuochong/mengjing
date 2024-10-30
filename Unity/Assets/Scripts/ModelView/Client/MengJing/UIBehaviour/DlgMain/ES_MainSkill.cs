@@ -611,7 +611,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_NpcDuiHuaButton == null )
      			{
-		    		this.m_E_Btn_NpcDuiHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/E_Btn_NpcDuiHua");
+		    		this.m_E_Btn_NpcDuiHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_NpcDuiHua");
      			}
      			return this.m_E_Btn_NpcDuiHuaButton;
      		}
