@@ -156,10 +156,10 @@ namespace ET.Server
                             unionPlayerInfo_new.Position = 1;
                             unionPlayerInfo_old.Position = 0;
                             dBUnionInfo.UnionInfo.LeaderName = unionPlayerInfo_new.PlayerName;
-                            BroadMessageHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
+                            BroadCastHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
 
                             //通知旧族长
-                            BroadMessageHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
+                            BroadCastHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
                         }
                     }
                 }

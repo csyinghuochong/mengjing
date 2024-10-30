@@ -129,7 +129,7 @@ namespace ET.Server
             DBUnionInfo dBUnionInfo = await self.GetDBUnionInfo(winunionid);
             if (dBUnionInfo != null)
             {
-                BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice,
+                BroadCastHelper.SendBroadMessage(self.Root(), NoticeType.Notice,
                     $"恭喜 <color=#{CommonHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
             }
         }

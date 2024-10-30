@@ -4,7 +4,7 @@ using System.Linq;
 namespace ET.Server
 {
     
-    public static class BroadMessageHelper
+    public static class BroadCastHelper
     {
         public static void SendBroadMessage(Scene root, int messageType, string message)
         {

@@ -31,10 +31,10 @@
             UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
 
            
-            BroadMessageHelper.NoticeUnionLeader(scene.Root(), request.NewLeader, 1).Coroutine();
+            BroadCastHelper.NoticeUnionLeader(scene.Root(), request.NewLeader, 1).Coroutine();
 
             //通知旧族长
-            BroadMessageHelper.NoticeUnionLeader(scene.Root(), request.UnitID, 0).Coroutine();
+            BroadCastHelper.NoticeUnionLeader(scene.Root(), request.UnitID, 0).Coroutine();
             
             await ETTask.CompletedTask;
         }

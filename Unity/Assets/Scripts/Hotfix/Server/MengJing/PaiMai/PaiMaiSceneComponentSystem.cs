@@ -113,7 +113,7 @@ namespace ET.Server
             }
 
             //拍卖会开始
-            BroadMessageHelper.SendServerMessage(self.Root(), UnitCacheHelper.GetChatServerId(self.Zone()), NoticeType.PaiMaiAuction,
+            BroadCastHelper.SendServerMessage(self.Root(), UnitCacheHelper.GetChatServerId(self.Zone()), NoticeType.PaiMaiAuction,
                 $"{self.AuctionItem}_{self.AuctionItemNum}_{self.AuctionPrice}_{self.AuctionPlayer}_1").Coroutine();
 
             ServerLogHelper.LogWarning($"拍卖会开始:  {self.Zone()}  {self.AuctioUnitId} {self.AuctionPlayer}", true);
@@ -224,7 +224,7 @@ namespace ET.Server
             self.AuctionStatus = 2;
 
             //拍卖会结束
-            BroadMessageHelper.SendServerMessage( self.Root(), UnitCacheHelper.GetChatServerId(self.Zone()), NoticeType.PaiMaiAuction,
+            BroadCastHelper.SendServerMessage( self.Root(), UnitCacheHelper.GetChatServerId(self.Zone()), NoticeType.PaiMaiAuction,
                 $"{self.AuctionItem}_{self.AuctionItemNum}_{self.AuctionPrice}_{self.AuctionPlayer}_2").Coroutine();
 
             Log.Warning($"拍卖会结束:  {self.Zone()} {self.AuctionPlayer}  {self.AuctionPrice} {self.AuctionItem}:{self.AuctionItemNum}");

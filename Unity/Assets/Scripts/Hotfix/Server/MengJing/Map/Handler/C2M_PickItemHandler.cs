@@ -140,7 +140,7 @@ namespace ET.Server
                 {
                     string uername = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
                     string getmessage = $"{uername}在喜从天降活动这种获得: <color=#{CommonHelp.QualityReturnColor(5)}>{itemConfig.ItemName}</color>";
-                    BroadMessageHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, getmessage);
+                    BroadCastHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, getmessage);
                 }
             }
 

@@ -1362,7 +1362,7 @@ namespace ET.Server
                     {
                         string name = unit.GetComponent<UserInfoComponentS>().GetName();
                         string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{CommonHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
-                        BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
+                        BroadCastHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
                     }
 
                     //刷新传承属性

@@ -70,7 +70,7 @@ namespace ET.Server
         {
             A2A_BroadcastSceneRequest broadcastSceneRequest = A2A_BroadcastSceneRequest.Create();
             broadcastSceneRequest.UnitId = chatUnitId;
-            List<StartSceneConfig> otherscenes = BroadMessageHelper.GetAllScene(root.Zone());
+            List<StartSceneConfig> otherscenes = BroadCastHelper.GetAllScene(root.Zone());
             
             for (int i = 0; i < otherscenes.Count; i++)
             {

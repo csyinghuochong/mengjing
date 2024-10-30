@@ -89,7 +89,7 @@ namespace ET.Server
             A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
             A2A_BroadcastRequest.LoadType = 2;
             A2A_BroadcastRequest.ServerInfo = self.DBServerInfo.ServerInfo;
-            BroadMessageHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
+            BroadCastHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
         }
 
         public static void ClearRankingTrial(this RankSceneComponent self)
@@ -745,7 +745,7 @@ namespace ET.Server
                 A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
                 A2A_BroadcastRequest.LoadType = 1;
                 A2A_BroadcastRequest.LoadValue = loadvalue;
-                BroadMessageHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
+                BroadCastHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
             }
         }
 

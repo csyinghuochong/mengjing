@@ -63,7 +63,7 @@ namespace ET.Server
                                 }
 
                                 string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
-                                BroadMessageHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
+                                BroadCastHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
                             }
                         }
                         else if (valuePararm[2] == "35") //UserDataType.UnionGold

@@ -765,7 +765,7 @@ namespace ET.Server
                         }
 
                         string noticeContent = $"恭喜玩家<color=#B6FF00>{userInfoComponent.UserName}</color>在拾取装备时,意外在装备上发现了隐藏技能:<color=#FFA313>{skillName}</color>";
-                        BroadMessageHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, noticeContent);
+                        BroadCastHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, noticeContent);
                     }
 
                     long totalValue = 0;

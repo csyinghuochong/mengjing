@@ -193,7 +193,7 @@ namespace ET.Server
                     string defendname = defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Name;
                     string killtext =
                             $"<color=#B6FF00>{attackname}</color> 在<color=#FFA313>{sceneConfig.Name}</color> 击败了 <color=#00F6E6>{defendname}</color>";
-                    BroadMessageHelper.SendBroadMessage(defendUnit.Root(), NoticeType.KillEvent, killtext);
+                    BroadCastHelper.SendBroadMessage(defendUnit.Root(), NoticeType.KillEvent, killtext);
                 }
             }
 

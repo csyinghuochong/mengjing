@@ -69,7 +69,7 @@ namespace ET.Server
                 return;
             }
             int index = ConfigData.TurtleList.IndexOf(unit.ConfigId);
-            BroadMessageHelper.SendBroadMessage(aiComponent.Root(), NoticeType.Notice, $"{index + 1}号选手获得了本次小龟大赛的最终胜");
+            BroadCastHelper.SendBroadMessage(aiComponent.Root(), NoticeType.Notice, $"{index + 1}号选手获得了本次小龟大赛的最终胜");
 
             //移除所有小龟
             List<Unit> units = UnitHelper.GetUnitList(unit.Scene(), UnitType.Npc);

@@ -28,7 +28,7 @@
             keyValuePair.Occ = message.Occ;
             keyValuePair.PlayerName = message.AuctionPlayer;
             paiMaiSceneComponent.AuctionRecords.Add(keyValuePair);
-            BroadMessageHelper.SendServerMessage(scene.Root(), UnitCacheHelper.GetChatServerId(scene.Zone()), NoticeType.PaiMaiAuction,
+            BroadCastHelper.SendServerMessage(scene.Root(), UnitCacheHelper.GetChatServerId(scene.Zone()), NoticeType.PaiMaiAuction,
                 $"{paiMaiSceneComponent.AuctionItem}_{paiMaiSceneComponent.AuctionItemNum}_{message.Price}_{paiMaiSceneComponent.AuctionPlayer}_1").Coroutine();
 
             await ETTask.CompletedTask;

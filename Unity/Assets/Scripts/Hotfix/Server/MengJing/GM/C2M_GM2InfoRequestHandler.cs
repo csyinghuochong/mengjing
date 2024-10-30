@@ -18,7 +18,7 @@ namespace ET.Server
 
             int totalNumber = 0;
             int robotNumber = 0;
-            List<int> zones = BroadMessageHelper.GetAllZone();
+            List<int> zones = BroadCastHelper.GetAllZone();
             for (int i = 0; i < zones.Count; i++)
             {
                 List<StartSceneConfig> zoneGates = StartSceneConfigCategory.Instance.Gates[zones[i]];

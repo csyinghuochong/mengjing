@@ -25,7 +25,7 @@ namespace ET.Server
             A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
             A2A_BroadcastRequest.LoadType = 3;
             A2A_BroadcastRequest.LoadValue = content;
-            BroadMessageHelper.BroadcastProcess(root, A2A_BroadcastRequest ).Coroutine();
+            BroadCastHelper.BroadcastProcess(root, A2A_BroadcastRequest ).Coroutine();
 
             return ErrorCode.ERR_Success;
         }

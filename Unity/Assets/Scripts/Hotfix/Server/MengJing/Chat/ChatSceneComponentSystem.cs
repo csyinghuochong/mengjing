@@ -100,7 +100,7 @@ namespace ET.Server
                 WorldSayConfig worldSayConfig = self.WordSayList[0];
                 self.WordSayList.RemoveAt(0);
 
-                BroadMessageHelper.SendServerMessage(self.Root(),  UnitCacheHelper.GetChatServerId(self.Zone()),
+                BroadCastHelper.SendServerMessage(self.Root(),  UnitCacheHelper.GetChatServerId(self.Zone()),
                     NoticeType.Notice, worldSayConfig.Conent).Coroutine();
             }
 

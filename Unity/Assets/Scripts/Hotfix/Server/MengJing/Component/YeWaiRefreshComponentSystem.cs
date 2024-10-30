@@ -548,7 +548,7 @@ namespace ET.Server
             {
                 string noticeContent =
                         $"神器活动!<color=#B6FF00>{monsterConfig.MonsterName}</color>携带神器出现在地图<color=#FFA313>{"宝藏之地"}</color>,想要挑战的玩家请在主城宝藏之地处进入!";
-                BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
+                BroadCastHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
             }
         }
     }
