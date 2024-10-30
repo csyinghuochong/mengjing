@@ -79,8 +79,8 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip("请输入热重载类型！");
                 return;
             }
-
-            await UserInfoNetHelper.Reload(self.Root(), reload);
+            
+            await UserInfoNetHelper.GMCommon(self.Root(), reload);
         }
 
         public static async ETTask RequestGMInfo(this DlgGM self)

@@ -22,6 +22,15 @@ namespace ET.Server
                         ConfigData.ServerInfo = request.ServerInfo;
                         //Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
                         break;
+                    case 3: //热重载
+                        string[] ss = request.LoadValue.Split(" ");
+                        int loadType = int.Parse(ss[1]);
+                        string LoadValue = ss[2];
+                        CodeLoader.Instance.Reload();
+                        Console.WriteLine($" CodeLoader.Instance.Reload ");
+                        break;
+                    default:
+                        break;
                 }
 
                 await ETTask.CompletedTask;

@@ -58,7 +58,24 @@ namespace ET.Server
             }
             return zoneList;
         }
-        
+
+        public static async ETTask BroadcastProcess(Scene root,  A2A_BroadcastProcessRequest A2A_BroadcastRequest)
+        {
+            List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < listprogress.Count; i++)
+            {
+                List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
+                if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
+                {
+                    continue;
+                }
+
+                StartSceneConfig startSceneConfig = processScenes[0];
+                ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
+                A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await root.GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
+            }
+        }
+
         public static async ETTask NoticeUnionLeader(Scene root, long unitid, int leader)
         {
             U2M_UnionTransferResult u2M_UnionTransferMessage = U2M_UnionTransferResult.Create();

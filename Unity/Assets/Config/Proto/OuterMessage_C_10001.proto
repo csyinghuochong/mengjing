@@ -62,24 +62,6 @@ message E2C_GMEMailResponse // IMailActorResponse
 	string Message = 92;
 }
 
-//ResponseType G2C_Reload
-message C2G_Reload // IRequest
-{
-	int32 RpcId = 90;
-	string Account = 1;
-	string Password = 2;
-
-	int32 LoadType = 3;
-	string LoadValue = 4;
-}
-
-message G2C_Reload // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 message C2M_GMCommand // ILocationMessage
 {
 	int32 RpcId = 1;

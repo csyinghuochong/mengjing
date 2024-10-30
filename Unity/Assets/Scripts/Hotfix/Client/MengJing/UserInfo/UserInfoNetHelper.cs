@@ -59,17 +59,7 @@
             M2C_GM2InfoResponse response = (M2C_GM2InfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
-
-        public static async ETTask<G2C_Reload> Reload(Scene root, string loadValue)
-        {
-            C2G_Reload request = C2G_Reload.Create();
-            request.Account = root.GetComponent<PlayerComponent>().Account;
-            request.LoadValue = loadValue;
-
-            G2C_Reload response = await root.GetComponent<ClientSenderCompnent>().Call(request) as G2C_Reload;
-            return response;
-        }
-
+        
         public static async ETTask<int> ExpToGoldRequest(Scene root, int operateType)
         {
             C2M_ExpToGoldRequest request = C2M_ExpToGoldRequest.Create();

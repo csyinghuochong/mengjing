@@ -1,13 +1,12 @@
-
 using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_GM2CommonRequestHandler : MessageLocationHandler<Unit, C2M_GM2InfoRequest, M2C_GM2InfoResponse>
+    public class C2M_GM2CommonRequestHandler : MessageLocationHandler<Unit, C2M_GM2CommonRequest, M2C_GM2CommonResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_GM2InfoRequest request, M2C_GM2InfoResponse response)
+        protected override async ETTask Run(Unit unit, C2M_GM2CommonRequest request, M2C_GM2CommonResponse response)
         {
             string account = unit.GetComponent<UserInfoComponentS>().Account;
             if (!GMData.GmAccount.Contains(account))
@@ -15,24 +14,12 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_GMError;
                 return;
             }
-
-            int totalNumber = 0;
-            int robotNumber = 0;
-            List<int> zones = BroadMessageHelper.GetAllZone();
-            for (int i = 0; i < zones.Count; i++)
+            string[] infoList = request.Context.Split(" ");
+            
+            if (infoList[0] == ConsoleMode.ReloadDll)  //R 0 0    R 1 0 /  R 1 ActivityConfig
             {
-                List<StartSceneConfig> zoneGates = StartSceneConfigCategory.Instance.Gates[zones[i]];
-
-                foreach (StartSceneConfig gateServerId in zoneGates)
-                {
-                    G2A_GetUnitNumber g2M_UpdateUnitResponse = (G2A_GetUnitNumber)await unit.Root().GetComponent<MessageSender>().Call
-                            (gateServerId.ActorId, A2G_GetUnitNumber.Create());
-                    totalNumber+= g2M_UpdateUnitResponse.OnLinePlayer;
-                    robotNumber += g2M_UpdateUnitResponse.OnLineRobot;
-                }
+                ConsoleHelper.ReloadDllConsoleHandler(unit.Root(), request.Context).Coroutine();
             }
-            response.OnLineNumber = totalNumber;
-            response.OnLineRobot = robotNumber;
 
             await ETTask.CompletedTask;
         }

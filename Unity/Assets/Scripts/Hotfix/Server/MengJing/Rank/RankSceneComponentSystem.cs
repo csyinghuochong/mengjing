@@ -86,23 +86,10 @@ namespace ET.Server
             //延迟刷新，以免有些服务器还没启动
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
 
-            List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < listprogress.Count; i++)
-            {
-                List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
-                if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
-                {
-                    continue;
-                }
-
-                StartSceneConfig startSceneConfig = processScenes[0];
-                ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
-                A2A_BroadcastRequest.LoadType = 2;
-                A2A_BroadcastRequest.ServerInfo = self.DBServerInfo.ServerInfo;
-                A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
-            }
-            
+            A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
+            A2A_BroadcastRequest.LoadType = 2;
+            A2A_BroadcastRequest.ServerInfo = self.DBServerInfo.ServerInfo;
+            BroadMessageHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
         }
 
         public static void ClearRankingTrial(this RankSceneComponent self)
@@ -754,27 +741,11 @@ namespace ET.Server
             {
                 Log.Debug($"BroadcastShowLie:  {self.Zone()}");
                 Log.Console($"BroadcastShowLie:  {self.Zone()} {loadvalue}");
-                List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
-                for (int i = 0; i < listprogress.Count; i++)
-                {
-                    if (listprogress[i].Id == 2)
-                    {
-                        continue;
-                    }
-
-                    List<StartSceneConfig> processScenes = StartSceneConfigCategory.Instance.GetByProcess(listprogress[i].Id);
-                    if (processScenes.Count == 0 || CommonHelp.IsRobotZone(processScenes[0].Zone)) //机器人进程
-                    {
-                        continue;
-                    }
-
-                    StartSceneConfig startSceneConfig = processScenes[0];
-                    ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                    A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
-                    A2A_BroadcastRequest.LoadType = 1;
-                    A2A_BroadcastRequest.LoadValue = loadvalue;
-                    A2A_BroadcastProcessResponse createUnit = (A2A_BroadcastProcessResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
-                }
+                
+                A2A_BroadcastProcessRequest A2A_BroadcastRequest = A2A_BroadcastProcessRequest.Create();
+                A2A_BroadcastRequest.LoadType = 1;
+                A2A_BroadcastRequest.LoadValue = loadvalue;
+                BroadMessageHelper.BroadcastProcess(self.Root(), A2A_BroadcastRequest ).Coroutine();
             }
         }
 
