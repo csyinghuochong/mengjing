@@ -201,6 +201,21 @@ message G2A_GetOnLineUnit // IResponse
 	repeated int64 OnLineUnits = 4;
 }
 
+//ResponseType G2A_GetUnitNumber
+message A2G_GetUnitNumber // IRequest
+{
+	int32 RpcId = 1;
+}
+
+message G2A_GetUnitNumber // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	int32 OnLinePlayer = 4;
+	int32 OnLineRobot = 5;
+}
+
 //ResponseType Q2R_EnterQueue
 message R2Q_EnterQueue // IRequest
 {

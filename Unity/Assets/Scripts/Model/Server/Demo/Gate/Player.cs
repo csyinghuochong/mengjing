@@ -37,5 +37,7 @@
         public ActorId PopularizeServerID { get; set; }
         
         public ActorId TeamServerID { get; set; }
+        
+        public string RemoteAddress  { get; set; }
     }
 }

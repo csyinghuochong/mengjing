@@ -80,6 +80,7 @@
                     playerSessionComponent.Session = session;
 
                     player.PlayerState = PlayerState.Gate;
+                    player.RemoteAddress = session.RemoteAddress.ToString();
                 }
                 else
                 {

@@ -17,7 +17,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-
+                
                 if (player.GetComponent<PlayerOfflineOutTimeComponent>() == null)
                 {
                     response.OnLineUnits.Add(player.UnitId);
