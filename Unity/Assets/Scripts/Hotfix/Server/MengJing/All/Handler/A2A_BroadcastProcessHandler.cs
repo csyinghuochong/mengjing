@@ -27,6 +27,7 @@ namespace ET.Server
                         int loadType = int.Parse(ss[1]);
                         string LoadValue = ss[2];
                         CodeLoader.Instance.Reload();
+                        await World.Instance.AddSingleton<ConfigLoader>().LoadAsync();  //耗时8s
                         Console.WriteLine($" CodeLoader.Instance.Reload ");
                         break;
                     default:
