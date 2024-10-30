@@ -1035,7 +1035,17 @@ namespace ET.Client
 
         private static void OnBagButton(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+            Scene root = self.Root();
+            if (SettingData.ModelShow == 0)
+            {
+                root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+            }
+            else
+            {
+                MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
+                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root),
+                    () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
+            }
         }
 
         public static void UpdateShowRoleExp(this DlgMain self)

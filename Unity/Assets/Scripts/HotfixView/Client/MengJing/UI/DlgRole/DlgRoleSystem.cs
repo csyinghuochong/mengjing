@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
+    public class BagItemUpdate_DlgRoleAndBagRefresh : AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
@@ -15,7 +15,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_EquipWear_RefreshEquip: AEvent<Scene, EquipWear>
+    public class DataUpdate_EquipWear_RefreshEquip : AEvent<Scene, EquipWear>
     {
         protected override async ETTask Run(Scene scene, EquipWear args)
         {
@@ -25,7 +25,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_Refreshitem: AEvent<Scene, HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_Refreshitem : AEvent<Scene, HuiShouSelect>
     {
         protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
@@ -35,7 +35,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_EquipHuiShow_Refreshitem: AEvent<Scene, EquipHuiShow>
+    public class DataUpdate_EquipHuiShow_Refreshitem : AEvent<Scene, EquipHuiShow>
     {
         protected override async ETTask Run(Scene scene, EquipHuiShow args)
         {
@@ -45,7 +45,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateRoleProper_Refresh: AEvent<Scene, DataUpdate_UpdateRoleProper>
+    public class DataUpdate_UpdateRoleProper_Refresh : AEvent<Scene, DataUpdate_UpdateRoleProper>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_UpdateRoleProper args)
         {
@@ -54,26 +54,26 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_RoleQiangHua))]
-    [FriendOf(typeof (ES_RoleHuiShou))]
-    [FriendOf(typeof (ES_EquipSet))]
-    [FriendOf(typeof (ES_RoleGem))]
-    [FriendOf(typeof (ES_RoleProperty))]
-    [FriendOf(typeof (ES_RoleBag))]
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (DlgRole))]
+    [FriendOf(typeof(ES_RoleQiangHua))]
+    [FriendOf(typeof(ES_RoleHuiShou))]
+    [FriendOf(typeof(ES_EquipSet))]
+    [FriendOf(typeof(ES_RoleGem))]
+    [FriendOf(typeof(ES_RoleProperty))]
+    [FriendOf(typeof(ES_RoleBag))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(DlgRole))]
     public static class DlgRoleSystem
     {
         public static void RegisterUIEvent(this DlgRole self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             self.View.E_ZodiacButton.AddListenerAsync(self.OnZodiacButton);
-            
+
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-            
+
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
-            
+
             ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
             reddotComponent.UpdateReddont(ReddotType.RolePoint);
         }
@@ -84,15 +84,20 @@ namespace ET.Client
 
         public static void BeforeUnload(this DlgRole self)
         {
+            if (SettingData.ModelShow == 1)
+            {
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit();
+            }
+
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
         }
-        
+
         public static void Reddot_RolePoint(this DlgRole self, int num)
         {
             self.View.E_Type_PropertyToggle.transform.Find("Reddot").gameObject.SetActive(num > 0);
         }
-        
+
         private static void OnFunctionSetBtn(this DlgRole self, int index)
         {
             CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);

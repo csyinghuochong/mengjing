@@ -421,11 +421,6 @@ namespace ET.Client
                 self.CurrentNpcUI = 0;
             }
 
-            if (windowId == WindowID.WindowID_Role && SettingData.ModelShow == 1)
-            {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit();
-            }
-
             UIBaseWindow baseWindow = self.VisibleWindowsDic[(int)windowId];
             UILayerScript uILayerScript = baseWindow.UIPrefabGameObject.GetComponent<UILayerScript>();
             if (uILayerScript.ShowHuoBi)

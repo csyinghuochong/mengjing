@@ -78,8 +78,8 @@ namespace ET.Client
             }
             else
             {
-                MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(self.Root()),
+                MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
+                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root),
                     () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
             }
 
