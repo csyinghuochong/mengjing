@@ -270,78 +270,6 @@ namespace ET
         }
     }
 
-    // GM后台指令
-    [MemoryPackable]
-    [Message(OuterMessage.C2C_GMCommonRequest)]
-    [ResponseType(nameof(C2C_GMCommonResponse))]
-    public partial class C2C_GMCommonRequest : MessageObject, ICenterActorRequest
-    {
-        public static C2C_GMCommonRequest Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2C_GMCommonRequest), isFromPool) as C2C_GMCommonRequest;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(92)]
-        public long ActorId { get; set; }
-
-        [MemoryPackOrder(0)]
-        public string Account { get; set; }
-
-        [MemoryPackOrder(1)]
-        public string Context { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.ActorId = default;
-            this.Account = default;
-            this.Context = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.C2C_GMCommonResponse)]
-    public partial class C2C_GMCommonResponse : MessageObject, ICenterActorResponse
-    {
-        public static C2C_GMCommonResponse Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2C_GMCommonResponse), isFromPool) as C2C_GMCommonResponse;
-        }
-
-        [MemoryPackOrder(89)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(90)]
-        public int Error { get; set; }
-
-        [MemoryPackOrder(91)]
-        public string Message { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.Error = default;
-            this.Message = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
     [MemoryPackable]
     [Message(OuterMessage.C2G_Reload)]
     [ResponseType(nameof(G2C_Reload))]
@@ -417,15 +345,48 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GMCommand)]
+    public partial class C2M_GMCommand : MessageObject, ILocationMessage
+    {
+        public static C2M_GMCommand Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GMCommand), isFromPool) as C2M_GMCommand;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string GMMsg { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string Account { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.GMMsg = default;
+            this.Account = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // GM数据
     [MemoryPackable]
-    [Message(OuterMessage.C2C_GMInfoRequest)]
-    [ResponseType(nameof(C2C_GMInfoResponse))]
-    public partial class C2C_GMInfoRequest : MessageObject, ICenterActorRequest
+    [Message(OuterMessage.C2M_GM2InfoRequest)]
+    [ResponseType(nameof(M2C_GM2InfoResponse))]
+    public partial class C2M_GM2InfoRequest : MessageObject, ILocationRequest
     {
-        public static C2C_GMInfoRequest Create(bool isFromPool = false)
+        public static C2M_GM2InfoRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2C_GMInfoRequest), isFromPool) as C2C_GMInfoRequest;
+            return ObjectPool.Instance.Fetch(typeof(C2M_GM2InfoRequest), isFromPool) as C2M_GM2InfoRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -453,12 +414,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.C2C_GMInfoResponse)]
-    public partial class C2C_GMInfoResponse : MessageObject, ICenterActorResponse
+    [Message(OuterMessage.M2C_GM2InfoResponse)]
+    public partial class M2C_GM2InfoResponse : MessageObject, ILocationResponse
     {
-        public static C2C_GMInfoResponse Create(bool isFromPool = false)
+        public static M2C_GM2InfoResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2C_GMInfoResponse), isFromPool) as C2C_GMInfoResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2C_GM2InfoResponse), isFromPool) as M2C_GM2InfoResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -488,6 +449,78 @@ namespace ET
             this.Message = default;
             this.OnLineNumber = default;
             this.OnLineRobot = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // GM后台指令
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_GM2CommonRequest)]
+    [ResponseType(nameof(M2C_GM2CommonResponse))]
+    public partial class C2M_GM2CommonRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_GM2CommonRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_GM2CommonRequest), isFromPool) as C2M_GM2CommonRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public string Account { get; set; }
+
+        [MemoryPackOrder(1)]
+        public string Context { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.Account = default;
+            this.Context = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_GM2CommonResponse)]
+    public partial class M2C_GM2CommonResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_GM2CommonResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_GM2CommonResponse), isFromPool) as M2C_GM2CommonResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -4118,39 +4151,6 @@ namespace ET
 
             this.FubenId = default;
             this.Difficulty = default;
-
-            ObjectPool.Instance.Recycle(this);
-        }
-    }
-
-    [MemoryPackable]
-    [Message(OuterMessage.C2M_GMCommand)]
-    public partial class C2M_GMCommand : MessageObject, ILocationMessage
-    {
-        public static C2M_GMCommand Create(bool isFromPool = false)
-        {
-            return ObjectPool.Instance.Fetch(typeof(C2M_GMCommand), isFromPool) as C2M_GMCommand;
-        }
-
-        [MemoryPackOrder(0)]
-        public int RpcId { get; set; }
-
-        [MemoryPackOrder(1)]
-        public string GMMsg { get; set; }
-
-        [MemoryPackOrder(2)]
-        public string Account { get; set; }
-
-        public override void Dispose()
-        {
-            if (!this.IsFromPool)
-            {
-                return;
-            }
-
-            this.RpcId = default;
-            this.GMMsg = default;
-            this.Account = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31282,93 +31282,93 @@ namespace ET
         public const ushort C2C_SendBroadcastResponse = 10007;
         public const ushort C2E_GMEMailRequest = 10008;
         public const ushort E2C_GMEMailResponse = 10009;
-        public const ushort C2C_GMCommonRequest = 10010;
-        public const ushort C2C_GMCommonResponse = 10011;
-        public const ushort C2G_Reload = 10012;
-        public const ushort G2C_Reload = 10013;
-        public const ushort C2C_GMInfoRequest = 10014;
-        public const ushort C2C_GMInfoResponse = 10015;
-        public const ushort C2G_EnterGame = 10016;
-        public const ushort G2C_EnterGame = 10017;
-        public const ushort MoveInfo = 10018;
-        public const ushort UnitInfo = 10019;
-        public const ushort M2C_CreateUnits = 10020;
-        public const ushort M2C_CreateMyUnit = 10021;
-        public const ushort M2C_StartSceneChange = 10022;
-        public const ushort M2C_CellDungeonInfo = 10023;
-        public const ushort M2C_CellSonDungeonInfo = 10024;
-        public const ushort M2C_RemoveUnits = 10025;
-        public const ushort C2M_PathfindingRequest = 10026;
-        public const ushort C2M_PathfindingResult = 10027;
-        public const ushort C2M_Stop = 10028;
-        public const ushort M2C_Stop = 10029;
-        public const ushort C2M_StopResult = 10030;
-        public const ushort M2C_StopResult = 10031;
-        public const ushort M2C_PathfindingResult = 10032;
-        public const ushort C2G_Ping = 10033;
-        public const ushort G2C_Ping = 10034;
-        public const ushort C2R_Ping = 10035;
-        public const ushort R2C_Ping = 10036;
-        public const ushort G2C_Test = 10037;
-        public const ushort C2M_Reload = 10038;
-        public const ushort M2C_Reload = 10039;
-        public const ushort ServerItem = 10040;
-        public const ushort C2R_DeleteAccountRequest = 10041;
-        public const ushort R2C_DeleteAccountResponse = 10042;
-        public const ushort C2R_ServerList = 10043;
-        public const ushort R2C_ServerList = 10044;
-        public const ushort C2R_LoginAccount = 10045;
-        public const ushort R2C_LoginAccount = 10046;
-        public const ushort C2R_RealNameRequest = 10047;
-        public const ushort R2C_RealNameResponse = 10048;
-        public const ushort RechargeInfo = 10049;
-        public const ushort PlayerInfo = 10050;
-        public const ushort CreateRoleInfo = 10051;
-        public const ushort C2G_LoginGameGate = 10052;
-        public const ushort G2C_LoginGameGate = 10053;
-        public const ushort C2R_CreateRoleData = 10054;
-        public const ushort R2C_CreateRoleData = 10055;
-        public const ushort C2R_DeleteRoleData = 10056;
-        public const ushort R2C_DeleteRoleData = 10057;
-        public const ushort C2Q_EnterQueue = 10058;
-        public const ushort Q2C_EnterQueue = 10059;
-        public const ushort C2R_GetRealmKey = 10060;
-        public const ushort R2C_GetRealmKey = 10061;
-        public const ushort G2C_TestHotfixMessage = 10062;
-        public const ushort C2M_TestRobotCase = 10063;
-        public const ushort M2C_TestRobotCase = 10064;
-        public const ushort C2M_TestRobotCase2 = 10065;
-        public const ushort M2C_TestRobotCase2 = 10066;
-        public const ushort C2M_TransferMap = 10067;
-        public const ushort M2C_TransferMap = 10068;
-        public const ushort C2G_Benchmark = 10069;
-        public const ushort G2C_Benchmark = 10070;
-        public const ushort BagInfo = 10071;
-        public const ushort MysteryItemInfo = 10072;
-        public const ushort ZhanQuReceiveNumber = 10073;
-        public const ushort FirstWinInfo = 10074;
-        public const ushort PetMingPlayerInfo = 10075;
-        public const ushort ChatInfo = 10076;
-        public const ushort MailInfo = 10077;
-        public const ushort PaiMaiItemInfo = 10078;
-        public const ushort PaiMaiShopItemInfo = 10079;
-        public const ushort PopularizeInfo = 10080;
-        public const ushort RankingInfo = 10081;
-        public const ushort RankShouLieInfo = 10082;
-        public const ushort RankPetInfo = 10083;
-        public const ushort ServerInfo = 10084;
-        public const ushort ServerMailItem = 10085;
-        public const ushort UnionInfo = 10086;
-        public const ushort UnionPlayerInfo = 10087;
-        public const ushort DonationRecord = 10088;
-        public const ushort A2C_Disconnect = 10089;
-        public const ushort G2C_SecondLogin = 10090;
-        public const ushort UserInfoProto = 10091;
-        public const ushort M2C_RoleDataUpdate = 10092;
-        public const ushort M2C_RoleDataBroadcast = 10093;
-        public const ushort SkillPro = 10094;
-        public const ushort FubenPassInfo = 10095;
-        public const ushort C2M_GMCommand = 10096;
+        public const ushort C2G_Reload = 10010;
+        public const ushort G2C_Reload = 10011;
+        public const ushort C2M_GMCommand = 10012;
+        public const ushort C2M_GM2InfoRequest = 10013;
+        public const ushort M2C_GM2InfoResponse = 10014;
+        public const ushort C2M_GM2CommonRequest = 10015;
+        public const ushort M2C_GM2CommonResponse = 10016;
+        public const ushort C2G_EnterGame = 10017;
+        public const ushort G2C_EnterGame = 10018;
+        public const ushort MoveInfo = 10019;
+        public const ushort UnitInfo = 10020;
+        public const ushort M2C_CreateUnits = 10021;
+        public const ushort M2C_CreateMyUnit = 10022;
+        public const ushort M2C_StartSceneChange = 10023;
+        public const ushort M2C_CellDungeonInfo = 10024;
+        public const ushort M2C_CellSonDungeonInfo = 10025;
+        public const ushort M2C_RemoveUnits = 10026;
+        public const ushort C2M_PathfindingRequest = 10027;
+        public const ushort C2M_PathfindingResult = 10028;
+        public const ushort C2M_Stop = 10029;
+        public const ushort M2C_Stop = 10030;
+        public const ushort C2M_StopResult = 10031;
+        public const ushort M2C_StopResult = 10032;
+        public const ushort M2C_PathfindingResult = 10033;
+        public const ushort C2G_Ping = 10034;
+        public const ushort G2C_Ping = 10035;
+        public const ushort C2R_Ping = 10036;
+        public const ushort R2C_Ping = 10037;
+        public const ushort G2C_Test = 10038;
+        public const ushort C2M_Reload = 10039;
+        public const ushort M2C_Reload = 10040;
+        public const ushort ServerItem = 10041;
+        public const ushort C2R_DeleteAccountRequest = 10042;
+        public const ushort R2C_DeleteAccountResponse = 10043;
+        public const ushort C2R_ServerList = 10044;
+        public const ushort R2C_ServerList = 10045;
+        public const ushort C2R_LoginAccount = 10046;
+        public const ushort R2C_LoginAccount = 10047;
+        public const ushort C2R_RealNameRequest = 10048;
+        public const ushort R2C_RealNameResponse = 10049;
+        public const ushort RechargeInfo = 10050;
+        public const ushort PlayerInfo = 10051;
+        public const ushort CreateRoleInfo = 10052;
+        public const ushort C2G_LoginGameGate = 10053;
+        public const ushort G2C_LoginGameGate = 10054;
+        public const ushort C2R_CreateRoleData = 10055;
+        public const ushort R2C_CreateRoleData = 10056;
+        public const ushort C2R_DeleteRoleData = 10057;
+        public const ushort R2C_DeleteRoleData = 10058;
+        public const ushort C2Q_EnterQueue = 10059;
+        public const ushort Q2C_EnterQueue = 10060;
+        public const ushort C2R_GetRealmKey = 10061;
+        public const ushort R2C_GetRealmKey = 10062;
+        public const ushort G2C_TestHotfixMessage = 10063;
+        public const ushort C2M_TestRobotCase = 10064;
+        public const ushort M2C_TestRobotCase = 10065;
+        public const ushort C2M_TestRobotCase2 = 10066;
+        public const ushort M2C_TestRobotCase2 = 10067;
+        public const ushort C2M_TransferMap = 10068;
+        public const ushort M2C_TransferMap = 10069;
+        public const ushort C2G_Benchmark = 10070;
+        public const ushort G2C_Benchmark = 10071;
+        public const ushort BagInfo = 10072;
+        public const ushort MysteryItemInfo = 10073;
+        public const ushort ZhanQuReceiveNumber = 10074;
+        public const ushort FirstWinInfo = 10075;
+        public const ushort PetMingPlayerInfo = 10076;
+        public const ushort ChatInfo = 10077;
+        public const ushort MailInfo = 10078;
+        public const ushort PaiMaiItemInfo = 10079;
+        public const ushort PaiMaiShopItemInfo = 10080;
+        public const ushort PopularizeInfo = 10081;
+        public const ushort RankingInfo = 10082;
+        public const ushort RankShouLieInfo = 10083;
+        public const ushort RankPetInfo = 10084;
+        public const ushort ServerInfo = 10085;
+        public const ushort ServerMailItem = 10086;
+        public const ushort UnionInfo = 10087;
+        public const ushort UnionPlayerInfo = 10088;
+        public const ushort DonationRecord = 10089;
+        public const ushort A2C_Disconnect = 10090;
+        public const ushort G2C_SecondLogin = 10091;
+        public const ushort UserInfoProto = 10092;
+        public const ushort M2C_RoleDataUpdate = 10093;
+        public const ushort M2C_RoleDataBroadcast = 10094;
+        public const ushort SkillPro = 10095;
+        public const ushort FubenPassInfo = 10096;
         public const ushort C2A_ActivityInfoRequest = 10097;
         public const ushort A2C_ActivityInfoResponse = 10098;
         public const ushort C2A_FirstWinInfoRequest = 10099;

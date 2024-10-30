@@ -62,23 +62,6 @@ message E2C_GMEMailResponse // IMailActorResponse
 	string Message = 92;
 }
 
-//GM后台指令
-//ResponseType C2C_GMCommonResponse
-message C2C_GMCommonRequest // ICenterActorRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	string Account = 1;
-	string Context = 2;
-}
-
-message C2C_GMCommonResponse // ICenterActorResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 //ResponseType G2C_Reload
 message C2G_Reload // IRequest
 {
@@ -97,22 +80,46 @@ message G2C_Reload // IResponse
 	string Message = 92;
 }
 
+message C2M_GMCommand // ILocationMessage
+{
+	int32 RpcId = 1;
+	string GMMsg = 2;
+	string Account = 3;
+}
+
 //GM数据
-//ResponseType C2C_GMInfoResponse
-message C2C_GMInfoRequest // ICenterActorRequest
+//ResponseType M2C_GM2InfoResponse
+message C2M_GM2InfoRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	string Account = 1;
 }
 
-message C2C_GMInfoResponse // ICenterActorResponse
+message M2C_GM2InfoResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
 	int32 OnLineNumber = 1;
 	int32 OnLineRobot = 2;
+}
+
+//GM后台指令
+//ResponseType M2C_GM2CommonResponse
+message C2M_GM2CommonRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string Account = 1;
+	string Context = 2;
+}
+
+message M2C_GM2CommonResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 //ResponseType G2C_EnterGame
@@ -961,13 +968,6 @@ message FubenPassInfo
 	int32 Difficulty = 2;			//1 difficulty普通 2 挑战  3困难
 }
 
-message C2M_GMCommand // ILocationMessage
-{
-	int32 RpcId = 1;
-	string GMMsg = 2;
-	string Account = 3;
-}
-
 //ResponseType A2C_ActivityInfoResponse
 message C2A_ActivityInfoRequest // IActivityActorRequest
 {
@@ -1155,7 +1155,6 @@ message M2C_RoleBagUpdate // IMessage
 	repeated ItemInfoProto BagInfoUpdate = 2;
 	repeated ItemInfoProto BagInfoDelete = 3;
 }
-
 
 //ResponseType M2C_BagInitResponse
 message C2M_BagInitRequest // ILocationRequest

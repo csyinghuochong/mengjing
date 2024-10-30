@@ -41,22 +41,22 @@
             return response;
         }
 
-        public static async ETTask<C2C_GMCommonResponse> GMCommon(Scene root, string context)
+        public static async ETTask<M2C_GM2CommonResponse> GMCommon(Scene root, string context)
         {
-            C2C_GMCommonRequest request = C2C_GMCommonRequest.Create();
+            C2M_GM2CommonRequest request = C2M_GM2CommonRequest.Create();
             request.Account = root.GetComponent<PlayerComponent>().Account;
             request.Context = context;
 
-            C2C_GMCommonResponse response = (C2C_GMCommonResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_GM2CommonResponse response = (M2C_GM2CommonResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
-        public static async ETTask<C2C_GMInfoResponse> GMInfo(Scene root)
+        public static async ETTask<M2C_GM2InfoResponse> GMInfo(Scene root)
         {
-            C2C_GMInfoRequest request = C2C_GMInfoRequest.Create();
+            C2M_GM2InfoRequest request = C2M_GM2InfoRequest.Create();
             request.Account = root.GetComponent<PlayerComponent>().Account;
 
-            C2C_GMInfoResponse response = (C2C_GMInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_GM2InfoResponse response = (M2C_GM2InfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 

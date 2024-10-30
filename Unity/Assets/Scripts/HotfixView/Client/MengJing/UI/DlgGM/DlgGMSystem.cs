@@ -86,7 +86,7 @@ namespace ET.Client
         public static async ETTask RequestGMInfo(this DlgGM self)
         {
             long instanceid = self.InstanceId;
-            C2C_GMInfoResponse response = await UserInfoNetHelper.GMInfo(self.Root());
+            M2C_GM2InfoResponse response = await UserInfoNetHelper.GMInfo(self.Root());
             if (instanceid != self.InstanceId)
             {
                 return;
