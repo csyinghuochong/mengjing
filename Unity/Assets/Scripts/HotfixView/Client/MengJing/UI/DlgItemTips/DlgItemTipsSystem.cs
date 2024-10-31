@@ -324,44 +324,44 @@ namespace ET.Client
                     return;
                 }
 
-                if (!dlgRole.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+                if (!dlgRole.ES_RoleGem.uiTransform.gameObject.activeSelf)
                 {
                     return;
                 }
 
-                if (dlgRole.View.ES_RoleGem.XiangQianItem == null)
+                if (dlgRole.ES_RoleGem.XiangQianItem == null)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("请选择装备！");
                     return;
                 }
 
-                string gemHole = dlgRole.View.ES_RoleGem.XiangQianItem.GemHole;
-                if (dlgRole.View.ES_RoleGem.XiangQianIndex == -1)
+                string gemHole = dlgRole.ES_RoleGem.XiangQianItem.GemHole;
+                if (dlgRole.ES_RoleGem.XiangQianIndex == -1)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("请选择孔位！");
                     return;
                 }
 
                 string[] gemHolelist = gemHole.Split('_');
-                if (gemHolelist.Length <= dlgRole.View.ES_RoleGem.XiangQianIndex)
+                if (gemHolelist.Length <= dlgRole.ES_RoleGem.XiangQianIndex)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("请选择孔位！");
                     return;
                 }
 
-                string itemgem = gemHolelist[dlgRole.View.ES_RoleGem.XiangQianIndex];
+                string itemgem = gemHolelist[dlgRole.ES_RoleGem.XiangQianIndex];
                 if (itemgem != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("宝石与孔位不符！");
                     return;
                 }
 
-                string[] getIdNew = dlgRole.View.ES_RoleGem.XiangQianItem.GemIDNew.Split('_');
+                string[] getIdNew = dlgRole.ES_RoleGem.XiangQianItem.GemIDNew.Split('_');
                 using (zstring.Block())
                 {
-                    usrPar = zstring.Format("{0}_{1}", dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID, dlgRole.View.ES_RoleGem.XiangQianIndex);
+                    usrPar = zstring.Format("{0}_{1}", dlgRole.ES_RoleGem.XiangQianItem.BagInfoID, dlgRole.ES_RoleGem.XiangQianIndex);
 
-                    if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
+                    if (getIdNew[dlgRole.ES_RoleGem.XiangQianIndex] != "0")
                     {
                         PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
                                 .Coroutine();
@@ -723,13 +723,13 @@ namespace ET.Client
                 return;
             }
 
-            if (!dlgRole.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+            if (!dlgRole.ES_RoleGem.uiTransform.gameObject.activeSelf)
             {
                 return;
             }
 
-            BagClientNetHelper.RequestXieXiaGem(self.Root(), dlgRole.View.ES_RoleGem.XiangQianItem,
-                dlgRole.View.ES_RoleGem.XiangQianIndex.ToString()).Coroutine();
+            BagClientNetHelper.RequestXieXiaGem(self.Root(), dlgRole.ES_RoleGem.XiangQianItem,
+                dlgRole.ES_RoleGem.XiangQianIndex.ToString()).Coroutine();
             self.OnCloseTips();
         }
 

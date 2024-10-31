@@ -78,106 +78,6 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RoleBag ES_RoleBag
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleBag es = this.m_es_rolebag;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleBag");
-		    	   this.m_es_rolebag = this.AddChild<ES_RoleBag,Transform>(subTrans);
-     			}
-     			return this.m_es_rolebag;
-     		}
-     	}
-
-		public ES_RoleProperty ES_RoleProperty
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleProperty es = this.m_es_roleproperty;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleProperty");
-		    	   this.m_es_roleproperty = this.AddChild<ES_RoleProperty,Transform>(subTrans);
-     			}
-     			return this.m_es_roleproperty;
-     		}
-     	}
-
-		public ES_RoleGem ES_RoleGem
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleGem es = this.m_es_rolegem;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleGem");
-		    	   this.m_es_rolegem = this.AddChild<ES_RoleGem,Transform>(subTrans);
-     			}
-     			return this.m_es_rolegem;
-     		}
-     	}
-
-		public ES_RoleHuiShou ES_RoleHuiShou
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleHuiShou es = this.m_es_rolehuishou;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleHuiShou");
-		    	   this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou,Transform>(subTrans);
-     			}
-     			return this.m_es_rolehuishou;
-     		}
-     	}
-
-		public ES_RoleQiangHua ES_RoleQiangHua
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			ES_RoleQiangHua es = this.m_es_roleqianghua;
-     			if( es == null )
-
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleQiangHua");
-		    	   this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua,Transform>(subTrans);
-     			}
-     			return this.m_es_roleqianghua;
-     		}
-     	}
-
 		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -218,11 +118,6 @@ namespace ET.Client
 			this.m_E_ZodiacButton = null;
 			this.m_E_ZodiacImage = null;
 			this.m_EG_SubViewRectTransform = null;
-			this.m_es_rolebag = null;
-			this.m_es_roleproperty = null;
-			this.m_es_rolegem = null;
-			this.m_es_rolehuishou = null;
-			this.m_es_roleqianghua = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_Type_PropertyToggle = null;
 			this.uiTransform = null;
@@ -232,11 +127,6 @@ namespace ET.Client
 		private Button m_E_ZodiacButton = null;
 		private Image m_E_ZodiacImage = null;
 		private RectTransform m_EG_SubViewRectTransform = null;
-		private EntityRef<ES_RoleBag> m_es_rolebag = null;
-		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
-		private EntityRef<ES_RoleGem> m_es_rolegem = null;
-		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
-		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private Toggle m_E_Type_PropertyToggle = null;
 		public Transform uiTransform = null;

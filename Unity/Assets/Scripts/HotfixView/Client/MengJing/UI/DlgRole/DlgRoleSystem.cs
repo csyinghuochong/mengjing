@@ -8,8 +8,8 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag?.RefreshBagItems();
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleGem?.RefreshBagItems();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.ES_RoleBag?.RefreshBagItems();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.ES_RoleGem?.RefreshBagItems();
             await ETTask.CompletedTask;
         }
     }
@@ -49,7 +49,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, DataUpdate_UpdateRoleProper args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleProperty.RefreshRoleProperty();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.ES_RoleProperty.RefreshRoleProperty();
             await ETTask.CompletedTask;
         }
     }
@@ -104,37 +104,37 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_RoleBag.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleBag.uiTransform.gameObject.SetActive(true);
                     self.View.E_ZodiacButton.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
                 case 1:
-                    self.View.ES_RoleProperty.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleProperty.uiTransform.gameObject.SetActive(true);
                     self.View.E_ZodiacButton.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
                 case 2:
-                    self.View.ES_RoleGem.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleGem.OnUpdateUI();
+                    self.ES_RoleGem.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleGem.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(false);
                     break;
                 case 3:
-                    self.View.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleHuiShou.OnUpdateUI();
+                    self.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleHuiShou.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
                 case 4:
-                    self.View.ES_RoleQiangHua.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleQiangHua.OnUpdateUI();
+                    self.ES_RoleQiangHua.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleQiangHua.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
@@ -167,9 +167,9 @@ namespace ET.Client
 
         public static bool OnClickXiangQianItem(this DlgRole self, ItemInfo bagInfo)
         {
-            if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+            if (self.ES_RoleGem.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_RoleGem.OnClickXiangQianItem(bagInfo);
+                self.ES_RoleGem.OnClickXiangQianItem(bagInfo);
                 return true;
             }
             else
@@ -180,17 +180,17 @@ namespace ET.Client
 
         public static void OnHuiShouSelect(this DlgRole self, string param_1)
         {
-            if (self.View.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
+            if (self.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_RoleHuiShou.OnHuiShouSelect(param_1);
+                self.ES_RoleHuiShou.OnHuiShouSelect(param_1);
             }
         }
 
         public static void OnEquipHuiShow(this DlgRole self)
         {
-            if (self.View.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
+            if (self.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_RoleHuiShou.OnEquipHuiShow();
+                self.ES_RoleHuiShou.OnEquipHuiShow();
             }
         }
 
