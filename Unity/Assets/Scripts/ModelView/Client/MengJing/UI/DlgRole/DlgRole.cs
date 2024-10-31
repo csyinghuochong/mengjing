@@ -26,6 +26,7 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleBag.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.View.EG_SubViewRectTransform);
+                    go.SetActive(false);
                     this.m_es_rolebag = this.AddChild<ES_RoleBag, Transform>(go.transform);
                 }
 
@@ -45,6 +46,7 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleProperty.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.View.EG_SubViewRectTransform);
+                    go.SetActive(false);
                     this.m_es_roleproperty = this.AddChild<ES_RoleProperty, Transform>(go.transform);
                 }
 
@@ -64,6 +66,7 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleGem.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.View.EG_SubViewRectTransform);
+                    go.SetActive(false);
                     this.m_es_rolegem = this.AddChild<ES_RoleGem, Transform>(go.transform);
                 }
 
@@ -83,6 +86,7 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleHuiShou.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.View.EG_SubViewRectTransform);
+                    go.SetActive(false);
                     this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou, Transform>(go.transform);
                 }
 
@@ -102,6 +106,7 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleQiangHua.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.View.EG_SubViewRectTransform);
+                    go.SetActive(false);
                     this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua, Transform>(go.transform);
                 }
 
