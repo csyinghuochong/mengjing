@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3307175868580793608}
   - component: {fileID: 3998987545551102783}
+  - component: {fileID: 6363820353804912530}
   m_Layer: 5
-  m_Name: ES_ButtonPositionSet
+  m_Name: DlgButtonPositionSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,6 +71,21 @@ MonoBehaviour:
     gameObject: {fileID: 6145090017111764810}
   - key: ImageLeftBottomBtns
     gameObject: {fileID: 4186155558614007017}
+--- !u!114 &6363820353804912530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58399009356781421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &1604181423043118127
 GameObject:
   m_ObjectHideFlags: 0

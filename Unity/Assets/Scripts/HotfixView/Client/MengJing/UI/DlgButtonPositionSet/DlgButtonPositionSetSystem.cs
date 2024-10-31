@@ -1,39 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(ES_ButtonPositionSet))]
-    [FriendOfAttribute(typeof(ES_ButtonPositionSet))]
-    public static partial class ES_ButtonPositionSetSystem
+    [FriendOf(typeof(DlgMainViewComponent))]
+    [FriendOf(typeof(DlgButtonPositionSetViewComponent))]
+    [FriendOf(typeof(DlgButtonPositionSet))]
+    public static class DlgButtonPositionSetSystem
     {
-        [EntitySystem]
-        private static void Awake(this ES_ButtonPositionSet self, Transform transform)
+        public static void RegisterUIEvent(this DlgButtonPositionSet self)
         {
-            self.uiTransform = transform;
+            self.View.E_SkillPositionSetImage.gameObject.SetActive(false);
 
-            self.E_SkillPositionSetImage.gameObject.SetActive(false);
+            self.View.E_Btn_SkilPositionResetButton.AddListener(self.OnBtn_SkilPositionResetButton);
 
-            self.E_Btn_SkilPositionResetButton.AddListener(self.OnBtn_SkilPositionResetButton);
+            self.View.E_Btn_SkilPositionCancelButton.AddListener(self.OnBtn_SkilPositionCancelButton);
 
-            self.E_Btn_SkilPositionCancelButton.AddListener(self.OnBtn_SkilPositionCancelButton);
-
-            self.E_Btn_SkilPositionSaveButton.AddListener(self.OnBtn_SkilPositionSaveButton);
+            self.View.E_Btn_SkilPositionSaveButton.AddListener(self.OnBtn_SkilPositionSaveButton);
+            
+            self.InitButtons();
         }
 
-        [EntitySystem]
-        private static void Destroy(this ES_ButtonPositionSet self)
+        public static void ShowWindow(this DlgButtonPositionSet self, Entity contextData = null)
         {
-            self.DestroyWidget();
         }
 
-        public static void InitButtons(this ES_ButtonPositionSet self, GameObject main)
+        public static void InitButtons(this DlgButtonPositionSet self)
         {
-            self.UIMain = main;
+            self.UIMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.uiTransform.gameObject;
+            self.View.uiTransform.SetParent(self.UIMain.transform);
+            self.View.uiTransform.SetSiblingIndex(0);
             self.SkillPositionList.Clear();
-            ReferenceCollector rc = main.GetComponent<ReferenceCollector>();
+            ReferenceCollector rc = self.UIMain.GetComponent<ReferenceCollector>();
 
             ReferenceCollector rc_skill = rc.Get<GameObject>("UIMainSkill").GetComponent<ReferenceCollector>();
             for (int i = 0; i < 10; i++)
@@ -66,7 +68,7 @@ namespace ET.Client
             self.UpdateSkillPosition();
         }
 
-        public static void AddSkillDragItem(this ES_ButtonPositionSet self, int i, GameObject go)
+        public static void AddSkillDragItem(this DlgButtonPositionSet self, int i, GameObject go)
         {
             UISkillDragComponent uISkillDrag = self.AddChild<UISkillDragComponent, int, GameObject>(i, go);
             uISkillDrag.BeginDrag_TriggerHandler = self.OnBeginDrag_TriggerHandler;
@@ -78,10 +80,10 @@ namespace ET.Client
             self.InitPositionList.Add(go.transform.localPosition);
         }
 
-        public static void ShowSkillPositionSet(this ES_ButtonPositionSet self)
+        public static void ShowSkillPositionSet(this DlgButtonPositionSet self)
         {
-            self.uiTransform.gameObject.SetActive(true);
-            self.E_SkillPositionSetImage.gameObject.SetActive(true);
+            self.View.uiTransform.gameObject.SetActive(true);
+            self.View.E_SkillPositionSetImage.gameObject.SetActive(true);
 
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
@@ -103,7 +105,7 @@ namespace ET.Client
             rc_skill.Get<GameObject>("UI_MainRoseSkill_item_juexing").SetActive(true);
         }
 
-        public static void CheckSkilPositionSet(this ES_ButtonPositionSet self)
+        public static void CheckSkilPositionSet(this DlgButtonPositionSet self)
         {
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             string positonlist;
@@ -138,7 +140,7 @@ namespace ET.Client
             }
         }
 
-        public static void UpdateSkillPosition(this ES_ButtonPositionSet self)
+        public static void UpdateSkillPosition(this DlgButtonPositionSet self)
         {
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
@@ -147,7 +149,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_SkilPositionResetButton(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionResetButton(this DlgButtonPositionSet self)
         {
             self.TempPositionList.Clear();
             self.SkillPositionList.Clear();
@@ -160,8 +162,8 @@ namespace ET.Client
             self.UpdateSkillPosition();
             self.OnBtn_SkilPositionSaveButton();
 
-            self.uiTransform.gameObject.SetActive(false);
-            self.E_SkillPositionSetImage.gameObject.SetActive(false);
+            self.View.uiTransform.gameObject.SetActive(false);
+            self.View.E_SkillPositionSetImage.gameObject.SetActive(false);
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
                 UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
@@ -169,7 +171,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnBtn_SkilPositionCancelButton(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionCancelButton(this DlgButtonPositionSet self)
         {
             self.TempPositionList.Clear();
             for (int i = 0; i < self.SkillPositionList.Count; i++)
@@ -182,10 +184,10 @@ namespace ET.Client
             self.HideEventTrigger();
         }
 
-        public static void HideEventTrigger(this ES_ButtonPositionSet self)
+        public static void HideEventTrigger(this DlgButtonPositionSet self)
         {
-            self.uiTransform.gameObject.SetActive(false);
-            self.E_SkillPositionSetImage.gameObject.SetActive(false);
+            self.View.uiTransform.gameObject.SetActive(false);
+            self.View.E_SkillPositionSetImage.gameObject.SetActive(false);
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
                 UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
@@ -197,7 +199,7 @@ namespace ET.Client
             rc_skill.Get<GameObject>("UI_MainRoseSkill_item_juexing").SetActive(false);
         }
 
-        public static void OnBtn_SkilPositionSaveButton(this ES_ButtonPositionSet self)
+        public static void OnBtn_SkilPositionSaveButton(this DlgButtonPositionSet self)
         {
             string positonlist = string.Empty;
             self.SkillPositionList.Clear();
@@ -222,7 +224,7 @@ namespace ET.Client
             self.HideEventTrigger();
         }
 
-        public static void OnBeginDrag_TriggerHandler(this ES_ButtonPositionSet self, int skillIndex)
+        public static void OnBeginDrag_TriggerHandler(this DlgButtonPositionSet self, int skillIndex)
         {
             self.CurDragIndex = skillIndex;
 
@@ -232,7 +234,7 @@ namespace ET.Client
             CommonViewHelper.SetParent(self.SkillIconItemCopy, self.UIMain);
         }
 
-        public static void OnDrag_TriggerHandler(this ES_ButtonPositionSet self, PointerEventData pdata)
+        public static void OnDrag_TriggerHandler(this DlgButtonPositionSet self, PointerEventData pdata)
         {
             Vector2 localPoint = Vector2.zero;
             RectTransform canvas = self.SkillIconItemCopy.transform.parent.GetComponent<RectTransform>();
@@ -242,12 +244,12 @@ namespace ET.Client
             self.SkillIconItemCopy.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
         }
 
-        public static void OnEndDrag_TriggerHandler(this ES_ButtonPositionSet self, PointerEventData pdata)
+        public static void OnEndDrag_TriggerHandler(this DlgButtonPositionSet self, PointerEventData pdata)
         {
             self.OnOnCancel_TriggerHandler(pdata);
         }
 
-        public static void OnOnCancel_TriggerHandler(this ES_ButtonPositionSet self, PointerEventData pdata)
+        public static void OnOnCancel_TriggerHandler(this DlgButtonPositionSet self, PointerEventData pdata)
         {
             RectTransform canvas = self.SkillIconItemCopy.transform.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();

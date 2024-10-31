@@ -360,7 +360,6 @@ namespace ET.Client
     [FriendOf(typeof(ES_MainHpBar))]
     [FriendOf(typeof(ES_OpenBox))]
     [FriendOf(typeof(ES_Singing))]
-    [FriendOf(typeof(ES_ButtonPositionSet))]
     [FriendOf(typeof(DlgMainViewComponent))]
     [FriendOf(typeof(ES_JoystickMove))]
     [FriendOf(typeof(ES_MainSkill))]
@@ -373,8 +372,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMain self)
         {
-            self.View.ES_ButtonPositionSet.InitButtons(self.View.uiTransform.gameObject);
-            self.View.ES_ButtonPositionSet.uiTransform.gameObject.SetActive(false);
+            self.InitButtons();
 
             self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
@@ -632,6 +630,52 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().EndRotate();
         }
 
+        private static void InitButtons(this DlgMain self)
+        {
+            List<GameObject> buttons = new List<GameObject>();
+            ReferenceCollector rc = self.View.uiTransform.GetComponent<ReferenceCollector>();
+            ReferenceCollector rc_skill = rc.Get<GameObject>("UIMainSkill").GetComponent<ReferenceCollector>();
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject go = rc_skill.Get<GameObject>($"UI_MainRoseSkill_item_{i}");
+                buttons.Add(go);
+            }
+
+            buttons.Add(rc_skill.Get<GameObject>("UI_MainRose_attack"));
+            buttons.Add(rc_skill.Get<GameObject>("UI_MainRose_FanGun"));
+
+            buttons.Add(rc.Get<GameObject>("Btn_RoseEquip"));
+            buttons.Add(rc.Get<GameObject>("Btn_Pet"));
+            buttons.Add(rc.Get<GameObject>("Btn_RoseSkill"));
+            buttons.Add(rc.Get<GameObject>("Btn_ChengJiu"));
+            buttons.Add(rc.Get<GameObject>("Btn_Friend"));
+            buttons.Add(rc.Get<GameObject>("Btn_Task"));
+            buttons.Add(rc.Get<GameObject>("UIMainChat"));
+            buttons.Add(rc_skill.Get<GameObject>("Btn_CancleSkill"));
+            buttons.Add(rc.Get<GameObject>("YaoGanDiFix"));
+            buttons.Add(rc_skill.Get<GameObject>("UI_MainRoseSkill_item_juexing"));
+
+            long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            string positonlist;
+            using (zstring.Block())
+            {
+                positonlist = PlayerPrefsHelp.GetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
+            }
+
+            string[] vector2list = positonlist.Split('@');
+
+            for (int i = 0; i < vector2list.Length; i++)
+            {
+                string[] vectorinfo = vector2list[i].Split(';');
+                if (vectorinfo.Length < 2)
+                {
+                    continue;
+                }
+
+                buttons[i].transform.localPosition = new Vector2() { x = float.Parse(vectorinfo[0]), y = float.Parse(vectorinfo[1]) };
+            }
+        }
+
         public static void ShowMainUI(this DlgMain self, bool show)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
@@ -714,7 +758,7 @@ namespace ET.Client
             self.View.ES_MapMini.OnMainHeroMove();
             self.LockTargetComponent.OnMainHeroMove();
             self.SkillIndicatorComponent.OnMainHeroMove();
-            self.View.E_NpcDuiHuaButton.gameObject.SetActive( DuiHuaHelper.GetCanNpcDialog(self.Root())!=null );
+            self.View.E_NpcDuiHuaButton.gameObject.SetActive(DuiHuaHelper.GetCanNpcDialog(self.Root()) != null);
             if (self.TianQiEffectObj != null)
             {
                 self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;

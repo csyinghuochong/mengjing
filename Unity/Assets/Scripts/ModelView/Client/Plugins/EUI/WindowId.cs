@@ -209,5 +209,6 @@ namespace ET.Client
 		WindowID_CellChapterOpen,
 		WindowID_CellDungeonSettlement,
 		WindowID_PetMeleeMain,
+		WindowID_ButtonPositionSet,
 	}
 }

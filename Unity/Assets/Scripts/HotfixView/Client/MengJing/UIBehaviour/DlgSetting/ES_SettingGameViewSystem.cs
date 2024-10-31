@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(DlgMainViewComponent))]
     [FriendOf(typeof(MJCameraComponent))]
     [FriendOf(typeof(ES_MainSkill))]
     [EntitySystemOf(typeof(ES_SettingGame))]
@@ -20,7 +21,7 @@ namespace ET.Client
 
             self.E_Btn_ClickButton.AddListener(self.OnBtn_ClickButton);
 
-            self.E_ButtonSkillSetButton.AddListener(self.OnButtonSkillSetButton);
+            self.E_ButtonSkillSetButton.AddListenerAsync(self.OnButtonSkillSetButton);
 
             self.E_Btn_YinYingButton.AddListener(self.OnBtn_YinYingButton);
 
@@ -31,7 +32,7 @@ namespace ET.Client
             self.EG_RotaAngleSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RotaAngle);
 
             self.E_LocalizationBtnButton.AddListener(self.OnLocalizationBtnButton);
-            
+
             self.RefreshLocalizationBtn();
             self.E_ReSetCameraBtnButton.AddListener(self.OnReSetCameraBtnButton);
 
@@ -136,7 +137,7 @@ namespace ET.Client
             SoundComponent.Instance.ChangeMusicVolume(value);
         }
 
-        public static void OnButtonSkillSetButton(this ES_SettingGame self)
+        public static async ETTask OnButtonSkillSetButton(this ES_SettingGame self)
         {
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
@@ -145,7 +146,9 @@ namespace ET.Client
                 return;
             }
 
-            dlgMain.View.ES_ButtonPositionSet.ShowSkillPositionSet();
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ButtonPositionSet);
+            DlgButtonPositionSet dlgButtonPositionSet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgButtonPositionSet>();
+            dlgButtonPositionSet.ShowSkillPositionSet();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
@@ -274,7 +277,7 @@ namespace ET.Client
         public static void RefreshLocalizationBtn(this ES_SettingGame self)
         {
             string languageName = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
-            
+
             if (languageName == "Chinese")
             {
                 self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "Change to English";
@@ -284,7 +287,7 @@ namespace ET.Client
                 self.E_LocalizationBtnButton.GetComponentInChildren<Text>().text = "切换成中文";
             }
         }
-        
+
         public static void OnReSetCameraBtnButton(this ES_SettingGame self)
         {
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, 1f);
