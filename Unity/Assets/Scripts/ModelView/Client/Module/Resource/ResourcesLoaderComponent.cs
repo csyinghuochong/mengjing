@@ -45,6 +45,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ResourcesLoaderComponent self)
         {
+            UnityEngine.Debug.Log("ResourcesLoaderComponent.Destroy");
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UnLoadAllAsset();
         }
@@ -79,6 +80,7 @@ namespace ET.Client
         {
             if (self.Handlers.TryGetValue(location, out var entry))
             {
+                //UnityEngine.Debug.LogError($"资源释放： {location} +   {TimeHelper.ServerNow()}");
                 self.ReleaseHandler(entry.handler);
                 self.Handlers.Remove(location);
             }
@@ -90,7 +92,6 @@ namespace ET.Client
             // {
             //     return;
             // }
-            
             // foreach (var kv in self.Handlers)
             // {
             //     self.ReleaseHandler(kv.Value.handler);

@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -84,7 +85,7 @@ namespace ET.Client
                 unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
 
-            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            OnAfterCreateUnit(unit);
             return unit;
         }
 
@@ -111,10 +112,47 @@ namespace ET.Client
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = unitInfo.Position;
 
-            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            OnAfterCreateUnit(unit);
             return unit;
         }
 
+        public static void OnAfterCreateUnit(this Unit unit)
+        {
+            if (!ConfigData.LoadSceneFinished)
+            {
+                unit.WaitLoad = true;
+                return;
+            }
+            unit.WaitLoad = false;
+
+            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+        }
+        
+        public static async ETTask ShowAllUnit(Scene root)
+        {
+            Scene curscene = root.CurrentScene();
+            long instanceid = curscene.InstanceId;
+            List<EntityRef<Unit>> allunits= curscene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                Unit unit = allunits[i];
+                if (!unit.WaitLoad || unit.IsDisposed)
+                {
+                    continue;
+                }
+                if (unit.Type == UnitType.Player)
+                {
+                    await root.GetComponent<TimerComponent>().WaitFrameAsync();
+                }
+                if (instanceid != curscene.InstanceId)
+                {
+                    break;
+                }
+                OnAfterCreateUnit(unit);
+                unit.WaitLoad = false;
+            }
+        }
+        
         //创建传送点
         public static Unit CreateTransferItem(Scene currentScene, UnitInfo unitInfo)
         {
@@ -143,7 +181,7 @@ namespace ET.Client
             unit.AddComponent<ChuansongComponent>();
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = unitInfo.Position;
-            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            OnAfterCreateUnit(unit);
             return unit;
         }
     }

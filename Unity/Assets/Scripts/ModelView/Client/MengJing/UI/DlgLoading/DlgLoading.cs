@@ -22,6 +22,6 @@ namespace ET.Client
         public string AssetPath = string.Empty;
 
         public float Program;
-        public bool LoadSceneFinished { get; set; }
+
     }
 }

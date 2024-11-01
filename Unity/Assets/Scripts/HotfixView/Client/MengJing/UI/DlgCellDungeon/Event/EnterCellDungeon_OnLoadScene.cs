@@ -9,7 +9,7 @@ namespace ET.Client
             await scene.GetComponent<SceneManagerComponent>().ChangeCellSonScene(mapComponent.SceneType,
                 mapComponent.SceneType,
                 mapComponent.SonSceneId);
-
+   
             scene.GetComponent<CellDungeonComponentC>().CheckChuansongOpen();
 
             await ETTask.CompletedTask;

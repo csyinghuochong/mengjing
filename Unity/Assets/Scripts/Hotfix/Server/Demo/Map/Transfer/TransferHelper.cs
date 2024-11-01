@@ -115,11 +115,11 @@ namespace ET.Server
                         else
                         {
                             UnitHelper.RemoveAllNoSelf(unit);
-                            AfterTransfer(unit, SceneTypeEnum.CellDungeon);
-
                             CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
                             cellDungeonComponentS.OnEnterSonCell(unit, request.paramInfo);
+                            AfterTransfer(unit, SceneTypeEnum.CellDungeon);
                         }
+                        
                         break;
                     case (int)SceneTypeEnum.TrialDungeon:
                         int requestTowerId = int.Parse(request.paramInfo);

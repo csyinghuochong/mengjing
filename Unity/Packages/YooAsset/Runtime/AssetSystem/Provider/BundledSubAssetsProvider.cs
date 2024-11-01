@@ -43,7 +43,7 @@ namespace YooAsset
 					LastError = DependBundles.GetLastError();
 					InvokeCompletion();
 					return;
-				}
+				} 
 
 				if (OwnerBundle.Status != BundleLoaderBase.EStatus.Succeed)
 				{

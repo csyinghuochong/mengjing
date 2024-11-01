@@ -111,7 +111,7 @@ namespace ET.Client
 
             if (sceneTypeEnum != SceneTypeEnum.LoginScene)
             {
-                EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+                ConfigData.LoadSceneFinished = true;
             }
 
             self.UpdateChuanSong(sceneTypeEnum);

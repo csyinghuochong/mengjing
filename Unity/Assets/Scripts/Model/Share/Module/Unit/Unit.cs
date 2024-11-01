@@ -24,7 +24,9 @@ namespace ET
 
         public int SpeedRate{get; set; }
 
-        
+
+        public bool WaitLoad { get; set; }
+
         [BsonElement]
         private float3 position; //坐标
 

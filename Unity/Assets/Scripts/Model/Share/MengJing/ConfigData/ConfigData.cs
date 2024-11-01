@@ -6,7 +6,9 @@ namespace ET
 {
     public static class ConfigData
     {
-
+        [StaticField]
+        public static bool LoadSceneFinished { get; set; }
+        
         //npc对话最大距离
         [StaticField]
         public static float NpcDialogDistance = 5f;

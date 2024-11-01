@@ -14,15 +14,16 @@ namespace ET.Client
             {
                 return;
             }
-
-          
+            
             if (GameObjectPoolHelper.HaveObject(path))
             {
+                //Debug.LogError($"资源加载11：  {path}  +   {TimeHelper.ServerNow()}");
                 GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
                 action(gameObject, formId);
                 return;
             }
 
+            //Debug.LogError($"资源加载22：  {path}  +   {TimeHelper.ServerNow()}");
             LoadAssetSync(root, path, formId, action).Coroutine();
         }
 
@@ -55,6 +56,10 @@ namespace ET.Client
             Log.Warning($"DisposeAll: {Time.time}");
 
             List<string> assets = GameObjectPoolHelper.DisposeAll();
+            foreach (var VARIABLE in assets)
+            {
+                root.GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
+            }
            
             Resources.UnloadUnusedAssets();
             GC.Collect();

@@ -23,15 +23,6 @@ namespace ET.Client
         }
     }
 
-    [Event(SceneType.Demo)]
-    public class LoadSceneFinished_DlgLoadingRefesh : AEvent<Scene, LoadSceneFinished>
-    {
-        protected override async ETTask Run(Scene root, LoadSceneFinished args)
-        {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgLoading>().LoadSceneFinished = true;
-            await ETTask.CompletedTask;
-        }
-    }
 
     [FriendOf(typeof(DlgMainViewComponent))]
     [FriendOf(typeof(DlgLoading))]
@@ -39,7 +30,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgLoading self)
         {
-            self.LoadSceneFinished = false;
+            ConfigData.LoadSceneFinished = false;
         }
 
         public static void ShowWindow(this DlgLoading self, Entity contextData = null)
@@ -401,7 +392,7 @@ namespace ET.Client
                     self.Program += Time.deltaTime * 0.1f;
                 }
 
-                if (!self.LoadSceneFinished)
+                if (!ConfigData.LoadSceneFinished)
                 {
                     self.ShowProgress(self.Program);
                     return;
@@ -411,6 +402,7 @@ namespace ET.Client
                 {
                     self.StartLoadAssets = true;
                     self.StartPreLoadAssets().Coroutine();
+                    UnitFactory.ShowAllUnit(self.Root()).Coroutine();
                 }
 
                 if (self.PreLoadAssets.Count > 0)
@@ -426,11 +418,6 @@ namespace ET.Client
 
                 self.PassTime += Time.deltaTime;
                 self.ShowProgress(0.9f + self.PassTime * 0.1f);
-                // if (self.PassTime > 0.5f && UnitFactory.LoadingScene)
-                // {
-                //     UnitFactory.LoadingScene = false;
-                //     UnitFactory.ShowAllUnit(self.DomainScene()).Coroutine();
-                // }
 
                 if (self.PassTime < 1.5f)
                 {
