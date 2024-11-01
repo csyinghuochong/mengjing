@@ -149,8 +149,9 @@ namespace ET.Client
 
             ReturnObjectToPool(t.gameObject);
         }
+        
 
-        public static void DisposeAll()
+        public static List<string>  DisposeAll( )
         {
             Debug.LogWarning($"DisposeAll: {Time.time}");
 
@@ -161,6 +162,7 @@ namespace ET.Client
             }
 
             poolDict.Clear();
+            return paths;
         }
 
         public static GameObject GetGameObjectByResType(string poolName)

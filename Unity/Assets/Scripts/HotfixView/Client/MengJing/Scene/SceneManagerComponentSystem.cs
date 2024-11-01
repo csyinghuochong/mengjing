@@ -99,7 +99,7 @@ namespace ET.Client
                     break;
             }
 
-            GameObjectLoadHelper.DisposeAll();
+            GameObjectLoadHelper.DisposeAll(self.Root());
 
             // 释放前一个场景的所有资源
             self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();

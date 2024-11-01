@@ -86,18 +86,17 @@ namespace ET.Client
 
         public static void UnLoadAllAsset(this ResourcesLoaderComponent self)
         {
-            if (!self.ReleaseAsset)
-            {
-                return;
-            }
+            // if (!self.ReleaseAsset)
+            // {
+            //     return;
+            // }
             
-            
-            foreach (var kv in self.Handlers)
-            {
-                self.ReleaseHandler(kv.Value.handler);
-            }
-
-            self.Handlers.Clear();
+            // foreach (var kv in self.Handlers)
+            // {
+            //     self.ReleaseHandler(kv.Value.handler);
+            // }
+            //
+            // self.Handlers.Clear();
 
             self.Package.UnloadUnusedAssets();
         }

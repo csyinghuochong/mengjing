@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -17,11 +18,6 @@ namespace ET.Client
           
             if (GameObjectPoolHelper.HaveObject(path))
             {
-                if (path.Contains("sets/Bundles/Unit/Monster/700010"))
-                {
-                    Log.Debug($"GameObjectPoolHelper.HaveObject(path):  {path}");
-                }
-                
                 GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
                 action(gameObject, formId);
                 return;
@@ -32,20 +28,10 @@ namespace ET.Client
 
         public static async ETTask LoadAssetSync(Scene root, string path, long formId, Action<GameObject, long> action)
         {
-            if (path.Contains("sets/Bundles/Unit/Monster/700010"))
-            {
-                Log.Debug($"GameObjectPoolHelper.LoadAssetSync:  {path}");
-            }
-            
             ResourcesLoaderComponent resourcesLoaderComponent = root.GetComponent<ResourcesLoaderComponent>();
             GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
             await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
             GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
-            
-            if (path.Contains("sets/Bundles/Unit/Monster/700010"))
-            {
-                Log.Debug($"GameObjectPoolHelper.GetObjectFromPool:  {path}   {gameObject != null}");
-            }
             
             if (gameObject != null)
             {
@@ -64,13 +50,14 @@ namespace ET.Client
             GameObjectPoolHelper.ReturnObjectToPool(gameObject);
         }
 
-        public static void DisposeAll()
+        public static void DisposeAll(Scene root)
         {
             Log.Warning($"DisposeAll: {Time.time}");
 
-            // GameObjectPoolHelper.DisposeAll();
-            //Resources.UnloadUnusedAssets();
-            //GC.Collect();
+            List<string> assets = GameObjectPoolHelper.DisposeAll();
+           
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
         }
     }
 }
