@@ -22,13 +22,13 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_DonationShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_DonationShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_DonationUnion.uiTransform.gameObject.SetActive(true);
+                    self.ES_DonationUnion.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_RankUnion.uiTransform.gameObject.SetActive(true);
+                    self.ES_RankUnion.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
