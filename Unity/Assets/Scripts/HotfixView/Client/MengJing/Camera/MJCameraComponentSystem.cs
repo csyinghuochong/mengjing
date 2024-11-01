@@ -86,18 +86,29 @@ namespace ET.Client
 
             self.MainCamera.transform.position = Vector3.Lerp(self.OldCameraPostion, self.TargetPosition, self.CameraMoveTime);
 
-            if (self.BuildUnit.Type == UnitType.Monster)
+            switch (self.CameraBuildType)
             {
-                self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 0.5f, 0));
-            }
-            else if (self.BuildUnit.Type == UnitType.Player)
-            {
-                self.MainCamera.transform.LookAt(self.BuildUnit.Position + math.mul(self.BuildUnit.Rotation, math.left()) * 1f +
-                    new float3(0, 1f, 0));
-            }
-            else
-            {
-                self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 1f, 0));
+                case CameraBuildType.Type_0:
+                {
+                    self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 1f, 0));
+                    break;
+                }
+                case CameraBuildType.Type_1:
+                {
+                    self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 0.5f, 0));
+                    break;
+                }
+                case CameraBuildType.Type_2:
+                {
+                    self.MainCamera.transform.LookAt(self.BuildUnit.Position + math.mul(self.BuildUnit.Rotation, math.left()) * 1f +
+                        new float3(0, 1f, 0));
+                    break;
+                }
+                case CameraBuildType.Type_3:
+                {
+                    self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 1f, 0));
+                    break;
+                }
             }
         }
 
@@ -162,7 +173,7 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
 
-        public static void SetBuildEnter(this MJCameraComponent self, Unit unit, Action action)
+        public static void SetBuildEnter(this MJCameraComponent self, Unit unit, CameraBuildType cameraBuildType, Action action)
         {
             if (unit == null || unit.IsDisposed)
             {
@@ -170,18 +181,26 @@ namespace ET.Client
             }
 
             self.BuildUnit = unit;
+            self.CameraBuildType = cameraBuildType;
             self.CameraMoveTime = 0f;
             self.CameraMoveType = CameraMoveType.BuildEnter;
 
-            if (unit.Type == UnitType.Player)
+            switch (self.CameraBuildType)
             {
-                self.TargetPosition = unit.Position + unit.Forward * 4f;
-                self.TargetPosition.y += 1f;
-            }
-            else
-            {
-                self.TargetPosition = unit.Position + unit.Forward * 4f;
-                self.TargetPosition.y += 2f;
+                case CameraBuildType.Type_0:
+                case CameraBuildType.Type_1:
+                {
+                    self.TargetPosition = unit.Position + unit.Forward * 4f;
+                    self.TargetPosition.y += 2f;
+                    break;
+                }
+                case CameraBuildType.Type_2:
+                case CameraBuildType.Type_3:
+                {
+                    self.TargetPosition = unit.Position + unit.Forward * 4f;
+                    self.TargetPosition.y += 1f;
+                    break;
+                }
             }
 
             self.OldCameraPostion = self.MainCamera.transform.position;

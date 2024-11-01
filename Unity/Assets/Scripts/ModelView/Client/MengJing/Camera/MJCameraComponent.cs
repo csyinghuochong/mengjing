@@ -15,6 +15,29 @@ namespace ET.Client
         LookAtPet = 6,
     }
 
+    public enum CameraBuildType
+    {
+        /// <summary>
+        /// 看NPC
+        /// </summary>
+        Type_0,
+
+        /// <summary>
+        /// 看怪物
+        /// </summary>
+        Type_1,
+
+        /// <summary>
+        /// 看主角 靠左
+        /// </summary>
+        Type_2,
+
+        /// <summary>
+        /// 看主角 居中
+        /// </summary>
+        Type_3,
+    }
+
     [FriendOf(typeof(Unit))]
     [ComponentOf(typeof(Scene))]
     public class MJCameraComponent : Entity, IAwake, ILateUpdate
@@ -27,6 +50,7 @@ namespace ET.Client
         //0正常 1商店npc
 
         public CameraMoveType CameraMoveType;
+        public CameraBuildType CameraBuildType;
 
         public float CameraMoveTime;
 

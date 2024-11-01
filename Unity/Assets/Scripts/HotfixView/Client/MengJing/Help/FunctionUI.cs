@@ -57,7 +57,7 @@ namespace ET.Client
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
 
             MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
-            cameraComponent.SetBuildEnter(npc, () => { OnBuildEnter(root, npcid, windowID); });
+            cameraComponent.SetBuildEnter(npc, CameraBuildType.Type_0, () => { OnBuildEnter(root, npcid, windowID); });
         }
 
         public static void OnBuildEnter(Scene root, int npcid, WindowID windowID)

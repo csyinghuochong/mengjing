@@ -417,7 +417,7 @@ namespace ET.Client
             uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
             MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-            cameraComponent.SetBuildEnter(target, () => { self.OnBuildEnter().Coroutine(); });
+            cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
         }
 
         public static async ETTask MoveToNpc(this ES_MainSkill self, Unit target, Vector3 position)
@@ -484,7 +484,8 @@ namespace ET.Client
             {
                 for (int i = units.Count - 1; i >= 0; i--)
                 {
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(units[i].GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
+                    ItemConfig itemConfig =
+                            ItemConfigCategory.Instance.Get(units[i].GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId));
 
                     if (userInfoComponent.PickSet[0] == "1" && itemConfig.ItemQuality == 2)
                     {

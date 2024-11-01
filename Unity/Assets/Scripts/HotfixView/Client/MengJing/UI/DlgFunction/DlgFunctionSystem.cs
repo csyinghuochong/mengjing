@@ -33,10 +33,16 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgFunction self, Entity contextData = null)
         {
+            self.ExitCamera = true;
         }
 
         public static void BeforeUnload(this DlgFunction self)
         {
+            if (self.ExitCamera)
+            {
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit();
+            }
+
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.UnRegisterReddot(ReddotType.Friend, self.Reddot_Frined);
             redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
@@ -78,8 +84,9 @@ namespace ET.Client
             }
             else
             {
+                self.ExitCamera = false;
                 MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
-                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root),
+                cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_2,
                     () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
             }
 
