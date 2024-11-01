@@ -24,19 +24,19 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_FenXiangSet.uiTransform.gameObject.SetActive(true);
+                    self.ES_FenXiangSet.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_Popularize.uiTransform.gameObject.SetActive(true);
+                    self.ES_Popularize.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_Serial.uiTransform.gameObject.SetActive(true);
+                    self.ES_Serial.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_LunTan.uiTransform.gameObject.SetActive(true);
+                    self.ES_LunTan.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
-                    self.View.ES_FenXiangQQAddSet.uiTransform.gameObject.SetActive(true);
+                    self.ES_FenXiangQQAddSet.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
