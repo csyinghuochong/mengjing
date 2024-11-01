@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgBattleViewComponent))]
-	[FriendOfAttribute(typeof(DlgBattleViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgBattleViewComponent))]
 	public static partial class DlgBattleViewComponentSystem
 	{
 		[EntitySystem]
