@@ -12,7 +12,7 @@ namespace ET.Client
         {
             try
             {
-                self.Switch();
+                self.OpenUI().Coroutine();
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace ET.Client
         {
             self.LongPress = false;
             self.Timer = self.Root().GetComponent<TimerComponent>()
-                    .NewOnceTimer(TimeInfo.Instance.ServerNow() + 1000, TimerInvokeType.MainPetFightTimer, self);
+                    .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetFightTimer, self);
         }
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)
@@ -55,12 +55,13 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             if (self.LongPress == false)
             {
-                self.OpenUI().Coroutine();
+                PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
             }
         }
 
-        private static async ETTask OpenUI(this ES_MainPetFight self)
+        public static async ETTask OpenUI(this ES_MainPetFight self)
         {
+            self.LongPress = true;
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight);
             DlgPetQuickFight dlgPetQuickFight = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetQuickFight>();
             dlgPetQuickFight.OnInitUI(self.FightIndex);
@@ -117,13 +118,6 @@ namespace ET.Client
             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
             self.E_PetHPImage.fillAmount = blood;
-        }
-
-        public static void Switch(this ES_MainPetFight self)
-        {
-            self.LongPress = true;
-
-            PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
         }
     }
 }
