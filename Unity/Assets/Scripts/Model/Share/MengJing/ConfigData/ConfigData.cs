@@ -9,7 +9,7 @@ namespace ET
 
         //npc对话最大距离
         [StaticField]
-        public static float NpcDialogDistance = 10f;
+        public static float NpcDialogDistance = 5f;
 
         //随机副本魔能老人兑换消耗
         [StaticField]
