@@ -17,8 +17,7 @@ namespace ET.Client
             
             Application.targetFrameRate = 60;
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(false);
-
-            self.AddUIScrollItems(ref self.Dictionary, 100);
+            
             self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
 
@@ -67,8 +66,7 @@ namespace ET.Client
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)
         {
-            Scroll_Item_test test = self.Dictionary[index].BindTrans(transform);
-            test.ELabel_ContentText.text = index.ToString();
+            
         }
 
         public static void HideLoadingView(this DlgMJLogin self)
