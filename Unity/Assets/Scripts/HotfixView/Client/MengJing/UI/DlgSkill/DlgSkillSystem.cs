@@ -84,22 +84,22 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_SkillLearn.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+                    self.ES_SkillLearn.uiTransform.gameObject.SetActive(true);
+                    self.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
                     break;
                 case 1:
-                    self.View.ES_SkillSet.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_SkillSet.UpdateSkillListUI();
+                    self.ES_SkillSet.uiTransform.gameObject.SetActive(true);
+                    self.ES_SkillSet.UpdateSkillListUI();
                     break;
                 case 2:
-                    self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
+                    self.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
+                    self.ES_SkillMake.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
-                    self.View.ES_SkillLifeShield.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_SkillLifeShield.OnUpdateUI();
+                    self.ES_SkillLifeShield.uiTransform.gameObject.SetActive(true);
+                    self.ES_SkillLifeShield.OnUpdateUI();
                     break;
             }
         }
@@ -111,25 +111,25 @@ namespace ET.Client
 
         public static void OnActiveTianFu(this DlgSkill self)
         {
-            if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillTianFu.RefreshTianFuList();
+                self.ES_SkillTianFu.RefreshTianFuList();
             }
         }
 
         public static void OnSkillReset(this DlgSkill self)
         {
-            if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+                self.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             }
         }
 
         public static void OnSkillUpgrade(this DlgSkill self, string DataParams)
         {
-            if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.OnSkillUpgrade(DataParams);
+                self.ES_SkillLearn.OnSkillUpgrade(DataParams);
             }
 
             self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.SkillUp, "0");
@@ -137,27 +137,27 @@ namespace ET.Client
 
         public static void OnSkillSetUpdate(this DlgSkill self)
         {
-            if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillLearn.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
+                self.ES_SkillLearn.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             }
 
-            if (self.View.ES_SkillSet.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillSet.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillSet.OnSkillSetting();
+                self.ES_SkillSet.OnSkillSetting();
             }
         }
 
         public static void OnHuiShouSelect(this DlgSkill self, string dataParams)
         {
-            if (self.View.ES_SkillMake.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillMake.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillMake.OnHuiShouSelect(dataParams);
+                self.ES_SkillMake.OnHuiShouSelect(dataParams);
             }
 
-            if (self.View.ES_SkillLifeShield.uiTransform.gameObject.activeSelf)
+            if (self.ES_SkillLifeShield.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillLifeShield.OnHuiShouSelect(dataParams);
+                self.ES_SkillLifeShield.OnHuiShouSelect(dataParams);
             }
         }
     }
