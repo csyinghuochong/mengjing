@@ -1,14 +1,14 @@
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_JiaYuanDaShiPro))]
-    [FriendOf(typeof (ES_JiaYuanDaShiShow))]
-    [FriendOf(typeof (DlgJiaYuanDaShi))]
+    [FriendOf(typeof(ES_JiaYuanDaShiPro))]
+    [FriendOf(typeof(ES_JiaYuanDaShiShow))]
+    [FriendOf(typeof(DlgJiaYuanDaShi))]
     public static class DlgJiaYuanDaShiSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanDaShi self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-            
+
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
@@ -22,12 +22,12 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_JiaYuanDaShiPro.OnUpdateUI();
+                    self.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
+                    self.ES_JiaYuanDaShiPro.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_JiaYuanDaShiShow.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_JiaYuanDaShiShow.OnUpdateUI();
+                    self.ES_JiaYuanDaShiShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_JiaYuanDaShiShow.OnUpdateUI();
                     break;
             }
         }
