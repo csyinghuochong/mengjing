@@ -16,8 +16,8 @@ namespace ET.Client
         {
             protected override async ETTask Run(Scene root, FriendUpdate args)
             {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.Refresh();
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendApply.Refresh();
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.ES_FriendList.Refresh();
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.ES_FriendApply.Refresh();
                 await ETTask.CompletedTask;
             }
         }
@@ -27,7 +27,7 @@ namespace ET.Client
         {
             protected override async ETTask Run(Scene root, FriendChat args)
             {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.OnFriendChat();
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.ES_FriendList.OnFriendChat();
                 await ETTask.CompletedTask;
             }
         }
@@ -97,17 +97,17 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_FriendList.uiTransform.gameObject.SetActive(true);
+                    self.ES_FriendList.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_FriendApply.uiTransform.gameObject.SetActive(true);
+                    self.ES_FriendApply.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_FriendBlack.uiTransform.gameObject.SetActive(true);
+                    self.ES_FriendBlack.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_UnionShow.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_UnionShow.OnUpdateUI();
+                    self.ES_UnionShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionShow.OnUpdateUI();
                     break;
                 case 4:
                     Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -118,15 +118,15 @@ namespace ET.Client
                         return;
                     }
 
-                    self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_UnionMy.OnUpdateUI().Coroutine();
+                    self.ES_UnionMy.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionMy.OnUpdateUI().Coroutine();
                     break;
             }
         }
 
         public static void OnCreateUnion(this DlgFriend self)
         {
-            self.View.ES_UnionShow.OnCreateUnion();
+            self.ES_UnionShow.OnCreateUnion();
         }
 
         public static void OnLeaveUnion(this DlgFriend self)
@@ -136,7 +136,7 @@ namespace ET.Client
 
         public static void OnUpdateMyUnion(this DlgFriend self)
         {
-            self.View.ES_UnionMy.OnUpdateUI().Coroutine();
+            self.ES_UnionMy.OnUpdateUI().Coroutine();
         }
     }
 }

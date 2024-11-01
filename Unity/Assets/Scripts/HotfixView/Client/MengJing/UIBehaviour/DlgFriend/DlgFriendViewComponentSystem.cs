@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgFriendViewComponent))]
-	[FriendOfAttribute(typeof(DlgFriendViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgFriendViewComponent))]
 	public static partial class DlgFriendViewComponentSystem
 	{
 		[EntitySystem]
