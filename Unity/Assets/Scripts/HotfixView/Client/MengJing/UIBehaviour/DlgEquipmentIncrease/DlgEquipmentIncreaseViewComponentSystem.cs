@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgEquipmentIncreaseViewComponent))]
-	[FriendOfAttribute(typeof(DlgEquipmentIncreaseViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgEquipmentIncreaseViewComponent))]
 	public static partial class DlgEquipmentIncreaseViewComponentSystem
 	{
 		[EntitySystem]
