@@ -63,20 +63,20 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetList.OnUpdateUI();
+                    self.ES_PetList.uiTransform.gameObject.SetActive(true);
+                    self.ES_PetList.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetHeCheng.OnUpdateUI();
+                    self.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
+                    self.ES_PetHeCheng.OnUpdateUI();
                     break;
                 case 2:
-                    self.View.ES_PetXiLian.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetXiLian.OnUpdateUI();
+                    self.ES_PetXiLian.uiTransform.gameObject.SetActive(true);
+                    self.ES_PetXiLian.OnUpdateUI();
                     break;
                 case 3:
-                    self.View.ES_PetShouHu.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetShouHu.OnUpdateUI();
+                    self.ES_PetShouHu.uiTransform.gameObject.SetActive(true);
+                    self.ES_PetShouHu.OnUpdateUI();
                     break;
             }
         }
@@ -88,11 +88,11 @@
             RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
             if (paramsList[0] == PetOperationType.XiLian.ToString())
             {
-                self.View.ES_PetXiLian.OnXiLianSelect(rolePetInfo);
+                self.ES_PetXiLian.OnXiLianSelect(rolePetInfo);
             }
             else if (paramsList[0] == PetOperationType.HeCheng.ToString())
             {
-                self.View.ES_PetHeCheng.OnHeChengSelect(rolePetInfo);
+                self.ES_PetHeCheng.OnHeChengSelect(rolePetInfo);
             }
             else if (paramsList[0] == PetOperationType.UpStar_Main.ToString())
             {
@@ -106,47 +106,47 @@
 
         public static void OnHeChengReturn(this DlgPet self)
         {
-            if (self.View.ES_PetHeCheng.uiTransform.gameObject.activeSelf)
+            if (self.ES_PetHeCheng.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_PetHeCheng.OnHeChengReturn();
+                self.ES_PetHeCheng.OnHeChengReturn();
             }
         }
 
         public static async ETTask RequestPetHeXinSelect(this DlgPet self)
         {
-            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            if (self.ES_PetList.uiTransform.gameObject.activeSelf)
             {
-                await self.View.ES_PetList.OnButtonEquipHeXinButton();
+                await self.ES_PetList.OnButtonEquipHeXinButton();
             }
         }
 
         public static void OnEquipPetHeXin(this DlgPet self)
         {
-            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            if (self.ES_PetList.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_PetList.OnEquipPetHeXin();
+                self.ES_PetList.OnEquipPetHeXin();
             }
         }
 
         public static void OnXiLianUpdate(this DlgPet self)
         {
-            if (self.View.ES_PetXiLian.uiTransform.gameObject.activeSelf)
+            if (self.ES_PetXiLian.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_PetXiLian.OnXiLianUpdate();
+                self.ES_PetXiLian.OnXiLianUpdate();
             }
         }
 
         public static void OnPetFightSet(this DlgPet self)
         {
-            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            if (self.ES_PetList.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_PetList.OnPetFightingSet();
+                self.ES_PetList.OnPetFightingSet();
             }
         }
 
         public static async ETTask RequestPetEquipSelect(this DlgPet self)
         {
-            await self.View.ES_PetList.OnButtonEquipHeXinButton();
+            await self.ES_PetList.OnButtonEquipHeXinButton();
         }
     }
 }

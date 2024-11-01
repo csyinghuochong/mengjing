@@ -109,7 +109,7 @@ namespace ET.Client
 
             RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(response.rolePetInfo.Id);
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().View.ES_PetXiLian.OnXiLianSelect(rolePetInfo);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().ES_PetXiLian.OnXiLianSelect(rolePetInfo);
 
             self.OnBtn_CloseButton();
         }
