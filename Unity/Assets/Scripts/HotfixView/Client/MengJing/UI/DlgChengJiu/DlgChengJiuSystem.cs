@@ -23,19 +23,19 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_ChengJiuReward.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_ChengJiuReward.OnUpdateUI();
+                    self.ES_ChengJiuReward.uiTransform.gameObject.SetActive(true);
+                    self.ES_ChengJiuReward.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_ChengJiuShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_ChengJiuShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_ChengJiuJingling.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_ChengJiuJingling.OnUpdateUI();
+                    self.ES_ChengJiuJingling.uiTransform.gameObject.SetActive(true);
+                    self.ES_ChengJiuJingling.OnUpdateUI();
                     break;
                 case 3:
-                    self.View.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetTuJian.OnUpdateUI();
+                    self.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
+                    self.ES_PetTuJian.OnUpdateUI();
                     break;
             }
         }
