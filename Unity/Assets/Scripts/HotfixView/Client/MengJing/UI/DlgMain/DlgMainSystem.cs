@@ -759,6 +759,7 @@ namespace ET.Client
             self.LockTargetComponent.OnMainHeroMove();
             self.SkillIndicatorComponent.OnMainHeroMove();
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(DuiHuaHelper.GetCanNpcDialog(self.Root()) != null);
+            self.View.ES_MainSkill.E_Btn_NpcDuiHuaButton.gameObject.SetActive(DuiHuaHelper.GetCanNpcDialog(self.Root()) != null);
             if (self.TianQiEffectObj != null)
             {
                 self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;
