@@ -24,31 +24,31 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_RoleXiLianShow.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleXiLianShow.OnUpdateUI();
+                    self.ES_RoleXiLianShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleXiLianShow.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_RoleXiLianLevel.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleXiLianLevel.OnUpdateUI();
+                    self.ES_RoleXiLianLevel.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleXiLianLevel.OnUpdateUI();
                     break;
                 case 2:
-                    self.View.ES_RoleXiLianSkill.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleXiLianSkill.OnUpdateUI();
+                    self.ES_RoleXiLianSkill.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleXiLianSkill.OnUpdateUI();
                     break;
                 case 3:
-                    self.View.ES_RoleXiLianTransfer.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleXiLianTransfer.OnUpdateUI();
+                    self.ES_RoleXiLianTransfer.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleXiLianTransfer.OnUpdateUI();
                     break;
                 case 4:
-                    self.View.ES_RoleXiLianInherit.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_RoleXiLianInherit.OnUpdateUI();
+                    self.ES_RoleXiLianInherit.uiTransform.gameObject.SetActive(true);
+                    self.ES_RoleXiLianInherit.OnUpdateUI();
                     break;
             }
         }
 
         public static void OnXiLianReturn(this DlgRoleXiLian self)
         {
-            self.View.ES_RoleXiLianShow.OnXiLianReturn();
+            self.ES_RoleXiLianShow.OnXiLianReturn();
         }
     }
 }
