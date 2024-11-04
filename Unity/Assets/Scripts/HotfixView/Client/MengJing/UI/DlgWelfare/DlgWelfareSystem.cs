@@ -11,7 +11,7 @@
         public static void RegisterUIEvent(this DlgWelfare self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-            
+
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.WelfareLogin, self.Reddot_WelfareLogin);
@@ -52,20 +52,20 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_ActivityLogin.OnUpdateUI();
+                    self.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
+                    self.ES_ActivityLogin.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_WelfareTask.uiTransform.gameObject.SetActive(true);
+                    self.ES_WelfareTask.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_WelfareDraw.uiTransform.gameObject.SetActive(true);
+                    self.ES_WelfareDraw.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_WelfareInvest.uiTransform.gameObject.SetActive(true);
+                    self.ES_WelfareInvest.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
-                    self.View.ES_WelfareDraw2.uiTransform.gameObject.SetActive(true);
+                    self.ES_WelfareDraw2.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
