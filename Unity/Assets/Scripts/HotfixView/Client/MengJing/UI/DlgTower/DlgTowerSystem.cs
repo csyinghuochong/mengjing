@@ -1,8 +1,8 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (ES_TowerDungeon))]
-    [FriendOf(typeof (ES_TowerShop))]
-    [FriendOf(typeof (DlgTower))]
+    [FriendOf(typeof(ES_TowerDungeon))]
+    [FriendOf(typeof(ES_TowerShop))]
+    [FriendOf(typeof(DlgTower))]
     public static class DlgTowerSystem
     {
         public static void RegisterUIEvent(this DlgTower self)
@@ -21,10 +21,10 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_TowerDungeon.uiTransform.gameObject.SetActive(true);
+                    self.ES_TowerDungeon.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_TowerShop.uiTransform.gameObject.SetActive(true);
+                    self.ES_TowerShop.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
