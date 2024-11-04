@@ -24,19 +24,19 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_SeasonHome.uiTransform.gameObject.SetActive(true);
+                    self.ES_SeasonHome.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_SeasonTask.uiTransform.gameObject.SetActive(true);
+                    self.ES_SeasonTask.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_SeasonJingHe.uiTransform.gameObject.SetActive(true);
+                    self.ES_SeasonJingHe.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_SeasonStore.uiTransform.gameObject.SetActive(true);
+                    self.ES_SeasonStore.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
-                    self.View.ES_SeasonTower.uiTransform.gameObject.SetActive(true);
+                    self.ES_SeasonTower.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
