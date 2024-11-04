@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Scene root, BagItemUpdate args)
         {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgUnionMystery>()?.View.ES_UnionMystery_B.UpdateItemNum();
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgUnionMystery>()?.ES_UnionMystery_B.UpdateItemNum();
 
             await ETTask.CompletedTask;
         }
@@ -40,11 +40,11 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_UnionMystery_A.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionMystery_A.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_UnionMystery_B.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_UnionMystery_B.OnUpdateUI();
+                    self.ES_UnionMystery_B.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionMystery_B.OnUpdateUI();
                     break;
             }
         }
