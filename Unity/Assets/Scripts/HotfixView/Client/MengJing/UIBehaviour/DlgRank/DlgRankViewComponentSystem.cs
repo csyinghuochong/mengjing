@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRankViewComponent))]
-	[FriendOfAttribute(typeof(DlgRankViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgRankViewComponent))]
 	public static partial class DlgRankViewComponentSystem
 	{
 		[EntitySystem]

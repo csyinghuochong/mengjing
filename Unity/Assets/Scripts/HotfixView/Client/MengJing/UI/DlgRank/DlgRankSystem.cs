@@ -23,16 +23,16 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_RankShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_RankShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_RankPet.uiTransform.gameObject.SetActive(true);
+                    self.ES_RankPet.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_RankReward.uiTransform.gameObject.SetActive(true);
+                    self.ES_RankReward.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_RankPetReward.uiTransform.gameObject.SetActive(true);
+                    self.ES_RankPetReward.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
