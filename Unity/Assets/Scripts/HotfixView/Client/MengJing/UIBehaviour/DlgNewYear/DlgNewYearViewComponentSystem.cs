@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgNewYearViewComponent))]
-	[FriendOfAttribute(typeof(DlgNewYearViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgNewYearViewComponent))]
 	public static partial class DlgNewYearViewComponentSystem
 	{
 		[EntitySystem]
