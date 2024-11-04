@@ -21,12 +21,12 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.ES_ProtectEquip.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_ProtectEquip.OnUpdateUI();
+                    self.ES_ProtectEquip.uiTransform.gameObject.SetActive(true);
+                    self.ES_ProtectEquip.OnUpdateUI();
                     break;
                 case 1:
-                    self.View.ES_ProtectPet.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_ProtectPet.OnUpdateUI();
+                    self.ES_ProtectPet.uiTransform.gameObject.SetActive(true);
+                    self.ES_ProtectPet.OnUpdateUI();
                     break;
             }
         }
