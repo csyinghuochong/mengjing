@@ -147,7 +147,7 @@ namespace ET.Client
                 }
             }
 
-            dlgPaiMai.View.ES_PaiMaiSell.OnPaiBuyShangJia(response.PaiMaiItemInfo);
+            dlgPaiMai.ES_PaiMaiSell.OnPaiBuyShangJia(response.PaiMaiItemInfo);
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PaiMaiSellPrice);
         }
