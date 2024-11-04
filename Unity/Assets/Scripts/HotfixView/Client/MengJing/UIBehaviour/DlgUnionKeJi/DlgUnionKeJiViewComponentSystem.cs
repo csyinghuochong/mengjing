@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgUnionKeJiViewComponent))]
-	[FriendOfAttribute(typeof(DlgUnionKeJiViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgUnionKeJiViewComponent))]
 	public static partial class DlgUnionKeJiViewComponentSystem
 	{
 		[EntitySystem]

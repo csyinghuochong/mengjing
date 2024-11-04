@@ -21,10 +21,10 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_UnionKeJiResearch.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionKeJiResearch.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_UnionKeJiLearn.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionKeJiLearn.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
