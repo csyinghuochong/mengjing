@@ -39,7 +39,7 @@ namespace ET.Client
             self.PetIconList.Add(gameObject_4.GetComponent<Image>());
             
             self.TeamId = -1;
-            ES_PetMining esPetMining = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSet>().View.ES_PetMining;
+            ES_PetMining esPetMining = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSet>().ES_PetMining;
             List<int> defendteamids = esPetMining.GetSelfPetMingTeam();
             for (int i = 0; i < 3; i++)
             {
@@ -148,7 +148,7 @@ namespace ET.Client
         public static void OnInitUI(this DlgPetMiningChallenge self, int mineType, int position, PetMingPlayerInfo petMingPlayerInfo)
         {
             DlgPetSet dlgPetSet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSet>();
-            ES_PetMining uIPetMining = dlgPetSet.View.ES_PetMining;
+            ES_PetMining uIPetMining = dlgPetSet.ES_PetMining;
 
             self.MineTpe = mineType;
             self.Position = position;
