@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (ES_ZhanQuLevel))]
-    [FriendOf(typeof (ES_ZhanQuCombat))]
-    [FriendOf(typeof (ES_FirstWin))]
-    [FriendOf(typeof (DlgZhanQu))]
+    [FriendOf(typeof(ES_ZhanQuLevel))]
+    [FriendOf(typeof(ES_ZhanQuCombat))]
+    [FriendOf(typeof(ES_FirstWin))]
+    [FriendOf(typeof(DlgZhanQu))]
     public static class DlgZhanQuSystem
     {
         public static void RegisterUIEvent(this DlgZhanQu self)
@@ -22,13 +22,13 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_ZhanQuLevel.uiTransform.gameObject.SetActive(true);
+                    self.ES_ZhanQuLevel.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_ZhanQuCombat.uiTransform.gameObject.SetActive(true);
+                    self.ES_ZhanQuCombat.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_FirstWin.uiTransform.gameObject.SetActive(true);
+                    self.ES_FirstWin.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
@@ -36,7 +36,7 @@
         public static void OnClickGoToFirstWin(this DlgZhanQu self, int bossId)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(2);
-            self.View.ES_FirstWin.BossId = bossId;
+            self.ES_FirstWin.BossId = bossId;
         }
     }
 }

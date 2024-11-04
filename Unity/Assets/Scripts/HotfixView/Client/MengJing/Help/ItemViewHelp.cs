@@ -92,7 +92,7 @@ namespace ET.Client
             if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
             {
                 DlgWarehouse dlgWarehouse = root.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>();
-                dlgWarehouse.View.ES_WarehouseAccount.BagInfoPutIn = bagInfo;
+                dlgWarehouse.ES_WarehouseAccount.BagInfoPutIn = bagInfo;
                 BagClientNetHelper.RequestAccountWarehousOperate(root, 1, bagInfo.BagInfoID).Coroutine();
             }
             else

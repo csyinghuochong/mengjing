@@ -22,13 +22,13 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_UnionRoleXiuLian.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionRoleXiuLian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_UnionPetXiuLian.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionPetXiuLian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_UnionBloodStone.uiTransform.gameObject.SetActive(true);
+                    self.ES_UnionBloodStone.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
