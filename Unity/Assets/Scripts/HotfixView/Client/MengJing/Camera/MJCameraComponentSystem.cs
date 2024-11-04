@@ -109,6 +109,13 @@ namespace ET.Client
                     self.MainCamera.transform.LookAt(self.BuildUnit.Position + new float3(0, 1f, 0));
                     break;
                 }
+                case CameraBuildType.Type_4:
+                {
+                    Vector3 targetPos = self.BuildUnit.Position + math.mul(self.BuildUnit.Rotation, math.left()) * 1f + new float3(0, 1f, 0);
+                    Quaternion targetRotation = Quaternion.LookRotation(targetPos - self.MainCamera.transform.position);
+                    self.MainCamera.transform.rotation = Quaternion.Slerp(self.MainCamera.transform.rotation, targetRotation, self.CameraMoveTime);
+                    break;
+                }
             }
         }
 
@@ -196,6 +203,7 @@ namespace ET.Client
                 }
                 case CameraBuildType.Type_2:
                 case CameraBuildType.Type_3:
+                case CameraBuildType.Type_4:
                 {
                     self.TargetPosition = unit.Position + unit.Forward * 4f;
                     self.TargetPosition.y += 1f;

@@ -36,6 +36,11 @@ namespace ET.Client
         /// 看主角 居中
         /// </summary>
         Type_3,
+
+        /// <summary>
+        /// 看主角 靠左 -> 居中
+        /// </summary>
+        Type_4,
     }
 
     [FriendOf(typeof(Unit))]
