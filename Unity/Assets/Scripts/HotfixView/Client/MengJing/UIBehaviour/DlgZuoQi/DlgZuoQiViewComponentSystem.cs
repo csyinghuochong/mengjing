@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgZuoQiViewComponent))]
-	[FriendOfAttribute(typeof(DlgZuoQiViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgZuoQiViewComponent))]
 	public static partial class DlgZuoQiViewComponentSystem
 	{
 		[EntitySystem]

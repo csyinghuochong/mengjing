@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (ES_ZuoQiShow))]
-    [FriendOf(typeof (DlgZuoQi))]
+    [FriendOf(typeof(ES_ZuoQiShow))]
+    [FriendOf(typeof(DlgZuoQi))]
     public static class DlgZuoQiSystem
     {
         public static void RegisterUIEvent(this DlgZuoQi self)
@@ -20,7 +20,7 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_ZuoQiShow.uiTransform.gameObject.SetActive(true);
+                    self.ES_ZuoQiShow.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
