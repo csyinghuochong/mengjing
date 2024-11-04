@@ -26,11 +26,11 @@
             switch (index)
             {
                 case 0:
-                    self.View.ES_WatchEquip.uiTransform.gameObject.SetActive(true);
+                    self.ES_WatchEquip.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_WatchPet.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_WatchPet.OnUpdateUI();
+                    self.ES_WatchPet.uiTransform.gameObject.SetActive(true);
+                    self.ES_WatchPet.OnUpdateUI();
                     break;
             }
         }
