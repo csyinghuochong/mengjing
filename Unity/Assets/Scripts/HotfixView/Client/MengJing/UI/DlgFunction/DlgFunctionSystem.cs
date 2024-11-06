@@ -86,8 +86,14 @@ namespace ET.Client
             {
                 self.ExitCamera = false;
                 MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                uiComponent.HideWindow(WindowID.WindowID_Main);
                 cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_4,
-                    () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
+                    () =>
+                    {
+                        uiComponent.ShowWindow(WindowID.WindowID_Role);
+                        uiComponent.ShowWindow(WindowID.WindowID_Main);
+                    });
             }
 
             self.OnClose();
