@@ -99,27 +99,46 @@ namespace ET.Client
                     break;
             }
 
-            GameObjectLoadHelper.DisposeAll(self.Root());
-
+            GameObjectLoadHelper.DisposeAll(self.Root()); 
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            
             // 释放前一个场景的所有资源
-            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
+            resourcesLoaderComponent.UnLoadAllAsset();
             
             string path = ABPathHelper.GetScenePath("Empty");
                 
-            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+            await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
                 
             GameObjectLoadHelper.DisposeAll(self.Root());
 
             // 释放前一个场景的所有资源
-            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
+            resourcesLoaderComponent.UnLoadAllAsset();
                 
             path = ABPathHelper.GetScenePath(paramss);
 
-            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+            await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
 
-            Log.Warning("切换场景" + path);
+            Debug.Log("切换场景" + path);
+            
+            // 获取当前场景
+ 
+            // 打印当前场景的名称
+            Debug.Log("当前场景的名称是: " +  SceneManager.GetActiveScene().name);
+            
+            
+            //动态生成场景
+            TextAsset mapconfig = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(ABPathHelper.GetMapConfigPath(paramss));
+            if (mapconfig!=null)
+            {
+                Debug.Log("mapconfig!=null" + path);
+            }
+            else
+            {
+                Debug.Log("mapconfig==null" + path);
+            }
 
-            ConfigData.LoadSceneFinished = true;
+            ConfigData.LoadSceneFinished = sceneTypeEnum!= SceneTypeEnum.LoginScene;
 
             self.UpdateChuanSong(sceneTypeEnum);
 

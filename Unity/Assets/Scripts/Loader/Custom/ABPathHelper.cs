@@ -60,6 +60,17 @@
             return prefabPath;
         }
 
+        public static string GetMapConfigPath(string fileName)
+        {
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/MapConfig/{0}.bytes", fileName).Intern();
+            }
+
+            return prefabPath;
+        }
+        
         public static string GetNormalConfigPath(string fileName)
         {
             string prefabPath;
