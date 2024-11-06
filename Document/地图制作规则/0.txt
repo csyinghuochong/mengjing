@@ -4,3 +4,4 @@
 4.  ET/NavMesh/导入场景修改后要导出   导入场景配置生成场景，修改完之后需要再导出一下。
 5.  场景所有的预制件在H:\GitMengJing\Unity\Assets\Bundles\Unit\Scene。
 6.  图2所示，不要打散， 尽量都做过预制件。 不然没法做动态加载。
+7.  挂载了自定义脚本的并且有参数的，列如 士兵，挂载npclocal. 不能放在AdditiveHide/pool 节点下面。会导致数据丢失。
