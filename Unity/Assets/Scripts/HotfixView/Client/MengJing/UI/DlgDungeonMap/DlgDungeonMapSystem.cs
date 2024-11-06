@@ -75,12 +75,12 @@ namespace ET.Client
             });
             self.View.E_BossRefreshCloseButton.AddListener(self.OnBoosRefreshClose);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonMapLevelItemsRefresh);
-            self.View.E_MapPanelDiButton.AddListener(() =>
-            {
-                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-                uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
-            });
-            
+            // self.View.E_MapPanelDiButton.AddListener(() =>
+            // {
+            //     UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            //     uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
+            // });
+            //
             self.View.E_RefreshTimeText.text = string.Empty;
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.OnBoosRefresh().Coroutine();

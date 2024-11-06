@@ -104,7 +104,18 @@ namespace ET.Client
             // 释放前一个场景的所有资源
             self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
 
-            string path = ABPathHelper.GetScenePath(paramss);
+ 
+            string path = ABPathHelper.GetScenePath("Empty");
+                
+            await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+                
+            GameObjectLoadHelper.DisposeAll(self.Root());
+
+            // 释放前一个场景的所有资源
+            self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
+                
+            path = ABPathHelper.GetScenePath(paramss);
+
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
 
             Log.Warning("切换场景" + path);
