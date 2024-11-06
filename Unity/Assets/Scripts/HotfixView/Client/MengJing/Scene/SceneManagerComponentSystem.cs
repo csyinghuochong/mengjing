@@ -103,8 +103,7 @@ namespace ET.Client
 
             // 释放前一个场景的所有资源
             self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAllAsset();
-
- 
+            
             string path = ABPathHelper.GetScenePath("Empty");
                 
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
@@ -120,10 +119,7 @@ namespace ET.Client
 
             Log.Warning("切换场景" + path);
 
-            if (sceneTypeEnum != SceneTypeEnum.LoginScene)
-            {
-                ConfigData.LoadSceneFinished = true;
-            }
+            ConfigData.LoadSceneFinished = true;
 
             self.UpdateChuanSong(sceneTypeEnum);
 
