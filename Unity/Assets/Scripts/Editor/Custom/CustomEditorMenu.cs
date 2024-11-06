@@ -844,7 +844,7 @@ public class CustomEditorMenu
     /// <summary>
     /// prefab文件尽量放在AdditiveHide/pool节点下面，不要嵌套。。
     /// </summary>
-    [MenuItem("Tools/导出场景生成配置文件")]
+    [MenuItem("ET/NavMesh/导出场景生成配置文件")]
     static void ExportScene()
     {
         string rootname = "pool";
@@ -890,42 +890,39 @@ public class CustomEditorMenu
             }
 
             string parentname = gameObject.transform.parent.name;
-            if (prefabname.Equals(parentname))
-            {
-                parentname = gameObject.transform.parent.parent.name;
-            }
+            // if (prefabname.Equals(parentname))
+            // {
+            //     parentname = gameObject.transform.parent.parent.name;
+            // }
 
-            if (parentname.Equals(rootname))
+            if (!parentname.Equals(rootname) && !parentname.Equals(prefabname))
             {
-                // 确保传入的GameObject是一个Prefab实例
-                string prefabpath  =  PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
-                bool moveret =  PrefabMoveToBundle(prefabpath);
-                if (!moveret)
-                {
-                    sceneerror = true;
-                    break;
-                }
-                
-                if (!validobjectlist.ContainsKey(prefabname))
-                {
-                    validobjectlist.Add( prefabname, string.Empty );
-                }
-                else
-                {
-                    validobjectlist[prefabname] += "|";
-                }
-
-                string objectinfo = $"{FormatDecimal(gameObject.position.x)}:{FormatDecimal(gameObject.position.y)}:{FormatDecimal(gameObject.position.z)}" +
-                        $":{FormatDecimal(gameObject.localScale.x)}:{FormatDecimal(gameObject.localScale.y)}:{FormatDecimal(gameObject.localScale.z)}" +
-                        $":{FormatDecimal(gameObject.rotation.eulerAngles.x)}:{FormatDecimal(gameObject.rotation.eulerAngles.y)}:{FormatDecimal(gameObject.rotation.eulerAngles.z)}";
-                validobjectlist[prefabname] += (objectinfo);
+                Log.Warning($"{gameObject.name}:  未处理，可能是嵌套Prefab");
+                continue;
             }
-            else
+            
+            // 确保传入的GameObject是一个Prefab实例
+            string prefabpath  =  PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+            bool moveret =  PrefabMoveToBundle(prefabpath);
+            if (!moveret)
             {
-                Log.Error($"{gameObject.name}:  的父节点不是{rootname}");
                 sceneerror = true;
                 break;
             }
+                
+            if (!validobjectlist.ContainsKey(prefabname))
+            {
+                validobjectlist.Add( prefabname, string.Empty );
+            }
+            else
+            {
+                validobjectlist[prefabname] += "|";
+            }
+
+            string objectinfo = $"{FormatDecimal(gameObject.position.x)}:{FormatDecimal(gameObject.position.y)}:{FormatDecimal(gameObject.position.z)}" +
+                    $":{FormatDecimal(gameObject.localScale.x)}:{FormatDecimal(gameObject.localScale.y)}:{FormatDecimal(gameObject.localScale.z)}" +
+                    $":{FormatDecimal(gameObject.rotation.eulerAngles.x)}:{FormatDecimal(gameObject.rotation.eulerAngles.y)}:{FormatDecimal(gameObject.rotation.eulerAngles.z)}";
+            validobjectlist[prefabname] += (objectinfo);
         }
 
         if (sceneerror)
@@ -969,11 +966,11 @@ public class CustomEditorMenu
     {
          string prefabname = string.Empty;
         
-         if (StringHelper.IsSpecialChar(gameObject.name))
-         {
-             Log.Error($"{gameObject.name}:  含有特殊字符！");
-             return prefabname;
-         }
+         // if (StringHelper.IsSpecialChar(gameObject.name))
+         // {
+         //     Log.Error($"{gameObject.name}:  含有特殊字符！");
+         //     return prefabname;
+         // }
          
         var type = PrefabUtility.GetPrefabAssetType(gameObject);
         var status = PrefabUtility.GetPrefabInstanceStatus(gameObject);
@@ -1026,7 +1023,7 @@ public class CustomEditorMenu
         return true;
     }
     
-    [MenuItem("Tools/导入场景修改后要导出")]
+    [MenuItem("ET/NavMesh/导入场景修改后要导出")]
     static  void ImportScene()
     {
         //TextAsset v = Resources.Load<GlobalConfig><TextAsset>($"Assets/Bundles/MapConfig/1.bytes");
@@ -1087,8 +1084,14 @@ public class CustomEditorMenu
             //     GameObject.DestroyImmediate(pool.transform.Find(mapinfo.AssetPath).gameObject);
             // }
 
-             UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Bundles/Unit/Scene/{mapinfo.AssetPath}.prefab", typeof(GameObject));
-             GameObject gameitem = (GameObject)GameObject.Instantiate(prefab);
+              UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Bundles/Unit/Scene/{mapinfo.AssetPath}.prefab", typeof(GameObject));
+              if (prefab == null)
+              {
+                  Log.Error($"prefab == null:  {mapinfo.AssetPath}");
+                  continue;
+              }
+
+              GameObject gameitem = (GameObject)GameObject.Instantiate(prefab);
 
               GameObject gamenode = new GameObject(mapinfo.AssetPath);
               gamenode.transform.SetParent(pool.transform);;
@@ -1147,6 +1150,9 @@ public class CustomEditorMenu
 
         bool moveret =  MoveFile(prefabpath, destinationFile);
         MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+        
+        Debug.Log($"{prefabpath}   to    {destinationFile}" );
+        
         return moveret;
     }
 
@@ -1156,11 +1162,16 @@ public class CustomEditorMenu
         {
             // 确保目标路径存在
             var destinationDirectory = Path.GetDirectoryName(destinationFile);
+            
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);
             }
- 
+            if (File.Exists(destinationFile))
+            {
+                return true;
+            }
+            
             // 移动文件
             File.Move(sourceFile, destinationFile);
             Log.Debug("文件移动成功:" + destinationFile);
