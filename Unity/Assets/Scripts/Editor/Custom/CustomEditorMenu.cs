@@ -921,7 +921,8 @@ public class CustomEditorMenu
 
             string objectinfo = $"{FormatDecimal(gameObject.position.x)}:{FormatDecimal(gameObject.position.y)}:{FormatDecimal(gameObject.position.z)}" +
                     $":{FormatDecimal(gameObject.localScale.x)}:{FormatDecimal(gameObject.localScale.y)}:{FormatDecimal(gameObject.localScale.z)}" +
-                    $":{FormatDecimal(gameObject.rotation.eulerAngles.x)}:{FormatDecimal(gameObject.rotation.eulerAngles.y)}:{FormatDecimal(gameObject.rotation.eulerAngles.z)}";
+                    $":{FormatDecimal(gameObject.rotation.eulerAngles.x)}:{FormatDecimal(gameObject.rotation.eulerAngles.y)}:{FormatDecimal(gameObject.rotation.eulerAngles.z)}" +
+                    $":{gameObject.tag}:{gameObject.gameObject.layer}";
             validobjectlist[prefabname] += (objectinfo);
         }
 

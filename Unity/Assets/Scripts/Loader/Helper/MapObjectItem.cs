@@ -13,6 +13,10 @@ namespace ET
         public List<Vector3> ScaleList = new List<Vector3>();
 
         public List<Quaternion> RotationList = new List<Quaternion>();
+        
+        public List<string> TagList = new List<string>();
+        
+        public List<int> LayerList = new List<int>();
 
         public static List<MapObjectItem> ToMapObjectItem(string mapObjectConfig)
         {
@@ -49,6 +53,8 @@ namespace ET
                     mapObjectItem.PositionList .Add(  new Vector3(float.Parse(positioninfo[0]),float.Parse(positioninfo[1]),float.Parse(positioninfo[2]))  ); 
                     mapObjectItem.ScaleList.Add(  new Vector3 (float.Parse(positioninfo[3]),float.Parse(positioninfo[4]),float.Parse(positioninfo[5]) )   ); 
                     mapObjectItem.RotationList.Add( Quaternion.Euler(float.Parse(positioninfo[6]),float.Parse(positioninfo[7]),float.Parse(positioninfo[8]) )  ); 
+                    mapObjectItem.TagList.Add( positioninfo[9] );
+                    mapObjectItem.LayerList.Add( int.Parse(positioninfo[10]) );
                 }
 
                 mapObjectItems.Add(mapObjectItem);
