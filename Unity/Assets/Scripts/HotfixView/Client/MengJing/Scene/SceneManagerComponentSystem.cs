@@ -129,13 +129,15 @@ namespace ET.Client
             
             //动态生成场景
             TextAsset mapconfig = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(ABPathHelper.GetMapConfigPath(paramss));
-            if (mapconfig!=null)
+            if (mapconfig!=null && mapconfig.bytes!=null)
             {
                 Debug.Log("mapconfig!=null" + path);
+                self.Root().GetComponent<MapObjectManagerComponent>().InitMapObject(mapconfig.bytes, paramss  );
             }
             else
             {
                 Debug.Log("mapconfig==null" + path);
+                self.Root().GetComponent<MapObjectManagerComponent>().InitMapObject(null, paramss  );
             }
 
             ConfigData.LoadSceneFinished = sceneTypeEnum!= SceneTypeEnum.LoginScene;

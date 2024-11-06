@@ -38,6 +38,7 @@ namespace ET.Client
             root.AddComponent<AttackComponent>();
             root.AddComponent<ActivityComponentC>();
             root.AddComponent<SceneManagerComponent>();
+            root.AddComponent<MapObjectManagerComponent>();
             root.AddComponent<JiaYuanComponentC>();
             root.AddComponent<TeamComponentC>();
             root.AddComponent<GuideComponent>();

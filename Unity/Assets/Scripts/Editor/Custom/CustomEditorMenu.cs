@@ -1042,16 +1042,15 @@ public class CustomEditorMenu
             Log.Error("该场景没有AdditiveHide节点！！");
             return;
         }
-
-        string rootname = "pool";
-        GameObject gameObjectpool = GameObject.Find($"AdditiveHide/{rootname}"); // 获取当前GameObject的Transform
+        
+        GameObject gameObjectpool = GameObject.Find("AdditiveHide/pool"); // 获取当前GameObject的Transform
         if (gameObjectpool != null)
         {
             GameObject.DestroyImmediate(gameObjectpool);
             return;
         }
 
-        gameObjectpool = new GameObject(rootname);
+        gameObjectpool = new GameObject("pool");
         gameObjectpool.transform.SetParent(GameObject.Find("AdditiveHide").transform);
         gameObjectpool.transform.SetAsFirstSibling();
         gameObjectpool.transform.localScale = Vector3.one;

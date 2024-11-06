@@ -13,6 +13,7 @@ namespace ET.Client
         Detroyed
     }
     
+    [ChildOf(typeof(MapObjectManagerComponent))]
     public class GameObjectTransInfo : Entity
     {
         public int aoi_x;
@@ -53,6 +54,9 @@ namespace ET.Client
     [ComponentOf(typeof (Scene))]
     public class MapObjectManagerComponent: Entity, IAwake
     {
+
+        public Dictionary<string, List<MapObjectItem>> MapObjectConfigs = new Dictionary<string, List<MapObjectItem>>();
         
+        public Dictionary<long, EntityRef<GameObjectTransInfo>> MapObjectTransList = new Dictionary<long, EntityRef<GameObjectTransInfo>>();
     }
 }
