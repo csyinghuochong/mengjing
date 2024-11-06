@@ -8,10 +8,14 @@ namespace ET.Client
         
         public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)
         {
+
             GlobalComponent globalComponent = root.GetComponent<GlobalComponent>();
-            Camera camera = globalComponent.MainCamera.GetComponent<Camera>();
-            camera.GetComponent<MyCamera_1>().enabled = false;
-            camera.GetComponent<MyCamera_1>().Target = topTf;
+            Camera maincamera = globalComponent.MainCamera.GetComponent<Camera>();
+            Camera uicamera = globalComponent.UICamera.GetComponent<Camera>();
+            GameObject bloodnode = globalComponent.BloodMonster;
+  
+            maincamera.GetComponent<MyCamera_1>().enabled = false;
+            maincamera.GetComponent<MyCamera_1>().Target = topTf;
 
             GameObject shiBingSet = GameObject.Find("ShiBingSet");
             if (shiBingSet != null)
@@ -28,6 +32,9 @@ namespace ET.Client
                     }
 
                     NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcLocal.NpcId);
+                    npcLocal.MainCamera = maincamera;
+                    npcLocal.UiCamera = uicamera;
+                    npcLocal.Blood = bloodnode;
                     npcLocal.Target = mainTf;
                     npcLocal.NpcName = npcConfig.Name;
                     npcLocal.NpcSpeak = npcConfig.SpeakText;

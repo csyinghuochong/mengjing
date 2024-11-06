@@ -23,9 +23,6 @@ public class NpcLocal : MonoBehaviour
 
     void Start()
     {
-        this.UiCamera = GameObject.Find("Global/UICamera").GetComponent<Camera>();
-        this.MainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
-        this.Blood = GameObject.Find("Global/UI/BloodRoot");
         this.HeadPos = this.transform.Find("NamePoint");
         if (this.HeadPos == null)
         {
