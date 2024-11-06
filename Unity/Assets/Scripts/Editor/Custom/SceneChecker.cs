@@ -15,6 +15,8 @@ namespace ET.Client
             string scenesDirectory = "Assets/Bundles/Scenes";
             string[] sceneFiles = Directory.GetFiles(scenesDirectory, "*.unity", SearchOption.AllDirectories);
 
+            Log.Debug("场景检查开始！");
+
             foreach (string scenePath in sceneFiles)
             {
                 SceneAsset sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
@@ -41,7 +43,6 @@ namespace ET.Client
             Log.Debug("所有场景检查完成！");
         }
 
-        // 递归获取物体的完整路径
         private static string GetFullPath(GameObject obj)
         {
             string path = obj.name;
