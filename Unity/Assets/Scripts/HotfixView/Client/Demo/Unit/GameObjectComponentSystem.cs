@@ -598,6 +598,7 @@ namespace ET.Client
                     if (unit.MainHero)
                     {
                         Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
+                        
                         MapViewHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
                     }
 
