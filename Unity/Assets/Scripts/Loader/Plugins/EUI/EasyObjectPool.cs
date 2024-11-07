@@ -70,6 +70,16 @@ namespace ET.Client
             po.gameObject.transform.SetParent(rootObj.transform, false);
         }
 
+        public int GetObjectNumber()
+        {
+            return availableObjStack.Count;
+        }
+
+        public int GetobjectsInUse()
+        {
+            return objectsInUse;
+        }
+
         private void populatePool(int initialCount)
         {
             for (int index = 0; index < initialCount; index++)

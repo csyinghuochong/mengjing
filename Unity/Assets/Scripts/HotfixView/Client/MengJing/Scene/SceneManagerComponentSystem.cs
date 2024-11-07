@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace ET.Client
@@ -114,6 +115,9 @@ namespace ET.Client
 
             // 释放前一个场景的所有资源
             resourcesLoaderComponent.UnLoadAllAsset();
+            
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
                 
             path = ABPathHelper.GetScenePath(paramss);
 

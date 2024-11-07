@@ -1,28 +1,11 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using YooAsset;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.ResourcesLoaderTimer)]
-    public class ResourcesLoaderTimer : ATimer<ResourcesLoaderComponent>
-    {
-        protected override void Run(ResourcesLoaderComponent self)
-        {
-            try
-            {
-                self.UnloadUnusedAssets();
-            }
-            catch (Exception e)
-            {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
-                }
-            }
-        }
-    }
 
     [EntitySystemOf(typeof(ResourcesLoaderComponent))]
     [FriendOf(typeof(ResourcesLoaderComponent))]
@@ -32,21 +15,18 @@ namespace ET.Client
         private static void Awake(this ResourcesLoaderComponent self)
         {
             self.Package = YooAssets.GetPackage("DefaultPackage");
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.CheckTime, TimerInvokeType.ResourcesLoaderTimer, self);
         }
 
         [EntitySystem]
         private static void Awake(this ResourcesLoaderComponent self, string packageName)
         {
             self.Package = YooAssets.GetPackage(packageName);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(self.CheckTime, TimerInvokeType.ResourcesLoaderTimer, self);
         }
 
         [EntitySystem]
         private static void Destroy(this ResourcesLoaderComponent self)
         {
             UnityEngine.Debug.Log("ResourcesLoaderComponent.Destroy");
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.UnLoadAllAsset();
         }
 
@@ -71,7 +51,6 @@ namespace ET.Client
                     {
                         handle.UnloadAsync();
                     }
-
                     break;
             }
         }
@@ -104,11 +83,7 @@ namespace ET.Client
 
         public static void UnloadUnusedAssets(this ResourcesLoaderComponent self)
         {
-            if (!self.ReleaseAsset)
-            {
-                return;
-            }
-
+            
             List<string> keysToRemove = new List<string>();
             long now = TimeInfo.Instance.ServerNow();
             foreach (var kv in self.Handlers)
@@ -203,9 +178,5 @@ namespace ET.Client
     {
         public ResourcePackage Package;
         public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
-        public long CheckTime = TimeHelper.Minute; //检测间隔
-        public long Timer;
-
-        public bool ReleaseAsset = false;
     }
 }

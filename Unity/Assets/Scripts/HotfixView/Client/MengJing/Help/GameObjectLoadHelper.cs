@@ -51,6 +51,17 @@ namespace ET.Client
             GameObjectPoolHelper.ReturnObjectToPool(gameObject);
         }
 
+        public static void DisposeUnUse(Scene root)
+        {
+            Log.Warning($"DisposeUnUse: {Time.time}");
+
+            List<string> assets = GameObjectPoolHelper.DisposeUnUse();
+            foreach (var VARIABLE in assets)
+            {
+                root.GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
+            }
+        }
+        
         public static void DisposeAll(Scene root)
         {
             Log.Warning($"DisposeAll: {Time.time}");
@@ -60,9 +71,7 @@ namespace ET.Client
             {
                 root.GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
             }
-           
-            Resources.UnloadUnusedAssets();
-            GC.Collect();
+            
         }
     }
 }

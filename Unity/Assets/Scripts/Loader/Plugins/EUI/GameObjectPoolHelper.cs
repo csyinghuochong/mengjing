@@ -150,7 +150,25 @@ namespace ET.Client
             ReturnObjectToPool(t.gameObject);
         }
         
+        public static List<string>  DisposeUnUse( )
+        {
+            Debug.LogWarning($"DisposeAll: {Time.time}");
+            List<string> unuse = new List<string>();
+            List<string> paths = poolDict.Keys.ToList();
+            for (int i = paths.Count - 1; i >= 0; i--)
+            {
+                if (poolDict[paths[i]].GetobjectsInUse() == 0)
+                {
+                    Log.Debug($"GetobjectsInUse() == 0:  {paths[i]}");
+                    UnityEngine.Object.Destroy(poolDict[paths[i]].rootObj);
+                    unuse.Add(paths[i]);
+                    poolDict.Remove(paths[i]);
+                }
+            }
 
+            return unuse;
+        }
+        
         public static List<string>  DisposeAll( )
         {
             Debug.LogWarning($"DisposeAll: {Time.time}");
@@ -163,6 +181,18 @@ namespace ET.Client
 
             poolDict.Clear();
             return paths;
+        }
+
+        public static int GetObjectNumber()
+        {
+            int totalnumber = 0;
+            List<string> paths = poolDict.Keys.ToList();
+            for (int i = paths.Count - 1; i >= 0; i--)
+            {
+                totalnumber += poolDict[paths[i]].GetObjectNumber();
+            }
+
+            return totalnumber;
         }
 
         public static GameObject GetGameObjectByResType(string poolName)
