@@ -448,6 +448,11 @@ namespace ET.Client
                     FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 }
 
+                GameObjectComponent gameObjectComponent = main.GetComponent<GameObjectComponent>();
+                Transform topTf = main.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
+                main.Root().GetComponent<SceneUnitManagerComponent>().InitMainHero(main.Id);
+                MapViewHelper.OnMainHeroInit(main.Root(), topTf, gameObjectComponent.GameObject.transform, sceneType);
+
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Loading);
             }
             catch (Exception ex)

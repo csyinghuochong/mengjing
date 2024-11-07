@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace ET.Client
@@ -595,12 +596,6 @@ namespace ET.Client
                         EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
                     }
 
-                    if (unit.MainHero)
-                    {
-                        Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-                        
-                        MapViewHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
-                    }
 
                     if (self.BianShenEffect)
                     {

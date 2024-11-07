@@ -132,12 +132,12 @@ namespace ET.Client
             if (mapconfig!=null && mapconfig.bytes!=null)
             {
                 Debug.Log("mapconfig!=null" + path);
-                self.Root().GetComponent<MapObjectManagerComponent>().InitMapObject(mapconfig.bytes, paramss  );
+                self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(mapconfig.bytes, paramss  );
             }
             else
             {
                 Debug.Log("mapconfig==null" + path);
-                self.Root().GetComponent<MapObjectManagerComponent>().InitMapObject(null, paramss  );
+                self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(null, paramss  );
             }
 
             ConfigData.LoadSceneFinished = sceneTypeEnum!= SceneTypeEnum.LoginScene;

@@ -38,14 +38,14 @@ namespace ET.Client
             root.AddComponent<AttackComponent>();
             root.AddComponent<ActivityComponentC>();
             root.AddComponent<SceneManagerComponent>();
-            root.AddComponent<MapObjectManagerComponent>();
+            root.AddComponent<SceneUnitManagerComponent>();
+            root.AddComponent<SceneAOIManagerComponent>();
             root.AddComponent<JiaYuanComponentC>();
             root.AddComponent<TeamComponentC>();
             root.AddComponent<GuideComponent>();
             root.AddComponent<FangChenMiComponentC>();
             root.AddComponent<CellDungeonComponentC>();
             
-
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
             root.SceneType = sceneType;

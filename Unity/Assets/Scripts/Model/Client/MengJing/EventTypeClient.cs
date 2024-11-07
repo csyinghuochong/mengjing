@@ -217,11 +217,7 @@ namespace ET.Client
     public struct SkillCDUpdate
     {
     }
-
-    public struct MainHeroMove
-    {
-    }
-
+    
     public struct SkillBeging
     {
         public string DataParamString;

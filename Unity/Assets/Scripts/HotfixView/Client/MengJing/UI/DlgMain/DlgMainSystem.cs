@@ -221,16 +221,6 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_MainHeroMove_MainChatItemsRefresh : AEvent<Scene, MainHeroMove>
-    {
-        protected override async ETTask Run(Scene root, MainHeroMove args)
-        {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
     public class DataUpdate_BeforeMove_DlgMainRefresh : AEvent<Scene, BeforeMove>
     {
         protected override async ETTask Run(Scene root, BeforeMove args)

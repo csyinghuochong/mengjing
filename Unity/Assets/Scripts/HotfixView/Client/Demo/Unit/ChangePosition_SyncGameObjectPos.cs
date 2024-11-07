@@ -25,8 +25,9 @@
             //主角
             if (unit.MainHero)
             {
-                EventSystem.Instance.Publish(scene.Root(), new MainHeroMove());
                 MapViewHelper.OnMainHeroMove(unit);
+                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
+                unit.Root().GetComponent<SceneUnitManagerComponent>().Move(unit,  args );
             }
 
             await ETTask.CompletedTask;

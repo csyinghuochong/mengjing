@@ -85,6 +85,7 @@ namespace ET.Client
                         break;
                 }
 
+                root.GetComponent<SceneUnitManagerComponent>().BeginEnterScene();
                 await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
 
             }
