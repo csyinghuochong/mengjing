@@ -48,7 +48,7 @@ namespace ET.Client
         {
             SceneUnit sceneUnit =  self.AddChildWithId<SceneUnit>(unitid, true);
             sceneUnit.Position = position;
-            sceneUnit.AddComponent<SceneAOIEntity, int, float3>(4 * 1000, sceneUnit.Position).MainHero = true;
+            sceneUnit.AddComponent<SceneAOIEntity, int, float3>(10 * 1000, sceneUnit.Position).MainHero = true;
             self.MainSceneUnit = sceneUnit;
         }
 
@@ -125,7 +125,7 @@ namespace ET.Client
                     }
                     
                     SceneUnit sceneUnit =  self.AddChildWithId<SceneUnit>(unitid, true);
-                    sceneUnit.InitSceneUnit(mapconfig.AssetPath, mapconfig.TagList[i],  mapconfig.LayerList[i], gamenode);
+                    sceneUnit.InitSceneUnit(mapconfig.AssetPath, mapconfig.TagList[i],  mapconfig.LayerList[i], gameObjectpool);
                     sceneUnit.Position = vector3;
                     sceneUnit.Rotation = mapconfig.RotationList[i];
                     sceneUnit.Scale = mapconfig.ScaleList[i];
