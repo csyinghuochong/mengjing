@@ -107,6 +107,9 @@ namespace ET.Client
             // 释放前一个场景的所有资源
             resourcesLoaderComponent.UnLoadAllAsset();
             
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
+            
             string path = ABPathHelper.GetScenePath("Empty");
                 
             await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
