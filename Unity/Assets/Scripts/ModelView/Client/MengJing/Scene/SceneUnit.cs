@@ -14,17 +14,15 @@ namespace ET.Client
     [ChildOf(typeof(SceneUnitManagerComponent))]
     public class SceneUnit : Entity, IAwake, IDestroy
     {
-        public string Name;
-        public string Parentname;
         public string Prefabname;
         public string Tag;
-        public string Layer;
+        public int Layer;
         public Vector3 Position { get; set; }
-        public Vector3 Rotation;
-        public Vector3 Scale;
+        public Quaternion Rotation{ get; set; }
+        public Vector3 Scale{ get; set; }
         
         public LoadState State { get; set; }
-        public GameObject Go { get; set; }
+        public GameObject GameObject { get; set; }
         public GameObject ParentGo { get; set; }
     }
 }

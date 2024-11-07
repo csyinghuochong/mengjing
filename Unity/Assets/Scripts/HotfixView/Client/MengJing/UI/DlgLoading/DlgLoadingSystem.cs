@@ -450,7 +450,7 @@ namespace ET.Client
 
                 GameObjectComponent gameObjectComponent = main.GetComponent<GameObjectComponent>();
                 Transform topTf = main.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-                main.Root().GetComponent<SceneUnitManagerComponent>().InitMainHero(main.Id);
+                main.Root().GetComponent<SceneUnitManagerComponent>().InitMainHero(main.Position, main.Id);
                 MapViewHelper.OnMainHeroInit(main.Root(), topTf, gameObjectComponent.GameObject.transform, sceneType);
 
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Loading);

@@ -13,11 +13,19 @@ namespace ET.Client
             {
                 return;
             }
+            
+            if (!a.IsPlayer())
+            {
+                return;
+            }
 
             SceneUnit ua = a.GetParent<SceneUnit>();
             SceneUnit ub = b.GetParent<SceneUnit>();
-            //MapMessageHelper.NoticeUnitAdd(ua, ub);
-            Log.Debug($"SceneUnitEnterSightRange_Notify:  {a.GetParent<SceneUnit>().Position}   {b.GetParent<SceneUnit>().Position}");
+            
+            //SceneUnitEnterSightRange_Notify:  False   3  True   1218242235335389
+            //SceneUnitEnterSightRange_Notify:  True   1218242235335389  False   465
+            Log.Debug($"SceneUnitEnterSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}   {b.Id}");
+            ub.LoadGameObject();
             await ETTask.CompletedTask;
         }
     }

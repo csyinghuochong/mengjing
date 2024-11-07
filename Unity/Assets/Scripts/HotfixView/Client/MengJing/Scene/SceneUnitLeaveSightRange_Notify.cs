@@ -7,11 +7,18 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, SceneUnitLeaveSightRange args)
         {
             await ETTask.CompletedTask;
+
             SceneAOIEntity a = args.A;
             SceneAOIEntity b = args.B;
-            
-            Log.Debug($"SceneUnitLeaveSightRange_Notify:  {a.GetParent<SceneUnit>().Position}   {b.GetParent<SceneUnit>().Position}");
-            //NoticeUnitRemove(a.GetParent<SceneUnit>(), b.GetParent<SceneUnit>());
+            if (!a.IsPlayer())
+            {
+                return;
+            }
+
+            //SceneUnitLeaveSightRange_Notify:  False   95  True  1218242235335389
+            //SceneUnitLeaveSightRange_Notify:  True   1218242235335389  False  978
+            Log.Debug($"SceneUnitLeaveSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}  {b.Id}");
+            b.GetParent<SceneUnit>().RecoverGameObject();
         }
     }
 }

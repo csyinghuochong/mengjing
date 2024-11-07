@@ -125,6 +125,17 @@
 
             return prefabPath;
         }
+        
+        public static string GetSceneUnitPath(string fileName)
+        {
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Unit/Scene/{0}.prefab", fileName).Intern();
+            }
+        
+            return prefabPath;
+        }
 
         public static string GetItemPath(string fileName)
         {

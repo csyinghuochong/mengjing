@@ -44,11 +44,11 @@ namespace ET.Client
         }
 
 
-        public static void InitMainHero(this ET.Client.SceneUnitManagerComponent self, long unitid)
+        public static void InitMainHero(this ET.Client.SceneUnitManagerComponent self, float3 position, long unitid)
         {
             SceneUnit sceneUnit =  self.AddChildWithId<SceneUnit>(unitid, true);
-            //sceneUnit.InitSceneUnit(  );
-            sceneUnit.AddComponent<SceneAOIEntity, int, float3>(9 * 1000, sceneUnit.Position).MainHero = true;
+            sceneUnit.Position = position;
+            sceneUnit.AddComponent<SceneAOIEntity, int, float3>(4 * 1000, sceneUnit.Position).MainHero = true;
             self.MainSceneUnit = sceneUnit;
         }
 
@@ -116,8 +116,10 @@ namespace ET.Client
 
                     unitid++;
                     SceneUnit sceneUnit =  self.AddChildWithId<SceneUnit>(unitid, true);
+                    sceneUnit.InitSceneUnit(mapconfig.AssetPath, mapconfig.TagList[i],  mapconfig.LayerList[i], gameObjectpool);
                     sceneUnit.Position = vector3;
-                    //sceneUnit.InitSceneUnit(  );
+                    sceneUnit.Rotation = mapconfig.RotationList[i];
+                    sceneUnit.Scale = mapconfig.ScaleList[i];
                     sceneUnit.AddComponent<SceneAOIEntity, int, float3>(1 * 1000, sceneUnit.Position).MainHero = false;;
                 }
             }
