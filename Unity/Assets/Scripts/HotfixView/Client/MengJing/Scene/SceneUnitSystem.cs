@@ -26,8 +26,8 @@ namespace ET.Client
             self.Prefabname = ABPathHelper.GetSceneUnitPath(prefabname);
             self.Tag = tag;
             self.Layer = layer;
+            self.ParentGo = parentGo;
             self.State = LoadState.None;
-            self.ParentGo = null;
         }
 
         public static void OnLoadGameObject(this SceneUnit self, GameObject go, long formId)
@@ -46,20 +46,20 @@ namespace ET.Client
             self.GameObject = go;
             self.State = LoadState.Loaded;
             CommonViewHelper.SetParent(go, self.ParentGo);
+            go.transform.localPosition = self.Position;
+            go.transform.localScale = self.Scale;
+            go.transform.rotation = self.Rotation;
         }
 
         public static void RecoverGameObject(this SceneUnit self)
         {
-            if (self.State == LoadState.WillDetroy)
-            {
-                return;
-            }
             self.State = LoadState.WillDetroy;
             if (self.GameObject == null)
             {
                 return;
             }
             GameObjectLoadHelper.RecoverGameObject(self.Prefabname, self.GameObject);
+            self.GameObject = null;
         }
         
         public static void LoadGameObject(this SceneUnit self)

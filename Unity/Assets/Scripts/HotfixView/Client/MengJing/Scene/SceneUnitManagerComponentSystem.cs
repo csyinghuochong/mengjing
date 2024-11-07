@@ -110,13 +110,22 @@ namespace ET.Client
             long unitid = 0;
             foreach (var mapconfig in mapObjectItem)
             {
+                GameObject gamenode = new GameObject(mapconfig.AssetPath);
+                gamenode.transform.SetParent(gameObjectpool.transform);;
+                gamenode.transform.localScale = Vector3.one;
+                gamenode.transform.localPosition = Vector3.zero;
+                
                 for (int i = 0; i < mapconfig.PositionList.Count; i++)
                 {
-                    float3 vector3 = mapconfig.PositionList[i];
-
                     unitid++;
+                    float3 vector3 = mapconfig.PositionList[i];
+                    if (mapconfig.AssetPath.Equals("Fence_5"))
+                    {
+                        Log.Debug($"Fence_5:  {vector3}");
+                    }
+                    
                     SceneUnit sceneUnit =  self.AddChildWithId<SceneUnit>(unitid, true);
-                    sceneUnit.InitSceneUnit(mapconfig.AssetPath, mapconfig.TagList[i],  mapconfig.LayerList[i], gameObjectpool);
+                    sceneUnit.InitSceneUnit(mapconfig.AssetPath, mapconfig.TagList[i],  mapconfig.LayerList[i], gamenode);
                     sceneUnit.Position = vector3;
                     sceneUnit.Rotation = mapconfig.RotationList[i];
                     sceneUnit.Scale = mapconfig.ScaleList[i];
