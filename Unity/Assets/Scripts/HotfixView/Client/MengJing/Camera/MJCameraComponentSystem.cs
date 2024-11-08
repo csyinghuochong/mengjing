@@ -131,6 +131,7 @@ namespace ET.Client
             {
                 self.CameraMoveType = CameraMoveType.Normal;
                 // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(true);
+                // self.Root().GetComponent<GlobalComponent>().BloodRoot.gameObject.SetActive(true);
                 return;
             }
 
@@ -215,6 +216,7 @@ namespace ET.Client
             self.OnBuildEnter = action;
 
             // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
+            // self.Root().GetComponent<GlobalComponent>().BloodRoot.gameObject.SetActive(false);
         }
 
         public static void SetBuildExit(this MJCameraComponent self)
