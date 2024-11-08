@@ -113,9 +113,20 @@ namespace ET.Server
                 {
                     self.TriggerEvent(ChengJiuTargetEnum.KillInfernalBoss_6, unitconfigId, 1);
                 }
+
+                List<int> jinglingids = null;
+                JingLingConfigCategory.Instance.JingLingActive.TryGetValue(defend.ConfigId, out jinglingids);
+                if (jinglingids!=null)
+                {
+                    foreach (var jinglingid in jinglingids)
+                    {
+                        self.OnActiveJingLing(jinglingid);
+                    }
+                }
             }
         }
-
+        
+        
         public static void OnPassFuben(this ChengJiuComponentS self, int difficulty, int chapterid, int star)
         {
             self.TriggerEvent(ChengJiuTargetEnum.PassNormalFubenID_11, chapterid, 1);
@@ -247,6 +258,10 @@ namespace ET.Server
             {
                 self.JingLingList[i].Progess++;
             }
+            
+            M2C_JingLingActiveMessage m2CJingLingActiveMessage = M2C_JingLingActiveMessage.Create();
+            m2CJingLingActiveMessage.JingLingList = self.JingLingList;
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
         }
 
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)

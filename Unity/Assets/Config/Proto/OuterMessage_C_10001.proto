@@ -1943,6 +1943,15 @@ message M2C_ChengJiuActiveMessage // IMessage
 	int32 ChengJiuId = 1;
 }
 
+//激活成就
+message M2C_JingLingActiveMessage // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated JingLingInfo JingLingList = 5;
+}
+
 //任务列表
 message TaskPro
 {
