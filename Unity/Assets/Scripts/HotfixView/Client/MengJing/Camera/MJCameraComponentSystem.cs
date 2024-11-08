@@ -130,7 +130,7 @@ namespace ET.Client
             if (self.CameraMoveTime > 1f)
             {
                 self.CameraMoveType = CameraMoveType.Normal;
-                //unit.GetComponent<UIUnitHpComponent>()?.ShowHearBar(true);
+                // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(true);
                 return;
             }
 
@@ -214,7 +214,7 @@ namespace ET.Client
             self.OldCameraPostion = self.MainCamera.transform.position;
             self.OnBuildEnter = action;
 
-            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
+            // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
         }
 
         public static void SetBuildExit(this MJCameraComponent self)
