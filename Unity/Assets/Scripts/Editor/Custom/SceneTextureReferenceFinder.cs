@@ -64,8 +64,7 @@ namespace ET.Client
                 result.Add($"{sceneName}:");
                 foreach (var (texture, size) in texturesInScene)
                 {
-                    result.Add($"  {texture.name} - {FormatBytes(size)}");
-                    // result.Add($"  {texture.name} - {FormatBytes(size)} - Path: {AssetDatabase.GetAssetPath(texture)}");
+                    result.Add($"  {AssetDatabase.GetAssetPath(texture)} - 大小：{FormatBytes(size)} - 尺寸：{texture.width}x{texture.height}");
                 }
 
                 result.Add(""); // 空行分隔场景
