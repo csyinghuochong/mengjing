@@ -6,6 +6,7 @@ namespace ET
 {
     public static class ConfigData
     {
+        
         [StaticField]
         public static bool LoadSceneFinished { get; set; }
         

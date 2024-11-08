@@ -194,6 +194,18 @@ namespace ET.Client
 
             return totalnumber;
         }
+        
+        public static int GetUnUseObjectNumber()
+        {
+            int totalnumber = 0;
+            List<string> paths = poolDict.Keys.ToList();
+            for (int i = paths.Count - 1; i >= 0; i--)
+            {
+                totalnumber += (poolDict[paths[i]].GetObjectNumber() -  poolDict[paths[i]].GetobjectsInUse()) ;
+            }
+
+            return totalnumber;
+        }
 
         public static GameObject GetGameObjectByResType(string poolName)
         {

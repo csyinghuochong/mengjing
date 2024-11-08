@@ -44,10 +44,9 @@ namespace ET.Client
         
         public static void CheckUnUseAssets(this SceneUnitManagerComponent self)
         {
-
             if (GameObjectPoolHelper.GetObjectNumber() >= 200)
             {
-                Log.Debug("GameObjectPoolHelper.GetObjectNumber() >= 200");
+                Debug.Log("GameObjectPoolHelper.GetObjectNumber() >= 200");
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
                 GameObjectLoadHelper.DisposeUnUse(self.Root());
 
@@ -57,6 +56,12 @@ namespace ET.Client
 
         public static void Move(this SceneUnitManagerComponent self, Unit unit, ChangePosition args)
         {
+            if (!SettingData.UseSceneAOI)
+            {
+                return;
+            }
+
+            
             float3 oldPos = args.OldPos;
             int oldCellX = (int)(oldPos.x * 1000) / SceneAOIManagerComponent.CellSize;
             int oldCellY = (int)(oldPos.z * 1000) / SceneAOIManagerComponent.CellSize;
@@ -83,6 +88,11 @@ namespace ET.Client
 
         public static void InitMainHero(this ET.Client.SceneUnitManagerComponent self, float3 position, long unitid)
         {
+            if (!SettingData.UseSceneAOI)
+            {
+                return;
+            }
+
             SceneUnit sceneUnit = self.AddChildWithId<SceneUnit>(unitid, true);
             sceneUnit.Position = position;
             sceneUnit.AddComponent<SceneAOIEntity, int, float3>(10 * 1000, sceneUnit.Position).MainHero = true;
@@ -93,6 +103,11 @@ namespace ET.Client
 
         public static void BeginEnterScene(this ET.Client.SceneUnitManagerComponent self)
         {
+            if (!SettingData.UseSceneAOI)
+            {
+                return;
+            }
+
             //清除scneunit。。
             List<long> removeids = new List<long>();
             foreach ((long key, Entity value) in self.Children)

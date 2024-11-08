@@ -103,6 +103,10 @@ namespace ET.Client
         
         [StaticField]
         public static bool ShowTerrain = true; 
+        
+        [StaticField]
+        public static bool UseSceneAOI = false; 
+
     }
 }
 
