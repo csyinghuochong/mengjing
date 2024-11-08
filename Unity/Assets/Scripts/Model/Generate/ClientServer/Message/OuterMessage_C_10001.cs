@@ -13672,9 +13672,6 @@ namespace ET
         [MemoryPackOrder(4)]
         public List<JingLingInfo> JingLingList { get; set; } = new();
 
-        [MemoryPackOrder(5)]
-        public int JingLingId { get; set; }
-
         [MemoryPackOrder(6)]
         public int RandomDrop { get; set; }
 
@@ -13693,7 +13690,6 @@ namespace ET
             this.TotalChengJiuPoint = default;
             this.AlreadReceivedId.Clear();
             this.JingLingList.Clear();
-            this.JingLingId = default;
             this.RandomDrop = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -13955,9 +13951,6 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
-        [MemoryPackOrder(0)]
-        public int JingLingId { get; set; }
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -13968,7 +13961,6 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
-            this.JingLingId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

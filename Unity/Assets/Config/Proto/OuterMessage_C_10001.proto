@@ -3147,7 +3147,6 @@ message M2C_ChengJiuListResponse // ILocationResponse
 	int32 TotalChengJiuPoint = 3;
 	repeated int32 AlreadReceivedId = 4;
 	repeated JingLingInfo JingLingList = 5;
-	int32 JingLingId = 6;
 	int32 RandomDrop = 7;
 }
 
@@ -3211,7 +3210,6 @@ message M2C_JingLingUseResponse    // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
-	int32 JingLingId = 1;
 }
 
 message C2M_UnitStateUpdate // ILocationMessage
