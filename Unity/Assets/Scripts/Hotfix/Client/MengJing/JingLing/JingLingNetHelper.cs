@@ -15,7 +15,7 @@
             }
 
             ChengJiuComponentC chengJiuComponent = root.GetComponent<ChengJiuComponentC>();
-            chengJiuComponent.JingLingId = response.JingLingId;
+            chengJiuComponent.OnFightJingLing(jingLingId);
             return ErrorCode.ERR_Success;
         }
 

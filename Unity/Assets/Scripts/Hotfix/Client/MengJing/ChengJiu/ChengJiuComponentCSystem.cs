@@ -17,13 +17,20 @@ namespace ET.Client
         {
         }
 
+        public static void OnFightJingLing(this ChengJiuComponentC self, int jid)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                self.JingLingList[i].State = jid == self.JingLingList[i].JingLingID ? 1 : 0;
+            }
+        } 
+        
         public static void OnGetChengJiuList(this ChengJiuComponentC self, M2C_ChengJiuListResponse r2C_Respose)
         {
             self.ChengJiuCompleteList = r2C_Respose.ChengJiuCompleteList;
             self.TotalChengJiuPoint = r2C_Respose.TotalChengJiuPoint;
             self.AlreadReceivedId = r2C_Respose.AlreadReceivedId;
             self.RandomDrop = r2C_Respose.RandomDrop;
-            self.JingLingId = r2C_Respose.JingLingId;
 
             self.ChengJiuProgessList.Clear();
             for (int i = 0; i < r2C_Respose.ChengJiuProgessList.Count; i++)
