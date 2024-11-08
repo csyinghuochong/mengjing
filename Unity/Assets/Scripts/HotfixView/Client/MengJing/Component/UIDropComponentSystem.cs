@@ -65,7 +65,7 @@ namespace ET.Client
 
             self.HeadBar = go;
             self.HeadBar.SetActive(true);
-            self.HeadBar.transform.SetParent(self.Root().GetComponent<GlobalComponent>().NormalRoot);
+            self.HeadBar.transform.SetParent(self.Root().GetComponent<GlobalComponent>().BloodText_Layer0.transform);
             self.HeadBar.transform.localScale = Vector3.one;
             if (self.HeadBar.GetComponent<HeadBarUI>() == null)
             {
