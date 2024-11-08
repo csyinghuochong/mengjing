@@ -15,7 +15,7 @@ namespace ET.Client
         private static readonly string scenesPath = "Assets/Bundles/Scenes";
         private static readonly string outputPath = "Assets/场景中引用的贴图.txt";
 
-        [MenuItem("Tools/场景中引用的贴图")]
+        [MenuItem("Tools/检测场景中引用的贴图")]
         public static void FindTextureReferences()
         {
             Log.Debug("查找开始！");
