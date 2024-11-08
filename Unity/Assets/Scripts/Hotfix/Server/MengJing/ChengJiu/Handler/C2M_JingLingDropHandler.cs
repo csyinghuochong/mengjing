@@ -9,12 +9,12 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_JingLingDropRequest request, M2C_JingLingDropResponse response)
         {
             ChengJiuComponentS chengJiuComponent = unit.GetComponent<ChengJiuComponentS>();
-            int jinglingid = chengJiuComponent.JingLingId;
-            if (jinglingid == 0 || chengJiuComponent.RandomDrop == 1)
+            JingLingInfo jingLingInfo = chengJiuComponent.GetFightJingLing();
+            if (jingLingInfo == null || chengJiuComponent.RandomDrop == 1)
             {
                 return;
             }
-            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jinglingid);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jingLingInfo.JingLingID);
             if (jingLingConfig.FunctionType!= JingLingFunctionType.RandomDrop)
             {
                 return;

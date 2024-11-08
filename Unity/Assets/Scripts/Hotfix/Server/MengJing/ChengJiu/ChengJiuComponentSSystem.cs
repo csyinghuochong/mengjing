@@ -30,17 +30,18 @@ namespace ET.Server
                 NumericHelp.GetProList(jinglingCof.AddProperty, proList);
             }
 
-            if (self.JingLingId == 0)
+            JingLingInfo jingLingInfo = self.GetFightJingLing();
+            if (jingLingInfo != null)
             {
-                return proList;
-            }
-            JingLingConfig lifeShieldConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
-            // NumericHelp.GetProList(lifeShieldConfig.AddProperty, proList);
-            if (lifeShieldConfig.FunctionType == JingLingFunctionType.AddProperty)
-            {
-                NumericHelp.GetProList(lifeShieldConfig.FunctionValue, proList);
+                JingLingConfig lifeShieldConfig = JingLingConfigCategory.Instance.Get(jingLingInfo.JingLingID);
+                // NumericHelp.GetProList(lifeShieldConfig.AddProperty, proList);
+                if (lifeShieldConfig.FunctionType == JingLingFunctionType.AddProperty)
+                {
+                    NumericHelp.GetProList(lifeShieldConfig.FunctionValue, proList);
+                }
             }
 
+           
             return proList;
         }
 
@@ -227,17 +228,17 @@ namespace ET.Server
             }
         }
         
-        public static int GetFightJingLing(this ChengJiuComponentS self, int jid)
+        public static JingLingInfo GetFightJingLing(this ChengJiuComponentS self)
         {
             for (int i = 0; i < self.JingLingList.Count; i++)
             {
                 if (self.JingLingList[i].State == 1)
                 {
-                    return self.JingLingList[i].JingLingID;
+                    return self.JingLingList[i];
                 }
             }
 
-            return 0;
+            return null;
         }
         
         public static void OnActiveJingLing(this ChengJiuComponentS self, int jid)

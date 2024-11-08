@@ -11,10 +11,11 @@
             {
                 unit.GetParent<UnitComponent>().Remove(chengJiuComponent.JingLingUnitId);
             }
-         
-            if (chengJiuComponent.JingLingId != 0)
+
+            JingLingInfo jingLingInfo = chengJiuComponent.GetFightJingLing();
+            if (jingLingInfo != null)
             {
-                JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
+                JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jingLingInfo.JingLingID);
                 if (jingLingConfig.FunctionType == JingLingFunctionType.AddSkill)
                 {
                     int skillid = int.Parse(jingLingConfig.FunctionValue);
@@ -23,17 +24,16 @@
                 }
             }
 
-            if (chengJiuComponent.JingLingId == request.JingLingId)
+            if (jingLingInfo!=null && jingLingInfo.JingLingID == request.JingLingId)
             {
-                chengJiuComponent.JingLingId = 0;
+                chengJiuComponent.OnFightJingLing(0);
                 chengJiuComponent.JingLingUnitId = 0;
             }
             else
             {
-                chengJiuComponent.JingLingId = (request.JingLingId);
-                chengJiuComponent.JingLingUnitId = UnitFactory.CreateJingLing(unit, chengJiuComponent.JingLingId).Id;
+                chengJiuComponent.OnFightJingLing(request.JingLingId);
+                chengJiuComponent.JingLingUnitId = UnitFactory.CreateJingLing(unit, request.JingLingId).Id;
             }
-            response.JingLingId = chengJiuComponent.JingLingId;
             
             await ETTask.CompletedTask;
         }

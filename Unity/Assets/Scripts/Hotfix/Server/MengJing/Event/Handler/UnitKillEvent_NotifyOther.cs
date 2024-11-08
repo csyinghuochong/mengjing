@@ -173,10 +173,10 @@ namespace ET.Server
 
                 if (mainAttack.Type == UnitType.Player)
                 {
-                    int jinglingid = mainAttack.GetComponent<ChengJiuComponentS>().JingLingId;
-                    if (jinglingid != 0)
+                    JingLingInfo jinglinginfo = mainAttack.GetComponent<ChengJiuComponentS>().GetFightJingLing();
+                    if (jinglinginfo != null)
                     {
-                        JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jinglingid);
+                        JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jinglinginfo.JingLingID);
                         if (jingLingConfig.FunctionType == JingLingFunctionType.ExtraDrop)
                         {
                             int dropid = int.Parse(jingLingConfig.FunctionValue);

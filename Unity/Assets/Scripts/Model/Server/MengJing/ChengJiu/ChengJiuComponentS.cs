@@ -15,8 +15,7 @@ namespace ET.Server
        
         public List<int> AlreadReceivedId = new List<int>();
         public List<int> ChengJiuCompleteList = new List<int>();
-       
-        public int JingLingId { set; get; } = 0;
+        
         public int RandomDrop { get; set; }
     }
 

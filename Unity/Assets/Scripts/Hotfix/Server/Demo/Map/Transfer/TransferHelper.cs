@@ -735,10 +735,10 @@ namespace ET.Server
 
         public static void CreateJingLing(Unit unit)
         {
-            int jinglingid = unit.GetComponent<ChengJiuComponentS>().JingLingId;
-            if (jinglingid != 0)
+            JingLingInfo jinglinginfo = unit.GetComponent<ChengJiuComponentS>().GetFightJingLing();
+            if (jinglinginfo != null )
             {
-                long JingLingUnitId = UnitFactory.CreateJingLing(unit, jinglingid).Id;
+                long JingLingUnitId = UnitFactory.CreateJingLing(unit, jinglinginfo.JingLingID).Id;
                 unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = JingLingUnitId;
             }
         }
