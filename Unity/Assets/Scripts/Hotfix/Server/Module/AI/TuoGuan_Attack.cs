@@ -47,15 +47,21 @@ namespace ET.Server
                     cmd.TargetID = target.Id;
                     cmd.SkillID = skillId;
 
-                    if (skillConfig.SkillZhishiTargetType == 1) //自身点
+                    float ange = math.degrees(math.atan2(direction.x, direction.z));
+                    cmd.TargetAngle = (int)math.floor(ange);
+                    
+                           // || skillConfig.SkillZhishiTargetType == 0 //自身点
+                           // || skillConfig.SkillZhishiType == 0)   //没有技能指示器
+                    if (skillConfig.SkillTargetType == 0 || skillConfig.SkillTargetType == 8 || skillConfig.SkillTargetType == 9 )
+                      
                     {
-                        cmd.TargetAngle = 0;
+                        //cmd.TargetAngle = 0;
                         cmd.TargetDistance = 0;
                     }
                     else
                     {
-                        float ange = math.degrees(math.atan2(direction.x, direction.z));
-                        cmd.TargetAngle = (int)math.floor(ange);
+                        //float ange = math.degrees(math.atan2(direction.x, direction.z));
+                        //cmd.TargetAngle = (int)math.floor(ange);
                         cmd.TargetDistance = math.distance(unit.Position, target.Position);
                     }
 

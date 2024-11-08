@@ -101,6 +101,8 @@ namespace ET
 		public int DamgeElementType { get; set; }
 		/// <summary>攻击系数</summary>
 		public double ActDamge { get; set; }
+		/// <summary>怪物攻击系数</summary>
+		public double MonsterActDamge { get; set; }
 		/// <summary>固定伤害值</summary>
 		public int DamgeValue { get; set; }
 		/// <summary>是否必中</summary>
