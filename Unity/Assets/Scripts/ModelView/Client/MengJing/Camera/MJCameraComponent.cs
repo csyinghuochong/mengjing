@@ -12,7 +12,6 @@ namespace ET.Client
         PetFuben = 3,
         Pull = 4,
         Rollback = 5,
-        LookAtPet = 6,
     }
 
     public enum CameraBuildType
@@ -91,14 +90,11 @@ namespace ET.Client
         public float MAX_ANGLE_Y = 80;
         public float MIN_ANGLE_Y = 10;
 
-        private EntityRef<Unit> mainUnit;
-        public Unit MainUnit { get => this.mainUnit; set => this.mainUnit = value; }
+        private EntityRef<Unit> lookAtUnit;
+        public Unit LookAtUnit { get => this.lookAtUnit; set => this.lookAtUnit = value; }
 
         private EntityRef<Unit> buildUnit;
         public Unit BuildUnit { get => this.buildUnit; set => this.buildUnit = value; }
-
-        private EntityRef<Unit> petUnit;
-        public Unit PetUnit { get => this.petUnit; set => this.petUnit = value; }
 
         public Action OnBuildEnter { get; set; }
     }

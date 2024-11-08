@@ -16,7 +16,7 @@ namespace ET.Client
             self.OffsetPostion = new float3(0, 10f, -6f);
             self.PullRate = 1f;
             self.CameraMoveType = CameraMoveType.Normal;
-            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
             self.OnEnterScene(SceneTypeEnum.MainCityScene);
         }
@@ -55,13 +55,6 @@ namespace ET.Client
                 return;
             }
 
-            if (self.CameraMoveType == CameraMoveType.LookAtPet)
-            {
-                self.MainCamera.transform.position = self.PetUnit.Position + self.OffsetPostion * self.LenDepth;
-                self.MainCamera.transform.LookAt(self.PetUnit.Position);
-                return;
-            }
-
             //if (self.MainCamera.GetComponent<CameraFollow>() != null)
             //{
             //	self.OffsetPostion = self.MainCamera.GetComponent<CameraFollow>().OffsetPostion;
@@ -71,8 +64,8 @@ namespace ET.Client
                 self.CalculateOffset();
             }
 
-            self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.LenDepth;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position);
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
+            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
         public static void BuildEnterMove(this MJCameraComponent self)
@@ -155,8 +148,8 @@ namespace ET.Client
             }
 
             self.PullRate += Time.deltaTime * 0.08f; // 速度
-            self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position);
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
+            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
         /// <summary>
@@ -177,8 +170,8 @@ namespace ET.Client
             }
 
             self.PullRate -= Time.deltaTime * 0.3f;
-            self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position);
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
+            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
         public static void SetBuildEnter(this MJCameraComponent self, Unit unit, CameraBuildType cameraBuildType, Action action)
@@ -301,13 +294,12 @@ namespace ET.Client
 
         public static void StartLookAtPet(this MJCameraComponent self, Unit pet)
         {
-            self.PetUnit = pet;
-            self.CameraMoveType = CameraMoveType.LookAtPet;
+            self.LookAtUnit = pet;
         }
 
         public static void EndLookAtPet(this MJCameraComponent self)
         {
-            self.CameraMoveType = CameraMoveType.Normal;
+            self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
         }
     }
 }
