@@ -11,6 +11,7 @@
             {
                 unit.GetParent<UnitComponent>().Remove(chengJiuComponent.JingLingUnitId);
             }
+         
             if (chengJiuComponent.JingLingId != 0)
             {
                 JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);

@@ -1917,6 +1917,14 @@ message M2C_SyncChatInfo // IMessage
 	ChatInfo ChatInfo = 1;
 }
 
+//精灵进度
+message JingLingInfo
+{
+	int32 JingLingID = 1;
+	int32 Progess = 2;   //对比JingLingConfig.NeedPoint判断是否激活。
+	int32 State = 3;   // 0休息 1 出战
+}
+
 
 //成就进度
 message ChengJiuInfo
@@ -3138,7 +3146,7 @@ message M2C_ChengJiuListResponse // ILocationResponse
 	repeated int32 ChengJiuCompleteList = 2;
 	int32 TotalChengJiuPoint = 3;
 	repeated int32 AlreadReceivedId = 4;
-	repeated int32 JingLingList = 5;
+	repeated JingLingInfo JingLingList = 5;
 	int32 JingLingId = 6;
 	int32 RandomDrop = 7;
 }

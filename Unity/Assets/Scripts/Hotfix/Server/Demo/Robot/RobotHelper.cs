@@ -979,17 +979,18 @@ namespace ET.Client
         public static async ETTask JingLingUse(Scene root)
         {
             ChengJiuComponentC chengJiuComponent = root.GetComponent<ChengJiuComponentC>();
-            if (chengJiuComponent.JingLingList.Count == 0)
-            {
-                return;
-            }
-
-            if (chengJiuComponent.JingLingList[^1] == chengJiuComponent.JingLingId)
-            {
-                return;
-            }
-
-            await JingLingNetHelper.RequestJingLingUse(root, chengJiuComponent.JingLingList[^1], 1);
+            // if (chengJiuComponent.JingLingList.Count == 0)
+            // {
+            //     return;
+            // }
+            //
+            // if (chengJiuComponent.JingLingList[^1] == chengJiuComponent.JingLingId)
+            // {
+            //     return;
+            // }
+            //
+            // await JingLingNetHelper.RequestJingLingUse(root, chengJiuComponent.JingLingList[^1], 1);
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask MoveToNpc(Scene root, int npcConfigId)

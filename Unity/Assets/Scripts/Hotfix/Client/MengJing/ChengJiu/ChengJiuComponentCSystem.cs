@@ -22,14 +22,19 @@ namespace ET.Client
             self.ChengJiuCompleteList = r2C_Respose.ChengJiuCompleteList;
             self.TotalChengJiuPoint = r2C_Respose.TotalChengJiuPoint;
             self.AlreadReceivedId = r2C_Respose.AlreadReceivedId;
-            self.JingLingList = r2C_Respose.JingLingList;
             self.RandomDrop = r2C_Respose.RandomDrop;
             self.JingLingId = r2C_Respose.JingLingId;
 
-            self.ChengJiuProgessList = new Dictionary<int, ChengJiuInfo>();
+            self.ChengJiuProgessList.Clear();
             for (int i = 0; i < r2C_Respose.ChengJiuProgessList.Count; i++)
             {
                 self.ChengJiuProgessList.Add(r2C_Respose.ChengJiuProgessList[i].ChengJiuID, r2C_Respose.ChengJiuProgessList[i]);
+            }
+            
+            self.JingLingList.Clear();
+            foreach (var jinlinginfo in  self.JingLingList)
+            {
+                self.JingLingList.Add(jinlinginfo.Key, jinlinginfo.Value);
             }
         }
 
@@ -47,12 +52,12 @@ namespace ET.Client
         {
             EventSystem.Instance.Publish(self.Root(), new JingLingGet { JingLingId = jid });
             
-            if (self.JingLingList.Contains(jid))
+            if (self.JingLingList.ContainsKey(jid))
             {
                 return;
             }
 
-            self.JingLingList.Add(jid);
+            self.JingLingList[jid].Progess++;
         }
     }
 }

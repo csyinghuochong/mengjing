@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -19,7 +20,13 @@ namespace ET.Server
 
             for (int i = 0; i < self.JingLingList.Count; i++)
             {
-                JingLingConfig jinglingCof = JingLingConfigCategory.Instance.Get(self.JingLingList[i]);
+                JingLingConfig jinglingCof = JingLingConfigCategory.Instance.Get(self.JingLingList[i].JingLingID);
+                
+                if (self.JingLingList[i].Progess < jinglingCof.NeedPoint)
+                {
+                    continue;
+                }
+
                 NumericHelp.GetProList(jinglingCof.AddProperty, proList);
             }
 
@@ -40,15 +47,21 @@ namespace ET.Server
         public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-            if (self.Zone() <= 48 && numericComponent.GetAsLong(NumericType.RechargeNumber) < 400 && self.JingLingList.Contains(10003))
-            {
-                Log.Warning($"充值小于400有精灵龟: {self.Id}");
-                self.JingLingList.Remove(10003);
-                self.JingLingId = 0;
-                self.JingLingUnitId = 0;
-            }
 
             self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv);
+
+            Dictionary<int, JingLingConfig> alljingling = JingLingConfigCategory.Instance.GetAll();
+            foreach (var JingLingConfig in alljingling)
+            {
+                if (self.JingLingList.Where( p=>p.JingLingID == JingLingConfig.Key).Count() > 0)
+                {
+                    continue;
+                }
+
+                JingLingInfo jingLingInfo = JingLingInfo.Create();
+                jingLingInfo.JingLingID = JingLingConfig.Key;
+                self.JingLingList.Add( jingLingInfo );
+            }
         }
 
         public static void OnZeroClockUpdate(this ChengJiuComponentS self)
@@ -205,13 +218,34 @@ namespace ET.Server
             }
         }
 
+        //出战
+        public static void OnFightJingLing(this ChengJiuComponentS self, int jid)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                self.JingLingList[i].State = jid == self.JingLingList[i].JingLingID ? 1 : 0;
+            }
+        }
+        
+        public static int GetFightJingLing(this ChengJiuComponentS self, int jid)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                if (self.JingLingList[i].State == 1)
+                {
+                    return self.JingLingList[i].JingLingID;
+                }
+            }
+
+            return 0;
+        }
+        
         public static void OnActiveJingLing(this ChengJiuComponentS self, int jid)
         {
-            if (self.JingLingList.Contains(jid))
+            for (int i = 0; i < self.JingLingList.Count; i++)
             {
-                return;
+                self.JingLingList[i].Progess++;
             }
-            self.JingLingList.Add(jid);
         }
 
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)

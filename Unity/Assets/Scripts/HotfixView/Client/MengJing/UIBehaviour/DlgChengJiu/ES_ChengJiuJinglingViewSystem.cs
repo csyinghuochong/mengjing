@@ -29,7 +29,7 @@ namespace ET.Client
             Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[index].BindTrans(transform);
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id,
-                chengJiuComponent.JingLingList.Contains(self.ShowJingLing[index].Id));
+                chengJiuComponent.JingLingList[self.ShowJingLing[index].Id]);
         }
 
         public static void OnInitUI(this ES_ChengJiuJingling self)

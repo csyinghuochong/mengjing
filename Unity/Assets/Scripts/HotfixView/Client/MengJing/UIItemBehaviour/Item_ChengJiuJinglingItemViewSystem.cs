@@ -20,12 +20,7 @@ namespace ET.Client
         private static async ETTask OnButtonActivite(this Scroll_Item_ChengJiuJinglingItem self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            if (!chengJiuComponent.JingLingList.Contains(self.JingLingId))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请先激活此精灵！");
-                return;
-            }
-
+           
             int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
             if (error != 0)
             {
@@ -39,12 +34,13 @@ namespace ET.Client
             EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
-        public static void OnInitUI(this Scroll_Item_ChengJiuJinglingItem self, int jid, bool active)
+        public static void OnInitUI(this Scroll_Item_ChengJiuJinglingItem self, int jid, JingLingInfo jingLingInfo)
         {
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jid);
             self.JingLingId = jid;
             self.E_ChengHaoNameText.text = jingLingConfig.Name;
-
+            bool active = jingLingInfo.Progess >= jingLingConfig.NeedPoint;
+            
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
             // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
             // 测试 70001001

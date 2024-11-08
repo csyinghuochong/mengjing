@@ -63,6 +63,16 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>名称</summary>
 		public string Name { get; set; }
+		/// <summary>获取方式</summary>
+		public int GetWay { get; set; }
+		/// <summary>获取参数</summary>
+		public int[] GetValue { get; set; }
+		/// <summary>激活点数</summary>
+		public int NeedPoint { get; set; }
+		/// <summary>激活概率</summary>
+		public double ActivePro { get; set; }
+		/// <summary>精灵类型</summary>
+		public int JingLingType { get; set; }
 		/// <summary>图标显示</summary>
 		public int Icon { get; set; }
 		/// <summary>模型</summary>
