@@ -24,7 +24,7 @@ namespace ET.Client
 
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_Close2Button.AddListener(self.OnCloseButton);
-            
+
             self.InitShow();
         }
 
@@ -107,9 +107,22 @@ namespace ET.Client
             //     titlePath = "UITeamDungeon";
             // }
             //
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_UIActivity");
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            self.View.E_TitleImage.sprite = sp;
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_UIActivity");
+            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            // self.View.E_TitleImage.sprite = sp;
+
+            string title = windowID switch
+            {
+                WindowID.WindowID_Task => "任务系统",
+                WindowID.WindowID_Role => "角色系统",
+                WindowID.WindowID_Pet => "宠物系统",
+                WindowID.WindowID_Skill => "技能系统",
+                WindowID.WindowID_Friend => "好友系统",
+                WindowID.WindowID_ChengJiu => "成就系统",
+                _ => ""
+            };
+
+            self.View.E_TitleTextText.text = title;
         }
     }
 }
