@@ -1,9 +1,12 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor.SceneManagement;
+using UnityEngine.Profiling;
+using System.Reflection;
 
 namespace ET.Client
 {
@@ -44,7 +47,7 @@ namespace ET.Client
                             Texture texture = material.GetTexture(textureName);
                             if (texture != null && texturesInScene.All(t => t.texture != texture))
                             {
-                                long textureSize = GetTextureSizeInBytes(texture);
+                                long textureSize = GetTextureFileSize(texture);
                                 if (textureSize > 0)
                                 {
                                     texturesInScene.Add((texture, textureSize));
@@ -75,27 +78,30 @@ namespace ET.Client
             Log.Debug($"查找结束！ 文件保存在 {outputPath}");
         }
 
-        private static long GetTextureSizeInBytes(Texture texture)
+        // 获取Texture的存储内存大小
+        private static long GetTextureFileSize(Texture texture)
         {
-            string path = AssetDatabase.GetAssetPath(texture);
+            long fileSize = 0;
 
-            // 检查路径是否为空
-            if (string.IsNullOrEmpty(path))
-            {
-                Log.Warning($"Texture '{texture.name}' does not have a valid path.");
-                return 0;
-            }
+            Type textureUtilType = typeof(TextureImporter).Assembly.GetType("UnityEditor.TextureUtil");
+            MethodInfo getStorageMemorySizeLongMethod =
+                    textureUtilType.GetMethod("GetStorageMemorySizeLong", BindingFlags.Static | BindingFlags.Public);
+            fileSize = (long)getStorageMemorySizeLongMethod.Invoke(null, new object[] { texture });
 
-            FileInfo fileInfo = new FileInfo(path);
+            return fileSize;
+        }
 
-            // 检查文件是否存在
-            if (!fileInfo.Exists)
-            {
-                Log.Warning($"Texture file '{path}' for texture '{texture.name}' does not exist.");
-                return 0;
-            }
+        // 获取Texture的运行时内存大小
+        private static long GetTextureRuntimeMemorySize(Texture texture)
+        {
+            long memorySize = 0;
 
-            return fileInfo.Length;
+            Type textureUtilType = typeof(TextureImporter).Assembly.GetType("UnityEditor.TextureUtil");
+            MethodInfo getRuntimeMemorySizeLongMethod =
+                    textureUtilType.GetMethod("GetRuntimeMemorySizeLong", BindingFlags.Static | BindingFlags.Public);
+            memorySize = (long)getRuntimeMemorySizeLongMethod.Invoke(null, new object[] { texture });
+
+            return memorySize;
         }
 
         private static string FormatBytes(long bytes)
@@ -105,7 +111,12 @@ namespace ET.Client
             if (bytes >= 1048576)
                 return $"{bytes / 1048576f:0.00} MB";
             if (bytes >= 1024)
-                return $"{bytes / 1024f:0.00} KB";
+            {
+                float sizeInMB = bytes / 1048576f;
+                float sizeInKB = bytes / 1024f;
+                return $"{sizeInKB:0.00} KB / {sizeInMB:0.00} MB ";
+            }
+
             return $"{bytes} B";
         }
     }
