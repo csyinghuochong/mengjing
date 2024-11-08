@@ -309,13 +309,13 @@ namespace ET.Client
         {
             self.E_Btn_JingLingButton.gameObject.SetActive(false);
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            if (chengJiuComponent.JingLingId == 0)
+            if (chengJiuComponent.GetFightJingLing() == 0)
             {
                 return;
             }
 
             bool showButton = false;
-            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.GetFightJingLing());
             switch (jingLingConfig.FunctionType)
             {
                 case 1:
@@ -335,12 +335,12 @@ namespace ET.Client
         public static async ETTask OnBtn_JingLingButton(this ES_MainSkill self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            if (chengJiuComponent.JingLingId == 0)
+            if (chengJiuComponent.GetFightJingLing() == 0)
             {
                 return;
             }
 
-            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.GetFightJingLing());
             switch (jingLingConfig.FunctionType)
             {
                 case 1:

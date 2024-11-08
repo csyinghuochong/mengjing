@@ -25,6 +25,19 @@ namespace ET.Client
             }
         } 
         
+        public static int GetFightJingLing(this ChengJiuComponentC self)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                if (self.JingLingList[i].State == 1)
+                {
+                    return self.JingLingList[i].JingLingID;
+                }
+            }
+
+            return 0;
+        }
+        
         public static void OnGetChengJiuList(this ChengJiuComponentC self, M2C_ChengJiuListResponse r2C_Respose)
         {
             self.ChengJiuCompleteList = r2C_Respose.ChengJiuCompleteList;

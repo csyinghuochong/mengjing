@@ -27,7 +27,7 @@ namespace ET.Client
                 return;
             }
 
-            bool current = chengJiuComponent.JingLingId == self.JingLingId;
+            bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
             self.E_ButtonShouHuiButton.gameObject.SetActive(current);
             self.E_ButtonActiviteButton.gameObject.SetActive(!current);
 
@@ -56,7 +56,7 @@ namespace ET.Client
             CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            bool current = chengJiuComponent.JingLingId == jid;
+            bool current = chengJiuComponent.GetFightJingLing() == jid;
             self.E_ButtonShouHuiButton.gameObject.SetActive(current);
             self.E_ButtonActiviteButton.gameObject.SetActive(!current);
 

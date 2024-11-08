@@ -268,13 +268,13 @@ namespace ET.Client
             }
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            if (chengJiuComponent.JingLingId == 0)
+            if (chengJiuComponent.GetFightJingLing() == 0)
             {
                 return;
             }
 
             bool sendpick = false;
-            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.JingLingId);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(chengJiuComponent.GetFightJingLing());
             if (jingLingConfig.FunctionType == JingLingFunctionType.PickGold && self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId) == 1)
             {
                 sendpick = true;
