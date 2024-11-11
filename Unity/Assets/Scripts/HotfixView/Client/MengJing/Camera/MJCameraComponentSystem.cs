@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -52,6 +53,11 @@ namespace ET.Client
             if (self.CameraMoveType == CameraMoveType.Rollback)
             {
                 self.RollbackCamera();
+                return;
+            }
+
+            if (self.CameraMoveType == CameraMoveType.Shake)
+            {
                 return;
             }
 
@@ -172,6 +178,22 @@ namespace ET.Client
             self.PullRate -= Time.deltaTime * 0.3f;
             self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
             self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
+        }
+
+        public static void ShakeCamera(this MJCameraComponent self, CameraShakeType type = CameraShakeType.Type_0)
+        {
+            self.MainCamera.DOKill();
+            self.CameraMoveType = CameraMoveType.Shake;
+
+            float shakeDuration = 0.5f; // 时间
+            float shakeStrength = 0.8f; // 振幅
+            int vibrato = 30; // 频率
+            float randomness = 90f; // 随机性
+
+            self.MainCamera.transform.DOShakePosition(shakeDuration, shakeStrength, vibrato, randomness).OnComplete(() =>
+            {
+                self.CameraMoveType = CameraMoveType.Normal;
+            });
         }
 
         public static void SetBuildEnter(this MJCameraComponent self, Unit unit, CameraBuildType cameraBuildType, Action action)

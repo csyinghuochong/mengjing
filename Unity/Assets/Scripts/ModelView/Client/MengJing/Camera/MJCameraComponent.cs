@@ -12,6 +12,7 @@ namespace ET.Client
         PetFuben = 3,
         Pull = 4,
         Rollback = 5,
+        Shake = 6
     }
 
     public enum CameraBuildType
@@ -40,6 +41,12 @@ namespace ET.Client
         /// 看主角 靠左 -> 居中
         /// </summary>
         Type_4,
+    }
+
+    public enum CameraShakeType
+    {
+        Type_0,
+        Type_1,
     }
 
     [FriendOf(typeof(Unit))]
