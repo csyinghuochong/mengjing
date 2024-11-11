@@ -170,7 +170,8 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", jingLingInfo.Progess, jingLingConfig.NeedPoint);
+                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}",
+                    jingLingInfo.Progess > jingLingConfig.NeedPoint ? jingLingConfig.NeedPoint : jingLingInfo.Progess, jingLingConfig.NeedPoint);
             }
 
             self.E_ProgressImgImage.fillAmount = jingLingInfo.Progess * 1f / jingLingConfig.NeedPoint;
