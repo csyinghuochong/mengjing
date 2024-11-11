@@ -287,6 +287,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ShouHuiButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShouHuiButton == null )
+     			{
+		    		this.m_E_ShouHuiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_ShouHui");
+     			}
+     			return this.m_E_ShouHuiButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ShouHuiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShouHuiImage == null )
+     			{
+		    		this.m_E_ShouHuiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_ShouHui");
+     			}
+     			return this.m_E_ShouHuiImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_UnactivateText
      	{
      		get
@@ -334,6 +368,8 @@ namespace ET.Client
 			this.m_E_ProgressTxtText = null;
 			this.m_E_ActivateButton = null;
 			this.m_E_ActivateImage = null;
+			this.m_E_ShouHuiButton = null;
+			this.m_E_ShouHuiImage = null;
 			this.m_E_UnactivateText = null;
 			this.uiTransform = null;
 		}
@@ -354,6 +390,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ProgressTxtText = null;
 		private UnityEngine.UI.Button m_E_ActivateButton = null;
 		private UnityEngine.UI.Image m_E_ActivateImage = null;
+		private UnityEngine.UI.Button m_E_ShouHuiButton = null;
+		private UnityEngine.UI.Image m_E_ShouHuiImage = null;
 		private UnityEngine.UI.Text m_E_UnactivateText = null;
 		public Transform uiTransform = null;
 	}

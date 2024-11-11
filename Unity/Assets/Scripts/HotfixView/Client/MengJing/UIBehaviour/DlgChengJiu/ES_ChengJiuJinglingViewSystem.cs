@@ -17,6 +17,7 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
             self.E_ActivateButton.AddListenerAsync(self.OnButtonActivite);
+            self.E_ShouHuiButton.AddListenerAsync(self.OnButtonActivite);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
@@ -72,6 +73,15 @@ namespace ET.Client
 
         private static async ETTask OnButtonActivite(this ES_ChengJiuJingling self)
         {
+            ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
+            JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
+            if (jingLingInfo.Progess < jingLingConfig.NeedPoint)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("未激活此精灵！");
+                return;
+            }
+
             int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
             if (error != 0)
             {
@@ -163,7 +173,18 @@ namespace ET.Client
 
             bool active = jingLingInfo.Progess >= jingLingConfig.NeedPoint;
 
-            self.E_ActivateButton.gameObject.SetActive(active);
+            if (active)
+            {
+                bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
+                self.E_ActivateButton.gameObject.SetActive(!current);
+                self.E_ShouHuiButton.gameObject.SetActive(current);
+            }
+            else
+            {
+                self.E_ActivateButton.gameObject.SetActive(false);
+                self.E_ShouHuiButton.gameObject.SetActive(false);
+            }
+
             self.E_UnactivateText.gameObject.SetActive(!active);
         }
     }

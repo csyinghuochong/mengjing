@@ -19,9 +19,9 @@ namespace ET.Client
 
         public static void OnFightJingLing(this ChengJiuComponentC self, int jid)
         {
-            for (int i = 0; i < self.JingLingList.Count; i++)
+            foreach (JingLingInfo jingLingInfo in self.JingLingList.Values)
             {
-                self.JingLingList[i].State = jid == self.JingLingList[i].JingLingID ? 1 : 0;
+                jingLingInfo.State = jid == jingLingInfo.JingLingID ? 1 : 0;
             }
         }
 

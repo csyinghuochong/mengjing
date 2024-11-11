@@ -15,7 +15,8 @@
             }
 
             ChengJiuComponentC chengJiuComponent = root.GetComponent<ChengJiuComponentC>();
-            chengJiuComponent.OnFightJingLing(jingLingId);
+            chengJiuComponent.OnFightJingLing(chengJiuComponent.GetFightJingLing() == jingLingId ? 0 : jingLingId);
+
             return ErrorCode.ERR_Success;
         }
 
