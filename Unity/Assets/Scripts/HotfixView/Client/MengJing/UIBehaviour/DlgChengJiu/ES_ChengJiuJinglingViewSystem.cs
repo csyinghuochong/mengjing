@@ -19,7 +19,6 @@ namespace ET.Client
             self.E_ActivateButton.AddListenerAsync(self.OnButtonActivite);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
-            // self.OnInitUI();
         }
 
         [EntitySystem]
@@ -71,6 +70,8 @@ namespace ET.Client
                 return;
             }
 
+            self.OnUpdateUI(self.JingLingId);
+
             EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
@@ -78,14 +79,17 @@ namespace ET.Client
         {
             self.JingLingId = jingLingId;
 
-            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
-            if (jingLingConfig.GetWay == 1)
+            foreach (Scroll_Item_ChengJiuJinglingItem item in self.ScrollItemChengJiuJinglingItems.Values)
             {
-                self.EG_RightRectTransform.gameObject.SetActive(false);
-                return;
+                if (item.uiTransform == null)
+                {
+                    return;
+                }
+
+                item.E_SelectedImage.gameObject.SetActive(self.JingLingId == item.JingLingId);
             }
 
-            self.EG_RightRectTransform.gameObject.SetActive(true);
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
 
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
             self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
@@ -99,26 +103,31 @@ namespace ET.Client
             self.ShowAttributeItemList(jingLingConfig.AddProperty, self.EG_AttributeListNodeRectTransform.gameObject,
                 self.EG_TextAttributeItemRectTransform.gameObject);
 
-            string name = "";
-            for (int i = 0; i < jingLingConfig.GetValue.Length; i++)
+            if (jingLingConfig.GetWay == 1)
             {
-                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(jingLingConfig.GetValue[i]);
-                name += monsterConfig.MonsterName;
-
-                if (i != jingLingConfig.GetValue.Length - 1)
+                self.E_GetWayText.text = "使用道具";
+                self.E_ProbabilityText.gameObject.SetActive(false);
+            }
+            else
+            {
+                string name = "";
+                for (int i = 0; i < jingLingConfig.GetValue.Length; i++)
                 {
-                    name += "、";
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(jingLingConfig.GetValue[i]);
+                    name += monsterConfig.MonsterName;
+
+                    if (i != jingLingConfig.GetValue.Length - 1)
+                    {
+                        name += "、";
+                    }
                 }
-            }
 
-            using (zstring.Block())
-            {
-                self.E_GetWayText.text = zstring.Format("获取方式：击败{0}", name);
-            }
-
-            using (zstring.Block())
-            {
-                self.E_ProbabilityText.text = zstring.Format("直接激活概率：{0}%", jingLingConfig.ActivePro.ToString());
+                using (zstring.Block())
+                {
+                    self.E_GetWayText.text = zstring.Format("获取方式：击败{0}", name);
+                    self.E_ProbabilityText.gameObject.SetActive(true);
+                    self.E_ProbabilityText.text = zstring.Format("直接激活概率：{0}%", jingLingConfig.ActivePro.ToString());
+                }
             }
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
@@ -150,7 +159,7 @@ namespace ET.Client
                 string[] attributeInfo = attributeinfos[i].Split(';');
                 int numberType = int.Parse(attributeInfo[0]);
                 float numberValue = float.Parse(attributeInfo[1]);
-                GameObject gameObject = GameObject.Instantiate(attributeItem);
+                GameObject gameObject = UnityEngine.Object.Instantiate(attributeItem);
                 gameObject.SetActive(true);
                 CommonViewHelper.SetParent(gameObject, itemNodeList);
 

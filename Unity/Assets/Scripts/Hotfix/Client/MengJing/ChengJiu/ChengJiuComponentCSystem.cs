@@ -51,10 +51,15 @@ namespace ET.Client
                 self.ChengJiuProgessList.Add(r2C_Respose.ChengJiuProgessList[i].ChengJiuID, r2C_Respose.ChengJiuProgessList[i]);
             }
             
+            self.UpdateJingLingList(r2C_Respose.JingLingList);
+        }
+
+        public static void UpdateJingLingList(this ChengJiuComponentC self, List<JingLingInfo> jingLingList)
+        {
             self.JingLingList.Clear();
-            foreach (var jinlinginfo in  self.JingLingList)
+            foreach (var jinlinginfo in  jingLingList)
             {
-                self.JingLingList.Add(jinlinginfo.Key, jinlinginfo.Value);
+                self.JingLingList.Add(jinlinginfo.JingLingID, jinlinginfo);
             }
         }
 

@@ -21,6 +21,30 @@ namespace ET.Client
 			return this;
 		}
 
+		public UnityEngine.UI.Image E_SelectedImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_SelectedImage == null )
+     				{
+		    			this.m_E_SelectedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Selected");
+     				}
+     				return this.m_E_SelectedImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Selected");
+     			}
+     		}
+     	}
+
 		public ES_ModelShow ES_ModelShow
      	{
      		get
@@ -163,6 +187,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_SelectedImage = null;
 			this.m_es_modelshow = null;
 			this.m_E_ActivatedText = null;
 			this.m_E_NameText = null;
@@ -172,6 +197,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
+		private UnityEngine.UI.Image m_E_SelectedImage = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_ActivatedText = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
