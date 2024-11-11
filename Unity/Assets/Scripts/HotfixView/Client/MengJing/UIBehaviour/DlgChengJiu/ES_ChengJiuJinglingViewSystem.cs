@@ -117,6 +117,10 @@ namespace ET.Client
             gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
 
             self.E_NameText.text = jingLingConfig.Name;
+            using (zstring.Block())
+            {
+                self.E_LvText.text = zstring.Format("境界：{0}", jingLingConfig.Lv);
+            }
 
             self.E_ProDesText.text = jingLingConfig.ProDes;
 

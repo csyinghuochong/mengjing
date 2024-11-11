@@ -85,6 +85,8 @@ namespace ET
 		public int AnimatorNumber { get; set; }
 		/// <summary>有效期(秒)</summary>
 		public int ValidityTime { get; set; }
+		/// <summary>境界</summary>
+		public string Lv { get; set; }
 		/// <summary>属性描述</summary>
 		public string ProDes { get; set; }
 		/// <summary>额外属性描述</summary>
