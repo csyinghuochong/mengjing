@@ -107,19 +107,16 @@ namespace ET.Client
             // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
             self.ES_ModelShow.ShowOtherModel("JingLing/70001001").Coroutine();
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
-            gameObject.transform.localPosition = new Vector2(1000 % 10 * 1000, 0);
+            gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
             gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
 
             self.E_NameText.text = jingLingConfig.Name;
 
-            self.EG_TextAttributeItemRectTransform.gameObject.SetActive(false);
-            CommonViewHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
-            self.ShowAttributeItemList(jingLingConfig.AddProperty, self.EG_AttributeListNodeRectTransform.gameObject,
-                self.EG_TextAttributeItemRectTransform.gameObject);
+            self.E_ProDesText.text = jingLingConfig.ProDes;
 
             if (jingLingConfig.GetWay == 1)
             {
-                self.E_GetWayText.text = "使用道具";
+                self.E_GetWayText.text = "获取方式：使用道具";
                 self.E_ProbabilityText.gameObject.SetActive(false);
             }
             else
@@ -158,44 +155,6 @@ namespace ET.Client
 
             self.E_ActivateButton.gameObject.SetActive(active);
             self.E_UnactivateText.gameObject.SetActive(!active);
-        }
-
-        private static void ShowAttributeItemList(this ES_ChengJiuJingling self, string itemList, GameObject itemNodeList, GameObject attributeItem)
-        {
-            string[] attributeinfos = itemList.Split('@');
-            for (int i = 0; i < attributeinfos.Length; i++)
-            {
-                if (string.IsNullOrEmpty(attributeinfos[i]))
-                {
-                    continue;
-                }
-
-                string[] attributeInfo = attributeinfos[i].Split(';');
-                int numberType = int.Parse(attributeInfo[0]);
-                float numberValue = float.Parse(attributeInfo[1]);
-                GameObject gameObject = UnityEngine.Object.Instantiate(attributeItem);
-                gameObject.SetActive(true);
-                CommonViewHelper.SetParent(gameObject, itemNodeList);
-
-                int showType = NumericHelp.GetNumericValueType(numberType);
-                string attribute;
-                if (showType == 2)
-                {
-                    using (zstring.Block())
-                    {
-                        attribute = zstring.Format("{0}+{1}%", ItemViewHelp.GetAttributeName(numberType), numberValue * 100);
-                    }
-                }
-                else
-                {
-                    using (zstring.Block())
-                    {
-                        attribute = zstring.Format("{0}+{1}", ItemViewHelp.GetAttributeName(numberType), numberValue);
-                    }
-                }
-
-                gameObject.transform.GetComponent<Text>().text = attribute;
-            }
         }
     }
 }

@@ -168,7 +168,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_TextAttributeItemRectTransform
+		public UnityEngine.UI.Text E_ProDesText
      	{
      		get
      		{
@@ -177,28 +177,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_TextAttributeItemRectTransform == null )
+     			if( this.m_E_ProDesText == null )
      			{
-		    		this.m_EG_TextAttributeItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_TextAttributeItem");
+		    		this.m_E_ProDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_ProDes");
      			}
-     			return this.m_EG_TextAttributeItemRectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_AttributeListNodeRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_AttributeListNodeRectTransform == null )
-     			{
-		    		this.m_EG_AttributeListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_AttributeListNode");
-     			}
-     			return this.m_EG_AttributeListNodeRectTransform;
+     			return this.m_E_ProDesText;
      		}
      	}
 
@@ -344,8 +327,7 @@ namespace ET.Client
 			this.m_es_modelshow = null;
 			this.m_E_NameText = null;
 			this.m_E_LvText = null;
-			this.m_EG_TextAttributeItemRectTransform = null;
-			this.m_EG_AttributeListNodeRectTransform = null;
+			this.m_E_ProDesText = null;
 			this.m_E_ProbabilityText = null;
 			this.m_E_GetWayText = null;
 			this.m_E_ProgressImgImage = null;
@@ -365,8 +347,7 @@ namespace ET.Client
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.UI.Text m_E_LvText = null;
-		private UnityEngine.RectTransform m_EG_TextAttributeItemRectTransform = null;
-		private UnityEngine.RectTransform m_EG_AttributeListNodeRectTransform = null;
+		private UnityEngine.UI.Text m_E_ProDesText = null;
 		private UnityEngine.UI.Text m_E_ProbabilityText = null;
 		private UnityEngine.UI.Text m_E_GetWayText = null;
 		private UnityEngine.UI.Image m_E_ProgressImgImage = null;

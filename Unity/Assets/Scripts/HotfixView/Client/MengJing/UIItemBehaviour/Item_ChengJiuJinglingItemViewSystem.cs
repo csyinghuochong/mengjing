@@ -35,6 +35,8 @@ namespace ET.Client
             bool active = jingLingInfo.Progess >= jingLingConfig.NeedPoint;
             self.E_ActivatedText.text = active ? "已激活" : "未激活";
             CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
+            
+            self.E_SelectedImage.gameObject.SetActive(false);
         }
     }
 }
