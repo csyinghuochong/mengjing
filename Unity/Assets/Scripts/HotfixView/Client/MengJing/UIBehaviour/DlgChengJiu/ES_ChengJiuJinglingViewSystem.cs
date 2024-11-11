@@ -161,7 +161,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, jingLingInfo.Progess, chengJiuComponent.JingLingList.Count);
+                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, chengJiuComponent.JingLingList.Count);
             }
 
             using (zstring.Block())
