@@ -587,4 +587,8 @@ namespace ET.Client
     public struct ChuanSongOpen
     {
     }
+
+    public struct JingLingActive
+    {
+    }
 }

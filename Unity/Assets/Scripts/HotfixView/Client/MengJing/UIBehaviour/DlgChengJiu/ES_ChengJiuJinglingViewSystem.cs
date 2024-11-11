@@ -34,6 +34,14 @@ namespace ET.Client
 
         private static void OnChengJiuJinglingItemsRefresh(this ES_ChengJiuJingling self, Transform transform, int index)
         {
+            foreach (Scroll_Item_ChengJiuJinglingItem item in self.ScrollItemChengJiuJinglingItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
             Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[index].BindTrans(transform);
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id, chengJiuComponent.JingLingList[self.ShowJingLing[index].Id]);
@@ -47,7 +55,7 @@ namespace ET.Client
                 if (self.E_ItemTypeSetToggleGroup.GetCurrentIndex() == 0)
                 {
                     self.ShowJingLing.Add(jingLingConfig);
-                    return;
+                    continue;
                 }
 
                 if (self.E_ItemTypeSetToggleGroup.GetCurrentIndex() == jingLingConfig.JingLingType)
@@ -64,15 +72,19 @@ namespace ET.Client
 
         private static async ETTask OnButtonActivite(this ES_ChengJiuJingling self)
         {
-            int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
-            if (error != 0)
-            {
-                return;
-            }
+            FlyTipComponent.Instance.ShowFlyTip("消息暂未实现");
 
-            self.OnUpdateUI(self.JingLingId);
+            await ETTask.CompletedTask;
 
-            EventSystem.Instance.Publish(self.Root(), new JingLingButton());
+            // int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
+            // if (error != 0)
+            // {
+            //     return;
+            // }
+            //
+            // self.OnUpdateUI(self.JingLingId);
+            //
+            // EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
         public static void OnUpdateUI(this ES_ChengJiuJingling self, int jingLingId)
@@ -83,7 +95,7 @@ namespace ET.Client
             {
                 if (item.uiTransform == null)
                 {
-                    return;
+                    continue;
                 }
 
                 item.E_SelectedImage.gameObject.SetActive(self.JingLingId == item.JingLingId);
@@ -92,13 +104,15 @@ namespace ET.Client
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
 
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
-            self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
+            // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
+            self.ES_ModelShow.ShowOtherModel("JingLing/70001001").Coroutine();
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
-            gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
+            gameObject.transform.localPosition = new Vector2(1000 % 10 * 1000, 0);
             gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
 
             self.E_NameText.text = jingLingConfig.Name;
 
+            self.EG_TextAttributeItemRectTransform.gameObject.SetActive(false);
             CommonViewHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
             self.ShowAttributeItemList(jingLingConfig.AddProperty, self.EG_AttributeListNodeRectTransform.gameObject,
                 self.EG_TextAttributeItemRectTransform.gameObject);

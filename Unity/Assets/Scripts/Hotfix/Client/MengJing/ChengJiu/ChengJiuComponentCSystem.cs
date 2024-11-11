@@ -3,8 +3,8 @@ using System.Linq;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ChengJiuComponentC))]
-    [FriendOf(typeof (ChengJiuComponentC))]
+    [EntitySystemOf(typeof(ChengJiuComponentC))]
+    [FriendOf(typeof(ChengJiuComponentC))]
     public static partial class ChengJiuComponentCSystem
     {
         [EntitySystem]
@@ -23,21 +23,21 @@ namespace ET.Client
             {
                 self.JingLingList[i].State = jid == self.JingLingList[i].JingLingID ? 1 : 0;
             }
-        } 
-        
+        }
+
         public static int GetFightJingLing(this ChengJiuComponentC self)
         {
-            for (int i = 0; i < self.JingLingList.Count; i++)
+            foreach (JingLingInfo jingLingInfo in self.JingLingList.Values)
             {
-                if (self.JingLingList[i].State == 1)
+                if (jingLingInfo.State == 1)
                 {
-                    return self.JingLingList[i].JingLingID;
+                    return jingLingInfo.JingLingID;
                 }
             }
 
             return 0;
         }
-        
+
         public static void OnGetChengJiuList(this ChengJiuComponentC self, M2C_ChengJiuListResponse r2C_Respose)
         {
             self.ChengJiuCompleteList = r2C_Respose.ChengJiuCompleteList;
@@ -50,14 +50,14 @@ namespace ET.Client
             {
                 self.ChengJiuProgessList.Add(r2C_Respose.ChengJiuProgessList[i].ChengJiuID, r2C_Respose.ChengJiuProgessList[i]);
             }
-            
+
             self.UpdateJingLingList(r2C_Respose.JingLingList);
         }
 
         public static void UpdateJingLingList(this ChengJiuComponentC self, List<JingLingInfo> jingLingList)
         {
             self.JingLingList.Clear();
-            foreach (var jinlinginfo in  jingLingList)
+            foreach (var jinlinginfo in jingLingList)
             {
                 self.JingLingList.Add(jinlinginfo.JingLingID, jinlinginfo);
             }
@@ -76,7 +76,7 @@ namespace ET.Client
         public static void OnActiveJingLing(this ChengJiuComponentC self, int jid)
         {
             EventSystem.Instance.Publish(self.Root(), new JingLingGet { JingLingId = jid });
-            
+
             if (self.JingLingList.ContainsKey(jid))
             {
                 return;

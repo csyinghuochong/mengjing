@@ -8,6 +8,8 @@
             ChengJiuComponentC chengJiuComponentC = root.GetComponent<ChengJiuComponentC>();
             chengJiuComponentC.UpdateJingLingList(message.JingLingList);
 
+            EventSystem.Instance.Publish(root, new JingLingActive());
+
             await ETTask.CompletedTask;
         }
     }
