@@ -60,8 +60,6 @@ namespace ET
 			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(true);
 			// 开始补丁更新流程
 			StartCoroutine(StartUpdate(ePlayMode));
-			
-			//new Advanced().Test();
 		}
 
 		IEnumerator StartUpdate(EPlayMode ePlayMode)
