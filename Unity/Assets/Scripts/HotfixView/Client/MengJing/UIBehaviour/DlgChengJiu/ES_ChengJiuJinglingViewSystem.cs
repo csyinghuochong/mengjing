@@ -13,9 +13,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
-
-            self.OnInitUI();
+            // self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
+            //
+            // self.OnInitUI();
         }
 
         [EntitySystem]
@@ -24,33 +24,33 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnChengJiuJinglingItemsRefresh(this ES_ChengJiuJingling self, Transform transform, int index)
-        {
-            Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[index].BindTrans(transform);
-            ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id,
-                chengJiuComponent.JingLingList[self.ShowJingLing[index].Id]);
-        }
-
-        public static void OnInitUI(this ES_ChengJiuJingling self)
-        {
-            self.ShowJingLing.Clear();
-            self.ShowJingLing.AddRange(JingLingConfigCategory.Instance.GetAll().Values.ToList());
-
-            self.AddUIScrollItems(ref self.ScrollItemChengJiuJinglingItems, self.ShowJingLing.Count);
-            self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.SetVisible(true, self.ShowJingLing.Count);
-        }
-
-        public static void OnUpdateUI(this ES_ChengJiuJingling self)
-        {
-            for (int i = 0; i < self.ScrollItemChengJiuJinglingItems.Count; i++)
-            {
-                Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[i];
-                if (scrollItemChengJiuJinglingItem.uiTransform != null)
-                {
-                    scrollItemChengJiuJinglingItem.OnUpdateUI();
-                }
-            }
-        }
+        // private static void OnChengJiuJinglingItemsRefresh(this ES_ChengJiuJingling self, Transform transform, int index)
+        // {
+        //     Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[index].BindTrans(transform);
+        //     ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
+        //     scrollItemChengJiuJinglingItem.OnInitUI(self.ShowJingLing[index].Id,
+        //         chengJiuComponent.JingLingList[self.ShowJingLing[index].Id]);
+        // }
+        //
+        // public static void OnInitUI(this ES_ChengJiuJingling self)
+        // {
+        //     self.ShowJingLing.Clear();
+        //     self.ShowJingLing.AddRange(JingLingConfigCategory.Instance.GetAll().Values.ToList());
+        //
+        //     self.AddUIScrollItems(ref self.ScrollItemChengJiuJinglingItems, self.ShowJingLing.Count);
+        //     self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.SetVisible(true, self.ShowJingLing.Count);
+        // }
+        //
+        // public static void OnUpdateUI(this ES_ChengJiuJingling self)
+        // {
+        //     for (int i = 0; i < self.ScrollItemChengJiuJinglingItems.Count; i++)
+        //     {
+        //         Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[i];
+        //         if (scrollItemChengJiuJinglingItem.uiTransform != null)
+        //         {
+        //             scrollItemChengJiuJinglingItem.OnUpdateUI();
+        //         }
+        //     }
+        // }
     }
 }
