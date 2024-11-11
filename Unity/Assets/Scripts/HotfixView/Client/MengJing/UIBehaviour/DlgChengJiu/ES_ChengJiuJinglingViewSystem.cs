@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -15,6 +16,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
+            self.E_ActivateButton.AddListenerAsync(self.OnButtonActivite);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             // self.OnInitUI();
@@ -57,35 +59,120 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemChengJiuJinglingItems, self.ShowJingLing.Count);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.SetVisible(true, self.ShowJingLing.Count);
+
+            self.OnUpdateUI(self.ShowJingLing[0].Id);
         }
 
         private static async ETTask OnButtonActivite(this ES_ChengJiuJingling self)
         {
-            // ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
-            //
-            // int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
-            // if (error != 0)
-            // {
-            //     return;
-            // }
-            //
-            // bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
-            // self.E_ButtonShouHuiButton.gameObject.SetActive(current);
-            // self.E_ButtonActiviteButton.gameObject.SetActive(!current);
-            //
-            // EventSystem.Instance.Publish(self.Root(), new JingLingButton());
+            int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
+            if (error != 0)
+            {
+                return;
+            }
+
+            EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
-        public static void OnUpdateUI(this ES_ChengJiuJingling self)
+        public static void OnUpdateUI(this ES_ChengJiuJingling self, int jingLingId)
         {
-            // for (int i = 0; i < self.ScrollItemChengJiuJinglingItems.Count; i++)
-            // {
-            //     Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[i];
-            //     if (scrollItemChengJiuJinglingItem.uiTransform != null)
-            //     {
-            //         scrollItemChengJiuJinglingItem.OnUpdateUI();
-            //     }
-            // }
+            self.JingLingId = jingLingId;
+
+            JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(self.JingLingId);
+            if (jingLingConfig.GetWay == 1)
+            {
+                self.EG_RightRectTransform.gameObject.SetActive(false);
+                return;
+            }
+
+            self.EG_RightRectTransform.gameObject.SetActive(true);
+
+            GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
+            self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
+            gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
+            gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
+            gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
+
+            self.E_NameText.text = jingLingConfig.Name;
+
+            CommonViewHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
+            self.ShowAttributeItemList(jingLingConfig.AddProperty, self.EG_AttributeListNodeRectTransform.gameObject,
+                self.EG_TextAttributeItemRectTransform.gameObject);
+
+            string name = "";
+            for (int i = 0; i < jingLingConfig.GetValue.Length; i++)
+            {
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(jingLingConfig.GetValue[i]);
+                name += monsterConfig.MonsterName;
+
+                if (i != jingLingConfig.GetValue.Length - 1)
+                {
+                    name += "、";
+                }
+            }
+
+            using (zstring.Block())
+            {
+                self.E_GetWayText.text = zstring.Format("获取方式：击败{0}", name);
+            }
+
+            using (zstring.Block())
+            {
+                self.E_ProbabilityText.text = zstring.Format("直接激活概率：{0}%", jingLingConfig.ActivePro.ToString());
+            }
+
+            ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
+            JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
+
+            using (zstring.Block())
+            {
+                self.E_ProgressTxtText.text = zstring.Format("{0}/{1}", jingLingInfo.Progess, jingLingConfig.NeedPoint);
+            }
+
+            self.E_ProgressImgImage.fillAmount = jingLingInfo.Progess * 1f / jingLingConfig.NeedPoint;
+
+            bool active = jingLingInfo.Progess >= jingLingConfig.NeedPoint;
+
+            self.E_ActivateButton.gameObject.SetActive(active);
+            self.E_UnactivateText.gameObject.SetActive(!active);
+        }
+
+        private static void ShowAttributeItemList(this ES_ChengJiuJingling self, string itemList, GameObject itemNodeList, GameObject attributeItem)
+        {
+            string[] attributeinfos = itemList.Split('@');
+            for (int i = 0; i < attributeinfos.Length; i++)
+            {
+                if (string.IsNullOrEmpty(attributeinfos[i]))
+                {
+                    continue;
+                }
+
+                string[] attributeInfo = attributeinfos[i].Split(';');
+                int numberType = int.Parse(attributeInfo[0]);
+                float numberValue = float.Parse(attributeInfo[1]);
+                GameObject gameObject = GameObject.Instantiate(attributeItem);
+                gameObject.SetActive(true);
+                CommonViewHelper.SetParent(gameObject, itemNodeList);
+
+                int showType = NumericHelp.GetNumericValueType(numberType);
+                string attribute;
+                if (showType == 2)
+                {
+                    using (zstring.Block())
+                    {
+                        attribute = zstring.Format("{0}+{1}%", ItemViewHelp.GetAttributeName(numberType), numberValue * 100);
+                    }
+                }
+                else
+                {
+                    using (zstring.Block())
+                    {
+                        attribute = zstring.Format("{0}+{1}", ItemViewHelp.GetAttributeName(numberType), numberValue);
+                    }
+                }
+
+                gameObject.transform.GetComponent<Text>().text = attribute;
+            }
         }
     }
 }

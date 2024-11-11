@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ChengJiuJinglingItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ChengJiuJinglingItem>
+	public  class Scroll_Item_ChengJiuJinglingItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ChengJiuJinglingItem> 
 	{
 		public int JingLingId;
 		
@@ -113,11 +113,61 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ClickButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ClickButton == null )
+     				{
+		    			this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Click");
+     				}
+     				return this.m_E_ClickButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Click");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ClickImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ClickImage == null )
+     				{
+		    			this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Click");
+     				}
+     				return this.m_E_ClickImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Click");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_es_modelshow = null;
 			this.m_E_ActivatedText = null;
 			this.m_E_NameText = null;
+			this.m_E_ClickButton = null;
+			this.m_E_ClickImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -125,6 +175,8 @@ namespace ET.Client
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_ActivatedText = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
+		private UnityEngine.UI.Button m_E_ClickButton = null;
+		private UnityEngine.UI.Image m_E_ClickImage = null;
 		public Transform uiTransform = null;
 	}
 }
