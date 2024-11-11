@@ -72,19 +72,15 @@ namespace ET.Client
 
         private static async ETTask OnButtonActivite(this ES_ChengJiuJingling self)
         {
-            FlyTipComponent.Instance.ShowFlyTip("消息暂未实现");
+            int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
+            if (error != 0)
+            {
+                return;
+            }
 
-            await ETTask.CompletedTask;
+            self.OnUpdateUI(self.JingLingId);
 
-            // int error = await JingLingNetHelper.RequestJingLingUse(self.Root(), self.JingLingId, 1);
-            // if (error != 0)
-            // {
-            //     return;
-            // }
-            //
-            // self.OnUpdateUI(self.JingLingId);
-            //
-            // EventSystem.Instance.Publish(self.Root(), new JingLingButton());
+            EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
         public static void OnUpdateUI(this ES_ChengJiuJingling self, int jingLingId)
@@ -143,6 +139,20 @@ namespace ET.Client
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
+
+            int num = 0;
+            foreach (JingLingInfo lingInfo in chengJiuComponent.JingLingList.Values)
+            {
+                if (lingInfo.Progess >= JingLingConfigCategory.Instance.Get(lingInfo.JingLingID).NeedPoint)
+                {
+                    num++;
+                }
+            }
+
+            using (zstring.Block())
+            {
+                self.E_TotalProgressText.text = zstring.Format("总进度：{0}/{1}", num, jingLingInfo.Progess, chengJiuComponent.JingLingList.Count);
+            }
 
             using (zstring.Block())
             {
