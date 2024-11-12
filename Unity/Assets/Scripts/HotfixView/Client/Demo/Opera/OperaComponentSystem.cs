@@ -65,10 +65,14 @@ namespace ET.Client
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
             }
 
+            if (InputHelper.GetKeyDown((int)KeyCode.S))
+            {
+                // 按 S键 测试屏幕震动，或技能 烈地击
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
+            }
+            
             if (InputHelper.GetKeyDown((int)KeyCode.R))
             {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
-
                 // CodeLoader.Instance.Reload();
                 // return;
             }
