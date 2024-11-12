@@ -88,6 +88,20 @@ namespace ET.Client
                 return;
             }
 
+            jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
+            foreach (Scroll_Item_ChengJiuJinglingItem item in self.ScrollItemChengJiuJinglingItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                if (item.JingLingId == self.JingLingId)
+                {
+                    item.OnInitUI(self.JingLingId, jingLingInfo);
+                }
+            }
+
             self.OnUpdateUI(self.JingLingId);
         }
 
@@ -148,7 +162,7 @@ namespace ET.Client
                 self.E_GetWayText.text = "获取方式：使用道具";
                 self.E_ProbabilityText.gameObject.SetActive(false);
             }
-            else
+            else if (jingLingConfig.GetWay == 2)
             {
                 string name = "";
                 for (int i = 0; i < jingLingConfig.GetValue.Length; i++)
@@ -176,7 +190,7 @@ namespace ET.Client
             int num = 0;
             foreach (JingLingInfo lingInfo in chengJiuComponent.JingLingList.Values)
             {
-                if (lingInfo.Progess >= JingLingConfigCategory.Instance.Get(lingInfo.JingLingID).NeedPoint)
+                if (lingInfo.IsActive == 1)
                 {
                     num++;
                 }
