@@ -34,6 +34,17 @@ namespace ET.Client
                 self.IsExcuteHurt = false;
             }
 
+            if (self.SkillConf.ShakeCameraType != 0)
+            {
+                self.SkillShakeCameraTime = (long)(1000 * self.SkillConf.ShakeStart) + skillcmd.SkillBeginTime;
+                self.IsCanShakeCamera = true;
+            }
+            else
+            {
+                self.SkillShakeCameraTime = skillcmd.SkillBeginTime;
+                self.IsCanShakeCamera = false;
+            }
+
             self.EffectId = effctId;
             self.TheUnitFrom = theUnitFrom;
             self.SkillState = SkillState.Running;
@@ -55,6 +66,13 @@ namespace ET.Client
                 {
                     EventSystem.Instance.Publish(self.Root(), new SkillSound() { Asset ="Skill/" + music  } );
                 }
+            }
+
+            if (self.IsCanShakeCamera && serverNow >= self.SkillShakeCameraTime)
+            {
+                self.IsCanShakeCamera = false;
+                EventSystem.Instance.Publish(self.Root(),
+                    new ShakeCamera() { ShakeCameraType = self.SkillConf.ShakeCameraType, ShakeDuration = (float)self.SkillConf.ShakeDuration });
             }
 
             if (serverNow >= self.SkillInfo.SkillEndTime)

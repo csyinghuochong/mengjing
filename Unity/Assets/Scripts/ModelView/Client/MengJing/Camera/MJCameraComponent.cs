@@ -43,10 +43,10 @@ namespace ET.Client
         Type_4,
     }
 
-    public enum CameraShakeType
+    public enum ShakeCameraType
     {
-        Type_0,
         Type_1,
+        Type_2,
     }
 
     [FriendOf(typeof(Unit))]
@@ -67,7 +67,7 @@ namespace ET.Client
         public Vector3 TargetPosition;
         public Vector3 OldCameraPostion;
 
-        public CameraShakeType CameraShakeType;
+        public ShakeCameraType ShakeCameraType;
         public float ShakeTime; // 震动时间
         public float NextShakeTime;
 

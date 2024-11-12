@@ -324,6 +324,12 @@ namespace ET.Client
         public string Asset;
     }
 
+    public struct ShakeCamera
+    {
+        public int ShakeCameraType;
+        public float ShakeDuration;
+    }
+    
     //技能特效
     public struct SkillEffect
     {

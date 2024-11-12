@@ -6,6 +6,17 @@ using Random = UnityEngine.Random;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class ShakeCameraEvent : AEvent<Scene, ShakeCamera>
+    {
+        protected override async ETTask Run(Scene root, ShakeCamera args)
+        {
+            root.CurrentScene()?.GetComponent<MJCameraComponent>()?.SetShakeCamera((ShakeCameraType)args.ShakeCameraType, args.ShakeDuration);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [EntitySystemOf(typeof(MJCameraComponent))]
     [FriendOf(typeof(MJCameraComponent))]
     public static partial class MJCameraComponentSystem
@@ -59,7 +70,7 @@ namespace ET.Client
 
             if (self.CameraMoveType == CameraMoveType.Shake)
             {
-                self.ShakeShakeCamera();
+                self.ShakeCamera();
                 return;
             }
 
@@ -182,15 +193,15 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
-        public static void SetShakeCamera(this MJCameraComponent self, CameraShakeType cameraShakeType = CameraShakeType.Type_0,
+        public static void SetShakeCamera(this MJCameraComponent self, ShakeCameraType shakeCameraType = ShakeCameraType.Type_1,
         float shakeTime = 0.3f)
         {
             self.CameraMoveType = CameraMoveType.Shake;
-            self.CameraShakeType = cameraShakeType;
+            self.ShakeCameraType = shakeCameraType;
             self.ShakeTime = shakeTime;
         }
 
-        public static void ShakeShakeCamera(this MJCameraComponent self)
+        public static void ShakeCamera(this MJCameraComponent self)
         {
             if (self.ShakeTime <= 0)
             {
@@ -204,9 +215,9 @@ namespace ET.Client
             {
                 float shakeStrength = 1; // 震动强度
                 float shakeFrequency = 30; // 震动频率，控制每秒的震动更新次数
-                switch (self.CameraShakeType)
+                switch (self.ShakeCameraType)
                 {
-                    case CameraShakeType.Type_0:
+                    case ShakeCameraType.Type_1:
                     {
                         shakeStrength = 0.8f;
                         shakeFrequency = 30f;
@@ -214,7 +225,7 @@ namespace ET.Client
                         shakeOffset = Random.insideUnitSphere * shakeStrength;
                         break;
                     }
-                    case CameraShakeType.Type_1:
+                    case ShakeCameraType.Type_2:
                     {
                         shakeStrength = 0.8f;
                         shakeFrequency = 20f;

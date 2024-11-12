@@ -201,6 +201,12 @@ namespace ET
 		public string SkillDamgeAddValue { get; set; }
 		/// <summary>最大攻击数量</summary>
 		public int MaxAttackNumber { get; set; }
+		/// <summary>震屏类型</summary>
+		public int ShakeCameraType { get; set; }
+		/// <summary>震屏开始时间</summary>
+		public double ShakeStart { get; set; }
+		/// <summary>震持续时间</summary>
+		public double ShakeDuration { get; set; }
 
 	}
 }

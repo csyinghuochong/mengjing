@@ -16,6 +16,9 @@ namespace ET.Client
 
         public bool IsExcuteHurt { get; set; }
         public long SkillExcuteHurtTime { get; set; }
+        
+        public long SkillShakeCameraTime { get; set; }
+        public bool IsCanShakeCamera { get; set; }
 
         public List<long> EffectInstanceId  { get; set; }= new List<long>();
 
