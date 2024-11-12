@@ -32,10 +32,10 @@ namespace ET.Client
             gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
             gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
 
-            bool active = jingLingInfo.Progess >= jingLingConfig.NeedPoint;
+            bool active = jingLingInfo.IsActive == 1;
             self.E_ActivatedText.text = active ? "已激活" : "未激活";
             CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
-            
+
             self.E_SelectedImage.gameObject.SetActive(false);
         }
     }

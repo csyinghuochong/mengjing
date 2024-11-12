@@ -1922,7 +1922,8 @@ message JingLingInfo
 {
 	int32 JingLingID = 1;
 	int32 Progess = 2;   //对比JingLingConfig.NeedPoint判断是否激活。
-	int32 State = 3;   // 0休息 1 出战
+	int32 State = 3;   //0休息 1出战
+	int32 IsActive = 4; //是否激活
 }
 
 
@@ -1941,6 +1942,20 @@ message M2C_ChengJiuActiveMessage // IMessage
 	int32 Error = 91;
 	string Message = 92;
 	int32 ChengJiuId = 1;
+}
+
+//ResponseType M2C_JingLingActiveResponse
+message C2M_JingLingActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 JingLingId = 1;
+}
+
+message M2C_JingLingActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 //激活成就

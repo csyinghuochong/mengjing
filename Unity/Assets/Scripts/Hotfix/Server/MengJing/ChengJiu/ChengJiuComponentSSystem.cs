@@ -120,7 +120,7 @@ namespace ET.Server
                 {
                     foreach (var jinglingid in jinglingids)
                     {
-                        self.OnActiveJingLing(jinglingid);
+                        self.OnAddJingLingProgess(jinglingid);
                     }
                 }
             }
@@ -251,17 +251,72 @@ namespace ET.Server
 
             return null;
         }
-        
+
         public static void OnActiveJingLing(this ChengJiuComponentS self, int jid)
         {
             for (int i = 0; i < self.JingLingList.Count; i++)
             {
-                self.JingLingList[i].Progess++;
+                if (jid == self.JingLingList[i].JingLingID)
+                {
+                    JingLingInfo jingLingInfo = self.JingLingList[i];
+
+                    if (jingLingInfo.IsActive != 0)
+                    {
+                        return;
+                    }
+
+                    JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jid);
+                    if (jingLingInfo.Progess < jingLingConfig.NeedPoint)
+                    {
+                        return;
+                    }
+
+                    jingLingInfo.IsActive = 1;
+
+                    M2C_JingLingActiveMessage m2CJingLingActiveMessage = M2C_JingLingActiveMessage.Create();
+                    m2CJingLingActiveMessage.JingLingList = self.JingLingList;
+                    MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
+
+                    return;
+                }
             }
-            
-            M2C_JingLingActiveMessage m2CJingLingActiveMessage = M2C_JingLingActiveMessage.Create();
-            m2CJingLingActiveMessage.JingLingList = self.JingLingList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
+        }
+
+        public static void OnAddJingLingProgess(this ChengJiuComponentS self, int jid)
+        {
+            for (int i = 0; i < self.JingLingList.Count; i++)
+            {
+                if (jid == self.JingLingList[i].JingLingID)
+                {
+                    JingLingInfo jingLingInfo = self.JingLingList[i];
+
+                    if (jingLingInfo.IsActive != 0)
+                    {
+                        return;
+                    }
+
+                    JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jid);
+                    if (jingLingInfo.Progess >= jingLingConfig.NeedPoint)
+                    {
+                        return;
+                    }
+
+                    if (jingLingConfig.GetWay == 2 && RandomHelper.RandFloat() <= jingLingConfig.ActivePro)
+                    {
+                        self.JingLingList[i].Progess = jingLingConfig.NeedPoint;
+                    }
+                    else
+                    {
+                        self.JingLingList[i].Progess++;
+                    }
+
+                    M2C_JingLingActiveMessage m2CJingLingActiveMessage = M2C_JingLingActiveMessage.Create();
+                    m2CJingLingActiveMessage.JingLingList = self.JingLingList;
+                    MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
+
+                    return;
+                }
+            }
         }
 
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)

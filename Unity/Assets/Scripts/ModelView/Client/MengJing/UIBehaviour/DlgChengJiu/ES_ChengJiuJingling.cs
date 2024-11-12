@@ -46,6 +46,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_DesButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DesButton == null )
+     			{
+		    		this.m_E_DesButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Left/E_Des");
+     			}
+     			return this.m_E_DesButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_DesImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DesImage == null )
+     			{
+		    		this.m_E_DesImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/E_Des");
+     			}
+     			return this.m_E_DesImage;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
@@ -287,6 +321,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_UseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UseButton == null )
+     			{
+		    		this.m_E_UseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_Use");
+     			}
+     			return this.m_E_UseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UseImage == null )
+     			{
+		    		this.m_E_UseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/E_Use");
+     			}
+     			return this.m_E_UseImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ShouHuiButton
      	{
      		get
@@ -354,6 +422,8 @@ namespace ET.Client
 		{
 			this.m_EG_LeftRectTransform = null;
 			this.m_E_TotalProgressText = null;
+			this.m_E_DesButton = null;
+			this.m_E_DesImage = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_E_ChengJiuJinglingItemsImage = null;
 			this.m_E_ChengJiuJinglingItemsLoopVerticalScrollRect = null;
@@ -368,6 +438,8 @@ namespace ET.Client
 			this.m_E_ProgressTxtText = null;
 			this.m_E_ActivateButton = null;
 			this.m_E_ActivateImage = null;
+			this.m_E_UseButton = null;
+			this.m_E_UseImage = null;
 			this.m_E_ShouHuiButton = null;
 			this.m_E_ShouHuiImage = null;
 			this.m_E_UnactivateText = null;
@@ -376,6 +448,8 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_LeftRectTransform = null;
 		private UnityEngine.UI.Text m_E_TotalProgressText = null;
+		private UnityEngine.UI.Button m_E_DesButton = null;
+		private UnityEngine.UI.Image m_E_DesImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_ChengJiuJinglingItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChengJiuJinglingItemsLoopVerticalScrollRect = null;
@@ -390,6 +464,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ProgressTxtText = null;
 		private UnityEngine.UI.Button m_E_ActivateButton = null;
 		private UnityEngine.UI.Image m_E_ActivateImage = null;
+		private UnityEngine.UI.Button m_E_UseButton = null;
+		private UnityEngine.UI.Image m_E_UseImage = null;
 		private UnityEngine.UI.Button m_E_ShouHuiButton = null;
 		private UnityEngine.UI.Image m_E_ShouHuiImage = null;
 		private UnityEngine.UI.Text m_E_UnactivateText = null;

@@ -2,6 +2,15 @@
 {
     public static class JingLingNetHelper
     {
+        public static async ETTask<int> RequestJingLingActivate(Scene root, int jingLingId)
+        {
+            C2M_JingLingActiveRequest request = C2M_JingLingActiveRequest.Create();
+            request.JingLingId = jingLingId;
+
+            M2C_JingLingActiveResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_JingLingActiveResponse;
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestJingLingUse(Scene root, int jingLingId, int operateType)
         {
             C2M_JingLingUseRequest request = C2M_JingLingUseRequest.Create();
