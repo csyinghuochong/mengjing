@@ -193,17 +193,17 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
-        public static void SetShakeCamera(this MJCameraComponent self, ShakeCameraType shakeCameraType = ShakeCameraType.Type_1,
-        float shakeTime = 0.3f)
+        public static void SetShakeCamera(this MJCameraComponent self, ShakeCameraType shakeCameraType, float shakeDuration)
         {
             self.CameraMoveType = CameraMoveType.Shake;
             self.ShakeCameraType = shakeCameraType;
-            self.ShakeTime = shakeTime;
+            self.ShakeDurationTime = shakeDuration;
+            self.ShakeCount = 0;
         }
 
         public static void ShakeCamera(this MJCameraComponent self)
         {
-            if (self.ShakeTime <= 0)
+            if (self.ShakeDurationTime <= 0)
             {
                 self.CameraMoveType = CameraMoveType.Normal;
                 return;
@@ -219,9 +219,10 @@ namespace ET.Client
                 {
                     case ShakeCameraType.Type_1:
                     {
-                        shakeStrength = 0.8f;
-                        shakeFrequency = 30f;
+                        shakeStrength = 0.5f;
+                        shakeFrequency = 20f;
 
+                        // 向任意方向震动一下
                         shakeOffset = Random.insideUnitSphere * shakeStrength;
                         break;
                     }
@@ -230,17 +231,27 @@ namespace ET.Client
                         shakeStrength = 0.8f;
                         shakeFrequency = 20f;
 
-                        shakeOffset.y = Random.Range(-1, 1) * shakeStrength;
+                        // 例如 可以自定义 前10下震动Y轴，之后震动X轴 等等
+                        if (self.ShakeCount < 10)
+                        {
+                            shakeOffset.y = Random.Range(-1, 1) * shakeStrength;
+                        }
+                        else
+                        {
+                            shakeOffset.x = Random.Range(-1, 1) * shakeStrength;
+                        }
+
                         break;
                     }
                 }
 
                 self.NextShakeTime = Time.time + (1f / shakeFrequency);
+                self.ShakeCount++;
             }
 
             self.MainCamera.transform.position = start + shakeOffset;
 
-            self.ShakeTime -= Time.deltaTime;
+            self.ShakeDurationTime -= Time.deltaTime;
         }
 
         public static void SetBuildEnter(this MJCameraComponent self, Unit unit, CameraBuildType cameraBuildType, Action action)

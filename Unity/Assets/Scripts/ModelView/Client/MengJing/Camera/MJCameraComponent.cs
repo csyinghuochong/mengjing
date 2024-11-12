@@ -68,8 +68,9 @@ namespace ET.Client
         public Vector3 OldCameraPostion;
 
         public ShakeCameraType ShakeCameraType;
-        public float ShakeTime; // 震动时间
+        public float ShakeDurationTime; // 震动时间
         public float NextShakeTime;
+        public int ShakeCount;
 
         public float PullRate; // 镜头拉远倍概率
 

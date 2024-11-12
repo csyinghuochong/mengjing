@@ -67,8 +67,8 @@ namespace ET.Client
 
             if (InputHelper.GetKeyDown((int)KeyCode.R))
             {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera();
-                
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
+
                 // CodeLoader.Instance.Reload();
                 // return;
             }
@@ -665,12 +665,14 @@ namespace ET.Client
 
                 return -1;
             }
+
             int errorCode = MoveHelper.IfCanMove(unit);
-            if (errorCode!= ErrorCode.ERR_Success)
+            if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(unit.Root(), errorCode);
                 return errorCode;
             }
+
             EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = operatetype });
             int ret = await unit.MoveToAsync(position);
             return ret;
