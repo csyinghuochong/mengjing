@@ -198,26 +198,37 @@ namespace ET.Client
                 return;
             }
 
-            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
-
+            Vector3 start = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
             Vector3 shakeOffset = Vector3.zero;
-            switch (self.CameraShakeType)
+            if (Time.time >= self.NextShakeTime)
             {
-                case CameraShakeType.Type_0:
+                float shakeStrength = 1; // 震动强度
+                float shakeFrequency = 30; // 震动频率，控制每秒的震动更新次数
+                switch (self.CameraShakeType)
                 {
-                    float shakeMagnitude = 0.8f; // 震动强度
-                    shakeOffset = Random.insideUnitSphere * shakeMagnitude;
-                    break;
+                    case CameraShakeType.Type_0:
+                    {
+                        shakeStrength = 0.8f;
+                        shakeFrequency = 30f;
+
+                        shakeOffset = Random.insideUnitSphere * shakeStrength;
+                        break;
+                    }
+                    case CameraShakeType.Type_1:
+                    {
+                        shakeStrength = 0.8f;
+                        shakeFrequency = 20f;
+
+                        shakeOffset.y = Random.Range(-1, 1) * shakeStrength;
+                        break;
+                    }
                 }
-                case CameraShakeType.Type_1:
-                {
-                    float shakeMagnitude = 0.3f; // 震动强度
-                    shakeOffset = Random.insideUnitSphere * shakeMagnitude;
-                    break;
-                }
+
+                self.NextShakeTime = Time.time + (1f / shakeFrequency);
             }
 
-            self.MainCamera.transform.position += shakeOffset;
+            self.MainCamera.transform.position = start + shakeOffset;
+
             self.ShakeTime -= Time.deltaTime;
         }
 

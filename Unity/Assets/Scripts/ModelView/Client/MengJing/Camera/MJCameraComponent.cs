@@ -62,14 +62,14 @@ namespace ET.Client
 
         public CameraMoveType CameraMoveType;
         public CameraBuildType CameraBuildType;
-
-        public CameraShakeType CameraShakeType;
         public float CameraMoveTime;
 
         public Vector3 TargetPosition;
         public Vector3 OldCameraPostion;
 
+        public CameraShakeType CameraShakeType;
         public float ShakeTime; // 震动时间
+        public float NextShakeTime;
 
         public float PullRate; // 镜头拉远倍概率
 
