@@ -67,7 +67,7 @@ namespace ET.Client
 
             if (InputHelper.GetKeyDown((int)KeyCode.R))
             {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().ShakeCamera();
+                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera();
                 
                 // CodeLoader.Instance.Reload();
                 // return;

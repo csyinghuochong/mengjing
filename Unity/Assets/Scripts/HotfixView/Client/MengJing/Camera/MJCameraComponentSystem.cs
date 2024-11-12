@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ET.Client
 {
@@ -58,6 +59,7 @@ namespace ET.Client
 
             if (self.CameraMoveType == CameraMoveType.Shake)
             {
+                self.ShakeShakeCamera();
                 return;
             }
 
@@ -180,20 +182,43 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
         }
 
-        public static void ShakeCamera(this MJCameraComponent self, CameraShakeType type = CameraShakeType.Type_0)
+        public static void SetShakeCamera(this MJCameraComponent self, CameraShakeType cameraShakeType = CameraShakeType.Type_0,
+        float shakeTime = 0.3f)
         {
-            self.MainCamera.DOKill();
             self.CameraMoveType = CameraMoveType.Shake;
+            self.CameraShakeType = cameraShakeType;
+            self.ShakeTime = shakeTime;
+        }
 
-            float shakeDuration = 0.5f; // 时间
-            float shakeStrength = 0.8f; // 振幅
-            int vibrato = 30; // 频率
-            float randomness = 90f; // 随机性
-
-            self.MainCamera.transform.DOShakePosition(shakeDuration, shakeStrength, vibrato, randomness).OnComplete(() =>
+        public static void ShakeShakeCamera(this MJCameraComponent self)
+        {
+            if (self.ShakeTime <= 0)
             {
                 self.CameraMoveType = CameraMoveType.Normal;
-            });
+                return;
+            }
+
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
+
+            Vector3 shakeOffset = Vector3.zero;
+            switch (self.CameraShakeType)
+            {
+                case CameraShakeType.Type_0:
+                {
+                    float shakeMagnitude = 0.8f; // 震动强度
+                    shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+                    break;
+                }
+                case CameraShakeType.Type_1:
+                {
+                    float shakeMagnitude = 0.3f; // 震动强度
+                    shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+                    break;
+                }
+            }
+
+            self.MainCamera.transform.position += shakeOffset;
+            self.ShakeTime -= Time.deltaTime;
         }
 
         public static void SetBuildEnter(this MJCameraComponent self, Unit unit, CameraBuildType cameraBuildType, Action action)
