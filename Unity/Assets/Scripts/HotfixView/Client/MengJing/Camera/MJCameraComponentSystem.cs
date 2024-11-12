@@ -249,7 +249,7 @@ namespace ET.Client
                 self.ShakeCount++;
             }
 
-            self.MainCamera.transform.position = start + shakeOffset;
+            self.MainCamera.transform.localPosition = start + shakeOffset;
 
             self.ShakeDurationTime -= Time.deltaTime;
         }
