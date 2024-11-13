@@ -2449,8 +2449,39 @@ message M2C_RolePetList // ILocationResponse
 }
 
 
+//ResponseType M2C_PetBarSetResponse
+//宠物栏设置
+message C2M_PetBarSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	
+	repeated PetBarInfo PetBarList = 5;  //三个栏位的上阵宠物   1选中圆形宠物栏位，左侧为宠物列表。 2选中出场技/主动技栏位，左侧为技能列表.  
+}
+
+message M2C_PetBarSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+		
+//ResponseType M2C_PetBarUpgradeResponse
+//宠物栏升级
+message C2M_PetBarUpgradeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Index = 1;   //1开始  
+}
+
+message M2C_PetBarUpgradeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+
 //ResponseType M2C_RolePetFormationSet
-//宠物出战设置
 message C2M_RolePetFormationSet // ILocationRequest
 {
 	int32 RpcId = 90;
