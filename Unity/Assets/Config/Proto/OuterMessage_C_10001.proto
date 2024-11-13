@@ -2418,6 +2418,15 @@ message C2M_RolePetList // ILocationRequest
 	int32 RpcId = 90;
 }
 
+//宠物栏
+message PetBarInfo
+{
+	int64 PetId = 1;
+	int32 Level = 2;  //PetBarConfig
+	int32 AppearSkill = 3;              //出场技，切换到宠物的时候释放。
+	repeated int32 ActiveSkill = 4;     //有四个，目前只需要做第一个。
+}
+
 message M2C_RolePetList // ILocationResponse
 {
 	int32 RpcId = 90;
@@ -2436,8 +2445,9 @@ message M2C_RolePetList // ILocationResponse
 	repeated int64 PetMingList = 11;
 	repeated int64 PetMingPosition = 12;
 	repeated RolePetInfo RolePetBag = 13;
-	repeated int64 PetFightList = 14;
+	repeated PetBarInfo PetFightList = 15;
 }
+
 
 //ResponseType M2C_RolePetFormationSet
 //宠物出战设置

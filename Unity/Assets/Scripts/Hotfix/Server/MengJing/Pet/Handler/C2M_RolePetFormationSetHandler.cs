@@ -20,9 +20,9 @@
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
                 case SceneTypeEnum.MainCityScene:
-                    TransferHelper.RemoveFightPetList(unit,request.PetFormat );
-                    petComponent.PetFightList = request.PetFormat; //通过布阵界面设置出战宠物
-                    TransferHelper.CreateFightPetList(unit);
+                    // TransferHelper.RemoveFightPetList(unit,request.PetFormat );
+                    // petComponent.PetFightList = request.PetFormat; //通过布阵界面设置出战宠物
+                    // TransferHelper.CreateFightPetList(unit);
                     break;
             }
             UnitCacheHelper.SaveComponentCache( unit.Root(),  petComponent).Coroutine();

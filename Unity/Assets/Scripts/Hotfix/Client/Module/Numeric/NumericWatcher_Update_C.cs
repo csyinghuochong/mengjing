@@ -128,7 +128,7 @@ namespace ET.Client
             if (petfightindex > 0)
             {
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
-                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1]);
+                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.PetFightList[petfightindex - 1].PetId);
 
                 root.GetComponent<AttackComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);

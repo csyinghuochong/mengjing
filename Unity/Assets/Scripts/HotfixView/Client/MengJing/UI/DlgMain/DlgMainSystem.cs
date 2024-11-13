@@ -1184,11 +1184,11 @@ namespace ET.Client
             self.View.ES_MainPetFight_2.uiTransform.localScale = petfightindex == 3 ? new Vector3(1.2f, 1.2f, 1f) : Vector3.one;
 
             self.View.ES_MainPetFight_0.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0] : 0), 1);
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 0 ? petComponentC.PetFightList[0].PetId : 0), 1);
             self.View.ES_MainPetFight_1.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1] : 0), 2);
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 1 ? petComponentC.PetFightList[1].PetId : 0), 2);
             self.View.ES_MainPetFight_2.Refresh(
-                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2] : 0), 3);
+                petComponentC.GetPetInfoByID(petComponentC.PetFightList.Count > 2 ? petComponentC.PetFightList[2].PetId : 0), 3);
         }
 
         public static void RefreshMainPetFightHPUI(this DlgMain self)
@@ -1210,7 +1210,7 @@ namespace ET.Client
                 // FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
 
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
-                long petId = petComponentC.PetFightList[petfightindex - 1];
+                long petId = petComponentC.PetFightList[petfightindex - 1].PetId;
                 Unit pet = currentScene.GetComponent<UnitComponent>().Get(petId);
 
                 root.GetComponent<LockTargetComponent>().MainUnit = pet;

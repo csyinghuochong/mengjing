@@ -45,7 +45,7 @@ namespace ET.Client
         public static async ETTask<int> RequestPetFightSwitch(Scene root, int fightindex)
         {
             PetComponentC petComponent = root.GetComponent<PetComponentC>();
-            if (fightindex != 0 && petComponent.PetFightList[fightindex - 1] == 0)
+            if (fightindex != 0 && petComponent.PetFightList[fightindex - 1].PetId == 0)
             {
                 return ErrorCode.ERR_Pet_NoExist;
             }

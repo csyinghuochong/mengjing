@@ -688,20 +688,20 @@ namespace ET.Server
         public static void RemoveFightPetList(Unit unit, List<long> newpetids = null)
         {
             UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
-            List<long> petfightlist = unit.GetComponent<PetComponentS>().PetFightList;
+            List<PetBarInfo> petfightlist = unit.GetComponent<PetComponentS>().PetFightList;
             for (int i = 0; i < petfightlist.Count; i++)
             {
-                if (unitComponent.Get(petfightlist[i]) == null)
+                if (unitComponent.Get(petfightlist[i].PetId) == null)
                 {
                     continue;
                 }
 
-                if (newpetids != null && newpetids.Contains(petfightlist[i]))
+                if (newpetids != null && newpetids.Contains(petfightlist[i].PetId))
                 {
                     continue;
                 }
 
-                unitComponent.Remove(petfightlist[i]);
+                unitComponent.Remove(petfightlist[i].PetId);
             }
         }
 
@@ -746,10 +746,10 @@ namespace ET.Server
         public static void CreateFightPetList(Unit unit)
         {
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            List<long> petfightlist = petComponentS.PetFightList;
+            List<PetBarInfo> petfightlist = petComponentS.PetFightList;
             for (int i = 0; i < petfightlist.Count; i++)
             {
-                RolePetInfo fightId = petComponentS.GetPetInfo(petfightlist[i]);
+                RolePetInfo fightId = petComponentS.GetPetInfo(petfightlist[i].PetId);
                 if (fightId == null)
                 {
                     continue;

@@ -15,7 +15,7 @@ namespace ET.Client
         public List<long> PetMingList { get; set; } = new(); //矿场队伍(15个宠物）
         public List<long> PetMingPosition { get; set; } = new(); //矿场宠物位置(27个位置)
         
-        public List<long> PetFightList{ get; set; } = new(); //宠物出战列表，后期需要通过布阵界面设置
+        public List<PetBarInfo> PetFightList{ get; set; } = new(); //宠物出战列表，后期需要通过布阵界面设置
         
         public List<int> PetCangKuOpen { get; set; } = new();
 

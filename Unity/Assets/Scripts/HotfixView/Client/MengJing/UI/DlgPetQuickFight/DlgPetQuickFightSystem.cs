@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ET.Client
@@ -122,7 +123,11 @@ namespace ET.Client
 
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             List<long> fightpets = new();
-            fightpets.AddRange(petComponent.PetFightList);
+            foreach (var petBarInfo in petComponent.PetFightList)
+            {
+                fightpets.Add(petBarInfo.PetId);
+            }
+            
             if (fightpets[self.FightIndex - 1] == petid)
             {
                 // 休息
@@ -142,7 +147,7 @@ namespace ET.Client
         public static void OnUpdateUI(this DlgPetQuickFight self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            long petId = petComponent.PetFightList[self.FightIndex - 1];
+            long petId = petComponent.PetFightList[self.FightIndex - 1].PetId;
 
             if (self.ScrollItemPetQuickFightItems != null)
             {
@@ -172,7 +177,7 @@ namespace ET.Client
 
             self.FightIndex = index;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            long petId = petComponent.PetFightList[self.FightIndex - 1];
+            long petId = petComponent.PetFightList[self.FightIndex - 1].PetId;
 
             List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
             self.ShowRolePetInfos.Clear();
@@ -183,7 +188,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (rolePetInfos[i].Id != petId && petComponent.PetFightList.Contains(rolePetInfos[i].Id))
+                if (rolePetInfos[i].Id != petId && petComponent.PetFightList.Where(p=>p.PetId ==rolePetInfos[i].Id).Count( ) > 0)
                 {
                     continue;
                 }

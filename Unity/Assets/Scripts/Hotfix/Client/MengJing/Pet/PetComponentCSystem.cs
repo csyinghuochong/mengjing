@@ -125,8 +125,6 @@ namespace ET.Client
                     self.PetMingPosition = positionList;
                     break;
                 case SceneTypeEnum.MainCityScene:
-                    self.PetFightList = petList;
-                    EventSystem.Instance.Publish(self.Root(), new PetFormationUpdate());
                     break;
             }
         }

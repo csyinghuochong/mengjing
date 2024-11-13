@@ -75,6 +75,24 @@ namespace ET.Server
             }
         }
 
+        public static void CheckPetList(this PetComponentS self, List<PetBarInfo> petList)
+        {
+            List <long> ids = new List<long>();
+
+            for (int i = petList.Count - 1; i >= 0; i--)
+            {
+                if (petList[i].PetId != 0 && (self.GetPetInfo(petList[i].PetId) == null) || ids.Contains(petList[i].PetId))
+                {
+                    petList[i].PetId = 0;
+                }
+                
+                if (petList[i].PetId != 0 && ids.Contains(petList[i].PetId))
+                {
+                    ids.Add(petList[i].PetId);
+                }
+            }
+        }
+        
         public static void InitPetInfo(this PetComponentS self)
         {
             if (!self.PetCangKuOpen.Contains(0))
@@ -108,9 +126,9 @@ namespace ET.Server
             if (self.PetFightList.Count != 3)
             {
                 self.PetFightList.Clear();
-                self.PetFightList.Add(0);
-                self.PetFightList.Add(0);
-                self.PetFightList.Add(0);
+                self.PetFightList.Add(PetBarInfo.Create());
+                self.PetFightList.Add(PetBarInfo.Create());
+                self.PetFightList.Add(PetBarInfo.Create());
             }
 
             if ( self.PetShouHuList.Count != 4)
@@ -1322,7 +1340,7 @@ namespace ET.Server
                 return null;
             }
 
-            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex - 1]);
+            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex - 1].PetId);
             Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
             return petunit;
         }
