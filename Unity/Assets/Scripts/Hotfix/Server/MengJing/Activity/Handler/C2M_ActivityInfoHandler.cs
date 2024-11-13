@@ -21,7 +21,7 @@
             }
            
             ActivityV1Info activityV1Info = activityComponent.ActivityV1Info;
-            activityV1Info.ChouKaDropId = ConfigData.ServerInfo.ChouKaDropId;
+            activityV1Info.ChouKaDropId = ConfigData.ServerInfoList[unit.Zone()].ChouKaDropId;
             activityV1Info.GuessIds.Clear();
 
             ActorId activitySceneid = UnitCacheHelper.GetActivityServerId(  unit.Zone() );

@@ -276,13 +276,14 @@ namespace ET.Server
         public static void Role_AddExp(this UserInfoComponentS self, long addValue, bool notice)
         {
             Scene scene = self.Scene();
-            if (ConfigData.ServerInfo == null)
+            ServerInfo serverInfo = ConfigData.ServerInfoList[scene.Zone()];
+            if (serverInfo == null)
             {
                 Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
                 return;
             }
 
-            ServerInfo serverInfo = ConfigData.ServerInfo;
+         
 
             float expAdd = CommonHelp.GetExpAdd(self.UserInfo.Lv, serverInfo);
 

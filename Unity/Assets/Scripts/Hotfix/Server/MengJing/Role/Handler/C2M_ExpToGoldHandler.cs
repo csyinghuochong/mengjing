@@ -10,7 +10,7 @@ namespace ET.Server
         {
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = userInfoComponent.UserInfo;
-            ServerInfo serverInfo = ConfigData.ServerInfo;
+            ServerInfo serverInfo = ConfigData.ServerInfoList[unit.Zone()];
             if (userInfo.Lv < serverInfo.WorldLv)
             {
                 response.Error = ErrorCode.ERR_LevelNoEnough;

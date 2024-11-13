@@ -242,7 +242,7 @@ namespace ET
         };
 
         [StaticField]
-        public static ServerInfo ServerInfo =null;
+        public static Dictionary<int, ServerInfo> ServerInfoList = new Dictionary<int, ServerInfo>();
         
         [StaticField]
         public static bool ShowLieOpen = false;

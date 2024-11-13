@@ -19,7 +19,8 @@ namespace ET.Server
                         Console.WriteLine($" ConfigData.ShowLieOpen:  {ConfigData.ShowLieOpen}");
                         break;
                     case 2:  //世界等级
-                        ConfigData.ServerInfo = request.ServerInfo;
+                        int zone = int.Parse(request.LoadValue);
+                        ConfigData.ServerInfoList[zone] = request.ServerInfo;
                         //Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
                         break;
                     case 3: //热重载
