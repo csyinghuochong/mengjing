@@ -44,7 +44,7 @@ namespace ET.Server
                     robotNumber++;
                 }
             }
-            account = $"{zone}_{robotid}_{robotNumber}_0002";   //服务器
+            account = $"{zone}_{robotid}_{robotNumber}_0003";   //服务器
             return account;
         }
 
