@@ -2422,7 +2422,7 @@ message C2M_RolePetList // ILocationRequest
 message PetBarInfo
 {
 	int64 PetId = 1;
-	int32 Level = 2;  //PetBarConfig
+	int32 PetBarId = 2;  								//PetBarConfig.Id
 	int32 AppearSkill = 3;              //出场技，切换到宠物的时候释放。
 	repeated int32 ActiveSkill = 4;     //有四个，目前只需要做第一个。
 }
