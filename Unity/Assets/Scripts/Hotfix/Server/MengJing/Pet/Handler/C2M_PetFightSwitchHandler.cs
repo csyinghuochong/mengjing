@@ -64,7 +64,7 @@ namespace ET.Server
             if (request.PetFightIndex == 0)
             {
                 unit.GetComponent<AIComponent>().Stop_2();
-                unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 97009002);
+                unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 97020004);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace ET.Server
                 unit.GetComponent<AIComponent>().Begin();
                 BuffData buffData_2 = new BuffData();
                 buffData_2.SkillId = 67000278;
-                buffData_2.BuffId = ConfigData.PetMianShangBuff;
+                buffData_2.BuffId = 97020004;
                 unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
             }
 
