@@ -1259,7 +1259,7 @@ namespace ET.Server
             {
                 return;
             }
-            //petUnit.GetComponent<HeroDataComponent>().InitPet(rolePetInfo, true);
+            petUnit.GetComponent<HeroDataComponentS>().InitPet(rolePetInfo, true);
         }
 
         //根据资质换算出当前系数

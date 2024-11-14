@@ -54,7 +54,7 @@ namespace ET.Server
                     buffData_2.SkillId = 67000278;
                     buffData_2.BuffId = 90106002; 
                     petunit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
-                    petunit.GetComponent<HeroDataComponentS>().InitPet(rolePetInfo, true);
+                    petunit.GetComponent<PetComponentS>().UpdatePetAttribute(rolePetInfo, true);
                 }
             }
 
