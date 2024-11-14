@@ -946,6 +946,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_CameraHorizontalOffsetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_CameraHorizontalOffsetRectTransform == null )
+     			{
+		    		this.m_EG_CameraHorizontalOffsetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_CameraHorizontalOffset");
+     			}
+     			return this.m_EG_CameraHorizontalOffsetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_CameraVerticalOffsetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_CameraVerticalOffsetRectTransform == null )
+     			{
+		    		this.m_EG_CameraVerticalOffsetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_CameraVerticalOffset");
+     			}
+     			return this.m_EG_CameraVerticalOffsetRectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_RotaAngleSetRectTransform
      	{
      		get
@@ -1168,6 +1202,8 @@ namespace ET.Client
 			this.m_E_ReSetCameraBtnButton = null;
 			this.m_E_ReSetCameraBtnImage = null;
 			this.m_EG_LenDepthSetRectTransform = null;
+			this.m_EG_CameraHorizontalOffsetRectTransform = null;
+			this.m_EG_CameraVerticalOffsetRectTransform = null;
 			this.m_EG_RotaAngleSetRectTransform = null;
 			this.m_EG_ZhuBoSetRectTransform = null;
 			this.m_E_TextZhangHaoIDText = null;
@@ -1235,6 +1271,8 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ReSetCameraBtnButton = null;
 		private UnityEngine.UI.Image m_E_ReSetCameraBtnImage = null;
 		private UnityEngine.RectTransform m_EG_LenDepthSetRectTransform = null;
+		private UnityEngine.RectTransform m_EG_CameraHorizontalOffsetRectTransform = null;
+		private UnityEngine.RectTransform m_EG_CameraVerticalOffsetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_RotaAngleSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_ZhuBoSetRectTransform = null;
 		private UnityEngine.UI.Text m_E_TextZhangHaoIDText = null;

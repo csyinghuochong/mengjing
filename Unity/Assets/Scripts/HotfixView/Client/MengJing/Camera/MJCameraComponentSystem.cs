@@ -84,7 +84,14 @@ namespace ET.Client
             }
 
             self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
-            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
+            self.MainCamera.transform.LookAt(self.GetLookAtPos());
+        }
+
+        private static Vector3 GetLookAtPos(this MJCameraComponent self)
+        {
+            Vector3 unitPos = self.LookAtUnit.Position;
+            Vector3 lookPos = unitPos + Vector3.up * self.VerticalOffset + self.MainCamera.transform.right * self.HorizontalOffset;
+            return lookPos;
         }
 
         public static void BuildEnterMove(this MJCameraComponent self)
@@ -168,7 +175,7 @@ namespace ET.Client
 
             self.PullRate += Time.deltaTime * 0.08f; // 速度
             self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
+            self.MainCamera.transform.LookAt(self.GetLookAtPos());
         }
 
         /// <summary>
@@ -190,7 +197,7 @@ namespace ET.Client
 
             self.PullRate -= Time.deltaTime * 0.3f;
             self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.LookAtUnit.Position);
+            self.MainCamera.transform.LookAt(self.GetLookAtPos());
         }
 
         public static void SetShakeCamera(this MJCameraComponent self, ShakeCameraType shakeCameraType, float shakeDuration)

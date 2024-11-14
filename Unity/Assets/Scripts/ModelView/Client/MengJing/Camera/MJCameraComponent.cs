@@ -75,6 +75,8 @@ namespace ET.Client
         public float PullRate; // 镜头拉远倍概率
 
         public float LenDepth { get; set; } = 1; // 镜头纵深
+        public float HorizontalOffset { get; set; } // 看向角色的水平偏差
+        public float VerticalOffset { get; set; } // 看向角色的垂直偏差
 
         //相机与人物距离
         public float Distance = 11.6f;
@@ -99,7 +101,7 @@ namespace ET.Client
 
         //相机上下的最大最小角度
         public float MAX_ANGLE_Y = 80;
-        public float MIN_ANGLE_Y = 10;
+        public float MIN_ANGLE_Y = -10;
 
         private EntityRef<Unit> lookAtUnit;
         public Unit LookAtUnit { get => this.lookAtUnit; set => this.lookAtUnit = value; }

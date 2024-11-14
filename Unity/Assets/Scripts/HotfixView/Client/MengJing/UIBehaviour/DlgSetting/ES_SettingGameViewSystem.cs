@@ -27,7 +27,12 @@ namespace ET.Client
 
             self.EG_RandomHoreseRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RandomHorese);
 
-            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().onValueChanged.AddListener((value) => { self.OnLenDepth(value); });
+            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().onValueChanged
+                    .AddListener((value) => { self.OnLenDepth(value); });
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().onValueChanged
+                    .AddListener((value) => { self.CameraHorizontalOffset(value); });
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().onValueChanged
+                    .AddListener((value) => { self.CameraVerticalOffset(value); });
 
             self.EG_RotaAngleSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RotaAngle);
 
@@ -253,6 +258,20 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = va;
         }
 
+        public static void CameraHorizontalOffset(this ES_SettingGame self, float value)
+        {
+            float va = -2 + value * 4;
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, va);
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().HorizontalOffset = va;
+        }
+
+        public static void CameraVerticalOffset(this ES_SettingGame self, float value)
+        {
+            float va = -2 + value * 4;
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, va);
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().VerticalOffset = va;
+        }
+
         public static void OnLocalizationBtnButton(this ES_SettingGame self)
         {
             string languageName = PlayerPrefsHelp.GetString(PlayerPrefsHelp.Localization, "Chinese");
@@ -291,8 +310,13 @@ namespace ET.Client
         public static void OnReSetCameraBtnButton(this ES_SettingGame self)
         {
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, 1f);
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = 1f;
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>().OffsetPostion = new Vector3(0, 10f, -6f);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, 0);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, 0);
+            MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+            cameraComponent.LenDepth = 1f;
+            cameraComponent.HorizontalOffset = 0;
+            cameraComponent.VerticalOffset = 0;
+            cameraComponent.OffsetPostion = new Vector3(0, 10f, -6f);
 
             float va = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
             if (va <= 0)
@@ -303,6 +327,9 @@ namespace ET.Client
             {
                 self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().value = (va - 0.1f) / 2;
             }
+
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().value = 0.5f;
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().value = 0.5f;
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, 0);
             self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(false);
@@ -386,6 +413,11 @@ namespace ET.Client
             {
                 self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().value = (va - 0.1f) / 2;
             }
+
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().value =
+                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset) + 2) / 4;
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().value =
+                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset) + 2) / 4;
 
             self.EG_ZhuBoSetRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) == 1);
 

@@ -494,7 +494,10 @@ namespace ET.Client
                     int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
 
             float lenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = lenDepth <= 0 ? 1 : lenDepth;
+            MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+            cameraComponent.LenDepth = lenDepth <= 0 ? 1 : lenDepth;
+            cameraComponent.HorizontalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset);
+            cameraComponent.VerticalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset);
 
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 

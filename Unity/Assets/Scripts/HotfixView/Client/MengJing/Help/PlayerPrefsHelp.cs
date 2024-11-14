@@ -18,6 +18,8 @@ namespace ET.Client
         public const string LoginErrorTime = "MJ_LoginErrorTime";
         public const string ChapterDifficulty = "MJ_ChapterDifficulty";
         public const string LenDepth = "MJ_LenDepth";
+        public const string CameraHorizontalOffset = "MJ_CameraHorizontalOffset";
+        public const string CameraVerticalOffset =  "MJ_CameraVerticalOffset";
         public const string RotaAngle = "MJ_RotaAngle";
         public const string ZhuBo = "MJ_ZhuBo";
         public const string Localization = "MJ_Localization";
