@@ -12,7 +12,7 @@ namespace ET.Server
             }
 
             Unit unit = aiComponent.GetParent<Unit>();
-            Unit nearest = GetTargetHelpS.GetNearestEnemy(unit, (float)aiComponent.ActDistance, true);
+            Unit nearest = GetTargetHelpS.GetNearestEnemy(unit, aiComponent.ActRange, true);
             if (nearest != null && !aiComponent.IsRetreat)
             {
                 aiComponent.TargetZhuiJi = unit.Position;
