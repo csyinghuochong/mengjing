@@ -11,6 +11,9 @@ namespace ET
         public static int PetMianShangBuff = 97020003;
         
         [StaticField]
+        public static int PlayerHideBuff = 97020004;
+        
+        [StaticField]
         public static bool LoadSceneFinished { get; set; }
         
         //npc对话最大距离

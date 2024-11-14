@@ -110,11 +110,6 @@ namespace ET.Server
                 return false;
             }
             
-            if (defendUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, ConfigData.PetMianShangBuff) > 0)
-            {
-                return false;
-            }
-            
             // 悬空buff，不受伤害
             if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Hung))
             {
