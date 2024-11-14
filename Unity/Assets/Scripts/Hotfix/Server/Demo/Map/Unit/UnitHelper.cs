@@ -157,9 +157,19 @@ namespace ET.Server
                 || self.Type == UnitType.Transfers || self.Type == UnitType.JingLing
                 || self.Type == UnitType.Pasture || self.Type == UnitType.Plant
                 || self.Type == UnitType.Bullet || self.Type == UnitType.Stall)
+            {
                 return false;
+            }
+
             if (self.Type == UnitType.Monster && (self.GetMonsterType() == (int)MonsterTypeEnum.SceneItem))
+            {
                 return false;
+            }
+
+            if (!self.GetComponent<StateComponentS>().IsCanBeAttack())
+            {
+                return false;
+            }
 
             if (checkdead)
             {

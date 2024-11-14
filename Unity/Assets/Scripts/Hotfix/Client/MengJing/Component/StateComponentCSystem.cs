@@ -25,6 +25,15 @@ namespace ET.Client
         {
             return TimeHelper.ClientNow() < self.RigidityEndTime;
         }
+        
+        public static bool IsCanBeAttack(this StateComponentC self)
+        {
+            if (self.StateTypeGet(StateTypeEnum.Hide))
+            {
+                return false;
+            }
+            return true;
+        }
 
         public static void SetNetWaitEndTime(this StateComponentC self, long addTime)
         {

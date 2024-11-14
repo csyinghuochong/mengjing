@@ -32,7 +32,15 @@ namespace ET.Server
             }
             return true;
         }
-
+        
+        public static bool IsCanBeAttack(this StateComponentS self)
+        {
+            if (self.StateTypeGet(StateTypeEnum.Hide))
+            {
+                return false;
+            }
+            return true;
+        }
 
         public static void Reset(this StateComponentS self)
         {

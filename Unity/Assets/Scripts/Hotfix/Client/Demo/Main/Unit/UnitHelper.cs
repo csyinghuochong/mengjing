@@ -39,9 +39,18 @@ namespace ET.Client
                 || self.Type == UnitType.Pasture || self.Type == UnitType.Plant
                 || self.Type == UnitType.Bullet || self.Type == UnitType.Stall
                 || self.Type == UnitType.CellTransfers)
+            {
                 return false;
+            }
+
             if (self.Type == UnitType.Monster && (self.GetMonsterType() == (int)MonsterTypeEnum.SceneItem))
+            {
                 return false;
+            }
+            if (!self.GetComponent<StateComponentC>().IsCanBeAttack())
+            {
+                return false;
+            }
 
             if (checkdead)
             {
