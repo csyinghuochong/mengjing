@@ -394,6 +394,7 @@ namespace ET.Client
         {
  
             C2M_PetBarSetRequest c2MPetBarSetRequest = C2M_PetBarSetRequest.Create();
+            c2MPetBarSetRequest.PetBarList = petBarInfos;
             M2C_PetBarSetResponse m2CPetBarSetResponse = await root.GetComponent<ClientSenderCompnent>().Call(c2MPetBarSetRequest) as M2C_PetBarSetResponse;
 
             return m2CPetBarSetResponse.Error;

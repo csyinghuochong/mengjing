@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -8,7 +9,15 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PetBarSetRequest request, M2C_PetBarSetResponse response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            petComponent.PetFightList = request.PetBarList;
+
+            List<long> petids = petComponent.PetFightList.Select(x => x.PetId).ToList();
+            TransferHelper.RemoveFightPetList(unit,petids);
+            
+            
+            petComponent.PetFightList = request.PetBarList; //通过布阵界面设置出战宠物
+            
+            TransferHelper.CreateFightPetList(unit);
+            
             await ETTask.CompletedTask;
         }
     }
