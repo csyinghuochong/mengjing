@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_PetBarSet))]
+    [FriendOf(typeof(ES_PetBarUpgrade))]
     [FriendOf(typeof(DlgPetBar))]
     public static class DlgPetBarSystem
     {
@@ -25,8 +27,10 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    // self.ES_PetList.uiTransform.gameObject.SetActive(true);
-                    // self.ES_PetList.OnUpdateUI();
+                    self.ES_PetBarSet.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 1:
+                    self.ES_PetBarUpgrade.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
