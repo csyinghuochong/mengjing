@@ -15,6 +15,8 @@ namespace ET.Client
         public long ReadyTime;
         public int MaxMoLi;
         public int MoLi;
+        public int MoLiRegenRate;
+        public long LastMoLiRegenTime;
         public int CostMoLi;
         public bool GameStart;
         public long Timer;
