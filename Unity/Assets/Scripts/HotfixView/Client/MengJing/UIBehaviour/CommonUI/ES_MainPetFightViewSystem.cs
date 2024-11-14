@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.MainPetFightTimer)]
-    public class MainPetFightTimer : ATimer<ES_MainPetFight>
+    [Invoke(TimerInvokeType.MainPetShowQuickFightTimer)]
+    public class MainPetShowQuickFightTimer : ATimer<ES_MainPetFight>
     {
         protected override void Run(ES_MainPetFight self)
         {
@@ -47,7 +47,7 @@ namespace ET.Client
         {
             self.LongPress = false;
             self.Timer = self.Root().GetComponent<TimerComponent>()
-                    .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetFightTimer, self);
+                    .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetShowQuickFightTimer, self);
         }
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)

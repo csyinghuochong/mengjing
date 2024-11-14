@@ -2650,6 +2650,24 @@ namespace ET.Client
      		}
      	}
 
+		public Text E_TextPetSwitch
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				Text es = this.m_E_TextPetSwitch;
+				if( es == null )
+				{
+					this.m_E_TextPetSwitch = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_MainPetFights/E_TextPetSwitch");
+				}
+				return this.m_E_TextPetSwitch;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_DragPanelImage = null;
@@ -2806,6 +2824,7 @@ namespace ET.Client
 			this.m_es_mainpetfight_2 = null;
 			this.m_E_Btn_CellDungeonButton= null;
 			this.m_E_Btn_PetMelee = null;
+			this.m_E_TextPetSwitch = null;
 			this.uiTransform = null;
 		}
 
@@ -2962,6 +2981,7 @@ namespace ET.Client
 		private EntityRef<ES_MainPetFight> m_es_mainpetfight_0 = null;
 		private EntityRef<ES_MainPetFight> m_es_mainpetfight_1 = null;
 		private EntityRef<ES_MainPetFight> m_es_mainpetfight_2 = null;
+		private UnityEngine.UI.Text m_E_TextPetSwitch = null;
 		public Transform uiTransform = null;
 	}
 }
