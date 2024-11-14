@@ -21,12 +21,14 @@ namespace ET.Client
             NumericComponentC numericComponent = nowNunt.GetComponent<NumericComponentC>();
             for (int i = 0; i < message.Vs.Count; i++)
             {
-                numericComponent.ApplyValue(message.Ks[i], message.Vs[i], false);
+                numericComponent.ApplyValue(message.Ks[i], message.Vs[i], true);
             }
-
-            //自己的属性派发时间更新属性界面
-            EventSystem.Instance.Publish(root, new DataUpdate_UpdateRoleProper());
-
+            
+            if (nowNunt.MainHero)
+            {
+                //自己的属性派发时间更新属性界面
+                EventSystem.Instance.Publish(root, new DataUpdate_UpdateRoleProper());
+            }
             await ETTask.CompletedTask;
         }
     }

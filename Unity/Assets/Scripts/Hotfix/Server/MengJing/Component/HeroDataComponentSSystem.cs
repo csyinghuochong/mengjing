@@ -499,15 +499,26 @@ namespace ET.Server
              NumericComponentS unitNumericComponent = unit.GetComponent<NumericComponentS>();
              NumericComponentS masterNumericComponent = master.GetComponent<NumericComponentS>();
              List<int> keylist = masterNumericComponent.NumericDic.Keys.ToList();
+             
+             List<int> ks = new List<int>();
+             List<long> vs = new List<long>();
              for (int i = 0; i < keylist.Count; i++)
              {
                  if (keylist[i] > NumericType.Now_Hp)
                  {
                      continue;
                  }
-
-                 unitNumericComponent.ApplyValue(keylist[i], masterNumericComponent.GetAsLong(keylist[i]));
+                 ks.Add(keylist[i]);
+                 vs.Add(masterNumericComponent.GetAsLong(keylist[i]));
+                 unitNumericComponent.ApplyValue( keylist[i], masterNumericComponent.GetAsLong(keylist[i]) );
              }
+             
+             M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
+             //通知自己
+             m2C_UnitNumericListUpdate.UnitID = unit.Id;
+             m2C_UnitNumericListUpdate.Vs = vs;
+             m2C_UnitNumericListUpdate.Ks = ks;
+             MapMessageHelper.SendToClient(master, m2C_UnitNumericListUpdate);
          }
 
          public static void InitPlan(this HeroDataComponentS self, JiaYuanPlant jiaYuanPlant, bool notice)

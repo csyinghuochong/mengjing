@@ -353,38 +353,41 @@ namespace ET.Client
         public static void UpdateBlood(this UIMonsterHpComponent self)
         {
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
-            float curhp = numericComponent.GetAsLong(NumericType.Now_Hp); // + value;
-            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            long curhp = numericComponent.GetAsLong(NumericType.Now_Hp); // + value;
+            long maxhp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            float blood = (1f * curhp / maxhp);
             blood = Mathf.Max(blood, 0f);
             if (self.Img_HpValue == null)
             {
                 return;
             }
 
-            int unitType = self.GetParent<Unit>().Type;
-            switch (unitType)
-            {
-                case UnitType.Player:
-                    self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
-                    int shieldHp = numericComponent.GetAsInt(NumericType.Now_Shield_HP);
-                    int shieldMax = numericComponent.GetAsInt(NumericType.Now_Shield_MaxHP);
-                    if (shieldMax > 0)
-                    {
-                        self.BuffShieldValue.GetComponent<Image>().fillAmount = shieldHp * 1f / shieldMax;
-                    }
-                    else
-                    {
-                        self.BuffShieldValue.GetComponent<Image>().fillAmount = 0f;
-                    }
-
-                    break;
-                case UnitType.Pet:
-                    self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
-                    break;
-                default:
-                    self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
-                    break;
-            }
+            self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+            
+            // int unitType = self.GetParent<Unit>().Type;
+            // switch (unitType)
+            // {
+            //     case UnitType.Player:
+            //         self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+            //         int shieldHp = numericComponent.GetAsInt(NumericType.Now_Shield_HP);
+            //         int shieldMax = numericComponent.GetAsInt(NumericType.Now_Shield_MaxHP);
+            //         if (shieldMax > 0)
+            //         {
+            //             self.BuffShieldValue.GetComponent<Image>().fillAmount = shieldHp * 1f / shieldMax;
+            //         }
+            //         else
+            //         {
+            //             self.BuffShieldValue.GetComponent<Image>().fillAmount = 0f;
+            //         }
+            //
+            //         break;
+            //     case UnitType.Pet:
+            //         self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+            //         break;
+            //     default:
+            //         self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+            //         break;
+            // }
         }
 
         public static void OnTimer(this UIMonsterHpComponent self)

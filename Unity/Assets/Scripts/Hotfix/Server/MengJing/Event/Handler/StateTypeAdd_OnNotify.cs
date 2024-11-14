@@ -23,7 +23,7 @@ namespace ET.Server
             }
             
             unit.GetComponent<SkillManagerComponentS>().InterruptSing(0, true);
-            unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
+            unit.GetComponent<SkillPassiveComponent>()?.StateTypeAdd(nowStateType);
   
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();
             if (ComHelperS.IsStateBroadcastType(nowStateType))

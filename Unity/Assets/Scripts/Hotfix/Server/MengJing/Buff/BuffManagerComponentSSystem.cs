@@ -263,6 +263,9 @@ namespace ET.Server
 
         public static void BuffRemoveByUnit(this BuffManagerComponentS self, long unitId, int buffId)
         {
+            
+            Log.Debug($"BuffRemoveByUnit:  {self.Id}  {buffId}");
+            
             //判断玩家身上是否有相同的buff,如果有就注销此Buff
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
@@ -308,6 +311,8 @@ namespace ET.Server
 
         public static void BuffFactory(this BuffManagerComponentS self, BuffData buffData, Unit from, SkillS skillHandler, bool notice = true)
         {
+            Log.Debug($"BuffFactory:  {self.Id}  {buffData.BuffId}");
+            
             Unit unit = self.GetParent<Unit>();
             SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
             float now_DiKangPro = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_DiKangPro);

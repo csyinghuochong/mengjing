@@ -6,6 +6,9 @@ namespace ET
 {
     public static class ConfigData
     {
+
+        [StaticField]
+        public static int PetMianShangBuff = 97020003;
         
         [StaticField]
         public static bool LoadSceneFinished { get; set; }

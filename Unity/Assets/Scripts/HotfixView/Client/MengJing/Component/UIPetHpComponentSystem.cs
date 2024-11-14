@@ -183,13 +183,14 @@ namespace ET.Client
         {
             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp); // + value;
-            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            float maxhp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            float blood = curhp / maxhp;
             blood = Mathf.Max(blood, 0f);
             if (self.Img_HpValue == null)
             {
                 return;
             }
-
+            Log.Debug($"UpdateBloodPet: {self.GetParent<Unit>().Id} {curhp}  {maxhp}");
             self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
         }
 

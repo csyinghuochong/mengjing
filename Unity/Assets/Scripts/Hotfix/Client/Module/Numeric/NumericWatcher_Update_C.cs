@@ -2,26 +2,12 @@ using System;
 
 namespace ET.Client
 {
-    [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
-    public class NumericWatcher_Update_Now_Hp : INumericWatcher
-    {
-        public void Run(Unit unit, NumbericChange args)
-        {
-            NumericComponentC numericComponentDefend = unit.GetComponent<NumericComponentC>();
-
-            long nowHpValue = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
-            long costHp = (nowHpValue - args.OldValue);
-            EventSystem.Instance.Publish(unit.Root(), new Now_Hp_Update()
-            {
-                Defend = unit,
-                ChangeHpValue = costHp,
-                DamgeType = args.DamgeType,
-                SkillID = args.SkillId,
-                AttackId = args.AttackId
-            });
-        }
-    }
-
+   /// <summary>
+   /// 逻辑
+   /// </summary>
+   ///
+   ///
+   /// 
     [NumericWatcher(SceneType.Current, NumericType.Now_Dead)]
     public class NumericWatcher_Now_Dead : INumericWatcher
     {
@@ -30,13 +16,11 @@ namespace ET.Client
             if (args.NewValue == 0) //复活
             {
                 unit.Position = unit.GetBornPostion();
-                EventSystem.Instance.Publish(unit.Root(), new UnitRevive() { Unit = unit });
             }
 
             if (args.NewValue == 1) //死亡
             {
                 unit.GetComponent<HeroDataComponentC>().OnDead();
-                EventSystem.Instance.Publish(unit.Root(), new UnitDead() { Unit = unit });
             }
         }
     }

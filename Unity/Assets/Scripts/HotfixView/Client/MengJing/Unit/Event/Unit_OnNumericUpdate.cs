@@ -1,5 +1,12 @@
 ﻿namespace ET.Client
 {
+    
+    /// <summary>
+    /// 表现
+    /// </summary>
+    ///
+    ///
+    /// 
     [Event(SceneType.Current)]
     public class Unit_OnNumericUpdate : AEvent<Scene, NumbericChange>
     {
@@ -89,7 +96,6 @@
                             // FunctionEffect.PlaySelfEffect(args.Defend, 200004);
                         }
                     }
-
                     break;
                 case NumericType.CardTransform:
                     int cardMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.CardTransform);
@@ -288,6 +294,38 @@
                         TaskClientNetHelper.RequestGetTask(root, newvalue3).Coroutine();
                     }
 
+                    break;
+                case NumericType.Now_Hp:
+                case NumericType.Now_MaxHp:
+                    NumericComponentC numericComponentDefend = args.Defend.GetComponent<NumericComponentC>();
+                    long costHp = 0;
+                    if (args.NumericType == NumericType.Now_Hp)
+                    {
+                        long nowHpValue = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
+                        costHp = (nowHpValue - args.OldValue);
+                    }
+
+                    
+                    EventSystem.Instance.Publish(args.Defend.Root(), new Now_Hp_Update()
+                    {
+                        Defend = args.Defend,
+                        ChangeHpValue = costHp,
+                        DamgeType = args.DamgeType,
+                        SkillID = args.SkillId,
+                        AttackId = args.AttackId
+                    });
+                    
+                    break;
+                case NumericType.Now_Dead:
+                    if (args.NewValue == 0) //复活
+                    {
+                        EventSystem.Instance.Publish(args.Defend.Root(), new UnitRevive() { Unit = args.Defend });
+                    }
+
+                    if (args.NewValue == 1) //死亡
+                    {
+                        EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend });
+                    }
                     break;
             }
 

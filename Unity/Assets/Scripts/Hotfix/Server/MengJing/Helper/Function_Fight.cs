@@ -97,8 +97,7 @@ namespace ET.Server
             {
                 playerPKStatus = true;
             }
-
-
+            
             //已死亡
             if (defendUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 1)
             {
@@ -110,6 +109,12 @@ namespace ET.Server
             {
                 return false;
             }
+            
+            if (defendUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, ConfigData.PetMianShangBuff) > 0)
+            {
+                return false;
+            }
+            
             // 悬空buff，不受伤害
             if (defendUnit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Hung))
             {
@@ -151,7 +156,7 @@ namespace ET.Server
 
             float attackPet_hit = 0;
             float attackPet_cri = 0;
-
+            
             //当前幸运
             int nowluck = numericComponentAttack.GetAsInt(NumericType.Now_Luck);
             float luckPro = 0;
