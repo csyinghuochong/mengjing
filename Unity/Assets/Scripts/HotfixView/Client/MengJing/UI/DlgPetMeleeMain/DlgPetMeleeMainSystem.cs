@@ -40,6 +40,7 @@ namespace ET.Client
             self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
             self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
             self.MoLi = 300; // 魔力 (暂时，之后根据公式读表)
+            self.MoLiRegenRate = 20; // 每秒魔力回复 (暂时，之后根据公式读表)
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
             self.View.E_IconImage.gameObject.SetActive(false);
         }
@@ -55,9 +56,9 @@ namespace ET.Client
 
         public static void Update(this DlgPetMeleeMain self)
         {
+            long nowTime = TimeInfo.Instance.ServerNow();
             if (!self.GameStart)
             {
-                long nowTime = TimeInfo.Instance.ServerNow();
                 long leftTime = self.ReadyTime - (nowTime - self.StartTime);
 
                 if (leftTime > 0)
@@ -75,6 +76,16 @@ namespace ET.Client
                     PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
                     self.View.EG_TopRectTransform.gameObject.SetActive(false);
                     self.GameStart = true;
+                }
+            }
+
+            if (nowTime - self.LastMoLiRegenTime >= 1000)
+            {
+                self.LastMoLiRegenTime = nowTime;
+                self.MoLi += self.MoLiRegenRate;
+                if (self.MoLi > self.MaxMoLi)
+                {
+                    self.MoLi = self.MaxMoLi;
                 }
             }
 
@@ -252,7 +263,6 @@ namespace ET.Client
             }
 
             Vector3 pos = raycastHit.point;
-            pos.y += 1f;
             self.PetMeleePlaceRequest(pos).Coroutine();
         }
 
