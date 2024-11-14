@@ -124,6 +124,7 @@ namespace ET.Client
                     self.PetMingList = petList;
                     self.PetMingPosition = positionList;
                     break;
+                
                 case SceneTypeEnum.MainCityScene:
                     break;
             }

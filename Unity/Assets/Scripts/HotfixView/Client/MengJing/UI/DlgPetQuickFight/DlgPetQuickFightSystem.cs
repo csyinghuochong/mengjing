@@ -122,25 +122,19 @@ namespace ET.Client
             }
 
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            List<long> fightpets = new();
-            foreach (var petBarInfo in petComponent.PetFightList)
-            {
-                fightpets.Add(petBarInfo.PetId);
-            }
             
-            if (fightpets[self.FightIndex - 1] == petid)
+            petComponent.PetFightList[self.FightIndex - 1].PetId = petid;
+            var petBarInfos = petComponent.PetFightList.Where(p => p.PetId == petid && (petComponent.PetFightList.IndexOf(p) != self.FightIndex - 1)).ToList();
+            for (int i = 0; i < petBarInfos.Count; i++)
             {
-                // 休息
-                fightpets[self.FightIndex - 1] = 0;
-            }
-            else
-            {
-                // 出战
-                fightpets[self.FightIndex - 1] = petid;
+                petBarInfos[i].PetId = 0;
             }
 
-            await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
 
+            await PetNetHelper.RequestPetBarSet(self.Root(), petComponent.PetFightList);
+
+            EventSystem.Instance.Publish(self.Root(), new PetFormationUpdate());
+            
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
         }
 

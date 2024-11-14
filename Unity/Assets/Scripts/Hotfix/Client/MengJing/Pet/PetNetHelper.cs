@@ -392,9 +392,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestPetBarSet(Scene root, List<PetBarInfo> petBarInfos)
         {
-            
-            
-            
+ 
             C2M_PetBarSetRequest c2MPetBarSetRequest = C2M_PetBarSetRequest.Create();
             M2C_PetBarSetResponse m2CPetBarSetResponse = await root.GetComponent<ClientSenderCompnent>().Call(c2MPetBarSetRequest) as M2C_PetBarSetResponse;
 
