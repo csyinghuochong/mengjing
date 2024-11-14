@@ -210,5 +210,6 @@ namespace ET.Client
 		WindowID_CellDungeonSettlement,
 		WindowID_PetMeleeMain,
 		WindowID_ButtonPositionSet,
+		WindowID_PetBar,
 	}
 }

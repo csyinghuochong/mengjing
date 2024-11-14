@@ -245,6 +245,74 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_PetBarButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetBarButton == null )
+     			{
+		    		this.m_E_PetBarButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_PetBar");
+     			}
+     			return this.m_E_PetBarButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetBarImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetBarImage == null )
+     			{
+		    		this.m_E_PetBarImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/Viewport/Content/E_PetBar");
+     			}
+     			return this.m_E_PetBarImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SettingButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SettingButton == null )
+     			{
+		    		this.m_E_SettingButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/E_Setting");
+     			}
+     			return this.m_E_SettingButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SettingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SettingImage == null )
+     			{
+		    		this.m_E_SettingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/E_Setting");
+     			}
+     			return this.m_E_SettingImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_CloseButton = null;
@@ -261,6 +329,10 @@ namespace ET.Client
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
+			this.m_E_PetBarButton = null;
+			this.m_E_PetBarImage = null;
+			this.m_E_SettingButton = null;
+			this.m_E_SettingImage = null;
 			this.uiTransform = null;
 		}
 
@@ -278,6 +350,10 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		private UnityEngine.UI.Button m_E_PetBarButton = null;
+		private UnityEngine.UI.Image m_E_PetBarImage = null;
+		private UnityEngine.UI.Button m_E_SettingButton = null;
+		private UnityEngine.UI.Image m_E_SettingImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -18,6 +18,7 @@ namespace ET.Client
             self.View.E_RoseSkillButton.AddListener(self.OnRoseSkill);
             self.View.E_FriendButton.AddListener(self.OnFriend);
             self.View.E_ChengJiuButton.AddListener(self.OnChengJiu);
+            self.View.E_PetBarButton.AddListener(self.OnPetBar);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.Friend, self.Reddot_Frined);
@@ -123,6 +124,12 @@ namespace ET.Client
         private static void OnChengJiu(this DlgFunction self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChengJiu).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnPetBar(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetBar).Coroutine();
             self.OnClose();
         }
     }
