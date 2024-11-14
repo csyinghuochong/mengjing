@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_PlanSetRectTransform
+		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
      		get
      		{
@@ -16,11 +16,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_PlanSetRectTransform == null )
+     			if( this.m_E_PlanSetToggleGroup == null )
      			{
-		    		this.m_EG_PlanSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_PlanSet");
+		    		this.m_E_PlanSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_PlanSet");
      			}
-     			return this.m_EG_PlanSetRectTransform;
+     			return this.m_E_PlanSetToggleGroup;
      		}
      	}
 
@@ -89,14 +89,14 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_EG_PlanSetRectTransform = null;
+			this.m_E_PlanSetToggleGroup = null;
 			this.m_E_PetTypeSetToggleGroup = null;
 			this.m_E_ConfirmButton = null;
 			this.m_E_ConfirmImage = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_PlanSetRectTransform = null;
+		private UnityEngine.UI.ToggleGroup m_E_PlanSetToggleGroup = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmImage = null;
