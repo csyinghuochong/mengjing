@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -488,6 +489,24 @@ namespace ET.Server
              for (int i = 0; i < rolePetInfo.Ks.Count; i++)
              {
                  numericComponent.ApplyValue(rolePetInfo.Ks[i], rolePetInfo.Vs[i], notice);
+             }
+         }
+         
+         public static void InitPetByMasther(this HeroDataComponentS self, Unit master)
+         {
+             Unit unit = self.GetParent<Unit>();
+
+             NumericComponentS unitNumericComponent = unit.GetComponent<NumericComponentS>();
+             NumericComponentS masterNumericComponent = master.GetComponent<NumericComponentS>();
+             List<int> keylist = masterNumericComponent.NumericDic.Keys.ToList();
+             for (int i = 0; i < keylist.Count; i++)
+             {
+                 if (keylist[i] > NumericType.Now_Hp)
+                 {
+                     continue;
+                 }
+
+                 unitNumericComponent.ApplyValue(keylist[i], masterNumericComponent.GetAsLong(keylist[i]));
              }
          }
 
