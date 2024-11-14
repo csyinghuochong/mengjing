@@ -39,10 +39,15 @@ namespace ET.Server
                 {
                     // 切换到宠物
                     petunit.GetComponent<AIComponent>().Stop_2();
+                    petunit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(90106002, 0);
                 }
                 else
                 {
                     petunit.GetComponent<AIComponent>().Begin();
+                    BuffData buffData_2 = new BuffData();
+                    buffData_2.SkillId = 67000278;
+                    buffData_2.BuffId = 90106002; 
+                    petunit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
                 }
             }
 

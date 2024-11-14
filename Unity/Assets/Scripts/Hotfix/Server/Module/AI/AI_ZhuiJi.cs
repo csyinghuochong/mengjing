@@ -58,13 +58,15 @@ namespace ET.Server
                     }
                     if (zhuiji && checktime == 200 && stateComponent.CanMove() == ErrorCode.ERR_Success && i % 5 == 0)
                     {
-                        //Vector3 dir = unit.Position - target.Position;
-                        //float ange = Mathf.Rad2Deg(Mathf.Atan2(dir.x, dir.z));
-                        //float addg = unit.Id % 10 * (unit.Id % 2 == 0 ? 2 : -2);
-                        //Quaternion rotation = Quaternion.Euler(0, ange + addg, 0);
-                        //Vector3 ttt = target.Position + rotation * Vector3.forward * ((float)aiComponent.ActDistance - 0.2f);
-                        //unit.FindPathMoveToAsync(ttt, cancellationToken, false).Coroutine();
-                        unit.FindPathMoveToAsync(target.Position).Coroutine();
+                        float3 dir = unit.Position - target.Position;
+                        float ange = math.degrees(math.atan2(dir.x, dir.z));
+                        float addg = unit.Id % 100;
+                        quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
+                        float3 ttt = target.Position + math.mul(rotation, math.forward()) * 1f;
+                        
+                        unit.FindPathMoveToAsync(ttt).Coroutine();
+                        
+                        //unit.FindPathMoveToAsync(target.Position).Coroutine();
                     }
                 }
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checktime, cancellationToken);
