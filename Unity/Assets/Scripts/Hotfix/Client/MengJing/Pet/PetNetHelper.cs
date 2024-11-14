@@ -390,6 +390,17 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetBarSet(Scene root, List<PetBarInfo> petBarInfos)
+        {
+            
+            
+            
+            C2M_PetBarSetRequest c2MPetBarSetRequest = C2M_PetBarSetRequest.Create();
+            M2C_PetBarSetResponse m2CPetBarSetResponse = await root.GetComponent<ClientSenderCompnent>().Call(c2MPetBarSetRequest) as M2C_PetBarSetResponse;
+
+            return m2CPetBarSetResponse.Error;
+        }
+
         public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet request = C2M_RolePetFormationSet.Create();
