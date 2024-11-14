@@ -132,8 +132,6 @@ namespace ET.Client
 
 
             await PetNetHelper.RequestPetBarSet(self.Root(), petComponent.PetFightList);
-
-            EventSystem.Instance.Publish(self.Root(), new PetFormationUpdate());
             
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
         }

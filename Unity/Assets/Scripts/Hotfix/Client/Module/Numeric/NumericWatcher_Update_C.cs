@@ -138,6 +138,8 @@ namespace ET.Client
                 root.GetComponent<AttackComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
             }
+
+            EventSystem.Instance.Publish(root, new PetFormationUpdate());
         }
     }
 }
