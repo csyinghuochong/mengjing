@@ -339,7 +339,7 @@ namespace ET.Client
             }
         }
     }
-
+    
     [FriendOf(typeof(ES_CellDungeonCellMini))]
     [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
@@ -1201,6 +1201,40 @@ namespace ET.Client
             self.View.ES_MainPetFight_2.UpdateHp();
         }
 
+        public static async ETTask ShowPetSwitchTimer(this DlgMain self)
+        {
+            Scene root = self.Root();
+            for (int  i = 0; i <= 6; i++)
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+                if (unit == null)
+                {
+                    self.View.E_TextPetSwitch.text = string.Empty;
+                    break;
+                }
+
+                int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
+                if (petfightindex == 0)
+                {
+                    self.View.E_TextPetSwitch.text = string.Empty;
+                    break;
+                }
+
+                if (i == 6)
+                {
+                    // 先切换回英雄
+                    PetNetHelper.RequestPetFightSwitch(self.Root(), 0).Coroutine();
+                    break;
+                }
+
+                using (zstring.Block())
+                {
+                    self.View.E_TextPetSwitch.text = zstring.Format("{0}", (6 - i));
+                }
+                await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
+            }
+        }
+
         public static void RefreshFightSet(this DlgMain self)
         {
             Scene root = self.Root();
@@ -1222,6 +1256,7 @@ namespace ET.Client
                 self.View.ES_JoystickMove.MainUnit = pet;
                 self.View.ES_MainSkill.OnEnterScene(pet);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
+                self.ShowPetSwitchTimer().Coroutine();
             }
             else
             {
