@@ -340,6 +340,26 @@ namespace ET.Client
         }
     }
     
+    [Invoke(TimerInvokeType.MainPetSwitchTimer)]
+    public class MainPetSwitchTimer : ATimer<DlgMain>
+    {
+        protected override void Run(DlgMain self)
+        {
+            try
+            {
+                self.ShowPetSwitchTimer();
+            }
+            catch (Exception e)
+            {
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
+            }
+        }
+    }
+
+    
     [FriendOf(typeof(ES_CellDungeonCellMini))]
     [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
@@ -555,6 +575,9 @@ namespace ET.Client
             redPointComponent.UnRegisterReddot(ReddotType.PetSet, self.Reddot_PetSet);
             redPointComponent.UnRegisterReddot(ReddotType.Welfare, self.Reddot_Welfare);
             redPointComponent.UnRegisterReddot(ReddotType.Chat, self.Reddot_MainChat);
+
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.TimerPing);
         }
 
         public static void Reddot_PetSet(this DlgMain self, int num)
@@ -1201,37 +1224,22 @@ namespace ET.Client
             self.View.ES_MainPetFight_2.UpdateHp();
         }
 
-        public static async ETTask ShowPetSwitchTimer(this DlgMain self)
+        public static  void ShowPetSwitchTimer(this DlgMain self)
         {
-            Scene root = self.Root();
-            for (int  i = 0; i <= 6; i++)
+            int leftTime = (int)((self.MainPetSwitchEndTime - TimeHelper.ServerNow()) * 0.001f);
+            if (leftTime <= 0)
             {
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-                if (unit == null)
-                {
-                    self.View.E_TextPetSwitch.text = string.Empty;
-                    break;
-                }
-
-                int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
-                if (petfightindex == 0)
-                {
-                    self.View.E_TextPetSwitch.text = string.Empty;
-                    break;
-                }
-
-                if (i == 6)
-                {
-                    // 先切换回英雄
-                    PetNetHelper.RequestPetFightSwitch(self.Root(), 0).Coroutine();
-                    break;
-                }
-
+                // 先切换回英雄
+                self.View.E_TextPetSwitch.text = string.Empty;
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
+                PetNetHelper.RequestPetFightSwitch(self.Root(), 0).Coroutine();
+            }
+            else
+            {
                 using (zstring.Block())
                 {
-                    self.View.E_TextPetSwitch.text = zstring.Format("{0}", (6 - i));
+                    self.View.E_TextPetSwitch.text = zstring.Format("{0}", leftTime);
                 }
-                await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
             }
         }
 
@@ -1242,6 +1250,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
 
+            root.GetComponent<TimerComponent>().Remove(ref self.MainPetSwitchTimer);
             if (petfightindex > 0)
             {
                 // FlyTipComponent.Instance.ShowFlyTip($"切换成宠物 Petfightindex：{petfightindex}");
@@ -1256,7 +1265,9 @@ namespace ET.Client
                 self.View.ES_JoystickMove.MainUnit = pet;
                 self.View.ES_MainSkill.OnEnterScene(pet);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
-                self.ShowPetSwitchTimer().Coroutine();
+                self.View.E_TextPetSwitch.text = "6";
+                self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * 6;
+                self.MainPetSwitchTimer = root.GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MainPetSwitchTimer, self);
             }
             else
             {
@@ -1268,6 +1279,8 @@ namespace ET.Client
                 self.View.ES_JoystickMove.MainUnit = unit;
                 self.View.ES_MainSkill.OnEnterScene(unit);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
+                self.View.E_TextPetSwitch.text = string.Empty;
+                self.MainPetSwitchEndTime = 0;
             }
 
             self.RefreshMainPetFightUI();

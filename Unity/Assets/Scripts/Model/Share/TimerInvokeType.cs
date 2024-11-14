@@ -105,5 +105,6 @@
         public const int UICellDungeonSettlement = 367;
         public const int UIPetMeleeMain = 368;
         public const int MainPetShowQuickFightTimer = 369;
+        public const int MainPetSwitchTimer = 370;
     }
 }

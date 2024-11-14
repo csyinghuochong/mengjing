@@ -12,6 +12,7 @@ namespace ET.Client
 		public int FightIndex;
 		public long Timer;
 		public bool LongPress;
+		public long LastTimer;
 		
 		public UnityEngine.UI.Image E_PetHPImage
      	{

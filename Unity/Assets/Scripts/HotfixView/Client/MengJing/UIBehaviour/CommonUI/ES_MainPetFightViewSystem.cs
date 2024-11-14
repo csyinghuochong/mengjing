@@ -46,17 +46,32 @@ namespace ET.Client
         private static void PointerDown(this ES_MainPetFight self, PointerEventData pdata)
         {
             self.LongPress = false;
-            self.Timer = self.Root().GetComponent<TimerComponent>()
-                    .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetShowQuickFightTimer, self);
+            //self.Timer = self.Root().GetComponent<TimerComponent>()
+            //        .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetShowQuickFightTimer, self);
         }
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            if (self.LongPress == false)
+            if (self.LongPress)
             {
-                PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
+               return;
             }
+
+            int leftTime = (int)(0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
+            if ( leftTime > 0  )
+            {
+                string lefttimestr = "{0}秒后可以切换！";
+                using (zstring.Block())
+                {
+                    lefttimestr = zstring.Format(lefttimestr,leftTime);
+                }
+                FlyTipComponent.Instance.ShowFlyTip(lefttimestr);
+                return;
+            }
+
+            self.LastTimer = TimeHelper.ServerNow() + TimeHelper.Minute;
+            PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
         }
 
         public static async ETTask OpenUI(this ES_MainPetFight self)
