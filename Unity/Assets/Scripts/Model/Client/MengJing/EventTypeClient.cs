@@ -585,6 +585,13 @@ namespace ET.Client
     public struct PetFormationUpdate
     {
     }
+    
+    public struct StateChange
+    {
+        public M2C_UnitStateUpdate m2C_UnitStateUpdate;
+        public Unit Unit;
+    }
+
 
     public struct EnterCellDungeon
     {

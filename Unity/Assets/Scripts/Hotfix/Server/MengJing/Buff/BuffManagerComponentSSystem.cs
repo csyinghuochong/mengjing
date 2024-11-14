@@ -83,13 +83,12 @@ namespace ET.Server
             }
         }
         
-        public static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
+        private static void OnRemoveBuffItem(this BuffManagerComponentS self, BuffS buffHandler)
         {
             M2C_UnitBuffRemove m2C_UnitBuffUpdate = M2C_UnitBuffRemove.Create();
             m2C_UnitBuffUpdate.UnitIdBelongTo = self.GetParent<Unit>().Id;
             m2C_UnitBuffUpdate.BuffID = buffHandler.mBuffConfig.Id;
             MapMessageHelper.BroadcastBuff(self.GetParent<Unit>(), m2C_UnitBuffUpdate, buffHandler.mBuffConfig, self.SceneType);
-
         }
         
         public static int GetBuffIndexById(this BuffManagerComponentS self, BuffS buffHandler)
@@ -240,8 +239,7 @@ namespace ET.Server
             {
                 if (buffIist.Contains(self.m_Buffs[i].mBuffConfig.Id))
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -258,8 +256,7 @@ namespace ET.Server
             {
                 if (self.m_Buffs[i].mBuffConfig.Remove == removetype)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -273,8 +270,7 @@ namespace ET.Server
                 if (self.m_Buffs[i].mBuffConfig.Id == buffId &&
                     (self.m_Buffs[i].TheUnitFrom.Id == unitId || unitId == 0))
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -287,8 +283,7 @@ namespace ET.Server
             {
                 if (nowAllBuffList[i].mSkillConf.Id == skillid)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
                 }
             }
         }
@@ -928,8 +923,7 @@ namespace ET.Server
                 SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffId);
                 if (skillBuffConfig.BuffType == 2 && skillBuffConfig.buffParameterType == 13)
                 {
-                    self.OnRemoveBuffItem(self.m_Buffs[i]);
-                    self.m_Buffs.RemoveAt(i);
+                    self.m_Buffs[i].BuffState = BuffState.WaitRemove;
 
                     break;
                 }

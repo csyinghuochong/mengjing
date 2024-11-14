@@ -4,55 +4,57 @@ namespace ET.Server
 {
     public class TuoGuan_Follow : AAIHandler
     {
+        
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-            Unit unit = aiComponent.GetParent<Unit>();
-            UnitComponent unitComponent = unit.GetParent<UnitComponent>();
-            int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
-            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            Unit master = petComponentS.GetFightPetByIndex(petfightindex);
-            if (master == null)
-            {
-                return 1;
-            }
-
-            float distance = math.distance(unit.Position, master.Position);
-            AttackRecordComponent attackRecordComponent = master.GetComponent<AttackRecordComponent>();
-            if (distance > aiComponent.ActRange) //超出追击距离，返回
-            {
-                aiComponent.TargetID = 0;
-                attackRecordComponent.PetLockId = 0;
-                return 0;
-            }
-
-            long mastaerAttackId = attackRecordComponent.PetLockId;
-            Unit enemyUnit = unitComponent.Get(mastaerAttackId);
-            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
-            {
-                mastaerAttackId = attackRecordComponent.AttackingId;
-                enemyUnit = unitComponent.Get(mastaerAttackId);
-            }
-
-            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
-            {
-                mastaerAttackId = attackRecordComponent.BeAttackId;
-                enemyUnit = unitComponent.Get(mastaerAttackId);
-            }
-
-            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
-            {
-                enemyUnit = unitComponent.Get(aiComponent.TargetID);
-            }
-
-            if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))
-            {
-                aiComponent.TargetID = 0;
-                return 0;
-            }
-
-            distance = math.distance(unit.Position, enemyUnit.Position);
-            aiComponent.TargetID = enemyUnit.Id;
-            return (aiComponent.TargetID > 0) ? 1 : 0;
+            return 0;
+            // Unit unit = aiComponent.GetParent<Unit>();
+            // UnitComponent unitComponent = unit.GetParent<UnitComponent>();
+            // int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
+            // PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            // Unit master = petComponentS.GetFightPetByIndex(petfightindex);
+            // if (master == null)
+            // {
+            //     return 1;
+            // }
+            //
+            // float distance = math.distance(unit.Position, master.Position);
+            // AttackRecordComponent attackRecordComponent = master.GetComponent<AttackRecordComponent>();
+            // if (distance > aiComponent.ActRange) //超出追击距离，返回
+            // {
+            //     aiComponent.TargetID = 0;
+            //     attackRecordComponent.PetLockId = 0;
+            //     return 0;
+            // }
+            //
+            // long mastaerAttackId = attackRecordComponent.PetLockId;
+            // Unit enemyUnit = unitComponent.Get(mastaerAttackId);
+            // if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            // {
+            //     mastaerAttackId = attackRecordComponent.AttackingId;
+            //     enemyUnit = unitComponent.Get(mastaerAttackId);
+            // }
+            //
+            // if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            // {
+            //     mastaerAttackId = attackRecordComponent.BeAttackId;
+            //     enemyUnit = unitComponent.Get(mastaerAttackId);
+            // }
+            //
+            // if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            // {
+            //     enemyUnit = unitComponent.Get(aiComponent.TargetID);
+            // }
+            //
+            // if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))
+            // {
+            //     aiComponent.TargetID = 0;
+            //     return 0;
+            // }
+            //
+            // distance = math.distance(unit.Position, enemyUnit.Position);
+            // aiComponent.TargetID = enemyUnit.Id;
+            // return (aiComponent.TargetID > 0) ? 1 : 0;
         }
 
         private static float3 GetFollowPosition(Unit unit, Unit master)

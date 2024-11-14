@@ -64,15 +64,19 @@
                             PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                             long petId = petComponentC.PetFightList[petfightindex - 1].PetId;
                             Unit pet = scene.GetComponent<UnitComponent>().Get(petId);
+                            
                             // 切换成宠物特效
-                            FunctionEffect.PlaySelfEffect(pet, 200004);
+                            //FunctionEffect.PlaySelfEffect(pet, 200004);
                         }
                         else
                         {
                             // 切换成英雄特效
                             FunctionEffect.PlaySelfEffect(args.Defend, 200004);
                         }
+                        
+                        EventSystem.Instance.Publish(root, new PetFormationUpdate());
                     }
+                    
                     else
                     {
                         if (petfightindex > 0)
