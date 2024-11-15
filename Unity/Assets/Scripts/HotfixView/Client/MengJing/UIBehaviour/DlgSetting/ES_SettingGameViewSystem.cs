@@ -260,14 +260,14 @@ namespace ET.Client
 
         public static void CameraHorizontalOffset(this ES_SettingGame self, float value)
         {
-            float va = -2 + value * 4;
+            float va = -4 + value * 8;
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, va);
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().HorizontalOffset = va;
         }
 
         public static void CameraVerticalOffset(this ES_SettingGame self, float value)
         {
-            float va = -2 + value * 4;
+            float va = -4 + value * 8;
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, va);
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().VerticalOffset = va;
         }
@@ -415,9 +415,9 @@ namespace ET.Client
             }
 
             self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().value =
-                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset) + 2) / 4;
+                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset) + 4) / 8;
             self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().value =
-                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset) + 2) / 4;
+                    (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset) + 4) / 8;
 
             self.EG_ZhuBoSetRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) == 1);
 
