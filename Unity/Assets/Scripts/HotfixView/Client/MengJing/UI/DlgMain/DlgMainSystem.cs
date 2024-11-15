@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -339,7 +340,7 @@ namespace ET.Client
             }
         }
     }
-    
+
     [Invoke(TimerInvokeType.MainPetSwitchTimer)]
     public class MainPetSwitchTimer : ATimer<DlgMain>
     {
@@ -359,7 +360,6 @@ namespace ET.Client
         }
     }
 
-    
     [FriendOf(typeof(ES_CellDungeonCellMini))]
     [FriendOf(typeof(ES_MainPetFight))]
     [FriendOf(typeof(ES_DigTreasure))]
@@ -516,6 +516,10 @@ namespace ET.Client
             float lenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
             MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
             cameraComponent.LenDepth = lenDepth <= 0 ? 1 : lenDepth;
+            cameraComponent.OffsetPostion =
+                    new(PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_X, 0),
+                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Y, 10f),
+                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Z, -6f));
             cameraComponent.HorizontalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset);
             cameraComponent.VerticalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset);
 
@@ -1224,7 +1228,7 @@ namespace ET.Client
             self.View.ES_MainPetFight_2.UpdateHp();
         }
 
-        public static  void ShowPetSwitchTimer(this DlgMain self)
+        public static void ShowPetSwitchTimer(this DlgMain self)
         {
             int leftTime = (int)((self.MainPetSwitchEndTime - TimeHelper.ServerNow()) * 0.001f);
             if (leftTime <= 0)

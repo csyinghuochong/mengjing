@@ -19,8 +19,11 @@ namespace ET.Client
         public const string ChapterDifficulty = "MJ_ChapterDifficulty";
         public const string LenDepth = "MJ_LenDepth";
         public const string CameraHorizontalOffset = "MJ_CameraHorizontalOffset";
-        public const string CameraVerticalOffset =  "MJ_CameraVerticalOffset";
+        public const string CameraVerticalOffset = "MJ_CameraVerticalOffset";
         public const string RotaAngle = "MJ_RotaAngle";
+        public const string OffsetPostion_X = "MJ_OffsetPostion_X";
+        public const string OffsetPostion_Y = "MJ_OffsetPostion_Y";
+        public const string OffsetPostion_Z = "MJ_OffsetPostion_Z";
         public const string ZhuBo = "MJ_ZhuBo";
         public const string Localization = "MJ_Localization";
 
@@ -49,9 +52,9 @@ namespace ET.Client
             return PlayerPrefs.GetInt(key);
         }
 
-        public static float GetFloat(string key)
+        public static float GetFloat(string key, float defaultValue = 0)
         {
-            return PlayerPrefs.GetFloat(key);
+            return PlayerPrefs.GetFloat(key, defaultValue);
         }
 
         public static void SetString(string key, string value)
@@ -59,7 +62,7 @@ namespace ET.Client
             PlayerPrefs.SetString(key, value);
         }
 
-        public static string GetString(string key,string defaultValue = "")
+        public static string GetString(string key, string defaultValue = "")
         {
             return PlayerPrefs.GetString(key, defaultValue);
         }

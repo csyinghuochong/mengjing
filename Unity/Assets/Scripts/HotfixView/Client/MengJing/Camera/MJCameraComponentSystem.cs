@@ -26,7 +26,6 @@ namespace ET.Client
         {
             self.MainCamera = Camera.main;
             //GameObject.Find("Global/MainCamera").GetComponent<Camera>();
-            self.OffsetPostion = new float3(0, 10f, -6f);
             self.PullRate = 1f;
             self.CameraMoveType = CameraMoveType.Normal;
             self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -339,10 +338,12 @@ namespace ET.Client
 
         public static void CalculateOffset(this MJCameraComponent self)
         {
-            self.OffsetPostion.y = self.Distance * Mathf.Sin(self.OffsetAngleY * self.ANGLE_CONVERTER);
+            Vector3 pos = new Vector3(0, 0, 0);
+            pos.y = self.Distance * Mathf.Sin(self.OffsetAngleY * self.ANGLE_CONVERTER);
             float newRadius = self.Distance * Mathf.Cos(self.OffsetAngleY * self.ANGLE_CONVERTER);
-            self.OffsetPostion.x = newRadius * Mathf.Sin(self.OffsetAngleX * self.ANGLE_CONVERTER);
-            self.OffsetPostion.z = -newRadius * Mathf.Cos(self.OffsetAngleX * self.ANGLE_CONVERTER);
+            pos.x = newRadius * Mathf.Sin(self.OffsetAngleX * self.ANGLE_CONVERTER);
+            pos.z = -newRadius * Mathf.Cos(self.OffsetAngleX * self.ANGLE_CONVERTER);
+            self.OffsetPostion = pos;
         }
 
         //开始旋转，纪录当前偏移角度，用于复原
