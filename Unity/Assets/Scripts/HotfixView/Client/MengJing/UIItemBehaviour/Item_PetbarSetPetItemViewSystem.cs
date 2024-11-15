@@ -37,6 +37,7 @@ namespace ET.Client
             {
                 self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
             }
+            self.E_XuanZhongImage.gameObject.SetActive(false);
         }
     }
 }

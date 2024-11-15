@@ -98,6 +98,91 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_PetbarSetSkillItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_PetbarSetSkillItems");
+     			}
+     			return this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ActivateSkillButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivateSkillButton == null )
+     			{
+		    		this.m_E_ActivateSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ActivateSkill");
+     			}
+     			return this.m_E_ActivateSkillButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ActivateSkillImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ActivateSkillImage == null )
+     			{
+		    		this.m_E_ActivateSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ActivateSkill");
+     			}
+     			return this.m_E_ActivateSkillImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_EquipSkillButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_EquipSkillButton == null )
+     			{
+		    		this.m_E_EquipSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_EquipSkill");
+     			}
+     			return this.m_E_EquipSkillButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_EquipSkillImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_EquipSkillImage == null )
+     			{
+		    		this.m_E_EquipSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_EquipSkill");
+     			}
+     			return this.m_E_EquipSkillImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_IconImage
      	{
      		get
@@ -134,6 +219,11 @@ namespace ET.Client
 			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 			this.m_E_ConfirmButton = null;
 			this.m_E_ConfirmImage = null;
+			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
+			this.m_E_ActivateSkillButton = null;
+			this.m_E_ActivateSkillImage = null;
+			this.m_E_EquipSkillButton = null;
+			this.m_E_EquipSkillImage = null;
 			this.m_E_IconImage = null;
 			this.uiTransform = null;
 		}
@@ -143,6 +233,11 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;
 		private UnityEngine.UI.Image m_E_ConfirmImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_ActivateSkillButton = null;
+		private UnityEngine.UI.Image m_E_ActivateSkillImage = null;
+		private UnityEngine.UI.Button m_E_EquipSkillButton = null;
+		private UnityEngine.UI.Image m_E_EquipSkillImage = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		public Transform uiTransform = null;
 	}
