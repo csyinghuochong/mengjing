@@ -92,8 +92,8 @@ namespace ET.Client
             Vector3 dre = unitPos - self.MainCamera.transform.position;
             self.MainCamera.transform.rotation = Quaternion.LookRotation(dre);
             Vector3 camPos = self.MainCamera.transform.position;
-            camPos.x += self.HorizontalOffset;
-            camPos.y += self.VerticalOffset;
+            camPos += self.MainCamera.transform.up * self.VerticalOffset;
+            camPos += self.MainCamera.transform.right * self.HorizontalOffset;
             self.MainCamera.transform.position = camPos;
         }
 

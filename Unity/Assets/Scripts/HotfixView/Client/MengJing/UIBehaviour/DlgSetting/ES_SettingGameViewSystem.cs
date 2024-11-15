@@ -235,10 +235,13 @@ namespace ET.Client
             self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, value == 0 ? 1 : 0);
 
-            Vector3 offsetPostion = self.Root().CurrentScene().GetComponent<MJCameraComponent>().OffsetPostion;
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, offsetPostion.x);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, offsetPostion.y);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, offsetPostion.z);
+            if (value == 1)
+            {
+                Vector3 offsetPostion = self.Root().CurrentScene().GetComponent<MJCameraComponent>().OffsetPostion;
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, offsetPostion.x);
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, offsetPostion.y);
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, offsetPostion.z);
+            }
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(value == 0);
         }
