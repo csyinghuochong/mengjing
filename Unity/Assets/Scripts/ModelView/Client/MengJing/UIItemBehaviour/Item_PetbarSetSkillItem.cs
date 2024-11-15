@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetbarSetSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetbarSetSkillItem> 
 	{
+		public int SkillId;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

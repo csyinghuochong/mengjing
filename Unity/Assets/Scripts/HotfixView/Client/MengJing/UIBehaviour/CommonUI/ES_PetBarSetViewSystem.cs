@@ -36,6 +36,12 @@ namespace ET.Client
         {
         }
 
+        private static void OnShowSkill(this ES_PetBarSet self, RolePetInfo petInfo)
+        {
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+            self.E_PetbarSetSkillItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+        }
+
         private static void OnPetTypeSet(this ES_PetBarSet self, int index)
         {
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
