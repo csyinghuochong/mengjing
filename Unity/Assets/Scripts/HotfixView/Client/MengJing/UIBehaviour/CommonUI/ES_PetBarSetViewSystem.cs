@@ -18,6 +18,9 @@ namespace ET.Client
             self.E_PetTypeSetToggleGroup.AddListener(self.OnPetTypeSet);
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetItemsRefresh);
             self.E_ConfirmButton.AddListenerAsync(self.OnConfirm);
+
+            self.E_PlanSetToggleGroup.OnSelectIndex(0);
+            self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -32,6 +35,26 @@ namespace ET.Client
 
         private static void OnPetTypeSet(this ES_PetBarSet self, int index)
         {
+            List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
+            self.ShowRolePetInfos.Clear();
+            for (int i = 0; i < rolePetInfos.Count; i++)
+            {
+                if (index == 0)
+                {
+                    self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                    continue;
+                }
+
+                PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfos[i].ConfigId);
+                if (petConfig.AttackType + 1 == index)
+                {
+                    self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                    continue;
+                }
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemPetbarSetPetItems, self.ShowRolePetInfos.Count);
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
         }
 
         private static void OnPetBarSetItemsRefresh(this ES_PetBarSet self, Transform transform, int index)
@@ -46,6 +69,7 @@ namespace ET.Client
             item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
             item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
             item.E_TouchEventTrigger.gameObject.SetActive(true);
+            item.OnInitUI(self.ShowRolePetInfos[index]);
         }
 
         private static void OnPointerDown(this ES_PetBarSet self, PointerEventData pdata)

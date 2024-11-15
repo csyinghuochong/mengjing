@@ -177,6 +177,8 @@ namespace ET
 		public int[] Skin { get; set; }
 		/// <summary>宠物皮肤激活概率</summary>
 		public int[] SkinPro { get; set; }
+		/// <summary>攻击方式</summary>
+		public int AttackType { get; set; }
 
 	}
 }

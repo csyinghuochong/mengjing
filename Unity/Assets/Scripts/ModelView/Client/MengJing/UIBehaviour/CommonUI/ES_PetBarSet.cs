@@ -6,11 +6,12 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public long ClickTime;
 		public bool IsDrag;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems;
+		public List<RolePetInfo> ShowRolePetInfos = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
