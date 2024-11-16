@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1352207199584384182}
   - {fileID: 2300479301200907624}
@@ -90,6 +91,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 4
@@ -122,6 +124,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -142,7 +145,7 @@ MonoBehaviour:
   m_Text: FX_splash_bug_air/floor
 --- !u!95 &218680839
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,10 +158,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &218680838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +209,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 1
@@ -236,6 +242,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -256,7 +263,7 @@ MonoBehaviour:
   m_Text: FX_splash_charge_floor
 --- !u!95 &463853931
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -269,10 +276,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &463853930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +327,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 12
@@ -350,6 +360,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -370,7 +381,7 @@ MonoBehaviour:
   m_Text: FX_splash_dust_floor
 --- !u!95 &612343625
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -383,10 +394,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &612343624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +445,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 10
@@ -464,6 +478,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -486,7 +501,7 @@ MonoBehaviour:
 '
 --- !u!95 &822255051
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -499,10 +514,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &822255050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,6 +565,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 19
@@ -580,6 +598,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -600,7 +619,7 @@ MonoBehaviour:
   m_Text: FX_splash_meteor_floor
 --- !u!95 &841917745
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -613,10 +632,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &841917744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,6 +683,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 17
@@ -694,6 +716,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -714,7 +737,7 @@ MonoBehaviour:
   m_Text: FX_splash_thorn_01_floor
 --- !u!95 &1008527102
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -727,10 +750,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1008527101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,6 +801,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 7
@@ -808,6 +834,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -828,7 +855,7 @@ MonoBehaviour:
   m_Text: FX_splash_energy_01_floor
 --- !u!95 &1033886378
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -841,10 +868,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1033886377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +919,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 5
@@ -922,6 +952,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -942,7 +973,7 @@ MonoBehaviour:
   m_Text: FX_splash_fire_air/floor
 --- !u!95 &1233790142
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -955,10 +986,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1233790141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,6 +1037,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 0
@@ -1036,6 +1070,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1058,7 +1093,7 @@ MonoBehaviour:
 '
 --- !u!95 &1280694860
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1071,10 +1106,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1280694859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,6 +1157,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 20
@@ -1152,6 +1190,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1172,7 +1211,7 @@ MonoBehaviour:
   m_Text: FX_splash_flash_air/floor
 --- !u!95 &1345422537
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1185,10 +1224,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1345422536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1275,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 6
@@ -1266,6 +1308,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1286,7 +1329,7 @@ MonoBehaviour:
   m_Text: FX_splash_coin_air/floor
 --- !u!95 &1375488770
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1299,10 +1342,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1375488769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1393,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 13
@@ -1380,6 +1426,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1400,7 +1447,7 @@ MonoBehaviour:
   m_Text: FX_splash_tar_floor
 --- !u!95 &1430330187
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1413,10 +1460,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1430330186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1462,6 +1511,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 9
@@ -1494,6 +1544,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1514,7 +1565,7 @@ MonoBehaviour:
   m_Text: FX_splash_gas_air/floor
 --- !u!95 &1510321401
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1527,10 +1578,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1510321400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,6 +1629,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 3
@@ -1608,6 +1662,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1628,7 +1683,7 @@ MonoBehaviour:
   m_Text: FX_splash_blood_air/floor
 --- !u!95 &1717233994
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1641,10 +1696,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1717233993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,6 +1747,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 2
@@ -1722,6 +1780,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1744,7 +1803,7 @@ MonoBehaviour:
 '
 --- !u!95 &1758588415
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1757,10 +1816,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1758588414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1806,6 +1867,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 8
@@ -1838,6 +1900,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1858,7 +1921,7 @@ MonoBehaviour:
   m_Text: FX_splash_energy_02_floor
 --- !u!95 &1809279507
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1871,10 +1934,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1809279506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1920,6 +1985,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 16
@@ -1952,6 +2018,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1974,7 +2041,7 @@ MonoBehaviour:
 '
 --- !u!95 &1837934645
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1987,10 +2054,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1837934644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2035,6 +2104,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1280694858}
   - {fileID: 463853929}
@@ -2108,6 +2178,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1944955049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,6 +2226,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 18
@@ -2187,6 +2259,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2207,7 +2280,7 @@ MonoBehaviour:
   m_Text: FX_splash_thorn_02_floor
 --- !u!95 &1999274372
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2220,10 +2293,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1999274371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,6 +2344,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 11
@@ -2301,6 +2377,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2321,7 +2398,7 @@ MonoBehaviour:
   m_Text: FX_splash_stone_air/floor
 --- !u!95 &2009802077
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2334,10 +2411,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2009802076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2383,6 +2462,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 14
@@ -2415,6 +2495,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2435,7 +2516,7 @@ MonoBehaviour:
   m_Text: FX_splash_hand_floor
 --- !u!95 &2011049491
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2448,10 +2529,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2011049490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,6 +2580,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1944955048}
   m_RootOrder: 15
@@ -2529,6 +2613,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2549,7 +2634,7 @@ MonoBehaviour:
   m_Text: FX_splash_reaper_floor
 --- !u!95 &2089266189
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2562,10 +2647,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2089266188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,6 +2695,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9208228}
   - {fileID: 1944955048}
@@ -2712,10 +2800,6 @@ PlayableDirector:
   - key: {fileID: 0}
     value: {fileID: 1999274369}
   - key: {fileID: -723527650810748517, guid: e3763ae98ba70e44c8dc32990dd0d966, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 2832949368156518156, guid: e3763ae98ba70e44c8dc32990dd0d966, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: 9176508297631950444, guid: e3763ae98ba70e44c8dc32990dd0d966, type: 2}
     value: {fileID: 0}
   - key: {fileID: -2885746065037416249, guid: e3763ae98ba70e44c8dc32990dd0d966, type: 2}
     value: {fileID: 1280694857}
@@ -3255,15 +3339,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9336625473d87384692aaf5616d61f18, type: 3}
---- !u!4 &8426298250617361721 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8426298250506289541, guid: 9336625473d87384692aaf5616d61f18,
-    type: 3}
-  m_PrefabInstance: {fileID: 124212412}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8426298250617361716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8426298250506289544, guid: 9336625473d87384692aaf5616d61f18,
+    type: 3}
+  m_PrefabInstance: {fileID: 124212412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8426298250617361721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8426298250506289541, guid: 9336625473d87384692aaf5616d61f18,
     type: 3}
   m_PrefabInstance: {fileID: 124212412}
   m_PrefabAsset: {fileID: 0}
@@ -3575,15 +3659,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 586643af911dc0b4d9a84adc0a535df6, type: 3}
---- !u!1 &2311169646221512530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2311169645915646850, guid: 586643af911dc0b4d9a84adc0a535df6,
-    type: 3}
-  m_PrefabInstance: {fileID: 314926288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2311169646221512529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2311169645915646849, guid: 586643af911dc0b4d9a84adc0a535df6,
+    type: 3}
+  m_PrefabInstance: {fileID: 314926288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2311169646221512530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2311169645915646850, guid: 586643af911dc0b4d9a84adc0a535df6,
     type: 3}
   m_PrefabInstance: {fileID: 314926288}
   m_PrefabAsset: {fileID: 0}
@@ -3704,15 +3788,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fb9ea4cdc40aa34b9aebd49f55161f4, type: 3}
---- !u!1 &8542656124205817331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8542656124520079728, guid: 8fb9ea4cdc40aa34b9aebd49f55161f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 365952131}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8542656124205817326 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8542656124520079725, guid: 8fb9ea4cdc40aa34b9aebd49f55161f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 365952131}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8542656124205817331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8542656124520079728, guid: 8fb9ea4cdc40aa34b9aebd49f55161f4,
     type: 3}
   m_PrefabInstance: {fileID: 365952131}
   m_PrefabAsset: {fileID: 0}
@@ -4049,12 +4133,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98562a1415248b94a93ec861efc50ee8, type: 3}
---- !u!1 &8441882909133327686 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8441882908599529461, guid: 98562a1415248b94a93ec861efc50ee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 550593203}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1769051784708109513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769051784159778426, guid: 98562a1415248b94a93ec861efc50ee8,
@@ -4064,6 +4142,12 @@ Transform:
 --- !u!1 &1769051784708109514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1769051784159778425, guid: 98562a1415248b94a93ec861efc50ee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 550593203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8441882909133327686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8441882908599529461, guid: 98562a1415248b94a93ec861efc50ee8,
     type: 3}
   m_PrefabInstance: {fileID: 550593203}
   m_PrefabAsset: {fileID: 0}
@@ -4222,15 +4306,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68dc6249797585744ac310830aac1e7e, type: 3}
---- !u!4 &2264145547795917996 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2264145547278940078, guid: 68dc6249797585744ac310830aac1e7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 562010882}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2264145547795917993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2264145547278940075, guid: 68dc6249797585744ac310830aac1e7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 562010882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2264145547795917996 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2264145547278940078, guid: 68dc6249797585744ac310830aac1e7e,
     type: 3}
   m_PrefabInstance: {fileID: 562010882}
   m_PrefabAsset: {fileID: 0}
@@ -4353,15 +4437,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6affd98f0f548478fc74ce96fab20d, type: 3}
---- !u!1 &7759373024274553854 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7759373024703531282, guid: 2a6affd98f0f548478fc74ce96fab20d,
-    type: 3}
-  m_PrefabInstance: {fileID: 647090924}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7759373024274553841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7759373024703531293, guid: 2a6affd98f0f548478fc74ce96fab20d,
+    type: 3}
+  m_PrefabInstance: {fileID: 647090924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7759373024274553854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7759373024703531282, guid: 2a6affd98f0f548478fc74ce96fab20d,
     type: 3}
   m_PrefabInstance: {fileID: 647090924}
   m_PrefabAsset: {fileID: 0}
@@ -4510,15 +4594,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44041482d8efa37429c6834fc46d2047, type: 3}
---- !u!1 &4353560721740646917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4353560722159399810, guid: 44041482d8efa37429c6834fc46d2047,
-    type: 3}
-  m_PrefabInstance: {fileID: 655800711}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4353560721740646914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4353560722159399813, guid: 44041482d8efa37429c6834fc46d2047,
+    type: 3}
+  m_PrefabInstance: {fileID: 655800711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4353560721740646917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4353560722159399810, guid: 44041482d8efa37429c6834fc46d2047,
     type: 3}
   m_PrefabInstance: {fileID: 655800711}
   m_PrefabAsset: {fileID: 0}
@@ -4856,15 +4940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a73f28e4c14484eb35c87da6bfcd60, type: 3}
---- !u!1 &529883519006237526 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 529883519366634463, guid: 09a73f28e4c14484eb35c87da6bfcd60,
-    type: 3}
-  m_PrefabInstance: {fileID: 714995849}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &529883519006237525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 529883519366634460, guid: 09a73f28e4c14484eb35c87da6bfcd60,
+    type: 3}
+  m_PrefabInstance: {fileID: 714995849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &529883519006237526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 529883519366634463, guid: 09a73f28e4c14484eb35c87da6bfcd60,
     type: 3}
   m_PrefabInstance: {fileID: 714995849}
   m_PrefabAsset: {fileID: 0}
@@ -5198,15 +5282,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71692ada9e8d3fe4387f2bc9cf2920e4, type: 3}
---- !u!1 &278160718818344606 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 278160718468755412, guid: 71692ada9e8d3fe4387f2bc9cf2920e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 762204490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &278160718818344603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 278160718468755409, guid: 71692ada9e8d3fe4387f2bc9cf2920e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 762204490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &278160718818344606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 278160718468755412, guid: 71692ada9e8d3fe4387f2bc9cf2920e4,
     type: 3}
   m_PrefabInstance: {fileID: 762204490}
   m_PrefabAsset: {fileID: 0}
@@ -5337,15 +5421,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 948567ac5c4d5cb429246f21fa1532a6, type: 3}
---- !u!4 &8829272897644574165 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8829272898433656444, guid: 948567ac5c4d5cb429246f21fa1532a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 822711209}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8829272897644574164 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829272898433656445, guid: 948567ac5c4d5cb429246f21fa1532a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 822711209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8829272897644574165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8829272898433656444, guid: 948567ac5c4d5cb429246f21fa1532a6,
     type: 3}
   m_PrefabInstance: {fileID: 822711209}
   m_PrefabAsset: {fileID: 0}
@@ -5448,15 +5532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9f38e3e878407041805eff8496bd057, type: 3}
---- !u!4 &3563469977419771749 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3563469976464276730, guid: b9f38e3e878407041805eff8496bd057,
-    type: 3}
-  m_PrefabInstance: {fileID: 959697823}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3563469977419771744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3563469976464276735, guid: b9f38e3e878407041805eff8496bd057,
+    type: 3}
+  m_PrefabInstance: {fileID: 959697823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3563469977419771749 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563469976464276730, guid: b9f38e3e878407041805eff8496bd057,
     type: 3}
   m_PrefabInstance: {fileID: 959697823}
   m_PrefabAsset: {fileID: 0}
@@ -6070,15 +6154,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d050c9203b11245409eee9ea6c96a907, type: 3}
---- !u!4 &3995097759649617582 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3995097758238481967, guid: d050c9203b11245409eee9ea6c96a907,
-    type: 3}
-  m_PrefabInstance: {fileID: 1411139713}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3995097759649617581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3995097758238481964, guid: d050c9203b11245409eee9ea6c96a907,
+    type: 3}
+  m_PrefabInstance: {fileID: 1411139713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3995097759649617582 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3995097758238481967, guid: d050c9203b11245409eee9ea6c96a907,
     type: 3}
   m_PrefabInstance: {fileID: 1411139713}
   m_PrefabAsset: {fileID: 0}
@@ -6760,15 +6844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce05724196f2628439b43b2a1173cc9b, type: 3}
---- !u!1 &2853581550839466541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2853581551338129099, guid: ce05724196f2628439b43b2a1173cc9b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1652231398}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2853581550839466536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2853581551338129102, guid: ce05724196f2628439b43b2a1173cc9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1652231398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2853581550839466541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2853581551338129099, guid: ce05724196f2628439b43b2a1173cc9b,
     type: 3}
   m_PrefabInstance: {fileID: 1652231398}
   m_PrefabAsset: {fileID: 0}
@@ -6987,15 +7071,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf80e5d03c2e6746a9a9a09340f3063, type: 3}
---- !u!1 &6413747094301177177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6413747094867669440, guid: bdf80e5d03c2e6746a9a9a09340f3063,
-    type: 3}
-  m_PrefabInstance: {fileID: 1740899481}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6413747094301177156 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6413747094867669469, guid: bdf80e5d03c2e6746a9a9a09340f3063,
+    type: 3}
+  m_PrefabInstance: {fileID: 1740899481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6413747094301177177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6413747094867669440, guid: bdf80e5d03c2e6746a9a9a09340f3063,
     type: 3}
   m_PrefabInstance: {fileID: 1740899481}
   m_PrefabAsset: {fileID: 0}
@@ -7480,15 +7564,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c952c9c37aca194c9b858e20164ca63, type: 3}
---- !u!4 &1971053168222339874 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1971053167397780630, guid: 1c952c9c37aca194c9b858e20164ca63,
-    type: 3}
-  m_PrefabInstance: {fileID: 1902788532}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1971053168222339873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1971053167397780629, guid: 1c952c9c37aca194c9b858e20164ca63,
+    type: 3}
+  m_PrefabInstance: {fileID: 1902788532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1971053168222339874 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1971053167397780630, guid: 1c952c9c37aca194c9b858e20164ca63,
     type: 3}
   m_PrefabInstance: {fileID: 1902788532}
   m_PrefabAsset: {fileID: 0}
@@ -7919,15 +8003,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 383976017d0eb1c458cd25b31771591f, type: 3}
---- !u!1 &6126995022234261844 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6126995022755970256, guid: 383976017d0eb1c458cd25b31771591f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2133370244}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6126995022234261841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6126995022755970261, guid: 383976017d0eb1c458cd25b31771591f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2133370244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6126995022234261844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6126995022755970256, guid: 383976017d0eb1c458cd25b31771591f,
     type: 3}
   m_PrefabInstance: {fileID: 2133370244}
   m_PrefabAsset: {fileID: 0}
