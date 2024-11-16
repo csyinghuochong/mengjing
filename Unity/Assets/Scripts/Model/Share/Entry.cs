@@ -63,7 +63,7 @@
             Log.Warning($"Debug...Entry.Create.Main: {TimeHelper.ClientNow()}");
             
 
-            //new Advanced().Test();
+            new Advanced().Test();
             await FiberManager.Instance.Create(SchedulerType.Main, ConstFiberId.Main, 0, SceneType.Main, "");
         }
     }
