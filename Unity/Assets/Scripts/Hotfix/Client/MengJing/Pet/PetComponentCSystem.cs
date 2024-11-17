@@ -109,6 +109,20 @@ namespace ET.Client
             
             return fightlist;
         }
+        
+        public static List<PetBarInfo> GetCanFightPetList2(this PetComponentC self)
+        {
+            List<PetBarInfo> fightlist = new List<PetBarInfo>();
+
+            fightlist = self.PetFightList;
+
+            if (self.RolePetInfos.Count > 0)
+            {
+                fightlist[0].PetId = self.RolePetInfos[0].Id;
+            }
+
+            return fightlist;
+        }
 
         public static void RequestPetFormationSet(this PetComponentC self, int sceneType, List<long> petList, List<long> positionList)
         {

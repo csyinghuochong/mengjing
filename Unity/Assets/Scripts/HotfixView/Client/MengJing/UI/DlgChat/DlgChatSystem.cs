@@ -163,13 +163,17 @@ namespace ET.Client
             if (text.Equals("#petfight"))
             {
                 //宠物出战列表 后期需要通过布阵界面去设置
-                List<long> fightpets = self.Root().GetComponent<PetComponentC>().GetCanFightPetList();
-                for (int i = fightpets.Count; i < 3; i++)
-                {
-                    fightpets.Add(0);
-                }
+                PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+                List<PetBarInfo> fightpets =petComponent.GetCanFightPetList2();
+                // for (int i = fightpets.Count; i < 3; i++)
+                // {
+                //     fightpets.Add(0);
+                // }
 
-                await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+                //await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
+                
+                
+                await PetNetHelper.RequestPetBarSet(self.Root(), fightpets);
                 //刷新主界面下方的出战ui
                 //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
                 return;
