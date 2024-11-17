@@ -17,13 +17,22 @@ namespace ET.Client
         public const string LastLoginType = "MJ_LastLoginType";
         public const string LoginErrorTime = "MJ_LoginErrorTime";
         public const string ChapterDifficulty = "MJ_ChapterDifficulty";
+
+        public const string UseCustomView = "MJ_UseCustomView";
         public const string LenDepth = "MJ_LenDepth";
+        public const float LenDepth_Default = 1f;
         public const string CameraHorizontalOffset = "MJ_CameraHorizontalOffset";
+        public const float CameraHorizontalOffset_Default = 0;
         public const string CameraVerticalOffset = "MJ_CameraVerticalOffset";
+        public const float CameraVerticalOffset_Default = 0;
         public const string RotaAngle = "MJ_RotaAngle";
         public const string OffsetPostion_X = "MJ_OffsetPostion_X";
+        public const float OffsetPostion_X_Default = 0;
         public const string OffsetPostion_Y = "MJ_OffsetPostion_Y";
+        public const float OffsetPostion_Y_Default = 10f;
         public const string OffsetPostion_Z = "MJ_OffsetPostion_Z";
+        public const float OffsetPostion_Z_Default = -6f;
+
         public const string ZhuBo = "MJ_ZhuBo";
         public const string Localization = "MJ_Localization";
 

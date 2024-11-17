@@ -513,15 +513,7 @@ namespace ET.Client
             self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst =
                     int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
 
-            float lenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
-            MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-            cameraComponent.LenDepth = lenDepth <= 0 ? 1 : lenDepth;
-            cameraComponent.OffsetPostion =
-                    new(PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_X, 0),
-                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Y, 10f),
-                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Z, -6f));
-            cameraComponent.HorizontalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset);
-            cameraComponent.VerticalOffset = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset);
+            SettingHelper.SetView(self.Root());
 
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 

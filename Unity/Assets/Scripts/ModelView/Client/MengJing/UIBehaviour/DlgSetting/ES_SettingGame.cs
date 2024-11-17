@@ -980,6 +980,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_SaveViewBtnButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SaveViewBtnButton == null )
+     			{
+		    		this.m_E_SaveViewBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/E_SaveViewBtn");
+     			}
+     			return this.m_E_SaveViewBtnButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SaveViewBtnImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SaveViewBtnImage == null )
+     			{
+		    		this.m_E_SaveViewBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/E_SaveViewBtn");
+     			}
+     			return this.m_E_SaveViewBtnImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UseCustomViewRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UseCustomViewRectTransform == null )
+     			{
+		    		this.m_EG_UseCustomViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_UseCustomView");
+     			}
+     			return this.m_EG_UseCustomViewRectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_RotaAngleSetRectTransform
      	{
      		get
@@ -1204,6 +1255,9 @@ namespace ET.Client
 			this.m_EG_LenDepthSetRectTransform = null;
 			this.m_EG_CameraHorizontalOffsetRectTransform = null;
 			this.m_EG_CameraVerticalOffsetRectTransform = null;
+			this.m_E_SaveViewBtnButton = null;
+			this.m_E_SaveViewBtnImage = null;
+			this.m_EG_UseCustomViewRectTransform = null;
 			this.m_EG_RotaAngleSetRectTransform = null;
 			this.m_EG_ZhuBoSetRectTransform = null;
 			this.m_E_TextZhangHaoIDText = null;
@@ -1273,6 +1327,9 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_LenDepthSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_CameraHorizontalOffsetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_CameraVerticalOffsetRectTransform = null;
+		private UnityEngine.UI.Button m_E_SaveViewBtnButton = null;
+		private UnityEngine.UI.Image m_E_SaveViewBtnImage = null;
+		private UnityEngine.RectTransform m_EG_UseCustomViewRectTransform = null;
 		private UnityEngine.RectTransform m_EG_RotaAngleSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_ZhuBoSetRectTransform = null;
 		private UnityEngine.UI.Text m_E_TextZhangHaoIDText = null;
