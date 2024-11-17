@@ -116,9 +116,17 @@ namespace ET.Client
 
             fightlist = self.PetFightList;
 
-            if (self.RolePetInfos.Count > 0)
+            // if (self.RolePetInfos.Count > 0)
+            // {
+            //     fightlist[0].PetId = self.RolePetInfos[0].Id;
+            // }
+
+            for (int i = 0; i < fightlist.Count; i++)
             {
-                fightlist[0].PetId = self.RolePetInfos[0].Id;
+                if(self.RolePetInfos.Count > i)
+                {
+                    fightlist[i].PetId = self.RolePetInfos[i].Id;
+                }
             }
 
             return fightlist;
