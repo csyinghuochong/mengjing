@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_PetBarSetItem))]
     [EntitySystemOf(typeof(ES_PetBarSet))]
     [FriendOfAttribute(typeof(ES_PetBarSet))]
     public static partial class ES_PetBarSetSystem
@@ -21,6 +22,16 @@ namespace ET.Client
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
             self.E_ActivateSkillButton.AddListenerAsync(self.OnActivateSkill);
             self.E_EquipSkillButton.AddListenerAsync(self.OnEquipSkill);
+
+            self.ES_PetBarSetItem_0.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(0));
+            self.ES_PetBarSetItem_0.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(0));
+            self.ES_PetBarSetItem_0.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(0));
+            self.ES_PetBarSetItem_1.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(1));
+            self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(1));
+            self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(1));
+            self.ES_PetBarSetItem_2.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(2));
+            self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(2));
+            self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(2));
 
             self.E_PlanSetToggleGroup.OnSelectIndex(0);
             self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
@@ -47,6 +58,21 @@ namespace ET.Client
             self.ES_PetBarSetItem_0.OnInit(0);
             self.ES_PetBarSetItem_1.OnInit(1);
             self.ES_PetBarSetItem_2.OnInit(2);
+        }
+
+        private static void OnClickPetIcon(this ES_PetBarSet self, int index)
+        {
+            self.PetBarIndex = index;
+        }
+
+        private static void OnClickAppearSkill(this ES_PetBarSet self, int index)
+        {
+            self.PetBarIndex = index;
+        }
+
+        private static void OnClickActivateSkill(this ES_PetBarSet self, int index)
+        {
+            self.PetBarIndex = index;
         }
 
         private static void OnShowSkill(this ES_PetBarSet self, RolePetInfo petInfo)

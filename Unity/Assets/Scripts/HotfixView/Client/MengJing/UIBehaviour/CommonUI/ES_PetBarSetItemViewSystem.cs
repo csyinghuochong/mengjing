@@ -37,6 +37,32 @@ namespace ET.Client
                 self.E_PetlIconImage.sprite = null;
                 self.E_LvText.text = "等级:0";
             }
+
+            int appearSkill = petBarInfo.AppearSkill;
+            if (appearSkill != 0)
+            {
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(appearSkill);
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_AppearSkillButton.transform.Find("mask/Icon").GetComponent<Image>().sprite = sp;
+            }
+            else
+            {
+                self.E_AppearSkillButton.transform.Find("mask/Icon").GetComponent<Image>().sprite = null;
+            }
+
+            int activeSkill = petBarInfo.ActiveSkill.Count > 0 ? petBarInfo.ActiveSkill[0] : 0;
+            if (activeSkill != 0)
+            {
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(activeSkill);
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_ActiveSkill_0Button.transform.Find("mask/Icon").GetComponent<Image>().sprite = sp;
+            }
+            else
+            {
+                self.E_ActiveSkill_0Button.transform.Find("mask/Icon").GetComponent<Image>().sprite = null;
+            }
         }
     }
 }
