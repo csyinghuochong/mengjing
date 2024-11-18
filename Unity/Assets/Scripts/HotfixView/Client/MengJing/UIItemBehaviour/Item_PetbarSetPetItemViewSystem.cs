@@ -21,12 +21,12 @@ namespace ET.Client
 
         public static void SetSelected(this Scroll_Item_PetbarSetPetItem self, long petid)
         {
-            self.E_XuanZhongImage.gameObject.SetActive(self.RolePetInfo.Id == petid);
+            self.E_XuanZhongImage.gameObject.SetActive(self.PetId == petid);
         }
 
         public static void OnInitUI(this Scroll_Item_PetbarSetPetItem self, RolePetInfo rolePetInfo)
         {
-            self.RolePetInfo = rolePetInfo;
+            self.PetId = rolePetInfo.Id;
 
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());

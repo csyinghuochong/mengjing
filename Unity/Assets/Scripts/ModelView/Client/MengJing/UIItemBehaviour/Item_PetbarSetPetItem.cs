@@ -6,7 +6,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetbarSetPetItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetbarSetPetItem> 
 	{
-		public RolePetInfo RolePetInfo;
+		public long PetId;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

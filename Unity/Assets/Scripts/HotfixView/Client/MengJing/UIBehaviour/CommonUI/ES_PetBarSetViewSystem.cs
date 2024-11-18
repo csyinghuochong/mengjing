@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetbarSetPetItem))]
     [FriendOf(typeof(ES_PetBarSetItem))]
     [EntitySystemOf(typeof(ES_PetBarSet))]
     [FriendOfAttribute(typeof(ES_PetBarSet))]
@@ -33,8 +34,10 @@ namespace ET.Client
             self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(2));
             self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(2));
 
+            self.EG_PetPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
+
             self.E_PlanSetToggleGroup.OnSelectIndex(0);
-            self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -63,16 +66,27 @@ namespace ET.Client
         private static void OnClickPetIcon(this ES_PetBarSet self, int index)
         {
             self.PetBarIndex = index;
+            self.EG_PetPanelRectTransform.gameObject.SetActive(true);
+            self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
+
+            self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
+
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            self.OnClickPetItem(petComponentC.PetFightList[self.PetBarIndex].PetId);
         }
 
         private static void OnClickAppearSkill(this ES_PetBarSet self, int index)
         {
             self.PetBarIndex = index;
+            self.EG_PetPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SkillPanelRectTransform.gameObject.SetActive(true);
         }
 
         private static void OnClickActivateSkill(this ES_PetBarSet self, int index)
         {
             self.PetBarIndex = index;
+            self.EG_PetPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SkillPanelRectTransform.gameObject.SetActive(true);
         }
 
         private static void OnShowSkill(this ES_PetBarSet self, RolePetInfo petInfo)
@@ -110,17 +124,45 @@ namespace ET.Client
 
         private static void OnPetBarSetItemsRefresh(this ES_PetBarSet self, Transform transform, int index)
         {
-            Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index].BindTrans(transform);
+            foreach (Scroll_Item_PetbarSetPetItem item in self.ScrollItemPetbarSetPetItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
 
-            item.E_TouchEventTrigger.gameObject.SetActive(false);
-            item.E_TouchEventTrigger.triggers.Clear();
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.OnDraging(pdata as PointerEventData); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.gameObject.SetActive(true);
-            item.OnInitUI(self.ShowRolePetInfos[index]);
+            Scroll_Item_PetbarSetPetItem scrollItemPetbarSetPetItem = self.ScrollItemPetbarSetPetItems[index].BindTrans(transform);
+
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(false);
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.triggers.Clear();
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
+                (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag,
+                (pdata) => { self.OnDraging(pdata as PointerEventData); });
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
+                (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
+            scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(true);
+            scrollItemPetbarSetPetItem.OnInitUI(self.ShowRolePetInfos[index]);
+        }
+
+        private static void OnClickPetItem(this ES_PetBarSet self, long petId)
+        {
+            self.SelectPetId = petId;
+
+            foreach (Scroll_Item_PetbarSetPetItem item in self.ScrollItemPetbarSetPetItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.E_XuanZhongImage.gameObject.SetActive(item.PetId == petId);
+            }
         }
 
         private static void OnPointerDown(this ES_PetBarSet self, PointerEventData pdata)
@@ -128,7 +170,7 @@ namespace ET.Client
             self.ClickTime = TimeHelper.ServerNow();
         }
 
-        private static void OnBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index1)
+        private static void OnBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             if (TimeHelper.ServerNow() - self.ClickTime <= 500)
             {
@@ -139,7 +181,7 @@ namespace ET.Client
             {
                 self.IsDrag = true;
                 self.E_IconImage.gameObject.SetActive(true);
-                Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index1];
+                Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
                 self.E_IconImage.sprite = item.E_IconImage.sprite;
             }
         }
@@ -160,11 +202,12 @@ namespace ET.Client
             }
         }
 
-        private static void OnPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index1)
+        private static void OnPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             if (TimeHelper.ServerNow() - self.ClickTime <= 200)
             {
-                self.OnClick(index1);
+                Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+                self.OnClickPetItem(item.Id);
             }
 
             self.ClickTime = 0;
@@ -202,10 +245,6 @@ namespace ET.Client
             {
                 self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
             }
-        }
-
-        private static void OnClick(this ES_PetBarSet self, int index1)
-        {
         }
 
         private static async ETTask OnConfirm(this ES_PetBarSet self)
