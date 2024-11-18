@@ -56,10 +56,6 @@ namespace ET.Client
     {
     }
     
-    public struct LoginByOther
-    {
-    }
-    
     public struct SessionDispose
     {
         

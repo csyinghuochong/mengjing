@@ -7,27 +7,11 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, ReturnLogin args)
         {
-            // scene.GetComponent<UIComponent>().Clear();
-            // UnitFactory.LoadingScene = false;
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             mapComponent.SceneType = SceneTypeEnum.LoginScene;
 
-            switch (args.ErrorCode)
-            {
-                case ErrorCode.ERR_OtherAccountLogin:
-                    FlyTipComponent.Instance.ShowFlyTip("账号异地登录");
-                    RunAsync2(scene, args, 100).Coroutine();
-                    break;
-                case ErrorCode.ERR_KickOutPlayer:
-                    PopupTipHelp.OpenPopupTip(scene, "重新登录", "由于您长时间未操作，请重新登录！", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine(); 
-                    break;
-                case ErrorCode.ERR_PackageFrequent:
-                    PopupTipHelp.OpenPopupTip(scene, "消息异常", "请重新登录", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine();
-                    break;
-                default:
-                    RunAsync2(scene, args, 100).Coroutine();
-                    break;
-            }
+            RunAsync2(scene, args, 100).Coroutine();
+            
             await ETTask.CompletedTask;
         }
 

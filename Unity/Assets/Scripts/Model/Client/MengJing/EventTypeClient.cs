@@ -297,7 +297,7 @@ namespace ET.Client
 
     public struct ReturnLogin
     {
-        public int ErrorCode;
+
     }
 
     public struct TaskNpcDialog
