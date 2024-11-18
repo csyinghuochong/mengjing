@@ -12,6 +12,10 @@
     {
     }
     
+    public struct EntryEvent4
+    {
+    }
+    
     public static class Entry
     {
         public static void Init()
@@ -59,9 +63,9 @@
             Log.Warning($"Debug...CreateCode: {TimeHelper.ClientNow()}");
             
             await World.Instance.AddSingleton<ConfigLoader>().LoadAsync();  //耗时8s
-            
+
             Log.Warning($"Debug...Entry.Create.Main: {TimeHelper.ClientNow()}");
-            
+    
             await FiberManager.Instance.Create(SchedulerType.Main, ConstFiberId.Main, 0, SceneType.Main, "");
         }
     }
