@@ -35,7 +35,7 @@ namespace ET
             {
                 return;
             }
-            fiber.Log.Debug(msg.ToString() + "   当前时间:" + TimeHelper.ServerNow());
+            fiber.Log.Debug(msg.ToString() );
         }
     }
 }
