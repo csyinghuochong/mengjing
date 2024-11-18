@@ -55,4 +55,13 @@ namespace ET.Client
     public struct LoginFinish
     {
     }
+    
+    public struct LoginByOther
+    {
+    }
+    
+    public struct SessionDispose
+    {
+        
+    }
 }

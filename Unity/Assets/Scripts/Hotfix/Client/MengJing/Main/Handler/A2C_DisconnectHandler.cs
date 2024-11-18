@@ -6,6 +6,9 @@ namespace ET.Client
         protected override async ETTask Run(Scene root, A2C_Disconnect message)
         {
             Log.Warning("A2C_Disconnect");
+
+            root.GetComponent<PlayerComponent>().DisconnectType = message.Error;
+            
             await ETTask.CompletedTask;
         }
     }

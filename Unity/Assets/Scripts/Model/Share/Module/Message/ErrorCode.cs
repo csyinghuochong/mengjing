@@ -69,7 +69,7 @@ namespace ET
         public const int ERR_SessionPlayerError = 200110;
         public const int ERR_NonePlayerError = 200111;
         public const int ERR_PlayerSessionError = 200112;
-        public const int ERR_SessionStateError = 200113;
+        public const int ERR_SessionDisconnect = 200113;
         public const int ERR_LoginTimeOut = 200114;                                 //登录超时
         public const int ERR_EnterQueue = 200115;                                   //进入排队    
         public const int ERR_LoginRealm = 200116;

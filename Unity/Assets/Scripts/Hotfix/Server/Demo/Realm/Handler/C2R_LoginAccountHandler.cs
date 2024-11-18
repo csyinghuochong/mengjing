@@ -195,8 +195,9 @@ namespace ET.Server
                     }
                     
                     Session otherSession  = accountSessionsComponent.Get(request.Account);
-                   
-                    otherSession?.Send( A2C_Disconnect.Create());
+                    A2C_Disconnect a2C_Disconnect = A2C_Disconnect.Create();
+                    a2C_Disconnect.Error = ErrorCode.ERR_OtherAccountLogin;
+                    otherSession?.Send(a2C_Disconnect );
                     otherSession?.Disconnect().Coroutine();
                     accountSessionsComponent.Add(request.Account, session);
                     session.AddComponent<AccountCheckOutTimeComponent, string>(request.Account);

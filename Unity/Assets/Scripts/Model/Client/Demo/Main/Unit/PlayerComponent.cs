@@ -44,5 +44,7 @@ namespace ET.Client
 
         public int IsPopUp = 0;
         public string PopUpInfo = string.Empty;
+
+        public int DisconnectType { get; set; }= 0;
     }
 }

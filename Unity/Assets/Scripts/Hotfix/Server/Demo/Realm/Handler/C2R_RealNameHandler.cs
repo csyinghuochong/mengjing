@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -66,7 +67,8 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_RealNameFail;
                     return;
                 }
-
+                
+                Console.WriteLine($"result_check: {result_check.ToString()}");
                 if (result_check.errcode == 0 && result_check.data.result.status == 0) //认证成功
                 {
                     dbCenterAccountInfo.PlayerInfo.Name = request.Name;

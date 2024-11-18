@@ -41,7 +41,7 @@ namespace ET.Server
             }
 
             A2C_Disconnect a2CDisconnect = A2C_Disconnect.Create();
-            a2CDisconnect.Error = 1;
+            a2CDisconnect.Error = ErrorCode.ERR_SessionDisconnect;
             session?.Send(a2CDisconnect);
             session?.Disconnect().Coroutine();
         }

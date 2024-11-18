@@ -6,5 +6,7 @@
         public bool Relink;
 
         public int ModifyDataNumber = 0;
+        
+        
     }
 }
