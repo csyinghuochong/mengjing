@@ -7,6 +7,14 @@ namespace ET.Client
         {
             Log.Warning("A2C_Disconnect");
 
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+            if (mapComponent.SceneType < SceneTypeEnum.MainCityScene)
+            {
+                //直接返回登陆
+                EventSystem.Instance.Publish(root, new ReturnLogin());
+                return;
+            }
+            
             root.GetComponent<PlayerComponent>().DisconnectType = message.Error;
             
             await ETTask.CompletedTask;
