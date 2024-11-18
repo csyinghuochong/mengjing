@@ -19,10 +19,9 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnInit(this ES_PetBarSetItem self, int petBarIndex)
+        public static void OnInit(this ES_PetBarSetItem self, PetBarInfo petBarInfo)
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-            PetBarInfo petBarInfo = petComponentC.PetFightList[petBarIndex];
             RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petBarInfo.PetId);
             if (rolePetInfo != null)
             {

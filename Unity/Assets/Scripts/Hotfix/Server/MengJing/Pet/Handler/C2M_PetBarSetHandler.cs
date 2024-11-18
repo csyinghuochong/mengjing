@@ -4,22 +4,20 @@ using System.Linq;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    public class C2M_PetBarSetHandler: MessageLocationHandler<Unit, C2M_PetBarSetRequest, M2C_PetBarSetResponse>
+    public class C2M_PetBarSetHandler : MessageLocationHandler<Unit, C2M_PetBarSetRequest, M2C_PetBarSetResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_PetBarSetRequest request, M2C_PetBarSetResponse response)
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 
-            List<long> petids = petComponent.PetFightList.Select(x => x.PetId).ToList();
-            TransferHelper.RemoveFightPetList(unit,petids);
-            
-            
-            petComponent.PetFightList = request.PetBarList; //通过布阵界面设置出战宠物
-            
+            List<long> petids = petComponent.GetNowPetFightList().Select(x => x.PetId).ToList();
+            TransferHelper.RemoveFightPetList(unit, petids);
+
+            petComponent.PetFightList_1 = request.PetBarList; //通过布阵界面设置出战宠物
+
             TransferHelper.CreateFightPetList(unit);
-            
+
             await ETTask.CompletedTask;
         }
     }
 }
-

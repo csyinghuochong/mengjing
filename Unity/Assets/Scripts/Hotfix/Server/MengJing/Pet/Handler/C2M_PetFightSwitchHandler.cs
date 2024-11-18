@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -8,7 +9,8 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PetFightSwitch request, M2C_PetFightSwitch response)
         {
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            if (request.PetFightIndex < 0 || request.PetFightIndex > petComponentS.PetFightList.Count)
+            List<PetBarInfo> PetFightList = petComponentS.GetNowPetFightList();
+            if (request.PetFightIndex < 0 || request.PetFightIndex > PetFightList.Count)
             {
                 return;
             }
@@ -18,9 +20,9 @@ namespace ET.Server
                 return;
             }
 
-            for (int i = 0; i < petComponentS.PetFightList.Count; i++)
+            for (int i = 0; i < PetFightList.Count; i++)
             {
-                RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[i].PetId);
+                RolePetInfo rolePetInfo = petComponentS.GetPetInfo(PetFightList[i].PetId);
 
                 if (rolePetInfo == null)
                 {

@@ -3154,7 +3154,7 @@ GameObject:
   - component: {fileID: 1767477197424698251}
   - component: {fileID: 4924235638721274817}
   m_Layer: 5
-  m_Name: E_Confirm
+  m_Name: E_ConfirmPet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4823,6 +4823,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3779573226659912243, guid: 00dc22f9afef393478bd9097fa0d4d99,
+        type: 3}
+      propertyPath: m_Name
+      value: Icon_2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00dc22f9afef393478bd9097fa0d4d99, type: 3}
 --- !u!224 &2377987389650092076 stripped
@@ -4948,6 +4953,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7229212164262633556, guid: 00dc22f9afef393478bd9097fa0d4d99,
+        type: 3}
+      propertyPath: m_Name
+      value: E_PetBarSetIcon_0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00dc22f9afef393478bd9097fa0d4d99, type: 3}
 --- !u!224 &2851080292551327329 stripped
@@ -5072,6 +5082,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7229212164262633556, guid: 00dc22f9afef393478bd9097fa0d4d99,
+        type: 3}
+      propertyPath: m_Name
+      value: E_PetBarSetIcon_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00dc22f9afef393478bd9097fa0d4d99, type: 3}

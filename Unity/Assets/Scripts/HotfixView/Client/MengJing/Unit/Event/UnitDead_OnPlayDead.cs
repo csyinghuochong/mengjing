@@ -122,7 +122,7 @@ namespace ET.Client
                     PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                     NumericComponentC numericComponentC = myUnit.GetComponent<NumericComponentC>();
                     int petFightIndex = numericComponentC.GetAsInt(NumericType.PetFightIndex);
-                    if (petFightIndex > 0 && unit.Id == petComponentC.PetFightList[petFightIndex - 1].PetId)
+                    if (petFightIndex > 0 && unit.Id == petComponentC.GetNowPetFightList()[petFightIndex - 1].PetId)
                     {
                         FlyTipComponent.Instance.ShowFlyTip("宠物死亡，自动切换为英雄");
                         PetNetHelper.RequestPetFightSwitch(root, 0).Coroutine();

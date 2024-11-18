@@ -123,15 +123,15 @@ namespace ET.Client
 
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             
-            petComponent.PetFightList[self.FightIndex - 1].PetId = petid;
-            var petBarInfos = petComponent.PetFightList.Where(p => p.PetId == petid && (petComponent.PetFightList.IndexOf(p) != self.FightIndex - 1)).ToList();
+            petComponent.GetNowPetFightList()[self.FightIndex - 1].PetId = petid;
+            var petBarInfos = petComponent.GetNowPetFightList().Where(p => p.PetId == petid && (petComponent.GetNowPetFightList().IndexOf(p) != self.FightIndex - 1)).ToList();
             for (int i = 0; i < petBarInfos.Count; i++)
             {
                 petBarInfos[i].PetId = 0;
             }
 
 
-            await PetNetHelper.RequestPetBarSet(self.Root(), petComponent.PetFightList);
+            await PetNetHelper.RequestPetBarSet(self.Root(), petComponent.GetNowPetFightList());
             
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetQuickFight);
         }
@@ -139,7 +139,7 @@ namespace ET.Client
         public static void OnUpdateUI(this DlgPetQuickFight self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            long petId = petComponent.PetFightList[self.FightIndex - 1].PetId;
+            long petId = petComponent.GetNowPetFightList()[self.FightIndex - 1].PetId;
 
             if (self.ScrollItemPetQuickFightItems != null)
             {
@@ -169,7 +169,7 @@ namespace ET.Client
 
             self.FightIndex = index;
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            long petId = petComponent.PetFightList[self.FightIndex - 1].PetId;
+            long petId = petComponent.GetNowPetFightList()[self.FightIndex - 1].PetId;
 
             List<RolePetInfo> rolePetInfos = petComponent.RolePetInfos;
             self.ShowRolePetInfos.Clear();
@@ -180,7 +180,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (rolePetInfos[i].Id != petId && petComponent.PetFightList.Where(p=>p.PetId ==rolePetInfos[i].Id).Count( ) > 0)
+                if (rolePetInfos[i].Id != petId && petComponent.GetNowPetFightList().Where(p=>p.PetId ==rolePetInfos[i].Id).Count( ) > 0)
                 {
                     continue;
                 }

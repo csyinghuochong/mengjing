@@ -69,7 +69,7 @@
                         if (petfightindex > 0)
                         {
                             PetComponentC petComponentC = root.GetComponent<PetComponentC>();
-                            long petId = petComponentC.PetFightList[petfightindex - 1].PetId;
+                            long petId = petComponentC.GetNowPetFightList()[petfightindex - 1].PetId;
                             Unit pet = scene.GetComponent<UnitComponent>().Get(petId);
                             
                             // 切换成宠物特效

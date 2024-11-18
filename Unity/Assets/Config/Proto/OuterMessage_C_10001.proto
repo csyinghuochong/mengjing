@@ -2445,16 +2445,33 @@ message M2C_RolePetList // ILocationResponse
 	repeated int64 PetMingList = 11;
 	repeated int64 PetMingPosition = 12;
 	repeated RolePetInfo RolePetBag = 13;
-	repeated PetBarInfo PetFightList = 15;
+	int32 PetFightPlan = 15;
+	repeated PetBarInfo PetFightList_1 = 16;
+	repeated PetBarInfo PetFightList_2 = 17;
+	repeated PetBarInfo PetFightList_3 = 18;
 }
 
+
+//ResponseType M2C_PetFightPlanResponse
+//宠物栏切换
+message C2M_PetFightPlanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 PetFightPlan = 1;
+}
+
+message M2C_PetFightPlanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
 
 //ResponseType M2C_PetBarSetResponse
 //宠物栏设置
 message C2M_PetBarSetRequest // ILocationRequest
 {
 	int32 RpcId = 90;
-	
 	repeated PetBarInfo PetBarList = 5;  //三个栏位的上阵宠物   1选中圆形宠物栏位，左侧为宠物列表。 2选中出场技/主动技栏位，左侧为技能列表.  
 }
 

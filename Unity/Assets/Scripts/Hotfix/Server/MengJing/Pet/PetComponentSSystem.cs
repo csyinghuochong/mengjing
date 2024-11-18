@@ -123,12 +123,28 @@ namespace ET.Server
                 }
             }
 
-            if (self.PetFightList.Count != 3)
+            if (self.PetFightList_1.Count != 3)
             {
-                self.PetFightList.Clear();
-                self.PetFightList.Add(PetBarInfo.Create());
-                self.PetFightList.Add(PetBarInfo.Create());
-                self.PetFightList.Add(PetBarInfo.Create());
+                self.PetFightList_1.Clear();
+                self.PetFightList_1.Add(PetBarInfo.Create());
+                self.PetFightList_1.Add(PetBarInfo.Create());
+                self.PetFightList_1.Add(PetBarInfo.Create());
+            }
+            
+            if (self.PetFightList_2.Count != 3)
+            {
+                self.PetFightList_2.Clear();
+                self.PetFightList_2.Add(PetBarInfo.Create());
+                self.PetFightList_2.Add(PetBarInfo.Create());
+                self.PetFightList_2.Add(PetBarInfo.Create());
+            }
+            
+            if (self.PetFightList_3.Count != 3)
+            {
+                self.PetFightList_3.Clear();
+                self.PetFightList_3.Add(PetBarInfo.Create());
+                self.PetFightList_3.Add(PetBarInfo.Create());
+                self.PetFightList_3.Add(PetBarInfo.Create());
             }
 
             if ( self.PetShouHuList.Count != 4)
@@ -168,7 +184,9 @@ namespace ET.Server
             }
             self.CheckPetList(self.PetFormations);
             self.CheckPetList(self.TeamPetList);
-            self.CheckPetList(self.PetFightList);
+            self.CheckPetList(self.PetFightList_1);
+            self.CheckPetList(self.PetFightList_2);
+            self.CheckPetList(self.PetFightList_3);
             self.CheckPetList(self.PetShouHuList);
             self.CheckPetList(self.PetMingList);
             self.CheckPetList(self.PetMingPosition);
@@ -1324,6 +1342,17 @@ namespace ET.Server
             return self.RolePetInfos;
         }
 
+        public static List<PetBarInfo> GetNowPetFightList(this PetComponentS self)
+        {
+            return self.PetFightPlan switch
+            {
+                0 => self.PetFightList_1,
+                1 => self.PetFightList_2,
+                2 => self.PetFightList_3,
+                _ => null
+            };
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -1332,16 +1361,15 @@ namespace ET.Server
         /// <returns></returns>
         public static Unit GetFightPetByIndex(this PetComponentS self,  int petfightindex)
         {
-            Unit unit = self.GetParent<Unit>();
-            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
             //petfightindex 123
-            if (petfightindex <= 0 || petfightindex > petComponentS.PetFightList.Count)
+            List<PetBarInfo> petFightList = self.GetNowPetFightList();
+            if (petfightindex <= 0 || petfightindex > petFightList.Count)
             {
                 return null;
             }
 
-            RolePetInfo rolePetInfo = petComponentS.GetPetInfo(petComponentS.PetFightList[petfightindex - 1].PetId);
-            Unit petunit = unit.GetParent<UnitComponent>().Get(rolePetInfo.Id);
+            RolePetInfo rolePetInfo = self.GetPetInfo(petFightList[petfightindex - 1].PetId);
+            Unit petunit = self.GetParent<Unit>().GetParent<UnitComponent>().Get(rolePetInfo.Id);
             return petunit;
         }
 

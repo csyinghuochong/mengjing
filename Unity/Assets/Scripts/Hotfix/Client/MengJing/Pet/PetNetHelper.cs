@@ -45,7 +45,7 @@ namespace ET.Client
         public static async ETTask<int> RequestPetFightSwitch(Scene root, int fightindex)
         {
             PetComponentC petComponent = root.GetComponent<PetComponentC>();
-            if (fightindex != 0 && petComponent.PetFightList[fightindex - 1].PetId == 0)
+            if (fightindex != 0 && petComponent.GetNowPetFightList()[fightindex - 1].PetId == 0)
             {
                 return ErrorCode.ERR_Pet_NoExist;
             }
@@ -56,7 +56,7 @@ namespace ET.Client
             {
                 fightindex = 0;
             }
-            
+
             C2M_PetFightSwitch c2MPetFightSwitch = C2M_PetFightSwitch.Create();
             c2MPetFightSwitch.PetFightIndex = fightindex;
             M2C_PetFightSwitch m2CPetFightSwitch = (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
@@ -390,14 +390,35 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetFightPlan(Scene root, int plan)
+        {
+            C2M_PetFightPlanRequest request = C2M_PetFightPlanRequest.Create();
+            request.PetFightPlan = plan;
+
+            M2C_PetFightPlanResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetFightPlanResponse;
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().PetFightPlan = plan;
+            }
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestPetBarSet(Scene root, List<PetBarInfo> petBarInfos)
         {
- 
-            C2M_PetBarSetRequest c2MPetBarSetRequest = C2M_PetBarSetRequest.Create();
-            c2MPetBarSetRequest.PetBarList = petBarInfos;
-            M2C_PetBarSetResponse m2CPetBarSetResponse = await root.GetComponent<ClientSenderCompnent>().Call(c2MPetBarSetRequest) as M2C_PetBarSetResponse;
+            C2M_PetBarSetRequest request = C2M_PetBarSetRequest.Create();
+            request.PetBarList = petBarInfos;
 
-            return m2CPetBarSetResponse.Error;
+            M2C_PetBarSetResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetBarSetResponse;
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().GetNowPetFightList().Clear();
+                root.GetComponent<PetComponentC>().GetNowPetFightList().AddRange(petBarInfos);
+            }
+
+            return response.Error;
         }
 
         public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)

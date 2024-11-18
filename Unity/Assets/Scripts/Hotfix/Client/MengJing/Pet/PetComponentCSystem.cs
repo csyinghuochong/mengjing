@@ -31,8 +31,11 @@ namespace ET.Client
             self.PetCangKuOpen = m2C_RolePetList.PetCangKuOpen;
             self.PetMingList = m2C_RolePetList.PetMingList;
             self.PetMingPosition = m2C_RolePetList.PetMingPosition;
-            self.PetFightList = m2C_RolePetList.PetFightList;
             self.RolePetBag = m2C_RolePetList.RolePetBag;
+            self.PetFightPlan = m2C_RolePetList.PetFightPlan;
+            self.PetFightList_1 = m2C_RolePetList.PetFightList_1;
+            self.PetFightList_2 = m2C_RolePetList.PetFightList_2;
+            self.PetFightList_3 = m2C_RolePetList.PetFightList_3;
         }
 
         public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)
@@ -98,7 +101,7 @@ namespace ET.Client
             {
                 if (self.RolePetInfos[i].PetStatus == 0)
                 {
-                    fightlist.Add( self.RolePetInfos[i].Id );
+                    fightlist.Add(self.RolePetInfos[i].Id);
                 }
 
                 if (fightlist.Count >= 3)
@@ -106,15 +109,26 @@ namespace ET.Client
                     break;
                 }
             }
-            
+
             return fightlist;
+        }
+
+        public static List<PetBarInfo> GetNowPetFightList(this PetComponentC self)
+        {
+            return self.PetFightPlan switch
+            {
+                0 => self.PetFightList_1,
+                1 => self.PetFightList_2,
+                2 => self.PetFightList_3,
+                _ => null
+            };
         }
         
         public static List<PetBarInfo> GetCanFightPetList2(this PetComponentC self)
         {
             List<PetBarInfo> fightlist = new List<PetBarInfo>();
 
-            fightlist = self.PetFightList;
+            fightlist = self.GetNowPetFightList();
 
             // if (self.RolePetInfos.Count > 0)
             // {
@@ -123,7 +137,7 @@ namespace ET.Client
 
             for (int i = 0; i < fightlist.Count; i++)
             {
-                if(self.RolePetInfos.Count > i)
+                if (self.RolePetInfos.Count > i)
                 {
                     fightlist[i].PetId = self.RolePetInfos[i].Id;
                 }
@@ -146,13 +160,12 @@ namespace ET.Client
                     self.PetMingList = petList;
                     self.PetMingPosition = positionList;
                     break;
-                
+
                 case SceneTypeEnum.MainCityScene:
                     break;
             }
         }
 
-        
         /// <summary>
         /// PetStatus = 0休息  1出战 2散步 3仓库
         /// </summary>

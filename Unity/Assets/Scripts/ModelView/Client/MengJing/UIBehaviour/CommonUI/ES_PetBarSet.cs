@@ -8,6 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public List<PetBarInfo> PetFightList = new();
 		public int PetBarIndex;
 		public long SelectPetId;
 		
@@ -144,7 +145,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ConfirmButton
+		public UnityEngine.UI.Button E_ConfirmPetButton
      	{
      		get
      		{
@@ -153,15 +154,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ConfirmButton == null )
+     			if( this.m_E_ConfirmPetButton == null )
      			{
-		    		this.m_E_ConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_Confirm");
+		    		this.m_E_ConfirmPetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_ConfirmPet");
      			}
-     			return this.m_E_ConfirmButton;
+     			return this.m_E_ConfirmPetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ConfirmImage
+		public UnityEngine.UI.Image E_ConfirmPetImage
      	{
      		get
      		{
@@ -170,11 +171,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ConfirmImage == null )
+     			if( this.m_E_ConfirmPetImage == null )
      			{
-		    		this.m_E_ConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_Confirm");
+		    		this.m_E_ConfirmPetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_ConfirmPet");
      			}
-     			return this.m_E_ConfirmImage;
+     			return this.m_E_ConfirmPetImage;
      		}
      	}
 
@@ -318,8 +319,8 @@ namespace ET.Client
 			this.m_EG_PetPanelRectTransform = null;
 			this.m_E_PetTypeSetToggleGroup = null;
 			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
-			this.m_E_ConfirmButton = null;
-			this.m_E_ConfirmImage = null;
+			this.m_E_ConfirmPetButton = null;
+			this.m_E_ConfirmPetImage = null;
 			this.m_EG_SkillPanelRectTransform = null;
 			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 			this.m_E_ActivateSkillButton = null;
@@ -337,8 +338,8 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_PetPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ConfirmButton = null;
-		private UnityEngine.UI.Image m_E_ConfirmImage = null;
+		private UnityEngine.UI.Button m_E_ConfirmPetButton = null;
+		private UnityEngine.UI.Image m_E_ConfirmPetImage = null;
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ActivateSkillButton = null;
