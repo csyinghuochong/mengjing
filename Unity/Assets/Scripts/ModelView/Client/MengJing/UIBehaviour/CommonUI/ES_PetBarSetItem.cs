@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Button E_PetlIconButton
+		public UnityEngine.UI.Button E_PetBarSetIconButton
      	{
      		get
      		{
@@ -16,15 +16,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetlIconButton == null )
+     			if( this.m_E_PetBarSetIconButton == null )
      			{
-		    		this.m_E_PetlIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_PetlIcon");
+		    		this.m_E_PetBarSetIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_PetBarSetIcon");
      			}
-     			return this.m_E_PetlIconButton;
+     			return this.m_E_PetBarSetIconButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PetlIconImage
+		public UnityEngine.UI.Image E_PetBarSetIconImage
      	{
      		get
      		{
@@ -33,11 +33,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetlIconImage == null )
+     			if( this.m_E_PetBarSetIconImage == null )
      			{
-		    		this.m_E_PetlIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_PetlIcon");
+		    		this.m_E_PetBarSetIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_PetBarSetIcon");
      			}
-     			return this.m_E_PetlIconImage;
+     			return this.m_E_PetBarSetIconImage;
      		}
      	}
 
@@ -140,8 +140,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_PetlIconButton = null;
-			this.m_E_PetlIconImage = null;
+			this.m_E_PetBarSetIconButton = null;
+			this.m_E_PetBarSetIconImage = null;
 			this.m_E_LvText = null;
 			this.m_E_AppearSkillButton = null;
 			this.m_E_AppearSkillImage = null;
@@ -150,8 +150,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_PetlIconButton = null;
-		private UnityEngine.UI.Image m_E_PetlIconImage = null;
+		private UnityEngine.UI.Button m_E_PetBarSetIconButton = null;
+		private UnityEngine.UI.Image m_E_PetBarSetIconImage = null;
 		private UnityEngine.UI.Text m_E_LvText = null;
 		private UnityEngine.UI.Button m_E_AppearSkillButton = null;
 		private UnityEngine.UI.Image m_E_AppearSkillImage = null;

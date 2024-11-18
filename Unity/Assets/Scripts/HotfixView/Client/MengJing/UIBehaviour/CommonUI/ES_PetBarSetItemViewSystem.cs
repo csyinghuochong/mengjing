@@ -28,12 +28,15 @@ namespace ET.Client
                 PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_PetlIconImage.sprite = sp;
-                self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
+                self.E_PetBarSetIconImage.sprite = sp;
+                using (zstring.Block())
+                {
+                    self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
+                }
             }
             else
             {
-                self.E_PetlIconImage.sprite = null;
+                self.E_PetBarSetIconImage.sprite = null;
                 self.E_LvText.text = "等级:0";
             }
 

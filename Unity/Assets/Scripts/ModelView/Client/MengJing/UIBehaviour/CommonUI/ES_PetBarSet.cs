@@ -10,7 +10,6 @@ namespace ET.Client
 	{
 		public List<PetBarInfo> PetFightList = new();
 		public int PetBarIndex;
-		public long SelectPetId;
 		
 		public long ClickTime;
 		public bool IsDrag;

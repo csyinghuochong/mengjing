@@ -24,13 +24,13 @@ namespace ET.Client
             self.E_ActivateSkillButton.AddListenerAsync(self.OnActivateSkill);
             self.E_EquipSkillButton.AddListenerAsync(self.OnEquipSkill);
 
-            self.ES_PetBarSetItem_0.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(0));
+            self.ES_PetBarSetItem_0.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(0));
             self.ES_PetBarSetItem_0.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(0));
             self.ES_PetBarSetItem_0.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(0));
-            self.ES_PetBarSetItem_1.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(1));
+            self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(1));
             self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(1));
-            self.ES_PetBarSetItem_2.E_PetlIconButton.AddListener(() => self.OnClickPetIcon(2));
+            self.ES_PetBarSetItem_2.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickAppearSkill(2));
             self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickActivateSkill(2));
 
@@ -48,29 +48,24 @@ namespace ET.Client
 
         private static async ETTask OnPlanSet(this ES_PetBarSet self, int index)
         {
-            if (index == 0)
-            {
-            }
-            else if (index == 1)
-            {
-            }
-            else if (index == 2)
-            {
-            }
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
-            int error = await PetNetHelper.RequestPetFightPlan(self.Root(), index);
-
-            if (error == ErrorCode.ERR_Success)
+            if (petComponentC.PetFightPlan != index)
             {
-                using (zstring.Block())
+                int error = await PetNetHelper.RequestPetFightPlan(self.Root(), index);
+
+                if (error == ErrorCode.ERR_Success)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物上阵切换 {0}", index));
+                    }
                 }
             }
 
             // 复制一份
             self.PetFightList.Clear();
-            foreach (PetBarInfo info in self.Root().GetComponent<PetComponentC>().GetNowPetFightList())
+            foreach (PetBarInfo info in petComponentC.GetNowPetFightList())
             {
                 PetBarInfo petBarInfo = PetBarInfo.Create();
                 petBarInfo.PetId = info.PetId;
@@ -82,6 +77,12 @@ namespace ET.Client
                 self.PetFightList.Add(petBarInfo);
             }
 
+            self.InitInfo();
+            self.OnUpdateSelectedPetItem();
+        }
+
+        private static void InitInfo(this ES_PetBarSet self)
+        {
             self.ES_PetBarSetItem_0.OnInit(self.PetFightList[0]);
             self.ES_PetBarSetItem_1.OnInit(self.PetFightList[1]);
             self.ES_PetBarSetItem_2.OnInit(self.PetFightList[2]);
@@ -94,8 +95,6 @@ namespace ET.Client
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
-
-            self.OnClickPetItem(self.PetFightList[self.PetBarIndex].PetId);
         }
 
         private static void OnClickAppearSkill(this ES_PetBarSet self, int index)
@@ -173,9 +172,12 @@ namespace ET.Client
             scrollItemPetbarSetPetItem.OnInitUI(self.ShowRolePetInfos[index]);
         }
 
-        private static void OnClickPetItem(this ES_PetBarSet self, long petId)
+        private static void OnUpdateSelectedPetItem(this ES_PetBarSet self)
         {
-            self.SelectPetId = petId;
+            if (self.ScrollItemPetbarSetPetItems == null)
+            {
+                return;
+            }
 
             foreach (Scroll_Item_PetbarSetPetItem item in self.ScrollItemPetbarSetPetItems.Values)
             {
@@ -184,10 +186,16 @@ namespace ET.Client
                     continue;
                 }
 
-                item.E_XuanZhongImage.gameObject.SetActive(item.PetId == petId);
+                item.E_XuanZhongImage.gameObject.SetActive(false);
+                foreach (PetBarInfo petBarInfo in self.PetFightList)
+                {
+                    if (petBarInfo.PetId == item.PetId)
+                    {
+                        item.E_XuanZhongImage.gameObject.SetActive(true);
+                        break;
+                    }
+                }
             }
-
-            self.E_ConfirmPetButton.gameObject.SetActive(self.SelectPetId != 0);
         }
 
         private static void OnPointerDown(this ES_PetBarSet self, PointerEventData pdata)
@@ -238,7 +246,7 @@ namespace ET.Client
             self.ClickTime = 0;
         }
 
-        private static void OnEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index1)
+        private static void OnEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             if (self.IsDrag)
             {
@@ -250,17 +258,18 @@ namespace ET.Client
                 for (int i = 0; i < results.Count; i++)
                 {
                     string name = results[i].gameObject.name;
-                    if (!name.Contains("E_PetBarSetIcon"))
+                    if (name != "E_PetBarSetIcon")
                     {
                         continue;
                     }
-                
+
                     name = results[i].gameObject.transform.parent.parent.name;
-                
-                    int index2 = int.Parse(name.Substring(16, name.Length - 16));
-                
-                    // self.ChangePos(index1, index2);
-                
+                    int petBarSetIndex = int.Parse(name.Substring(17, name.Length - 17));
+                    Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+                    self.PetFightList[petBarSetIndex].PetId = item.PetId;
+                    self.InitInfo();
+                    self.OnUpdateSelectedPetItem();
+
                     break;
                 }
 
@@ -274,7 +283,7 @@ namespace ET.Client
 
         private static async ETTask OnConfirmPet(this ES_PetBarSet self)
         {
-            // PetNetHelper.RequestPetBarSet(self.Root(),)
+            await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
 
             await ETTask.CompletedTask;
         }
