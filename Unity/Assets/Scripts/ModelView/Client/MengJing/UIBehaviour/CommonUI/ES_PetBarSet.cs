@@ -8,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public int PetBarIndex;
+		
 		public long ClickTime;
 		public bool IsDrag;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems;

@@ -5,11 +5,9 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetBarSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PetBarSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public PetBarInfo PetBarInfo;
-		
-		public UnityEngine.UI.Image E_SkillIconImage
+		public UnityEngine.UI.Image E_PetlIconImage
      	{
      		get
      		{
@@ -18,11 +16,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SkillIconImage == null )
+     			if( this.m_E_PetlIconImage == null )
      			{
-		    		this.m_E_SkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_SkillIcon");
+		    		this.m_E_PetlIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_PetlIcon");
      			}
-     			return this.m_E_SkillIconImage;
+     			return this.m_E_PetlIconImage;
      		}
      	}
 
@@ -108,7 +106,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_SkillIconImage = null;
+			this.m_E_PetlIconImage = null;
 			this.m_E_LvText = null;
 			this.m_E_Skill_0Button = null;
 			this.m_E_Skill_0Image = null;
@@ -116,7 +114,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_SkillIconImage = null;
+		private UnityEngine.UI.Image m_E_PetlIconImage = null;
 		private UnityEngine.UI.Text m_E_LvText = null;
 		private UnityEngine.UI.Button m_E_Skill_0Button = null;
 		private UnityEngine.UI.Image m_E_Skill_0Image = null;

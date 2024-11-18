@@ -11,7 +11,6 @@ namespace ET.Client
         private static void Awake(this ES_PetBarSetItem self, Transform transform)
         {
             self.uiTransform = transform;
-            
         }
 
         [EntitySystem]
@@ -20,9 +19,24 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnInit(this ES_PetBarSetItem self, PetBarInfo petBarInfo)
+        public static void OnInit(this ES_PetBarSetItem self, int petBarIndex)
         {
-            self.PetBarInfo = petBarInfo;
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            PetBarInfo petBarInfo = petComponentC.PetFightList[petBarIndex];
+            RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petBarInfo.PetId);
+            if (rolePetInfo != null)
+            {
+                PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_PetlIconImage.sprite = sp;
+                self.E_LvText.text = zstring.Format("等级:{0}", rolePetInfo.PetLv);
+            }
+            else
+            {
+                self.E_PetlIconImage.sprite = null;
+                self.E_LvText.text = "等级:0";
+            }
         }
     }
 }

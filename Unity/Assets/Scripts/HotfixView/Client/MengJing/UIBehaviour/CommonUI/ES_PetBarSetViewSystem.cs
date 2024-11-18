@@ -43,8 +43,10 @@ namespace ET.Client
             else if (index == 2)
             {
             }
-            
-            
+
+            self.ES_PetBarSetItem_0.OnInit(0);
+            self.ES_PetBarSetItem_1.OnInit(1);
+            self.ES_PetBarSetItem_2.OnInit(2);
         }
 
         private static void OnShowSkill(this ES_PetBarSet self, RolePetInfo petInfo)
