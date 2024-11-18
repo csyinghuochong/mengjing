@@ -24,6 +24,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this MJCameraComponent self)
         {
+            SettingHelper.SetView(self.Root());
             self.MainCamera = Camera.main;
             //GameObject.Find("Global/MainCamera").GetComponent<Camera>();
             self.PullRate = 1f;

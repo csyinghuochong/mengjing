@@ -512,8 +512,7 @@ namespace ET.Client
 
             self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst =
                     int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
-
-            SettingHelper.SetView(self.Root());
+            
 
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
