@@ -34,12 +34,24 @@ namespace ET.Client
 
         private static void OnPlanSet(this ES_PetBarSet self, int index)
         {
+            if (index == 0)
+            {
+            }
+            else if (index == 1)
+            {
+            }
+            else if (index == 2)
+            {
+            }
         }
 
         private static void OnShowSkill(this ES_PetBarSet self, RolePetInfo petInfo)
         {
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            PetBarInfo petBarInfo = self.Root().GetComponent<PetComponentC>().PetFightList[0];
+            PetBarConfig petBarConfig = PetBarConfigCategory.Instance.Get(petBarInfo.PetBarId);
+            // petBarConfig.ActiveSkills
         }
 
         private static void OnPetTypeSet(this ES_PetBarSet self, int index)
