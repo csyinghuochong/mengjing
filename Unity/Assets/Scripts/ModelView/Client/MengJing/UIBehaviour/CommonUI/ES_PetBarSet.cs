@@ -11,8 +11,6 @@ namespace ET.Client
 		public List<PetBarInfo> PetFightList = new();
 		public int PetBarIndex;
 		
-		public long ClickTime;
-		public bool IsDrag;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetPetItem>> ScrollItemPetbarSetPetItems;
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		

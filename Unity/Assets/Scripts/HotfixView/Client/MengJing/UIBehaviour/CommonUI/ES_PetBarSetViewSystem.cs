@@ -95,6 +95,7 @@ namespace ET.Client
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
+            self.OnUpdateSelectedPetItem();
         }
 
         private static void OnClickAppearSkill(this ES_PetBarSet self, int index)
@@ -200,85 +201,68 @@ namespace ET.Client
 
         private static void OnPointerDown(this ES_PetBarSet self, PointerEventData pdata)
         {
-            self.ClickTime = TimeHelper.ServerNow();
+            // self.ClickTime = TimeHelper.ServerNow();
         }
 
         private static void OnBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
-            if (TimeHelper.ServerNow() - self.ClickTime <= 500)
-            {
-                self.IsDrag = false;
-                self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
-            }
-            else
-            {
-                self.IsDrag = true;
-                self.E_IconImage.gameObject.SetActive(true);
-                Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
-                self.E_IconImage.sprite = item.E_IconImage.sprite;
-            }
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
+
+            self.E_IconImage.gameObject.SetActive(true);
+            Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+            self.E_IconImage.sprite = item.E_IconImage.sprite;
         }
 
         private static void OnDraging(this ES_PetBarSet self, PointerEventData pdata)
         {
-            if (self.IsDrag)
-            {
-                Vector2 localPoint = new Vector3();
-                RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
-                Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-                self.E_IconImage.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
-            }
-            else
-            {
-                self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnDrag(pdata);
-            }
+            Vector2 localPoint = new Vector3();
+            RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            self.E_IconImage.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnDrag(pdata);
         }
 
         private static void OnPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
-            if (TimeHelper.ServerNow() - self.ClickTime <= 200)
-            {
-                // Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
-                // self.OnClickPetItem(item.PetId);
-            }
-
-            self.ClickTime = 0;
+            // if (TimeHelper.ServerNow() - self.ClickTime <= 200)
+            // {
+            //     Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+            //     self.OnClickPetItem(item.PetId);
+            // }
+            //
+            // self.ClickTime = 0;
         }
 
         private static void OnEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
-            if (self.IsDrag)
+            RectTransform canvas = self.E_IconImage.transform.parent.parent.parent.GetComponent<RectTransform>();
+            GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
+            List<RaycastResult> results = new List<RaycastResult>();
+            gr.Raycast(pdata, results);
+
+            for (int i = 0; i < results.Count; i++)
             {
-                RectTransform canvas = self.E_IconImage.transform.parent.parent.parent.GetComponent<RectTransform>();
-                GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
-                List<RaycastResult> results = new List<RaycastResult>();
-                gr.Raycast(pdata, results);
-
-                for (int i = 0; i < results.Count; i++)
+                string name = results[i].gameObject.name;
+                if (name != "E_PetBarSetIcon")
                 {
-                    string name = results[i].gameObject.name;
-                    if (name != "E_PetBarSetIcon")
-                    {
-                        continue;
-                    }
-
-                    name = results[i].gameObject.transform.parent.parent.name;
-                    int petBarSetIndex = int.Parse(name.Substring(17, name.Length - 17));
-                    Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
-                    self.PetFightList[petBarSetIndex].PetId = item.PetId;
-                    self.InitInfo();
-                    self.OnUpdateSelectedPetItem();
-
-                    break;
+                    continue;
                 }
 
-                self.E_IconImage.gameObject.SetActive(false);
+                name = results[i].gameObject.transform.parent.parent.name;
+                int petBarSetIndex = int.Parse(name.Substring(17, name.Length - 17));
+                Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+                self.PetFightList[petBarSetIndex].PetId = item.PetId;
+                self.InitInfo();
+                self.OnUpdateSelectedPetItem();
+
+                break;
             }
-            else
-            {
-                self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
-            }
+
+            self.E_IconImage.gameObject.SetActive(false);
+
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
         }
 
         private static async ETTask OnConfirmPet(this ES_PetBarSet self)
