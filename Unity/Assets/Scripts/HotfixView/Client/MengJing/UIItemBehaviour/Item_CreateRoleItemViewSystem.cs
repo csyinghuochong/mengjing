@@ -74,7 +74,7 @@ namespace ET.Client
                 if (self.CreateRoleInfo == null)
                 {
                     uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
-                    uiComponent.HideWindow(WindowID.WindowID_MJLobby);
+                    uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
                 }
                 else
                 {

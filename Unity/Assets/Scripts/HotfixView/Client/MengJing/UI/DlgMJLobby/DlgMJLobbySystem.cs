@@ -54,7 +54,7 @@ namespace ET.Client
             {
                 UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                 uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
-                uiComponent.HideWindow(WindowID.WindowID_MJLobby);
+                uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
                 return;
             }
         }
