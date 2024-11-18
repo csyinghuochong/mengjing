@@ -30,7 +30,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_PetBarItem ES_PetBarItem_0
+		public ES_PetBarSetItem ES_PetBarSetItem_0
      	{
      		get
      		{
@@ -39,18 +39,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_PetBarItem es = this.m_es_petbaritem_0;
+     			ES_PetBarSetItem es = this.m_es_petbarsetitem_0;
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarItem_0");
-		    	   this.m_es_petbaritem_0 = this.AddChild<ES_PetBarItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarSetItem_0");
+		    	   this.m_es_petbarsetitem_0 = this.AddChild<ES_PetBarSetItem,Transform>(subTrans);
      			}
-     			return this.m_es_petbaritem_0;
+     			return this.m_es_petbarsetitem_0;
      		}
      	}
 
-		public ES_PetBarItem ES_PetBarItem_1
+		public ES_PetBarSetItem ES_PetBarSetItem_1
      	{
      		get
      		{
@@ -59,18 +59,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_PetBarItem es = this.m_es_petbaritem_1;
+     			ES_PetBarSetItem es = this.m_es_petbarsetitem_1;
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarItem_1");
-		    	   this.m_es_petbaritem_1 = this.AddChild<ES_PetBarItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarSetItem_1");
+		    	   this.m_es_petbarsetitem_1 = this.AddChild<ES_PetBarSetItem,Transform>(subTrans);
      			}
-     			return this.m_es_petbaritem_1;
+     			return this.m_es_petbarsetitem_1;
      		}
      	}
 
-		public ES_PetBarItem ES_PetBarItem_2
+		public ES_PetBarSetItem ES_PetBarSetItem_2
      	{
      		get
      		{
@@ -79,14 +79,14 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_PetBarItem es = this.m_es_petbaritem_2;
+     			ES_PetBarSetItem es = this.m_es_petbarsetitem_2;
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarItem_2");
-		    	   this.m_es_petbaritem_2 = this.AddChild<ES_PetBarItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetBarSetItem_2");
+		    	   this.m_es_petbarsetitem_2 = this.AddChild<ES_PetBarSetItem,Transform>(subTrans);
      			}
-     			return this.m_es_petbaritem_2;
+     			return this.m_es_petbarsetitem_2;
      		}
      	}
 
@@ -275,9 +275,9 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_PlanSetToggleGroup = null;
-			this.m_es_petbaritem_0 = null;
-			this.m_es_petbaritem_1 = null;
-			this.m_es_petbaritem_2 = null;
+			this.m_es_petbarsetitem_0 = null;
+			this.m_es_petbarsetitem_1 = null;
+			this.m_es_petbarsetitem_2 = null;
 			this.m_E_PetTypeSetToggleGroup = null;
 			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 			this.m_E_ConfirmButton = null;
@@ -292,9 +292,9 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_PlanSetToggleGroup = null;
-		private EntityRef<ES_PetBarItem> m_es_petbaritem_0 = null;
-		private EntityRef<ES_PetBarItem> m_es_petbaritem_1 = null;
-		private EntityRef<ES_PetBarItem> m_es_petbaritem_2 = null;
+		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_0 = null;
+		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_1 = null;
+		private EntityRef<ES_PetBarSetItem> m_es_petbarsetitem_2 = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;

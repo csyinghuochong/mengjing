@@ -5,8 +5,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetBarItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetBarSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public PetBarInfo PetBarInfo;
+		
 		public UnityEngine.UI.Image E_SkillIconImage
      	{
      		get
