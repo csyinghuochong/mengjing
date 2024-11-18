@@ -34,6 +34,8 @@ namespace ET.Client
 
         public List<GameObject> gameObjects = new List<GameObject>();
 
+        public List<GameObject> oldFashions = new   List<GameObject>(); 
+        
         public List<string> objectNames = new List<string>();
 
         public Dictionary<int, int> FashionBase = new Dictionary<int, int>();

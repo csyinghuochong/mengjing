@@ -118,6 +118,7 @@ namespace ET.Client
             newRenderer.bones = myBones;
             newRenderer.sharedMesh = thisRender.sharedMesh;
             newRenderer.materials = thisRender.materials;
+            self.oldFashions.Add(newObj);
         }
 
         public static Transform FindChildByName(this ChangeEquipHelper self, string thisName, Transform thisObj)
@@ -441,6 +442,12 @@ namespace ET.Client
             self.trparent = target.transform;
             self.trparentbone = self.trparent.Find("BaseModel/Bip001");
             self.FashionBase.Clear();
+            
+            for (int i = self.oldFashions.Count - 1; i >= 0; i--)
+            {
+                GameObject.DestroyImmediate(self.oldFashions[i]);
+            }
+            self.oldFashions.Clear();
 
             for (int i = 0; i < fashionids.Count; i++)
             {
