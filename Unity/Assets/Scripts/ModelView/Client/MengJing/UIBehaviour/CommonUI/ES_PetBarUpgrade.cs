@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetBarUpgrade : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PetBarUpgrade : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int Index;
 		
@@ -208,6 +208,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_MaxText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MaxText == null )
+     			{
+		    		this.m_E_MaxText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_Max");
+     			}
+     			return this.m_E_MaxText;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -233,6 +250,7 @@ namespace ET.Client
 			this.m_es_costlist = null;
 			this.m_E_UpgradeButton = null;
 			this.m_E_UpgradeImage = null;
+			this.m_E_MaxText = null;
 			this.uiTransform = null;
 		}
 
@@ -247,6 +265,7 @@ namespace ET.Client
 		private EntityRef<ES_CostList> m_es_costlist = null;
 		private UnityEngine.UI.Button m_E_UpgradeButton = null;
 		private UnityEngine.UI.Image m_E_UpgradeImage = null;
+		private UnityEngine.UI.Text m_E_MaxText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -80,12 +80,14 @@ namespace ET.Client
             {
                 self.ES_CostList.uiTransform.gameObject.SetActive(false);
                 self.E_UpgradeButton.gameObject.SetActive(false);
+                self.E_MaxText.gameObject.SetActive(true);
             }
             else
             {
                 self.ES_CostList.uiTransform.gameObject.SetActive(true);
                 self.ES_CostList.Refresh(PetBarConfigCategory.Instance.Get(nowConfig + 1).CostItems);
                 self.E_UpgradeButton.gameObject.SetActive(true);
+                self.E_MaxText.gameObject.SetActive(false);
             }
         }
     }
