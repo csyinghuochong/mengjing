@@ -106,5 +106,6 @@
         public const int UIPetMeleeMain = 368;
         public const int MainPetShowQuickFightTimer = 369;
         public const int MainPetSwitchTimer = 370;
+        public const int PetBarSetSkillShowInfoTimer = 371;
     }
 }

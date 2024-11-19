@@ -12,7 +12,6 @@ namespace ET.Client
 		public int PetBarIndex;
 		public int SkillType;
 		public int SkillIndex;
-		public bool IsDragSkillItem;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetSkillItem>> ScrollItemPetbarSetSkillItems;
 		public List<int> ShowSKillIds = new();
 		public List<int> ActivatedSKillIds = new();
