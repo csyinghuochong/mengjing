@@ -275,16 +275,6 @@ namespace ET.Client
         private static void OnPetBarSetSkillsRefresh(this ES_PetBarSet self, Transform transform, int index)
         {
             Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index].BindTrans(transform);
-
-            item.E_TouchEventTrigger.gameObject.SetActive(false);
-            item.E_TouchEventTrigger.triggers.Clear();
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.OnDraging(pdata as PointerEventData); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
-            item.E_TouchEventTrigger.gameObject.SetActive(true);
-            item.OnInitUI(self.ShowRolePetInfos[index]);
         }
 
         private static async ETTask OnActivateSkill(this ES_PetBarSet self)

@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarUpgrade : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
+		public UnityEngine.UI.Button E_PetBarIcon_0Button
      	{
      		get
      		{
@@ -16,15 +16,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ItemTypeSetToggleGroup == null )
+     			if( this.m_E_PetBarIcon_0Button == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
+		    		this.m_E_PetBarIcon_0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarIcon_0");
      			}
-     			return this.m_E_ItemTypeSetToggleGroup;
+     			return this.m_E_PetBarIcon_0Button;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ZhengLiButton
+		public UnityEngine.UI.Image E_PetBarIcon_0Image
      	{
      		get
      		{
@@ -33,15 +33,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ZhengLiButton == null )
+     			if( this.m_E_PetBarIcon_0Image == null )
      			{
-		    		this.m_E_ZhengLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ZhengLi");
+		    		this.m_E_PetBarIcon_0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarIcon_0");
      			}
-     			return this.m_E_ZhengLiButton;
+     			return this.m_E_PetBarIcon_0Image;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ZhengLiImage
+		public UnityEngine.UI.Text E_PetBarName_0Text
      	{
      		get
      		{
@@ -50,15 +50,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ZhengLiImage == null )
+     			if( this.m_E_PetBarName_0Text == null )
      			{
-		    		this.m_E_ZhengLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ZhengLi");
+		    		this.m_E_PetBarName_0Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarName_0");
      			}
-     			return this.m_E_ZhengLiImage;
+     			return this.m_E_PetBarName_0Text;
      		}
      	}
 
-		public UnityEngine.UI.Button E_OneSellButton
+		public UnityEngine.UI.Text E_PetBarLv_0Text
      	{
      		get
      		{
@@ -67,15 +67,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OneSellButton == null )
+     			if( this.m_E_PetBarLv_0Text == null )
      			{
-		    		this.m_E_OneSellButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_OneSell");
+		    		this.m_E_PetBarLv_0Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarLv_0");
      			}
-     			return this.m_E_OneSellButton;
+     			return this.m_E_PetBarLv_0Text;
      		}
      	}
 
-		public UnityEngine.UI.Image E_OneSellImage
+		public UnityEngine.UI.Image E_PetBarIconImage
      	{
      		get
      		{
@@ -84,15 +84,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OneSellImage == null )
+     			if( this.m_E_PetBarIconImage == null )
      			{
-		    		this.m_E_OneSellImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_OneSell");
+		    		this.m_E_PetBarIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_PetBarIcon");
      			}
-     			return this.m_E_OneSellImage;
+     			return this.m_E_PetBarIconImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_OneGemButton
+		public UnityEngine.UI.Text E_PetBarNameText
      	{
      		get
      		{
@@ -101,15 +101,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OneGemButton == null )
+     			if( this.m_E_PetBarNameText == null )
      			{
-		    		this.m_E_OneGemButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_OneGem");
+		    		this.m_E_PetBarNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_PetBarName");
      			}
-     			return this.m_E_OneGemButton;
+     			return this.m_E_PetBarNameText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_OneGemImage
+		public UnityEngine.UI.Text E_PetBarLvText
      	{
      		get
      		{
@@ -118,15 +118,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OneGemImage == null )
+     			if( this.m_E_PetBarLvText == null )
      			{
-		    		this.m_E_OneGemImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_OneGem");
+		    		this.m_E_PetBarLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_PetBarLv");
      			}
-     			return this.m_E_OneGemImage;
+     			return this.m_E_PetBarLvText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_OpenOneSellSetButton
+		public UnityEngine.UI.Text E_DesText
      	{
      		get
      		{
@@ -135,15 +135,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OpenOneSellSetButton == null )
+     			if( this.m_E_DesText == null )
      			{
-		    		this.m_E_OpenOneSellSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_OpenOneSellSet");
+		    		this.m_E_DesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Des");
      			}
-     			return this.m_E_OpenOneSellSetButton;
+     			return this.m_E_DesText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_OpenOneSellSetImage
+		public ES_CostList ES_CostList
      	{
      		get
      		{
@@ -152,15 +152,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_OpenOneSellSetImage == null )
+     			ES_CostList es = this.m_es_costlist;
+     			if( es == null )
+
      			{
-		    		this.m_E_OpenOneSellSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_OpenOneSellSet");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CostList");
+		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
      			}
-     			return this.m_E_OpenOneSellSetImage;
+     			return this.m_es_costlist;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.Button E_UpgradeButton
      	{
      		get
      		{
@@ -169,11 +172,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_UpgradeButton == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
+		    		this.m_E_UpgradeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Upgrade");
      			}
-     			return this.m_E_BagItemsLoopVerticalScrollRect;
+     			return this.m_E_UpgradeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UpgradeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UpgradeImage == null )
+     			{
+		    		this.m_E_UpgradeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Upgrade");
+     			}
+     			return this.m_E_UpgradeImage;
      		}
      	}
 
@@ -191,29 +211,31 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_ZhengLiButton = null;
-			this.m_E_ZhengLiImage = null;
-			this.m_E_OneSellButton = null;
-			this.m_E_OneSellImage = null;
-			this.m_E_OneGemButton = null;
-			this.m_E_OneGemImage = null;
-			this.m_E_OpenOneSellSetButton = null;
-			this.m_E_OpenOneSellSetImage = null;
-			this.m_E_BagItemsLoopVerticalScrollRect = null;
+			this.m_E_PetBarIcon_0Button = null;
+			this.m_E_PetBarIcon_0Image = null;
+			this.m_E_PetBarName_0Text = null;
+			this.m_E_PetBarLv_0Text = null;
+			this.m_E_PetBarIconImage = null;
+			this.m_E_PetBarNameText = null;
+			this.m_E_PetBarLvText = null;
+			this.m_E_DesText = null;
+			this.m_es_costlist = null;
+			this.m_E_UpgradeButton = null;
+			this.m_E_UpgradeImage = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Button m_E_ZhengLiButton = null;
-		private UnityEngine.UI.Image m_E_ZhengLiImage = null;
-		private UnityEngine.UI.Button m_E_OneSellButton = null;
-		private UnityEngine.UI.Image m_E_OneSellImage = null;
-		private UnityEngine.UI.Button m_E_OneGemButton = null;
-		private UnityEngine.UI.Image m_E_OneGemImage = null;
-		private UnityEngine.UI.Button m_E_OpenOneSellSetButton = null;
-		private UnityEngine.UI.Image m_E_OpenOneSellSetImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_PetBarIcon_0Button = null;
+		private UnityEngine.UI.Image m_E_PetBarIcon_0Image = null;
+		private UnityEngine.UI.Text m_E_PetBarName_0Text = null;
+		private UnityEngine.UI.Text m_E_PetBarLv_0Text = null;
+		private UnityEngine.UI.Image m_E_PetBarIconImage = null;
+		private UnityEngine.UI.Text m_E_PetBarNameText = null;
+		private UnityEngine.UI.Text m_E_PetBarLvText = null;
+		private UnityEngine.UI.Text m_E_DesText = null;
+		private EntityRef<ES_CostList> m_es_costlist = null;
+		private UnityEngine.UI.Button m_E_UpgradeButton = null;
+		private UnityEngine.UI.Image m_E_UpgradeImage = null;
 		public Transform uiTransform = null;
 	}
 }
