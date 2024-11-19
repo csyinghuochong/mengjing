@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class SessionDispose_OnHandler: AEvent<Scene, SessionDispose>
+    public class SessionDispose_OnRelink: AEvent<Scene, SessionDispose>
     {
         protected override async ETTask Run(Scene root, SessionDispose args)
         {
@@ -46,6 +46,7 @@ namespace ET.Client
         {
             // 断线重连的流程
             // 需要显示菊花。。
+            Log.Debug($"OnSessionDisconnect...Relink");
             await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
             PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
             await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
