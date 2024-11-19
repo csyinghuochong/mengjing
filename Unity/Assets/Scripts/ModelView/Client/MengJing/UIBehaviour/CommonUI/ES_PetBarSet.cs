@@ -12,6 +12,7 @@ namespace ET.Client
 		public int PetBarIndex;
 		public int SkillType;
 		public int SkillIndex;
+		public bool IsDragSkillItem;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetSkillItem>> ScrollItemPetbarSetSkillItems;
 		public List<int> ShowSKillIds = new();
 		public List<int> ActivatedSKillIds = new();
@@ -147,40 +148,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ConfirmPetButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ConfirmPetButton == null )
-     			{
-		    		this.m_E_ConfirmPetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_ConfirmPet");
-     			}
-     			return this.m_E_ConfirmPetButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ConfirmPetImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ConfirmPetImage == null )
-     			{
-		    		this.m_E_ConfirmPetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_PetPanel/E_ConfirmPet");
-     			}
-     			return this.m_E_ConfirmPetImage;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SkillPanelRectTransform
      	{
      		get
@@ -215,7 +182,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ActivateSkillButton
+		public UnityEngine.UI.Button E_ConfirmPetButton
      	{
      		get
      		{
@@ -224,15 +191,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActivateSkillButton == null )
+     			if( this.m_E_ConfirmPetButton == null )
      			{
-		    		this.m_E_ActivateSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_ActivateSkill");
+		    		this.m_E_ConfirmPetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ConfirmPet");
      			}
-     			return this.m_E_ActivateSkillButton;
+     			return this.m_E_ConfirmPetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ActivateSkillImage
+		public UnityEngine.UI.Image E_ConfirmPetImage
      	{
      		get
      		{
@@ -241,45 +208,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActivateSkillImage == null )
+     			if( this.m_E_ConfirmPetImage == null )
      			{
-		    		this.m_E_ActivateSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_ActivateSkill");
+		    		this.m_E_ConfirmPetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ConfirmPet");
      			}
-     			return this.m_E_ActivateSkillImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_EquipSkillButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipSkillButton == null )
-     			{
-		    		this.m_E_EquipSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_EquipSkill");
-     			}
-     			return this.m_E_EquipSkillButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_EquipSkillImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipSkillImage == null )
-     			{
-		    		this.m_E_EquipSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_EquipSkill");
-     			}
-     			return this.m_E_EquipSkillImage;
+     			return this.m_E_ConfirmPetImage;
      		}
      	}
 
@@ -321,14 +254,10 @@ namespace ET.Client
 			this.m_EG_PetPanelRectTransform = null;
 			this.m_E_PetTypeSetToggleGroup = null;
 			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
-			this.m_E_ConfirmPetButton = null;
-			this.m_E_ConfirmPetImage = null;
 			this.m_EG_SkillPanelRectTransform = null;
 			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
-			this.m_E_ActivateSkillButton = null;
-			this.m_E_ActivateSkillImage = null;
-			this.m_E_EquipSkillButton = null;
-			this.m_E_EquipSkillImage = null;
+			this.m_E_ConfirmPetButton = null;
+			this.m_E_ConfirmPetImage = null;
 			this.m_E_IconImage = null;
 			this.uiTransform = null;
 		}
@@ -340,14 +269,10 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_PetPanelRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_PetTypeSetToggleGroup = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ConfirmPetButton = null;
-		private UnityEngine.UI.Image m_E_ConfirmPetImage = null;
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ActivateSkillButton = null;
-		private UnityEngine.UI.Image m_E_ActivateSkillImage = null;
-		private UnityEngine.UI.Button m_E_EquipSkillButton = null;
-		private UnityEngine.UI.Image m_E_EquipSkillImage = null;
+		private UnityEngine.UI.Button m_E_ConfirmPetButton = null;
+		private UnityEngine.UI.Image m_E_ConfirmPetImage = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		public Transform uiTransform = null;
 	}

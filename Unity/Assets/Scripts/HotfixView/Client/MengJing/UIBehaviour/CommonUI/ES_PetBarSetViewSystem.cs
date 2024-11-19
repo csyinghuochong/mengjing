@@ -23,8 +23,6 @@ namespace ET.Client
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetItemsRefresh);
             self.E_ConfirmPetButton.AddListenerAsync(self.OnConfirmPet);
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
-            self.E_ActivateSkillButton.AddListenerAsync(self.OnActivateSkill);
-            self.E_EquipSkillButton.AddListenerAsync(self.OnEquipSkill);
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
@@ -85,6 +83,11 @@ namespace ET.Client
             self.OnUpdateSelectedPetItem();
         }
 
+        private static async ETTask OnConfirmPet(this ES_PetBarSet self)
+        {
+            await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
+        }
+
         #region 宠物
 
         private static void InitInfo(this ES_PetBarSet self)
@@ -143,15 +146,15 @@ namespace ET.Client
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(false);
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.triggers.Clear();
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
-                (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
+                (pdata) => { self.OnPetItemPointerDown(pdata as PointerEventData); });
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
+                (pdata) => { self.OnPetItemBeginDrag(pdata as PointerEventData, index); });
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnDraging(pdata as PointerEventData); });
+                (pdata) => { self.OnPetItemDraging(pdata as PointerEventData); });
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
+                (pdata) => { self.OnPetItemPointerUp(pdata as PointerEventData, index); });
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
+                (pdata) => { self.OnPetItemEndDrag(pdata as PointerEventData, index); });
             scrollItemPetbarSetPetItem.E_TouchEventTrigger.gameObject.SetActive(true);
             scrollItemPetbarSetPetItem.OnInitUI(self.ShowRolePetInfos[index]);
         }
@@ -182,12 +185,12 @@ namespace ET.Client
             // }
         }
 
-        private static void OnPointerDown(this ES_PetBarSet self, PointerEventData pdata)
+        private static void OnPetItemPointerDown(this ES_PetBarSet self, PointerEventData pdata)
         {
             // self.ClickTime = TimeHelper.ServerNow();
         }
 
-        private static void OnBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
+        private static void OnPetItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
 
@@ -196,7 +199,7 @@ namespace ET.Client
             self.E_IconImage.sprite = item.E_IconImage.sprite;
         }
 
-        private static void OnDraging(this ES_PetBarSet self, PointerEventData pdata)
+        private static void OnPetItemDraging(this ES_PetBarSet self, PointerEventData pdata)
         {
             Vector2 localPoint = new Vector3();
             RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
@@ -207,7 +210,7 @@ namespace ET.Client
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnDrag(pdata);
         }
 
-        private static void OnPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index)
+        private static void OnPetItemPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             // if (TimeHelper.ServerNow() - self.ClickTime <= 200)
             // {
@@ -218,7 +221,7 @@ namespace ET.Client
             // self.ClickTime = 0;
         }
 
-        private static void OnEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
+        private static void OnPetItemEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
             RectTransform canvas = self.E_IconImage.transform.parent.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
@@ -246,13 +249,6 @@ namespace ET.Client
             self.E_IconImage.gameObject.SetActive(false);
 
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
-        }
-
-        private static async ETTask OnConfirmPet(this ES_PetBarSet self)
-        {
-            await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
-
-            await ETTask.CompletedTask;
         }
 
         #endregion
@@ -340,14 +336,51 @@ namespace ET.Client
             }
         }
 
-        private static async ETTask OnActivateSkill(this ES_PetBarSet self)
+        private static void OnSkillItemPointerDown(this ES_PetBarSet self, PointerEventData pdata)
         {
-            await ETTask.CompletedTask;
+            self.IsDragSkillItem = false;
         }
 
-        private static async ETTask OnEquipSkill(this ES_PetBarSet self)
+        private static void OnSkillItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
-            await ETTask.CompletedTask;
+            self.IsDragSkillItem = true;
+
+            self.E_PetbarSetSkillItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
+
+            self.E_IconImage.gameObject.SetActive(true);// 
+            Scroll_Item_PetbarSetSkillItem item = self.ScrollItemPetbarSetSkillItems[index];
+            self.E_IconImage.sprite = item.E_IconImage.sprite;
+        }
+
+        private static void OnSkillItemDraging(this ES_PetBarSet self, PointerEventData pdata)
+        {
+            Vector2 localPoint = new Vector3();
+            RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            self.E_IconImage.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnDrag(pdata);
+        }
+
+        private static void OnSkillItemPointerUp(this ES_PetBarSet self, PointerEventData pdata, int index)
+        {
+            if (!self.IsDragSkillItem)
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_SkillTips);
+
+                Vector2 localPoint;
+                RectTransform canvas = self.Root().GetComponent<GlobalComponent>().NormalRoot.GetComponent<RectTransform>();
+                Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+                DlgSkillTips dlgSkillTips = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkillTips>();
+                dlgSkillTips.OnUpdateData(self.SkillId, new Vector3(localPoint.x, localPoint.y, 0f), ABAtlasTypes.RoleSkillIcon);
+            }
+        }
+
+        private static void OnSkillItemEndDrag(this ES_PetBarSet self, PointerEventData pdata)
+        {
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
         }
 
         #endregion
