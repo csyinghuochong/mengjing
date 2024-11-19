@@ -421,6 +421,21 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetBarUpgrade(Scene root, int index)
+        {
+            C2M_PetBarUpgradeRequest request = C2M_PetBarUpgradeRequest.Create();
+            request.Index = index;
+
+            M2C_PetBarUpgradeResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetBarUpgradeResponse;
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().PetBarConfigList[index]++;
+            }
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet request = C2M_RolePetFormationSet.Create();

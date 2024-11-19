@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarUpgrade : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Button E_PetBarIcon_0Button
+		public ES_PetUpgradeItem ES_PetUpgradeItem_1
      	{
      		get
      		{
@@ -16,15 +16,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetBarIcon_0Button == null )
+     			ES_PetUpgradeItem es = this.m_es_petupgradeitem_1;
+     			if( es == null )
+
      			{
-		    		this.m_E_PetBarIcon_0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarIcon_0");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetUpgradeItem_1");
+		    	   this.m_es_petupgradeitem_1 = this.AddChild<ES_PetUpgradeItem,Transform>(subTrans);
      			}
-     			return this.m_E_PetBarIcon_0Button;
+     			return this.m_es_petupgradeitem_1;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PetBarIcon_0Image
+		public ES_PetUpgradeItem ES_PetUpgradeItem_2
      	{
      		get
      		{
@@ -33,15 +36,18 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetBarIcon_0Image == null )
+     			ES_PetUpgradeItem es = this.m_es_petupgradeitem_2;
+     			if( es == null )
+
      			{
-		    		this.m_E_PetBarIcon_0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarIcon_0");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetUpgradeItem_2");
+		    	   this.m_es_petupgradeitem_2 = this.AddChild<ES_PetUpgradeItem,Transform>(subTrans);
      			}
-     			return this.m_E_PetBarIcon_0Image;
+     			return this.m_es_petupgradeitem_2;
      		}
      	}
 
-		public UnityEngine.UI.Text E_PetBarName_0Text
+		public ES_PetUpgradeItem ES_PetUpgradeItem_3
      	{
      		get
      		{
@@ -50,28 +56,14 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetBarName_0Text == null )
-     			{
-		    		this.m_E_PetBarName_0Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarName_0");
-     			}
-     			return this.m_E_PetBarName_0Text;
-     		}
-     	}
+     			ES_PetUpgradeItem es = this.m_es_petupgradeitem_3;
+     			if( es == null )
 
-		public UnityEngine.UI.Text E_PetBarLv_0Text
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
      			{
-     				Log.Error("uiTransform is null.");
-     				return null;
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_PetUpgradeItem_3");
+		    	   this.m_es_petupgradeitem_3 = this.AddChild<ES_PetUpgradeItem,Transform>(subTrans);
      			}
-     			if( this.m_E_PetBarLv_0Text == null )
-     			{
-		    		this.m_E_PetBarLv_0Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/PetUpgradeItem_0/E_PetBarLv_0");
-     			}
-     			return this.m_E_PetBarLv_0Text;
+     			return this.m_es_petupgradeitem_3;
      		}
      	}
 
@@ -211,10 +203,9 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_PetBarIcon_0Button = null;
-			this.m_E_PetBarIcon_0Image = null;
-			this.m_E_PetBarName_0Text = null;
-			this.m_E_PetBarLv_0Text = null;
+			this.m_es_petupgradeitem_1 = null;
+			this.m_es_petupgradeitem_2 = null;
+			this.m_es_petupgradeitem_3 = null;
 			this.m_E_PetBarIconImage = null;
 			this.m_E_PetBarNameText = null;
 			this.m_E_PetBarLvText = null;
@@ -225,10 +216,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_PetBarIcon_0Button = null;
-		private UnityEngine.UI.Image m_E_PetBarIcon_0Image = null;
-		private UnityEngine.UI.Text m_E_PetBarName_0Text = null;
-		private UnityEngine.UI.Text m_E_PetBarLv_0Text = null;
+		private EntityRef<ES_PetUpgradeItem> m_es_petupgradeitem_1 = null;
+		private EntityRef<ES_PetUpgradeItem> m_es_petupgradeitem_2 = null;
+		private EntityRef<ES_PetUpgradeItem> m_es_petupgradeitem_3 = null;
 		private UnityEngine.UI.Image m_E_PetBarIconImage = null;
 		private UnityEngine.UI.Text m_E_PetBarNameText = null;
 		private UnityEngine.UI.Text m_E_PetBarLvText = null;
