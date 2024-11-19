@@ -17,15 +17,5 @@ namespace ET.Client
         {
             self.DestroyWidget();
         }
-
-        public static void OnUpdateUI(this Scroll_Item_PetbarSetSkillItem self, int skillId, string skillAtlas = ABAtlasTypes.RoleSkillIcon)
-        {
-            self.SkillId = skillId;
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-            string path = ABPathHelper.GetAtlasPath_2(skillAtlas, skillConfig.SkillIcon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            self.E_IconImage.sprite = sp;
-            self.E_NameText.text = skillConfig.SkillName;
-        }
     }
 }
