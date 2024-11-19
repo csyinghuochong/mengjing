@@ -191,7 +191,8 @@ namespace ET.Client
             { ErrorCode.Pre_Condition_Error, "前置条件不足！" },
             { ErrorCode.ERR_TalentNotActivePreId, "未激活前置天赋" },
             { ErrorCode.ERR_TalentPointNot, "天赋点不足" },
-            { ErrorCode.ERR_LvNoHigh, "等级不足" }
+            { ErrorCode.ERR_LvNoHigh, "等级不足" },
+            { ErrorCode.ERR_SessionDisconnect, "网络已断开" },
         };
     }
 }

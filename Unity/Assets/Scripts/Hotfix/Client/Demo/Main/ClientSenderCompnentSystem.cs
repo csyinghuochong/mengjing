@@ -137,6 +137,11 @@ namespace ET.Client
                 EventSystem.Instance.Publish(self.Root(), new CommonHintError() { ErrorValue = response.Error });
             }
             
+            if (response.Error == ErrorCode.ERR_SessionDisconnect)
+            {
+               Log.Error($"response.Error == ErrorCode.ERR_SessionDisconnect.[网络已断开，但是没重连！！！！]");
+            }
+            
             return response;
         }
 
