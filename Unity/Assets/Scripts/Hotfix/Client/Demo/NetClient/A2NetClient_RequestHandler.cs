@@ -13,9 +13,11 @@
             }
 
             Session session = sessionComponent.Session;
-            if (session == null)
+            if (session == null || session.IsDisposed)
             {
                 Log.Debug($"session == null");
+                response.Error = ErrorCode.ERR_SessionDisconnect;
+                return;
             }
             
             IResponse res = await root.GetComponent<SessionComponent>().Session.Call(request.MessageObject);
