@@ -430,7 +430,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponentC>().PetBarConfigList[index]++;
+                root.GetComponent<PetComponentC>().PetBarConfigList[index - 1]++;
             }
 
             return response.Error;

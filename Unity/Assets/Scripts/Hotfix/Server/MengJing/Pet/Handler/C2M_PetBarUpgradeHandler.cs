@@ -12,7 +12,7 @@
             }
 
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-            int nowConfig = petComponentS.PetBarConfigList[request.Index];
+            int nowConfig = petComponentS.PetBarConfigList[request.Index - 1];
             if (!PetBarConfigCategory.Instance.Contain(nowConfig + 1))
             {
                 response.Error = ErrorCode.ERR_ModifyData;
@@ -27,7 +27,7 @@
                 return;
             }
 
-            petComponentS.PetBarConfigList[request.Index] = nowConfig + 1;
+            petComponentS.PetBarConfigList[request.Index - 1] = nowConfig + 1;
             // TODO 加属性
 
             await ETTask.CompletedTask;
