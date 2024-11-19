@@ -46,10 +46,12 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(appearSkill);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_AppearSkillButton.transform.Find("mask/Icon").gameObject.SetActive(true);
                 self.E_AppearSkillButton.transform.Find("mask/Icon").GetComponent<Image>().sprite = sp;
             }
             else
             {
+                self.E_AppearSkillButton.transform.Find("mask/Icon").gameObject.SetActive(false);
                 self.E_AppearSkillButton.transform.Find("mask/Icon").GetComponent<Image>().sprite = null;
             }
 
@@ -59,10 +61,12 @@ namespace ET.Client
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(activeSkill);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_ActiveSkill_0Button.transform.Find("mask/Icon").gameObject.SetActive(true);
                 self.E_ActiveSkill_0Button.transform.Find("mask/Icon").GetComponent<Image>().sprite = sp;
             }
             else
             {
+                self.E_ActiveSkill_0Button.transform.Find("mask/Icon").gameObject.SetActive(false);
                 self.E_ActiveSkill_0Button.transform.Find("mask/Icon").GetComponent<Image>().sprite = null;
             }
         }

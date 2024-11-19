@@ -38,6 +38,8 @@ namespace ET.Client
 
             self.EG_PetPanelRectTransform.gameObject.SetActive(false);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
+            self.EG_PetIconRectTransform.gameObject.SetActive(false);
+            self.EG_SkillIconRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(0);
         }
@@ -194,18 +196,18 @@ namespace ET.Client
         {
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
 
-            self.E_IconImage.gameObject.SetActive(true);
+            self.EG_PetIconRectTransform.gameObject.SetActive(true);
             Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
-            self.E_IconImage.sprite = item.E_IconImage.sprite;
+            self.EG_PetIconRectTransform.Find("Icon").GetComponent<Image>().sprite = item.E_IconImage.sprite;
         }
 
         private static void OnPetItemDraging(this ES_PetBarSet self, PointerEventData pdata)
         {
             Vector2 localPoint = new Vector3();
-            RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.EG_PetIconRectTransform.transform.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            self.E_IconImage.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+            self.EG_PetIconRectTransform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
 
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnDrag(pdata);
         }
@@ -223,7 +225,7 @@ namespace ET.Client
 
         private static void OnPetItemEndDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
         {
-            RectTransform canvas = self.E_IconImage.transform.parent.parent.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.EG_PetIconRectTransform.parent.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
@@ -246,7 +248,7 @@ namespace ET.Client
                 break;
             }
 
-            self.E_IconImage.gameObject.SetActive(false);
+            self.EG_PetIconRectTransform.gameObject.SetActive(false);
 
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
         }
@@ -341,13 +343,13 @@ namespace ET.Client
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.OnSkillItemPointerDown(pdata as PointerEventData, skillId); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, index); });
+                (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, index, activated); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData); });
+                (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData, activated); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
                 (pdata) => { self.OnSkillItemPointerUp(pdata as PointerEventData, skillId); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData); });
+                (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData, skillId, activated); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(true);
         }
 
@@ -363,24 +365,30 @@ namespace ET.Client
             dlgSkillTips.OnUpdateData(skillId, new Vector3(localPoint.x, localPoint.y - 300f, 0f), ABAtlasTypes.RoleSkillIcon);
         }
 
-        private static void OnSkillItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index)
+        private static void OnSkillItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index, bool activate)
         {
             self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
 
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
 
-            self.E_IconImage.gameObject.SetActive(true);
-            Scroll_Item_PetbarSetSkillItem item = self.ScrollItemPetbarSetSkillItems[index];
-            self.E_IconImage.sprite = item.E_IconImage.sprite;
+            if (activate)
+            {
+                self.EG_SkillIconRectTransform.gameObject.SetActive(true);
+                Scroll_Item_PetbarSetSkillItem item = self.ScrollItemPetbarSetSkillItems[index];
+                self.EG_SkillIconRectTransform.Find("mask/Icon").GetComponent<Image>().sprite = item.E_IconImage.sprite;
+            }
         }
 
-        private static void OnSkillItemDraging(this ES_PetBarSet self, PointerEventData pdata)
+        private static void OnSkillItemDraging(this ES_PetBarSet self, PointerEventData pdata, bool activate)
         {
-            Vector2 localPoint = new Vector3();
-            RectTransform canvas = self.E_IconImage.transform.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            self.E_IconImage.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+            if (activate)
+            {
+                Vector2 localPoint = new Vector3();
+                RectTransform canvas = self.EG_SkillIconRectTransform.parent.GetComponent<RectTransform>();
+                Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+                self.EG_SkillIconRectTransform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+            }
 
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.OnDrag(pdata);
         }
@@ -388,12 +396,47 @@ namespace ET.Client
         private static void OnSkillItemPointerUp(this ES_PetBarSet self, PointerEventData pdata, int skillId)
         {
             self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
-
-            self.E_IconImage.gameObject.SetActive(false);
         }
 
-        private static void OnSkillItemEndDrag(this ES_PetBarSet self, PointerEventData pdata)
+        private static void OnSkillItemEndDrag(this ES_PetBarSet self, PointerEventData pdata, int skillId, bool activate)
         {
+            if (activate)
+            {
+                RectTransform canvas = self.EG_SkillIconRectTransform.parent.parent.parent.GetComponent<RectTransform>();
+                GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
+                List<RaycastResult> results = new List<RaycastResult>();
+                gr.Raycast(pdata, results);
+
+                for (int i = 0; i < results.Count; i++)
+                {
+                    string name = results[i].gameObject.name;
+                    if (name != "E_AppearSkill" && name != "E_ActiveSkill_0")
+                    {
+                        continue;
+                    }
+
+                    string parentName = results[i].gameObject.transform.parent.name;
+                    int petBarSetIndex = int.Parse(parentName.Substring(17, parentName.Length - 17));
+
+                    if (name == "E_AppearSkill")
+                    {
+                        self.PetFightList[petBarSetIndex - 1].AppearSkill = skillId;
+                    }
+                    else
+                    {
+                        self.PetFightList[petBarSetIndex - 1].ActiveSkill.Clear();
+                        self.PetFightList[petBarSetIndex - 1].ActiveSkill.Add(skillId);
+                    }
+
+                    self.InitInfo();
+
+                    break;
+                }
+            }
+
+            self.EG_SkillIconRectTransform.gameObject.SetActive(false);
+
+            self.E_PetbarSetPetItemsLoopVerticalScrollRect.OnEndDrag(pdata);
         }
 
         #endregion
