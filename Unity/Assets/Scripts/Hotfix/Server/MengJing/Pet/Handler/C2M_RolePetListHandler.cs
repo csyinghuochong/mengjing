@@ -26,6 +26,8 @@
             response.PetFightList_1.AddRange(petComponent.PetFightList_1);
             response.PetFightList_2.AddRange(petComponent.PetFightList_2);
             response.PetFightList_3.AddRange(petComponent.PetFightList_3);
+            response.PetBarConfigList.AddRange(petComponent.PetBarConfigList);
+            
             await ETTask.CompletedTask;
         }
     }

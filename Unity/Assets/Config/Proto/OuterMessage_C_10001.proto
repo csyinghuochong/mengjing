@@ -2449,6 +2449,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated PetBarInfo PetFightList_1 = 16;
 	repeated PetBarInfo PetFightList_2 = 17;
 	repeated PetBarInfo PetFightList_3 = 18;
+	repeated int32 PetBarConfigList = 19;
 }
 
 

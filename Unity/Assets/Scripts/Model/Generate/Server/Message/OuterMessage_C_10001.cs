@@ -10615,6 +10615,9 @@ namespace ET
         [MemoryPackOrder(17)]
         public List<PetBarInfo> PetFightList_3 { get; set; } = new();
 
+        [MemoryPackOrder(18)]
+        public List<int> PetBarConfigList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -10642,6 +10645,7 @@ namespace ET
             this.PetFightList_1.Clear();
             this.PetFightList_2.Clear();
             this.PetFightList_3.Clear();
+            this.PetBarConfigList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

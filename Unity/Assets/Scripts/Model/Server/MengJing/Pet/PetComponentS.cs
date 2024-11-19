@@ -21,6 +21,7 @@ namespace ET.Server
         public List<PetBarInfo> PetFightList_1 { get; set; } = new();   //宠物出战列表  （后期需要通过布阵界面来设置）
         public List<PetBarInfo> PetFightList_2 { get; set; } = new();
         public List<PetBarInfo> PetFightList_3 { get; set; } = new();
+        public List<int> PetBarConfigList { get; set; } = new();
         
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
         public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 

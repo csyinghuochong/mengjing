@@ -147,6 +147,14 @@ namespace ET.Server
                 self.PetFightList_3.Add(PetBarInfo.Create());
             }
 
+            if (self.PetBarConfigList.Count != 3)
+            {
+                self.PetBarConfigList.Clear();
+                self.PetBarConfigList.Add(100001);
+                self.PetBarConfigList.Add(200001);
+                self.PetBarConfigList.Add(300001);
+            }
+
             if ( self.PetShouHuList.Count != 4)
             {
                 self.PetShouHuList.Clear();

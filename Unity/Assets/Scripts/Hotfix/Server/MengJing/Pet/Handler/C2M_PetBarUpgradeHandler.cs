@@ -5,6 +5,12 @@
     {
         protected override async ETTask Run(Unit unit, C2M_PetBarUpgradeRequest request, M2C_PetBarUpgradeResponse response)
         {
+            if (request.Index < 1 || request.Index > 3)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+            
             await ETTask.CompletedTask;
         }
     }
