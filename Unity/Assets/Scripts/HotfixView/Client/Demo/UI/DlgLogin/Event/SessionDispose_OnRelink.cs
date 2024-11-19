@@ -37,7 +37,8 @@ namespace ET.Client
                     //PopupTipHelp.OpenPopupTip(scene, "消息异常", "请重新登录", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine();
                      break;
                 default:
-                    EventSystem.Instance.Publish(root, new ReturnLogin());
+                    //EventSystem.Instance.Publish(root, new ReturnLogin());
+                    OnSessionDisconnect(root).Coroutine();
                     break;
             }
         }
@@ -47,10 +48,7 @@ namespace ET.Client
             // 断线重连的流程
             // 需要显示菊花。。
             Log.Debug($"OnSessionDisconnect...Relink");
-            await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
-            await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
-            await LoginHelper.LoginGameAsync(root, 1);
+            root.GetComponent<RelinkComponent>().CheckRelink().Coroutine();
         }
 
         private async ETTask OnOtherAccountLogin(Scene root)

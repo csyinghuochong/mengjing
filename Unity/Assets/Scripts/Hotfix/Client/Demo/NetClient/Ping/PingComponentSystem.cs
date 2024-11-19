@@ -22,7 +22,6 @@ namespace ET.Client
             Session session = self.GetParent<Session>();
             long instanceId = self.InstanceId;
             Fiber fiber = self.Fiber();
-            
             while (true)
             {
                 try
@@ -54,7 +53,6 @@ namespace ET.Client
                     {
                         return;
                     }
-
                     long time2 = TimeInfo.Instance.ClientNow();
                     self.Ping = time2 - time1;
 

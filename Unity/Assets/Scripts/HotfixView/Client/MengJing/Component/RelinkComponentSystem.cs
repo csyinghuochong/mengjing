@@ -130,8 +130,9 @@
             }
 
             self.Relink = true;
-            Log.Debug($"重连请求！！");
+            UIEventComponent.Instance?.SetUIClicked(true);
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Relink).Coroutine();
+            
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             for (int i = 0; i < 5; i++)
             {
@@ -157,11 +158,13 @@
                 self.SendLogin().Coroutine();
                 if (i == 4)
                 {
-                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Relink);
                     EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
                     break;
                 }
             }
+            
+            UIEventComponent.Instance?.SetUIClicked(false);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Relink);
         }
 
         public static void OnModifyData(this RelinkComponent self)
@@ -183,51 +186,30 @@
 
         public static async ETTask OnRelinkSucess(this RelinkComponent self)
         {
-            // self.Relink = false;
-            // Log.ILog.Debug($"重连成功！！ {self.Relink}");
-            // Scene zoneScene = self.ZoneScene();
-            // UIHelper.Remove(self.DomainScene(), UIType.UIRelink);
-            //
-            // zoneScene.GetComponent<SessionComponent>().Session.Send(new C2M_RefreshUnitRequest());
-            // await NetHelper.RequestUserInfo(zoneScene, true);
-            // await NetHelper.RequestUnitInfo(zoneScene, true);
-            // await NetHelper.RequestAllPets(zoneScene);
-            // await NetHelper.RequestFriendInfo(zoneScene);
-            //
-            // AccountInfoComponent accountInfoComponent = zoneScene.GetComponent<AccountInfoComponent>();
-            // string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString());
-            // if (!string.IsNullOrEmpty(info))
-            // {
-            //     NetHelper.SendIOSPayVerifyRequest(zoneScene, info);
-            //     PlayerPrefsHelp.SetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString(), string.Empty);
-            //     FloatTipManager.Instance.ShowFloatTip("重连成功_IOS！");
-            // }
-            // else
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("重连成功！");
-            // }
-            //
-            // UI uIMain = UIHelper.GetUI(zoneScene, UIType.UIMain);
-            // if (uIMain != null)
-            // {
-            //     uIMain.GetComponent<UIMainComponent>().OnRelinkUpdate();
-            // }
-            //
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(zoneScene);
-            //
-            // NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            // int nowhp = numericComponent.GetAsInt(NumericType.Now_Hp);
-            // int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
-            //
-            // if (nowdead == 1)
-            // {
-            //     unit.GetComponent<UIUnitHpComponent>().UpdateBlood();
-            //     unit.GetComponent<HeroDataComponent>().OnDead(null);
-            //     EventType.UnitDead.Instance.Unit = unit;
-            //     Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
-            // }
+            self.Relink = false;
+
+            PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
+            string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString());
+            if (!string.IsNullOrEmpty(info))
+            {
+                //重新验证IOS充值结果
+                //NetHelper.SendIOSPayVerifyRequest(zoneScene, info);
+                PlayerPrefsHelp.SetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString(), string.Empty);
+            }
+
+             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+             int nowhp = numericComponent.GetAsInt(NumericType.Now_Hp);
+             int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
             
-            //UIEventComponent.Instance?.SetUIClicked(false);
+             if (nowdead == 1)
+             {
+                 unit.GetComponent<UIPlayerHpComponent>().UpdateBlood();
+                 unit.GetComponent<HeroDataComponentC>().OnDead();
+                 EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
+             }
+            
+
             await ETTask.CompletedTask;
         }
 
@@ -237,39 +219,17 @@
         /// <param name="self"></param>
         public static async ETTask<int> SendLogin(this RelinkComponent self)
         {
-            //             long instanceid = self.InstanceId;
-            //             AccountInfoComponent PlayerComponent = self.DomainScene().GetComponent<AccountInfoComponent>();
-            //
-            //             int code = await LoginHelper.Login(self.DomainScene(),
-            //                 PlayerComponent.ServerIp,
-            //                 PlayerComponent.Account,
-            //                 PlayerComponent.Password, true, string.Empty, PlayerComponent.LoginType);
-            //             if (code != ErrorCode.ERR_Success)
-            //             {
-            //                 return code;
-            //             }
-            //
-            //             code = await LoginHelper.GetRealmKey(self.DomainScene());
-            //             if (code != ErrorCode.ERR_Success)
-            //             {
-            //                 return code;
-            //             }
-            //
-            //             await TimerComponent.Instance.WaitAsync(1500);
-            //             if (instanceid != self.InstanceId)
-            //             {
-            //                 return ErrorCode.ERR_NetWorkError;
-            //             }
-            //
-            // #if TikTok5
-            //                     string deviveInfo = $"tiktok";
-            // #else
-            //             string deviveInfo = $"{UnityEngine.SystemInfo.deviceModel}_{UnityEngine.Screen.width}:{UnityEngine.Screen.height}";
-            // #endif
-            //             code = await LoginHelper.EnterGame(self.ZoneScene(), deviveInfo, true, GlobalHelp.GetPlatform());
-            //             return code;
-            await ETTask.CompletedTask;
-            return 0;
+            Scene root = self.Root();
+            int errorCode = ErrorCode.ERR_Success;
+            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            errorCode = await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            errorCode = await LoginHelper.LoginGameAsync(root, 1);
+            return errorCode;
         }
     }
 }

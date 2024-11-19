@@ -38,7 +38,7 @@ namespace ET.Client
             return netClient2MainRealName.Error;
         }
 
-        public static async ETTask Login(Scene root, string account, string password, int reLink, int versionmode)
+        public static async ETTask<int> Login(Scene root, string account, string password, int reLink, int versionmode)
         {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
@@ -48,21 +48,22 @@ namespace ET.Client
             {
                 Log.Debug("LoginAsync->NotRealName");
                 EventSystem.Instance.Publish(root, new NotRealName() {   });
-                return;
+                return errCode;
             }
 
             if (errCode != ErrorCode.ERR_Success)
             {
                 EventSystem.Instance.Publish(root, new CommonPopup() { HintText = $"无法进入游戏: 错误吗{errCode}" });
-                return;
+                return errCode;
             }
             if (reLink == 0)
             {
                 await EventSystem.Instance.PublishAsync(root, new LoginFinish());
             }
+            return errCode;
         }
 
-        public static async ETTask LoginGameAsync(Scene root, int reLink)
+        public static async ETTask<int> LoginGameAsync(Scene root, int reLink)
         {
             try
             {
@@ -81,7 +82,7 @@ namespace ET.Client
                 if (r2CGetRealmKey.Error != ErrorCode.ERR_Success)
                 {
                     Log.Error("获取RealmKey失败！");
-                    return;
+                    return r2CGetRealmKey.Error;
                 }
 
                 NetClient2Main_LoginGame netClient2MainLoginGame = await clientSenderComponent.LoginGameAsync(playerComponent.Account,
@@ -95,7 +96,7 @@ namespace ET.Client
                 if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
                 {
                     Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");
-                    return;
+                    return netClient2MainLoginGame.Error;
                 }
               
                 if (reLink == 0)
@@ -118,12 +119,15 @@ namespace ET.Client
                 {
                     //G2C_SecondLogin 处理
                     //断线重连 走一下登录流程 刷一下数据
+                    Log.Debug($"LoginGameAsync..重连成功！！");
                 }
                 Log.Debug("进入游戏成功！！！");
+                return ErrorCode.ERR_Success;
             }
             catch (Exception e)
             {
                 Log.Error(e);
+                return ErrorCode.ERR_Error;
             }
         }
 

@@ -5,13 +5,12 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, G2C_SecondLogin message)
         {
-            Log.Debug("G2C_SecondLoginHandler");
-            
+            Log.Debug("G2C_SecondLoginHandler..重连成功！！");
+            //也可以放在 LoginHelper.LoginGameAsync
             
             await UserInfoNetHelper.RequestUserInfoInit(root);
             await UserInfoNetHelper.RequestFreshUnit(root);
             EventSystem.Instance.Publish(root, new RelinkSucess());
-            
             
             //MapComponent mapComponent = root.GetComponent<MapComponent>();
             // if (mapComponent.SceneType == message.SceneType )
