@@ -269,17 +269,19 @@ namespace ET.Client
             self.EG_SkillPanelRectTransform.gameObject.SetActive(true);
 
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-            int nowPetbarId = petComponentC.PetBarConfigList[petIndex];
+            int nowPetbarId = petComponentC.PetBarConfigList[petIndex - 1];
             self.ShowSKillIds.Clear();
             self.ActivatedSKillIds.Clear();
             foreach (int id in PetBarConfigCategory.Instance.PetBarGroupList[petIndex])
             {
+                PetBarConfig petBarConfig = PetBarConfigCategory.Instance.Get(id);
+
                 if (id <= nowPetbarId)
                 {
-                    self.ActivatedSKillIds.Add(id);
+                    self.ActivatedSKillIds.AddRange(petBarConfig.ActiveSkills);
                 }
 
-                self.ShowSKillIds.Add(id);
+                self.ShowSKillIds.AddRange(petBarConfig.ActiveSkills);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemPetbarSetSkillItems, self.ShowSKillIds.Count);
@@ -309,6 +311,7 @@ namespace ET.Client
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.ShowSKillIds[index]);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            scrollItemPetbarSetSkillItem.E_XuanZhongImage.gameObject.SetActive(false);
             scrollItemPetbarSetSkillItem.E_IconImage.sprite = sp;
             scrollItemPetbarSetSkillItem.E_NameText.text = skillConfig.SkillName;
             bool activated = self.ActivatedSKillIds.Contains(self.ShowSKillIds[index]);
