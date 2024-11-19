@@ -8,11 +8,6 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, ReturnLogin args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == SceneTypeEnum.LoginScene)
-            {
-                return;
-            }
-
             mapComponent.SceneType = SceneTypeEnum.LoginScene;
 
             RunAsync2(scene, args, 100).Coroutine();
@@ -33,7 +28,7 @@ namespace ET.Client
 
             Scene oldroot = scene.Root();
             scene.Root().RemoveComponent<ClientSenderCompnent>();
-            oldroot.CurrentScene().Dispose();
+            oldroot.CurrentScene()?.Dispose();
             oldroot.GetComponent<UIComponent>().CloseAllWindow();
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(true);
             await FiberManager.Instance.Remove(oldroot.Fiber.Id);
