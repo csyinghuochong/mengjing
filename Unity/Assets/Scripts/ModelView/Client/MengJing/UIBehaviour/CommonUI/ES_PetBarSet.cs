@@ -181,6 +181,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ToggleGroup E_SkillTypeSetToggleGroup
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SkillTypeSetToggleGroup == null )
+     			{
+		    		this.m_E_SkillTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/EG_SkillPanel/E_SkillTypeSet");
+     			}
+     			return this.m_E_SkillTypeSetToggleGroup;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_PetbarSetSkillItemsImage
      	{
      		get
@@ -340,6 +357,7 @@ namespace ET.Client
 			this.m_E_PetbarSetPetItemsImage = null;
 			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 			this.m_EG_SkillPanelRectTransform = null;
+			this.m_E_SkillTypeSetToggleGroup = null;
 			this.m_E_PetbarSetSkillItemsImage = null;
 			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 			this.m_E_ConfirmButton = null;
@@ -360,6 +378,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_PetbarSetPetItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
+		private UnityEngine.UI.ToggleGroup m_E_SkillTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_PetbarSetSkillItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ConfirmButton = null;
