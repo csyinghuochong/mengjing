@@ -43,7 +43,7 @@ namespace ET.Client
             self.EG_PetIconRectTransform.gameObject.SetActive(false);
             self.EG_SkillIconRectTransform.gameObject.SetActive(false);
 
-            self.E_PlanSetToggleGroup.OnSelectIndex(0);
+            self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetFightPlan);
         }
 
         [EntitySystem]
@@ -104,10 +104,12 @@ namespace ET.Client
 
         private static void OnReSet(this ES_PetBarSet self)
         {
-            PetBarInfo petBarInfo = self.PetFightList[self.PetBarIndex - 1];
-            petBarInfo.PetId = 0;
-            petBarInfo.AppearSkill = 0;
-            petBarInfo.ActiveSkill.Clear();
+            foreach (PetBarInfo petBarInfo in self.PetFightList)
+            {
+                petBarInfo.PetId = 0;
+                petBarInfo.AppearSkill = 0;
+                petBarInfo.ActiveSkill.Clear();
+            }
 
             self.InitInfo();
         }

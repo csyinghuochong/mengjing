@@ -1350,6 +1350,42 @@ namespace ET.Server
             return self.RolePetInfos;
         }
 
+        public static void SetNowPetFightList(this PetComponentS self, List<PetBarInfo> petBarInfos)
+        {
+            if (self.PetFightPlan == 0)
+            {
+                foreach (PetBarInfo petBarInfo in self.PetFightList_1)
+                {
+                    petBarInfo.Dispose();
+                }
+
+                self.PetFightList_1.Clear();
+                self.PetFightList_1 = petBarInfos;
+            }
+
+            if (self.PetFightPlan == 1)
+            {
+                foreach (PetBarInfo petBarInfo in self.PetFightList_2)
+                {
+                    petBarInfo.Dispose();
+                }
+
+                self.PetFightList_2.Clear();
+                self.PetFightList_2 = petBarInfos;
+            }
+
+            if (self.PetFightPlan == 2)
+            {
+                foreach (PetBarInfo petBarInfo in self.PetFightList_3)
+                {
+                    petBarInfo.Dispose();
+                }
+
+                self.PetFightList_3.Clear();
+                self.PetFightList_3 = petBarInfos;
+            }
+        }
+
         public static List<PetBarInfo> GetNowPetFightList(this PetComponentS self)
         {
             return self.PetFightPlan switch

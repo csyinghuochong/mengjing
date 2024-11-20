@@ -10,10 +10,16 @@ namespace ET.Server
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 
+            if (request.PetBarList == null || request.PetBarList.Count < 3)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+
             // List<long> petids = petComponent.GetNowPetFightList().Select(x => x.PetId).ToList();
             TransferHelper.RemoveFightPetList(unit);
 
-            petComponent.PetFightList_1 = request.PetBarList; //通过布阵界面设置出战宠物
+            petComponent.SetNowPetFightList(request.PetBarList); //通过布阵界面设置出战宠物
 
             TransferHelper.CreateFightPetList(unit);
 
