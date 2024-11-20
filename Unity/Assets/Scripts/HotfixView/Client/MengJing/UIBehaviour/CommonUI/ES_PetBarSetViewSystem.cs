@@ -88,7 +88,11 @@ namespace ET.Client
 
         private static async ETTask OnConfirm(this ES_PetBarSet self)
         {
-            await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
+            int error = await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
+            if (error == ErrorCode.ERR_Success)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("上阵成功！");
+            }
         }
 
         private static void OnReSet(this ES_PetBarSet self)
