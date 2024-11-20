@@ -104,13 +104,6 @@ namespace ET.Client
 
         private static async ETTask OnAwake(this FlyTipComponent self)
         {
-            //ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-
-            //GameObject flyTip = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTip.prefab");
-            //await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTip.prefab", flyTip, 3);
-
-            //GameObject flyTipDi = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTipDi.prefab");
-            //await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTipDi.prefab", flyTipDi, 3);
             await ETTask.CompletedTask;
         }
 
