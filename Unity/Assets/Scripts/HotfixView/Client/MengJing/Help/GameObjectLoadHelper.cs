@@ -53,9 +53,8 @@ namespace ET.Client
 
         public static void DisposeUnUse(Scene root)
         {
-            Log.Warning($"DisposeUnUse: {Time.time}");
-
-            List<string> assets = GameObjectPoolHelper.DisposeUnUse();
+            
+			List<string> assets = GameObjectPoolHelper.DisposeUnUse();
             foreach (var VARIABLE in assets)
             {
                 root.GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);

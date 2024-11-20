@@ -17,7 +17,7 @@ namespace ET.Client
 
             //SceneUnitLeaveSightRange_Notify:  False   95  True  1218242235335389
             //SceneUnitLeaveSightRange_Notify:  True   1218242235335389  False  978
-            Log.Debug($"SceneUnitLeaveSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}  {b.Id}");
+            //Log.Debug($"SceneUnitLeaveSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}  {b.Id}");
             b.GetParent<SceneUnit>().RecoverGameObject();
         }
     }

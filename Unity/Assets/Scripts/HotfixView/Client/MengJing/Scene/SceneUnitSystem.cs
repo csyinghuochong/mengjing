@@ -68,6 +68,12 @@ namespace ET.Client
             {
                 return;
             }
+
+            if (!SettingData.ShowSceneUnit)
+            {
+                return;
+            }
+
             self.State = LoadState.WillLoad;
             GameObjectLoadHelper.AddLoadQueue(self.Root(), self.Prefabname, self.InstanceId, self.OnLoadGameObject);
         }

@@ -134,9 +134,9 @@ namespace ET.Client
                 return;
             }
 
-            if (text.Equals("#pool"))
+            if (text.Equals("#showsceneunit"))
             {
-                SettingData.UsePool = !SettingData.UsePool;
+                SettingData.ShowSceneUnit = !SettingData.ShowSceneUnit;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }

@@ -24,7 +24,7 @@ namespace ET.Client
             
             //SceneUnitEnterSightRange_Notify:  False   3  True   1218242235335389
             //SceneUnitEnterSightRange_Notify:  True   1218242235335389  False   465
-            Log.Debug($"SceneUnitEnterSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}   {b.Id}");
+            //Log.Debug($"SceneUnitEnterSightRange_Notify:  {a.MainHero}   {a.Id}  {b.MainHero}   {b.Id}");
             ub.LoadGameObject();
             await ETTask.CompletedTask;
         }

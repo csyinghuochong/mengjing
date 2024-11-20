@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -44,14 +45,47 @@ namespace ET.Client
         
         public static void CheckUnUseAssets(this SceneUnitManagerComponent self)
         {
-            if (GameObjectPoolHelper.GetObjectNumber() >= 200)
+            if (GameObjectPoolHelper.GetAssetNumber() >= 50)
             {
-                Debug.Log("GameObjectPoolHelper.GetObjectNumber() >= 200");
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
                 GameObjectLoadHelper.DisposeUnUse(self.Root());
 
                 resourcesLoaderComponent.UnLoadAllAsset();
+                
+                Debug.Log("GameMemory..GetAssetNumber() >= 50");
+
+                //导致卡顿不能用、、
+                //Resources.UnloadUnusedAssets();
+                //GC.Collect();
+                
+                self.GetGameMemory();
             }
+        }
+
+        public static void GetGameMemory(this SceneUnitManagerComponent self)
+        {
+            long monouse        = UnityEngine.Profiling.Profiler.GetMonoUsedSizeLong() ;               //使用的
+            long totalallocated = UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong();         //unity分配的
+            long totalreserved = UnityEngine.Profiling.Profiler.GetTotalReservedMemoryLong();           //总内存
+            long unusedreserved = UnityEngine.Profiling.Profiler.GetTotalUnusedReservedMemoryLong();    //未使用的内存
+
+            StringBuilder stringBuilder =  new StringBuilder();
+            stringBuilder.Clear();
+            stringBuilder.Append($"内存占用: 当前使用:{monouse/1024/1024}MB Unity分配:{totalallocated / 1024 / 1024}MB 总内存:{totalreserved / 1024 / 1024}MB 空闲内存:{unusedreserved / 1024 / 1024}MB");
+            stringBuilder.AppendLine();
+
+            stringBuilder.Append("EventSystem:");
+            stringBuilder.AppendLine();
+            stringBuilder.Append(EventSystem.Instance.ToString());
+            stringBuilder.Append("ObjectPool:");
+            stringBuilder.AppendLine();
+            stringBuilder.Append(ObjectPool.Instance.ToString());
+            stringBuilder.Append("MonoPool:");
+            stringBuilder.AppendLine();
+            stringBuilder.Append("GameObjectPool:");
+            stringBuilder.AppendLine();
+            
+            Debug.Log($"GameMemory..GetGameMemory:  {stringBuilder.ToString()}");
         }
 
         public static void Move(this SceneUnitManagerComponent self, Unit unit, ChangePosition args)

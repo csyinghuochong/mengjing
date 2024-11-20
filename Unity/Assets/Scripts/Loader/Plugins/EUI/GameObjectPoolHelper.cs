@@ -195,6 +195,12 @@ namespace ET.Client
             return totalnumber;
         }
         
+        public static int GetAssetNumber()
+        {
+            List<string> paths = poolDict.Keys.ToList();
+            return paths.Count;
+        }
+        
         public static int GetUnUseObjectNumber()
         {
             int totalnumber = 0;
