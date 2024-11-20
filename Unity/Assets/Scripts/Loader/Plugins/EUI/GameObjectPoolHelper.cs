@@ -7,7 +7,10 @@ namespace ET.Client
 {
     public static class GameObjectPoolHelper
     {
+        
         private static Dictionary<string, GameObjectPool> poolDict = new Dictionary<string, GameObjectPool>();
+        
+        
 
         public static bool HaveObject(string poolName)
         {
@@ -171,8 +174,6 @@ namespace ET.Client
         
         public static List<string>  DisposeAll( )
         {
-            Debug.LogWarning($"DisposeAll: {Time.time}");
-
             List<string> paths = poolDict.Keys.ToList();
             for (int i = paths.Count - 1; i >= 0; i--)
             {
@@ -213,9 +214,14 @@ namespace ET.Client
             return totalnumber;
         }
 
+        public delegate GameObject DelegateGS(string a, long b);
+
+        public static DelegateGS DelegateLoadAsset = null;
+        
         public static GameObject GetGameObjectByResType(string poolName)
         {
-            GameObject pb = ResourcesComponent.Instance.LoadAssetSync<GameObject>(poolName);
+            GameObject pb = DelegateLoadAsset?.Invoke(poolName, 0);
+            //GameObject pb =ResourcesComponent.Instance.LoadAssetSync<GameObject>(poolName);
             return pb;
         }
     }

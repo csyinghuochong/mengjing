@@ -45,14 +45,14 @@ namespace ET.Client
         
         public static void CheckUnUseAssets(this SceneUnitManagerComponent self)
         {
-            if (GameObjectPoolHelper.GetAssetNumber() >= 50)
+            //if (GameObjectPoolHelper.GetAssetNumber() >= 50)
             {
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
                 GameObjectLoadHelper.DisposeUnUse(self.Root());
 
                 resourcesLoaderComponent.UnLoadAllAsset();
                 
-                Debug.Log("GameMemory..GetAssetNumber() >= 50");
+                Debug.Log("GameMemory..UnLoadAllUnUseAsset");
 
                 //导致卡顿不能用、、
                 //Resources.UnloadUnusedAssets();

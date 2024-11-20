@@ -15,14 +15,13 @@ namespace ET.Client
         private static void Awake(this ResourcesLoaderComponent self)
         {
             self.Package = YooAssets.GetPackage("DefaultPackage");
-        }
 
-        [EntitySystem]
-        private static void Awake(this ResourcesLoaderComponent self, string packageName)
-        {
-            self.Package = YooAssets.GetPackage(packageName);
+            GameObjectPoolHelper.DelegateLoadAsset = (string a, long b) =>
+            {
+               return self.LoadAssetSync<GameObject>(a,b);
+            };
         }
-
+        
         [EntitySystem]
         private static void Destroy(this ResourcesLoaderComponent self)
         {
@@ -59,9 +58,13 @@ namespace ET.Client
         {
             if (self.Handlers.TryGetValue(location, out var entry))
             {
-                //UnityEngine.Debug.LogError($"资源释放： {location} +   {TimeHelper.ServerNow()}");
+                //UnityEngine.Debug.LogError($"UnLoadAsset True： {location}");
                 self.ReleaseHandler(entry.handler);
                 self.Handlers.Remove(location);
+            }
+            else
+            {
+                //UnityEngine.Debug.LogError($"UnLoadAsset False： {location}");
             }
         }
 
@@ -174,7 +177,7 @@ namespace ET.Client
     /// 这样CurrentScene释放后，它用到的所有资源都释放了
     /// </summary>
     [ComponentOf]
-    public class ResourcesLoaderComponent : Entity, IAwake, IAwake<string>, IDestroy
+    public class ResourcesLoaderComponent : Entity, IAwake, IDestroy
     {
         public ResourcePackage Package;
         public Dictionary<string, (OperationHandleBase handler, long destroyTime)> Handlers = new();
