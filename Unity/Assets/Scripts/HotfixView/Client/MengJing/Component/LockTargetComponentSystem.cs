@@ -121,6 +121,13 @@ namespace ET.Client
             }
             
             self.Type = type;
+
+            if (self.EffectMap.ContainsKey(type) && self.EffectMap[type] == null)
+            {
+                self.EffectMap.Remove(type);
+                Log.Error($"self.LockUnitEffect == null:  {type}");
+            }
+
             if (!self.EffectMap.ContainsKey(type))
             {
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -150,9 +157,14 @@ namespace ET.Client
             }
 
             self.LastLockId = unitId;
+            
             self.CheckLockEffect();
-            CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
-            self.LockUnitEffect.SetActive(true);
+
+            if (self.LockUnitEffect != null)
+            {
+                CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
+                self.LockUnitEffect.SetActive(true);
+            }
 
             if (unitTarget.Type == UnitType.Monster)
             {
