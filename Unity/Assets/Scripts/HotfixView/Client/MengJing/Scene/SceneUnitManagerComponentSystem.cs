@@ -48,7 +48,7 @@ namespace ET.Client
             //if (GameObjectPoolHelper.GetAssetNumber() >= 50)
             {
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-                GameObjectLoadHelper.DisposeUnUse(self.Root());
+                self.Root().GetComponent<GameObjectLoadComponent>().DisposeUnUse();
 
                 resourcesLoaderComponent.UnLoadAllAsset();
                 

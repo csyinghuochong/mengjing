@@ -90,7 +90,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    GameObjectLoadHelper.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
+                    self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
                 }
             }
 
@@ -99,6 +99,7 @@ namespace ET.Client
 
         public static async ETTask ShowDissolve(this GameObjectComponent self, bool recover)
         {
+            Scene root = self.Root();
             self.Dissolve = false;
             string unitAssetsPath = self.UnitAssetsPath;
             GameObject gameObject = self.GameObject;
@@ -141,7 +142,7 @@ namespace ET.Client
 
             if (recover)
             {
-                GameObjectLoadHelper.RecoverGameObject(unitAssetsPath, gameObject);
+                root.GetComponent<GameObjectLoadComponent>().RecoverGameObject(unitAssetsPath, gameObject);
             }
         }
 
@@ -275,7 +276,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
             }
         }
 
@@ -292,14 +293,14 @@ namespace ET.Client
             string path = ABPathHelper.GetUnitPath($"JiaYuan/100101");
             unit.RemoveComponent<UIJiaYuanPlanComponent>();
             unit.RemoveComponent<JiaYuanPlanEffectComponent>();
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( path, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void RecoverHorse(this GameObjectComponent self)
         {
             if (self.ObjectHorse != null)
             {
-                GameObjectLoadHelper.RecoverGameObject(self.HorseAssetsPath, self.ObjectHorse);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HorseAssetsPath, self.ObjectHorse);
                 self.ObjectHorse = null;
             }
         }
@@ -468,7 +469,7 @@ namespace ET.Client
 
                 // self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
                 self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{10001}");
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), self.HorseAssetsPath, self.InstanceId, self.OnLoadHorse);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HorseAssetsPath, self.InstanceId, self.OnLoadHorse);
             }
             else
             {
@@ -1115,8 +1116,9 @@ namespace ET.Client
             }
 
             // 脚底Buff恢复
-            foreach (Effect aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
+            foreach (var entity in unit.GetComponent<EffectViewComponent>().Children)
             {
+                Effect aEffectHandler = (Effect)entity.Value;
                 if (aEffectHandler.EffectConfig.Id >= 80000001 && aEffectHandler.EffectConfig.Id <= 80000006)
                 {
                     ParticleSystem particleSystem = aEffectHandler.EffectObj.GetComponentInChildren<ParticleSystem>();

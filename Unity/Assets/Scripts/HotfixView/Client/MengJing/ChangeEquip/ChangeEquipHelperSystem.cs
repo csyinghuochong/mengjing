@@ -35,7 +35,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.WeaponAsset) && self.WeaponObject != null)
             {
-                GameObjectLoadHelper.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.WeaponAsset, self.WeaponObject);
             }
 
             self.WeaponAsset = null;
@@ -230,7 +230,7 @@ namespace ET.Client
 
         public static void LoadPrefab(this ChangeEquipHelper self, string asset)
         {
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), asset, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(asset, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void RecoverGameObject(this ChangeEquipHelper self)
@@ -257,7 +257,7 @@ namespace ET.Client
                 fashionmap.TryGetValue(assets, out assetpath);
                 if (!string.IsNullOrEmpty(assetpath))
                 {
-                    GameObjectLoadHelper.RecoverGameObject(assetpath, self.gameObjects[i]);
+                    self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(assetpath, self.gameObjects[i]);
                 }
                 else
                 {
@@ -369,7 +369,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.WeaponAsset) && self.WeaponObject != null)
             {
-                GameObjectLoadHelper.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.WeaponAsset, self.WeaponObject);
             }
 
             string weaponPath = "";
@@ -423,7 +423,7 @@ namespace ET.Client
             self.WeaponObject = null;
             self.WeaponParent = weaponParent;
             self.RimLight = rimLight;
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject_Weapon);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject_Weapon);
         }
 
         public static void LoadEquipment(this ChangeEquipHelper self, GameObject target, List<int> fashionids, int occ)

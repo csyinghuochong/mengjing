@@ -4,7 +4,7 @@ namespace ET.Client
 {
     
     [ChildOf(typeof(EffectViewComponent))]
-    public class Effect : Entity, IAwake
+    public class Effect : Entity, IAwake, IDestroy
     {
         /// <summary>
         /// Buff当前状态

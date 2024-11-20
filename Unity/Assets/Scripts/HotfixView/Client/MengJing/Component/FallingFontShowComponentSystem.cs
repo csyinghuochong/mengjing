@@ -34,7 +34,7 @@ namespace ET.Client
                 self.ObjFlyText.transform.localPosition = new Vector3(-5000f, 0f, 0f);
             }
 
-            GameObjectLoadHelper.RecoverGameObject(self.FallingFontPath, FlyFontObj, true);
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.FallingFontPath, FlyFontObj, true);
             FlyFontObj.transform.localPosition = new Vector2(-2000f, -2000f);
         }
 
@@ -135,7 +135,7 @@ namespace ET.Client
                 _ => null
             };
 
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.FallingFontPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.FallingFontPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static bool LateUpdate(this FallingFontShowComponent self)

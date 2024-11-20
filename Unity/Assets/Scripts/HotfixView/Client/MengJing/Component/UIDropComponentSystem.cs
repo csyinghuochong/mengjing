@@ -101,7 +101,7 @@ namespace ET.Client
             self.UIPosition = gameObjectComponent.GameObject.transform.Find("UIPosition");
             self.ModelMesh = gameObjectComponent.GameObject.transform.Find("DropModel").GetComponent<MeshRenderer>();
 
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), StringBuilderData.UIDropUIPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(StringBuilderData.UIDropUIPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void ShowDropInfo(this UIDropComponent self)
@@ -347,7 +347,7 @@ namespace ET.Client
             if (self.HeadBar != null)
             {
                 self.HeadBar.SetActive(false);
-                GameObjectLoadHelper.RecoverGameObject(StringBuilderData.UIDropUIPath, self.HeadBar);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(StringBuilderData.UIDropUIPath, self.HeadBar);
                 self.HeadBar = null;
             }
 

@@ -58,7 +58,7 @@ namespace ET.Client
             {
                 return;
             }
-            GameObjectLoadHelper.RecoverGameObject(self.Prefabname, self.GameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.Prefabname, self.GameObject);
             self.GameObject = null;
         }
         
@@ -75,7 +75,7 @@ namespace ET.Client
             }
 
             self.State = LoadState.WillLoad;
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.Prefabname, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.Prefabname, self.InstanceId, self.OnLoadGameObject);
         }
     }
 }

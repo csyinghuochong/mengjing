@@ -86,7 +86,7 @@ namespace ET.Client
             skillIndicatorItem.LiveTime = (float)delayTime;
             skillIndicatorItem.Enemy = enemy;
             self.SkillIndicatorList.Add(skillIndicatorItem);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), skillIndicatorItem.EffectPath, skillIndicatorItem.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( skillIndicatorItem.EffectPath, skillIndicatorItem.InstanceId, self.OnLoadGameObject);
         }
 
         public static void OnLoadGameObject(this SkillYujingComponent self, GameObject gameObject, long formId)
@@ -201,7 +201,7 @@ namespace ET.Client
             if (skillIndicatorItem.GameObject != null)
             {
                 skillIndicatorItem.GameObject.SetActive(false);
-                GameObjectLoadHelper.RecoverGameObject(skillIndicatorItem.EffectPath, skillIndicatorItem.GameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(skillIndicatorItem.EffectPath, skillIndicatorItem.GameObject);
             }
 
             skillIndicatorItem = null;

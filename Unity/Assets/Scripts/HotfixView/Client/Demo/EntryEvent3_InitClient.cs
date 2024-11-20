@@ -26,6 +26,7 @@ namespace ET.Client
             root.AddComponent<PetComponentC>();
             root.AddComponent<SkillSetComponentC>();
             root.AddComponent<ChengJiuComponentC>();
+            root.AddComponent<GameObjectLoadComponent>();
             root.AddComponent<LockTargetComponent>();
             root.AddComponent<FallingFontComponent>();
             root.AddComponent<SkillIndicatorComponent>();

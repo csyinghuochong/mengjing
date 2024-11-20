@@ -100,7 +100,7 @@ namespace ET.Client
                     break;
             }
 
-            GameObjectLoadHelper.DisposeAll(self.Root()); 
+            self.Root().GetComponent<GameObjectLoadComponent>().DisposeAll(); 
             
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             
@@ -114,7 +114,7 @@ namespace ET.Client
                 
             await resourcesLoaderComponent.LoadSceneAsync(path, LoadSceneMode.Single);
                 
-            GameObjectLoadHelper.DisposeAll(self.Root());
+            self.Root().GetComponent<GameObjectLoadComponent>().DisposeAll();
 
             // 释放前一个场景的所有资源
             resourcesLoaderComponent.UnLoadAllAsset();

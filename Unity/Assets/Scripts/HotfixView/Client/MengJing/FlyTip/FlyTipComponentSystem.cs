@@ -122,7 +122,7 @@ namespace ET.Client
             string FlyTip = "Assets/Bundles/UI/Other/FlyTip.prefab";
             long newkey = self.FlyTipStr.Count + 1;
             self.FlyTipStr.Add(newkey, str);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), FlyTip, newkey, self.SpawnFlyTip_2);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( FlyTip, newkey, self.SpawnFlyTip_2);
         }
 
         private static void SpawnFlyTip_2(this FlyTipComponent self, GameObject FlyTipGO, long formId)
@@ -163,7 +163,7 @@ namespace ET.Client
             string FlyTip = "Assets/Bundles/UI/Other/FlyTipDi.prefab";
             long newkey = self.FlyTipStr.Count + 1;
             self.FlyTipStr.Add(newkey, str);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), FlyTip, newkey, self.SpawnFlyTipDi_2);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( FlyTip, newkey, self.SpawnFlyTipDi_2);
         }
         
         private static void SpawnFlyTipDi_2(this FlyTipComponent self, GameObject FlyTipDiGO, long formId)

@@ -116,7 +116,7 @@ namespace ET.Client
                     : skillconfig.SkillZhishiType;
 
             skillIndicatorItem.EffectPath = self.GetIndicatorPath(skillIndicatorItem.SkillZhishiType);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), skillIndicatorItem.EffectPath, skillIndicatorItem.SkillZhishiType, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(skillIndicatorItem.EffectPath, skillIndicatorItem.SkillZhishiType, self.OnLoadGameObject);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace ET.Client
             self.SkillIndicator = skillIndicatorItem;
             skillIndicatorItem.SkillZhishiType = SkillZhishiType.CommonAttack;
             skillIndicatorItem.EffectPath = self.GetIndicatorPath(skillIndicatorItem.SkillZhishiType);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), skillIndicatorItem.EffectPath, skillIndicatorItem.SkillZhishiType, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(skillIndicatorItem.EffectPath, skillIndicatorItem.SkillZhishiType, self.OnLoadGameObject);
         }
 
         public static void InitZhishiEffect(this SkillIndicatorComponent self, SkillIndicatorItem skillIndicatorItem)
@@ -331,7 +331,7 @@ namespace ET.Client
             }
 
             skillIndicatorItem.GameObject.SetActive(false);
-            GameObjectLoadHelper.RecoverGameObject(skillIndicatorItem.EffectPath, skillIndicatorItem.GameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(skillIndicatorItem.EffectPath, skillIndicatorItem.GameObject);
         }
 
         public static void OnMainHeroMove(this SkillIndicatorComponent self)

@@ -26,7 +26,7 @@ namespace ET.Client
             if (!self.IsPlayEffect)
             {
                 self.IsPlayEffect = true;
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), self.EffectPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.EffectPath, self.InstanceId, self.OnLoadGameObject);
             }
 
             if (!self.Send && math.distance(self.MyUnit.Position, self.TargetUnit.Position) < self.Distance)
@@ -96,7 +96,7 @@ namespace ET.Client
                 return;
             }
 
-            GameObjectLoadHelper.RecoverGameObject(self.EffectPath, gameObject, true);
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, gameObject, true);
         }
     }
 }

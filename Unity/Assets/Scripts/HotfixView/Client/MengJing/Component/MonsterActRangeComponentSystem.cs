@@ -21,7 +21,7 @@ namespace ET.Client
         private static void Destroy(this MonsterActRangeComponent self)
         {
             string path = ABPathHelper.GetEffetPath("MonsterActRange");
-            GameObjectLoadHelper.RecoverGameObject(path, self.MonsterActRange);
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, self.MonsterActRange);
             self.MonsterActRange = null;
         }
         
@@ -63,7 +63,7 @@ namespace ET.Client
             if (self.IsDisposed)
             {
                 string path = ABPathHelper.GetEffetPath("MonsterActRange");
-                GameObjectLoadHelper.RecoverGameObject(path, self.MonsterActRange);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, self.MonsterActRange);
                 return;
             }
             self.MonsterActRange = gameObject;
@@ -76,7 +76,7 @@ namespace ET.Client
         public static  void LoadEffect(this MonsterActRangeComponent self)
         {
             string path = ABPathHelper.GetEffetPath("MonsterActRange");
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
         }
     }
 

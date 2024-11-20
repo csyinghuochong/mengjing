@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (Effect))]
-    [FriendOf(typeof (Effect))]
+    [EntitySystemOf(typeof(Effect))]
+    [FriendOf(typeof(Effect))]
     public static partial class EffectSystem
     {
         [EntitySystem]
@@ -13,7 +13,7 @@ namespace ET.Client
         {
         }
 
-        public  static void OnInit(this Effect self, EffectData effectData, Unit theUnitBelongto)
+        public static void OnInit(this Effect self, EffectData effectData, Unit theUnitBelongto)
         {
             self.EffectPath = string.Empty;
             self.EffectObj = null;
@@ -21,7 +21,7 @@ namespace ET.Client
             self.EffectState = BuffState.Running;
             self.TheUnitBelongto = theUnitBelongto;
             self.EffectConfig = EffectConfigCategory.Instance.Get(effectData.EffectId);
-            self.EffectBeginTime =  TimeHelper.ServerNow();
+            self.EffectBeginTime = TimeHelper.ServerNow();
             self.EffectEndTime = TimeHelper.ServerNow() + self.EffectConfig.SkillEffectLiveTime;
 
             self.OnUpdate();
@@ -89,12 +89,12 @@ namespace ET.Client
                         self.EffectObj.transform.SetParent(tParent);
                         self.EffectObj.transform.localPosition = Vector3.zero;
                         self.EffectObj.transform.localScale = Vector3.one;
-                        float angle = self.EffectData.TargetAngle != 0? self.EffectData.TargetAngle : 0;// self.TheUnitBelongto.Rotation.eulerAngles.y
+                        float angle = self.EffectData.TargetAngle != 0 ? self.EffectData.TargetAngle : 0;// self.TheUnitBelongto.Rotation.eulerAngles.y
                         self.EffectObj.transform.localRotation = Quaternion.Euler(0, angle, 0);
                         break;
                     //不跟随玩家
                     case 1:
-                        angle = self.EffectData.EffectAngle != 0? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
+                        angle = self.EffectData.EffectAngle != 0 ? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
                         self.EffectObj.transform.SetParent(globalComponent.Unit);
                         self.EffectObj.transform.position = self.EffectData.EffectPosition;
                         self.EffectObj.transform.localScale = Vector3.one;
@@ -168,7 +168,7 @@ namespace ET.Client
             }
 
             self.EffectPath = StringBuilderHelper.GetEffectPathByConfig(self.EffectConfig);
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.EffectPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void OnUpdate(this Effect self)
@@ -224,14 +224,14 @@ namespace ET.Client
             }
         }
 
-        
+
         /// <summary>
         /// 添加服务器的碰撞范围,显示作用
         /// </summary>
         /// <param name="effect"></param>
         /// <param name="rangeType"></param>
         /// <param name="rangeValue"></param>
-        public static void AddCollider(this Effect self, GameObject effect,int rangeType,  float[] rangeValue )
+        public static void AddCollider(this Effect self, GameObject effect, int rangeType, float[] rangeValue)
         {
             //Log.Debug("实装碰撞体:" + self.EffectConfig.Id.ToString() + "rangeType :" + rangeType + "rangeValue:" + rangeValue);
             if (rangeType == 1 && effect.GetComponent<SphereCollider>() == null)
@@ -243,7 +243,7 @@ namespace ET.Client
             if (rangeType == 2 && effect.GetComponent<BoxCollider>() == null)
             {
                 BoxCollider collider = effect.AddComponent<BoxCollider>();
-                collider.center = new Vector3(0,0, rangeValue[1]*0.5f);
+                collider.center = new Vector3(0, 0, rangeValue[1] * 0.5f);
                 collider.size = new Vector3(rangeValue[0], 1, rangeValue[1]);
                 collider.isTrigger = true;
             }
@@ -264,15 +264,22 @@ namespace ET.Client
             }
             self.EffectObj.transform.position = vec3;
         }
-        
+
         public static void OnFinished(this Effect self)
         {
-            GameObjectLoadHelper.RecoverGameObject(self.EffectPath, self.EffectObj);
+
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectObj);
             self.EffectState = BuffState.Finished;
             self.TheUnitBelongto = null;
             self.EffectObj = null;
             self.EffectPath = String.Empty;
             self.EffectEndTime = 0;
+        }
+        
+        [EntitySystem]
+        private static void Destroy(this ET.Client.Effect self)
+        {
+            self.OnFinished();
         }
     }
 }

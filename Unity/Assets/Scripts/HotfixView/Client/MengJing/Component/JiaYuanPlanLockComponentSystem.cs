@@ -28,7 +28,7 @@ namespace ET.Client
 
             if (self.PlanEffectObj != null)
             {
-                GameObjectLoadHelper.RecoverGameObject(self.PlanEffectPath, self.PlanEffectObj, false);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.PlanEffectPath, self.PlanEffectObj, false);
                 self.PlanEffectObj = null;
             }
         }
@@ -55,7 +55,7 @@ namespace ET.Client
         public static void InitEffect(this JiaYuanPlanLockComponent self)
         {
             self.PlanEffectPath = ABPathHelper.GetEffetPath("ScenceEffect/Eff_JiaYuan_Active");
-            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.PlanEffectPath, self.InstanceId, self.OnLoadEffect);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.PlanEffectPath, self.InstanceId, self.OnLoadEffect);
         }
 
         public static void OnLoadEffect(this JiaYuanPlanLockComponent self, GameObject go, long formId)

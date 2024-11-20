@@ -29,7 +29,7 @@ namespace ET.Client
             if (gameobject != null)
             {
                 gameobject.GetComponent<HeadBarUI>().enabled = false;
-                GameObjectLoadHelper.RecoverGameObject(self.HeadBarPath, gameobject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.HeadBarPath, gameobject);
                 self.GameObject = null;
             }
         }

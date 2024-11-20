@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof (EffectViewComponent))]
     [FriendOf(typeof (EffectViewComponent))]
-    public static partial class EffectViewComponnetSytstem
+    public static partial class EffectViewComponentSytstem
     {
         
         [Invoke(TimerInvokeType.Effectimer)]
@@ -43,13 +43,10 @@ namespace ET.Client
             {
                 for (int i = self.Effects.Count - 1; i >= 0; i--)
                 {
-                    Effect aEffectHandler = self.Effects[i];
-                    aEffectHandler.OnFinished();
-                    aEffectHandler.Dispose();
-                    self.Effects.RemoveAt(i);
+                    self.Effects[i].EffectState = BuffState.Finished;
                 }
 
-                self.Effects.Clear();
+                self.Check();
             }
 
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
@@ -61,10 +58,7 @@ namespace ET.Client
             {
                 if (self.Effects[i].EffectData.EffectTypeEnum == effectTypeEnum)
                 {
-                    Effect aEffectHandler = self.Effects[i];
-                    aEffectHandler.OnFinished();
-                    aEffectHandler.Dispose();
-                    self.Effects.RemoveAt(i);
+                    self.Effects[i].EffectState = BuffState.Finished;
                 }
             }
         }
@@ -75,10 +69,7 @@ namespace ET.Client
             {
                 if (self.Effects[i].EffectData.InstanceId == instanceId)
                 {
-                    Effect aEffectHandler = self.Effects[i];
-                    aEffectHandler.OnFinished();
-                    aEffectHandler.Dispose();
-                    self.Effects.RemoveAt(i);
+                    self.Effects[i].EffectState = BuffState.Finished;
                 }
             }
         }
@@ -122,13 +113,12 @@ namespace ET.Client
                 Effect aEffectHandler = self.Effects[i];
                 if (aEffectHandler.EffectState == BuffState.Finished)
                 {
-                    aEffectHandler.OnFinished();
                     aEffectHandler.Dispose();
                     self.Effects.RemoveAt(i);
                     continue;
                 }
 
-                self.Effects[i].OnUpdate();
+                aEffectHandler.OnUpdate();
             }
 
             if (self.Effects.Count == 0)
@@ -174,19 +164,20 @@ namespace ET.Client
                 return;
             }
 
-            for (int i = self.Effects.Count - 1; i >= 0; i--)
+
+
+            for(int i = 0; i < self.Effects.Count; i++)
             {
-                if (self.Effects[i].EffectData.EffectTypeEnum != EffectTypeEnum.BuffEffect)
+                Effect effect = self.Effects[i];
+                
+                if (effect.EffectData.EffectTypeEnum != EffectTypeEnum.BuffEffect)
                 {
                     continue;
                 }
 
-                if (self.Effects[i].EffectData.EffectId == effectData.EffectId)
+                if (effect.EffectData.EffectId == effectData.EffectId)
                 {
-                    Effect aEffectHandler = self.Effects[i];
-                    aEffectHandler.OnFinished();
-                    aEffectHandler.Dispose();
-                    self.Effects.RemoveAt(i);
+                    effect.EffectState = BuffState.Finished;
                 }
             }
         }
