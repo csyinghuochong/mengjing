@@ -99,6 +99,8 @@ namespace ET.Client
                     self.E_BackImage.GetComponent<RectTransform>().sizeDelta = new Vector2(vector2.x + exceedWidth, vector2.y);
                 }
 
+                self.ExceedWidth = exceedWidth;
+
                 // 部位、类型
                 string textEquipType = LanguageComponent.Instance.LoadLocalization(ItemViewHelp.GetItemSubType3Name(itemConfig.ItemSubType));
                 string textEquipTypeSon = self.GetEquipType(itemConfig.EquipType);

@@ -11,7 +11,8 @@ namespace ET.Client
 		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public ItemOperateEnum ItemOpetateType;
 		public int CurrentHouse;
-		
+		public float ExceedWidth { get; set; } = 0f;
+
 		public Image E_BackImage
      	{
      		get

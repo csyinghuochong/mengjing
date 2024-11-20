@@ -352,6 +352,8 @@ namespace ET.Client
                     self.E_BackImage.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(vector2.x + exceedWidth + 30, vector2.y);
                 }
 
+                self.ExceedWidth = exceedWidth;
+
                 string langStr = LanguageComponent.Instance.LoadLocalization("等级");
                 if (itemconf.UseLv > 0)
                 {

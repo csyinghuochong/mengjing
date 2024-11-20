@@ -14,6 +14,9 @@ namespace ET.Client
 		public float TitleBigHeight_160;      //底图头部的宽度
 		public float TextItemHeight_40;       //底图属性的宽度
 		public float TitleMiniHeight_50;
+
+		public float ExceedWidth { get; set; } = 0f;
+
 		public GameObject[] Obj_UIEquipGemHoleList;
 		public GameObject[] Obj_UIEquipGemHoleTextList;
 		public GameObject[] Obj_UIEquipGemHoleIconList;
