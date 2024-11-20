@@ -104,13 +104,14 @@ namespace ET.Client
 
         private static async ETTask OnAwake(this FlyTipComponent self)
         {
-            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            //ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
-            GameObject flyTip = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTip.prefab");
-            await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTip.prefab", flyTip, 3);
+            //GameObject flyTip = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTip.prefab");
+            //await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTip.prefab", flyTip, 3);
 
-            GameObject flyTipDi = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTipDi.prefab");
-            await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTipDi.prefab", flyTipDi, 3);
+            //GameObject flyTipDi = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTipDi.prefab");
+            //await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTipDi.prefab", flyTipDi, 3);
+            await ETTask.CompletedTask;
         }
 
         public static void ShowFlyTip(this FlyTipComponent self, string str)
@@ -122,15 +123,22 @@ namespace ET.Client
 
             self.FlyTipQueue.Enqueue(str);
         }
-
+        
         private static void SpawnFlyTip(this FlyTipComponent self, string str)
         {
+            string FlyTip = "Assets/Bundles/UI/Other/FlyTip.prefab";
+            long newkey = self.FlyTipStr.Count + 1;
+            self.FlyTipStr.Add(newkey, str);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), FlyTip, newkey, self.SpawnFlyTip_2);
+        }
+
+        private static void SpawnFlyTip_2(this FlyTipComponent self, GameObject FlyTipGO, long formId)
+        {
             Vector3 startPos = new(0, -200, 0);
-            GameObject FlyTipGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTip.prefab");
             FlyTipGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTips.Add(FlyTipGO);
             FlyTipGO.SetActive(true);
-
+        
             RectTransform rectTransform = FlyTipGO.transform.GetComponent<RectTransform>();
             rectTransform.localPosition = startPos;
             rectTransform.localScale = Vector3.one;
@@ -140,13 +148,13 @@ namespace ET.Client
                 self.FlyTips.Remove(FlyTipGO);
                 GameObjectPoolHelper.ReturnObjectToPool(FlyTipGO);
             };
-
+        
             Text text = FlyTipGO.GetComponentInChildren<Text>();
-            text.text = str;
+            text.text = self.FlyTipStr[formId];
             text.color = Color.white;
             text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
         }
-
+        
         public static void ShowFlyTipDi(this FlyTipComponent self, string str)
         {
             if (self.FlyTipDiQueue.Contains(str))
@@ -159,8 +167,15 @@ namespace ET.Client
 
         private static void SpawnFlyTipDi(this FlyTipComponent self, string str)
         {
+            string FlyTip = "Assets/Bundles/UI/Other/FlyTipDi.prefab";
+            long newkey = self.FlyTipStr.Count + 1;
+            self.FlyTipStr.Add(newkey, str);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), FlyTip, newkey, self.SpawnFlyTipDi_2);
+        }
+        
+        private static void SpawnFlyTipDi_2(this FlyTipComponent self, GameObject FlyTipDiGO, long formId)
+        {
             Vector3 startPos = new(0, -200, 0);
-            GameObject FlyTipDiGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTipDi.prefab");
             FlyTipDiGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTipDis.Add(FlyTipDiGO);
             FlyTipDiGO.SetActive(true);
@@ -176,7 +191,7 @@ namespace ET.Client
             };
 
             Text text = FlyTipDiGO.GetComponentInChildren<Text>();
-            text.text = str;
+            text.text = self.FlyTipStr[formId];
             text.color = Color.white;
             text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
 

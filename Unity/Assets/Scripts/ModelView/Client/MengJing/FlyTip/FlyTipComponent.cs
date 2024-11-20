@@ -17,5 +17,7 @@ namespace ET.Client
 
         [StaticField]
         public static FlyTipComponent Instance;
+
+        public Dictionary<long, string> FlyTipStr = new();
     }
 }
