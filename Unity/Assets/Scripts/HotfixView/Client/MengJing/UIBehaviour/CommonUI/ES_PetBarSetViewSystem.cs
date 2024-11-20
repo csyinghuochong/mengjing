@@ -70,7 +70,13 @@ namespace ET.Client
             }
 
             // 复制一份
+            foreach (PetBarInfo petBarInfo in self.PetFightList)
+            {
+                petBarInfo.Dispose();
+            }
+
             self.PetFightList.Clear();
+
             foreach (PetBarInfo info in petComponentC.GetNowPetFightList())
             {
                 PetBarInfo petBarInfo = PetBarInfo.Create();
