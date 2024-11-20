@@ -51,13 +51,15 @@ namespace ET.Client
             self.View.E_Lab_SkillNameText.text = skillConfig.SkillName;
             self.View.E_Lab_SkillDesText.text = skillConfig.SkillDescribe.Replace("\\n", "\n") + addTip;
 
-            if (skillConfig.SkillType == 1)
+            if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
             {
-                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：主动技能");
+                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：被动技能");
             }
             else
             {
-                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：被动技能");
+                self.View.E_Lab_SkillTypeText.text = LanguageComponent.Instance.LoadLocalization("类型：主动技能");
             }
 
             if (vector3.x > Screen.width * -0.5 + 500)

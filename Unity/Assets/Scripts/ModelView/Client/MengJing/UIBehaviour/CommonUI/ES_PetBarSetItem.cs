@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetBarSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public UnityEngine.UI.Image E_HighlightImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HighlightImage == null )
+     			{
+		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
+     			}
+     			return this.m_E_HighlightImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_PetBarSetIconButton
      	{
      		get
@@ -140,6 +157,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_HighlightImage = null;
 			this.m_E_PetBarSetIconButton = null;
 			this.m_E_PetBarSetIconImage = null;
 			this.m_E_LvText = null;
@@ -150,6 +168,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_HighlightImage = null;
 		private UnityEngine.UI.Button m_E_PetBarSetIconButton = null;
 		private UnityEngine.UI.Image m_E_PetBarSetIconImage = null;
 		private UnityEngine.UI.Text m_E_LvText = null;

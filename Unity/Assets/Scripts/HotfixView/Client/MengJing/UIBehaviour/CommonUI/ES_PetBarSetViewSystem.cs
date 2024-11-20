@@ -21,7 +21,8 @@ namespace ET.Client
             self.E_PlanSetToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
             self.E_PetTypeSetToggleGroup.AddListener(self.OnPetTypeSet);
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetItemsRefresh);
-            self.E_ConfirmPetButton.AddListenerAsync(self.OnConfirmPet);
+            self.E_ConfirmButton.AddListenerAsync(self.OnConfirm);
+            self.E_ReSetButton.AddListener(self.OnReSet);
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
@@ -85,9 +86,19 @@ namespace ET.Client
             self.OnUpdateSelectedPetItem();
         }
 
-        private static async ETTask OnConfirmPet(this ES_PetBarSet self)
+        private static async ETTask OnConfirm(this ES_PetBarSet self)
         {
             await PetNetHelper.RequestPetBarSet(self.Root(), self.PetFightList);
+        }
+
+        private static void OnReSet(this ES_PetBarSet self)
+        {
+            PetBarInfo petBarInfo = self.PetFightList[self.PetBarIndex - 1];
+            petBarInfo.PetId = 0;
+            petBarInfo.AppearSkill = 0;
+            petBarInfo.ActiveSkill.Clear();
+
+            self.InitInfo();
         }
 
         #region 宠物
@@ -265,6 +276,10 @@ namespace ET.Client
 
             self.EG_PetPanelRectTransform.gameObject.SetActive(false);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(true);
+
+            self.ES_PetBarSetItem_1.E_HighlightImage.gameObject.SetActive(petIndex == 1);
+            self.ES_PetBarSetItem_2.E_HighlightImage.gameObject.SetActive(petIndex == 2);
+            self.ES_PetBarSetItem_3.E_HighlightImage.gameObject.SetActive(petIndex == 3);
 
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             int nowPetbarId = petComponentC.PetBarConfigList[petIndex - 1];

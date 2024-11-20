@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetBarSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<PetBarInfo> PetFightList = new();
-		public int PetBarIndex;
+		public int PetBarIndex = 1;
 		public int SkillType;
 		public int SkillIndex;
 		public Dictionary<int, EntityRef<Scroll_Item_PetbarSetSkillItem>> ScrollItemPetbarSetSkillItems;
@@ -215,7 +215,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ConfirmPetButton
+		public UnityEngine.UI.Button E_ConfirmButton
      	{
      		get
      		{
@@ -224,15 +224,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ConfirmPetButton == null )
+     			if( this.m_E_ConfirmButton == null )
      			{
-		    		this.m_E_ConfirmPetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ConfirmPet");
+		    		this.m_E_ConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Confirm");
      			}
-     			return this.m_E_ConfirmPetButton;
+     			return this.m_E_ConfirmButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ConfirmPetImage
+		public UnityEngine.UI.Image E_ConfirmImage
      	{
      		get
      		{
@@ -241,11 +241,45 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ConfirmPetImage == null )
+     			if( this.m_E_ConfirmImage == null )
      			{
-		    		this.m_E_ConfirmPetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ConfirmPet");
+		    		this.m_E_ConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Confirm");
      			}
-     			return this.m_E_ConfirmPetImage;
+     			return this.m_E_ConfirmImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ReSetButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetButton == null )
+     			{
+		    		this.m_E_ReSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ReSet");
+     			}
+     			return this.m_E_ReSetButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ReSetImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ReSetImage == null )
+     			{
+		    		this.m_E_ReSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ReSet");
+     			}
+     			return this.m_E_ReSetImage;
      		}
      	}
 
@@ -308,8 +342,10 @@ namespace ET.Client
 			this.m_EG_SkillPanelRectTransform = null;
 			this.m_E_PetbarSetSkillItemsImage = null;
 			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
-			this.m_E_ConfirmPetButton = null;
-			this.m_E_ConfirmPetImage = null;
+			this.m_E_ConfirmButton = null;
+			this.m_E_ConfirmImage = null;
+			this.m_E_ReSetButton = null;
+			this.m_E_ReSetImage = null;
 			this.m_EG_PetIconRectTransform = null;
 			this.m_EG_SkillIconRectTransform = null;
 			this.uiTransform = null;
@@ -326,8 +362,10 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SkillPanelRectTransform = null;
 		private UnityEngine.UI.Image m_E_PetbarSetSkillItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ConfirmPetButton = null;
-		private UnityEngine.UI.Image m_E_ConfirmPetImage = null;
+		private UnityEngine.UI.Button m_E_ConfirmButton = null;
+		private UnityEngine.UI.Image m_E_ConfirmImage = null;
+		private UnityEngine.UI.Button m_E_ReSetButton = null;
+		private UnityEngine.UI.Image m_E_ReSetImage = null;
 		private UnityEngine.RectTransform m_EG_PetIconRectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillIconRectTransform = null;
 		public Transform uiTransform = null;
