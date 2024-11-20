@@ -25,12 +25,12 @@ namespace ET.Client
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
-            self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
-            self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0));
+            self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(1, 0, 0));
+            self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(1, 1, 0));
 
             self.ES_PetBarSetItem_2.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
-            self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0));
+            self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(2, 1, 0));
 
             self.ES_PetBarSetItem_3.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(3));
             self.ES_PetBarSetItem_3.E_AppearSkillButton.AddListener(() => self.OnClickSkill(3, 0, 0));
@@ -338,18 +338,21 @@ namespace ET.Client
                 }
             }
 
+            // 被动技能不能拖
+            bool canDrag = activated && skillConfig.SkillType == (int)SkillTypeEnum.ActiveSkill;
+
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(false);
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.triggers.Clear();
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.OnSkillItemPointerDown(pdata as PointerEventData, skillId); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, index, activated); });
+                (pdata) => { self.OnSkillItemBeginDrag(pdata as PointerEventData, index, canDrag); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData, activated); });
+                (pdata) => { self.OnSkillItemDraging(pdata as PointerEventData, canDrag); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnSkillItemPointerUp(pdata as PointerEventData, skillId); });
+                (pdata) => { self.OnSkillItemPointerUp(pdata as PointerEventData); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData, skillId, activated); });
+                (pdata) => { self.OnSkillItemEndDrag(pdata as PointerEventData, skillId, canDrag); });
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(true);
         }
 
@@ -365,13 +368,13 @@ namespace ET.Client
             dlgSkillTips.OnUpdateData(skillId, new Vector3(localPoint.x, localPoint.y - 300f, 0f), ABAtlasTypes.RoleSkillIcon);
         }
 
-        private static void OnSkillItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index, bool activate)
+        private static void OnSkillItemBeginDrag(this ES_PetBarSet self, PointerEventData pdata, int index, bool canDrag)
         {
             self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
 
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
 
-            if (activate)
+            if (canDrag)
             {
                 self.EG_SkillIconRectTransform.gameObject.SetActive(true);
                 Scroll_Item_PetbarSetSkillItem item = self.ScrollItemPetbarSetSkillItems[index];
@@ -379,9 +382,9 @@ namespace ET.Client
             }
         }
 
-        private static void OnSkillItemDraging(this ES_PetBarSet self, PointerEventData pdata, bool activate)
+        private static void OnSkillItemDraging(this ES_PetBarSet self, PointerEventData pdata, bool canDrag)
         {
-            if (activate)
+            if (canDrag)
             {
                 Vector2 localPoint = new Vector3();
                 RectTransform canvas = self.EG_SkillIconRectTransform.parent.GetComponent<RectTransform>();
@@ -393,14 +396,14 @@ namespace ET.Client
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.OnDrag(pdata);
         }
 
-        private static void OnSkillItemPointerUp(this ES_PetBarSet self, PointerEventData pdata, int skillId)
+        private static void OnSkillItemPointerUp(this ES_PetBarSet self, PointerEventData pdata)
         {
             self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
         }
 
-        private static void OnSkillItemEndDrag(this ES_PetBarSet self, PointerEventData pdata, int skillId, bool activate)
+        private static void OnSkillItemEndDrag(this ES_PetBarSet self, PointerEventData pdata, int skillId, bool canDrag)
         {
-            if (activate)
+            if (canDrag)
             {
                 RectTransform canvas = self.EG_SkillIconRectTransform.parent.parent.parent.GetComponent<RectTransform>();
                 GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
