@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_SaveStoreHouseButton.AddListener(self.OnSaveStoreHouseButton);
             self.E_StoreHouseSetButton.AddListener(self.OnStoreHouseSetButton);
 
-            self.TitleBigHeight_160 = 160f; //标题底框高度
+            self.TitleBigHeight_160 = 240f; //标题底框高度
             self.TitleMiniHeight_50 = 50; //条目标题高度
             self.TextItemHeight_40 = 40; //条目文本高度
 
@@ -66,6 +66,8 @@ namespace ET.Client
                     return;
                 }
 
+                //-38 - > -118  = -80
+                
                 ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
                 // 背部
