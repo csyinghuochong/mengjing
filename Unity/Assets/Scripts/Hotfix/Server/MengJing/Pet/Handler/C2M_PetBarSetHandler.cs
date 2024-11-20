@@ -10,8 +10,8 @@ namespace ET.Server
         {
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 
-            List<long> petids = petComponent.GetNowPetFightList().Select(x => x.PetId).ToList();
-            TransferHelper.RemoveFightPetList(unit, petids);
+            // List<long> petids = petComponent.GetNowPetFightList().Select(x => x.PetId).ToList();
+            TransferHelper.RemoveFightPetList(unit);
 
             petComponent.PetFightList_1 = request.PetBarList; //通过布阵界面设置出战宠物
 

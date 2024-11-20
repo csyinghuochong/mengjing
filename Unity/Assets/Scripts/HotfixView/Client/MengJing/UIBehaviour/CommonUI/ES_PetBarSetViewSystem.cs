@@ -339,7 +339,9 @@ namespace ET.Client
             }
 
             // 被动技能不能拖
-            bool canDrag = activated && skillConfig.SkillType == (int)SkillTypeEnum.ActiveSkill;
+            bool canDrag = !(!activated || skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight);
 
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.gameObject.SetActive(false);
             scrollItemPetbarSetSkillItem.E_IconEventTrigger.triggers.Clear();
@@ -421,14 +423,34 @@ namespace ET.Client
                     string parentName = results[i].gameObject.transform.parent.name;
                     int petBarSetIndex = int.Parse(parentName.Substring(17, parentName.Length - 17));
 
+                    if (petBarSetIndex != self.PetBarIndex)
+                    {
+                        continue;
+                    }
+
+                    PetBarInfo petBarInfo = self.PetFightList[petBarSetIndex - 1];
+                    // 清除相同的技能
+                    if (petBarInfo.AppearSkill == skillId)
+                    {
+                        petBarInfo.AppearSkill = 0;
+                    }
+
+                    for (int j = 0; j < petBarInfo.ActiveSkill.Count; j++)
+                    {
+                        if (petBarInfo.ActiveSkill[j] == skillId)
+                        {
+                            petBarInfo.ActiveSkill[j] = 0;
+                        }
+                    }
+
                     if (name == "E_AppearSkill")
                     {
-                        self.PetFightList[petBarSetIndex - 1].AppearSkill = skillId;
+                        petBarInfo.AppearSkill = skillId;
                     }
                     else
                     {
-                        self.PetFightList[petBarSetIndex - 1].ActiveSkill.Clear();
-                        self.PetFightList[petBarSetIndex - 1].ActiveSkill.Add(skillId);
+                        petBarInfo.ActiveSkill.Clear();
+                        petBarInfo.ActiveSkill.Add(skillId);
                     }
 
                     self.InitInfo();

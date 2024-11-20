@@ -241,19 +241,34 @@ namespace ET.Client
             if (petId > 0)
             {
                 PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
+                // RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
                 List<int> skill = new List<int>();
-                foreach (int skillId in rolePetInfo.PetSkill)
+                // foreach (int skillId in rolePetInfo.PetSkill)
+                // {
+                //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                //     if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                //         skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                //         skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                //     {
+                //         continue;
+                //     }
+                //
+                //     skill.Add(skillId);
+                // }
+                foreach (PetBarInfo petBarInfo in petComponentC.GetNowPetFightList())
                 {
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                    if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
-                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
-                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                    if (petBarInfo.PetId == petId)
                     {
-                        continue;
-                    }
+                        // 释放出场技
+                        if (petBarInfo.AppearSkill != 0)
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip("释放出场技");
+                            self.MainUnit.GetComponent<SkillManagerComponentC>().SendUseSkill(petBarInfo.AppearSkill, 0, 0, 0, 0).Coroutine();
+                        }
 
-                    skill.Add(skillId);
+                        skill.AddRange(petBarInfo.ActiveSkill);
+                        break;
+                    }
                 }
 
                 for (int i = 0; i < 8; i++)
