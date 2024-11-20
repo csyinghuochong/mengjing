@@ -11,6 +11,8 @@ namespace ET.Client
         private static void Awake(this ES_PetBarSetItem self, Transform transform)
         {
             self.uiTransform = transform;
+            
+            self.E_HighlightImage.gameObject.SetActive(false);
         }
 
         [EntitySystem]

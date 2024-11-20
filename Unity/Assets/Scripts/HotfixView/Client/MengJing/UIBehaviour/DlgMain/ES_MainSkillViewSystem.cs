@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -263,7 +264,32 @@ namespace ET.Client
                         if (petBarInfo.AppearSkill != 0)
                         {
                             FlyTipComponent.Instance.ShowFlyTip("释放出场技");
-                            self.MainUnit.GetComponent<SkillManagerComponentC>().SendUseSkill(petBarInfo.AppearSkill, 0, 0, 0, 0).Coroutine();
+
+                            int angle = 0;
+                            long targetId = 0;
+                            float distance = 0;
+                            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petBarInfo.AppearSkill);
+                            if (skillConfig.SkillZhishiTargetType == 1) //自身点
+                            {
+                                angle = 0;
+                                targetId = 0;
+                                distance = 0;
+                            }
+                            else
+                            {
+                                Unit enemy = GetTargetHelperc.GetNearestEnemy(self.MainUnit, (float)skillConfig.SkillRangeSize + 4);
+                                if (enemy != null)
+                                {
+                                    float3 direction = enemy.Position - self.MainUnit.Position;
+                                    float ange = math.degrees(math.atan2(direction.x, direction.z));
+                                    angle = (int)math.floor(ange);
+                                    targetId = enemy.Id;
+                                    distance = math.distance(enemy.Position, self.MainUnit.Position);
+                                }
+                            }
+
+                            self.MainUnit.GetComponent<SkillManagerComponentC>().SendUseSkill(petBarInfo.AppearSkill, 0, angle, targetId, distance)
+                                    .Coroutine();
                         }
 
                         skill.AddRange(petBarInfo.ActiveSkill);
