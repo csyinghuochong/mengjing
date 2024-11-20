@@ -5,7 +5,7 @@ namespace ET.Client
     
     
     [ChildOf(typeof(BuffManagerComponentC))]
-    public class BuffC : Entity, IAwake
+    public class BuffC : Entity, IAwake, IDestroy
     {
         /// <summary>
         /// Buff当前状态

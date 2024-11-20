@@ -1,7 +1,7 @@
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (BuffC))]
-    [FriendOf(typeof (BuffC))]
+    [EntitySystemOf(typeof(BuffC))]
+    [FriendOf(typeof(BuffC))]
     public static partial class BuffCSystem
     {
         [EntitySystem]
@@ -9,6 +9,14 @@ namespace ET.Client
         {
         }
 
+        [EntitySystem]
+        private static void Destroy(this ET.Client.BuffC self)
+        {
+            BuffHandlerC buffHandler = BuffDispatcherComponentC.Instance.Get(self.mSkillBuffConf.BuffScript);
+            buffHandler.OnFinished(self);
+            self.Clear();
+        }
+        
         /// <summary>
         /// 子弹和Buff做区分
         /// </summary>
@@ -25,9 +33,9 @@ namespace ET.Client
             //获取数据
             self.mSkillConf = SkillConfigCategory.Instance.Get(buffData.SkillId);
             self.mSkillBuffConf = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
-            self.mEffectConf = self.mSkillBuffConf.BuffEffectID == 0? null : EffectConfigCategory.Instance.Get(self.mSkillBuffConf.BuffEffectID);
+            self.mEffectConf = self.mSkillBuffConf.BuffEffectID == 0 ? null : EffectConfigCategory.Instance.Get(self.mSkillBuffConf.BuffEffectID);
             self.BuffEndTime = TimeHelper.ServerNow() + self.mSkillBuffConf.BuffTime;
-            self.BuffEndTime = buffData.BuffEndTime > 0? buffData.BuffEndTime : self.BuffEndTime;
+            self.BuffEndTime = buffData.BuffEndTime > 0 ? buffData.BuffEndTime : self.BuffEndTime;
             self.BuffBeginTime = TimeHelper.ServerNow();
             self.StartPosition = theUnitBelongto.Position;
         }
@@ -50,7 +58,7 @@ namespace ET.Client
             self.TheUnitBelongto = null;
             //self.BuffState = BuffState.Waiting;
         }
-        
+
         //播放特效
         public static long PlayBuffEffects(this BuffC self)
         {
@@ -64,18 +72,19 @@ namespace ET.Client
             playEffectBuffData.TargetAngle = self.BuffData.TargetAngle;
             playEffectBuffData.EffectTypeEnum = EffectTypeEnum.BuffEffect;
             playEffectBuffData.InstanceId = IdGenerater.Instance.GenerateInstanceId();
-            
+
             //特效类型
-           
+
             EventSystem.Instance.Publish(self.Root(), new SkillEffect()
-                    {
-                        EffectData = playEffectBuffData,
-                        Unit = self.TheUnitBelongto
-                    }
+            {
+                EffectData = playEffectBuffData,
+                Unit = self.TheUnitBelongto
+            }
             );
-            
+
             self.EffectData = playEffectBuffData;
             return playEffectBuffData.InstanceId;
         }
+      
     }
 }

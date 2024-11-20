@@ -158,9 +158,7 @@ namespace ET.Client
                     self.Skills.RemoveAt(i);
                     continue;
                 }
-
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skill.SkillConf.GameObjectName);
-                aaiHandler.OnFinished(skill);
+                
                 skill.Dispose();
                 self.Skills.RemoveAt(i);
             }

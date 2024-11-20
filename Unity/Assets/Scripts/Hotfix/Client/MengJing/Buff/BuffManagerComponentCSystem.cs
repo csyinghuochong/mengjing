@@ -69,8 +69,6 @@ namespace ET.Client
 
                 if (buffHandler.BuffState == BuffState.Finished)
                 {
-                    aaiHandler.OnFinished(buffHandler);
-                    buffHandler.Clear();
                     buffHandler.Dispose();
                     self.m_Buffs.RemoveAt(i);
                 }

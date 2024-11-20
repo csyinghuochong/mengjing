@@ -14,6 +14,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this SkillC self)
         {
+           
         }
 
         //技能基础设置

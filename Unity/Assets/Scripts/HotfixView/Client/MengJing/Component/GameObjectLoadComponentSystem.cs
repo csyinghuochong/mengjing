@@ -55,29 +55,46 @@ namespace ET.Client
                 return;
             }
 
-            //Debug.LogError($"资源加载22：  {path}  +   {TimeHelper.ServerNow()}");
-            //LoadAssetSync(path, formId, action).Coroutine();
+
+            // GameObjectLoad load = self.AddChild<GameObjectLoad>(true);
+            // load.Path = path;
+            // load.FormId = formId;
+            // load.LoadHandler = action;
+            // self.WaitLoadingList.Insert(0, load);
+            // self.AddTimer();
             
-            GameObjectLoad load = self.AddChild<GameObjectLoad>(true);
-            load.Path = path;
-            load.FormId = formId;
-            load.LoadHandler = action;
-            self.WaitLoadingList.Insert(0, load);
-            self.AddTimer();
+            //Debug.LogError($"资源加载22：  {path}  +   {TimeHelper.ServerNow()}");
+            self.LoadAssetSync(path, formId, action).Coroutine();
+        }
+        
+        public static async ETTask LoadAssetSync(this GameObjectLoadComponent self,  string path, long formId, Action<GameObject, long> action)
+        {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
+            await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
+            
+            GameObject  gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
+            if (gameObject != null)
+            {
+                action(gameObject, formId);
+            }
         }
         
          public static void OnUpdate(this GameObjectLoadComponent self)
          {
-             if (self.WaitLoadingList.Count == 0)
-             {
-                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-                 return;
-             }
+             // if (self.WaitLoadingList.Count == 0)
+             // {
+             //     self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+             //     return;
+             // }
         
-             int number = Math.Max(self.WaitLoadingList.Count - 4, 0);
-             for (int i = self.WaitLoadingList.Count - 1; i>= number; i-- )
+             //int number = Math.Min(self.WaitLoadingList.Count, 10);
+             for (int i = self.WaitLoadingList.Count - 1; i>= 0; i-- )
              {
                  GameObjectLoad load = self.WaitLoadingList[i];
+                 
+                 Debug.Log(($"OnUpdateOnUpdate: {load.Path}"));
+                 
                  if (self.LoadingList.Contains(load.Path))
                  {
                      continue;
@@ -93,6 +110,7 @@ namespace ET.Client
              if (self.Timer == 0)
              {
                  self.Timer =  self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.GameObjectPoolTimer, self);
+                 self.OnUpdate();
              }
          }
 
@@ -114,9 +132,15 @@ namespace ET.Client
              {
                  self.LoadingList.Add(load.Path);
              }
+             
+             Debug.Log(($"OnUpdateOnUpdate1111: {load.Path}"));
+             
              ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
              GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
              await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
+             
+             Debug.Log(($"OnUpdateOnUpdate22222: {load.Path}"));
+             
              self.LoadingList.Remove(load.Path);
              gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
              if (gameObject != null)

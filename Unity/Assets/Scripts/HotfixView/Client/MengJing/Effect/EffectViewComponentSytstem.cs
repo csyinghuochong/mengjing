@@ -39,16 +39,6 @@ namespace ET.Client
 
         public static void OnDispose(this EffectViewComponent self)
         {
-            if (self.Effects != null)
-            {
-                for (int i = self.Effects.Count - 1; i >= 0; i--)
-                {
-                    self.Effects[i].EffectState = BuffState.Finished;
-                }
-
-                self.Check();
-            }
-
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }
 
