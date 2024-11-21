@@ -308,9 +308,30 @@ namespace ET.Client
 
                         GameObject icon_item = self.Obj_UIEquipGemHoleIconList[gemNumber];
                         GameObject icon_di = self.Obj_UIEquipGemHoleList[gemNumber].transform.Find("E_UIEquipGemHoleIcon_Di").gameObject;
+
+                        int gemid = int.Parse(gemIds[gemNumber]);
                         self.TipsShowEquipGem(icon_item, icon_di, self.Obj_UIEquipGemHoleTextList[gemNumber],
-                            int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
+                            int.Parse(gemHoles[gemNumber]), gemid);
                         gemNumber += (gemHoles[i] != "0" ? 1 : 0);
+
+                        if (gemid > 0)
+                        {
+                            icon_item.GetComponent<Button>().onClick.AddListener(()=>
+                            {
+                                ItemInfo bagInfoGemids = new ItemInfo();
+                                bagInfoGemids.ItemID = gemid;
+                                EventSystem.Instance.Publish(self.Root(),
+                                    new ShowItemTips()
+                                    {
+                                        BagInfo = bagInfoGemids,
+                                        ItemOperateEnum = ItemOperateEnum.None,
+                                        InputPoint = Input.mousePosition,
+                                        Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                                        EquipList = new List<ItemInfo>(),
+                                        CurrentHouse =  self.CurrentHouse
+                                    });
+                            });
+                        }
                     }
                 }
                 else
