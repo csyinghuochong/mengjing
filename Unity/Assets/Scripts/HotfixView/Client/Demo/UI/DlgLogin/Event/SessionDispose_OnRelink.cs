@@ -25,7 +25,7 @@ namespace ET.Client
             switch (disconnectType)
             {
                 case ErrorCode.ERR_OtherAccountLogin:
-                    OnOtherAccountLogin(root).Coroutine();
+                    OnOtherAccountLogin(root);
                     break;
                 case ErrorCode.ERR_SessionDisconnect:
                     OnSessionDisconnect(root).Coroutine();
@@ -41,6 +41,8 @@ namespace ET.Client
                     OnSessionDisconnect(root).Coroutine();
                     break;
             }
+
+            await ETTask.CompletedTask;
         }
 
         private async ETTask OnSessionDisconnect(Scene root)
@@ -51,7 +53,7 @@ namespace ET.Client
             root.GetComponent<RelinkComponent>().CheckRelink().Coroutine();
         }
 
-        private async ETTask OnOtherAccountLogin(Scene root)
+        private  void OnOtherAccountLogin(Scene root)
         {
             PopupTipHelp.OpenPopupTip_2(root, "系统提示", "账号在其他设备登陆!", () => 
                         {

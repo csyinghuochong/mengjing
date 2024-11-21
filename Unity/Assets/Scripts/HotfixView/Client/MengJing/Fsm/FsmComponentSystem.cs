@@ -338,7 +338,7 @@ namespace ET.Client
                 AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
                 animatorComponent.SetBoolValue("Run", false);
                 animatorComponent.SetBoolValue("Idle", false);
-                animatorComponent.Animator.Play("ZuoQi");
+                animatorComponent.PlayAnimator("ZuoQi", false);
             }
             else
             {
@@ -412,7 +412,7 @@ namespace ET.Client
                 
                 if (SettingData.AnimController == 0)
                 {
-                    AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
+                    AnimatorStateInfo animatorStateInfo = animatorComponent.Animator[0].GetCurrentAnimatorStateInfo(0);
                     foreach (var item in SkillData.AckExitTime)
                     {
                         if (animatorStateInfo.IsName(item.Key))

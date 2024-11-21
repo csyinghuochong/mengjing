@@ -118,7 +118,7 @@ namespace ET.Client
 
             // 释放前一个场景的所有资源
             resourcesLoaderComponent.UnLoadAllAsset();
-            
+            await ETTask.CompletedTask;
             Resources.UnloadUnusedAssets();
             GC.Collect();
                 

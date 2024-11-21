@@ -33,6 +33,10 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetMeleeMain self)
         {
+            self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+            self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+            self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
+
             self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
 
             self.RefreshItems();
@@ -52,6 +56,22 @@ namespace ET.Client
         public static void BeforeUnload(this DlgPetMeleeMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
+        public static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata)
+        {
+            self.PreviousPressPosition = pdata.position;
+        }
+
+        public static void Drag(this DlgPetMeleeMain self, PointerEventData pdata)
+        {
+            float x = (self.PreviousPressPosition.x - pdata.position.x) * 0.05f;
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().ApplyCameraPos_X(x, -10, 10);
+            self.PreviousPressPosition = pdata.position;
+        }
+
+        public static void EndDrag(this DlgPetMeleeMain self, PointerEventData pdata)
+        {
         }
 
         public static void Update(this DlgPetMeleeMain self)
@@ -127,24 +147,6 @@ namespace ET.Client
                     item.SetCD();
                     break;
                 }
-            }
-        }
-
-        private static bool IsPointerOverGameObject(this DlgPetMeleeMain self, Vector2 mousePosition)
-        {
-            //创建一个点击事件
-            PointerEventData eventData = new PointerEventData(UnityEngine.EventSystems.EventSystem.current);
-            eventData.position = mousePosition;
-            List<RaycastResult> raycastResults = new List<RaycastResult>();
-            //向点击位置发射一条射线，检测是否点击UI
-            UnityEngine.EventSystems.EventSystem.current.RaycastAll(eventData, raycastResults);
-            if (raycastResults.Count > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -233,26 +235,6 @@ namespace ET.Client
             }
 
             self.View.E_IconImage.gameObject.SetActive(false);
-
-            if (GameObject.Find("Global").GetComponent<Init>().EditorMode)
-            {
-                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-                {
-                    return;
-                }
-            }
-            else
-            {
-                if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                {
-                    return;
-                }
-            }
-
-            if (self.IsPointerOverGameObject(Input.mousePosition))
-            {
-                return;
-            }
 
             RaycastHit raycastHit;
             Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);

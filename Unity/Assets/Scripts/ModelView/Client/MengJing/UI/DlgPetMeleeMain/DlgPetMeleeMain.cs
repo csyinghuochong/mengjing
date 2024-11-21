@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -6,6 +7,8 @@ namespace ET.Client
     public class DlgPetMeleeMain : Entity, IAwake, IUILogic
     {
         public DlgPetMeleeMainViewComponent View { get => this.GetComponent<DlgPetMeleeMainViewComponent>(); }
+
+        public Vector2 PreviousPressPosition;
 
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
         public List<RolePetInfo> ShowRolePetInfos = new();

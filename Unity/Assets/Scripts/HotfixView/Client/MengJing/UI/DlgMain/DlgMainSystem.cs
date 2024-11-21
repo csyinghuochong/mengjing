@@ -1915,6 +1915,7 @@ namespace ET.Client
                     self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
                     break;
                 default:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
