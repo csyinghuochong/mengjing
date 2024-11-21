@@ -14,6 +14,5 @@
         public const int Bullet = 10;               //弹道
         public const int Stall = 11;                //摆摊
         public const int CellTransfers = 12;
-        public const int HomeBase = 13;             //老家基地
     }
 }

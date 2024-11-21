@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+
 namespace ET.Server
 {
     [Event(SceneType.Map)]
@@ -8,9 +10,14 @@ namespace ET.Server
             Unit defendUnit = args.UnitDefend;
             Unit mainAttack = args.UnitAttack;
 
-            if (defendUnit.Type == UnitType.HomeBase)
+            Scene domainScene = defendUnit.Scene();
+            MapComponent mapComponent = domainScene.GetComponent<MapComponent>();
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
             {
-                // 老家被拆了，判断结果
+                if (defendUnit.Type == UnitType.Monster)
+                {
+                    // 老家被拆了，判断结果
+                }
             }
 
             await ETTask.CompletedTask;
@@ -36,8 +43,6 @@ namespace ET.Server
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
 
             FubenHelp.CreateMonsterList(self.Scene(), SceneConfigCategory.Instance.Get(mapComponent.SceneId).CreateMonsterPosi);
-
-            // 生成双方的基地
         }
     }
 }
