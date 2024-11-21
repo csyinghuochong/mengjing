@@ -7,6 +7,40 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgPetMeleeMainViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Image E_TouchImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TouchImage == null )
+     			{
+		    		this.m_E_TouchImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Touch");
+     			}
+     			return this.m_E_TouchImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_TouchEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TouchEventTrigger == null )
+     			{
+		    		this.m_E_TouchEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Touch");
+     			}
+     			return this.m_E_TouchEventTrigger;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_TopRectTransform
      	{
      		get
@@ -145,6 +179,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_TouchImage = null;
+			this.m_E_TouchEventTrigger = null;
 			this.m_EG_TopRectTransform = null;
 			this.m_E_LeftTimeTextText = null;
 			this.m_E_LeftTimeImgImage = null;
@@ -156,6 +192,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_TouchImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_TouchEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_TopRectTransform = null;
 		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
 		private UnityEngine.UI.Image m_E_LeftTimeImgImage = null;

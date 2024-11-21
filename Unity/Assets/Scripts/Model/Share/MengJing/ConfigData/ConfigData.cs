@@ -1422,6 +1422,15 @@ namespace ET
         [StaticField]
         public static float3 FuBenCameraRotation =
                 new float3(60f, -90f, 0);
+        
+        //摄像机位置
+        [StaticField]
+        public static float3 PetMeleeFuBenCameraPosition =
+                new float3(0, 12, -11);
+
+        [StaticField]
+        public static float3 PetMeleeFuBenCameraRotation =
+                new float3(50, 0, 0);
 
         //拖动位置
         public const float FuBenCameraPositionMin_X = -50f;

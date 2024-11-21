@@ -31,7 +31,7 @@ namespace ET.Client
             self.CameraMoveType = CameraMoveType.Normal;
             self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            self.OnEnterScene(SceneTypeEnum.MainCityScene);
+            self.OnEnterScene(self.Root().GetComponent<MapComponent>().SceneType);
         }
 
         [EntitySystem]
@@ -331,10 +331,27 @@ namespace ET.Client
                     self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
+                case SceneTypeEnum.PetMelee:
+                    self.CameraMoveType = CameraMoveType.PetFuben;
+                    self.MainCamera.transform.position = ConfigData.PetMeleeFuBenCameraPosition;
+                    self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.PetMeleeFuBenCameraRotation);
+                    break;
                 default:
                     self.CameraMoveType = CameraMoveType.Normal;
                     break;
             }
+        }
+
+        public static void ApplyCameraPos_X(this MJCameraComponent self, float x, float min, float max)
+        {
+            if (self.MainCamera.transform.position.x + x > max || self.MainCamera.transform.position.x + x < min)
+            {
+                return;
+            }
+
+            Vector3 pos = self.MainCamera.transform.position;
+            pos.x += x;
+            self.MainCamera.transform.position = pos;
         }
 
         public static void CalculateOffset(this MJCameraComponent self)
