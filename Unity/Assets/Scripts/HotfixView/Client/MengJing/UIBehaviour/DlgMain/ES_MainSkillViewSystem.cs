@@ -242,20 +242,7 @@ namespace ET.Client
             if (petId > 0)
             {
                 PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-                // RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
                 List<int> skill = new List<int>();
-                // foreach (int skillId in rolePetInfo.PetSkill)
-                // {
-                //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                //     if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
-                //         skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
-                //         skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
-                //     {
-                //         continue;
-                //     }
-                //
-                //     skill.Add(skillId);
-                // }
                 foreach (PetBarInfo petBarInfo in petComponentC.GetNowPetFightList())
                 {
                     if (petBarInfo.PetId == petId)
@@ -295,6 +282,26 @@ namespace ET.Client
                         skill.AddRange(petBarInfo.ActiveSkill);
                         break;
                     }
+                }
+                
+                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
+                foreach (int skillId in rolePetInfo.PetSkill)
+                {
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                    if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                    {
+                        continue;
+                    }
+
+                    // 再读取最多3个
+                    if (skill.Count >= 4)
+                    {
+                        break;
+                    }
+
+                    skill.Add(skillId);
                 }
 
                 for (int i = 0; i < 8; i++)

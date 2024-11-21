@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class PetBarUpgrade_Refresh : AEvent<Scene, PetBarUpgrade>
+    {
+        protected override async ETTask Run(Scene scene, PetBarUpgrade args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetBar>()?.ES_PetBarSet.E_PetTypeSetToggleGroup.OnSelectIndex(0);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof(Scroll_Item_PetbarSetSkillItem))]
     [FriendOf(typeof(Scroll_Item_PetbarSetPetItem))]
     [FriendOf(typeof(ES_PetBarSetItem))]
@@ -22,7 +32,7 @@ namespace ET.Client
             self.E_PetTypeSetToggleGroup.AddListener(self.OnPetTypeSet);
             self.E_SkillTypeSetToggleGroup.AddListener(self.OnSkillTypeSet);
             self.E_PetbarSetPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetItemsRefresh);
-            self.E_ConfirmButton.AddListenerAsync(self.OnConfirm);
+            // self.E_ConfirmButton.AddListenerAsync(self.OnConfirm);
             self.E_ReSetButton.AddListener(self.OnReSet);
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
 
@@ -111,6 +121,7 @@ namespace ET.Client
                 petBarInfo.ActiveSkill.Clear();
             }
 
+            self.OnConfirm().Coroutine();
             self.InitInfo();
         }
 
@@ -123,10 +134,14 @@ namespace ET.Client
             self.ES_PetBarSetItem_3.OnInit(self.PetFightList[2]);
         }
 
-        private static void OnClickPetIcon(this ES_PetBarSet self, int index)
+        private static void OnClickPetIcon(this ES_PetBarSet self, int petIndex)
         {
             self.EG_PetPanelRectTransform.gameObject.SetActive(true);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
+
+            self.ES_PetBarSetItem_1.E_HighlightImage.gameObject.SetActive(petIndex == 1);
+            self.ES_PetBarSetItem_2.E_HighlightImage.gameObject.SetActive(petIndex == 2);
+            self.ES_PetBarSetItem_3.E_HighlightImage.gameObject.SetActive(petIndex == 3);
 
             self.E_PetTypeSetToggleGroup.OnSelectIndex(0);
             self.OnUpdateSelectedPetItem();
@@ -266,6 +281,7 @@ namespace ET.Client
                 int petBarSetIndex = int.Parse(name.Substring(17, name.Length - 17));
                 Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
                 self.PetFightList[petBarSetIndex - 1].PetId = item.PetId;
+                self.OnConfirm().Coroutine();
                 self.InitInfo();
                 self.OnUpdateSelectedPetItem();
 
@@ -281,7 +297,7 @@ namespace ET.Client
 
         #region 技能
 
-        private static void OnSkillTypeSet(this ES_PetBarSet self, int index)
+        public static void OnSkillTypeSet(this ES_PetBarSet self, int index)
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             int nowPetbarId = petComponentC.PetBarConfigList[self.PetBarIndex - 1];
@@ -496,6 +512,7 @@ namespace ET.Client
                         petBarInfo.ActiveSkill.Add(skillId);
                     }
 
+                    self.OnConfirm().Coroutine();
                     self.InitInfo();
 
                     break;

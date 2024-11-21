@@ -604,4 +604,8 @@ namespace ET.Client
     public struct JingLingActive
     {
     }
+
+    public struct PetBarUpgrade
+    {
+    }
 }

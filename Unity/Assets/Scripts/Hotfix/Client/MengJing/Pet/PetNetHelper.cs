@@ -430,6 +430,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
+                EventSystem.Instance.Publish(root, new PetBarUpgrade());
                 root.GetComponent<PetComponentC>().PetBarConfigList[index - 1]++;
             }
 
