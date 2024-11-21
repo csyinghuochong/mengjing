@@ -7,7 +7,7 @@
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.windowType = UIWindowType.Fixed;
+		  uiBaseWindow.windowType = UIWindowType.Normal;
 		}
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)
