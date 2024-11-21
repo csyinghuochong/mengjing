@@ -318,18 +318,18 @@ namespace ET.Client
                     self.Obj_UIEquipGemHoleList[3].SetActive(false);
                 }
 
-                float gemHoleShowHeight = gemNumber * 35f;
+                float gemHoleShowHeight = gemNumber > 0 ? 120f : 0f;
 
                 //显示专精属性
                 startPostionY -= gemHoleShowHeight;
-                startPostionY -= 5;
+                startPostionY -= 10f;
                 int zhunjingNumber = self.ShowZhuanJingAttribute(itemConfig, startPostionY);
 
                 //显示隐藏技能
                 //float HintTextNum = 50;
                 startPostionY -= (zhunjingNumber > 0 ? self.TitleMiniHeight_50 : 0);
                 startPostionY = startPostionY - zhunjingNumber * self.TextItemHeight_40;
-                startPostionY -= 5;
+                startPostionY  -= 10f;
                 int hideSkillNumber = self.ShowHideSkill(itemConfig, startPostionY);
 
                 //显示装备套装信息
