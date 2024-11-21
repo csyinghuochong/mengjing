@@ -319,7 +319,7 @@ namespace ET.Server
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
 
-            if (mapComponent.SceneType != SceneTypeEnum.Battle &&
+            if (mapComponent.SceneType != SceneTypeEnum.Battle && mapComponent.SceneType != SceneTypeEnum.PetMelee &&
                 self.Type == UnitType.Monster && defend.Type == UnitType.Monster
                 && self.MasterId == 0 && defend.MasterId == 0)
             {
@@ -402,7 +402,8 @@ namespace ET.Server
                 return !self.IsMasterOrPet(defend, petComponent);
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.Battle
+            if (mapComponent.SceneType == SceneTypeEnum.Battle
+                || mapComponent.SceneType == SceneTypeEnum.PetMelee
                 || mapComponent.SceneType == SceneTypeEnum.Demon)
             {
                 return self.GetBattleCamp() != defend.GetBattleCamp();
