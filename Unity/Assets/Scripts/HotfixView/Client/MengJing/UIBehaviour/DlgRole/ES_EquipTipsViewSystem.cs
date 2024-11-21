@@ -320,6 +320,7 @@ namespace ET.Client
                             {
                                 ItemInfo bagInfoGemids = new ItemInfo();
                                 bagInfoGemids.ItemID = gemid;
+                                bagInfoGemids.isBinging = true;
                                 EventSystem.Instance.Publish(self.Root(),
                                     new ShowItemTips()
                                     {
