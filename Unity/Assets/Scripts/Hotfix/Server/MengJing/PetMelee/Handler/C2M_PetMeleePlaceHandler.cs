@@ -7,11 +7,26 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleePlace request, M2C_PetMeleePlace response)
         {
+            PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+            if (petMeleeDungeonComponent.GameOver)
+            {
+                response.Error = ErrorCode.ERR_Error;
+                return;
+            }
+
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetId);
             if (rolePetInfo == null)
             {
                 response.Error = ErrorCode.ERR_Pet_NoExist;
+                return;
+            }
+
+            List<Unit> allpet = UnitHelper.GetUnitList(unit.Scene(), UnitType.Pet);
+            if (allpet.Count > 10)
+            {
+                // 防止招太多
+                response.Error = ErrorCode.ERR_Error;
                 return;
             }
 
@@ -21,8 +36,14 @@ namespace ET.Server
             //     return;
             // }
 
-            UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
+            // 目前是可以重复放一个宠物
+            Unit pet = UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
                 IdGenerater.Instance.GenerateId());
+
+            if (petMeleeDungeonComponent.GameStart)
+            {
+                pet.GetComponent<AIComponent>().Begin();
+            }
 
             await ETTask.CompletedTask;
         }

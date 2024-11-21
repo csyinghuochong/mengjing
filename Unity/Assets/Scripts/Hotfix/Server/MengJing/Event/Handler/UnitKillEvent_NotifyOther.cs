@@ -275,6 +275,9 @@ namespace ET.Server
                 case SceneTypeEnum.Demon:
                     domainScene.GetComponent<DemonDungeonComponent>().OnKillEvent(defendUnit, mainAttack).Coroutine();
                     break;
+                case SceneTypeEnum.PetMelee:
+                    domainScene.GetComponent<PetMeleeDungeonComponent>().OnKillEvent(defendUnit);
+                    break;
                 default:
                     break;
             }

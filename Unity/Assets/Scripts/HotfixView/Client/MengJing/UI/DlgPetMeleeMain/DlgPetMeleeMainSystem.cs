@@ -35,7 +35,6 @@ namespace ET.Client
         {
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
-            self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
 
             self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
 
@@ -58,6 +57,11 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
+        public static void StopTimer(this DlgPetMeleeMain self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
         public static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata)
         {
             self.PreviousPressPosition = pdata.position;
@@ -68,10 +72,6 @@ namespace ET.Client
             float x = (self.PreviousPressPosition.x - pdata.position.x) * 0.05f;
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().ApplyCameraPos_X(x, -10, 10);
             self.PreviousPressPosition = pdata.position;
-        }
-
-        public static void EndDrag(this DlgPetMeleeMain self, PointerEventData pdata)
-        {
         }
 
         public static void Update(this DlgPetMeleeMain self)

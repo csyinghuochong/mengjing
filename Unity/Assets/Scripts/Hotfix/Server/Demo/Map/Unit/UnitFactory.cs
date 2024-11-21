@@ -396,7 +396,6 @@ namespace ET.Server
                     AIComponent aiComponent = unit.AddComponent<AIComponent, int>(15);
                     aiComponent.TargetPoint.Add(new float3(13, 0, 0));
                     aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
-                    aiComponent.Begin();
                     break;
                 default:
                     unit.AddComponent<AIComponent, int>(1).InitPet(petinfo); //AI行为树序号  撤退

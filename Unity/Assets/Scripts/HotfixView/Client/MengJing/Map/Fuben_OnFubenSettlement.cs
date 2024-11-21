@@ -82,6 +82,12 @@ namespace ET.Client
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
                     break;
+                case SceneTypeEnum.PetMelee:
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().StopTimer();
+                    PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
+                        args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "宠物乱斗胜利" : "宠物乱斗失败",
+                        () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
+                    break;
                 default:
                     break;
             }
