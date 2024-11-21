@@ -74,18 +74,18 @@ namespace ET.Client
             }
 
             GameObject gameObject = unit.GetComponent<GameObjectComponent>().GameObject;
-            Animator animator = gameObject.GetComponentInChildren<Animator>();
-            animator.runtimeAnimatorController = self.animatorControllers[equipIndex];
+            Animator[] animator = gameObject.GetComponentsInChildren<Animator>();
+            animator[0].runtimeAnimatorController = self.animatorControllers[equipIndex];
 
             self.Animator = animator;
             self.animationClips.Clear();
             self.Parameter.Clear();
-            foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
+            foreach (AnimationClip animationClip in animator[0].runtimeAnimatorController.animationClips)
             {
                 self.animationClips[animationClip.name] = animationClip;
             }
 
-            foreach (AnimatorControllerParameter animatorControllerParameter in animator.parameters)
+            foreach (AnimatorControllerParameter animatorControllerParameter in animator[0].parameters)
             {
                 self.Parameter.Add(animatorControllerParameter.name);
             }
@@ -93,18 +93,18 @@ namespace ET.Client
 
         public static void UpdateAnimator(this AnimatorComponent self, GameObject gameObject)
         {
-            Animator animator = gameObject.GetComponentInChildren<Animator>();
+            Animator[] animator = gameObject.GetComponentsInChildren<Animator>();
             if (animator == null)
             {
                 return;
             }
 
-            if (animator.runtimeAnimatorController == null)
+            if (animator[0].runtimeAnimatorController == null)
             {
                 return;
             }
 
-            if (animator.runtimeAnimatorController.animationClips == null)
+            if (animator[0].runtimeAnimatorController.animationClips == null)
             {
                 return;
             }
@@ -112,12 +112,12 @@ namespace ET.Client
             self.Animator = animator;
             self.animationClips.Clear();
             self.Parameter.Clear();
-            foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
+            foreach (AnimationClip animationClip in animator[0].runtimeAnimatorController.animationClips)
             {
                 self.animationClips[animationClip.name] = animationClip;
             }
 
-            foreach (AnimatorControllerParameter animatorControllerParameter in animator.parameters)
+            foreach (AnimatorControllerParameter animatorControllerParameter in animator[0].parameters)
             {
                 self.Parameter.Add(animatorControllerParameter.name);
             }
@@ -137,9 +137,8 @@ namespace ET.Client
 
             try
             {
-                self.Animator.SetFloat("MotionSpeed", self.MontionSpeed);
-
-                self.Animator.SetTrigger(self.MotionType.ToString());
+                self.SetFloatValue("MotionSpeed", self.MontionSpeed);
+                self.SetTrigger(self.MotionType.ToString());
 
                 self.MontionSpeed = 1;
                 self.MotionType = MotionType.None;
@@ -157,14 +156,14 @@ namespace ET.Client
 
         public static string CurrentAnimation(this AnimatorComponent self)
         {
-            AnimatorClipInfo animatorClipInfo = self.Animator.GetCurrentAnimatorClipInfo(0)[0];
+            AnimatorClipInfo animatorClipInfo = self.Animator[0].GetCurrentAnimatorClipInfo(0)[0];
             Log.Debug($"animatorClipInfo.clip.name： {animatorClipInfo.clip.name}");
             return animatorClipInfo.clip.name;
         }
 
         public static float CurrentSateTime(this AnimatorComponent self)
         {
-            AnimatorStateInfo animatorStateInfo = self.Animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo animatorStateInfo = self.Animator[0].GetCurrentAnimatorStateInfo(0);
             return animatorStateInfo.normalizedTime;
         }
 
@@ -193,22 +192,15 @@ namespace ET.Client
 
             if (self.HasParameter(motionType.ToString()))
             {
-                if (replay)
-                {
-                    self.Animator.Play(motionType, 0, 0);
-                }
-                else
-                {
-                    self.Animator.Play(motionType);
-                }
+                self.PlayAnimator(motionType, replay);
                 return;
             }
 
-            bool hasAction = self.Animator.HasState(0, Animator.StringToHash(motionType));
+            bool hasAction = self.Animator[0].HasState(0, Animator.StringToHash(motionType));
             if (hasAction)
             {
                 self.Parameter.Add(motionType);
-                self.Animator.Play(motionType);
+                self.PlayAnimator(motionType, false);
             }
             else
             {
@@ -230,8 +222,8 @@ namespace ET.Client
                 return;
             }
 
-            self.stopSpeed = self.Animator.speed;
-            self.Animator.speed = 0;
+            self.stopSpeed = self.Animator[0].speed;
+            self.SetAnimatorSpeed(0);
         }
 
         public static void RunAnimator(this AnimatorComponent self)
@@ -248,7 +240,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Animator.speed = self.stopSpeed;
+            self.SetAnimatorSpeed(self.stopSpeed);
         }
 
         public static void SetBoolValue(this AnimatorComponent self, string name, bool state)
@@ -263,33 +255,102 @@ namespace ET.Client
                 return;
             }
 
-            self.Animator.SetBool(name, state);
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].SetBool(name, state);
+            }
         }
-
+        
         public static void SetFloatValue(this AnimatorComponent self, string name, float state)
         {
-            self.Animator.SetFloat(name, state);
-        }
+            if (self.Animator == null)
+            {
+                return;
+            }
 
+            if (!self.HasParameter(name))
+            {
+                return;
+            }
+
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].SetFloat(name, state);
+            }
+        }
+        
+        //self.Animator.SetFloat("MotionSpeed", self.MontionSpeed);
+        //self.Animator.SetTrigger(self.MotionType.ToString());
+
+        public static void PlayAnimator(this AnimatorComponent self, string animator, bool replay)
+        {
+            if (replay)
+            {
+                for (int i = 0; i < self.Animator.Length; i++)
+                {
+                    self.Animator[i].Play(animator,0,0 );
+                }
+            }
+            else
+            {
+                for (int i = 0; i < self.Animator.Length; i++)
+                {
+                    self.Animator[i].Play(animator);
+                }
+            }
+        }
+        
         public static void SetIntValue(this AnimatorComponent self, string name, int value)
         {
-            self.Animator.SetInteger(name, value);
+            if (self.Animator == null)
+            {
+                return;
+            }
+
+            if (!self.HasParameter(name))
+            {
+                return;
+            }
+
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].SetInteger(name, value);
+            }
         }
 
         public static void SetTrigger(this AnimatorComponent self, string name)
         {
-            self.Animator.SetTrigger(name);
+            if (self.Animator == null)
+            {
+                return;
+            }
+
+            if (!self.HasParameter(name))
+            {
+                return;
+            }
+
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].SetTrigger(name);
+            }
         }
 
         public static void SetAnimatorSpeed(this AnimatorComponent self, float speed)
         {
-            self.stopSpeed = self.Animator.speed;
-            self.Animator.speed = speed;
+            self.stopSpeed = self.Animator[0].speed;
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].speed = speed;
+            }
         }
 
         public static void ResetAnimatorSpeed(this AnimatorComponent self)
         {
-            self.Animator.speed = self.stopSpeed;
+            for (int i = 0; i < self.Animator.Length; i++)
+            {
+                self.Animator[i].speed = self.stopSpeed;
+            }
         }
     }
 }

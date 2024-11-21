@@ -23,7 +23,7 @@ namespace ET
         public long SkillRigibTime;
         public long SkillSingTime;
         public long SkillMoveTime; //1旋风斩之类的技能
-        public Animator Animator;
+        public Animator[] Animator;
         public int CurrentFsm;
 
         void Awake()
@@ -50,19 +50,35 @@ namespace ET
                 case FsmStateEnum.FsmSkillState:
                     if (this.SkillSingTime > 0 && TimeHelper.ClientNow() >= this.SkillSingTime)
                     {
-                        this.Animator.SetBool("Idle", true);
+                        this.SetBoolValue("Idle", true);
                     }
 
                     if (this.SkillSingTime == 0 && TimeHelper.ClientNow() >= this.SkillRigibTime)
                     {
-                        this.Animator.SetBool("Idle", true);
+                        this.SetBoolValue("Idle", true);
                     }
 
                     break;
             }
         }
 
-        public void OnInitUI(Animator animator)
+        private void SetBoolValue(string idie, bool value)
+        {
+            for (int i = 0; i < this.Animator.Length; i++)
+            {
+                this.Animator[i].SetBool(idie, value);
+            }
+        }
+        
+        private void PlayAnimator(string animator)
+        {
+            for (int i = 0; i < this.Animator.Length; i++)
+            {
+                this.Animator[i].Play(animator);
+            }
+        }
+
+        public void OnInitUI(Animator[] animator)
         {
             this.Animator = animator;
         }
@@ -85,20 +101,20 @@ namespace ET
 
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    this.Animator.SetBool("Death", false);
+                    this.SetBoolValue("Death", false);
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
-                    this.Animator.SetBool("Idle", true);
+                    this.SetBoolValue("Idle", true);
                     break;
                 case FsmStateEnum.FsmSinging:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Run", false);
-                    this.Animator.SetBool("Idle", true);
+                    this.SetBoolValue("Run", false);
+                    this.SetBoolValue("Idle", true);
                     break;
                 case FsmStateEnum.FsmSkillState:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Run", false);
-                    this.Animator.SetBool("Idle", true);
+                    this.SetBoolValue("Run", false);
+                    this.SetBoolValue("Idle", true);
                     break;
                 default:
                     break;
@@ -108,44 +124,44 @@ namespace ET
             {
                 case FsmStateEnum.FsmComboState:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Run", false);
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Run", false);
                     this.OnEnterFsmComboState(parasmss);
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Death", true);
-                    this.Animator.Play("Death");
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Death", true);
+                    this.PlayAnimator("Death");
                     break;
                 case FsmStateEnum.FsmHui:
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.Play("Hui");
+                    this.SetBoolValue("Idle", false);
+                    this.PlayAnimator("Hui");
                     break;
                 case FsmStateEnum.FsmIdleState:
                     this.SetIdleState();
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Run", false);
-                    this.Animator.Play("Speak");
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Run", false);
+                    this.PlayAnimator("Speak");
                     break;
                 case FsmStateEnum.FsmRunState:
                     this.OnEnterFsmFsmRunState(parasmss);
                     break;
                 case FsmStateEnum.FsmShiQuItem:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Run", false);
-                    this.Animator.Play("ShiQu");
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Run", false);
+                    this.PlayAnimator("ShiQu");
                     break;
                 case FsmStateEnum.FsmSinging:
                     //this.ClearnAnimator();
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Run", false);
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Run", false);
                     if (double.Parse(parasmss) > 0)
                     {
-                        this.Animator.Play("YinChang");
+                        this.PlayAnimator("YinChang");
                     }
 
                     break;
@@ -153,9 +169,9 @@ namespace ET
                     this.OnEnterFsmSkillState(parasmss);
                     break;
                 case FsmStateEnum.FsmHorse:
-                    this.Animator.SetBool("Idle", false);
-                    this.Animator.SetBool("Run", false);
-                    this.Animator.Play("Horse");
+                    this.SetBoolValue("Idle", false);
+                    this.SetBoolValue("Run", false);
+                    this.PlayAnimator("Horse");
                     break;
                 default:
                     break;
@@ -168,7 +184,7 @@ namespace ET
         {
             string[] animationinfos = paramss.Split('@');
             this.SkillMoveTime = long.Parse(animationinfos[0]);
-            this.Animator.Play(animationinfos[1]);
+            this.PlayAnimator(animationinfos[1]);
 
             float singTime = float.Parse(animationinfos[2]);
             if (singTime > 0f)
@@ -194,9 +210,9 @@ namespace ET
 
         public void SetIdleState()
         {
-            this.Animator.SetBool("Run", false);
-            this.Animator.SetBool("Idle", true);
-            this.Animator.Play("Idle");
+            this.SetBoolValue("Run", false);
+            this.SetBoolValue("Idle", true);
+            this.PlayAnimator("Idle");
 
             Log.Debug("SetIdleState");
         }
@@ -204,9 +220,9 @@ namespace ET
         public void SetRunState()
         {
             this.SkillMoveTime = 0;
-            this.Animator.SetBool("Idle", false);
-            this.Animator.SetBool("Run", true);
-            this.Animator.Play("Run");
+            this.SetBoolValue("Idle", false);
+            this.SetBoolValue("Run", true);
+            this.PlayAnimator("Run");
 
             Log.Debug("SetRunState");
         }
@@ -234,19 +250,19 @@ namespace ET
                 }
             }
 
-            this.Animator.Play(animation);
+            this.PlayAnimator(animation);
         }
 
         public void ClearnAnimator()
         {
             //重置参数
-            this.Animator.SetBool("Idle", false);
-            this.Animator.SetBool("Run", false);
-            this.Animator.SetBool("Death", false);
-            this.Animator.SetBool("CriAct", false);
-            this.Animator.SetBool("Act_1", false);
-            this.Animator.SetBool("Act_2", false);
-            this.Animator.SetBool("Act_3", false);
+            this.SetBoolValue("Idle", false);
+            this.SetBoolValue("Run", false);
+            this.SetBoolValue("Death", false);
+            this.SetBoolValue("CriAct", false);
+            this.SetBoolValue("Act_1", false);
+            this.SetBoolValue("Act_2", false);
+            this.SetBoolValue("Act_3", false);
         }
     }
 }
