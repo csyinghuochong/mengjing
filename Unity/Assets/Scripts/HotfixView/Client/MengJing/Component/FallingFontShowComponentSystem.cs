@@ -140,11 +140,17 @@ namespace ET.Client
 
         public static bool LateUpdate(this FallingFontShowComponent self)
         {
+            if (self.HeadBar == null)
+            {
+                return true;
+            }
+            
             switch (self.FallingFontExecuteType)
             {
                 case FallingFontExecuteType.Type_0: // 战斗飘字逻辑
                 {
                     self.DamgeFlyTimeSum = self.DamgeFlyTimeSum + Time.deltaTime;
+                    
                     if (self.Transform != null)
                     {
                         if (self.DamgeFlyTimeSum < 0.2f)
