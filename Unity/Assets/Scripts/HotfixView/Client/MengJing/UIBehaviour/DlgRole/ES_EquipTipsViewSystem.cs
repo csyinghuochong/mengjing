@@ -303,9 +303,12 @@ namespace ET.Client
                         {
                             continue;
                         }
-
+                        
                         self.Obj_UIEquipGemHoleList[gemNumber].SetActive(gemHoles[i] != "0");
-                        self.TipsShowEquipGem(self.Obj_UIEquipGemHoleIconList[gemNumber], self.Obj_UIEquipGemHoleTextList[gemNumber],
+
+                        GameObject icon_item = self.Obj_UIEquipGemHoleIconList[gemNumber];
+                        GameObject icon_di = self.Obj_UIEquipGemHoleList[gemNumber].transform.GetChild(0).gameObject;
+                        self.TipsShowEquipGem(icon_item, icon_di, self.Obj_UIEquipGemHoleTextList[gemNumber],
                             int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
                         gemNumber += (gemHoles[i] != "0" ? 1 : 0);
                     }
@@ -364,13 +367,22 @@ namespace ET.Client
             }
         }
 
-        public static void TipsShowEquipGem(this ES_EquipTips self, GameObject icon, GameObject text, int gemHole, int gemId)
+        public static void TipsShowEquipGem(this ES_EquipTips self, GameObject icon,GameObject icondi, GameObject text, int gemHole, int gemId)
         {
             if (gemHole == 0)
             {
                 return;
             }
 
+            text.GetComponent<Text>().text = ItemViewData.GemHoleName[gemHole];
+            icon.SetActive(gemId != 0);
+            using (zstring.Block())
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("Img_hole_{0}", gemHole));
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                icondi.GetComponent<Image>().sprite = sp;
+            }
+            
             if (gemId != 0)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(gemId);
@@ -401,16 +413,6 @@ namespace ET.Client
                 if (itemConfig.ItemSubType == 110 && equipShiShiGemNum > 4)
                 {
                     text.GetComponent<Text>().text += "(超过4个,属性无效)";
-                }
-            }
-            else
-            {
-                text.GetComponent<Text>().text = ItemViewData.GemHoleName[gemHole];
-                using (zstring.Block())
-                {
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("Img_hole_{0}", gemHole));
-                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                    icon.GetComponent<Image>().sprite = sp;
                 }
             }
         }
