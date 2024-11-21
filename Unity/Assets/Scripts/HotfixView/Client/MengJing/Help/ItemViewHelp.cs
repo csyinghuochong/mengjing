@@ -7,6 +7,25 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+
+        /// <summary>
+        /// 等级 99 显示传承  98显示史诗
+        /// </summary>
+        /// <param name="itemConfig"></param>
+        /// <returns></returns>
+        public static string GetGemUseLv(ItemConfig itemConfig)
+        {
+            if (itemConfig.UseLv == 99)
+            {
+                return "传承";
+            }
+            if (itemConfig.UseLv == 98)
+            {
+                return "史诗";
+            }
+            return itemConfig.UseLv.ToString() + "级";
+        }
+
         public static string GetFumpProDesc(List<HideProList> hideProLists)
         {
             string fumopro = "";

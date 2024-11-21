@@ -307,7 +307,7 @@ namespace ET.Client
                         self.Obj_UIEquipGemHoleList[gemNumber].SetActive(gemHoles[i] != "0");
 
                         GameObject icon_item = self.Obj_UIEquipGemHoleIconList[gemNumber];
-                        GameObject icon_di = self.Obj_UIEquipGemHoleList[gemNumber].transform.GetChild(0).gameObject;
+                        GameObject icon_di = self.Obj_UIEquipGemHoleList[gemNumber].transform.Find("E_UIEquipGemHoleIcon_Di").gameObject;
                         self.TipsShowEquipGem(icon_item, icon_di, self.Obj_UIEquipGemHoleTextList[gemNumber],
                             int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
                         gemNumber += (gemHoles[i] != "0" ? 1 : 0);
@@ -374,8 +374,9 @@ namespace ET.Client
                 return;
             }
 
-            text.GetComponent<Text>().text = ItemViewData.GemHoleName[gemHole];
+            //text.GetComponent<Text>().text = ItemViewData.GemHoleName[gemHole];
             icon.SetActive(gemId != 0);
+            text.SetActive(gemId != 0);
             using (zstring.Block())
             {
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("Img_hole_{0}", gemHole));
@@ -386,7 +387,11 @@ namespace ET.Client
             if (gemId != 0)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(gemId);
-                text.GetComponent<Text>().text = itemConfig.ItemName;
+                
+                //等级 99 显示传承  98显示史诗
+                text.GetComponent<Text>().text = ItemViewHelp.GetGemUseLv(itemConfig);
+                text.GetComponent<Text>().color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
+                
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
