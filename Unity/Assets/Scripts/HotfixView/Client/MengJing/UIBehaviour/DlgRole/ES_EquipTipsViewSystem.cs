@@ -318,7 +318,7 @@ namespace ET.Client
                     self.Obj_UIEquipGemHoleList[3].SetActive(false);
                 }
 
-                float gemHoleShowHeight = gemNumber > 0 ? 120f : 0f;
+                float gemHoleShowHeight = gemNumber > 0 ? 120f : 10f;
 
                 //显示专精属性
                 startPostionY -= gemHoleShowHeight;
