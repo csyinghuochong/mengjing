@@ -12,9 +12,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ET.Client.BuffC self)
         {
-            BuffHandlerC buffHandler = BuffDispatcherComponentC.Instance.Get(self.mSkillBuffConf.BuffScript);
-            buffHandler.OnFinished(self);
-            self.Clear();
+           //do nothing
         }
         
         /// <summary>

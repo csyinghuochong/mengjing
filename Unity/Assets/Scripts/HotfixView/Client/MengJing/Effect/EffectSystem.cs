@@ -13,6 +13,23 @@ namespace ET.Client
         {
         }
 
+        [EntitySystem]
+        private static void Destroy(this ET.Client.Effect self)
+        {
+            self.OnFinished();
+        }
+        
+        public static void OnFinished(this Effect self)
+        {
+            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectObj);
+            self.EffectState = BuffState.Finished;
+            self.TheUnitBelongto = null;
+            self.EffectObj = null;
+            self.EffectPath = String.Empty;
+            self.EffectEndTime = 0;
+        }
+
+        
         public static void OnInit(this Effect self, EffectData effectData, Unit theUnitBelongto)
         {
             self.EffectPath = string.Empty;
@@ -264,22 +281,6 @@ namespace ET.Client
             }
             self.EffectObj.transform.position = vec3;
         }
-
-        public static void OnFinished(this Effect self)
-        {
-
-            self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.EffectPath, self.EffectObj);
-            self.EffectState = BuffState.Finished;
-            self.TheUnitBelongto = null;
-            self.EffectObj = null;
-            self.EffectPath = String.Empty;
-            self.EffectEndTime = 0;
-        }
         
-        [EntitySystem]
-        private static void Destroy(this ET.Client.Effect self)
-        {
-            self.OnFinished();
-        }
     }
 }
