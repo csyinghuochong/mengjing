@@ -220,8 +220,11 @@ namespace ET.Client
 
             if (isPet)
             {
-                Animator animator = go.GetComponentInChildren<Animator>();
-                animator.Play(RandomHelper.RandFloat01() >= 0.5 ? "Skill_1" : "Skill_2");
+                Animator[] animator = go.GetComponentsInChildren<Animator>();
+                for (int i = 0; i < animator.Length; i++)
+                {
+                    animator[i].Play(RandomHelper.RandFloat01() >= 0.5 ? "Skill_1" : "Skill_2");
+                }
             }
 
             self.Model.Add(go);
