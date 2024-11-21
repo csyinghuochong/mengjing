@@ -7,6 +7,9 @@ namespace ET
     public static class ConfigData
     {
 
+        public const long PetSwichCD1 = 60;
+        public const float PetSwichCD2 = 1f / PetSwichCD1;
+        
         [StaticField]
         public static int PetMianShangBuff = 97020003;
         

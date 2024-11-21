@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.MainPetShowQuickFightTimer)]
-    public class MainPetShowQuickFightTimer : ATimer<ES_MainPetFight>
+    [Invoke(TimerInvokeType.MainPetFightSwitchCD)]
+    public class MainPetFightSwitchCD : ATimer<ES_MainPetFight>
     {
         protected override void Run(ES_MainPetFight self)
         {
             try
             {
-                self.OpenUI().Coroutine();
+                //self.OpenUI().Coroutine();
+
+                self.UpdateSwitchCD();
             }
             catch (Exception e)
             {
@@ -45,19 +47,11 @@ namespace ET.Client
 
         private static void PointerDown(this ES_MainPetFight self, PointerEventData pdata)
         {
-            self.LongPress = false;
-            //self.Timer = self.Root().GetComponent<TimerComponent>()
-            //        .NewOnceTimer(TimeInfo.Instance.ServerNow() + 600, TimerInvokeType.MainPetShowQuickFightTimer, self);
+            
         }
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)
         {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            if (self.LongPress)
-            {
-               return;
-            }
-
             int leftTime = (int)(0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
             if ( leftTime > 0  )
             {
@@ -70,13 +64,95 @@ namespace ET.Client
                 return;
             }
 
-            self.LastTimer = TimeHelper.ServerNow() + TimeHelper.Minute;
+            self.LastTimer = TimeHelper.ServerNow() + ConfigData.PetSwichCD1 * TimeHelper.Second;
             PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
         }
+        
+        public static void UpdateSwitchCD(this ES_MainPetFight self)
+        {
+            float leftTime = (0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
 
+            if (leftTime <= 0f)
+            {
+                self.ResetSwitchCD();
+                return;
+            }
+            
+            self.E_PetHPImage.fillAmount = (60f - leftTime)  * ConfigData.PetSwichCD2;
+        }
+        
+        private static void ResetSwitchCD(this ES_MainPetFight self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.E_PetHPImage.fillAmount = 1f;       
+        }
+
+        public static void AddSwitchTimer(this ES_MainPetFight self)
+        {
+            if (self.Timer == 0)
+            {
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MainPetFightSwitchCD, self);
+            }
+        }
+
+        public static void Refresh(this ES_MainPetFight self, RolePetInfo rolePetInfo, int fightIndex)
+        {
+            self.FightIndex = fightIndex;
+
+            if (rolePetInfo == null)
+            {
+                self.ResetSwitchCD();
+                self.E_PetIconImage.gameObject.SetActive(false);
+                self.E_PetLvText.gameObject.SetActive(false);
+                self.E_PetHPImage.fillAmount = 0f;    
+                
+                return;
+            }
+
+            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
+            if (pet == null)
+            {
+                self.ResetSwitchCD();
+                self.E_PetHPImage.fillAmount = 0f;    
+                
+                return;
+            }
+
+            int leftTime = (int)(0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
+            if (leftTime > 0)
+            {
+                self.AddSwitchTimer();
+            }
+            else
+            {
+                self.ResetSwitchCD();
+            }
+
+            self.Pet = pet;
+            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_PetIconImage.gameObject.SetActive(true);
+            self.E_PetIconImage.sprite = sp;
+            self.E_PetLvText.gameObject.SetActive(true);
+            self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
+        }
+        
+        public static void UpdateHp(this ES_MainPetFight self)
+        {
+            if (self.Pet == null || self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.Pet.GetComponent<NumericComponentC>();
+            float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
+            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
+            self.E_PetHPImage.fillAmount = blood;
+        }
+        
         public static async ETTask OpenUI(this ES_MainPetFight self)
         {
-            self.LongPress = true;
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight);
             DlgPetQuickFight dlgPetQuickFight = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetQuickFight>();
             dlgPetQuickFight.OnInitUI(self.FightIndex);
@@ -90,49 +166,6 @@ namespace ET.Client
             //await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
         }
 
-        public static void Refresh(this ES_MainPetFight self, RolePetInfo rolePetInfo, int fightIndex)
-        {
-            self.FightIndex = fightIndex;
-
-            if (rolePetInfo == null)
-            {
-                self.E_PetIconImage.gameObject.SetActive(false);
-                self.E_PetHPImage.fillAmount = 0;
-                self.E_PetLvText.gameObject.SetActive(false);
-                return;
-            }
-
-            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
-            if (pet == null)
-            {
-                self.E_PetHPImage.fillAmount = 0;
-                return;
-            }
-
-            self.Pet = pet;
-
-            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            self.E_PetIconImage.gameObject.SetActive(true);
-            self.E_PetIconImage.sprite = sp;
-            self.E_PetLvText.gameObject.SetActive(true);
-            self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
-
-            self.UpdateHp();
-        }
-
-        public static void UpdateHp(this ES_MainPetFight self)
-        {
-            if (self.Pet == null || self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
-            {
-                return;
-            }
-
-            NumericComponentC numericComponent = self.Pet.GetComponent<NumericComponentC>();
-            float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
-            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            self.E_PetHPImage.fillAmount = blood;
-        }
+        
     }
 }

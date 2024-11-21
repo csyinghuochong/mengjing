@@ -104,7 +104,7 @@
         public const int UICellChapterOpen = 366;
         public const int UICellDungeonSettlement = 367;
         public const int UIPetMeleeMain = 368;
-        public const int MainPetShowQuickFightTimer = 369;
+        public const int MainPetFightSwitchCD = 369;
         public const int MainPetSwitchTimer = 370;
         public const int PetBarSetSkillShowInfoTimer = 371;
     }

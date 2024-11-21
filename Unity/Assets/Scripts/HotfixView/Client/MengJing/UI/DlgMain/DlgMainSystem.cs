@@ -1212,12 +1212,6 @@ namespace ET.Client
                 petComponentC.GetPetInfoByID(petComponentC.GetNowPetFightList().Count > 2 ? petComponentC.GetNowPetFightList()[2].PetId : 0), 3);
         }
 
-        public static void RefreshMainPetFightHPUI(this DlgMain self)
-        {
-            self.View.ES_MainPetFight_0.UpdateHp();
-            self.View.ES_MainPetFight_1.UpdateHp();
-            self.View.ES_MainPetFight_2.UpdateHp();
-        }
 
         public static void ShowPetSwitchTimer(this DlgMain self)
         {
