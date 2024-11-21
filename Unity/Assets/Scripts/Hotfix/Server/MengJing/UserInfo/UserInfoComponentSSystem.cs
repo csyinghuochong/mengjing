@@ -1218,7 +1218,7 @@ namespace ET.Server
                 main.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ShowLieMonster_1201, 0, 1);
             }
 
-            if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == 55)
+            if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
             {
                 self.OnAddChests(sceneId, beKill.ConfigId);
             }

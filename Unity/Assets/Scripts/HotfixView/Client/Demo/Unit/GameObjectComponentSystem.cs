@@ -202,14 +202,14 @@ namespace ET.Client
                         GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
                         self.OnLoadGameObject(gameObject, self.InstanceId);
                     }
-                    else if (monsterCof.MonsterSonType == 58)
+                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
                     {
                         //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
                         int itemid = monsterCof.Parameter[1];
                         int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
                     }
-                    else if (monsterCof.MonsterSonType == 59)
+                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                     {
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
                     }
@@ -657,56 +657,46 @@ namespace ET.Client
                         bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                         go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
                     }
-
-                    //51 场景怪 有AI 不显示名称
-                    //52 能量台子 无AI
-                    //54 场景怪 有AI 显示名称
-                    //55 宝箱类 无AI
-                    //56 宝箱类 刷新地图后即可刷新
-                    //57 宠物蛋 直接掉落进背包
-                    //58 宠物实体
-                    //59 精灵实体
-                    //60 家园物品
-
-                    if (monsterCof.MonsterSonType == 51)
+                    
+                    if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_51)
                     {
                     }
-                    else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
+                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_52 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_54)
                     {
                         self.OnAddCollider(go);
                         unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
                         unit.AddComponent<UISceneItemComponent>(true).OnInitEnergyTableUI().Coroutine(); //血条UI组件
                     }
-                    else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
+                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                     {
                         self.OnAddCollider(go);
                         unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
 
-                        if (monsterCof.MonsterSonType == 58)
+                        if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
                         {
                             //实例化特效
                             FunctionEffect.PlaySelfEffect(unit, 91000106);
                         }
 
-                        if (monsterCof.MonsterSonType == 59)
+                        if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                         {
                             //实例化特效
                             FunctionEffect.PlaySelfEffect(unit, 91000107);
                         }
                     }
-                    else if (unit.IsChest() || monsterCof.MonsterSonType == 60)
+                    else if (unit.IsChest() || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_60)
                     {
                         unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
                     }
-                    else if (monsterCof.MonsterSonType == 61)
+                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_61)
                     {
                         self.OnAddCollider(go);
                         unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     }
-                    else if (monsterCof.MonsterType != (int)MonsterTypeEnum.SceneItem)
+                    else if (monsterCof.MonsterType != MonsterTypeEnum.SceneItem)
                     {
                         unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
                         unit.AddComponent<UIMonsterHpComponent>(true); //血条UI组件

@@ -529,7 +529,7 @@ namespace  ET
                 int add = GlobalValueConfigCategory.Instance.ZhuaPuItem[itemid];
 
                 //抓捕怪物加成
-                if (monsterConfig.MonsterSonType == 58) {
+                if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) {
                     add = add * 2;
                 }
 

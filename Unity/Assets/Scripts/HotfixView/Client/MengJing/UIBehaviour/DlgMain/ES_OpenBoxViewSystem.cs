@@ -82,14 +82,14 @@ namespace ET.Client
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            if (userInfo.PiLao <= 0 && monsterConfig.MonsterSonType == 56)
+            if (userInfo.PiLao <= 0 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_56)
             {
                 FlyTipComponent.Instance.ShowFlyTip("体力不足,无法拾取");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1 && monsterConfig.MonsterSonType == 57)
+            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 1 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_57)
             {
                 FlyTipComponent.Instance.ShowFlyTip("背包空间不足,无法拾取");
                 return;
@@ -146,7 +146,7 @@ namespace ET.Client
                 }
 
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
-                if (monsterConfig.MonsterType == 5 && monsterConfig.MonsterSonType == 58)
+                if (monsterConfig.MonsterType == 5 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58)
                 {
                     Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                     UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;

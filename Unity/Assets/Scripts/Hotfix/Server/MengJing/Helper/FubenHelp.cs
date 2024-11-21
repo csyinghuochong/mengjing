@@ -147,18 +147,8 @@ namespace ET.Server
 				{
 					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
 					float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
-
-					//51 场景怪 有AI 不显示名称
-					//52 能量台子 无AI
-					//54 场景怪 有AI 显示名称
-					//55 宝箱类(一次) 无AI
-					//56 宝箱类(无限) 无AI
 					
-					//51 场景怪 有AI 不显示名称
-					//52 能量台子 无AI
-					//54 场景怪 有AI 显示名称
-					//55 宝箱类 无AI
-					if (monsterConfig.MonsterSonType == 52)
+					if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_52)
 					{
 						CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
 						if (cellDungeonComponent!=null)
@@ -408,7 +398,7 @@ namespace ET.Server
 						monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
 
 						int skinId = 0;
-						if (monsterConfig.MonsterSonType == 58) //奇遇宠物
+						if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) //奇遇宠物
 						{
 							int itemid = monsterConfig.Parameter[1];
 							ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
@@ -433,7 +423,7 @@ namespace ET.Server
 					continue;
 				}
 
-				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == 55)
+				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
 				{
 					LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 					UserInfoComponentS userInfoComponent = localDungeonComponent.MainUnit.GetComponent<UserInfoComponentS>();
@@ -457,12 +447,8 @@ namespace ET.Server
 					for (int c = 0; c < cmcount; c++)
 					{
 						float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
-
-						//51 场景怪 有AI 不显示名称
-						//52 能量台子 无AI
-						//54 场景怪 有AI 显示名称
-						//55 宝箱类 无AI
-						if (monsterConfig.MonsterSonType == 52)
+						
+						if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_52)
 						{
 							CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
 							if (cellDungeonComponent!=null)

@@ -161,13 +161,13 @@ namespace ET.Client
                         if (monsterCof.MonsterType == 5)
                         {
                             //6 宝箱
-                            if (monsterCof.MonsterSonType == 55)
+                            if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_55)
                             {
                                 showType = "6";
                             }
 
                             //5 精灵 宠物 宠灵书
-                            if (monsterCof.MonsterSonType == 57 || monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
+                            if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_57 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                             {
                                 showType = "5";
                             }

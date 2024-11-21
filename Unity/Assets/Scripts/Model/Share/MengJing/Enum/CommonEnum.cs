@@ -287,4 +287,24 @@ namespace ET
         public const int SceneItem = 5;
     }
 
+    public static class MonsterSonTypeEnum
+    {
+        public const int Type_1 = 1;//1 密境怪物
+        public const int Type_2 = 2;//2 副本怪物
+        public const int Type_3 = 3;//3 任务怪物
+        public const int Type_51 = 51;//51 场景怪 有AI 不显示名称
+        public const int Type_52 = 52;//52 能量台子 无AI
+        public const int Type_53 = 53;//53 传送门
+        public const int Type_54 = 54;//54 场景怪 有AI 显示名称
+        public const int Type_55 = 55;//55 宝箱类(一次) 无AI
+        public const int Type_56 = 56;//56 宝箱类(无限) 无AI 刷新地图后即可刷新
+        public const int Type_57 = 57;//57 宠物蛋 直接掉落进背包
+        public const int Type_58 = 58;//58 宠物实体
+        public const int Type_59 = 59;//59 精灵实体
+        public const int Type_60 = 60;//60 家园物品
+        public const int Type_61 = 61;//61 小龟
+        public const int Type_62 = 62;//62 基地
+        public const int Type_101 = 101;//101 猎魔
+        public const int Type_102 = 102;//102 曙光
+    }
 }

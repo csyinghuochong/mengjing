@@ -415,7 +415,7 @@ namespace ET.Client
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitlock.ConfigId);
-            self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59);
+            self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59);
         }
 
         public static void OnButton_ZhuaPuButton(this ES_MainSkill self)

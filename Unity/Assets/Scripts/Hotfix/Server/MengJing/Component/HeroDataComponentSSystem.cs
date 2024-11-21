@@ -437,7 +437,7 @@ namespace ET.Server
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monster);
 
              //判定是否为成长怪物
-             if (monsterConfig.MonsterSonType == 1)
+             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_1)
              {
                  int nowUserLv = nowUnit.GetComponent<UserInfoComponentS>().GetUserLv();
                  for (int i = 0; i < monsterConfig.Parameter.Length; i++)
@@ -695,7 +695,7 @@ namespace ET.Server
              }
 
              //判定是否为成长怪物
-             if (monsterConfig.MonsterSonType == 1)
+             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_1)
              {
                  int nowUserLv = nowUnit.GetComponent<UserInfoComponentS>().GetUserLv();
                  for (int i = 0; i < monsterConfig.Parameter.Length; i++)
@@ -710,7 +710,7 @@ namespace ET.Server
              }
 
              //判定是否为成长怪物
-             if (monsterConfig.MonsterSonType == 2)
+             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_2)
              {
                  MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(nowUnit.ConfigId);
                  int nowUserLv = monsterCof.Lv;

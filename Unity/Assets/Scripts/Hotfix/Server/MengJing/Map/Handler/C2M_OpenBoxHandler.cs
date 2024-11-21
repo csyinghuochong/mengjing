@@ -35,7 +35,7 @@ namespace ET.Server
                 return;
             }
 
-            if (monsterConfig.MonsterSonType == 57) 
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_57) 
             {
                 //背包是否满
                 if (unit.GetComponent<BagComponentS>().IsBagFullByLoc(ItemLocType.ItemLocBag))

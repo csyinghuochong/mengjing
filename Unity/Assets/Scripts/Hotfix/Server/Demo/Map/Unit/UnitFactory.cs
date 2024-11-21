@@ -152,12 +152,7 @@ namespace ET.Server
                 numericComponent.ApplyValue(NumericType.ReviveTime, revetime, false);
                 numericComponent.ApplyValue(NumericType.Now_Dead, 1, false);
             }
-
-            //51 场景怪
-            //52 能量台子
-            //53 传送门
-            //54 场景怪 显示名称
-            //55 宝箱
+            
             if (monsterConfig.AI != 0)
             {
                 if (createMonsterInfo.MasterID > 0 && !string.IsNullOrEmpty(createMonsterInfo.AttributeParams))
@@ -170,6 +165,12 @@ namespace ET.Server
                 }
             }
 
+            // 暂时这样，后面可能会给基地加AI
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+            {
+                heroDataComponent.InitMonsterInfo(monsterConfig, createMonsterInfo);
+            }
+            
             if (monsterConfig.AI != 0)
             {
                 int ai = createMonsterInfo.AI > 0 ? createMonsterInfo.AI : monsterConfig.AI;
@@ -601,12 +602,12 @@ namespace ET.Server
 
                 //场景宝箱掉落和体力无关
                 if (monsterCof.MonsterType == 5 &&
-                    (monsterCof.MonsterSonType == 55 || monsterCof.MonsterSonType == 57))
+                    (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_55 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_57))
                 {
                     drop = true;
                 }
 
-                if (monsterCof.MonsterType == 1 && monsterCof.MonsterSonType == 3)
+                if (monsterCof.MonsterType == 1 && monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_3)
                 {
                     drop = true;
                 }
@@ -704,7 +705,7 @@ namespace ET.Server
             }
 
             //创建掉落
-            if (main != null && monsterCof.MonsterSonType == 1)
+            if (main != null && monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_1)
             {
                 int nowUserLv = main.GetComponent<UserInfoComponentS>().UserInfo.Lv;
                 for (int i = 0; i < monsterCof.Parameter.Length; i++)
@@ -732,7 +733,7 @@ namespace ET.Server
                 droplist.AddRange(droplist_2);
             }
 
-            if ((monsterCof.MonsterSonType == 55 || monsterCof.MonsterSonType == 56) && droplist.Count == 0)
+            if ((monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_55 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_56) && droplist.Count == 0)
             {
                 Log.Warning($"宝箱掉落为空{monsterCof.Id} {main.Id}");
             }
@@ -866,7 +867,7 @@ namespace ET.Server
                         //}
 
                         //宠物蛋直接进背包
-                        if (monsterCof.MonsterSonType == 57)
+                        if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_57)
                         {
                             beAttack.GetComponent<BagComponentS>().OnAddItemData($"{droplist[k].ItemID};{droplist[k].ItemNum}",
                                 $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");

@@ -168,7 +168,7 @@ namespace ET.Client
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
-            if (monsterConfig.MonsterType == 5 && monsterConfig.MonsterSonType == 58)
+            if (monsterConfig.MonsterType == 5 && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58)
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;

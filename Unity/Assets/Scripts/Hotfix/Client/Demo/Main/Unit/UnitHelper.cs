@@ -210,7 +210,7 @@ namespace ET.Client
             }
 
             int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
-            return sonType == 55 || sonType == 56 || sonType == 57;
+            return sonType == MonsterSonTypeEnum.Type_55 || sonType == MonsterSonTypeEnum.Type_56 || sonType == MonsterSonTypeEnum.Type_57;
         }
 
         public static int GetEquipType(Scene root)
