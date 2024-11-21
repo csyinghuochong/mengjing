@@ -169,6 +169,10 @@ namespace ET.Server
             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
             {
                 heroDataComponent.InitMonsterInfo(monsterConfig, createMonsterInfo);
+                unit.AddComponent<SkillManagerComponentS>();
+                unit.AddComponent<SkillPassiveComponent>();
+                unit.AddComponent<StateComponentS>();
+                unit.AddComponent<BuffManagerComponentS>();
             }
             
             if (monsterConfig.AI != 0)
@@ -390,6 +394,7 @@ namespace ET.Server
                     break;
                 case SceneTypeEnum.PetMelee:
                     AIComponent aiComponent = unit.AddComponent<AIComponent, int>(15);
+                    aiComponent.TargetPoint.Add(new float3(13, 0, 0));
                     aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
                     aiComponent.Begin();
                     break;
