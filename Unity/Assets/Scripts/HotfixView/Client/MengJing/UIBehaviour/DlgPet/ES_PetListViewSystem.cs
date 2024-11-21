@@ -55,6 +55,7 @@ namespace ET.Client
             self.E_Btn_FangShengButton.AddListener(self.OnBtn_FangShengButton);
             self.E_Btn_ChuZhanButton.AddListener(self.OnBtn_XiuXiButton);
             self.E_InputFieldNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
+            self.E_InputFieldNameInputField.onEndEdit.AddListener((string text) => { self.OnButtonRNameButton().Coroutine();  });
             self.E_ButtonRNameButton.AddListenerAsync(self.OnButtonRNameButton);
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
