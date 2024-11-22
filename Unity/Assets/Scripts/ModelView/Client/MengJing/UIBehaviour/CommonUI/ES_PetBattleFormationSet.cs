@@ -39,23 +39,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_PlanSetToggleGroup = null;
-			this.m_es_petbarsetitem_1 = null;
-			this.m_es_petbarsetitem_2 = null;
-			this.m_es_petbarsetitem_3 = null;
-			this.m_EG_PetPanelRectTransform = null;
-			this.m_E_PetTypeSetToggleGroup = null;
-			this.m_E_PetbarSetPetItemsImage = null;
-			this.m_E_PetbarSetPetItemsLoopVerticalScrollRect = null;
-			this.m_EG_SkillPanelRectTransform = null;
-			this.m_E_SkillTypeSetToggleGroup = null;
-			this.m_E_PetbarSetSkillItemsImage = null;
-			this.m_E_PetbarSetSkillItemsLoopVerticalScrollRect = null;
-			this.m_E_ConfirmButton = null;
-			this.m_E_ConfirmImage = null;
-			this.m_E_ReSetButton = null;
-			this.m_E_ReSetImage = null;
-			this.m_EG_PetIconRectTransform = null;
-			this.m_EG_SkillIconRectTransform = null;
 			this.uiTransform = null;
 		}
 
