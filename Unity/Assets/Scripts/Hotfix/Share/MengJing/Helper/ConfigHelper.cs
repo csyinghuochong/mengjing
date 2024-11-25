@@ -111,20 +111,7 @@ namespace ET
             return null;
         }
 
-        /// <summary>
-        /// 三个对应等级套装属性
-        /// </summary>
-
-        public static Dictionary<int, string> PetSuitProperty()
-        {
-            return new Dictionary<int, string>()
-            {
-                {  5, "205003,0.05;203003,0.2;203103,0.2" },
-                {  8, "205003,0.1;203003,0.25;203103,0.25" },
-                {  10, "205003,0.15;203003,0.3;203103,0.3" },
-            };
-        }
-
+     
         public static string GetPetSuitProperty(List<int> pethexinLv)
         {
             int lv5number = 0;
@@ -148,15 +135,15 @@ namespace ET
 
             if (lv10number >= 3)
             {
-                return PetSuitProperty()[10];
+                return ConfigData.PetSuitProperty[10];
             }
             if (lv8number >= 3)
             {
-                return PetSuitProperty()[8];
+                return ConfigData.PetSuitProperty[8];
             }
             if (lv5number >= 3)
             {
-                return PetSuitProperty()[5];
+                return ConfigData.PetSuitProperty[5];
             }
             return null;
         }
@@ -193,22 +180,5 @@ namespace ET
             return string.Empty;
         }
 
-
-        /// <summary>
-        /// 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
-        /// </summary>
-        public static int GMDungeonId()
-        {
-            return 60003;
-        }
-
-
-        /// <summary>
-        /// 组队副本  gm账号显示副本和新地图,大于等于指定副本id不显示
-        /// </summary>
-        public static int GmTeamdungeonId()
-        {
-            return 110006;
-        }
     }
 }

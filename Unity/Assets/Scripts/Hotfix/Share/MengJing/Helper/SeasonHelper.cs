@@ -56,7 +56,7 @@ namespace ET
                 {
                     continue;
                 }
-                if (item.Value.EnterLv <= lv && item.Key < ConfigHelper.GMDungeonId())
+                if (item.Value.EnterLv <= lv && item.Key < ConfigData.GMDungeonId)
                 {
                     canEnterIds.Add(item.Key);
                 }

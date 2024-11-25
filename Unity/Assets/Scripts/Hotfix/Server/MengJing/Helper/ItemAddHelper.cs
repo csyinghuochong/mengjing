@@ -96,7 +96,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                if (dungeonConfigsAll[i].EnterLv <= roleLv && dungeonConfigsAll[i].Id < ConfigHelper.GMDungeonId())
+                if (dungeonConfigsAll[i].EnterLv <= roleLv && dungeonConfigsAll[i].Id < ConfigData.GMDungeonId)
                 {
                     dungeonConfigs.Add(dungeonConfigsAll[i]);
                 }

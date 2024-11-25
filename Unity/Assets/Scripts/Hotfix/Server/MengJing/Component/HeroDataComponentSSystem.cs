@@ -168,7 +168,7 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }
 
-             if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= ConfigHelper.GMDungeonId())
+             if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= ConfigData.GMDungeonId)
              {
                  numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }

@@ -6,14 +6,31 @@ namespace ET
 {
     public static class ConfigData
     {
+        
+        /// <summary>
+        /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
+        /// </summary>
 
         public const long PetSwichCD1 = 60;
         public const float PetSwichCD2 = 1f / PetSwichCD1;
         
         public const int PetFramgeItemId = 10000152;
         
+        public const int PetMianShangBuff = 97020003;
+        
+
+        /// <summary>
+        /// 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
+        /// </summary>
         [StaticField]
-        public static int PetMianShangBuff = 97020003;
+        public static int GMDungeonId = 60003;
+
+        /// <summary>
+        /// 组队副本  gm账号显示副本和新地图,大于等于指定副本id不显示
+        /// </summary>
+        [StaticField]
+        public static int GmTeamdungeonId = 110006;
+      
         
         [StaticField]
         public static int PlayerHideBuff = 97020004;
@@ -56,6 +73,7 @@ namespace ET
         public static List<int> HunterNearSkill =  new List<int>() { 63200201, 63200202, 63200203, 63200204 };
 
 
+        
         /// <summary>
         /// 目标任务 TaskConfig
         /// </summary>
@@ -338,16 +356,6 @@ namespace ET
         
         [StaticField]
         public static bool ShowLieOpen = false;
-
-        // 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
-        [StaticField]
-        public static int GMDungeonId = 1060003;
-
-        /// <summary>
-        /// 组队副本  gm账号显示副本和新地图,大于等于指定副本id不显示
-        /// </summary>
-        [StaticField]
-        public static int GmTeamdungeonId = 10110006;
 
         [StaticField]
         public static string ChangeOccItem = "10000178;1";

@@ -338,7 +338,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                if (config.EnterLv <= lv && config.Id < ConfigHelper.GMDungeonId())
+                if (config.EnterLv <= lv && config.Id < ConfigData.GMDungeonId)
                 {
                     openfubenids.Add(fubenid);
                 }
