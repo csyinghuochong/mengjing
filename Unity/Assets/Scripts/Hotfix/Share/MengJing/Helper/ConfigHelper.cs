@@ -5,11 +5,6 @@ namespace ET
 
     public static class ConfigHelper
     {
-
-        public static int PetFramgeItemId()
-        {
-            return 10000152;
-        }
         
         /// <summary>
         /// 开服天数金币限制
@@ -38,8 +33,6 @@ namespace ET
             return 30000000;
         }
         
-
-       
         public static List<RewardItem> GetHeQuReward(int lv)
         {
             List<RewardItem> rewards = new List<RewardItem>();

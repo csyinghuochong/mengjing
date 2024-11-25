@@ -248,7 +248,7 @@ namespace ET.Client
                 return;
             }
 
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(ConfigHelper.PetFramgeItemId());
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(ConfigData.PetFramgeItemId);
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "碎片兑换", zstring.Format("是否消耗一个神兽碎片兑换一个{0}", itemConfig.ItemName),

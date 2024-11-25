@@ -10,6 +10,8 @@ namespace ET
         public const long PetSwichCD1 = 60;
         public const float PetSwichCD2 = 1f / PetSwichCD1;
         
+        public const int PetFramgeItemId = 10000152;
+        
         [StaticField]
         public static int PetMianShangBuff = 97020003;
         
@@ -1871,4 +1873,5 @@ namespace ET
             new List<int> { 11300601, 11300602, 11300603, 11300604, 11300605 }
         };
     }
+    
 }
