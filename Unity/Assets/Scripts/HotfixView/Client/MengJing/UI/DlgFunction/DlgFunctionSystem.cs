@@ -12,6 +12,9 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgFunction self)
         {
             self.View.E_CloseButton.AddListener(self.OnClose);
+
+            self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
+
             self.View.E_TaskButton.AddListener(self.OnTask);
             self.View.E_RoseEquipButton.AddListener(self.OnRoseEquip);
             self.View.E_PetButton.AddListener(self.OnPet);
@@ -100,6 +103,12 @@ namespace ET.Client
                     });
             }
 
+            self.OnClose();
+        }
+
+        private static void OnPetMelee(this DlgFunction self)
+        {
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
             self.OnClose();
         }
 
