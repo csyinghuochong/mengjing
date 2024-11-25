@@ -1093,7 +1093,7 @@ namespace ET
                 }
 
                 //通用
-                EquipChuanChengSkillCom.AddRange(ConfigHelper.EquipChuanChengSkillCom());
+                EquipChuanChengSkillCom.AddRange(ConfigData.EquipChuanChengSkillCom);
                 List<int> idList = new List<int>();
                 List<int> randList = new List<int>();
 

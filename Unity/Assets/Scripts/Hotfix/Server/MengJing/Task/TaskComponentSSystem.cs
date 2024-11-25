@@ -1390,7 +1390,7 @@ namespace ET.Server
         public static void UpdateTargetTask(this TaskComponentS self, bool notice)
         {
             int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetCrateDay();
-            if (createDay == 0 || createDay > ConfigHelper.WelfareTaskList().Count)
+            if (createDay == 0 || createDay > ConfigData.WelfareTaskList.Count)
             {
                 return;
             }
@@ -1398,7 +1398,7 @@ namespace ET.Server
             List<int> taskids = new List<int>();
             for (int i = 0; i < createDay; i++)
             {
-                taskids.AddRange(ConfigHelper.WelfareTaskList()[i]);
+                taskids.AddRange(ConfigData.WelfareTaskList[i]);
             }
             for (int i = 0; i < taskids.Count; i++)
             {

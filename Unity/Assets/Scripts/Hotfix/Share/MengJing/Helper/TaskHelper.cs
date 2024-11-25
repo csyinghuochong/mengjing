@@ -493,7 +493,7 @@ namespace ET
         /// <returns></returns>
         public static bool IsDayTaskComplete(List<int> completeids, int day)
         {
-            List<int> daytask = ConfigHelper.WelfareTaskList()[day];
+            List<int> daytask = ConfigData.WelfareTaskList[day];
             for (int i = 0; i < daytask.Count; i++)
             {
                 if (!completeids.Contains(daytask[i]))

@@ -49,7 +49,7 @@ namespace ET.Server
             //增加属性
             float addFloat = CommonHelp.GetPetShouHuPro(nowNum,fightNum);
             PropertyValue hide = new PropertyValue();
-            hide.HideID = int.Parse(ConfigHelper.PetShouHuAttri()[self.PetShouHuActive - 1].Value2);
+            hide.HideID = int.Parse(ConfigData.PetShouHuAttri[self.PetShouHuActive - 1].Value2);
             hide.HideValue = (long)(addFloat * 10000);
             proList.Add(hide);
 

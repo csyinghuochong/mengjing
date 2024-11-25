@@ -42,6 +42,87 @@ namespace ET
         [StaticField]
         public static Dictionary<int, List<int>> FubenToNpcList = new  Dictionary<int, List<int>>() { };
         
+        
+        /// <summary>
+        /// 猎人远程技能
+        /// </summary>
+        [StaticField]
+        public static List<int> HunterFarSkill = new List<int>() { 63200101, 63200102, 63200103, 63200104 };
+
+        /// <summary>
+        /// 猎人近战技能
+        /// </summary>
+         [StaticField]
+        public static List<int> HunterNearSkill =  new List<int>() { 63200201, 63200202, 63200203, 63200204 };
+
+
+        /// <summary>
+        /// 目标任务 TaskConfig
+        /// </summary>
+         [StaticField]
+        public static List<List<int>> WelfareTaskList = new List<List<int>>()
+        {
+            //第一天
+            new List<int>{ 71001001,71001002,71001003,71001004,71001005,71001006 },          
+            //第二天
+            new List<int>{ 71002001,71002002,71002003,71002004,71002005,71002006 },
+            //第三天
+            new List<int>{ 71003001,71003002,71003003,71003004,71003005 },
+            //第四天
+            new List<int>{ 71004001,71004002,71004003,71004004,71004005 },
+            //第五天
+            new List<int>{ 71005001,71005002,71005003,71005004,71005005 },
+            //第六天
+            new List<int>{ 71006001,71006002,71006003,71006004,71006005 },
+            //第七天
+            new List<int>{ 71007001,71007002,71007003,71007004,71007005 },
+        };
+
+        [StaticField]
+        public static List<BossDevelopment> BossDevelopmentList_5 = new List<BossDevelopment>()
+        {
+            new BossDevelopment(){ Name = "初级领主", Level = 1, AttributeAdd = 1f,   ExpAdd = 1f,   ReviveTimeAdd = 1f,     DropAdd = 1f,   KillNumber = 0 },
+            new BossDevelopment(){ Name = "次级领主", Level = 2, AttributeAdd = 1.1f, ExpAdd = 1.25f,    ReviveTimeAdd = 1.25f,   DropAdd = 1.15f, KillNumber = 3 },
+            new BossDevelopment(){ Name = "中级领主", Level = 3, AttributeAdd = 1.2f, ExpAdd = 1.5f,    ReviveTimeAdd = 1.5f,     DropAdd = 1.3f, KillNumber = 5 },
+            new BossDevelopment(){ Name = "高级领主", Level = 4, AttributeAdd = 1.3f, ExpAdd = 1.75f,    ReviveTimeAdd = 1.75f,   DropAdd = 1.4f, KillNumber = 10 },
+            new BossDevelopment(){ Name = "终级领主", Level = 5, AttributeAdd = 1.4f, ExpAdd = 2f,    ReviveTimeAdd = 2f,     DropAdd = 1.5f, KillNumber = 20 },
+        };
+        
+        
+        [StaticField]
+        public static List<BossDevelopment> BossDevelopmentList_6 =  new List<BossDevelopment>()
+        {
+            new BossDevelopment(){ Name = "初级领主", Level = 1, AttributeAdd = 1f,    ExpAdd = 1f,   ReviveTimeAdd = 1f,     DropAdd = 1f,   KillNumber = 0 },
+            new BossDevelopment(){ Name = "次级领主", Level = 2, AttributeAdd = 1.1f,  ExpAdd = 1.25f,  ReviveTimeAdd = 1.25f,   DropAdd = 1.15f, KillNumber = 3 },
+            new BossDevelopment(){ Name = "中级领主", Level = 3, AttributeAdd = 1.2f,  ExpAdd = 1.5f,   ReviveTimeAdd = 1.5f,     DropAdd = 1.3f, KillNumber = 5 },
+            new BossDevelopment(){ Name = "高级领主", Level = 4, AttributeAdd = 1.3f,  ExpAdd = 1.75f,   ReviveTimeAdd = 1.75f,   DropAdd = 1.4f, KillNumber = 10 },
+            new BossDevelopment(){ Name = "终级领主", Level = 5, AttributeAdd = 1.4f,  ExpAdd = 2f,   ReviveTimeAdd = 2f,     DropAdd = 1.5f, KillNumber = 20 },
+        };
+        
+        //装备传承部位通用
+        //技能id，权重概率
+        [StaticField]
+        public static List<EquipChuanChengList> EquipChuanChengSkillCom = new List<EquipChuanChengList>()
+        {
+            new EquipChuanChengList() { SkillID = 69041001, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041002, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041003, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041004, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041005, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041006, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69041007, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021001, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021002, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021003, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021004, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021005, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021006, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021007, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021008, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021009, RandPro = 100 },
+            new EquipChuanChengList() { SkillID = 69021010, RandPro = 100 },
+        };
+
           //装备传承职业对应激活技能
        [StaticField]
           public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo = 
@@ -304,80 +385,7 @@ namespace ET
             { 110004, 90014 },
             { 110005, 90015 },
         };
-
-        /// <summary>
-        /// 目标任务 TaskConfig
-        /// </summary>
-        [StaticField]
-        public static List<List<int>> WelfareTaskList = new()
-        {
-            //第一天
-            new List<int>
-            {
-                71001001,
-                71001002,
-                71001003,
-                71001004,
-                71001005,
-                71001006
-            },
-            //第二天
-            new List<int>
-            {
-                71002001,
-                71002002,
-                71002003,
-                71002004,
-                71002005,
-                71002006
-            },
-            //第三天
-            new List<int>
-            {
-                71003001,
-                71003002,
-                71003003,
-                71003004,
-                71003005
-            },
-            //第四天
-            new List<int>
-            {
-                71004001,
-                71004002,
-                71004003,
-                71004004,
-                71004005
-            },
-            //第五天
-            new List<int>
-            {
-                71005001,
-                71005002,
-                71005003,
-                71005004,
-                71005005
-            },
-            //第六天
-            new List<int>
-            {
-                71006001,
-                71006002,
-                71006003,
-                71006004,
-                71006005
-            },
-            //第七天
-            new List<int>
-            {
-                71007001,
-                71007002,
-                71007003,
-                71007004,
-                71007005
-            },
-        };
-
+        
         [StaticField]
         public static bool IsShowLieOpen = false;
 

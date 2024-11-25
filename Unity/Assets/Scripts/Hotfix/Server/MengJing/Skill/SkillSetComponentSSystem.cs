@@ -856,15 +856,15 @@ namespace ET.Server
                 for (int k = self.SkillList.Count - 1; k >= 0; k--)
                 {
                     int skillId = self.SkillList[k].SkillID;
-                    if (ConfigHelper.HunterFarSkill().Contains(skillId)
-                        || ConfigHelper.HunterNearSkill().Contains(skillId))
+                    if (ConfigData.HunterFarSkill.Contains(skillId)
+                        || ConfigData.HunterNearSkill.Contains(skillId))
                     {
                         self.SkillList.RemoveAt(k);
                     }
                 }
 
                 int equipIndex = 0;
-                List<int> addskills = equipIndex == 0 ? ConfigHelper.HunterFarSkill() : ConfigHelper.HunterNearSkill();
+                List<int> addskills = equipIndex == 0 ? ConfigData.HunterFarSkill: ConfigData.HunterNearSkill;
                 for (int i = 0; i < addskills.Count; i++)
                 {
                     SkillPro skillPro = self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
@@ -877,9 +877,9 @@ namespace ET.Server
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
         {
-            self.OnRmItemSkill(ConfigHelper.HunterFarSkill(), 0);
-            self.OnRmItemSkill(ConfigHelper.HunterNearSkill(), 0);
-            self.OnAddItemSkill(equipIndex == 0 ? ConfigHelper.HunterFarSkill() : ConfigHelper.HunterNearSkill()    );
+            self.OnRmItemSkill(ConfigData.HunterFarSkill, 0);
+            self.OnRmItemSkill(ConfigData.HunterNearSkill, 0);
+            self.OnAddItemSkill(equipIndex == 0 ? ConfigData.HunterFarSkill: ConfigData.HunterNearSkill   );
         }
 
         /// <summary>

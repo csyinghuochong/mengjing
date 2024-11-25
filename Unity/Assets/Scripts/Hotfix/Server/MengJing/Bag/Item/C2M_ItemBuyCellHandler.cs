@@ -20,7 +20,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_AleardyMaxCell;
                     return;
                 }
-                BuyCellCost buyCellCost = ConfigHelper.BuyBagCellCosts()[bagComponent.BagBuyCellNumber[0]];
+                BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.BagBuyCellNumber[0]];
                 if (!bagComponent.OnCostItemData(buyCellCost.Cost))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
