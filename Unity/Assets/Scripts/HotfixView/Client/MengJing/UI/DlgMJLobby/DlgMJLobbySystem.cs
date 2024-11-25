@@ -54,7 +54,7 @@ namespace ET.Client
             {
                 UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                 uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
-                uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
+                uiComponent.HideWindow(WindowID.WindowID_MJLobby);
                 return;
             }
         }
@@ -139,8 +139,8 @@ namespace ET.Client
                 self.View.E_LvText.gameObject.SetActive(true);
 
                 self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
-                self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
                 self.View.ES_ModelShow.SetShow(true);
+                self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), createRoleInfo.PlayerOcc, 0, new List<int>());
             }
             else
             {
