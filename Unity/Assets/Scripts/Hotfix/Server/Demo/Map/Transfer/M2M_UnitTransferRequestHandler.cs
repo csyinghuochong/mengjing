@@ -54,7 +54,7 @@ namespace ET.Server
                 MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
             }
 
-            int aoivalue = 5;
+            int aoivalue = 9;
             switch (request.SceneType)
             {
                 case SceneTypeEnum.CellDungeon:
