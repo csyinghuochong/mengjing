@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[ComponentOf(typeof(DlgPetBattleFormation))]
+	[ComponentOf(typeof(DlgPetMelee))]
 	[EnableMethod]
-	public  class DlgPetBattleFormationViewComponent : Entity,IAwake,IDestroy 
+	public  class DlgPetMeleeViewComponent : Entity,IAwake,IDestroy 
 	{
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{

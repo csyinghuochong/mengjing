@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetBattleFormationSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetMeleeSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{

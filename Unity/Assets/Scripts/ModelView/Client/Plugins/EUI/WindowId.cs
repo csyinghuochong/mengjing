@@ -212,5 +212,6 @@ namespace ET.Client
 		WindowID_ButtonPositionSet,
 		WindowID_PetBar,
 		WindowID_PetBattleFormation,
+		WindowID_PetMelee,
 	}
 }
