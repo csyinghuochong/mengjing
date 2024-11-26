@@ -58,9 +58,9 @@ namespace ET.Client
         {
             if (self.Handlers.TryGetValue(location, out var entry))
             {
-                //UnityEngine.Debug.LogError($"UnLoadAsset True： {location}");
                 self.ReleaseHandler(entry.handler);
                 self.Handlers.Remove(location);
+                //UnityEngine.Debug.LogError($"UnLoadAsset True： {location}");
             }
             else
             {
