@@ -12,23 +12,7 @@ namespace ET.Client
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             return await clientSenderCompnent.GetServerList(versionMode);
         }
-
-        public static async ETTask LoginOld(Scene root, string account, string password)
-        {
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
-            C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
-            c2RLoginAccount.Account = account;
-            c2RLoginAccount.Password = password;
-            c2RLoginAccount.ServerId = playerComponent.ServerItem.ServerId;
-            R2C_LoginAccount response = (R2C_LoginAccount)await root.GetComponent<ClientSenderCompnent>().Call(c2RLoginAccount);
-            playerComponent.Account = account;
-            playerComponent.Token = response.Token;
-            playerComponent.AccountId = response.AccountId;
-            playerComponent.PlayerInfo = response.PlayerInfo;
-            playerComponent.CreateRoleList = response.RoleLists;
-            await EventSystem.Instance.PublishAsync(root, new LoginFinish());
-        }
-
+        
         public static async ETTask<int> RealName(Scene root, string name, string idcard)
         {
             root.RemoveComponent<ClientSenderCompnent>();
