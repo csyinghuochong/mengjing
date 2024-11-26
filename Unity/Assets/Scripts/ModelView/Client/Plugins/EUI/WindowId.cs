@@ -213,5 +213,6 @@ namespace ET.Client
 		WindowID_PetBar,
 		WindowID_PetBattleFormation,
 		WindowID_PetMelee,
+		WindowID_PetMeleeLevel,
 	}
 }

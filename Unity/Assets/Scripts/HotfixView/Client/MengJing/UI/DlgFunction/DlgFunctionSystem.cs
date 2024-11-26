@@ -108,7 +108,7 @@ namespace ET.Client
 
         private static void OnPetMelee(this DlgFunction self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeLevel).Coroutine();
             self.OnClose();
         }
 
