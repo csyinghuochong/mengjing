@@ -14,7 +14,8 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnClose);
             self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
 
-            self.View.E_Level_1Button.AddListener(self.OnLevel);
+            self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
+            self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700002));
 
             self.View.E_EnterMapButton.AddListener(self.OnEnterMap);
         }
@@ -34,14 +35,18 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMelee).Coroutine();
         }
 
-        private static void OnLevel(this DlgPetMeleeLevel self)
+        private static void OnLevel(this DlgPetMeleeLevel self, int sceneId)
         {
+            self.SceneId = sceneId;
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            self.View.ES_RewardList.Refresh(sceneConfig.RewardShow);
+
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
 
         private static void OnEnterMap(this DlgPetMeleeLevel self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0").Coroutine();
             self.OnClose();
         }
     }

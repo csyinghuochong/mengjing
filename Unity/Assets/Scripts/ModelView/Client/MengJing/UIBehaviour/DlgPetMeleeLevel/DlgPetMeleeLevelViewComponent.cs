@@ -194,6 +194,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RewardList ES_RewardList
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_RewardList es = this.m_es_rewardlist;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_RightBG/ES_RewardList");
+		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+     			}
+     			return this.m_es_rewardlist;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_EnterMapButton
      	{
      		get
@@ -292,6 +312,7 @@ namespace ET.Client
 			this.m_E_RightBGImage = null;
 			this.m_E_LevelNameText = null;
 			this.m_E_LevelDesText = null;
+			this.m_es_rewardlist = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
 			this.m_E_ReceiveButton = null;
@@ -311,6 +332,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_RightBGImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
 		private UnityEngine.UI.Text m_E_LevelDesText = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
 		private UnityEngine.UI.Button m_E_ReceiveButton = null;
