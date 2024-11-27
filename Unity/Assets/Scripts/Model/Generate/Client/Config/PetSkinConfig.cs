@@ -63,9 +63,9 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>名称</summary>
 		public string Name { get; set; }
-		/// <summary>皮肤图标</summary>
+		/// <summary>图标图标</summary>
 		public int IconID { get; set; }
-		/// <summary>皮肤ID</summary>
+		/// <summary>模型ID</summary>
 		public int SkinID { get; set; }
 		/// <summary>激活属性(暂时不用)</summary>
 		public string PripertySet { get; set; }
