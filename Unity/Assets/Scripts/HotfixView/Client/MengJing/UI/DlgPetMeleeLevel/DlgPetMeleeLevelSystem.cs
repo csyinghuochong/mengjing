@@ -17,14 +17,20 @@ namespace ET.Client
             self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
             self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
 
-            
-            
+            self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
+
             self.View.E_EnterMapButton.AddListener(self.OnEnterMap);
         }
 
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
         {
             self.View.E_RightBGImage.gameObject.SetActive(false);
+        }
+
+        private static void OnMonsterItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
+        {
+            Scroll_Item_MonsterItem scrollItemMonsterItem = self.ScrollItemMonsterItems[index].BindTrans(transform);
+            scrollItemMonsterItem.Refresh(self.ShowMonsterIds[index]);
         }
 
         private static void OnClose(this DlgPetMeleeLevel self)
@@ -42,6 +48,32 @@ namespace ET.Client
             self.SceneId = sceneId;
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             self.View.E_LevelNameText.text = sceneConfig.Name;
+
+            self.ShowMonsterIds.Clear();
+            foreach (int posi in sceneConfig.CreateMonsterPosi)
+            {
+                MonsterPositionConfig monsterPositionConfig = MonsterPositionConfigCategory.Instance.Get(posi);
+                foreach (int monsterId in monsterPositionConfig.MonsterID)
+                {
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
+
+                    if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+                    {
+                        continue;
+                    }
+
+                    if (self.ShowMonsterIds.Contains(monsterId))
+                    {
+                        continue;
+                    }
+
+                    self.ShowMonsterIds.Add(monsterId);
+                }
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemMonsterItems, self.ShowMonsterIds.Count);
+            self.View.E_MonsterItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMonsterIds.Count);
+
             self.View.ES_RewardList.Refresh(sceneConfig.RewardShow);
 
             // 判断是否通关、领取奖励
