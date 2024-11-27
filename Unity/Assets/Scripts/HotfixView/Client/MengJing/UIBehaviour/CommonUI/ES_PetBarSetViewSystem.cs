@@ -136,6 +136,7 @@ namespace ET.Client
 
         private static void OnClickPetIcon(this ES_PetBarSet self, int petIndex)
         {
+            self.PetBarIndex = petIndex;
             self.EG_PetPanelRectTransform.gameObject.SetActive(true);
             self.EG_SkillPanelRectTransform.gameObject.SetActive(false);
 
@@ -279,7 +280,21 @@ namespace ET.Client
 
                 name = results[i].gameObject.transform.parent.parent.name;
                 int petBarSetIndex = int.Parse(name.Substring(17, name.Length - 17));
+
+                if (petBarSetIndex != self.PetBarIndex)
+                {
+                    continue;
+                }
+
                 Scroll_Item_PetbarSetPetItem item = self.ScrollItemPetbarSetPetItems[index];
+                for (int j = 0; j < self.PetFightList.Count; j++)
+                {
+                    if (self.PetFightList[j].PetId == item.PetId)
+                    {
+                        self.PetFightList[j].PetId = 0;
+                    }
+                }
+
                 self.PetFightList[petBarSetIndex - 1].PetId = item.PetId;
                 self.OnConfirm().Coroutine();
                 self.InitInfo();
