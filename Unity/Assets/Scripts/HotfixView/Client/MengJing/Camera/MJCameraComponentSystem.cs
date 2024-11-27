@@ -24,7 +24,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this MJCameraComponent self)
         {
-            SettingHelper.SetView(self.Root());
+            self.SetView();
             self.MainCamera = Camera.main;
             //GameObject.Find("Global/MainCamera").GetComponent<Camera>();
             self.PullRate = 1f;
@@ -81,12 +81,28 @@ namespace ET.Client
             if (self.IsRotateing)
             {
                 self.CalculateOffset();
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, self.OffsetPosition.x);
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, self.OffsetPosition.y);
+                PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, self.OffsetPosition.z);
             }
 
-            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPosition * self.LenDepth;
             self.LookAt();
         }
 
+        public static void SetView(this MJCameraComponent self)
+        {
+            self.LenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth, PlayerPrefsHelp.LenDepth_Default);
+            self.OffsetPosition =
+                    new(PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_X, PlayerPrefsHelp.OffsetPostion_X_Default),
+                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Y, PlayerPrefsHelp.OffsetPostion_Y_Default),
+                        PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.OffsetPostion_Z, PlayerPrefsHelp.OffsetPostion_Z_Default));
+            self.HorizontalOffset =
+                    PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset, PlayerPrefsHelp.CameraHorizontalOffset_Default);
+            self.VerticalOffset =
+                    PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset, PlayerPrefsHelp.CameraVerticalOffset_Default);
+        }
+        
         private static void LookAt(this MJCameraComponent self)
         {
             Vector3 unitPos = self.LookAtUnit.Position;
@@ -178,7 +194,7 @@ namespace ET.Client
             }
 
             self.PullRate += Time.deltaTime * 0.08f; // 速度
-            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPosition * self.PullRate;
             self.LookAt();
         }
 
@@ -200,7 +216,7 @@ namespace ET.Client
             }
 
             self.PullRate -= Time.deltaTime * 0.3f;
-            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPostion * self.PullRate;
+            self.MainCamera.transform.position = self.LookAtUnit.Position + self.OffsetPosition * self.PullRate;
             self.LookAt();
         }
 
@@ -220,7 +236,7 @@ namespace ET.Client
                 return;
             }
 
-            Vector3 start = self.LookAtUnit.Position + self.OffsetPostion * self.LenDepth;
+            Vector3 start = self.LookAtUnit.Position + self.OffsetPosition * self.LenDepth;
             Vector3 shakeOffset = Vector3.zero;
             if (Time.time >= self.NextShakeTime)
             {
@@ -309,7 +325,7 @@ namespace ET.Client
             self.CameraMoveTime = 0f;
             self.CameraMoveType = CameraMoveType.BuildExit;
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
-            self.TargetPosition = unit.Position + self.OffsetPostion;
+            self.TargetPosition = unit.Position + self.OffsetPosition;
         }
 
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
@@ -361,7 +377,7 @@ namespace ET.Client
             float newRadius = self.Distance * Mathf.Cos(self.OffsetAngleY * self.ANGLE_CONVERTER);
             pos.x = newRadius * Mathf.Sin(self.OffsetAngleX * self.ANGLE_CONVERTER);
             pos.z = -newRadius * Mathf.Cos(self.OffsetAngleX * self.ANGLE_CONVERTER);
-            self.OffsetPostion = pos;
+            self.OffsetPosition = pos;
         }
 
         //开始旋转，纪录当前偏移角度，用于复原

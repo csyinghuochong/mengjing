@@ -17,8 +17,7 @@ namespace ET.Client
         public const string LastLoginType = "MJ_LastLoginType";
         public const string LoginErrorTime = "MJ_LoginErrorTime";
         public const string ChapterDifficulty = "MJ_ChapterDifficulty";
-
-        public const string UseCustomView = "MJ_UseCustomView";
+        
         public const string LenDepth = "MJ_LenDepth";
         public const float LenDepth_Default = 1f;
         public const string CameraHorizontalOffset = "MJ_CameraHorizontalOffset";

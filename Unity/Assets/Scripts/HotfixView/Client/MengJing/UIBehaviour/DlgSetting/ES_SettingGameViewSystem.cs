@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using I2.Loc;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.UI;
@@ -35,13 +36,13 @@ namespace ET.Client
                     .AddListener((value) => { self.CameraVerticalOffset(value); });
 
             self.EG_RotaAngleSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RotaAngle);
-            self.EG_UseCustomViewRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnUseCustomView);
 
             self.E_LocalizationBtnButton.AddListener(self.OnLocalizationBtnButton);
 
             self.RefreshLocalizationBtn();
             self.E_ReSetCameraBtnButton.AddListener(self.OnReSetCameraBtnButton);
-            self.E_SaveViewBtnButton.AddListener(self.OnSaveView);
+            self.E_TestViewBtnButton.AddListener(self.OnTestView);
+            self.E_PrintViewBtnButton.AddListener(self.OnPrintView);
 
             self.EG_ZhuBoSetRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_ZhuBo);
 
@@ -247,7 +248,6 @@ namespace ET.Client
 
         public static void OnReSetCameraBtnButton(this ES_SettingGame self)
         {
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, 0);
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, PlayerPrefsHelp.LenDepth_Default);
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, PlayerPrefsHelp.CameraHorizontalOffset_Default);
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, PlayerPrefsHelp.CameraVerticalOffset_Default);
@@ -256,53 +256,62 @@ namespace ET.Client
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, PlayerPrefsHelp.OffsetPostion_Y_Default);
             PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, PlayerPrefsHelp.OffsetPostion_Z_Default);
 
-            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().value = 0.4f;
-            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().value = 0.5f;
-            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().value = 0.5f;
+            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.4f);
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
 
             self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(false);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(false);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(false);
 
-            SettingHelper.SetView(self.Root());
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
+
+            FlyTipComponent.Instance.ShowFlyTip("重置视角");
         }
 
-        public static void OnSaveView(this ES_SettingGame self)
+        private static void OnTestView(this ES_SettingGame self)
+        {
+            // 自定义视角后，可在设置界面点击打印镜头参数按钮，查看当前镜头参数
+            // 打印信息在Console窗口中，类型为Warning
+            float LenDepth = 0.6430578f; // 镜头纵深，值越大镜头离角色越远
+            float3 OffsetPostion = new float3(0f, 1.0571f, -11.55173f); // 相机与人物的坐标的偏移量
+            float CameraHorizontalOffset = 0f; // 看向角色的水平偏差，值越大镜头越右
+            float CameraVerticalOffset = 1.808699f; // 看向角色的垂直偏差，值越大镜头越往上
+
+            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(LenDepth <= 0 ? 0.4f : (LenDepth - 0.1f) / 2);
+            self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((CameraHorizontalOffset + 4) / 8);
+            self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((CameraVerticalOffset + 4) / 8);
+
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, LenDepth);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, OffsetPostion.x);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, OffsetPostion.y);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, OffsetPostion.z);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, CameraHorizontalOffset);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, CameraVerticalOffset);
+
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
+
+            FlyTipComponent.Instance.ShowFlyTip("调整为测试视角");
+        }
+
+        public static void OnPrintView(this ES_SettingGame self)
         {
             MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, cameraComponent.LenDepth);
-            Vector3 offsetPostion = cameraComponent.OffsetPostion;
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, offsetPostion.x);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, offsetPostion.y);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, offsetPostion.z);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, cameraComponent.HorizontalOffset);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, cameraComponent.VerticalOffset);
-        }
 
-        public static void OnUseCustomView(this ES_SettingGame self)
-        {
-            int value = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.UseCustomView);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, value == 0 ? 1 : 0);
+            Log.Warning("================当前视角参数================");
+            Log.Warning($"LenDepth : {cameraComponent.LenDepth}");
+            Log.Warning($"OffsetPosition : {cameraComponent.OffsetPosition}");
+            Log.Warning($"CameraHorizontalOffset : {cameraComponent.HorizontalOffset}");
+            Log.Warning($"CameraVerticalOffset : {cameraComponent.VerticalOffset}");
+            Log.Warning("==========================================");
 
-            if (value == 1)
-            {
-                // 不使用自定义视角，不能调整角度
-                PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, 0);
-                self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(false);
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(false);
-            }
-
-            SettingHelper.SetView(self.Root());
+            FlyTipComponent.Instance.ShowFlyTip("视角参数打印成功，请在Console窗口中查看，类型Warning");
         }
 
         public static void OnLenDepth(this ES_SettingGame self, float value)
         {
             float va = 0.1f + value * 2;
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = va;
-
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, 1);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(true);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, va);
         }
 
         public static void OnBtn_RotaAngle(this ES_SettingGame self)
@@ -312,30 +321,20 @@ namespace ET.Client
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, value == 0 ? 1 : 0);
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(value == 0);
-
-            if (value == 0)
-            {
-                PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, 1);
-                self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(true);
-            }
         }
 
         public static void CameraHorizontalOffset(this ES_SettingGame self, float value)
         {
             float va = -4 + value * 8;
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().HorizontalOffset = va;
-
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, 1);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(true);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, va);
         }
 
         public static void CameraVerticalOffset(this ES_SettingGame self, float value)
         {
             float va = -4 + value * 8;
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().VerticalOffset = va;
-
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.UseCustomView, 1);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(true);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, va);
         }
 
         public static void OnLocalizationBtnButton(this ES_SettingGame self)
@@ -441,17 +440,9 @@ namespace ET.Client
             self.EG_NoShowOtherRectTransform.Find("Image_Click").gameObject
                     .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther) == "1");
             self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
-            self.EG_UseCustomViewRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.UseCustomView) == 1);
-            float va = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
-            if (va <= 0)
-            {
-                self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.4f);
-            }
-            else
-            {
-                self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify((va - 0.1f) / 2);
-            }
 
+            float LenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
+            self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(LenDepth <= 0 ? 0.4f : (LenDepth - 0.1f) / 2);
             self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(
                 (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset) + 4) / 8);
             self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(
