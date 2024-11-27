@@ -533,38 +533,38 @@ namespace ET.Client
                         zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
             }
 
-            Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
-            Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
+            //Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
+            //        .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
+            //Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
+            //        .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
 
-            self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //       rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Hp / (float)petConfig.ZiZhi_Hp_Max, 0f, 1f);
 
-            self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Act >= petConfig.ZiZhi_Act_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //        rolePetInfo.ZiZhi_Act >= petConfig.ZiZhi_Act_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Act / (float)petConfig.ZiZhi_Act_Max, 0f, 1f);
 
-            self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Def >= petConfig.ZiZhi_Def_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //        rolePetInfo.ZiZhi_Def >= petConfig.ZiZhi_Def_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Def / (float)petConfig.ZiZhi_Def_Max, 0f, 1f);
 
-            self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Adf >= petConfig.ZiZhi_Adf_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //        rolePetInfo.ZiZhi_Adf >= petConfig.ZiZhi_Adf_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Adf / (float)petConfig.ZiZhi_Adf_Max, 0f, 1f);
 
-            self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_ChengZhang >= petConfig.ZiZhi_ChengZhang_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //        rolePetInfo.ZiZhi_ChengZhang >= petConfig.ZiZhi_ChengZhang_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_ChengZhang / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f);
 
-            self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_MageAct >= petConfig.ZiZhi_MageAct_Max ? sprite16 : sprite17;
+            //self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
+            //        rolePetInfo.ZiZhi_MageAct >= petConfig.ZiZhi_MageAct_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_MageAct / (float)petConfig.ZiZhi_MageAct_Max, 0f, 1f);
         }
