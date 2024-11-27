@@ -197,19 +197,6 @@
         //图集2
         public static string GetAtlasPath_2(string path, string name)
         {
-            if (path == "PropertyIcon")
-            {
-                name = "PetPro_2";
-            }
-            // if (path == "OtherIcon")
-            // {
-            //     name = "Img_hole_102";
-            // }
-
-            if (path == "RoleSkillIcon")
-            {
-                name = "80000001";
-            }
 
             string prefabPath;
             using (zstring.Block())
