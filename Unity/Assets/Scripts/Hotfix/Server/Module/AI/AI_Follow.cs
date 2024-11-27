@@ -113,12 +113,11 @@ namespace ET.Server
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
-                if (errorCode == ErrorCode.ERR_Success && distacne > 10f)
+                if (errorCode == ErrorCode.ERR_Success && distacne > 10f)  //距离大于10米加速追
                 {
-                    //nowspeed = (long)(nowspeed * distacne / 2f);
                     nowspeed = (long)(nowspeed * 1.3f);
                 }
-                else
+                if(errorCode != ErrorCode.ERR_Success ||  distacne < 3f)   //距离小于3米停止追
                 {
                     nowspeed = 0;
                 }
@@ -136,7 +135,7 @@ namespace ET.Server
                     unit.FindPathMoveToAsync(nextTarget).Coroutine();
                 }
 
-                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(500, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     break;
