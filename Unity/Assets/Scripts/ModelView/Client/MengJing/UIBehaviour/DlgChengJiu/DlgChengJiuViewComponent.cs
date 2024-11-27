@@ -41,17 +41,38 @@ namespace ET.Client
      		}
      	}
 
+		private EntityRef<ES_ChengJiuJingling> m_es_chengjiujingling = null;
+
+		public ES_ChengJiuPetTuJian ES_ChengJiuPetTuJian
+		{
+			get
+			{
+				ES_ChengJiuPetTuJian es = this.m_ES_ChengJiuPetTuJian;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ChengJiuPetTuJian.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_ES_ChengJiuPetTuJian = this.AddChild<ES_ChengJiuPetTuJian, Transform>(go.transform);
+				}
+
+				return this.m_ES_ChengJiuPetTuJian;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_EG_SubViewRectTransform = null;
+			this.m_ES_ChengJiuPetTuJian = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 
-		//private ES_ChengJiuPetTuJian ES_ChengJiuPetTuJian;
+		private EntityRef<ES_ChengJiuPetTuJian> m_ES_ChengJiuPetTuJian = null;
 		
 		public Transform uiTransform = null;
 	}

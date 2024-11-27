@@ -33,7 +33,7 @@ namespace ET.Client
                     self.ES_ChengJiuJingling.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    Log.Debug("宠物图鉴！！！");
+                    self.View.ES_ChengJiuPetTuJian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
                     self.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
