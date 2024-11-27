@@ -1053,32 +1053,32 @@ namespace ET.Client
             float ziZhi_HpProp = Mathf.Clamp(rolePetInfo.ZiZhi_Hp * 1f /  petConfig.ZiZhi_Hp_Max, 0f, 1f) ;
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_HpProp;
             self.PetZiZhiItemList[0].transform.Find("Image_56").gameObject.SetActive(ziZhi_HpProp >= showImage_56);
-            self.PetZiZhiItemList[0].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_HpProp), 0f, 0f);
+            self.PetZiZhiItemList[0].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_HpProp), -1f, 0f);
             
             float ziZhi_ActProp = Mathf.Clamp(rolePetInfo.ZiZhi_Act * 1f / petConfig.ZiZhi_Act_Max, 0f, 1f);
             self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_ActProp;
             self.PetZiZhiItemList[1].transform.Find("Image_56").gameObject.SetActive(ziZhi_ActProp >= showImage_56);
-            self.PetZiZhiItemList[1].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_ActProp), 0f, 0f);
+            self.PetZiZhiItemList[1].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_ActProp), -1f, 0f);
 
             float ziZhi_DefProp =   Mathf.Clamp(rolePetInfo.ZiZhi_Def * 1f  / petConfig.ZiZhi_Def_Max, 0f, 1f); 
             self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_DefProp;
             self.PetZiZhiItemList[2].transform.Find("Image_56")?.gameObject.SetActive(ziZhi_DefProp >= showImage_56);
-            self.PetZiZhiItemList[2].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_DefProp), 0f, 0f);
+            self.PetZiZhiItemList[2].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_DefProp), -1f, 0f);
 
             float ziZhi_AdfProp =Mathf.Clamp(rolePetInfo.ZiZhi_Adf * 1f / petConfig.ZiZhi_Adf_Max, 0f, 1f); 
             self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =ziZhi_AdfProp;
             self.PetZiZhiItemList[3].transform.Find("Image_56").gameObject.SetActive(ziZhi_AdfProp >= showImage_56);
-            self.PetZiZhiItemList[3].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_AdfProp), 0f, 0f);
+            self.PetZiZhiItemList[3].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_AdfProp), -1f, 0f);
             
             float ziZhi_ChengZhangProp =    Mathf.Clamp(rolePetInfo.ZiZhi_ChengZhang / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f); 
             self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_ChengZhangProp;
             self.PetZiZhiItemList[4].transform.Find("Image_56")?.gameObject.SetActive(ziZhi_ChengZhangProp >= showImage_56);
-            self.PetZiZhiItemList[4].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_ChengZhangProp), 0f, 0f);
+            self.PetZiZhiItemList[4].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_ChengZhangProp), -1f, 0f);
 
             float ziZhi_MageActProp =   Mathf.Clamp(rolePetInfo.ZiZhi_MageAct * 1f / petConfig.ZiZhi_MageAct_Max, 0f, 1f); 
             self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =ziZhi_MageActProp;
             self.PetZiZhiItemList[5].transform.Find("Image_56")?.gameObject.SetActive(ziZhi_MageActProp >= showImage_56);
-            self.PetZiZhiItemList[5].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_MageActProp), 0f, 0f);
+            self.PetZiZhiItemList[5].transform.Find("Image_56").localPosition = new Vector3(285 - 409 * (1f - ziZhi_MageActProp), -1f, 0f);
         }
 
         private static void UpdatePetSkin(this ES_PetList self, RolePetInfo rolePetInfo)
