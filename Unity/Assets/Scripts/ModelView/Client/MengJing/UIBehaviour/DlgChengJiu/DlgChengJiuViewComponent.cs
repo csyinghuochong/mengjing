@@ -40,9 +40,7 @@ namespace ET.Client
      			return this.m_EG_SubViewRectTransform;
      		}
      	}
-
-		private EntityRef<ES_ChengJiuJingling> m_es_chengjiujingling = null;
-
+		
 		public ES_ChengJiuPetTuJian ES_ChengJiuPetTuJian
 		{
 			get
