@@ -164,7 +164,7 @@ namespace ET.Client
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
 
-            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
+            string imageHp = canAttack ? ConfigData.UI_pro_3_2 : ConfigData.UI_pro_4_2;
             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
             rc.Get<GameObject>("Img_HpValue").SetActive(true);
             self.Img_HpValue.GetComponent<Image>().sprite = sp;
