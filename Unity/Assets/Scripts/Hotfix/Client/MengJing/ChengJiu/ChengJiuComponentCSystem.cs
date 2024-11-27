@@ -52,6 +52,7 @@ namespace ET.Client
             }
 
             self.UpdateJingLingList(r2C_Respose.JingLingList);
+            self.PetTuJianActives = r2C_Respose.PetTuJianActives;
         }
 
         public static void UpdateJingLingList(this ChengJiuComponentC self, List<JingLingInfo> jingLingList)

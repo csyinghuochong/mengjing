@@ -321,7 +321,15 @@ namespace ET.Server
 
         public static void OnPetTuJianActive(this ChengJiuComponentS self, int petId)
         {
+            if (self.PetTuJianActives.Contains(petId))
+            {
+                return;
+            }
             
+            self.PetTuJianActives.Add(petId);
+            M2C_PetTuJianActiveMessage m2CJingLingActiveMessage = M2C_PetTuJianActiveMessage.Create();
+            m2CJingLingActiveMessage.PetTuJianActives = self.PetTuJianActives;
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
         }
 
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)

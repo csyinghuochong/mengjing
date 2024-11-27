@@ -32,7 +32,6 @@ namespace ET.Client
 
         //背包宠物
         public List<RolePetInfo> RolePetBag { get; set; } = new();
-
-        public int UpdateNumber { get; set; } //1处理神兽技能
+        
     }
 }

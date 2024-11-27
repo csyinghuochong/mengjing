@@ -13,5 +13,7 @@ namespace ET.Client
         
         public Dictionary<int, JingLingInfo> JingLingList { get; set; } = new Dictionary<int, JingLingInfo>(); //
         public Dictionary<int, ChengJiuInfo> ChengJiuProgessList { get; set; } = new Dictionary<int, ChengJiuInfo>();
+        
+        public List<int> PetTuJianActives  { get; set; } = new List<int>();
     }
 }
