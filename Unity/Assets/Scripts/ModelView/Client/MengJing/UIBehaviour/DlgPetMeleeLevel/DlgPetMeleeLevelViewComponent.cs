@@ -194,6 +194,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_MonsterItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MonsterItemsImage == null )
+     			{
+		    		this.m_E_MonsterItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RightBG/E_MonsterItems");
+     			}
+     			return this.m_E_MonsterItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_MonsterItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MonsterItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_MonsterItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RightBG/E_MonsterItems");
+     			}
+     			return this.m_E_MonsterItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		public ES_RewardList ES_RewardList
      	{
      		get
@@ -312,6 +346,8 @@ namespace ET.Client
 			this.m_E_RightBGImage = null;
 			this.m_E_LevelNameText = null;
 			this.m_E_LevelDesText = null;
+			this.m_E_MonsterItemsImage = null;
+			this.m_E_MonsterItemsLoopVerticalScrollRect = null;
 			this.m_es_rewardlist = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
@@ -332,6 +368,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_RightBGImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
 		private UnityEngine.UI.Text m_E_LevelDesText = null;
+		private UnityEngine.UI.Image m_E_MonsterItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MonsterItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;

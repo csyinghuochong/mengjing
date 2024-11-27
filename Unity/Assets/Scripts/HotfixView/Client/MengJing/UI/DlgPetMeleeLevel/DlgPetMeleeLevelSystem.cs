@@ -15,8 +15,10 @@ namespace ET.Client
             self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
 
             self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
-            self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700002));
+            self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
 
+            
+            
             self.View.E_EnterMapButton.AddListener(self.OnEnterMap);
         }
 
@@ -39,7 +41,13 @@ namespace ET.Client
         {
             self.SceneId = sceneId;
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            self.View.E_LevelNameText.text = sceneConfig.Name;
             self.View.ES_RewardList.Refresh(sceneConfig.RewardShow);
+
+            // 判断是否通关、领取奖励
+            self.View.E_EnterMapButton.gameObject.SetActive(true);
+            self.View.E_ReceiveButton.gameObject.SetActive(false);
+            self.View.E_ReceivedText.gameObject.SetActive(false);
 
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
