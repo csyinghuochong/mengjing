@@ -283,7 +283,8 @@ namespace ET.Client
                         break;
                     }
                 }
-                
+
+                int max = 4;// 总共最多4个技能
                 RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
                 foreach (int skillId in rolePetInfo.PetSkill)
                 {
@@ -295,8 +296,7 @@ namespace ET.Client
                         continue;
                     }
 
-                    // 再读取最多3个
-                    if (skill.Count >= 4)
+                    if (skill.Count >= max)
                     {
                         break;
                     }
@@ -315,12 +315,19 @@ namespace ET.Client
                         skillPro.SkillSetType = SkillSetEnum.Skill;
                         esSkillGrid.uiTransform.gameObject.SetActive(true);
                         esSkillGrid.UpdateSkillInfo(skillPro);
+                        continue;
                     }
-                    else
+
+                    if (i < max)
                     {
-                        esSkillGrid.uiTransform.gameObject.SetActive(false);
+                        esSkillGrid.uiTransform.gameObject.SetActive(true);
                         esSkillGrid.UpdateSkillInfo(null);
+                        esSkillGrid.E_Img_MaskImage.gameObject.SetActive(true);
+                        continue;
                     }
+
+                    esSkillGrid.uiTransform.gameObject.SetActive(false);
+                    esSkillGrid.UpdateSkillInfo(null);
                 }
 
                 self.EG_NormalRectTransform.gameObject.SetActive(false);
