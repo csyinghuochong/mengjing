@@ -50,6 +50,9 @@ namespace ET.Client
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+
+		//private ES_ChengJiuPetTuJian ES_ChengJiuPetTuJian;
+		
 		public Transform uiTransform = null;
 	}
 }
