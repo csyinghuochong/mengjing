@@ -14,7 +14,14 @@ namespace ET.Client
 
             self.E_SetMainButton.AddListener(self.OnSetMain);
             self.E_SetAssistButton.AddListener(self.OnSetAssist);
-            self.E_SetMagicButton.AddListener(self.SetMagic);
+            self.E_SetSkillButton.AddListener(self.OnSetSkill);
+
+            self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
+            self.MainPetItem.SetActive(false);
+            self.AssistPetItem = self.EG_AssistPetListRectTransform.GetChild(0).gameObject;
+            self.AssistPetItem.SetActive(false);
+            self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
+            self.SkillItem.SetActive(false);
 
             self.uiTransform = transform;
         }
@@ -44,7 +51,7 @@ namespace ET.Client
         {
         }
 
-        private static void SetMagic(this ES_PetMeleeSet self)
+        private static void OnSetSkill(this ES_PetMeleeSet self)
         {
         }
     }

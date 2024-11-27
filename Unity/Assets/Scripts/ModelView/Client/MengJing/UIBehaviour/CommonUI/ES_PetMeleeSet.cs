@@ -5,8 +5,12 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetMeleeSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetMeleeSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public GameObject MainPetItem;
+		public GameObject AssistPetItem;
+		public GameObject SkillItem;
+		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
      		get
@@ -21,6 +25,57 @@ namespace ET.Client
 		    		this.m_E_PlanSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_PlanSet");
      			}
      			return this.m_E_PlanSetToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_MainPetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_MainPetListRectTransform == null )
+     			{
+		    		this.m_EG_MainPetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_MainPetList");
+     			}
+     			return this.m_EG_MainPetListRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_AssistPetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AssistPetListRectTransform == null )
+     			{
+		    		this.m_EG_AssistPetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_AssistPetList");
+     			}
+     			return this.m_EG_AssistPetListRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_SkillListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SkillListRectTransform == null )
+     			{
+		    		this.m_EG_SkillListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillList");
+     			}
+     			return this.m_EG_SkillListRectTransform;
      		}
      	}
 
@@ -92,7 +147,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_PetBarSetIconButton
+		public UnityEngine.UI.Button E_SetSkillButton
      	{
      		get
      		{
@@ -101,15 +156,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetBarSetIconButton == null )
+     			if( this.m_E_SetSkillButton == null )
      			{
-		    		this.m_E_PetBarSetIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/PetMask/E_PetBarSetIcon");
+		    		this.m_E_SetSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SetSkill");
      			}
-     			return this.m_E_PetBarSetIconButton;
+     			return this.m_E_SetSkillButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PetBarSetIconImage
+		public UnityEngine.UI.Image E_SetSkillImage
      	{
      		get
      		{
@@ -118,15 +173,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetBarSetIconImage == null )
+     			if( this.m_E_SetSkillImage == null )
      			{
-		    		this.m_E_PetBarSetIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/PetMask/E_PetBarSetIcon");
+		    		this.m_E_SetSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SetSkill");
      			}
-     			return this.m_E_PetBarSetIconImage;
+     			return this.m_E_SetSkillImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_SetMagicButton
+		public UnityEngine.RectTransform EG_SetMainRectTransform
      	{
      		get
      		{
@@ -135,28 +190,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SetMagicButton == null )
+     			if( this.m_EG_SetMainRectTransform == null )
      			{
-		    		this.m_E_SetMagicButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SetMagic");
+		    		this.m_EG_SetMainRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SetMain");
      			}
-     			return this.m_E_SetMagicButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SetMagicImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SetMagicImage == null )
-     			{
-		    		this.m_E_SetMagicImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SetMagic");
-     			}
-     			return this.m_E_SetMagicImage;
+     			return this.m_EG_SetMainRectTransform;
      		}
      	}
 
@@ -175,26 +213,30 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_PlanSetToggleGroup = null;
+			this.m_EG_MainPetListRectTransform = null;
+			this.m_EG_AssistPetListRectTransform = null;
+			this.m_EG_SkillListRectTransform = null;
 			this.m_E_SetMainButton = null;
 			this.m_E_SetMainImage = null;
 			this.m_E_SetAssistButton = null;
 			this.m_E_SetAssistImage = null;
-			this.m_E_PetBarSetIconButton = null;
-			this.m_E_PetBarSetIconImage = null;
-			this.m_E_SetMagicButton = null;
-			this.m_E_SetMagicImage = null;
+			this.m_E_SetSkillButton = null;
+			this.m_E_SetSkillImage = null;
+			this.m_EG_SetMainRectTransform = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_PlanSetToggleGroup = null;
+		private UnityEngine.RectTransform m_EG_MainPetListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_AssistPetListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_SkillListRectTransform = null;
 		private UnityEngine.UI.Button m_E_SetMainButton = null;
 		private UnityEngine.UI.Image m_E_SetMainImage = null;
 		private UnityEngine.UI.Button m_E_SetAssistButton = null;
 		private UnityEngine.UI.Image m_E_SetAssistImage = null;
-		private UnityEngine.UI.Button m_E_PetBarSetIconButton = null;
-		private UnityEngine.UI.Image m_E_PetBarSetIconImage = null;
-		private UnityEngine.UI.Button m_E_SetMagicButton = null;
-		private UnityEngine.UI.Image m_E_SetMagicImage = null;
+		private UnityEngine.UI.Button m_E_SetSkillButton = null;
+		private UnityEngine.UI.Image m_E_SetSkillImage = null;
+		private UnityEngine.RectTransform m_EG_SetMainRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
