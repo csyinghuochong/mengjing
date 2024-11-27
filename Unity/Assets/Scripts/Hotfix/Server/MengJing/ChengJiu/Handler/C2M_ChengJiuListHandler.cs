@@ -14,7 +14,7 @@ namespace ET.Server
             response.TotalChengJiuPoint = chengJiuComponent.TotalChengJiuPoint;
             response.AlreadReceivedId .AddRange(chengJiuComponent.AlreadReceivedId); 
             response.JingLingList .AddRange( chengJiuComponent.JingLingList);
-
+            response.PetTuJianActives.AddRange( chengJiuComponent.PetTuJianActives );
             response.RandomDrop = chengJiuComponent.RandomDrop;
 
             await ETTask.CompletedTask;

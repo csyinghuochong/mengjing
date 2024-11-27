@@ -319,6 +319,11 @@ namespace ET.Server
             }
         }
 
+        public static void OnPetTuJianActive(this ChengJiuComponentS self, int petId)
+        {
+            
+        }
+
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)
         {
             int chengJiuTargetInt = (int)chengJiuTarget;

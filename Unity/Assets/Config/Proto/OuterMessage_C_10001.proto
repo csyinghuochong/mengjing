@@ -1967,6 +1967,15 @@ message M2C_JingLingActiveMessage // IMessage
 	repeated JingLingInfo JingLingList = 5;
 }
 
+//激活宠物图鉴
+message M2C_PetTuJianActiveMessage // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int32 PetTuJianActives = 5;
+}
+
 //任务列表
 message TaskPro
 {
@@ -3230,6 +3239,7 @@ message M2C_ChengJiuListResponse // ILocationResponse
 	int32 TotalChengJiuPoint = 3;
 	repeated int32 AlreadReceivedId = 4;
 	repeated JingLingInfo JingLingList = 5;
+	repeated int32 PetTuJianActives = 6;
 	int32 RandomDrop = 7;
 }
 
