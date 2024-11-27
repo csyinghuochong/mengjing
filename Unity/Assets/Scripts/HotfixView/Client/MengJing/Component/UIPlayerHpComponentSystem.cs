@@ -189,8 +189,8 @@ namespace ET.Client
             self.Img_MpValue.gameObject.SetActive(false);
             self.UIXuLieZhenComponent = self.AddChild<UIXuLieZhenComponent, GameObject>(self.Img_ChengHao);
             bool lierenxuetiao = unit.MainHero && unit.ConfigId == 3;
-            self.Img_HpValue.GetComponent<RectTransform>().sizeDelta = lierenxuetiao ? new Vector2(145f, 12f) : new Vector2(145f, 12f);
-            self.Img_HpValue.transform.localPosition = lierenxuetiao ? new Vector3(-82.5f, 1.9f, 0f) : new Vector3(-82.5f, 0.1f, 0f);
+            //self.Img_HpValue.GetComponent<RectTransform>().sizeDelta = lierenxuetiao ? new Vector2(145f, 12f) : new Vector2(145f, 12f);
+            //self.Img_HpValue.transform.localPosition = lierenxuetiao ? new Vector3(-82.5f, 1.9f, 0f) : new Vector3(-82.5f, 0.1f, 0f);
 
             self.Lal_Name = rc.Get<GameObject>("Lal_Name");
             self.Lal_JiaZuName = rc.Get<GameObject>("Lal_JiaZuName");
