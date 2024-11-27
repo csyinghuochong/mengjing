@@ -1254,8 +1254,8 @@ namespace ET.Client
                 self.View.ES_JoystickMove.MainUnit = pet;
                 self.View.ES_MainSkill.OnEnterScene(pet);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
-                self.View.E_TextPetSwitch.text = "6";
-                self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * 6;
+                self.View.E_TextPetSwitch.text = "600";
+                self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * 600;
                 self.MainPetSwitchTimer = root.GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MainPetSwitchTimer, self);
             }
             else
