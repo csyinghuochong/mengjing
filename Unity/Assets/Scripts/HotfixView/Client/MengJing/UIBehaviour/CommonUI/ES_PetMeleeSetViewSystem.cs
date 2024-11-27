@@ -10,6 +10,8 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this ES_PetMeleeSet self, Transform transform)
         {
+            self.uiTransform = transform;
+            
             self.E_PlanSetToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 
             self.E_SetMainButton.AddListener(self.OnSetMain);
@@ -22,8 +24,6 @@ namespace ET.Client
             self.AssistPetItem.SetActive(false);
             self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
             self.SkillItem.SetActive(false);
-
-            self.uiTransform = transform;
         }
 
         [EntitySystem]
