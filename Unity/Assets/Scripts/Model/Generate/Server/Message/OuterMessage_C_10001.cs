@@ -10656,6 +10656,18 @@ namespace ET
         [MemoryPackOrder(18)]
         public List<int> PetBarConfigList { get; set; } = new();
 
+        [MemoryPackOrder(19)]
+        public int PetMeleePlan { get; set; }
+
+        [MemoryPackOrder(20)]
+        public List<int> PetMeleeMainPetList { get; set; } = new();
+
+        [MemoryPackOrder(21)]
+        public List<int> PetMeleeAssistPetList { get; set; } = new();
+
+        [MemoryPackOrder(22)]
+        public List<int> PetMeleeSkillList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -10684,6 +10696,10 @@ namespace ET
             this.PetFightList_2.Clear();
             this.PetFightList_3.Clear();
             this.PetBarConfigList.Clear();
+            this.PetMeleePlan = default;
+            this.PetMeleeMainPetList.Clear();
+            this.PetMeleeAssistPetList.Clear();
+            this.PetMeleeSkillList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

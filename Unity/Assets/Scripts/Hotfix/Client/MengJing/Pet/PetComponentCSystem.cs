@@ -37,6 +37,10 @@ namespace ET.Client
             self.PetFightList_2 = m2C_RolePetList.PetFightList_2;
             self.PetFightList_3 = m2C_RolePetList.PetFightList_3;
             self.PetBarConfigList = m2C_RolePetList.PetBarConfigList;
+            self.PetMeleePlan = m2C_RolePetList.PetMeleePlan;
+            self.PetMeleeMainPetList = m2C_RolePetList.PetMeleeMainPetList;
+            self.PetMeleeAssistPetList = m2C_RolePetList.PetMeleeAssistPetList;
+            self.PetMeleeSkillList = m2C_RolePetList.PetMeleeSkillList;
         }
 
         public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)

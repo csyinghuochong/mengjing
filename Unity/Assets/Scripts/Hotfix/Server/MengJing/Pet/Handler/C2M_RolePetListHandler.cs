@@ -28,6 +28,11 @@
             response.PetFightList_3.AddRange(petComponent.PetFightList_3);
             response.PetBarConfigList.AddRange(petComponent.PetBarConfigList);
             
+            response.PetMeleePlan = petComponent.PetMeleePlan;
+            response.PetMeleeMainPetList.AddRange(petComponent.PetMeleeMainPetList);
+            response.PetMeleeAssistPetList.AddRange(petComponent.PetMeleeAssistPetList);
+            response.PetMeleeSkillList.AddRange(petComponent.PetMeleeSkillList);
+            
             await ETTask.CompletedTask;
         }
     }
