@@ -68,10 +68,12 @@ namespace ET
             using ListComponent<float3> path = ListComponent<float3>.Create();
             
             self.MoveForward(false);
+            
+            ///custom  ...
             if (self.IsArrived())
             {
                 return false;
-            }
+            } 
             
             path.Add(unit.Position); // 第一个是Unit的pos
             for (int i = self.N; i < self.Targets.Count; ++i)

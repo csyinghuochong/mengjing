@@ -15,8 +15,10 @@
 			{
 				float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
 				speed *= (message.SpeedRate * 0.01f);
-				await unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed, 100, message.SpeedRate);
+				unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed, 100, message.SpeedRate).Coroutine();
 			}
+			
+			await ETTask.CompletedTask;
 		}
 	}
 }

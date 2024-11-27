@@ -102,40 +102,33 @@ namespace ET.Server
             }
             */
             long oldSpeed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base);
+            
+            long masterspeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_Speed_Base, masterspeed);
+            
             while (true)
             {
-                long nowspeed = 60000;
-                if (master != null && !master.IsDisposed)
-                {
-                    nowspeed = master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
-                }
-
+                int speedProp = 100;
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
                 if (errorCode == ErrorCode.ERR_Success && distacne > 10f)  //距离大于10米加速追
                 {
-                    nowspeed = (long)(nowspeed * 1.3f);
+                    speedProp = 130;
                 }
                 if(errorCode != ErrorCode.ERR_Success ||  distacne < 3f)   //距离小于3米停止追
                 {
-                    nowspeed = 0;
+                    speedProp = 0;
                 }
 
                 //宠物移动速度限制
-                if (nowspeed >= 100000)
-                {
-                    nowspeed = 100000;
-                }
-
-                if (nowspeed > 0)
+                if (speedProp > 0)
                 {
                     float3 nextTarget = GetFollowPosition(unit, master);
-                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Base_Speed_Base, nowspeed);
-                    unit.FindPathMoveToAsync(nextTarget).Coroutine();
+                    unit.FindPathMoveToAsync(nextTarget, speedProp).Coroutine();
                 }
 
-                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(500, cancellationToken);
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     break;
