@@ -52,22 +52,30 @@ namespace ET.Client
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)
         {
-            int leftTime = (int)(0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
-            if ( leftTime > 0  )
+            int petfightindex = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
+                    .GetAsInt(NumericType.PetFightIndex);
+
+            if (petfightindex != self.FightIndex)
             {
-                string lefttimestr = "{0}秒后可以切换！";
-                using (zstring.Block())
+                int leftTime = (int)(0.001f * (self.LastTimer - TimeHelper.ServerNow()));
+                if (leftTime > 0)
                 {
-                    lefttimestr = zstring.Format(lefttimestr,leftTime);
+                    string lefttimestr = "{0}秒后可以切换！";
+                    using (zstring.Block())
+                    {
+                        lefttimestr = zstring.Format(lefttimestr, leftTime);
+                    }
+
+                    FlyTipComponent.Instance.ShowFlyTip(lefttimestr);
+                    return;
                 }
-                FlyTipComponent.Instance.ShowFlyTip(lefttimestr);
-                return;
+
+                self.LastTimer = TimeHelper.ServerNow() + ConfigData.PetSwichCD1 * TimeHelper.Second;
             }
 
-            self.LastTimer = TimeHelper.ServerNow() + ConfigData.PetSwichCD1 * TimeHelper.Second;
             PetNetHelper.RequestPetFightSwitch(self.Root(), self.FightIndex).Coroutine();
         }
-        
+
         public static void UpdateSwitchCD(this ES_MainPetFight self)
         {
             float leftTime = (0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
