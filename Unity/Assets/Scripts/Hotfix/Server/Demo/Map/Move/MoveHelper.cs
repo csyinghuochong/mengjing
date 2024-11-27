@@ -35,7 +35,7 @@ namespace ET.Server
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
-         
+            speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);
             if (ret) // 如果返回false，说明被其它移动取消了，这时候不需要通知客户端stop
             {
