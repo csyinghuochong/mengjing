@@ -278,6 +278,18 @@ namespace ET.Client
                 self.View.E_UseButton.gameObject.SetActive(true);
                 self.View.E_SplitButton.gameObject.SetActive(true);
             }
+
+            float preferredHeight = self.View.E_ItemDesText.preferredHeight;
+            if (preferredHeight > 200f)
+            {
+                float addheight = preferredHeight - 200f;
+                Vector2 oldbagsize =  self.View.E_BackImage.GetComponent<RectTransform>().sizeDelta;
+                oldbagsize.y += addheight;
+
+                self.View.E_BackImage.GetComponent<RectTransform>().sizeDelta = oldbagsize;
+                Log.Debug($"addheight:{addheight}");
+            }
+            
         }
 
         private static async ETTask OnSellButton(this DlgItemTips self)
