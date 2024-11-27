@@ -47,11 +47,17 @@ namespace ET.Client
 
         private static void PointerDown(this ES_MainPetFight self, PointerEventData pdata)
         {
-            
         }
 
         private static void PointerUp(this ES_MainPetFight self, PointerEventData pdata)
         {
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            long petId = petComponentC.GetNowPetFightList()[self.FightIndex - 1].PetId;
+            if (petId == 0)
+            {
+                return;
+            }
+
             int petfightindex = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
                     .GetAsInt(NumericType.PetFightIndex);
 
@@ -78,21 +84,21 @@ namespace ET.Client
 
         public static void UpdateSwitchCD(this ES_MainPetFight self)
         {
-            float leftTime = (0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
+            float leftTime = (0.001f * (self.LastTimer - TimeHelper.ServerNow()));
 
             if (leftTime <= 0f)
             {
                 self.ResetSwitchCD();
                 return;
             }
-            
-            self.E_PetHPImage.fillAmount = (60f - leftTime)  * ConfigData.PetSwichCD2;
+
+            self.E_PetHPImage.fillAmount = (60f - leftTime) * ConfigData.PetSwichCD2;
         }
-        
+
         private static void ResetSwitchCD(this ES_MainPetFight self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            self.E_PetHPImage.fillAmount = 1f;       
+            self.E_PetHPImage.fillAmount = 1f;
         }
 
         public static void AddSwitchTimer(this ES_MainPetFight self)
@@ -112,8 +118,8 @@ namespace ET.Client
                 self.ResetSwitchCD();
                 self.E_PetIconImage.gameObject.SetActive(false);
                 self.E_PetLvText.gameObject.SetActive(false);
-                self.E_PetHPImage.fillAmount = 0f;    
-                
+                self.E_PetHPImage.fillAmount = 0f;
+
                 return;
             }
 
@@ -121,12 +127,12 @@ namespace ET.Client
             if (pet == null)
             {
                 self.ResetSwitchCD();
-                self.E_PetHPImage.fillAmount = 0f;    
-                
+                self.E_PetHPImage.fillAmount = 0f;
+
                 return;
             }
 
-            int leftTime = (int)(0.001f * (self.LastTimer  - TimeHelper.ServerNow()));
+            int leftTime = (int)(0.001f * (self.LastTimer - TimeHelper.ServerNow()));
             if (leftTime > 0)
             {
                 self.AddSwitchTimer();
@@ -145,7 +151,7 @@ namespace ET.Client
             self.E_PetLvText.gameObject.SetActive(true);
             self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
         }
-        
+
         public static void UpdateHp(this ES_MainPetFight self)
         {
             if (self.Pet == null || self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
@@ -158,7 +164,7 @@ namespace ET.Client
             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
             self.E_PetHPImage.fillAmount = blood;
         }
-        
+
         public static async ETTask OpenUI(this ES_MainPetFight self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight);
@@ -173,7 +179,5 @@ namespace ET.Client
             //      点击第二个格子， 弹出的宠物列表，对应的宠物3， 就显示休息按钮，点击休息fightpets就是{8， 0， 9}.  
             //await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
         }
-
-        
     }
 }
