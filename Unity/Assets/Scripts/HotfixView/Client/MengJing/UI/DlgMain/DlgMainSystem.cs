@@ -11,9 +11,9 @@ namespace ET.Client
     # region 注册的事件
 
     [Event(SceneType.Demo)]
-    public class PetFightUpdate_DlgMainRefresh : AEvent<Scene, PetFormationUpdate>
+    public class PetFightUpdate_DlgMainRefresh : AEvent<Scene, PetBarUpdate>
     {
-        protected override async ETTask Run(Scene scene, PetFormationUpdate args)
+        protected override async ETTask Run(Scene scene, PetBarUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshFightSet();
             await ETTask.CompletedTask;

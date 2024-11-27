@@ -81,9 +81,8 @@
                             FunctionEffect.PlaySelfEffect(args.Defend, 200004);
                         }
                         
-                        EventSystem.Instance.Publish(root, new PetFormationUpdate());
+                        EventSystem.Instance.Publish(root, new PetBarUpdate());
                     }
-                    
                     else
                     {
                         if (petfightindex > 0)

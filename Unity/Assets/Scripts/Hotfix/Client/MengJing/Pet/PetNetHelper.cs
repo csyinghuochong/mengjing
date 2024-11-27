@@ -416,6 +416,7 @@ namespace ET.Client
             {
                 root.GetComponent<PetComponentC>().GetNowPetFightList().Clear();
                 root.GetComponent<PetComponentC>().GetNowPetFightList().AddRange(petBarInfos);
+                EventSystem.Instance.Publish(root, new PetBarUpdate());
             }
 
             return response.Error;
