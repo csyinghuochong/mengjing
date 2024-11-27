@@ -16,11 +16,15 @@ namespace ET.Server
                 return;
             }
 
+            // 先切换回英雄
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, 0);
+            unit.GetComponent<AIComponent>().Stop_2();
+            unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PlayerHideBuff);
+            unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PetMianShangBuff);
+
             // List<long> petids = petComponent.GetNowPetFightList().Select(x => x.PetId).ToList();
             TransferHelper.RemoveFightPetList(unit);
-
             petComponent.SetNowPetFightList(request.PetBarList); //通过布阵界面设置出战宠物
-
             TransferHelper.CreateFightPetList(unit);
 
             await ETTask.CompletedTask;
