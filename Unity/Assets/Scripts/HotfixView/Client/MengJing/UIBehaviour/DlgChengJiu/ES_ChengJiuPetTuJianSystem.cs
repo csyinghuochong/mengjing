@@ -143,17 +143,17 @@ namespace ET.Client
 
             if (progress == 1)
             {
-                bool current = chengJiuComponent.GetFightJingLing() == self.JingLingId;
-                self.E_UnactivateText.gameObject.SetActive(false);
+                self.E_UnactivateText.text = "已激活";
+                
                 self.E_ActivateButton.gameObject.SetActive(false);
-                self.E_UseButton.gameObject.SetActive(!current);
-                self.E_ShouHuiButton.gameObject.SetActive(current);
+                self.E_UseButton.gameObject.SetActive(false);
+                self.E_ShouHuiButton.gameObject.SetActive(false);
             }
             else
             {
-                self.E_UnactivateText.gameObject.SetActive(true);
+                self.E_UnactivateText.text = "未激活";
+                
                 self.E_ActivateButton.gameObject.SetActive(false);
-
                 self.E_UseButton.gameObject.SetActive(false);
                 self.E_ShouHuiButton.gameObject.SetActive(false);
             }
