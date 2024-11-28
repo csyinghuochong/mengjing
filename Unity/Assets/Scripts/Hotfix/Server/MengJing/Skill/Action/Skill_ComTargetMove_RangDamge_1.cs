@@ -34,6 +34,7 @@ namespace ET.Server
             float moveSpeed = skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             float3 normalizeSpeed = math.forward(math.normalize(rotation)).normalize();
             float3 TargetPoint = sourcePoint +  normalizeSpeed* moveSpeed;
+            TargetPoint.y +=SkillHelp.GetCenterHigh(skillS.TheUnitFrom.Type, skillS.TheUnitFrom.ConfigId);
             return TargetPoint;
         }
 

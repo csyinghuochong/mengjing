@@ -57,7 +57,7 @@ namespace ET.Server
         }
         
         // 可以多次调用，多次调用的话会取消上一次的协程
-        public static async ETTask BulletMoveToAsync(this Unit unit, float3 target)
+        public static async ETTask BulletMoveToAsync(this Unit unit,  float3 target)
         {
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
             if (speed < 0.01)
@@ -67,9 +67,11 @@ namespace ET.Server
                 return;
             }
 
+            float3 startpos = unit.Position;
+            startpos.y = target.y;
             M2C_PathfindingResult m2CPathfindingResult = new();
-            m2CPathfindingResult.Points.Add(unit.Position);
-            m2CPathfindingResult.Points.Add(unit.Position + (target - unit.Position) * 0.5f);
+            m2CPathfindingResult.Points.Add(startpos);
+            m2CPathfindingResult.Points.Add(startpos + (target - unit.Position) * 0.5f);
             m2CPathfindingResult.Points.Add(target);
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;
