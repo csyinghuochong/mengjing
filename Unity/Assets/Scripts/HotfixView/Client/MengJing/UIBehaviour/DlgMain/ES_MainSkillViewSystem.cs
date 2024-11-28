@@ -744,7 +744,6 @@ namespace ET.Client
         public static void OnEnterScene(this ES_MainSkill self, Unit main, long petid)
         {
             self.MainUnit = main;
-            self.SkillManagerComponent = main.GetComponent<SkillManagerComponentC>();
             self.OnSkillCDUpdate();
             self.CheckJingLingFunction();
             self.OnUpdateButton();

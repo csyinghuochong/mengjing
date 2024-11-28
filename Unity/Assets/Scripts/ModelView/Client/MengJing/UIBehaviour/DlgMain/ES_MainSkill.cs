@@ -12,7 +12,9 @@ namespace ET.Client
 		public Unit MainUnit { get => this.unit; set => this.unit = value; }
 		public List<ES_SkillGrid> UISkillGirdList_Normal { get; set; } = new();
 		public List<ES_SkillGrid> UISkillGirdList_PetFight { get; set; } = new();
-		public SkillManagerComponentC SkillManagerComponent { get; set; }
+		public EntityRef<SkillManagerComponentC> skillManagerComponent;
+		public SkillManagerComponentC SkillManagerComponent { get => this.skillManagerComponent; set => this.skillManagerComponent = value; }
+		
 		public float LastLockTime;
 		public float LastPickTime;
 		public long SwitchCDEndTime;
