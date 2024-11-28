@@ -47,7 +47,8 @@ namespace ET.Client
             go.transform.name = unit.Id.ToString();
             if (SettingData.AnimController == 0)
             {
-                unit.GetComponent<AnimatorComponent>().InitInitGameObject();
+                unit.RemoveComponent<AnimatorComponent>();
+                unit.AddComponent<AnimatorComponent>();
             }
             else
             {
@@ -55,7 +56,8 @@ namespace ET.Client
             }
 
             // unit.GetComponent<FsmComponent>();
-            unit.GetComponent<HeroTransformComponent>().InitGameObject();
+            unit.RemoveComponent<HeroTransformComponent>();
+            unit.AddComponent<HeroTransformComponent>();
             // unit.GetComponent<EffectViewComponent>();
 
             // 改变UI
