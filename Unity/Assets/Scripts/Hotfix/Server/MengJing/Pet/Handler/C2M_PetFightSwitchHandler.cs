@@ -20,7 +20,72 @@ namespace ET.Server
                 return;
             }
 
-            for (int i = 0; i < PetFightList.Count; i++)
+            //切换宠物新模式：
+            //切换为宠物模式 更改主角的模型和技能为宠物的。  移除宠物
+            //切换为主角模式 重置主角的模型和技能，  添加宠物。。。。
+            //宠物出生便携带无敌wuff。 无须改动。。
+            UnitComponent unitComponent = unit.GetParent<UnitComponent>();
+            
+              for (int i = 0; i < PetFightList.Count; i++)
+            {
+                RolePetInfo rolePetInfo = petComponentS.GetPetInfo(PetFightList[i].PetId);
+
+                if (rolePetInfo == null)
+                {
+                    continue;
+                }
+
+                Unit petunit = unitComponent.Get(rolePetInfo.Id);
+            
+                if (petunit == null && request.PetFightIndex - 1 == i)
+                {
+                    response.Error = ErrorCode.ERR_Pet_Dead;
+                    return;
+                }
+                    
+                if (petunit == null)
+                {
+                    continue;
+                }
+              
+                if (request.PetFightIndex - 1 == i)
+                {
+                    // 切换到宠物
+                    unitComponent.Remove(petunit.Id);
+                    
+                    //客户端自己修改模型 和 技能。。。。
+                }
+                if(lastPetFightIndex - 1 == i)
+                {
+                    //重新创建之前的宠物
+                    UnitFactory.CreatePet(unit, rolePetInfo);
+                }
+            }
+
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, request.PetFightIndex);
+            await ETTask.CompletedTask;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
+        private void PetFightSwitchOld(Unit unit, C2M_PetFightSwitch request, M2C_PetFightSwitch response)
+        {
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            List<PetBarInfo> PetFightList = petComponentS.GetNowPetFightList();
+            if (request.PetFightIndex < 0 || request.PetFightIndex > PetFightList.Count)
+            {
+                return;
+            }
+            int lastPetFightIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
+            if (lastPetFightIndex == request.PetFightIndex)
+            {
+                return;
+            }
+             for (int i = 0; i < PetFightList.Count; i++)
             {
                 RolePetInfo rolePetInfo = petComponentS.GetPetInfo(PetFightList[i].PetId);
 
@@ -86,7 +151,6 @@ namespace ET.Server
                 unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
             }
 
-            await ETTask.CompletedTask;
         }
     }
 }

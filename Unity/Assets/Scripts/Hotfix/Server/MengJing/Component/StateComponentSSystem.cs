@@ -39,6 +39,10 @@ namespace ET.Server
             {
                 return false;
             }
+            if (self.StateTypeGet(StateTypeEnum.WuDi))
+            {
+                return false;
+            }
             return true;
         }
 
