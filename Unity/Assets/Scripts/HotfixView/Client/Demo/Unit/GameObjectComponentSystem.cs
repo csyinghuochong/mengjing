@@ -156,9 +156,10 @@ namespace ET.Client
                 case UnitType.Player:
                     MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
                     //宠物副本不显示玩家
-                    if (unit.MainHero && (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
-                            || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
-                            || mapComponent.SceneType == (int)SceneTypeEnum.PetMing))
+                    if (unit.MainHero && (mapComponent.SceneType == SceneTypeEnum.PetDungeon
+                            || mapComponent.SceneType == SceneTypeEnum.PetTianTi
+                            || mapComponent.SceneType == SceneTypeEnum.PetMing
+                            || mapComponent.SceneType == SceneTypeEnum.PetMelee))
                     {
                         return;
                     }

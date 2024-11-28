@@ -21,12 +21,17 @@ namespace ET.Client
             self.MissParameter.Clear();
             self.animationClips.Clear();
             self.animatorControllers.Clear();
+            self.InitInitGameObject();
+        }
+
+        public static void InitInitGameObject(this AnimatorComponent self)
+        {
             GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
             self.InitController(gameObject);
             self.UpdateAnimator(gameObject);
             self.UpdateController();
         }
-
+        
         public static void InitController(this AnimatorComponent self, GameObject gameObject)
         {
             Unit unit = self.GetParent<Unit>();

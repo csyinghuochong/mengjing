@@ -217,7 +217,7 @@ namespace ET.Client
     public struct SkillCDUpdate
     {
     }
-    
+
     public struct SkillBeging
     {
         public string DataParamString;
@@ -297,7 +297,6 @@ namespace ET.Client
 
     public struct ReturnLogin
     {
-
     }
 
     public struct TaskNpcDialog
@@ -329,7 +328,7 @@ namespace ET.Client
         public int ShakeCameraType;
         public float ShakeDuration;
     }
-    
+
     //技能特效
     public struct SkillEffect
     {
@@ -585,13 +584,12 @@ namespace ET.Client
     public struct PetBarUpdate
     {
     }
-    
+
     public struct StateChange
     {
         public M2C_UnitStateUpdate m2C_UnitStateUpdate;
         public Unit Unit;
     }
-
 
     public struct EnterCellDungeon
     {
@@ -607,5 +605,11 @@ namespace ET.Client
 
     public struct PetBarUpgrade
     {
+    }
+
+    public struct PetFightSwitch
+    {
+        public long UnitId;
+        public int PetConfigId;
     }
 }

@@ -13,7 +13,7 @@ namespace ET.Client
         public GameObject Lal_Name;
         public GameObject Img_HpValue;
         public GameObject GameObject { get; set; }
-        public GameObject UIPlayerHpText;
+        public GameObject UIPlayerHpText { get; set; }
         public GameObject BuffShieldValue;
         public GameObject Img_ChengHao;
         public Image Img_AngleValue;

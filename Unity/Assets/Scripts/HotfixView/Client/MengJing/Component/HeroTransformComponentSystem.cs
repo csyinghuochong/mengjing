@@ -11,6 +11,11 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this HeroTransformComponent self)
         {
+            self.InitGameObject();
+        }
+
+        public static void InitGameObject(this HeroTransformComponent self)
+        {
             Unit MyHero = self.GetParent<Unit>();
             Transform transform = MyHero.GetComponent<GameObjectComponent>().GameObject.transform;
             Transform roleBoneSetTra = transform.Find("RoleBoneSet");
@@ -36,11 +41,10 @@ namespace ET.Client
             if (MyHero.Type == UnitType.Player)
             {
                 Transform runtr = MyHero.GetComponent<GameObjectComponent>().GameObject.transform.Find("RoseRunEffect");
-                self.RunEffect = runtr!= null ? runtr.gameObject: null;
+                self.RunEffect = runtr != null ? runtr.gameObject : null;
             }
         }
-        
-        
+
         public static void ShowRunEffect(this HeroTransformComponent self)
         {
             if (self.RunEffect == null)

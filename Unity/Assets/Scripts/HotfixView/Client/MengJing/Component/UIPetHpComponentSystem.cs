@@ -196,11 +196,22 @@ namespace ET.Client
 
         public static void UpdateShow(this UIPetHpComponent self)
         {
-            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
+            Unit unit = self.GetParent<Unit>();
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
             self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
             using (zstring.Block())
             {
-                self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", unitInfoComponent.MasterName);
+                string masterName = "";
+                if (string.IsNullOrEmpty(unitInfoComponent.MasterName))
+                {
+                    // 角色切换成宠物了
+                    masterName = unitInfoComponent.UnitName;
+                }
+                else
+                {
+                    masterName = unitInfoComponent.MasterName;
+                }
+                self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", masterName);
             }
         }
     }

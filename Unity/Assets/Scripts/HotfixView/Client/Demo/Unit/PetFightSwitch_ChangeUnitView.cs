@@ -1,0 +1,81 @@
+﻿using UnityEngine;
+
+namespace ET.Client
+{
+    [Event(SceneType.Current)]
+    public class PetFightSwitch_ChangeUnitView : AEvent<Scene, PetFightSwitch>
+    {
+        protected override async ETTask Run(Scene scene, PetFightSwitch args)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().Get(args.UnitId);
+            if (unit == null || unit.IsDisposed)
+            {
+                return;
+            }
+
+            string path = "";
+            if (args.PetConfigId == 0)
+            {
+                // 模型切换成主角
+                path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
+            }
+            else
+            {
+                // 模型切换成宠物
+                PetConfig petConfig = PetConfigCategory.Instance.Get(args.PetConfigId);
+                PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(petConfig.Skin[0]);
+                path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID);
+            }
+
+            unit.GetComponent<GameObjectComponent>().RecoverGameObject();
+
+            GameObject go = null;
+            if (GameObjectPoolHelper.HaveObject(path))
+            {
+                go = GameObjectPoolHelper.GetObjectFromPool(path);
+            }
+            else
+            {
+                go = scene.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            }
+
+            unit.GetComponent<GameObjectComponent>().UnitAssetsPath = path;
+            unit.GetComponent<GameObjectComponent>().GameObject = go;
+            CommonViewHelper.SetParent(go, GlobalComponent.Instance.Unit.gameObject);
+            go.transform.localPosition = unit.Position;
+            go.transform.rotation = unit.Rotation;
+            go.transform.name = unit.Id.ToString();
+            if (SettingData.AnimController == 0)
+            {
+                unit.GetComponent<AnimatorComponent>().InitInitGameObject();
+            }
+            else
+            {
+                unit.GetComponent<AnimationComponent>().UpdateAnimData(go);
+            }
+
+            // unit.GetComponent<FsmComponent>();
+            unit.GetComponent<HeroTransformComponent>().InitGameObject();
+            // unit.GetComponent<EffectViewComponent>();
+
+            // 改变UI
+            if (args.PetConfigId == 0)
+            {
+                unit.RemoveComponent<UIPetHpComponent>();
+                unit.AddComponent<UIPlayerHpComponent>();
+            }
+            else
+            {
+                unit.RemoveComponent<UIPlayerHpComponent>();
+                unit.AddComponent<UIPetHpComponent>();
+            }
+
+            // unit.GetComponent<UIPlayerHpComponent>().UIPlayerHpText.GetComponent<HeadBarUI>().HeadPos =
+            //         unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
+            // unit.GetComponent<UIPlayerHpComponent>().GameObject.GetComponent<HeadBarUI>().HeadPos =
+            //         unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
+
+            await ETTask.CompletedTask;
+        }
+    }
+}
