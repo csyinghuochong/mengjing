@@ -41,15 +41,75 @@ namespace ET.Client
      		}
      	}
 
+        public ES_UnionRoleXiuLian ES_UnionRoleXiuLian
+        {
+            get
+            {
+                ES_UnionRoleXiuLian es = this.m_es_unionrolexiulian;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionRoleXiuLian.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_unionrolexiulian = this.AddChild<ES_UnionRoleXiuLian, Transform>(go.transform);
+                }
+
+                return this.m_es_unionrolexiulian;
+            }
+        }
+
+        public ES_UnionPetXiuLian ES_UnionPetXiuLian
+        {
+            get
+            {
+                ES_UnionPetXiuLian es = this.m_es_unionpetxiulian;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionPetXiuLian.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_unionpetxiulian = this.AddChild<ES_UnionPetXiuLian, Transform>(go.transform);
+                }
+
+                return this.m_es_unionpetxiulian;
+            }
+        }
+
+        public ES_UnionBloodStone ES_UnionBloodStone
+        {
+            get
+            {
+                ES_UnionBloodStone es = this.m_es_unionbloodstone;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionBloodStone.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_unionbloodstone = this.AddChild<ES_UnionBloodStone, Transform>(go.transform);
+                }
+
+                return this.m_es_unionbloodstone;
+            }
+        }
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_unionrolexiulian = null;
+			this.m_es_unionpetxiulian = null;
+			this.m_es_unionbloodstone = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_UnionRoleXiuLian> m_es_unionrolexiulian = null;
+		private EntityRef<ES_UnionPetXiuLian> m_es_unionpetxiulian = null;
+		private EntityRef<ES_UnionBloodStone> m_es_unionbloodstone = null;
 		public Transform uiTransform = null;
 	}
 }

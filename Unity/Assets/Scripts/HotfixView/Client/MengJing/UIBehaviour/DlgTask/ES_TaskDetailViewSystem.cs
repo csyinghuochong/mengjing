@@ -9,7 +9,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskGet args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.ES_TaskDetail.SetExpand(TaskTypeEnum.Daily);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.SetExpand(TaskTypeEnum.Daily);
             await ETTask.CompletedTask;
         }
     }
@@ -19,7 +19,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskUpdate args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.ES_TaskDetail.OnRecvTaskUpdate();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
         }
     }
@@ -29,7 +29,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskComplete args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.ES_TaskDetail.OnRecvTaskUpdate();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
         }
     }
@@ -39,7 +39,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskGiveUp args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.ES_TaskDetail.ReExpand();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.ReExpand();
             await ETTask.CompletedTask;
         }
     }
@@ -49,7 +49,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, TaskTypeItemClick args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.ES_TaskDetail.RefreshTaskInfo(args.TaskPro);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTask>()?.View.ES_TaskDetail.RefreshTaskInfo(args.TaskPro);
             await ETTask.CompletedTask;
         }
     }

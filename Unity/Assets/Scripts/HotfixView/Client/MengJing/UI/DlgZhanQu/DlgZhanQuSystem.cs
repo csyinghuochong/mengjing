@@ -22,13 +22,13 @@
             switch (index)
             {
                 case 0:
-                    self.ES_ZhanQuLevel.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ZhanQuLevel.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_ZhanQuCombat.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ZhanQuCombat.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_FirstWin.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_FirstWin.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
@@ -36,7 +36,7 @@
         public static void OnClickGoToFirstWin(this DlgZhanQu self, int bossId)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(2);
-            self.ES_FirstWin.BossId = bossId;
+            self.View.ES_FirstWin.BossId = bossId;
         }
     }
 }

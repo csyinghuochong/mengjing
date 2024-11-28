@@ -21,10 +21,10 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_TaskDetail.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_TaskDetail.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

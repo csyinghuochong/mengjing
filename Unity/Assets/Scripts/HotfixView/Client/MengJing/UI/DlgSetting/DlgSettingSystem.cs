@@ -20,7 +20,7 @@ namespace ET.Client
         public static void OnBeforeClose(this DlgSetting self)
         {
             Log.Debug("关闭Setting前保存设置");
-            self.ES_SettingGame.OnBeforeClose();
+            self.View.ES_SettingGame.OnBeforeClose();
         }
 
         private static void OnFunctionSetBtn(this DlgSetting self, int index)
@@ -29,24 +29,24 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_SettingGame.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SettingGame.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_SettingTitle.uiTransform.gameObject.SetActive(true);
-                    self.ES_SettingTitle.OnUpdateUI();
+                    self.View.ES_SettingTitle.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SettingTitle.OnUpdateUI();
                     break;
                 case 2:
-                    self.ES_SettingGuaJi.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SettingGuaJi.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.ES_FashionShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_FashionShow.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
 
         public static void OnTitleUse(this DlgSetting self)
         {
-            self.ES_SettingTitle.OnUpdateUI();
+            self.View.ES_SettingTitle.OnUpdateUI();
         }
     }
 }

@@ -52,20 +52,20 @@
             switch (index)
             {
                 case 0:
-                    self.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
-                    self.ES_ActivityLogin.OnUpdateUI();
+                    self.View.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivityLogin.OnUpdateUI();
                     break;
                 case 1:
-                    self.ES_WelfareTask.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WelfareTask.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_WelfareDraw.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WelfareDraw.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.ES_WelfareInvest.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WelfareInvest.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
-                    self.ES_WelfareDraw2.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WelfareDraw2.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

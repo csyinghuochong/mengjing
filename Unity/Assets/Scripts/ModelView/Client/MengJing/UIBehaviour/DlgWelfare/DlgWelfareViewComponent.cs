@@ -92,6 +92,96 @@ namespace ET.Client
      		}
      	}
 
+        public ES_ActivityLogin ES_ActivityLogin
+        {
+            get
+            {
+                ES_ActivityLogin es = this.m_es_activitylogin;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivityLogin.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_activitylogin = this.AddChild<ES_ActivityLogin, Transform>(go.transform);
+                }
+
+                return this.m_es_activitylogin;
+            }
+        }
+
+        public ES_WelfareTask ES_WelfareTask
+        {
+            get
+            {
+                ES_WelfareTask es = this.m_es_welfaretask;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WelfareTask.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_welfaretask = this.AddChild<ES_WelfareTask, Transform>(go.transform);
+                }
+
+                return this.m_es_welfaretask;
+            }
+        }
+
+        public ES_WelfareDraw ES_WelfareDraw
+        {
+            get
+            {
+                ES_WelfareDraw es = this.m_es_welfaredraw;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WelfareDraw.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_welfaredraw = this.AddChild<ES_WelfareDraw, Transform>(go.transform);
+                }
+
+                return this.m_es_welfaredraw;
+            }
+        }
+
+        public ES_WelfareInvest ES_WelfareInvest
+        {
+            get
+            {
+                ES_WelfareInvest es = this.m_es_welfareinvest;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WelfareInvest.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_welfareinvest = this.AddChild<ES_WelfareInvest, Transform>(go.transform);
+                }
+
+                return this.m_es_welfareinvest;
+            }
+        }
+
+        public ES_WelfareDraw2 ES_WelfareDraw2
+        {
+            get
+            {
+                ES_WelfareDraw2 es = this.m_es_welfaredraw2;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WelfareDraw2.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_welfaredraw2 = this.AddChild<ES_WelfareDraw2, Transform>(go.transform);
+                }
+
+                return this.m_es_welfaredraw2;
+            }
+        }
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -99,6 +189,11 @@ namespace ET.Client
 			this.m_E_Type_0Toggle = null;
 			this.m_E_Type_1Toggle = null;
 			this.m_E_Type_2Toggle = null;
+			this.m_es_activitylogin = null;
+			this.m_es_welfaretask = null;
+			this.m_es_welfaredraw = null;
+			this.m_es_welfareinvest = null;
+			this.m_es_welfaredraw2 = null;
 			this.uiTransform = null;
 		}
 
@@ -107,6 +202,11 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Type_2Toggle = null;
+		private EntityRef<ES_ActivityLogin> m_es_activitylogin = null;
+		private EntityRef<ES_WelfareTask> m_es_welfaretask = null;
+		private EntityRef<ES_WelfareDraw> m_es_welfaredraw = null;
+		private EntityRef<ES_WelfareInvest> m_es_welfareinvest = null;
+		private EntityRef<ES_WelfareDraw2> m_es_welfaredraw2 = null;
 		public Transform uiTransform = null;
 	}
 }

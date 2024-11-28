@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ShouJiList ES_ShouJiList
+		{
+			get
+			{
+				ES_ShouJiList es = this.m_es_shoujilist;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ShouJiList.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_shoujilist = this.AddChild<ES_ShouJiList, Transform>(go.transform);
+				}
+
+				return this.m_es_shoujilist;
+			}
+		}
+
+		public ES_ShouJiTreasure ES_ShouJiTreasure
+		{
+			get
+			{
+				ES_ShouJiTreasure es = this.m_es_shoujitreasure;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ShouJiTreasure.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_shoujitreasure = this.AddChild<ES_ShouJiTreasure, Transform>(go.transform);
+				}
+
+				return this.m_es_shoujitreasure;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_shoujilist = null;
+			this.m_es_shoujitreasure = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_ShouJiList> m_es_shoujilist = null;
+		private EntityRef<ES_ShouJiTreasure> m_es_shoujitreasure = null;
 		public Transform uiTransform = null;
 	}
 }

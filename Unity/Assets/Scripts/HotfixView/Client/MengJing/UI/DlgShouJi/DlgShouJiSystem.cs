@@ -21,17 +21,17 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_ShouJiList.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ShouJiList.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_ShouJiTreasure.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ShouJiTreasure.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
 
         public static void OnShouJiTreasure(this DlgShouJi self)
         {
-            self.ES_ShouJiTreasure.OnShouJiTreasure();
+            self.View.ES_ShouJiTreasure.OnShouJiTreasure();
         }
     }
 }

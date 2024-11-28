@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_TrialDungeon ES_TrialDungeon
+		{
+			get
+			{
+				ES_TrialDungeon es = this.m_es_trialdungeon;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TrialDungeon.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_trialdungeon = this.AddChild<ES_TrialDungeon, Transform>(go.transform);
+				}
+
+				return this.m_es_trialdungeon;
+			}
+		}
+
+		public ES_TrialRank ES_TrialRank
+		{
+			get
+			{
+				ES_TrialRank es = this.m_es_trialrank;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TrialRank.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_trialrank = this.AddChild<ES_TrialRank, Transform>(go.transform);
+				}
+
+				return this.m_es_trialrank;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_trialdungeon = null;
+			this.m_es_trialrank = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_TrialDungeon> m_es_trialdungeon = null;
+		private EntityRef<ES_TrialRank> m_es_trialrank = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_TowerDungeon ES_TowerDungeon
+		{
+			get
+			{
+				ES_TowerDungeon es = this.m_es_towerdungeon;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TowerDungeon.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_towerdungeon = this.AddChild<ES_TowerDungeon, Transform>(go.transform);
+				}
+
+				return this.m_es_towerdungeon;
+			}
+		}
+
+		public ES_TowerShop ES_TowerShop
+		{
+			get
+			{
+				ES_TowerShop es = this.m_es_towershop;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TowerShop.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_towershop = this.AddChild<ES_TowerShop, Transform>(go.transform);
+				}
+
+				return this.m_es_towershop;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_towerdungeon = null;
+			this.m_es_towershop = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_TowerDungeon> m_es_towerdungeon = null;
+		private EntityRef<ES_TowerShop> m_es_towershop = null;
 		public Transform uiTransform = null;
 	}
 }

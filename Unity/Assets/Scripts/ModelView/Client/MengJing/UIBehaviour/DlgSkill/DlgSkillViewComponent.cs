@@ -58,17 +58,117 @@ namespace ET.Client
      		}
      	}
 
+        public ES_SkillLearn ES_SkillLearn
+        {
+            get
+            {
+                ES_SkillLearn es = this.m_es_skilllearn;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillLearn.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+                    go.SetActive(false);
+                    this.m_es_skilllearn = this.AddChild<ES_SkillLearn, Transform>(go.transform);
+                }
+
+                return this.m_es_skilllearn;
+            }
+        }
+
+        public ES_SkillSet ES_SkillSet
+        {
+            get
+            {
+                ES_SkillSet es = this.m_es_skillset;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillSet.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+                    go.SetActive(false);
+                    this.m_es_skillset = this.AddChild<ES_SkillSet, Transform>(go.transform);
+                }
+
+                return this.m_es_skillset;
+            }
+        }
+
+        public ES_SkillTianFu ES_SkillTianFu
+        {
+            get
+            {
+                ES_SkillTianFu es = this.m_es_skilltianfu;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillTianFu.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+                    go.SetActive(false);
+                    this.m_es_skilltianfu = this.AddChild<ES_SkillTianFu, Transform>(go.transform);
+                }
+
+                return this.m_es_skilltianfu;
+            }
+        }
+
+        public ES_SkillMake ES_SkillMake
+        {
+            get
+            {
+                ES_SkillMake es = this.m_es_skillmake;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillMake.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+                    go.SetActive(false);
+                    this.m_es_skillmake = this.AddChild<ES_SkillMake, Transform>(go.transform);
+                }
+
+                return this.m_es_skillmake;
+            }
+        }
+
+        public ES_SkillLifeShield ES_SkillLifeShield
+        {
+            get
+            {
+                ES_SkillLifeShield es = this.m_es_skilllifeshield;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillLifeShield.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+                    go.SetActive(false);
+                    this.m_es_skilllifeshield = this.AddChild<ES_SkillLifeShield, Transform>(go.transform);
+                }
+
+                return this.m_es_skilllifeshield;
+            }
+        }
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewNodeRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_Type_0Toggle = null;
+			this.m_es_skilllearn = null;
+			this.m_es_skillset = null;
+			this.m_es_skilltianfu = null;
+			this.m_es_skillmake = null;
+			this.m_es_skilllifeshield = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
+		private EntityRef<ES_SkillLearn> m_es_skilllearn = null;
+		private EntityRef<ES_SkillSet> m_es_skillset = null;
+		private EntityRef<ES_SkillTianFu> m_es_skilltianfu = null;
+		private EntityRef<ES_SkillMake> m_es_skillmake = null;
+		private EntityRef<ES_SkillLifeShield> m_es_skilllifeshield = null;
 		public Transform uiTransform = null;
 	}
 }

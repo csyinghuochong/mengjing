@@ -21,10 +21,10 @@
             switch (index)
             {
                 case 0:
-                    self.ES_TrialDungeon.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_TrialDungeon.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_TrialRank.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_TrialRank.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

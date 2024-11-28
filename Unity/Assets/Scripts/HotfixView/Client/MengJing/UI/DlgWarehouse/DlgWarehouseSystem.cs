@@ -5,8 +5,8 @@
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.ES_WarehouseRole?.Refresh();
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.ES_WarehouseGem?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseRole?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseGem?.Refresh();
             await ETTask.CompletedTask;
         }
     }
@@ -16,7 +16,7 @@
     {
         protected override async ETTask Run(Scene scene, OnAccountWarehous args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.ES_WarehouseAccount
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseAccount
                     ?.OnAccountWarehous(args.DataParamString, args.baginfoId);
             await ETTask.CompletedTask;
         }
@@ -44,16 +44,16 @@
             switch (index)
             {
                 case 0:
-                    self.ES_WarehouseRole.uiTransform.gameObject.SetActive(true);
-                    self.ES_WarehouseRole.Refresh();
+                    self.View.ES_WarehouseRole.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseRole.Refresh();
                     break;
                 case 1:
-                    self.ES_WarehouseAccount.uiTransform.gameObject.SetActive(true);
-                    self.ES_WarehouseAccount.RefreshBagItems();
+                    self.View.ES_WarehouseAccount.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseAccount.RefreshBagItems();
                     break;
                 case 2:
-                    self.ES_WarehouseGem.uiTransform.gameObject.SetActive(true);
-                    self.ES_WarehouseGem.Refresh();
+                    self.View.ES_WarehouseGem.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseGem.Refresh();
                     break;
             }
         }
