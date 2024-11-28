@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -26,6 +27,7 @@ namespace ET.Server
             //宠物出生便携带无敌wuff。 无须改动。。
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
             int petconfigid = 0;
+
               for (int i = 0; i < PetFightList.Count; i++)
             {
                 RolePetInfo rolePetInfo = petComponentS.GetPetInfo(PetFightList[i].PetId);
@@ -51,8 +53,13 @@ namespace ET.Server
                     }
                     
                     // 切换到宠物
+                    unit.Position = petunit.Position;
+                    
                     unitComponent.Remove(petunit.Id);
                     petconfigid = rolePetInfo.ConfigId;
+                    
+ 
+                    unit.Stop(-3);
                     //客户端自己修改模型 和 技能。。。。
                 }
                 if(lastPetFightIndex - 1 == i)

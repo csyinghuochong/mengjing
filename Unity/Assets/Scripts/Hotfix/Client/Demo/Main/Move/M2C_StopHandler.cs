@@ -52,7 +52,7 @@ namespace ET.Client
                 EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() { Unit = unit });
             }
 
-            //message.Error == -2立即停止且同步坐标
+            //message.Error == -3立即停止且同步坐标
             if (message.Error == -3)
             {
                 MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
