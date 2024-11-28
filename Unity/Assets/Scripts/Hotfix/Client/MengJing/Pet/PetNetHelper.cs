@@ -60,6 +60,21 @@ namespace ET.Client
             C2M_PetFightSwitch c2MPetFightSwitch = C2M_PetFightSwitch.Create();
             c2MPetFightSwitch.PetFightIndex = fightindex;
             M2C_PetFightSwitch m2CPetFightSwitch = (M2C_PetFightSwitch)await root.GetComponent<ClientSenderCompnent>().Call(c2MPetFightSwitch);
+
+            if (m2CPetFightSwitch.Error == ErrorCode.ERR_Success)
+            {
+                if (fightindex > 0)
+                {
+                    PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                    Unit pet = unit.GetParent<UnitComponent>().Get(petComponentC.GetNowPetFightList()[fightindex - 1].PetId);
+                    root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
+                }
+                else
+                {
+                    root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
+                }
+            }
+
             return m2CPetFightSwitch.Error;
         }
 

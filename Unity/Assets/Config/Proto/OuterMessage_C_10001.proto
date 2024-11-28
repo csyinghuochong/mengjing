@@ -2582,6 +2582,17 @@ message M2C_PetFightSwitch // ILocationResponse
 	int32 Error = 92;
 }
 
+//广播玩家变身。。
+message M2C_PetFightSwitchMessage // IMessage
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	
+	int64 UnitId = 2;
+	int32 PetConfigId = 1;
+}
+
 //ResponseType M2C_RolePetSkillCD
 //获取玩家和宠物的技能CD
 message C2M_RolePetSkillCD // ILocationRequest

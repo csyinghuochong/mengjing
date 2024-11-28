@@ -25,7 +25,7 @@ namespace ET.Server
             //切换为主角模式 重置主角的模型和技能，  添加宠物。。。。
             //宠物出生便携带无敌wuff。 无须改动。。
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
-            
+            int petconfigid = 0;
               for (int i = 0; i < PetFightList.Count; i++)
             {
                 RolePetInfo rolePetInfo = petComponentS.GetPetInfo(PetFightList[i].PetId);
@@ -52,17 +52,23 @@ namespace ET.Server
                     
                     // 切换到宠物
                     unitComponent.Remove(petunit.Id);
-                    
+                    petconfigid = rolePetInfo.ConfigId;
                     //客户端自己修改模型 和 技能。。。。
                 }
                 if(lastPetFightIndex - 1 == i)
                 {
                     //重新创建之前的宠物
                     UnitFactory.CreatePet(unit, rolePetInfo);
+                    petconfigid = 0;
                 }
             }
 
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, request.PetFightIndex);
+
+            M2C_PetFightSwitchMessage fightSwitchMessage = M2C_PetFightSwitchMessage.Create();
+            fightSwitchMessage.UnitId = unit.Id;
+            fightSwitchMessage.PetConfigId = petconfigid; // > 0变身  == 0 回到主角
+            MapMessageHelper.Broadcast( unit, fightSwitchMessage );
             await ETTask.CompletedTask;
         }
 
