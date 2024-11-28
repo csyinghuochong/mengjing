@@ -42,14 +42,14 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_Pet_Dead;
                     return;
                 }
-                    
-                if (petunit == null)
-                {
-                    continue;
-                }
-              
+
                 if (request.PetFightIndex - 1 == i)
                 {
+                    if (petunit == null)
+                    {
+                        continue;
+                    }
+                    
                     // 切换到宠物
                     unitComponent.Remove(petunit.Id);
                     
