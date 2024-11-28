@@ -38,8 +38,6 @@ namespace ET.Server
 
             for (int i = 0; i < skillS.ICheckShape.Count; i++)
             {
-                // (int)Quaternion.QuaternionToEuler().y;
-                // (this.ICheckShape[i] as Rectangle).s_forward = 
                 (skillS.ICheckShape[i] as Rectangle).s_forward = math.forward(skillS.TheUnitFrom.Rotation);
             }
             
