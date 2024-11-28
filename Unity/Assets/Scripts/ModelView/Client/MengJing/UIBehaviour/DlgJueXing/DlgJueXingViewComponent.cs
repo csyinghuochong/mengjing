@@ -41,15 +41,35 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JueXingShow ES_JueXingShow
+		{
+			get
+			{
+				ES_JueXingShow es = this.m_es_juexingshow;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JueXingShow.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.m_es_juexingshow = this.AddChild<ES_JueXingShow, Transform>(go.transform);
+				}
+
+				return this.m_es_juexingshow;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewNodeRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_juexingshow = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_JueXingShow> m_es_juexingshow = null;
 		public Transform uiTransform = null;
 	}
 }

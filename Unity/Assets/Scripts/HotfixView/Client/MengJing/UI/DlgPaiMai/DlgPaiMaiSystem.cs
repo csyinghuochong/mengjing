@@ -23,17 +23,17 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_PaiMaiShop.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PaiMaiShop.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_PaiMaiBuy.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PaiMaiBuy.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_PaiMaiSell.uiTransform.gameObject.SetActive(true);
-                    self.ES_PaiMaiSell.OnUpdateUI();
+                    self.View.ES_PaiMaiSell.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PaiMaiSell.OnUpdateUI();
                     break;
                 case 3:
-                    self.ES_PaiMaiDuiHuan.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PaiMaiDuiHuan.uiTransform.gameObject.SetActive(true);
                     break;
                 case 4:
                     break;
@@ -43,7 +43,7 @@ namespace ET.Client
         public static void OnClickGoToPaiMai(this DlgPaiMai self, int itemType, long paimaiItemId)
         {
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
-            self.ES_PaiMaiBuy.OnClickGoToPaiMai(itemType, paimaiItemId).Coroutine();
+            self.View.ES_PaiMaiBuy.OnClickGoToPaiMai(itemType, paimaiItemId).Coroutine();
         }
     }
 }

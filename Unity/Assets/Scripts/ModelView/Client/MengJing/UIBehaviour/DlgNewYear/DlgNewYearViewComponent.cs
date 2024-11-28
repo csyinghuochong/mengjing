@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_NewYearCollectionWord ES_NewYearCollectionWord
+		{
+			get
+			{
+				ES_NewYearCollectionWord es = this.m_es_newyearcollectionword;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_NewYearCollectionWord.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_newyearcollectionword = this.AddChild<ES_NewYearCollectionWord, Transform>(go.transform);
+				}
+
+				return this.m_es_newyearcollectionword;
+			}
+		}
+
+		public ES_NewYearMonster ES_NewYearMonster
+		{
+			get
+			{
+				ES_NewYearMonster es = this.m_es_newyearmonster;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_NewYearMonster.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_newyearmonster = this.AddChild<ES_NewYearMonster, Transform>(go.transform);
+				}
+
+				return this.m_es_newyearmonster;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_newyearcollectionword = null;
+			this.m_es_newyearmonster = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_NewYearCollectionWord> m_es_newyearcollectionword = null;
+		private EntityRef<ES_NewYearMonster> m_es_newyearmonster = null;
 		public Transform uiTransform = null;
 	}
 }

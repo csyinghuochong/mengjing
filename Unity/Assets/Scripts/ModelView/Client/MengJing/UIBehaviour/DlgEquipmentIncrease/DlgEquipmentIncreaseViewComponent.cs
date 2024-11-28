@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_EquipmentIncreaseShow ES_EquipmentIncreaseShow
+		{
+			get
+			{
+				ES_EquipmentIncreaseShow es = this.m_es_equipmentincreaseshow;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_EquipmentIncreaseShow.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_equipmentincreaseshow = this.AddChild<ES_EquipmentIncreaseShow, Transform>(go.transform);
+				}
+
+				return this.m_es_equipmentincreaseshow;
+			}
+		}
+
+		public ES_EquipmentIncreaseTransfer ES_EquipmentIncreaseTransfer
+		{
+			get
+			{
+				ES_EquipmentIncreaseTransfer es = this.m_es_equipmentincreasetransfer;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_EquipmentIncreaseTransfer.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_equipmentincreasetransfer = this.AddChild<ES_EquipmentIncreaseTransfer, Transform>(go.transform);
+				}
+
+				return this.m_es_equipmentincreasetransfer;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_equipmentincreaseshow = null;
+			this.m_es_equipmentincreasetransfer = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_EquipmentIncreaseShow> m_es_equipmentincreaseshow = null;
+		private EntityRef<ES_EquipmentIncreaseTransfer> m_es_equipmentincreasetransfer = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ProtectEquip ES_ProtectEquip
+		{
+			get
+			{
+				ES_ProtectEquip es = this.m_es_protectequip;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ProtectEquip.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_protectequip = this.AddChild<ES_ProtectEquip, Transform>(go.transform);
+				}
+
+				return this.m_es_protectequip;
+			}
+		}
+
+		public ES_ProtectPet ES_ProtectPet
+		{
+			get
+			{
+				ES_ProtectPet es = this.m_es_protectpet;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ProtectPet.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_protectpet = this.AddChild<ES_ProtectPet, Transform>(go.transform);
+				}
+
+				return this.m_es_protectpet;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_protectequip = null;
+			this.m_es_protectpet = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_ProtectEquip> m_es_protectequip = null;
+		private EntityRef<ES_ProtectPet> m_es_protectpet = null;
 		public Transform uiTransform = null;
 	}
 }

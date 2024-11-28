@@ -5,7 +5,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, BagItemUpdate args)
         {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipmentIncrease>()?.ES_EquipmentIncreaseShow.OnUpdateUI();
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipmentIncrease>()?.View.ES_EquipmentIncreaseShow.OnUpdateUI();
             await ETTask.CompletedTask;
         }
     }
@@ -31,11 +31,11 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_EquipmentIncreaseShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_EquipmentIncreaseShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_EquipmentIncreaseTransfer.uiTransform.gameObject.SetActive(true);
-                    self.ES_EquipmentIncreaseTransfer.OnUpdateUI();
+                    self.View.ES_EquipmentIncreaseTransfer.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_EquipmentIncreaseTransfer.OnUpdateUI();
                     break;
             }
         }

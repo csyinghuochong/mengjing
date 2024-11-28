@@ -21,11 +21,11 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_HuntRanking.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_HuntRanking.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_HuntTask.uiTransform.gameObject.SetActive(true);
-                    self.ES_HuntTask.OnUpdateUI();
+                    self.View.ES_HuntTask.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_HuntTask.OnUpdateUI();
                     break;
             }
         }

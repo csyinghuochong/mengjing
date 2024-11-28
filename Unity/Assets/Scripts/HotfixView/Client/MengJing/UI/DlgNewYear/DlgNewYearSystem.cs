@@ -21,11 +21,11 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_NewYearCollectionWord.uiTransform.gameObject.SetActive(true);
-                    self.ES_NewYearCollectionWord.OnUpdateUI();
+                    self.View.ES_NewYearCollectionWord.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_NewYearCollectionWord.OnUpdateUI();
                     break;
                 case 1:
-                    self.ES_NewYearMonster.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_NewYearMonster.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

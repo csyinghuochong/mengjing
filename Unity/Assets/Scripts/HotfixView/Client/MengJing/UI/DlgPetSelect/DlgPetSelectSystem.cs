@@ -41,7 +41,7 @@ namespace ET.Client
             if (self.OperationType == PetOperationType.HeCheng)
             {
                 DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
-                selected = dlgPet.ES_PetHeCheng.GetSelectedPet();
+                selected = dlgPet.View.ES_PetHeCheng.GetSelectedPet();
 
                 long petid = petComponent.GetFightPetId();
                 if (petid != 0 && !selected.Contains(petid))
@@ -63,7 +63,7 @@ namespace ET.Client
             if (self.OperationType == PetOperationType.XianJi)
             {
                 DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
-                long petinfoId = dlgPet.ES_PetList.LastSelectItem.Id;
+                long petinfoId = dlgPet.View.ES_PetList.LastSelectItem.Id;
                 selected.Add(petinfoId);
             }
 

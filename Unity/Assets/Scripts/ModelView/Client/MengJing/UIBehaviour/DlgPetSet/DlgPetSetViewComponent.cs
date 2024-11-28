@@ -58,17 +58,57 @@ namespace ET.Client
      		}
      	}
 
+		public ES_PetChallenge ES_PetChallenge
+		{
+			get
+			{
+				ES_PetChallenge es = this.m_es_petchallenge;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetChallenge.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_petchallenge = this.AddChild<ES_PetChallenge, Transform>(go.transform);
+				}
+
+				return this.m_es_petchallenge;
+			}
+		}
+
+		public ES_PetMining ES_PetMining
+		{
+			get
+			{
+				ES_PetMining es = this.m_es_petmining;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetMining.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_petmining = this.AddChild<ES_PetMining, Transform>(go.transform);
+				}
+
+				return this.m_es_petmining;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_Type_1Toggle = null;
+			this.m_es_petchallenge = null;
+			this.m_es_petmining = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
+		private EntityRef<ES_PetChallenge> m_es_petchallenge = null;
+		private EntityRef<ES_PetMining> m_es_petmining = null;
 		public Transform uiTransform = null;
 	}
 }

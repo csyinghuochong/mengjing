@@ -22,21 +22,21 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_CountryTask.uiTransform.gameObject.SetActive(true);
-                    self.ES_CountryTask.OnUpdateUI();
+                    self.View.ES_CountryTask.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_CountryTask.OnUpdateUI();
                     break;
                 case 1:
-                    self.ES_CountryHuoDong.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_CountryHuoDong.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_ActivitySingIn.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivitySingIn.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
 
         public static void OnUpdateRoleData(this DlgCountry self)
         {
-            self.ES_CountryTask.OnTaskCountryUpdate();
+            self.View.ES_CountryTask.OnTaskCountryUpdate();
         }
     }
 }

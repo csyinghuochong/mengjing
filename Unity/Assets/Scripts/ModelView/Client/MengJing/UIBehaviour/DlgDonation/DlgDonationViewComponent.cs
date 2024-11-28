@@ -41,15 +41,75 @@ namespace ET.Client
      		}
      	}
 
+        public ES_DonationShow ES_DonationShow
+        {
+            get
+            {
+                ES_DonationShow es = this.m_es_donationshow;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_DonationShow.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_donationshow = this.AddChild<ES_DonationShow, Transform>(go.transform);
+                }
+
+                return this.m_es_donationshow;
+            }
+        }
+
+        public ES_DonationUnion ES_DonationUnion
+        {
+            get
+            {
+                ES_DonationUnion es = this.m_es_donationunion;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_DonationUnion.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_donationunion = this.AddChild<ES_DonationUnion, Transform>(go.transform);
+                }
+
+                return this.m_es_donationunion;
+            }
+        }
+
+        public ES_RankUnion ES_RankUnion
+        {
+            get
+            {
+                ES_RankUnion es = this.m_es_rankunion;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RankUnion.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rankunion = this.AddChild<ES_RankUnion, Transform>(go.transform);
+                }
+
+                return this.m_es_rankunion;
+            }
+        }
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_donationshow = null;
+			this.m_es_donationunion = null;
+			this.m_es_rankunion = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_DonationShow> m_es_donationshow = null;
+		private EntityRef<ES_DonationUnion> m_es_donationunion = null;
+		private EntityRef<ES_RankUnion> m_es_rankunion = null;
 		public Transform uiTransform = null;
 	}
 }

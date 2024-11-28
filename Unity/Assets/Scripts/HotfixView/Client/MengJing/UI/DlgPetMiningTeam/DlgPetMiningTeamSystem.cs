@@ -120,7 +120,7 @@ namespace ET.Client
         {
             DlgPetSet dlgPetSet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSet>();
 
-            List<int> defendteamids = dlgPetSet.ES_PetMining.GetSelfPetMingTeam();
+            List<int> defendteamids = dlgPetSet.View.ES_PetMining.GetSelfPetMingTeam();
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (defendteamids.Contains(team) && unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.PetMineCDTime) > TimeHelper.ServerNow())

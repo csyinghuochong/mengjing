@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanPetWalk ES_JiaYuanPetWalk
+		{
+			get
+			{
+				ES_JiaYuanPetWalk es = this.m_es_jiayuanpetwalk;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JiaYuanPetWalk.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_jiayuanpetwalk = this.AddChild<ES_JiaYuanPetWalk, Transform>(go.transform);
+				}
+
+				return this.m_es_jiayuanpetwalk;
+			}
+		}
+
+		public ES_PetCangKu ES_PetCangKu
+		{
+			get
+			{
+				ES_PetCangKu es = this.m_es_petcangku;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetCangKu.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_petcangku = this.AddChild<ES_PetCangKu, Transform>(go.transform);
+				}
+
+				return this.m_es_petcangku;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_jiayuanpetwalk = null;
+			this.m_es_petcangku = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_JiaYuanPetWalk> m_es_jiayuanpetwalk = null;
+		private EntityRef<ES_PetCangKu> m_es_petcangku = null;
 		public Transform uiTransform = null;
 	}
 }
