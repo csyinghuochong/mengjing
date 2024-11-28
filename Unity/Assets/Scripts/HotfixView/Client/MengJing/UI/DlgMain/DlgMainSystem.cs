@@ -1247,11 +1247,7 @@ namespace ET.Client
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                 long petId = petComponentC.GetNowPetFightList()[petfightindex - 1].PetId;
                 Unit pet = currentScene.GetComponent<UnitComponent>().Get(petId);
-
-                root.GetComponent<LockTargetComponent>().MainUnit = pet;
-                root.GetComponent<SkillIndicatorComponent>().MainUnit = pet;
-                currentScene.GetComponent<MJCameraComponent>().StartLookAtPet(pet);
-                self.View.ES_JoystickMove.MainUnit = pet;
+                
                 self.View.ES_MainSkill.OnEnterScene(pet);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
                 self.View.E_TextPetSwitch.text = "600";
@@ -1261,11 +1257,6 @@ namespace ET.Client
             else
             {
                 // FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
-
-                root.GetComponent<LockTargetComponent>().MainUnit = unit;
-                root.GetComponent<SkillIndicatorComponent>().MainUnit = unit;
-                currentScene.GetComponent<MJCameraComponent>().EndLookAtPet();
-                self.View.ES_JoystickMove.MainUnit = unit;
                 self.View.ES_MainSkill.OnEnterScene(unit);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
                 self.View.E_TextPetSwitch.text = string.Empty;
