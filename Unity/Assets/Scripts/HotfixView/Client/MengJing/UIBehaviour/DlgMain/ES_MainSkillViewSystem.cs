@@ -239,107 +239,106 @@ namespace ET.Client
 
         public static void OnPetFightSwitch(this ES_MainSkill self, long petId)
         {
-            if (petId > 0)
-            {
-                PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
-                List<int> skill = new List<int>();
-                foreach (PetBarInfo petBarInfo in petComponentC.GetNowPetFightList())
-                {
-                    if (petBarInfo.PetId == petId)
-                    {
-                        // 释放出场技
-                        if (petBarInfo.AppearSkill != 0)
-                        {
-                            FlyTipComponent.Instance.ShowFlyTip("释放出场技");
-
-                            int angle = 0;
-                            long targetId = 0;
-                            float distance = 0;
-                            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petBarInfo.AppearSkill);
-                            if (skillConfig.SkillZhishiTargetType == 1) //自身点
-                            {
-                                angle = 0;
-                                targetId = 0;
-                                distance = 0;
-                            }
-                            else
-                            {
-                                Unit enemy = GetTargetHelperc.GetNearestEnemy(self.MainUnit, (float)skillConfig.SkillRangeSize + 4);
-                                if (enemy != null)
-                                {
-                                    float3 direction = enemy.Position - self.MainUnit.Position;
-                                    float ange = math.degrees(math.atan2(direction.x, direction.z));
-                                    angle = (int)math.floor(ange);
-                                    targetId = enemy.Id;
-                                    distance = math.distance(enemy.Position, self.MainUnit.Position);
-                                }
-                            }
-
-                            self.MainUnit.GetComponent<SkillManagerComponentC>().SendUseSkill(petBarInfo.AppearSkill, 0, angle, targetId, distance)
-                                    .Coroutine();
-                        }
-
-                        skill.AddRange(petBarInfo.ActiveSkill);
-                        break;
-                    }
-                }
-
-                int max = 4;// 总共最多4个技能
-                RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
-                foreach (int skillId in rolePetInfo.PetSkill)
-                {
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                    if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
-                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
-                        skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
-                    {
-                        continue;
-                    }
-
-                    if (skill.Count >= max)
-                    {
-                        break;
-                    }
-
-                    skill.Add(skillId);
-                }
-
-                for (int i = 0; i < 8; i++)
-                {
-                    ES_SkillGrid esSkillGrid = self.UISkillGirdList_PetFight[i];
-
-                    if (i < skill.Count)
-                    {
-                        SkillPro skillPro = new();
-                        skillPro.SkillID = skill[i];
-                        skillPro.SkillSetType = SkillSetEnum.Skill;
-                        esSkillGrid.uiTransform.gameObject.SetActive(true);
-                        esSkillGrid.UpdateSkillInfo(skillPro);
-                        continue;
-                    }
-
-                    if (i < max)
-                    {
-                        esSkillGrid.uiTransform.gameObject.SetActive(true);
-                        esSkillGrid.UpdateSkillInfo(null);
-                        esSkillGrid.E_Img_MaskImage.gameObject.SetActive(true);
-                        continue;
-                    }
-
-                    esSkillGrid.uiTransform.gameObject.SetActive(false);
-                    esSkillGrid.UpdateSkillInfo(null);
-                }
-
-                self.EG_NormalRectTransform.gameObject.SetActive(false);
-                self.EG_TransformsRectTransform.gameObject.SetActive(false);
-                self.EG_PetFightRectTransform.gameObject.SetActive(true);
-            }
-            else
+            if (petId <= 0)
             {
                 self.EG_NormalRectTransform.gameObject.SetActive(true);
                 self.EG_TransformsRectTransform.gameObject.SetActive(false);
                 self.EG_PetFightRectTransform.gameObject.SetActive(false);
+                return;
             }
+
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            List<int> skill = new List<int>();
+            foreach (PetBarInfo petBarInfo in petComponentC.GetNowPetFightList())
+            {
+                if (petBarInfo.PetId == petId)
+                {
+                    // 释放出场技
+                    if (petBarInfo.AppearSkill != 0)
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip("释放出场技");
+
+                        int angle = 0;
+                        long targetId = 0;
+                        float distance = 0;
+                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petBarInfo.AppearSkill);
+                        if (skillConfig.SkillZhishiTargetType == 1) //自身点
+                        {
+                            angle = 0;
+                            targetId = 0;
+                            distance = 0;
+                        }
+                        else
+                        {
+                            Unit enemy = GetTargetHelperc.GetNearestEnemy(self.MainUnit, (float)skillConfig.SkillRangeSize + 4);
+                            if (enemy != null)
+                            {
+                                float3 direction = enemy.Position - self.MainUnit.Position;
+                                float ange = math.degrees(math.atan2(direction.x, direction.z));
+                                angle = (int)math.floor(ange);
+                                targetId = enemy.Id;
+                                distance = math.distance(enemy.Position, self.MainUnit.Position);
+                            }
+                        }
+
+                        self.MainUnit.GetComponent<SkillManagerComponentC>().SendUseSkill(petBarInfo.AppearSkill, 0, angle, targetId, distance)
+                                .Coroutine();
+                    }
+
+                    skill.AddRange(petBarInfo.ActiveSkill);
+                    break;
+                }
+            }
+
+            int max = 4;// 总共最多4个技能
+            RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(petId);
+            foreach (int skillId in rolePetInfo.PetSkill)
+            {
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                if (skillConfig.SkillType == (int)SkillTypeEnum.PassiveSkill ||
+                    skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkill ||
+                    skillConfig.SkillType == (int)SkillTypeEnum.PassiveAddProSkillNoFight)
+                {
+                    continue;
+                }
+
+                if (skill.Count >= max)
+                {
+                    break;
+                }
+
+                skill.Add(skillId);
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                ES_SkillGrid esSkillGrid = self.UISkillGirdList_PetFight[i];
+
+                if (i < skill.Count)
+                {
+                    SkillPro skillPro = new();
+                    skillPro.SkillID = skill[i];
+                    skillPro.SkillSetType = SkillSetEnum.Skill;
+                    esSkillGrid.uiTransform.gameObject.SetActive(true);
+                    esSkillGrid.UpdateSkillInfo(skillPro);
+                    continue;
+                }
+
+                if (i < max)
+                {
+                    esSkillGrid.uiTransform.gameObject.SetActive(true);
+                    esSkillGrid.UpdateSkillInfo(null);
+                    esSkillGrid.E_Img_MaskImage.gameObject.SetActive(true);
+                    continue;
+                }
+
+                esSkillGrid.uiTransform.gameObject.SetActive(false);
+                esSkillGrid.UpdateSkillInfo(null);
+            }
+
+            self.EG_NormalRectTransform.gameObject.SetActive(false);
+            self.EG_TransformsRectTransform.gameObject.SetActive(false);
+            self.EG_PetFightRectTransform.gameObject.SetActive(true);
         }
 
         public static void OnUpdateAngle(this ES_MainSkill self)

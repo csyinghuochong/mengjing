@@ -251,7 +251,7 @@ namespace ET.Client
             {
                 FallingFontShowComponent fallingFontShowComponent = self.FallingFontShows[i];
                 self.FallingFontShows.RemoveAt(i);
-                fallingFontShowComponent.Dispose();
+                fallingFontShowComponent?.Dispose();
             }
 
             self.FallingFontShows = null;
