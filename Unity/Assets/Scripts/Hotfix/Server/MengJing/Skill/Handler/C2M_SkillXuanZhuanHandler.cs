@@ -8,24 +8,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillXuanZhuanRequest request, M2C_SkillXuanZhuanResponse response)
         {
-	        Unit rotationUnit = null;
+	        Unit rotationUnit = unit;
             int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
-            
-            if (petfightindex == 0)
-            {
-                rotationUnit = unit;
-            }
-            else
-            {
-                PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
-                Unit petunit = petComponentS.GetFightPetByIndex(petfightindex);
-                if (petunit == null)
-                {
-                    return;
-                }
-
-                rotationUnit = petunit;
-            }
             
             rotationUnit.Rotation =   quaternion.Euler(0, math.radians(request.Angle), 0);
             
