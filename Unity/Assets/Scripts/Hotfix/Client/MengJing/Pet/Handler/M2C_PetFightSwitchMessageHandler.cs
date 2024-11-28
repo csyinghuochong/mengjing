@@ -9,7 +9,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene root, M2C_PetFightSwitchMessage message)
         {
             PetComponentC petComponent = root.GetComponent<PetComponentC>();
-           
+
             await ETTask.CompletedTask;
         }
     }

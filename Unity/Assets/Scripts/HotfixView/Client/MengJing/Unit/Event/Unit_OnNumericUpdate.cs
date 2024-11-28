@@ -64,8 +64,6 @@
                     int petfightindex = (int)args.NewValue;
                     if (args.Defend.MainHero)
                     {
-                        root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().RefreshFightSet();
-                        
                         if (petfightindex > 0)
                         {
                            

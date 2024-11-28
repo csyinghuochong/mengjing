@@ -74,7 +74,7 @@ namespace ET.Client
                     root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
                 }
             }
-
+            EventSystem.Instance.Publish(root, new PetBarUpdate());
             return m2CPetFightSwitch.Error;
         }
 
