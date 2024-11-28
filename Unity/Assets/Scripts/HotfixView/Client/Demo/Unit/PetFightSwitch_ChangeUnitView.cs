@@ -61,14 +61,14 @@ namespace ET.Client
             // unit.GetComponent<EffectViewComponent>();
 
             // 改变UI
+            unit.RemoveComponent<UIPetHpComponent>();
+            unit.RemoveComponent<UIPlayerHpComponent>();
             if (args.PetConfigId == 0)
             {
-                unit.RemoveComponent<UIPetHpComponent>();
                 unit.AddComponent<UIPlayerHpComponent>();
             }
             else
             {
-                unit.RemoveComponent<UIPlayerHpComponent>();
                 unit.AddComponent<UIPetHpComponent>();
             }
 
