@@ -68,12 +68,7 @@
                         
                         if (petfightindex > 0)
                         {
-                            PetComponentC petComponentC = root.GetComponent<PetComponentC>();
-                            long petId = petComponentC.GetNowPetFightList()[petfightindex - 1].PetId;
-                            Unit pet = scene.GetComponent<UnitComponent>().Get(petId);
-                            
-                            // 切换成宠物特效
-                            //FunctionEffect.PlaySelfEffect(pet, 200004);
+                           
                         }
                         else
                         {

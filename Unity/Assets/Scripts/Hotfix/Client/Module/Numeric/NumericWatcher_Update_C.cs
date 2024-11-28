@@ -113,13 +113,10 @@ namespace ET.Client
             {
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                 Unit pet = currentScene.GetComponent<UnitComponent>().Get(petComponentC.GetNowPetFightList()[petfightindex - 1].PetId);
-
-                root.GetComponent<AttackComponent>().MainUnit = pet;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, pet.ConfigId);
             }
             else
             {
-                root.GetComponent<AttackComponent>().MainUnit = unit;
                 root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
             }
         }
