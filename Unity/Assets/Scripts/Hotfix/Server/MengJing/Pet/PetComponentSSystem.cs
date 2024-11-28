@@ -1417,6 +1417,28 @@ namespace ET.Server
             return petunit;
         }
 
+        public static bool HavePetByConfigId(this PetComponentS self, int configId)
+        {
+            for (int i = 0; i < self.RolePetInfos.Count; i++)
+            {
+                if (self.RolePetInfos[i].ConfigId == configId)
+                {
+                    return true;
+                }
+            }
+            
+            
+            for (int i = 0; i < self.RolePetBag.Count; i++)
+            {
+                if (self.RolePetBag[i].ConfigId == configId)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
         /// <summary>
         /// Get可以取缓存数据，不用读缓存数据库
         /// </summary>

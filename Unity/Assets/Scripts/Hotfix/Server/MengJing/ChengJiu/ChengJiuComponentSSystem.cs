@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace ET.Server
 {
 
@@ -47,9 +48,8 @@ namespace ET.Server
 
         public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
-            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-
-            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv);
+          
+            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv, false);
 
             Dictionary<int, JingLingConfig> alljingling = JingLingConfigCategory.Instance.GetAll();
             foreach (var JingLingConfig in alljingling)
@@ -62,6 +62,16 @@ namespace ET.Server
                 JingLingInfo jingLingInfo = JingLingInfo.Create();
                 jingLingInfo.JingLingID = JingLingConfig.Key;
                 self.JingLingList.Add( jingLingInfo );
+            }
+
+            PetComponentS petComponent = self.GetParent<Unit>().GetComponent<PetComponentS>();
+            Dictionary<int, PetTuJianConfig> pettujianlist = PetTuJianConfigCategory.Instance.GetAll();
+            foreach (var pettujian in pettujianlist)
+            {
+                if (petComponent.HavePetByConfigId(pettujian.Key))
+                {
+                    self.OnPetTuJianActive(pettujian.Key, false);
+                }
             }
         }
 
@@ -319,7 +329,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnPetTuJianActive(this ChengJiuComponentS self, int petId)
+        public static void OnPetTuJianActive(this ChengJiuComponentS self, int petId, bool notice)
         {
             if (self.PetTuJianActives.Contains(petId))
             {
@@ -327,9 +337,13 @@ namespace ET.Server
             }
             
             self.PetTuJianActives.Add(petId);
-            M2C_PetTuJianActiveMessage m2CJingLingActiveMessage = M2C_PetTuJianActiveMessage.Create();
-            m2CJingLingActiveMessage.PetTuJianActives = self.PetTuJianActives;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
+
+            if (notice)
+            {
+                M2C_PetTuJianActiveMessage m2CJingLingActiveMessage = M2C_PetTuJianActiveMessage.Create();
+                m2CJingLingActiveMessage.PetTuJianActives = self.PetTuJianActives;
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2CJingLingActiveMessage);
+            }
         }
 
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)

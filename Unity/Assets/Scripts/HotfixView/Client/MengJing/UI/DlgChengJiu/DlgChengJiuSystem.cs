@@ -5,6 +5,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_ChengJiuShow))]
     [FriendOf(typeof (ES_ChengJiuReward))]
     [FriendOf(typeof (DlgChengJiu))]
+    [FriendOf(typeof (ES_ChengJiuPetTuJian))]
     public static class DlgChengJiuSystem
     {
         public static void RegisterUIEvent(this DlgChengJiu self)
