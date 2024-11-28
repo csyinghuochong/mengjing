@@ -10,6 +10,7 @@ namespace ET.Client
 		public GameObject MainPetItem;
 		public GameObject AssistPetItem;
 		public GameObject SkillItem;
+		public PetMeleeInfo PetMeleeInfo;
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{

@@ -2481,9 +2481,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated PetBarInfo PetFightList_3 = 18;
 	repeated int32 PetBarConfigList = 19;
 	int32 PetMeleePlan = 20;
-	repeated int32 PetMeleeMainPetList = 21;
-	repeated int32 PetMeleeAssistPetList = 22;
-	repeated int32 PetMeleeSkillList = 23;
+	repeated PetMeleeInfo PetMeleeInfoList = 21;
 }
 
 
@@ -7262,6 +7260,42 @@ message ItemInfoProto
 	int32 EquipPlan = 26;
 	int32 EquipIndex = 27;
 	int32 FuLing = 28;    //0未附灵 1附灵
+}
+
+
+message PetMeleeInfo
+{
+	repeated int32 MainPetList = 1; // 宠物乱斗，主战宠物
+	repeated int32 AssistPetList = 2; // 宠物乱斗，辅战宠物
+	repeated int32 SkillList = 3; // 宠物乱斗，魔法卡牌
+}
+
+//ResponseType M2C_PetMeleePlanResponse
+message C2M_PetMeleePlanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 PetMeleePlan = 1;
+}
+
+message M2C_PetMeleePlanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetMeleeSetResponse
+message C2M_PetMeleeSetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	PetMeleeInfo PetMeleeInfo = 5;
+}
+
+message M2C_PetMeleeSetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
 }
 
 //ResponseType M2C_PetMeleePlace

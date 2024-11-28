@@ -29,9 +29,7 @@
             response.PetBarConfigList.AddRange(petComponent.PetBarConfigList);
             
             response.PetMeleePlan = petComponent.PetMeleePlan;
-            response.PetMeleeMainPetList.AddRange(petComponent.PetMeleeMainPetList);
-            response.PetMeleeAssistPetList.AddRange(petComponent.PetMeleeAssistPetList);
-            response.PetMeleeSkillList.AddRange(petComponent.PetMeleeSkillList);
+            response.PetMeleeInfoList.AddRange(petComponent.PetMeleeInfoList);
             
             await ETTask.CompletedTask;
         }

@@ -10756,13 +10756,7 @@ namespace ET
         public int PetMeleePlan { get; set; }
 
         [MemoryPackOrder(20)]
-        public List<int> PetMeleeMainPetList { get; set; } = new();
-
-        [MemoryPackOrder(21)]
-        public List<int> PetMeleeAssistPetList { get; set; } = new();
-
-        [MemoryPackOrder(22)]
-        public List<int> PetMeleeSkillList { get; set; } = new();
+        public List<PetMeleeInfo> PetMeleeInfoList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -10793,9 +10787,7 @@ namespace ET
             this.PetFightList_3.Clear();
             this.PetBarConfigList.Clear();
             this.PetMeleePlan = default;
-            this.PetMeleeMainPetList.Clear();
-            this.PetMeleeAssistPetList.Clear();
-            this.PetMeleeSkillList.Clear();
+            this.PetMeleeInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31620,6 +31612,174 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.PetMeleeInfo)]
+    public partial class PetMeleeInfo : MessageObject
+    {
+        public static PetMeleeInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMeleeInfo), isFromPool) as PetMeleeInfo;
+        }
+
+        /// <summary>
+        /// 宠物乱斗，主战宠物
+        /// </summary>
+        [MemoryPackOrder(0)]
+        public List<int> MainPetList { get; set; } = new();
+
+        /// <summary>
+        /// 宠物乱斗，辅战宠物
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public List<int> AssistPetList { get; set; } = new();
+
+        /// <summary>
+        /// 宠物乱斗，魔法卡牌
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public List<int> SkillList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.MainPetList.Clear();
+            this.AssistPetList.Clear();
+            this.SkillList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleePlanRequest)]
+    [ResponseType(nameof(M2C_PetMeleePlanResponse))]
+    public partial class C2M_PetMeleePlanRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleePlanRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleePlanRequest), isFromPool) as C2M_PetMeleePlanRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int PetMeleePlan { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.PetMeleePlan = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleePlanResponse)]
+    public partial class M2C_PetMeleePlanResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleePlanResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleePlanResponse), isFromPool) as M2C_PetMeleePlanResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeSetRequest)]
+    [ResponseType(nameof(M2C_PetMeleeSetResponse))]
+    public partial class C2M_PetMeleeSetRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeSetRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeSetRequest), isFromPool) as C2M_PetMeleeSetRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(4)]
+        public PetMeleeInfo PetMeleeInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.PetMeleeInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeSetResponse)]
+    public partial class M2C_PetMeleeSetResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeSetResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeSetResponse), isFromPool) as M2C_PetMeleeSetResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // 宠物大战放置位置   前后端 ui命名都要一直 方便查找
     [MemoryPackable]
     [Message(OuterMessage.C2M_PetMeleePlace)]
@@ -32591,9 +32751,14 @@ namespace ET
         public const ushort Popularize2C_RewardResponse = 10837;
         public const ushort TestServerInfoProto = 10838;
         public const ushort ItemInfoProto = 10839;
-        public const ushort C2M_PetMeleePlace = 10840;
-        public const ushort M2C_PetMeleePlace = 10841;
-        public const ushort C2M_PetMeleeBegin = 10842;
-        public const ushort M2C_PetMeleeBegin = 10843;
+        public const ushort PetMeleeInfo = 10840;
+        public const ushort C2M_PetMeleePlanRequest = 10841;
+        public const ushort M2C_PetMeleePlanResponse = 10842;
+        public const ushort C2M_PetMeleeSetRequest = 10843;
+        public const ushort M2C_PetMeleeSetResponse = 10844;
+        public const ushort C2M_PetMeleePlace = 10845;
+        public const ushort M2C_PetMeleePlace = 10846;
+        public const ushort C2M_PetMeleeBegin = 10847;
+        public const ushort M2C_PetMeleeBegin = 10848;
     }
 }

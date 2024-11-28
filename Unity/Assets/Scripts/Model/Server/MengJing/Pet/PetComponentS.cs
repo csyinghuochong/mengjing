@@ -24,9 +24,7 @@ namespace ET.Server
         public List<int> PetBarConfigList { get; set; } = new();
 
         public int PetMeleePlan { get; set; }
-        public List<int> PetMeleeMainPetList { get; set; } = new(); // 宠物乱斗，主战宠物
-        public List<int> PetMeleeAssistPetList { get; set; } = new(); // 宠物乱斗，辅战宠物
-        public List<int> PetMeleeSkillList { get; set; } = new(); // 宠物乱斗，魔法卡牌
+        public List<PetMeleeInfo> PetMeleeInfoList { get; set; } = new();
         
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
         public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 

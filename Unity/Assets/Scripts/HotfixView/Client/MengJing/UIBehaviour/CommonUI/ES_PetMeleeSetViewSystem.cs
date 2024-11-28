@@ -11,7 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_PetMeleeSet self, Transform transform)
         {
             self.uiTransform = transform;
-            
+
             self.E_PlanSetToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 
             self.E_SetMainButton.AddListener(self.OnSetMain);
@@ -24,6 +24,8 @@ namespace ET.Client
             self.AssistPetItem.SetActive(false);
             self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
             self.SkillItem.SetActive(false);
+
+            self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
         }
 
         [EntitySystem]
@@ -36,9 +38,33 @@ namespace ET.Client
         {
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
 
-            if (petComponentC.PetFightPlan != index)
+            if (petComponentC.PetMeleePlan != index)
             {
+                int error = await PetNetHelper.RequestPetMeleePlan(self.Root(), index);
+
+                if (error == ErrorCode.ERR_Success)
+                {
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物乱斗切换 {0}", index));
+                    }
+                }
             }
+
+            // 复制一份
+            if (self.PetMeleeInfo == null)
+            {
+                self.PetMeleeInfo = PetMeleeInfo.Create();
+            }
+
+            self.PetMeleeInfo.MainPetList.Clear();
+            self.PetMeleeInfo.AssistPetList.Clear();
+            self.PetMeleeInfo.SkillList.Clear();
+
+            PetMeleeInfo petMeleeInfo = petComponentC.PetMeleeInfoList[petComponentC.PetMeleePlan];
+            self.PetMeleeInfo.MainPetList.AddRange(petMeleeInfo.MainPetList);
+            self.PetMeleeInfo.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
+            self.PetMeleeInfo.SkillList.AddRange(petMeleeInfo.SkillList);
 
             await ETTask.CompletedTask;
         }
@@ -53,6 +79,15 @@ namespace ET.Client
 
         private static void OnSetSkill(this ES_PetMeleeSet self)
         {
+        }
+
+        private static async ETTask OnConfirm(this ES_PetMeleeSet self)
+        {
+            int error = await PetNetHelper.RequestPetMeleeSet(self.Root(), self.PetMeleeInfo);
+            if (error == ErrorCode.ERR_Success)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("设置成功！");
+            }
         }
     }
 }

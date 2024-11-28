@@ -405,6 +405,21 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetMeleePlan(Scene root, int plan)
+        {
+            C2M_PetMeleePlanRequest request = C2M_PetMeleePlanRequest.Create();
+            request.PetMeleePlan = plan;
+
+            M2C_PetMeleePlanResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetMeleePlanResponse;
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().PetMeleePlan = plan;
+            }
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestPetBarSet(Scene root, List<PetBarInfo> petBarInfos)
         {
             C2M_PetBarSetRequest request = C2M_PetBarSetRequest.Create();
@@ -414,9 +429,33 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponentC>().GetNowPetFightList().Clear();
+                PetComponentC petComponent = root.GetComponent<PetComponentC>();
+                foreach (PetBarInfo petBarInfo in petComponent.GetNowPetFightList())
+                {
+                    petBarInfo.Dispose();
+                }
+
+                petComponent.GetNowPetFightList().Clear();
                 root.GetComponent<PetComponentC>().GetNowPetFightList().AddRange(petBarInfos);
+
                 EventSystem.Instance.Publish(root, new PetBarUpdate());
+            }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetMeleeSet(Scene root, PetMeleeInfo petMeleeInfo)
+        {
+            C2M_PetMeleeSetRequest request = C2M_PetMeleeSetRequest.Create();
+            request.PetMeleeInfo = petMeleeInfo;
+
+            M2C_PetMeleeSetResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetMeleeSetResponse;
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                PetComponentC petComponent = root.GetComponent<PetComponentC>();
+                petComponent.PetMeleeInfoList[petComponent.PetMeleePlan].Dispose();
+                petComponent.PetMeleeInfoList[petComponent.PetMeleePlan] = petMeleeInfo;
             }
 
             return response.Error;

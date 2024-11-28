@@ -155,6 +155,14 @@ namespace ET.Server
                 self.PetBarConfigList.Add(300001);
             }
 
+            if (self.PetMeleeInfoList.Count != 3)
+            {
+                self.PetMeleeInfoList.Clear();
+                self.PetMeleeInfoList.Add(PetMeleeInfo.Create());
+                self.PetMeleeInfoList.Add(PetMeleeInfo.Create());
+                self.PetMeleeInfoList.Add(PetMeleeInfo.Create());
+            }
+            
             if ( self.PetShouHuList.Count != 4)
             {
                 self.PetShouHuList.Clear();
