@@ -7,8 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_MainPetFight : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		private EntityRef<Unit> pet;
-		public Unit Pet { get => this.pet; set => this.pet = value; }
+
 		public int FightIndex;
 		public long Timer;
 		public bool LongPress;

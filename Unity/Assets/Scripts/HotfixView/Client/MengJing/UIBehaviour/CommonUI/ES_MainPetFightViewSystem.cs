@@ -156,22 +156,8 @@ namespace ET.Client
                 // self.E_PetHPImage.fillAmount = 0f;
                 // return;
             }
-            self.Pet = pet;
         }
-
-        public static void UpdateHp(this ES_MainPetFight self)
-        {
-            if (self.Pet == null || self.Pet.IsDisposed || !self.uiTransform.gameObject.activeSelf)
-            {
-                return;
-            }
-
-            NumericComponentC numericComponent = self.Pet.GetComponent<NumericComponentC>();
-            float curhp = numericComponent.GetAsLong(NumericType.Now_Hp);
-            float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            self.E_PetHPImage.fillAmount = blood;
-        }
-
+        
         public static async ETTask OpenUI(this ES_MainPetFight self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight);
