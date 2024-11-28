@@ -71,9 +71,9 @@ namespace ET.Server
             m2CPathfindingResult.Points.Add(unit.Position);
             m2CPathfindingResult.Points.Add(unit.Position + (target - unit.Position) * 0.5f);
             m2CPathfindingResult.Points.Add(target);
-
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;
+            m2CPathfindingResult.SpeedRate = 100;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();

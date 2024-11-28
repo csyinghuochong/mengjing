@@ -239,7 +239,6 @@ namespace ET.Client
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
                     self.DelayShow = (long)(1000 * effectConfig.SkillEffectDelayTime);
                     self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
-                    ;
                     break;
                 case UnitType.Npc:
                     int npcId = unit.ConfigId;
