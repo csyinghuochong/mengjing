@@ -1246,9 +1246,8 @@ namespace ET.Client
 
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                 long petId = petComponentC.GetNowPetFightList()[petfightindex - 1].PetId;
-                Unit pet = currentScene.GetComponent<UnitComponent>().Get(petId);
                 
-                self.View.ES_MainSkill.OnEnterScene(pet);
+                self.View.ES_MainSkill.OnEnterScene(unit, petId);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
                 self.View.E_TextPetSwitch.text = "600";
                 self.MainPetSwitchEndTime = TimeHelper.ServerNow() + TimeHelper.Second * 600;
@@ -1257,7 +1256,7 @@ namespace ET.Client
             else
             {
                 // FlyTipComponent.Instance.ShowFlyTip("切换成英雄");
-                self.View.ES_MainSkill.OnEnterScene(unit);
+                self.View.ES_MainSkill.OnEnterScene(unit, 0);
                 self.View.ES_MainSkill.OnPetFightSwitch(0);
                 self.View.E_TextPetSwitch.text = string.Empty;
                 self.MainPetSwitchEndTime = 0;

@@ -735,10 +735,15 @@ namespace ET.Client
             self.ES_FangunSkill.OnUpdate(self.SkillManagerComponent.GetCdTime(self.ES_FangunSkill.SkillId, serverTime));
         }
 
-        public static void OnEnterScene(this ES_MainSkill self, Unit unit)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="main"></param>
+        /// <param name="petid"></param>
+        public static void OnEnterScene(this ES_MainSkill self, Unit main, long petid)
         {
-            self.MainUnit = unit;
-            self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
+            self.MainUnit = main;
             self.OnSkillCDUpdate();
             self.CheckJingLingFunction();
             self.OnUpdateButton();
