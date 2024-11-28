@@ -50,11 +50,17 @@ namespace ET.Client
             switch (unitDefend.Type)
             {
                 case UnitType.Player:
-                    UIPlayerHpComponent heroHeadBarComponent = unitDefend.GetComponent<UIPlayerHpComponent>();
-                    if (heroHeadBarComponent != null)
+                    UIPlayerHpComponent uiPlayerHpComponent = unitDefend.GetComponent<UIPlayerHpComponent>();
+                    if (uiPlayerHpComponent != null)
                     {
-                        HpGameObject = heroHeadBarComponent.GameObject;
-                        heroHeadBarComponent.UpdateBlood();
+                        HpGameObject = uiPlayerHpComponent.GameObject;
+                        uiPlayerHpComponent.UpdateBlood();
+                    }
+                    UIPetHpComponent uiPetHpComponent = unitDefend.GetComponent<UIPetHpComponent>();
+                    if (uiPetHpComponent != null)
+                    {
+                        HpGameObject = uiPetHpComponent.GameObject;
+                        uiPetHpComponent.UpdateBlood();
                     }
 
                     break;
