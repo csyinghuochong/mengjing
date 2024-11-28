@@ -11,7 +11,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, PetBarUpgrade args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetBar>()?.ES_PetBarSet.E_SkillTypeSetToggleGroup.OnSelectIndex(0);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetBar>()?.View.ES_PetBarSet.E_SkillTypeSetToggleGroup.OnSelectIndex(0);
             await ETTask.CompletedTask;
         }
     }

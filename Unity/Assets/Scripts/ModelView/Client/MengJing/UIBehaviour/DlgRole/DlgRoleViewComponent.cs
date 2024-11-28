@@ -112,6 +112,96 @@ namespace ET.Client
      		}
      	}
 
+        public ES_RoleBag ES_RoleBag
+        {
+            get
+            {
+                ES_RoleBag es = this.m_es_rolebag;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleBag.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rolebag = this.AddChild<ES_RoleBag, Transform>(go.transform);
+                }
+
+                return this.m_es_rolebag;
+            }
+        }
+
+        public ES_RoleProperty ES_RoleProperty
+        {
+            get
+            {
+                ES_RoleProperty es = this.m_es_roleproperty;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleProperty.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_roleproperty = this.AddChild<ES_RoleProperty, Transform>(go.transform);
+                }
+
+                return this.m_es_roleproperty;
+            }
+        }
+
+        public ES_RoleGem ES_RoleGem
+        {
+            get
+            {
+                ES_RoleGem es = this.m_es_rolegem;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleGem.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rolegem = this.AddChild<ES_RoleGem, Transform>(go.transform);
+                }
+
+                return this.m_es_rolegem;
+            }
+        }
+
+        public ES_RoleHuiShou ES_RoleHuiShou
+        {
+            get
+            {
+                ES_RoleHuiShou es = this.m_es_rolehuishou;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleHuiShou.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou, Transform>(go.transform);
+                }
+
+                return this.m_es_rolehuishou;
+            }
+        }
+
+        public ES_RoleQiangHua ES_RoleQiangHua
+        {
+            get
+            {
+                ES_RoleQiangHua es = this.m_es_roleqianghua;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleQiangHua.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua, Transform>(go.transform);
+                }
+
+                return this.m_es_roleqianghua;
+            }
+        }
+		
 		public void DestroyWidget()
 		{
 			this.m_es_equipset = null;
@@ -120,6 +210,11 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_Type_PropertyToggle = null;
+			this.m_es_rolebag = null;
+			this.m_es_roleproperty = null;
+			this.m_es_rolegem = null;
+			this.m_es_rolehuishou = null;
+			this.m_es_roleqianghua = null;
 			this.uiTransform = null;
 		}
 
@@ -129,6 +224,11 @@ namespace ET.Client
 		private RectTransform m_EG_SubViewRectTransform = null;
 		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private Toggle m_E_Type_PropertyToggle = null;
+		private EntityRef<ES_RoleBag> m_es_rolebag = null;
+		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
+		private EntityRef<ES_RoleGem> m_es_rolegem = null;
+		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
+		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		public Transform uiTransform = null;
 	}
 }

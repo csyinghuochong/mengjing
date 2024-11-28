@@ -41,15 +41,75 @@ namespace ET.Client
      		}
      	}
 
+        public ES_CountryTask ES_CountryTask
+        {
+            get
+            {
+                ES_CountryTask es = this.m_es_countrytask;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_CountryTask.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_countrytask = this.AddChild<ES_CountryTask, Transform>(go.transform);
+                }
+
+                return this.m_es_countrytask;
+            }
+        }
+
+        public ES_CountryHuoDong ES_CountryHuoDong
+        {
+            get
+            {
+                ES_CountryHuoDong es = this.m_es_countryhuodong;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_CountryHuoDong.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_countryhuodong = this.AddChild<ES_CountryHuoDong, Transform>(go.transform);
+                }
+
+                return this.m_es_countryhuodong;
+            }
+        }
+
+        public ES_ActivitySingIn ES_ActivitySingIn
+        {
+            get
+            {
+                ES_ActivitySingIn es = this.m_es_activitysingin;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivitySingIn.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_activitysingin = this.AddChild<ES_ActivitySingIn, Transform>(go.transform);
+                }
+
+                return this.m_es_activitysingin;
+            }
+        }
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_countrytask = null;
+			this.m_es_countryhuodong = null;
+			this.m_es_activitysingin = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_CountryTask> m_es_countrytask = null;
+		private EntityRef<ES_CountryHuoDong> m_es_countryhuodong = null;
+		private EntityRef<ES_ActivitySingIn> m_es_activitysingin = null;
 		public Transform uiTransform = null;
 	}
 }

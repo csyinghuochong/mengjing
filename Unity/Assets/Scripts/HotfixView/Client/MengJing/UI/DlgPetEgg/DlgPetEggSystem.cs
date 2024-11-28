@@ -23,30 +23,30 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_PetEggList.uiTransform.gameObject.SetActive(true);
-                    self.ES_PetEggList.OnUpdateUI();
+                    self.View.ES_PetEggList.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetEggList.OnUpdateUI();
                     break;
                 case 1:
-                    self.ES_PetEggDuiHuan.uiTransform.gameObject.SetActive(true);
-                    self.ES_PetEggDuiHuan.OnUpdateUI();
+                    self.View.ES_PetEggDuiHuan.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetEggDuiHuan.OnUpdateUI();
                     break;
                 case 2:
-                    self.ES_PetEggChouKa.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetEggChouKa.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.ES_PetHeXinChouKa.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetHeXinChouKa.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
 
         public static void OnRolePetEggOpen(this DlgPetEgg self)
         {
-            self.ES_PetEggList.UpdatePetEggUI();
+            self.View.ES_PetEggList.UpdatePetEggUI();
         }
 
         public static void OnUpdateLuckly(this DlgPetEgg self)
         {
-            self.ES_PetEggChouKa.OnUpdateInfo();
+            self.View.ES_PetEggChouKa.OnUpdateInfo();
         }
 
         public static void UpdateChouKaTime(this DlgPetEgg self)

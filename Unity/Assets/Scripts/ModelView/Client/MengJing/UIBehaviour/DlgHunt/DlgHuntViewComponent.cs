@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_HuntRanking ES_HuntRanking
+		{
+			get
+			{
+				ES_HuntRanking es = this.m_es_huntranking;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_HuntRanking.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_huntranking = this.AddChild<ES_HuntRanking, Transform>(go.transform);
+				}
+
+				return this.m_es_huntranking;
+			}
+		}
+
+		public ES_HuntTask ES_HuntTask
+		{
+			get
+			{
+				ES_HuntTask es = this.m_es_hunttask;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_HuntTask.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_hunttask = this.AddChild<ES_HuntTask, Transform>(go.transform);
+				}
+
+				return this.m_es_hunttask;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_huntranking = null;
+			this.m_es_hunttask = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_HuntRanking> m_es_huntranking = null;
+		private EntityRef<ES_HuntTask> m_es_hunttask = null;
 		public Transform uiTransform = null;
 	}
 }

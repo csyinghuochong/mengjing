@@ -20,7 +20,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_JueXingShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JueXingShow.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

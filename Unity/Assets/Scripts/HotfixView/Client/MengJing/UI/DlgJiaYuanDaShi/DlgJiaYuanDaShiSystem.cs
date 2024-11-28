@@ -22,12 +22,12 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
-                    self.ES_JiaYuanDaShiPro.OnUpdateUI();
+                    self.View.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanDaShiPro.OnUpdateUI();
                     break;
                 case 1:
-                    self.ES_JiaYuanDaShiShow.uiTransform.gameObject.SetActive(true);
-                    self.ES_JiaYuanDaShiShow.OnUpdateUI();
+                    self.View.ES_JiaYuanDaShiShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanDaShiShow.OnUpdateUI();
                     break;
             }
         }

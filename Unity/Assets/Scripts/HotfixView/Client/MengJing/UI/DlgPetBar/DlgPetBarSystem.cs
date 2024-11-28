@@ -27,10 +27,10 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_PetBarSet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetBarSet.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_PetBarUpgrade.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetBarUpgrade.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

@@ -41,15 +41,55 @@ namespace ET.Client
      		}
      	}
 
+		public ES_PetBarSet ES_PetBarSet
+		{
+			get
+			{
+				ES_PetBarSet es = this.m_es_petBarSet;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetBarSet.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_petBarSet = this.AddChild<ES_PetBarSet, Transform>(go.transform);
+				}
+
+				return this.m_es_petBarSet;
+			}
+		}
+
+		public ES_PetBarUpgrade ES_PetBarUpgrade
+		{
+			get
+			{
+				ES_PetBarUpgrade es = this.m_es_petBarUpgrade;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetBarUpgrade.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_petBarUpgrade = this.AddChild<ES_PetBarUpgrade, Transform>(go.transform);
+				}
+
+				return this.m_es_petBarUpgrade;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_petBarSet = null;
+			this.m_es_petBarUpgrade = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_PetBarSet> m_es_petBarSet = null;
+		private EntityRef<ES_PetBarUpgrade> m_es_petBarUpgrade = null;
 		public Transform uiTransform = null;
 	}
 }

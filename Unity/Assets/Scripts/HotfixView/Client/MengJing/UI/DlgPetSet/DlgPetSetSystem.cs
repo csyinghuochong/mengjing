@@ -35,11 +35,11 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_PetChallenge.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetChallenge.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_PetMining.uiTransform.gameObject.SetActive(true);
-                    self.ES_PetMining.OnUpdateUI();
+                    self.View.ES_PetMining.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetMining.OnUpdateUI();
                     break;
             }
         }

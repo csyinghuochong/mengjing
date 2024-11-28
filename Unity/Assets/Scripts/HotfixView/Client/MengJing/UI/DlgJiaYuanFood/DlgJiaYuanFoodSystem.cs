@@ -5,7 +5,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanFood>()?.ES_JiaYuanCooking.OnHuiShouSelect(args.DataParamString);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanFood>()?.View.ES_JiaYuanCooking.OnHuiShouSelect(args.DataParamString);
             await ETTask.CompletedTask;
         }
     }
@@ -33,14 +33,14 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_JiaYuanPurchase.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanPurchase.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_JiaYuanCooking.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanCooking.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_JiaYuanCookbook.uiTransform.gameObject.SetActive(true);
-                    self.ES_JiaYuanCookbook.OnUpdateUI();
+                    self.View.ES_JiaYuanCookbook.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanCookbook.OnUpdateUI();
                     break;
             }
         }

@@ -20,7 +20,7 @@
             switch (index)
             {
                 case 0:
-                    self.ES_PetMeleeSet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetMeleeSet.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

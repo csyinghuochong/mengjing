@@ -41,15 +41,95 @@ namespace ET.Client
      		}
      	}
 
+        public ES_PaiMaiShop ES_PaiMaiShop
+        {
+            get
+            {
+                ES_PaiMaiShop es = this.m_es_paimaishop;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PaiMaiShop.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_paimaishop = this.AddChild<ES_PaiMaiShop, Transform>(go.transform);
+                }
+
+                return this.m_es_paimaishop;
+            }
+        }
+
+        public ES_PaiMaiBuy ES_PaiMaiBuy
+        {
+            get
+            {
+                ES_PaiMaiBuy es = this.m_es_paimaibuy;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PaiMaiBuy.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_paimaibuy = this.AddChild<ES_PaiMaiBuy, Transform>(go.transform);
+                }
+
+                return this.m_es_paimaibuy;
+            }
+        }
+
+        public ES_PaiMaiSell ES_PaiMaiSell
+        {
+            get
+            {
+                ES_PaiMaiSell es = this.m_es_paimaisell;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PaiMaiSell.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_paimaisell = this.AddChild<ES_PaiMaiSell, Transform>(go.transform);
+                }
+
+                return this.m_es_paimaisell;
+            }
+        }
+
+        public ES_PaiMaiDuiHuan ES_PaiMaiDuiHuan
+        {
+            get
+            {
+                ES_PaiMaiDuiHuan es = this.m_es_paimaiduihuan;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PaiMaiDuiHuan.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_paimaiduihuan = this.AddChild<ES_PaiMaiDuiHuan, Transform>(go.transform);
+                }
+
+                return this.m_es_paimaiduihuan;
+            }
+        }
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_paimaishop = null;
+			this.m_es_paimaibuy = null;
+			this.m_es_paimaisell = null;
+			this.m_es_paimaiduihuan = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_PaiMaiShop> m_es_paimaishop = null;
+		private EntityRef<ES_PaiMaiBuy> m_es_paimaibuy = null;
+		private EntityRef<ES_PaiMaiSell> m_es_paimaisell = null;
+		private EntityRef<ES_PaiMaiDuiHuan> m_es_paimaiduihuan = null;
 		public Transform uiTransform = null;
 	}
 }

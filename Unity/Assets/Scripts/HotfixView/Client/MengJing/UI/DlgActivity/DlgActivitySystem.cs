@@ -37,20 +37,20 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_ActivityYueKa.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivityYueKa.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_ActivityMaoXian.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivityMaoXian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.ES_ActivityToken.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivityToken.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.ES_ActivityTeHui.uiTransform.gameObject.SetActive(true);
-                    self.ES_ActivityTeHui.OnUpdateUI();
+                    self.View.ES_ActivityTeHui.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivityTeHui.OnUpdateUI();
                     break;
                 case 4:
-                    self.ES_ActivitySingleRecharge.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ActivitySingleRecharge.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

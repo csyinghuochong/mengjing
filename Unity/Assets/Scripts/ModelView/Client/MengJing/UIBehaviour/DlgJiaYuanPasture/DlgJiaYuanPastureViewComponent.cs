@@ -61,17 +61,57 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanPasture_A ES_JiaYuanPasture_A
+		{
+			get
+			{
+				ES_JiaYuanPasture_A es = this.m_es_jiayuanpasture_a;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JiaYuanPasture_A.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_jiayuanpasture_a = this.AddChild<ES_JiaYuanPasture_A, Transform>(go.transform);
+				}
+
+				return this.m_es_jiayuanpasture_a;
+			}
+		}
+
+		public ES_JiaYuanPasture_B ES_JiaYuanPasture_B
+		{
+			get
+			{
+				ES_JiaYuanPasture_B es = this.m_es_jiayuanpasture_b;
+				if (es == null)
+				{
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JiaYuanPasture_B.prefab");
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.m_es_jiayuanpasture_b = this.AddChild<ES_JiaYuanPasture_B, Transform>(go.transform);
+				}
+
+				return this.m_es_jiayuanpasture_b;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_es_modelshow = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_jiayuanpasture_a = null;
+			this.m_es_jiayuanpasture_b = null;
 			this.uiTransform = null;
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_JiaYuanPasture_A> m_es_jiayuanpasture_a = null;
+		private EntityRef<ES_JiaYuanPasture_B> m_es_jiayuanpasture_b = null;
 		public Transform uiTransform = null;
 	}
 }

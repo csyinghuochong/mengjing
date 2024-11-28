@@ -22,15 +22,15 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_BattleEnter.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_BattleEnter.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_BattleTask.uiTransform.gameObject.SetActive(true);
-                    self.ES_BattleTask.OnUpdateUI();
+                    self.View.ES_BattleTask.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_BattleTask.OnUpdateUI();
                     break;
                 case 2:
-                    self.ES_BattleShop.uiTransform.gameObject.SetActive(true);
-                    self.ES_BattleShop.OnUpdateUI();
+                    self.View.ES_BattleShop.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_BattleShop.OnUpdateUI();
                     break;
             }
         }

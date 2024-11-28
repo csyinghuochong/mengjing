@@ -41,15 +41,95 @@ namespace ET.Client
      		}
      	}
 
+        public ES_RankShow ES_RankShow
+        {
+            get
+            {
+                ES_RankShow es = this.m_es_rankshow;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RankShow.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rankshow = this.AddChild<ES_RankShow, Transform>(go.transform);
+                }
+
+                return this.m_es_rankshow;
+            }
+        }
+
+        public ES_RankPet ES_RankPet
+        {
+            get
+            {
+                ES_RankPet es = this.m_es_rankpet;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RankPet.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rankpet = this.AddChild<ES_RankPet, Transform>(go.transform);
+                }
+
+                return this.m_es_rankpet;
+            }
+        }
+
+        public ES_RankReward ES_RankReward
+        {
+            get
+            {
+                ES_RankReward es = this.m_es_rankreward;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RankReward.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rankreward = this.AddChild<ES_RankReward, Transform>(go.transform);
+                }
+
+                return this.m_es_rankreward;
+            }
+        }
+
+        public ES_RankPetReward ES_RankPetReward
+        {
+            get
+            {
+                ES_RankPetReward es = this.m_es_rankpetreward;
+                if (es == null)
+                {
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RankPetReward.prefab");
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(false);
+                    this.m_es_rankpetreward = this.AddChild<ES_RankPetReward, Transform>(go.transform);
+                }
+
+                return this.m_es_rankpetreward;
+            }
+        }
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_es_rankshow = null;
+			this.m_es_rankpet = null;
+			this.m_es_rankreward = null;
+			this.m_es_rankpetreward = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private EntityRef<ES_RankShow> m_es_rankshow = null;
+		private EntityRef<ES_RankPet> m_es_rankpet = null;
+		private EntityRef<ES_RankReward> m_es_rankreward = null;
+		private EntityRef<ES_RankPetReward> m_es_rankpetreward = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -5,7 +5,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, PetItemSelect args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.ES_JiaYuanPetWalk.PetItemSelect(args.DataParamString);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.View.ES_JiaYuanPetWalk.PetItemSelect(args.DataParamString);
             await ETTask.CompletedTask;
         }
     }
@@ -32,10 +32,10 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_JiaYuanPetWalk.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanPetWalk.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.ES_PetCangKu.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetCangKu.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
