@@ -140,7 +140,7 @@ namespace ET.Client
             }
 
             self.E_ProgressImgImage.fillAmount =progress * 1f / jingLingConfig.NeedPoint;
-
+            self.E_UnactivateText.gameObject.SetActive(true);
             if (progress == 1)
             {
                 self.E_UnactivateText.text = "已激活";
