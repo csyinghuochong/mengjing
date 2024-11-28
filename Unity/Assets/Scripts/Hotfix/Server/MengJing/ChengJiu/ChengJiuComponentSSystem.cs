@@ -46,6 +46,20 @@ namespace ET.Server
             return proList;
         }
 
+        public static List<PropertyValue> GetPetTuJianProLists(this ChengJiuComponentS self)
+        {
+            List<PropertyValue> proList = new List<PropertyValue>();
+
+            for (int i = 0; i < self.PetTuJianActives.Count; i++)
+            {
+                PetTuJianConfig jinglingCof = PetTuJianConfigCategory.Instance.Get(self.PetTuJianActives[i]);
+                NumericHelp.GetProList(jinglingCof.AddProperty, proList);
+            }
+
+            
+            return proList;
+        }
+        
         public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
             self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv, false);

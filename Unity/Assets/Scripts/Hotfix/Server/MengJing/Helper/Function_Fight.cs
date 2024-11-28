@@ -2018,6 +2018,13 @@ namespace ET.Server
              {
                  AddUpdateProDicList(jinglingProList[i].HideID, jinglingProList[i].HideValue, UpdateProDicList);
              }
+             
+             //宠物图鉴属性
+             List<PropertyValue> pettujianProList = unit.GetComponent<ChengJiuComponentS>().GetPetTuJianProLists();
+             for (int i = 0; i < pettujianProList.Count; i++)
+             {
+                 AddUpdateProDicList(pettujianProList[i].HideID, pettujianProList[i].HideValue, UpdateProDicList);
+             }
 
              //家族修炼属性
              int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
