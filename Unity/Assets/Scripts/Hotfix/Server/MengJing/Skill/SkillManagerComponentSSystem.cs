@@ -480,6 +480,12 @@ namespace ET.Server
                   {
                       continue;
                   }
+                  
+                  if (skillHandler.SkillConf.SkillName.Equals(ConfigData.Skill_XuanZhuan_Attack_2))
+                  {
+                      ifStop = true;
+                  }
+                  
                   //打断
                   if (ifStop)
                   {

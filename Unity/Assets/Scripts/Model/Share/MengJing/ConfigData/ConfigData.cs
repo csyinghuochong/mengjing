@@ -17,6 +17,8 @@ namespace ET
         public const int PetFramgeItemId = 10000152;
         
         public const int PetMianShangBuff = 97020003;
+
+        public const string Skill_XuanZhuan_Attack_2 = "Skill_XuanZhuan_Attack_2";
         
 
         /// <summary>

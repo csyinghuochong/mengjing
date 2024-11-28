@@ -212,7 +212,7 @@ namespace ET.Client
 
             Vector2 indicator = self.NewPoint - self.OldPoint;
             int angle = 90 - (int)(Mathf.Atan2(indicator.y, indicator.x) * Mathf.Rad2Deg) + (int)self.MainCamera.transform.eulerAngles.y;
-            angle = ( angle  - angle % 20 );
+            angle = ( angle  - angle % 5 );
             return angle;
         }
 
@@ -380,6 +380,19 @@ namespace ET.Client
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
             int errorCode = MoveHelper.IfCanMove(unit);
+            
+            if (errorCode == ErrorCode.ERR_CanNotMove_Rigidity)
+            {
+                SkillManagerComponentC skillManager = unit.GetComponent<SkillManagerComponentC>();
+                if (skillManager.HaveSkillType(ConfigData.Skill_XuanZhuan_Attack_2))
+                {
+                    self.checkTime = 100;
+                    self.lastSendTime = clientNow;
+                    self.lastDirection = direction;
+                    MoveHelper.RequestSkillXuanZhuan( self.Root(), direction ).Coroutine();
+                    return;
+                }
+            }
             if (errorCode!= ErrorCode.ERR_Success)
             {
                   HintHelp.ShowErrorHint(unit.Root(), errorCode);

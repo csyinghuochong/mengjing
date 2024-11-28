@@ -28,7 +28,8 @@ namespace ET.Client
             {
                 return;
             }
-            int angle = (int)(skils.TheUnitFrom.Rotation.value).y;
+            float angle = MathHelper.QuaternionToEulerAngle_Y(skils.TheUnitFrom.Rotation.value);
+
             for (int i = 0; i < skils.EffectInstanceId.Count; i++)
             {
                 EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()

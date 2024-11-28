@@ -14,7 +14,6 @@ namespace ET.Client
             if (ErrorCode.ERR_Success != errorCode)
             {
                 stateComponent.CheckSilence();
-                return -1;
             }
 
             return errorCode;
@@ -84,5 +83,14 @@ namespace ET.Client
             c2MStop.Position = position;
             root.GetComponent<ClientSenderCompnent>().Send(c2MStop);
         }
+        
+        public static async ETTask<int> RequestSkillXuanZhuan(Scene root, int angle)
+        {
+            C2M_SkillXuanZhuanRequest c2M_SkillXuanZhuan = C2M_SkillXuanZhuanRequest.Create();
+            c2M_SkillXuanZhuan.Angle = angle;
+            M2C_SkillXuanZhuanResponse m2C_SkillXuanZhuan = (M2C_SkillXuanZhuanResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_SkillXuanZhuan);
+            return m2C_SkillXuanZhuan.Error;
+        }
+        
     }
 }
