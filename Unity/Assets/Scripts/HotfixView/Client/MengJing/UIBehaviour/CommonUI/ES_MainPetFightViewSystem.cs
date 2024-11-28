@@ -109,6 +109,12 @@ namespace ET.Client
             }
         }
 
+        /// <summary>
+        /// 切换到宠物 当前显示的玩家的血量
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="rolePetInfo"></param>
+        /// <param name="fightIndex"></param>
         public static void Refresh(this ES_MainPetFight self, RolePetInfo rolePetInfo, int fightIndex)
         {
             self.FightIndex = fightIndex;
@@ -122,16 +128,7 @@ namespace ET.Client
 
                 return;
             }
-
-            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
-            if (pet == null)
-            {
-                self.ResetSwitchCD();
-                self.E_PetHPImage.fillAmount = 0f;
-
-                return;
-            }
-
+            
             int leftTime = (int)(0.001f * (self.LastTimer - TimeHelper.ServerNow()));
             if (leftTime > 0)
             {
@@ -141,8 +138,7 @@ namespace ET.Client
             {
                 self.ResetSwitchCD();
             }
-
-            self.Pet = pet;
+            
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -150,6 +146,17 @@ namespace ET.Client
             self.E_PetIconImage.sprite = sp;
             self.E_PetLvText.gameObject.SetActive(true);
             self.E_PetLvText.text = rolePetInfo.PetLv.ToString();
+            
+            Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
+            
+            //切换到宠物 当前显示的玩家的血量
+            if (pet == null)
+            {
+                // self.ResetSwitchCD();
+                // self.E_PetHPImage.fillAmount = 0f;
+                // return;
+            }
+            self.Pet = pet;
         }
 
         public static void UpdateHp(this ES_MainPetFight self)
