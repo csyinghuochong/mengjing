@@ -48,7 +48,6 @@ namespace ET.Server
 
         public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
-          
             self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv, false);
 
             Dictionary<int, JingLingConfig> alljingling = JingLingConfigCategory.Instance.GetAll();

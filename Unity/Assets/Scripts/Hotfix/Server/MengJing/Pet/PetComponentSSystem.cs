@@ -589,10 +589,7 @@ namespace ET.Server
             self.UpdatePetAttribute(newpet, false);
             self.CheckPetPingFen();
             self.CheckPetZiZhi();
-
-            //unit.GetComponent<ChengJiuComponent>().OnGetPet(newpet);
-            //unit.GetComponent<TaskComponent>().OnGetPet(newpet);
-
+            
             if (ItemGetWay.PetExplore == getWay)
             {
                 self.RolePetBag.Add(newpet);
@@ -610,8 +607,12 @@ namespace ET.Server
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetUpdate);
             }
             
+            unit.GetComponent<ChengJiuComponentS>().OnPetTuJianActive(newpet.ConfigId, true);
+            unit.GetComponent<ChengJiuComponentS>().OnGetPet(newpet);
+            unit.GetComponent<TaskComponentS>().OnGetPet(newpet);
+            
             //如果有皮肤的话更新一次角色属性
-            //Function_Fight.GetInstance().UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
+            Function_Fight.UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
             return newpet;
         }
 
