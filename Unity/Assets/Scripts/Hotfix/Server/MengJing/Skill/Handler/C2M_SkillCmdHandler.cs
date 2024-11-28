@@ -11,18 +11,18 @@ namespace ET.Server
         {
             await ETTask.CompletedTask;
 
-            if (request.PetId > 0)//宠物释放技能
-            {
-                Unit unitpet = unit.GetParent<UnitComponent>().Get(request.PetId);
-                if (unitpet == null)
-                {
-                    response.Error = ErrorCode.ERR_Pet_NoExist;
-                    return;
-                }
-
-                unitpet.GetComponent<SkillManagerComponentS>().OnUseSkill(request);
-            }
-            else
+            // if (request.PetId > 0)//宠物释放技能 ===>>>> 全部改成由玩家释放。
+            // {
+            //     Unit unitpet = unit.GetParent<UnitComponent>().Get(request.PetId);
+            //     if (unitpet == null)
+            //     {
+            //         response.Error = ErrorCode.ERR_Pet_NoExist;
+            //         return;
+            //     }
+            //
+            //     unitpet.GetComponent<SkillManagerComponentS>().OnUseSkill(request);
+            // }
+            // else
             {
                 int juexingid = 0;
                 int occtwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
