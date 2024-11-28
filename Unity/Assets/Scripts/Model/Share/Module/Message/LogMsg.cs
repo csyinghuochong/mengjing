@@ -18,8 +18,8 @@ namespace ET
             OuterMessage.M2C_UnitBuffRemove,
             OuterMessage.M2C_UnitBuffStatus,
             OuterMessage.M2C_UnitBuffUpdate,
-            OuterMessage.C2M_SkillCmd,
-            OuterMessage.M2C_SkillCmd,
+            //OuterMessage.C2M_SkillCmd,
+            //OuterMessage.M2C_SkillCmd,
             OuterMessage.M2C_UnitUseSkill,
             OuterMessage.M2C_HorseNoticeInfo,
         };
