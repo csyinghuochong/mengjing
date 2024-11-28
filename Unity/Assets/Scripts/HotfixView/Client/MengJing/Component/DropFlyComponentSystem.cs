@@ -78,7 +78,7 @@ namespace ET.Client
         {
             if (self.IsDisposed || formId != self.InstanceId || self.MyUnit.IsDisposed || self.TargetUnit.IsDisposed)
             {
-                self.RecoveryGameObject(gameObject);
+                GameObject.Destroy(gameObject);
                 return;
             }
 

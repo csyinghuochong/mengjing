@@ -152,7 +152,7 @@ namespace ET.Client
         {
             if (self.IsDisposed)
             {
-                self.RecoverGameObject(gameObject);
+                GameObject.DestroyImmediate(gameObject);
                 return;
             }
 

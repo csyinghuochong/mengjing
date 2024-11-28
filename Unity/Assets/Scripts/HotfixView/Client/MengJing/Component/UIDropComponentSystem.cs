@@ -59,7 +59,7 @@ namespace ET.Client
         {
             if (self.IsDisposed)
             {
-                self.OnDestroy();
+                GameObject.Destroy(go);
                 return;
             }
 

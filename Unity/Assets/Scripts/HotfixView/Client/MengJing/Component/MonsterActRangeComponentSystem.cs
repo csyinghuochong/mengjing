@@ -62,8 +62,7 @@ namespace ET.Client
         {
             if (self.IsDisposed)
             {
-                string path = ABPathHelper.GetEffetPath("MonsterActRange");
-                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(path, self.MonsterActRange);
+                GameObject.Destroy(gameObject);
                 return;
             }
             self.MonsterActRange = gameObject;

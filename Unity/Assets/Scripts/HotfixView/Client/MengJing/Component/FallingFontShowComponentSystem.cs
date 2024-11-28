@@ -42,7 +42,7 @@ namespace ET.Client
         {
             if (self.IsDisposed || formId != self.InstanceId || self.Unit.IsDisposed)
             {
-                self.RecoveryGameObject(FlyFontObj);
+                GameObject.DestroyImmediate(FlyFontObj);
                 return;
             }
 
