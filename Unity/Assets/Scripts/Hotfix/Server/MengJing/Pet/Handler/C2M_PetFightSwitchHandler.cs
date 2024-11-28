@@ -55,12 +55,11 @@ namespace ET.Server
                     // 切换到宠物
                     unit.GetComponent<MoveComponent>().Stop(true);
                     unit.Position = petunit.Position;
+                    unit.Stop(-3);
                     
                     unitComponent.Remove(petunit.Id);
                     petconfigid = rolePetInfo.ConfigId;
                     
- 
-                    unit.Stop(-3);
                     //客户端自己修改模型 和 技能。。。。
                 }
                 if(lastPetFightIndex - 1 == i)

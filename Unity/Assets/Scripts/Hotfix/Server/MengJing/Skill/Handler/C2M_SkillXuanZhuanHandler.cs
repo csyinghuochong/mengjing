@@ -9,8 +9,6 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_SkillXuanZhuanRequest request, M2C_SkillXuanZhuanResponse response)
         {
 	        Unit rotationUnit = unit;
-            int petfightindex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetFightIndex);
-            
             rotationUnit.Rotation =   quaternion.Euler(0, math.radians(request.Angle), 0);
             
             M2C_SkillXuanZhuanMessage m2C_SkillXuanZhuan = M2C_SkillXuanZhuanMessage.Create();
