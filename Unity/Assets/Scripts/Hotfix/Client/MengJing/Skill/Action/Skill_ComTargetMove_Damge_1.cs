@@ -1,12 +1,10 @@
-﻿
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 
 namespace ET.Client
 {
     //指定目标攻击
     public class Skill_ComTargetMove_Damge_1 : SkillHandlerC
     {
-
         public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
             skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
@@ -33,7 +31,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             Unit targetUnit = skils.TheUnitFrom.GetParent<UnitComponent>().Get(skils.SkillInfo.TargetID);
             if (targetUnit != null)
             {
@@ -43,7 +41,7 @@ namespace ET.Client
                 skils.TargetPosition = targetPosition;
             }
 
-            float3 dir =  (skils.TargetPosition - skils.NowPosition).normalize();
+            float3 dir = (skils.TargetPosition - skils.NowPosition).normalize();
             float effectAngle = math.degrees(math.atan2(dir.x, dir.z));
             if (skils.EffectInstanceId.Count == 0)
             {
@@ -65,12 +63,12 @@ namespace ET.Client
             }
 
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
-            float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime; // Time.deltaTime
-            
+            float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime * 0.1f; // Time.deltaTime
+
             move = math.min(dis, move);
             skils.NowPosition = skils.NowPosition + (move * dir);
 
-            if (skils.EffectId!=0)
+            if (skils.EffectId != 0)
             {
                 EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()
                 {
@@ -80,7 +78,7 @@ namespace ET.Client
                     Angle = effectAngle
                 });
             }
-          
+
             dis = PositionHelper.Distance2D(skils.NowPosition, skils.TargetPosition);
             if (dis < 0.5f || passTime > 20f)
             {
@@ -92,6 +90,5 @@ namespace ET.Client
         {
             skils.EndSkillEffect();
         }
-
     }
 }

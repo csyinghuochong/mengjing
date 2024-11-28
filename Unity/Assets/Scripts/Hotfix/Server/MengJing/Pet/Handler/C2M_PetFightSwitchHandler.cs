@@ -69,11 +69,13 @@ namespace ET.Server
                 unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PlayerHideBuff);
                 unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PetMianShangBuff);
             }
-            else
+            
+            if (lastPetFightIndex == 0)
             {
                 unit.GetComponent<AIComponent>().Stop_2();
                 unit.GetComponent<AIComponent>().InitHeroTuoGuan(unit);
                 unit.GetComponent<AIComponent>().Begin();
+
                 BuffData buffData_1 = new BuffData();
                 buffData_1.SkillId = 67000278;
                 buffData_1.BuffId = ConfigData.PlayerHideBuff;
