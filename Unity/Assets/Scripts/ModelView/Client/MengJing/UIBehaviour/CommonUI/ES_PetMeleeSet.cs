@@ -205,6 +205,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_SelectMainPetItemCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectMainPetItemCloseButton == null )
+     			{
+		    		this.m_E_SelectMainPetItemCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectMainPetItemPanel/E_SelectMainPetItemClose");
+     			}
+     			return this.m_E_SelectMainPetItemCloseButton;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_SelectMainPetItemCloseImage
      	{
      		get
@@ -332,6 +349,7 @@ namespace ET.Client
 			this.m_E_SetSkillButton = null;
 			this.m_E_SetSkillImage = null;
 			this.m_EG_SelectMainPetItemPanelRectTransform = null;
+			this.m_E_SelectMainPetItemCloseButton = null;
 			this.m_E_SelectMainPetItemCloseImage = null;
 			this.m_E_SelectMainPetItemsImage = null;
 			this.m_E_SelectMainPetItemsLoopVerticalScrollRect = null;
@@ -352,6 +370,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_SetSkillButton = null;
 		private UnityEngine.UI.Image m_E_SetSkillImage = null;
 		private UnityEngine.RectTransform m_EG_SelectMainPetItemPanelRectTransform = null;
+		private UnityEngine.UI.Button m_E_SelectMainPetItemCloseButton = null;
 		private UnityEngine.UI.Image m_E_SelectMainPetItemCloseImage = null;
 		private UnityEngine.UI.Image m_E_SelectMainPetItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectMainPetItemsLoopVerticalScrollRect = null;

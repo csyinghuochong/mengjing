@@ -25,8 +25,9 @@ namespace ET.Client
             self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
             self.InitItemList();
 
+            self.E_SelectMainPetItemCloseButton.AddListener(self.OnSelectMainPetItemClose);
+            self.E_SelectMainPetItemConfirmButton.AddListener(self.OnSelectMainPetItemConfirm);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectMainPetItemsRefresh);
-            self.E_SelectMainPetItemConfirmButton.AddListenerAsync(self.OnConfirm);
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
@@ -171,6 +172,17 @@ namespace ET.Client
             self.OnUpdateSelectMainPetItem();
         }
 
+        private static void OnSelectMainPetItemClose(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
+        }
+
+        private static void OnSelectMainPetItemConfirm(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
+            self.OnConfirm().Coroutine();
+        }
+
         private static void OnSelectMainPetItemsRefresh(this ES_PetMeleeSet self, Transform transform, int index)
         {
             foreach (Scroll_Item_SelectMainPetItem item in self.ScrollItemSelectMainPetItems.Values)
@@ -188,6 +200,11 @@ namespace ET.Client
 
         private static void OnSelectMainPetItem(this ES_PetMeleeSet self, long petId)
         {
+            if (petId == 0)
+            {
+                return;
+            }
+
             if (self.PetMeleeInfo.MainPetList.Contains(petId))
             {
                 self.PetMeleeInfo.MainPetList.Remove(petId);

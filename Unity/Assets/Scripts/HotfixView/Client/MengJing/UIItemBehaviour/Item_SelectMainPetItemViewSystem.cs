@@ -21,7 +21,9 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_SelectMainPetItem self, RolePetInfo rolePetInfo)
         {
             self.E_TouchButton.AddListener(self.OnTouch);
+            self.E_SelectedImage.gameObject.SetActive(false);
 
+            self.PetId = rolePetInfo.Id;
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
             Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
