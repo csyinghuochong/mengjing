@@ -107,7 +107,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this DlgPetChouKaGet self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.RolePetInfo.PetSkill[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.RolePetInfo.PetSkill[index], ABAtlasTypes.RoleSkillIcon);
             if (self.OldRolePetInfo != null)
             {
                 if (self.OldRolePetInfo.PetSkill.Contains(self.RolePetInfo.PetSkill[index]) == false)
