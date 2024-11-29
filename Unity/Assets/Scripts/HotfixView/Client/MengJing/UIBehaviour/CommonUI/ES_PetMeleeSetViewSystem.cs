@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SelectAssistPetItem))]
     [FriendOf(typeof(Scroll_Item_SelectMainPetItem))]
     [EntitySystemOf(typeof(ES_PetMeleeSet))]
     [FriendOfAttribute(typeof(ES_PetMeleeSet))]
@@ -29,6 +30,11 @@ namespace ET.Client
             self.E_SelectMainPetItemConfirmButton.AddListener(self.OnSelectMainPetItemConfirm);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectMainPetItemsRefresh);
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
+
+            self.E_SelectAssistPetItemCloseButton.AddListener(self.OnSelectAssistPetItemClose);
+            self.E_SelectAssistPetItemConfirmButton.AddListener(self.OnSelectAssistPetItemConfirm);
+            self.E_SelectAssistPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectAssistPetItemsRefresh);
+            self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
         }
@@ -245,6 +251,84 @@ namespace ET.Client
 
         private static void OnSetAssist(this ES_PetMeleeSet self)
         {
+            self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(true);
+
+            List<int> petTuJianActives = self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives;
+
+            self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, petTuJianActives.Count);
+            self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, petTuJianActives.Count);
+            self.OnUpdateSelectAssistPetItem();
+        }
+
+        private static void OnSelectAssistPetItemClose(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
+        }
+
+        private static void OnSelectAssistPetItemConfirm(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
+            self.OnConfirm().Coroutine();
+        }
+
+        private static void OnSelectAssistPetItemsRefresh(this ES_PetMeleeSet self, Transform transform, int index)
+        {
+            foreach (Scroll_Item_SelectAssistPetItem item in self.ScrollItemSelectAssistPetItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
+            Scroll_Item_SelectAssistPetItem scrollItemSelectMainPetItem = self.ScrollItemSelectAssistPetItems[index].BindTrans(transform);
+            scrollItemSelectMainPetItem.Refresh(self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives[index]);
+            scrollItemSelectMainPetItem.OnSelectAssistPetItem = self.OnSelectAssistPetItem;
+        }
+
+        private static void OnSelectAssistPetItem(this ES_PetMeleeSet self, int petTuJianConfigId)
+        {
+            if (petTuJianConfigId == 0)
+            {
+                return;
+            }
+
+            if (self.PetMeleeInfo.AssistPetList.Contains(petTuJianConfigId))
+            {
+                self.PetMeleeInfo.AssistPetList.Remove(petTuJianConfigId);
+            }
+            else
+            {
+                if (self.PetMeleeInfo.AssistPetList.Count < 12)
+                {
+                    self.PetMeleeInfo.AssistPetList.Add(petTuJianConfigId);
+                }
+                else
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("辅战宠物最多选12个！");
+                    return;
+                }
+            }
+
+            self.OnUpdateSelectAssistPetItem();
+
+            using (zstring.Block())
+            {
+                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/6", self.PetMeleeInfo.AssistPetList.Count);
+            }
+        }
+
+        private static void OnUpdateSelectAssistPetItem(this ES_PetMeleeSet self)
+        {
+            foreach (Scroll_Item_SelectAssistPetItem item in self.ScrollItemSelectAssistPetItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.AssistPetList.Contains(item.PetTuJianConfigId));
+            }
         }
 
         private static void OnSetSkill(this ES_PetMeleeSet self)

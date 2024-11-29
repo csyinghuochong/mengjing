@@ -73,6 +73,7 @@ namespace ET.Client
                     root.GetComponent<AttackComponent>().OnPetFightId(unit.ConfigId, 0);
                 }
             }
+
             EventSystem.Instance.Publish(root, new PetBarUpdate());
             return m2CPetFightSwitch.Error;
         }
@@ -468,8 +469,14 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 PetComponentC petComponent = root.GetComponent<PetComponentC>();
-                petComponent.PetMeleeInfoList[petComponent.PetMeleePlan].Dispose();
-                petComponent.PetMeleeInfoList[petComponent.PetMeleePlan] = petMeleeInfo;
+                PetMeleeInfo old = petComponent.PetMeleeInfoList[petComponent.PetMeleePlan];
+                old.MainPetList.Clear();
+                old.AssistPetList.Clear();
+                old.SkillList.Clear();
+
+                old.MainPetList.AddRange(petMeleeInfo.MainPetList);
+                old.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
+                old.SkillList.AddRange(petMeleeInfo.SkillList);
             }
 
             return response.Error;
