@@ -91,14 +91,14 @@ namespace ET.Server
                     unitInfo.UnitName = unitInfoComponent.UnitName;
                     break;
                 case UnitType.Pet:
-                    unitInfo.MasterName = unit.GetComponent<UnitInfoComponent>().MasterName;
-                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    unitInfo.MasterName = unitInfoComponent.MasterName;
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
                     break;
                 case UnitType.Bullet:
-                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
                     break;
                 case UnitType.Stall:
-                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
                     break;
                 case UnitType.Npc:
                     break;

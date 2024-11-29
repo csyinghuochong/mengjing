@@ -125,7 +125,6 @@ namespace ET.Client
             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText_Layer0.transform);
             self.UIPlayerHpText.transform.localScale = Vector3.one;
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
-            HeadBarUI_1.enabled = !unit.MainHero;
             HeadBarUI_1.enabled = true;
             HeadBarUI_1.HeadPos = self.UIPosition;
             HeadBarUI_1.HeadBar = self.UIPlayerHpText;
@@ -134,7 +133,6 @@ namespace ET.Client
             HeadBarUI_1.UpdatePostion();
 
             HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
-            HeadBarUI_2.enabled = !unit.MainHero;
             HeadBarUI_2.enabled = true;
             HeadBarUI_2.HeadPos = self.UIPosition;
             HeadBarUI_2.HeadBar = self.GameObject;
@@ -198,7 +196,7 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
-            self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
+           
             using (zstring.Block())
             {
                 string masterName = "";
@@ -212,6 +210,15 @@ namespace ET.Client
                     masterName = unitInfoComponent.MasterName;
                 }
                 self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", masterName);
+            }
+
+            if (unit.Type == UnitType.Player)
+            {
+                self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.DemonName;
+            }
+            else
+            {
+                self.Lal_Name.GetComponent<Text>().text = unitInfoComponent.UnitName;
             }
         }
     }

@@ -11237,6 +11237,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int PetConfigId { get; set; }
 
+        [MemoryPackOrder(2)]
+        public string DemonName { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -11249,6 +11252,7 @@ namespace ET
             this.Error = default;
             this.UnitId = default;
             this.PetConfigId = default;
+            this.DemonName = default;
 
             ObjectPool.Instance.Recycle(this);
         }

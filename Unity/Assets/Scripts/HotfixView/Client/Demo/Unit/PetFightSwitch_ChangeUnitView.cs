@@ -7,14 +7,15 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, PetFightSwitch args)
         {
-            Unit unit = scene.GetComponent<UnitComponent>().Get(args.UnitId);
+            M2C_PetFightSwitchMessage message = args.Message;
+            Unit unit = scene.GetComponent<UnitComponent>().Get(message.UnitId);
             if (unit == null || unit.IsDisposed)
             {
                 return;
             }
 
             string path = "";
-            if (args.PetConfigId == 0)
+            if (message.PetConfigId == 0)
             {
                 // 模型切换成主角
                 path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
@@ -22,7 +23,7 @@ namespace ET.Client
             else
             {
                 // 模型切换成宠物
-                PetConfig petConfig = PetConfigCategory.Instance.Get(args.PetConfigId);
+                PetConfig petConfig = PetConfigCategory.Instance.Get(message.PetConfigId);
                 PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(petConfig.Skin[0]);
                 path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID);
             }
@@ -45,6 +46,8 @@ namespace ET.Client
             go.transform.localPosition = unit.Position;
             go.transform.rotation = unit.Rotation;
             go.transform.name = unit.Id.ToString();
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+                            unitInfoComponent.DemonName = message.DemonName;
             if (SettingData.AnimController == 0)
             {
                 unit.RemoveComponent<AnimatorComponent>();
@@ -63,7 +66,7 @@ namespace ET.Client
             // 改变UI
             unit.RemoveComponent<UIPetHpComponent>();
             unit.RemoveComponent<UIPlayerHpComponent>();
-            if (args.PetConfigId == 0)
+            if (message.PetConfigId == 0)
             {
                 unit.AddComponent<UIPlayerHpComponent>();
             }

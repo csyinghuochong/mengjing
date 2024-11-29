@@ -2591,6 +2591,7 @@ message M2C_PetFightSwitchMessage // IMessage
 	
 	int64 UnitId = 2;
 	int32 PetConfigId = 1;
+	string  DemonName = 3;
 }
 
 //ResponseType M2C_RolePetSkillCD

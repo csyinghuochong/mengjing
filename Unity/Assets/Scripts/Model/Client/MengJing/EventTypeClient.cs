@@ -609,7 +609,6 @@ namespace ET.Client
 
     public struct PetFightSwitch
     {
-        public long UnitId;
-        public int PetConfigId;
+        public M2C_PetFightSwitchMessage Message;
     }
 }
