@@ -10,6 +10,8 @@ namespace ET.Client
 
         public Vector2 PreviousPressPosition;
 
+        public List<EntityRef<ES_PetMeleeCard>> PetMeleeCards = new();
+
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
         public List<RolePetInfo> ShowRolePetInfos = new();
         public long PetId;

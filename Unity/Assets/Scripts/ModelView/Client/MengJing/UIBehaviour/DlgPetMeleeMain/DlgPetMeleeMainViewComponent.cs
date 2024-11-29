@@ -177,6 +177,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_CardListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_CardListRectTransform == null )
+     			{
+		    		this.m_EG_CardListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_CardList");
+     			}
+     			return this.m_EG_CardListRectTransform;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_TouchImage = null;
@@ -189,6 +206,7 @@ namespace ET.Client
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 			this.m_E_IconImage = null;
 			this.m_E_IconEventTrigger = null;
+			this.m_EG_CardListRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -202,6 +220,7 @@ namespace ET.Client
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
+		private UnityEngine.RectTransform m_EG_CardListRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

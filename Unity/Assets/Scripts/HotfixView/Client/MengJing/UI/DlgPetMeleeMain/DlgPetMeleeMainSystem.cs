@@ -33,9 +33,11 @@ namespace ET.Client
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
 
-            self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
+            self.InitCard();
 
+            self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
             self.RefreshItems();
+
             self.StartTime = TimeInfo.Instance.ServerNow();
             self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
             self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
@@ -52,6 +54,20 @@ namespace ET.Client
         public static void BeforeUnload(this DlgPetMeleeMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
+        public static void InitCard(this DlgPetMeleeMain self)
+        {
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetMeleeCard.prefab");
+            // 不用自动布局组件，后面可能会有卡牌的拖动动画什么的
+            for (int i = 0; i < 5; i++)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardListRectTransform);
+                go.SetActive(false);
+                ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
+                self.PetMeleeCards.Add(esPetMeleeCard);
+            }
         }
 
         public static void StopTimer(this DlgPetMeleeMain self)
