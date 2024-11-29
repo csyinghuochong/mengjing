@@ -31667,7 +31667,7 @@ namespace ET
         /// 宠物乱斗，主战宠物
         /// </summary>
         [MemoryPackOrder(0)]
-        public List<int> MainPetList { get; set; } = new();
+        public List<long> MainPetList { get; set; } = new();
 
         /// <summary>
         /// 宠物乱斗，辅战宠物

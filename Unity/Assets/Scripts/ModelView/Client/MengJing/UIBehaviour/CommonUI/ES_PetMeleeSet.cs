@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -10,6 +11,9 @@ namespace ET.Client
 		public GameObject MainPetItem;
 		public GameObject AssistPetItem;
 		public GameObject SkillItem;
+		public List<GameObject> MainPetItemList = new();
+		public List<GameObject> AssistPetItemList = new();
+		public List<GameObject> SkillItemList = new();
 		public PetMeleeInfo PetMeleeInfo;
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
