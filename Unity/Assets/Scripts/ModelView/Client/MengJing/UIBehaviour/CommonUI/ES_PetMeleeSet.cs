@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetMeleeSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetMeleeSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public GameObject MainPetItem;
 		public GameObject AssistPetItem;
@@ -15,6 +15,8 @@ namespace ET.Client
 		public List<GameObject> AssistPetItemList = new();
 		public List<GameObject> SkillItemList = new();
 		public PetMeleeInfo PetMeleeInfo;
+		public Dictionary<int, EntityRef<Scroll_Item_SelectMainPetItem>> ScrollItemSelectMainPetItems;
+		public List<RolePetInfo> ShowMainPets = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{

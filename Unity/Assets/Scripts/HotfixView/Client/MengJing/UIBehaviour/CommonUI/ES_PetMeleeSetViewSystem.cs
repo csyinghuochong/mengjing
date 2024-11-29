@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SelectMainPetItem))]
     [EntitySystemOf(typeof(ES_PetMeleeSet))]
     [FriendOfAttribute(typeof(ES_PetMeleeSet))]
     public static partial class ES_PetMeleeSetSystem
@@ -22,6 +24,10 @@ namespace ET.Client
             self.AssistPetItem = self.EG_AssistPetListRectTransform.GetChild(0).gameObject;
             self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
             self.InitItemList();
+
+            self.E_SelectMainPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectMainPetItemsRefresh);
+            self.E_SelectMainPetItemConfirmButton.AddListenerAsync(self.OnConfirm);
+            self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
         }
@@ -151,6 +157,73 @@ namespace ET.Client
 
         private static void OnSetMain(this ES_PetMeleeSet self)
         {
+            self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(true);
+
+            List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
+            self.ShowMainPets.Clear();
+            for (int i = 0; i < rolePetInfos.Count; i++)
+            {
+                self.ShowMainPets.Add(rolePetInfos[i]);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemSelectMainPetItems, self.ShowMainPets.Count);
+            self.E_SelectMainPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMainPets.Count);
+            self.OnUpdateSelectMainPetItem();
+        }
+
+        private static void OnSelectMainPetItemsRefresh(this ES_PetMeleeSet self, Transform transform, int index)
+        {
+            foreach (Scroll_Item_SelectMainPetItem item in self.ScrollItemSelectMainPetItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
+            Scroll_Item_SelectMainPetItem scrollItemSelectMainPetItem = self.ScrollItemSelectMainPetItems[index].BindTrans(transform);
+            scrollItemSelectMainPetItem.Refresh(self.ShowMainPets[index]);
+            scrollItemSelectMainPetItem.OnSelectMainPetItem = self.OnSelectMainPetItem;
+        }
+
+        private static void OnSelectMainPetItem(this ES_PetMeleeSet self, long petId)
+        {
+            if (self.PetMeleeInfo.MainPetList.Contains(petId))
+            {
+                self.PetMeleeInfo.MainPetList.Remove(petId);
+            }
+            else
+            {
+                if (self.PetMeleeInfo.MainPetList.Count < 6)
+                {
+                    self.PetMeleeInfo.MainPetList.Add(petId);
+                }
+                else
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("主战宠物最多选6个！");
+                    return;
+                }
+            }
+
+            self.OnUpdateSelectMainPetItem();
+
+            using (zstring.Block())
+            {
+                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/6", self.PetMeleeInfo.MainPetList.Count);
+            }
+        }
+
+        private static void OnUpdateSelectMainPetItem(this ES_PetMeleeSet self)
+        {
+            foreach (Scroll_Item_SelectMainPetItem item in self.ScrollItemSelectMainPetItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.MainPetList.Contains(item.PetId));
+            }
         }
 
         private static void OnSetAssist(this ES_PetMeleeSet self)
