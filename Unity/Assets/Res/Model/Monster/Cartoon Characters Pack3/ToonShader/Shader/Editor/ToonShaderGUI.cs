@@ -69,7 +69,9 @@ namespace ToonShader.Editor
             EditorGUI.indentLevel++;
         
             string[] options = {"Skin or Textiles", "Hair or Metal"};
-            _shadingStyle = (ShadingStyle)materialEditor.PopupShaderProperty(FindProperty("_SHADING_STYLE", properties), new GUIContent("Material"), options);
+            // public static int PopupShaderProperty(this MaterialEditor editor, MaterialProperty prop, GUIContent label, string[] displayedOptions)
+            // public static int IntPopupShaderProperty(this MaterialEditor editor, MaterialProperty prop, string label, string[] displayedOptions, int[] optionValues)
+            _shadingStyle = ShadingStyle.SkinAndTextiles; /// (ShadingStyle)(MaterialEditor)materialEditor.PopupShaderProperty(FindProperty("_SHADING_STYLE", properties), new GUIContent("Material"), (string[])options);
         
             switch (_shadingStyle)
             {
