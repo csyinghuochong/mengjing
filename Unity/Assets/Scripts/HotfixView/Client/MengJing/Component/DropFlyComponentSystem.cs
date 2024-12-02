@@ -43,7 +43,13 @@ namespace ET.Client
             self.MyUnit.Position = Vector3.MoveTowards(self.MyUnit.Position, self.TargetUnit.Position, self.Speed * Time.deltaTime);
             if (self.EffectGameObject != null)
             {
-                self.EffectGameObject.transform.rotation = Quaternion.LookRotation(self.TargetUnit.Position - self.MyUnit.Position, Vector3.forward);
+                Vector3 direction = self.TargetUnit.Position - self.MyUnit.Position;
+                if (direction == Vector3.zero)
+                {
+                    return;
+                }
+
+                self.EffectGameObject.transform.rotation = Quaternion.LookRotation(direction, Vector3.forward);
             }
         }
 
