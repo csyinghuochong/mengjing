@@ -63,7 +63,7 @@ namespace ET.Client
             }
 
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
-            float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime * 0.1f; // Time.deltaTime
+            float move = (float)skils.SkillConf.SkillMoveSpeed * TimeInfo.Instance.DeltaTime * 0.5f; // Time.deltaTime
 
             move = math.min(dis, move);
             skils.NowPosition = skils.NowPosition + (move * dir);
