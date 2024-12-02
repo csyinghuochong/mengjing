@@ -107,5 +107,8 @@
         public const int MainPetFightSwitchCD = 369;
         public const int MainPetSwitchTimer = 370;
         public const int PetBarSetSkillShowInfoTimer = 371;
+        public const int PetMeleeDungeonBattleTimer = 372;
+        public const int PetMeleeDungeonDealCardTimer = 373;
+        public const int PetMeleeDungeonRestoreTimer = 374;
     }
 }

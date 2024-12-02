@@ -8,6 +8,9 @@ namespace ET.Client
     {
         public DlgPetMeleeMainViewComponent View { get => this.GetComponent<DlgPetMeleeMainViewComponent>(); }
 
+        public List<PetMeleeCarInfo> PetMeleeCarInfos = new();
+        public List<PetMeleeCarInfo> PetMeleeCarInfoPool = new();
+
         public Vector2 PreviousPressPosition;
 
         public List<EntityRef<ES_PetMeleeCard>> PetMeleeCards = new();

@@ -7282,6 +7282,14 @@ message PetMeleeInfo
 	repeated int32 SkillList = 3; // 宠物乱斗，魔法卡牌
 }
 
+message PetMeleeCarInfo
+{
+	int64 Id = 1;
+	int32 Type = 2; //1主战宠物卡牌 2辅战宠物卡牌 3魔法卡牌
+	int64 PetId = 3; //主战宠物Id
+	int32 PetTuJianConfigId = 4; //宠物图鉴Id
+}
+
 //ResponseType M2C_PetMeleePlanResponse
 message C2M_PetMeleePlanRequest // ILocationRequest
 {

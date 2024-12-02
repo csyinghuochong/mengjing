@@ -31701,6 +31701,52 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.PetMeleeCarInfo)]
+    public partial class PetMeleeCarInfo : MessageObject
+    {
+        public static PetMeleeCarInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMeleeCarInfo), isFromPool) as PetMeleeCarInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public long Id { get; set; }
+
+        /// <summary>
+        /// 1主战宠物卡牌 2辅战宠物卡牌 3魔法卡牌
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public int Type { get; set; }
+
+        /// <summary>
+        /// 主战宠物Id
+        /// </summary>
+        [MemoryPackOrder(2)]
+        public long PetId { get; set; }
+
+        /// <summary>
+        /// 宠物图鉴Id
+        /// </summary>
+        [MemoryPackOrder(3)]
+        public int PetTuJianConfigId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.Id = default;
+            this.Type = default;
+            this.PetId = default;
+            this.PetTuJianConfigId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_PetMeleePlanRequest)]
     [ResponseType(nameof(M2C_PetMeleePlanResponse))]
     public partial class C2M_PetMeleePlanRequest : MessageObject, ILocationRequest
@@ -32799,13 +32845,14 @@ namespace ET
         public const ushort TestServerInfoProto = 10839;
         public const ushort ItemInfoProto = 10840;
         public const ushort PetMeleeInfo = 10841;
-        public const ushort C2M_PetMeleePlanRequest = 10842;
-        public const ushort M2C_PetMeleePlanResponse = 10843;
-        public const ushort C2M_PetMeleeSetRequest = 10844;
-        public const ushort M2C_PetMeleeSetResponse = 10845;
-        public const ushort C2M_PetMeleePlace = 10846;
-        public const ushort M2C_PetMeleePlace = 10847;
-        public const ushort C2M_PetMeleeBegin = 10848;
-        public const ushort M2C_PetMeleeBegin = 10849;
+        public const ushort PetMeleeCarInfo = 10842;
+        public const ushort C2M_PetMeleePlanRequest = 10843;
+        public const ushort M2C_PetMeleePlanResponse = 10844;
+        public const ushort C2M_PetMeleeSetRequest = 10845;
+        public const ushort M2C_PetMeleeSetResponse = 10846;
+        public const ushort C2M_PetMeleePlace = 10847;
+        public const ushort M2C_PetMeleePlace = 10848;
+        public const ushort C2M_PetMeleeBegin = 10849;
+        public const ushort M2C_PetMeleeBegin = 10850;
     }
 }

@@ -2017,7 +2017,7 @@ namespace ET
         /// 游戏战斗时间，超过时间判定为输
         /// </summary>
         [StaticField]
-        public static long PetMeleeBattleMaxTime = 3000 * 1000;
+        public static long PetMeleeBattleMaxTime = 300 * 1000;
 
         #endregion
     }

@@ -8,7 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PetMeleePlace request, M2C_PetMeleePlace response)
         {
             PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
-            if (petMeleeDungeonComponent.GameOver)
+            if (petMeleeDungeonComponent.IsGameOver())
             {
                 response.Error = ErrorCode.ERR_Error;
                 return;
@@ -23,13 +23,16 @@ namespace ET.Server
             }
 
             List<Unit> allpet = UnitHelper.GetUnitList(unit.Scene(), UnitType.Pet);
+            // 防止招太多
             if (allpet.Count > 10)
             {
-                // 防止招太多
                 response.Error = ErrorCode.ERR_Error;
                 return;
             }
 
+            // 单条战线最多几个宠物。。。
+
+            // // 不能存在相同的宠物
             // if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
             // {
             //     response.Error = ErrorCode.ERR_RequestRepeatedly;
@@ -40,7 +43,7 @@ namespace ET.Server
             Unit pet = UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
                 IdGenerater.Instance.GenerateId());
 
-            if (petMeleeDungeonComponent.GameStart)
+            if (petMeleeDungeonComponent.IsGameStart())
             {
                 pet.GetComponent<AIComponent>().Begin();
             }
