@@ -211,7 +211,7 @@ namespace ET.Client
                 return;
             }
 
-            int maxNum = ConfigData.PetMeleeMainMaxNum;
+            int maxNum = ConfigData.PetMeleeMainPetMaxNum;
             if (self.PetMeleeInfo.MainPetList.Contains(petId))
             {
                 self.PetMeleeInfo.MainPetList.Remove(petId);
@@ -298,7 +298,7 @@ namespace ET.Client
                 return;
             }
 
-            int maxNum = ConfigData.PetMeleeAssistMaxNum;
+            int maxNum = ConfigData.PetMeleeAssistPetMaxNum;
             if (self.PetMeleeInfo.AssistPetList.Contains(petTuJianConfigId))
             {
                 self.PetMeleeInfo.AssistPetList.Remove(petTuJianConfigId);

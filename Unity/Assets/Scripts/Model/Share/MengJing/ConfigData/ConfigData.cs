@@ -6,20 +6,18 @@ namespace ET
 {
     public static class ConfigData
     {
-        
         /// <summary>
         /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
         /// </summary>
-
         public const long PetSwichCD1 = 60;
+
         public const float PetSwichCD2 = 1f / PetSwichCD1;
-        
+
         public const int PetFramgeItemId = 10000152;
-        
+
         public const int PetMianShangBuff = 97020003;
 
         public const string Skill_XuanZhuan_Attack_2 = "Skill_XuanZhuan_Attack_2";
-        
 
         /// <summary>
         /// 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
@@ -32,14 +30,13 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int GmTeamdungeonId = 110006;
-      
-        
+
         [StaticField]
         public static int PlayerHideBuff = 97020004;
-        
+
         [StaticField]
         public static bool LoadSceneFinished { get; set; }
-        
+
         //npc对话最大距离
         [StaticField]
         public static float NpcDialogDistance = 5f;
@@ -57,11 +54,10 @@ namespace ET
 
         [StaticField]
         public static List<int> NOPassiveSkill = new List<int>() { };
-        
+
         [StaticField]
-        public static Dictionary<int, List<int>> FubenToNpcList = new  Dictionary<int, List<int>>() { };
-        
-        
+        public static Dictionary<int, List<int>> FubenToNpcList = new Dictionary<int, List<int>>() { };
+
         /// <summary>
         /// 猎人远程技能
         /// </summary>
@@ -71,54 +67,57 @@ namespace ET
         /// <summary>
         /// 猎人近战技能
         /// </summary>
-         [StaticField]
-        public static List<int> HunterNearSkill =  new List<int>() { 63200201, 63200202, 63200203, 63200204 };
+        [StaticField]
+        public static List<int> HunterNearSkill = new List<int>() { 63200201, 63200202, 63200203, 63200204 };
 
-
-        
         /// <summary>
         /// 目标任务 TaskConfig
         /// </summary>
-         [StaticField]
+        [StaticField]
         public static List<List<int>> WelfareTaskList = new List<List<int>>()
         {
             //第一天
-            new List<int>{ 71001001,71001002,71001003,71001004,71001005,71001006 },          
+            new List<int> { 71001001, 71001002, 71001003, 71001004, 71001005, 71001006 },
             //第二天
-            new List<int>{ 71002001,71002002,71002003,71002004,71002005,71002006 },
+            new List<int> { 71002001, 71002002, 71002003, 71002004, 71002005, 71002006 },
             //第三天
-            new List<int>{ 71003001,71003002,71003003,71003004,71003005 },
+            new List<int> { 71003001, 71003002, 71003003, 71003004, 71003005 },
             //第四天
-            new List<int>{ 71004001,71004002,71004003,71004004,71004005 },
+            new List<int> { 71004001, 71004002, 71004003, 71004004, 71004005 },
             //第五天
-            new List<int>{ 71005001,71005002,71005003,71005004,71005005 },
+            new List<int> { 71005001, 71005002, 71005003, 71005004, 71005005 },
             //第六天
-            new List<int>{ 71006001,71006002,71006003,71006004,71006005 },
+            new List<int> { 71006001, 71006002, 71006003, 71006004, 71006005 },
             //第七天
-            new List<int>{ 71007001,71007002,71007003,71007004,71007005 },
+            new List<int> { 71007001, 71007002, 71007003, 71007004, 71007005 },
         };
 
         [StaticField]
         public static List<BossDevelopment> BossDevelopmentList_5 = new List<BossDevelopment>()
         {
-            new BossDevelopment(){ Name = "初级领主", Level = 1, AttributeAdd = 1f,   ExpAdd = 1f,   ReviveTimeAdd = 1f,     DropAdd = 1f,   KillNumber = 0 },
-            new BossDevelopment(){ Name = "次级领主", Level = 2, AttributeAdd = 1.1f, ExpAdd = 1.25f,    ReviveTimeAdd = 1.25f,   DropAdd = 1.15f, KillNumber = 3 },
-            new BossDevelopment(){ Name = "中级领主", Level = 3, AttributeAdd = 1.2f, ExpAdd = 1.5f,    ReviveTimeAdd = 1.5f,     DropAdd = 1.3f, KillNumber = 5 },
-            new BossDevelopment(){ Name = "高级领主", Level = 4, AttributeAdd = 1.3f, ExpAdd = 1.75f,    ReviveTimeAdd = 1.75f,   DropAdd = 1.4f, KillNumber = 10 },
-            new BossDevelopment(){ Name = "终级领主", Level = 5, AttributeAdd = 1.4f, ExpAdd = 2f,    ReviveTimeAdd = 2f,     DropAdd = 1.5f, KillNumber = 20 },
+            new BossDevelopment() { Name = "初级领主", Level = 1, AttributeAdd = 1f, ExpAdd = 1f, ReviveTimeAdd = 1f, DropAdd = 1f, KillNumber = 0 },
+            new BossDevelopment()
+                    { Name = "次级领主", Level = 2, AttributeAdd = 1.1f, ExpAdd = 1.25f, ReviveTimeAdd = 1.25f, DropAdd = 1.15f, KillNumber = 3 },
+            new BossDevelopment()
+                    { Name = "中级领主", Level = 3, AttributeAdd = 1.2f, ExpAdd = 1.5f, ReviveTimeAdd = 1.5f, DropAdd = 1.3f, KillNumber = 5 },
+            new BossDevelopment()
+                    { Name = "高级领主", Level = 4, AttributeAdd = 1.3f, ExpAdd = 1.75f, ReviveTimeAdd = 1.75f, DropAdd = 1.4f, KillNumber = 10 },
+            new BossDevelopment() { Name = "终级领主", Level = 5, AttributeAdd = 1.4f, ExpAdd = 2f, ReviveTimeAdd = 2f, DropAdd = 1.5f, KillNumber = 20 },
         };
-        
-        
+
         [StaticField]
-        public static List<BossDevelopment> BossDevelopmentList_6 =  new List<BossDevelopment>()
+        public static List<BossDevelopment> BossDevelopmentList_6 = new List<BossDevelopment>()
         {
-            new BossDevelopment(){ Name = "初级领主", Level = 1, AttributeAdd = 1f,    ExpAdd = 1f,   ReviveTimeAdd = 1f,     DropAdd = 1f,   KillNumber = 0 },
-            new BossDevelopment(){ Name = "次级领主", Level = 2, AttributeAdd = 1.1f,  ExpAdd = 1.25f,  ReviveTimeAdd = 1.25f,   DropAdd = 1.15f, KillNumber = 3 },
-            new BossDevelopment(){ Name = "中级领主", Level = 3, AttributeAdd = 1.2f,  ExpAdd = 1.5f,   ReviveTimeAdd = 1.5f,     DropAdd = 1.3f, KillNumber = 5 },
-            new BossDevelopment(){ Name = "高级领主", Level = 4, AttributeAdd = 1.3f,  ExpAdd = 1.75f,   ReviveTimeAdd = 1.75f,   DropAdd = 1.4f, KillNumber = 10 },
-            new BossDevelopment(){ Name = "终级领主", Level = 5, AttributeAdd = 1.4f,  ExpAdd = 2f,   ReviveTimeAdd = 2f,     DropAdd = 1.5f, KillNumber = 20 },
+            new BossDevelopment() { Name = "初级领主", Level = 1, AttributeAdd = 1f, ExpAdd = 1f, ReviveTimeAdd = 1f, DropAdd = 1f, KillNumber = 0 },
+            new BossDevelopment()
+                    { Name = "次级领主", Level = 2, AttributeAdd = 1.1f, ExpAdd = 1.25f, ReviveTimeAdd = 1.25f, DropAdd = 1.15f, KillNumber = 3 },
+            new BossDevelopment()
+                    { Name = "中级领主", Level = 3, AttributeAdd = 1.2f, ExpAdd = 1.5f, ReviveTimeAdd = 1.5f, DropAdd = 1.3f, KillNumber = 5 },
+            new BossDevelopment()
+                    { Name = "高级领主", Level = 4, AttributeAdd = 1.3f, ExpAdd = 1.75f, ReviveTimeAdd = 1.75f, DropAdd = 1.4f, KillNumber = 10 },
+            new BossDevelopment() { Name = "终级领主", Level = 5, AttributeAdd = 1.4f, ExpAdd = 2f, ReviveTimeAdd = 2f, DropAdd = 1.5f, KillNumber = 20 },
         };
-        
+
         //装备传承部位通用
         //技能id，权重概率
         [StaticField]
@@ -143,67 +142,75 @@ namespace ET
             new EquipChuanChengList() { SkillID = 69021010, RandPro = 100 },
         };
 
-          //装备传承职业对应激活技能
-       [StaticField]
-          public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo = 
-       new Dictionary<int, List<EquipChuanChengList>>()
-            {
-
-                { 11, new List<EquipChuanChengList>()
+        //装备传承职业对应激活技能
+        [StaticField]
+        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo =
+                new Dictionary<int, List<EquipChuanChengList>>()
                 {
-                     new EquipChuanChengList() { SkillID = 69011101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011104, RandPro = 100 },
-                }},
+                    {
+                        11, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69011101, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011102, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011103, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011104, RandPro = 100 },
+                        }
+                    },
 
-                { 12, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69011201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011204, RandPro = 100 },
-                }},
+                    {
+                        12, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69011201, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011202, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011203, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011204, RandPro = 100 },
+                        }
+                    },
 
-                { 13, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69011301, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011302, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011303, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69011304, RandPro = 100 },
-                }},
+                    {
+                        13, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69011301, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011302, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011303, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69011304, RandPro = 100 },
+                        }
+                    },
 
-                { 21, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012104, RandPro = 100 },
-                }},
+                    {
+                        21, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69012101, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012102, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012103, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012104, RandPro = 100 },
+                        }
+                    },
 
-                { 22, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012204, RandPro = 100 },
-                }},
+                    {
+                        22, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69012201, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012202, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012203, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012204, RandPro = 100 },
+                        }
+                    },
 
-                { 23, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69012301, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012302, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012303, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69012304, RandPro = 100 },
-                }},
+                    {
+                        23, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69012301, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012302, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012303, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69012304, RandPro = 100 },
+                        }
+                    },
+                };
 
-            };
-        
-        
-        
         //装备传承部位对应激活技能
         [StaticField]
-        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOcc = 
+        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOcc =
                 new Dictionary<int, List<EquipChuanChengList>>()
                 {
                     {
@@ -217,7 +224,6 @@ namespace ET
                             new EquipChuanChengList() { SkillID = 69011006, RandPro = 100 },
                             new EquipChuanChengList() { SkillID = 69021011, RandPro = 100 },
                             new EquipChuanChengList() { SkillID = 69021012, RandPro = 100 },
-
                         }
                     },
                     {
@@ -234,71 +240,78 @@ namespace ET
                         }
                     },
                 };
-        
-        
+
         //类型对应部位
         [StaticField]
-        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkill = 
-         new Dictionary<int, List<EquipChuanChengList>>()
-            {
-                //攻击
-                { 1, new List<EquipChuanChengList>()
+        public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkill =
+                new Dictionary<int, List<EquipChuanChengList>>()
                 {
-                     new EquipChuanChengList() { SkillID = 69031001, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031002, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031003, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031004, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031005, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031006, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031007, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031008, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031009, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69031010, RandPro = 100 },
-                }},
+                    //攻击
+                    {
+                        1, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69031001, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031002, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031003, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031004, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031005, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031006, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031007, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031008, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031009, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69031010, RandPro = 100 },
+                        }
+                    },
 
-                //防御
-                { 2, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69032001, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032002, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032003, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032004, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032005, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032006, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032007, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032008, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032009, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69032010, RandPro = 100 },
-                }},
+                    //防御
+                    {
+                        2, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69032001, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032002, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032003, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032004, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032005, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032006, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032007, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032008, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032009, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69032010, RandPro = 100 },
+                        }
+                    },
 
-                //技能_战士
-                { 11, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69033101, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033102, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033103, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033104, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033105, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033106, RandPro = 100 },
-                }},
+                    //技能_战士
+                    {
+                        11, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69033101, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033102, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033103, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033104, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033105, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033106, RandPro = 100 },
+                        }
+                    },
 
-                //技能_法师
-                { 12, new List<EquipChuanChengList>()
-                {
-                     new EquipChuanChengList() { SkillID = 69033201, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033202, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033203, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033204, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033205, RandPro = 100 },
-                     new EquipChuanChengList() { SkillID = 69033206, RandPro = 100 },
-                }},
-            };
-        
-        
+                    //技能_法师
+                    {
+                        12, new List<EquipChuanChengList>()
+                        {
+                            new EquipChuanChengList() { SkillID = 69033201, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033202, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033203, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033204, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033205, RandPro = 100 },
+                            new EquipChuanChengList() { SkillID = 69033206, RandPro = 100 },
+                        }
+                    },
+                };
+
         //觉醒技能ID
         [StaticField]
-        public static List<int> JueXingSkillIDList = 
-                new List<int>() {
+        public static List<int> JueXingSkillIDList =
+                new List<int>()
+                {
                     60031111,
                     60031121,
                     60031131,
@@ -308,7 +321,7 @@ namespace ET
                     60031161,
                     60031162,
                 };
-        
+
         /// <summary>
         /// 神兽羁绊属性
         /// </summary>
@@ -316,9 +329,15 @@ namespace ET
         public static Dictionary<int, List<PropertyValue>> ShenShouJiBan =
                 new Dictionary<int, List<PropertyValue>>()
                 {
-                    { 1, new List<PropertyValue>(){ new PropertyValue() { HideID = 201003,  HideValue = 1000 } } },
-                    { 2, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1000 }/*, new PropertyValue() { HideID = 105201, HideValue = 0 }*/ } },
-                    { 3, new List<PropertyValue>(){ new PropertyValue() { HideID = 200903, HideValue = 1500 } } },
+                    { 1, new List<PropertyValue>() { new PropertyValue() { HideID = 201003, HideValue = 1000 } } },
+                    {
+                        2,
+                        new List<PropertyValue>()
+                        {
+                            new PropertyValue() { HideID = 200903, HideValue = 1000 } /*, new PropertyValue() { HideID = 105201, HideValue = 0 }*/
+                        }
+                    },
+                    { 3, new List<PropertyValue>() { new PropertyValue() { HideID = 200903, HideValue = 1500 } } },
                 };
 
         /// <summary>
@@ -355,7 +374,7 @@ namespace ET
 
         [StaticField]
         public static Dictionary<int, ServerInfo> ServerInfoList = new Dictionary<int, ServerInfo>();
-        
+
         [StaticField]
         public static bool ShowLieOpen = false;
 
@@ -395,7 +414,7 @@ namespace ET
             { 110004, 90014 },
             { 110005, 90015 },
         };
-        
+
         [StaticField]
         public static bool IsShowLieOpen = false;
 
@@ -1293,12 +1312,12 @@ namespace ET
                     new float3(14.89f, 0f, -15.42f),
                     //中排
                     new float3(14.89f - 2f, 0f, -9.25f),
-                    new float3(14.89f- 2f, 0f, -12.3f),
-                    new float3(14.89f- 2f, 0f, -15.42f),
+                    new float3(14.89f - 2f, 0f, -12.3f),
+                    new float3(14.89f - 2f, 0f, -15.42f),
                     //后排
-                    new float3(14.89f -4f, 0f, -9.25f),
-                    new float3(14.89f- 4f, 0f, -12.3f),
-                    new float3(14.89f- 4f, 0f, -15.42f),
+                    new float3(14.89f - 4f, 0f, -9.25f),
+                    new float3(14.89f - 4f, 0f, -12.3f),
+                    new float3(14.89f - 4f, 0f, -15.42f),
                 };
 
         //对方位置
@@ -1307,9 +1326,9 @@ namespace ET
                 new List<float3>()
                 {
                     //前排
-                    new float3(21.16f , 0f, -9.25f),
-                    new float3(21.16f , 0f, -12.3f),
-                    new float3(21.16f , 0f, -15.42f),
+                    new float3(21.16f, 0f, -9.25f),
+                    new float3(21.16f, 0f, -12.3f),
+                    new float3(21.16f, 0f, -15.42f),
                     //中排 
                     new float3(21.16f + 2f, 0f, -9.25f),
                     new float3(21.16f + 2f, 0f, -12.3f),
@@ -1445,7 +1464,7 @@ namespace ET
         [StaticField]
         public static float3 FuBenCameraRotation =
                 new float3(60f, -90f, 0);
-        
+
         //摄像机位置
         [StaticField]
         public static float3 PetMeleeFuBenCameraPosition =
@@ -1850,7 +1869,6 @@ namespace ET
             { 2, new List<string>() { "我好累,妈妈说累了就可以歇一歇", "好饱啊,我要停下来歇一歇。", "唉呀,谁用石头丢了我一下,头好晕哦" } }
         };
 
-
         /// <summary>
         /// 角色属性推荐加点,按比例加点
         /// </summary>
@@ -1891,22 +1909,116 @@ namespace ET
             new List<int> { 11300601, 11300602, 11300603, 11300604, 11300605 }
         };
 
+        # region 宠物乱斗配置
+
         /// <summary>
-        /// 主战宠物最多选几个
+        /// 初始魔力值
         /// </summary>
         [StaticField]
-        public static int PetMeleeMainMaxNum = 6;
-        
+        public static int PetMeleeMoLiBase = 60;
+
         /// <summary>
-        /// 辅战宠物最多选几个
+        /// 每秒回复魔力值
         /// </summary>
         [StaticField]
-        public static int PetMeleeAssistMaxNum = 12;
+        public static int PetMeleeMoLiRPS = 1;
+
+        /// <summary>
+        /// 魔力值上限
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeMoLiMax = 1;
+
+        /// <summary>
+        /// 主战宠物卡消耗
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeMainPetCost = 30;
+
+        /// <summary>
+        /// 辅战宠物卡消耗
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeAssistPetCost = 10;
+
+        /// <summary>
+        /// 主战宠物卡最多选几个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeMainPetMaxNum = 6;
+
+        /// <summary>
+        /// 辅战宠物卡最多选几个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeAssistPetMaxNum = 12;
 
         /// <summary>
         /// 魔法卡最多选几个
         /// </summary>
         [StaticField]
         public static int PetMeleeSkillMaxNum = 6;
+
+        /// <summary>
+        /// 手持多少张牌
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeCarNum = 5;
+
+        /// <summary>
+        /// 首回合主战宠物卡随机多少个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeFirstMainPetNum = 1;
+
+        /// <summary>
+        /// 首回合辅战宠物卡随机多少个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeFirstAssistPetNum = 3;
+
+        /// <summary>
+        /// 首回合魔法卡随机多少个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeFirstSkillNum = 1;
+
+        /// <summary>
+        /// 主战宠物卡出现概率
+        /// </summary>
+        [StaticField]
+        public static float PetMeleeMainPetProb = 0.2f;
+
+        /// <summary>
+        /// 辅战宠物卡出现概率
+        /// </summary>
+        [StaticField]
+        public static float PetMeleeAssistPetProb = 0.6f;
+
+        /// <summary>
+        /// 魔法卡出现概率
+        /// </summary>
+        [StaticField]
+        public static float PetMeleeSkillProb = 0.2f;
+
+        /// <summary>
+        /// 多少秒刷新一张卡牌
+        /// </summary>
+        [StaticField]
+        public static long PetMeleeCardRefreshInterval = 10 * 1000;
+
+        /// <summary>
+        /// 单条战线上己方最大宠物数量，超过不能再进行召唤
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeMaxPetsInLine = 5;
+
+        /// <summary>
+        /// 游戏战斗时间，超过时间判定为输
+        /// </summary>
+        [StaticField]
+        public static long PetMeleeBattleMaxTime = 3000 * 1000;
+
+        #endregion
     }
 }

@@ -11,13 +11,13 @@
                 return;
             }
 
-            if (request.PetMeleeInfo.MainPetList.Count >= ConfigData.PetMeleeMainMaxNum)
+            if (request.PetMeleeInfo.MainPetList.Count >= ConfigData.PetMeleeMainPetMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
-            if (request.PetMeleeInfo.AssistPetList.Count >= ConfigData.PetMeleeAssistMaxNum)
+            if (request.PetMeleeInfo.AssistPetList.Count >= ConfigData.PetMeleeAssistPetMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
