@@ -85,9 +85,10 @@ namespace ET.Server
             self.PetMeleeCarInfoPool = null;
         }
 
-        public static void SetPlayer(this PetMeleeDungeonComponent self, Unit unit)
+        public static void SetPlayer(this PetMeleeDungeonComponent self)
         {
-            self.Player = unit;
+            List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
+            self.Player = players[0];
 
             // 设置初始魔力值
 
@@ -138,12 +139,11 @@ namespace ET.Server
             self.GameStart = true;
 
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
-            self.PetMeleeDungeonBattleTimer =
-                    timerComponent.NewOnceTimer(ConfigData.PetMeleeBattleMaxTime, TimerInvokeType.PetMeleeDungeonBattleTimer, self);
+            self.PetMeleeDungeonBattleTimer = timerComponent.NewOnceTimer(TimeInfo.Instance.ServerNow() + ConfigData.PetMeleeBattleMaxTime,
+                TimerInvokeType.PetMeleeDungeonBattleTimer, self);
             self.PetMeleeDungeonDealCardTimer =
                     timerComponent.NewRepeatedTimer(ConfigData.PetMeleeCardRefreshInterval, TimerInvokeType.PetMeleeDungeonDealCardTimer, self);
-            self.PetMeleeDungeonRestoreTimer =
-                    timerComponent.NewRepeatedTimer(1000, TimerInvokeType.PetMeleeDungeonRestoreTimer, self);
+            self.PetMeleeDungeonRestoreTimer = timerComponent.NewRepeatedTimer(1000, TimerInvokeType.PetMeleeDungeonRestoreTimer, self);
 
             List<Unit> allPet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
             for (int i = 0; i < allPet.Count; i++)
@@ -167,8 +167,10 @@ namespace ET.Server
             m2C_FubenSettlement.BattleResult = combatResult;
             // 奖励。。。
 
-            List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
-            MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
+            if (self.Player != null)
+            {
+                MapMessageHelper.SendToClient(self.Player, m2C_FubenSettlement);
+            }
         }
 
         private static void GenerateFuben(this PetMeleeDungeonComponent self)
