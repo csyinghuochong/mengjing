@@ -508,8 +508,6 @@ namespace ET.Client
 
         public static void OnLoadGameObject(this GameObjectComponent self, GameObject go, long formId)
         {
-            Log.Debug($"OnLoadGameObject:  {formId}    {self.UnitAssetsPath}");
-
             if (self.IsDisposed)
             {
                 GameObject.Destroy(go);
