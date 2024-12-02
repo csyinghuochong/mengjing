@@ -466,6 +466,12 @@ namespace ET.Client
                     break;
                 }
 
+                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
+                if (hit.collider != null)
+                {
+                    break;
+                }
+
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
                 if (hit.collider == null)
                 {
