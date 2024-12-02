@@ -211,19 +211,24 @@ namespace ET.Client
                 return;
             }
 
+            int maxNum = ConfigData.PetMeleeMainMaxNum;
             if (self.PetMeleeInfo.MainPetList.Contains(petId))
             {
                 self.PetMeleeInfo.MainPetList.Remove(petId);
             }
             else
             {
-                if (self.PetMeleeInfo.MainPetList.Count < 6)
+                if (self.PetMeleeInfo.MainPetList.Count < maxNum)
                 {
                     self.PetMeleeInfo.MainPetList.Add(petId);
                 }
                 else
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("主战宠物最多选6个！");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("主战宠物最多选{0}个！", maxNum));
+                    }
+
                     return;
                 }
             }
@@ -232,7 +237,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/6", self.PetMeleeInfo.MainPetList.Count);
+                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MainPetList.Count, maxNum);
             }
         }
 
@@ -293,19 +298,24 @@ namespace ET.Client
                 return;
             }
 
+            int maxNum = ConfigData.PetMeleeAssistMaxNum;
             if (self.PetMeleeInfo.AssistPetList.Contains(petTuJianConfigId))
             {
                 self.PetMeleeInfo.AssistPetList.Remove(petTuJianConfigId);
             }
             else
             {
-                if (self.PetMeleeInfo.AssistPetList.Count < 12)
+                if (self.PetMeleeInfo.AssistPetList.Count < maxNum)
                 {
                     self.PetMeleeInfo.AssistPetList.Add(petTuJianConfigId);
                 }
                 else
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("辅战宠物最多选12个！");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("辅战宠物最多选{0}个！", maxNum));
+                    }
+
                     return;
                 }
             }
@@ -314,7 +324,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/6", self.PetMeleeInfo.AssistPetList.Count);
+                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.AssistPetList.Count, maxNum);
             }
         }
 

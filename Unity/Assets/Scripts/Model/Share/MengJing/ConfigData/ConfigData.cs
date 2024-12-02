@@ -1890,6 +1890,23 @@ namespace ET
             // 终极
             new List<int> { 11300601, 11300602, 11300603, 11300604, 11300605 }
         };
+
+        /// <summary>
+        /// 主战宠物最多选几个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeMainMaxNum = 6;
+        
+        /// <summary>
+        /// 辅战宠物最多选几个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeAssistMaxNum = 12;
+
+        /// <summary>
+        /// 魔法卡最多选几个
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeSkillMaxNum = 6;
     }
-    
 }
