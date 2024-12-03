@@ -611,4 +611,9 @@ namespace ET.Client
     {
         public M2C_PetFightSwitchMessage Message;
     }
+
+    public struct PetMeleeDealCards
+    {
+        public List<PetMeleeCardInfo> PetMeleeCards;
+    }
 }

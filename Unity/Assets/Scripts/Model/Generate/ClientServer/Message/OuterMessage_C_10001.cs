@@ -31701,12 +31701,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.PetMeleeCarInfo)]
-    public partial class PetMeleeCarInfo : MessageObject
+    [Message(OuterMessage.PetMeleeCardInfo)]
+    public partial class PetMeleeCardInfo : MessageObject
     {
-        public static PetMeleeCarInfo Create(bool isFromPool = false)
+        public static PetMeleeCardInfo Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(PetMeleeCarInfo), isFromPool) as PetMeleeCarInfo;
+            return ObjectPool.Instance.Fetch(typeof(PetMeleeCardInfo), isFromPool) as PetMeleeCardInfo;
         }
 
         [MemoryPackOrder(0)]
@@ -31718,17 +31718,11 @@ namespace ET
         [MemoryPackOrder(1)]
         public int Type { get; set; }
 
-        /// <summary>
-        /// 主战宠物Id
-        /// </summary>
         [MemoryPackOrder(2)]
-        public long PetId { get; set; }
+        public int ConfigId { get; set; }
 
-        /// <summary>
-        /// 宠物图鉴Id
-        /// </summary>
         [MemoryPackOrder(3)]
-        public int PetTuJianConfigId { get; set; }
+        public long PetId { get; set; }
 
         public override void Dispose()
         {
@@ -31739,8 +31733,8 @@ namespace ET
 
             this.Id = default;
             this.Type = default;
+            this.ConfigId = default;
             this.PetId = default;
-            this.PetTuJianConfigId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31872,6 +31866,31 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeDealCards)]
+    public partial class M2C_PetMeleeDealCards : MessageObject, IMessage
+    {
+        public static M2C_PetMeleeDealCards Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeDealCards), isFromPool) as M2C_PetMeleeDealCards;
+        }
+
+        [MemoryPackOrder(0)]
+        public List<PetMeleeCardInfo> PetMeleeCardList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.PetMeleeCardList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // 宠物大战放置位置   前后端 ui命名都要一直 方便查找
     [MemoryPackable]
     [Message(OuterMessage.C2M_PetMeleePlace)]
@@ -31886,11 +31905,8 @@ namespace ET
         [MemoryPackOrder(89)]
         public int RpcId { get; set; }
 
-        /// <summary>
-        /// 宠物id
-        /// </summary>
         [MemoryPackOrder(0)]
-        public long PetId { get; set; }
+        public long CarId { get; set; }
 
         [MemoryPackOrder(1)]
         public Unity.Mathematics.float3 Position { get; set; }
@@ -31903,7 +31919,7 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.PetId = default;
+            this.CarId = default;
             this.Position = default;
 
             ObjectPool.Instance.Recycle(this);
@@ -32845,14 +32861,15 @@ namespace ET
         public const ushort TestServerInfoProto = 10839;
         public const ushort ItemInfoProto = 10840;
         public const ushort PetMeleeInfo = 10841;
-        public const ushort PetMeleeCarInfo = 10842;
+        public const ushort PetMeleeCardInfo = 10842;
         public const ushort C2M_PetMeleePlanRequest = 10843;
         public const ushort M2C_PetMeleePlanResponse = 10844;
         public const ushort C2M_PetMeleeSetRequest = 10845;
         public const ushort M2C_PetMeleeSetResponse = 10846;
-        public const ushort C2M_PetMeleePlace = 10847;
-        public const ushort M2C_PetMeleePlace = 10848;
-        public const ushort C2M_PetMeleeBegin = 10849;
-        public const ushort M2C_PetMeleeBegin = 10850;
+        public const ushort M2C_PetMeleeDealCards = 10847;
+        public const ushort C2M_PetMeleePlace = 10848;
+        public const ushort M2C_PetMeleePlace = 10849;
+        public const ushort C2M_PetMeleeBegin = 10850;
+        public const ushort M2C_PetMeleeBegin = 10851;
     }
 }

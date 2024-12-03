@@ -7,6 +7,18 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class PetMeleeDealCards_Refresh : AEvent<Scene, PetMeleeDealCards>
+    {
+        protected override async ETTask Run(Scene scene, PetMeleeDealCards args)
+        {
+            FlyTipComponent.Instance.ShowFlyTip($"发放卡牌数量：{args.PetMeleeCards.Count}");
+            // scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshFightSet();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Invoke(TimerInvokeType.UIPetMeleeMain)]
     public class UIPetMeleeMain : ATimer<DlgPetMeleeMain>
     {
@@ -66,7 +78,7 @@ namespace ET.Client
                 GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardListRectTransform);
                 go.SetActive(false);
                 ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
-                self.PetMeleeCards.Add(esPetMeleeCard);
+                self.PetMeleeCardInHandView.Add(esPetMeleeCard);
             }
         }
 

@@ -307,4 +307,11 @@ namespace ET
         public const int Type_101 = 101;//101 猎魔
         public const int Type_102 = 102;//102 曙光
     }
+
+    public enum PetMeleeCarType
+    {
+        MainPet = 1,
+        AssistPet = 2,
+        Skill = 3,
+    }
 }

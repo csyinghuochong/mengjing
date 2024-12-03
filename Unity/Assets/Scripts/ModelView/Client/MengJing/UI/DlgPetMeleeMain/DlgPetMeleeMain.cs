@@ -8,12 +8,10 @@ namespace ET.Client
     {
         public DlgPetMeleeMainViewComponent View { get => this.GetComponent<DlgPetMeleeMainViewComponent>(); }
 
-        public List<PetMeleeCarInfo> PetMeleeCarInfos = new();
-        public List<PetMeleeCarInfo> PetMeleeCarInfoPool = new();
+        public List<PetMeleeCardInfo> PetMeleeCardInHand = new(); //手里的卡
+        public List<EntityRef<ES_PetMeleeCard>> PetMeleeCardInHandView = new();
 
         public Vector2 PreviousPressPosition;
-
-        public List<EntityRef<ES_PetMeleeCard>> PetMeleeCards = new();
 
         public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
         public List<RolePetInfo> ShowRolePetInfos = new();

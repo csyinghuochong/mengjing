@@ -7282,12 +7282,12 @@ message PetMeleeInfo
 	repeated int32 SkillList = 3; // 宠物乱斗，魔法卡牌
 }
 
-message PetMeleeCarInfo
+message PetMeleeCardInfo
 {
 	int64 Id = 1;
 	int32 Type = 2; //1主战宠物卡牌 2辅战宠物卡牌 3魔法卡牌
-	int64 PetId = 3; //主战宠物Id
-	int32 PetTuJianConfigId = 4; //宠物图鉴Id
+	int32 ConfigId = 3;
+	int64 PetId = 4;
 }
 
 //ResponseType M2C_PetMeleePlanResponse
@@ -7318,12 +7318,17 @@ message M2C_PetMeleeSetResponse // ILocationResponse
 	int32 Error = 92;
 }
 
+message M2C_PetMeleeDealCards // IMessage
+{
+	repeated PetMeleeCardInfo PetMeleeCardList = 1;
+}
+
 //ResponseType M2C_PetMeleePlace
 //宠物大战放置位置   前后端 ui命名都要一直 方便查找
 message C2M_PetMeleePlace // ILocationRequest
 {
 	int32 RpcId = 90;
-	int64 PetId = 1;  //宠物id
+	int64 CarId = 1;
 	Unity.Mathematics.float3 Position = 2;
 }
 

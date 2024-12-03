@@ -15,7 +15,7 @@ namespace ET.Server
             }
 
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetId);
+            RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.CarId);
             if (rolePetInfo == null)
             {
                 response.Error = ErrorCode.ERR_Pet_NoExist;

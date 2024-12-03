@@ -1927,7 +1927,7 @@ namespace ET
         /// 魔力值上限
         /// </summary>
         [StaticField]
-        public static int PetMeleeMoLiMax = 1;
+        public static int PetMeleeMoLiMax = 100;
 
         /// <summary>
         /// 主战宠物卡消耗
@@ -1963,7 +1963,7 @@ namespace ET
         /// 手持多少张牌
         /// </summary>
         [StaticField]
-        public static int PetMeleeCarNum = 5;
+        public static int PetMeleeCarInHandNum = 5;
 
         /// <summary>
         /// 首回合主战宠物卡随机多少个

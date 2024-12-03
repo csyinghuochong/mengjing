@@ -590,7 +590,7 @@ namespace ET.Client
         public static async ETTask<int> PetMeleePlaceRequest(Scene root, long petId, float3 position)
         {
             C2M_PetMeleePlace request = C2M_PetMeleePlace.Create();
-            request.PetId = petId;
+            request.CarId = petId;
             request.Position = position;
 
             M2C_PetMeleePlace response = (M2C_PetMeleePlace)await root.GetComponent<ClientSenderCompnent>().Call(request);
