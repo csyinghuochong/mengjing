@@ -9,8 +9,6 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: T_Ice_Bear_B
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
   - _IS_ANGELRING_OFF
@@ -26,7 +24,6 @@ Material:
     IgnoreProjection: False
     RenderType: Opaque
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -488,8 +485,8 @@ Material:
     - _simpleUI: 0
     - _utsTechnique: 0
     - _utsVersionX: 0
-    - _utsVersionY: 9
-    - _utsVersionZ: 4
+    - _utsVersionY: 10
+    - _utsVersionZ: 2
     m_Colors:
     - _1st_ShadeColor: {r: 0.8862745, g: 0.68235296, b: 0.68235296, a: 1}
     - _2nd_ShadeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -528,4 +525,3 @@ Material:
     - _ViewShift: {r: 0, g: 0, b: 0, a: 1}
     - emissive: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
