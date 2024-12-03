@@ -89,6 +89,13 @@
                         }
                     }
                     break;
+                case NumericType.PetMeleeMoLi:
+                    if (args.Defend.MainHero)
+                    {
+                        root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.UpdateMoLi();
+                    }
+
+                    break;
                 case NumericType.CardTransform:
                     int cardMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.CardTransform);
                     args.Defend.GetComponent<GameObjectComponent>().OnCardTranfer(cardMonster, true);

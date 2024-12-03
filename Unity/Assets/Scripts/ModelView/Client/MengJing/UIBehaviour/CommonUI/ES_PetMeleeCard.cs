@@ -5,8 +5,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public PetMeleeCardInfo PetMeleeCardInfo;
+		
 		public UnityEngine.UI.Text E_CostText
      	{
      		get

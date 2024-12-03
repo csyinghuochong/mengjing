@@ -14,39 +14,7 @@ namespace ET.Server
                 return;
             }
 
-            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.CarId);
-            if (rolePetInfo == null)
-            {
-                response.Error = ErrorCode.ERR_Pet_NoExist;
-                return;
-            }
-
-            List<Unit> allpet = UnitHelper.GetUnitList(unit.Scene(), UnitType.Pet);
-            // 防止招太多
-            if (allpet.Count > 10)
-            {
-                response.Error = ErrorCode.ERR_Error;
-                return;
-            }
-
-            // 单条战线最多几个宠物。。。
-
-            // // 不能存在相同的宠物
-            // if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
-            // {
-            //     response.Error = ErrorCode.ERR_RequestRepeatedly;
-            //     return;
-            // }
-
-            // 目前是可以重复放一个宠物
-            Unit pet = UnitFactory.CreateTianTiPet(unit.Scene(), unit.Id, CampEnum.CampPlayer_1, rolePetInfo, request.Position, 90, -1,
-                IdGenerater.Instance.GenerateId());
-
-            if (petMeleeDungeonComponent.IsGameStart())
-            {
-                pet.GetComponent<AIComponent>().Begin();
-            }
+            response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position);
 
             await ETTask.CompletedTask;
         }

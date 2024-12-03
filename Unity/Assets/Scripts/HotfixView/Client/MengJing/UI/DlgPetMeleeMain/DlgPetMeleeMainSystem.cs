@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -47,15 +48,10 @@ namespace ET.Client
 
             self.InitCard().Coroutine();
 
-            // self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
-            // self.RefreshItems();
-
             self.StartTime = TimeInfo.Instance.ServerNow();
-            self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
-            self.MaxMoLi = 1000; // 最大魔力 (暂时，之后根据公式读表)
-            self.MoLi = 300; // 魔力 (暂时，之后根据公式读表)
-            self.MoLiRegenRate = 20; // 每秒魔力回复 (暂时，之后根据公式读表)
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
+            self.ReadyTime = 10000; // 倒计时时间
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIPetMeleeMain, self);
+            self.UpdateMoLi();
             self.View.E_IconImage.gameObject.SetActive(false);
         }
 
@@ -66,6 +62,11 @@ namespace ET.Client
         public static void BeforeUnload(this DlgPetMeleeMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+            self.PetMeleeCardInHand.Clear();
+            self.PetMeleeCardInHand = null;
+            self.PetMeleeCardPool.Clear();
+            self.PetMeleeCardPool = null;
         }
 
         private static async ETTask InitCard(this DlgPetMeleeMain self)
@@ -101,9 +102,19 @@ namespace ET.Client
             {
                 ES_PetMeleeCard esPetMeleeCard = self.GetCardFromPool();
                 self.PetMeleeCardInHand.Add(esPetMeleeCard);
-                // 在这可以加一些卡牌的排序动画什么的
-                esPetMeleeCard.uiTransform.localPosition = new Vector3(-500f + self.PetMeleeCardInHand.Count * 200f, 0, 0);
                 esPetMeleeCard.InitCard(cardInfo);
+            }
+
+            self.ArrangeCards();
+        }
+
+        private static void ArrangeCards(this DlgPetMeleeMain self)
+        {
+            for (int i = 0; i < self.PetMeleeCardInHand.Count; i++)
+            {
+                // 在这可以加一些卡牌的排序动画什么的
+                ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardInHand[i];
+                esPetMeleeCard.uiTransform.localPosition = new Vector3(-500f + i * 200f, 0, 0);
             }
         }
 
@@ -128,12 +139,12 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata)
+        private static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata)
         {
             self.PreviousPressPosition = pdata.position;
         }
 
-        public static void Drag(this DlgPetMeleeMain self, PointerEventData pdata)
+        private static void Drag(this DlgPetMeleeMain self, PointerEventData pdata)
         {
             float x = (self.PreviousPressPosition.x - pdata.position.x) * 0.05f;
             self.Root().CurrentScene().GetComponent<MJCameraComponent>().ApplyCameraPos_X(x, -10, 10);
@@ -164,166 +175,33 @@ namespace ET.Client
                     self.GameStart = true;
                 }
             }
-
-            // if (nowTime - self.LastMoLiRegenTime >= 1000)
-            // {
-            //     self.LastMoLiRegenTime = nowTime;
-            //     self.MoLi += self.MoLiRegenRate;
-            //     if (self.MoLi > self.MaxMoLi)
-            //     {
-            //         self.MoLi = self.MaxMoLi;
-            //     }
-            // }
-            //
-            // using (zstring.Block())
-            // {
-            //     self.View.E_MoLiText.text = zstring.Format("{0}/{1}", self.MoLi, self.MaxMoLi);
-            // }
-            //
-            // self.View.E_MoLiImgImage.fillAmount = self.MoLi * 1f / self.MaxMoLi;
-            //
-            // self.RefreshItemCD();
         }
 
-        private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 pos)
+        public static void UpdateMoLi(this DlgPetMeleeMain self)
         {
-            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), self.PetId, pos);
-
-            if (error == 0)
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            using (zstring.Block())
             {
-                self.MoLi -= self.CostMoLi;
-
-                foreach (Scroll_Item_PetMeleeItem item in self.ScrollItemPetMeleeItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    if (item.RolePetInfo == null)
-                    {
-                        continue;
-                    }
-
-                    if (self.PetId != item.RolePetInfo.Id)
-                    {
-                        continue;
-                    }
-
-                    item.SetCD();
-                    break;
-                }
+                self.View.E_MoLiText.text =
+                        zstring.Format("{0}/{1}", numericComponentC.GetAsInt(NumericType.PetMeleeMoLi), ConfigData.PetMeleeMoLiMax);
             }
+
+            self.View.E_MoLiImgImage.fillAmount = numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax;
         }
 
-        private static void RefreshItems(this DlgPetMeleeMain self)
+        public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position)
         {
-            List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
-            self.ShowRolePetInfos.Clear();
+            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position);
 
-            UnitComponent unitComponent = self.Root().CurrentScene().GetComponent<UnitComponent>();
-
-            for (int i = 0; i < rolePetInfos.Count; i++)
+            if (error == ErrorCode.ERR_Success)
             {
-                // if (rolePetInfos[i].PetStatus != 0)
-                // {
-                //     continue;
-                // }
-
-                if (unitComponent.Get(rolePetInfos[i].Id) != null)
-                {
-                    continue;
-                }
-
-                self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                self.PetMeleeCardInHand.Remove(card);
+                self.ReturnCardToPool(card);
+                self.ArrangeCards();
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemPetMeleeItems, self.ShowRolePetInfos.Count);
-            self.View.E_PetMeleeItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
-        }
-
-        private static void RefreshItemCD(this DlgPetMeleeMain self)
-        {
-            foreach (Scroll_Item_PetMeleeItem item in self.ScrollItemPetMeleeItems.Values)
-            {
-                if (item.uiTransform == null)
-                {
-                    continue;
-                }
-
-                item.RefreshCD();
-            }
-        }
-
-        private static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
-        {
-            self.CanPlace = true;
-
-            if (item.EndTime > TimeHelper.ServerNow())
-            {
-                FlyTipComponent.Instance.ShowFlyTip("冷却中。。。");
-                self.CanPlace = false;
-                return;
-            }
-
-            if (self.MoLi < item.CostMoLi)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("魔力不足");
-                self.CanPlace = false;
-                return;
-            }
-
-            self.CostMoLi = item.CostMoLi;
-            self.PetId = item.RolePetInfo.Id;
-            self.View.E_IconImage.sprite = item.E_IconImage.sprite;
-            self.View.E_IconImage.gameObject.SetActive(true);
-        }
-
-        private static void Drag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
-        {
-            if (self.CanPlace == false)
-            {
-                return;
-            }
-
-            Vector2 localPoint = new Vector2();
-            RectTransform canvas = self.View.uiTransform.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            self.View.E_IconImage.transform.localPosition = localPoint;
-        }
-
-        private static void EndDrag(this DlgPetMeleeMain self, PointerEventData pdata, Scroll_Item_PetMeleeItem item)
-        {
-            if (self.CanPlace == false)
-            {
-                return;
-            }
-
-            self.View.E_IconImage.gameObject.SetActive(false);
-
-            RaycastHit raycastHit;
-            Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out raycastHit, 100, 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
-            if (!hit)
-            {
-                return;
-            }
-
-            Vector3 pos = raycastHit.point;
-            self.PetMeleePlaceRequest(pos).Coroutine();
-        }
-
-        private static void OnPetMeleeItemsRefresh(this DlgPetMeleeMain self, Transform transform, int index)
-        {
-            Scroll_Item_PetMeleeItem scrollItemPetMeleeItem = self.ScrollItemPetMeleeItems[index].BindTrans(transform);
-            scrollItemPetMeleeItem.Refresh(self.ShowRolePetInfos[index]);
-            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.BeginDrag(pdata as PointerEventData, scrollItemPetMeleeItem); });
-            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.Drag(pdata as PointerEventData, scrollItemPetMeleeItem); });
-            scrollItemPetMeleeItem.E_IconEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.EndDrag(pdata as PointerEventData, scrollItemPetMeleeItem); });
+            await ETTask.CompletedTask;
         }
     }
 }

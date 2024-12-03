@@ -308,6 +308,29 @@ namespace ET.Server
             newpet.PlayerName = unit.GetComponent<UserInfoComponentS>().GetName();
             return newpet;
         }
+        
+        public static RolePetInfo GenerateNewPetByPetTuJianConfigId(this PetComponentS self, int petTuJianConfigId)
+        {
+            Unit unit = self.GetParent<Unit>();
+            PetTuJianConfig petConfig = PetTuJianConfigCategory.Instance.Get(petTuJianConfigId);
+            RolePetInfo newpet = RolePetInfo.Create();
+            newpet.Id = IdGenerater.Instance.GenerateId() + RandomHelper.RandomNumber(0, 100);
+            newpet.PetStatus = 0;
+            newpet.ConfigId = petConfig.Id;
+            newpet.PetLv = 1;
+            newpet.PetExp = 0;
+            newpet.PetName = petConfig.Name;
+            newpet.IfBaby = true;
+            newpet.SkinId = 0;
+            newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
+            newpet.AddPropretyNum = 0;
+            newpet.AddPropretyValue = "0_0_0_0";
+            newpet.ShouHuPos = RandomHelper.RandomNumber(1, 5);
+            newpet.PlayerName = unit.GetComponent<UserInfoComponentS>().GetName();
+            self.PetXiLian(newpet, 2, 0, 0 );
+            self.UpdatePetAttribute(newpet, false);
+            return newpet;
+        }
 
         //取随机值 保留两位
         public static float RandomNumberFloatKeep2(this PetComponentS self, float lower, float upper)

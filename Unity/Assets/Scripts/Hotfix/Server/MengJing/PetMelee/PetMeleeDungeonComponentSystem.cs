@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -255,14 +256,107 @@ namespace ET.Server
         }
 
         // 用牌
-        public static bool UseCard(this PetMeleeDungeonComponent self, PetMeleeCardInfo cardInfo)
+        public static int UseCard(this PetMeleeDungeonComponent self, long cardId, float3 position)
         {
             if (self.GameOver)
             {
-                return false;
+                return ErrorCode.ERR_ModifyData;
             }
 
-            return false;
+            PetMeleeCardInfo useCard = null;
+            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand)
+            {
+                if (cardInfo.Id == cardId)
+                {
+                    useCard = cardInfo;
+                    break;
+                }
+            }
+
+            if (useCard == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            if (useCard.Type == (int)PetMeleeCarType.MainPet)
+            {
+                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeMainPetCost)
+                {
+                    return ErrorCode.ERR_ExpNoEnough;
+                }
+                else
+                {
+                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeMainPetCost);
+                }
+
+                PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
+                RolePetInfo rolePetInfo = petComponent.GetPetInfo(useCard.PetId);
+                if (rolePetInfo == null)
+                {
+                    return ErrorCode.ERR_Pet_NoExist;
+                }
+
+                List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
+                // 防止招太多
+                if (allpet.Count > 10)
+                {
+                    return ErrorCode.ERR_Error;
+                }
+
+                // 单条战线最多几个宠物。。。
+
+                // // 不能存在相同的宠物
+                // if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
+                // {
+                //     response.Error = ErrorCode.ERR_RequestRepeatedly;
+                //     return;
+                // }
+
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), self.Player.Id, CampEnum.CampPlayer_1, rolePetInfo, position, 90, -1,
+                    IdGenerater.Instance.GenerateId());
+
+                if (self.GameStart)
+                {
+                    pet.GetComponent<AIComponent>().Begin();
+                }
+            }
+            else if (useCard.Type == (int)PetMeleeCarType.AssistPet)
+            {
+                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeAssistPetCost)
+                {
+                    return ErrorCode.ERR_ExpNoEnough;
+                }
+                else
+                {
+                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeAssistPetCost);
+                }
+
+                PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
+
+                List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
+                // 防止招太多
+                if (allpet.Count > 10)
+                {
+                    return ErrorCode.ERR_Error;
+                }
+
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), self.Player.Id, CampEnum.CampPlayer_1,
+                    petComponent.GenerateNewPetByPetTuJianConfigId(useCard.ConfigId), position, 90, -1, IdGenerater.Instance.GenerateId());
+
+                if (self.GameStart)
+                {
+                    pet.GetComponent<AIComponent>().Begin();
+                }
+            }
+            else if (useCard.Type == (int)PetMeleeCarType.Skill)
+            {
+                // ...
+            }
+
+            self.PetMeleeCardInHand.Remove(useCard);
+            useCard.Dispose();
+
+            return ErrorCode.ERR_Success;
         }
 
         // 恢复魔力
