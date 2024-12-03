@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1697115491382211067
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Basewater_shader
+  m_Shader: {fileID: -6465566751694194690, guid: ddd79b692fb685643aac79cc9fc0c39f,
+    type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Vector1_39E293C6: 11.4
+    - Vector1_4DB73822: 0.5
+    - Vector1_6BE19BF2: 5.04
+    - Vector1_70092C51: 1.1
+    - Vector1_9C56C814: 0.59
+    - Vector1_A8A10E47: 10.69
+    - Vector1_D8F26FF3: 10.86
+    - Vector1_F30EA70E: 0.08
+    m_Colors:
+    - Color_4FD176D0: {r: 0.11801348, g: 0.47016215, b: 0.49056596, a: 0.007843138}
+    - Color_8F2A3F56: {r: 0.2117647, g: 0.7735255, b: 0.9529412, a: 0.99607843}
+    - Color_D2738806: {r: 0.28439835, g: 0.7264151, b: 0.64479977, a: 1}
+  m_BuildTextureStacks: []
