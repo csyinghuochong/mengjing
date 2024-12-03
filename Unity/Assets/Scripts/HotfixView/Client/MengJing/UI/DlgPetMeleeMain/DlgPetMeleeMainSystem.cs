@@ -12,8 +12,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, PetMeleeDealCards args)
         {
-            FlyTipComponent.Instance.ShowFlyTip($"发放卡牌数量：{args.PetMeleeCards.Count}");
-            // scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshFightSet();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.DealCards(args.PetMeleeCards);
 
             await ETTask.CompletedTask;
         }
@@ -35,6 +34,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_PetMeleeCard))]
     [FriendOf(typeof(DlgPetMeleeMainViewComponent))]
     [FriendOf(typeof(Scroll_Item_PetMeleeItem))]
     [FriendOf(typeof(DlgPetMeleeMain))]
@@ -45,10 +45,10 @@ namespace ET.Client
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
 
-            self.InitCard();
+            self.InitCard().Coroutine();
 
-            self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
-            self.RefreshItems();
+            // self.View.E_PetMeleeItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnPetMeleeItemsRefresh);
+            // self.RefreshItems();
 
             self.StartTime = TimeInfo.Instance.ServerNow();
             self.ReadyTime = 10000; // 倒计时时间 (暂时，之后根据公式读表)
@@ -68,18 +68,59 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void InitCard(this DlgPetMeleeMain self)
+        private static async ETTask InitCard(this DlgPetMeleeMain self)
         {
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetMeleeCard.prefab");
-            // 不用自动布局组件，后面可能会有卡牌的拖动动画什么的
-            for (int i = 0; i < 5; i++)
+
+            // 不用自动布局组件，后面可能会有卡牌的拖动、排序动画什么的
+            for (int i = 0; i < ConfigData.PetMeleeCarInHandNum * 2; i++)
             {
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardListRectTransform);
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardPoolRectTransform);
                 go.SetActive(false);
                 ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
-                self.PetMeleeCardInHandView.Add(esPetMeleeCard);
+                self.PetMeleeCardPool.Add(esPetMeleeCard);
             }
+
+            M2C_PetMeleeGetMyCards response = await PetNetHelper.PetMeleePetMeleeGetMyCardsRequest(self.Root());
+            foreach (ES_PetMeleeCard card in self.PetMeleeCardInHand)
+            {
+                self.ReturnCardToPool(card);
+            }
+
+            self.PetMeleeCardInHand.Clear();
+
+            self.DealCards(response.PetMeleeCardList);
+        }
+
+        public static void DealCards(this DlgPetMeleeMain self, List<PetMeleeCardInfo> cards)
+        {
+            FlyTipComponent.Instance.ShowFlyTip($"发放卡牌 {cards.Count} 张");
+
+            foreach (PetMeleeCardInfo cardInfo in cards)
+            {
+                ES_PetMeleeCard esPetMeleeCard = self.GetCardFromPool();
+                self.PetMeleeCardInHand.Add(esPetMeleeCard);
+                // 在这可以加一些卡牌的排序动画什么的
+                esPetMeleeCard.uiTransform.localPosition = new Vector3(-500f + self.PetMeleeCardInHand.Count * 200f, 0, 0);
+                esPetMeleeCard.InitCard(cardInfo);
+            }
+        }
+
+        private static ES_PetMeleeCard GetCardFromPool(this DlgPetMeleeMain self)
+        {
+            ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardPool[^1];
+            self.PetMeleeCardPool.RemoveAt(self.PetMeleeCardPool.Count - 1);
+            esPetMeleeCard.uiTransform.SetParent(self.View.EG_CardInHandRectTransform);
+            esPetMeleeCard.uiTransform.gameObject.SetActive(true);
+            return esPetMeleeCard;
+        }
+
+        private static void ReturnCardToPool(this DlgPetMeleeMain self, ES_PetMeleeCard card)
+        {
+            self.PetMeleeCardPool.Add(card);
+            card.uiTransform.SetParent(self.View.EG_CardPoolRectTransform);
+            card.uiTransform.gameObject.SetActive(false);
         }
 
         public static void StopTimer(this DlgPetMeleeMain self)
@@ -124,24 +165,24 @@ namespace ET.Client
                 }
             }
 
-            if (nowTime - self.LastMoLiRegenTime >= 1000)
-            {
-                self.LastMoLiRegenTime = nowTime;
-                self.MoLi += self.MoLiRegenRate;
-                if (self.MoLi > self.MaxMoLi)
-                {
-                    self.MoLi = self.MaxMoLi;
-                }
-            }
-
-            using (zstring.Block())
-            {
-                self.View.E_MoLiText.text = zstring.Format("{0}/{1}", self.MoLi, self.MaxMoLi);
-            }
-
-            self.View.E_MoLiImgImage.fillAmount = self.MoLi * 1f / self.MaxMoLi;
-
-            self.RefreshItemCD();
+            // if (nowTime - self.LastMoLiRegenTime >= 1000)
+            // {
+            //     self.LastMoLiRegenTime = nowTime;
+            //     self.MoLi += self.MoLiRegenRate;
+            //     if (self.MoLi > self.MaxMoLi)
+            //     {
+            //         self.MoLi = self.MaxMoLi;
+            //     }
+            // }
+            //
+            // using (zstring.Block())
+            // {
+            //     self.View.E_MoLiText.text = zstring.Format("{0}/{1}", self.MoLi, self.MaxMoLi);
+            // }
+            //
+            // self.View.E_MoLiImgImage.fillAmount = self.MoLi * 1f / self.MaxMoLi;
+            //
+            // self.RefreshItemCD();
         }
 
         private static async ETTask PetMeleePlaceRequest(this DlgPetMeleeMain self, Vector3 pos)

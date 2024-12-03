@@ -174,10 +174,6 @@ namespace ET.Server
                     self.PetMeleeCardInHand.Add(cardInfo);
                 }
             }
-
-            M2C_PetMeleeDealCards message = M2C_PetMeleeDealCards.Create();
-            message.PetMeleeCardList.AddRange(self.PetMeleeCardInHand);
-            MapMessageHelper.SendToClient(self.Player, message);
         }
 
         private static PetMeleeCardInfo CreateCard(this PetMeleeDungeonComponent self, PetMeleeCarType petMeleeCarType)

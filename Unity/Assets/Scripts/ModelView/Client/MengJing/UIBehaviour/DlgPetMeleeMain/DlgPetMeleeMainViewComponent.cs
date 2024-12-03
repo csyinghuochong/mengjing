@@ -177,7 +177,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_CardListRectTransform
+		public UnityEngine.RectTransform EG_CardInHandRectTransform
      	{
      		get
      		{
@@ -186,11 +186,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_CardListRectTransform == null )
+     			if( this.m_EG_CardInHandRectTransform == null )
      			{
-		    		this.m_EG_CardListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_CardList");
+		    		this.m_EG_CardInHandRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_CardInHand");
      			}
-     			return this.m_EG_CardListRectTransform;
+     			return this.m_EG_CardInHandRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_CardPoolRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_CardPoolRectTransform == null )
+     			{
+		    		this.m_EG_CardPoolRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_CardPool");
+     			}
+     			return this.m_EG_CardPoolRectTransform;
      		}
      	}
 
@@ -206,7 +223,8 @@ namespace ET.Client
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 			this.m_E_IconImage = null;
 			this.m_E_IconEventTrigger = null;
-			this.m_EG_CardListRectTransform = null;
+			this.m_EG_CardInHandRectTransform = null;
+			this.m_EG_CardPoolRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -220,7 +238,8 @@ namespace ET.Client
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
-		private UnityEngine.RectTransform m_EG_CardListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_CardInHandRectTransform = null;
+		private UnityEngine.RectTransform m_EG_CardPoolRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

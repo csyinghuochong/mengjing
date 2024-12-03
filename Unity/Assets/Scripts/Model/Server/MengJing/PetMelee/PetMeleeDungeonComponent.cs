@@ -14,7 +14,7 @@ namespace ET.Server
         private EntityRef<Unit> player;
         public Unit Player { get => this.player; set => this.player = value; }
 
-        public List<PetMeleeCardInfo> PetMeleeCardInHand = new(); //手里的卡
+        public List<PetMeleeCardInfo> PetMeleeCardInHand { get; set; } = new(); //手里的卡
         public List<PetMeleeCardInfo> PetMeleeCardPool = new(); //储存池里的卡
     }
 }

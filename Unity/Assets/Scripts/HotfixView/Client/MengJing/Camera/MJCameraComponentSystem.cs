@@ -360,13 +360,8 @@ namespace ET.Client
 
         public static void ApplyCameraPos_X(this MJCameraComponent self, float x, float min, float max)
         {
-            if (self.MainCamera.transform.position.x + x > max || self.MainCamera.transform.position.x + x < min)
-            {
-                return;
-            }
-
             Vector3 pos = self.MainCamera.transform.position;
-            pos.x += x;
+            pos.x = Mathf.Clamp(pos.x + x, min, max);
             self.MainCamera.transform.position = pos;
         }
 

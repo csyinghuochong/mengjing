@@ -31867,6 +31867,69 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeGetMyCards)]
+    [ResponseType(nameof(M2C_PetMeleeGetMyCards))]
+    public partial class C2M_PetMeleeGetMyCards : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeGetMyCards Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeGetMyCards), isFromPool) as C2M_PetMeleeGetMyCards;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeGetMyCards)]
+    public partial class M2C_PetMeleeGetMyCards : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeGetMyCards Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeGetMyCards), isFromPool) as M2C_PetMeleeGetMyCards;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(0)]
+        public List<PetMeleeCardInfo> PetMeleeCardList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+            this.PetMeleeCardList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.M2C_PetMeleeDealCards)]
     public partial class M2C_PetMeleeDealCards : MessageObject, IMessage
     {
@@ -32866,10 +32929,12 @@ namespace ET
         public const ushort M2C_PetMeleePlanResponse = 10844;
         public const ushort C2M_PetMeleeSetRequest = 10845;
         public const ushort M2C_PetMeleeSetResponse = 10846;
-        public const ushort M2C_PetMeleeDealCards = 10847;
-        public const ushort C2M_PetMeleePlace = 10848;
-        public const ushort M2C_PetMeleePlace = 10849;
-        public const ushort C2M_PetMeleeBegin = 10850;
-        public const ushort M2C_PetMeleeBegin = 10851;
+        public const ushort C2M_PetMeleeGetMyCards = 10847;
+        public const ushort M2C_PetMeleeGetMyCards = 10848;
+        public const ushort M2C_PetMeleeDealCards = 10849;
+        public const ushort C2M_PetMeleePlace = 10850;
+        public const ushort M2C_PetMeleePlace = 10851;
+        public const ushort C2M_PetMeleeBegin = 10852;
+        public const ushort M2C_PetMeleeBegin = 10853;
     }
 }
