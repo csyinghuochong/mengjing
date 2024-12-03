@@ -47,7 +47,12 @@ Shader "Toon/BasicNormal"
                 float4 _BaseColor;
                 float _BumpScale;
             CBUFFER_END
- 
+
+
+            CBUFFER_START(UnityPerFrame)
+                float3 _WorldSpaceLightPos0; // Direction to the main light
+            CBUFFER_END
+            
             struct Attributes
             {
                 float4 positionOS : POSITION;
@@ -101,9 +106,14 @@ Shader "Toon/BasicNormal"
                 // Here you would typically use the normalMap to calculate lighting,
                 // but for simplicity let's just return a shaded color using the base color and a fixed light direction.
                 float3 normal = normalize(input.normalWS + normalMap); // Combine world-space normal with normal map
-                //init
+                //init  固定灯光方向
                 // float3 lightDir = normalize(float3(1, 1, -1)); // Example light direction
                 //float diff =  max(0, dot(normal, lightDir)); // Diffuse lighting
+
+                //
+                //float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+                //float diff =  max(0, dot(normal, lightDir))  + 0.5; // Diffuse lighting
+                
                 float diff = 1;
                 float4 color = mainTex * _BaseColor * diff;
                 return color;

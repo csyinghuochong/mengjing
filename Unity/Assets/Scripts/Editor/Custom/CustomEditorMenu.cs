@@ -1206,7 +1206,7 @@ public class CustomEditorMenu
     }
 
     
-    [MenuItem("Custom/获取Shader路径")]
+    [MenuItem("Custom/获取全部Shader路径")]
     static void FindAllShaders()
     {
         string shaderPaths = "";
