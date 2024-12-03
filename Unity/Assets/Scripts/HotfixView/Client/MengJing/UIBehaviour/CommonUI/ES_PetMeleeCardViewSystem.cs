@@ -69,6 +69,7 @@ namespace ET.Client
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
+            self.uiTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
             self.GetParent<DlgPetMeleeMain>().View.E_IconImage.sprite = self.E_IconImage.sprite;
             self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(true);
         }
@@ -84,6 +85,8 @@ namespace ET.Client
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
+            self.uiTransform.localScale = new Vector3(1f, 1f, 1f);
+
             self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(false);
 
             RaycastHit raycastHit;

@@ -173,6 +173,7 @@ namespace ET.Client
                     PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
                     self.View.EG_TopRectTransform.gameObject.SetActive(false);
                     self.GameStart = true;
+                    self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 }
             }
         }
