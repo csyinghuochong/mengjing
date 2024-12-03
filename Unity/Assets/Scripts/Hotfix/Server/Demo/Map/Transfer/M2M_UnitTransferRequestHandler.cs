@@ -99,6 +99,7 @@ namespace ET.Server
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMelee)
                     {
+                        scene.GetComponent<PetMeleeDungeonComponent>().SetPlayer();
                         aoivalue = 40;
                     }
                     break;

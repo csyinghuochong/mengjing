@@ -85,7 +85,7 @@ namespace ET.Server
                         PetMeleeDungeonComponent petMeleeDungeonComponent = fubnescene.AddComponent<PetMeleeDungeonComponent>();
                         BeforeTransfer(unit);
                         await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetMelee, request.SceneId, FubenDifficulty.None, request.paramInfo);
-                        petMeleeDungeonComponent.SetPlayer();
+                        
                         NoticeFubenCenter(fubnescene, 1).Coroutine();
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
