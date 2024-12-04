@@ -1969,7 +1969,7 @@ namespace ET
         /// 测试 魔法卡技能
         /// </summary>
         [StaticField]
-        public static List<int> PetMeleeSkillTest = new() { 80004001, };
+        public static List<int> PetMeleeSkillTest = new() { 2102020, 2102030 };
 
         /// <summary>
         /// 手持多少张牌
