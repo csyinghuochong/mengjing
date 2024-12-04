@@ -1966,10 +1966,10 @@ namespace ET
         public static int PetMeleeSkillMaxNum = 6;
 
         /// <summary>
-        /// 测试 魔法卡技能
+        /// 测试 魔法卡技能，目前由主角释放，配置技能的释放范围要大些
         /// </summary>
         [StaticField]
-        public static List<int> PetMeleeSkillTest = new() { 2102020, 2102030 };
+        public static List<int> PetMeleeSkillTest = new() { 2202030 };
 
         /// <summary>
         /// 手持多少张牌
