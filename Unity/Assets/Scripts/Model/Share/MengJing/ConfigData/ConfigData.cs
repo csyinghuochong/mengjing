@@ -1942,6 +1942,12 @@ namespace ET
         public static int PetMeleeAssistPetCost = 10;
 
         /// <summary>
+        /// 魔法卡消耗
+        /// </summary>
+        [StaticField]
+        public static int PetMeleeSkillCost = 10;
+
+        /// <summary>
         /// 主战宠物卡最多选几个
         /// </summary>
         [StaticField]
@@ -1958,6 +1964,12 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int PetMeleeSkillMaxNum = 6;
+
+        /// <summary>
+        /// 测试 魔法卡技能
+        /// </summary>
+        [StaticField]
+        public static List<int> PetMeleeSkillTest = new() { 80004001, };
 
         /// <summary>
         /// 手持多少张牌

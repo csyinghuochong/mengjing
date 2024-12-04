@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_SelectSkillItem))]
     [FriendOf(typeof(Scroll_Item_SelectAssistPetItem))]
     [FriendOf(typeof(Scroll_Item_SelectMainPetItem))]
     [EntitySystemOf(typeof(ES_PetMeleeSet))]
@@ -35,6 +36,11 @@ namespace ET.Client
             self.E_SelectAssistPetItemConfirmButton.AddListener(self.OnSelectAssistPetItemConfirm);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectAssistPetItemsRefresh);
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
+
+            self.E_SelectSkillItemCloseButton.AddListener(self.OnSelectSkillItemClose);
+            self.E_SelectSkilIItemConfirmButton.AddListener(self.OnSelectSkillItemConfirm);
+            self.E_SelectSkilIItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectSkillItemsRefresh);
+            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
         }
@@ -343,6 +349,90 @@ namespace ET.Client
 
         private static void OnSetSkill(this ES_PetMeleeSet self)
         {
+            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(true);
+
+            self.ShowSkills.Clear();
+            self.ShowSkills.AddRange(ConfigData.PetMeleeSkillTest);
+
+            self.AddUIScrollItems(ref self.ScrollItemSelectSkillItems, self.ShowSkills.Count);
+            self.E_SelectSkilIItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkills.Count);
+            self.OnUpdateSelectSkillItem();
+        }
+
+        private static void OnSelectSkillItemClose(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
+        }
+
+        private static void OnSelectSkillItemConfirm(this ES_PetMeleeSet self)
+        {
+            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
+            self.OnConfirm().Coroutine();
+        }
+
+        private static void OnSelectSkillItemsRefresh(this ES_PetMeleeSet self, Transform transform, int index)
+        {
+            foreach (Scroll_Item_SelectSkillItem item in self.ScrollItemSelectSkillItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
+            Scroll_Item_SelectSkillItem scrollItemSelectSkillItem = self.ScrollItemSelectSkillItems[index].BindTrans(transform);
+            scrollItemSelectSkillItem.Refresh(self.ShowSkills[index]);
+            scrollItemSelectSkillItem.OnSelectSkillItem = self.OnSelectSkillItem;
+        }
+
+        private static void OnSelectSkillItem(this ES_PetMeleeSet self, int skillId)
+        {
+            if (skillId == 0)
+            {
+                return;
+            }
+
+            int maxNum = ConfigData.PetMeleeSkillMaxNum;
+            if (self.PetMeleeInfo.SkillList.Contains(skillId))
+            {
+                self.PetMeleeInfo.SkillList.Remove(skillId);
+            }
+            else
+            {
+                if (self.PetMeleeInfo.SkillList.Count < maxNum)
+                {
+                    self.PetMeleeInfo.SkillList.Add(skillId);
+                }
+                else
+                {
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("魔法卡最多选{0}个！", maxNum));
+                    }
+
+                    return;
+                }
+            }
+
+            self.OnUpdateSelectSkillItem();
+
+            using (zstring.Block())
+            {
+                self.E_SelectSkilIItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.SkillList.Count, maxNum);
+            }
+        }
+
+        private static void OnUpdateSelectSkillItem(this ES_PetMeleeSet self)
+        {
+            foreach (Scroll_Item_SelectSkillItem item in self.ScrollItemSelectSkillItems.Values)
+            {
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.SkillList.Contains(item.SkillId));
+            }
         }
 
         private static async ETTask OnConfirm(this ES_PetMeleeSet self)

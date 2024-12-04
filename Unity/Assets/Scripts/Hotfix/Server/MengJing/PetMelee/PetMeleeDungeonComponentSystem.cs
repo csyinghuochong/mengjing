@@ -219,9 +219,12 @@ namespace ET.Server
                         return null;
                     }
 
-                    // ...
-
-                    break;
+                    int index = RandomHelper.RandomNumber(0, petmeleeinfo.SkillList.Count);
+                    PetMeleeCardInfo cardInfo = PetMeleeCardInfo.Create();
+                    cardInfo.Id = IdGenerater.Instance.GenerateId();
+                    cardInfo.Type = (int)PetMeleeCarType.Skill;
+                    cardInfo.ConfigId = petmeleeinfo.SkillList[index];
+                    return cardInfo;
                 }
             }
 
@@ -346,7 +349,20 @@ namespace ET.Server
             }
             else if (useCard.Type == (int)PetMeleeCarType.Skill)
             {
-                // ...
+                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeSkillCost)
+                {
+                    return ErrorCode.ERR_PetMelee_MoLiNoEnough;
+                }
+                else
+                {
+                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeSkillCost);
+                }
+
+                // 暂时是让主角使用技能
+                C2M_SkillCmd cmd = C2M_SkillCmd.Create();
+                cmd.SkillID = useCard.ConfigId;
+
+                self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, true);
             }
 
             self.PetMeleeCardInHand.Remove(useCard);

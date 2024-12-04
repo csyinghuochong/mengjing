@@ -18,6 +18,8 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMainPetItem>> ScrollItemSelectMainPetItems;
 		public List<RolePetInfo> ShowMainPets = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SelectAssistPetItem>> ScrollItemSelectAssistPetItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SelectSkillItem>> ScrollItemSelectSkillItems;
+		public List<int> ShowSkills = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
@@ -461,6 +463,142 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_SelectSkillItemPanelRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SelectSkillItemPanelRectTransform == null )
+     			{
+		    		this.m_EG_SelectSkillItemPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel");
+     			}
+     			return this.m_EG_SelectSkillItemPanelRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SelectSkillItemCloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkillItemCloseButton == null )
+     			{
+		    		this.m_E_SelectSkillItemCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkillItemClose");
+     			}
+     			return this.m_E_SelectSkillItemCloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectSkillItemCloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkillItemCloseImage == null )
+     			{
+		    		this.m_E_SelectSkillItemCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkillItemClose");
+     			}
+     			return this.m_E_SelectSkillItemCloseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectSkilIItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkilIItemsImage == null )
+     			{
+		    		this.m_E_SelectSkilIItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItems");
+     			}
+     			return this.m_E_SelectSkilIItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_SelectSkilIItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkilIItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_SelectSkilIItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItems");
+     			}
+     			return this.m_E_SelectSkilIItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_SelectSkilIItemNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkilIItemNumText == null )
+     			{
+		    		this.m_E_SelectSkilIItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemNum");
+     			}
+     			return this.m_E_SelectSkilIItemNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SelectSkilIItemConfirmButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkilIItemConfirmButton == null )
+     			{
+		    		this.m_E_SelectSkilIItemConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemConfirm");
+     			}
+     			return this.m_E_SelectSkilIItemConfirmButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectSkilIItemConfirmImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectSkilIItemConfirmImage == null )
+     			{
+		    		this.m_E_SelectSkilIItemConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemConfirm");
+     			}
+     			return this.m_E_SelectSkilIItemConfirmImage;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -501,6 +639,14 @@ namespace ET.Client
 			this.m_E_SelectAssistPetItemNumText = null;
 			this.m_E_SelectAssistPetItemConfirmButton = null;
 			this.m_E_SelectAssistPetItemConfirmImage = null;
+			this.m_EG_SelectSkillItemPanelRectTransform = null;
+			this.m_E_SelectSkillItemCloseButton = null;
+			this.m_E_SelectSkillItemCloseImage = null;
+			this.m_E_SelectSkilIItemsImage = null;
+			this.m_E_SelectSkilIItemsLoopVerticalScrollRect = null;
+			this.m_E_SelectSkilIItemNumText = null;
+			this.m_E_SelectSkilIItemConfirmButton = null;
+			this.m_E_SelectSkilIItemConfirmImage = null;
 			this.uiTransform = null;
 		}
 
@@ -530,6 +676,14 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SelectAssistPetItemNumText = null;
 		private UnityEngine.UI.Button m_E_SelectAssistPetItemConfirmButton = null;
 		private UnityEngine.UI.Image m_E_SelectAssistPetItemConfirmImage = null;
+		private UnityEngine.RectTransform m_EG_SelectSkillItemPanelRectTransform = null;
+		private UnityEngine.UI.Button m_E_SelectSkillItemCloseButton = null;
+		private UnityEngine.UI.Image m_E_SelectSkillItemCloseImage = null;
+		private UnityEngine.UI.Image m_E_SelectSkilIItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectSkilIItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_SelectSkilIItemNumText = null;
+		private UnityEngine.UI.Button m_E_SelectSkilIItemConfirmButton = null;
+		private UnityEngine.UI.Image m_E_SelectSkilIItemConfirmImage = null;
 		public Transform uiTransform = null;
 	}
 }
