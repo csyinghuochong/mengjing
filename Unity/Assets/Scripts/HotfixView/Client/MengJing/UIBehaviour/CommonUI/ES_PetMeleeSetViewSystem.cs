@@ -179,6 +179,7 @@ namespace ET.Client
                 self.ShowMainPets.Add(rolePetInfos[i]);
             }
 
+            self.PetMeleeInfo.MainPetList.Clear();
             self.AddUIScrollItems(ref self.ScrollItemSelectMainPetItems, self.ShowMainPets.Count);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMainPets.Count);
             self.OnUpdateSelectMainPetItem();
@@ -266,6 +267,7 @@ namespace ET.Client
 
             List<int> petTuJianActives = self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives;
 
+            self.PetMeleeInfo.AssistPetList.Clear();
             self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, petTuJianActives.Count);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, petTuJianActives.Count);
             self.OnUpdateSelectAssistPetItem();
@@ -354,6 +356,7 @@ namespace ET.Client
             self.ShowSkills.Clear();
             self.ShowSkills.AddRange(ConfigData.PetMeleeSkillTest);
 
+            self.PetMeleeInfo.SkillList.Clear();
             self.AddUIScrollItems(ref self.ScrollItemSelectSkillItems, self.ShowSkills.Count);
             self.E_SelectSkilIItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkills.Count);
             self.OnUpdateSelectSkillItem();
