@@ -358,10 +358,14 @@ namespace ET.Server
                     self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeSkillCost);
                 }
 
+                float3 direction = position - self.Player.Position;
+                float ange = math.degrees(math.atan2(direction.x, direction.z));
+
                 // 暂时是让主角使用技能
                 C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 cmd.SkillID = useCard.ConfigId;
-
+                cmd.TargetAngle = (int)math.floor(ange);
+                cmd.TargetDistance = math.distance(position, self.Player.Position);
                 self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, true);
             }
 
