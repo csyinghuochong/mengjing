@@ -306,25 +306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: 
---- !u!114 &550010208227637035
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0d1ad44666d1b64fb45664b4dbcbb8f, type: 3}
-  m_Name: VisualEffectActivationClip(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  activationBehavior:
-    onClipEnter:
-      m_Name: OnPlay
-    onClipExit:
-      m_Name: OnStop
-    clipEnterEventAttributes: []
-    clipExitEventAttributes: []
 --- !u!114 &5398298306582584145
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -382,6 +363,47 @@ MonoBehaviour:
   VirtualCamera:
     exposedName: a9f157ef5a021084dab1e4a85f8fc056
     defaultValue: {fileID: 0}
+--- !u!114 &7703509880898445396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488c20dddec813547afc71a1f46c10dd, type: 3}
+  m_Name: VisualEffectControlClip
+  m_EditorClassIdentifier: 
+  scrubbing: 0
+  startSeed: 0
+  reinit: 0
+  prewarm:
+    enable: 0
+    stepCount: 20
+    deltaTime: 0.05
+    eventName:
+      m_Name: OnPlay
+  clipEvents:
+  - editorColor: {r: 0.48235294, g: 0.61960787, b: 0.019607844, a: 1}
+    enter:
+      time: 0
+      timeSpace: 0
+      name:
+        m_Name: OnPlay
+      eventAttributes:
+        content: []
+    exit:
+      time: 0
+      timeSpace: 1
+      name:
+        m_Name: OnStop
+      eventAttributes:
+        content: []
+  singleEvents: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7879830706054162843
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,14 +428,14 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0.3
     m_ClipIn: 0
-    m_Asset: {fileID: 550010208227637035}
+    m_Asset: {fileID: 7703509880898445396}
     m_Duration: 5.65
     m_TimeScale: 1
     m_ParentTrack: {fileID: 7879830706054162843}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 0
-    m_BlendOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -471,6 +493,8 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: VisualEffectActivationClip
+    m_DisplayName: VisualEffectControlClip
   m_Markers:
     m_Objects: []
+  m_VFXVersion: 1
+  reinit: 0
