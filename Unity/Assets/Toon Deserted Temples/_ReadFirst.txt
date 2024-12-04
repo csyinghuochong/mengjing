@@ -1,0 +1,11 @@
+Thanks for purchasing TOON Deserted Temples!
+
+A few easy steps are required in order to ensure proper function of the pack.
+
+	1. Please make sure you install the proper version in your Unity Project. At the moment, only Built-in (2021.3.0 and later) and URP (2021.3.0 and later) are supported.
+
+	2. Depending on the Unity version, the Color Space might be set to "Gamma" by default. Make sure you set it to "Linear", in order for the lighting to function properly.
+You can find the Color Space setting in: "Edit > Project Settings > Player > Other Settings > Rendering"
+
+	3. Make sure to check the "Opaque Texture" option box in the "Universal Render Pipeline Asset" that you're using in your project.
+You can find it in the "Assets > Settings" folder. This is required for the water shader to function with full features.

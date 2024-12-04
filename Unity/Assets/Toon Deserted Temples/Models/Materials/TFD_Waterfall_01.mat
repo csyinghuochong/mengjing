@@ -1,0 +1,174 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TFD_Waterfall_01
+  m_Shader: {fileID: 4800000, guid: 22c063fc56b408049bf0aec8dccc86c4, type: 3}
+  m_ValidKeywords:
+  - _RECEIVE_SHADOWS_OFF
+  m_InvalidKeywords:
+  - _RECEIVESHADOWS_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: f9ca64d3408222642ab931e3c3501018, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture1:
+        m_Texture: {fileID: 2800000, guid: e8076616ef343604d80dc40048ca2b1b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture2:
+        m_Texture: {fileID: 2800000, guid: a8f0bf26ec1a13d429948e0952c87a15, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture3:
+        m_Texture: {fileID: 2800000, guid: 4dae9bb34f4f78e4bb5ac29dec73f2de, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 31ddcdbbfd4470f47a32ed5564b7e2e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: af9893658bd35fb418f41f8388bda3bd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample14:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _BumpScale: 1
+    - _ChromaticAberration: 0.1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EdgeFade: 0.85
+    - _EdgeFoamDistance: 0.082
+    - _EdgeFoamHardness: 0.161
+    - _EdgeFoamOpacity: 0.885
+    - _EdgeFoamScale: 0.976
+    - _EdgeFoamSpeed: 0.18687928
+    - _EnvironmentReflections: 1
+    - _FlowSpeed: 1
+    - _FresnelIntensity: 0.28
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GradientFade: 1
+    - _GradientLevel: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Opacity: 0.234
+    - _OpacityDepth: 6
+    - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 0
+    - _ReflectionsCutoff: 0.248
+    - _ReflectionsCutoffScale: 6
+    - _ReflectionsCutoffScrollSpeed: 0.015
+    - _ReflectionsOpacity: 0.065
+    - _ReflectionsScale: 6
+    - _ReflectionsScrollSpeed: -0.01
+    - _RefractionCutoffScale: 12
+    - _RefractionFactor: 0.5
+    - _RefractionIntensity: 0.015
+    - _RefractionScrollSpeed: -0.025
+    - _ShallowColorDepth: 16.18
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SurfaceFoamIntensity: -0.156
+    - _SurfaceFoamScale: 8
+    - _SurfaceFoamScrollSpeed: 0.05
+    - _UVSec: 0
+    - _VerticalFade: 0.96
+    - _VerticalReflectionsScale: 4.8
+    - _VerticalScrollSpeed: -1
+    - _WaveAmplitude: 10
+    - _WaveIntensity: 1
+    - _WaveSpeed: 4
+    - _Waves: 1
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _BaseColor: {r: 0.5377358, g: 0.5153787, b: 0.5149074, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DeepColor: {r: 0.02745098, g: 0.17254898, b: 0.25490195, a: 1}
+    - _EdgeFoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlowSpeed: {r: 0, g: 0.65, b: 0, a: 0}
+    - _FresnelColor: {r: 0.8392157, g: 0.5960784, b: 0.36862743, a: 1}
+    - _Highlights1Color: {r: 0.61743504, g: 0.6908598, b: 0.7075472, a: 1}
+    - _Highlights2Color: {r: 0, g: 0.43867922, b: 0.5849056, a: 1}
+    - _ShallowColor: {r: 0.12941173, g: 0.33725488, b: 0.5019608, a: 1}
+  m_BuildTextureStacks: []
