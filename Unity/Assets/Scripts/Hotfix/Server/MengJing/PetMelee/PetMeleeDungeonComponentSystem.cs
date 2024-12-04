@@ -282,7 +282,7 @@ namespace ET.Server
             {
                 if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeMainPetCost)
                 {
-                    return ErrorCode.ERR_ExpNoEnough;
+                    return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
@@ -297,13 +297,10 @@ namespace ET.Server
                 }
 
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-                // 防止招太多
-                if (allpet.Count > 10)
+                if (allpet.Count >= ConfigData.PetMeleeMaxPetsInLine)
                 {
-                    return ErrorCode.ERR_Error;
+                    return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
-
-                // 单条战线最多几个宠物。。。
 
                 // // 不能存在相同的宠物
                 // if (unit.GetParent<UnitComponent>().Get(request.PetId) != null)
@@ -324,7 +321,7 @@ namespace ET.Server
             {
                 if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeAssistPetCost)
                 {
-                    return ErrorCode.ERR_ExpNoEnough;
+                    return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
@@ -334,10 +331,9 @@ namespace ET.Server
                 PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
 
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-                // 防止招太多
-                if (allpet.Count > 10)
+                if (allpet.Count > ConfigData.PetMeleeMaxPetsInLine)
                 {
-                    return ErrorCode.ERR_Error;
+                    return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
 
                 Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), self.Player.Id, CampEnum.CampPlayer_1,

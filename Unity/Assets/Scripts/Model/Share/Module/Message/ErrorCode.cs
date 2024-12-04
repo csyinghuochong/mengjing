@@ -228,6 +228,8 @@ namespace ET
         public const int ERR_Pet_CanNotLock = 300914;
         public const int ERR_Pet_NotFight = 300915;
         public const int ERR_Pet_Dead = 300916;
+        public const int ERR_PetMelee_MoLiNoEnough = 300917;
+        public const int ERR_PetMelee_PetNumMax = 300918;
 
         public const int ERR_Union_Same_Name = 301001;                              //同名的家族
         public const int ERR_MysteryItem_Max = 301002;                              //改道具每日购买次数已达上限

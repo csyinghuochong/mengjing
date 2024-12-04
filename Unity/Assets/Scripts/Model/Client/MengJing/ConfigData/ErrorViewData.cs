@@ -193,6 +193,8 @@ namespace ET.Client
             { ErrorCode.ERR_TalentPointNot, "天赋点不足" },
             { ErrorCode.ERR_LvNoHigh, "等级不足" },
             { ErrorCode.ERR_SessionDisconnect, "网络已断开" },
+            { ErrorCode.ERR_PetMelee_MoLiNoEnough, "魔力不足" },
+            { ErrorCode.ERR_PetMelee_PetNumMax, "宠物数量达到上限" },
         };
     }
 }
