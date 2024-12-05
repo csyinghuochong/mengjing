@@ -17,6 +17,15 @@ namespace ET.Server
                 aiComponent.TargetID = 0;
                 return 1;
             }
+            else
+            {
+                if (target.Type == UnitType.Player && target.Scene().GetComponent<MapComponent>().SceneType == SceneTypeEnum.PetMelee)
+                {
+                    aiComponent.TargetID = 0;
+                    return 1;
+                }
+            }
+            
             //获取范敌人是否在攻击范围内
             float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
             bool zhuiji = distance >= aiComponent.ActDistance && (aiComponent.Parent as Unit).GetComponent<StateComponentS>().IsCanZhuiJi();
