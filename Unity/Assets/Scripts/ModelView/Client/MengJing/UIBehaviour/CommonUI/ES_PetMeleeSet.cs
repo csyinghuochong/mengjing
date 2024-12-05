@@ -18,8 +18,8 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMainPetItem>> ScrollItemSelectMainPetItems;
 		public List<RolePetInfo> ShowMainPets = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SelectAssistPetItem>> ScrollItemSelectAssistPetItems;
-		public Dictionary<int, EntityRef<Scroll_Item_SelectSkillItem>> ScrollItemSelectSkillItems;
-		public List<int> ShowSkills = new();
+		public Dictionary<int, EntityRef<Scroll_Item_SelectMagicItem>> ScrollItemSelectMagicItems;
+		public List<int> ShowMagics = new();
 		
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{

@@ -59,16 +59,16 @@ namespace ET.Client
 
                     break;
                 }
-                case (int)PetMeleeCarType.Skill:
+                case (int)PetMeleeCarType.Magic:
                 {
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString());
                     Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     self.E_IconImage.sprite = sp;
                     using (zstring.Block())
                     {
-                        self.E_DesText.text = zstring.Format("魔法卡：{0}", skillConfig.SkillName);
-                        self.E_CostText.text = zstring.Format("魔力：{0}", ConfigData.PetMeleeSkillCost);
+                        self.E_DesText.text = zstring.Format("魔法卡：{0}", petMagicCardConfig.Name);
+                        self.E_CostText.text = zstring.Format("魔力：{0}", petMagicCardConfig.Cost);
                     }
 
                     break;

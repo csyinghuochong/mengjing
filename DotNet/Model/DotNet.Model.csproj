@@ -54,6 +54,7 @@
         <ProjectReference Include="..\ThirdParty\DotNet.ThirdParty.csproj" />
     </ItemGroup> 
     <ItemGroup>
+      <Folder Include="Generate\Config\" />
       <Folder Include="Server\MengJing\Happy\" />
       <Folder Include="Share\MengJing\Component\" />
       <Folder Update="..\..\Unity\Assets\Scripts\Model\Server\MengJing\TowerOfSeal" />

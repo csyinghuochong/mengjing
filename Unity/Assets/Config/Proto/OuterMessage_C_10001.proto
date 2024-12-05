@@ -7281,7 +7281,7 @@ message PetMeleeInfo
 {
 	repeated int64 MainPetList = 1; // 宠物乱斗，主战宠物
 	repeated int32 AssistPetList = 2; // 宠物乱斗，辅战宠物
-	repeated int32 SkillList = 3; // 宠物乱斗，魔法卡牌
+	repeated int32 MagicList = 3; // 宠物乱斗，魔法卡牌
 }
 
 message PetMeleeCardInfo

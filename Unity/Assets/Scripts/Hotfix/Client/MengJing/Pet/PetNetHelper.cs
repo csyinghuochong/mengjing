@@ -472,11 +472,11 @@ namespace ET.Client
                 PetMeleeInfo old = petComponent.PetMeleeInfoList[petComponent.PetMeleePlan];
                 old.MainPetList.Clear();
                 old.AssistPetList.Clear();
-                old.SkillList.Clear();
+                old.MagicList.Clear();
 
                 old.MainPetList.AddRange(petMeleeInfo.MainPetList);
                 old.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
-                old.SkillList.AddRange(petMeleeInfo.SkillList);
+                old.MagicList.AddRange(petMeleeInfo.MagicList);
             }
 
             return response.Error;

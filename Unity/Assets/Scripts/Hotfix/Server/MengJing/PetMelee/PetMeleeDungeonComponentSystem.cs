@@ -114,7 +114,7 @@ namespace ET.Server
                 }
                 else
                 {
-                    cardInfo = self.CreateCard(PetMeleeCarType.Skill);
+                    cardInfo = self.CreateCard(PetMeleeCarType.Magic);
                 }
 
                 if (cardInfo != null)
@@ -161,7 +161,7 @@ namespace ET.Server
 
             for (int i = 0; i < skillCardNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Skill);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic);
 
                 if (cardInfo != null)
                 {
@@ -199,9 +199,9 @@ namespace ET.Server
                 }
             }
 
-            for (int i = 0; i < ConfigData.PetMeleeFirstSkillNum; i++)
+            for (int i = 0; i < ConfigData.PetMeleeFirstMagicNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Skill);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic);
 
                 if (cardInfo != null)
                 {
@@ -265,22 +265,23 @@ namespace ET.Server
                     cardInfo.ConfigId = petmeleeinfo.AssistPetList[index];
                     return cardInfo;
                 }
-                case PetMeleeCarType.Skill:
+                case PetMeleeCarType.Magic:
                 {
-                    if (petmeleeinfo.SkillList.Count <= 0)
+                    if (petmeleeinfo.MagicList.Count <= 0)
                     {
                         return null;
                     }
 
                     // 有些魔法卡只能出现一次
                     List<int> cards = new();
-                    foreach (int id in petmeleeinfo.SkillList)
+                    foreach (int id in petmeleeinfo.MagicList)
                     {
+                        PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(id);
                         // 判断该卡是不是只能出现一次
-                        // if (self.UsedMainPetList.Contains(id))
-                        // {
-                        //     continue;
-                        // }
+                        if (petMagicCardConfig.IsOnly == 1 && self.UsedSkillList.Contains(id))
+                        {
+                            continue;
+                        }
 
                         cards.Add(id);
                     }
@@ -293,7 +294,7 @@ namespace ET.Server
                     int index = RandomHelper.RandomNumber(0, cards.Count);
                     PetMeleeCardInfo cardInfo = PetMeleeCardInfo.Create();
                     cardInfo.Id = IdGenerater.Instance.GenerateId();
-                    cardInfo.Type = (int)PetMeleeCarType.Skill;
+                    cardInfo.Type = (int)PetMeleeCarType.Magic;
                     cardInfo.ConfigId = cards[index];
 
                     self.UsedSkillList.Add(cards[index]);
@@ -423,15 +424,16 @@ namespace ET.Server
                     pet.GetComponent<AIComponent>().Begin();
                 }
             }
-            else if (useCard.Type == (int)PetMeleeCarType.Skill)
+            else if (useCard.Type == (int)PetMeleeCarType.Magic)
             {
-                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeSkillCost)
+                PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(useCard.ConfigId);
+                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < petMagicCardConfig.Cost)
                 {
                     return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
-                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeSkillCost);
+                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -petMagicCardConfig.Cost);
                 }
 
                 float3 direction = position - self.Player.Position;
@@ -439,7 +441,7 @@ namespace ET.Server
 
                 // 暂时是让主角使用技能
                 C2M_SkillCmd cmd = C2M_SkillCmd.Create();
-                cmd.SkillID = useCard.ConfigId;
+                cmd.SkillID = petMagicCardConfig.SkillId;
                 cmd.TargetAngle = (int)math.floor(ange);
                 cmd.TargetDistance = math.distance(position, self.Player.Position);
                 self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, true);

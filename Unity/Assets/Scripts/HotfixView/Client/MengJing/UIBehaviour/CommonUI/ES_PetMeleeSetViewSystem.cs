@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(Scroll_Item_SelectSkillItem))]
+    [FriendOf(typeof(Scroll_Item_SelectMagicItem))]
     [FriendOf(typeof(Scroll_Item_SelectAssistPetItem))]
     [FriendOf(typeof(Scroll_Item_SelectMainPetItem))]
     [EntitySystemOf(typeof(ES_PetMeleeSet))]
@@ -115,11 +115,11 @@ namespace ET.Client
             for (int i = 0; i < 6; i++)
             {
                 GameObject go = self.SkillItemList[i];
-                if (i < self.PetMeleeInfo.SkillList.Count)
+                if (i < self.PetMeleeInfo.MagicList.Count)
                 {
-                    int skillConfigId = self.PetMeleeInfo.SkillList[i];
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillConfigId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
+                    int magicConfigId = self.PetMeleeInfo.MagicList[i];
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(magicConfigId);
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString());
                     Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                     go.transform.Find("mask/Icon").gameObject.SetActive(true);
                     go.transform.Find("mask/Icon").GetComponent<Image>().sprite = sprite;
@@ -156,12 +156,12 @@ namespace ET.Client
 
             self.PetMeleeInfo.MainPetList.Clear();
             self.PetMeleeInfo.AssistPetList.Clear();
-            self.PetMeleeInfo.SkillList.Clear();
+            self.PetMeleeInfo.MagicList.Clear();
 
             PetMeleeInfo petMeleeInfo = petComponentC.PetMeleeInfoList[petComponentC.PetMeleePlan];
             self.PetMeleeInfo.MainPetList.AddRange(petMeleeInfo.MainPetList);
             self.PetMeleeInfo.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
-            self.PetMeleeInfo.SkillList.AddRange(petMeleeInfo.SkillList);
+            self.PetMeleeInfo.MagicList.AddRange(petMeleeInfo.MagicList);
 
             self.RefreshItemList();
 
@@ -353,12 +353,12 @@ namespace ET.Client
         {
             self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(true);
 
-            self.ShowSkills.Clear();
-            self.ShowSkills.AddRange(ConfigData.PetMeleeSkillTest);
+            self.ShowMagics.Clear();
+            self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
 
-            self.PetMeleeInfo.SkillList.Clear();
-            self.AddUIScrollItems(ref self.ScrollItemSelectSkillItems, self.ShowSkills.Count);
-            self.E_SelectSkilIItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkills.Count);
+            self.PetMeleeInfo.MagicList.Clear();
+            self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
+            self.E_SelectSkilIItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
         }
 
@@ -375,7 +375,7 @@ namespace ET.Client
 
         private static void OnSelectSkillItemsRefresh(this ES_PetMeleeSet self, Transform transform, int index)
         {
-            foreach (Scroll_Item_SelectSkillItem item in self.ScrollItemSelectSkillItems.Values)
+            foreach (Scroll_Item_SelectMagicItem item in self.ScrollItemSelectMagicItems.Values)
             {
                 if (item.uiTransform == transform)
                 {
@@ -383,9 +383,9 @@ namespace ET.Client
                 }
             }
 
-            Scroll_Item_SelectSkillItem scrollItemSelectSkillItem = self.ScrollItemSelectSkillItems[index].BindTrans(transform);
-            scrollItemSelectSkillItem.Refresh(self.ShowSkills[index]);
-            scrollItemSelectSkillItem.OnSelectSkillItem = self.OnSelectSkillItem;
+            Scroll_Item_SelectMagicItem scrollItemSelectMagicItem = self.ScrollItemSelectMagicItems[index].BindTrans(transform);
+            scrollItemSelectMagicItem.Refresh(self.ShowMagics[index]);
+            scrollItemSelectMagicItem.OnSelectSkillItem = self.OnSelectSkillItem;
         }
 
         private static void OnSelectSkillItem(this ES_PetMeleeSet self, int skillId)
@@ -396,15 +396,15 @@ namespace ET.Client
             }
 
             int maxNum = ConfigData.PetMeleeSkillMaxNum;
-            if (self.PetMeleeInfo.SkillList.Contains(skillId))
+            if (self.PetMeleeInfo.MagicList.Contains(skillId))
             {
-                self.PetMeleeInfo.SkillList.Remove(skillId);
+                self.PetMeleeInfo.MagicList.Remove(skillId);
             }
             else
             {
-                if (self.PetMeleeInfo.SkillList.Count < maxNum)
+                if (self.PetMeleeInfo.MagicList.Count < maxNum)
                 {
-                    self.PetMeleeInfo.SkillList.Add(skillId);
+                    self.PetMeleeInfo.MagicList.Add(skillId);
                 }
                 else
                 {
@@ -421,20 +421,20 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectSkilIItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.SkillList.Count, maxNum);
+                self.E_SelectSkilIItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MagicList.Count, maxNum);
             }
         }
 
         private static void OnUpdateSelectSkillItem(this ES_PetMeleeSet self)
         {
-            foreach (Scroll_Item_SelectSkillItem item in self.ScrollItemSelectSkillItems.Values)
+            foreach (Scroll_Item_SelectMagicItem item in self.ScrollItemSelectMagicItems.Values)
             {
                 if (item.uiTransform == null)
                 {
                     continue;
                 }
 
-                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.SkillList.Contains(item.SkillId));
+                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.MagicList.Contains(item.magicId));
             }
         }
 

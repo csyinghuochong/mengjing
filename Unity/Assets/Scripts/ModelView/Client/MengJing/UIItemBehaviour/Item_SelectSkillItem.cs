@@ -5,9 +5,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_SelectSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SelectSkillItem>
+	public  class Scroll_Item_SelectMagicItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SelectMagicItem>
 	{
-		public int SkillId;
+		public int magicId;
 		public Action<int> OnSelectSkillItem;
 		
 		public long DataId {get;set;}
@@ -17,7 +17,7 @@ namespace ET.Client
 			this.isCacheNode = isCache;
 		}
 
-		public Scroll_Item_SelectSkillItem BindTrans(Transform trans)
+		public Scroll_Item_SelectMagicItem BindTrans(Transform trans)
 		{
 			this.uiTransform = trans;
 			return this;

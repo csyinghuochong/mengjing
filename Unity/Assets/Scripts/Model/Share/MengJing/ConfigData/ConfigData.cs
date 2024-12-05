@@ -1936,12 +1936,6 @@ namespace ET
         public static int PetMeleeMainPetCost = 30;
 
         /// <summary>
-        /// 魔法卡消耗
-        /// </summary>
-        [StaticField]
-        public static int PetMeleeSkillCost = 10;
-
-        /// <summary>
         /// 主战宠物卡最多选几个
         /// </summary>
         [StaticField]
@@ -1963,7 +1957,7 @@ namespace ET
         /// 测试 魔法卡技能，目前由主角释放，配置技能的释放范围要大些
         /// </summary>
         [StaticField]
-        public static List<int> PetMeleeSkillTest = new() { 2202030 };
+        public static List<int> PetMeleeMagicTest = new() { 1001 };
 
         /// <summary>
         /// 手持多少张牌
@@ -1987,7 +1981,7 @@ namespace ET
         /// 首回合魔法卡随机多少个
         /// </summary>
         [StaticField]
-        public static int PetMeleeFirstSkillNum = 1;
+        public static int PetMeleeFirstMagicNum = 1;
 
         /// <summary>
         /// 主战宠物卡出现概率

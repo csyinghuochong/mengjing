@@ -31687,7 +31687,7 @@ namespace ET
         /// 宠物乱斗，魔法卡牌
         /// </summary>
         [MemoryPackOrder(2)]
-        public List<int> SkillList { get; set; } = new();
+        public List<int> MagicList { get; set; } = new();
 
         public override void Dispose()
         {
@@ -31698,7 +31698,7 @@ namespace ET
 
             this.MainPetList.Clear();
             this.AssistPetList.Clear();
-            this.SkillList.Clear();
+            this.MagicList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

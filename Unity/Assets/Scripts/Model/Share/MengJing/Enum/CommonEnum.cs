@@ -312,6 +312,6 @@ namespace ET
     {
         MainPet = 1,
         AssistPet = 2,
-        Skill = 3,
+        Magic = 3,
     }
 }

@@ -23,7 +23,7 @@
                 return;
             }
 
-            if (request.PetMeleeInfo.SkillList.Count >= ConfigData.PetMeleeSkillMaxNum)
+            if (request.PetMeleeInfo.MagicList.Count >= ConfigData.PetMeleeSkillMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
