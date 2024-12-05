@@ -54,7 +54,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_DesText.text = zstring.Format("辅战卡：{0}", petTuJianConfig.Name);
-                        self.E_CostText.text = zstring.Format("魔力：{0}", ConfigData.PetMeleeAssistPetCost);
+                        self.E_CostText.text = zstring.Format("魔力：{0}", petTuJianConfig.Cost);
                     }
 
                     break;
