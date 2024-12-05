@@ -73,6 +73,8 @@ namespace ET
 		public double ActivePro { get; set; }
 		/// <summary>精灵类型</summary>
 		public int JingLingType { get; set; }
+		/// <summary>召唤消耗</summary>
+		public int Cost { get; set; }
 		/// <summary>图标显示</summary>
 		public int Icon { get; set; }
 		/// <summary>模型</summary>

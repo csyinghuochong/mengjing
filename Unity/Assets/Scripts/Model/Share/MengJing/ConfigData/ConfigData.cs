@@ -1936,12 +1936,6 @@ namespace ET
         public static int PetMeleeMainPetCost = 30;
 
         /// <summary>
-        /// 辅战宠物卡消耗
-        /// </summary>
-        [StaticField]
-        public static int PetMeleeAssistPetCost = 10;
-
-        /// <summary>
         /// 魔法卡消耗
         /// </summary>
         [StaticField]

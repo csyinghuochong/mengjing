@@ -396,13 +396,15 @@ namespace ET.Server
             }
             else if (useCard.Type == (int)PetMeleeCarType.AssistPet)
             {
-                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeAssistPetCost)
+                int cost = PetTuJianConfigCategory.Instance.Get(useCard.ConfigId).Cost;
+
+                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < cost)
                 {
                     return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
-                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeAssistPetCost);
+                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -cost);
                 }
 
                 PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
