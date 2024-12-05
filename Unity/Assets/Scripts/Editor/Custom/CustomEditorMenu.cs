@@ -9,6 +9,7 @@ using Unity.Mathematics;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 剪切板
@@ -30,6 +31,10 @@ public class ClipBoard
 
 public class CustomEditorMenu
 {
+    static string sBundleCheckPath = "Assets/Bundles";
+    static string sBundleUICheckPath = "Assets/Bundles/UI";
+    static string sSceneCheckPath = "Assets/Bundles/Scenes";
+    
     [MenuItem("Custom/修改Tag 子对象的Tag同步为父对象")]
     static void ChangeChildTag()
     {
@@ -109,7 +114,7 @@ public class CustomEditorMenu
             GenerateConnectSlope_1(gameObject_1, gameObject_2);
         }
     }
-    
+
     [MenuItem("Custom/生成连接坡体 相对方向需要和朝向一致")]
     static void GenerateConnectSlope_2()
     {
@@ -141,7 +146,7 @@ public class CustomEditorMenu
             GenerateConnectSlope_1(gameObject_1, gameObject_2);
         }
     }
-    
+
     private static void GenerateConnectSlope_3(GameObject gameObject_1, GameObject gameObject_2)
     {
         Vector3 eulerAngles_1 = gameObject_1.transform.eulerAngles;
@@ -154,7 +159,7 @@ public class CustomEditorMenu
             Log.Error("Y方向有旋转 无法生成！");
             return;
         }
-        
+
         string cube_name = gameObject_1.name + "_" + gameObject_2.gameObject;
         if (GameObject.Find($"NavMesh/{cube_name}") != null)
         {
@@ -198,7 +203,7 @@ public class CustomEditorMenu
         Vector3 position_top_2_d = position_top_2
                 + gameObject_2.transform.forward * scale_2.z * -0.5f
                 + gameObject_2.transform.right * scale_2.x * -0.5f;
-        
+
         //找出距离最短的两条边
         float distance_1_ab_2_ab = DistanceToLineSegment(position_top_1_a, position_top_2_a, position_top_2_b);
         float distance_1_ab_2_cd = DistanceToLineSegment(position_top_1_a, position_top_2_c, position_top_2_d);
@@ -228,7 +233,7 @@ public class CustomEditorMenu
                 miniIndex = i;
             }
         }
-        
+
         Vector3 postion_init = Vector3.zero;
         Vector3 postion_end1 = Vector3.zero;
         Vector3 postion_end2 = Vector3.zero;
@@ -244,32 +249,32 @@ public class CustomEditorMenu
                 postion_end1 = position_top_2_c;
                 postion_end2 = position_top_2_d;
                 break;
-            case 2:  //distance_1_bc_2_ad
+            case 2: //distance_1_bc_2_ad
                 postion_init = (position_top_1_b + position_top_1_c) * 0.5f;
                 postion_end1 = position_top_2_a;
                 postion_end2 = position_top_2_d;
                 break;
-            case 3:  //distance_1_bc_2_bc
+            case 3: //distance_1_bc_2_bc
                 postion_init = (position_top_1_b + position_top_1_c) * 0.5f;
                 postion_end1 = position_top_2_b;
                 postion_end2 = position_top_2_c;
                 break;
-            case 4:  //distance_1_cd_2_ab
-                postion_init = (position_top_1_c+ position_top_1_d) * 0.5f;
+            case 4: //distance_1_cd_2_ab
+                postion_init = (position_top_1_c + position_top_1_d) * 0.5f;
                 postion_end1 = position_top_2_a;
                 postion_end2 = position_top_2_b;
                 break;
-            case 5:  //distance_1_cd_2_cd
-                postion_init = (position_top_1_c+ position_top_1_d) * 0.5f;
+            case 5: //distance_1_cd_2_cd
+                postion_init = (position_top_1_c + position_top_1_d) * 0.5f;
                 postion_end1 = position_top_2_c;
                 postion_end2 = position_top_2_d;
                 break;
-            case 6:  //distance_1_da_2_da
+            case 6: //distance_1_da_2_da
                 postion_init = (position_top_1_d + position_top_1_a) * 0.5f;
                 postion_end1 = position_top_2_d;
                 postion_end2 = position_top_2_a;
-                break; 
-            case 7:  //distance_1_da_2_bc
+                break;
+            case 7: //distance_1_da_2_bc
                 postion_init = (position_top_1_d + position_top_1_a) * 0.5f;
                 postion_end1 = position_top_2_b;
                 postion_end2 = position_top_2_c;
@@ -277,7 +282,7 @@ public class CustomEditorMenu
             default:
                 break;
         }
-        
+
         Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(postion_init, postion_end1, postion_end2);
         cube.transform.localPosition = (postion_init + position_top_1_ac) * 0.5f;
         cube.transform.localScale = new Vector3(Vector3.Distance(postion_init, position_top_1_ac), 0.1f,
@@ -298,7 +303,7 @@ public class CustomEditorMenu
         //     return (point_to_start - dir_normalized).magnitude;
         // else
         //     return Mathf.Abs(Vector3.Distance(point, lineStart) - Vector3.Distance(point, lineEnd));
-        
+
         Vector3 lineDir = (lineEnd - lineStart).normalized;
         Vector3 pointDir = point - lineStart;
 
@@ -308,11 +313,11 @@ public class CustomEditorMenu
         // Vector3 projectionDir = pointOnLine - pointDir;
         // return lineStart + projectionDir;
 
-        Vector3  point2 =  lineStart + lineDir * dotProduct;
+        Vector3 point2 = lineStart + lineDir * dotProduct;
         return Vector3.Distance(point, point2);
     }
-    
-      private static void GenerateConnectSlope_2(GameObject gameObject_1, GameObject gameObject_2)
+
+    private static void GenerateConnectSlope_2(GameObject gameObject_1, GameObject gameObject_2)
     {
         Vector3 position_1 = gameObject_1.transform.localPosition;
         Vector3 position_2 = gameObject_2.transform.localPosition;
@@ -362,6 +367,7 @@ public class CustomEditorMenu
             {
                 generatetype = 1;
             }
+
             if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
             {
                 generatetype = 2;
@@ -376,97 +382,96 @@ public class CustomEditorMenu
                 Log.Error("Z方向有旋转 无法生成！");
                 return;
             }
-            
-             if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
-             {
-                 generatetype = 2;
+
+            if (eulerAngles_1_y_direction == 1 || eulerAngles_1_y_direction == 3)
+            {
+                generatetype = 2;
             }
 
             if (eulerAngles_1_y_direction == 2 || eulerAngles_1_y_direction == 4)
             {
                 generatetype = 1;
-
             }
         }
 
         if (generatetype == 1)
         {
-             Vector3 position_top_1_a = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.right * scale_1.x * 0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-                Vector3 position_top_1_b = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.right * scale_1.x * -0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+            Vector3 position_top_1_a = gameObject_1.transform.localPosition
+                    + gameObject_1.transform.right * scale_1.x * 0.5f
+                    + gameObject_1.transform.up * scale_1.y * 0.5f;
+            Vector3 position_top_1_b = gameObject_1.transform.localPosition
+                    + gameObject_1.transform.right * scale_1.x * -0.5f
+                    + gameObject_1.transform.up * scale_1.y * 0.5f;
 
-                Vector3 position_top_2_a = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.right * scale_2.x * 0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-                Vector3 position_top_2_b = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.right * scale_2.x * -0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+            Vector3 position_top_2_a = gameObject_2.transform.localPosition
+                    + gameObject_2.transform.right * scale_2.x * 0.5f
+                    + gameObject_2.transform.up * scale_2.y * 0.5f;
+            Vector3 position_top_2_b = gameObject_2.transform.localPosition
+                    + gameObject_2.transform.right * scale_2.x * -0.5f
+                    + gameObject_2.transform.up * scale_2.y * 0.5f;
 
-                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
-                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
-                if (distance_1 < distance_2)
-                {
-                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.forward * 1;
-                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
-                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
-                        Vector3.Distance(position_top_2_b, position_top_1_ac));
-                    cube.transform.LookAt(position_top_1_ac);
-                }
-                else
-                {
-                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.forward * 1;
-                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
+            float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
+            float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
+            if (distance_1 < distance_2)
+            {
+                Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.forward * 1;
+                Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
+                cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
+                cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
+                    Vector3.Distance(position_top_2_b, position_top_1_ac));
+                cube.transform.LookAt(position_top_1_ac);
+            }
+            else
+            {
+                Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.forward * 1;
+                Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
 
-                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
-                        Vector3.Distance(position_top_1_b, position_top_2_ac));
-                    cube.transform.LookAt(position_top_2_ac);
-                }
+                cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
+                cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
+                    Vector3.Distance(position_top_1_b, position_top_2_ac));
+                cube.transform.LookAt(position_top_2_ac);
+            }
         }
         else
         {
-             Vector3 position_top_1_a = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.forward * scale_1.z * 0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
-                Vector3 position_top_1_b = gameObject_1.transform.localPosition
-                        + gameObject_1.transform.forward * scale_1.z * -0.5f
-                        + gameObject_1.transform.up * scale_1.y * 0.5f;
+            Vector3 position_top_1_a = gameObject_1.transform.localPosition
+                    + gameObject_1.transform.forward * scale_1.z * 0.5f
+                    + gameObject_1.transform.up * scale_1.y * 0.5f;
+            Vector3 position_top_1_b = gameObject_1.transform.localPosition
+                    + gameObject_1.transform.forward * scale_1.z * -0.5f
+                    + gameObject_1.transform.up * scale_1.y * 0.5f;
 
-                Vector3 position_top_2_a = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.forward * scale_2.z * 0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
-                Vector3 position_top_2_b = gameObject_2.transform.localPosition
-                        + gameObject_2.transform.forward * scale_2.z * -0.5f
-                        + gameObject_2.transform.up * scale_2.y * 0.5f;
+            Vector3 position_top_2_a = gameObject_2.transform.localPosition
+                    + gameObject_2.transform.forward * scale_2.z * 0.5f
+                    + gameObject_2.transform.up * scale_2.y * 0.5f;
+            Vector3 position_top_2_b = gameObject_2.transform.localPosition
+                    + gameObject_2.transform.forward * scale_2.z * -0.5f
+                    + gameObject_2.transform.up * scale_2.y * 0.5f;
 
-                float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
-                float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
-                if (distance_1 < distance_2)
-                {
-                    Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.right * 1;
-                    Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
-                    cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
-                        Vector3.Distance(position_top_2_b, position_top_1_ac));
-                    cube.transform.LookAt(position_top_1_ac);
-                }
-                else
-                {
-                    Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.right * 1;
-                    Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
+            float distance_1 = Vector3.Distance(position_top_1_a, position_top_2_b);
+            float distance_2 = Vector3.Distance(position_top_1_b, position_top_2_a);
+            if (distance_1 < distance_2)
+            {
+                Vector3 position_top_1_aa = position_top_1_a + gameObject_1.transform.right * 1;
+                Vector3 position_top_1_ac = GetVerticalProjectionOnLineSegment(position_top_2_b, position_top_1_a, position_top_1_aa);
+                cube.transform.localPosition = (position_top_2_b + position_top_1_ac) * 0.5f;
+                cube.transform.localScale = new Vector3(Vector3.Distance(position_top_2_b, position_top_1_ac), 0.1f,
+                    Vector3.Distance(position_top_2_b, position_top_1_ac));
+                cube.transform.LookAt(position_top_1_ac);
+            }
+            else
+            {
+                Vector3 position_top_2_aa = position_top_2_a + gameObject_2.transform.right * 1;
+                Vector3 position_top_2_ac = GetVerticalProjectionOnLineSegment(position_top_1_b, position_top_2_a, position_top_2_aa);
 
-                    cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
-                    cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
-                        Vector3.Distance(position_top_1_b, position_top_2_ac));
-                    cube.transform.LookAt(position_top_2_ac);
-                }
+                cube.transform.localPosition = (position_top_1_b + position_top_2_ac) * 0.5f;
+                cube.transform.localScale = new Vector3(Vector3.Distance(position_top_1_b, position_top_2_ac), 0.1f,
+                    Vector3.Distance(position_top_1_b, position_top_2_ac));
+                cube.transform.LookAt(position_top_2_ac);
+            }
         }
     }
-      
+
     private static void GenerateConnectSlope_1(GameObject gameObject_1, GameObject gameObject_2)
     {
         Vector3 position_1 = gameObject_1.transform.localPosition;
@@ -616,7 +621,7 @@ public class CustomEditorMenu
             return 1;
         }
     }
-    
+
     public static Vector3 GetVerticalProjectionOnLineSegment(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
     {
         Vector3 lineDir = (lineEnd - lineStart).normalized;
@@ -824,7 +829,7 @@ public class CustomEditorMenu
     [MenuItem("Custom/获取喜从天降所有格子的坐标点")]
     static void GetAllBoxPositions()
     {
-        var objs = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
+        var objs = Resources.FindObjectsOfTypeAll(typeof (GameObject)) as GameObject[];
         string postionList = "";
         foreach (GameObject obj in objs)
         {
@@ -858,7 +863,6 @@ public class CustomEditorMenu
         Transform parentTransform = gameObjectpool.transform;
         Transform[] allchildren = parentTransform.GetComponentsInChildren<Transform>(); // 创建一个GameObject数组
 
-
         // 打印出所有子GameObject的名字
         // export节点下面必须全部是perfab 并且 不能有嵌套frefab
         bool sceneerror = false;
@@ -870,6 +874,7 @@ public class CustomEditorMenu
             {
                 continue;
             }
+
             if (IsEmptyNode(gameObject.gameObject))
             {
                 continue;
@@ -900,26 +905,27 @@ public class CustomEditorMenu
                 Log.Warning($"{gameObject.name}:  未处理，可能是嵌套Prefab");
                 continue;
             }
-            
+
             // 确保传入的GameObject是一个Prefab实例
-            string prefabpath  =  PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
-            bool moveret =  PrefabMoveToBundle(prefabpath);
+            string prefabpath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+            bool moveret = PrefabMoveToBundle(prefabpath);
             if (!moveret)
             {
                 sceneerror = true;
                 break;
             }
-                
+
             if (!validobjectlist.ContainsKey(prefabname))
             {
-                validobjectlist.Add( prefabname, string.Empty );
+                validobjectlist.Add(prefabname, string.Empty);
             }
             else
             {
                 validobjectlist[prefabname] += "|";
             }
 
-            string objectinfo = $"{FormatDecimal(gameObject.position.x)}:{FormatDecimal(gameObject.position.y)}:{FormatDecimal(gameObject.position.z)}" +
+            string objectinfo =
+                    $"{FormatDecimal(gameObject.position.x)}:{FormatDecimal(gameObject.position.y)}:{FormatDecimal(gameObject.position.z)}" +
                     $":{FormatDecimal(gameObject.localScale.x)}:{FormatDecimal(gameObject.localScale.y)}:{FormatDecimal(gameObject.localScale.z)}" +
                     $":{FormatDecimal(gameObject.rotation.eulerAngles.x)}:{FormatDecimal(gameObject.rotation.eulerAngles.y)}:{FormatDecimal(gameObject.rotation.eulerAngles.z)}" +
                     $":{gameObject.tag}:{gameObject.gameObject.layer}";
@@ -936,46 +942,46 @@ public class CustomEditorMenu
             Log.Error("场景过于简单！！！");
             return;
         }
-        
+
         string allobjectinfo = string.Empty;
 
         foreach (var VARIABLE in validobjectlist)
         {
             allobjectinfo += $"{VARIABLE.Key}&{VARIABLE.Value}@";
         }
-        
+
         ClipBoard.Copy(allobjectinfo);
-        
+
         MapObjectConfig mapObjectConfig = new MapObjectConfig();
         mapObjectConfig.Id = 1;
         mapObjectConfig.MapConfig = allobjectinfo;
-        
+
         string destinationPath = $"H:\\GitMengJing\\Unity\\Assets\\Bundles\\MapConfig\\{EditorSceneManager.GetActiveScene().name}.bytes";
         // 将二进制数据写入.bytes文件
         File.WriteAllBytes(destinationPath, mapObjectConfig.ToBson());
-        
+
         GameObject.DestroyImmediate(gameObjectpool);
-        
+
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
-        
+
         Log.Debug("allobjectinfo:  " + allobjectinfo);
     }
 
     static string GetPrefabName(GameObject gameObject)
     {
-         string prefabname = string.Empty;
-        
-         // if (StringHelper.IsSpecialChar(gameObject.name))
-         // {
-         //     Log.Error($"{gameObject.name}:  含有特殊字符！");
-         //     return prefabname;
-         // }
-         
+        string prefabname = string.Empty;
+
+        // if (StringHelper.IsSpecialChar(gameObject.name))
+        // {
+        //     Log.Error($"{gameObject.name}:  含有特殊字符！");
+        //     return prefabname;
+        // }
+
         var type = PrefabUtility.GetPrefabAssetType(gameObject);
         var status = PrefabUtility.GetPrefabInstanceStatus(gameObject);
-            
+
         // 是否为预制体实例判断
         if (type == PrefabAssetType.NotAPrefab || status == PrefabInstanceStatus.NotAPrefab)
         {
@@ -987,17 +993,17 @@ public class CustomEditorMenu
         {
             return prefabname;
         }
-        
+
         // 确保传入的GameObject是一个Prefab实例
-        string prefabpath  =  PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+        string prefabpath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
         if (string.IsNullOrEmpty(prefabpath))
         {
             Log.Error($"{gameObject.name}:  找不到Prefab资源！");
             return prefabname;
         }
-        
+
         string[] pathlist = prefabpath.Split('/');
-        
+
         prefabname = pathlist[pathlist.Length - 1];
         prefabname = prefabname.Substring(0, prefabname.Length - 7);
 
@@ -1011,25 +1017,25 @@ public class CustomEditorMenu
         {
             return false;
         }
- 
+
         // 检查GameObject是否有子节点
-        for(int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             if (!GetPrefabName(gameObject.transform.GetChild(i).gameObject).Equals(gameObject.name))
             {
                 return false;
             }
         }
- 
+
         return true;
     }
-    
+
     [MenuItem("ET/NavMesh/导入场景修改后要导出")]
-    static  void ImportScene()
+    static void ImportScene()
     {
         //TextAsset v = Resources.Load<GlobalConfig><TextAsset>($"Assets/Bundles/MapConfig/1.bytes");
         //H:\GitMengJing\Unity\Assets\Bundles\MapConfig
-        byte[] bytes  = File.ReadAllBytes($"H:/GitMengJing/Unity/Assets/Bundles/MapConfig/{EditorSceneManager.GetActiveScene().name}.bytes");
+        byte[] bytes = File.ReadAllBytes($"H:/GitMengJing/Unity/Assets/Bundles/MapConfig/{EditorSceneManager.GetActiveScene().name}.bytes");
 
         if (bytes == null)
         {
@@ -1042,7 +1048,7 @@ public class CustomEditorMenu
             Log.Error("该场景没有AdditiveHide节点！！");
             return;
         }
-        
+
         GameObject gameObjectpool = GameObject.Find("AdditiveHide/pool"); // 获取当前GameObject的Transform
         if (gameObjectpool != null)
         {
@@ -1056,20 +1062,19 @@ public class CustomEditorMenu
         gameObjectpool.transform.localScale = Vector3.one;
         gameObjectpool.transform.localPosition = Vector3.zero;
 
-        object category = MongoHelper.Deserialize(typeof(MapObjectConfig), bytes, 0, bytes.Length);
+        object category = MongoHelper.Deserialize(typeof (MapObjectConfig), bytes, 0, bytes.Length);
         MapObjectConfig singleton = category as MapObjectConfig;
 
         List<MapObjectItem> mapObjectItem = MapObjectItem.ToMapObjectItem(singleton.MapConfig);
-        
-        ImportMapObject(gameObjectpool,mapObjectItem);
-        
-        
+
+        ImportMapObject(gameObjectpool, mapObjectItem);
+
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         Log.Debug("ImportMapObject");
     }
-    
+
     static void ImportMapObject(GameObject pool, List<MapObjectItem> mapObjectItems)
     {
         if (pool == null)
@@ -1084,21 +1089,21 @@ public class CustomEditorMenu
             //     GameObject.DestroyImmediate(pool.transform.Find(mapinfo.AssetPath).gameObject);
             // }
 
-              UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Bundles/Unit/Scene/{mapinfo.AssetPath}.prefab", typeof(GameObject));
-              if (prefab == null)
-              {
-                  Log.Error($"prefab == null:  {mapinfo.AssetPath}");
-                  continue;
-              }
+            UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Bundles/Unit/Scene/{mapinfo.AssetPath}.prefab", typeof (GameObject));
+            if (prefab == null)
+            {
+                Log.Error($"prefab == null:  {mapinfo.AssetPath}");
+                continue;
+            }
 
-              GameObject gameitem = (GameObject)GameObject.Instantiate(prefab);
+            GameObject gameitem = (GameObject)GameObject.Instantiate(prefab);
 
-              GameObject gamenode = new GameObject(mapinfo.AssetPath);
-              gamenode.transform.SetParent(pool.transform);;
-              gamenode.transform.localScale = Vector3.one;
-              gamenode.transform.localPosition = Vector3.zero;
-            
-           
+            GameObject gamenode = new GameObject(mapinfo.AssetPath);
+            gamenode.transform.SetParent(pool.transform);
+            ;
+            gamenode.transform.localScale = Vector3.one;
+            gamenode.transform.localPosition = Vector3.zero;
+
             for (int i = 0; i < mapinfo.PositionList.Count; i++)
             {
                 // 将实例转换为Prefab实例
@@ -1121,6 +1126,7 @@ public class CustomEditorMenu
                     prefabAsset.name = mapinfo.AssetPath;
                 }
             }
+
             GameObject.DestroyImmediate(gameitem);
         }
     }
@@ -1135,9 +1141,9 @@ public class CustomEditorMenu
 
     static bool PrefabMoveToBundle(string prefabpath)
     {
-        string projectPath = Application.dataPath.Substring(0, Application.dataPath.Length - "/Assets".Length); 
+        string projectPath = Application.dataPath.Substring(0, Application.dataPath.Length - "/Assets".Length);
         //Application.dataPath = H:/GitMengJing/Unity/Assets    projectPath = H:/GitMengJing/Unity
-        prefabpath = projectPath +  "/" + prefabpath;
+        prefabpath = projectPath + "/" + prefabpath;
 
         if (prefabpath.Contains("Bundles/Unit/Scene"))
         {
@@ -1148,30 +1154,31 @@ public class CustomEditorMenu
         string[] pathlist = prefabpath.Split('/');
         string destinationFile = Application.dataPath + "/Bundles/Unit/Scene/" + pathlist[pathlist.Length - 1];
 
-        bool moveret =  MoveFile(prefabpath, destinationFile);
+        bool moveret = MoveFile(prefabpath, destinationFile);
         MoveFile(prefabpath + ".meta", destinationFile + ".meta");
-        
-        Debug.Log($"{prefabpath}   to    {destinationFile}" );
-        
+
+        Debug.Log($"{prefabpath}   to    {destinationFile}");
+
         return moveret;
     }
 
-    static bool MoveFile(string sourceFile, string destinationFile )
+    static bool MoveFile(string sourceFile, string destinationFile)
     {
         try
         {
             // 确保目标路径存在
             var destinationDirectory = Path.GetDirectoryName(destinationFile);
-            
+
             if (!Directory.Exists(destinationDirectory))
             {
                 Directory.CreateDirectory(destinationDirectory);
             }
+
             if (File.Exists(destinationFile))
             {
                 return true;
             }
-            
+
             // 移动文件
             File.Move(sourceFile, destinationFile);
             Log.Debug("文件移动成功:" + destinationFile);
@@ -1185,32 +1192,36 @@ public class CustomEditorMenu
     }
 
     //判断是否为预制体的根节点
-    static int IsPrefabRoot(GameObject obj) {
-        if (PrefabUtility.IsAnyPrefabInstanceRoot(obj)) {
+    static int IsPrefabRoot(GameObject obj)
+    {
+        if (PrefabUtility.IsAnyPrefabInstanceRoot(obj))
+        {
             return 1; //根perfab
         }
 
-        if (PrefabStageUtility.GetCurrentPrefabStage()?.prefabContentsRoot == obj) {
+        if (PrefabStageUtility.GetCurrentPrefabStage()?.prefabContentsRoot == obj)
+        {
             return 2;
         }
 
-        if (PrefabUtility.GetOutermostPrefabInstanceRoot(obj) == obj) {
+        if (PrefabUtility.GetOutermostPrefabInstanceRoot(obj) == obj)
+        {
             return 3;
         }
 
-        if (PrefabUtility.IsPartOfAnyPrefab(obj)) {
+        if (PrefabUtility.IsPartOfAnyPrefab(obj))
+        {
             return 4;
         }
 
         return 0;
     }
 
-    
     [MenuItem("Custom/获取全部Shader路径")]
     static void FindAllShaders()
     {
         string shaderPaths = "";
-
+        
         string projectPath = Application.dataPath.Replace("/Assets", "");
 
         string[] allFiles = Directory.GetFiles(projectPath, "*.*", SearchOption.AllDirectories);
@@ -1289,7 +1300,7 @@ public class CustomEditorMenu
     }
 
     // [MenuItem("Asset / ), false, 1]
-    [MenuItem("Assets/Custom/Check  Dependencies", false, 1)] //路径
+    [MenuItem("Assets/Custom/Check Dependencies", false, 1)] //路径
     public static void CheckDependencies()
     {
         string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
@@ -1307,5 +1318,229 @@ public class CustomEditorMenu
         }
 
         UnityEngine.Debug.Log("KCheckDependencies: End");
+    }
+
+    // [MenuItem("Asset / ), false, 1]
+    [MenuItem("Assets/Custom/Check References Bundler", false, 1)] //路径
+    public static void KCheckBundleReferences()
+    {
+        string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+
+        string[] assetPath = fontPath.Split('/');
+        string fontAssetName = assetPath[assetPath.Length - 1];
+        if (fontAssetName.Contains("."))
+        {
+            fontAssetName = fontAssetName.Split('.')[0];
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: Begin");
+
+        List<string> fileList = new List<string>();
+        fileList.AddRange(GetFile(sBundleCheckPath, fileList));
+
+        string dataPath = Application.dataPath;
+        int pathLength = dataPath.Length - 6;
+        for (int i = 0; i < fileList.Count; i++)
+        {
+            string itemPath = fileList[i];
+            if (itemPath.Contains(".meta"))
+            {
+                continue;
+            }
+
+            itemPath = itemPath.Remove(0, pathLength);
+            string[] dependPathList = AssetDatabase.GetDependencies(new string[] { itemPath });
+            foreach (string path in dependPathList)
+            {
+                // string[] assetPath = path.Split('/');
+                //if (assetPath[assetPath.Length-1] == fongPath)
+                if (path == fontPath)
+                {
+                    UnityEngine.Debug.Log($"以下文件有引用： {itemPath} ");
+
+                    GameObject tmpObj = AssetDatabase.LoadAssetAtPath(itemPath, typeof (GameObject)) as GameObject;
+                    //tmpObj = GameObject.Instantiate(tmpObj) as GameObject;
+                    Text[] tmpAr = tmpObj.GetComponentsInChildren<Text>();
+                    for (int t = 0; t < tmpAr.Length; t++)
+                    {
+                        Text textTemp = tmpAr[t];
+                        Font fontTemp = textTemp.font;
+                        if (fontTemp == null)
+                        {
+                            continue;
+                        }
+
+                        string assetName = fontTemp.name;
+                        if (fontAssetName == assetName)
+                        {
+                            UnityEngine.Debug.Log($" {textTemp.name}");
+                        }
+                    }
+
+                    // TextMeshPro[] tmpProAr = tmpObj.GetComponentsInChildren<TextMeshPro>();
+                    // for (int t = 0; t < tmpProAr.Length; t++)
+                    // {
+                    //     TextMeshPro textTemp = tmpProAr[t];
+                    //     TMP_FontAsset fontTemp = textTemp.font;
+                    //     if (fontTemp == null)
+                    //     {
+                    //         continue;
+                    //     }
+                    //
+                    //     string assetName = fontTemp.name;
+                    //     if (fontAssetName == assetName)
+                    //     {
+                    //         UnityEngine.Debug.Log($" {textTemp.name}");
+                    //     }
+                    // }
+                }
+            }
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: End");
+    }
+
+    [MenuItem("Assets/Custom/Check References Bundler UI", false, 1)] //路径
+    public static void KCheckBundleUIReferences()
+    {
+        string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+
+        string[] assetPath = fontPath.Split('/');
+        string fontAssetName = assetPath[assetPath.Length - 1];
+        if (fontAssetName.Contains("."))
+        {
+            fontAssetName = fontAssetName.Split('.')[0];
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: Begin");
+
+        List<string> fileList = new List<string>();
+        fileList.AddRange(GetFile(sBundleUICheckPath, fileList));
+
+        string dataPath = Application.dataPath;
+        int pathLength = dataPath.Length - 6;
+        for (int i = 0; i < fileList.Count; i++)
+        {
+            string itemPath = fileList[i];
+            if (itemPath.Contains(".meta"))
+            {
+                continue;
+            }
+
+            itemPath = itemPath.Remove(0, pathLength);
+            string[] dependPathList = AssetDatabase.GetDependencies(new string[] { itemPath });
+            foreach (string path in dependPathList)
+            {
+                // string[] assetPath = path.Split('/');
+                //if (assetPath[assetPath.Length-1] == fongPath)
+                if (path == fontPath)
+                {
+                    UnityEngine.Debug.Log($"以下文件有引用： {itemPath} ");
+
+                    //GameObject tmpObj = AssetDatabase.LoadAssetAtPath(itemPath, typeof(GameObject)) as GameObject;
+                    ////tmpObj = GameObject.Instantiate(tmpObj) as GameObject;
+                    //Text[] tmpAr = tmpObj.GetComponentsInChildren<Text>();
+                    //for (int t = 0; t < tmpAr.Length; t++)
+                    //{
+                    //    Text textTemp = tmpAr[t];
+                    //    Font fontTemp = textTemp.font;
+                    //    if (fontTemp == null)
+                    //    {
+                    //        continue;
+                    //    }
+                    //    string assetName = fontTemp.name;
+                    //    if (fontAssetName == assetName)
+                    //    {
+                    //        UnityEngine.Debug.Log($" {textTemp.name}");
+                    //    }
+                    //}
+
+                    //TextMeshPro[] tmpProAr = tmpObj.GetComponentsInChildren<TextMeshPro>();
+                    //for (int t = 0; t < tmpProAr.Length; t++)
+                    //{
+                    //    TextMeshPro textTemp = tmpProAr[t];
+                    //    TMP_FontAsset fontTemp = textTemp.font;
+                    //    if (fontTemp == null)
+                    //    {
+                    //        continue;
+                    //    }
+                    //    string assetName = fontTemp.name;
+                    //    if (fontAssetName == assetName)
+                    //    {
+                    //        UnityEngine.Debug.Log($" {textTemp.name}");
+                    //    }
+                    //}
+                }
+            }
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: End");
+    }
+    
+    /// <summary>
+    /// 获取路径下所有文件以及子文件夹中文件
+    /// </summary>
+    /// <param name="path">全路径根目录</param>
+    /// <param name="FileList">存放所有文件的全路径</param>
+    /// <returns></returns>
+    public static List<string> GetFile(string path, List<string> FileList)
+    {
+        DirectoryInfo dir = new DirectoryInfo(path);
+        FileInfo[] fil = dir.GetFiles();
+        DirectoryInfo[] dii = dir.GetDirectories();
+        foreach (FileInfo f in fil)
+        {
+            //int size = Convert.ToInt32(f.Length);
+            long size = f.Length;
+            FileList.Add(f.FullName);//添加文件路径到列表中
+        }
+        //获取子文件夹内的文件列表，递归遍历
+        foreach (DirectoryInfo d in dii)
+        {
+            GetFile(d.FullName, FileList);
+        }
+        return FileList;
+    }
+
+    // [MenuItem("Asset / ), false, 1]
+    [MenuItem("Assets/Custom/Check References Scene", false, 1)] //路径
+    public static void KCheckSceneReferences()
+    {
+        string fontPath = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+
+        string[] assetPath = fontPath.Split('/');
+        string fontAssetName = assetPath[assetPath.Length - 1];
+        if (fontAssetName.Contains("."))
+        {
+            fontAssetName = fontAssetName.Split('.')[0];
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: Begin");
+
+        List<string> fileList = new List<string>();
+        fileList.AddRange(GetFile(sSceneCheckPath, fileList));
+
+        string dataPath = Application.dataPath;
+        int pathLength = dataPath.Length - 6;
+        for (int i = 0; i < fileList.Count; i++)
+        {
+            string itemPath = fileList[i];
+            if (itemPath.Contains(".meta"))
+            {
+                continue;
+            }
+
+            itemPath = itemPath.Remove(0, pathLength);
+            string[] dependPathList = AssetDatabase.GetDependencies(new string[] { itemPath });
+            foreach (string path in dependPathList)
+            {
+                if (path == fontPath)
+                {
+                    UnityEngine.Debug.Log($"以下文件有引用： {itemPath} ");
+                }
+            }
+        }
+
+        UnityEngine.Debug.Log("KCheckFontReferences: End");
     }
 }
