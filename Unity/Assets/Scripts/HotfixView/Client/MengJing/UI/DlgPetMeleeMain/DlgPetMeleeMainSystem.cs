@@ -162,7 +162,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.View.E_LeftTimeTextText.text = zstring.Format("剩余时间：{0}", leftTime / 1000);
+                        self.View.E_LeftTimeTextText.text = zstring.Format("{0}秒后战斗开始！", leftTime / 1000);
                     }
 
                     self.View.E_LeftTimeImgImage.fillAmount = leftTime * 1f / self.ReadyTime;
@@ -171,9 +171,17 @@ namespace ET.Client
                 {
                     FlyTipComponent.Instance.ShowFlyTip("一大波怪物正在来袭!!!");
                     PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
-                    self.View.EG_TopRectTransform.gameObject.SetActive(false);
+                    self.View.EG_LeftTimeRectTransform.gameObject.SetActive(false);
+                    self.StartTime = nowTime;
                     self.GameStart = true;
-                    self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                }
+            }
+            else
+            {
+                long leftTime = ConfigData.PetMeleeBattleMaxTime - (nowTime - self.StartTime);
+                using (zstring.Block())
+                {
+                    self.View.E_LeftTimeTextText.text = zstring.Format("{0}秒后战斗结束！", leftTime / 1000);
                 }
             }
         }

@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_TopRectTransform
+		public UnityEngine.RectTransform EG_LeftTimeRectTransform
      	{
      		get
      		{
@@ -50,28 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_TopRectTransform == null )
+     			if( this.m_EG_LeftTimeRectTransform == null )
      			{
-		    		this.m_EG_TopRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Top");
+		    		this.m_EG_LeftTimeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftTime");
      			}
-     			return this.m_EG_TopRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_LeftTimeTextText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_LeftTimeTextText == null )
-     			{
-		    		this.m_E_LeftTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Top/E_LeftTimeText");
-     			}
-     			return this.m_E_LeftTimeTextText;
+     			return this.m_EG_LeftTimeRectTransform;
      		}
      	}
 
@@ -86,9 +69,26 @@ namespace ET.Client
      			}
      			if( this.m_E_LeftTimeImgImage == null )
      			{
-		    		this.m_E_LeftTimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Top/E_LeftTimeImg");
+		    		this.m_E_LeftTimeImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftTime/E_LeftTimeImg");
      			}
      			return this.m_E_LeftTimeImgImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_LeftTimeTextText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LeftTimeTextText == null )
+     			{
+		    		this.m_E_LeftTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LeftTimeText");
+     			}
+     			return this.m_E_LeftTimeTextText;
      		}
      	}
 
@@ -215,9 +215,9 @@ namespace ET.Client
 		{
 			this.m_E_TouchImage = null;
 			this.m_E_TouchEventTrigger = null;
-			this.m_EG_TopRectTransform = null;
-			this.m_E_LeftTimeTextText = null;
+			this.m_EG_LeftTimeRectTransform = null;
 			this.m_E_LeftTimeImgImage = null;
+			this.m_E_LeftTimeTextText = null;
 			this.m_E_MoLiImgImage = null;
 			this.m_E_MoLiText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
@@ -230,9 +230,9 @@ namespace ET.Client
 
 		private UnityEngine.UI.Image m_E_TouchImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_TouchEventTrigger = null;
-		private UnityEngine.RectTransform m_EG_TopRectTransform = null;
-		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
+		private UnityEngine.RectTransform m_EG_LeftTimeRectTransform = null;
 		private UnityEngine.UI.Image m_E_LeftTimeImgImage = null;
+		private UnityEngine.UI.Text m_E_LeftTimeTextText = null;
 		private UnityEngine.UI.Image m_E_MoLiImgImage = null;
 		private UnityEngine.UI.Text m_E_MoLiText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
