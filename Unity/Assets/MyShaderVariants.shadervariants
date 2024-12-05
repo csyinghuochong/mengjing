@@ -1,0 +1,621 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MyShaderVariants
+  m_Shaders:
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON SHADOWS_DEPTH
+        passType: 8
+  - first: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: _SUNDISK_SIMPLE
+        passType: 0
+  - first: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 202, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: _ALPHABLEND_ON
+        passType: 0
+      - keywords: _ALPHATEST_ON _COLORCOLOR_ON _REQUIRE_UV2
+        passType: 0
+      - keywords: PROCEDURAL_INSTANCING_ON _ALPHABLEND_ON
+        passType: 8
+      - keywords: PROCEDURAL_INSTANCING_ON _ALPHATEST_ON _REQUIRE_UV2
+        passType: 8
+      - keywords: SHADOWS_DEPTH _ALPHABLEND_ON
+        passType: 8
+      - keywords: SHADOWS_DEPTH _ALPHATEST_ON _REQUIRE_UV2
+        passType: 8
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 10720, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 10721, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _EMISSION _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _MAIN_LIGHT_SHADOWS _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _MAIN_LIGHT_SHADOWS _NORMALMAP
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _MAIN_LIGHT_SHADOWS _NORMALMAP _SPECULARHIGHLIGHTS_OFF
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _NORMALMAP
+        passType: 13
+  - first: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
+    second:
+      variants:
+      - keywords: _ALPHATEST_ON _EMISSION
+        passType: 0
+      - keywords: _EMISSION _FADING_ON _SOFTPARTICLES_ON _SURFACE_TYPE_TRANSPARENT
+        passType: 0
+      - keywords: _EMISSION _SURFACE_TYPE_TRANSPARENT
+        passType: 0
+  - first: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+        passType: 13
+  - first: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
+        passType: 13
+  - first: {fileID: 4800000, guid: 7416434d398d3f74cafeac1642916d51, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: 
+        passType: 13
+      - keywords: 
+        passType: 14
+  - first: {fileID: 4800000, guid: dcad05f175c6f5b4bb8c35842aa5a96b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 6856502c6f7145441a2b8b7366e521b3, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: 
+        passType: 13
+      - keywords: 
+        passType: 14
+  - first: {fileID: 4800000, guid: 341b058cd7dee4f5cba5cc59a513619e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: f4f96caa19b27524687b441f720f958f,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: b50955928b87e714ab31f7fe9003b849, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _SMOOTHNESSSOURCE_ALBEDO_ALPHA
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _SMOOTHNESSSOURCE_METALLIC_ALPHA
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 885acccc5f38c2840be6c959d19efca0,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: -6465566751694194690, guid: 6a39a903c0355b94e83ad8bde66075c7,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: EVALUATE_SH_VERTEX _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS
+        passType: 13
+  - first: {fileID: 4800000, guid: 9f7e299f202797a4cb234938560347b2, type: 3}
+    second:
+      variants:
+      - keywords: _2SIDESSECONDEDGE_ON _AXIS_Z _GUIDEAFFECTSEDGESBLENDING_ON
+        passType: 8
+  - first: {fileID: 4800000, guid: bc992512c7ee89d41aadf27228675e0b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: 
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 3bb35f7f86ffc45c2aa6fc4291f787fc,
+      type: 3}
+    second:
+      variants:
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _SHADING_STYLE_HAIR_AND_METAL
+        passType: 0
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _SHADING_STYLE_SKIN_AND_TEXTILES
+        passType: 0
+      - keywords: _ADDITIONAL_LIGHTS _SHADING_STYLE_HAIR_AND_METAL
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _SHADING_STYLE_SKIN_AND_TEXTILES
+        passType: 8
+      - keywords: _SHADING_STYLE_HAIR_AND_METAL
+        passType: 8
+      - keywords: _SHADING_STYLE_SKIN_AND_TEXTILES
+        passType: 8
+  - first: {fileID: 4800000, guid: 76f8a8247a9952a4393b35768748ecaa, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: d2fcf3fdde90a8747920abf9a156372d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: c61194769c49566439e564fcdf2deff8, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _BLENDNORMALS_ON _COVERAGEOVERLAYTYPE_WORLD_NORMAL
+          _COVERAGE_ON _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _BLENDNORMALS_ON _COVERAGEOVERLAYTYPE_WORLD_NORMAL
+          _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _COVERAGEOVERLAYTYPE_VERTEX_POSITION
+          _MAIN_LIGHT_SHADOWS
+        passType: 13
+  - first: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _WIND_ON
+        passType: 8
+      - keywords: _WIND_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _COLOR2ENABLE_ON _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
+          _MAIN_LIGHT_SHADOWS _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED _TRANCLUSENCYENABLE_ON
+          _WIND_ON
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
+          _MAIN_LIGHT_SHADOWS _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED _TRANCLUSENCYENABLE_ON
+          _WIND_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 4e76d4023d7e0411297c670f878973e2, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 29c4798100bc7654d95191789568fd20,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: ecfa8f5732b504ef98fba10aa18d0326, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 9c453302c6300e64996a20b6e6d61178, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _BLENDNORMALS_ON _COVERAGEON_ON
+          _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R _MAIN_LIGHT_SHADOWS _OVERLAYMETHOD_VERTEX_POSITION
+          _SMOOTHNESSSOURCE_METALLIC_ALPHA
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _BLENDNORMALS_ON _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R
+          _MAIN_LIGHT_SHADOWS _OVERLAYMETHOD_WORLD_NORMAL _SMOOTHNESSSOURCE_METALLIC_ALPHA
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _BLENDNORMALS_ON _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R
+          _MAIN_LIGHT_SHADOWS _OVERLAYMETHOD_WORLD_NORMAL _SMOOTHNESSSOURCE_METALLIC_R
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _BLENDNORMALS_ON _COVERAGEON_ON _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R
+          _MAIN_LIGHT_SHADOWS _OVERLAYMETHOD_VERTEX_POSITION _SMOOTHNESSSOURCE_METALLIC_ALPHA
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _BLENDNORMALS_ON _COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R
+          _MAIN_LIGHT_SHADOWS _OVERLAYMETHOD_WORLD_NORMAL _SMOOTHNESSSOURCE_METALLIC_R
+        passType: 13
+  - first: {fileID: 4800000, guid: 947355c823b272d489f36561db5960f5, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+          _NOISEWORLDSPACEUVS_ON _NORMALWORLDSPACEUVS_ON
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 148abe62744ef47419d72b8f327e003d,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: 04f71f53d85a777419bea44b671d3da0, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: c723bf599da5bf2418887cb5d81e4600, type: 3}
+    second:
+      variants:
+      - keywords: _ENABLEWIND_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS
+          _SECONDCOLOROVERLAYTYPE_WORLD_POSITION _SMOOTHNESSSOURCE_SMOOTHNESS_ALPHA
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+          _SMOOTHNESSSOURCE_SMOOTHNESS_ALPHA
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 48356d57c9cf49645a6f11246edc0508,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 1d10d370c3f169448b4d855d9b93645f, type: 3}
+    second:
+      variants:
+      - keywords: _ANCHORTHEFOLIAGEBASE_ON _ENABLEWIND_ON
+        passType: 8
+      - keywords: _ENABLEWIND_ON
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ANCHORTHEFOLIAGEBASE_ON
+          _COLOR2ENABLE_ON _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_UV_BASED
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ANCHORTHEFOLIAGEBASE_ON
+          _COLOR2ENABLE_ON _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ANCHORTHEFOLIAGEBASE_ON
+          _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _COLOR2ENABLE_ON _ENABLEWIND_ON
+          _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_UV_BASED
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _COLOR2ENABLE_ON _ENABLEWIND_ON
+          _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ENABLEWIND_ON _MAIN_LIGHT_SHADOWS
+          _SECONDCOLOROVERLAYTYPE_WORLD_POSITION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ANCHORTHEFOLIAGEBASE_ON _COLOR2ENABLE_ON _ENABLEWIND_ON
+          _MAIN_LIGHT_SHADOWS _SECONDCOLOROVERLAYTYPE_UV_BASED
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 0a62ce06f13f3b44fa3cda31f7bc45d3,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 4509922185c0db246983daba8a7c9c6e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: d7dd1c3f4cba1d441a7d295a168bac0d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: INSTANCING_ON
+        passType: 8
+      - keywords: INSTANCING_ON _FADING
+        passType: 8
+      - keywords: INSTANCING_ON _FADING _SCALEMAP
+        passType: 8
+      - keywords: INSTANCING_ON _SCALEMAP
+        passType: 8
+      - keywords: _FADING
+        passType: 8
+      - keywords: _SCALEMAP
+        passType: 8
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ADVANCED_LIGHTING
+          _FADING _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ADVANCED_LIGHTING
+          _FADING _MAIN_LIGHT_SHADOWS _NORMALMAP _SCALEMAP
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ADVANCED_LIGHTING
+          _MAIN_LIGHT_SHADOWS
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _ADVANCED_LIGHTING
+          _MAIN_LIGHT_SHADOWS _SCALEMAP
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADVANCED_LIGHTING _MAIN_LIGHT_SHADOWS _NORMALMAP
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _MAIN_LIGHT_SHADOWS _SIMPLE_LIGHTING
+        passType: 13
+  - first: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 6f0f961f33f1abf4f87d8b6909a05ae9, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 2280f576a6e24d848ab42f9114ad2b47,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 6707f2ddaa5b82b4297679aa0c194c1b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 13c02b14c4d048fa9653293d54f6e0e1, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: 2dc950ae6709e1249b25548b357e3e9e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: affe7ca333e34564b87394162c5bc9d6,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 402b8ef79f7ca3b4fa75cf4d96b2ccb6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 128884b8f0bc0bb4494e8c4757dfcf67, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 5a659dc855f7c604ab331468e82264f8, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fb9e0d484aa88744d82ff846aaa10a15, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 5cbf9b39f53165b4597e780d76bf2cf7, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 35e513c05d70d5b4e923d7bd37975b36, type: 3}
+    second:
+      variants:
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: f6e8203fb71a5a8499f7151f6ee2bf76,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: -6465566751694194690, guid: 4558a026fe213bd41992ca204c5c2c6b,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: -6465566751694194690, guid: 67533c9c85391154384a29e7892ad143,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 4c6ca57bef297be40ab508e13189beda, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: bd633d18b02a45b47804d018628801a5, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 9c57b6815e205024eadb1d825fc7c4ff,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: f616c47fe26d3e54f9249d3e7db2ba5b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: c0ace1ca4bc0718448acf798c93d52d9, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: ddd79b692fb685643aac79cc9fc0c39f,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: -6465566751694194690, guid: 4129263f158a51b40af39ceabc9793c8,
+      type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
