@@ -107,6 +107,14 @@ namespace ET.Client
             }
 
             Vector3 pos = raycastHit.point;
+
+            if ((self.PetMeleeCardInfo.Type == (int)PetMeleeCarType.MainPet || self.PetMeleeCardInfo.Type == (int)PetMeleeCarType.AssistPet) &&
+                pos.x > 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请放置在左边");
+                return;
+            }
+
             self.GetParent<DlgPetMeleeMain>().UseCard(self, pos).Coroutine();
         }
     }

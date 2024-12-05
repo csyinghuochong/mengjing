@@ -20,11 +20,11 @@ namespace ET.Client
 
             self.E_SetMainButton.AddListener(self.OnSetMain);
             self.E_SetAssistButton.AddListener(self.OnSetAssist);
-            self.E_SetSkillButton.AddListener(self.OnSetSkill);
+            self.E_SetMagicButton.AddListener(self.OnSetMagic);
 
             self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
             self.AssistPetItem = self.EG_AssistPetListRectTransform.GetChild(0).gameObject;
-            self.SkillItem = self.EG_SkillListRectTransform.GetChild(0).gameObject;
+            self.MagicItem = self.EG_MagicListRectTransform.GetChild(0).gameObject;
             self.InitItemList();
 
             self.E_SelectMainPetItemCloseButton.AddListener(self.OnSelectMainPetItemClose);
@@ -37,10 +37,10 @@ namespace ET.Client
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectAssistPetItemsRefresh);
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
 
-            self.E_SelectSkillItemCloseButton.AddListener(self.OnSelectSkillItemClose);
-            self.E_SelectSkilIItemConfirmButton.AddListener(self.OnSelectSkillItemConfirm);
-            self.E_SelectSkilIItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectSkillItemsRefresh);
-            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
+            self.E_SelectMagicItemCloseButton.AddListener(self.OnSelectSkillItemClose);
+            self.E_SelectMagicItemConfirmButton.AddListener(self.OnSelectSkillItemConfirm);
+            self.E_SelectMagicItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectSkillItemsRefresh);
+            self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_PlanSetToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
         }
@@ -67,11 +67,11 @@ namespace ET.Client
                 self.AssistPetItemList.Add(go);
             }
 
-            self.SkillItemList.Add(self.SkillItem);
+            self.MagicItemList.Add(self.MagicItem);
             for (int i = 1; i < 6; i++)
             {
-                GameObject go = UnityEngine.Object.Instantiate(self.SkillItem, self.SkillItem.transform.parent);
-                self.SkillItemList.Add(go);
+                GameObject go = UnityEngine.Object.Instantiate(self.MagicItem, self.MagicItem.transform.parent);
+                self.MagicItemList.Add(go);
             }
         }
 
@@ -114,7 +114,7 @@ namespace ET.Client
 
             for (int i = 0; i < 6; i++)
             {
-                GameObject go = self.SkillItemList[i];
+                GameObject go = self.MagicItemList[i];
                 if (i < self.PetMeleeInfo.MagicList.Count)
                 {
                     int magicConfigId = self.PetMeleeInfo.MagicList[i];
@@ -349,27 +349,27 @@ namespace ET.Client
             }
         }
 
-        private static void OnSetSkill(this ES_PetMeleeSet self)
+        private static void OnSetMagic(this ES_PetMeleeSet self)
         {
-            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(true);
+            self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(true);
 
             self.ShowMagics.Clear();
             self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
 
             self.PetMeleeInfo.MagicList.Clear();
             self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
-            self.E_SelectSkilIItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
+            self.E_SelectMagicItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
         }
 
         private static void OnSelectSkillItemClose(this ES_PetMeleeSet self)
         {
-            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
         }
 
         private static void OnSelectSkillItemConfirm(this ES_PetMeleeSet self)
         {
-            self.EG_SelectSkillItemPanelRectTransform.gameObject.SetActive(false);
+            self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
             self.OnConfirm().Coroutine();
         }
 
@@ -421,7 +421,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectSkilIItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MagicList.Count, maxNum);
+                self.E_SelectMagicItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MagicList.Count, maxNum);
             }
         }
 

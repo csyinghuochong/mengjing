@@ -10,10 +10,10 @@ namespace ET.Client
 	{
 		public GameObject MainPetItem;
 		public GameObject AssistPetItem;
-		public GameObject SkillItem;
+		public GameObject MagicItem;
 		public List<GameObject> MainPetItemList = new();
 		public List<GameObject> AssistPetItemList = new();
-		public List<GameObject> SkillItemList = new();
+		public List<GameObject> MagicItemList = new();
 		public PetMeleeInfo PetMeleeInfo;
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMainPetItem>> ScrollItemSelectMainPetItems;
 		public List<RolePetInfo> ShowMainPets = new();
@@ -72,7 +72,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SkillListRectTransform
+		public UnityEngine.RectTransform EG_MagicListRectTransform
      	{
      		get
      		{
@@ -81,11 +81,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_SkillListRectTransform == null )
+     			if( this.m_EG_MagicListRectTransform == null )
      			{
-		    		this.m_EG_SkillListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillList");
+		    		this.m_EG_MagicListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_MagicList");
      			}
-     			return this.m_EG_SkillListRectTransform;
+     			return this.m_EG_MagicListRectTransform;
      		}
      	}
 
@@ -157,7 +157,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_SetSkillButton
+		public UnityEngine.UI.Button E_SetMagicButton
      	{
      		get
      		{
@@ -166,15 +166,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SetSkillButton == null )
+     			if( this.m_E_SetMagicButton == null )
      			{
-		    		this.m_E_SetSkillButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SetSkill");
+		    		this.m_E_SetMagicButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_SetMagic");
      			}
-     			return this.m_E_SetSkillButton;
+     			return this.m_E_SetMagicButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SetSkillImage
+		public UnityEngine.UI.Image E_SetMagicImage
      	{
      		get
      		{
@@ -183,11 +183,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SetSkillImage == null )
+     			if( this.m_E_SetMagicImage == null )
      			{
-		    		this.m_E_SetSkillImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SetSkill");
+		    		this.m_E_SetMagicImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_SetMagic");
      			}
-     			return this.m_E_SetSkillImage;
+     			return this.m_E_SetMagicImage;
      		}
      	}
 
@@ -463,7 +463,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SelectSkillItemPanelRectTransform
+		public UnityEngine.RectTransform EG_SelectMagicItemPanelRectTransform
      	{
      		get
      		{
@@ -472,15 +472,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_SelectSkillItemPanelRectTransform == null )
+     			if( this.m_EG_SelectMagicItemPanelRectTransform == null )
      			{
-		    		this.m_EG_SelectSkillItemPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel");
+		    		this.m_EG_SelectMagicItemPanelRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel");
      			}
-     			return this.m_EG_SelectSkillItemPanelRectTransform;
+     			return this.m_EG_SelectMagicItemPanelRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_SelectSkillItemCloseButton
+		public UnityEngine.UI.Button E_SelectMagicItemCloseButton
      	{
      		get
      		{
@@ -489,15 +489,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkillItemCloseButton == null )
+     			if( this.m_E_SelectMagicItemCloseButton == null )
      			{
-		    		this.m_E_SelectSkillItemCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkillItemClose");
+		    		this.m_E_SelectMagicItemCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemClose");
      			}
-     			return this.m_E_SelectSkillItemCloseButton;
+     			return this.m_E_SelectMagicItemCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectSkillItemCloseImage
+		public UnityEngine.UI.Image E_SelectMagicItemCloseImage
      	{
      		get
      		{
@@ -506,15 +506,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkillItemCloseImage == null )
+     			if( this.m_E_SelectMagicItemCloseImage == null )
      			{
-		    		this.m_E_SelectSkillItemCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkillItemClose");
+		    		this.m_E_SelectMagicItemCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemClose");
      			}
-     			return this.m_E_SelectSkillItemCloseImage;
+     			return this.m_E_SelectMagicItemCloseImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectSkilIItemsImage
+		public UnityEngine.UI.Image E_SelectMagicItemsImage
      	{
      		get
      		{
@@ -523,15 +523,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkilIItemsImage == null )
+     			if( this.m_E_SelectMagicItemsImage == null )
      			{
-		    		this.m_E_SelectSkilIItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItems");
+		    		this.m_E_SelectMagicItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItems");
      			}
-     			return this.m_E_SelectSkilIItemsImage;
+     			return this.m_E_SelectMagicItemsImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_SelectSkilIItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_SelectMagicItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -540,15 +540,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkilIItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_SelectMagicItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SelectSkilIItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItems");
+		    		this.m_E_SelectMagicItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItems");
      			}
-     			return this.m_E_SelectSkilIItemsLoopVerticalScrollRect;
+     			return this.m_E_SelectMagicItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SelectSkilIItemNumText
+		public UnityEngine.UI.Text E_SelectMagicItemNumText
      	{
      		get
      		{
@@ -557,15 +557,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkilIItemNumText == null )
+     			if( this.m_E_SelectMagicItemNumText == null )
      			{
-		    		this.m_E_SelectSkilIItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemNum");
+		    		this.m_E_SelectMagicItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemNum");
      			}
-     			return this.m_E_SelectSkilIItemNumText;
+     			return this.m_E_SelectMagicItemNumText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_SelectSkilIItemConfirmButton
+		public UnityEngine.UI.Button E_SelectMagicItemConfirmButton
      	{
      		get
      		{
@@ -574,15 +574,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkilIItemConfirmButton == null )
+     			if( this.m_E_SelectMagicItemConfirmButton == null )
      			{
-		    		this.m_E_SelectSkilIItemConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemConfirm");
+		    		this.m_E_SelectMagicItemConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemConfirm");
      			}
-     			return this.m_E_SelectSkilIItemConfirmButton;
+     			return this.m_E_SelectMagicItemConfirmButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectSkilIItemConfirmImage
+		public UnityEngine.UI.Image E_SelectMagicItemConfirmImage
      	{
      		get
      		{
@@ -591,11 +591,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SelectSkilIItemConfirmImage == null )
+     			if( this.m_E_SelectMagicItemConfirmImage == null )
      			{
-		    		this.m_E_SelectSkilIItemConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectSkillItemPanel/E_SelectSkilIItemConfirm");
+		    		this.m_E_SelectMagicItemConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemConfirm");
      			}
-     			return this.m_E_SelectSkilIItemConfirmImage;
+     			return this.m_E_SelectMagicItemConfirmImage;
      		}
      	}
 
@@ -616,13 +616,13 @@ namespace ET.Client
 			this.m_E_PlanSetToggleGroup = null;
 			this.m_EG_MainPetListRectTransform = null;
 			this.m_EG_AssistPetListRectTransform = null;
-			this.m_EG_SkillListRectTransform = null;
+			this.m_EG_MagicListRectTransform = null;
 			this.m_E_SetMainButton = null;
 			this.m_E_SetMainImage = null;
 			this.m_E_SetAssistButton = null;
 			this.m_E_SetAssistImage = null;
-			this.m_E_SetSkillButton = null;
-			this.m_E_SetSkillImage = null;
+			this.m_E_SetMagicButton = null;
+			this.m_E_SetMagicImage = null;
 			this.m_EG_SelectMainPetItemPanelRectTransform = null;
 			this.m_E_SelectMainPetItemCloseButton = null;
 			this.m_E_SelectMainPetItemCloseImage = null;
@@ -639,27 +639,27 @@ namespace ET.Client
 			this.m_E_SelectAssistPetItemNumText = null;
 			this.m_E_SelectAssistPetItemConfirmButton = null;
 			this.m_E_SelectAssistPetItemConfirmImage = null;
-			this.m_EG_SelectSkillItemPanelRectTransform = null;
-			this.m_E_SelectSkillItemCloseButton = null;
-			this.m_E_SelectSkillItemCloseImage = null;
-			this.m_E_SelectSkilIItemsImage = null;
-			this.m_E_SelectSkilIItemsLoopVerticalScrollRect = null;
-			this.m_E_SelectSkilIItemNumText = null;
-			this.m_E_SelectSkilIItemConfirmButton = null;
-			this.m_E_SelectSkilIItemConfirmImage = null;
+			this.m_EG_SelectMagicItemPanelRectTransform = null;
+			this.m_E_SelectMagicItemCloseButton = null;
+			this.m_E_SelectMagicItemCloseImage = null;
+			this.m_E_SelectMagicItemsImage = null;
+			this.m_E_SelectMagicItemsLoopVerticalScrollRect = null;
+			this.m_E_SelectMagicItemNumText = null;
+			this.m_E_SelectMagicItemConfirmButton = null;
+			this.m_E_SelectMagicItemConfirmImage = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_PlanSetToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_MainPetListRectTransform = null;
 		private UnityEngine.RectTransform m_EG_AssistPetListRectTransform = null;
-		private UnityEngine.RectTransform m_EG_SkillListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_MagicListRectTransform = null;
 		private UnityEngine.UI.Button m_E_SetMainButton = null;
 		private UnityEngine.UI.Image m_E_SetMainImage = null;
 		private UnityEngine.UI.Button m_E_SetAssistButton = null;
 		private UnityEngine.UI.Image m_E_SetAssistImage = null;
-		private UnityEngine.UI.Button m_E_SetSkillButton = null;
-		private UnityEngine.UI.Image m_E_SetSkillImage = null;
+		private UnityEngine.UI.Button m_E_SetMagicButton = null;
+		private UnityEngine.UI.Image m_E_SetMagicImage = null;
 		private UnityEngine.RectTransform m_EG_SelectMainPetItemPanelRectTransform = null;
 		private UnityEngine.UI.Button m_E_SelectMainPetItemCloseButton = null;
 		private UnityEngine.UI.Image m_E_SelectMainPetItemCloseImage = null;
@@ -676,14 +676,14 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SelectAssistPetItemNumText = null;
 		private UnityEngine.UI.Button m_E_SelectAssistPetItemConfirmButton = null;
 		private UnityEngine.UI.Image m_E_SelectAssistPetItemConfirmImage = null;
-		private UnityEngine.RectTransform m_EG_SelectSkillItemPanelRectTransform = null;
-		private UnityEngine.UI.Button m_E_SelectSkillItemCloseButton = null;
-		private UnityEngine.UI.Image m_E_SelectSkillItemCloseImage = null;
-		private UnityEngine.UI.Image m_E_SelectSkilIItemsImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectSkilIItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_SelectSkilIItemNumText = null;
-		private UnityEngine.UI.Button m_E_SelectSkilIItemConfirmButton = null;
-		private UnityEngine.UI.Image m_E_SelectSkilIItemConfirmImage = null;
+		private UnityEngine.RectTransform m_EG_SelectMagicItemPanelRectTransform = null;
+		private UnityEngine.UI.Button m_E_SelectMagicItemCloseButton = null;
+		private UnityEngine.UI.Image m_E_SelectMagicItemCloseImage = null;
+		private UnityEngine.UI.Image m_E_SelectMagicItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SelectMagicItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_SelectMagicItemNumText = null;
+		private UnityEngine.UI.Button m_E_SelectMagicItemConfirmButton = null;
+		private UnityEngine.UI.Image m_E_SelectMagicItemConfirmImage = null;
 		public Transform uiTransform = null;
 	}
 }
