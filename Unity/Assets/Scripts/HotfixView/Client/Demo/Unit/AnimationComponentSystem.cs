@@ -10,57 +10,63 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this AnimationComponent self)
         {
+            GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
+            self.UpdateAnimData(gameObject);
         }
 
         [EntitySystem]
         private static void Destroy(this AnimationComponent self)
         {
-            self.Animancer = null;
-            self.AnimGroup = null;
+            self.Animancer.Clear();
+            self.AnimGroup.Clear();
             self.CurrentAnimation = null;
         }
 
         public static void UpdateAnimData(this AnimationComponent self, GameObject go)
         {
-            self.Animancer = null;
-            self.AnimGroup = null;
+            self.Animancer.Clear();
+            self.AnimGroup.Clear();
             self.CurrentAnimation = null;
 
             // 使用Animancer的话Animator不要添加Controller
-            Animator animator = go.GetComponentInChildren<Animator>();
-            animator.runtimeAnimatorController = null;
-
-            self.Animancer = go.GetComponentInChildren<AnimancerComponent>();
-            if (self.Animancer == null)
+            Animator[] animators = go.GetComponentsInChildren<Animator>(true);
+            foreach (Animator animator in animators)
             {
-                Log.Error("对象未添加 mono脚本 AnimancerComponent！！！");
-                return;
-            }
+                animator.runtimeAnimatorController = null;
 
-            AnimData animData = go.GetComponentInChildren<AnimData>();
-            if (animData == null)
-            {
-                Log.Error("对象未添加 mono脚本 AnimData！！！");
-                return;
-            }
-
-            if (animData.AnimGroup == null)
-            {
-                Log.Error("mono脚本 AnimData 没有添加AnimGroup！！！");
-                return;
-            }
-
-            if (animData.AnimGroup.AnimInfos.Length == 0)
-            {
-                using (zstring.Block())
+                AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
+                if (animancerComponent == null)
                 {
-                    Log.Error(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
+                    Log.Error("对象未添加 mono脚本 AnimancerComponent！！！");
+                    return;
                 }
 
-                return;
-            }
+                AnimData animData = animator.gameObject.GetComponent<AnimData>();
+                if (animData == null)
+                {
+                    Log.Error("对象未添加 mono脚本 AnimData！！！");
+                    return;
+                }
 
-            self.AnimGroup = animData.AnimGroup;
+                if (animData.AnimGroup == null)
+                {
+                    Log.Error("mono脚本 AnimData 没有添加AnimGroup！！！");
+                    return;
+                }
+
+                if (animData.AnimGroup.AnimInfos.Length == 0)
+                {
+                    using (zstring.Block())
+                    {
+                        Log.Error(zstring.Format("{0} 没有添加动画片段！！！", animData.AnimGroup.name));
+                    }
+
+                    return;
+                }
+
+                self.Animancer.Add(animancerComponent);
+                self.AnimGroup.Add(animData.AnimGroup);
+            }
 
             self.Play("Idle");
         }
@@ -77,49 +83,62 @@ namespace ET.Client
         /// <param name="speed"></param>
         public static void Play(this AnimationComponent self, string name, FadeMode fadeMode = FadeMode.FixedDuration, float speed = 0)
         {
-            AnimInfo animInfo = null;
-            foreach (AnimInfo a in self.AnimGroup.AnimInfos)
+            for (int i = 0; i < self.Animancer.Count; i++)
             {
-                if (a.StateName == name)
+                AnimInfo animInfo = null;
+                foreach (AnimInfo a in self.AnimGroup[i].AnimInfos)
                 {
-                    animInfo = a;
-                    break;
-                }
-            }
-
-            if (animInfo == null)
-            {
-                using (zstring.Block())
-                {
-                    Log.Error(zstring.Format("动画 {0} 未加载", name));
+                    if (a.StateName == name)
+                    {
+                        animInfo = a;
+                        break;
+                    }
                 }
 
-                return;
-            }
-
-            self.CurrentAnimation = name;
-            self.Animancer.Playable.Speed = speed != 0 ? speed : animInfo.Speed;
-
-            using (zstring.Block())
-            {
-                Log.Debug(zstring.Format("播放动画 {0}", name));
-            }
-
-            if (!string.IsNullOrEmpty(animInfo.NextStateName))
-            {
-                self.Animancer.Play(animInfo.AnimationClip, 0.25f, fadeMode).Events.OnEnd = () =>
+                if (animInfo == null)
                 {
                     using (zstring.Block())
                     {
-                        Log.Debug(zstring.Format("{0} 播放完毕,自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
+                        Log.Warning(zstring.Format("动画 {0} 未加载", name));
                     }
 
-                    self.Play(animInfo.NextStateName);
-                };
-            }
-            else
-            {
-                self.Animancer.Play(animInfo.AnimationClip, 0.25f, fadeMode);
+                    continue;
+                }
+
+                if (animInfo.AnimationClip == null)
+                {
+                    using (zstring.Block())
+                    {
+                        Log.Warning(zstring.Format("动画片段 {0} 未加载", name));
+                    }
+
+                    continue;
+                }
+
+                self.CurrentAnimation = name;
+                self.Animancer[i].Playable.Speed = speed != 0 ? speed : animInfo.Speed;
+
+                using (zstring.Block())
+                {
+                    Log.Debug(zstring.Format("播放动画 {0}", name));
+                }
+
+                if (!string.IsNullOrEmpty(animInfo.NextStateName))
+                {
+                    self.Animancer[i].Play(animInfo.AnimationClip, 0.25f, fadeMode).Events.OnEnd = () =>
+                    {
+                        using (zstring.Block())
+                        {
+                            Log.Debug(zstring.Format("{0} 播放完毕,自动切换为 {1}", animInfo.StateName, animInfo.NextStateName));
+                        }
+
+                        self.Play(animInfo.NextStateName);
+                    };
+                }
+                else
+                {
+                    self.Animancer[i].Play(animInfo.AnimationClip, 0.25f, fadeMode);
+                }
             }
         }
     }

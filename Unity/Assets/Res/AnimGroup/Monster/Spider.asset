@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Spider
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Spider_Attack_1
+    AnimationClip: {fileID: -4563379944364502377, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Attack_2
+  - StateName: Spider_Attack_2
+    AnimationClip: {fileID: 3253511446467843788, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Idle
+  - StateName: Spider_Damage
+    AnimationClip: {fileID: -256784162486639082, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Death
+  - StateName: Spider_Death
+    AnimationClip: {fileID: 3988323045870148651, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Attack_1
+  - StateName: Spider_Idle
+    AnimationClip: {fileID: 1093246620068816649, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Idle_long
+  - StateName: Spider_Idle_long
+    AnimationClip: {fileID: 1526765685201458245, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Walk
+  - StateName: Spider_Walk
+    AnimationClip: {fileID: 8375986166197498128, guid: d99a78907d285f645b75cc8a64d06620,
+      type: 3}
+    Speed: 1
+    NextStateName: Spider_Damage

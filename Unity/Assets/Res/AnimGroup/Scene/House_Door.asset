@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: House_Door
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Idle
+    AnimationClip: {fileID: 0}
+    Speed: 1
+    NextStateName: 
+  - StateName: doorOpen
+    AnimationClip: {fileID: 7400000, guid: 7fdb66dc36a80884c8f50f345d114013, type: 2}
+    Speed: 1
+    NextStateName: 
+  - StateName: doorClose
+    AnimationClip: {fileID: 7400000, guid: d75440130a4000841b43a01399e9ff2c, type: 2}
+    Speed: 1
+    NextStateName: 

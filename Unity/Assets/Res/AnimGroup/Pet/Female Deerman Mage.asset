@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Female Deerman Mage
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Female Deerman Mage_idle
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_display
+  - StateName: Female Deerman Mage_display
+    AnimationClip: {fileID: 7400000, guid: 2f5d723261cea0c4d9cdbfbd206aae1d, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0
+  - StateName: Female Deerman Mage_attack
+    AnimationClip: {fileID: 7400000, guid: b3e8a93157204a54aaeada6b835e543c, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0 0
+  - StateName: Female Deerman Mage_skill2a
+    AnimationClip: {fileID: 7400000, guid: f086df4ac75c0b148b60509128e254b3, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0 0 0
+  - StateName: Female Deerman Mage_skill2b
+    AnimationClip: {fileID: 7400000, guid: 667491713acc50c40974279c67a2c897, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0 0 0 0
+  - StateName: Female Deerman Mage_hit
+    AnimationClip: {fileID: 7400000, guid: 05cbee926bba93a40bc3d5b64d417a7b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0 0 0 0 0
+  - StateName: Female Deerman Mage_die
+    AnimationClip: {fileID: 7400000, guid: be733ece71c21394e9cba5fb3da88d8a, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_idle 0 0 0 0 0 0
+  - StateName: Female Deerman Mage_walk
+    AnimationClip: {fileID: 7400000, guid: 8fcbbf9b124815241bef9a2c38d6718d, type: 2}
+    Speed: 1
+    NextStateName: 
+  - StateName: Female Deerman Mage_idle 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_attack
+  - StateName: Female Deerman Mage_idle 0 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_skill2a
+  - StateName: Female Deerman Mage_idle 0 0 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_skill2b
+  - StateName: Female Deerman Mage_idle 0 0 0 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_hit
+  - StateName: Female Deerman Mage_idle 0 0 0 0 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_die
+  - StateName: Female Deerman Mage_idle 0 0 0 0 0 0
+    AnimationClip: {fileID: 7400000, guid: c530bc208e8e5804cb62ef45d059585b, type: 2}
+    Speed: 1
+    NextStateName: Female Deerman Mage_walk

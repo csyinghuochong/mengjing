@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: 310162
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Idle
+    AnimationClip: {fileID: 5574756513766743746, guid: 69afeb258a3b6954da1890e68ae71bb6,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Walk
+    AnimationClip: {fileID: -3340984008872198816, guid: a41318ab068aee147b42fef9ac40c99a,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack_1
+    AnimationClip: {fileID: -6402471325042816102, guid: b2515e51c415ce045bd094b454439937,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Hit
+    AnimationClip: {fileID: -5676311078243198232, guid: 7c938eba5791d9e48925c03dae6d2906,
+      type: 3}
+    Speed: 1
+    NextStateName: Attack_1
+  - StateName: Run
+    AnimationClip: {fileID: -3340984008872198816, guid: a41318ab068aee147b42fef9ac40c99a,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Death
+    AnimationClip: {fileID: -6726420090315957800, guid: 58eeb7ae11aca164aa36a07de0d84421,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Skill_2
+    AnimationClip: {fileID: -6402471325042816102, guid: b2515e51c415ce045bd094b454439937,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Skill_3
+    AnimationClip: {fileID: -6402471325042816102, guid: b2515e51c415ce045bd094b454439937,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle
+  - StateName: Skill_1
+    AnimationClip: {fileID: -6402471325042816102, guid: b2515e51c415ce045bd094b454439937,
+      type: 3}
+    Speed: 1
+    NextStateName: Idle

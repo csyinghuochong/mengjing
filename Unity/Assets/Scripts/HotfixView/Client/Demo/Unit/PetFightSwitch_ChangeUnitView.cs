@@ -55,7 +55,8 @@ namespace ET.Client
             }
             else
             {
-                unit.GetComponent<AnimationComponent>().UpdateAnimData(go);
+                unit.RemoveComponent<AnimationComponent>();
+                unit.AddComponent<AnimationComponent>();
             }
 
             // unit.GetComponent<FsmComponent>();

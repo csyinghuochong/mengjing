@@ -97,91 +97,94 @@ namespace ET
                 }
 
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-                Animator animator = prefab.GetComponent<Animator>();
-
-                if (animator != null)
+                Animator[] animators = prefab.GetComponentsInChildren<Animator>(true);
+                foreach (Animator animator in animators)
                 {
-                    AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-
-                    if (animatorController != null)
+                    if (animator != null)
                     {
-                        string relativePath = Path.GetDirectoryName(prefabPath).Substring(prefabFolderPath.Length);
-                        string assetFolderPath = (assetBaseFolderPath + relativePath).Replace('\\', '/');
+                        AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
 
-                        if (!AssetDatabase.IsValidFolder(assetFolderPath))
+                        if (animatorController != null)
                         {
-                            string[] folders = assetFolderPath.Split('/');
-                            string currentPath = "";
-                            for (int i = 0; i < folders.Length; i++)
-                            {
-                                string folder = folders[i];
-                                if (string.IsNullOrEmpty(folder)) continue;
+                            string relativePath = Path.GetDirectoryName(prefabPath).Substring(prefabFolderPath.Length);
+                            string assetFolderPath = (assetBaseFolderPath + relativePath).Replace('\\', '/');
 
-                                if (i == 0)
+                            if (!AssetDatabase.IsValidFolder(assetFolderPath))
+                            {
+                                string[] folders = assetFolderPath.Split('/');
+                                string currentPath = "";
+                                for (int i = 0; i < folders.Length; i++)
                                 {
-                                    currentPath = folder;
-                                }
-                                else
-                                {
-                                    string parentPath = currentPath;
-                                    currentPath = $"{parentPath}/{folder}";
-                                    if (!AssetDatabase.IsValidFolder(currentPath))
+                                    string folder = folders[i];
+                                    if (string.IsNullOrEmpty(folder)) continue;
+
+                                    if (i == 0)
                                     {
-                                        AssetDatabase.CreateFolder(parentPath, folder);
+                                        currentPath = folder;
+                                    }
+                                    else
+                                    {
+                                        string parentPath = currentPath;
+                                        currentPath = $"{parentPath}/{folder}";
+                                        if (!AssetDatabase.IsValidFolder(currentPath))
+                                        {
+                                            AssetDatabase.CreateFolder(parentPath, folder);
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        string assetName = animatorController.name;
-                        string assetPath = Path.Combine(assetFolderPath, $"{assetName}.asset");
+                            string assetName = animatorController.name;
+                            string assetPath = Path.Combine(assetFolderPath, $"{assetName}.asset");
 
-                        AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
+                            AnimGroup animGroup = AssetDatabase.LoadAssetAtPath<AnimGroup>(assetPath);
 
-                        if (animGroup == null)
-                        {
-                            animGroup = ScriptableObject.CreateInstance<AnimGroup>();
-                            AssetDatabase.CreateAsset(animGroup, assetPath);
-                        }
-
-                        var states = animatorController.layers[0].stateMachine.states;
-                        animGroup.AnimInfos = new AnimInfo[states.Length];
-
-                        for (int i = 0; i < states.Length; i++)
-                        {
-                            var state = states[i].state;
-                            animGroup.AnimInfos[i] = new AnimInfo()
+                            if (animGroup == null)
                             {
-                                StateName = state.name,
-                                AnimationClip = state.motion as AnimationClip,
-                                Speed = state.speed,
-                                NextStateName = GetNextStateName(state)
-                            };
+                                animGroup = ScriptableObject.CreateInstance<AnimGroup>();
+                                AssetDatabase.CreateAsset(animGroup, assetPath);
+                            }
+
+                            var states = animatorController.layers[0].stateMachine.states;
+                            animGroup.AnimInfos = new AnimInfo[states.Length];
+
+                            for (int i = 0; i < states.Length; i++)
+                            {
+                                var state = states[i].state;
+                                animGroup.AnimInfos[i] = new AnimInfo()
+                                {
+                                    StateName = state.name,
+                                    AnimationClip = state.motion as AnimationClip,
+                                    Speed = state.speed,
+                                    NextStateName = GetNextStateName(state)
+                                };
+                            }
+
+                            EditorUtility.SetDirty(animGroup);
+                            AssetDatabase.SaveAssets();
+
+                            Log.Debug(prefabPath + " AnimGroup generated at " + assetPath);
+
+                            // 添加组件和引用
+                            AnimancerComponent animancerComponent = animator.gameObject.GetComponent<AnimancerComponent>();
+                            if (animancerComponent == null)
+                            {
+                                animator.gameObject.AddComponent<AnimancerComponent>();
+                            }
+
+                            AnimData animData = animator.gameObject.GetComponent<AnimData>();
+                            if (animData == null)
+                            {
+                                animData = animator.gameObject.AddComponent<AnimData>();
+                            }
+
+                            animData.AnimGroup = animGroup;
                         }
-
-                        EditorUtility.SetDirty(animGroup);
-                        AssetDatabase.SaveAssets();
-
-                        Log.Debug(prefabPath + " AnimGroup generated at " + assetPath);
-
-                        // 添加组件和引用
-                        AnimancerComponent animancerComponent = prefab.GetComponent<AnimancerComponent>();
-                        if (animancerComponent == null)
-                        {
-                            prefab.AddComponent<AnimancerComponent>();
-                        }
-
-                        AnimData animData = prefab.GetComponent<AnimData>();
-                        if (animData == null)
-                        {
-                            animData = prefab.AddComponent<AnimData>();
-                        }
-
-                        animData.AnimGroup = animGroup;
-                        EditorUtility.SetDirty(prefab);
-                        PrefabUtility.SavePrefabAsset(prefab);
                     }
                 }
+
+                EditorUtility.SetDirty(prefab);
+                PrefabUtility.SavePrefabAsset(prefab);
             }
         }
 

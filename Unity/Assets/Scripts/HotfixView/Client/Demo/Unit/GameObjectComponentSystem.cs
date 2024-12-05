@@ -559,7 +559,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>();
                     }
 
                     unit.AddComponent<FsmComponent>(); //当前状态组建
@@ -639,7 +639,7 @@ namespace ET.Client
                         }
                         else
                         {
-                            unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                            unit.AddComponent<AnimationComponent>();
                         }
 
                         unit.AddComponent<FsmComponent>(true); //当前状态组建
@@ -722,7 +722,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>();
                     }
 
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
@@ -744,7 +744,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>();
                     }
 
                     unit.AddComponent<HeroTransformComponent>();
@@ -807,7 +807,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>();
                     }
 
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
@@ -828,7 +828,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.AddComponent<AnimationComponent>().UpdateAnimData(go);
+                        unit.AddComponent<AnimationComponent>();
                     }
 
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
