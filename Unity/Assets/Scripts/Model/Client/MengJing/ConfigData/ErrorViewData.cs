@@ -195,6 +195,7 @@ namespace ET.Client
             { ErrorCode.ERR_SessionDisconnect, "网络已断开" },
             { ErrorCode.ERR_PetMelee_MoLiNoEnough, "魔力不足" },
             { ErrorCode.ERR_PetMelee_PetNumMax, "宠物数量达到上限" },
+            { ErrorCode.ERR_PetMelee_MainPetNumMax, "主战宠物数量达到上限" },
         };
     }
 }

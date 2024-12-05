@@ -16,5 +16,7 @@ namespace ET.Server
 
         public List<PetMeleeCardInfo> PetMeleeCardInHand { get; set; } = new(); //手里的卡
         public List<PetMeleeCardInfo> PetMeleeCardPool = new(); //储存池里的卡
+        public List<long> UsedMainPetList = new();
+        public List<int> UsedSkillList = new();
     }
 }
