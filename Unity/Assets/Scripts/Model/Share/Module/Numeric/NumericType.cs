@@ -196,6 +196,7 @@
         public const int EnergySkillId = 3196;
         public const int PetFightIndex = 3197;
         public const int PetMeleeMoLi = 3198; //宠物乱斗 魔力
+        public const int PetMeleeDungeonId = 3199; // 宠物乱斗 过关MapId 
         
         public const int DropItemId = 4000;
         public const int DropItemNum = 4001;

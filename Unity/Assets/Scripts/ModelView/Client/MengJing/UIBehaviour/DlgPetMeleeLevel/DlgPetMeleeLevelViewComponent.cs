@@ -109,6 +109,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Level_3Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Level_3Button == null )
+     			{
+		    		this.m_E_Level_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Level_3");
+     			}
+     			return this.m_E_Level_3Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Level_3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Level_3Image == null )
+     			{
+		    		this.m_E_Level_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Level_3");
+     			}
+     			return this.m_E_Level_3Image;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_PetMeleeButton
      	{
      		get
@@ -341,6 +375,8 @@ namespace ET.Client
 			this.m_E_Level_1Image = null;
 			this.m_E_Level_2Button = null;
 			this.m_E_Level_2Image = null;
+			this.m_E_Level_3Button = null;
+			this.m_E_Level_3Image = null;
 			this.m_E_PetMeleeButton = null;
 			this.m_E_PetMeleeImage = null;
 			this.m_E_RightBGImage = null;
@@ -363,6 +399,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Level_1Image = null;
 		private UnityEngine.UI.Button m_E_Level_2Button = null;
 		private UnityEngine.UI.Image m_E_Level_2Image = null;
+		private UnityEngine.UI.Button m_E_Level_3Button = null;
+		private UnityEngine.UI.Image m_E_Level_3Image = null;
 		private UnityEngine.UI.Button m_E_PetMeleeButton = null;
 		private UnityEngine.UI.Image m_E_PetMeleeImage = null;
 		private UnityEngine.UI.Image m_E_RightBGImage = null;

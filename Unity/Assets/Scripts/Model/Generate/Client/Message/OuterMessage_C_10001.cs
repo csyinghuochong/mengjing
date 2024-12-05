@@ -3842,6 +3842,9 @@ namespace ET
         [MemoryPackOrder(61)]
         public int TalentPoints { get; set; }
 
+        [MemoryPackOrder(62)]
+        public List<int> PetMeleeRewardIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3909,6 +3912,7 @@ namespace ET
             this.DefeatedBossIds.Clear();
             this.BuyStoreItems.Clear();
             this.TalentPoints = default;
+            this.PetMeleeRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -32082,6 +32086,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeRewardRequest)]
+    [ResponseType(nameof(M2C_PetMeleeRewardResponse))]
+    public partial class C2M_PetMeleeRewardRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeRewardRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeRewardRequest), isFromPool) as C2M_PetMeleeRewardRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int SceneId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.SceneId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeRewardResponse)]
+    public partial class M2C_PetMeleeRewardResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeRewardResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeRewardResponse), isFromPool) as M2C_PetMeleeRewardResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -32936,5 +33003,7 @@ namespace ET
         public const ushort M2C_PetMeleePlace = 10851;
         public const ushort C2M_PetMeleeBegin = 10852;
         public const ushort M2C_PetMeleeBegin = 10853;
+        public const ushort C2M_PetMeleeRewardRequest = 10854;
+        public const ushort M2C_PetMeleeRewardResponse = 10855;
     }
 }

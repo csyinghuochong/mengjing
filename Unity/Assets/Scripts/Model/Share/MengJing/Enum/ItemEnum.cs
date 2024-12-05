@@ -102,6 +102,7 @@ namespace ET
         public const int SingleRecharge = 91;           //单笔充值奖励
         public const int ItemXiLian = 92;               //道具洗练
         public const int ActivityNewYear = 93;
+        public const int PetMeleeReward = 94;
 
         public const int Activity = 100;                //活动
 

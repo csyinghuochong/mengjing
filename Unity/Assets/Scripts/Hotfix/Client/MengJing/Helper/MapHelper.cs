@@ -194,5 +194,20 @@ namespace ET.Client
 
             return respone.Error;
         }
+
+        public static async ETTask<int> RequestPetMeleeReward(Scene root, int sceneId)
+        {
+            C2M_PetMeleeRewardRequest request = C2M_PetMeleeRewardRequest.Create();
+            request.SceneId = sceneId;
+
+            M2C_PetMeleeRewardResponse respone = (M2C_PetMeleeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (respone.Error == ErrorCode.ERR_Success)
+            {
+                UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+                userInfoComponent.UserInfo.PetMeleeRewardIds.Add(sceneId);
+            }
+
+            return respone.Error;
+        }
     }
 }

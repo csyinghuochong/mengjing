@@ -427,6 +427,11 @@ namespace ET.Server
 
             self.GameOver = true;
 
+            if (combatResult == CombatResultEnum.Win)
+            {
+                self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId,self.Scene().GetComponent<MapComponent>().SceneId);
+            }
+            
             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = combatResult;
             // 奖励。。。

@@ -16,6 +16,8 @@ namespace ET.Client
 
             self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
             self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
+            self.View.E_Level_3Button.AddListener(() => self.OnLevel(2700003));
+            self.View.E_ReceiveButton.AddListenerAsync(self.OnReceive);
 
             self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
 
@@ -45,6 +47,25 @@ namespace ET.Client
 
         private static void OnLevel(this DlgPetMeleeLevel self, int sceneId)
         {
+            int firstId = 0;
+            foreach (SceneConfig config in SceneConfigCategory.Instance.GetAll().Values)
+            {
+                if (config.MapType == SceneTypeEnum.PetMelee)
+                {
+                    firstId = config.Id;
+                    break;
+                }
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
+            if (petMeleeDungeonId == 0 && sceneId != firstId ||
+                petMeleeDungeonId != 0 && sceneId > petMeleeDungeonId + 1)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
+                return;
+            }
+
             self.SceneId = sceneId;
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             self.View.E_LevelNameText.text = sceneConfig.Name;
@@ -76,10 +97,26 @@ namespace ET.Client
 
             self.View.ES_RewardList.Refresh(sceneConfig.RewardShow);
 
-            // 判断是否通关、领取奖励
-            self.View.E_EnterMapButton.gameObject.SetActive(true);
-            self.View.E_ReceiveButton.gameObject.SetActive(false);
-            self.View.E_ReceivedText.gameObject.SetActive(false);
+            if (sceneId <= petMeleeDungeonId)
+            {
+                self.View.E_EnterMapButton.gameObject.SetActive(false);
+                if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.PetMeleeRewardIds.Contains(sceneId))
+                {
+                    self.View.E_ReceiveButton.gameObject.SetActive(false);
+                    self.View.E_ReceivedText.gameObject.SetActive(true);
+                }
+                else
+                {
+                    self.View.E_ReceiveButton.gameObject.SetActive(true);
+                    self.View.E_ReceivedText.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                self.View.E_EnterMapButton.gameObject.SetActive(true);
+                self.View.E_ReceiveButton.gameObject.SetActive(false);
+                self.View.E_ReceivedText.gameObject.SetActive(false);
+            }
 
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
@@ -88,6 +125,16 @@ namespace ET.Client
         {
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0").Coroutine();
             self.OnClose();
+        }
+
+        private static async ETTask OnReceive(this DlgPetMeleeLevel self)
+        {
+            int error = await MapHelper.RequestPetMeleeReward(self.Root(), self.SceneId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.View.E_ReceiveButton.gameObject.SetActive(false);
+                self.View.E_ReceivedText.gameObject.SetActive(true);
+            }
         }
     }
 }
