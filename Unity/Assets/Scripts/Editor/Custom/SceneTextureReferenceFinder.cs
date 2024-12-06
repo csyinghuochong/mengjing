@@ -69,8 +69,12 @@ namespace ET.Client
 
                 if (texturesInScene.Any())
                 {
-                    // 按大小从大到小排序
-                    texturesInScene = texturesInScene.OrderByDescending(t => t.size).ToList();
+                    // 按大小、引用次数和路径名排序
+                    texturesInScene = texturesInScene
+                            .OrderByDescending(t => t.size)
+                            .ThenByDescending(t => t.count)
+                            .ThenBy(t => AssetDatabase.GetAssetPath(t.texture))
+                            .ToList();
 
                     // 收集输出信息
                     result.Add($"{sceneName}:");
