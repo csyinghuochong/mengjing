@@ -75,11 +75,6 @@ namespace ET.Client
                     // 收集输出信息
                     result.Add($"{sceneName}:");
 
-                    // 确定每列最大宽度
-                    int maxPathLength = texturesInScene.Max(t => AssetDatabase.GetAssetPath(t.texture).Length);
-                    int maxSizeLength = texturesInScene.Max(t => FormatBytes(t.size).Length);
-                    int maxCountLength = texturesInScene.Max(t => t.count.ToString().Length);
-
                     foreach (var (texture, size, count) in texturesInScene)
                     {
                         string path = AssetDatabase.GetAssetPath(texture);
