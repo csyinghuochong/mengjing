@@ -1089,7 +1089,7 @@ public class CustomEditorMenu
             //     GameObject.DestroyImmediate(pool.transform.Find(mapinfo.AssetPath).gameObject);
             // }
 
-            UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Bundles/Unit/Scene/{mapinfo.AssetPath}.prefab", typeof (GameObject));
+            UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath($"Assets/Res/Scene/Unit/{mapinfo.AssetPath}.prefab", typeof (GameObject));
             if (prefab == null)
             {
                 Log.Error($"prefab == null:  {mapinfo.AssetPath}");
@@ -1145,14 +1145,14 @@ public class CustomEditorMenu
         //Application.dataPath = H:/GitMengJing/Unity/Assets    projectPath = H:/GitMengJing/Unity
         prefabpath = projectPath + "/" + prefabpath;
 
-        if (prefabpath.Contains("Bundles/Unit/Scene"))
+        if (prefabpath.Contains("Res/Scene/Unit"))
         {
             return true;
         }
 
         //.meta
         string[] pathlist = prefabpath.Split('/');
-        string destinationFile = Application.dataPath + "/Bundles/Unit/Scene/" + pathlist[pathlist.Length - 1];
+        string destinationFile = Application.dataPath + "/Res/Scene/Unit/" + pathlist[pathlist.Length - 1];
 
         bool moveret = MoveFile(prefabpath, destinationFile);
         MoveFile(prefabpath + ".meta", destinationFile + ".meta");
@@ -1233,7 +1233,6 @@ public class CustomEditorMenu
                 shaderPaths += file + "\n";
             }
         }
-
         ClipBoard.Copy(shaderPaths);
     }
 
