@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor.SceneManagement;
-using UnityEngine.Profiling;
 using System.Reflection;
 
 namespace ET.Client
@@ -33,7 +32,7 @@ namespace ET.Client
                 EditorSceneManager.OpenScene(scenePath);
 
                 // 查找场景中的所有贴图引用及大小
-                List<(Texture texture, long size)> texturesInScene = new List<(Texture, long)>();
+                List<(Texture texture, long size, int count)> texturesInScene = new List<(Texture, long, int)>();
                 var renderers = GameObject.FindObjectsOfType<Renderer>();
 
                 foreach (var renderer in renderers)
@@ -45,29 +44,61 @@ namespace ET.Client
                         foreach (var textureName in material.GetTexturePropertyNames())
                         {
                             Texture texture = material.GetTexture(textureName);
-                            if (texture != null && texturesInScene.All(t => t.texture != texture))
+                            if (texture != null)
                             {
-                                long textureSize = GetTextureFileSize(texture);
-                                if (textureSize > 0)
+                                var existingTexture = texturesInScene.FirstOrDefault(t => t.texture == texture);
+                                if (existingTexture.texture != null)
                                 {
-                                    texturesInScene.Add((texture, textureSize));
+                                    // 如果贴图已存在，则增加引用计数
+                                    texturesInScene.Remove(existingTexture);
+                                    texturesInScene.Add((existingTexture.texture, existingTexture.size, existingTexture.count + 1));
+                                }
+                                else
+                                {
+                                    // 如果是新贴图，则添加到列表
+                                    long textureSize = GetTextureFileSize(texture);
+                                    if (textureSize > 0)
+                                    {
+                                        texturesInScene.Add((texture, textureSize, 1));
+                                    }
                                 }
                             }
                         }
                     }
                 }
 
-                // 按大小从大到小排序
-                texturesInScene = texturesInScene.OrderByDescending(t => t.size).ToList();
-
-                // 收集输出信息
-                result.Add($"{sceneName}:");
-                foreach (var (texture, size) in texturesInScene)
+                if (texturesInScene.Any())
                 {
-                    result.Add($"  {AssetDatabase.GetAssetPath(texture)} - 大小：{FormatBytes(size)} - 尺寸：{texture.width}x{texture.height}");
-                }
+                    // 按大小从大到小排序
+                    texturesInScene = texturesInScene.OrderByDescending(t => t.size).ToList();
 
-                result.Add(""); // 空行分隔场景
+                    // 收集输出信息
+                    result.Add($"{sceneName}:");
+
+                    // 确定每列最大宽度
+                    int maxPathLength = texturesInScene.Max(t => AssetDatabase.GetAssetPath(t.texture).Length);
+                    int maxSizeLength = texturesInScene.Max(t => FormatBytes(t.size).Length);
+                    int maxCountLength = texturesInScene.Max(t => t.count.ToString().Length);
+
+                    foreach (var (texture, size, count) in texturesInScene)
+                    {
+                        string path = AssetDatabase.GetAssetPath(texture);
+                        string sizeFormatted = FormatBytes(size);
+                        string countFormatted = count.ToString();
+
+                        result.Add(string.Format("  大小：{0,-" + 15 + "} 尺寸：{1,-" + 12 + "} 引用：{2,-" + 10 + "} {3}",
+                            sizeFormatted,
+                            texture.width + "x" + texture.height,
+                            countFormatted,
+                            path));
+                    }
+
+                    result.Add("");
+                }
+                else
+                {
+                    result.Add($"{sceneName}: 没有引用的贴图.");
+                }
             }
 
             // 写入到文件
@@ -113,7 +144,8 @@ namespace ET.Client
             {
                 float sizeInMB = bytes / 1048576f;
                 float sizeInKB = bytes / 1024f;
-                return $"{sizeInKB:0.00} KB / {sizeInMB:0.00} MB ";
+                // return $"{sizeInKB:0.00} KB / {sizeInMB:0.00} MB ";
+                return $"{sizeInKB:0.00} KB";
             }
 
             return $"{bytes} B";
