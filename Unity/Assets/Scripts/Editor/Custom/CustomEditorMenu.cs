@@ -1228,11 +1228,32 @@ public class CustomEditorMenu
 
         foreach (string file in allFiles)
         {
-            if (file.EndsWith(".shader"))
+            if (!file.EndsWith(".shader"))
             {
-                shaderPaths += file + "\n";
+                continue;
             }
+
+            //H:/GitMengJing2022/Unity\Library\PackageCache\com.unity.render-pipelines.universal@14.0.11\Shaders\XR\XROcclusionMesh.shader
+
+            if (!file.Contains("nity\\Library\\PackageCache"))
+            {
+                if (!file.Contains(@"Assets\Res\Shader") && !file.Contains(@"Amazing Assets"))
+                {
+                    string prefabpath = file;
+                    string[] pathlist = file.Split('\\');
+                    string destinationFile = @"Assets\\Res\\Shader\\" + pathlist[pathlist.Length - 1];
+                    // bool moveret = MoveFile(prefabpath, destinationFile);
+                    // MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+                    
+                    Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
+                }
+            }
+
+            shaderPaths += file + "\n";
         }
+        
+       
+        
         ClipBoard.Copy(shaderPaths);
     }
 
