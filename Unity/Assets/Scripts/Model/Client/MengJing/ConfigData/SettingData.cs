@@ -99,9 +99,6 @@ namespace ET.Client
         
         
         [StaticField]
-        public static bool ShowTerrain = true; 
-        
-        [StaticField]
         public static bool UseSceneAOI = false;   //true需要清除场景的pool节点。。
 
         [StaticField]

@@ -1245,14 +1245,12 @@ public class CustomEditorMenu
                     // bool moveret = MoveFile(prefabpath, destinationFile);
                     // MoveFile(prefabpath + ".meta", destinationFile + ".meta");
                     
+                    shaderPaths += file + "\n";
+                    
                     Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
                 }
             }
-
-            shaderPaths += file + "\n";
         }
-        
-       
         
         ClipBoard.Copy(shaderPaths);
     }
