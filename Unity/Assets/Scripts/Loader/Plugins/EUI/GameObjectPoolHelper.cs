@@ -153,7 +153,6 @@ namespace ET.Client
         
         public static List<string>  DisposeUnUse( )
         {
-            Debug.LogWarning($"DisposeAll: {Time.time}");
             List<string> unuse = new List<string>();
             List<string> paths = poolDict.Keys.ToList();
             for (int i = paths.Count - 1; i >= 0; i--)

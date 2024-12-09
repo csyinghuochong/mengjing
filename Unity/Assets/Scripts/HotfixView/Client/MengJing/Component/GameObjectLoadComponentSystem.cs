@@ -182,23 +182,27 @@ namespace ET.Client
 
         public static void DisposeUnUse(this GameObjectLoadComponent self)
         {
+            Debug.LogWarning($"DisposeUnUse: {Time.time}");
+            
             List<string> assets = GameObjectPoolHelper.DisposeUnUse();
             foreach (var VARIABLE in assets)
             {
                 self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
                 
-                Log.Debug($"DisposeUnUse :  {VARIABLE}");
+                Debug.LogWarning($"DisposeUnUse :  {VARIABLE}");
             }
         }
 
         public static void DisposeAll(this GameObjectLoadComponent self)
         {
+            Debug.LogWarning($"DisposeAll: {Time.time}");
+            
             List<string> assets = GameObjectPoolHelper.DisposeAll();
             foreach (var VARIABLE in assets)
             {
-                Debug.Log($"DisposeAll: {VARIABLE}");
-                
                 self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
+                
+                Debug.LogWarning($"DisposeAll: {VARIABLE}");
             }
         }
     }
