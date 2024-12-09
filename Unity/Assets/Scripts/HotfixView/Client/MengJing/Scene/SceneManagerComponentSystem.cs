@@ -87,13 +87,7 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
-
                     playerComponent = self.Root().GetComponent<PlayerComponent>();
-                    if (!SettingData.ShowTerrain)
-                    {
-                        paramss = "10001_test";
-                    }
-
                     break;
                 default:
                     paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();

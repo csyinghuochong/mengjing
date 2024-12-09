@@ -147,9 +147,9 @@ namespace ET.Client
                 return;
             }
 
-            if (text.Equals("#showterrain"))
+            if (text.Equals("#unloadasset"))
             {
-                SettingData.ShowTerrain = !SettingData.ShowTerrain;
+                
                 return;
             }
 
@@ -160,43 +160,15 @@ namespace ET.Client
                 return;
             }
 
-            if (text.Equals("#petfight"))
-            {
-                //宠物出战列表 后期需要通过布阵界面去设置
-                PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-                List<PetBarInfo> fightpets =petComponent.GetCanFightPetList2();
-                // for (int i = fightpets.Count; i < 3; i++)
-                // {
-                //     fightpets.Add(0);
-                // }
-
-                //await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.MainCityScene, fightpets, null);
-                
-                
-                await PetNetHelper.RequestPetBarSet(self.Root(), fightpets);
-                //刷新主界面下方的出战ui
-                //点击宠物按钮自身可以切换到对应的宠物上进行控制(摄像机跟随)  
-                return;
-            }
-            
-            if (text.Equals("#openall"))
-            {
-                SettingData.ShowBlood = true;
-                SettingData.ShowEffect = true;
-                SettingData.ShowGuangHuan = true;
-                SettingData.ShowAnimation = true;
-                SettingData.PlaySound = true;
-                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
-                return;
-            }
-
+          
             if (text.Equals("#resetall"))
             {
-                SettingData.ShowBlood = false;
-                SettingData.ShowEffect = false;
-                SettingData.ShowGuangHuan = false;
-                SettingData.ShowAnimation = false;
-                SettingData.PlaySound = false;
+                bool svalue = !SettingData.ShowEffect;
+                SettingData.ShowBlood = svalue;
+                SettingData.ShowEffect = svalue;
+                SettingData.ShowGuangHuan = svalue;
+                SettingData.ShowAnimation = svalue;
+                SettingData.PlaySound = svalue;
                 self.View.E_ChatInputField.GetComponent<InputField>().text = "";
                 return;
             }
