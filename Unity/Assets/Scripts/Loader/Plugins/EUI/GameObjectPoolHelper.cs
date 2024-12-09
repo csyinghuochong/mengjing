@@ -43,7 +43,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask InitPoolFormGamObjectAsync(string poolName, GameObject pb, int size,
+        public static  void InitPoolFormGamObjectAsync(string poolName, GameObject pb, int size,
         PoolInflationType type = PoolInflationType.DOUBLE)
         {
             if (poolDict.ContainsKey(poolName))
@@ -67,8 +67,6 @@ namespace ET.Client
                     Debug.LogError(e);
                 }
             }
-
-            await ETTask.CompletedTask;
         }
 
         /// <summary>
@@ -162,7 +160,6 @@ namespace ET.Client
             {
                 if (poolDict[paths[i]].GetobjectsInUse() == 0)
                 {
-                    Log.Debug($"GetobjectsInUse() == 0:  {paths[i]}");
                     UnityEngine.Object.Destroy(poolDict[paths[i]].rootObj);
                     unuse.Add(paths[i]);
                     poolDict.Remove(paths[i]);

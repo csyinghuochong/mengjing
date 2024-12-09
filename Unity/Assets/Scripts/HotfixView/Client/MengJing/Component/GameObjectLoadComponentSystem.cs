@@ -37,7 +37,23 @@ namespace ET.Client
         {
 
         }
-        
+
+        public static async ETTask<string> PreLoadQueue(this GameObjectLoadComponent self, string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                return path;
+            }
+
+            if (GameObjectPoolHelper.HaveObject(path))
+            {
+                return path;
+            }
+
+            await  self.LoadAssetSync(path, 0, null);
+            return path;
+        }
+
         public static void AddLoadQueue(this GameObjectLoadComponent self, string path, long formId, Action<GameObject, long> action)
         {
             //Log.Debug($"self.GameObject !=null:  {path}  {formId}");
@@ -50,8 +66,11 @@ namespace ET.Client
             if (GameObjectPoolHelper.HaveObject(path))
             {
                 //Debug.LogError($"资源加载11：  {path}  +   {TimeHelper.ServerNow()}");
-                GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
-                action(gameObject, formId);
+                if (action!=null)
+                {
+                    GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
+                    action?.Invoke(gameObject, formId);
+                }
                 return;
             }
 
@@ -67,17 +86,18 @@ namespace ET.Client
             self.LoadAssetSync(path, formId, action).Coroutine();
         }
         
-        public static async ETTask LoadAssetSync(this GameObjectLoadComponent self,  string path, long formId, Action<GameObject, long> action)
+        public static async ETTask<string> LoadAssetSync(this GameObjectLoadComponent self,  string path, long formId, Action<GameObject, long> action)
         {
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
-            await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
-            
-            GameObject  gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
-            if (gameObject != null)
+            GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
+            if (action != null)
             {
-                action(gameObject, formId);
+                GameObject  gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
+                action?.Invoke(gameObject, formId);
             }
+
+            return path;
         }
         
          public static void OnUpdate(this GameObjectLoadComponent self)
@@ -137,7 +157,7 @@ namespace ET.Client
              
              ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
              GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
-             await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
+             GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
              
              Debug.Log(($"OnUpdateOnUpdate22222: {load.Path}"));
              
@@ -162,21 +182,22 @@ namespace ET.Client
 
         public static void DisposeUnUse(this GameObjectLoadComponent self)
         {
-
             List<string> assets = GameObjectPoolHelper.DisposeUnUse();
             foreach (var VARIABLE in assets)
             {
                 self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
+                
+                Log.Debug($"DisposeUnUse :  {VARIABLE}");
             }
         }
 
         public static void DisposeAll(this GameObjectLoadComponent self)
         {
-            Log.Warning($"DisposeAll: {Time.time}");
-
             List<string> assets = GameObjectPoolHelper.DisposeAll();
             foreach (var VARIABLE in assets)
             {
+                Debug.Log($"DisposeAll: {VARIABLE}");
+                
                 self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(VARIABLE);
             }
         }

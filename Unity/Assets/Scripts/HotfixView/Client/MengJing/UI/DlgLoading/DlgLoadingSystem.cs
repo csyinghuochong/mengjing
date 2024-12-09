@@ -263,19 +263,8 @@ namespace ET.Client
         {
             for (int i = self.PreLoadAssets.Count - 1; i >= 0; i--)
             {
-                await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(self.PreLoadAssets[i]);
+                await self.Root().GetComponent<GameObjectLoadComponent>().PreLoadQueue(self.PreLoadAssets[i]);
                 self.PreLoadAssets.RemoveAt(i);
-            }
-
-            List<string> commonassets = self.GetCommonAssets();
-            for (int i = 0; i < self.ReleaseAssets.Count; i++)
-            {
-                if (commonassets.Contains(self.ReleaseAssets[i]))
-                {
-                    continue;
-                }
-
-                self.Root().GetComponent<ResourcesLoaderComponent>().UnLoadAsset(self.ReleaseAssets[i]);
             }
         }
 

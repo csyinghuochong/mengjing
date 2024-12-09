@@ -149,7 +149,7 @@ namespace ET.Client
 
             if (text.Equals("#unloadasset"))
             {
-                
+                self.Root().GetComponent<SceneManagerComponent>().UnLoadAsset();
                 return;
             }
 

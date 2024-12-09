@@ -66,6 +66,19 @@ namespace ET.Client
             dlgMain.AfterEnterScene(sceneTypeEnum);
         }
 
+        public static void UnLoadAsset(this SceneManagerComponent self)
+        {
+            self.Root().GetComponent<GameObjectLoadComponent>().DisposeUnUse(); 
+            
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            
+            // 释放前一个场景的所有资源
+            resourcesLoaderComponent.UnLoadAllAsset();
+            
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
+        }
+
         public static async ETTask ChangeScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
         {
             string paramss = "";
