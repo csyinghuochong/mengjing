@@ -1388,6 +1388,11 @@ public class CustomEditorMenu
                 Debug.Log($"以下文件有引用： {itemPath} ");
 
                 GameObject tmpObj = AssetDatabase.LoadAssetAtPath(itemPath, typeof (GameObject)) as GameObject;
+                if (tmpObj == null)
+                {
+                    Debug.Log($"tmpObj == null： {itemPath} ");
+                    continue;
+                }
                 //tmpObj = GameObject.Instantiate(tmpObj) as GameObject;
                 Text[] tmpAr = tmpObj.GetComponentsInChildren<Text>();
                 for (int t = 0; t < tmpAr.Length; t++)
