@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace YooAsset.Editor
 {
 	[Serializable]
-	public class ReportRedundancyInfo
+	public class ReportRedundancyInfo //冗余
 	{
 		/// <summary>
 		/// 资源路径

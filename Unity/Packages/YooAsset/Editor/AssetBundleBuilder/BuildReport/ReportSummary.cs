@@ -6,7 +6,7 @@ using UnityEditor;
 namespace YooAsset.Editor
 {
 	[Serializable]
-	public class ReportSummary
+	public class ReportSummary   //总结
 	{
 		/// <summary>
 		/// YooAsset版本
