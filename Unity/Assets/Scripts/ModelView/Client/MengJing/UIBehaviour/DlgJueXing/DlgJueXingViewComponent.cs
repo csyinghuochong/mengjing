@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgJueXingViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
 				ES_JueXingShow es = this.m_es_juexingshow;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JueXingShow.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_JueXingShow.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_juexingshow = this.AddChild<ES_JueXingShow, Transform>(go.transform);
 				}
 
@@ -65,6 +69,14 @@ namespace ET.Client
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_es_juexingshow = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;

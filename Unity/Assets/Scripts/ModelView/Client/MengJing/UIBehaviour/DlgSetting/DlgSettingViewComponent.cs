@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgSettingViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
                 ES_SettingGame es = this.m_es_settinggame;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SettingGame.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SettingGame.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_settinggame = this.AddChild<ES_SettingGame, Transform>(go.transform);
                 }
 
@@ -66,10 +70,11 @@ namespace ET.Client
                 ES_SettingTitle es = this.m_es_settingtitle;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SettingTitle.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SettingTitle.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_settingtitle = this.AddChild<ES_SettingTitle, Transform>(go.transform);
                 }
 
@@ -84,10 +89,11 @@ namespace ET.Client
                 ES_SettingGuaJi es = this.m_es_settingguaji;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SettingGuaJi.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SettingGuaJi.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_settingguaji = this.AddChild<ES_SettingGuaJi, Transform>(go.transform);
                 }
 
@@ -102,10 +108,11 @@ namespace ET.Client
                 ES_FashionShow es = this.m_es_fashionshow;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FashionShow.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FashionShow.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_fashionshow = this.AddChild<ES_FashionShow, Transform>(go.transform);
                 }
 
@@ -122,6 +129,14 @@ namespace ET.Client
 			this.m_es_settingguaji = null;
 			this.m_es_fashionshow = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

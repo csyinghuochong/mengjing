@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgWarehouseViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
                 ES_WarehouseRole es = this.m_es_warehouserole;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WarehouseRole.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_WarehouseRole.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_warehouserole = this.AddChild<ES_WarehouseRole, Transform>(go.transform);
                 }
 
@@ -66,10 +70,11 @@ namespace ET.Client
                 ES_WarehouseAccount es = this.m_es_warehouseaccount;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WarehouseAccount.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_WarehouseAccount.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_warehouseaccount = this.AddChild<ES_WarehouseAccount, Transform>(go.transform);
                 }
 
@@ -84,10 +89,11 @@ namespace ET.Client
                 ES_WarehouseGem es = this.m_es_warehousegem;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_WarehouseGem.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_WarehouseGem.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_warehousegem = this.AddChild<ES_WarehouseGem, Transform>(go.transform);
                 }
 
@@ -103,6 +109,14 @@ namespace ET.Client
 			this.m_es_warehouseaccount = null;
 			this.m_es_warehousegem = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

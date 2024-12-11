@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgTrialViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
 				ES_TrialDungeon es = this.m_es_trialdungeon;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TrialDungeon.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_TrialDungeon.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_trialdungeon = this.AddChild<ES_TrialDungeon, Transform>(go.transform);
 				}
 
@@ -66,10 +70,11 @@ namespace ET.Client
 				ES_TrialRank es = this.m_es_trialrank;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TrialRank.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_TrialRank.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_trialrank = this.AddChild<ES_TrialRank, Transform>(go.transform);
 				}
 
@@ -84,6 +89,14 @@ namespace ET.Client
 			this.m_es_trialdungeon = null;
 			this.m_es_trialrank = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

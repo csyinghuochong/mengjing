@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgFenXiangViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
                 ES_FenXiangSet es = this.m_es_fenxiangset;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FenXiangSet.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FenXiangSet.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_fenxiangset = this.AddChild<ES_FenXiangSet, Transform>(go.transform);
                 }
 
@@ -66,10 +70,11 @@ namespace ET.Client
                 ES_Popularize es = this.m_es_popularize;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_Popularize.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_Popularize.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_popularize = this.AddChild<ES_Popularize, Transform>(go.transform);
                 }
 
@@ -84,10 +89,11 @@ namespace ET.Client
                 ES_Serial es = this.m_es_serial;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_Serial.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_Serial.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_serial = this.AddChild<ES_Serial, Transform>(go.transform);
                 }
 
@@ -102,10 +108,11 @@ namespace ET.Client
                 ES_LunTan es = this.m_es_luntan;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_LunTan.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_LunTan.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_luntan = this.AddChild<ES_LunTan, Transform>(go.transform);
                 }
 
@@ -120,10 +127,11 @@ namespace ET.Client
                 ES_FenXiangQQAddSet es = this.m_es_fenxiangqqaddset;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FenXiangQQAddSet.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FenXiangQQAddSet.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_fenxiangqqaddset = this.AddChild<ES_FenXiangQQAddSet, Transform>(go.transform);
                 }
 
@@ -141,6 +149,14 @@ namespace ET.Client
 			this.m_es_luntan = null;
 			this.m_es_fenxiangqqaddset = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

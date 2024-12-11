@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgFriendViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
      	{
      		get
@@ -82,10 +85,11 @@ namespace ET.Client
                 ES_FriendList es = this.m_es_friendlist;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FriendList.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FriendList.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_friendlist = this.AddChild<ES_FriendList, Transform>(go.transform);
                 }
 
@@ -100,10 +104,11 @@ namespace ET.Client
                 ES_FriendApply es = this.m_es_friendapply;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FriendApply.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FriendApply.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_friendapply = this.AddChild<ES_FriendApply, Transform>(go.transform);
                 }
 
@@ -118,10 +123,11 @@ namespace ET.Client
                 ES_FriendBlack es = this.m_es_friendblack;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_FriendBlack.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_FriendBlack.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_friendblack = this.AddChild<ES_FriendBlack, Transform>(go.transform);
                 }
 
@@ -136,10 +142,11 @@ namespace ET.Client
                 ES_UnionShow es = this.m_es_unionshow;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionShow.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_UnionShow.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_unionshow = this.AddChild<ES_UnionShow, Transform>(go.transform);
                 }
 
@@ -154,10 +161,11 @@ namespace ET.Client
                 ES_UnionMy es = this.m_es_unionmy;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionMy.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_UnionMy.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_unionmy = this.AddChild<ES_UnionMy, Transform>(go.transform);
                 }
 
@@ -177,6 +185,14 @@ namespace ET.Client
 			this.m_es_unionshow = null;
 			this.m_es_unionmy = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;

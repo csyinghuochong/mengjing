@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgUnionXiuLianViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
                 ES_UnionRoleXiuLian es = this.m_es_unionrolexiulian;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionRoleXiuLian.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_UnionRoleXiuLian.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_unionrolexiulian = this.AddChild<ES_UnionRoleXiuLian, Transform>(go.transform);
                 }
 
@@ -66,10 +70,11 @@ namespace ET.Client
                 ES_UnionPetXiuLian es = this.m_es_unionpetxiulian;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionPetXiuLian.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_UnionPetXiuLian.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_unionpetxiulian = this.AddChild<ES_UnionPetXiuLian, Transform>(go.transform);
                 }
 
@@ -84,10 +89,11 @@ namespace ET.Client
                 ES_UnionBloodStone es = this.m_es_unionbloodstone;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_UnionBloodStone.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_UnionBloodStone.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_unionbloodstone = this.AddChild<ES_UnionBloodStone, Transform>(go.transform);
                 }
 
@@ -103,6 +109,14 @@ namespace ET.Client
 			this.m_es_unionpetxiulian = null;
 			this.m_es_unionbloodstone = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

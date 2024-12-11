@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgActivityViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -65,10 +68,11 @@ namespace ET.Client
                 ES_ActivityYueKa es = this.m_es_activityyueka;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivityYueKa.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_ActivityYueKa.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_activityyueka = this.AddChild<ES_ActivityYueKa, Transform>(go.transform);
                 }
 
@@ -83,10 +87,11 @@ namespace ET.Client
                 ES_ActivityMaoXian es = this.m_es_activitymaoxian;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivityMaoXian.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_ActivityMaoXian.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_activitymaoxian = this.AddChild<ES_ActivityMaoXian, Transform>(go.transform);
                 }
 
@@ -101,10 +106,11 @@ namespace ET.Client
                 ES_ActivityToken es = this.m_es_activitytoken;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivityToken.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_ActivityToken.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_activitytoken = this.AddChild<ES_ActivityToken, Transform>(go.transform);
                 }
 
@@ -119,10 +125,11 @@ namespace ET.Client
                 ES_ActivityTeHui es = this.m_es_activitytehui;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivityTeHui.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_ActivityTeHui.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_activitytehui = this.AddChild<ES_ActivityTeHui, Transform>(go.transform);
                 }
 
@@ -137,10 +144,11 @@ namespace ET.Client
                 ES_ActivitySingleRecharge es = this.m_es_activitysinglerecharge;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_ActivitySingleRecharge.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_ActivitySingleRecharge.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_activitysinglerecharge = this.AddChild<ES_ActivitySingleRecharge, Transform>(go.transform);
                 }
 
@@ -159,6 +167,14 @@ namespace ET.Client
 			this.m_es_activitytehui = null;
 			this.m_es_activitysinglerecharge = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

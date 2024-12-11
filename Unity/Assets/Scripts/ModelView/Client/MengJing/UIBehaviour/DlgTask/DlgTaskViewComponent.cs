@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgTaskViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -48,10 +51,11 @@ namespace ET.Client
 				ES_TaskDetail es = this.m_es_taskdetail;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TaskDetail.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_TaskDetail.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_taskdetail = this.AddChild<ES_TaskDetail, Transform>(go.transform);
 				}
 
@@ -66,10 +70,11 @@ namespace ET.Client
 				ES_TaskGrowUp es = this.m_es_taskgrowup;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_TaskGrowUp.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_TaskGrowUp.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_taskgrowup = this.AddChild<ES_TaskGrowUp, Transform>(go.transform);
 				}
 
@@ -84,6 +89,14 @@ namespace ET.Client
 			this.m_es_taskdetail = null;
 			this.m_es_taskgrowup = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;

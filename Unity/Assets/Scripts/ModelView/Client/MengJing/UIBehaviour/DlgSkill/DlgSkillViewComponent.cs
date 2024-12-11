@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgSkillViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
      	{
      		get
@@ -65,10 +68,11 @@ namespace ET.Client
                 ES_SkillLearn es = this.m_es_skilllearn;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillLearn.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SkillLearn.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_skilllearn = this.AddChild<ES_SkillLearn, Transform>(go.transform);
                 }
 
@@ -83,10 +87,11 @@ namespace ET.Client
                 ES_SkillSet es = this.m_es_skillset;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillSet.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SkillSet.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_skillset = this.AddChild<ES_SkillSet, Transform>(go.transform);
                 }
 
@@ -101,10 +106,11 @@ namespace ET.Client
                 ES_SkillTianFu es = this.m_es_skilltianfu;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillTianFu.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SkillTianFu.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_skilltianfu = this.AddChild<ES_SkillTianFu, Transform>(go.transform);
                 }
 
@@ -119,10 +125,11 @@ namespace ET.Client
                 ES_SkillMake es = this.m_es_skillmake;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillMake.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SkillMake.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_skillmake = this.AddChild<ES_SkillMake, Transform>(go.transform);
                 }
 
@@ -137,10 +144,11 @@ namespace ET.Client
                 ES_SkillLifeShield es = this.m_es_skilllifeshield;
                 if (es == null)
                 {
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_SkillLifeShield.prefab");
+	                string path = "Assets/Bundles/UI/Common/ES_SkillLifeShield.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
                     go.SetActive(false);
+                    this.AssetList.Add(path);
                     this.m_es_skilllifeshield = this.AddChild<ES_SkillLifeShield, Transform>(go.transform);
                 }
 
@@ -159,6 +167,14 @@ namespace ET.Client
 			this.m_es_skillmake = null;
 			this.m_es_skilllifeshield = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgEquipmentIncreaseViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -45,13 +48,14 @@ namespace ET.Client
 		{
 			get
 			{
+				string path = "Assets/Bundles/UI/Common/ES_EquipmentIncreaseShow.prefab";
 				ES_EquipmentIncreaseShow es = this.m_es_equipmentincreaseshow;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_EquipmentIncreaseShow.prefab");
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_equipmentincreaseshow = this.AddChild<ES_EquipmentIncreaseShow, Transform>(go.transform);
 				}
 
@@ -63,13 +67,14 @@ namespace ET.Client
 		{
 			get
 			{
+				string path = "Assets/Bundles/UI/Common/ES_EquipmentIncreaseTransfer.prefab";
 				ES_EquipmentIncreaseTransfer es = this.m_es_equipmentincreasetransfer;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_EquipmentIncreaseTransfer.prefab");
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_equipmentincreasetransfer = this.AddChild<ES_EquipmentIncreaseTransfer, Transform>(go.transform);
 				}
 
@@ -84,6 +89,14 @@ namespace ET.Client
 			this.m_es_equipmentincreaseshow = null;
 			this.m_es_equipmentincreasetransfer = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgJiaYuanPastureViewComponent : Entity,IAwake,IDestroy 
 	{
+		public List<string> AssetList = new();
+		
 		public ES_ModelShow ES_ModelShow
      	{
      		get
@@ -68,10 +71,11 @@ namespace ET.Client
 				ES_JiaYuanPasture_A es = this.m_es_jiayuanpasture_a;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JiaYuanPasture_A.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_JiaYuanPasture_A.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_jiayuanpasture_a = this.AddChild<ES_JiaYuanPasture_A, Transform>(go.transform);
 				}
 
@@ -86,10 +90,11 @@ namespace ET.Client
 				ES_JiaYuanPasture_B es = this.m_es_jiayuanpasture_b;
 				if (es == null)
 				{
-					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
-							.LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_JiaYuanPasture_B.prefab");
+					string path = "Assets/Bundles/UI/Common/ES_JiaYuanPasture_B.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
 					go.SetActive(false);
+					this.AssetList.Add(path);
 					this.m_es_jiayuanpasture_b = this.AddChild<ES_JiaYuanPasture_B, Transform>(go.transform);
 				}
 
@@ -105,6 +110,14 @@ namespace ET.Client
 			this.m_es_jiayuanpasture_a = null;
 			this.m_es_jiayuanpasture_b = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
