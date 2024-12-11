@@ -47,13 +47,6 @@ namespace ET.Client
         {
             //if (GameObjectPoolHelper.GetAssetNumber() >= 50)
             {
-                ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-                self.Root().GetComponent<GameObjectLoadComponent>().DisposeUnUse();
-
-                resourcesLoaderComponent.UnLoadAllAsset();
-                
-                Debug.Log("GameMemory..UnLoadAllUnUseAsset");
-
                 //导致卡顿不能用、、
                 //Resources.UnloadUnusedAssets();
                 //GC.Collect();

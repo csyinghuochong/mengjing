@@ -212,11 +212,11 @@ namespace ET.Client
 
         public delegate GameObject DelegateGS(string a, long b);
 
-        public static DelegateGS DelegateLoadAsset = null;
+        public static DelegateGS LoadAssetEventHandle = null;
         
         public static GameObject GetGameObjectByResType(string poolName)
         {
-            GameObject pb = DelegateLoadAsset?.Invoke(poolName, 0);
+            GameObject pb = LoadAssetEventHandle?.Invoke(poolName, 0);
             //GameObject pb =ResourcesComponent.Instance.LoadAssetSync<GameObject>(poolName);
             return pb;
         }

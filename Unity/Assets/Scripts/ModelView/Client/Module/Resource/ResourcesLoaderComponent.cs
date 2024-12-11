@@ -16,7 +16,7 @@ namespace ET.Client
         {
             self.Package = YooAssets.GetPackage("DefaultPackage");
 
-            GameObjectPoolHelper.DelegateLoadAsset = (string a, long b) =>
+            GameObjectPoolHelper.LoadAssetEventHandle = (string a, long b) =>
             {
                return self.LoadAssetSync<GameObject>(a,b);
             };
@@ -70,10 +70,6 @@ namespace ET.Client
 
         public static void UnLoadAllAsset(this ResourcesLoaderComponent self)
         {
-            // if (!self.ReleaseAsset)
-            // {
-            //     return;
-            // }
             // foreach (var kv in self.Handlers)
             // {
             //     self.ReleaseHandler(kv.Value.handler);
