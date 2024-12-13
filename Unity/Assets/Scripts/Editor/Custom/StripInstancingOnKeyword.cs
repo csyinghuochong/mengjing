@@ -30,13 +30,11 @@ namespace ET.Client
             {
                 ShaderCompilerData input = data[i];
 
-                // if (input.shaderKeywordSet.IsEnabled(new ShaderKeyword("INSTANCING_ON"))
-                //     || input.shaderKeywordSet.IsEnabled(new ShaderKeyword(shader, "INSTANCING_ON"))
-                //     || input.shaderKeywordSet.IsEnabled(new ShaderKeyword(shader, "_ADDITIONAL_LIGHT_SHADOWS"))
-                //     || input.shaderKeywordSet.IsEnabled(new ShaderKeyword(shader, "_ADDITIONAL_LIGHTS")))
-                // {
-                //     data.RemoveAt(i);
-                // }
+                if (input.shaderKeywordSet.IsEnabled(new ShaderKeyword(shader, "_ADDITIONAL_LIGHT_SHADOWS")) )
+                    //|| input.shaderKeywordSet.IsEnabled(new ShaderKeyword(shader, "_ADDITIONAL_LIGHTS")))
+                {
+                    data.RemoveAt(i);
+                }
             }
         }
     }
