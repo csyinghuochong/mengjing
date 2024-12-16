@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: e412a2fa9615ebd4c82856138f5f52af, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 95816c210181fff4fa02a946affdd290, type: 2}
 --- !u!1 &7800993
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +228,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7800993}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &32471102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32471103}
+  - component: {fileID: 32471106}
+  - component: {fileID: 32471105}
+  - component: {fileID: 32471104}
+  m_Layer: 8
+  m_Name: Cube (2)
+  m_TagString: NavMesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32471103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32471102}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 20.2, y: 7.84, z: -16.7}
+  m_LocalScale: {x: 4, y: 0.5, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4107271058465592260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &32471104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32471102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &32471105
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32471102}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &32471106
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32471102}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &71601457
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +543,142 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 98094943}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &187885939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187885940}
+  m_Layer: 0
+  m_Name: BornPosition (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &187885940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187885939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.15, y: 6.19, z: -51.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1948057897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &230878293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230878294}
+  - component: {fileID: 230878297}
+  - component: {fileID: 230878296}
+  - component: {fileID: 230878295}
+  m_Layer: 8
+  m_Name: Cube (3)
+  m_TagString: NavMesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230878294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230878293}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.76, y: 5.71, z: -37.19}
+  m_LocalScale: {x: 6.1304, y: 0.5, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4107271058465592260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &230878295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230878293}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &230878296
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230878293}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &230878297
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230878293}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &248021697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,111 +1729,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491695855}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &523549755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 523549759}
-  - component: {fileID: 523549758}
-  - component: {fileID: 523549757}
-  - component: {fileID: 523549756}
-  m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &523549756
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523549755}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &523549757
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523549755}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &523549758
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523549755}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &523549759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523549755}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.69, y: 2.154, z: -4.965}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &595113968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,13 +1846,13 @@ GameObject:
   - component: {fileID: 598836246}
   - component: {fileID: 598836245}
   - component: {fileID: 598836244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &598836244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1796,12 +1932,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598836243}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.84, y: 2.154, z: -4.965}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.89, y: 7.84, z: -9.01}
+  m_LocalScale: {x: 4, y: 0.5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 4107271058465592260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &625280263
 GameObject:
@@ -2359,111 +2495,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716929641}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &729893804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 729893805}
-  - component: {fileID: 729893808}
-  - component: {fileID: 729893807}
-  - component: {fileID: 729893806}
-  m_Layer: 14
-  m_Name: Cube
-  m_TagString: NavMesh
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &729893805
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 729893804}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.92, y: -0.8, z: -6.34}
-  m_LocalScale: {x: 8.0209055, y: 10, z: 6.3992405}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4107271058465592260}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &729893806
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 729893804}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &729893807
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 729893804}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &729893808
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 729893804}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &739913994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,6 +2600,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739913994}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &756716171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756716172}
+  - component: {fileID: 756716175}
+  - component: {fileID: 756716174}
+  - component: {fileID: 756716173}
+  m_Layer: 8
+  m_Name: Cube (1)
+  m_TagString: NavMesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756716172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756716171}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.86, y: 7.84, z: -24.58}
+  m_LocalScale: {x: 4, y: 0.5, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4107271058465592260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &756716173
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756716171}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &756716174
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756716171}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &756716175
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756716171}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &786274176
 GameObject:
   m_ObjectHideFlags: 0
@@ -3268,6 +3404,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217804859}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1308877925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308877926}
+  m_Layer: 0
+  m_Name: BornPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1308877926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308877925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.46, y: 7.5, z: -44.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1948057897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313335311
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,6 +4275,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781590087}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1860739489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1860739490}
+  - component: {fileID: 1860739493}
+  - component: {fileID: 1860739492}
+  - component: {fileID: 1860739491}
+  m_Layer: 8
+  m_Name: Cube (4)
+  m_TagString: NavMesh
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1860739490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860739489}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 28.76, y: 5.8, z: 4.02}
+  m_LocalScale: {x: 6.1304, y: 0.5, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4107271058465592260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1860739491
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860739489}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1860739492
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860739489}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1860739493
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860739489}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1872676096
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,6 +4590,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917036691}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1948057896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1948057897}
+  m_Layer: 0
+  m_Name: PositionSet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1948057897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948057896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1308877926}
+  - {fileID: 187885940}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043260278
 GameObject:
   m_ObjectHideFlags: 0
@@ -4925,6 +5230,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_C
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104395998773436871, guid: d43bd4843c34f3842bdae88bef386673,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104395998773436871, guid: d43bd4843c34f3842bdae88bef386673,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104395998773436871, guid: d43bd4843c34f3842bdae88bef386673,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4015854310278397460, guid: d43bd4843c34f3842bdae88bef386673,
         type: 3}
@@ -6809,6 +7129,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_K
       objectReference: {fileID: 0}
+    - target: {fileID: 7426216035215573919, guid: e3cd29705d3379f46b54262723a5bda8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426216035215573919, guid: e3cd29705d3379f46b54262723a5bda8,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7426216035215573919, guid: e3cd29705d3379f46b54262723a5bda8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8220,6 +8555,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_D
       objectReference: {fileID: 0}
+    - target: {fileID: 4637977876985461128, guid: a1369124381bf8e40aa75d9e51428a36,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637977876985461128, guid: a1369124381bf8e40aa75d9e51428a36,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637977876985461128, guid: a1369124381bf8e40aa75d9e51428a36,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7697240531749774939, guid: a1369124381bf8e40aa75d9e51428a36,
         type: 3}
       propertyPath: m_RootOrder
@@ -8299,7 +8649,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 729893805}
+  - {fileID: 598836247}
+  - {fileID: 756716172}
+  - {fileID: 230878294}
+  - {fileID: 1860739490}
+  - {fileID: 32471103}
   m_Father: {fileID: 4107271059112604330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4107271058465592263
@@ -8317,7 +8671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4107271058856781576
 Transform:
   m_ObjectHideFlags: 0
@@ -26085,6 +26439,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_J
       objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26164,6 +26533,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_B
       objectReference: {fileID: 0}
+    - target: {fileID: 7733572800562100658, guid: 4f7a5da02827d594d82a4ca7f765dfb8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733572800562100658, guid: 4f7a5da02827d594d82a4ca7f765dfb8,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733572800562100658, guid: 4f7a5da02827d594d82a4ca7f765dfb8,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26187,6 +26571,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_O
+      objectReference: {fileID: 0}
+    - target: {fileID: 266730370034944178, guid: 7e0726ab97762364bb0c1ac6231c6112,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 266730370034944178, guid: 7e0726ab97762364bb0c1ac6231c6112,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 266730370034944178, guid: 7e0726ab97762364bb0c1ac6231c6112,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 266730370034944179, guid: 7e0726ab97762364bb0c1ac6231c6112,
         type: 3}
@@ -26400,6 +26799,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_I
+      objectReference: {fileID: 0}
+    - target: {fileID: 165521173170514994, guid: 3da1fc2625635474b9caf6f5b21eae6a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 165521173170514994, guid: 3da1fc2625635474b9caf6f5b21eae6a,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 165521173170514994, guid: 3da1fc2625635474b9caf6f5b21eae6a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33992,6 +34406,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleCircle_A (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4871709356803489779, guid: bea5de77ab0b75e4a8d56a921e7ce630,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871709356803489779, guid: bea5de77ab0b75e4a8d56a921e7ce630,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 6113872440185868540, guid: bea5de77ab0b75e4a8d56a921e7ce630,
         type: 3}
       propertyPath: m_RootOrder
@@ -37069,6 +37493,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_B (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42990,6 +43424,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_C (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44057,6 +44501,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_C (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -50503,6 +50957,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_J (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 433038699655999428, guid: 4776074ba54bfd246a5bec7d3e808ba6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51703,6 +52172,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_C (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52863,6 +53342,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_C (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53627,9 +54116,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5181142053482471238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TempleTile Props
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55293,6 +55782,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_B (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58055,6 +58554,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_B (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -58503,6 +59012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleFrameB_A (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 596569809761522705, guid: c5b7c10e97187aa41b34219c6120d74e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 596569809761522709, guid: c5b7c10e97187aa41b34219c6120d74e,
         type: 3}
@@ -62860,6 +63374,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_B (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67956,6 +68480,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleFrameB_A (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 596569809761522705, guid: c5b7c10e97187aa41b34219c6120d74e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 596569809761522709, guid: c5b7c10e97187aa41b34219c6120d74e,
         type: 3}
       propertyPath: m_RootOrder
@@ -68448,6 +68977,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_B (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -79224,6 +79763,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_C (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -84186,6 +84735,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_B (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -88342,6 +88901,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleFrameB_A (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 596569809761522705, guid: c5b7c10e97187aa41b34219c6120d74e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 596569809761522709, guid: c5b7c10e97187aa41b34219c6120d74e,
         type: 3}
       propertyPath: m_RootOrder
@@ -92121,6 +92685,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_C (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -93944,10 +94518,10 @@ GameObject:
   - component: {fileID: 5181142054610625506}
   m_Layer: 0
   m_Name: TempleStair Props
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1001 &5181142054610646440
 PrefabInstance:
@@ -94515,6 +95089,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleStair_C (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436245452409357792, guid: a52360390e610c342b5efa3d3393f14f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -101703,6 +102287,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleStair_B (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937488003838841634, guid: 44f07d517b5267e47b3217b2270caec2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102042,6 +102636,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_A (87)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7907702167890040944, guid: 2f816024c7b62a1429b9038d3e286e5c,
         type: 3}
@@ -102499,6 +103108,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_A (88)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130358692668344227, guid: 2f816024c7b62a1429b9038d3e286e5c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7907702167890040944, guid: 2f816024c7b62a1429b9038d3e286e5c,
         type: 3}
@@ -109684,6 +110308,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_Q
       objectReference: {fileID: 0}
+    - target: {fileID: 1550096322222581473, guid: a4199f02e2981a14580a362493fa8eef,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550096322222581473, guid: a4199f02e2981a14580a362493fa8eef,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550096322222581473, guid: a4199f02e2981a14580a362493fa8eef,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -109730,6 +110369,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623046178746532027, guid: 8a611daa41106824cb9a795784ae6965,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623046178746532027, guid: 8a611daa41106824cb9a795784ae6965,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623046178746532027, guid: 8a611daa41106824cb9a795784ae6965,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7685149997323755368, guid: 8a611daa41106824cb9a795784ae6965,
         type: 3}
@@ -110611,6 +111265,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_N
       objectReference: {fileID: 0}
+    - target: {fileID: 2643167641047010248, guid: 68ed6e8cce9c3794184db088e307d751,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643167641047010248, guid: 68ed6e8cce9c3794184db088e307d751,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643167641047010248, guid: 68ed6e8cce9c3794184db088e307d751,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2643167641047010253, guid: 68ed6e8cce9c3794184db088e307d751,
         type: 3}
       propertyPath: m_RootOrder
@@ -111014,6 +111683,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_M
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363905043386957960, guid: 0dc973d9234fcf045abcc3b9206c98c5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363905043386957960, guid: 0dc973d9234fcf045abcc3b9206c98c5,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363905043386957960, guid: 0dc973d9234fcf045abcc3b9206c98c5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -111562,6 +112246,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_G
       objectReference: {fileID: 0}
+    - target: {fileID: 5165835185703458799, guid: 0f0549dde96183a44a1f8be3f88adeaa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165835185703458799, guid: 0f0549dde96183a44a1f8be3f88adeaa,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165835185703458799, guid: 0f0549dde96183a44a1f8be3f88adeaa,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7872226789046093884, guid: 0f0549dde96183a44a1f8be3f88adeaa,
         type: 3}
       propertyPath: m_RootOrder
@@ -111696,6 +112395,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_H
       objectReference: {fileID: 0}
+    - target: {fileID: 3769855650915594800, guid: 9b7392a6ff6906842ab7d70d27b8f649,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769855650915594800, guid: 9b7392a6ff6906842ab7d70d27b8f649,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769855650915594800, guid: 9b7392a6ff6906842ab7d70d27b8f649,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -111813,6 +112527,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TempleTile_R
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018250005093412185, guid: f1842df991f81044ab9c350c17afc929,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018250005093412185, guid: f1842df991f81044ab9c350c17afc929,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018250005093412185, guid: f1842df991f81044ab9c350c17afc929,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7843581094041593662, guid: f1842df991f81044ab9c350c17afc929,
         type: 3}
@@ -112248,6 +112977,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_F
       objectReference: {fileID: 0}
+    - target: {fileID: 3592197097293031614, guid: 592706dda6c0eec4cb1710cbd05a2301,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592197097293031614, guid: 592706dda6c0eec4cb1710cbd05a2301,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592197097293031614, guid: 592706dda6c0eec4cb1710cbd05a2301,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -112583,6 +113327,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TempleTile_E
       objectReference: {fileID: 0}
+    - target: {fileID: 9166438123976917272, guid: 79b47df51e0bf7640bb2ce24f3226994,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166438123976917272, guid: 79b47df51e0bf7640bb2ce24f3226994,
+        type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166438123976917272, guid: 79b47df51e0bf7640bb2ce24f3226994,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -112724,6 +113483,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 4107271059112604330}
-  - {fileID: 598836247}
-  - {fileID: 523549759}
   - {fileID: 862318458}
+  - {fileID: 1948057897}
