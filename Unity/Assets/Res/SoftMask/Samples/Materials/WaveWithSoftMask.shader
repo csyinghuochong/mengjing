@@ -66,7 +66,7 @@
 
             // Soft Mask Support
             // You also can use full path (Assets/...)
-            #include "../../Shaders/SoftMask.cginc"
+            #include "Assets/Res/SoftMask/Shaders/Resources/SoftMask.cginc"
 
             #pragma multi_compile __ UNITY_UI_ALPHACLIP
 
