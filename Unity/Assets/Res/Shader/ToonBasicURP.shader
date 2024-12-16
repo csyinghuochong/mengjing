@@ -73,8 +73,8 @@ Shader "Toon/BasicURP"
 
                 half4 col = _Color * SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
                 half4 cube = SAMPLE_TEXTURECUBE(_ToonShade, sampler_ToonShade, i.cubenormal);
-                half4 c = half4(2.0f * cube.rgb * col.rgb, col.a);
-                //UNITY_APPLY_FOG(i.fogCoord, c);  20240624 error
+                half4 c = half4(3.0f * cube.rgb * col.rgb, col.a);
+                //UNITY_APPLY_FOG(i.fogCoord, c); // 20240624 error
                 return c;
             }
             ENDHLSL
