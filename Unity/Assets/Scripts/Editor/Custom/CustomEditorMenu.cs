@@ -788,8 +788,20 @@ public class CustomEditorMenu
             Vector3 vector3 = gameObject.transform.position;
             Vector3 sceleV = gameObject.transform.localScale;
 
-            postionList += gameObject.name + "|" + vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
-                    "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2");
+            SphereCollider sphereCollider = gameObject.GetComponent<SphereCollider>();
+            if (sphereCollider != null)
+            {
+                 float radiusss = sphereCollider.radius;
+                 postionList += gameObject.name + "|" + vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
+                                    "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2")+ "," + radiusss.ToString("F2");
+            }
+            else
+            {
+                postionList += gameObject.name + "|" + vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
+                        "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2");
+            }
+
+           
             postionList += "\r\n";
         }
 
@@ -1235,20 +1247,19 @@ public class CustomEditorMenu
 
             //H:/GitMengJing2022/Unity\Library\PackageCache\com.unity.render-pipelines.universal@14.0.11\Shaders\XR\XROcclusionMesh.shader
 
-            if (!file.Contains("Unity\\Library\\PackageCache"))
+            if (!file.Contains("nity\\Library\\PackageCache"))
             {
                 if (!file.Contains(@"Assets\Res\Shader") && !file.Contains(@"Amazing Assets"))
                 {
                     string prefabpath = file;
                     string[] pathlist = file.Split('\\');
                     string destinationFile = @"Assets\\Res\\Shader\\" + pathlist[pathlist.Length - 1];
-                    
-                    MoveFile(prefabpath, destinationFile);
-                    MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+                    // bool moveret = MoveFile(prefabpath, destinationFile);
+                    // MoveFile(prefabpath + ".meta", destinationFile + ".meta");
                     
                     shaderPaths += file + "\n";
                     
-                    //Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
+                    Debug.Log($"移动shader：{prefabpath}   ====>   {destinationFile}");
                 }
             }
         }
