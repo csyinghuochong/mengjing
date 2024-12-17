@@ -793,7 +793,7 @@ public class CustomEditorMenu
             {
                  float radiusss = sphereCollider.radius;
                  postionList += gameObject.name + "|" + vector3.x.ToString("F2") + "," + vector3.y.ToString("F2") + "," + vector3.z.ToString("F2") +
-                                    "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2")+ "," + radiusss.ToString("F2");
+                                    "|" + sceleV.x.ToString("F2") + "," + sceleV.y.ToString("F2") + "," + sceleV.z.ToString("F2")+ "|" + radiusss;
             }
             else
             {
