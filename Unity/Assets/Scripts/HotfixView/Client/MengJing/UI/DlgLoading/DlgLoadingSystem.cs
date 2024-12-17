@@ -23,7 +23,16 @@ namespace ET.Client
         }
     }
 
-
+    [Event(SceneType.Demo)]
+    public class LoadSceneFinished_DlgLoadingRefesh : AEvent<Scene, LoadSceneFinished>
+    {
+        protected override async ETTask Run(Scene root, LoadSceneFinished args)
+        {
+            ConfigData.LoadSceneFinished = true;
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [FriendOf(typeof(DlgMainViewComponent))]
     [FriendOf(typeof(DlgLoading))]
     public static class DlgLoadingSystem

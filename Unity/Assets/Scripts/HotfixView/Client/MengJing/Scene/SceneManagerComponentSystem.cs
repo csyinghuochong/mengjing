@@ -155,8 +155,10 @@ namespace ET.Client
                     self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(null, paramss  );
                 }
             }
-            
-            ConfigData.LoadSceneFinished = sceneTypeEnum!= SceneTypeEnum.LoginScene;
+            if (sceneTypeEnum != SceneTypeEnum.LoginScene)
+            {
+                EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+            }
 
             self.UpdateChuanSong(sceneTypeEnum);
 
