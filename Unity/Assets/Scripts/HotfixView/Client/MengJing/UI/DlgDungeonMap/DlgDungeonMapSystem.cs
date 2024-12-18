@@ -34,15 +34,15 @@ namespace ET.Client
         {
             // UI中的地图块Id 对应的 ChapterId
             Dictionary<int, int> dic = new Dictionary<int, int>();
-            dic.Add(0, 2);
+            dic.Add(0, 9);
             dic.Add(1, 1);
-            dic.Add(2, 3);
-            dic.Add(3, 4);
-            dic.Add(4, 5);
-            dic.Add(5, 6);
-            dic.Add(6, 7);
-            dic.Add(7, 8);
-            dic.Add(8, 9);
+            dic.Add(2, 2);
+            dic.Add(3, 3);
+            dic.Add(4, 4);
+            dic.Add(5, 5);
+            dic.Add(6, 6);
+            dic.Add(7, 7);
+            dic.Add(8, 8);
 
             self.MapGameObjects = new GameObject[dic.Count];
             for (int i = 0; i < self.MapGameObjects.Length; i++)
