@@ -32,6 +32,11 @@ namespace ET.Client
             self.InitTime = TimeHelper.ServerNow() + TimeHelper.Second * 3;
             self.UICamera = GlobalComponent.Instance.UICamera.GetComponent<Camera>();
             self.MainCamera = GlobalComponent.Instance.MainCamera.GetComponent<Camera>();
+
+            self.Distance = 1.5f;
+            self.IsPlayerBornInArea = false;
+            self.PlayerLeaveTime = 0;
+            self.IsPlayerBornInArea();
         }
 
         [EntitySystem]
@@ -103,12 +108,68 @@ namespace ET.Client
             self.Timer = timerComponent.NewOnceTimer(TimeHelper.ServerNow() + leftTime, TimerInvokeType.TransferUITimer, self);
         }
 
+        /// <summary>
+        /// 判断玩家是否一开始就在传送点范围内
+        /// </summary>
+        /// <param name="self"></param>
+        private static void IsPlayerBornInArea(this UITransferHpComponent self)
+        {
+            Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (mainUnit == null || mainUnit.IsDisposed)
+            {
+                return;
+            }
+
+            float distance = PositionHelper.Distance2D(self.GetParent<Unit>().Position, mainUnit.Position);
+            if (distance <= self.Distance)
+            {
+                self.IsPlayerBornInArea = true;
+            }
+        }
+
         public static void OnCheckChuanSong(this UITransferHpComponent self, Unit mainhero)
         {
             Vector3 vector3 = self.GetParent<Unit>().Position;
             float distance = PositionHelper.Distance2D(vector3, mainhero.Position);
 
-            if (distance <= 1.5f && !self.EnterRange)
+            // 如果玩家刚出生在传送点，要离开传送点2秒后再进来才有效
+            if (self.IsPlayerBornInArea)
+            {
+                if (distance <= self.Distance)
+                {
+                    if (self.PlayerLeaveTime != 0)
+                    {
+                        // 进来
+                        if (self.PlayerLeaveTime + 2000 > TimeHelper.ServerNow())
+                        {
+                            // 还没到2秒又重新进来，计时重置
+                            self.PlayerLeaveTime = 0;
+                            return;
+                        }
+                        else
+                        {
+                            // 可以了
+                            self.IsPlayerBornInArea = false;
+                        }
+                    }
+                    else
+                    {
+                        // 还在里面，没出去过
+                        return;
+                    }
+                }
+                else
+                {
+                    if (self.PlayerLeaveTime == 0)
+                    {
+                        // 出去
+                        self.PlayerLeaveTime = TimeHelper.ServerNow();
+                    }
+                    return;
+                }
+            }
+
+            if (distance <= self.Distance && !self.EnterRange)
             {
                 self.EnterRange = true;
                 if (UnitHelper.IsHaveBoss(mainhero.Scene(), vector3, 8f))
@@ -121,7 +182,7 @@ namespace ET.Client
                 }
             }
 
-            if (distance > 1.5f && self.EnterRange)
+            if (distance > self.Distance && self.EnterRange)
             {
                 self.EnterRange = false;
             }

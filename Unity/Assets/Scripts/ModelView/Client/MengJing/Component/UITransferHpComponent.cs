@@ -19,5 +19,9 @@ namespace ET.Client
         public long InitTime;
 
         public long Timer;
+
+        public float Distance;
+        public bool IsPlayerBornInArea;
+        public long PlayerLeaveTime;
     }
 }
