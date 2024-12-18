@@ -483,10 +483,19 @@ namespace ET.Client
                 }
                 else
                 {
-                    targetPosi = hit.point;
+                    //targetPosi = hit.point;
+                    if (Mathf.Abs(hit.point.y - targetPosi.y) > 0.4f)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        targetPosi = hit.point;
+                        pathfind.Add(targetPosi);
+                    }
                 }
                 
-                pathfind.Add(targetPosi);
+                //pathfind.Add(targetPosi);
             }
 
             return targetPosi;
