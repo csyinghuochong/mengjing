@@ -115,7 +115,7 @@ namespace ET.Server
                     {
                         unit.Position = new float3(dungeonConfig.BornPosLeft[0] * 0.01f, dungeonConfig.BornPosLeft[1] * 0.01f, dungeonConfig.BornPosLeft[2] * 0.01f);
                     }
-                    unit.AddComponent<PathfindingComponent, int>(10001);
+                    unit.AddComponent<PathfindingComponent, int>(dungeonConfig.MapID);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
                     scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
                     break;
