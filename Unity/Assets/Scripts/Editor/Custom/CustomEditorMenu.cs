@@ -780,6 +780,22 @@ public class CustomEditorMenu
             return;
 
         GameObject gameObject = Selection.gameObjects[0];
+        
+        Component[] components = gameObject.GetComponentsInChildren<Component>();
+        for (int i = 0; i < components.Length; i++)
+        {
+            if (components[i] == gameObject || components[i] == null)
+                continue;
+ 
+            // 打印非this的组件类型
+            string comname =   components[i].GetType().Name;
+
+            if (comname.Contains("PhysicsObject"))
+            {
+                GameObject.DestroyImmediate(components[i]);
+            }
+        }
+        
         Rigidbody[] rigidbodies =   gameObject.GetComponentsInChildren<Rigidbody>();
         for (int i = 0; i < rigidbodies.Length; i++)
         {
@@ -791,6 +807,8 @@ public class CustomEditorMenu
         {
             GameObject.DestroyImmediate(audioSources[i]);
         }
+
+        
         AssetDatabase.SaveAssets();
     }
     
