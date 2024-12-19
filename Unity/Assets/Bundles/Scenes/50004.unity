@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 312795d81038e194bb7d950613305ae6, type: 2}
 --- !u!1 &1147272
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +782,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (125)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 311
@@ -940,6 +948,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 313
@@ -1021,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -1663,6 +1679,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (66)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -2385,6 +2409,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (131)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 421
@@ -2784,6 +2816,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (118)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -3611,7 +3651,7 @@ GameObject:
   - component: {fileID: 812600172}
   - component: {fileID: 812600171}
   - component: {fileID: 812600170}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Cube (1)
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3661,7 +3701,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812600168}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4084,6 +4124,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (127)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 311
@@ -4267,6 +4315,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (126)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -5458,6 +5514,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 1276
@@ -5962,6 +6026,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 1276
@@ -6043,7 +6115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -6456,6 +6528,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (129)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 423
@@ -6640,6 +6720,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (130)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 423
@@ -6718,6 +6806,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -6876,6 +6972,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -7284,6 +7388,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 312
@@ -7449,6 +7561,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (128)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -8517,6 +8637,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (113)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1256
@@ -8595,6 +8723,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -8762,6 +8898,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1239
@@ -8927,6 +9071,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -9264,6 +9416,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 1059
@@ -9342,9 +9502,9 @@ GameObject:
   - component: {fileID: 2678748950808924570}
   - component: {fileID: 3483075077689637214}
   - component: {fileID: 6506187487011367502}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -9454,6 +9614,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -9768,6 +9936,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 425
@@ -10069,9 +10245,9 @@ GameObject:
   - component: {fileID: 1529354806069904540}
   - component: {fileID: 3090951603355844126}
   - component: {fileID: 3673279021862781305}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -10398,6 +10574,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 448
@@ -10606,6 +10790,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1070
@@ -10685,6 +10877,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1267
@@ -10763,6 +10963,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -10863,6 +11071,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -15634,7 +15850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -15759,7 +15975,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127762, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155858, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Name
@@ -15775,7 +15991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187072, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 476986, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_RootOrder
@@ -15877,6 +16093,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 1102
@@ -15956,6 +16180,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 426
@@ -16034,6 +16266,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -16574,6 +16814,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1231
@@ -17022,9 +17270,9 @@ GameObject:
   - component: {fileID: 1132981239972180281}
   - component: {fileID: 3631344756381023422}
   - component: {fileID: 1270888099600899034}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -17040,6 +17288,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -17119,6 +17375,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -17417,7 +17681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -17786,6 +18050,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 326
@@ -18048,6 +18320,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 431
@@ -18264,6 +18544,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -18601,7 +18889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -18765,6 +19053,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1101
@@ -18864,6 +19160,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1100
@@ -18942,6 +19246,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -19354,7 +19666,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127762, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155858, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Name
@@ -19370,7 +19682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187072, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 476986, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_RootOrder
@@ -19537,6 +19849,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -20272,6 +20592,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 436
@@ -20801,6 +21129,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1090
@@ -20879,6 +21215,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (112)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -21046,6 +21390,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (86)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 371
@@ -21124,6 +21476,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (58)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -21900,6 +22260,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 1300
@@ -21979,6 +22347,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1082
@@ -22057,6 +22433,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -22526,6 +22910,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -23071,6 +23463,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 1242
@@ -23149,6 +23549,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -23422,6 +23830,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -23850,6 +24266,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_Small_01 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
       value: 1264
@@ -23928,6 +24352,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -24049,6 +24481,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -24333,6 +24773,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -24715,6 +25163,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -26032,6 +26488,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1271
@@ -26285,6 +26749,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1063
@@ -26376,6 +26848,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -26542,6 +27022,14 @@ PrefabInstance:
     - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_Name
       value: Column_Small_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
@@ -26812,6 +27300,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 322
@@ -26978,6 +27474,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 323
@@ -27057,6 +27561,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_01 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
       value: 1251
@@ -27135,6 +27647,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -27645,9 +28165,9 @@ GameObject:
   - component: {fileID: 6653657345133843110}
   - component: {fileID: 5704364924186400760}
   - component: {fileID: 2716945526425629293}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -27839,7 +28359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -28344,9 +28864,9 @@ GameObject:
   - component: {fileID: 3175688979079625817}
   - component: {fileID: 2346776423600935450}
   - component: {fileID: 3161154538235829899}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -28362,6 +28882,14 @@ PrefabInstance:
     - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
       propertyPath: m_Name
       value: Railing_03 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 428206, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
       propertyPath: m_RootOrder
@@ -28933,7 +29461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -29105,6 +29633,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (65)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 421
@@ -29270,6 +29806,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -29611,6 +30155,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_02 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 489506, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
       propertyPath: m_RootOrder
       value: 1279
@@ -29689,6 +30241,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (115)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -30109,6 +30669,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1050
@@ -30449,6 +31017,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 489506, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
       propertyPath: m_RootOrder
       value: 1120
@@ -30570,6 +31146,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (116)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1262
@@ -30648,6 +31232,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -30750,7 +31342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -30987,7 +31579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_TagString
@@ -31071,6 +31663,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -31360,6 +31960,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -31822,6 +32430,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1287
@@ -32060,6 +32676,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1071
@@ -32138,6 +32762,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -32738,6 +33370,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1069
@@ -32816,6 +33456,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -33115,6 +33763,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1270
@@ -33193,9 +33849,9 @@ GameObject:
   - component: {fileID: 457401820536079465}
   - component: {fileID: 6128179874342183025}
   - component: {fileID: 9070489737483311250}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -33307,6 +33963,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 428
@@ -33385,6 +34049,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -33697,6 +34369,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -34219,6 +34899,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_01 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
       value: 1252
@@ -34397,6 +35085,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 347
@@ -34532,6 +35228,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -34713,6 +35417,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (108)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -34970,6 +35682,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -35498,6 +36218,14 @@ PrefabInstance:
     - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_Name
       value: Column_Small_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
@@ -40370,6 +41098,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 355
@@ -40571,6 +41307,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 330
@@ -40650,6 +41394,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 454
@@ -40728,6 +41480,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -41073,6 +41833,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 317
@@ -41173,6 +41941,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_Small_01 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
       value: 334
@@ -41270,6 +42046,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -41696,6 +42480,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1277
@@ -41774,6 +42566,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -42012,6 +42812,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1243
@@ -42178,6 +42986,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (119)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1282
@@ -42257,6 +43073,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1080
@@ -42335,6 +43159,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -42588,6 +43420,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -43084,6 +43924,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 338
@@ -43183,6 +44031,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -43353,6 +44209,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -43683,6 +44547,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1048
@@ -43761,6 +44633,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -43944,6 +44824,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1093
@@ -44022,6 +44910,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -44117,6 +45013,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -44319,6 +45223,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 349
@@ -44484,9 +45396,9 @@ GameObject:
   - component: {fileID: 7311178862601558022}
   - component: {fileID: 8499546605252573449}
   - component: {fileID: 3345734842204533231}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -44501,7 +45413,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127762, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155858, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Name
@@ -44517,7 +45429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187072, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 476986, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_RootOrder
@@ -44685,6 +45597,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 327
@@ -44850,6 +45770,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -45294,6 +46222,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (52)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -45787,7 +46723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4107271058856781576
 Transform:
   m_ObjectHideFlags: 0
@@ -45886,6 +46822,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 1273
@@ -45979,6 +46923,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -46238,9 +47190,9 @@ GameObject:
   - component: {fileID: 2648416560375497167}
   - component: {fileID: 1489054140504559645}
   - component: {fileID: 8573843959483054238}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -46259,7 +47211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -46343,6 +47295,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -46717,6 +47677,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -47329,6 +48297,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (57)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 439
@@ -47408,6 +48384,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 1233
@@ -47486,6 +48470,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -48167,6 +49159,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_Small_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
       value: 344
@@ -48424,6 +49424,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (111)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -48871,7 +49879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -48978,6 +49986,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -49248,6 +50264,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (122)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 315
@@ -49324,9 +50348,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593507051487609762}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (2)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -49342,6 +50366,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -49765,6 +50797,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (69)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1115
@@ -49925,7 +50965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -50009,6 +51049,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -50454,6 +51502,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (64)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1113
@@ -50532,6 +51588,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -50699,6 +51763,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1106
@@ -50778,6 +51850,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 1276
@@ -50856,6 +51936,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (59)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -51214,6 +52302,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1098
@@ -51292,6 +52388,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (70)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -51649,6 +52753,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1054
@@ -51727,6 +52839,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -51885,6 +53005,14 @@ PrefabInstance:
     - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_Name
       value: Column_Small_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
@@ -52224,9 +53352,9 @@ GameObject:
   - component: {fileID: 376736291066555517}
   - component: {fileID: 482637817676312297}
   - component: {fileID: 5321996931123079760}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -52242,6 +53370,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (124)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -52433,6 +53569,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (60)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1094
@@ -52511,6 +53655,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -52851,6 +54003,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -53396,6 +54556,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1121
@@ -53488,7 +54656,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 168948, guid: 6ccb487f378ffc84a82d67fe6018519b, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 168948, guid: 6ccb487f378ffc84a82d67fe6018519b, type: 3}
       propertyPath: m_TagString
@@ -53925,6 +55093,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 1311
@@ -54004,6 +55180,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1292
@@ -54082,6 +55266,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (71)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -54184,6 +55376,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -54354,6 +55554,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -54730,7 +55938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -54814,6 +56022,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -55011,7 +56227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -55196,6 +56412,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 455
@@ -55272,9 +56496,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4749387795462572286}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (4)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -55595,6 +56819,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1044
@@ -55760,9 +56992,9 @@ GameObject:
   - component: {fileID: 8282980063508650019}
   - component: {fileID: 3763210270641180062}
   - component: {fileID: 5534882690587695185}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_Shadow
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 88
@@ -55831,6 +57063,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (54)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -55925,6 +57165,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -56132,6 +57380,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 1218
@@ -56290,6 +57546,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (63)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 423
@@ -56429,6 +57693,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1045
@@ -56507,6 +57779,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (109)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -56773,6 +58053,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -57071,6 +58359,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_Small_01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
       value: 1259
@@ -57149,6 +58445,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -57231,7 +58535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -57313,9 +58617,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6472759033050855771}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (22)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -57373,6 +58677,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -57452,6 +58764,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -57573,6 +58893,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -58088,6 +59416,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 1235
@@ -58333,6 +59669,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1072
@@ -58412,6 +59756,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 406
@@ -58490,6 +59842,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -59479,6 +60839,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 286
@@ -59644,6 +61012,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -59991,6 +61367,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -64783,7 +66167,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 168948, guid: 6ccb487f378ffc84a82d67fe6018519b, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 168948, guid: 6ccb487f378ffc84a82d67fe6018519b, type: 3}
       propertyPath: m_TagString
@@ -65000,7 +66384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -65182,7 +66566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_TagString
@@ -65353,6 +66737,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -65529,6 +66921,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -65934,7 +67334,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127762, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155858, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Name
@@ -65950,7 +67350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187072, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 476986, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_RootOrder
@@ -66049,6 +67449,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -66253,6 +67661,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -66908,6 +68324,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1065
@@ -66986,6 +68410,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -67505,6 +68937,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 442
@@ -67583,6 +69023,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -72893,9 +74341,9 @@ GameObject:
   - component: {fileID: 9018389530274546491}
   - component: {fileID: 2115955600474544673}
   - component: {fileID: 552063018170913894}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_Shadow
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 88
@@ -73015,6 +74463,14 @@ PrefabInstance:
     - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
       propertyPath: m_Name
       value: Railing_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 428206, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
       propertyPath: m_RootOrder
@@ -73325,6 +74781,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 345
@@ -73405,9 +74869,9 @@ GameObject:
   - component: {fileID: 529820733613964510}
   - component: {fileID: 3066655938781908120}
   - component: {fileID: 6960473684662946913}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -73576,6 +75040,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 1053
@@ -73667,9 +75139,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2694784982581254020}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (21)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -73773,6 +75245,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (51)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1084
@@ -73851,6 +75331,14 @@ PrefabInstance:
     - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_Name
       value: Column_04 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
@@ -73931,6 +75419,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1232
@@ -74009,6 +75505,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -74165,9 +75669,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9041069221525233498}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (4)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -74392,6 +75896,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (110)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1253
@@ -74470,6 +75982,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -74636,9 +76156,9 @@ GameObject:
   - component: {fileID: 5069004635465190765}
   - component: {fileID: 1146785913057534559}
   - component: {fileID: 7251997849674885331}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_Shadow
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 88
@@ -74657,7 +76177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -74739,9 +76259,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038670615945935612}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -74844,6 +76364,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -75176,6 +76704,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1220
@@ -75420,6 +76956,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -75835,6 +77379,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
       value: 341
@@ -76001,6 +77553,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1230
@@ -76079,6 +77639,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (117)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -76500,6 +78068,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -77233,6 +78809,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (114)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1257
@@ -77628,6 +79212,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1067
@@ -77982,6 +79574,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_03
       objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 140624, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 428206, guid: f42d0e4bd8756f4478f1f1f3e60629d0, type: 3}
       propertyPath: m_RootOrder
       value: 456
@@ -78117,6 +79717,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -78552,6 +80160,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1110
@@ -78896,6 +80512,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1212
@@ -78975,6 +80599,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1075
@@ -79053,9 +80685,9 @@ GameObject:
   - component: {fileID: 2852406458123931166}
   - component: {fileID: 5850830266703380820}
   - component: {fileID: 5486278560035349052}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -79184,7 +80816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_TagString
@@ -79395,7 +81027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -79479,6 +81111,14 @@ PrefabInstance:
     - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_Name
       value: Column_07 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
@@ -79607,7 +81247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -79691,6 +81331,14 @@ PrefabInstance:
     - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_Name
       value: Column_03 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
@@ -79806,6 +81454,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1042
@@ -79884,6 +81540,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -80160,6 +81824,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 337
@@ -80341,6 +82013,14 @@ PrefabInstance:
     - target: {fileID: 199478, guid: 449c0e9f247e3cb438118a7359f9d188, type: 3}
       propertyPath: m_Name
       value: Bush_01 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 199478, guid: 449c0e9f247e3cb438118a7359f9d188, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 199478, guid: 449c0e9f247e3cb438118a7359f9d188, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 401248, guid: 449c0e9f247e3cb438118a7359f9d188, type: 3}
       propertyPath: m_RootOrder
@@ -80645,9 +82325,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828291562625650395}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (21)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -80666,7 +82346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 191810, guid: a65d892ddf6b61440ac95a9284593af4, type: 3}
       propertyPath: m_TagString
@@ -81210,6 +82890,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1060
@@ -81463,6 +83151,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 408
@@ -81627,7 +83323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 127762, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 155858, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Name
@@ -81643,7 +83339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187072, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 476986, guid: 5b9ec60375247354e8e32f5a310ab9cd, type: 3}
       propertyPath: m_RootOrder
@@ -81723,6 +83419,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -82193,6 +83897,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1055
@@ -82417,6 +84129,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1275
@@ -82575,6 +84295,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1215
@@ -82732,6 +84460,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (72)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -83365,6 +85101,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 449
@@ -83539,6 +85283,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 410
@@ -83617,6 +85369,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -83806,6 +85566,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1076
@@ -83972,6 +85740,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_04 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 164814, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457734, guid: 4d3568bdd69812c43b45b2593f1d6f1b, type: 3}
       propertyPath: m_RootOrder
       value: 316
@@ -84137,6 +85913,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -89129,6 +90913,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soil_Bricks_03 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 193424, guid: 57b357eb83cb03246be15ec4b8aab8b4, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 193424, guid: 57b357eb83cb03246be15ec4b8aab8b4, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 441356, guid: 57b357eb83cb03246be15ec4b8aab8b4, type: 3}
       propertyPath: m_RootOrder
       value: 103
@@ -89208,6 +91000,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (74)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1119
@@ -89286,6 +91086,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -89445,6 +91253,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1244
@@ -89584,6 +91400,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 342
@@ -89662,6 +91486,14 @@ PrefabInstance:
     - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_Name
       value: Column_Small_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 151804, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 447582, guid: 3cc96a4f974485d478c762b0a8aab6c6, type: 3}
       propertyPath: m_RootOrder
@@ -90015,6 +91847,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_07 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128688, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437798, guid: a38e1a25713a2f245bfbb5e2a843415a, type: 3}
       propertyPath: m_RootOrder
       value: 353
@@ -90093,6 +91933,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (73)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -90317,6 +92165,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1228
@@ -90491,6 +92347,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 489506, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
       propertyPath: m_RootOrder
       value: 411
@@ -90569,6 +92433,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -90834,6 +92706,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
       value: 1248
@@ -90912,6 +92792,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -90992,6 +92880,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 1266
@@ -91070,6 +92966,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -92154,6 +94058,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 450
@@ -92322,7 +94234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103070, guid: 2aa3edf9a18125e43b72358a7fbe685a, type: 3}
       propertyPath: m_TagString
@@ -92486,6 +94398,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1211
@@ -92567,7 +94487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -92653,9 +94573,9 @@ GameObject:
   - component: {fileID: 2673748578824434002}
   - component: {fileID: 3408440461822355335}
   - component: {fileID: 5410088343221673198}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -92844,7 +94764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 103492, guid: 90612cd57c96bb44fbe08103dd723c14, type: 3}
       propertyPath: m_TagString
@@ -93111,6 +95031,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (123)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 311
@@ -93189,6 +95117,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (68)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -93292,6 +95228,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 1222
@@ -93370,6 +95314,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -93624,6 +95576,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (121)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1285
@@ -93717,6 +95677,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (67)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -94071,6 +96039,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 435
@@ -94284,9 +96260,9 @@ GameObject:
   - component: {fileID: 9035416468547160153}
   - component: {fileID: 180024384918634879}
   - component: {fileID: 1672803083316925413}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Bottom_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -94633,6 +96609,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_01 (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
       value: 1078
@@ -94799,6 +96783,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 1241
@@ -94877,6 +96869,14 @@ PrefabInstance:
     - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_Name
       value: Column_02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
@@ -95006,6 +97006,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -95595,6 +97603,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (120)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -100257,6 +102273,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
       value: 1111
@@ -100694,6 +102718,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_03 (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 155334, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 457538, guid: 10e1db897679c8945bcb8dc9f2313d46, type: 3}
       propertyPath: m_RootOrder
       value: 1274
@@ -100772,6 +102804,14 @@ PrefabInstance:
     - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_Name
       value: Column_05 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
@@ -100991,6 +103031,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_02
       objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 489506, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
       propertyPath: m_RootOrder
       value: 438
@@ -101087,6 +103135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_02 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 158532, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 465254, guid: db792844e9dcfc64389b3bcf6123cf4f, type: 3}
       propertyPath: m_RootOrder
       value: 354
@@ -101165,6 +103221,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -101303,6 +103367,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Railing_02 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 141160, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 489506, guid: 692c1f3f6ae0aa9428a428d77c78bc24, type: 3}
       propertyPath: m_RootOrder
       value: 324
@@ -101382,6 +103454,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Column_05 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 175032, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 416620, guid: 2f32b7915fc07c1469d5b0dcb60cabfa, type: 3}
       propertyPath: m_RootOrder
       value: 319
@@ -101460,6 +103540,14 @@ PrefabInstance:
     - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_Name
       value: Railing_Rounded_Small_01 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 170934, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 413268, guid: 92658dff3494da84884c48d38ac8712b, type: 3}
       propertyPath: m_RootOrder
@@ -101561,6 +103649,14 @@ PrefabInstance:
     - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_Name
       value: Railing_01 (62)
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 128534, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 437164, guid: e068514672ef8e24f8e3806f16858fe9, type: 3}
       propertyPath: m_RootOrder
@@ -101725,9 +103821,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5475787751994200963}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01 (1)
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
@@ -101782,6 +103878,14 @@ PrefabInstance:
     - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_Name
       value: Column_01 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 182968, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
+      propertyPath: m_TagString
+      value: NavMesh
       objectReference: {fileID: 0}
     - target: {fileID: 449270, guid: b8e1e10130ef28c4a88a8d5846149b64, type: 3}
       propertyPath: m_RootOrder
@@ -101863,9 +103967,9 @@ GameObject:
   - component: {fileID: 1087413671494876803}
   - component: {fileID: 7173344062034368952}
   - component: {fileID: 737525697776461636}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Building_Column_01_Top_LOD0
-  m_TagString: Untagged
+  m_TagString: NavMesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 89
