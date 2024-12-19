@@ -454,7 +454,7 @@ namespace ET.Client
 
         private static void ShowObstructName(this ES_JoystickMove self, GameObject hit)
         {
-            FlyTipComponent.Instance.ShowFlyTip($"阻挡物： {self.GetPath(hit)}");
+            //FlyTipComponent.Instance.ShowFlyTip($"阻挡物： {self.GetPath(hit)}");
             Log.Debug($"阻挡物： {self.GetPath(hit)}");
         }
 
