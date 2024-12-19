@@ -166,7 +166,7 @@ namespace ETEditor
 
         private static void ResetScene()
         {
-            GameObject.Find("AdditiveHide/NavMesh")?.SetActive(false);
+            //GameObject.Find("AdditiveHide/NavMesh")?.SetActive(false);
             
             GameObject mesh = GetTerrainMesh();
             if (mesh != null)
