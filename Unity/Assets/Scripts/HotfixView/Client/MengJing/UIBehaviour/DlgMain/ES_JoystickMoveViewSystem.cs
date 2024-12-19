@@ -452,6 +452,26 @@ namespace ET.Client
             return distance * intveral;
         }
 
+        private static void ShowObstructName(this ES_JoystickMove self, GameObject hit)
+        {
+            FlyTipComponent.Instance.ShowFlyTip($"阻挡物： {self.GetPath(hit)}");
+            Log.Debug($"阻挡物： {self.GetPath(hit)}");
+        }
+
+        private static  string GetPath(this ES_JoystickMove self, GameObject obj)
+        {
+            if (obj.transform.parent == null)
+            {
+                // 如果是根节点，直接返回自己的名字
+                return obj.name;
+            }
+            else
+            {
+                // 递归调用获取父节点路径，然后加上自己的名字
+                return self.GetPath(obj.transform.parent.gameObject) + "/" + obj.name;
+            }
+        }
+
         private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
         {
             float3 targetPosi = unit.Position;
@@ -463,12 +483,14 @@ namespace ET.Client
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
                 {
+                    self.ShowObstructName(hit.collider.gameObject);
                     break;
                 }
 
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
                 if (hit.collider != null)
                 {
+                    self.ShowObstructName(hit.collider.gameObject);
                     break;
                 }
 
