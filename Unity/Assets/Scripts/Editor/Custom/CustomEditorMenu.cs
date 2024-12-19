@@ -773,6 +773,39 @@ public class CustomEditorMenu
         UnityEngine.Debug.Log("导出坐标点成功！生成:" + gameObject.transform.childCount + "个");
     }
 
+    [MenuItem("Custom/移除所有子对象刚体和音效组件")]
+    static void RemoveChildRigidboy()
+    {
+        if (Selection.gameObjects.Length != 1)
+            return;
+
+        GameObject gameObject = Selection.gameObjects[0];
+        Rigidbody[] rigidbodies =   gameObject.GetComponentsInChildren<Rigidbody>();
+        for (int i = 0; i < rigidbodies.Length; i++)
+        {
+            GameObject.DestroyImmediate(rigidbodies[i]);
+        }
+       
+        AudioSource[] audioSources =  gameObject.GetComponentsInChildren<AudioSource>();
+        for (int i = 0; i < audioSources.Length; i++)
+        {
+            GameObject.DestroyImmediate(audioSources[i]);
+        }
+        AssetDatabase.SaveAssets();
+    }
+    
+    private static void RemoveChildComponent(GameObject go)
+    {
+        // Transform t = go.transform;
+        //
+        //
+        // for (int i = 0; i < t.childCount; i++)
+        // {
+        //     RemoveChildComponent(t.GetChild(i).gameObject);
+        // }
+    }
+  
+
     [MenuItem("Custom/获取坐标点和缩放")]
     static void GetPositions()
     {
