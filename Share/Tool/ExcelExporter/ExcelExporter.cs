@@ -674,7 +674,7 @@ namespace ET
                         {
                             if (!int.TryParse(s, out int result))
                             {
-                                throw new Exception(hint);
+                                throw new Exception(hint + "报错内容(int[])： " + value);
                             }
                         }
                     }
@@ -690,7 +690,7 @@ namespace ET
                         {
                             if (!long.TryParse(s, out long result))
                             {
-                                throw new Exception(hint);
+                                throw new Exception(hint + "报错内容(long[])： " + value);
                             }
                         }
                     }
@@ -706,7 +706,7 @@ namespace ET
                         {
                             if (!float.TryParse(s, out float result))
                             {
-                                throw new Exception(hint);
+                                throw new Exception(hint + "报错内容(float[])： " + value);
                             }
                         }
                     }
@@ -722,7 +722,7 @@ namespace ET
                         {
                             if (!double.TryParse(s, out double result))
                             {
-                                throw new Exception(hint);
+                                throw new Exception(hint + "报错内容(double[])： " + value);
                             }
                         }
                     }
@@ -743,7 +743,7 @@ namespace ET
 
                     if (!int.TryParse(value, out int result))
                     {
-                        throw new Exception(hint);
+                        throw new Exception(hint + "报错内容(int)： " + value);
                     }
 
                     return value;
@@ -758,7 +758,7 @@ namespace ET
 
                     if (!long.TryParse(value, out long result))
                     {
-                        throw new Exception(hint);
+                        throw new Exception(hint + "报错内容(long)： " + value);
                     }
 
                     return value;
@@ -773,7 +773,7 @@ namespace ET
 
                     if (!float.TryParse(value, out float result))
                     {
-                        throw new Exception(hint);
+                        throw new Exception(hint + "报错内容(float)： " + value);
                     }
 
                     return value;
@@ -788,7 +788,7 @@ namespace ET
 
                     if (!double.TryParse(value, out double result))
                     {
-                        throw new Exception(hint);
+                        throw new Exception(hint + "报错内容(double)： " + value);
                     }
 
                     return value;
