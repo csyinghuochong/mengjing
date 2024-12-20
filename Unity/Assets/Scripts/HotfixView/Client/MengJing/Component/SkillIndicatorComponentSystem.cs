@@ -31,7 +31,7 @@ namespace ET.Client
             return self.MainUnit;
         }
 
-        public static void BeginEnterScene(this SkillIndicatorComponent self)
+        public static void BeforeEnterScene(this SkillIndicatorComponent self)
         {
             self.RecoveryEffect();
         }

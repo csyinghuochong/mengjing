@@ -1736,7 +1736,7 @@ namespace ET.Client
             }
         }
 
-        public static void BeginEnterScene(this DlgMain self, int lastScene)
+        public static void BeforeEnterScene(this DlgMain self, int lastScene)
         {
             Log.Debug("BeginEnterScene");
 
@@ -1745,11 +1745,11 @@ namespace ET.Client
             self.View.ES_MainBuff.ResetUI();
             self.View.ES_JoystickMove.ResetUI();
 
-            self.View.ES_MapMini.BeginChangeScene(lastScene);
+            self.View.ES_MapMini.BeforeEnterScene(lastScene);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
-            self.View.ES_MainHpBar.BeginEnterScene();
-            self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
-            self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
+            self.View.ES_MainHpBar.BeforeEnterScene();
+            self.Root().GetComponent<SkillIndicatorComponent>().BeforeEnterScene();
+            self.Root().GetComponent<LockTargetComponent>().BeforeEnterScene();
             self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
             self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
             self.Root().RemoveComponent<UnitGuaJiComponent>();

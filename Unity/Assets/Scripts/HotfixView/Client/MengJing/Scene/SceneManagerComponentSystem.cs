@@ -51,8 +51,8 @@ namespace ET.Client
 
         public static async ETTask ChangeCellSonScene(this SceneManagerComponent self, int sceneTypeEnum, int lastScene, int sceneid)
         {
-            self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
-            self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
+            self.Root().GetComponent<SkillIndicatorComponent>().BeforeEnterScene();
+            self.Root().GetComponent<LockTargetComponent>().BeforeEnterScene();
 
             string paramss = CellDungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
 

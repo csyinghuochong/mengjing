@@ -74,7 +74,7 @@ namespace ET.Client
             }
         }
 
-        public static void BeginEnterScene(this LockTargetComponent self)
+        public static void BeforeEnterScene(this LockTargetComponent self)
         {
             self.HideLockEffect();
         }

@@ -72,7 +72,7 @@ namespace ET.Client
                     dlgTowerOfSealMain.ShowStartBtn();
                     Unit myUnit = UnitHelper.GetMyUnitFromClientScene(scene);
                     myUnit.GetComponent<SkillManagerComponentC>().ClearSkillAndCd();
-                    dlgMain.BeginEnterScene(sceneTypeEnum);
+                    dlgMain.BeforeEnterScene(sceneTypeEnum);
                     break;
                 case SceneTypeEnum.SeasonTower:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);

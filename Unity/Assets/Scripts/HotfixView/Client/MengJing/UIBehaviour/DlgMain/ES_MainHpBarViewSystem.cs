@@ -78,7 +78,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhanQu>().OnClickGoToFirstWin(self.BossConfiId);
         }
 
-        public static void BeginEnterScene(this ES_MainHpBar self)
+        public static void BeforeEnterScene(this ES_MainHpBar self)
         {
             self.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
             self.E_Lab_OwnerText.text = string.Empty;

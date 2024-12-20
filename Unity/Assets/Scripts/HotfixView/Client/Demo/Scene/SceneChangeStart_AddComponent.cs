@@ -20,7 +20,7 @@ namespace ET.Client
                 if (dlgMain != null)
                 {
                     uiComponent.CloseWindow(WindowID.WindowID_MapBig);
-                    dlgMain.BeginEnterScene(args.LastSceneType);
+                    dlgMain.BeforeEnterScene(args.LastSceneType);
                 }
 
                 switch (args.LastSceneType)

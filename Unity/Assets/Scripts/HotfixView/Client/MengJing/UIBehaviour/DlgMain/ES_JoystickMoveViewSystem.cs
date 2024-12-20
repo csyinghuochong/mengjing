@@ -84,12 +84,12 @@ namespace ET.Client
             self.MainUnit = null;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
         }
-
+        
         public static void AfterEnterScene(this ES_JoystickMove self)
         {
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.NumericComponent = self.MainUnit.GetComponent<NumericComponentC>();
-            self.Root().GetComponent<BattleMessageComponent>().TransferMap = false;
+            self.BattleMessageComponent.TransferMap = false;
         }
 
         public static void UpdateOperateMode(this ES_JoystickMove self, int operateMode)
