@@ -85,6 +85,7 @@ namespace ET.Client
 
             if (removeTime)
             {
+                self.IsDrag = false;
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             }
         }

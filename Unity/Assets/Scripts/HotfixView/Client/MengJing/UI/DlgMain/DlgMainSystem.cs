@@ -1748,7 +1748,7 @@ namespace ET.Client
             self.ResetTeamUI();
             self.View.ES_MainSkill.ResetUI();
             self.View.ES_MainBuff.ResetUI();
-            self.View.ES_JoystickMove.ResetUI(false);
+            self.View.ES_JoystickMove.ResetUI(true);
 
             self.View.ES_MapMini.BeforeEnterScene(lastScene);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
