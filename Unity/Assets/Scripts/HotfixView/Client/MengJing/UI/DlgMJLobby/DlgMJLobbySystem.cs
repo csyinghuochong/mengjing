@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [FriendOf(typeof(DlgMJLobby))]
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     public static class DlgMJLobbySystem
     {
         public static void RegisterUIEvent(this DlgMJLobby self)
@@ -33,15 +33,15 @@ namespace ET.Client
             self.RefreshCreateRoleItems();
             
             string lastUserID = PlayerPrefsHelp.GetString(PlayerPrefsHelp.LastUserID);
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             if (!string.IsNullOrEmpty(lastUserID))
             {
                 long useid = long.Parse(lastUserID);
-                for (int i = 0; i < playerComponent.CreateRoleList.Count; i++)
+                for (int i = 0; i < playerInfoComponent.CreateRoleList.Count; i++)
                 {
-                    if (playerComponent.CreateRoleList[i].UnitId == useid)
+                    if (playerInfoComponent.CreateRoleList[i].UnitId == useid)
                     {
-                        self.SeletRoleInfo = playerComponent.CreateRoleList[i];
+                        self.SeletRoleInfo = playerInfoComponent.CreateRoleList[i];
                         self.PageIndex = i / self.PageCount;
                         break;
                     }
@@ -74,12 +74,12 @@ namespace ET.Client
 
         private static void RefreshCreateRoleItems(this DlgMJLobby self)
         {
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             if (self.SeletRoleInfo == null)
             {
-                if (playerComponent.CreateRoleList.Count > 0)
+                if (playerInfoComponent.CreateRoleList.Count > 0)
                 {
-                    self.SeletRoleInfo = playerComponent.CreateRoleList[0];
+                    self.SeletRoleInfo = playerInfoComponent.CreateRoleList[0];
                 }
 
                 self.PageIndex = 0;
@@ -87,16 +87,16 @@ namespace ET.Client
 
             int starIndex = self.PageIndex * self.PageCount;
 
-            int num = playerComponent.CreateRoleList.Count - starIndex + 1;
+            int num = playerInfoComponent.CreateRoleList.Count - starIndex + 1;
             num = Mathf.Min(self.PageCount, num);
 
             self.ShowCreateRoleInfos.Clear();
 
             for (int i = 0; i < num; i++)
             {
-                if (i < playerComponent.CreateRoleList.Count - starIndex)
+                if (i < playerInfoComponent.CreateRoleList.Count - starIndex)
                 {
-                    self.ShowCreateRoleInfos.Add(playerComponent.CreateRoleList[starIndex + i]);
+                    self.ShowCreateRoleInfos.Add(playerInfoComponent.CreateRoleList[starIndex + i]);
                 }
             }
 
@@ -108,7 +108,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemCreateRoleItems, self.ShowCreateRoleInfos.Count);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.SetVisible(true, self.ShowCreateRoleInfos.Count);
 
-            int roleNumber = playerComponent.CreateRoleList.Count;
+            int roleNumber = playerInfoComponent.CreateRoleList.Count;
             roleNumber = Mathf.Max(roleNumber, 8);
 
             int pagetotal = roleNumber / 4;
@@ -157,8 +157,8 @@ namespace ET.Client
                 return;
             }
             
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (playerComponent.CreateRoleList.Count == 0)
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            if (playerInfoComponent.CreateRoleList.Count == 0)
             {
                 Log.Debug("需要先创建角色！");
                 return;
@@ -172,7 +172,7 @@ namespace ET.Client
 
             self.LastLoginTime = Time.time;
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.LastUserID, self.SeletRoleInfo.UnitId.ToString());
-            playerComponent.CurrentRoleId = self.SeletRoleInfo.UnitId;
+            playerInfoComponent.CurrentRoleId = self.SeletRoleInfo.UnitId;
             await LoginHelper.LoginGameAsync(self.Root(), 0);
         }
 
@@ -193,8 +193,8 @@ namespace ET.Client
 
         private static async ETTask RequestDeleteRole(this DlgMJLobby self)
         {
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            await LoginHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            await LoginHelper.RequestDeleteRole(self.Root(), playerInfoComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
             self.SeletRoleInfo = null;
             self.Refresh();
         }
@@ -213,7 +213,7 @@ namespace ET.Client
 
         private static void OnNextButton(this DlgMJLobby self)
         {
-            int roleNumber = self.Root().GetComponent<PlayerComponent>().CreateRoleList.Count;
+            int roleNumber = self.Root().GetComponent<PlayerInfoComponent>().CreateRoleList.Count;
             roleNumber = Mathf.Max(roleNumber, 8);
 
             int pagetotal = roleNumber / 4;

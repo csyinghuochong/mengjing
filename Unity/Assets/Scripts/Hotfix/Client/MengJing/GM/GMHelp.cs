@@ -14,7 +14,7 @@ namespace ET.Client
 
         public static void SendGmCommand(Scene scene, string gm)
         {
-            C2M_GMCommand request = new() { GMMsg = gm, Account = scene.GetComponent<PlayerComponent>().Account };
+            C2M_GMCommand request = new() { GMMsg = gm, Account = scene.GetComponent<PlayerInfoComponent>().Account };
             scene.GetComponent<ClientSenderCompnent>().Send(request);
         }
 

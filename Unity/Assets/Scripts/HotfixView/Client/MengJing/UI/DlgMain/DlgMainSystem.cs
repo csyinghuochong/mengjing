@@ -2312,7 +2312,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip(zstring.Format("充值{0}元成功", addNumber));
             }
 
-            self.Root().GetComponent<PlayerComponent>().PlayerInfo.RechargeInfos.Add(new()
+            self.Root().GetComponent<PlayerInfoComponent>().PlayerInfo.RechargeInfos.Add(new()
             {
                 Amount = addNumber, Time = TimeHelper.ClientNow(), UnitId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId
             });

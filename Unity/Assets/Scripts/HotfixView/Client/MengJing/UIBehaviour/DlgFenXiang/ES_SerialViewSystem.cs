@@ -40,7 +40,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.Root().GetComponent<PlayerComponent>().SerialErrorTime >= 10)
+            if (self.Root().GetComponent<PlayerInfoComponent>().SerialErrorTime >= 10)
             {
                 return;
             }
@@ -63,7 +63,7 @@ namespace ET.Client
                 M2C_SerialReardResponse response = await ActivityNetHelper.SerialReardRequest(self.Root(), serial);
                 if (response.Error != ErrorCode.ERR_Success)
                 {
-                    self.Root().GetComponent<PlayerComponent>().SerialErrorTime++;
+                    self.Root().GetComponent<PlayerInfoComponent>().SerialErrorTime++;
                 }
             }
         }

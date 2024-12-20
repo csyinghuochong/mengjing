@@ -41,9 +41,9 @@ namespace ET.Client
             FlyTipComponent.Instance.ShowFlyTip("账号已完成实名认证!");
             // await scene.GetComponent<TimerComponent>().WaitAsync(500);
 
-            PlayerComponent PlayerComponent = scene.GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = scene.GetComponent<PlayerInfoComponent>();
             await scene.GetComponent<UIComponent>()
-                    .ShowWindowAsync(PlayerComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
+                    .ShowWindowAsync(playerInfoComponent.CreateRoleList.Count > 0 ? WindowID.WindowID_MJLobby : WindowID.WindowID_CreateRole);
             scene.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
         }
     }

@@ -17,8 +17,8 @@ namespace ET.Client
             
             self.View.EG_TeamdungeonItemRectTransform.gameObject.SetActive(false);
             List<SceneConfig> sceneConfig = SceneConfigCategory.Instance.GetAll().Values.ToList();
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            bool isGmaccount = GMData.GmAccount.Contains(playerComponent.Account);
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            bool isGmaccount = GMData.GmAccount.Contains(playerInfoComponent.Account);
             for (int i = 0; i < sceneConfig.Count; i++)
             {
                 if (sceneConfig[i].MapType != (int)SceneTypeEnum.TeamDungeon)

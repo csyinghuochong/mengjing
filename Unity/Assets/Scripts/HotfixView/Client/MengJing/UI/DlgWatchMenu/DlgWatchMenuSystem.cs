@@ -107,7 +107,7 @@ namespace ET.Client
 
         public static async ETTask OnButton_ServerBlack(this DlgWatchMenu self)
         {
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
+            int zone = self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerId;
             if (string.IsNullOrEmpty(self.UserName))
             {
                 self.OnClickImageBg();
@@ -335,10 +335,10 @@ namespace ET.Client
             {
                 case MenuEnumType.Main:
                 case MenuEnumType.Chat:
-                    PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
+                    PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
                     self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.SceneType == SceneTypeEnum.MainCityScene);
-                    self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMData.GmAccount.Contains(accountInfoComponent.Account));
+                    self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMData.GmAccount.Contains(accountInfoInfoComponent.Account));
                     self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
                     break;
                 case MenuEnumType.Team:

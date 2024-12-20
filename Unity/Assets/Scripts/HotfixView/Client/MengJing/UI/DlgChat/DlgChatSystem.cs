@@ -17,7 +17,7 @@ namespace ET.Client
     }
 
   
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     [FriendOf(typeof(DlgChat))]
     public static class DlgChatSystem
     {
@@ -91,10 +91,10 @@ namespace ET.Client
                 return;
             }
 
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
 
             bool mask = false;
-            if (!ET.GMHelp.IsGmAccount(playerComponent.Account))
+            if (!ET.GMHelp.IsGmAccount(playerInfoComponent.Account))
             {
                 // 替换敏感词
                 mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);

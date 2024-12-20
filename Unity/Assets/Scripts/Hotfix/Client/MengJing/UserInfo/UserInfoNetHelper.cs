@@ -44,7 +44,7 @@
         public static async ETTask<M2C_GM2CommonResponse> GMCommon(Scene root, string context)
         {
             C2M_GM2CommonRequest request = C2M_GM2CommonRequest.Create();
-            request.Account = root.GetComponent<PlayerComponent>().Account;
+            request.Account = root.GetComponent<PlayerInfoComponent>().Account;
             request.Context = context;
 
             M2C_GM2CommonResponse response = (M2C_GM2CommonResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
@@ -54,7 +54,7 @@
         public static async ETTask<M2C_GM2InfoResponse> GMInfo(Scene root)
         {
             C2M_GM2InfoRequest request = C2M_GM2InfoRequest.Create();
-            request.Account = root.GetComponent<PlayerComponent>().Account;
+            request.Account = root.GetComponent<PlayerInfoComponent>().Account;
 
             M2C_GM2InfoResponse response = (M2C_GM2InfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;

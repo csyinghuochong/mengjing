@@ -91,7 +91,7 @@ namespace ET.Client
                     paramss = "Login";
                     break;
                 case (int)SceneTypeEnum.MainCityScene:
-                    PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+                    PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     string scenepath = sceneid.ToString();
                     paramss = scenepath;
                     break;
@@ -100,7 +100,7 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
-                    playerComponent = self.Root().GetComponent<PlayerComponent>();
+                    playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     break;
                 default:
                     paramss = SceneConfigCategory.Instance.Get(sceneid).MapID.ToString();

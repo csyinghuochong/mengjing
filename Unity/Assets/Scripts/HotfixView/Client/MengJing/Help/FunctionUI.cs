@@ -30,7 +30,7 @@ namespace ET.Client
             //     return;
             // }
 
-            bool gm = GMData.GmAccount.Contains(root.GetComponent<PlayerComponent>().Account);
+            bool gm = GMData.GmAccount.Contains(root.GetComponent<PlayerInfoComponent>().Account);
             if (!gm && functionid == 1048)
             {
                 return;

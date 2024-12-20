@@ -4,7 +4,7 @@ using ET.Client;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     [FriendOf(typeof(FangChenMiComponentC))]
     [EntitySystemOf(typeof(FangChenMiComponentC))]
     public static partial class FangChenMiComponentCSystem
@@ -65,8 +65,8 @@ namespace ET.Client
         /// <returns></returns>
         public static int GetPlayerAge(this FangChenMiComponentC self)
         {
-            PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
-            return IDCardHelper.GetBirthdayAgeSex(accountInfoComponent.PlayerInfo.IdCardNo, accountInfoComponent.Age_Type);
+            PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            return IDCardHelper.GetBirthdayAgeSex(accountInfoInfoComponent.PlayerInfo.IdCardNo, accountInfoInfoComponent.Age_Type);
         }
 
         public static int GetMouthTotal(this FangChenMiComponentC self)
@@ -75,7 +75,7 @@ namespace ET.Client
             DateTime dateTime = TimeHelper.DateTimeNow();
             int monsth = dateTime.Month;
 
-            List<RechargeInfo> rechargeInfos = self.Root().GetComponent<PlayerComponent>().PlayerInfo.RechargeInfos;
+            List<RechargeInfo> rechargeInfos = self.Root().GetComponent<PlayerInfoComponent>().PlayerInfo.RechargeInfos;
             for (int i = 0; i < rechargeInfos.Count; i++)
             {
                 dateTime = TimeInfo.Instance.ToDateTime(rechargeInfos[i].Time);

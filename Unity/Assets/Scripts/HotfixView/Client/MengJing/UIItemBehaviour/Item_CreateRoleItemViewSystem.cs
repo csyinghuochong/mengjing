@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     [FriendOf(typeof(Scroll_Item_CreateRoleItem))]
     [EntitySystemOf(typeof(Scroll_Item_CreateRoleItem))]
     public static partial class Scroll_Item_CreateRoleItemSystem
@@ -54,8 +54,8 @@ namespace ET.Client
             }
             else
             {
-                PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-                if (playerComponent.CreateRoleList.Count >= 8)
+                PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+                if (playerInfoComponent.CreateRoleList.Count >= 8)
                 {
                     self.EG_NoRoleRectTransform.gameObject.SetActive(false);
                     self.EG_RoleRectTransform.gameObject.SetActive(false);

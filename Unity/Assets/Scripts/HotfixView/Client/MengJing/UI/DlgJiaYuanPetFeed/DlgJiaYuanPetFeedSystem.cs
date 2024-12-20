@@ -69,7 +69,7 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    Log.Error(zstring.Format("UIJiaYuanPetFeed:  {0}", self.Root().GetComponent<PlayerComponent>().CurrentRoleId));
+                    Log.Error(zstring.Format("UIJiaYuanPetFeed:  {0}", self.Root().GetComponent<PlayerInfoComponent>().CurrentRoleId));
                 }
 
                 return;

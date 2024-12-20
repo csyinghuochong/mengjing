@@ -15,7 +15,7 @@ namespace ET.Client
             root.AddComponent<TimerComponent>();
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
-            root.AddComponent<PlayerComponent>();
+            root.AddComponent<PlayerInfoComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<ObjectWait>();
             root.AddComponent<RobotManagerComponent>();

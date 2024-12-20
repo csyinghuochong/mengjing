@@ -692,7 +692,7 @@ namespace ET.Client
 
         public static void OnButtonPhoneButton(this ES_SettingGame self)
         {
-            PlayerInfo playerInfo = self.Root().GetComponent<PlayerComponent>().PlayerInfo;
+            PlayerInfo playerInfo = self.Root().GetComponent<PlayerInfoComponent>().PlayerInfo;
             if (!string.IsNullOrEmpty(playerInfo.PhoneNumber))
             {
                 using (zstring.Block())

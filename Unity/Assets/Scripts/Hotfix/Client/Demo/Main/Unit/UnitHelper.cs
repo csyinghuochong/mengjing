@@ -76,8 +76,8 @@ namespace ET.Client
 
         public static long GetMyUnitId(Scene root)
         {
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
-            return playerComponent.CurrentRoleId;
+            PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
+            return playerInfoComponent.CurrentRoleId;
         }
 
         public static int GetTeamDungeonXieZhu(this Unit self)
@@ -163,9 +163,9 @@ namespace ET.Client
 
         public static Unit GetMyUnitFromClientScene(Scene root)
         {
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
             Scene currentScene = root.GetComponent<CurrentScenesComponent>().Scene;
-            return currentScene.GetComponent<UnitComponent>().Get(playerComponent.CurrentRoleId);
+            return currentScene.GetComponent<UnitComponent>().Get(playerInfoComponent.CurrentRoleId);
         }
 
         public static Unit GetUnitFromZoneSceneByID(Scene zoneScene, long id)
@@ -176,8 +176,8 @@ namespace ET.Client
 
         public static Unit GetMyUnitFromCurrentScene(Scene currentScene)
         {
-            PlayerComponent playerComponent = currentScene.Root().GetComponent<PlayerComponent>();
-            return currentScene.GetComponent<UnitComponent>().Get(playerComponent.CurrentRoleId);
+            PlayerInfoComponent playerInfoComponent = currentScene.Root().GetComponent<PlayerInfoComponent>();
+            return currentScene.GetComponent<UnitComponent>().Get(playerInfoComponent.CurrentRoleId);
         }
 
         public static List<Unit> GetUnitsByType(Scene root, int unitType)

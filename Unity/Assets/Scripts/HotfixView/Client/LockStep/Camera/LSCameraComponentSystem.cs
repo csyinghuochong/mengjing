@@ -30,7 +30,7 @@ namespace ET.Client
 			LSUnitView lsUnit = self.MyUnitView;
 			if (lsUnit == null)
 			{
-				long id = room.IsReplay? room.PlayerIds[self.index % room.PlayerIds.Count] : room.GetParent<Scene>().GetComponent<PlayerComponent>().CurrentRoleId;
+				long id = room.IsReplay? room.PlayerIds[self.index % room.PlayerIds.Count] : room.GetParent<Scene>().GetComponent<PlayerInfoComponent>().CurrentRoleId;
 				self.MyUnitView = room.GetComponent<LSUnitViewComponent>().GetChild<LSUnitView>(id);
 			}
 

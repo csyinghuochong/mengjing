@@ -148,7 +148,7 @@ namespace ET.Client
                     break;
                 case 5: //补偿大师
                     self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
-                    PlayerComponent accountInfo = self.Root().GetComponent<PlayerComponent>();
+                    PlayerInfoComponent accountInfo = self.Root().GetComponent<PlayerInfoComponent>();
                     int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.CurrentRoleId, accountInfo.ServerItem.ServerId);
                     GameObject go = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_TaskFubenItem.prefab");
@@ -269,8 +269,8 @@ namespace ET.Client
         public static async ETTask RequestBuChangItem(this DlgTaskGet self, long userid)
         {
             M2C_BuChangeResponse response = await UserInfoNetHelper.BuChangeRequest(self.Root(), userid);
-            PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
-            accountInfoComponent.PlayerInfo = response.PlayerInfo;
+            PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            accountInfoInfoComponent.PlayerInfo = response.PlayerInfo;
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
             await ETTask.CompletedTask;

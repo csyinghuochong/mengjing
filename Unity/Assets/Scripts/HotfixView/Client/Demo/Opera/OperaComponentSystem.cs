@@ -359,8 +359,8 @@ namespace ET.Client
 
         public static async ETTask OnClickUnitItem(this OperaComponent self, long unitid)
         {
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (unitid == playerComponent.CurrentRoleId)
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            if (unitid == playerInfoComponent.CurrentRoleId)
             {
                 return;
             }

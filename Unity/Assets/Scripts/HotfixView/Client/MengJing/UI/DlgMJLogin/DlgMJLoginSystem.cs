@@ -37,12 +37,18 @@ namespace ET.Client
         public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
         {
         }
+        
+        
 
         public static async ETTask RequestServerList(this DlgMJLogin self)
         {
             //获取服务器列表
             R2C_ServerList r2CServerList = await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
             ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
+            
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            playerInfoComponent.ServerItem = serverItem;
+            playerInfoComponent.AllServerList = r2CServerList.ServerItems;
 
             int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
             myserver = ServerHelper.GetNewServerId(myserver);
@@ -59,9 +65,6 @@ namespace ET.Client
             self.OnSelectServer(serverItem);
 
             //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            playerComponent.ServerItem = serverItem;
-            playerComponent.AllServerList = r2CServerList.ServerItems;
         }
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)
@@ -81,11 +84,11 @@ namespace ET.Client
                 return;
             }
 
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            playerComponent.ServerItem = self.ServerInfo;
-            playerComponent.Account = self.View.E_AccountInputField.text;
-            playerComponent.Password = self.View.E_PasswordInputField.text;
-            playerComponent.VersionMode = GlobalHelp.GetVersionMode();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            playerInfoComponent.ServerItem = self.ServerInfo;
+            playerInfoComponent.Account = self.View.E_AccountInputField.text;
+            playerInfoComponent.Password = self.View.E_PasswordInputField.text;
+            playerInfoComponent.VersionMode = GlobalHelp.GetVersionMode();
             self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);

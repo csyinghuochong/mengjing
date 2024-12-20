@@ -9,7 +9,7 @@ namespace ET.Client
     
     [EntitySystemOf(typeof(ClientSenderCompnent))]
     [FriendOf(typeof(ClientSenderCompnent))]
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     public static partial class ClientSenderCompnentSystem
     {
         [EntitySystem]
@@ -57,10 +57,10 @@ namespace ET.Client
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
 
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             Main2NetClient_RealName main2NetClientRealName = Main2NetClient_RealName.Create();
-            main2NetClientRealName.Account = playerComponent.Account;
-            main2NetClientRealName.Password = playerComponent.Password;
+            main2NetClientRealName.Account = playerInfoComponent.Account;
+            main2NetClientRealName.Password = playerInfoComponent.Password;
             main2NetClientRealName.AccountId = accountId;
             main2NetClientRealName.IdCardNO = idcard;
             main2NetClientRealName.Name = name;
@@ -75,20 +75,20 @@ namespace ET.Client
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
             
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
             Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
             main2NetClientLogin.Account      = account;
             main2NetClientLogin.Password     = password;
             main2NetClientLogin.Relink       = relink;
-            main2NetClientLogin.ServerId     = playerComponent.ServerItem.ServerId;
+            main2NetClientLogin.ServerId     = playerInfoComponent.ServerItem.ServerId;
             main2NetClientLogin.VersionMode  = versionmode;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
             
-            playerComponent.Token = response.Token;
-            playerComponent.AccountId = response.AccountId;
-            playerComponent.PlayerInfo = response.PlayerInfo;
-            playerComponent.CreateRoleList = response.RoleLists;
+            playerInfoComponent.Token = response.Token;
+            playerInfoComponent.AccountId = response.AccountId;
+            playerInfoComponent.PlayerInfo = response.PlayerInfo;
+            playerInfoComponent.CreateRoleList = response.RoleLists;
             
             return response.Error;
         }

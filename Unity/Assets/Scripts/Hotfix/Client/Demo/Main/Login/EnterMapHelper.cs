@@ -2,7 +2,7 @@ using System;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(PlayerComponent))]
+    [FriendOf(typeof(PlayerInfoComponent))]
     public static partial class EnterMapHelper
     {
         public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId, int difficulty = FubenDifficulty.None,

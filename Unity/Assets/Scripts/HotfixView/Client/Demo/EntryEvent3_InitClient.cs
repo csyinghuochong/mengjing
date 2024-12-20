@@ -12,7 +12,7 @@ namespace ET.Client
             root.AddComponent<UIPathComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
-            root.AddComponent<PlayerComponent>();
+            root.AddComponent<PlayerInfoComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<BagComponentC>();
             root.AddComponent<RelinkComponent>();

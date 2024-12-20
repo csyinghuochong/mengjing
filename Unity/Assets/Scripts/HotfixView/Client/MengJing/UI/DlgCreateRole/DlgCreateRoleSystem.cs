@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [FriendOf(typeof (DlgCreateRole))]
-    [FriendOf(typeof (PlayerComponent))]
+    [FriendOf(typeof (PlayerInfoComponent))]
     public static class DlgCreateRoleSystem
     {
         public static void RegisterUIEvent(this DlgCreateRole self)
@@ -84,14 +84,14 @@ namespace ET.Client
             }
 
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (playerComponent.CreateRoleList.Count >= 8)
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            if (playerInfoComponent.CreateRoleList.Count >= 8)
             {
                 Log.Debug("超出数量！");
                 return;
             }
 
-            await LoginHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, self.Occ, createName);
+            await LoginHelper.RequestCreateRole(self.Root(), playerInfoComponent.AccountId, self.Occ, createName);
 
             self.OnCloseButton();
         }

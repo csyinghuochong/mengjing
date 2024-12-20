@@ -20,8 +20,8 @@ namespace ET.Client
                 return;
             }
 
-            int disconnectType = root.GetComponent<PlayerComponent>().DisconnectType;
-            root.GetComponent<PlayerComponent>().DisconnectType = 0;
+            int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
+            root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             switch (disconnectType)
             {
                 case ErrorCode.ERR_OtherAccountLogin:

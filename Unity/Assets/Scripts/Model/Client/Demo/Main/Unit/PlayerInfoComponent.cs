@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class PlayerComponent: Entity, IAwake
+    public class PlayerInfoComponent: Entity, IAwake
     {
 
         public ServerItem ServerItem { get; set; }

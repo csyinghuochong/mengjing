@@ -188,13 +188,13 @@
         {
             self.Relink = false;
 
-            PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
-            string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString());
+            PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
+            string info = PlayerPrefsHelp.GetString("IOS_" + accountInfoInfoComponent.CurrentRoleId.ToString());
             if (!string.IsNullOrEmpty(info))
             {
                 //重新验证IOS充值结果
                 //NetHelper.SendIOSPayVerifyRequest(zoneScene, info);
-                PlayerPrefsHelp.SetString("IOS_" + accountInfoComponent.CurrentRoleId.ToString(), string.Empty);
+                PlayerPrefsHelp.SetString("IOS_" + accountInfoInfoComponent.CurrentRoleId.ToString(), string.Empty);
             }
 
              Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
@@ -221,8 +221,8 @@
         {
             Scene root = self.Root();
             int errorCode = ErrorCode.ERR_Success;
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
-            errorCode = await LoginHelper.Login(root, playerComponent.Account, playerComponent.Password, 1, playerComponent.VersionMode);
+            PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
+            errorCode = await LoginHelper.Login(root, playerInfoComponent.Account, playerInfoComponent.Password, 1, playerInfoComponent.VersionMode);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;

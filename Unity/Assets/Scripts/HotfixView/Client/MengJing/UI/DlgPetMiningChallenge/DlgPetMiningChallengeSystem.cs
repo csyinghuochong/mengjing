@@ -159,7 +159,7 @@ namespace ET.Client
             self.View.E_RawImageImage.sprite = sp;
             self.View.E_Text_mingText.text = mineBattleConfig.Name;
 
-            ServerItem serverItem = self.Root().GetComponent<PlayerComponent>().ServerItem;
+            ServerItem serverItem = self.Root().GetComponent<PlayerInfoComponent>().ServerItem;
             
             int zone = serverItem.ServerId;
             int openDay = TimeHelper.GetServeOpenrDay(serverItem.ServerOpenTime);

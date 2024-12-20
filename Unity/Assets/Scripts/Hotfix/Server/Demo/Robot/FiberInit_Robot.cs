@@ -14,7 +14,7 @@ namespace ET.Client
             root.AddComponent<TimerComponent>();
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
-            root.AddComponent<PlayerComponent>();
+            root.AddComponent<PlayerInfoComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<ObjectWait>();
             root.AddComponent<BagComponentC>();
@@ -38,9 +38,9 @@ namespace ET.Client
             
             root.SceneType = SceneType.Demo;
             
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
             int versionMode =  ComHelperS.IsInnerNet() ? VersionMode.Alpha: VersionMode.Beta;
-            playerComponent.ServerItem = ServerHelper.GetServerList(versionMode)[0];
+            playerInfoComponent.ServerItem = ServerHelper.GetServerList(versionMode)[0];
             
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
             
@@ -50,9 +50,9 @@ namespace ET.Client
             //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
 
             int errorcode = ErrorCode.ERR_Success;
-            if (playerComponent.CreateRoleList.Count == 0)
+            if (playerInfoComponent.CreateRoleList.Count == 0)
             {
-                errorcode = await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, RandNameComponent.Instance.GetRandomName());
+                errorcode = await LoginHelper.RequestCreateRole(root, playerInfoComponent.AccountId, 1, RandNameComponent.Instance.GetRandomName());
             }
 
             if (errorcode != ErrorCode.ERR_Success)
@@ -61,8 +61,8 @@ namespace ET.Client
                 return;
             }
 
-            playerComponent.Account = root.Name;
-            playerComponent.CurrentRoleId = playerComponent.CreateRoleList[0].UnitId;
+            playerInfoComponent.Account = root.Name;
+            playerInfoComponent.CurrentRoleId = playerInfoComponent.CreateRoleList[0].UnitId;
             await LoginHelper.LoginGameAsync(root, 0);
             // string account = $"{zone}_{robotid}_{robotNumber}_0001";   //服务器
             int robotid = int.Parse( root.Name.Split('_')[1]);

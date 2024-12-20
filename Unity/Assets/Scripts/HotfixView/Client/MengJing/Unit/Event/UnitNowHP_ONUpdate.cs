@@ -22,7 +22,7 @@ namespace ET.Client
 
             Scene root = unitDefend.Root();
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            long myunitid = root.GetComponent<PlayerComponent>().CurrentRoleId;
+            long myunitid = root.GetComponent<PlayerInfoComponent>().CurrentRoleId;
 
             bool mainattack = unitAttack != null && unitAttack.MainHero;
             if (args.ChangeHpValue < 0 && mainattack)

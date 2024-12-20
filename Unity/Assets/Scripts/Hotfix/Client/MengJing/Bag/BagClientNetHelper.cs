@@ -509,7 +509,7 @@ namespace ET.Client
 
         public static async ETTask<E2C_AccountWarehousInfoResponse> RequestAccountWarehousInfo(Scene root)
         {
-            long accountId = root.GetComponent<PlayerComponent>().AccountId;
+            long accountId = root.GetComponent<PlayerInfoComponent>().AccountId;
             C2E_AccountWarehousInfoRequest reuqest = C2E_AccountWarehousInfoRequest.Create();
             reuqest.AccInfoID = accountId;
 

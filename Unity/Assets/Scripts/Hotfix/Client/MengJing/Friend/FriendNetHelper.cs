@@ -6,7 +6,7 @@ namespace ET.Client
         public static async ETTask<int> RequestFriendInfo(Scene root)
         {
             C2F_FriendInfoRequest request = C2F_FriendInfoRequest.Create();
-            request.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
+            request.UnitId = root.GetComponent<PlayerInfoComponent>().CurrentRoleId;
 
             F2C_FriendInfoResponse response = (F2C_FriendInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 

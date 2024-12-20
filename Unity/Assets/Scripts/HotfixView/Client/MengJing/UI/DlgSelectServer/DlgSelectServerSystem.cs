@@ -36,9 +36,9 @@ namespace ET.Client
 
         public static void OnUpdateServerList(this DlgSelectServer self)
         {
-            PlayerComponent PlayerComponent = self.Root().GetComponent<PlayerComponent>();
+            PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
 
-            List<ServerItem> allserverList = PlayerComponent.AllServerList;
+            List<ServerItem> allserverList = playerInfoComponent.AllServerList;
 
             // 暂时不区分平台
             // int platform = GlobalHelp.GetPlatform();

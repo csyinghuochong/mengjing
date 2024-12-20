@@ -14,7 +14,7 @@ namespace ET.Client
                 EventSystem.Instance.Publish(root, new ReturnLogin());
                 return;
             }
-            root.GetComponent<PlayerComponent>().DisconnectType = message.Error;
+            root.GetComponent<PlayerInfoComponent>().DisconnectType = message.Error;
             
             await ETTask.CompletedTask;
         }
