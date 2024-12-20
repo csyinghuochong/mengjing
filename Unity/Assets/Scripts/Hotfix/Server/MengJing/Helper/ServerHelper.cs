@@ -57,7 +57,7 @@ namespace ET
                 return 0;
             }
 
-            return TimeHelper.GetServeOpenrDay(openSerTime);;
+            return TimeHelper.GetServeOpenrDay(openSerTime);
         }
         /// <summary>
         /// 合区后的区
