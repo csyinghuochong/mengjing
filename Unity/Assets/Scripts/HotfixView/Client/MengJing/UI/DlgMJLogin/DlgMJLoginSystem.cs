@@ -51,7 +51,7 @@ namespace ET.Client
             playerInfoComponent.AllServerList = r2CServerList.ServerItems;
 
             int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
-            myserver = ServerHelper.GetNewServerId(myserver);
+            myserver = playerInfoComponent.GetNewServerId(myserver);
 
             for (int i = 0; i < r2CServerList.ServerItems.Count; i++)
             {

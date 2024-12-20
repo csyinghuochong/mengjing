@@ -28,7 +28,7 @@ namespace ET.Client
                     OnOtherAccountLogin(root);
                     break;
                 case ErrorCode.ERR_SessionDisconnect:
-                    OnSessionDisconnect(root).Coroutine();
+                    OnSessionDisconnect(root);
                     break;
                 case ErrorCode.ERR_KickOutPlayer:
                     //PopupTipHelp.OpenPopupTip(scene, "重新登录", "由于您长时间未操作，请重新登录！", () => { RunAsync2(scene, args, 100).Coroutine(); }).Coroutine(); 
@@ -38,14 +38,14 @@ namespace ET.Client
                      break;
                 default:
                     //EventSystem.Instance.Publish(root, new ReturnLogin());
-                    OnSessionDisconnect(root).Coroutine();
+                    OnSessionDisconnect(root);
                     break;
             }
 
             await ETTask.CompletedTask;
         }
 
-        private async ETTask OnSessionDisconnect(Scene root)
+        private  void OnSessionDisconnect(Scene root)
         {
             // 断线重连的流程
             // 需要显示菊花。。

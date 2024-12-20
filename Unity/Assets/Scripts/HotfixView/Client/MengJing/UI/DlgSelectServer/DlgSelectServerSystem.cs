@@ -60,13 +60,13 @@ namespace ET.Client
 
             List<int> myserverids = new List<int>();
             int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
-            myserver = ServerHelper.GetNewServerId(myserver);
+            myserver = playerInfoComponent.GetNewServerId(myserver);
             myserverids.Add(myserver);
 
             List<int> myoldserveids = PlayerPrefsHelp.GetOldServerIds();
             for (int i = 0; i < myoldserveids.Count; i++)
             {
-                int newids = ServerHelper.GetNewServerId(myoldserveids[i]);
+                int newids = playerInfoComponent.GetNewServerId(myoldserveids[i]);
                 if (!myserverids.Contains(newids))
                 {
                     myserverids.Add(newids);
