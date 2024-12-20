@@ -175,10 +175,10 @@ namespace ET.Client
                 EnterMapHelper.RequestQuitFuben(root);
                 return;
             }
-
-            root.GetComponent<SkillIndicatorComponent>().OnSelfDead();
+            
             root.GetComponent<LockTargetComponent>().LastLockId = 0;
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnStopAction();
+            root.GetComponent<SkillIndicatorComponent>().OnSelfDead();
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnSelfDead();
 
             DlgCellDungeonRevive dungeonRevive = root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>();
             if (dungeonRevive  == null)

@@ -754,14 +754,19 @@ namespace ET.Client
 
         public static void OnMoveStart(this DlgMain self)
         {
+            self.StopAction();
+
+            self.MainUnit.GetComponent<SingingComponent>()?.BeginMove();
+        }
+
+        public static void StopAction(this DlgMain self)
+        {
             if (self.View.ES_OpenBox != null && self.View.ES_OpenBox.BoxUnitId > 0)
             {
                 self.View.ES_OpenBox.OnOpenBox(null);
             }
 
-            self.View.ES_MainSkill.ES_AttackGrid.OnMoveStart();
-
-            self.MainUnit.GetComponent<SingingComponent>()?.BeginMove();
+            self.View.ES_MainSkill.ES_AttackGrid.StopAction();
         }
 
         public static void OnMainHeroMove(this DlgMain self)
@@ -2282,10 +2287,10 @@ namespace ET.Client
             self.View.ES_JoystickMove.lastSendTime = 0;
         }
 
-        public static void OnStopAction(this DlgMain self)
+        public static void OnSelfDead(this DlgMain self)
         {
-            self.View.ES_JoystickMove.ResetUI();
-            self.OnMoveStart();
+             self.StopAction();
+             self.View.ES_JoystickMove.ResetUI();
         }
 
         public static void OnBagItemUpdate(this DlgMain self)

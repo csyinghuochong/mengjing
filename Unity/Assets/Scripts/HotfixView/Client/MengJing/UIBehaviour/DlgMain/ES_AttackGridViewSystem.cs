@@ -32,7 +32,7 @@ namespace ET.Client
 
         public static void PointerUp(this ES_AttackGrid self, PointerEventData pdata)
         {
-            self.OnMoveStart();
+            self.StopAction();
             self.EG_FightEffectRectTransform.gameObject.SetActive(false);
             Scene root = self.Root();
             root.GetComponent<SkillIndicatorComponent>().RecoveryEffect();
@@ -86,7 +86,7 @@ namespace ET.Client
             self.Root().GetComponent<SkillIndicatorComponent>().ShowCommonAttackZhishi();
         }
 
-        public static void OnMoveStart(this ES_AttackGrid self)
+        public static void StopAction(this ES_AttackGrid self)
         {
             self.Root().GetComponent<AttackComponent>().RemoveTimer();
         }
