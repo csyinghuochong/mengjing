@@ -9,7 +9,7 @@ namespace ET.Client
 {
     public class SceneChecker : EditorWindow
     {
-        [MenuItem("Tools/检测场景包含 AdditiveHide节点")]
+        [MenuItem("Tools/检测场景 包含AdditiveHide节点")]
         public static void CheckScenesForAdditiveHideAndListAllNodes()
         {
             string scenesDirectory = "Assets/Bundles/Scenes";
