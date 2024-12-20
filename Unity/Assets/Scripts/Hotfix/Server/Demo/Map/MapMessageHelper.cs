@@ -152,6 +152,17 @@ namespace ET.Server
                 return;
             }
             
+            //1222236673410017
+            // if(sendUnit.Id == 1222236673410017 && unit.Type == UnitType.Player)
+            // {
+            //     if (TimeHelper.ServerNow() -ConfigData.LastRemoveTime < 2000 )
+            //     {
+            //         Log.Error("111");
+            //     }
+            //
+            //     ConfigData.LastRemoveTime = TimeHelper.ServerNow();
+            // }
+            
             M2C_RemoveUnits removeUnits = M2C_RemoveUnits.Create();
             removeUnits.Units.Add(sendUnit.Id);
             SendToClient(unit, removeUnits);

@@ -6,6 +6,10 @@ namespace ET
 {
     public static class ConfigData
     {
+
+        [StaticField]
+        public static long LastRemoveTime = 0;
+        
         /// <summary>
         /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
         /// </summary>

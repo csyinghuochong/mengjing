@@ -543,7 +543,7 @@ namespace ET.Server
                 unit.GetComponent<UnitInfoComponent>().LastDungeonPosition = unit.Position;
             }
 
-            long oldsceneid = unit.Root().Id;
+            Scene oldscene = unit.Scene();
             sceneId = transferId != 0 ? DungeonTransferConfigCategory.Instance.Get(transferId).MapID : sceneId;
             if (sceneId == 0)
             {
@@ -568,13 +568,12 @@ namespace ET.Server
             await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
 
             //移除旧scene
-            // Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
-            // if (scene.GetComponent<LocalDungeonComponent>() != null)
-            // {
-            //     //动态删除副本
-            //     TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
-            //     scene.Dispose();
-            // }
+            if (oldscene.GetComponent<LocalDungeonComponent>() != null)
+            {
+                //动态删除副本
+                TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
+                oldscene.Dispose();
+            }
             return ErrorCode.ERR_Success;
         }
 
@@ -797,7 +796,7 @@ namespace ET.Server
             }
             //unit.Dispose();
             unit.GetParent<UnitComponent>().Remove(unit.Id);
-
+            await root.GetComponent<TimerComponent>().WaitFrameAsync();
             await root.GetComponent<LocationProxyComponent>().Lock(LocationType.Unit, unitId, request.OldActorId);
             await root.GetComponent<MessageSender>().Call(sceneInstanceId, request);
         }

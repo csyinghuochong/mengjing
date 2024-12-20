@@ -50,6 +50,7 @@ namespace ET.Client
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             self.AttackComponent = self.Root().GetComponent<AttackComponent>();
+            self.BattleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
 
             self.ObstructLayer = 1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString());
             self.BuildingLayer = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
@@ -80,6 +81,7 @@ namespace ET.Client
                 self.E_YaoGanDiFixEventTrigger.gameObject.SetActive(false);
             }
 
+            self.MainUnit = null;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
         }
 
@@ -87,6 +89,7 @@ namespace ET.Client
         {
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.NumericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+            self.Root().GetComponent<BattleMessageComponent>().TransferMap = false;
         }
 
         public static void UpdateOperateMode(this ES_JoystickMove self, int operateMode)
@@ -291,6 +294,11 @@ namespace ET.Client
                 return;
             }
           
+            if(self.BattleMessageComponent.TransferMap)
+            {
+                return;
+            }
+            
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             List<float3> pathfind = new List<float3>();
@@ -653,6 +661,11 @@ namespace ET.Client
             }
             
             if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
+            {
+                return;
+            }
+            
+            if(self.BattleMessageComponent.TransferMap)
             {
                 return;
             }

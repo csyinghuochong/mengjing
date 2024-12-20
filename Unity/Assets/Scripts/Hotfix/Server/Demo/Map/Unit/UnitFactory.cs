@@ -292,6 +292,7 @@ namespace ET.Server
                 master.Position.z + RandomHelper.RandFloat01() * 1f);
             unit.Type = UnitType.Pet;
             AIComponent aIComponent = unit.AddComponent<AIComponent, int>(2); //AI行为树序号
+            aIComponent.TargetID = 0;
             aIComponent.InitPet(petinfo);
             aIComponent.Begin();
             //添加其他组件

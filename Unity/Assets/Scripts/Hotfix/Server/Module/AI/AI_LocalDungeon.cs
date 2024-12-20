@@ -20,7 +20,6 @@ namespace ET.Server
             if (unitlist.Count == 0)
             {
                 aiComponent.Stop();
-                Log.Error($"aiComponent.LocalDungeonUnit == null: scenetype:{ aiComponent.SceneType}  confidid: {unit.ConfigId}");
                 return 0;
             }
 

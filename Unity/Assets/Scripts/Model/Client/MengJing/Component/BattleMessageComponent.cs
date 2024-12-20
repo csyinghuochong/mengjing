@@ -33,6 +33,8 @@ namespace ET
         public long UploadMemoryTime { get; set; }
 
         public int LastDungeonId { get; set; }
+        
+        public bool TransferMap { get; set; }
 
         public Dictionary<long, long> PetFightCD { get; set; } = new();
 

@@ -11,7 +11,7 @@ namespace ET
             OuterMessage.C2G_Benchmark, 
             OuterMessage.G2C_Benchmark,
             //OuterMessage.C2M_PathfindingRequest,
-            //OuterMessage.M2C_PathfindingResult,
+            OuterMessage.M2C_PathfindingResult,
             //OuterMessage.M2C_Stop,
             //OuterMessage.M2C_UnitNumericUpdate,
             //OuterMessage.M2C_UnitNumericListUpdate,

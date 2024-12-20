@@ -30,6 +30,9 @@ namespace ET.Client
         private EntityRef<AttackComponent> attackComponent;
         public AttackComponent AttackComponent { get => this.attackComponent; set => this.attackComponent = value; }
 
+        private EntityRef<BattleMessageComponent> battleMessageComponent;
+        public BattleMessageComponent BattleMessageComponent { get => this.battleMessageComponent; set => this.battleMessageComponent = value; }
+        
         public int ObstructLayer;
         public int BuildingLayer;
         public int MapLayer;
@@ -186,5 +189,6 @@ namespace ET.Client
         private Image m_E_CenterShowImage = null;
         private Image m_E_ThumbImage = null;
         public Transform uiTransform = null;
+       
     }
 }

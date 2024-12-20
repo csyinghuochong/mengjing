@@ -45,15 +45,17 @@ namespace ET.Client
                 }
             }
 
+            BattleMessageComponent battleMessageComponent = root.GetComponent<BattleMessageComponent>();
             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
             {
-                root.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
+                battleMessageComponent.LastDungeonId = mapComponent.SceneId;
             }
             else
             {
-                root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
+                battleMessageComponent.LastDungeonId = 0;
             }
 
+            battleMessageComponent.TransferMap = true;
             C2M_TransferMap request = C2M_TransferMap.Create();
             request.SceneType = newsceneType;
             request.SceneId = sceneId;
@@ -62,6 +64,7 @@ namespace ET.Client
 
             M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(request);
             userInfoComponent.AddSceneFubenTimes(sceneId);
+            
             return ErrorCode.ERR_Success;
         }
 
