@@ -1,6 +1,6 @@
 {
-    "ShaderTotalCount": 105,
-    "VariantTotalCount": 176,
+    "ShaderTotalCount": 113,
+    "VariantTotalCount": 243,
     "ShaderVariantInfos": [
         {
             "AssetPath": "Resources/unity_builtin_extra",
@@ -39,7 +39,8 @@
                 {
                     "PassType": 8,
                     "Keywords": [
-                        "INSTANCING_ON"
+                        "INSTANCING_ON",
+                        "SHADOWS_DEPTH"
                     ]
                 }
             ]
@@ -82,7 +83,31 @@
         },
         {
             "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Legacy Shaders/Particles/Additive",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
             "ShaderName": "Legacy Shaders/Particles/Additive (Soft)",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Legacy Shaders/Particles/Alpha Blended",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -100,6 +125,22 @@
                     "PassType": 0,
                     "Keywords": [
                         "_ALPHABLEND_ON"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_ALPHABLEND_ON",
+                        "_COLOROVERLAY_ON",
+                        "_FADING_ON"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_ALPHABLEND_ON",
+                        "_EMISSION",
+                        "_FADING_ON"
                     ]
                 },
                 {
@@ -128,14 +169,12 @@
                 {
                     "PassType": 8,
                     "Keywords": [
-                        "SHADOWS_DEPTH",
                         "_ALPHABLEND_ON"
                     ]
                 },
                 {
                     "PassType": 8,
                     "Keywords": [
-                        "SHADOWS_DEPTH",
                         "_ALPHATEST_ON",
                         "_REQUIRE_UV2"
                     ]
@@ -276,7 +315,43 @@
         },
         {
             "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Unlit/Transparent Cutout",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
             "ShaderName": "Unlit/Texture",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Resources/unity_builtin_extra",
+            "ShaderName": "Sprites/Default",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Packages/com.unity.render-pipelines.universal/Shaders/Utils/CopyDepth.shader",
+            "ShaderName": "Hidden/Universal Render Pipeline/CopyDepth",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -335,7 +410,56 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHAPREMULTIPLY_ON",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHATEST_ON",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_NORMALMAP",
+                        "_SPECULARHIGHLIGHTS_OFF"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSION",
+                        "_ENVIRONMENTREFLECTIONS_OFF",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSION",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSION",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SPECULAR_SETUP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -344,7 +468,37 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_METALLICSPECGLOSSMAP",
+                        "_NORMALMAP",
+                        "_OCCLUSIONMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_METALLICSPECGLOSSMAP",
+                        "_NORMALMAP",
+                        "_SPECULAR_SETUP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_NORMALMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
@@ -355,10 +509,10 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
-                        "_NORMALMAP"
+                        "_SPECULAR_SETUP"
                     ]
                 }
             ]
@@ -391,6 +545,57 @@
                     "Keywords": [
                         "_GLOSSINESS_FROM_BASE_ALPHA"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHATEST_ON",
+                        "_EMISSION",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_NORMALMAP",
+                        "_SPECGLOSSMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHATEST_ON",
+                        "_GLOSSINESS_FROM_BASE_ALPHA",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_NORMALMAP",
+                        "_SPECGLOSSMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSION",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_GLOSSINESS_FROM_BASE_ALPHA",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SPECULAR_COLOR"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -402,6 +607,32 @@
                     "PassType": 0,
                     "Keywords": [
                         "_ALPHATEST_ON",
+                        "_EMISSION"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_COLORADDSUBDIFF_ON",
+                        "_EMISSION",
+                        "_FADING_ON",
+                        "_SOFTPARTICLES_ON",
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_COLORCOLOR_ON",
+                        "_FADING_ON",
+                        "_FLIPBOOKBLENDING_ON",
+                        "_SOFTPARTICLES_ON",
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
+                    "PassType": 0,
+                    "Keywords": [
                         "_EMISSION"
                     ]
                 },
@@ -436,26 +667,8 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
-                        "_MAIN_LIGHT_SHADOWS",
-                        "_TERRAIN_INSTANCED_PERPIXEL_NORMAL"
-                    ]
-                },
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        "EVALUATE_SH_VERTEX",
-                        "_ADDITIONAL_LIGHTS",
-                        "_MAIN_LIGHT_SHADOWS"
-                    ]
-                },
-                {
-                    "PassType": 13,
-                    "Keywords": [
-                        "EVALUATE_SH_VERTEX",
-                        "_ADDITIONAL_LIGHTS",
                         "_MAIN_LIGHT_SHADOWS",
                         "_TERRAIN_INSTANCED_PERPIXEL_NORMAL"
                     ]
@@ -470,6 +683,24 @@
                     "PassType": 13,
                     "Keywords": [
                         ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Packages/com.unity.render-pipelines.universal/Shaders/Particles/ParticlesLit.shader",
+            "ShaderName": "Universal Render Pipeline/Particles/Lit",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSION",
+                        "_FADING_ON",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SOFTPARTICLES_ON",
+                        "_SURFACE_TYPE_TRANSPARENT"
                     ]
                 }
             ]
@@ -499,8 +730,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/UI_Hui.shader",
-            "ShaderName": "Custom/UI_Hui",
+            "AssetPath": "Assets/Res/Shader/ToonBasicURP.shader",
+            "ShaderName": "Toon/BasicURP",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -511,8 +742,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend1.shader",
-            "ShaderName": "Particles/Alpha Blended_game",
+            "AssetPath": "Assets/Res/Shader/UI_Hui.shader",
+            "ShaderName": "Custom/UI_Hui",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -547,8 +778,44 @@
             ]
         },
         {
+            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend DetachAlpha Top.shader",
+            "ShaderName": "Particles/Alpha Blended DetachAlpha Top",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend1.shader",
+            "ShaderName": "Particles/Alpha Blended_game",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
             "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Mobile-Particle-Add-DetachAlpha-Top.shader",
             "ShaderName": "Mobile/Particles/AdditiveDetachAlphaTop",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Shader/Mobile-Particle-Add-DetachAlpha-Top.shader",
+            "ShaderName": "Mobile/Particles/Additive DetachAlpha Top",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -571,20 +838,8 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Shader/Particle Alpha Blend DetachAlpha Top.shader",
-            "ShaderName": "Particles/Alpha Blended DetachAlpha Top",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Shader/Mobile-Particle-Add-DetachAlpha-Top.shader",
-            "ShaderName": "Mobile/Particles/Additive DetachAlpha Top",
+            "AssetPath": "Assets/Res/Shader/ToonBasic.shader",
+            "ShaderName": "Toon/Basic",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -612,18 +867,6 @@
                 },
                 {
                     "PassType": 14,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Shader/ToonBasic.shader",
-            "ShaderName": "Toon/Basic",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
                     "Keywords": [
                         ""
                     ]
@@ -713,6 +956,13 @@
                 {
                     "PassType": 8,
                     "Keywords": [
+                        "_FADING",
+                        "_SCALEMAP"
+                    ]
+                },
+                {
+                    "PassType": 8,
+                    "Keywords": [
                         "_SCALEMAP"
                     ]
                 },
@@ -754,7 +1004,27 @@
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ADVANCED_LIGHTING",
                         "_MAIN_LIGHT_SHADOWS",
+                        "_NORMALMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ADVANCED_LIGHTING",
+                        "_MAIN_LIGHT_SHADOWS",
                         "_SCALEMAP"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_FADING",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SIMPLE_LIGHTING"
                     ]
                 }
             ]
@@ -871,6 +1141,18 @@
                         "_COLOR2ENABLE_ON",
                         "_ENABLEWIND_ON",
                         "_MAIN_LIGHT_SHADOWS",
+                        "_SECONDCOLOROVERLAYTYPE_UV_BASED"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ANCHORTHEFOLIAGEBASE_ON",
+                        "_COLOR2ENABLE_ON",
+                        "_ENABLEWIND_ON",
+                        "_MAIN_LIGHT_SHADOWS",
                         "_SECONDCOLOROVERLAYTYPE_WORLD_POSITION"
                     ]
                 },
@@ -948,6 +1230,14 @@
                     "Keywords": [
                         "INSTANCING_ON"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -959,6 +1249,14 @@
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -978,6 +1276,25 @@
                     "Keywords": [
                         "INSTANCING_ON"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_BLENDNORMALSON_ON",
+                        "_GROUNDCOVERON_ON",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_GROUNDCOVERON_ON",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -995,6 +1312,27 @@
                     "PassType": 8,
                     "Keywords": [
                         "INSTANCING_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_BLENDNORMALS_ON",
+                        "_COVERAGEOVERLAYTYPE_WORLD_NORMAL",
+                        "_COVERAGE_ON",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_BLENDNORMALS_ON",
+                        "_COVERAGEOVERLAYTYPE_WORLD_NORMAL",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 },
                 {
@@ -1024,6 +1362,19 @@
                     "Keywords": [
                         "_WIND_ON"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_COLOR2ENABLE_ON",
+                        "_COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SNOWOVERLAYTYPE_WORLD_NORMAL_BASED",
+                        "_TRANCLUSENCYENABLE_ON",
+                        "_WIND_ON"
+                    ]
                 }
             ]
         },
@@ -1035,6 +1386,14 @@
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -1053,6 +1412,30 @@
                     "PassType": 8,
                     "Keywords": [
                         "INSTANCING_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_BLENDNORMALS_ON",
+                        "_COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_OVERLAYMETHOD_WORLD_NORMAL",
+                        "_SMOOTHNESSSOURCE_METALLIC_ALPHA"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_BLENDNORMALS_ON",
+                        "_COVERAGESMOOTHNESSSOURCE_SMOOTHNESS_R",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_OVERLAYMETHOD_WORLD_NORMAL",
+                        "_SMOOTHNESSSOURCE_METALLIC_R"
                     ]
                 }
             ]
@@ -1093,6 +1476,17 @@
                     "PassType": 8,
                     "Keywords": [
                         "_ENABLEWIND_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ENABLEWIND_ON",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_SECONDCOLOROVERLAYTYPE_WORLD_POSITION",
+                        "_SMOOTHNESSSOURCE_SMOOTHNESS_ALPHA"
                     ]
                 }
             ]
@@ -1142,6 +1536,14 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1159,6 +1561,7 @@
                     "PassType": 13,
                     "Keywords": [
                         "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
                         "_EDGEBLENDING_VERTEXBLENDING",
                         "_MAIN_LIGHT_SHADOWS"
                     ]
@@ -1193,6 +1596,14 @@
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -1230,6 +1641,7 @@
                     "PassType": 13,
                     "Keywords": [
                         "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
                     ]
                 },
@@ -1237,6 +1649,7 @@
                     "PassType": 13,
                     "Keywords": [
                         "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS",
                         "_USEDFORTRUNK_ON"
                     ]
@@ -1247,6 +1660,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_dissolve_particle_apb.shadergraph",
             "ShaderName": "Shader Graphs/Fx_dissolve_particle_apb",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1259,6 +1678,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_Shoot&Hit_Particle_add.shadergraph",
             "ShaderName": "Shader Graphs/Fx_Shoot&Hit_Particle_add",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1276,6 +1701,14 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1283,6 +1716,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_Shoot&Hit_Particle_apb.shadergraph",
             "ShaderName": "Shader Graphs/Fx_Shoot&Hit_Particle_apb",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1296,6 +1735,12 @@
             "ShaderName": "Kyeoms/Kyeoms_ParticleDissolve&Offset",
             "ShaderVariantElements": [
                 {
+                    "PassType": 0,
+                    "Keywords": [
+                        "_SURFACE_TYPE_TRANSPARENT"
+                    ]
+                },
+                {
                     "PassType": 8,
                     "Keywords": [
                         ""
@@ -1307,6 +1752,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_ParticleDissolve_apb.shadergraph",
             "ShaderName": "Shader Graphs/Fx_ParticleDissolve_apb",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1320,6 +1771,12 @@
             "ShaderName": "Shader Graphs/HCFX_Particle_apb",
             "ShaderVariantElements": [
                 {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
                     "PassType": 8,
                     "Keywords": [
                         ""
@@ -1331,6 +1788,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_ParticleDissolve_add.shadergraph",
             "ShaderName": "Shader Graphs/Fx_ParticleDissolve_add",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1344,6 +1807,12 @@
             "ShaderName": "Shader Graphs/Fx_Hit&Slash_add_SG",
             "ShaderVariantElements": [
                 {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
                     "PassType": 8,
                     "Keywords": [
                         ""
@@ -1355,6 +1824,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/Fx_RockDissolve.shadergraph",
             "ShaderName": "Shader Graphs/Fx_RockDissolve",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1368,6 +1843,12 @@
             "ShaderName": "Shader Graphs/Fx_Hit&Slash_apb_SG",
             "ShaderVariantElements": [
                 {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
                     "PassType": 8,
                     "Keywords": [
                         ""
@@ -1379,6 +1860,12 @@
             "AssetPath": "Assets/Res/Effect/VFX_Klaus/Shaders/HCFX_Particle_add.shadergraph",
             "ShaderName": "Shader Graphs/HCFX_Particle_add",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1430,18 +1917,6 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Effect/MonsterAckRange/ProjectorLight.shader",
-            "ShaderName": "Projector/Light",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 0,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
             "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Particle-Add-DetachAlpha-Top.shader",
             "ShaderName": "Particles/AdditiveDetachAlphaTop",
             "ShaderVariantElements": [
@@ -1456,6 +1931,18 @@
         {
             "AssetPath": "Assets/Mono/GameDemo/ArtResource/Shaders/Particle-AddSmooth-DetachAlpha-Top.shader",
             "ShaderName": "Particles/Additive(Soft)DetachAlphaTop",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Effect/MonsterAckRange/ProjectorLight.shader",
+            "ShaderName": "Projector/Light",
             "ShaderVariantElements": [
                 {
                     "PassType": 0,
@@ -1487,6 +1974,18 @@
                         "_2SIDESSECONDEDGE_ON",
                         "_AXIS_Z",
                         "_GUIDEAFFECTSEDGESBLENDING_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_2SIDESSECONDEDGE_ON",
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_AXIS_Z",
+                        "_EDGESAFFECT_ALBEDO",
+                        "_GUIDEAFFECTSEDGESBLENDING_ON",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -1552,61 +2051,31 @@
             ]
         },
         {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomBackground.shader",
-            "ShaderName": "Toon/TFD_CustomBackground",
+            "AssetPath": "Packages/com.unity.toonshader/Runtime/Integrated/Shaders/UnityToon.shader",
+            "ShaderName": "Toon",
             "ShaderVariantElements": [
                 {
                     "PassType": 8,
                     "Keywords": [
                         ""
                     ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToonVegetation.shader",
-            "ShaderName": "Toon/TFD_CustomToonVegetation",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 8,
-                    "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_ToonFire.shader",
-            "ShaderName": "Toon/TFD_ToonFire",
-            "ShaderVariantElements": [
+                },
                 {
                     "PassType": 13,
                     "Keywords": [
-                        ""
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_EMISSIVE_SIMPLE",
+                        "_IS_ANGELRING_OFF",
+                        "_IS_CLIPPING_OFF",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomTerrainFirstPass.shader",
-            "ShaderName": "Toon/TFD_CustomTerrainFirstPass",
-            "ShaderVariantElements": [
+                },
                 {
-                    "PassType": 8,
+                    "PassType": 14,
                     "Keywords": [
-                        ""
-                    ]
-                }
-            ]
-        },
-        {
-            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToon.shader",
-            "ShaderName": "Toon/TFD_CustomToon",
-            "ShaderVariantElements": [
-                {
-                    "PassType": 8,
-                    "Keywords": [
-                        ""
+                        "_IS_OUTLINE_CLIPPING_NO",
+                        "_OUTLINE_NML"
                     ]
                 }
             ]
@@ -1615,6 +2084,12 @@
             "AssetPath": "Assets/Res/Model/Scene/LostTemple-BuiltInRP/Fx/Basewater_Shader.shadergraph",
             "ShaderName": "Shader Graphs/Basewater_Shader",
             "ShaderVariantElements": [
+                {
+                    "PassType": 0,
+                    "Keywords": [
+                        ""
+                    ]
+                },
                 {
                     "PassType": 8,
                     "Keywords": [
@@ -1632,6 +2107,81 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToonVegetation.shader",
+            "ShaderName": "Toon/TFD_CustomToonVegetation",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_ToonWater.shader",
+            "ShaderName": "Toon/TFD_ToonWater",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS",
+                        "_RECEIVE_SHADOWS_OFF"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_ToonFire.shader",
+            "ShaderName": "Toon/TFD_ToonFire",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        ""
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Models/Toon Deserted Temples/Shaders/TFD_CustomToon.shader",
+            "ShaderName": "Toon/TFD_CustomToon",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 8,
+                    "Keywords": [
+                        ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1648,7 +2198,6 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -1669,7 +2218,6 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -1690,7 +2238,6 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_MAIN_LIGHT_SHADOWS"
@@ -1707,6 +2254,15 @@
                     "Keywords": [
                         "_ALPHATEST_ON"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHATEST_ON",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1719,6 +2275,14 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1730,6 +2294,14 @@
                     "PassType": 8,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -1747,7 +2319,6 @@
                 {
                     "PassType": 13,
                     "Keywords": [
-                        "EVALUATE_SH_VERTEX",
                         "_ADDITIONAL_LIGHTS",
                         "_ADDITIONAL_LIGHT_SHADOWS",
                         "_ALPHATEST_ON",
@@ -1765,6 +2336,14 @@
                     "Keywords": [
                         ""
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1776,6 +2355,15 @@
                     "PassType": 8,
                     "Keywords": [
                         "_ALPHATEST_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_ALPHATEST_ON",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
@@ -1795,6 +2383,14 @@
                     "Keywords": [
                         "INSTANCING_ON"
                     ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
                 }
             ]
         },
@@ -1812,6 +2408,28 @@
                     "PassType": 8,
                     "Keywords": [
                         "INSTANCING_ON"
+                    ]
+                },
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
+                    ]
+                }
+            ]
+        },
+        {
+            "AssetPath": "Assets/Res/Model/Scene/TriForge Assets/Fantasy Forest Environment/Shaders/Water.shader",
+            "ShaderName": "TriForge/Fantasy Forest/SimpleWater",
+            "ShaderVariantElements": [
+                {
+                    "PassType": 13,
+                    "Keywords": [
+                        "_ADDITIONAL_LIGHTS",
+                        "_ADDITIONAL_LIGHT_SHADOWS",
+                        "_MAIN_LIGHT_SHADOWS"
                     ]
                 }
             ]
