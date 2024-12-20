@@ -18,7 +18,8 @@ namespace ET.Server
                 unit.SendStop(-1);
                 return;
             }
-
+            MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
+            moveComponent.SyncPosition();
             M2C_PathfindingResult m2CPathfindingResult = new();
             unit.GetComponent<PathfindingComponent>().Find(unit.Position, target, m2CPathfindingResult.Points);
 
@@ -33,7 +34,7 @@ namespace ET.Server
             m2CPathfindingResult.SpeedRate = speedRate;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
 
-            MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
+           
             float speed = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_Speed);
             speed *= (speedRate * 0.01f);
             bool ret = await moveComponent.MoveToAsync(m2CPathfindingResult.Points, speed);

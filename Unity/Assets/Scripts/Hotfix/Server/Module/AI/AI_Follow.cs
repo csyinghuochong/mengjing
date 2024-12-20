@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -112,11 +113,11 @@ namespace ET.Server
                 int errorCode = unit.GetComponent<StateComponentS>().CanMove();
                 float distacne = math.distance(unit.Position, master.Position);
 
-                if (errorCode == ErrorCode.ERR_Success && distacne > 5f)  //距离大于5米加速追
+                if (errorCode == ErrorCode.ERR_Success && distacne > 10f)  //距离大于10米加速追
                 {
                     speedProp = 150;
                 }
-                if(errorCode != ErrorCode.ERR_Success ||  distacne < 3f)   //距离小于3米停止追
+                if(errorCode != ErrorCode.ERR_Success ||  distacne < 4f)   //距离小于4米停止追
                 {
                     speedProp = 0;
                 }
@@ -128,7 +129,7 @@ namespace ET.Server
                     unit.FindPathMoveToAsync(nextTarget, speedProp).Coroutine();
                 }
 
-                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(300, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     break;

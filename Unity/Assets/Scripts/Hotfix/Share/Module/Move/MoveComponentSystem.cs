@@ -87,6 +87,7 @@ namespace ET
         // 该方法不需要用cancelToken的方式取消，因为即使不传入cancelToken，多次调用该方法也要取消之前的移动协程,上层可以stop取消
         public static async ETTask<bool> MoveToAsync(this MoveComponent self, List<float3> target, float speed, int turnTime = 100, int speedRate = 100)
         {
+            
             self.Stop(false);
 
             foreach (float3 v in target)
@@ -263,6 +264,14 @@ namespace ET
             return true;
         }
 
+        public static void SyncPosition(this MoveComponent self)
+        {
+            if (self.Targets.Count > 0)
+            {
+                self.MoveForward(false);
+            }
+        }
+        
         // ret: 停止的时候，移动协程的返回值
         public static void Stop(this MoveComponent self, bool ret)
         {
