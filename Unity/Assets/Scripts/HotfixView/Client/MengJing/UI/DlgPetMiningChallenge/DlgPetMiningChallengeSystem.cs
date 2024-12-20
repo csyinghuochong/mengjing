@@ -159,8 +159,10 @@ namespace ET.Client
             self.View.E_RawImageImage.sprite = sp;
             self.View.E_Text_mingText.text = mineBattleConfig.Name;
 
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openDay = ServerHelper.GetServeOpenrDay(zone);
+            ServerItem serverItem = self.Root().GetComponent<PlayerComponent>().ServerItem;
+            
+            int zone = serverItem.ServerId;
+            int openDay = TimeHelper.GetServeOpenrDay(serverItem.ServerOpenTime);
             float coffi = CommonHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
 

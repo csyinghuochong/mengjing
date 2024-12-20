@@ -60,9 +60,8 @@ namespace ET.Client
             {
                 return;
             }
-
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openday = ServerHelper.GetServeOpenrDay(zone);
+            
+            int openday = TimeHelper.GetServeOpenrDay(self.Root().GetComponent<PlayerComponent>().ServerItem.ServerOpenTime);
 
             self.PaiMaiItemInfos = response.PaiMaiItemInfos;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

@@ -20,20 +20,10 @@ namespace ET.Server
 
         public void MoveToSync(SkillS skillS)
         {
-            //Unit targetUnit = this.TheUnitFrom.GetParent<UnitComponent>().Get(this.SkillInfo.TargetID);
-            //if (targetUnit != null && this.SkillConf.GameObjectParameter == "1")
-            //{
-            //    Vector3 direction = targetUnit.Position - this.TheUnitFrom.Position;
-            //    this.SkillInfo.TargetAngle = (int)Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
-            //}
             NumericComponentS numericComponent = skillS.TheUnitFrom.GetComponent<NumericComponentS>();
             float oldSpeed = numericComponent.GetAsFloat(NumericType.Now_Speed);
             float oldspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add);
-            //float moveDistance = ((float)this.SkillConf.SkillMoveSpeed * this.SkillConf.SkillLiveTime * 0.001f);
-            //Quaternion rotation = Quaternion.Euler(0, this.SkillInfo.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
-            //this.TargetPosition = theUnitFrom.Position + rotation * Vector3.forward * moveDistance;
-            //this.TargetPosition = theUnitFrom.DomainScene().GetComponent<MapComponent>().GetCanChongJiPath(theUnitFrom.Position, TargetPosition);
-            //1-10 表示 10%-100%
+           
             double addPro = (double)numericComponent.GetAsInt(NumericType.Now_JumpDisAdd) / 10;
             float newSpeed = (float)(skillS.SkillConf.SkillMoveSpeed * (1 + addPro));
             float newspeedAdd = newSpeed - oldSpeed;
@@ -58,17 +48,7 @@ namespace ET.Server
             skillS.NowPosition = skillS.TheUnitFrom.Position;
             skillS.TheUnitFrom.GetComponent<BuffManagerComponentS>().AddBuffRecord(1, 1);
         }
-
-        //public async ETTask MoveToAsync()
-        //{
-        //    await this.TheUnitFrom.FindPathMoveToAsync(TargetPosition, null, false);
-        //    if (this.TheUnitFrom.IsDisposed)
-        //    {
-        //        return;
-        //    }
-        //    OnFinished();
-        //}
-
+        
         public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();

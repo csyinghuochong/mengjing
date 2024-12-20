@@ -173,7 +173,7 @@ namespace ET.Client
 
         public static int GetCreateDay(this UserInfoComponentC self)
         {
-            return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
+            return TimeHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
         }
 
         public static void UpdateGameSetting(this UserInfoComponentC self, List<KeyValuePair> gameSettingInfos)
@@ -205,7 +205,7 @@ namespace ET.Client
         /// <returns></returns>
         public static int GetCrateDay(this UserInfoComponentC self)
         {
-            return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
+            return TimeHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
         }
 
         public static bool IsHaveFristWinReward(this UserInfoComponentC self, int firstwinid, int difficulty)

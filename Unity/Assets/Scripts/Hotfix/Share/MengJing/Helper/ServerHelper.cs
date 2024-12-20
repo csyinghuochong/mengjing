@@ -57,21 +57,8 @@ namespace ET
                 return 0;
             }
 
-            int openserverDay = DateDiff_Time(serverNow, openSerTime);
-            return openserverDay;
+            return TimeHelper.GetServeOpenrDay(openSerTime);;
         }
-
-        public static int DateDiff_Time(long time1, long time2)
-        {
-            DateTime d1 = TimeInfo.Instance.ToDateTime(time1);
-            DateTime d2 = TimeInfo.Instance.ToDateTime(time2);
-            DateTime d3 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d1.Year, d1.Month, d1.Day));
-
-            DateTime d4 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d2.Year, d2.Month, d2.Day));
-            int days = (d3 - d4).Days + 1;
-            return days;
-        }
-        
         /// <summary>
         /// 合区后的区
         /// </summary>
@@ -80,7 +67,6 @@ namespace ET
         /// <returns></returns>
         public static int GetNewServerId(int zone)
         {
-
             List<ServerItem> serverItems_1 = GetServerList(VersionMode.Beta);
 
             string serverip = string.Empty;
