@@ -66,7 +66,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void ResetUI(this ES_JoystickMove self)
+        public static void ResetUI(this ES_JoystickMove self, bool removeTime)
         {
             self.SetAlpha(0.3f);
             if (self.OperateMode == 0)
@@ -82,7 +82,11 @@ namespace ET.Client
             }
 
             self.MainUnit = null;
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+
+            if (removeTime)
+            {
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+            }
         }
         
         public static void AfterEnterScene(this ES_JoystickMove self)

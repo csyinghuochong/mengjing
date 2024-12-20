@@ -1748,7 +1748,7 @@ namespace ET.Client
             self.ResetTeamUI();
             self.View.ES_MainSkill.ResetUI();
             self.View.ES_MainBuff.ResetUI();
-            self.View.ES_JoystickMove.ResetUI();
+            self.View.ES_JoystickMove.ResetUI(false);
 
             self.View.ES_MapMini.BeforeEnterScene(lastScene);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
@@ -2290,7 +2290,7 @@ namespace ET.Client
         public static void OnSelfDead(this DlgMain self)
         {
              self.StopAction();
-             self.View.ES_JoystickMove.ResetUI();
+             self.View.ES_JoystickMove.ResetUI(true);
         }
 
         public static void OnBagItemUpdate(this DlgMain self)
