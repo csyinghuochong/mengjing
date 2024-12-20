@@ -12,6 +12,14 @@ namespace ET.Client
 
         public static int GetNewServerId(this ET.Client.PlayerInfoComponent self, int serverid)
         {
+            for (int  i = 0; i < self.AllServerList.Count; i++)
+            {
+                if (self.AllServerList[i].OldServerIds.Contains(serverid))
+                {
+                    return self.AllServerList[i].ServerId;
+                }
+            }
+
             return serverid;
         }
     }

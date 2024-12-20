@@ -1319,6 +1319,12 @@ namespace ET
         [MemoryPackOrder(6)]
         public List<int> PlatformList { get; set; } = new();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        [MemoryPackOrder(7)]
+        public List<long> OldServerIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1333,6 +1339,7 @@ namespace ET
             this.Show = default;
             this.New = default;
             this.PlatformList.Clear();
+            this.OldServerIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

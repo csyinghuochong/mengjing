@@ -298,6 +298,7 @@ message ServerItem
 	int32 Show = 5;
 	int32 New = 6;
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
+	repeated int64 OldServerIds = 8;      //
 }
 
 //ResponseType R2C_DeleteAccountResponse
