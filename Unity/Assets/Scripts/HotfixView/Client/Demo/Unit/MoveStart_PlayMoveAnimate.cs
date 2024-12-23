@@ -16,6 +16,12 @@ namespace ET.Client
             {
                 return;
             }
+            
+            if (unit.GetComponent<SkillManagerComponentC>().HaveChongJi())
+            {
+                return;
+            }
+            
             unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmRunState);
             unit.GetComponent<HeroTransformComponent>()?.ShowRunEffect();
             

@@ -900,7 +900,7 @@ namespace ET
         public static List<int> SoloBuffIds = new List<int>() { 99004006 };
 
         [StaticField]
-        public static string ChongJiSkill = "Skill_Other_ChongJi_1";
+        public static string Skill_Other_ChongJi_1 = "Skill_Other_ChongJi_1";
 
         [StaticField]
         public static string Skill_Halo_2 = "Skill_Halo_2";

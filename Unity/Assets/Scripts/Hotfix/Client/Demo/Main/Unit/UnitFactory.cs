@@ -59,19 +59,7 @@ namespace ET.Client
             {
                 numericComponentC.ApplyValue(kv.Key, kv.Value, false);
             }
-
-            unit.MasterId = numericComponentC.GetAsLong(NumericType.MasterId);
-            if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
-            {
-                using (ListComponent<float3> list = ListComponent<float3>.Create())
-                {
-                    list.Add(unit.Position);
-                    list.AddRange(unitInfo.MoveInfo.Points);
-
-                    unit.MoveToAsync(list).Coroutine();
-                }
-            }
-
+            
             bool noSkill = unit.Type == UnitType.Npc && NpcConfigCategory.Instance.Get(unit.ConfigId).AI == 0;
             if (!noSkill)
             {
@@ -84,7 +72,19 @@ namespace ET.Client
                 int runraceMonster = numericComponentC.GetAsInt(NumericType.RunRaceTransform);
                 unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
+            
+            unit.MasterId = numericComponentC.GetAsLong(NumericType.MasterId);
+            if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
+            {
+                using (ListComponent<float3> list = ListComponent<float3>.Create())
+                {
+                    list.Add(unit.Position);
+                    list.AddRange(unitInfo.MoveInfo.Points);
 
+                    unit.MoveToAsync(list).Coroutine();
+                }
+            }
+            
             OnAfterCreateUnit(unit);
             return unit;
         }

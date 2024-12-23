@@ -29,10 +29,14 @@ namespace ET.Server
             buffS.StartPosition = theUnitBelongto.Position;
             buffS.TargetPosition =  theUnitBelongto.GetComponent<PathfindingComponent>().GetCanChongJiPath(theUnitBelongto.Position, vector3);
 
+            int speedRate = 100;
+            if (newSpeed > oldSpeed )
+            {
+                speedRate = (int)(newSpeed * 100f / oldSpeed);
+            }
             theUnitBelongto.Stop(-1);
-            theUnitBelongto.GetComponent<NumericComponentS>().ApplyValue(NumericType.Extra_Buff_Speed_Add, newSpeed - oldSpeed);
             theUnitBelongto.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.JiTui);
-            theUnitBelongto.FindPathMoveToAsync(buffS.TargetPosition ).Coroutine();
+            theUnitBelongto.FindPathMoveToAsync(buffS.TargetPosition ,speedRate).Coroutine();
         }
 
         public override void OnUpdate(BuffS buffS)
@@ -46,7 +50,6 @@ namespace ET.Server
         public override void OnFinished(BuffS buffS)
         {
             buffS.TheUnitBelongto.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.JiTui);
-            buffS.TheUnitBelongto.GetComponent<NumericComponentS>().ApplyValue(NumericType.Extra_Buff_Speed_Add, 0);
         }
     }
 }

@@ -428,7 +428,7 @@ namespace ET.Server
               for (int i = skillcnt - 1; i >= 0; i--)
               {
                   SkillS skillS = self.Skills[i];
-                  if (skillS.SkillConf.GameObjectName == ConfigData.ChongJiSkill)
+                  if (skillS.SkillConf.GameObjectName == ConfigData.Skill_Other_ChongJi_1)
                   {
                       return true;
                   }
@@ -442,27 +442,18 @@ namespace ET.Server
           /// <param name="self"></param>
           /// <param name="skillId"></param>
           /// <returns></returns>
-          public static bool CheckChongJi(this SkillManagerComponentS self, int skillId)
+          public static bool CheckCanChongJi(this SkillManagerComponentS self, int skillId)
           {
               if (!SkillConfigCategory.Instance.Contain(skillId))
               {
                   return false;
               }
               SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-              if (!SkillHelp.IsChongJi(skillConfig.GameObjectName))
+              if (!SkillHelp.IsChongJiSkill(skillConfig.GameObjectName))
               {
                   return false;
               }
-              int skillcnt = self.Skills.Count;
-              for (int i = skillcnt - 1; i >= 0; i--)
-              {
-                  SkillS skillS = self.Skills[i];
-                  if (skillS.SkillConf.GameObjectName == skillConfig.GameObjectName)
-                  {
-                      return true;
-                  }
-              }
-              return false;
+              return self.HaveChongJi();
           }
 
           /// <summary>
@@ -509,7 +500,6 @@ namespace ET.Server
           /// <returns></returns>
           public static M2C_SkillCmd OnUseSkill(this SkillManagerComponentS self, C2M_SkillCmd skillcmd, bool zhudong = true, bool checkDead = true)
           {
-              
               Unit unit = self.GetParent<Unit>();
               M2C_SkillCmd m2C_Skill = self.M2C_SkillCmd;
               m2C_Skill.Message = String.Empty;
@@ -575,7 +565,7 @@ namespace ET.Server
 
                   self.Skills.Add(handlerList[i] );
               }
-              if (zhudong && ConfigData.NOPassiveSkill.Contains(weaponSkillConfig.Id)  && !SkillHelp.IsChongJi(weaponSkillConfig.GameObjectName))
+              if (zhudong && ConfigData.NOPassiveSkill.Contains(weaponSkillConfig.Id)  && !SkillHelp.IsChongJiSkill(weaponSkillConfig.GameObjectName))
               {
                   SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
                   if (skillPassiveComponent == null)
@@ -609,7 +599,7 @@ namespace ET.Server
               float now_ZhuanZhuPro = unit.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_ZhuanZhuPro);
               if (zhudong && RandomHelper.RandFloat01() < now_ZhuanZhuPro
                   && TimeHelper.ServerFrameTime() - self.LastLianJiTime >= 4000
-                  && !SkillHelp.IsChongJi(weaponSkillConfig.GameObjectName))
+                  && !SkillHelp.IsChongJiSkill(weaponSkillConfig.GameObjectName))
               {
                   if (unit.Type == UnitType.Player)
                   {
@@ -895,7 +885,7 @@ namespace ET.Server
           //技能是否可以使用
           public static int IsCanUseSkill(this SkillManagerComponentS self, int nowSkillID, bool zhudong = true, bool checkDead = true)
           {
-              if (self.CheckChongJi(nowSkillID))
+              if (self.CheckCanChongJi(nowSkillID))
               { 
                   return ErrorCode.ERR_SkillMoveTime;
               }

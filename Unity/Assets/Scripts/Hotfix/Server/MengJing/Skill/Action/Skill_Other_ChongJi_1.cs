@@ -22,29 +22,22 @@ namespace ET.Server
         {
             NumericComponentS numericComponent = skillS.TheUnitFrom.GetComponent<NumericComponentS>();
             float oldSpeed = numericComponent.GetAsFloat(NumericType.Now_Speed);
-            float oldspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add);
-           
             double addPro = (double)numericComponent.GetAsInt(NumericType.Now_JumpDisAdd) / 10;
             float newSpeed = (float)(skillS.SkillConf.SkillMoveSpeed * (1 + addPro));
-            float newspeedAdd = newSpeed - oldSpeed;
 
-            if (newSpeed > oldSpeed && newspeedAdd > oldspeedAdd)
+            int speedRate = 100;
+            if (newSpeed > oldSpeed )
             {
-                skillS.SpeedAddValue = newspeedAdd - oldspeedAdd;
-                numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, newspeedAdd);
+                speedRate = (int)(newSpeed * 100f / oldSpeed);
             }
-            else
-            {
-                skillS.SpeedAddValue = 0f;
-            }
-
+         
             skillS.TheUnitFrom.GetComponent<StateComponentS>().SetRigidityEndTime(0);
             float moveDistance = ((float)skillS.SkillConf.SkillMoveSpeed * skillS.SkillConf.SkillLiveTime * 0.001f);
             quaternion rotation = quaternion.Euler(0, math.radians(skillS.SkillInfo.TargetAngle), 0); //按照Z轴旋转30度的Quaterion
-            skillS.TargetPosition = skillS.TheUnitFrom.Position + math.mul(rotation, new float3(0, 0, 1)) * moveDistance;
-
-            skillS.TargetPosition = skillS.TheUnitFrom.GetComponent<PathfindingComponent>().GetCanChongJiPath(skillS.TheUnitFrom.Position, skillS.TargetPosition);
-            skillS.TheUnitFrom.FindPathMoveToAsync(skillS.TargetPosition).Coroutine();
+            float3 TargetPosition = skillS.TheUnitFrom.Position + math.mul(rotation, new float3(0, 0, 1)) * moveDistance;
+            skillS.TargetPosition = skillS.TheUnitFrom.GetComponent<PathfindingComponent>().GetCanChongJiPath(skillS.TheUnitFrom.Position, TargetPosition);
+            
+            skillS.TheUnitFrom.FindPathMoveToAsync(skillS.TargetPosition, speedRate).Coroutine();
             skillS.NowPosition = skillS.TheUnitFrom.Position;
             skillS.TheUnitFrom.GetComponent<BuffManagerComponentS>().AddBuffRecord(1, 1);
         }
@@ -99,9 +92,6 @@ namespace ET.Server
 
         public override void OnFinished(SkillS skillS)
         {
-            NumericComponentS numericComponent = skillS.TheUnitFrom.GetComponent<NumericComponentS>();
-            float curspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add) - skillS.SpeedAddValue;
-            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, math.max(0, curspeedAdd));
             skillS.Clear();
         }
     }
