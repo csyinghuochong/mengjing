@@ -21,8 +21,7 @@ namespace ET
 
         public const int PetMianShangBuff = 97020003;
 
-        public const string Skill_XuanZhuan_Attack_2 = "Skill_XuanZhuan_Attack_2";
-
+     
         /// <summary>
         /// 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
         /// </summary>
@@ -898,12 +897,16 @@ namespace ET
         /// </summary>
         [StaticField]
         public static List<int> SoloBuffIds = new List<int>() { 99004006 };
+        
+        //伏击
+        public const string Skill_Ambushing = "Skill_Ambushing";
+        
+        public const string Skill_Halo_2 = "Skill_Halo_2";
+        
+        public const string Skill_Other_ChongJi_1 = "Skill_Other_ChongJi_1";
 
-        [StaticField]
-        public static string Skill_Other_ChongJi_1 = "Skill_Other_ChongJi_1";
+        public const string Skill_XuanZhuan_Attack_2 = "Skill_XuanZhuan_Attack_2";
 
-        [StaticField]
-        public static string Skill_Halo_2 = "Skill_Halo_2";
 
         /// <summary>
         /// 三个对应等级套装属性

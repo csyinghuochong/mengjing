@@ -317,7 +317,7 @@ namespace ET.Server
                           skillInfo.TargetAngle = skillcmd.TargetAngle;
                           skillInfos.Add(skillInfo);
                       }
-                      else if (target == null && skillConfig.SkillActType == 0)
+                      if (target == null && skillConfig.SkillActType == 0)
                       {
                           skillInfo = SkillInfo.Create();
                           skillInfo.TargetAngle = (int)math.forward(unit.Rotation).y;

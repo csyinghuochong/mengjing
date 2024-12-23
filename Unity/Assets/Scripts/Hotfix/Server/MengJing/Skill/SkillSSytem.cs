@@ -140,7 +140,7 @@ namespace ET.Server
                  self.IsExcuteHurt = true;
                  if (self.SkillConf.SkillTargetType == (int)SkillTargetType.TargetOnly)
                  {
-                     Unit targetUnit = self.TheUnitFrom.Scene().GetComponent<UnitComponent>().Get(self.SkillInfo.TargetID);
+                     Unit targetUnit = self.TheUnitFrom.GetParent<UnitComponent>().Get(self.SkillInfo.TargetID);
                      if (targetUnit != null && self.SkillConf.SkillActType == 1)
                      {
                          self.OnCollisionUnit(targetUnit);
@@ -444,6 +444,30 @@ namespace ET.Server
                      break;
              }
              return ishape;
+         }
+
+         public static void UpdateCheckRotation(this SkillS self, float anglea_1)
+         {
+             if (self.ICheckShape == null || self.ICheckShape.Count == 0)
+             {
+                 //Log.Debug($"self.ICheckShape == null: {self.SkillConf.SkillName}");
+                 self.SetSkillState( SkillState.Finished );
+                 return;
+             }
+
+             switch (self.SkillConf.DamgeRangeType)
+             {
+                 case 0:
+                 case 1:
+                     break;
+                 case 2:
+                     //.s_forward = math.mul(quaternion.Euler(0, math.radians(anglea_1), 0), math.forward());
+                     (self.ICheckShape[0] as Rectangle).s_forward = math.mul(quaternion.Euler(0, math.radians(anglea_1), 0), new float3(0, 0, 1));
+                     break;
+                 case 3:
+                     (self.ICheckShape[0] as Fan).s_rotation = quaternion.Euler(0, math.radians(anglea_1), 0);
+                     break;
+             }
          }
 
          //目前只有冲锋技能用到。 

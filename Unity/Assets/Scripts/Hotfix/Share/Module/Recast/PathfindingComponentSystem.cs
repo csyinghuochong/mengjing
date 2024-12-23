@@ -86,7 +86,7 @@ namespace ET
             }
         }
 
-        public static float3 GetCanChongJiPath(this PathfindingComponent self, float3 start, float3 target)
+        public static float3 GetCanChongJiPath(this PathfindingComponent self, float3 start, float3 target, float distance = 1f)
         {
             using var list = ListComponent<float3>.Create();
             float3 dir = (target - start).normalize();
@@ -95,7 +95,7 @@ namespace ET
             int max = 0;
             while (max < 10)
             {
-                float3 next = tmm + (1f * dir);
+                float3 next = tmm + (distance * dir);
                 self.Find(start, next, list);
                 if (list.Count == 0 || list.Count == 1)
                 {
@@ -107,7 +107,7 @@ namespace ET
                     break;
                 }
 
-                if (math.distance(next, target) <= 1f)
+                if (math.distance(next, target) <= distance)
                 {
                     break;
                 }
