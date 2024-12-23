@@ -533,7 +533,7 @@ namespace ET.Client
                         zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
             }
             
-            float showImage_56 = 0.1f;
+
             float ziZhi_HpProp = Mathf.Clamp(rolePetInfo.ZiZhi_Hp * 1f /  petConfig.ZiZhi_Hp_Max, 0f, 1f) ;
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount = ziZhi_HpProp;
             //self.PetZiZhiItemList[0].transform.Find("Image_56").gameObject.SetActive(ziZhi_HpProp >= showImage_56);

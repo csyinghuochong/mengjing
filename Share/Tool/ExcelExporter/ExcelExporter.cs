@@ -103,7 +103,6 @@ namespace ET
                 template = File.ReadAllText("Template.txt");
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-
                 string nameWithoutCS = null;
                 
                 if (name != "All")

@@ -17,8 +17,8 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
             self.E_ActivateButton.AddListener(self.OnButtonActivate);
-            self.E_UseButton.AddListenerAsync(self.OnButtonUse);
-            self.E_ShouHuiButton.AddListenerAsync(self.OnButtonUse);
+            self.E_UseButton.AddListener(self.OnButtonUse);
+            self.E_ShouHuiButton.AddListener(self.OnButtonUse);
 
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
@@ -77,7 +77,7 @@ namespace ET.Client
             Log.Debug($"OnButtonActivate");
         }
 
-        private static async ETTask OnButtonUse(this ES_ChengJiuPetTuJian self)
+        private static  void  OnButtonUse(this ES_ChengJiuPetTuJian self)
         {
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             JingLingInfo jingLingInfo = chengJiuComponent.JingLingList[self.JingLingId];
