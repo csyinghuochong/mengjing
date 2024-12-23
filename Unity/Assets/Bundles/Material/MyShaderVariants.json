@@ -1,6 +1,6 @@
 {
     "ShaderTotalCount": 113,
-    "VariantTotalCount": 243,
+    "VariantTotalCount": 245,
     "ShaderVariantInfos": [
         {
             "AssetPath": "Resources/unity_builtin_extra",
@@ -39,8 +39,7 @@
                 {
                     "PassType": 8,
                     "Keywords": [
-                        "INSTANCING_ON",
-                        "SHADOWS_DEPTH"
+                        "INSTANCING_ON"
                     ]
                 }
             ]
@@ -866,9 +865,21 @@
                     ]
                 },
                 {
+                    "PassType": 13,
+                    "Keywords": [
+                        "INSTANCING_ON"
+                    ]
+                },
+                {
                     "PassType": 14,
                     "Keywords": [
                         ""
+                    ]
+                },
+                {
+                    "PassType": 14,
+                    "Keywords": [
+                        "INSTANCING_ON"
                     ]
                 }
             ]

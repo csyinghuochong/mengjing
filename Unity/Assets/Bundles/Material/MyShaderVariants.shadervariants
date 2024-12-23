@@ -23,7 +23,7 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 8
-      - keywords: INSTANCING_ON SHADOWS_DEPTH
+      - keywords: INSTANCING_ON
         passType: 8
   - first: {fileID: 103, guid: 0000000000000000f000000000000000, type: 0}
     second:
@@ -325,7 +325,11 @@ ShaderVariantCollection:
         passType: 8
       - keywords: 
         passType: 13
+      - keywords: INSTANCING_ON
+        passType: 13
       - keywords: 
+        passType: 14
+      - keywords: INSTANCING_ON
         passType: 14
   - first: {fileID: 4800000, guid: 341b058cd7dee4f5cba5cc59a513619e, type: 3}
     second:
