@@ -113,7 +113,6 @@ namespace ET.Server
              numericComponent.ApplyValue((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
              numericComponent.ApplyValue(NumericType.JueXingAnger, 0, false);
              numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, false);
-             numericComponent.ApplyValue(NumericType.ZeroClock, 0, false);
              numericComponent.ApplyValue(NumericType.MakeShuLianDu_1, 50, false);
              numericComponent.ApplyValue(NumericType.MakeShuLianDu_2, 50, false);
 

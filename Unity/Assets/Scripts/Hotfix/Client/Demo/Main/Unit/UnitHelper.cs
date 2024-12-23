@@ -131,7 +131,7 @@ namespace ET.Client
             rechargeNum *= 10;
             rechargeNum += self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp);
 
-            Log.Info(
+            Log.Debug(
                 $" GetMaoXianExp:  {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber)}   {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp)}");
 
             return rechargeNum;
