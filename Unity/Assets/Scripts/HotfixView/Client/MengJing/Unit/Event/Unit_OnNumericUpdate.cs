@@ -212,12 +212,6 @@
                 case NumericType.TitleID:
                     args.Defend.GetComponent<UIPlayerHpComponent>()?.UpdateShow();
                     break;
-                case NumericType.ZeroClock:
-                    root.GetComponent<UserInfoComponentC>().ClearDayData();
-                    root.GetComponent<TaskComponentC>().OnZeroClockUpdate();
-                    root.GetComponent<ActivityComponentC>().OnZeroClockUpdate();
-                    root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnZeroClockUpdate();
-                    break;
                 case NumericType.HongBao:
                     int hongbao = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.HongBao);
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnHongBao(hongbao);

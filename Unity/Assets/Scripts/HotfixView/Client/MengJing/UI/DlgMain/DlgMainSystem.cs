@@ -29,6 +29,16 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TeamUpdatet_ZeroClock : AEvent<Scene, ZeroClock>
+    {
+        protected override async ETTask Run(Scene scene, ZeroClock args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnZeroClockUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
 
     [Event(SceneType.Demo)]
     public class CommonHintErrorEvent : AEvent<Scene, CommonHintError>

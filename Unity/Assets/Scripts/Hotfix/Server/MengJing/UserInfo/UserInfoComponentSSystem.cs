@@ -624,11 +624,15 @@ namespace ET.Server
             self.UpdateRoleData(UserDataType.Vitality, updatevalue.ToString(), notice);
             //updatevalue = ComHelp.GetMaxBaoShiDu() - self.UserInfo.BaoShiDu;
             //self.UpdateRoleData(UserDataType.BaoShiDu, updatevalue.ToString(), notice);
-            numericComponent.ApplyValue(NumericType.ZeroClock, 1, notice);
             self.ClearDayData();
-            self.LastLoginTime = TimeHelper.ServerNow();
             self.TodayOnLine = 0;
             self.ShouLieKill = 0;
+            self.LastLoginTime = TimeHelper.ServerNow();
+            
+            if (notice)
+            {
+                MapMessageHelper.SendToClient( unit, M2C_ZeroClock.Create() );
+            }
         }
 
         public static void ClearDayData(this UserInfoComponentS self)

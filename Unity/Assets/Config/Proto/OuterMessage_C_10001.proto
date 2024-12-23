@@ -3786,7 +3786,7 @@ message U2C_DonationRankListResponse // IUnionActorResponse
 	repeated RankingInfo RankList = 1;		//排行榜列表
 }
 
-message M2C_UnionRaceInfoResult // ILocationMessage
+message M2C_UnionRaceInfoResult // IMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -3818,6 +3818,12 @@ message M2C_HorseNoticeInfo // IMessage
 	int64 ActorId = 93;
 	string NoticeText = 1;
 	int32 NoticeType = 2;
+}
+
+message M2C_ZeroClock // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
 }
 
 message UnionListItem

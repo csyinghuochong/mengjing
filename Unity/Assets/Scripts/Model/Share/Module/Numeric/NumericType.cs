@@ -30,7 +30,6 @@
         public const int LastGameTime = 3026;
         public const int Ling_DiLv = 3027;
         public const int Ling_DiExp = 3028;
-        public const int ZeroClock = 3029;
         public const int XiuLian_ExpNumber = 3030;                                   //经验修炼次数
         public const int XiuLian_CoinNumber = 3031;                                  //金币修炼次数
         public const int XiuLian_ExpTime = 3032;
@@ -185,10 +184,7 @@
         public const int GemWarehouseOpen = 3185;
         public const int PaiMaiOpen = 3186;
         public const int UpdateActivty = 3187;                                     //更新活动
-        public const int MasterPlayerId = 3188;                                          //主人【玩家】
         public const int PaiMaiTodayGold = 3189;
-        public const int ShenMiDungeonNumber = 3190;
-        public const int BlackRoom = 3191;
         public const int UnionAttribute_1 = 3192;
         public const int UnionAttribute_2 = 3193;
         public const int UnionAttributeFail_1 = 3194;
@@ -197,7 +193,6 @@
         public const int PetFightIndex = 3197;
         public const int PetMeleeMoLi = 3198; //宠物乱斗 魔力
         public const int PetMeleeDungeonId = 3199; // 宠物乱斗 过关MapId 
-        
         public const int DropItemId = 4000;
         public const int DropItemNum = 4001;
         public const int DropType = 4002; //0 公共掉落    1私人掉落

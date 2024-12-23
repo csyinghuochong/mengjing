@@ -591,6 +591,11 @@ namespace ET.Client
         public Unit Unit;
     }
 
+    public struct ZeroClock
+    {
+        
+    }
+
     public struct EnterCellDungeon
     {
     }

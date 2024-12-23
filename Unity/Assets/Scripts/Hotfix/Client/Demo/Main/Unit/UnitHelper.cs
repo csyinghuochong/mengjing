@@ -18,8 +18,7 @@ namespace ET.Client
 
         public static bool IsBackRoom(this Unit self)
         {
-            int black = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.BlackRoom);
-            return black != 0;
+            return false;
         }
 
         public static bool IsPasture(this Unit self)

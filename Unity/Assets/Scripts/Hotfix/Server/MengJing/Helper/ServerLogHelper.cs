@@ -364,12 +364,7 @@ namespace ET.Server
         /// <param name="unit"></param>
         public static void CheckBlackRoom(Unit unit)
         {
-            bool black = false;
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();  
-            if (black)
-            {
-                numericComponent.ApplyValue( NumericType.BlackRoom, 1 );
-            }
+            
         }
 
         /// <summary>

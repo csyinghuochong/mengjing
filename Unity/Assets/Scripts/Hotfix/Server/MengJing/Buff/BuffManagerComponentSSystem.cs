@@ -567,8 +567,6 @@ namespace ET.Server
                     return true;        
                 }
             }
-
-
             return false;
         }
         
