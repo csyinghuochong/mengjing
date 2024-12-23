@@ -52,23 +52,11 @@ namespace ET.Client
             {
                 self.OnGetMouseButtonDown_1();
             }
-
-            if (InputHelper.GetKeyDown((int)KeyCode.W))
-            {
-                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-
-                float float3 = MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
-
-                C2M_SkillCmd c2MSkillCmd = C2M_SkillCmd.Create();
-                c2MSkillCmd.SkillID = 62000503;
-                c2MSkillCmd.TargetAngle = (int)math.floor(float3);
-                self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
-            }
-
+            
             if (InputHelper.GetKeyDown((int)KeyCode.S))
             {
                 // 按 S键 测试屏幕震动，或技能 烈地击
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
+                //self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
             }
             
             if (InputHelper.GetKeyDown((int)KeyCode.R))
@@ -134,7 +122,7 @@ namespace ET.Client
                 //     return;
                 // }
                 // 测试技能
-                List<int> skillids = new List<int>() { 80000101 };
+                List<int> skillids = new List<int>() { 80000202 }; //40000011 40000012
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 long targetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
 

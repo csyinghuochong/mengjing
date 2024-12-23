@@ -24,7 +24,6 @@ namespace ET.Client
 
             if (self.randomName_xing == null)
             {
-                Log.Warning("222222222");
                 var path_1 = ABPathHelper.GetTextPath("RandName_Xing");
                 var path_2 = ABPathHelper.GetTextPath("RandName_Name");
                 TextAsset textAsset1 = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(path_1);
@@ -36,7 +35,6 @@ namespace ET.Client
 
         private static void LoadWWW_Xing(this LanguageComponent self, string wwwStr)
         {
-            Log.Warning("1111111111111111111");
             wwwStr = wwwStr.Replace("\r", "");
             wwwStr = wwwStr.Replace("\n", "");
 

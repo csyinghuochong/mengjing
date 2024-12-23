@@ -166,12 +166,11 @@ namespace ET.Client
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-
                     if (cardtransform > 0)
                     {
                         self.OnCardTranfer(cardtransform, false);
                     }
-                    else
+                    else 
                     {
                         self.OnRunRaceTranfer(runmonsterId, false);
                     }
@@ -180,9 +179,6 @@ namespace ET.Client
                     {
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
                     }
-
-                    Log.Debug(
-                        $"runmonsterId:  {runmonsterId}   cardtransform:{cardtransform}     id:{unit.Id}    instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
                     break;
                 case UnitType.Stall:
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Player/BaiTan");
@@ -194,28 +190,36 @@ namespace ET.Client
                     int userMaterModel = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UseMasterModel);
                     long masterId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
                     Unit master = unit.GetParent<UnitComponent>().Get(masterId);
-
-                    if (userMaterModel == 1 && master != null
-                        && master.GetComponent<GameObjectComponent>() != null
-                        && master.GetComponent<GameObjectComponent>().GameObject != null)
+                    numericComponent = unit.GetComponent<NumericComponentC>();
+                    
+                    cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
+                    self.OnCardTranfer(cardtransform, false);
+                    
+                    if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
-                        GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
-                        self.OnLoadGameObject(gameObject, self.InstanceId);
-                    }
-                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
-                    {
-                        //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
-                        int itemid = monsterCof.Parameter[1];
-                        int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
-                    }
-                    else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
-                    {
-                        self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
-                    }
-                    else
-                    {
-                        self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
+                        if (userMaterModel == 1 && master != null
+                            && master.GetComponent<GameObjectComponent>() != null
+                            && master.GetComponent<GameObjectComponent>().GameObject != null)
+                        {
+                            //GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
+                            //self.OnLoadGameObject(gameObject, self.InstanceId);
+                        
+                        }
+                        else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58)
+                        {
+                            //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
+                            int itemid = monsterCof.Parameter[1];
+                            int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
+                            self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
+                        }
+                        else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
+                        {
+                            self.UnitAssetsPath = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
+                        }
+                        else
+                        {
+                            self.UnitAssetsPath = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
+                        }
                     }
 
                     Log.Debug($"monster: id:{unit.Id}   instanceid:{self.InstanceId}   UnitAssetsPath：{self.UnitAssetsPath}");
@@ -550,9 +554,7 @@ namespace ET.Client
                     int weaponid = numericComponent.GetAsInt(NumericType.Now_Weapon);
                     List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
                     go.transform.name = unit.Id.ToString();
-
-                    Log.Debug($"UnitType.Player.go.transform.name:  {go.transform.name}");
-
+                    
                     if (SettingData.AnimController == 0)
                     {
                         unit.AddComponent<AnimatorComponent>();
@@ -1207,20 +1209,21 @@ namespace ET.Client
                 unit.RemoveComponent<EffectViewComponent>(); //添加特效组建
                 unit.RemoveComponent<SkillYujingComponent>();
                 unit.RemoveComponent<UIPlayerHpComponent>();
+                unit.RemoveComponent<UIMonsterHpComponent>();
             }
 
             if (monsterid > 0)
             {
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
+                
                 self.UnitAssetsPath = path;
             }
             else
             {
-                //string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
                 self.UnitAssetsPath = string.Empty;
             }
-
+           
             self.BianShenEffect = unit.MainHero && remove;
         }
 

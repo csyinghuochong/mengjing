@@ -40,31 +40,36 @@ namespace ET.Server
                 {
                     aiComponent.TargetID = 0;
                 }
-                else if( skillManagerComponent.IsCanUseSkill (skillId) == ErrorCode.ERR_Success)
+                else
                 {
-                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-                    float3 direction = target.Position - unit.Position;
-
-                    C2M_SkillCmd cmd = C2M_SkillCmd.Create();
-                    //触发技能
-                    cmd.TargetID = target.Id;
-                    cmd.SkillID = skillId;
-
-                    if (skillConfig.SkillZhishiTargetType == 1)  //自身点
+                    float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
+                    if(distance <= aiComponent.ActDistance && skillManagerComponent.IsCanUseSkill (skillId) == ErrorCode.ERR_Success)
                     {
-                        cmd.TargetAngle = 0;
-                        cmd.TargetDistance = 0;
-                    }
-                    else
-                    {
-                        float ange = math.degrees(math.atan2(direction.x, direction.z));
-                        cmd.TargetAngle = (int)math.floor(ange);
-                        cmd.TargetDistance = math.distance(unit.Position, target.Position);
-                    }
+                        SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+                        float3 direction = target.Position - unit.Position;
 
-                    skillManagerComponent.OnUseSkill(cmd, true);
-                    rigidityEndTime = (long)(SkillConfigCategory.Instance.Get(cmd.SkillID).SkillRigidity * 1000) + TimeHelper.ClientNow();
+                        C2M_SkillCmd cmd = C2M_SkillCmd.Create();
+                        //触发技能
+                        cmd.TargetID = target.Id;
+                        cmd.SkillID = skillId;
+
+                        if (skillConfig.SkillZhishiTargetType == 1)  //自身点
+                        {
+                            cmd.TargetAngle = 0;
+                            cmd.TargetDistance = 0;
+                        }
+                        else
+                        {
+                            float ange = math.degrees(math.atan2(direction.x, direction.z));
+                            cmd.TargetAngle = (int)math.floor(ange);
+                            cmd.TargetDistance = math.distance(unit.Position, target.Position);
+                        }
+
+                        skillManagerComponent.OnUseSkill(cmd, true);
+                        rigidityEndTime = (long)(SkillConfigCategory.Instance.Get(cmd.SkillID).SkillRigidity * 1000) + TimeHelper.ClientNow();
+                    }
                 }
+
                 if (rigidityEndTime > stateComponent.RigidityEndTime)
                 {
                     stateComponent.SetRigidityEndTime(rigidityEndTime);

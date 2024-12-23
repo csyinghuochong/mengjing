@@ -103,7 +103,7 @@ namespace ET.Server
             
             if (self.StateTypeGet(StateTypeEnum.Silence))
             {
-                if (skillConfig.Id != 60000011 && skillConfig.SkillActType != 0)
+                if ( skillConfig.SkillActType != 0) 
                 {
                     return ErrorCode.ERR_CanNotUseSkill_Silence;
                 }
