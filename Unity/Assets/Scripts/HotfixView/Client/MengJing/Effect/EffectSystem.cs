@@ -57,9 +57,7 @@ namespace ET.Client
 
                     return;
                 }
-
-                self.EffectObj = gameObject;
-                self.EffectObj.name = self.EffectConfig.EffectName;
+                
                 if (self.EffectData.InstanceId == 0 || gameObject == null)
                 {
                     self.EffectState = BuffState.Finished;
@@ -75,6 +73,8 @@ namespace ET.Client
                     return;
                 }
 
+                self.EffectObj = gameObject;
+                self.EffectObj.name = self.EffectConfig.EffectName;
                 int skillParentID = self.EffectConfig.SkillParent;
                 //显示特效大小。
                 //if (this.EffectData.SkillId != 0)
