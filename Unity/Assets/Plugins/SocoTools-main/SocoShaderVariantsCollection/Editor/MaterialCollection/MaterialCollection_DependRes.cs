@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -12,13 +13,29 @@ namespace Soco.ShaderVariantsCollection
     {
         private List<string> GetConfigFile()
         {
-            //return new List<string>() { "Assets/Bundles/" };
-            List<string> allasset =   new List<string>();
-            string assetpath = "Assets/Bundles/";
+            List<string> allAssets = new List<string>();
+            string assetPath = "Assets/Bundles/";
 
-            //获取assetpath 下的所有资源 和 引用（GetDependencies）到的所有资源。填充到allasset
-            
-            return allasset;
+            // 获取assetpath 下的所有资源 和 引用（GetDependencies）到的所有资源。填充到allasset
+            string[] assetFiles = AssetDatabase.FindAssets("", new[] { assetPath });
+
+            foreach (string assetGuid in assetFiles)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(assetGuid);
+                allAssets.Add(path);
+
+
+                string[] dependencies = AssetDatabase.GetDependencies(path);
+                foreach (string dependency in dependencies)
+                {
+                    if (!allAssets.Contains(dependency))
+                    {
+                        allAssets.Add(dependency);
+                    }
+                }
+            }
+
+            return allAssets;
         }
 
         public override void AddMaterialBuildDependency(IList<Material> buildDependencyList)
