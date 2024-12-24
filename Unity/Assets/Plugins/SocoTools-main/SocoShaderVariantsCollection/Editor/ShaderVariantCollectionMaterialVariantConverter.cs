@@ -89,7 +89,7 @@ public class ShaderVariantCollectionMaterialVariantConverter
                 collectorIndex++;
             }
             
-            Debug.Log($"[材质收集]共收集到{mMaterials}个材质");
+            Debug.Log($"[材质收集]共收集到{mMaterials.Count}个材质");
 
             success = true;
         }
