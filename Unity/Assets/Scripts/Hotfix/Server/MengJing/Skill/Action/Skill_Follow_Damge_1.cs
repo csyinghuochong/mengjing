@@ -1,6 +1,8 @@
 ﻿namespace ET.Server
 {
-    //量子导弹
+    /// <summary>
+    /// 量子导弹
+    /// </summary>
     public class Skill_Follow_Damge_1 : SkillHandlerS
     {
         

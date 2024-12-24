@@ -4,7 +4,9 @@ using Unity.Mathematics;
 namespace ET.Server
 {
 
-    //全地图随机子弹
+    /// <summary>
+    /// 全地图随机子弹
+    /// </summary>
     public class Skill_ComTargetMove_RangDamge_4 : SkillHandlerS
     {
         

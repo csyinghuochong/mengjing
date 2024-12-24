@@ -2,7 +2,9 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    //旋转攻击
+    /// <summary>
+    /// 旋转攻击
+    /// </summary>
     public class Skill_XuanZhuan_Attack_2 : SkillHandlerS
     {
 

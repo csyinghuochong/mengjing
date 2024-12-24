@@ -3,7 +3,9 @@
 namespace ET.Server
 {
 
-    //钩子技能:指定目标
+    /// <summary>
+    /// 钩子技能:指定目标
+    /// </summary>
     public class Skill_Hook_1 : SkillHandlerS
     {
         //初始化

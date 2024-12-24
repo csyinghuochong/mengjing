@@ -4,7 +4,9 @@ using Unity.Mathematics;
 namespace ET.Server
 {
 
-    //子弹1
+    /// <summary>
+    /// 子弹1
+    /// </summary>
     public class Skill_ComTargetMove_RangDamge_1 : SkillHandlerS
     {
 

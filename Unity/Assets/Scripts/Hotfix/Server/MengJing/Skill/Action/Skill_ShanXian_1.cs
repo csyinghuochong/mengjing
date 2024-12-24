@@ -1,7 +1,9 @@
 ﻿namespace ET.Server
 {
 
-    //闪现(玩家技能）
+    /// <summary>
+    /// 闪现(玩家技能）
+    /// </summary>
     public class Skill_ShanXian_1 : SkillHandlerS
     {
 

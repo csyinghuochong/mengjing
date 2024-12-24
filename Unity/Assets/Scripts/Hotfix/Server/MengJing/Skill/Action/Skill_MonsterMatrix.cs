@@ -3,7 +3,9 @@
 namespace ET.Server
 {
 
-    //创建怪物矩阵
+    /// <summary>
+    /// 创建怪物矩阵
+    /// </summary>
     public class Skill_MonsterMatrix : SkillHandlerS
     {
         //初始化

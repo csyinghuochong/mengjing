@@ -4,7 +4,9 @@ using Unity.Mathematics;
 namespace ET.Server
 {
 
-    //范围轰炸
+    /// <summary>
+    /// 范围轰炸
+    /// </summary>
     public class Skill_Range_Bomb_1 : SkillHandlerS
     {
         

@@ -3,7 +3,9 @@
 namespace ET.Server
 {
 
-    //给主人(宠物)加Buff
+    /// <summary>
+    /// 给主人(宠物)加Buff
+    /// </summary>
     public class Skill_Pet_AddBuff : SkillHandlerS
     {
 

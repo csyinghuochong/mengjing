@@ -4,7 +4,9 @@ using Unity.Mathematics;
 namespace ET.Server
 {
 
-    //拉怪技能:瞬间拉至自身/目标点
+    /// <summary>
+    /// 拉怪技能:瞬间拉至自身/目标点
+    /// </summary>
     public class Skill_Pull_Monster_1 : SkillHandlerS
     {
         //初始化

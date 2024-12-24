@@ -3,7 +3,9 @@
 namespace ET.Server
 {
 
-    //持续性伤害
+    /// <summary>
+    /// 持续性伤害
+    /// </summary>
     public class Skill_ComSelfRang_Damge_1 : SkillHandlerS
     {
      

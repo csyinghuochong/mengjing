@@ -3,7 +3,9 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    //指定目标攻击
+    /// <summary>
+    /// 指定目标攻击
+    /// </summary>
     public class Skill_ComTargetMove_Damge_1 : SkillHandlerS
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)

@@ -3,7 +3,9 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    //牵引拉怪
+    /// <summary>
+    /// 牵引拉怪
+    /// </summary>
     public class Skill_Pull_Monster_2 : SkillHandlerS
     {
         //初始化

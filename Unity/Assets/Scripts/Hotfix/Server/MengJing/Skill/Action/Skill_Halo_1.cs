@@ -1,6 +1,8 @@
 ﻿namespace ET.Server
 {
-    //光环
+    /// <summary>
+    /// 光环技能
+    /// </summary>
     public class Skill_Halo_1 : SkillHandlerS
     {
 

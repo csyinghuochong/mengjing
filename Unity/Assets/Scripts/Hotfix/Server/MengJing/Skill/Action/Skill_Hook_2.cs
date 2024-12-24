@@ -3,7 +3,9 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    //钩子技能:指定范围
+    /// <summary>
+    /// 钩子技能:指定范围
+    /// </summary>
     public class Skill_Hook_2 : SkillHandlerS
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)

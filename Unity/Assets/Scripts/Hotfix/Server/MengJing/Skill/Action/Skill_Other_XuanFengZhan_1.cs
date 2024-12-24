@@ -2,7 +2,9 @@
 namespace ET.Server
 {
 
-    //旋风斩
+    /// <summary>
+    /// 旋风斩
+    /// </summary>
     public class Skill_Other_XuanFengZhan_1 : SkillHandlerS
     {
       

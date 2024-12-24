@@ -1,6 +1,8 @@
 ﻿namespace ET.Server
 {
-    //子弹2
+    /// <summary>
+    /// 子弹2
+    /// </summary>
     public class Skill_ComTargetMove_RangDamge_2 : SkillHandlerS
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
