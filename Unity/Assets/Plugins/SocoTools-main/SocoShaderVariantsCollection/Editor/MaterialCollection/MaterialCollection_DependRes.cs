@@ -16,7 +16,7 @@ namespace Soco.ShaderVariantsCollection
             List<string> allasset =   new List<string>();
             string assetpath = "Assets/Bundles/";
 
-            //获取assetpath 下的所有资源 和 引用到的所有资源。填充到allasset
+            //获取assetpath 下的所有资源 和 引用（GetDependencies）到的所有资源。填充到allasset
             
             return allasset;
         }
