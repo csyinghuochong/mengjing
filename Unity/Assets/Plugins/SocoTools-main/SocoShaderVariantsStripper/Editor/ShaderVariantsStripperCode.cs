@@ -37,6 +37,11 @@ namespace Soco.ShaderVariantsStripper
         {
             LoadConfigs();
 
+            if (data.Count == 0)
+            {
+                return;
+            }
+            
             ShaderCompilerData workaround = data[0];
 
             int stripCount = 0;
