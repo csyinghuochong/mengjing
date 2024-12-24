@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: grad12_14
+  m_Shader: {fileID: 4800000, guid: 895a57bfcfc97594c8b5267b157c902b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: b90d8dc6e2defc648a57ac06d08d4f16, type: 3}
+        m_Scale: {x: 2, y: 3}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 463f3e17448c6f147a7b7811acdfb56f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TEX:
+        m_Texture: {fileID: 2800000, guid: b90d8dc6e2defc648a57ac06d08d4f16, type: 3}
+        m_Scale: {x: 2, y: 4}
+        m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 2800000, guid: b90d8dc6e2defc648a57ac06d08d4f16, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Cutoff: 0.5
+    - _InvFade: 1
+    - _Mask_Range: 0
+    - _Tex_power: 0.8
+    - _U: 0
+    - _U_Mask: 0
+    - _U_copy: 0
+    - _V: -0.9
+    - _V_Mask: 0
+    - _V_copy: -1.5
+    - _mask_power: 0.5
+    m_Colors:
+    - _Color: {r: 0.8406688, g: 0.44299307, b: 1, a: 0.853}
+    - _TintColor: {r: 0.40550053, g: 0.27249137, b: 0.8235294, a: 1}
+    - _glowcolor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _node_2264: {r: 0.5, g: 0.5, b: 0.5, a: 1}

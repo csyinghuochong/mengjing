@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: StartWave_Electro 3
+  m_Shader: {fileID: 4800000, guid: a2679aaa9d6558442bc71873a2128c68, type: 3}
+  m_ShaderKeywords: _USERAMP_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DistortionNoise:
+        m_Texture: {fileID: 2800000, guid: 1f256e8a66ea42c4ea6aa1c16a11c9e7, type: 3}
+        m_Scale: {x: 3, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMask:
+        m_Texture: {fileID: 2800000, guid: 69c4a6898925c474c847db66695e96e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientMask02:
+        m_Texture: {fileID: 2800000, guid: 69c4a6898925c474c847db66695e96e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 1}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise01:
+        m_Texture: {fileID: 2800000, guid: cfe985002915cc14d9f8a13a2f98f53f, type: 3}
+        m_Scale: {x: 4, y: 0.75}
+        m_Offset: {x: 0, y: 0}
+    - _Noise02:
+        m_Texture: {fileID: 2800000, guid: 1746d72c8cbcebf4ebe6ab93898e2f61, type: 3}
+        m_Scale: {x: 1, y: 0.75}
+        m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: b51ee46f15552054686c64a0c57efb62, type: 3}
+        m_Scale: {x: 1.5, y: 1}
+        m_Offset: {x: 0.1, y: 0}
+    m_Floats:
+    - _Cutoff: 0.5
+    - _DistortionPower: 0.091
+    - _FinalPower: 2.5
+    - _MaskPower: 0.71
+    - _OpacityBoost: 1.77
+    - _UseRamp: 1
+    - _X_Speed_copy_copy: -2.4
+    - _node_817: 0
+    m_Colors:
+    - _TintColor: {r: 0.8880324, g: 0.49264705, b: 1, a: 1}
