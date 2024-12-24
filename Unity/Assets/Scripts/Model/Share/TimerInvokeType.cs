@@ -44,6 +44,7 @@
         public const int RoleBullet5Timer = 232;
         public const int RoleBullet6Timer = 233;
         public const int RoleBullet7Timer = 234;
+        public const int RoleBullet7TimerC = 235;
         public const int ResourcesLoaderTimer = 240;
         
         public const int RoomUpdate = 301;

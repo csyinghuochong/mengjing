@@ -858,11 +858,12 @@ namespace ET.Client
 
             if (unit.Type == UnitType.Bullet)
             {
-                // SkillConfig skillConfig = SkillConfigCategory.Instance.Get(unit.ConfigId);
-                // if (skillConfig.GameObjectName.Equals(StringBuilderHelper.Skill_ComTargetMove_RangDamge_2))
-                // {
-                //     unit.AddComponent<RoleBullet2Componnet>().BaseOnBulletInit(unit.ConfigId);
-                // }
+                SkillConfig skillConfig = SkillConfigCategory.Instance.Get(unit.ConfigId);
+                if (skillConfig.GameObjectName.Equals(ConfigData.Skill_ComTargetMove_RangDamge_7))
+                {
+                    long masterid = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
+                    unit.AddComponent<RoleBullet7Componnet>().OnBaseBulletInit(masterid);
+                }
             }
         }
 

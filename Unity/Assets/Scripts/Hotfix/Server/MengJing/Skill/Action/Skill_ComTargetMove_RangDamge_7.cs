@@ -28,9 +28,12 @@ namespace ET.Server
             {
                 skillS.BulletUnit.Position = skillS.TheUnitTarget.Position;
             }
+            if (skillS.BulletUnit!= null && skillS.TheUnitTarget==null)
+            {
+                skillS.BulletUnit.GetParent<UnitComponent>().Remove(skillS.BulletUnit.Id);
+                skillS.BulletUnit = null;
+            }
 
-            
-            
             if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
                 skillS.SetSkillState(SkillState.Finished);
@@ -40,6 +43,11 @@ namespace ET.Server
 
         public override void OnFinished(SkillS skillS)
         {
+            if (skillS.BulletUnit!= null )
+            {
+                skillS.BulletUnit.GetParent<UnitComponent>().Remove(skillS.BulletUnit.Id);
+                skillS.BulletUnit = null;
+            }
             skillS.Clear();
         }
 
@@ -56,7 +64,7 @@ namespace ET.Server
             }
             
             Unit target = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(skillS.SkillInfo.TargetID);
-            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0,
+            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.SkillInfo.TargetID, skillS.SkillConf.Id, 0,
                 target.Position,  new CreateMonsterInfo());
             unit.AddComponent<RoleBullet7Componnet>().OnBaseBulletInit(skillS, skillS.TheUnitFrom.Id);
             skillS.BulletUnit = unit;

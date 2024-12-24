@@ -8,7 +8,7 @@ namespace ET.Server
     /// 持续伤害
     /// </summary>
     [Invoke(TimerInvokeType.RoleBullet7Timer)]
-    public class RoleBullet7Timer : ATimer<RoleBullet7Componnet>
+    public class RoleBullet7Timer: ATimer<RoleBullet7Componnet>
     {
         protected override void Run(RoleBullet7Componnet self)
         {
@@ -52,7 +52,7 @@ namespace ET.Server
             self.BuffEndTime = 1000 * (int)skillS.GetTianfuProAdd((int)SkillAttributeEnum.AddSkillLiveTime) + skillS.SkillConf.SkillLiveTime +
                     TimeHelper.ServerNow();
 
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.RoleBullet6Timer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.RoleBullet7Timer, self);
         }
 
         public static void OnUpdate(this RoleBullet7Componnet self)

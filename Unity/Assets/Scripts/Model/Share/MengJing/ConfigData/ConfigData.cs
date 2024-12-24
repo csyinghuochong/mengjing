@@ -907,6 +907,7 @@ namespace ET
 
         public const string Skill_XuanZhuan_Attack_2 = "Skill_XuanZhuan_Attack_2";
 
+        public const string Skill_ComTargetMove_RangDamge_7 = "Skill_ComTargetMove_RangDamge_7";
 
         /// <summary>
         /// 三个对应等级套装属性
