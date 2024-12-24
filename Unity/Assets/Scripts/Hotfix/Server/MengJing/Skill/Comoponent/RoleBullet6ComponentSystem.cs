@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    
+    /// <summary>
+    /// 持续伤害
+    /// </summary>
     [Invoke(TimerInvokeType.RoleBullet6Timer)]
     public class RoleBullet6Timer : ATimer<RoleBullet6Componnet>
     {

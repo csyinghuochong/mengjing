@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    
+    /// <summary>
+    /// 伤害一次
+    /// </summary>
     [EntitySystemOf(typeof (RoleBullet1Componet))]
     [FriendOf(typeof (RoleBullet1Componet))]
     public static partial class RoleBullet1ComponentSystem
