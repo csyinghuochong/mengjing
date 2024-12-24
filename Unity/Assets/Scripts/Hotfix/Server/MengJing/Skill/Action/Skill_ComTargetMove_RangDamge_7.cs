@@ -39,6 +39,8 @@ namespace ET.Server
                 skillS.SetSkillState(SkillState.Finished);
                 return;
             }
+
+            //skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
