@@ -10,7 +10,7 @@ namespace ET.Client
         public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
             skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
-            skils.SkillExcuteHurtTime = TimeHelper.ServerNow() + 100;
+            skils.SkillExcuteHurtTime += 100;
         }
 
         public override void OnExecute(SkillC skils)
