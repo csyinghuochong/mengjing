@@ -6,7 +6,6 @@ namespace ET.Client
     /// </summary>
     public class Skill_ComTargetMove_RangDamge_7: SkillHandlerC
     {
-        
         public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
             skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
