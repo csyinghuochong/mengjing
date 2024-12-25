@@ -2,74 +2,76 @@
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "E3D/EffectEN/ADD_Top2"
 {
-	Properties
-	{
-		_MainTex("MainTex", 2D) = "white" {}
-		[HDR]_MainColor("MainColor", Color) = (1,1,1,1)
-		[HideInInspector] _texcoord( "", 2D ) = "white" {}
-		[HideInInspector] __dirty( "", Int ) = 1
-	}
+    Properties
+    {
+        _MainTex("MainTex", 2D) = "white" {}
+        [HDR]_MainColor("MainColor", Color) = (1,1,1,1)
+    }
 
-	SubShader
-	{
-		Tags{ "RenderType" = "Opaque"  "Queue" = "Overlay+0" }
-		Cull Off
-		ZWrite Off
-		ZTest Always
-		Blend One One
-		
-		CGPROGRAM
-		#include "UnityPBSLighting.cginc"
-		#pragma target 3.0
-		#pragma surface surf StandardCustomLighting keepalpha noshadow 
-		struct Input
-		{
-			float4 vertexColor : COLOR;
-			float2 uv_texcoord;
-		};
+    SubShader
+    {
+        Tags
+        {
+            "RenderType" = "Opaque" "Queue" = "Overlay+0"
+        }
+        Cull Off
+        ZWrite Off
+        ZTest Always
+        Blend One One
 
-		struct SurfaceOutputCustomLightingCustom
-		{
-			half3 Albedo;
-			half3 Normal;
-			half3 Emission;
-			half Metallic;
-			half Smoothness;
-			half Occlusion;
-			half Alpha;
-			Input SurfInput;
-			UnityGIInput GIData;
-		};
+        Pass
+        {
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-		uniform sampler2D _MainTex;
-		uniform float4 _MainTex_ST;
-		uniform float4 _MainColor;
+            // Properties
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            float4 _MainColor;
 
-		inline half4 LightingStandardCustomLighting( inout SurfaceOutputCustomLightingCustom s, half3 viewDir, UnityGI gi )
-		{
-			UnityGIInput data = s.GIData;
-			Input i = s.SurfInput;
-			half4 c = 0;
-			float2 uv_MainTex = i.uv_texcoord * _MainTex_ST.xy + _MainTex_ST.zw;
-			float4 tex2DNode5 = tex2D( _MainTex, uv_MainTex );
-			c.rgb = ( ( i.vertexColor * tex2DNode5 * _MainColor ) * ( i.vertexColor.a * tex2DNode5.a * _MainColor.a ) ).rgb;
-			c.a = 1;
-			return c;
-		}
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float4 color : COLOR;
+                float2 uv : TEXCOORD0;
+            };
 
-		inline void LightingStandardCustomLighting_GI( inout SurfaceOutputCustomLightingCustom s, UnityGIInput data, inout UnityGI gi )
-		{
-			s.GIData = data;
-		}
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+                float4 color : COLOR;
+                float2 uv : TEXCOORD0;
+            };
 
-		void surf( Input i , inout SurfaceOutputCustomLightingCustom o )
-		{
-			o.SurfInput = i;
-		}
+            Varyings vert(Attributes IN)
+            {
+                Varyings OUT;
+                OUT.positionCS = TransformObjectToHClip(IN.positionOS);
+                OUT.color = IN.color;
+                OUT.uv = IN.uv;
+                return OUT;
+            }
 
-		ENDCG
-	}
-	CustomEditor "ASEMaterialInspector"
+            half4 frag(Varyings IN) : SV_Target
+            {
+                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
+                float4 mainColor = _MainColor;
+                float4 vertexColor = IN.color;
+
+                // Calculate final color
+                float4 finalColor;
+                finalColor.rgb = (vertexColor * texColor * mainColor).rgb;
+                finalColor.a = 1;
+                return finalColor;
+            }
+
+            ENDHLSL
+        }
+    }
+
+    CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
 Version=16400
