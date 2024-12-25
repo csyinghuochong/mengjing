@@ -63,8 +63,8 @@ Shader "E3D/EffectEN/ADD_Top2"
                 // Calculate final color
                 float4 finalColor;
                 finalColor.rgb = (vertexColor * texColor * mainColor).rgb;
-                finalColor.a = 1;
-                return finalColor;
+                finalColor.a = texColor.a * IN.color.a * mainColor.a; // 1;
+                return finalColor; 
             }
 
             ENDHLSL
