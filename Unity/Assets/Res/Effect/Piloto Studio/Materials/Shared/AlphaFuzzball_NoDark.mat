@@ -12,6 +12,7 @@ Material:
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
+  - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -48,6 +49,7 @@ Material:
     - _BlendMode: 0
     - _CullMode: 0
     - _CullModeForward: 0
+    - _Culling: 0
     - _Desaturate: 0
     - _DisableErosion: 0
     - _DistortionEnable: 0
@@ -63,6 +65,7 @@ Material:
     - _FresnelScale: 1
     - _InvFade: 1
     - _MiddlePointPos: 0.5
+    - _MiddlePointPos1: 0.5
     - _MultiplyNoiseDesaturation: 1
     - _OpaqueCullMode: 2
     - _ReceivesSSR: 1
@@ -90,6 +93,7 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseAlphaOverride: 0
+    - _UsePixelation: 0
     - _UseRamp: 0
     - _UseShadowThreshold: 0
     - _UseSoftAlpha: 0
@@ -106,7 +110,8 @@ Material:
     - _DetailDistortionChannel: {r: 0, g: 0, b: 0, a: 1}
     - _DetailMultiplyChannel: {r: 1, g: 1, b: 1, a: 0}
     - _DetailNoisePanning: {r: 0.2, g: 0, b: 0, a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _DetailVertexOffsetChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _LastColor: {r: 1, g: 0, b: 0, a: 0}
@@ -114,6 +119,7 @@ Material:
     - _MainTextureChannel: {r: 1, g: 1, b: 1, a: 0}
     - _MainTexturePanning: {r: 0, g: 0, b: 0, a: 0}
     - _MidColor: {r: 1, g: 0.4447915, b: 0, a: 0}
+    - _Resolution: {r: 64, g: 64, b: 0, a: 0}
     - _UnlitColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _WhiteColor: {r: 1, g: 0.8950032, b: 0, a: 0}
   m_BuildTextureStacks: []

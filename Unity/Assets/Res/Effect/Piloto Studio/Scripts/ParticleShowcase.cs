@@ -20,14 +20,17 @@ namespace PilotoStudio
             {
                 particles.Add(t.gameObject);
             }
-            UpdateDisplayName();
+            PostUpdateLogic();
             particles[currentlyActive].SetActive(true);
         }
 
-        void UpdateDisplayName()
+        void PostUpdateLogic()
         {
             displayName.text = particles[currentlyActive].name;
-
+            if (particles[currentlyActive].TryGetComponent<ParticleHandler>(out ParticleHandler handler))
+            {
+                handler.Cast();
+            }
         }
 
 
@@ -46,7 +49,7 @@ namespace PilotoStudio
                 particles[currentlyActive].SetActive(true);
             }
 
-            UpdateDisplayName();
+            PostUpdateLogic();
         }
 
         public void ActivatePrevious()
@@ -64,7 +67,7 @@ namespace PilotoStudio
                 particles[currentlyActive].SetActive(true);
             }
 
-            UpdateDisplayName();
+            PostUpdateLogic();
         }
 
 
@@ -82,7 +85,12 @@ namespace PilotoStudio
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                particles[currentlyActive].GetComponent<ParticleSystem>().Play();
+          
+                if (particles[currentlyActive].TryGetComponent<ParticleSystem>(out ParticleSystem ps))
+                {
+                    ps.Play();
+                }
+                PostUpdateLogic() ;
             }
         }
 

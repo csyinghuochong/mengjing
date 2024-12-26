@@ -117,11 +117,13 @@ Shader "Hovl/Particles/Lightning"
 					UNITY_SETUP_INSTANCE_ID( i );
 					UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( i );
 					
+					float lp = 1;
 					#ifdef SOFTPARTICLES_ON
 						float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)));
 						float partZ = i.projPos.z;
 						float fade = saturate (_InvFade * (sceneZ-partZ));
-						i.color.a *= fade;
+						lp *= lerp(1, fade, _Usedepth);
+						i.color.a *= lp;
 					#endif
 
 					float2 uv0_MainTexture = i.texcoord.xy * _MainTexture_ST.xy + _MainTexture_ST.zw;
