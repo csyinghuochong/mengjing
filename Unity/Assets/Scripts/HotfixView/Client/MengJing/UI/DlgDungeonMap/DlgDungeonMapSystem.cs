@@ -203,10 +203,10 @@ namespace ET.Client
             }
         }
 
-        
-        
         private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
+            Log.Debug($"Enlarge map  chapterId:  {map}  {chapterId}");
+            
             if (!self.CanOpen(chapterId))
             {
                 FlyTipComponent.Instance.ShowFlyTip("未开启");
@@ -227,7 +227,6 @@ namespace ET.Client
             }
             
             self.ChapterId = chapterId;
-
             self.EnableBtns(false);
 
             self.CurrentMap = self.MapGameObjects[map];
@@ -244,11 +243,13 @@ namespace ET.Client
             targetPosition.x -= 250f;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
+                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
+                
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
                 List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
                 self.SetTitle(false);
-
+                
                 List<Transform> levels = new();
                 for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
                 {
@@ -383,7 +384,7 @@ namespace ET.Client
                         }
                     }
                 }
-
+                
                 // 默认选第一个
                 self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
 
@@ -396,8 +397,7 @@ namespace ET.Client
                 {
                     self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
                 }
-
-                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
+                
                 self.View.E_CloseButton.gameObject.SetActive(false);
                 self.View.E_BossRefreshButton.gameObject.SetActive(true);
                 self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
@@ -434,7 +434,7 @@ namespace ET.Client
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
 
             self.View.E_SelectImage.gameObject.SetActive(false);
-            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
+            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
             self.View.E_CloseButton.gameObject.SetActive(true);
             self.View.EG_MapPanelRectTransform.gameObject.SetActive(true);
             self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
