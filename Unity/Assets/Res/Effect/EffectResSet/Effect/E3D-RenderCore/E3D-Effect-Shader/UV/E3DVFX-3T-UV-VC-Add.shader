@@ -2,58 +2,81 @@
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "E3D/Effect/E3DVFX-3T-UV-VC-Add"
 {
-	Properties
-	{
-		[HDR]_BaseColor("BaseColor", Color) = (1,1,1,0)
-		_BaseMap("BaseMap", 2D) = "white" {}
-		_MaskMap("MaskMap", 2D) = "white" {}
-		_DetailMap("DetailMap", 2D) = "white" {}
-		[HideInInspector] _texcoord( "", 2D ) = "white" {}
-		[HideInInspector] __dirty( "", Int ) = 1
-	}
+    Properties
+    {
+        [HDR]_BaseColor("BaseColor", Color) = (1,1,1,0)
+        _BaseMap("BaseMap", 2D) = "white" {}
+        _MaskMap("MaskMap", 2D) = "white" {}
+        _DetailMap("DetailMap", 2D) = "white" {}
+    }
 
-	SubShader
-	{
-		Tags{ "RenderType" = "Transparent"  "Queue" = "Overlay+0" "IsEmissive" = "true"  }
-		Cull Off
-		ZWrite Off
-		Blend One One
-		
-		CGPROGRAM
-		#pragma target 3.0
-		#pragma exclude_renderers xbox360 xboxone ps4 psp2 n3ds wiiu 
-		#pragma surface surf Unlit keepalpha noshadow noambient novertexlights nolightmap  nodynlightmap nodirlightmap nofog nometa noforwardadd 
-		struct Input
-		{
-			float2 uv_texcoord;
-			float4 vertexColor : COLOR;
-		};
+    SubShader
+    {
+        Tags { "RenderType"="Transparent" "Queue"="Overlay+0" "IsEmissive"="true" }
+        Cull Off
+        ZWrite Off
+        Blend One One
 
-		uniform sampler2D _BaseMap;
-		uniform float4 _BaseMap_ST;
-		uniform sampler2D _MaskMap;
-		uniform float4 _MaskMap_ST;
-		uniform sampler2D _DetailMap;
-		uniform float4 _DetailMap_ST;
-		uniform float4 _BaseColor;
+        Pass
+        {
+            Name "ForwardLit"
+            Tags { "LightMode"="UniversalForward" }
 
-		inline half4 LightingUnlit( SurfaceOutput s, half3 lightDir, half atten )
-		{
-			return half4 ( 0, 0, 0, s.Alpha );
-		}
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
-		void surf( Input i , inout SurfaceOutput o )
-		{
-			float2 uv_BaseMap = i.uv_texcoord * _BaseMap_ST.xy + _BaseMap_ST.zw;
-			float2 uv_MaskMap = i.uv_texcoord * _MaskMap_ST.xy + _MaskMap_ST.zw;
-			float2 uv_DetailMap = i.uv_texcoord * _DetailMap_ST.xy + _DetailMap_ST.zw;
-			o.Emission = ( tex2D( _BaseMap, uv_BaseMap ) * tex2D( _MaskMap, uv_MaskMap ) * tex2D( _DetailMap, uv_DetailMap ) * _BaseColor * i.vertexColor * i.vertexColor.a ).rgb;
-			o.Alpha = 1;
-		}
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_MaskMap);
+            SAMPLER(sampler_MaskMap);
+            TEXTURE2D(_DetailMap);
+            SAMPLER(sampler_DetailMap);
+            float4 _BaseColor;
 
-		ENDCG
-	}
-	CustomEditor "ASEMaterialInspector"
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
+            };
+
+            struct Varyings
+            {
+                float4 positionHCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
+            };
+
+            Varyings vert(Attributes input)
+            {
+                Varyings output;
+                output.positionHCS = TransformObjectToHClip(input.positionOS);
+                output.uv = input.uv;
+                output.color = input.color;
+                return output;
+            }
+
+            half4 frag(Varyings input) : SV_Target
+            {
+                float2 uv_BaseMap = input.uv;
+                float2 uv_MaskMap = input.uv;
+                float2 uv_DetailMap = input.uv;
+
+                half4 baseColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv_BaseMap);
+                half4 maskColor = SAMPLE_TEXTURE2D(_MaskMap, sampler_MaskMap, uv_MaskMap);
+                half4 detailColor = SAMPLE_TEXTURE2D(_DetailMap, sampler_DetailMap, uv_DetailMap);
+
+                half4 finalColor = baseColor * maskColor * detailColor * _BaseColor * input.color * input.color.a;
+
+                return half4(finalColor.rgb, 1.0);
+            }
+            ENDHLSL
+        }
+    }
+    CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
 Version=16400

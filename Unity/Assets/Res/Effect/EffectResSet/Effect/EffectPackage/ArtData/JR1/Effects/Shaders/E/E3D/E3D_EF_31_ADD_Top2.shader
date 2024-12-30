@@ -6,14 +6,13 @@ Shader "E3D/EffectEN/ADD_Top2"
     {
         _MainTex("MainTex", 2D) = "white" {}
         [HDR]_MainColor("MainColor", Color) = (1,1,1,1)
+        [HideInInspector] _texcoord("", 2D) = "white" {}
+        [HideInInspector] __dirty("", Int) = 1
     }
 
     SubShader
     {
-        Tags
-        {
-            "RenderType" = "Opaque" "Queue" = "Overlay+0"
-        }
+        Tags { "RenderType" = "Opaque" "Queue" = "Overlay+0" }
         Cull Off
         ZWrite Off
         ZTest Always
@@ -21,56 +20,55 @@ Shader "E3D/EffectEN/ADD_Top2"
 
         Pass
         {
+            Name "ForwardLit"
+            Tags { "LightMode" = "UniversalForward" }
+
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #pragma target 3.0
 
-            // Properties
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-            float4 _MainColor;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 
             struct Attributes
             {
-                float4 positionOS : POSITION;
-                float4 color : COLOR;
-                float2 uv : TEXCOORD0;
+                float4 positionOS   : POSITION;
+                float2 uv           : TEXCOORD0;
+                float4 vertexColor  : COLOR;
             };
 
             struct Varyings
             {
-                float4 positionCS : SV_POSITION;
-                float4 color : COLOR;
-                float2 uv : TEXCOORD0;
+                float4 positionHCS  : SV_POSITION;
+                float2 uv           : TEXCOORD0;
+                float4 vertexColor  : COLOR;
             };
 
-            Varyings vert(Attributes IN)
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            float4 _MainColor;
+
+            Varyings vert(Attributes input)
             {
-                Varyings OUT;
-                OUT.positionCS = TransformObjectToHClip(IN.positionOS);
-                OUT.color = IN.color;
-                OUT.uv = IN.uv;
-                return OUT;
+                Varyings output;
+                output.positionHCS = TransformObjectToHClip(input.positionOS);
+                output.uv = input.uv;
+                output.vertexColor = input.vertexColor;
+                return output;
             }
 
-            half4 frag(Varyings IN) : SV_Target
+            half4 frag(Varyings input) : SV_TARGET
             {
-                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
-                float4 mainColor = _MainColor;
-                float4 vertexColor = IN.color;
-
-                // Calculate final color
-                float4 finalColor;
-                finalColor.rgb = (vertexColor * texColor * mainColor).rgb;
-                finalColor.a = texColor.a * IN.color.a * mainColor.a; // 1;
-                return finalColor; 
+                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+                float4 color = (input.vertexColor * texColor * _MainColor) * (input.vertexColor.a * texColor.a * _MainColor.a);
+                return half4(color.rgb, 1.0);
             }
 
             ENDHLSL
         }
     }
-
     CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
