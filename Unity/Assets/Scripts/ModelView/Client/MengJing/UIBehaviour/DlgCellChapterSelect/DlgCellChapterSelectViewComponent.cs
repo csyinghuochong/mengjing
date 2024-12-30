@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NanDuTipText == null )
      			{
-		    		this.m_E_NanDuTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_NanDuTip");
+		    		this.m_E_NanDuTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/EnterLevelSet0/E_NanDuTip");
      			}
      			return this.m_E_NanDuTipText;
      		}
@@ -171,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AdditionText == null )
      			{
-		    		this.m_E_AdditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_Addition");
+		    		this.m_E_AdditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/EnterLevelSet1/E_Addition");
      			}
      			return this.m_E_AdditionText;
      		}
@@ -188,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterLevelText == null )
      			{
-		    		this.m_E_EnterLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_EnterLevel");
+		    		this.m_E_EnterLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/EnterLevelSet2/E_EnterLevel");
      			}
      			return this.m_E_EnterLevelText;
      		}
