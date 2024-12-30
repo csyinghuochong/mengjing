@@ -205,8 +205,6 @@ namespace ET.Client
 
         private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
-            Log.Debug($"Enlarge map  chapterId:  {map}  {chapterId}");
-            
             if (!self.CanOpen(chapterId))
             {
                 FlyTipComponent.Instance.ShowFlyTip("未开启");
@@ -243,8 +241,6 @@ namespace ET.Client
             targetPosition.x -= 250f;
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
-                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
-                
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
                 List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
@@ -387,17 +383,18 @@ namespace ET.Client
                 
                 // 默认选第一个
                 self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
-
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
+  
                 self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
-
+                
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 using (zstring.Block())
                 {
                     self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
                 }
                 
+                self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
                 self.View.E_BossRefreshButton.gameObject.SetActive(true);
                 self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
