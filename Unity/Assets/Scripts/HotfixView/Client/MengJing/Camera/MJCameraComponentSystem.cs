@@ -326,6 +326,8 @@ namespace ET.Client
             self.CameraMoveType = CameraMoveType.BuildExit;
             self.OldCameraPostion = self.MainCamera.transform.localPosition;
             self.TargetPosition = unit.Position + self.OffsetPosition;
+
+            MapViewHelper.ShowOtherUnit(self.Root(), true);
         }
 
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)

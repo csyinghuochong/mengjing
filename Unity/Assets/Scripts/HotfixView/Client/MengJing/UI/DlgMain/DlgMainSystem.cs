@@ -1008,8 +1008,13 @@ namespace ET.Client
             Scene root = self.Root();
             MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
             cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_3,
-                () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine(); });
+                () =>
+                {
+                    MapViewHelper.ShowOtherUnit(root, false);
+                    root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine();
+                });
         }
+
 
         private static async ETTask OnRoseEquipButton(this DlgMain self)
         {
@@ -1118,7 +1123,11 @@ namespace ET.Client
             {
                 MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
                 cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_2,
-                    () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
+                    () => 
+                    {
+                        MapViewHelper.ShowOtherUnit(root, false);
+                        root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+                    });
             }
         }
 

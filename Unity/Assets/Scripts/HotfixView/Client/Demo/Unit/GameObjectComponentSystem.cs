@@ -971,7 +971,7 @@ namespace ET.Client
                 self.ObjectHorse.SetActive(false);
             }
 
-            self.GetParent<Unit>().GetComponent<UIPlayerHpComponent>()?.EnterHide();
+            self.GetParent<Unit>().EnterHide();
         }
 
         public static void EnterBaTi(this GameObjectComponent self)
@@ -1021,7 +1021,7 @@ namespace ET.Client
             }
 
             self.CheckRunState();
-            self.GetParent<Unit>().GetComponent<UIPlayerHpComponent>().ExitHide();
+            self.GetParent<Unit>().ExitHide();
         }
 
         /// <summary>
