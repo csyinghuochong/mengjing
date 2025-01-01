@@ -545,7 +545,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LevelReturnButton == null )
      			{
-		    		this.m_E_LevelReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_LevelReturn");
+		    		this.m_E_LevelReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_LevelReturn");
      			}
      			return this.m_E_LevelReturnButton;
      		}

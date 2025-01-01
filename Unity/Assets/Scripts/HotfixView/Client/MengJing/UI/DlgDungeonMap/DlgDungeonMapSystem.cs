@@ -431,7 +431,7 @@ namespace ET.Client
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
 
             self.View.E_SelectImage.gameObject.SetActive(false);
-            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
+            self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.View.E_CloseButton.gameObject.SetActive(true);
             self.View.EG_MapPanelRectTransform.gameObject.SetActive(true);
             self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
