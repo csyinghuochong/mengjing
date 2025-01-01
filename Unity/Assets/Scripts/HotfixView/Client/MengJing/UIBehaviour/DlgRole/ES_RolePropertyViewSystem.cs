@@ -111,7 +111,7 @@ namespace ET.Client
             ShowPropertyList showList = new();
             showList.NumericType = numericType;
             showList.Name = name;
-            showList.IconID = iconID;
+            showList.IconID = ItemViewHelp.GetAttributeIcon(numericType);
             showList.Type = type;
             return showList;
         }

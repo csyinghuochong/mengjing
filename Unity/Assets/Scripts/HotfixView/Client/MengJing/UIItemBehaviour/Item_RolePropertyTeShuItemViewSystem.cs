@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(UserInfoComponentC))]
     [EntitySystemOf(typeof(Scroll_Item_RolePropertyTeShuItem))]
@@ -21,6 +23,18 @@
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
             self.E_PropertyTypeText.text = showPropertyList.Name;
+
+            if (!string.IsNullOrEmpty(showPropertyList.IconID))
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PropertyIcon, showPropertyList.IconID);
+                self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                self.E_IconImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.E_IconImage.gameObject.SetActive(false);
+            }
 
             //整数
             if (showPropertyList.Type == 1)
