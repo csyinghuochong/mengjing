@@ -316,11 +316,15 @@ namespace ET.Client
                                 image.color = self.View.E_Type0Image.color;
                             }
                         }
-
+                        self.View.E_Type0Image.gameObject.SetActive(true);
+                        self.View.E_Type1Image.gameObject.SetActive(false);
                         levels[i].GetComponent<Button>().AddListener(() => { FlyTipComponent.Instance.ShowFlyTip("等级不足"); });
                     }
                     else
                     {
+                        self.View.E_Type0Image.gameObject.SetActive(false);
+                        self.View.E_Type1Image.gameObject.SetActive(true);
+
                         int i1 = i;
                         levels[i].GetComponent<Button>().AddListener(() =>
                         {
@@ -328,20 +332,21 @@ namespace ET.Client
                             self.OnSelect(dungeonConfig.Id, levels[i1], level.Find("SelectPosition"));
                         });
 
-                        bool bossRevive = false;
+                        bool bossRevive = true;
                         long nowTime = TimeHelper.ServerNow();
                         foreach (int bossId in bossIds)
                         {
                             foreach (KeyValuePair pair in bossRevivesTime)
                             {
-                                if (pair.KeyId == bossId || long.Parse(pair.Value) > nowTime)
+                                if (pair.KeyId == bossId && long.Parse(pair.Value) < nowTime)
                                 {
-                                    bossRevive = true;
+                                    bossRevive = false;
                                     break;
                                 }
                             }
                         }
 
+                        self.View.E_Type2Image.gameObject.SetActive(bossRevive);
                         if (bossRevive)
                         {
                             // boss刷新 绿色 可以选择

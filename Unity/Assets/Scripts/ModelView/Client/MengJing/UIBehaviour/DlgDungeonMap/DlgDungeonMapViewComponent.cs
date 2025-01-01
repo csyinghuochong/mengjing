@@ -579,7 +579,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type0Image == null )
      			{
-		    		this.m_E_Type0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_Type0");
+		    		this.m_E_Type0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "EG_LevelPanel/E_TypeList/E_Type0");
      			}
      			return this.m_E_Type0Image;
      		}
@@ -596,7 +596,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type1Image == null )
      			{
-		    		this.m_E_Type1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_Type1");
+		    		this.m_E_Type1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "EG_LevelPanel/E_TypeList/E_Type1");
      			}
      			return this.m_E_Type1Image;
      		}
@@ -613,7 +613,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Type2Image == null )
      			{
-		    		this.m_E_Type2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LevelPanel/E_Type2");
+		    		this.m_E_Type2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "EG_LevelPanel/E_TypeList/E_Type2");
      			}
      			return this.m_E_Type2Image;
      		}
