@@ -120,7 +120,7 @@ namespace ET.Client
             {
                 self.OnBuildEnter();
                 self.OnBuildEnter = null;
-                //抛出实践
+                MapViewHelper.ShowOtherUnit(self.Root(), false);
             }
 
             self.MainCamera.transform.position = Vector3.Lerp(self.OldCameraPostion, self.TargetPosition, self.CameraMoveTime);

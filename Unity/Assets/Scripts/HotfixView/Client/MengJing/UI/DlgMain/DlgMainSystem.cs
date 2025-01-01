@@ -1010,7 +1010,6 @@ namespace ET.Client
             cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_3,
                 () =>
                 {
-                    MapViewHelper.ShowOtherUnit(root, false);
                     root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine();
                 });
         }
@@ -1125,7 +1124,6 @@ namespace ET.Client
                 cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_2,
                     () => 
                     {
-                        MapViewHelper.ShowOtherUnit(root, false);
                         root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
                     });
             }
