@@ -15,7 +15,7 @@
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_RolePropertyTeShuItem self, ShowPropertyList showPropertyList)
+        public static void Refresh(this Scroll_Item_RolePropertyTeShuItem self, ShowPropertyList showPropertyList, int index)
         {
             NumericComponentC numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
@@ -27,6 +27,8 @@
             {
                 self.E_ProTypeValueText.text = numericComponentC.GetAsLong(showPropertyList.NumericType).ToString();
             }
+
+            self.uiTransform.Find("Image_di").gameObject.SetActive(index % 2 ==0);
 
             //浮点数
             if (showPropertyList.Type == 2)
