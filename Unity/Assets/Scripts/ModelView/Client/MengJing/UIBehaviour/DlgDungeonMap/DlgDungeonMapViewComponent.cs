@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LevelDesText == null )
      			{
-		    		this.m_E_LevelDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/E_LevelDes");
+		    		this.m_E_LevelDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LevelPanel/E_RightBG/LevelInfo/E_LevelDes");
      			}
      			return this.m_E_LevelDesText;
      		}
