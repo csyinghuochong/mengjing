@@ -74,6 +74,7 @@ namespace ET.Client
                 self.View.E_BossRefreshButton.gameObject.SetActive(false);
                 self.View.E_BossRefreshCloseButton.gameObject.SetActive(true);
                 self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                self.CurrentMap.gameObject.SetActive(false);
             });
             self.View.E_BossRefreshCloseButton.AddListener(self.OnBoosRefreshClose);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonMapLevelItemsRefresh);
@@ -164,6 +165,7 @@ namespace ET.Client
             self.View.E_BossRefreshButton.gameObject.SetActive(true);
             self.View.E_BossRefreshCloseButton.gameObject.SetActive(false);
             self.View.E_DungeonMapLevelItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+            self.CurrentMap.gameObject.SetActive(true);
         }
 
         private static bool CanOpen(this DlgDungeonMap self, int chapterId)
@@ -459,7 +461,7 @@ namespace ET.Client
         {
             RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
-
+            self.CurrentMap.gameObject.SetActive(true);
             self.View.E_SelectImage.gameObject.SetActive(false);
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.View.E_CloseButton.gameObject.SetActive(true);
