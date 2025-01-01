@@ -41,7 +41,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_1;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_1");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemWuqi_1");
 		    	   this.m_es_roleqianghuaitem_1 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_1;
@@ -61,7 +61,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_2;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_2");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemYifu_1");
 		    	   this.m_es_roleqianghuaitem_2 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_2;
@@ -81,7 +81,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_3;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_3");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemFuhu_1");
 		    	   this.m_es_roleqianghuaitem_3 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_3;
@@ -101,7 +101,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_4;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_4");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemJiezhi_1");
 		    	   this.m_es_roleqianghuaitem_4 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_4;
@@ -121,7 +121,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_5;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_5");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemShiping1_1");
 		    	   this.m_es_roleqianghuaitem_5 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_5;
@@ -141,7 +141,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_6;
      			if( es ==null)
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_6");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemXiezi_1");
 		    	   this.m_es_roleqianghuaitem_6 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_6;
@@ -161,7 +161,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_7;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_7");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemKuzi_1");
 		    	   this.m_es_roleqianghuaitem_7 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_7;
@@ -181,7 +181,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_8;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_8");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemYaodai_1");
 		    	   this.m_es_roleqianghuaitem_8 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_8;
@@ -201,7 +201,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_9;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_9");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemShouzhuo_1");
 		    	   this.m_es_roleqianghuaitem_9 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_9;
@@ -221,7 +221,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_10;
      			if( es==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_10");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemToukui_1");
 		    	   this.m_es_roleqianghuaitem_10 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_10;
@@ -241,7 +241,7 @@ namespace ET.Client
 		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_11;
      			if( es ==null  )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_11");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EquipSet/ES_EquipItemXianglian_1");
 		    	   this.m_es_roleqianghuaitem_11 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
      			}
      			return this.m_es_roleqianghuaitem_11;
