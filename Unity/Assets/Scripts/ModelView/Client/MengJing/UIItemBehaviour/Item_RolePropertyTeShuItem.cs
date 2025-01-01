@@ -90,6 +90,30 @@ namespace ET.Client
      			}
      		}
      	}
+		
+		public Transform E_Image_di
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Image_di == null )
+					{
+						this.m_E_Image_di = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Image_di");
+					}
+					return this.m_E_Image_di;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Image_di");
+				}
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -97,12 +121,14 @@ namespace ET.Client
 			this.m_E_PropertyTypeText = null;
 			this.m_E_ProTypeValueText = null;
 			this.uiTransform = null;
+			this.m_E_Image_di = null;
 			this.DataId = 0;
 		}
 
 		private Image m_E_IconImage = null;
 		private Text m_E_PropertyTypeText = null;
 		private Text m_E_ProTypeValueText = null;
+		private Transform m_E_Image_di = null;
 		public Transform uiTransform = null;
 	}
 }

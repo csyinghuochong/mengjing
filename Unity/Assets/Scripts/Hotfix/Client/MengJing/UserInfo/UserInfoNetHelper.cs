@@ -15,6 +15,7 @@
             root.GetComponent<ShoujiComponentC>().TreasureInfo = response.TreasureInfo;
             root.GetComponent<ShoujiComponentC>().ShouJiChapterInfos = response.ShouJiChapterInfos;
             root.GetComponent<TitleComponentC>().TitleList = response.TitleList;
+            userInfo.Dispose();
             return ErrorCode.ERR_Success;
         }
 

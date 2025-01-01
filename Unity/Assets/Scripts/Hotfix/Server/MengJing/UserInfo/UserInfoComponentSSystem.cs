@@ -915,9 +915,14 @@ namespace ET.Server
                 self.UserInfo.MonsterRevives.Add(new KeyValuePair() { KeyId = monsterId, Value = reviveTime.ToString(), Value2 = "1" });
             }
 
-            M2C_UpdateUserInfoMessage m2C_UpdateUserInfo = new M2C_UpdateUserInfoMessage();
-            //m2C_UpdateUserInfo.UserInfo = self.UserInfo;
-            //MessageHelper.SendToClient( self.GetParent<Unit>(), m2C_UpdateUserInfo );
+            self.NoticeUpdateUserInfo();
+        }
+
+        private static void NoticeUpdateUserInfo(this UserInfoComponentS self)
+        {
+            M2C_UpdateUserInfoMessage m2C_UpdateUserInfo = M2C_UpdateUserInfoMessage.Create();
+            m2C_UpdateUserInfo.UserInfo = self.UserInfo.ToMessage();
+            MapMessageHelper.SendToClient( self.GetParent<Unit>(), m2C_UpdateUserInfo );
         }
 
         public static void OnAddFirstWinSelf(this UserInfoComponentS self, Unit boss, int difficulty)

@@ -5848,6 +5848,11 @@ message M2C_JingHePlanResponse // ILocationResponse
 	string Message = 92;
 }
 
+message M2C_UpdateUserInfoMessage	// IMessage
+{
+	UserInfoProto UserInfo = 1;
+}
+
 //ResponseType M2C_JingHeWearResponse
 message C2M_JingHeWearRequest // ILocationRequest
 {
