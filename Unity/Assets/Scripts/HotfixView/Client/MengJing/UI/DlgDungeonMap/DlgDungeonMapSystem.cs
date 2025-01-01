@@ -258,11 +258,15 @@ namespace ET.Client
             Vector3 buttonLocalPosition = self.View.uiTransform.InverseTransformPoint(buttonRectTransform.position);
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
             targetPosition *= self.ScaleFactor;
-            targetPosition.x -= 250f;
+
+            DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
+            targetPosition.x += dungeonSectionConfig.Offset[0];
+            targetPosition.y += dungeonSectionConfig.Offset[1];
+
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-                DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
+                
                 List<KeyValuePair> bossRevivesTime = self.Root().GetComponent<UserInfoComponentC>().UserInfo.MonsterRevives;
                 self.SetTitle(false);
                 

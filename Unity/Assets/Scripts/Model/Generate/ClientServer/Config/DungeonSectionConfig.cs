@@ -71,6 +71,8 @@ namespace ET
 		public int[] OpenLevel { get; set; }
 		/// <summary>神秘之门地图ID</summary>
 		public string ShenMiEnterID { get; set; }
+		/// <summary>ui偏移x,y</summary>
+		public int[] Offset { get; set; }
 
 	}
 }
