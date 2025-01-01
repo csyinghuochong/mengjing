@@ -103,7 +103,7 @@ namespace ET.Client
         private static void OnRolePropertyTeShuItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
         {
             Scroll_Item_RolePropertyTeShuItem scrollItemRolePropertyTeShuItem = self.ScrollItemRolePropertyTeShuItems[index].BindTrans(transform);
-            scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyLists[index]);
+            scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyLists[index], index);
         }
 
         private static ShowPropertyList AddShowProperList(this ES_RoleProperty self, int numericType, string name, string iconID, int type)
