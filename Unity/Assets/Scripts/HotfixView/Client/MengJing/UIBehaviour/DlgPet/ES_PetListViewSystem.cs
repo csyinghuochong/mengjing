@@ -188,8 +188,17 @@ namespace ET.Client
             //    return;
             //}
             PopupTipHelp.OpenPopupTip(self.Root(), "", LanguageComponent.Instance.LoadLocalization("确定放生?"),
-                () => { PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id).Coroutine(); },
+                async () => { 
+                    await PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id);
+                    self.OnPetFenJieUpdate();
+                },
                 null).Coroutine();
+        }
+
+        private static void OnPetFenJieUpdate(this ES_PetList self)
+        {
+            self.LastSelectItem = null;
+            self.RefreshCreateRoleItems();
         }
 
         private static void OnBtn_XiuXiButton(this ES_PetList self)
