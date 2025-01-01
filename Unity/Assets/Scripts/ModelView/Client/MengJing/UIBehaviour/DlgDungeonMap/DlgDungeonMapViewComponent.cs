@@ -619,7 +619,26 @@ namespace ET.Client
      		}
      	}
 		
-		public UnityEngine.UI.Button E_MapPanelDiButton
+        public Transform E_SelectEffect
+        {
+            get 
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.m_e_E_SelectEffect == null)
+                {
+                    this.m_e_E_SelectEffect = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject, "EG_LevelPanel/E_SelectEffect");
+                }
+                return this.m_e_E_SelectEffect;
+            }
+            
+        }
+
+
+        public UnityEngine.UI.Button E_MapPanelDiButton
 		{
 			get
 			{
@@ -676,7 +695,9 @@ namespace ET.Client
 			this.m_E_Type2Image = null;
 			this.m_E_MapPanelDiButton = null;
 			this.uiTransform = null;
-		}
+            this.m_e_E_SelectEffect = null;
+
+        }
 
 		private UnityEngine.RectTransform m_EG_MapPanelRectTransform = null;
 		private UnityEngine.UI.Button m_E_CloseButton = null;
@@ -715,6 +736,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Type1Image = null;
 		private UnityEngine.UI.Image m_E_Type2Image = null;
 		private UnityEngine.UI.Button m_E_MapPanelDiButton = null;
-		public Transform uiTransform = null;
+        private Transform m_e_E_SelectEffect = null;
+
+        public Transform uiTransform = null;
 	}
 }
