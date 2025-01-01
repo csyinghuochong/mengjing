@@ -773,6 +773,32 @@ public class CustomEditorMenu
         UnityEngine.Debug.Log("导出坐标点成功！生成:" + gameObject.transform.childCount + "个");
     }
 
+    [MenuItem("Custom/修改关卡路径点方向")]
+    static void CorrectLevelPathPoints()
+    {
+          if (Selection.gameObjects.Length < 2)
+                    return;
+
+          int number = Selection.gameObjects.Length;
+          for ( int i = 0; i < number - 1; i++ )
+          {
+              GameObject gameObject = Selection.gameObjects[i];
+              GameObject lookatobje = Selection.gameObjects[i + 1];
+              
+              
+              float2 direction = new float2(lookatobje.transform.position.x, lookatobje.transform.position.y) 
+                      - new float2( gameObject.transform.position.x, gameObject.transform.position.y);
+              
+              int angel_1 = (int)(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+              
+              Log.Debug($"angel_1:  {angel_1}");
+
+              gameObject.transform.rotation = Quaternion.Euler(0, 0, angel_1);
+
+              //gameObject.transform.LookAt( Selection.gameObjects[i - 1].transform );
+          }
+    }
+
     [MenuItem("Custom/移除所有子对象刚体和音效组件")]
     static void RemoveChildRigidboy()
     {
