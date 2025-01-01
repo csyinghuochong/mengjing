@@ -430,6 +430,7 @@ namespace ET.Client
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonConfigId);
             self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
             self.View.E_LevelDesText.text = dungeonConfig.ChapterDes;
+            
             using (zstring.Block())
             {
                 self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", dungeonConfig.EnterLv);
@@ -443,7 +444,10 @@ namespace ET.Client
             RectTransform rectTransform = self.View.EG_LevelPanelRectTransform;
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
+
+            self.View.E_SelectEffect.gameObject.SetActive(true);
             CommonViewHelper.SetParent(self.View.E_SelectImage.gameObject, parent_1.gameObject);
+            CommonViewHelper.SetParent(self.View.E_SelectEffect.gameObject, transform.gameObject);
             //self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
         }
 
