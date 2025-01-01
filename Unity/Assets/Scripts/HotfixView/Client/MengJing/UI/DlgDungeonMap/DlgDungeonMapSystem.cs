@@ -58,6 +58,8 @@ namespace ET.Client
                 // 默认情况下，该属性值为 0，表示所有不透明像素都可以通过 alpha 值命中测试。
                 // 如果将该属性设置为大于 0 的值，则只有当图像中的像素透明度大于等于该阈值时，该像素才会被视为不透明像素，并且图像才会通过 alpha 值命中测试。
                 go.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.5f;
+
+                self.ResetLevelsInfo( i1, dic[i1] );
             }
 
             self.View.E_NanDu_1_ButtonButton.AddListener(() => { self.OnNanDu_Button(1); });
@@ -97,7 +99,7 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Main);
         }
-
+        
         private static async ETTask OnBoosRefresh(this DlgDungeonMap self)
         {
             await UserInfoNetHelper.RequestUserInfoInit(self.Root());
@@ -203,6 +205,23 @@ namespace ET.Client
             }
         }
 
+        private static void ResetLevelsInfo(this DlgDungeonMap self , int map, int chapterId)
+        {
+            if (map == 0) //返回天空之城
+            {
+                return;
+            }
+            GameObject currentMap = self.MapGameObjects[map];
+            Transform transform = currentMap.transform.Find("Levels");
+            if (transform == null)
+            {
+                return;
+            }
+            GameObject Levels = transform.gameObject;
+            Levels.SetActive(false);
+            //DungeonSectionConfigCategory.Instance.Get(chapterId);
+        }
+        
         private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
             if (!self.CanOpen(chapterId))
@@ -299,7 +318,7 @@ namespace ET.Client
                         levels[i].GetComponent<Button>().AddListener(() =>
                         {
                             // 选择关卡
-                            self.OnSelect(dungeonConfig.Id, levels[i1]);
+                            self.OnSelect(dungeonConfig.Id, levels[i1], level.Find("SelectPosition"));
                         });
 
                         bool bossRevive = false;
@@ -382,7 +401,7 @@ namespace ET.Client
                 }
                 
                 // 默认选第一个
-                self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0]);
+                self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0], levels[0].Find("SelectPosition"));
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
   
@@ -402,10 +421,10 @@ namespace ET.Client
             };
         }
 
-        private static void OnSelect(this DlgDungeonMap self, int dungeonConfigId, Transform transform)
+        private static void OnSelect(this DlgDungeonMap self, int dungeonConfigId, Transform transform, Transform parent_1)
         {
             self.LevelId = dungeonConfigId;
-            self.ShowSelect(transform);
+            self.ShowSelect(transform, parent_1);
 
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(dungeonConfigId);
             self.View.E_LevelNameText.text = dungeonConfig.ChapterName;
@@ -414,15 +433,17 @@ namespace ET.Client
             {
                 self.View.E_EnterLevelText.text = zstring.Format("进入等级：{0}", dungeonConfig.EnterLv);
             }
+
         }
 
-        private static void ShowSelect(this DlgDungeonMap self, Transform transform)
+        private static void ShowSelect(this DlgDungeonMap self, Transform transform, Transform parent_1)
         {
             self.View.E_SelectImage.gameObject.SetActive(true);
             RectTransform rectTransform = self.View.EG_LevelPanelRectTransform;
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
-            self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
+            CommonViewHelper.SetParent(self.View.E_SelectImage.gameObject, parent_1.gameObject);
+            //self.View.E_SelectImage.GetComponent<RectTransform>().localPosition = position;
         }
 
         public static void ReEnlarge(this DlgDungeonMap self)
