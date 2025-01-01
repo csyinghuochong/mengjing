@@ -28,7 +28,7 @@
                 self.E_ProTypeValueText.text = numericComponentC.GetAsLong(showPropertyList.NumericType).ToString();
             }
 
-            self.uiTransform.Find("Image_di").gameObject.SetActive(index % 2 ==0);
+            self.uiTransform.Find("Image_di").gameObject.SetActive(index % 4 ==0);
 
             //浮点数
             if (showPropertyList.Type == 2)
