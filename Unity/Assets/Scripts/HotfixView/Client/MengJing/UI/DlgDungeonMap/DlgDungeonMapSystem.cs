@@ -224,12 +224,6 @@ namespace ET.Client
         
         private static void Enlarge(this DlgDungeonMap self, int map, int chapterId)
         {
-            if (!self.CanOpen(chapterId))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("未开启");
-                return;
-            }
-            
             if (map == 0)  //返回天空之城
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否返回主城出生点？", () =>
@@ -242,7 +236,14 @@ namespace ET.Client
                 }, null).Coroutine();
                 return;
             }
-            
+
+            if (!self.CanOpen(chapterId))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("未开启");
+                return;
+            }
+
+
             self.ChapterId = chapterId;
             self.EnableBtns(false);
 
