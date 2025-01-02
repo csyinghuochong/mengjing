@@ -254,17 +254,21 @@ namespace ET.Client
             RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             RectTransform buttonRectTransform = self.CurrentMap.GetComponent<RectTransform>();
 
-            Vector3 targetScale = Vector3.one * self.ScaleFactor;
+            DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
+            
+            float ScaleFactor = (float)dungeonSectionConfig.Size[0] / 0.32f;
+            Vector3 targetScale = Vector3.one * ScaleFactor;
+            
             rectTransform.DOScale(targetScale, self.Duration).SetEase(Ease.Linear);
 
             Vector3 buttonLocalPosition = self.View.uiTransform.InverseTransformPoint(buttonRectTransform.position);
             Vector3 targetPosition = rectTransform.localPosition - buttonLocalPosition;
-            targetPosition *= self.ScaleFactor;
-
-            DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterId);
+            targetPosition *= ScaleFactor;
+            
             targetPosition.x += dungeonSectionConfig.Offset[0];
             targetPosition.y += dungeonSectionConfig.Offset[1];
-
+            
+            self.View.E_MapPanelDiButton.gameObject.SetActive(false);
             rectTransform.DOLocalMove(targetPosition, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -411,15 +415,15 @@ namespace ET.Client
                 self.OnSelect(dungeonSectionConfig.RandomArea[0], levels[0], levels[0].Find("SelectPosition"));
                 self.CurrentMap.transform.SetParent(self.View.E_BlackBGImage.transform);
                 self.CurrentMap.transform.Find("Levels").gameObject.SetActive(true);
-  
-                self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
-                
+
                 UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
                 using (zstring.Block())
                 {
                     self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty(zstring.Format("{0}{1}", userinfo.UserId, self.ChapterId)));
                 }
                 
+                self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
+                self.View.E_MapPanelDiButton.gameObject.SetActive(true);
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
                 self.View.E_BossRefreshButton.gameObject.SetActive(true);
@@ -451,6 +455,7 @@ namespace ET.Client
             Vector3 position = rectTransform.InverseTransformPoint(transform.position);
             position.y += 40;
 
+            self.View.E_SelectEffect.gameObject.SetActive(false);
             self.View.E_SelectEffect.gameObject.SetActive(true);
             CommonViewHelper.SetParent(self.View.E_SelectImage.gameObject, parent_1.gameObject);
             CommonViewHelper.SetParent(self.View.E_SelectEffect.gameObject, transform.gameObject);
@@ -461,12 +466,14 @@ namespace ET.Client
         {
             RectTransform rectTransform = self.View.EG_MapPanelRectTransform;
             rectTransform.DOScale(Vector3.one, self.Duration).SetEase(Ease.Linear);
+           
             self.CurrentMap.gameObject.SetActive(true);
             self.View.E_SelectImage.gameObject.SetActive(false);
             self.View.EG_LevelPanelRectTransform.gameObject.SetActive(false);
             self.View.E_CloseButton.gameObject.SetActive(true);
             self.View.EG_MapPanelRectTransform.gameObject.SetActive(true);
             self.CurrentMap.transform.SetParent(self.View.EG_MapPanelRectTransform);
+            self.CurrentMap.transform.localScale = Vector3.one * 0.32f;
             self.CurrentMap.transform.SetSiblingIndex(self.OriginalIndex);
             self.SetTitle(true);
             self.CurrentMap.transform.Find("Levels").gameObject.SetActive(false);
