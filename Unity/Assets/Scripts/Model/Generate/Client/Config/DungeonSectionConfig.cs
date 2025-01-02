@@ -73,6 +73,8 @@ namespace ET
 		public string ShenMiEnterID { get; set; }
 		/// <summary>ui偏移x,y</summary>
 		public int[] Offset { get; set; }
+		/// <summary>缩放</summary>
+		public double[] Size { get; set; }
 
 	}
 }
