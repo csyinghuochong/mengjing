@@ -423,7 +423,6 @@ namespace ET.Client
                 }
                 
                 self.View.EG_MapPanelRectTransform.gameObject.SetActive(false);
-                self.View.E_MapPanelDiButton.gameObject.SetActive(true);
                 self.View.EG_LevelPanelRectTransform.gameObject.SetActive(true);
                 self.View.E_CloseButton.gameObject.SetActive(false);
                 self.View.E_BossRefreshButton.gameObject.SetActive(true);
@@ -480,6 +479,7 @@ namespace ET.Client
 
             rectTransform.DOLocalMove(Vector3.zero, self.Duration).SetEase(Ease.Linear).onComplete = () =>
             {
+                self.View.E_MapPanelDiButton.gameObject.SetActive(true);
                 self.EnableBtns(true);
             };
         }
