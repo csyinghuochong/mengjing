@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -45,7 +46,8 @@ namespace ET.Client
 
             self.E_ReceivedButton.gameObject.SetActive(received);
 
-            self.E_DiButtonButton.AddListener(self.OnClick_DiButton);
+            //self.E_DiButtonButton.AddListener(self.OnClick_DiButton);
+            self.E_ChengJiuIconImage.gameObject.GetComponent<Button>().AddListener(self.OnClick_DiButton);
         }
     }
 }
