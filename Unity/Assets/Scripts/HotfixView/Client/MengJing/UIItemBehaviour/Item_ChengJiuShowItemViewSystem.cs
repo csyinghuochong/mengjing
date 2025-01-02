@@ -52,7 +52,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_Lab_ChengJiuNumText.text = zstring.Format("成就点数:{0}", chengJiuConfig.RewardNum);
+                self.E_Lab_ChengJiuNumText.text = zstring.Format("{0}", chengJiuConfig.RewardNum);
             }
         }
     }
