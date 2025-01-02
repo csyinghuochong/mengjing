@@ -332,15 +332,15 @@ namespace ET.Client
                             self.OnSelect(dungeonConfig.Id, levels[i1], level.Find("SelectPosition"));
                         });
 
-                        bool bossRevive = false;
+                        bool bossRevive = true;
                         long nowTime = TimeHelper.ServerNow();
                         foreach (int bossId in bossIds)
                         {
                             foreach (KeyValuePair pair in bossRevivesTime)
                             {
-                                if (pair.KeyId == bossId && long.Parse(pair.Value) < nowTime)
+                                if (pair.KeyId == bossId && long.Parse(pair.Value) > nowTime)
                                 {
-                                    bossRevive = true;
+                                    bossRevive = false;
                                     break;
                                 }
                             }
