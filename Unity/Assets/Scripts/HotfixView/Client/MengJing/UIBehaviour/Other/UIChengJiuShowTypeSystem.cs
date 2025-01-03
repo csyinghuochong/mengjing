@@ -51,6 +51,9 @@ namespace ET.Client
 
             self.UIChengJiuShowChapterItemListNode.SetActive(value);
 
+            GameObject Checkmark = self.GameObject.GetComponent<ReferenceCollector>().Get<GameObject>("Checkmark");
+            Checkmark.transform.localScale = value ? new Vector3(1, -1, 1) : new Vector3(1, 1, 1);
+            
             if (value)
             {
                 GameObject temp = self.UIChengJiuShowChapterItemListNode.transform.GetChild(0).gameObject;

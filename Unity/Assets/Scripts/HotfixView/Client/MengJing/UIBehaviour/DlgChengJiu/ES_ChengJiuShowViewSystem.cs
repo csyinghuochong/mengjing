@@ -76,7 +76,7 @@ namespace ET.Client
             self.ShowTask.AddRange(self.Root().GetComponent<ChengJiuComponentC>().GetTasksByChapter(type, chapter));
 
             self.AddUIScrollItems(ref self.ScrollItemChengJiuShowItems, self.ShowTask.Count);
-            self.E_ChengJiuShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTask.Count);
+            self.E_ChengJiuShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTask.Count, true);
         }
         public static void OnIma_DiButton(this ES_ChengJiuShow self)
         {
