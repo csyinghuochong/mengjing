@@ -16,7 +16,7 @@ void BlurScale_float(float BlurScale, out float Iterations, out float Kernel)
 		int tempBS = BlurScale;
 
 		Iterations = tempBS;
-		Kernel = 1;
+		Kernel = 2;
 
 		
 
