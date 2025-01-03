@@ -316,15 +316,10 @@ namespace ET.Client
                                 image.color = self.View.E_Type0Image.color;
                             }
                         }
-                        self.View.E_Type0Image.gameObject.SetActive(true);
-                        self.View.E_Type1Image.gameObject.SetActive(false);
                         levels[i].GetComponent<Button>().AddListener(() => { FlyTipComponent.Instance.ShowFlyTip("等级不足"); });
                     }
                     else
                     {
-                        self.View.E_Type0Image.gameObject.SetActive(false);
-                        self.View.E_Type1Image.gameObject.SetActive(true);
-
                         int i1 = i;
                         levels[i].GetComponent<Button>().AddListener(() =>
                         {
