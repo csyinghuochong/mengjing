@@ -123,6 +123,14 @@ namespace ET.Client
 
         private static void OnEnterMap(this DlgPetMeleeLevel self)
         {
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            PetMeleeInfo petMeleeInfo = petComponentC.PetMeleeInfoList[petComponentC.PetMeleePlan];
+            if (petMeleeInfo.MainPetList.Count == 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("你未携带上阵宠物无法参与。");
+                return;
+            }
+
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0").Coroutine();
             self.OnClose();
         }
