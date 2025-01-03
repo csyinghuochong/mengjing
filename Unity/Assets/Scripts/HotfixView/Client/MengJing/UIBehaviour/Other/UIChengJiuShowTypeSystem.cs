@@ -47,7 +47,7 @@ namespace ET.Client
 
         public static void SetSelected(this UIChengJiuShowType self, int type)
         {
-            bool value = type == self.ChengJiuType;
+            bool value = type == self.ChengJiuType && !self.UIChengJiuShowChapterItemListNode.gameObject.activeSelf;
 
             self.UIChengJiuShowChapterItemListNode.SetActive(value);
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -25,7 +26,6 @@ namespace ET.Client
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuShowItemsRefresh);
 
             self.InitChengJiuList();
-            self.E_Ima_DiButton.AddListener(self.OnIma_DiButton);
         }
 
         [EntitySystem]
@@ -68,6 +68,8 @@ namespace ET.Client
             {
                 uiChengJiuShowType.SetSelected(type);
             }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.LeftContent.GetComponent<RectTransform>());
         }
 
         public static void OnChapter(this ES_ChengJiuShow self, int type, int chapter)
@@ -77,9 +79,6 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemChengJiuShowItems, self.ShowTask.Count);
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTask.Count, true);
-        }
-        public static void OnIma_DiButton(this ES_ChengJiuShow self)
-        {
         }
     }
 }
