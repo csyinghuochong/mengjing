@@ -15,6 +15,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyTeShuItemsRefresh);
+            self.E_RolePropertyBaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyBaseItemsRefresh);
             self.E_AddPointButton.AddListener(self.OnAddPointButton);
 
             self.E_Add_LiLiangEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(0).Coroutine(); });
@@ -90,6 +91,8 @@ namespace ET.Client
                 self.ShowPropertyLists = self.ShowPropertyList_KangXing;
             }
 
+            self.PropertyType = index;
+
             self.RefreshRoleProperty();
         }
 
@@ -104,6 +107,12 @@ namespace ET.Client
         {
             Scroll_Item_RolePropertyTeShuItem scrollItemRolePropertyTeShuItem = self.ScrollItemRolePropertyTeShuItems[index].BindTrans(transform);
             scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyLists[index], index);
+        }
+
+        private static void OnRolePropertyBaseItemsRefresh(this ES_RoleProperty self, Transform transform, int index)
+        {
+            Scroll_Item_RolePropertyBaseItem scrollItemRolePropertyBaseItem = self.ScrollItemRolePropertyBaseItems[index].BindTrans(transform);
+            scrollItemRolePropertyBaseItem.Refresh(self.ShowPropertyLists[index]);
         }
 
         private static ShowPropertyList AddShowProperList(this ES_RoleProperty self, int numericType, string name, string iconID, int type)
@@ -191,8 +200,22 @@ namespace ET.Client
                 self.E_BaoShiDuTextText.text = zstring.Format("{0}/{1}", userInfoComponentC.UserInfo.BaoShiDu, CommonHelp.GetMaxBaoShiDu());
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyLists.Count);
-            self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyLists.Count, true);
+            if (self.PropertyType == 0)
+            {
+                self.E_RolePropertyBaseItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+
+                self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyLists.Count);
+                self.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyLists.Count, true);
+            }
+            else
+            {
+                self.E_RolePropertyBaseItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+                self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+
+                self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyLists.Count);
+                self.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyLists.Count, true);
+            }
         }
 
         #endregion
