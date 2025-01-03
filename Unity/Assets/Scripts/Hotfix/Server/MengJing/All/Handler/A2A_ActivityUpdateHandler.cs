@@ -70,19 +70,19 @@ namespace ET.Server
                     }
                     if (request.FunctionId == 1057 && request.FunctionType == 2)
                     {
-                        List<Unit> units = UnitHelper.GetUnitList( scene, UnitType.Npc );
-                        for (int i = units.Count - 1; i >= 0; i--)
-                        {
-                            if (units[i].ConfigId >= 20099007 && units[i].ConfigId <= 20099010)
-                            {
-                                scene.GetComponent<UnitComponent>().Remove(units[i].Id);
-                            }
-                        }
+                        //List<Unit> units = UnitHelper.GetUnitList( scene, UnitType.Npc );
+                        //for (int i = units.Count - 1; i >= 0; i--)
+                        //{
+                        //    if (units[i].ConfigId >= 20099007 && units[i].ConfigId <= 20099010)
+                        //    {
+                        //        scene.GetComponent<UnitComponent>().Remove(units[i].Id);
+                        //    }
+                        //}
 
-                        for (int i = 0; i < ConfigData.TurtleList.Count; i++)
-                        {
-                            UnitFactory.CreateNpc(scene, ConfigData.TurtleList[i]);
-                        }
+                        //for (int i = 0; i < ConfigData.TurtleList.Count; i++)
+                        //{
+                        //    UnitFactory.CreateNpc(scene, ConfigData.TurtleList[i]);
+                        //}
                     }
                     break;
                 case SceneType.Rank:
