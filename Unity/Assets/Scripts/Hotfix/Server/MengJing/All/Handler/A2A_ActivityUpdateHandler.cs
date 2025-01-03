@@ -63,10 +63,10 @@ namespace ET.Server
                     //Log.Console($"{scene.Name}  {scene.DomainZone()}  request.FunctionType: {request.FunctionId} {request.FunctionType}");
                     if (request.FunctionId == 1057 && request.FunctionType == 1)
                     {
-                        for (int npcid = 20099007; npcid <= 20099010; npcid++ )
-                        {
-                            UnitFactory.CreateNpc(scene, npcid);
-                        }
+                        //for (int npcid = 20099007; npcid <= 20099010; npcid++ )
+                        //{
+                        //    UnitFactory.CreateNpc(scene, npcid);
+                        //}
                     }
                     if (request.FunctionId == 1057 && request.FunctionType == 2)
                     {
