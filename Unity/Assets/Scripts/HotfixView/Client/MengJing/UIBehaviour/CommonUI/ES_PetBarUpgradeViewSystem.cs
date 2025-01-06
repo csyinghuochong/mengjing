@@ -44,6 +44,10 @@ namespace ET.Client
         {
             self.Index = index;
             self.UpdateRightInfo();
+            
+            self.ES_PetUpgradeItem_1.EPetBarIconSelectImageImage.gameObject.SetActive(index == 1);
+            self.ES_PetUpgradeItem_2.EPetBarIconSelectImageImage.gameObject.SetActive(index == 2);
+            self.ES_PetUpgradeItem_3.EPetBarIconSelectImageImage.gameObject.SetActive(index == 3);
         }
 
         private static void UpdateLeftInfo(this ES_PetBarUpgrade self)

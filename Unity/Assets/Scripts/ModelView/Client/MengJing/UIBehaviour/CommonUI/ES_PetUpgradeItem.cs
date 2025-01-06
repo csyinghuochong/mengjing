@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetUpgradeItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public UnityEngine.UI.Image EPetBarIconSelectImageImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_PetBarIconSelectImage == null )
+				{
+					this.m_E_PetBarIconSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_PetBarIconSelect");
+				}
+				return this.m_E_PetBarIconSelectImage;
+			}
+		}
+				
 		public UnityEngine.UI.Image E_PetBarIconImage
      	{
      		get
@@ -106,6 +123,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_PetBarIconSelectImage = null;
 			this.m_E_PetBarIconImage = null;
 			this.m_E_PetBarNameText = null;
 			this.m_E_PetBarLvText = null;
@@ -114,6 +132,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_PetBarIconSelectImage = null;
 		private UnityEngine.UI.Image m_E_PetBarIconImage = null;
 		private UnityEngine.UI.Text m_E_PetBarNameText = null;
 		private UnityEngine.UI.Text m_E_PetBarLvText = null;
