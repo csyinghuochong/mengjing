@@ -100,6 +100,16 @@ namespace ET.Client
             }
 
             self.InitInfo();
+            RolePetInfo rolePetInfo = petComponentC.GetPetInfoByID(self.PetFightList[0].PetId);
+            if (rolePetInfo != null)
+            {
+                self.OnClickSkill(1, 0, 0);
+            }
+            else
+            {
+                self.OnClickPetIcon(1);
+            }
+            
             self.OnUpdateSelectedPetItem();
         }
 
