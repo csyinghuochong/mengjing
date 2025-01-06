@@ -126,7 +126,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillDesText == null )
      			{
-		    		this.m_E_SkillDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/E_SkillDes");
+		    		this.m_E_SkillDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_SkillInfoPanel/Scroll View/Viewport/Content/Item/TextBg/E_SkillDes");
      			}
      			return this.m_E_SkillDesText;
      		}
