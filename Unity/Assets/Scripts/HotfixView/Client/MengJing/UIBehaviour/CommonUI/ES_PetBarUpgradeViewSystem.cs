@@ -17,6 +17,9 @@ namespace ET.Client
             self.ES_PetUpgradeItem_1.E_TouchButton.AddListener(() => { self.OnClickPetBarIcon(1); });
             self.ES_PetUpgradeItem_2.E_TouchButton.AddListener(() => { self.OnClickPetBarIcon(2); });
             self.ES_PetUpgradeItem_3.E_TouchButton.AddListener(() => { self.OnClickPetBarIcon(3); });
+            self.ES_PetUpgradeItem_1.EPetBarIconSelectImageImage.gameObject.SetActive(false);
+            self.ES_PetUpgradeItem_2.EPetBarIconSelectImageImage.gameObject.SetActive(false);
+            self.ES_PetUpgradeItem_3.EPetBarIconSelectImageImage.gameObject.SetActive(false);
             self.E_UpgradeButton.AddListenerAsync(self.OnUpgrade);
 
             self.EG_RightRectTransform.gameObject.SetActive(false);
