@@ -23,7 +23,24 @@ namespace ET.Client
      			return this.m_E_HighlightImage;
      		}
      	}
-
+		
+		public UnityEngine.UI.Button E_TouchButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_TouchButton == null )
+				{
+					this.m_E_TouchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Touch");
+				}
+				return this.m_E_TouchButton;
+			}
+		}
+				
 		public UnityEngine.UI.Button E_PetBarSetIconButton
      	{
      		get
@@ -158,6 +175,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_HighlightImage = null;
+			this.m_E_TouchButton = null;
 			this.m_E_PetBarSetIconButton = null;
 			this.m_E_PetBarSetIconImage = null;
 			this.m_E_LvText = null;
@@ -169,6 +187,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_HighlightImage = null;
+		private UnityEngine.UI.Button m_E_TouchButton = null;
 		private UnityEngine.UI.Button m_E_PetBarSetIconButton = null;
 		private UnityEngine.UI.Image m_E_PetBarSetIconImage = null;
 		private UnityEngine.UI.Text m_E_LvText = null;

@@ -37,14 +37,17 @@ namespace ET.Client
             self.E_PetbarSetSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetBarSetSkillsRefresh);
 
             self.ES_PetBarSetItem_1.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(1));
+            self.ES_PetBarSetItem_1.E_TouchButton.AddListener(() => self.OnClickPetIcon(1));
             self.ES_PetBarSetItem_1.E_AppearSkillButton.AddListener(() => self.OnClickSkill(1, 0, 0));
             self.ES_PetBarSetItem_1.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(1, 1, 0));
 
             self.ES_PetBarSetItem_2.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(2));
+            self.ES_PetBarSetItem_2.E_TouchButton.AddListener(() => self.OnClickPetIcon(2));
             self.ES_PetBarSetItem_2.E_AppearSkillButton.AddListener(() => self.OnClickSkill(2, 0, 0));
             self.ES_PetBarSetItem_2.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(2, 1, 0));
 
             self.ES_PetBarSetItem_3.E_PetBarSetIconButton.AddListener(() => self.OnClickPetIcon(3));
+            self.ES_PetBarSetItem_3.E_TouchButton.AddListener(() => self.OnClickPetIcon(3));
             self.ES_PetBarSetItem_3.E_AppearSkillButton.AddListener(() => self.OnClickSkill(3, 0, 0));
             self.ES_PetBarSetItem_3.E_ActiveSkill_0Button.AddListener(() => self.OnClickSkill(3, 1, 0));
 
