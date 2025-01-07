@@ -91,7 +91,15 @@ namespace ET.Client
                 }
 
                 GameObject go = self.MainPetItemList[i];
-                go.transform.Find("Mask/Icon").GetComponent<Image>().sprite = sprite;
+                if (sprite != null)
+                {
+                    go.transform.Find("Mask/Icon").gameObject.SetActive(true);
+                    go.transform.Find("Mask/Icon").GetComponent<Image>().sprite = sprite;
+                }
+                else
+                {
+                    go.transform.Find("Mask/Icon").gameObject.SetActive(false);
+                }
             }
 
             for (int i = 0; i < 12; i++)
