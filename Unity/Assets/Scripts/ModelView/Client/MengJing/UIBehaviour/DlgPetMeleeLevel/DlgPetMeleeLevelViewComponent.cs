@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Level_1Button
+		public UnityEngine.UI.ToggleGroup E_ChapterSetToggleGroup
      	{
      		get
      		{
@@ -50,15 +50,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Level_1Button == null )
+     			if( this.m_E_ChapterSetToggleGroup == null )
      			{
-		    		this.m_E_Level_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Level_1");
+		    		this.m_E_ChapterSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_ChapterSet");
      			}
-     			return this.m_E_Level_1Button;
+     			return this.m_E_ChapterSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Level_1Image
+		public UnityEngine.UI.Image E_PetMeleeLevelItemsImage
      	{
      		get
      		{
@@ -67,15 +67,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Level_1Image == null )
+     			if( this.m_E_PetMeleeLevelItemsImage == null )
      			{
-		    		this.m_E_Level_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Level_1");
+		    		this.m_E_PetMeleeLevelItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_PetMeleeLevelItems");
      			}
-     			return this.m_E_Level_1Image;
+     			return this.m_E_PetMeleeLevelItemsImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Level_2Button
+		public UnityEngine.UI.LoopVerticalScrollRect E_PetMeleeLevelItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -84,96 +84,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Level_2Button == null )
+     			if( this.m_E_PetMeleeLevelItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_Level_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Level_2");
+		    		this.m_E_PetMeleeLevelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_PetMeleeLevelItems");
      			}
-     			return this.m_E_Level_2Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Level_2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Level_2Image == null )
-     			{
-		    		this.m_E_Level_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Level_2");
-     			}
-     			return this.m_E_Level_2Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_Level_3Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Level_3Button == null )
-     			{
-		    		this.m_E_Level_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Level_3");
-     			}
-     			return this.m_E_Level_3Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Level_3Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Level_3Image == null )
-     			{
-		    		this.m_E_Level_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Level_3");
-     			}
-     			return this.m_E_Level_3Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_PetMeleeButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetMeleeButton == null )
-     			{
-		    		this.m_E_PetMeleeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_PetMelee");
-     			}
-     			return this.m_E_PetMeleeButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_PetMeleeImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetMeleeImage == null )
-     			{
-		    		this.m_E_PetMeleeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_PetMelee");
-     			}
-     			return this.m_E_PetMeleeImage;
+     			return this.m_E_PetMeleeLevelItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -367,18 +282,47 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_PetMeleeButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetMeleeButton == null )
+     			{
+		    		this.m_E_PetMeleeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_PetMelee");
+     			}
+     			return this.m_E_PetMeleeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetMeleeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetMeleeImage == null )
+     			{
+		    		this.m_E_PetMeleeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_PetMelee");
+     			}
+     			return this.m_E_PetMeleeImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_CloseButton = null;
 			this.m_E_CloseImage = null;
-			this.m_E_Level_1Button = null;
-			this.m_E_Level_1Image = null;
-			this.m_E_Level_2Button = null;
-			this.m_E_Level_2Image = null;
-			this.m_E_Level_3Button = null;
-			this.m_E_Level_3Image = null;
-			this.m_E_PetMeleeButton = null;
-			this.m_E_PetMeleeImage = null;
+			this.m_E_ChapterSetToggleGroup = null;
+			this.m_E_PetMeleeLevelItemsImage = null;
+			this.m_E_PetMeleeLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_RightBGImage = null;
 			this.m_E_LevelNameText = null;
 			this.m_E_LevelDesText = null;
@@ -390,19 +334,16 @@ namespace ET.Client
 			this.m_E_ReceiveButton = null;
 			this.m_E_ReceiveImage = null;
 			this.m_E_ReceivedText = null;
+			this.m_E_PetMeleeButton = null;
+			this.m_E_PetMeleeImage = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
-		private UnityEngine.UI.Button m_E_Level_1Button = null;
-		private UnityEngine.UI.Image m_E_Level_1Image = null;
-		private UnityEngine.UI.Button m_E_Level_2Button = null;
-		private UnityEngine.UI.Image m_E_Level_2Image = null;
-		private UnityEngine.UI.Button m_E_Level_3Button = null;
-		private UnityEngine.UI.Image m_E_Level_3Image = null;
-		private UnityEngine.UI.Button m_E_PetMeleeButton = null;
-		private UnityEngine.UI.Image m_E_PetMeleeImage = null;
+		private UnityEngine.UI.ToggleGroup m_E_ChapterSetToggleGroup = null;
+		private UnityEngine.UI.Image m_E_PetMeleeLevelItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetMeleeLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Image m_E_RightBGImage = null;
 		private UnityEngine.UI.Text m_E_LevelNameText = null;
 		private UnityEngine.UI.Text m_E_LevelDesText = null;
@@ -414,6 +355,8 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ReceiveButton = null;
 		private UnityEngine.UI.Image m_E_ReceiveImage = null;
 		private UnityEngine.UI.Text m_E_ReceivedText = null;
+		private UnityEngine.UI.Button m_E_PetMeleeButton = null;
+		private UnityEngine.UI.Image m_E_PetMeleeImage = null;
 		public Transform uiTransform = null;
 	}
 }

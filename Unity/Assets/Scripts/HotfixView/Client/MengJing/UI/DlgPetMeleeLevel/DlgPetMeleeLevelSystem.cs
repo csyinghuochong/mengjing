@@ -14,9 +14,9 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnClose);
             self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
 
-            self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
-            self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
-            self.View.E_Level_3Button.AddListener(() => self.OnLevel(2700003));
+            // self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
+            // self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
+            // self.View.E_Level_3Button.AddListener(() => self.OnLevel(2700003));
             self.View.E_ReceiveButton.AddListenerAsync(self.OnReceive);
 
             self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
