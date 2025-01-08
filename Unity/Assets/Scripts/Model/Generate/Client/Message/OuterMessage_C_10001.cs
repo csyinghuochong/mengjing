@@ -8010,10 +8010,10 @@ namespace ET
         public List<SkillPro> SkillList { get; set; } = new();
 
         [MemoryPackOrder(1)]
-        public List<int> TianFuList1 { get; set; } = new();
+        public List<KeyValuePairInt> TianFuList1 { get; set; } = new();
 
         [MemoryPackOrder(2)]
-        public List<int> TianFuList2 { get; set; } = new();
+        public List<KeyValuePairInt> TianFuList2 { get; set; } = new();
 
         [MemoryPackOrder(3)]
         public List<LifeShieldInfo> LifeShieldList { get; set; } = new();

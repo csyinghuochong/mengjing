@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -76,17 +77,17 @@ namespace ET.Server
             return self.GetBySkillID(juexingid) != null;
         }
 
-        public static List<int> TianFuList(this SkillSetComponentS self)
+        public static List<KeyValuePairInt> TianFuList(this SkillSetComponentS self)
         {
             return self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
         }
 
         public static void TianFuReSet(this SkillSetComponentS self)
         {
-            List<int> tianfus = self.TianFuList();
-            for (int i = 0; i < tianfus.Count; i++)
+            List<KeyValuePairInt> tianfus = self.TianFuList();
+            foreach (KeyValuePairInt keyValuePairInt in tianfus)
             {
-                self.AddTianFuAttribute(tianfus[i], false);
+                self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
             }
 
             if (self.TianFuPlan == 0)
@@ -102,11 +103,11 @@ namespace ET.Server
             self.UpdateSkillSet();
         }
 
-        public static List<int> TianFuListAll(this SkillSetComponentS self)
+        public static List<KeyValuePairInt> TianFuListAll(this SkillSetComponentS self)
         {
-            List<int> list = new List<int>();
+            List<KeyValuePairInt> list = new List<KeyValuePairInt>();
 
-            List<int> tianfulist = self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
+            List<KeyValuePairInt> tianfulist = self.TianFuPlan == 0 ? self.TianFuList1 : self.TianFuList2;
             for (int i = 0; i < tianfulist.Count; i++)
             {
                 list.Add(tianfulist[i]);
@@ -121,14 +122,14 @@ namespace ET.Server
             int tifuId = 0;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
             int learnLv = talentConfig.LearnRoseLv;
-            List<int> tianfuList = self.TianFuList();
+            List<KeyValuePairInt> tianfuList = self.TianFuList();
 
             for (int i = 0; i < tianfuList.Count; i++)
             {
-                TalentConfig talentConfig2 = TalentConfigCategory.Instance.Get(tianfuList[i]);
+                TalentConfig talentConfig2 = TalentConfigCategory.Instance.Get(tianfuList[i].KeyId);
                 if (talentConfig2.LearnRoseLv == learnLv)
                 {
-                    tifuId = tianfuList[i];
+                    tifuId = tianfuList[i].KeyId;
                     break;
                 }
             }
@@ -137,40 +138,64 @@ namespace ET.Server
 
         public static void TianFuRemove(this SkillSetComponentS self, int tianFuid)
         {
-            List<int> tianfuIds = self.TianFuList1;
-            if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
+            List<KeyValuePairInt> tianfuIds = self.TianFuList1;
+            foreach (KeyValuePairInt keyValuePairInt in tianfuIds)
             {
-                tianfuIds.Remove(tianFuid);
-                self.AddTianFuAttribute(tianFuid, false);
+                if (tianFuid > 0 && keyValuePairInt.KeyId == tianFuid)
+                {
+                    tianfuIds.Remove(keyValuePairInt);
+                    self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
+                    break;
+                }
             }
+
             tianfuIds = self.TianFuList2;
-            if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
+            foreach (KeyValuePairInt keyValuePairInt in tianfuIds)
             {
-                tianfuIds.Remove(tianFuid);
-                self.AddTianFuAttribute(tianFuid, false);
+                if (tianFuid > 0 && keyValuePairInt.KeyId == tianFuid)
+                {
+                    tianfuIds.Remove(keyValuePairInt);
+                    self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
+                    break;
+                }
             }
         }
 
         public static void TianFuAdd(this SkillSetComponentS self, int tianFuid)
         {
-            if (tianFuid > 0 && !self.TianFuList().Contains(tianFuid))
+            List<KeyValuePairInt> tianfuIds = self.TianFuList();
+            bool exist = tianfuIds.Any(keyValuePairInt => keyValuePairInt.KeyId == tianFuid);
+
+            if (tianFuid > 0 && !exist)
             {
-                self.TianFuList().Add(tianFuid);
-                self.AddTianFuAttribute(tianFuid, true);
+                KeyValuePairInt keyValuePairInt = new KeyValuePairInt() { KeyId = tianFuid, Value = 1 };
+                tianfuIds.Add(keyValuePairInt);
+                self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
             }
         }
 
         public static void AddiontTianFu(this SkillSetComponentS self, int tianFuid, bool active)
         {
-            if (self.TianFuAddition.Contains(tianFuid) && !active)
+            KeyValuePairInt tianFu = null;
+            foreach (KeyValuePairInt keyValuePairInt in self.TianFuAddition)
             {
-                self.TianFuAddition.Remove(tianFuid);
-                self.AddTianFuAttribute(tianFuid, true);
+                if (keyValuePairInt.KeyId == tianFuid)
+                {
+                    tianFu = keyValuePairInt;
+                }
             }
-            if (!self.TianFuAddition.Contains(tianFuid) && active)
+
+            if (tianFu != null && !active)
             {
-                self.TianFuAddition.Add(tianFuid);
-                self.AddTianFuAttribute(tianFuid, false);
+                self.TianFuAddition.Remove(tianFu);
+                self.AddTianFuAttribute(tianFu.KeyId, true, (int)tianFu.Value);
+            }
+
+            if (tianFu == null && active)
+            {
+                tianFu = new KeyValuePairInt() { KeyId = tianFuid, Value = 1 };
+                self.TianFuAddition.Add(tianFu);
+                self.AddTianFuAttribute(tianFu.KeyId, false, (int)tianFu.Value);
             }
         }
 
@@ -179,16 +204,18 @@ namespace ET.Server
         {
             self.TianFuPlan = plan;
 
-            List<int> oldtianfus = plan == 0 ? self.TianFuList2 : self.TianFuList1;
-            for (int i = 0; i < oldtianfus.Count; i++)
+            List<KeyValuePairInt> oldtianfus = plan == 0 ? self.TianFuList2 : self.TianFuList1;
+            foreach (KeyValuePairInt keyValuePairInt in oldtianfus)
             {
-                self.AddTianFuAttribute(oldtianfus[i], false);
+                self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
             }
-            List<int> newtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList2;
-            for (int i = 0; i < newtianfus.Count; i++)
+
+            List<KeyValuePairInt> newtianfus = plan == 0 ? self.TianFuList1 : self.TianFuList2;
+            foreach (KeyValuePairInt keyValuePairInt in newtianfus)
             {
-                self.AddTianFuAttribute(newtianfus[i], true);
+                self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
             }
+
 
             self.GetParent<Unit>().GetComponent<SkillPassiveComponent>().UpdatePassiveSkill();
             self.UpdateSkillSet();
@@ -199,14 +226,25 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="tianfuId"></param>
-        public static void AddTianFuAttribute(this SkillSetComponentS self, int tianfuId, bool add)
+        public static void AddTianFuAttribute(this SkillSetComponentS self, int tianfuId, bool add, int lv)
         {
             if (tianfuId == 0)
             {
                 return;
             }
 
-            string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuId).AddPropreListStr.Split("@");
+            if (lv <= 0)
+            {
+                return;
+            }
+
+            string[] propreByLv = TalentConfigCategory.Instance.Get(tianfuId).AddPropreListStr.Split("#");
+            if (propreByLv.Length < lv)
+            {
+                return;
+            }
+
+            string[] addPropreListStr = propreByLv[lv - 1].Split("@");
 
             for (int k = 0; k < addPropreListStr.Length; k++)
             {
@@ -274,12 +312,19 @@ namespace ET.Server
         public static List<PropertyValue> GetTianfuRoleProLists(this SkillSetComponentS self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
-            List<int> tianfuids = self.TianFuListAll();
-            for (int i = 0; i < tianfuids.Count; i++)
+            List<KeyValuePairInt> tianfuids = self.TianFuListAll();
+            foreach (var keyValuePairInt in tianfuids)
             {
-                if (TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr != null && TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr != "")
+                TalentConfig talentConfig = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId);
+                if (!string.IsNullOrEmpty(talentConfig.AddPropreListStr))
                 {
-                    string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                    string[] propreByLv = talentConfig.AddPropreListStr.Split("#");
+                    if (propreByLv.Length < keyValuePairInt.Value)
+                    {
+                        continue;
+                    }
+
+                    string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
 
                     for (int k = 0; k < addPropreListStr.Length; k++)
                     {
@@ -414,13 +459,21 @@ namespace ET.Server
             return proList;
         }
 
-        public static List<int> GetTianFuIdsByType(this SkillSetComponentS self, string proType)
+        public static List<KeyValuePairInt> GetTianFuIdsByType(this SkillSetComponentS self, string proType)
         {
-            List<int> typeTianfus = new List<int>();
-            List<int> tianfuIds = self.TianFuListAll();
-            for (int i = 0; i < tianfuIds.Count; i++)
+            List<KeyValuePairInt> typeTianfus = new List<KeyValuePairInt>();
+            List<KeyValuePairInt> tianfuIds = self.TianFuListAll();
+
+            foreach (KeyValuePairInt keyValuePairInt in tianfuIds)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuIds[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -429,25 +482,35 @@ namespace ET.Server
                     {
                         continue;
                     }
-                    if (!typeTianfus.Contains(tianfuIds[i]))
+
+                    if (!typeTianfus.Contains(keyValuePairInt))
                     {
-                        typeTianfus.Add(tianfuIds[i]);
+                        typeTianfus.Add(keyValuePairInt);
                     }
                 }
             }
+
             return typeTianfus;
         }
 
         public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponentS self, int skillId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
             if (tianfuids.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
-            for (int i = 0; i < tianfuids.Count; i++)
+
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -455,10 +518,12 @@ namespace ET.Server
                     {
                         continue;
                     }
+
                     if (!properInfo[1].Contains(skillId.ToString()))
                     {
                         continue;
                     }
+
                     int key = int.Parse(properInfo[2]);
                     float value = float.Parse(properInfo[3]);
                     if (HideProList.ContainsKey(key))
@@ -471,18 +536,26 @@ namespace ET.Server
                     }
                 }
             }
+
             return HideProList;
         }
 
         public static bool IsSkillSingingCancel(this SkillSetComponentS self, int skillId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
             if (tianfuids.Count == 0)
                 return false;
 
-            for (int i = 0; i < tianfuids.Count; i++)
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -493,19 +566,27 @@ namespace ET.Server
                     }
                 }
             }
+
             return false;
         }
 
         public static List<int> GetBuffIdAdd(this SkillSetComponentS self, int skillId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
             if (tianfuids.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
-            for (int i = 0; i < tianfuids.Count; i++)
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -513,26 +594,36 @@ namespace ET.Server
                     {
                         continue;
                     }
+
                     if (!properInfo[1].Contains(skillId.ToString()))
                     {
                         continue;
                     }
+
                     addBuffs.Add(int.Parse(properInfo[2]));
                 }
             }
+
             return addBuffs;
         }
 
         public static List<int> GetBuffInitIdAdd(this SkillSetComponentS self, int skillId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
             if (tianfuids.Count == 0)
                 return null;
 
             List<int> addBuffs = new List<int>();
-            for (int i = 0; i < tianfuids.Count; i++)
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -540,24 +631,35 @@ namespace ET.Server
                     {
                         continue;
                     }
+
                     if (!properInfo[1].Contains(skillId.ToString()))
                     {
                         continue;
                     }
+
                     addBuffs.Add(int.Parse(properInfo[2]));
                 }
             }
+
             return addBuffs;
         }
 
         public static int GetReplaceSkillId(this SkillSetComponentS self, int skillId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
             if (tianfuids.Count == 0)
                 return 0;
-            for (int i = 0; i < tianfuids.Count; i++)
+
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] propreByLv = TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#");
+                if (propreByLv.Length < keyValuePairInt.Value)
+                {
+                    continue;
+                }
+
+                string[] addPropreListStr = propreByLv[(int)keyValuePairInt.Value - 1].Split("@");
+                
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -565,26 +667,31 @@ namespace ET.Server
                     {
                         continue;
                     }
+
                     if (properInfo[1] != skillId.ToString())
                     {
                         continue;
                     }
+
                     return int.Parse(properInfo[2]);
                 }
             }
+
             return 0;
         }
 
         public static Dictionary<int, float> GetBuffPropertyAdd(this SkillSetComponentS self, int buffId)
         {
-            List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
+            List<KeyValuePairInt> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
             if (tianfuids.Count == 0)
                 return null;
 
             Dictionary<int, float> HideProList = new Dictionary<int, float>();
-            for (int i = 0; i < tianfuids.Count; i++)
+
+            foreach (KeyValuePairInt keyValuePairInt in tianfuids)
             {
-                string[] addPropreListStr = TalentConfigCategory.Instance.Get(tianfuids[i]).AddPropreListStr.Split("@");
+                string[] addPropreListStr =
+                        TalentConfigCategory.Instance.Get(keyValuePairInt.KeyId).AddPropreListStr.Split("#")[keyValuePairInt.Value - 1].Split("@");
                 for (int k = 0; k < addPropreListStr.Length; k++)
                 {
                     string[] properInfo = addPropreListStr[k].Split(";");
@@ -592,10 +699,12 @@ namespace ET.Server
                     {
                         continue;
                     }
+
                     if (!properInfo[1].Contains(buffId.ToString()))
                     {
                         continue;
                     }
+
                     try
                     {
                         int key = int.Parse(properInfo[2]);
@@ -611,10 +720,11 @@ namespace ET.Server
                     }
                     catch (Exception ex)
                     {
-                        Log.Error($"GetBuffPropertyAdd: {tianfuids[i]}: " + ex.ToString());
+                        Log.Error($"GetBuffPropertyAdd: {keyValuePairInt.KeyId}: " + ex.ToString());
                     }
                 }
             }
+
             return HideProList;
         }
 
@@ -765,29 +875,34 @@ namespace ET.Server
         }
 
 
-        public static void OnActiveTianfu(this SkillSetComponentS self,int tianfuId)
+        public static void OnActiveTianfu(this SkillSetComponentS self, int tianfuId)
         {
-            TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
-            int position = talentConfig.Position;
             bool exist = false;
-            List<int> tianfuList = self.TianFuList();
-            for (int i = 0; i < tianfuList.Count; i++)
+            List<KeyValuePairInt> tianfuList = self.TianFuList();
+            foreach (KeyValuePairInt keyValuePairInt in tianfuList)
             {
-                TalentConfig talentConfig2 = TalentConfigCategory.Instance.Get(tianfuList[i]);
-                if (talentConfig2.Position == position)
+                if (tianfuId == keyValuePairInt.KeyId)
                 {
+                    TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
+                    if (keyValuePairInt.Value >= talentConfig.Lv)
+                    {
+                        // 已经达到最大等级
+                        return;
+                    }
+
                     exist = true;
-                    self.AddTianFuAttribute(tianfuList[i], false);
-                    self.AddTianFuAttribute(tianfuId, true);
-                    tianfuList[i] = tianfuId;
+                    self.AddTianFuAttribute(keyValuePairInt.KeyId, false, (int)keyValuePairInt.Value);
+                    keyValuePairInt.Value++;
+                    self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
                     break;
                 }
             }
 
             if (!exist)
             {
-                tianfuList.Add(tianfuId);
-                self.AddTianFuAttribute(tianfuId, true);
+                KeyValuePairInt keyValuePairInt = new KeyValuePairInt() { KeyId = tianfuId, Value = 1 };
+                tianfuList.Add(keyValuePairInt);
+                self.AddTianFuAttribute(keyValuePairInt.KeyId, true, (int)keyValuePairInt.Value);
             }
 
             self.UpdateSkillSet();

@@ -97,27 +97,33 @@ namespace ET.Client
             int talentType = self.Root().GetComponent<SkillSetComponentC>().TianFuPlan + 1;
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            List<int> oldtalentlist = skillSetComponent.TianFuList();
+            List<KeyValuePairInt> oldtalentlist = skillSetComponent.TianFuList();
             int talentId = TalentHelpter.GetTalentIdByPosition(self.Position, oldtalentlist);
 
             bool active = true;
             if (talentId == 0)
             {
                 active = false;
-                List<int> talentConfigs = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
-                if (talentConfigs == null)
+                talentId = TalentConfigCategory.Instance.GetTalentIdByPosition(userInfo.Occ, talentType, self.Position);
+                if (talentId == 0)
                 {
                     return;
                 }
-
-                talentId = talentConfigs[0];
             }
 
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(talentId);
             self.uiTransform.gameObject.SetActive(true);
 
-            int curlv = TalentHelpter.GetTalentCurLevel(userInfo.Occ, talentType, self.Position, talentId);
-            int maxlv = TalentHelpter.GetTalentMaxLevel(userInfo.Occ, talentType, self.Position);
+            int curlv = 0;
+            foreach (KeyValuePairInt keyValuePairInt in oldtalentlist)
+            {
+                if (talentId == keyValuePairInt.KeyId)
+                {
+                    curlv = (int)keyValuePairInt.Value;
+                }
+            }
+            
+            int maxlv = talentConfig.Lv;
 
             string[] descList = talentConfig.talentDes.Split(';');
             CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);

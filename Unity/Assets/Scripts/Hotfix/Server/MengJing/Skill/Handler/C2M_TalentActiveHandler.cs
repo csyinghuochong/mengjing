@@ -10,9 +10,11 @@ namespace ET.Server
             UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();
             int tianfuplan = skillSetComponentS.TianFuPlan + 1;
-            List<int> oldtalentlist = new List<int>();
+            int occ = userInfoComponentS.UserInfo.Occ;
+            List<KeyValuePairInt> oldtalentlist = new List<KeyValuePairInt>();
             oldtalentlist.AddRange(skillSetComponentS.TianFuList());
-            int erroCode = TalentHelpter.OnTalentActive(userInfoComponentS.UserInfo.Occ,
+            int erroCode = TalentHelpter.OnTalentActive(
+                occ,
                 tianfuplan,
                 request.Position,
                 oldtalentlist,
@@ -21,7 +23,8 @@ namespace ET.Server
 
             if (erroCode == ErrorCode.ERR_Success)
             {
-                skillSetComponentS.OnActiveTianfu(oldtalentlist[^1]);
+                int talentid = TalentConfigCategory.Instance.GetTalentIdByPosition(occ, tianfuplan, request.Position);
+                skillSetComponentS.OnActiveTianfu(talentid);
             }
 
             response.Error = erroCode;

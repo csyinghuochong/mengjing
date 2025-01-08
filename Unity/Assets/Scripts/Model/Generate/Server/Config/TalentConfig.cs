@@ -69,6 +69,8 @@ namespace ET
 		public int TalentType { get; set; }
 		/// <summary>天赋位置</summary>
 		public int Position { get; set; }
+		/// <summary>天赋等级</summary>
+		public int Lv { get; set; }
 		/// <summary>前置id</summary>
 		public int[] PreId { get; set; }
 		/// <summary>需要当前类型已使用天赋点</summary>

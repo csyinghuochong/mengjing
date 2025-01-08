@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -78,10 +79,10 @@ namespace ET.Client
         {
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
 
-            List<int> activeList = skillSetComponent.TianFuList();
-            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon3Image.gameObject, !activeList.Contains(self.TianFuList[2]));
-            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon2Image.gameObject, !activeList.Contains(self.TianFuList[1]));
-            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon1Image.gameObject, !activeList.Contains(self.TianFuList[0]));
+            List<KeyValuePairInt> activeList = skillSetComponent.TianFuList();
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon3Image.gameObject, !activeList.Any(keyValuePairInt => keyValuePairInt.KeyId == self.TianFuList[2]));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon2Image.gameObject, !activeList.Any(keyValuePairInt => keyValuePairInt.KeyId == self.TianFuList[1]));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon1Image.gameObject, !activeList.Any(keyValuePairInt => keyValuePairInt.KeyId == self.TianFuList[0]));
         }
     }
 }

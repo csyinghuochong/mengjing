@@ -9,11 +9,11 @@ namespace ET.Server
 
         public int TianFuPlan { get; set; } = 0; //对应TalentConfig.TalentType
 
-        public List<int> TianFuList1{ get; set; } = new List<int>();        //第一套天赋 只记录每个位置当前激活的天赋id.  
+        public List<KeyValuePairInt> TianFuList1{ get; set; } = new List<KeyValuePairInt>();        //第一套天赋 只记录每个位置当前激活的天赋id->等级.  
 
-        public List<int> TianFuList2{ get; set; } = new List<int>();        //第二套天赋 
+        public List<KeyValuePairInt> TianFuList2{ get; set; } = new List<KeyValuePairInt>();        //第二套天赋 
 
-        public List<int> TianFuAddition = new List<int>();      //附加天赋
+        public List<KeyValuePairInt> TianFuAddition = new List<KeyValuePairInt>();      //附加天赋
 
         /// <summary>
         /// 玩家携带的技能列表

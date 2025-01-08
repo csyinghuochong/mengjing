@@ -9,11 +9,11 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillInitRequest request, M2C_SkillInitResponse response)
         {
-           
+
             int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
             int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
-           
+
             //强化技能可以激活
             bool haveqianghuaskill = false;
             for (int i = 0; i < skillSetComponent.SkillList.Count; i++)
@@ -106,7 +106,7 @@ namespace ET.Server
                 }
             }
 
-            List<int> tianfulist1 = new List<int>();
+            List<KeyValuePairInt> tianfulist1 = new List<KeyValuePairInt>();
             for (int i = 0; i < skillSetComponent.TianFuList1.Count; i++)
             {
                 if (!tianfulist1.Contains(skillSetComponent.TianFuList1[i]))
@@ -115,7 +115,7 @@ namespace ET.Server
                 }
             }
 
-            List<int> tianfulist2 = new List<int>();
+            List<KeyValuePairInt> tianfulist2 = new List<KeyValuePairInt>();
             for (int i = 0; i < skillSetComponent.TianFuList2.Count; i++)
             {
                 if (!tianfulist2.Contains(skillSetComponent.TianFuList2[i]))
@@ -123,17 +123,18 @@ namespace ET.Server
                     tianfulist2.Add(skillSetComponent.TianFuList2[i]);
                 }
             }
+
             skillSetComponent.TianFuList1 = tianfulist1;
             skillSetComponent.TianFuList2 = tianfulist2;
-            
-            
+
+
             response.SkillSetInfo = SkillSetInfo.Create();
-            response.SkillSetInfo.SkillList .AddRange( skillSetComponent.SkillList);
-            response.SkillSetInfo.LifeShieldList .AddRange(skillSetComponent.LifeShieldList); 
+            response.SkillSetInfo.SkillList.AddRange(skillSetComponent.SkillList);
+            response.SkillSetInfo.LifeShieldList.AddRange(skillSetComponent.LifeShieldList);
             response.SkillSetInfo.TianFuPlan = skillSetComponent.TianFuPlan;
-            
-            response.SkillSetInfo.TianFuList1 .AddRange(tianfulist1); 
-            response.SkillSetInfo.TianFuList2 .AddRange(tianfulist2); 
+
+            response.SkillSetInfo.TianFuList1.AddRange(tianfulist1);
+            response.SkillSetInfo.TianFuList2.AddRange(tianfulist2);
             await ETTask.CompletedTask;
 
         }
