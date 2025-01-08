@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetMeleeLevelItem))]
     [FriendOf(typeof(DlgPetMeleeLevel))]
     public static class DlgPetMeleeLevelSystem
     {
@@ -14,9 +15,8 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnClose);
             self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
 
-            // self.View.E_Level_1Button.AddListener(() => self.OnLevel(2700001));
-            // self.View.E_Level_2Button.AddListener(() => self.OnLevel(2700002));
-            // self.View.E_Level_3Button.AddListener(() => self.OnLevel(2700003));
+            self.View.E_SectionSetToggleGroup.AddListener(self.OnSectionSet);
+            self.View.E_PetMeleeLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetMeleeLevelItemsRefresh);
             self.View.E_ReceiveButton.AddListenerAsync(self.OnReceive);
 
             self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
@@ -26,7 +26,23 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
         {
+            self.View.E_SectionSetToggleGroup.OnSelectIndex(0);
             self.View.E_RightBGImage.gameObject.SetActive(false);
+        }
+
+        private static void OnSectionSet(this DlgPetMeleeLevel self, int index)
+        {
+            self.ShowPetMeleeSceneIds = ConfigData.PetMeleeSectionConfig[index];
+
+            self.AddUIScrollItems(ref self.ScrollItemPetMeleeLevelItems, self.ShowPetMeleeSceneIds.Count);
+            self.View.E_PetMeleeLevelItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetMeleeSceneIds.Count);
+        }
+
+        private static void OnPetMeleeLevelItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
+        {
+            Scroll_Item_PetMeleeLevelItem scrollItemPetMeleeLevelItem = self.ScrollItemPetMeleeLevelItems[index].BindTrans(transform);
+            scrollItemPetMeleeLevelItem.OnInit(self.ShowPetMeleeSceneIds[index]);
+            scrollItemPetMeleeLevelItem.E_TouchButton.AddListener(() => self.OnLevel(self.ShowPetMeleeSceneIds[index]));
         }
 
         private static void OnMonsterItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
@@ -47,23 +63,13 @@ namespace ET.Client
 
         private static void OnLevel(this DlgPetMeleeLevel self, int sceneId)
         {
-            int firstId = 0;
-            foreach (SceneConfig config in SceneConfigCategory.Instance.GetAll().Values)
+            for (int i = 0; i < self.ScrollItemPetMeleeLevelItems.Count; i++)
             {
-                if (config.MapType == SceneTypeEnum.PetMelee)
+                Scroll_Item_PetMeleeLevelItem scrollItemPetMeleeLevelItem = self.ScrollItemPetMeleeLevelItems[i];
+                if (scrollItemPetMeleeLevelItem.uiTransform != null)
                 {
-                    firstId = config.Id;
-                    break;
+                    scrollItemPetMeleeLevelItem.SetSelected(sceneId);
                 }
-            }
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
-            if (petMeleeDungeonId == 0 && sceneId != firstId ||
-                petMeleeDungeonId != 0 && sceneId > petMeleeDungeonId + 1)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
-                return;
             }
 
             self.SceneId = sceneId;
@@ -97,6 +103,9 @@ namespace ET.Client
 
             self.View.ES_RewardList.Refresh(sceneConfig.RewardShow);
 
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
+
             if (sceneId <= petMeleeDungeonId)
             {
                 self.View.E_EnterMapButton.gameObject.SetActive(false);
@@ -123,6 +132,25 @@ namespace ET.Client
 
         private static void OnEnterMap(this DlgPetMeleeLevel self)
         {
+            int firstId = 0;
+            foreach (SceneConfig config in SceneConfigCategory.Instance.GetAll().Values)
+            {
+                if (config.MapType == SceneTypeEnum.PetMelee)
+                {
+                    firstId = config.Id;
+                    break;
+                }
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
+            if (petMeleeDungeonId == 0 && self.SceneId != firstId ||
+                petMeleeDungeonId != 0 && self.SceneId > petMeleeDungeonId + 1)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
+                return;
+            }
+
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             PetMeleeInfo petMeleeInfo = petComponentC.PetMeleeInfoList[petComponentC.PetMeleePlan];
             if (petMeleeInfo.MainPetList.Count == 0)

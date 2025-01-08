@@ -7,6 +7,8 @@ namespace ET.Client
     {
         public DlgPetMeleeLevelViewComponent View { get => this.GetComponent<DlgPetMeleeLevelViewComponent>(); }
 
+        public Dictionary<int, EntityRef<Scroll_Item_PetMeleeLevelItem>> ScrollItemPetMeleeLevelItems;
+        public List<int> ShowPetMeleeSceneIds = new();
         public int SceneId;
         public Dictionary<int, EntityRef<Scroll_Item_MonsterItem>> ScrollItemMonsterItems;
         public List<int> ShowMonsterIds = new();

@@ -1920,6 +1920,17 @@ namespace ET
         # region 宠物乱斗配置
 
         /// <summary>
+        /// 宠物乱斗章节关卡
+        /// </summary>
+        /// <returns></returns>
+        [StaticField]
+        public static List<List<int>> PetMeleeSectionConfig = new List<List<int>>()
+        {
+            new List<int>() { 2700001, 2700002, 2700003 },
+            new List<int>() { 2700011, 2700012, 2700013 },
+        };
+        
+        /// <summary>
         /// 初始魔力值
         /// </summary>
         [StaticField]

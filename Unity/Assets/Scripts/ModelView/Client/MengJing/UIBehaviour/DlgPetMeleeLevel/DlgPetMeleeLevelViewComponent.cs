@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_ChapterSetToggleGroup
+		public UnityEngine.UI.ToggleGroup E_SectionSetToggleGroup
      	{
      		get
      		{
@@ -50,11 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ChapterSetToggleGroup == null )
+     			if( this.m_E_SectionSetToggleGroup == null )
      			{
-		    		this.m_E_ChapterSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_ChapterSet");
+		    		this.m_E_SectionSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_SectionSet");
      			}
-     			return this.m_E_ChapterSetToggleGroup;
+     			return this.m_E_SectionSetToggleGroup;
      		}
      	}
 
@@ -320,7 +320,7 @@ namespace ET.Client
 		{
 			this.m_E_CloseButton = null;
 			this.m_E_CloseImage = null;
-			this.m_E_ChapterSetToggleGroup = null;
+			this.m_E_SectionSetToggleGroup = null;
 			this.m_E_PetMeleeLevelItemsImage = null;
 			this.m_E_PetMeleeLevelItemsLoopVerticalScrollRect = null;
 			this.m_E_RightBGImage = null;
@@ -341,7 +341,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
-		private UnityEngine.UI.ToggleGroup m_E_ChapterSetToggleGroup = null;
+		private UnityEngine.UI.ToggleGroup m_E_SectionSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_PetMeleeLevelItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetMeleeLevelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Image m_E_RightBGImage = null;
