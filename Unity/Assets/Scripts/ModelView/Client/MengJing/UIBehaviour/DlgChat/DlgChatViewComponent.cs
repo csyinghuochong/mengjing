@@ -211,6 +211,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Button_Close
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Button_Close == null )
+				{
+					this.m_E_Button_Close = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Close");
+				}
+				return this.m_E_Button_Close;
+			}
+		}
+
 		public UnityEngine.UI.Image E_SendImage
      	{
      		get
@@ -243,6 +260,7 @@ namespace ET.Client
 			this.m_E_ChatImage = null;
 			this.m_E_SendButton = null;
 			this.m_E_SendImage = null;
+			this.m_E_Button_Close = null;
 			this.uiTransform = null;
 		}
 
@@ -259,6 +277,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ChatImage = null;
 		private UnityEngine.UI.Button m_E_SendButton = null;
 		private UnityEngine.UI.Image m_E_SendImage = null;
+		private UnityEngine.UI.Button m_E_Button_Close = null;
 		public Transform uiTransform = null;
 	}
 }
