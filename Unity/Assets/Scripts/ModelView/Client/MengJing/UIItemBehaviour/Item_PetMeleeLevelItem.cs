@@ -4,10 +4,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetMeleeLevelItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeLevelItem>
+	public  class Scroll_Item_PetMeleeLevelItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeLevelItem> 
 	{
 		public int SceneId;
-		
+
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
@@ -41,6 +41,30 @@ namespace ET.Client
      			else
      			{
 		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Selected");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_NameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_NameText == null )
+     				{
+		    			this.m_E_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Name");
+     				}
+     				return this.m_E_NameText;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Name");
      			}
      		}
      	}
@@ -96,6 +120,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_SelectedImage = null;
+			this.m_E_NameText = null;
 			this.m_E_TouchButton = null;
 			this.m_E_TouchImage = null;
 			this.uiTransform = null;
@@ -103,6 +128,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_SelectedImage = null;
+		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.UI.Button m_E_TouchButton = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
 		public Transform uiTransform = null;

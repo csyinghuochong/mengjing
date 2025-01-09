@@ -18,10 +18,14 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnInit(this Scroll_Item_PetMeleeLevelItem self, int sceneId)
+        public static void OnInit(this Scroll_Item_PetMeleeLevelItem self, int sceneId, int index)
         {
             self.SceneId = sceneId;
             self.E_SelectedImage.gameObject.SetActive(false);
+            using (zstring.Block())
+            {
+                self.E_NameText.text = zstring.Format("第{0}关", index + 1);
+            }
         }
 
         public static void SetSelected(this Scroll_Item_PetMeleeLevelItem self, int sceneId)

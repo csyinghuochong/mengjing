@@ -41,7 +41,7 @@ namespace ET.Client
         private static void OnPetMeleeLevelItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
         {
             Scroll_Item_PetMeleeLevelItem scrollItemPetMeleeLevelItem = self.ScrollItemPetMeleeLevelItems[index].BindTrans(transform);
-            scrollItemPetMeleeLevelItem.OnInit(self.ShowPetMeleeSceneIds[index]);
+            scrollItemPetMeleeLevelItem.OnInit(self.ShowPetMeleeSceneIds[index], index);
             scrollItemPetMeleeLevelItem.E_TouchButton.AddListener(() => self.OnLevel(self.ShowPetMeleeSceneIds[index]));
         }
 
