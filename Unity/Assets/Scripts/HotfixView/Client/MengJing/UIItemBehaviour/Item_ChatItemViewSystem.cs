@@ -74,7 +74,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    self.uiTransform.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(780, 200);
+                    self.uiTransform.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(780, 180);
                 }
 
                 for (int i = 0; i < ChannelEnum.Number; i++)
