@@ -87,6 +87,7 @@ namespace ET
         public const int ERR_LoginGameGateError01 = 200128;
         public const int ERR_AccountNameFormError = 20129;
         public const int ERR_PasswordFormError = 20130;
+        public const int ERR_GetRealmKeyOff = 20131;
         
         //300001-400001 服务器提示性错误码
         //角色

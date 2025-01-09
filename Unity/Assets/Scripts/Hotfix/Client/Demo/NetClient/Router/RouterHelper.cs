@@ -19,8 +19,7 @@ namespace ET.Client
             }
             
             Log.Info($"get router: {recvLocalConn} {routerAddress}");
-
-            Log.Debug($"CreateRouterSession.localConn: AddComponent<PingComponent>");
+            
             Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
             
             routerSession.AddComponent<PingComponent>().SceneType  =sceneTpe;

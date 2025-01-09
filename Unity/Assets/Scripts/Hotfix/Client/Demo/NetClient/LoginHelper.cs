@@ -51,12 +51,10 @@ namespace ET.Client
         {
             try
             {
-                Log.Debug("LoginGameAsync");
                 //请求游戏角色进入Map地图
                 PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
-
                 ClientSenderCompnent clientSenderComponent = root.GetComponent<ClientSenderCompnent>();
-
+                playerInfoComponent.DisconnectType = ErrorCode.ERR_GetRealmKeyOff;
                 C2R_GetRealmKey c2RGetRealmKey = C2R_GetRealmKey.Create();
                 c2RGetRealmKey.Token = playerInfoComponent.Token;
                 c2RGetRealmKey.Account = playerInfoComponent.Account;
@@ -76,7 +74,6 @@ namespace ET.Client
                     r2CGetRealmKey.Address,
                     reLink);
                 
-                Log.Debug($"NetClient2Main_LoginGame.  {netClient2MainLoginGame.Error}");
                 if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
                 {
                     Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");

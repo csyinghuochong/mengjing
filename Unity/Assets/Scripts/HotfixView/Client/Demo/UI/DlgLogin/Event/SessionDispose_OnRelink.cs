@@ -7,12 +7,22 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, SessionDispose args)
         {
-            Log.Warning("SessionDispose_OnHandler");
+           
             //await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
             ConfigData.LoadSceneFinished = false;
             //先简单做一下断线重连
-         
             MapComponent mapComponent = root.GetComponent<MapComponent>();
+            int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
+            
+            Log.Info($"SessionDispose_OnHandler: {mapComponent.SceneType}  {disconnectType}");
+            
+            if (disconnectType == ErrorCode.ERR_GetRealmKeyOff)
+            {
+                return;
+            }
+            
+            root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
+            
             if (mapComponent.SceneType < SceneTypeEnum.MainCityScene)
             {
                 //直接返回登陆
@@ -20,8 +30,6 @@ namespace ET.Client
                 return;
             }
 
-            int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
-            root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             switch (disconnectType)
             {
                 case ErrorCode.ERR_OtherAccountLogin:
