@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -17,6 +18,24 @@ namespace ET.Client
 
             self.View.E_SectionSetToggleGroup.AddListener(self.OnSectionSet);
             self.View.E_PetMeleeLevelItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetMeleeLevelItemsRefresh);
+
+            self.View.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                (pdata) => { self.BeginDrag(1, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                (pdata) => { self.EndDrag(1, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                (pdata) => { self.BeginDrag(2, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                (pdata) => { self.EndDrag(2, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                (pdata) => { self.BeginDrag(3, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                (pdata) => { self.EndDrag(3, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+                (pdata) => { self.BeginDrag(4, pdata as PointerEventData).Coroutine(); });
+            self.View.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+                (pdata) => { self.EndDrag(4, pdata as PointerEventData).Coroutine(); });
+
             self.View.E_ReceiveButton.AddListenerAsync(self.OnReceive);
 
             self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
@@ -49,6 +68,58 @@ namespace ET.Client
         {
             Scroll_Item_MonsterItem scrollItemMonsterItem = self.ScrollItemMonsterItems[index].BindTrans(transform);
             scrollItemMonsterItem.Refresh(self.ShowMonsterIds[index]);
+        }
+
+        public static async ETTask BeginDrag(this DlgPetMeleeLevel self, int id, PointerEventData pdata)
+        {
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            if (!PetFubenRewardConfigCategory.Instance.Contain(id))
+            {
+                return;
+            }
+
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CountryTips);
+            DlgCountryTips dlgCountryTips = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCountryTips>();
+            Vector2 localPoint;
+            RectTransform canvas = self.Root().GetComponent<GlobalComponent>().NormalRoot.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+
+            PetFubenRewardConfig shouJiConfig = PetFubenRewardConfigCategory.Instance.Get(id);
+            string rewards = shouJiConfig.RewardItems;
+            dlgCountryTips.OnUpdateUI(rewards, new Vector3(localPoint.x, localPoint.y + 50f, 0f), 1);
+        }
+
+        public static async ETTask EndDrag(this DlgPetMeleeLevel self, int id, PointerEventData pdata)
+        {
+            // PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            // int canRewardId = petComponent.GetCanRewardId();
+            // if (canRewardId == 0)
+            // {
+            //     return;
+            // }
+            //
+            // long instanceid = self.InstanceId;
+            // int errorCode = await PetNetHelper.RequestPetFubenReward(self.Root());
+            // if (instanceid != self.InstanceId)
+            // {
+            //     return;
+            // }
+            //
+            // if (errorCode == ErrorCode.ERR_Success)
+            // {
+            //     petComponent.PetFubeRewardId = canRewardId;
+            //     self.OnUpdateStar();
+            // }
+            // else
+            // {
+            //     await PetNetHelper.RequestPetInfo(self.Root());
+            //     self.OnUpdateStar();
+            // }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryTips);
+
+            await ETTask.CompletedTask;
         }
 
         private static void OnClose(this DlgPetMeleeLevel self)

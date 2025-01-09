@@ -1926,8 +1926,8 @@ namespace ET
         [StaticField]
         public static List<List<int>> PetMeleeSectionConfig = new List<List<int>>()
         {
-            new List<int>() { 2700001, 2700002, 2700003 },
-            new List<int>() { 2700011, 2700012, 2700013 },
+            new List<int>() { 2700101, 2700102, 2700103, 2700104},
+            new List<int>() { 2700201, 2700202, 2700203 ,2700204},
         };
         
         /// <summary>
