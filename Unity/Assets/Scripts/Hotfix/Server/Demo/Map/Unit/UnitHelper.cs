@@ -17,6 +17,11 @@ namespace ET.Server
             return self.GetComponent<AOIEntity>().GetBeSeePlayers();
         }
         
+        public static Dictionary<long, EntityRef<AOIEntity>>  GetGetSeeUnits(this Unit self)
+        {
+            return self.GetComponent<AOIEntity>().GetSeeUnits();
+        }
+        
         public static void RecordPostion(this Unit self, int sceneType, int sceneId)
         {
             bool record = false;

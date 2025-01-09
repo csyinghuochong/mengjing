@@ -15,7 +15,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
             
             M2C_CreateUnits createUnits = M2C_CreateUnits.Create();
-            Dictionary<long, EntityRef<AOIEntity>>  dict = unit.GetBeSeePlayers();
+            Dictionary<long, EntityRef<AOIEntity>>  dict = unit.GetGetSeeUnits();
             foreach (AOIEntity u in dict.Values)
             {
                 createUnits.Units.Add( MapMessageHelper.CreateUnitInfo(u.Unit) ); 
