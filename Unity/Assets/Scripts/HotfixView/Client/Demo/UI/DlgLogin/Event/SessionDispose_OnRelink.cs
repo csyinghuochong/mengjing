@@ -13,15 +13,13 @@ namespace ET.Client
             //先简单做一下断线重连
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
-            
+            root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             Log.Info($"SessionDispose_OnHandler: {mapComponent.SceneType}  {disconnectType}");
             
             if (disconnectType == ErrorCode.ERR_GetRealmKeyOff)
             {
                 return;
             }
-            
-            root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             
             if (mapComponent.SceneType < SceneTypeEnum.MainCityScene)
             {
