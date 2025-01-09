@@ -13,11 +13,12 @@
         private static void Destroy(this ClientSessionErrorComponent self)
         {
             Fiber fiber = self.Fiber();
+            Log.Debug($"ClientSessionErrorComponent.Destroy: {fiber.IsDisposed}");
+            
             if (fiber.IsDisposed)
             {
                 return;
             }
-            Log.Debug($"SessionPlayerComponent.Destroy: ");
             
             NetClient2Main_SessionDispose message = NetClient2Main_SessionDispose.Create();
             message.Error = self.GetParent<Session>().Error;
