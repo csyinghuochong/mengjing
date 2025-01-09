@@ -60,11 +60,6 @@ namespace ET.Client
 
             skillSetComponent.UpdateTianFuPlan(plan);
             self.RefreshTianFuList();
-
-            using (zstring.Block())
-            {
-                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("切换天赋 {0}", plan));
-            }
         }
 
         public static void RefreshTianFuList(this ES_SkillTianFu self)
