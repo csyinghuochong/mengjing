@@ -55,7 +55,7 @@ namespace ET.Client
                 self.E_SystemText.text = showValue;
 
                 self.uiTransform.GetComponent<RectTransform>().sizeDelta =
-                        new Vector2(1000, self.E_SystemText.preferredHeight + 50);
+                        new Vector2(780, self.E_SystemText.preferredHeight + 50);
             }
             else
             {
@@ -70,11 +70,11 @@ namespace ET.Client
                 if (self.E_TextText.preferredHeight > 100)
                 {
                     self.uiTransform.gameObject.GetComponent<RectTransform>().sizeDelta =
-                            new Vector2(1000, self.E_TextText.preferredHeight + 110);
+                            new Vector2(780, self.E_TextText.preferredHeight + 110);
                 }
                 else
                 {
-                    self.uiTransform.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(1000, 200);
+                    self.uiTransform.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(780, 200);
                 }
 
                 for (int i = 0; i < ChannelEnum.Number; i++)
