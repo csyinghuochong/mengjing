@@ -34,7 +34,7 @@ namespace ET.Client
             R2C_LoginAccount r2CLoginAccount = (R2C_LoginAccount)await session.Call(c2RLoginAccount);
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
-                session.AddComponent<ClientSessionErrorComponent>();
+                //session.AddComponent<ClientSessionErrorComponent>();
                 root.AddComponent<SessionComponent>().Session = session;
                 Log.Debug($"r2CLoginAccount.Error == ErrorCode.ERR_Success  Session = session");
             }
