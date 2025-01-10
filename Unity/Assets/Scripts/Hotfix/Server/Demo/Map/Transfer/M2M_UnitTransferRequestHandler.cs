@@ -59,9 +59,11 @@ namespace ET.Server
             {
                 case SceneTypeEnum.CellDungeon:
                     CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();
-                    MapComponent mapComponent = scene.GetComponent<MapComponent>();
                     //起始格子
                     fubenComponentS.OnEnterFirstCell(unit, request);
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    
                     break;
                 case (int)SceneTypeEnum.PetMing:
                 case (int)SceneTypeEnum.PetDungeon:

@@ -833,26 +833,15 @@ namespace ET.Server
             //动态创建副本
             long fubenid = IdGenerater.Instance.GenerateId();
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "TeamDungeon" + fubenid.ToString());
+            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "DragonDungeon" + fubenid.ToString());
             DragonDungeonComponentS dragonDungeonComponentS = fubnescene.AddComponent<DragonDungeonComponentS>();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-            mapComponent.SetMapInfo((int)SceneTypeEnum.TeamDungeon, sceneId, 0);
-            mapComponent.NavMeshId = sceneConfig.MapID;
+            mapComponent.SetMapInfo((int)SceneTypeEnum.DragonDungeon, sceneId, 0);
             dragonDungeonComponentS.EnterTime = TimeHelper.ServerNow();
             dragonDungeonComponentS.FubenType = fubentype;
-            dragonDungeonComponentS.BossDeadPosition =
-                    new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
-
+            dragonDungeonComponentS.InitFubenCell(sceneId);
+            
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
-            FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(sceneId).CreateMonsterPosi);
-
-            if (fubentype == TeamFubenType.ShenYuan)
-            {
-                int postionid = ConfigData.ShenYuanCreateConfig[sceneId];
-                FubenHelp.CreateMonsterList(fubnescene, postionid);
-            }
-
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.TeamFubens[teamid] = fubnescene.GetActorId();
         }

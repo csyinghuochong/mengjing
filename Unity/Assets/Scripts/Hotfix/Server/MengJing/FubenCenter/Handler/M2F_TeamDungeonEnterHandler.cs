@@ -25,7 +25,7 @@
                         fubenCenterComponent.CreateTeamDungeon(request.TeamId, request.SceneId, request.FubenType);
                         break;
                     case SceneTypeEnum.DragonDungeon:
-                        
+                        fubenCenterComponent.CreateDragonDungeon(request.TeamId, request.SceneId, request.FubenType);
                         break;
                     default:
                         Log.Error($"M2F_TeamDungeonEnterRequest.request.SceneType.Error: {request.SceneType}");
