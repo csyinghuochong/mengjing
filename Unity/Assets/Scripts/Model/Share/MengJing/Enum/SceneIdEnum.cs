@@ -68,6 +68,7 @@ namespace ET
         public const int SeasonTower = 25;  //赛季之塔
         public const int OneChallenge = 26;    //1v1挑战
         public const int PetMelee = 27;      //宠物乱斗
+        public const int DragonDungeon = 28;  //龙与地下城副本模式
     }
 
     public static class SceneSubTypeEnum
