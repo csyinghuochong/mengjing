@@ -79,8 +79,7 @@ namespace ET.Server
             self.PlayerState = PlayerState.None;
             TransferHelper.BeforeTransfer(unit);
             unit.GetParent<UnitComponent>().Remove(unit.Id);
-
-            EventSystem.Instance.Publish( scene, new UnitDisconnect() { UnitId = unit.Id }  );
+            TransferHelper.OnPlayerDisconnect(scene, unit.Id);
         }
         
         public static void OnRelogin(this DBSaveComponent self)

@@ -494,6 +494,7 @@ namespace ET.Server
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Arena, request.SceneId, FubenDifficulty.Normal, "0");
                         break;
                     case (int)SceneTypeEnum.TeamDungeon:
+                    case (int)SceneTypeEnum.DragonDungeon:
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.SceneType;
@@ -503,6 +504,7 @@ namespace ET.Server
                         M2F_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2F_TeamDungeonEnterRequest.Create();
                         M2T_TeamDungeonEnterRequest.UserID = unit.Id;
                         M2T_TeamDungeonEnterRequest.SceneId = request.SceneId == 0 ? 110001 : request.SceneId;
+                        M2T_TeamDungeonEnterRequest.SceneType = request.SceneType;
                         M2T_TeamDungeonEnterRequest.TeamId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.TeamId);
                         request.SceneId = M2T_TeamDungeonEnterRequest.SceneId;
                         F2M_TeamDungeonEnterResponse createUnit = (F2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
@@ -601,12 +603,12 @@ namespace ET.Server
             Scene scene = unit.Scene();
             BeforeTransfer(unit);
             await Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
-            
             //动态删除副本
-            OnTransfer(scene, userId);
+            OnFubenToMain(scene, userId);
         }
+        
 
-        public static void OnMainToMain(Unit unit)
+        private static void OnMainToMain(Unit unit)
         {
             RemovePetAndJingLing(unit);
             
@@ -618,7 +620,7 @@ namespace ET.Server
             CreateJingLing(unit);
         }
 
-        public static void OnTransfer(Scene scene, long userId)
+        public static void OnFubenToMain(Scene scene, long userId)
         {
             if (scene.IsDisposed)
             {
@@ -652,6 +654,19 @@ namespace ET.Server
             //     OneChallengeDungeonComponent jiayuanSceneComponent = scene.GetParent<OneChallengeDungeonComponent>();
             //     jiayuanSceneComponent.OnUnitLeave(scene);
             // }
+        }
+
+        public static void OnPlayerDisconnect(Scene scene, long userId)
+        {
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+
+            if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+            {
+                //动态删除副本
+                TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+                scene.Dispose();
+            }
+
         }
 
         public static void BeforeTransfer(Unit unit)

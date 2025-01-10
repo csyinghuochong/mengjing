@@ -8,7 +8,6 @@
         {
             if (request.TeamId == 0)
             {
-                
                 return;
             }
 
