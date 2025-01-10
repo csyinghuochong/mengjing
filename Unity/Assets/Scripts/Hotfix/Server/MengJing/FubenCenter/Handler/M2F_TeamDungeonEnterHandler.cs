@@ -12,13 +12,27 @@
             }
 
             ActorId fubenActorId = default;
-            scene.GetComponent<FubenCenterComponent>().TeamFubens.TryGetValue(request.TeamId, out fubenActorId);
+            FubenCenterComponent fubenCenterComponent = scene.GetComponent<FubenCenterComponent>();
+            fubenCenterComponent.TeamFubens.TryGetValue(request.TeamId, out fubenActorId);
             if (fubenActorId == default || request.UserID == request.TeamId)
             {
-                scene.GetComponent<FubenCenterComponent>().CreateTeamDungeon(request.TeamId, request.SceneId, request.FubenType);
+                fubenCenterComponent.TeamFubens[request.TeamId] = default;
             }
 
-            response.FubenActorId = scene.GetComponent<FubenCenterComponent>().TeamFubens[request.TeamId];
+            switch (request.SceneType)
+            {
+                    case SceneTypeEnum.TeamDungeon:
+                        fubenCenterComponent.CreateTeamDungeon(request.TeamId, request.SceneId, request.FubenType);
+                        break;
+                    case SceneTypeEnum.DragonDungeon:
+                        
+                        break;
+                    default:
+                        Log.Error($"M2F_TeamDungeonEnterRequest.request.SceneType.Error: {request.SceneType}");
+                        break;
+            }
+            
+            response.FubenActorId = fubenCenterComponent.TeamFubens[request.TeamId];
             await ETTask.CompletedTask;
         }
     }
