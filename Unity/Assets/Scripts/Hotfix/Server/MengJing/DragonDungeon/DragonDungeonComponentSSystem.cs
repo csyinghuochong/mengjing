@@ -333,7 +333,6 @@ namespace ET.Server
 
         public static void OnEnterFirstCell(this DragonDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
         {
-            self.InitFubenCell(request.SceneId);
             CellDungeonInfo curCell = self.CurrentFubenCell;
             self.HurtValue = 0;
             self.EnterTime = TimeHelper.ServerNow();
