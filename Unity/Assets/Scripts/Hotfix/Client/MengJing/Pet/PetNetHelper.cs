@@ -36,6 +36,15 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestPetMeleeFubenReward(Scene root, int id)
+        {
+            C2M_PetMeleeFubenRewardRequest request = C2M_PetMeleeFubenRewardRequest.Create();
+            request.Id = id;
+
+            M2C_PetMeleeFubenRewardResponse response = (M2C_PetMeleeFubenRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
         /// <summary>
         /// 切换主站宠物。 切换后镜头跟随改宠物 右下角刷新为改宠物的技能 并且可以主动释放该宠物的技能
         /// </summary>

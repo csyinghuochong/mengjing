@@ -203,8 +203,8 @@ namespace ET.Client
             M2C_PetMeleeRewardResponse respone = (M2C_PetMeleeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (respone.Error == ErrorCode.ERR_Success)
             {
-                UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-                userInfoComponent.UserInfo.PetMeleeRewardIds.Add(sceneId);
+                PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+                petComponentC.PetMeleeRewardIds.Add(sceneId);
             }
 
             return respone.Error;

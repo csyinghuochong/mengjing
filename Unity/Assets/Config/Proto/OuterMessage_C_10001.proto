@@ -915,9 +915,6 @@ message UserInfoProto
 	repeated  KeyValuePairInt BuyStoreItems = 61;
 
 	int32 TalentPoints = 62;
-
-	repeated int32 PetMeleeRewardIds = 63;
-
 }
 
 message M2C_RoleDataUpdate // IMessage
@@ -2485,6 +2482,9 @@ message M2C_RolePetList // ILocationResponse
 	repeated int32 PetBarConfigList = 19;
 	int32 PetMeleePlan = 20;
 	repeated PetMeleeInfo PetMeleeInfoList = 21;
+	repeated PetMeleeFubenInfo PetMeleeFubenInfos = 22;
+	repeated int PetMeleeRewardIds = 23;
+	repeated int PetMeleeFubeRewardIds = 24;
 }
 
 
@@ -7304,6 +7304,13 @@ message PetMeleeCardInfo
 	int64 PetId = 4;
 }
 
+message PetMeleeFubenInfo
+{
+	int32 PetFubenId = 1;
+	int32 Star = 2;
+	int32 Reward = 3;
+}
+
 //ResponseType M2C_PetMeleePlanResponse
 message C2M_PetMeleePlanRequest // ILocationRequest
 {
@@ -7389,6 +7396,23 @@ message C2M_PetMeleeRewardRequest // ILocationRequest
 }
 
 message M2C_PetMeleeRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType M2C_PetMeleeFubenRewardResponse
+//宠物乱斗星级奖励
+message C2M_PetMeleeFubenRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Id = 1;
+}
+
+message M2C_PetMeleeFubenRewardResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

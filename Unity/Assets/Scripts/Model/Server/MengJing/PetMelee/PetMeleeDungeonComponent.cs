@@ -6,6 +6,7 @@ namespace ET.Server
     public class PetMeleeDungeonComponent : Entity, IAwake, IDestroy
     {
         public bool GameStart;
+        public long StartTime;
         public bool GameOver;
         public long PetMeleeDungeonBattleTimer; //战斗倒计时
         public long PetMeleeDungeonDealCardTimer; //发牌记时

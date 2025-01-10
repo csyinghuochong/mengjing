@@ -26,6 +26,25 @@ namespace ET.Client
             {
                 self.E_NameText.text = zstring.Format("第{0}关", index + 1);
             }
+
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            int star = 0;
+            foreach (PetMeleeFubenInfo petMeleeFubenInfo in petComponentC.PetMeleeFubenInfos)
+            {
+                if (petMeleeFubenInfo.PetFubenId == sceneId)
+                {
+                    star = petMeleeFubenInfo.Star;
+                    break;
+                }
+            }
+
+            for (int i = 1; i <= 3; i++)
+            {
+                using (zstring.Block())
+                {
+                    self.uiTransform.Find(zstring.Format("Start_Show_{0}", i)).gameObject.SetActive(i <= star);
+                }
+            }
         }
 
         public static void SetSelected(this Scroll_Item_PetMeleeLevelItem self, int sceneId)

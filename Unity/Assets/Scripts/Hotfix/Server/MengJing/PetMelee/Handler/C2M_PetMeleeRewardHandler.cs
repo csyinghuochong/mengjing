@@ -24,8 +24,8 @@
                 return;
             }
 
-            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-            if (userInfoComponent.UserInfo.PetMeleeRewardIds.Contains(request.SceneId))
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            if (petComponentS.PetMeleeRewardIds.Contains(request.SceneId))
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
                 return;
@@ -37,7 +37,7 @@
 
             if (unit.GetComponent<BagComponentS>().OnAddItemData(sceneConfig.RewardShow, $"{ItemGetWay.PetMeleeReward}_{TimeHelper.ServerNow()}"))
             {
-                userInfoComponent.UserInfo.PetMeleeRewardIds.Add(request.SceneId);
+                petComponentS.PetMeleeRewardIds.Add(request.SceneId);
             }
             else
             {

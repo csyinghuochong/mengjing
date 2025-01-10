@@ -479,6 +479,7 @@ namespace ET.Server
         public static void SetGameStart(this PetMeleeDungeonComponent self)
         {
             self.GameStart = true;
+            self.StartTime = TimeInfo.Instance.ServerNow();
 
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             self.PetMeleeDungeonBattleTimer = timerComponent.NewOnceTimer(TimeInfo.Instance.ServerNow() + ConfigData.PetMeleeBattleMaxTime,
@@ -503,22 +504,52 @@ namespace ET.Server
                 return;
             }
 
-            self.GameOver = true;
-
-            if (combatResult == CombatResultEnum.Win)
+            if (self.Player == null)
             {
-                self.Player.GetComponent<NumericComponentS>()
-                        .ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                return;
             }
+
+            self.GameOver = true;
 
             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = combatResult;
-            // 奖励。。。
-
-            if (self.Player != null)
+            long nowTime = TimeInfo.Instance.ServerNow();
+            // 先按通关时间来判断星星
+            if (nowTime - self.StartTime <= 60 * 1000)
             {
-                MapMessageHelper.SendToClient(self.Player, m2C_FubenSettlement);
+                // 3星
+                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 1 };
             }
+            else if (nowTime - self.StartTime <= 120 * 1000)
+            {
+                // 2星
+                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 1, 0 };
+            }
+            else
+            {
+                // 1星
+                m2C_FubenSettlement.StarInfos = new List<int>() { 1, 0, 0 };
+            }
+
+            if (combatResult == CombatResultEnum.Win)
+            {
+                self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+
+                int sceneId = self.Scene().GetComponent<MapComponent>().SceneId;
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+                // m2C_FubenSettlement.ReardList.AddRange(rewardItems);
+                self.Player.GetComponent<BagComponentS>().OnAddItemData(sceneConfig.RewardShow, $"{ItemGetWay.PetMeleeReward}_{TimeHelper.ServerNow()}");
+
+                int star = 0;
+                for (int i = 0; i < m2C_FubenSettlement.StarInfos.Count; i++)
+                {
+                    star += m2C_FubenSettlement.StarInfos[i];
+                }
+
+                self.Player.GetComponent<PetComponentS>().OnPassPetMeleeFuben(sceneId, star);
+            }
+
+            MapMessageHelper.SendToClient(self.Player, m2C_FubenSettlement);
         }
 
         private static void GenerateFuben(this PetMeleeDungeonComponent self)

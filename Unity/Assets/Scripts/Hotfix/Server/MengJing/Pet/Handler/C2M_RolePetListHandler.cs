@@ -30,6 +30,9 @@
             
             response.PetMeleePlan = petComponent.PetMeleePlan;
             response.PetMeleeInfoList.AddRange(petComponent.PetMeleeInfoList);
+            response.PetMeleeFubenInfos.AddRange(petComponent.PetMeleeFubenInfos);
+            response.PetMeleeRewardIds.AddRange(petComponent.PetMeleeRewardIds);
+            response.PetMeleeFubeRewardIds.AddRange(petComponent.PetMeleeFubeRewardIds);
             
             await ETTask.CompletedTask;
         }

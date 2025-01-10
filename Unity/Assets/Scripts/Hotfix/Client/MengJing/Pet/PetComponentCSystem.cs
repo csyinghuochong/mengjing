@@ -39,6 +39,9 @@ namespace ET.Client
             self.PetBarConfigList = m2C_RolePetList.PetBarConfigList;
             self.PetMeleePlan = m2C_RolePetList.PetMeleePlan;
             self.PetMeleeInfoList = m2C_RolePetList.PetMeleeInfoList;
+            self.PetMeleeFubenInfos = m2C_RolePetList.PetMeleeFubenInfos;
+            self.PetMeleeRewardIds = m2C_RolePetList.PetMeleeRewardIds;
+            self.PetMeleeFubeRewardIds = m2C_RolePetList.PetMeleeFubeRewardIds;
         }
 
         public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)
@@ -380,7 +383,18 @@ namespace ET.Client
 
             return 0;
         }
+        
+        public static int GetPetMeleeTotalStar(this PetComponentC self)
+        {
+            int star = 0;
+            for (int i = 0; i < self.PetMeleeFubenInfos.Count; i++)
+            {
+                star += self.PetMeleeFubenInfos[i].Star;
+            }
 
+            return star;
+        }
+        
         public static void OnRolePetUpdate(this PetComponentC self, RolePetInfo rolePetInfo)
         {
             for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
@@ -409,6 +423,24 @@ namespace ET.Client
             PetFubenInfo.Star = star;
             PetFubenInfo.Reward = 0;
             self.PetFubenInfos.Add(PetFubenInfo);
+        }
+
+        public static void OnPassPetMeleeFuben(this PetComponentC self, int petfubenId, int star)
+        {
+            for (int i = 0; i < self.PetMeleeFubenInfos.Count; i++)
+            {
+                if (self.PetMeleeFubenInfos[i].PetFubenId == petfubenId)
+                {
+                    self.PetMeleeFubenInfos[i].Star = star > self.PetMeleeFubenInfos[i].Star ? star : self.PetMeleeFubenInfos[i].Star;
+                    return;
+                }
+            }
+
+            PetMeleeFubenInfo petMeleeFubenInfo = PetMeleeFubenInfo.Create();
+            petMeleeFubenInfo.PetFubenId = petfubenId;
+            petMeleeFubenInfo.Star = star;
+            petMeleeFubenInfo.Reward = 0;
+            self.PetMeleeFubenInfos.Add(petMeleeFubenInfo);
         }
 
         public static bool HavePetSkin(this PetComponentC self, int petId, int skinId)

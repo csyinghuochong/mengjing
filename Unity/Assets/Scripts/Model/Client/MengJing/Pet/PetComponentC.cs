@@ -22,7 +22,10 @@ namespace ET.Client
         public List<int> PetBarConfigList { get; set; } = new();
 
         public int PetMeleePlan { get; set; }
-        public List<PetMeleeInfo> PetMeleeInfoList { get; set; } = new();
+        public List<PetMeleeInfo> PetMeleeInfoList { get; set; } = new(); //宠物乱斗 宠物卡牌配置信息
+        public List<PetMeleeFubenInfo> PetMeleeFubenInfos { get; set; } = new(); //宠物乱斗 副本信息
+        public List<int> PetMeleeRewardIds { get; set; } = new(); //宠物乱斗 领取的关卡奖励Id
+        public List<int> PetMeleeFubeRewardIds { get; set; } = new(); //宠物乱斗 领取的星星数量奖励Id
         
         public List<int> PetCangKuOpen { get; set; } = new();
 

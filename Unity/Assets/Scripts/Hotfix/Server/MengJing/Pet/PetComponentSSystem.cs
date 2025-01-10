@@ -1638,6 +1638,17 @@ namespace ET.Server
             return rewardId;
         }
 
+        public static int GetPetMeleeTotalStar(this PetComponentS self)
+        {
+            int star = 0;
+            for (int i = 0; i < self.PetMeleeFubenInfos.Count; i++)
+            {
+                star += self.PetMeleeFubenInfos[i].Star;
+            }
+
+            return star;
+        }
+
         public static void OnUnlockSkin(this PetComponentS self, string skininfo)
         {
             string[] petskininfo = skininfo.Split(';');
@@ -1704,6 +1715,24 @@ namespace ET.Server
             PetFubenInfo.Star = star;
             PetFubenInfo.Reward = 0;
             self.PetFubenInfos.Add( PetFubenInfo);
+        }
+
+        public static void OnPassPetMeleeFuben(this PetComponentS self, int petfubenId, int star)
+        {
+            for (int i = 0; i < self.PetMeleeFubenInfos.Count; i++)
+            {
+                if (self.PetMeleeFubenInfos[i].PetFubenId == petfubenId)
+                {
+                    self.PetMeleeFubenInfos[i].Star = star > self.PetMeleeFubenInfos[i].Star ? star : self.PetMeleeFubenInfos[i].Star;
+                    return;
+                }
+            }
+
+            PetMeleeFubenInfo petMeleeFubenInfo = PetMeleeFubenInfo.Create();
+            petMeleeFubenInfo.PetFubenId = petfubenId;
+            petMeleeFubenInfo.Star = star;
+            petMeleeFubenInfo.Reward = 0;
+            self.PetMeleeFubenInfos.Add(petMeleeFubenInfo);
         }
 
         public static void OnPetMingRecord(this PetComponentS self, PetMingRecord record)

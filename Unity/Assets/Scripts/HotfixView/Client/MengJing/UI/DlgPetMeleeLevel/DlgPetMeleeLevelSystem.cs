@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -46,6 +42,7 @@ namespace ET.Client
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
         {
             self.View.E_SectionSetToggleGroup.OnSelectIndex(0);
+            self.OnUpdateStar();
             self.View.E_RightBGImage.gameObject.SetActive(false);
         }
 
@@ -72,7 +69,6 @@ namespace ET.Client
 
         public static async ETTask BeginDrag(this DlgPetMeleeLevel self, int id, PointerEventData pdata)
         {
-            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             if (!PetFubenRewardConfigCategory.Instance.Contain(id))
             {
                 return;
@@ -85,41 +81,63 @@ namespace ET.Client
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
 
-            PetFubenRewardConfig shouJiConfig = PetFubenRewardConfigCategory.Instance.Get(id);
+            PetMeleeFubenRewardConfig shouJiConfig = PetMeleeFubenRewardConfigCategory.Instance.Get(id);
             string rewards = shouJiConfig.RewardItems;
             dlgCountryTips.OnUpdateUI(rewards, new Vector3(localPoint.x, localPoint.y + 50f, 0f), 1);
         }
 
         public static async ETTask EndDrag(this DlgPetMeleeLevel self, int id, PointerEventData pdata)
         {
-            // PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            // int canRewardId = petComponent.GetCanRewardId();
-            // if (canRewardId == 0)
-            // {
-            //     return;
-            // }
-            //
-            // long instanceid = self.InstanceId;
-            // int errorCode = await PetNetHelper.RequestPetFubenReward(self.Root());
-            // if (instanceid != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // if (errorCode == ErrorCode.ERR_Success)
-            // {
-            //     petComponent.PetFubeRewardId = canRewardId;
-            //     self.OnUpdateStar();
-            // }
-            // else
-            // {
-            //     await PetNetHelper.RequestPetInfo(self.Root());
-            //     self.OnUpdateStar();
-            // }
-
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryTips);
 
+            if (!PetMeleeFubenRewardConfigCategory.Instance.Contain(id))
+            {
+                return;
+            }
+
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            int totalStar = petComponentC.GetPetMeleeTotalStar();
+            PetMeleeFubenRewardConfig rewardConfig = PetMeleeFubenRewardConfigCategory.Instance.Get(id);
+
+            if (petComponentC.PetMeleeFubeRewardIds.Contains(id))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("已经领取");
+                return;
+            }
+
+            if (rewardConfig.NeedStar > totalStar)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("星星数量不够");
+                return;
+            }
+
+            long instanceid = self.InstanceId;
+            int errorCode = await PetNetHelper.RequestPetMeleeFubenReward(self.Root(), id);
+            if (instanceid != self.InstanceId)
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CountryTips);
+                return;
+            }
+
+            if (errorCode == ErrorCode.ERR_Success)
+            {
+                petComponentC.PetMeleeFubeRewardIds.Add(id);
+                self.OnUpdateStar();
+            }
+            else
+            {
+                await PetNetHelper.RequestPetInfo(self.Root());
+                self.OnUpdateStar();
+            }
+
             await ETTask.CompletedTask;
+        }
+
+        private static void OnUpdateStar(this DlgPetMeleeLevel self)
+        {
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            int star = petComponent.GetPetMeleeTotalStar();
+            self.View.E_RewardProgressImage.fillAmount = star / 100f;
         }
 
         private static void OnClose(this DlgPetMeleeLevel self)
@@ -180,7 +198,7 @@ namespace ET.Client
             if (sceneId <= petMeleeDungeonId)
             {
                 self.View.E_EnterMapButton.gameObject.SetActive(false);
-                if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.PetMeleeRewardIds.Contains(sceneId))
+                if (self.Root().GetComponent<PetComponentC>().PetMeleeRewardIds.Contains(sceneId))
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(false);
                     self.View.E_ReceivedText.gameObject.SetActive(true);

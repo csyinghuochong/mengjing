@@ -83,6 +83,17 @@ namespace ET.Client
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
                     break;
                 case SceneTypeEnum.PetMelee:
+                    star = 0;
+                    for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)
+                    {
+                        star += args.m2C_FubenSettlement.StarInfos[i];
+                    }
+
+                    if (args.m2C_FubenSettlement.BattleResult == 1)
+                    {
+                        scene.GetComponent<PetComponentC>().OnPassPetMeleeFuben(mapComponent.SonSceneId, star);
+                    }
+                    
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().StopTimer();
                     PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
                         args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "宠物乱斗胜利" : "宠物乱斗失败",

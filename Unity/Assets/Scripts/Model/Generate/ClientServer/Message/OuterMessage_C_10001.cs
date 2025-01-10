@@ -3849,9 +3849,6 @@ namespace ET
         [MemoryPackOrder(61)]
         public int TalentPoints { get; set; }
 
-        [MemoryPackOrder(62)]
-        public List<int> PetMeleeRewardIds { get; set; } = new();
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3919,7 +3916,6 @@ namespace ET
             this.DefeatedBossIds.Clear();
             this.BuyStoreItems.Clear();
             this.TalentPoints = default;
-            this.PetMeleeRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -10769,6 +10765,15 @@ namespace ET
         [MemoryPackOrder(20)]
         public List<PetMeleeInfo> PetMeleeInfoList { get; set; } = new();
 
+        [MemoryPackOrder(21)]
+        public List<PetMeleeFubenInfo> PetMeleeFubenInfos { get; set; } = new();
+
+        [MemoryPackOrder(22)]
+        public List<int> PetMeleeRewardIds { get; set; } = new();
+
+        [MemoryPackOrder(23)]
+        public List<int> PetMeleeFubeRewardIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -10799,6 +10804,9 @@ namespace ET
             this.PetBarConfigList.Clear();
             this.PetMeleePlan = default;
             this.PetMeleeInfoList.Clear();
+            this.PetMeleeFubenInfos.Clear();
+            this.PetMeleeRewardIds.Clear();
+            this.PetMeleeFubeRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31806,6 +31814,39 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(OuterMessage.PetMeleeFubenInfo)]
+    public partial class PetMeleeFubenInfo : MessageObject
+    {
+        public static PetMeleeFubenInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMeleeFubenInfo), isFromPool) as PetMeleeFubenInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int PetFubenId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int Star { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int Reward { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.PetFubenId = default;
+            this.Star = default;
+            this.Reward = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(OuterMessage.C2M_PetMeleePlanRequest)]
     [ResponseType(nameof(M2C_PetMeleePlanResponse))]
     public partial class C2M_PetMeleePlanRequest : MessageObject, ILocationRequest
@@ -32184,6 +32225,74 @@ namespace ET
         public static M2C_PetMeleeRewardResponse Create(bool isFromPool = false)
         {
             return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeRewardResponse), isFromPool) as M2C_PetMeleeRewardResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 宠物乱斗星级奖励
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeFubenRewardRequest)]
+    [ResponseType(nameof(M2C_PetMeleeFubenRewardResponse))]
+    public partial class C2M_PetMeleeFubenRewardRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeFubenRewardRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeFubenRewardRequest), isFromPool) as C2M_PetMeleeFubenRewardRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int Id { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.Id = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeFubenRewardResponse)]
+    public partial class M2C_PetMeleeFubenRewardResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeFubenRewardResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeFubenRewardResponse), isFromPool) as M2C_PetMeleeFubenRewardResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -33055,18 +33164,21 @@ namespace ET
         public const ushort ItemInfoProto = 10842;
         public const ushort PetMeleeInfo = 10843;
         public const ushort PetMeleeCardInfo = 10844;
-        public const ushort C2M_PetMeleePlanRequest = 10845;
-        public const ushort M2C_PetMeleePlanResponse = 10846;
-        public const ushort C2M_PetMeleeSetRequest = 10847;
-        public const ushort M2C_PetMeleeSetResponse = 10848;
-        public const ushort C2M_PetMeleeGetMyCards = 10849;
-        public const ushort M2C_PetMeleeGetMyCards = 10850;
-        public const ushort M2C_PetMeleeDealCards = 10851;
-        public const ushort C2M_PetMeleePlace = 10852;
-        public const ushort M2C_PetMeleePlace = 10853;
-        public const ushort C2M_PetMeleeBegin = 10854;
-        public const ushort M2C_PetMeleeBegin = 10855;
-        public const ushort C2M_PetMeleeRewardRequest = 10856;
-        public const ushort M2C_PetMeleeRewardResponse = 10857;
+        public const ushort PetMeleeFubenInfo = 10845;
+        public const ushort C2M_PetMeleePlanRequest = 10846;
+        public const ushort M2C_PetMeleePlanResponse = 10847;
+        public const ushort C2M_PetMeleeSetRequest = 10848;
+        public const ushort M2C_PetMeleeSetResponse = 10849;
+        public const ushort C2M_PetMeleeGetMyCards = 10850;
+        public const ushort M2C_PetMeleeGetMyCards = 10851;
+        public const ushort M2C_PetMeleeDealCards = 10852;
+        public const ushort C2M_PetMeleePlace = 10853;
+        public const ushort M2C_PetMeleePlace = 10854;
+        public const ushort C2M_PetMeleeBegin = 10855;
+        public const ushort M2C_PetMeleeBegin = 10856;
+        public const ushort C2M_PetMeleeRewardRequest = 10857;
+        public const ushort M2C_PetMeleeRewardResponse = 10858;
+        public const ushort C2M_PetMeleeFubenRewardRequest = 10859;
+        public const ushort M2C_PetMeleeFubenRewardResponse = 10860;
     }
 }
