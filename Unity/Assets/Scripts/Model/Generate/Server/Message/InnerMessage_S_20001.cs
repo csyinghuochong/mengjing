@@ -8145,6 +8145,9 @@ namespace ET
         [MemoryPackOrder(3)]
         public int FubenType { get; set; }
 
+        [MemoryPackOrder(4)]
+        public int SceneType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8158,6 +8161,7 @@ namespace ET
             this.UserID = default;
             this.SceneId = default;
             this.FubenType = default;
+            this.SceneType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
