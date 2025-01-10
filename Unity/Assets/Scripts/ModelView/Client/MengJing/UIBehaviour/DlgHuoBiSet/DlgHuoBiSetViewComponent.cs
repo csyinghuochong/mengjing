@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgHuoBiSetViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Image E_TitleIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TitleIconImage == null )
+     			{
+		    		this.m_E_TitleIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TitleIcon");
+     			}
+     			return this.m_E_TitleIconImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_TitleTextText
      	{
      		get
@@ -417,6 +434,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_TitleIconImage = null;
 			this.m_E_TitleTextText = null;
 			this.m_E_TitleImage = null;
 			this.m_EG_GoldSetRectTransform = null;
@@ -444,6 +462,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_TitleIconImage = null;
 		private UnityEngine.UI.Text m_E_TitleTextText = null;
 		private UnityEngine.UI.Image m_E_TitleImage = null;
 		private UnityEngine.RectTransform m_EG_GoldSetRectTransform = null;

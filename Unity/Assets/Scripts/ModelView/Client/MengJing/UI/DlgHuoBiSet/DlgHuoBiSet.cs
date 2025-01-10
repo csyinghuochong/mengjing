@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [ComponentOf(typeof (UIBaseWindow))]
     public class DlgHuoBiSet: Entity, IAwake, IUILogic
@@ -7,5 +9,7 @@
         {
             get => this.GetComponent<DlgHuoBiSetViewComponent>();
         }
+        
+        public Sprite DefaultTitleIconSprite;
     }
 }

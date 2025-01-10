@@ -25,6 +25,8 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_Close2Button.AddListener(self.OnCloseButton);
 
+            self.DefaultTitleIconSprite = self.View.E_TitleIconImage.sprite;
+
             self.InitShow();
         }
 
@@ -111,6 +113,25 @@ namespace ET.Client
             // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             // self.View.E_TitleImage.sprite = sp;
 
+            // 标题图标
+            string titleIcon = windowID switch
+            {
+                WindowID.WindowID_Activity => "Img_UIActivity",
+                _ => "Default"
+            };
+
+            if (titleIcon != "Default")
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, titleIcon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.View.E_TitleIconImage.sprite = sp;
+            }
+            else
+            {
+                self.View.E_TitleIconImage.sprite = self.DefaultTitleIconSprite;
+            }
+
+            // 标题文字
             string title = windowID switch
             {
                 WindowID.WindowID_Task => "任务系统",
