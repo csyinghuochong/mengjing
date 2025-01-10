@@ -52,6 +52,12 @@ namespace ET.Server
 
             for (int i = 0; i < self.PetTuJianActives.Count; i++)
             {
+                if (!PetTuJianConfigCategory.Instance.Contain(self.PetTuJianActives[i]))
+                {
+                    Log.Error($"PetTuJianConfigCategory: {self.PetTuJianActives}");
+                    continue;
+                }
+
                 PetTuJianConfig jinglingCof = PetTuJianConfigCategory.Instance.Get(self.PetTuJianActives[i]);
                 NumericHelp.GetProList(jinglingCof.AddProperty, proList);
             }

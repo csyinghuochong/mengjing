@@ -117,6 +117,7 @@ namespace ET.Client
             string titleIcon = windowID switch
             {
                 WindowID.WindowID_Activity => "Img_UIActivity",
+                //WindowID.WindowID_Friend => "Img_UIActivity",
                 _ => "Default"
             };
 
