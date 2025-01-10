@@ -508,7 +508,7 @@ namespace ET.Client
             {
                 case 1:
                     self.View.E_NanDuTipText.text = "适合刚进入的探险者";
-                    self.View.E_AdditionText.text = string.Empty;
+                    self.View.E_AdditionText.text = "正常爆率";
                     break;
                 case 2:
                     self.View.E_NanDuTipText.text = "适合经常冒险";
