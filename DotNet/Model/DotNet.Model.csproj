@@ -54,6 +54,12 @@
         <ProjectReference Include="..\ThirdParty\DotNet.ThirdParty.csproj" />
     </ItemGroup> 
     <ItemGroup>
+      <Folder Include="..\..\Unity\Assets\Scripts\Model\Server\MengJing\DragonDungeon\">
+        <Link>Server\MengJing\DragonDungeon</Link>
+      </Folder>
+      <Folder Include="..\..\Unity\Assets\Scripts\Model\Server\MengJing\TeamDungeon\">
+        <Link>Server\MengJing\TeamDungeon</Link>
+      </Folder>
       <Folder Include="Generate\Config\" />
       <Folder Include="Server\MengJing\Happy\" />
       <Folder Include="Share\MengJing\Component\" />
