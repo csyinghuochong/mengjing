@@ -789,8 +789,12 @@ namespace ET.Server
 
 
         #region TeamDungeon
-        
-        
+
+        public static void OnTeamDungeonOver(this FubenCenterComponent self, long teamid)
+        {
+            self.TeamFubens[teamid] = default;
+        }
+
         public static void CreateTeamDungeon(this FubenCenterComponent self, long teamid, int sceneId, int fubentype)
         {
             //动态创建副本
@@ -819,6 +823,11 @@ namespace ET.Server
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.TeamFubens[teamid] = fubnescene.GetActorId();
         }
+
+        #endregion
+
+
+        #region DragonDungeon
 
         #endregion
     }

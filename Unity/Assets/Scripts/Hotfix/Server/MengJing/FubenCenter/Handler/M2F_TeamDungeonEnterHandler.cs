@@ -13,7 +13,7 @@
 
             ActorId fubenActorId = default;
             scene.GetComponent<FubenCenterComponent>().TeamFubens.TryGetValue(request.TeamId, out fubenActorId);
-            if (fubenActorId == default)
+            if (fubenActorId == default || request.UserID == request.TeamId)
             {
                 scene.GetComponent<FubenCenterComponent>().CreateTeamDungeon(request.TeamId, request.SceneId, request.FubenType);
             }
