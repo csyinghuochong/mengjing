@@ -834,14 +834,14 @@ namespace ET.Server
             long fubenid = IdGenerater.Instance.GenerateId();
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "TeamDungeon" + fubenid.ToString());
-            DragonDungeonComponent teamDungeonComponent = fubnescene.AddComponent<DragonDungeonComponent>();
+            DragonDungeonComponentS teamDungeonComponentS = fubnescene.AddComponent<DragonDungeonComponentS>();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             mapComponent.SetMapInfo((int)SceneTypeEnum.TeamDungeon, sceneId, 0);
             mapComponent.NavMeshId = sceneConfig.MapID;
-            teamDungeonComponent.EnterTime = TimeHelper.ServerNow();
-            teamDungeonComponent.FubenType = fubentype;
-            teamDungeonComponent.BossDeadPosition =
+            teamDungeonComponentS.EnterTime = TimeHelper.ServerNow();
+            teamDungeonComponentS.FubenType = fubentype;
+            teamDungeonComponentS.BossDeadPosition =
                     new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
 
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);

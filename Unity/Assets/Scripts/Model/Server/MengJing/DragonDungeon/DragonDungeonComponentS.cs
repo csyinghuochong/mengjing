@@ -5,7 +5,7 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Scene))]
-    public class DragonDungeonComponent : Entity, IAwake, IDestroy
+    public class DragonDungeonComponentS : Entity, IAwake, IDestroy
     {
         public long Timer;
         public int FubenType { get; set; }
