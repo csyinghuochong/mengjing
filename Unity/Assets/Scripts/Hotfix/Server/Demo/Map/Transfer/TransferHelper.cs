@@ -494,17 +494,16 @@ namespace ET.Server
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Arena, request.SceneId, FubenDifficulty.Normal, "0");
                         break;
                     case (int)SceneTypeEnum.TeamDungeon:
-                    case (int)SceneTypeEnum.DragonDungeon:
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.SceneType;
                         mapInstanceId = UnitCacheHelper.GetFubenCenterId(unit.Zone());
                         //[创建副本Scene]
+
                         M2F_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2F_TeamDungeonEnterRequest.Create();
                         M2T_TeamDungeonEnterRequest.UserID = unit.Id;
                         M2T_TeamDungeonEnterRequest.SceneId = request.SceneId == 0 ? 110001 : request.SceneId;
                         M2T_TeamDungeonEnterRequest.TeamId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.TeamId);
-                        M2T_TeamDungeonEnterRequest.FubenType
                         request.SceneId = M2T_TeamDungeonEnterRequest.SceneId;
                         F2M_TeamDungeonEnterResponse createUnit = (F2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2T_TeamDungeonEnterRequest);
