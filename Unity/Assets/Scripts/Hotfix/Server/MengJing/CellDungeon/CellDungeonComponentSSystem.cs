@@ -267,19 +267,7 @@ namespace ET.Server
             int line = cellIndex / self.ChapterConfig.InitSize[0];
             return self.GetFubenCell(row, line);
         }
-
-        public static void RemoveAllNoSelf(Unit unit)
-        {
-            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
-            List<Entity> allunits = unitComponent.Children.Values.ToList();
-            for (int i = allunits.Count - 1; i >= 0; i--)
-            {
-                if (unit.Id == allunits[i].Id)
-                    continue;
-                unitComponent.Remove(allunits[i].Id);
-            }
-        }
-
+        
         public static CellDungeonInfo GetFubenCell(this CellDungeonComponentS self, int row, int line)
         {
             if (row >= 0 && row < self.ChapterConfig.InitSize[0] && line >= 0 && line < self.ChapterConfig.InitSize[1])

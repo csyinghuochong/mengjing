@@ -36,6 +36,10 @@ namespace ET.Server
 
         public CellDungeonInfo[][] FubenCellInfoList { get; set; }
 
+        //神秘商品
+        public List<int> EnergySkills { get; set; } = new List<int>() { };
+        public List<MysteryItemInfo> MysteryItemInfos  { get; set; }= new List<MysteryItemInfo>();
+        public CellDungeonInfo CurrentFubenCell { get; set; }
     }
     
 }
