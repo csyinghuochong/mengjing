@@ -61,6 +61,8 @@ namespace ET
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
+		/// <summary>地图类型</summary>
+		public int MapType { get; set; }
 		/// <summary>章节名称</summary>
 		public string ChapterName { get; set; }
 		/// <summary>音乐</summary>
