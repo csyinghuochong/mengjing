@@ -25,7 +25,17 @@ namespace ET.Server
 
         public float3 BossDeadPosition  { get; set; }= float3.zero;
         
+        public int ChapterId { get; set; }
         
+        public long HurtValue { get; set; }
+        public CellGenerateConfig ChapterConfig { get; set; }
+        public int FubenDifficulty { get; set; }
+
+        public FubenInfo FubenInfo { get; set; } = FubenInfo.Create();
+        public SonFubenInfo SonFubenInfo { get; set; } = SonFubenInfo.Create();
+
+        public CellDungeonInfo[][] FubenCellInfoList { get; set; }
+
     }
     
 }
