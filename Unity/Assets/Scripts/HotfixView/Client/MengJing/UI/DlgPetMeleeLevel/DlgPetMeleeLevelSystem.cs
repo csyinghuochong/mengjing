@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -42,6 +43,17 @@ namespace ET.Client
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
         {
             self.View.E_SectionSetToggleGroup.OnSelectIndex(0);
+
+            using (zstring.Block())
+            {
+                self.View.E_Reward1Image.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/99", PetMeleeFubenRewardConfigCategory.Instance.Get(1).NeedStar);
+                self.View.E_Reward2Image.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/99", PetMeleeFubenRewardConfigCategory.Instance.Get(2).NeedStar);
+                self.View.E_Reward3Image.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/99", PetMeleeFubenRewardConfigCategory.Instance.Get(3).NeedStar);
+            }
+
             self.OnUpdateStar();
             self.View.E_RightBGImage.gameObject.SetActive(false);
         }
