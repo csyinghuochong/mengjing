@@ -91,7 +91,7 @@ namespace ET.Client
 
                     if (args.m2C_FubenSettlement.BattleResult == 1)
                     {
-                        scene.GetComponent<PetComponentC>().OnPassPetMeleeFuben(mapComponent.SonSceneId, star);
+                        scene.GetComponent<PetComponentC>().OnPassPetMeleeFuben(mapComponent.SceneId, star);
                     }
                     
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().StopTimer();
