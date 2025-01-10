@@ -24,6 +24,8 @@ namespace ET.Server
         public M2C_TeamPickMessage m2C_TeamPickMessage { get; set; } = M2C_TeamPickMessage.Create();
 
         public float3 BossDeadPosition  { get; set; }= float3.zero;
+        
+        
     }
     
 }
