@@ -26,11 +26,10 @@
         <NoWarn>0169,0649,3021,8981,CS9192,CS9193</NoWarn>
     </PropertyGroup>
     <ItemGroup>
-
-        <Compile Include="..\..\Unity\Assets\Scripts\Model\Server\**\*.cs"> 
-            <Link>Server\%(RecursiveDir)%(FileName)%(Extension)</Link> 
+        <Compile Include="..\..\Unity\Assets\Scripts\Model\Server\**\*.cs">
+            <Link>Server\%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
-
+        
 		<Compile Include="..\..\Unity\Assets\Scripts\Model\Client\**\*.cs"> 
             <Link>Client\%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
@@ -54,12 +53,6 @@
         <ProjectReference Include="..\ThirdParty\DotNet.ThirdParty.csproj" />
     </ItemGroup> 
     <ItemGroup>
-      <Folder Include="..\..\Unity\Assets\Scripts\Model\Server\MengJing\DragonDungeon\">
-        <Link>Server\MengJing\DragonDungeon</Link>
-      </Folder>
-      <Folder Include="..\..\Unity\Assets\Scripts\Model\Server\MengJing\TeamDungeon\">
-        <Link>Server\MengJing\TeamDungeon</Link>
-      </Folder>
       <Folder Include="Generate\Config\" />
       <Folder Include="Server\MengJing\Happy\" />
       <Folder Include="Share\MengJing\Component\" />
