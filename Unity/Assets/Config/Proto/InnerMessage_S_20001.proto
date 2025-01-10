@@ -303,8 +303,6 @@ message M2G_SecondLogin // ILocationResponse
 	int32 SceneId = 6;
 }
 
-
-
 //ResponseType M2G_RequestExitGame
 message G2M_RequestExitGame // ILocationRequest
 {
@@ -1892,7 +1890,8 @@ message M2F_TeamDungeonEnterRequest // IRequest
 	int64 TeamId = 1;
 	int64 UserID = 2;
 	int32 SceneId = 3;
-	int32 FubenType = 4;
+	int32 FubenType = 4;  //普通 深渊
+	int32 SceneType = 5;
 }
 
 message F2M_TeamDungeonEnterResponse // IResponse
