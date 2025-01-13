@@ -189,6 +189,7 @@ namespace ET.Client
             }
 
             self.RequestDragonDungeonCreate(dungeonType).Coroutine();
+            await ETTask.CompletedTask;
         }
 
         private static async ETTask RequestDragonDungeonCreate(this DlgDragonDungeonCreate self, int dungeonType)
