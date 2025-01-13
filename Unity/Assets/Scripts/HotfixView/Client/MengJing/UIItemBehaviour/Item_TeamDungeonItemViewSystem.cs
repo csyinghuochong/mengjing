@@ -121,7 +121,9 @@ namespace ET.Client
                         self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", cellGenerateConfig.EnterLv, cellGenerateConfig.EnterLv);
                     }
                     break;
-                break;
+                default:
+                                       
+                    break;
             }
            
         }
