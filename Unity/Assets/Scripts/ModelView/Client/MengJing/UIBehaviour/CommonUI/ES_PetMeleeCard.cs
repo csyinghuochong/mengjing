@@ -8,6 +8,8 @@ namespace ET.Client
 	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public PetMeleeCardInfo PetMeleeCardInfo;
+		public GameObject GameObject;
+		public string UnitAssetsPath;
 		
 		public UnityEngine.UI.Text E_CostText
      	{

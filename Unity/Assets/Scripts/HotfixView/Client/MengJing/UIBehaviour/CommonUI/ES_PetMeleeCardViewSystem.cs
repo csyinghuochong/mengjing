@@ -26,8 +26,15 @@ namespace ET.Client
         public static void InitCard(this ES_PetMeleeCard self, PetMeleeCardInfo cardInfo)
         {
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 1f;
-            
+
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)
+            {
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+            }
+
             self.PetMeleeCardInfo = cardInfo;
+            self.GameObject = null;
+            self.UnitAssetsPath = null;
 
             switch (self.PetMeleeCardInfo.Type)
             {
@@ -45,6 +52,8 @@ namespace ET.Client
                         self.E_CostText.text = zstring.Format("魔力：{0}", ConfigData.PetMeleeMainPetCost);
                     }
 
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID);
+
                     break;
                 }
                 case (int)PetMeleeCarType.AssistPet:
@@ -58,6 +67,8 @@ namespace ET.Client
                         self.E_DesText.text = zstring.Format("辅战卡：{0}", petTuJianConfig.Name);
                         self.E_CostText.text = zstring.Format("魔力：{0}", petTuJianConfig.Cost);
                     }
+
+                    self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petTuJianConfig.Assets);
 
                     break;
                 }
@@ -76,33 +87,78 @@ namespace ET.Client
                     break;
                 }
             }
+
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath))
+            {
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+            }
+        }
+
+        public static void OnLoadGameObject(this ES_PetMeleeCard self, GameObject go, long formId)
+        {
+            if (self.IsDisposed)
+            {
+                UnityEngine.Object.Destroy(go);
+                return;
+            }
+
+            if (self.GameObject != null)
+            {
+                Log.Error($" self.GameObject !=null:   {self.GameObject.name}    {go.name}   {self.InstanceId}   {formId}");
+                return;
+            }
+
+            self.GameObject = go;
+            self.GameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+            self.GameObject.transform.SetParent(GlobalComponent.Instance.Unit);
         }
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
-            
+
             self.uiTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
             self.GetParent<DlgPetMeleeMain>().View.E_IconImage.sprite = self.E_IconImage.sprite;
-            self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(true);
+            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(true);
         }
 
         private static void Drag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
-            Vector2 localPoint = new Vector2();
-            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            self.GetParent<DlgPetMeleeMain>().View.E_IconImage.transform.localPosition = localPoint;
+            if (self.GameObject == null)
+            {
+                return;
+            }
+
+            RaycastHit raycastHit;
+            Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out raycastHit, 100, 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
+            if (!hit)
+            {
+                return;
+            }
+
+            Vector3 pos = raycastHit.point;
+            self.GameObject.gameObject.SetActive(true);
+            self.GameObject.transform.position = pos;
+
+            // Vector2 localPoint = new Vector2();
+            // RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
+            // Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.transform.localPosition = localPoint;
         }
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 1f;
-            
+
             self.uiTransform.localScale = new Vector3(1f, 1f, 1f);
 
-            self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(false);
+            if (self.GameObject != null)
+            {
+                self.GameObject.gameObject.SetActive(false);
+            }
+            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(false);
 
             RaycastHit raycastHit;
             Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
