@@ -248,6 +248,11 @@ namespace ET.Client
                 int nextId = 0;
                 foreach (List<int> list in ConfigData.PetMeleeSectionConfig)
                 {
+                    if (nextId != 0)
+                    {
+                        break;
+                    }
+
                     foreach (int id in list)
                     {
                         if (id == petMeleeDungeonId)

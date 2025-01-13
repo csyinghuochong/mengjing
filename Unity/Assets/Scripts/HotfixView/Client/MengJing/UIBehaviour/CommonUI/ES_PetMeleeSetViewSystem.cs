@@ -273,11 +273,18 @@ namespace ET.Client
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(true);
 
-            List<int> petTuJianActives = self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives;
+            self.ShowAssistPets.Clear();
+            foreach (int id in self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives)
+            {
+                if (PetTuJianConfigCategory.Instance.Contain(id))
+                {
+                    self.ShowAssistPets.Add(id);
+                }
+            }
 
             self.PetMeleeInfo.AssistPetList.Clear();
-            self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, petTuJianActives.Count);
-            self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, petTuJianActives.Count);
+            self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, self.ShowAssistPets.Count);
+            self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowAssistPets.Count);
             self.OnUpdateSelectAssistPetItem();
         }
 
@@ -303,7 +310,7 @@ namespace ET.Client
             }
 
             Scroll_Item_SelectAssistPetItem scrollItemSelectMainPetItem = self.ScrollItemSelectAssistPetItems[index].BindTrans(transform);
-            scrollItemSelectMainPetItem.Refresh(self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives[index]);
+            scrollItemSelectMainPetItem.Refresh(self.ShowAssistPets[index]);
             scrollItemSelectMainPetItem.OnSelectAssistPetItem = self.OnSelectAssistPetItem;
         }
 
