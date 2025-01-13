@@ -116,7 +116,7 @@ namespace ET.Client
             self.UpdatePetSkinList(petid);
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
-            self.ES_ModelShow.ShowOtherModel($"Pet/petConfig.PetModel", true).Coroutine();
+            self.ES_ModelShow.ShowOtherModel($"Pet/{petConfig.PetModel}", true).Coroutine();
 
             self.E_Text_PetNameText.text = petConfig.PetName;
         }
