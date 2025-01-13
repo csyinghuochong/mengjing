@@ -189,7 +189,7 @@ namespace ET.Client
                 self.ShowMainPets.Add(rolePetInfos[i]);
             }
 
-            self.PetMeleeInfo.MainPetList.Clear();
+            
             self.AddUIScrollItems(ref self.ScrollItemSelectMainPetItems, self.ShowMainPets.Count);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMainPets.Count);
             self.OnUpdateSelectMainPetItem();
@@ -290,7 +290,7 @@ namespace ET.Client
                 }
             }
 
-            self.PetMeleeInfo.AssistPetList.Clear();
+            
             self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, self.ShowAssistPets.Count);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowAssistPets.Count);
             self.OnUpdateSelectAssistPetItem();
@@ -385,7 +385,7 @@ namespace ET.Client
             self.ShowMagics.Clear();
             self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
 
-            self.PetMeleeInfo.MagicList.Clear();
+            
             self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
             self.E_SelectMagicItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
