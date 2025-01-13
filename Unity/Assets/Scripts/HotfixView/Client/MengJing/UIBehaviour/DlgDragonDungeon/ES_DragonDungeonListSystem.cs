@@ -29,8 +29,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip("已经有队伍了");
                 return;
             }
-
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonCreate).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DragonDungeonCreate).Coroutine();
         }
 
         private static void OnTeamDungeonItemsRefresh(this ES_DragonDungeonList self, Transform transform, int index)
