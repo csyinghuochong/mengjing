@@ -9,8 +9,9 @@ namespace ET.Client
     public static partial class ES_DragonDungeonListSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_DragonDungeonList self, UnityEngine.Transform args2)
+        private static void Awake(this ET.Client.ES_DragonDungeonList self, UnityEngine.Transform transform)
         {
+            self.uiTransform = transform;
             self.E_TeamDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
             self.E_Button_CreateButton.AddListener(self.OnButton_CreateButton);
         }

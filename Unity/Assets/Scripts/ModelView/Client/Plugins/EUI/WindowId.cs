@@ -215,5 +215,6 @@ namespace ET.Client
 		WindowID_PetMelee,
 		WindowID_PetMeleeLevel,
 		WindowID_DragonDungeon,
+		WindowID_DragonDungeonCreate,
 	}
 }

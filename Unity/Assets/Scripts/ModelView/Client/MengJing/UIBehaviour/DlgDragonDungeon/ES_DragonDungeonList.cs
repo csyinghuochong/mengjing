@@ -56,7 +56,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TeamDungeonItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_TeamDungeonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TeamDungeonItems");
+		    		this.m_E_TeamDungeonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DragonDungeonItems");
      			}
      			return this.m_E_TeamDungeonItemsLoopVerticalScrollRect;
      		}

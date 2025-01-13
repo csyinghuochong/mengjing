@@ -6,6 +6,7 @@
         {
             C2T_TeamDungeonInfoRequest request = C2T_TeamDungeonInfoRequest.Create();
             request.UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            request.SceneType = sceneType;
 
             T2C_TeamDungeonInfoResponse response = (T2C_TeamDungeonInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             root.GetComponent<TeamComponentC>().TeamList = response.TeamList;
