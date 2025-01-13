@@ -11,19 +11,19 @@
                 return;
             }
 
-            if (request.PetMeleeInfo.MainPetList.Count >= ConfigData.PetMeleeMainPetMaxNum)
+            if (request.PetMeleeInfo.MainPetList.Count > ConfigData.PetMeleeMainPetMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
-            if (request.PetMeleeInfo.AssistPetList.Count >= ConfigData.PetMeleeAssistPetMaxNum)
+            if (request.PetMeleeInfo.AssistPetList.Count > ConfigData.PetMeleeAssistPetMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
-            if (request.PetMeleeInfo.MagicList.Count >= ConfigData.PetMeleeSkillMaxNum)
+            if (request.PetMeleeInfo.MagicList.Count > ConfigData.PetMeleeSkillMaxNum)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
