@@ -732,6 +732,12 @@ namespace ET.Client
                     unit.AddComponent<UIPetHpComponent>(); //血条UI组件
                     self.OnAddCollider(go);
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+                    
+                    if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+                    {
+                        FunctionEffect.PlaySelfEffect(unit, 200004);
+                    }
+
                     break;
                 case UnitType.Npc:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
