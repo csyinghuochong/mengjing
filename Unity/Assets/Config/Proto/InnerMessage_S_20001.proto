@@ -1854,6 +1854,7 @@ message M2T_TeamDungeonOpenRequest // IRequest
 
 	int64 UserID = 1;
 	int32 FubenType = 3;
+	int32 SceneType = 4;
 }
 
 message T2M_TeamDungeonOpenResponse // IResponse

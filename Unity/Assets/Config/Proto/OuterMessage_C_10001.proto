@@ -5405,6 +5405,7 @@ message C2M_TeamDungeonOpenRequest // ILocationRequest
 
 	int64 UserID = 1;
 	int32 FubenType = 2;
+	int32 SceneType = 3;
 }
 
 message M2C_TeamDungeonOpenResponse // ILocationResponse
@@ -5457,7 +5458,7 @@ message M2C_TeamDungeonBoxRewardResult // IMessage
 {
 	int64 UserId = 1;
 	int32 BoxIndex = 2;
-	string PlayerName =     3;
+	string PlayerName = 3;
 }
 
 //同意组队
@@ -5600,6 +5601,7 @@ message C2T_TeamRobotRequest // ITeamActorRequest
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int64 UnitId = 1;
+	int32 SceneType = 2;
 }
 
 message T2C_TeamRobotResponse // ITeamActorResponse
