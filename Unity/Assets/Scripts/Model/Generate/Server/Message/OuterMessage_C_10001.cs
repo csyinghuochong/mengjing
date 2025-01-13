@@ -18526,6 +18526,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public int FubenType { get; set; }
 
+        [MemoryPackOrder(6)]
+        public int SceneType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -18539,6 +18542,7 @@ namespace ET
             this.FubenInstanceId = default;
             this.FubenUUId = default;
             this.FubenType = default;
+            this.SceneType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -23466,6 +23470,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public int FubenType { get; set; }
 
+        [MemoryPackOrder(3)]
+        public int SceneType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -23478,6 +23485,7 @@ namespace ET
             this.FubenId = default;
             this.TeamPlayerInfo = default;
             this.FubenType = default;
+            this.SceneType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -24074,6 +24082,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public long UserId { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int SceneType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -24084,6 +24095,7 @@ namespace ET
             this.RpcId = default;
             this.ActorId = default;
             this.UserId = default;
+            this.SceneType = default;
 
             ObjectPool.Instance.Recycle(this);
         }

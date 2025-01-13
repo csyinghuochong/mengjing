@@ -17,11 +17,12 @@
             //无队伍
             if (teamInfo == null)
             {
-                teamInfo = teamSceneComponent.CreateTeamInfo(request.TeamPlayerInfo, request.FubenId);
+                teamInfo = teamSceneComponent.CreateTeamInfo(request.TeamPlayerInfo, request.FubenId, request.SceneType);
             }
             else
             {
                 teamInfo.SceneId = request.FubenId;
+                teamInfo.SceneType = request.SceneType;
             }
             teamInfo.FubenType = request.FubenType; 
             teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList);

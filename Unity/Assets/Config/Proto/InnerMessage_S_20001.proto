@@ -1833,6 +1833,7 @@ message M2T_TeamDungeonCreateRequest // IRequest
 	int32 FubenId = 1;
 	TeamPlayerInfo TeamPlayerInfo = 2;
 	int32 FubenType = 3;
+	int32 SceneType = 4; 
 }
 
 message T2M_TeamDungeonCreateResponse // IResponse

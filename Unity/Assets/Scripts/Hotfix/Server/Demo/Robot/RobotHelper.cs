@@ -1066,7 +1066,7 @@ namespace ET.Client
 
         public static async ETTask JoinTeam(Scene root)
         {
-            await TeamNetHelper.RequestTeamDungeonList(root);
+            await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.TeamDungeon);
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
             TeamInfo teamInfo = teamComponent.GetSelfTeam();
             if (teamInfo == null || teamInfo.SceneId == 0)
@@ -1092,7 +1092,7 @@ namespace ET.Client
 
                 if (error != 0)
                 {
-                    await TeamNetHelper.RequestTeamDungeonCreate(root, 110001, 1);
+                    await TeamNetHelper.RequestTeamDungeonCreate(root, 110001, 1,SceneTypeEnum.TeamDungeon);
                 }
             }
             else

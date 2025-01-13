@@ -4248,6 +4248,7 @@ message TeamInfo
 	int64 FubenInstanceId = 4;
 	int64 FubenUUId = 5;
 	int32 FubenType = 6;
+	int32 SceneType = 7;
 }
 
 message M2C_TeamUpdateResult // IMessage
@@ -5382,6 +5383,7 @@ message C2M_TeamDungeonCreateRequest // ILocationRequest
 	int32 FubenId = 1;
 	TeamPlayerInfo TeamPlayerInfo = 2;
 	int32 FubenType = 3;
+	int32 SceneType = 4;
 }
 
 message M2C_TeamDungeonCreateResponse // ILocationResponse
@@ -5525,6 +5527,7 @@ message C2T_TeamDungeonInfoRequest // ITeamActorRequest
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int64 UserId = 1;
+	int32 SceneType = 2;
 }
 
 message T2C_TeamDungeonInfoResponse // ITeamActorResponse

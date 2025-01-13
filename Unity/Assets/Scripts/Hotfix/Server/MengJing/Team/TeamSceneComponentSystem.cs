@@ -43,7 +43,7 @@ namespace ET.Server
             return teamInfo != null ? teamInfo.TeamId : 0;
         }
 
-        public static TeamInfo CreateTeamInfo(this TeamSceneComponent self, TeamPlayerInfo teamPlayerInfo, int fubenId)
+        public static TeamInfo CreateTeamInfo(this TeamSceneComponent self, TeamPlayerInfo teamPlayerInfo, int fubenId, int sceneType)
         {
             TeamInfo teamInfo = self.GetTeamInfo(teamPlayerInfo.UserID);
             if (teamInfo != null)
@@ -55,6 +55,7 @@ namespace ET.Server
             teamInfo = TeamInfo.Create();
             teamInfo.TeamId = teamPlayerInfo.UserID;
             teamInfo.SceneId = fubenId;
+            teamInfo.SceneType = sceneType;
 
             teamInfo.PlayerList.Add(teamPlayerInfo);
             self.TeamList.Add(teamInfo);

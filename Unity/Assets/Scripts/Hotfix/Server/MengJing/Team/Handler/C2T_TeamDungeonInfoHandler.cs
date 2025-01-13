@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using MongoDB.Driver.Linq;
 
 namespace ET.Server
 {
@@ -20,18 +22,14 @@ namespace ET.Server
                     teamList.RemoveAt(i);
                     continue;
                 }
-                if (teamInfo.SceneId != 0)
+                if (teamInfo.SceneId > 0 && teamInfo.SceneType == request.SceneType)
                 {
                     teamInfos.Add(teamInfo);
                     continue;
                 }
-                for (int k = 0; k < teamInfo.PlayerList.Count; k++)
+                if (teamInfo.PlayerList.Any(n => n.UserID == request.UserId))
                 {
-                    if (teamInfo.PlayerList[k].UserID == request.UserId)
-                    {
-                        teamInfos.Add(teamInfo);
-                        break;
-                    }
+                    teamInfos.Add(teamInfo);
                 }
             }
             response.TeamList = teamInfos;

@@ -19,7 +19,7 @@
             }
             if (teamInfo == null)
             {
-                teamInfo = teamSceneComponent.CreateTeamInfo(request.TeamPlayerInfo_1, 0);
+                teamInfo = teamSceneComponent.CreateTeamInfo(request.TeamPlayerInfo_1, 0, 0);
             }
             bool haveplayer = false;
             for (int i = 0; i < teamInfo.PlayerList.Count; i++ )

@@ -186,7 +186,7 @@ namespace ET.Client
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数", async () =>
                     {
-                        int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType);
+                        int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
                         if (errorCode != ErrorCode.ERR_Success)
                         {
                             HintHelp.ShowErrorHint(self.Root(), errorCode);
@@ -199,7 +199,7 @@ namespace ET.Client
                 }
             }
 
-            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType);
+            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);
