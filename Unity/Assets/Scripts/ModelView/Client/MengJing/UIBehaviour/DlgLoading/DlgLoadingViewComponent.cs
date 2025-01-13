@@ -92,6 +92,23 @@ namespace ET.Client
      		}
      	}
 
+		public Transform E_ImageEffect
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_e_E_ImageEffect == null )
+				{
+					this.m_e_E_ImageEffect = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"GameObject/E_ImageEffect");
+				}
+				return this.m_e_E_ImageEffect;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_BackSetRectTransform = null;
@@ -99,6 +116,7 @@ namespace ET.Client
 			this.m_E_Img_LodingValueImage = null;
 			this.m_E_ImageImage = null;
 			this.m_E_Lab_TextText = null;
+			this.m_e_E_ImageEffect = null;
 			this.uiTransform = null;
 		}
 
@@ -106,6 +124,7 @@ namespace ET.Client
 		private Image m_E_Back_1Image = null;
 		private Image m_E_Img_LodingValueImage = null;
 		private Image m_E_ImageImage = null;
+		private Transform m_e_E_ImageEffect = null;
 		private Text m_E_Lab_TextText = null;
 		public Transform uiTransform = null;
 	}

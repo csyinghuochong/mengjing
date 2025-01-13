@@ -281,6 +281,7 @@ namespace ET.Client
         {
             progress = Mathf.Min(1f, Mathf.Max(progress, 0f));
             self.View.E_Img_LodingValueImage.fillAmount = progress;
+            self.View.E_ImageEffect.localPosition = new Vector3(-750+ 1500 *progress, 89.4f, 0f );
             using (zstring.Block())
             {
                 self.View.E_Lab_TextText.text = zstring.Format("{0}%", (int)(progress * 100));
