@@ -26,7 +26,7 @@
 			if (leader != null)
 			{
 				BagComponentS bagComponent = leader.GetComponent<BagComponentS>();
-				if (request.TeamInfo.FubenType == TeamFubenType.ShenYuan && bagComponent.GetItemNumber(CommonHelp.ShenYuanCostId) < 1)
+				if (request.TeamInfo.FubenType == TeamFubenType.ShenYuan && bagComponent.GetItemNumber(ConfigData.ShenYuanCostId) < 1)
 				{
 					errorcode = ErrorCode.Err_ShenYuanItemError;
 				}

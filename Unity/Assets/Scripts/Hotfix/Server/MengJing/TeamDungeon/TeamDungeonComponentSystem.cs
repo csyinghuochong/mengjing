@@ -54,7 +54,7 @@ namespace ET.Server
 
                 if (fubenType == TeamFubenType.ShenYuan && unit.Id == self.TeamId)
                 {
-                    unit.GetComponent<BagComponentS>().OnCostItemData($"{CommonHelp.ShenYuanCostId};1");
+                    unit.GetComponent<BagComponentS>().OnCostItemData($"{ConfigData.ShenYuanCostId};1");
                 }
 
                 if (fubenType == TeamFubenType.ShenYuan)

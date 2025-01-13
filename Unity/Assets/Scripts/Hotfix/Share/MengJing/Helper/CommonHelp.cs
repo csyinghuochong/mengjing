@@ -45,9 +45,7 @@ namespace  ET
 
         //熔炼获得道具
         public const int MeltingItemId = 1;
-
-        public const int ShenYuanCostId = 10000150;
-
+        
         public const bool AccountOldLogic = true;
 
         public static int MaxShuLianDu()

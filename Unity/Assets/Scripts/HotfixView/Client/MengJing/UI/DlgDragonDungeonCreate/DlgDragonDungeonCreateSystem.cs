@@ -153,12 +153,12 @@ namespace ET.Client
             if (dungeonType == TeamFubenType.Normal && shenyuan)
             {
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-                if (bagComponent.GetItemNumber(CommonHelp.ShenYuanCostId) < 1)
+                if (bagComponent.GetItemNumber(ConfigData.ShenYuanCostId) < 1)
                 {
                     using (zstring.Block())
                     {
                         FlyTipComponent.Instance.ShowFlyTip(zstring.Format("需要道具{0}！",
-                            ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName));
+                            ItemConfigCategory.Instance.Get(ConfigData.ShenYuanCostId).ItemName));
                     }
 
                     return;
