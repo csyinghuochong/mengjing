@@ -21,7 +21,42 @@ namespace ET.Client
 		public List<int> ShowAssistPets = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMagicItem>> ScrollItemSelectMagicItems;
 		public List<int> ShowMagics = new();
+
 		
+		public UnityEngine.UI.Button E_CloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseButton == null )
+     			{
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseImage == null )
+     			{
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseImage;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_PlanSetToggleGroup
      	{
      		get
@@ -328,6 +363,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_SelectMainPetItemClose_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectMainPetItemClose_2Button == null )
+     			{
+		    		this.m_E_SelectMainPetItemClose_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectMainPetItemPanel/E_SelectMainPetItemClose_2");
+     			}
+     			return this.m_E_SelectMainPetItemClose_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectMainPetItemClose_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectMainPetItemClose_2Image == null )
+     			{
+		    		this.m_E_SelectMainPetItemClose_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectMainPetItemPanel/E_SelectMainPetItemClose_2");
+     			}
+     			return this.m_E_SelectMainPetItemClose_2Image;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_SelectAssistPetItemPanelRectTransform
      	{
      		get
@@ -461,6 +530,40 @@ namespace ET.Client
 		    		this.m_E_SelectAssistPetItemConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectAssistPetItemPanel/E_SelectAssistPetItemConfirm");
      			}
      			return this.m_E_SelectAssistPetItemConfirmImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SelectAssistPetItemClose_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectAssistPetItemClose_2Button == null )
+     			{
+		    		this.m_E_SelectAssistPetItemClose_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectAssistPetItemPanel/E_SelectAssistPetItemClose_2");
+     			}
+     			return this.m_E_SelectAssistPetItemClose_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectAssistPetItemClose_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectAssistPetItemClose_2Image == null )
+     			{
+		    		this.m_E_SelectAssistPetItemClose_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectAssistPetItemPanel/E_SelectAssistPetItemClose_2");
+     			}
+     			return this.m_E_SelectAssistPetItemClose_2Image;
      		}
      	}
 
@@ -600,6 +703,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_SelectMagicItemClose_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectMagicItemClose_2Button == null )
+     			{
+		    		this.m_E_SelectMagicItemClose_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemClose_2");
+     			}
+     			return this.m_E_SelectMagicItemClose_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectMagicItemClose_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectMagicItemClose_2Image == null )
+     			{
+		    		this.m_E_SelectMagicItemClose_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_SelectMagicItemPanel/E_SelectMagicItemClose_2");
+     			}
+     			return this.m_E_SelectMagicItemClose_2Image;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -614,6 +751,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_CloseButton = null;
+			this.m_E_CloseImage = null;
 			this.m_E_PlanSetToggleGroup = null;
 			this.m_EG_MainPetListRectTransform = null;
 			this.m_EG_AssistPetListRectTransform = null;
@@ -632,6 +771,8 @@ namespace ET.Client
 			this.m_E_SelectMainPetItemNumText = null;
 			this.m_E_SelectMainPetItemConfirmButton = null;
 			this.m_E_SelectMainPetItemConfirmImage = null;
+			this.m_E_SelectMainPetItemClose_2Button = null;
+			this.m_E_SelectMainPetItemClose_2Image = null;
 			this.m_EG_SelectAssistPetItemPanelRectTransform = null;
 			this.m_E_SelectAssistPetItemCloseButton = null;
 			this.m_E_SelectAssistPetItemCloseImage = null;
@@ -640,6 +781,8 @@ namespace ET.Client
 			this.m_E_SelectAssistPetItemNumText = null;
 			this.m_E_SelectAssistPetItemConfirmButton = null;
 			this.m_E_SelectAssistPetItemConfirmImage = null;
+			this.m_E_SelectAssistPetItemClose_2Button = null;
+			this.m_E_SelectAssistPetItemClose_2Image = null;
 			this.m_EG_SelectMagicItemPanelRectTransform = null;
 			this.m_E_SelectMagicItemCloseButton = null;
 			this.m_E_SelectMagicItemCloseImage = null;
@@ -648,9 +791,13 @@ namespace ET.Client
 			this.m_E_SelectMagicItemNumText = null;
 			this.m_E_SelectMagicItemConfirmButton = null;
 			this.m_E_SelectMagicItemConfirmImage = null;
+			this.m_E_SelectMagicItemClose_2Button = null;
+			this.m_E_SelectMagicItemClose_2Image = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_PlanSetToggleGroup = null;
 		private UnityEngine.RectTransform m_EG_MainPetListRectTransform = null;
 		private UnityEngine.RectTransform m_EG_AssistPetListRectTransform = null;
@@ -669,6 +816,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SelectMainPetItemNumText = null;
 		private UnityEngine.UI.Button m_E_SelectMainPetItemConfirmButton = null;
 		private UnityEngine.UI.Image m_E_SelectMainPetItemConfirmImage = null;
+		private UnityEngine.UI.Button m_E_SelectMainPetItemClose_2Button = null;
+		private UnityEngine.UI.Image m_E_SelectMainPetItemClose_2Image = null;
 		private UnityEngine.RectTransform m_EG_SelectAssistPetItemPanelRectTransform = null;
 		private UnityEngine.UI.Button m_E_SelectAssistPetItemCloseButton = null;
 		private UnityEngine.UI.Image m_E_SelectAssistPetItemCloseImage = null;
@@ -677,6 +826,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SelectAssistPetItemNumText = null;
 		private UnityEngine.UI.Button m_E_SelectAssistPetItemConfirmButton = null;
 		private UnityEngine.UI.Image m_E_SelectAssistPetItemConfirmImage = null;
+		private UnityEngine.UI.Button m_E_SelectAssistPetItemClose_2Button = null;
+		private UnityEngine.UI.Image m_E_SelectAssistPetItemClose_2Image = null;
 		private UnityEngine.RectTransform m_EG_SelectMagicItemPanelRectTransform = null;
 		private UnityEngine.UI.Button m_E_SelectMagicItemCloseButton = null;
 		private UnityEngine.UI.Image m_E_SelectMagicItemCloseImage = null;
@@ -685,6 +836,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SelectMagicItemNumText = null;
 		private UnityEngine.UI.Button m_E_SelectMagicItemConfirmButton = null;
 		private UnityEngine.UI.Image m_E_SelectMagicItemConfirmImage = null;
+		private UnityEngine.UI.Button m_E_SelectMagicItemClose_2Button = null;
+		private UnityEngine.UI.Image m_E_SelectMagicItemClose_2Image = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -16,6 +16,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.E_CloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMelee); });
             self.E_PlanSetToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 
             self.E_SetMainButton.AddListener(self.OnSetMain);
@@ -28,16 +29,19 @@ namespace ET.Client
             self.InitItemList();
 
             self.E_SelectMainPetItemCloseButton.AddListener(self.OnSelectMainPetItemClose);
+            self.E_SelectMainPetItemClose_2Button.AddListener(self.OnSelectMainPetItemClose);
             self.E_SelectMainPetItemConfirmButton.AddListener(self.OnSelectMainPetItemConfirm);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectMainPetItemsRefresh);
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_SelectAssistPetItemCloseButton.AddListener(self.OnSelectAssistPetItemClose);
+            self.E_SelectAssistPetItemClose_2Button.AddListener(self.OnSelectAssistPetItemClose);
             self.E_SelectAssistPetItemConfirmButton.AddListener(self.OnSelectAssistPetItemConfirm);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectAssistPetItemsRefresh);
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
 
             self.E_SelectMagicItemCloseButton.AddListener(self.OnSelectSkillItemClose);
+            self.E_SelectMagicItemClose_2Button.AddListener(self.OnSelectSkillItemClose);
             self.E_SelectMagicItemConfirmButton.AddListener(self.OnSelectSkillItemConfirm);
             self.E_SelectMagicItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSelectSkillItemsRefresh);
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
@@ -179,7 +183,6 @@ namespace ET.Client
         private static void OnSetMain(this ES_PetMeleeSet self)
         {
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(true);
-            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
@@ -197,14 +200,12 @@ namespace ET.Client
         private static void OnSelectMainPetItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectMainPetItemConfirm(this ES_PetMeleeSet self)
         {
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
         }
@@ -288,7 +289,6 @@ namespace ET.Client
         private static void OnSetAssist(this ES_PetMeleeSet self)
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(true);
-            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             self.ShowAssistPets.Clear();
@@ -308,14 +308,12 @@ namespace ET.Client
         private static void OnSelectAssistPetItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectAssistPetItemConfirm(this ES_PetMeleeSet self)
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
         }
@@ -399,7 +397,6 @@ namespace ET.Client
         private static void OnSetMagic(this ES_PetMeleeSet self)
         {
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(true);
-            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             self.ShowMagics.Clear();
@@ -413,14 +410,12 @@ namespace ET.Client
         private static void OnSelectSkillItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectSkillItemConfirm(this ES_PetMeleeSet self)
         {
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
         }

@@ -47,7 +47,7 @@ namespace ET.Client
             }
 
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-            if (string.IsNullOrEmpty(sceneConfig.Icon))
+            if (!string.IsNullOrEmpty(sceneConfig.Icon))
             {
                 self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig.Icon));
