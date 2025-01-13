@@ -17,10 +17,13 @@ namespace ET.Client
 		public PetMeleeInfo PetMeleeInfo;
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMainPetItem>> ScrollItemSelectMainPetItems;
 		public List<RolePetInfo> ShowMainPets = new();
+		public List<long> SelectMainPets = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SelectAssistPetItem>> ScrollItemSelectAssistPetItems;
 		public List<int> ShowAssistPets = new();
+		public List<int> SelectAssistPets = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SelectMagicItem>> ScrollItemSelectMagicItems;
 		public List<int> ShowMagics = new();
+		public List<int> SelectMagics = new();
 
 		
 		public UnityEngine.UI.Button E_CloseButton

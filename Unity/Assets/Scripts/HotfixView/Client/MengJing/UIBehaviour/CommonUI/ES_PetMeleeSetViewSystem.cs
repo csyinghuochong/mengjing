@@ -191,6 +191,9 @@ namespace ET.Client
             {
                 self.ShowMainPets.Add(rolePetInfos[i]);
             }
+            
+            self.SelectMainPets.Clear();
+            self.SelectMainPets.AddRange(self.PetMeleeInfo.MainPetList);
 
             self.AddUIScrollItems(ref self.ScrollItemSelectMainPetItems, self.ShowMainPets.Count);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMainPets.Count);
@@ -205,6 +208,8 @@ namespace ET.Client
 
         private static void OnSelectMainPetItemConfirm(this ES_PetMeleeSet self)
         {
+            self.PetMeleeInfo.MainPetList.Clear();
+            self.PetMeleeInfo.MainPetList.AddRange(self.SelectMainPets);
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
@@ -233,15 +238,15 @@ namespace ET.Client
             }
 
             int maxNum = ConfigData.PetMeleeMainPetMaxNum;
-            if (self.PetMeleeInfo.MainPetList.Contains(petId))
+            if (self.SelectMainPets.Contains(petId))
             {
-                self.PetMeleeInfo.MainPetList.Remove(petId);
+                self.SelectMainPets.Remove(petId);
             }
             else
             {
-                if (self.PetMeleeInfo.MainPetList.Count < maxNum)
+                if (self.SelectMainPets.Count < maxNum)
                 {
-                    self.PetMeleeInfo.MainPetList.Add(petId);
+                    self.SelectMainPets.Add(petId);
                 }
                 else
                 {
@@ -255,13 +260,13 @@ namespace ET.Client
             }
 
             List<long> copy = new List<long>();
-            copy.AddRange(self.PetMeleeInfo.MainPetList);
-            self.PetMeleeInfo.MainPetList.Clear();
+            copy.AddRange(self.SelectMainPets);
+            self.SelectMainPets.Clear();
             foreach (RolePetInfo rolePetInfo in self.ShowMainPets)
             {
                 if (copy.Contains(rolePetInfo.Id))
                 {
-                    self.PetMeleeInfo.MainPetList.Add(rolePetInfo.Id);
+                    self.SelectMainPets.Add(rolePetInfo.Id);
                 }
             }
 
@@ -269,7 +274,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MainPetList.Count, maxNum);
+                self.E_SelectMainPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectMainPets.Count, maxNum);
             }
         }
 
@@ -282,7 +287,7 @@ namespace ET.Client
                     continue;
                 }
 
-                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.MainPetList.Contains(item.PetId));
+                item.E_SelectedImage.gameObject.SetActive(self.SelectMainPets.Contains(item.PetId));
             }
         }
 
@@ -299,6 +304,9 @@ namespace ET.Client
                     self.ShowAssistPets.Add(id);
                 }
             }
+            
+            self.SelectAssistPets.Clear();
+            self.SelectAssistPets.AddRange(self.PetMeleeInfo.AssistPetList);
 
             self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, self.ShowAssistPets.Count);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowAssistPets.Count);
@@ -313,6 +321,8 @@ namespace ET.Client
 
         private static void OnSelectAssistPetItemConfirm(this ES_PetMeleeSet self)
         {
+            self.PetMeleeInfo.AssistPetList.Clear();
+            self.PetMeleeInfo.AssistPetList.AddRange(self.SelectAssistPets);
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
@@ -341,15 +351,15 @@ namespace ET.Client
             }
 
             int maxNum = ConfigData.PetMeleeAssistPetMaxNum;
-            if (self.PetMeleeInfo.AssistPetList.Contains(petTuJianConfigId))
+            if (self.SelectAssistPets.Contains(petTuJianConfigId))
             {
-                self.PetMeleeInfo.AssistPetList.Remove(petTuJianConfigId);
+                self.SelectAssistPets.Remove(petTuJianConfigId);
             }
             else
             {
-                if (self.PetMeleeInfo.AssistPetList.Count < maxNum)
+                if (self.SelectAssistPets.Count < maxNum)
                 {
-                    self.PetMeleeInfo.AssistPetList.Add(petTuJianConfigId);
+                    self.SelectAssistPets.Add(petTuJianConfigId);
                 }
                 else
                 {
@@ -363,13 +373,13 @@ namespace ET.Client
             }
 
             List<int> copy = new List<int>();
-            copy.AddRange(self.PetMeleeInfo.AssistPetList);
-            self.PetMeleeInfo.AssistPetList.Clear();
+            copy.AddRange(self.SelectAssistPets);
+            self.SelectAssistPets.Clear();
             foreach (int id in self.ShowAssistPets)
             {
                 if (copy.Contains(id))
                 {
-                    self.PetMeleeInfo.AssistPetList.Add(id);
+                    self.SelectAssistPets.Add(id);
                 }
             }
 
@@ -377,7 +387,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.AssistPetList.Count, maxNum);
+                self.E_SelectAssistPetItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectAssistPets.Count, maxNum);
             }
         }
 
@@ -390,7 +400,7 @@ namespace ET.Client
                     continue;
                 }
 
-                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.AssistPetList.Contains(item.PetTuJianConfigId));
+                item.E_SelectedImage.gameObject.SetActive(self.SelectAssistPets.Contains(item.PetTuJianConfigId));
             }
         }
 
@@ -402,6 +412,9 @@ namespace ET.Client
             self.ShowMagics.Clear();
             self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
 
+            self.SelectMagics.Clear();
+            self.SelectMagics.AddRange(self.PetMeleeInfo.MagicList);
+            
             self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
             self.E_SelectMagicItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
@@ -415,6 +428,8 @@ namespace ET.Client
 
         private static void OnSelectSkillItemConfirm(this ES_PetMeleeSet self)
         {
+            self.PetMeleeInfo.MagicList.Clear();
+            self.PetMeleeInfo.MagicList.AddRange(self.SelectMagics);
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
             self.OnConfirm().Coroutine();
@@ -443,15 +458,15 @@ namespace ET.Client
             }
 
             int maxNum = ConfigData.PetMeleeSkillMaxNum;
-            if (self.PetMeleeInfo.MagicList.Contains(skillId))
+            if (self.SelectMagics.Contains(skillId))
             {
-                self.PetMeleeInfo.MagicList.Remove(skillId);
+                self.SelectMagics.Remove(skillId);
             }
             else
             {
-                if (self.PetMeleeInfo.MagicList.Count < maxNum)
+                if (self.SelectMagics.Count < maxNum)
                 {
-                    self.PetMeleeInfo.MagicList.Add(skillId);
+                    self.SelectMagics.Add(skillId);
                 }
                 else
                 {
@@ -465,13 +480,13 @@ namespace ET.Client
             }
 
             List<int> copy = new List<int>();
-            copy.AddRange(self.PetMeleeInfo.MagicList);
-            self.PetMeleeInfo.MagicList.Clear();
+            copy.AddRange(self.SelectMagics);
+            self.SelectMagics.Clear();
             foreach (int id in self.ShowMagics)
             {
                 if (copy.Contains(id))
                 {
-                    self.PetMeleeInfo.MagicList.Add(id);
+                    self.SelectMagics.Add(id);
                 }
             }
 
@@ -479,7 +494,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_SelectMagicItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.PetMeleeInfo.MagicList.Count, maxNum);
+                self.E_SelectMagicItemNumText.text = zstring.Format("已经选择数量：{0}/{1}", self.SelectMagics.Count, maxNum);
             }
         }
 
@@ -492,7 +507,7 @@ namespace ET.Client
                     continue;
                 }
 
-                item.E_SelectedImage.gameObject.SetActive(self.PetMeleeInfo.MagicList.Contains(item.magicId));
+                item.E_SelectedImage.gameObject.SetActive(self.SelectMagics.Contains(item.magicId));
             }
         }
 
