@@ -7,7 +7,7 @@
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.windowType = UIWindowType.Normal;//梦境弹出Tips调 背景货币需要在Tips后面
+		  uiBaseWindow.windowType = UIWindowType.Mid;//梦境弹出Tips调 背景货币需要在Tips后面
 		}
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)

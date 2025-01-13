@@ -15,6 +15,7 @@ namespace ET
             self.UI = GameObject.Find("/Global/UI").transform;
             self.BloodRoot = GameObject.Find("/Global/UI/BloodRoot").transform;
             self.NormalRoot = GameObject.Find("/Global/UI/NormalRoot").transform;
+            self.MidRoot = GameObject.Find("/Global/UI/MidRoot").transform;
             self.PopUpRoot = GameObject.Find("/Global/UI/PopUpRoot").transform;
             self.FixedRoot = GameObject.Find("/Global/UI/FixedRoot").transform;
             self.OtherRoot = GameObject.Find("/Global/UI/OtherRoot").transform;
@@ -69,6 +70,7 @@ namespace ET
 
         public Transform BloodRoot { get; set; }
         public Transform NormalRoot { get; set; }
+        public Transform MidRoot { get; set; }
         public Transform PopUpRoot { get; set; }
         public Transform FixedRoot { get; set; }
         public Transform PoolRoot { get; set; }

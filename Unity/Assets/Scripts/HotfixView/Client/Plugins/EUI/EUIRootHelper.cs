@@ -16,6 +16,10 @@ namespace ET.Client
             {
                 return root.GetComponent<GlobalComponent>().NormalRoot;
             }
+            else if (type == UIWindowType.Mid)
+            {
+                return root.GetComponent<GlobalComponent>().MidRoot;
+            }
             else if (type == UIWindowType.Fixed)
             {
                 return root.GetComponent<GlobalComponent>().FixedRoot;
