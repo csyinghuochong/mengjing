@@ -34,9 +34,9 @@ RectTransform:
   m_Children:
   - {fileID: 4637141409389757353}
   - {fileID: 555804313661810783}
-  - {fileID: 8998219404343188563}
   - {fileID: 8386503762008520619}
   - {fileID: 7300983300400738831}
+  - {fileID: 8998219404343188563}
   - {fileID: 8679753928921976173}
   - {fileID: 6321472140763014592}
   m_Father: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIType: 0
   HideMainUI: 0
-  ShowHuoBi: 1
+  ShowHuoBi: 0
 --- !u!1 &52017423323352438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,9 +1795,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 17654666246771255}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1815, y: -76}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -150, y: -113}
   m_SizeDelta: {x: 66, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &73019987480276613
