@@ -16,20 +16,16 @@ namespace ET.Client
             self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
 
             self.View.EG_TeamdungeonItemRectTransform.gameObject.SetActive(false);
-            List<SceneConfig> sceneConfig = SceneConfigCategory.Instance.GetAll().Values.ToList();
+            List<CellGenerateConfig> sceneConfig = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
-            bool isGmaccount = GMData.GmAccount.Contains(playerInfoComponent.Account);
+           
             for (int i = 0; i < sceneConfig.Count; i++)
             {
-                if (sceneConfig[i].MapType != (int)SceneTypeEnum.TeamDungeon)
+                if (sceneConfig[i].MapType != (int)SceneTypeEnum.DragonDungeon)
                 {
                     continue;
                 }
 
-                if (!isGmaccount && sceneConfig[i].Id >= ConfigData.GmTeamdungeonId)
-                {
-                    continue;
-                }
 
                 self.FubenIdList.Add(sceneConfig[i].Id);
                 GameObject item = UnityEngine.Object.Instantiate(self.View.EG_TeamdungeonItemRectTransform.gameObject);
@@ -44,7 +40,7 @@ namespace ET.Client
                     rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
                 }
 
-                rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].Name;
+                rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].ChapterDes;
 
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig[i].Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -82,7 +78,7 @@ namespace ET.Client
         public static void OnUpdatUI(this DlgDragonDungeonCreate self, int fubenId)
         {
             self.FubenId = fubenId;
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenId);
+            CellGenerateConfig sceneConfig = CellGenerateConfigCategory.Instance.Get(fubenId);
 
             int bossId = sceneConfig.BossId;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
@@ -130,11 +126,11 @@ namespace ET.Client
             self.View.E_TextLevelLimitText.text = sceneConfig.EnterLv.ToString();
             using (zstring.Block())
             {
-                self.View.E_TextPlayerLimitText.text = zstring.Format("{0}-3人", sceneConfig.PlayerLimit);
+                self.View.E_TextPlayerLimitText.text = zstring.Format("{0}-3人", 1);
             }
 
             self.View.E_TextFubenDescText.text = sceneConfig.ChapterDes;
-            self.View.E_TextFubenName2Text.text = sceneConfig.Name;
+            self.View.E_TextFubenName2Text.text = sceneConfig.ChapterName;
 
             // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig.Icon2);
             // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -143,7 +139,7 @@ namespace ET.Client
 
         public static void OnButton_Close(this DlgDragonDungeonCreate self)
         {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeonCreate);
         }
 
         public static void OnShenYuanMode(this DlgDragonDungeonCreate self)

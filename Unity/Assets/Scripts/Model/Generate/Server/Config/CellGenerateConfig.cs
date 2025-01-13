@@ -95,6 +95,12 @@ namespace ET
 		public int RewardGold { get; set; }
 		/// <summary>翻卡掉落ID</summary>
 		public int BoxDropID { get; set; }
+		/// <summary>翻卡掉落ID</summary>
+		public string Icon { get; set; }
+		/// <summary>章节BossId</summary>
+		public int BossId { get; set; }
+		/// <summary>奖励展示</summary>
+		public string RewardShow { get; set; }
 
 	}
 }
