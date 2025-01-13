@@ -253,7 +253,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this ES_PetTuJian self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         private static void OnPetSinIconItemsRefresh(this ES_PetTuJian self, Transform transform, int index)

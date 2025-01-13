@@ -42,7 +42,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkills[index], ABAtlasTypes.PetSkillIcon,
+            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkills[index], ABAtlasTypes.RoleSkillIcon,
                 self.RolePetInfo.LockSkill.Contains(self.ShowSkills[index]));
         }
 

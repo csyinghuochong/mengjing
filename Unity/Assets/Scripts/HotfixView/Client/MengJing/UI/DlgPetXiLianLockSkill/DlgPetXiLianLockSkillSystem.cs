@@ -21,7 +21,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this DlgPetXiLianLockSkill self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon, self.RolePetInfo.LockSkill.Contains(self.ShowPetSkills[index]));
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon, self.RolePetInfo.LockSkill.Contains(self.ShowPetSkills[index]));
             scrollItemCommonSkillItem.SelectAction = self.OnSelectSkill;
         }
 

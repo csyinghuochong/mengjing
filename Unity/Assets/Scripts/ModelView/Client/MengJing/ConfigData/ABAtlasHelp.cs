@@ -5,7 +5,6 @@
         public const string ItemIcon = "ItemIcon";
         public const string ItemQualityIcon = "ItemQualityIcon";
         public const string PetHeadIcon = "PetHeadIcon";
-        public const string PetSkillIcon = "PetSkillIcon";
         public const string RoleSkillIcon = "RoleSkillIcon";
         public const string TianFuIcon = "TianFuIcon";
         public const string ChapterIcon = "ChapterIcon";

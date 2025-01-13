@@ -26,7 +26,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this DlgCommonProperty self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         public static void ShowSkillList(this DlgCommonProperty self, Unit unit)

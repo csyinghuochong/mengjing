@@ -47,7 +47,7 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this ES_PetInfoShow self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon,
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.RoleSkillIcon,
                 self.RolePetInfo.LockSkill.Contains(self.ShowPetSkills[index]));
         }
 

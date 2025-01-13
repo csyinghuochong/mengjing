@@ -32,19 +32,19 @@ namespace ET.Client
         private static void OnCommonSkillItems_ARefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems_A[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetAbaseSkillId[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetAbaseSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         private static void OnCommonSkillItems_BRefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems_B[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetBbaseSkillId[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.PetBbaseSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         private static void OnCommonSkillItemsRefresh(this DlgPetHeChengPreview self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdatePetSkill(self.AllSkillId[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.AllSkillId[index], ABAtlasTypes.RoleSkillIcon);
         }
 
         public static void UpdateInfo(this DlgPetHeChengPreview self, RolePetInfo rolePetA, RolePetInfo rolePetB)
