@@ -24,7 +24,7 @@ namespace ET.Client
                 self.TeamInfo.PlayerList[0].PlayerLv, true).Coroutine();
         }
 
-        public static void OnUpdateUI(this Scroll_Item_TeamDungeonItem self, TeamInfo teamInfo)
+        public static void OnUpdateUI(this Scroll_Item_TeamDungeonItem self, TeamInfo teamInfo, int sceneType)
         {
             self.E_Button_ApplyButton.AddListener(self.OnButton_Apply);
 
@@ -61,33 +61,69 @@ namespace ET.Client
                         .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, teamPlayerInfo.Occ.ToString()));
             }
 
-            SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
-            using (zstring.Block())
+            switch (sceneType)
             {
-                self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", teamDungeonConfig.EnterLv);
-            }
+                case SceneTypeEnum.TeamDungeon:
+                    SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
+                    using (zstring.Block())
+                    {
+                        self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", teamDungeonConfig.EnterLv);
+                    }
 
-            string addStr = "";
+                    string addStr = "";
 
-            if (teamInfo.FubenType == TeamFubenType.XieZhu)
-            {
-                int lvCha = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv - teamDungeonConfig.EnterLv;
-                if (lvCha >= 10)
-                {
-                    addStr = "(帮助模式)";
-                }
-            }
+                    if (teamInfo.FubenType == TeamFubenType.XieZhu)
+                    {
+                        int lvCha = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv - teamDungeonConfig.EnterLv;
+                        if (lvCha >= 10)
+                        {
+                            addStr = "(帮助模式)";
+                        }
+                    }
 
-            if (teamInfo.FubenType == TeamFubenType.ShenYuan)
-            {
-                addStr = "(深渊模式)";
-            }
+                    if (teamInfo.FubenType == TeamFubenType.ShenYuan)
+                    {
+                        addStr = "(深渊模式)";
+                    }
 
-            using (zstring.Block())
-            {
-                self.E_Text_NameText.text = zstring.Format("{0}{1}", teamDungeonConfig.Name, addStr);
-                self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
+                    using (zstring.Block())
+                    {
+                        self.E_Text_NameText.text = zstring.Format("{0}{1}", teamDungeonConfig.Name, addStr);
+                        self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
+                    }
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(teamInfo.SceneId);
+                    using (zstring.Block())
+                    {
+                        self.E_Text_ConditionText.text = zstring.Format("进入条件: {0}级", cellGenerateConfig.EnterLv);
+                    }
+
+                    addStr = "";
+
+                    if (teamInfo.FubenType == TeamFubenType.XieZhu)
+                    {
+                        int lvCha = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv - cellGenerateConfig.EnterLv;
+                        if (lvCha >= 10)
+                        {
+                            addStr = "(帮助模式)";
+                        }
+                    }
+
+                    if (teamInfo.FubenType == TeamFubenType.ShenYuan)
+                    {
+                        addStr = "(深渊模式)";
+                    }
+
+                    using (zstring.Block())
+                    {
+                        self.E_Text_NameText.text = zstring.Format("{0}{1}", cellGenerateConfig.ChapterName, addStr);
+                        self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", cellGenerateConfig.EnterLv, cellGenerateConfig.EnterLv);
+                    }
+                    break;
+                break;
             }
+           
         }
     }
 }

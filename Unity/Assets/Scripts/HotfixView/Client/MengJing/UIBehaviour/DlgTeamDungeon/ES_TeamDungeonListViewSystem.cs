@@ -37,7 +37,7 @@ namespace ET.Client
         private static void OnTeamDungeonItemsRefresh(this ES_TeamDungeonList self, Transform transform, int index)
         {
             Scroll_Item_TeamDungeonItem scrollItemTeamDungeonItem = self.ScrollItemTeamDungeonItems[index].BindTrans(transform);
-            scrollItemTeamDungeonItem.OnUpdateUI(self.ShowTeamInfos[index]);
+            scrollItemTeamDungeonItem.OnUpdateUI(self.ShowTeamInfos[index],SceneTypeEnum.TeamDungeon);
         }
 
         public static void OnUpdateUI(this ES_TeamDungeonList self)
