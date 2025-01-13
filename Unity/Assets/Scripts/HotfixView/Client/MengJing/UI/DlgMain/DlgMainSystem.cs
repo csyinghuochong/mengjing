@@ -1804,6 +1804,8 @@ namespace ET.Client
             bool zhankai = self.View.E_Button_ZhanKaiButton.transform.localScale == new Vector3(-1f, 1f, 1f);
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
 
+            self.View.EG_RightSetRectTransform.gameObject.SetActive(true);
+            self.View.EG_RightBottomSetRectTransform.gameObject.SetActive(true);
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&
@@ -1922,6 +1924,8 @@ namespace ET.Client
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+                    self.View.EG_RightSetRectTransform.gameObject.SetActive(false);
+                    self.View.EG_RightBottomSetRectTransform.gameObject.SetActive(false);
                     break;
                 default:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);

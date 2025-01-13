@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -233,23 +234,41 @@ namespace ET.Client
 
         private static void OnEnterMap(this DlgPetMeleeLevel self)
         {
-            int firstId = 0;
-            foreach (SceneConfig config in SceneConfigCategory.Instance.GetAll().Values)
-            {
-                if (config.MapType == SceneTypeEnum.PetMelee)
-                {
-                    firstId = config.Id;
-                    break;
-                }
-            }
-
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
-            if (petMeleeDungeonId == 0 && self.SceneId != firstId ||
-                petMeleeDungeonId != 0 && self.SceneId > petMeleeDungeonId + 1)
+            if (petMeleeDungeonId == 0 && self.SceneId != ConfigData.PetMeleeSectionConfig[0][0])
             {
                 FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
                 return;
+            }
+
+            if (petMeleeDungeonId != 0)
+            {
+                bool flag = false;
+                int nextId = 0;
+                foreach (List<int> list in ConfigData.PetMeleeSectionConfig)
+                {
+                    foreach (int id in list)
+                    {
+                        if (id == petMeleeDungeonId)
+                        {
+                            flag = true;
+                            continue;
+                        }
+
+                        if (flag)
+                        {
+                            nextId = id;
+                            break;
+                        }
+                    }
+                }
+
+                if (self.SceneId != nextId)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
+                    return;
+                }
             }
 
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();

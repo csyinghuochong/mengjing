@@ -536,9 +536,9 @@ namespace ET.Server
                 self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
 
                 int sceneId = self.Scene().GetComponent<MapComponent>().SceneId;
-                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+                // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
                 // m2C_FubenSettlement.ReardList.AddRange(rewardItems);
-                self.Player.GetComponent<BagComponentS>().OnAddItemData(sceneConfig.RewardShow, $"{ItemGetWay.PetMeleeReward}_{TimeHelper.ServerNow()}");
+                // self.Player.GetComponent<BagComponentS>().OnAddItemData(sceneConfig.RewardShow, $"{ItemGetWay.PetMeleeReward}_{TimeHelper.ServerNow()}");
 
                 int star = 0;
                 for (int i = 0; i < m2C_FubenSettlement.StarInfos.Count; i++)
