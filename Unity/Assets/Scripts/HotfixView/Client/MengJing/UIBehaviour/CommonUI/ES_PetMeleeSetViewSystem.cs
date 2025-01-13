@@ -179,6 +179,8 @@ namespace ET.Client
         private static void OnSetMain(this ES_PetMeleeSet self)
         {
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(true);
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
             self.ShowMainPets.Clear();
@@ -196,6 +198,8 @@ namespace ET.Client
         private static void OnSelectMainPetItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectMainPetItemPanelRectTransform.gameObject.SetActive(false);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectMainPetItemConfirm(this ES_PetMeleeSet self)
@@ -272,6 +276,8 @@ namespace ET.Client
         private static void OnSetAssist(this ES_PetMeleeSet self)
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(true);
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             self.ShowAssistPets.Clear();
             foreach (int id in self.Root().GetComponent<ChengJiuComponentC>().PetTuJianActives)
@@ -291,6 +297,8 @@ namespace ET.Client
         private static void OnSelectAssistPetItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectAssistPetItemPanelRectTransform.gameObject.SetActive(false);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectAssistPetItemConfirm(this ES_PetMeleeSet self)
@@ -367,6 +375,8 @@ namespace ET.Client
         private static void OnSetMagic(this ES_PetMeleeSet self)
         {
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(true);
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(false);
 
             self.ShowMagics.Clear();
             self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
@@ -380,6 +390,8 @@ namespace ET.Client
         private static void OnSelectSkillItemClose(this ES_PetMeleeSet self)
         {
             self.EG_SelectMagicItemPanelRectTransform.gameObject.SetActive(false);
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_HuoBiSet);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMelee>().View.E_FunctionSetBtnToggleGroup.gameObject.SetActive(true);
         }
 
         private static void OnSelectSkillItemConfirm(this ES_PetMeleeSet self)
