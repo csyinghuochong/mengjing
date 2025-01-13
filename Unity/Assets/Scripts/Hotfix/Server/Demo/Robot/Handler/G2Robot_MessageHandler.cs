@@ -49,7 +49,9 @@ namespace ET.Server
                         robotnumber++;
                     }
                     break;
-                
+                case NoticeType.DragonDungeon:
+                    
+                    break;
                 case NoticeType.BattleOpen:
                     using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))
                     {

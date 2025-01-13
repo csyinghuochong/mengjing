@@ -70,13 +70,24 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(self.Root()), self.TeamInfo);
-            if (preare == 1 && errorCode != ErrorCode.ERR_Success)
-            {
-                HintHelp.ShowErrorHint(self.Root(), errorCode);
-                return;
-            }
+            int errorCode = ErrorCode.ERR_Success;
 
+            switch (self.TeamInfo.SceneType)
+            {
+                case SceneTypeEnum.TeamDungeon:
+                    errorCode =  TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(self.Root()), self.TeamInfo);
+                    if (preare == 1 && errorCode != ErrorCode.ERR_Success)
+                    {
+                        HintHelp.ShowErrorHint(self.Root(), errorCode);
+                        return;
+                    }
+                    break; 
+                case SceneTypeEnum.DragonDungeon:
+                    break;
+                default:
+                    break;
+            }
+            
             long unitid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             for (int i = 0; i < self.TeamInfo.PlayerList.Count; i++)
             {
@@ -136,6 +147,7 @@ namespace ET.Client
             if (error != ErrorCode.Err_HaveNotPrepare)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeon);
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeon);
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonPrepare);
             }
         }

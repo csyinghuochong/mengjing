@@ -43,6 +43,7 @@ namespace ET
         public const int RunRace = 20;
         public const int Demon = 21;
         public const int PaiMai = 22;
+        public const int DragonDungeon = 23;
     }
 
 }

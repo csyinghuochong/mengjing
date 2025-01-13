@@ -13,12 +13,22 @@
 			}
 
 			UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-			SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
-			if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneid))
+			switch (request.TeamInfo.SceneType)
 			{
-				response.Error = ErrorCode.ERR_TimesIsNot;
-				return;
+				case SceneTypeEnum.TeamDungeon:
+					SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+					if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneid))
+					{
+						response.Error = ErrorCode.ERR_TimesIsNot;
+						return;
+					}
+					break;
+				case SceneTypeEnum.DragonDungeon:
+					break;
+				default:
+					break;
 			}
+			
 
 			int errorcode = ErrorCode.ERR_Success;
 			//判断队长是否有深渊票

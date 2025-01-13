@@ -146,6 +146,13 @@ namespace ET
             new EquipChuanChengList() { SkillID = 69021010, RandPro = 100 },
         };
 
+        [StaticField]
+        public static Dictionary<int, int> RototMessageType= new(2)
+        {
+            {SceneTypeEnum.TeamDungeon, NoticeType.TeamDungeon},
+            {SceneTypeEnum.DragonDungeon, NoticeType.DragonDungeon}
+        };
+
         //装备传承职业对应激活技能
         [StaticField]
         public static Dictionary<int, List<EquipChuanChengList>> EquipChuanChengSkillOccTwo =

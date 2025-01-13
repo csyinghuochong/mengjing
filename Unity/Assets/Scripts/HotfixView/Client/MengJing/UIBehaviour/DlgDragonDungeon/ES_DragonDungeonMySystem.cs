@@ -86,13 +86,14 @@ namespace ET.Client
                 return;
             }
 
+            CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(teamInfo.SceneId);
             BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
             if (battleMessageComponent.CanShout())
             {
                 using (zstring.Block())
                 {
                     string text = zstring.Format(" 副本:{0}开启冒险,现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{1}_{2}_{3}_{4}_{5}></link>",
-                        SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
+                        cellGenerateConfig.ChapterName, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
                         teamInfo.PlayerList[0].PlayerLv, SceneTypeEnum.DragonDungeon);
                     ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
                 }

@@ -5,14 +5,17 @@
     {
         protected override async ETTask Run(Scene root, M2C_TeamDungeonPrepareResult message)
         {
+            //刷新ui
             EventSystem.Instance.Publish(root, new RecvTeamDungeonPrepare() { m2CTeamDungeonPrepareResult = message });
-
-            if (message.ErrorCode == ErrorCode.ERR_Success)
+            
+            if (message.ErrorCode != ErrorCode.ERR_Success)
             {
-                Log.Debug("所有人都准好好了");
-                await root.GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(0, 1000));
-                EnterMapHelper.RequestTransfer(root, (int)SceneTypeEnum.TeamDungeon, 0).Coroutine();
+               return;
             }
+    
+            //所有人都准备好了
+            await root.GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(0, 1000));
+            EnterMapHelper.RequestTransfer(root, (int)message.TeamInfo.SceneType, 0).Coroutine();
         }
     }
 }
