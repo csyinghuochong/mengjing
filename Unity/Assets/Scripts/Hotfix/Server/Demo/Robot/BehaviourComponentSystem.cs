@@ -69,7 +69,8 @@ namespace ET
                     self.NewBehaviour = BehaviourType.Behaviour_Battle;
                     break;
                 case 11:
-                    //SceneTypeEnum.DragonDungeon:
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_DragonDungeon, Value = "Behaviour_DragonDungeon" });
+                    self.NewBehaviour = BehaviourType.Behaviour_DragonDungeon;
                     break;
                 default:
                     break;
