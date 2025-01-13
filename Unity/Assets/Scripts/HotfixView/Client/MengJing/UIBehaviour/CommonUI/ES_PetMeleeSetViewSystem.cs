@@ -189,7 +189,6 @@ namespace ET.Client
                 self.ShowMainPets.Add(rolePetInfos[i]);
             }
 
-            
             self.AddUIScrollItems(ref self.ScrollItemSelectMainPetItems, self.ShowMainPets.Count);
             self.E_SelectMainPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMainPets.Count);
             self.OnUpdateSelectMainPetItem();
@@ -254,6 +253,17 @@ namespace ET.Client
                 }
             }
 
+            List<long> copy = new List<long>();
+            copy.AddRange(self.PetMeleeInfo.MainPetList);
+            self.PetMeleeInfo.MainPetList.Clear();
+            foreach (RolePetInfo rolePetInfo in self.ShowMainPets)
+            {
+                if (copy.Contains(rolePetInfo.Id))
+                {
+                    self.PetMeleeInfo.MainPetList.Add(rolePetInfo.Id);
+                }
+            }
+
             self.OnUpdateSelectMainPetItem();
 
             using (zstring.Block())
@@ -290,7 +300,6 @@ namespace ET.Client
                 }
             }
 
-            
             self.AddUIScrollItems(ref self.ScrollItemSelectAssistPetItems, self.ShowAssistPets.Count);
             self.E_SelectAssistPetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowAssistPets.Count);
             self.OnUpdateSelectAssistPetItem();
@@ -355,6 +364,17 @@ namespace ET.Client
                 }
             }
 
+            List<int> copy = new List<int>();
+            copy.AddRange(self.PetMeleeInfo.AssistPetList);
+            self.PetMeleeInfo.AssistPetList.Clear();
+            foreach (int id in self.ShowAssistPets)
+            {
+                if (copy.Contains(id))
+                {
+                    self.PetMeleeInfo.AssistPetList.Add(id);
+                }
+            }
+
             self.OnUpdateSelectAssistPetItem();
 
             using (zstring.Block())
@@ -385,7 +405,6 @@ namespace ET.Client
             self.ShowMagics.Clear();
             self.ShowMagics.AddRange(ConfigData.PetMeleeMagicTest);
 
-            
             self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
             self.E_SelectMagicItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
@@ -447,6 +466,17 @@ namespace ET.Client
                     }
 
                     return;
+                }
+            }
+
+            List<int> copy = new List<int>();
+            copy.AddRange(self.PetMeleeInfo.MagicList);
+            self.PetMeleeInfo.MagicList.Clear();
+            foreach (int id in self.ShowMagics)
+            {
+                if (copy.Contains(id))
+                {
+                    self.PetMeleeInfo.MagicList.Add(id);
                 }
             }
 
