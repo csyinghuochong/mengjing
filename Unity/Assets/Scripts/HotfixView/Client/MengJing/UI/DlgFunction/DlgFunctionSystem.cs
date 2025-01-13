@@ -14,6 +14,7 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnClose);
 
             self.View.E_PetMeleeButton.AddListener(self.OnPetMelee);
+            self.View.E_DragonDungeonButton.AddListener(self.OnDragonDungeonButton);
 
             self.View.E_TaskButton.AddListener(self.OnTask);
             self.View.E_RoseEquipButton.AddListener(self.OnRoseEquip);
@@ -109,6 +110,12 @@ namespace ET.Client
         private static void OnPetMelee(this DlgFunction self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeLevel).Coroutine();
+            self.OnClose();
+        }
+
+        private static void OnDragonDungeonButton(this DlgFunction self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DragonDungeon).Coroutine();
             self.OnClose();
         }
 

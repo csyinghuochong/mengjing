@@ -58,6 +58,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_DragonDungeonButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_DragonDungeonButton == null )
+				{
+					this.m_E_DragonDungeonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Left/Viewport/Content/E_DragonDungeon");
+				}
+				return this.m_E_DragonDungeonButton;
+			}
+		}
+
 		public UnityEngine.UI.Image E_PetMeleeImage
      	{
      		get
@@ -353,6 +370,7 @@ namespace ET.Client
 			this.m_E_CloseImage = null;
 			this.m_E_PetMeleeButton = null;
 			this.m_E_PetMeleeImage = null;
+			this.m_E_DragonDungeonButton = null;
 			this.m_E_TaskButton = null;
 			this.m_E_TaskImage = null;
 			this.m_E_RoseEquipButton = null;
@@ -375,6 +393,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.UI.Button m_E_PetMeleeButton = null;
+		private UnityEngine.UI.Button m_E_DragonDungeonButton = null;
 		private UnityEngine.UI.Image m_E_PetMeleeImage = null;
 		private UnityEngine.UI.Button m_E_TaskButton = null;
 		private UnityEngine.UI.Image m_E_TaskImage = null;
