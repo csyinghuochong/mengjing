@@ -45,6 +45,13 @@ namespace ET.Client
                     self.uiTransform.Find(zstring.Format("Start_Show_{0}", i)).gameObject.SetActive(i <= star);
                 }
             }
+
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            if (string.IsNullOrEmpty(sceneConfig.Icon))
+            {
+                self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig.Icon));
+            }
         }
 
         public static void SetSelected(this Scroll_Item_PetMeleeLevelItem self, int sceneId)

@@ -7,7 +7,7 @@ namespace ET.Client
 	public  class Scroll_Item_PetMeleeLevelItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMeleeLevelItem> 
 	{
 		public int SceneId;
-
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
@@ -41,6 +41,30 @@ namespace ET.Client
      			else
      			{
 		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Selected");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_IconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_IconImage == null )
+     				{
+		    			this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
+     				}
+     				return this.m_E_IconImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
      			}
      		}
      	}
@@ -120,6 +144,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_SelectedImage = null;
+			this.m_E_IconImage = null;
 			this.m_E_NameText = null;
 			this.m_E_TouchButton = null;
 			this.m_E_TouchImage = null;
@@ -128,6 +153,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_SelectedImage = null;
+		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.UI.Button m_E_TouchButton = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
