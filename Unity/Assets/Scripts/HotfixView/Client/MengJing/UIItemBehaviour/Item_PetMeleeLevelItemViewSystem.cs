@@ -52,6 +52,10 @@ namespace ET.Client
                 self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig.Icon));
             }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_IconImage.gameObject, self.SceneId > petMeleeDungeonId);
         }
 
         public static void SetSelected(this Scroll_Item_PetMeleeLevelItem self, int sceneId)
