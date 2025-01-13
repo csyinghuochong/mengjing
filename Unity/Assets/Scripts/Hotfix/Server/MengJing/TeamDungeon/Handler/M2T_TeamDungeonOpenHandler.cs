@@ -21,8 +21,6 @@
             teamInfo.FubenType = request.FubenType;
             M2C_TeamDungeonOpenResult m2C_HorseNoticeInfo = M2C_TeamDungeonOpenResult.Create();
             m2C_HorseNoticeInfo.TeamInfo = teamInfo;
-            
-            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
             for (int i = 0; i < teamInfo.PlayerList.Count; i++)
             {
                 MapMessageHelper.SendToClient(scene.Root(), teamInfo.PlayerList[i].UserID, m2C_HorseNoticeInfo);

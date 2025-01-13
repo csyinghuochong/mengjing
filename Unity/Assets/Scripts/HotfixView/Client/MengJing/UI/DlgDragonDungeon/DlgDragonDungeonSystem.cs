@@ -4,11 +4,11 @@ namespace ET.Client
 {
 	
 	[Event(SceneType.Demo)]
-	public class DataUpdate_TeamUpdate_DlgDragonDungeonRefresh : AEvent<Scene, TeamUpdate>
+	public class DataUpdate_TeamUpdate_DlgDragonDungeonRefresh : AEvent<Scene, RecvTeamUpdate>
 	{
-		protected override async ETTask Run(Scene scene, TeamUpdate args)
+		protected override async ETTask Run(Scene scene, RecvTeamUpdate args)
 		{
-			//scene.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>()?.OnTeamUpdate();
+			scene.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>()?.OnTeamUpdate();
 			await ETTask.CompletedTask;
 		}
 	}

@@ -166,11 +166,7 @@ namespace ET.Client
     {
     }
 
-    // 组队更新
-    public struct TeamUpdate
-    {
-    }
-
+    
     public struct RecvTeamUpdate
     {
     }

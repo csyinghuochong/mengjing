@@ -106,8 +106,7 @@
                 self.TeamList.Add(message.TeamInfo);
                 self.ApplyList.Clear();
             }
-
-            EventSystem.Instance.Publish(self.Root(), new TeamUpdate());
+            
         }
 
         public static void OnRecvTeamApply(this TeamComponentC self, TeamPlayerInfo teamPlayerInfo)

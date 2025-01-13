@@ -3,9 +3,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh : AEvent<Scene, TeamUpdate>
+    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh : AEvent<Scene, RecvTeamUpdate>
     {
-        protected override async ETTask Run(Scene scene, TeamUpdate args)
+        protected override async ETTask Run(Scene scene, RecvTeamUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>()?.OnTeamUpdate();
             await ETTask.CompletedTask;

@@ -1,9 +1,9 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TeamUpdate_DlgTeamRefresh : AEvent<Scene, TeamUpdate>
+    public class DataUpdate_TeamUpdate_DlgTeamRefresh : AEvent<Scene, RecvTeamUpdate>
     {
-        protected override async ETTask Run(Scene scene, TeamUpdate args)
+        protected override async ETTask Run(Scene scene, RecvTeamUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeam>()?.OnTeamUpdate();
             await ETTask.CompletedTask;
