@@ -43,7 +43,37 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
         {
-            self.View.E_SectionSetToggleGroup.OnSelectIndex(0);
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
+            int itemIndex = 0;
+            if (petMeleeDungeonId == 0)
+            {
+                self.View.E_SectionSetToggleGroup.OnSelectIndex(0);
+            }
+            else
+            {
+                bool flag = false;
+                for (int i = 0; i < ConfigData.PetMeleeSectionConfig.Count; i++)
+                {
+                    if (flag)
+                    {
+                        self.View.E_SectionSetToggleGroup.OnSelectIndex(i - 1);
+                        break;
+                    }
+
+                    for (int j = 0; j < ConfigData.PetMeleeSectionConfig[i].Count; j++)
+                    {
+                        if (ConfigData.PetMeleeSectionConfig[i][j] == petMeleeDungeonId)
+                        {
+                            flag = true;
+                            itemIndex = j;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            self.OnLevel(self.ShowPetMeleeSceneIds[itemIndex]);
 
             using (zstring.Block())
             {
@@ -54,9 +84,6 @@ namespace ET.Client
                 self.View.E_Reward3Image.GetComponentInChildren<Text>().text =
                         zstring.Format("{0}/99", PetMeleeFubenRewardConfigCategory.Instance.Get(3).NeedStar);
             }
-
-            self.OnUpdateStar();
-            self.View.E_RightBGImage.gameObject.SetActive(false);
         }
 
         private static void OnSectionSet(this DlgPetMeleeLevel self, int index)
