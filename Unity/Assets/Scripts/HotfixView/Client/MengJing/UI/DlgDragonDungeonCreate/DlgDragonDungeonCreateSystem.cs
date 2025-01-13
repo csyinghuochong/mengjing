@@ -167,7 +167,7 @@ namespace ET.Client
                 dungeonType = TeamFubenType.ShenYuan;
             }
 
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(self.FubenId);
+            CellGenerateConfig sceneConfig = CellGenerateConfigCategory.Instance.Get(self.FubenId);
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (dungeonType == TeamFubenType.XieZhu && sceneConfig.EnterLv <= userInfo.Lv - 10)
@@ -183,32 +183,33 @@ namespace ET.Client
                     PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数", async () =>
                     {
                         int errorCode =
-                                await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
+                                await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.DragonDungeon);
                         if (errorCode != ErrorCode.ERR_Success)
                         {
                             HintHelp.ShowErrorHint(self.Root(), errorCode);
                             return;
                         }
 
-                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
+                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
                     }, null).Coroutine();
                     return;
                 }
             }
 
-            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
+            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.DragonDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeonCreate);
         }
 
         public static void OnCloseButtonButton(this DlgDragonDungeonCreate self)
         {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeonCreate);
         }
     }
 }
