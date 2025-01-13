@@ -109,10 +109,10 @@ namespace ET.Client
         public static async ETTask OnClickRickText(this Scroll_Item_ChatItem self, string text)
         {
             string[] paramss = text.Split('_');
-            if (paramss[0] == "team" && paramss.Length >= 5)
+            if (paramss[0] == "team" && paramss.Length >= 6)
             {
                 TeamNetHelper.TeamDungeonApplyRequest(self.Root(), long.Parse(paramss[1]), int.Parse(paramss[2]), int.Parse(paramss[3]),
-                    int.Parse(paramss[4]), true).Coroutine();
+                    int.Parse(paramss[4]), true, int.Parse(paramss[5])).Coroutine();
             }
 
             if (paramss[0] == "paimai")

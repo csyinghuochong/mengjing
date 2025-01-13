@@ -1082,7 +1082,7 @@ namespace ET.Client
                     }
 
                     error = await TeamNetHelper.TeamDungeonApplyRequest(root, teamList[i].TeamId, teamList[i].SceneId, teamList[i].FubenType,
-                        teamList[i].PlayerList[0].PlayerLv, true);
+                        teamList[i].PlayerList[0].PlayerLv, true,SceneTypeEnum.TeamDungeon);
 
                     if (error == 0)
                     {

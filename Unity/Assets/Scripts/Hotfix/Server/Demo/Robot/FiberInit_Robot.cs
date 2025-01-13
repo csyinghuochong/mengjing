@@ -8,7 +8,6 @@ namespace ET.Client
     {
         public override async ETTask Handle(FiberInit fiberInit)
         {
-
             Scene root = fiberInit.Fiber.Root;
             root.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             root.AddComponent<TimerComponent>();

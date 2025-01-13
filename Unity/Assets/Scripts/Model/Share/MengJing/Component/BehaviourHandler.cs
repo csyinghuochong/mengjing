@@ -20,6 +20,7 @@ namespace ET
         public const int Behaviour_Demon = 14;
         public const int Behaviour_BaoZang = 15;
         public const int Behaviour_Retreat = 16;
+        public const int Behaviour_DragonDungeon = 17;
     }
 
     public class BehaviourHandlerAttribute : BaseAttribute

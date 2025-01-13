@@ -13,7 +13,7 @@
             return response.Error;
         }
 
-        public static async ETTask<int> TeamDungeonApplyRequest(Scene root, long teamId, int fubenId, int fubenType, int leaderLv, bool checkfuben)
+        public static async ETTask<int> TeamDungeonApplyRequest(Scene root, long teamId, int fubenId, int fubenType, int leaderLv, bool checkfuben, int sceneType)
         {
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
 
@@ -33,7 +33,7 @@
             if (fubenId != 0)
             {
                 int errorCode = TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), fubenType, fubenId,
-                    userInfo.UserId);
+                    userInfo.UserId, sceneType);
                 if (errorCode != 0)
                 {
                     HintHelp.ShowErrorHint(root, errorCode);
@@ -79,7 +79,7 @@
             {
                 case SceneTypeEnum.TeamDungeon:
                     errorCode =
-                            TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), fubenType, fubenId, userInfo.UserId);
+                            TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), fubenType, fubenId, userInfo.UserId,sceneType);
                     if (errorCode != ErrorCode.ERR_Success)
                     {
                         return errorCode;

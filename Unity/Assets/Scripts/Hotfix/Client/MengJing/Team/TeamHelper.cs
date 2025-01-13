@@ -4,10 +4,10 @@
     {
         public static int CheckTimesAndLevel(Unit unit, TeamInfo teamInfo)
         {
-            return CheckTimesAndLevel(unit, teamInfo.FubenType, teamInfo.SceneId, teamInfo.TeamId);
+            return CheckTimesAndLevel(unit, teamInfo.FubenType, teamInfo.SceneId, teamInfo.TeamId, teamInfo.SceneType);
         }
 
-        public static int CheckTimesAndLevel(Unit unit, int fubenType, int fubenid, long teamid)
+        public static int CheckTimesAndLevel(Unit unit, int fubenType, int fubenid, long teamid, int sceneType)
         {
             UserInfoComponentC userInfoComponent = null;
 #if SERVER
@@ -41,12 +41,18 @@
                 }
             }
 
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenid);
-            if (userInfoComponent.UserInfo.Lv < sceneConfig.CreateLv)
+            switch (sceneType)
             {
-                return ErrorCode.ERR_LevelIsNot;
-            }
+                case SceneTypeEnum.TeamDungeon:
+                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenid);
+                    if (userInfoComponent.UserInfo.Lv < sceneConfig.CreateLv)
+                    {
+                        return ErrorCode.ERR_LevelIsNot;
+                    }
 
+                    break;
+            }
+           
             return ErrorCode.ERR_Success;
         }
     }

@@ -21,7 +21,7 @@ namespace ET.Client
         public static void OnButton_Apply(this Scroll_Item_TeamDungeonItem self)
         {
             TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamInfo.TeamId, self.TeamInfo.SceneId, self.TeamInfo.FubenType,
-                self.TeamInfo.PlayerList[0].PlayerLv, true).Coroutine();
+                self.TeamInfo.PlayerList[0].PlayerLv, true, self.TeamInfo.SceneType).Coroutine();
         }
 
         public static void OnUpdateUI(this Scroll_Item_TeamDungeonItem self, TeamInfo teamInfo, int sceneType)

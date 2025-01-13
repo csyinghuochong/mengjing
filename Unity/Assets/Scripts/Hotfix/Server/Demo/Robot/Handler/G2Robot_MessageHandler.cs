@@ -15,6 +15,7 @@ namespace ET.Server
             switch (message.MessageType)
             {
                 case NoticeType.TeamDungeon:
+                case NoticeType.DragonDungeon:
                     int robotnumber = 0;
                     long lastteamtime = 0;
                     string[] teamInfo = message.Message.Split('_');
@@ -37,7 +38,7 @@ namespace ET.Server
                         }
                         
                         //message.Message   sceneid_teamid
-                        int  robotId = BattleHelper.GetTeamRobotId(fubenId);
+                        int  robotId = BattleHelper.GetBattleRobotId(ConfigData.RototBehaviourType[message.MessageType], fubenId);
                         int fiberId= await robotManagerComponent.NewRobot(message.Zone, robotId);
                         ActorId roborActorId = new ActorId(scene.Fiber().Process, fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
                         Main2RobotClient_Message main2RobotClientMessage = Main2RobotClient_Message.Create();
@@ -48,9 +49,6 @@ namespace ET.Server
                         
                         robotnumber++;
                     }
-                    break;
-                case NoticeType.DragonDungeon:
-                    
                     break;
                 case NoticeType.BattleOpen:
                     using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.NewRobot, 1))

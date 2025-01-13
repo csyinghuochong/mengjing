@@ -4,11 +4,11 @@ using ET.Client;
 namespace ET
 {
     //战场
-    public class Behaviour_TeamDungeon : BehaviourHandler
+    public class Behaviour_DragonDungeon : BehaviourHandler
     {
         public override int BehaviourId()
         {
-            return BehaviourType.Behaviour_TeamDungeon;
+            return BehaviourType.Behaviour_DragonDungeon;
         }
 
         public override bool Check(BehaviourComponent aiComponent, AIConfig aiConfig)
@@ -26,13 +26,13 @@ namespace ET
             while (true)
             {
                 //获取队伍列表
-                int errorCode = await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.TeamDungeon);
+                int errorCode = await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.DragonDungeon);
                 string messagevalue = aiComponent.Message;
                 string[] teamId = messagevalue.Split('_');
                 TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
                 if (teamInfo != null)
                 {
-                    errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.TeamDungeon);
+                    errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.DragonDungeon);
                 }
                 if (errorCode != 0)
                 {

@@ -46,6 +46,7 @@ namespace ET
             //8   塔防机器人
             //9   奔跑大赛机器人
             //10  恶魔活动机器人
+            //11  龙与地下城机器人
             switch (robotConfig.Behaviour)
             {
                 case 0:
@@ -66,6 +67,9 @@ namespace ET
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Target, Value = "Behaviour_Target" });
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Retreat, Value = "Behaviour_Retreat" });
                     self.NewBehaviour = BehaviourType.Behaviour_Battle;
+                    break;
+                case 11:
+                    //SceneTypeEnum.DragonDungeon:
                     break;
                 default:
                     break;

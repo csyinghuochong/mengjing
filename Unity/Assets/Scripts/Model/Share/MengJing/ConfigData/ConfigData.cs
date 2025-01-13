@@ -152,6 +152,13 @@ namespace ET
             {SceneTypeEnum.TeamDungeon, NoticeType.TeamDungeon},
             {SceneTypeEnum.DragonDungeon, NoticeType.DragonDungeon}
         };
+        
+        [StaticField]
+        public static Dictionary<int, int> RototBehaviourType= new(2)
+        {
+            {NoticeType.TeamDungeon, 2},
+            {NoticeType.DragonDungeon, 11}
+        };
 
         //装备传承职业对应激活技能
         [StaticField]

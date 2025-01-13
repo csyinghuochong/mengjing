@@ -221,7 +221,7 @@ namespace ET.Client
 
         public static void OnButton_ApplyTeam(this DlgWatchMenu self)
         {
-            TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamId, 0, 0, 0, false).Coroutine();
+            TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamId, 0, 0, 0, false, SceneTypeEnum.DragonDungeon).Coroutine();
 
             self.OnClickImageBg();
         }
