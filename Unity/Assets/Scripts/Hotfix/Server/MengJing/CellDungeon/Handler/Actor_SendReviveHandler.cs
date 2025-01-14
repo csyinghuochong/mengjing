@@ -25,25 +25,27 @@ namespace ET.Server
             }
             else
             {
-                if (mapComponent.SceneType == SceneTypeEnum.TeamDungeon)
+                switch (mapComponent.SceneType)
                 {
-                    TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
-                    unit.SetBornPosition(teamDungeonComponent.BossDeadPosition, true);
-                }
-                else
-                {
-                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
+                    case SceneTypeEnum.TeamDungeon:
+                        TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
+                        unit.SetBornPosition(teamDungeonComponent.BossDeadPosition, true);
+                        break;
+                    case SceneTypeEnum.DragonDungeon:
+                        break;
+                    default:
+                        SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
 
-                    if (unit.GetBattleCamp() == CampEnum.CampPlayer_1)
-                    {
-                        unit.SetBornPosition(new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f), true);
-                    }
-                    else
-                    {
-                        unit.SetBornPosition(new float3(sceneConfig.InitPos[3] * 0.01f, sceneConfig.InitPos[4] * 0.01f, sceneConfig.InitPos[5] * 0.01f), true);
-                    }
+                        if (unit.GetBattleCamp() == CampEnum.CampPlayer_1)
+                        {
+                            unit.SetBornPosition(new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f), true);
+                        }
+                        else
+                        {
+                            unit.SetBornPosition(new float3(sceneConfig.InitPos[3] * 0.01f, sceneConfig.InitPos[4] * 0.01f, sceneConfig.InitPos[5] * 0.01f), true);
+                        }
+                        break;
                 }
-
                 unit.GetComponent<HeroDataComponentS>().OnRevive();
             }
 

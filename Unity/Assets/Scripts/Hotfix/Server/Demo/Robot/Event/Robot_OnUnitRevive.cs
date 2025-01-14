@@ -24,10 +24,11 @@ namespace ET.Client
                         root.GetComponent<BehaviourComponent>().Start();
                         break;
                     case SceneTypeEnum.DragonDungeon:
-                        Console .WriteLine("地下城机器人复活！暂未处理！");
+                        Console .WriteLine("地下城机器人复活！");
+                        root.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
+                        root.GetComponent<BehaviourComponent>().Start();
                         break;
                     case SceneTypeEnum.Arena:
-                        
                         //发消息移除该rbobot
                         break;
                     case SceneTypeEnum.Demon:

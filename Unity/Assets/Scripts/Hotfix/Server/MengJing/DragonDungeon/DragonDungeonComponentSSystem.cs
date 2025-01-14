@@ -353,7 +353,7 @@ namespace ET.Server
             //更新unit坐标
             unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
             unit.Rotation = quaternion.identity;
-
+            unit.SetBornPosition( unit.Position, false);
             // 通知客户端开始切场景
             string parminfo = self.CurrentFubenCell.sonid.ToString();
             M2C_StartSceneChange m2CStartSceneChange = new()
@@ -457,7 +457,7 @@ namespace ET.Server
 
             unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
             unit.Rotation = quaternion.identity;
-
+            unit.SetBornPosition( unit.Position, false);
             M2C_CellSonDungeonInfo m2CCellDungeonInfo = M2C_CellSonDungeonInfo.Create();
             m2CCellDungeonInfo.Position = unit.Position;
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;

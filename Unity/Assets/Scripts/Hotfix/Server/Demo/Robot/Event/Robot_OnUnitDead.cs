@@ -32,7 +32,15 @@ namespace ET.Client
                         EnterMapHelper.SendReviveRequest(root, false).Coroutine();
                         break;
                     case SceneTypeEnum.DragonDungeon:
-                        Console .WriteLine("地下城机器人死亡！暂未处理！");
+                        Console .WriteLine("地下城机器人死亡！");
+                        await root.GetComponent<TimerComponent>().WaitAsync(1000);
+                        if (InstanceId != unit.InstanceId)
+                        {
+                            Log.Debug("InstanceId != unit.InstanceId");
+                            return;
+                        }
+                                                
+                        EnterMapHelper.SendReviveRequest(root, false).Coroutine();
                         break;
                     case SceneTypeEnum.Arena:
                         await root.GetComponent<TimerComponent>().WaitAsync(20000);
