@@ -12,11 +12,17 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this ET.Server.DragonChuansongComponent self)
         {
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.DragonChuansongTimer, self);
+        }
 
+        [EntitySystem]
+        private static void Destroy(this ET.Server.DragonChuansongComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }
         
         [Invoke(TimerInvokeType.DragonChuansongTimer)]
-        public class DragonChuansongTimer: ATimer<DragonChuansongComponent>
+        public class DragonChuansongTimer : ATimer<DragonChuansongComponent>
         {
             protected override void Run(DragonChuansongComponent self)
             {
@@ -45,7 +51,7 @@ namespace ET.Server
             Unit chuansong = self.GetParent<Unit>();
             for (int i = 0; i < unitlist.Count; i++)
             {
-                if (math.distance( chuansong.Position, unitlist[i].Position ) > 1.5f)
+                if (math.distance(chuansong.Position, unitlist[i].Position) > 1.5f)
                 {
                     allin = false;
                     break;
@@ -57,11 +63,18 @@ namespace ET.Server
                 return;
             }
 
+            Scene scene = self.Scene();
             NumericComponentS numericComponentS = chuansong.GetComponent<NumericComponentS>();
             string paraminfo = $"{numericComponentS.GetAsInt(NumericType.CellIndex)}_{numericComponentS.GetAsInt(NumericType.DirectionType)}";
-            self.Scene().GetComponent<DragonDungeonComponentS>().InitSonCell(paraminfo);
             
+            UnitHelper.RemoveAllNoType(self.Scene(), new List<int>() { UnitType.Player, UnitType.Pet });
+
+            DragonDungeonComponentS dragonDungeonComponentS = scene.GetComponent<DragonDungeonComponentS>();
+            dragonDungeonComponentS.InitSonCell(paraminfo);
+
             //通知客户端切场景
+            dragonDungeonComponentS.OnEnterSonCell(paraminfo);
         }
+        
     }
 }

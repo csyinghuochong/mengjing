@@ -392,52 +392,23 @@ namespace ET.Server
             mapComponent.SetMapInfo(SceneTypeEnum.DragonDungeon, mapComponent.SceneId, sonid);
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
-           
-            //更新unit出生点坐标
-            int[] borpos;
-            switch (DirectionType)
-            {
-                case 1:
-                    borpos = chapterSon.BornPosDwon;
-                    break;
-
-                case 2:
-                    borpos = chapterSon.BornPosRight;
-                    break;
-                case 3:
-                    borpos = chapterSon.BornPosUp;
-                    break;
-                default:
-                    borpos = chapterSon.BornPosLeft;
-                    break;
-            }
-
+          
             //创建副本内的各种Unit
             self.GenerateFubenScene(fubenCellInfoNext.pass);
             
             Console.WriteLine($"InitSonCell:  {ParamInfo}");
         }
 
-        public static void OnEnterSonCell(this DragonDungeonComponentS self, Unit unit, string ParamInfo)
+        public static void OnEnterSonCell(this DragonDungeonComponentS self,  string ParamInfo)
         {
-            unit.GetComponent<MoveComponent>().Stop(true);
-            unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
-
             string[] cellinfo = ParamInfo.Split('_');
             int CurrentCell = int.Parse(cellinfo[0]);
             int DirectionType = int.Parse(cellinfo[1]);
-
-            CellDungeonInfo fubenCellInfoNext  =  self.CurrentFubenCell;
-            if (!fubenCellInfoNext.pass)
-            {
-                unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
-            }
-            
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+            
+            CellDungeonInfo fubenCellInfoNext  =  self.CurrentFubenCell;
             int sonid = fubenCellInfoNext.sonid;
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
-            unit.RemoveComponent<PathfindingComponent>();
-            unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
 
             //更新unit出生点坐标
             int[] borpos;
@@ -457,14 +428,47 @@ namespace ET.Server
                     borpos = chapterSon.BornPosLeft;
                     break;
             }
+            
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            M2C_DragonSonDungeonInfo m2CCellDungeonInfo = M2C_DragonSonDungeonInfo.Create();
+            
+            for (int i = 0; i < players.Count; i++)
+            {
+                Unit unit = players[i];
+                
+                unit.GetComponent<MoveComponent>().Stop(true);
+                unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
+         
+                if (!fubenCellInfoNext.pass)
+                {
+                    unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
+                }
+            
+           
+                unit.RemoveComponent<PathfindingComponent>();
+                unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+                
+                unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                unit.Rotation = quaternion.identity;
+                unit.SetBornPosition( unit.Position, false);
+                
+                m2CCellDungeonInfo.UnitIds.Add(unit.Id);
+                m2CCellDungeonInfo.Positions.Add(unit.Position);
+            }
+            
+            List<Unit> pets = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
+            for (int i = 0; i < players.Count; i++)
+            {
+                Unit unit = pets[i];
+                
+                unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                unit.Rotation = quaternion.identity;
+                m2CCellDungeonInfo.UnitIds.Add(unit.Id);
+                m2CCellDungeonInfo.Positions.Add(unit.Position);
+            }
 
-            unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
-            unit.Rotation = quaternion.identity;
-            unit.SetBornPosition( unit.Position, false);
-            M2C_CellSonDungeonInfo m2CCellDungeonInfo = M2C_CellSonDungeonInfo.Create();
-            m2CCellDungeonInfo.Position = unit.Position;
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
-            MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+            MapMessageHelper.SendToClient(players, m2CCellDungeonInfo);
         }
 
         public static void GenerateFubenScene(this DragonDungeonComponentS self, bool pass)

@@ -4265,7 +4265,6 @@ message M2C_TeamDungeonQuitMessage // IMessage
 	string Message = 92;
 }
 
-
 //紫色道具判断是否需要拾取
 message M2C_TeamPickMessage // IMessage
 {
@@ -5628,6 +5627,12 @@ message M2C_TeamDungeonPrepareResult // IMessage
 	int32 ErrorCode = 2;
 }
 
+message M2C_DragonSonDungeonInfo // IMessage
+{
+		SonFubenInfo SonFubenInfo = 2;
+		repeated Unity.Mathematics.float3 Positions = 3;
+		repeated int64 UnitIds = 4;
+}
 
 //v1活动.抽奖
 //ResponseType M2C_ActivityChouKaResponse

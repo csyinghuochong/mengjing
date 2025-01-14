@@ -571,5 +571,19 @@ namespace ET.Server
             }
         }
 
+        public static void RemoveAllNoType(Scene scene, List<int> typelist)
+        {
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            List<Entity> allunits = unitComponent.Children.Values.ToList();
+            for (int i = allunits.Count - 1; i >= 0; i--)
+            {
+                Unit unit = allunits[i] as Unit;
+                if (typelist.Contains(unit.Type()))
+                {
+                    continue;
+                }
+                unitComponent.Remove(unit.Id);
+            }
+        }
     }
 }
