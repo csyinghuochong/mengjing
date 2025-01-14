@@ -22,7 +22,7 @@ namespace ET
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
 
-            //Console.WriteLine("Behaviour_TeamDungeon");
+            Console.WriteLine("Behaviour_DragonDungeon");
             while (true)
             {
                 //获取队伍列表
@@ -32,13 +32,23 @@ namespace ET
                 TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
                 if (teamInfo != null)
                 {
+                    
                     errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.DragonDungeon);
                 }
-                if (errorCode != 0)
+                else
                 {
-                    Console.WriteLine($"Behaviour_TeamDungeon: Execute {errorCode}");
+                   Console.WriteLine("Behaviour_DragonDungeon  teamInfo == null");
                 }
                 
+                if (errorCode != 0)
+                {
+                    Console.WriteLine($"Behaviour_DragonDungeon: Execute {errorCode}");
+                }
+                else
+                {
+                    Console.WriteLine("Behaviour_DragonDungeon  Execute Sucess");
+                }
+
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())
