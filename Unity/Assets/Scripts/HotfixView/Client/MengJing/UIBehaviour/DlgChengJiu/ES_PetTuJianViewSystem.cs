@@ -31,7 +31,7 @@ namespace ET.Client
             self.UIPetTuJianItemListNode.SetActive(false);
 
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
-            self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
+            // self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
 
             self.InitPetTuJianList();
 
@@ -79,7 +79,7 @@ namespace ET.Client
         {
             self.UpdatePetZizhi(petid);
             self.UpdateSkillList(petid);
-            self.UpdatePetSkinList(petid);
+            // self.UpdatePetSkinList(petid);
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
             self.ES_ModelShow.ShowOtherModel($"Pet/{petConfig.PetModel}", true).Coroutine();
@@ -229,26 +229,26 @@ namespace ET.Client
             scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.RoleSkillIcon);
         }
 
-        private static void OnPetSinIconItemsRefresh(this ES_PetTuJian self, Transform transform, int index)
-        {
-            Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
-            scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
-            scrollItemPetSkinIconItem.OnUpdateUI(self.ShowSkin[index], index == 0);
-        }
+        // private static void OnPetSinIconItemsRefresh(this ES_PetTuJian self, Transform transform, int index)
+        // {
+        //     Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
+        //     scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
+        //     scrollItemPetSkinIconItem.OnUpdateUI(self.ShowSkin[index], index == 0);
+        // }
 
-        public static void UpdatePetSkinList(this ES_PetTuJian self, int petid)
-        {
-            PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
+        // public static void UpdatePetSkinList(this ES_PetTuJian self, int petid)
+        // {
+        //     PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
+        //
+        //     self.ShowSkin.Clear();
+        //     self.ShowSkin.AddRange(petConfig.Skin);
+        //
+        //     self.AddUIScrollItems(ref self.ScrollItemPetSkinIconItems, self.ShowSkin.Count);
+        //     self.E_PetSinIconItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkin.Count);
+        // }
 
-            self.ShowSkin.Clear();
-            self.ShowSkin.AddRange(petConfig.Skin);
-
-            self.AddUIScrollItems(ref self.ScrollItemPetSkinIconItems, self.ShowSkin.Count);
-            self.E_PetSinIconItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkin.Count);
-        }
-
-        public static void OnSelectSkinHandler(this ES_PetTuJian self, int skinId)
-        {
-        }
+        // public static void OnSelectSkinHandler(this ES_PetTuJian self, int skinId)
+        // {
+        // }
     }
 }
