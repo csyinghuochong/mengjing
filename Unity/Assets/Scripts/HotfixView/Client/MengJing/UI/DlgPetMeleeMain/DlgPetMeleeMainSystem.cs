@@ -57,6 +57,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
         {
+            GameObject GridCanvas = GameObject.Find("/GridCanvas");
+            GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
+            GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
+            BackgroundImage.SetActive(false);
+            CellIndicator.SetActive(false);
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)

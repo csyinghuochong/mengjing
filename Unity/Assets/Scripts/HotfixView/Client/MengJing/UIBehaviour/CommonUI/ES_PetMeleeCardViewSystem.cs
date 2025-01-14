@@ -1,19 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [EntitySystemOf(typeof(ES_PetMeleeCard))]
-    [FriendOfAttribute(typeof(ES_PetMeleeCard))]
+    [FriendOf(typeof(ES_PetMeleeCard))]
     public static partial class ES_PetMeleeCardSystem
     {
+        [Invoke(TimerInvokeType.PetMeleeCardTimer)]
+        public class ES_PetMeleeCardTimer : ATimer<ES_PetMeleeCard>
+        {
+            protected override void Run(ES_PetMeleeCard self)
+            {
+                try
+                {
+                    self.Drag();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.ToString());
+                }
+            }
+        }
+
         [EntitySystem]
         private static void Awake(this ES_PetMeleeCard self, Transform transform)
         {
             self.uiTransform = transform;
             self.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
-            self.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
             self.E_TouchEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
         }
 
@@ -147,16 +164,13 @@ namespace ET.Client
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
 
             self.uiTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
-            self.GetParent<DlgPetMeleeMain>().View.E_IconImage.sprite = self.E_IconImage.sprite;
-            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(true);
+
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMeleeCardTimer, self);
         }
 
-        private static void Drag(this ES_PetMeleeCard self, PointerEventData pdata)
+        private static void Drag(this ES_PetMeleeCard self)
         {
-            if (self.GameObject == null)
-            {
-                return;
-            }
+            self.CanPlace = false;
 
             RaycastHit raycastHit;
             Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -166,15 +180,71 @@ namespace ET.Client
                 return;
             }
 
-            Vector3 pos = raycastHit.point;
-            self.GameObject.gameObject.SetActive(true);
-            self.GameObject.transform.position = pos;
+            Vector3 hitPoint = raycastHit.point;
 
-            // Vector2 localPoint = new Vector2();
-            // RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
-            // Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.transform.localPosition = localPoint;
+            switch (self.PetMeleeCardInfo.Type)
+            {
+                case (int)PetMeleeCarType.MainPet:
+                case (int)PetMeleeCarType.AssistPet:
+                {
+                    GameObject GridCanvas = GameObject.Find("/GridCanvas");
+                    GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
+                    GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
+                    BackgroundImage.SetActive(true);
+                    CellIndicator.SetActive(true);
+
+                    float targetX = hitPoint.x;
+                    float targetZ = hitPoint.z;
+                    float nearestX = Mathf.Round(targetX / self.CellSize) * self.CellSize;
+                    float nearestZ = Mathf.Round(targetZ / self.CellSize) * self.CellSize;
+                    nearestX = Mathf.Clamp(nearestX, self.CellSize * -4, self.CellSize * 4);
+                    nearestZ = Mathf.Clamp(nearestZ, self.CellSize * -4, self.CellSize * 4);
+                    self.TargetPos = new Vector3(nearestX, 0, nearestZ);
+                    CellIndicator.GetComponent<RectTransform>().localPosition = new Vector2(self.CellSize * 10 * Mathf.Round(targetX / self.CellSize),
+                        self.CellSize * 10 * Mathf.Round(targetZ / self.CellSize));
+
+                    // 在点击位置周围发射一个半径为detectionRadius的球形碰撞体，检测是否有场景障碍物
+                    Collider[] colliders = Physics.OverlapSphere(self.TargetPos, self.CellSize / 2f,
+                        1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString()));
+                    bool haveObstruct = colliders.Length > 0;
+
+                    // 获取所有unit的位置，判断这个格子内是否有unit
+                    List<EntityRef<Unit>> units = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+                    bool haveUnit = false;
+                    foreach (Unit unit in units)
+                    {
+                        if (PositionHelper.Distance2D(unit.Position, self.TargetPos) < self.CellSize / 2)
+                        {
+                            haveUnit = true;
+                            break;
+                        }
+                    }
+
+                    if (!haveObstruct && !haveUnit)
+                    {
+                        self.CanPlace = true;
+                        CellIndicator.GetComponent<Image>().color = Color.green;
+                    }
+                    else
+                    {
+                        CellIndicator.GetComponent<Image>().color = Color.red;
+                    }
+
+                    break;
+                }
+                case (int)PetMeleeCarType.Magic:
+                {
+                    self.TargetPos = hitPoint;
+                    self.CanPlace = true;
+                    break;
+                }
+            }
+
+            if (self.GameObject != null)
+            {
+                self.GameObject.gameObject.SetActive(true);
+                self.GameObject.transform.position = self.TargetPos;
+            }
         }
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
@@ -183,30 +253,25 @@ namespace ET.Client
 
             self.uiTransform.localScale = new Vector3(1f, 1f, 1f);
 
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+            GameObject GridCanvas = GameObject.Find("/GridCanvas");
+            GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
+            GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
+            BackgroundImage.SetActive(false);
+            CellIndicator.SetActive(false);
+
             if (self.GameObject != null)
             {
                 self.GameObject.gameObject.SetActive(false);
             }
-            // self.GetParent<DlgPetMeleeMain>().View.E_IconImage.gameObject.SetActive(false);
 
-            RaycastHit raycastHit;
-            Ray Ray = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out raycastHit, 100, 1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
-            if (!hit)
+            if (!self.CanPlace)
             {
                 return;
             }
 
-            Vector3 pos = raycastHit.point;
-
-            if ((self.PetMeleeCardInfo.Type == (int)PetMeleeCarType.MainPet || self.PetMeleeCardInfo.Type == (int)PetMeleeCarType.AssistPet) &&
-                pos.x > 0)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("请放置在左边");
-                return;
-            }
-
-            self.GetParent<DlgPetMeleeMain>().UseCard(self, pos).Coroutine();
+            self.GetParent<DlgPetMeleeMain>().UseCard(self, self.TargetPos).Coroutine();
         }
     }
 }

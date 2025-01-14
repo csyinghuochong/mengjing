@@ -10,6 +10,10 @@ namespace ET.Client
 		public PetMeleeCardInfo PetMeleeCardInfo;
 		public GameObject GameObject;
 		public string UnitAssetsPath;
+		public float CellSize = 3.33f;
+		public bool CanPlace;
+		public Vector3 TargetPos;
+		public long Timer;
 		
 		public UnityEngine.UI.Text E_CostText
      	{
