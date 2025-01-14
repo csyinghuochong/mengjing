@@ -10,8 +10,12 @@ namespace ET.Client
 	public  class ES_PetTuJian : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public GameObject[] PetZiZhiItemList = new GameObject[6];
-		public List<EntityRef<Scroll_Item_PetTuJianItem>> uIPetTuJianItems = new();
 
+		public List<EntityRef<UIPetTuJianType>> UIPetTuJianTypes = new();
+		public GameObject LeftContent;
+		public GameObject UIPetTuJianType;
+		public GameObject UIPetTuJianItemListNode;
+		
 		public List<int> ShowSkill = new List<int>();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 

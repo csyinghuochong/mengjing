@@ -38,8 +38,8 @@ namespace ET.Client
                     break;
                 case 4:
                     self.View.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetTuJian.OnUpdateUI();
-                    break;
+                    
+                    self.View.ES_PetTuJian.OnUpdateUI();break;
             }
         }
     }

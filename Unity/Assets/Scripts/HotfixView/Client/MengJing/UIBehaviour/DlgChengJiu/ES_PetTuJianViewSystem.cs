@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetTuJianItem))]
-    [EntitySystemOf(typeof (ES_PetTuJian))]
-    [FriendOfAttribute(typeof (ES_PetTuJian))]
+    [FriendOf(typeof(Scroll_Item_PetTuJianItem))]
+    [EntitySystemOf(typeof(ES_PetTuJian))]
+    [FriendOfAttribute(typeof(ES_PetTuJian))]
     public static partial class ES_PetTuJianSystem
     {
         [EntitySystem]
@@ -22,18 +22,69 @@ namespace ET.Client
             self.PetZiZhiItemList[4] = self.EG_PetZiZhiItem5RectTransform.gameObject;
             self.PetZiZhiItemList[5] = self.EG_PetZiZhiItem6RectTransform.gameObject;
 
+            ReferenceCollector rc = transform.GetComponent<ReferenceCollector>();
+            self.LeftContent = rc.Get<GameObject>("LeftContent");
+            self.UIPetTuJianType = rc.Get<GameObject>("UIPetTuJianType");
+            self.UIPetTuJianItemListNode = rc.Get<GameObject>("UIPetTuJianItemListNode");
+
+            self.UIPetTuJianType.SetActive(false);
+            self.UIPetTuJianItemListNode.SetActive(false);
+
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
             self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
 
+            self.InitPetTuJianList();
+
             self.InitModelShowView_1();
-            // self.E_Image_ItemButtonButton.AddListener(self.OnImage_ItemButtonButton);
-            // self.E_Image_EventTriggerButton.AddListener(self.OnImage_EventTriggerButton);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_PetTuJian self)
         {
             self.DestroyWidget();
+        }
+
+        public static void InitPetTuJianList(this ES_PetTuJian self)
+        {
+            List<int> showType = new List<int>();
+            showType.Add(0);
+            showType.Add(1);
+
+            foreach (int type in showType)
+            {
+                GameObject go1 = UnityEngine.Object.Instantiate(self.UIPetTuJianType, self.LeftContent.transform);
+                GameObject go2 = UnityEngine.Object.Instantiate(self.UIPetTuJianItemListNode, self.LeftContent.transform);
+                UIPetTuJianType uiChengJiuShowType = self.AddChild<UIPetTuJianType, GameObject, GameObject>(go1, go2);
+                go1.SetActive(true);
+                uiChengJiuShowType.Init(type, self.OnType, self.OnClickPetHandler);
+
+                self.UIPetTuJianTypes.Add(uiChengJiuShowType);
+            }
+
+            UIPetTuJianType ui = self.UIPetTuJianTypes[0];
+            ui.OnImageButton();
+        }
+
+        public static void OnType(this ES_PetTuJian self, int type)
+        {
+            foreach (UIPetTuJianType uiChengJiuShowType in self.UIPetTuJianTypes)
+            {
+                uiChengJiuShowType.SetSelected(type);
+            }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.LeftContent.GetComponent<RectTransform>());
+        }
+
+        public static void OnClickPetHandler(this ES_PetTuJian self, int petid)
+        {
+            self.UpdatePetZizhi(petid);
+            self.UpdateSkillList(petid);
+            self.UpdatePetSkinList(petid);
+
+            PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
+            self.ES_ModelShow.ShowOtherModel($"Pet/{petConfig.PetModel}", true).Coroutine();
+
+            self.E_Text_PetNameText.text = petConfig.PetName;
         }
 
         public static void InitModelShowView_1(this ES_PetTuJian self)
@@ -43,82 +94,6 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_PetTuJian self)
         {
-            self.OnUpdatePetList();
-        }
-
-        public static void OnUpdatePetList(this ES_PetTuJian self)
-        {
-            List<PetConfig> petConfigs = PetConfigCategory.Instance.GetAll().Values.ToList();
-
-            int commonPetNum = 0;
-            int godPetNum = 0;
-            for (int i = 0; i < petConfigs.Count; i++)
-            {
-                Scroll_Item_PetTuJianItem uIPetTuJianItem = null;
-                if (i < self.uIPetTuJianItems.Count)
-                {
-                    uIPetTuJianItem = self.uIPetTuJianItems[i];
-                    uIPetTuJianItem.uiTransform.gameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go =
-                            UnityEngine.Object.Instantiate(self.uiTransform.GetComponent<ReferenceCollector>().Get<GameObject>("UIPetTuJianItem"));
-                    go.SetActive(true);
-                    if (petConfigs[i].PetType == 0)
-                    {
-                        commonPetNum++;
-                        int row = commonPetNum / 4;
-                        row += commonPetNum % 4 > 0? 1 : 0;
-                        self.EG_CommonPetListRectTransform.sizeDelta = new Vector2(713f, 150f + row * 160f);
-
-                        CommonViewHelper.SetParent(go,
-                            self.EG_CommonPetListRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("ItemNode"));
-                    }
-                    else
-                    {
-                        godPetNum++;
-                        int row = godPetNum / 4;
-                        row += godPetNum % 4 > 0? 1 : 0;
-                        self.EG_GodPetListRectTransform.sizeDelta = new Vector2(713f, 150f + row * 160f);
-
-                        CommonViewHelper.SetParent(go, self.EG_GodPetListRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("ItemNode"));
-                    }
-
-                    uIPetTuJianItem = self.AddChild<Scroll_Item_PetTuJianItem>();
-                    uIPetTuJianItem.uiTransform = go.transform;
-                    uIPetTuJianItem.OnInitUI(petConfigs[i].Id);
-                    uIPetTuJianItem.SetClickHandler((int petId) => { self.OnClickPetHandler(petId); });
-                    self.uIPetTuJianItems.Add(uIPetTuJianItem);
-                }
-            }
-
-            for (int i = petConfigs.Count; i < self.uIPetTuJianItems.Count; i++)
-            {
-                Scroll_Item_PetTuJianItem item = self.uIPetTuJianItems[i];
-                item.uiTransform.gameObject.SetActive(false);
-            }
-
-            Scroll_Item_PetTuJianItem scrollItemPetTuJianItem = self.uIPetTuJianItems[0];
-            scrollItemPetTuJianItem.OnImage_ItemButton();
-        }
-
-        public static void OnClickPetHandler(this ES_PetTuJian self, int petid)
-        {
-            for (int i = 0; i < self.uIPetTuJianItems.Count; i++)
-            {
-                Scroll_Item_PetTuJianItem scrollItemPetTuJianItem = self.uIPetTuJianItems[i];
-                scrollItemPetTuJianItem.SetSelected(petid);
-            }
-
-            self.UpdatePetZizhi(petid);
-            self.UpdateSkillList(petid);
-            self.UpdatePetSkinList(petid);
-
-            PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
-            self.ES_ModelShow.ShowOtherModel($"Pet/{petConfig.PetModel}", true).Coroutine();
-
-            self.E_Text_PetNameText.text = petConfig.PetName;
         }
 
         public static void UpdatePetZizhi(this ES_PetTuJian self, int petid)
@@ -178,7 +153,7 @@ namespace ET.Client
                             zstring.Format("{0}/{1}", petConfig.ZiZhi_Adf_Max, petConfig.ZiZhi_Adf_Max);
                     self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                             zstring.Format("{0}/{1}", petConfig.ZiZhi_MageAct_Max, petConfig.ZiZhi_MageAct_Max);
-                    self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = 
+                    self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                             zstring.Format("{0}/{1}", (float)petConfig.ZiZhi_ChengZhang_Max, (float)petConfig.ZiZhi_ChengZhang_Max);
                 }
 
@@ -273,12 +248,6 @@ namespace ET.Client
         }
 
         public static void OnSelectSkinHandler(this ES_PetTuJian self, int skinId)
-        {
-        }
-        public static void OnImage_ItemButtonButton(this ES_PetTuJian self)
-        {
-        }
-        public static void OnImage_EventTriggerButton(this ES_PetTuJian self)
         {
         }
     }
