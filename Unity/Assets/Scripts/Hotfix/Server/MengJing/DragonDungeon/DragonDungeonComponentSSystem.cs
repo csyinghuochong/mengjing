@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
@@ -413,6 +414,8 @@ namespace ET.Server
 
             //创建副本内的各种Unit
             self.GenerateFubenScene(fubenCellInfoNext.pass);
+            
+            Console.WriteLine($"InitSonCell:  {ParamInfo}");
         }
 
         public static void OnEnterSonCell(this DragonDungeonComponentS self, Unit unit, string ParamInfo)
