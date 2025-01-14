@@ -1,4 +1,7 @@
-﻿namespace ET.Server
+﻿using System;
+using System.Linq;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Team)]
     public class C2T_TeamDungeonAgreeHandler : MessageHandler<Scene, C2T_TeamDungeonAgreeRequest, T2C_TeamDungeonAgreeResponse>
@@ -20,15 +23,8 @@
                 return;
             }
             
-            bool haveplayer = false;
-            for (int i = 0; i < teamInfo.PlayerList.Count; i++)
-            {
-                if (teamInfo.PlayerList[i].UserID == request.TeamPlayerInfo.UserID)
-                {
-                    haveplayer = true;
-                    break;
-                }
-            }
+            bool haveplayer = teamInfo.PlayerList.Any( d=>d.UserID ==  request.TeamPlayerInfo.UserID);
+            Console.WriteLine($"C2T_TeamDungeonAgreeRequest:  haveplayer:{haveplayer}");
             if (!haveplayer)
             {
                 teamInfo.PlayerList.Add(request.TeamPlayerInfo);

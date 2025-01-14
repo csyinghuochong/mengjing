@@ -121,6 +121,68 @@ namespace ET.Server
 
             self.SyncTeamInfo(teamInfo, userIDList);
         }
+       
         
-}
+        
+        
+        #region TeamDungeon
+
+        public static void OnTeamDungeonOver(this TeamSceneComponent self, long teamid)
+        {
+
+        }
+
+        public static void CreateTeamDungeon(this TeamSceneComponent self, TeamInfo teamInfo)
+        {
+            //动态创建副本
+            long fubenid = IdGenerater.Instance.GenerateId();
+            long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "TeamDungeon" + fubenid.ToString());
+            TeamDungeonComponent teamDungeonComponent = fubnescene.AddComponent<TeamDungeonComponent>();
+            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
+            mapComponent.SetMapInfo((int)SceneTypeEnum.TeamDungeon, teamInfo.SceneId, 0);
+            mapComponent.NavMeshId = sceneConfig.MapID;
+            teamDungeonComponent.EnterTime = TimeHelper.ServerNow();
+            teamDungeonComponent.FubenType = teamInfo.FubenType;
+            teamDungeonComponent.BossDeadPosition =
+                    new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
+            FubenHelp.CreateMonsterList(fubnescene, SceneConfigCategory.Instance.Get(teamInfo.SceneId).CreateMonsterPosi);
+
+            if (teamInfo.FubenType == TeamFubenType.ShenYuan)
+            {
+                int postionid = ConfigData.ShenYuanCreateConfig[teamInfo.SceneId];
+                FubenHelp.CreateMonsterList(fubnescene, postionid);
+            }
+
+            //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+            teamInfo.FubenActorId = fubnescene.GetActorId();
+        }
+
+        #endregion
+
+
+        #region DragonDungeon
+        public static void CreateDragonDungeon(this TeamSceneComponent self, TeamInfo teamInfo)
+        {
+            //动态创建副本
+            long fubenid = IdGenerater.Instance.GenerateId();
+            long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "DragonDungeon" + fubenid.ToString());
+            DragonDungeonComponentS dragonDungeonComponentS = fubnescene.AddComponent<DragonDungeonComponentS>();
+            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+            mapComponent.SetMapInfo((int)SceneTypeEnum.DragonDungeon, teamInfo.SceneId, 0);
+            dragonDungeonComponentS.EnterTime = TimeHelper.ServerNow();
+            dragonDungeonComponentS.FubenType = teamInfo.FubenType;
+            dragonDungeonComponentS.InitFubenCell(teamInfo.SceneId);
+            dragonDungeonComponentS.InitFirstCell();
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
+            //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+            teamInfo.FubenActorId = fubnescene.GetActorId();
+        }
+
+        #endregion
+    }
 }

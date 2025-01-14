@@ -46,7 +46,8 @@ namespace ET.Server
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
-            if (request.SceneType != SceneTypeEnum.CellDungeon)
+            if (request.SceneType != SceneTypeEnum.CellDungeon
+                && request.SceneType != SceneTypeEnum.DragonDungeon)
             {
                 // parminfo = scene.GetComponent<CellDungeonComponentS>().CurrentFubenCell.sonid.ToString();
                 // 通知客户端开始切场景
@@ -57,14 +58,6 @@ namespace ET.Server
             int aoivalue = 9;
             switch (request.SceneType)
             {
-                case SceneTypeEnum.CellDungeon:
-                    CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();
-                    //起始格子
-                    fubenComponentS.OnEnterFirstCell(unit, request);
-                    break;
-                case SceneTypeEnum.DragonDungeon:
-                    
-                    break;
                 case (int)SceneTypeEnum.PetMing:
                 case (int)SceneTypeEnum.PetDungeon:
                 case (int)SceneTypeEnum.PetTianTi:
@@ -120,6 +113,15 @@ namespace ET.Server
                     unit.AddComponent<PathfindingComponent, int>(dungeonConfig.MapID);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
                     scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
+                    break;
+                case SceneTypeEnum.CellDungeon:
+                    CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();
+                    //起始格子
+                    fubenComponentS.OnEnterFirstCell(unit, request);
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    DragonDungeonComponentS dragonDungeonComponentS  =scene.GetComponent<DragonDungeonComponentS>();
+                    dragonDungeonComponentS.OnEnterFirstCell(unit, request);
                     break;
                 case SceneTypeEnum.JiaYuan:
                 case SceneTypeEnum.Union:

@@ -1887,8 +1887,8 @@ message T2M_TeamDungeonPrepareResponse // IResponse
 }
 
 //进入组队副本
-//ResponseType F2M_TeamDungeonEnterResponse
-message M2F_TeamDungeonEnterRequest // IRequest
+//ResponseType T2M_TeamDungeonEnterResponse
+message M2T_TeamDungeonEnterRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1899,7 +1899,7 @@ message M2F_TeamDungeonEnterRequest // IRequest
 	int32 SceneType = 5;
 }
 
-message F2M_TeamDungeonEnterResponse // IResponse
+message T2M_TeamDungeonEnterResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

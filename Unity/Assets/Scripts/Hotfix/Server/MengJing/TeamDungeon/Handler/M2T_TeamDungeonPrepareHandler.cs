@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
 
     [MessageHandler(SceneType.Team)]
@@ -6,6 +8,7 @@
     {
         protected override async ETTask Run(Scene scene, M2T_TeamDungeonPrepareRequest request, T2M_TeamDungeonPrepareResponse response)
         {
+            Console.WriteLine($"M2T_TeamDungeonPrepareRequest : {request.UnitID}  {request.Prepare}");
             TeamInfo teamInfo = scene.GetComponent<TeamSceneComponent>().GetTeamInfo(request.TeamId);
             if (teamInfo == null)
             {

@@ -57,6 +57,9 @@ namespace ET.Client
                     case SceneTypeEnum.TeamDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamMain);
                         break;
+                    case SceneTypeEnum.DragonDungeon:
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamMain);
+                        break;
                     case SceneTypeEnum.TrialDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TrialMain);
                         break;

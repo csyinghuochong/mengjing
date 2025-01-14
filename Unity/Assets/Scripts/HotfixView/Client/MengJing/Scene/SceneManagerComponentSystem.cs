@@ -84,21 +84,23 @@ namespace ET.Client
             string paramss = "";
             switch (sceneTypeEnum)
             {
-                case (int)SceneTypeEnum.InitScene:
+                case SceneTypeEnum.InitScene:
                     paramss = "Init";
                     break;
-                case (int)SceneTypeEnum.LoginScene:
+                case SceneTypeEnum.LoginScene:
                     paramss = "Login";
                     break;
-                case (int)SceneTypeEnum.MainCityScene:
+                case SceneTypeEnum.MainCityScene:
                     PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     string scenepath = sceneid.ToString();
                     paramss = scenepath;
                     break;
-                case (int)SceneTypeEnum.CellDungeon:
+                case SceneTypeEnum.CellDungeon:
                     paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
-                case (int)SceneTypeEnum.LocalDungeon:
+                case SceneTypeEnum.DragonDungeon:
+                    break;
+                case SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     break;

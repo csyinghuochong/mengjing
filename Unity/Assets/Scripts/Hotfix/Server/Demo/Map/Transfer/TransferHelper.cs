@@ -495,18 +495,20 @@ namespace ET.Server
                         break;
                     case (int)SceneTypeEnum.TeamDungeon:
                     case (int)SceneTypeEnum.DragonDungeon:
+                        Console.WriteLine($"TransferUnit:  {unit.Id}");
+                        
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
                         sceneTypeEnum = mapComponent.SceneType;
-                        mapInstanceId = UnitCacheHelper.GetFubenCenterId(unit.Zone());
+                        mapInstanceId = UnitCacheHelper.GetTeamServerId(unit.Zone());
                         //[创建副本Scene]
-                        M2F_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2F_TeamDungeonEnterRequest.Create();
+                        M2T_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2T_TeamDungeonEnterRequest.Create();
                         M2T_TeamDungeonEnterRequest.UserID = unit.Id;
                         M2T_TeamDungeonEnterRequest.SceneId =  request.SceneId;
                         M2T_TeamDungeonEnterRequest.SceneType = request.SceneType;
                         M2T_TeamDungeonEnterRequest.TeamId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.TeamId);
                         request.SceneId = M2T_TeamDungeonEnterRequest.SceneId;
-                        F2M_TeamDungeonEnterResponse createUnit = (F2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2T_TeamDungeonEnterRequest);
                         if (createUnit.Error != ErrorCode.ERR_Success)
                         {
@@ -514,7 +516,7 @@ namespace ET.Server
                         }
                         BeforeTransfer(unit);
 
-                        await Transfer(unit, createUnit.FubenActorId, (int)SceneTypeEnum.TeamDungeon, request.SceneId, request.Difficulty, "0");
+                        await Transfer(unit, createUnit.FubenActorId, request.SceneType, createUnit.FubenId, createUnit.FubenType, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
                             NoticeFubenCenter(oldscene, 2).Coroutine();

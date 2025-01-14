@@ -8126,13 +8126,13 @@ namespace ET
 
     // 进入组队副本
     [MemoryPackable]
-    [Message(InnerMessage.M2F_TeamDungeonEnterRequest)]
-    [ResponseType(nameof(F2M_TeamDungeonEnterResponse))]
-    public partial class M2F_TeamDungeonEnterRequest : MessageObject, IRequest
+    [Message(InnerMessage.M2T_TeamDungeonEnterRequest)]
+    [ResponseType(nameof(T2M_TeamDungeonEnterResponse))]
+    public partial class M2T_TeamDungeonEnterRequest : MessageObject, IRequest
     {
-        public static M2F_TeamDungeonEnterRequest Create(bool isFromPool = false)
+        public static M2T_TeamDungeonEnterRequest Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2F_TeamDungeonEnterRequest), isFromPool) as M2F_TeamDungeonEnterRequest;
+            return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonEnterRequest), isFromPool) as M2T_TeamDungeonEnterRequest;
         }
 
         [MemoryPackOrder(89)]
@@ -8176,12 +8176,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.F2M_TeamDungeonEnterResponse)]
-    public partial class F2M_TeamDungeonEnterResponse : MessageObject, IResponse
+    [Message(InnerMessage.T2M_TeamDungeonEnterResponse)]
+    public partial class T2M_TeamDungeonEnterResponse : MessageObject, IResponse
     {
-        public static F2M_TeamDungeonEnterResponse Create(bool isFromPool = false)
+        public static T2M_TeamDungeonEnterResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(F2M_TeamDungeonEnterResponse), isFromPool) as F2M_TeamDungeonEnterResponse;
+            return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonEnterResponse), isFromPool) as T2M_TeamDungeonEnterResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8991,8 +8991,8 @@ namespace ET
         public const ushort T2M_TeamDungeonOpenResponse = 20218;
         public const ushort M2T_TeamDungeonPrepareRequest = 20219;
         public const ushort T2M_TeamDungeonPrepareResponse = 20220;
-        public const ushort M2F_TeamDungeonEnterRequest = 20221;
-        public const ushort F2M_TeamDungeonEnterResponse = 20222;
+        public const ushort M2T_TeamDungeonEnterRequest = 20221;
+        public const ushort T2M_TeamDungeonEnterResponse = 20222;
         public const ushort A2M_PetMingChanChuRequest = 20223;
         public const ushort M2A_PetMingChanChuResponse = 20224;
         public const ushort A2M_PetMingLoginRequest = 20225;

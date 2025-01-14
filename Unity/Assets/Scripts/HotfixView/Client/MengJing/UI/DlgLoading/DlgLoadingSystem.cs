@@ -70,7 +70,7 @@ namespace ET.Client
             self.StartLoadAssets = false;
             switch (sceneTypeEnum)
             {
-                case (int)SceneTypeEnum.MainCityScene:
+                case SceneTypeEnum.MainCityScene:
                     // if (!ResourcesComponent.Instance.LoadCommonAsset)
                     // {
                     //     ResourcesComponent.Instance.LoadCommonAsset = true;
@@ -80,29 +80,32 @@ namespace ET.Client
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
                     break;
-                case (int)SceneTypeEnum.CellDungeon:
+                case SceneTypeEnum.CellDungeon:
                     loadResName = backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetCommonAssets());
                     break;
-                case (int)SceneTypeEnum.TeamDungeon:
-                case (int)SceneTypeEnum.BaoZang:
-                case (int)SceneTypeEnum.MiJing:
-                case (int)SceneTypeEnum.Tower:
-                case (int)SceneTypeEnum.RandomTower:
-                case (int)SceneTypeEnum.TrialDungeon:
-                case (int)SceneTypeEnum.PetDungeon:
-                case (int)SceneTypeEnum.PetTianTi:
-                case (int)SceneTypeEnum.PetMing:
-                case (int)SceneTypeEnum.Battle:
-                case (int)SceneTypeEnum.Arena:
+                case SceneTypeEnum.DragonDungeon:
+                    loadResName = backpngs[index];
+                    break;
+                case SceneTypeEnum.TeamDungeon:
+                case SceneTypeEnum.BaoZang:
+                case SceneTypeEnum.MiJing:
+                case SceneTypeEnum.Tower:
+                case SceneTypeEnum.RandomTower:
+                case SceneTypeEnum.TrialDungeon:
+                case SceneTypeEnum.PetDungeon:
+                case SceneTypeEnum.PetTianTi:
+                case SceneTypeEnum.PetMing:
+                case SceneTypeEnum.Battle:
+                case SceneTypeEnum.Arena:
                     loadResName = backpngs[index];
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetSceneDungeonMonsters());
                     break;
-                case (int)SceneTypeEnum.LocalDungeon:
+                case SceneTypeEnum.LocalDungeon:
                     loadResName = backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetLocalDungeonMonsters());
@@ -338,6 +341,12 @@ namespace ET.Client
                 case SceneTypeEnum.Arena:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ArenaMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                     break;
                 case SceneTypeEnum.TeamDungeon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();

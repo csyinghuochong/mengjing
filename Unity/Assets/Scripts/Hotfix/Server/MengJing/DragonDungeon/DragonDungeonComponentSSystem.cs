@@ -331,7 +331,7 @@ namespace ET.Server
             return false;
         }
 
-        public static void OnEnterFirstCell(this DragonDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
+        public static void InitFirstCell(this DragonDungeonComponentS self)
         {
             CellDungeonInfo curCell = self.CurrentFubenCell;
             self.HurtValue = 0;
@@ -341,17 +341,23 @@ namespace ET.Server
             self.SonFubenInfo.PassableFlag = self.GetPassableFlag();
             self.EnergySkills.AddRange(ConfigData.EnergySkills);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, request.SceneId, curCell.sonid);
+            mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, self.ChapterId, curCell.sonid);
 
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(curCell.sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
+            self.GenerateFubenScene(false);
+        }
+
+        public static void OnEnterFirstCell(this DragonDungeonComponentS self, Unit unit, M2M_UnitTransferRequest request)
+        {
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(self.CurrentFubenCell.sonid);
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
             //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
             //更新unit坐标
             unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
             unit.Rotation = quaternion.identity;
-            self.GenerateFubenScene(false);
-
+            
             // 通知客户端开始切场景
             string parminfo = self.CurrentFubenCell.sonid.ToString();
             M2C_StartSceneChange m2CStartSceneChange = new()
@@ -361,8 +367,9 @@ namespace ET.Server
             };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
+            
             M2C_CellDungeonInfo m2CCellDungeonInfo = M2C_CellDungeonInfo.Create();
-            m2CCellDungeonInfo.SceneId = request.SceneId;
+            m2CCellDungeonInfo.SceneId = self.ChapterId;
             m2CCellDungeonInfo.FubenInfo = self.FubenInfo;
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
             MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);

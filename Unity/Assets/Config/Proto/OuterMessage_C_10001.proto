@@ -4249,6 +4249,7 @@ message TeamInfo
 	int64 FubenUUId = 5;
 	int32 FubenType = 6;
 	int32 SceneType = 7;
+	ActorId FubenActorId = 8;
 }
 
 message M2C_TeamUpdateResult // IMessage

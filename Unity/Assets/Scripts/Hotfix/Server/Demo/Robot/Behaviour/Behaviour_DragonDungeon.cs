@@ -43,14 +43,7 @@ namespace ET
                         Console.WriteLine("Behaviour_DragonDungeon  teamInfo == null");
                     }
                 
-                    if (errorCode != 0)
-                    {
-                        Console.WriteLine($"Behaviour_DragonDungeon: Execute {errorCode}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Behaviour_DragonDungeon  Execute Sucess");
-                    }
+                    Console.WriteLine($"Behaviour_DragonDungeon: Execute {errorCode}");
                 }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回

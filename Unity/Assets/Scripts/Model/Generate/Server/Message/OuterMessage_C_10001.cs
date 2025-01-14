@@ -18529,6 +18529,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public int SceneType { get; set; }
 
+        [MemoryPackOrder(7)]
+        public ActorId FubenActorId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -18543,6 +18546,7 @@ namespace ET
             this.FubenUUId = default;
             this.FubenType = default;
             this.SceneType = default;
+            this.FubenActorId = default;
 
             ObjectPool.Instance.Recycle(this);
         }
