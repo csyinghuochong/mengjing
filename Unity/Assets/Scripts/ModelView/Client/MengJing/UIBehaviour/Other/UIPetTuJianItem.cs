@@ -15,6 +15,7 @@ namespace ET.Client
         public GameObject E_Label_ItemNum;
         public GameObject E_Label_ItemName;
         public GameObject E_Label_Active;
+        public GameObject E_Label_InActive;
         public int PetId;
         public Action<int> ClickHandler;
     }

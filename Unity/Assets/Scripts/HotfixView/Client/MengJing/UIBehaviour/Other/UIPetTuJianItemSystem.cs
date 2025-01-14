@@ -22,6 +22,7 @@ namespace ET.Client
             self.E_Label_ItemNum = rc.Get<GameObject>("E_Label_ItemNum");
             self.E_Label_ItemName = rc.Get<GameObject>("E_Label_ItemName");
             self.E_Label_Active = rc.Get<GameObject>("E_Label_Active");
+            self.E_Label_InActive = rc.Get<GameObject>("E_Label_InActive");
             self.E_Image_ItemButton.GetComponent<Button>().AddListener(self.OnIma_Di);
         }
 
@@ -36,6 +37,13 @@ namespace ET.Client
 
             self.E_Image_ItemIcon.GetComponent<Image>().sprite = sp;
             self.E_Label_ItemName.GetComponent<Text>().text = petConfig.PetName;
+
+            ChengJiuComponentC chengJiuComponentC = self.Root().GetComponent<ChengJiuComponentC>();
+            bool isActivate = chengJiuComponentC.PetTuJianActives.Contains(petId);
+
+            CommonViewHelper.SetImageGray(self.Root(), self.E_Image_ItemIcon.gameObject, !isActivate);
+            self.E_Label_Active.SetActive(isActivate);
+            self.E_Label_InActive.SetActive(!isActivate);
         }
 
         public static void OnIma_Di(this UIPetTuJianItem self)
