@@ -4,7 +4,6 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-
     [EntitySystemOf(typeof(DragonDungeonComponentS))]
     [FriendOf(typeof(DragonDungeonComponentS))]
     public static partial class DragonDungeonComponentSSystem
@@ -12,13 +11,11 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this ET.Server.DragonDungeonComponentS self)
         {
-
         }
 
         [EntitySystem]
         private static void Destroy(this ET.Server.DragonDungeonComponentS self)
         {
-
         }
 
         public static void InitFubenCell(this DragonDungeonComponentS self, int chapterid)
@@ -276,7 +273,6 @@ namespace ET.Server
             return self.GetFubenCell(row, line);
         }
 
-
         public static CellDungeonInfo GetFubenCell(this DragonDungeonComponentS self, int row, int line)
         {
             if (row >= 0 && row < self.ChapterConfig.InitSize[0] && line >= 0 && line < self.ChapterConfig.InitSize[1])
@@ -357,7 +353,7 @@ namespace ET.Server
             //更新unit坐标
             unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
             unit.Rotation = quaternion.identity;
-            
+
             // 通知客户端开始切场景
             string parminfo = self.CurrentFubenCell.sonid.ToString();
             M2C_StartSceneChange m2CStartSceneChange = new()
@@ -367,12 +363,56 @@ namespace ET.Server
             };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
-            
             M2C_CellDungeonInfo m2CCellDungeonInfo = M2C_CellDungeonInfo.Create();
             m2CCellDungeonInfo.SceneId = self.ChapterId;
             m2CCellDungeonInfo.FubenInfo = self.FubenInfo;
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
             MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+        }
+
+        public static void InitSonCell(this DragonDungeonComponentS self, string ParamInfo)
+        {
+            string[] cellinfo = ParamInfo.Split('_');
+            int CurrentCell = int.Parse(cellinfo[0]);
+            int DirectionType = int.Parse(cellinfo[1]);
+
+            CellDungeonInfo fubenCellInfoCurt = self.GetByCellIndex(CurrentCell);
+            fubenCellInfoCurt.pass = true;
+            CellDungeonInfo fubenCellInfoNext = self.GetNextSonCell(CurrentCell, DirectionType);
+            self.CurrentFubenCell = fubenCellInfoNext;
+   
+            SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
+            enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
+            enterFubenInfo.PassableFlag = self.GetPassableFlag();
+            enterFubenInfo.CurrentCell = self.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
+            self.SonFubenInfo = enterFubenInfo;
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+            int sonid = fubenCellInfoNext.sonid;
+            mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
+            CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
+            mapComponent.NavMeshId = chapterSon.MapID;
+           
+            //更新unit出生点坐标
+            int[] borpos;
+            switch (DirectionType)
+            {
+                case 1:
+                    borpos = chapterSon.BornPosDwon;
+                    break;
+
+                case 2:
+                    borpos = chapterSon.BornPosRight;
+                    break;
+                case 3:
+                    borpos = chapterSon.BornPosUp;
+                    break;
+                default:
+                    borpos = chapterSon.BornPosLeft;
+                    break;
+            }
+
+            //创建副本内的各种Unit
+            self.GenerateFubenScene(fubenCellInfoNext.pass);
         }
 
         public static void OnEnterSonCell(this DragonDungeonComponentS self, Unit unit, string ParamInfo)
@@ -384,25 +424,15 @@ namespace ET.Server
             int CurrentCell = int.Parse(cellinfo[0]);
             int DirectionType = int.Parse(cellinfo[1]);
 
-            CellDungeonInfo fubenCellInfoCurt = self.GetByCellIndex(CurrentCell);
-            fubenCellInfoCurt.pass = true;
-            CellDungeonInfo fubenCellInfoNext = self.GetNextSonCell(CurrentCell, DirectionType);
-            self.CurrentFubenCell = fubenCellInfoNext;
+            CellDungeonInfo fubenCellInfoNext  =  self.CurrentFubenCell;
             if (!fubenCellInfoNext.pass)
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
             }
-
-            SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
-            enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
-            enterFubenInfo.PassableFlag = self.GetPassableFlag();
-            enterFubenInfo.CurrentCell = self.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
-            self.SonFubenInfo = enterFubenInfo;
+            
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             int sonid = fubenCellInfoNext.sonid;
-            mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
-            mapComponent.NavMeshId = chapterSon.MapID;
             unit.RemoveComponent<PathfindingComponent>();
             unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
 
@@ -427,9 +457,6 @@ namespace ET.Server
 
             unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
             unit.Rotation = quaternion.identity;
-
-            //创建副本内的各种Unit
-            self.GenerateFubenScene(fubenCellInfoNext.pass);
 
             M2C_CellSonDungeonInfo m2CCellDungeonInfo = M2C_CellSonDungeonInfo.Create();
             m2CCellDungeonInfo.Position = unit.Position;
@@ -613,7 +640,7 @@ namespace ET.Server
         public static void InitMysteryItemInfos(this DragonDungeonComponentS self)
         {
             self.MysteryItemInfos.Clear();
-            int openServerDay = ServerHelper.GetServeOpenrDay( self.Zone());
+            int openServerDay = ServerHelper.GetServeOpenrDay(self.Zone());
             self.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
         }
 
@@ -623,5 +650,4 @@ namespace ET.Server
             return FubenHelp.IsAllMonsterDead(self.Scene(), players[0]);
         }
     }
-
 }
