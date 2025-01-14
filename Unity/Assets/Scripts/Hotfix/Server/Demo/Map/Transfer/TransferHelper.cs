@@ -103,7 +103,9 @@ namespace ET.Server
                             fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 
                             fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "CellDungeon" + fubenid.ToString());
-                            fubnescene.AddComponent<CellDungeonComponentS>().InitFubenCell(request.SceneId);
+                            CellDungeonComponentS cellDungeonComponentS = fubnescene.AddComponent<CellDungeonComponentS>();
+                            cellDungeonComponentS.InitFubenCell(request.SceneId);
+                            cellDungeonComponentS.InitFirstCell();
                             BeforeTransfer(unit);
                             await Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.CellDungeon, request.SceneId, request.Difficulty, request.paramInfo);
                             NoticeFubenCenter(fubnescene, 1).Coroutine();
@@ -117,6 +119,7 @@ namespace ET.Server
                         {
                             UnitHelper.RemoveAllNoSelf(unit);
                             CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
+                            cellDungeonComponentS.InitSonCell(request.paramInfo);
                             cellDungeonComponentS.OnEnterSonCell(unit, request.paramInfo);
                             AfterTransfer(unit, SceneTypeEnum.CellDungeon);
                         }
