@@ -550,8 +550,8 @@ namespace ET.Server
                     //创建传送点Unit
                     Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
                     chuansong.Type = UnitType.CellTransfers;
-                    self.Scene().GetComponent<UnitComponent>().Add(chuansong);
-                    ChuansongComponent chuansongComponent = chuansong.AddComponent<ChuansongComponent>();
+                    chuansong.GetParent<UnitComponent>().Add(chuansong);
+                    chuansong.AddComponent<ChuansongComponent>();
                     NumericComponentS numericComponentS = chuansong.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.CellIndex, self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line), false); //走过的格子
                     numericComponentS.ApplyValue(NumericType.DirectionType, i + 1, false);

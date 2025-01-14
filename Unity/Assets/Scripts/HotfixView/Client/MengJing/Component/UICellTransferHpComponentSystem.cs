@@ -73,7 +73,7 @@ namespace ET.Client
             self.Timer = timerComponent.NewOnceTimer(TimeHelper.ServerNow() + leftTime, TimerInvokeType.CellTransferUITimer, self);
         }
 
-        public static void OnCheckChuanSong(this UICellTransferHpComponent self, Unit mainhero)
+        public static void  OnCheckChuanSong(this UICellTransferHpComponent self, Unit mainhero)
         {
             Vector3 vector3 = self.GetParent<Unit>().Position;
             float distance = PositionHelper.Distance2D(vector3, mainhero.Position);
