@@ -1856,6 +1856,14 @@ namespace ET.Client
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
+                case SceneTypeEnum.DragonDungeon:
+                    self.View.ES_CellDungeonCellMini.OnUpdateUI();
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
+                    break;
                 case SceneTypeEnum.MainCityScene:
                     self.View.ES_MainHpBar.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainHpBar.EG_BossNodeRectTransform.gameObject.SetActive(false);

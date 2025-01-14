@@ -24,9 +24,6 @@ namespace ET
             TimerComponent timerComponent = aiComponent.Root().GetComponent<TimerComponent>();
             
             float3 targetPosition = aiComponent.TargetPosition;
-            
-            Console.WriteLine("Behaviour_Target.Execute");
-
             while (true)
             {
                 if (aiComponent.RobotConfig.Behaviour == 11)
@@ -40,11 +37,7 @@ namespace ET
 
                     targetPosition = unit.Position;
                     M2C_TeamerPositionResponse response = await TeamNetHelper.TeamerPositionRequest(aiComponent.Root());
-                    if (response.Error != ErrorCode.ERR_Success)
-                    {
-                        break;
-                    }
-
+                 
                     for (int i = 0; i < response.UnitList.Count; i++)
                     {
                         if (teamid == response.UnitList[i].UnitId)

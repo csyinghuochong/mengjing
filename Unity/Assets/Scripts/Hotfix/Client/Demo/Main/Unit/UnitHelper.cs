@@ -267,7 +267,7 @@ namespace ET.Client
 
         public static long GetTeamId(this Unit self)
         {
-            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.TeamId);
+            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.TeamId);
         }
 
         public static bool IsSameTeam(this Unit self, Unit other)
