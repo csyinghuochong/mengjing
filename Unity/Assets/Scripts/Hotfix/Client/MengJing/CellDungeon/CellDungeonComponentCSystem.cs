@@ -139,7 +139,6 @@ namespace ET.Client
             for(int i = 0; i < entities.Count; i++)
             {
                 Unit unit = entities[i] as Unit;
-                UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
                 if (unit.IsMonster() && unit.IsCanBeAttack())
                     return false;
             }

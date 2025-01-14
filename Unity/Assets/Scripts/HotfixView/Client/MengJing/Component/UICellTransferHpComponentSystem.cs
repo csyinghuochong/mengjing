@@ -53,14 +53,13 @@ namespace ET.Client
                 return;
             }
             MoveHelper.Stop(self.Root());
-
+            
             Unit mainhero = UnitHelper.GetMyUnitFromClientScene(self.Root());
             mainhero.GetComponent<StateComponentC>().StateTypeAdd(StateTypeEnum.NoMove);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.ResetJoystick();
             Unit unit = self.GetParent<Unit>();
-            ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
             MapComponent mapComponent = self.Root().GetComponent <MapComponent> ();
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.CellDungeon, 0, mapComponent.FubenDifficulty,
+            EnterMapHelper.RequestTransfer(self.Root(), mapComponent.SceneType, 0, mapComponent.FubenDifficulty,
                         $"{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex)}_{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType)}")
                     .Coroutine();
         }
@@ -81,14 +80,17 @@ namespace ET.Client
 
             if (distance <= 1.5f && !self.EnterRange)
             {
-                if (self.Root().GetComponent<CellDungeonComponentC>().IsAllMonsterDead())
-                {
-                    self.EnterRange = true;
-                    self.StartTimer();
-                }
-                else
+                if (!self.Root().GetComponent<CellDungeonComponentC>().IsAllMonsterDead())
                 {
                     FlyTipComponent.Instance.ShowFlyTip("消灭怪物后才可进行传送");
+                    return;
+                }
+
+                self.EnterRange = true;
+                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                if (mapComponent.SceneType == SceneTypeEnum.CellDungeon)
+                {
+                    self.StartTimer();
                 }
             }
 

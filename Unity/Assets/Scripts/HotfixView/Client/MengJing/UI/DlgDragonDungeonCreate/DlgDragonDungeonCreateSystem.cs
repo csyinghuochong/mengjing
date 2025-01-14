@@ -200,8 +200,9 @@ namespace ET.Client
                 HintHelp.ShowErrorHint(self.Root(), errorCode);
                 return;
             } 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeonCreate);
+            Scene root = self.Root();
+            root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeonCreate);
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
         }
 
         public static void OnCloseButtonButton(this DlgDragonDungeonCreate self)

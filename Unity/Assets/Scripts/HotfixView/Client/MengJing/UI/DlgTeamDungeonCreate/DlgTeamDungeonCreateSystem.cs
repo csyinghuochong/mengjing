@@ -186,29 +186,30 @@ namespace ET.Client
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数", async () =>
                     {
-                        int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
-                        if (errorCode != ErrorCode.ERR_Success)
-                        {
-                            HintHelp.ShowErrorHint(self.Root(), errorCode);
-                            return;
-                        }
-
-                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
+                        self.RequestDragonDungeonCreate(dungeonType).Coroutine();
                     }, null).Coroutine();
                     return;
                 }
             }
 
+            self.RequestDragonDungeonCreate(dungeonType).Coroutine();
+            await ETTask.CompletedTask;
+        }
+        
+        private static async ETTask RequestDragonDungeonCreate(this DlgTeamDungeonCreate self, int dungeonType)
+        {
             int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);
                 return;
-            }
-
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
+            } 
+            
+            Scene root = self.Root();
+            root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
         }
+        
         public static void OnCloseButtonButton(this DlgTeamDungeonCreate self)
         {
         }
