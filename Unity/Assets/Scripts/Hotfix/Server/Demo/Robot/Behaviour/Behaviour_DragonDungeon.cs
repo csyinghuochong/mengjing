@@ -23,32 +23,36 @@ namespace ET
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
 
             Console.WriteLine("Behaviour_DragonDungeon");
+            int errorCode = ErrorCode.ERR_TeamDungeonWait;
             while (true)
             {
                 //获取队伍列表
-                int errorCode = await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.DragonDungeon);
+                await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.DragonDungeon);
                 string messagevalue = aiComponent.Message;
                 string[] teamId = messagevalue.Split('_');
-                TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
-                if (teamInfo != null)
+
+                if (errorCode != ErrorCode.ERR_Success)
                 {
-                    
-                    errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.DragonDungeon);
-                }
-                else
-                {
-                   Console.WriteLine("Behaviour_DragonDungeon  teamInfo == null");
+                    TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
+                    if (teamInfo != null)
+                    {
+                        errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.DragonDungeon);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Behaviour_DragonDungeon  teamInfo == null");
+                    }
+                
+                    if (errorCode != 0)
+                    {
+                        Console.WriteLine($"Behaviour_DragonDungeon: Execute {errorCode}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Behaviour_DragonDungeon  Execute Sucess");
+                    }
                 }
                 
-                if (errorCode != 0)
-                {
-                    Console.WriteLine($"Behaviour_DragonDungeon: Execute {errorCode}");
-                }
-                else
-                {
-                    Console.WriteLine("Behaviour_DragonDungeon  Execute Sucess");
-                }
-
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
                 await timerComponent.WaitAsync(20000, cancellationToken);
                 if (cancellationToken.IsCancel())
