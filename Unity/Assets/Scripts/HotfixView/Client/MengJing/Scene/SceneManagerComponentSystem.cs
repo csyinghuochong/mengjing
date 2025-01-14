@@ -99,6 +99,7 @@ namespace ET.Client
                     paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
                 case SceneTypeEnum.DragonDungeon:
+                    paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
                 case SceneTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();

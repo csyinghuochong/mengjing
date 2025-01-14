@@ -337,7 +337,7 @@ namespace ET.Server
             self.SonFubenInfo.PassableFlag = self.GetPassableFlag();
             self.EnergySkills.AddRange(ConfigData.EnergySkills);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.CellDungeon, self.ChapterId, curCell.sonid);
+            mapComponent.SetMapInfo((int)SceneTypeEnum.DragonDungeon, self.ChapterId, curCell.sonid);
 
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(curCell.sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
@@ -388,7 +388,7 @@ namespace ET.Server
             self.SonFubenInfo = enterFubenInfo;
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             int sonid = fubenCellInfoNext.sonid;
-            mapComponent.SetMapInfo(SceneTypeEnum.CellDungeon, mapComponent.SceneId, sonid);
+            mapComponent.SetMapInfo(SceneTypeEnum.DragonDungeon, mapComponent.SceneId, sonid);
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
            

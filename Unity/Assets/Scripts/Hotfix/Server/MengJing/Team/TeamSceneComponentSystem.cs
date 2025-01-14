@@ -172,8 +172,6 @@ namespace ET.Server
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "DragonDungeon" + fubenid.ToString());
             DragonDungeonComponentS dragonDungeonComponentS = fubnescene.AddComponent<DragonDungeonComponentS>();
-            MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.DragonDungeon, teamInfo.SceneId, 0);
             dragonDungeonComponentS.EnterTime = TimeHelper.ServerNow();
             dragonDungeonComponentS.FubenType = teamInfo.FubenType;
             dragonDungeonComponentS.InitFubenCell(teamInfo.SceneId);
