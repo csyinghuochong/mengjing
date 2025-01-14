@@ -29,7 +29,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)
             {
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
             self.PetMeleeCardInfo = cardInfo;
@@ -84,6 +84,12 @@ namespace ET.Client
                         self.E_CostText.text = zstring.Format("魔力：{0}", petMagicCardConfig.Cost);
                     }
 
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
+                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    {
+                        self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillZhishi/Skill_Position");
+                    }
+
                     break;
                 }
             }
@@ -109,8 +115,31 @@ namespace ET.Client
             }
 
             self.GameObject = go;
-            self.GameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
             self.GameObject.transform.SetParent(GlobalComponent.Instance.Unit);
+
+            switch (self.PetMeleeCardInfo.Type)
+            {
+                case (int)PetMeleeCarType.MainPet:
+                case (int)PetMeleeCarType.AssistPet:
+                    self.GameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    break;
+
+                case (int)PetMeleeCarType.Magic:
+                {
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
+                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    {
+                        float innerRadius = (float)skillConfig.DamgeRange[0] * 2f;
+                        self.GameObject.Get<GameObject>("Skill_InnerArea").transform.localScale = Vector3.one * innerRadius;
+                        self.GameObject.Get<GameObject>("Skill_Area").SetActive(false);
+                    }
+
+                    break;
+                }
+            }
+
+            self.GameObject.SetActive(false);
         }
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
