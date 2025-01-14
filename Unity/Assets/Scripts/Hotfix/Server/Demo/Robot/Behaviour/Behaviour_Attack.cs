@@ -45,7 +45,6 @@ namespace ET
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
             int sceneType = root.GetComponent<MapComponent>().SceneType;
-            long instanceId = unit.InstanceId;
             while (true)
             {
                 Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);

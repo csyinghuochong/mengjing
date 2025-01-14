@@ -22,7 +22,7 @@ namespace ET
 
         public float3 TargetPosition{ get; set; }
 
-        public RobotConfig RobotConfig;
+        public RobotConfig RobotConfig{ get; set; }
 
         public long CreateTime;
 

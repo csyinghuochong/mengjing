@@ -70,6 +70,9 @@ namespace ET
                     break;
                 case 11:
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_DragonDungeon, Value = "Behaviour_DragonDungeon" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_ZhuiJi, Value = "Behaviour_ZhuiJi" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Attack, Value = "Behaviour_Attack" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Target, Value = "Behaviour_Target" });
                     self.NewBehaviour = BehaviourType.Behaviour_DragonDungeon;
                     break;
                 default:

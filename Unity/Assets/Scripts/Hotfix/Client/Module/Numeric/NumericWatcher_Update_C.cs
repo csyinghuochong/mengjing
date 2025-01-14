@@ -16,11 +16,13 @@ namespace ET.Client
             if (args.NewValue == 0) //复活
             {
                 unit.Position = unit.GetBornPostion();
+                EventSystem.Instance.Publish(args.Defend.Root(), new UnitRevive() { Unit = args.Defend });
             }
 
             if (args.NewValue == 1) //死亡
             {
                 unit.GetComponent<HeroDataComponentC>().OnDead();
+                EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend });
             }
         }
     }

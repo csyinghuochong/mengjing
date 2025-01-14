@@ -308,18 +308,8 @@
                         SkillID = args.SkillId,
                         AttackId = args.AttackId
                     });
-                    
                     break;
-                case NumericType.Now_Dead:
-                    if (args.NewValue == 0) //复活
-                    {
-                        EventSystem.Instance.Publish(args.Defend.Root(), new UnitRevive() { Unit = args.Defend });
-                    }
-
-                    if (args.NewValue == 1) //死亡
-                    {
-                        EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend });
-                    }
+                default:
                     break;
             }
 

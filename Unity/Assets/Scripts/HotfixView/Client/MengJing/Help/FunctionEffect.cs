@@ -12,11 +12,20 @@ namespace ET.Client
               //Log.Info("播放受击特效PlayHitEffect:" + skillID);
               //播放受击特效
               if (skillID == 0)
+              {
                   return;
+              }
+              
               SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
               if (skillCof.SkillHitEffectID == 0)
+              {
                   return;
+              }
 
+              if(!EffectConfigCategory.Instance.Contain(skillCof.SkillHitEffectID))
+              {
+                  return;
+              }
 
               int angle = 0;
               EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillCof.SkillHitEffectID);

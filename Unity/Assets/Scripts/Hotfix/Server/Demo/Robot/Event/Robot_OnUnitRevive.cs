@@ -20,9 +20,11 @@ namespace ET.Client
                     case SceneTypeEnum.TeamDungeon:
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
-                        
                         root.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
                         root.GetComponent<BehaviourComponent>().Start();
+                        break;
+                    case SceneTypeEnum.DragonDungeon:
+                        Console .WriteLine("地下城机器人复活！暂未处理！");
                         break;
                     case SceneTypeEnum.Arena:
                         

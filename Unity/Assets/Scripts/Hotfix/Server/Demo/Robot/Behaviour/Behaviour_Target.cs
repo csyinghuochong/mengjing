@@ -22,10 +22,38 @@ namespace ET
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(aiComponent.Root());
             TimerComponent timerComponent = aiComponent.Root().GetComponent<TimerComponent>();
+            
             float3 targetPosition = aiComponent.TargetPosition;
-            //Console.WriteLine("Behaviour_Target.Execute");
+            
+            Console.WriteLine("Behaviour_Target.Execute");
+
             while (true)
             {
+                if (aiComponent.RobotConfig.Behaviour == 11)
+                {
+                    long teamid = unit.GetTeamId();
+                    if (teamid == unit.Id)
+                    {
+                        Console.WriteLine($"队长不可能是机器人,逻辑错误！！！: {unit.Id} " );
+                        break;
+                    }
+
+                    targetPosition = unit.Position;
+                    M2C_TeamerPositionResponse response = await TeamNetHelper.TeamerPositionRequest(aiComponent.Root());
+                    if (response.Error != ErrorCode.ERR_Success)
+                    {
+                        break;
+                    }
+
+                    for (int i = 0; i < response.UnitList.Count; i++)
+                    {
+                        if (teamid == response.UnitList[i].UnitId)
+                        {
+                            targetPosition = response.UnitList[i].Position;
+                        }
+                    }
+                }
+                
                 Unit target = GetTargetHelperc.GetNearestEnemy(unit, 10);
                 if (target!=null && aiComponent.HaveHaviour(BehaviourType.Behaviour_ZhuiJi))
                 {

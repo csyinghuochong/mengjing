@@ -161,7 +161,8 @@ namespace ET.Server
             if (self.Type == UnitType.Npc || self.Type == UnitType.DropItem
                 || self.Type == UnitType.Transfers || self.Type == UnitType.JingLing
                 || self.Type == UnitType.Pasture || self.Type == UnitType.Plant
-                || self.Type == UnitType.Bullet || self.Type == UnitType.Stall)
+                || self.Type == UnitType.Bullet || self.Type == UnitType.Stall
+                || self.Type == UnitType.CellTransfers)
             {
                 return false;
             }

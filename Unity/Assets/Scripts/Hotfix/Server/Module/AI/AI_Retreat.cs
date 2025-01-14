@@ -32,6 +32,7 @@ namespace ET.Server
                 {
                     continue;
                 }
+              
                 if (!main.IsCanAttackUnit(unit, false))
                 {
                     continue;

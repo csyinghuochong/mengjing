@@ -10,6 +10,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
             long InstanceId = unit.InstanceId;
+            Console .WriteLine($"Robot_OnUnitDead！{unit.MainHero}  { unit.IsSelfRobot()}");
             if (unit.MainHero && unit.IsSelfRobot())
             {
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
@@ -29,6 +30,9 @@ namespace ET.Client
                         }
                         
                         EnterMapHelper.SendReviveRequest(root, false).Coroutine();
+                        break;
+                    case SceneTypeEnum.DragonDungeon:
+                        Console .WriteLine("地下城机器人死亡！暂未处理！");
                         break;
                     case SceneTypeEnum.Arena:
                         await root.GetComponent<TimerComponent>().WaitAsync(20000);

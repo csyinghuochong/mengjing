@@ -14,6 +14,7 @@ namespace ET.Client
                 case SceneTypeEnum.Battle:
                 case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.LocalDungeon:
+                case SceneTypeEnum.DragonDungeon:
                     await timerComponent.WaitAsync(TimeHelper.Second * 5);
                     scene.Root().GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
                     break;

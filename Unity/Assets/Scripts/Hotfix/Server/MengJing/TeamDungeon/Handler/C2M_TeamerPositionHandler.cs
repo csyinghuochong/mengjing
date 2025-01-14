@@ -14,7 +14,7 @@ namespace ET.Server
             {
                 Unit uniitem = units[i];
                 
-                if (sceneType == SceneTypeEnum.TeamDungeon && uniitem.Id!=unit.Id && uniitem.Type == UnitType.Player)
+                if ((sceneType == SceneTypeEnum.TeamDungeon || sceneType == SceneTypeEnum.DragonDungeon) && uniitem.Id!=unit.Id && uniitem.Type == UnitType.Player)
                 {
                     UnitInfo UnitInfo = UnitInfo.Create();
                     UnitInfo.Type = uniitem.Type;

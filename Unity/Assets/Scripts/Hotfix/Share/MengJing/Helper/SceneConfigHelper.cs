@@ -78,7 +78,8 @@ namespace ET
         public static bool UseSceneConfig(int sceneType)
         {
             return sceneType != SceneTypeEnum.LocalDungeon
-                 && sceneType != SceneTypeEnum.CellDungeon;
+                 && sceneType != SceneTypeEnum.CellDungeon
+                 && sceneType != SceneTypeEnum.DragonDungeon;
         }
 
         public static bool IfCanRevive(int sceneType, int sceneId)

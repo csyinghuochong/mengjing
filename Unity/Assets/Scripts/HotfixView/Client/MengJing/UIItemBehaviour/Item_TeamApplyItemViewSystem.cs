@@ -54,8 +54,12 @@
 
         public static async ETTask OnButtonAgree(this Scroll_Item_TeamApplyItem self)
         {
+            long instanceid = self.InstanceId;
             await TeamNetHelper.TeamDungeonAgreeRequest(self.Root(), self.TeamPlayerInfo, 1);
-
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTeamApplyList>().OnUpdateUI();
         }
 

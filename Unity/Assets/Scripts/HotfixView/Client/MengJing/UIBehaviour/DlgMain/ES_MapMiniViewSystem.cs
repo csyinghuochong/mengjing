@@ -302,11 +302,15 @@ namespace ET.Client
                 //显示地图名称
                 switch (sceneTypeEnum)
                 {
-                    case (int)SceneTypeEnum.CellDungeon:
+                    case SceneTypeEnum.CellDungeon:
                         self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
                         self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
                         break;
-                    case (int)SceneTypeEnum.LocalDungeon:
+                    case SceneTypeEnum.DragonDungeon:
+                        self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
+                        self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
+                        break;
+                    case SceneTypeEnum.LocalDungeon:
                         string str = string.Empty;
                         if (difficulty == FubenDifficulty.Normal)
                         {
@@ -330,7 +334,7 @@ namespace ET.Client
 
                         self.E_MapNameText.text = zstring.Format("{0}{1}", DungeonConfigCategory.Instance.Get(sceneId).ChapterName, str);
                         break;
-                    case (int)SceneTypeEnum.TeamDungeon:
+                    case SceneTypeEnum.TeamDungeon:
                         str = "";
                         if (difficulty == TeamFubenType.XieZhu)
                         {

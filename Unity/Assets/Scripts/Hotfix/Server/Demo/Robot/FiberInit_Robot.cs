@@ -34,6 +34,7 @@ namespace ET.Client
             root.AddComponent<ActivityComponentC>();
             root.AddComponent<JiaYuanComponentC>();
             root.AddComponent<TeamComponentC>();
+            root.AddComponent<CellDungeonComponentC>();
             
             root.SceneType = SceneType.Demo;
             
