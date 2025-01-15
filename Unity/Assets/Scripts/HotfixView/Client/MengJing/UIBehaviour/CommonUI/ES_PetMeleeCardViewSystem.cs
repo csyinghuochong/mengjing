@@ -197,11 +197,10 @@ namespace ET.Client
                     float targetZ = hitPoint.z;
                     float nearestX = Mathf.Round(targetX / self.CellSize) * self.CellSize;
                     float nearestZ = Mathf.Round(targetZ / self.CellSize) * self.CellSize;
-                    nearestX = Mathf.Clamp(nearestX, self.CellSize * -4, self.CellSize * 4);
+                    nearestX = Mathf.Clamp(nearestX, self.CellSize * -4, self.CellSize * 4); // 限制一下放置的范围
                     nearestZ = Mathf.Clamp(nearestZ, self.CellSize * -1, self.CellSize * 1);
                     self.TargetPos = new Vector3(nearestX, 0, nearestZ);
-                    CellIndicator.GetComponent<RectTransform>().localPosition = new Vector2(self.CellSize * 10 * Mathf.Round(targetX / self.CellSize),
-                        self.CellSize * 10 * Mathf.Round(targetZ / self.CellSize));
+                    CellIndicator.GetComponent<RectTransform>().localPosition = new Vector2(nearestX * 10, nearestZ * 10);
 
                     // 在点击位置周围发射一个半径为detectionRadius的球形碰撞体，检测是否有场景障碍物
                     Collider[] colliders = Physics.OverlapSphere(self.TargetPos, self.CellSize / 2f,
