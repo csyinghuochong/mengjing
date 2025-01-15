@@ -35,10 +35,17 @@ namespace ET.Server
             // {
             //     return;
             // }
-
+            
             if (self.Player.GetComponent<PlayerOfflineOutTimeComponent>() == null)
             {
                 self.Player.AddComponent<PlayerOfflineOutTimeComponent>();
+            }
+            
+            //机器人直接下线
+            if (self.Player.Account.Contains("_"))
+            {
+                self.Player.RemoveComponent<PlayerOfflineOutTimeComponent>();
+                DisconnectHelper.KickPlayer(self.Player).Coroutine();
             }
         }
         

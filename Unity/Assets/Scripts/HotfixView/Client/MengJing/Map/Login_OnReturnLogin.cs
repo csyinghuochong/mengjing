@@ -25,9 +25,9 @@ namespace ET.Client
             {
                 return;
             }
-            ConfigData.LoadSceneFinished = false;
+            ConfigData.LoadSceneFinished = false;   //加载场景完毕 才能加载模型
             Scene oldroot = scene.Root();
-            Log.Debug($"ReturnLogin222  {oldroot.Fiber.Id}");
+            Log.Debug($"ReturnLogin222  {oldroot.Fiber.Id}");   
             scene.Root().RemoveComponent<ClientSenderCompnent>();
             Log.Debug($"ReturnLogin  {oldroot.CurrentScene()}   {oldroot.CurrentScene().GetComponent<UnitComponent>().Children.Count}");
             oldroot.CurrentScene()?.Dispose();

@@ -175,6 +175,12 @@
                         return ErrorCode.ERR_PlayerIsNot;
                     }
                     break;
+                case SceneTypeEnum.DragonDungeon:
+                    if (teamInfo.PlayerList.Count < 2)
+                    {
+                        return ErrorCode.ERR_PlayerIsNot;
+                    }
+                    break;
                 default:
                     break;
             }
