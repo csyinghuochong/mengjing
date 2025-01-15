@@ -138,6 +138,7 @@ namespace ET.Client
 
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
             self.ES_CommonItem.UpdateItem(info, ItemOperateEnum.None);
+            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
             info.GemHole = string.IsNullOrEmpty(info.GemHole) ? "" : info.GemHole;
