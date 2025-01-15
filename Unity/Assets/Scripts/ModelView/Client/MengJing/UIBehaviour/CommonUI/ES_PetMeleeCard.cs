@@ -100,6 +100,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_Icon2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon2Image == null )
+     			{
+		    		this.m_E_Icon2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon2");
+     			}
+     			return this.m_E_Icon2Image;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_TouchImage
      	{
      		get
@@ -153,6 +170,7 @@ namespace ET.Client
 			this.m_E_TypeText = null;
 			this.m_E_NameText = null;
 			this.m_E_IconImage = null;
+			this.m_E_Icon2Image = null;
 			this.m_E_TouchImage = null;
 			this.m_E_TouchEventTrigger = null;
 			this.uiTransform = null;
@@ -163,6 +181,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TypeText = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
+		private UnityEngine.UI.Image m_E_Icon2Image = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_TouchEventTrigger = null;
 		public Transform uiTransform = null;

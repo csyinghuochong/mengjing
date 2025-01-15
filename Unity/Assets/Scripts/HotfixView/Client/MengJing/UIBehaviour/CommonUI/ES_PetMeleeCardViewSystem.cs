@@ -63,6 +63,8 @@ namespace ET.Client
 
                     self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString()));
+                    self.E_Icon2Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_164"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_160"));
                     self.E_CostText.text = ConfigData.PetMeleeMainPetCost.ToString();
@@ -79,6 +81,8 @@ namespace ET.Client
 
                     self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString()));
+                    self.E_Icon2Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_163"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_157"));
                     self.E_CostText.text = petTuJianConfig.Cost.ToString();
@@ -95,6 +99,8 @@ namespace ET.Client
 
                     self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString()));
+                    self.E_Icon2Image.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_165"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_161"));
                     self.E_CostText.text = petMagicCardConfig.Cost.ToString();
