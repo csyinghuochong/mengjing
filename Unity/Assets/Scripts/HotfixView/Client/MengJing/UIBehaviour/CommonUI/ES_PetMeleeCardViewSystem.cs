@@ -163,7 +163,7 @@ namespace ET.Client
         {
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
 
-            self.uiTransform.localScale = new Vector3(1.2f, 1.2f, 1f);
+            self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMeleeCardTimer, self);
         }
@@ -198,7 +198,7 @@ namespace ET.Client
                     float nearestX = Mathf.Round(targetX / self.CellSize) * self.CellSize;
                     float nearestZ = Mathf.Round(targetZ / self.CellSize) * self.CellSize;
                     nearestX = Mathf.Clamp(nearestX, self.CellSize * -4, self.CellSize * 4);
-                    nearestZ = Mathf.Clamp(nearestZ, self.CellSize * -4, self.CellSize * 4);
+                    nearestZ = Mathf.Clamp(nearestZ, self.CellSize * -1, self.CellSize * 1);
                     self.TargetPos = new Vector3(nearestX, 0, nearestZ);
                     CellIndicator.GetComponent<RectTransform>().localPosition = new Vector2(self.CellSize * 10 * Mathf.Round(targetX / self.CellSize),
                         self.CellSize * 10 * Mathf.Round(targetZ / self.CellSize));

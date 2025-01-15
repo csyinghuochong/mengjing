@@ -329,6 +329,7 @@ namespace ET.Client
             {
                 self.View.E_ReceiveButton.gameObject.SetActive(false);
                 self.View.E_ReceivedText.gameObject.SetActive(true);
+                self.View.E_EnterMapButton.gameObject.SetActive(true);
             }
         }
     }
