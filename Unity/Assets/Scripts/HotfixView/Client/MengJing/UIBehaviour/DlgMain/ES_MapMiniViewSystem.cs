@@ -53,6 +53,7 @@ namespace ET.Client
                     self.OnOpenBigMap(); //打开主城
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
+                case (int)SceneTypeEnum.DragonDungeon:
                     self.OnShowFubenIndex(); //打开副本小地图
                     break;
                 default:
