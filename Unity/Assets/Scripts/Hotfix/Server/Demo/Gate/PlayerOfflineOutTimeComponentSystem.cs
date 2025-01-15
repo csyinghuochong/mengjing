@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     
@@ -6,6 +8,7 @@ namespace ET.Server
     {
         protected override void Run(PlayerOfflineOutTimeComponent t)
         {
+            Console.WriteLine($"PlayerOfflineOutTime:  {t.Id}");
             t?.KickPlayer();
         }
     }
@@ -19,7 +22,7 @@ namespace ET.Server
         private static void Awake(this PlayerOfflineOutTimeComponent self)
         {
             self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() +  
-                MessageLocationSenderOneType.TIMEOUT_TIME * 5, TimerInvokeType.PlayerOfflineOutTime, self);
+                MessageLocationSenderOneType.TIMEOUT_TIME , TimerInvokeType.PlayerOfflineOutTime, self);
         }
         
         [EntitySystem]

@@ -1626,15 +1626,6 @@ message P2M_StallXiaJiaResponse // IResponse
 	PaiMaiItemInfo PaiMaiItemInfo = 2;
 }
 
-//踢出掉线玩家
-message G2M_KickPlayerRequest // IMessage
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	int64 UnitId = 2;
-	int64 SceneId = 3;
-}
-
 //ResponseType M2G_RechargeResultResponse
 message G2M_RechargeResultRequest // IRequest
 {

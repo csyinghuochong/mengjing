@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -125,6 +126,8 @@ namespace ET.Server
         public static void OnDungeonOver(this TeamSceneComponent self, long teamId)
         {
             TeamInfo teamInfo = self.GetTeamInfo(teamId);
+            
+            Console.WriteLine($"OnDungeonOver: {teamInfo}");
             if (teamInfo != null)
             {
                 for (int i = 0;i < teamInfo.PlayerList.Count; i++)
@@ -153,12 +156,13 @@ namespace ET.Server
                 }
                 MapMessageHelper.SendToClient(allunits[i], self.M2C_TeamDungeonQuitMessage);
             }
+            Console.WriteLine($"OnUnitReturn:  {unitId}    {allunits.Count}   {fubnescene.Name}");
+            
             if (allunits.Count > 0)
             {
                 return;
             }
             self.OnDungeonOver(unitId);
-            Log.Debug($"TeamDungeonDispose {fubnescene.Name}");
             TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
             fubnescene.Dispose();
         }
@@ -171,17 +175,18 @@ namespace ET.Server
         /// <returns></returns>
         public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, int sceneTypeEnum, long unitId)
         {
+            Console.WriteLine($"OnUnitDisconnect11: {UnitHelper.IsHavePlayer(fubnescene)}");
             TeamInfo teamInfo = self.GetTeamInfo(unitId);
             if (teamInfo == null)
             {
                 return;
             }
-
+            
             if (UnitHelper.IsHavePlayer(fubnescene))
             {
                 return;
             }
-
+    
             self.OnDungeonOver(teamInfo.TeamId);
             TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
             fubnescene.Dispose();

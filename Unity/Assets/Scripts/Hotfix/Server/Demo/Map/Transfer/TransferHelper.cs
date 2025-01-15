@@ -498,7 +498,7 @@ namespace ET.Server
                         break;
                     case (int)SceneTypeEnum.TeamDungeon:
                     case (int)SceneTypeEnum.DragonDungeon:
-                        Console.WriteLine($"TransferUnit:  {unit.Id}");
+                        Console.WriteLine($"EnterDungeon:  {request.SceneType}  {unit.Id}");
                         
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
@@ -626,6 +626,8 @@ namespace ET.Server
 
         public static void OnFubenToMain(Scene scene, long userId)
         {
+            Console.WriteLine($"OnFubenToMain: {userId}");
+            
             if (scene.IsDisposed)
             {
                 Log.Warning($"ReturnMainCity: scene.IsDisposed");

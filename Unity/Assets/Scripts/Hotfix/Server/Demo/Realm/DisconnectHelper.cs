@@ -104,25 +104,6 @@ namespace ET.Server
                 await KickPlayerNoLock(player);
             }
         }
-
-        public static async ETTask KickPlayer(int zone, long unitid)
-        {
-            Log.Info("KickPlayer_2");
-            // long fubencenterId = DBHelper.GetFubenCenterId(zone);
-            // M2F_FubenCenterListRequest request = new M2F_FubenCenterListRequest() { };
-            // F2M_FubenCenterListResponse response = (F2M_FubenCenterListResponse)await ActorMessageSenderComponent.Instance.Call(fubencenterId, request);
-            //
-            // List<long> mapIdList = new List<long>()
-            // {
-            //     StartSceneConfigCategory.Instance.GetBySceneName(zone, $"Map{ComHelp.MainCityID()}").InstanceId
-            // };
-            // mapIdList.AddRange(response.FubenInstanceList);
-            //
-            // for (int i = mapIdList.Count - 1; i >= 0; i--)
-            // {
-            //     ActorMessageSenderComponent.Instance.Send(mapIdList[i], new G2M_KickPlayerRequest() { UnitId = unitid });
-            // }
-            await ETTask.CompletedTask;
-        }
+        
     }
 }

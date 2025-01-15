@@ -14,6 +14,8 @@ namespace ET.Server
                 return;
             }
             
+            Console.WriteLine($"SessionPlayerComponent.Destroy:  {self.Player.Id}");
+            
             // 发送断线消息
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(self.Player.Id, G2M_SessionDisconnect.Create());
 
@@ -21,9 +23,7 @@ namespace ET.Server
             {
                 return;
             }
-
-            Console.WriteLine($"SessionPlayerComponent.Destroy:  {self.Player.Id}");
-
+            
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
             // Session playerSession = playerSessionComponent ?.Session;
             // if ( playerSession == null)
