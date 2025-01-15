@@ -225,6 +225,11 @@ namespace ET.Server
 
         public static void OnUpdateDamage(this TeamDungeonComponent self, Unit attack, Unit defend, long damage)
         {
+            if (attack == null)
+            {
+                return;
+            }
+
             if (defend.Type != UnitType.Monster)
             {
                 return;

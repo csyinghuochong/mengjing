@@ -229,9 +229,16 @@ namespace ET.Server
                     bool dungeonover = TeamDungeonComponent.OnKillEvent(defendUnit);
                     if (dungeonover)
                     {
-                        TeamDungeonComponent.OnDungeonOver(TeamDungeonComponent.TeamId);
+                        domainScene.GetParent<TeamSceneComponent>().OnDungeonOver(TeamDungeonComponent.TeamId);
                     }
-
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    DragonDungeonComponentS dragonDungeonComponent = domainScene.GetComponent<DragonDungeonComponentS>();
+                    dungeonover = dragonDungeonComponent.OnKillEvent();
+                    if (dungeonover)
+                    {
+                        domainScene.GetParent<TeamSceneComponent>().OnDungeonOver(dragonDungeonComponent.TeamId);
+                    }
                     break;
                 case SceneTypeEnum.PetMing:
                     domainScene.GetComponent<PetMingDungeonComponent>().OnKillEvent();

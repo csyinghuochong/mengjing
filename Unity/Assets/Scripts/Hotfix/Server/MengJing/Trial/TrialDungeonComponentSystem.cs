@@ -80,6 +80,11 @@ namespace ET.Server
 
         public static void OnUpdateDamage(this TrialDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
         {
+            if (player == null)
+            {
+                return;
+            }
+
             if (defend.Type != UnitType.Monster)
             {
                 return;

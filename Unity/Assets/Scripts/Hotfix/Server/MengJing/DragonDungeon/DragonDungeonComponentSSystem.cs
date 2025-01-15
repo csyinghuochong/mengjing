@@ -577,7 +577,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnKillEvent(this DragonDungeonComponentS self)
+        public static bool OnKillEvent(this DragonDungeonComponentS self)
         {
             if (self.IsAllMonsterDead() && self.CurrentFubenCell.ctype == (int)CellDungeonStatu.End)
             {
@@ -642,7 +642,11 @@ namespace ET.Server
 
                 players[0].GetComponent<TaskComponentS>().OnPassFuben(self.FubenDifficulty, self.ChapterId, starNumber);
                 players[0].GetComponent<ChengJiuComponentS>().OnPassFuben(self.FubenDifficulty, self.ChapterId, starNumber);
+
+                return true;
             }
+
+            return false;
         }
 
         public static void InitMysteryItemInfos(this DragonDungeonComponentS self)

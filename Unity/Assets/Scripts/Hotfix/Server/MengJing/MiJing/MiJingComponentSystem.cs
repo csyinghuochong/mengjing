@@ -91,6 +91,11 @@ namespace ET.Server
 
         public static void OnUpdateDamage(this MiJingComponent self, Unit attack, Unit defend, long damage)
         {
+            if (attack == null)
+            {
+                return;
+            }
+
             if (!defend.IsBoss() || defend.ConfigId != self.BossId)
             {
                 return;

@@ -51,25 +51,21 @@ namespace ET.Server
                     player = null;
                 }
 
-                if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon) //个人副本接受到的伤害
+                switch (sceneTypeEnum)
                 {
-                    DomainScene.GetComponent<CellDungeonComponentS>().OnRecivedHurt(args.OldValue - args.NewValue);
-                }
-
-                if (sceneTypeEnum == (int)SceneTypeEnum.TeamDungeon && player != null) //组队副本输出伤害
-                {
-                    DomainScene.GetComponent<TeamDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
-                }
-
-                if (sceneTypeEnum == (int)SceneTypeEnum.MiJing && player != null) //秘境伤害
-                {
-                    DomainScene.GetComponent<MiJingComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
-                }
-
-                if (sceneTypeEnum == (int)SceneTypeEnum.TrialDungeon && player != null) //试炼副本伤害
-                {
-                    DomainScene.GetComponent<TrialDungeonComponent>()
-                            ?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
+	                case SceneTypeEnum.CellDungeon://个人副本接受到的伤害
+		                DomainScene.GetComponent<CellDungeonComponentS>().OnRecivedHurt(args.OldValue - args.NewValue);
+		                break;
+	                case SceneTypeEnum.TeamDungeon://组队副本输出伤害
+		                DomainScene.GetComponent<TeamDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
+		                break;
+	                case SceneTypeEnum.MiJing://秘境伤害
+		                DomainScene.GetComponent<MiJingComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
+		                break;
+	                case SceneTypeEnum.TrialDungeon://试炼副本伤害
+		                DomainScene.GetComponent<TrialDungeonComponent>()
+				                ?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
+		                break;
                 }
             }
         }
