@@ -1,51 +1,19 @@
-﻿using System;
+﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleGemHole : Entity,IAwake<Transform>,IDestroy 
+	public  class ES_RoleGemHole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int Index;
 		public Action<int> ClickHandler;
+		private EntityRef<ItemInfo> baginfo;
+		public ItemInfo Baginfo { get => this.baginfo; set => this.baginfo = value; }
 		
-		public Button E_SelectButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SelectButton == null )
-     			{
-		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Select");
-     			}
-     			return this.m_E_SelectButton;
-     		}
-     	}
-
-		public Image E_SelectImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SelectImage == null )
-     			{
-		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Select");
-     			}
-     			return this.m_E_SelectImage;
-     		}
-     	}
-
-		public Image E_HoleBackImage
+		public UnityEngine.UI.Image E_HoleBackImage
      	{
      		get
      		{
@@ -56,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HoleBackImage == null )
      			{
-		    		this.m_E_HoleBackImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HoleBack");
+		    		this.m_E_HoleBackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HoleBack");
      			}
      			return this.m_E_HoleBackImage;
      		}
      	}
 
-		public Text E_HoleNameText
+		public UnityEngine.UI.Text E_HoleNameText
      	{
      		get
      		{
@@ -73,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HoleNameText == null )
      			{
-		    		this.m_E_HoleNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_HoleName");
+		    		this.m_E_HoleNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_HoleName");
      			}
      			return this.m_E_HoleNameText;
      		}
      	}
 
-		public ES_CommonItem ES_CommonItem
+		public UnityEngine.UI.Image E_ItemIconImage
      	{
      		get
      		{
@@ -88,18 +56,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-
-		        ES_CommonItem es = this.m_es_commonitem;
-     			if( es ==null  )
+     			if( this.m_E_ItemIconImage == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
-		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+		    		this.m_E_ItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemIcon");
      			}
-     			return this.m_es_commonitem;
+     			return this.m_E_ItemIconImage;
      		}
      	}
 
-		public Image E_HighlightImage
+		public UnityEngine.UI.Image E_HighlightImage
      	{
      		get
      		{
@@ -110,29 +75,75 @@ namespace ET.Client
      			}
      			if( this.m_E_HighlightImage == null )
      			{
-		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Highlight");
+		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
      			}
      			return this.m_E_HighlightImage;
      		}
      	}
 
+		public UnityEngine.UI.Button E_SelectButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectButton == null )
+     			{
+		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select");
+     			}
+     			return this.m_E_SelectButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectImage == null )
+     			{
+		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
+     			}
+     			return this.m_E_SelectImage;
+     		}
+     	}
+
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
-			this.m_E_SelectButton = null;
-			this.m_E_SelectImage = null;
 			this.m_E_HoleBackImage = null;
 			this.m_E_HoleNameText = null;
-			this.m_es_commonitem = null;
+			this.m_E_ItemIconImage = null;
 			this.m_E_HighlightImage = null;
+			this.m_E_SelectButton = null;
+			this.m_E_SelectImage = null;
 			this.uiTransform = null;
 		}
 
-		private Button m_E_SelectButton = null;
-		private Image m_E_SelectImage = null;
-		private Image m_E_HoleBackImage = null;
-		private Text m_E_HoleNameText = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private Image m_E_HighlightImage = null;
+		private UnityEngine.UI.Image m_E_HoleBackImage = null;
+		private UnityEngine.UI.Text m_E_HoleNameText = null;
+		private UnityEngine.UI.Image m_E_ItemIconImage = null;
+		private UnityEngine.UI.Image m_E_HighlightImage = null;
+		private UnityEngine.UI.Button m_E_SelectButton = null;
+		private UnityEngine.UI.Image m_E_SelectImage = null;
 		public Transform uiTransform = null;
 	}
 }

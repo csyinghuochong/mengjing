@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -28,9 +29,18 @@ namespace ET.Client
                 return;
             }
 
-            if (self.ES_CommonItem.uiTransform.gameObject.activeSelf)
+            if (self.E_ItemIconImage.gameObject.activeSelf)
             {
-                self.ES_CommonItem.OnClickUIItem();
+                EventSystem.Instance.Publish(self.Root(),
+                    new ShowItemTips()
+                    {
+                        BagInfo = self.Baginfo,
+                        ItemOperateEnum = ItemOperateEnum.XiangQianGem,
+                        InputPoint = Input.mousePosition,
+                        Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                        EquipList = new List<ItemInfo>(),
+                        CurrentHouse = -1
+                    });
             }
 
             self.ClickHandler?.Invoke(self.Index);
@@ -57,8 +67,6 @@ namespace ET.Client
             }
 
             self.uiTransform.gameObject.SetActive(true);
-            self.E_HoleBackImage.gameObject.SetActive(true);
-            self.E_HoleNameText.gameObject.SetActive(true);
 
             using (zstring.Block())
             {
@@ -69,19 +77,18 @@ namespace ET.Client
 
                 if (gemId == 0)
                 {
-                    self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+                    self.E_ItemIconImage.gameObject.SetActive(false);
                     return;
                 }
             }
 
-            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
+            self.E_ItemIconImage.gameObject.SetActive(true);
             ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = gemId;
-            bagInfo.ItemNum = 1;
-            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);
-            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
-            self.ES_CommonItem.E_ItemClickButton.gameObject.SetActive(false);
-            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.Baginfo = bagInfo;
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            self.E_ItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
         }
     }
 }
