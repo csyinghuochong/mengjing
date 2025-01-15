@@ -179,7 +179,7 @@ namespace ET.Server
         /// <returns></returns>
         public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, int sceneTypeEnum, long unitId)
         {
-            Console.WriteLine($"OnUnitDisconnect11: {UnitHelper.IsHavePlayer(fubnescene)}");
+            Console.WriteLine($"OnUnitDisconnect11: IsHavePlayer: {UnitHelper.IsHavePlayer(fubnescene)}");
 
             TeamInfo teamInfo = self.GetTeamInfo(unitId);
             if (teamInfo == null)

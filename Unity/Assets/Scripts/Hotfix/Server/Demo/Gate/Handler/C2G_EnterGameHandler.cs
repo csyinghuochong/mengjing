@@ -32,16 +32,21 @@ namespace ET.Server
 
             Player player = sessionPlayerComponent.Player;
 
-            if (player == null || player.IsDisposed)
+            if (player == null )
             {
+                Console.WriteLine($"C2G_EnterGame: player == null  {request.UnitId}  {session.Id}");
+                response.Error = ErrorCode.ERR_NonePlayerError;
+                return;
+            }
+            if ( player.IsDisposed)
+            {
+                Console.WriteLine($"C2G_EnterGame: player.IsDisposed  {request.UnitId}  {session.Id}");
                 response.Error = ErrorCode.ERR_NonePlayerError;
                 return;
             }
 
             CoroutineLockComponent coroutineLockComponent = session.Root().GetComponent<CoroutineLockComponent>();
-
             long instanceId = session.InstanceId;
-
             using (session.AddComponent<SessionLockingComponent>())
             {
                 using (await coroutineLockComponent.Wait(CoroutineLockType.LoginGate, player.Account.GetLongHashCode()))
@@ -76,14 +81,14 @@ namespace ET.Server
 
                             Log.Error("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
                             response.Error = ErrorCode.ERR_ReEnterGameError;
-                            await DisconnectHelper.KickPlayerNoLock(player);
+                            await DisconnectHelper.KickPlayerNoLock(player, 1);
                             session.Disconnect().Coroutine();
                         }
                         catch (Exception e)
                         {
                             Log.Error("二次登录失败  " + e);
                             response.Error = ErrorCode.ERR_ReEnterGameError2;
-                            await DisconnectHelper.KickPlayerNoLock(player);
+                            await DisconnectHelper.KickPlayerNoLock(player, 2);
                             session.Disconnect().Coroutine();
                         }
 
@@ -141,7 +146,7 @@ namespace ET.Server
                     {
                         Log.Error($"角色进入游戏逻辑服出现问题 账号Id: {player.Account}  角色Id: {player.Id}   异常信息： {e}");
                         response.Error = ErrorCode.ERR_EnterGameError;
-                        await DisconnectHelper.KickPlayerNoLock(player);
+                        await DisconnectHelper.KickPlayerNoLock(player, 3);
                         session.Disconnect().Coroutine();
                     }
                 }

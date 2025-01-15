@@ -24,13 +24,13 @@ namespace ET.Server
             self.Dispose();
         }
 
-        public static async ETTask KickPlayerNoLock(Player player)
+        public static async ETTask KickPlayerNoLock(Player player, int ftype)
         { 
             if (player == null || player.IsDisposed)
             {
                 return;
             }
-    
+            Log.Error($"KickPlayerNoLock:  {player.Id}  {ftype}");
             switch (player.PlayerState)
             {
                 case PlayerState.Disconnect:
@@ -101,7 +101,7 @@ namespace ET.Server
                 {
                     return;
                 }
-                await KickPlayerNoLock(player);
+                await KickPlayerNoLock(player, 5);
             }
         }
         

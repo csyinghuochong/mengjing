@@ -13,7 +13,7 @@ namespace ET.Server
             try
             {
                 string sceneName = scene.Root().Name;
-                Console.WriteLine($"A2A_BroadcastSceneRequest.kickout:  {sceneName}");
+                Console.WriteLine($"A2A_BroadcastSceneRequest.kickout: {request.UnitId} {sceneName}");
                 if (sceneName.Equals("Map101") ||sceneName.Equals("Union") ||sceneName.Equals("FubenCenter1") ||sceneName.Equals("Team") )
                 {
                     ///暂时写在这 没想到好的解决方案。

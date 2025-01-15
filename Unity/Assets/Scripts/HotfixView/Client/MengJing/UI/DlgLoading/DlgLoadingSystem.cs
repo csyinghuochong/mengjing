@@ -39,6 +39,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgLoading self)
         {
+            Log.Debug("DlgLoading   egisterUIEvent");
             ConfigData.LoadSceneFinished = false;
         }
 

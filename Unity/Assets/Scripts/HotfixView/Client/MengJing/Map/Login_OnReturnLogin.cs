@@ -18,16 +18,18 @@ namespace ET.Client
         private async ETTask RunAsync2(Scene scene, ReturnLogin args, long waitTime)
         {
             long instanceId = scene.InstanceId;
-
+            Log.Debug($"ReturnLogin  111");
             TimerComponent timerComponent = scene.GetComponent<TimerComponent>();
             await timerComponent.WaitAsync(waitTime);
             if (instanceId != scene.InstanceId)
             {
                 return;
             }
-
+            ConfigData.LoadSceneFinished = false;
             Scene oldroot = scene.Root();
+            Log.Debug($"ReturnLogin222  {oldroot.Fiber.Id}");
             scene.Root().RemoveComponent<ClientSenderCompnent>();
+            Log.Debug($"ReturnLogin  {oldroot.CurrentScene()}   {oldroot.CurrentScene().GetComponent<UnitComponent>().Children.Count}");
             oldroot.CurrentScene()?.Dispose();
             oldroot.GetComponent<UIComponent>().CloseAllWindow();
             GameObject.Find("Global").GetComponent<Init>().TogglePatchWindow(true);

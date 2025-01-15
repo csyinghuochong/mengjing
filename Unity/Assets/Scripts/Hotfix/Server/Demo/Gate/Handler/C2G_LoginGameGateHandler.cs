@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageSessionHandler(SceneType.Gate)]
     public class C2G_LoginGameGateHandler: MessageSessionHandler<C2G_LoginGameGate, G2C_LoginGameGate>
@@ -65,6 +67,8 @@
                 
                 if (player == null)
                 {
+                    Console.WriteLine($"C2G_LoginGameGate: player == null  {account}  {session.Id}");
+                    
                     player = playerComponent.AddChildWithId<Player, string>(request.RoleId, account);
                     player.UnitId = request.RoleId;
 
@@ -84,6 +88,8 @@
                 }
                 else
                 {
+                    Console.WriteLine($"C2G_LoginGameGate:  player != null  {account}  {player.IsDisposed}  {player.Id}  {session.Id}");
+                    
                     player.RemoveComponent<PlayerOfflineOutTimeComponent>();
 
                     session.AddComponent<SessionPlayerComponent>().Player = player;
