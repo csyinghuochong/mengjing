@@ -158,8 +158,7 @@ namespace ET.Server
                 return;
             }
             self.OnDungeonOver(unitId);
-            TeamDungeonComponent teamDungeonComponent = fubnescene.GetComponent<TeamDungeonComponent>();
-            Log.Debug($"TeamDungeonDispose {teamDungeonComponent.TeamId}{fubnescene.InstanceId}");
+            Log.Debug($"TeamDungeonDispose {fubnescene.Name}");
             TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
             fubnescene.Dispose();
         }
@@ -170,21 +169,20 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="unitId"></param>c
         /// <returns></returns>
-        public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, long unitId)
+        public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, int sceneTypeEnum, long unitId)
         {
-            TeamDungeonComponent teamDungeonComponent = fubnescene.GetComponent<TeamDungeonComponent>();
             TeamInfo teamInfo = self.GetTeamInfo(unitId);
             if (teamInfo == null)
             {
                 return;
             }
-            if (teamDungeonComponent.IsHavePlayer())
+
+            if (UnitHelper.IsHavePlayer(fubnescene))
             {
                 return;
             }
+
             self.OnDungeonOver(teamInfo.TeamId);
-    
-            Log.Debug($"TeamDungeonDispose {teamDungeonComponent.TeamId}{fubnescene.InstanceId}");
             TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
             fubnescene.Dispose();
         }

@@ -287,6 +287,23 @@ namespace ET.Server
             return self.GetMonsterType() == MonsterTypeEnum.Boss;
         }
 
+        public static bool IsHavePlayer(Scene scene)
+        {
+            bool haveplayer = false;
+            List<Entity> units = scene.GetComponent<UnitComponent>().Children.Values.ToList();
+            for (int i = 0; i < units.Count; i++)
+            {
+                Unit unit = units[i] as Unit;
+                if (unit.Type == UnitType.Player)
+                {
+                    haveplayer = true;
+                    break;
+                }
+            }
+        
+            return haveplayer;
+        }
+        
         public static List<Unit> GetUnitList(Scene scene, int unitType)
         {
             List<Unit> list = new List<Unit>();

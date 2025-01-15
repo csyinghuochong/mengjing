@@ -218,23 +218,6 @@ namespace ET.Server
             return teamDropItem;
         }
 
-        public static bool IsHavePlayer(this TeamDungeonComponent self)
-        {
-            bool haveplayer = false;
-            List<Entity> units = self.Scene().GetComponent<UnitComponent>().Children.Values.ToList();
-            for (int i = 0; i < units.Count; i++)
-            {
-                Unit unit = units[i] as Unit;
-                if (unit.Type == UnitType.Player)
-                {
-                    haveplayer = true;
-                    break;
-                }
-            }
-
-            return haveplayer;
-        }
-
         public static int GetRealPlayerNumber(this TeamDungeonComponent self)
         {
             return 1;
@@ -417,64 +400,5 @@ namespace ET.Server
             return true;
         }
 
-        /// <summary>
-        /// 组队副本返回主城
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="unitId"></param>
-        /// <returns></returns>
-        public static void OnUnitReturn(this TeamDungeonComponent self, long unitId)
-        {
-            M2C_TeamDungeonQuitMessage m2CTeamDungeonQuitMessage = M2C_TeamDungeonQuitMessage.Create();
-            List<Unit> allunits = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
-            for (int i = 0; i < allunits.Count; i++)
-            {
-                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
-                {
-                    continue;
-                }
-
-                MapMessageHelper.SendToClient(allunits[i], m2CTeamDungeonQuitMessage);
-            }
-
-            if (allunits.Count > 0)
-            {
-                return;
-            }
-
-            self.OnDungeonOver(unitId);
-        }
-
-        /// <summary>
-        /// 玩家离线， unit已经移除了
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="unitId"></param>
-        /// <returns></returns>
-        public static void OnUnitDisconnect(this TeamDungeonComponent self, long unitId)
-        {
-            if (self.IsHavePlayer())
-            {
-                return;
-            }
-
-            self.OnDungeonOver(self.TeamId);
-        }
-
-        public static void OnDungeonOver(this TeamDungeonComponent self, long teamId)
-        {
-            // TeamInfo teamInfo = self.GetTeamInfo(teamId);
-            // if (teamInfo != null)
-            // {
-            //     for (int i = 0; i < teamInfo.PlayerList.Count; i++)
-            //     {
-            //         teamInfo.PlayerList[i].Damage = 0;
-            //     }
-            //
-            //     teamInfo.FubenUUId = 0;
-            //     teamInfo.FubenInstanceId = 0;
-            // }
-            
-        }
     }
 }

@@ -641,6 +641,7 @@ namespace ET.Server
             }
             switch (sceneTypeEnum)
             {
+                case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.DragonDungeon:
                     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
                     teamSceneComponent.OnUnitReturn(scene, userId);
@@ -682,9 +683,10 @@ namespace ET.Server
 
             switch (sceneTypeEnum)
             {
+                case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.DragonDungeon:
                     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
-                    teamSceneComponent.OnUnitDisconnect(scene, userId);
+                    teamSceneComponent.OnUnitDisconnect(scene, sceneTypeEnum, userId);
                     break;
             }
             // if (sceneTypeEnum == (int)SceneTypeEnum.TeamDungeon)
