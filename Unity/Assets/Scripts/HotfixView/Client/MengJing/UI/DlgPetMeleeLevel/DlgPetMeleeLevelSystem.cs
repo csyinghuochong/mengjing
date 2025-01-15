@@ -75,20 +75,6 @@ namespace ET.Client
 
             self.OnLevel(self.ShowPetMeleeSceneIds[itemIndex]);
 
-            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            int star = petComponent.GetPetMeleeTotalStar();
-            using (zstring.Block())
-            {
-                self.View.E_Reward1Image.GetComponentInChildren<Text>().text =
-                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(1).NeedStar);
-                self.View.E_Reward2Image.GetComponentInChildren<Text>().text =
-                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(2).NeedStar);
-                self.View.E_Reward3Image.GetComponentInChildren<Text>().text =
-                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(3).NeedStar);
-                self.View.E_Reward4Image.GetComponentInChildren<Text>().text =
-                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(4).NeedStar);
-            }
-
             self.OnUpdateStar();
         }
 
@@ -184,6 +170,27 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             int star = petComponent.GetPetMeleeTotalStar();
             self.View.E_RewardProgressImage.fillAmount = star <= 100 ? star / 100f : 1f;
+
+            using (zstring.Block())
+            {
+                self.View.E_Reward1EventTrigger.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(1).NeedStar);
+                self.View.E_Reward2EventTrigger.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(2).NeedStar);
+                self.View.E_Reward3EventTrigger.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(3).NeedStar);
+                self.View.E_Reward4EventTrigger.GetComponentInChildren<Text>().text =
+                        zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(4).NeedStar);
+            }
+
+            self.View.E_Reward1EventTrigger.transform.Find("Image_1").gameObject.SetActive(!petComponent.PetMeleeFubeRewardIds.Contains(1));
+            self.View.E_Reward1EventTrigger.transform.Find("Image_2").gameObject.SetActive(petComponent.PetMeleeFubeRewardIds.Contains(1));
+            self.View.E_Reward2EventTrigger.transform.Find("Image_1").gameObject.SetActive(!petComponent.PetMeleeFubeRewardIds.Contains(2));
+            self.View.E_Reward2EventTrigger.transform.Find("Image_2").gameObject.SetActive(petComponent.PetMeleeFubeRewardIds.Contains(2));
+            self.View.E_Reward3EventTrigger.transform.Find("Image_1").gameObject.SetActive(!petComponent.PetMeleeFubeRewardIds.Contains(3));
+            self.View.E_Reward3EventTrigger.transform.Find("Image_2").gameObject.SetActive(petComponent.PetMeleeFubeRewardIds.Contains(3));
+            self.View.E_Reward4EventTrigger.transform.Find("Image_1").gameObject.SetActive(!petComponent.PetMeleeFubeRewardIds.Contains(4));
+            self.View.E_Reward4EventTrigger.transform.Find("Image_2").gameObject.SetActive(petComponent.PetMeleeFubeRewardIds.Contains(4));
         }
 
         private static void OnClose(this DlgPetMeleeLevel self)

@@ -333,23 +333,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Reward1Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Reward1Image == null )
-     			{
-		    		this.m_E_Reward1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RewardSet/E_Reward1");
-     			}
-     			return this.m_E_Reward1Image;
-     		}
-     	}
-
 		public UnityEngine.EventSystems.EventTrigger E_Reward1EventTrigger
      	{
      		get
@@ -364,23 +347,6 @@ namespace ET.Client
 		    		this.m_E_Reward1EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"RewardSet/E_Reward1");
      			}
      			return this.m_E_Reward1EventTrigger;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Reward2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Reward2Image == null )
-     			{
-		    		this.m_E_Reward2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RewardSet/E_Reward2");
-     			}
-     			return this.m_E_Reward2Image;
      		}
      	}
 
@@ -401,23 +367,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Reward3Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Reward3Image == null )
-     			{
-		    		this.m_E_Reward3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RewardSet/E_Reward3");
-     			}
-     			return this.m_E_Reward3Image;
-     		}
-     	}
-
 		public UnityEngine.EventSystems.EventTrigger E_Reward3EventTrigger
      	{
      		get
@@ -432,23 +381,6 @@ namespace ET.Client
 		    		this.m_E_Reward3EventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"RewardSet/E_Reward3");
      			}
      			return this.m_E_Reward3EventTrigger;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Reward4Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Reward4Image == null )
-     			{
-		    		this.m_E_Reward4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RewardSet/E_Reward4");
-     			}
-     			return this.m_E_Reward4Image;
      		}
      	}
 
@@ -490,13 +422,9 @@ namespace ET.Client
 			this.m_E_PetMeleeButton = null;
 			this.m_E_PetMeleeImage = null;
 			this.m_E_RewardProgressImage = null;
-			this.m_E_Reward1Image = null;
 			this.m_E_Reward1EventTrigger = null;
-			this.m_E_Reward2Image = null;
 			this.m_E_Reward2EventTrigger = null;
-			this.m_E_Reward3Image = null;
 			this.m_E_Reward3EventTrigger = null;
-			this.m_E_Reward4Image = null;
 			this.m_E_Reward4EventTrigger = null;
 			this.uiTransform = null;
 		}
@@ -520,13 +448,9 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_PetMeleeButton = null;
 		private UnityEngine.UI.Image m_E_PetMeleeImage = null;
 		private UnityEngine.UI.Image m_E_RewardProgressImage = null;
-		private UnityEngine.UI.Image m_E_Reward1Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward1EventTrigger = null;
-		private UnityEngine.UI.Image m_E_Reward2Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward2EventTrigger = null;
-		private UnityEngine.UI.Image m_E_Reward3Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward3EventTrigger = null;
-		private UnityEngine.UI.Image m_E_Reward4Image = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Reward4EventTrigger = null;
 		public Transform uiTransform = null;
 	}
