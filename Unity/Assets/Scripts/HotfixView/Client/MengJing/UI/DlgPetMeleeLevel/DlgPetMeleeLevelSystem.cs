@@ -246,20 +246,20 @@ namespace ET.Client
                 if (self.Root().GetComponent<PetComponentC>().PetMeleeRewardIds.Contains(sceneId))
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(false);
-                    self.View.E_ReceivedText.gameObject.SetActive(true);
+                    self.View.EG_ReceivedRectTransform.gameObject.SetActive(true);
                     self.View.E_EnterMapButton.gameObject.SetActive(true);
                 }
                 else
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(true);
-                    self.View.E_ReceivedText.gameObject.SetActive(false);
+                    self.View.EG_ReceivedRectTransform.gameObject.SetActive(false);
                     self.View.E_EnterMapButton.gameObject.SetActive(false);
                 }
             }
             else
             {
                 self.View.E_ReceiveButton.gameObject.SetActive(false);
-                self.View.E_ReceivedText.gameObject.SetActive(false);
+                self.View.EG_ReceivedRectTransform.gameObject.SetActive(false);
                 self.View.E_EnterMapButton.gameObject.SetActive(true);
             }
 
@@ -328,7 +328,7 @@ namespace ET.Client
             if (error == ErrorCode.ERR_Success)
             {
                 self.View.E_ReceiveButton.gameObject.SetActive(false);
-                self.View.E_ReceivedText.gameObject.SetActive(true);
+                self.View.EG_ReceivedRectTransform.gameObject.SetActive(true);
                 self.View.E_EnterMapButton.gameObject.SetActive(true);
             }
         }
