@@ -153,6 +153,10 @@ namespace ET.Client
 
             if (errorCode == ErrorCode.ERR_Success)
             {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_BaoXiangReward);
+                DlgBaoXiangReward dlgBaoXiangReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgBaoXiangReward>();
+                dlgBaoXiangReward.OnUpdateUI(rewardConfig.RewardItems);
+
                 petComponentC.PetMeleeFubeRewardIds.Add(id);
                 self.OnUpdateStar();
             }
