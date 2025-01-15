@@ -205,7 +205,9 @@ namespace ET.Server
                 float addMp = numericComponent.GetAsFloat(NumericType.Max_SkillUseMPAdd);
                 int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
                 //equipIndex 0弓   1剑
-                int huifuspeed = equipIndex == 0 ? 1 : 2;
+                int huifuspeed = equipIndex == 0 ? 1 : 2;  
+                
+                //再加上恢复速度加速 huifuspeed * (1 + NumericType.SkillRestoreMP)
                 if (addMp == 0f && nowMp < maxMp)
                 {
                     numericComponent.ApplyValue(NumericType.SkillUseMP, 10 * huifuspeed);
