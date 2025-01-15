@@ -13,7 +13,8 @@ namespace ET.Client
         public GameObject E_Image_XuanZhong;
         public GameObject E_Image_ItemIcon;
         public GameObject E_Label_ItemNum;
-        public GameObject E_Label_ItemName;
+        public GameObject E_Label_ItemName_Active;
+        public GameObject E_Label_ItemName_InActive;
         public GameObject E_Label_Active;
         public GameObject E_Label_InActive;
         public int PetId;
