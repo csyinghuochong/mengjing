@@ -1,22 +1,160 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleGem : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_RoleGem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public int CurrentItemType;
+		public List<GameObject> ItemDiList = new();
 		public List<EntityRef<ES_RoleGemHole>> GemHoleList = new();
+		public long ItemBagInfoID;
 		private EntityRef<ItemInfo> xiangQianItem;
 		public ItemInfo XiangQianItem { get => this.xiangQianItem; set => this.xiangQianItem = value; }
 		public int XiangQianIndex;
+		
+		public UnityEngine.UI.Button E_ItemDi_1Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_1Button == null )
+     			{
+		    		this.m_E_ItemDi_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_1");
+     			}
+     			return this.m_E_ItemDi_1Button;
+     		}
+     	}
 
-		public ES_RoleGemHole ES_RoleGemHole_0
+		public UnityEngine.UI.Image E_ItemDi_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_1Image == null )
+     			{
+		    		this.m_E_ItemDi_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_1");
+     			}
+     			return this.m_E_ItemDi_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ItemDi_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_2Button == null )
+     			{
+		    		this.m_E_ItemDi_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_2");
+     			}
+     			return this.m_E_ItemDi_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDi_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_2Image == null )
+     			{
+		    		this.m_E_ItemDi_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_2");
+     			}
+     			return this.m_E_ItemDi_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ItemDi_3Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_3Button == null )
+     			{
+		    		this.m_E_ItemDi_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_3");
+     			}
+     			return this.m_E_ItemDi_3Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDi_3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_3Image == null )
+     			{
+		    		this.m_E_ItemDi_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_3");
+     			}
+     			return this.m_E_ItemDi_3Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ItemDi_4Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_4Button == null )
+     			{
+		    		this.m_E_ItemDi_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Gem/E_ItemDi_4");
+     			}
+     			return this.m_E_ItemDi_4Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDi_4Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDi_4Image == null )
+     			{
+		    		this.m_E_ItemDi_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Gem/E_ItemDi_4");
+     			}
+     			return this.m_E_ItemDi_4Image;
+     		}
+     	}
+
+				public ES_RoleGemHole ES_RoleGemHole_0
      	{
      		get
      		{
@@ -145,7 +283,7 @@ namespace ET.Client
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
-
+		
 		    public Transform UITransform
          {
      	    get
@@ -160,6 +298,14 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_ItemDi_1Button = null;
+			this.m_E_ItemDi_1Image = null;
+			this.m_E_ItemDi_2Button = null;
+			this.m_E_ItemDi_2Image = null;
+			this.m_E_ItemDi_3Button = null;
+			this.m_E_ItemDi_3Image = null;
+			this.m_E_ItemDi_4Button = null;
+			this.m_E_ItemDi_4Image = null;
 			this.m_es_rolegemhole_0 = null;
 			this.m_es_rolegemhole_1 = null;
 			this.m_es_rolegemhole_2 = null;
@@ -170,6 +316,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Button m_E_ItemDi_1Button = null;
+		private UnityEngine.UI.Image m_E_ItemDi_1Image = null;
+		private UnityEngine.UI.Button m_E_ItemDi_2Button = null;
+		private UnityEngine.UI.Image m_E_ItemDi_2Image = null;
+		private UnityEngine.UI.Button m_E_ItemDi_3Button = null;
+		private UnityEngine.UI.Image m_E_ItemDi_3Image = null;
+		private UnityEngine.UI.Button m_E_ItemDi_4Button = null;
+		private UnityEngine.UI.Image m_E_ItemDi_4Image = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_0 = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_1 = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_2 = null;

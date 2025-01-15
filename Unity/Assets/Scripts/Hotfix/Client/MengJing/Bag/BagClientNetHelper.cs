@@ -270,6 +270,11 @@ namespace ET.Client
 
             M2C_ItemOperateGemResponse response = (M2C_ItemOperateGemResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                EventSystem.Instance.Publish(root, new ItemOperateGem());
+            }
+
             return response.Error;
         }
 
@@ -282,6 +287,11 @@ namespace ET.Client
 
             M2C_ItemOperateGemResponse response = (M2C_ItemOperateGemResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                EventSystem.Instance.Publish(root, new ItemOperateGem());
+            }
+            
             return response.Error;
         }
 

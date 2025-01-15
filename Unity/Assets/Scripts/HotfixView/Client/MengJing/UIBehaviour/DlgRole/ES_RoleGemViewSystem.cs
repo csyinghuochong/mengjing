@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_RoleGemHole))]
     [FriendOf(typeof(ES_CommonItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof(ES_RoleGem))]
@@ -13,6 +14,10 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.ItemDiList.Add(self.E_ItemDi_1Image.gameObject);
+            self.ItemDiList.Add(self.E_ItemDi_2Image.gameObject);
+            self.ItemDiList.Add(self.E_ItemDi_3Image.gameObject);
+            self.ItemDiList.Add(self.E_ItemDi_4Image.gameObject);
             self.GemHoleList.Add(self.ES_RoleGemHole_0);
             self.GemHoleList.Add(self.ES_RoleGemHole_1);
             self.GemHoleList.Add(self.ES_RoleGemHole_2);
@@ -39,6 +44,13 @@ namespace ET.Client
             self.ResetHole();
             self.RefreshBagItems();
             self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+        }
+
+        public static void OnUpdateLastItem(this ES_RoleGem self)
+        {
+            ItemInfo itemInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.ItemBagInfoID);
+            self.OnClickXiangQianItem(itemInfo);
+            self.RefreshBagItems();
         }
 
         private static void OnItemTypeSet(this ES_RoleGem self, int index)
@@ -112,12 +124,17 @@ namespace ET.Client
 
         public static void OnClickXiangQianItem(this ES_RoleGem self, ItemInfo info)
         {
-            self.XiangQianItem = info;
+            self.XiangQianItem = null;
+            self.XiangQianIndex = -1;
+            self.ResetHole();
+
             if (info == null)
             {
-                self.ResetHole();
                 return;
             }
+
+            self.XiangQianItem = info;
+            self.ItemBagInfoID = info.BagInfoID;
 
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
             self.ES_CommonItem.UpdateItem(info, ItemOperateEnum.None);
@@ -132,6 +149,8 @@ namespace ET.Client
             {
                 int gemHoleId = (gemHoles.Length > i && gemHoles[i] != "") ? int.Parse(gemHoles[i]) : 0;
                 int gemId = (gemIds.Length > i && gemIds[i] != "") ? int.Parse(gemIds[i]) : 0;
+
+                self.ItemDiList[i].SetActive(gemHoleId == 0);
 
                 ES_RoleGemHole esRoleGemHole = self.GemHoleList[i];
                 esRoleGemHole.OnUpdateUI(gemHoleId, gemId, i);

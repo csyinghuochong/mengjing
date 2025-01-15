@@ -53,6 +53,16 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [Event(SceneType.Demo)]
+    public class ItemOperateGem_Refresh : AEvent<Scene, ItemOperateGem>
+    {
+        protected override async ETTask Run(Scene scene, ItemOperateGem args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnUpdateLastItem();
+            await ETTask.CompletedTask;
+        }
+    }
 
     [FriendOf(typeof(ES_RoleQiangHua))]
     [FriendOf(typeof(ES_RoleHuiShou))]
@@ -175,6 +185,14 @@ namespace ET.Client
             else
             {
                 return false;
+            }
+        }
+        
+        public static void OnUpdateLastItem(this DlgRole self)
+        {
+            if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_RoleGem.OnUpdateLastItem();
             }
         }
 

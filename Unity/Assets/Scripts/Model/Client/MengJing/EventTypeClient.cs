@@ -617,4 +617,8 @@ namespace ET.Client
     {
         public List<PetMeleeCardInfo> PetMeleeCards;
     }
+
+    public struct ItemOperateGem
+    {
+    }
 }

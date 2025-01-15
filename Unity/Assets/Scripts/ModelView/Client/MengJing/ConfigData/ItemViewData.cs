@@ -59,6 +59,18 @@ namespace ET.Client
             { 104, "绿色插槽" },
             { 105, "橙色插槽" },
         };
+        
+        //宝石槽位
+        [StaticField]
+        public static Dictionary<int, string> GemHoleBack = new()
+        {
+            { 101, "ItemQuality3_5" },
+            { 102, "ItemQuality3_4" },
+            { 103, "ItemQuality3_3" },
+            { 104, "ItemQuality3_2" },
+            { 105, "ItemQuality3_5" },
+        };
+
 
         //Administrator:
         //当道具类型为1（消耗品）时该字段的意义
