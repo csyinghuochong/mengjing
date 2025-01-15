@@ -303,7 +303,7 @@ namespace ET.Client
                     }
                 }
 
-                if (self.SceneId > nextId)
+                if (nextId != 0 && self.SceneId > nextId)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
                     return;
