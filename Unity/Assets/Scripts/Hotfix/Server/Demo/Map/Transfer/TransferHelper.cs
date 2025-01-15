@@ -637,6 +637,14 @@ namespace ET.Server
             {
                 NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();
+                return;
+            }
+            switch (sceneTypeEnum)
+            {
+                case SceneTypeEnum.DragonDungeon:
+                    TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
+                    teamSceneComponent.OnUnitReturn(scene, userId);
+                    break;
             }
             // if (sceneTypeEnum == SceneTypeEnum.TeamDungeon)
             // {
@@ -669,8 +677,36 @@ namespace ET.Server
                 //动态删除副本
                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();
+                return;
             }
 
+            switch (sceneTypeEnum)
+            {
+                case SceneTypeEnum.DragonDungeon:
+                    TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
+                    teamSceneComponent.OnUnitDisconnect(scene, userId);
+                    break;
+            }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.TeamDungeon)
+            // {
+            //     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
+            //     teamSceneComponent.OnUnitDisconnect(scene, userId);
+            // }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.Arena)
+            // {
+            //     ArenaDungeonComponent areneSceneComponent = scene.GetComponent<ArenaDungeonComponent>();
+            //     areneSceneComponent.OnUnitDisconnect(userId);
+            // }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.JiaYuan)
+            // {
+            //     JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
+            //     jiayuanSceneComponent.OnUnitLeave(scene);
+            // }
+            // if (sceneTypeEnum == (int)SceneTypeEnum.OneChallenge)
+            // {
+            //     OneChallengeDungeonComponent jiayuanSceneComponent = scene.GetParent<OneChallengeDungeonComponent>();
+            //     jiayuanSceneComponent.OnUnitLeave(scene);
+            // }
         }
 
         public static void BeforeTransfer(Unit unit)

@@ -196,7 +196,7 @@ namespace ET.Client
         public M2C_TeamDungeonPrepareResult m2CTeamDungeonPrepareResult;
     }
 
-    public struct TeamDungeonQuit
+    public struct PlayerQuitDungeon
     {
         public M2C_TeamDungeonQuitMessage M2CTeamDungeonQuitMessage;
     }

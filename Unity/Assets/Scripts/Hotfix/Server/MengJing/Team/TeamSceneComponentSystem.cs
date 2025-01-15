@@ -121,9 +121,73 @@ namespace ET.Server
 
             self.SyncTeamInfo(teamInfo, userIDList);
         }
-       
         
+        public static void OnDungeonOver(this TeamSceneComponent self, long teamId)
+        {
+            TeamInfo teamInfo = self.GetTeamInfo(teamId);
+            if (teamInfo != null)
+            {
+                for (int i = 0;i < teamInfo.PlayerList.Count; i++)
+                {
+                    teamInfo.PlayerList[i].Damage = 0;
+                }
+                teamInfo.FubenUUId = 0;
+                teamInfo.FubenInstanceId = 0;
+            }
+        }
         
+        /// <summary>
+        /// 组队副本返回主城
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        public static void  OnUnitReturn(this TeamSceneComponent self, Scene fubnescene, long unitId)
+        {
+            List<Unit> allunits = UnitHelper.GetUnitList(fubnescene, UnitType.Player);
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
+                {
+                    continue;
+                }
+                MapMessageHelper.SendToClient(allunits[i], self.M2C_TeamDungeonQuitMessage);
+            }
+            if (allunits.Count > 0)
+            {
+                return;
+            }
+            self.OnDungeonOver(unitId);
+            TeamDungeonComponent teamDungeonComponent = fubnescene.GetComponent<TeamDungeonComponent>();
+            Log.Debug($"TeamDungeonDispose {teamDungeonComponent.TeamId}{fubnescene.InstanceId}");
+            TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
+            fubnescene.Dispose();
+        }
+        
+        /// <summary>
+        /// 玩家离线， unit已经移除了
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="unitId"></param>c
+        /// <returns></returns>
+        public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, long unitId)
+        {
+            TeamDungeonComponent teamDungeonComponent = fubnescene.GetComponent<TeamDungeonComponent>();
+            TeamInfo teamInfo = self.GetTeamInfo(unitId);
+            if (teamInfo == null)
+            {
+                return;
+            }
+            if (teamDungeonComponent.IsHavePlayer())
+            {
+                return;
+            }
+            self.OnDungeonOver(teamInfo.TeamId);
+    
+            Log.Debug($"TeamDungeonDispose {teamDungeonComponent.TeamId}{fubnescene.InstanceId}");
+            TransferHelper.NoticeFubenCenter(fubnescene, 2).Coroutine();
+            fubnescene.Dispose();
+        }
         
         #region TeamDungeon
 
