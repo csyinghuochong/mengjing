@@ -53,7 +53,24 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false); 
         }
+        
+        public static void OnRelogin(this DBSaveComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}   二次登录";
 
+            if (!unit.IsRobot())
+            {
+                ServerLogHelper.LoginInfo(offLineInfo);
+                //需要通知其他服务器吗？
+                Log.Debug(offLineInfo);
+            }
+            self.PlayerState = PlayerState.Game;
+        }
+        
         public static void OnDisconnect(this DBSaveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
@@ -80,23 +97,6 @@ namespace ET.Server
             TransferHelper.BeforeTransfer(unit);
             unit.GetParent<UnitComponent>().Remove(unit.Id);
             TransferHelper.OnPlayerDisconnect(scene, unit.Id);
-        }
-        
-        public static void OnRelogin(this DBSaveComponent self)
-        {
-            Unit unit = self.GetParent<Unit>();
-            string offLineInfo = $"{unit.Zone()}区： " +
-                    $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
-                    $"{  TimeHelper.DateTimeNow().ToString()}   二次登录";
-
-            if (!unit.IsRobot())
-            {
-                ServerLogHelper.LoginInfo(offLineInfo);
-                //需要通知其他服务器吗？
-                Log.Debug(offLineInfo);
-            }
-            self.PlayerState = PlayerState.Game;
         }
         
         //离线

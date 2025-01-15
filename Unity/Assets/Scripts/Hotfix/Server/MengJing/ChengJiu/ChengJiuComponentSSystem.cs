@@ -54,7 +54,6 @@ namespace ET.Server
             {
                 if (!PetTuJianConfigCategory.Instance.Contain(self.PetTuJianActives[i]))
                 {
-                    Log.Error($"PetTuJianConfigCategory: {self.PetTuJianActives}");
                     continue;
                 }
 
