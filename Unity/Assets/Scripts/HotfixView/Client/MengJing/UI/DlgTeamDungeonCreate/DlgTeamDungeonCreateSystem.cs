@@ -206,6 +206,7 @@ namespace ET.Client
             } 
             
             Scene root = self.Root();
+            await root.GetComponent<TimerComponent>().WaitFrameAsync();
             root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
             root.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
         }
