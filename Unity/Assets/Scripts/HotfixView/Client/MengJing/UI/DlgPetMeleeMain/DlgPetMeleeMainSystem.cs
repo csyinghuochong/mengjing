@@ -119,7 +119,7 @@ namespace ET.Client
             {
                 // 在这可以加一些卡牌的排序动画什么的
                 ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardInHand[i];
-                esPetMeleeCard.uiTransform.localPosition = new Vector3(-500f + i * 200f, 0, 0);
+                esPetMeleeCard.uiTransform.localPosition = new Vector3(-500f + i * 280f, 0, 0);
             }
         }
 

@@ -60,14 +60,14 @@ namespace ET.Client
                     RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.PetMeleeCardInfo.PetId);
                     PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
                     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
-                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                    self.E_IconImage.sprite = sp;
-                    using (zstring.Block())
-                    {
-                        self.E_DesText.text = zstring.Format("主战卡：{0}", rolePetInfo.PetName);
-                        self.E_CostText.text = zstring.Format("魔力：{0}", ConfigData.PetMeleeMainPetCost);
-                    }
+
+                    self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString()));
+                    self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_160"));
+                    self.E_CostText.text = ConfigData.PetMeleeMainPetCost.ToString();
+                    self.E_TypeText.text = "主战卡";
+                    self.E_NameText.text = rolePetInfo.PetName;
 
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID);
 
@@ -76,14 +76,14 @@ namespace ET.Client
                 case (int)PetMeleeCarType.AssistPet:
                 {
                     PetTuJianConfig petTuJianConfig = PetTuJianConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString());
-                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                    self.E_IconImage.sprite = sp;
-                    using (zstring.Block())
-                    {
-                        self.E_DesText.text = zstring.Format("辅战卡：{0}", petTuJianConfig.Name);
-                        self.E_CostText.text = zstring.Format("魔力：{0}", petTuJianConfig.Cost);
-                    }
+
+                    self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petTuJianConfig.Icon.ToString()));
+                    self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_157"));
+                    self.E_CostText.text = petTuJianConfig.Cost.ToString();
+                    self.E_TypeText.text = "辅战卡";
+                    self.E_NameText.text = petTuJianConfig.Name;
 
                     self.UnitAssetsPath = ABPathHelper.GetUnitPath("Pet/" + petTuJianConfig.Assets);
 
@@ -92,14 +92,14 @@ namespace ET.Client
                 case (int)PetMeleeCarType.Magic:
                 {
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
-                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString());
-                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                    self.E_IconImage.sprite = sp;
-                    using (zstring.Block())
-                    {
-                        self.E_DesText.text = zstring.Format("魔法卡：{0}", petMagicCardConfig.Name);
-                        self.E_CostText.text = zstring.Format("魔力：{0}", petMagicCardConfig.Cost);
-                    }
+
+                    self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString()));
+                    self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_161"));
+                    self.E_CostText.text = petMagicCardConfig.Cost.ToString();
+                    self.E_TypeText.text = "魔法卡";
+                    self.E_NameText.text = petMagicCardConfig.Name;
 
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
                     if (skillConfig.SkillZhishiType == SkillZhishiType.Position)

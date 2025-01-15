@@ -88,6 +88,7 @@ namespace ET.Client
                 self.View.E_Reward4Image.GetComponentInChildren<Text>().text =
                         zstring.Format("{0}/{1}", star, PetMeleeFubenRewardConfigCategory.Instance.Get(4).NeedStar);
             }
+
             self.OnUpdateStar();
         }
 
@@ -246,20 +247,22 @@ namespace ET.Client
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(false);
                     self.View.E_ReceivedText.gameObject.SetActive(true);
+                    self.View.E_EnterMapButton.gameObject.SetActive(true);
                 }
                 else
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(true);
                     self.View.E_ReceivedText.gameObject.SetActive(false);
+                    self.View.E_EnterMapButton.gameObject.SetActive(false);
                 }
             }
             else
             {
                 self.View.E_ReceiveButton.gameObject.SetActive(false);
                 self.View.E_ReceivedText.gameObject.SetActive(false);
+                self.View.E_EnterMapButton.gameObject.SetActive(true);
             }
 
-            self.View.E_EnterMapButton.gameObject.SetActive(true);
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
 
