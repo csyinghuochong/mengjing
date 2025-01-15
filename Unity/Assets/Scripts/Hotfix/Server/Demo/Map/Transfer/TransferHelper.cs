@@ -517,6 +517,7 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_TransferFailError;
                         }
+                        Console.WriteLine($"T2M_TeamDungeonEnterResponse:  {createUnit} ");
                         BeforeTransfer(unit);
 
                         await Transfer(unit, createUnit.FubenActorId, request.SceneType, createUnit.FubenId, createUnit.FubenType, "0");
@@ -688,6 +689,7 @@ namespace ET.Server
                 case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.DragonDungeon:
                     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
+                    teamSceneComponent.OnRecvUnitLeave(userId, true);
                     teamSceneComponent.OnUnitDisconnect(scene, sceneTypeEnum, userId);
                     break;
             }

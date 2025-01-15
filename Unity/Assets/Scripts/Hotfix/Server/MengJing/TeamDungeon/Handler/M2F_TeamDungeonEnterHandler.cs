@@ -8,6 +8,7 @@
         {
             if (request.TeamId == 0)
             {
+                response.Error = ErrorCode.Err_TeamIsNull;
                 return;
             }
 

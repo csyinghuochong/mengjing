@@ -40,6 +40,11 @@ namespace ET.Server
         public static void Check(this DragonChuansongComponent self)
         {
             List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            if (unitlist.Count <= 0)
+            {
+                return;
+            }
+
             Unit mainUnit = unitlist[0];
             bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), mainUnit);
             if (!allMonsterDead)

@@ -74,6 +74,8 @@ namespace ET.Server
                 long userId = userIds[i].UserID;
                 t2M_TeamUpdateRequest.TeamId = self.GetTeamInfoId(userId);
 
+                Console.WriteLine($"TeamSceneComponent SyncTeamInfo {userId} { t2M_TeamUpdateRequest.TeamId}");
+                
                 self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(userId, m2C_HorseNoticeInfo);
                 self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, t2M_TeamUpdateRequest);
             }
@@ -87,7 +89,7 @@ namespace ET.Server
         /// <returns></returns>
         public static void OnRecvUnitLeave(this TeamSceneComponent self, long userId, bool exitgame = false)
         {
-            Log.Debug($"TeamSceneComponent Leave {userId} {exitgame}");
+            Console.WriteLine($"TeamSceneComponent OnRecvUnitLeave {userId} {exitgame}");
             TeamInfo teamInfo = self.GetTeamInfo(userId);
             if (teamInfo == null)
             {
@@ -120,6 +122,7 @@ namespace ET.Server
                 self.TeamList.Remove(teamInfo);
             }
 
+            //已经移除的玩家不通知
             self.SyncTeamInfo(teamInfo, userIDList);
         }
         
@@ -136,6 +139,7 @@ namespace ET.Server
                 }
                 teamInfo.FubenUUId = 0;
                 teamInfo.FubenInstanceId = 0;
+                teamInfo.FubenActorId = default;
             }
         }
         
@@ -154,7 +158,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                MapMessageHelper.SendToClient(allunits[i], self.m2C_TeamPlayerQuitDungeon);
+                MapMessageHelper.SendToClient(allunits[i], M2C_TeamPlayerQuitDungeon.Create());
             }
             Console.WriteLine($"OnUnitReturn:  {unitId}    {allunits.Count}   {fubnescene.Name}");
             
@@ -177,8 +181,6 @@ namespace ET.Server
         {
             Console.WriteLine($"OnUnitDisconnect11: {UnitHelper.IsHavePlayer(fubnescene)}");
 
-            self.OnRecvUnitLeave(unitId);
-            
             TeamInfo teamInfo = self.GetTeamInfo(unitId);
             if (teamInfo == null)
             {

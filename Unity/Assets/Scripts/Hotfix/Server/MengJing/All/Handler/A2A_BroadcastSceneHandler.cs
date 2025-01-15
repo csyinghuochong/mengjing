@@ -14,17 +14,13 @@ namespace ET.Server
             {
                 string sceneName = scene.Root().Name;
                 Console.WriteLine($"A2A_BroadcastSceneRequest.kickout:  {sceneName}");
-                if (sceneName.Equals("Map101") ||sceneName.Equals("Union") ||sceneName.Equals("FubenCenter1")  )
+                if (sceneName.Equals("Map101") ||sceneName.Equals("Union") ||sceneName.Equals("FubenCenter1") ||sceneName.Equals("Team") )
                 {
                     ///暂时写在这 没想到好的解决方案。
                     scene.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Remove(request.UnitId);
                     scene.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Remove(request.UnitId);
-
                 }
 
-
-
-               
                 await ETTask.CompletedTask;
             }
             catch (Exception ex)

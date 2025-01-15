@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
     [MessageHandler(SceneType.Team)]
     public class M2T_TeamDungeonCreateHandler : MessageHandler<Scene, M2T_TeamDungeonCreateRequest, T2M_TeamDungeonCreateResponse>
@@ -9,6 +11,7 @@
             TeamInfo teamInfo = teamSceneComponent.GetTeamInfo(request.TeamPlayerInfo.UserID);
             if (teamInfo != null && teamInfo.TeamId != request.TeamPlayerInfo.UserID)
             {
+                Console.WriteLine($"M2T_TeamDungeonCreateRequest  ErrorCode.ERR_IsNotLeader ");
                 //非队长
                 response.Error = ErrorCode.ERR_IsNotLeader;
                 return;
