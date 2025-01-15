@@ -1815,7 +1815,7 @@ namespace ET.Client
             // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
-            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
+            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon || sceneTypeEnum == SceneTypeEnum.DragonDungeon);
             self.View.E_OpenChatButton.gameObject.SetActive(false);
             self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(false);
             self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
