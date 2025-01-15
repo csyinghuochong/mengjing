@@ -22,8 +22,6 @@ public class Robot_OnRecvTeamUpdate : AEvent<Scene, RecvTeamUpdate>
                     await scene.Root().GetComponent<ProcessInnerSender>().Call(roborActorId, main2RobotClientMessage) as
                             RobotManager2Main_Message;
         }
-
-      
         
         await ETTask.CompletedTask;
     }

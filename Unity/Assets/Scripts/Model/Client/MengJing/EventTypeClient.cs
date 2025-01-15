@@ -198,7 +198,7 @@ namespace ET.Client
 
     public struct PlayerQuitDungeon
     {
-        public M2C_TeamDungeonQuitMessage M2CTeamDungeonQuitMessage;
+        public M2C_TeamPlayerQuitDungeon M2CTeamDungeonQuitMessage;
     }
 
     // 好友更新

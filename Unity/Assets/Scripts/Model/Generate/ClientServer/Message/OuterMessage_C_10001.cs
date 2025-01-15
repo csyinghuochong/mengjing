@@ -18579,12 +18579,12 @@ namespace ET
 
     // 退出组队广播
     [MemoryPackable]
-    [Message(OuterMessage.M2C_TeamDungeonQuitMessage)]
-    public partial class M2C_TeamDungeonQuitMessage : MessageObject, IMessage
+    [Message(OuterMessage.M2C_TeamPlayerQuitDungeon)]
+    public partial class M2C_TeamPlayerQuitDungeon : MessageObject, IMessage
     {
-        public static M2C_TeamDungeonQuitMessage Create(bool isFromPool = false)
+        public static M2C_TeamPlayerQuitDungeon Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2C_TeamDungeonQuitMessage), isFromPool) as M2C_TeamDungeonQuitMessage;
+            return ObjectPool.Instance.Fetch(typeof(M2C_TeamPlayerQuitDungeon), isFromPool) as M2C_TeamPlayerQuitDungeon;
         }
 
         [MemoryPackOrder(89)]
@@ -32855,7 +32855,7 @@ namespace ET
         public const ushort M2C_RankDemonMessage = 10476;
         public const ushort TeamInfo = 10477;
         public const ushort M2C_TeamUpdateResult = 10478;
-        public const ushort M2C_TeamDungeonQuitMessage = 10479;
+        public const ushort M2C_TeamPlayerQuitDungeon = 10479;
         public const ushort M2C_TeamPickMessage = 10480;
         public const ushort M2C_CreateDropItems = 10481;
         public const ushort M2C_TeamDungeonSettlement = 10482;

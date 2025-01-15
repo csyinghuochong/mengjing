@@ -80,7 +80,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// 离开队伍
+        /// 离开队伍 [主动离开 或者被踢]
         /// </summary>
         /// <param name="self"></param>
         /// <param name="userId"></param>
@@ -140,7 +140,7 @@ namespace ET.Server
         }
         
         /// <summary>
-        /// 组队副本返回主城
+        /// 组队副本返回主城  退出副本也通知机器人退出， 玩家离开队伍才下线机器人。
         /// </summary>
         /// <param name="self"></param>
         /// <param name="unitId"></param>
@@ -154,7 +154,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                MapMessageHelper.SendToClient(allunits[i], self.M2C_TeamDungeonQuitMessage);
+                MapMessageHelper.SendToClient(allunits[i], self.m2C_TeamPlayerQuitDungeon);
             }
             Console.WriteLine($"OnUnitReturn:  {unitId}    {allunits.Count}   {fubnescene.Name}");
             
@@ -176,6 +176,9 @@ namespace ET.Server
         public static void  OnUnitDisconnect(this TeamSceneComponent self, Scene fubnescene, int sceneTypeEnum, long unitId)
         {
             Console.WriteLine($"OnUnitDisconnect11: {UnitHelper.IsHavePlayer(fubnescene)}");
+
+            self.OnRecvUnitLeave(unitId);
+            
             TeamInfo teamInfo = self.GetTeamInfo(unitId);
             if (teamInfo == null)
             {

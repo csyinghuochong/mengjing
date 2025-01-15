@@ -15,16 +15,10 @@ namespace ET.Server
                 switch (scene.SceneType)
                 {
                     case SceneType.Team:
-                        if (request.MessageType == NoticeType.PlayerExit)
-                        {
-                            scene.GetComponent<TeamSceneComponent>().OnRecvUnitLeave(long.Parse(request.MessageValue), true);
-                        }
+                       
                         break;
                     case SceneType.Solo:
-                        if (request.MessageType == NoticeType.PlayerExit)
-                        {
-                            scene.GetComponent<SoloSceneComponent>().OnRecvUnitLeave(long.Parse(request.MessageValue));
-                        }
+                       
                         break;
                     case SceneType.Rank:
                         if (request.MessageType == NoticeType.RankRefresh)
@@ -53,15 +47,7 @@ namespace ET.Server
                         break;
                     case SceneType.Chat:
                         ChatSceneComponent chatInfoUnitsComponent = scene.GetComponent<ChatSceneComponent>();
-                        if (request.MessageType == NoticeType.PlayerExit)
-                        {
-                            long unitid = long.Parse(request.MessageValue);
-                            if (chatInfoUnitsComponent.Get(unitid) != null)
-                            {
-                                chatInfoUnitsComponent.Remove(unitid);
-                            }
-                        }
-                        else if (request.MessageType == NoticeType.PaiMai)
+                        if (request.MessageType == NoticeType.PaiMai)
                         {
                             M2C_SyncChatInfo m2C_SyncChatInfo = M2C_SyncChatInfo.Create();
                             m2C_SyncChatInfo.ChatInfo = ChatInfo.Create();

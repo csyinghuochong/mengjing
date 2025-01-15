@@ -12,7 +12,7 @@ namespace ET.Server
 
         public T2M_TeamUpdateRequest t2M_TeamUpdateRequest = T2M_TeamUpdateRequest.Create();
 
-        public M2C_TeamDungeonQuitMessage M2C_TeamDungeonQuitMessage = M2C_TeamDungeonQuitMessage.Create();
+        public M2C_TeamPlayerQuitDungeon m2C_TeamPlayerQuitDungeon = M2C_TeamPlayerQuitDungeon.Create();
     }
     
 }
