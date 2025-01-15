@@ -79,8 +79,9 @@ namespace ET.Client
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.CellDungeon:
+                case SceneTypeEnum.DragonDungeon:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
-                    uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement).Coroutine();
+                    uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement, sceneTypeEnum).Coroutine();
                     break;
                 case SceneTypeEnum.PetMelee:
                     star = 0;

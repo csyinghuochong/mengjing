@@ -177,8 +177,9 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonSettlement);
         }
 
-        public static async ETTask OnUpdateUI(this DlgCellDungeonSettlement self, M2C_FubenSettlement m2C_FubenSettlement)
+        public static async ETTask OnUpdateUI(this DlgCellDungeonSettlement self, M2C_FubenSettlement m2C_FubenSettlement, int sceneTypeEnum)
         {
+            self.View.E_Button_continueButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_Text_expText.text = m2C_FubenSettlement.RewardExp.ToString();
             self.View.E_Text_goldText.text = m2C_FubenSettlement.RewardGold.ToString();
 

@@ -8,7 +8,44 @@ namespace ET.Server
 	public static class FubenHelp
 	{
 
-		//public static M2C_SyncChatInfo m2C_SyncChatInfo = new M2C_SyncChatInfo();
+		public static void OnDragonSettlement(List<Unit> players, int chapterId, int fubenDifficulty,int starNumber)
+		{
+			
+			CellGenerateConfig chapterConfig = CellGenerateConfigCategory.Instance.Get(chapterId);
+			for (int pp = 0; pp < players.Count; pp++)
+			{
+				Unit players_pp = players[pp];
+				UserInfo userInfo = players_pp.GetComponent<UserInfoComponentS>().UserInfo;
+				List<FubenPassInfo> fubenPassInfos = userInfo.FubenPassList;
+				FubenPassInfo fubenPassInfo = null;
+				for (int i = 0; i < fubenPassInfos.Count; i++)
+				{
+					if (fubenPassInfos[i].FubenId == chapterId)
+					{
+						fubenPassInfo = fubenPassInfos[i];
+						break;
+					}
+				}
+
+				if (fubenPassInfo == null)
+				{
+					fubenPassInfo = FubenPassInfo.Create();
+					fubenPassInfo.FubenId = chapterId;
+					userInfo.FubenPassList.Add(fubenPassInfo);
+				}
+
+				fubenPassInfo.Difficulty =
+						((int)fubenDifficulty > fubenPassInfo.Difficulty) ? (int)fubenDifficulty : fubenPassInfo.Difficulty;
+
+				players_pp.GetComponent<UserInfoComponentS>()
+						.UpdateRoleMoneyAdd(UserDataType.Exp, chapterConfig.RewardExp.ToString(), true, ItemGetWay.FubenGetReward);
+				players_pp.GetComponent<UserInfoComponentS>()
+						.UpdateRoleMoneyAdd(UserDataType.Gold, chapterConfig.RewardGold.ToString(), true, ItemGetWay.FubenGetReward);
+
+				players_pp.GetComponent<TaskComponentS>().OnPassFuben(fubenDifficulty, chapterId, starNumber);
+				players_pp.GetComponent<ChengJiuComponentS>().OnPassFuben(fubenDifficulty, chapterId, starNumber);
+			}
+		}
 
 		public static List<Unit> GetUnitList(Scene scene, int unitType)
 		{
