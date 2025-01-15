@@ -533,7 +533,12 @@ namespace ET.Server
 
             if (combatResult == CombatResultEnum.Win)
             {
-                self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                NumericComponentS numericComponent = self.Player.GetComponent<NumericComponentS>();
+                if (self.Scene().GetComponent<MapComponent>().SceneId > numericComponent.GetAsInt(NumericType.PetMeleeDungeonId))
+                {
+                    self.Player.GetComponent<NumericComponentS>()
+                            .ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                }
 
                 int sceneId = self.Scene().GetComponent<MapComponent>().SceneId;
                 // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);

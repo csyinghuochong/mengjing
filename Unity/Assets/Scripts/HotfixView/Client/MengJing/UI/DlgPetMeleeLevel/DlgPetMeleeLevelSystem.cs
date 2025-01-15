@@ -242,7 +242,6 @@ namespace ET.Client
 
             if (sceneId <= petMeleeDungeonId)
             {
-                self.View.E_EnterMapButton.gameObject.SetActive(false);
                 if (self.Root().GetComponent<PetComponentC>().PetMeleeRewardIds.Contains(sceneId))
                 {
                     self.View.E_ReceiveButton.gameObject.SetActive(false);
@@ -256,11 +255,11 @@ namespace ET.Client
             }
             else
             {
-                self.View.E_EnterMapButton.gameObject.SetActive(true);
                 self.View.E_ReceiveButton.gameObject.SetActive(false);
                 self.View.E_ReceivedText.gameObject.SetActive(false);
             }
 
+            self.View.E_EnterMapButton.gameObject.SetActive(true);
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
 
@@ -301,7 +300,7 @@ namespace ET.Client
                     }
                 }
 
-                if (self.SceneId != nextId)
+                if (self.SceneId > nextId)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("请先通关前面的关卡");
                     return;
