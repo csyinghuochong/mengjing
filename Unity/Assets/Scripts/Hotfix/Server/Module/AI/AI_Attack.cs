@@ -2,8 +2,6 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-
-
     public class AI_Attack: AAIHandler
     {
 
@@ -40,7 +38,8 @@ namespace ET.Server
                 {
                     aiComponent.TargetID = 0;
                 }
-                else
+
+                if (aiComponent.TargetID != 0 && target != null)
                 {
                     float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
                     if(distance <= aiComponent.ActDistance && skillManagerComponent.IsCanUseSkill (skillId) == ErrorCode.ERR_Success)

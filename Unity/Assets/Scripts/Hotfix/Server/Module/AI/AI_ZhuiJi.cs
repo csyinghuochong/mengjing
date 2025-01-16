@@ -72,10 +72,7 @@ namespace ET.Server
                         float addg = unit.Id % 100;
                         quaternion rotation = quaternion.Euler(0, math.radians(ange + addg), 0);
                         float3 ttt = target.Position + math.mul(rotation, math.forward()) * 1f;
-                        
                         unit.FindPathMoveToAsync(ttt).Coroutine();
-                        
-                        //unit.FindPathMoveToAsync(target.Position).Coroutine();
                     }
                 }
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checktime, cancellationToken);
