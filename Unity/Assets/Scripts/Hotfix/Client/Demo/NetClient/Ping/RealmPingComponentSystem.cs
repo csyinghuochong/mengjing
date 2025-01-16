@@ -2,22 +2,22 @@ using System;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(PingComponent))]
-    public static partial class PingComponentSystem
+    [EntitySystemOf(typeof(RealmPingComponent))]
+    public static partial class RealmPingComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this PingComponent self)
+        private static void Awake(this RealmPingComponent self)
         {
             self.PingAsync().Coroutine();
         }
         
         [EntitySystem]
-        private static void Destroy(this PingComponent self)
+        private static void Destroy(this RealmPingComponent self)
         {
             self.Ping = default;
         }
         
-        private static async ETTask PingAsync(this PingComponent self)
+        private static async ETTask PingAsync(this RealmPingComponent self)
         {
             Session session = self.GetParent<Session>();
             long instanceId = self.InstanceId;
@@ -35,9 +35,9 @@ namespace ET.Client
                     long serverTime  =0 ;
 
                     // C2G_Ping不需要调用dispose，Call中会判断，如果用了对象池会自动回收
-                    C2G_Ping c2GPing = C2G_Ping.Create(true);
+                    C2R_Ping c2GPing = C2R_Ping.Create(true);
                     // 这里response要用using才能回收到池，默认不回收
-                    using G2C_Ping response = await session.Call(c2GPing) as G2C_Ping;
+                    using R2C_Ping response = await session.Call(c2GPing) as R2C_Ping;
                     serverTime = response.Time;
                     
                     if (self.InstanceId != instanceId)

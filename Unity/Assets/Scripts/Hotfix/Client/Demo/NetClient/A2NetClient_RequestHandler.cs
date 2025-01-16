@@ -10,6 +10,8 @@
             if (sessionComponent == null)
             {
                 Log.Debug($"sessionComponent == null");
+                response.Error = ErrorCode.ERR_SessionDisconnect;
+                return;
             }
 
             Session session = sessionComponent.Session;

@@ -54,7 +54,6 @@ namespace ET.Client
                 //请求游戏角色进入Map地图
                 PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
                 ClientSenderCompnent clientSenderComponent = root.GetComponent<ClientSenderCompnent>();
-                playerInfoComponent.DisconnectType = ErrorCode.ERR_GetRealmKeyOff;
                 C2R_GetRealmKey c2RGetRealmKey = C2R_GetRealmKey.Create();
                 c2RGetRealmKey.Token = playerInfoComponent.Token;
                 c2RGetRealmKey.Account = playerInfoComponent.Account;

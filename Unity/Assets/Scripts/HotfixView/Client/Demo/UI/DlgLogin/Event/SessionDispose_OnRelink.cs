@@ -15,12 +15,6 @@ namespace ET.Client
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
             root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
             Log.Info($"SessionDispose_OnHandler: {mapComponent.SceneType}  {disconnectType}");
-            
-            if (disconnectType == ErrorCode.ERR_GetRealmKeyOff)
-            {
-                return;
-            }
-            
             if (mapComponent.SceneType < SceneTypeEnum.MainCityScene)
             {
                 //直接返回登陆

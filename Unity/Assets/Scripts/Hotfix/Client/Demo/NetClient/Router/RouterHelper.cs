@@ -6,8 +6,7 @@ namespace ET.Client
     public static partial class RouterHelper
     {
         
-        // 注册router
-        public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password, int sceneTpe)
+        public static async ETTask<Session> CreateRealmSession(this NetComponent netComponent, IPEndPoint address, string account, string password)
         {
             uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
             
@@ -21,10 +20,27 @@ namespace ET.Client
             Log.Info($"get router: {recvLocalConn} {routerAddress}");
             
             Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
+            routerSession.AddComponent<RealmPingComponent>();
+            return routerSession;
+        }
+        
+        // 注册router
+        public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password)
+        {
+            uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
             
-            routerSession.AddComponent<PingComponent>().SceneType  =sceneTpe;
+            (uint recvLocalConn, IPEndPoint routerAddress) = await GetRouterAddress(netComponent, address, localConn, 0);
+
+            if (recvLocalConn == 0)
+            {
+                throw new Exception($"get router fail: {netComponent.Root().Id} {address}");
+            }
+            
+            Log.Info($"get router: {recvLocalConn} {routerAddress}");
+            
+            Session routerSession = netComponent.Create(routerAddress, address, recvLocalConn);
+            routerSession.AddComponent<PingComponent>();
             routerSession.AddComponent<RouterCheckComponent>();
-            
             return routerSession;
         }
         

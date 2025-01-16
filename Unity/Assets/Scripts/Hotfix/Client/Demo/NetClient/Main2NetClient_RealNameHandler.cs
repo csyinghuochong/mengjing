@@ -25,7 +25,7 @@ namespace ET.Client
 
             IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress();
 
-            Session session = await netComponent.CreateRouterSession(realmAddress, account, password, SceneTypeEnum.LoginScene);;
+            Session session = await netComponent.CreateRealmSession(realmAddress, account, password);
             
             Log.Debug($"Main2NetClient_RealNameHandler   22222:  {realmAddress.Address}" );
             

@@ -25,7 +25,7 @@ namespace ET.Client
 
             IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account, request.ServerId);
 
-            Session session = await netComponent.CreateRouterSession(realmAddress, account, password, SceneTypeEnum.LoginScene);
+            Session session = await netComponent.CreateRealmSession(realmAddress, account, password);
             C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
             c2RLoginAccount.Account = account;
             c2RLoginAccount.Password = password;
@@ -34,8 +34,6 @@ namespace ET.Client
             R2C_LoginAccount r2CLoginAccount = (R2C_LoginAccount)await session.Call(c2RLoginAccount);
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
-                session.AddComponent<ClientSessionErrorComponent>();
-                root.AddComponent<SessionComponent>().Session = session;
                 Log.Debug($"r2CLoginAccount.Error == ErrorCode.ERR_Success  Session = session");
             }
             else
@@ -43,7 +41,7 @@ namespace ET.Client
                 session?.Dispose();
                 Log.Debug($"r2CLoginAccount.Error != ErrorCode.ERR_Success   session?.Dispose");
             }
-
+            root.AddComponent<SessionComponent>().Session = session;
             response.AccountId = r2CLoginAccount.AccountId;
             response.PlayerInfo = r2CLoginAccount.PlayerInfo;
             response.RoleLists = r2CLoginAccount.RoleLists;
