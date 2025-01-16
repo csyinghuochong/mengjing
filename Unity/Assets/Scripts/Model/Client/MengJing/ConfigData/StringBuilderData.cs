@@ -40,11 +40,7 @@ namespace ET.Client
             "Skill_Range_Bomb_1",
             "Skill_Boomerang",
         };
-
-
-        [StaticField]
-        public static List<string> AiCheckList = new List<string>() { "AI_XunLuo", "AI_ZhuiJi", "AI_LocalDungeon" };
-
+        
         [StaticField]
         public static string MainCity = "101";
         
