@@ -384,10 +384,11 @@ namespace ET.Client
                     List<EntityRef<Unit>> allunits = myUnit.GetParent<UnitComponent>().GetAll();
                     foreach (Unit u in allunits)
                     {
-                        if (!myUnit.IsCanAttackUnit(u) && !u.IsJingLingMonster())
-                        {
-                            continue;
-                        }
+                        // 选取目标可能是自己、友方、敌方，暂时还没有看到配置。所以这里先不做区分
+                        // if (!myUnit.IsCanAttackUnit(u) && !u.IsJingLingMonster())
+                        // {
+                        //     continue;
+                        // }
 
                         StateComponentC stateComponent = u.GetComponent<StateComponentC>();
                         if (stateComponent.StateTypeGet(StateTypeEnum.Stealth) || stateComponent.StateTypeGet(StateTypeEnum.Hide))
