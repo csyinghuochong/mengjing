@@ -18,7 +18,6 @@ namespace ET.Server
 
             // 先切换回英雄
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetFightIndex, 0);
-            unit.GetComponent<AIComponent>().Stop_2();
             unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PlayerHideBuff);
             unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, ConfigData.PetMianShangBuff);
 
