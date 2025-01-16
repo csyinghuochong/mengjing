@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_RankShowItem))]
-    [EntitySystemOf(typeof (Scroll_Item_RankShowItem))]
+    [FriendOf(typeof(Scroll_Item_RankShowItem))]
+    [EntitySystemOf(typeof(Scroll_Item_RankShowItem))]
     public static partial class Scroll_Item_RankShowItemSystem
     {
         [EntitySystem]
@@ -33,7 +33,11 @@ namespace ET.Client
             self.RankingInfo = rankingInfo;
 
             self.E_Text_CombatText.text = rankingInfo.Combat.ToString();
-            self.E_Text_LevelText.text = rankingInfo.PlayerLv.ToString();
+            using (zstring.Block())
+            {
+                self.E_Text_LevelText.text = zstring.Format("等级：{0}", rankingInfo.PlayerLv.ToString());
+            }
+
             self.E_Text_NameText.text = rankingInfo.PlayerName;
             self.E_Text_RankText.text = rank.ToString();
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -43,6 +47,7 @@ namespace ET.Client
             if (rank >= 4)
             {
                 self.EG_RankShowSetRectTransform.gameObject.SetActive(false);
+                self.E_Text_RankText.gameObject.SetActive(true);
             }
             else
             {

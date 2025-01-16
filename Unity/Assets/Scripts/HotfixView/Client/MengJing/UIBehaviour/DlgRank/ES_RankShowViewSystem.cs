@@ -21,6 +21,13 @@ namespace ET.Client
             self.E_HeadIcomImage3Image.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
 
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_RankShowItem");
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefab, self.EG_MyRankShowRectTransform);
+            self.MyRankShowItem = self.AddChild<Scroll_Item_RankShowItem>();
+            self.MyRankShowItem.BindTrans(gameObject.transform);
+            self.EG_MyRankShowRectTransform.gameObject.SetActive(false);
+
             self.OnUpdateUI().Coroutine();
         }
 
@@ -74,10 +81,19 @@ namespace ET.Client
                 rank++;
             }
 
-            using (zstring.Block())
+            if (myRank != -1)
             {
-                self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : zstring.Format("我的排名: {0}", myRank);
+                self.MyRankShowItem.Refresh(myRank, response.RankList.Find(r => r.UserId == selfId));
+                self.EG_MyRankShowRectTransform.gameObject.SetActive(true);
             }
+            else
+            {
+                self.EG_MyRankShowRectTransform.gameObject.SetActive(false);
+            }
+            // using (zstring.Block())
+            // {
+            //     self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : zstring.Format("我的排名: {0}", myRank);
+            // }
 
             self.AddUIScrollItems(ref self.ScrollItemRankShowItems, self.ShowRankingInfos.Count);
             self.E_RankShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingInfos.Count);
