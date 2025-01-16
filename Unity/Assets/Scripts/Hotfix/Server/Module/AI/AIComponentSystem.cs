@@ -185,32 +185,7 @@ namespace ET
 
             self.AISkillIDList.Add(petConfig.ActSkillID);
         }
-
-        public static void InitHeroTuoGuan(this AIComponent self, Unit unit)
-        {
-            self.ChaseRange = 100;
-            self.ActRange = 100;
-           
-            self.AISkillIDList.Clear();
-
-            OccupationConfig occConfig = OccupationConfigCategory.Instance.Get(unit.ConfigId);
-            self.AISkillIDList.Add(occConfig.InitActSkillID);
-            
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(SkillHelp.GetWeaponSkill(occConfig.InitActSkillID, unit.GetEquipType(), null));
-            self.ActDistance = (float)skillConfig.SkillRangeSize;
-
-            List<SkillPro> skillPros = unit.GetComponent<SkillSetComponentS>().SkillList;
-            foreach (SkillPro skillPro in skillPros)
-            {
-                if (skillPro.SkillID == 0 || skillPro.SkillPosition == 0)
-                {
-                    continue;
-                }
-
-                self.AISkillIDList.Add(skillPro.SkillID);
-            }
-        }
-
+        
         /// <summary>
         /// 初始化宠物副本怪物AI参数
         /// </summary>
