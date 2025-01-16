@@ -13,6 +13,8 @@ namespace ET.Client
 
         public Vector2 PreviousPressPosition;
 
+        public float OranginScale;
+        
         public bool IsGameOver;
         public long Timer;
         public float BeginTime;

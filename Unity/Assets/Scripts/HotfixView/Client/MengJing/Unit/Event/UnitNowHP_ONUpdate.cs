@@ -108,6 +108,11 @@ namespace ET.Client
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
             }
 
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitHpUpdate(unitDefend);
+            }
+
             if (mapComponent.SceneType == SceneTypeEnum.BaoZang
                 && unitDefend.Type == UnitType.Player && unitDefend.MainHero
                 && unitAttack != null && unitAttack.Type == UnitType.Player)

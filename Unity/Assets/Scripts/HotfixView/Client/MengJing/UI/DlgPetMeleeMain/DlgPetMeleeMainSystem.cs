@@ -8,6 +8,28 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Current)]
+    public class AfterUnitCreate_UpdateDlgPetMeleeMain : AEvent<Scene, AfterUnitCreate>
+    {
+        protected override async ETTask Run(Scene scene, AfterUnitCreate args)
+        {
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitNumUpdate();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class UnitRemove_UpdateDlgPetMeleeMain : AEvent<Scene, UnitRemove>
+    {
+        protected override async ETTask Run(Scene root, UnitRemove args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitNumUpdate();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Event(SceneType.Demo)]
     public class PetMeleeDealCards_Refresh : AEvent<Scene, PetMeleeDealCards>
     {
@@ -48,10 +70,6 @@ namespace ET.Client
             self.View.E_IconImage.gameObject.SetActive(false);
             self.View.E_RerurnButton.AddListener(self.OnRerurnButton);
 
-            self.View.E_Image_3Image.gameObject.SetActive(false);
-            self.View.E_Image_2Image.gameObject.SetActive(false);
-            self.View.E_Image_1Image.gameObject.SetActive(false);
-            
             self.InitCard().Coroutine();
             self.UpdateMoLi();
             self.OnPlayAnimation().Coroutine();
@@ -59,6 +77,15 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
         {
+            self.View.E_Image_3Image.gameObject.SetActive(false);
+            self.View.E_Image_2Image.gameObject.SetActive(false);
+            self.View.E_Image_1Image.gameObject.SetActive(false);
+            self.View.E_CountdownTimeText.text = ((int)ConfigData.PetMeleeBattleMaxTime / 1000).ToString();
+
+            self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
+            self.View.E_JiFanNumText.text = "召唤宠物数量：0";
+            self.View.E_DiRenNumText.text = "召唤怪物数量：0";
+
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
             GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
@@ -74,6 +101,77 @@ namespace ET.Client
             self.PetMeleeCardInHand = null;
             self.PetMeleeCardPool.Clear();
             self.PetMeleeCardPool = null;
+        }
+
+        public static void OnUnitHpUpdate(this DlgPetMeleeMain self, Unit unit)
+        {
+            if (unit.Type == UnitType.Monster)
+            {
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+                {
+                    NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+                    int nowHp = numericComponentC.GetAsInt(NumericType.Now_Hp);
+                    if (nowHp < 0)
+                    {
+                        nowHp = 0;
+                    }
+
+                    int maxHp = numericComponentC.GetAsInt(NumericType.Now_MaxHp);
+                    if (monsterConfig.MonsterCamp == 1) // 我方
+                    {
+                        using (zstring.Block())
+                        {
+                            self.View.E_JiFanHpTxtText.text = zstring.Format("{0}/{1}", nowHp, maxHp);
+                            Vector2 size = self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta;
+                            size.x = nowHp * 1f / maxHp * self.OranginScale;
+                            self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
+                        }
+                    }
+                    else // 敌方
+                    {
+                        using (zstring.Block())
+                        {
+                            self.View.E_DiRenHpTxtText.text = zstring.Format("{0}/{1}", nowHp, maxHp);
+                            Vector2 size = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta;
+                            size.x = nowHp * 1f / maxHp * self.OranginScale;
+                            self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void OnUnitNumUpdate(this DlgPetMeleeMain self)
+        {
+            int JiFanNum = 0;
+            int DiRenNum = 0;
+            foreach (Unit unit in self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll())
+            {
+                if (unit.Type == UnitType.Pet)
+                {
+                    JiFanNum++;
+                }
+
+                if (unit.Type == UnitType.Monster)
+                {
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    if (monsterConfig.MonsterSonType != MonsterSonTypeEnum.Type_62)
+                    {
+                        DiRenNum++;
+                    }
+                    else
+                    {
+                        self.OnUnitHpUpdate(unit);
+                    }
+                }
+            }
+
+            using (zstring.Block())
+            {
+                self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}", JiFanNum);
+                self.View.E_DiRenNumText.text = zstring.Format("召唤怪物数量：{0}", DiRenNum);
+            }
         }
 
         private static void OnRerurnButton(this DlgPetMeleeMain self)
