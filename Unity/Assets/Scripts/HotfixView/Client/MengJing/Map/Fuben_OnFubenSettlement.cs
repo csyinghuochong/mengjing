@@ -95,7 +95,7 @@ namespace ET.Client
                         scene.GetComponent<PetComponentC>().OnPassPetMeleeFuben(mapComponent.SceneId, star);
                     }
                     
-                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().StopTimer();
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>().Stop();
                     PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
                         args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "宠物乱斗胜利" : "宠物乱斗失败",
                         () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();

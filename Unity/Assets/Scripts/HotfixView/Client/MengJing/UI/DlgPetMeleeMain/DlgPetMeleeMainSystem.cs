@@ -26,7 +26,7 @@ namespace ET.Client
         {
             try
             {
-                self.Update();
+                self.OnTimer();
             }
             catch (Exception e)
             {
@@ -45,15 +45,16 @@ namespace ET.Client
         {
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_TouchEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
-
-            self.InitCard().Coroutine();
-
-            self.StartTime = TimeInfo.Instance.ServerNow();
-            self.ReadyTime = 10000; // 倒计时时间
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIPetMeleeMain, self);
-            self.UpdateMoLi();
             self.View.E_IconImage.gameObject.SetActive(false);
             self.View.E_RerurnButton.AddListener(self.OnRerurnButton);
+
+            self.View.E_Image_3Image.gameObject.SetActive(false);
+            self.View.E_Image_2Image.gameObject.SetActive(false);
+            self.View.E_Image_1Image.gameObject.SetActive(false);
+            
+            self.InitCard().Coroutine();
+            self.UpdateMoLi();
+            self.OnPlayAnimation().Coroutine();
         }
 
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
@@ -147,9 +148,10 @@ namespace ET.Client
             card.uiTransform.gameObject.SetActive(false);
         }
 
-        public static void StopTimer(this DlgPetMeleeMain self)
+        public static void Stop(this DlgPetMeleeMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.IsGameOver = true;
         }
 
         private static void BeginDrag(this DlgPetMeleeMain self, PointerEventData pdata)
@@ -164,37 +166,79 @@ namespace ET.Client
             self.PreviousPressPosition = pdata.position;
         }
 
-        public static void Update(this DlgPetMeleeMain self)
+        public static void OnTimer(this DlgPetMeleeMain self)
         {
-            long nowTime = TimeInfo.Instance.ServerNow();
-            if (!self.GameStart)
+            // 镜头拉近效果
+            // Camera camera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
+            // float passTime = Time.time - self.BeginTime;
+            // float fieldOfView = 50f - (passTime / 10f) * 20;
+            // fieldOfView = Math.Max(fieldOfView, 30);
+            // camera.GetComponent<Camera>().fieldOfView = fieldOfView;
+        }
+
+        public static async ETTask OnPlayAnimation(this DlgPetMeleeMain self)
+        {
+            long instanceId = self.InstanceId;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
+            self.View.E_Image_3Image.gameObject.SetActive(true);
+            self.BeginTime = Time.time;
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
+            CommonViewHelper.DOScale(self.View.E_Image_3Image.transform, Vector3.zero, 1f);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            if (instanceId != self.InstanceId)
             {
-                long leftTime = self.ReadyTime - (nowTime - self.StartTime);
+                return;
+            }
 
-                if (leftTime > 0)
+            self.View.E_Image_3Image.gameObject.SetActive(false);
+            self.View.E_Image_2Image.gameObject.SetActive(true);
+            CommonViewHelper.DOScale(self.View.E_Image_2Image.transform, Vector3.zero, 1f);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            if (instanceId != self.InstanceId)
+            {
+                return;
+            }
+
+            self.View.E_Image_2Image.gameObject.SetActive(false);
+            self.View.E_Image_1Image.gameObject.SetActive(true);
+            CommonViewHelper.DOScale(self.View.E_Image_1Image.transform, Vector3.zero, 1f);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            if (instanceId != self.InstanceId)
+            {
+                return;
+            }
+
+            self.View.E_Image_1Image.gameObject.SetActive(false);
+            self.View.E_DiImage.gameObject.SetActive(false);
+            await PetNetHelper.PetMeleeBeginRequest(self.Root());
+            self.BeginCountdown().Coroutine();
+        }
+
+        public static async ETTask BeginCountdown(this DlgPetMeleeMain self)
+        {
+            long instanceId = self.InstanceId;
+            int cdTime = (int)ConfigData.PetMeleeBattleMaxTime / 1000;
+
+            for (int i = cdTime; i >= 0; i--)
+            {
+                if (instanceId != self.InstanceId)
                 {
-                    using (zstring.Block())
-                    {
-                        self.View.E_LeftTimeTextText.text = zstring.Format("{0}秒后战斗开始！", leftTime / 1000);
-                    }
+                    return;
+                }
 
-                    self.View.E_LeftTimeImgImage.fillAmount = leftTime * 1f / self.ReadyTime;
+                if (self.IsGameOver)
+                {
+                    return;
+                }
+
+                if (i == 0)
+                {
+                    self.View.E_CountdownTimeText.text = i.ToString();
                 }
                 else
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("一大波怪物正在来袭!!!");
-                    PetNetHelper.PetMeleeBeginRequest(self.Root()).Coroutine();
-                    self.View.EG_LeftTimeRectTransform.gameObject.SetActive(false);
-                    self.StartTime = nowTime;
-                    self.GameStart = true;
-                }
-            }
-            else
-            {
-                long leftTime = ConfigData.PetMeleeBattleMaxTime - (nowTime - self.StartTime);
-                using (zstring.Block())
-                {
-                    self.View.E_LeftTimeTextText.text = zstring.Format("{0}秒后战斗结束！", leftTime / 1000);
+                    self.View.E_CountdownTimeText.text = i.ToString();
+                    await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
                 }
             }
         }

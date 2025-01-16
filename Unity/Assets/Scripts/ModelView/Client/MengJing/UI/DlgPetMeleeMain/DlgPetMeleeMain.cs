@@ -13,18 +13,8 @@ namespace ET.Client
 
         public Vector2 PreviousPressPosition;
 
-        public Dictionary<int, EntityRef<Scroll_Item_PetMeleeItem>> ScrollItemPetMeleeItems;
-        public List<RolePetInfo> ShowRolePetInfos = new();
-        public long PetId;
-        public bool CanPlace;
-        public long StartTime;
-        public long ReadyTime;
-        public int MaxMoLi;
-        public int MoLi;
-        public int MoLiRegenRate;
-        public long LastMoLiRegenTime;
-        public int CostMoLi;
-        public bool GameStart;
+        public bool IsGameOver;
         public long Timer;
+        public float BeginTime;
     }
 }
