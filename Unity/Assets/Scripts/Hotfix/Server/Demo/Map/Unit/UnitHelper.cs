@@ -440,8 +440,16 @@ namespace ET.Server
                 return !self.IsMasterOrPet(defend, petComponent);
             }
 
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                if (defend.Type == UnitType.Player)
+                {
+                    return false;
+                }
+                return self.GetBattleCamp() != defend.GetBattleCamp();
+            }
+            
             if (mapComponent.SceneType == SceneTypeEnum.Battle
-                || mapComponent.SceneType == SceneTypeEnum.PetMelee
                 || mapComponent.SceneType == SceneTypeEnum.Demon)
             {
                 return self.GetBattleCamp() != defend.GetBattleCamp();
@@ -451,15 +459,7 @@ namespace ET.Server
             {
                 return false;
             }
-
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
-            {
-                if (defend.Type == UnitType.Player)
-                {
-                    return false;
-                }
-            }
-
+            
             int camp_1 = self.GetBattleCamp();
             int camp_2 = defend.GetBattleCamp();
             bool result = camp_1!= camp_2 && !self.IsSameTeam(defend);
