@@ -42,11 +42,11 @@ namespace ET.Server
             }
             
             //机器人直接下线
-            if (self.Player.Account.Contains("_"))
-            {
-                self.Player.RemoveComponent<PlayerOfflineOutTimeComponent>();
-                DisconnectHelper.KickPlayer(self.Player).Coroutine();
-            }
+            // if (self.Player.Account.Contains("_"))
+            // {
+            //     self.Player.RemoveComponent<PlayerOfflineOutTimeComponent>();
+            //     DisconnectHelper.KickPlayer(self.Player).Coroutine();
+            // }
         }
         
         [EntitySystem]

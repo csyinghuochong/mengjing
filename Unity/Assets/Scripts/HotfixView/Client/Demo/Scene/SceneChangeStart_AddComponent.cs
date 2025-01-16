@@ -9,7 +9,6 @@ namespace ET.Client
         {
             try
             {
-                ConfigData.LoadSceneFinished = false;   //加载场景完毕 才能加载模型
                 root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
                         
                 UIComponent uiComponent = root.GetComponent<UIComponent>();

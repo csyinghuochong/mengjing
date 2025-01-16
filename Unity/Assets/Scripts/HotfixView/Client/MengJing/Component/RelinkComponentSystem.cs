@@ -137,7 +137,7 @@
             for (int i = 0; i < 5; i++)
             {
                 long instanceid = self.InstanceId;
-                Log.Debug($"重连请求11！！ {self.Relink}");
+                Log.Debug($"重连请求  {i} ！！ {self.Relink}");
                 if (timerComponent == null || !self.Relink)
                 {
                     break;
@@ -153,8 +153,7 @@
                 {
                     break;
                 }
-
-                Log.Debug($"重连请求22！！ {self.Relink}");
+                
                 self.SendLogin().Coroutine();
                 if (i == 4)
                 {

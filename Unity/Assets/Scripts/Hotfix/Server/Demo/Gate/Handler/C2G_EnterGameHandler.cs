@@ -59,6 +59,7 @@ namespace ET.Server
 
                     if (player.PlayerState == PlayerState.Game && request.ReLink == 0)
                     {
+                        Console.WriteLine($"G2M_RequestExitGame:  {player.Id} ");
                         var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
                         player.RemoveComponent<GateMapComponent>();
                         player.PlayerState = PlayerState.Gate;

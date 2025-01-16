@@ -37,7 +37,8 @@ namespace ET.Server
                 
                 if (request.ReLink == 0)
                 {
-                      DisconnectHelper.KickPlayerNoLock(player, 4).Coroutine();
+                    //非重连流程 直接踢下线。  客户端要延迟一帧entergame
+                    await  DisconnectHelper.KickPlayerNoLock(player, 4);
                 }
             }
         }

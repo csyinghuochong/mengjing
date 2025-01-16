@@ -47,6 +47,11 @@ namespace ET
             int sceneType = root.GetComponent<MapComponent>().SceneType;
             while (true)
             {
+                if (unit.IsDisposed)
+                {
+                    break;
+                }
+
                 Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
                 if (target != null && target.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Dead) == 0
                     && math.distance(unit.Position, target.Position) < aiComponent.ActDistance)
