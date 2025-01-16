@@ -122,7 +122,7 @@ namespace ET.Client
                 //     return;
                 // }
                 // 测试技能
-                List<int> skillids = new List<int>() { 2200090 }; //40000011 40000012
+                List<int> skillids = new List<int>() { 2200140 }; //40000011 40000012
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 long targetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
 

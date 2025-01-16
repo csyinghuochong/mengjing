@@ -207,16 +207,17 @@ namespace ET.Server
                 //equipIndex 0弓   1剑
                 int huifuspeed = equipIndex == 0 ? 1 : 2;  
                 
-                //再加上恢复速度加速 huifuspeed * (1 + NumericType.SkillRestoreMP)
-                if (addMp == 0f && nowMp < maxMp)
+                //再加上恢复速度加速
+                huifuspeed = (int)(10 * huifuspeed * (1 + addMp));
+                
+                nowMp = nowMp + huifuspeed;
+
+                if (nowMp > maxMp)
                 {
-                    numericComponent.ApplyValue(NumericType.SkillUseMP, 10 * huifuspeed);
+                    nowMp = maxMp;
                 }
 
-                if (addMp > 0f && nowMp < maxMp)
-                {
-                    numericComponent.ApplyValue(NumericType.SkillUseMP, 10 * huifuspeed);
-                }
+                numericComponent.ApplyValue(NumericType.SkillUseMP, nowMp);
             }
         }
 
