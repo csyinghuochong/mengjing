@@ -372,7 +372,7 @@ namespace ET.Client
                     break;
                 case SceneTypeEnum.PetMelee:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeMain).Coroutine();
-                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    dlgMain.View.uiTransform.localScale = Vector3.zero;
                     break;
                 default:
                     dlgMain.View.uiTransform.localScale = Vector3.one;
