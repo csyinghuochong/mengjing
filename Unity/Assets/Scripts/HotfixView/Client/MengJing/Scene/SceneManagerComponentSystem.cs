@@ -160,13 +160,18 @@ namespace ET.Client
             }
             if (sceneTypeEnum != SceneTypeEnum.LoginScene)
             {
-                EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+                ConfigData.LoadSceneFinished = true;
             }
 
             self.UpdateChuanSong(sceneTypeEnum);
 
             int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
             self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, sceneid, sousceneid);
+        }
+
+        public static void BeforeChangeScene(this SceneManagerComponent self)
+        {
+            ConfigData.LoadSceneFinished = false;
         }
     }
 }

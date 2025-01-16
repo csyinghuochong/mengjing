@@ -7,9 +7,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, SessionDispose args)
         {
-           
             //await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
-            ConfigData.LoadSceneFinished = false;
             //先简单做一下断线重连
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;

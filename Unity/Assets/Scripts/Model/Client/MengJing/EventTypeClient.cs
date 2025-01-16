@@ -448,10 +448,6 @@ namespace ET.Client
         public M2C_RunRaceBattleInfo M2C_RunRaceBattleInfo;
     }
 
-    public struct LoadSceneFinished
-    {
-    }
-
     public struct JingLingGet
     {
         public int JingLingId;

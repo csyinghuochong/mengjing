@@ -9,10 +9,10 @@ namespace ET.Client
         {
             try
             {
-                Scene currentScene = root.CurrentScene();
-
+                ConfigData.LoadSceneFinished = false;   //加载场景完毕 才能加载模型
+                root.GetComponent<SceneManagerComponent>().BeforeChangeScene();
+                        
                 UIComponent uiComponent = root.GetComponent<UIComponent>();
-
                 await uiComponent.ShowWindowAsync(WindowID.WindowID_Loading);
                 uiComponent.GetDlgLogic<DlgLoading>().OnInitUI(args.LastSceneType, args.SceneType, args. ChapterId);
 
