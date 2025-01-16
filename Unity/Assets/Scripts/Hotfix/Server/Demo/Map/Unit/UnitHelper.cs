@@ -452,6 +452,14 @@ namespace ET.Server
                 return false;
             }
 
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                if (defend.Type == UnitType.Player)
+                {
+                    return false;
+                }
+            }
+
             int camp_1 = self.GetBattleCamp();
             int camp_2 = defend.GetBattleCamp();
             bool result = camp_1!= camp_2 && !self.IsSameTeam(defend);

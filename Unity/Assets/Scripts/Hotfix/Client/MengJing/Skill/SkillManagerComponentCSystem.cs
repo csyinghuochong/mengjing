@@ -380,13 +380,15 @@ namespace ET.Client
                 EventSystem.Instance.Publish(self.Root(), new OnSkillUse() { SkillId = skillcmd.SkillID });
             }
 
+            unit.SpeedRate = 100;
             if (unit.Type != UnitType.Player && skillcmd.SkillInfos.Count > 0)
             {
                 Unit target = unit.GetParent<UnitComponent>().Get(skillcmd.SkillInfos[0].TargetID);
                 if (target != null)
                 {
-                    //float3 direction = target.Position - unit.Position;
-                    //float ange =Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
+                    // float3 dir = target.Position - unit.Position ;
+                    // float ange = math.atan2(dir.x, dir.z);
+                    // unit.Rotation = quaternion.Euler(0, ange, 0);
                     unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
                 }
                 else

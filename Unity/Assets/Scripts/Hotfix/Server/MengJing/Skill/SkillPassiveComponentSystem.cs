@@ -483,12 +483,12 @@ namespace ET.Server
                 targetIdList.Add(targetId);
             }
 
-            int targetAngle = 0; // (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
+            int targetAngle = 0; 
             Unit target = unit.GetParent<UnitComponent>().Get(targetId);
             if (target != null && target.Id != targetId)
             {
-                float3 direction = target.Position - unit.Position;
-                targetAngle = 0; // (int)Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
+                float3 dir = target.Position - unit.Position;
+                targetAngle =  (int)math.degrees( math.degrees(math.atan2(dir.x, dir.z)));
             }
 
             SkillManagerComponentS skillManagerComponent = unit.GetComponent<SkillManagerComponentS>();
