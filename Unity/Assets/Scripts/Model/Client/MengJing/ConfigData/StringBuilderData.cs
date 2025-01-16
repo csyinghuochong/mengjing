@@ -47,37 +47,7 @@ namespace ET.Client
 
         [StaticField]
         public static string MainCity = "101";
-
-        [StaticField]
-        public static string GuangHuan = "GuangHuan";
-
-        [StaticField]
-        public static string UI_pro_4_2 = "UI_pro_4_2";
-
-        [StaticField]
-        public static string UI_pro_3_2 = "UI_pro_3_2";
-
-        [StaticField]
-        public static string UI_pro_3_4 = "UI_pro_3_4";
-
-        [StaticField]
-        public static string 族长 = "族长";
-
-        [StaticField]
-        public static string 成员 = "成员";
-
-        [StaticField]
-        public static string ai_1 = "AI_XunLuo";
-
-        [StaticField]
-        public static string ai_2 = "AI_ZhuiJi";
-
-        [StaticField]
-        public static string ai_3 = "AI_LocalDungeon";
-
-        [StaticField]
-        public static string 内存占用 = "内存占用:";
-
+        
         [StaticField]
         public static string UnitFashionPath_1 = "Assets/Bundles/Unit/Parts/1/";
 

@@ -6,7 +6,7 @@
         protected override async ETTask Run(Unit unit, C2M_PetMeleeGetMyCards request, M2C_PetMeleeGetMyCards response)
         {
             // 当掉线重新连接了，可以发送这个消息拿到当前的卡牌
-
+            // 重连成功，派发事件， 各自的模块去处理。。
             PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
             if (petMeleeDungeonComponent != null)
             {
