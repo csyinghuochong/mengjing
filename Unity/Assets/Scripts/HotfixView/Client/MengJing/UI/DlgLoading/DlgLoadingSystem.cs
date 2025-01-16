@@ -440,7 +440,7 @@ namespace ET.Client
                 camera.GetComponent<Camera>().fieldOfView = 50;
 
                 //播放传送特效
-                if (sceneType != SceneTypeEnum.MainCityScene)
+                if (sceneType != SceneTypeEnum.MainCityScene && sceneType != SceneTypeEnum.PetMelee)
                 {
                     FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 }
