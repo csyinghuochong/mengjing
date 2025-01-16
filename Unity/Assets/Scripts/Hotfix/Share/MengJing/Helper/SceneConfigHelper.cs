@@ -49,7 +49,8 @@ namespace ET
                 || sceneTypeEnum == SceneTypeEnum.TrialDungeon
                 || sceneTypeEnum == SceneTypeEnum.SealTower
                 || sceneTypeEnum == SceneTypeEnum.PetMing
-                || sceneTypeEnum == SceneTypeEnum.SeasonTower;
+                || sceneTypeEnum == SceneTypeEnum.SeasonTower
+                || sceneTypeEnum == SceneTypeEnum.PetMelee;
         }
 
 

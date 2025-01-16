@@ -82,6 +82,11 @@ namespace ET.Server
         {
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
         }
+        
+        public static int GetMonsterSonType(this Unit self)
+        {
+            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+        }
 
         public static bool IsSceneItem(this Unit self)
         {
@@ -91,6 +96,16 @@ namespace ET.Server
             }
 
             return self.GetMonsterType() == MonsterTypeEnum.SceneItem;
+        }
+
+        public static bool IsTowerMonster(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+
+            return self.GetMonsterSonType() > 0;
         }
 
         public static bool IsSameTeam(this Unit self, Unit other)

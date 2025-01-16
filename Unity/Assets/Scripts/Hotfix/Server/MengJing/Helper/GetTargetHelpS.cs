@@ -112,6 +112,60 @@ namespace ET.Server
             return nearest;
         }
 
+        
+        /// <summary>
+        /// 服务器使用。不需要找最近的
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="maxdis"></param>
+        /// <param name="isMini">是否要最小距离</param>
+        /// <param name="unitType">目标Unit类型</param>
+        /// <returns></returns>
+        public static Unit GetNearestEnemyExcludeSonType(Unit main, float maxdis, bool isMini = false, int unitType = 0)
+        {
+            Unit nearest = null;
+            float minDistance = maxdis;
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
+            for (int i = 0; i < units.Count; i++)
+            {
+                Unit unit = units[i];
+                if (unit.IsDisposed || main.Id == unit.Id)
+                {
+                    continue;
+                }
+
+                if (unitType != 0 && unit.Type != unitType)
+                {
+                    continue;
+                }
+
+                if (unit.IsTowerMonster())
+                {
+                    continue;
+                }
+
+                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
+                if (dd > maxdis || !main.IsCanAttackUnit(unit))
+                {
+                    continue;
+                }
+
+                if (!isMini)
+                {
+                    //找到目标直接跳出来
+                    nearest = unit;
+                    break;
+                }
+
+                if (dd < minDistance)
+                {
+                    minDistance = dd;
+                    nearest = unit;
+                }
+            }
+
+            return nearest;
+        }
 
         public static Unit GetNearestEnemyByPosition(Unit main, float3 position, float maxdis)
         {

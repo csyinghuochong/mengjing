@@ -394,8 +394,7 @@ namespace ET.Server
                     unit.AddComponent<AIComponent, int>(1).InitTianTiPet(petinfo.ConfigId); //AI行为树序号  撤退
                     break;
                 case SceneTypeEnum.PetMelee:
-                    AIComponent aiComponent = unit.AddComponent<AIComponent, int>(15);
-                    aiComponent.TargetPoint.Add(new float3(13, 0, 0));
+                    AIComponent aiComponent = unit.AddComponent<AIComponent, int>(16);
                     aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
                     break;
                 default:
