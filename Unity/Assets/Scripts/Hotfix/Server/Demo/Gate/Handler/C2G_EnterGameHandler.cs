@@ -72,7 +72,7 @@ namespace ET.Server
                             M2G_SecondLogin reqEnter = await session.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin) as M2G_SecondLogin;
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
-                                Log.Console("二次登陆逻辑，补全下发切换场景消息");
+                                Console.WriteLine($"二次登陆逻辑，补全下发切换场景消息:{request.UnitId}");
                                 G2C_SecondLogin g2CSecondLogin = G2C_SecondLogin.Create();
                                 g2CSecondLogin.SceneType = reqEnter.SceneType;
                                 g2CSecondLogin.SceneId = reqEnter.SceneId;
