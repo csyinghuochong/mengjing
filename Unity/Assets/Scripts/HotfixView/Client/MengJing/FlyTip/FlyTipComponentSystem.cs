@@ -135,8 +135,15 @@ namespace ET.Client
             RectTransform rectTransform = FlyTipGO.transform.GetComponent<RectTransform>();
             rectTransform.localPosition = startPos;
             rectTransform.localScale = Vector3.one;
+            long instanceid = self.InstanceId;
             rectTransform.DOLocalMoveY(0, 2f).SetEase(Ease.OutQuad).onComplete = () =>
             {
+                if (instanceid != self.InstanceId)
+                {
+                    GameObject.DestroyImmediate(FlyTipGO);
+                    return;
+                }
+
                 FlyTipGO.SetActive(false);
                 self.FlyTips.Remove(FlyTipGO);
                 GameObjectPoolHelper.ReturnObjectToPool(FlyTipGO);
@@ -176,8 +183,15 @@ namespace ET.Client
             RectTransform rectTransform = FlyTipDiGO.transform.GetComponent<RectTransform>();
             rectTransform.localPosition = startPos;
             rectTransform.localScale = Vector3.one;
+            long instanceid = self.InstanceId;
             rectTransform.GetComponent<RectTransform>().DOMoveY(0, 2f).SetEase(Ease.OutQuad).onComplete = () =>
             {
+                if (instanceid != self.InstanceId)
+                {
+                    GameObject.DestroyImmediate(FlyTipDiGO);
+                    return;
+                }
+                
                 FlyTipDiGO.SetActive(false);
                 self.FlyTipDis.Remove(FlyTipDiGO);
                 GameObjectPoolHelper.ReturnObjectToPool(FlyTipDiGO);
