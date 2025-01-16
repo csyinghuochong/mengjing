@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -51,6 +52,10 @@ namespace ET.Client
 
         private static async ETTask OnUpdateUI(this ES_RankShow self, int type = 0)
         {
+            self.EG_Rank_1RectTransform.gameObject.SetActive(false);
+            self.EG_Rank_2RectTransform.gameObject.SetActive(false);
+            self.EG_Rank_3RectTransform.gameObject.SetActive(false);
+
             long instanceid = self.InstanceId;
 
             R2C_RankListResponse response = await RankNetHelper.RankList(self.Root());
@@ -76,6 +81,36 @@ namespace ET.Client
                 if (selfId == response.RankList[i].UserId)
                 {
                     myRank = rank;
+                }
+
+                if (rank == 1)
+                {
+                    self.EG_Rank_1RectTransform.gameObject.SetActive(true);
+                    self.EG_Rank_1RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
+                    self.EG_Rank_1RectTransform.Find("HeadIconImg").GetComponent<Image>().sprite =
+                            self.Root().GetComponent<ResourcesLoaderComponent>()
+                                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, response.RankList[i].Occ.ToString()));
+                    self.EG_Rank_1RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
+                }
+
+                if (rank == 2)
+                {
+                    self.EG_Rank_2RectTransform.gameObject.SetActive(true);
+                    self.EG_Rank_2RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
+                    self.EG_Rank_2RectTransform.Find("HeadIconImg").GetComponent<Image>().sprite =
+                            self.Root().GetComponent<ResourcesLoaderComponent>()
+                                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, response.RankList[i].Occ.ToString()));
+                    self.EG_Rank_2RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
+                }
+
+                if (rank == 3)
+                {
+                    self.EG_Rank_3RectTransform.gameObject.SetActive(true);
+                    self.EG_Rank_3RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
+                    self.EG_Rank_3RectTransform.Find("HeadIconImg").GetComponent<Image>().sprite =
+                            self.Root().GetComponent<ResourcesLoaderComponent>()
+                                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, response.RankList[i].Occ.ToString()));
+                    self.EG_Rank_3RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
                 }
 
                 rank++;

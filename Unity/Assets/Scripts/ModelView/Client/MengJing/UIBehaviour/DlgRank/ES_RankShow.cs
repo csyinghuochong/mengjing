@@ -151,6 +151,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_Rank_1RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Rank_1RectTransform == null )
+     			{
+		    		this.m_EG_Rank_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_1");
+     			}
+     			return this.m_EG_Rank_1RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_Rank_2RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Rank_2RectTransform == null )
+     			{
+		    		this.m_EG_Rank_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_2");
+     			}
+     			return this.m_EG_Rank_2RectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_Rank_3RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_Rank_3RectTransform == null )
+     			{
+		    		this.m_EG_Rank_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_3");
+     			}
+     			return this.m_EG_Rank_3RectTransform;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -173,6 +224,9 @@ namespace ET.Client
 			this.m_E_HeadIcomImage2Image = null;
 			this.m_E_HeadIcomImage3Image = null;
 			this.m_E_Text_MyRankText = null;
+			this.m_EG_Rank_1RectTransform = null;
+			this.m_EG_Rank_2RectTransform = null;
+			this.m_EG_Rank_3RectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -184,6 +238,9 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_HeadIcomImage2Image = null;
 		private UnityEngine.UI.Image m_E_HeadIcomImage3Image = null;
 		private UnityEngine.UI.Text m_E_Text_MyRankText = null;
+		private UnityEngine.RectTransform m_EG_Rank_1RectTransform = null;
+		private UnityEngine.RectTransform m_EG_Rank_2RectTransform = null;
+		private UnityEngine.RectTransform m_EG_Rank_3RectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
