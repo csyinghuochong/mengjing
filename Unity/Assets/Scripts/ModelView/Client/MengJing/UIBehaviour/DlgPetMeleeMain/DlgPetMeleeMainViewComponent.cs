@@ -211,6 +211,142 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_DiRenHpImgImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DiRenHpImgImage == null )
+     			{
+		    		this.m_E_DiRenHpImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DiRenSet/E_DiRenHpImg");
+     			}
+     			return this.m_E_DiRenHpImgImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_DiRenHpTxtText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DiRenHpTxtText == null )
+     			{
+		    		this.m_E_DiRenHpTxtText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"DiRenSet/E_DiRenHpTxt");
+     			}
+     			return this.m_E_DiRenHpTxtText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_DiRenNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DiRenNumText == null )
+     			{
+		    		this.m_E_DiRenNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"DiRenSet/E_DiRenNum");
+     			}
+     			return this.m_E_DiRenNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_JiFanHpImgImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiFanHpImgImage == null )
+     			{
+		    		this.m_E_JiFanHpImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"JiFangSet/E_JiFanHpImg");
+     			}
+     			return this.m_E_JiFanHpImgImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_JiFanHpTxtText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiFanHpTxtText == null )
+     			{
+		    		this.m_E_JiFanHpTxtText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"JiFangSet/E_JiFanHpTxt");
+     			}
+     			return this.m_E_JiFanHpTxtText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_JiFanNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiFanNumText == null )
+     			{
+		    		this.m_E_JiFanNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"JiFangSet/E_JiFanNum");
+     			}
+     			return this.m_E_JiFanNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_RerurnButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RerurnButton == null )
+     			{
+		    		this.m_E_RerurnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Rerurn");
+     			}
+     			return this.m_E_RerurnButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RerurnImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RerurnImage == null )
+     			{
+		    		this.m_E_RerurnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Rerurn");
+     			}
+     			return this.m_E_RerurnImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_TouchImage = null;
@@ -225,6 +361,14 @@ namespace ET.Client
 			this.m_E_IconEventTrigger = null;
 			this.m_EG_CardInHandRectTransform = null;
 			this.m_EG_CardPoolRectTransform = null;
+			this.m_E_DiRenHpImgImage = null;
+			this.m_E_DiRenHpTxtText = null;
+			this.m_E_DiRenNumText = null;
+			this.m_E_JiFanHpImgImage = null;
+			this.m_E_JiFanHpTxtText = null;
+			this.m_E_JiFanNumText = null;
+			this.m_E_RerurnButton = null;
+			this.m_E_RerurnImage = null;
 			this.uiTransform = null;
 		}
 
@@ -240,6 +384,14 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_CardInHandRectTransform = null;
 		private UnityEngine.RectTransform m_EG_CardPoolRectTransform = null;
+		private UnityEngine.UI.Image m_E_DiRenHpImgImage = null;
+		private UnityEngine.UI.Text m_E_DiRenHpTxtText = null;
+		private UnityEngine.UI.Text m_E_DiRenNumText = null;
+		private UnityEngine.UI.Image m_E_JiFanHpImgImage = null;
+		private UnityEngine.UI.Text m_E_JiFanHpTxtText = null;
+		private UnityEngine.UI.Text m_E_JiFanNumText = null;
+		private UnityEngine.UI.Button m_E_RerurnButton = null;
+		private UnityEngine.UI.Image m_E_RerurnImage = null;
 		public Transform uiTransform = null;
 	}
 }

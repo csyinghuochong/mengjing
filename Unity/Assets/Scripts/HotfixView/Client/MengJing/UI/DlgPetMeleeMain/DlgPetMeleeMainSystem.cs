@@ -53,6 +53,7 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIPetMeleeMain, self);
             self.UpdateMoLi();
             self.View.E_IconImage.gameObject.SetActive(false);
+            self.View.E_RerurnButton.AddListener(self.OnRerurnButton);
         }
 
         public static void ShowWindow(this DlgPetMeleeMain self, Entity contextData = null)
@@ -72,6 +73,13 @@ namespace ET.Client
             self.PetMeleeCardInHand = null;
             self.PetMeleeCardPool.Clear();
             self.PetMeleeCardPool = null;
+        }
+
+        private static void OnRerurnButton(this DlgPetMeleeMain self)
+        {
+            string tipStr = "是否强制退出战斗！";
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "", tipStr, () => { EnterMapHelper.RequestQuitFuben(self.Root()); }, null).Coroutine();
         }
 
         private static async ETTask InitCard(this DlgPetMeleeMain self)
