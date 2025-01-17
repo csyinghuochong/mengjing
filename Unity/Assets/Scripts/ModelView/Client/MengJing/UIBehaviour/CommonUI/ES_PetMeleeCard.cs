@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public PetMeleeCardInfo PetMeleeCardInfo;
 		public GameObject GameObject;
@@ -32,7 +32,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_CostText
+		public UnityEngine.UI.Text E_Cost_ActiveText
      	{
      		get
      		{
@@ -41,15 +41,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CostText == null )
+     			if( this.m_E_Cost_ActiveText == null )
      			{
-		    		this.m_E_CostText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Cost");
+		    		this.m_E_Cost_ActiveText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Cost_Active");
      			}
-     			return this.m_E_CostText;
+     			return this.m_E_Cost_ActiveText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TypeText
+		public UnityEngine.UI.Text E_Cost_InactiveText
      	{
      		get
      		{
@@ -58,11 +58,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TypeText == null )
+     			if( this.m_E_Cost_InactiveText == null )
      			{
-		    		this.m_E_TypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Type");
+		    		this.m_E_Cost_InactiveText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Cost_Inactive");
      			}
-     			return this.m_E_TypeText;
+     			return this.m_E_Cost_InactiveText;
      		}
      	}
 
@@ -80,6 +80,23 @@ namespace ET.Client
 		    		this.m_E_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Name");
      			}
      			return this.m_E_NameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TypeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TypeText == null )
+     			{
+		    		this.m_E_TypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Type");
+     			}
+     			return this.m_E_TypeText;
      		}
      	}
 
@@ -166,9 +183,10 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_BackImage = null;
-			this.m_E_CostText = null;
-			this.m_E_TypeText = null;
+			this.m_E_Cost_ActiveText = null;
+			this.m_E_Cost_InactiveText = null;
 			this.m_E_NameText = null;
+			this.m_E_TypeText = null;
 			this.m_E_IconImage = null;
 			this.m_E_Icon2Image = null;
 			this.m_E_TouchImage = null;
@@ -177,9 +195,10 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_BackImage = null;
-		private UnityEngine.UI.Text m_E_CostText = null;
-		private UnityEngine.UI.Text m_E_TypeText = null;
+		private UnityEngine.UI.Text m_E_Cost_ActiveText = null;
+		private UnityEngine.UI.Text m_E_Cost_InactiveText = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
+		private UnityEngine.UI.Text m_E_TypeText = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.UI.Image m_E_Icon2Image = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;

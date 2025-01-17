@@ -214,11 +214,13 @@ namespace ET.Client
         {
             FlyTipComponent.Instance.ShowFlyTip($"发放卡牌 {cards.Count} 张");
 
+            NumericComponentC numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             foreach (PetMeleeCardInfo cardInfo in cards)
             {
                 ES_PetMeleeCard esPetMeleeCard = self.GetCardFromPool();
                 self.PetMeleeCardInHand.Add(esPetMeleeCard);
                 esPetMeleeCard.InitCard(cardInfo);
+                esPetMeleeCard.UpdateCostText(numericComponentC.GetAsInt(NumericType.PetMeleeMoLi));
             }
 
             self.ArrangeCards();
@@ -356,6 +358,12 @@ namespace ET.Client
             }
 
             self.View.E_MoLiImgImage.fillAmount = numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax;
+
+            for (int i = 0; i < self.PetMeleeCardInHand.Count; i++)
+            {
+                ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardInHand[i];
+                esPetMeleeCard.UpdateCostText(numericComponentC.GetAsInt(NumericType.PetMeleeMoLi));
+            }
         }
 
         public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position)
