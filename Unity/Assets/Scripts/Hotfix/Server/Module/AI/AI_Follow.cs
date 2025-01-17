@@ -25,6 +25,10 @@ namespace ET.Server
                 return 0;
             }
 
+            if (attackRecordComponent.AttackingId == unit.Id)
+            {
+                attackRecordComponent.AttackingId = 0;
+            }
             long mastaerAttackId = attackRecordComponent.PetLockId;
             Unit enemyUnit = unitComponent.Get(mastaerAttackId);
             if (enemyUnit == null || !enemyUnit.IsCanBeAttack())

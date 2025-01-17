@@ -25,7 +25,6 @@ namespace ET
              NumericType.Born_X,
              NumericType.Born_Y,
              NumericType.Born_Z,
-             NumericType.Now_AI,
              NumericType.TeamId,
              NumericType.HorseRide,
              NumericType.TitleID,

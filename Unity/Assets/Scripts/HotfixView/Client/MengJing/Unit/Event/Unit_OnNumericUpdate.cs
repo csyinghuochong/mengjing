@@ -224,9 +224,6 @@
                     int incombat = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.BossInCombat);
                     args.Defend.GetComponent<MonsterActRangeComponent>()?.OnBossInCombat(incombat);
                     break;
-                case NumericType.Now_AI:
-                    args.Defend.GetComponent<UIPlayerHpComponent>()?.UpdateAI();
-                    break;
                 case NumericType.Now_TurtleAI:
                     //小龟状态改变。 头顶随机说一句话
                     args.Defend.GetComponent<UINpcHpComponent>()?.UpdateTurtleAI();

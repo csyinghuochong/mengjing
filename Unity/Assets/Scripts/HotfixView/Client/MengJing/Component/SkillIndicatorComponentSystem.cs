@@ -391,6 +391,11 @@ namespace ET.Client
                         // }
 
                         StateComponentC stateComponent = u.GetComponent<StateComponentC>();
+                        if (stateComponent == null)
+                        {
+                            continue;
+                        }
+
                         if (stateComponent.StateTypeGet(StateTypeEnum.Stealth) || stateComponent.StateTypeGet(StateTypeEnum.Hide))
                         {
                             continue;

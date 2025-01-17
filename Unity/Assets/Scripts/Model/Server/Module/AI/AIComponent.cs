@@ -48,7 +48,6 @@ namespace ET.Server
         
         public int SceneType { get; set; }
         
-        public bool noCheckStatus { get; set; }            //检测状态  true 就是不检测 待机除外
         public int CheckJianGeTimeNum;          //检测间隔时间次数
 
         public long AIDelay;

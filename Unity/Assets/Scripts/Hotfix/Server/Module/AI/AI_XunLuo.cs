@@ -60,20 +60,19 @@ namespace ET.Server
                 return 1;
             }
             Unit unit = aiComponent.GetParent<Unit>();
-            Unit nearestEnemy = null;
+            Unit nearest = null;
             if (aiComponent.SceneType == SceneTypeEnum.PetDungeon
                 || aiComponent.SceneType == SceneTypeEnum.PetTianTi)
             {
-                nearestEnemy = GetNearestCell(unit);
+                nearest = GetNearestCell(unit);
             }
             else
             {
-                nearestEnemy = GetTargetHelpS.GetNearestEnemy(unit, aiComponent.ActRange, true); ;
+                nearest = GetTargetHelpS.GetNearestEnemy(unit, aiComponent.ActRange, true); ;
             } 
-            if (nearestEnemy == null)
+            if (nearest == null)
             {
                 aiComponent.TargetID = 0;
-                aiComponent.noCheckStatus = true;
                 return 1;
             }
 
@@ -81,7 +80,7 @@ namespace ET.Server
             {
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.BossInCombat, 1, true, true);
             }
-            aiComponent.TargetID = nearestEnemy.Id;
+            aiComponent.TargetID = nearest.Id;
             return (aiComponent.TargetID == 0) ? 1 : 0;
         }
 

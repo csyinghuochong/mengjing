@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -139,28 +140,50 @@ namespace ET.Server
 
                         heroCom.ApplyChange(NumericType.Now_Hp, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0, nowdamgeType);
                     }
-                    else if (NowBuffParameterType == 3164)
+                    else if (NowBuffParameterType == NumericType.CardTransform)
                     {
                         heroCom.ApplyChange(NumericType.CardTransform, (int)(buffS.mBuffConfig.buffParameterValue), true, true, buffS.TheUnitFrom.Id,0, 0);
                     }
-                    else if (NowBuffParameterType == 3134)
+                    else if (NowBuffParameterType == NumericType.SkillUseMP)
                     {
                         heroCom.ApplyChange(NumericType.SkillUseMP, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0);
                     }
+                    else if (NowBuffParameterType == NumericType.BattleCamp)
+                    {
+                        int oldCamp = heroCom.GetAsInt(NumericType.BattleCamp);
+                        int oldAi  = heroCom.GetAsInt(NumericType.Old_AI);
+                        int newCamp = buffS.TheUnitFrom.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
+                        heroCom.ApplyValue(NumericType.BattleCamp, newCamp, true, true, 0, 0);
+                        heroCom.ApplyValue(NumericType.BattleCampOld, oldCamp, true, true, 0, 0);
+                        heroCom.ApplyValue(NumericType.MasterId,  buffS.TheUnitFrom.Id, true, true, 0, 0);
+                        heroCom.ApplyValue(NumericType.Old_AI, oldAi, true, true, 0, 0);
+
+                        AttackRecordComponent attackRecordComponent = buffS.TheUnitFrom.GetComponent<AttackRecordComponent>();
+                        attackRecordComponent.BeAttackId = 0;
+                        attackRecordComponent.AttackingId = 0;
+
+                        AIComponent belongToAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
+                        buffS.TheUnitBelongto.MasterId = buffS.TheUnitFrom.Id;
+                        belongToAIComponent.AIConfigId = 2;
+                        belongToAIComponent.TargetID = 0;
+                        belongToAIComponent.Stop_2();
+                        belongToAIComponent.Begin();
+                        Console.WriteLine($"newCamp:   {heroCom.Id}   {oldCamp} ==>  {newCamp}");
+                    }
                     else
                     {
+                        HeroDataComponentS heroDataComponentS = buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>();
                         //整数
                         if (ValueType == 0)
                         {
-                            buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>()
-                                    .BuffPropertyUpdate_Long(NowBuffParameterType, (long)buffS.NowBuffValue);
+                            
+                            heroDataComponentS.BuffPropertyUpdate_Long(NowBuffParameterType, (long)buffS.NowBuffValue);
                         }
 
                         //浮点数
                         if (ValueType == 1)
                         {
-                            buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>()
-                                    .BuffPropertyUpdate_Float(NowBuffParameterType, (float)buffS.NowBuffValue);
+                            heroDataComponentS .BuffPropertyUpdate_Float(NowBuffParameterType, (float)buffS.NowBuffValue);
                         }
                     }
 
@@ -251,34 +274,46 @@ namespace ET.Server
                 case 1:
                     //Log.Debug("执行buff移除属性...");
                     int NowBuffParameterType = buffS.mBuffConfig.buffParameterType;
+                    NumericComponentS numericComponentS = buffS.TheUnitBelongto.GetComponent<NumericComponentS>();
                     if (NowBuffParameterType == 3001)
                     {
                         //血量不进行移除
                     }
                     else if (NowBuffParameterType == 3164)
                     {
-                        buffS.TheUnitBelongto.GetComponent<NumericComponentS>().ApplyValue(NowBuffParameterType, 0);
+                        numericComponentS.ApplyValue(NowBuffParameterType, 0);
                     }
                     else if (NowBuffParameterType == 3134)
                     {
                         //怒气不进行移除
                     }
+                    else if (NowBuffParameterType == NumericType.BattleCamp)
+                    {
+                        int oldCamp = numericComponentS.GetAsInt(NumericType.BattleCampOld);
+                        int oldAi  =  numericComponentS.GetAsInt(NumericType.Old_AI);
+                        numericComponentS.ApplyValue(NumericType.BattleCamp, oldCamp, true, true, 0, 0);
+                        numericComponentS.ApplyValue(NumericType.MasterId,  0, true, true, 0, 0);
+
+                        AIComponent belongAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
+                        buffS.TheUnitBelongto.MasterId = 0;
+                        belongAIComponent.AIConfigId = oldAi;
+                        belongAIComponent.TargetID = 0;
+                        belongAIComponent.Stop_2();
+                        belongAIComponent.Begin();
+                    }
                     else
                     {
                         int ValueType = buffS.mBuffConfig.buffParameterValueDef; //0 表示整数  1表示浮点数
-
+                        HeroDataComponentS heroDataComponentS = buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>();
                         //整数
                         if (ValueType == 0)
                         {
-                            buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>()
-                                    .BuffPropertyUpdate_Long(NowBuffParameterType, (long)buffS.NowBuffValue * -1);
+                            heroDataComponentS.BuffPropertyUpdate_Long(NowBuffParameterType, (long)buffS.NowBuffValue * -1);
                         }
-
                         //浮点数
                         if (ValueType == 1)
                         {
-                            buffS.TheUnitBelongto.GetComponent<HeroDataComponentS>()
-                                    .BuffPropertyUpdate_Float(NowBuffParameterType, (float)buffS.NowBuffValue * -1);
+                            heroDataComponentS .BuffPropertyUpdate_Float(NowBuffParameterType, (float)buffS.NowBuffValue * -1);
                         }
                     }
 

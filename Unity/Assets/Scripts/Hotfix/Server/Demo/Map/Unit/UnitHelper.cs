@@ -356,13 +356,23 @@ namespace ET.Server
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
-
+            
             if (mapComponent.SceneType != SceneTypeEnum.Battle && mapComponent.SceneType != SceneTypeEnum.PetMelee &&
                 self.Type == UnitType.Monster && defend.Type == UnitType.Monster
                 && self.MasterId == 0 && defend.MasterId == 0)
             {
                 return false;
             }
+            
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                if (defend.Type == UnitType.Player)
+                {
+                    return false;
+                }
+                return self.GetBattleCamp() != defend.GetBattleCamp();
+            }
+
 
             if (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
                 || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
@@ -438,15 +448,6 @@ namespace ET.Server
             {
                 //允许pk地图
                 return !self.IsMasterOrPet(defend, petComponent);
-            }
-
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
-            {
-                if (defend.Type == UnitType.Player)
-                {
-                    return false;
-                }
-                return self.GetBattleCamp() != defend.GetBattleCamp();
             }
             
             if (mapComponent.SceneType == SceneTypeEnum.Battle
