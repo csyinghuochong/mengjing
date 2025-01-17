@@ -46,6 +46,7 @@ namespace ET.Client
             {
                 return false;
             }
+
             if (!self.GetComponent<StateComponentC>().IsCanBeAttack())
             {
                 return false;
