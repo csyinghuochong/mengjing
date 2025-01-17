@@ -456,7 +456,7 @@ namespace ET.Server
             }
 
             List<Unit> pets = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-            for (int i = 0; i < players.Count; i++)
+            for (int i = 0; i < pets.Count; i++)
             {
                 Unit unit = pets[i];
 
