@@ -513,11 +513,11 @@ namespace ET.Server
                         request.SceneId = M2T_TeamDungeonEnterRequest.SceneId;
                         T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, M2T_TeamDungeonEnterRequest);
+                        Console.WriteLine($"T2M_TeamDungeonEnterResponse:  {createUnit} { M2T_TeamDungeonEnterRequest.TeamId}");
                         if (createUnit.Error != ErrorCode.ERR_Success)
                         {
                             return ErrorCode.ERR_TransferFailError;
                         }
-                        Console.WriteLine($"T2M_TeamDungeonEnterResponse:  {createUnit} ");
                         BeforeTransfer(unit);
 
                         await Transfer(unit, createUnit.FubenActorId, request.SceneType, createUnit.FubenId, createUnit.FubenType, "0");

@@ -29,6 +29,7 @@ namespace ET.Server
             await unit.RemoveLocation(LocationType.Unit);
             
             unit.GetComponent<DBSaveComponent>().OnDisconnect();
+            unit.GetComponent<EnergyComponentS>().OnDisconnect();
         }
         
     }

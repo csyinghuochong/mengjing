@@ -87,7 +87,7 @@ namespace ET.Server
             {
                 unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());
             }
-            unit.GetComponent<EnergyComponentS>().OnDisconnect();
+           
             if (!unit.IsRobot())
             {
                 self.UpdateCacheDB();
