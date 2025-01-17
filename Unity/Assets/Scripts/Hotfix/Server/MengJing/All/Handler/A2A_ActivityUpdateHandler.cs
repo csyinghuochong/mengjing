@@ -138,7 +138,7 @@ namespace ET.Server
                     }
                     break;
                 case SceneType.DBCache:
-                    if (!ComHelperS.IsInnerNet())
+                    if (!CommonHelperS.IsInnerNet())
                     {
                         scene.GetComponent<UnitCacheComponent>().CheckUnitCacheList();
                     }

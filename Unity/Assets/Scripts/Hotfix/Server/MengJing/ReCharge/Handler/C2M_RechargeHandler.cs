@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_RechargeRequest request, M2C_RechargeResponse response)
         {
             // 测试
-            if(ComHelperS.IsInnerNet() || unit.IsRobot() || unit.ISGM())
+            if(CommonHelperS.IsInnerNet() || unit.IsRobot() || unit.ISGM())
             {
                 RechargeHelp.SendDiamondToUnit(unit, request.RechargeNumber, "GM");
             }

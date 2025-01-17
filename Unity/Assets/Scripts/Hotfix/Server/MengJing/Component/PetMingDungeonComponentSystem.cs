@@ -47,7 +47,7 @@ namespace ET.Server
 
              self.OnPetMingOccupy(mainUnit).Coroutine();
              long cdTime = result == CombatResultEnum.Win ? TimeHelper.Hour : TimeHelper.Minute * 10;
-             if (ComHelperS.IsInnerNet())
+             if (CommonHelperS.IsInnerNet())
              {
                  cdTime = TimeHelper.Second * 10;
              }
@@ -170,7 +170,7 @@ namespace ET.Server
                             CampEnum.CampPlayer_2, petInfo, ConfigData.Formation_2[k], 180f, k);
                          petunit.GetComponent<AIComponent>().Stop();
 
-                         if (ComHelperS.IsInnerNet())
+                         if (CommonHelperS.IsInnerNet())
                          {
                              break;
                          }

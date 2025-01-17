@@ -370,7 +370,7 @@ namespace ET.Server
                     unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanLevel_404, 0, self.UserInfo.JiaYuanLv - 10000);
                     break;
                 case UserDataType.FangRong:
-                    ComHelperS.OnAddLingDiExp(unit, int.Parse(value), notice);
+                    CommonHelperS.OnAddLingDiExp(unit, int.Parse(value), notice);
                     break;
                 //名字应该在改名的协议处理
                 case UserDataType.Name:

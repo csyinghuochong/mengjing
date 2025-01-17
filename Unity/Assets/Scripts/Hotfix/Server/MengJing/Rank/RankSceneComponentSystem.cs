@@ -76,7 +76,7 @@ namespace ET.Server
         {
             //第二天并且超过12点才刷新
             int openserverDay = ServerHelper.GetServeOpenrDay( self.Zone());
-            int worldLv = ComHelperS.GetWorldLv(openserverDay);
+            int worldLv = CommonHelperS.GetWorldLv(openserverDay);
             self.DBServerInfo.ServerInfo.WorldLv = worldLv;
             Log.Debug($"UpdateWorldLv: {self.Zone()} {worldLv}");
         }

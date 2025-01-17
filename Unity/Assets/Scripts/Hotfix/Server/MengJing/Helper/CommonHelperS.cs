@@ -1,7 +1,7 @@
 namespace ET.Server
 {
     
-    public static class ComHelperS
+    public static class CommonHelperS
     {
 
         public static bool IsStateBroadcastType(long nowStateType)

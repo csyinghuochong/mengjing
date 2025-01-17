@@ -14,7 +14,6 @@ namespace ET.Server
         {
 
         }
-
         
         public static List<PropertyValue> GetPetShouHuPro(this PetComponentS self)
         {
@@ -987,6 +986,58 @@ namespace ET.Server
         public static float GetAsFloat(this PetComponentS self, RolePetInfo rolePetInfo, int numericType)
         {
             return (float)self.GetByKey(rolePetInfo, numericType) / 10000;
+        }
+
+        public static void OnPetQiangHua(this PetComponentS self,int addtype, int addpoint)
+        {
+            switch (addtype)
+            {
+                case 0:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"{addpoint}_{addpoint}_{addpoint}_{addpoint}";
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"{addpoint}_0_0_0";
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"0_{addpoint}_0_0";
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"0_0_{addpoint}_0";
+                    }
+                    break;
+                case 4:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"0_0_0_{addpoint}";
+                    }
+                    break;
+                case 5:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"{addpoint}_{addpoint}_0_0";
+                    }
+                    break;
+                case 6:
+                    for (int i = 0; i < self.RolePetInfos.Count; i++)
+                    {
+                        self.RolePetInfos[i].AddPropretyValue = $"{addpoint}_{addpoint}_{addpoint}_0";
+                    }
+                    break;
+                default:
+                    break;
+            }
+           
         }
 
         public static void UpdatePetAttributeWithData(this PetComponentS self, BagComponentS bagComponent, NumericComponentS numericComponent, RolePetInfo rolePetInfo, bool updateUnit = false)

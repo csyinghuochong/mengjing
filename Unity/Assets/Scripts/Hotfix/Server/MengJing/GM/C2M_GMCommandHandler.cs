@@ -158,6 +158,11 @@ namespace ET.Server
                         mailInfo.ItemList.AddRange(itemList);
                         MailHelp.SendUserMail( unit.Root(), unit.Id, mailInfo, ItemGetWay.GM).Coroutine();
                         break;
+                    case 16:  //16#0#200
+                        int addtype = int.Parse(commands[1]);
+                        int addpoint = int.Parse(commands[2]);
+                        unit.GetComponent<PetComponentS>().OnPetQiangHua(addtype, addpoint);
+                        break;
                     default:
                         break;
                 }

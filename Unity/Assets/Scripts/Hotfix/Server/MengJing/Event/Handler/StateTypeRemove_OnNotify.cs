@@ -12,7 +12,7 @@ namespace ET.Server
 
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();
             
-            if (ComHelperS.IsStateBroadcastType(args.nowStateType))
+            if (CommonHelperS.IsStateBroadcastType(args.nowStateType))
             {
                 M2C_UnitStateUpdate.UnitId = unit.Id;
                 M2C_UnitStateUpdate.StateType = (long)args.nowStateType;

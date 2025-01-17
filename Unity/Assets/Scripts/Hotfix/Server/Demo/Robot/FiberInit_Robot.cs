@@ -43,7 +43,7 @@ namespace ET.Client
             int robotid = int.Parse( root.Name.Split('_')[1]);
             
             PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
-            int versionMode =  ComHelperS.IsInnerNet() ? VersionMode.Alpha: VersionMode.Beta;
+            int versionMode =  CommonHelperS.IsInnerNet() ? VersionMode.Alpha: VersionMode.Beta;
             playerInfoComponent.ServerItem = ServerHelper.GetServerIpList(versionMode, zone);
             
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());

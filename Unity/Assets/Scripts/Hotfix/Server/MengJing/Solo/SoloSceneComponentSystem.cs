@@ -261,7 +261,7 @@ namespace ET.Server
             }
 
             self.MatchList.Add(teamPlayerInfo);
-            if (ComHelperS.IsInnerNet())
+            if (CommonHelperS.IsInnerNet())
             {
                 self.MatchList.Add(teamPlayerInfo);
             }

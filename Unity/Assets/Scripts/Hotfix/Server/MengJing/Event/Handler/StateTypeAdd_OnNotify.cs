@@ -26,7 +26,7 @@ namespace ET.Server
             unit.GetComponent<SkillPassiveComponent>()?.StateTypeAdd(nowStateType);
   
             M2C_UnitStateUpdate M2C_UnitStateUpdate = M2C_UnitStateUpdate.Create();
-            if (ComHelperS.IsStateBroadcastType(nowStateType))
+            if (CommonHelperS.IsStateBroadcastType(nowStateType))
             {
                 M2C_UnitStateUpdate.UnitId = unit.Id;
                 M2C_UnitStateUpdate.StateType = (long)nowStateType;
