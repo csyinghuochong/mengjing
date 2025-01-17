@@ -150,20 +150,21 @@ namespace ET.Server
                     }
                     else if (NowBuffParameterType == NumericType.BattleCamp)
                     {
+                        AIComponent belongToAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
+
+                        int oldAi = belongToAIComponent.AIConfigId;
                         int oldCamp = heroCom.GetAsInt(NumericType.BattleCamp);
-                        int oldAi  = heroCom.GetAsInt(NumericType.Old_AI);
                         int newCamp = buffS.TheUnitFrom.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
                         heroCom.ApplyValue(NumericType.BattleCamp, newCamp, true, true, 0, 0);
                         heroCom.ApplyValue(NumericType.BattleCampOld, oldCamp, true, true, 0, 0);
                         heroCom.ApplyValue(NumericType.MasterId,  buffS.TheUnitFrom.Id, true, true, 0, 0);
                         heroCom.ApplyValue(NumericType.Old_AI, oldAi, true, true, 0, 0);
+                        buffS.TheUnitBelongto.MasterId = buffS.TheUnitFrom.Id;
 
                         AttackRecordComponent attackRecordComponent = buffS.TheUnitFrom.GetComponent<AttackRecordComponent>();
                         attackRecordComponent.BeAttackId = 0;
                         attackRecordComponent.AttackingId = 0;
 
-                        AIComponent belongToAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
-                        buffS.TheUnitBelongto.MasterId = buffS.TheUnitFrom.Id;
                         belongToAIComponent.AIConfigId = 14;
                         belongToAIComponent.TargetID = 0;
                         belongToAIComponent.Stop_2();
@@ -176,7 +177,6 @@ namespace ET.Server
                         //整数
                         if (ValueType == 0)
                         {
-                            
                             heroDataComponentS.BuffPropertyUpdate_Long(NowBuffParameterType, (long)buffS.NowBuffValue);
                         }
 
@@ -293,9 +293,9 @@ namespace ET.Server
                         int oldAi  =  numericComponentS.GetAsInt(NumericType.Old_AI);
                         numericComponentS.ApplyValue(NumericType.BattleCamp, oldCamp, true, true, 0, 0);
                         numericComponentS.ApplyValue(NumericType.MasterId,  0, true, true, 0, 0);
+                        buffS.TheUnitBelongto.MasterId = 0;
 
                         AIComponent belongAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
-                        buffS.TheUnitBelongto.MasterId = 0;
                         belongAIComponent.AIConfigId = oldAi;
                         belongAIComponent.TargetID = 0;
                         belongAIComponent.Stop_2();
