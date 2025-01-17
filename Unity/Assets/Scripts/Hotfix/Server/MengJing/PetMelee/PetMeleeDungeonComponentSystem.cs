@@ -453,6 +453,29 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
+        public static int DisposeCard(this PetMeleeDungeonComponent self, long cardId)
+        {
+            PetMeleeCardInfo useCard = null;
+            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand)
+            {
+                if (cardInfo.Id == cardId)
+                {
+                    useCard = cardInfo;
+                    break;
+                }
+            }
+
+            if (useCard == null)
+            {
+                return ErrorCode.ERR_ModifyData;
+            }
+
+            self.PetMeleeCardInHand.Remove(useCard);
+            useCard.Dispose();
+
+            return ErrorCode.ERR_Success;
+        }
+
         // 恢复魔力
         public static void Restore(this PetMeleeDungeonComponent self)
         {

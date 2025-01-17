@@ -7385,6 +7385,20 @@ message M2C_PetMeleePlace // ILocationResponse
 	int32 Error = 92;
 }
 
+//ResponseType M2C_PetMeleeDisposeCard
+message C2M_PetMeleeDisposeCard // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 CarId = 1;
+}
+
+message M2C_PetMeleeDisposeCard // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
 //ResponseType M2C_PetMeleeBegin
 //宠物大战开始战斗
 message C2M_PetMeleeBegin // ILocationRequest

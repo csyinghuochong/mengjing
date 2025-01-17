@@ -32185,6 +32185,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMeleeDisposeCard)]
+    [ResponseType(nameof(M2C_PetMeleeDisposeCard))]
+    public partial class C2M_PetMeleeDisposeCard : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMeleeDisposeCard Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMeleeDisposeCard), isFromPool) as C2M_PetMeleeDisposeCard;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public long CarId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.CarId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMeleeDisposeCard)]
+    public partial class M2C_PetMeleeDisposeCard : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMeleeDisposeCard Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMeleeDisposeCard), isFromPool) as M2C_PetMeleeDisposeCard;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(91)]
+        public int Error { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Message = default;
+            this.Error = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // 宠物大战开始战斗
     [MemoryPackable]
     [Message(OuterMessage.C2M_PetMeleeBegin)]
@@ -33232,11 +33295,13 @@ namespace ET
         public const ushort M2C_PetMeleeDealCards = 10853;
         public const ushort C2M_PetMeleePlace = 10854;
         public const ushort M2C_PetMeleePlace = 10855;
-        public const ushort C2M_PetMeleeBegin = 10856;
-        public const ushort M2C_PetMeleeBegin = 10857;
-        public const ushort C2M_PetMeleeRewardRequest = 10858;
-        public const ushort M2C_PetMeleeRewardResponse = 10859;
-        public const ushort C2M_PetMeleeFubenRewardRequest = 10860;
-        public const ushort M2C_PetMeleeFubenRewardResponse = 10861;
+        public const ushort C2M_PetMeleeDisposeCard = 10856;
+        public const ushort M2C_PetMeleeDisposeCard = 10857;
+        public const ushort C2M_PetMeleeBegin = 10858;
+        public const ushort M2C_PetMeleeBegin = 10859;
+        public const ushort C2M_PetMeleeRewardRequest = 10860;
+        public const ushort M2C_PetMeleeRewardResponse = 10861;
+        public const ushort C2M_PetMeleeFubenRewardRequest = 10862;
+        public const ushort M2C_PetMeleeFubenRewardResponse = 10863;
     }
 }

@@ -606,6 +606,15 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> PetMeleeDisposeCardRequest(Scene root, long carId)
+        {
+            C2M_PetMeleeDisposeCard request = C2M_PetMeleeDisposeCard.Create();
+            request.CarId = carId;
+
+            M2C_PetMeleeDisposeCard response = (M2C_PetMeleeDisposeCard)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
         public static async ETTask<M2C_PetMeleeGetMyCards> PetMeleePetMeleeGetMyCardsRequest(Scene root)
         {
             C2M_PetMeleeGetMyCards request = C2M_PetMeleeGetMyCards.Create();

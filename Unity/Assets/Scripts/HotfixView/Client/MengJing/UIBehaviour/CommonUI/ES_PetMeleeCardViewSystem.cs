@@ -286,12 +286,18 @@ namespace ET.Client
                 self.GameObject.gameObject.SetActive(false);
             }
 
-            if (!self.CanPlace)
+            DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
+
+            if (dlgPetMeleeMain.IsDisposeCard)
             {
+                dlgPetMeleeMain.DisposeCard(self).Coroutine();
                 return;
             }
 
-            self.GetParent<DlgPetMeleeMain>().UseCard(self, self.TargetPos).Coroutine();
+            if (self.CanPlace)
+            {
+                dlgPetMeleeMain.UseCard(self, self.TargetPos).Coroutine();
+            }
         }
     }
 }

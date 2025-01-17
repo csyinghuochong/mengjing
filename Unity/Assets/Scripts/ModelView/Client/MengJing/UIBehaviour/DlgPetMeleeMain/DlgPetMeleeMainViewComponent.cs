@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgPetMeleeMainViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Text E_CountdownTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CountdownTimeText == null )
+     			{
+		    		this.m_E_CountdownTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_CountdownTime");
+     			}
+     			return this.m_E_CountdownTimeText;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_Image_3Image
      	{
      		get
@@ -38,23 +55,6 @@ namespace ET.Client
 		    		this.m_E_Image_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_2");
      			}
      			return this.m_E_Image_2Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_CountdownTimeText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CountdownTimeText == null )
-     			{
-		    		this.m_E_CountdownTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_CountdownTime");
-     			}
-     			return this.m_E_CountdownTimeText;
      		}
      	}
 
@@ -398,6 +398,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_DisposeCardImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DisposeCardImage == null )
+     			{
+		    		this.m_E_DisposeCardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DisposeCard");
+     			}
+     			return this.m_E_DisposeCardImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_DisposeCardEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DisposeCardEventTrigger == null )
+     			{
+		    		this.m_E_DisposeCardEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_DisposeCard");
+     			}
+     			return this.m_E_DisposeCardEventTrigger;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_RerurnButton
      	{
      		get
@@ -434,9 +468,9 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_CountdownTimeText = null;
 			this.m_E_Image_3Image = null;
 			this.m_E_Image_2Image = null;
-			this.m_E_CountdownTimeText = null;
 			this.m_E_Image_1Image = null;
 			this.m_E_DiImage = null;
 			this.m_E_TouchImage = null;
@@ -457,14 +491,16 @@ namespace ET.Client
 			this.m_E_JiFanHpImgImage = null;
 			this.m_E_JiFanHpTxtText = null;
 			this.m_E_JiFanNumText = null;
+			this.m_E_DisposeCardImage = null;
+			this.m_E_DisposeCardEventTrigger = null;
 			this.m_E_RerurnButton = null;
 			this.m_E_RerurnImage = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Text m_E_CountdownTimeText = null;
 		private UnityEngine.UI.Image m_E_Image_3Image = null;
 		private UnityEngine.UI.Image m_E_Image_2Image = null;
-		private UnityEngine.UI.Text m_E_CountdownTimeText = null;
 		private UnityEngine.UI.Image m_E_Image_1Image = null;
 		private UnityEngine.UI.Image m_E_DiImage = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
@@ -485,6 +521,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_JiFanHpImgImage = null;
 		private UnityEngine.UI.Text m_E_JiFanHpTxtText = null;
 		private UnityEngine.UI.Text m_E_JiFanNumText = null;
+		private UnityEngine.UI.Image m_E_DisposeCardImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_DisposeCardEventTrigger = null;
 		private UnityEngine.UI.Button m_E_RerurnButton = null;
 		private UnityEngine.UI.Image m_E_RerurnImage = null;
 		public Transform uiTransform = null;

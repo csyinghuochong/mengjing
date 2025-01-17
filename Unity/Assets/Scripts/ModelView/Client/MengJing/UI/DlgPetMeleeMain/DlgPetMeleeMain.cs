@@ -13,8 +13,10 @@ namespace ET.Client
 
         public Vector2 PreviousPressPosition;
 
+        public bool IsDisposeCard { get; set; }
+
         public float OranginScale;
-        
+
         public bool IsGameOver;
         public long Timer;
         public float BeginTime;

@@ -71,6 +71,17 @@ namespace ET.Client
             self.View.E_IconImage.gameObject.SetActive(false);
             self.View.E_RerurnButton.AddListener(self.OnRerurnButton);
 
+            self.View.E_DisposeCardEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) =>
+            {
+                self.IsDisposeCard = true;
+                self.View.E_DisposeCardEventTrigger.GetComponent<RectTransform>().localScale = new Vector2(1.1f, 1.1f);
+            });
+            self.View.E_DisposeCardEventTrigger.RegisterEvent(EventTriggerType.PointerExit, (pdata) =>
+            {
+                self.IsDisposeCard = false;
+                self.View.E_DisposeCardEventTrigger.GetComponent<RectTransform>().localScale = new Vector2(1f, 1f);
+            });
+
             self.InitCard().Coroutine();
             self.UpdateMoLi();
             self.OnPlayAnimation().Coroutine();
@@ -378,6 +389,20 @@ namespace ET.Client
         public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position)
         {
             int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position);
+
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.PetMeleeCardInHand.Remove(card);
+                self.ReturnCardToPool(card);
+                self.ArrangeCards();
+            }
+
+            await ETTask.CompletedTask;
+        }
+
+        public static async ETTask DisposeCard(this DlgPetMeleeMain self, ES_PetMeleeCard card)
+        {
+            int error = await PetNetHelper.PetMeleeDisposeCardRequest(self.Root(), card.PetMeleeCardInfo.Id);
 
             if (error == ErrorCode.ERR_Success)
             {
