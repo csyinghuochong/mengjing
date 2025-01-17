@@ -254,8 +254,11 @@ namespace ET.Server
                     }
                     rolePetInfo.ShouHuPos = 5;
                 }
-               
-                PetHelper.CheckPropretyPoint(rolePetInfo);
+
+                if (!CommonHelperS.IsInnerNet())
+                {
+                    PetHelper.CheckPropretyPoint(rolePetInfo);
+                }
             }
 
             if (self.UpdateNumber == 0)
@@ -1052,7 +1055,6 @@ namespace ET.Server
 
             //属性加点对应属性 力量-攻击 智力-魔法 体质-血量 耐力就是物防和魔防
             PetConfig petCof = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-
             PetHelper.CheckPropretyPoint(rolePetInfo);
 
             //获取加点属性

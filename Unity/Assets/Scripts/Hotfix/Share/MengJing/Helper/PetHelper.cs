@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ET.Server;
 
 namespace ET
 {
@@ -207,11 +206,6 @@ namespace ET
 
         public static void CheckPropretyPoint(RolePetInfo rolePetInfo)
         {
-            if (CommonHelperS.IsInnerNet())
-            {
-                return;
-            }
-
             int maxPoint = (rolePetInfo.PetLv - 1) * 5;
             if (!string.IsNullOrEmpty(rolePetInfo.AddPropretyValue))
             {
