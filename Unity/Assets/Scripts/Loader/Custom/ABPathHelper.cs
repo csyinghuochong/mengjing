@@ -242,5 +242,16 @@
 
             return prefabPath;
         }
+        
+        public static string GetRecastPath(int text)
+        {
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Recast/{0}.bytes", text).Intern();
+            }
+
+            return prefabPath;
+        }
     }
 }

@@ -51,14 +51,15 @@ namespace ET.Client
             if (InputHelper.GetMouseButtonDown(1))
             {
                 self.OnGetMouseButtonDown_1();
+                self.TestClientPathfindingComponent();
             }
-            
+
             if (InputHelper.GetKeyDown((int)KeyCode.S))
             {
                 // 按 S键 测试屏幕震动，或技能 烈地击
                 //self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetShakeCamera(ShakeCameraType.Type_1, 0.3f);
             }
-            
+
             if (InputHelper.GetKeyDown((int)KeyCode.R))
             {
                 // CodeLoader.Instance.Reload();
@@ -94,6 +95,31 @@ namespace ET.Client
             if (InputHelper.GetKey(100))
             {
                 self.OnGetKeyHandler(100);
+            }
+        }
+
+        /// <summary>
+        /// 测试客户端寻路
+        /// </summary>
+        /// <param name="self"></param>
+        public static void TestClientPathfindingComponent(this OperaComponent self)
+        {
+            Ray ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000, self.MapMask))
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+                List<float3> points = new List<float3>();
+                unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position, hit.point, points);
+
+                if (points.Count < 2)
+                {
+                    return;
+                }
+
+                float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+                unit.GetComponent<MoveComponent>().MoveToAsync(points, speed, 100, (int)speed).Coroutine();
             }
         }
 
