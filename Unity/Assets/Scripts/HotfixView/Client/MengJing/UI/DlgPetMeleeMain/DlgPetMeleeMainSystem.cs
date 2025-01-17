@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -85,6 +86,10 @@ namespace ET.Client
             self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
             self.View.E_JiFanNumText.text = "召唤宠物数量：0";
             self.View.E_DiRenNumText.text = "召唤怪物数量：0";
+            using (zstring.Block())
+            {
+                self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", ConfigData.PetMeleeMoLiRPS);
+            }
 
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
@@ -210,11 +215,13 @@ namespace ET.Client
         {
             FlyTipComponent.Instance.ShowFlyTip($"发放卡牌 {cards.Count} 张");
 
+            NumericComponentC numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
             foreach (PetMeleeCardInfo cardInfo in cards)
             {
                 ES_PetMeleeCard esPetMeleeCard = self.GetCardFromPool();
                 self.PetMeleeCardInHand.Add(esPetMeleeCard);
                 esPetMeleeCard.InitCard(cardInfo);
+                esPetMeleeCard.UpdateCostText(numericComponentC.GetAsInt(NumericType.PetMeleeMoLi));
             }
 
             self.ArrangeCards();
@@ -281,7 +288,7 @@ namespace ET.Client
             self.View.E_Image_3Image.gameObject.SetActive(true);
             self.BeginTime = Time.time;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
-            CommonViewHelper.DOScale(self.View.E_Image_3Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_3Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -290,7 +297,7 @@ namespace ET.Client
 
             self.View.E_Image_3Image.gameObject.SetActive(false);
             self.View.E_Image_2Image.gameObject.SetActive(true);
-            CommonViewHelper.DOScale(self.View.E_Image_2Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_2Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -299,7 +306,7 @@ namespace ET.Client
 
             self.View.E_Image_2Image.gameObject.SetActive(false);
             self.View.E_Image_1Image.gameObject.SetActive(true);
-            CommonViewHelper.DOScale(self.View.E_Image_1Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_1Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -347,11 +354,25 @@ namespace ET.Client
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             using (zstring.Block())
             {
-                self.View.E_MoLiText.text =
+                self.View.E_MoLiTxtText.text =
                         zstring.Format("{0}/{1}", numericComponentC.GetAsInt(NumericType.PetMeleeMoLi), ConfigData.PetMeleeMoLiMax);
             }
 
             self.View.E_MoLiImgImage.fillAmount = numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax;
+
+            float y = self.View.E_MoLiImgImage.GetComponent<RectTransform>().localPosition.y +
+                    (numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax - 0.5f) *
+                    self.View.E_MoLiImgImage.GetComponent<RectTransform>().sizeDelta.y;
+
+            Vector2 pos = self.View.E_MoLiImgOnlineImage.GetComponent<RectTransform>().localPosition;
+            pos.y = y;
+            self.View.E_MoLiImgOnlineImage.GetComponent<RectTransform>().localPosition = pos;
+
+            for (int i = 0; i < self.PetMeleeCardInHand.Count; i++)
+            {
+                ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardInHand[i];
+                esPetMeleeCard.UpdateCostText(numericComponentC.GetAsInt(NumericType.PetMeleeMoLi));
+            }
         }
 
         public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position)

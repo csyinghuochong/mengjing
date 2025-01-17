@@ -66,6 +66,7 @@ namespace ET.Client
 
         public Vector3 TargetPosition;
         public Vector3 OldCameraPostion;
+        public Vector3 OldCameraDirection;
 
         public ShakeCameraType ShakeCameraType;
         public float ShakeDurationTime; // 震动时间

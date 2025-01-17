@@ -67,7 +67,8 @@ namespace ET.Client
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_164"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_160"));
-                    self.E_CostText.text = ConfigData.PetMeleeMainPetCost.ToString();
+                    self.E_Cost_ActiveText.text = ConfigData.PetMeleeMainPetCost.ToString();
+                    self.E_Cost_InactiveText.text = ConfigData.PetMeleeMainPetCost.ToString();
                     self.E_TypeText.text = "主战卡";
                     self.E_NameText.text = rolePetInfo.PetName;
 
@@ -85,7 +86,8 @@ namespace ET.Client
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_163"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_157"));
-                    self.E_CostText.text = petTuJianConfig.Cost.ToString();
+                    self.E_Cost_ActiveText.text = petTuJianConfig.Cost.ToString();
+                    self.E_Cost_InactiveText.text = petTuJianConfig.Cost.ToString();
                     self.E_TypeText.text = "辅战卡";
                     self.E_NameText.text = petTuJianConfig.Name;
 
@@ -103,7 +105,8 @@ namespace ET.Client
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_165"));
                     self.E_BackImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Image_161"));
-                    self.E_CostText.text = petMagicCardConfig.Cost.ToString();
+                    self.E_Cost_ActiveText.text = petMagicCardConfig.Cost.ToString();
+                    self.E_Cost_InactiveText.text = petMagicCardConfig.Cost.ToString();
                     self.E_TypeText.text = "魔法卡";
                     self.E_NameText.text = petMagicCardConfig.Name;
 
@@ -121,6 +124,13 @@ namespace ET.Client
             {
                 self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
             }
+        }
+
+        public static void UpdateCostText(this ES_PetMeleeCard self, int cost)
+        {
+            int myCost = int.Parse(self.E_Cost_ActiveText.text);
+            self.E_Cost_ActiveText.gameObject.SetActive(myCost <= cost);
+            self.E_Cost_InactiveText.gameObject.SetActive(myCost > cost);
         }
 
         public static void OnLoadGameObject(this ES_PetMeleeCard self, GameObject go, long formId)

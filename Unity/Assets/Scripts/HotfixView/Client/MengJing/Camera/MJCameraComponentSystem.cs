@@ -102,7 +102,7 @@ namespace ET.Client
             self.VerticalOffset =
                     PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset, PlayerPrefsHelp.CameraVerticalOffset_Default);
         }
-        
+
         private static void LookAt(this MJCameraComponent self)
         {
             Vector3 unitPos = self.LookAtUnit.Position;
@@ -123,7 +123,27 @@ namespace ET.Client
                 MapViewHelper.ShowOtherUnit(self.Root(), false);
             }
 
-            self.MainCamera.transform.position = Vector3.Lerp(self.OldCameraPostion, self.TargetPosition, self.CameraMoveTime);
+            switch (self.CameraBuildType)
+            {
+                case CameraBuildType.Type_0:
+                case CameraBuildType.Type_1:
+                {
+                    self.TargetPosition = self.BuildUnit.Position + self.BuildUnit.Forward * 4f;
+                    self.TargetPosition.y += 2f;
+                    break;
+                }
+                case CameraBuildType.Type_2:
+                case CameraBuildType.Type_3:
+                case CameraBuildType.Type_4:
+                {
+                    self.TargetPosition = self.BuildUnit.Position + self.BuildUnit.Forward * 4f;
+                    self.TargetPosition.y += 1f;
+                    break;
+                }
+            }
+
+            Vector3 unitPos = self.BuildUnit.Position;
+            self.MainCamera.transform.position = Vector3.Lerp(unitPos + self.OldCameraDirection, self.TargetPosition, self.CameraMoveTime);
 
             switch (self.CameraBuildType)
             {
@@ -293,26 +313,9 @@ namespace ET.Client
             self.CameraMoveTime = 0f;
             self.CameraMoveType = CameraMoveType.BuildEnter;
 
-            switch (self.CameraBuildType)
-            {
-                case CameraBuildType.Type_0:
-                case CameraBuildType.Type_1:
-                {
-                    self.TargetPosition = unit.Position + unit.Forward * 4f;
-                    self.TargetPosition.y += 2f;
-                    break;
-                }
-                case CameraBuildType.Type_2:
-                case CameraBuildType.Type_3:
-                case CameraBuildType.Type_4:
-                {
-                    self.TargetPosition = unit.Position + unit.Forward * 4f;
-                    self.TargetPosition.y += 1f;
-                    break;
-                }
-            }
-
             self.OldCameraPostion = self.MainCamera.transform.position;
+            Vector3 unitPos = unit.Position;
+            self.OldCameraDirection = self.MainCamera.transform.position - unitPos;
             self.OnBuildEnter = action;
 
             // UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
