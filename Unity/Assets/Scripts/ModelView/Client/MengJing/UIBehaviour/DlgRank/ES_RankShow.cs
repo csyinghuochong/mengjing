@@ -168,6 +168,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ModelShow ES_ModelShow_1
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_ModelShow es = this.m_es_modelshow_1;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_1/ES_ModelShow_1");
+		    	   this.m_es_modelshow_1 = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow_1;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_Rank_2RectTransform
      	{
      		get
@@ -185,6 +205,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ModelShow ES_ModelShow_2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_ModelShow es = this.m_es_modelshow_2;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_2/ES_ModelShow_2");
+		    	   this.m_es_modelshow_2 = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow_2;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_Rank_3RectTransform
      	{
      		get
@@ -199,6 +239,26 @@ namespace ET.Client
 		    		this.m_EG_Rank_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_3");
      			}
      			return this.m_EG_Rank_3RectTransform;
+     		}
+     	}
+
+		public ES_ModelShow ES_ModelShow_3
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_ModelShow es = this.m_es_modelshow_3;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_UISet/EG_Rank_3/ES_ModelShow_3");
+		    	   this.m_es_modelshow_3 = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow_3;
      		}
      	}
 
@@ -225,8 +285,11 @@ namespace ET.Client
 			this.m_E_HeadIcomImage3Image = null;
 			this.m_E_Text_MyRankText = null;
 			this.m_EG_Rank_1RectTransform = null;
+			this.m_es_modelshow_1 = null;
 			this.m_EG_Rank_2RectTransform = null;
+			this.m_es_modelshow_2 = null;
 			this.m_EG_Rank_3RectTransform = null;
+			this.m_es_modelshow_3 = null;
 			this.uiTransform = null;
 		}
 
@@ -239,8 +302,11 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_HeadIcomImage3Image = null;
 		private UnityEngine.UI.Text m_E_Text_MyRankText = null;
 		private UnityEngine.RectTransform m_EG_Rank_1RectTransform = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow_1 = null;
 		private UnityEngine.RectTransform m_EG_Rank_2RectTransform = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow_2 = null;
 		private UnityEngine.RectTransform m_EG_Rank_3RectTransform = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow_3 = null;
 		public Transform uiTransform = null;
 	}
 }
