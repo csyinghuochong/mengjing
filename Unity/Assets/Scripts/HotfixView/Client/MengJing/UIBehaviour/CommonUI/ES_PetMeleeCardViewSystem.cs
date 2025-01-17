@@ -219,23 +219,28 @@ namespace ET.Client
                     CellIndicator.GetComponent<RectTransform>().localPosition = new Vector2(nearestX * 10, nearestZ * 10);
 
                     // 在点击位置周围发射一个半径为detectionRadius的球形碰撞体，检测是否有场景障碍物
-                    Collider[] colliders = Physics.OverlapSphere(self.TargetPos, self.CellSize / 2f,
+                    Collider[] colliders = Physics.OverlapSphere(self.TargetPos, self.CellSize / 2f - 0.2f,
                         1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString()));
                     bool haveObstruct = colliders.Length > 0;
 
                     // 获取所有unit的位置，判断这个格子内是否有unit
                     List<EntityRef<Unit>> units = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
                     bool haveUnit = false;
+                    float rightPetX = self.CellSize * -1;
                     foreach (Unit unit in units)
                     {
                         if (PositionHelper.Distance2D(unit.Position, self.TargetPos) < self.CellSize / 2)
                         {
                             haveUnit = true;
-                            break;
+                        }
+
+                        if (unit.Type == UnitType.Pet)
+                        {
+                            rightPetX = unit.Position.x > rightPetX ? unit.Position.x : rightPetX;
                         }
                     }
 
-                    if (!haveObstruct && !haveUnit)
+                    if (!haveObstruct && !haveUnit && self.TargetPos.x <= rightPetX)
                     {
                         self.CanPlace = true;
                         CellIndicator.GetComponent<Image>().color = Color.green;
