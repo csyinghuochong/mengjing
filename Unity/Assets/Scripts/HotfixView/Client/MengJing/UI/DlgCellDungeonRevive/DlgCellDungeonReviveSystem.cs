@@ -21,7 +21,8 @@ namespace ET.Client
                     || sceneType == SceneTypeEnum.Battle
                     || sceneType == SceneTypeEnum.BaoZang
                     || sceneType == SceneTypeEnum.MiJing
-                    || sceneType == SceneTypeEnum.UnionRace;
+                    || sceneType == SceneTypeEnum.UnionRace
+                    || sceneType == SceneTypeEnum.DragonDungeon;
         }
 
         public static void Check(this DlgCellDungeonRevive self, int leftTime)
@@ -143,6 +144,12 @@ namespace ET.Client
         public static void OnButton_ExitButton(this DlgCellDungeonRevive self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType == SceneTypeEnum.MainCityScene)
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonRevive);
+                return;
+            }
+            
             if (self.IsNoAutoExit(mapComponent.SceneType))
             {
                 if (self.LeftTime > 0)

@@ -18,6 +18,10 @@
             }
 
             unit.GetComponent<GameObjectComponent>()?.OnRevive();
+            if (unit.MainHero)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnSelfRevive();
+            }
             await ETTask.CompletedTask;
         }
     }

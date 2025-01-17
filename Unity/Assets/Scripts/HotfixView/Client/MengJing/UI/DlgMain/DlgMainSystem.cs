@@ -2314,6 +2314,11 @@ namespace ET.Client
              self.View.ES_JoystickMove.ResetUI(true);
         }
 
+        public static void OnSelfRevive(this DlgMain self)
+        {
+            self.View.ES_JoystickMove.AfterEnterScene();
+        }
+        
         public static void OnBagItemUpdate(this DlgMain self)
         {
             self.View.ES_MainSkill.OnBagItemUpdate();
