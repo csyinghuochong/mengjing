@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -287,7 +288,7 @@ namespace ET.Client
             self.View.E_Image_3Image.gameObject.SetActive(true);
             self.BeginTime = Time.time;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIPetMeleeMain, self);
-            CommonViewHelper.DOScale(self.View.E_Image_3Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_3Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -296,7 +297,7 @@ namespace ET.Client
 
             self.View.E_Image_3Image.gameObject.SetActive(false);
             self.View.E_Image_2Image.gameObject.SetActive(true);
-            CommonViewHelper.DOScale(self.View.E_Image_2Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_2Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -305,7 +306,7 @@ namespace ET.Client
 
             self.View.E_Image_2Image.gameObject.SetActive(false);
             self.View.E_Image_1Image.gameObject.SetActive(true);
-            CommonViewHelper.DOScale(self.View.E_Image_1Image.transform, Vector3.zero, 1f);
+            self.View.E_Image_1Image.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InOutQuad);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
