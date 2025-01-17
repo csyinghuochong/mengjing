@@ -125,7 +125,7 @@ namespace ET.Client
             NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
             return numericComponent.GetAsInt(NumericType.YueKaEndTime) > 0;
         }
-        
+
         public static int GetMaoXianExp(this Unit self)
         {
             int rechargeNum = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
@@ -193,13 +193,13 @@ namespace ET.Client
 
             return units;
         }
-        
+
         public static List<Unit> GetUnitsByTypes(Scene root, List<int> unitType)
         {
             List<Unit> units = new List<Unit>();
             foreach (Unit unit in root.CurrentScene().GetComponent<UnitComponent>().GetAll())
             {
-                if ( unitType.Contains(unit.Type))
+                if (unitType.Contains(unit.Type))
                 {
                     units.Add(unit);
                 }
@@ -357,9 +357,22 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
 
             if (mapComponent.SceneType != SceneTypeEnum.Battle
-                && self.IsYeWaiMonster() && defend.IsYeWaiMonster())
+                && mapComponent.SceneType != SceneTypeEnum.PetMelee)
             {
-                return false;
+                if (self.IsYeWaiMonster() && defend.IsYeWaiMonster())
+                {
+                    return false;
+                }
+            }
+
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                if (defend.Type == UnitType.Player)
+                {
+                    return false;
+                }
+
+                return self.GetBattleCamp() != defend.GetBattleCamp();
             }
 
             if (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
@@ -438,7 +451,7 @@ namespace ET.Client
                 return !self.IsMasterOrPet(defend, petComponent);
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.Battle
+            if (mapComponent.SceneType == SceneTypeEnum.Battle
                 || mapComponent.SceneType == SceneTypeEnum.Demon)
             {
                 return self.GetBattleCamp() != defend.GetBattleCamp();
@@ -451,7 +464,8 @@ namespace ET.Client
 
             int camp_1 = self.GetBattleCamp();
             int camp_2 = defend.GetBattleCamp();
-            return camp_1 != camp_2 && !self.IsSameTeam(defend);
+            bool result = camp_1 != camp_2 && !self.IsSameTeam(defend);
+            return result;
         }
 
         public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)

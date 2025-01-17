@@ -166,6 +166,11 @@ namespace ET.Server
                 numericComponent.GetAsFloat(NumericType.Born_Z));
         }
 
+        public static bool IsYeWaiMonster(this Unit self)
+        {
+            return self.Type == UnitType.Monster && self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId) == 0;
+        }
+        
         public static int GetBattleCamp(this Unit self)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
@@ -357,12 +362,14 @@ namespace ET.Server
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
-            
-            if (mapComponent.SceneType != SceneTypeEnum.Battle && mapComponent.SceneType != SceneTypeEnum.PetMelee &&
-                self.Type == UnitType.Monster && defend.Type == UnitType.Monster
-                && self.GetMasterId() == 0 && defend.GetMasterId() == 0)
+
+            if (mapComponent.SceneType != SceneTypeEnum.Battle 
+                && mapComponent.SceneType != SceneTypeEnum.PetMelee)
             {
-                return false;
+                if( self.IsYeWaiMonster()  && defend.IsYeWaiMonster())
+                {
+                    return false;
+                }
             }
             
             if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
@@ -373,7 +380,6 @@ namespace ET.Server
                 }
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
-
 
             if (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
                 || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
