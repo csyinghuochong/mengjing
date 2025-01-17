@@ -9808,16 +9808,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328237987813159646}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 836213095198150941}
+  m_Father: {fileID: 5340148562108510451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -768, y: -361}
+  m_AnchoredPosition: {x: -768, y: 12}
   m_SizeDelta: {x: 480, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8971411756075754681
@@ -9896,7 +9896,6 @@ RectTransform:
   - {fileID: 187807057562859045}
   - {fileID: 9118839308307130525}
   - {fileID: 220856799203915726}
-  - {fileID: 2204825971275516775}
   - {fileID: 6537928592231078190}
   - {fileID: 5340148562108510451}
   - {fileID: 201438726652622022}
@@ -29684,7 +29683,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.5
+  m_FillAmount: 0.444
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -46132,6 +46131,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4504748278442471531}
+  - {fileID: 2204825971275516775}
   - {fileID: 7374707593922191767}
   - {fileID: 8281025403459423832}
   - {fileID: 1628204854121276767}
@@ -46248,7 +46248,7 @@ GameObject:
   - component: {fileID: 7884005998728644058}
   - component: {fileID: 4529025496689484622}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: E_MoLiRPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81924,7 +81924,7 @@ GameObject:
   - component: {fileID: 73424734911895264}
   - component: {fileID: 8011003873817174703}
   m_Layer: 5
-  m_Name: E_MoLi
+  m_Name: E_MoLiTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

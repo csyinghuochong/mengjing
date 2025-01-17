@@ -126,6 +126,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_MoLiImgOnlineImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MoLiImgOnlineImage == null )
+     			{
+		    		this.m_E_MoLiImgOnlineImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Bottom/E_MoLiImgOnline");
+     			}
+     			return this.m_E_MoLiImgOnlineImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_MoLiImgImage
      	{
      		get
@@ -143,7 +160,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_MoLiText
+		public UnityEngine.UI.Image E_MoLiImg222Image
      	{
      		get
      		{
@@ -152,11 +169,45 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MoLiText == null )
+     			if( this.m_E_MoLiImg222Image == null )
      			{
-		    		this.m_E_MoLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_MoLi");
+		    		this.m_E_MoLiImg222Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Bottom/E_MoLiImg222");
      			}
-     			return this.m_E_MoLiText;
+     			return this.m_E_MoLiImg222Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_MoLiRPSText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MoLiRPSText == null )
+     			{
+		    		this.m_E_MoLiRPSText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_MoLiRPS");
+     			}
+     			return this.m_E_MoLiRPSText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_MoLiTxtText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MoLiTxtText == null )
+     			{
+		    		this.m_E_MoLiTxtText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Bottom/E_MoLiTxt");
+     			}
+     			return this.m_E_MoLiTxtText;
      		}
      	}
 
@@ -390,8 +441,11 @@ namespace ET.Client
 			this.m_E_DiImage = null;
 			this.m_E_TouchImage = null;
 			this.m_E_TouchEventTrigger = null;
+			this.m_E_MoLiImgOnlineImage = null;
 			this.m_E_MoLiImgImage = null;
-			this.m_E_MoLiText = null;
+			this.m_E_MoLiImg222Image = null;
+			this.m_E_MoLiRPSText = null;
+			this.m_E_MoLiTxtText = null;
 			this.m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 			this.m_E_IconImage = null;
 			this.m_E_IconEventTrigger = null;
@@ -415,8 +469,11 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_DiImage = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_TouchEventTrigger = null;
+		private UnityEngine.UI.Image m_E_MoLiImgOnlineImage = null;
 		private UnityEngine.UI.Image m_E_MoLiImgImage = null;
-		private UnityEngine.UI.Text m_E_MoLiText = null;
+		private UnityEngine.UI.Image m_E_MoLiImg222Image = null;
+		private UnityEngine.UI.Text m_E_MoLiRPSText = null;
+		private UnityEngine.UI.Text m_E_MoLiTxtText = null;
 		private UnityEngine.UI.LoopHorizontalScrollRect m_E_PetMeleeItemsLoopHorizontalScrollRect = null;
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;

@@ -85,6 +85,10 @@ namespace ET.Client
             self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
             self.View.E_JiFanNumText.text = "召唤宠物数量：0";
             self.View.E_DiRenNumText.text = "召唤怪物数量：0";
+            using (zstring.Block())
+            {
+                self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", ConfigData.PetMeleeMoLiRPS);
+            }
 
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
@@ -347,7 +351,7 @@ namespace ET.Client
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             using (zstring.Block())
             {
-                self.View.E_MoLiText.text =
+                self.View.E_MoLiTxtText.text =
                         zstring.Format("{0}/{1}", numericComponentC.GetAsInt(NumericType.PetMeleeMoLi), ConfigData.PetMeleeMoLiMax);
             }
 
