@@ -207,21 +207,22 @@ namespace ET
         public static void CheckPropretyPoint(RolePetInfo rolePetInfo)
         {
             int maxPoint = (rolePetInfo.PetLv - 1) * 5;
-            if (!string.IsNullOrEmpty(rolePetInfo.AddPropretyValue))
+            if (string.IsNullOrEmpty(rolePetInfo.AddPropretyValue))
             {
-                string[] attributeinfos = rolePetInfo.AddPropretyValue.Split('_');
-                int pro_LiLiang = int.Parse(attributeinfos[0]);
-                int pro_ZhiLi = int.Parse(attributeinfos[1]);
-                int pro_TiZhi = int.Parse(attributeinfos[2]);
-                int pro_NaiLi = int.Parse(attributeinfos[3]);
-                int allValue = pro_LiLiang + pro_ZhiLi + pro_TiZhi + pro_NaiLi;
+                return;
+            }
+            string[] attributeinfos = rolePetInfo.AddPropretyValue.Split('_');
+            int pro_LiLiang = int.Parse(attributeinfos[0]);
+            int pro_ZhiLi = int.Parse(attributeinfos[1]);
+            int pro_TiZhi = int.Parse(attributeinfos[2]);
+            int pro_NaiLi = int.Parse(attributeinfos[3]);
+            int allValue = pro_LiLiang + pro_ZhiLi + pro_TiZhi + pro_NaiLi;
 
-                if (pro_LiLiang < 0 || pro_ZhiLi < 0 || pro_TiZhi < 0 || pro_NaiLi < 0
-                    || rolePetInfo.AddPropretyNum < 0 || allValue > maxPoint)
-                {
-                    rolePetInfo.AddPropretyValue = "0_0_0_0";
-                    rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
-                }
+            if (pro_LiLiang < 0 || pro_ZhiLi < 0 || pro_TiZhi < 0 || pro_NaiLi < 0
+                || rolePetInfo.AddPropretyNum < 0 || allValue > maxPoint)
+            {
+                rolePetInfo.AddPropretyValue = "0_0_0_0";
+                rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
             }
         }
 

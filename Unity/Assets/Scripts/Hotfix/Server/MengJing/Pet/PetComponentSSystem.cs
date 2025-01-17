@@ -254,11 +254,7 @@ namespace ET.Server
                     }
                     rolePetInfo.ShouHuPos = 5;
                 }
-
-                if (!CommonHelperS.IsInnerNet())
-                {
-                    PetHelper.CheckPropretyPoint(rolePetInfo);
-                }
+                PetHelper.CheckPropretyPoint(rolePetInfo);
             }
 
             if (self.UpdateNumber == 0)
