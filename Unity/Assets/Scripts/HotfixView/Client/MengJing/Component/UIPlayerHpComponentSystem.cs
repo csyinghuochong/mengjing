@@ -176,7 +176,7 @@ namespace ET.Client
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
-            
+            self.UpdateCampToMain(canAttack);
             self.DialogText = rc.Get<GameObject>("DialogText");
             self.DialogText.SetActive(false);
             self.PlayerNameSet = rc.Get<GameObject>("PlayerNameSet");

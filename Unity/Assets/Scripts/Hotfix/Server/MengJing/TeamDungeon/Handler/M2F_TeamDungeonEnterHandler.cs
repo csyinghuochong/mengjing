@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
 
     [MessageHandler(SceneType.Team)]
@@ -17,6 +19,7 @@
             if (teamInfo == null)
             {
                 response.Error = ErrorCode.ERR_TransferFailError;
+                Console.WriteLine($"teamInfo == null:  {request.UserID}");
                 return;
             }
             
