@@ -164,7 +164,7 @@ namespace ET.Server
 
                         AIComponent belongToAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
                         buffS.TheUnitBelongto.MasterId = buffS.TheUnitFrom.Id;
-                        belongToAIComponent.AIConfigId = 2;
+                        belongToAIComponent.AIConfigId = 14;
                         belongToAIComponent.TargetID = 0;
                         belongToAIComponent.Stop_2();
                         belongToAIComponent.Begin();
@@ -300,6 +300,8 @@ namespace ET.Server
                         belongAIComponent.TargetID = 0;
                         belongAIComponent.Stop_2();
                         belongAIComponent.Begin();
+
+                        Console.WriteLine($"resetCamp:   {numericComponentS.Id}");
                     }
                     else
                     {
