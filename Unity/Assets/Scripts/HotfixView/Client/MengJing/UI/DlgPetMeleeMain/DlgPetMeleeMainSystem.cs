@@ -359,6 +359,14 @@ namespace ET.Client
 
             self.View.E_MoLiImgImage.fillAmount = numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax;
 
+            float y = self.View.E_MoLiImgImage.GetComponent<RectTransform>().localPosition.y +
+                    (numericComponentC.GetAsInt(NumericType.PetMeleeMoLi) * 1f / ConfigData.PetMeleeMoLiMax - 0.5f) *
+                    self.View.E_MoLiImgImage.GetComponent<RectTransform>().sizeDelta.y;
+
+            Vector2 pos = self.View.E_MoLiImgOnlineImage.GetComponent<RectTransform>().localPosition;
+            pos.y = y;
+            self.View.E_MoLiImgOnlineImage.GetComponent<RectTransform>().localPosition = pos;
+
             for (int i = 0; i < self.PetMeleeCardInHand.Count; i++)
             {
                 ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardInHand[i];
