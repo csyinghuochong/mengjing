@@ -8,7 +8,7 @@ namespace ET.Client
     {
         public GameObject DialogText;
         public GameObject Lal_Name;
-        public GameObject Img_HpValue;
+        public GameObject Img_HpValue{ get; set; }
         public GameObject GameObject { get; set; }
         public GameObject UIPlayerHpText;
         public GameObject BuffShieldValue{ get; set; }

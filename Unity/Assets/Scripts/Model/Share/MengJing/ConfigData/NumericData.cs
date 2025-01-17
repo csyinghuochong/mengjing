@@ -40,6 +40,7 @@ namespace ET
              NumericType.CombatRankID,
              NumericType.FirstUnionName,
              NumericType.OccCombatRankID,
+             NumericType.MasterId,
          };
 
          //1 整数  2 浮点数

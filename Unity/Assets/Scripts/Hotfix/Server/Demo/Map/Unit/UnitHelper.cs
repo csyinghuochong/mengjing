@@ -122,11 +122,12 @@ namespace ET.Server
         
         public static bool MasterIsPlayer(this Unit self)
         {
-            if (self.MasterId == 0)
+            long masterId = self.GetMasterId();
+            if (masterId == 0)
             {
                 return false;
             }
-            Unit master = self.GetParent<UnitComponent>().Get(self.MasterId);
+            Unit master = self.GetParent<UnitComponent>().Get(masterId);
             if (master == null)
             {
                 return false;
@@ -138,7 +139,7 @@ namespace ET.Server
         {
             return self.GetComponent<NumericComponentS>().GetAsInt(NumericType.TeamId);
         }
-
+        
         public static int GetAttackMode(this Unit self)
         {
             return self.GetComponent<NumericComponentS>().GetAsInt(NumericType.AttackMode);
@@ -359,7 +360,7 @@ namespace ET.Server
             
             if (mapComponent.SceneType != SceneTypeEnum.Battle && mapComponent.SceneType != SceneTypeEnum.PetMelee &&
                 self.Type == UnitType.Monster && defend.Type == UnitType.Monster
-                && self.MasterId == 0 && defend.MasterId == 0)
+                && self.GetMasterId() == 0 && defend.GetMasterId() == 0)
             {
                 return false;
             }

@@ -430,7 +430,7 @@ namespace ET.Client
                 return;
             }
 
-            if (unitmonster.Type == UnitType.Monster && unitmonster.MasterId == UnitHelper.GetMyUnitId(self.Root()))
+            if (unitmonster.Type == UnitType.Monster && unitmonster.GetMasterId() == UnitHelper.GetMyUnitId(self.Root()))
             {
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonProperty);
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonProperty>().InitPropertyShow(unitmonster).Coroutine();

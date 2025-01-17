@@ -3,7 +3,6 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-
     public class AI_Retreat : AAIHandler
     {
 

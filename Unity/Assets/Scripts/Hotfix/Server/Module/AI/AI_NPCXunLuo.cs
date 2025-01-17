@@ -12,7 +12,6 @@
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
-            Unit unit = aiComponent.GetParent<Unit>();
             while (true)
             {
                 await  aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(5000, cancellationToken);

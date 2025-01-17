@@ -618,7 +618,7 @@ namespace ET.Server
                         NumericComponentS numCom = unit.GetComponent<NumericComponentS>();
                         if (unit.Type == UnitType.JingLing)
                         {
-                            Unit master = unit.GetParent<UnitComponent>().Get(unit.MasterId);
+                            Unit master = unit.GetParent<UnitComponent>().Get(unit.GetMasterId());
                             numCom = (master != null && !master.IsDisposed) ? master.GetComponent<NumericComponentS>() : numCom;
                         }
 

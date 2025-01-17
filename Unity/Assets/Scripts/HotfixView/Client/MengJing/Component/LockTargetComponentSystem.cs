@@ -125,7 +125,6 @@ namespace ET.Client
             if (self.EffectMap.ContainsKey(type) && self.EffectMap[type] == null)
             {
                 self.EffectMap.Remove(type);
-                Log.Error($"self.LockUnitEffect == null:  {type}");
             }
 
             if (!self.EffectMap.ContainsKey(type))

@@ -600,10 +600,10 @@ namespace ET.Server
                      canBuff = true;
                      break;
                  case 6:////6: 己方召唤兽，不包含宠物
-                     canBuff = uu.Type == UnitType.Monster && uu.MasterId == self.TheUnitFrom.Id;
+                     canBuff = uu.Type == UnitType.Monster && uu.GetMasterId() == self.TheUnitFrom.Id;
                      break;
                  case 7://// 7: 己方召唤兽，包含宠物
-                     canBuff = uu.MasterId == self.TheUnitFrom.Id;
+                     canBuff = uu.GetMasterId() == self.TheUnitFrom.Id;
                      break;
                      default
                      : break;    

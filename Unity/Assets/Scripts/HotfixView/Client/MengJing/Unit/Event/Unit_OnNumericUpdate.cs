@@ -41,7 +41,6 @@
                     {
                         root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowUIStall(stallType);
                     }
-
                     break;
                 case NumericType.OccCombatRankID:
                 case NumericType.FirstUnionName:
@@ -49,7 +48,7 @@
                     break;
                 case NumericType.BattleCamp:
                     Unit unitmain = UnitHelper.GetMyUnitFromClientScene(root);
-                    args.Defend.GetComponent<UIPlayerHpComponent>()?.UpdateBattleCamp(unitmain, args.Defend.Id);
+                    MapViewHelper.UpdateBattleCamp(unitmain, args.Defend.Id);
                     break;
                 case NumericType.RunRaceTransform:
                     int runraceMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.RunRaceTransform);
@@ -296,7 +295,6 @@
                         costHp = (nowHpValue - args.OldValue);
                     }
 
-                    
                     EventSystem.Instance.Publish(args.Defend.Root(), new Now_Hp_Update()
                     {
                         Defend = args.Defend,

@@ -93,7 +93,7 @@ namespace ET.Server
                 playerPKStatus = true;
             }
 
-            if (attackUnit.Type == UnitType.Monster && attackUnit.MasterId > 0 && defendUnit.Type == UnitType.Player)
+            if (attackUnit.Type == UnitType.Monster && attackUnit.GetMasterId() > 0 && defendUnit.Type == UnitType.Player)
             {
                 playerPKStatus = true;
             }

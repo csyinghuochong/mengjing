@@ -53,7 +53,7 @@ namespace ET.Server
             List<EntityRef<Unit>> all = attack.GetParent<UnitComponent>().GetAll();
             foreach (Unit uu in all)
             {
-                if (uu.Type == UnitType.Monster && monsterIds.Contains(uu.ConfigId) && uu.MasterId == attack.Id)
+                if (uu.Type == UnitType.Monster && monsterIds.Contains(uu.ConfigId) && uu.GetMasterId() == attack.Id)
                 {
                     haved.Add(uu);
                 }

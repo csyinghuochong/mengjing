@@ -107,7 +107,7 @@ namespace ET.Server
             Unit master = scene.GetComponent<UnitComponent>().Get(createMonsterInfo.MasterID);
             if (master != null && master.Type == UnitType.JingLing)
             {
-                createMonsterInfo.MasterID = master.MasterId;
+                createMonsterInfo.MasterID = master.GetMasterId();
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterID);
@@ -131,7 +131,6 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.PetSkin, createMonsterInfo.SkinId, false);
             numericComponent.ApplyValue(NumericType.EnergySkillId, createMonsterInfo.SkillId, false);
             unit.SetBornPosition(unit.Position, false);
-            unit.MasterId = createMonsterInfo.MasterID;
 
             long revetime = 0;
             Unit mainUnit = null;
@@ -285,7 +284,6 @@ namespace ET.Server
             unitInfoComponent.UnitName = petinfo.PetName;
 
             unit.ConfigId = petinfo.ConfigId;
-            unit.MasterId = master.Id;
             unit.AddComponent<StateComponentS>(); //添加状态组件
             unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y,
@@ -369,7 +367,6 @@ namespace ET.Server
             unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
             unit.AddComponent<AttackRecordComponent>();
             unit.ConfigId = petinfo.ConfigId;
-            unit.MasterId = masterId;
             unitInfoComponent.UnitName = petinfo.PetName;
             unitInfoComponent.MasterName = petinfo.PlayerName;
             unit.AddComponent<StateComponentS>(); //添加状态组件
@@ -423,7 +420,6 @@ namespace ET.Server
             unitInfoComponent.UnitName = JingLingConfigCategory.Instance.Get(jinglingId).Name;
 
             unit.ConfigId = jinglingId;
-            unit.MasterId = master.Id;
             unit.AddComponent<StateComponentS>(); //添加状态组件
             unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y,
@@ -460,7 +456,6 @@ namespace ET.Server
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             unitInfoComponent.UnitName = master.GetComponent<UserInfoComponentS>().UserInfo.StallName;
             numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
-            unit.MasterId = master.Id;
             unit.Type = UnitType.Stall;
             unit.Position = master.Position;
             //unit.AddComponent<DeathTimeComponent, long>(TimeHelper.Hour * 6);

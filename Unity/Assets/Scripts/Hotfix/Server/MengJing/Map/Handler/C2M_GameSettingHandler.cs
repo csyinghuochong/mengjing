@@ -23,7 +23,7 @@ namespace ET.Server
                     for (int u = 0; u < unitlist.Count; u++)
                     {
 	                    Unit unititem = unitlist[i];
-						if (unititem.MasterId == unit.Id)
+						if (unititem.GetMasterId() == unit.Id)
 						{
 							unititem.GetComponent<NumericComponentS>().ApplyValue(NumericType.AttackMode, int.Parse(request.GameSettingInfos[i].Value));
                         }

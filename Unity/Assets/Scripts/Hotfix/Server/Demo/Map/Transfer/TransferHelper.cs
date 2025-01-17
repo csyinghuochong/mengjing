@@ -733,7 +733,7 @@ namespace ET.Server
             List<Unit> stallList = UnitHelper.GetUnitList(unit.Scene(), UnitType.Stall);
             for (int i = stallList.Count - 1; i >= 0; i--)
             {
-                if (stallList[i].MasterId == unit.Id)
+                if (stallList[i].GetMasterId() == unit.Id)
                 {
                     unit.GetParent<UnitComponent>().Remove(stallList[i].Id);
                 }

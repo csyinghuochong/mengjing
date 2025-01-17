@@ -152,6 +152,15 @@ namespace ET.Client
             //}
         }
 
+        public static void UpdateCampToMain(this UIPlayerHpComponent self, bool canAttack )
+        {
+            ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+            self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
+            string imageHp = canAttack ? ConfigData.UI_pro_3_2 : ConfigData.UI_pro_4_2 ;
+            Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
+            self.Img_HpValue.GetComponent<Image>().sprite = sp;
+        }
+
         public static void OnLoadGameObject(this UIPlayerHpComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed)
@@ -167,13 +176,11 @@ namespace ET.Client
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
-
-            string imageHp = canAttack ? ConfigData.UI_pro_3_2 : ConfigData.UI_pro_4_2 ;
-            Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
+            
             self.DialogText = rc.Get<GameObject>("DialogText");
             self.DialogText.SetActive(false);
             self.PlayerNameSet = rc.Get<GameObject>("PlayerNameSet");
-            self.Img_HpValue.GetComponent<Image>().sprite = sp;
+           
             self.BuffShieldValue = rc.Get<GameObject>("BuffShieldValue");
             self.Img_ChengHao = rc.Get<GameObject>("Img_ChengHao");
             self.Img_ChengHao.SetActive(true);
@@ -548,55 +555,7 @@ namespace ET.Client
             float value = numericComponent.GetAsInt(NumericType.JueXingAnger) * 1f / 500;
             self.Img_AngleValue.fillAmount = math.min(value, 1f);
         }
-
-        /// <summary>
-        /// 阵营改变，其他玩家的血条颜色做相应调整
-        /// </summary>
-        /// <param name="self"></param>
-        public static void UpdateBattleCamp(this UIPlayerHpComponent self, Unit mainUnit, long unitId)
-        {
-            if (mainUnit == null)
-            {
-                Log.Error("UpdateBattleCamp/mainUnit == null");
-            }
-
-            List<Unit> unitlist = UnitHelper.GetUnitsByType(mainUnit.Root(), UnitType.Player);
-            for (int i = 0; i < unitlist.Count; i++)
-            {
-                bool update = false;
-                if (unitlist[i].Id == mainUnit.Id || unitlist[i].Id == unitId || unitId == mainUnit.Id)
-                {
-                    update = true;
-                }
-
-                if (!update)
-                {
-                    continue;
-                }
-
-                bool canAttack = mainUnit.IsCanAttackUnit(unitlist[i]);
-                string imageHp = canAttack ?ConfigData.UI_pro_3_2: ConfigData.UI_pro_4_2 ;
-
-                switch (unitlist[i].Type)
-                {
-                    case UnitType.Player:
-                        UIPlayerHpComponent uIUnitHpComponent = unitlist[i].GetComponent<UIPlayerHpComponent>();
-                        if (uIUnitHpComponent != null && uIUnitHpComponent.Img_HpValue != null)
-                        {
-                            ReferenceCollector rc = uIUnitHpComponent.GameObject.GetComponent<ReferenceCollector>();
-                            Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
-                            uIUnitHpComponent.Img_HpValue.GetComponent<Image>().sprite = sp;
-                        }
-
-                        break;
-                    case UnitType.Monster:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
+        
         public static void RecoverGameObject(this UIPlayerHpComponent self, GameObject gameobject)
         {
             if (gameobject != null)

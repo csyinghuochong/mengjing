@@ -67,7 +67,7 @@ namespace ET.Server
                 for (int i = entities.Count - 1; i >= 0; i--)
                 {
                     Unit uu = entities[i];
-                    if (uu.Type == UnitType.Monster && destoryOldMonsterList.Contains(uu.ConfigId) && uu.MasterId == theUnitFrom.Id)
+                    if (uu.Type == UnitType.Monster && destoryOldMonsterList.Contains(uu.ConfigId) && uu.GetMasterId() == theUnitFrom.Id)
                     {
                         uu.GetComponent<HeroDataComponentS>().OnDead(null);
                         unitInfoComponent.ZhaohuanIds.Remove(uu.Id);

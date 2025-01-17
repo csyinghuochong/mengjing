@@ -7,7 +7,6 @@ namespace ET.Server
     {
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-
             Unit unit = aiComponent.GetParent<Unit>();
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
             Unit target = unitComponent.Get(aiComponent.TargetID);

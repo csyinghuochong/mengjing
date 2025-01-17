@@ -50,7 +50,7 @@ namespace ET.Server
                 List<EntityRef<Unit>> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
                 foreach (Unit unit in all)
                 {
-                    if (unit.Type == UnitType.Monster && unit.MasterId == theUnitFrom.Id && (allMonster || monsterIds.Contains(unit.ConfigId)))
+                    if (unit.Type == UnitType.Monster && unit.GetMasterId() == theUnitFrom.Id && (allMonster || monsterIds.Contains(unit.ConfigId)))
                     {
                         C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                         cmd.TargetID = skillS.SkillInfo.TargetID;

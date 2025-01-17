@@ -24,9 +24,7 @@ namespace ET.Server
                 attackRecordComponent.PetLockId = 0;
                 return 0;
             }
-
             
-
             long mastaerAttackId = attackRecordComponent.PetLockId;
             if (attackRecordComponent.PetLockId == unit.Id)
             {
@@ -36,32 +34,19 @@ namespace ET.Server
             Unit enemyUnit = unitComponent.Get(mastaerAttackId);
             if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
             {
-                mastaerAttackId = attackRecordComponent.AttackingId;
-                if (mastaerAttackId == unit.Id)
-                {
-                    mastaerAttackId = 0;
-                }
-
+                mastaerAttackId =mastaerAttackId == unit.Id ? 0 : attackRecordComponent.AttackingId;
                 enemyUnit = unitComponent.Get(mastaerAttackId);
             }
 
             if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
             {
-                mastaerAttackId = attackRecordComponent.BeAttackId;
-                if (mastaerAttackId == unit.Id)
-                {
-                    mastaerAttackId = 0;
-                }
-
+                mastaerAttackId = mastaerAttackId == unit.Id ? 0 : attackRecordComponent.BeAttackId;
                 enemyUnit = unitComponent.Get(mastaerAttackId);
             }
 
-            if (enemyUnit == null || !enemyUnit.IsCanBeAttack())
+            if ((enemyUnit == null || !enemyUnit.IsCanBeAttack() ) && (aiComponent.TargetID != unit.Id))
             {
-                if (aiComponent.TargetID != unit.Id)
-                {
-                    enemyUnit = unitComponent.Get(aiComponent.TargetID);
-                }
+                enemyUnit = unitComponent.Get(aiComponent.TargetID);
             }
 
             if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))

@@ -192,6 +192,20 @@ namespace ET.Client
 
             return units;
         }
+        
+        public static List<Unit> GetUnitsByTypes(Scene root, List<int> unitType)
+        {
+            List<Unit> units = new List<Unit>();
+            foreach (Unit unit in root.CurrentScene().GetComponent<UnitComponent>().GetAll())
+            {
+                if ( unitType.Contains(unit.Type))
+                {
+                    units.Add(unit);
+                }
+            }
+
+            return units;
+        }
 
         public static float3 GetBornPostion(this Unit self)
         {

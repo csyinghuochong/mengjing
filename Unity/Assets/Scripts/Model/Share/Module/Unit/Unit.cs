@@ -17,8 +17,6 @@ namespace ET
         public int ConfigId { get; set; } //配置表id
         
         public bool MainHero { get; set; }
-
-        public long MasterId {get; set; }
         
         public int SceneType {get; set; }
 

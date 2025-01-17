@@ -73,7 +73,6 @@ namespace ET.Client
                 unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
             
-            unit.MasterId = numericComponentC.GetAsLong(NumericType.MasterId);
             if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
             {
                 using (ListComponent<float3> list = ListComponent<float3>.Create())

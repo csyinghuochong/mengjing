@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ET.Client;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -53,7 +54,7 @@ namespace ET.Server
             List<EntityRef<Unit>> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
             foreach (Unit unit in all)
             {
-                if (unit.Type == UnitType.Monster && unit.ConfigId == monsterId && unit.MasterId == theUnitFrom.Id)
+                if (unit.Type == UnitType.Monster && unit.ConfigId == monsterId && unit.GetMasterId() == theUnitFrom.Id)
                 {
                     haved.Add(unit);
                 }

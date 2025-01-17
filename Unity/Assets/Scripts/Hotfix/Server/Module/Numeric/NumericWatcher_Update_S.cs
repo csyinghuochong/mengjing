@@ -41,9 +41,9 @@ namespace ET.Server
             {
                 Unit player = attack;
 
-                if (attack.MasterId > 0 && (attack.Type == UnitType.Pet || attack.Type == UnitType.Monster))
+                if (attack.GetMasterId() > 0 && (attack.Type == UnitType.Pet || attack.Type == UnitType.Monster))
                 {
-                    player = attack.GetParent<UnitComponent>().Get(attack.MasterId);
+                    player = attack.GetParent<UnitComponent>().Get(attack.GetMasterId());
                 }
 
                 if (player != null && player.Type != UnitType.Player)

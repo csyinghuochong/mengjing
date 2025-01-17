@@ -159,7 +159,6 @@ namespace ET.Server
                         heroCom.ApplyValue(NumericType.BattleCampOld, oldCamp, true, true, 0, 0);
                         heroCom.ApplyValue(NumericType.MasterId,  buffS.TheUnitFrom.Id, true, true, 0, 0);
                         heroCom.ApplyValue(NumericType.Old_AI, oldAi, true, true, 0, 0);
-                        buffS.TheUnitBelongto.MasterId = buffS.TheUnitFrom.Id;
 
                         AttackRecordComponent attackRecordComponent = buffS.TheUnitFrom.GetComponent<AttackRecordComponent>();
                         attackRecordComponent.BeAttackId = 0;
@@ -293,7 +292,6 @@ namespace ET.Server
                         int oldAi  =  numericComponentS.GetAsInt(NumericType.Old_AI);
                         numericComponentS.ApplyValue(NumericType.BattleCamp, oldCamp, true, true, 0, 0);
                         numericComponentS.ApplyValue(NumericType.MasterId,  0, true, true, 0, 0);
-                        buffS.TheUnitBelongto.MasterId = 0;
 
                         AIComponent belongAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
                         belongAIComponent.AIConfigId = oldAi;

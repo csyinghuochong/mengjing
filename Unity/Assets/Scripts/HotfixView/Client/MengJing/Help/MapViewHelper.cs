@@ -1,11 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
     public static class MapViewHelper
     {
 
+        /// <summary>
+        /// 阵营改变，其他玩家的血条颜色做相应调整
+        /// </summary>
+        /// <param name="self"></param>
+        public static void UpdateBattleCamp( Unit mainUnit, long unitId)
+        {
+            if (mainUnit == null)
+            {
+                Log.Error("UpdateBattleCamp/mainUnit == null");
+            }
+
+            List<Unit> unitlist = UnitHelper.GetUnitsByTypes(mainUnit.Root(), new List<int>(){ UnitType.Player, UnitType.Pet, UnitType.Monster });
+            for (int i = 0; i < unitlist.Count; i++)
+            {
+                bool update = false;
+                if (unitlist[i].Id == mainUnit.Id || unitlist[i].Id == unitId || unitId == mainUnit.Id)
+                {
+                    update = true;
+                }
+
+                if (!update)
+                {
+                    continue;
+                }
+
+                bool canAttack = mainUnit.IsCanAttackUnit(unitlist[i]);
+
+                switch (unitlist[i].Type)
+                {
+                    case UnitType.Player:
+                        UIPlayerHpComponent uIUnitHpComponent = unitlist[i].GetComponent<UIPlayerHpComponent>();
+                        uIUnitHpComponent?.UpdateCampToMain(canAttack);
+                        break;
+                    case UnitType.Monster:
+                        UIMonsterHpComponent uiMonsterHpComponent = unitlist[i].GetComponent<UIMonsterHpComponent>();
+                        uiMonsterHpComponent?.UpdateCampToMain(canAttack);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        
         public static void EnterHide(this Unit self)
         {
             switch(self.Type)

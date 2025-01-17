@@ -148,6 +148,17 @@ namespace ET.Client
             //}
         }
 
+        public static void UpdateCampToMain(this UIMonsterHpComponent self,bool canAttack)
+        {
+            ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+            
+            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2 ;
+            Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
+            self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
+            rc.Get<GameObject>("Img_HpValue").SetActive(true);
+            self.Img_HpValue.GetComponent<Image>().sprite = sp;
+        }
+        
         public static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed)
@@ -162,12 +173,8 @@ namespace ET.Client
 
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
-            self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
 
-            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2 ;
-            Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
-            rc.Get<GameObject>("Img_HpValue").SetActive(true);
-            self.Img_HpValue.GetComponent<Image>().sprite = sp;
+            self.UpdateCampToMain(canAttack);
             rc.Get<GameObject>("Alive").SetActive(true);
             rc.Get<GameObject>("Dead").SetActive(false);
             rc.Get<GameObject>("ReviveTime").SetActive(false);
