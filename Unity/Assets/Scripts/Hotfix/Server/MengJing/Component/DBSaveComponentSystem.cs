@@ -94,7 +94,7 @@ namespace ET.Server
                 ServerLogHelper.LoginInfo(offLineInfo);
                 ServerLogHelper.LogDebug(offLineInfo);
             }
-
+            unit.GetComponent<EnergyComponentS>().OnDisconnect();
             self.PlayerState = PlayerState.None;
             TransferHelper.BeforeTransfer(unit);
             unit.GetParent<UnitComponent>().Remove(unit.Id);

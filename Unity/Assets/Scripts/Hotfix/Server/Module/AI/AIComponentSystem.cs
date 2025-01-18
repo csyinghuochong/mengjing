@@ -272,6 +272,12 @@ namespace ET
 
         public static void BeAttacking(this AIComponent self, Unit attack)
         {
+            Unit main = self.GetParent<Unit>();
+            if (!main.IsCanAttackUnit(attack))
+            {
+                return;
+            }
+            
             //0.1的概率概率转移仇恨
             float moveActPro = 0.1f;
             moveActPro = moveActPro * (1 + attack.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Now_ChaoFengPro));
@@ -279,7 +285,7 @@ namespace ET
             {
                 return;
             }
-
+            
             long serverTime = TimeHelper.ServerNow();
             if (serverTime - self.LastChangeTime < 6000)
             {
@@ -287,8 +293,7 @@ namespace ET
             }
 
             self.LastChangeTime = serverTime;
-
-            if (self.GetParent<Unit>().Type == UnitType.Pet)
+            if (main.Type == UnitType.Pet)
             {
                 bool gaiLv = RandomHelper.RandFloat01() < 0.1f;
                 if (self.TargetID != 0 && gaiLv)
