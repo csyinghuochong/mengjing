@@ -536,40 +536,6 @@ namespace ET.Client
             return targetPosi;
         }
         
-        private static float3 CanMovePosition_2(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
-        {
-            float3 targetPosi = unit.Position;
-            for (int i = 0; i < 10; i++)
-            {
-                targetPosi = targetPosi + math.forward(rotation) * ( 0.5f);
-                RaycastHit hit;
-
-                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
-                if (hit.collider != null)
-                {
-                    break;
-                }
-
-                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
-                if (hit.collider == null)
-                {
-                    // if (i == 0)
-                    // {
-                    //     targetpositon = target;
-                    // }
-                    break;
-                }
-                else
-                {
-                    targetPosi = hit.point;
-                }
-                
-                pathfind.Add(targetPosi);
-            }
-
-            return targetPosi;
-        }
-        
         private static void CanMovePosition_3(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
         {
             float3 targetPosi = unit.Position;
@@ -593,14 +559,25 @@ namespace ET.Client
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
                 if (hit.collider == null)
                 {
+                    // if (i == 0)
+                    // {
+                    //     targetpositon = target;
+                    // }
                     break;
                 }
                 else
                 {
-                    targetPosi = hit.point;
+                    //targetPosi = hit.point;
+                    if (Mathf.Abs(hit.point.y - targetPosi.y) > 0.4f)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        targetPosi = hit.point;
+                        pathfind.Add(targetPosi);
+                    }
                 }
-                
-                pathfind.Add(targetPosi);
             }
 
             return;
