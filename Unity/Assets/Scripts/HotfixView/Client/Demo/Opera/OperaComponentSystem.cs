@@ -51,7 +51,7 @@ namespace ET.Client
             if (InputHelper.GetMouseButtonDown(1))
             {
                 self.OnGetMouseButtonDown_1();
-                self.TestClientPathfindingComponent();
+                self.TestClientPathfinding2Component();
             }
 
             if (InputHelper.GetKeyDown((int)KeyCode.S))
@@ -99,7 +99,7 @@ namespace ET.Client
         }
 
         /// <summary>
-        /// 测试客户端寻路
+        /// 测试客户端寻路1
         /// </summary>
         /// <param name="self"></param>
         public static void TestClientPathfindingComponent(this OperaComponent self)
@@ -117,6 +117,35 @@ namespace ET.Client
                 {
                     return;
                 }
+
+                Log.Warning($"寻路方案1 路径点{points}");
+                
+                float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
+                unit.GetComponent<MoveComponent>().MoveToAsync(points, speed, 100, (int)speed).Coroutine();
+            }
+        }
+
+        /// <summary>
+        /// 测试客户端寻路2
+        /// </summary>
+        /// <param name="self"></param>
+        public static void TestClientPathfinding2Component(this OperaComponent self)
+        {
+            Ray ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000, self.MapMask))
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+                List<float3> points = new List<float3>();
+                unit.GetComponent<ClientPathfinding2Component>().Find(hit.point, points);
+
+                if (points.Count < 2)
+                {
+                    return;
+                }
+
+                Log.Warning($"寻路方案2 路径点{points}");
 
                 float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
                 unit.GetComponent<MoveComponent>().MoveToAsync(points, speed, 100, (int)speed).Coroutine();
