@@ -563,7 +563,11 @@ namespace ET.Client
                     {
                         unit.AddComponent<AnimationComponent>();
                     }
-
+                    
+                    // 客户端寻路组件
+                    //unit.AddComponent<ClientPathfindingComponent, int>(SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID);
+                    //unit.AddComponent<ClientPathfinding2Component>();
+                    
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
                     unit.AddComponent<EffectViewComponent>(); //添加特效组建
