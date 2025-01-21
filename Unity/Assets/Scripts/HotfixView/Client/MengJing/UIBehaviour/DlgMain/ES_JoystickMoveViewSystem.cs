@@ -256,13 +256,13 @@ namespace ET.Client
                 unit.SpeedRate = speedRate;
                 List<float3> pathfind = new List<float3>();
                 quaternion rotation_1 = quaternion.Euler(0, math.radians(direction + i ), 0);
-                self.CanMovePosition_3(unit, rotation_1, pathfind);
+                self.CanMovePosition(unit, rotation_1, pathfind, 2, 0.1f, false);
 
                 if (pathfind.Count < 2)
                 {
                     pathfind.Clear();
                     quaternion rotation_2 = quaternion.Euler(0, math.radians(direction - i ), 0);
-                    self.CanMovePosition_3(unit, rotation_2, pathfind);
+                    self.CanMovePosition(unit, rotation_2, pathfind, 2, 0.1f, false);
                 }
                 
                 if (pathfind.Count >= 2)
@@ -427,43 +427,7 @@ namespace ET.Client
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
         }
-
-        private static void ShowObstructTip(this ES_JoystickMove self, int monsterId)
-        {
-            if (Time.time - self.LastShowTip < 1f)
-            {
-                return;
-            }
-
-            self.LastShowTip = Time.time;
-            string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
-            using (zstring.Block())
-            {
-                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请先消灭{0}", monsterName));
-            }
-        }
-
-        private static float CanMoveDistance(this ES_JoystickMove self, Unit unit, Quaternion rotation)
-        {
-            float intveral = 1f; //每次寻的长度
-            int distance = 2;
-            int maxnumber = 5; //最多寻多少次
-            for (int i = distance; i <= maxnumber; i++)
-            {
-                Vector3 unitPosi = unit.Position;
-                Vector3 target = unitPosi + rotation * Vector3.forward * i * intveral;
-                RaycastHit hit;
-
-                distance = i;
-                Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
-                if (hit.collider != null)
-                {
-                    break;
-                }
-            }
-
-            return distance * intveral;
-        }
+        
 
         private static void ShowObstructName(this ES_JoystickMove self, GameObject hit)
         {
@@ -485,40 +449,51 @@ namespace ET.Client
             }
         }
 
-        private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="unit"></param>
+        /// <param name="rotation"></param>
+        /// <param name="pathfind"></param>
+        /// <param name="number"></param>
+        /// <param name="dis"></param>
+        /// <param name="showobs"></param>
+        /// <returns></returns>
+        private static float3 CanMovePosition(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind, int number = 30, float distance = 0.2f, bool showobs = true)
         {
             float3 targetPosi = unit.Position;
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < number; i++)
             {
-                targetPosi = targetPosi + math.forward(rotation) * ( 0.2f);
+                targetPosi += math.forward(rotation) * ( distance);
                 RaycastHit hit;
-
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
                 {
-                    self.ShowObstructName(hit.collider.gameObject);
+                    if (showobs)
+                    {
+                        self.ShowObstructName(hit.collider.gameObject);
+                    }
                     break;
                 }
 
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
                 if (hit.collider != null)
                 {
-                    self.ShowObstructName(hit.collider.gameObject);
+                    if (showobs)
+                    {                    
+                        self.ShowObstructName(hit.collider.gameObject);
+                    }
                     break;
                 }
 
                 Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
                 if (hit.collider == null)
                 {
-                    // if (i == 0)
-                    // {
-                    //     targetpositon = target;
-                    // }
                     break;
                 }
                 else
                 {
-                    //targetPosi = hit.point;
                     if (Mathf.Abs(hit.point.y - targetPosi.y) > 0.4f)
                     {
                         break;
@@ -529,82 +504,11 @@ namespace ET.Client
                         pathfind.Add(targetPosi);
                     }
                 }
-                
-                //pathfind.Add(targetPosi);
             }
 
             return targetPosi;
         }
         
-        private static void CanMovePosition_3(this ES_JoystickMove self, Unit unit, quaternion rotation,  List<float3> pathfind)
-        {
-            float3 targetPosi = unit.Position;
-            for (int i = 0; i < 2; i++)
-            {
-                targetPosi = targetPosi + math.forward(rotation) * ( 0.1f);
-                RaycastHit hit;
-
-                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
-                if (hit.collider != null)
-                {
-                    break;
-                }
-
-                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
-                if (hit.collider != null)
-                {
-                    break;
-                }
-                
-                Physics.Raycast(targetPosi + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
-                if (hit.collider == null)
-                {
-                    // if (i == 0)
-                    // {
-                    //     targetpositon = target;
-                    // }
-                    break;
-                }
-                else
-                {
-                    //targetPosi = hit.point;
-                    if (Mathf.Abs(hit.point.y - targetPosi.y) > 0.4f)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        targetPosi = hit.point;
-                        pathfind.Add(targetPosi);
-                    }
-                }
-            }
-
-            return;
-        }
-        
-        private static int CheckObstruct(this ES_JoystickMove self, Unit unit, Vector3 target)
-        {
-            RaycastHit hit;
-            Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
-            if (hit.collider == null)
-            {
-                return 0;
-            }
-
-            int monsterid = int.Parse(hit.collider.gameObject.name);
-            List<Unit> units = UnitHelper.GetUnitsByType(unit.Root(), UnitType.Monster);
-            for (int i = 0; i < units.Count; i++)
-            {
-                if (units[i].ConfigId == monsterid)
-                {
-                    return monsterid;
-                }
-            }
-
-            return 0;
-        }
-
         public static void ResetJoystick(this ES_JoystickMove self)
         {
             self.IsDrag = false;
