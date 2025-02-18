@@ -16,7 +16,10 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.Height = self.uiTransform.GetComponent<RectTransform>().rect.height;
-            self.E_HighlightImage.gameObject.SetActive(false);
+            self.E_Bg1Image.gameObject.SetActive(true);
+            self.E_Bg2Image.gameObject.SetActive(false);
+            self.E_TaskTypeName1Text.gameObject.SetActive(true);
+            self.E_TaskTypeName2Text.gameObject.SetActive(false);
 
             self.E_TaskTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskTypeItemsRefresh);
         }
@@ -34,13 +37,16 @@ namespace ET.Client
             switch (taskType)
             {
                 case TaskTypeEnum.Main:
-                    self.E_TaskTypeNameText.text = "主线任务";
+                    self.E_TaskTypeName1Text.text = "主线任务";
+                    self.E_TaskTypeName2Text.text = "主线任务";
                     break;
                 case TaskTypeEnum.Branch:
-                    self.E_TaskTypeNameText.text = "支线任务";
+                    self.E_TaskTypeName1Text.text = "支线任务";
+                    self.E_TaskTypeName2Text.text = "支线任务";
                     break;
                 case TaskTypeEnum.Daily:
-                    self.E_TaskTypeNameText.text = "每日任务";
+                    self.E_TaskTypeName1Text.text = "每日任务";
+                    self.E_TaskTypeName2Text.text = "每日任务";
                     break;
             }
 
@@ -50,7 +56,10 @@ namespace ET.Client
         public static void Expand(this ES_TaskType self)
         {
             self.IsExpand = true;
-            self.E_HighlightImage.gameObject.SetActive(true);
+            self.E_Bg1Image.gameObject.SetActive(false);
+            self.E_Bg2Image.gameObject.SetActive(true);
+            self.E_TaskTypeName1Text.gameObject.SetActive(false);
+            self.E_TaskTypeName2Text.gameObject.SetActive(true);
             self.Refresh();
 
             // 默认选第一个
@@ -68,7 +77,10 @@ namespace ET.Client
         public static void TalkUp(this ES_TaskType self)
         {
             self.IsExpand = false;
-            self.E_HighlightImage.gameObject.SetActive(false);
+            self.E_Bg1Image.gameObject.SetActive(true);
+            self.E_Bg2Image.gameObject.SetActive(false);
+            self.E_TaskTypeName1Text.gameObject.SetActive(true);
+            self.E_TaskTypeName2Text.gameObject.SetActive(false);
             self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, self.Height);
             self.E_TaskTypeItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(710, 1f);
             // 刷新一下父物体

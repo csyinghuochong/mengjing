@@ -14,7 +14,7 @@ namespace ET.Client
 		public bool IsExpand { get; set; }
 		public int TaskType;
 		
-		public Image E_HighlightImage
+		public Image E_Bg1Image
      	{
      		get
      		{
@@ -23,15 +23,32 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_HighlightImage == null )
+     			if( this.m_E_Bg1Image == null )
      			{
-		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Highlight");
+		    		this.m_E_Bg1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Bg1");
      			}
-     			return this.m_E_HighlightImage;
+     			return this.m_E_Bg1Image;
      		}
      	}
+		
+		public Image E_Bg2Image
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Bg2Image == null )
+				{
+					this.m_E_Bg2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Bg2");
+				}
+				return this.m_E_Bg2Image;
+			}
+		}
 
-		public Text E_TaskTypeNameText
+		public Text E_TaskTypeName1Text
      	{
      		get
      		{
@@ -40,13 +57,30 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_TaskTypeNameText == null )
+     			if( this.m_E_TaskTypeName1Text == null )
      			{
-		    		this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName");
+		    		this.m_E_TaskTypeName1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName1");
      			}
-     			return this.m_E_TaskTypeNameText;
+     			return this.m_E_TaskTypeName1Text;
      		}
      	}
+		
+		public Text E_TaskTypeName2Text
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_TaskTypeName2Text == null )
+				{
+					this.m_E_TaskTypeName2Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName2");
+				}
+				return this.m_E_TaskTypeName2Text;
+			}
+		}
 
 		public Button E_SelectButton
      	{
@@ -113,16 +147,20 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_HighlightImage = null;
-			this.m_E_TaskTypeNameText = null;
+			this.m_E_Bg1Image = null;
+			this.m_E_Bg2Image = null;
+			this.m_E_TaskTypeName1Text = null;
+			this.m_E_TaskTypeName2Text = null;
 			this.m_E_SelectButton = null;
 			this.m_E_SelectImage = null;
 			this.m_E_TaskTypeItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
 
-		private Image m_E_HighlightImage = null;
-		private Text m_E_TaskTypeNameText = null;
+		private Image m_E_Bg1Image = null;
+		private Image m_E_Bg2Image = null;
+		private Text m_E_TaskTypeName1Text = null;
+		private Text m_E_TaskTypeName2Text = null;
 		private Button m_E_SelectButton = null;
 		private Image m_E_SelectImage = null;
 		private LoopVerticalScrollRect m_E_TaskTypeItemsLoopVerticalScrollRect = null;
