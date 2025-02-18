@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ET
 {
-    /// <summary>
+    /// <summary>c
     /// 将png的文件名称改为小写
     /// </summary>
     public class PngCheckTool : MonoBehaviour
