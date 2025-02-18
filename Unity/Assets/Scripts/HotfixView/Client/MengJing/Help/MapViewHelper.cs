@@ -112,6 +112,47 @@ namespace ET.Client
             }
          }
 
+        public static void OnMainHeroPath(this Unit self, MapComponent mapComponent)
+        {
+            if (!self.MainHero)
+            {
+                return;
+            }
+
+            int navmesh = 0;
+            int sceneType = mapComponent.SceneType;
+           
+            if (SceneConfigHelper.UseSceneConfig(sceneType))
+            {
+                navmesh = SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID;
+            }
+            else
+            {
+                switch (sceneType)
+                {
+                    case SceneTypeEnum.LocalDungeon:
+                        navmesh = DungeonConfigCategory.Instance.Get(mapComponent.SceneId).MapID;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            self.AddComponent<ClientPathfindingComponent, int>(navmesh);
+            //unit.AddComponent<ClientPathfinding2Component>();
+        }
+        
+        public static void UpdateMainHeroPath(this Unit self, MapComponent mapComponent)
+        {
+            if (!self.MainHero)
+            {
+                return;
+            }
+            
+            self.RemoveComponent<ClientPathfindingComponent>();
+            self.OnMainHeroPath(mapComponent);
+        }
+
         public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)
         {
 

@@ -307,13 +307,20 @@ namespace ET.Client
             Unit unit = self.MainUnit;
             quaternion rotation = quaternion.Euler(0, math.radians(direction), 0);
             List<float3> pathfind = new List<float3>();
-            float3 newv3 = self.CanMovePosition(unit, rotation, pathfind);
+            
+            self.CanMovePosition(unit, rotation, pathfind);
+            
+            //unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  unit.Position + math.forward(rotation) * 2f, pathfind);
+            
+            //unit.GetComponent<ClientPathfinding2Component>().Find(unit.Position + math.forward(rotation) * 2f, pathfind);
+            
             if (pathfind.Count < 2)
             {
                 self.MoveSlowly(direction);
                 return;
             }
 
+            float3 newv3 = pathfind[pathfind.Count - 1];
             float3 initpos = pathfind[0];
             List<float3> pathfind_2 = new List<float3>();
             pathfind_2.Add(initpos);

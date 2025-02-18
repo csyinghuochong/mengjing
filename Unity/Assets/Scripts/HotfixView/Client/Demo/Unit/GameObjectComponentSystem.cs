@@ -565,8 +565,7 @@ namespace ET.Client
                     }
                     
                     // 客户端寻路组件
-                    //unit.AddComponent<ClientPathfindingComponent, int>(SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID);
-                    //unit.AddComponent<ClientPathfinding2Component>();
+                    unit.OnMainHeroPath(mapComponent);
                     
                     unit.AddComponent<FsmComponent>(); //当前状态组建
                     unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件

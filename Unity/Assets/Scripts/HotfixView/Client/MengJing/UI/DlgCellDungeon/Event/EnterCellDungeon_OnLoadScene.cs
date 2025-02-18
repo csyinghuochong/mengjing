@@ -6,6 +6,10 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, EnterCellDungeon args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
+            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
+            unit.UpdateMainHeroPath(mapComponent);
+            
             await scene.GetComponent<SceneManagerComponent>().ChangeCellSonScene(mapComponent.SceneType,
                 mapComponent.SceneType,
                 mapComponent.SonSceneId);
