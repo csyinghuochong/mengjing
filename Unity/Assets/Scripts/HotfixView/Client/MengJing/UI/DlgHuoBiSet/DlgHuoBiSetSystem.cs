@@ -116,9 +116,27 @@ namespace ET.Client
             // 标题图标
             string titleIcon = windowID switch
             {
-                WindowID.WindowID_Activity => "Img_UIActivity",
-                //WindowID.WindowID_Friend => "Img_UIActivity",
+                WindowID.WindowID_Task => "Title_Task",
+                WindowID.WindowID_Role => "Title_Rose",
+                WindowID.WindowID_Pet => "Title_Pet",
+                WindowID.WindowID_Skill => "Title_Skill",
+                WindowID.WindowID_Friend => "Title_Friend",
+                WindowID.WindowID_ChengJiu => "Title_ChengJiu",
+                WindowID.WindowID_PetBar => "Title_Pet",
                 _ => "Default"
+            };
+            
+            // 标题文字
+            string title = windowID switch
+            {
+                WindowID.WindowID_Task => "任务系统",
+                WindowID.WindowID_Role => "角色系统",
+                WindowID.WindowID_Pet => "宠物系统",
+                WindowID.WindowID_Skill => "技能系统",
+                WindowID.WindowID_Friend => "好友系统",
+                WindowID.WindowID_ChengJiu => "成就系统",
+                WindowID.WindowID_PetBar => "宠物上阵",
+                _ => ""
             };
 
             if (titleIcon != "Default")
@@ -131,18 +149,6 @@ namespace ET.Client
             {
                 self.View.E_TitleIconImage.sprite = self.DefaultTitleIconSprite;
             }
-
-            // 标题文字
-            string title = windowID switch
-            {
-                WindowID.WindowID_Task => "任务系统",
-                WindowID.WindowID_Role => "角色系统",
-                WindowID.WindowID_Pet => "宠物系统",
-                WindowID.WindowID_Skill => "技能系统",
-                WindowID.WindowID_Friend => "好友系统",
-                WindowID.WindowID_ChengJiu => "成就系统",
-                _ => ""
-            };
 
             self.View.E_TitleTextText.text = title;
         }
