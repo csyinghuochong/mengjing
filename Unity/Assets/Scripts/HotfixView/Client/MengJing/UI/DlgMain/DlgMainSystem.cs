@@ -839,8 +839,15 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.EG_MainTaskRectTransform.gameObject.SetActive(true);
-                    self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
+                    if (self.View.EG_MainTaskRectTransform.gameObject.activeSelf)
+                    {
+                        self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task).Coroutine();
+                    }
+                    else
+                    {
+                        self.View.EG_MainTaskRectTransform.gameObject.SetActive(true);
+                        self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
+                    }
                     break;
                 case 1:
                     self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
@@ -1839,6 +1846,8 @@ namespace ET.Client
             else
             {
                 self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
+                self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
+                self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
                 self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon ? 1 : 0);
             }
 
