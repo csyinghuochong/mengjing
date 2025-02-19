@@ -8,7 +8,7 @@ namespace ET.Client
 	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public PetMeleeCardInfo PetMeleeCardInfo;
-		public GameObject GameObject;
+		public GameObject UnitGameObject;
 		public string UnitAssetsPath;
 		public float CellSize = 3.33f;
 		public bool CanPlace;
@@ -16,6 +16,7 @@ namespace ET.Client
 		public long Timer;
 		public Vector2 StartPos;
 		public float MaxDamageRange = 25f;// 伤害范围半径(覆盖整个场景)
+		public GameObject CardIconGameObject;
 		
 		public UnityEngine.UI.Image E_BackImage
      	{

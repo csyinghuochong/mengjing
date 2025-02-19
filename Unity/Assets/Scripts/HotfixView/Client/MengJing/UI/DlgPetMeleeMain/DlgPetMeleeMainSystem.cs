@@ -74,12 +74,14 @@ namespace ET.Client
             self.View.E_DisposeCardEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) =>
             {
                 self.IsDisposeCard = true;
-                self.View.E_DisposeCardEventTrigger.GetComponent<RectTransform>().localScale = new Vector2(1.1f, 1.1f);
+                self.View.E_DisposeCardEventTrigger.transform.Find("Image1").gameObject.SetActive(false);
+                self.View.E_DisposeCardEventTrigger.transform.Find("Image2").gameObject.SetActive(true);
             });
             self.View.E_DisposeCardEventTrigger.RegisterEvent(EventTriggerType.PointerExit, (pdata) =>
             {
                 self.IsDisposeCard = false;
-                self.View.E_DisposeCardEventTrigger.GetComponent<RectTransform>().localScale = new Vector2(1f, 1f);
+                self.View.E_DisposeCardEventTrigger.transform.Find("Image1").gameObject.SetActive(true);
+                self.View.E_DisposeCardEventTrigger.transform.Find("Image2").gameObject.SetActive(false);
             });
 
             self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.IsCancelCard = true; });
@@ -111,6 +113,8 @@ namespace ET.Client
             BackgroundImage.SetActive(false);
             CellIndicator.SetActive(false);
 
+            self.View.E_DisposeCardEventTrigger.transform.Find("Image1").gameObject.SetActive(true);
+            self.View.E_DisposeCardEventTrigger.transform.Find("Image2").gameObject.SetActive(false);
             self.View.E_CancelCardAreaImage.gameObject.SetActive(false);
         }
 

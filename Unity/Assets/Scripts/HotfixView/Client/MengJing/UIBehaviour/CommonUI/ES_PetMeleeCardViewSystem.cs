@@ -44,13 +44,13 @@ namespace ET.Client
         {
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 1f;
 
-            if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)
+            if (!string.IsNullOrEmpty(self.UnitAssetsPath) && self.UnitGameObject != null)
             {
-                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.GameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().RecoverGameObject(self.UnitAssetsPath, self.UnitGameObject);
             }
 
             self.PetMeleeCardInfo = cardInfo;
-            self.GameObject = null;
+            self.UnitGameObject = null;
             self.UnitAssetsPath = null;
 
             switch (self.PetMeleeCardInfo.Type)
@@ -141,20 +141,20 @@ namespace ET.Client
                 return;
             }
 
-            if (self.GameObject != null)
+            if (self.UnitGameObject != null)
             {
-                Log.Error($" self.GameObject !=null:   {self.GameObject.name}    {go.name}   {self.InstanceId}   {formId}");
+                Log.Error($" self.GameObject !=null:   {self.UnitGameObject.name}    {go.name}   {self.InstanceId}   {formId}");
                 return;
             }
 
-            self.GameObject = go;
-            self.GameObject.transform.SetParent(GlobalComponent.Instance.Unit);
+            self.UnitGameObject = go;
+            self.UnitGameObject.transform.SetParent(GlobalComponent.Instance.Unit);
 
             switch (self.PetMeleeCardInfo.Type)
             {
                 case (int)PetMeleeCarType.MainPet:
                 case (int)PetMeleeCarType.AssistPet:
-                    self.GameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    self.UnitGameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
                     break;
 
                 case (int)PetMeleeCarType.Magic:
@@ -164,15 +164,15 @@ namespace ET.Client
                     if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
                     {
                         float innerRadius = (float)skillConfig.DamgeRange[0] * 2f;
-                        self.GameObject.Get<GameObject>("Skill_InnerArea").transform.localScale = Vector3.one * innerRadius;
-                        self.GameObject.Get<GameObject>("Skill_Area").SetActive(false);
+                        self.UnitGameObject.Get<GameObject>("Skill_InnerArea").transform.localScale = Vector3.one * innerRadius;
+                        self.UnitGameObject.Get<GameObject>("Skill_Area").SetActive(false);
                     }
 
                     break;
                 }
             }
 
-            self.GameObject.SetActive(false);
+            self.UnitGameObject.SetActive(false);
         }
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
@@ -231,6 +231,31 @@ namespace ET.Client
 
             DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
 
+            // 在丢弃按钮位置显示一个卡牌Icon
+            if (dlgPetMeleeMain.IsDisposeCard)
+            {
+                if (self.CardIconGameObject == null)
+                {
+                    self.CardIconGameObject = UnityEngine.Object.Instantiate(self.uiTransform.gameObject, self.uiTransform.parent);
+                    self.CardIconGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+                    self.CardIconGameObject.GetComponent<CanvasGroup>().alpha = 1f;
+                }
+
+                Vector2 localPoint = new Vector2();
+                RectTransform canvas = self.uiTransform.parent.GetComponent<RectTransform>();
+                Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
+                self.CardIconGameObject.SetActive(true);
+                self.CardIconGameObject.transform.localPosition = localPoint;
+            }
+            else
+            {
+                if (self.CardIconGameObject != null)
+                {
+                    self.CardIconGameObject.SetActive(false);
+                }
+            }
+
             switch (self.PetMeleeCardInfo.Type)
             {
                 case (int)PetMeleeCarType.MainPet:
@@ -240,12 +265,12 @@ namespace ET.Client
                     GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
                     GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
 
-                    if (dlgPetMeleeMain.IsCancelCard)
+                    if (dlgPetMeleeMain.IsCancelCard || dlgPetMeleeMain.IsDisposeCard)
                     {
-                        if (self.GameObject != null)
+                        if (self.UnitGameObject != null)
                         {
                             CellIndicator.SetActive(false);
-                            self.GameObject.gameObject.SetActive(false);
+                            self.UnitGameObject.gameObject.SetActive(false);
                         }
 
                         return;
@@ -305,6 +330,8 @@ namespace ET.Client
                     {
                         if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
                         {
+                            self.uiTransform.gameObject.SetActive(!dlgPetMeleeMain.IsDisposeCard);
+
                             Vector2 localPoint = new Vector2();
                             RectTransform canvas = self.uiTransform.parent.GetComponent<RectTransform>();
                             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
@@ -313,11 +340,11 @@ namespace ET.Client
                         }
                     }
 
-                    if (dlgPetMeleeMain.IsCancelCard)
+                    if (dlgPetMeleeMain.IsCancelCard || dlgPetMeleeMain.IsDisposeCard)
                     {
-                        if (self.GameObject != null)
+                        if (self.UnitGameObject != null)
                         {
-                            self.GameObject.gameObject.SetActive(false);
+                            self.UnitGameObject.gameObject.SetActive(false);
                         }
 
                         return;
@@ -329,10 +356,10 @@ namespace ET.Client
                 }
             }
 
-            if (self.GameObject != null)
+            if (self.UnitGameObject != null)
             {
-                self.GameObject.gameObject.SetActive(true);
-                self.GameObject.transform.position = self.TargetPos;
+                self.UnitGameObject.gameObject.SetActive(true);
+                self.UnitGameObject.transform.position = self.TargetPos;
             }
         }
 
@@ -371,12 +398,14 @@ namespace ET.Client
             BackgroundImage.SetActive(false);
             CellIndicator.SetActive(false);
 
-            if (self.GameObject != null)
+            if (self.UnitGameObject != null)
             {
-                self.GameObject.gameObject.SetActive(false);
+                self.UnitGameObject.gameObject.SetActive(false);
             }
 
             DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
+
+            UnityEngine.Object.Destroy(self.CardIconGameObject);
 
             dlgPetMeleeMain.View.E_CancelCardAreaImage.gameObject.SetActive(false);
             if (dlgPetMeleeMain.IsCancelCard)
