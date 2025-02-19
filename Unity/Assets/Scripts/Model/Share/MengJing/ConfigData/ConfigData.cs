@@ -2030,13 +2030,13 @@ namespace ET
         /// 辅战宠物卡出现概率
         /// </summary>
         [StaticField]
-        public static float PetMeleeAssistPetProb = 0.6f;
+        public static float PetMeleeAssistPetProb = 0.3f;
 
         /// <summary>
         /// 魔法卡出现概率
         /// </summary>
         [StaticField]
-        public static float PetMeleeSkillProb = 0.2f;
+        public static float PetMeleeSkillProb = 0.5f;
 
         /// <summary>
         /// 多少秒刷新一张卡牌
