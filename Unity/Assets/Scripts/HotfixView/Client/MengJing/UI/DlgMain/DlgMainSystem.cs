@@ -484,6 +484,8 @@ namespace ET.Client
             self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(false);
 
             self.View.E_Btn_ShouSuoButton.AddListener(self.OnShouSuo);
+            self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
+            self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
             self.RefreshMainTaskItems();
 
