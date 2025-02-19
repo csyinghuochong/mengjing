@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -127,18 +128,37 @@ namespace ET.Client
             for (int i = 0; i < 6; i++)
             {
                 GameObject go = self.MagicItemList[i];
+                GameObject icon = go.transform.Find("mask/Icon").gameObject;
                 if (i < self.PetMeleeInfo.MagicList.Count)
                 {
                     int magicConfigId = self.PetMeleeInfo.MagicList[i];
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(magicConfigId);
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, petMagicCardConfig.Icon.ToString());
                     Sprite sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                    go.transform.Find("mask/Icon").gameObject.SetActive(true);
-                    go.transform.Find("mask/Icon").GetComponent<Image>().sprite = sprite;
+                    icon.gameObject.SetActive(true);
+                    icon.GetComponent<Image>().sprite = sprite;
+
+                    icon.GetComponent<EventTrigger>().triggers.Clear();
+                    icon.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerDown,
+                        (pdata) =>
+                        {
+                            PointerEventData p = pdata as PointerEventData;
+
+                            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_SkillTips);
+                            Vector2 localPoint;
+                            RectTransform canvas = self.Root().GetComponent<GlobalComponent>().NormalRoot.GetComponent<RectTransform>();
+                            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+                            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, p.position, uiCamera, out localPoint);
+                            DlgSkillTips dlgSkillTips = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkillTips>();
+                            dlgSkillTips.OnUpdateData(petMagicCardConfig.SkillId, new Vector3(localPoint.x, localPoint.y + 150f, 0f),
+                                ABAtlasTypes.RoleSkillIcon);
+                        });
+                    icon.GetComponent<EventTrigger>().RegisterEvent(EventTriggerType.PointerUp,
+                        (pdata) => { self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips); });
                 }
                 else
                 {
-                    go.transform.Find("mask/Icon").gameObject.SetActive(false);
+                    icon.gameObject.SetActive(false);
                 }
             }
         }
@@ -191,7 +211,7 @@ namespace ET.Client
             {
                 self.ShowMainPets.Add(rolePetInfos[i]);
             }
-            
+
             self.SelectMainPets.Clear();
             self.SelectMainPets.AddRange(self.PetMeleeInfo.MainPetList);
 
@@ -304,7 +324,7 @@ namespace ET.Client
                     self.ShowAssistPets.Add(id);
                 }
             }
-            
+
             self.SelectAssistPets.Clear();
             self.SelectAssistPets.AddRange(self.PetMeleeInfo.AssistPetList);
 
@@ -414,7 +434,7 @@ namespace ET.Client
 
             self.SelectMagics.Clear();
             self.SelectMagics.AddRange(self.PetMeleeInfo.MagicList);
-            
+
             self.AddUIScrollItems(ref self.ScrollItemSelectMagicItems, self.ShowMagics.Count);
             self.E_SelectMagicItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMagics.Count);
             self.OnUpdateSelectSkillItem();
