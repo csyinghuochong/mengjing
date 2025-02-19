@@ -15,9 +15,26 @@ namespace ET.Server
                 aiComponent.TargetID = 0;
             }
 
-            if (target !=null && !target.IsDisposed && target.IsTowerMonster())
-            {
-                Unit nearest = GetTargetHelpS.GetNearestEnemyExcludeSonType(unit, aiComponent.ActRange, true);
+           string targetinfo = string.Empty;
+           if (target!=null)
+           {
+               switch (target.Type)
+               {
+                   case UnitType.Monster:
+                       MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
+                       targetinfo = $"{target.Type};{monsterConfig.MonsterType};{monsterConfig.MonsterSonType}";
+                       break;
+                   default:
+                       targetinfo = $"{target.Type};1;0";
+                       break;
+               }
+           }
+
+           //不是优先级最高的怪物
+           if (target !=null && !target.IsDisposed && !targetinfo.Equals(aiConfig.NodeParams))
+           {
+                //寻找优先级最高的怪物
+                Unit nearest = GetTargetHelpS.GetNearestEnemyAIPriority(unit, aiComponent.ActRange, aiConfig.NodeParams, false);
                 aiComponent.TargetID = nearest != null ?  nearest.Id : aiComponent.TargetID;
             }
 

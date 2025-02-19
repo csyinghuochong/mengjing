@@ -121,31 +121,45 @@ namespace ET.Server
         /// <param name="isMini">是否要最小距离</param>
         /// <param name="unitType">目标Unit类型</param>
         /// <returns></returns>
-        public static Unit GetNearestEnemyExcludeSonType(Unit main, float maxdis, bool isMini = false, int unitType = 0)
+        public static Unit GetNearestEnemyAIPriority(Unit main, float maxdis, string aiNodeParams,  bool isMini = false)
         {
             Unit nearest = null;
             float minDistance = maxdis;
+            
+            //3;1;0
+            
+            
             List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                Unit unit = units[i];
-                if (unit.IsDisposed || main.Id == unit.Id)
+                Unit target = units[i];
+                if (target.IsDisposed || main.Id == target.Id)
                 {
                     continue;
                 }
 
-                if (unitType != 0 && unit.Type != unitType)
+                string targetinfo = string.Empty;
+                if (target!=null)
+                {
+                    switch (target.Type)
+                    {
+                        case UnitType.Monster:
+                            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
+                            targetinfo = $"{target.Type};{monsterConfig.MonsterType};{monsterConfig.MonsterSonType}";
+                            break;
+                        default:
+                            targetinfo = $"{target.Type};1;0";
+                            break;
+                    }
+                }
+                
+                if (!targetinfo.Equals(aiNodeParams))
                 {
                     continue;
                 }
 
-                if (unit.IsTowerMonster())
-                {
-                    continue;
-                }
-
-                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
-                if (dd > maxdis || !main.IsCanAttackUnit(unit))
+                float dd = PositionHelper.Distance2D(main.Position, target.Position);
+                if (dd > maxdis || !main.IsCanAttackUnit(target))
                 {
                     continue;
                 }
@@ -153,14 +167,14 @@ namespace ET.Server
                 if (!isMini)
                 {
                     //找到目标直接跳出来
-                    nearest = unit;
+                    nearest = target;
                     break;
                 }
 
                 if (dd < minDistance)
                 {
                     minDistance = dd;
-                    nearest = unit;
+                    nearest = target;
                 }
             }
 
