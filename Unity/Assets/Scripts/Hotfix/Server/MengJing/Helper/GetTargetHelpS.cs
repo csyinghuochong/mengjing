@@ -138,20 +138,7 @@ namespace ET.Server
                     continue;
                 }
 
-                string targetinfo = string.Empty;
-                if (target!=null)
-                {
-                    switch (target.Type)
-                    {
-                        case UnitType.Monster:
-                            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
-                            targetinfo = $"{target.Type};{monsterConfig.MonsterType};{monsterConfig.MonsterSonType}";
-                            break;
-                        default:
-                            targetinfo = $"{target.Type};1;0";
-                            break;
-                    }
-                }
+                string targetinfo = target.GetAIPriorityParams();
                 
                 if (!targetinfo.Equals(aiNodeParams))
                 {

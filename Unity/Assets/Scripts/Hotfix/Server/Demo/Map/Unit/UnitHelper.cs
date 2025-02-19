@@ -629,6 +629,26 @@ namespace ET.Server
             }
         }
 
+        public static string GetAIPriorityParams(this Unit target)
+        {
+            string targetinfo = string.Empty;
+            if (target!=null)
+            {
+                switch (target.Type)
+                {
+                    case UnitType.Monster:
+                        MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
+                        targetinfo = $"{target.Type};{monsterConfig.MonsterType};{monsterConfig.MonsterSonType}";
+                        break;
+                    default:
+                        targetinfo = $"{target.Type};1;0";
+                        break;
+                }
+            }
+
+            return targetinfo;
+        }
+
         public static void RemoveAllNoType(Scene scene, List<int> typelist)
         {
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();

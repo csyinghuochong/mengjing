@@ -15,20 +15,7 @@ namespace ET.Server
                 aiComponent.TargetID = 0;
             }
 
-           string targetinfo = string.Empty;
-           if (target!=null)
-           {
-               switch (target.Type)
-               {
-                   case UnitType.Monster:
-                       MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
-                       targetinfo = $"{target.Type};{monsterConfig.MonsterType};{monsterConfig.MonsterSonType}";
-                       break;
-                   default:
-                       targetinfo = $"{target.Type};1;0";
-                       break;
-               }
-           }
+            string targetinfo = target != null ? target.GetAIPriorityParams() : string.Empty;
 
            //不是优先级最高的怪物
            if (target !=null && !target.IsDisposed && !targetinfo.Equals(aiConfig.NodeParams))
