@@ -177,9 +177,37 @@ namespace ET.Client
 
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
-            self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
+            switch (self.PetMeleeCardInfo.Type)
+            {
+                case (int)PetMeleeCarType.MainPet:
+                case (int)PetMeleeCarType.AssistPet:
+                {
+                    self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                    break;
+                }
+                case (int)PetMeleeCarType.Magic:
+                {
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
+                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    {
+                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        {
+                            // 伤害范围半径覆盖整个场景，卡牌直接拖动
+                            self.StartPos = self.uiTransform.localPosition;
+                            self.uiTransform.localScale = new Vector3(0.75f, 0.75f, 1f);
+                        }
+                        else
+                        {
+                            self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                        }
+                    }
 
-            self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                    break;
+                }
+            }
+
+            self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMeleeCardTimer, self);
         }
@@ -254,6 +282,20 @@ namespace ET.Client
                 }
                 case (int)PetMeleeCarType.Magic:
                 {
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
+                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    {
+                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        {
+                            Vector2 localPoint = new Vector2();
+                            RectTransform canvas = self.uiTransform.parent.GetComponent<RectTransform>();
+                            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+                            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
+                            self.uiTransform.localPosition = localPoint;
+                        }
+                    }
+
                     self.TargetPos = hitPoint;
                     self.CanPlace = true;
                     break;
@@ -269,6 +311,27 @@ namespace ET.Client
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
+            switch (self.PetMeleeCardInfo.Type)
+            {
+                case (int)PetMeleeCarType.MainPet:
+                case (int)PetMeleeCarType.AssistPet:
+                    break;
+                case (int)PetMeleeCarType.Magic:
+                {
+                    PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
+                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    {
+                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        {
+                            self.uiTransform.localPosition = self.StartPos;
+                        }
+                    }
+
+                    break;
+                }
+            }
+
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 1f;
 
             self.uiTransform.localScale = new Vector3(1f, 1f, 1f);
