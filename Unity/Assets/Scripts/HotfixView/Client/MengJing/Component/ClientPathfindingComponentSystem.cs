@@ -22,8 +22,8 @@ namespace ET.Client
             TextAsset textAsset = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<TextAsset>(ABPathHelper.GetRecastPath(name));
             if(textAsset == null)
             {
-                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("加载寻路数据失败： {0}", name));
-                Log.Error(zstring.Format("加载寻路数据失败： {0}", name));
+                FlyTipComponent.Instance.ShowFlyTip(string.Format("加载寻路数据失败： {0}", name));
+                Log.Error(string.Format("加载寻路数据失败： {0}", name));
                 return;
             }
             
