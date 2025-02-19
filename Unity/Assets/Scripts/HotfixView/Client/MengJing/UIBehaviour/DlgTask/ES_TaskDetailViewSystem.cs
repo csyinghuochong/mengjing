@@ -81,6 +81,17 @@ namespace ET.Client
             self.E_GoingButton.AddListener(self.OnGoingButton);
 
             self.EG_RightRectTransform.gameObject.SetActive(false);
+
+            self.OnSelectMain().Coroutine();
+        }
+
+        private static async  ETTask OnSelectMain(this ES_TaskDetail self)
+        {
+            // ExecuteEvents.Execute(scrollItemTaskTypeItem.E_ClickButton.gameObject,
+            //new PointerEventData(UnityEngine.EventSystems.EventSystem.current), ExecuteEvents.pointerClickHandler);
+            // 这个貌似有点问题， 先延迟一帧
+            await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            self.SetExpand(TaskTypeEnum.Main);
         }
 
         [EntitySystem]
