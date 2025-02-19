@@ -578,7 +578,17 @@ namespace ET.Server
             int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
             return sonType == 55 || sonType == 56 || sonType == 57;
         }
-        
+
+        public static bool IsPetMeleeTower(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+            return sonType == 62;
+        }
+
         public static int GetTeamDungeonTimes(this Unit self)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
