@@ -313,6 +313,16 @@ namespace ET.Client
                         }
                     }
 
+                    if (dlgPetMeleeMain.IsCancelCard)
+                    {
+                        if (self.GameObject != null)
+                        {
+                            self.GameObject.gameObject.SetActive(false);
+                        }
+
+                        return;
+                    }
+
                     self.TargetPos = hitPoint;
                     self.CanPlace = true;
                     break;
