@@ -444,7 +444,7 @@ namespace ET.Server
                 cmd.SkillID = petMagicCardConfig.SkillId;
                 cmd.TargetAngle = (int)math.floor(ange);
                 cmd.TargetDistance = math.distance(position, self.Player.Position);
-                self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, true);
+                self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, false);
             }
 
             self.PetMeleeCardInHand.Remove(useCard);
