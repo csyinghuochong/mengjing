@@ -1279,7 +1279,7 @@ public class CustomEditorMenu
 
    
     [MenuItem("Tools/修改寻路数据为.bytes[客户端]")]
-    static void RenamePathFilesInFolder1()
+    public static void RenamePathFilesInFolder1(bool clean = true)
     {
         string dataPath = Application.dataPath; //"H:/GitMengJing/Unity/Assets"
         string sourceFolder = dataPath.Remove(dataPath.Length - 12, 12) + $"Config/Recast";
@@ -1296,15 +1296,18 @@ public class CustomEditorMenu
             return;
         }
 
-        FileHelper.CleanDirectory(destinationFolder);
-        
-        FileHelper.CopyDirectory(sourceFolder, destinationFolder);
+        if (clean)
+        {
+            FileHelper.CleanDirectory(destinationFolder);
+        }
+
+        FileHelper.CopyFolderContents(sourceFolder, destinationFolder, ".bytes");
         
         UnityEngine.Debug.Log("检测开始");
 
         string[] files = Directory.GetFiles(destinationFolder, "*.*", SearchOption.AllDirectories)
                 .Where(file => file.EndsWith(string.Empty, System.StringComparison.OrdinalIgnoreCase)
-                        && !file.EndsWith(".bytes"))
+                        && !file.EndsWith(".bytes")&& !file.EndsWith(".meta"))
                 .ToArray();
 
         foreach (string file in files)

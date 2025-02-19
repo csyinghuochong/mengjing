@@ -16,6 +16,9 @@ namespace ET
         public static void ReGenerateProjectFiles()
         {
             CodeEditor.CurrentEditor.SyncAll();
+            
+                        
+            CustomEditorMenu.RenamePathFilesInFolder1(false);
         }
 
 #if ENABLE_VIEW

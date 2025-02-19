@@ -19,6 +19,7 @@ namespace ET
                 CreateLog();
                 EditorApplication.update -= CheckCompolingFinish;
             }
+
         }
 
         private static void OnPlayModeStateChanged(PlayModeStateChange state)

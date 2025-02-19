@@ -19,7 +19,15 @@ namespace ET.Client
             self.Name = name;
 
             // 文件类型以.bytes结尾
-            byte[] buffer = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<TextAsset>(ABPathHelper.GetRecastPath(name)).bytes;
+            TextAsset textAsset = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<TextAsset>(ABPathHelper.GetRecastPath(name));
+            if(textAsset == null)
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("加载寻路数据失败： {0}", name));
+                Log.Error(zstring.Format("加载寻路数据失败： {0}", name));
+                return;
+            }
+            
+            byte[] buffer = textAsset.bytes;
 
             DtMeshSetReader reader = new();
             using MemoryStream ms = new(buffer);

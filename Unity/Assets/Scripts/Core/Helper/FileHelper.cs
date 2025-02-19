@@ -69,7 +69,7 @@ namespace ET
     /// <param name="sourceFolder"></param>
     /// <param name="destinationFolder"></param>
     /// <exception cref="DirectoryNotFoundException"></exception>
-    public static void CopyFolderContents(string sourceFolder, string destinationFolder)
+    public static void CopyFolderContents(string sourceFolder, string destinationFolder, string extension)
     {
         // 检查源文件夹是否存在
         if (!Directory.Exists(sourceFolder))
@@ -89,6 +89,11 @@ namespace ET
         {
             string fileName = Path.GetFileName(file);
             string destFile = Path.Combine(destinationFolder, fileName);
+            if (File.Exists(destFile) || File.Exists(destFile + extension ))
+            {
+	            continue;
+            }
+            
             File.Copy(file, destFile, true);
         }
 
@@ -98,7 +103,7 @@ namespace ET
         {
             string folderName = Path.GetFileName(subFolder);
             string destSubFolder = Path.Combine(destinationFolder, folderName);
-            CopyFolderContents(subFolder, destSubFolder);
+            CopyFolderContents(subFolder, destSubFolder, extension);
         }
     }
     
