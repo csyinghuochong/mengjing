@@ -1243,43 +1243,14 @@ public class CustomEditorMenu
         string[] pathlist = prefabpath.Split('/');
         string destinationFile = Application.dataPath + "/Res/Scene/Unit/" + pathlist[pathlist.Length - 1];
 
-        bool moveret = MoveFile(prefabpath, destinationFile);
-        MoveFile(prefabpath + ".meta", destinationFile + ".meta");
+        bool moveret = FileHelper.MoveFile(prefabpath, destinationFile);
+        FileHelper.MoveFile(prefabpath + ".meta", destinationFile + ".meta");
 
         Debug.Log($"{prefabpath}   to    {destinationFile}");
 
         return moveret;
     }
-
-    static bool MoveFile(string sourceFile, string destinationFile)
-    {
-        try
-        {
-            // 确保目标路径存在
-            var destinationDirectory = Path.GetDirectoryName(destinationFile);
-
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
-
-            if (File.Exists(destinationFile))
-            {
-                return true;
-            }
-
-            // 移动文件
-            File.Move(sourceFile, destinationFile);
-            Log.Debug("文件移动成功:" + destinationFile);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Log.Error("文件移动失败: " + ex.Message);
-            return false;
-        }
-    }
-
+    
     //判断是否为预制体的根节点
     static int IsPrefabRoot(GameObject obj)
     {
@@ -1306,6 +1277,48 @@ public class CustomEditorMenu
         return 0;
     }
 
+   
+    [MenuItem("Tools/修改寻路数据为.bytes[客户端]")]
+    static void RenamePathFilesInFolder1()
+    {
+        string dataPath = Application.dataPath; //"H:/GitMengJing/Unity/Assets"
+        string sourceFolder = dataPath.Remove(dataPath.Length - 12, 12) + $"Config/Recast";
+        if (string.IsNullOrEmpty(sourceFolder))
+        {
+            UnityEngine.Debug.Log("Folder selection canceled.");
+            return;
+        }
+        
+        string destinationFolder = Application.dataPath + "/Bundles/Recast";
+        if (string.IsNullOrEmpty(destinationFolder))
+        {
+            UnityEngine.Debug.Log("Folder selection canceled.");
+            return;
+        }
+
+        FileHelper.CleanDirectory(destinationFolder);
+        
+        FileHelper.CopyDirectory(sourceFolder, destinationFolder);
+        
+        UnityEngine.Debug.Log("检测开始");
+
+        string[] files = Directory.GetFiles(destinationFolder, "*.*", SearchOption.AllDirectories)
+                .Where(file => file.EndsWith(string.Empty, System.StringComparison.OrdinalIgnoreCase)
+                        && !file.EndsWith(".bytes"))
+                .ToArray();
+
+        foreach (string file in files)
+        {
+            string newFilePath = file + ".bytes";
+                    //Path.Combine(Path.GetDirectoryName(file) ?? string.Empty, Path.GetFileNameWithoutExtension(file));
+            File.Move(file, newFilePath);
+            UnityEngine.Debug.Log($"Renamed: {file} -> {newFilePath}");
+        }
+
+        AssetDatabase.Refresh();
+        UnityEngine.Debug.Log("检测结束");
+    }
+    
     [MenuItem("Custom/获取全部Shader路径")]
     static void FindAllShaders()
     {

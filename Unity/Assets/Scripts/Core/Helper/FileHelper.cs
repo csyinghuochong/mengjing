@@ -28,6 +28,123 @@ namespace ET
 			}
 		}
 		
+		 /// <summary>
+    /// 移动文件
+    /// </summary>
+    /// <param name="sourceFile"></param>
+    /// <param name="destinationFile"></param>
+    /// <returns></returns>
+    public  static bool MoveFile(string sourceFile, string destinationFile)
+    {
+        try
+        {
+            // 确保目标路径存在
+            var destinationDirectory = Path.GetDirectoryName(destinationFile);
+
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
+
+            if (File.Exists(destinationFile))
+            {
+                return true;
+            }
+
+            // 移动文件
+            File.Move(sourceFile, destinationFile);
+            Log.Debug("文件移动成功:" + destinationFile);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Log.Error("文件移动失败: " + ex.Message);
+            return false;
+        }
+    }
+    
+    /// <summary>
+    /// 拷贝文件夹
+    /// </summary>
+    /// <param name="sourceFolder"></param>
+    /// <param name="destinationFolder"></param>
+    /// <exception cref="DirectoryNotFoundException"></exception>
+    public static void CopyFolderContents(string sourceFolder, string destinationFolder)
+    {
+        // 检查源文件夹是否存在
+        if (!Directory.Exists(sourceFolder))
+        {
+            throw new DirectoryNotFoundException($"源文件夹 {sourceFolder} 不存在。");
+        }
+
+        // 如果目标文件夹不存在，则创建它
+        if (!Directory.Exists(destinationFolder))
+        {
+            Directory.CreateDirectory(destinationFolder);
+        }
+
+        // 复制文件
+        string[] files = Directory.GetFiles(sourceFolder);
+        foreach (string file in files)
+        {
+            string fileName = Path.GetFileName(file);
+            string destFile = Path.Combine(destinationFolder, fileName);
+            File.Copy(file, destFile, true);
+        }
+
+        // 递归复制子文件夹
+        string[] subFolders = Directory.GetDirectories(sourceFolder);
+        foreach (string subFolder in subFolders)
+        {
+            string folderName = Path.GetFileName(subFolder);
+            string destSubFolder = Path.Combine(destinationFolder, folderName);
+            CopyFolderContents(subFolder, destSubFolder);
+        }
+    }
+    
+    /// <summary>
+    /// 移动文件夹
+    /// </summary>
+    /// <param name="sourceFolder"></param>
+    /// <param name="destinationFolder"></param>
+    /// <exception cref="DirectoryNotFoundException"></exception>
+    public static void MoveFolderContents(string sourceFolder, string destinationFolder)
+    {
+        // 检查源文件夹是否存在
+        if (!Directory.Exists(sourceFolder))
+        {
+            throw new DirectoryNotFoundException($"源文件夹 {sourceFolder} 不存在。");
+        }
+
+        // 如果目标文件夹不存在，则创建它
+        if (!Directory.Exists(destinationFolder))
+        {
+            Directory.CreateDirectory(destinationFolder);
+        }
+
+        // 移动文件
+        string[] files = Directory.GetFiles(sourceFolder);
+        foreach (string file in files)
+        {
+            string fileName = Path.GetFileName(file);
+            string destFile = Path.Combine(destinationFolder, fileName);
+            File.Move(file, destFile);
+        }
+
+        // 递归移动子文件夹
+        string[] subDirectories = Directory.GetDirectories(sourceFolder);
+        foreach (string subDirectory in subDirectories)
+        {
+            string subDirectoryName = Path.GetFileName(subDirectory);
+            string destSubDirectory = Path.Combine(destinationFolder, subDirectoryName);
+            MoveFolderContents(subDirectory, destSubDirectory);
+        }
+
+        // 移动完成后删除空的源文件夹
+        Directory.Delete(sourceFolder);
+    }
+    
+		
 		public static void CleanDirectory(string dir)
 		{
 			if (!Directory.Exists(dir))
