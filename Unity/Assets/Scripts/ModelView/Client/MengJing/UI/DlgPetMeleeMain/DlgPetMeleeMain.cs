@@ -14,6 +14,7 @@ namespace ET.Client
         public Vector2 PreviousPressPosition;
 
         public bool IsDisposeCard { get; set; }
+        public bool IsCancelCard { get; set; }
 
         public float OranginScale;
 

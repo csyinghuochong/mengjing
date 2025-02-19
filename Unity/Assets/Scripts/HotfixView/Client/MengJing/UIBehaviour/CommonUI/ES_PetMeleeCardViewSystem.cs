@@ -210,6 +210,9 @@ namespace ET.Client
             self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMeleeCardTimer, self);
+
+            DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
+            dlgPetMeleeMain.View.E_CancelCardAreaImage.gameObject.SetActive(true);
         }
 
         private static void Drag(this ES_PetMeleeCard self)
@@ -226,6 +229,8 @@ namespace ET.Client
 
             Vector3 hitPoint = raycastHit.point;
 
+            DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
+
             switch (self.PetMeleeCardInfo.Type)
             {
                 case (int)PetMeleeCarType.MainPet:
@@ -234,6 +239,18 @@ namespace ET.Client
                     GameObject GridCanvas = GameObject.Find("/GridCanvas");
                     GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
                     GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
+
+                    if (dlgPetMeleeMain.IsCancelCard)
+                    {
+                        if (self.GameObject != null)
+                        {
+                            CellIndicator.SetActive(false);
+                            self.GameObject.gameObject.SetActive(false);
+                        }
+
+                        return;
+                    }
+
                     BackgroundImage.SetActive(true);
                     CellIndicator.SetActive(true);
 
@@ -350,6 +367,12 @@ namespace ET.Client
             }
 
             DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
+
+            dlgPetMeleeMain.View.E_CancelCardAreaImage.gameObject.SetActive(false);
+            if (dlgPetMeleeMain.IsCancelCard)
+            {
+                return;
+            }
 
             if (dlgPetMeleeMain.IsDisposeCard)
             {

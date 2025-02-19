@@ -82,6 +82,9 @@ namespace ET.Client
                 self.View.E_DisposeCardEventTrigger.GetComponent<RectTransform>().localScale = new Vector2(1f, 1f);
             });
 
+            self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.IsCancelCard = true; });
+            self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerExit, (pdata) => { self.IsCancelCard = false; });
+
             self.InitCard().Coroutine();
             self.UpdateMoLi();
             self.OnPlayAnimation().Coroutine();
@@ -107,6 +110,8 @@ namespace ET.Client
             GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
             BackgroundImage.SetActive(false);
             CellIndicator.SetActive(false);
+
+            self.View.E_CancelCardAreaImage.gameObject.SetActive(false);
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)

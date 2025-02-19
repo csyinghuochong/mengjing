@@ -279,6 +279,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_CancelCardAreaImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CancelCardAreaImage == null )
+     			{
+		    		this.m_E_CancelCardAreaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CancelCardArea");
+     			}
+     			return this.m_E_CancelCardAreaImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_CancelCardAreaEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CancelCardAreaEventTrigger == null )
+     			{
+		    		this.m_E_CancelCardAreaEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_CancelCardArea");
+     			}
+     			return this.m_E_CancelCardAreaEventTrigger;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_CardPoolRectTransform
      	{
      		get
@@ -484,6 +518,8 @@ namespace ET.Client
 			this.m_E_IconImage = null;
 			this.m_E_IconEventTrigger = null;
 			this.m_EG_CardInHandRectTransform = null;
+			this.m_E_CancelCardAreaImage = null;
+			this.m_E_CancelCardAreaEventTrigger = null;
 			this.m_EG_CardPoolRectTransform = null;
 			this.m_E_DiRenHpImgImage = null;
 			this.m_E_DiRenHpTxtText = null;
@@ -514,6 +550,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_IconEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_CardInHandRectTransform = null;
+		private UnityEngine.UI.Image m_E_CancelCardAreaImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_CancelCardAreaEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_CardPoolRectTransform = null;
 		private UnityEngine.UI.Image m_E_DiRenHpImgImage = null;
 		private UnityEngine.UI.Text m_E_DiRenHpTxtText = null;
