@@ -207,7 +207,7 @@ namespace ET.Client
                 }
             }
 
-            self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.3f;
+            self.uiTransform.GetComponent<CanvasGroup>().alpha = 0.8f;
 
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMeleeCardTimer, self);
 
