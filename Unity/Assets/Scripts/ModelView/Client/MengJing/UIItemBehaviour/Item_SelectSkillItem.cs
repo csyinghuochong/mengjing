@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace ET.Client
 {
@@ -9,6 +10,13 @@ namespace ET.Client
 	{
 		public int magicId;
 		public Action<int> OnSelectSkillItem;
+
+		public long Time;
+		public Transform ScrollRect;
+		public long ClickTime;
+		public bool IsDrag;
+		public bool IsClick;
+		
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -95,7 +103,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_TouchButton
+		public EventTrigger E_TouchEventTrigger
      	{
      		get
      		{
@@ -106,15 +114,15 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_TouchButton == null )
+     				if( this.m_E_TouchEventTrigger == null )
      				{
-		    			this.m_E_TouchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Touch");
+		    			this.m_E_TouchEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Touch");
      				}
-     				return this.m_E_TouchButton;
+     				return this.m_E_TouchEventTrigger;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Touch");
+		    		return UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Touch");
      			}
      		}
      	}
@@ -148,7 +156,7 @@ namespace ET.Client
 			this.m_E_IconImage = null;
 			this.m_E_SelectedImage = null;
 			this.m_E_NameText = null;
-			this.m_E_TouchButton = null;
+			this.m_E_TouchEventTrigger = null;
 			this.m_E_TouchImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
@@ -157,7 +165,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_IconImage = null;
 		private UnityEngine.UI.Image m_E_SelectedImage = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
-		private UnityEngine.UI.Button m_E_TouchButton = null;
+		private EventTrigger m_E_TouchEventTrigger = null;
 		private UnityEngine.UI.Image m_E_TouchImage = null;
 		public Transform uiTransform = null;
 	}
