@@ -236,13 +236,14 @@ namespace ET.Client
             {
                 if (self.CardIconGameObject == null)
                 {
-                    self.CardIconGameObject = UnityEngine.Object.Instantiate(self.uiTransform.gameObject, self.uiTransform.parent);
+                    self.CardIconGameObject = UnityEngine.Object.Instantiate(self.uiTransform.gameObject, self.uiTransform.parent.parent);
                     self.CardIconGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
                     self.CardIconGameObject.GetComponent<CanvasGroup>().alpha = 1f;
+                    self.CardIconGameObject.GetComponent<CanvasGroup>().blocksRaycasts = false; // 防止拖动到丢弃按钮上时，出现些小问题
                 }
 
                 Vector2 localPoint = new Vector2();
-                RectTransform canvas = self.uiTransform.parent.GetComponent<RectTransform>();
+                RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
                 Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
                 self.CardIconGameObject.SetActive(true);
