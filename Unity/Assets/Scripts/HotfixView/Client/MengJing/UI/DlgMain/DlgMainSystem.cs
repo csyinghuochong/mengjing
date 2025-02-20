@@ -29,7 +29,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
     public class DataUpdate_TeamUpdatet_ZeroClock : AEvent<Scene, ZeroClock>
     {
@@ -121,7 +121,7 @@ namespace ET.Client
             {
                 dlgMain.View.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
             }
-            else
+            else if (args.Unit.IsBoss())
             {
                 dlgMain.View.ES_MainHpBar.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
             }
@@ -524,7 +524,6 @@ namespace ET.Client
 
             self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst =
                     int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
-            
 
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
@@ -850,6 +849,7 @@ namespace ET.Client
                         self.View.EG_MainTaskRectTransform.gameObject.SetActive(true);
                         self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
                     }
+
                     break;
                 case 1:
                     self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
@@ -1017,12 +1017,8 @@ namespace ET.Client
             Scene root = self.Root();
             MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
             cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_3,
-                () =>
-                {
-                    root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine();
-                });
+                () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Function).Coroutine(); });
         }
-
 
         private static async ETTask OnRoseEquipButton(this DlgMain self)
         {
@@ -1131,10 +1127,7 @@ namespace ET.Client
             {
                 MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
                 cameraComponent.SetBuildEnter(UnitHelper.GetMyUnitFromClientScene(root), CameraBuildType.Type_2,
-                    () => 
-                    {
-                        root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
-                    });
+                    () => { root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role).Coroutine(); });
             }
         }
 
@@ -1243,7 +1236,6 @@ namespace ET.Client
                 petComponentC.GetPetInfoByID(petComponentC.GetNowPetFightList().Count > 2 ? petComponentC.GetNowPetFightList()[2].PetId : 0), 3);
         }
 
-
         public static void ShowPetSwitchTimer(this DlgMain self)
         {
             int leftTime = (int)((self.MainPetSwitchEndTime - TimeHelper.ServerNow()) * 0.001f);
@@ -1277,7 +1269,7 @@ namespace ET.Client
 
                 PetComponentC petComponentC = root.GetComponent<PetComponentC>();
                 long petId = petComponentC.GetNowPetFightList()[petfightindex - 1].PetId;
-                
+
                 self.View.ES_MainSkill.OnEnterScene(unit, petId);
                 self.View.ES_MainSkill.OnPetFightSwitch(petId);
                 self.View.E_TextPetSwitch.text = "600";
@@ -1812,7 +1804,7 @@ namespace ET.Client
         {
             bool zhankai = self.View.E_Button_ZhanKaiButton.transform.localScale == new Vector3(-1f, 1f, 1f);
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
-            
+
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&
@@ -1822,7 +1814,8 @@ namespace ET.Client
             // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
             self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
             self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
-            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon || sceneTypeEnum == SceneTypeEnum.DragonDungeon);
+            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon ||
+                sceneTypeEnum == SceneTypeEnum.DragonDungeon);
             self.View.E_OpenChatButton.gameObject.SetActive(false);
             self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(false);
             self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
@@ -2321,15 +2314,15 @@ namespace ET.Client
 
         public static void OnSelfDead(this DlgMain self)
         {
-             self.StopAction();
-             self.View.ES_JoystickMove.ResetUI(true);
+            self.StopAction();
+            self.View.ES_JoystickMove.ResetUI(true);
         }
 
         public static void OnSelfRevive(this DlgMain self)
         {
             self.View.ES_JoystickMove.AfterEnterScene();
         }
-        
+
         public static void OnBagItemUpdate(this DlgMain self)
         {
             self.View.ES_MainSkill.OnBagItemUpdate();

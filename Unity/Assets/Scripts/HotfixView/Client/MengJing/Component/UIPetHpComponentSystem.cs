@@ -3,6 +3,29 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class BuffUpdate_UIPetHpRefresh : AEvent<Scene, BuffUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BuffUpdate args)
+        {
+            if (args.Unit.Type != UnitType.Pet)
+            {
+                return;
+            }
+
+            MapComponent mapComponent = scene.GetComponent<MapComponent>();
+            if (mapComponent.SceneType != SceneTypeEnum.PetMelee)
+            {
+                return;
+            }
+
+            args.Unit.GetComponent<UIPetHpComponent>()?.ES_MainBuff?.OnBuffUpdate(args.ABuffHandler, args.OperateType);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [FriendOf(typeof(UIMainBuffItemComponent))]
     [FriendOf(typeof(UIPetHpComponent))]
     [EntitySystemOf(typeof(UIPetHpComponent))]
     public static partial class UIPetHpComponentSystem
@@ -19,7 +42,7 @@ namespace ET.Client
 
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIPetHp");
 
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         [EntitySystem]
@@ -105,11 +128,13 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
 
+            self.ES_MainBuff = self.AddChild<ES_MainBuff, Transform>(rc.Get<GameObject>("ES_MainBuff").transform);
+
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
 
-            string imageHp = canAttack ?  ConfigData.UI_pro_3_4 :ConfigData.UI_pro_4_2 ;
+            string imageHp = canAttack ? ConfigData.UI_pro_3_4 : ConfigData.UI_pro_4_2;
             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
             self.Img_HpValue.GetComponent<Image>().sprite = sp;
 
@@ -188,6 +213,7 @@ namespace ET.Client
             {
                 return;
             }
+
             Log.Debug($"UpdateBloodPet: {self.GetParent<Unit>().Id} {curhp}  {maxhp}");
             self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
         }
@@ -196,7 +222,7 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
-           
+
             using (zstring.Block())
             {
                 string masterName = "";
@@ -209,7 +235,16 @@ namespace ET.Client
                 {
                     masterName = unitInfoComponent.MasterName;
                 }
-                self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", masterName);
+
+                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                if (mapComponent.SceneType != SceneTypeEnum.PetMelee)
+                {
+                    self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", masterName);
+                }
+                else
+                {
+                    self.Lal_JiaZuName.GetComponent<Text>().text = "";
+                }
             }
 
             if (unit.Type == UnitType.Player)
