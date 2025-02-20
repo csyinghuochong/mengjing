@@ -38,7 +38,7 @@ namespace ET.Client
 
             self.View.E_MonsterItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMonsterItemsRefresh);
 
-            self.View.E_EnterMapButton.AddListener(self.OnEnterMap);
+            self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMap);
         }
 
         public static void ShowWindow(this DlgPetMeleeLevel self, Entity contextData = null)
@@ -277,7 +277,7 @@ namespace ET.Client
             self.View.E_RightBGImage.gameObject.SetActive(true);
         }
 
-        private static void OnEnterMap(this DlgPetMeleeLevel self)
+        private static async ETTask OnEnterMap(this DlgPetMeleeLevel self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int petMeleeDungeonId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMeleeDungeonId);
@@ -329,8 +329,17 @@ namespace ET.Client
                 return;
             }
 
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0").Coroutine();
-            self.OnClose();
+            long instanceid = self.InstanceId;  
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0");
+            if (instanceid!= self.InstanceId)
+            {
+                return; 
+            }
+
+            if (errorCode == ErrorCode.ERR_Success)
+            {
+                self.OnClose();
+            }
         }
 
         private static async ETTask OnReceive(this DlgPetMeleeLevel self)
