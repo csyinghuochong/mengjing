@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_PetListItem))]
     [FriendOf(typeof(ES_PetInfoShow))]
     [EntitySystemOf(typeof(ES_PetXiLian))]
     [FriendOfAttribute(typeof(ES_PetXiLian))]
@@ -15,6 +16,7 @@ namespace ET.Client
 
             self.E_Btn_XiLianButton.AddListenerAsync(self.OnBtn_XiLianButton);
             self.E_CommonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
+            self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.OnInitUI();
         }
 
@@ -28,7 +30,7 @@ namespace ET.Client
         {
             self.ES_PetInfoShow.Weizhi = 0;
             self.ES_PetInfoShow.BagOperationType = PetOperationType.XiLian;
-            self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
+            self.ES_PetInfoShow.OnInitData(null);
         }
 
         public static async ETTask OnBtn_XiLianButton(this ES_PetXiLian self)
@@ -114,7 +116,9 @@ namespace ET.Client
         {
             self.RolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.RolePetInfo.Id);
             self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
+
             self.UpdateConsume();
+            self.UpdatePetListItemInfo();
         }
 
         public static void OnXiLianSelect(this ES_PetXiLian self, RolePetInfo rolePetInfo)
@@ -123,6 +127,31 @@ namespace ET.Client
             self.ES_PetInfoShow.OnInitData(rolePetInfo);
 
             self.UpdateConsume();
+            self.UpdatePetSelected(rolePetInfo);
+        }
+
+        private static void UpdatePetListItemInfo(this ES_PetXiLian self)
+        {
+            for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
+            {
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
+                if (scrollItemPetListItem.uiTransform != null)
+                {
+                    scrollItemPetListItem.UpdateLv();
+                }
+            }
+        }
+
+        private static void UpdatePetSelected(this ES_PetXiLian self, RolePetInfo rolePetItem)
+        {
+            for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
+            {
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
+                if (scrollItemPetListItem.uiTransform != null)
+                {
+                    scrollItemPetListItem.OnSelectUI(rolePetItem);
+                }
+            }
         }
 
         private static void OnSelectItem(this ES_PetXiLian self, ItemInfo bagInfo)
@@ -130,6 +159,9 @@ namespace ET.Client
             self.CostItemInfo = bagInfo;
             if (bagInfo == null)
             {
+                self.E_Img_ItemIconImage.gameObject.SetActive(false);
+                self.E_Img_ItemQualityImage.gameObject.SetActive(false);
+                self.E_Text_ItemNameText.text = "";
                 return;
             }
 
@@ -137,8 +169,9 @@ namespace ET.Client
             ItemConfig itemconfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
             self.E_Img_ItemIconImage.sprite = sp;
+            
+            self.E_Img_ItemQualityImage.gameObject.SetActive(true);
             string qualityiconStr = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
             string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
             Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
@@ -150,11 +183,19 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_PetXiLian self)
         {
             self.RolePetInfo = null;
-            self.CostItemInfo = null;
-            self.E_Img_ItemIconImage.gameObject.SetActive(false);
-            self.E_Text_ItemNameText.text = "";
+            self.OnSelectItem(null);
             self.UpdateConsume();
-            self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
+
+            self.RefreshCreateRoleItems();
+            if (self.ShowRolePetInfos.Count > 0)
+            {
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[0];
+                scrollItemPetListItem.OnClickPetItem();
+            }
+            else
+            {
+                self.ES_PetInfoShow.OnInitData(null);
+            }
         }
 
         private static void OnCommonItemsRefresh(this ES_PetXiLian self, Transform transform, int index)
@@ -192,10 +233,38 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
 
-            if (self.ShowBagInfos.Count == 0)
+            self.OnSelectItem(null);
+        }
+
+        private static void RefreshCreateRoleItems(this ES_PetXiLian self)
+        {
+            List<RolePetInfo> rolePetInfos = self.Root().GetComponent<PetComponentC>().RolePetInfos;
+            self.ShowRolePetInfos.Clear();
+            for (int i = 0; i < rolePetInfos.Count; i++)
             {
-                self.OnSelectItem(null);
+                if (rolePetInfos[i].PetStatus != 3)
+                {
+                    self.ShowRolePetInfos.Add(rolePetInfos[i]);
+                }
             }
+
+            self.AddUIScrollItems(ref self.ScrollItemPetListItems, self.ShowRolePetInfos.Count);
+            self.E_PetListItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
+        }
+
+        private static void OnPetListItemsRefresh(this ES_PetXiLian self, Transform transform, int index)
+        {
+            Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
+            scrollItemPetListItem.SetClickHandler((long petId) =>
+            {
+                RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
+                self.OnXiLianSelect(rolePetInfo);
+            });
+
+            scrollItemPetListItem.E_ImageDiButtonButton.gameObject.SetActive(true);
+            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(false);
+
+            scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], 0);
         }
     }
 }

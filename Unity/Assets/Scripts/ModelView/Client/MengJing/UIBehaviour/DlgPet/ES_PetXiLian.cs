@@ -11,9 +11,28 @@ namespace ET.Client
 		private EntityRef<ItemInfo> costItemInfo;
 		public ItemInfo CostItemInfo { get => this.costItemInfo; set => this.costItemInfo = value; }
 		public RolePetInfo RolePetInfo;
+		public Dictionary<int, EntityRef<Scroll_Item_PetListItem>> ScrollItemPetListItems;
+		public List<RolePetInfo> ShowRolePetInfos = new();
 
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();
+		
+		public LoopVerticalScrollRect E_PetListItemsLoopVerticalScrollRect
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_PetListItemsLoopVerticalScrollRect == null )
+				{
+					this.m_E_PetListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_UIPetInfo1/E_PetListItems");
+				}
+				return this.m_E_PetListItemsLoopVerticalScrollRect;
+			}
+		}
 		
 		public ES_PetInfoShow ES_PetInfoShow
      	{
@@ -150,6 +169,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_PetListItemsLoopVerticalScrollRect = null;
 			this.m_es_petinfoshow = null;
 			this.m_E_CommonItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_XiLianButton = null;
@@ -160,6 +180,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private LoopVerticalScrollRect m_E_PetListItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow = null;
 		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
 		private Button m_E_Btn_XiLianButton = null;

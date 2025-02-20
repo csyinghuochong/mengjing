@@ -93,7 +93,10 @@ namespace ET.Client
 
                 self.E_Img_CanZhanImage.gameObject.SetActive(rolePetInfo.PetStatus == 1);
                 self.E_Lab_PetNameText.text = rolePetInfo.PetName;
-                self.E_Lab_PetLvText.text = rolePetInfo.PetLv.ToString() + LanguageComponent.Instance.LoadLocalization("级");
+                using (zstring.Block())
+                {
+                    self.E_Lab_PetLvText.text = zstring.Format("{0}{1}", rolePetInfo.PetLv, "级");
+                }
 
                 self.E_Lab_PetQualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
                 self.E_Lab_PetQualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
@@ -107,6 +110,18 @@ namespace ET.Client
                 using (zstring.Block())
                 {
                     self.E_Text_OpenText.text = zstring.Format("{0}级开启", nextLv);
+                }
+            }
+        }
+
+        public static void UpdateLv(this Scroll_Item_PetListItem self)
+        {
+            RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.PetId);
+            if (rolePetInfo != null)
+            {
+                using (zstring.Block())
+                {
+                    self.E_Lab_PetLvText.text = zstring.Format("{0}{1}", rolePetInfo.PetLv, "级");
                 }
             }
         }
