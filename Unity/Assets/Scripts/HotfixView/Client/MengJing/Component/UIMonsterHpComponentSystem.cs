@@ -4,6 +4,29 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class BuffUpdate_UIMonsterHpRefresh : AEvent<Scene, BuffUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BuffUpdate args)
+        {
+            if (args.Unit.Type != UnitType.Monster)
+            {
+                return;
+            }
+
+            MapComponent mapComponent = scene.GetComponent<MapComponent>();
+            if (mapComponent.SceneType != SceneTypeEnum.PetMelee)
+            {
+                return;
+            }
+
+            args.Unit.GetComponent<UIMonsterHpComponent>()?.ES_MainBuff?.OnBuffUpdate(args.ABuffHandler, args.OperateType);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [FriendOf(typeof(UIMainBuffItemComponent))]
     [EntitySystemOf(typeof(UIMonsterHpComponent))]
     [FriendOf(typeof(UIMonsterHpComponent))]
     public static partial class UIMonsterHpComponentSystem
@@ -36,7 +59,7 @@ namespace ET.Client
             self.HeadBarPath = "";
             self.LastTime = 0f;
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         [EntitySystem]
@@ -148,17 +171,17 @@ namespace ET.Client
             //}
         }
 
-        public static void UpdateCampToMain(this UIMonsterHpComponent self,bool canAttack)
+        public static void UpdateCampToMain(this UIMonsterHpComponent self, bool canAttack)
         {
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-            
-            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2 ;
+
+            string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
             rc.Get<GameObject>("Img_HpValue").SetActive(true);
             self.Img_HpValue.GetComponent<Image>().sprite = sp;
         }
-        
+
         public static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed)
@@ -170,6 +193,8 @@ namespace ET.Client
             self.GameObject = gameObject;
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+
+            self.ES_MainBuff = self.AddChild<ES_MainBuff, Transform>(rc.Get<GameObject>("ES_MainBuff").transform);
 
             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             bool canAttack = mainUnit.IsCanAttackUnit(unit);
@@ -370,7 +395,7 @@ namespace ET.Client
             }
 
             self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
-            
+
             // int unitType = self.GetParent<Unit>().Type;
             // switch (unitType)
             // {

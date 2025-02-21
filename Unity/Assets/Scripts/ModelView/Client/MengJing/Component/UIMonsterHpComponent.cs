@@ -27,5 +27,8 @@ namespace ET.Client
         public float LastTime;
         public long Timer;
         public long DialogTimer;
+        
+        private EntityRef<ES_MainBuff> es_MainBuff;
+        public ES_MainBuff ES_MainBuff { get => this.es_MainBuff; set => this.es_MainBuff = value; }
     }
 }

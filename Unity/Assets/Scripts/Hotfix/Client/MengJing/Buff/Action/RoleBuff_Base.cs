@@ -13,7 +13,8 @@
                 return;
             }
             
-            if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss() || buffc.TheUnitBelongto.Type == UnitType.Pet)
+            if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss() || 
+                buffc.TheUnitBelongto.Type == UnitType.Pet || buffc.TheUnitBelongto.Type == UnitType.Monster)
             {
                 EventSystem.Instance.Publish( buffc.Root(), new BuffUpdate()
                 {
@@ -46,7 +47,8 @@
             {
                 return;
             }
-            if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss() || buffc.TheUnitBelongto.Type == UnitType.Pet)
+            if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss() || 
+                buffc.TheUnitBelongto.Type == UnitType.Pet || buffc.TheUnitBelongto.Type == UnitType.Monster)
             {
                 EventSystem.Instance.Publish( buffc.Root(), new  BuffUpdate()
                 {
@@ -79,7 +81,8 @@
             {
                 return;
             }
-            if (buffC.TheUnitBelongto.MainHero || buffC.TheUnitBelongto.IsBoss() || buffC.TheUnitBelongto.Type == UnitType.Pet)
+            if (buffC.TheUnitBelongto.MainHero || buffC.TheUnitBelongto.IsBoss() || 
+                buffC.TheUnitBelongto.Type == UnitType.Pet || buffC.TheUnitBelongto.Type == UnitType.Monster)
             {
                 EventSystem.Instance.Publish( buffC.Root(), new BuffUpdate()
                 {
