@@ -48,10 +48,6 @@ namespace ET.Server
                 }
 
                 long waitTime = remove ? 1000 : 200;
-                if (unit.ConfigId == 80000003)
-                {
-                    waitTime = 200;
-                }
                 await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(waitTime, cancellationToken);
                 if (instanceId != aiComponent.InstanceId)
                 {

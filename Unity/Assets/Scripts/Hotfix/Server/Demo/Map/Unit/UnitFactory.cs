@@ -187,7 +187,7 @@ namespace ET.Server
                 unit.AddComponent<StateComponentS>(); //添加状态组件
                 unit.AddComponent<BuffManagerComponentS>(); //添加Buff管理器
                 skillPassiveComponent.UpdateMonsterPassiveSkill();
-                numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID);
+                numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID, false);
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
                 switch (mapComponent.SceneType)
                 {

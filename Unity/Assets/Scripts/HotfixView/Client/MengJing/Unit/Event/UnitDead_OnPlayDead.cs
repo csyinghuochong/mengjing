@@ -47,10 +47,8 @@ namespace ET.Client
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
                 }
 
-                if (unit.Type == UnitType.Monster)
-                {
-                    unit.GetComponent<GameObjectComponent>().Dissolve = true;
-                }
+                unit.GetComponent<GameObjectComponent>().Dissolve = unit.GetMonsterShowDissolve();
+
 
                 //播放开启宝箱特效
                 if (unit.IsChest())

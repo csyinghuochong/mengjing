@@ -90,14 +90,14 @@ namespace ET.Server
                 //{
                 //    Log.Warning($"找不到击杀方主人.defendUnit == mainAttack: {defendUnit.ConfigId}");
                 //}
-                OnRemoveUnit(scene, args, 1).Coroutine();
+                OnRemoveUnit(defendUnit.Root(), args, 1).Coroutine();
                 return;
             }
 
             if (mainAttack == null || mainAttack.IsDisposed)
             {
                 //Log.Warning($"找不到击杀方主人.mainAttack == null ");
-                OnRemoveUnit(scene, args, 1).Coroutine();
+                OnRemoveUnit(defendUnit.Root(), args, 1).Coroutine();
                 return;
             }
 
@@ -288,7 +288,7 @@ namespace ET.Server
                 default:
                     break;
             }
-
+ 
             OnRemoveUnit(defendUnit.Root(), args, waittime).Coroutine();
             await ETTask.CompletedTask;
         }

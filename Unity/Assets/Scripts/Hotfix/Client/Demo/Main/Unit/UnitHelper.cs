@@ -243,7 +243,23 @@ namespace ET.Client
         {
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
         }
+        
+        public static int GetMonsterSonType(this Unit self)
+        {
+            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+        }
 
+        public static bool GetMonsterShowDissolve(this Unit self)
+        {
+            if (self.Type!= UnitType.Monster)
+            {
+                return false;   
+            }
+
+            int MonsterSonType = self.GetMonsterSonType();
+            return MonsterSonType <= 50;
+        }
+        
         public static long GetMasterId(this Unit self)
         {
             if (self.Type == UnitType.Player)
