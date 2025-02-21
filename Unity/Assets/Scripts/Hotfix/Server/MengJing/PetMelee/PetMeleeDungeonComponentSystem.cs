@@ -291,7 +291,7 @@ namespace ET.Server
                         return null;
                     }
 
-                    int index = RandomHelper.RandomNumber(0, cards.Count);
+                    int index = RandomHelper.ReturnRamdomValue_Int(0, cards.Count - 1);
                     PetMeleeCardInfo cardInfo = PetMeleeCardInfo.Create();
                     cardInfo.Id = IdGenerater.Instance.GenerateId();
                     cardInfo.Type = (int)PetMeleeCarType.Magic;
