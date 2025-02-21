@@ -335,7 +335,7 @@ namespace ET.Server
         }
 
         // 用牌
-        public static int UseCard(this PetMeleeDungeonComponent self, long cardId, float3 position)
+        public static int UseCard(this PetMeleeDungeonComponent self, long cardId, float3 position, long targetUnitId)
         {
             if (self.GameOver)
             {
@@ -444,6 +444,7 @@ namespace ET.Server
                 cmd.SkillID = petMagicCardConfig.SkillId;
                 cmd.TargetAngle = (int)math.floor(ange);
                 cmd.TargetDistance = math.distance(position, self.Player.Position);
+                cmd.TargetID = targetUnitId;
                 self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, false);
             }
 

@@ -111,9 +111,13 @@ namespace ET.Client
                     self.E_NameText.text = petMagicCardConfig.Name;
 
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
-                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
                         self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillZhishi/Skill_Position");
+                    }
+                    else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
+                    {
+                        self.UnitAssetsPath = ABPathHelper.GetEffetPath("SkillZhishi/Skill_TargetOnly");
                     }
 
                     break;
@@ -161,11 +165,18 @@ namespace ET.Client
                 {
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
-                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
                         float innerRadius = (float)skillConfig.DamgeRange[0] * 2f;
                         self.UnitGameObject.Get<GameObject>("Skill_InnerArea").transform.localScale = Vector3.one * innerRadius;
                         self.UnitGameObject.Get<GameObject>("Skill_Area").SetActive(false);
+                    }
+                    else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
+                    {
+                        self.UnitGameObject.Get<GameObject>("Skill_Area").SetActive(false);
+                        self.UnitGameObject.Get<GameObject>("Skill_Target").transform.localPosition = Vector3.zero;
+                        self.UnitGameObject.Get<GameObject>("Skill_InnerArea").SetActive(false);
+                        self.UnitGameObject.Get<GameObject>("Skill_Dir").SetActive(false);
                     }
 
                     break;
@@ -189,7 +200,7 @@ namespace ET.Client
                 {
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
-                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
                         if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
                         {
@@ -201,6 +212,10 @@ namespace ET.Client
                         {
                             self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
                         }
+                    }
+                    else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
+                    {
+                        self.uiTransform.localScale = new Vector3(1.1f, 1.1f, 1f);
                     }
 
                     break;
@@ -231,23 +246,19 @@ namespace ET.Client
 
             DlgPetMeleeMain dlgPetMeleeMain = self.GetParent<DlgPetMeleeMain>();
 
-            // 在丢弃按钮位置显示一个卡牌Icon
+            if (self.CardIconGameObject == null)
+            {
+                self.CardIconGameObject = UnityEngine.Object.Instantiate(self.uiTransform.gameObject, self.uiTransform.parent.parent);
+                self.CardIconGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+                self.CardIconGameObject.GetComponent<CanvasGroup>().alpha = 1f;
+                self.CardIconGameObject.GetComponent<CanvasGroup>().blocksRaycasts = false; // 防止拖动到丢弃按钮上时，出现些小问题
+            }
+
             if (dlgPetMeleeMain.IsDisposeCard)
             {
-                if (self.CardIconGameObject == null)
-                {
-                    self.CardIconGameObject = UnityEngine.Object.Instantiate(self.uiTransform.gameObject, self.uiTransform.parent.parent);
-                    self.CardIconGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
-                    self.CardIconGameObject.GetComponent<CanvasGroup>().alpha = 1f;
-                    self.CardIconGameObject.GetComponent<CanvasGroup>().blocksRaycasts = false; // 防止拖动到丢弃按钮上时，出现些小问题
-                }
-
-                Vector2 localPoint = new Vector2();
-                RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
-                Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
+                // 在丢弃按钮位置显示一个卡牌Icon
                 self.CardIconGameObject.SetActive(true);
-                self.CardIconGameObject.transform.localPosition = localPoint;
+                self.UpdateCardIconGOPos();
             }
             else
             {
@@ -318,7 +329,14 @@ namespace ET.Client
                     }
                     else
                     {
+                        self.CanPlace = false;
                         CellIndicator.GetComponent<Image>().color = Color.red;
+                    }
+
+                    if (self.UnitGameObject != null)
+                    {
+                        self.UnitGameObject.gameObject.SetActive(true);
+                        self.UnitGameObject.transform.position = self.TargetPos;
                     }
 
                     break;
@@ -327,7 +345,7 @@ namespace ET.Client
                 {
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
-                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
                         if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
                         {
@@ -339,29 +357,153 @@ namespace ET.Client
                             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
                             self.uiTransform.localPosition = localPoint;
                         }
-                    }
 
-                    if (dlgPetMeleeMain.IsCancelCard || dlgPetMeleeMain.IsDisposeCard)
-                    {
+                        self.TargetPos = hitPoint;
+                        self.CanPlace = true;
+
                         if (self.UnitGameObject != null)
                         {
-                            self.UnitGameObject.gameObject.SetActive(false);
+                            self.UnitGameObject.gameObject.SetActive(true);
+                            self.UnitGameObject.transform.position = self.TargetPos;
+                        }
+                    }
+                    else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
+                    {
+                        self.CardIconGameObject.SetActive(true);
+                        self.UpdateCardIconGOPos();
+
+                        List<EntityRef<Unit>> units = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+                        Unit nearestUnit = null;
+                        float maxDistance = 2f; //技能指示器吸附范围
+                        float nearestDistance = float.MaxValue;
+
+                        SkillBuffConfig skillBuffConfig = null;
+                        if (skillConfig.BuffID.Length > 0 && skillConfig.BuffID[0] != 0)
+                        {
+                            skillBuffConfig = SkillBuffConfigCategory.Instance.Get(skillConfig.BuffID[0]);
                         }
 
-                        return;
+                        Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        foreach (Unit uu in units)
+                        {
+                            // 根据技能目标类型，筛选出符合条件的unit
+                            if (skillBuffConfig != null)
+                            {
+                                bool canBuff = false;
+                                switch (skillBuffConfig.TargetType)
+                                {
+                                    // //对自己释放
+                                    // case 1:
+                                    //     canBuff = uu.Id == self.TheUnitFrom.Id;
+                                    //     if (uu.Type == UnitType.JingLing)
+                                    //     {
+                                    //         long masterid = uu.GetMasterId();
+                                    //         uu = uu.GetParent<UnitComponent>().Get(masterid);
+                                    //         if (uu == null || uu.IsDisposed)
+                                    //         {
+                                    //             return;
+                                    //         }
+                                    //     }
+                                    //
+                                    //     break;
+                                    case 2:
+                                        PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+                                        canBuff = myUnit.IsSameTeam(uu) || myUnit.IsMasterOrPet(uu, petComponent);
+                                        //if (canBuff && skillBuffConfig.Id == 92000032 && uu.Type == UnitType.Monster)
+                                        //{
+                                        //    Log.Console("怪物攻速！！！！");
+                                        //}
+                                        break;
+                                    //己方 同阵营
+                                    case 3:
+                                        canBuff = myUnit.GetBattleCamp() == uu.GetBattleCamp();
+                                        break;
+                                    //敌方
+                                    case 4:
+                                        canBuff = myUnit.IsCanAttackUnit(uu);
+                                        break;
+                                        // //全部
+                                        // case 5:
+                                        //     canBuff = true;
+                                        //     break;
+                                        // case 6: ////6: 己方召唤兽，不包含宠物
+                                        //     canBuff = uu.Type == UnitType.Monster && uu.GetMasterId() == self.TheUnitFrom.Id;
+                                        //     break;
+                                        // case 7: //// 7: 己方召唤兽，包含宠物
+                                        //     canBuff = uu.GetMasterId() == self.TheUnitFrom.Id;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                if (!canBuff)
+                                {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if (!myUnit.IsCanAttackUnit(uu))
+                                {
+                                    continue;
+                                }
+                            }
+
+                            float distance = PositionHelper.Distance2D(uu.Position, hitPoint);
+                            if (distance < maxDistance && distance < nearestDistance)
+                            {
+                                nearestDistance = distance;
+                                nearestUnit = uu;
+                            }
+                        }
+
+                        if (nearestUnit != null)
+                        {
+                            self.TargetPos = nearestUnit.Position;
+                            self.TargetUnitId = nearestUnit.Id;
+                            self.CanPlace = true;
+
+                            if (self.UnitGameObject != null)
+                            {
+                                self.UnitGameObject.gameObject.SetActive(true);
+                                self.UnitGameObject.transform.position = self.TargetPos;
+                            }
+                        }
+                        else
+                        {
+                            self.TargetPos = hitPoint;
+                            self.TargetUnitId = 0;
+                            self.CanPlace = false;
+
+                            if (self.UnitGameObject != null)
+                            {
+                                self.UnitGameObject.gameObject.SetActive(false);
+                            }
+                        }
                     }
 
-                    self.TargetPos = hitPoint;
-                    self.CanPlace = true;
                     break;
                 }
             }
 
-            if (self.UnitGameObject != null)
+            if (dlgPetMeleeMain.IsCancelCard || dlgPetMeleeMain.IsDisposeCard)
             {
-                self.UnitGameObject.gameObject.SetActive(true);
-                self.UnitGameObject.transform.position = self.TargetPos;
+                self.CanPlace = false;
+
+                if (self.UnitGameObject != null)
+                {
+                    self.UnitGameObject.gameObject.SetActive(false);
+                }
             }
+        }
+
+        private static void UpdateCardIconGOPos(this ES_PetMeleeCard self)
+        {
+            Vector2 localPoint = new Vector2();
+            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
+            self.CardIconGameObject.transform.localPosition = localPoint;
         }
 
         private static void EndDrag(this ES_PetMeleeCard self, PointerEventData pdata)
@@ -375,12 +517,15 @@ namespace ET.Client
                 {
                     PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(self.PetMeleeCardInfo.ConfigId);
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
-                    if (skillConfig.SkillZhishiType == SkillZhishiType.Position)
+                    if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
                         if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
                         {
                             self.uiTransform.localPosition = self.StartPos;
                         }
+                    }
+                    else if (skillConfig.SkillTargetType == SkillTargetType.TargetOnly)
+                    {
                     }
 
                     break;
@@ -422,7 +567,7 @@ namespace ET.Client
 
             if (self.CanPlace)
             {
-                dlgPetMeleeMain.UseCard(self, self.TargetPos).Coroutine();
+                dlgPetMeleeMain.UseCard(self, self.TargetPos, self.TargetUnitId).Coroutine();
             }
         }
     }

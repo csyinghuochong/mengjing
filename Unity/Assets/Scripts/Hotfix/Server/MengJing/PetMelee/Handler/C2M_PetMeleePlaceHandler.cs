@@ -14,7 +14,7 @@ namespace ET.Server
                 return;
             }
 
-            response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position);
+            response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId);
 
             await ETTask.CompletedTask;
         }

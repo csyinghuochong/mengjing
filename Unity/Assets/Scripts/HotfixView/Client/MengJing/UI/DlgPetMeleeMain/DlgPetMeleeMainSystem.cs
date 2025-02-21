@@ -395,9 +395,9 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position)
+        public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position, long targetUnitId)
         {
-            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position);
+            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position, targetUnitId);
 
             if (error == ErrorCode.ERR_Success)
             {

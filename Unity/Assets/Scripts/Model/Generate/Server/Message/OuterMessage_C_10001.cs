@@ -32137,6 +32137,9 @@ namespace ET
         [MemoryPackOrder(1)]
         public Unity.Mathematics.float3 Position { get; set; }
 
+        [MemoryPackOrder(2)]
+        public long TargetUnitId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -32147,6 +32150,7 @@ namespace ET
             this.RpcId = default;
             this.CarId = default;
             this.Position = default;
+            this.TargetUnitId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

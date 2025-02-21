@@ -7376,6 +7376,7 @@ message C2M_PetMeleePlace // ILocationRequest
 	int32 RpcId = 90;
 	int64 CarId = 1;
 	Unity.Mathematics.float3 Position = 2;
+	int64 TargetUnitId = 3;
 }
 
 message M2C_PetMeleePlace // ILocationResponse

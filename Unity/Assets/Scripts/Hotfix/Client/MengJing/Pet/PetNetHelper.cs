@@ -596,11 +596,12 @@ namespace ET.Client
             root.GetComponent<ClientSenderCompnent>().Send(C2M_PetFubenOverRequest.Create());
         }
 
-        public static async ETTask<int> PetMeleePlaceRequest(Scene root, long carId, float3 position)
+        public static async ETTask<int> PetMeleePlaceRequest(Scene root, long carId, float3 position, long targetUnitId)
         {
             C2M_PetMeleePlace request = C2M_PetMeleePlace.Create();
             request.CarId = carId;
             request.Position = position;
+            request.TargetUnitId = targetUnitId;
 
             M2C_PetMeleePlace response = (M2C_PetMeleePlace)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;

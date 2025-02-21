@@ -8,11 +8,14 @@ namespace ET.Client
 	public  class ES_PetMeleeCard : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public PetMeleeCardInfo PetMeleeCardInfo;
-		public GameObject UnitGameObject;
+		public GameObject UnitGameObject; // 拖动卡牌时跟随的宠物模型、技能指示器
 		public string UnitAssetsPath;
 		public float CellSize = 3.33f;
 		public bool CanPlace;
+		
 		public Vector3 TargetPos;
+		public long TargetUnitId;
+		
 		public long Timer;
 		public Vector2 StartPos;
 		public float MaxDamageRange = 25f;// 伤害范围半径(覆盖整个场景)
