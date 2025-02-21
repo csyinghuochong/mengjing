@@ -215,8 +215,14 @@ namespace ET.Client
             self.UIPlayerHpText = rc.Get<GameObject>("UIPlayerHpText");
             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText_Layer0.transform);
             self.UIPlayerHpText.transform.localScale = Vector3.one;
+            
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            Vector2 offset = Vector2.zero;
+            offset = mapComponent.SceneType == SceneTypeEnum.PetMelee ? new Vector2(0, 30f) : Vector2.zero;
+            
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             HeadBarUI_1.enabled = !unit.MainHero;
+            HeadBarUI_1.Offset = offset;
             HeadBarUI_1.HeadPos = self.UIPosition;
             HeadBarUI_1.HeadBar = self.UIPlayerHpText;
             HeadBarUI_1.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
@@ -225,6 +231,7 @@ namespace ET.Client
 
             HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
             HeadBarUI_2.enabled = !unit.MainHero;
+            HeadBarUI_2.Offset = offset;
             HeadBarUI_2.HeadPos = self.UIPosition;
             HeadBarUI_2.HeadBar = self.GameObject;
             HeadBarUI_2.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
