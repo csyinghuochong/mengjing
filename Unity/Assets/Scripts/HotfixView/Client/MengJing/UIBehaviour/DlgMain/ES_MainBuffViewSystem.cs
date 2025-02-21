@@ -39,6 +39,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_MainBuff self)
         {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.DestroyWidget();
         }
 
