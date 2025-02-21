@@ -40,7 +40,7 @@ namespace ET.Client
                     rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
                 }
 
-                rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].ChapterDes;
+                rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].ChapterName;
 
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig[i].Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
