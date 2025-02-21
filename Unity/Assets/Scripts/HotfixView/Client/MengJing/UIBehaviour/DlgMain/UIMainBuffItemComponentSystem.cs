@@ -29,6 +29,10 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this UIMainBuffItemComponent self)
         {
+            if (self.GameObject != null)
+            {
+                UnityEngine.Object.Destroy(self.GameObject);
+            }
         }
 
         public static async ETTask BeginDrag(this UIMainBuffItemComponent self, PointerEventData pdata)
