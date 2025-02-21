@@ -485,9 +485,11 @@ namespace ET.Server
                 return;
             }
 
-            int num = self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi);
+            NumericComponentS numericComponentS = self.Player.GetComponent<NumericComponentS>();
+            int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
+            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
             self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi,
-                num + ConfigData.PetMeleeMoLiRPS > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num + ConfigData.PetMeleeMoLiRPS);
+                num +add > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num +add );
         }
 
         public static bool IsGameStart(this PetMeleeDungeonComponent self)

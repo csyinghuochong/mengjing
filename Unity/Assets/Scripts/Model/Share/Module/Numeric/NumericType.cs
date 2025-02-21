@@ -200,6 +200,7 @@
         public const int BeKillId = 4004;
         public const int DirectionType = 4005;
         public const int BattleCampOld = 4006;                                     //战斗阵营[之前的]
+        public const int PetMeleeMoLiAdd = 4007;          //宠物乱斗魔法恢复附加
 
         public const int Max = 10000;
 
@@ -443,7 +444,7 @@
         public const int Max_SkillUseMPAdd_Add = Max_SkillUseMPAdd * 100 + 3;                     //属性附加
         public const int Extra__SkillUseMPAdd_Add = Max_SkillUseMPAdd * 100 + 11;              //属性Buff附加加法
         public const int Extra__SkillUseMPAdd_Mul = Max_SkillUseMPAdd * 100 + 12;              //属性Buff附加乘法
-
+        
         public const int Now_ActBossAddDamge = 1212;                                                 //当前BOSS普通攻击加成固定值
         public const int Base_ActBossAddDamge_Base = Now_ActBossAddDamge * 100 + 1;                  //属性累加
         public const int Base_ActBossAddDamge_Mul = Now_ActBossAddDamge * 100 + 2;                   //属性乘法
@@ -1167,8 +1168,8 @@
         public const int Max_SkillUseMP_Base = Max_SkillUseMP * 100 + 1;                    //属性累加
         public const int Max_SkillUseMP_Mul = Max_SkillUseMP * 100 + 2;                     //属性乘法
         public const int Max_SkillUseMP_Add = Max_SkillUseMP * 100 + 3;                     //属性附加
-        public const int Extra__SkillUseMP_Add = Max_SkillUseMP * 100 + 11;              //属性Buff附加加法
-        public const int Extra__SkillUseMP_Mul = Max_SkillUseMP * 100 + 12;              //属性Buff附加乘法
+        public const int Extra_SkillUseMP_Add = Max_SkillUseMP * 100 + 11;              //属性Buff附加加法
+        public const int Extra_SkillUseMP_Mul = Max_SkillUseMP * 100 + 12;              //属性Buff附加乘法
         
         public const int Now_PlayerHitAddPro = 2445;          //增加受到玩家暴击概率的比例
         public const int Now_PlayerHitAddPro_Base = Now_PlayerHitAddPro * 100 + 1;              //属性累加

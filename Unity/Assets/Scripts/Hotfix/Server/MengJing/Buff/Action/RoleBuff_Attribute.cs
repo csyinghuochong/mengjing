@@ -148,6 +148,10 @@ namespace ET.Server
                     {
                         heroCom.ApplyChange(NumericType.SkillUseMP, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0);
                     }
+                    else if (NowBuffParameterType == NumericType.PetMeleeMoLi)
+                    {
+                        heroCom.ApplyChange(NumericType.PetMeleeMoLi, (long)buffS.NowBuffValue, true, true, buffS.TheUnitFrom.Id, 0);
+                    }
                     else if (NowBuffParameterType == NumericType.BattleCamp)
                     {
                         AIComponent belongToAIComponent = buffS.TheUnitBelongto.GetComponent<AIComponent>();
@@ -283,6 +287,10 @@ namespace ET.Server
                         numericComponentS.ApplyValue(NowBuffParameterType, 0);
                     }
                     else if (NowBuffParameterType == 3134)
+                    {
+                        //怒气不进行移除
+                    }
+                    else if (NowBuffParameterType == NumericType.PetMeleeMoLi)
                     {
                         //怒气不进行移除
                     }
