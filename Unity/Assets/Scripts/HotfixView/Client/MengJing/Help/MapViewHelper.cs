@@ -133,6 +133,11 @@ namespace ET.Client
                     case SceneTypeEnum.LocalDungeon:
                         navmesh = DungeonConfigCategory.Instance.Get(mapComponent.SceneId).MapID;
                         break;
+                    case SceneTypeEnum.CellDungeon:
+                    case SceneTypeEnum.DragonDungeon:
+                        CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(mapComponent.SonSceneId);
+                        navmesh = chapterSon.MapID;
+                        break;
                     default:
                         break;
                 }
