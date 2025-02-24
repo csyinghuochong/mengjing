@@ -1776,6 +1776,7 @@ namespace ET.Client
             self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
             self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
             self.Root().RemoveComponent<UnitGuaJiComponent>();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
         }
 
         public static void OnChapterOpen(this DlgMain self)
@@ -1976,7 +1977,7 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
             self.RefreshFightSet();
             self.OnMainHeroMove();
-
+            
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
         }
 
