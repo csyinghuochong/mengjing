@@ -186,7 +186,7 @@ namespace ET.Server
 
                 if (addHpValue > 0)
                 {
-                    NumericComponent.ApplyValue(NumericType.Now_Hp, addHpValue, true);
+                    NumericComponent.ApplyChange(NumericType.Now_Hp, addHpValue, true);
                 }
             }
         }

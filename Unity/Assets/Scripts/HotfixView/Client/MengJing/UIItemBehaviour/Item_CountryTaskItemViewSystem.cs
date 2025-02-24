@@ -36,19 +36,21 @@
             // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             // self.E_ImageIconImage.sprite = sp;
 
-            foreach (string str in taskConfig.RewardItem.Split('@'))
-            {
-                string[] reward = str.Split(',');
-                if (reward[0] == "1")
-                {
-                    using (zstring.Block())
-                    {
-                        self.E_ItemNumberText.text = zstring.Format(" +{0}", reward[1]);
-                    }
+            // foreach (string str in taskConfig.RewardItem.Split('@'))
+            // {
+            //     string[] reward = str.Split(',');
+            //     if (reward[0] == "1")
+            //     {
+            //         using (zstring.Block())
+            //         {
+            //             self.E_ItemNumberText.text = zstring.Format(" +{0}", reward[1]);
+            //         }
+            //
+            //         break;
+            //     }
+            // }
 
-                    break;
-                }
-            }
+            self.ES_RewardList.Refresh(taskConfig.RewardItem);
 
             using (zstring.Block())
             {
