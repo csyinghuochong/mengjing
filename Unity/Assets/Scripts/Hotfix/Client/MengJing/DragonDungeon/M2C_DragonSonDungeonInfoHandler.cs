@@ -12,6 +12,13 @@ namespace ET.Client
             Unit unitmain = UnitHelper.GetMyUnitFromClientScene(root);
             unitmain.GetComponent<StateComponentC>().StateTypeRemove(StateTypeEnum.NoMove);
             
+            UnitComponent  unitComponent = unitmain.GetParent<UnitComponent>();
+            for (int i = 0; i < message.UnitIds.Count; i++)
+            {
+                Unit unit = unitComponent.Get(message.UnitIds[i]);
+                unit.GetComponent<MoveComponent>().Stop(true);
+            }
+            
             fubenComponent.SonFubenInfo = message.SonFubenInfo;
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
             fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
@@ -23,7 +30,7 @@ namespace ET.Client
                 
             });
 
-            UnitComponent unitComponent = unitmain.GetParent<UnitComponent>();
+            unitComponent = unitmain.GetParent<UnitComponent>();
             for (int i = 0; i < message.UnitIds.Count; i++)
             {
                 Unit unit = unitComponent.Get(message.UnitIds[i]);
