@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_TeamDungeonPrepareRequest request, M2C_TeamDungeonPrepareResponse response)
         {
-	        Console.WriteLine($"C2M_TeamDungeonPrepareRequest : {unit.Id}  {request.Prepare}");
+	        Console.WriteLine($"C2M_TeamDungeonPrepareRequest : {unit.Id}  {request.Prepare} {request.TeamInfo.SceneType}");
 			int sceneid = request.TeamInfo.SceneId;
 			if (sceneid == 0)
 			{

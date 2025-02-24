@@ -130,7 +130,7 @@ namespace ET.Server
         {
             TeamInfo teamInfo = self.GetTeamInfo(teamId);
             
-            Console.WriteLine($"OnDungeonOver: {teamInfo}");
+            Console.WriteLine($"OnTeamDungeonOver: {teamInfo}");
             if (teamInfo != null)
             {
                 for (int i = 0;i < teamInfo.PlayerList.Count; i++)
