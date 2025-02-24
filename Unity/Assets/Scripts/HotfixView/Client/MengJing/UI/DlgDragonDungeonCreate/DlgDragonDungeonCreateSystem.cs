@@ -37,7 +37,7 @@ namespace ET.Client
                 ReferenceCollector rcSon = item.GetComponent<ReferenceCollector>();
                 using (zstring.Block())
                 {
-                    rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
+                    rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("创建等级:{0}级", sceneConfig[i].EnterLv);
                 }
 
                 rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].ChapterName;
