@@ -86,6 +86,11 @@ namespace ET.Client
             }
 
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            {
+                showfloattext = true;   
+            }
+
             if (HpGameObject != null && (unitDefend.MainHero || UnitHelper.GetMasterId(unitDefend) == myunitid || showfloattext))
             {
                 FallingFontComponent fallingFontComponent = unitDefend.Root().GetComponent<FallingFontComponent>();
