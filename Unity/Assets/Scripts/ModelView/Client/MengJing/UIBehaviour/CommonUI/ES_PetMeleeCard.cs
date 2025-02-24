@@ -18,7 +18,6 @@ namespace ET.Client
 		
 		public long Timer;
 		public Vector2 StartPos;
-		public float MaxDamageRange = 25f;// 伤害范围半径(覆盖整个场景)
 		public GameObject CardIconGameObject;
 		
 		public UnityEngine.UI.Image E_BackImage

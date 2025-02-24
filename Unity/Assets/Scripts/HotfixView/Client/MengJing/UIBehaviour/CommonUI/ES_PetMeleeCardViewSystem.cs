@@ -186,6 +186,19 @@ namespace ET.Client
             self.UnitGameObject.SetActive(false);
         }
 
+        private static bool IsShowCardDrag(this ES_PetMeleeCard self, double range)
+        {
+            // 伤害范围半径覆盖整个场景，或者没有则拖动卡牌的时候卡牌也要跟着鼠标动
+            if (range <= 0 || range >= 15)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private static void BeginDrag(this ES_PetMeleeCard self, PointerEventData pdata)
         {
             switch (self.PetMeleeCardInfo.Type)
@@ -202,7 +215,7 @@ namespace ET.Client
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
                     if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
-                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        if (self.IsShowCardDrag(skillConfig.DamgeRange[0]))
                         {
                             // 伤害范围半径覆盖整个场景，卡牌直接拖动
                             self.StartPos = self.uiTransform.localPosition;
@@ -347,7 +360,7 @@ namespace ET.Client
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
                     if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
-                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        if (self.IsShowCardDrag(skillConfig.DamgeRange[0]))
                         {
                             self.uiTransform.gameObject.SetActive(!dlgPetMeleeMain.IsDisposeCard);
 
@@ -519,7 +532,7 @@ namespace ET.Client
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(petMagicCardConfig.SkillId);
                     if (skillConfig.SkillTargetType == SkillTargetType.FixedPosition)
                     {
-                        if ((float)skillConfig.DamgeRange[0] >= self.MaxDamageRange)
+                        if (self.IsShowCardDrag(skillConfig.DamgeRange[0]))
                         {
                             self.uiTransform.localPosition = self.StartPos;
                         }
