@@ -55,6 +55,12 @@ namespace ET
                 fiber.Root.GetComponent<TimerComponent>().Remove(ref self.Timer);
                 return;
             }
+            
+            if ( self.AIDelay >= 0)
+            {
+                self.AIDelay -= 500;
+                return;
+            }
 
             var oneAI = AIConfigCategory.Instance.AIConfigs[self.AIConfigId];
 
@@ -339,6 +345,7 @@ namespace ET
                 return;
             }
 
+            self.AIDelay -= 500;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.AITimer, self);
         }
 
