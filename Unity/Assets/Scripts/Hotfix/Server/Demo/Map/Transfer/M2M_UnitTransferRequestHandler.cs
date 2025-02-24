@@ -41,6 +41,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.PetFightIndex, 0, false);
             numericComponent.ApplyValue(NumericType.RunRaceTransform, 0, false);
             numericComponent.ApplyValue(NumericType.CardTransform, 0, false);
+            numericComponent.ApplyValue(NumericType.PetMeleeMoLiAdd, 0, false);
         
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
