@@ -188,25 +188,34 @@ namespace ET.Server
                 return;
             }
 
-            //是否超过指定上限值
-            if (numericType == NumericType.Now_Hp)
+             //是否超过指定上限值
+            switch (numericType)
             {
-                long nowCostHp = self.GetAsLong(NumericType.Now_MaxHp) - self.GetAsLong(NumericType.Now_Hp);
-                if (changedValue >= nowCostHp)
-                {
-                    changedValue = nowCostHp;
-                }
+                case NumericType.Now_Hp:
+                    long nowCostHp = self.GetAsLong(NumericType.Now_MaxHp) - self.GetAsLong(NumericType.Now_Hp);
+                    if (changedValue >= nowCostHp)
+                    {
+                        changedValue = nowCostHp;
+                    }
+                    break;
+                
+                case NumericType.SkillUseMP:
+                    nowCostHp = self.GetAsLong(NumericType.Max_SkillUseMP) - self.GetAsLong(NumericType.SkillUseMP);
+                    if (changedValue >= nowCostHp)
+                    {
+                        changedValue = nowCostHp;
+                    }
+                    break;
+                
+                case NumericType.PetMeleeMoLi:
+                    nowCostHp = ConfigData.PetMeleeMoLiMax - self.GetAsLong(NumericType.PetMeleeMoLi);
+                    if (changedValue >= nowCostHp)
+                    {
+                        changedValue = nowCostHp;
+                    }
+                    break;      
             }
 
-            if (numericType == NumericType.SkillUseMP)
-            {
-                long nowCostHp = self.GetAsLong(NumericType.Max_SkillUseMP) - self.GetAsLong(NumericType.SkillUseMP);
-                if (changedValue >= nowCostHp)
-                {
-                    changedValue = nowCostHp;
-                }
-            }
-            
             long newvalue = self.GetAsLong(numericType) + changedValue;
             self.ApplyValue( numericType, newvalue, notice,  true, attackid, skillId, damgeType);
         }

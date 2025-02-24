@@ -102,11 +102,8 @@ namespace ET.Client
             self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
             self.View.E_JiFanNumText.text = "召唤宠物数量：0";
             self.View.E_DiRenNumText.text = "召唤怪物数量：0";
-            using (zstring.Block())
-            {
-                self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", ConfigData.PetMeleeMoLiRPS);
-            }
-
+            
+           
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
             GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
@@ -116,6 +113,21 @@ namespace ET.Client
             self.View.E_DisposeCardEventTrigger.transform.Find("Image1").gameObject.SetActive(true);
             self.View.E_DisposeCardEventTrigger.transform.Find("Image2").gameObject.SetActive(false);
             self.View.E_CancelCardAreaImage.gameObject.SetActive(false);
+
+            self.UpdatePetMeleeMoRPS();
+        }
+
+        public static void UpdatePetMeleeMoRPS(this DlgPetMeleeMain self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());   
+            NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
+            //int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
+            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
+            
+            using (zstring.Block())
+            {
+                self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", add);
+            }
         }
 
         public static void BeforeUnload(this DlgPetMeleeMain self)
@@ -130,6 +142,8 @@ namespace ET.Client
 
         public static void OnUnitHpUpdate(this DlgPetMeleeMain self, Unit unit)
         {
+            self.UpdatePetMeleeMoRPS();
+            
             if (unit.Type == UnitType.Monster)
             {
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);

@@ -285,6 +285,9 @@
                     }
 
                     break;
+                case NumericType.PetMeleeMoLiAdd:
+                    scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.UpdatePetMeleeMoRPS();
+                    break;
                 case NumericType.Now_Hp:
                 case NumericType.Now_MaxHp:
                     NumericComponentC numericComponentDefend = args.Defend.GetComponent<NumericComponentC>();
