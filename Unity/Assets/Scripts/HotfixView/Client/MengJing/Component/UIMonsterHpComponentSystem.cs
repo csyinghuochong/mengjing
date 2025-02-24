@@ -218,7 +218,7 @@ namespace ET.Client
             
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             Vector2 offset = Vector2.zero;
-            offset = mapComponent.SceneType == SceneTypeEnum.PetMelee ? new Vector2(0, 30f) : Vector2.zero;
+            offset = mapComponent.SceneType == SceneTypeEnum.PetMelee ? new Vector2(0, 70f) : Vector2.zero;
             
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             HeadBarUI_1.enabled = !unit.MainHero;
