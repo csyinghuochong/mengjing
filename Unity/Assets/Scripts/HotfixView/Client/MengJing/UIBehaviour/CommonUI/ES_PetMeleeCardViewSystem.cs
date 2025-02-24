@@ -396,9 +396,11 @@ namespace ET.Client
                             skillBuffConfig = SkillBuffConfigCategory.Instance.Get(skillConfig.BuffID[0]);
                         }
 
+                        int effectType = 1;
                         Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                         foreach (Unit uu in units)
                         {
+                            int type = 1;
                             // 根据技能目标类型，筛选出符合条件的unit
                             if (skillBuffConfig != null)
                             {
@@ -420,6 +422,7 @@ namespace ET.Client
                                     //
                                     //     break;
                                     case 2:
+                                        type = 1;
                                         PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
                                         canBuff = myUnit.IsSameTeam(uu) || myUnit.IsMasterOrPet(uu, petComponent);
                                         //if (canBuff && skillBuffConfig.Id == 92000032 && uu.Type == UnitType.Monster)
@@ -429,10 +432,12 @@ namespace ET.Client
                                         break;
                                     //己方 同阵营
                                     case 3:
+                                        type = 1;
                                         canBuff = myUnit.GetBattleCamp() == uu.GetBattleCamp();
                                         break;
                                     //敌方
                                     case 4:
+                                        type = 2;
                                         canBuff = myUnit.IsCanAttackUnit(uu);
                                         break;
                                         // //全部
@@ -456,6 +461,7 @@ namespace ET.Client
                             }
                             else
                             {
+                                type = 2;
                                 if (!myUnit.IsCanAttackUnit(uu))
                                 {
                                     continue;
@@ -465,6 +471,7 @@ namespace ET.Client
                             float distance = PositionHelper.Distance2D(uu.Position, hitPoint);
                             if (distance < maxDistance && distance < nearestDistance)
                             {
+                                effectType = type;
                                 nearestDistance = distance;
                                 nearestUnit = uu;
                             }
@@ -479,6 +486,8 @@ namespace ET.Client
                             if (self.UnitGameObject != null)
                             {
                                 self.UnitGameObject.gameObject.SetActive(true);
+                                self.UnitGameObject.Get<GameObject>("Skill_Target_1").SetActive(effectType == 1);
+                                self.UnitGameObject.Get<GameObject>("Skill_Target_2").SetActive(effectType == 2);
                                 self.UnitGameObject.transform.position = self.TargetPos;
                             }
                         }
