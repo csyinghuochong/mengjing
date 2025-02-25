@@ -504,8 +504,8 @@ namespace ET.Client
                 self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
             }
             self.View.EG_TaskDesc.gameObject.SetActive(true);
-            self.View.E_Lab_TaskDest.text = taskConfig.TaskDes;    
-            self.View.E_Lab_TaskName.text = taskConfig.TaskName;    
+            self.View.E_Lab_NpcSpeakText.text = taskConfig.TaskDes;    
+            self.View.E_Lab_NpcNameText.text = taskConfig.TaskName;    
             
             string rewardStr = taskConfig.RewardItem;
             int taskExp = (int)(taskConfig.TaskExp * 1);
@@ -535,7 +535,7 @@ namespace ET.Client
         {
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
-            // self.View.EG_TaskDesc.gameObject.SetActive(false);
+            self.View.EG_TaskDesc.gameObject.SetActive(false);
             // self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             // self.View.E_ButtonGetButton.gameObject.SetActive(false);
         }
