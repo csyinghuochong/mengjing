@@ -113,8 +113,27 @@ namespace ET.Client
                 return;
             }
             //最后一条数据即为被击杀的怪物或者玩家
-            
-           
+
+            if (damageValueListResponse.DamageValueList.Count > 0)
+            {
+                DamageValueInfo damageValueInfo = damageValueListResponse.DamageValueList[damageValueListResponse.DamageValueList.Count - 1];
+                
+                using (zstring.Block())
+                {
+                    switch (damageValueInfo.UnitType)
+                    {
+                        case UnitType.Monster:
+                            self.View.E_Text_Damage_Record_0.text = zstring.Format("被击杀怪物:{0}",  MonsterConfigCategory.Instance.Get(damageValueInfo.ConfigId).MonsterName);
+                            break;  
+                        default:
+                            self.View.E_Text_Damage_Record_0.text = zstring.Format("被击杀玩家:{0}", damageValueInfo.UnitName);
+                            break;
+                    }
+                    self.View.E_Text_Damage_Record_1.text = zstring.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
+                    self.View.E_Text_Damage_Record_2.text = zstring.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
+                }
+               
+            }
         }
 
         public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)
