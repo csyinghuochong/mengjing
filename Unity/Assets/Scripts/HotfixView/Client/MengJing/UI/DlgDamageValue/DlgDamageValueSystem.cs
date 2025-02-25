@@ -19,7 +19,10 @@ namespace ET.Client
 		{
 		}
 
-		 
+		public static void OnInitUI(this DlgDamageValue self, M2C_DamageValueListResponse info)
+		{
+			
+		}
 
 	}
 }

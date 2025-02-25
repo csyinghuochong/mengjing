@@ -11,5 +11,6 @@
         public long Timer;
         public int LeftTime;
         public int SceneType;
+        public M2C_DamageValueListResponse M2C_DamageValueListResponse;
     }
 }

@@ -9,6 +9,7 @@ namespace ET.Client
         {
             self.View.E_Button_ReviveButton.AddListener(self.OnButton_ReviveButton);
             self.View.E_Button_ExitButton.AddListener(self.OnButton_ExitButton);
+            self.View.E_Button_DamageButton.AddListenerAsync(self.OnButton_DamageButton);
         }
 
         public static void ShowWindow(this DlgCellDungeonRevive self, Entity contextData = null)
@@ -132,8 +133,15 @@ namespace ET.Client
                     self.View.E_Text_Damage_Record_1.text = zstring.Format("最后一击技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
                     self.View.E_Text_Damage_Record_2.text = zstring.Format("最后一击伤害:{0}",  damageValueInfo.DamageValue);
                 }
-               
             }
+            self.M2C_DamageValueListResponse = damageValueListResponse; 
+        }
+
+        public static async ETTask OnButton_DamageButton(this DlgCellDungeonRevive self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DamageValue);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDamageValue>().OnInitUI(self.M2C_DamageValueListResponse);
+            await ETTask.CompletedTask;
         }
 
         public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)

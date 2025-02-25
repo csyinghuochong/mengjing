@@ -91,6 +91,23 @@ namespace ET.Client
      			return this.m_E_Button_ReviveButton;
      		}
      	}
+		
+		public Button E_Button_DamageButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Button_Damage == null )
+				{
+					this.m_E_Button_Damage = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Damage");
+				}
+				return this.m_E_Button_Damage;
+			}
+		}
 
 		public Image E_Button_ReviveImage
      	{
@@ -219,6 +236,7 @@ namespace ET.Client
 			this.m_E_Text_ExitDesText = null;
 			this.m_E_Button_ReviveButton = null;
 			this.m_E_Button_ReviveImage = null;
+			this.m_E_Button_Damage = null;
 			this.m_E_Text_ExitTipText = null;
 			this.m_E_Text_CostText = null;
 			this.m_E_Text_CostNameText = null;
@@ -233,6 +251,7 @@ namespace ET.Client
 		private Image m_E_Button_ExitImage = null;
 		private Text m_E_Text_ExitDesText = null;
 		private Button m_E_Button_ReviveButton = null;
+		private Button m_E_Button_Damage = null;
 		private Image m_E_Button_ReviveImage = null;
 		private Text m_E_Text_ExitTipText = null;
 		private Text m_E_Text_CostText = null;
