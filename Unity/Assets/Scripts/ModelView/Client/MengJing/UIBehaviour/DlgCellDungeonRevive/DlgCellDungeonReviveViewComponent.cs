@@ -160,6 +160,57 @@ namespace ET.Client
      		}
      	}
 
+		public Text E_Text_Damage_Record_0
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Damage_Record_0 == null )
+				{
+					this.m_E_Text_Damage_Record_0 = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Damage_Record_0");
+				}
+				return this.m_E_Text_Damage_Record_0;
+			}
+		}
+		
+		public Text E_Text_Damage_Record_1
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Damage_Record_1 == null )
+				{
+					this.m_E_Text_Damage_Record_1 = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Damage_Record_1");
+				}
+				return this.m_E_Text_Damage_Record_1;
+			}
+		}
+
+		public Text E_Text_Damage_Record_2
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Damage_Record_2 == null )
+				{
+					this.m_E_Text_Damage_Record_2 = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Damage_Record_2");
+				}
+				return this.m_E_Text_Damage_Record_2;
+			}
+		}
+        
 		public void DestroyWidget()
 		{
 			this.m_E_ImageCostImage = null;
@@ -171,6 +222,9 @@ namespace ET.Client
 			this.m_E_Text_ExitTipText = null;
 			this.m_E_Text_CostText = null;
 			this.m_E_Text_CostNameText = null;
+			this.m_E_Text_Damage_Record_0 = null;
+			this.m_E_Text_Damage_Record_1 = null;
+			this.m_E_Text_Damage_Record_2 = null;
 			this.uiTransform = null;
 		}
 
@@ -183,6 +237,9 @@ namespace ET.Client
 		private Text m_E_Text_ExitTipText = null;
 		private Text m_E_Text_CostText = null;
 		private Text m_E_Text_CostNameText = null;
+		private Text m_E_Text_Damage_Record_0 = null;
+		private Text m_E_Text_Damage_Record_1 = null;
+		private Text m_E_Text_Damage_Record_2 = null;
 		public Transform uiTransform = null;
 	}
 }
