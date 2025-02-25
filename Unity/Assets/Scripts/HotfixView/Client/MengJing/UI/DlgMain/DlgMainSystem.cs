@@ -848,12 +848,14 @@ namespace ET.Client
                     {
                         self.View.EG_MainTaskRectTransform.gameObject.SetActive(true);
                         self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
+                        self.RefreshMainTaskItems();
                     }
 
                     break;
                 case 1:
                     self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
                     self.View.EG_MainTeamRectTransform.gameObject.SetActive(true);
+                    self.OnUpdateTeamUI();
                     break;
             }
         }
@@ -1977,7 +1979,7 @@ namespace ET.Client
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
             self.RefreshFightSet();
             self.OnMainHeroMove();
-            
+
             UserInfoNetHelper.RequestUserInfoInit(self.Root()).Coroutine();
         }
 

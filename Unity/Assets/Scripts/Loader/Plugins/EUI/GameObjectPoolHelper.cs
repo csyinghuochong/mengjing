@@ -129,6 +129,7 @@ namespace ET.Client
                 else
                 {
                     Debug.LogWarning("No pool available with name: " + po.poolName);
+                    UnityEngine.Object.Destroy(go);
                 }
 #endif
             }
