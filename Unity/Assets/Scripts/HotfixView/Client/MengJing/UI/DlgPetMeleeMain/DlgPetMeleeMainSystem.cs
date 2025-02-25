@@ -100,10 +100,12 @@ namespace ET.Client
             self.View.E_CountdownTimeText.text = ((int)ConfigData.PetMeleeBattleMaxTime / 1000).ToString();
 
             self.OranginScale = self.View.E_DiRenHpImgImage.GetComponent<RectTransform>().rect.width;
-            self.View.E_JiFanNumText.text = "召唤宠物数量：0";
-            self.View.E_DiRenNumText.text = "召唤怪物数量：0";
-            
-           
+            using (zstring.Block())
+            {
+                self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：0/{0}", ConfigData.PetMeleeMaxPetsInLine);
+                self.View.E_DiRenNumText.text = "召唤怪物数量：0";
+            }
+
             GameObject GridCanvas = GameObject.Find("/GridCanvas");
             GameObject BackgroundImage = GridCanvas.transform.Find("Background Image").gameObject;
             GameObject CellIndicator = GridCanvas.transform.Find("Cell Indicator").gameObject;
@@ -119,11 +121,11 @@ namespace ET.Client
 
         public static void UpdatePetMeleeMoRPS(this DlgPetMeleeMain self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());   
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponentS = unit.GetComponent<NumericComponentC>();
             //int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
-            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
-            
+            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd));
+
             using (zstring.Block())
             {
                 self.View.E_MoLiRPSText.text = zstring.Format("恢复值：{0}点/每秒", add);
@@ -143,7 +145,7 @@ namespace ET.Client
         public static void OnUnitHpUpdate(this DlgPetMeleeMain self, Unit unit)
         {
             self.UpdatePetMeleeMoRPS();
-            
+
             if (unit.Type == UnitType.Monster)
             {
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
@@ -208,7 +210,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}", JiFanNum);
+                self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}/{1}", JiFanNum, ConfigData.PetMeleeMaxPetsInLine);
                 self.View.E_DiRenNumText.text = zstring.Format("召唤怪物数量：{0}", DiRenNum);
             }
         }

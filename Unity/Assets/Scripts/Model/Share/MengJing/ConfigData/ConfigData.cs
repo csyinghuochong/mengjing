@@ -2045,10 +2045,10 @@ namespace ET
         public static long PetMeleeCardRefreshInterval = 10 * 1000;
 
         /// <summary>
-        /// 单条战线上己方最大宠物数量，超过不能再进行召唤
+        /// 召唤兽数量的限制，超过不能再进行召唤
         /// </summary>
         [StaticField]
-        public static int PetMeleeMaxPetsInLine = 5;
+        public static int PetMeleeMaxPetsInLine = 10;
 
         /// <summary>
         /// 游戏战斗时间，超过时间判定为输
