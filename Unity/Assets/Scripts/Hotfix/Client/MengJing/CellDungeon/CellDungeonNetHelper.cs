@@ -10,5 +10,13 @@
 
             return response.Error;
         }
+        
+        public static async ETTask<M2C_DamageValueListResponse> RequestDamageValueList(Scene root)
+        {
+            C2M_DamageValueListRequest request = C2M_DamageValueListRequest.Create();
+            M2C_DamageValueListResponse response = (M2C_DamageValueListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

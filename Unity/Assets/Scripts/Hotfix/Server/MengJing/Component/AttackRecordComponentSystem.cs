@@ -27,7 +27,23 @@ namespace ET.Server
         {
 
         }
+
+        public static void ClearDamageList(this AttackRecordComponent self)
+        {
+            
+        }
         
+        public static void OnUpdateDamage(this AttackRecordComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
+        {
+            DamageValueInfo damageValueInfo = DamageValueInfo.Create();
+            damageValueInfo.UnitType = attack.Type;
+            damageValueInfo.ConfigId = attack.ConfigId;
+            damageValueInfo.UnitName = attack.GetComponent<UnitInfoComponent>()?.UnitName;
+            damageValueInfo.DamageValue = damage;
+            damageValueInfo.SkillId = skillid;
+            self.DamageValueList.Add(damageValueInfo);  
+        }
+
         public static void BeAttacking(this AttackRecordComponent self, Unit attack, long hurtvalue)
         {
             if (hurtvalue >= 0)

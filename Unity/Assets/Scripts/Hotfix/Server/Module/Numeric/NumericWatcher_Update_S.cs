@@ -67,6 +67,11 @@ namespace ET.Server
 				                ?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
 		                break;
                 }
+
+                if (unit.Type == UnitType.Player)
+                {
+	                unit.GetComponent<AttackRecordComponent>()?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
+                }
             }
         }
     }

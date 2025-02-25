@@ -21,47 +21,51 @@ namespace ET.Server
 
         public static void OnKillEvent(this LocalDungeonComponent self, Unit unit, Unit attack)
         {
-            if (attack == null || attack.Type != UnitType.Player)
+            if (attack == null )
             {
                 return;
             }
 
-            if (unit.Type != UnitType.Monster)
+            if (unit.Type == UnitType.Monster)
             {
-                return;
-            }
-
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            UserInfoComponentS userInfoComponent = self.MainUnit.GetComponent<UserInfoComponentS>();
-            if (userInfoComponent == null || userInfoComponent.IsDisposed)
-            {
-                return;
-            }
-
-            if (monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss && userInfoComponent.GetUserLv() >= 20)
-            {
-                userInfoComponent.UpdateRoleData(UserDataType.BaoShiDu, "-1", true);
-                return;
-            }
-
-            ///刷新刷出神秘之门
-            if (userInfoComponent.GetUserLv() > 0 && !unit.IsSceneItem() && RandomHelper.RandFloat01() < 0.001f)
-            {
-                int shenminId = 40000003;
-                List<EntityRef<Unit>> npclist = self.MainUnit.GetParent<UnitComponent>().GetAll();
-                for (int i = 0; i < npclist.Count; i++)
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                UserInfoComponentS userInfoComponent = self.MainUnit.GetComponent<UserInfoComponentS>();
+                if (userInfoComponent == null || userInfoComponent.IsDisposed)
                 {
-                    Unit npc = npclist[i];
-                    if (npc.Type == UnitType.Npc && npc.ConfigId == shenminId)
+                    return;
+                }
+
+                if (monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss && userInfoComponent.GetUserLv() >= 20)
+                {
+                    userInfoComponent.UpdateRoleData(UserDataType.BaoShiDu, "-1", true);
+                    return;
+                }
+
+                ///刷新刷出神秘之门
+                if (userInfoComponent.GetUserLv() > 0 && !unit.IsSceneItem() && RandomHelper.RandFloat01() < 0.001f)
+                {
+                    int shenminId = 40000003;
+                    List<EntityRef<Unit>> npclist = self.MainUnit.GetParent<UnitComponent>().GetAll();
+                    for (int i = 0; i < npclist.Count; i++)
                     {
-                        shenminId = 0;
+                        Unit npc = npclist[i];
+                        if (npc.Type == UnitType.Npc && npc.ConfigId == shenminId)
+                        {
+                            shenminId = 0;
+                        }
+                    }
+
+                    if (shenminId != 0)
+                    {
+                        UnitFactory.CreateNpcByPosition(self.Root(), shenminId, unit.Position);
                     }
                 }
+            }
 
-                if (shenminId != 0)
-                {
-                    UnitFactory.CreateNpcByPosition(self.Root(), shenminId, unit.Position);
-                }
+            if(unit.Type == UnitType.Player)
+            {
+                //弹出结算界面
+                
             }
         }
 
@@ -83,6 +87,19 @@ namespace ET.Server
             }
         }
 
+        public static void OnUpdateDamage(this LocalDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
+        {
+            if (player == null)
+            {
+                return;
+            }
+
+            if (defend.Type != UnitType.Monster)
+            {
+                return;
+            }
+        }
+        
         public static void GenerateFuben(this LocalDungeonComponent self, int mapid)
         {
             DungeonConfig chapterSonConfig = DungeonConfigCategory.Instance.Get(mapid);

@@ -100,6 +100,19 @@ namespace ET.Client
             {
                 self.View.E_Text_ExitDesText.text = "返回出生点";
             }
+            
+            self.RequestDamageValueList().Coroutine();  
+        }
+
+        private static async ETTask RequestDamageValueList(this DlgCellDungeonRevive self)
+        {
+            long instanceid = self.InstanceId;  
+            M2C_DamageValueListResponse damageValueListResponse = await CellDungeonNetHelper.RequestDamageValueList( self.Root() );
+            if (instanceid != self.InstanceId || damageValueListResponse == null)
+            {
+                return;
+            }
+            
         }
 
         public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)
@@ -130,12 +143,7 @@ namespace ET.Client
             {
                 return;
             }
-
-            SessionComponent sessionComponent = self.Root().GetComponent<SessionComponent>();
-            if (sessionComponent.Session == null || sessionComponent.Session.IsDisposed)
-            {
-                return;
-            }
+            
 
             EnterMapHelper.RequestQuitFuben(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonRevive);

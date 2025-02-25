@@ -7444,3 +7444,29 @@ message M2C_PetMeleeFubenRewardResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+message DamageValueInfo
+{
+	int32 UnitType = 1;
+	int32 ConfigId = 2;	
+	string UnitName = 3;
+	int32 SkillId = 4;	
+	int64 DamageValue = 5;
+}
+
+//ResponseType M2C_DamageValueListResponse
+//玩家收到的伤害列表
+message C2M_DamageValueListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Id = 1;
+}
+
+message M2C_DamageValueListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated DamageValueInfo DamageValueList = 2;
+}

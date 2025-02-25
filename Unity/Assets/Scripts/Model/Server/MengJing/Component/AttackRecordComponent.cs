@@ -29,5 +29,11 @@ namespace ET.Server
         /// 战场召唤记录
         /// </summary>
         public List<BattleSummonInfo> BattleSummonList { get; set; } = new List<BattleSummonInfo>();
+        
+        /// <summary>
+        /// 伤害列表   被击败的 为列表最后一个 
+        /// </summary>
+        /// <returns></returns>
+        public List<DamageValueInfo> DamageValueList  { get; set; } = new List<DamageValueInfo>(); 
     }
 }

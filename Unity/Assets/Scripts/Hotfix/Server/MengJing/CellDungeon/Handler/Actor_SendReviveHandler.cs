@@ -17,8 +17,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
-
-
+                
                 unit.SetBornPosition(unit.Position, true);
                 unit.GetComponent<HeroDataComponentS>().OnRevive();
                 unit.GetComponent<ChengJiuComponentS>().OnRevive();
@@ -46,6 +45,7 @@ namespace ET.Server
                         }
                         break;
                 }
+                unit.GetComponent<AttackRecordComponent>().ClearDamageList();
                 unit.GetComponent<HeroDataComponentS>().OnRevive();
             }
 

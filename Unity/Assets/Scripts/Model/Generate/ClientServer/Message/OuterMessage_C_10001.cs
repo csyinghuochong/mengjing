@@ -32443,6 +32443,119 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.DamageValueInfo)]
+    public partial class DamageValueInfo : MessageObject
+    {
+        public static DamageValueInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(DamageValueInfo), isFromPool) as DamageValueInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public int UnitType { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int ConfigId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public string UnitName { get; set; }
+
+        [MemoryPackOrder(3)]
+        public int SkillId { get; set; }
+
+        [MemoryPackOrder(4)]
+        public long DamageValue { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.UnitType = default;
+            this.ConfigId = default;
+            this.UnitName = default;
+            this.SkillId = default;
+            this.DamageValue = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 玩家收到的伤害列表
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_DamageValueListRequest)]
+    [ResponseType(nameof(M2C_DamageValueListResponse))]
+    public partial class C2M_DamageValueListRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_DamageValueListRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_DamageValueListRequest), isFromPool) as C2M_DamageValueListRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int Id { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.Id = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_DamageValueListResponse)]
+    public partial class M2C_DamageValueListResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_DamageValueListResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_DamageValueListResponse), isFromPool) as M2C_DamageValueListResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(1)]
+        public List<DamageValueInfo> DamageValueList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.DamageValueList.Clear();
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -33307,5 +33420,8 @@ namespace ET
         public const ushort M2C_PetMeleeRewardResponse = 10861;
         public const ushort C2M_PetMeleeFubenRewardRequest = 10862;
         public const ushort M2C_PetMeleeFubenRewardResponse = 10863;
+        public const ushort DamageValueInfo = 10864;
+        public const ushort C2M_DamageValueListRequest = 10865;
+        public const ushort M2C_DamageValueListResponse = 10866;
     }
 }
