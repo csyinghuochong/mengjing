@@ -42,6 +42,10 @@ namespace ET.Server
             damageValueInfo.DamageValue = damage;
             damageValueInfo.SkillId = skillid;
             self.DamageValueList.Add(damageValueInfo);  
+            if (self.DamageValueList.Count > 50)
+            {
+                self.DamageValueList.RemoveAt(0);
+            }
         }
 
         public static void BeAttacking(this AttackRecordComponent self, Unit attack, long hurtvalue)

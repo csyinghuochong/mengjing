@@ -112,7 +112,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+            //最后一条数据即为被击杀的怪物或者玩家
         }
 
         public static void OnButton_ReviveButton(this DlgCellDungeonRevive self)
