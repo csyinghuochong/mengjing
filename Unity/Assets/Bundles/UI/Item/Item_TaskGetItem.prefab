@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 7509330425648896706}
   - component: {fileID: 4325766261655528671}
   - component: {fileID: 9080685901264974802}
+  - component: {fileID: 1400098113272575272}
   m_Layer: 5
   m_Name: Item_TaskGetItem
   m_TagString: Untagged
@@ -258,6 +259,26 @@ MonoBehaviour:
     gameObject: {fileID: 5072164934746421109}
   - key: ImageDi
     gameObject: {fileID: 9182413110697338305}
+--- !u!114 &1400098113272575272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598985793016341864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 800
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &1523109542478445253
 GameObject:
   m_ObjectHideFlags: 0

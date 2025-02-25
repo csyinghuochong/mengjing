@@ -20,6 +20,9 @@ namespace ET.Client
 
         public static void InitData(this Scroll_Item_TaskGetItem self, int taskid)
         {
+            self.E_ImageDiImage.gameObject.SetActive(true);
+            self.E_ImageSelectImage.gameObject.SetActive(false);
+            
             self.TaskId = taskid;
             TaskPro taskPro = self.Root().GetComponent<TaskComponentC>().GetTaskById(taskid);
             bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
