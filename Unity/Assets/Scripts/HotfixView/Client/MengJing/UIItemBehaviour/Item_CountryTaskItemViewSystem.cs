@@ -50,7 +50,11 @@
             //     }
             // }
 
-            self.ES_RewardList.Refresh(taskConfig.RewardItem);
+            using (zstring.Block())
+            {
+                zstring rewardItem = "1;" + taskConfig.TaskCoin + "@" + taskConfig.RewardItem;
+                self.ES_RewardList.Refresh(rewardItem);
+            }
 
             using (zstring.Block())
             {
