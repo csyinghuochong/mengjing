@@ -35,7 +35,7 @@ namespace ET.Client
 				string text_2 = zstring.Format("技能:{0}", SkillConfigCategory.Instance.Get(damageValueInfo.SkillId).SkillName);
 				string text_3 = zstring.Format("伤害:{0}",  damageValueInfo.DamageValue);
 				
-				self.E_Text_NameText.text = zstring.Format("请先消灭{0} {1} {2}", text_1, text_2, text_3);
+				self.E_Text_NameText.text = zstring.Format("{0} {1} {2}", text_1, text_2, text_3);
 			}
 			
 		}
