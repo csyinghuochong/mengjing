@@ -313,6 +313,23 @@ namespace ET.Client
      		}
      	}
 
+		public Button E_ButtonReturnButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonReturn == null )
+				{
+					this.m_E_ButtonReturn = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonReturn");
+				}
+				return this.m_E_ButtonReturn;
+			}
+		}
+
 		public Image E_ButtonJieRiRewardImage
      	{
      		get
@@ -587,6 +604,7 @@ namespace ET.Client
 			this.m_E_Lab_TaskDest = null;
 			this.m_E_Lab_TaskName = null;
 			this.m_es_rewardlist = null;
+			this.m_E_ButtonReturn = null;
 			this.uiTransform = null;
 		}
 
@@ -608,6 +626,7 @@ namespace ET.Client
 		private Text m_E_Lab_MoNnengHintText = null;
 		private Text m_E_Lab_HuoBiNameText = null;
 		private Button m_E_ButtonJieRiRewardButton = null;
+		private Button m_E_ButtonReturn = null;
 		private Image m_E_ButtonJieRiRewardImage = null;
 		private Button m_E_ButtonExpDuiHuanButton = null;
 		private Image m_E_ButtonExpDuiHuanImage = null;

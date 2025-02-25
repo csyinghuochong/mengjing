@@ -32,6 +32,7 @@ namespace ET.Client
             self.View.E_ButtonPetFragmentButton.AddListener(self.OnButtonPetFragmentButton);
             self.View.E_ButtonGiveTaskButton.AddListenerAsync(self.OnButtonGiveTaskButton);
             self.View.E_ButtonMysteryButton.AddListener(self.OnButtonMysteryButton);
+            self.View.E_ButtonReturnButton.AddListener(self.OnButtonReturnButton);
         }
 
         public static void ShowWindow(this DlgTaskGet self, Entity contextData = null)
@@ -114,6 +115,8 @@ namespace ET.Client
             self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
             self.View.E_ButtonMysteryButton.gameObject.SetActive(false);
             self.View.EG_TaskDesc.gameObject.SetActive(false);
+            self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
+            
             switch (npcConfig.NpcType)
             {
                 case 1: //神兽兑换
@@ -524,6 +527,14 @@ namespace ET.Client
             }
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
             self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+            self.View.E_ButtonReturnButton.gameObject.SetActive(true);  
+            self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+        }
+
+        public static void OnButtonReturnButton(this DlgTaskGet self)
+        {
+            self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
+            self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
         }
 
         public static void OnButtonMysteryButton(this DlgTaskGet self)
