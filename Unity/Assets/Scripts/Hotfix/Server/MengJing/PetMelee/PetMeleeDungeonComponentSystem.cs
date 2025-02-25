@@ -411,7 +411,7 @@ namespace ET.Server
                 PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
 
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-                if (allpet.Count > ConfigData.PetMeleeMaxPetsInLine)
+                if (allpet.Count >= ConfigData.PetMeleeMaxPetsInLine)
                 {
                     return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
