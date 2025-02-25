@@ -296,8 +296,7 @@ namespace ET.Client
                     animatorComponent.SetBoolValue("Idle", true);
                 }
             }
-
-            Log.Debug($"PlayAnimator: {skillConfig.SkillAnimation}");
+            
             if (SettingData.AnimController == 0)
             {
                 animatorComponent.Play(skillConfig.SkillAnimation);

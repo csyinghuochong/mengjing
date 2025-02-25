@@ -120,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_TaskGetItems/E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnCommitTask1Button == null )
      			{
-		    		this.m_E_BtnCommitTask1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_TaskGetItems/E_BtnCommitTask1");
+		    		this.m_E_BtnCommitTask1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_BtnCommitTask1");
      			}
      			return this.m_E_BtnCommitTask1Button;
      		}
@@ -171,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnCommitTask1Image == null )
      			{
-		    		this.m_E_BtnCommitTask1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_TaskGetItems/E_BtnCommitTask1");
+		    		this.m_E_BtnCommitTask1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_BtnCommitTask1");
      			}
      			return this.m_E_BtnCommitTask1Image;
      		}
@@ -188,7 +188,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGiveTaskButton == null )
      			{
-		    		this.m_E_ButtonGiveTaskButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_TaskGetItems/E_ButtonGiveTask");
+		    		this.m_E_ButtonGiveTaskButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonGiveTask");
      			}
      			return this.m_E_ButtonGiveTaskButton;
      		}
