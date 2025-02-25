@@ -535,6 +535,9 @@ namespace ET.Client
         {
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+            // self.View.EG_TaskDesc.gameObject.SetActive(false);
+            // self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
+            // self.View.E_ButtonGetButton.gameObject.SetActive(false);
         }
 
         public static void OnButtonMysteryButton(this DlgTaskGet self)

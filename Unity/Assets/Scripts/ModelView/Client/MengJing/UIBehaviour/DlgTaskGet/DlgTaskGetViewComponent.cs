@@ -494,7 +494,7 @@ namespace ET.Client
 				}
 				if( this.m_EG_TaskDesc == null )
 				{
-					this.m_EG_TaskDesc = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_Lab_TaskDesk");
+					this.m_EG_TaskDesc = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_TaskDesc");
 				}
 				return this.m_EG_TaskDesc;
 			}
