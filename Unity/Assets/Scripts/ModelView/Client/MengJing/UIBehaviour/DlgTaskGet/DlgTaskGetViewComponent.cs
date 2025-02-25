@@ -466,6 +466,76 @@ namespace ET.Client
      		}
      	}
 
+		public Transform EG_TaskDesc
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_TaskDesc == null )
+				{
+					this.m_EG_TaskDesc = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_Lab_TaskDesk");
+				}
+				return this.m_EG_TaskDesc;
+			}
+		}
+		
+		public Text E_Lab_TaskDest
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Lab_TaskDest == null )
+				{
+					this.m_E_Lab_TaskDest = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskDesk");
+				}
+				return this.m_E_Lab_TaskDest;
+			}
+		}
+
+		public Text E_Lab_TaskName
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Lab_TaskName == null )
+				{
+					this.m_E_Lab_TaskName = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskName");
+				}
+				return this.m_E_Lab_TaskName;
+			}
+		}
+		
+		public ES_RewardList ES_RewardList
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_RewardList es = this.m_es_rewardlist;
+				if( es == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_TaskDesc/ES_RewardList");
+					this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+				}
+				return this.m_es_rewardlist;
+			}
+		}
+		
 		public LoopVerticalScrollRect E_TaskFubenItemsLoopVerticalScrollRect
      	{
      		get
@@ -513,6 +583,10 @@ namespace ET.Client
 			this.m_E_TaskFubenItemsImage = null;
 			this.m_E_EnergySkillImage = null;
 			this.m_E_TaskFubenItemsLoopVerticalScrollRect = null;
+			this.m_EG_TaskDesc = null;
+			this.m_E_Lab_TaskDest = null;
+			this.m_E_Lab_TaskName = null;
+			this.m_es_rewardlist = null;
 			this.uiTransform = null;
 		}
 
@@ -543,6 +617,10 @@ namespace ET.Client
 		private Image m_E_ButtonMysteryImage = null;
 		private Image m_E_TaskFubenItemsImage = null;
 		private Image m_E_EnergySkillImage;
+		private Transform m_EG_TaskDesc = null;
+		private Text m_E_Lab_TaskDest = null;
+		private Text m_E_Lab_TaskName = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private LoopVerticalScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}

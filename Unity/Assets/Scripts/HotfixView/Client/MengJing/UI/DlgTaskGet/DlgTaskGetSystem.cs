@@ -113,7 +113,7 @@ namespace ET.Client
             self.View.E_ButtonPetFragmentButton.gameObject.SetActive(false);
             self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
             self.View.E_ButtonMysteryButton.gameObject.SetActive(false);
-
+            self.View.EG_TaskDesc.gameObject.SetActive(false);
             switch (npcConfig.NpcType)
             {
                 case 1: //神兽兑换
@@ -461,8 +461,8 @@ namespace ET.Client
 
             if (self.ShowTaskId.Count > 0)
             {
-                Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[0];
-                scrollItemTaskGetItem.OnClickSelectTask();
+                //Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[0];
+                //scrollItemTaskGetItem.OnClickSelectTask();
                 return true;
             }
 
@@ -500,6 +500,30 @@ namespace ET.Client
                 self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
                 self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
             }
+            self.View.EG_TaskDesc.gameObject.SetActive(true);
+            self.View.E_Lab_TaskDest.text = taskConfig.TaskDes;    
+            self.View.E_Lab_TaskName.text = taskConfig.TaskName;    
+            
+            string rewardStr = taskConfig.RewardItem;
+            int taskExp = (int)(taskConfig.TaskExp * 1);
+            int taskCoin = (int)(taskConfig.TaskCoin * 1);
+            if (CommonHelp.IfNull(rewardStr))
+            {
+                using (zstring.Block())
+                {
+                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
+                }
+            }
+            else
+            {
+                using (zstring.Block())
+                {
+                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
+                    rewardStr += rewardStr;
+                }
+            }
+            List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
+            self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
         }
 
         public static void OnButtonMysteryButton(this DlgTaskGet self)
