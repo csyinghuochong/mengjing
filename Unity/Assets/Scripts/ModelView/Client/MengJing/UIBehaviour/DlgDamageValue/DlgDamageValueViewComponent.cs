@@ -24,13 +24,33 @@ namespace ET.Client
      		}
      	}
 
+		public Button E_ButtonCloseButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonClose == null )
+				{
+					this.m_E_ButtonClose = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
+				}
+				return this.m_E_ButtonClose;
+			}
+		}
+                
+		
 		public void DestroyWidget()
 		{
 			this.m_E_RankShowItemsLoopVerticalScrollRect = null;
+			this.m_E_ButtonClose = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RankShowItemsLoopVerticalScrollRect = null;
+		private Button m_E_ButtonClose = null;
 		public Transform uiTransform = null;
 	}
 }

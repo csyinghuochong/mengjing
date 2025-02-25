@@ -1779,6 +1779,7 @@ namespace ET.Client
             self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
             self.Root().RemoveComponent<UnitGuaJiComponent>();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DamageValue);
         }
 
         public static void OnChapterOpen(this DlgMain self)
