@@ -4,6 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
 	[EntitySystemOf(typeof(Scroll_Item_TaskRewardItem))]
+	[FriendOf(typeof(Scroll_Item_TaskRewardItem))]
 	public static partial class Scroll_Item_TaskRewardItemSystem 
 	{
 		[EntitySystem]
