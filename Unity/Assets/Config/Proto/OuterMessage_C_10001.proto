@@ -5700,10 +5700,14 @@ message M2C_ActivityInfoResponse // ILocationResponse
 	repeated int32 ReceiveIds = 1;
 	int64 LastSignTime = 3;
 	int32 TotalSignNumber = 4;
-	repeated TokenRecvive QuTokenRecvive = 5;
-	int64 LastLoginTime = 6;
-	repeated int32 DayTeHui = 7;
-	ActivityV1InfoProto ActivityV1InfoProto = 8;
+	repeated int32 TotalSignRewardsList = 5;
+	int64 LastSignTime_VIP = 6;
+	int32 TotalSignNumber_VIP = 7;
+	repeated int32 TotalSignRewardsList_VIP = 8;
+	repeated TokenRecvive QuTokenRecvive = 9;
+	int64 LastLoginTime = 10;
+	repeated int32 DayTeHui = 11;
+	ActivityV1InfoProto ActivityV1InfoProto = 12;
 }
 
 //领取奖励
@@ -5718,6 +5722,23 @@ message C2M_ActivityReceiveRequest // ILocationRequest
 }
 
 message M2C_ActivityReceiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//领取累计签到奖励
+//ResponseType M2C_ActivityTotalSignReceiveResponse
+message C2M_ActivityTotalSignReceiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Type = 1;
+	int32 Day = 2;
+}
+
+message M2C_ActivityTotalSignReceiveResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

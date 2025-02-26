@@ -108,7 +108,7 @@ namespace ET.Server
             for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
             {
                 ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
-                if (activityConfig.ActivityType == 33)
+                if (activityConfig.ActivityType == (int)ActivityEnum.Type_33)
                 {
                     self.ActivityReceiveIds.RemoveAt(i);
                 }
@@ -123,7 +123,7 @@ namespace ET.Server
             for (int i = self.ActivityReceiveIds.Count -1; i >= 0; i--)
             {
                 ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
-                if (activityConfig.ActivityType ==2 || activityConfig.ActivityType == 32)
+                if (activityConfig.ActivityType == (int)ActivityEnum.Type_2 || activityConfig.ActivityType == (int)ActivityEnum.Type_32)
                 {
                     self.ActivityReceiveIds.RemoveAt(i);
                 }
@@ -135,7 +135,7 @@ namespace ET.Server
                 for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == 23)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23)
                     {
                         self.ActivityReceiveIds.RemoveAt(i);
                     }

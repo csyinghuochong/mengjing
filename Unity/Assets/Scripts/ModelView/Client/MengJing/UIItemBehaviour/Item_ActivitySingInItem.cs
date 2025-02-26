@@ -1,14 +1,12 @@
-﻿using System;
+﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ActivitySingInItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ActivitySingInItem> 
+	public  class Scroll_Item_ActivitySingInItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ActivitySingInItem>
 	{
-		public GameObject CurrentImage_ItemIcon;
-		public GameObject[] Image_ItemIconList = new GameObject[2];
 		public Action<int> ClickHandler;
 		public ActivityConfig ActivityConfig;
 		
@@ -25,7 +23,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public Image E_Image_ItemIcon1Image
+		public UnityEngine.UI.Image E_LightImage
      	{
      		get
      		{
@@ -36,20 +34,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Image_ItemIcon1Image == null )
+     				if( this.m_E_LightImage == null )
      				{
-		    			this.m_E_Image_ItemIcon1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemIcon1");
+		    			this.m_E_LightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Light");
      				}
-     				return this.m_E_Image_ItemIcon1Image;
+     				return this.m_E_LightImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemIcon1");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Light");
      			}
      		}
      	}
 
-		public Image E_Image_ItemIcon2Image
+		public UnityEngine.UI.Image E_ItemIconImage
      	{
      		get
      		{
@@ -60,20 +58,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Image_ItemIcon2Image == null )
+     				if( this.m_E_ItemIconImage == null )
      				{
-		    			this.m_E_Image_ItemIcon2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemIcon2");
+		    			this.m_E_ItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemIcon");
      				}
-     				return this.m_E_Image_ItemIcon2Image;
+     				return this.m_E_ItemIconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemIcon2");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemIcon");
      			}
      		}
      	}
 
-		public Image E_Image_XuanZhongImage
+		public UnityEngine.UI.Text E_ItemNumText
      	{
      		get
      		{
@@ -84,20 +82,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Image_XuanZhongImage == null )
+     				if( this.m_E_ItemNumText == null )
      				{
-		    			this.m_E_Image_XuanZhongImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_XuanZhong");
+		    			this.m_E_ItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemNum");
      				}
-     				return this.m_E_Image_XuanZhongImage;
+     				return this.m_E_ItemNumText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_XuanZhong");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemNum");
      			}
      		}
      	}
 
-		public Button E_Image_ItemButtonButton
+		public UnityEngine.UI.Image E_XuanZhongImage
      	{
      		get
      		{
@@ -108,20 +106,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Image_ItemButtonButton == null )
+     				if( this.m_E_XuanZhongImage == null )
      				{
-		    			this.m_E_Image_ItemButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Image_ItemButton");
+		    			this.m_E_XuanZhongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_XuanZhong");
      				}
-     				return this.m_E_Image_ItemButtonButton;
+     				return this.m_E_XuanZhongImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Image_ItemButton");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_XuanZhong");
      			}
      		}
      	}
 
-		public Image E_Image_ItemButtonImage
+		public UnityEngine.UI.Text E_DayText
      	{
      		get
      		{
@@ -132,20 +130,20 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Image_ItemButtonImage == null )
+     				if( this.m_E_DayText == null )
      				{
-		    			this.m_E_Image_ItemButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemButton");
+		    			this.m_E_DayText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Day");
      				}
-     				return this.m_E_Image_ItemButtonImage;
+     				return this.m_E_DayText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_ItemButton");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Day");
      			}
      		}
      	}
 
-		public Text E_Label_ItemNameText
+		public UnityEngine.UI.Image E_LingQuImage
      	{
      		get
      		{
@@ -156,37 +154,89 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_E_Label_ItemNameText == null )
+     				if( this.m_E_LingQuImage == null )
      				{
-		    			this.m_E_Label_ItemNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Label_ItemName");
+		    			this.m_E_LingQuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQu");
      				}
-     				return this.m_E_Label_ItemNameText;
+     				return this.m_E_LingQuImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Label_ItemName");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQu");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ItemButtonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemButtonButton == null )
+     				{
+		    			this.m_E_ItemButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemButton");
+     				}
+     				return this.m_E_ItemButtonButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemButton");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemButtonImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemButtonImage == null )
+     				{
+		    			this.m_E_ItemButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemButton");
+     				}
+     				return this.m_E_ItemButtonImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemButton");
      			}
      		}
      	}
 
 		public void DestroyWidget()
 		{
-			this.m_E_Image_ItemIcon1Image = null;
-			this.m_E_Image_ItemIcon2Image = null;
-			this.m_E_Image_XuanZhongImage = null;
-			this.m_E_Image_ItemButtonButton = null;
-			this.m_E_Image_ItemButtonImage = null;
-			this.m_E_Label_ItemNameText = null;
+			this.m_E_LightImage = null;
+			this.m_E_ItemIconImage = null;
+			this.m_E_ItemNumText = null;
+			this.m_E_XuanZhongImage = null;
+			this.m_E_DayText = null;
+			this.m_E_LingQuImage = null;
+			this.m_E_ItemButtonButton = null;
+			this.m_E_ItemButtonImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
-		private Image m_E_Image_ItemIcon1Image = null;
-		private Image m_E_Image_ItemIcon2Image = null;
-		private Image m_E_Image_XuanZhongImage = null;
-		private Button m_E_Image_ItemButtonButton = null;
-		private Image m_E_Image_ItemButtonImage = null;
-		private Text m_E_Label_ItemNameText = null;
+		private UnityEngine.UI.Image m_E_LightImage = null;
+		private UnityEngine.UI.Image m_E_ItemIconImage = null;
+		private UnityEngine.UI.Text m_E_ItemNumText = null;
+		private UnityEngine.UI.Image m_E_XuanZhongImage = null;
+		private UnityEngine.UI.Text m_E_DayText = null;
+		private UnityEngine.UI.Image m_E_LingQuImage = null;
+		private UnityEngine.UI.Button m_E_ItemButtonButton = null;
+		private UnityEngine.UI.Image m_E_ItemButtonImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -14,12 +14,12 @@ namespace ET
         {
             foreach (ActivityConfig activityConfig in this.GetAll().Values)
             {
-                if (activityConfig.ActivityType == 34)
+                if (activityConfig.ActivityType == (int)ActivityEnum.Type_34)
                 {
                     PulicSerialList.Add(activityConfig.Par_2, activityConfig.Id);
                 }
                 
-                if (activityConfig.ActivityType != 101)
+                if (activityConfig.ActivityType != (int)ActivityEnum.Type_101)
                 {
                     continue;
                 }

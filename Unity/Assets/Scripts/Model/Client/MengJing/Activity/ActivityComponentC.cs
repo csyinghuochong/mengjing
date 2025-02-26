@@ -6,14 +6,30 @@ namespace ET.Client
     public class ActivityComponentC: Entity, IAwake
     {
         /// <summary>
-        /// 上次签到时间
+        /// 上次签到时间 免费
         /// </summary>
         public long LastSignTime { get; set; } = 0;
-
         /// <summary>
-        /// 已经签到次数
+        /// 已经签到次数 免费
         /// </summary>
         public int TotalSignNumber { get; set; } = 0;
+        /// <summary>
+        /// 已经领取的累计签到奖励 免费
+        /// </summary>
+        public List<int> TotalSignRewardsList { get; set; } = new();
+        
+        /// <summary>
+        /// 上次签到时间 VIP
+        /// </summary>
+        public long LastSignTime_VIP { get; set; }= 0;
+        /// <summary>
+        /// 已经签到次数 VIP
+        /// </summary>
+        public int TotalSignNumber_VIP { get; set; }= 0;
+        /// <summary>
+        /// 已经领取的累计签到奖励 VIP
+        /// </summary>
+        public List<int> TotalSignRewardsList_VIP { get; set; } = new();
 
         public long LastLoginTime { get; set; } = 0;
 

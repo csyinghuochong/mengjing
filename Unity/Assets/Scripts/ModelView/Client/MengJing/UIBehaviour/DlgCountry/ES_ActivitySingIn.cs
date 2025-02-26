@@ -1,20 +1,54 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivitySingIn : Entity,IAwake<Transform>,IDestroy,IUILogic
+	public  class ES_ActivitySingIn : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public int CurDay;
-		public bool IsSign;
-		public int ActivityId;
-		public List<ActivityConfig> ShowActivityConfigs = new();
-		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingInItem>> ScrollItemActivitySingInItems;
+		public List<string> AssetList = new();
 		
-		public LoopVerticalScrollRect E_ActivitySingInItemsLoopVerticalScrollRect
+		public ES_ActivitySingInFree ES_ActivitySingInFree
+		{
+			get
+			{
+				ES_ActivitySingInFree es = this.m_es_activitySingInFree;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInFree.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_activitySingInFree = this.AddChild<ES_ActivitySingInFree, Transform>(go.transform);
+				}
+
+				return this.m_es_activitySingInFree;
+			}
+		}
+		
+		public ES_ActivitySingInVIP ES_ActivitySingInVip
+		{
+			get
+			{
+				ES_ActivitySingInVIP es = this.m_es_activitySingInPaid;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInVIP.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_activitySingInPaid = this.AddChild<ES_ActivitySingInVIP, Transform>(go.transform);
+				}
+
+				return this.m_es_activitySingInPaid;
+			}
+		}
+		
+		public UnityEngine.UI.ToggleGroup E_TypeSetToggleGroup
      	{
      		get
      		{
@@ -23,15 +57,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ActivitySingInItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TypeSetToggleGroup == null )
      			{
-		    		this.m_E_ActivitySingInItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivitySingInItems");
+		    		this.m_E_TypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_TypeSet");
      			}
-     			return this.m_E_ActivitySingInItemsLoopVerticalScrollRect;
+     			return this.m_E_TypeSetToggleGroup;
      		}
      	}
 
-		public Button E_Btn_ComButton
+		public UnityEngine.RectTransform EG_PanelRootRectTransform
      	{
      		get
      		{
@@ -40,134 +74,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_ComButton == null )
+     			if( this.m_EG_PanelRootRectTransform == null )
      			{
-		    		this.m_E_Btn_ComButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Com");
+		    		this.m_EG_PanelRootRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PanelRoot");
      			}
-     			return this.m_E_Btn_ComButton;
-     		}
-     	}
-
-		public Image E_Btn_ComImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_ComImage == null )
-     			{
-		    		this.m_E_Btn_ComImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Com");
-     			}
-     			return this.m_E_Btn_ComImage;
-     		}
-     	}
-
-		public Image E_Img_lingQuImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_lingQuImage == null )
-     			{
-		    		this.m_E_Img_lingQuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_lingQu");
-     			}
-     			return this.m_E_Img_lingQuImage;
-     		}
-     	}
-
-		public ES_RewardList ES_RewardList
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-		        ES_RewardList es = this.m_es_rewardlist;
-     			if( es == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
-     			}
-     			return this.m_es_rewardlist;
-     		}
-     	}
-
-		public ES_RewardList ES_RewardList_2
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-		        ES_RewardList es = this.m_es_rewardlist_2;
-     			if( es == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_2");
-		    	   this.m_es_rewardlist_2 = this.AddChild<ES_RewardList,Transform>(subTrans);
-     			}
-     			return this.m_es_rewardlist_2;
-     		}
-     	}
-
-		public Button E_Btn_Com2Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_Com2Button == null )
-     			{
-		    		this.m_E_Btn_Com2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Com2");
-     			}
-     			return this.m_E_Btn_Com2Button;
-     		}
-     	}
-
-		public Image E_Btn_Com2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_Com2Image == null )
-     			{
-		    		this.m_E_Btn_Com2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Com2");
-     			}
-     			return this.m_E_Btn_Com2Image;
-     		}
-     	}
-
-		public Image E_Img_lingQu2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_lingQu2Image == null )
-     			{
-		    		this.m_E_Img_lingQu2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_lingQu2");
-     			}
-     			return this.m_E_Img_lingQu2Image;
+     			return this.m_EG_PanelRootRectTransform;
      		}
      	}
 
@@ -185,27 +96,25 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
-			this.m_E_Btn_ComButton = null;
-			this.m_E_Btn_ComImage = null;
-			this.m_E_Img_lingQuImage = null;
-			this.m_es_rewardlist = null;
-			this.m_es_rewardlist_2 = null;
-			this.m_E_Btn_Com2Button = null;
-			this.m_E_Btn_Com2Image = null;
-			this.m_E_Img_lingQu2Image = null;
+			this.m_es_activitySingInFree = null;
+			this.m_es_activitySingInPaid = null;
+			this.m_E_TypeSetToggleGroup = null;
+			this.m_EG_PanelRootRectTransform = null;
 			this.uiTransform = null;
+			
+			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
+			for (int i = 0; i < this.AssetList.Count; i++)
+			{
+				resourcesLoaderComponent.UnLoadAsset(this.AssetList[i]);
+			}
+			this.AssetList.Clear();
+			this.AssetList = null;
 		}
 
-		private LoopVerticalScrollRect m_E_ActivitySingInItemsLoopVerticalScrollRect = null;
-		private Button m_E_Btn_ComButton = null;
-		private Image m_E_Btn_ComImage = null;
-		private Image m_E_Img_lingQuImage = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist_2 = null;
-		private Button m_E_Btn_Com2Button = null;
-		private Image m_E_Btn_Com2Image = null;
-		private Image m_E_Img_lingQu2Image = null;
+		private EntityRef<ES_ActivitySingInFree> m_es_activitySingInFree = null;
+		private EntityRef<ES_ActivitySingInVIP> m_es_activitySingInPaid = null;
+		private UnityEngine.UI.ToggleGroup m_E_TypeSetToggleGroup = null;
+		private UnityEngine.RectTransform m_EG_PanelRootRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

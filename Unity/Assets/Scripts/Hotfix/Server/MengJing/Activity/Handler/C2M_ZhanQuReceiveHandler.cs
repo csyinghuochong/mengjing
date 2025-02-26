@@ -29,11 +29,11 @@
                 {
                     return;
                 }
-                if (request.ActivityType == 21 && userInfo.Lv <int.Parse(activityConfig.Par_1))
+                if (request.ActivityType == (int)ActivityEnum.Type_21 && userInfo.Lv <int.Parse(activityConfig.Par_1))
                 {
                     return;
                 }
-                if (request.ActivityType == 22 && userInfo.Combat < int.Parse(activityConfig.Par_1))
+                if (request.ActivityType == (int)ActivityEnum.Type_22 && userInfo.Combat < int.Parse(activityConfig.Par_1))
                 {
                     return;
                 }

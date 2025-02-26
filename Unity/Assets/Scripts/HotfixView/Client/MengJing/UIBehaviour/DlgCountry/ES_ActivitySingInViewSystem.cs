@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ActivitySingInItem))]
-    [EntitySystemOf(typeof (ES_ActivitySingIn))]
-    [FriendOfAttribute(typeof (ES_ActivitySingIn))]
+    [FriendOf(typeof(ES_ActivitySingInVIP))]
+    [FriendOf(typeof(ES_ActivitySingInFree))]
+    [FriendOf(typeof(Scroll_Item_ActivitySingInItem))]
+    [EntitySystemOf(typeof(ES_ActivitySingIn))]
+    [FriendOfAttribute(typeof(ES_ActivitySingIn))]
     public static partial class ES_ActivitySingInSystem
     {
         [EntitySystem]
@@ -14,11 +16,9 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_ComButton.AddListenerAsync(self.OnBtn_ComButton);
-            self.E_Btn_Com2Button.AddListenerAsync(self.OnBtn_Com2Button);
-            self.E_ActivitySingInItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnActivitySingInItemsRefresh);
+            self.E_TypeSetToggleGroup.AddListener(self.OnTypeSet);
 
-            self.OnInitUI();
+            self.E_TypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -27,154 +27,74 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnActivitySingInItemsRefresh(this ES_ActivitySingIn self, Transform transform, int index)
+        private static void OnTypeSet(this ES_ActivitySingIn self, int page)
         {
-            Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[index].BindTrans(transform);
-            scrollItemActivitySingInItem.OnUpdateUI(self.ShowActivityConfigs[index], (int activityId) => { self.OnClickSignItem(activityId); });
-            scrollItemActivitySingInItem.SetSignState(self.CurDay, self.IsSign);
+            CommonViewHelper.HideChildren(self.EG_PanelRootRectTransform);
+            if (page == 0)
+            {
+                self.ES_ActivitySingInFree.uiTransform.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.ES_ActivitySingInVip.uiTransform.gameObject.SetActive(true);
+            }
         }
 
-        public static void OnInitUI(this ES_ActivitySingIn self)
-        {
-            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-
-            int curDay = 0;
-            long serverNow = TimeHelper.ServerNow();
-            bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
-            curDay = activityComponent.TotalSignNumber;
-            if (activityComponent.TotalSignNumber < 30 && !isSign)
-            {
-                curDay++;
-            }
-
-            self.CurDay = curDay;
-            self.IsSign = isSign;
-            self.ShowActivityConfigs.Clear();
-            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < activityConfigs.Count; i++)
-            {
-                if (activityConfigs[i].ActivityType != 23)
-                {
-                    continue;
-                }
-
-                self.ShowActivityConfigs.Add(activityConfigs[i]);
-            }
-
-            self.AddUIScrollItems(ref self.ScrollItemActivitySingInItems, self.ShowActivityConfigs.Count);
-            self.E_ActivitySingInItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
-
-            self.E_Img_lingQuImage.gameObject.SetActive(isSign);
-            self.E_Btn_ComButton.gameObject.SetActive(!isSign);
-            Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[curDay - 1];
-            scrollItemActivitySingInItem.OnImage_ItemButton();
-            self.ActivityId = scrollItemActivitySingInItem.ActivityConfig.Id;
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.E_Img_lingQu2Image.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) == 2);
-        }
-
-        public static void OnClickSignItem(this ES_ActivitySingIn self, int activityId)
-        {
-            ActivityConfig ActivityConfig = null;
-            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
-            for (int i = 0; i < activityConfigs.Count; i++)
-            {
-                if (activityConfigs[i].ActivityType != 23)
-                {
-                    continue;
-                }
-
-                if (activityConfigs[i].Id == activityId)
-                {
-                    ActivityConfig = activityConfigs[i];
-                }
-            }
-
-            if (self.ScrollItemActivitySingInItems != null)
-            {
-                foreach (Scroll_Item_ActivitySingInItem item in self.ScrollItemActivitySingInItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.SetSelected(ActivityConfig.Id);
-                }
-            }
-
-            self.ES_RewardList.Refresh(ActivityConfig.Par_3);
-
-            self.ES_RewardList_2.Refresh(ActivityConfig.Par_2);
-
-            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            long serverNow = TimeHelper.ServerNow();
-            bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
-            bool ifShow = int.Parse(ActivityConfig.Par_1) <= activityComponent.TotalSignNumber || isSign ||
-                    activityComponent.ActivityReceiveIds.Contains(activityId);
-            self.E_Img_lingQuImage.gameObject.SetActive(ifShow);
-            self.E_Btn_ComButton.gameObject.SetActive(!ifShow);
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.E_Btn_Com2Button.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 2);
-        }
-
-        public static async ETTask OnBtn_Com2Button(this ES_ActivitySingIn self)
-        {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 1)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
-                return;
-            }
-
-            ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityId);
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < ItemHelper.GetNeedCell(activityConfig.Par_2))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
-                return;
-            }
-
-            await ActivityNetHelper.ActivityRechargeSignRequest(self.Root(), 23, self.ActivityId);
-            self.E_Btn_Com2Button.gameObject.SetActive(false);
-            self.E_Img_lingQu2Image.gameObject.SetActive(true);
-        }
-
-        public static async ETTask OnBtn_ComButton(this ES_ActivitySingIn self)
-        {
-            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            if (activityComponent.TotalSignNumber == 30)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("已领完全部奖励！");
-                return;
-            }
-
-            long serverNow = TimeHelper.ServerNow();
-            if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
-                return;
-            }
-
-            if (activityComponent.ActivityReceiveIds.Contains(self.ActivityId))
-            {
-                FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
-                return;
-            }
-
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), 23, self.ActivityId);
-            if (error != ErrorCode.ERR_Success)
-            {
-                return;
-            }
-
-            activityComponent.TotalSignNumber++;
-            activityComponent.LastSignTime = serverNow;
-            activityComponent.ActivityReceiveIds.Add(self.ActivityId);
-
-            self.OnClickSignItem(self.ActivityId);
-        }
+        // public static async ETTask OnBtn_Com2Button(this ES_ActivitySingIn self)
+        // {
+        //     Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+        //     if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 1)
+        //     {
+        //         FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
+        //         return;
+        //     }
+        //
+        //     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityId);
+        //     BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+        //     if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < ItemHelper.GetNeedCell(activityConfig.Par_2))
+        //     {
+        //         FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
+        //         return;
+        //     }
+        //
+        //     await ActivityNetHelper.ActivityRechargeSignRequest(self.Root(), 23, self.ActivityId);
+        //     self.E_Btn_Com2Button.gameObject.SetActive(false);
+        //     self.E_Img_lingQu2Image.gameObject.SetActive(true);
+        // }
+        //
+        // public static async ETTask OnBtn_ComButton(this ES_ActivitySingIn self)
+        // {
+        //     ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+        //     if (activityComponent.TotalSignNumber == 30)
+        //     {
+        //         FlyTipComponent.Instance.ShowFlyTip("已领完全部奖励！");
+        //         return;
+        //     }
+        //
+        //     long serverNow = TimeHelper.ServerNow();
+        //     if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
+        //     {
+        //         FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
+        //         return;
+        //     }
+        //
+        //     if (activityComponent.ActivityReceiveIds.Contains(self.ActivityId))
+        //     {
+        //         FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
+        //         return;
+        //     }
+        //
+        //     int error = await ActivityNetHelper.ActivityReceive(self.Root(), 23, self.ActivityId);
+        //     if (error != ErrorCode.ERR_Success)
+        //     {
+        //         return;
+        //     }
+        //
+        //     activityComponent.TotalSignNumber++;
+        //     activityComponent.LastSignTime = serverNow;
+        //     activityComponent.ActivityReceiveIds.Add(self.ActivityId);
+        //
+        //     self.OnClickSignItem(self.ActivityId);
+        // }
     }
 }

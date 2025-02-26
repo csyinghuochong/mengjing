@@ -4,10 +4,30 @@ namespace ET.Client
     {
         public static async ETTask<int> RequestActivityInfo(Scene root)
         {
-            Log.Debug($"C2A_ActivityInfoRequest: client0");
-            C2A_ActivityInfoRequest request = C2A_ActivityInfoRequest.Create();
-            A2C_ActivityInfoResponse response = (A2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            
+            // Log.Debug($"C2A_ActivityInfoRequest: client0");
+            // C2A_ActivityInfoRequest request = C2A_ActivityInfoRequest.Create();
+            // A2C_ActivityInfoResponse response = (A2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            C2M_ActivityInfoRequest request = C2M_ActivityInfoRequest.Create();
+            M2C_ActivityInfoResponse response = (M2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            ActivityComponentC activityComponentC = root.GetComponent<ActivityComponentC>();
+            activityComponentC.LastSignTime = response.LastSignTime;
+            activityComponentC.TotalSignNumber = response.TotalSignNumber;
+            activityComponentC.TotalSignRewardsList = response.TotalSignRewardsList;
+            activityComponentC.LastSignTime_VIP = response.LastSignTime_VIP;
+            activityComponentC.TotalSignNumber_VIP = response.TotalSignNumber_VIP;
+            activityComponentC.TotalSignRewardsList_VIP = response.TotalSignRewardsList_VIP;
+            activityComponentC.LastLoginTime = response.LastLoginTime;
+            activityComponentC.DayTeHui = response.DayTeHui;
+            activityComponentC.ActivityReceiveIds = response.ReceiveIds;
+            activityComponentC.QuTokenRecvive = response.QuTokenRecvive;
+            // activityComponentC.ZhanQuReceiveIds = response.ZhanQuReceiveIds;
+            ActivityV1Info activityV1Info = activityComponentC.AddChild<ActivityV1Info>();
+            activityV1Info.FromMessage(response.ActivityV1InfoProto);
+            activityComponentC.ActivityV1Info = activityV1Info;
+            // activityComponentC.ZhanQuReceiveNumbers = response.ZhanQuReceiveNumbers;
+
             return ErrorCode.ERR_Success;
         }
 
@@ -22,7 +42,7 @@ namespace ET.Client
 
             ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
 
-            if (activityType == 31)
+            if (activityType == (int)ActivityEnum.Type_31)
             {
                 activityComponent.LastLoginTime = TimeHelper.ServerNow();
             }
@@ -30,6 +50,32 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 activityComponent.ActivityReceiveIds.Add(activityId);
+            }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> ActivityTotalSignReceive(Scene root, int type, int day)
+        {
+            C2M_ActivityTotalSignReceiveRequest request = C2M_ActivityTotalSignReceiveRequest.Create();
+            request.Type = type;
+            request.Day = day;
+
+            M2C_ActivityTotalSignReceiveResponse response =
+                    (M2C_ActivityTotalSignReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                if (type == 0)
+                {
+                    activityComponent.TotalSignRewardsList.Add(day);
+                }
+                else if (type == 1)
+                {
+                    activityComponent.TotalSignRewardsList_VIP.Add(day);
+                }
             }
 
             return response.Error;

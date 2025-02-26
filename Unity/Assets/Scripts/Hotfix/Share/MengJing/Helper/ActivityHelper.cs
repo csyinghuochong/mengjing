@@ -94,7 +94,7 @@ namespace ET
         public static bool HaveReceiveTimes(List<int> receiveIds, int receiveId)
         {
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(receiveId);
-            if (activityConfig.ActivityType != 32)
+            if (activityConfig.ActivityType != (int)ActivityEnum.Type_32)
             {
                 return !receiveIds.Contains(receiveId);
             }

@@ -13,7 +13,19 @@
                 for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == 23)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23)
+                    {
+                        activityComponent.ActivityReceiveIds.RemoveAt(i);
+                    }
+                }
+            }
+            
+            if (activityComponent.TotalSignNumber_VIP == 0)
+            {
+                for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
+                {
+                    ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25)
                     {
                         activityComponent.ActivityReceiveIds.RemoveAt(i);
                     }
@@ -35,12 +47,16 @@
             activityV1Info.BaoShiDu = r_GameStatusResponse.BaoShiDu;
             activityV1Info.OpenGuessIds = r_GameStatusResponse.OpenGuessIds;
             
-            response.ReceiveIds .AddRange(activityComponent.ActivityReceiveIds); 
+            response.ReceiveIds.AddRange(activityComponent.ActivityReceiveIds); 
             response.LastSignTime = activityComponent.LastSignTime;
             response.TotalSignNumber = activityComponent.TotalSignNumber;
-            response.QuTokenRecvive .AddRange(activityComponent.QuTokenRecvive); 
+            response.TotalSignRewardsList.AddRange(activityComponent.TotalSignRewardsList);
+            response.LastSignTime_VIP = activityComponent.LastSignTime_VIP;
+            response.TotalSignNumber_VIP = activityComponent.TotalSignNumber_VIP;
+            response.TotalSignRewardsList_VIP.AddRange(activityComponent.TotalSignRewardsList_VIP);
+            response.QuTokenRecvive.AddRange(activityComponent.QuTokenRecvive); 
             response.LastLoginTime = activityComponent.LastLoginTime;
-            response.DayTeHui .AddRange(activityComponent.DayTeHui); 
+            response.DayTeHui.AddRange(activityComponent.DayTeHui); 
 
             response.ActivityV1InfoProto = activityV1Info.ToMessage();
 

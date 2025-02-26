@@ -27,7 +27,7 @@ namespace ET.Server
                 }
                 ServerLogHelper.LogWarning($"C2M_ActivityReceive:  {unit.Id} {request.ActivityId} {request.ReceiveIndex} {TimeHelper.ServerNow().ToString()}", true);
                 ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(request.ActivityId);
-                if (activityConfig.ActivityType!= request.ActivityType)
+                if (activityConfig.ActivityType != request.ActivityType)
                 {
                     Log.Error($"C2M_ActivityReceiveRequest.2");
                     response.Error = ErrorCode.ERR_ModifyData;
@@ -36,7 +36,7 @@ namespace ET.Server
 
                 switch (activityConfig.ActivityType)
                 {
-                    case 2: //每日特惠
+                    case (int)ActivityEnum.Type_2: //每日特惠
                         string[] needList = activityConfig.Par_3.Split('@');
                         if (unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag) < needList.Length)
                         {
@@ -59,21 +59,37 @@ namespace ET.Server
                         activityComponent.ActivityReceiveIds.Add(request.ActivityId);
                         
                         break;
-                    case 23:    //签到
-                        if (activityComponent.TotalSignNumber == 30)
-                        {
-                            response.Error = ErrorCode.ERR_AlreadyReceived;
-                   
-                            return;
-                        }
+                    case (int)ActivityEnum.Type_23:  //免费签到
+                        int curDay = activityComponent.TotalSignNumber;
                         long serverNow = TimeHelper.ServerNow();
-                        if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
+                        bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
+                        int maxSignNumber = 0;
+                        foreach (ActivityConfig config in ActivityConfigCategory.Instance.GetAll().Values)
                         {
-                            response.Error = ErrorCode.ERR_AlreadyReceived;
-          
+                            if (config.ActivityType == (int)ActivityEnum.Type_23)
+                            {
+                                maxSignNumber++;
+                            }
+                        }
+
+                        if (activityComponent.TotalSignNumber < maxSignNumber && !isSign)
+                        {
+                            curDay++;
+                        }
+                        
+                        if (curDay < int.Parse(activityConfig.Par_1))
+                        {
+                            response.Error = ErrorCode.ERR_ModifyData;
                             return;
                         }
-                        string[] rewarditems = activityConfig.Par_3.Split('@');
+
+                        if (activityComponent.ActivityReceiveIds.Contains(activityConfig.Id))
+                        {
+                            response.Error = ErrorCode.ERR_AlreadyReceived;
+                            return;
+                        }
+                        
+                        string[] rewarditems = activityConfig.Par_2.Split('@');
                         if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
@@ -84,9 +100,9 @@ namespace ET.Server
                         activityComponent.TotalSignNumber++;
                         activityComponent.LastSignTime = TimeHelper.ServerNow();
                         activityComponent.ActivityReceiveIds.Add(request.ActivityId);
-                        unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_3, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+                        unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
-                    case 24:    //令牌
+                    case (int)ActivityEnum.Type_24:    //令牌
                         List<TokenRecvive> zhanQuTokenRecvives = activityComponent.QuTokenRecvive;
                         for (int i = 0; i < zhanQuTokenRecvives.Count; i++)
                         {
@@ -131,7 +147,50 @@ namespace ET.Server
                         zhanQuTokenRecvives.Add(TokenRecvive);
                         unit.GetComponent<BagComponentS>().OnAddItemData(rewards, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
-                    case 31:    //登录奖励
+                    case (int)ActivityEnum.Type_25:  //付费签到
+                        curDay = activityComponent.TotalSignNumber_VIP;
+                        serverNow = TimeHelper.ServerNow();
+                        isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime_VIP);
+                        maxSignNumber = 0;
+                        foreach (ActivityConfig config in ActivityConfigCategory.Instance.GetAll().Values)
+                        {
+                            if (config.ActivityType == (int)ActivityEnum.Type_25)
+                            {
+                                maxSignNumber++;
+                            }
+                        }
+
+                        if (activityComponent.TotalSignNumber_VIP < maxSignNumber && !isSign)
+                        {
+                            curDay++;
+                        }
+                        
+                        if (curDay < int.Parse(activityConfig.Par_1))
+                        {
+                            response.Error = ErrorCode.ERR_ModifyData;
+                            return;
+                        }
+
+                        if (activityComponent.ActivityReceiveIds.Contains(activityConfig.Id))
+                        {
+                            response.Error = ErrorCode.ERR_AlreadyReceived;
+                            return;
+                        }
+                        
+                        rewarditems = activityConfig.Par_2.Split('@');
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
+                        {
+                            response.Error = ErrorCode.ERR_BagIsFull;
+                  
+                            return;
+                        }
+
+                        activityComponent.TotalSignNumber_VIP++;
+                        activityComponent.LastSignTime_VIP = TimeHelper.ServerNow();
+                        activityComponent.ActivityReceiveIds.Add(request.ActivityId);
+                        unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+                        break;
+                    case (int)ActivityEnum.Type_31:    //登录奖励
                         userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                         if (userInfoComponent.UserInfo.Lv < 10)
                         {
@@ -155,7 +214,7 @@ namespace ET.Server
                         unit.GetComponent<ActivityComponentS>().ActivityReceiveIds.Add(request.ActivityId);
                         unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_3, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
-                    case 32:    //新年集字
+                    case (int)ActivityEnum.Type_32:    //新年集字
                         rewarditems = activityConfig.Par_3.Split('@');
                         if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
@@ -172,7 +231,7 @@ namespace ET.Server
                             response.Error = ErrorCode.ERR_ItemNotEnoughError;
                         }
                         break;
-                    case 33://节日活动
+                    case (int)ActivityEnum.Type_33://节日活动
                         if (unit.GetComponent<UserInfoComponentS>().TodayOnLine < 30)
                         {
                             response.Error = ErrorCode.Err_OnLineTimeNot;
@@ -199,7 +258,7 @@ namespace ET.Server
                         unit.GetComponent<ActivityComponentS>().ActivityReceiveIds.Add(request.ActivityId);
                         unit.GetComponent<BagComponentS>().OnAddItemData(rewardItemlist, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
-                    case 34:
+                    case (int)ActivityEnum.Type_34:
                         userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                         if (userInfoComponent.UserInfo.Lv < int.Parse(activityConfig.Par_1))
                         {
@@ -217,7 +276,7 @@ namespace ET.Server
                         unit.GetComponent<ActivityComponentS>().ActivityReceiveIds.Add(request.ActivityId);
                         unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_3, $"{ItemGetWay.Serial}_{TimeHelper.ServerNow()}");
                         break;
-                    case 101:   //冒险家
+                    case (int)ActivityEnum.Type_101:   //冒险家
                                 //需要从dbaccountinfo中获取当前角色重置额度
                         long needrecharge = int.Parse(activityConfig.Par_2);
                         int rechargeNum = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.RechargeNumber);
