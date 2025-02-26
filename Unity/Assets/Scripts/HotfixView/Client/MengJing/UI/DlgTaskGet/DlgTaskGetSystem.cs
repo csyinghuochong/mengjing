@@ -24,7 +24,7 @@ namespace ET.Client
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
 
             self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.OnBtn_EnergyDuihuanButton);
-            self.View.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
+            self.View.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
             self.View.E_BtnCommitTask1Button.AddListenerAsync(self.OnBtnCommitTask1Button);
             self.View.E_ButtonJieRiRewardButton.AddListener(self.OnButtonJieRiRewardButton);
             self.View.E_ButtonExpDuiHuanButton.AddListenerAsync(self.OnButtonExpDuiHuanButton);
@@ -546,8 +546,8 @@ namespace ET.Client
             self.View.E_ButtonReturnButton.gameObject.SetActive(false);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(true);
             self.View.EG_TaskDesc.gameObject.SetActive(false);
-            // self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
-            // self.View.E_ButtonGetButton.gameObject.SetActive(false);
+            self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
+            self.View.E_ButtonGetButton.gameObject.SetActive(false);
         }
 
         public static void OnButtonMysteryButton(this DlgTaskGet self)
@@ -588,7 +588,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GiveTask);
         }
 
-        public static void OnButtonGetButton(this DlgTaskGet self)
+        public static async ETTask OnButtonGetButton(this DlgTaskGet self)
         {
             if (self.TaskId == 0)
             {
@@ -596,7 +596,8 @@ namespace ET.Client
                 return;
             }
 
-            TaskClientNetHelper.RequestGetTask(self.Root(), self.TaskId).Coroutine();
+            await TaskClientNetHelper.RequestGetTask(self.Root(), self.TaskId);
+            self.OnButtonReturnButton();
         }
 
         public static async ETTask OnBtnCommitTask1Button(this DlgTaskGet self)
@@ -613,6 +614,7 @@ namespace ET.Client
             {
                 FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(root), 200006);
                 self.OnTaskGet();
+                self.OnButtonReturnButton();
             }
             else
             {
