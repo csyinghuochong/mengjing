@@ -1,6 +1,6 @@
 using System;
 
-namespace ET.Recast
+namespace ET
 {
     [EnableClass]
     public class NoMemoryCheck: Attribute
@@ -30,8 +30,8 @@ namespace ET.Recast
         [NoMemoryCheck]
         public float[] EndPos = new float[3];
 
-       // [NoMemoryCheck]
-       // public float[] Result = new float[Recast.MAX_POLYS * 3];
+        [NoMemoryCheck]
+        public float[] Result = new float[Recast.MAX_POLYS * 3];
     }
     
 }
