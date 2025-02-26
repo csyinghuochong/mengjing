@@ -13,7 +13,7 @@ namespace ET.Client
         /// <param name="text"></param>
         /// <param name="content"></param>
         /// <param name="cancellationToken"></param>
-        /// <param name="time"></param>
+        /// <param name="time">间隔多少ms出现一个字</param>
         public static async ETTask TextPrinter(Scene root, Text text, string content, ETCancellationToken cancellationToken, long time)
         {
             for (int i = 0; i <= content.Length; ++i)

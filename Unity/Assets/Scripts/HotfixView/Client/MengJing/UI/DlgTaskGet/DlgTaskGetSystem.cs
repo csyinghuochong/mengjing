@@ -514,7 +514,12 @@ namespace ET.Client
                 self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
             }
             self.View.EG_TaskDesc.gameObject.SetActive(true);
-            self.View.E_Lab_NpcSpeakText.text = taskConfig.TaskDes;    
+            
+            self.CancellationToken?.Cancel();
+            self.CancellationToken = new ETCancellationToken();
+            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, taskConfig.TaskDes, self.CancellationToken, 50)
+                    .Coroutine();
+            
             self.View.E_Lab_NpcNameText.text = taskConfig.TaskName;    
             
             string rewardStr = taskConfig.RewardItem;
