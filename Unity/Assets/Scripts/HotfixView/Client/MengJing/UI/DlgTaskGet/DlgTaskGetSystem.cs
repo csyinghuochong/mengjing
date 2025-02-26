@@ -22,6 +22,7 @@ namespace ET.Client
         {
             self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
+            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
             self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.OnBtn_EnergyDuihuanButton);
             self.View.E_ButtonGetButton.AddListenerAsync(self.OnButtonGetButton);
@@ -541,9 +542,28 @@ namespace ET.Client
                 }
             }
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
-            self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+            self.ShowBagInfos.Clear();
+            foreach (RewardItem item in rewardItems)
+            {
+                ItemInfo bagInfo = new ItemInfo();
+                bagInfo.ItemID = item.ItemID;
+                bagInfo.ItemNum = item.ItemNum;
+                self.ShowBagInfos.Add(bagInfo);
+            }
+            
+            //self.View.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+
+            self.AddUIScrollItems(ref self.ScrollItemTaskRewardItems, rewardItems.Count);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, rewardItems.Count);
+            
             self.View.E_ButtonReturnButton.gameObject.SetActive(true);  
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
+        }
+        
+        private static void OnBagItemsRefresh(this DlgTaskGet self, Transform transform, int index)
+        {
+            Scroll_Item_TaskRewardItem scrollItemTaskGetItem = self.ScrollItemTaskRewardItems[index].BindTrans(transform);
+            scrollItemTaskGetItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
         }
 
         public static void OnButtonReturnButton(this DlgTaskGet self)

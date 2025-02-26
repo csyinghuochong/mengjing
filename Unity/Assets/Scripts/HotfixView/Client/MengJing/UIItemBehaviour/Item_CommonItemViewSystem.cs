@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI.Extensions;
-
 namespace ET.Client
 {
     [FriendOf(typeof (ES_CommonItem))]

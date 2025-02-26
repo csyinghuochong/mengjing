@@ -551,7 +551,7 @@ namespace ET.Client
 			}
 		}
 		
-		public ES_RewardList ES_RewardList
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
 		{
 			get
 			{
@@ -560,13 +560,11 @@ namespace ET.Client
 					Log.Error("uiTransform is null.");
 					return null;
 				}
-				ES_RewardList es = this.m_es_rewardlist;
-				if( es == null )
+				if( this.m_E_BagItemsLoopVerticalScrollRect == null )
 				{
-					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_TaskDesc/ES_RewardList");
-					this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+					this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
 				}
-				return this.m_es_rewardlist;
+				return this.m_E_BagItemsLoopVerticalScrollRect;
 			}
 		}
 		
@@ -618,6 +616,7 @@ namespace ET.Client
 			this.m_E_TaskFubenItemsImage = null;
 			this.m_E_EnergySkillImage = null;
 			this.m_E_TaskFubenItemsLoopVerticalScrollRect = null;
+			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.m_EG_TaskDesc = null;
 			this.m_E_Lab_TaskDest = null;
 			this.m_E_Lab_TaskName = null;
@@ -659,6 +658,7 @@ namespace ET.Client
 		private Text m_E_Lab_TaskDest = null;
 		private Text m_E_Lab_TaskName = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private LoopVerticalScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
