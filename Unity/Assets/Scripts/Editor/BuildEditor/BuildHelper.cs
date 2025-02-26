@@ -18,7 +18,7 @@ namespace ET
             CodeEditor.CurrentEditor.SyncAll();
             
                         
-            CustomEditorMenu.RenamePathFilesInFolder1(false);
+            CustomEditorMenu.RenamePathFilesInFolder1();
         }
 
 #if ENABLE_VIEW

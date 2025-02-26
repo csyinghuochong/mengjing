@@ -309,11 +309,18 @@ namespace ET.Client
             List<float3> pathfind = new List<float3>();
             
             //self.CanMovePosition(unit, rotation, pathfind);
+
+            float3 targetpos = unit.Position + math.forward(rotation) * 2f;
             
-            unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  unit.Position + math.forward(rotation) * 2f, pathfind);
-            
+            RaycastHit hit;
+            Physics.Raycast(targetpos + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+            if (hit.collider != null)
+            {
+                targetpos = hit.point;  
+            }
+            unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
+
             //unit.GetComponent<ClientPathfinding2Component>().Find(unit.Position + math.forward(rotation) * 2f, pathfind);
-            
             if (pathfind.Count < 2)
             {
                 self.MoveSlowly(direction);

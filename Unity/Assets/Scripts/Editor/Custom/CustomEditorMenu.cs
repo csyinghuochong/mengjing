@@ -938,7 +938,7 @@ public class CustomEditorMenu
     /// <summary>
     /// prefab文件尽量放在AdditiveHide/pool节点下面，不要嵌套。。
     /// </summary>
-    [MenuItem("ET/NavMesh/导出场景生成配置文件")]
+    //[MenuItem("ET/NavMesh/导出场景生成配置文件")]
     static void ExportScene()
     {
         string rootname = "pool";
@@ -1119,7 +1119,7 @@ public class CustomEditorMenu
         return true;
     }
 
-    [MenuItem("ET/NavMesh/导入场景修改后要导出")]
+    //[MenuItem("ET/NavMesh/导入场景修改后要导出")]
     static void ImportScene()
     {
         //TextAsset v = Resources.Load<GlobalConfig><TextAsset>($"Assets/Bundles/MapConfig/1.bytes");
@@ -1276,10 +1276,9 @@ public class CustomEditorMenu
 
         return 0;
     }
-
-   
-    [MenuItem("Tools/修改寻路数据为.bytes[客户端]")]
-    public static void RenamePathFilesInFolder1(bool clean = true)
+    
+    [MenuItem("Tools/拷贝并修改寻路数据为.bytes[客户端]")]
+    public static void RenamePathFilesInFolder1()
     {
         string dataPath = Application.dataPath; //"H:/GitMengJing/Unity/Assets"
         string sourceFolder = dataPath.Remove(dataPath.Length - 12, 12) + $"Config/Recast";
@@ -1296,12 +1295,9 @@ public class CustomEditorMenu
             return;
         }
 
-        if (clean)
-        {
-            FileHelper.CleanDirectory(destinationFolder);
-        }
+        FileHelper.CleanDirectory(destinationFolder);
 
-        FileHelper.CopyFolderContents(sourceFolder, destinationFolder, ".bytes");
+        FileHelper.CopyFolderContents(sourceFolder, destinationFolder);
         
         UnityEngine.Debug.Log("检测开始");
 
