@@ -33,10 +33,16 @@ namespace ET.Client
             self.View.E_ButtonGiveTaskButton.AddListenerAsync(self.OnButtonGiveTaskButton);
             self.View.E_ButtonMysteryButton.AddListener(self.OnButtonMysteryButton);
             self.View.E_ButtonReturnButton.AddListener(self.OnButtonReturnButton);
+            self.View.E_CancelNpcSpeakButton.AddListener(() => { self.CancellationToken?.Cancel(); });
         }
 
         public static void ShowWindow(this DlgTaskGet self, Entity contextData = null)
         {
+        }
+        
+        public static void BeforeUnload(this DlgTaskGet self)
+        {
+            self.CancellationToken?.Cancel();
         }
 
         private static void OnTaskGetItemsRefresh(this DlgTaskGet self, Transform transform, int index)
@@ -102,7 +108,11 @@ namespace ET.Client
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcID);
 
             //显示Npc对话   
-            self.View.E_Lab_NpcSpeakText.text = "   " + npcConfig.SpeakText;
+            self.CancellationToken?.Cancel();
+            self.CancellationToken = new ETCancellationToken();
+            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, "   " + npcConfig.SpeakText, self.CancellationToken, 100)
+                    .Coroutine();
+            
             self.View.E_Lab_NpcNameText.text = npcConfig.Name;
             self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             self.View.E_ButtonGetButton.gameObject.SetActive(false);

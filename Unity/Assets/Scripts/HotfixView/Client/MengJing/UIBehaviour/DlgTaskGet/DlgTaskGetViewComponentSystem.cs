@@ -1,7 +1,10 @@
-﻿namespace ET.Client
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTaskGetViewComponent))]
-	[FriendOfAttribute(typeof(DlgTaskGetViewComponent))]
+	[FriendOfAttribute(typeof(ET.Client.DlgTaskGetViewComponent))]
 	public static partial class DlgTaskGetViewComponentSystem
 	{
 		[EntitySystem]

@@ -13,6 +13,8 @@ namespace ET.Client
         public int NpcID;
         public int TaskId;
         public List<int> ShowTaskId = new();
+        
+        public ETCancellationToken CancellationToken;
 
         public Dictionary<int, EntityRef<Scroll_Item_TaskGetItem>> ScrollItemTaskGetItems;
         public Dictionary<int, EntityRef<Scroll_Item_TaskFubenItem>> ScrollItemTaskFubenItems;

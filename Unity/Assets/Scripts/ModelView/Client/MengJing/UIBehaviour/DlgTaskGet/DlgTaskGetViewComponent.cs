@@ -74,6 +74,23 @@ namespace ET.Client
      			return this.m_E_Lab_NpcSpeakText;
      		}
      	}
+		
+		public Button E_CancelNpcSpeakButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_CancelNpcSpeakButton == null )
+				{
+					this.m_E_CancelNpcSpeakButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_CancelNpcSpeak");
+				}
+				return this.m_E_CancelNpcSpeakButton;
+			}
+		}
 
 		public Image E_TaskGetItemsImage
      	{
@@ -576,6 +593,7 @@ namespace ET.Client
 			this.m_E_Img_buttonImage = null;
 			this.m_E_Lab_NpcNameText = null;
 			this.m_E_Lab_NpcSpeakText = null;
+			this.m_E_CancelNpcSpeakButton = null;
 			this.m_E_TaskGetItemsImage = null;
 			this.m_E_TaskGetItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonGetButton = null;
@@ -611,6 +629,7 @@ namespace ET.Client
 		private Button m_E_Img_buttonButton = null;
 		private Image m_E_Img_buttonImage = null;
 		private Text m_E_Lab_NpcNameText = null;
+		private Button m_E_CancelNpcSpeakButton = null;
 		private Text m_E_Lab_NpcSpeakText = null;
 		private Image m_E_TaskGetItemsImage = null;
 		private LoopVerticalScrollRect m_E_TaskGetItemsLoopVerticalScrollRect = null;

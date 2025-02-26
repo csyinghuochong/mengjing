@@ -6,6 +6,39 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        /// <summary>
+        /// 打印机效果
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="text"></param>
+        /// <param name="content"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="time"></param>
+        public static async ETTask TextPrinter(Scene root, Text text, string content, ETCancellationToken cancellationToken, long time)
+        {
+            for (int i = 0; i <= content.Length; ++i)
+            {
+                if (text == null)
+                {
+                    return;
+                }
+
+                text.text = content.Substring(0, i);
+
+                await root.GetComponent<TimerComponent>().WaitAsync(time, cancellationToken);
+                if (cancellationToken.IsCancel())
+                {
+                    if (text == null)
+                    {
+                        return;
+                    }
+
+                    text.text = content;
+                    return;
+                }
+            }
+        }
+
         public static void ShowOccIcon(Scene root, GameObject gameObject, int occ)
         {
             gameObject.GetComponent<Image>().sprite = root.GetComponent<ResourcesLoaderComponent>()
