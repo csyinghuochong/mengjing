@@ -111,7 +111,7 @@ namespace ET.Client
             //显示Npc对话   
             self.CancellationToken?.Cancel();
             self.CancellationToken = new ETCancellationToken();
-            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, "   " + npcConfig.SpeakText, self.CancellationToken, 100)
+            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, "   " + npcConfig.SpeakText, self.CancellationToken, 20)
                     .Coroutine();
             
             self.View.E_Lab_NpcNameText.text = npcConfig.Name;
