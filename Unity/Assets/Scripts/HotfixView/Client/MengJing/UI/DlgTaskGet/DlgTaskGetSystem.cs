@@ -573,6 +573,11 @@ namespace ET.Client
             self.View.EG_TaskDesc.gameObject.SetActive(false);
             self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
             self.View.E_ButtonGetButton.gameObject.SetActive(false);
+            
+            self.CancellationToken?.Cancel();
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.NpcID);
+            self.View.E_Lab_NpcNameText.text = npcConfig.Name;
+            self.View.E_Lab_NpcSpeakText.text = "   " + npcConfig.SpeakText;
         }
 
         public static void OnButtonMysteryButton(this DlgTaskGet self)
