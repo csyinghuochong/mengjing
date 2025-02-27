@@ -148,6 +148,12 @@ namespace ET.Server
                         unit.GetComponent<BagComponentS>().OnAddItemData(rewards, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
                     case (int)ActivityEnum.Type_25:  //付费签到
+                        if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.RechargeSign) != 1)
+                        {
+                            response.Error = ErrorCode.ERR_ModifyData;
+                            return;
+                        }
+                        
                         curDay = activityComponent.TotalSignNumber_VIP;
                         serverNow = TimeHelper.ServerNow();
                         isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime_VIP);
@@ -181,7 +187,6 @@ namespace ET.Server
                         if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
                         {
                             response.Error = ErrorCode.ERR_BagIsFull;
-                  
                             return;
                         }
 
@@ -189,6 +194,7 @@ namespace ET.Server
                         activityComponent.LastSignTime_VIP = TimeHelper.ServerNow();
                         activityComponent.ActivityReceiveIds.Add(request.ActivityId);
                         unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+                        unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.RechargeSign, 2);
                         break;
                     case (int)ActivityEnum.Type_31:    //登录奖励
                         userInfoComponent = unit.GetComponent<UserInfoComponentS>();
