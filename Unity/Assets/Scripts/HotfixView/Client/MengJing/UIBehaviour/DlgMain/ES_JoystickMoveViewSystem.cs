@@ -310,7 +310,7 @@ namespace ET.Client
             
             //self.CanMovePosition(unit, rotation, pathfind);
 
-            float3 targetpos = unit.Position + math.forward(rotation) * 2f;
+            float3 targetpos = unit.Position + math.forward(rotation) * 5f;
             
             RaycastHit hit;
             Physics.Raycast(targetpos + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
@@ -323,81 +323,11 @@ namespace ET.Client
             //unit.GetComponent<ET6PathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
             if (pathfind.Count < 2)
             {
-                self.MoveSlowly(direction);
+                //self.MoveSlowly(direction);
                 return;
             }
-
+            
             float3 newv3 = pathfind[pathfind.Count - 1];
-            float3 initpos = pathfind[0];
-            List<float3> pathfind_2 = new List<float3>();
-            pathfind_2.Add(initpos);
-            
-            
-            ////////-------------------------------------
-            // int distance_init = 0;
-            // for (int i = 1; i < pathfind.Count; i++)
-            // {
-            //     float distance_cur = math.distance(pathfind[i] , pathfind[distance_init]);
-            //     if (distance_cur < 0.5f)
-            //     {
-            //         continue;
-            //     }
-            //     else
-            //     {
-            //         distance_init = i;
-            //         pathfind_2.Add(pathfind[i]);
-            //     }
-            // }
-            //
-            // distance_init = 0;
-            // for (int i = 1; i <pathfind_2.Count;)
-            // {
-            //     if (math.abs(pathfind_2[i].y - pathfind_2[i-1].y) < 0.02f)
-            //     {
-            //         pathfind_2.RemoveAt(i);
-            //     }
-            //     else
-            //     {
-            //         i++;
-            //     }
-            // }
-            
-            /////////--------------------------------
-            for (int i = 1; i <pathfind.Count; i++)
-            {
-                //if (!pathfind[i].y.Equals(pathfind[i-1].y))
-                if (math.abs(pathfind[i].y - pathfind[i-1].y) > 0.05f)
-                {
-                    pathfind_2.Add(pathfind[i]);
-                }
-            }
-
-            if (pathfind_2.Count > 2)
-            {
-                int distance_init = 0;
-                for (int i = 1; i <pathfind_2.Count;  )
-                {
-                    float distance_cur = math.distance(pathfind_2[i] , pathfind_2[distance_init]);
-                    if (distance_cur < 0.5f)
-                    {
-                        pathfind_2.RemoveAt(i);
-                    }
-                    else
-                    {
-                        distance_init = i;
-                        i++;
-                    }
-                }
-            }
-            /////////--------------------------------
-            
-            
-            if (pathfind_2.Count < 2)
-            {
-                pathfind_2.Add(pathfind[pathfind.Count - 1]);
-            }
-
-            newv3 = pathfind_2[pathfind_2.Count - 1];
             float distance = Vector3.Distance(newv3, unit.Position);
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
@@ -407,7 +337,6 @@ namespace ET.Client
             //GameObject.Find("Global/Target").transform.position = newv3;
             //Log.Debug($"MoveToAsync:  direction: {direction}    unitPosition:{unitPosition}  newv3:{newv3}  distance:{distance}  self.checkTime:{self.checkTime}");
             int errorCode = MoveHelper.IfCanMove(unit);
-            
             if (errorCode == ErrorCode.ERR_CanNotMove_Rigidity)
             {
                 SkillManagerComponentC skillManager = unit.GetComponent<SkillManagerComponentC>();
@@ -434,8 +363,8 @@ namespace ET.Client
             }
             else
             {
-                unit.MoveResultToAsync(pathfind_2, null ).Coroutine();
-                unit.GetComponent<MoveComponent>().MoveToAsync(pathfind_2, speed).Coroutine();
+                unit.MoveResultToAsync(pathfind, null ).Coroutine();
+                unit.GetComponent<MoveComponent>().MoveToAsync(pathfind, speed).Coroutine();
             }
             
             self.lastSendTime = clientNow;
