@@ -129,9 +129,11 @@ namespace ET.Server
                 }
             }
 
-            if (self.TotalSignNumber >= 30)
+            // 周期重置签到活动
+            if (self.TotalSignNumber >= ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_23))
             {
                 self.TotalSignNumber = 0;
+                self.TotalSignRewardsList.Clear();
                 for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
@@ -141,6 +143,20 @@ namespace ET.Server
                     }
                 }
             }
+            if (self.TotalSignNumber_VIP >= ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_25))
+            {
+                self.TotalSignNumber_VIP = 0;
+                self.TotalSignRewardsList_VIP.Clear();
+                for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
+                {
+                    ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25)
+                    {
+                        self.ActivityReceiveIds.RemoveAt(i);
+                    }
+                }
+            }
+
 
             self.ActivityV1Info.LiBaoAllIds = ActivityConfigHelper.GetLiBaoList();
             self.ActivityV1Info.LiBaoBuyIds.Clear();

@@ -2058,8 +2058,12 @@ namespace ET
 
         #endregion
 
+
+        #region 签到活动配置
+        
         /// <summary>
         /// 累计签到奖励 免费
+        /// 累计领取天数 -> 奖励
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> TotalSignRewards = new()
@@ -2072,6 +2076,7 @@ namespace ET
 
         /// <summary>
         /// 累计签到奖励 VIP
+        /// 累计领取天数 -> 奖励
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> TotalSignRewards_VIP = new()
@@ -2081,5 +2086,7 @@ namespace ET
             { 9, "1;9000" },
             { 12, "1;12000" }
         };
+
+        #endregion
     }
 }

@@ -63,14 +63,7 @@ namespace ET.Server
                         int curDay = activityComponent.TotalSignNumber;
                         long serverNow = TimeHelper.ServerNow();
                         bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
-                        int maxSignNumber = 0;
-                        foreach (ActivityConfig config in ActivityConfigCategory.Instance.GetAll().Values)
-                        {
-                            if (config.ActivityType == (int)ActivityEnum.Type_23)
-                            {
-                                maxSignNumber++;
-                            }
-                        }
+                        int maxSignNumber = ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_23);
 
                         if (activityComponent.TotalSignNumber < maxSignNumber && !isSign)
                         {
@@ -157,14 +150,7 @@ namespace ET.Server
                         curDay = activityComponent.TotalSignNumber_VIP;
                         serverNow = TimeHelper.ServerNow();
                         isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime_VIP);
-                        maxSignNumber = 0;
-                        foreach (ActivityConfig config in ActivityConfigCategory.Instance.GetAll().Values)
-                        {
-                            if (config.ActivityType == (int)ActivityEnum.Type_25)
-                            {
-                                maxSignNumber++;
-                            }
-                        }
+                        maxSignNumber = ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_25);
 
                         if (activityComponent.TotalSignNumber_VIP < maxSignNumber && !isSign)
                         {

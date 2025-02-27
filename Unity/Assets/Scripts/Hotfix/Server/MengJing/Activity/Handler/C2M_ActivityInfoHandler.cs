@@ -10,6 +10,7 @@
             ActivityComponentS activityComponent = unit.GetComponent<ActivityComponentS>();
             if (activityComponent.TotalSignNumber == 0)
             {
+                activityComponent.TotalSignRewardsList.Clear();
                 for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);
@@ -22,6 +23,7 @@
             
             if (activityComponent.TotalSignNumber_VIP == 0)
             {
+                activityComponent.TotalSignRewardsList_VIP.Clear();
                 for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);

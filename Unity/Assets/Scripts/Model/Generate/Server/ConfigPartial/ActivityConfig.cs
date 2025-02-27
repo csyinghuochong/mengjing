@@ -40,6 +40,19 @@ namespace ET
             }
         }
 
+        public int GetNumByType(int type)
+        {
+            int num = 0;
+            foreach (ActivityConfig activityConfig in this.GetAll().Values)
+            {
+                if (activityConfig.ActivityType == type)
+                {
+                    num++;
+                }
+            }
+            return num;
+        }
+        
         public List<int> GetBuffIds(int activityid)
         {
             List<int> buffids = null;
