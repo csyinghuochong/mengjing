@@ -319,8 +319,8 @@ namespace ET.Client
                 targetpos = hit.point;  
             }
             unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
-
-            //unit.GetComponent<ClientPathfinding2Component>().Find(unit.Position + math.forward(rotation) * 2f, pathfind);
+            //unit.GetComponent<ClientPathfinding2Component>().Find(unit.Position + targetpos, pathfind);
+            //unit.GetComponent<ET6PathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
             if (pathfind.Count < 2)
             {
                 self.MoveSlowly(direction);

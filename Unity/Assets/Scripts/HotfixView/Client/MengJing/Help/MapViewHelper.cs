@@ -144,8 +144,8 @@ namespace ET.Client
             }
             
             self.AddComponent<ClientPathfindingComponent, int>(navmesh);
-            self.AddComponent<ET6PathfindingComponent, int>(navmesh);
-            //unit.AddComponent<ClientPathfinding2Component>();
+            //self.AddComponent<ET6PathfindingComponent, int>(navmesh);
+            //self.AddComponent<ClientPathfinding2Component>();
         }
         
         public static void UpdateMainHeroPath(this Unit self, MapComponent mapComponent)

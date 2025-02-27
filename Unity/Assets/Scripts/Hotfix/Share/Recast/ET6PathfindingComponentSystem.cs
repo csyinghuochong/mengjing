@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -23,7 +24,7 @@ namespace ET
             self.NavMesh = 0;
         }
 
-        public static void Find(this ET6PathfindingComponent self, Vector3 start, Vector3 target, List<Vector3> result)
+        public static void Find(this ET6PathfindingComponent self, float3 start, float3 target, List<float3> result)
         {
             if (self.NavMesh == 0)
             {
@@ -31,13 +32,13 @@ namespace ET
                 throw new Exception($"pathfinding ptr is zero: {self.Scene().Name}");
             }
 
-            self.StartPos[0] = -start.X;
-            self.StartPos[1] = start.Y;
-            self.StartPos[2] = start.Z;
+            self.StartPos[0] = -start.x;
+            self.StartPos[1] = start.y;
+            self.StartPos[2] = start.z;
 
-            self.EndPos[0] = -target.X;
-            self.EndPos[1] = target.Y;
-            self.EndPos[2] = target.Z;
+            self.EndPos[0] = -target.x;
+            self.EndPos[1] = target.y;
+            self.EndPos[2] = target.z;
             //Log.Debug($"start find path: {self.GetParent<Unit>().Id}");
             //int n = Recast.RecastFind(self.NavMesh, PathfindingComponent.extents2, self.StartPos, self.EndPos, self.Result);
             int n = Recast.RecastFind(self.NavMesh,  new float[3]{15,10,15}, self.StartPos, self.EndPos, self.Result);
@@ -45,12 +46,12 @@ namespace ET
             for (int i = 0; i < n; ++i)
             {
                 int index = i * 3;
-                result.Add(new Vector3(-self.Result[index], self.Result[index + 1], self.Result[index + 2]));
+                result.Add(new float3(-self.Result[index], self.Result[index + 1], self.Result[index + 2]));
             }
             //Log.Debug($"finish find path: {self.GetParent<Unit>().Id} {result.ListToString()}");
         }
 
-        public static void FindWithAdjust(this ET6PathfindingComponent self, Vector3 start, Vector3 target, List<Vector3> result, float adjustRaduis)
+        public static void FindWithAdjust(this ET6PathfindingComponent self, float3 start, float3 target, List<float3> result, float adjustRaduis)
         {
             self.Find(start, target, result);
             for (int i = 0; i < result.Count; i++)
