@@ -518,7 +518,7 @@ namespace ET.Client
             
             self.CancellationToken?.Cancel();
             self.CancellationToken = new ETCancellationToken();
-            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, taskConfig.TaskDes, self.CancellationToken, 50)
+            CommonViewHelper.TextPrinter(self.Root(), self.View.E_Lab_NpcSpeakText, taskConfig.TaskDes, self.CancellationToken, 20)
                     .Coroutine();
             
             self.View.E_Lab_NpcNameText.text = taskConfig.TaskName;    
