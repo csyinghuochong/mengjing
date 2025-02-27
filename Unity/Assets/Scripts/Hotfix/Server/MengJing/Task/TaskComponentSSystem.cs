@@ -149,7 +149,7 @@ namespace ET.Server
             }
             if (self.IsHaveTask(taskId))
             {
-                return (null, ErrorCode.ERR_TaskNoComplete);
+                return (null, ErrorCode.ERR_TaskNoComplete); 
             }
             TaskPro taskPro = self.CreateTask(taskId);
             self.RoleTaskList.Add(taskPro);

@@ -537,8 +537,8 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
-                    rewardStr += rewardStr;
+                    //rewardStr = 
+                    rewardStr = zstring.Format("1;{0}@2;{1}@{2}", taskCoin, taskExp, rewardStr);
                 }
             }
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);

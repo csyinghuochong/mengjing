@@ -129,7 +129,7 @@ namespace ET.Client
             { ErrorCode.ERR_LevelChallengeNoPass, "挑战关卡未通关" },
             { ErrorCode.ERR_NotFindNpc, "任务点不在此地图，请根据指示前往其他地图。" },
             { ErrorCode.ERR_TaskCanNotGet, "未达到领取条件" },
-            { ErrorCode.ERR_TaskNoComplete, "前先完成此类任务" },
+            { ErrorCode.ERR_TaskNoComplete, "请先完成此类任务" },
             { ErrorCode.ERR_TowerOfSealReachTop, "已通关" },
             { ErrorCode.ERR_Challenge_CD, "挑战CD中" },
             { ErrorCode.ERR_Pet_Hint_1, "宠物星级出错" },
