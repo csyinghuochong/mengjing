@@ -144,6 +144,7 @@ namespace ET.Client
             }
             
             self.AddComponent<ClientPathfindingComponent, int>(navmesh);
+            self.AddComponent<ET6PathfindingComponent, int>(navmesh);
             //unit.AddComponent<ClientPathfinding2Component>();
         }
         
