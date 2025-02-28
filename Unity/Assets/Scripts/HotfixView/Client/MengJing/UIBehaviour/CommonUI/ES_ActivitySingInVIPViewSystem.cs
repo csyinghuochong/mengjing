@@ -195,13 +195,13 @@ namespace ET.Client
             }
 
             self.E_Reward1EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards_VIP.ToList()[0].Key));
+                    .SetActive(activityComponent.TotalSignRewardsList_VIP.Contains(ConfigData.TotalSignRewards_VIP.ToList()[0].Key));
             self.E_Reward2EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards_VIP.ToList()[1].Key));
+                    .SetActive(activityComponent.TotalSignRewardsList_VIP.Contains(ConfigData.TotalSignRewards_VIP.ToList()[1].Key));
             self.E_Reward3EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards_VIP.ToList()[2].Key));
+                    .SetActive(activityComponent.TotalSignRewardsList_VIP.Contains(ConfigData.TotalSignRewards_VIP.ToList()[2].Key));
             self.E_Reward4EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards_VIP.ToList()[3].Key));
+                    .SetActive(activityComponent.TotalSignRewardsList_VIP.Contains(ConfigData.TotalSignRewards_VIP.ToList()[3].Key));
         }
     }
 }

@@ -82,8 +82,6 @@ namespace ET.Client
             self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
 
             self.UpdateProgress();
-
-            // self.E_Img_lingQu2Image.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) == 2);
         }
 
         private static void OnActivitySingInItemsRefresh(this ES_ActivitySingInFree self, Transform transform, int index)
