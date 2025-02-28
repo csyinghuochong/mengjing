@@ -64,22 +64,36 @@ namespace ET.Client
             self.E_ActivitySingInItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-            string[] itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[0].Value.Split(';');
-            self.E_Reward1EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
-                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-            self.E_Reward1EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-            itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[1].Value.Split(';');
-            self.E_Reward2EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
-                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-            self.E_Reward2EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-            itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[2].Value.Split(';');
-            self.E_Reward3EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
-                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-            self.E_Reward3EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
-            itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[3].Value.Split(';');
-            self.E_Reward4EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
-                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
-            self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+            using (zstring.Block())
+            {
+                string[] itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[0].Value.Split(';');
+                self.E_Reward1EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
+                        resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+                self.E_Reward1EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+                self.E_Reward1EventTrigger.transform.Find("Text").GetComponent<Text>().text =
+                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards_VIP.ToList()[0].Key);
+
+                itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[1].Value.Split(';');
+                self.E_Reward2EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
+                        resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+                self.E_Reward2EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+                self.E_Reward2EventTrigger.transform.Find("Text").GetComponent<Text>().text =
+                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards_VIP.ToList()[1].Key);
+
+                itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[2].Value.Split(';');
+                self.E_Reward3EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
+                        resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+                self.E_Reward3EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+                self.E_Reward3EventTrigger.transform.Find("Text").GetComponent<Text>().text =
+                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards_VIP.ToList()[2].Key);
+
+                itemInfo = ConfigData.TotalSignRewards_VIP.ToList()[3].Value.Split(';');
+                self.E_Reward4EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
+                        resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+                self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
+                self.E_Reward4EventTrigger.transform.Find("Text").GetComponent<Text>().text =
+                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards_VIP.ToList()[3].Key);
+            }
 
             self.UpdateProgress();
         }
