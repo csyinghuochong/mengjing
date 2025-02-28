@@ -3796,7 +3796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5317203948483856976}
-  - component: {fileID: 4239110052778864359}
+  - component: {fileID: 7639131387460734215}
   - component: {fileID: 466730916694072862}
   - component: {fileID: 2824694385448012356}
   - component: {fileID: 3768412326291386738}
@@ -3827,7 +3827,7 @@ RectTransform:
   m_AnchoredPosition: {x: -373, y: 15}
   m_SizeDelta: {x: 700, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4239110052778864359
+--- !u!114 &7639131387460734215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3836,14 +3836,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7674819927573888992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_TaskGetItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 3136574719140276405}
   m_Horizontal: 0
   m_Vertical: 1

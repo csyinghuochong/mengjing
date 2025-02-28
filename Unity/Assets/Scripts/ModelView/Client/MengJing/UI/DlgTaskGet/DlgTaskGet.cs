@@ -10,6 +10,8 @@ namespace ET.Client
             get => this.GetComponent<DlgTaskGetViewComponent>();
         }
 
+        public List<string> AssetList { get; set; } = new();
+        
         public int NpcID;
         public int TaskId;
         public List<int> ShowTaskId = new();
@@ -17,7 +19,7 @@ namespace ET.Client
         
         public ETCancellationToken CancellationToken;
 
-        public Dictionary<int, EntityRef<Scroll_Item_TaskGetItem>> ScrollItemTaskGetItems;
+        public Dictionary<int, EntityRef<Scroll_Item_TaskGetItem>> ScrollItemTaskGetItems = new();
         public Dictionary<int, EntityRef<Scroll_Item_TaskFubenItem>> ScrollItemTaskFubenItems;
         public Dictionary<int, EntityRef<Scroll_Item_TaskRewardItem>> ScrollItemTaskRewardItems;
     }

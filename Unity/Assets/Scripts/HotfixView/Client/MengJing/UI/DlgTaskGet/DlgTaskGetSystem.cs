@@ -20,7 +20,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgTaskGet self)
         {
-            self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
+            // self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
@@ -43,14 +43,14 @@ namespace ET.Client
         
         public static void BeforeUnload(this DlgTaskGet self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+            self.AssetList.Clear();
+            self.AssetList = null;
             self.CancellationToken?.Cancel();
-        }
-
-        private static void OnTaskGetItemsRefresh(this DlgTaskGet self, Transform transform, int index)
-        {
-            Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[index].BindTrans(transform);
-            scrollItemTaskGetItem.InitData(self.ShowTaskId[index]);
-            scrollItemTaskGetItem.SetClickHandler((int taskid) => { self.OnSelectTaskHandler(taskid); });
         }
 
         private static void OnTaskFubenItemsRefresh(this DlgTaskGet self, Transform transform, int index)
@@ -470,8 +470,40 @@ namespace ET.Client
             self.ShowTaskId.Clear();
             self.ShowTaskId.AddRange(taskids);
 
-            self.AddUIScrollItems(ref self.ScrollItemTaskGetItems, self.ShowTaskId.Count);
-            self.View.E_TaskGetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskId.Count);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.ShowTaskId.Count; i++)
+            {
+                if (!self.ScrollItemTaskGetItems.ContainsKey(i))
+                {
+                    Scroll_Item_TaskGetItem item = self.AddChild<Scroll_Item_TaskGetItem>();
+                    string path = "Assets/Bundles/UI/Item/Item_TaskGetItem.prefab";
+                    if (!self.AssetList.Contains(path))
+                    {
+                        self.AssetList.Add(path);
+                    }
+
+                    GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab,self.View.E_TaskGetItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                    item.BindTrans(go.transform);
+                    self.ScrollItemTaskGetItems.Add(i, item);
+                }
+                
+                Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[i];
+                scrollItemTaskGetItem.InitData(self.ShowTaskId[i]);
+                scrollItemTaskGetItem.SetClickHandler((int taskid) => { self.OnSelectTaskHandler(taskid); });
+            }
+
+            if (self.ScrollItemTaskGetItems.Count > self.ShowTaskId.Count)
+            {
+                for (int i = self.ShowTaskId.Count; i < self.ScrollItemTaskGetItems.Count; i++)
+                {
+                    Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[i];
+                    scrollItemTaskGetItem.uiTransform.gameObject.SetActive(false);
+                }
+            }
+
+            // self.AddUIScrollItems(ref self.ScrollItemTaskGetItems, self.ShowTaskId.Count);
+            // self.View.E_TaskGetItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskId.Count);
 
             if (self.ShowTaskId.Count > 0)
             {
@@ -483,6 +515,13 @@ namespace ET.Client
             return false;
         }
 
+        private static void OnTaskGetItemsRefresh(this DlgTaskGet self, Transform transform, int index)
+        {
+            Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[index].BindTrans(transform);
+            scrollItemTaskGetItem.InitData(self.ShowTaskId[index]);
+            scrollItemTaskGetItem.SetClickHandler((int taskid) => { self.OnSelectTaskHandler(taskid); });
+        }
+        
         public static void OnSelectTaskHandler(this DlgTaskGet self, int taskid)
         {
             self.TaskId = taskid;

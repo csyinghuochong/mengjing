@@ -109,7 +109,7 @@ namespace ET.Client
      		}
      	}
 
-		public LoopVerticalScrollRect E_TaskGetItemsLoopVerticalScrollRect
+		public ScrollRect E_TaskGetItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -120,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskGetItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_TaskGetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskGetItems");
+		    		this.m_E_TaskGetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<ScrollRect>(this.uiTransform.gameObject,"E_TaskGetItems");
      			}
      			return this.m_E_TaskGetItemsLoopVerticalScrollRect;
      		}
@@ -631,7 +631,7 @@ namespace ET.Client
 		private Button m_E_CancelNpcSpeakButton = null;
 		private Text m_E_Lab_NpcSpeakText = null;
 		private Image m_E_TaskGetItemsImage = null;
-		private LoopVerticalScrollRect m_E_TaskGetItemsLoopVerticalScrollRect = null;
+		private ScrollRect m_E_TaskGetItemsLoopVerticalScrollRect = null;
 		private Button m_E_ButtonGetButton = null;
 		private Image m_E_ButtonGetImage = null;
 		private Button m_E_BtnCommitTask1Button = null;
