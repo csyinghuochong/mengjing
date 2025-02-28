@@ -310,7 +310,7 @@ namespace ET.Client
             
             //self.CanMovePosition(unit, rotation, pathfind);
 
-            float3 targetpos = unit.Position + math.forward(rotation) * 5f;
+            float3 targetpos = unit.Position + math.forward(rotation) * 2f;
             
             RaycastHit hit;
             Physics.Raycast(targetpos + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
