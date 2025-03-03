@@ -29,7 +29,6 @@
                     }
 
                     PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), request.UserId);
-
                     NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UserId);
                     foreach ((int key, long value) in numericComponent.NumericDic)
                     {
@@ -42,6 +41,7 @@
                         response.Vs.Add(value);
                     }
 
+                    bagComponents.Deserialize();
                     foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemLocEquip))  
                     {
                         response.EquipList.Add(itemInfo.ToMessage());

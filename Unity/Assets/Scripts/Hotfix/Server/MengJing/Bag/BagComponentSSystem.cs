@@ -22,7 +22,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Deserialize(this BagComponentS self)
+        public static void Deserialize(this BagComponentS self)
         {
             if (self.AllItemList == null)
             {
@@ -69,7 +69,6 @@ namespace ET.Server
             {
                 self.BagAddCellNumber.Add(0);
             }
-
         }
 
         /// <summary>

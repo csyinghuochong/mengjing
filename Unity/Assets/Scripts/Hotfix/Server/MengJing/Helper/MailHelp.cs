@@ -180,6 +180,7 @@ namespace ET.Server
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(root, userID);
             NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, userID);
             BagComponentS bagComponent = await UnitCacheHelper.GetComponentCache<BagComponentS>(root, userID);
+            bagComponent.Deserialize();
             bool cansendMail = CheckSendMail(serverMailItem.MailType, serverMailItem.ParasmNew, numericComponent, userInfoComponent,
                 bagComponent);
             if (cansendMail == false)

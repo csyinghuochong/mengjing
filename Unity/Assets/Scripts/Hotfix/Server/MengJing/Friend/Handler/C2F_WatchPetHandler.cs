@@ -15,6 +15,7 @@
             }
             
             BagComponentS bagComponents = await UnitCacheHelper.GetComponentCache<BagComponentS>(scene.Root(), request.UnitID);
+            bagComponents.Deserialize();
             response.RolePetInfos = petComponent.GetPetInfo( request.PetId );
             foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemPetHeXinEquip))
             {

@@ -24,10 +24,11 @@ namespace ET.Server
                 return null;
             }
 
+            UserInfo userInfo = resultUser[0].ChildrenDB[0] as UserInfo;
             JiaYuanVisit jiaYuanVisit = JiaYuanVisit.Create();
-            jiaYuanVisit.Occ = resultUser[0].UserInfo.Occ;
-            jiaYuanVisit.OccTwo = resultUser[0].UserInfo.OccTwo;
-            jiaYuanVisit.PlayerName = resultUser[0].UserInfo.Name;
+            jiaYuanVisit.Occ = userInfo.Occ;
+            jiaYuanVisit.OccTwo = userInfo.OccTwo;
+            jiaYuanVisit.PlayerName = userInfo.Name;
             jiaYuanVisit.UnitId = resultJiaYuan[0].Id;
             jiaYuanVisit.Rubbish = resultJiaYuan[0].GetRubbishNumber();
             jiaYuanVisit.Gather = resultJiaYuan[0].GetCanGatherNumber();
