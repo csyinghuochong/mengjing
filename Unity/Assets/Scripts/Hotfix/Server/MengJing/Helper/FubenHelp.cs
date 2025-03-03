@@ -143,7 +143,7 @@ namespace ET.Server
 				}
 			}
 		}
-
+		
 		public static void CreateMonsterList(Scene scene, int monsterId)
 		{
 			int whileNumber = 0;
