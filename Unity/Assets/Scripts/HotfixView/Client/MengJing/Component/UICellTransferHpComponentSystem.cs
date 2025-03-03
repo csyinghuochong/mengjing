@@ -27,7 +27,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this UICellTransferHpComponent self)
         {
-            self.HeadBar = null;
             self.EnterRange = false;
             self.InitTime = TimeHelper.ServerNow() + TimeHelper.Second * 3;
           

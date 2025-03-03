@@ -466,6 +466,7 @@ namespace ET.Server
                 m2CCellDungeonInfo.Positions.Add(unit.Position);
             }
 
+            Console.WriteLine($"OnEnterSonCell:  {players[0].Position}");
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
             MapMessageHelper.SendToClient(players, m2CCellDungeonInfo);
         }
