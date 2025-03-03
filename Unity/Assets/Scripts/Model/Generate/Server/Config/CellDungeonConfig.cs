@@ -80,7 +80,7 @@ namespace ET
 		/// <summary>传送门坐标</summary>
 		public string TransmitPosi { get; set; }
 		/// <summary>怪物生成坐标点</summary>
-		public int CreateMonster { get; set; }
+		public int[] CreateMonster { get; set; }
 		/// <summary>特殊怪</summary>
 		public string CreateScenceMonsterPro { get; set; }
 		/// <summary>特殊怪</summary>
