@@ -339,13 +339,37 @@ namespace ET.Server
 
             string[] position = monsterPosition.Position.Split(',');
             string[] refreshPar = monsterPosition.Par.Split('@'); //10,2@20,2@30,2@40,2@50,2@60,2
+            
+            
+            List<float3> positionList = new List<float3>();
+            for (int i = 0; i < position.Length; i+=3)
+            {
+                positionList.Add(new float3(float.Parse(position[i]), float.Parse(position[i+1]), float.Parse(position[i+2])));
+            }
+            
 
+            //Log.Debug($"野外怪定时刷新bbbbbb:  {self.DomainZone()}区：   MonsterID：{monsterPosition.MonsterID} ");
+            
             for ( int wave = 0; wave < refreshPar.Length; wave++  )
             {
                 string[] wavePar = refreshPar[wave].Split(',');
                 long waitTimer = int.Parse(wavePar[0]) * 1000;
                 int monsterNum = int.Parse(wavePar[1]);
                 
+                List<float3> monsterpositionList = new List<float3>();  
+                
+                int[] indexlist = RandomHelper.GetRandoms(positionList.Count, 0, positionList.Count);
+                for (int i = 0; i < indexlist.Length; i++)
+                {
+                    monsterpositionList.Add(positionList[indexlist[i]]);
+                }
+                
+                for (int i = monsterpositionList.Count; i < monsterNum; i++)
+                { 
+                    int positionindex = RandomHelper.RandomNumber(0, positionList.Count);
+                    monsterpositionList.Add(positionList[positionindex]);
+                }
+
                 for (int i = 0; i < monsterNum; i++)
                 {
                     int randomIndex =   RandomHelper.RandomNumber(0, monsterPosition.MonsterID.Length);
@@ -354,12 +378,12 @@ namespace ET.Server
                     {
                         MonsterId = randomMonsterid,
                         NextTime = TimeHelper.ServerNow() + waitTimer,
-                        PositionX = float.Parse(position[0]),
-                        PositionY = float.Parse(position[1]),
-                        PositionZ = float.Parse(position[2]),
+                        PositionX = monsterpositionList[i].x,
+                        PositionY = monsterpositionList[i].y,
+                        PositionZ = monsterpositionList[i].z,
                         Number = 1,
                         Range = (float)monsterPosition.CreateRange,
-                        Interval = 0,
+                        Interval = -1,
                         Rotation = monsterPosition.Create,
                     });
                 }
