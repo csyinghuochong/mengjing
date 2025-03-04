@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 
 namespace ET.Client
@@ -489,6 +490,20 @@ namespace ET.Client
             return result;
         }
 
+        public static bool IsAllMonsterDead(Scene scene)
+        {
+            List<Entity> entities = scene.GetComponent<UnitComponent>().Children.Values.ToList();
+            for(int i = 0; i < entities.Count; i++)
+            {
+                Unit unit = entities[i] as Unit;
+                if (unit.IsMonster() && unit.IsCanBeAttack())
+                    return false;
+            }
+
+            return true;
+        }
+
+        
         public static bool IsHaveBoss(Scene scene, float3 vector3, float dis)
         {
             List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();

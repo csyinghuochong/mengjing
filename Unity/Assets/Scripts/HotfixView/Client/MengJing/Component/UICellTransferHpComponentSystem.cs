@@ -77,13 +77,14 @@ namespace ET.Client
 
             if (distance <= 1.5f && !self.EnterRange)
             {
-                if (!self.Root().GetComponent<CellDungeonComponentC>().IsAllMonsterDead())
+                self.EnterRange = true;
+                if (!UnitHelper.IsAllMonsterDead(self.Root().CurrentScene()))
                 {
                     FlyTipComponent.Instance.ShowFlyTip("消灭怪物后才可进行传送");
                     return;
                 }
 
-                self.EnterRange = true;
+                //self.EnterRange = true;
                 // if (self.SceneType == SceneTypeEnum.CellDungeon)
                 // {
                 //     self.StartTimer();

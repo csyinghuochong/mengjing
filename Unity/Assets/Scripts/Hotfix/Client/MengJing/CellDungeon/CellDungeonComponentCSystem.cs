@@ -133,19 +133,6 @@ namespace ET.Client
             }
         }
 
-        public static bool IsAllMonsterDead(this CellDungeonComponentC self)
-        {
-            List<Entity> entities = self.Root().CurrentScene().GetComponent<UnitComponent>().Children.Values.ToList();
-            for(int i = 0; i < entities.Count; i++)
-            {
-                Unit unit = entities[i] as Unit;
-                if (unit.IsMonster() && unit.IsCanBeAttack())
-                    return false;
-            }
-
-            return true;
-        }
-
         public static bool HaveFubenCellNpc(this CellDungeonComponentC self, int npcType)
         {
             for (int i = 0; i < self.FubenInfo.FubenCellNpcs.Count; i++)
@@ -186,10 +173,11 @@ namespace ET.Client
 
         public static void CheckChuansongOpen(this CellDungeonComponentC self)
         {
-            if (!self.IsAllMonsterDead())
+            Scene scene = self.Root().CurrentScene();
+            if (!UnitHelper.IsAllMonsterDead(scene))
                 return;
 
-            List<Entity> entities = self.Root().CurrentScene().GetComponent<UnitComponent>().Children.Values.ToList();
+            List<Entity> entities = scene.GetComponent<UnitComponent>().Children.Values.ToList();
             for(int i = 0; i < entities.Count; i++)
             {
                 Unit unit = entities[i] as Unit;
