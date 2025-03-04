@@ -33,15 +33,16 @@ namespace ET.Client
                 self.GameObject = null;
             }
         }
-        
-        public static async ETTask OnInitEnergyTableUI(this UISceneItemComponent self)
+
+        public static void OnLoadGameObject(this UISceneItemComponent self, GameObject gameObject, long formId)
         {
-            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
-            self.HeadBarPath = path;
-            Unit myUnit =self.GetParent<Unit>();
-            self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
-            GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
-            self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
+            if (self.IsDisposed)
+            {
+                GameObject.DestroyImmediate(gameObject);
+                return;
+            }
+
+            self.GameObject = gameObject;
             self.GameObject.transform.SetParent(GlobalComponent.Instance.BloodMonster.transform);
             self.GameObject.transform.localScale = Vector3.one;
             if (self.GameObject.GetComponent<HeadBarUI>() == null)
@@ -59,6 +60,17 @@ namespace ET.Client
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(energySkillId);
             self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = skillConfig.SkillName;
             self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = skillConfig.SkillDescribe;
+        }
+
+        public static async ETTask OnInitEnergyTableUI(this UISceneItemComponent self)
+        {
+            string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
+            self.HeadBarPath = path;
+            Unit myUnit =self.GetParent<Unit>();
+            self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
+             // GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
+            //self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
     }
 }
