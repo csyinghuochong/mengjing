@@ -10,8 +10,6 @@ namespace ET.Client
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
             Unit unitmain = UnitHelper.GetMyUnitFromClientScene(root);
-            unitmain.GetComponent<StateComponentC>().StateTypeRemove(StateTypeEnum.NoMove);
-            
             UnitComponent  unitComponent = unitmain.GetParent<UnitComponent>();
             for (int i = 0; i < message.UnitIds.Count; i++)
             {

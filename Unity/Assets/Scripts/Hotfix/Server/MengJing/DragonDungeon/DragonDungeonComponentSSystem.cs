@@ -438,6 +438,7 @@ namespace ET.Server
 
                 unit.GetComponent<MoveComponent>().Stop(true);
                 unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
+                unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.Transfer);
 
                 if (!fubenCellInfoNext.pass)
                 {
@@ -458,19 +459,37 @@ namespace ET.Server
             List<Unit> pets = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
             for (int i = 0; i < pets.Count; i++)
             {
-                Unit unit = pets[i];
-
-                unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
-                unit.Rotation = quaternion.identity;
-                m2CCellDungeonInfo.UnitIds.Add(unit.Id);
-                m2CCellDungeonInfo.Positions.Add(unit.Position);
+                Unit pet = pets[i];
+                pet.GetComponent<MoveComponent>().Stop(true);
+                pet.GetComponent<SkillManagerComponentS>().OnFinish(true);
+               
+                pet.RemoveComponent<PathfindingComponent>();
+                pet.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+                
+                pet.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                pet.Rotation = quaternion.identity;
+                m2CCellDungeonInfo.UnitIds.Add(pet.Id);
+                m2CCellDungeonInfo.Positions.Add(pet.Position);
             }
 
             Console.WriteLine($"OnEnterSonCell:  {players[0].Position}");
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
             MapMessageHelper.SendToClient(players, m2CCellDungeonInfo);
+            
+            self.MainHeroRemoveTransfer().Coroutine();
         }
 
+        public static async ETTask MainHeroRemoveTransfer(this DragonDungeonComponentS self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            for (int i = 0; i < players.Count; i++)
+            {
+                Unit unit = players[i];
+                unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.Transfer);
+            }
+        }
+        
         public static void GenerateFubenScene(this DragonDungeonComponentS self, bool pass)
         {
             CellDungeonInfo fubenCellInfo = self.CurrentFubenCell;

@@ -59,7 +59,8 @@ namespace ET.Server
 
             if (distance <= 1.5f && !self.EnterRange)
             {
-                if (!self.Scene().GetComponent<CellDungeonComponentS>().IsAllMonsterDead())
+                bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), mainhero);
+                if (!allMonsterDead)
                 {
                     return;
                 }
