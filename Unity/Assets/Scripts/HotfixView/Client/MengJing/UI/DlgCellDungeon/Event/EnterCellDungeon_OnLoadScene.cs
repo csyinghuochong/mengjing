@@ -7,6 +7,8 @@ namespace ET.Client
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.ResetJoystick();
+            
             Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
             unit.UpdateMainHeroPath(mapComponent);
             

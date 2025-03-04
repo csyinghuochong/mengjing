@@ -348,6 +348,22 @@ namespace ET.Server
             return list;
         }
 
+        public static List<Unit> GetUnitList(Scene scene, List<int> unitType)
+        {
+            List<Unit> list = new List<Unit>();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                Unit unit = allunits[i];
+                if (unitType.Contains( unit.Type) )
+                {
+                    list.Add(allunits[i]);
+                }
+            }
+
+            return list;
+        }
+        
         public static bool IsSameUnion(this Unit self, Unit other)
         {
             long teamid_1 = self.GetUnionId();

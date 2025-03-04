@@ -54,9 +54,17 @@ namespace ET.Server
 
             bool allin = true;
             Unit chuansong = self.GetParent<Unit>();
-            for (int i = 0; i < unitlist.Count; i++)
+            
+            List<EntityRef<Unit>> allunits = self.Scene().GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
             {
-                if (math.distance(chuansong.Position, unitlist[i].Position) > 1.5f)
+                Unit unit = allunits[i];
+                if (unit.Type != UnitType.Player)
+                {
+                   continue;
+                }
+                
+                if (math.distance(chuansong.Position, unit.Position) > 1.5f)
                 {
                     allin = false;
                     break;

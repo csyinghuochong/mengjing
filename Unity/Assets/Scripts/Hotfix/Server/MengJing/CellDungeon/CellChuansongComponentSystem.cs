@@ -52,30 +52,45 @@ namespace ET.Server
                 return;
             }
 
-            Unit mainhero = unitlist[0];
-           
-            float3 vector3 = self.GetParent<Unit>().Position;
-            float distance = PositionHelper.Distance2D(vector3, mainhero.Position);
-
-            if (distance <= 1.5f && !self.EnterRange)
+            Unit mainUnit = unitlist[0];
+            bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), mainUnit);
+            if (!allMonsterDead)
             {
-                bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), mainhero);
-                if (!allMonsterDead)
+                return;
+            }
+            
+            bool allin = true;
+            Unit chuansong = self.GetParent<Unit>();
+            
+            List<EntityRef<Unit>> allunits = self.Scene().GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                Unit unit = allunits[i];
+                if (unit.Type != UnitType.Player)
                 {
-                    return;
+                    continue;
                 }
+                
+                if (math.distance(chuansong.Position, unit.Position) > 1.5f)
+                {
+                    allin = false;
+                    break;
+                }
+            }
 
+            if (allin && !self.EnterRange)
+            {
                 self.EnterRange = true;
             }
 
-            if (distance > 1.5f && self.EnterRange)
+            if (!allin && self.EnterRange)
             {
                 self.EnterRange = false;
             }
-
-            if (!self.EnterRange)
+            
+            if (!allin)
             {
-                return; 
+                return;
             }
             
             Scene scene = self.Scene();
