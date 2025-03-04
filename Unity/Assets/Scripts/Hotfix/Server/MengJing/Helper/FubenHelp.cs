@@ -270,6 +270,15 @@ namespace ET.Server
 				//固定时间刷新  YeWaiRefreshComponent
 				//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
 			}
+
+			// Admin:
+			// 类型3：  30,60 30s后开始刷新     每60s刷一轮
+			// 类型7    10,2@20,2             10s 刷新一波 20刷新2波  后面跟的是怪物数量,怪物ID从前面随机获取
+			if (mtype == 7)
+			{
+				//定时刷新  YeWaiRefreshComponent
+				scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByRandom(monsterPosition);
+			}
 		}
 
 		private static int CreateMonsterByPos(Scene scene, int monsterPos)

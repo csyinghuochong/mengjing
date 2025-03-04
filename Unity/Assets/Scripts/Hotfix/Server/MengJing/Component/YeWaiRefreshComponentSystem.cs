@@ -309,6 +309,67 @@ namespace ET.Server
                 });
             }
         }
+        
+        /// <summary>
+        /// 间隔时间刷新
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="monsterPos"></param>
+        /// <param name="fubenDifficulty"></param>
+        /// // 类型3：  30,60 30s后开始刷新     每60s刷一轮
+        // 类型7    10,2@20,2             10s 刷新一波 20刷新2波  后面跟的是怪物数量,怪物ID从前面随机获取
+        public static void CreateMonsterByRandom(this YeWaiRefreshComponent self, MonsterPositionConfig monsterPosition)
+        {
+            if (monsterPosition == null)
+            {
+                return;
+            }
+
+            //521401,521402,521403
+            //10,2@20,2@30,2@40,2@50,2@60,2
+            
+            //Id      NextID  Type Position             MonsterID CreateRange CreateNum Create    Par(3代表刷新时间)
+            //10001   10002   2    - 71.46,0.34,-5.35   81000002       0           1       90    30,60
+            int mtype = monsterPosition.Type;
+            if (mtype != 7)
+            {
+                Log.Error("mtype != 7");
+                return;
+            }
+
+            string[] position = monsterPosition.Position.Split(',');
+            string[] refreshPar = monsterPosition.Par.Split('@'); //10,2@20,2@30,2@40,2@50,2@60,2
+
+            for ( int wave = 0; wave < refreshPar.Length; wave++  )
+            {
+                string[] wavePar = refreshPar[wave].Split(',');
+                long waitTimer = int.Parse(wavePar[0]) * 1000;
+                int monsterNum = int.Parse(wavePar[1]);
+                
+                for (int i = 0; i < monsterNum; i++)
+                {
+                    int randomIndex =   RandomHelper.RandomNumber(0, monsterPosition.MonsterID.Length);
+                    int randomMonsterid = monsterPosition.MonsterID[ randomIndex ];
+                    self.RefreshMonsters.Add(new RefreshMonster()
+                    {
+                        MonsterId = randomMonsterid,
+                        NextTime = TimeHelper.ServerNow() + waitTimer,
+                        PositionX = float.Parse(position[0]),
+                        PositionY = float.Parse(position[1]),
+                        PositionZ = float.Parse(position[2]),
+                        Number = 1,
+                        Range = (float)monsterPosition.CreateRange,
+                        Interval = 0,
+                        Rotation = monsterPosition.Create,
+                    });
+                }
+            }
+
+
+            //Log.Debug($"野外怪定时刷新bbbbbb:  {self.DomainZone()}区：   MonsterID：{monsterPosition.MonsterID} ");
+
+            
+        }
 
         /// <summary>
         /// 固定时间刷新
