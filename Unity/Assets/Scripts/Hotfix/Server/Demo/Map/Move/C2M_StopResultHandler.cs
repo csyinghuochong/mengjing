@@ -5,6 +5,11 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_StopResult message)
         {
+            if (unit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Transfer))
+            {
+                return;
+            }
+            
             unit.StopResult(message.Position, 0);
             
             await ETTask.CompletedTask;

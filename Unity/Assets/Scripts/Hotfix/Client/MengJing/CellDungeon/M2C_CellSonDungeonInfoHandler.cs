@@ -9,10 +9,14 @@ namespace ET.Client
             MapComponent mapComponent = root.GetComponent<MapComponent>();      
             CellDungeonComponentC fubenComponent = root.GetComponent<CellDungeonComponentC>();
 
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-            unit.GetComponent<StateComponentC>().StateTypeRemove(StateTypeEnum.NoMove);
-
-
+            Unit unitmain = UnitHelper.GetMyUnitFromClientScene(root);
+            UnitComponent  unitComponent = unitmain.GetParent<UnitComponent>();
+            for (int i = 0; i < message.UnitIds.Count; i++)
+            {
+                Unit unit = unitComponent.Get(message.UnitIds[i]);
+                unit.GetComponent<MoveComponent>().Stop(true);
+            }
+            
             fubenComponent.SonFubenInfo = message.SonFubenInfo;
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
             fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
@@ -24,9 +28,16 @@ namespace ET.Client
                 
             });
 
-         
 
-            unit.Position = message.Position;
+            unitComponent = unitmain.GetParent<UnitComponent>();
+            for (int i = 0; i < message.UnitIds.Count; i++)
+            {
+                Unit unit = unitComponent.Get(message.UnitIds[i]);
+                if (unit != null)
+                {
+                    unit.Position = message.Positions[i];
+                }
+            }
             await ETTask.CompletedTask;
         }
     }

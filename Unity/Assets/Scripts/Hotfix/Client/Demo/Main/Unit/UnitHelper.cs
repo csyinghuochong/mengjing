@@ -47,7 +47,12 @@ namespace ET.Client
                 return false;
             }
 
-            if (!self.GetComponent<StateComponentC>().IsCanBeAttack())
+            StateComponentC stateComponentS = self.GetComponent<StateComponentC>();
+            if (stateComponentS == null)
+            {
+                return false;
+            }
+            if (!stateComponentS.IsCanBeAttack())
             {
                 return false;
             }

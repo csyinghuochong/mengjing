@@ -17,7 +17,6 @@ namespace ET.Server
         {
             self.CurrentStateType = StateTypeEnum.None;
             self.RigidityEndTime = 0;
-            self.ObstructStatus = 0;
         }
 
         public static bool IsCanZhuiJi(this StateComponentS self)
@@ -137,6 +136,10 @@ namespace ET.Server
 
         public static int CanMove(this StateComponentS self)
         {
+            if (self.StateTypeGet(StateTypeEnum.Transfer))
+            {
+                return ErrorCode.ERR_CanNotMove_1;
+            }
             if (self.StateTypeGet(StateTypeEnum.BePulled))
             {
                 return ErrorCode.ERR_CanNotMove_1;

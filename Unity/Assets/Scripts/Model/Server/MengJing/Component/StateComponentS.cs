@@ -11,8 +11,6 @@ namespace ET.Server
 
         public long NetWaitEndTime { get; set; }
 
-        public int ObstructStatus { get; set; }
-
     }
 
 }

@@ -793,7 +793,10 @@ namespace ET
         public SonFubenInfo SonFubenInfo { get; set; }
 
         [MemoryPackOrder(2)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public List<Unity.Mathematics.float3> Positions { get; set; } = new();
+
+        [MemoryPackOrder(3)]
+        public List<long> UnitIds { get; set; } = new();
 
         public override void Dispose()
         {
@@ -803,7 +806,8 @@ namespace ET
             }
 
             this.SonFubenInfo = default;
-            this.Position = default;
+            this.Positions.Clear();
+            this.UnitIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

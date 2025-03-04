@@ -182,7 +182,8 @@ message M2C_CellDungeonInfo // IMessage
 message M2C_CellSonDungeonInfo // IMessage
 {
 	 SonFubenInfo SonFubenInfo = 2;
-	 Unity.Mathematics.float3 Position = 3;
+	 repeated Unity.Mathematics.float3 Positions = 3;
+	 repeated int64 UnitIds = 4;
 }
 
 message M2C_RemoveUnits // IMessage

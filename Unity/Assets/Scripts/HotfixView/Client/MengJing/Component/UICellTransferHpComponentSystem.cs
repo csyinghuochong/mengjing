@@ -29,20 +29,18 @@ namespace ET.Client
         {
             self.EnterRange = false;
             self.InitTime = TimeHelper.ServerNow() + TimeHelper.Second * 3;
-          
         }
 
         [EntitySystem]
         private static void Destroy(this UICellTransferHpComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-
         }
 
         //chuansongComponent.CellIndex, chuansongComponent.DirectionType
-        public static  void OnInitUI(this UICellTransferHpComponent self, int cellIndex, int directionType)
+        public static  void OnInitUI(this UICellTransferHpComponent self, int sceneType)
         {
-
+            self.SceneType = sceneType;
         }
 
         public static void OnTimer(this UICellTransferHpComponent self)
@@ -86,11 +84,10 @@ namespace ET.Client
                 }
 
                 self.EnterRange = true;
-                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                if (mapComponent.SceneType == SceneTypeEnum.CellDungeon)
-                {
-                    self.StartTimer();
-                }
+                // if (self.SceneType == SceneTypeEnum.CellDungeon)
+                // {
+                //     self.StartTimer();
+                // }
             }
 
             if (distance > 1.5f && self.EnterRange)

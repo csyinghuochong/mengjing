@@ -47,6 +47,7 @@
         public const int RoleBullet7TimerC = 235;
         public const int ResourcesLoaderTimer = 240;
         public const int DragonChuansongTimer = 241;
+        public const int CellChuansongTimer = 242;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

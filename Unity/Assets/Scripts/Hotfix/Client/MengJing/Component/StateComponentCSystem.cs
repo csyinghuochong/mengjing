@@ -121,6 +121,10 @@ namespace ET.Client
 
         public static int CanMove(this StateComponentC self)
         {
+            if (self.StateTypeGet(StateTypeEnum.Transfer))
+            {
+                return ErrorCode.ERR_CanNotMove_1;
+            }
             if (self.StateTypeGet(StateTypeEnum.BePulled))
             {
                 return ErrorCode.ERR_CanNotMove_1;

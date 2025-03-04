@@ -803,8 +803,7 @@ namespace ET.Client
                             break;
                     }
 
-                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex),
-                        unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType));
+                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(mapComponent.SceneType);
                     break;
                 case UnitType.JingLing:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

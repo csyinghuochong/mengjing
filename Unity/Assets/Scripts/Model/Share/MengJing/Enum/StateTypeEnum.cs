@@ -116,5 +116,11 @@ namespace ET
         /// </summary>
 
         public const long Hide = 1 << 22;   
+        
+        
+        /// <summary>
+        /// 传送状态
+        /// </summary>
+        public const long Transfer = 1 << 23;   
     }
 }

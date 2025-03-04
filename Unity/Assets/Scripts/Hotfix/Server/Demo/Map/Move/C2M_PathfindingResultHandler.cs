@@ -9,6 +9,11 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PathfindingResult message)
         {
+            if (unit.GetComponent<StateComponentS>().StateTypeGet(StateTypeEnum.Transfer))
+            {
+                return;
+            }
+
             M2C_PathfindingResult m2CPathfindingResult = new();
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;

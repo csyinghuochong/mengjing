@@ -193,7 +193,14 @@ namespace ET.Server
                 return false;
             }
 
-            if (!self.GetComponent<StateComponentS>().IsCanBeAttack())
+            StateComponentS stateComponentS = self.GetComponent<StateComponentS>();
+            if (stateComponentS == null)
+            {
+                Console.WriteLine($"stateComponentS == null:  {self.Type}  {self.ConfigId}");
+                return false;
+            }
+
+            if (!stateComponentS.IsCanBeAttack())
             {
                 return false;
             }

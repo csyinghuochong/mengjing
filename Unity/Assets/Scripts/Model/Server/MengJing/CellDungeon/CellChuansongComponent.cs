@@ -1,11 +1,11 @@
-using UnityEngine;
 
-namespace ET.Client
+using System.Collections.Generic;
+
+namespace ET.Server
 {
     [ComponentOf(typeof(Unit))]
-    public class UICellTransferHpComponent : Entity, IAwake, IDestroy
+    public class CellChuansongComponent : Entity, IAwake, IDestroy
     {
-
         public bool EnterRange;
 
         public long InitTime;

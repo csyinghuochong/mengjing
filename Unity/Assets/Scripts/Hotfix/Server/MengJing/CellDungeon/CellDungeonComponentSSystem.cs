@@ -387,48 +387,22 @@ namespace ET.Server
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(sonid);
             mapComponent.NavMeshId = chapterSon.MapID;
           
-            //更新unit出生点坐标
-            int[] borpos;
-            switch (DirectionType)
-            {
-                case 1:
-                    borpos = chapterSon.BornPosDwon;
-                    break;
-
-                case 2:
-                    borpos = chapterSon.BornPosRight;
-                    break;
-                case 3:
-                    borpos = chapterSon.BornPosUp;
-                    break;
-                default:
-                    borpos = chapterSon.BornPosLeft;
-                    break;
-            }
-            
             //创建副本内的各种Unit
             self.GenerateFubenScene(fubenCellInfoNext.pass);
         }
 
-        public static void OnEnterSonCell(this CellDungeonComponentS self, Unit unit, string ParamInfo)
+        public static void OnEnterSonCell(this CellDungeonComponentS self,  string ParamInfo)
         {
             string[] cellinfo = ParamInfo.Split('_');
             int DirectionType = int.Parse(cellinfo[1]);
             
-            unit.GetComponent<MoveComponent>().Stop(true);
-            unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
             
-            CellDungeonInfo fubenCellInfoNext = self.CurrentFubenCell;
-            if (!fubenCellInfoNext.pass)
-            {
-                unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
-            }
-
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
+            CellDungeonInfo fubenCellInfoNext = self.CurrentFubenCell;
+            int sonid = fubenCellInfoNext.sonid;
             CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(mapComponent.SonSceneId);
-            unit.RemoveComponent<PathfindingComponent>();
-            unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
-
+            
+           
             //更新unit出生点坐标
             int[] borpos;
             switch (DirectionType)
@@ -436,7 +410,6 @@ namespace ET.Server
                 case 1:
                     borpos = chapterSon.BornPosDwon;
                     break;
-
                 case 2:
                     borpos = chapterSon.BornPosRight;
                     break;
@@ -447,14 +420,62 @@ namespace ET.Server
                     borpos = chapterSon.BornPosLeft;
                     break;
             }
-
-            unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
-            unit.Rotation = quaternion.identity;
             
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             M2C_CellSonDungeonInfo m2CCellDungeonInfo = M2C_CellSonDungeonInfo.Create();
-            m2CCellDungeonInfo.Position = unit.Position;
+            
+            for (int i = 0; i < players.Count; i++)
+            {
+                Unit unit = players[i];
+                
+                unit.GetComponent<MoveComponent>().Stop(true);
+                unit.GetComponent<SkillManagerComponentS>().OnFinish(true);
+                unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.Transfer);
+                
+                if (!fubenCellInfoNext.pass)
+                {
+                    unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
+                }
+
+                unit.RemoveComponent<PathfindingComponent>();
+                unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+
+                unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                unit.Rotation = quaternion.identity;
+                unit.SetBornPosition(unit.Position, false);
+
+                m2CCellDungeonInfo.UnitIds.Add(unit.Id);
+                m2CCellDungeonInfo.Positions.Add(unit.Position);
+            }
+
+            
+            List<Unit> pets = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
+            for (int i = 0; i < pets.Count; i++)
+            {
+                Unit pet = pets[i];
+
+                pet.GetComponent<MoveComponent>().Stop(true);
+                pet.GetComponent<SkillManagerComponentS>().OnFinish(true);
+               
+                pet.RemoveComponent<PathfindingComponent>();
+                pet.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
+                
+                pet.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                pet.Rotation = quaternion.identity;
+                m2CCellDungeonInfo.UnitIds.Add(pet.Id);
+                m2CCellDungeonInfo.Positions.Add(pet.Position);
+            }
+            
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
-            MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+            MapMessageHelper.SendToClient(players[0], m2CCellDungeonInfo);
+            
+            self.MainHeroRemoveTransfer(players[0]).Coroutine();
+        }
+
+        public static async ETTask MainHeroRemoveTransfer(this CellDungeonComponentS self, Unit unit)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.Transfer);
         }
 
         public static void GenerateFubenScene(this CellDungeonComponentS self, bool pass)
@@ -552,6 +573,7 @@ namespace ET.Server
                     chuansong.Type = UnitType.CellTransfers;
                     chuansong.GetParent<UnitComponent>().Add(chuansong);
                     chuansong.AddComponent<ChuansongComponent>();
+                    chuansong.AddComponent<CellChuansongComponent>();
                     NumericComponentS numericComponentS = chuansong.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.CellIndex, self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line), false); //走过的格子
                     numericComponentS.ApplyValue(NumericType.DirectionType, i + 1, false);

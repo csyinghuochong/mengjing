@@ -117,13 +117,17 @@ namespace ET.Server
                         }
                         else
                         {
-                            UnitHelper.RemoveAllNoSelf(unit);
-                            CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
-                            cellDungeonComponentS.InitSonCell(request.paramInfo);
-                            cellDungeonComponentS.OnEnterSonCell(unit, request.paramInfo);
-                            AfterTransfer(unit, SceneTypeEnum.CellDungeon);
+                            Console.WriteLine($"SceneTypeEnum.CellDungeon:request.SceneId == 0 ");
                         }
-                        
+
+                        // else
+                        // {
+                        //     UnitHelper.RemoveAllNoSelf(unit);
+                        //     CellDungeonComponentS cellDungeonComponentS = unit.Scene().GetComponent<CellDungeonComponentS>();
+                        //     cellDungeonComponentS.InitSonCell(request.paramInfo);
+                        //     cellDungeonComponentS.OnEnterSonCell(request.paramInfo);
+                        //     AfterTransfer(unit, SceneTypeEnum.CellDungeon);
+                        // }
                         break;
                     case (int)SceneTypeEnum.TrialDungeon:
                         int requestTowerId = int.Parse(request.paramInfo);
