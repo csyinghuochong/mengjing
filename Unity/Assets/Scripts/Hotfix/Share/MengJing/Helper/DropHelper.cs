@@ -396,11 +396,18 @@ namespace ET
 					}
 					if (dropItemID >= 100000)
 					{
-						ItemConfig itemCof = ItemConfigCategory.Instance.Get(dropItemID);
-						if (itemCof.ItemQuality >= needQuality && showID.Contains(dropItemID) == false)
+						if (ItemConfigCategory.Instance.Contain(dropItemID))
 						{
-							showID.Add(dropItemID);
-							dropItemList.Add(new RewardItem() { ItemID = dropItemID, ItemNum = 1 });
+							ItemConfig itemCof = ItemConfigCategory.Instance.Get(dropItemID);
+							if (itemCof.ItemQuality >= needQuality && showID.Contains(dropItemID) == false)
+							{
+								showID.Add(dropItemID);
+								dropItemList.Add(new RewardItem() { ItemID = dropItemID, ItemNum = 1 });
+							}
+						}
+						else
+						{
+							Log.Error("掉落物品不存在:" + dropItemID);	
 						}
 					}
 				}
