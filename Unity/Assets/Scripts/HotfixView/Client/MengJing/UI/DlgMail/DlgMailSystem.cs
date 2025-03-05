@@ -23,7 +23,7 @@ namespace ET.Client
             self.View.E_ButtonGetButton.AddListener(self.OnButtonGetButton);
             self.View.E_ButtonOneKeyButton.AddListenerAsync(self.OnButtonOneKeyButton);
             self.View.E_Btn_CloseButton.AddListener(self.OnBtn_CloseButton);
-            
+
             self.RequestMaiList();
         }
 
@@ -121,6 +121,22 @@ namespace ET.Client
 
             //增删改
             List<MailInfo> mailInfos = mailComponent.MailInfoList;
+
+            // Test 
+            // MailInfo mailInfo1 = MailInfo.Create();
+            // mailInfo1.Context = "1111111111";
+            // ItemInfoProto itemInfoProto1 = ItemInfoProto.Create();
+            // itemInfoProto1.ItemID = 1;
+            // itemInfoProto1.ItemNum = 1;
+            // mailInfo1.ItemList.Add(itemInfoProto1);
+            // mailInfos.Add(mailInfo1);
+            // for (int i = 0; i < 20; i++)
+            // {
+            //     MailInfo mailInfo2 = MailInfo.Create();
+            //     mailInfo2.Context = i.ToString();
+            //     mailInfos.Add(mailInfo2);
+            // }
+
             if (mailInfos.Count == 0)
             {
                 mailComponent.SelectMail = null;
@@ -151,12 +167,21 @@ namespace ET.Client
 
         private static void OnMailItemsRefresh(this DlgMail self, Transform transform, int index)
         {
+            foreach (Scroll_Item_MailItem item in self.ScrollItemMailItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+
             Scroll_Item_MailItem scrollItemMailItem = self.ScrollItemMailItems[index].BindTrans(transform);
 
             MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
 
             scrollItemMailItem.OnUpdateUI(mailComponent.MailInfoList[index]);
             scrollItemMailItem.SetClickHandler(() => { self.OnSelectMail(); });
+            scrollItemMailItem.SetSelected(mailComponent.SelectMail);
         }
 
         public static void OnBtn_CloseButton(this DlgMail self)

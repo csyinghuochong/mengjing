@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -19,11 +20,25 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_MailItem self, MailInfo mailInfo)
         {
+            self.E_ItemIconImage.gameObject.SetActive(false);
+            self.E_MailIconImage.gameObject.SetActive(false);
             self.E_ImageSelectImage.gameObject.SetActive(false);
             self.E_ImageButtonButton.AddListener(self.OnImageButton);
 
             self.MailInfo = mailInfo;
             self.E_TextConentText.text = mailInfo.Title;
+
+            if (mailInfo.ItemList != null && mailInfo.ItemList.Count > 0)
+            {
+                self.E_ItemIconImage.gameObject.SetActive(true);
+                ItemInfoProto itemInfoProto = mailInfo.ItemList[0];
+                self.E_ItemIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfoProto.ItemID.ToString()));
+            }
+            else
+            {
+                self.E_MailIconImage.gameObject.SetActive(true);
+            }
         }
 
         public static void OnImageButton(this Scroll_Item_MailItem self)

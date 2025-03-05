@@ -95,6 +95,54 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_ItemIconImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ItemIconImage == null )
+					{
+						this.m_E_ItemIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ItemIcon");
+					}
+					return this.m_E_ItemIconImage;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ItemIcon");
+				}
+			}
+		}
+		
+		public Image E_MailIconImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_MailIconImage == null )
+					{
+						this.m_E_MailIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_MailIcon");
+					}
+					return this.m_E_MailIconImage;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_MailIcon");
+				}
+			}
+		}
+		
 		public Text E_TextConentText
      	{
      		get
@@ -124,6 +172,8 @@ namespace ET.Client
 			this.m_E_ImageButtonButton = null;
 			this.m_E_ImageButtonImage = null;
 			this.m_E_ImageSelectImage = null;
+			this.m_E_ItemIconImage = null;
+			this.m_E_MailIconImage = null;
 			this.m_E_TextConentText = null;
 			this.uiTransform = null;
 			this.DataId = 0;
@@ -132,6 +182,8 @@ namespace ET.Client
 		private Button m_E_ImageButtonButton = null;
 		private Image m_E_ImageButtonImage = null;
 		private Image m_E_ImageSelectImage = null;
+		private Image m_E_ItemIconImage = null;
+		private Image m_E_MailIconImage = null;
 		private Text m_E_TextConentText = null;
 		public Transform uiTransform = null;
 	}
