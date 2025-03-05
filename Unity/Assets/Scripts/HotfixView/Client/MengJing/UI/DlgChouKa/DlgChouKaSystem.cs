@@ -117,7 +117,7 @@ namespace ET.Client
             }
 
             itemList += dropShow;
-            self.View.ES_RewardList.Refresh(itemList, 0.8f, showNumber: false);
+            self.View.ES_RewardList.Refresh(itemList, 0.8f);
         }
 
         public static void OnBtn_ZhangJieXuanZeButton(this DlgChouKa self)
