@@ -84,7 +84,10 @@ namespace ET.Client
                 discount = float.Parse(set[1]);
             }
 
-            self.E_Text_DiamondNumberText.text = ((int)(needDimanond * discount)).ToString();
+            using (zstring.Block())
+            {
+                self.E_Text_DiamondNumberText.text = zstring.Format("x {0}", ((int)(needDimanond * discount)).ToString());
+            }
 
             string[] itemInfo = GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[0].Split(';');
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(int.Parse(itemInfo[0])).Icon);
