@@ -1,4 +1,5 @@
 using System;
+using ET.Server;
 using ET.Client;
 
 namespace ET
@@ -47,11 +48,21 @@ namespace ET
                 }
                 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                await timerComponent.WaitAsync(20000, cancellationToken);
+                await timerComponent.WaitAsync(TimeHelper.Minute, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     //Console.WriteLine("Behaviour_TeamDungeon.Exit: IsCancel");
                     return;
+                }
+                else
+                {
+                    ActorId roborActorId = UnitCacheHelper.GetRobotServerId();
+                    Main2RobotManager_Message main2RobotClientMessage = Main2RobotManager_Message.Create();
+                    main2RobotClientMessage.OpType = 1;
+                    main2RobotClientMessage.OpParam = root.Fiber.Id.ToString();
+                    RobotManager2Main_Message respone =
+                            await root.GetComponent<ProcessInnerSender>().Call(roborActorId, main2RobotClientMessage) as
+                                    RobotManager2Main_Message;
                 }
             }
         }

@@ -425,6 +425,13 @@ namespace ET.Client
                 int fubenId = SceneConfigHelper.GetFubenByMonster(monsterId);
                 fubenId = taskPro.FubenId > 0 ? taskPro.FubenId : fubenId;
                 string fubenName = fubenId > 0 ? " (地图:" + DungeonConfigCategory.Instance.Get(fubenId).ChapterName + ")" : "";
+
+                if (!MonsterConfigCategory.Instance.Contain(monsterId))
+                {
+                    Log.Error($"MonsterConfig not contain {monsterId}");
+                    return desc;
+                }
+                
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
 
                 string text1 = "";

@@ -1,6 +1,5 @@
 ﻿using System;
 using ET.Server;
-
 namespace ET.Client;
 
 [Event(SceneType.Demo)]
@@ -8,9 +7,8 @@ public class Robot_OnRecvTeamUpdate : AEvent<Scene, RecvTeamUpdate>
 {
     protected override async ETTask Run(Scene scene, RecvTeamUpdate args)
     {
-        Console.WriteLine("Robot_OnRecvTeamUpdate");
-
         TeamInfo selfinfo = scene.GetComponent<TeamComponentC>().GetSelfTeam();
+        Console.WriteLine($"Robot_OnRecvTeamUpdate:  {selfinfo}");
 
         if (selfinfo == null)
         {
