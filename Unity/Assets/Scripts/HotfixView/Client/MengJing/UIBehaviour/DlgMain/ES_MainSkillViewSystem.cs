@@ -702,12 +702,6 @@ namespace ET.Client
 
         public static void OnSkillCDUpdate(this ES_MainSkill self)
         {
-            if (self.SkillManagerComponent == null)
-            {
-                Unit unit = self.MainUnit;
-                self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
-            }
-
             long serverTime = TimeHelper.ServerNow();
             long pulicCd = self.SkillManagerComponent.SkillPublicCDTime - serverTime;
             for (int i = 0; i < self.UISkillGirdList_Normal.Count; i++)
@@ -733,6 +727,12 @@ namespace ET.Client
                 pulicCd);
             self.ES_FangunSkill.OnUpdate(self.SkillManagerComponent.GetCdTime(self.ES_FangunSkill.SkillId, serverTime));
         }
+        
+        public static void InitMainHero(this ES_MainSkill self)
+        {
+            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            self.SkillManagerComponent = self.MainUnit.GetComponent<SkillManagerComponentC>();
+        }
 
         /// <summary>
         /// 
@@ -742,7 +742,12 @@ namespace ET.Client
         /// <param name="petid"></param>
         public static void OnEnterScene(this ES_MainSkill self, Unit main, long petid)
         {
-            self.MainUnit = main;
+            if (main == null)
+            {
+                return; 
+            }
+
+            self.InitMainHero();
             self.OnSkillCDUpdate();
             self.CheckJingLingFunction();
             self.OnUpdateButton();

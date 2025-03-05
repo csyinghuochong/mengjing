@@ -1260,7 +1260,6 @@ namespace ET.Client
         public static void RefreshFightSet(this DlgMain self)
         {
             Scene root = self.Root();
-            Scene currentScene = root.CurrentScene();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             int petfightindex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetFightIndex);
 
@@ -1799,6 +1798,13 @@ namespace ET.Client
             dlgCellDungeonEnterShow.OnUpdateUI(chapterId);
         }
 
+        public static void InitMainHero(this DlgMain self, int sceneTypeEnum)
+        {
+            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            self.View.ES_JoystickMove.InitMainHero();
+            self.View.ES_MainSkill.InitMainHero();
+        }
+
         /// <summary>
         /// 返回myunit 并且场景加载完成 
         /// </summary>
@@ -1807,8 +1813,8 @@ namespace ET.Client
         public static void AfterEnterScene(this DlgMain self, int sceneTypeEnum)
         {
             bool zhankai = self.View.E_Button_ZhanKaiButton.transform.localScale == new Vector3(-1f, 1f, 1f);
+            
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
-
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&

@@ -90,6 +90,13 @@ namespace ET.Client
             }
         }
         
+        public static void InitMainHero(this ES_JoystickMove self)
+        {
+            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.NumericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+        }
+
+        
         public static void AfterEnterScene(this ES_JoystickMove self)
         {
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
