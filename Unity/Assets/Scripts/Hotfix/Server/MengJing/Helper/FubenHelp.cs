@@ -170,114 +170,105 @@ namespace ET.Server
 
 		private static void CreateMonsterById(Scene scene, MonsterPositionConfig monsterPosition, int MonsterID, int CreateNum)
 		{
+			if (CreateNum > 100)
+			{
+				Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
+				return;
+			}
+			
 			int mtype = monsterPosition.Type;
 			string[] position = monsterPosition.Position.Split(',');
-			if (mtype == 1) //固定位置刷怪
-			{
-				if (CreateNum > 100)
-				{
-					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
-					return;
-				}
 
-				for (int c = 0; c < CreateNum; c++)
-				{
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
-					float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
-					
-					if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_52)
+			switch (mtype)
+			{
+				case 0: //随机位置刷怪
+					break;
+				case 1: //固定位置刷怪
+					for (int c = 0; c < CreateNum; c++)
 					{
-						CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
-						if (cellDungeonComponent!=null)
+						MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
+						float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
+					
+						if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_52)
 						{
-							List<int> EnergySkills = cellDungeonComponent.EnergySkills;
-							int skillId = EnergySkills[RandomHelper.RandomNumber(0, EnergySkills.Count)];
-							EnergySkills.Remove(skillId);
-							UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3, new CreateMonsterInfo()
+							CellDungeonComponentS cellDungeonComponent = scene.GetComponent<CellDungeonComponentS>();
+							if (cellDungeonComponent!=null)
 							{
-								SkillId = skillId,
-								Camp = monsterConfig.MonsterCamp
-							});
+								List<int> EnergySkills = cellDungeonComponent.EnergySkills;
+								int skillId = EnergySkills[RandomHelper.RandomNumber(0, EnergySkills.Count)];
+								EnergySkills.Remove(skillId);
+								UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3, new CreateMonsterInfo()
+								{
+									SkillId = skillId,
+									Camp = monsterConfig.MonsterCamp
+								});
+							}
+						}
+						else
+						{
+							UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3,
+								new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = monsterPosition.Create, });
 						}
 					}
-					else
+					break;
+				case 2:
+					for (int c = 0; c < CreateNum; c++)
 					{
-						UnitFactory.CreateMonster(scene, monsterConfig.Id, vector3,
+						float range = (float) monsterPosition.CreateRange;
+						MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
+						float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
+							float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
+						UnitFactory.CreateMonster(scene, MonsterID, vector3,
 							new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = monsterPosition.Create, });
 					}
-				}
-			}
-
-			if (mtype == 2)
-			{
-				if (CreateNum > 100)
-				{
-					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
-					return ;
-				}
-		
-				for (int c = 0; c < CreateNum; c++)
-				{
-					float range = (float) monsterPosition.CreateRange;
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
-					float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
-						float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
-					UnitFactory.CreateMonster(scene, MonsterID, vector3,
-						new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = monsterPosition.Create, });
-				}
-			}
-
-			if (mtype == 3)
-			{
-				//定时刷新  YeWaiRefreshComponent
-				scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos(monsterPosition.Id);
-			}
-
-			if (mtype == 4)
-			{
-				//4; 0,0,0; 71020001; 2,2; 2, 2
-				int playerLv = 1;
-				if (scene.GetComponent<MapComponent>().SceneType == SceneTypeEnum.Tower)
-				{
-					//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
-					//playerLv = mainUnit.GetComponent<UserInfoComponentServer>().GetLv();
-				}
-
-				if (CreateNum > 100)
-				{
-					Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
-					return ;
-				}
-
-				for (int c = 0; c < CreateNum; c++)
-				{
-					float range = (float) monsterPosition.CreateRange;
-					MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
-					float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
-						float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
-					UnitFactory.CreateMonster(scene, MonsterID, vector3, new CreateMonsterInfo()
+					break;
+				case 3:
+					//定时刷新  YeWaiRefreshComponent
+					scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos(monsterPosition.Id);
+					break;
+				case 4:
+					//4; 0,0,0; 71020001; 2,2; 2, 2
+					int playerLv = 1;
+					if (scene.GetComponent<MapComponent>().SceneType == SceneTypeEnum.Tower)
 					{
-						PlayerLevel = playerLv,
-						AttributeParams = monsterPosition.Par,
-						Camp = monsterConfig.MonsterCamp,
-						Rotation = monsterPosition.Create,
-					});
-				}
-			}
+						//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
+						//playerLv = mainUnit.GetComponent<UserInfoComponentServer>().GetLv();
+					}
 
-			if (mtype == 5 || mtype == 6)
-			{
-				//固定时间刷新  YeWaiRefreshComponent
-				//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
-			}
+					if (CreateNum > 100)
+					{
+						Log.Error($"monsterPosition.CreateNum:  {CreateNum}");
+						return ;
+					}
 
-			// Admin:
-			// 类型3：  30,60 30s后开始刷新     每60s刷一轮
-			// 类型7    10,2@20,2             10s 刷新一波 20刷新2波  后面跟的是怪物数量,怪物ID从前面随机获取
-			if (mtype == 7)
-			{
-				//定时刷新  YeWaiRefreshComponent
-				scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByRandom(monsterPosition);
+					for (int c = 0; c < CreateNum; c++)
+					{
+						float range = (float) monsterPosition.CreateRange;
+						MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(MonsterID);
+						float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
+							float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
+						UnitFactory.CreateMonster(scene, MonsterID, vector3, new CreateMonsterInfo()
+						{
+							PlayerLevel = playerLv,
+							AttributeParams = monsterPosition.Par,
+							Camp = monsterConfig.MonsterCamp,
+							Rotation = monsterPosition.Create,
+						});
+					}
+					break;
+				case 5:
+				case 6:
+					//固定时间刷新  YeWaiRefreshComponent
+					//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByPos_2(monsterPosition.Id);
+					break;
+				case 7:
+					// 类型3：  30,60 30s后开始刷新     每60s刷一轮
+					// 类型7    10,2@20,2             10s 刷新一波 20刷新2波  后面跟的是怪物数量,怪物ID从前面随机获取
+					//定时刷新  YeWaiRefreshComponent
+                    				scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterByRandom(monsterPosition);
+					break;
+				default:
+					break;	
 			}
 		}
 
