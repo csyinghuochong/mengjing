@@ -101,6 +101,7 @@ namespace ET.Client
 			this.m_EG_JiHuoSetRectTransform = null;
 			this.m_EG_ItemNodeRectTransform = null;
 			this.uiTransform = null;
+			this.uIItems.Clear();		// 引用类型清空 不然第二次打开有问题 看一会怎么全部优化一下 
 			this.DataId = 0;
 		}
 
