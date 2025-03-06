@@ -4,6 +4,7 @@ Shader "Toon/BasicURPShadow"
     {
         [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
         [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
+        _ShadowIntensity("Shadow Intensity", Range(0, 1)) = 0.5
     }
 
     SubShader
@@ -15,9 +16,9 @@ Shader "Toon/BasicURPShadow"
             "Queue" = "Geometry"
         }
 
-        // 禁止投射阴影
+        // 禁用阴影投射
         UsePass "Universal Render Pipeline/Lit/ShadowCaster"
-        
+
         Pass
         {
             Name "ForwardLit"
@@ -48,9 +49,8 @@ Shader "Toon/BasicURPShadow"
             {
                 float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float3 normalWS : TEXCOORD1;
-                float3 positionWS : TEXCOORD2;
-                float4 shadowCoord : TEXCOORD3;
+                float3 positionWS : TEXCOORD1;
+                float4 shadowCoord : TEXCOORD2;
             };
 
             TEXTURE2D(_BaseMap);
@@ -59,6 +59,7 @@ Shader "Toon/BasicURPShadow"
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 half4 _BaseColor;
+                float _ShadowIntensity;
             CBUFFER_END
 
             Varyings vert(Attributes input)
@@ -69,9 +70,6 @@ Shader "Toon/BasicURPShadow"
                 VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
                 output.positionCS = vertexInput.positionCS;
                 output.positionWS = vertexInput.positionWS;
-                
-                // 法线变换（统一处理为正面法线）
-                output.normalWS = normalize(mul((float3x3)GetObjectToWorldMatrix(), input.normalOS));
                 
                 // 处理UV
                 output.uv = TRANSFORM_TEX(input.uv, _BaseMap);
@@ -84,25 +82,21 @@ Shader "Toon/BasicURPShadow"
 
             half4 frag(Varyings input) : SV_Target
             {
-                // 采样基础贴图
-                half4 albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
+                // 直接采样贴图颜色（不受光照影响）
+                half4 baseColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv) * _BaseColor;
                 
-                // 主光源数据
+                // 获取阴影衰减
                 Light mainLight = GetMainLight(input.shadowCoord);
+                float shadow = lerp(1.0, mainLight.shadowAttenuation, _ShadowIntensity);
                 
-                // 阴影衰减
-                float shadow = mainLight.shadowAttenuation;
+                // 应用阴影（保持贴图原有颜色，仅叠加阴影效果）
+                half3 finalColor = baseColor.rgb * shadow;
                 
-                // 统一光照方向（消除背面变暗）
-                float3 lightDir = normalize(mainLight.direction);
-                float NdotL = saturate(dot(abs(input.normalWS), lightDir));
-                
-                // 最终颜色计算
-                half3 color = albedo.rgb * mainLight.color * (NdotL * shadow);
-                
-                return half4(color, albedo.a);
+                return half4(finalColor, baseColor.a);
             }
             ENDHLSL
         }
     }
+    
+    Fallback "Universal Render Pipeline/Unlit"
 }
