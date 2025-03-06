@@ -11,7 +11,7 @@ namespace ET.Client
 		public ItemInfo BagInfo { get => this.bagInfo; set => this.bagInfo = value; }
 		public ItemOperateEnum ItemOpetateType;
 		public int CurrentHouse;
-		public float TitleBigHeight_160;      //底图头部的宽度
+		public float TitleBigHeight_234;      //底图头部的宽度
 		public float TextItemHeight_40;       //底图属性的宽度
 		public float TitleMiniHeight_50;
 

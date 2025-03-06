@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_SaveStoreHouseButton.AddListener(self.OnSaveStoreHouseButton);
             self.E_StoreHouseSetButton.AddListener(self.OnStoreHouseSetButton);
 
-            self.TitleBigHeight_160 = 234f; //标题底框高度
+            self.TitleBigHeight_234 = 234f; //标题底框高度
             self.TitleMiniHeight_50 = 50; //条目标题高度
             self.TextItemHeight_40 = 40; //条目文本高度
 
@@ -221,6 +221,7 @@ namespace ET.Client
                 self.E_SaveStoreHouseButton.gameObject.SetActive(false);
                 self.E_HuiShouFangZhiButton.gameObject.SetActive(false);
                 self.E_TakeButton.gameObject.SetActive(false);
+                self.EG_EquipZhuanJingSetRectTransform.gameObject.SetActive(false);
                 switch (self.ItemOpetateType)
                 {
                     case ItemOperateEnum.None:
@@ -283,8 +284,10 @@ namespace ET.Client
                         ItemViewHelp.ShowBaseAttribute(equipItemList, bagInfo, self.E_EquipPropertyTextText.gameObject,
                             self.EG_EquipBaseSetListRectTransform.gameObject);
 
+                
+                
                 //显示宝石
-                float startPostionY = 0 - self.TitleBigHeight_160 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
+                float startPostionY = 0 - self.TitleBigHeight_234 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
                 Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
                 self.EG_UIEquipGemHoleSetRectTransform.GetComponent<RectTransform>().anchoredPosition = equipNeedvec2;
                 int gemNumber = 0;
@@ -344,10 +347,17 @@ namespace ET.Client
                 }
 
                 float gemHoleShowHeight = gemNumber > 0 ? 135f : 20f;
-
                 //显示专精属性
                 startPostionY -= gemHoleShowHeight;
                 startPostionY -= 5f;
+                
+                //展示类装备不显示宝石
+                // if (self.BagInfo.BagInfoID == 0)
+                // {
+                //     self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false); 
+                //     startPostionY += 50;
+                // }
+                
                 int zhunjingNumber = self.ShowZhuanJingAttribute(itemConfig, startPostionY);
 
                 //显示隐藏技能
