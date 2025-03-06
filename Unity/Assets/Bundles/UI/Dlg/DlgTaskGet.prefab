@@ -685,7 +685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9027789709664209399}
-  - component: {fileID: 8397295992457674275}
+  - component: {fileID: 1205010280244045545}
   - component: {fileID: 6091745927286945842}
   - component: {fileID: 354508661755469863}
   - component: {fileID: 6981055679237773921}
@@ -716,7 +716,7 @@ RectTransform:
   m_AnchoredPosition: {x: -370, y: 16}
   m_SizeDelta: {x: 700, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8397295992457674275
+--- !u!114 &1205010280244045545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -725,14 +725,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 911132408113501657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSource:
-    prefabName: Item_TaskFubenItem
-    poolSize: 5
-  totalCount: 0
-  reverseDirection: 0
   m_Content: {fileID: 2755220653043328994}
   m_Horizontal: 0
   m_Vertical: 1

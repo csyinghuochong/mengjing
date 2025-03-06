@@ -568,7 +568,7 @@ namespace ET.Client
 			}
 		}
 		
-		public LoopVerticalScrollRect E_TaskFubenItemsLoopVerticalScrollRect
+		public ScrollRect E_TaskFubenItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -579,7 +579,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskFubenItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_TaskFubenItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskFubenItems");
+		    		this.m_E_TaskFubenItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<ScrollRect>(this.uiTransform.gameObject,"E_TaskFubenItems");
      			}
      			return this.m_E_TaskFubenItemsLoopVerticalScrollRect;
      		}
@@ -659,7 +659,7 @@ namespace ET.Client
 		private Text m_E_Lab_TaskName = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private LoopVerticalScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
+		private ScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

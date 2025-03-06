@@ -20,7 +20,7 @@ namespace ET.Client
         public ETCancellationToken CancellationToken;
 
         public Dictionary<int, EntityRef<Scroll_Item_TaskGetItem>> ScrollItemTaskGetItems = new();
-        public Dictionary<int, EntityRef<Scroll_Item_TaskFubenItem>> ScrollItemTaskFubenItems;
+        public Dictionary<int, EntityRef<Scroll_Item_TaskFubenItem>> ScrollItemTaskFubenItems = new();
         public Dictionary<int, EntityRef<Scroll_Item_TaskRewardItem>> ScrollItemTaskRewardItems;
     }
 }

@@ -21,7 +21,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTaskGet self)
         {
             // self.View.E_TaskGetItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGetItemsRefresh);
-            self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
+            // self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
             self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.OnBtn_EnergyDuihuanButton);
@@ -132,15 +132,51 @@ namespace ET.Client
             {
                 case 1: //神兽兑换
                 case 2: //挑戰之地
+                {
                     self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
                     if (npcConfig.NpcPar != null)
                     {
                         List<int> fubenList = new List<int>(npcConfig.NpcPar);
-                        self.AddUIScrollItems(ref self.ScrollItemTaskFubenItems, fubenList.Count);
-                        self.View.E_TaskFubenItemsLoopVerticalScrollRect.SetVisible(true, fubenList.Count);
+
+                        ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+                        for (int i = 0; i < npcConfig.NpcPar.Length; i++)
+                        {
+                            if (!self.ScrollItemTaskFubenItems.ContainsKey(i))
+                            {
+                                Scroll_Item_TaskFubenItem item = self.AddChild<Scroll_Item_TaskFubenItem>();
+                                string prefabPath = "Assets/Bundles/UI/Item/Item_TaskFubenItem.prefab";
+                                if (!self.AssetList.Contains(prefabPath))
+                                {
+                                    self.AssetList.Add(prefabPath);
+                                }
+
+                                GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(prefabPath);
+                                GameObject gameObject = UnityEngine.Object.Instantiate(prefab,
+                                    self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject.transform);
+                                item.BindTrans(gameObject.transform);
+                                self.ScrollItemTaskFubenItems.Add(i, item);
+                            }
+
+                            Scroll_Item_TaskFubenItem scrollItemTaskFubenItem = self.ScrollItemTaskFubenItems[i];
+                            scrollItemTaskFubenItem.OnInitData((npcType, fubenId) => { self.OnClickFubenItem(npcType, fubenId); }, npcConfig.NpcType,
+                                fubenList[i]);
+                        }
+
+                        if (self.ScrollItemTaskFubenItems.Count > fubenList.Count)
+                        {
+                            for (int i = fubenList.Count; i < self.ScrollItemTaskFubenItems.Count; i++)
+                            {
+                                Scroll_Item_TaskFubenItem scrollItemTaskFubenItem = self.ScrollItemTaskFubenItems[i];
+                                scrollItemTaskFubenItem.uiTransform.gameObject.SetActive(false);
+                            }
+                        }
+
+                        // self.AddUIScrollItems(ref self.ScrollItemTaskFubenItems, fubenList.Count);
+                        // self.View.E_TaskFubenItemsLoopVerticalScrollRect.SetVisible(true, fubenList.Count);
                     }
 
                     break;
+                }
                 case 3: //循环任务 周任务 支线任务 藏宝图任务
                     bool update = self.UpdataTask();
                     self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(update);
