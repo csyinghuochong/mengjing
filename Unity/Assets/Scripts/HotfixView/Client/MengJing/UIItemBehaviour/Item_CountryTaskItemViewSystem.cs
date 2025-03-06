@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof(Scroll_Item_CountryTaskItem))]
     [EntitySystemOf(typeof(Scroll_Item_CountryTaskItem))]
@@ -32,9 +34,9 @@
                     taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
             }
 
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
-            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            // self.E_ImageIconImage.sprite = sp;
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_ImageIconImage.sprite = sp;
 
             // foreach (string str in taskConfig.RewardItem.Split('@'))
             // {
