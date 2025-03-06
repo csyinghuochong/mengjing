@@ -81,6 +81,7 @@ namespace ET.Server
                             }
 
                             Log.Error("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
+                            Console.WriteLine("二次登录失败  " + reqEnter.Error + " | " + reqEnter.Message);
                             response.Error = ErrorCode.ERR_ReEnterGameError;
                             await DisconnectHelper.KickPlayerNoLock(player, 1);
                             session.Disconnect().Coroutine();
