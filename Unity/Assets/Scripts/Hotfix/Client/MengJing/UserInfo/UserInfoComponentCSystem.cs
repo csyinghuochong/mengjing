@@ -140,6 +140,8 @@ namespace ET.Client
                     return "0";
                 case GameSettingEnum.PickSet:
                     return "0@0";
+                case GameSettingEnum.Shadow:
+                    return "1";
                 default:
                     return "0";
             }
