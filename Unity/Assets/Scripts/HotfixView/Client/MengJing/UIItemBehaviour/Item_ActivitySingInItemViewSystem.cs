@@ -38,8 +38,10 @@ namespace ET.Client
             }
 
             string[] itemInfo = activityConfig.Par_2.Split(';');
+            int itemid = int.Parse(itemInfo[0]);    
+            ItemConfig itemConfig= ItemConfigCategory.Instance.Get(itemid);     
             self.E_ItemIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
             self.E_ItemNumText.text = itemInfo[1];
 
             self.UpdateLingQu();
