@@ -684,6 +684,23 @@ namespace ET.Client
      		}
      	}
 
+		public RectTransform EG_EquipHintSkillSetList
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_EquipHintSkillSetList == null )
+				{
+					this.m_EG_EquipHintSkillSetList = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipHintSkill/E_EquipHintSkillSetList");
+				}
+				return this.m_EG_EquipHintSkillSetList;
+			}
+		}
+
 		public Text E_WearNeedText
      	{
      		get
@@ -1101,6 +1118,7 @@ namespace ET.Client
 			this.m_E_UseButton = null;
 			this.m_E_UseImage = null;
 			this.m_EG_RoseEquipOpenSetRectTransform = null;
+			this.m_EG_EquipHintSkillSetList = null;
 			this.m_E_TakeoffButton = null;
 			this.m_E_TakeoffImage = null;
 			this.uiTransform = null;
@@ -1164,6 +1182,7 @@ namespace ET.Client
 		private Button m_E_UseButton = null;
 		private Image m_E_UseImage = null;
 		private RectTransform m_EG_RoseEquipOpenSetRectTransform = null;
+		private RectTransform m_EG_EquipHintSkillSetList = null;
 		private Button m_E_TakeoffButton = null;
 		private Image m_E_TakeoffImage = null;
 		public Transform uiTransform = null;

@@ -352,11 +352,11 @@ namespace ET.Client
                 startPostionY -= 5f;
                 
                 //展示类装备不显示宝石
-                // if (self.BagInfo.BagInfoID == 0)
-                // {
-                //     self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false); 
-                //     startPostionY += 50;
-                // }
+                if (self.BagInfo.BagInfoID == 0)
+                {
+                    self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false); 
+                    startPostionY += 50;
+                }
                 
                 int zhunjingNumber = self.ShowZhuanJingAttribute(itemConfig, startPostionY);
 
@@ -594,7 +594,7 @@ namespace ET.Client
                     {
                         string showHintTxt = zstring.Format("{0}：{1}", LanguageComponent.Instance.LoadLocalization("技能"), skillName);
                         ItemViewHelp.ShowPropertyText(showHintTxt, "4", self.E_EquipPropertyTextText.gameObject,
-                            self.EG_EquipHintSkillRectTransform.gameObject);
+                            self.EG_EquipHintSkillSetList.gameObject);
                     }
 
                     properShowNum += 1;
