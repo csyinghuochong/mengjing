@@ -213,7 +213,7 @@ namespace ET
                         }
                     }
 
-                    triggerPro = taskCountryConfig.TriggerValue;
+                    triggerPro = taskCountryConfig.Weight;
                     writeTaskID_Next = taskCountryConfig.NextTask;
 
                     if (writeTaskID_Next == 0)
