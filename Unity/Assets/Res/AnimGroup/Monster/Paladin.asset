@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Paladin
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Paladin_Attack
+    AnimationClip: {fileID: 3071484889224735476, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Damage
+  - StateName: Paladin_Damage
+    AnimationClip: {fileID: -4033800910099844247, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Death
+  - StateName: Paladin_Death
+    AnimationClip: {fileID: -2493317710058382319, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Idle
+  - StateName: Paladin_Idle
+    AnimationClip: {fileID: -6506938584977803237, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Idle_long
+  - StateName: Paladin_Idle_long
+    AnimationClip: {fileID: -8230694816052482616, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Walk
+  - StateName: Paladin_Walk
+    AnimationClip: {fileID: -2876645152291955850, guid: c707114c2e5fe3c4092b5feb2535be35,
+      type: 3}
+    Speed: 1
+    NextStateName: Paladin_Attack

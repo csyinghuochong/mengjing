@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Magicbook_Animations_Check
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Move
+    AnimationClip: {fileID: -6505420529512041809, guid: dd3f0c75b333dc444ae9ff65f085c957,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: New State
+    AnimationClip: {fileID: 0}
+    Speed: 1
+    NextStateName: 
+  - StateName: Idle
+    AnimationClip: {fileID: 6466502959160713168, guid: e09ac5e2bcd6d754699ee11f16eca620,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack
+    AnimationClip: {fileID: -526806073688342552, guid: e9ee2176ebcf32f4ab9c90a9c7c1e5e9,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Damage
+    AnimationClip: {fileID: 7790536442349652062, guid: f2a1a2b377c94fa42b870c5508c1204f,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Die
+    AnimationClip: {fileID: 8177436498849890679, guid: 48fab230475a4ec4b81dc95a4087abbd,
+      type: 3}
+    Speed: 1
+    NextStateName: 

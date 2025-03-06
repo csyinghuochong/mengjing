@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Devilu_Animations_Check
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Move
+    AnimationClip: {fileID: -850809356027840095, guid: 645fbdfbd3f276d46af440f249f14e3a,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: New State
+    AnimationClip: {fileID: 0}
+    Speed: 1
+    NextStateName: 
+  - StateName: Idle
+    AnimationClip: {fileID: 7394383946303536532, guid: ffca11430b5c658468892239afa334ed,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack
+    AnimationClip: {fileID: -6145948987690942304, guid: c64a3395db5001943a626e71e4bb515c,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Damage
+    AnimationClip: {fileID: -5836447463271726442, guid: dfef25185907f4c4fabc3efe939f4547,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Die
+    AnimationClip: {fileID: -9107413605874475190, guid: e0340b17600b7124db89bd562bb8ff93,
+      type: 3}
+    Speed: 1
+    NextStateName: 

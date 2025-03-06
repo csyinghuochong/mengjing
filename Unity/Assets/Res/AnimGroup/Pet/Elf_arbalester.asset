@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Elf_arbalester
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Elf_arbalester_Attack
+    AnimationClip: {fileID: 776501014172576944, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Damage
+  - StateName: Elf_arbalester_Damage
+    AnimationClip: {fileID: -8244687459422708611, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Death
+  - StateName: Elf_arbalester_Death
+    AnimationClip: {fileID: -4124584508442763900, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Idle
+  - StateName: Elf_arbalester_Idle
+    AnimationClip: {fileID: -119678563960161720, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Idle_long
+  - StateName: Elf_arbalester_Idle_long
+    AnimationClip: {fileID: -5248581432334518433, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Shot
+  - StateName: Elf_arbalester_Run
+    AnimationClip: {fileID: 1946659407117300092, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Attack
+  - StateName: Elf_arbalester_Shot
+    AnimationClip: {fileID: 7092439004482707478, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: Elf_arbalester_Run
+  - StateName: Elf_arbalester_Tpose
+    AnimationClip: {fileID: -7366378717654659607, guid: f52efa120541cff47aa7197c2bf5c954,
+      type: 3}
+    Speed: 1
+    NextStateName: 

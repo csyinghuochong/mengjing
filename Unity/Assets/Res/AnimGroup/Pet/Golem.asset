@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Golem
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Golem_Attack
+    AnimationClip: {fileID: -3896885640705118079, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Damage
+  - StateName: Golem_Damage
+    AnimationClip: {fileID: -5820232839456985624, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Death
+  - StateName: Golem_Death
+    AnimationClip: {fileID: -8052750737918154264, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Idle
+  - StateName: Golem_Idle
+    AnimationClip: {fileID: 5361153175256386553, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Idle_long
+  - StateName: Golem_Idle_long
+    AnimationClip: {fileID: 3052567957919671617, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Walk
+  - StateName: Golem_Walk
+    AnimationClip: {fileID: 8520957437536398688, guid: b94f82332d224744ab18d6dbafb6699e,
+      type: 3}
+    Speed: 1
+    NextStateName: Golem_Attack

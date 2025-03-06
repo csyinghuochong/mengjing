@@ -371,8 +371,8 @@ namespace ET.Client
 
         public static void ShowRoleDi(this GameObjectComponent self, bool show)
         {
-            GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
-            di.SetActive(show);
+            //GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
+            //di.SetActive(show);
         }
 
         public static void CheckRunState(this GameObjectComponent self)
@@ -1062,12 +1062,12 @@ namespace ET.Client
             self.Material.SetFloat("_Alpha", alpha);
 
             // 脚底阴影隐形
-            if (self.GameObject.transform.Find("fake shadow (5)") != null)
-            {
-                GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
-                Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
-                di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, alpha);
-            }
+            // if (self.GameObject.transform.Find("fake shadow (5)") != null)
+            // {
+            //     GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
+            //     Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
+            //     di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, alpha);
+            // }
 
             // 脚底Buff隐形
             foreach (Effect aEffectHandler in unit.GetComponent<EffectViewComponent>().Effects)
@@ -1106,12 +1106,12 @@ namespace ET.Client
 
             // 脚底阴影恢复
             GameObject di = null;
-            if (self.GameObject.transform.Find("fake shadow (5)") != null)
-            {
-                di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
-                Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
-                di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, 0.5f);
-            }
+            // if (self.GameObject.transform.Find("fake shadow (5)") != null)
+            // {
+            //     di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
+            //     Color oldColorDi = di.GetComponent<MeshRenderer>().material.color;
+            //     di.GetComponent<MeshRenderer>().material.color = new Color(oldColorDi.r, oldColorDi.g, oldColorDi.b, 0.5f);
+            // }
 
             // 脚底Buff恢复
             foreach (var entity in unit.GetComponent<EffectViewComponent>().Children)

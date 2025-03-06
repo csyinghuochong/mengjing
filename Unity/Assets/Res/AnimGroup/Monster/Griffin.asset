@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Griffin
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Griffin_Attack_fly
+    AnimationClip: {fileID: -454610499225912139, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Attack_ground
+  - StateName: Griffin_Attack_ground
+    AnimationClip: {fileID: 1638057734245064524, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Damage
+  - StateName: Griffin_Damage
+    AnimationClip: {fileID: -3855390952360259259, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Death
+  - StateName: Griffin_Death
+    AnimationClip: {fileID: 9113611685691052469, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Fly
+  - StateName: Griffin_Fly
+    AnimationClip: {fileID: -6842044512095852459, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Idle
+  - StateName: Griffin_Idle
+    AnimationClip: {fileID: 7717223293303972438, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Landing
+  - StateName: Griffin_Landing
+    AnimationClip: {fileID: 2696751230130814108, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Stand
+  - StateName: Griffin_Stand
+    AnimationClip: {fileID: 140418763064768131, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Take_off
+  - StateName: Griffin_Take_off
+    AnimationClip: {fileID: 1570945702434808834, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Walk
+  - StateName: Griffin_Walk
+    AnimationClip: {fileID: 8026464980679107707, guid: e80940fd0eb84124cad2c24181540cba,
+      type: 3}
+    Speed: 1
+    NextStateName: Griffin_Attack_fly

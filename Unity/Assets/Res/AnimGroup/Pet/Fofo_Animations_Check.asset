@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Fofo_Animations_Check
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Move
+    AnimationClip: {fileID: 9093772097223845002, guid: c343f23f6b7bf7b478e3d2407c802d0e,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: New State
+    AnimationClip: {fileID: 0}
+    Speed: 1
+    NextStateName: 
+  - StateName: Idle
+    AnimationClip: {fileID: -3151565555237890620, guid: c2a6037b7620ba94abc71c20a0970450,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack
+    AnimationClip: {fileID: -8690935883236062380, guid: 7b10789ed8aed194b92b8b21ae9a3d22,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Damage
+    AnimationClip: {fileID: -1978592971267190842, guid: 3631bcad34198ae4d8f57cb37bcd7e26,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Die
+    AnimationClip: {fileID: 5274989643193016248, guid: 510b4d8127c222f40ab848f435666636,
+      type: 3}
+    Speed: 1
+    NextStateName: 

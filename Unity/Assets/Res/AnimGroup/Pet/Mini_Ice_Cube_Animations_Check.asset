@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Mini_Ice_Cube_Animations_Check
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Move
+    AnimationClip: {fileID: -2553108179912576340, guid: e9a621bbcf499fb47a16a5633ab75149,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: New State
+    AnimationClip: {fileID: 0}
+    Speed: 1
+    NextStateName: 
+  - StateName: Idle
+    AnimationClip: {fileID: -8970303428292135354, guid: d741eb9495f1d71459050ce29d978e96,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Attack
+    AnimationClip: {fileID: 8384980032444454030, guid: 5b33238f24b2f0248949be34dd279883,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Damage
+    AnimationClip: {fileID: 6064163796675816857, guid: 5d663913d67ee584589ddad7b2749a52,
+      type: 3}
+    Speed: 1
+    NextStateName: 
+  - StateName: Die
+    AnimationClip: {fileID: -5588188863812216692, guid: 6f7bf35c367ec524b86a923abd05175e,
+      type: 3}
+    Speed: 1
+    NextStateName: 

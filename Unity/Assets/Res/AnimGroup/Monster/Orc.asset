@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1ccaf882e41cd4d9cc3acea406739c, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  AnimInfos:
+  - StateName: Orc_Attack
+    AnimationClip: {fileID: 136418036038257936, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Death
+  - StateName: Orc_Death
+    AnimationClip: {fileID: -2265968702973956624, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Hit
+  - StateName: Orc_Hit
+    AnimationClip: {fileID: -3561289222963964754, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Idle
+  - StateName: Orc_Idle
+    AnimationClip: {fileID: 7107234076973956223, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Idle_long
+  - StateName: Orc_Idle_long
+    AnimationClip: {fileID: -2498672518916173519, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Walk
+  - StateName: Orc_Walk
+    AnimationClip: {fileID: -1033540805288742838, guid: 6f69b951037438246a0d302e9a081c8b,
+      type: 3}
+    Speed: 1
+    NextStateName: Orc_Attack

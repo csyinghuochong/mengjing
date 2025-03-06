@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimGroup: {fileID: 11400000, guid: 428ca3680653ccf46a38175297498286, type: 2}
+  AnimGroup: {fileID: 11400000, guid: 10b3beb3e420aab4dba330f15c40e38a, type: 2}
 --- !u!1 &2169910270574798433
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +642,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4201577943226334160}
   - component: {fileID: 4710413288292428860}
+  - component: {fileID: 1059722980384781911}
+  - component: {fileID: 280534476480625612}
   m_Layer: 0
   m_Name: Squif_B
   m_TagString: Untagged
@@ -687,6 +689,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1059722980384781911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544994830806916676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 4710413288292428860}
+  _ActionOnDisable: 0
+--- !u!114 &280534476480625612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544994830806916676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3967c910cf9304a90fe607c1531405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimGroup: {fileID: 11400000, guid: d8bb2204e504b1340a60c978206c7761, type: 2}
 --- !u!1 &3792696845566634347
 GameObject:
   m_ObjectHideFlags: 0
