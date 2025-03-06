@@ -52,7 +52,11 @@
 
             using (zstring.Block())
             {
-                zstring rewardItem = "1;" + taskConfig.TaskCoin + "@" + taskConfig.RewardItem;
+                zstring rewardItem = "1;" + taskConfig.TaskCoin;
+                if (!CommonHelp.IfNull(taskConfig.RewardItem))
+                {
+                    rewardItem += "@" + taskConfig.RewardItem;
+                }
                 self.ES_RewardList.Refresh(rewardItem);
             }
 
