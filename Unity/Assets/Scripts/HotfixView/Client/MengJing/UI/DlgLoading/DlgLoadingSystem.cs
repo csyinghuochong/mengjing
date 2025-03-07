@@ -107,11 +107,11 @@ namespace ET.Client
 
             if (!loadResName.Equals("MainCity"))
             {
-                // var path = ABPathHelper.GetJpgPath(loadResName);
-                // Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                // self.View.E_Back_1Image.sprite = atlas;
-                // self.View.E_Back_1Image.gameObject.SetActive(true);
-                // self.AssetPath = path;
+                var path = ABPathHelper.GetJpgPath(loadResName);
+                Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.View.E_Back_1Image.sprite = atlas;
+                self.View.E_Back_1Image.gameObject.SetActive(true);
+                self.AssetPath = path;
             }
 
             self.PassTime = 0f;
