@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -46,11 +47,13 @@ namespace ET.Client
                 }
             }
 
-            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-            if (!string.IsNullOrEmpty(sceneConfig.Icon))
+            //SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            List<int> monsterIds = MapViewHelper.GetSceneShowMonsters(sceneId);
+            if (monsterIds.Count > 0)
             {
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterIds[0]);
                 self.E_IconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig.Icon));
+                       .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, monsterConfig.MonsterHeadIcon)); 
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

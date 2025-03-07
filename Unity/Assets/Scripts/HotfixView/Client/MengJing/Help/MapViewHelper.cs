@@ -196,6 +196,34 @@ namespace ET.Client
             }
         }
 
+        public static List<int> GetSceneShowMonsters(int sceneId)
+        {
+            
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            List<int> monsterIds = new List<int>();     
+            foreach (int posi in sceneConfig.CreateMonsterPosi)
+            {
+                MonsterPositionConfig monsterPositionConfig = MonsterPositionConfigCategory.Instance.Get(posi);
+                foreach (int monsterId in monsterPositionConfig.MonsterID)
+                {
+                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
+
+                    if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+                    {
+                        continue;
+                    }
+
+                    if (monsterIds.Contains(monsterId))
+                    {
+                        continue;
+                    }
+
+                    monsterIds.Add(monsterId);
+                }
+            }
+            return monsterIds;  
+        }
+        
         public static void OnMainHeroMove(Unit self)
         {
             long curTime = TimeInfo.Instance.ServerNow();

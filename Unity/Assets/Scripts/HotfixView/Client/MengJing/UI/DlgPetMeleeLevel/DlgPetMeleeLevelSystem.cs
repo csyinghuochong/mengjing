@@ -223,26 +223,7 @@ namespace ET.Client
             self.View.E_LevelNameText.text = sceneConfig.Name;
 
             self.ShowMonsterIds.Clear();
-            foreach (int posi in sceneConfig.CreateMonsterPosi)
-            {
-                MonsterPositionConfig monsterPositionConfig = MonsterPositionConfigCategory.Instance.Get(posi);
-                foreach (int monsterId in monsterPositionConfig.MonsterID)
-                {
-                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
-
-                    if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
-                    {
-                        continue;
-                    }
-
-                    if (self.ShowMonsterIds.Contains(monsterId))
-                    {
-                        continue;
-                    }
-
-                    self.ShowMonsterIds.Add(monsterId);
-                }
-            }
+            self.ShowMonsterIds = MapViewHelper.GetSceneShowMonsters(sceneId);
 
             self.AddUIScrollItems(ref self.ScrollItemMonsterItems, self.ShowMonsterIds.Count);
             self.View.E_MonsterItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMonsterIds.Count);
