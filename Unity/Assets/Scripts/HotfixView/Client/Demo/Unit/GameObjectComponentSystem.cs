@@ -667,7 +667,7 @@ namespace ET.Client
                     {
                         self.OnAddCollider(go);
                         unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
-                        unit.AddComponent<UISceneItemComponent>(true).OnInitEnergyTableUI().Coroutine(); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true).OnInitEnergyTableUI(); //血条UI组件
                     }
                     else if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
                     {
@@ -1105,7 +1105,7 @@ namespace ET.Client
             self.Material.shader = GlobalHelp.Find(self.OldShader);
 
             // 脚底阴影恢复
-            GameObject di = null;
+            //GameObject di = null;
             // if (self.GameObject.transform.Find("fake shadow (5)") != null)
             // {
             //     di = self.GameObject.transform.Find("fake shadow (5)").gameObject;

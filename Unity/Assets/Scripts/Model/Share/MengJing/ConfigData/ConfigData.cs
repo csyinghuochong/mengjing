@@ -1879,7 +1879,9 @@ namespace ET
         };
 
         [StaticField]
-        public static List<ServerItem> ServerItems = new List<ServerItem>();
+        public static List<ServerItem> ServerItems = new List<ServerItem>()
+        {
+        };
 
         /// <summary>
         /// 小龟说话

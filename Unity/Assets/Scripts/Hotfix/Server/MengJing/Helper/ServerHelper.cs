@@ -171,42 +171,41 @@ namespace ET
             for (int i  = 0; i < allserverList.Count; i++)
             {
                 ServerItem serverItem = allserverList[i];
+                
                 if (!servertozone.ContainsKey(serverItem.ServerIp))
                 {
                     servertozone.Add( serverItem.ServerIp, new  List<int>());
                 }
-
                 if (servertozone[serverItem.ServerIp].Contains(serverItem.ServerId))
                 {
                     Console.WriteLine("ServerItem 配置重复: " + serverItem.ServerIp );
                     Log.Error("ServerItem 配置重复: " + serverItem.ServerIp);
                     break;
                 }
-                
+
                 servertozone[serverItem.ServerIp].Add(serverItem.ServerId);
             }
         }
 
         public static List<ServerItem> GetServerList(int  versionMode)
         {
-            List<ServerItem> ServerItems = ConfigData.ServerItems;
-            if (ServerItems.Count > 0 )
+            if (ConfigData.ServerItems.Count > 0 )
             { 
-                return ServerItems;
+                return ConfigData.ServerItems;
             }
             //Log.Debug("UpdateServerList");
-            ServerItems.Clear();
-            string ip = GetRouterHttpHost(versionMode);
-            List<ServerItem> serverItems_1 = ServerItems;
             
-            serverItems_1.Add( GetServerItem( 1, $"{ip}:20325", "封测一区", 1720782000000, 1 ) );
-            serverItems_1.Add( GetServerItem( 2, $"{ip}:20335", "封测二区", 1720954800000, 1 ) );
-            serverItems_1.Add( GetServerItem( 3, $"{ip}:20345", "封测三区", 1721041200000, 1 ) );
+            string ip = GetRouterHttpHost(versionMode);
+  
+            ConfigData.ServerItems.Clear();
+            ConfigData.ServerItems.Add( GetServerItem( 1, $"{ip}:20325", "封测一区", 1720782000000, 1 ) );
+            ConfigData.ServerItems.Add( GetServerItem( 2, $"{ip}:20335", "封测二区", 1720954800000, 1 ) );
+            ConfigData.ServerItems.Add( GetServerItem( 3, $"{ip}:20345", "封测三区", 1721041200000, 1 ) );
 
-            CheckServerIds(serverItems_1);
+            CheckServerIds(ConfigData.ServerItems);
             
             ///PlatformHelper.GetPlatformName(); 所有渠道ID定义
-            return serverItems_1;
+            return ConfigData.ServerItems;
         }
     }
 }

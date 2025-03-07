@@ -62,7 +62,7 @@ namespace ET.Client
             self.GameObject.Get<GameObject>("Lal_Desc").GetComponent<Text>().text = skillConfig.SkillDescribe;
         }
 
-        public static async ETTask OnInitEnergyTableUI(this UISceneItemComponent self)
+        public static  void OnInitEnergyTableUI(this UISceneItemComponent self)
         {
             string path = ABPathHelper.GetUGUIPath("Blood/UISceneItem");
             self.HeadBarPath = path;

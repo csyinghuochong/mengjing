@@ -449,7 +449,6 @@ namespace ET.Client
                                         //     break;
                                         // case 7: //// 7: 己方召唤兽，包含宠物
                                         //     canBuff = uu.GetMasterId() == self.TheUnitFrom.Id;
-                                        break;
                                     default:
                                         break;
                                 }
