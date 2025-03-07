@@ -1235,7 +1235,11 @@ namespace ET.Server
                 {
                     continue;
                 }
-                self.RoleTaskList.RemoveAt(i);
+
+                if (TaskHelper.IsDailyTask(taskCountry.TaskType))
+                {
+                    self.RoleTaskList.RemoveAt(i);
+                }
             }
 
             self.ReceiveHuoYueIds.Clear();
@@ -1256,6 +1260,7 @@ namespace ET.Server
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
             Log.Debug($"RoleTaskList:  {unit.Id} {self.Zone()}  {self.RoleTaskList.Count}");
+            Console.WriteLine($"UpdateCountryList:  {self.RoleTaskList.Count}");
         }
 
         public static void CheckDailyTask(this TaskComponentS self, bool notice)

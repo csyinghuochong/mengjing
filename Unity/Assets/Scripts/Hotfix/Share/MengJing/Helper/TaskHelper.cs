@@ -39,6 +39,17 @@ namespace ET
             return npc;
         }
 
+        public static bool IsDailyTask(int taskType)
+        {
+            return taskType == (int)TaskTypeEnum.Daily 
+                    || taskType == (int)TaskTypeEnum.Country
+                    || taskType == (int)TaskTypeEnum.Battle
+                    || taskType == (int)TaskTypeEnum.ShowLie
+                    || taskType == (int)TaskTypeEnum.UnionRace
+                    || taskType == (int)TaskTypeEnum.Mine
+                    || taskType == (int)TaskTypeEnum.ActivityV1;
+        }
+
         public static int GetChapterByNpc(int npcId)
         {
             List<CellGenerateConfig> chapterList = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();
