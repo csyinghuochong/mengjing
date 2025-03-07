@@ -333,7 +333,7 @@ namespace ET.Server
 
                 if (todayopen)
                 {
-                    if (sceneserverid.Equals(new ActorId()))
+                    if (sceneserverid.InstanceId == 0)
                     {
                         Log.Error(("sceneserverid == null"));
                     }

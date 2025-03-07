@@ -1416,34 +1416,17 @@ namespace ET.Server
             }
         }
 
-        public static void ClearTypeTask(this TaskComponentS self, int taskType)
-        {
-            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
-            {
-                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
-                if (taskConfig.TaskType == taskType)
-                {
-                    if (self.RoleComoleteTaskList.Contains(taskConfig.Id))
-                    {
-                        self.RoleComoleteTaskList.Remove(taskConfig.Id);
-                    }
-                    self.RoleTaskList.RemoveAt(i);
-                    continue;
-                }
-            }
-        }
-
         public static void UpdateDayTask(this TaskComponentS self, bool notice)
         {
-
-            //���ÿ������
+            
             Unit unit = self.GetParent<Unit>();
             DateTime dateTime = TimeHelper.DateTimeNow();
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 if (taskConfig.TaskType == TaskTypeEnum.Daily
-                    || taskConfig.TaskType == TaskTypeEnum.Union)
+                    || taskConfig.TaskType == TaskTypeEnum.Union
+                    || taskConfig.TaskType == TaskTypeEnum.Country)
                 {
                     if (self.RoleComoleteTaskList.Contains(taskConfig.Id))
                     {
@@ -1616,8 +1599,7 @@ namespace ET.Server
             self.UpdateCountryList(notice);
             self.UpdateDayTask(notice);
             self.UpdateTargetTask(notice);
-
-
+            
             if (notice)
             {
                 M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
