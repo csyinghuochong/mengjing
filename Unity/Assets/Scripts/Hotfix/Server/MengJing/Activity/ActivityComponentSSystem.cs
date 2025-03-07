@@ -133,11 +133,11 @@ namespace ET.Server
             if (self.TotalSignNumber >= ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_23))
             {
                 self.TotalSignNumber = 0;
-                self.TotalSignRewardsList.Clear();
                 for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23 || 
+                        activityConfig.ActivityType == (int)ActivityEnum.Type_26)
                     {
                         self.ActivityReceiveIds.RemoveAt(i);
                     }
@@ -146,11 +146,11 @@ namespace ET.Server
             if (self.TotalSignNumber_VIP >= ActivityConfigCategory.Instance.GetNumByType((int)ActivityEnum.Type_25))
             {
                 self.TotalSignNumber_VIP = 0;
-                self.TotalSignRewardsList_VIP.Clear();
                 for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25 || 
+                        activityConfig.ActivityType == (int)ActivityEnum.Type_27)
                     {
                         self.ActivityReceiveIds.RemoveAt(i);
                     }

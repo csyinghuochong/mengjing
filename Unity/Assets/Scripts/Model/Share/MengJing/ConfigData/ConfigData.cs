@@ -2059,36 +2059,5 @@ namespace ET
         public static long PetMeleeBattleMaxTime = 300 * 1000;
 
         #endregion
-
-
-        #region 签到活动配置
-        
-        /// <summary>
-        /// 累计签到奖励 免费
-        /// 累计领取天数 -> 奖励
-        /// </summary>
-        [StaticField]
-        public static Dictionary<int, string> TotalSignRewards = new()
-        {
-            { 3, "1;300" },
-            { 6, "1;600" },
-            { 9, "1;900" },
-            { 12, "1;1200" }
-        };
-
-        /// <summary>
-        /// 累计签到奖励 VIP
-        /// 累计领取天数 -> 奖励
-        /// </summary>
-        [StaticField]
-        public static Dictionary<int, string> TotalSignRewards_VIP = new()
-        {
-            { 3, "1;3000" },
-            { 6, "1;6000" },
-            { 9, "1;9000" },
-            { 12, "1;12000" }
-        };
-
-        #endregion
     }
 }

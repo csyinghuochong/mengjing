@@ -182,6 +182,42 @@ namespace ET.Server
                         unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.RechargeSign, 2);
                         break;
+                    case (int)ActivityEnum.Type_26:
+                        if (activityComponent.TotalSignNumber < int.Parse(activityConfig.Par_1))
+                        {
+                            response.Error = ErrorCode.ERR_ModifyData;
+                            return;
+                        }
+
+                        rewarditems = activityConfig.Par_2.Split('@');
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
+                        {
+                            response.Error = ErrorCode.ERR_BagIsFull;
+                            return;
+                        }
+
+                        activityComponent.ActivityReceiveIds.Add(request.ActivityId);
+                        unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+
+                        break;
+                    case (int)ActivityEnum.Type_27:
+                        if (activityComponent.TotalSignNumber_VIP < int.Parse(activityConfig.Par_1))
+                        {
+                            response.Error = ErrorCode.ERR_ModifyData;
+                            return;
+                        }
+
+                        rewarditems = activityConfig.Par_2.Split('@');
+                        if (rewarditems.Length > unit.GetComponent<BagComponentS>().GetBagLeftCell(ItemLocType.ItemLocBag))
+                        {
+                            response.Error = ErrorCode.ERR_BagIsFull;
+                            return;
+                        }
+
+                        activityComponent.ActivityReceiveIds.Add(request.ActivityId);
+                        unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+                        
+                        break;
                     case (int)ActivityEnum.Type_31:    //登录奖励
                         userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                         if (userInfoComponent.UserInfo.Lv < 10)

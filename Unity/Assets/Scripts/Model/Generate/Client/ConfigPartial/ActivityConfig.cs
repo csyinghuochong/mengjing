@@ -59,6 +59,19 @@ namespace ET
             return num;
         }
         
+        public List<ActivityConfig> GetByType(int type)
+        {
+            List<ActivityConfig> list = new List<ActivityConfig>();
+            foreach (ActivityConfig activityConfig in this.GetAll().Values)
+            {
+                if (activityConfig.ActivityType == type)
+                {
+                    list.Add(activityConfig);
+                }
+            }
+            return list;
+        }
+        
         public int GetPulicSerial(string serial)
         { 
             int activityid = 0;

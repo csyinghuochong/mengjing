@@ -14,10 +14,8 @@ namespace ET.Client
             ActivityComponentC activityComponentC = root.GetComponent<ActivityComponentC>();
             activityComponentC.LastSignTime = response.LastSignTime;
             activityComponentC.TotalSignNumber = response.TotalSignNumber;
-            activityComponentC.TotalSignRewardsList = response.TotalSignRewardsList;
             activityComponentC.LastSignTime_VIP = response.LastSignTime_VIP;
             activityComponentC.TotalSignNumber_VIP = response.TotalSignNumber_VIP;
-            activityComponentC.TotalSignRewardsList_VIP = response.TotalSignRewardsList_VIP;
             activityComponentC.LastLoginTime = response.LastLoginTime;
             activityComponentC.DayTeHui = response.DayTeHui;
             activityComponentC.ActivityReceiveIds = response.ReceiveIds;
@@ -50,32 +48,6 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 activityComponent.ActivityReceiveIds.Add(activityId);
-            }
-
-            return response.Error;
-        }
-
-        public static async ETTask<int> ActivityTotalSignReceive(Scene root, int type, int day)
-        {
-            C2M_ActivityTotalSignReceiveRequest request = C2M_ActivityTotalSignReceiveRequest.Create();
-            request.Type = type;
-            request.Day = day;
-
-            M2C_ActivityTotalSignReceiveResponse response =
-                    (M2C_ActivityTotalSignReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-
-            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
-
-            if (response.Error == ErrorCode.ERR_Success)
-            {
-                if (type == 0)
-                {
-                    activityComponent.TotalSignRewardsList.Add(day);
-                }
-                else if (type == 1)
-                {
-                    activityComponent.TotalSignRewardsList_VIP.Add(day);
-                }
             }
 
             return response.Error;

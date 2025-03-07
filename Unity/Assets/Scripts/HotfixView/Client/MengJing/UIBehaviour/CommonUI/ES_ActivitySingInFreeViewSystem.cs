@@ -16,14 +16,15 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            List<ActivityConfig> list = ActivityConfigCategory.Instance.GetByType((int)ActivityEnum.Type_26);
             self.E_Reward1EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.EndDrag(ConfigData.TotalSignRewards.ToList()[0].Key, pdata as PointerEventData).Coroutine(); });
+                (pdata) => { self.EndDrag(list[0].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward2EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.EndDrag(ConfigData.TotalSignRewards.ToList()[1].Key, pdata as PointerEventData).Coroutine(); });
+                (pdata) => { self.EndDrag(list[1].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward3EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.EndDrag(ConfigData.TotalSignRewards.ToList()[2].Key, pdata as PointerEventData).Coroutine(); });
+                (pdata) => { self.EndDrag(list[2].Id, pdata as PointerEventData).Coroutine(); });
             self.E_Reward4EventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.EndDrag(ConfigData.TotalSignRewards.ToList()[3].Key, pdata as PointerEventData).Coroutine(); });
+                (pdata) => { self.EndDrag(list[3].Id, pdata as PointerEventData).Coroutine(); });
 
             self.E_ActivitySingInItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnActivitySingInItemsRefresh);
 
@@ -64,35 +65,36 @@ namespace ET.Client
             self.E_ActivitySingInItemsLoopVerticalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            List<ActivityConfig> list = ActivityConfigCategory.Instance.GetByType((int)ActivityEnum.Type_26);
             using (zstring.Block())
             {
-                string[] itemInfo = ConfigData.TotalSignRewards.ToList()[0].Value.Split(';');
+                string[] itemInfo = list[0].Par_2.Split(';');
                 self.E_Reward1EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
                         resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
                 self.E_Reward1EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
                 self.E_Reward1EventTrigger.transform.Find("Text").GetComponent<Text>().text =
-                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards.ToList()[0].Key);
+                        zstring.Format("累计签到{0}天", list[0].Par_1);
 
-                itemInfo = ConfigData.TotalSignRewards.ToList()[1].Value.Split(';');
+                itemInfo = list[1].Par_2.Split(';');
                 self.E_Reward2EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
                         resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
                 self.E_Reward2EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
                 self.E_Reward2EventTrigger.transform.Find("Text").GetComponent<Text>().text =
-                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards.ToList()[1].Key);
+                        zstring.Format("累计签到{0}天", list[1].Par_1);
 
-                itemInfo = ConfigData.TotalSignRewards.ToList()[2].Value.Split(';');
+                itemInfo = list[2].Par_2.Split(';');
                 self.E_Reward3EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
                         resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
                 self.E_Reward3EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
                 self.E_Reward3EventTrigger.transform.Find("Text").GetComponent<Text>().text =
-                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards.ToList()[2].Key);
+                        zstring.Format("累计签到{0}天", list[2].Par_1);
 
-                itemInfo = ConfigData.TotalSignRewards.ToList()[3].Value.Split(';');
+                itemInfo = list[3].Par_2.Split(';');
                 self.E_Reward4EventTrigger.transform.Find("ItemIcon").GetComponent<Image>().sprite =
                         resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemInfo[0]));
                 self.E_Reward4EventTrigger.transform.Find("ItemNum").GetComponent<Text>().text = itemInfo[1];
                 self.E_Reward4EventTrigger.transform.Find("Text").GetComponent<Text>().text =
-                        zstring.Format("累计签到{0}天", ConfigData.TotalSignRewards.ToList()[3].Key);
+                        zstring.Format("累计签到{0}天", list[3].Par_1);
             }
 
             self.UpdateProgress();
@@ -160,22 +162,24 @@ namespace ET.Client
             self.UpdateProgress();
         }
 
-        private static async ETTask EndDrag(this ES_ActivitySingInFree self, int day, PointerEventData pdata)
+        private static async ETTask EndDrag(this ES_ActivitySingInFree self, int activityId, PointerEventData pdata)
         {
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            if (activityComponent.TotalSignRewardsList.Contains(day))
+            ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
+
+            if (activityComponent.ActivityReceiveIds.Contains(activityId))
             {
                 FlyTipComponent.Instance.ShowFlyTip("已领取");
                 return;
             }
 
-            if (activityComponent.TotalSignNumber < day)
+            if (activityComponent.TotalSignNumber < int.Parse(activityConfig.Par_1))
             {
                 FlyTipComponent.Instance.ShowFlyTip("未达到领取条件");
                 return;
             }
 
-            int error = await ActivityNetHelper.ActivityTotalSignReceive(self.Root(), 0, day);
+            int error = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_26, activityId);
             if (error != ErrorCode.ERR_Success)
             {
                 return;
@@ -201,14 +205,15 @@ namespace ET.Client
                 self.E_RewardProgressImage.fillAmount = 0;
             }
 
+            List<ActivityConfig> list = ActivityConfigCategory.Instance.GetByType((int)ActivityEnum.Type_26);
             self.E_Reward1EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards.ToList()[0].Key));
+                    .SetActive(activityComponent.ActivityReceiveIds.Contains(list[0].Id));
             self.E_Reward2EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards.ToList()[1].Key));
+                    .SetActive(activityComponent.ActivityReceiveIds.Contains(list[1].Id));
             self.E_Reward3EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards.ToList()[2].Key));
+                    .SetActive(activityComponent.ActivityReceiveIds.Contains(list[2].Id));
             self.E_Reward4EventTrigger.transform.Find("LingQu").gameObject
-                    .SetActive(activityComponent.TotalSignRewardsList.Contains(ConfigData.TotalSignRewards.ToList()[3].Key));
+                    .SetActive(activityComponent.ActivityReceiveIds.Contains(list[3].Id));
         }
     }
 }

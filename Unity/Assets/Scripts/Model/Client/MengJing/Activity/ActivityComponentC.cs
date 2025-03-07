@@ -14,11 +14,6 @@ namespace ET.Client
         /// </summary>
         public int TotalSignNumber { get; set; } = 0;
         /// <summary>
-        /// 已经领取的累计签到奖励 免费
-        /// </summary>
-        public List<int> TotalSignRewardsList { get; set; } = new();
-        
-        /// <summary>
         /// 上次签到时间 VIP
         /// </summary>
         public long LastSignTime_VIP { get; set; }= 0;
@@ -26,10 +21,6 @@ namespace ET.Client
         /// 已经签到次数 VIP
         /// </summary>
         public int TotalSignNumber_VIP { get; set; }= 0;
-        /// <summary>
-        /// 已经领取的累计签到奖励 VIP
-        /// </summary>
-        public List<int> TotalSignRewardsList_VIP { get; set; } = new();
 
         public long LastLoginTime { get; set; } = 0;
 

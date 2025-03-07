@@ -10,11 +10,11 @@
             ActivityComponentS activityComponent = unit.GetComponent<ActivityComponentS>();
             if (activityComponent.TotalSignNumber == 0)
             {
-                activityComponent.TotalSignRewardsList.Clear();
                 for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_23 || 
+                        activityConfig.ActivityType == (int)ActivityEnum.Type_26)
                     {
                         activityComponent.ActivityReceiveIds.RemoveAt(i);
                     }
@@ -23,11 +23,11 @@
             
             if (activityComponent.TotalSignNumber_VIP == 0)
             {
-                activityComponent.TotalSignRewardsList_VIP.Clear();
                 for (int i = activityComponent.ActivityReceiveIds.Count - 1; i >= 0; i--)
                 {
                     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityComponent.ActivityReceiveIds[i]);
-                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25)
+                    if (activityConfig.ActivityType == (int)ActivityEnum.Type_25 || 
+                        activityConfig.ActivityType == (int)ActivityEnum.Type_27)
                     {
                         activityComponent.ActivityReceiveIds.RemoveAt(i);
                     }
@@ -52,10 +52,8 @@
             response.ReceiveIds.AddRange(activityComponent.ActivityReceiveIds); 
             response.LastSignTime = activityComponent.LastSignTime;
             response.TotalSignNumber = activityComponent.TotalSignNumber;
-            response.TotalSignRewardsList.AddRange(activityComponent.TotalSignRewardsList);
             response.LastSignTime_VIP = activityComponent.LastSignTime_VIP;
             response.TotalSignNumber_VIP = activityComponent.TotalSignNumber_VIP;
-            response.TotalSignRewardsList_VIP.AddRange(activityComponent.TotalSignRewardsList_VIP);
             response.QuTokenRecvive.AddRange(activityComponent.QuTokenRecvive); 
             response.LastLoginTime = activityComponent.LastLoginTime;
             response.DayTeHui.AddRange(activityComponent.DayTeHui); 

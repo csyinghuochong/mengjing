@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace ET.Server
 {
     
-    
+    [BsonIgnoreExtraElements]
     [ComponentOf(typeof(Unit))]
     public class ActivityComponentS : Entity , IAwake, ITransfer, IUnitCache, IDestroy, IDeserialize
     {
@@ -16,10 +16,6 @@ namespace ET.Server
         /// 已经签到次数 免费
         /// </summary>
         public int TotalSignNumber { get; set; }= 0;
-        /// <summary>
-        /// 已经领取的累计签到奖励 免费
-        /// </summary>
-        public List<int> TotalSignRewardsList { get; set; } = new();
         
         /// <summary>
         /// 上次签到时间 VIP
@@ -29,10 +25,6 @@ namespace ET.Server
         /// 已经签到次数 VIP
         /// </summary>
         public int TotalSignNumber_VIP { get; set; }= 0;
-        /// <summary>
-        /// 已经领取的累计签到奖励 VIP
-        /// </summary>
-        public List<int> TotalSignRewardsList_VIP { get; set; } = new();
 
         public long LastLoginTime { get; set; }= 0;
 
