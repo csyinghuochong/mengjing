@@ -21,6 +21,7 @@ namespace ET.Client
 
         public static void OnInitUI(this Scroll_Item_RoleXiLianSkillItem self, EquipXiLianConfig equipXiLianConfig)
         {
+            self.uIItems.Clear();
             self.EquipXiLianConfig = equipXiLianConfig;
 
             var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
