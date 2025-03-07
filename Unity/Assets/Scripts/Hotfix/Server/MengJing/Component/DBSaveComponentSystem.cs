@@ -137,7 +137,7 @@ namespace ET.Server
         public static void Activeted(this DBSaveComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.DBSaveTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.DBSaveTimer, self);
         }
 
         public static void UpdateCacheDB(this DBSaveComponent self)
@@ -145,11 +145,22 @@ namespace ET.Server
             UnitCacheHelper.AddOrUpdateUnitAllCache(self.GetParent<Unit>());
         }
 
+        /// <summary>
+        /// 每秒检测
+        /// </summary>
+        /// <param name="self"></param>
         public static void Check(this DBSaveComponent self)
         {
-            self.GetParent<Unit>().GetComponent<UserInfoComponentS>().Check();
+            Unit unit =  self.GetParent<Unit>(); 
+            unit.GetComponent<UserInfoComponentS>().Check(1);
+            unit.GetComponent<TaskComponentS>().Check(1);
             
-            UnitCacheHelper.AddOrUpdateUnitAllCache(self.GetParent<Unit>());
+            self.DBInterval++;
+            if (self.DBInterval >= 600)
+            {
+                self.DBInterval = 0;
+                self.UpdateCacheDB();   
+            }
         }
         
         [EntitySystem]

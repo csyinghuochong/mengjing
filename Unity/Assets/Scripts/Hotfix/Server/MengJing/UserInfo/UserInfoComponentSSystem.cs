@@ -29,13 +29,13 @@ namespace ET.Server
             }
         }
         
-        public static void Check(this UserInfoComponentS self)
+        public static void Check(this UserInfoComponentS self, int sceond)
         {
-            self.TodayOnLine++;
-            self.LingDiOnLine++;
+            self.TodayOnLine+=sceond;
+            self.LingDiOnLine+=sceond;
 
             //领地和家园都是一小时刷新一次经验
-            if (self.LingDiOnLine > 60)
+            if (self.LingDiOnLine > 600)
             {
                 self.LingDiOnLine = 0;
                 //self.OnRongyuChanChu(1, true);

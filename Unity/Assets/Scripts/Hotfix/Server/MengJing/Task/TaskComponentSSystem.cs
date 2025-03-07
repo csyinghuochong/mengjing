@@ -78,10 +78,14 @@ namespace ET.Server
             return huoYueDu;
         }
 
-        public static void Check(this TaskComponentS self)
+        public static void Check(this TaskComponentS self, int sceond)
         {
-            self.OnLineTime++;
-            self.OnLineTime(1);
+            self.OnLineTime+=sceond;
+            if (self.OnLineTime >= 60)
+            {
+                self.OnLineTime = 0;
+                self.OnLineTime(1);
+            }
         }
 
         public static bool IsTaskComplete(this TaskComponentS self, int taskid)

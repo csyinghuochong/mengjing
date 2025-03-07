@@ -8,7 +8,7 @@ namespace ET.Server
     public class DBSaveComponent:Entity, IAwake, ITransfer, IDestroy
     {
         public long Timer= 0;
-        public long DBInterval{ get; set; }
+        public long DBInterval{ get; set; }   //秒
         public long NoFindPath{ get; set; }
 
         public PlayerState PlayerState { get; set; }

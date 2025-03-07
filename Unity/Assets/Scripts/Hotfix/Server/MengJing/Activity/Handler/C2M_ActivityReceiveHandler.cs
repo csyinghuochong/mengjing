@@ -260,7 +260,7 @@ namespace ET.Server
                         }
                         break;
                     case (int)ActivityEnum.Type_33://节日活动
-                        if (unit.GetComponent<UserInfoComponentS>().TodayOnLine < 30)
+                        if (unit.GetComponent<UserInfoComponentS>().TodayOnLine < 1800)
                         {
                             response.Error = ErrorCode.Err_OnLineTimeNot;
                             return;

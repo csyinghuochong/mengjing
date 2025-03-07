@@ -10,20 +10,21 @@
                 return;
             }
 
-            UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+            
+            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+            UserInfo userInfo = userInfoComponentS.UserInfo;
             if (userInfo.Lv < 10)
             {
                 response.Error = ErrorCode.ERR_LevelIsNot;
                 return;
             }
             
-            TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
-            if (taskComponent.OnLineTime < 30)
+            if (userInfoComponentS.TodayOnLine < 1800)
             {
                 response.Error = ErrorCode.Err_OnLineTimeNot;
                 return;
             }
-            if (taskComponent.GetHuoYueDu() < 30)
+            if (unit.GetComponent<TaskComponentS>().GetHuoYueDu() < 30)
             {
                 response.Error = ErrorCode.ERR_HuoYueNot;
                 return;

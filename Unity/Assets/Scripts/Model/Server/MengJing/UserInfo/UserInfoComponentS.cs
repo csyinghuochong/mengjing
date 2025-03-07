@@ -24,7 +24,7 @@ namespace ET.Server
         /// <summary>
         /// 今日在线时长
         /// </summary>
-        public long TodayOnLine { get; set; }
+        public long TodayOnLine { get; set; }  //秒
 
         public long LastJiaYuanExpTime = 0;
         public string RemoteAddress { get; set; }
