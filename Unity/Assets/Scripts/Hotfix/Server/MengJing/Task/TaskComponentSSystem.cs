@@ -1220,7 +1220,7 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateCountryList(this TaskComponentS self, bool notice)
+        public static void UpdateDailyList(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
             if (self.RoleTaskList.Count == 0)
@@ -1238,6 +1238,10 @@ namespace ET.Server
 
                 if (TaskHelper.IsDailyTask(taskCountry.TaskType))
                 {
+                    if (self.RoleComoleteTaskList.Contains(taskCountry.Id))
+                    {
+                        self.RoleComoleteTaskList.Remove(taskCountry.Id);
+                    }
                     self.RoleTaskList.RemoveAt(i);
                 }
             }
@@ -1259,6 +1263,16 @@ namespace ET.Server
             }
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
+            
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+
+            numericComponent.ApplyValue(NumericType.DailyTaskNumber, 0, notice);
+            numericComponent.ApplyValue(NumericType.UnionTaskNumber, 0, notice);
+            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
+            numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
+
+            
             Log.Debug($"RoleTaskList:  {unit.Id} {self.Zone()}  {self.RoleTaskList.Count}");
             Console.WriteLine($"UpdateCountryList:  {self.RoleTaskList.Count}");
         }
@@ -1420,40 +1434,7 @@ namespace ET.Server
                 self.RoleTaskList.Add(self.CreateTask(taskids[i]));
             }
         }
-
-        public static void UpdateDayTask(this TaskComponentS self, bool notice)
-        {
-            
-            Unit unit = self.GetParent<Unit>();
-            DateTime dateTime = TimeHelper.DateTimeNow();
-            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
-            {
-                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
-                if (taskConfig.TaskType == TaskTypeEnum.Daily
-                    || taskConfig.TaskType == TaskTypeEnum.Union
-                    || taskConfig.TaskType == TaskTypeEnum.Country)
-                {
-                    if (self.RoleComoleteTaskList.Contains(taskConfig.Id))
-                    {
-                        self.RoleComoleteTaskList.Remove(taskConfig.Id);
-                    }
-                    self.RoleTaskList.RemoveAt(i);
-                    continue;
-                }
-            }
-
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
-
-            numericComponent.ApplyValue(NumericType.DailyTaskNumber, 0, notice);
-            numericComponent.ApplyValue(NumericType.UnionTaskNumber, 0, notice);
-            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
-            numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
-
-            //int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
-            //numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, notice);
-        }
-
+        
         public static TaskPro GetTreasureMonster(this TaskComponentS self, int fubenid)
         {
             List<TaskPro> taskPros = self.GetTaskList(TaskTypeEnum.Treasure);
@@ -1601,8 +1582,7 @@ namespace ET.Server
         {
             self.OnLineTime = 0;
             Unit unit = self.GetParent<Unit>();
-            self.UpdateCountryList(notice);
-            self.UpdateDayTask(notice);
+            self.UpdateDailyList(notice);
             self.UpdateTargetTask(notice);
             
             if (notice)

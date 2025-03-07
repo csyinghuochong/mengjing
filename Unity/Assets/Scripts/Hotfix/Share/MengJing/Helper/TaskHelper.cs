@@ -45,6 +45,7 @@ namespace ET
                     || taskType == (int)TaskTypeEnum.Country
                     || taskType == (int)TaskTypeEnum.Battle
                     || taskType == (int)TaskTypeEnum.ShowLie
+                    || taskType == (int)TaskTypeEnum.Union
                     || taskType == (int)TaskTypeEnum.UnionRace
                     || taskType == (int)TaskTypeEnum.Mine
                     || taskType == (int)TaskTypeEnum.ActivityV1;
