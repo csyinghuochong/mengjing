@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
@@ -11,7 +13,7 @@ namespace ET.Server
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
             response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
-         
+            Console.WriteLine($"C2M_TaskInitRequest:  {taskComponent.RoleTaskList.Count}");
             await ETTask.CompletedTask;
         }
     }

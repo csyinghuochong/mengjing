@@ -1247,8 +1247,9 @@ namespace ET.Server
             }
 
             self.ReceiveHuoYueIds.Clear();
+            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
             List<int> taskCountryList = new List<int>();
-            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(unit, 1));
+            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(unit, roleLv));
             taskCountryList.AddRange(TaskHelper.GetBattleTask());
             taskCountryList.AddRange(TaskHelper.GetShowLieTask());
             taskCountryList.AddRange(TaskHelper.GetUnionRaceTask());
@@ -1265,8 +1266,7 @@ namespace ET.Server
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
             
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
-
+            
             numericComponent.ApplyValue(NumericType.DailyTaskNumber, 0, notice);
             numericComponent.ApplyValue(NumericType.UnionTaskNumber, 0, notice);
             numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
