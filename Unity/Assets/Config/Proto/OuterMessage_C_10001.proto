@@ -2077,6 +2077,7 @@ message M2C_TaskCommitResponse    // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 	repeated int32 RoleComoleteTaskList = 1;
+	repeated TaskPro RoleTaskList = 2;
 }
 
 //接取任务

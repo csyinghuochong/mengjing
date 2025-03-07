@@ -13,8 +13,8 @@ namespace ET.Server
 
             TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
             response.Error = taskComponent.OnCommitTask(request);
+            response.RoleTaskList.AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
-
             await ETTask.CompletedTask;
         }
     }

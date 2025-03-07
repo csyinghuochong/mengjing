@@ -62,16 +62,8 @@ namespace ET.Client
             {
                 return response.Error;
             }
-
-            for (int i = taskComponentC.RoleTaskList.Count - 1; i >= 0; i--)
-            {
-                if (taskComponentC.RoleTaskList[i].taskID == taskid)
-                {
-                    taskComponentC.RoleTaskList.RemoveAt(i);
-                    break;
-                }
-            }
-
+            
+            taskComponentC.RoleTaskList= response.RoleTaskList;
             taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
             EventSystem.Instance.Publish(root, new TaskComplete() { TaskConfigId = taskid });
             return response.Error;

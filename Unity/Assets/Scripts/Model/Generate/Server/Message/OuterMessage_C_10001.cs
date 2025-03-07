@@ -8996,6 +8996,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public List<int> RoleComoleteTaskList { get; set; } = new();
 
+        [MemoryPackOrder(1)]
+        public List<TaskPro> RoleTaskList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -9007,6 +9010,7 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.RoleComoleteTaskList.Clear();
+            this.RoleTaskList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
