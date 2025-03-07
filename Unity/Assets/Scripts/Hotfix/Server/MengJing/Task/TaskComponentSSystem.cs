@@ -534,30 +534,34 @@ namespace ET.Server
                 return checkError;
             }
 
-            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
-            {
-                if (self.RoleTaskList[i].taskID == taskid)
-                {
-                    self.RoleTaskList.RemoveAt(i);
-                }
-            }
 
-            if (taskConfig.TaskType != TaskTypeEnum.Daily
-              && taskConfig.TaskType != TaskTypeEnum.Weekly
-              && taskConfig.TaskType != TaskTypeEnum.Treasure
-              && taskConfig.TaskType != TaskTypeEnum.Union
-              && taskConfig.TaskType != TaskTypeEnum.Season
-              && taskConfig.TaskType != TaskTypeEnum.Ring
-              && taskConfig.TaskType != TaskTypeEnum.System)
+            if (TaskHelper.IsMainTask(taskConfig.TaskType))
             {
                 if (self.RoleComoleteTaskList.Contains(taskid))
                 {
                     return ErrorCode.ERR_ModifyData;
                 }
 
+                for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+                {
+                    if (self.RoleTaskList[i].taskID == taskid)
+                    {
+                        self.RoleTaskList.RemoveAt(i);
+                    }
+                }
                 if (!self.RoleComoleteTaskList.Contains(taskid))
                 {
                     self.RoleComoleteTaskList.Add(taskid);
+                }
+            }
+            else
+            {
+                for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+                {
+                    if (self.RoleTaskList[i].taskID == taskid)
+                    {
+                        self.RoleTaskList[i].taskStatus = TaskStatuEnum.Commited;
+                    }
                 }
             }
 

@@ -51,6 +51,30 @@ namespace ET
                     || taskType == (int)TaskTypeEnum.ActivityV1;
         }
 
+        /// <summary>
+        ///主线任务做完立即从RoleTaskList中移除，保存到RoleComoleteTaskList
+        ///定期任务到时间RoleTaskList中移除，  不保存到RoleComoleteTaskList
+        /// </summary>
+        /// <param name="taskType"></param>
+        /// <returns></returns>
+        public static bool IsMainTask(int taskType)
+        {
+            if (IsDailyTask(taskType))
+            {
+                return false;
+            }
+
+            if (taskType == TaskTypeEnum.Main
+                || taskType == TaskTypeEnum.Branch
+                || taskType == TaskTypeEnum.Welfare
+                || taskType == TaskTypeEnum.System)
+            {
+                return true;    
+            }
+
+            return false;
+        }
+
         public static int GetChapterByNpc(int npcId)
         {
             List<CellGenerateConfig> chapterList = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();

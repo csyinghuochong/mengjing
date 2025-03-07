@@ -3,28 +3,28 @@
 namespace ET
 {
     //0未激活 1已接取 2已完成 3已领取
-    public enum TaskStatuEnum :int
+    public static class TaskStatuEnum
     {
-        UnActive = 0,
-        Accepted,       //已接取
-        Completed,      //已完成
-        Commited,       //已领取
+        public const int UnActive = 0;
+        public const int Accepted = 1;       //已接取
+        public const int Completed = 2;      //已完成
+        public const int Commited = 3;      //已领取
     }
 
     public static class TaskTypeEnum
     {
         public const int None = 0;
-        public const int Main = 1;              //主线任务
-        public const int Branch = 2;            //支线任务
+        public const int Main = 1;              //主线任务      只做一次
+        public const int Branch = 2;            //支线任务      只做一次
         public const int Daily = 3;             //赏金任务
         public const int Trial = 4;             //试炼任务(没做)
         public const int Weekly = 5;            //每周任务
         public const int Treasure = 6;          //挖宝任务
         public const int Union = 7;             //家族任务
         public const int Season = 8;            //赛季主线任务
-        public const int Welfare = 9;           //福利任务
+        public const int Welfare = 9;           //福利任务        只做一次
         public const int Ring = 10;             //跑环任务
-        public const int System = 11;           //系统任务
+        public const int System = 11;           //系统任务        只做一次
         
         public const int Country = 21;    //活跃任务
         public const int Battle = 22;     //战场任务
