@@ -158,6 +158,7 @@ namespace ET.Client
                             }
 
                             Scroll_Item_TaskFubenItem scrollItemTaskFubenItem = self.ScrollItemTaskFubenItems[i];
+                            scrollItemTaskFubenItem.uiTransform.gameObject.SetActive(true);
                             scrollItemTaskFubenItem.OnInitData((npcType, fubenId) => { self.OnClickFubenItem(npcType, fubenId); }, npcConfig.NpcType,
                                 fubenList[i]);
                         }
@@ -525,6 +526,7 @@ namespace ET.Client
                 }
                 
                 Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[i];
+                scrollItemTaskGetItem.uiTransform.gameObject.SetActive(true);
                 scrollItemTaskGetItem.InitData(self.ShowTaskId[i]);
                 scrollItemTaskGetItem.SetClickHandler((int taskid) => { self.OnSelectTaskHandler(taskid); });
             }

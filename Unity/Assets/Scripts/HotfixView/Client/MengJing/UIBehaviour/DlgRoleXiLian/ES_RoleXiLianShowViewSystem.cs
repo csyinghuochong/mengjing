@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(Scroll_Item_XiLianShowEquipItem))]
     [FriendOf(typeof(Scroll_Item_CommonItem))]
     [FriendOf(typeof(ES_CommonItem))]
     [FriendOf(typeof(ES_EquipSet))]
@@ -27,25 +28,26 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianExplain).Coroutine();
             });
 
-            self.E_NeedDiamondText.text = GlobalValueConfigCategory.Instance.Get(73).Value;
+            using (zstring.Block())
+            {
+                self.E_NeedDiamondText.text = zstring.Format("x {0}", GlobalValueConfigCategory.Instance.Get(73).Value);
+            }
 
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            self.ES_EquipSet.PlayerLv(userInfo.Lv);
-            self.ES_EquipSet.PlayerName(userInfo.Name);
-            self.ES_EquipSet.ShowPlayerModel(bagInfo, userInfo.Occ, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex),
-                bagComponent.FashionEquipList);
-
-            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
-            self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
-            self.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
+            self.EG_XuanZhonItemRectTransform.gameObject.SetActive(false);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_RoleXiLianShow self)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < self.AssetList.Count; i++)
+            {
+                resourcesLoaderComponent.UnLoadAsset(self.AssetList[i]);
+            }
+
+            self.AssetList.Clear();
+            self.AssetList = null;
+
             self.DestroyWidget();
         }
 
@@ -56,16 +58,50 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.ES_EquipSet.uiTransform.gameObject.SetActive(true);
+                    self.E_XiLianShowEquipItemsScrollRect.gameObject.SetActive(true);
                     self.E_EquipItemsLoopVerticalScrollRect.gameObject.SetActive(false);
 
-                    self.ES_EquipSet.PlayShowIdelAnimate(null);
-                    self.ES_EquipSet.RefreshEquip(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip),
-                        bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponent.UserInfo.Occ, ItemOperateEnum.Juese);
-                    self.ES_EquipSet.SetCallBack(self.OnSelectItem);
+                    List<ItemInfo> itemInfos = new List<ItemInfo>();
+                    itemInfos.AddRange(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip));
+                    itemInfos.AddRange(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip_2));
+
+                    ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+                    for (int i = 0; i < itemInfos.Count; i++)
+                    {
+                        if (!self.ScrollItemXiLianShowEquipItems.ContainsKey(i))
+                        {
+                            Scroll_Item_XiLianShowEquipItem item = self.AddChild<Scroll_Item_XiLianShowEquipItem>();
+                            string path = "Assets/Bundles/UI/Item/Item_XiLianShowEquipItem.prefab";
+                            if (!self.AssetList.Contains(path))
+                            {
+                                self.AssetList.Add(path);
+                            }
+
+                            GameObject prefab = resourcesLoaderComponent.LoadAssetSync<GameObject>(path);
+                            GameObject go = UnityEngine.Object.Instantiate(prefab,
+                                self.E_XiLianShowEquipItemsScrollRect.transform.Find("Content").gameObject.transform);
+                            item.BindTrans(go.transform);
+                            self.ScrollItemXiLianShowEquipItems.Add(i, item);
+                        }
+
+                        Scroll_Item_XiLianShowEquipItem scrollItemXiLianShowEquipItem = self.ScrollItemXiLianShowEquipItems[i];
+                        scrollItemXiLianShowEquipItem.uiTransform.gameObject.SetActive(true);
+                        scrollItemXiLianShowEquipItem.Refresh(itemInfos[i], userInfoComponent.UserInfo.Occ, ItemOperateEnum.Juese, itemInfos);
+                        scrollItemXiLianShowEquipItem.OnClickAction = self.OnSelectEquipItem;
+                    }
+
+                    if (self.ScrollItemXiLianShowEquipItems.Count > itemInfos.Count)
+                    {
+                        for (int i = itemInfos.Count; i < self.ScrollItemXiLianShowEquipItems.Count; i++)
+                        {
+                            Scroll_Item_XiLianShowEquipItem scrollItemXiLianShowEquipItem = self.ScrollItemXiLianShowEquipItems[i];
+                            scrollItemXiLianShowEquipItem.uiTransform.gameObject.SetActive(false);
+                        }
+                    }
+
                     break;
                 case 1:
-                    self.ES_EquipSet.uiTransform.gameObject.SetActive(false);
+                    self.E_XiLianShowEquipItemsScrollRect.gameObject.SetActive(false);
                     self.E_EquipItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
                     self.ShowBagInfos.Clear();
@@ -91,7 +127,7 @@ namespace ET.Client
 
                     if (self.XilianBagInfo != null)
                     {
-                        self.OnSelectItem(self.XilianBagInfo);
+                        self.OnSelectBagItem(self.XilianBagInfo);
                     }
                     else if (self.ShowBagInfos.Count > 0)
                     {
@@ -117,10 +153,10 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleXiLianShow self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectItem);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectBagItem);
         }
 
-        private static void OnSelectItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        private static void OnSelectBagItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
             self.XilianBagInfo = bagInfo;
 
@@ -140,62 +176,75 @@ namespace ET.Client
             self.OnUpdateXinLian();
         }
 
-        public static void UpdateAttribute(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        private static void OnSelectEquipItem(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
-            CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
-            if (bagInfo == null)
+            self.XilianBagInfo = bagInfo;
+
+            if (self.ScrollItemXiLianShowEquipItems != null)
             {
-                return;
+                foreach (Scroll_Item_XiLianShowEquipItem item in self.ScrollItemXiLianShowEquipItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.UpdateSelectStatus(bagInfo);
+                }
             }
 
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.E_Obj_EquipPropertyTextText.gameObject,
-                self.EG_EquipBaseSetListRectTransform.gameObject);
+            self.OnUpdateXinLian();
+        }
+
+        public static void UpdateAttribute(this ES_RoleXiLianShow self, ItemInfo bagInfo)
+        {
+            // CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
+            // if (bagInfo == null)
+            // {
+            //     return;
+            // }
+            //
+            // BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            // ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.E_Obj_EquipPropertyTextText.gameObject,
+            //     self.EG_EquipBaseSetListRectTransform.gameObject);
         }
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
             ItemInfo bagInfo = self.XilianBagInfo;
-            self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(bagInfo != null);
+            self.EG_XuanZhonItemRectTransform.gameObject.SetActive(bagInfo != null);
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
             {
                 return;
             }
 
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
-            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
-            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
-            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+
+            self.E_XuanZhonItemItemIconImage.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+
+            self.E_XuanZhonItemItemQualityImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(
+                ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality)));
+
+            self.E_XuanZhonItemNameText.text = itemConfig.ItemName;
+            self.E_XuanZhonItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
             //洗炼消耗
             int[] itemCost = itemConfig.XiLianStone;
             if (itemCost == null || itemCost.Length < 2)
             {
-                self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
                 return;
             }
 
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            ItemInfo bagInfoNeed = new ItemInfo();
-            bagInfoNeed.ItemID = itemCost[0];
-            bagInfoNeed.ItemNum = itemCost[1];
-            self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
-            self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
+            self.E_CostItemIconImage.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemCost[0].ToString()));
 
             using (zstring.Block())
             {
-                self.E_Text_CostValueText.text = zstring.Format("{0}/{1}", bagComponent.GetItemNumber(itemCost[0]), itemCost[1]);
-            }
-
-            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1] ? Color.green : Color.red;
-
-            self.E_Text_CostNameText.text = ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemName;
-            self.E_Text_CostNameText.color = FunctionUI.QualityReturnColorDi((int)ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemQuality);
-            if (bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1])
-            {
-                self.E_Text_CostValueText.color = Color.green;
+                self.E_Text_CostValueText.text = zstring.Format("x {1}", itemCost[1]);
             }
         }
 
@@ -308,9 +357,6 @@ namespace ET.Client
             }
 
             self.EG_XiLianEffectRectTransform.gameObject.SetActive(false);
-        }
-        public static void OnImageButtonButton(this ES_RoleXiLianShow self)
-        {
         }
     }
 }
