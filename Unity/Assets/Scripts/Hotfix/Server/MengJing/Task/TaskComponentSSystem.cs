@@ -1095,7 +1095,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                if (targetType != TaskTargetType.ItemID_Number_2 && taskPro.taskStatus == (int)TaskStatuEnum.Completed)
+                if (targetType != TaskTargetType.ItemID_Number_2 && taskPro.taskStatus >= (int)TaskStatuEnum.Completed)
                 {
                     continue;
                 }
