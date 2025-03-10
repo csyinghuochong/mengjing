@@ -203,15 +203,23 @@ namespace ET.Client
 
         public static void UpdateAttribute(this ES_RoleXiLianShow self, ItemInfo bagInfo)
         {
-            // CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
-            // if (bagInfo == null)
-            // {
-            //     return;
-            // }
-            //
-            // BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            // ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.E_Obj_EquipPropertyTextText.gameObject,
-            //     self.EG_EquipBaseSetListRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
+            if (bagInfo == null)
+            {
+                return;
+            }
+            
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            ResourcesLoaderComponent resourcesLoader = self.Root().GetComponent<ResourcesLoaderComponent>();
+            string path = "Assets/Bundles/UI/Item/Item_XiLianShowEquipPropertyItem.prefab";
+            if (!self.AssetList.Contains(path))
+            {
+                self.AssetList.Add(path);
+            }
+
+            GameObject prefab = resourcesLoader.LoadAssetSync<GameObject>(path);
+            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, prefab,
+                self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
         }
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
@@ -342,7 +350,7 @@ namespace ET.Client
 
         public static void OnXiLianReturn(this ES_RoleXiLianShow self)
         {
-            self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XilianBagInfo.BagInfoID);
+            self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.BagInfoID);
             self.OnUpdateXinLian();
             self.OnItemTypeSet(self.CurrentItemType);
         }

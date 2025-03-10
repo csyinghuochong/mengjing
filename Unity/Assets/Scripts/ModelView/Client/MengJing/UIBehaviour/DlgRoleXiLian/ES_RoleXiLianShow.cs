@@ -9,8 +9,19 @@ namespace ET.Client
 	public  class ES_RoleXiLianShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int CurrentItemType;
+		public long BagInfoID;
 		private EntityRef<ItemInfo> xilianBagInfo;
-		public ItemInfo XilianBagInfo { get => this.xilianBagInfo; set => this.xilianBagInfo = value; }
+
+		public ItemInfo XilianBagInfo
+		{
+			get => this.xilianBagInfo;
+			set
+			{
+				this.xilianBagInfo = value;
+				this.BagInfoID = value == null ? 0 : value.BagInfoID;
+			}
+		}
+
 		public Dictionary<int, EntityRef<Scroll_Item_XiLianShowEquipItem>> ScrollItemXiLianShowEquipItems = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();

@@ -28854,6 +28854,7 @@ GameObject:
   - component: {fileID: 6044553603941110347}
   - component: {fileID: 6127714560899675678}
   - component: {fileID: 6231476190688633485}
+  - component: {fileID: 2697321439423000914}
   m_Layer: 0
   m_Name: E_XiLianShowEquipPropertyItems
   m_TagString: Untagged
@@ -28876,10 +28877,10 @@ RectTransform:
   - {fileID: 3246722622463914025}
   m_Father: {fileID: 6775409251373831676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -675.1011, y: 67}
-  m_SizeDelta: {x: 516.8956, y: 254.1987}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -782, y: 88.48578}
+  m_SizeDelta: {x: 726, y: 289.3572}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6127714560899675678
 CanvasRenderer:
@@ -28919,6 +28920,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2697321439423000914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6721503128544870092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &6758884869260946654
 GameObject:
   m_ObjectHideFlags: 0

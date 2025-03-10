@@ -228,7 +228,7 @@ namespace ET.Client
 
         //装备基础属性
         public static int ShowBaseAttribute(List<ItemInfo> equipItemList, ItemInfo baginfo, GameObject propertyGO,
-        GameObject parentGO)
+        GameObject parentGO, int type = 0)
         {
             int properShowNum = 0;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baginfo.ItemID);
@@ -757,7 +757,12 @@ namespace ET.Client
         {
             GameObject go = UnityEngine.Object.Instantiate(proItem, parObj.transform, true);
             go.transform.localScale = new Vector3(1, 1, 1);
-            go.GetComponent<Text>().text = showText;
+            Text textComponent = go.GetComponent<Text>();
+            if (textComponent == null)
+            {
+                textComponent = go.GetComponentInChildren<Text>();
+            }
+            textComponent.text = showText;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.SetActive(true);
 
@@ -765,31 +770,31 @@ namespace ET.Client
             {
                 //极品提示  绿色
                 case "1":
-                    go.GetComponent<Text>().color = new Color(80f / 255f, 160f / 255f, 0f);
+                    textComponent.color = new Color(80f / 255f, 160f / 255f, 0f);
                     break;
                 //隐藏技能  橙色
                 case "2":
-                    go.GetComponent<Text>().color = new Color(248 / 255f, 62f / 255, 191f / 255f);
+                    textComponent.color = new Color(248 / 255f, 62f / 255, 191f / 255f);
                     break;
                 //红色
                 case "3":
-                    go.GetComponent<Text>().color = Color.red;
+                    textComponent.color = Color.red;
                     break;
                 //蓝色
                 case "4":
-                    go.GetComponent<Text>().color = new Color(1f, 0.5f, 1f);
+                    textComponent.color = new Color(1f, 0.5f, 1f);
                     break;
                 //白色
                 case "5":
-                    go.GetComponent<Text>().color = new Color(100f / 255f, 80f / 255f, 60f / 255f);
+                    textComponent.color = new Color(100f / 255f, 80f / 255f, 60f / 255f);
                     break;
                 //橙色
                 case "6":
-                    go.GetComponent<Text>().color = new Color(255f / 255f, 90f / 255f, 0f);
+                    textComponent.color = new Color(255f / 255f, 90f / 255f, 0f);
                     break;
                 //灰色
                 case "11":
-                    go.GetComponent<Text>().color = new Color(0.66f, 0.66f, 0.66f);
+                    textComponent.color = new Color(0.66f, 0.66f, 0.66f);
                     break;
             }
 
