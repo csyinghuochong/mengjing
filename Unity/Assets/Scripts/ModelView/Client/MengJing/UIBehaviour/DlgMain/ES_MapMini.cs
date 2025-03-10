@@ -14,7 +14,8 @@ namespace ET.Client
 		public float ScaleRateY;
 		public int SceneTypeEnum;
 		public long MapMiniTimer;
-		public List<GameObject> AllPointList = new();
+		public Dictionary<long, GameObject> AllPointList = new();
+		public List<GameObject> CachePointList = new();	
 		public Vector3 NoVector3 = new(-10000, -10000, 0);
 		
 		public UnityEngine.RectTransform EG_MainCityShowRectTransform

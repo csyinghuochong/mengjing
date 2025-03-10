@@ -793,6 +793,16 @@ namespace ET.Client
             }
         }
 
+        public static void OnUnitChangePosition(this DlgMain self, Unit unit)
+        {
+            self.View.ES_MapMini.OnUpdateMiniMapOneUnit(unit);   
+        }
+        
+        public static void OnUnitUnitRemove(this DlgMain self, List<long> removeIds)
+        {
+            self.View.ES_MapMini.OnUnitUnitRemove(removeIds);   
+        }
+
         #region 左边
 
         private static void OnShouSuo(this DlgMain self)

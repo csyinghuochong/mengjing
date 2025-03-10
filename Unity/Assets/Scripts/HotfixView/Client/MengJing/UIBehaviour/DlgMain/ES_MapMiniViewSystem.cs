@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ET.Client
@@ -11,7 +12,7 @@ namespace ET.Client
         {
             try
             {
-                self.OnUpdateMiniMap();
+                self.OnUpdateMiniMapTime(); 
             }
             catch (Exception e)
             {
@@ -23,6 +24,7 @@ namespace ET.Client
         }
     }
 
+
     [EntitySystemOf(typeof(ES_MapMini))]
     [FriendOfAttribute(typeof(ES_MapMini))]
     public static partial class ES_MapMiniSystem
@@ -31,7 +33,7 @@ namespace ET.Client
         private static void Awake(this ES_MapMini self, Transform transform)
         {
             self.uiTransform = transform;
-
+            self.EG_HeadItemRectTransform.gameObject.SetActive(false);
             self.E_MiniMapButtonButton.AddListener(self.OnMiniMapButtonButton);
         }
 
@@ -110,9 +112,98 @@ namespace ET.Client
             Vector2 localPosition = self.GetWordToUIPositon(vector31);
             self.E_RawImageRawImage.transform.localPosition = new Vector2(localPosition.x * -1, localPosition.y * -1);
             self.EG_HeadListRectTransform.localPosition = new Vector2(localPosition.x * -1, localPosition.y * -1);
+            
+            self.OnUpdateMiniMapAllUnit();
         }
+        
+        public static void OnUpdateMiniMapOneUnit(this ES_MapMini self, Unit unit)
+        {
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-        public static void OnUpdateMiniMap(this ES_MapMini self)
+            if (main == null)
+            {
+                return;
+            }
+            
+            if (unit.Type != UnitType.Player && unit.Type != UnitType.Monster)
+            {
+                return;
+            }
+            
+            Vector3 vector31 = new Vector3(unit.Position.x, unit.Position.z, 0f);
+            Vector3 vector32 = self.GetWordToUIPositon(vector31);
+            GameObject headItem = self.GetTeamPointObj(unit.Id);
+
+            //1自己 2敌对 3队友  4主城
+            string showType = "4";
+            if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
+            {
+                showType = "2";
+            }
+            
+            if (main.IsSameTeam(unit))
+            {
+                showType = "3";
+            }
+            
+            if (unit.MainHero)
+            {
+                showType = "1";
+            }
+
+            if (unit.Type == UnitType.Monster)
+            {
+                if (unit.ConfigId > 0)
+                {
+                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    if (monsterCof.MonsterType == 5)
+                    {
+                        //6 宝箱
+                        if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_55)
+                        {
+                            showType = "6";
+                        }
+
+                        //5 精灵 宠物 宠灵书
+                        if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_57 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
+                        {
+                            showType = "5";
+                        }
+                    }
+                }
+            }
+            
+            for (int icontype = 0; icontype < GlobalData.ES_MapMiniType.Count; icontype++)
+            {
+                headItem.Get<GameObject>( GlobalData.ES_MapMiniType[icontype] ).transform.localPosition =  
+                        GlobalData.ES_MapMiniType[icontype] == showType ?  Vector3.zero : GlobalData.ES_MapMiniNoVisie;
+            }
+            
+            headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
+                        
+        }
+        
+        public static void OnUnitUnitRemove(this ES_MapMini self, List<long> removeIds)
+        {
+            foreach (long removeid in removeIds)
+            {
+                GameObject unitgo = null;
+                self.AllPointList.TryGetValue(removeid, out unitgo);
+                if (unitgo != null)
+                {
+                    self.AllPointList.Remove(removeid);
+                    unitgo.transform.localPosition = self.NoVector3;
+                    self.CachePointList.Add(unitgo);
+                }
+            }
+
+            foreach (var cacheitem in self.CachePointList)
+            {
+                cacheitem.transform.localPosition = self.NoVector3;
+            }
+        }
+        
+        public static void OnUpdateMiniMapAllUnit(this ES_MapMini self)
         {
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
@@ -121,100 +212,61 @@ namespace ET.Client
                 return;
             }
 
+            List<long> allids = new List<long>();       
             List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
-
-            int teamNumber = 0;
+            
             // int selfCamp_1 = main.GetBattleCamp();
             for (int i = 0; i < allUnit.Count; i++)
             {
                 Unit unit = allUnit[i];
-                if (unit.Type != UnitType.Player && unit.Type != UnitType.Monster)
+                allids.Add(unit.Id);
+                self.OnUpdateMiniMapOneUnit(unit);  
+            }
+           
+            List<long> removeIds = new List<long>();
+            foreach (var pGameObject in self.AllPointList)
+            {
+                if (!allids.Contains(pGameObject.Key))
                 {
-                    continue;
+                    removeIds.Add(pGameObject.Key);
                 }
-
-                Vector3 vector31 = new Vector3(unit.Position.x, unit.Position.z, 0f);
-                Vector3 vector32 = self.GetWordToUIPositon(vector31);
-                GameObject headItem = self.GetTeamPointObj(teamNumber);
-
-                //1自己 2敌对 3队友  4主城
-                string showType = "4";
-                if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
-                {
-                    showType = "2";
-                }
-                
-                if (main.IsSameTeam(unit))
-                {
-                    showType = "3";
-                }
-                
-                if (unit.MainHero)
-                {
-                    showType = "1";
-                }
-
-                if (unit.Type == UnitType.Monster)
-                {
-                    if (unit.ConfigId > 0)
-                    {
-                        MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-                        if (monsterCof.MonsterType == 5)
-                        {
-                            //6 宝箱
-                            if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_55)
-                            {
-                                showType = "6";
-                            }
-
-                            //5 精灵 宠物 宠灵书
-                            if (monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_57 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterCof.MonsterSonType == MonsterSonTypeEnum.Type_59)
-                            {
-                                showType = "5";
-                            }
-                        }
-                    }
-                }
-                
-                teamNumber++;
-                for (int icontype = 0; icontype < GlobalData.ES_MapMiniType.Count; icontype++)
-                {
-                    headItem.Get<GameObject>( GlobalData.ES_MapMiniType[icontype] ).transform.localPosition =  
-                            GlobalData.ES_MapMiniType[icontype] == showType ?  Vector3.zero : GlobalData.ES_MapMiniNoVisie;
-                }
-                
-                headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
             }
 
-            for (int i = teamNumber; i < self.AllPointList.Count; i++)
-            {
-                self.AllPointList[i].transform.localPosition = self.NoVector3;
-            }
+            self.OnUnitUnitRemove(removeIds);
+        }
 
-            self.Lab_TimeIndex++;
-            if (self.Lab_TimeIndex >= 300)
+        public static void OnUpdateMiniMapTime(this ES_MapMini self)
+        {
+            DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            using (zstring.Block())
             {
-                self.Lab_TimeIndex = 0;
-                DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                using (zstring.Block())
-                {
-                    self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
-                }
+                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
             }
         }
 
-        private static GameObject GetTeamPointObj(this ES_MapMini self, int index)
+        private static GameObject GetTeamPointObj(this ES_MapMini self, long unitid)
         {
-            if (self.AllPointList.Count > index)
+            GameObject unitgo = null;
+            self.AllPointList.TryGetValue(unitid, out unitgo);
+            if (unitgo!=null)
             {
-                return self.AllPointList[index];
+                return unitgo;
+            }
+
+            if (self.CachePointList.Count > 0)
+            {
+                unitgo = self.CachePointList[0];
+                
+                self.CachePointList.RemoveAt(0);
+                self.AllPointList.Add(unitid, unitgo);
+                return unitgo;
             }
 
             GameObject go = UnityEngine.Object.Instantiate(self.EG_HeadItemRectTransform.gameObject, self.EG_HeadItemRectTransform.parent,
                 true);
             go.transform.localScale = Vector3.one;
             go.SetActive(true);
-            self.AllPointList.Add(go);
+            self.AllPointList.Add(unitid, go);
             return go;
         }
 
@@ -360,8 +412,8 @@ namespace ET.Client
                 }
 
                 self.EG_HeadListRectTransform.gameObject.SetActive(true);
-                self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-                self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
+                //self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+                //self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
 
                 DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
                 self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);

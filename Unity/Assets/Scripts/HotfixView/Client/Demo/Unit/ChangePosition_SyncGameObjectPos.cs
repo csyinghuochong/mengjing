@@ -29,7 +29,11 @@
                 unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
                 unit.Root().GetComponent<SceneUnitManagerComponent>().Move(unit,  args );
             }
-
+            else
+            {
+                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUnitChangePosition(unit);
+            }
+            
             await ETTask.CompletedTask;
         }
     }
