@@ -65,6 +65,11 @@ namespace ET.Client
                     itemInfos.AddRange(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip));
                     itemInfos.AddRange(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip_2));
 
+                    for (int i = itemInfos.Count; i < 14; i++)
+                    {
+                        itemInfos.Add(null);
+                    }
+
                     ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
                     for (int i = 0; i < itemInfos.Count; i++)
                     {
