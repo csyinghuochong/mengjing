@@ -198,7 +198,6 @@ namespace ET.Client
 
         public static List<int> GetSceneShowMonsters(int sceneId)
         {
-            
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             List<int> monsterIds = new List<int>();     
             foreach (int posi in sceneConfig.CreateMonsterPosi)
@@ -206,6 +205,11 @@ namespace ET.Client
                 MonsterPositionConfig monsterPositionConfig = MonsterPositionConfigCategory.Instance.Get(posi);
                 foreach (int monsterId in monsterPositionConfig.MonsterID)
                 {
+                    if (!MonsterConfigCategory.Instance.Contain(monsterId))
+                    {
+                        Log.Error($"monsterId {monsterId} not exists   sceneId {sceneId}   monsterpositionid {posi}    ");
+                    }
+
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
 
                     if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
