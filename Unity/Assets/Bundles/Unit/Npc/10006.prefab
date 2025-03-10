@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 1076939022297653738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.4, z: 0.177}
+  m_LocalPosition: {x: -0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5415,7 +5415,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
+    'RigSpine3'\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tTransform
+    'RigSpine1'\n\tTransform 'RigSpine1'\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tand
+    more ...\n\tFrom animation clip 'Idle'\n\tFrom animation clip 'Talking'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -5621,15 +5626,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641700324852894, guid: 0691327379fa9344c8c1007b2d0e6fb7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641700324852894, guid: 0691327379fa9344c8c1007b2d0e6fb7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641700324852894, guid: 0691327379fa9344c8c1007b2d0e6fb7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4641700324852894, guid: 0691327379fa9344c8c1007b2d0e6fb7, type: 3}
       propertyPath: m_LocalPosition.x
