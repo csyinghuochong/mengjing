@@ -75,6 +75,8 @@ namespace ET
 		public string ChapterDes { get; set; }
 		/// <summary>地图ID</summary>
 		public int MapID { get; set; }
+		/// <summary>loading图</summary>
+		public string LoadingRes { get; set; }
 		/// <summary>出生点</summary>
 		public int[] BornPosLeft { get; set; }
 		/// <summary>摄像机参数</summary>
