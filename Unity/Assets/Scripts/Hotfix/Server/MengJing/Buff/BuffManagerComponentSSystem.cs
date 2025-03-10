@@ -664,6 +664,11 @@ namespace ET.Server
         public static void InitBaoShiBuff(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
+            if (unit.Id > 0)
+            {
+                return;
+            }
+
             if (unit.Type != UnitType.Player)
             {
                 return;
