@@ -70,14 +70,6 @@ namespace ET.Client
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
                     break;
-                case SceneTypeEnum.CellDungeon:
-                    loadResName = backpngs[index];
-                    self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
-                    self.PreLoadAssets.AddRange(self.GetCommonAssets());
-                    break;
-                case SceneTypeEnum.DragonDungeon:
-                    loadResName = backpngs[index];
-                    break;
                 case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.BaoZang:
                 case SceneTypeEnum.MiJing:
@@ -90,16 +82,27 @@ namespace ET.Client
                 case SceneTypeEnum.Battle:
                 case SceneTypeEnum.Arena: 
                 case SceneTypeEnum.PetMelee:
-                    loadResName = backpngs[index];
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetSceneDungeonMonsters());
                     break;
                 case SceneTypeEnum.LocalDungeon:
-                    loadResName = backpngs[index];
+                    DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(chapterId);
+                    loadResName = !CommonHelp.IfNull(dungeonConfig.LoadingRes) ? dungeonConfig.LoadingRes : backpngs[index];
+                    
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetLocalDungeonMonsters());
+                    break;
+                case SceneTypeEnum.CellDungeon:
+                    CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(chapterId);
+                    loadResName = !CommonHelp.IfNull(cellGenerateConfig.LoadingRes) ? cellGenerateConfig.LoadingRes : backpngs[index];
+                    self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
+                    self.PreLoadAssets.AddRange(self.GetCommonAssets());
+                    break;
+                case SceneTypeEnum.DragonDungeon:
+                    cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(chapterId);
+                    loadResName = !CommonHelp.IfNull(cellGenerateConfig.LoadingRes) ? cellGenerateConfig.LoadingRes : backpngs[index];
                     break;
                 default:
                     loadResName = backpngs[index];
@@ -109,6 +112,7 @@ namespace ET.Client
             if (!loadResName.Equals("MainCity"))
             {
                 var path = ABPathHelper.GetJpgPath(loadResName);
+                Log.Debug($"loadingjpg: {path}");
                 Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                 self.View.E_Back_1Image.sprite = atlas;
                 self.View.E_Back_1Image.gameObject.SetActive(true);
