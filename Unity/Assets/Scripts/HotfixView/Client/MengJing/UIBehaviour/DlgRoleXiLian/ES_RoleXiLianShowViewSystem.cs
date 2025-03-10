@@ -93,6 +93,7 @@ namespace ET.Client
                         scrollItemXiLianShowEquipItem.uiTransform.gameObject.SetActive(true);
                         scrollItemXiLianShowEquipItem.Refresh(itemInfos[i], userInfoComponent.UserInfo.Occ, ItemOperateEnum.Juese, itemInfos);
                         scrollItemXiLianShowEquipItem.OnClickAction = self.OnSelectEquipItem;
+                        scrollItemXiLianShowEquipItem.UpdateSelectStatus(self.XilianBagInfo);
                     }
 
                     if (self.ScrollItemXiLianShowEquipItems.Count > itemInfos.Count)
@@ -218,7 +219,7 @@ namespace ET.Client
             }
 
             GameObject prefab = resourcesLoader.LoadAssetSync<GameObject>(path);
-            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, prefab,
+            ItemViewHelp.ShowXiLianAttribute(bagComponent.GetEquipList(), bagInfo, prefab,
                 self.E_XiLianShowEquipPropertyItemsScrollRect.transform.Find("Content").gameObject);
         }
 
