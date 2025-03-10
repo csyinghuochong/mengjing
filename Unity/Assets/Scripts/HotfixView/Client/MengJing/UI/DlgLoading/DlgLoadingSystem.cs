@@ -88,7 +88,8 @@ namespace ET.Client
                 case SceneTypeEnum.PetTianTi:
                 case SceneTypeEnum.PetMing:
                 case SceneTypeEnum.Battle:
-                case SceneTypeEnum.Arena:
+                case SceneTypeEnum.Arena: 
+                case SceneTypeEnum.PetMelee:
                     loadResName = backpngs[index];
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
