@@ -79,6 +79,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_XiLianInfoRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_XiLianInfoRectTransform == null )
+     			{
+		    		this.m_EG_XiLianInfoRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_XiLianInfo");
+     			}
+     			return this.m_EG_XiLianInfoRectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_XuanZhonItemRectTransform
      	{
      		get
@@ -90,7 +107,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_XuanZhonItemRectTransform == null )
      			{
-		    		this.m_EG_XuanZhonItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_XuanZhonItem");
+		    		this.m_EG_XuanZhonItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem");
      			}
      			return this.m_EG_XuanZhonItemRectTransform;
      		}
@@ -107,7 +124,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XuanZhonItemItemQualityImage == null )
      			{
-		    		this.m_E_XuanZhonItemItemQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XuanZhonItem/E_XuanZhonItemItemQuality");
+		    		this.m_E_XuanZhonItemItemQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_XuanZhonItemItemQuality");
      			}
      			return this.m_E_XuanZhonItemItemQualityImage;
      		}
@@ -124,7 +141,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XuanZhonItemItemIconImage == null )
      			{
-		    		this.m_E_XuanZhonItemItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XuanZhonItem/E_XuanZhonItemItemIcon");
+		    		this.m_E_XuanZhonItemItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_XuanZhonItemItemIcon");
      			}
      			return this.m_E_XuanZhonItemItemIconImage;
      		}
@@ -141,7 +158,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XuanZhonItemNameText == null )
      			{
-		    		this.m_E_XuanZhonItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XuanZhonItem/E_XuanZhonItemName");
+		    		this.m_E_XuanZhonItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_XuanZhonItemName");
      			}
      			return this.m_E_XuanZhonItemNameText;
      		}
@@ -158,7 +175,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BatAddText == null )
      			{
-		    		this.m_E_BatAddText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XuanZhonItem/E_BatAdd");
+		    		this.m_E_BatAddText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/EG_XuanZhonItem/E_BatAdd");
      			}
      			return this.m_E_BatAddText;
      		}
@@ -175,7 +192,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianShowEquipPropertyItemsScrollRect == null )
      			{
-		    		this.m_E_XiLianShowEquipPropertyItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/E_XiLianShowEquipPropertyItems");
+		    		this.m_E_XiLianShowEquipPropertyItemsScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_XiLianShowEquipPropertyItems");
      			}
      			return this.m_E_XiLianShowEquipPropertyItemsScrollRect;
      		}
@@ -192,7 +209,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NeedDiamondText == null )
      			{
-		    		this.m_E_NeedDiamondText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_NeedDiamond");
+		    		this.m_E_NeedDiamondText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_NeedDiamond");
      			}
      			return this.m_E_NeedDiamondText;
      		}
@@ -209,7 +226,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianTenButton == null )
      			{
-		    		this.m_E_XiLianTenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_XiLianTen");
+		    		this.m_E_XiLianTenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_XiLianTen");
      			}
      			return this.m_E_XiLianTenButton;
      		}
@@ -226,7 +243,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianTenImage == null )
      			{
-		    		this.m_E_XiLianTenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_XiLianTen");
+		    		this.m_E_XiLianTenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_XiLianTen");
      			}
      			return this.m_E_XiLianTenImage;
      		}
@@ -243,7 +260,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CostItemIconImage == null )
      			{
-		    		this.m_E_CostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_CostItemIcon");
+		    		this.m_E_CostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_CostItemIcon");
      			}
      			return this.m_E_CostItemIconImage;
      		}
@@ -260,7 +277,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_CostValueText == null )
      			{
-		    		this.m_E_Text_CostValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_CostValue");
+		    		this.m_E_Text_CostValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_Text_CostValue");
      			}
      			return this.m_E_Text_CostValueText;
      		}
@@ -277,7 +294,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianButtonButton == null )
      			{
-		    		this.m_E_XiLianButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_XiLianButton");
+		    		this.m_E_XiLianButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_XiLianButton");
      			}
      			return this.m_E_XiLianButtonButton;
      		}
@@ -294,7 +311,7 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianButtonImage == null )
      			{
-		    		this.m_E_XiLianButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_XiLianButton");
+		    		this.m_E_XiLianButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_XiLianInfo/E_XiLianButton");
      			}
      			return this.m_E_XiLianButtonImage;
      		}
@@ -436,6 +453,7 @@ namespace ET.Client
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_E_EquipItemsLoopVerticalScrollRect = null;
 			this.m_E_XiLianShowEquipItemsScrollRect = null;
+			this.m_EG_XiLianInfoRectTransform = null;
 			this.m_EG_XuanZhonItemRectTransform = null;
 			this.m_E_XuanZhonItemItemQualityImage = null;
 			this.m_E_XuanZhonItemItemIconImage = null;
@@ -462,6 +480,7 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.ScrollRect m_E_XiLianShowEquipItemsScrollRect = null;
+		private UnityEngine.RectTransform m_EG_XiLianInfoRectTransform = null;
 		private UnityEngine.RectTransform m_EG_XuanZhonItemRectTransform = null;
 		private UnityEngine.UI.Image m_E_XuanZhonItemItemQualityImage = null;
 		private UnityEngine.UI.Image m_E_XuanZhonItemItemIconImage = null;

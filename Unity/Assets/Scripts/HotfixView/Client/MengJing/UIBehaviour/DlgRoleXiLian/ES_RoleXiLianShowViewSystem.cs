@@ -34,8 +34,7 @@ namespace ET.Client
                 self.E_NeedDiamondText.text = zstring.Format("x {0}", GlobalValueConfigCategory.Instance.Get(73).Value);
             }
 
-            self.EG_XuanZhonItemRectTransform.gameObject.SetActive(false);
-            self.E_BatAddText.gameObject.SetActive(false);
+            self.EG_XiLianInfoRectTransform.gameObject.SetActive(false);
         }
 
         [EntitySystem]
@@ -228,7 +227,7 @@ namespace ET.Client
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
             ItemInfo bagInfo = self.XilianBagInfo;
-            self.EG_XuanZhonItemRectTransform.gameObject.SetActive(bagInfo != null);
+            self.EG_XiLianInfoRectTransform.gameObject.SetActive(bagInfo != null);
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
             {
@@ -262,7 +261,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_Text_CostValueText.text = zstring.Format("x {1}", itemCost[1]);
+                self.E_Text_CostValueText.text = zstring.Format("x {0}", itemCost[1]);
             }
         }
 
@@ -270,8 +269,6 @@ namespace ET.Client
 
         private static void UpdateCombat(this ES_RoleXiLianShow self)
         {
-            self.E_BatAddText.gameObject.SetActive(true);
-
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.XilianBagInfo.ItemID);
 
             int zhanliValue = 0;
