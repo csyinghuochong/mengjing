@@ -67,6 +67,8 @@ namespace ET
 		public string ChapterName { get; set; }
 		/// <summary>音乐</summary>
 		public string Music { get; set; }
+		/// <summary>loading图</summary>
+		public string LoadingRes { get; set; }
 		/// <summary>生成范围</summary>
 		public int[] InitSize { get; set; }
 		/// <summary>起始地块</summary>
