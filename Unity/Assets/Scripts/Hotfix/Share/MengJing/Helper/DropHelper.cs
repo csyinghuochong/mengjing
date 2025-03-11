@@ -192,8 +192,34 @@ namespace ET
 			return dropItemList;
 		}
 
+		public static List<RewardItem> Show_MonsterDropNoRepeat(int monsterID, float dropProValue, bool all)
+		{
+			//根据怪物ID获得掉落ID
 
-		//传入ID判定是否是特殊掉落ID
+			List<RewardItem> dropItemList = Show_MonsterDrop(monsterID,dropProValue, all );
+
+			Dictionary<int,int> itemlist = new Dictionary<int, int>();
+			for (int i = 0; i < dropItemList.Count; i++)
+			{
+				if (!itemlist.ContainsKey(dropItemList[i].ItemID))
+				{
+					itemlist.Add(dropItemList[i].ItemID, dropItemList[i].ItemNum);
+				}
+				else
+				{
+					itemlist[dropItemList[i].ItemID] += dropItemList[i].ItemNum;	
+				}
+			}
+
+			dropItemList.Clear();	
+			foreach (var iteminfo in itemlist)
+			{
+				dropItemList.Add( new RewardItem(){ ItemID =  iteminfo.Key, ItemNum =  iteminfo.Value} );
+			}
+
+			return dropItemList;
+		}
+
 		public static bool IfTeShuDropItemID(int itemID)
 		{
 			//钥匙类 返回1

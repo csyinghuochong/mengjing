@@ -21,7 +21,7 @@ namespace ET.Client
             int playerlv = userInfoComponentC.UserInfo.Lv;
             int bossid = TowerHelper.GetSealTowerBoss(playerlv);
             
-            List<RewardItem> droplist = DropHelper.Show_MonsterDrop(bossid, 1f, true);
+            List<RewardItem> droplist = DropHelper.Show_MonsterDropNoRepeat(bossid, 1f, true);
             self.View.ES_RewardList.Refresh(droplist, 1f, false);
         }
 
