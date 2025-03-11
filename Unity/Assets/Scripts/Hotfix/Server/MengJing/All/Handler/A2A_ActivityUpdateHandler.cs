@@ -162,6 +162,11 @@ namespace ET.Server
                         foreach (var item in fubenCenter.Children)
                         {
                             Scene fubenScene = item.Value as Scene;
+                            if(fubenScene == null)
+                            {
+                                Log.Error($"FubenCenter定时刷新: {scene.Zone()} {item.Key} {item.Value}");
+                                continue;   
+                            }
                             fubenScene.GetComponent<YeWaiRefreshComponent>()?.OnZeroClockUpdate(request.OpenDay);
                         }
                     }

@@ -744,7 +744,7 @@ namespace ET.Server
         {
             self.TriggerTaskEvent(TaskTargetType.OnLineTime_1010, 0, 1);
 
-            if (self.Root().GetComponent<MapComponent>().SceneType == SceneTypeEnum.Battle)
+            if (self.Scene().GetComponent<MapComponent>().SceneType == SceneTypeEnum.Battle)
             {
                 self.TriggerTaskEvent(TaskTargetType.BattleExist_1103, 0, 1);
             }
