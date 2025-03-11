@@ -62,7 +62,7 @@ namespace ET.Client
             int totalTimes = numericComponent.GetAsInt(NumericType.PetExploreNumber);
             using (zstring.Block())
             {
-                self.E_Text_TotalNumberText.text = zstring.Format("今日累计次数：{0}", totalTimes);
+                self.E_Text_TotalNumberText.text = zstring.Format("次数：{0}", totalTimes);
             }
 
             self.E_Text_PetExploreLucklyText.text = numericComponent.GetAsInt(NumericType.PetExploreLuckly).ToString();

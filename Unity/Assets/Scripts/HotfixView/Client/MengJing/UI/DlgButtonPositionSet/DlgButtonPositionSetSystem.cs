@@ -170,7 +170,6 @@ namespace ET.Client
 
             self.UpdateSkillPosition();
             self.OnBtn_SkilPositionSaveButton();
-
             self.SetViewActive(true);
             
             for (int i = 0; i < self.UISkillDragList.Count; i++)
