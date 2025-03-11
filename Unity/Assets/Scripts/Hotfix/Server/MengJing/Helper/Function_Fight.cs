@@ -1224,7 +1224,7 @@ namespace ET.Server
             {
                 //设置伤害为0,用于伤害飘字
                 long now_hp = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
-                numericComponentDefend.ApplyValue(NumericType.Now_Hp, now_hp, true, true, attackUnit.Id);
+                numericComponentDefend.ApplyValue(NumericType.Now_Hp, now_hp, true, false, attackUnit.Id, skillconfig.Id );
 
                 //闪避触发被动技能
                 defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.ShanBi_5, attackUnit.Id);

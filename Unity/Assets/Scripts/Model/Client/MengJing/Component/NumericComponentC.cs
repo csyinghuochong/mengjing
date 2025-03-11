@@ -36,12 +36,7 @@ namespace ET.Client
             long old = self.GetByKey(numericType);
 
             self.NumericDic[numericType] = value;
-
-            if (check && old == value)
-            {
-                return;
-            }
-
+            
             if (notice)
             {
                 //发送改变属性的相关消息
@@ -73,13 +68,6 @@ namespace ET.Client
             //是否超过指定上限值
             long old = self.GetByKey(numericType);
             self.NumericDic[numericType] = value;
-
-            //血量特殊处理
-            if (old == value && numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
-                numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
-            {
-                return;
-            }
             
             if (notice)
             {

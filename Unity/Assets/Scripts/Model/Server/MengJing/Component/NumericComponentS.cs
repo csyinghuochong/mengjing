@@ -97,7 +97,12 @@ namespace ET.Server
                 nowPropertyValue = value;
             }
 
-            if (notice && old!= nowPropertyValue)
+            if (check && old == nowPropertyValue)
+            {
+                return;
+            }
+
+            if (notice)
             {
                 //发送改变属性的相关消息
                 NumbericChange args = new();
@@ -162,6 +167,12 @@ namespace ET.Server
         {
             long old = self.GetByKey(numericType);
            
+            if (numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
+                numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
+            {
+                check = false;
+            }
+            
             if (check && old == value)
             {
                 return;
