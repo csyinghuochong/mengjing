@@ -17,6 +17,8 @@ namespace ET.Server
                     return;
                 }
 
+                //unit.GetComponent<MoveComponent>().SyncPosition();
+                //unit.GetComponent<MoveComponent>().Stop(true);
                 bagComponentS.OnCostItemData($"{ConfigData.FlyToItem};1", ItemLocType.ItemLocBag);
 
                 response.Error = TransferHelper.OnFlyToPosition(unit, request.NpcConfigId);

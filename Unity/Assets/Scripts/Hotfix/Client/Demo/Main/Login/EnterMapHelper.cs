@@ -87,6 +87,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestFlyToPosition(Scene root, int npcId)
         {
+            MoveHelper.Stop(root);
             C2M_FlyToPosition c2mFlyToPosition = C2M_FlyToPosition.Create();    
             c2mFlyToPosition.NpcConfigId = npcId;
             M2C_FlyToPosition response =  await root.GetComponent<ClientSenderCompnent>().Call(c2mFlyToPosition) as M2C_FlyToPosition;
