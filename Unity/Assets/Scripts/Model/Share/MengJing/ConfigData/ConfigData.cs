@@ -24,6 +24,11 @@ namespace ET
         public const int ShenYuanCostId = 10000150;
      
         /// <summary>
+        /// 小飞鞋
+        /// </summary>
+        public const int FlyToItem = 90000014;
+        
+        /// <summary>
         /// 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
         /// </summary>
         [StaticField]

@@ -615,7 +615,35 @@ namespace ET.Server
             //动态删除副本
             OnFubenToMain(scene, userId);
         }
-        
+
+        public static int OnFlyToPosition(Unit unit, int npcid)
+        {
+            Unit tonpc = null;
+            List<Unit> npclist= FubenHelp.GetUnitList(unit.Scene(), UnitType.Npc);
+            foreach (Unit npc in npclist)
+            {
+                if (npc.ConfigId == npcid)
+                {
+                    tonpc = npc;
+                    break;
+                }
+            }
+
+            if (tonpc == null)
+            {
+                return ErrorCode.ERR_NotFindNpc;
+            }
+
+            RemovePetAndJingLing(unit);
+            
+            unit.Position = tonpc.Position + math.mul(tonpc.Rotation, math.forward()) * 1f;;
+            unit.Stop(-2);
+            
+            CreateFightPetList(unit);
+            CreateJingLing(unit);
+            
+            return ErrorCode.ERR_Success;   
+        }
 
         private static void OnMainToMain(Unit unit)
         {

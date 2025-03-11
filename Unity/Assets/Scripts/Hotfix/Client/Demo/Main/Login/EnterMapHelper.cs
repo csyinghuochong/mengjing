@@ -85,6 +85,14 @@ namespace ET.Client
             RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID()).Coroutine();
         }
 
+        public static async ETTask<int> RequestFlyToPosition(Scene root, int npcId)
+        {
+            C2M_FlyToPosition c2mFlyToPosition = C2M_FlyToPosition.Create();    
+            c2mFlyToPosition.NpcConfigId = npcId;
+            M2C_FlyToPosition response =  await root.GetComponent<ClientSenderCompnent>().Call(c2mFlyToPosition) as M2C_FlyToPosition;
+            return response.Error;
+        }
+
         public static async ETTask SendReviveRequest(Scene root, bool revive)
         {
             Actor_SendReviveRequest request = Actor_SendReviveRequest.Create();

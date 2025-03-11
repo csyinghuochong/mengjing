@@ -48,6 +48,30 @@ namespace ET.Client
      		}
      	}
 
+		public Button E_FlyToButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_FlyToButton == null )
+					{
+						this.m_E_FlyToButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_FlyToButton");
+					}
+					return this.m_E_FlyToButton;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_FlyToButton");
+				}
+			}
+		}
+
 		public Image E_ImageDiImage
      	{
      		get
@@ -101,11 +125,13 @@ namespace ET.Client
 			this.m_E_ImageDiButton = null;
 			this.m_E_ImageDiImage = null;
 			this.m_E_TextNameText = null;
+			this.m_E_FlyToButton = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
 		private Button m_E_ImageDiButton = null;
+		private Button m_E_FlyToButton = null;	
 		private Image m_E_ImageDiImage = null;
 		private Text m_E_TextNameText = null;
 		public Transform uiTransform = null;
