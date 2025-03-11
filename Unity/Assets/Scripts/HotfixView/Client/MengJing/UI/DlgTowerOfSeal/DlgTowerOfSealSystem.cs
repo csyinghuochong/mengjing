@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     [FriendOf(typeof (DlgTowerOfSeal))]
     public static class DlgTowerOfSealSystem
@@ -10,6 +12,17 @@
 
         public static void ShowWindow(this DlgTowerOfSeal self, Entity contextData = null)
         {
+            self.UpdateRewardShowList();
+        }
+        
+        public static void UpdateRewardShowList(this DlgTowerOfSeal self)
+        {
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+            int playerlv = userInfoComponentC.UserInfo.Lv;
+            int bossid = TowerHelper.GetSealTowerBoss(playerlv);
+            
+            List<RewardItem> droplist = DropHelper.Show_MonsterDrop(bossid, 1f, true);
+            self.View.ES_RewardList.Refresh(droplist, 1f, false);
         }
 
         public static async ETTask OnBtn_Enter(this DlgTowerOfSeal self)

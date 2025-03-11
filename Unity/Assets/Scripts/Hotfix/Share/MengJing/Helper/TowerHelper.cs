@@ -66,7 +66,33 @@ namespace ET
             return (int.Parse(ids[fubenDifficulty - 1]));
         }
 
-        
+        public static int GetSealTowerBoss(int lv)
+        {
+            int baseLevel = 200000;
+            foreach (var sealcofnig in ConfigData.SealTowerLevelConfig)
+            {
+                if (lv <= sealcofnig.Key)
+                {
+                    baseLevel = sealcofnig.Value;
+                    break;
+                }
+            }
+
+            int monsterId = 0;  
+            while (true)
+            {
+                baseLevel += 1;
+                if (!TowerConfigCategory.Instance.Contain(baseLevel))
+                {
+                    break;
+                }
+                TowerConfig towerConfig = TowerConfigCategory.Instance.Get(baseLevel);
+                string[] monsterIds = towerConfig.MonsterSet.Split(';');
+                monsterId = int.Parse(monsterIds[2]);
+            }
+            
+            return monsterId;   
+        }
         
         public static int GetLastTowerIdByScene(int sceneType)
         {

@@ -95,10 +95,10 @@ namespace ET.Client
             self.TakeCardId = chapterid;
 
             self.OnUpdateCost();
-            self.UpdateReardShowList();
+            self.UpdateRewardShowList();
         }
 
-        public static void UpdateReardShowList(this DlgChouKa self)
+        public static void UpdateRewardShowList(this DlgChouKa self)
         {
             int cindex = self.TakeCardId % 1000;
             using (zstring.Block())
