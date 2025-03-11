@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionSaveButton == null )
      			{
-		    		this.m_E_Btn_SkilPositionSaveButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_SkilPositionSave");
+		    		this.m_E_Btn_SkilPositionSaveButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionSave");
      			}
      			return this.m_E_Btn_SkilPositionSaveButton;
      		}
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionSaveImage == null )
      			{
-		    		this.m_E_Btn_SkilPositionSaveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_SkilPositionSave");
+		    		this.m_E_Btn_SkilPositionSaveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionSave");
      			}
      			return this.m_E_Btn_SkilPositionSaveImage;
      		}
@@ -120,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionCancelButton == null )
      			{
-		    		this.m_E_Btn_SkilPositionCancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_SkilPositionCancel");
+		    		this.m_E_Btn_SkilPositionCancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionCancel");
      			}
      			return this.m_E_Btn_SkilPositionCancelButton;
      		}
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionCancelImage == null )
      			{
-		    		this.m_E_Btn_SkilPositionCancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_SkilPositionCancel");
+		    		this.m_E_Btn_SkilPositionCancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionCancel");
      			}
      			return this.m_E_Btn_SkilPositionCancelImage;
      		}
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionResetButton == null )
      			{
-		    		this.m_E_Btn_SkilPositionResetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_SkilPositionReset");
+		    		this.m_E_Btn_SkilPositionResetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionReset");
      			}
      			return this.m_E_Btn_SkilPositionResetButton;
      		}
@@ -171,10 +171,27 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkilPositionResetImage == null )
      			{
-		    		this.m_E_Btn_SkilPositionResetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_SkilPositionReset");
+		    		this.m_E_Btn_SkilPositionResetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Top/E_Btn_SkilPositionReset");
      			}
      			return this.m_E_Btn_SkilPositionResetImage;
      		}
+     	}
+		
+		public Transform EG_Top
+     	{
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_EG_Top == null )
+		        {
+			        this.m_EG_Top = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Top");
+		        }
+		        return this.m_EG_Top;
+	        }
      	}
 
 		public void DestroyWidget()
@@ -189,6 +206,7 @@ namespace ET.Client
 			this.m_E_Btn_SkilPositionCancelImage = null;
 			this.m_E_Btn_SkilPositionResetButton = null;
 			this.m_E_Btn_SkilPositionResetImage = null;
+			this.m_EG_Top = null;
 			this.uiTransform = null;
 		}
 
@@ -202,6 +220,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Btn_SkilPositionCancelImage = null;
 		private UnityEngine.UI.Button m_E_Btn_SkilPositionResetButton = null;
 		private UnityEngine.UI.Image m_E_Btn_SkilPositionResetImage = null;
+		private Transform m_EG_Top = null;
 		public Transform uiTransform = null;
 	}
 }

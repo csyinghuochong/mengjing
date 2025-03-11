@@ -27,6 +27,7 @@
 
 		public void OnHideWindow(UIBaseWindow uiBaseWindow)
 		{
+			uiBaseWindow.GetComponent<DlgButtonPositionSet>().HideWindow(); 
 		}
 
 		public void BeforeUnload(UIBaseWindow uiBaseWindow)

@@ -27,6 +27,12 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgButtonPositionSet self, Entity contextData = null)
         {
+            
+        }
+
+        public static void HideWindow(this DlgButtonPositionSet self)
+        {
+            self.SetViewActive(false);
         }
 
         public static void InitButtons(this DlgButtonPositionSet self)
@@ -34,6 +40,10 @@ namespace ET.Client
             self.UIMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.uiTransform.gameObject;
             self.View.uiTransform.SetParent(self.UIMain.transform);
             self.View.uiTransform.SetSiblingIndex(0);
+            
+            self.View.EG_Top.transform.SetParent(self.UIMain.transform);
+            self.View.EG_Top.transform.SetAsLastSibling();
+
             self.SkillPositionList.Clear();
             ReferenceCollector rc = self.UIMain.GetComponent<ReferenceCollector>();
 
@@ -82,9 +92,8 @@ namespace ET.Client
 
         public static void ShowSkillPositionSet(this DlgButtonPositionSet self)
         {
-            self.View.uiTransform.gameObject.SetActive(true);
-            self.View.E_SkillPositionSetImage.gameObject.SetActive(true);
-
+            self.SetViewActive(true);    
+            
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
                 UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
@@ -162,8 +171,8 @@ namespace ET.Client
             self.UpdateSkillPosition();
             self.OnBtn_SkilPositionSaveButton();
 
-            self.View.uiTransform.gameObject.SetActive(false);
-            self.View.E_SkillPositionSetImage.gameObject.SetActive(false);
+            self.SetViewActive(true);
+            
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
                 UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
@@ -184,10 +193,17 @@ namespace ET.Client
             self.HideEventTrigger();
         }
 
+        private static void SetViewActive(this DlgButtonPositionSet self, bool isActive)
+        {
+            self.View.uiTransform.gameObject.SetActive(isActive);
+            self.View.E_SkillPositionSetImage.gameObject.SetActive(isActive);
+            self.View.EG_Top.gameObject.SetActive(isActive);
+        }
+
         public static void HideEventTrigger(this DlgButtonPositionSet self)
         {
-            self.View.uiTransform.gameObject.SetActive(false);
-            self.View.E_SkillPositionSetImage.gameObject.SetActive(false);
+            self.SetViewActive(false);
+            
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
                 UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
