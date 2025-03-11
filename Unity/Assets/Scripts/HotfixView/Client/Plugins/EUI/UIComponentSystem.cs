@@ -407,16 +407,20 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <param name="windowId"></param>
-        public static void CloseWindow(this UIComponent self,WindowID windowId)
+        public static void CloseWindow(this UIComponent self,WindowID windowId, bool showUnit = true)
         {
             if (!self.VisibleWindowsDic.ContainsKey((int)windowId))
             {
                 return;
             }
 
+            if (self.CurrentNpcUI == windowId && showUnit)
+            {
+                 self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit(); 
+            }
+
             if (self.CurrentNpcUI == windowId)
             {
-                self.Root().CurrentScene().GetComponent<MJCameraComponent>().SetBuildExit();
                 self.CurrentNpcId = 0;
                 self.CurrentNpcUI = 0;
             }

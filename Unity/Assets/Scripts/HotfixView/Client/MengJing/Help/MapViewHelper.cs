@@ -103,11 +103,11 @@ namespace ET.Client
 
                 if (show)
                 {
-                    uu.GetComponent<GameObjectComponent>().ExitHide();
+                    uu.GetComponent<GameObjectComponent>()?.ExitHide();
                 }
                 else
                 {
-                    uu.GetComponent<GameObjectComponent>().EnterHide();
+                    uu.GetComponent<GameObjectComponent>()?.EnterHide();
                 }
             }
          }
