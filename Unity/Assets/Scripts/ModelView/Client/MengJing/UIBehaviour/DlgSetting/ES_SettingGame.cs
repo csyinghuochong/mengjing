@@ -657,108 +657,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_FixedButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_FixedButton == null )
-     			{
-		    		this.m_E_Btn_FixedButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGanSet/E_Btn_Fixed");
-     			}
-     			return this.m_E_Btn_FixedButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Btn_FixedImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_FixedImage == null )
-     			{
-		    		this.m_E_Btn_FixedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGanSet/E_Btn_Fixed");
-     			}
-     			return this.m_E_Btn_FixedImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Image_FixedImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Image_FixedImage == null )
-     			{
-		    		this.m_E_Image_FixedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGanSet/E_Image_Fixed");
-     			}
-     			return this.m_E_Image_FixedImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_Btn_ClickButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_ClickButton == null )
-     			{
-		    		this.m_E_Btn_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGan/E_Btn_Click");
-     			}
-     			return this.m_E_Btn_ClickButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Btn_ClickImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Btn_ClickImage == null )
-     			{
-		    		this.m_E_Btn_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGan/E_Btn_Click");
-     			}
-     			return this.m_E_Btn_ClickImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Image_ClickImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Image_ClickImage == null )
-     			{
-		    		this.m_E_Image_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_2/Viewport/Content/UIGameSetting/YaoGan/E_Image_Click");
-     			}
-     			return this.m_E_Image_ClickImage;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_ActTargetSelectRectTransform
      	{
      		get
@@ -858,6 +756,108 @@ namespace ET.Client
 		    		this.m_E_ScrollView_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_3");
      			}
      			return this.m_E_ScrollView_3Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_ClickButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ClickButton == null )
+     			{
+		    		this.m_E_Btn_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGan/E_Btn_Click");
+     			}
+     			return this.m_E_Btn_ClickButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_ClickImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ClickImage == null )
+     			{
+		    		this.m_E_Btn_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGan/E_Btn_Click");
+     			}
+     			return this.m_E_Btn_ClickImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image_ClickImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image_ClickImage == null )
+     			{
+		    		this.m_E_Image_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGan/E_Image_Click");
+     			}
+     			return this.m_E_Image_ClickImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_FixedButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_FixedButton == null )
+     			{
+		    		this.m_E_Btn_FixedButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGanSet/E_Btn_Fixed");
+     			}
+     			return this.m_E_Btn_FixedButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_FixedImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_FixedImage == null )
+     			{
+		    		this.m_E_Btn_FixedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGanSet/E_Btn_Fixed");
+     			}
+     			return this.m_E_Btn_FixedImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Image_FixedImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Image_FixedImage == null )
+     			{
+		    		this.m_E_Image_FixedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView_3/Viewport/Content/UIGameSetting/YaoGanSet/E_Image_Fixed");
+     			}
+     			return this.m_E_Image_FixedImage;
      		}
      	}
 
@@ -1406,18 +1406,18 @@ namespace ET.Client
 			this.m_EG_FirstUnionNameRectTransform = null;
 			this.m_E_ScrollView_2ScrollRect = null;
 			this.m_E_ScrollView_2Image = null;
-			this.m_E_Btn_FixedButton = null;
-			this.m_E_Btn_FixedImage = null;
-			this.m_E_Image_FixedImage = null;
-			this.m_E_Btn_ClickButton = null;
-			this.m_E_Btn_ClickImage = null;
-			this.m_E_Image_ClickImage = null;
 			this.m_EG_ActTargetSelectRectTransform = null;
 			this.m_EG_AutoAttackRectTransform = null;
 			this.m_EG_ActTypeSetRectTransform = null;
 			this.m_EG_SkillAttackPlayerFirstRectTransform = null;
 			this.m_E_ScrollView_3ScrollRect = null;
 			this.m_E_ScrollView_3Image = null;
+			this.m_E_Btn_ClickButton = null;
+			this.m_E_Btn_ClickImage = null;
+			this.m_E_Image_ClickImage = null;
+			this.m_E_Btn_FixedButton = null;
+			this.m_E_Btn_FixedImage = null;
+			this.m_E_Image_FixedImage = null;
 			this.m_E_InputFieldCNameInputField = null;
 			this.m_E_InputFieldCNameImage = null;
 			this.m_E_ButtonRnameButton = null;
@@ -1488,18 +1488,18 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_FirstUnionNameRectTransform = null;
 		private UnityEngine.UI.ScrollRect m_E_ScrollView_2ScrollRect = null;
 		private UnityEngine.UI.Image m_E_ScrollView_2Image = null;
-		private UnityEngine.UI.Button m_E_Btn_FixedButton = null;
-		private UnityEngine.UI.Image m_E_Btn_FixedImage = null;
-		private UnityEngine.UI.Image m_E_Image_FixedImage = null;
-		private UnityEngine.UI.Button m_E_Btn_ClickButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ClickImage = null;
-		private UnityEngine.UI.Image m_E_Image_ClickImage = null;
 		private UnityEngine.RectTransform m_EG_ActTargetSelectRectTransform = null;
 		private UnityEngine.RectTransform m_EG_AutoAttackRectTransform = null;
 		private UnityEngine.RectTransform m_EG_ActTypeSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_SkillAttackPlayerFirstRectTransform = null;
 		private UnityEngine.UI.ScrollRect m_E_ScrollView_3ScrollRect = null;
 		private UnityEngine.UI.Image m_E_ScrollView_3Image = null;
+		private UnityEngine.UI.Button m_E_Btn_ClickButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ClickImage = null;
+		private UnityEngine.UI.Image m_E_Image_ClickImage = null;
+		private UnityEngine.UI.Button m_E_Btn_FixedButton = null;
+		private UnityEngine.UI.Image m_E_Btn_FixedImage = null;
+		private UnityEngine.UI.Image m_E_Image_FixedImage = null;
 		private UnityEngine.UI.InputField m_E_InputFieldCNameInputField = null;
 		private UnityEngine.UI.Image m_E_InputFieldCNameImage = null;
 		private UnityEngine.UI.Button m_E_ButtonRnameButton = null;
