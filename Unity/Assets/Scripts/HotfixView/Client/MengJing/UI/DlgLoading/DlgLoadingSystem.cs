@@ -68,7 +68,7 @@ namespace ET.Client
                     // }
 
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "Back_5";
                     break;
                 case SceneTypeEnum.TeamDungeon:
                 case SceneTypeEnum.BaoZang:
@@ -110,15 +110,12 @@ namespace ET.Client
                     break;
             }
 
-            if (!loadResName.Equals("MainCity"))
-            {
-                var path = ABPathHelper.GetJpgPath(loadResName);
-                Log.Debug($"loadingjpg: {path}");
-                Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.View.E_Back_1Image.sprite = atlas;
-                self.View.E_Back_1Image.gameObject.SetActive(true);
-                self.AssetPath = path;
-            }
+            var path = ABPathHelper.GetJpgPath(loadResName);
+            Log.Debug($"loadingjpg: {path}");
+            Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.View.E_Back_1Image.sprite = atlas;
+            self.View.E_Back_1Image.gameObject.SetActive(true);
+            self.AssetPath = path;
 
             self.PassTime = 0f;
             self.ChapterId = sceneTypeEnum == (int)SceneTypeEnum.CellDungeon ? chapterId : 0;
