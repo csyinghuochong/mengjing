@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -16,6 +17,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.UpdateToggleGroupInfo();
 
             self.Button_Open = new GameObject[3];
             self.Button_Open[2] = self.E_Img_Chest_2_OpenImage.gameObject;
@@ -41,7 +43,7 @@ namespace ET.Client
                 (pdata) => { self.BeginDrag(pdata as PointerEventData, 1).Coroutine(); });
             self.Button_Close[0].GetComponent<EventTrigger>()
                     .RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData, 1); });
-            
+
             self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
@@ -174,6 +176,22 @@ namespace ET.Client
             }
         }
 
+        private static void UpdateToggleGroupInfo(this ES_ShouJiList self)
+        {
+            List<ShouJiConfig> shouJiConfigs = ShouJiConfigCategory.Instance.GetAll().Values.ToList();
+            ShoujiComponentC shoujiComponent = self.Root().GetComponent<ShoujiComponentC>();
+
+            for (int i = 0; i < shouJiConfigs.Count; i++)
+            {
+                Transform transform = self.E_BtnItemTypeSetToggleGroup.transform.GetChild(i).Find("StarText");
+                int starNum = shoujiComponent.GetChapterStar(shouJiConfigs[i].Id);
+                using (zstring.Block())
+                {
+                    transform.GetComponent<Text>().text = zstring.Format("({0}/{1})", starNum, shouJiConfigs[i].ProList3_StartNum);
+                }
+            }
+        }
+
         private static void UpdateStarInfo(this ES_ShouJiList self, ShouJiConfig shouJiConfig)
         {
             ShoujiComponentC shoujiComponent = self.Root().GetComponent<ShoujiComponentC>();
@@ -182,7 +200,7 @@ namespace ET.Client
             progress = Mathf.Min(1f, progress);
 
             self.E_ImageProgressImage.fillAmount = progress;
-            // self.E_Text_NameText.text = shouJiConfig.ChapterDes;
+            self.E_Text_NameText.text = shouJiConfig.ChapterDes;
             using (zstring.Block())
             {
                 self.E_Text_StarNumText.text = zstring.Format("{0}/{1}", starNum, shouJiConfig.ProList3_StartNum);

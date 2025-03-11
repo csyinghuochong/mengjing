@@ -99,6 +99,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_NameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_NameText == null )
+     			{
+		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_TopNode/E_Text_Name");
+     			}
+     			return this.m_E_Text_NameText;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_Text_StarNumText
      	{
      		get
@@ -441,6 +458,7 @@ namespace ET.Client
 			this.m_E_ScrollViewImage = null;
 			this.m_EG_TopNodeRectTransform = null;
 			this.m_E_ImageProgressImage = null;
+			this.m_E_Text_NameText = null;
 			this.m_E_Text_StarNumText = null;
 			this.m_E_Text_Star1Text = null;
 			this.m_E_Text_Star2Text = null;
@@ -468,6 +486,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ScrollViewImage = null;
 		private UnityEngine.RectTransform m_EG_TopNodeRectTransform = null;
 		private UnityEngine.UI.Image m_E_ImageProgressImage = null;
+		private UnityEngine.UI.Text m_E_Text_NameText = null;
 		private UnityEngine.UI.Text m_E_Text_StarNumText = null;
 		private UnityEngine.UI.Text m_E_Text_Star1Text = null;
 		private UnityEngine.UI.Text m_E_Text_Star2Text = null;
