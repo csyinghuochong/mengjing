@@ -952,6 +952,8 @@ namespace ET
             new KeyValuePair() { Value = "玄武守护", Value2 = "200301" }, //闪避
             new KeyValuePair() { Value = "神兽守护", Value2 = "" },
         };
+        
+        
 
         [StaticField]
         public static string DefaultGem = "0_0_0_0";
@@ -1939,6 +1941,20 @@ namespace ET
             new List<int> { 11300601, 11300602, 11300603, 11300604, 11300605 }
         };
 
+        /// <summary>
+        /// 封印塔等级配置, KeyId.ToweConfigid.  value=monsterid
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, int> SealTowerLevelConfig = new Dictionary<int, int>()
+        {
+            { 20,   201000 },
+            { 30,   202000 },
+            { 40,   203000 },
+            { 50,   204000 },
+            { 60,   205000 },
+            { 1000, 206000 }
+        };
+        
         # region 宠物乱斗配置
 
         /// <summary>

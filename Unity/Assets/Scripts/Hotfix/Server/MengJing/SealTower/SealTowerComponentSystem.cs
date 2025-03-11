@@ -60,29 +60,14 @@ namespace ET.Server
                 // 60-99级 206001
                 int lv = players[0].GetComponent<UserInfoComponentS>().UserInfo.Lv;
                 int baseLevel = 200000;
-                if (lv < 20)
+
+                foreach (var sealcofnig in ConfigData.SealTowerLevelConfig)
                 {
-                    baseLevel = 201000;
-                }
-                else if (lv < 30)
-                {
-                    baseLevel = 202000;
-                }
-                else if (lv < 40)
-                {
-                    baseLevel = 203000;
-                }
-                else if (lv < 50)
-                {
-                    baseLevel = 204000;
-                }
-                else if (lv < 60)
-                {
-                    baseLevel = 205000;
-                }
-                else if (lv < 100)
-                {
-                    baseLevel = 206000;
+                    if (lv <= sealcofnig.Key)
+                    {
+                        baseLevel = sealcofnig.Value;
+                        break;
+                    }
                 }
 
                 // 读取配置表,根据到达层数生成怪物

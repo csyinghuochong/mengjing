@@ -66,6 +66,8 @@ namespace ET
             return (int.Parse(ids[fubenDifficulty - 1]));
         }
 
+        
+        
         public static int GetLastTowerIdByScene(int sceneType)
         {
             int towerId = 0;
