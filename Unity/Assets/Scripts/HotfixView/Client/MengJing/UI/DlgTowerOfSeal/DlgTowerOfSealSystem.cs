@@ -42,7 +42,7 @@ namespace ET.Client
                 BattleHelper.GetSceneIdByType(SceneTypeEnum.SealTower), 0, "0");
             if (errorCode == ErrorCode.ERR_Success)
             {
-                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSeal);
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSeal, false);
             }
         }
     }
