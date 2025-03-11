@@ -49,12 +49,12 @@ namespace ET.Client
             string loadResName = "MainCity";
             List<string> backpngs = new List<string>()
             {
-                "Back_6",
-                "Back_7",
-                "Back_11",
-                "Back_13",
-                "Back_14",
-                "Back_15"
+                "Back_5",
+                // "Back_7",
+                // "Back_11",
+                // "Back_13",
+                // "Back_14",
+                // "Back_15"
             };
             int index = RandomHelper.RandomNumber(0, backpngs.Count);
             self.StartLoadAssets = false;
@@ -82,6 +82,7 @@ namespace ET.Client
                 case SceneTypeEnum.Battle:
                 case SceneTypeEnum.Arena: 
                 case SceneTypeEnum.PetMelee:
+                case SceneTypeEnum.SealTower:
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
