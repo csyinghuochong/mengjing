@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace ET.Client
@@ -36,6 +37,9 @@ namespace ET.Client
 
         public GameObject EffectObj { get; set; }
         public string EffectPath;
+        
+        public float3 EffectPosition;
+        public float EffectAngle;
     }
 }
 

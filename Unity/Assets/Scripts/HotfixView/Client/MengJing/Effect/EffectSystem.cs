@@ -40,7 +40,6 @@ namespace ET.Client
             self.EffectConfig = EffectConfigCategory.Instance.Get(effectData.EffectId);
             self.EffectBeginTime = TimeHelper.ServerNow();
             self.EffectEndTime = TimeHelper.ServerNow() + self.EffectConfig.SkillEffectLiveTime;
-
             self.OnUpdate();
         }
 
@@ -111,11 +110,19 @@ namespace ET.Client
                         break;
                     //不跟随玩家
                     case 1:
-                        angle = self.EffectData.EffectAngle != 0 ? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
                         self.EffectObj.transform.SetParent(globalComponent.Unit);
-                        self.EffectObj.transform.position = self.EffectData.EffectPosition;
+                        if (self.EffectData.EffectPosition.Equals(self.EffectPosition))
+                        {
+                            angle = self.EffectData.EffectAngle != 0 ? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
+                            self.EffectObj.transform.position = self.EffectData.EffectPosition;
+                            self.EffectObj.transform.localRotation = Quaternion.Euler(0, angle, 0);
+                        }
+                        else
+                        {
+                            self.EffectObj.transform.position = self.EffectPosition;
+                            self.EffectObj.transform.localRotation = Quaternion.Euler(0, self.EffectAngle, 0);
+                        }
                         self.EffectObj.transform.localScale = Vector3.one;
-                        self.EffectObj.transform.localRotation = Quaternion.Euler(0, angle, 0);
                         break;
                     //实时跟随玩家位置,但是不跟随旋转
                     case 2:
@@ -273,6 +280,8 @@ namespace ET.Client
         {
             if (self.EffectObj == null)
             {
+                self.EffectPosition = vec3;
+                self.EffectAngle = angle;
                 return;
             }
             if (angle != -1)
