@@ -20,6 +20,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            
             self.E_Btn_ClickButton.AddListener(self.OnBtn_ClickButton);
 
             self.E_ButtonSkillSetButton.AddListenerAsync(self.OnButtonSkillSetButton);
@@ -109,12 +111,22 @@ namespace ET.Client
 
             self.UserInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.InitUI();
+            
+            self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_SettingGame self)
         {
             self.DestroyWidget();
+        }
+
+        private static void OnItemTypeSet(this ES_SettingGame self, int index)
+        {
+            self.E_ScrollView_0ScrollRect.gameObject.SetActive(index == 0);
+            self.E_ScrollView_1ScrollRect.gameObject.SetActive(index == 1);
+            self.E_ScrollView_2ScrollRect.gameObject.SetActive(index == 2);
+            self.E_ScrollView_3ScrollRect.gameObject.SetActive(index == 3);
         }
 
         public static void OnScreenToggle0_Ex(this ES_SettingGame self, bool value)
