@@ -554,6 +554,23 @@ message M2C_TransferMap // ILocationResponse
 	string Message = 3;
 }
 
+//ResponseType M2C_FlyToPosition
+message C2M_FlyToPosition // ILocationRequest
+{
+	int32 RpcId = 1;
+
+	int32 SceneId = 2;
+	int32 SceneType = 3;
+	int32 NpcConfigId = 4;	
+}
+
+message M2C_FlyToPosition // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 //ResponseType G2C_Benchmark
 message C2G_Benchmark // ISessionRequest
 {
