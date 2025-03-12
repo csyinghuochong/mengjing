@@ -92,6 +92,23 @@ namespace ET.Client
      		}
      	}
 
+		public Transform EG_Text_FailTip
+     	{
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_E_Text_FailTip == null )
+		        {
+			        this.m_E_Text_FailTip = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/EG_Text_FailTip");
+		        }
+		        return this.m_E_Text_FailTip;
+	        }
+     	}
+        
 		public void DestroyWidget()
 		{
 			this.m_E_ButtonTiaozhanButton = null;
@@ -99,6 +116,7 @@ namespace ET.Client
 			this.m_E_ButtonDamageButton = null;
 			this.m_E_TextHurtText = null;
 			this.m_E_TextCoundownText = null;
+			this.m_E_Text_FailTip = null;
 			this.uiTransform = null;
 		}
 
@@ -107,6 +125,7 @@ namespace ET.Client
 		private Image m_E_ButtonTiaozhanImage = null;
 		private Text m_E_TextHurtText = null;
 		private Text m_E_TextCoundownText = null;
+		private Transform m_E_Text_FailTip = null;
 		public Transform uiTransform = null;
 	}
 }

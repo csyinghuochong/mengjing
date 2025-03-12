@@ -50,6 +50,7 @@ namespace ET.Client
         public static void OnResetHurt(this DlgTrialMain self)
         {
             self.View.E_TextHurtText.text = "伤害总值:0\n伤害秒值:0";
+            self.View.EG_Text_FailTip.gameObject.SetActive(false);
         }
 
         public static void OnUpdateHurt(this DlgTrialMain self, M2C_TrialDungeonDamage dungeonDamage)
@@ -111,6 +112,13 @@ namespace ET.Client
             
             self.BeginTimer();
             self.OnResetHurt();
+            self.ResetMainUI();
+        }
+
+        private static void ResetMainUI(this DlgTrialMain self)
+        {
+            DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+            dlgMain.DlgMainReset(SceneTypeEnum.TrialDungeon);
         }
 
         public static void OnTimer(this DlgTrialMain self)
@@ -121,7 +129,7 @@ namespace ET.Client
                 self.Root().GetComponent<ClientSenderCompnent>().Call(C2M_TrialDungeonFinishRequest.Create()).Coroutine();
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 self.View.E_TextCoundownText.text = "00:00";
-                //self.View.E_TextCoundownText.text = "未能在60秒内击败怪物,请点击重新挑战";
+                self.View.EG_Text_FailTip.gameObject.SetActive(true);
 
                 return;
             }
