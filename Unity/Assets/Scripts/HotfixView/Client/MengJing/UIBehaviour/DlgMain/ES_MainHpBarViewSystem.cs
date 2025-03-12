@@ -186,6 +186,13 @@ namespace ET.Client
             }
         }
 
+        public static void OnUpdateHP(this ES_MainHpBar self, long playerHurt, long petHurt)
+        {
+            self.PlayerHurt = playerHurt;
+            self.PetHurt = petHurt;
+            self.UpdateHurtText();
+        }
+
         public static string ShowHurtString(this ES_MainHpBar self, long hurt)
         {
             if (hurt == 0)
