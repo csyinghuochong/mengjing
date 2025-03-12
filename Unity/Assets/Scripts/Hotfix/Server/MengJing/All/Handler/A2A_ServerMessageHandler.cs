@@ -15,7 +15,10 @@ namespace ET.Server
                 switch (scene.SceneType)
                 {
                     case SceneType.Team:
-                       
+                        if (request.MessageType == NoticeType.PlayerExit)
+                        {
+                            scene.GetComponent<TeamSceneComponent>().OnRecvUnitLeave(long.Parse(request.MessageValue), true);
+                        }
                         break;
                     case SceneType.Solo:
                        

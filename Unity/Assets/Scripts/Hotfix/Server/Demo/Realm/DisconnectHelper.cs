@@ -42,7 +42,12 @@ namespace ET.Server
                     var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
                             .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
                     
-               
+                    //通知组队服
+                    await BroadCastHelper.SendServerMessage(player.Root(), UnitCacheHelper.GetTeamServerId(player.Zone()) , NoticeType.PlayerExit, player.UnitId.ToString());
+                    
+                    //通知Solo服
+                    //await BroadCastHelper.SendServerMessage(player.SoloServerID, NoticeType.PlayerExit, player.UnitId.ToString());
+                    
                     //通知移除账号角色登录信息
                     G2L_RemoveLoginRecord g2LRemoveLoginRecord = G2L_RemoveLoginRecord.Create();
                     g2LRemoveLoginRecord.AccountName = player.Account;
