@@ -217,9 +217,7 @@ namespace ET.Client
                 }
             }
 
-            // self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
-            self.ES_ModelShow.ShowOtherModel("Monster/70001001").Coroutine();
-
+            self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
             string skilldesc = "";
             int[] skilllist = monsterConfig.SkillID;
             for (int i = 0; i < skilllist.Length; i++)
@@ -286,6 +284,13 @@ namespace ET.Client
                 {
                     droplist.RemoveAt(i);
                     continue;
+                }
+
+                if (!ItemConfigCategory.Instance.Contain(droplist[i].ItemID))
+                {
+                    Log.Error($"掉落道具不存在:ItemID {droplist[i].ItemID}   monster:{monsterConfig.Id}");
+                     droplist.RemoveAt(i);
+                     continue;
                 }
 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(droplist[i].ItemID);
