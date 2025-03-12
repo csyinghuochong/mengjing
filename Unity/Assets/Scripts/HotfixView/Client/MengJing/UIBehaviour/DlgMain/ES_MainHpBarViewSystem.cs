@@ -89,6 +89,11 @@ namespace ET.Client
             self.EG_BossNodeRectTransform.gameObject.SetActive(false);
         }
 
+        public static void AfterEnterScene(this ES_MainHpBar self, int sceneType)
+        {
+            self.SceneType = sceneType;
+        }
+
         public static void OnUpdateBelongID(this ES_MainHpBar self, long bossid, long belongid)
         {
             if (bossid != self.LockBossId)
@@ -159,7 +164,7 @@ namespace ET.Client
             self.OnUpdateHP(unit);
         }
 
-        public static void OnUpdateHP(this ES_MainHpBar self, Unit defend, Unit attack, long hurtvalue)
+        public static void OnUpdateDamage(this ES_MainHpBar self, Unit defend, Unit attack, long hurtvalue)
         {
             if (defend.Id != self.LockBossId)
             {

@@ -1761,7 +1761,7 @@ namespace ET.Client
             if (unitType == UnitType.Monster)
             {
                 self.View.ES_MainHpBar.OnUpdateHP(defend);
-                self.View.ES_MainHpBar.OnUpdateHP(defend, attack, hurtvalue);
+                self.View.ES_MainHpBar.OnUpdateDamage(defend, attack, hurtvalue);
             }
 
             if (unitType == UnitType.Pet)
@@ -1869,7 +1869,7 @@ namespace ET.Client
             }
 
             self.View.ES_JoystickMove.AfterEnterScene();
-
+            self.View.ES_MainHpBar.AfterEnterScene(sceneTypeEnum);
             if (!SceneConfigHelper.ShowLeftButton(sceneTypeEnum))
             {
                 self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);

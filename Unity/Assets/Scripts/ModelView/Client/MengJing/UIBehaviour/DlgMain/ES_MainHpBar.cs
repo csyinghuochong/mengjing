@@ -21,6 +21,8 @@ namespace ET.Client
 		public string DefaultString = "0";
 
 		public long MyUnitId = 0;
+
+		public int SceneType;
 		
 		public UnityEngine.RectTransform EG_BossNodeRectTransform
      	{
