@@ -56,22 +56,22 @@ namespace ET.Client
             hurt *= -1;
             self.HurtValue += hurt;
 
-            if (self.FightTime <= 0)
-            {
-                self.FightTime = 1;
-            }
-
+            long leftTime = self.Countdown - TimeHelper.ServerNow();
+            leftTime = Math.Clamp( leftTime, 0, TimeHelper.Minute );
+            float fightTime = (TimeHelper.Minute - leftTime) * 0.001f;
+          
             using (zstring.Block())
             {
-                self.View.E_TextHurtText.text = zstring.Format("伤害总值:{0}\n伤害秒值:{1}", self.HurtValue, (int)((float)self.HurtValue / self.FightTime));
+                self.View.E_TextHurtText.text = zstring.Format("伤害总值:{0}\n伤害秒值:{1}", self.HurtValue, (int)((float)self.HurtValue / fightTime));
             }
         }
 
         public static void BeginTimer(this DlgTrialMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            self.Countdown = 60;
+            self.Countdown = TimeHelper.ServerNow() + TimeHelper.Minute;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.TrialMainTimer, self);
+            self.OnTimer(); 
         }
 
         public static void OnButtonTiaozhan(this DlgTrialMain self)
@@ -95,31 +95,28 @@ namespace ET.Client
                 return;
             }
 
-            self.BeginTimer();
             self.HurtValue = 0;
+            self.BeginTimer();
             self.OnUpdateHurt(0);
-            self.FightTime = 0;
         }
 
         public static void OnTimer(this DlgTrialMain self)
         {
-            if (self.Countdown <= 0)
+            long leftTime = self.Countdown - TimeHelper.ServerNow();
+            if (leftTime <= 0)
             {
                 self.Root().GetComponent<ClientSenderCompnent>().Call(C2M_TrialDungeonFinishRequest.Create()).Coroutine();
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-
-                self.View.E_TextCoundownText.text = "未能在60秒内击败怪物,请点击重新挑战";
+                self.View.E_TextCoundownText.text = "00:00";
+                //self.View.E_TextCoundownText.text = "未能在60秒内击败怪物,请点击重新挑战";
 
                 return;
             }
 
             using (zstring.Block())
             {
-                self.View.E_TextCoundownText.text = zstring.Format("倒计时 {0}", self.Countdown - 1);
+                self.View.E_TextCoundownText.text = zstring.Format("剩余时间 {0}", TimeHelper.FormatSecondsToTime(leftTime));
             }
-
-            self.Countdown--;
-            self.FightTime++;
         }
     }
 }

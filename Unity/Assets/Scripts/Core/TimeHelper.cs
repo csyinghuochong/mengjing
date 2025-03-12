@@ -78,6 +78,19 @@ namespace ET
             return ShowTimeDifferenceStr(dt1, dt2);
         }
 
+        public static string FormatSecondsToTime(long mseconds)
+        {
+            int seconds = (int)Math.Floor(mseconds * 0.001f);
+            
+            // 计算分钟数
+            int minutes = seconds / 60;
+            // 计算剩余的秒数
+            int remainingSeconds = seconds % 60;
+
+            // 使用字符串格式化将分钟和秒数转换为 00:00 格式
+            return $"{minutes:D2}:{remainingSeconds:D2}";
+        }
+        
         public static string ShowLeftTime(long time)
         {
             string str = "";

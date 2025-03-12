@@ -7,11 +7,10 @@
         {
             get => this.GetComponent<DlgTrialMainViewComponent>();
         }
-
-        public int Countdown;
+        
         public long Timer;
         public long LastTiaoZhan;
         public long HurtValue;
-        public float FightTime;
+        public long Countdown;
     }
 }
