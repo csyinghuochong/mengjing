@@ -62,7 +62,7 @@ namespace ET.Client
                 {
                     return;
                 }
-
+                
                 self.FirstWinInfos = response.FirstWinInfos;
                 KeyValuePairInt keyValuePairInt = FirstWinConfigCategory.Instance.GetBossChapter(self.BossId);
                 if (keyValuePairInt != null)

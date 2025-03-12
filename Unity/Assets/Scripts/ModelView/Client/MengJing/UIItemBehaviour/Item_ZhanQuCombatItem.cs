@@ -137,6 +137,30 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_Img_LodingValue
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Img_LodingValue == null)
+					{
+						this.m_E_Img_LodingValue = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue");
+					}
+					return this.m_E_Img_LodingValue;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue");
+				}
+			}
+		}
+
 		public Text E_TextTip2Text
      	{
      		get
@@ -218,6 +242,7 @@ namespace ET.Client
 			this.m_E_TextTip2Text = null;
 			this.m_E_TextLeftText = null;
 			this.m_E_Text_levelText = null;
+			this.m_E_Img_LodingValue = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -226,6 +251,7 @@ namespace ET.Client
 		private RectTransform m_EG_YiLingQuSetRectTransform = null;
 		private Button m_E_ButtonReceiveButton = null;
 		private Image m_E_ButtonReceiveImage = null;
+		private Image m_E_Img_LodingValue = null;	
 		private Text m_E_TextTip2Text = null;
 		private Text m_E_TextLeftText = null;
 		private Text m_E_Text_levelText = null;
