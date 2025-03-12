@@ -10,7 +10,7 @@
         
         public long Timer;
         public long LastTiaoZhan;
-        public long HurtValue;
-        public long Countdown;
+        public long BeginTime;
+        public long HurtValue;  
     }
 }

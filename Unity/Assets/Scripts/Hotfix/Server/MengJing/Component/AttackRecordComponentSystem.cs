@@ -30,10 +30,10 @@ namespace ET.Server
 
         public static void ClearDamageList(this AttackRecordComponent self)
         {
-            
+            self.DamageValueList.Clear();   
         }
         
-        public static void OnUpdateDamage(this AttackRecordComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
+        public static void OnUpdateDamage(this AttackRecordComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid, int sceneType)
         {
             DamageValueInfo damageValueInfo = DamageValueInfo.Create();
             damageValueInfo.UnitType = attack.Type;
@@ -41,8 +41,10 @@ namespace ET.Server
             damageValueInfo.UnitName = attack.GetComponent<UnitInfoComponent>()?.UnitName;
             damageValueInfo.DamageValue = damage;
             damageValueInfo.SkillId = skillid;
-            self.DamageValueList.Add(damageValueInfo);  
-            if (self.DamageValueList.Count > 50)
+            damageValueInfo.Time = TimeHelper.ServerNow();  
+            self.DamageValueList.Add(damageValueInfo);
+
+            if (sceneType != SceneTypeEnum.TrialDungeon && self.DamageValueList.Count > 50)
             {
                 self.DamageValueList.RemoveAt(0);
             }

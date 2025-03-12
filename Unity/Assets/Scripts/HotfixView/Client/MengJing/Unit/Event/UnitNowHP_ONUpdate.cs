@@ -32,7 +32,7 @@ namespace ET.Client
 
             bool isnotattackSelf = unitAttack != null && unitAttack != unitDefend;
             bool defendisPlayerorBoss = unitDefend.Type == UnitType.Player || unitDefend.IsBoss();
-            bool attackidPlayerorBoss = unitAttack != null && (unitAttack.Type == UnitType.Player || unitAttack.IsBoss());
+            bool attackisPlayerorBoss = unitAttack != null && (unitAttack.Type == UnitType.Player || unitAttack.IsBoss());
 
             //攻击英雄或者Boss不能骑马
             if (args.ChangeHpValue < 0 && mainattack && isnotattackSelf && defendisPlayerorBoss)
@@ -40,7 +40,7 @@ namespace ET.Client
                 root.GetComponent<BattleMessageComponent>().SetRideTargetUnit(unitDefend.Id);
             }
 
-            if (args.ChangeHpValue < 0 && unitDefend.MainHero && isnotattackSelf && attackidPlayerorBoss)
+            if (args.ChangeHpValue < 0 && unitDefend.MainHero && isnotattackSelf && attackisPlayerorBoss)
             {
                 root.GetComponent<BattleMessageComponent>().SetRideTargetUnit(unitAttack.Id);
             }
@@ -130,11 +130,13 @@ namespace ET.Client
                 }
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.TrialDungeon
-                && unitDefend.Type == UnitType.Monster)
-            {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>()?.OnUpdateHurt(args.ChangeHpValue);
-            }
+            
+            // 改为服务器通知
+            // if (mapComponent.SceneType == SceneTypeEnum.TrialDungeon   
+            //     && unitDefend.Type == UnitType.Monster)
+            // {
+            //     root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>()?.OnUpdateHurt(args.ChangeHpValue);
+            // }
 
             await ETTask.CompletedTask;
         }

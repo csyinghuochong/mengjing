@@ -166,7 +166,7 @@ namespace ET.Client
     {
     }
 
-    
+
     public struct RecvTeamUpdate
     {
     }
@@ -461,6 +461,11 @@ namespace ET.Client
     public struct BattleInfo
     {
         public M2C_BattleInfoResult M2CBattleInfoResult;
+    }
+
+    public struct TrialDungeonDamageInfo
+    {
+        public M2C_TrialDungeonDamage M2CTrialDungeonDamage;
     }
 
     public struct AreneInfo

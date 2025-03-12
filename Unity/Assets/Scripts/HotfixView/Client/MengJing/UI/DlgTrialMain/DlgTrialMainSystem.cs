@@ -28,7 +28,7 @@ namespace ET.Client
         {
             self.View.E_ButtonTiaozhanButton.AddListener(self.OnButtonTiaozhan);
             
-            self.OnUpdateHurt(0);
+            self.OnResetHurt();
             self.BeginTimer();
         }
 
@@ -46,30 +46,30 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void OnUpdateHurt(this DlgTrialMain self, long hurt)
+        public static void OnResetHurt(this DlgTrialMain self)
         {
-            if (hurt > 0)
-            {
-                return;
-            }
+            self.View.E_TextHurtText.text = "伤害总值:0\n伤害秒值:0";
+        }
 
-            hurt *= -1;
-            self.HurtValue += hurt;
-
-            long leftTime = self.Countdown - TimeHelper.ServerNow();
+        public static void OnUpdateHurt(this DlgTrialMain self, M2C_TrialDungeonDamage dungeonDamage)
+        {
+            self.HurtValue = dungeonDamage.HurtValue;
+            self.BeginTime = dungeonDamage.BeginTime;
+            
+            long leftTime = TimeHelper.ServerNow() - dungeonDamage.BeginTime;
             leftTime = Math.Clamp( leftTime, 0, TimeHelper.Minute );
             float fightTime = (TimeHelper.Minute - leftTime) * 0.001f;
-          
+            
             using (zstring.Block())
             {
-                self.View.E_TextHurtText.text = zstring.Format("伤害总值:{0}\n伤害秒值:{1}", self.HurtValue, (int)((float)self.HurtValue / fightTime));
+                self.View.E_TextHurtText.text = zstring.Format("伤害总值:{0}\n伤害秒值:{1}",dungeonDamage.HurtValue, (int)((float)dungeonDamage.HurtValue / fightTime));
             }
         }
 
         public static void BeginTimer(this DlgTrialMain self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            self.Countdown = TimeHelper.ServerNow() + TimeHelper.Minute;
+            self.BeginTime = TimeHelper.ServerNow() ;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.TrialMainTimer, self);
             self.OnTimer(); 
         }
@@ -94,15 +94,14 @@ namespace ET.Client
             {
                 return;
             }
-
-            self.HurtValue = 0;
+            
             self.BeginTimer();
-            self.OnUpdateHurt(0);
+            self.OnResetHurt();
         }
 
         public static void OnTimer(this DlgTrialMain self)
         {
-            long leftTime = self.Countdown - TimeHelper.ServerNow();
+            long leftTime = ( self.BeginTime + TimeHelper.Minute ) - TimeHelper.ServerNow();
             if (leftTime <= 0)
             {
                 self.Root().GetComponent<ClientSenderCompnent>().Call(C2M_TrialDungeonFinishRequest.Create()).Coroutine();

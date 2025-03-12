@@ -26,6 +26,7 @@ namespace ET.Server
                 return;
             }
 
+            self.NoticePlayerDamage(players[0]);
             self.UploadHurtValue().Coroutine();
 
             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
@@ -46,6 +47,14 @@ namespace ET.Server
             MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
 
             players[0].GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TrialTowerCeng_134, mapComponent.SonSceneId, 1);
+        }
+
+        private static void NoticePlayerDamage(this TrialDungeonComponent self, Unit player)
+        {
+            M2C_TrialDungeonDamage m2CTrialDungeonDamage = M2C_TrialDungeonDamage.Create();
+            m2CTrialDungeonDamage.BeginTime = self.BeginTime;
+            m2CTrialDungeonDamage.HurtValue = self.HurtValue;
+            MapMessageHelper.SendToClient(player, m2CTrialDungeonDamage);
         }
 
         public static async ETTask UploadHurtValue(this TrialDungeonComponent self)
@@ -78,20 +87,20 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
 
-        public static void OnUpdateDamage(this TrialDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
+        public static bool OnUpdateDamage(this TrialDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
         {
             if (player == null)
             {
-                return;
+                return false;
             }
 
             if (defend.Type != UnitType.Monster)
             {
-                return;
+                return false;
             }
 
             self.HurtValue += damage;
-
+            
             if (player.Id == 2010003137213038592)
             {
                 string skillName = string.Empty;
@@ -118,6 +127,10 @@ namespace ET.Server
                     ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 召唤怪{monsterConfig.MonsterName} 使用{skillName} 造成了{damage}伤害");
                 }
             }
+
+            self.NoticePlayerDamage(player);
+         
+            return true;
         }
 
         public static void GenerateFuben(this TrialDungeonComponent self, int towerId)
@@ -126,6 +139,8 @@ namespace ET.Server
             FubenHelp.CreateMonsterList(self.Scene(), towerConfig.MonsterSet);
             self.HurtValue = 0;
             self.BeginTime = TimeHelper.ServerNow();
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            players[0].GetComponent<AttackRecordComponent>().ClearDamageList();
         }
     }
 }

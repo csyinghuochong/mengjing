@@ -7075,6 +7075,13 @@ message M2C_TrialDungeonFinishResponse    // ILocationResponse
 	int32 CombatResult = 1;
 }
 
+message M2C_TrialDungeonDamage    // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	int64 BeginTime = 1;
+	int64 HurtValue = 2;
+}
 
 //小龟大赛记录
 //ResponseType M2C_TurtleRecordResponse
@@ -7472,6 +7479,7 @@ message DamageValueInfo
 	string UnitName = 3;
 	int32 SkillId = 4;	
 	int64 DamageValue = 5;
+	int64 Time = 6;
 }
 
 //ResponseType M2C_DamageValueListResponse
