@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_DamageValueListRequest request, M2C_DamageValueListResponse response)
         {
-            response.DamageValueList = unit.GetComponent<AttackRecordComponent>().DamageValueList;
+            response.DamageValueList .AddRange(unit.GetComponent<AttackRecordComponent>().DamageValueList);
 
             await ETTask.CompletedTask;
         }

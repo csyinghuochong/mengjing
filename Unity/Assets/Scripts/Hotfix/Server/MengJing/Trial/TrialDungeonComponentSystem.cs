@@ -87,50 +87,29 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
 
-        public static bool OnUpdateDamage(this TrialDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
+        public static Unit OnUpdateDamage(this TrialDungeonComponent self, Unit player, Unit attack, Unit defend, long damage, int skillid)
         {
             if (player == null)
             {
-                return false;
+                return null;
             }
 
             if (defend.Type != UnitType.Monster)
             {
-                return false;
+                return null;
             }
 
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            if (players.Count == 0)
+            {
+                return null;
+            }
+            
             self.HurtValue += damage;
             
-            if (player.Id == 2010003137213038592)
-            {
-                string skillName = string.Empty;
-                if (skillid != 0)
-                {
-                    skillName = SkillConfigCategory.Instance.Get(skillid).SkillName;
-                    ;
-                }
-
-                if (attack.Type == UnitType.Player)
-                {
-                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 使用{skillName} 造成了{damage}伤害");
-                }
-
-                if (attack.Type == UnitType.Pet)
-                {
-                    PetConfig petConfig = PetConfigCategory.Instance.Get(attack.ConfigId);
-                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 宠物{petConfig.PetName} 使用{skillName} 造成了{damage}伤害");
-                }
-
-                if (attack.Type == UnitType.Monster)
-                {
-                    MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(attack.ConfigId);
-                    ServerLogHelper.TrialBattleInfo(44, $"南宫灵蓝 召唤怪{monsterConfig.MonsterName} 使用{skillName} 造成了{damage}伤害");
-                }
-            }
-
-            self.NoticePlayerDamage(player);
+            self.NoticePlayerDamage(players[0]);
          
-            return true;
+            return players[0];
         }
 
         public static void GenerateFuben(this TrialDungeonComponent self, int towerId)

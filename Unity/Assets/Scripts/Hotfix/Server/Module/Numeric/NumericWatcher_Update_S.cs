@@ -51,19 +51,19 @@ namespace ET.Server
                     player = null;
                 }
 
-                bool record = false; 
+                Unit recordUnit = null; 
                 switch (sceneTypeEnum)
                 {
 	                case SceneTypeEnum.CellDungeon://个人副本接受到的伤害
-		                record = unit.Type == UnitType.Player;
+		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<CellDungeonComponentS>().OnRecivedHurt(args.OldValue - args.NewValue);
 		                break;
 	                case SceneTypeEnum.TeamDungeon://组队副本输出伤害
-		                 record = unit.Type == UnitType.Player;
+		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<TeamDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
 		                break;
 	                case SceneTypeEnum.MiJing://秘境伤害
-		                record = unit.Type == UnitType.Player;
+		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<MiJingComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
 		                break;
 	                case SceneTypeEnum.TrialDungeon://试炼副本伤害
@@ -73,17 +73,17 @@ namespace ET.Server
 			                return;
 		                }
 
-		                record = trialDungeonComponent.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
-		               
+		                recordUnit = trialDungeonComponent.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId);
+	
 		                break;
 	                default:
-		                record = unit.Type == UnitType.Player;
+		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                break;
                 }
 
-                if (record)
+                if (recordUnit!=null)
                 {
-	                unit.GetComponent<AttackRecordComponent>()?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId, sceneTypeEnum);
+	                recordUnit.GetComponent<AttackRecordComponent>()?.OnUpdateDamage(player, attack, unit, args.OldValue - args.NewValue, args.SkillId, sceneTypeEnum);
                 }
             }
         }

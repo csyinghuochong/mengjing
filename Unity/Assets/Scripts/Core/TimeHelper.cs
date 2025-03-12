@@ -91,6 +91,21 @@ namespace ET
             return $"{minutes:D2}:{remainingSeconds:D2}";
         }
         
+        public static string FormatTimestampToTime(long timestamp)
+        {
+            // 计算小时数
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(timestamp);
+            int hours = dateTime.Hour;
+
+
+            int minutes = dateTime.Minute;
+
+            int seconds = dateTime.Second;
+
+            // 使用字符串格式化输出 00:00:00 格式的时间
+            return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+        }
+        
         public static string ShowLeftTime(long time)
         {
             string str = "";

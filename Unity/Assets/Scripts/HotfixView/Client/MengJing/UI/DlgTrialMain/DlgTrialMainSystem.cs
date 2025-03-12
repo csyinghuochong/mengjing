@@ -27,6 +27,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgTrialMain self)
         {
             self.View.E_ButtonTiaozhanButton.AddListener(self.OnButtonTiaozhan);
+            self.View.E_ButtonDamageButton.AddListenerAsync(self.OnButtonDamageButton);
             
             self.OnResetHurt();
             self.BeginTimer();
@@ -72,6 +73,19 @@ namespace ET.Client
             self.BeginTime = TimeHelper.ServerNow() ;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.TrialMainTimer, self);
             self.OnTimer(); 
+        }
+
+        public static async ETTask OnButtonDamageButton(this DlgTrialMain self)
+        {
+            long instanceid = self.InstanceId;  
+            M2C_DamageValueListResponse damageValueListResponse = await CellDungeonNetHelper.RequestDamageValueList( self.Root() );
+            if (instanceid != self.InstanceId || damageValueListResponse == null)
+            {
+                return;
+            }
+            
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DamageValue);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDamageValue>().OnInitUI(damageValueListResponse);
         }
 
         public static void OnButtonTiaozhan(this DlgTrialMain self)

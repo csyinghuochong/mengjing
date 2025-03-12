@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 364857645756927407}
   - component: {fileID: 4813124154476060099}
   m_Layer: 0
-  m_Name: Text (1)
+  m_Name: Text_FailTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1107931271246440732
 RectTransform:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 4331443582870032957}
   - component: {fileID: 4691943049127826375}
   m_Layer: 0
-  m_Name: E_ButtonDagame
+  m_Name: E_ButtonDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,12 +1021,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1107931271246440732}
   - {fileID: 7727623426434732723}
   - {fileID: 8171877946784088530}
+  - {fileID: 7544637994503987844}
   - {fileID: 3833106901767276130}
   - {fileID: 3731655447741005115}
-  - {fileID: 7544637994503987844}
+  - {fileID: 1107931271246440732}
   m_Father: {fileID: 1679095062278519800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}

@@ -38,13 +38,26 @@ namespace ET.Server
             DamageValueInfo damageValueInfo = DamageValueInfo.Create();
             damageValueInfo.UnitType = attack.Type;
             damageValueInfo.ConfigId = attack.ConfigId;
-            damageValueInfo.UnitName = attack.GetComponent<UnitInfoComponent>()?.UnitName;
+
+            switch (attack.Type)
+            {
+                case UnitType.Player:
+                    damageValueInfo.UnitName = player.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                    break;
+                case UnitType.Monster:
+                    damageValueInfo.UnitName = MonsterConfigCategory.Instance.Get(attack.ConfigId).MonsterName;
+                    break;
+                default:
+                    damageValueInfo.UnitName = attack.GetComponent<UnitInfoComponent>()?.UnitName;
+                    break;
+            }
             damageValueInfo.DamageValue = damage;
             damageValueInfo.SkillId = skillid;
             damageValueInfo.Time = TimeHelper.ServerNow();  
             self.DamageValueList.Add(damageValueInfo);
 
-            if (sceneType != SceneTypeEnum.TrialDungeon && self.DamageValueList.Count > 50)
+            //if (sceneType != SceneTypeEnum.TrialDungeon && self.DamageValueList.Count > 50)
+            if (self.DamageValueList.Count > 50)
             {
                 self.DamageValueList.RemoveAt(0);
             }

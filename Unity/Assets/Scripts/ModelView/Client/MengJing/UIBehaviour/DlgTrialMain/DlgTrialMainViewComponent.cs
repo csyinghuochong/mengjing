@@ -24,6 +24,23 @@ namespace ET.Client
      		}
      	}
 
+		public Button E_ButtonDamageButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonDamageButton == null )
+				{
+					this.m_E_ButtonDamageButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_ButtonDamage");
+				}
+				return this.m_E_ButtonDamageButton;
+			}
+		}
+
 		public Image E_ButtonTiaozhanImage
      	{
      		get
@@ -79,12 +96,14 @@ namespace ET.Client
 		{
 			this.m_E_ButtonTiaozhanButton = null;
 			this.m_E_ButtonTiaozhanImage = null;
+			this.m_E_ButtonDamageButton = null;
 			this.m_E_TextHurtText = null;
 			this.m_E_TextCoundownText = null;
 			this.uiTransform = null;
 		}
 
 		private Button m_E_ButtonTiaozhanButton = null;
+		private Button m_E_ButtonDamageButton = null;
 		private Image m_E_ButtonTiaozhanImage = null;
 		private Text m_E_TextHurtText = null;
 		private Text m_E_TextCoundownText = null;
