@@ -133,7 +133,7 @@ namespace ET.Client
             if (mapComponent.SceneType == SceneTypeEnum.TrialDungeon
                 && unitDefend.Type == UnitType.Monster)
             {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().OnUpdateHurt(args.ChangeHpValue);
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>()?.OnUpdateHurt(args.ChangeHpValue);
             }
 
             await ETTask.CompletedTask;
