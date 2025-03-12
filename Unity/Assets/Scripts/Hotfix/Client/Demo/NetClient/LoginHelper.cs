@@ -91,6 +91,7 @@ namespace ET.Client
                     await SkillNetHelper.RequestSkillSet(root);
                     await FriendNetHelper.RequestFriendInfo(root);
                     await ActivityNetHelper.RequestActivityInfo(root);
+                    await ActivityNetHelper.RequestZhanQuInfo(root);
                     await ChengJiuNetHelper.GetChengJiuList(root);
 
                     EventSystem.Instance.Publish(root, new EnterMapFinish());

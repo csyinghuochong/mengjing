@@ -5,9 +5,6 @@ namespace ET.Client
         public static async ETTask<int> RequestActivityInfo(Scene root)
         {
             // Log.Debug($"C2A_ActivityInfoRequest: client0");
-            // C2A_ActivityInfoRequest request = C2A_ActivityInfoRequest.Create();
-            // A2C_ActivityInfoResponse response = (A2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-
             C2M_ActivityInfoRequest request = C2M_ActivityInfoRequest.Create();
             M2C_ActivityInfoResponse response = (M2C_ActivityInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
@@ -20,13 +17,24 @@ namespace ET.Client
             activityComponentC.DayTeHui = response.DayTeHui;
             activityComponentC.ActivityReceiveIds = response.ReceiveIds;
             activityComponentC.QuTokenRecvive = response.QuTokenRecvive;
-            // activityComponentC.ZhanQuReceiveIds = response.ZhanQuReceiveIds;
+           
             ActivityV1Info activityV1Info = activityComponentC.AddChild<ActivityV1Info>();
             activityV1Info.FromMessage(response.ActivityV1InfoProto);
             activityComponentC.ActivityV1Info = activityV1Info;
-            // activityComponentC.ZhanQuReceiveNumbers = response.ZhanQuReceiveNumbers;
-
+            
+            //activityComponentC.ZhanQuReceiveIds = response.ZhanQuReceiveIds;
+            //activityComponentC.ZhanQuReceiveNumbers = response.ZhanQuReceiveNumbers;
             return ErrorCode.ERR_Success;
+        }
+
+        public static async ETTask<int> RequestZhanQuInfo(Scene root)
+        {
+            C2M_ZhanQuInfoRequest request = C2M_ZhanQuInfoRequest.Create();
+            M2C_ZhanQuInfoResponse response = (M2C_ZhanQuInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            ActivityComponentC activityComponentC = root.GetComponent<ActivityComponentC>();
+            activityComponentC.ZhanQuReceiveIds = response.ReceiveIds;
+            activityComponentC.ZhanQuReceiveNumbers = response.ReceiveNum;
+            return response.Error;   
         }
 
         public static async ETTask<int> ActivityReceive(Scene root, int activityType, int activityId, int index = 0)
