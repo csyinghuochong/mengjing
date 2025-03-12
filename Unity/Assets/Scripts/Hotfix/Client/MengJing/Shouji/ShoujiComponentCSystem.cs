@@ -2,6 +2,16 @@
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class BagItemItemAdd_RefreshShouji : AEvent<Scene, BagItemItemAdd>
+    {
+        protected override async ETTask Run(Scene scene, BagItemItemAdd args)
+        {
+            scene.GetComponent<ShoujiComponentC>()?.OnGetItem(args.ItemId);
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [FriendOf(typeof(ShoujiComponentC))]
     [EntitySystemOf(typeof(ShoujiComponentC))]
     public static partial class ShoujiComponentCSystem
@@ -87,6 +97,38 @@ namespace ET.Client
             return keyValuePairInt;
         }
 
+        public static void OnGetItem(this ShoujiComponentC self, int itemId)
+        {
+            ItemStarInfo itemStarInfo = null;
+            List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.GetItemStarInfos();
+            for (int i = 0; i < itemStars.Count; i++)
+            {
+                if (itemStars[i].ItemId == itemId && itemStars[i].StartType == 1)
+                {
+                    itemStarInfo = itemStars[i];
+                    break;
+                }
+            }
+            if (itemStarInfo == null)
+            {
+                return;
+            }
+        
+            ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(itemStarInfo.Chapter);
+            if (shouJiChapterInfo == null)
+            {
+                shouJiChapterInfo = ShouJiChapterInfo.Create();
+                shouJiChapterInfo.RewardInfo = 0;
+                shouJiChapterInfo.ChapterId = itemStarInfo.Chapter;
+                self.ShouJiChapterInfos.Add(shouJiChapterInfo);
+            }
+            if (!shouJiChapterInfo.ShouJiItemList.Contains(itemStarInfo.ItemId))
+            {
+                shouJiChapterInfo.ShouJiItemList.Add(itemStarInfo.ItemId);
+                shouJiChapterInfo.StarNum += itemStarInfo.Star;
+            }
+        }
+        
         public static void OnShouJiTreasure(this ShoujiComponentC self, int shoujiId, int itemNum)
         {
             KeyValuePairInt keyValuePairInt = null;
@@ -103,6 +145,65 @@ namespace ET.Client
             {
                 keyValuePairInt = new KeyValuePairInt() { KeyId = shoujiId, Value = itemNum };
                 self.TreasureInfo.Add(keyValuePairInt);
+            }
+
+            self.OnActiveTreasureItem(shoujiId);
+        }
+        
+        private static void OnActiveTreasureItem(this ShoujiComponentC self, int shoujiId)
+        {
+            if (!ShouJiItemConfigCategory.Instance.Contain(shoujiId))
+            {
+                return;
+            }
+
+            ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(shoujiId);
+
+            bool active = false;
+            foreach (KeyValuePairInt keyValuePairInt in self.TreasureInfo)
+            {
+                if (keyValuePairInt.KeyId == shoujiId)
+                {
+                    if (keyValuePairInt.Value >= shouJiItemConfig.AcitveNum)
+                    {
+                        active = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!active)
+            {
+                return;
+            }
+        
+        
+            ItemStarInfo itemStarInfo = null;
+            List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.GetItemStarInfos();
+            for (int i = 0; i < itemStars.Count; i++)
+            {
+                if (itemStars[i].ItemId == shouJiItemConfig.ItemID && itemStars[i].StartType == 2)
+                {
+                    itemStarInfo = itemStars[i];
+                }
+            }
+            if (itemStarInfo == null)
+            {
+                return;
+            }
+        
+            ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(itemStarInfo.Chapter);
+            if (shouJiChapterInfo == null)
+            {
+                shouJiChapterInfo = ShouJiChapterInfo.Create();
+                shouJiChapterInfo.RewardInfo = 0;
+                shouJiChapterInfo.ChapterId = itemStarInfo.Chapter;
+                self.ShouJiChapterInfos.Add(shouJiChapterInfo);
+            }
+            if (!shouJiChapterInfo.ShouJiItemList.Contains(itemStarInfo.ItemId))
+            {
+                shouJiChapterInfo.ShouJiItemList.Add(itemStarInfo.ItemId);
+                shouJiChapterInfo.StarNum += itemStarInfo.Star;
             }
         }
     }

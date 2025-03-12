@@ -40,15 +40,75 @@ namespace ET.Server
         List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.GetItemStarInfos();
         for (int i = 0; i < itemStars.Count; i++)
         {
-            if (itemStars[i].ItemId == itemId)
+            if (itemStars[i].ItemId == itemId &&itemStars[i].StartType == 1)
             {
                 itemStarInfo = itemStars[i];
+                break;
             }
         }
         if (itemStarInfo == null)
         {
             return;
         }
+        
+        ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(itemStarInfo.Chapter);
+        if (shouJiChapterInfo == null)
+        {
+            shouJiChapterInfo = ShouJiChapterInfo.Create();
+            shouJiChapterInfo.RewardInfo = 0;
+            shouJiChapterInfo.ChapterId = itemStarInfo.Chapter;
+            self.ShouJiChapterInfos.Add(shouJiChapterInfo);
+        }
+        if (!shouJiChapterInfo.ShouJiItemList.Contains(itemStarInfo.ItemId))
+        {
+            shouJiChapterInfo.ShouJiItemList.Add(itemStarInfo.ItemId);
+            shouJiChapterInfo.StarNum += itemStarInfo.Star;
+        }
+    }
+    
+    private static void OnActiveTreasureItem(this ShoujiComponentS self, int shoujiId)
+    {
+        if (!ShouJiItemConfigCategory.Instance.Contain(shoujiId))
+        {
+            return;
+        }
+
+        ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(shoujiId);
+
+        bool active = false;
+        foreach (KeyValuePairInt keyValuePairInt in self.TreasureInfo)
+        {
+            if (keyValuePairInt.KeyId == shoujiId)
+            {
+                if (keyValuePairInt.Value >= shouJiItemConfig.AcitveNum)
+                {
+                    active = true;
+                    break;
+                }
+            }
+        }
+
+        if (!active)
+        {
+            return;
+        }
+        
+        
+        ItemStarInfo itemStarInfo = null;
+        List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.GetItemStarInfos();
+        for (int i = 0; i < itemStars.Count; i++)
+        {
+            if (itemStars[i].ItemId == shouJiItemConfig.ItemID && itemStars[i].StartType == 2)
+            {
+                itemStarInfo = itemStars[i];
+                break;
+            }
+        }
+        if (itemStarInfo == null)
+        {
+            return;
+        }
+        
         ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(itemStarInfo.Chapter);
         if (shouJiChapterInfo == null)
         {
@@ -113,6 +173,8 @@ namespace ET.Server
             keyValuePairInt = new KeyValuePairInt() { KeyId = shoujiId, Value = itemNum };
             self.TreasureInfo.Add(keyValuePairInt); 
         }
+        
+        self.OnActiveTreasureItem(shoujiId);
     }
 
     public static KeyValuePairInt GetTreasureInfo(this ShoujiComponentS self, int shoujiId)

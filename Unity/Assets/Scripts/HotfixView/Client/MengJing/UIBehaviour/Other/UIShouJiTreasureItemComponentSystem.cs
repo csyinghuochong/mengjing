@@ -19,6 +19,7 @@ namespace ET.Client
             self.ImageActived = rc.Get<GameObject>("ImageActived");
             self.ES_CommonItem = rc.Get<GameObject>("ES_CommonItem");
             self.TextNumber = rc.Get<GameObject>("TextNumber");
+            self.Label_StarNum = rc.Get<GameObject>("Label_StarNum");
 
             self.UIItemComponent = self.AddChild<ES_CommonItem, Transform>(self.ES_CommonItem.transform);
             self.ButtonActive.GetComponent<Button>().onClick.AddListener(() => { self.OnButtonActive().Coroutine(); });
@@ -96,6 +97,8 @@ namespace ET.Client
 
             self.TextAttribute.GetComponent<Text>().text = attributeStr;
 
+            self.Label_StarNum.GetComponent<Text>().text = shouJiItemConfig.StartNum.ToString();
+            
             KeyValuePairInt keyValuePairInt = self.Root().GetComponent<ShoujiComponentC>().GetTreasureInfo(shouijId);
             int haveNumber = keyValuePairInt != null ? (int)keyValuePairInt.Value : 0;
             using (zstring.Block())

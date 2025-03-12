@@ -210,6 +210,8 @@ namespace ET.Client
                 // self.Root().GetComponent<ShoujiComponentC>().OnGetItem(bagInfo.ItemID);
                 HintHelp.ShowHint(self.Root(), $"获得 {itemConfig.ItemName} {addNum}");
             }
+            
+            EventSystem.Instance.Publish(self.Root(), new BagItemItemAdd() { ItemId = bagInfo.ItemID , Num = addNum});
         }
 
         //检测

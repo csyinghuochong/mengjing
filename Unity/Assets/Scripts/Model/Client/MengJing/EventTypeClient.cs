@@ -50,6 +50,8 @@ namespace ET.Client
     // 获得物品
     public struct BagItemItemAdd
     {
+        public int ItemId;
+        public int Num;
     }
 
     public struct PaiMaiBuy

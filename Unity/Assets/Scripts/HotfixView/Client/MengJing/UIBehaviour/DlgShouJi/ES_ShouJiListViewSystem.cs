@@ -183,11 +183,14 @@ namespace ET.Client
 
             for (int i = 0; i < shouJiConfigs.Count; i++)
             {
-                Transform transform = self.E_BtnItemTypeSetToggleGroup.transform.GetChild(i).Find("StarText");
-                int starNum = shoujiComponent.GetChapterStar(shouJiConfigs[i].Id);
-                using (zstring.Block())
+                if (i < self.E_BtnItemTypeSetToggleGroup.transform.childCount)
                 {
-                    transform.GetComponent<Text>().text = zstring.Format("({0}/{1})", starNum, shouJiConfigs[i].ProList3_StartNum);
+                    Transform transform = self.E_BtnItemTypeSetToggleGroup.transform.GetChild(i).Find("StarText");
+                    int starNum = shoujiComponent.GetChapterStar(shouJiConfigs[i].Id);
+                    using (zstring.Block())
+                    {
+                        transform.GetComponent<Text>().text = zstring.Format("({0}/{1})", starNum, shouJiConfigs[i].ProList3_StartNum);
+                    }
                 }
             }
         }

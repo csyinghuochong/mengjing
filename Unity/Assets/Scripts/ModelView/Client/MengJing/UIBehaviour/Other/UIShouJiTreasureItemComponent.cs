@@ -12,6 +12,7 @@ namespace ET.Client
         public GameObject ImageActived;
         public GameObject ES_CommonItem;
         public GameObject GameObject;
+        public GameObject Label_StarNum;
 
         public int ShoujiId;
         public ES_CommonItem UIItemComponent { get; set; }
