@@ -187,10 +187,8 @@ namespace ET.Client
                 {
                     Transform transform = self.E_BtnItemTypeSetToggleGroup.transform.GetChild(i).Find("StarText");
                     int starNum = shoujiComponent.GetChapterStar(shouJiConfigs[i].Id);
-                    using (zstring.Block())
-                    {
-                        transform.GetComponent<Text>().text = zstring.Format("({0}/{1})", starNum, shouJiConfigs[i].ProList3_StartNum);
-                    }
+                    
+                    transform.GetComponent<Text>().text = $"({starNum}/{shouJiConfigs[i].ProList3_StartNum})";
                 }
             }
         }

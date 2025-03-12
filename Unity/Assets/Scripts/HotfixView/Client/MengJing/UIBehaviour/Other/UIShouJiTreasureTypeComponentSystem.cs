@@ -41,11 +41,8 @@ namespace ET.Client
         public static void OnInitData(this UIShouJiTreasureTypeComponent self, int chapter)
         {
             self.Chapter = chapter;
-
-            using (zstring.Block())
-            {
-                self.Lab_TaskName.GetComponent<Text>().text = zstring.Format("第{0}章", chapter);
-            }
+            
+            self.Lab_TaskName.GetComponent<Text>().text = $"第{chapter}章";
 
             self.UpdateRedDot();
         }
