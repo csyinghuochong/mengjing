@@ -123,6 +123,11 @@ namespace ET.Client
                 MapViewHelper.ShowOtherUnit(self.Root(), false);
             }
 
+            if (self.BuildUnit == null)
+            {
+                return;
+            }
+
             switch (self.CameraBuildType)
             {
                 case CameraBuildType.Type_0:
