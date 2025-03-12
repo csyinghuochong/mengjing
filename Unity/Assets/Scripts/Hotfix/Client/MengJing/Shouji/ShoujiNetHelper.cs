@@ -12,6 +12,11 @@ namespace ET.Client
 
             M2C_ShouJiTreasureResponse response = (M2C_ShouJiTreasureResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<ShoujiComponentC>().OnShouJiTreasure(shouJiId, response.ActiveNum);
+            }
+            
             return response;
         }
 

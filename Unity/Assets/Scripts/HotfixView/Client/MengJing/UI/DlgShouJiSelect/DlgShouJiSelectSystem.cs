@@ -82,11 +82,6 @@ namespace ET.Client
                 return;
             }
 
-            if (response.Error == ErrorCode.ERR_Success)
-            {
-                self.Root().GetComponent<ShoujiComponentC>().OnShouJiTreasure(self.ShouJIId, response.ActiveNum);
-            }
-
             DlgShouJi dlgShouJi = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgShouJi>();
             dlgShouJi.OnShouJiTreasure();
 

@@ -5,6 +5,7 @@ namespace ET
     public partial class ShouJiItemConfigCategory
     {
         public Dictionary<int, List<int>> TreasureList = new();
+        private List<ItemStarInfo> ItemStarInfos = new List<ItemStarInfo>();
 
         public override void EndInit()
         {
