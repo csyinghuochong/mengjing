@@ -1769,28 +1769,7 @@ namespace ET.Client
                 self.View.ES_RoleHead.OnUpdatePetHP(defend);
             }
         }
-
-        public static void BeforeEnterScene(this DlgMain self, int lastScene)
-        {
-            Log.Debug("BeginEnterScene");
-
-            self.ResetTeamUI();
-            self.View.ES_MainSkill.ResetUI();
-            self.View.ES_MainBuff.ResetUI();
-            self.View.ES_JoystickMove.ResetUI(true);
-
-            self.View.ES_MapMini.BeforeEnterScene(lastScene);
-            self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
-            self.View.ES_MainHpBar.BeforeEnterScene();
-            self.Root().GetComponent<SkillIndicatorComponent>().BeforeEnterScene();
-            self.Root().GetComponent<LockTargetComponent>().BeforeEnterScene();
-            self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
-            self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
-            self.Root().RemoveComponent<UnitGuaJiComponent>();
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DamageValue);
-        }
-
+        
         public static void OnChapterOpen(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellChapterOpen).Coroutine();
@@ -1815,6 +1794,44 @@ namespace ET.Client
             self.View.ES_MainSkill.InitMainHero();
         }
 
+        public static void BeforeEnterScene(this DlgMain self, int lastScene)
+        {
+            self.ResetTeamUI();
+            self.View.ES_MainSkill.ResetUI();
+            self.View.ES_MainBuff.ResetUI();
+            self.View.ES_JoystickMove.ResetUI(true);
+
+            self.View.ES_MapMini.BeforeEnterScene(lastScene);
+            self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
+            self.View.ES_MainHpBar.BeforeEnterScene();
+            self.Root().GetComponent<SkillIndicatorComponent>().BeforeEnterScene();
+            self.Root().GetComponent<LockTargetComponent>().BeforeEnterScene();
+            self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
+            self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+            self.Root().RemoveComponent<UnitGuaJiComponent>();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DamageValue);
+        }
+        
+        public static void DlgMainReset(this DlgMain self, int lastScene)
+        {
+            self.ResetTeamUI();
+            self.View.ES_MainSkill.ResetUI();
+            self.View.ES_MainBuff.ResetUI();
+            //self.View.ES_JoystickMove.ResetUI(true);
+
+            self.View.ES_MapMini.BeforeEnterScene(lastScene);
+            self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
+            self.View.ES_MainHpBar.BeforeEnterScene();
+            self.Root().GetComponent<SkillIndicatorComponent>().BeforeEnterScene();
+            self.Root().GetComponent<LockTargetComponent>().BeforeEnterScene();
+            self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
+            self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+            self.Root().RemoveComponent<UnitGuaJiComponent>();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DamageValue);
+        }
+        
         /// <summary>
         /// 返回myunit 并且场景加载完成 
         /// </summary>

@@ -2,6 +2,8 @@
 
 namespace ET.Server
 {
+    
+    [MessageLocationHandler(SceneType.Map)]
     public class C2M_TowerOfSealNextHandler: MessageLocationHandler<Unit, C2M_TowerOfSealNextRequest, M2C_TowerOfSealNextResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_TowerOfSealNextRequest request, M2C_TowerOfSealNextResponse response)
