@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TrialDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_TrialDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int TowerId;
 		
@@ -219,7 +219,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ReceivedRectTransform
+		public UnityEngine.UI.Image E_Hint_1Image
      	{
      		get
      		{
@@ -228,11 +228,45 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_ReceivedRectTransform == null )
+     			if( this.m_E_Hint_1Image == null )
      			{
-		    		this.m_EG_ReceivedRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_Received");
+		    		this.m_E_Hint_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Hint_1");
      			}
-     			return this.m_EG_ReceivedRectTransform;
+     			return this.m_E_Hint_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Hint_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Hint_2Image == null )
+     			{
+		    		this.m_E_Hint_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Hint_2");
+     			}
+     			return this.m_E_Hint_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Hint_3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Hint_3Image == null )
+     			{
+		    		this.m_E_Hint_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Hint_3");
+     			}
+     			return this.m_E_Hint_3Image;
      		}
      	}
 
@@ -262,7 +296,9 @@ namespace ET.Client
 			this.m_E_Btn_ReceiveButton = null;
 			this.m_E_Btn_ReceiveImage = null;
 			this.m_es_rewardlist = null;
-			this.m_EG_ReceivedRectTransform = null;
+			this.m_E_Hint_1Image = null;
+			this.m_E_Hint_2Image = null;
+			this.m_E_Hint_3Image = null;
 			this.uiTransform = null;
 		}
 
@@ -278,7 +314,9 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_Btn_ReceiveButton = null;
 		private UnityEngine.UI.Image m_E_Btn_ReceiveImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.RectTransform m_EG_ReceivedRectTransform = null;
+		private UnityEngine.UI.Image m_E_Hint_1Image = null;
+		private UnityEngine.UI.Image m_E_Hint_2Image = null;
+		private UnityEngine.UI.Image m_E_Hint_3Image = null;
 		public Transform uiTransform = null;
 	}
 }

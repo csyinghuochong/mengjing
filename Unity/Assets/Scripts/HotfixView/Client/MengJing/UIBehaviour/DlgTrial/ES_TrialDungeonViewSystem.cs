@@ -127,7 +127,34 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.E_Btn_EnterButton.gameObject.SetActive(self.TowerId > curId);
             self.E_Btn_ReceiveButton.gameObject.SetActive(self.TowerId <= curId && !userInfo.TowerRewardIds.Contains(self.TowerId));
-            self.EG_ReceivedRectTransform.gameObject.SetActive(userInfo.TowerRewardIds.Contains(self.TowerId));
+
+            TowerConfig towerConfig = TowerConfigCategory.Instance.Get(self.TowerId);
+
+            self.E_Hint_1Image.gameObject.SetActive(false);
+            self.E_Hint_2Image.gameObject.SetActive(false);
+            self.E_Hint_3Image.gameObject.SetActive(false);
+            // 已经打完
+            if (curId >= towerConfig.Id)
+            {
+                //是否领取
+                if (userInfo.TowerRewardIds.Contains(towerConfig.Id))
+                {
+                    //包含
+                    self.E_Hint_2Image.gameObject.SetActive(true);
+                }
+                else
+                {
+                    //不包含
+                    self.E_Hint_3Image.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (curId + 1 == towerConfig.Id)
+                {
+                    self.E_Hint_1Image.gameObject.SetActive(true);
+                }
+            }
 
             if (!self.E_Btn_ReceiveButton.gameObject.activeSelf)
             {
