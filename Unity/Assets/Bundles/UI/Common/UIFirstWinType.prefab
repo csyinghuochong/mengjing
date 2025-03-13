@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 5543111043222658605}
   - component: {fileID: 3056937522880143455}
   m_Layer: 0
-  m_Name: Image
+  m_Name: ImageSelect_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3324985900700684905}
   m_Father: {fileID: 1916150081520627285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -261,7 +262,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5718877477732312428}
-  - {fileID: 3324985900700684905}
   - {fileID: 7703065831200687636}
   - {fileID: 766988749488622355}
   - {fileID: 4082287077015079567}
@@ -287,12 +287,16 @@ MonoBehaviour:
   data:
   - key: UIPointTaskDate
     gameObject: {fileID: 479341567932064339}
-  - key: TaskTypeName
-    gameObject: {fileID: 1841857356508389915}
-  - key: ImageSelect
-    gameObject: {fileID: 2484434017312500947}
   - key: ImageButton
     gameObject: {fileID: 412666619877432702}
+  - key: ImageSelect_1
+    gameObject: {fileID: 705772609405834541}
+  - key: TaskTypeName_1
+    gameObject: {fileID: 4552085947377992152}
+  - key: ImageSelect_0
+    gameObject: {fileID: 2484434017312500947}
+  - key: TaskTypeName_0
+    gameObject: {fileID: 1841857356508389915}
 --- !u!114 &889620610220386440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +330,7 @@ GameObject:
   - component: {fileID: 1737629745673485963}
   - component: {fileID: 2206014103163144636}
   m_Layer: 5
-  m_Name: TaskTypeName
+  m_Name: TaskTypeName_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +424,7 @@ GameObject:
   - component: {fileID: 7457347048723907049}
   - component: {fileID: 1263562509249494379}
   m_Layer: 0
-  m_Name: ImageSelect
+  m_Name: ImageSelect_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +501,7 @@ GameObject:
   - component: {fileID: 3673645671609435242}
   - component: {fileID: 7428849760028759484}
   m_Layer: 5
-  m_Name: TaskTypeName
+  m_Name: TaskTypeName_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,14 +516,14 @@ RectTransform:
   m_GameObject: {fileID: 4552085947377992152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1916150081520627285}
+  m_Father: {fileID: 5718877477732312428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 61.000015, y: -46.299988}
+  m_AnchoredPosition: {x: 76.249954, y: -53.62497}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4256825788354806715

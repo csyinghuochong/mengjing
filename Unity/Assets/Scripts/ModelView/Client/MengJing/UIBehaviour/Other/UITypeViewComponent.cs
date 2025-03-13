@@ -36,9 +36,11 @@ namespace ET
         public string TypeItemAsset;
         public TypeButtonInfo TypeButtonInfo;
         public GameObject ImageButton;
-        public GameObject ImageSelect;
         public GameObject UIPointTaskDate;
-        public GameObject TaskTypeName;
+        public GameObject ImageSelect_1;  //选中
+        public GameObject TaskTypeName_1;
+        public GameObject ImageSelect_0;  //未选中
+        public GameObject TaskTypeName_0;
         public GameObject GameObject;
 
         public List<EntityRef<UITypeButtonItemComponent>> TypeItemUIList = new();

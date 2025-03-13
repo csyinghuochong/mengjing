@@ -68,9 +68,13 @@ namespace ET.Client
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
             self.GameObject = gameObject;
             self.UIPointTaskDate = rc.Get<GameObject>("UIPointTaskDate");
-            self.TaskTypeName = rc.Get<GameObject>("TaskTypeName");
             self.ImageButton = rc.Get<GameObject>("ImageButton");
-            self.ImageSelect =  rc.Get<GameObject>("ImageSelect");  
+            
+            self.ImageSelect_1 = rc.Get<GameObject>("ImageSelect_1");
+            self.TaskTypeName_1 =  rc.Get<GameObject>("TaskTypeName_1");  
+            self.ImageSelect_0 = rc.Get<GameObject>("ImageSelect_0");
+            self.TaskTypeName_0 =  rc.Get<GameObject>("TaskTypeName_0");  
+            
             self.ImageButton.GetComponent<Button>().onClick.AddListener(self.OnClickTypeButton);
 
             self.TypeItemUIList.Clear();
@@ -95,7 +99,8 @@ namespace ET.Client
                 ui.GameObject.SetActive(false);
             }
             
-            self.ImageSelect.SetActive(!self.bSelected);
+            self.ImageSelect_0.SetActive(!self.bSelected);
+            self.ImageSelect_1.SetActive(self.bSelected);
 
             if (!self.bSelected)
             {
@@ -154,7 +159,8 @@ namespace ET.Client
             self.TypeId = typeinfo.TypeId;
             self.TypeButtonInfo = typeinfo;
 
-            self.TaskTypeName.GetComponent<Text>().text = typeinfo.TypeName;
+            self.TaskTypeName_1.GetComponent<Text>().text = typeinfo.TypeName;
+            self.TaskTypeName_0.GetComponent<Text>().text = typeinfo.TypeName;
         }
 
         public static void SetClickTypeHandler(this UITypeButtonComponent self, Action<int> action)
