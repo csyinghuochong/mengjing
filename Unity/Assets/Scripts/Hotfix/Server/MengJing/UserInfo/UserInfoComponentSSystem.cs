@@ -785,6 +785,14 @@ namespace ET.Server
 
         public static long GetReviveTime(this UserInfoComponentS self, int monsterId)
         {
+            for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
+            {
+                if (self.UserInfo.MonsterRevives[i].KeyId == monsterId)
+                {
+                    return long.Parse(self.UserInfo.MonsterRevives[i].Value);
+                }
+            }
+
             return 0;
         }
 

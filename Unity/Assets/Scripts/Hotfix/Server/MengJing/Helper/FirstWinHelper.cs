@@ -15,7 +15,7 @@ namespace ET.Server
             return firstWinConfigs[0];
         }
 
-        public static void SendFirstWinInfo(Unit player, Unit boss, int difficulty = 1)
+        public static  void SendFirstWinInfo(Unit player, Unit boss, int difficulty = 1)
         {
             if (difficulty == 0)
             {
@@ -34,13 +34,12 @@ namespace ET.Server
             firstWinInfo.UserId = userInfo.Id;
             firstWinInfo.PlayerName = userInfo.GetName();
             firstWinInfo.Difficulty = difficulty;
-
-            // M2A_FirstWinInfoMessage message = new M2A_FirstWinInfoMessage()
-            // {
-            //     FirstWinInfo = firstWinInfo,
-            // };
-            // long activiyServerId = DBHelper.GetActivityServerId(player.DomainZone());
-            // MessageHelper.SendActor(activiyServerId, message);
+            
+            ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(player.Zone());
+            M2A_FirstWinInfoMessage message = M2A_FirstWinInfoMessage.Create();
+            message.FirstWinInfo = firstWinInfo;
+            player.Root().GetComponent<MessageSender>().Send(chargeServerId, message);
+           
         }
     }
 }

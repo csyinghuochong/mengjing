@@ -592,10 +592,11 @@ message A2M_ActivitySelfInfo // IResponse
 	repeated int32 OpenGuessIds = 4;
 }
 
-message M2A_FirstWinInfoMessage // IMessage
+message M2A_FirstWinInfoMessage // ILocationMessage
 {
 	int32 RpcId = 90;
-	int64 ActorId = 93;
+	int32 Error = 91;
+	string Message = 92;
 	FirstWinInfo FirstWinInfo = 1;
 }
 

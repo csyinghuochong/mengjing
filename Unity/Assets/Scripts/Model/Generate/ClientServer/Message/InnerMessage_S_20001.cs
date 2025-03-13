@@ -2573,7 +2573,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.M2A_FirstWinInfoMessage)]
-    public partial class M2A_FirstWinInfoMessage : MessageObject, IMessage
+    public partial class M2A_FirstWinInfoMessage : MessageObject, ILocationMessage
     {
         public static M2A_FirstWinInfoMessage Create(bool isFromPool = false)
         {
@@ -2583,8 +2583,11 @@ namespace ET
         [MemoryPackOrder(89)]
         public int RpcId { get; set; }
 
-        [MemoryPackOrder(92)]
-        public long ActorId { get; set; }
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
 
         [MemoryPackOrder(0)]
         public FirstWinInfo FirstWinInfo { get; set; }
@@ -2597,7 +2600,8 @@ namespace ET
             }
 
             this.RpcId = default;
-            this.ActorId = default;
+            this.Error = default;
+            this.Message = default;
             this.FirstWinInfo = default;
 
             ObjectPool.Instance.Recycle(this);

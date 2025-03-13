@@ -351,6 +351,7 @@ namespace ET.Client
                 rc.Get<GameObject>("Alive").SetActive(true);
                 rc.Get<GameObject>("Dead").SetActive(false);
                 rc.Get<GameObject>("ReviveTime").SetActive(false);
+                rc.Get<GameObject>("Lal_Lv").SetActive(true);
             }
 
             self.UpdateBlood();
@@ -375,7 +376,7 @@ namespace ET.Client
                 rc.Get<GameObject>("Alive").SetActive(false);
                 rc.Get<GameObject>("Dead").SetActive(true);
                 rc.Get<GameObject>("ReviveTime").SetActive(true);
-
+                rc.Get<GameObject>("Lal_Lv").SetActive(false);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIUnitReviveTime, self);
             }
