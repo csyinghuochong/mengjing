@@ -216,7 +216,7 @@ namespace ET.Client
 
             go.transform.localScale = Vector3.one;
             go.transform.localPosition = Vector3.zero;
-            go.transform.localEulerAngles = Vector3.zero;
+            go.transform.localEulerAngles = new Vector3(0, self.RotationY, 0);
 
             if (isPet)
             {

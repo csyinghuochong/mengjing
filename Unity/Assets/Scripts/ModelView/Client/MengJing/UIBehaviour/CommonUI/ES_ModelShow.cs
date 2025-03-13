@@ -18,6 +18,8 @@ namespace ET.Client
 		public Vector2 StartPosition;
 		public bool Draged = false;
 		public Action ClickHandler { get; set; }
+
+		public float RotationY { get; set; } = 0f;
 		
 		public Button E_RenderButton
      	{
