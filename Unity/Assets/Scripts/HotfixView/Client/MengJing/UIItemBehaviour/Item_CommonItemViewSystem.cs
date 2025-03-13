@@ -45,6 +45,8 @@ namespace ET.Client
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true);
             UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>().scale  = (float)effectConfig.Scale;
+            UIParticle.gameObject.SetActive(false);
+            UIParticle.gameObject.SetActive(true);
         }
         
         public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, ItemInfo bagInfo)

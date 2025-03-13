@@ -32,6 +32,7 @@
             self.E_ReceivedImgImage.gameObject.SetActive(userInfoComponent.UserInfo.SingleRewardIds.Contains(key));
             self.E_ReceiveBtnButton.gameObject.SetActive(!userInfoComponent.UserInfo.SingleRewardIds.Contains(key));
             self.ES_RewardList.Refresh(ConfigData.SingleRechargeReward[key]);
+            self.ES_RewardList.ShowUIEffect(41100001);
         }
 
         public static async ETTask OnReceiveBtn(this Scroll_Item_ActivitySingleRechargeItem self)

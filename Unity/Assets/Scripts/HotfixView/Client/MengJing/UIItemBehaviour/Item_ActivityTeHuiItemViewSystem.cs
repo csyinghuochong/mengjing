@@ -46,7 +46,7 @@ namespace ET.Client
             self.E_TextTypeText.text = activityConfig.Par_4;
 
             self.ES_RewardList.Refresh(activityConfig.Par_3, getWay: ItemGetWay.Activity_DayTeHui);
-
+            self.ES_RewardList.ShowUIEffect(41100001);
             //显示图标
             string ItemIcon = activityConfig.Icon;
             if (!string.IsNullOrEmpty(ItemIcon))

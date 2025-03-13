@@ -57,7 +57,7 @@ namespace ET.Client
         {
             string reward = GlobalValueConfigCategory.Instance.Get(28).Value;
             self.ES_RewardList.Refresh(reward);
-
+            self.ES_RewardList.ShowUIEffect( 41100001 );
             self.E_TextYueKaCostText.text = GlobalValueConfigCategory.Instance.Get(37).Value;
         }
 

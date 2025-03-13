@@ -94,11 +94,13 @@ namespace ET.Client
             bagInfo2.ItemID = int.Parse(activityConfig.Par_3.Split(';')[0]);
             bagInfo2.ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]);
             self.ES_CommonItem_2.UpdateItem(bagInfo2, ItemOperateEnum.None);
+            self.ES_CommonItem_2.ShowUIEffect(41100001);
 
             ItemInfo bagInfo3 = new ItemInfo();
             bagInfo3.ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]);
             bagInfo3.ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]);
             self.ES_CommonItem_3.UpdateItem(bagInfo3, ItemOperateEnum.None);
+            self.ES_CommonItem_3.ShowUIEffect(41100001);
 
             self.SetReceiced(self.E_LingQuHint_3Image.gameObject, 3);
             self.SetReceiced(self.E_LingQuHint_2Image.gameObject, 2);

@@ -127,6 +127,22 @@ namespace ET.Client
             self.CurrentHouse = currentHouse;
         }
         
+        public static void ShowUIEffect(this ES_CommonItem self, int effectid)
+        {
+            Transform UIParticle = self.uiTransform.Find("UIParticle");
+            if (UIParticle == null)
+            {
+                return;
+            }
+            UIParticle.gameObject.SetActive(true);
+            CommonViewHelper.DestoryChild(UIParticle.gameObject);
+            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
+            string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true);
+            UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>().scale  = (float)effectConfig.Scale;
+        }
+        
         public static void UpdateItem(this ES_CommonItem self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.Baginfo = bagInfo;
