@@ -20,6 +20,7 @@ namespace ET.Client
 
             self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWinButton);
             self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
+            self.E_Button_SkillDes.AddListenerAsync(self.OnButton_ClickSkillDes);
 
             self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 115, 394f);
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
@@ -50,6 +51,13 @@ namespace ET.Client
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FirstWinReward);
             DlgFirstWinReward dlgFirstWinReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFirstWinReward>();
             dlgFirstWinReward.OnUpdateUISelf(self.FirstWinId);
+        }
+
+        public static async ETTask OnButton_ClickSkillDes(this ES_FirstWin self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FirstWinBossSkill);
+            DlgFirstWinBossSkill dlgFirstWinBossSkill = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFirstWinBossSkill>();
+            dlgFirstWinBossSkill.UpdateBossInfo(self.FirstWinId);
         }
 
         public static async ETTask ReqestFirstWinInfo(this ES_FirstWin self)

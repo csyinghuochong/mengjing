@@ -89,6 +89,23 @@ namespace ET.Client
      		}
      	}
 
+		public Button E_Button_SkillDes
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Button_SkillDes == null )
+				{
+					this.m_E_Button_SkillDes = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_Button_SkillDes");
+				}
+				return this.m_E_Button_SkillDes;
+			}
+		}
+
 		public Image E_Button_FirstWinImage
      	{
      		get
@@ -401,6 +418,7 @@ namespace ET.Client
 			this.m_E_Button_FirstWinButton = null;
 			this.m_E_Button_FirstWinImage = null;
 			this.m_E_Button_FirstWinSelfButton = null;
+			this.m_E_Button_SkillDes = null;
 			this.m_E_Button_FirstWinSelfImage = null;
 			this.m_E_Text_UpdateStatusText = null;
 			this.m_E_Text_BossDevpText = null;
@@ -425,6 +443,7 @@ namespace ET.Client
 		private Button m_E_Button_FirstWinButton = null;
 		private Image m_E_Button_FirstWinImage = null;
 		private Button m_E_Button_FirstWinSelfButton = null;
+		private Button m_E_Button_SkillDes = null;
 		private Image m_E_Button_FirstWinSelfImage = null;
 		private Text m_E_Text_UpdateStatusText = null;
 		private Text m_E_Text_BossDevpText = null;
