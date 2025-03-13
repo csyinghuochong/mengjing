@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
             self.E_Button_SkillDes.AddListenerAsync(self.OnButton_ClickSkillDes);
 
-            self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 115, 394f);
+            self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 200f, 394f);
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
             self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.TypeListNode);
             self.UITypeViewComponent.TypeButtonItemAsset = ABPathHelper.GetUGUIPath("Common/UIFirstWinTypeItem");
