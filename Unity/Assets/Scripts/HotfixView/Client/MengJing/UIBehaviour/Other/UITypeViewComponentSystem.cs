@@ -70,7 +70,8 @@ namespace ET.Client
             self.UIPointTaskDate = rc.Get<GameObject>("UIPointTaskDate");
             self.TaskTypeName = rc.Get<GameObject>("TaskTypeName");
             self.ImageButton = rc.Get<GameObject>("ImageButton");
-            self.ImageButton.GetComponent<Button>().onClick.AddListener(() => { self.OnClickTypeButton(); });
+            self.ImageSelect =  rc.Get<GameObject>("ImageSelect");  
+            self.ImageButton.GetComponent<Button>().onClick.AddListener(self.OnClickTypeButton);
 
             self.TypeItemUIList.Clear();
             self.bSelected = false;
@@ -93,6 +94,8 @@ namespace ET.Client
                 UITypeButtonItemComponent ui = self.TypeItemUIList[i];
                 ui.GameObject.SetActive(false);
             }
+            
+            self.ImageSelect.SetActive(!self.bSelected);
 
             if (!self.bSelected)
             {

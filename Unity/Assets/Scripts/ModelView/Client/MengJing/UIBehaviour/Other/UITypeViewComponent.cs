@@ -36,6 +36,7 @@ namespace ET
         public string TypeItemAsset;
         public TypeButtonInfo TypeButtonInfo;
         public GameObject ImageButton;
+        public GameObject ImageSelect;
         public GameObject UIPointTaskDate;
         public GameObject TaskTypeName;
         public GameObject GameObject;
