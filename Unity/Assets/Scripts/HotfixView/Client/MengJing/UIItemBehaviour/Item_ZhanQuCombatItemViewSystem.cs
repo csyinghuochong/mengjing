@@ -50,7 +50,7 @@
                 self.E_Text_levelText.text = zstring.Format("战力达到{0}", activityInfo.Par_1);
             }
 
-            self.E_Img_LodingValue.fillAmount = 1f - (float)leftNumber / int.Parse(activityInfo.Par_2);  
+            self.E_Img_LodingValue.fillAmount = (float)leftNumber / int.Parse(activityInfo.Par_2);  
             self.EG_YiLingQuSetRectTransform.gameObject.SetActive(activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id) && leftNumber > 0);
             self.E_ButtonReceiveButton.gameObject.SetActive(!activityComponent.ZhanQuReceiveIds.Contains(activityInfo.Id) && leftNumber > 0);
             self.E_TextTip2Text.gameObject.SetActive(leftNumber == 0);
