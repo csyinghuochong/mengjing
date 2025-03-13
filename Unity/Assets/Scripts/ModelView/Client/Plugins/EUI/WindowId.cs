@@ -218,5 +218,6 @@ namespace ET.Client
 		WindowID_DragonDungeonCreate,
 		WindowID_BaoXiangReward,
 		WindowID_DamageValue,
+		WindowID_FirstWinBossSkill,
 	}
 }
