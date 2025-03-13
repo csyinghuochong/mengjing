@@ -21,8 +21,7 @@ namespace ET.Client
             self.E_Button_FirstWinButton.AddListenerAsync(self.OnButton_FirstWinButton);
             self.E_Button_FirstWinSelfButton.AddListenerAsync(self.OnButton_FirstWinSelfButton);
             self.E_Button_SkillDes.AddListenerAsync(self.OnButton_ClickSkillDes);
-
-            self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 200f, 394f);
+            
             self.TypeListNode = rc.Get<GameObject>("TypeListNode");
             self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.TypeListNode);
             self.UITypeViewComponent.TypeButtonItemAsset = ABPathHelper.GetUGUIPath("Common/UIFirstWinTypeItem");
@@ -223,6 +222,21 @@ namespace ET.Client
                 {
                     self.SkillDescriptionList[i].SetActive(false);
                 }
+            }
+
+            string[] strs = null;
+            if (!CommonHelp.IfNull(monsterConfig.ModelShowPosi))
+            {
+                strs = monsterConfig.ModelShowPosi.Split(',');
+            }
+            if (strs != null && strs.Length >= 4)
+            {
+                self.ES_ModelShow.Camera.localPosition = new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2]));
+                self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = float.Parse(strs[3]);    
+            }
+            else
+            {
+                self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 200f, 394f);
             }
 
             self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
