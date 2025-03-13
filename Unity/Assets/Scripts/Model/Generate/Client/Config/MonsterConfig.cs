@@ -163,6 +163,8 @@ namespace ET
 		public int IfHide { get; set; }
 		/// <summary>是否带走buff</summary>
 		public int RemoveBuff { get; set; }
+		/// <summary>怪物显示的位置</summary>
+		public string ModelShowPosi { get; set; }
 
 	}
 }
