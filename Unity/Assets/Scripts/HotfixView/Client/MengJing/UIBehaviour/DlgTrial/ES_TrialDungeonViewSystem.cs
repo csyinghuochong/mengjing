@@ -13,7 +13,6 @@ namespace ET.Client
         private static void Awake(this ES_TrialDungeon self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_TrialDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTrialDungeonItemsRefresh);
             self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_EnterButton);
             self.E_Btn_ReceiveButton.AddListenerAsync(self.OnBtn_ReceiveButton);
             self.E_Btn_AddButton.AddListener(self.OnBtn_AddButton);
@@ -26,12 +25,6 @@ namespace ET.Client
         private static void Destroy(this ES_TrialDungeon self)
         {
             self.DestroyWidget();
-        }
-
-        private static void OnTrialDungeonItemsRefresh(this ES_TrialDungeon self, Transform transform, int index)
-        {
-            Scroll_Item_TrialDungeonItem scrollItemTrialDungeonItem = self.ScrollItemTrialDungeonItems[index].BindTrans(transform);
-            scrollItemTrialDungeonItem.OnInitUI(self.ShowTowerConfigs[index], self.OnSelectDungeonItem);
         }
 
         public static int GetShowCengNum(this ES_TrialDungeon self)
@@ -51,7 +44,7 @@ namespace ET.Client
                 }
             }
 
-            return TowerConfigCategory.Instance.Get(nextId == 0 ? towerId : nextId).CengNum;
+            return nextId == 0 ? towerId : nextId;
         }
 
         public static int GetMaxCengNum(this ES_TrialDungeon self)
@@ -83,7 +76,7 @@ namespace ET.Client
                 return;
             }
 
-            self.OnUpdateUI(towerConfig.CengNum + 1);
+            self.OnUpdateUI(self.TowerId + 1);
         }
 
         public static void OnBtn_SubButton(this ES_TrialDungeon self)
@@ -94,103 +87,47 @@ namespace ET.Client
                 return;
             }
 
-            self.OnUpdateUI(towerConfig.CengNum - 1);
+            self.OnUpdateUI(self.TowerId - 1);
         }
 
-        public static void OnUpdateUI(this ES_TrialDungeon self, int cengNum)
+        public static void OnUpdateUI(this ES_TrialDungeon self, int towerId)
         {
-            List<TowerConfig> towerConfigs = TowerConfigCategory.Instance.GetAll().Values.ToList();
-            int towerId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.TrialDungeonId);
-            int nextId = TowerHelper.GetNextTowerIdByScene(SceneTypeEnum.TrialDungeon, towerId);
+            TowerConfig towerConfig = TowerConfigCategory.Instance.Get(towerId);
 
-            int showNum = 0;
-            int showIndex = 0;
-            bool haveReward = false;
-            self.ShowTowerConfigs.Clear();
-            for (int i = 0; i < towerConfigs.Count; i++)
-            {
-                TowerConfig towerConfig = towerConfigs[i];
-                if (towerConfig.MapType != SceneTypeEnum.TrialDungeon)
-                {
-                    continue;
-                }
+            self.TowerId = towerId;
 
-                if (cengNum != towerConfig.CengNum)
-                {
-                    continue;
-                }
-
-                if (self.IsHaveReward(towerConfig.Id))
-                {
-                    haveReward = true;
-                    showIndex = showNum;
-                }
-
-                if (!haveReward && towerConfig.Id == nextId)
-                {
-                    haveReward = true;
-                    showIndex = showNum;
-                }
-
-                self.ShowTowerConfigs.Add(towerConfig);
-
-                showNum++;
-            }
-
-            self.AddUIScrollItems(ref self.ScrollItemTrialDungeonItems, self.ShowTowerConfigs.Count);
-            self.E_TrialDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTowerConfigs.Count);
-
-            showIndex = showIndex == -1 ? 0 : showIndex;
+            int monsterId = int.Parse(towerConfig.MonsterSet.Split(';')[2]);
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
             using (zstring.Block())
             {
-                self.E_TextLayerText.text = zstring.Format("第{0}层", cengNum);
+                self.E_TextLayerText.text = zstring.Format("第{0}层", towerConfig.CengNum);
+                self.E_TextMonsterHPText.text = zstring.Format("怪物生命：{0}", monsterConfig.Hp);
             }
 
-            int moveIndex = Mathf.Max(showIndex, showNum - 5);
-            Scroll_Item_TrialDungeonItem scrollItemTrialDungeonItem = self.ScrollItemTrialDungeonItems[showIndex];
-            scrollItemTrialDungeonItem.OnBtn_XuanZhong();
-            self.MoveToIndex(showIndex);
-        }
-
-        public static void MoveToIndex(this ES_TrialDungeon self, int showIndex)
-        {
-            self.E_TrialDungeonItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition =
-                    new Vector2(0, showIndex * 180);
-        }
-
-        public static void OnSelectDungeonItem(this ES_TrialDungeon self, int towerId)
-        {
-            self.TowerId = towerId;
-            if (self.ScrollItemTrialDungeonItems != null)
+            self.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+            using (zstring.Block())
             {
-                foreach (Scroll_Item_TrialDungeonItem item in self.ScrollItemTrialDungeonItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.OnSelected(towerId);
-                }
+                self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
             }
 
             self.UpdateButtons();
             self.ShowRewardList();
         }
 
-        public static bool IsHaveReward(this ES_TrialDungeon self, int towerId)
+        private static bool IsHaveReward(this ES_TrialDungeon self, int towerId)
         {
             int curId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.TrialDungeonId);
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             return towerId <= curId && !userInfo.TowerRewardIds.Contains(towerId);
         }
 
-        public static void UpdateButtons(this ES_TrialDungeon self)
+        private static void UpdateButtons(this ES_TrialDungeon self)
         {
             int curId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.TrialDungeonId);
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.E_Btn_EnterButton.gameObject.SetActive(self.TowerId > curId);
             self.E_Btn_ReceiveButton.gameObject.SetActive(self.TowerId <= curId && !userInfo.TowerRewardIds.Contains(self.TowerId));
+            self.EG_ReceivedRectTransform.gameObject.SetActive(userInfo.TowerRewardIds.Contains(self.TowerId));
 
             if (!self.E_Btn_ReceiveButton.gameObject.activeSelf)
             {
@@ -198,13 +135,13 @@ namespace ET.Client
             }
         }
 
-        public static void ShowRewardList(this ES_TrialDungeon self)
+        private static void ShowRewardList(this ES_TrialDungeon self)
         {
             TowerConfig towerConfig = TowerConfigCategory.Instance.Get(self.TowerId);
             self.ES_RewardList.Refresh(towerConfig.DropShow);
         }
 
-        public static async ETTask OnBtn_ReceiveButton(this ES_TrialDungeon self)
+        private static async ETTask OnBtn_ReceiveButton(this ES_TrialDungeon self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < 2)
@@ -218,7 +155,7 @@ namespace ET.Client
             self.UpdateButtons();
         }
 
-        public static async ETTask OnBtn_EnterButton(this ES_TrialDungeon self)
+        private static async ETTask OnBtn_EnterButton(this ES_TrialDungeon self)
         {
             if (self.TowerId == 0)
             {
