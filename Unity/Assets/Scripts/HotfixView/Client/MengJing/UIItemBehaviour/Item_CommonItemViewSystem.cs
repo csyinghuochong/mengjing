@@ -33,20 +33,7 @@ namespace ET.Client
 
         public static void ShowUIEffect(this Scroll_Item_CommonItem self, int effectid)
         {
-            Transform UIParticle = self.uiTransform.Find("UIParticle");
-            if (UIParticle == null)
-            {
-                return;
-            }
-            UIParticle.gameObject.SetActive(true);
-            CommonViewHelper.DestoryChild(UIParticle.gameObject);
-            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
-            string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
-            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true);
-            UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>().scale  = (float)effectConfig.Scale;
-            UIParticle.gameObject.SetActive(false);
-            UIParticle.gameObject.SetActive(true);
+            self.ES_CommonItem.ShowUIEffect(effectid);
         }
         
         public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, ItemInfo bagInfo)

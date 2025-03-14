@@ -134,13 +134,48 @@ namespace ET.Client
             {
                 return;
             }
+            
+            float scale = 70;
+            string path = string.Empty;
+    
+            if (effectid != 41100001)
+            {
+                EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
+                path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
+                scale = (float)effectConfig.Scale;
+            }
+            else
+            {
+                if (self.Baginfo == null)
+                {
+                    return;
+                }
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.Baginfo.ItemID);
+                if (itemConfig.ItemQuality < 2)
+                {
+                    return;
+                }
+
+                using (zstring.Block())
+                {
+                    path = zstring.Format("Assets/Bundles/Effect/UIEffect/UIEffect_Quaity_{0}", itemConfig.ItemQuality);  
+                }
+            }
+            
             UIParticle.gameObject.SetActive(true);
             CommonViewHelper.DestoryChild(UIParticle.gameObject);
-            EffectConfig effectConfig = EffectConfigCategory.Instance.Get(effectid);
-            string path = StringBuilderHelper.GetEffectPathByConfig(effectConfig);
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, UIParticle, true);
-            UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>().scale  = (float)effectConfig.Scale;
+            go.transform.localPosition = Vector3.zero;
+            
+            Coffee.UIExtensions.UIParticle uiParticle = UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>();
+            if (uiParticle != null)
+            {
+                uiParticle.enabled = false;
+                uiParticle.enabled = true;
+                uiParticle.scale = scale;       
+            }
+            //uiParticle = uiParticle.gameObject.AddComponent<Coffee.UIExtensions.UIParticle>();
         }
         
         public static void UpdateItem(this ES_CommonItem self, ItemInfo bagInfo, ItemOperateEnum itemOperateEnum)
