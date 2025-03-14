@@ -95,25 +95,6 @@ namespace ET.Client
      		}
      	}
 
-        public ES_ActivityLogin ES_ActivityLogin
-        {
-            get
-            {
-                ES_ActivityLogin es = this.m_es_activitylogin;
-                if (es == null)
-                {
-	                string path = "Assets/Bundles/UI/Common/ES_ActivityLogin.prefab";
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
-                    this.AssetList.Add(path);
-                    this.m_es_activitylogin = this.AddChild<ES_ActivityLogin, Transform>(go.transform);
-                }
-
-                return this.m_es_activitylogin;
-            }
-        }
-
         public ES_WelfareTask ES_WelfareTask
         {
             get
@@ -197,7 +178,6 @@ namespace ET.Client
 			this.m_E_Type_0Toggle = null;
 			this.m_E_Type_1Toggle = null;
 			this.m_E_Type_2Toggle = null;
-			this.m_es_activitylogin = null;
 			this.m_es_welfaretask = null;
 			this.m_es_welfaredraw = null;
 			this.m_es_welfareinvest = null;
@@ -218,7 +198,6 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_Type_0Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_Type_2Toggle = null;
-		private EntityRef<ES_ActivityLogin> m_es_activitylogin = null;
 		private EntityRef<ES_WelfareTask> m_es_welfaretask = null;
 		private EntityRef<ES_WelfareDraw> m_es_welfaredraw = null;
 		private EntityRef<ES_WelfareInvest> m_es_welfareinvest = null;
