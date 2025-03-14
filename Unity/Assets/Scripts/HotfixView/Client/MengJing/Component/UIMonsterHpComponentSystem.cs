@@ -379,6 +379,7 @@ namespace ET.Client
                 rc.Get<GameObject>("Lal_Lv").SetActive(false);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIUnitReviveTime, self);
+                self.OnTimer();     
             }
         }
 

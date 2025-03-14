@@ -214,7 +214,7 @@ namespace ET.Client
 
             if (wait)
            {
-                           await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+               await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
            }
             if (instanceId != unit.InstanceId)
             {
