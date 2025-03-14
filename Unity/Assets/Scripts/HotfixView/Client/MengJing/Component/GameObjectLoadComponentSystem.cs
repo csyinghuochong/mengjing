@@ -54,7 +54,7 @@ namespace ET.Client
             return path;
         }
 
-        public static void AddLoadQueue(this GameObjectLoadComponent self, string path, long formId, Action<GameObject, long> action)
+        public static void AddLoadQueue(this GameObjectLoadComponent self, string path, long formId, bool autoActive, Action<GameObject, long> action)
         {
             //Log.Debug($"self.GameObject !=null:  {path}  {formId}");
 
@@ -68,7 +68,7 @@ namespace ET.Client
                 //Debug.LogError($"资源加载11：  {path}  +   {TimeHelper.ServerNow()}");
                 if (action!=null)
                 {
-                    GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
+                    GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path, autoActive);
                     action?.Invoke(gameObject, formId);
                 }
                 return;

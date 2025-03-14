@@ -55,7 +55,7 @@ namespace ET.Client
         public static void InitEffect(this JiaYuanPlanLockComponent self)
         {
             self.PlanEffectPath = ABPathHelper.GetEffetPath("ScenceEffect/Eff_JiaYuan_Active");
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.PlanEffectPath, self.InstanceId, self.OnLoadEffect);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.PlanEffectPath, self.InstanceId,true, self.OnLoadEffect);
         }
 
         public static void OnLoadEffect(this JiaYuanPlanLockComponent self, GameObject go, long formId)

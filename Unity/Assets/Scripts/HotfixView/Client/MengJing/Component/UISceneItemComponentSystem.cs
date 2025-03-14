@@ -70,7 +70,7 @@ namespace ET.Client
             self.UIPosition = myUnit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
              // GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
             //self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.HeadBarPath, self.InstanceId,true, self.OnLoadGameObject);
         }
     }
 }

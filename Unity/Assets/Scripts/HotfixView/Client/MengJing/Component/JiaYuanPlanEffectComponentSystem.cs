@@ -43,7 +43,7 @@ namespace ET.Client
             }
 
             self.PlanEffectPath = ABPathHelper.GetEffetPath("ScenceEffect/Eff_JiaYuan_Zhong");
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.PlanEffectPath, self.InstanceId, self.OnLoadEffect);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.PlanEffectPath, self.InstanceId, true,self.OnLoadEffect);
         }
 
         public static void OnLoadEffect(this JiaYuanPlanEffectComponent self, GameObject go, long formId)

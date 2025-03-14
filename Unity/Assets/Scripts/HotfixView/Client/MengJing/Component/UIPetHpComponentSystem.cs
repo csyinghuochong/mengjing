@@ -42,7 +42,7 @@ namespace ET.Client
 
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIPetHp");
 
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId,true, self.OnLoadGameObject);
         }
 
         [EntitySystem]

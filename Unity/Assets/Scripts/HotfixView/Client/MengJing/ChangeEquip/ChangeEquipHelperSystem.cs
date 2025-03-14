@@ -230,7 +230,7 @@ namespace ET.Client
 
         public static void LoadPrefab(this ChangeEquipHelper self, string asset)
         {
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(asset, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(asset, self.InstanceId, true, self.OnLoadGameObject);
         }
 
         public static void RecoverGameObject(this ChangeEquipHelper self)
@@ -423,7 +423,7 @@ namespace ET.Client
             self.WeaponObject = null;
             self.WeaponParent = weaponParent;
             self.RimLight = rimLight;
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject_Weapon);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId,true, self.OnLoadGameObject_Weapon);
         }
 
         public static void LoadEquipment(this ChangeEquipHelper self, GameObject target, List<int> fashionids, int occ)

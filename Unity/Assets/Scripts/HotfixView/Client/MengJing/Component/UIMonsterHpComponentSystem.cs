@@ -59,7 +59,7 @@ namespace ET.Client
             self.HeadBarPath = "";
             self.LastTime = 0f;
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HeadBarPath, self.InstanceId, true,self.OnLoadGameObject);
         }
 
         [EntitySystem]

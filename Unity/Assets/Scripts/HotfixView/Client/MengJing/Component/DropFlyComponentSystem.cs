@@ -26,7 +26,7 @@ namespace ET.Client
             if (!self.IsPlayEffect)
             {
                 self.IsPlayEffect = true;
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.EffectPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.EffectPath, self.InstanceId, true,self.OnLoadGameObject);
             }
 
             if (!self.Send && math.distance(self.MyUnit.Position, self.TargetUnit.Position) < self.Distance)

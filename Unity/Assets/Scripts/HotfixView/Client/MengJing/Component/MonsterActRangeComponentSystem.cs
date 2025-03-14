@@ -75,7 +75,7 @@ namespace ET.Client
         public static  void LoadEffect(this MonsterActRangeComponent self)
         {
             string path = ABPathHelper.GetEffetPath("MonsterActRange");
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(path, self.InstanceId, true,self.OnLoadGameObject);
         }
     }
 

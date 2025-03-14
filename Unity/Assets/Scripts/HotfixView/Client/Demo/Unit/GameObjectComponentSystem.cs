@@ -279,7 +279,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.UnitAssetsPath, self.InstanceId, false, self.OnLoadGameObject);
             }
         }
 
@@ -296,7 +296,7 @@ namespace ET.Client
             string path = ABPathHelper.GetUnitPath($"JiaYuan/100101");
             unit.RemoveComponent<UIJiaYuanPlanComponent>();
             unit.RemoveComponent<JiaYuanPlanEffectComponent>();
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( path, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( path, self.InstanceId, true, self.OnLoadGameObject);
         }
 
         public static void RecoverHorse(this GameObjectComponent self)
@@ -472,7 +472,7 @@ namespace ET.Client
 
                 // self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
                 self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{10001}");
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HorseAssetsPath, self.InstanceId, self.OnLoadHorse);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.HorseAssetsPath, self.InstanceId, true, self.OnLoadHorse);
             }
             else
             {

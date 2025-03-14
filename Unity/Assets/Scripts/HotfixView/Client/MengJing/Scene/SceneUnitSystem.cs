@@ -75,7 +75,7 @@ namespace ET.Client
             }
 
             self.State = LoadState.WillLoad;
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.Prefabname, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.Prefabname, self.InstanceId, true,self.OnLoadGameObject);
         }
     }
 }

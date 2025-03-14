@@ -135,7 +135,7 @@ namespace ET.Client
                 _ => null
             };
 
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.FallingFontPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.FallingFontPath, self.InstanceId,true, self.OnLoadGameObject);
         }
 
         public static bool LateUpdate(this FallingFontShowComponent self)

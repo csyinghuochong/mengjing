@@ -193,7 +193,7 @@ namespace ET.Client
             }
 
             self.EffectPath = StringBuilderHelper.GetEffectPathByConfig(self.EffectConfig);
-            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, self.OnLoadGameObject);
+            self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.EffectPath, self.InstanceId, true,self.OnLoadGameObject);
         }
 
         public static void OnUpdate(this Effect self)

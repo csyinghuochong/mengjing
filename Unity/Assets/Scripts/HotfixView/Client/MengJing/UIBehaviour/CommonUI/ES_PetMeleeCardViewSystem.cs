@@ -126,7 +126,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
-                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId, self.OnLoadGameObject);
+                self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue(self.UnitAssetsPath, self.InstanceId,true, self.OnLoadGameObject);
             }
         }
 
