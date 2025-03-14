@@ -342,8 +342,11 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
+                    DateTime dateTime = TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime);
+                    string str_1 = dateTime.ToString("HH:mm:ss");
+                    string str_2 = zstring.Format("{0}年{1}月{2}日 {3}", dateTime.Year, dateTime.Month, dateTime.Day, str_1);
                     Text_JiSha_1.GetComponent<Text>().text =
-                            zstring.Format("{0} (时间： {1})", firstWinInfo.PlayerName, TimeInfo.Instance.ToDateTime(firstWinInfo.KillTime).ToString());
+                            zstring.Format("{0} ({1})", firstWinInfo.PlayerName, str_2);
                 }
             }
             else
