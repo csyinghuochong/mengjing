@@ -288,11 +288,14 @@ namespace ET.Client
                 
                 //显示宝石
                 float startPostionY = 0 - self.TitleBigHeight_234 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
-                Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
-                self.EG_UIEquipGemHoleSetRectTransform.GetComponent<RectTransform>().anchoredPosition = equipNeedvec2;
+               
                 int gemNumber = 0;
                 if (!string.IsNullOrEmpty(self.BagInfo.GemHole))
                 {
+                    Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
+                    self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(true);
+                    self.EG_UIEquipGemHoleSetRectTransform.GetComponent<RectTransform>().anchoredPosition = equipNeedvec2;
+                    
                     string[] gemHoles = self.BagInfo.GemHole.Split('_');
                     string[] gemIds = self.BagInfo.GemIDNew.Split('_');
                     for (int g = 0; g < self.Obj_UIEquipGemHoleList.Length; g++)
@@ -340,16 +343,16 @@ namespace ET.Client
                 }
                 else
                 {
+                    self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false);
                     self.Obj_UIEquipGemHoleList[0].SetActive(false);
                     self.Obj_UIEquipGemHoleList[1].SetActive(false);
                     self.Obj_UIEquipGemHoleList[2].SetActive(false);
                     self.Obj_UIEquipGemHoleList[3].SetActive(false);
                 }
 
-                float gemHoleShowHeight = gemNumber > 0 ? 135f : 20f;
+                float gemHoleShowHeight = gemNumber > 0 ? 140f : -30f;
                 //显示专精属性
                 startPostionY -= gemHoleShowHeight;
-                startPostionY -= 5f;
                 
                 //展示类装备不显示宝石
                 if (self.BagInfo.BagInfoID == 0)
