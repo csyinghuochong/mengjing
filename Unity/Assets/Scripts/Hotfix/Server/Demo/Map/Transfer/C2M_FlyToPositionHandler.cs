@@ -17,9 +17,16 @@ namespace ET.Server
                     return;
                 }
 
+                if (request.UnitType!= UnitType.Npc && request.UnitType!= UnitType.Monster)
+                {
+                    response.Error = ErrorCode.ERR_NotFindNpc;
+                    return;
+                }
+
+
                 bagComponentS.OnCostItemData($"{ConfigData.FlyToItem};1", ItemLocType.ItemLocBag);
 
-                response.Error = TransferHelper.OnFlyToPosition(unit, request.NpcConfigId);
+                response.Error = TransferHelper.OnFlyToPosition(unit, request.UnitType, request.ConfigId);
                 await ETTask.CompletedTask;
             }
             catch (Exception ex)

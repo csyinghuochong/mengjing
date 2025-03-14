@@ -8,6 +8,7 @@ namespace ET.Client
 	public  class Scroll_Item_MapBigNpcItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MapBigNpcItem>
 	{
 		public Action<int, int> ClickHandler;
+		public Action<int, int> FlyToHandler;
 		public int ConfigId;
 		public int UnitType;
 		

@@ -136,8 +136,6 @@ namespace ET.Client
 
         private static string GetAttributeDesc(this ES_ShouJiTreasure self, int[] type, long[] value)
         {
-            string desc = "";
-
             string attributeStr = string.Empty;
             for (int i = 0; i < type.Length; i++)
             {

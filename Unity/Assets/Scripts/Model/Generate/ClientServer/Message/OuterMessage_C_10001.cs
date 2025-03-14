@@ -2495,8 +2495,11 @@ namespace ET
         [MemoryPackOrder(2)]
         public int SceneType { get; set; }
 
-        [MemoryPackOrder(3)]
-        public int NpcConfigId { get; set; }
+        [MemoryPackOrder(4)]
+        public int UnitType { get; set; }
+
+        [MemoryPackOrder(5)]
+        public int ConfigId { get; set; }
 
         public override void Dispose()
         {
@@ -2508,7 +2511,8 @@ namespace ET
             this.RpcId = default;
             this.SceneId = default;
             this.SceneType = default;
-            this.NpcConfigId = default;
+            this.UnitType = default;
+            this.ConfigId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

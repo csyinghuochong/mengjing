@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -85,11 +86,12 @@ namespace ET.Client
             RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID()).Coroutine();
         }
 
-        public static async ETTask<int> RequestFlyToPosition(Scene root, int npcId)
+        public static async ETTask<int> RequestFlyToPosition(Scene root, int unitType, int configid)
         {
             MoveHelper.Stop(root);
             C2M_FlyToPosition c2mFlyToPosition = C2M_FlyToPosition.Create();    
-            c2mFlyToPosition.NpcConfigId = npcId;
+            c2mFlyToPosition.UnitType = unitType;
+            c2mFlyToPosition.ConfigId = configid;   
             M2C_FlyToPosition response =  await root.GetComponent<ClientSenderCompnent>().Call(c2mFlyToPosition) as M2C_FlyToPosition;
             return response.Error;
         }

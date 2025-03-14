@@ -22,23 +22,20 @@ namespace ET.Client
             self.ClickHandler(self.UnitType, self.ConfigId);
         }
 
-        private static async ETTask OnFlyTo(this Scroll_Item_MapBigNpcItem self)
+        private static  void OnFlyTo(this Scroll_Item_MapBigNpcItem self)
         {
-            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            if (bagComponentC.GetItemNumber(ConfigData.FlyToItem) < 1)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("道具不足");  
-                return; 
-            }
+            self.FlyToHandler(self.UnitType, self.ConfigId);
+        }
 
-            EnterMapHelper.RequestFlyToPosition(self.Root(), self.ConfigId).Coroutine();
-            await ETTask.CompletedTask; 
+        public static void SetFlyToHandler(this Scroll_Item_MapBigNpcItem self,  Action<int, int> action)
+        {
+            self.FlyToHandler = action;
         }
 
         public static void SetClickHandler(this Scroll_Item_MapBigNpcItem self, int unittype, int npcId, Action<int, int> action)
         {
             self.E_ImageDiButton.AddListener(self.OnImageDi);
-            self.E_FlyToButton.AddListenerAsync( self.OnFlyTo);
+            self.E_FlyToButton.AddListener( self.OnFlyTo);
 
             self.ConfigId = npcId;
             self.ClickHandler = action;

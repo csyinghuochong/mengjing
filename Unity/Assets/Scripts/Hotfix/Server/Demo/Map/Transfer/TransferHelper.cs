@@ -616,27 +616,27 @@ namespace ET.Server
             OnFubenToMain(scene, userId);
         }
 
-        public static int OnFlyToPosition(Unit unit, int npcid)
+        public static int OnFlyToPosition(Unit unit, int unitType, int configid)
         {
             Unit tonpc = null;
-            List<Unit> npclist= FubenHelp.GetUnitList(unit.Scene(), UnitType.Npc);
+            List<Unit> npclist= FubenHelp.GetUnitList(unit.Scene(), unitType);
             foreach (Unit npc in npclist)
             {
-                if (npc.ConfigId == npcid)
+                if (npc.ConfigId == configid)
                 {
                     tonpc = npc;
                     break;
                 }
             }
-
+            
             if (tonpc == null)
             {
                 return ErrorCode.ERR_NotFindNpc;
             }
 
             RemovePetAndJingLing(unit);
-            
-            unit.Position = tonpc.Position + math.mul(tonpc.Rotation, math.forward()) * 1f;;
+           
+            unit.Position =  tonpc.Position + math.mul(tonpc.Rotation, math.forward()) * 1f;;
             unit.Stop(-2);
             
             CreateFightPetList(unit);

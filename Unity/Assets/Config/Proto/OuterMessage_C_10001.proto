@@ -561,7 +561,8 @@ message C2M_FlyToPosition // ILocationRequest
 
 	int32 SceneId = 2;
 	int32 SceneType = 3;
-	int32 NpcConfigId = 4;	
+	int32 UnitType = 5;
+	int32 ConfigId = 6;
 }
 
 message M2C_FlyToPosition // ILocationResponse

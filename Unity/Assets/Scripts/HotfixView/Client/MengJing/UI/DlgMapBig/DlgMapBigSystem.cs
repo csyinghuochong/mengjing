@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine.EventSystems;
 
 namespace ET.Client
@@ -450,14 +451,44 @@ namespace ET.Client
             {
                 scrollItemMapBigNpcItem.SetClickHandler(UnitType.Npc, self.ShowNpc[index],
                     (int unitype, int npcid) => { self.OnClickNpcItem(unitype, npcid); });
+                scrollItemMapBigNpcItem.SetFlyToHandler(
+                    (int unitype, int npcid) => { self.OnFlyTo(unitype, npcid).Coroutine(); });
             }
             else
             {
                 scrollItemMapBigNpcItem.SetClickHandler(UnitType.Monster, self.ShowBoss[index-self.ShowNpc.Count],
                     (int unitype, int npcid) => { self.OnClickNpcItem(unitype, npcid); });
+                scrollItemMapBigNpcItem.SetFlyToHandler(
+                    (int unitype, int npcid) => { self.OnFlyTo(unitype, npcid).Coroutine(); });
             }
         }
 
+        public static async ETTask OnFlyTo(this DlgMapBig self, int unitype, int configid)
+        {
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+            if (bagComponentC.GetItemNumber(ConfigData.FlyToItem) < 1)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("道具不足");  
+                return; 
+            }
+
+            // float3 target;
+            // if (unitype == UnitType.Npc)
+            // {
+            //     NpcConfig npcConfig = NpcConfigCategory.Instance.Get(configid);
+            //     target = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
+            //     quaternion rotation = quaternion.Euler(0, math.radians(npcConfig.Rotation), 0); 
+            //     target =  target + math.mul(rotation, math.forward()) * 1f;
+            // }
+            // else
+            // {
+            //     target = (self.BossList[configid]);
+            // }
+            
+            EnterMapHelper.RequestFlyToPosition(self.Root(), unitype, configid).Coroutine();
+            await ETTask.CompletedTask; 
+        }
+        
         public static void OnClickNpcItem(this DlgMapBig self, int unitype, int configid)
         {
             self.View.EG_ImageSelectRectTransform.gameObject.SetActive(true);
