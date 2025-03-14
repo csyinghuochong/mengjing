@@ -11,8 +11,10 @@ namespace ET.Server
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
-            root.AddComponent<ActivitySceneComponent>();
+            root.AddComponent<LocationProxyComponent>();
             root.AddComponent<DBManagerComponent>();
+            root.AddComponent<MessageLocationSenderComponent>();
+            root.AddComponent<ActivitySceneComponent>();
             await ETTask.CompletedTask;
         }
     }
