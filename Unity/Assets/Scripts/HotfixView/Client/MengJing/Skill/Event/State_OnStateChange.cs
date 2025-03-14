@@ -16,11 +16,11 @@ namespace ET.Client
             // 隐藏状态
             if (message.StateType == StateTypeEnum.Hide && message.StateOperateType == 1)
             {
-                args.Unit.GetComponent<GameObjectComponent>().EnterHide();
+                args.Unit.EnterHide();
             }
             if (message.StateType == StateTypeEnum.Hide && message.StateOperateType == 2)
             {
-                args.Unit.GetComponent<GameObjectComponent>().ExitHide();
+                args.Unit.ExitHide();
             }
             
             await ETTask.CompletedTask;

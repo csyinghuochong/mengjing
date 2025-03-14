@@ -53,6 +53,8 @@ namespace ET.Client
         
         public static void EnterHide(this Unit self)
         {
+            self.GetComponent<GameObjectComponent>().EnterHide();
+            
             switch(self.Type)
             {
                 case UnitType.Player:
@@ -71,6 +73,8 @@ namespace ET.Client
 
         public static void ExitHide(this Unit self)
         {
+            self.GetComponent<GameObjectComponent>().ExitHide();
+            
             switch (self.Type)
             {
                 case UnitType.Player:
@@ -103,11 +107,11 @@ namespace ET.Client
 
                 if (show)
                 {
-                    uu.GetComponent<GameObjectComponent>()?.ExitHide();
+                    uu.ExitHide();
                 }
                 else
                 {
-                    uu.GetComponent<GameObjectComponent>()?.EnterHide();
+                    uu.EnterHide();
                 }
             }
          }

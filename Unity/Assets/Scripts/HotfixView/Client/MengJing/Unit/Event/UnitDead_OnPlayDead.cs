@@ -203,7 +203,7 @@ namespace ET.Client
                 long waitType = 1000 + (long)(skillConfigCategory.SkillDelayTime * 1000) + skillConfigCategory.SkillLiveTime;
                 if (waitType >= 5000)
                 {
-                    unit.GetComponent<GameObjectComponent>().EnterHide();
+                    unit.EnterHide();
                 }
             }
         }
@@ -215,15 +215,15 @@ namespace ET.Client
             if (wait)
            {
                await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+               //unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmHui);
+               await unit.GetComponent<GameObjectComponent>().ShowDissolve(false);
            }
             if (instanceId != unit.InstanceId)
             {
                 return;
             }
-
-            //unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmHui);
-            await unit.GetComponent<GameObjectComponent>().ShowDissolve(false);
-            unit.GetComponent<GameObjectComponent>().OnHui();
+            
+            unit.GetComponent<GameObjectComponent>()?.OnDead();
             unit.GetComponent<UIMonsterHpComponent>()?.OnDead();
         }
     }

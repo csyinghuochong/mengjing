@@ -82,8 +82,6 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
-                self.OnRevive();
-
                 if (self.Dissolve)
                 {
                     self.ShowDissolve(true).Coroutine();
@@ -166,15 +164,13 @@ namespace ET.Client
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-                    if (cardtransform > 0)
+                    int showmonsterId = cardtransform > 0 ? cardtransform : runmonsterId;
+                    if (showmonsterId > 0)
                     {
-                        self.OnCardTranfer(cardtransform, false);
+                        MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(showmonsterId);
+                        self.UnitAssetsPath =  ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);;
                     }
-                    else 
-                    {
-                        self.OnRunRaceTranfer(runmonsterId, false);
-                    }
-
+                    
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
                         self.UnitAssetsPath = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
@@ -192,9 +188,21 @@ namespace ET.Client
                     Unit master = unit.GetParent<UnitComponent>().Get(masterId);
                     numericComponent = unit.GetComponent<NumericComponentC>();
                     
-                    cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-                    self.OnCardTranfer(cardtransform, false);
-                    
+                    int nowdead = numericComponent.GetAsInt(NumericType.Now_Dead);
+                    if (nowdead == 1)
+                    {
+                        showmonsterId = 800001;
+                    }
+                    else
+                    {
+                        showmonsterId = numericComponent.GetAsInt(NumericType.CardTransform);
+                    }
+                    if (showmonsterId > 0)
+                    {
+                        MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(showmonsterId);
+                        self.UnitAssetsPath =  ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);;
+                    }
+
                     if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
                         if (userMaterModel == 1 && master != null
@@ -576,13 +584,22 @@ namespace ET.Client
                     unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     self.OnUpdateHorse();
 
-                    if (numericComponent.GetAsInt(NumericType.RunRaceTransform) == 0
-                        && numericComponent.GetAsInt(NumericType.CardTransform) == 0)
+                    int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
+                    int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform); 
+                    if (cardtransform == 0 && runmonsterId == 0)
                     {
                         unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
                         self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
                     }
-
+                    if (unit.MainHero && cardtransform > 0)
+                    {
+                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnCardTranfer(cardtransform);
+                    }
+                    if (unit.MainHero&& runmonsterId > 0)
+                    {
+                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnRunRaceTranfer(runmonsterId);
+                    }
+                    
                     StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
                     if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
                     {
@@ -591,15 +608,14 @@ namespace ET.Client
 
                     if (stateComponent.StateTypeGet(StateTypeEnum.Hide))
                     {
-                        self.EnterHide();
+                        unit.EnterHide();
                     }
 
                     if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
                     {
                         EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit, Wait = false});
                     }
-
-
+                    
                     if (self.BianShenEffect)
                     {
                         self.BianShenEffect = false;
@@ -703,17 +719,18 @@ namespace ET.Client
                         unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
                         unit.AddComponent<UIMonsterHpComponent>(true); //血条UI组件
                     }
-
-                    if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
-                    {
-                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit});
-                    }
-                    else
-                    {
-                        unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
-                        unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
-                    }
-
+                    
+                    unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
+                    unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
+                    numericComponent = unit.GetComponent<NumericComponentC>();
+                    // if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
+                    // {
+                    //     EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit});
+                    // }
+                    // else
+                    // {
+                    //    
+                    // }
                     break;
                 case UnitType.Pet:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
@@ -978,8 +995,7 @@ namespace ET.Client
             {
                 self.ObjectHorse.SetActive(false);
             }
-
-            self.GetParent<Unit>().EnterHide();
+            
         }
 
         public static void EnterBaTi(this GameObjectComponent self)
@@ -1029,7 +1045,6 @@ namespace ET.Client
             }
 
             self.CheckRunState();
-            self.GetParent<Unit>().ExitHide();
         }
 
         /// <summary>
@@ -1137,70 +1152,75 @@ namespace ET.Client
             unit.GetComponent<UIPlayerHpComponent>().ExitStealth();
         }
 
-        public static void OnHui(this GameObjectComponent self)
-        {
-            Transform transform = self.GameObject.transform;
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).name.Equals(StringBuilderData.RoleBoneSet))
-                {
-                    continue;
-                }
-
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
-
         public static void OnRevive(this GameObjectComponent self)
         {
-            if (self.GameObject == null)
-            {
-                return;
-            }
-
-            Transform transform = self.GameObject.transform;
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).name == "RoleBoneSet")
-                {
-                    continue;
-                }
-
-                transform.GetChild(i).gameObject.SetActive(true);
-            }
+            // if (self.GameObject == null)
+            // {
+            //     return;
+            // }
+            //
+            // Transform transform = self.GameObject.transform;
+            // for (int i = 0; i < transform.childCount; i++)
+            // {
+            //     if (transform.GetChild(i).name == "RoleBoneSet")
+            //     {
+            //         continue;
+            //     }
+            //
+            //     transform.GetChild(i).gameObject.SetActive(true);
+            // }
+            
+            self.OnTranferHandler(0, true);
+            
+            self.LoadGameObject();
         }
 
+        
+        public static void OnDead(this GameObjectComponent self)
+        {
+            // Transform transform = self.GameObject.transform;
+            // for (int i = 0; i < transform.childCount; i++)
+            // {
+            //     if (transform.GetChild(i).name.Equals(StringBuilderData.RoleBoneSet))
+            //     {
+            //         continue;
+            //     }
+            //
+            //     transform.GetChild(i).gameObject.SetActive(false);
+            // }
+            
+            self.OnTranferHandler(0, true);
+            
+            self.LoadGameObject();
+        }
+
+        
         /// <summary>
         /// 变身卡
         /// </summary>
         /// <param name="self"></param>
         /// <param name="monsterid"></param>
         /// <param name="remove"></param>
-        public static void OnCardTranfer(this GameObjectComponent self, int monsterid, bool remove)
+        public static void OnCardTranfer(this GameObjectComponent self, int monsterid)
         {
             Unit unit = self.GetParent<Unit>();
 
-            self.OnTranferHandler(monsterid, remove);
-
-            if (unit.MainHero)
-            {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnCardTranfer(monsterid);
-            }
+            self.BianShenEffect = unit.MainHero;
+            self.OnTranferHandler(monsterid, true);
+            
+            self.LoadGameObject();
         }
 
         /// <summary>
         /// 奔跑大赛变身
         /// </summary>
-        public static void OnRunRaceTranfer(this GameObjectComponent self, int monsterid, bool remove)
+        public static void OnRunRaceTranfer(this GameObjectComponent self, int monsterid)
         {
             Unit unit = self.GetParent<Unit>();
-
-            self.OnTranferHandler(monsterid, remove);
-
-            if (unit.MainHero)
-            {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnRunRaceTranfer(monsterid);
-            }
+            self.BianShenEffect = unit.MainHero;
+            self.OnTranferHandler(monsterid, true);
+            
+            self.LoadGameObject();
         }
 
         public static void OnTranferHandler(this GameObjectComponent self, int monsterid, bool remove)
@@ -1219,32 +1239,19 @@ namespace ET.Client
                 unit.RemoveComponent<SkillYujingComponent>();
                 unit.RemoveComponent<UIPlayerHpComponent>();
                 unit.RemoveComponent<UIMonsterHpComponent>();
+                unit.RemoveComponent<MonsterActRangeComponent>();   
             }
-
-            if (monsterid > 0)
-            {
-                MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
-                string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
-                
-                self.UnitAssetsPath = path;
-            }
-            else
-            {
-                self.UnitAssetsPath = string.Empty;
-            }
-           
-            self.BianShenEffect = unit.MainHero && remove;
         }
 
         public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
         {
             if (stallType > 0)
             {
-                self.EnterHide();
+                self.GetParent<Unit>().EnterHide();
             }
             else
             {
-                self.ExitHide();
+                self.GetParent<Unit>().ExitHide();
             }
         }
     }

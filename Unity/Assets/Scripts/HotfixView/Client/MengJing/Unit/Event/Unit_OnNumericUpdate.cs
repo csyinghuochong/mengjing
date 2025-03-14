@@ -52,7 +52,7 @@
                     break;
                 case NumericType.RunRaceTransform:
                     int runraceMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.RunRaceTransform);
-                    args.Defend.GetComponent<GameObjectComponent>()?.OnRunRaceTranfer(runraceMonster, true);
+                    args.Defend.GetComponent<GameObjectComponent>()?.OnRunRaceTranfer(runraceMonster);
                     if (args.Defend.MainHero)
                     {
                         args.Defend.Root().GetComponent<AttackComponent>().OnTransformId(args.Defend.ConfigId, runraceMonster);
@@ -97,7 +97,7 @@
                     break;
                 case NumericType.CardTransform:
                     int cardMonster = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.CardTransform);
-                    args.Defend.GetComponent<GameObjectComponent>().OnCardTranfer(cardMonster, true);
+                    args.Defend.GetComponent<GameObjectComponent>().OnCardTranfer(cardMonster);
                     args.Defend.GetComponent<GameObjectComponent>().LoadGameObject();
                     if (args.Defend.MainHero)
                     {

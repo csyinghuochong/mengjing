@@ -117,7 +117,8 @@ namespace ET.Server
                     }
                 }
 
-                if (itemConfig.ItemSubType == 110 && unit.Root().GetComponent<MapComponent>().SceneId != 2000001) // 领主怪物召唤
+                MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
+                if (itemConfig.ItemSubType == 110 && mapComponent.SceneId != 2000001) // 领主怪物召唤
                 {
                     response.Error = ErrorCode.ERR_ItemOnlyUseMiJing;
                     return;
@@ -207,12 +208,11 @@ namespace ET.Server
                             break;
                         //回城卷轴[返回另外一个副本场景]
                         case 4:
-                            if (unit.Root().GetComponent<MapComponent>().SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
                             {
                                 //LocalDungeonComponent localDungeon = unit.DomainScene().GetComponent<LocalDungeonComponent>();
                                 //TransferHelper.LocalDungeonTransfer(unit, 0, int.Parse(itemConfig.ItemUsePar), localDungeon.FubenDifficulty).Coroutine();
                             }
-
                             break;
                         //图纸制造
                         case 5:
@@ -253,15 +253,16 @@ namespace ET.Server
                         //冷却时间清空卷轴"
                         case 12:
                             userInfoComponent.OnCleanBossCD();
-                            if (unit.Root().GetComponent<MapComponent>().SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            
+                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
                             {
-                                //unit.Root().GetComponent<LocalDungeonComponent>().OnCleanBossCD();
+                                unit.Scene().GetComponent<LocalDungeonComponent>().OnCleanBossCD();
                             }
 
                             break;
                         //召唤卷轴
                         case 14:
-                            if (unit.Root().GetComponent<MapComponent>().SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
                             {
                                 //UnitFactory.CreateTempFollower(unit, int.Parse(itemConfig.ItemUsePar));
                             }

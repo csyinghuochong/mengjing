@@ -247,15 +247,22 @@ namespace ET.Client
             self.UpdateShow();
 
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();   
             if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
             {
                 self.EnterStealth(canAttack ? 0f : 0.3f);
             }
 
             if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
-                || unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall) > 0)
+                || numericComponentC.GetAsLong(NumericType.Now_Stall) > 0)
             {
                 self.EnterHide();
+            }
+            
+            long leftTime = numericComponentC.GetAsLong(NumericType.ReviveTime) - TimeHelper.ClientNow();
+            if (leftTime > 0)
+            {
+                self.OnDead();
             }
         }
 
