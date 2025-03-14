@@ -68,7 +68,7 @@ namespace ET.Client
 
                 if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) > 0)
                 {
-                    OnBossDead(unit).Coroutine();
+                    OnBossDead(unit, args.Wait).Coroutine();
                     unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmDeathState);
                 }
                 else
@@ -208,10 +208,14 @@ namespace ET.Client
             }
         }
 
-        private async ETTask OnBossDead(Unit unit)
+        private async ETTask OnBossDead(Unit unit, bool wait)
         {
             long instanceId = unit.InstanceId;
-            await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+
+            if (wait)
+           {
+                           await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+           }
             if (instanceId != unit.InstanceId)
             {
                 return;

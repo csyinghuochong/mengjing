@@ -596,7 +596,7 @@ namespace ET.Client
 
                     if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
                     {
-                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
+                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit, Wait = false});
                     }
 
 
@@ -706,7 +706,7 @@ namespace ET.Client
 
                     if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
                     {
-                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
+                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit});
                     }
                     else
                     {

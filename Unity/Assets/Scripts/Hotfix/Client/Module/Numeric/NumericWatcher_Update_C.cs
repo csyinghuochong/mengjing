@@ -22,7 +22,7 @@ namespace ET.Client
             if (args.NewValue == 1) //死亡
             {
                 unit.GetComponent<HeroDataComponentC>().OnDead();
-                EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend });
+                EventSystem.Instance.Publish(args.Defend.Root(), new UnitDead() { Unit = args.Defend, Wait =  true});
             }
         }
     }

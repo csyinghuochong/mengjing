@@ -72,12 +72,13 @@ namespace ET.Server
                 self.DBDayActivityInfo.LastHour = dateTime.Hour;
                 self.NoticeActivityUpdate_Hour(dateTime).Coroutine();
             }
-            
-            if (self.CheckIndex >= 600)
+
+            self.CheckIndex++;
+            if (self.CheckIndex >=  600)
             { 
-                self.CheckIndex++;
                 self.CheckPetMine(self.CheckIndex);
                 self.SaveDB();
+                self.CheckIndex = 0;
             }
         }
 

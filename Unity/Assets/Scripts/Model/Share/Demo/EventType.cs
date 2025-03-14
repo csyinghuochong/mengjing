@@ -44,6 +44,7 @@ namespace ET.Client
 
     public struct UnitDead
     {
+        public bool Wait;
         public Unit Unit;
     }
 
