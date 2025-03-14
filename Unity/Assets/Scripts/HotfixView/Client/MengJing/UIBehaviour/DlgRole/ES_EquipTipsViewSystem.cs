@@ -350,7 +350,7 @@ namespace ET.Client
                     self.Obj_UIEquipGemHoleList[3].SetActive(false);
                 }
 
-                float gemHoleShowHeight = gemNumber > 0 ? 140f : -30f;
+                float gemHoleShowHeight = gemNumber > 0 ? 135f : -20;
                 //显示专精属性
                 startPostionY -= gemHoleShowHeight;
                 
@@ -381,7 +381,7 @@ namespace ET.Client
                 startPostionY = startPostionY - self.TitleMiniHeight_50 - suitEquipNumber * self.TextItemHeight_40;
                 startPostionY -= 5;
 
-                float DiHight = startPostionY * -1 + 70;
+                float DiHight = startPostionY * -1 + 50;
                 Vector2 backVector2 = self.E_BackImage.GetComponent<RectTransform>().sizeDelta;
                 if (DiHight > backVector2.y)
                 {
