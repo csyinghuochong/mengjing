@@ -28,6 +28,8 @@ namespace ET
         public Action<int, int> ClickTypeItemHandler { get; set; }
         public List<TypeButtonInfo> TypeButtonInfos { get; set; } = new();
         public List<UITypeButtonComponent> TypeButtonComponents { get; set; } = new();
+
+        public bool CanClick { get; set; } = true;
     }
 
     [ChildOf]

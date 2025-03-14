@@ -139,17 +139,11 @@ namespace ET.Client
             {
                 return;
             }
-
-            if (TimeHelper.ServerNow() - self.LastUpdateTime < 500)
-            {
-                return;
-            }
-
-            self.LastUpdateTime = TimeHelper.ServerNow();
+            
             self.FirstWinId = firstwinId;
             self.ChapterId = typeid;
 
-            self.UpdateBossInfo(firstwinId);
+            self.UpdateBossInfo(firstwinId).Coroutine();
         }
 
         public static FirstWinInfo GetFirstWinInfo(this ES_FirstWin self, int firstWinId, int difficulty)
@@ -166,7 +160,7 @@ namespace ET.Client
             return null;
         }
 
-        public static void UpdateBossInfo(this ES_FirstWin self, int firstwinId)
+        public static async ETTask UpdateBossInfo(this ES_FirstWin self, int firstwinId)
         {
             if (firstwinId == 0)
             {
@@ -239,8 +233,11 @@ namespace ET.Client
             {
                 self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 200f, 394f);
             }
-
-            self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID.ToString()).Coroutine();
+            
+            self.UITypeViewComponent.CanClick = false;
+            await self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID);
+            self.UITypeViewComponent.CanClick = true;
+            
             string skilldesc = "";
             int[] skilllist = monsterConfig.SkillID;
             for (int i = 0; i < skilllist.Length; i++)

@@ -45,6 +45,11 @@ namespace ET.Client
 
         public static void OnClickType(this UITypeViewComponent self, int typeid)
         {
+            if (!self.CanClick)
+            {
+                return;
+            }
+            
             for (int i = 0; i < self.TypeButtonComponents.Count; i++)
             {
                 self.TypeButtonComponents[i].SetSelected(typeid).Coroutine();
@@ -180,6 +185,11 @@ namespace ET.Client
 
         public static void OnClickTaskTypeItem(this UITypeButtonComponent self, int chapterid)
         {
+            if (!self.GetParent<UITypeViewComponent>().CanClick)
+            {
+                return;
+            }
+
             for (int i = 0; i < self.TypeItemUIList.Count; i++)
             {
                 UITypeButtonItemComponent ui = self.TypeItemUIList[i];

@@ -14,7 +14,6 @@ namespace ET.Client
 
 		public List<FirstWinInfo> FirstWinInfos = new();
 		public int FirstWinId;
-		public long LastUpdateTime;
 		public int BossId;
 		public int ChapterId;
 
