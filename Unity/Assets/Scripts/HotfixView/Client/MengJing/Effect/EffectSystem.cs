@@ -40,6 +40,7 @@ namespace ET.Client
             self.EffectConfig = EffectConfigCategory.Instance.Get(effectData.EffectId);
             self.EffectBeginTime = TimeHelper.ServerNow();
             self.EffectEndTime = TimeHelper.ServerNow() + self.EffectConfig.SkillEffectLiveTime;
+            self.EffectAngle = -10000;
             self.OnUpdate();
         }
 
@@ -111,7 +112,7 @@ namespace ET.Client
                     //不跟随玩家
                     case 1:
                         self.EffectObj.transform.SetParent(globalComponent.Unit);
-                        if (self.EffectData.EffectPosition.Equals(self.EffectPosition))
+                        if ( self.EffectAngle == -10000)
                         {
                             angle = self.EffectData.EffectAngle != 0 ? self.EffectData.EffectAngle : self.EffectData.TargetAngle;
                             self.EffectObj.transform.position = self.EffectData.EffectPosition;
