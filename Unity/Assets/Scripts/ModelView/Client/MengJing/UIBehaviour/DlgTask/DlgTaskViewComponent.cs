@@ -81,15 +81,35 @@ namespace ET.Client
 				return this.m_es_taskgrowup;
 			}
 		}
-		
+
+		public ES_TaskShop ES_TaskShop
+		{
+			get
+			{
+				ES_TaskShop es = this.m_es_taskshop;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_TaskShop.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_taskshop = this.AddChild<ES_TaskShop, Transform>(go.transform);
+				}
+
+				return this.m_es_taskshop;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_taskdetail = null;
 			this.m_es_taskgrowup = null;
+			this.m_es_taskshop = null;
 			this.uiTransform = null;
-			
+
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < this.AssetList.Count; i++)
 			{
@@ -103,7 +123,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
-		
+		private EntityRef<ES_TaskShop> m_es_taskshop = null;
 		public Transform uiTransform = null;
 	}
 }

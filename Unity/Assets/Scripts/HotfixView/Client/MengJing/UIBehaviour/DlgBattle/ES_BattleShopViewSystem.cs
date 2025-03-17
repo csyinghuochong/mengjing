@@ -13,7 +13,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_BattleShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBattleShopItemsRefresh);
-            self.E_ButtonBuyButton.AddListener(self.OnButtonBuyButton);
+            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuyButton);
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnClickChangeBuyNum(-1); });
@@ -46,7 +46,7 @@ namespace ET.Client
             scrollItemBattleShopItem.SetClickHandler(self.OnClickHandler);
         }
 
-        public static void OnButtonBuyButton(this ES_BattleShop self)
+        public static async ETTask OnButtonBuyButton(this ES_BattleShop self)
         {
             if (self.SellId == 0)
             {
@@ -54,7 +54,8 @@ namespace ET.Client
                 return;
             }
 
-            BagClientNetHelper.RquestStoreBuy(self.Root(), self.SellId, self.BuyNum).Coroutine();
+            await BagClientNetHelper.RquestStoreBuy(self.Root(), self.SellId, self.BuyNum);
+            self.UpdateItemNum();  
         }
 
         public static void OnUpdateUI(this ES_BattleShop self)

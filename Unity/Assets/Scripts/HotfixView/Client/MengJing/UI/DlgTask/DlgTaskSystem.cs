@@ -2,6 +2,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_TaskGrowUp))]
     [FriendOf(typeof (ES_TaskDetail))]
+    [FriendOf(typeof (ES_TaskShop))]
     [FriendOf(typeof (DlgTask))]
     public static class DlgTaskSystem
     {
@@ -27,10 +28,10 @@ namespace ET.Client
                     self.View.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.ES_TaskShop.uiTransform.gameObject.SetActive(true);
                     break;
                 default:
                     break;
-                break;
             }
         }
     }
