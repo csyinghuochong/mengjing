@@ -135,7 +135,7 @@ namespace ET.Client
                 WindowID.WindowID_Skill => "技能系统",
                 WindowID.WindowID_Friend => "好友系统",
                 WindowID.WindowID_ChengJiu => "成就系统",
-                WindowID.WindowID_PetBar => "宠物上阵",
+                WindowID.WindowID_PetBar => "宠物布阵",
                 _ => ""
             };
 
