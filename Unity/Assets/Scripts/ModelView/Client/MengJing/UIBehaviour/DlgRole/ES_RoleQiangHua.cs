@@ -458,6 +458,8 @@ namespace ET.Client
      		}
      	}
 
+		
+		
 		public Text E_QiangHuaNameText
      	{
      		get

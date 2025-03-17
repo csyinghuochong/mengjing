@@ -126,7 +126,7 @@ namespace ET.Client
                 self.E_Attribute2Text.text = zstring.Format("对应部位提升 {0}%属性", svalue);
 
                 string costItems = equipQiangHuaConfig.CostItem;
-                costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
+                //costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
                 self.ES_CostList.Refresh(costItems);
 
                 self.E_SuccessRateText.text = zstring.Format("强化成功率: {0}%", (int)(equipQiangHuaConfig.SuccessPro * 100));
