@@ -24,6 +24,8 @@ namespace ET.Client
 
             self.EG_RightRectTransform.gameObject.SetActive(false);
             self.UpdateLeftInfo();
+            
+            self.OnClickPetBarIcon(1);
         }
 
         [EntitySystem]
