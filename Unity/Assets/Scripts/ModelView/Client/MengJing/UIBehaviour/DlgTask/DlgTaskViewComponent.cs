@@ -103,6 +103,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
+		
 		public Transform uiTransform = null;
 	}
 }

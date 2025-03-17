@@ -26,6 +26,11 @@ namespace ET.Client
                 case 1:
                     self.View.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
                     break;
+                case 2:
+                    break;
+                default:
+                    break;
+                break;
             }
         }
     }
