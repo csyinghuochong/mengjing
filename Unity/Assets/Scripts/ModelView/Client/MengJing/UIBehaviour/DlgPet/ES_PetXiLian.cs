@@ -52,6 +52,25 @@ namespace ET.Client
      			return this.m_es_petinfoshow;
      		}
      	}
+		
+		public ES_ModelShow ES_ModelShow
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_ModelShow es = this.m_es_modelshow;
+				if( es == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_UIPetInfo1/ES_ModelShow");
+					this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
+				}
+				return this.m_es_modelshow;
+			}
+		}
 
 		public LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
      	{
@@ -171,6 +190,7 @@ namespace ET.Client
 		{
 			this.m_E_PetListItemsLoopVerticalScrollRect = null;
 			this.m_es_petinfoshow = null;
+			this.m_es_modelshow = null;
 			this.m_E_CommonItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_XiLianButton = null;
 			this.m_E_Btn_XiLianImage = null;
@@ -182,6 +202,7 @@ namespace ET.Client
 
 		private LoopVerticalScrollRect m_E_PetListItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
 		private Button m_E_Btn_XiLianButton = null;
 		private Image m_E_Btn_XiLianImage = null;
