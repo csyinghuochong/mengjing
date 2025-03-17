@@ -16,8 +16,9 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
 
-            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
+            self.InitUI();
             self.RefreshBagItems();
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -26,15 +27,73 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnUpdateUI(this ES_RoleZodiac self)
+        private static void InitUI(this ES_RoleZodiac self)
         {
+            GameObject go = self.EG_ZodiacListRectTransform.GetChild(0).gameObject;
+            self.ZodiacList.Add(go);
+            for (int i = 0; i < 11; i++)
+            {
+                self.ZodiacList.Add(UnityEngine.Object.Instantiate(go, self.EG_ZodiacListRectTransform));
+            }
+
+            go = self.EG_EquipSuitPropertyListRectTransform.GetChild(0).gameObject;
+            self.EquipSuitPropertyList.Add(go);
+            for (int i = 0; i < 2; i++)
+            {
+                self.EquipSuitPropertyList.Add(UnityEngine.Object.Instantiate(go, self.EG_EquipSuitPropertyListRectTransform));
+            }
         }
 
         private static void OnItemTypeSet(this ES_RoleZodiac self, int index)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+
+            string path;
+            Sprite sp;
+            switch (index)
+            {
+                case 0:
+                {
+                    path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_2");
+                    break;
+                }
+                case 1:
+                {
+                    path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_3");
+                    break;
+                }
+                case 2:
+                {
+                    path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_4");
+                    break;
+                }
+                default:
+                {
+                    path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_5");
+                    break;
+                }
+            }
+
+            sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
+            int startId = 16000101 + index * 100;
+            for (int i = 0; i < self.ZodiacList.Count; i++)
+            {
+                GameObject item = self.ZodiacList[i];
+
+                item.transform.Find("Img_Quality").GetComponent<Image>().sprite = sp;
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(startId);
+
+                item.transform.Find("Img_Icon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+                CommonViewHelper.SetImageGray(self.Root(), item.transform.Find("Img_Icon").gameObject, true);
+                item.transform.Find("Text_Name").GetComponent<Text>().text = itemConfig.ItemName;
+                item.transform.Find("Text_Name").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
+
+                startId++;
+            }
         }
 
-        public static void RefreshBagItems(this ES_RoleZodiac self)
+        private static void RefreshBagItems(this ES_RoleZodiac self)
         {
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
@@ -57,15 +116,13 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleZodiac self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag,
-                self.UpdateSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
         }
 
         private static void UpdateSelect(this ES_RoleZodiac self, ItemInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
+            foreach (Scroll_Item_CommonItem scrollItemCommonItem in self.ScrollItemCommonItems.Values)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
                 if (scrollItemCommonItem.uiTransform != null)
                 {
                     scrollItemCommonItem.UpdateSelectStatus(bagInfo);
