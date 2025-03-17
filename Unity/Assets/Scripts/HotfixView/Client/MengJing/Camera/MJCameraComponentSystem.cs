@@ -329,6 +329,11 @@ namespace ET.Client
 
         public static void SetBuildExit(this MJCameraComponent self)
         {
+            if (self.BuildUnit == null || self.BuildUnit.IsDisposed)
+            {
+                return;
+            }
+
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.CameraMoveTime = 0f;
             self.CameraMoveType = CameraMoveType.BuildExit;
