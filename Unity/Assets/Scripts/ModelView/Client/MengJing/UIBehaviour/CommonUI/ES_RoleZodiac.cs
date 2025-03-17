@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleZodiac : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_RoleZodiac : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
+		public List<ItemInfo> ShowBagInfos { get; set; } = new();
+		
 		public UnityEngine.UI.Button E_ButtonColseButton
      	{
      		get
