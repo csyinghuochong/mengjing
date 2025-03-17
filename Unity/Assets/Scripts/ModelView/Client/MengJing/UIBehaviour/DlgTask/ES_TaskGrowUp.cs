@@ -186,6 +186,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_FunctionSetBtnToggleGroup == null )
+				{
+					this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+				}
+				return this.m_E_FunctionSetBtnToggleGroup;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -201,6 +218,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
+			this.m_E_FunctionSetBtnToggleGroup = null;	
 			this.m_E_TaskNameTextText = null;
 			this.m_E_ProgressTextText = null;
 			this.m_E_TaskDescTextText = null;
@@ -214,6 +232,7 @@ namespace ET.Client
 		}
 
 		private LoopVerticalScrollRect m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private Text m_E_TaskNameTextText = null;
 		private Text m_E_ProgressTextText = null;
 		private Text m_E_TaskDescTextText = null;

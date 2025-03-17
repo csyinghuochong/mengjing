@@ -16,8 +16,10 @@ namespace ET.Client
             self.E_TaskGrowUpItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGrowUpItemsRefresh);
             self.E_GetBtnButton.AddListenerAsync(self.OnGetBtnButton);
             self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
+            self.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            
+            self.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
 
-            self.UpdateTask();
         }
 
         [EntitySystem]
@@ -26,6 +28,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        private static void OnFunctionSetBtn(this ES_TaskGrowUp self, int index)
+        {
+                  Log.Debug($"OnFunctionSetBtn: {index}");
+                  self.UpdateTask(index);
+        }
+        
         private static void OnTaskGrowUpItemsRefresh(this ES_TaskGrowUp self, Transform transform, int index)
         {
             Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[index].BindTrans(transform);
@@ -83,8 +91,13 @@ namespace ET.Client
             }
         }
 
-        public static void UpdateTask(this ES_TaskGrowUp self)
+        public static void UpdateTask(this ES_TaskGrowUp self, int page)
         {
+            if(page < 0)
+            {
+                return;
+            }
+            
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
@@ -125,6 +138,7 @@ namespace ET.Client
                 }
             }
 
+            
             self.AddUIScrollItems(ref self.ScrollItemTaskGrowUpItems, self.ShowTaskConfigIds.Count);
             self.E_TaskGrowUpItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskConfigIds.Count);
 
@@ -269,7 +283,7 @@ namespace ET.Client
             }
 
             await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
-            self.UpdateTask();
+            self.UpdateTask(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
         }
 
         public static async ETTask OnGiveBtnButton(this ES_TaskGrowUp self)
@@ -291,7 +305,7 @@ namespace ET.Client
 
         public static void UpdateTaskB(this ES_TaskGrowUp self)
         {
-            self.UpdateTask();
+            self.UpdateTask(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
         }
     }
 }

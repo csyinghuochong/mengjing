@@ -10,6 +10,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_SkillLearnItem self)
         {
+
         }
 
         [EntitySystem]
@@ -21,6 +22,8 @@ namespace ET.Client
         public static void OnSetSelected(this Scroll_Item_SkillLearnItem self, int SkillId)
         {
             self.E_HighlightImage.gameObject.SetActive(self.SkillPro.SkillID == SkillId);
+            
+            //Log.Error($"OnSetSelected:  {self.SkillPro.SkillID}   {SkillId}  {self.SkillPro.SkillID == SkillId}  {SkillConfigCategory.Instance.Get(self.SkillPro.SkillID).SkillName}");
         }
 
         public static void OnClick(this Scroll_Item_SkillLearnItem self)
