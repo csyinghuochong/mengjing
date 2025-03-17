@@ -53,53 +53,43 @@ namespace ET.Client
                 dre = -1;
             }
 
-            scrollItemTaskGrowUpItem.EG_ItemRectTransform.localPosition = posi;
+           
             if (dre == 1)
             {
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
+              
             }
             else
             {
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
+                
             }
 
             scrollItemTaskGrowUpItem.OnUpdateData(self.ShowTaskConfigIds[index]);
             scrollItemTaskGrowUpItem.E_SeasonIconImage.material = null;
-            scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(true);
-            scrollItemTaskGrowUpItem.E_Img_lineDiImage.gameObject.SetActive(true);
 
             if (self.ShowTaskConfigIds[index] > self.TaskPro.taskID)
             {
                 scrollItemTaskGrowUpItem.E_SeasonIconImage.material = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-                scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(false);
             }
 
             if (self.ShowTaskConfigIds[index] == self.TaskPro.taskID)
             {
-                scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(false);
+
             }
 
             // 尾巴隐藏
             if (self.ShowTaskConfigIds.Count > 0 && index == self.ShowTaskConfigIds.Count - 1)
             {
-                scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(false);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.gameObject.SetActive(false);
             }
         }
 
         public static void UpdateTask(this ES_TaskGrowUp self)
         {
-            // self.CompeletTaskId =
-            //         (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SystemTask];
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
             // 测试
-            self.CompeletTaskId = 82000014;
+            //self.CompeletTaskId = 82000014;
 
             List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
             for (int i = 0; i < taskPros.Count; i++)

@@ -4,12 +4,13 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_TaskGrowUpItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_TaskGrowUpItem>
+	public class Scroll_Item_TaskGrowUpItem : Entity, IAwake, IDestroy, IUIScrollItem<Scroll_Item_TaskGrowUpItem>
 	{
 		public int TaskId;
-		
-		public long DataId {get;set;}
+
+		public long DataId { get; set; }
 		private bool isCacheNode = false;
+
 		public void SetCacheMode(bool isCache)
 		{
 			this.isCacheNode = isCache;
@@ -21,149 +22,133 @@ namespace ET.Client
 			return this;
 		}
 
-		public RectTransform EG_ItemRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_EG_ItemRectTransform == null )
-     				{
-		    			this.m_EG_ItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item");
-     				}
-     				return this.m_EG_ItemRectTransform;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item");
-     			}
-     		}
-     	}
-
-		public Image E_Img_lineDiImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_Img_lineDiImage == null )
-     				{
-		    			this.m_E_Img_lineDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
-     				}
-     				return this.m_E_Img_lineDiImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
-     			}
-     		}
-     	}
-
-		public Image E_Img_lineImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_Img_lineImage == null )
-     				{
-		    			this.m_E_Img_lineImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
-     				}
-     				return this.m_E_Img_lineImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
-     			}
-     		}
-     	}
-
-		public Image E_ScelectImgImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ScelectImgImage == null )
-     				{
-		    			this.m_E_ScelectImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
-     				}
-     				return this.m_E_ScelectImgImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
-     			}
-     		}
-     	}
-
 		public Button E_SeasonIconButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_SeasonIconButton == null )
-     				{
-		    			this.m_E_SeasonIconButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
-     				}
-     				return this.m_E_SeasonIconButton;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
-     			}
-     		}
-     	}
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				if (this.isCacheNode)
+				{
+					if (this.m_E_SeasonIconButton == null)
+					{
+						this.m_E_SeasonIconButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "E_SeasonIcon");
+					}
+
+					return this.m_E_SeasonIconButton;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject, "E_SeasonIcon");
+				}
+			}
+		}
 
 		public Image E_SeasonIconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_SeasonIconImage == null )
-     				{
-		    			this.m_E_SeasonIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
-     				}
-     				return this.m_E_SeasonIconImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
-     			}
-     		}
-     	}
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				if (this.isCacheNode)
+				{
+					if (this.m_E_SeasonIconImage == null)
+					{
+						this.m_E_SeasonIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_SeasonIcon");
+					}
+
+					return this.m_E_SeasonIconImage;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_SeasonIcon");
+				}
+			}
+		}
+
+		public Transform EG_Completed
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				if (this.isCacheNode)
+				{
+					if (this.m_EG_Completed == null)
+					{
+						this.m_EG_Completed = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_Completed");
+					}
+
+					return this.m_EG_Completed;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_Completed");
+				}
+			}
+		}
+		
+		public Transform EG_Lock
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				if (this.isCacheNode)
+				{
+					if (this.m_EG_Lock == null)
+					{
+						this.m_EG_Lock = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_Lock");
+					}
+
+					return this.m_EG_Lock;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "EG_Lock");
+				}
+			}
+		}
+		
+		public Text E_TextNameText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_TextNameText == null )
+					{
+						this.m_E_TextNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
+					}
+					return this.m_E_TextNameText;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
+				}
+			}
+		}
 
 		public Text E_TextText
      	{
@@ -178,37 +163,35 @@ namespace ET.Client
      			{
      				if( this.m_E_TextText == null )
      				{
-		    			this.m_E_TextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
+		    			this.m_E_TextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text");
      				}
      				return this.m_E_TextText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text");
      			}
      		}
      	}
 
 		public void DestroyWidget()
 		{
-			this.m_EG_ItemRectTransform = null;
-			this.m_E_Img_lineDiImage = null;
-			this.m_E_Img_lineImage = null;
-			this.m_E_ScelectImgImage = null;
 			this.m_E_SeasonIconButton = null;
 			this.m_E_SeasonIconImage = null;
 			this.m_E_TextText = null;
+			this.m_E_TextNameText = null;
+			this.m_EG_Completed = null;	
+			this.m_EG_Lock = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
-
-		private RectTransform m_EG_ItemRectTransform = null;
-		private Image m_E_Img_lineDiImage = null;
-		private Image m_E_Img_lineImage = null;
-		private Image m_E_ScelectImgImage = null;
+		
 		private Button m_E_SeasonIconButton = null;
 		private Image m_E_SeasonIconImage = null;
 		private Text m_E_TextText = null;
+		private Text m_E_TextNameText = null;
+		private Transform m_EG_Completed = null;	
+		private Transform m_EG_Lock = null;
 		public Transform uiTransform = null;
 	}
 }

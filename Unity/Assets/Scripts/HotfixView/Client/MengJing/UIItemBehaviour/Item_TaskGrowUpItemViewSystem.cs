@@ -22,13 +22,14 @@
             self.E_SeasonIconButton.onClick.RemoveAllListeners();
             self.E_SeasonIconButton.onClick.AddListener(() => { self.GetParent<ES_TaskGrowUp>().UpdateInfo(self.TaskId); });
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskId);
-            self.E_TextText.text = taskConfig.TaskName;
-            self.E_Img_lineImage.gameObject.SetActive(true);
+            self.E_TextNameText.text = taskConfig.TaskName;
+            self.EG_Completed.gameObject.SetActive(false);
+            self.EG_Lock.gameObject.SetActive(false);   
         }
 
         public static void Selected(this Scroll_Item_TaskGrowUpItem self, int taskId)
         {
-            self.E_ScelectImgImage.gameObject.SetActive(self.TaskId == taskId);
+     
         }
     }
 }
