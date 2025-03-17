@@ -295,11 +295,11 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<(int, int)> RequestItemQiangHua(Scene root, int itemSubType)
+        public static async ETTask<(int, int)> RequestItemQiangHua(Scene root, int itemSubType, bool useLucky)
         {
             C2M_ItemQiangHuaRequest request = C2M_ItemQiangHuaRequest.Create();
             request.WeiZhi = itemSubType;
-
+            request.UseLucky = useLucky;
             M2C_ItemQiangHuaResponse response = (M2C_ItemQiangHuaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return (response.Error, response.QiangHuaLevel);

@@ -23,6 +23,24 @@ namespace ET.Client
         public static void OnInitUI(this ES_RoleQiangHuaItem self, int index)
         {
             self.ItemSubType = index;
+            
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, index);
+            if (bagInfo != null)
+            {
+                self.E_EquipIconImage.gameObject.SetActive(true);
+                self.E_EquipQualityImage.gameObject.SetActive(true);
+                
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_EquipIconImage.sprite = sp;
+                
+                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+                Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+                self.E_EquipQualityImage.sprite = sp2;
+            }
         }
 
         public static void OnEquipButton(this ES_RoleQiangHuaItem self)

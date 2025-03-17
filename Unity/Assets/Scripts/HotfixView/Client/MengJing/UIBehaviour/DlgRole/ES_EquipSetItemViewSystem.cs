@@ -51,7 +51,7 @@ namespace ET.Client
             self.E_EquipIconImage.gameObject.SetActive(false);
             self.E_EquipQualityImage.gameObject.SetActive(false);
             self.EG_BangDingRectTransform.gameObject.SetActive(false);
-
+            self.E_QiangHuaNameText.text = ItemViewHelp.GetItemSubType3Name(subType);
             if (subType < 100)
             {
                 string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
@@ -71,31 +71,33 @@ namespace ET.Client
                 self.BagInfo = bagInfo;
                 self.itemOperateEnum = itemOperateEnum;
                 self.EquipIdList = equipIdList;
-                ItemConfig itemconfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
 
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-                self.E_EquipIconImage.gameObject.SetActive(true);
-                self.E_EquipIconImage.sprite = sp;
-
-                //设置品质
-                string ItemQuality = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
-                self.E_EquipQualityImage.gameObject.SetActive(true);
-                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality);
-                Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-
-                self.E_EquipQualityImage.sprite = sp2;
-
-                //显示绑定
-                if (bagInfo.isBinging)
+                if (bagInfo != null)
                 {
-                    self.EG_BangDingRectTransform.gameObject.SetActive(true);
+                    ItemConfig itemconfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
+                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                    self.E_EquipIconImage.gameObject.SetActive(true);
+                    self.E_EquipIconImage.sprite = sp;
+
+                    //设置品质
+                    string ItemQuality = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
+                    self.E_EquipQualityImage.gameObject.SetActive(true);
+                    string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality);
+                    Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+
+                    self.E_EquipQualityImage.sprite = sp2;
+
+                    //显示绑定
+                    self.EG_BangDingRectTransform.gameObject.SetActive(bagInfo.isBinging);
                 }
                 else
                 {
-                    self.EG_BangDingRectTransform.gameObject.SetActive(false);
+                    self.E_EquipIconImage.gameObject.SetActive(false);
+                    self.E_EquipQualityImage.gameObject.SetActive(false);
                 }
+
             }
             catch (Exception ex)
             {

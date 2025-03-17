@@ -1545,6 +1545,7 @@ message C2M_ItemQiangHuaRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int32 WeiZhi = 1;
+	bool UseLucky = 2;
 }
 
 message M2C_ItemQiangHuaResponse // ILocationResponse

@@ -440,6 +440,8 @@ namespace ET.Client
      			return this.m_es_costlist;
      		}
      	}
+		
+		
 
 		public Text E_Attribute1Text
      	{
@@ -458,8 +460,40 @@ namespace ET.Client
      		}
      	}
 
-		
-		
+		public Toggle E_ToggleLucky
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ToggleLucky == null )
+				{
+					this.m_E_ToggleLucky = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"Right/EG_NextNode/E_ToggleLucky");
+				}
+				return this.m_E_ToggleLucky;
+			}
+		}
+
+		public Image E_Img_LodingValue
+        {
+        	get
+        	{
+        		if (this.uiTransform == null)		
+        		{
+        			Log.Error("uiTransform is null.");
+        			return null;
+        		}
+        		if( this.m_E_Img_LodingValue == null )
+        		{
+        			this.m_E_Img_LodingValue = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_NextNode/E_Img_LodingValue");
+        		}
+        		return this.m_E_Img_LodingValue;
+        	}
+        }
+
 		public Text E_QiangHuaNameText
      	{
      		get
@@ -476,6 +510,57 @@ namespace ET.Client
      			return this.m_E_QiangHuaNameText;
      		}
      	}
+
+		public Text E_QiangItemNameText
+     	{
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_E_QiangItemNameText == null )
+		        {
+			        this.m_E_QiangItemNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_QiangItemName");
+		        }
+		        return this.m_E_QiangItemNameText;
+	        }
+     	}
+
+		public Text E_TextGold
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_TextGold == null )
+				{
+					this.m_E_TextGold = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_TextGold");
+				}
+				return this.m_E_TextGold;
+			}
+		}
+
+		public Text E_QiangHuaLevel
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_QiangHuaLevel == null )
+				{
+					this.m_E_QiangHuaLevel = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_QiangHuaLevel");
+				}
+				return this.m_E_QiangHuaLevel;
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -504,6 +589,11 @@ namespace ET.Client
 			this.m_es_costlist = null;
 			this.m_E_Attribute1Text = null;
 			this.m_E_QiangHuaNameText = null;
+			this.m_E_QiangItemNameText = null;
+			this.m_E_TextGold = null;
+			this.m_E_ToggleLucky = null;
+			this.m_E_QiangHuaLevel = null;
+			this.m_E_Img_LodingValue = null;
 			this.uiTransform = null;
 		}
 
@@ -532,6 +622,11 @@ namespace ET.Client
 		private EntityRef<ES_CostList> m_es_costlist = null;
 		private Text m_E_Attribute1Text = null;
 		private Text m_E_QiangHuaNameText = null;
+		private Text m_E_QiangItemNameText = null;
+		private Text m_E_TextGold = null;
+		private Text m_E_QiangHuaLevel = null;
+		private Toggle m_E_ToggleLucky= null;
+		private Image m_E_Img_LodingValue = null;
 		public Transform uiTransform = null;
 	}
 }

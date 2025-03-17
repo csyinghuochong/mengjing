@@ -231,7 +231,7 @@ namespace ET.Client
                     continue;
                 }
 
-                await BagClientNetHelper.RequestItemQiangHua(root, itemSubType);
+                await BagClientNetHelper.RequestItemQiangHua(root, itemSubType, false);
             }
 
             await ETTask.CompletedTask;

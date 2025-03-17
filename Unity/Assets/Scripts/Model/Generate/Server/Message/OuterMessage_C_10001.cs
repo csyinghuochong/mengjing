@@ -6690,6 +6690,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int WeiZhi { get; set; }
 
+        [MemoryPackOrder(1)]
+        public bool UseLucky { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -6699,6 +6702,7 @@ namespace ET
 
             this.RpcId = default;
             this.WeiZhi = default;
+            this.UseLucky = default;
 
             ObjectPool.Instance.Recycle(this);
         }

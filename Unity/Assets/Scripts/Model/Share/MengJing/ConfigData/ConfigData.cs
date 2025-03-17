@@ -23,6 +23,8 @@ namespace ET
 
         public const int ShenYuanCostId = 10000150;
      
+        public const int QiangHuaLuckyCostId = 90000015;
+        
         /// <summary>
         /// 小飞鞋
         /// </summary>

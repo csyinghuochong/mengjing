@@ -17,6 +17,12 @@ namespace ET.Server
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(request.WeiZhi, bagComponent.QiangHuaLevel[request.WeiZhi]);
             string costItems = equipQiangHuaConfig.CostItem;
             costItems += $"@1;{equipQiangHuaConfig.CostGold}";
+
+            if (request.UseLucky)
+            {
+                costItems += string.Format("@{0};1", ConfigData.QiangHuaLuckyCostId);
+            }
+
             if (!bagComponent.OnCostItemData(costItems))
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -31,7 +37,7 @@ namespace ET.Server
             }
             else
             {
-                bagComponent.QiangHuaFails[request.WeiZhi]++;
+                bagComponent.QiangHuaFails[request.WeiZhi] += request.UseLucky ? 2 : 1;
             }
             response.QiangHuaLevel = bagComponent.QiangHuaLevel[request.WeiZhi];
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);

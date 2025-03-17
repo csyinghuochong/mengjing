@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -82,7 +84,10 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             int qianghuaLevel = bagComponent.QiangHuaLevel[subType];
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(subType);
-
+            ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, subType);
+            self.ES_EquipSetItem.UpdateData(bagInfo, 0, ItemOperateEnum.None, new List<ItemInfo>());
+            self.E_QiangItemNameText.text = bagInfo != null ? ItemConfigCategory.Instance.Get(bagInfo.ItemID).ItemName : String.Empty;
+            self.E_TextGold.text = bagComponent.GetItemNumber(1).ToString();
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
@@ -93,6 +98,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.E_QiangHuaNameText.text = zstring.Format("{0}强化 +{1}", qianghuaName, qianghuaLevel);
+                self.E_QiangHuaLevel.text = zstring.Format("{0}级", qianghuaLevel);
             }
 
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel);
@@ -126,13 +132,15 @@ namespace ET.Client
                 self.E_Attribute2Text.text = zstring.Format("对应部位提升 {0}%属性", svalue);
 
                 string costItems = equipQiangHuaConfig.CostItem;
-                //costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
+                costItems += zstring.Format("@{0};1", ConfigData.QiangHuaLuckyCostId);
                 self.ES_CostList.Refresh(costItems);
 
                 self.E_SuccessRateText.text = zstring.Format("强化成功率: {0}%", (int)(equipQiangHuaConfig.SuccessPro * 100));
                 double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
                 self.E_SuccessAdditionText.text = zstring.Format("附加成功率 {0}%", (int)(addPro * 100));
             }
+
+            self.E_Img_LodingValue.fillAmount = (qianghuaLevel / 13f);
         }
 
         public static async ETTask OnQiangHuaButton(this ES_RoleQiangHua self)
@@ -151,6 +159,11 @@ namespace ET.Client
             using (zstring.Block())
             {
                 costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
+
+                if (self.E_ToggleLucky.isOn)
+                {
+                    costItems += zstring.Format("@{0};1", ConfigData.QiangHuaLuckyCostId);
+                }
             }
 
             if (!bagComponent.CheckNeedItem(costItems))
@@ -159,7 +172,7 @@ namespace ET.Client
                 return;
             }
 
-            (int, int) respons = await BagClientNetHelper.RequestItemQiangHua(self.Root(), self.ItemSubType);
+            (int, int) respons = await BagClientNetHelper.RequestItemQiangHua(self.Root(), self.ItemSubType, self.E_ToggleLucky.isOn);
             if (respons.Item1 != ErrorCode.ERR_Success)
             {
                 return;
