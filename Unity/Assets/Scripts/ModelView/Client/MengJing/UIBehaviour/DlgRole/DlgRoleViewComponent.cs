@@ -213,6 +213,26 @@ namespace ET.Client
                 return this.m_es_roleqianghua;
             }
         }
+        
+        public ES_RoleZodiac ES_RoleZodiac
+        {
+	        get
+	        {
+		        ES_RoleZodiac es = this.m_es_roleZodiac;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_RoleZodiac.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
+					        .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleZodiac.prefab");
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(false);
+			        this.AssetList.Add(path);
+			        this.m_es_roleZodiac = this.AddChild<ES_RoleZodiac, Transform>(go.transform);
+		        }
+
+		        return this.m_es_roleZodiac;
+	        }
+        }
 		
 		public void DestroyWidget()
 		{
@@ -227,6 +247,7 @@ namespace ET.Client
 			this.m_es_rolegem = null;
 			this.m_es_rolehuishou = null;
 			this.m_es_roleqianghua = null;
+			this.m_es_roleZodiac = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -249,6 +270,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleGem> m_es_rolegem = null;
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
+		private EntityRef<ES_RoleZodiac> m_es_roleZodiac = null;
 		public Transform uiTransform = null;
 	}
 }

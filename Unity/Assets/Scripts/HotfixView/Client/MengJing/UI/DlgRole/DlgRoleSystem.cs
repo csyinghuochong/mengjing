@@ -64,6 +64,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof(ES_RoleZodiac))]
     [FriendOf(typeof(ES_RoleQiangHua))]
     [FriendOf(typeof(ES_RoleHuiShou))]
     [FriendOf(typeof(ES_EquipSet))]
@@ -115,14 +116,14 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_RoleBag.uiTransform.gameObject.SetActive(true);
-                    self.View.E_ZodiacButton.gameObject.SetActive(true);
+                    // self.View.E_ZodiacButton.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
                 case 1:
                     self.View.ES_RoleProperty.uiTransform.gameObject.SetActive(true);
-                    self.View.E_ZodiacButton.gameObject.SetActive(true);
+                    // self.View.E_ZodiacButton.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(true);
@@ -130,7 +131,7 @@ namespace ET.Client
                 case 2:
                     self.View.ES_RoleGem.uiTransform.gameObject.SetActive(true);
                     self.View.ES_RoleGem.OnUpdateUI();
-                    self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    // self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);
                     self.View.ES_EquipSet.EquipSetHide(false);
@@ -138,14 +139,19 @@ namespace ET.Client
                 case 3:
                     self.View.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
                     self.View.ES_RoleHuiShou.OnUpdateUI();
-                    self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    // self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
                 case 4:
                     self.View.ES_RoleQiangHua.uiTransform.gameObject.SetActive(true);
                     self.View.ES_RoleQiangHua.OnUpdateUI();
-                    self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    // self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_EquipSet.EquipSetHide(true);
+                    break;
+                case 5:
+                    self.View.ES_RoleZodiac.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
                     break;
