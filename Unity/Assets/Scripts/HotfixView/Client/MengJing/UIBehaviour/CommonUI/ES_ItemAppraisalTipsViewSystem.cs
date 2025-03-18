@@ -410,7 +410,7 @@ namespace ET.Client
                 int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
 
                 BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-                ItemInfo costbaginfo = bagComponentC.GetBagInfo(appraisalItem);
+                ItemInfo costbaginfo = bagComponentC.GetBagInfoByConfigId(appraisalItem);
                 if (costbaginfo == null)
                 {
                     self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("道具不足！");
