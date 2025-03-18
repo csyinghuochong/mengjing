@@ -17,23 +17,9 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
-            //
-            // HuoYueRewardConfig huoYueRewardConfig = HuoYueRewardConfigCategory.Instance.Get(request.HuoYueId);
-            // long haveHuoyue = unit.GetComponent<TaskComponentS>().GetHuoYueDu();
-            // if (haveHuoyue < huoYueRewardConfig.NeedPoint)
-            // {
-            //     response.Error = ErrorCode.ERR_HouBiNotEnough;
-            //     return;
-            // }
-            //
-            // 
-            // unit.GetComponent<BagComponentS>().OnAddItemData(huoYueRewardConfig.RewardItems, $"{ItemGetWay.TaskCountry}_{TimeHelper.ServerNow()}");
-            //
-            // if (huoYueRewardConfig.NeedPoint >= 100)
-            // {
-            //     unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.HuoYue100Reward_221, 0, 1);
-            // }
-            
+          
+            int skillid = ConfigData.TaskGrowUpRewardConfig[request.GrowUpRewardId];
+            unit.GetComponent<SkillSetComponentS>().OnAddSkillByOther(SkillSourceEnum.Task, skillid);
             taskComponent.ReceiveGrowUpRewardIds.Add(request.GrowUpRewardId);
             await ETTask.CompletedTask;
         }

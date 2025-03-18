@@ -23,9 +23,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
             self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
+            
             if (self.CompeletTaskId > 0)
             {
-                float fff = (self.CompeletTaskId - 82000000) / 10f;
+                float fff = (self.CompeletTaskId - ConfigData.TaskGrowUpInitId) / 10f;
                 page = Mathf.FloorToInt(fff);
             }
             Log.Debug($"page:{page}  self.CompeletTaskId:{self.CompeletTaskId}  ");
@@ -57,7 +58,7 @@ namespace ET.Client
             self.ES_CommonSkillItem_2.SetSelectAction(self.OnBeginDragHandler);
             
             List<int> keyids = ConfigData.TaskGrowUpRewardConfig.Keys.ToList();
-            int completeNum = self.CompeletTaskId - 82000000;
+            int completeNum = self.CompeletTaskId - ConfigData.TaskGrowUpInitId;
             completeNum = Mathf.Max(0, completeNum);
             if (completeNum < keyids[0] )
             {
@@ -95,7 +96,7 @@ namespace ET.Client
                 return;
             }
             
-            int completeNum = self.CompeletTaskId - 82000000;   
+            int completeNum = self.CompeletTaskId - ConfigData.TaskGrowUpInitId;   
             completeNum = Mathf.Max(0, completeNum);
             if (completeNum < keyid)
             {
@@ -171,7 +172,7 @@ namespace ET.Client
             // 测试
             //self.CompeletTaskId = 82000014;
             
-            int minId = 82000000 + page * 10 + 1;
+            int minId = ConfigData.TaskGrowUpInitId + page * 10 + 1;
             int maxId = minId + 9;
             
             Log.Debug($"minid: {minId}  maxid:{maxId}");

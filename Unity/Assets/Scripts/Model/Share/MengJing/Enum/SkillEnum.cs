@@ -145,7 +145,8 @@ namespace ET
         public const int Sprite = 3;
         public const int Suit = 4;
         public const int Book = 5;
-        public const int Buff = 6; 
+        public const int Buff = 6;
+        public const int Task = 7;
     }
 
     //1.增加范围

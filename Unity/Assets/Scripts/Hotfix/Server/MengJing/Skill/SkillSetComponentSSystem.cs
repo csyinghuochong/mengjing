@@ -1125,7 +1125,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="skillSourceEnum"></param>
         /// <param name="skillId"></param>
-        public static void OnAddSkillBook(this SkillSetComponentS self, int skillSourceEnum, int skillId)
+        public static void OnAddSkillByOther(this SkillSetComponentS self, int skillSourceEnum, int skillId)
         {
             if (self.GetBySkillID(skillId) != null)
             {
@@ -1137,7 +1137,7 @@ namespace ET.Server
 
             self.UpdateSkillSet();
         }
-
+        
         /// <summary>
         /// ���õڶ�ְҵ
         /// </summary>
