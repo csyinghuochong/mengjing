@@ -301,7 +301,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "1/1";
                         self.E_Img_LodingValue_22.fillAmount = 1;   
                     }
                 }
@@ -309,9 +309,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
-                            LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
                         self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
                     }
                 }
@@ -327,7 +325,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "0/1";
                         self.E_Img_LodingValue_22.fillAmount = 0f;   
                     }
 
@@ -342,7 +340,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "1/1";
                             self.E_Img_LodingValue_22.fillAmount = 1f;   
                         }
 
@@ -353,7 +351,7 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "0/1";
                             self.E_Img_LodingValue_22.fillAmount = 0f;   
                         }
 
@@ -365,9 +363,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
-                            LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
                         self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
