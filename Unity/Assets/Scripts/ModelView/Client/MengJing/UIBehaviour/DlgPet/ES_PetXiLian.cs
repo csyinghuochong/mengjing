@@ -174,7 +174,7 @@ namespace ET.Client
      		}
      	}
 
-		    public Transform UITransform
+		public Transform UITransform
          {
      	    get
      	    {

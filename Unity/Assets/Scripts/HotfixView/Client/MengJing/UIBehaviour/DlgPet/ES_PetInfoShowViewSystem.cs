@@ -91,10 +91,13 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_Img_PetHeroIonImage.sprite = sp;
-
+            if (self.E_Text_PetPingFen != null)
+            {
+                self.E_Text_PetPingFen.text = PetHelper.PetPingJia(rolePetInfo).ToString();
+            }
             self.E_Text_PetLevelText.text = rolePetInfo.PetLv + LanguageComponent.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
-
+            
             string expStr = rolePetInfo.PetExp.ToString();
             string upExpStr = expConfig.UpExp.ToString();
 
@@ -150,6 +153,11 @@ namespace ET.Client
             self.E_Text_PetLevelText.gameObject.SetActive(havepet);
             self.E_Text_PetExpText.gameObject.SetActive(havepet);
             self.E_ImageExpValueImage.gameObject.SetActive(havepet);
+            if (self.E_Text_PetPingFen != null)
+            {
+                self.E_Text_PetPingFen.gameObject.SetActive(havepet);
+            }
+
             for (int i = 0; i < self.PetZiZhiItemList.Length; i++)
             {
                 self.PetZiZhiItemList[i].SetActive(havepet);

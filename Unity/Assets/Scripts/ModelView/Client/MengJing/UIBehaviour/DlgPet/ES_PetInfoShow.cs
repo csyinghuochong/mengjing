@@ -320,6 +320,24 @@ namespace ET.Client
      			return this.m_E_Text_PetExpText;
      		}
      	}
+		
+		public Text E_Text_PetPingFen
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_PetPingFen == null )
+				{
+					this.m_E_Text_PetPingFen = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/E_Text_PetPingFen");
+				}
+				return this.m_E_Text_PetPingFen;
+			}
+		}
+
 
 		    public Transform UITransform
          {
@@ -353,6 +371,7 @@ namespace ET.Client
 			this.m_E_Text_PetNameText = null;
 			this.m_E_Text_PetLevelText = null;
 			this.m_E_Text_PetExpText = null;
+			this.m_E_Text_PetPingFen = null;
 			this.uiTransform = null;
 		}
 
@@ -374,6 +393,7 @@ namespace ET.Client
 		private Text m_E_Text_PetNameText = null;
 		private Text m_E_Text_PetLevelText = null;
 		private Text m_E_Text_PetExpText = null;
+		private Text m_E_Text_PetPingFen = null;
 		public Transform uiTransform = null;
 	}
 }
