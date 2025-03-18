@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -18,8 +19,17 @@ namespace ET.Client
             self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtnButton);
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
             
-            self.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-
+            int page = 0;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
+            if (self.CompeletTaskId > 0)
+            {
+                float fff = (self.CompeletTaskId - 82000000) / 10f;
+                page = Mathf.CeilToInt(fff);
+            }
+            Log.Debug($"page:{page}  self.CompeletTaskId:{self.CompeletTaskId}  ");
+            self.E_FunctionSetBtnToggleGroup.OnSelectIndex(page);
         }
 
         [EntitySystem]
@@ -30,10 +40,83 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this ES_TaskGrowUp self, int index)
         {
-                  Log.Debug($"OnFunctionSetBtn: {index}");
-                  self.UpdateTask(index);
+              Log.Debug($"OnFunctionSetBtn: {index}");
+              self.SelectIndex = index;
+              self.UpdateTask(index);
+              self.UpdateReward();
         }
-        
+
+        private static void UpdateReward(this ES_TaskGrowUp self)
+        {
+            List<int> skillids = ConfigData.TaskGrowUpRewardConfig.Values.ToList(); 
+            self.ES_CommonSkillItem_0.OnUpdateUI(skillids[0]);
+            self.ES_CommonSkillItem_1.OnUpdateUI(skillids[1]);
+            self.ES_CommonSkillItem_2.OnUpdateUI(skillids[2]);
+            self.ES_CommonSkillItem_0.SetSelectAction(self.OnBeginDragHandler);
+            self.ES_CommonSkillItem_1.SetSelectAction(self.OnBeginDragHandler);
+            self.ES_CommonSkillItem_2.SetSelectAction(self.OnBeginDragHandler);
+            
+            List<int> keyids = ConfigData.TaskGrowUpRewardConfig.Keys.ToList();
+            int completeNum = self.CompeletTaskId - 82000000;
+            completeNum = Mathf.Max(0, completeNum);
+            if (completeNum < keyids[0] )
+            {
+                self.ES_CommonSkillItem_0.SetImageGray(true);
+            }
+            if (completeNum < keyids[1] )
+            {
+                self.ES_CommonSkillItem_1.SetImageGray(true);
+            }
+            if (completeNum < keyids[2] )
+            {
+                self.ES_CommonSkillItem_2.SetImageGray(true);
+            }
+
+            using (zstring.Block())
+            {
+                self.E_TextProgress.text = zstring.Format("{0}/{1}", completeNum, keyids[2]);
+            }
+
+            self.E_Img_LodingValue.fillAmount = (float)completeNum / (float)keyids[2];  
+        }
+
+        private static void OnBeginDragHandler(this ES_TaskGrowUp self, int skillid)
+        {
+            int keyid = 0;
+            var keys = ConfigData.TaskGrowUpRewardConfig.Where(pair => pair.Value == skillid).Select(pair => pair.Key);
+            foreach (var key in keys)
+            {
+                keyid = key;
+                break;
+            }
+
+            if (keyid == 0)
+            {
+                return;
+            }
+            
+            int completeNum = self.CompeletTaskId - 82000000;   
+            completeNum = Mathf.Max(0, completeNum);
+            if (completeNum < keyid)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("未达到领取条件！"); 
+                return;
+            }
+
+            TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>(); 
+            if (taskComponentC.ReceiveGrowUpRewardIds.Contains(keyid))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("奖励已领取！"); 
+            }
+            else
+            {
+                //领取奖励
+                TaskClientNetHelper.TaskGrowUpRewardRequest(self.Root(), keyid).Coroutine();
+            }
+
+            Log.Debug($"keyid:  {keyid}  skillid: {skillid}");
+        }
+
         private static void OnTaskGrowUpItemsRefresh(this ES_TaskGrowUp self, Transform transform, int index)
         {
             Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[index].BindTrans(transform);
@@ -72,23 +155,7 @@ namespace ET.Client
             }
 
             scrollItemTaskGrowUpItem.OnUpdateData(self.ShowTaskConfigIds[index]);
-            scrollItemTaskGrowUpItem.E_SeasonIconImage.material = null;
-
-            if (self.ShowTaskConfigIds[index] > self.TaskPro.taskID)
-            {
-                scrollItemTaskGrowUpItem.E_SeasonIconImage.material = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-            }
-
-            if (self.ShowTaskConfigIds[index] == self.TaskPro.taskID)
-            {
-
-            }
-
-            // 尾巴隐藏
-            if (self.ShowTaskConfigIds.Count > 0 && index == self.ShowTaskConfigIds.Count - 1)
-            {
-            }
+            scrollItemTaskGrowUpItem.SetCurId( self.TaskPro.taskID );
         }
 
         public static void UpdateTask(this ES_TaskGrowUp self, int page)
@@ -103,16 +170,24 @@ namespace ET.Client
             self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
             // 测试
             //self.CompeletTaskId = 82000014;
+            
+            int minId = 82000000 + page * 10 + 1;
+            int maxId = minId + 9;
+            
+            Log.Debug($"minid: {minId}  maxid:{maxId}");
 
             List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
             for (int i = 0; i < taskPros.Count; i++)
             {
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
-                if (taskConfig.TaskType == TaskTypeEnum.System)
+                if (taskConfig.TaskType != TaskTypeEnum.System)
                 {
-                    self.TaskPro = taskPros[i];
+                    continue;
                     break;
                 }
+
+                self.TaskPro = taskPros[i];
+                break;
             }
 
             if (self.TaskPro == null && self.CompeletTaskId > 0)
@@ -122,22 +197,35 @@ namespace ET.Client
                 self.TaskPro = taskPro;
             }
 
+            Log.Debug($"taskPro:  {self.TaskPro.taskID}");
+            
             int index = 0;
 
             self.ShowTaskConfigIds.Clear();
             foreach (TaskConfig taskConfig in TaskConfigCategory.Instance.GetAll().Values)
             {
-                if (taskConfig.TaskType == TaskTypeEnum.System)
+                if (taskConfig.TaskType != TaskTypeEnum.System)
                 {
-                    self.ShowTaskConfigIds.Add(taskConfig.Id);
+                    continue;
+                }
+                
+                if (taskConfig.Id < minId || taskConfig.Id > maxId)
+                {
+                    continue;
+                }
+                
+                self.ShowTaskConfigIds.Add(taskConfig.Id);
 
-                    if (taskConfig.Id == self.TaskPro.taskID)
-                    {
-                        index = self.ShowTaskConfigIds.Count;
-                    }
+                if (taskConfig.Id == self.TaskPro.taskID)
+                {
+                    index = self.ShowTaskConfigIds.Count;
                 }
             }
-
+            
+            RectTransform Content = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>();
+            Content.anchoredPosition = Vector3.zero;
+            Content.gameObject.SetActive(false);
+            Content.gameObject.SetActive(true); 
             
             self.AddUIScrollItems(ref self.ScrollItemTaskGrowUpItems, self.ShowTaskConfigIds.Count);
             self.E_TaskGrowUpItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskConfigIds.Count);
@@ -145,11 +233,60 @@ namespace ET.Client
             self.UpdateInfo(self.TaskPro.taskID);
 
             // 滑动到对应位置
-            Vector3 vector3 = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
-            vector3.y = index * 160;
-            self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
+           
+            //Vector3 vector3 = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
+            //vector3.y = index * 160;
+            //self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
         }
 
+        
+         public static void OnRecvReward(this ES_TaskGrowUp self, int page)
+        {
+            if(page < 0)
+            {
+                return;
+            }
+            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            self.CompeletTaskId = numericComponentC.GetAsInt(NumericType.SystemTask);
+            // 测试
+            //self.CompeletTaskId = 82000014;
+            
+            List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
+            for (int i = 0; i < taskPros.Count; i++)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
+                if (taskConfig.TaskType != TaskTypeEnum.System)
+                {
+                    continue;
+                    break;
+                }
+
+                self.TaskPro = taskPros[i];
+                break;
+            }
+
+            if (self.TaskPro == null && self.CompeletTaskId > 0)
+            {
+                TaskPro taskPro = TaskPro.Create();
+                taskPro.taskID = self.CompeletTaskId;
+                self.TaskPro = taskPro;
+            }
+
+            Log.Debug($"taskPro:  {self.TaskPro.taskID}");
+            for (int i = 0; i < self.ScrollItemTaskGrowUpItems.Count; i++)
+            {
+                Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[i];
+                if (scrollItemTaskGrowUpItem.uiTransform == null)
+                {
+                    continue;
+                }
+
+                scrollItemTaskGrowUpItem.SetCurId( self.TaskPro.taskID );
+            }
+        }
+        
         public static void UpdateInfo(this ES_TaskGrowUp self, int taskId)
         {
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskId);
@@ -166,6 +303,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_Img_LodingValue_22.fillAmount = 1;   
                     }
                 }
                 else
@@ -175,6 +313,7 @@ namespace ET.Client
                         self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
                             LanguageComponent.Instance.LoadLocalization("当前进度值"),
                             taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
                     }
                 }
 
@@ -190,6 +329,7 @@ namespace ET.Client
                     using (zstring.Block())
                     {
                         self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_Img_LodingValue_22.fillAmount = 0f;   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -204,6 +344,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_Img_LodingValue_22.fillAmount = 1f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -214,6 +355,7 @@ namespace ET.Client
                         using (zstring.Block())
                         {
                             self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_Img_LodingValue_22.fillAmount = 0f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -227,6 +369,7 @@ namespace ET.Client
                         self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}",
                             LanguageComponent.Instance.LoadLocalization("当前进度值"),
                             self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(true);
@@ -283,7 +426,8 @@ namespace ET.Client
             }
 
             await TaskClientNetHelper.RequestCommitTask(self.Root(), self.TaskPro.taskID, 0);
-            self.UpdateTask(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
+            self.OnRecvReward(self.SelectIndex);
+            self.UpdateReward();
         }
 
         public static async ETTask OnGiveBtnButton(this ES_TaskGrowUp self)
@@ -305,7 +449,7 @@ namespace ET.Client
 
         public static void UpdateTaskB(this ES_TaskGrowUp self)
         {
-            self.UpdateTask(self.E_FunctionSetBtnToggleGroup.GetCurrentIndex());
+            self.UpdateTask(self.SelectIndex);
         }
     }
 }

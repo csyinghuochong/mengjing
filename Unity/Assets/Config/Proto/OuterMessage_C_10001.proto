@@ -2146,6 +2146,21 @@ message M2C_TaskHuoYueRewardResponse    // ILocationResponse
 	string Message = 92;
 }
 
+//成长奖励
+//ResponseType M2C_TaskGrowUpRewardResponse
+message C2M_TaskGrowUpRewardRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 GrowUpRewardId = 1;
+}
+
+message M2C_TaskGrowUpRewardResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //任务列表
 //ResponseType M2C_TaskInitResponse
 message C2M_TaskInitRequest    // ILocationRequest
@@ -2161,6 +2176,7 @@ message M2C_TaskInitResponse    // ILocationResponse
 	repeated TaskPro RoleTaskList = 1;
 	repeated int32 RoleComoleteTaskList = 2;
 	repeated int32 ReceiveHuoYueIds = 4;
+	repeated int32 ReceiveGrowUpRewardIds = 5;
 }
 
 //任务通知【目前用于对话完成】

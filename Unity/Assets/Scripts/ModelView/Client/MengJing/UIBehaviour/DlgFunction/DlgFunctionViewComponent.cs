@@ -341,7 +341,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SettingButton == null )
      			{
-		    		this.m_E_SettingButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Scroll View Right/E_Setting");
+		    		this.m_E_SettingButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Bottom  Right 2/E_Setting");
      			}
      			return this.m_E_SettingButton;
      		}
@@ -358,7 +358,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SettingImage == null )
      			{
-		    		this.m_E_SettingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Scroll View Right/E_Setting");
+		    		this.m_E_SettingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Bottom  Right 2/E_Setting");
      			}
      			return this.m_E_SettingImage;
      		}

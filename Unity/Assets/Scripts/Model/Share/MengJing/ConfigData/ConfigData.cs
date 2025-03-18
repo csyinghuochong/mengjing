@@ -1957,6 +1957,17 @@ namespace ET
             { 1000, 206000 }
         };
         
+        /// <summary>
+        /// 成长任务奖励配置, KeyId.完成数量.  value=skillid
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int,int> TaskGrowUpRewardConfig = new Dictionary<int, int>()   
+        {
+            { 10,   62000011 },
+            { 20,   62000012 },
+            { 50,  62000031 },
+        };
+        
         # region 宠物乱斗配置
 
         /// <summary>

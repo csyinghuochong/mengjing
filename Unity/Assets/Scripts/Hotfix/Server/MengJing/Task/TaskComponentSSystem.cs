@@ -658,9 +658,9 @@ namespace ET.Server
                 {
                     self.OnAcceptedTask(taskid + 1);
 
-                    M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                    m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                    MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                    //M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
+                    //m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
+                    //MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
                 }
             }
             if (taskConfig.TaskType == TaskTypeEnum.System)
@@ -670,9 +670,9 @@ namespace ET.Server
                 {
                     self.OnAcceptedTask(taskid + 1);
 
-                    M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                    m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                    MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                    //M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
+                    //m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
+                    //MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
                 }
             }
             if (taskConfig.TaskType != TaskTypeEnum.Main)

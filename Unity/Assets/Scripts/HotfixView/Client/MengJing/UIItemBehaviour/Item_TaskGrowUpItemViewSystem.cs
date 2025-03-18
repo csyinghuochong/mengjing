@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
     [FriendOf(typeof (Scroll_Item_TaskGrowUpItem))]
     [EntitySystemOf(typeof (Scroll_Item_TaskGrowUpItem))]
@@ -30,6 +32,42 @@
         public static void Selected(this Scroll_Item_TaskGrowUpItem self, int taskId)
         {
      
+        }
+
+        public static void SetCurId(this Scroll_Item_TaskGrowUpItem self, int curId)
+        {
+            if (self.TaskId > curId)
+            {
+                self.SetLocked(true);
+            }
+            else if (self.TaskId  == curId)
+            {
+                self.SetOpened();
+            }
+            else
+            {
+                self.SetCompleted();
+            }
+        }
+
+        public static void SetLocked(this Scroll_Item_TaskGrowUpItem self, bool locked)
+        {
+            self.E_SeasonIconImage.material = locked ? self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui")) : null;
+            self.EG_Lock.gameObject.SetActive(locked);    
+        }
+        
+        public static void SetOpened(this Scroll_Item_TaskGrowUpItem self)
+        {
+            self.E_SeasonIconImage.material = null;
+            self.EG_Lock.gameObject.SetActive(false);    
+        }
+        
+        public static void SetCompleted(this Scroll_Item_TaskGrowUpItem self)
+        {
+            self.E_SeasonIconImage.material = null;
+            self.EG_Lock.gameObject.SetActive(false);    
+            self.EG_Completed.gameObject.SetActive(true);
         }
     }
 }

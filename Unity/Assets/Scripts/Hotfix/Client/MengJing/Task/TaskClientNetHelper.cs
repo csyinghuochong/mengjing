@@ -13,7 +13,10 @@ namespace ET.Client
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList = response.RoleTaskList;
-            return ErrorCode.ERR_Success;
+            taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
+            taskComponentC.ReceiveHuoYueIds = response.ReceiveHuoYueIds;
+            taskComponentC.ReceiveGrowUpRewardIds = response.ReceiveGrowUpRewardIds;
+            return response.Error;
         }
 
         public static async ETTask<int> RequestTaskTrack(Scene root, int taskId, int trackStatus)
@@ -120,6 +123,19 @@ namespace ET.Client
             }
 
             return response;
+        }
+
+        public static async ETTask<int> TaskGrowUpRewardRequest(Scene root, int growUpId)
+        {
+            C2M_TaskGrowUpRewardRequest request = C2M_TaskGrowUpRewardRequest.Create();
+            request.GrowUpRewardId = growUpId;
+            M2C_TaskGrowUpRewardResponse response = (M2C_TaskGrowUpRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                TaskComponentC taskComponent = root.GetComponent<TaskComponentC>();
+                taskComponent.ReceiveGrowUpRewardIds.Add(growUpId);
+            }
+            return response.Error;
         }
 
         public static async ETTask<int> TaskHuoYueRewardRequest(Scene root, int huoYueId)

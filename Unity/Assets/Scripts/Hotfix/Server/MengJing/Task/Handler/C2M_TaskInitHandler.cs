@@ -13,6 +13,7 @@ namespace ET.Server
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
             response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
+            response.ReceiveGrowUpRewardIds.AddRange(taskComponent.ReceiveGrowUpRewardIds); 
             Console.WriteLine($"C2M_TaskInitRequest:  {taskComponent.RoleTaskList.Count}");
             await ETTask.CompletedTask;
         }

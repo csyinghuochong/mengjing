@@ -10,6 +10,7 @@ namespace ET.Client
 	{
 		public TaskPro TaskPro;
 		public int CompeletTaskId;
+		public int SelectIndex;
 		public List<int> ShowTaskConfigIds = new();
 		public Dictionary<int, EntityRef<Scroll_Item_TaskGrowUpItem>> ScrollItemTaskGrowUpItems;
 		
@@ -186,6 +187,85 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_Img_LodingValue
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Img_LodingValue == null )
+				{
+					this.m_E_Img_LodingValue = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue");
+				}
+				return this.m_E_Img_LodingValue;
+			}
+		}
+		
+		public Image E_Img_LodingValue_22
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Img_LodingValue_22 == null )
+				{
+					this.m_E_Img_LodingValue_22 = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue_22");
+				}
+				return this.m_E_Img_LodingValue_22;
+			}
+		}
+				
+		public ES_CommonSkillItem ES_CommonSkillItem_0
+		{
+			get
+			{
+				ES_CommonSkillItem es = this.m_ES_CommonSkillItem_0;
+				if (es == null)
+				{
+					Transform go = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TaskGrowUpSkillItem_0");
+					this.m_ES_CommonSkillItem_0 = this.AddChild<ES_CommonSkillItem, Transform>(go);
+				}
+
+				return this.m_ES_CommonSkillItem_0;
+			}
+		}
+
+		public ES_CommonSkillItem ES_CommonSkillItem_1
+		{
+			get
+			{
+				ES_CommonSkillItem es = this.m_ES_CommonSkillItem_1;
+				if (es == null)
+				{
+					Transform go = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TaskGrowUpSkillItem_1");
+					this.m_ES_CommonSkillItem_1 = this.AddChild<ES_CommonSkillItem, Transform>(go);
+				}
+
+				return this.m_ES_CommonSkillItem_1;
+			}
+		}
+		
+		public ES_CommonSkillItem ES_CommonSkillItem_2
+		{
+			get
+			{
+				ES_CommonSkillItem es = this.m_ES_CommonSkillItem_2;
+				if (es == null)
+				{
+					Transform go = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TaskGrowUpSkillItem_2");
+					this.m_ES_CommonSkillItem_2 = this.AddChild<ES_CommonSkillItem, Transform>(go);
+				}
+
+				return this.m_ES_CommonSkillItem_2;
+			}
+		}
+        
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
 		{
 			get
@@ -202,8 +282,25 @@ namespace ET.Client
 				return this.m_E_FunctionSetBtnToggleGroup;
 			}
 		}
-		
-		    public Transform UITransform
+
+		public Text E_TextProgress
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_TextProgress == null )
+				{
+					this.m_E_TextProgress = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextProgress");
+				}
+				return this.m_E_TextProgress;
+			}
+		}
+
+		public Transform UITransform
          {
      	    get
      	    {
@@ -228,6 +325,12 @@ namespace ET.Client
 			this.m_E_GiveBtnButton = null;
 			this.m_E_GiveBtnImage = null;
 			this.m_E_AcvityedImgImage = null;
+			this.m_E_Img_LodingValue = null;
+			this.m_ES_CommonSkillItem_0 = null;
+			this.m_ES_CommonSkillItem_1 = null;
+			this.m_ES_CommonSkillItem_2 = null;
+			this.m_E_Img_LodingValue_22 = null;
+			this.m_E_TextProgress = null;
 			this.uiTransform = null;
 		}
 
@@ -242,6 +345,12 @@ namespace ET.Client
 		private Button m_E_GiveBtnButton = null;
 		private Image m_E_GiveBtnImage = null;
 		private Image m_E_AcvityedImgImage = null;
+		private Image m_E_Img_LodingValue = null;
+		private Image m_E_Img_LodingValue_22 = null;
+		private EntityRef<ES_CommonSkillItem> m_ES_CommonSkillItem_0 = null;
+		private EntityRef<ES_CommonSkillItem> m_ES_CommonSkillItem_1 = null;
+		private EntityRef<ES_CommonSkillItem> m_ES_CommonSkillItem_2 = null;
+		private Text m_E_TextProgress = null;
 		public Transform uiTransform = null;
 	}
 }
