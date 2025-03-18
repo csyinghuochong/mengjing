@@ -433,7 +433,6 @@ namespace ET.Client
                     return self.LifeShieldList[i].Level;
                 }
             }
-
             return 0;
         }
 

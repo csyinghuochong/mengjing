@@ -21,28 +21,25 @@ namespace ET.Client
             self.ShieldUIList.Add(self.ES_Shield_4);
             self.ShieldUIList.Add(self.ES_Shield_5);
             self.ShieldUIList.Add(self.ES_Shield_6);
+            self.ShieldUIList.Add(self.ES_Shield_7);
             self.ES_Shield_1.OnInitUI(1);
             self.ES_Shield_2.OnInitUI(2);
             self.ES_Shield_3.OnInitUI(3);
             self.ES_Shield_4.OnInitUI(4);
             self.ES_Shield_5.OnInitUI(5);
             self.ES_Shield_6.OnInitUI(6);
+            self.ES_Shield_7.OnInitUI(7);
             self.ES_Shield_1.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_2.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_3.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_4.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_5.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_6.SetClickHandler(self.OnClickShieldHandler);
-
+            self.ES_Shield_7.SetClickHandler(self.OnClickShieldHandler);
+            
             ES_Shield esShield = self.ShieldUIList[0];
             esShield.OnImageIconButton();
-
-            self.HuiShoulist.Add(self.ES_CommonItem_1);
-            self.HuiShoulist.Add(self.ES_CommonItem_2);
-            self.HuiShoulist.Add(self.ES_CommonItem_3);
-            self.HuiShoulist.Add(self.ES_CommonItem_4);
-            self.HuiShoulist.Add(self.ES_CommonItem_5);
-
+            
             self.E_CommonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
 
             self.E_Btn_ZhuRuButton.AddListenerAsync(self.OnBtn_ZhuRuButton);
@@ -59,13 +56,7 @@ namespace ET.Client
             self.UpdateBagUI();
             self.OnUpdateShieldUI();
             self.UpdateZhuRuExp();
-
-            for (int i = 0; i < self.HuiShoulist.Count; i++)
-            {
-                ES_CommonItem esCommonItem = self.HuiShoulist[i];
-                esCommonItem.UpdateItem(null, ItemOperateEnum.None);
-                esCommonItem.HideItemName();
-            }
+            self.HuiShoulist.Clear();
         }
 
         public static void OnUpdateShieldUI(this ES_SkillLifeShield self)
@@ -134,6 +125,13 @@ namespace ET.Client
                     }
                 }
             }
+
+            int total = LifeShieldConfigCategory.Instance.GetAll().Count;
+            int cur = self.GetOtherLifeShieldLevel(new List<int>(){1,2,3,4,5,6,7});
+            using (zstring.Block())
+            {
+                self.E_Text_TotalLevel.text = zstring.Format("{0}/{1}", cur, total);   
+            }
         }
 
         public static void UpdateHuiShouInfo(this ES_SkillLifeShield self, string dataparams)
@@ -148,47 +146,14 @@ namespace ET.Client
             //1新增  2移除 
             if (huishouInfo[0] == "1")
             {
-                for (int i = 0; i < self.HuiShoulist.Count; i++)
+                if (!self.HuiShoulist.Contains(bagInfo.BagInfoID))
                 {
-                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
-                    if (esCommonItem.Baginfo == null)
-                    {
-                        continue;
-                    }
-
-                    if (esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
-                    {
-                        return;
-                    }
-                }
-
-                for (int i = 0; i < self.HuiShoulist.Count; i++)
-                {
-                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
-                    if (esCommonItem.Baginfo == null)
-                    {
-                        esCommonItem.UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
-                        esCommonItem.E_ItemNameText.gameObject.SetActive(true);
-                        break;
-                    }
+                    self.HuiShoulist.Add(bagInfo.BagInfoID);
                 }
             }
             else
             {
-                for (int i = 0; i < self.HuiShoulist.Count; i++)
-                {
-                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
-                    if (esCommonItem.Baginfo == null)
-                    {
-                        continue;
-                    }
-
-                    if (esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
-                    {
-                        esCommonItem.UpdateItem(null, ItemOperateEnum.None);
-                        esCommonItem.E_ItemNameText.gameObject.SetActive(false);
-                    }
-                }
+                self.HuiShoulist.Remove(bagInfo.BagInfoID);
             }
         }
 
@@ -208,16 +173,7 @@ namespace ET.Client
                     continue;
                 }
 
-                bool have = false;
-                for (int h = 0; h < self.HuiShoulist.Count; h++)
-                {
-                    ES_CommonItem esCommonItem = self.HuiShoulist[h];
-                    if (esCommonItem.Baginfo != null && esCommonItem.Baginfo == bagInfo)
-                    {
-                        have = true;
-                    }
-                }
-
+                bool have = self.HuiShoulist.Contains(bagInfo.BagInfoID);
                 uIItemComponent.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
             }
         }
@@ -231,8 +187,9 @@ namespace ET.Client
             int nextlifeId = skillSetComponent.GetLifeShieldShowId(shieldType);
 
             LifeShieldConfig lifeShieldConfig = LifeShieldConfigCategory.Instance.Get(nextlifeId);
-            self.E_Text_ShieldNameText.text = "{lifeShieldConfig.ShieldName}";
-            self.E_Text_ShieldDescText.text = lifeShieldConfig.Des;
+            self.E_Text_ShieldNameText.text = lifeShieldConfig.ShieldName;
+            self.E_Text_ShieldDescText.text = lifeShieldConfig.Des.Replace(",", "\n");  //lifeShieldConfig.Des;
+            self.E_Text_ShieldLevel.text = lifeShieldConfig.ShieldLevel.ToString();
 
             LifeShieldInfo lifeShieldInfo = skillSetComponent.GetLifeShieldByType(shieldType);
             int curExp = lifeShieldInfo != null ? lifeShieldInfo.Exp : 0;
@@ -258,6 +215,17 @@ namespace ET.Client
             }
         }
 
+        private static int GetOtherLifeShieldLevel(this ES_SkillLifeShield self, List<int> typelist)
+        {
+            int lv = 0;
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            foreach (var i in typelist)
+            {
+                lv +=  skillSetComponent.GetLifeShieldLevel(i);
+            }
+            return lv;  
+        }
+
         public static async ETTask OnBtn_ZhuRuButton(this ES_SkillLifeShield self)
         {
             List<long> costs = self.GetConstItems();
@@ -265,20 +233,28 @@ namespace ET.Client
             {
                 return;
             }
+            
+            //技能的生灵系统调整 增加一个格子，之前是周围不能超过中间，现在是当前6个总和超过共享上限等级
+            //就需要升级中间的来提升共享上限等级，初始是6级，中间升一级 会提升6个共享上限等级
 
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            if (self.ShieldType != 6)   //生命之盾必须要大于其他盾
+            if (self.ShieldType != 7)   //非能量之源升级 需要 判断 共享上限
             {
-                int hplv = skillSetComponent.GetLifeShieldLevel(6);
-                int culv = skillSetComponent.GetLifeShieldLevel(self.ShieldType);
+                int hplv = skillSetComponent.GetLifeShieldLevel(7) * 6;
+                int culv = self.GetOtherLifeShieldLevel(new List<int>(){1,2,3,4,5,6});
                 if (hplv <= culv)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip("请先升级生命之魂！");
+                    FlyTipComponent.Instance.ShowFlyTip("请先升级能量之源！");
                     return;
                 }
             }
-            M2C_LifeShieldCostResponse response = await SkillNetHelper.LifeShieldCost(self.Root(), self.ShieldType, costs);
 
+            long instanceid = self.InstanceId;
+            M2C_LifeShieldCostResponse response = await SkillNetHelper.LifeShieldCost(self.Root(), self.ShieldType, costs);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
             if (response.AddExp > 0)
             {
                 using (zstring.Block())
@@ -287,7 +263,7 @@ namespace ET.Client
                 }
             }
 
-            self.Root().GetComponent<SkillSetComponentC>().LifeShieldList = response.ShieldList;
+            skillSetComponent.LifeShieldList = response.ShieldList;
             self.OnClickShieldHandler(self.ShieldType);
             self.OnUpdateUI();
         }
@@ -303,9 +279,10 @@ namespace ET.Client
                 self.OnPointerDown(binfo, pdata).Coroutine();
             };
             scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnBeginDrag(binfo, pdata); };
-            scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnDraging(binfo, pdata); };
+            // scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnBeginDrag(binfo, pdata); };
+            // scrollItemCommonItem.ES_CommonItem.DragingHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnDraging(binfo, pdata); };
             scrollItemCommonItem.ES_CommonItem.EndDragHandler = (ItemInfo binfo, PointerEventData pdata) => { self.OnEndDrag(binfo, pdata); };
+            //scrollItemCommonItem.ES_CommonItem.ClickItemHandler =  (ItemInfo binfo) => { self.OnClickItem(binfo); };
         }
 
         public static void UpdateBagUI(this ES_SkillLifeShield self)
@@ -331,18 +308,12 @@ namespace ET.Client
             self.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void OnBeginDrag(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
+        public static void OnClickItem(this ES_SkillLifeShield self, ItemInfo bagInfo)
         {
-            self.E_CommonItemsLoopVerticalScrollRect.OnBeginDrag(pdata);
-            self.IsDrag = true;
+            
         }
 
-        public static void OnDraging(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
-        {
-            self.E_CommonItemsLoopVerticalScrollRect.OnDrag(pdata);
-            self.IsDrag = true;
-        }
-
+       
         public static void OnEndDrag(this ES_SkillLifeShield self, ItemInfo bagInfo, PointerEventData pdata)
         {
             self.E_CommonItemsLoopVerticalScrollRect.OnEndDrag(pdata);
@@ -372,7 +343,9 @@ namespace ET.Client
         {
             if (TimeHelper.ClientNow() - self.ClickTime < 200)
             {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+                int add = self.HuiShoulist.Contains(binfo.BagInfoID) ? 2 : 1;   
+                string paramsStr = $"{add}_{binfo.BagInfoID}";
+                self.OnHuiShouSelect(paramsStr);
             }
 
             self.IsHoldDown = false;
@@ -380,17 +353,7 @@ namespace ET.Client
 
         public static List<long> GetConstItems(this ES_SkillLifeShield self)
         {
-            List<long> constids = new List<long>();
-            for (int h = 0; h < self.HuiShoulist.Count; h++)
-            {
-                ES_CommonItem esCommonItem = self.HuiShoulist[h];
-                if (esCommonItem.Baginfo != null)
-                {
-                    constids.Add(esCommonItem.Baginfo.BagInfoID);
-                }
-            }
-
-            return constids;
+            return  self.HuiShoulist;
         }
     }
 }

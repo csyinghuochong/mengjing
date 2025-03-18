@@ -9,113 +9,13 @@ namespace ET.Client
 	public  class ES_SkillLifeShield : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<EntityRef<ES_Shield>> ShieldUIList = new();
-		public List<EntityRef<ES_CommonItem>> HuiShoulist = new ();
+		public List<long> HuiShoulist = new ();
 		public List<ItemInfo> ShowBagInfos { get; set; } = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsDrag;
 		public long ClickTime;
 		public int ShieldType;
 		public bool IsHoldDown;
-		
-		public ES_CommonItem ES_CommonItem_1
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem_1;
-     			if( es ==null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_1");
-		    	   this.m_es_commonitem_1 = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem_1;
-     		}
-     	}
-
-		public ES_CommonItem ES_CommonItem_2
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem_2;
-     			if( es ==null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_2");
-		    	   this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem_2;
-     		}
-     	}
-
-		public ES_CommonItem ES_CommonItem_3
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem_3;
-     			if( es==null)
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_3");
-		    	   this.m_es_commonitem_3 = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem_3;
-     		}
-     	}
-
-		public ES_CommonItem ES_CommonItem_4
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem_4;
-     			if( es ==null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_4");
-		    	   this.m_es_commonitem_4 = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem_4;
-     		}
-     	}
-
-		public ES_CommonItem ES_CommonItem_5
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_CommonItem es = this.m_es_commonitem_5;
-     			if( es ==null  )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_5");
-		    	   this.m_es_commonitem_5 = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem_5;
-     		}
-     	}
 
 		public ES_Shield ES_Shield_1
      	{
@@ -236,6 +136,26 @@ namespace ET.Client
      			return this.m_es_shield_6;
      		}
      	}
+		
+		public ES_Shield ES_Shield_7
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+
+				ES_Shield es = this.m_es_shield_7;
+				if( es ==null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_Shield_7");
+					this.m_es_shield_7 = this.AddChild<ES_Shield,Transform>(subTrans);
+				}
+				return this.m_es_shield_7;
+			}
+		}
 
 		public LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
      	{
@@ -373,7 +293,41 @@ namespace ET.Client
      		}
      	}
 
-		    public Transform UITransform
+		public Text E_Text_ShieldLevel
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_ShieldLevel == null )
+				{
+					this.m_E_Text_ShieldLevel = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_ShieldLevel");
+				}
+				return this.m_E_Text_ShieldLevel;
+			}
+		}
+
+		public Text E_Text_TotalLevel
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_TotalLevel == null )
+				{
+					this.m_E_Text_TotalLevel = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_TotalLevel");
+				}
+				return this.m_E_Text_TotalLevel;
+			}
+		}
+
+		public Transform UITransform
          {
      	    get
      	    {
@@ -387,17 +341,13 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_es_commonitem_1 = null;
-			this.m_es_commonitem_2 = null;
-			this.m_es_commonitem_3 = null;
-			this.m_es_commonitem_4 = null;
-			this.m_es_commonitem_5 = null;
 			this.m_es_shield_1 = null;
 			this.m_es_shield_2 = null;
 			this.m_es_shield_3 = null;
 			this.m_es_shield_4 = null;
 			this.m_es_shield_5 = null;
 			this.m_es_shield_6 = null;
+			this.m_es_shield_7 = null;
 			this.m_E_CommonItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_ZhuRuButton = null;
 			this.m_E_Btn_ZhuRuImage = null;
@@ -406,20 +356,18 @@ namespace ET.Client
 			this.m_E_Text_ProgessText = null;
 			this.m_E_Text_ShieldDescText = null;
 			this.m_E_Text_Zhuru_ExpText = null;
+			this.m_E_Text_ShieldLevel = null;
+			this.m_E_Text_TotalLevel = null;
 			this.uiTransform = null;
 		}
 
-		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem_3 = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem_4 = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem_5 = null;
 		private EntityRef<ES_Shield> m_es_shield_1 = null;
 		private EntityRef<ES_Shield> m_es_shield_2 = null;
 		private EntityRef<ES_Shield> m_es_shield_3 = null;
 		private EntityRef<ES_Shield> m_es_shield_4 = null;
 		private EntityRef<ES_Shield> m_es_shield_5 = null;
 		private EntityRef<ES_Shield> m_es_shield_6 = null;
+		private EntityRef<ES_Shield> m_es_shield_7 = null;
 		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
 		private Button m_E_Btn_ZhuRuButton = null;
 		private Image m_E_Btn_ZhuRuImage = null;
@@ -428,6 +376,8 @@ namespace ET.Client
 		private Text m_E_Text_ProgessText = null;
 		private Text m_E_Text_ShieldDescText = null;
 		private Text m_E_Text_Zhuru_ExpText = null;
+		private Text m_E_Text_ShieldLevel = null;
+		private Text m_E_Text_TotalLevel = null;
 		public Transform uiTransform = null;
 	}
 }

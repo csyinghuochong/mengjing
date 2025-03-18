@@ -154,11 +154,6 @@ namespace ET.Client
             {
                 self.View.ES_SkillMake.OnHuiShouSelect(dataParams);
             }
-
-            if (self.View.ES_SkillLifeShield.uiTransform.gameObject.activeSelf)
-            {
-                self.View.ES_SkillLifeShield.OnHuiShouSelect(dataParams);
-            }
         }
     }
 }
