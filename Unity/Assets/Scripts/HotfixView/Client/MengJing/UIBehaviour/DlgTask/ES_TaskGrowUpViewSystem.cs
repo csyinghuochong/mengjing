@@ -26,7 +26,7 @@ namespace ET.Client
             if (self.CompeletTaskId > 0)
             {
                 float fff = (self.CompeletTaskId - 82000000) / 10f;
-                page = Mathf.CeilToInt(fff);
+                page = Mathf.FloorToInt(fff);
             }
             Log.Debug($"page:{page}  self.CompeletTaskId:{self.CompeletTaskId}  ");
             self.E_FunctionSetBtnToggleGroup.OnSelectIndex(page);
