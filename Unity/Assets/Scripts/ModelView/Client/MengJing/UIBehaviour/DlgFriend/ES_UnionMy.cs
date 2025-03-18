@@ -144,7 +144,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonJingXuanButton == null )
      			{
-		    		this.m_E_ButtonJingXuanButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_ButtonJingXuan");
+		    		this.m_E_ButtonJingXuanButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/E_ButtonJingXuan");
      			}
      			return this.m_E_ButtonJingXuanButton;
      		}
@@ -161,7 +161,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonJingXuanImage == null )
      			{
-		    		this.m_E_ButtonJingXuanImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_ButtonJingXuan");
+		    		this.m_E_ButtonJingXuanImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_ShowSet/E_ButtonJingXuan");
      			}
      			return this.m_E_ButtonJingXuanImage;
      		}
@@ -178,7 +178,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextJingXuanEndTimeText == null )
      			{
-		    		this.m_E_TextJingXuanEndTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_ButtonJingXuan/E_TextJingXuanEndTime");
+		    		this.m_E_TextJingXuanEndTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_ShowSet/E_ButtonJingXuan/E_TextJingXuanEndTime");
      			}
      			return this.m_E_TextJingXuanEndTimeText;
      		}
@@ -450,7 +450,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_EnterUnionButton == null )
      			{
-		    		this.m_E_Text_EnterUnionButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/E_Text_EnterUnion");
+		    		this.m_E_Text_EnterUnionButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_Text_EnterUnion");
      			}
      			return this.m_E_Text_EnterUnionButton;
      		}
@@ -552,7 +552,7 @@ namespace ET.Client
      			}
      			if( this.m_E_UnionRecordsBtnButton == null )
      			{
-		    		this.m_E_UnionRecordsBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/E_UnionRecordsBtn");
+		    		this.m_E_UnionRecordsBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_UnionRecordsBtn");
      			}
      			return this.m_E_UnionRecordsBtnButton;
      		}
