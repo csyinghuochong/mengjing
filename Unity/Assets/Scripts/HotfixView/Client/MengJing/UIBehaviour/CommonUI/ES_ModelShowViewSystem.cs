@@ -190,7 +190,7 @@ namespace ET.Client
         public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false, bool canDrag = true)
         {
             self.RemoveModel();
-
+            self.ModelParent.transform.localEulerAngles = Vector3.zero;
             self.E_RenderEventTrigger.triggers.Clear();
             if (canDrag)
             {
