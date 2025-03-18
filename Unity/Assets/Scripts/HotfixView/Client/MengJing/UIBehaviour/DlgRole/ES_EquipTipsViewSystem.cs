@@ -290,7 +290,7 @@ namespace ET.Client
                 float startPostionY = 0 - self.TitleBigHeight_234 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
                
                 int gemNumber = 0;
-                if (!string.IsNullOrEmpty(self.BagInfo.GemHole))
+                if (!string.IsNullOrEmpty(self.BagInfo.GemHole) && self.BagInfo.GemHole != "0_0_0_0")
                 {
                     Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
                     self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(true);
