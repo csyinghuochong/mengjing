@@ -144,46 +144,46 @@ namespace ET.Client
                 return;
             }
 
-            string purpose = self.E_InputFieldPurposeInputField.text;
-            // mask = MaskWordComponent.Instance.IsContainSensitiveWords(purpose);
-            //if (mask || !StringHelper.IsSpecialChar(purpose) || purpose.Length >= 200)
-            //{
-            //    FloatTipManager.Instance.ShowFloatTip("请重新输入！");
-            //    return;
-            //}
-            // if (mask)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("宣言有特殊字符！");
-            //     return;
-            // }
-            //
-            // if (purpose.Length >= 200)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("宣言内容过长！");
-            //     return;
-            // }
-            //
-            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) != 0)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("请先退出公会！");
-            //     return;
-            // }
+             string purpose = self.E_InputFieldPurposeInputField.text;
+             mask = MaskWordHelper.Instance.IsContainSensitiveWords(purpose);
+             if (mask)
+             {
+                 FlyTipComponent.Instance.ShowFlyTip("宣言有特殊字符！");
+                 return;
+             }
+             if (!StringHelper.IsSpecialChar(purpose) || purpose.Length >= 200)
+             {
+                 FlyTipComponent.Instance.ShowFlyTip("请重新输入！");
+                 return;
+             }
+            
+             if (purpose.Length >= 200)
+             {
+                 FlyTipComponent.Instance.ShowFlyTip("宣言内容过长！");
+                 return;
+             }
+            
+             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+             if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) != 0)
+             {
+                 FlyTipComponent.Instance.ShowFlyTip("请先退出公会！");
+                 return;
+             }
 
-            // UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            // int needLevel = int.Parse(GlobalValueConfigCategory.Instance.Get(21).Value);
-            // int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
-            // if (userInfo.Lv < needLevel)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！");
-            //     return;
-            // }
-            //
-            // if (userInfo.Diamond < needDiamond)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("钻石不足！");
-            //     return;
-            // }
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int needLevel = int.Parse(GlobalValueConfigCategory.Instance.Get(21).Value);
+            int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
+            if (userInfo.Lv < needLevel)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
+                return;
+            }
+            
+            if (userInfo.Diamond < needDiamond)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
+                return;
+            }
 
             M2C_UnionCreateResponse response = await UnionNetHelper.UnionCreate(self.Root(), unionName, purpose);
             if (response.Error != ErrorCode.ERR_Success)

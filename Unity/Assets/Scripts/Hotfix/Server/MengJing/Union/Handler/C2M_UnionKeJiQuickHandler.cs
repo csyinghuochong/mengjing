@@ -13,7 +13,7 @@
             }
             if (dBUnionInfo.UnionInfo.KeJiActiteTime == 0)
             {
-                response.Error = ErrorCode.ERR_Union_NotActive;
+                response.Error = ErrorCode.ERR_Union_NotKeJi;
                 return;
             }
 
@@ -21,7 +21,7 @@
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(keijiId);
             if (unionKeJiConfig.NextID == 0)
             {
-                response.Error = ErrorCode.ERR_Union_NotActive;
+                response.Error = ErrorCode.ERR_Union_NotKeJi;
                 return;
             }
 

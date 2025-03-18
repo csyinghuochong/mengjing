@@ -11,7 +11,7 @@
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsLong(NumericType.UnionId_0) != 0)
             {
-                response.Error = ErrorCode.ERR_Error;
+                response.Error = ErrorCode.ERR_Union_Create;
                 return;
             }
             UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
@@ -19,7 +19,7 @@
             int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
             if (userInfo.Lv < needLevel || userInfo.Diamond < needDiamond)
             {
-                response.Error = ErrorCode.ERR_Error;
+                response.Error = ErrorCode.ERR_Union_Create;
                 return;
             }
 

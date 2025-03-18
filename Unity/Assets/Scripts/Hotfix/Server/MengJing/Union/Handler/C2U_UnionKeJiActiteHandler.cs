@@ -16,7 +16,7 @@
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(keijiId);
             if (unionKeJiConfig.NextID == 0)
             {
-                response.Error = ErrorCode.ERR_Union_NotActive;
+                response.Error = ErrorCode.ERR_Union_NotKeJi;
                 return;
             }
             if(dBUnionInfo.UnionInfo.UnionGold < unionKeJiConfig.CostUnionGold)
@@ -28,7 +28,7 @@
             if (dBUnionInfo.UnionInfo.KeJiActiteTime != 0)
             {
                 response.UnionInfo = dBUnionInfo.UnionInfo;
-                response.Error = ErrorCode.ERR_Union_HavActive;
+                response.Error = ErrorCode.ERR_Union_HavKeJi;
                 return;
             }
             dBUnionInfo.UnionInfo.UnionGold -= unionKeJiConfig.CostUnionGold;
