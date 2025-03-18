@@ -145,10 +145,10 @@ namespace ET.Client
                 }
             }
 
-            DlgRoleZodiac dlgRoleZodiac = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleZodiac>();
-            if (dlgRoleZodiac != null)
+            DlgRole dlgRole = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>();
+            if (dlgRole != null)
             {
-                dlgRoleZodiac.UpdateBagUI(self.EquipInfoList, self.Occ, self.ItemOperateEnum);
+                dlgRole.View.ES_RoleZodiac.OnUpdate();
             }
         }
 

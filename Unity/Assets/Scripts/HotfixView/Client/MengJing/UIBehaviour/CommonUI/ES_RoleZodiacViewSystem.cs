@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -17,7 +19,6 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
 
             self.InitUI();
-            self.RefreshBagItems();
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
@@ -44,6 +45,11 @@ namespace ET.Client
             }
         }
 
+        public static void OnUpdate(this ES_RoleZodiac self)
+        {
+            self.OnItemTypeSet(self.E_ItemTypeSetToggleGroup.GetCurrentIndex());
+        }
+        
         private static void OnItemTypeSet(this ES_RoleZodiac self, int index)
         {
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -75,24 +81,58 @@ namespace ET.Client
             }
 
             sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+            List<ItemInfo> equipList = bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip);
             int startId = 16000101 + index * 100;
             for (int i = 0; i < self.ZodiacList.Count; i++)
             {
                 GameObject item = self.ZodiacList[i];
-
+                ItemInfo itemInfo = null;
+                foreach (ItemInfo info in equipList)
+                {
+                    if (info.ItemID == startId)
+                    {
+                        itemInfo = info;
+                        break;
+                    }
+                }
+                
                 item.transform.Find("Img_Quality").GetComponent<Image>().sprite = sp;
 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(startId);
 
                 item.transform.Find("Img_Icon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
-                CommonViewHelper.SetImageGray(self.Root(), item.transform.Find("Img_Icon").gameObject, true);
+                CommonViewHelper.SetImageGray(self.Root(), item.transform.Find("Img_Icon").gameObject, itemInfo == null);
+                
                 item.transform.Find("Text_Name").GetComponent<Text>().text = itemConfig.ItemName;
                 item.transform.Find("Text_Name").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
+                if (itemInfo != null)
+                {
+                    item.transform.Find("Btn_Click").GetComponent<Button>().onClick.RemoveAllListeners();
+                    item.transform.Find("Btn_Click").GetComponent<Button>().AddListener(() => { self.OnClickZodiacItem(itemInfo); });
+                }
+
                 startId++;
             }
+            
+            self.RefreshBagItems();
         }
 
+        private static void OnClickZodiacItem(this ES_RoleZodiac self, ItemInfo itemInfo)
+        {
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = itemInfo,
+                    ItemOperateEnum = ItemOperateEnum.Juese,
+                    InputPoint = Input.mousePosition,
+                    Occ = occ,
+                    EquipList = new List<ItemInfo>()
+                });
+        }
+        
         private static void RefreshBagItems(this ES_RoleZodiac self)
         {
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
@@ -116,7 +156,22 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleZodiac self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
+            if (index < self.ShowBagInfos.Count)
+            {
+                scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag, self.UpdateSelect);
+                
+                BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+                UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+                List<ItemInfo> equipList = bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip);
+
+                bool have = equipList.Any(itemInfo => itemInfo.ItemID == self.ShowBagInfos[index].ItemID);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
+                scrollItemCommonItem.ES_CommonItem.E_UpTipImage.gameObject.SetActive(!have && userInfoComponentC.UserInfo.Lv >= itemConfig.UseLv);
+            }
+            else
+            {
+                scrollItemCommonItem.Refresh(null, ItemOperateEnum.Bag, self.UpdateSelect);
+            }
         }
 
         private static void UpdateSelect(this ES_RoleZodiac self, ItemInfo bagInfo)

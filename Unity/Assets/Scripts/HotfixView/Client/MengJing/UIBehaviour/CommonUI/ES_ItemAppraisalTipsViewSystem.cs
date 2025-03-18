@@ -91,8 +91,12 @@ namespace ET.Client
                     string textEquipSonType = ItemViewHelp.GetEquipTypeShow(itemconf.EquipType);
 
                     //121211 <color=#AFFF06>颜色</color>
+
+                    if (textEquipSonType != "")
+                    {
+                        equipType = zstring.Format("<color=#AFFF06>    类型:{0}</color>", textEquipSonType);
+                    }
                     
-                    equipType = zstring.Format("<color=#AFFF06>    类型:{0}</color>", textEquipSonType);
                     self.E_ItemTypeText.text = zstring.Format("部位:{0}", textEquipType);
                 }
 
