@@ -154,7 +154,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             await UnionNetHelper.UnionOperatate(self.Root(), unit.GetUnionId(), 3, $"{self.UserId}_{postion}");
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnion>().OnUpdateMyUnion();
             self.OnClickImageBg();
         }
 
@@ -166,7 +166,7 @@ namespace ET.Client
         public static async ETTask RequestUnionTransfer(this DlgWatchMenu self)
         {
             await UnionNetHelper.UnionTransferRequest(self.Root(), self.UserId);
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnion>().OnUpdateMyUnion();
             self.OnClickImageBg();
         }
 
@@ -177,7 +177,7 @@ namespace ET.Client
 
             await UnionNetHelper.UnionKickOutRequest(self.Root(), unionId, self.UserId);
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().OnUpdateMyUnion();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnion>().OnUpdateMyUnion();
 
             self.OnClickImageBg();
         }

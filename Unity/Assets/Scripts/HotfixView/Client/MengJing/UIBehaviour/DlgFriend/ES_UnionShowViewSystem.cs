@@ -191,7 +191,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(4);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnion>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
 
             await ETTask.CompletedTask;
         }

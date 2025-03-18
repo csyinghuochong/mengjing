@@ -43,6 +43,7 @@ namespace ET.Client
 		WindowID_MapBig,
 		WindowID_RoleZodiac,
 		WindowID_Watch,
+		WindowID_Union,
 		WindowID_UnionRecords,
 		WindowID_TaskGet,
 		WindowID_Warehouse,

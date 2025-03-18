@@ -1,7 +1,5 @@
 namespace ET.Client
 {
-    [FriendOf(typeof(ES_UnionMy))]
-    [FriendOf(typeof(ES_UnionShow))]
     [FriendOf(typeof(ES_FriendList))]
     [FriendOf(typeof(ES_FriendBlack))]
     [FriendOf(typeof(ES_FriendApply))]
@@ -73,16 +71,7 @@ namespace ET.Client
             }
 
             self.ClickEnabled = true;
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-            if (unionId > 0)
-            {
-                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(4);
-            }
-            else
-            {
-                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(3);
-            }
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgFriend self, int index)
@@ -105,38 +94,10 @@ namespace ET.Client
                 case 2:
                     self.View.ES_FriendBlack.uiTransform.gameObject.SetActive(true);
                     break;
-                case 3:
-                    self.View.ES_UnionShow.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_UnionShow.OnUpdateUI();
-                    break;
-                case 4:
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                    long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-                    if (unionId == 0)
-                    {
-                        FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
-                        return;
-                    }
-
-                    self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_UnionMy.OnUpdateUI().Coroutine();
+              default:
                     break;
             }
         }
-
-        public static void OnCreateUnion(this DlgFriend self)
-        {
-            self.View.ES_UnionShow.OnCreateUnion();
-        }
-
-        public static void OnLeaveUnion(this DlgFriend self)
-        {
-            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
-        }
-
-        public static void OnUpdateMyUnion(this DlgFriend self)
-        {
-            self.View.ES_UnionMy.OnUpdateUI().Coroutine();
-        }
+        
     }
 }

@@ -141,7 +141,7 @@
                     break;
                 case NumericType.UnionId_0:
                     long unionId = args.Defend.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-                    DlgFriend dlgFriend = root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>();
+                    DlgUnion dlgFriend = root.GetComponent<UIComponent>().GetDlgLogic<DlgUnion>();
                     if (args.Defend.MainHero && dlgFriend != null && unionId > 0)
                     {
                         dlgFriend.OnCreateUnion();

@@ -184,7 +184,6 @@ namespace ET.Client
                 if (taskConfig.TaskType != TaskTypeEnum.System)
                 {
                     continue;
-                    break;
                 }
 
                 self.TaskPro = taskPros[i];
@@ -261,7 +260,6 @@ namespace ET.Client
                 if (taskConfig.TaskType != TaskTypeEnum.System)
                 {
                     continue;
-                    break;
                 }
 
                 self.TaskPro = taskPros[i];

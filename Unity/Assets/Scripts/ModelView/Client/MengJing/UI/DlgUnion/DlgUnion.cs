@@ -7,6 +7,6 @@
 		public DlgUnionViewComponent View { get => this.GetComponent<DlgUnionViewComponent>();} 
 
 		 
-
+		public bool ClickEnabled;
 	}
 }
