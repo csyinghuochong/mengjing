@@ -84,6 +84,36 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
             List<ItemInfo> equipList = bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip);
             int startId = 16000101 + index * 100;
+            
+            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(startId);
+            EquipSuitConfig equipSuit = EquipSuitConfigCategory.Instance.Get(equipConfig.EquipSuitID);
+            int[] needEquipIDSet = equipSuit.NeedEquipID;
+            string[] suitPropertyIDSet = equipSuit.SuitPropertyID.Split(';');
+            int equipSuitNum = 0;
+            for (int i = 0; i < equipList.Count; i++)
+            {
+                if (needEquipIDSet.Contains(equipList[i].ItemID))
+                {
+                    equipSuitNum++;
+                }
+            }
+            for (int i = 0; i < suitPropertyIDSet.Length; i++)
+            {
+                string triggerSuitNum = suitPropertyIDSet[i].Split(',')[0];
+                string triggerSuitPropertyID = suitPropertyIDSet[i].Split(',')[1];
+                
+                EquipSuitPropertyConfig equipSuitProperty = EquipSuitPropertyConfigCategory.Instance.Get(int.Parse(triggerSuitPropertyID));
+
+                GameObject go = self.EquipSuitPropertyList[i];
+                
+                using (zstring.Block())
+                {
+                    go.transform.Find("Text_Num").GetComponent<Text>().text = zstring.Format("激活{0}/{1}：", equipSuitNum, triggerSuitNum);
+                }
+                go.transform.Find("Text_Prop").GetComponent<Text>().text = equipSuitProperty.EquipSuitDes;
+                go.transform.Find("Actived").gameObject.SetActive(equipSuitNum >= int.Parse(triggerSuitNum));
+            }
+            
             for (int i = 0; i < self.ZodiacList.Count; i++)
             {
                 GameObject item = self.ZodiacList[i];
@@ -129,7 +159,7 @@ namespace ET.Client
                     ItemOperateEnum = ItemOperateEnum.Juese,
                     InputPoint = Input.mousePosition,
                     Occ = occ,
-                    EquipList = new List<ItemInfo>()
+                    EquipList = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocEquip)
                 });
         }
         
