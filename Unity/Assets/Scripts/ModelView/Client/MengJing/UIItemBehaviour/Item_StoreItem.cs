@@ -159,6 +159,30 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_Image_bg
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Image_bg == null )
+					{
+						this.m_E_Image_bg = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_bg");
+					}
+					return this.m_E_Image_bg;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_bg");
+				}
+			}
+		}
+
 		public Text E_Text_valueText
      	{
      		get
@@ -190,6 +214,7 @@ namespace ET.Client
 			this.m_es_commonitem = null;
 			this.m_E_ButtonBuyButton = null;
 			this.m_E_ButtonBuyImage = null;
+			this.m_E_Image_bg = null;
 			this.m_E_Text_valueText = null;
 			this.uiTransform = null;
 			this.DataId = 0;
@@ -200,6 +225,7 @@ namespace ET.Client
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private Button m_E_ButtonBuyButton = null;
 		private Image m_E_ButtonBuyImage = null;
+		private Image m_E_Image_bg = null;
 		private Text m_E_Text_valueText = null;
 		public Transform uiTransform = null;
 	}
