@@ -309,6 +309,8 @@ namespace ET.Client
 
         public static void OnText_EnterUnionButton(this ES_UnionMy self)
         {
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Union);
         }
 
         public static void OnText_LevelButton(this ES_UnionMy self)
