@@ -38,6 +38,9 @@ namespace ET.Client
                 showConfigs.Add(activityConfigs[i]);
             }
 
+            bool todayrecv = CommonHelp.GetDayByTime(activityComponent.LastLoginTime) == CommonHelp.GetDayByTime(TimeHelper.ServerNow());
+
+
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             for (int i = 0; i < showConfigs.Count; i++)
             {
@@ -62,7 +65,10 @@ namespace ET.Client
                 itemTransform.Find("Btn_Receive").gameObject.SetActive(!received);
                 itemTransform.Find("Img_Received").gameObject.SetActive(received);
                 itemTransform.Find("Text_State").GetComponent<Text>().text = received ? "已领取" : "待签到";
-
+                
+                bool canReceive = self.CanReceive(activityConfig.Id) && !todayrecv;
+                CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_Di").gameObject,  !canReceive  );
+                CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_ItemIcon").gameObject,  !canReceive  );
                 itemTransform.Find("Btn_Receive").GetComponent<Button>().AddListener(() => { self.OnBtn_Receive(activityConfig).Coroutine(); });
             }
         }
