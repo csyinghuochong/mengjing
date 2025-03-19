@@ -123,6 +123,7 @@ namespace ET.Client
                 WindowID.WindowID_Friend => "Title_Friend",
                 WindowID.WindowID_ChengJiu => "Title_ChengJiu",
                 WindowID.WindowID_PetBar => "Title_Pet",
+                WindowID.WindowID_ShouJi => "Title_Skill",
                 _ => "Default"
             };
             
@@ -136,6 +137,7 @@ namespace ET.Client
                 WindowID.WindowID_Friend => "好友系统",
                 WindowID.WindowID_ChengJiu => "成就系统",
                 WindowID.WindowID_PetBar => "宠物布阵",
+                WindowID.WindowID_ShouJi => "拾光收集",
                 _ => ""
             };
 
