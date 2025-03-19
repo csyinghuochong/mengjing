@@ -124,6 +124,21 @@ namespace ET
             return str;
         }
 
+        public static string ShowLeftTime2(long time)
+        {
+            string str = "";
+            time = time / 1000;
+
+            if (time > 24 * 60 * 60)
+            {
+                str += $"{time / (24 * 60 * 60)}天";
+                time %= 24 * 60 * 60;
+            }
+
+            str += $"{time / (60 * 60)}时";
+            return str;
+        }
+
         public static bool IsInTime(List<int> openTime)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();

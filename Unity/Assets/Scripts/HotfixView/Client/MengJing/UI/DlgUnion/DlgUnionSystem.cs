@@ -9,6 +9,7 @@ namespace ET.Client
 	
 	[FriendOf(typeof(ES_UnionMy))]
 	[FriendOf(typeof(ES_UnionShow))]
+	[FriendOf(typeof(ES_UnionMember))]
 	[FriendOf(typeof(DlgUnion))]
 	public static  class DlgUnionSystem
 	{
@@ -72,6 +73,19 @@ namespace ET.Client
 					self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionMy.OnUpdateUI().Coroutine();
 					break;
+				case 2:
+					unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+					unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+					if (unionId == 0)
+					{
+						FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
+						return;
+					}
+					self.View.ES_UnionMember.uiTransform.gameObject.SetActive(true);
+					self.View.ES_UnionMember.OnUpdateUI().Coroutine();
+					break;	
+				default:
+					break;	
 			}
 		}
 		

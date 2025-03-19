@@ -82,6 +82,25 @@ namespace ET.Client
 				return this.m_es_unionmy;
 			}
 		}
+		
+		public ES_UnionMember ES_UnionMember
+		{
+			get
+			{
+				ES_UnionMember es = this.m_es_unionmember;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_UnionMember.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_unionmember = this.AddChild<ES_UnionMember, Transform>(go.transform);
+				}
+
+				return this.m_es_unionmember;
+			}
+		}
         
 		public void DestroyWidget()
 		{
@@ -90,6 +109,7 @@ namespace ET.Client
 			this.m_es_unionshow = null;
 			this.m_es_unionmy = null;
 			this.uiTransform = null;
+			this.m_es_unionmember = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < this.AssetList.Count; i++)
@@ -104,6 +124,7 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private EntityRef<ES_UnionShow> m_es_unionshow = null;
 		private EntityRef<ES_UnionMy> m_es_unionmy = null;
+		private EntityRef<ES_UnionMember> m_es_unionmember = null;
         public Transform uiTransform = null;
 	}
 }

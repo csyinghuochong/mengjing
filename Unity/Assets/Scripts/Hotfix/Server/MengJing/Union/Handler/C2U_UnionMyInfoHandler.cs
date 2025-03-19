@@ -46,7 +46,7 @@ namespace ET.Server
                     unionPlayerInfo.PlayerName = unionInfoCache.Name;
                     unionPlayerInfo.Combat = unionInfoCache.Combat;
 
-                    if (allonlines.Contains(request.UnitId))
+                    if (allonlines.Contains(userId))
                     {
                         unionPlayerInfo.LastLoginTime = 0;
                         response.OnLinePlayer.Add(userId);

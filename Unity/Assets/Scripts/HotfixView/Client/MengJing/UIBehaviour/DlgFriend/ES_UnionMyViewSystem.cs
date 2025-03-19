@@ -60,7 +60,7 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.UnionJingXuanTimer);
 
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.UnRegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
+            redPointComponent?.UnRegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
             self.DestroyWidget();
         }
 
