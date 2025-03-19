@@ -114,6 +114,7 @@ namespace ET.Client
                 "UIEquipmentIncrease" => WindowID.WindowID_EquipmentIncrease,
                 "UIJueXing" => WindowID.WindowID_JueXing,
                 "UIBattleRecruit" => WindowID.WindowID_BattleRecruit,
+                "UIUnion" => WindowID.WindowID_Union,
                 _ => WindowID.WindowID_Invaild
             };
         }
