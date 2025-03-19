@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [FriendOf(typeof(DlgPet))]
     [FriendOf(typeof(PetComponentC))]
-    [FriendOf(typeof(ES_PetInfoShow))]
+    [FriendOf(typeof(ES_PetHeChengInfoShow))]
     [EntitySystemOf(typeof(ES_PetHeCheng))]
     [FriendOfAttribute(typeof(ES_PetHeCheng))]
     public static partial class ES_PetHeChengSystem
@@ -33,14 +33,14 @@ namespace ET.Client
 
         private static void OnInitSubView(this ES_PetHeCheng self)
         {
-            self.ES_PetInfoShow_1.Weizhi = -1;
-            self.ES_PetInfoShow_1.BagOperationType = PetOperationType.HeCheng;
+            self.ES_PetHeChengInfoShow_1.Weizhi = -1;
+            self.ES_PetHeChengInfoShow_1.BagOperationType = PetOperationType.HeCheng;
 
-            self.ES_PetInfoShow_2.Weizhi = 1;
-            self.ES_PetInfoShow_2.BagOperationType = PetOperationType.HeCheng;
+            self.ES_PetHeChengInfoShow_2.Weizhi = 1;
+            self.ES_PetHeChengInfoShow_2.BagOperationType = PetOperationType.HeCheng;
 
-            self.ES_PetInfoShow_1.OnInitData(null);
-            self.ES_PetInfoShow_2.OnInitData(null);
+            self.ES_PetHeChengInfoShow_1.OnInitData(null);
+            self.ES_PetHeChengInfoShow_2.OnInitData(null);
         }
 
         public static List<long> GetSelectedPet(this ES_PetHeCheng self)
@@ -58,8 +58,8 @@ namespace ET.Client
         {
             self.HeChengPet_Left = null;
             self.HeChengPet_Right = null;
-            self.ES_PetInfoShow_1.OnInitData(null);
-            self.ES_PetInfoShow_2.OnInitData(null);
+            self.ES_PetHeChengInfoShow_1.OnInitData(null);
+            self.ES_PetHeChengInfoShow_2.OnInitData(null);
         }
 
         public static void OnBtn_HeChengButton(this ES_PetHeCheng self)
@@ -157,8 +157,8 @@ namespace ET.Client
 
         public static void OnHeChengReturn(this ES_PetHeCheng self)
         {
-            self.ES_PetInfoShow_1.OnInitData(null);
-            self.ES_PetInfoShow_2.OnInitData(null);
+            self.ES_PetHeChengInfoShow_1.OnInitData(null);
+            self.ES_PetHeChengInfoShow_2.OnInitData(null);
         }
 
         public static void OnHeChengSelect(this ES_PetHeCheng self, RolePetInfo rolePetInfo)
@@ -166,12 +166,12 @@ namespace ET.Client
             if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().PetItemWeizhi == -1)
             {
                 self.HeChengPet_Left = rolePetInfo;
-                self.ES_PetInfoShow_1.OnInitData(self.HeChengPet_Left);
+                self.ES_PetHeChengInfoShow_1.OnInitData(self.HeChengPet_Left);
             }
             else
             {
                 self.HeChengPet_Right = rolePetInfo;
-                self.ES_PetInfoShow_2.OnInitData(self.HeChengPet_Right);
+                self.ES_PetHeChengInfoShow_2.OnInitData(self.HeChengPet_Right);
             }
         }
     }

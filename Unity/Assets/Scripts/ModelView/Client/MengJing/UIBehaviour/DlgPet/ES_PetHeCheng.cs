@@ -27,7 +27,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_PetInfoShow ES_PetInfoShow_1
+		public ES_PetHeChengInfoShow ES_PetHeChengInfoShow_1
      	{
      		get
      		{
@@ -37,13 +37,13 @@ namespace ET.Client
      				return null;
      			}
 
-		        ES_PetInfoShow es = this.m_es_petinfoshow_1;
+		        ES_PetHeChengInfoShow es = this.m_es_pethechenginfoshow_1;
      			if( es ==null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo1/ES_PetInfoShow_1");
-		    	   this.m_es_petinfoshow_1 = this.AddChild<ES_PetInfoShow,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo1/ES_PetHeChengInfoShow_1");
+		    	   this.m_es_pethechenginfoshow_1 = this.AddChild<ES_PetHeChengInfoShow,Transform>(subTrans);
      			}
-     			return this.m_es_petinfoshow_1;
+     			return this.m_es_pethechenginfoshow_1;
      		}
      	}
 
@@ -64,7 +64,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_PetInfoShow ES_PetInfoShow_2
+		public ES_PetHeChengInfoShow ES_PetHeChengInfoShow_2
      	{
      		get
      		{
@@ -74,13 +74,13 @@ namespace ET.Client
      				return null;
      			}
 
-		        ES_PetInfoShow es = this.m_es_petinfoshow_2;
+		        ES_PetHeChengInfoShow es = this.m_es_pethechenginfoshow_2;
      			if( es ==null)
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo2/ES_PetInfoShow_2");
-		    	   this.m_es_petinfoshow_2 = this.AddChild<ES_PetInfoShow,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo2/ES_PetHeChengInfoShow_2");
+		    	   this.m_es_pethechenginfoshow_2 = this.AddChild<ES_PetHeChengInfoShow,Transform>(subTrans);
      			}
-     			return this.m_es_petinfoshow_2;
+     			return this.m_es_pethechenginfoshow_2;
      		}
      	}
 
@@ -201,9 +201,9 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_PetInfo1RectTransform = null;
-			this.m_es_petinfoshow_1 = null;
+			this.m_es_pethechenginfoshow_1 = null;
 			this.m_EG_PetInfo2RectTransform = null;
-			this.m_es_petinfoshow_2 = null;
+			this.m_es_pethechenginfoshow_2 = null;
 			this.m_E_Btn_HeChengButton = null;
 			this.m_E_Btn_HeChengImage = null;
 			this.m_E_Btn_PreviewButton = null;
@@ -214,9 +214,9 @@ namespace ET.Client
 		}
 
 		private RectTransform m_EG_PetInfo1RectTransform = null;
-		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_1 = null;
+		private EntityRef<ES_PetHeChengInfoShow> m_es_pethechenginfoshow_1 = null;
 		private RectTransform m_EG_PetInfo2RectTransform = null;
-		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_2 = null;
+		private EntityRef<ES_PetHeChengInfoShow> m_es_pethechenginfoshow_2 = null;
 		private Button m_E_Btn_HeChengButton = null;
 		private Image m_E_Btn_HeChengImage = null;
 		private Button m_E_Btn_PreviewButton = null;
