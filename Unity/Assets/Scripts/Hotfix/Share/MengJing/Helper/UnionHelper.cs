@@ -4,6 +4,20 @@ namespace ET
 {
     public static class UnionHelper
     {
+        
+        public static async ETTask SendUnionOperate(Scene root, long unionId, int getWay, int dataType,  long dataValue)
+        {
+            // if (unionid == 0)
+            // {
+            //     return;
+            // }
+            // string playerName = self.UserInfo.Name;
+            // long serverod = DBHelper.GetUnionServerId(self.DomainZone() );
+            // U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await ActorMessageSenderComponent.Instance.Call(
+            //     serverod, new M2U_UnionOperationRequest() { OperateType = 1, UnionId = unionid, Par = $"{playerName}_{getWay}_{dataType}_{dataValue}" });
+            await ETTask.CompletedTask;
+        }
+        
         public static int CalcuNeedeForAccele(long startTime, long needTime)
         {
             int g = GlobalValueConfigCategory.Instance.Get(105).Value2;

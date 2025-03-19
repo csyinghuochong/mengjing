@@ -45,21 +45,17 @@ namespace ET.Client
             for (int i = 0; i < showConfigs.Count; i++)
             {
                 ActivityConfig activityConfig = showConfigs[i];
-
-                Transform itemTransform = null;
-                using (zstring.Block())
-                {
-                    itemTransform = self.uiTransform.Find(zstring.Format("ActivityLoginItem_{0}", i + 1));
+                
+                Transform  itemTransform = self.uiTransform.Find($"ActivityLoginItem_{i + 1}");
                     
-                    itemTransform.Find("Text_Day").GetComponent<Text>().text = zstring.Format("{0}", i + 1);
+                itemTransform.Find("Text_Day").GetComponent<Text>().text = (i + 1).ToString();
 
-                    string[] items = activityConfig.Par_3.Split('@');
-                    string[] item = items[0].Split(';');
-                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(item[0]));
-                    itemTransform.Find("Img_ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
-                    itemTransform.Find("Text_ItemName").GetComponent<Text>().text = zstring.Format("{0} x {1}", itemConfig.ItemName, int.Parse(item[1]));
-                    itemTransform.Find("Text_ItemName").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
-                }
+                string[] items = activityConfig.Par_3.Split('@');
+                string[] item = items[0].Split(';');
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(item[0]));
+                itemTransform.Find("Img_ItemIcon").GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+                itemTransform.Find("Text_ItemName").GetComponent<Text>().text = $"{itemConfig.ItemName} x {item[1]}";
+                itemTransform.Find("Text_ItemName").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
                 bool received = activityComponent.ActivityReceiveIds.Contains(activityConfig.Id);
                 itemTransform.Find("Btn_Receive").gameObject.SetActive(!received);
@@ -67,8 +63,9 @@ namespace ET.Client
                 itemTransform.Find("Text_State").GetComponent<Text>().text = received ? "已领取" : "待签到";
                 
                 bool canReceive = self.CanReceive(activityConfig.Id) && !todayrecv;
-                CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_Di").gameObject,  !canReceive  );
-                CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_ItemIcon").gameObject,  !canReceive  );
+                bool allReceive = activityComponent.ActivityReceiveIds.Contains(activityConfig.Id);
+                //CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_Di").gameObject,  !canReceive  );
+                CommonViewHelper.SetImageGray( self.Root(), itemTransform.Find("Img_ItemIcon").gameObject,  !canReceive && !allReceive );
                 itemTransform.Find("Btn_Receive").GetComponent<Button>().AddListener(() => { self.OnBtn_Receive(activityConfig).Coroutine(); });
             }
         }
