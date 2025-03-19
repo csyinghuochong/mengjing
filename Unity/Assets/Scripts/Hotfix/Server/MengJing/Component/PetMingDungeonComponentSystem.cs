@@ -187,7 +187,7 @@ namespace ET.Server
                      if (petComponent_enemy != null)
                      {
                          BagComponentS bagComponentS = await UnitCacheHelper.GetComponentCache<BagComponentS>(self.Root(), enemyId);
-                         bagComponentS.Deserialize();
+                         bagComponentS.DeserializeCache();
                          NumericComponentS numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponentS>(self.Root(), enemyId);
                          
                          petComponent_enemy.CheckSkin();

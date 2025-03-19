@@ -71,36 +71,6 @@ namespace ET.Server
             self.PlayerState = PlayerState.Game;
         }
         
-        public static void OnDisconnect(this DBSaveComponent self)
-        {
-            Console.WriteLine($"OnDisconnect: {self.Id}");
-            
-            Unit unit = self.GetParent<Unit>();
-            string offLineInfo = $"{unit.Zone()}区： " +
-                    $"unit.id: {unit.Id} : " +
-                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
-                    $"{  TimeHelper.DateTimeNow().ToString()}  移除";
-
-            Scene scene = unit.Scene();
-            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
-            if (sceneTypeEnum == SceneTypeEnum.MainCityScene)
-            {
-                unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());
-            }
-           
-            if (!unit.IsRobot())
-            {
-                self.UpdateCacheDB();
-                ServerLogHelper.LoginInfo(offLineInfo);
-                ServerLogHelper.LogDebug(offLineInfo);
-            }
-            unit.GetComponent<EnergyComponentS>().OnDisconnect();
-            self.PlayerState = PlayerState.None;
-            TransferHelper.BeforeTransfer(unit);
-            unit.GetParent<UnitComponent>().Remove(unit.Id);
-            TransferHelper.OnPlayerDisconnect(scene, unit.Id);
-        }
-        
         //离线
         public static  void OnOffLine(this DBSaveComponent self)
         {
@@ -132,7 +102,37 @@ namespace ET.Server
                 self.UpdateCacheDB();
             }
         }
+        
+        
+        public static void OnDisconnect(this DBSaveComponent self)
+        {
+            Console.WriteLine($"OnDisconnect: {self.Id}");
+            
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}  移除";
 
+            Scene scene = unit.Scene();
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            if (sceneTypeEnum == SceneTypeEnum.MainCityScene)
+            {
+                unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());
+            }
+           
+            if (!unit.IsRobot())
+            {
+                self.UpdateCacheDB();
+                ServerLogHelper.LoginInfo(offLineInfo);
+                ServerLogHelper.LogDebug(offLineInfo);
+            }
+            unit.GetComponent<EnergyComponentS>().OnDisconnect();
+            self.PlayerState = PlayerState.None;
+            TransferHelper.BeforeTransfer(unit);
+            unit.GetParent<UnitComponent>().Remove(unit.Id);
+            TransferHelper.OnPlayerDisconnect(scene, unit.Id);
+        }
         
         public static void Activeted(this DBSaveComponent self)
         {

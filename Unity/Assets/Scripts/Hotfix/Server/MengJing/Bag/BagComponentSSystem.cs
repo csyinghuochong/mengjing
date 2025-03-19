@@ -22,7 +22,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        public static void Deserialize(this BagComponentS self)
+        private static void Deserialize(this BagComponentS self)
         {
             if (self.AllItemList == null)
             {
@@ -38,6 +38,29 @@ namespace ET.Server
             }
 
             foreach (Entity entity in self.Children.Values)
+            {
+                ItemInfo itemInfo = entity as ItemInfo;
+
+                self.AllItemList[itemInfo.Loc].Add(itemInfo);
+            }
+        }
+        
+        public static void DeserializeCache(this BagComponentS self)
+        {
+            if (self.AllItemList == null)
+            {
+                self.AllItemList = new();
+            }
+
+            for (int i = 0; i < ItemLocType.ItemLocMax; i++)
+            {
+                if (!self.AllItemList.ContainsKey(i))
+                {
+                    self.AllItemList.Add(i, new());
+                }
+            }
+
+            foreach (Entity entity in self.ChildrenDB)
             {
                 ItemInfo itemInfo = entity as ItemInfo;
 
