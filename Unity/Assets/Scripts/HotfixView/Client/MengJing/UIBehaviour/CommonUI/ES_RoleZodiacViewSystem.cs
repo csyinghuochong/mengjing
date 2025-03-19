@@ -137,9 +137,9 @@ namespace ET.Client
                 item.transform.Find("Text_Name").GetComponent<Text>().text = itemConfig.ItemName;
                 item.transform.Find("Text_Name").GetComponent<Text>().color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
+                item.transform.Find("Btn_Click").GetComponent<Button>().onClick.RemoveAllListeners();
                 if (itemInfo != null)
                 {
-                    item.transform.Find("Btn_Click").GetComponent<Button>().onClick.RemoveAllListeners();
                     item.transform.Find("Btn_Click").GetComponent<Button>().AddListener(() => { self.OnClickZodiacItem(itemInfo); });
                 }
 
