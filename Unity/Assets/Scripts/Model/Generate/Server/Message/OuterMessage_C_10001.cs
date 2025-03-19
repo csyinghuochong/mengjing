@@ -3556,6 +3556,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public int OccTwo { get; set; }
 
+        [MemoryPackOrder(7)]
+        public long LastLoginTime { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3570,6 +3573,7 @@ namespace ET
             this.Combat = default;
             this.Occ = default;
             this.OccTwo = default;
+            this.LastLoginTime = default;
 
             ObjectPool.Instance.Recycle(this);
         }

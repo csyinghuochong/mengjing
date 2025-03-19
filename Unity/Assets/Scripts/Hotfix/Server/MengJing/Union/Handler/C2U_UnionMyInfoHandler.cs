@@ -26,13 +26,12 @@ namespace ET.Server
                     long userId = unionPlayerInfo.UserID;
 
                     UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), userId);
-                    UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                     if (userInfoComponent == null)
                     {
                         dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
                         continue;
                     }
-
+                    UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;
                     if (unionPlayerInfo.Position == 1 && unionPlayerInfo.UserID != dBUnionInfo.UnionInfo.LeaderId)
                     {
                         unionPlayerInfo.Position = 0;
@@ -49,7 +48,13 @@ namespace ET.Server
 
                     if (allonlines.Contains(request.UnitId))
                     {
+                        unionPlayerInfo.LastLoginTime = 0;
                         response.OnLinePlayer.Add(userId);
+                    }
+                    else
+                    {
+                        NumericComponentS numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), userId);
+                        unionPlayerInfo.LastLoginTime = numericComponentS.GetAsLong(NumericType.LastLoginTime);
                     }
 
                     if (dBUnionInfo.UnionInfo.LeaderId == userId)
