@@ -171,8 +171,10 @@ namespace ET.Client
             Coffee.UIExtensions.UIParticle uiParticle = UIParticle.GetComponent<Coffee.UIExtensions.UIParticle>();
             if (uiParticle != null)
             {
-                uiParticle.enabled = false;
-                uiParticle.enabled = true;
+                //uiParticle.enabled = false;
+                //uiParticle.enabled = true;
+                uiParticle.particles.Clear();   
+                uiParticle.RefreshParticles();
                 uiParticle.scale = scale;       
             }
             //uiParticle = uiParticle.gameObject.AddComponent<Coffee.UIExtensions.UIParticle>();

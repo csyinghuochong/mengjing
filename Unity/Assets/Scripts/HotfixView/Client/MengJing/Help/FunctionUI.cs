@@ -204,6 +204,35 @@ namespace ET.Client
             return path;
         }
 
+        //ItemQualityBig_2
+        public static string BigItemQualiytoPath(int itemQuality)
+        {
+            string path = "";
+            switch (itemQuality)
+            {
+                case 1:
+                    path = "ItemQualityBig_1";
+                    break;
+                case 2:
+                    path = "ItemQualityBig_2";
+                    break;
+                case 3:
+                    path = "ItemQualityBig_3";
+                    break;
+                case 4:
+                    path = "ItemQualityBig_4";
+                    break;
+                case 5:
+                    path = "ItemQualityBig_5";
+                    break;
+                case 6:
+                    path = "ItemQualityBig_6";
+                    break;
+            }
+
+            return path;
+        }
+        
         public static string ItemQualityLine(int itemQuality)
         {
             return $"QuaDiline_{itemQuality}";

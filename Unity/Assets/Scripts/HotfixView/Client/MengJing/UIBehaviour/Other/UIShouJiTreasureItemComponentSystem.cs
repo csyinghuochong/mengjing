@@ -111,8 +111,12 @@ namespace ET.Client
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(shouJiItemConfig.ItemID);   
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
-            self.ImageQuality.GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(
-                ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality)));
+
+            if (actived)
+            {
+                self.ImageQuality.GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(
+                    ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.BigItemQualiytoPath(itemConfig.ItemQuality)));
+            }
             
             // 显示红点
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
