@@ -999,7 +999,7 @@ namespace ET.Server
                 self.CheckSystemTask();
             }
 
-            self.UpdateTargetTask(false);
+            self.UpdateWelfareTask(false);
             self.TriggerTaskEvent(TaskTargetType.Login_1001, 0, 1, false);
 
             //numericComponent.ApplyValue(NumericType.RankID, chat2G_EnterChat.RankId, false, false);
@@ -1420,7 +1420,7 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateTargetTask(this TaskComponentS self, bool notice)
+        public static void UpdateWelfareTask(this TaskComponentS self, bool notice)
         {
             int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetCrateDay();
             if (createDay == 0 || createDay > ConfigData.WelfareTaskList.Count)
@@ -1597,7 +1597,7 @@ namespace ET.Server
             self.OnLineTime = 0;
             Unit unit = self.GetParent<Unit>();
             self.UpdateDailyList(notice);
-            self.UpdateTargetTask(notice);
+            self.UpdateWelfareTask(notice);
             
             if (notice)
             {

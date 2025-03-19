@@ -777,7 +777,7 @@ namespace ET.Server
 
         public static int GetCrateDay(this UserInfoComponentS self)
         {
-            return 1;
+            return  TimeHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
         }
 
         public static long GetReviveTime(this UserInfoComponentS self, int monsterId)
