@@ -30,6 +30,7 @@ namespace ET.Client
             });
 
             self.E_Btn_CreateButton.AddListenerAsync(self.OnBtn_CreateButton);
+            self.E_ButtonJoin.AddListenerAsync(self.OnButtonJoin);
 
             self.E_InputFieldPurposeInputField.onValueChanged.AddListener((string text) =>
             {
@@ -39,6 +40,7 @@ namespace ET.Client
             self.E_UnionListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionListItemsRefresh);
 
             self.OnInitUI();
+            self.ResetUI();
         }
 
         [EntitySystem]
@@ -50,7 +52,12 @@ namespace ET.Client
         private static void OnUnionListItemsRefresh(this ES_UnionShow self, Transform transform, int index)
         {
             Scroll_Item_UnionListItem scrollItemUnionListItem = self.ScrollItemUnionListItems[index].BindTrans(transform);
-            scrollItemUnionListItem.Refresh(self.ShowUnionListItems[index]);
+            scrollItemUnionListItem.Refresh(self.ShowUnionListItems[index], self.OnSelectUnionItem);
+
+            if (index == 0)
+            {
+                self.OnSelectUnionItem(self.ShowUnionListItems[index]); 
+            }
         }
 
         public static void OnCreateUnion(this ES_UnionShow self)
@@ -68,7 +75,53 @@ namespace ET.Client
 
             self.OnUpdateListUI().Coroutine();
         }
+        
 
+        public static void OnSelectUnionItem(this ES_UnionShow self, UnionListItem unionListItem)
+        {
+            self.UnionListItem = unionListItem;
+            self.E_Text_Info.text = unionListItem.UnionPurpose;
+            self.E_Text_Request.text = "等级>=1";    
+            self.E_ButtonJoin.gameObject.SetActive(true);  
+        }
+
+        public static async ETTask OnButtonJoin(this ES_UnionShow self)
+        {
+            if (self.UnionListItem == null)
+            {
+                return;
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            long unionId = numericComponent.GetAsLong(NumericType.UnionId_0);
+            if (unionId != 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请先退出公会");
+                return;
+            }
+
+            long leaveTime = numericComponent.GetAsLong(NumericType.UnionIdLeaveTime);
+            if (TimeHelper.ServerNow() - leaveTime < TimeHelper.Hour * 8)
+            {
+                string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0} 后才能加入家族！", tip));
+                }
+
+                return;
+            }
+
+            await UnionNetHelper.UnionApplyRequest(self.Root(), self.UnionListItem.UnionId, unit.Id);
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            FlyTipComponent.Instance.ShowFlyTip("已申请加入");
+        }
+        
         public static async ETTask OnUpdateListUI(this ES_UnionShow self)
         {
             if (self.ShowUnionListItems == null)
@@ -109,6 +162,10 @@ namespace ET.Client
         public static void ResetUI(this ES_UnionShow self)
         {
             // self.UnionList = null;
+            self.E_Text_Info.text = string.Empty;
+            self.E_Text_Request.text = string.Empty;    
+            self.E_ButtonJoin.gameObject.SetActive(false);  
+            self.UnionListItem = null;  
         }
 
         public static void CheckSensitiveWords(this ES_UnionShow self, GameObject InputField)
@@ -126,6 +183,7 @@ namespace ET.Client
                 self.E_Text_Contion1Text.text = zstring.Format("1. 角色等级达到{0}级", GlobalValueConfigCategory.Instance.Get(21).Value);
                 self.E_Text_Contion2Text.text = zstring.Format("2. 消耗{0}钻石", GlobalValueConfigCategory.Instance.Get(22).Value);
             }
+            
         }
 
         public static async ETTask OnBtn_CreateButton(this ES_UnionShow self)

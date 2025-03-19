@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -7,6 +8,7 @@ namespace ET.Client
 	public  class Scroll_Item_UnionListItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_UnionListItem>
 	{
 		public UnionListItem UnionListItem;
+		public Action<UnionListItem> ClickCallback;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -93,78 +95,6 @@ namespace ET.Client
      		}
      	}
 
-		public Text E_Text_RequestText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_Text_RequestText == null )
-     				{
-		    			this.m_E_Text_RequestText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Request");
-     				}
-     				return this.m_E_Text_RequestText;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Request");
-     			}
-     		}
-     	}
-
-		public Button E_ButtonApplyButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ButtonApplyButton == null )
-     				{
-		    			this.m_E_ButtonApplyButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonApply");
-     				}
-     				return this.m_E_ButtonApplyButton;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonApply");
-     			}
-     		}
-     	}
-
-		public Image E_ButtonApplyImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ButtonApplyImage == null )
-     				{
-		    			this.m_E_ButtonApplyImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonApply");
-     				}
-     				return this.m_E_ButtonApplyImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonApply");
-     			}
-     		}
-     	}
-
 		public Text E_Text_LeaderText
      	{
      		get
@@ -188,16 +118,38 @@ namespace ET.Client
      			}
      		}
      	}
-
+		
+		public Button E_ButtonImageDI
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ButtonImageDI == null )
+					{
+						this.m_E_ButtonImageDI = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonImageDI");
+					}
+					return this.m_E_ButtonImageDI;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonImageDI");
+				}
+			}
+		}
+        
 		public void DestroyWidget()
 		{
 			this.m_E_Text_LevelText = null;
 			this.m_E_Text_NameText = null;
 			this.m_E_Text_NumberText = null;
-			this.m_E_Text_RequestText = null;
-			this.m_E_ButtonApplyButton = null;
-			this.m_E_ButtonApplyImage = null;
 			this.m_E_Text_LeaderText = null;
+			this.m_E_ButtonImageDI = null;	
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -205,10 +157,8 @@ namespace ET.Client
 		private Text m_E_Text_LevelText = null;
 		private Text m_E_Text_NameText = null;
 		private Text m_E_Text_NumberText = null;
-		private Text m_E_Text_RequestText = null;
-		private Button m_E_ButtonApplyButton = null;
-		private Image m_E_ButtonApplyImage = null;
 		private Text m_E_Text_LeaderText = null;
+		private Button m_E_ButtonImageDI = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -10,6 +10,7 @@ namespace ET.Client
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_UnionListItem>> ScrollItemUnionListItems;
 		public List<UnionListItem> ShowUnionListItems;
+		public UnionListItem UnionListItem;
 		
 		public RectTransform EG_UIUnionCreateRectTransform
      	{
@@ -266,6 +267,57 @@ namespace ET.Client
      		}
      	}
 
+		public Text E_Text_Info
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Info == null )
+				{
+					this.m_E_Text_Info = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UIUnionList/E_Text_Info");
+				}
+				return this.m_E_Text_Info;
+			}
+		}
+
+		public Text E_Text_Request
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Request == null )
+				{
+					this.m_E_Text_Request = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UIUnionList/E_Text_Request");
+				}
+				return this.m_E_Text_Request;
+			}
+		}
+	
+		public Button E_ButtonJoin
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonJoin == null )
+				{
+					this.m_E_ButtonJoin = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIUnionList/E_ButtonJoin");
+				}
+				return this.m_E_ButtonJoin;
+			}
+		}
+        
 		    public Transform UITransform
          {
      	    get
@@ -295,6 +347,9 @@ namespace ET.Client
 			this.m_E_UnionListItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonCreateButton = null;
 			this.m_E_ButtonCreateImage = null;
+			this.m_E_Text_Info = null;
+			this.m_E_Text_Request = null;
+			this.m_E_ButtonJoin = null;
 			this.uiTransform = null;
 		}
 
@@ -313,6 +368,9 @@ namespace ET.Client
 		private LoopVerticalScrollRect m_E_UnionListItemsLoopVerticalScrollRect = null;
 		private Button m_E_ButtonCreateButton = null;
 		private Image m_E_ButtonCreateImage = null;
+		private Text m_E_Text_Info = null;
+		private Text m_E_Text_Request = null;
+		private Button m_E_ButtonJoin = null;
 		public Transform uiTransform = null;
 	}
 }
