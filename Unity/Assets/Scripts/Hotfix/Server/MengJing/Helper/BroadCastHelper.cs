@@ -89,6 +89,22 @@ namespace ET.Server
             }
         }
         
+        public static async ETTask SendUnionOperate(Scene root, long unionId, int getWay, int dataType,  long dataValue, string parmass)
+        {
+            if (unionId == 0)
+            {
+                return;
+            }
+        
+            ActorId serverod = UnitCacheHelper.GetUnionServerId(root.Zone() );
+            M2U_UnionOperationRequest m2UUnionOperationRequest  = M2U_UnionOperationRequest.Create();
+            m2UUnionOperationRequest.OperateType = 1;
+            m2UUnionOperationRequest.UnionId = unionId;
+            m2UUnionOperationRequest.Par = $"{getWay}_{dataType}_{dataValue}_{parmass}";
+            U2M_UnionOperationResponse responseUnionEnter =  (U2M_UnionOperationResponse)await root.GetComponent<MessageSender>().Call
+                    (serverod, m2UUnionOperationRequest);
+            await ETTask.CompletedTask;
+        }
     }
     
 }

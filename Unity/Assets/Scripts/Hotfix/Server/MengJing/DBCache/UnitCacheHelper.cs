@@ -86,6 +86,8 @@ namespace ET.Server
             return null;
         }
         
+        /// <summary>
+        /// 保存玩家组件缓存
         public static async ETTask SaveComponentCache(Scene root,  Entity entity)
         {
             int zone = root.Zone();
@@ -97,7 +99,14 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
         }
-                
+            
+        /// <summary>
+        /// 保存非玩家组件缓存
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="unitId"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
         {
             int zone = root.Zone();

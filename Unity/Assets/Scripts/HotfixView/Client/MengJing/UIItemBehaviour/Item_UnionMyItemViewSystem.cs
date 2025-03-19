@@ -22,6 +22,7 @@ namespace ET.Client
             List<int> vs = new List<int>() { MenuOperation.Watch };
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            
             UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
             if (mainPlayerInfo == null)
             {

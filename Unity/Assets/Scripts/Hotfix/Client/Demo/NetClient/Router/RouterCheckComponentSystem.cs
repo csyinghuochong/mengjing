@@ -38,7 +38,7 @@ namespace ET.Client
 
                 long time = TimeInfo.Instance.ClientFrameTime();
 
-                if (time - session.LastRecvTime < 7 * 1000)
+                if (time - session.LastRecvTime < 60 * 1000)
                 {
                     continue;
                 }

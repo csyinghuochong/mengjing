@@ -86,7 +86,7 @@ namespace ET.Server
                             dBUnionInfo.UnionInfo.ActiveRecord.RemoveAt(0);
                         }
 
-                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo).Coroutine();
                         break;
                     case 2:  //获取等级
                         response.Par = dBUnionInfo.UnionInfo.Level.ToString();
@@ -134,11 +134,11 @@ namespace ET.Server
                         DonationRecord.Time = TimeHelper.ServerNow();
                         DonationRecord.UnitId = request.UnitId;
                         dBUnionInfo.UnionInfo.DonationRecords.Add(DonationRecord);
-                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
                         break;
                     case 5: //增加金币
                         dBUnionInfo.UnionInfo.UnionGold += int.Parse(request.Par);
-                        UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo).Coroutine();
                         break;
                     default:
                         break;

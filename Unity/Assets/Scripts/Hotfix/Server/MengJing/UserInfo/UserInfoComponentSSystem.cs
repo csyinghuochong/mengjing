@@ -230,7 +230,7 @@ namespace ET.Server
 
             if (Type == UserDataType.UnionExp || Type == UserDataType.UnionGold)
             {
-                //UnionHelper.SendUnionOperate(self.Root(),unit.GetUnionId(),  getWay, Type, gold,string.Empty).Coroutine();
+                BroadCastHelper.SendUnionOperate(self.Root(), unit.GetUnionId(),  getWay, Type, gold,string.Empty).Coroutine();
             }
 
             self.UpdateRoleData(Type, value, notice);
