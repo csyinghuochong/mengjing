@@ -16,11 +16,27 @@ namespace ET.Client
 
 		public static void RegisterUIEvent(this DlgUnion self)
 		{
-			self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-		
+			self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn, self.CheckPageButton_1);
 			self.RequestFriendInfo().Coroutine();
         }
 
+		public static bool CheckPageButton_1(this DlgUnion self, int page)
+		{
+			if (page == 0)
+			{
+				return true;
+			}
+
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+			if (unionId == 0)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
+			}
+			
+			return unionId > 0;
+		}
+        
 		public static async ETTask RequestFriendInfo(this DlgUnion self)
 		{
 			if (self.IsDisposed)

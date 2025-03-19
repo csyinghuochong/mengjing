@@ -135,7 +135,7 @@ namespace ET
                 time %= 24 * 60 * 60;
             }
 
-            str += $"{time / (60 * 60)}时";
+            str += $"{Math.Ceiling(time * 1f/ (60 * 60))}时";
             return str;
         }
 

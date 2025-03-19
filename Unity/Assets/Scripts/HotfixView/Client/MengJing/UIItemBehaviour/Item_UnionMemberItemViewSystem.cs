@@ -94,7 +94,7 @@ namespace ET.Client
             else
             {
                 long curTime = TimeHelper.ServerNow() - lastloginTime;
-               return "离线：" + TimeHelper.ShowLeftTime(curTime); 
+               return "离线：" + TimeHelper.ShowLeftTime2(curTime); 
             }
         }
 
