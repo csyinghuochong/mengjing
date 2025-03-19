@@ -101,6 +101,44 @@ namespace ET.Client
 				return this.m_es_unionmember;
 			}
 		}
+		
+		public ES_UnionMystery_A ES_UnionMystery_A
+		{
+			get
+			{
+				ES_UnionMystery_A es = this.m_es_unionmystery_a;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_UnionMystery_A.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_unionmystery_a = this.AddChild<ES_UnionMystery_A, Transform>(go.transform);
+				}
+
+				return this.m_es_unionmystery_a;
+			}
+		}
+
+		public ES_UnionMystery_B ES_UnionMystery_B
+		{
+			get
+			{
+				ES_UnionMystery_B es = this.m_es_unionmystery_b;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_UnionMystery_B.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_unionmystery_b = this.AddChild<ES_UnionMystery_B, Transform>(go.transform);
+				}
+
+				return this.m_es_unionmystery_b;
+			}
+		}
         
 		public void DestroyWidget()
 		{
@@ -108,6 +146,8 @@ namespace ET.Client
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_es_unionshow = null;
 			this.m_es_unionmy = null;
+			this.m_es_unionmystery_a = null;
+			this.m_es_unionmystery_b = null;
 			this.uiTransform = null;
 			this.m_es_unionmember = null;
 			
@@ -125,6 +165,8 @@ namespace ET.Client
 		private EntityRef<ES_UnionShow> m_es_unionshow = null;
 		private EntityRef<ES_UnionMy> m_es_unionmy = null;
 		private EntityRef<ES_UnionMember> m_es_unionmember = null;
+		private EntityRef<ES_UnionMystery_A> m_es_unionmystery_a = null;
+		private EntityRef<ES_UnionMystery_B> m_es_unionmystery_b = null;
         public Transform uiTransform = null;
 	}
 }

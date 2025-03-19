@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	
+	[FriendOf(typeof(ES_UnionMystery_A))]
+	[FriendOf(typeof(ES_UnionMystery_B))]
 	[FriendOf(typeof(ES_UnionMy))]
 	[FriendOf(typeof(ES_UnionShow))]
 	[FriendOf(typeof(ES_UnionMember))]
@@ -78,29 +79,19 @@ namespace ET.Client
 					self.View.ES_UnionShow.OnUpdateUI();
 					break;
 				case 1:
-					Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-					long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-					if (unionId == 0)
-					{
-						FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
-						return;
-					}
-
 					self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionMy.OnUpdateUI().Coroutine();
 					break;
 				case 2:
-					unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-					unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-					if (unionId == 0)
-					{
-						FlyTipComponent.Instance.ShowFlyTip("请先创建或者加入一个家族");
-						return;
-					}
 					self.View.ES_UnionMember.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionMember.OnUpdateUI().Coroutine();
 					break;	
-				default:
+				case 3:
+					self.View.ES_UnionMystery_A.uiTransform.gameObject.SetActive(true);
+					break;
+				case 4:
+					self.View.ES_UnionMystery_B.uiTransform.gameObject.SetActive(true);
+					self.View.ES_UnionMystery_B.OnUpdateUI();
 					break;	
 			}
 		}
