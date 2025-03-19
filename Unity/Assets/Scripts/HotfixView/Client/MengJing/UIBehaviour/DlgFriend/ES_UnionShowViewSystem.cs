@@ -5,6 +5,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(ES_UnionShow))]
     [FriendOfAttribute(typeof(ES_UnionShow))]
+    [FriendOf(typeof(Scroll_Item_UnionListItem))]
     public static partial class ES_UnionShowSystem
     {
         [EntitySystem]
@@ -79,10 +80,21 @@ namespace ET.Client
 
         public static void OnSelectUnionItem(this ES_UnionShow self, UnionListItem unionListItem)
         {
+            long userid = UnitHelper.GetMyUnitId(self.Root());
+            
             self.UnionListItem = unionListItem;
             self.E_Text_Info.text = unionListItem.UnionPurpose;
             self.E_Text_Request.text = "等级>=1";    
-            self.E_ButtonJoin.gameObject.SetActive(true);  
+            self.E_ButtonJoin.gameObject.SetActive(!unionListItem.ApplyList.Contains(userid));  
+            
+            foreach (Scroll_Item_UnionListItem scrollItemUnionListItem in self.ScrollItemUnionListItems.Values)
+            {
+                if (scrollItemUnionListItem.uiTransform == null)
+                {
+                    continue;   
+                }
+                scrollItemUnionListItem.SetSelected(unionListItem.UnionId);
+            }
         }
 
         public static async ETTask OnButtonJoin(this ES_UnionShow self)
@@ -118,7 +130,8 @@ namespace ET.Client
             {
                 return;
             }
-
+            self.UnionListItem.ApplyList.Add(unit.Id);
+            self.E_ButtonJoin.gameObject.SetActive(false);  
             FlyTipComponent.Instance.ShowFlyTip("已申请加入");
         }
         

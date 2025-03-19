@@ -142,6 +142,30 @@ namespace ET.Client
 				}
 			}
 		}
+
+		public Transform E_ImageHighLight
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ImageHighLight == null )
+					{
+						this.m_E_ImageHighLight = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_ImageHighLight");
+					}
+					return this.m_E_ImageHighLight;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_ImageHighLight");
+				}
+			}
+		}	
         
 		public void DestroyWidget()
 		{
@@ -150,6 +174,7 @@ namespace ET.Client
 			this.m_E_Text_NumberText = null;
 			this.m_E_Text_LeaderText = null;
 			this.m_E_ButtonImageDI = null;	
+			this.m_E_ImageHighLight = null;	
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -159,6 +184,7 @@ namespace ET.Client
 		private Text m_E_Text_NumberText = null;
 		private Text m_E_Text_LeaderText = null;
 		private Button m_E_ButtonImageDI = null;
+		private Transform m_E_ImageHighLight = null;	
 		public Transform uiTransform = null;
 	}
 }

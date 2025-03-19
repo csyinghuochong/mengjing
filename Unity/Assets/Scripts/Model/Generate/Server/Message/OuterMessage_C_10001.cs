@@ -16873,6 +16873,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public string UnionPurpose { get; set; }
 
+        [MemoryPackOrder(7)]
+        public List<long> ApplyList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -16887,6 +16890,7 @@ namespace ET
             this.UnionLevel = default;
             this.UnionLeader = default;
             this.UnionPurpose = default;
+            this.ApplyList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

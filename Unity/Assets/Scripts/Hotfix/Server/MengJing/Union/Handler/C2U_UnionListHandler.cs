@@ -28,6 +28,7 @@ namespace ET.Server
                 unionListItem.UnionLevel = Math.Max(dBUnionInfo.UnionInfo.Level, 1);
                 unionListItem.UnionLeader = dBUnionInfo.UnionInfo.LeaderName;
                 unionListItem.UnionPurpose = dBUnionInfo.UnionInfo.UnionPurpose;
+                unionListItem.ApplyList = dBUnionInfo.UnionInfo.ApplyList;  
                 unionList.Add(unionListItem);
             }
             response.UnionList = unionList;

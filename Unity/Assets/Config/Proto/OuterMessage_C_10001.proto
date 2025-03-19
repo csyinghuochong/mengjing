@@ -3872,6 +3872,7 @@ message UnionListItem
 	int32 UnionLevel = 5;
 	string UnionLeader = 6;
 	string UnionPurpose = 7;	
+	repeated int64 ApplyList = 8;
 }
 
 //公会列表
