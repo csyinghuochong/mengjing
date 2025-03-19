@@ -48,7 +48,7 @@ namespace ET.Client
                 {
                     itemTransform = self.uiTransform.Find(zstring.Format("ActivityLoginItem_{0}", i + 1));
                     
-                    itemTransform.Find("Text_Day").GetComponent<Text>().text = zstring.Format("0{0}", i + 1);
+                    itemTransform.Find("Text_Day").GetComponent<Text>().text = zstring.Format("{0}", i + 1);
 
                     string[] items = activityConfig.Par_3.Split('@');
                     string[] item = items[0].Split(';');
