@@ -168,12 +168,6 @@ namespace ET.Server
                         }
                     }
                 }
-
-
-                dBUnionInfo.UnionInfo.Level = 8;
-                dBUnionInfo.UnionInfo.UnionGold = 90000000;
-                Console.WriteLine($"C2U_UnionMyInfoHandler  测试数据");
-
                 response.UnionMyInfo = dBUnionInfo.UnionInfo;
                 UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             }
