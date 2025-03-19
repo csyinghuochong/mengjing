@@ -174,8 +174,7 @@ namespace ET.Server
             self.CheckData();
             self.RemoteAddress = remoteIp;
             self.DeviceName = deviceName;
-
-            self.LastLoginTime = currentTime;
+            
             self.UserName = self.UserInfo.Name;
             self.ShouLieSendTime = 0;
         }
@@ -627,7 +626,6 @@ namespace ET.Server
             self.ClearDayData();
             self.TodayOnLine = 0;
             self.ShouLieKill = 0;
-            self.LastLoginTime = TimeHelper.ServerNow();
             
             if (notice)
             {
@@ -667,7 +665,6 @@ namespace ET.Server
 
             //Log.Warning($"[增加疲劳] {unit.DomainZone()}  {unit.Id}   {0}  {recoverPiLao}");
             self.UpdateRoleData(UserDataType.PiLao, recoverPiLao.ToString(), notice);
-            self.LastLoginTime = TimeHelper.ServerNow();
         }
 
         public static int GetMaxPiLao(this Unit self)

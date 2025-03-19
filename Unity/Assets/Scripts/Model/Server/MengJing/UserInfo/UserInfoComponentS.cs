@@ -10,12 +10,7 @@ namespace ET.Server
 
         [BsonIgnore]
         public UserInfo UserInfo { get; set; }
-
-        /// <summary>
-        /// 登录或者零点刷新的时候会改变.主要用来体力恢复，刷新数据
-        /// </summary>
-        public long LastLoginTime { get; set; }
-
+        
         /// <summary>
         /// 领地经验
         /// </summary>

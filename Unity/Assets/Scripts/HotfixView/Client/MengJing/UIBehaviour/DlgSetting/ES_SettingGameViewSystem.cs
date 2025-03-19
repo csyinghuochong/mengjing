@@ -489,7 +489,7 @@ namespace ET.Client
             self.E_TextVersionText.text = GlobalHelp.GetBigVersion().ToString();
             self.E_InputFieldCNameInputField.text = self.UserInfoComponent.UserInfo.Name;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long lastTime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.LastGameTime);
+            long lastTime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.LastLoginTime);
             self.E_LastLoginTimeText.text = TimeInfo.Instance.ToDateTime(lastTime).ToString();
         }
 

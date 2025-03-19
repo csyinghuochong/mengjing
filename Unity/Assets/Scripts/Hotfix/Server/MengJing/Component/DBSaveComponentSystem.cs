@@ -51,7 +51,7 @@ namespace ET.Server
             }
             self.PlayerState = PlayerState.Game;
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false); 
+            numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false); 
         }
         
         public static void OnRelogin(this DBSaveComponent self)
@@ -93,7 +93,7 @@ namespace ET.Server
                 }
             }
 
-            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false);
+            numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
             self.PlayerState = PlayerState.Disconnect;
             if (!unit.IsRobot())
             {
@@ -128,6 +128,8 @@ namespace ET.Server
                 ServerLogHelper.LogDebug(offLineInfo);
             }
             unit.GetComponent<EnergyComponentS>().OnDisconnect();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.LastLoginTime, TimeHelper.ServerNow(), false);
             self.PlayerState = PlayerState.None;
             TransferHelper.BeforeTransfer(unit);
             unit.GetParent<UnitComponent>().Remove(unit.Id);

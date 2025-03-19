@@ -97,7 +97,7 @@ namespace ET.Server
                         await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);
 
                 if (dBUnionInfo.UnionInfo.JingXuanEndTime == 0 && numericComponent != null &&
-                    timeNow - numericComponent.GetAsLong(NumericType.LastGameTime) > TimeHelper.OneDay * 5)
+                    timeNow - numericComponent.GetAsLong(NumericType.LastLoginTime) > TimeHelper.OneDay * 5)
                 {
                     dBUnionInfo.UnionInfo.JingXuanEndTime = timeNow + TimeHelper.OneDay * 3;
                 }
