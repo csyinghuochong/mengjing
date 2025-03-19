@@ -34,6 +34,7 @@ namespace ET.Client
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();
+            self.ES_CommonItem.UseTextColor = true;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             if (bagInfo.ItemNum <= 1)
             {
@@ -42,7 +43,7 @@ namespace ET.Client
 
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
             
-            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+            string qualityiconStr = FunctionUI.BigItemQualiytoPath(itemConfig.ItemQuality);
             string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
             Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
             self.E_Image_bg.sprite = sp1;
