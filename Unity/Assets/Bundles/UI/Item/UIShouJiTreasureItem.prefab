@@ -1002,6 +1002,8 @@ MonoBehaviour:
     gameObject: {fileID: 4220293892501114744}
   - key: Label_StarNum
     gameObject: {fileID: 6189832257721741832}
+  - key: ImageQuality
+    gameObject: {fileID: 5713891351228173670}
 --- !u!1 &5713891351228173670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1016,7 @@ GameObject:
   - component: {fileID: 5501215827393138546}
   - component: {fileID: 5682197208654212032}
   m_Layer: 5
-  m_Name: Image1
+  m_Name: ImageQuality
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,7 +1039,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 382, y: 425}
+  m_SizeDelta: {x: 340, y: 405}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5501215827393138546
 CanvasRenderer:
@@ -1067,7 +1069,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 01d855ece2d520746a461f57b4730879, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

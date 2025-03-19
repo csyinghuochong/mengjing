@@ -20,6 +20,7 @@ namespace ET.Client
             self.ES_CommonItem = rc.Get<GameObject>("ES_CommonItem");
             self.TextNumber = rc.Get<GameObject>("TextNumber");
             self.Label_StarNum = rc.Get<GameObject>("Label_StarNum");
+            self.ImageQuality = rc.Get<GameObject>("ImageQuality"); 
 
             self.UIItemComponent = self.AddChild<ES_CommonItem, Transform>(self.ES_CommonItem.transform);
             self.ButtonActive.GetComponent<Button>().onClick.AddListener(() => { self.OnButtonActive().Coroutine(); });
@@ -108,6 +109,11 @@ namespace ET.Client
 
             bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
 
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(shouJiItemConfig.ItemID);   
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.ImageQuality.GetComponent<Image>().sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(
+                ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality)));
+            
             // 显示红点
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             self.RedDot.SetActive(bagComponent.GetItemNumber(shouJiItemConfig.ItemID) > 0 && !actived);
