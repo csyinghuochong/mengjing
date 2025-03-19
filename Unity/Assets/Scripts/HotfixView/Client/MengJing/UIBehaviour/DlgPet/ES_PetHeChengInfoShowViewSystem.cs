@@ -147,7 +147,7 @@ namespace ET.Client
         private static void CheckNoPet(this ES_PetHeChengInfoShow self, bool havepet)
         {
             self.E_Text_PetNameText.gameObject.SetActive(havepet);
-            self.E_AddImage.color = havepet ? new Color(1f, 1f, 1f, 0) : new Color(1f, 1f, 1f, 1f);
+            //self.E_AddImage.color = havepet ? new Color(1f, 1f, 1f, 0) : new Color(1f, 1f, 1f, 1f);
             self.ES_ModelShow.SetShow(havepet);
             self.E_Text_PetLevelText.gameObject.SetActive(havepet);
             self.E_Text_PetExpText.gameObject.SetActive(havepet);
