@@ -190,6 +190,31 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_Occ
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Text_Occ == null )
+					{
+						this.m_E_Text_Occ = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Occ");
+					}
+					return this.m_E_Text_Occ;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Occ");
+				}
+			}
+		}
+				
+
 		public void DestroyWidget()
 		{
 			this.m_E_ImageButtonButton = null;
@@ -199,6 +224,7 @@ namespace ET.Client
 			this.m_E_Text_NameText = null;
 			this.m_E_Text_CombatText = null;
 			this.m_E_Text_OnLineText = null;
+			this.m_E_Text_Occ = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -210,6 +236,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_NameText = null;
 		private UnityEngine.UI.Text m_E_Text_CombatText = null;
 		private UnityEngine.UI.Text m_E_Text_OnLineText = null;
+		private UnityEngine.UI.Text m_E_Text_Occ = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -776,7 +776,6 @@ message UnionInfo
 	repeated string ActiveRecord = 18;	//记录 $"{playerName}_{getWay}_{dataType}_{dataValue}
 }
 
-
 message UnionPlayerInfo
 {
 	string PlayerName = 1;

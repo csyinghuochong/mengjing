@@ -99,16 +99,24 @@ namespace ET.Client
         }
 
         public static void OnUpdateUI(this Scroll_Item_UnionMemberItem self, UnionInfo unionInfo, UnionPlayerInfo unionPlayerInfo)
-		{
-			self.E_ImageButtonButton.AddListenerAsync(self.OnOpenMenu);
+        {
+            self.E_ImageButtonButton.AddListenerAsync(self.OnOpenMenu);
 
-			self.UnionInfo = unionInfo;
-			self.CurPlayerInfo = unionPlayerInfo;
-			self.E_Text_NameText.text = unionPlayerInfo.PlayerName;
+            self.UnionInfo = unionInfo;
+            self.CurPlayerInfo = unionPlayerInfo;
+            self.E_Text_NameText.text = unionPlayerInfo.PlayerName;
             self.E_Text_CombatText.text = unionPlayerInfo.Combat.ToString();
-			self.E_Text_LevelText.text = unionPlayerInfo.PlayerLevel.ToString();
-			self.E_Text_PositionText.text = UnionData.UnionPosition[unionPlayerInfo.Position];
-            self.E_Text_OnLineText.text  = self.ShowLeftTime(unionPlayerInfo.LastLoginTime);
+            self.E_Text_LevelText.text = unionPlayerInfo.PlayerLevel.ToString();
+            self.E_Text_PositionText.text = UnionData.UnionPosition[unionPlayerInfo.Position];
+            self.E_Text_OnLineText.text = self.ShowLeftTime(unionPlayerInfo.LastLoginTime);
+            if (unionPlayerInfo.OccTwo > 0)
+            {
+                self.E_Text_Occ.text = OccupationTwoConfigCategory.Instance.Get(unionPlayerInfo.OccTwo).OccupationName;
+            }
+            else
+            {
+                self.E_Text_Occ.text = OccupationConfigCategory.Instance.Get(unionPlayerInfo.Occ).OccupationName;
+            }
 		}
 	}
 }

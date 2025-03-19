@@ -42,6 +42,8 @@ namespace ET.Server
                         unionPlayerInfo.Position = 1;
                     }
 
+                    unionPlayerInfo.Occ = unionInfoCache.Occ;
+                    unionPlayerInfo.OccTwo = unionInfoCache.OccTwo; 
                     unionPlayerInfo.PlayerLevel = unionInfoCache.Lv;
                     unionPlayerInfo.PlayerName = unionInfoCache.Name;
                     unionPlayerInfo.Combat = unionInfoCache.Combat;
@@ -64,12 +66,7 @@ namespace ET.Server
                 }
 
                 long timeNow = TimeHelper.ServerNow();
-
-                if (dBUnionInfo.UnionInfo.Level == 0)
-                {
-                    dBUnionInfo.UnionInfo.Level = 1;
-                }
-
+                dBUnionInfo.UnionInfo.Level = Math.Max(1, dBUnionInfo.UnionInfo.Level);
                 dBUnionInfo.MysteryFreshTime = 0;
 
                 if (dBUnionInfo.UnionInfo.UnionKeJiList.Count < UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count)
