@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -43,10 +44,14 @@ namespace ET.Client
 
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
             
+            
             string qualityiconStr = FunctionUI.BigItemQualiytoPath(itemConfig.ItemQuality);
             string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
             Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
             self.E_Image_bg.sprite = sp1;
+            
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
 
             self.E_ButtonBuyButton.AddListenerAsync(self.OnClickBuyButton);
         }
