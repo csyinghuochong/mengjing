@@ -3703,7 +3703,8 @@ message M2C_UnionDonationResponse // ILocationResponse
 
 //会长才能操作
 //当前已获得祝福类型，发送祝福的时间戳都保存在unioninfo中
-//会长成员和副会长不同的礼包配置在configdata.  只有获取了祝福，才显示发送祝福按钮	
+//会长成员和副会长不同的礼包配置在configdata.  只有获取了祝福，才显示发送祝福按钮	  
+//流程不清楚的问策划。。
 //ResponseType M2C_UnionWishGetResponse
 message C2M_UnionWishGetRequest // ILocationRequest
 {
