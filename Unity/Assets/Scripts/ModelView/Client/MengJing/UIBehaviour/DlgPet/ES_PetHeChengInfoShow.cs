@@ -153,6 +153,23 @@ namespace ET.Client
      		}
      	}
 
+        public Image E_TipImage
+        {
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_E_TipImage == null )
+		        {
+			        this.m_E_TipImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_Tip");
+		        }
+		        return this.m_E_TipImage;
+	        }
+        }
+		
 		public Button E_AddButton
      	{
      		get
@@ -312,6 +329,7 @@ namespace ET.Client
 			this.m_EG_PetZiZhiItem6RectTransform = null;
 			this.m_es_modelshow = null;
 			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+			this.m_E_TipImage = null;
 			this.m_E_AddButton = null;
 			this.m_E_AddImage = null;
 			this.m_E_ImageExpDiImage = null;
@@ -331,6 +349,7 @@ namespace ET.Client
 		private RectTransform m_EG_PetZiZhiItem6RectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private Image m_E_TipImage = null;
 		private Button m_E_AddButton = null;
 		private Image m_E_AddImage = null;
 		private Image m_E_ImageExpDiImage = null;
