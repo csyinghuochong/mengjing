@@ -28,10 +28,7 @@ namespace ET.Client
 
 		private static async ETTask OnClickSendButton(this ES_UnionWish self)
 		{
-			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-
-            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo( self.Root() , unionId);
+            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo( self.Root() );
             if (response.Error != ErrorCode.ERR_Success)
             {
 	            return;

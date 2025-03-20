@@ -100,7 +100,7 @@ namespace ET.Client
 					break;
 				case 6:
 					self.View.ES_UnionOrder.uiTransform.gameObject.SetActive(true);
-					self.View.ES_UnionOrder.OnUpdateUI();
+					self.View.ES_UnionOrder.OnUpdateUI().Coroutine();
 					break;
 				default:
 					break;

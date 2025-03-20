@@ -126,7 +126,7 @@ namespace ET.Client
         {
         	get
         	{
-        		ES_UnionWish es = this.m_es_unionwish;
+		        ES_UnionOrder es = this.m_es_unionorder;
         		if (es == null)
         		{
         			string path = "Assets/Bundles/UI/Common/ES_UnionOrder.prefab";

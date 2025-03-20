@@ -75,9 +75,12 @@
             return response;
         }
 
-        public static async ETTask<U2C_UnionMyInfoResponse> UnionMyInfo(Scene root, long unionId)
+        public static async ETTask<U2C_UnionMyInfoResponse> UnionMyInfo(Scene root)
         {
             Log.Debug(("UnionMyInfo.C2U_UnionMyInfoRequest"));
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+            
             C2U_UnionMyInfoRequest request = C2U_UnionMyInfoRequest.Create();
             request.UnionId = unionId;
             request.UnitId = UnitHelper.GetMyUnitId(root);

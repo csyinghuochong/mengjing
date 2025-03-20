@@ -99,7 +99,7 @@ namespace ET.Client
                 }
             }
 
-            U2C_UnionMyInfoResponse unionrespose = await UnionNetHelper.UnionMyInfo(self.Root(), numericComponent.GetAsLong(NumericType.UnionId_0));
+            U2C_UnionMyInfoResponse unionrespose = await UnionNetHelper.UnionMyInfo(self.Root());
 
             UnionPlayerInfo unionPlayerInfo = UnionHelper.GetUnionPlayerInfo(unionrespose.UnionMyInfo.UnionPlayerList, unit.Id);
             if (unionPlayerInfo.Position == 0)

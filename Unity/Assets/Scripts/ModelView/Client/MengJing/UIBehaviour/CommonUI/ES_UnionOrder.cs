@@ -1,12 +1,17 @@
-﻿
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionOrder : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_UnionOrder : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy, IUILogic
 	{
+
+		public Dictionary<int, EntityRef<Scroll_Item_UnionOrderItem>> ScrollItemUnionListItems;
+		public List<int> ShowTaskIds = new List<int>();	
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_UnionMyItemsLoopVerticalScrollRect
      	{
      		get

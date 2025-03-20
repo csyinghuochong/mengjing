@@ -104,9 +104,7 @@ namespace ET.Client
         {
             //家族等级
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionid = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
-
-            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root(), unionid);
+            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
             if (respose.Error != ErrorCode.ERR_Success)
             {
                 return;

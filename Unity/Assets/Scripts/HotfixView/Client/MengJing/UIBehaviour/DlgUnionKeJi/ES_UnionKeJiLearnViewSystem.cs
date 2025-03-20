@@ -33,10 +33,7 @@ namespace ET.Client
 
         public static async ETTask InitItemList(this ES_UnionKeJiLearn self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            long unionId = unit.GetUnionId();
-
-            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root(), unionId);
+            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
 
             self.UnionMyInfo = respose.UnionMyInfo;
 
