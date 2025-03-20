@@ -7,8 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[FriendOf(typeof(ES_UnionBoss))]
-	[FriendOf(typeof(ES_UnionMystery_A))]
-	[FriendOf(typeof(ES_UnionMystery_B))]
+	[FriendOf(typeof(ES_UnionMystery))]
 	[FriendOf(typeof(ES_UnionMy))]
 	[FriendOf(typeof(ES_UnionShow))]
 	[FriendOf(typeof(ES_UnionMember))]
@@ -89,16 +88,12 @@ namespace ET.Client
 					self.View.ES_UnionMember.OnUpdateUI().Coroutine();
 					break;	
 				case 3:
-					self.View.ES_UnionMystery_A.uiTransform.gameObject.SetActive(true);
+					self.View.ES_UnionMystery.uiTransform.gameObject.SetActive(true);
 					break;
 				case 4:
-					self.View.ES_UnionMystery_B.uiTransform.gameObject.SetActive(true);
-					self.View.ES_UnionMystery_B.OnUpdateUI();
-					break;
-				case 5:
 					self.View.ES_UnionBoss.uiTransform.gameObject.SetActive(true);
 					break;	
-				case 6:
+				case 5:
 					self.View.ES_UnionWish.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionWish.OnUpdateUI();
 					break;
