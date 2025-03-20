@@ -188,6 +188,7 @@ namespace ET.Client
 		private EntityRef<ES_UnionMystery> m_es_unionmystery = null;
 		private EntityRef<ES_UnionBoss> m_es_unionboss = null;
 		private EntityRef<ES_UnionWish> m_es_unionwish = null;
+		
         public Transform uiTransform = null;
 	}
 }
