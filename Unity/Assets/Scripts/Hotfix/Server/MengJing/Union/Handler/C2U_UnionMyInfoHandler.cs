@@ -94,6 +94,14 @@ namespace ET.Server
                     }
                 }
 
+                //检测订单是否可以刷新
+                if (TimeHelper.ServerNow() - dBUnionInfo.UnionInfo.UnionOrderTime > TimeHelper.Minute * 1)
+                {
+                    dBUnionInfo.UnionInfo.UnionOrderTime = TimeHelper.ServerNow();
+                    dBUnionInfo.UnionInfo.UnionOrderTask.Clear();
+                    dBUnionInfo.UnionInfo.UnionOrderTask = TaskHelper.GetTaskListByType(TaskTypeEnum.UnionOrder, dBUnionInfo.UnionInfo.Level, 5);
+                }
+
                 ///判断族长离线时间
                 NumericComponentS numericComponent =
                         await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);

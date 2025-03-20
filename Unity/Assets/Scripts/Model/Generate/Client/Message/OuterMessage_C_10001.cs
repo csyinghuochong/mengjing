@@ -3506,7 +3506,7 @@ namespace ET
         /// 公会订单任务
         /// </summary>
         [MemoryPackOrder(20)]
-        public long UnionOrderTask { get; set; }
+        public List<int> UnionOrderTask { get; set; } = new();
 
         public override void Dispose()
         {
@@ -3535,7 +3535,7 @@ namespace ET
             this.ActiveRecord.Clear();
             this.UnionWishTime = default;
             this.UnionOrderTime = default;
-            this.UnionOrderTask = default;
+            this.UnionOrderTask.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
