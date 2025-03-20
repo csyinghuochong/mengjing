@@ -18,13 +18,7 @@ namespace ET.Server
                 return;
             }
 
-            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
-            if (userInfoComponentS.UserInfo.Diamond < ConfigData.UnionWishSendDiamondCost)
-            {
-                response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                return;
-            }
-
+  
             ActorId unionserverid = UnitCacheHelper.GetUnionServerId( unit.Zone() );
             M2U_UnionWishSendRequest transferRequest = M2U_UnionWishSendRequest.Create();
             transferRequest.UnionId = unionid;
@@ -36,8 +30,6 @@ namespace ET.Server
                 response.Error = responseUnionEnter.Error;
                 return;
             }
-            
-            userInfoComponentS.UpdateRoleMoneySub( UserDataType.Diamond, (ConfigData.UnionWishSendDiamondCost * -1).ToString(), true, ItemGetWay.UnionWish  );
             
             await ETTask.CompletedTask;
         }

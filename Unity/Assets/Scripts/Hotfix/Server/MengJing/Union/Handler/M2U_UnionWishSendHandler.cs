@@ -22,6 +22,12 @@ namespace ET.Server
                 return;
             }
 
+            if (dBUnionInfo.UnionInfo.UnionGold < ConfigData.UnionWishSendDiamondCost)
+            {
+                response.Error = ErrorCode.ERR_UnionGoldNotEnough;
+                return;
+            }
+
             for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
             {
                 UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
@@ -46,7 +52,8 @@ namespace ET.Server
                 
                 MailHelp.SendUserMail(scene.Root(), unionPlayerInfo.UserID, mailInfo,ItemGetWay.UnionWish).Coroutine();
             }
-            
+
+            dBUnionInfo.UnionInfo.UnionGold -= ConfigData.UnionWishSendDiamondCost;
             dBUnionInfo.UnionInfo.UnionWishTime = TimeHelper.ServerNow(); 
             await UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo);
         }
