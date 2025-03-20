@@ -101,6 +101,25 @@ namespace ET.Client
 				return this.m_es_unionmember;
 			}
 		}
+
+		public ES_UnionWish ES_UnionWish
+		{
+			get
+			{
+				ES_UnionWish es = this.m_es_unionwish;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_UnionWish.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_unionwish = this.AddChild<ES_UnionWish, Transform>(go.transform);
+				}
+
+				return this.m_es_unionwish;
+			}
+		}
 		
 		public ES_UnionMystery_A ES_UnionMystery_A
 		{
@@ -170,6 +189,7 @@ namespace ET.Client
 			this.m_es_unionboss = null;
 			this.uiTransform = null;
 			this.m_es_unionmember = null;
+			this.m_es_unionwish = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < this.AssetList.Count; i++)
@@ -188,6 +208,7 @@ namespace ET.Client
 		private EntityRef<ES_UnionMystery_A> m_es_unionmystery_a = null;
 		private EntityRef<ES_UnionMystery_B> m_es_unionmystery_b = null;
 		private EntityRef<ES_UnionBoss> m_es_unionboss = null;
+		private EntityRef<ES_UnionWish> m_es_unionwish = null;
         public Transform uiTransform = null;
 	}
 }
