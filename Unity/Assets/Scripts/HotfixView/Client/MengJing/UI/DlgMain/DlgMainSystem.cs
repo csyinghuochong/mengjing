@@ -1968,6 +1968,11 @@ namespace ET.Client
                     break;
                 case SceneTypeEnum.PetMelee:
                     break;
+                case SceneTypeEnum.Union:
+                case SceneTypeEnum.UnionRace:
+                    self.View.E_OpenChatButton.gameObject.SetActive(true);
+                    self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
+                    break;
                 default:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
