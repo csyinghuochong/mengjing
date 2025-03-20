@@ -95,7 +95,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_WishItem_1RectTransform
+		public ES_UnionWishItem ES_UnionWishItem_1
      	{
      		get
      		{
@@ -104,48 +104,54 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_WishItem_1RectTransform == null )
+		        ES_UnionWishItem es = this.m_es_unionwishitem_1;
+     			if( es == null )
      			{
-		    		this.m_EG_WishItem_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_WishItem_1");
+				    Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_1");
+				    this.m_es_unionwishitem_1 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
      			}
-     			return this.m_EG_WishItem_1RectTransform;
+     			return this.m_es_unionwishitem_1;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_WishItem_2RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_WishItem_2RectTransform == null )
-     			{
-		    		this.m_EG_WishItem_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_WishItem_2");
-     			}
-     			return this.m_EG_WishItem_2RectTransform;
-     		}
-     	}
+		public ES_UnionWishItem ES_UnionWishItem_2
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_UnionWishItem es = this.m_es_unionwishitem_2;
+				if( es == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_2");
+					this.m_es_unionwishitem_2 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
+				}
+				return this.m_es_unionwishitem_2;
+			}
+		}
 
-		public UnityEngine.RectTransform EG_WishItem_3RectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_WishItem_3RectTransform == null )
-     			{
-		    		this.m_EG_WishItem_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_WishItem_3");
-     			}
-     			return this.m_EG_WishItem_3RectTransform;
-     		}
-     	}
-
+		public ES_UnionWishItem ES_UnionWishItem_3
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_UnionWishItem es = this.m_es_unionwishitem_3;
+				if( es == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_WishItem_3");
+					this.m_es_unionwishitem_3 = this.AddChild<ES_UnionWishItem,Transform>(subTrans);
+				}
+				return this.m_es_unionwishitem_3;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -165,9 +171,9 @@ namespace ET.Client
 			this.m_E_ButtonSendButton = null;
 			this.m_E_ButtonSendImage = null;
 			this.m_E_Text_WishCostText = null;
-			this.m_EG_WishItem_1RectTransform = null;
-			this.m_EG_WishItem_2RectTransform = null;
-			this.m_EG_WishItem_3RectTransform = null;
+			this.m_es_unionwishitem_1 = null;
+			this.m_es_unionwishitem_2 = null;
+			this.m_es_unionwishitem_3 = null;
 			this.uiTransform = null;
 		}
 
@@ -176,9 +182,9 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ButtonSendButton = null;
 		private UnityEngine.UI.Image m_E_ButtonSendImage = null;
 		private UnityEngine.UI.Text m_E_Text_WishCostText = null;
-		private UnityEngine.RectTransform m_EG_WishItem_1RectTransform = null;
-		private UnityEngine.RectTransform m_EG_WishItem_2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_WishItem_3RectTransform = null;
+		private EntityRef<ES_UnionWishItem> m_es_unionwishitem_1 = null;
+		private EntityRef<ES_UnionWishItem> m_es_unionwishitem_2 = null;
+		private EntityRef<ES_UnionWishItem> m_es_unionwishitem_3 = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1969,7 +1969,44 @@ namespace ET
             { 20,   62000012 },
             { 50,  62000031 },
         };
+
+        /// <summary>
+        /// 公会祝福奖励。  1免费祝福 2金币祝福 3钻石祝福
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> UnionWishRewardForType = new Dictionary<int, string>()
+        {
+            { 1, "10000157;1@10000147;1@10000148;1" },
+            { 2, "10000157;1@10000147;1@10000148;1"  },
+            { 3, "10000157;1@10000147;1@10000148;1"  },
+        };
+        /// <summary>
+        /// 公会祝福金币消耗
+        /// </summary>
+        [StaticField]
+        public static int UnionWishGetGoldCost = 100000;
+        /// <summary>
+        /// 公会祝福钻石消耗
+        /// </summary>
+        [StaticField]
+        public static int UnionWishGetDiamondCost = 300;
         
+        /// <summary>
+        /// 不同的职位对应的奖励礼包    1族长 2副族长 0其他
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> UnionWishRewardForPosition = new Dictionary<int, string>()
+        {
+            { 1, "10000157;1@10000147;1@10000148;1" },
+            { 2, "10000157;1@10000147;1@10000148;1"  },
+            { 0, "10000157;1@10000147;1@10000148;1"  },
+        };
+        
+        /// <summary>
+        /// 族长祝福
+        /// </summary>
+        [StaticField]
+        public static int UnionWishSendDiamondCost = 300;
         # region 宠物乱斗配置
 
         /// <summary>
