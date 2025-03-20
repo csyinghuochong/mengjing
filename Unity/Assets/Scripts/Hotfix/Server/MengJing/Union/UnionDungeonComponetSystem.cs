@@ -49,7 +49,8 @@ namespace ET.Server
             DateTime dateTime = TimeHelper.DateTimeNow();
             long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
             long openTime = FunctionHelp.BossOpenTime();
-            if (curTime < openTime || curTime > openTime + 300)
+            long closeTime = FunctionHelp.BossCloseTime();
+            if (curTime < openTime || curTime > closeTime)
             {
                 return;
             }
@@ -57,27 +58,8 @@ namespace ET.Server
             //获取开服天数
             int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
 
-            int monsterID = 72000021;
             //根据开服天数创建怪物
-            if (openDay >= 2)
-            {
-                monsterID = 72000022;
-            }
-
-            if (openDay >= 4)
-            {
-                monsterID = 72000023;
-            }
-
-            if (openDay >= 6)
-            {
-                monsterID = 72000024;
-            }
-
-            if (openDay >= 8)
-            {
-                monsterID = 72000025;
-            }
+            int monsterID = FunctionHelp.GetUnionBossId(openDay);
 
             long serverTime = TimeHelper.ServerNow();
             float3 initPosi = new float3(0f, 0.5f, 0f);

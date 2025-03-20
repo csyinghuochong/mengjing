@@ -139,6 +139,25 @@ namespace ET.Client
 				return this.m_es_unionmystery_b;
 			}
 		}
+		
+		public ES_UnionBoss ES_UnionBoss
+		{
+			get
+			{
+				ES_UnionBoss es = this.m_es_unionboss;
+				if (es == null)
+				{
+					string path = "Assets/Bundles/UI/Common/ES_UnionBoss.prefab";
+					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+					go.SetActive(false);
+					this.AssetList.Add(path);
+					this.m_es_unionboss = this.AddChild<ES_UnionBoss, Transform>(go.transform);
+				}
+
+				return this.m_es_unionboss;
+			}
+		}
         
 		public void DestroyWidget()
 		{
@@ -148,6 +167,7 @@ namespace ET.Client
 			this.m_es_unionmy = null;
 			this.m_es_unionmystery_a = null;
 			this.m_es_unionmystery_b = null;
+			this.m_es_unionboss = null;
 			this.uiTransform = null;
 			this.m_es_unionmember = null;
 			
@@ -167,6 +187,7 @@ namespace ET.Client
 		private EntityRef<ES_UnionMember> m_es_unionmember = null;
 		private EntityRef<ES_UnionMystery_A> m_es_unionmystery_a = null;
 		private EntityRef<ES_UnionMystery_B> m_es_unionmystery_b = null;
+		private EntityRef<ES_UnionBoss> m_es_unionboss = null;
         public Transform uiTransform = null;
 	}
 }

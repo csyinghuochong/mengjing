@@ -15,6 +15,42 @@ namespace ET
             return (openTime_1 * 60 + openTime_2) * 60 + 0;
         }
 
+        public static long BossCloseTime()
+        {
+            FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(1043);
+            string[] openTimes = funtionConfig.OpenTime.Split('@');
+            int openTime_1 = int.Parse(openTimes[1].Split(';')[0]);
+            int openTime_2 = int.Parse(openTimes[1].Split(';')[1]);
+            return (openTime_1 * 60 + openTime_2) * 60 + 0;
+        }
+        
+        public static int GetUnionBossId(int openDay)
+        {
+            int monsterID = 72000021;
+            //根据开服天数创建怪物
+            if (openDay >= 2)
+            {
+                monsterID = 72000022;
+            }
+
+            if (openDay >= 4)
+            {
+                monsterID = 72000023;
+            }
+
+            if (openDay >= 6)
+            {
+                monsterID = 72000024;
+            }
+
+            if (openDay >= 8)
+            {
+                monsterID = 72000025;
+            }
+
+            return monsterID;
+        }
+        
         /// <summary>
         /// 1044 家族战
         /// </summary>

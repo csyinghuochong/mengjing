@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+	[FriendOf(typeof(ES_UnionBoss))]
 	[FriendOf(typeof(ES_UnionMystery_A))]
 	[FriendOf(typeof(ES_UnionMystery_B))]
 	[FriendOf(typeof(ES_UnionMy))]
@@ -92,6 +93,9 @@ namespace ET.Client
 				case 4:
 					self.View.ES_UnionMystery_B.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionMystery_B.OnUpdateUI();
+					break;
+				case 5:
+					self.View.ES_UnionBoss.uiTransform.gameObject.SetActive(true);
 					break;	
 			}
 		}
