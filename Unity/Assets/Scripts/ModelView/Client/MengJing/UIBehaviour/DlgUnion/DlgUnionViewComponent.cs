@@ -121,6 +121,26 @@ namespace ET.Client
 			}
 		}
 		
+		//m_es_unionorder
+		public ES_UnionOrder ES_UnionOrder
+        {
+        	get
+        	{
+        		ES_UnionWish es = this.m_es_unionwish;
+        		if (es == null)
+        		{
+        			string path = "Assets/Bundles/UI/Common/ES_UnionOrder.prefab";
+        			GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+        			GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
+        			go.SetActive(false);
+        			this.AssetList.Add(path);
+        			this.m_es_unionorder = this.AddChild<ES_UnionOrder, Transform>(go.transform);
+        		}
+
+        		return this.m_es_unionorder;
+        	}
+        }
+		
 		public ES_UnionMystery ES_UnionMystery
 		{
 			get
@@ -170,6 +190,7 @@ namespace ET.Client
 			this.uiTransform = null;
 			this.m_es_unionmember = null;
 			this.m_es_unionwish = null;
+			this.m_es_unionorder = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < this.AssetList.Count; i++)
@@ -188,7 +209,7 @@ namespace ET.Client
 		private EntityRef<ES_UnionMystery> m_es_unionmystery = null;
 		private EntityRef<ES_UnionBoss> m_es_unionboss = null;
 		private EntityRef<ES_UnionWish> m_es_unionwish = null;
-		
+		private EntityRef<ES_UnionOrder> m_es_unionorder = null;
         public Transform uiTransform = null;
 	}
 }

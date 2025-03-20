@@ -12,6 +12,7 @@ namespace ET.Client
 	[FriendOf(typeof(ES_UnionShow))]
 	[FriendOf(typeof(ES_UnionMember))]
 	[FriendOf(typeof(ES_UnionWish))]
+	[FriendOf(typeof(ES_UnionOrder))]
 	[FriendOf(typeof(DlgUnion))]
 	public static  class DlgUnionSystem
 	{
@@ -96,6 +97,12 @@ namespace ET.Client
 				case 5:
 					self.View.ES_UnionWish.uiTransform.gameObject.SetActive(true);
 					self.View.ES_UnionWish.OnUpdateUI();
+					break;
+				case 6:
+					self.View.ES_UnionOrder.uiTransform.gameObject.SetActive(true);
+					self.View.ES_UnionOrder.OnUpdateUI();
+					break;
+				default:
 					break;
 			}
 		}
