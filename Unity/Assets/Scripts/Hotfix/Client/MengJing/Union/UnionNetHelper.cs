@@ -3,6 +3,21 @@
     public static partial class UnionNetHelper
     {
 
+        public static async ETTask<M2C_UnionWishSendResponse>  UnionWishSendRequest (Scene root)
+        {
+            C2M_UnionWishSendRequest request = C2M_UnionWishSendRequest.Create();
+            M2C_UnionWishSendResponse response = (M2C_UnionWishSendResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+        
+         public static async ETTask<M2C_UnionWishGetResponse>  UnionWishGetRequest (Scene root, int wishType)
+         {
+             C2M_UnionWishGetRequest request = C2M_UnionWishGetRequest.Create();
+             request.Type = wishType;
+             M2C_UnionWishGetResponse response = (M2C_UnionWishGetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+             return response;
+         }
+        
         public static async ETTask<U2C_UnionUpgradeResponse> UnionUpgradeRequest(Scene root, long unionId, long userId)
         {
             C2U_UnionUpgradeRequest c2UUnionUpgradeRequest = C2U_UnionUpgradeRequest.Create();

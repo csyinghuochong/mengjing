@@ -103,6 +103,7 @@ namespace ET
         public const int ItemXiLian = 92;               //道具洗练
         public const int ActivityNewYear = 93;
         public const int PetMeleeReward = 94;
+        public const int UnionWish = 96;
 
         public const int Activity = 100;                //活动
 

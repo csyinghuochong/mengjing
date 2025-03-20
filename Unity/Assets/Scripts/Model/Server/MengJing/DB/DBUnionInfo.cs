@@ -13,5 +13,7 @@ namespace ET.Server
         public List<MysteryItemInfo> MysteryItemInfos{ get; set; } = new List<MysteryItemInfo>();
 
         public long MysteryFreshTime { get; set; }= 0;
+        
+        public long UnionWishTime { get; set; }= 0; 
     }
 }

@@ -7,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_UnionWishItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+
+		public int WishType { get; set; }
+
 		public ES_RewardList ES_RewardList
      	{
      		get
@@ -61,6 +64,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Text_WishCost
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_WishCost == null )
+				{
+					this.m_E_Text_WishCost = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_WishCost");
+				}
+				return this.m_E_Text_WishCost;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -78,12 +98,14 @@ namespace ET.Client
 			this.m_es_rewardlist = null;
 			this.m_E_ButtonGetButton = null;
 			this.m_E_ButtonGetImage = null;
+			this.m_E_Text_WishCost = null;
 			this.uiTransform = null;
 		}
 
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
+		private Text m_E_Text_WishCost;
 		public Transform uiTransform = null;
 	}
 }

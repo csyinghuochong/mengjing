@@ -11,12 +11,38 @@ namespace ET.Client
 		private static void Awake(this ES_UnionWishItem self,Transform transform)
 		{
 			self.uiTransform = transform;
+			
+			self.E_ButtonGetButton.AddListenerAsync(self.OnClickGetButton );
 		}
 
 		[EntitySystem]
 		private static void Destroy(this ES_UnionWishItem self)
 		{
 			self.DestroyWidget();
+		}
+
+		private static async ETTask OnClickGetButton(this ES_UnionWishItem self)
+		{
+			M2C_UnionWishGetResponse response = await  UnionNetHelper.UnionWishGetRequest(self.Root(), self.WishType);
+		}
+
+		public static void OnInitType(this ES_UnionWishItem self, int type)
+		{
+			self.WishType  = type;	
+			switch (type)
+			{
+				case 2:
+					self.E_Text_WishCost.text = ConfigData.UnionWishGetGoldCost.ToString();
+					break;
+				case 3:
+					self.E_Text_WishCost.text = ConfigData.UnionWishGetDiamondCost.ToString();
+					break;	
+				default:
+					break;		
+			}
+			
+			string reward = ConfigData.UnionWishRewardForType[type];
+			self.ES_RewardList.Refresh(reward);
 		}
 	}
 

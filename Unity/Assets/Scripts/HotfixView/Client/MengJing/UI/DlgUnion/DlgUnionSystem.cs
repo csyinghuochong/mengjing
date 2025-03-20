@@ -100,7 +100,7 @@ namespace ET.Client
 					break;	
 				case 6:
 					self.View.ES_UnionWish.uiTransform.gameObject.SetActive(true);
-					//self.View.ES_UnionWish.OnUpdateUI().Coroutine();
+					self.View.ES_UnionWish.OnUpdateUI();
 					break;
 			}
 		}

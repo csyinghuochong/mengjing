@@ -324,6 +324,11 @@ namespace ET.Client
             return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
         }
 
+        public static long GetUnionLeader(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionLeader);
+        }
+
         public static bool IsSameUnion(this Unit self, Unit other)
         {
             long teamid_1 = self.GetUnionId();
