@@ -25,6 +25,7 @@ namespace ET
         public const int Welfare = 9;           //福利任务        只做一次
         public const int Ring = 10;             //跑环任务
         public const int System = 11;           //系统任务        只做一次
+        public const int UnionOrder = 12;       //家族订单任务     每日刷新
         
         public const int Country = 21;    //活跃任务
         public const int Battle = 22;     //战场任务
