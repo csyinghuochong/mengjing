@@ -34,8 +34,7 @@ namespace ET.Client
             // self.E_PetSinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSinIconItemsRefresh);
 
             self.InitPetTuJianList();
-
-            self.InitModelShowView_1();
+            
         }
 
         [EntitySystem]
@@ -80,8 +79,24 @@ namespace ET.Client
             self.UpdatePetZizhi(petid);
             self.UpdateSkillList(petid);
             // self.UpdatePetSkinList(petid);
-
             PetConfig petConfig = PetConfigCategory.Instance.Get(petid);
+            
+            string[] strs = null;
+            if (!CommonHelp.IfNull(petConfig.ModelShowPosi))
+            {
+                strs = petConfig.ModelShowPosi.Split(',');
+            }
+            if (strs != null && strs.Length >= 5)
+            {
+                self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = float.Parse(strs[3]);
+                self.ES_ModelShow.SetPosition(new Vector3(0 * 1000, 0, 0), new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
+                self.ES_ModelShow.RotationY = float.Parse(strs[4]); 
+            }
+            else
+            {
+                self.ES_ModelShow.SetPosition(new Vector3(0 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+            }
+            
             self.ES_ModelShow.ShowOtherModel($"Pet/{petConfig.PetModel}", true).Coroutine();
 
             self.E_Text_PetNameText.text = petConfig.PetName;
@@ -89,7 +104,7 @@ namespace ET.Client
 
         public static void InitModelShowView_1(this ES_PetTuJian self)
         {
-            self.ES_ModelShow.SetPosition(new Vector3(0 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+          
         }
 
         public static void OnUpdateUI(this ES_PetTuJian self)
