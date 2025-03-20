@@ -1263,7 +1263,7 @@ namespace ET.Server
             self.ReceiveHuoYueIds.Clear();
             int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
             List<int> taskCountryList = new List<int>();
-            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(unit, roleLv));
+            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(roleLv));
             taskCountryList.AddRange(TaskHelper.GetBattleTask());
             taskCountryList.AddRange(TaskHelper.GetShowLieTask());
             taskCountryList.AddRange(TaskHelper.GetUnionRaceTask());

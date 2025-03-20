@@ -162,6 +162,90 @@ namespace ET
             return randomIds;
         }
 
+         /// <summary>
+        /// 活跃任务
+        /// </summary>
+        /// <returns></returns>
+        public static List<int> GetTaskCountrys( int playerLv)
+        {
+            //活跃任务
+            List<int> taskCountryList = new List<int>();
+            string[] dayTaskID = GlobalValueConfigCategory.Instance.Get(8).Value.Split(';');
+            for (int i = 0; i < dayTaskID.Length; i++)
+            {
+                //获取任务概率
+                float taskRandValue = RandomHelper.RandFloat01();
+                int writeTaskID = int.Parse(dayTaskID[i]);
+                int writeTaskID_Next = writeTaskID;
+                TaskConfig taskCountryConfig = null;
+                double triggerPro = 0;
+                do
+                {
+                    writeTaskID = writeTaskID_Next;
+                    taskCountryConfig = TaskConfigCategory.Instance.Get(writeTaskID);
+
+                    if (taskCountryConfig.TriggerType == 1 && playerLv < taskCountryConfig.TargetValue[0])
+                    {
+                        //条件不满足
+                        if (taskCountryConfig.NextTask == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            writeTaskID_Next = taskCountryConfig.NextTask;
+                            continue;
+                        }
+                    }
+
+                    triggerPro = taskCountryConfig.Weight;
+                    writeTaskID_Next = taskCountryConfig.NextTask;
+
+                    if (writeTaskID_Next == 0)
+                    {
+                        taskRandValue = -1;
+                    }
+                }
+                while (taskRandValue >= triggerPro);
+
+                taskCountryList.Add(writeTaskID);
+            }
+
+            return taskCountryList;
+        }
+         
+        public static List<int> GetUnionOrderTasks(int taskType, int roleLv)
+        {
+            List<int> taskids = new List<int>();    
+            List<int> allTaskIds = new List<int>();
+            List<int> allWeights = new List<int>();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
+            foreach (var item in keyValuePairs)
+            {
+                if (item.Value.TriggerType == 1 && item.Value.TriggerValue > roleLv)
+                {
+                    continue;
+                }
+
+                if (item.Value.TaskType == taskType
+                    && roleLv >= item.Value.TaskLv
+                    && roleLv <= item.Value.TaskMaxLv)
+                {
+                    allTaskIds.Add(item.Key);
+                    allWeights.Add(item.Value.Weight);
+                }
+            }
+
+            if (allTaskIds.Count == 0)
+            {
+                return taskids;
+            }
+
+            taskids = RandomHelper.SelectNumbers(allWeights, allTaskIds, 5);
+            return taskids;
+        }
+        
+        
         public static int GetTaskIdByType(int taskType, int roleLv)
         {
             List<int> allTaskIds = new List<int>();
@@ -211,60 +295,7 @@ namespace ET
 
             return taskIds;
         }
-
-        /// <summary>
-        /// 活跃任务
-        /// </summary>
-        /// <returns></returns>
-        public static List<int> GetTaskCountrys(Unit unit, int playerLv)
-        {
-            //活跃任务
-
-            List<int> taskCountryList = new List<int>();
-            string[] dayTaskID = GlobalValueConfigCategory.Instance.Get(8).Value.Split(';');
-            for (int i = 0; i < dayTaskID.Length; i++)
-            {
-                //获取任务概率
-                float taskRandValue = RandomHelper.RandFloat01();
-                int writeTaskID = int.Parse(dayTaskID[i]);
-                int writeTaskID_Next = writeTaskID;
-                TaskConfig taskCountryConfig = null;
-                double triggerPro = 0;
-                do
-                {
-                    writeTaskID = writeTaskID_Next;
-                    taskCountryConfig = TaskConfigCategory.Instance.Get(writeTaskID);
-
-                    if (taskCountryConfig.TriggerType == 1 && playerLv < taskCountryConfig.TargetValue[0])
-                    {
-                        //条件不满足
-                        if (taskCountryConfig.NextTask == 0)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            writeTaskID_Next = taskCountryConfig.NextTask;
-                            continue;
-                        }
-                    }
-
-                    triggerPro = taskCountryConfig.Weight;
-                    writeTaskID_Next = taskCountryConfig.NextTask;
-
-                    if (writeTaskID_Next == 0)
-                    {
-                        taskRandValue = -1;
-                    }
-                }
-                while (taskRandValue >= triggerPro);
-
-                taskCountryList.Add(writeTaskID);
-            }
-
-            return taskCountryList;
-        }
-
+        
         public static List<int> GetBattleTask()
         {
             List<int> taskIds = new List<int>();

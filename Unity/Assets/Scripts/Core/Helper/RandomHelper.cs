@@ -281,6 +281,39 @@ namespace ET
             return -1;
         }
 
+        // 根据权重从一组数字中选择指定数量的不重复数字
+        public static List<int> SelectNumbers(List<int> weightedNumbers, List<int> sourceNumber,  int count)
+        {
+            List<int> selectedNumbers = new List<int>();
+            Random random = new Random();
+
+            while (selectedNumbers.Count < count && weightedNumbers.Count > 0)
+            {
+                int totalWeight = 0;
+                // 计算总权重
+                foreach (var wn in weightedNumbers)
+                {
+                    totalWeight += wn;
+                }
+
+                int randomValue = random.Next(0, totalWeight);
+                int currentWeight = 0;
+
+                for (int i = 0; i < weightedNumbers.Count; i++)
+                {
+                    currentWeight += weightedNumbers[i];
+                    if (randomValue < currentWeight)
+                    {
+                        selectedNumbers.Add(sourceNumber[i]);
+                        weightedNumbers.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
+            return selectedNumbers;
+        }
+        
         public static int RandomByWeight(List<int> weights)
         {
             if (weights.Count == 0)
