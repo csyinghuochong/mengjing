@@ -572,13 +572,14 @@ namespace ET.Client
                 self.PetHeXinSuit = 0;
             }
 
+            // 暂时用不上
             // 更换图标
-            using (zstring.Block())
-            {
-                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, (zstring)"hexin" + index);
-                Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
-                self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
-            }
+            // using (zstring.Block())
+            // {
+            //     string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, (zstring)"hexin" + index);
+            //     Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+            //     self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
+            // }
         }
 
         /// <summary>
@@ -929,12 +930,13 @@ namespace ET.Client
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
 
             self.E_Text_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
-            using (zstring.Block())
-            {
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
-                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                self.E_ImageShouHuImage.sprite = sp;
-            }
+            // 暂时用不上
+            // using (zstring.Block())
+            // {
+            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
+            //     Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            //     self.E_ImageShouHuImage.sprite = sp;
+            // }
 
             //更新宠物是否进化
             if (rolePetInfo.UpStageStatus == 0 || rolePetInfo.UpStageStatus == 1)
