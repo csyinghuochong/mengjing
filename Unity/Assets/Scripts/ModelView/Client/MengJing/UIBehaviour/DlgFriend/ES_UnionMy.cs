@@ -592,7 +592,24 @@ namespace ET.Client
      		}
      	}
 
-		    public Transform UITransform
+		public Button E_Button_Upgrade
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Button_Upgrade == null )
+				{
+					this.m_E_Button_Upgrade = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_ShowSet/ButtonList/E_Button_Upgrade");
+				}
+				return this.m_E_Button_Upgrade;
+			}
+		}
+
+		public Transform UITransform
          {
      	    get
      	    {
@@ -640,6 +657,7 @@ namespace ET.Client
 			this.m_E_UnionRecordsBtnButton = null;
 			this.m_E_UnionRecordsBtnImage = null;
 			this.m_E_Text_UnionGoldText = null;
+			this.m_E_Button_Upgrade = null;	
 			this.uiTransform = null;
 		}
 
@@ -677,6 +695,7 @@ namespace ET.Client
 		private Button m_E_UnionRecordsBtnButton = null;
 		private Image m_E_UnionRecordsBtnImage = null;
 		private Text m_E_Text_UnionGoldText = null;
+		private Button m_E_Button_Upgrade = null;
 		public Transform uiTransform = null;
 	}
 }

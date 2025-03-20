@@ -81,6 +81,8 @@ namespace ET
 		public int[] AddUnionGold { get; set; }
 		/// <summary>家族金币上限</summary>
 		public int UnionGoldLimit { get; set; }
+		/// <summary>消耗家族资金</summary>
+		public int UnionGoldCost { get; set; }
 
 	}
 }

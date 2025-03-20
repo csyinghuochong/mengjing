@@ -248,6 +248,7 @@ namespace ET
         public const int ERR_Union_NotKeJi = 301012;
         public const int ERR_Already_Guess = 301013;
         public const int ERR_Union_Create = 301014;
+        public const int ERR_UnionLevelMax = 301015;
 
         //赏金任务
         public const int ERR_ShangJinNumFull = 301101;                              //赏金任务完成上限

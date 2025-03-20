@@ -2,6 +2,16 @@
 {
     public static partial class UnionNetHelper
     {
+
+        public static async ETTask<U2C_UnionUpgradeResponse> UnionUpgradeRequest(Scene root, long unionId, long userId)
+        {
+            C2U_UnionUpgradeRequest c2UUnionUpgradeRequest = C2U_UnionUpgradeRequest.Create();
+            c2UUnionUpgradeRequest.UnionId = unionId;
+            c2UUnionUpgradeRequest.UserId = userId;
+            U2C_UnionUpgradeResponse u2CUnionUpgradeResponse = (U2C_UnionUpgradeResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2UUnionUpgradeRequest);
+            return u2CUnionUpgradeResponse;
+        }
+
         public static async ETTask<U2C_UnionApplyResponse> UnionApplyRequest(Scene root, long unionId, long userId)
         {
             C2U_UnionApplyRequest request = C2U_UnionApplyRequest.Create();

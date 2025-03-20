@@ -49,6 +49,7 @@ namespace ET.Client
             self.E_Text_EnterUnionButton.AddListener(self.OnText_EnterUnionButton);
             self.E_Text_LevelButton.AddListener(self.OnText_LevelButton);
             self.E_Text_ExpButton.AddListener(self.OnText_ExpButton);
+            self.E_Button_Upgrade.AddListener(self.OnButtonUpgrade);
             
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
             redPointComponent.RegisterReddot(ReddotType.UnionApply, self.Reddot_UnionApply);
@@ -210,31 +211,7 @@ namespace ET.Client
 
             self.UnionInfo = response.UnionMyInfo;
             self.OnLinePlayer = response.OnLinePlayer;
-            self.E_Text_LevelText.text = response.UnionMyInfo.Level.ToString();
-            using (zstring.Block())
-            {
-                if (UnionConfigCategory.Instance.Contain(response.UnionMyInfo.Level))
-                {
-                    UnionConfig unionConfig = UnionConfigCategory.Instance.Get(response.UnionMyInfo.Level);
-                    self.E_Text_ExpText.text = zstring.Format("{0}/{1}", response.UnionMyInfo.Exp, unionConfig.Exp);
-                    if (response.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
-                    {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (response.UnionMyInfo.UnionGold / 10000f).ToString("0.#"),
-                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
-                    }
-                    else
-                    {
-                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"),
-                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
-                    }
-                }
-                else
-                {
-                    self.E_Text_ExpText.text = string.Empty;
-                    self.E_Text_UnionGoldText.text = string.Empty;
-                }
-            }
-
+ 
             self.UpdateMyUnion();
         }
 
@@ -250,17 +227,43 @@ namespace ET.Client
             self.E_TextJingXuanEndTimeText.text = TimeHelper.ShowLeftTime(lastTime);
         }
 
-        public static void UpdateMyUnion(this ES_UnionMy self)
+        public static void UpdateUnionLevel(this ES_UnionMy self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
-            UnionConfig unionCof = UnionConfigCategory.Instance.Get(self.UnionInfo.Level);
+            
+            int unionlevel = self.UnionInfo.Level;
+            UnionConfig unionConfig = UnionConfigCategory.Instance.Get(unionlevel);
             bool leader = userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId;
+            self.E_Text_LevelText.text =  self.UnionInfo.Level.ToString();
+            using (zstring.Block())
+            {
+                if (UnionConfigCategory.Instance.Contain(unionlevel + 1))
+                {
+                    self.E_Text_ExpText.text = zstring.Format("{0}/{1}", self.UnionInfo.Exp, unionConfig.Exp);
+                    if (self.UnionInfo.UnionGold <= unionConfig.UnionGoldLimit)
+                    {
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (self.UnionInfo.UnionGold / 10000f).ToString("0.#"),
+                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
+                    }
+                    else
+                    {
+                        self.E_Text_UnionGoldText.text = zstring.Format("{0}万/{1}万", (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"),
+                            (unionConfig.UnionGoldLimit / 10000f).ToString("0.#"));
+                    }
+                }
+                else
+                {
+                    self.E_Text_ExpText.text = string.Empty;
+                    self.E_Text_UnionGoldText.text = string.Empty;
+                }
+            }
+            
             using (zstring.Block())
             {
                 self.E_Text_OnLineText.text = zstring.Format("在线人数 {0}", self.OnLinePlayer.Count);
                 self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;
-                self.E_Text_NumberText.text = zstring.Format("{0}/{1}", self.UnionInfo.UnionPlayerList.Count, unionCof.PeopleNum);
+                self.E_Text_NumberText.text = zstring.Format("{0}/{1}", self.UnionInfo.UnionPlayerList.Count, unionConfig.PeopleNum);
             }
 
             self.E_Text_LeaderText.text = self.UnionInfo.LeaderName;
@@ -268,6 +271,18 @@ namespace ET.Client
             self.EG_LeadNodeRectTransform.gameObject.SetActive(leader || mainPlayerInfo.Position != 0);
             self.E_ButtonApplyListButton.gameObject.SetActive(leader || mainPlayerInfo.Position != 0);
             self.E_ButtonJingXuanButton.gameObject.SetActive(self.UnionInfo.JingXuanEndTime > 0);
+
+            self.E_Button_Upgrade.gameObject.SetActive(leader);
+            self.E_Button_Upgrade.transform.Find("Reddot").gameObject.SetActive(self.UnionInfo.Exp >= unionConfig.Exp && UnionConfigCategory.Instance.Contain(unionlevel + 1));
+        }
+
+        public static void UpdateMyUnion(this ES_UnionMy self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
+            
+            self.UpdateUnionLevel();
+            
             if (self.UnionInfo.JingXuanEndTime > 0)
             {
                 self.OnUnionJingXuanTimer();
@@ -319,6 +334,47 @@ namespace ET.Client
 
         public static void OnText_ExpButton(this ES_UnionMy self)
         {
+        }
+
+        private static async ETTask RequestUnionUpgrade(this ES_UnionMy self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            U2C_UnionUpgradeResponse response =  await UnionNetHelper.UnionUpgradeRequest(self.Root(), unit.GetUnionId(), unit.Id);
+            if (response != null && response.Error == ErrorCode.ERR_Success)
+            {
+                self.UnionInfo = response.UnionMyInfo;
+                self.UpdateUnionLevel();
+                FlyTipComponent.Instance.ShowFlyTip("升级成功!");
+            }
+        }
+
+        public   static void OnButtonUpgrade(this ES_UnionMy self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+    
+            int unionlevel = self.UnionInfo.Level;
+
+            UnionConfig unionConfig = UnionConfigCategory.Instance.Get(unionlevel);
+            if (self.UnionInfo.Exp < unionConfig.Exp)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("经验不足！");
+                return;
+            }
+
+            if (self.UnionInfo.UnionGold < unionConfig.UnionGoldCost)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("资金不足！");
+                return;
+            }
+                
+            if ( !UnionConfigCategory.Instance.Contain(unionlevel + 1))
+            {
+                FlyTipComponent.Instance.ShowFlyTip("已达到最大等级！");
+                return;
+            }
+            
+            PopupTipHelp.OpenPopupTip(self.Root(), "家族升级", $"是否确认花费{unionConfig.UnionGoldCost}家族资金升级？", () => { self.RequestUnionUpgrade().Coroutine(); }, null)
+                .Coroutine();
         }
     }
 }

@@ -22,71 +22,37 @@ namespace ET.Server
                         //Par = $"{getWay}_{dataType}_{dataValue}_{playerName or params}
                         UnionConfig unionConfig = null;
                         string[] valuePararm = request.Par.Split('_');
-
+                        int addExp = int.Parse(valuePararm[2]);
                         if (valuePararm[1] == "17") // UserDataType.UnionExp
                         {
-                            int addExp = int.Parse(valuePararm[2]);
                             //增加经验
                             if (dBUnionInfo.UnionInfo.Level == 0)
                             {
                                 dBUnionInfo.UnionInfo.Level = 1;
                             }
-                            int level = dBUnionInfo.UnionInfo.Level;
                             dBUnionInfo.UnionInfo.Exp += addExp;
-                            //unionConfig = UnionConfigCategory.Instance.Get(level);
-                            // if (dBUnionInfo.UnionInfo.Exp >= unionConfig.Exp && UnionConfigCategory.Instance.Contain(level + 1))
-                            // {
-                            //     dBUnionInfo.UnionInfo.Level++;
-                            //     dBUnionInfo.UnionInfo.Exp -= unionConfig.Exp;
-                            //
-                            //     MailInfo mailInfo = MailInfo.Create();
-                            //     mailInfo.Title = "家族升级";
-                            //     mailInfo.Context = "恭喜您!您所在得家族等级获得提升,这是家族升级的奖励!";
-                            //
-                            //     long serverTime = TimeHelper.ServerNow();
-                            //     UnionConfig unionCof = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);
-                            //     string[] rewardStrList = unionCof.UpAllReward.Split(';');
-                            //     for (int i = 0; i < rewardStrList.Length; i++)
-                            //     {
-                            //         string[] rewardList = rewardStrList[i].Split(',');
-                            //
-                            //         ItemInfoProto BagInfo = ItemInfoProto.Create();
-                            //         BagInfo.ItemID = int.Parse(rewardList[0]);
-                            //         BagInfo.ItemNum = int.Parse(rewardList[1]);
-                            //         BagInfo. GetWay =$"{ItemGetWay.UnionUpLv}_{serverTime}";
-                            //         mailInfo.ItemList.Add(BagInfo);
-                            //     }
-                            //
-                            //     for (int i = 0; i < dBUnionInfo.UnionInfo.UnionPlayerList.Count; i++)
-                            //     {
-                            //         MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo,ItemGetWay.UnionUpLv).Coroutine();
-                            //     }
-                            //
-                            //     string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
-                            //     BroadCastHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
-                            // }
+                            
+                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为家族增加经验 {addExp}");
                         }
                         else if (valuePararm[1] == "35") //UserDataType.UnionGold
                         {
                             unionConfig = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);
-                            dBUnionInfo.UnionInfo.UnionGold += int.Parse(valuePararm[3]);
-                            if (dBUnionInfo.UnionInfo.UnionGold > unionConfig.UnionGoldLimit)
-                            {
-                                dBUnionInfo.UnionInfo.UnionGold = unionConfig.UnionGoldLimit;
-                            }
+                            dBUnionInfo.UnionInfo.UnionGold += addExp;
+                            dBUnionInfo.UnionInfo.UnionGold = Math.Min(unionConfig.UnionGoldLimit, dBUnionInfo.UnionInfo.UnionGold);
+                            
+                            dBUnionInfo.UnionInfo.ActiveRecord.Add($"{request.Par} 为家族增加资金 {addExp}");
                         }
                         else
                         {
                             return;
                         }
-
-                        dBUnionInfo.UnionInfo.ActiveRecord.Add(request.Par);
+                        
                         if (dBUnionInfo.UnionInfo.ActiveRecord.Count >= 100)
                         {
                             dBUnionInfo.UnionInfo.ActiveRecord.RemoveAt(0);
                         }
 
-                        UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo).Coroutine();
+                        await  UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo);
                         break;
                     case 2:  //获取等级
                         response.Par = dBUnionInfo.UnionInfo.Level.ToString();
@@ -111,7 +77,7 @@ namespace ET.Server
                         DonationRecord.Time = TimeHelper.ServerNow();
                         DonationRecord.UnitId = request.UnitId;
                         dBUnionInfo.UnionInfo.DonationRecords.Add( DonationRecord);
-                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+                        await  UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo);
                         break;
                     case 4: //钻石捐献
                         dBUnionInfo.UnionInfo.Level = Math.Max(dBUnionInfo.UnionInfo.Level, 1);
@@ -134,11 +100,11 @@ namespace ET.Server
                         DonationRecord.Time = TimeHelper.ServerNow();
                         DonationRecord.UnitId = request.UnitId;
                         dBUnionInfo.UnionInfo.DonationRecords.Add(DonationRecord);
-                        UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo).Coroutine();
+                        await UnitCacheHelper.SaveComponent(scene.Root(), dBUnionInfo.Id, dBUnionInfo);
                         break;
                     case 5: //增加金币
                         dBUnionInfo.UnionInfo.UnionGold += int.Parse(request.Par);
-                        UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo).Coroutine();
+                        await UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo);
                         break;
                     default:
                         break;

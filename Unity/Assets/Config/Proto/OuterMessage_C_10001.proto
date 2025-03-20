@@ -4027,6 +4027,26 @@ message U2C_UnionKickOutResponse // IUnionActorResponse
 	string Message = 92;
 }
 
+//公会升级
+//ResponseType U2C_UnionUpgradeResponse
+message C2U_UnionUpgradeRequest // IUnionActorRequest
+{
+  int32 RpcId = 90;
+  int64 ActorId = 93;
+
+  int64 UnionId = 1;
+  int64 UserId = 2;
+}
+
+message U2C_UnionUpgradeResponse // IUnionActorResponse
+{
+  int32 RpcId = 90;
+  int32 Error = 91;
+  string Message = 92;
+  
+  UnionInfo UnionMyInfo = 1;
+}
+
 //我的公会
 //ResponseType U2C_UnionMyInfoResponse
 message C2U_UnionMyInfoRequest // IUnionActorRequest

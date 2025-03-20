@@ -5,10 +5,18 @@
     {
         protected override async ETTask Run(Scene scene, C2U_UnionSignUpRequest request, U2C_UnionSignUpResponse response)
         {
-            UnionSceneComponent rankComponent = scene.GetComponent<UnionSceneComponent>();
-            if (!rankComponent.DBUnionManager.SignupUnions.Contains(request.UnionId))
+            UnionSceneComponent unionSceneComponent = scene.GetComponent<UnionSceneComponent>();
+            DBUnionInfo dBUnionInfo = await unionSceneComponent.GetDBUnionInfo(request.UnionId);
+            if (dBUnionInfo == null)
             {
-                rankComponent.DBUnionManager.SignupUnions.Add(request.UnionId);
+                response.Error = ErrorCode.ERR_Union_Not_Exist;
+                return;
+            }
+
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId))
+            {
+                
+                
             }
 
             await ETTask.CompletedTask;
