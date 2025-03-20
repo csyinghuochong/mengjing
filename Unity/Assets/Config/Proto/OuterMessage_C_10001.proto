@@ -3700,11 +3700,7 @@ message M2C_UnionDonationResponse // ILocationResponse
 	string Message = 92;
 }
 
-
-//会长才能操作
-//当前已获得祝福类型，发送祝福的时间戳都保存在unioninfo中
-//会长成员和副会长不同的礼包配置在configdata.  只有获取了祝福，才显示发送祝福按钮	  
-//流程不清楚的问策划。。
+//针对自己，每日祝福
 //ResponseType M2C_UnionWishGetResponse
 message C2M_UnionWishGetRequest // ILocationRequest
 {
@@ -3721,7 +3717,7 @@ message M2C_UnionWishGetResponse // ILocationResponse
 	string Message = 92;
 }
 
-//会长才能操作
+//会长才能操作。 给全公会发送奖励
 //ResponseType M2C_UnionWishSendResponse
 message C2M_UnionWishSendRequest // ILocationRequest
 {
