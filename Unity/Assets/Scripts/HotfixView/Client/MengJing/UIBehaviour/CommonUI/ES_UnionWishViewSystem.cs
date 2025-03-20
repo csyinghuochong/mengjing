@@ -28,7 +28,21 @@ namespace ET.Client
 
 		private static async ETTask OnClickSendButton(this ES_UnionWish self)
 		{
-			M2C_UnionWishSendResponse response = await  UnionNetHelper.UnionWishSendRequest(self.Root());
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+
+            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo( self.Root() , unionId);
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+	            return;
+            }
+            if ( CommonHelp.GetDayByTime(TimeHelper.ServerNow()) == CommonHelp.GetDayByTime(response.UnionMyInfo.UnionWishTime))
+            {
+	            FlyTipComponent.Instance.ShowFlyTip("当前已经发送过祝福!");
+	            return;
+            }
+
+            await  UnionNetHelper.UnionWishSendRequest(self.Root());
 		}
         
 		public static void OnUpdateUI(this ES_UnionWish self)

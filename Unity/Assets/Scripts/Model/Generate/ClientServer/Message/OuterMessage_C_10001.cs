@@ -3493,6 +3493,9 @@ namespace ET
         [MemoryPackOrder(17)]
         public List<string> ActiveRecord { get; set; } = new();
 
+        [MemoryPackOrder(18)]
+        public long UnionWishTime { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3518,6 +3521,7 @@ namespace ET
             this.KeJiActiteTime = default;
             this.UnionGold = default;
             this.ActiveRecord.Clear();
+            this.UnionWishTime = default;
 
             ObjectPool.Instance.Recycle(this);
         }

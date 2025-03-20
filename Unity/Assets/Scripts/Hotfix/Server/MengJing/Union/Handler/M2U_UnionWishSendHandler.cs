@@ -16,7 +16,7 @@ namespace ET.Server
                 return;
             }
 
-            if ( CommonHelp.GetDayByTime(TimeHelper.ServerNow()) == CommonHelp.GetDayByTime(dBUnionInfo.UnionWishTime))
+            if ( CommonHelp.GetDayByTime(TimeHelper.ServerNow()) == CommonHelp.GetDayByTime(dBUnionInfo.UnionInfo.UnionWishTime))
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;
                 return;
@@ -47,7 +47,7 @@ namespace ET.Server
                 MailHelp.SendUserMail(scene.Root(), unionPlayerInfo.UserID, mailInfo,ItemGetWay.UnionWish).Coroutine();
             }
             
-            dBUnionInfo.UnionWishTime = TimeHelper.ServerNow(); 
+            dBUnionInfo.UnionInfo.UnionWishTime = TimeHelper.ServerNow(); 
             await UnitCacheHelper.SaveComponent(scene.Root(),dBUnionInfo.Id,  dBUnionInfo);
         }
     }

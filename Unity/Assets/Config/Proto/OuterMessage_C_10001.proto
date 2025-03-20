@@ -774,6 +774,7 @@ message UnionInfo
 	int64 KeJiActiteTime = 16;			//当前升级时间
 	int64 UnionGold = 17;               //家族金币
 	repeated string ActiveRecord = 18;	//记录 $"{playerName}_{getWay}_{dataType}_{dataValue}
+	int64 UnionWishTime = 19;
 }
 
 message UnionPlayerInfo

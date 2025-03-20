@@ -23,6 +23,26 @@ namespace ET.Client
 
 		private static async ETTask OnClickGetButton(this ES_UnionWishItem self)
 		{
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+			if (numericComponentC.GetAsInt(NumericType.UnionWishGet) > 0)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("当天已经领取过祝福！");
+				return;
+			}
+			UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+			if (self.WishType == 2 && userInfoComponentC.UserInfo.Gold < ConfigData.UnionWishGetGoldCost)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("金币不足！");
+				return;
+			}
+
+			if (self.WishType == 3 && userInfoComponentC.UserInfo.Diamond < ConfigData.UnionWishGetDiamondCost)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
+				return;
+			}
+
 			M2C_UnionWishGetResponse response = await  UnionNetHelper.UnionWishGetRequest(self.Root(), self.WishType);
 		}
 
