@@ -3700,6 +3700,41 @@ message M2C_UnionDonationResponse // ILocationResponse
 	string Message = 92;
 }
 
+
+//会长才能操作
+//当前已获得祝福类型，发送祝福的时间戳都保存在unioninfo中
+//会长成员和副会长不同的礼包配置在configdata.  只有获取了祝福，才显示发送祝福按钮	
+//ResponseType M2C_UnionWishGetResponse
+message C2M_UnionWishGetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	int32 Type = 1;  // 1免费祝福 2金币祝福 3 钻石祝福
+}
+
+message M2C_UnionWishGetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//会长才能操作
+//ResponseType M2C_UnionWishSendResponse
+message C2M_UnionWishSendRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_UnionWishSendResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //邀请玩家加入家族
 message C2M_UnionInviteRequest // ILocationMessage
 {

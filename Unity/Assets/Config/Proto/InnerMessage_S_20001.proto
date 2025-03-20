@@ -800,6 +800,38 @@ message U2M_UnionCreateResponse // IResponse
 	int64 UnionId = 1;
 }
 
+//ResponseType U2M_UnionWishGetResponse
+message M2U_UnionWishGetRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64  UnionId = 4;
+}
+
+message U2M_UnionWishGetResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType U2M_UnionWishSendResponse
+message M2U_UnionWishSendRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64  UnionId = 4;
+}
+
+message U2M_UnionWishSendResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType Chat2M_UpdateUnion
 message M2Chat_UpdateUnion //IRequest
 {
