@@ -32,10 +32,10 @@ namespace ET.Server
                 
                 long serverTime = TimeHelper.ServerNow();
                 UnionConfig unionCof = UnionConfigCategory.Instance.Get(dBUnionInfo.UnionInfo.Level);
-                string[] rewardStrList = ConfigData.UnionWishRewardForPosition[unionPlayerInfo.Position].Split(';');
+                string[] rewardStrList = ConfigData.UnionWishRewardForPosition[unionPlayerInfo.Position].Split('@');
                 for (int item = 0; item < rewardStrList.Length; item++)
                 {
-                    string[] rewardList = rewardStrList[item].Split(',');
+                    string[] rewardList = rewardStrList[item].Split(';');
                 
                     ItemInfoProto BagInfo = ItemInfoProto.Create();
                     BagInfo.ItemID = int.Parse(rewardList[0]);
