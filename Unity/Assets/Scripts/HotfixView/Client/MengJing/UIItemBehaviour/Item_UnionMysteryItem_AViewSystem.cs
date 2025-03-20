@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -65,8 +66,12 @@ namespace ET.Client
 
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
+            self.ES_CommonItem.UseTextColor = true;
             self.ES_CommonItem.UpdateItem(new() { ItemID = self.MysteryItemInfo.ItemID }, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(ItemConfigCategory.Instance.Get(self.MysteryItemInfo.ItemID).ItemQuality);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
