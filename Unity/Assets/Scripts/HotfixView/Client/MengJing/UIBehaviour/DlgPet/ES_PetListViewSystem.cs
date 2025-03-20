@@ -1208,10 +1208,12 @@ namespace ET.Client
         {
             self.LastSelectItem = rolePetItem;
             self.E_ButtonAddPointButton.transform.Find("Reddot").gameObject.SetActive(rolePetItem != null && rolePetItem.AddPropretyNum > 0);
-            for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
+            foreach (Scroll_Item_PetListItem scrollItemPetListItem in self.ScrollItemPetListItems.Values)
             {
-                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
-                scrollItemPetListItem.OnUpdatePetPoint(rolePetItem);
+                if (scrollItemPetListItem.uiTransform != null)
+                {
+                    scrollItemPetListItem.OnUpdatePetPoint(rolePetItem);
+                }
             }
 
             self.UpdateAttribute(self.LastSelectItem);
