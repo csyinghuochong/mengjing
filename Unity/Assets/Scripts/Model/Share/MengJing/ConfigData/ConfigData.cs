@@ -1976,15 +1976,15 @@ namespace ET
         [StaticField]
         public static Dictionary<int, string> UnionWishRewardForType = new Dictionary<int, string>()
         {
-            { 1, "3;20000@10010041;50@10010083;10" },
-            { 2, "3;20000@10010041;50@10010083;10"  },
-            { 3, "3;20000@10010041;50@10010083;10"  },
+            { 1, "35;10000@16;10@1000018;1" },
+            { 2, "35;100000@16;30@1000018;5"  },
+            { 3, "35;100000@16;50@1000018;10"  },
         };
         /// <summary>
         /// 公会祝福金币消耗
         /// </summary>
         [StaticField]
-        public static int UnionWishGetGoldCost = 100000;
+        public static int UnionWishGetGoldCost = 50000;
         /// <summary>
         /// 公会祝福钻石消耗
         /// </summary>
@@ -1992,21 +1992,22 @@ namespace ET
         public static int UnionWishGetDiamondCost = 300;
         
         /// <summary>
-        /// 不同的职位对应的奖励礼包    1族长 2副族长 0其他
+        /// 不同的职位对应的奖励礼包    1族长 2副族长 3长老 0其他
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> UnionWishRewardForPosition = new Dictionary<int, string>()
         {
-            { 1, "3;20000@10010041;50@10010083;10" },
-            { 2, "3;20000@10010041;50@10010083;10"  },
-            { 0, "3;20000@10010041;50@10010083;10"  },
+            { 1, "1010053;1" },
+            { 2, "1010054;1"  },
+            { 3, "1010053;1"  },
+            { 0, "1010055;1"  },
         };
         
         /// <summary>
         /// 族长祝福
         /// </summary>
         [StaticField]
-        public static int UnionWishSendDiamondCost = 300;
+        public static int UnionWishSendDiamondCost = 100000;
         # region 宠物乱斗配置
 
         /// <summary>

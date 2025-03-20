@@ -45,7 +45,7 @@ namespace ET.Client
                 int openTime_2 = int.Parse(openTimes[0].Split(';')[1]);
                 int closeTime_1 = int.Parse(openTimes[1].Split(';')[0]);
                 int closeTime_2 = int.Parse(openTimes[1].Split(';')[1]);
-                self.E_DesText.text = zstring.Format("每天{0}:{1}点在公会地图刷新Boss，请各位少侠一定要准时参加哦", openTime_1, openTime_2);
+                self.E_DesText.text = zstring.Format("每天{0}:{1}点在公会地图刷新领主怪物，怪物会携带大量的财宝，请各位少侠一定要准时参加哦！", openTime_1, openTime_2);
             }
         }
 

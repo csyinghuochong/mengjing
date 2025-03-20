@@ -26,26 +26,26 @@ namespace ET
         
         public static int GetUnionBossId(int openDay)
         {
-            int monsterID = 72000021;
+            int monsterID = 403065;
             //根据开服天数创建怪物
             if (openDay >= 2)
             {
-                monsterID = 72000022;
+                monsterID = 403065;
             }
 
             if (openDay >= 4)
             {
-                monsterID = 72000023;
+                monsterID = 403065;
             }
 
             if (openDay >= 6)
             {
-                monsterID = 72000024;
+                monsterID = 403065;
             }
 
             if (openDay >= 8)
             {
-                monsterID = 72000025;
+                monsterID = 403065;
             }
 
             return monsterID;
