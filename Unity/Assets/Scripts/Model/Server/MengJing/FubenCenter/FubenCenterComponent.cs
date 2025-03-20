@@ -75,8 +75,6 @@ namespace ET.Server
         /// 家族争霸
         /// </summary>
         public BattleInfo UnionRaceScene { get; set; } 
-
-        public Dictionary<long, long> UnionBossList = new Dictionary<long, long>(); 
         
         /// <summary>
         /// 家族地图
