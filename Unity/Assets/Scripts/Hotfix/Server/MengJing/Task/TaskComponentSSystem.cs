@@ -314,10 +314,14 @@ namespace ET.Server
             {
                 self.GetRandomFubenId(taskPro);
             }
-            if (taskConfig.TaskType != TaskTypeEnum.Season
-                && taskConfig.TaskType != TaskTypeEnum.Welfare
-                && taskConfig.TaskType != TaskTypeEnum.System
-                && self.GetTrackTaskList().Count < 3)
+            // if (taskConfig.TaskType != TaskTypeEnum.Season
+            //     && taskConfig.TaskType != TaskTypeEnum.Welfare
+            //     && taskConfig.TaskType != TaskTypeEnum.System
+            //     && self.GetTrackTaskList().Count < 3)
+            // {
+            //     taskPro.TrackStatus = 1;
+            // }
+            if (taskConfig.TaskType == TaskTypeEnum.Main && self.GetTrackTaskList().Count < 3)
             {
                 taskPro.TrackStatus = 1;
             }

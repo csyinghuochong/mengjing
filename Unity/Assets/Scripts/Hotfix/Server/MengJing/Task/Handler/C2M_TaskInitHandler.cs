@@ -10,6 +10,11 @@ namespace ET.Server
         {
             TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
 
+            for (int i = 0; i < taskComponent.RoleTaskList.Count; i++)
+            {
+                taskComponent.RoleTaskList[i].TrackStatus = 0;
+            }
+
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
             response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 

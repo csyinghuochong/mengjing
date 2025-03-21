@@ -1371,8 +1371,15 @@ namespace ET.Client
             int taskId = taskPro.taskID;
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskId);
             int TargetType = taskConfig.TargetType;
+            TaskLogic taskLogic = GetTaskLogic(TargetType);
 
-            return GetTaskLogic(TargetType).taskProgess(taskPro, taskConfig);
+            if (taskLogic.taskProgess == null)
+            {
+                Log.Debug($"taskLogic.taskProgess == null:  {taskConfig.Id}");
+                return string.Empty;
+            }
+
+            return taskLogic.taskProgess(taskPro, taskConfig);
         }
     }
 }
