@@ -15,7 +15,7 @@ namespace ET.Server
             switch (request.OperateType)
             {
                 case 1:
-                    if (serverTime - numericComponent.GetAsLong(NumericType.OrderTaskRefrehTime) >= TimeHelper.Minute)
+                    if (serverTime - numericComponent.GetAsLong(NumericType.OrderTaskRefrehTime) >= TimeHelper.Hour * 2)
                     {
                         //刷新订单
                         taskComponentS.UpdateOrderTask();
