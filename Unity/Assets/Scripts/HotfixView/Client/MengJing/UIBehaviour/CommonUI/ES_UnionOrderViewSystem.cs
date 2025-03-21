@@ -43,6 +43,8 @@ namespace ET.Client
 		[EntitySystem]
 		private static void Destroy(this ES_UnionOrder self)
 		{
+			self.Root().GetComponent<TimerComponent>().Remove(ref self.UpdateTime);
+			
 			self.DestroyWidget();
 		}
 		
@@ -84,6 +86,7 @@ namespace ET.Client
             }
             // 普通道具直接扣
             self.UpdateTaskStatus();
+            self.UpdateTodayNumber();
 		}
 
 		public static void OnSelectUnionItem(this ES_UnionOrder self, TaskPro taskPro)
@@ -122,6 +125,7 @@ namespace ET.Client
 			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 2 );
 			
 			self.UpdateTaskList();
+			self.UpdateTodayNumber();
 		}
 
 		public static async ETTask OnUpdateUI(this ES_UnionOrder self)
@@ -130,6 +134,7 @@ namespace ET.Client
 
 			self.UpdateTaskList();
 			self.ShowUpdateTime();
+			self.UpdateTodayNumber();
 		}
 
 		private static void UpdateTaskStatus(this ES_UnionOrder self)
@@ -182,16 +187,22 @@ namespace ET.Client
 			}
 		}
 
+		private static void UpdateTodayNumber(this ES_UnionOrder self)
+		{
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+			using (zstring.Block())
+			{
+				self.E_Text_TodayNumber.text = zstring.Format("今日已完成{0}/10次", numericComponentC.GetAsInt(NumericType.OrderTaskCompNumber));	
+			}
+		}
+        
 		private static void UpdateTaskList(this ES_UnionOrder self)
 		{
 			TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>();
 			self.ShowTaskIds = taskComponentC.GetTaskTypeList(TaskTypeEnum.UnionOrder);
 			self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowTaskIds.Count);
 			self.E_UnionMyItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskIds.Count);
-
-			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();	
-			self.E_Text_TodayNumber.text = zstring.Format("今日已完成{0}/10次", numericComponentC.GetAsInt(NumericType.OrderTaskCompNumber));	
 		}
 	}
 
