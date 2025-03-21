@@ -1,0 +1,64 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace ET.Client
+{
+    [EntitySystemOf(typeof(ES_UnionKeJiResearchItem))]
+    [FriendOfAttribute(typeof(ES_UnionKeJiResearchItem))]
+    public static partial class ES_UnionKeJiResearchItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_UnionKeJiResearchItem self, Transform transform)
+        {
+            self.uiTransform = transform;
+            self.E_ImageIconButton.AddListener(self.OnImageIcon);
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_UnionKeJiResearchItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void Init(this ES_UnionKeJiResearchItem self, int position)
+        {
+            self.Position = position;
+        }
+
+        public static void Refresh(this ES_UnionKeJiResearchItem self)
+        {
+            int configId = self.GetParent<ES_UnionKeJiResearch>().UnionMyInfo.UnionKeJiList[self.Position];
+            UnionKeJiConfig nowUnionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(configId);
+
+            
+            for (int i = 0; i < nowUnionKeJiConfig.PreId.Length; i++)
+            {
+                bool havePre = UnionKeJiConfigCategory.Instance.HavePreId(nowUnionKeJiConfig.PreId[i], self.GetParent<ES_UnionKeJiResearch>().UnionMyInfo.UnionKeJiList);
+
+                using (zstring.Block())
+                {
+                    self.uiTransform.Find(zstring.Format("Img_line_{0}", i))?.gameObject.SetActive(havePre);
+                }
+            }
+
+            int curlv = nowUnionKeJiConfig.QiangHuaLv;
+            int maxlv = UnionKeJiConfigCategory.Instance.Get(UnionKeJiConfigCategory.Instance.GetMaxId(self.Position)).QiangHuaLv;
+
+            using (zstring.Block())
+            {
+                self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
+            }
+
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
+            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            // self.E_ImageIconImage.sprite = sp;
+            // CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, !active);
+        }
+
+        private static void OnImageIcon(this ES_UnionKeJiResearchItem self)
+        {
+            self.GetParent<ES_UnionKeJiResearch>().UpdateInfo(self.Position);
+        }
+    }
+}
