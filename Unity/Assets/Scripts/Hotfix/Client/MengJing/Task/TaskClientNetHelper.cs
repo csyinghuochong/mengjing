@@ -19,6 +19,14 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> UnionOrderTaskRequest(Scene root, int operate)
+        {
+            C2M_UnionOrderOperateRequest request = C2M_UnionOrderOperateRequest.Create();   
+            request.OperateType = operate;  
+            M2C_UnionOrderOperateResponse response = (M2C_UnionOrderOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestTaskTrack(Scene root, int taskId, int trackStatus)
         {
             C2M_TaskTrackRequest request = C2M_TaskTrackRequest.Create();

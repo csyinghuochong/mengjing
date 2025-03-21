@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 
 		public Dictionary<int, EntityRef<Scroll_Item_UnionOrderItem>> ScrollItemUnionListItems;
-		public List<int> ShowTaskIds = new List<int>();	
+		public List<TaskPro> ShowTaskIds = new List<TaskPro>();	
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_UnionMyItemsLoopVerticalScrollRect
      	{

@@ -10,15 +10,23 @@ namespace ET.Server
 
             long serverTime = TimeHelper.ServerNow();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-
             TaskComponentS taskComponentS      =    unit.GetComponent<TaskComponentS>();
             
-            if (serverTime - numericComponent.GetAsLong(NumericType.OrderTaskRefrehTime) >= TimeHelper.Minute)
+            switch (request.OperateType)
             {
-                //刷新订单
-                taskComponentS.UpdateOrderTask();
+                case 1:
+                    if (serverTime - numericComponent.GetAsLong(NumericType.OrderTaskRefrehTime) >= TimeHelper.Minute)
+                    {
+                        //刷新订单
+                        taskComponentS.UpdateOrderTask();
+                        numericComponent.ApplyValue(NumericType.OrderTaskRefrehTime, TimeHelper.ServerNow());
+                    }
+                    break;
+                case 2:
+              
+                    taskComponentS.UpdateOrderTask();
+                    break;
             }
-            
             
             await ETTask.CompletedTask;
         }

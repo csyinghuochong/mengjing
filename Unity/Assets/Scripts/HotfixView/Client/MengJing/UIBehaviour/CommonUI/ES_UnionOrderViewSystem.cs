@@ -38,9 +38,9 @@ namespace ET.Client
 			await ETTask.CompletedTask;
 		}
 
-		public static void OnSelectUnionItem(this ES_UnionOrder self, int taskid)
+		public static void OnSelectUnionItem(this ES_UnionOrder self, TaskPro taskPro)
 		{
-			TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
+			TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 			BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();	
 			
 			if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
@@ -69,9 +69,10 @@ namespace ET.Client
 
 		public static async ETTask OnUpdateUI(this ES_UnionOrder self)
 		{
-			U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root());
+			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 1 );
 
-			//self.ShowTaskIds = response.UnionMyInfo.UnionOrderTask;
+			TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>();
+			self.ShowTaskIds = taskComponentC.GetTaskTypeList(TaskTypeEnum.UnionOrder);
 			self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowTaskIds.Count);
 			self.E_UnionMyItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskIds.Count);
 		}

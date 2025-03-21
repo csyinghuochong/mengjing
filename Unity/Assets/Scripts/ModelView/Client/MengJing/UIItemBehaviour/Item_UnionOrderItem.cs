@@ -8,8 +8,8 @@ namespace ET.Client
 	public  class Scroll_Item_UnionOrderItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_UnionOrderItem> 
 	{
 		
-		public int TaskId {get;set;}
-		public Action<int> ClickCallback {get;set;}
+		public TaskPro TaskInfo {get;set;}
+		public Action<TaskPro> ClickCallback {get;set;}
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

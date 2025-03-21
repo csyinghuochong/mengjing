@@ -386,9 +386,7 @@ namespace ET.Server
             }
 
             self.CreateTask(taskid);
-            M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            self.NoticeUpdateTask(0);
         }
 
         public static List<TaskPro> GetTrackTaskList(this TaskComponentS self)
@@ -1062,9 +1060,7 @@ namespace ET.Server
                 taskPro.taskStatus = (int)TaskStatuEnum.Completed;
             }
 
-            M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            self.NoticeUpdateTask(0);
         }
 
         public static void OnPetMineLogin(this TaskComponentS self, List<PetMingPlayerInfo> petMingPlayers, List<KeyValuePairInt> extends)
@@ -1120,9 +1116,7 @@ namespace ET.Server
 
             if (notice)
             {
-                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+                self.NoticeUpdateTask(0);
             }
         }
 
@@ -1233,15 +1227,17 @@ namespace ET.Server
 
         public static void UpdateOrderTask(this TaskComponentS self)
         {
-                self.RemoveTaskByType(TaskTypeEnum.UnionOrder);
+            self.RemoveTaskByType(TaskTypeEnum.UnionOrder);
                 
-                Unit unit = self.GetParent<Unit>();
-                int playerlv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
-                List<int> taskids = TaskHelper.GetTaskListByWeight(TaskTypeEnum.UnionOrder, playerlv, 5);
-                for (int i = 0; i < taskids.Count; i++)
-                {
-                    self.CreateTask(taskids[i]);
-                }
+            Unit unit = self.GetParent<Unit>();
+            int playerlv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+            List<int> taskids = TaskHelper.GetTaskListByWeight(TaskTypeEnum.UnionOrder, playerlv, 5);
+            for (int i = 0; i < taskids.Count; i++)
+            {
+                self.CreateTask(taskids[i]);
+            }
+                
+            self.NoticeUpdateTask(0);
         }
 
         private static void RemoveTaskByType(this TaskComponentS self, int taskType)
@@ -1288,11 +1284,15 @@ namespace ET.Server
 
                 if (TaskHelper.IsDailyTask(taskCountry.TaskType))
                 {
-                    if (self.RoleComoleteTaskList.Contains(taskCountry.Id))
-                    {
-                        self.RoleComoleteTaskList.Remove(taskCountry.Id);
-                    }
                     self.RoleTaskList.RemoveAt(i);
+                }
+            }
+            for (int i = self.RoleComoleteTaskList.Count - 1; i >= 0; i--)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleComoleteTaskList[i]);
+                if (TaskHelper.IsDailyTask(taskConfig.TaskType))
+                {
+                    self.RoleComoleteTaskList.RemoveAt(i);
                 }
             }
 
@@ -1398,9 +1398,7 @@ namespace ET.Server
                 break;
             }
 
-            M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            self.NoticeUpdateTask(0);
         }
 
         public static void CheckUnionTask(this TaskComponentS self)
@@ -1448,9 +1446,7 @@ namespace ET.Server
 
             if (notice)
             {
-                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+               self.NoticeUpdateTask(0);
             }
         }
 
@@ -1588,10 +1584,7 @@ namespace ET.Server
 
             if (notice)
             {
-                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                m2C_TaskUpdate.UpdateMode = 2;
-                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+                self.NoticeUpdateTask(2);
             }
         }
 
@@ -1623,19 +1616,25 @@ namespace ET.Server
             }
         }
 
-
+        private static void NoticeUpdateTask(this TaskComponentS self, int updatemode)
+        {
+            Unit unit = self.GetParent<Unit>();
+            M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
+            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
+            m2C_TaskUpdate.UpdateMode = updatemode;
+            MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+        }
+        
         public static void OnZeroClockUpdate(this TaskComponentS self, bool notice)
         {
             self.OnLineTime = 0;
-            Unit unit = self.GetParent<Unit>();
+        
             self.UpdateDailyList(notice);
             self.UpdateWelfareTask(notice);
             
             if (notice)
             {
-                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                self.NoticeUpdateTask(0);
             }
         }
     }

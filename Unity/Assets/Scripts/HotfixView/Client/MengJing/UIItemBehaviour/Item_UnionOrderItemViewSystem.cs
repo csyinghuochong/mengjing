@@ -20,17 +20,17 @@ namespace ET.Client
 
 		private static void OnClick(this Scroll_Item_UnionOrderItem self)
 		{
-			self.ClickCallback?.Invoke(self.TaskId);     
+			self.ClickCallback?.Invoke(self.TaskInfo);     
 		}
 		
-		public static void Refresh(this Scroll_Item_UnionOrderItem self, int  taskid, Action<int> clickCallback)
+		public static void Refresh(this Scroll_Item_UnionOrderItem self, TaskPro  taskPro, Action<TaskPro> clickCallback)
 		{
-			self.TaskId  = taskid;
+			self.TaskInfo  = taskPro;
 			self.ClickCallback = clickCallback;	
 			
 			self.E_ImageButtonButton.AddListener(self.OnClick);
 			
-			TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
+			TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon);
 			Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 			self.E_TaskIconImage.sprite = sp;
