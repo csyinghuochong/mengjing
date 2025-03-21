@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_UnionOrderItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_UnionOrderItem> 
 	{
+		
+		public int TaskId {get;set;}
+		public Action<int> ClickCallback {get;set;}
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
