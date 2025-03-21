@@ -107,6 +107,7 @@ namespace ET.Client
             // 普通道具直接扣
             self.UpdateTaskStatus();
             self.UpdateTodayNumber();
+            self.OnSelectUnionItem(self.SelectTaskPro);
 		}
 
 		public static void OnSelectUnionItem(this ES_UnionOrder self, TaskPro taskPro)
@@ -148,11 +149,13 @@ namespace ET.Client
 				FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
 				return;
 			}
-            
-			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 2 );
 			
-			self.UpdateTaskList();
-			self.UpdateTodayNumber();
+			PopupTipHelp.OpenPopupTip( self.Root(), "刷新订单", "是否花费200钻石进行升级？", async () =>
+			{
+				await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 2 );
+				self.UpdateTaskList();
+				self.UpdateTodayNumber();
+			},() => { }).Coroutine();
 		}
 
 		public static async ETTask OnUpdateUI(this ES_UnionOrder self)
