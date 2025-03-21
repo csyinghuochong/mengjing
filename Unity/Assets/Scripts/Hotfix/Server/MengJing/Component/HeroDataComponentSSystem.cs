@@ -227,7 +227,7 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.UnionDonationNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.UnionDiamondDonationNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.UnionWishGet, 0, notice);
-             numericComponent.ApplyValue(NumericType.UnionOrderTaskNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.OrderTaskCompNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
              // 重置封印之塔数据
              numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);

@@ -775,8 +775,6 @@ message UnionInfo
 	int64 UnionGold = 17;               //家族金币
 	repeated string ActiveRecord = 18;	//记录 $"{playerName}_{getWay}_{dataType}_{dataValue}
 	int64 UnionWishTime = 19;
-	int64 UnionOrderTime = 20;   //公会订单刷新时间
-	repeated int32 UnionOrderTask = 21;   //公会订单任务
 }
 
 message UnionPlayerInfo
@@ -4043,6 +4041,24 @@ message M2C_UnionKeJiQuickResponse // ILocationResponse
 	string Message = 92;
 	UnionInfo UnionInfo = 1;
 }
+
+//公会订单
+//ResponseType M2C_UnionOrderOperateResponse
+message C2M_UnionOrderOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	int32 OperateType = 1;	// 1 查看订单 2刷新订单
+}
+
+message M2C_UnionOrderOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 
 //公会踢人
 //ResponseType U2C_UnionKickOutResponse

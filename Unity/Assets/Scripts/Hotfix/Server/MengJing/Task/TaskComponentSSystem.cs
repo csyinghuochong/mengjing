@@ -86,6 +86,8 @@ namespace ET.Server
                 self.OnLineTime = 0;
                 self.OnLineTime(1);
             }
+            
+            //检测订单任务
         }
 
         public static bool IsTaskComplete(this TaskComponentS self, int taskid)
@@ -491,9 +493,7 @@ namespace ET.Server
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
 
             TaskPro taskPro = self.GetTaskById(taskid);
-
-            //帮会订单任务不需要接取。。
-            if (taskPro == null && taskConfig.TaskType != TaskTypeEnum.UnionOrder)
+            if (taskPro == null )
             {
                 return ErrorCode.ERR_TaskCommited;
             }
@@ -676,8 +676,8 @@ namespace ET.Server
                     }
                     break;
                 case TaskTypeEnum.UnionOrder:
-                    int unionOrderTaskNumber = numericComponent.GetAsInt(NumericType.UnionOrderTaskNumber) + 1;
-                    numericComponent.ApplyValue(NumericType.UnionOrderTaskNumber, unionOrderTaskNumber,  true);
+                    int unionOrderTaskNumber = numericComponent.GetAsInt(NumericType.OrderTaskCompNumber) + 1;
+                    numericComponent.ApplyValue(NumericType.OrderTaskCompNumber, unionOrderTaskNumber,  true);
                     break;
             }
             return ErrorCode.ERR_Success;

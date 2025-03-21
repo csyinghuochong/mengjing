@@ -32,7 +32,6 @@ namespace ET.Server
             unionInfo.UnionInfo.LeaderId = request.UserID;       
             unionInfo.UnionInfo.UnionName = request.UnionName;
             unionInfo.UnionInfo.UnionPurpose = request.UnionPurpose;
-            unionInfo.UnionInfo.UnionOrderTime = TimeHelper.ServerNow();
 
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserID);
             UserInfo unionInfoCache = userInfoComponent.ChildrenDB[0] as UserInfo;

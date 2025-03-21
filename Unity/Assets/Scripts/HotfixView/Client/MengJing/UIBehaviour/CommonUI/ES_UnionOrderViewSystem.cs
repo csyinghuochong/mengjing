@@ -71,7 +71,7 @@ namespace ET.Client
 		{
 			U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root());
 
-			self.ShowTaskIds = response.UnionMyInfo.UnionOrderTask;
+			//self.ShowTaskIds = response.UnionMyInfo.UnionOrderTask;
 			self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowTaskIds.Count);
 			self.E_UnionMyItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskIds.Count);
 		}

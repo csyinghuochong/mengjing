@@ -3496,18 +3496,6 @@ namespace ET
         [MemoryPackOrder(18)]
         public long UnionWishTime { get; set; }
 
-        /// <summary>
-        /// 公会订单刷新时间
-        /// </summary>
-        [MemoryPackOrder(19)]
-        public long UnionOrderTime { get; set; }
-
-        /// <summary>
-        /// 公会订单任务
-        /// </summary>
-        [MemoryPackOrder(20)]
-        public List<int> UnionOrderTask { get; set; } = new();
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3534,8 +3522,6 @@ namespace ET
             this.UnionGold = default;
             this.ActiveRecord.Clear();
             this.UnionWishTime = default;
-            this.UnionOrderTime = default;
-            this.UnionOrderTask.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
