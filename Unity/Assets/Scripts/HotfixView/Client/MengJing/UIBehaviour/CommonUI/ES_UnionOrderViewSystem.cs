@@ -13,6 +13,7 @@ namespace ET.Client
 			self.uiTransform = transform;
 			
 			self.E_Button_CommitButton.AddListenerAsync( self.OnClickCommitButton  );
+			self.E_Button_UpgradeButton.AddListenerAsync( self.OnClickUpgradeButton );
 			self.E_UnionMyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionListItemsRefresh);
 		}
 
@@ -67,10 +68,22 @@ namespace ET.Client
 			self.ES_RewardList.Refresh(TaskHelper.GetTaskRewards(taskConfig.Id, taskConfig));
 		}
 
+		private static async ETTask OnClickUpgradeButton(this ES_UnionOrder self)
+		{
+			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 2 );
+			
+			self.UpdateTaskList();
+		}
+
 		public static async ETTask OnUpdateUI(this ES_UnionOrder self)
 		{
 			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 1 );
 
+			self.UpdateTaskList();
+		}
+
+		private static void UpdateTaskList(this ES_UnionOrder self)
+		{
 			TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>();
 			self.ShowTaskIds = taskComponentC.GetTaskTypeList(TaskTypeEnum.UnionOrder);
 			self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowTaskIds.Count);
