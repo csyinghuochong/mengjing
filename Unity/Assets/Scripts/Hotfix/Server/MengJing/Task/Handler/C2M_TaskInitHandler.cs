@@ -12,7 +12,10 @@ namespace ET.Server
 
             for (int i = 0; i < taskComponent.RoleTaskList.Count; i++)
             {
-                taskComponent.RoleTaskList[i].TrackStatus = 0;
+                if(TaskConfigCategory.Instance.Get(taskComponent.RoleTaskList[i].taskID).TaskType != (int)TaskTypeEnum.Main )
+                {
+                    taskComponent.RoleTaskList[i].TrackStatus = 0;
+                }
             }
 
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 

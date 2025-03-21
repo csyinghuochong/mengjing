@@ -82,7 +82,15 @@ namespace ET.Client
             }
             else
             {
-	            await TaskClientNetHelper.RequestCommitTask(self.Root(),  self.SelectTaskPro.taskID, 0);
+	            int errorCode = await TaskClientNetHelper.RequestCommitTask(self.Root(),  self.SelectTaskPro.taskID, 0);
+	            if (errorCode == ErrorCode.ERR_Success)
+	            {
+		            FlyTipComponent.Instance.ShowFlyTip("任务完成!");
+	            }
+	            else
+	            {
+		            HintHelp.ShowErrorHint(self.Root(), errorCode);
+	            }
             }
             // 普通道具直接扣
             self.UpdateTaskStatus();
