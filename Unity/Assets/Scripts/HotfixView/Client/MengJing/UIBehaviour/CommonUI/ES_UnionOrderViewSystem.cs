@@ -82,6 +82,18 @@ namespace ET.Client
             }
             else
             {
+	            if (taskConfig.TargetType == TaskTargetType.ItemID_Number_2)
+	            {
+		            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();	
+		            int neednum = taskConfig.TargetValue[0];
+		            long havenum = bagComponentC.GetItemNumber(taskConfig.Target[0]);
+		            if (havenum < neednum)
+		            {
+			            FlyTipComponent.Instance.ShowFlyTip("道具不足!");
+			            return;
+		            }
+	            }
+
 	            int errorCode = await TaskClientNetHelper.RequestCommitTask(self.Root(),  self.SelectTaskPro.taskID, 0);
 	            if (errorCode == ErrorCode.ERR_Success)
 	            {
