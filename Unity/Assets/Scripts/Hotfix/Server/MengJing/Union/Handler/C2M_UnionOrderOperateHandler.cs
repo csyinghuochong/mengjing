@@ -23,7 +23,8 @@ namespace ET.Server
                     }
                     break;
                 case 2:
-              
+                    UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+                    userInfoComponentS.UpdateRoleMoneySub( UserDataType.Diamond, "-200", true, ItemGetWay.UnionOrder );
                     taskComponentS.UpdateOrderTask();
                     break;
             }

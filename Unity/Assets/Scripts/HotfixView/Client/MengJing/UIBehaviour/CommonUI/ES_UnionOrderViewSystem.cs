@@ -122,6 +122,13 @@ namespace ET.Client
 
 		private static async ETTask OnClickUpgradeButton(this ES_UnionOrder self)
 		{
+			UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+			if (userInfoComponentC.UserInfo.Diamond < 200)
+			{
+				FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
+				return;
+			}
+            
 			await TaskClientNetHelper.UnionOrderTaskRequest(self.Root(), 2 );
 			
 			self.UpdateTaskList();

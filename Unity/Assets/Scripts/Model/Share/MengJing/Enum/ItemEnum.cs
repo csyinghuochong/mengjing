@@ -104,7 +104,7 @@ namespace ET
         public const int ActivityNewYear = 93;
         public const int PetMeleeReward = 94;
         public const int UnionWish = 96;
-
+        public const int UnionOrder = 96;
         public const int Activity = 100;                //活动
 
 
