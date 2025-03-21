@@ -139,6 +139,17 @@ namespace ET
             return str;
         }
 
+        public static string ShowLeftTime3(long seconds)
+        {
+            // int hours = (int)Math.Ceiling(time * 1f/ Hour);
+            // int minutes =  (int)Math.Ceiling((time - hours * Hour) * 1f/ Minute);
+            //
+            // // 使用字符串格式化输出 00:00:00 格式的时间
+            // return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+            TimeSpan time = TimeSpan.FromSeconds(seconds);
+            return time.ToString(@"hh\:mm\:ss");
+        }
+        
         public static bool IsInTime(List<int> openTime)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();

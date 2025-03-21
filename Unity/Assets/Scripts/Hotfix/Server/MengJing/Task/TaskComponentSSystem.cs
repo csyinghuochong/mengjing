@@ -416,9 +416,9 @@ namespace ET.Server
 
         public static int CheckGiveItemTask(this TaskComponentS self, int TargetType, int[] Target, int[] TargetValue, long BagInfoID, TaskPro taskPro)
         {
+            BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
             if (TargetType == (int)TaskTargetType.ItemID_Number_2)
             {
-                BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
                 int needid = Target[0];
                 int neednumber = TargetValue[0];
                 int curnumber = (int)bagComponent.GetItemNumber(needid);
@@ -434,7 +434,6 @@ namespace ET.Server
 
             if (TargetType == (int)TaskTargetType.GiveItem_10)
             {
-                BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
                 ItemInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, BagInfoID);
                 if (bagInfo == null)
                 {
@@ -547,8 +546,7 @@ namespace ET.Server
                 return checkError;
             }
             
-            if (TaskHelper.IsMainTask(taskConfig.TaskType) 
-                || taskConfig.TaskType == TaskTypeEnum.UnionOrder)
+            if (TaskHelper.IsMainTask(taskConfig.TaskType))
             {
                 for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
                 {

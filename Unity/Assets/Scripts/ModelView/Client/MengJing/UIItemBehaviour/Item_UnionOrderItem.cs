@@ -188,6 +188,30 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_Image_Completed
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Image_Completed == null )
+					{
+						this.m_E_Image_Completed = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_Completed");
+					}
+					return this.m_E_Image_Completed;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_Completed");
+				}
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_ImageButtonButton = null;
@@ -196,6 +220,7 @@ namespace ET.Client
 			this.m_EG_QulityListRectTransform = null;
 			this.m_es_commonitem = null;
 			this.m_E_Text_NameText = null;
+			this.m_E_Image_Completed = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -206,6 +231,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_QulityListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.Text m_E_Text_NameText = null;
+		private Image m_E_Image_Completed = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -22,7 +22,14 @@ namespace ET.Client
 		{
 			self.ClickCallback?.Invoke(self.TaskInfo);     
 		}
-		
+
+		public static void UpdateTaskStatus(this Scroll_Item_UnionOrderItem self)
+		{
+			TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>();
+			self.TaskInfo = taskComponentC.GetTaskById(self.TaskInfo.taskID);
+			self.E_Image_Completed.gameObject.SetActive(self.TaskInfo.taskStatus == (int)TaskStatuEnum.Commited);
+		}
+
 		public static void Refresh(this Scroll_Item_UnionOrderItem self, TaskPro  taskPro, Action<TaskPro> clickCallback)
 		{
 			self.TaskInfo  = taskPro;
@@ -35,7 +42,7 @@ namespace ET.Client
 			Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 			self.E_TaskIconImage.sprite = sp;
 
-			if (taskConfig.TargetType == TaskTargetType.GiveItem_10)
+			if (taskConfig.TargetType == TaskTargetType.ItemID_Number_2)
 			{
 				ItemInfo itemInfo = new ItemInfo();
 				itemInfo.ItemID  =	taskConfig.Target[0];
@@ -44,6 +51,7 @@ namespace ET.Client
 			}
 			
 			self.E_Text_NameText.text = taskConfig.TaskName;
+			self.E_Image_Completed.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Commited);
 		}
 	}
 }

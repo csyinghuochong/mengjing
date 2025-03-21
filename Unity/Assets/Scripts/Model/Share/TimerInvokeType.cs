@@ -115,5 +115,6 @@
         public const int PetMeleeDungeonDealCardTimer = 373;
         public const int PetMeleeDungeonRestoreTimer = 374;
         public const int PetMeleeCardTimer = 375;
+        public const int UIUnionOrderTimer = 376;
     }
 }

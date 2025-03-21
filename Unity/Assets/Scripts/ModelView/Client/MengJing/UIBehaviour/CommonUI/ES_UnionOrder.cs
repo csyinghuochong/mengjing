@@ -9,6 +9,8 @@ namespace ET.Client
 	public  class ES_UnionOrder : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy, IUILogic
 	{
 
+		public long UpdateTime;
+		public TaskPro SelectTaskPro;
 		public Dictionary<int, EntityRef<Scroll_Item_UnionOrderItem>> ScrollItemUnionListItems;
 		public List<TaskPro> ShowTaskIds = new List<TaskPro>();	
 		
@@ -204,6 +206,23 @@ namespace ET.Client
      			return this.m_E_Text_TaskDesText;
      		}
      	}
+		//
+		public UnityEngine.UI.Text E_Text_TodayNumber
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_TodayNumber == null )
+				{
+					this.m_E_Text_TodayNumber = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_Text_TodayNumber");
+				}
+				return this.m_E_Text_TodayNumber;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -230,6 +249,7 @@ namespace ET.Client
 			this.m_E_Text_NeedText = null;
 			this.m_E_Text_HaveText = null;
 			this.m_E_Text_TaskDesText = null;
+			this.m_E_Text_TodayNumber = null;
 			this.uiTransform = null;
 		}
 
@@ -244,6 +264,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_NeedText = null;
 		private UnityEngine.UI.Text m_E_Text_HaveText = null;
 		private UnityEngine.UI.Text m_E_Text_TaskDesText = null;
+		private UnityEngine.UI.Text m_E_Text_TodayNumber = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -306,6 +306,7 @@ namespace ET
                     {
                         selectedNumbers.Add(sourceNumber[i]);
                         weightedNumbers.RemoveAt(i);
+                        sourceNumber.RemoveAt(i);
                         break;
                     }
                 }
