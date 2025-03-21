@@ -676,7 +676,8 @@ namespace ET.Server
                     }
                     break;
                 case TaskTypeEnum.UnionOrder:
-                    
+                    int unionOrderTaskNumber = numericComponent.GetAsInt(NumericType.UnionOrderTaskNumber) + 1;
+                    numericComponent.ApplyValue(NumericType.UnionOrderTaskNumber, unionOrderTaskNumber,  true);
                     break;
             }
             return ErrorCode.ERR_Success;

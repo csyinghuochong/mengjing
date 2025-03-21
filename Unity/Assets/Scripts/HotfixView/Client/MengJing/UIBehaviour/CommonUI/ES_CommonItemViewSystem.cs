@@ -110,6 +110,11 @@ namespace ET.Client
             self.E_ItemNameText.gameObject.SetActive(false);
         }
 
+        public static void HideItemNumber(this ES_CommonItem self)
+        {
+            self.E_ItemNumText.gameObject.SetActive(false);
+        }
+        
         public static void ShowIcon(this ES_CommonItem self, string itemIcon)
         {
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemIcon);

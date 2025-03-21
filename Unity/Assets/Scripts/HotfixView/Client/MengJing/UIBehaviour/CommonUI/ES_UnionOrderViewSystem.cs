@@ -62,7 +62,7 @@ namespace ET.Client
 			{
 				self.ES_CommonItem.UpdateItem(null, ItemOperateEnum.None);
 			}
-			
+			self.ES_CommonItem.HideItemNumber();
 			self.E_Text_TaskDesText.text = taskConfig.TaskDes;
 			self.ES_RewardList.Refresh(TaskHelper.GetTaskRewards(taskConfig.Id, taskConfig));
 		}

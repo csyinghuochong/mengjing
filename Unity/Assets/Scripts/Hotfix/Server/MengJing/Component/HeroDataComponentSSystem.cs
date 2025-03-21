@@ -227,6 +227,7 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.UnionDonationNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.UnionDiamondDonationNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.UnionWishGet, 0, notice);
+             numericComponent.ApplyValue(NumericType.UnionOrderTaskNumber, 0, notice);
              numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
              // 重置封印之塔数据
              numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);
@@ -255,6 +256,14 @@ namespace ET.Server
              
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
              numericComponent.ApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
+             
+             // 需要广播的notice= true
+             // M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
+             // //通知自己
+             // m2C_UnitNumericListUpdate.UnitID = unit.Id;
+             // m2C_UnitNumericListUpdate.Vs = vs;
+             // m2C_UnitNumericListUpdate.Ks = ks;
+             // MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
          }
 
          /// <summary>

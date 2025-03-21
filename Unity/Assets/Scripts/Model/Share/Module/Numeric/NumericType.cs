@@ -202,6 +202,7 @@
         public const int BattleCampOld = 4006;                                     //战斗阵营[之前的]
         public const int PetMeleeMoLiAdd = 4007;          //宠物乱斗魔法恢复附加
         public const int UnionWishGet = 4008;
+        public const int UnionOrderTaskNumber = 4009;
 
         public const int Max = 10000;
 
