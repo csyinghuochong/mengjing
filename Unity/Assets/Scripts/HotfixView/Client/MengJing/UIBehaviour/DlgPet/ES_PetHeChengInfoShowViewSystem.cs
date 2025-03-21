@@ -23,6 +23,7 @@ namespace ET.Client
             self.PetZiZhiItemList[5] = self.EG_PetZiZhiItem6RectTransform.gameObject;
 
             self.E_AddButton.AddListenerAsync(self.OnImg_PeteroQualityButton);
+            self.E_TipButton.AddListenerAsync(self.OnImg_PeteroQualityButton);
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
