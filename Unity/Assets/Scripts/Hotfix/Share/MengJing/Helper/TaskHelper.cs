@@ -214,7 +214,7 @@ namespace ET
             return taskCountryList;
         }
          
-        public static List<int> GetUnionOrderTasks(int taskType, int roleLv)
+        public static List<int> GetTaskListByWeight(int taskType, int roleLv, int number)
         {
             List<int> taskids = new List<int>();    
             List<int> allTaskIds = new List<int>();
@@ -241,7 +241,7 @@ namespace ET
                 return taskids;
             }
 
-            taskids = RandomHelper.SelectNumbers(allWeights, allTaskIds, 5);
+            taskids = RandomHelper.SelectNumbers(allWeights, allTaskIds, number);
             return taskids;
         }
         

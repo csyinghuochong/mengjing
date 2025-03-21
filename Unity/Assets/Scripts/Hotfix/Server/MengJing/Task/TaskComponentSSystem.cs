@@ -31,12 +31,10 @@ namespace ET.Server
             if (!self.IsHaveTask(initTask))
             {
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(initTask);
-                TaskPro TaskPro = TaskPro.Create();
-                TaskPro.taskID = initTask;
+                TaskPro TaskPro = self.CreateTask(initTask);
                 TaskPro.TrackStatus = 1;
                 TaskPro.taskStatus = taskConfig.TargetType == TaskTargetType.LookingFor_3 ? (int)TaskStatuEnum.Completed : (int)TaskStatuEnum.Accepted;
                 TaskPro.taskTargetNum_1 = 1;
-                self.RoleTaskList.Add(TaskPro);
             }
         }
 
@@ -157,15 +155,13 @@ namespace ET.Server
             {
                 return (null, ErrorCode.ERR_TaskNoComplete); 
             }
-            TaskPro taskPro = self.CreateTask(taskId);
-            self.RoleTaskList.Add(taskPro);
+            TaskPro taskPro =  self.CreateTask(taskId);
             return (taskPro, ErrorCode.ERR_Success);
         }
 
         public static TaskPro OnGetDailyTask(this TaskComponentS self, int taskId)
         {
             TaskPro taskPro = self.CreateTask(taskId);
-            self.RoleTaskList.Add(taskPro);
             return taskPro;
         }
 
@@ -325,6 +321,8 @@ namespace ET.Server
             {
                 taskPro.TrackStatus = 1;
             }
+
+            self.RoleTaskList.Add(taskPro);
             return taskPro;
         }
 
@@ -387,9 +385,7 @@ namespace ET.Server
                 }
             }
 
-            TaskPro taskPro = self.CreateTask(taskid);
-            self.RoleTaskList.Add(taskPro);
-
+            self.CreateTask(taskid);
             M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
             m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
@@ -1235,6 +1231,45 @@ namespace ET.Server
             }
         }
 
+        public static void UpdateOrderTask(this TaskComponentS self)
+        {
+                self.RemoveTaskByType(TaskTypeEnum.UnionOrder);
+                
+                Unit unit = self.GetParent<Unit>();
+                int playerlv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+                List<int> taskids = TaskHelper.GetTaskListByWeight(TaskTypeEnum.UnionOrder, playerlv, 5);
+                for (int i = 0; i < taskids.Count; i++)
+                {
+                    self.CreateTask(taskids[i]);
+                }
+        }
+
+        private static void RemoveTaskByType(this TaskComponentS self, int taskType)
+        {
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                if (!TaskConfigCategory.Instance.Contain(self.RoleTaskList[i].taskID))
+                {
+                    self.RoleTaskList.RemoveAt(i);
+                    continue;
+                }
+
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskConfig.TaskType == taskType )
+                {
+                    self.RoleTaskList.RemoveAt(i);
+                }
+            }
+            for (int i = self.RoleComoleteTaskList.Count - 1; i >= 0; i--)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleComoleteTaskList[i]);
+                if (taskConfig.TaskType == taskType)
+                {
+                    self.RoleComoleteTaskList.RemoveAt(i);
+                }
+            }
+        }
+
         public static void UpdateDailyList(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
@@ -1273,9 +1308,7 @@ namespace ET.Server
 
             for (int i = 0; i < taskCountryList.Count; i++)
             {
-                TaskPro TaskPro = TaskPro.Create();
-                TaskPro.taskID = taskCountryList[i];
-                self.RoleTaskList.Add(TaskPro);
+                self.CreateTask(taskCountryList[i]);
             }
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
@@ -1446,7 +1479,7 @@ namespace ET.Server
                     continue;
                 }
 
-                self.RoleTaskList.Add(self.CreateTask(taskids[i]));
+                self.CreateTask(taskids[i]);
             }
         }
         
@@ -1549,9 +1582,7 @@ namespace ET.Server
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
                 for (int i = 0; i < taskCountryList.Count; i++)
                 {
-                    TaskPro TaskPro = TaskPro.Create();
-                    TaskPro.taskID = taskCountryList[i];
-                    self.RoleTaskList.Add(TaskPro);
+                    self.CreateTask(taskCountryList[i]);
                 }
             }
 
