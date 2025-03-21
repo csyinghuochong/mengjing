@@ -65,6 +65,8 @@ namespace ET
 		public string EquipSpaceName { get; set; }
 		/// <summary>图标</summary>
 		public string Icon { get; set; }
+		/// <summary>前置id</summary>
+		public int[] PreId { get; set; }
 		/// <summary>下一级强化</summary>
 		public int NextID { get; set; }
 		/// <summary>等级</summary>

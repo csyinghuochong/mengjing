@@ -33,5 +33,23 @@ namespace ET
         {
             return UnionQiangHuaList[position][UnionQiangHuaList[position].Count - 1].Id;
         }
+
+        public bool HavePreId(int preId, List<int> idList)
+        {
+            if (preId == 0)
+            {
+                return true;
+            }
+
+            foreach (int id in idList)
+            {
+                if (preId % 100 == id % 100 && preId - id >= 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_UnionKeJiResearchItem))]
     [FriendOf(typeof(Scroll_Item_UnionKeJiResearchItem))]
     [EntitySystemOf(typeof(ES_UnionKeJiResearch))]
     [FriendOfAttribute(typeof(ES_UnionKeJiResearch))]
@@ -12,10 +13,10 @@ namespace ET.Client
         private static void Awake(this ES_UnionKeJiResearch self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ImageSelectImage.gameObject.SetActive(false);
             self.E_ProgressBarImgImage.fillAmount = 0;
             self.E_QuickBtnButton.AddListener(self.OnQuickBtnButton);
             self.E_StartBtnButton.AddListenerAsync(self.OnStartBtnButton);
-            self.E_UnionKeJiResearchItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionKeJiResearchItemsRefresh);
 
             self.InitItemList().Coroutine();
         }
@@ -26,21 +27,27 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnUnionKeJiResearchItemsRefresh(this ES_UnionKeJiResearch self, Transform transform, int index)
-        {
-            Scroll_Item_UnionKeJiResearchItem scrollItemUnionKeJiResearchItem = self.ScrollItemUnionKeJiResearchItems[index].BindTrans(transform);
-            scrollItemUnionKeJiResearchItem.UpdateInfo(index, self.UnionMyInfo.UnionKeJiList[index]);
-            scrollItemUnionKeJiResearchItem.ClickAction = self.UpdateInfo;
-        }
-
         public static async ETTask InitItemList(this ES_UnionKeJiResearch self)
         {
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
 
             self.UnionMyInfo = respose.UnionMyInfo;
 
-            self.AddUIScrollItems(ref self.ScrollItemUnionKeJiResearchItems, self.UnionMyInfo.UnionKeJiList.Count);
-            self.E_UnionKeJiResearchItemsLoopVerticalScrollRect.SetVisible(true, self.UnionMyInfo.UnionKeJiList.Count);
+            if (self.Items.Count == 0)
+            {
+                for (int i = 0; i < self.EG_ContentRectTransform.childCount; i++)
+                {
+                    Transform subTrans = self.EG_ContentRectTransform.GetChild(i);
+                    ES_UnionKeJiResearchItem item = self.AddChild<ES_UnionKeJiResearchItem, Transform>(subTrans);
+                    item.Init(i);
+                    self.Items.Add(item);
+                }
+            }
+
+            foreach (ES_UnionKeJiResearchItem item in self.Items)
+            {
+                item.Refresh();
+            }
 
             self.UpdateInfo(0);
             self.UpdataProgressBar().Coroutine();
@@ -50,23 +57,14 @@ namespace ET.Client
         {
             self.Position = position;
 
-            if (self.ScrollItemUnionKeJiResearchItems != null)
+            for (int i = 0; i < self.Items.Count; i++)
             {
-                for (int i = 0; i < self.ScrollItemUnionKeJiResearchItems.Count; i++)
+                ES_UnionKeJiResearchItem item = self.Items[i];
+                if (position == item.Position)
                 {
-                    Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.UpdateInfo(i, self.UnionMyInfo.UnionKeJiList[i]);
-                    GameObject highlightImg = item.E_HighlightImgImage.gameObject;
-                    highlightImg.SetActive(item.Position == position);
-                    if (item.Position == position)
-                    {
-                        self.E_HeadImgImage.sprite = item.E_IconImgImage.sprite;
-                    }
+                    self.E_ImageSelectImage.transform.SetParent(item.uiTransform);
+                    self.E_ImageSelectImage.transform.localPosition = Vector3.zero;
+                    self.E_ImageSelectImage.gameObject.SetActive(true);
                 }
             }
 
@@ -75,27 +73,7 @@ namespace ET.Client
             if (self.UnionMyInfo.KeJiActitePos != -1)
             {
                 self.NeedTime = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.UnionMyInfo.KeJiActitePos]).NeedTime;
-
-                if (self.ScrollItemUnionKeJiResearchItems != null)
-                {
-                    for (int i = 0; i < self.ScrollItemUnionKeJiResearchItems.Count; i++)
-                    {
-                        Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
-
-                        if (item.uiTransform == null)
-                        {
-                            continue;
-                        }
-
-                        if (item.Position != self.UnionMyInfo.KeJiActitePos)
-                        {
-                            continue;
-                        }
-
-                        item.E_LvTextText.text = "研究中";
-                        break;
-                    }
-                }
+                // "研究中"
             }
             else
             {

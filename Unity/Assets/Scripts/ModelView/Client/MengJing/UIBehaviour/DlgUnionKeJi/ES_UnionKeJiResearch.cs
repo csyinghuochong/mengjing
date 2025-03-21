@@ -10,10 +10,27 @@ namespace ET.Client
 	{
 		public long NeedTime;
 		public int Position;
-		public UnionInfo UnionMyInfo;
-		public Dictionary<int, EntityRef<Scroll_Item_UnionKeJiResearchItem>> ScrollItemUnionKeJiResearchItems;
+		public UnionInfo UnionMyInfo { get; set; }
+		public List<EntityRef<ES_UnionKeJiResearchItem>> Items = new();
 		
-		public LoopVerticalScrollRect E_UnionKeJiResearchItemsLoopVerticalScrollRect
+		public RectTransform EG_ContentRectTransform
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_ContentRectTransform == null )
+				{
+					this.m_EG_ContentRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/EG_Content");
+				}
+				return this.m_EG_ContentRectTransform;
+			}
+		}
+		
+		public UnityEngine.UI.Image E_ImageSelectImage
      	{
      		get
      		{
@@ -22,15 +39,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_UnionKeJiResearchItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_UnionKeJiResearchItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_UnionKeJiResearchItems");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ImageSelect");
      			}
-     			return this.m_E_UnionKeJiResearchItemsLoopVerticalScrollRect;
+     			return this.m_E_ImageSelectImage;
      		}
      	}
 
-		public Image E_ProgressBarImgImage
+		public UnityEngine.UI.Image E_ProgressBarImgImage
      	{
      		get
      		{
@@ -41,13 +58,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ProgressBarImgImage == null )
      			{
-		    		this.m_E_ProgressBarImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ProgressBarImg");
+		    		this.m_E_ProgressBarImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ProgressBarImg");
      			}
      			return this.m_E_ProgressBarImgImage;
      		}
      	}
 
-		public Text E_ProgressBarTextText
+		public UnityEngine.UI.Text E_ProgressBarTextText
      	{
      		get
      		{
@@ -58,13 +75,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ProgressBarTextText == null )
      			{
-		    		this.m_E_ProgressBarTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_ProgressBarText");
+		    		this.m_E_ProgressBarTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_ProgressBarText");
      			}
      			return this.m_E_ProgressBarTextText;
      		}
      	}
 
-		public Button E_QuickBtnButton
+		public UnityEngine.UI.Button E_QuickBtnButton
      	{
      		get
      		{
@@ -75,13 +92,13 @@ namespace ET.Client
      			}
      			if( this.m_E_QuickBtnButton == null )
      			{
-		    		this.m_E_QuickBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_QuickBtn");
+		    		this.m_E_QuickBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_QuickBtn");
      			}
      			return this.m_E_QuickBtnButton;
      		}
      	}
 
-		public Image E_QuickBtnImage
+		public UnityEngine.UI.Image E_QuickBtnImage
      	{
      		get
      		{
@@ -92,13 +109,13 @@ namespace ET.Client
      			}
      			if( this.m_E_QuickBtnImage == null )
      			{
-		    		this.m_E_QuickBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_QuickBtn");
+		    		this.m_E_QuickBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_QuickBtn");
      			}
      			return this.m_E_QuickBtnImage;
      		}
      	}
 
-		public Image E_HeadImgImage
+		public UnityEngine.UI.Image E_HeadImgImage
      	{
      		get
      		{
@@ -109,13 +126,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadImgImage == null )
      			{
-		    		this.m_E_HeadImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HeadImg");
+		    		this.m_E_HeadImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_HeadImg");
      			}
      			return this.m_E_HeadImgImage;
      		}
      	}
 
-		public Text E_NameTextText
+		public UnityEngine.UI.Text E_NameTextText
      	{
      		get
      		{
@@ -126,13 +143,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NameTextText == null )
      			{
-		    		this.m_E_NameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NameText");
+		    		this.m_E_NameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_NameText");
      			}
      			return this.m_E_NameTextText;
      		}
      	}
 
-		public Text E_LvTextText
+		public UnityEngine.UI.Text E_LvTextText
      	{
      		get
      		{
@@ -143,13 +160,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LvTextText == null )
      			{
-		    		this.m_E_LvTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_LvText");
+		    		this.m_E_LvTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_LvText");
      			}
      			return this.m_E_LvTextText;
      		}
      	}
 
-		public Text E_NeedUnionLvTextText
+		public UnityEngine.UI.Text E_NeedUnionLvTextText
      	{
      		get
      		{
@@ -160,13 +177,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NeedUnionLvTextText == null )
      			{
-		    		this.m_E_NeedUnionLvTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NeedUnionLvText");
+		    		this.m_E_NeedUnionLvTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_NeedUnionLvText");
      			}
      			return this.m_E_NeedUnionLvTextText;
      		}
      	}
 
-		public Text E_UnderwayTextText
+		public UnityEngine.UI.Text E_UnderwayTextText
      	{
      		get
      		{
@@ -177,7 +194,7 @@ namespace ET.Client
      			}
      			if( this.m_E_UnderwayTextText == null )
      			{
-		    		this.m_E_UnderwayTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_UnderwayText");
+		    		this.m_E_UnderwayTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_UnderwayText");
      			}
      			return this.m_E_UnderwayTextText;
      		}
@@ -301,7 +318,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_UnionKeJiResearchItemsLoopVerticalScrollRect = null;
+			this.m_EG_ContentRectTransform = null;
+			this.m_E_ImageSelectImage = null;
 			this.m_E_ProgressBarImgImage = null;
 			this.m_E_ProgressBarTextText = null;
 			this.m_E_QuickBtnButton = null;
@@ -320,16 +338,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_UnionKeJiResearchItemsLoopVerticalScrollRect = null;
-		private Image m_E_ProgressBarImgImage = null;
-		private Text m_E_ProgressBarTextText = null;
-		private Button m_E_QuickBtnButton = null;
-		private Image m_E_QuickBtnImage = null;
-		private Image m_E_HeadImgImage = null;
-		private Text m_E_NameTextText = null;
-		private Text m_E_LvTextText = null;
-		private Text m_E_NeedUnionLvTextText = null;
-		private Text m_E_UnderwayTextText = null;
+		private RectTransform m_EG_ContentRectTransform = null;
+		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+		private UnityEngine.UI.Image m_E_ProgressBarImgImage = null;
+		private UnityEngine.UI.Text m_E_ProgressBarTextText = null;
+		private UnityEngine.UI.Button m_E_QuickBtnButton = null;
+		private UnityEngine.UI.Image m_E_QuickBtnImage = null;
+		private UnityEngine.UI.Image m_E_HeadImgImage = null;
+		private UnityEngine.UI.Text m_E_NameTextText = null;
+		private UnityEngine.UI.Text m_E_LvTextText = null;
+		private UnityEngine.UI.Text m_E_NeedUnionLvTextText = null;
+		private UnityEngine.UI.Text m_E_UnderwayTextText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private Text m_E_CostUnionGoldTextText = null;
 		private Text m_E_NeedTimeTextText = null;
