@@ -611,6 +611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3594922266502929273}
   - component: {fileID: 3893917879412653177}
+  - component: {fileID: 1056922815586369079}
   m_Layer: 0
   m_Name: Item_StoreItem
   m_TagString: Untagged
@@ -642,7 +643,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3893917879412653177
 MonoBehaviour:
@@ -665,6 +666,26 @@ MonoBehaviour:
     gameObject: {fileID: 5823114188920009441}
   - key: Text_value
     gameObject: {fileID: 1386472773616096819}
+--- !u!114 &1056922815586369079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039961394293174428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 400
+  m_PreferredHeight: 500
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &8825046838888847655
 GameObject:
   m_ObjectHideFlags: 0

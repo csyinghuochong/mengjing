@@ -914,6 +914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4269060396657668239}
   - component: {fileID: 3133964147683975782}
+  - component: {fileID: 5336427274303056659}
   m_Layer: 5
   m_Name: Item_UnionOrderItem
   m_TagString: Untagged
@@ -969,6 +970,26 @@ MonoBehaviour:
     gameObject: {fileID: 0}
   - key: Text_Name
     gameObject: {fileID: 410000724656393842}
+--- !u!114 &5336427274303056659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283804230314236011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 680
+  m_PreferredHeight: 150
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &8164934714528665515
 GameObject:
   m_ObjectHideFlags: 0

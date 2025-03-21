@@ -377,6 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2308578854410852755}
   - component: {fileID: 1714356344957000691}
+  - component: {fileID: -3279741813418576922}
   m_Layer: 5
   m_Name: Item_XiLianShowEquipItem
   m_TagString: Untagged
@@ -413,6 +414,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4713394847045641184}
   m_CullTransparentMesh: 1
+--- !u!114 &-3279741813418576922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4713394847045641184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 600
+  m_PreferredHeight: 150
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &6598353037214008184
 GameObject:
   m_ObjectHideFlags: 0

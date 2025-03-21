@@ -940,6 +940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4800308128301456644}
   - component: {fileID: 539985478221712372}
+  - component: {fileID: -4805938684485938050}
   m_Layer: 5
   m_Name: Item_PetSelectItem
   m_TagString: Untagged
@@ -1010,3 +1011,23 @@ MonoBehaviour:
     gameObject: {fileID: 1511117782222095832}
   - key: Image_Protect
     gameObject: {fileID: 3308187816345950070}
+--- !u!114 &-4805938684485938050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800308128279428256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 420
+  m_PreferredHeight: 140
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1

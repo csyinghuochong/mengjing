@@ -210,6 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 15916461769576892}
   - component: {fileID: 8343739477494354277}
+  - component: {fileID: 6184284899554033027}
   m_Layer: 0
   m_Name: Item_UnionMysteryItem_A
   m_TagString: Untagged
@@ -267,6 +268,26 @@ MonoBehaviour:
     gameObject: {fileID: 0}
   - key: Image_gold
     gameObject: {fileID: 6059411269173104040}
+--- !u!114 &6184284899554033027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2561421094093554951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 350
+  m_PreferredHeight: 390
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3702349953425996436
 GameObject:
   m_ObjectHideFlags: 0

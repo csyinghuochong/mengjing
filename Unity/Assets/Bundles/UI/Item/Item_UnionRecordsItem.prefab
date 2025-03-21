@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 1004451913989537306}
   - component: {fileID: 7720939022236124427}
   - component: {fileID: 663939630032592653}
+  - component: {fileID: 1462277721713124275}
   m_Layer: 5
   m_Name: Item_UnionRecordsItem
   m_TagString: Untagged
@@ -265,3 +266,23 @@ MonoBehaviour:
     gameObject: {fileID: 1514297833491027203}
   - key: TextContent
     gameObject: {fileID: 4660039958470467622}
+--- !u!114 &1462277721713124275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620144370492908045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 800
+  m_PreferredHeight: 100
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
