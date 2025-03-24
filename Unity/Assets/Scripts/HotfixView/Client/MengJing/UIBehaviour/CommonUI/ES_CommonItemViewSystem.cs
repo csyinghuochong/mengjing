@@ -226,7 +226,17 @@ namespace ET.Client
 
                 //self.E_ItemNameText.gameObject.SetActive(true);
                 self.E_ItemNameText.text = itemConfig.ItemName;
-
+                self.ItemID  = bagInfo.ItemID;
+                if (itemOperateEnum == ItemOperateEnum.ItemXiLian)
+                {
+                    self.E_ItemDragButton.gameObject.SetActive(true);
+                    self.E_ItemDragButton.AddListener(self.OnClickUIItem);
+                    self.SetEventTrigger();
+                }
+                else
+                {
+                    self.SetEventTrigger(false);
+                }
                 if (!self.UseTextColor)
                 {
                     self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);

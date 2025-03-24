@@ -62,6 +62,8 @@ namespace ET.Client
 
                     int itemid = item.ES_CommonItem.ItemID;
                     long number = bagComponent.GetItemNumber(itemid);
+                    
+                    Log.Debug($"itemid: {itemid}   number:{number}" );
 
                     item.ES_CommonItem.E_ItemNumText.text = ItemViewHelp.ReturnNumStr(number);
                     CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, number <= 0);
@@ -106,7 +108,15 @@ namespace ET.Client
             }
 
             self.SelectItemList(self.ItemId);
-            self.UpdateTyp1_Gailv();
+            if (self.ZhuaBuType == 1)
+            {
+                self.UpdateTyp1_Gailv();
+            }
+
+            if (self.ZhuaBuType == 2)
+            {
+                self.UpdateTyp2_Gailv();
+            }
         }
 
         public static void  OnButtonDig(this DlgZhuaPu self)
@@ -207,8 +217,7 @@ namespace ET.Client
             float distance = Vector3.Distance(self.View.E_Img_ChanZiImage.transform.localPosition, self.View.E_Img_PosImage.transform.localPosition);
             string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-
-            await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            
             M2C_ZhuBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
             
             // 捕捉成功，

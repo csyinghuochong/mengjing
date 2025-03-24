@@ -222,8 +222,6 @@ namespace ET.Server
 			int pet_exp = 0;
 			int addPropertyNum = pet_Lv * 5 + 20;
 			string addPropertyValue = ConfigData.DefaultGem;
-            bool baby = false;
-
 
 			//合成等级
 			pet_Lv = (int)(math.min(petLv_1, petLv_2) * 0.75f + (math.max(petLv_1, petLv_2) - math.min(petLv_1, petLv_2)) * GetRandomZeroTOne());
@@ -344,7 +342,7 @@ namespace ET.Server
 			petinfo_update.ConfigId = petID;
 			petinfo_update.PetLv = pet_Lv;
 			petinfo_update.PetExp = pet_exp;
-			petinfo_update.IfBaby = baby;
+			petinfo_update.BabyType = 0;
 			petinfo_update.AddPropretyNum = addPropertyNum;
 			petinfo_update.AddPropretyValue = addPropertyValue;
 			petinfo_update.PetPingFen = 0;

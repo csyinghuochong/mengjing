@@ -304,8 +304,8 @@ namespace ET.Server
 		private bool Pet_AddProprety(RolePetInfo petinfo)
 		{
 			//判定目标是否为宝宝
-			bool ifBaby = petinfo.IfBaby;
-			if (ifBaby == false)
+			int ifBaby = petinfo.BabyType;
+			if (ifBaby == 0)
 			{
 				//langStrHint = Game_PublicClassVar.Get_gameSettingLanguge.LoadLocalizationHint("hint_229");
 				//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front(langStrHint);
