@@ -15,6 +15,7 @@ namespace ET
         public long UnitId;
         public int AI;
         public int SkinId;
+        public int BaByType; //0普通怪物 1宝宝  2变异宝宝
     }
 
     public static class TeamFubenType

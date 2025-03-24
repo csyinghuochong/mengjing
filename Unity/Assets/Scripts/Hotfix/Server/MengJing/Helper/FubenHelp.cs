@@ -353,7 +353,7 @@ namespace ET.Server
 					continue;
 				}
 
-				if (numericComponent.GetAsInt(NumericType.LocalDungeonTime) >= 30)
+				if (numericComponent.GetAsInt(NumericType.JingLingRefreshTime) >= 30)
 				{
 					break;
 				}
@@ -384,8 +384,44 @@ namespace ET.Server
 			}
 
 			
-			numericComponent.ApplyChange( NumericType.LocalDungeonTime, 1, false);
+			numericComponent.ApplyChange( NumericType.JingLingRefreshTime, 1, false);
 			return randomMonsterList;
+		}
+
+		/// <summary>
+		/// 宝宝类型  0普通 1  宝宝  2 变异宝宝
+		/// </summary>
+		/// <param name="monsterId"></param>
+		/// <returns></returns>
+		public static int GetBabyType(int sceneType, int babyNumber, MonsterConfig monsterConfig)
+		{
+
+			if (babyNumber >= 10)
+			{
+				return 0;	
+			}
+
+			if (sceneType != SceneTypeEnum.LocalDungeon)
+			{
+				return 0;	
+			}
+
+			if (monsterConfig.MonsterType != MonsterTypeEnum.Normal)
+			{
+				return 0;
+			}
+
+			float rvalue = RandomHelper.RandFloat01();
+			if (rvalue< ConfigData.BabyBianYiRefreshChance)
+			{
+				return 2;
+			}
+			if (rvalue < ConfigData.BabyRefreshChance)
+			{
+				return 1;
+			}
+
+			return 0;
 		}
 
 		public static void CreateMonsterList(Scene scene, string createMonster)
@@ -400,6 +436,13 @@ namespace ET.Server
 			string[] monsters = createMonster.Split('@');
 			//1;37.65,0,3.2;70005005;1@138.43,0,0.06;70005010;1
 
+			int babyNumber = 0;
+			if (sceneType == SceneTypeEnum.LocalDungeon)
+			{
+				LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
+				NumericComponentS numericComponent = localDungeonComponent.MainUnit.GetComponent<NumericComponentS>();
+				babyNumber = numericComponent.GetAsInt(NumericType.BabyRefreshTime);
+			}
 			List<KeyValuePairInt> randomMonsterList = GetLocalDungeonRandomMonster(scene, sceneType, createMonster);
 
 			for (int i = 0; i < monsters.Length; i++)
@@ -460,7 +503,6 @@ namespace ET.Server
 				{
 					//continue;
 				}
-
 				
 				//剧情副本一次性宝箱
 				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
@@ -474,7 +516,7 @@ namespace ET.Server
 						continue;
 					}
 				}
-
+				
 				if (mtype[0] == "1") //固定位置刷怪
 				{
 					int cmcount = int.Parse(mcount[0]);
@@ -505,7 +547,13 @@ namespace ET.Server
 						}
 						else
 						{
-							UnitFactory.CreateMonster(scene, monsterid, vector3, new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp });
+							int babyType  = GetBabyType(sceneType, babyNumber, monsterConfig);
+							if (babyType > 0)
+							{
+								babyNumber++;
+							}
+
+							UnitFactory.CreateMonster(scene, monsterid, vector3, new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp ,BaByType = babyType});
 						}
 					}
 				}
@@ -524,7 +572,13 @@ namespace ET.Server
 						float range = float.Parse(mcount[1]);
 						float3 vector3 = new float3(float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range),
 							float.Parse(position[1]), float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range));
-						UnitFactory.CreateMonster(scene, monsterid, vector3, new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp });
+						
+						int babyType  = GetBabyType(sceneType, babyNumber, monsterConfig);
+						if (babyType > 0)
+						{
+							babyNumber++;
+						}
+						UnitFactory.CreateMonster(scene, monsterid, vector3, new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, BaByType = babyType});
 					}
 				}
 
@@ -569,6 +623,13 @@ namespace ET.Server
 				{
 					//scene.GetComponent<YeWaiRefreshComponent>().CreateMonsterList_2(monsters[i]);
 				}
+			}
+			
+			if (sceneType == SceneTypeEnum.LocalDungeon)
+			{
+				LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
+				NumericComponentS numericComponent = localDungeonComponent.MainUnit.GetComponent<NumericComponentS>();
+				numericComponent.ApplyChange( NumericType.BabyRefreshTime, babyNumber, false);
 			}
 		}
 

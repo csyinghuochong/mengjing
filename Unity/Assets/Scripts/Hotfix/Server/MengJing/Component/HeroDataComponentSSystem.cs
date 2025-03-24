@@ -217,7 +217,7 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.FubenTimesReset, 0, notice);
              numericComponent.ApplyValue(NumericType.FenShangSet, 0, notice);
              numericComponent.ApplyValue(NumericType.ArenaNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.LocalDungeonTime, 0, notice);
+             numericComponent.ApplyValue(NumericType.JingLingRefreshTime, 0, notice);
              numericComponent.ApplyValue(NumericType.TreasureTask, 0, notice);
              numericComponent.ApplyValue(NumericType.JiaYuanExchangeZiJin, 0, notice);
              numericComponent.ApplyValue(NumericType.JiaYuanExchangeExp, 0, notice);

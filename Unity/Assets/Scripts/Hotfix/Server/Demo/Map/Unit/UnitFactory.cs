@@ -130,6 +130,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0, false);
             numericComponent.ApplyValue(NumericType.PetSkin, createMonsterInfo.SkinId, false);
             numericComponent.ApplyValue(NumericType.EnergySkillId, createMonsterInfo.SkillId, false);
+            numericComponent.ApplyValue(NumericType.BaByType, createMonsterInfo.BaByType, false);
             unit.SetBornPosition(unit.Position, false);
 
             long revetime = 0;

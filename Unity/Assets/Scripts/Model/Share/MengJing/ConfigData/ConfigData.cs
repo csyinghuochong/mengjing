@@ -1970,6 +1970,19 @@ namespace ET
             { 50,  62000031 },
         };
 
+        #region 宠物抓捕配置
+        [StaticField]
+        //宝宝刷新概率
+        public static float BabyRefreshChance = 0.05f;
+        //变异宝宝刷新概率
+        [StaticField]
+        public static float BabyBianYiRefreshChance = 0.05f;
+        [StaticField]
+        //每日最多刷新宝宝数量
+        public static int BabyMaxNum = 5;
+        #endregion
+        
+        #region 公会祝福配置
         /// <summary>
         /// 公会祝福奖励。  1免费祝福 2金币祝福 3钻石祝福
         /// </summary>
@@ -2008,6 +2021,8 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int UnionWishSendDiamondCost = 100000;
+        #endregion
+        
         # region 宠物乱斗配置
 
         /// <summary>

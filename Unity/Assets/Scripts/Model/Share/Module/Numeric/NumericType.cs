@@ -82,7 +82,7 @@
         public const int PetTianTiRankID = 3083;                                          //宠物天梯排名
         public const int DailyTaskID = 3084;                                         //赏金任务ID
         public const int BossBelongID = 3085;                                       //归属ID
-        public const int LocalDungeonTime = 3086;                                    //剧情副本次数
+        public const int JingLingRefreshTime = 3086;                                    //精灵次数
         public const int TreasureTask = 3087;
         public const int JianYuanCangKu = 3088;
         public const int StartTime = 3089;
@@ -204,6 +204,8 @@
         public const int UnionWishGet = 4008;
         public const int OrderTaskCompNumber = 4009;            //订单任务完成数量
         public const int OrderTaskRefrehTime = 4010;            //订单任务刷新时间
+        public const int BabyRefreshTime = 4011;                                    //宝宝刷新次数
+        public const int BaByType = 4012;
 
         public const int Max = 10000;
 
