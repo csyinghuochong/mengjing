@@ -218,9 +218,9 @@ namespace ET.Server
             self.Scene().RemoveComponent<UnitComponent>();
             self.Scene().AddComponent<UnitComponent>();
             List<RankingInfo> rankingInfoList = new List<RankingInfo>();
-            for (int i = self.DBRankInfo.rankingInfos.Count - 1; i >= 0; i--)
+            for (int i = self.DBRankInfo.rankingCombats.Count - 1; i >= 0; i--)
             {
-                rankingInfoList.Add(self.DBRankInfo.rankingInfos[i]);
+                rankingInfoList.Add(self.DBRankInfo.rankingCombats[i]);
             }
 
             for (int i = rankingInfoList.Count - 1; i >= 0; i--)
@@ -257,9 +257,9 @@ namespace ET.Server
         {
             int oldRankIndex = -1;
             Dictionary<long, int> oldRankList = new Dictionary<long, int>();
-            for (int i = 0; i < self.DBRankInfo.rankingInfos.Count; i++)
+            for (int i = 0; i < self.DBRankInfo.rankingCombats.Count; i++)
             {
-                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingInfos[i];
+                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingCombats[i];
                 if (oldRankList.ContainsKey(rankingInfoTemp.UserId))
                 {
                     Log.Error($"oldRankList.ContainsKey(rankingInfoTemp.UserId): {rankingInfoTemp.UserId}");
@@ -277,24 +277,24 @@ namespace ET.Server
 
             if (oldRankIndex == -1)
             {
-                self.DBRankInfo.rankingInfos.Add(rankingInfo);
+                self.DBRankInfo.rankingCombats.Add(rankingInfo);
             }
             else
             {
-                self.DBRankInfo.rankingInfos[oldRankIndex] = rankingInfo;
+                self.DBRankInfo.rankingCombats[oldRankIndex] = rankingInfo;
             }
 
-            self.DBRankInfo.rankingInfos.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)b.Combat - (int)a.Combat; });
+            self.DBRankInfo.rankingCombats.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)b.Combat - (int)a.Combat; });
 
-            if (self.DBRankInfo.rankingInfos.Count > 500)
+            if (self.DBRankInfo.rankingCombats.Count > 500)
             {
-                self.DBRankInfo.rankingInfos.RemoveAt(self.DBRankInfo.rankingInfos.Count - 1);
+                self.DBRankInfo.rankingCombats.RemoveAt(self.DBRankInfo.rankingCombats.Count - 1);
             }
 
             List<long> updateRankList = new List<long>();
-            for (int i = 0; i < self.DBRankInfo.rankingInfos.Count; i++)
+            for (int i = 0; i < self.DBRankInfo.rankingCombats.Count; i++)
             {
-                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingInfos[i];
+                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingCombats[i];
                 if (!oldRankList.ContainsKey(rankingInfoTemp.UserId) || oldRankList[rankingInfoTemp.UserId] != i)
                 {
                     updateRankList.Add(rankingInfoTemp.UserId);
@@ -322,9 +322,9 @@ namespace ET.Server
             long oldNo1 = 0;
             long newNo1 = 0;
 
-            for (int i = 0; i < self.DBRankInfo.rankingInfos.Count; i++)
+            for (int i = 0; i < self.DBRankInfo.rankingCombats.Count; i++)
             {
-                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingInfos[i];
+                RankingInfo rankingInfoTemp = self.DBRankInfo.rankingCombats[i];
                 if (i == 0)
                 {
                     oldNo1 = rankingInfoTemp.UserId;
@@ -332,7 +332,7 @@ namespace ET.Server
 
                 if (rankingInfoTemp.UserId == rankingInfo.UserId)
                 {
-                    self.DBRankInfo.rankingInfos[i] = rankingInfo;
+                    self.DBRankInfo.rankingCombats[i] = rankingInfo;
                     have = true;
                     break;
                 }
@@ -340,22 +340,22 @@ namespace ET.Server
 
             if (!have)
             {
-                if (self.DBRankInfo.rankingInfos.Count < 500)
+                if (self.DBRankInfo.rankingCombats.Count < 500)
                 {
-                    self.DBRankInfo.rankingInfos.Add(rankingInfo);
+                    self.DBRankInfo.rankingCombats.Add(rankingInfo);
                 }
                 else
                 {
-                    if (self.DBRankInfo.rankingInfos.LastOrDefault().Combat < rankingInfo.Combat)
+                    if (self.DBRankInfo.rankingCombats.LastOrDefault().Combat < rankingInfo.Combat)
                     {
-                        self.DBRankInfo.rankingInfos[self.DBRankInfo.rankingInfos.Count - 1] = rankingInfo;
+                        self.DBRankInfo.rankingCombats[self.DBRankInfo.rankingCombats.Count - 1] = rankingInfo;
                     }
                 }
             }
 
-            self.DBRankInfo.rankingInfos.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)b.Combat - (int)a.Combat; });
+            self.DBRankInfo.rankingCombats.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)b.Combat - (int)a.Combat; });
 
-            newNo1 = self.DBRankInfo.rankingInfos[0].UserId;
+            newNo1 = self.DBRankInfo.rankingCombats[0].UserId;
             if (oldNo1 == newNo1)
             {
                 //self.UpdateRankNo1(newNo1).Coroutine();
@@ -435,9 +435,9 @@ namespace ET.Server
 
         public static int GetCombatRank(this RankSceneComponent self, long usrerId)
         {
-            for (int i = 0; i < self.DBRankInfo.rankingInfos.Count; i++)
+            for (int i = 0; i < self.DBRankInfo.rankingCombats.Count; i++)
             {
-                if (self.DBRankInfo.rankingInfos[i].UserId == usrerId)
+                if (self.DBRankInfo.rankingCombats[i].UserId == usrerId)
                 {
                     return i + 1;
                 }
@@ -449,9 +449,9 @@ namespace ET.Server
         public static int GetOccCombatRank(this RankSceneComponent self, long usrerId, int occ)
         {
             int ocRank = 0;
-            for (int i = 0; i < self.DBRankInfo.rankingInfos.Count; i++)
+            for (int i = 0; i < self.DBRankInfo.rankingCombats.Count; i++)
             {
-                RankingInfo rankingInfo = self.DBRankInfo.rankingInfos[i];
+                RankingInfo rankingInfo = self.DBRankInfo.rankingCombats[i];
                 if (rankingInfo.Occ == occ)
                 {
                     ocRank++;
@@ -1023,7 +1023,7 @@ namespace ET.Server
 
             Log.Debug($"发放战力排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
-            List<RankingInfo> rankingInfos = self.DBRankInfo.rankingInfos;
+            List<RankingInfo> rankingInfos = self.DBRankInfo.rankingCombats;
             ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {

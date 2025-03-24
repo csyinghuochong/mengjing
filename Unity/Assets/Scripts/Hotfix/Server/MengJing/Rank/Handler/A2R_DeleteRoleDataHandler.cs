@@ -8,7 +8,7 @@
         protected override async ETTask Run(Scene scene, A2R_DeleteRoleData request, R2A_DeleteRoleData response)
         {
             RankSceneComponent rankScene = scene.GetComponent<RankSceneComponent>();
-            rankScene.OnDeleteRole(rankScene.DBRankInfo.rankingInfos, request.DeleUserID);
+            rankScene.OnDeleteRole(rankScene.DBRankInfo.rankingCombats, request.DeleUserID);
             rankScene.OnDeleteRole(rankScene.DBRankInfo.rankingCamp1, request.DeleUserID);
             rankScene.OnDeleteRole(rankScene.DBRankInfo.rankingCamp2, request.DeleUserID);
 
