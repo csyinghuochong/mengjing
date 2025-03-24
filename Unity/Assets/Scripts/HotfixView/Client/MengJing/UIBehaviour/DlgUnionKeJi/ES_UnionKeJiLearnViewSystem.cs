@@ -26,9 +26,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask InitItemList(this ES_UnionKeJiLearn self)
+        private static async ETTask InitItemList(this ES_UnionKeJiLearn self)
         {
+            self.uiTransform.gameObject.SetActive(false);
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
+            self.uiTransform.gameObject.SetActive(true);
 
             self.UnionMyInfo = respose.UnionMyInfo;
 
@@ -118,7 +120,7 @@ namespace ET.Client
             self.E_UpBtnButton.gameObject.SetActive(nowUnionKeJiConfig.QiangHuaLv != 0);
         }
 
-        public static async ETTask OnStartBtnButton(this ES_UnionKeJiLearn self)
+        private static async ETTask OnStartBtnButton(this ES_UnionKeJiLearn self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[self.Position]);
 

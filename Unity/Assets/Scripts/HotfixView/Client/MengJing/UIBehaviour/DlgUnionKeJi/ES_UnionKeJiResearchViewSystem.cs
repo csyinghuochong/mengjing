@@ -27,9 +27,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static async ETTask InitItemList(this ES_UnionKeJiResearch self)
+        private static async ETTask InitItemList(this ES_UnionKeJiResearch self)
         {
+            self.uiTransform.gameObject.SetActive(false);
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
+            self.uiTransform.gameObject.SetActive(true);
 
             self.UnionMyInfo = respose.UnionMyInfo;
 
@@ -143,7 +145,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnQuickBtnButton(this ES_UnionKeJiResearch self)
+        private static void OnQuickBtnButton(this ES_UnionKeJiResearch self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.Position]);
             if (self.UnionMyInfo.KeJiActiteTime == 0)
