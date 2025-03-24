@@ -457,7 +457,7 @@ namespace ET.Server
 
 				if (haveotherMonster)
 				{
-					continue;
+					//continue;
 				}
 
 				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
