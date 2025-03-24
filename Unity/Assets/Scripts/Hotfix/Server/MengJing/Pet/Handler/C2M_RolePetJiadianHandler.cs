@@ -31,7 +31,7 @@
 				|| request.AddPropretyValue[3] > maxPoint)
 			{
 				rolePetInfo.AddPropretyValue = ConfigData.DefaultGem;
-                rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
+                rolePetInfo.AddPropretyNum = PetHelper.GetAddPropretyNum(rolePetInfo);
 			}
 			unit.GetComponent<PetComponentS>().UpdatePetAttribute(rolePetInfo, true);
 			response.RolePetInfo = rolePetInfo;	

@@ -293,14 +293,27 @@ namespace ET.Server
             newpet.Id = IdGenerater.Instance.GenerateId() + RandomHelper.RandomNumber(0, 100);
             newpet.PetStatus = 0;
             newpet.ConfigId = petConfig.Id;
-            newpet.PetLv = babytype == 0 ? petConfig.PetLv : lv;
             newpet.PetExp = 0;
             newpet.PetName = petConfig.PetName;
             newpet.BabyType = babytype;
             newpet.SkinId = skinId != 0 ? skinId : petConfig.Skin[0];
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
-            newpet.AddPropretyNum = 0;
-            newpet.AddPropretyValue = "0_0_0_0";
+
+            if (babytype == 0)
+            { 
+                newpet.AddPropretyNum = 0;
+                newpet.PetLv =petConfig.PetLv;
+                newpet.AddPropretyValue = "0_0_0_0";
+            }
+            else
+            {
+                newpet.AddPropretyNum = 0;
+                newpet.PetLv = Math.Max(lv, 15);
+                int addnum = (newpet.PetLv - 1) * 5 - 30;
+                List<int> randoms = RandomHelper.SplitIntegerRandomly(addnum, 4);   
+                newpet.AddPropretyValue = $"{randoms[0]}_{randoms[1]}_{randoms[2]}_{randoms[3]}";
+            }
+
             newpet.ShouHuPos = RandomHelper.RandomNumber(1, 5);
             newpet.PetName = PetSkinConfigCategory.Instance.Get(newpet.SkinId).Name;
             newpet.PlayerName = unit.GetComponent<UserInfoComponentS>().GetName();
@@ -863,7 +876,7 @@ namespace ET.Server
         //重置属性点
         public static void OnResetPoint(this PetComponentS self, RolePetInfo rolePetInfo)
         {
-            rolePetInfo.AddPropretyNum =( rolePetInfo.PetLv - 1 ) * 5;
+            rolePetInfo.AddPropretyNum = PetHelper.GetAddPropretyNum(rolePetInfo);
             rolePetInfo.AddPropretyValue = "0_0_0_0";
             self.UpdatePetAttribute(rolePetInfo, false);
         }

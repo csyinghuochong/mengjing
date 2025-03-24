@@ -222,7 +222,7 @@ namespace ET
                 || rolePetInfo.AddPropretyNum < 0 || allValue > maxPoint)
             {
                 rolePetInfo.AddPropretyValue = "0_0_0_0";
-                rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
+                rolePetInfo.AddPropretyNum = PetHelper.GetAddPropretyNum(rolePetInfo);
             }
         }
 
@@ -261,6 +261,11 @@ namespace ET
             return false;
         }
 
+         public static int GetAddPropretyNum(RolePetInfo rolePetInfos)
+        {
+            return (rolePetInfos.PetLv - 1) * 5 - (rolePetInfos.BabyType > 0 ? 30 : 0);
+        }
+        
         /// <summary>
         /// 2000001 2000001
         /// </summary>

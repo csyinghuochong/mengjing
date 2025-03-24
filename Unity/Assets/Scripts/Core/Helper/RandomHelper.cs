@@ -73,6 +73,36 @@ namespace ET
             return value;
         }
 
+        
+        public  static List<int> SplitIntegerRandomly(int number, int n)
+        {
+            if (n <= 0)
+            {
+                throw new ArgumentException("n 必须是正整数。");
+            }
+            if (number < 0)
+            {
+                throw new ArgumentException("输入的整数必须是非负的。");
+            }
+        
+            Random random = new Random();
+            List<int> result = new List<int>();
+        
+            // 先将每个位置初始化为 0
+            for (int i = 0; i < n; i++)
+            {
+                result.Add(0);
+            }
+        
+            // 随机分配数值
+            for (int i = 0; i < number; i++)
+            {
+                int index = random.Next(0, n);
+                result[index]++;
+            }
+        
+            return result;
+        }
 
         //传入随机范围,生成一个随机数(平均概率)
         public static int ReturnRamdomValue_Int(int randomMinValue, int randomMaxValue)
