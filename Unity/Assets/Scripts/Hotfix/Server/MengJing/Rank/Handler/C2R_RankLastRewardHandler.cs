@@ -37,6 +37,12 @@ namespace ET.Server
             }
             
             response.LastRewardList.AddRange(all);
+
+            if (response.LastRewardList.Count == 0 && rankComponent.DBRankInfo.rankingCombats.Count > 0)
+            {
+                response.LastRewardList.Add(rankComponent.DBRankInfo.rankingCombats[0]);
+            }
+            
             await ETTask.CompletedTask;
         }
     }

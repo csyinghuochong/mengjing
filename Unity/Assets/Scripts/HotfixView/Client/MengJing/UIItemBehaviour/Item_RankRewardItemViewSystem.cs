@@ -24,6 +24,7 @@ namespace ET.Client
                 return;
             }
             
+            self.EG_LastNo.gameObject.SetActive(false);
             self.EG_PlayerInfo.gameObject.SetActive(true);
             self.E_PlayerName.text = rankingInfo.PlayerName;
             self.LastRewardPlayerId = rankingInfo.UserId;
@@ -47,10 +48,10 @@ namespace ET.Client
             {
                 self.E_Text_RankText.text = zstring.Format("{0}-{1}名", rankRewardConfig.NeedPoint[0], rankRewardConfig.NeedPoint[1]);
             }
-            
+            self.EG_LastNo.gameObject.SetActive(false);
             self.EG_PlayerInfo.gameObject.SetActive(false);
             self.E_Text_RankText.gameObject.SetActive(true);
-
+           
             self.E_PlayerIcon.GetComponent<Button>().AddListenerAsync(self.OnButtonWatch);
             self.ES_RewardList.Refresh(rankRewardConfig.RewardItems, 0.9f);
 
@@ -59,6 +60,7 @@ namespace ET.Client
             {
                 self.E_Rank_1Image.gameObject.SetActive(true);
                 self.E_Text_RankText.gameObject.SetActive(false);
+                self.EG_LastNo.gameObject.SetActive(true);
             }
 
             if (rankRewardConfig.NeedPoint[0] == 2)

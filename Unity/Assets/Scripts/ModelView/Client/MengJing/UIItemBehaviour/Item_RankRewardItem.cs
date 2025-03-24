@@ -256,6 +256,31 @@ namespace ET.Client
 			}
 		}
 		
+
+		public Transform EG_LastNo
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_EG_LastNo == null )
+					{
+						this.m_EG_LastNo = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LastNo");
+					}
+					return this.m_EG_LastNo;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LastNo");
+				}
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_Text_RankText = null;
@@ -267,6 +292,7 @@ namespace ET.Client
 			this.m_EG_PlayerInfo = null;
 			this.m_E_PlayerIcon = null;
 			this.m_E_PlayerName = null;
+			this.m_EG_LastNo = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -280,6 +306,7 @@ namespace ET.Client
 		private Transform m_EG_PlayerInfo = null;
 		private Image m_E_PlayerIcon = null;
 		private Text m_E_PlayerName = null;
+		private Transform m_EG_LastNo = null;
 		public Transform uiTransform = null;
 	}
 }
