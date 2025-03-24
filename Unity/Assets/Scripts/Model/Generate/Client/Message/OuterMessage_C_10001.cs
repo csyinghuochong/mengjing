@@ -4556,7 +4556,7 @@ namespace ET
         public string PetName { get; set; }
 
         [MemoryPackOrder(8)]
-        public bool IfBaby { get; set; }
+        public int BabyType { get; set; }
 
         [MemoryPackOrder(9)]
         public int AddPropretyNum { get; set; }
@@ -4674,7 +4674,7 @@ namespace ET
             this.Star = default;
             this.PetExp = default;
             this.PetName = default;
-            this.IfBaby = default;
+            this.BabyType = default;
             this.AddPropretyNum = default;
             this.AddPropretyValue = default;
             this.PetPingFen = default;

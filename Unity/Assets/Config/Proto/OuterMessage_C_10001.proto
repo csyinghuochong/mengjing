@@ -1058,7 +1058,7 @@ message RolePetInfo
 	int32 Star = 5;
 	int32 PetExp = 7;
 	string PetName = 8;
-	bool IfBaby = 9;
+	int32 BabyType = 9;
 	int32 AddPropretyNum = 10;
 	string AddPropretyValue = 11;
 	int32 PetPingFen = 12;

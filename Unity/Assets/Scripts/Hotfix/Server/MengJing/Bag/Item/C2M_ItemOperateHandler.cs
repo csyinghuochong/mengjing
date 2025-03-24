@@ -282,8 +282,7 @@ namespace ET.Server
                         //宠物蛋
                         case 102:
                             string[] getway = useBagInfo.GetWay.Split('_');
-                            unit.GetComponent<PetComponentS>()
-                                    .OnAddPet(int.Parse(getway[0]), int.Parse(itemConfig.ItemUsePar), 0, useBagInfo.FuLing);
+                            unit.GetComponent<PetComponentS>().OnAddPet(int.Parse(getway[0]), int.Parse(itemConfig.ItemUsePar), 0, useBagInfo.FuLing);
                             break;
                         //随机宠物蛋
                         case 103:

@@ -285,7 +285,7 @@ namespace ET.Server
         }
 
         //获取新宠物
-        public static RolePetInfo GenerateNewPet(this PetComponentS self, int petId, int skinId)
+        public static RolePetInfo GenerateNewPet(this PetComponentS self, int petId, int skinId, int babytype, int lv)
         {
             Unit unit = self.GetParent<Unit>();
             PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
@@ -293,10 +293,10 @@ namespace ET.Server
             newpet.Id = IdGenerater.Instance.GenerateId() + RandomHelper.RandomNumber(0, 100);
             newpet.PetStatus = 0;
             newpet.ConfigId = petConfig.Id;
-            newpet.PetLv = petConfig.PetLv;
+            newpet.PetLv = babytype == 0 ? petConfig.PetLv : lv;
             newpet.PetExp = 0;
             newpet.PetName = petConfig.PetName;
-            newpet.IfBaby = true;
+            newpet.BabyType = babytype;
             newpet.SkinId = skinId != 0 ? skinId : petConfig.Skin[0];
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
             newpet.AddPropretyNum = 0;
@@ -318,7 +318,7 @@ namespace ET.Server
             newpet.PetLv = 1;
             newpet.PetExp = 0;
             newpet.PetName = petConfig.Name;
-            newpet.IfBaby = true;
+            newpet.BabyType = 0;
             newpet.SkinId = 0;
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
             newpet.AddPropretyNum = 0;
@@ -598,7 +598,7 @@ namespace ET.Server
         /// <param name="skinId"></param>
         /// <param name="fuling"></param>
         /// <returns></returns>
-        public static RolePetInfo OnAddPet(this PetComponentS self, int getWay, int petId, int skinId = 0, int fuling = 0)
+        public static RolePetInfo OnAddPet(this PetComponentS self, int getWay, int petId, int skinId = 0, int fuling = 0, int babyType = 0, int monsterLv = 1)
         {
             Unit unit = self.GetParent<Unit>();
             PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
@@ -612,8 +612,7 @@ namespace ET.Server
 
             self.OnUnlockSkin(petConfig.Id + ";" + skinId.ToString());
 
-            RolePetInfo newpet = self.GenerateNewPet(petId, skinId);
-
+            RolePetInfo newpet = self.GenerateNewPet(petId, skinId, babyType, monsterLv);
             newpet = self.PetXiLian(newpet, 1, 0, fuling);
             self.UpdatePetAttribute(newpet, false);
             self.CheckPetPingFen();

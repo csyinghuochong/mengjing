@@ -71,7 +71,7 @@ namespace ET.Server
                  List<int> petlist = new List<int>() { 1000101, 1000201, 1000301 };
                  for (int k = 0; k < petlist.Count; k++)
                  {
-                     RolePetInfo petInfo = petComponent.GenerateNewPet(petlist[0], 0);
+                     RolePetInfo petInfo = petComponent.GenerateNewPet(petlist[0], 0, 0, 1);
                      petComponent.PetXiLian(petInfo, 2, 0, 0 );
                      petComponent.UpdatePetAttribute(petInfo, false);
                      petInfo.PlayerName = "机器人";
