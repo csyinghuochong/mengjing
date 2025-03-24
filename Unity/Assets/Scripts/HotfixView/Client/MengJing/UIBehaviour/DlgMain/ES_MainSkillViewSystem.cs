@@ -428,7 +428,10 @@ namespace ET.Client
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitlock.ConfigId);
-            self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59);
+            //除了boss 都可以抓捕。。
+            self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterType == MonsterTypeEnum.Normal
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58 
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59);
         }
 
         public static void OnButton_ZhuaPuButton(this ES_MainSkill self)
@@ -510,6 +513,8 @@ namespace ET.Client
             }
 
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhuaPu);
+            
+            
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
         }
 

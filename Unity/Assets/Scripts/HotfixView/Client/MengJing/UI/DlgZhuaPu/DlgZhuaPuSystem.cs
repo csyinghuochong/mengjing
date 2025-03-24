@@ -26,16 +26,19 @@ namespace ET.Client
 
         public static void RegisterUIEvent(this DlgZhuaPu self)
         {
-            self.View.E_ButtonDigButton.AddListenerAsync(self.OnButtonDig);
+            self.View.E_ButtonDigButton.AddListener(self.OnButtonDig);
             self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu); });
             self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
-            
-            self.InitItemlist();
-            self.UpdateItemList();
+
         }
 
         public static void ShowWindow(this DlgZhuaPu self, Entity contextData = null)
         {
+        }
+
+        public static void HideWindow(this DlgZhuaPu self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         private static void OnBagItemsRefresh(this DlgZhuaPu self, Transform transform, int index)
@@ -44,21 +47,7 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None, self.OnClickItem);
             scrollItemCommonItem.ES_CommonItem.ShowTip = false;
         }
-
-        public static void InitItemlist(this DlgZhuaPu self)
-        {
-            self.ShowBagInfos.Clear();
-            foreach (var item in GlobalValueConfigCategory.Instance.ZhuaPuItem)
-            {
-                ItemInfo bagInfo = new ItemInfo();
-                bagInfo.ItemID = item.Key;
-                self.ShowBagInfos.Add(bagInfo);
-            }
-
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
-            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
-        }
-
+        
         public static void UpdateItemList(this DlgZhuaPu self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
@@ -117,9 +106,22 @@ namespace ET.Client
             }
 
             self.SelectItemList(self.ItemId);
-            self.UpdateGailv();
+            self.UpdateTyp1_Gailv();
         }
 
+        public static void  OnButtonDig(this DlgZhuaPu self)
+        {
+            if (self.ZhuaBuType == 1)
+            {
+                self.OnType1_ButtonDig().Coroutine();
+            }
+
+            if (self.ZhuaBuType == 2)
+            {
+                self.OnType2_ButtonDig().Coroutine();
+            }
+        }
+        
         public static void OnTimer(this DlgZhuaPu self)
         {
             self.PassTime += Time.deltaTime;
@@ -132,34 +134,130 @@ namespace ET.Client
 
             self.View.E_Img_ChanZiImage.transform.localPosition = new Vector3(posX, 0f, 0f);
         }
-
-        public static void UpdateGailv(this DlgZhuaPu self)
-        {
-            if (self.MonsterId == 0)
-            {
-                return;
-            }
-
-            int gailv = CommonHelp.GetZhuPuGaiLv(self.MonsterId, self.ItemId, 1);
-            using (zstring.Block())
-            {
-                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
-            }
-        }
-
+        
         public static void OnInitUI(this DlgZhuaPu self, Unit unitmonster)
         {
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitmonster.ConfigId);
+
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            {
+                self.ZhuaBuType = 1;
+                
+                self.UpdateTyp1_Gailv();
+                self.InitType1_Itemlist();
+                self.UpdateItemList();
+            }
+            else
+            {
+                self.ZhuaBuType = 2;
+                self.UpdateTyp2_Gailv();
+                self.InitType1_Itemlist();
+                self.UpdateItemList();
+            }
+
+          
             self.MonsterId = unitmonster.ConfigId;
             self.MonsterUnitid = unitmonster.Id;
             float size = RandomHelper.RandFloat01();
             self.View.E_Img_PosImage.transform.localPosition = new Vector3(size * 300f, 0f, 0f);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIZhuaPuTimer, self);
-
-            self.UpdateGailv();
         }
 
-        public static async ETTask OnButtonDig(this DlgZhuaPu self)
+        #region 新的抓捕逻辑
+        public static void UpdateTyp2_Gailv(this DlgZhuaPu self)
+        {
+            if (self.MonsterId == 0)
+            {
+                return;
+            }
+
+            int gailv = CommonHelp.GetZhuPuType2_GaiLv(self.MonsterId, self.ItemId, 1);
+            using (zstring.Block())
+            {
+                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
+            }
+        }
+        
+        private static async ETTask OnType2_ButtonDig(this DlgZhuaPu self)
+        {
+            Unit zhupuUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.MonsterUnitid);
+            if (zhupuUnit == null || zhupuUnit.Type != UnitType.Monster)
+            {
+                return;
+            }
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
+            if (monsterConfig.QiYuPetId == 0)
+            {
+                return;
+            }
+            
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
+            int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
+            if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
+                return;
+            }
+
+            float distance = Vector3.Distance(self.View.E_Img_ChanZiImage.transform.localPosition, self.View.E_Img_PosImage.transform.localPosition);
+            string jiacheng = distance <= 10f ? "2" : "1";
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+            //M2C_JingLingCatchResponse response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            // if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
+            // {
+            //     FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
+            // }
+            //
+            // if (response.Error == ErrorCode.ERR_ZhuaBuFail)
+            // {
+            //     List<string> strList = new List<string>();
+            //     strList.Add("它趁你不注意,偷偷的溜走了!");
+            //     strList.Add("抓铺的动作太大,被他发现后马上的逃走了!");
+            //
+            //     int randInt = RandomHelper.RandomNumber(0, strList.Count);
+            //     FlyTipComponent.Instance.ShowFlyTip(strList[randInt]);
+            // }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu);
+        }
+        #endregion
+        
+        #region 旧的抓捕逻辑
+        public static void UpdateTyp1_Gailv(this DlgZhuaPu self)
+        {
+            if (self.MonsterId == 0)
+            {
+                return;
+            }
+
+            int gailv = CommonHelp.GetZhuPuType1_GaiLv(self.MonsterId, self.ItemId, 1);
+            using (zstring.Block())
+            {
+                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
+            }
+        }
+        
+        public static void InitType1_Itemlist(this DlgZhuaPu self)
+        {
+            self.ShowBagInfos.Clear();
+            foreach (var item in GlobalValueConfigCategory.Instance.ZhuaPuItem)
+            {
+                ItemInfo bagInfo = new ItemInfo();
+                bagInfo.ItemID = item.Key;
+                self.ShowBagInfos.Add(bagInfo);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+        }
+
+        private static async ETTask OnType1_ButtonDig(this DlgZhuaPu self)
         {
             Unit zhupuUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.MonsterUnitid);
             if (zhupuUnit == null || zhupuUnit.Type != UnitType.Monster)
@@ -185,8 +283,7 @@ namespace ET.Client
             string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-            M2C_JingLingCatchResponse response = await JingLingNetHelper.JingLingCatchRequest(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
-
+            M2C_ZhuBuType1Response response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
             if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
             {
                 FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
@@ -204,5 +301,7 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu);
         }
+
+        #endregion
     }
 }

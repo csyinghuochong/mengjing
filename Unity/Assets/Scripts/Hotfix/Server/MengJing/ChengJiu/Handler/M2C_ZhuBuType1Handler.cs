@@ -5,11 +5,10 @@ namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(ChengJiuComponentS))]
-    public class C2M_JingLingCatchHandler : MessageLocationHandler<Unit, C2M_JingLingCatchRequest, M2C_JingLingCatchResponse>
+    public class M2C_ZhuBuType1Handler : MessageLocationHandler<Unit, C2M_ZhuBuType1Request, M2C_ZhuBuType1Response>
     {
-        protected override async ETTask Run(Unit unit, C2M_JingLingCatchRequest request, M2C_JingLingCatchResponse response)
+        protected override async ETTask Run(Unit unit, C2M_ZhuBuType1Request request, M2C_ZhuBuType1Response response)
         {
-
             Unit zhupuUnit = unit.GetParent<UnitComponent>().Get(request.JingLingId);
             if (zhupuUnit == null)
             {
@@ -32,7 +31,7 @@ namespace ET.Server
                 }
             }
 
-            int gailv = CommonHelp.GetZhuPuGaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
+            int gailv = CommonHelp.GetZhuPuType1_GaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
             if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
             {
                 response.Message = String.Empty;

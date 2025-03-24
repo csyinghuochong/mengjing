@@ -1979,7 +1979,7 @@ namespace ET
         public static float BabyBianYiRefreshChance = 0.1f;
         [StaticField]
         //每日最多刷新宝宝数量
-        public static int BabyRefreshMaxNum = 100;
+        public static int BabyRefreshMaxNum = 100000;
         #endregion
         
         #region 公会祝福配置

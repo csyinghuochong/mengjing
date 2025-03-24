@@ -29,14 +29,15 @@
             return ErrorCode.ERR_Success;
         }
 
-        public static async ETTask<M2C_JingLingCatchResponse> JingLingCatchRequest(Scene root, long jingLingId, int itemId, string operateType)
+        
+        public static async ETTask<M2C_ZhuBuType1Response> ZhuaBuType1Request(Scene root, long jingLingId, int itemId, string operateType)
         {
-            C2M_JingLingCatchRequest request = C2M_JingLingCatchRequest.Create();
+            C2M_ZhuBuType1Request request = C2M_ZhuBuType1Request.Create();
             request.JingLingId = jingLingId;
             request.ItemId = itemId;
             request.OperateType = operateType;
 
-            M2C_JingLingCatchResponse response = (M2C_JingLingCatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ZhuBuType1Response response = (M2C_ZhuBuType1Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 

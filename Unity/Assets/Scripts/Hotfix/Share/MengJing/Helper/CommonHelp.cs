@@ -508,8 +508,29 @@ namespace  ET
 
         }
 
+        public static int GetZhuPuType2_GaiLv(int monsterid, int itemid, int jiacheng)
+        {
+            if (monsterid == 0)
+            {
+                return 0;
+            }
 
-        public static int GetZhuPuGaiLv(int monsterid, int itemid, int jiacheng)
+            int gailv = 20; 
+            if (itemid > 0)
+            {
+                int add = GlobalValueConfigCategory.Instance.ZhuaPuItem[itemid];
+                gailv += add;
+
+            }
+            //触点加成
+            if (jiacheng == 2)
+            {
+                gailv += 50;
+            }
+            return gailv;
+        }
+
+        public static int GetZhuPuType1_GaiLv(int monsterid, int itemid, int jiacheng)
         {
             if (monsterid == 0)
             {
