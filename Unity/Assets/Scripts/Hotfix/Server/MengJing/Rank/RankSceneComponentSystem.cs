@@ -1020,11 +1020,12 @@ namespace ET.Server
             {
                 return;
             }
-
+            
             Log.Debug($"发放战力排行榜奖励： {zone}");
-            long serverTime = TimeHelper.ServerNow();
+
+            self.DBRankInfo.LastRewardCombatIds.Count();
             List<RankingInfo> rankingInfos = self.DBRankInfo.rankingCombats;
-            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
+
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 1);
@@ -1032,7 +1033,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-
+                
                 MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
@@ -1040,9 +1041,14 @@ namespace ET.Server
                 mailInfo.Title = "排行榜奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
+                long userId = rankingInfos[i].UserId;
                 if (i <= 10)
                 {
-                    Log.Warning($"战力奖励: {self.Zone()} {rankingInfos[i].UserId}");
+                    Log.Warning($"战力奖励: {self.Zone()} {userId}");
+                }
+                if (i == 0)
+                {
+                    self.DBRankInfo.LastRewardCombatIds.Add(userId);
                 }
 
                 string[] needList = rankRewardConfig.RewardItems.Split('@');
@@ -1059,7 +1065,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                await MailHelp.SendUserMail(self.Root(), rankingInfos[i].UserId, mailInfo, ItemGetWay.RankReward);
+                await MailHelp.SendUserMail(self.Root(), userId, mailInfo, ItemGetWay.RankReward);
             }
         }
 
@@ -1074,9 +1080,9 @@ namespace ET.Server
             }
 
             Log.Debug($"发放宠物排行榜奖励： {zone}");
-            long serverTime = TimeHelper.ServerNow();
+            
+            self.DBRankInfo.LastRewardPetIds.Clear();
             List<RankPetInfo> rankingInfos = self.DBRankInfo.rankingPets;
-            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 bool havePetUId = false;
@@ -1100,8 +1106,12 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = MailInfo.Create();
+                if (i == 0)
+                {
+                    self.DBRankInfo.LastRewardPetIds.Add(rankingInfos[i].UserId);
+                }
 
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得排行榜第{i + 1}名奖励";
                 mailInfo.Title = "排行榜奖励";

@@ -45,7 +45,7 @@ namespace ET.Server
             }
         }
         
-        public static void DeserializeCache(this BagComponentS self)
+        public static void DeserializeDB(this BagComponentS self)
         {
             if (self.AllItemList == null)
             {

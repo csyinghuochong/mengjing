@@ -4,8 +4,11 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_RankRewardItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RankRewardItem> 
+	public  class Scroll_Item_RankRewardItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RankRewardItem>
 	{
+
+		public long LastRewardPlayerId {get;set;}= 0;
+        
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
@@ -181,6 +184,78 @@ namespace ET.Client
      		}
      	}
 
+		public Transform EG_PlayerInfo
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_EG_PlayerInfo == null )
+					{
+						this.m_EG_PlayerInfo = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PlayerInfo");
+					}
+					return this.m_EG_PlayerInfo;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PlayerInfo");
+				}
+			}
+		}
+
+		public Image E_PlayerIcon
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_PlayerIcon == null )
+					{
+						this.m_E_PlayerIcon = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_PlayerInfo/E_PlayerIcon");
+					}
+					return this.m_E_PlayerIcon;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_PlayerInfo/E_PlayerIcon");
+				}
+			}
+		}
+		
+		public Text E_PlayerName
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_PlayerName == null )
+					{
+						this.m_E_PlayerName = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PlayerInfo/E_PlayerName");
+					}
+					return this.m_E_PlayerName;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PlayerInfo/E_PlayerName");
+				}
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_E_Text_RankText = null;
@@ -189,6 +264,9 @@ namespace ET.Client
 			this.m_E_Rank_1Image = null;
 			this.m_E_Rank_2Image = null;
 			this.m_E_Rank_3Image = null;
+			this.m_EG_PlayerInfo = null;
+			this.m_E_PlayerIcon = null;
+			this.m_E_PlayerName = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -199,6 +277,9 @@ namespace ET.Client
 		private Image m_E_Rank_1Image = null;
 		private Image m_E_Rank_2Image = null;
 		private Image m_E_Rank_3Image = null;
+		private Transform m_EG_PlayerInfo = null;
+		private Image m_E_PlayerIcon = null;
+		private Text m_E_PlayerName = null;
 		public Transform uiTransform = null;
 	}
 }

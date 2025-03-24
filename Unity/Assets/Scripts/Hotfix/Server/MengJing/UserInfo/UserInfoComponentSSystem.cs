@@ -29,6 +29,11 @@ namespace ET.Server
             }
         }
         
+        public static void DeserializeDB(this UserInfoComponentS self)
+        {
+            self.UserInfo = self.ChildrenDB[0] as UserInfo;
+        }
+        
         public static void Check(this UserInfoComponentS self, int sceond)
         {
             self.TodayOnLine+=sceond;

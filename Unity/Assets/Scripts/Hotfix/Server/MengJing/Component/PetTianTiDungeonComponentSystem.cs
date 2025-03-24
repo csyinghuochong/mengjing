@@ -57,7 +57,7 @@ namespace ET.Server
                      }
 
                      BagComponentS bagComponent_enemy =  await UnitCacheHelper.GetComponentCache<BagComponentS>(self.Root(), self.EnemyId);
-                     bagComponent_enemy.DeserializeCache();
+                     bagComponent_enemy.DeserializeDB();
                      NumericComponentS numericComponent_enemy =  await UnitCacheHelper.GetComponentCache<NumericComponentS>(self.Root(), self.EnemyId);
                      
                      petComponent_enemy.UpdatePetAttributeWithData(bagComponent_enemy, numericComponent_enemy, rolePetInfo, false);

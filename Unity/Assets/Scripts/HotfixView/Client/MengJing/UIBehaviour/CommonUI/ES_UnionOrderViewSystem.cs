@@ -36,7 +36,7 @@ namespace ET.Client
 			self.uiTransform = transform;
 			
 			self.E_Button_CommitButton.AddListenerAsync( self.OnClickCommitButton  );
-			self.E_Button_UpgradeButton.AddListenerAsync( self.OnClickUpgradeButton );
+			self.E_Button_UpgradeButton.AddListener( self.OnClickUpgradeButton );
 			self.E_UnionMyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionListItemsRefresh);
 		}
 
@@ -141,7 +141,7 @@ namespace ET.Client
 			self.ES_RewardList.Refresh(TaskHelper.GetTaskRewards(taskConfig.Id, taskConfig));
 		}
 
-		private static async ETTask OnClickUpgradeButton(this ES_UnionOrder self)
+		private static  void OnClickUpgradeButton(this ES_UnionOrder self)
 		{
 			UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 			if (userInfoComponentC.UserInfo.Diamond < 200)

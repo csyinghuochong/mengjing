@@ -101,6 +101,14 @@ namespace ET.Client
             return m2CRolePetSkillCd;
         }
 
+        public static async ETTask<R2C_RankLastRewardResponse> RequestLastReward(Scene root, int rankType)
+        {
+            C2R_RankLastRewardRequest c2R_RankLastRewardRequest = C2R_RankLastRewardRequest.Create();
+            c2R_RankLastRewardRequest.RankType = rankType;  
+            R2C_RankLastRewardResponse m2c_RankLastRewardResponse = (R2C_RankLastRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2R_RankLastRewardRequest);
+            return m2c_RankLastRewardResponse;  
+        }
+
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
         {
             C2M_RolePetFight request = C2M_RolePetFight.Create();

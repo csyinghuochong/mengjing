@@ -41,7 +41,7 @@
                         response.Vs.Add(value);
                     }
 
-                    bagComponents.DeserializeCache();
+                    bagComponents.DeserializeDB();
                     foreach (ItemInfo itemInfo in bagComponents.GetItemByLoc(ItemLocType.ItemLocEquip))  
                     {
                         response.EquipList.Add(itemInfo.ToMessage());
