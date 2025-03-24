@@ -113,7 +113,6 @@ namespace ET.Server
                     unit.AddComponent<PathfindingComponent, int>(dungeonConfig.MapID);
                     scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
                     scene.GetComponent<LocalDungeonComponent>().GenerateFuben(request.SceneId);
-                    numericComponent.ApplyChange( NumericType.LocalDungeonTime, 1, false);
                     break;
                 case SceneTypeEnum.CellDungeon:
                     CellDungeonComponentS fubenComponentS = scene.GetComponent<CellDungeonComponentS>();

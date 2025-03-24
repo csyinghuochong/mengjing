@@ -295,17 +295,16 @@ namespace ET.Server
 			return monsterPosition.NextID;
 		}
 
-		public static List<KeyValuePairInt> GetRandomMonster(Scene scene, int fubenid, string createMonster)
+		public static List<KeyValuePairInt> GetLocalDungeonRandomMonster(Scene scene,int sceneType , string createMonster)
 		{
 			List<KeyValuePairInt> randomMonsterList = new List<KeyValuePairInt>();
 
-			MapComponent mapComponent = scene.GetComponent<MapComponent>();
-			int sceneType = mapComponent.SceneType;
 			if (sceneType != SceneTypeEnum.LocalDungeon)
 			{
 				return randomMonsterList;
 			}
 
+			MapComponent mapComponent = scene.GetComponent<MapComponent>();
 			LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 			Unit mainUnit = localDungeonComponent.MainUnit;
 
@@ -330,7 +329,7 @@ namespace ET.Server
 				long serverNow = TimeHelper.ServerNow();
 				long seasonBossTime = numericComponent.GetAsLong(NumericType.SeasonBossRefreshTime);
 				int sessonBossFuben = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
-				if (seasonBossTime > 0 && serverNow > seasonBossTime && fubenid == sessonBossFuben)
+				if (seasonBossTime > 0 && serverNow > seasonBossTime && mapComponent.SceneId == sessonBossFuben)
 				{
 					KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
 					keyValuePairInt.KeyId = RandomHelper.RandomNumber(0, monsters.Length);
@@ -384,6 +383,8 @@ namespace ET.Server
 				}
 			}
 
+			
+			numericComponent.ApplyChange( NumericType.LocalDungeonTime, 1, false);
 			return randomMonsterList;
 		}
 
@@ -399,7 +400,7 @@ namespace ET.Server
 			string[] monsters = createMonster.Split('@');
 			//1;37.65,0,3.2;70005005;1@138.43,0,0.06;70005010;1
 
-			List<KeyValuePairInt> randomMonsterList = GetRandomMonster(scene, mapComponent.SceneId, createMonster);
+			List<KeyValuePairInt> randomMonsterList = GetLocalDungeonRandomMonster(scene, sceneType, createMonster);
 
 			for (int i = 0; i < monsters.Length; i++)
 			{
@@ -460,6 +461,8 @@ namespace ET.Server
 					//continue;
 				}
 
+				
+				//剧情副本一次性宝箱
 				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
 				{
 					LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
