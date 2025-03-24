@@ -13,6 +13,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_RankRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRankShowItemsRefresh);
+            self.E_CloseButton.AddListener(() => { self.uiTransform.gameObject.SetActive(false); });
 
             self.OnInitUI();
             self.ShowLastRewardPlayer().Coroutine();    

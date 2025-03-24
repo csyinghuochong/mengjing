@@ -28,6 +28,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_CloseButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_CloseButton == null )
+				{
+					this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+				}
+				return this.m_E_CloseButton;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -47,6 +64,7 @@ namespace ET.Client
 		}
 
 		private LoopVerticalScrollRect m_E_RankRewardItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_CloseButton = null;
 		public Transform uiTransform = null;
 	}
 }

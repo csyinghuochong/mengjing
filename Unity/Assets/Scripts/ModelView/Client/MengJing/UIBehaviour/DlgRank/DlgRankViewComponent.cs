@@ -82,52 +82,12 @@ namespace ET.Client
             }
         }
 
-        public ES_RankReward ES_RankReward
-        {
-            get
-            {
-                ES_RankReward es = this.m_es_rankreward;
-                if (es == null)
-                {
-	                string path = "Assets/Bundles/UI/Common/ES_RankReward.prefab";
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
-                    this.AssetList.Add(path);
-                    this.m_es_rankreward = this.AddChild<ES_RankReward, Transform>(go.transform);
-                }
-
-                return this.m_es_rankreward;
-            }
-        }
-
-        public ES_RankPetReward ES_RankPetReward
-        {
-            get
-            {
-                ES_RankPetReward es = this.m_es_rankpetreward;
-                if (es == null)
-                {
-	                string path = "Assets/Bundles/UI/Common/ES_RankPetReward.prefab";
-                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
-                    this.AssetList.Add(path);
-                    this.m_es_rankpetreward = this.AddChild<ES_RankPetReward, Transform>(go.transform);
-                }
-
-                return this.m_es_rankpetreward;
-            }
-        }
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_es_rankshow = null;
 			this.m_es_rankpet = null;
-			this.m_es_rankreward = null;
-			this.m_es_rankpetreward = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -143,8 +103,6 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private EntityRef<ES_RankShow> m_es_rankshow = null;
 		private EntityRef<ES_RankPet> m_es_rankpet = null;
-		private EntityRef<ES_RankReward> m_es_rankreward = null;
-		private EntityRef<ES_RankPetReward> m_es_rankpetreward = null;
 		public Transform uiTransform = null;
 	}
 }

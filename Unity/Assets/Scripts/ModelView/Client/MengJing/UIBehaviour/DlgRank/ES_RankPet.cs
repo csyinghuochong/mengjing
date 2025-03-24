@@ -257,6 +257,44 @@ namespace ET.Client
      		}
      	}
 
+				
+		public ES_RankPetReward ES_RankPetReward
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_RankPetReward es = this.m_es_rankpetreward;
+				if( es == null )
+
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RankPetReward");
+					this.m_es_rankpetreward = this.AddChild<ES_RankPetReward,Transform>(subTrans);
+				}
+				return this.m_es_rankpetreward;
+			}
+		}
+		
+		public UnityEngine.UI.Button E_RankRewardButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_RankRewardButton == null )
+				{
+					this.m_E_RankRewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RankReward");
+				}
+				return this.m_E_RankRewardButton;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -285,6 +323,8 @@ namespace ET.Client
 			this.m_es_rankpetitem_0 = null;
 			this.m_es_rankpetitem_1 = null;
 			this.m_es_rankpetitem_2 = null;
+			this.m_es_rankpetreward = null;
+			this.m_E_RankRewardButton = null;
 			this.uiTransform = null;
 		}
 
@@ -302,6 +342,8 @@ namespace ET.Client
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_0 = null;
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_1 = null;
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_2 = null;
+		private EntityRef<ES_RankPetReward> m_es_rankpetreward = null;
+		private UnityEngine.UI.Button m_E_RankRewardButton = null;
 		public Transform uiTransform = null;
 	}
 }

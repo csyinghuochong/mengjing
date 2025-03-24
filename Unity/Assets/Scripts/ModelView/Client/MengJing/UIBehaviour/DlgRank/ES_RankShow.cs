@@ -261,6 +261,43 @@ namespace ET.Client
      			return this.m_es_modelshow_3;
      		}
      	}
+		
+		public ES_RankReward ES_RankReward
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				ES_RankReward es = this.m_es_rankreward;
+				if( es == null )
+
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RankReward");
+					this.m_es_rankreward = this.AddChild<ES_RankReward,Transform>(subTrans);
+				}
+				return this.m_es_rankreward;
+			}
+		}
+		
+		public UnityEngine.UI.Button E_RankRewardButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_RankRewardButton == null )
+				{
+					this.m_E_RankRewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UISet/E_RankReward");
+				}
+				return this.m_E_RankRewardButton;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -290,6 +327,8 @@ namespace ET.Client
 			this.m_es_modelshow_2 = null;
 			this.m_EG_Rank_3RectTransform = null;
 			this.m_es_modelshow_3 = null;
+			this.m_es_rankreward = null;
+			this.m_E_RankRewardButton = null;
 			this.uiTransform = null;
 		}
 
@@ -307,6 +346,8 @@ namespace ET.Client
 		private EntityRef<ES_ModelShow> m_es_modelshow_2 = null;
 		private UnityEngine.RectTransform m_EG_Rank_3RectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow_3 = null;
+		private EntityRef<ES_RankReward> m_es_rankreward = null;
+		private UnityEngine.UI.Button m_E_RankRewardButton = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_RankReward))]
     [EntitySystemOf(typeof(ES_RankShow))]
     [FriendOfAttribute(typeof(ES_RankShow))]
     public static partial class ES_RankShowSystem
@@ -14,6 +15,7 @@ namespace ET.Client
             self.uiTransform = transform;
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_RankShowItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRankShowItemsRefresh);
+            self.E_RankRewardButton.AddListener(() => {self.ES_RankReward.uiTransform.gameObject.SetActive(true);});
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             self.E_HeadIcomImage1Image.sprite =
@@ -29,6 +31,7 @@ namespace ET.Client
             self.MyRankShowItem = self.AddChild<Scroll_Item_RankShowItem>();
             self.MyRankShowItem.BindTrans(gameObject.transform);
             self.EG_MyRankShowRectTransform.gameObject.SetActive(false);
+            self.ES_RankReward.uiTransform.gameObject.SetActive(false);
 
             self.OnUpdateUI().Coroutine();
         }

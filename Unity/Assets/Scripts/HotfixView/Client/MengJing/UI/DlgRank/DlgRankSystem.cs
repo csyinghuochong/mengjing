@@ -28,12 +28,6 @@ namespace ET.Client
                 case 1:
                     self.View.ES_RankPet.uiTransform.gameObject.SetActive(true);
                     break;
-                case 2:
-                    self.View.ES_RankReward.uiTransform.gameObject.SetActive(true);
-                    break;
-                case 3:
-                    self.View.ES_RankPetReward.uiTransform.gameObject.SetActive(true);
-                    break;
             }
         }
     }

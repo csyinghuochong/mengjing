@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_RankPetReward))]
     [EntitySystemOf(typeof(ES_RankPet))]
     [FriendOfAttribute(typeof(ES_RankPet))]
     public static partial class ES_RankPetSystem
@@ -16,11 +17,14 @@ namespace ET.Client
             self.E_Button_RefreshButton.AddListener(self.OnButton_RefreshButton);
             self.E_Button_RewardButton.AddListener(self.OnButton_RewardButton);
             self.E_Button_TeamButton.AddListenerAsync(self.OnButton_TeamButton);
+            self.E_RankRewardButton.AddListener(() => {self.ES_RankPetReward.uiTransform.gameObject.SetActive(true);});
 
             self.PetUIList.Add(self.ES_RankPetItem_0);
             self.PetUIList.Add(self.ES_RankPetItem_1);
             self.PetUIList.Add(self.ES_RankPetItem_2);
 
+            self.ES_RankPetReward.uiTransform.gameObject.SetActive(false);
+            
             self.OnUpdateUI().Coroutine();
             self.OnUpdateTimes();
         }
