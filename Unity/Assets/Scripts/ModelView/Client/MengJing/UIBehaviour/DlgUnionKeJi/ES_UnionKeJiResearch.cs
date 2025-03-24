@@ -200,24 +200,22 @@ namespace ET.Client
      		}
      	}
 
-		public ES_CommonItem ES_CommonItem
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-		        ES_CommonItem es = this.m_es_commonitem;
-     			if( es == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
-		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
-     			}
-     			return this.m_es_commonitem;
-     		}
-     	}
+		public UnityEngine.UI.Image E_CostItemIconImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_CostItemIconImage == null )
+				{
+					this.m_E_CostItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_CostItemIcon");
+				}
+				return this.m_E_CostItemIconImage;
+			}
+		}
 
 		public Text E_CostUnionGoldTextText
      	{
@@ -287,7 +285,7 @@ namespace ET.Client
      		}
      	}
 
-		public Text E_AttributeTextText
+		public Text E_NowAttributeTextText
      	{
      		get
      		{
@@ -296,13 +294,30 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_AttributeTextText == null )
+     			if( this.m_E_NowAttributeTextText == null )
      			{
-		    		this.m_E_AttributeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_AttributeText");
+		    		this.m_E_NowAttributeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NowAttributeText");
      			}
-     			return this.m_E_AttributeTextText;
+     			return this.m_E_NowAttributeTextText;
      		}
      	}
+		
+		public Text E_NextAttributeTextText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_NextAttributeTextText == null )
+				{
+					this.m_E_NextAttributeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NextAttributeText");
+				}
+				return this.m_E_NextAttributeTextText;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -329,12 +344,13 @@ namespace ET.Client
 			this.m_E_NameTextText = null;
 			this.m_E_LvTextText = null;
 			this.m_E_NeedUnionLvTextText = null;
-			this.m_es_commonitem = null;
+			this.m_E_CostItemIconImage = null;
 			this.m_E_CostUnionGoldTextText = null;
 			this.m_E_NeedTimeTextText = null;
 			this.m_E_UpBtnButton = null;
 			this.m_E_StartBtnImage = null;
-			this.m_E_AttributeTextText = null;
+			this.m_E_NowAttributeTextText = null;
+			this.m_E_NextAttributeTextText = null;
 			this.uiTransform = null;
 		}
 
@@ -349,12 +365,13 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_NameTextText = null;
 		private UnityEngine.UI.Text m_E_LvTextText = null;
 		private UnityEngine.UI.Text m_E_NeedUnionLvTextText = null;
-		private EntityRef<ES_CommonItem> m_es_commonitem = null;
+		private UnityEngine.UI.Image m_E_CostItemIconImage = null;
 		private Text m_E_CostUnionGoldTextText = null;
 		private Text m_E_NeedTimeTextText = null;
 		private Button m_E_UpBtnButton = null;
 		private Image m_E_StartBtnImage = null;
-		private Text m_E_AttributeTextText = null;
+		private Text m_E_NowAttributeTextText = null;
+		private Text m_E_NextAttributeTextText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -43,7 +43,7 @@ namespace ET
 
             foreach (int id in idList)
             {
-                if (preId % 100 == id % 100 && preId - id >= 0)
+                if (preId / 100 == id / 100 && preId - id <= 0)
                 {
                     return true;
                 }

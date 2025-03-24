@@ -50,7 +50,7 @@ namespace ET.Client
                 self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
             }
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, nowUnionKeJiConfig.Icon);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, nowUnionKeJiConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageIconImage.sprite = sp;
             CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, curlv == 0);
