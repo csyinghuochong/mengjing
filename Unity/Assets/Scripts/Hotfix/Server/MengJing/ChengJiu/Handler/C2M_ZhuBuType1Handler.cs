@@ -5,7 +5,7 @@ namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(ChengJiuComponentS))]
-    public class M2C_ZhuBuType1Handler : MessageLocationHandler<Unit, C2M_ZhuBuType1Request, M2C_ZhuBuType1Response>
+    public class C2M_ZhuBuType1Handler : MessageLocationHandler<Unit, C2M_ZhuBuType1Request, M2C_ZhuBuType1Response>
     {
         protected override async ETTask Run(Unit unit, C2M_ZhuBuType1Request request, M2C_ZhuBuType1Response response)
         {

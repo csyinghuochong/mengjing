@@ -208,11 +208,28 @@ namespace ET.Client
             string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-            //M2C_JingLingCatchResponse response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
-            // if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
-            // {
-            //     FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
-            // }
+            await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            M2C_ZhuBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            
+            // 捕捉成功，
+            // 捕捉失败怪物死亡（就是隐藏 并播放特效）
+            // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
+            if (response.Error == ErrorCode.ERR_Success && response.Message == string.Empty)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
+                return;
+            }
+            if (response.Message == "1")
+            {
+                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物死亡！");
+                return;
+            }
+            if (response.Message == "2")
+            {
+                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物逃跑！");
+                return;
+            }
+            
             //
             // if (response.Error == ErrorCode.ERR_ZhuaBuFail)
             // {

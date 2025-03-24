@@ -28,7 +28,6 @@
 
             return ErrorCode.ERR_Success;
         }
-
         
         public static async ETTask<M2C_ZhuBuType1Response> ZhuaBuType1Request(Scene root, long jingLingId, int itemId, string operateType)
         {
@@ -38,6 +37,17 @@
             request.OperateType = operateType;
 
             M2C_ZhuBuType1Response response = (M2C_ZhuBuType1Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+        
+        public static async ETTask<M2C_ZhuBuType2Response> ZhuaBuType2Request(Scene root, long jingLingId, int itemId, string operateType)
+        {
+            C2M_ZhuBuType2Request request = C2M_ZhuBuType2Request.Create();
+            request.JingLingId = jingLingId;
+            request.ItemId = itemId;
+            request.OperateType = operateType;
+
+            M2C_ZhuBuType2Response response = (M2C_ZhuBuType2Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
