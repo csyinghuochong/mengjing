@@ -10,8 +10,7 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this LocalDungeonComponent self)
         {
-            self.RandomJingLing = 0;
-            self.RandomMonster = 0;
+
         }
 
         [EntitySystem]

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,22 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+
+        public static string GetMonsterShowName(int babaType)
+        {
+            if (babaType == 1)
+            {
+                return "(宝宝)";
+            }
+            
+            if (babaType == 2)
+            {
+                return "(变异宝宝)";
+            }
+            
+            return  string.Empty;
+        }
+
         /// <summary>
         /// 打印机效果
         /// </summary>

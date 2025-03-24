@@ -310,6 +310,7 @@ namespace ET.Client
                 //NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
                 //this.ObjName.GetComponent<TextMeshProUGUI>().text = $"{colorstr}{monsterCof.MonsterName}_{numericComponent.GetAsInt(NumericType.Now_AI)}</color>";
                 MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
+                NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
                 bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                 using (zstring.Block())
                 {
@@ -326,13 +327,23 @@ namespace ET.Client
                     }
                     else
                     {
-                        self.Lal_Name.GetComponent<Text>().text = zstring.Format("{0}{1}</color>", colorstr, monsterCof.MonsterName);
+                        int babyType =  numericComponentC.GetAsInt(NumericType.BaByType);
+                        string addname = CommonViewHelper.GetMonsterShowName(babyType);
+                        
+                        if (!string.IsNullOrEmpty(addname))
+                        {
+                            self.Lal_Name.GetComponent<Text>().text = zstring.Format("{0}{1}{2}</color>", colorstr, monsterCof.MonsterName, addname);
+                        }
+                        else
+                        {
+                            self.Lal_Name.GetComponent<Text>().text = zstring.Format("{0}{1}</color>", colorstr, monsterCof.MonsterName);
+                        }
                     }
                 }
 
                 //怪物等级显示
                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-                int monsterLv = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Lv);
+                int monsterLv = numericComponentC.GetAsInt(NumericType.Now_Lv);
                 if (monsterLv > 0)
                 {
                     rc.Get<GameObject>("Lal_Lv").GetComponent<Text>().text = monsterLv.ToString();

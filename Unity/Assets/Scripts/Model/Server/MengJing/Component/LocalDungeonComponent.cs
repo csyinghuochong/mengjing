@@ -6,9 +6,6 @@ namespace ET.Server
         public long Timer { get; set; }
         public int FubenDifficulty { get; set; }
 
-        public int RandomMonster { get; set; }
-        public int RandomJingLing { get; set; }
-        
         private EntityRef<Unit> mainUnit;
         public Unit MainUnit
         {

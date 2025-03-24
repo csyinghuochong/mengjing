@@ -310,8 +310,7 @@ namespace ET.Server
 
 			UserInfoComponentS userInfoComponent = mainUnit.GetComponent<UserInfoComponentS>();
 			NumericComponentS numericComponent = mainUnit.GetComponent<NumericComponentS>();
-
-
+			
 			TaskPro taskPro = mainUnit.GetComponent<TaskComponentS>().GetTreasureMonster(mapComponent.SceneId);
 			if (taskPro != null)
 			{
@@ -361,7 +360,6 @@ namespace ET.Server
 				int randomid = userInfoComponent.GetRandomMonsterId();
 				if (randomid > 0)
 				{
-					localDungeonComponent.RandomMonster = randomid;
 					KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
 					keyValuePairInt.KeyId = i;
 					keyValuePairInt.Value = randomid;
@@ -373,7 +371,6 @@ namespace ET.Server
 				randomid = userInfoComponent.GetRandomJingLingId();
 				if (randomid > 0)
 				{
-					localDungeonComponent.RandomJingLing = randomid;
 					KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
 					keyValuePairInt.KeyId = i;
 					keyValuePairInt.Value = randomid;
@@ -395,8 +392,7 @@ namespace ET.Server
 		/// <returns></returns>
 		public static int GetBabyType(int sceneType, int babyNumber, MonsterConfig monsterConfig)
 		{
-
-			if (babyNumber >= 10)
+			if (babyNumber >= ConfigData.BabyRefreshMaxNum)
 			{
 				return 0;	
 			}
@@ -475,13 +471,13 @@ namespace ET.Server
 
 					if (randomMonsterList[kk].KeyId == i && (int) randomMonsterList[kk].Value > 0 && position.Length >= 3)
 					{
-						monsterid = (int) randomMonsterList[kk].Value;
-						monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+						int tempmonsterid = (int) randomMonsterList[kk].Value;
+						MonsterConfig tempmonsterConfig = MonsterConfigCategory.Instance.Get(tempmonsterid);
 
 						int skinId = 0;
-						if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) //奇遇宠物
+						if (tempmonsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) //奇遇宠物
 						{
-							int itemid = monsterConfig.Parameter[1];
+							int itemid = tempmonsterConfig.Parameter[1];
 							ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
 							int petId = int.Parse(itemConfig.ItemUsePar);
 							PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
@@ -492,8 +488,8 @@ namespace ET.Server
 						}
 
 						float3 vector3 = new float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]));
-						Unit unitmonster = UnitFactory.CreateMonster(scene, monsterid, vector3,
-							new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, SkinId = skinId, });
+						Unit unitmonster = UnitFactory.CreateMonster(scene, tempmonsterid, vector3,
+							new CreateMonsterInfo() { Camp = tempmonsterConfig.MonsterCamp, SkinId = skinId });
 
 						haveotherMonster = true;
 					}
@@ -503,6 +499,8 @@ namespace ET.Server
 				{
 					//continue;
 				}
+				
+				
 				
 				//剧情副本一次性宝箱
 				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
