@@ -85,7 +85,7 @@ namespace ET.Client
             self.E_NameTextText.text = nowUnionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
             using (zstring.Block())
             {
-                self.E_LvTextText.text = zstring.Format("等级：{0}", nowUnionKeJiConfig.QiangHuaLv.ToString());
+                self.E_LvTextText.text = zstring.Format("科技等级：{0}/{1}", nowUnionKeJiConfig.QiangHuaLv.ToString(), UnionKeJiConfigCategory.Instance.UnionQiangHuaList[position].Count);
                 // self.E_NeedUnionLvTextText.text = zstring.Format("需要家族等级达到{0}级", unionKeJiConfig.NeedUnionLv);
                 
                 self.E_NowAttributeTextText.text = ItemViewHelp.GetAttributeDesc(nowUnionKeJiConfig.EquipPropreAdd);
@@ -125,7 +125,7 @@ namespace ET.Client
                         long leftTime = self.NeedTime - passTime;
                         using (zstring.Block())
                         {
-                            self.E_ProgressBarTextText.text = zstring.Format("研究剩余时间{0}时{1}分{2}秒", leftTime / 3600, leftTime % 3600 / 60, leftTime % 3600 % 60);
+                            self.E_ProgressBarTextText.text = zstring.Format("研究剩余时间：{0}时{1}分{2}秒", leftTime / 3600, leftTime % 3600 / 60, leftTime % 3600 % 60);
                         }
                     }
                     else

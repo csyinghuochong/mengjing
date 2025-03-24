@@ -18,12 +18,12 @@
                 return;
             }
 
-            UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(request.KeJiId);
-            if (unionKeJiConfig.NeedUnionLv > dBUnionInfo.UnionInfo.Level)
-            {
-                response.Error = ErrorCode.ERR_LevelIsNot;
-                return;
-            }
+            // UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(request.KeJiId);
+            // if (unionKeJiConfig.NeedUnionLv > dBUnionInfo.UnionInfo.Level)
+            // {
+            //     response.Error = ErrorCode.ERR_LevelIsNot;
+            //     return;
+            // }
             
             await ETTask.CompletedTask;
         }

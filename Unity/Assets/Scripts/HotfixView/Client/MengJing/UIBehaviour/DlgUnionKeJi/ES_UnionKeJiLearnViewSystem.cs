@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(ES_UnionKeJiLearnItem))]
     [FriendOf(typeof(Scroll_Item_UnionKeJiLearnItem))]
     [EntitySystemOf(typeof(ES_UnionKeJiLearn))]
     [FriendOfAttribute(typeof(ES_UnionKeJiLearn))]
@@ -12,8 +13,9 @@ namespace ET.Client
         private static void Awake(this ES_UnionKeJiLearn self, Transform transform)
         {
             self.uiTransform = transform;
-            self.E_UnionKeJiLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionKeJiLearnItemsRefresh);
-            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtnButton);
+
+            self.E_ActiveBtnButton.AddListenerAsync(self.OnStartBtnButton);
+            self.E_UpBtnButton.AddListenerAsync(self.OnStartBtnButton);
 
             self.InitItemList().Coroutine();
         }
@@ -24,13 +26,6 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnUnionKeJiLearnItemsRefresh(this ES_UnionKeJiLearn self, Transform transform, int index)
-        {
-            Scroll_Item_UnionKeJiLearnItem scrollItemUnionKeJiLearnItem = self.ScrollItemUnionKeJiLearnItems[index].BindTrans(transform);
-            scrollItemUnionKeJiLearnItem.ClickAction = self.UpdateInfo;
-            scrollItemUnionKeJiLearnItem.UpdateInfo(index, self.UserInfo.UnionKeJiList[index], self.UnionMyInfo.UnionKeJiList[index]);
-        }
-
         public static async ETTask InitItemList(this ES_UnionKeJiLearn self)
         {
             U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
@@ -39,8 +34,16 @@ namespace ET.Client
 
             self.UserInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
 
-            self.AddUIScrollItems(ref self.ScrollItemUnionKeJiLearnItems, self.UnionMyInfo.UnionKeJiList.Count);
-            self.E_UnionKeJiLearnItemsLoopVerticalScrollRect.SetVisible(true, self.UnionMyInfo.UnionKeJiList.Count);
+            if (self.Items.Count == 0)
+            {
+                for (int i = 0; i < self.EG_ContentRectTransform.childCount; i++)
+                {
+                    Transform subTrans = self.EG_ContentRectTransform.GetChild(i);
+                    ES_UnionKeJiLearnItem item = self.AddChild<ES_UnionKeJiLearnItem, Transform>(subTrans);
+                    item.Init(i);
+                    self.Items.Add(item);
+                }
+            }
 
             self.UpdateInfo(0);
         }
@@ -48,62 +51,76 @@ namespace ET.Client
         public static void UpdateInfo(this ES_UnionKeJiLearn self, int position)
         {
             self.Position = position;
-
-            if (self.ScrollItemUnionKeJiLearnItems != null)
+            
+            for (int i = 0; i < self.Items.Count; i++)
             {
-                for (int i = 0; i < self.ScrollItemUnionKeJiLearnItems.Count; i++)
+                ES_UnionKeJiLearnItem item = self.Items[i];
+                item.Refresh();
+                if (position == item.Position)
                 {
-                    Scroll_Item_UnionKeJiLearnItem item = self.ScrollItemUnionKeJiLearnItems[i];
-
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.UpdateInfo(i, self.UserInfo.UnionKeJiList[i], self.UnionMyInfo.UnionKeJiList[i]);
-
-                    GameObject highlightImg = item.E_HighlightImgImage.gameObject;
-                    highlightImg.SetActive(item.Position == position);
-                    if (item.Position == position)
-                    {
-                        self.E_HeadImgImage.sprite = item.E_IconImgImage.sprite;
-                    }
+                    self.E_ImageSelectImage.transform.SetParent(item.uiTransform);
+                    self.E_ImageSelectImage.transform.localPosition = Vector3.zero;
+                    self.E_ImageSelectImage.gameObject.SetActive(true);
                 }
             }
 
-            UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[position]);
+            UnionKeJiConfig nowUnionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[position]);
 
-            Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
-            self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            
+            self.E_HeadImgImage.sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, nowUnionKeJiConfig.Icon));
+            
+            string keJiName = nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);
+            self.E_NameTextText.text = keJiName;
             using (zstring.Block())
             {
-                self.E_LvTextText.text = zstring.Format("等级：{0}", unionKeJiConfig.QiangHuaLv.ToString());
-            }
-
-            if (unionKeJiConfig.QiangHuaLv == 0)
-            {
-                UnionKeJiConfig unionKeJiConfig1 = UnionKeJiConfigCategory.Instance.Get(unionKeJiConfig.NextID);
-                using (zstring.Block())
+                self.E_LvTextText.text = zstring.Format("当前科技等级：{0}", nowUnionKeJiConfig.QiangHuaLv.ToString());
+                self.E_MaxLvTextText.text = zstring.Format("{0}可以提升至{1}级", keJiName, UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[position]).QiangHuaLv);
+                if (nowUnionKeJiConfig.PreId.Length == 0 || nowUnionKeJiConfig.PreId[0] == 0)
                 {
-                    self.E_AttributeTextText.text = zstring.Format("下一级：{0}", ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd));
+                    self.E_PreTextText.text = "";
                 }
+                else
+                {
+                    string preInfo = "需要";
+                    for (int i = 0; i < nowUnionKeJiConfig.PreId.Length; i++)
+                    {
+                        if (i != 0)
+                        {
+                            preInfo += "或";
+                        }
+                        
+                        UnionKeJiConfig config = UnionKeJiConfigCategory.Instance.Get(nowUnionKeJiConfig.PreId[i]);
+                        preInfo += nowUnionKeJiConfig.EquipSpaceName.Substring(0, Regex.Match(nowUnionKeJiConfig.EquipSpaceName, @"\d").Index);
+                        preInfo += "达到" + config.QiangHuaLv + "级";
+                    }
+                    self.E_PreTextText.text = preInfo;
+                }
+                
             }
-            else
-            {
-                self.E_AttributeTextText.text = ItemViewHelp.GetAttributeDesc(unionKeJiConfig.EquipPropreAdd);
-            }
+            
+            // if (nowUnionKeJiConfig.QiangHuaLv == 0)
+            // {
+            //     UnionKeJiConfig unionKeJiConfig1 = UnionKeJiConfigCategory.Instance.Get(nowUnionKeJiConfig.NextID);
+            //     using (zstring.Block())
+            //     {
+            //         self.E_AttributeTextText.text = zstring.Format("下一级：{0}", ItemViewHelp.GetAttributeDesc(unionKeJiConfig1.EquipPropreAdd));
+            //     }
+            // }
+            // else
+            // {
+            //     self.E_AttributeTextText.text = ItemViewHelp.GetAttributeDesc(nowUnionKeJiConfig.EquipPropreAdd);
+            // }
 
-            self.ES_CostList.Refresh(unionKeJiConfig.LearnCost);
+            self.ES_CostList.Refresh(nowUnionKeJiConfig.LearnCost);
+            
+            self.E_ActiveBtnButton.gameObject.SetActive(nowUnionKeJiConfig.QiangHuaLv == 0);
+            self.E_UpBtnButton.gameObject.SetActive(nowUnionKeJiConfig.QiangHuaLv != 0);
         }
 
         public static async ETTask OnStartBtnButton(this ES_UnionKeJiLearn self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[self.Position]);
-            if (unionKeJiConfig.NextID == 0)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("已经达到满级！");
-                return;
-            }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (!bagComponent.CheckNeedItem(unionKeJiConfig.LearnCost))
@@ -114,7 +131,7 @@ namespace ET.Client
 
             if (unionKeJiConfig.NextID > self.UnionMyInfo.UnionKeJiList[self.Position])
             {
-                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("已达当前最高等级！");
                 return;
             }
 
