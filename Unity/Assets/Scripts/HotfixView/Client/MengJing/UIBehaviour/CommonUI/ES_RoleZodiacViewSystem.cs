@@ -83,7 +83,7 @@ namespace ET.Client
             sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
             List<ItemInfo> equipList = bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip);
-            int startId = 16000101 + index * 100;
+            int startId = 1600101 + index * 100;
             
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(startId);
             EquipSuitConfig equipSuit = EquipSuitConfigCategory.Instance.Get(equipConfig.EquipSuitID);
