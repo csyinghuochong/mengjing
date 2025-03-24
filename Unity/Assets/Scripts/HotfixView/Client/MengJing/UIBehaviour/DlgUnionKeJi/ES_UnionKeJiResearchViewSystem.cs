@@ -16,7 +16,7 @@ namespace ET.Client
             self.E_ImageSelectImage.gameObject.SetActive(false);
             self.E_ProgressBarImgImage.fillAmount = 0;
             self.E_QuickBtnButton.AddListener(self.OnQuickBtnButton);
-            self.E_StartBtnButton.AddListenerAsync(self.OnStartBtnButton);
+            self.E_UpBtnButton.AddListenerAsync(self.OnUpBtnButton);
 
             self.InitItemList().Coroutine();
         }
@@ -79,6 +79,8 @@ namespace ET.Client
             {
                 self.NeedTime = 0;
             }
+            self.EG_ProgressRectTransform.gameObject.SetActive(self.UnionMyInfo.KeJiActitePos == position);
+            self.E_UpBtnButton.gameObject.SetActive(self.UnionMyInfo.KeJiActitePos != position);
 
             Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
             self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
@@ -104,7 +106,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask UpdataProgressBar(this ES_UnionKeJiResearch self)
+        private static async ETTask UpdataProgressBar(this ES_UnionKeJiResearch self)
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             while (!self.IsDisposed)
@@ -112,7 +114,7 @@ namespace ET.Client
                 if (self.NeedTime == 0)
                 {
                     self.E_ProgressBarImgImage.fillAmount = 0;
-                    self.E_UnderwayTextText.text = string.Empty;
+                    self.E_ProgressBarTextText.text = string.Empty;
                 }
                 else
                 {
@@ -124,14 +126,13 @@ namespace ET.Client
                         long leftTime = self.NeedTime - passTime;
                         using (zstring.Block())
                         {
-                            self.E_UnderwayTextText.text =
-                                    zstring.Format("{0}时{1}分{2}秒", leftTime / 3600, leftTime % 3600 / 60, leftTime % 3600 % 60);
+                            self.E_ProgressBarTextText.text = zstring.Format("研究剩余时间{0}时{1}分{2}秒", leftTime / 3600, leftTime % 3600 / 60, leftTime % 3600 % 60);
                         }
                     }
                     else
                     {
                         self.E_ProgressBarImgImage.fillAmount = 0;
-                        self.E_UnderwayTextText.text = string.Empty;
+                        self.E_ProgressBarTextText.text = string.Empty;
                     }
                 }
 
@@ -187,7 +188,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnStartBtnButton(this ES_UnionKeJiResearch self)
+        private static async ETTask OnUpBtnButton(this ES_UnionKeJiResearch self)
         {
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.Position]);
 
@@ -196,6 +197,21 @@ namespace ET.Client
             if (passTime < unionKeJiConfig.NeedTime)
             {
                 FlyTipComponent.Instance.ShowFlyTip("有科技正在研究中！");
+                return;
+            }
+
+            bool havePre = false;
+            for (int i = 0; i < unionKeJiConfig.PreId.Length; i++)
+            {
+                if (UnionKeJiConfigCategory.Instance.HavePreId(unionKeJiConfig.PreId[i], self.UnionMyInfo.UnionKeJiList))
+                {
+                    havePre = true;
+                    break;
+                }
+            }
+            if (!havePre)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请先激活前置科技！");
                 return;
             }
 
