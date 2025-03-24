@@ -50,10 +50,10 @@ namespace ET.Client
                 self.E_PointText.text = zstring.Format("{0}/{1}", curlv, maxlv);
             }
 
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, talentConfig.Icon.ToString());
-            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            // self.E_ImageIconImage.sprite = sp;
-            // CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, !active);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, nowUnionKeJiConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_ImageIconImage.sprite = sp;
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, curlv == 0);
         }
 
         private static void OnImageIcon(this ES_UnionKeJiResearchItem self)

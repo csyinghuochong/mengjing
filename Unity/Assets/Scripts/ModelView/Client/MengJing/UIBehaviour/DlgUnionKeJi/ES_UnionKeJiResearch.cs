@@ -47,6 +47,23 @@ namespace ET.Client
      		}
      	}
 
+		public RectTransform EG_ProgressRectTransform
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_ProgressRectTransform == null )
+				{
+					this.m_EG_ProgressRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Progress");
+				}
+				return this.m_EG_ProgressRectTransform;
+			}
+		}
+		
 		public UnityEngine.UI.Image E_ProgressBarImgImage
      	{
      		get
@@ -58,7 +75,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ProgressBarImgImage == null )
      			{
-		    		this.m_E_ProgressBarImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ProgressBarImg");
+		    		this.m_E_ProgressBarImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_Progress/E_ProgressBarImg");
      			}
      			return this.m_E_ProgressBarImgImage;
      		}
@@ -75,7 +92,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ProgressBarTextText == null )
      			{
-		    		this.m_E_ProgressBarTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_ProgressBarText");
+		    		this.m_E_ProgressBarTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_Progress/E_ProgressBarText");
      			}
      			return this.m_E_ProgressBarTextText;
      		}
@@ -92,7 +109,7 @@ namespace ET.Client
      			}
      			if( this.m_E_QuickBtnButton == null )
      			{
-		    		this.m_E_QuickBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_QuickBtn");
+		    		this.m_E_QuickBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_Progress/E_QuickBtn");
      			}
      			return this.m_E_QuickBtnButton;
      		}
@@ -183,23 +200,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_UnderwayTextText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_UnderwayTextText == null )
-     			{
-		    		this.m_E_UnderwayTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_UnderwayText");
-     			}
-     			return this.m_E_UnderwayTextText;
-     		}
-     	}
-
 		public ES_CommonItem ES_CommonItem
      	{
      		get
@@ -253,23 +253,23 @@ namespace ET.Client
      		}
      	}
 
-		public Button E_StartBtnButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_StartBtnButton == null )
-     			{
-		    		this.m_E_StartBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_StartBtn");
-     			}
-     			return this.m_E_StartBtnButton;
-     		}
-     	}
-
+		public Button E_UpBtnButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_UpBtnButton == null )
+				{
+					this.m_E_UpBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_UpBtn");
+				}
+				return this.m_E_UpBtnButton;
+			}
+		}
+		
 		public Image E_StartBtnImage
      	{
      		get
@@ -320,6 +320,7 @@ namespace ET.Client
 		{
 			this.m_EG_ContentRectTransform = null;
 			this.m_E_ImageSelectImage = null;
+			this.m_EG_ProgressRectTransform = null;
 			this.m_E_ProgressBarImgImage = null;
 			this.m_E_ProgressBarTextText = null;
 			this.m_E_QuickBtnButton = null;
@@ -328,11 +329,10 @@ namespace ET.Client
 			this.m_E_NameTextText = null;
 			this.m_E_LvTextText = null;
 			this.m_E_NeedUnionLvTextText = null;
-			this.m_E_UnderwayTextText = null;
 			this.m_es_commonitem = null;
 			this.m_E_CostUnionGoldTextText = null;
 			this.m_E_NeedTimeTextText = null;
-			this.m_E_StartBtnButton = null;
+			this.m_E_UpBtnButton = null;
 			this.m_E_StartBtnImage = null;
 			this.m_E_AttributeTextText = null;
 			this.uiTransform = null;
@@ -340,6 +340,7 @@ namespace ET.Client
 
 		private RectTransform m_EG_ContentRectTransform = null;
 		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+		private RectTransform m_EG_ProgressRectTransform = null;
 		private UnityEngine.UI.Image m_E_ProgressBarImgImage = null;
 		private UnityEngine.UI.Text m_E_ProgressBarTextText = null;
 		private UnityEngine.UI.Button m_E_QuickBtnButton = null;
@@ -348,11 +349,10 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_NameTextText = null;
 		private UnityEngine.UI.Text m_E_LvTextText = null;
 		private UnityEngine.UI.Text m_E_NeedUnionLvTextText = null;
-		private UnityEngine.UI.Text m_E_UnderwayTextText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private Text m_E_CostUnionGoldTextText = null;
 		private Text m_E_NeedTimeTextText = null;
-		private Button m_E_StartBtnButton = null;
+		private Button m_E_UpBtnButton = null;
 		private Image m_E_StartBtnImage = null;
 		private Text m_E_AttributeTextText = null;
 		public Transform uiTransform = null;
