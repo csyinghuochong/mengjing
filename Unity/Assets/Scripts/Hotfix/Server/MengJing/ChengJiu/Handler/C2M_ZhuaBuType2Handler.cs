@@ -71,7 +71,7 @@ namespace ET.Server
                 int failType = RandomHelper.RandomNumber(1, 3);
                 if (failType >= 1)
                 {
-                    zhupuUnit.GetComponent<HeroDataComponentS>().OnDead(unit);
+                    zhupuUnit.GetComponent<HeroDataComponentS>().OnDead(unit ,true);
                 }
                 else
                 {
