@@ -1414,9 +1414,16 @@ namespace ET.Server
             }
         }
 
-        public static void ClearSeasonData(this TaskComponentS self)
+        public static void OnResetSeason(this TaskComponentS self, bool notice)
         {
-
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskConfig.TaskType == TaskTypeEnum.Season || taskConfig.TaskType == TaskTypeEnum.SeasonDaily)
+                {
+                    self.RoleTaskList.RemoveAt(i);  
+                }
+            }
         }
 
         public static void InitSeasonMainTask(this TaskComponentS self, bool notice)
@@ -1575,7 +1582,7 @@ namespace ET.Server
             }
 
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
-            if (SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
+            if (SeasonHelper.GetOpenSeason(userInfoComponent.GetUserLv())!=null)
             {
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
                 for (int i = 0; i < taskCountryList.Count; i++)

@@ -5,19 +5,36 @@ namespace ET
 {
     public static class SeasonHelper
     {
-
-        public const int SeasonBossId = 90000051;
         
-        public static bool IsOpenSeason(int userLv)
-        {
-            if (userLv < 55)
-            {
-                return false;
-            }
-            long serverTime = TimeHelper.ServerNow();
-            return serverTime >= ConfigData.SeasonOpenTime && serverTime <= ConfigData.SeasonCloseTime;
-        }
-
+         /// <summary>
+         /// 赛季结束奖励
+         /// </summary>
+         public static string GetSeasonOverReward(int seasonLevel)
+         {
+             if (seasonLevel >= 20)
+             {
+                 return "1;1000000@10000159;30@10010094;1@10000165;10";
+             }
+             if (seasonLevel >= 15)
+             {
+                 return "1;500000@10000159;20@10010093;1@10000165;5";
+             }
+             if (seasonLevel >= 10)
+             {
+                 return "1;300000@10000159;10@10010093;1";
+             }
+             if (seasonLevel >= 5)
+             {
+                 return "1;100000@10000159;5@10010092;1";
+             }
+             if (seasonLevel >= 1)
+             {
+                 return "1;10000@10000159;2";
+             }
+        
+             return string.Empty;
+         }
+        
         /// <summary>
         /// 第几赛季
         /// </summary>

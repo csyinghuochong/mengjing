@@ -76,7 +76,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
 
-            int bossId = SeasonHelper.SeasonBossId;
+            int bossId = ConfigData.SeasonBossId;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, monsterConfig.MonsterHeadIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

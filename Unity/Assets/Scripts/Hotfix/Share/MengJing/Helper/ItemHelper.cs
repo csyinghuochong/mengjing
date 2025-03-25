@@ -5,6 +5,27 @@ namespace ET
     [FriendOf(typeof(RewardItem))]
     public static class ItemHelper
     {
+        public static List<ItemInfoProto> GetRewardItems_2(string needitems)
+        {
+            List<ItemInfoProto> costItems = new List<ItemInfoProto>();
+            if (CommonHelp.IfNull(needitems))
+            {
+                return costItems;
+            }
+            string[] needList = needitems.Split('@');
+            for (int i = 0; i < needList.Length; i++)
+            {
+                string[] itemInfo = needList[i].Split(';');
+                int itemId = int.Parse(itemInfo[0]);
+                int itemNum = int.Parse(itemInfo[1]);
+                ItemInfoProto ItemInfoProto = ItemInfoProto.Create();
+                ItemInfoProto.ItemID = itemId;
+                ItemInfoProto.ItemNum = itemNum;      
+                costItems.Add(ItemInfoProto);
+            }
+            return costItems;
+        }
+        
         public static int CanEquip(ItemInfo bagInfo, UserInfo userInfo)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);

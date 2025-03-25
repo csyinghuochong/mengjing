@@ -1134,6 +1134,14 @@ namespace ET.Server
 
             return 0;
         }
+        
+        public static void OnResetSeason(this UserInfoComponentS self, bool notice)
+        {
+            self.UserInfo.SeasonLevel = 1;
+            self.UserInfo.SeasonExp = 0;
+            self.UserInfo.SeasonCoin = 0;
+            self.UserInfo.OpenJingHeIds.Clear();
+        }
 
         public static void ClearMakeListByType(this UserInfoComponentS self, int makeType)
         {

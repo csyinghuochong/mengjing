@@ -444,25 +444,7 @@ namespace ET
 
         [StaticField]
         public static bool IsShowLieOpen = false;
-
-        /// <summary>
-        /// 赛季开始时间 . 已废弃
-        /// </summary>
-        //public static long SeasonOpenTime = 1701360000000;
-
-        //赛季结束时间 . 已废弃
-        //public static long SeasonCloseTime = 1713715200000;
-
-        /// <summary>
-        /// 赛季开时间
-        /// </summary>
-        [StaticField]
-        public static List<KeyValuePairLong> SeasonTimeList = new List<KeyValuePairLong>()
-        {
-            new KeyValuePairLong() { KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
-            new KeyValuePairLong() { KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 }
-        };
-
+        
         /// <summary>
         /// 新人抽奖 //KeyId权重 value道具..     第七天是武器ComHelp.GetWelfareWeapon
         /// </summary>
@@ -1134,14 +1116,17 @@ namespace ET
         };
 
         /// <summary>
-        /// 赛季开始时间
+        /// 赛季开时间
         /// </summary>
         [StaticField]
-        public static long SeasonOpenTime = 1701360000000;
-
-        //赛季结束时间
-        [StaticField]
-        public static long SeasonCloseTime = 1711814400000;
+        public static List<KeyValuePairLong> SeasonTimeList = new List<KeyValuePairLong>()
+        {
+            new KeyValuePairLong(){ KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
+            new KeyValuePairLong(){ KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 },
+            new KeyValuePairLong(){ KeyId = 2, Value = 1721577600001, Value2 = 1730390400000 },
+            new KeyValuePairLong(){ KeyId = 3, Value = 1730390400001, Value2 = 1738339200000 },
+            new KeyValuePairLong(){ KeyId = 4, Value = 1738339200001, Value2 = 1753977600000 },
+        };
 
         /// <summary>
         /// 赛季BOSS

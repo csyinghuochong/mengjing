@@ -574,11 +574,16 @@ namespace ET.Server
             return false;
         }
 
-        public static void OnResetSeason(this BagComponentS self)
+        public static void OnResetSeason(this BagComponentS self, bool notice)
         { 
             self.SeasonJingHePlan = 0;
-           //self.SeasonJingHe.Clear();
-            //self.ClearJingHeItem(self.BagItemList);
+       
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.ItemLocBag));
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.ItemWareHouse1));
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.ItemWareHouse2));
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.ItemWareHouse3));
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.ItemWareHouse4));
+            self.ClearJingHeItem(self.GetItemByLoc(ItemLocType.SeasonJingHe));
         }
 
         public static void ClearJingHeItem(this BagComponentS self, List<ItemInfo> bagInfos)

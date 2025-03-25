@@ -126,28 +126,26 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.PointMinJie, robotConfig.PointList[4], false);
              }
 
+              UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
              if (numericComponent.GetAsInt(NumericType.CostTiLi) > 600)
              {
-                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                
                  Log.Console($"体力消耗异常: {self.Zone()}  {userInfoComponent.GetName()} {numericComponent.GetAsInt(NumericType.CostTiLi)}");
-             }
-
-             ///赛季数据[赛季开始]
-             long serverTime = TimeHelper.ServerNow();
-             long seasonopenTime = numericComponent.GetAsLong(NumericType.SeasonOpenTime);
-             if (seasonopenTime != 0 && seasonopenTime != ConfigData.SeasonOpenTime)
-             {
-                 //清空赛季相关数据. 赛季任务 晶核
-                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, 0, false);
-
-                 Log.Console("清空赛季任务！");
              }
 
              if (numericComponent.GetAsInt(NumericType.SkillMakePlan2) == 0)
              {
                  numericComponent.ApplyValue(NumericType.MakeType_2, 0, false);
              }
-
+             
+             //月卡次数用完，则清空标志
+             int yuekatimes = numericComponent.GetAsInt(NumericType.YueKaRemainTimes);
+             if (yuekatimes > 0)
+             {
+                 numericComponent.ApplyValue(NumericType.YueKaEndTime, yuekatimes, false);
+             }
+             
+             self.CheckSeasonOver(false);
              self.CheckSeasonOpen(false);
          }
 
@@ -156,6 +154,52 @@ namespace ET.Server
              
          }
 
+         public static void CheckSeasonOver(this HeroDataComponentS self, bool notice)
+         {
+             ///赛季数据[赛季开始]
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+             long seasonopenTime = numericComponent.GetAsLong(NumericType.SeasonOpenTime);
+             KeyValuePairLong keyValuePairLong = SeasonHelper.GetOpenSeason(userInfoComponent.UserInfo.Lv);
+
+             if (seasonopenTime != 0 &&  (keyValuePairLong== null  || seasonopenTime != keyValuePairLong.Value) )
+             {
+                 //清空赛季相关数据. 赛季任务 晶核
+                 Log.Warning($"清空赛季数据！:{unit.Id}");
+                 Console.WriteLine($"清空赛季数据！: {unit.Zone()}  {unit.Id}  {seasonopenTime} ");
+                 //self.SendSeasonReward(unit.GetComponent<UserInfoComponent>().UserInfo.SeasonLevel);
+
+                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, 0, notice);
+                 numericComponent.ApplyValue(NumericType.SeasonReward, 0, notice);
+                 numericComponent.ApplyValue(NumericType.SeasonBossFuben, 0, notice);
+                 numericComponent.ApplyValue(NumericType.SeasonBossRefreshTime, 0, notice);
+                 numericComponent.ApplyValue(NumericType.SeasonTowerId, 0, notice);
+                 numericComponent.ApplyValue(NumericType.SeasonTask, 0, notice);
+
+                 unit.GetComponent<UserInfoComponentS>().OnResetSeason(notice);
+                 unit.GetComponent<BagComponentS>().OnResetSeason(notice);
+                 unit.GetComponent<TaskComponentS>().OnResetSeason(notice);
+             }
+         }
+         
+         public static void SendSeasonReward(this HeroDataComponentS self, int seasonLevel)
+         {
+             string rewardItem = SeasonHelper.GetSeasonOverReward(seasonLevel);
+             if (string.IsNullOrEmpty(rewardItem))
+             {
+                 return;
+             }
+
+             MailInfo mailInfo = MailInfo.Create();
+             mailInfo.Status = 0;
+             mailInfo.Context = "赛季结束奖励";
+             mailInfo.Title = "赛季结束奖励";
+             mailInfo.MailId = IdGenerater.Instance.GenerateId();
+             mailInfo.ItemList.AddRange(ItemHelper.GetRewardItems_2(rewardItem));
+             MailHelp.SendUserMail( self.Root(), self.Id, mailInfo, ItemGetWay.Season ).Coroutine();
+         }
+        
          public static void CheckSeasonOpen(this HeroDataComponentS self, bool notice)
          {
              Unit unit = self.GetParent<Unit>();
@@ -172,14 +216,15 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }
 
-             if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
+              KeyValuePairLong seasonOpenTime = SeasonHelper.GetOpenSeason(userInfoComponent.UserInfo.Lv);
+             if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && seasonOpenTime != null)
              {
                  Log.Console($"CheckSeasonOpen: {unit.Id}");
 
                  //刷新boss
                  numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
                  numericComponent.ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + TimeHelper.Minute, false);
-                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, ConfigData.SeasonOpenTime, false);
+                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, seasonOpenTime.Value, false);
 
                  //刷新任务
                  TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
