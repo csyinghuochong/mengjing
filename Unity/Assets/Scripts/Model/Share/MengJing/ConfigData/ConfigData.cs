@@ -2151,5 +2151,17 @@ namespace ET
         public static long PetMeleeBattleMaxTime = 300 * 1000;
 
         #endregion
+
+        /// <summary>
+        /// SkillMake假配置
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> SkillMakeConfig = new Dictionary<int, string>()
+        {
+            { 1, "10010001;10010011;10010076" },
+            { 2, "10010001;10010011;10010076" },
+            { 3, "10010001;10010011;10010076" },
+            { 6, "10010001;10010011;10010076" },
+        };
     }
 }
