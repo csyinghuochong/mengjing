@@ -191,6 +191,7 @@ namespace ET.Client
             }
 
             self.GameObject = gameObject;
+            self.GameObject.SetActive(true);
             Unit unit = self.GetParent<Unit>();
             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
 
