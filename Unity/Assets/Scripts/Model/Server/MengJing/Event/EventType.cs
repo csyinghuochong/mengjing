@@ -11,6 +11,7 @@ namespace ET.Server
         public int WaitRevive;
         public Unit UnitAttack;
         public Unit UnitDefend;
+        public bool NoDrop;
     }
     
     public struct StateTypeAdd

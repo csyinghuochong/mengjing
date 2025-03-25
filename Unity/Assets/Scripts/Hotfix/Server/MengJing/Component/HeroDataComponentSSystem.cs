@@ -796,7 +796,7 @@ namespace ET.Server
          }
 
 
-         public static void OnDead(this HeroDataComponentS self, Unit attack)
+         public static void OnDead(this HeroDataComponentS self, Unit attack, bool nodrop = false)
          {
              Unit unit = self.GetParent<Unit>();
             
@@ -808,6 +808,7 @@ namespace ET.Server
                  WaitRevive = waitRevive,
                  UnitAttack = attack,
                  UnitDefend = unit,
+                 NoDrop = nodrop,
              });
             }
     }

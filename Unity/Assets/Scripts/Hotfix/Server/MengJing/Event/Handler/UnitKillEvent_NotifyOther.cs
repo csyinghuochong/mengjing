@@ -163,13 +163,21 @@ namespace ET.Server
                         continue;
                     }
 
+                    if (args.NoDrop)
+                    {
+                        continue;
+                    }
+
                     attackUnit.GetComponent<TaskComponentS>().OnKillUnit(defendUnit, sceneTypeEnum);
                     attackUnit.GetComponent<ChengJiuComponentS>().OnKillUnit(defendUnit);
                     attackUnit.GetComponent<PetComponentS>().OnKillUnit(defendUnit);
                     attackUnit.GetComponent<UserInfoComponentS>().OnKillUnit(defendUnit, sceneTypeEnum, sceneId);
                 }
-
-                UnitFactory.CreateDropItems(defendUnit, mainAttack, sceneTypeEnum, sceneId, realPlayer);
+                
+                if (!args.NoDrop)
+                {
+                    UnitFactory.CreateDropItems(defendUnit, mainAttack, sceneTypeEnum, sceneId, realPlayer);
+                }
 
                 if (mainAttack.Type == UnitType.Player)
                 {
