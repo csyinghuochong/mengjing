@@ -85,8 +85,10 @@ namespace ET.Server
                         string[] mondels = monsters[waveId].Split(';');
                         string[] position = mondels[1].Split(',');
                         zhupuUnit.GetComponent<MoveComponent>().Stop(true);
+                        zhupuUnit.GetComponent<AIComponent>().Stop_2();
                         zhupuUnit.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
                         zhupuUnit.Stop(-3);
+                        zhupuUnit.GetComponent<AIComponent>().Begin();
                     }
                     else
                     {
