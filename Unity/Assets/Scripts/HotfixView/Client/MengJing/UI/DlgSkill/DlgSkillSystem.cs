@@ -95,11 +95,11 @@ namespace ET.Client
                     self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
-                    break;
-                case 4:
                     self.View.ES_SkillLifeShield.uiTransform.gameObject.SetActive(true);
                     self.View.ES_SkillLifeShield.OnUpdateUI();
+                    break;
+                case 4:
+                    self.View.ES_SkillMake.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
