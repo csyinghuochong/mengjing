@@ -215,7 +215,7 @@ namespace ET.Client
             self.UIPlayerHpText = rc.Get<GameObject>("UIPlayerHpText");
             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText_Layer0.transform);
             self.UIPlayerHpText.transform.localScale = Vector3.one;
-            
+            self.UIPlayerHpText.gameObject.SetActive(true);
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             Vector2 offset = Vector2.zero;
             offset = mapComponent.SceneType == SceneTypeEnum.PetMelee ? new Vector2(0, 70f) : Vector2.zero;
