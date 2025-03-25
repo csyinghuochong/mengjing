@@ -40,7 +40,7 @@ namespace ET.Server
                     userInfoComponent.UpdateRoleData(UserDataType.Sp, sp.ToString());
                     break;
                 case 3:
-                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SkillMakePlan2, 1, false);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SkillMakePlan2, 1);
                     break;
                 case 4:
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.GemWarehouseOpen, 1, false);

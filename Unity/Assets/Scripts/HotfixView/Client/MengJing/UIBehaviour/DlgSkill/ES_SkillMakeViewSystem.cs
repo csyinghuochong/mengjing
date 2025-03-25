@@ -68,7 +68,6 @@ namespace ET.Client
             self.HuiShouUIList[4] = self.ES_CommonItem_5;
 
             self.OnBtn_Plan(1);
-            self.E_Btn_TianFu_2Button.AddListener(self.OnBtn_TianFu_2Button);
         }
 
         [EntitySystem]
@@ -725,9 +724,6 @@ namespace ET.Client
         {
             self.IsHoldDown = false;
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
-        }
-        public static void OnBtn_TianFu_2Button(this ES_SkillMake self)
-        {
         }
     }
 }
