@@ -179,7 +179,7 @@ namespace ET.Client
                         FlyTipComponent.Instance.ShowFlyTip("加速完成");
                         
                         self.UnionMyInfo = response.UnionInfo;
-                        self.GetParent<DlgUnionKeJi>().UnionMyInfo = response.UnionInfo;
+                        self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionKeJi>().UnionMyInfo = response.UnionInfo;
                         self.UpdateInfo(self.Position);
                     }, () => { }).Coroutine();
             }
@@ -235,6 +235,7 @@ namespace ET.Client
             }
 
             self.UnionMyInfo = response.UnionInfo;
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionKeJi>().UnionMyInfo = response.UnionInfo;
             self.UpdateInfo(self.Position);
         }
     }

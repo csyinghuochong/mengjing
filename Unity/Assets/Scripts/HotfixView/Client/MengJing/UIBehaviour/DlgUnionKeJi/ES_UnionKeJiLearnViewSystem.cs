@@ -90,7 +90,8 @@ namespace ET.Client
                     }
                     self.E_PreTextText.text = preInfo;
                 }
-                
+
+                self.E_CostPointTextText.text = zstring.Format("科技点数：{0}点", nowUnionKeJiConfig.Point);
             }
             
             // if (nowUnionKeJiConfig.QiangHuaLv == 0)

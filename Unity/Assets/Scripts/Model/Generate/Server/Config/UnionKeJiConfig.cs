@@ -77,6 +77,8 @@ namespace ET
 		public int NeedTime { get; set; }
 		/// <summary>升级消耗家族金币</summary>
 		public int CostUnionGold { get; set; }
+		/// <summary>消耗科技点数</summary>
+		public int Point { get; set; }
 		/// <summary>学习消耗道具</summary>
 		public string LearnCost { get; set; }
 		/// <summary>强化属性</summary>

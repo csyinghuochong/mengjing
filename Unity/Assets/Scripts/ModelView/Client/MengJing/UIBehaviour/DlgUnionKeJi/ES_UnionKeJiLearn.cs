@@ -132,6 +132,23 @@ namespace ET.Client
 			}
 		}
 		
+		public Text E_CostPointTextText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_CostPointTextText == null )
+				{
+					this.m_E_CostPointTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_CostPointText");
+				}
+				return this.m_E_CostPointTextText;
+			}
+		}
+		
 		public ES_CostList ES_CostList
      	{
      		get
@@ -240,6 +257,7 @@ namespace ET.Client
 			this.m_E_LvTextText = null;
 			this.m_E_MaxLvTextText = null;
 			this.m_E_PreTextText = null;
+			this.m_E_CostPointTextText = null;
 			this.m_es_costlist = null;
 			this.m_E_ActiveBtnButton = null;
 			this.m_E_UpBtnButton = null;
@@ -255,6 +273,7 @@ namespace ET.Client
 		private Text m_E_LvTextText = null;
 		private Text m_E_MaxLvTextText = null;
 		private Text m_E_PreTextText = null;
+		private Text m_E_CostPointTextText = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
 		private Button m_E_ActiveBtnButton = null;
 		private Button m_E_UpBtnButton = null;
