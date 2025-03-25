@@ -46,7 +46,7 @@ namespace ET.Server
            
             //2000102
             C2M_SkillCmd cmd = C2M_SkillCmd.Create();
-            cmd.SkillID = 2000001;
+            cmd.SkillID = 80000202;
             cmd.TargetID = request.JingLingId;
             float3 direction = unitzhuabu.Position - unit.Position;
             cmd.TargetAngle=  (int)math.degrees(math.atan2(direction.x, direction.z));
