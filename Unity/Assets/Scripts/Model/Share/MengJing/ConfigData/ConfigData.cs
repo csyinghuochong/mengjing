@@ -1981,7 +1981,8 @@ namespace ET
         //每日最多刷新宝宝数量
         public static int BabyRefreshMaxNum = 100000000;
         
-        
+        [StaticField]
+        public static int ZhuaBuQiItemId = 90000016;
         #endregion
         
         #region 公会祝福配置

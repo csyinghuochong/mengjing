@@ -518,7 +518,7 @@ namespace  ET
             int gailv = 2000; 
             if (itemid > 0)
             {
-                int add = GlobalValueConfigCategory.Instance.ZhuaPuItem[itemid];
+                int add = int.Parse(ItemConfigCategory.Instance.Get(itemid).ItemUsePar);
                 gailv += add;
 
             }

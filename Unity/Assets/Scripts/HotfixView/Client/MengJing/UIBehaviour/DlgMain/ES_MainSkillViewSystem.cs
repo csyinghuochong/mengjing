@@ -469,12 +469,21 @@ namespace ET.Client
                 return;
             }
 
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.CurrentNpcId = target.ConfigId;
-            uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
-            MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-            cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            {
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                uiComponent.CurrentNpcId = target.ConfigId;
+                uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+                MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
+                cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
+            }
+            else
+            {
+                self.OnBuildEnter().Coroutine();
+            }
         }
 
         public static async ETTask MoveToNpc(this ES_MainSkill self, Unit target, Vector3 position)
@@ -511,13 +520,62 @@ namespace ET.Client
             {
                 return;
             }
+            
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhuaPu);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
+            }
+            else
+            {
+                if (monsterConfig.QiYuPetId == 0)
+                {
+                    return;
+                }
 
-            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhuaPu);
-            
-            
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                self.OnType2_ButtonDig(unit).Coroutine();
+            }
         }
 
+         private static async ETTask OnType2_ButtonDig(this ES_MainSkill self, Unit zhupuUnit)
+        {
+            if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality < 5)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("活力不足！");
+                return;
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
+            int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
+            if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
+                return;
+            }
+            
+            M2C_ZhuaBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), zhupuUnit.Id, 0, "0");
+            // 捕捉成功，
+            // 捕捉失败怪物死亡（就是隐藏 并播放特效）
+            // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
+            if (response.Error == ErrorCode.ERR_Success && response.Message == string.Empty)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
+            }
+            if (response.Message == "1")
+            {
+                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物死亡！");
+            }
+            if (response.Message == "2")
+            {
+                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物逃跑！");
+            }
+        }
+        
         public static void OnBtn_NpcDuiHuaButton(this ES_MainSkill self)
         {
             DuiHuaHelper.MoveToNpcDialog(self.Root());

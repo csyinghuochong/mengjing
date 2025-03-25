@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -16,20 +17,20 @@ namespace ET.Server
                 return;
             }
             
-            Unit zhupuUnit = unit.GetParent<UnitComponent>().Get(request.JingLingId);
-            if (zhupuUnit == null)
+            Unit unitzhuabu = unit.GetParent<UnitComponent>().Get(request.JingLingId);
+            if (unitzhuabu == null)
             {
                 return;
             }
             
-            NumericComponentS zhuabuNumeric = zhupuUnit.GetComponent<NumericComponentS>();
+            NumericComponentS zhuabuNumeric = unitzhuabu.GetComponent<NumericComponentS>();
             if (zhuabuNumeric.GetAsInt(NumericType.ZhuaBuTime) >= 1)
             {
                 response.Error = ErrorCode.ERR_ZhuaBuTimeLimit;
                 return;
             }
 
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitzhuabu.ConfigId);
             if(monsterConfig.QiYuPetId == 0)
             {
                 return;
@@ -40,24 +41,26 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }
-
-            if (request.ItemId != 0)
-            {
-                bool costresult =  unit.GetComponent<BagComponentS>().OnCostItemData($"{request.ItemId};1");
-                if (costresult == false)
-                {
-                    response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                    return;
-                }
-            }
-
+            
+            zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
+           
+            //2000102
+            C2M_SkillCmd cmd = C2M_SkillCmd.Create();
+            cmd.SkillID = 2000001;
+            cmd.TargetID = request.JingLingId;
+            float3 direction = unitzhuabu.Position - unit.Position;
+            cmd.TargetAngle=  (int)math.degrees(math.atan2(direction.x, direction.z));
+            cmd.TargetDistance = PositionHelper.Distance2D(unitzhuabu.Position,unit.Position);
+            unit.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, false);
+            
+            bool costresult =  unit.GetComponent<BagComponentS>().OnCostItemData($"{ConfigData.ZhuaBuQiItemId};1");
+            request.ItemId = costresult ? ConfigData.ZhuaBuQiItemId : 0;
             // 捕捉有3种情况，
             // 捕捉成功，
             // 捕捉失败怪物死亡（就是隐藏 并播放特效）
             // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
-             zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
-             
-             int gailv = CommonHelp.GetZhuPuType2_GaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
+            
+             int gailv = CommonHelp.GetZhuPuType2_GaiLv(unitzhuabu.ConfigId, request.ItemId, int.Parse(request.OperateType));
              if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
              {
                  response.Message = String.Empty;
@@ -72,7 +75,7 @@ namespace ET.Server
                 int failType = RandomHelper.RandomNumber(1, 3);
                 if (failType == 1)
                 {
-                    zhupuUnit.GetComponent<HeroDataComponentS>().OnDead(unit ,true);
+                    unitzhuabu.GetComponent<HeroDataComponentS>().OnDead(unit ,true);
                 }
                 else
                 {
@@ -84,11 +87,11 @@ namespace ET.Server
                         
                         string[] mondels = monsters[waveId].Split(';');
                         string[] position = mondels[1].Split(',');
-                        zhupuUnit.GetComponent<MoveComponent>().Stop(true);
-                        zhupuUnit.GetComponent<AIComponent>().Stop_2();
-                        zhupuUnit.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
-                        zhupuUnit.Stop(-3);
-                        zhupuUnit.GetComponent<AIComponent>().Begin();
+                        unitzhuabu.GetComponent<MoveComponent>().Stop(true);
+                        unitzhuabu.GetComponent<AIComponent>().Stop_2();
+                        unitzhuabu.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
+                        unitzhuabu.Stop(-3);
+                        unitzhuabu.GetComponent<AIComponent>().Begin();
                     }
                     else
                     {

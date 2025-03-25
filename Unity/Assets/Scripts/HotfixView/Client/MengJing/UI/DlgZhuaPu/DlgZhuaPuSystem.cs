@@ -128,7 +128,7 @@ namespace ET.Client
 
             if (self.ZhuaBuType == 2)
             {
-                self.OnType2_ButtonDig().Coroutine();
+                //self.OnType2_ButtonDig().Coroutine();
             }
         }
         
@@ -188,61 +188,6 @@ namespace ET.Client
             }
         }
         
-        private static async ETTask OnType2_ButtonDig(this DlgZhuaPu self)
-        {
-            Unit zhupuUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(self.MonsterUnitid);
-            if (zhupuUnit == null || zhupuUnit.Type != UnitType.Monster)
-            {
-                return;
-            }
-
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
-            if (monsterConfig.QiYuPetId == 0)
-            {
-                return;
-            }
-
-            if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality < 5)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("活力不足！");
-                return;
-            }
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
-            int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
-            if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
-                return;
-            }
-
-            float distance = Vector3.Distance(self.View.E_Img_ChanZiImage.transform.localPosition, self.View.E_Img_PosImage.transform.localPosition);
-            string jiacheng = distance <= 10f ? "2" : "1";
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            
-            M2C_ZhuaBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
-            
-            // 捕捉成功，
-            // 捕捉失败怪物死亡（就是隐藏 并播放特效）
-            // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
-            if (response.Error == ErrorCode.ERR_Success && response.Message == string.Empty)
-            {
-                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
-            }
-            if (response.Message == "1")
-            {
-                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物死亡！");
-                FunctionEffect.PlayEffectPosition(unit, 200004, zhupuUnit.Position);
-            }
-            if (response.Message == "2")
-            {
-                FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物逃跑！");
-            }
-            
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu);
-        }
         #endregion
         
         #region 旧的抓捕逻辑
