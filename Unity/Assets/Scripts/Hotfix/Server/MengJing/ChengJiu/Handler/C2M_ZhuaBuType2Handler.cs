@@ -9,6 +9,13 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ZhuaBuType2Request request, M2C_ZhuaBuType2Response response)
         {
+            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+            if (userInfoComponentS.UserInfo.Vitality < 5)
+            {
+                response.Error = ErrorCode.ERR_VitalityNotEnoughError;
+                return;
+            }
+            
             Unit zhupuUnit = unit.GetParent<UnitComponent>().Get(request.JingLingId);
             if (zhupuUnit == null)
             {
@@ -86,9 +93,9 @@ namespace ET.Server
                     }
                 }
                 response.Message = failType.ToString();
-                
             }
 
+            userInfoComponentS.UpdateRoleMoneySub(UserDataType.Vitality, "-5");
             await ETTask.CompletedTask;
         }
     }
