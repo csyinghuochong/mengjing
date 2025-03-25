@@ -234,7 +234,7 @@ namespace ET.Client
             if (response.Message == "1")
             {
                 FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物死亡！");
-                FunctionEffect.PlayEffectPosition(unit, 200004, unit.Position);
+                FunctionEffect.PlayEffectPosition(unit, 200004, zhupuUnit.Position);
             }
             if (response.Message == "2")
             {
