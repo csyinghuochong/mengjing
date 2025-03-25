@@ -14507,13 +14507,13 @@ namespace ET
 
     // 抓捕精灵
     [MemoryPackable]
-    [Message(OuterMessage.C2M_ZhuBuType1Request)]
-    [ResponseType(nameof(M2C_ZhuBuType1Response))]
-    public partial class C2M_ZhuBuType1Request : MessageObject, ILocationRequest
+    [Message(OuterMessage.C2M_ZhuaBuType1Request)]
+    [ResponseType(nameof(M2C_ZhuaBuType1Response))]
+    public partial class C2M_ZhuaBuType1Request : MessageObject, ILocationRequest
     {
-        public static C2M_ZhuBuType1Request Create(bool isFromPool = false)
+        public static C2M_ZhuaBuType1Request Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2M_ZhuBuType1Request), isFromPool) as C2M_ZhuBuType1Request;
+            return ObjectPool.Instance.Fetch(typeof(C2M_ZhuaBuType1Request), isFromPool) as C2M_ZhuaBuType1Request;
         }
 
         [MemoryPackOrder(89)]
@@ -14545,12 +14545,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.M2C_ZhuBuType1Response)]
-    public partial class M2C_ZhuBuType1Response : MessageObject, ILocationResponse
+    [Message(OuterMessage.M2C_ZhuaBuType1Response)]
+    public partial class M2C_ZhuaBuType1Response : MessageObject, ILocationResponse
     {
-        public static M2C_ZhuBuType1Response Create(bool isFromPool = false)
+        public static M2C_ZhuaBuType1Response Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2C_ZhuBuType1Response), isFromPool) as M2C_ZhuBuType1Response;
+            return ObjectPool.Instance.Fetch(typeof(M2C_ZhuaBuType1Response), isFromPool) as M2C_ZhuaBuType1Response;
         }
 
         [MemoryPackOrder(89)]
@@ -14579,13 +14579,13 @@ namespace ET
 
     // 抓捕宠物(新)
     [MemoryPackable]
-    [Message(OuterMessage.C2M_ZhuBuType2Request)]
-    [ResponseType(nameof(M2C_ZhuBuType2Response))]
-    public partial class C2M_ZhuBuType2Request : MessageObject, ILocationRequest
+    [Message(OuterMessage.C2M_ZhuaBuType2Request)]
+    [ResponseType(nameof(M2C_ZhuaBuType2Response))]
+    public partial class C2M_ZhuaBuType2Request : MessageObject, ILocationRequest
     {
-        public static C2M_ZhuBuType2Request Create(bool isFromPool = false)
+        public static C2M_ZhuaBuType2Request Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2M_ZhuBuType2Request), isFromPool) as C2M_ZhuBuType2Request;
+            return ObjectPool.Instance.Fetch(typeof(C2M_ZhuaBuType2Request), isFromPool) as C2M_ZhuaBuType2Request;
         }
 
         [MemoryPackOrder(89)]
@@ -14617,12 +14617,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.M2C_ZhuBuType2Response)]
-    public partial class M2C_ZhuBuType2Response : MessageObject, ILocationResponse
+    [Message(OuterMessage.M2C_ZhuaBuType2Response)]
+    public partial class M2C_ZhuaBuType2Response : MessageObject, ILocationResponse
     {
-        public static M2C_ZhuBuType2Response Create(bool isFromPool = false)
+        public static M2C_ZhuaBuType2Response Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2C_ZhuBuType2Response), isFromPool) as M2C_ZhuBuType2Response;
+            return ObjectPool.Instance.Fetch(typeof(M2C_ZhuaBuType2Response), isFromPool) as M2C_ZhuaBuType2Response;
         }
 
         [MemoryPackOrder(89)]
@@ -33576,10 +33576,10 @@ namespace ET
         public const ushort M2C_ChengJiuListResponse = 10369;
         public const ushort C2M_ChengJiuRewardRequest = 10370;
         public const ushort M2C_ChengJiuRewardResponse = 10371;
-        public const ushort C2M_ZhuBuType1Request = 10372;
-        public const ushort M2C_ZhuBuType1Response = 10373;
-        public const ushort C2M_ZhuBuType2Request = 10374;
-        public const ushort M2C_ZhuBuType2Response = 10375;
+        public const ushort C2M_ZhuaBuType1Request = 10372;
+        public const ushort M2C_ZhuaBuType1Response = 10373;
+        public const ushort C2M_ZhuaBuType2Request = 10374;
+        public const ushort M2C_ZhuaBuType2Response = 10375;
         public const ushort C2M_JingLingDropRequest = 10376;
         public const ushort M2C_JingLingDropResponse = 10377;
         public const ushort C2M_JingLingUseRequest = 10378;

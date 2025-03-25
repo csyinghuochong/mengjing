@@ -164,7 +164,7 @@ namespace ET.Server
                             Scene fubenScene = item.Value as Scene;
                             if(fubenScene == null)
                             {
-                                Log.Error($"FubenCenter定时刷新Error: {scene.Zone()} {item.Key} {item.Value}");
+                                //Log.Error($"FubenCenter定时刷新Error: {scene.Zone()} {item.Key} {item.Value}");
                                 continue;   
                             }
                             fubenScene.GetComponent<YeWaiRefreshComponent>()?.OnZeroClockUpdate(request.OpenDay);

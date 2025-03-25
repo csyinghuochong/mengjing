@@ -29,25 +29,25 @@
             return ErrorCode.ERR_Success;
         }
         
-        public static async ETTask<M2C_ZhuBuType1Response> ZhuaBuType1Request(Scene root, long jingLingId, int itemId, string operateType)
+        public static async ETTask<M2C_ZhuaBuType1Response> ZhuaBuType1Request(Scene root, long jingLingId, int itemId, string operateType)
         {
-            C2M_ZhuBuType1Request request = C2M_ZhuBuType1Request.Create();
+            C2M_ZhuaBuType1Request request = C2M_ZhuaBuType1Request.Create();
             request.JingLingId = jingLingId;
             request.ItemId = itemId;
             request.OperateType = operateType;
 
-            M2C_ZhuBuType1Response response = (M2C_ZhuBuType1Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ZhuaBuType1Response response = (M2C_ZhuaBuType1Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
         
-        public static async ETTask<M2C_ZhuBuType2Response> ZhuaBuType2Request(Scene root, long jingLingId, int itemId, string operateType)
+        public static async ETTask<M2C_ZhuaBuType2Response> ZhuaBuType2Request(Scene root, long jingLingId, int itemId, string operateType)
         {
-            C2M_ZhuBuType2Request request = C2M_ZhuBuType2Request.Create();
+            C2M_ZhuaBuType2Request request = C2M_ZhuaBuType2Request.Create();
             request.JingLingId = jingLingId;
             request.ItemId = itemId;
             request.OperateType = operateType;
 
-            M2C_ZhuBuType2Response response = (M2C_ZhuBuType2Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ZhuaBuType2Response response = (M2C_ZhuaBuType2Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 

@@ -54,6 +54,17 @@ namespace ET.Client
               unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
           }
 
+          public static void PlayEffectPosition(Unit unit, int effectID, float3 position)
+          {
+              EffectData playEffectBuffData = new EffectData();
+              playEffectBuffData.EffectId = effectID;                  //特效相关配置
+              playEffectBuffData.EffectPosition = position;
+              playEffectBuffData.TargetAngle = 0;
+              playEffectBuffData.EffectTypeEnum = EffectTypeEnum.SkillEffect;
+              playEffectBuffData.InstanceId = 1;
+              unit.GetComponent<EffectViewComponent>()?.EffectFactory(playEffectBuffData);
+          }
+          
           public  static void PlayDropEffect(Unit unit, int effectID)
           {
               EffectData playEffectBuffData = new EffectData();

@@ -263,7 +263,7 @@ namespace ET
 
          public static int GetAddPropretyNum(RolePetInfo rolePetInfos)
         {
-            return (rolePetInfos.PetLv - 1) * 5 - (rolePetInfos.BabyType > 0 ? 30 : 0);
+            return (rolePetInfos.PetLv - 1) * 5 - (rolePetInfos.BabyType == 3 ? 30 : 0);
         }
         
         /// <summary>

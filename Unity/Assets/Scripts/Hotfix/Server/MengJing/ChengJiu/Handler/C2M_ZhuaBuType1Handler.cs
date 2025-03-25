@@ -5,9 +5,9 @@ namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(ChengJiuComponentS))]
-    public class C2M_ZhuBuType1Handler : MessageLocationHandler<Unit, C2M_ZhuBuType1Request, M2C_ZhuBuType1Response>
+    public class C2M_ZhuaBuType1Handler : MessageLocationHandler<Unit, C2M_ZhuaBuType1Request, M2C_ZhuaBuType1Response>
     {
-        protected override async ETTask Run(Unit unit, C2M_ZhuBuType1Request request, M2C_ZhuBuType1Response response)
+        protected override async ETTask Run(Unit unit, C2M_ZhuaBuType1Request request, M2C_ZhuaBuType1Response response)
         {
             Unit zhupuUnit = unit.GetParent<UnitComponent>().Get(request.JingLingId);
             if (zhupuUnit == null)

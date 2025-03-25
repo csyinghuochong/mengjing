@@ -3335,8 +3335,8 @@ message M2C_ChengJiuRewardResponse // ILocationResponse
 }
 
 //抓捕精灵
-//ResponseType M2C_ZhuBuType1Response
-message C2M_ZhuBuType1Request    // ILocationRequest
+//ResponseType M2C_ZhuaBuType1Response
+message C2M_ZhuaBuType1Request    // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 JingLingId = 1;
@@ -3344,7 +3344,7 @@ message C2M_ZhuBuType1Request    // ILocationRequest
 	string OperateType = 5;
 }
 
-message M2C_ZhuBuType1Response    // ILocationResponse
+message M2C_ZhuaBuType1Response    // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -3352,8 +3352,8 @@ message M2C_ZhuBuType1Response    // ILocationResponse
 }
 
 //抓捕宠物(新)
-//ResponseType M2C_ZhuBuType2Response
-message C2M_ZhuBuType2Request    // ILocationRequest
+//ResponseType M2C_ZhuaBuType2Response
+message C2M_ZhuaBuType2Request    // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 JingLingId = 1;
@@ -3361,7 +3361,7 @@ message C2M_ZhuBuType2Request    // ILocationRequest
 	string OperateType = 5;
 }
 
-message M2C_ZhuBuType2Response    // ILocationResponse
+message M2C_ZhuaBuType2Response    // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

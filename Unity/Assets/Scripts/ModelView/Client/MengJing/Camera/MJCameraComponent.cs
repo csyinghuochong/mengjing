@@ -110,6 +110,8 @@ namespace ET.Client
         private EntityRef<Unit> buildUnit;
         public Unit BuildUnit { get => this.buildUnit; set => this.buildUnit = value; }
 
+        public float3 BuildUnitPos { get; set; }
+
         public Action OnBuildEnter { get; set; }
     }
 }

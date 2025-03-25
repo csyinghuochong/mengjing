@@ -148,6 +148,12 @@ namespace ET.Client
         public static void OnInitUI(this DlgZhuaPu self, Unit unitmonster)
         {
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitmonster.ConfigId);
+            self.MonsterId = unitmonster.ConfigId;
+            self.MonsterUnitid = unitmonster.Id;
+            float size = RandomHelper.RandFloat01();
+            self.View.E_Img_PosImage.transform.localPosition = new Vector3(size * 300f, 0f, 0f);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIZhuaPuTimer, self);
 
             if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
                 || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
@@ -165,14 +171,6 @@ namespace ET.Client
                 self.InitType1_Itemlist();
                 self.UpdateItemList();
             }
-
-          
-            self.MonsterId = unitmonster.ConfigId;
-            self.MonsterUnitid = unitmonster.Id;
-            float size = RandomHelper.RandFloat01();
-            self.View.E_Img_PosImage.transform.localPosition = new Vector3(size * 300f, 0f, 0f);
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.UIZhuaPuTimer, self);
         }
 
         #region 新的抓捕逻辑
@@ -218,7 +216,7 @@ namespace ET.Client
             string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             
-            M2C_ZhuBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            M2C_ZhuaBuType2Response response = await JingLingNetHelper.ZhuaBuType2Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
             
             // 捕捉成功，
             // 捕捉失败怪物死亡（就是隐藏 并播放特效）
@@ -230,6 +228,7 @@ namespace ET.Client
             if (response.Message == "1")
             {
                 FlyTipComponent.Instance.ShowFlyTip("捕捉失败怪物死亡！");
+                FunctionEffect.PlayEffectPosition(unit, 200004, unit.Position);
             }
             if (response.Message == "2")
             {
@@ -295,7 +294,7 @@ namespace ET.Client
             string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-            M2C_ZhuBuType1Response response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
+            M2C_ZhuaBuType1Response response = await JingLingNetHelper.ZhuaBuType1Request(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
             if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
             {
                 FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");

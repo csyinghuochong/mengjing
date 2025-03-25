@@ -355,7 +355,7 @@ namespace ET.Server
             string[] monsters = SceneConfigHelper.GetLocalDungeonMonsters_2(dungeonid).Split('@');
             taskPro.FubenId = dungeonid;
             taskPro.WaveId = RandomHelper.RandomNumber(0, monsters.Length);
-            Log.Warning($"���ɲر�ͼ�����: {self.GetParent<Unit>().Id} {dungeonid} {taskPro.WaveId}");
+            Log.Warning($"GetRandomFubenId: {self.GetParent<Unit>().Id} {dungeonid} {taskPro.WaveId}");
         }
 
         public static bool IsCompleted(this TaskComponentS self, TaskPro taskPro, int TargetType, int[] Target, int[] TargetValue)

@@ -199,6 +199,12 @@ namespace ET.Client
                 return;
             }
 
+            if (self.BuildUnit == null || self.BuildUnit.IsDisposed)
+            {
+                self.CameraMoveType = CameraMoveType.Normal;
+                return;
+            }
+
             Vector3 chaV3 = self.OldCameraPostion + (self.TargetPosition - self.OldCameraPostion) * self.CameraMoveTime;
             self.MainCamera.transform.position = chaV3;
             Vector3 lookPosition = self.BuildUnit.Position + (unit.Position - self.BuildUnit.Position) * self.CameraMoveTime;
@@ -329,11 +335,6 @@ namespace ET.Client
 
         public static void SetBuildExit(this MJCameraComponent self)
         {
-            if (self.BuildUnit == null || self.BuildUnit.IsDisposed)
-            {
-                return;
-            }
-
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.CameraMoveTime = 0f;
             self.CameraMoveType = CameraMoveType.BuildExit;

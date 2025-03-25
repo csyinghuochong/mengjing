@@ -299,19 +299,21 @@ namespace ET.Server
             newpet.SkinId = skinId != 0 ? skinId : petConfig.Skin[0];
             newpet.PetHeXinList = new List<long>() { 0, 0, 0 };
 
-            if (babytype == 0)
+            // 当目标是宝宝或者变异宝宝时,捕捉过来为1级。
+            // 如果目标是普通怪物,抓过来的宠物对应变成对应等级，最低为15级。并且总的加点属性为随机分配，总属性点少30点。
+            if (babytype == 3)
             { 
-                newpet.AddPropretyNum = 0;
-                newpet.PetLv =petConfig.PetLv;
-                newpet.AddPropretyValue = "0_0_0_0";
-            }
-            else
-            {
                 newpet.AddPropretyNum = 0;
                 newpet.PetLv = Math.Max(lv, 15);
                 int addnum = (newpet.PetLv - 1) * 5 - 30;
                 List<int> randoms = RandomHelper.SplitIntegerRandomly(addnum, 4);   
                 newpet.AddPropretyValue = $"{randoms[0]}_{randoms[1]}_{randoms[2]}_{randoms[3]}";
+            }
+            else
+            {
+                newpet.AddPropretyNum = 0;
+                newpet.PetLv =petConfig.PetLv;
+                newpet.AddPropretyValue = "0_0_0_0";
             }
 
             newpet.ShouHuPos = RandomHelper.RandomNumber(1, 5);

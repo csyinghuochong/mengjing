@@ -386,7 +386,7 @@ namespace ET.Server
 		}
 
 		/// <summary>
-		/// 宝宝类型  0普通 1  宝宝  2 变异宝宝
+		/// 宝宝类型  0普通 1  宝宝  2 变异宝宝  3普通怪物
 		/// </summary>
 		/// <param name="monsterId"></param>
 		/// <returns></returns>
@@ -627,7 +627,7 @@ namespace ET.Server
 			{
 				LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 				NumericComponentS numericComponent = localDungeonComponent.MainUnit.GetComponent<NumericComponentS>();
-				numericComponent.ApplyChange( NumericType.BabyRefreshTime, babyNumber, false);
+				numericComponent.ApplyValue( NumericType.BabyRefreshTime, babyNumber, false);
 			}
 		}
 
