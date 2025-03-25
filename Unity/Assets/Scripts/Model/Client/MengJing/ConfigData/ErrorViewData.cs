@@ -132,6 +132,7 @@ namespace ET.Client
             { ErrorCode.ERR_TaskNoComplete, "请先完成此类任务" },
             { ErrorCode.ERR_TowerOfSealReachTop, "已通关" },
             { ErrorCode.ERR_Challenge_CD, "挑战CD中" },
+            { ErrorCode.ERR_ZhuaBuTimeLimit, "只能抓捕一次" },
             { ErrorCode.ERR_Pet_Hint_1, "宠物星级出错" },
             { ErrorCode.ERR_Pet_UpStar, "宠物星级失败" },
             { ErrorCode.ERR_Pet_UpStage, "宠物进化失败" },

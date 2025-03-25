@@ -14,6 +14,13 @@ namespace ET.Server
             {
                 return;
             }
+            
+            NumericComponentS zhuabuNumeric = zhupuUnit.GetComponent<NumericComponentS>();
+            if (zhuabuNumeric.GetAsInt(NumericType.ZhuaBuTime) >= 1)
+            {
+                response.Error = ErrorCode.ERR_ZhuaBuFail;
+                return;
+            }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
             if(monsterConfig.QiYuPetId == 0)
@@ -41,8 +48,7 @@ namespace ET.Server
             // 捕捉成功，
             // 捕捉失败怪物死亡（就是隐藏 并播放特效）
             // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
-            NumericComponentS zhuabuNumeric = zhupuUnit.GetComponent<NumericComponentS>();
-
+          
             int gailv = CommonHelp.GetZhuPuType2_GaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
              if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
              {
@@ -72,6 +78,7 @@ namespace ET.Server
                         string[] position = mondels[1].Split(',');
                         zhupuUnit.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
                         zhupuUnit.Stop(-3);
+                        zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, true);
                     }
                     else
                     {
