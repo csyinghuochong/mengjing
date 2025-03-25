@@ -221,6 +221,11 @@ namespace ET.Server
                 waittime = 1000;
             }
 
+            if (numericComponent.GetAsInt(NumericType.ZhuaBuTime) >= 1)
+            {
+                waittime = 0;
+            }
+
             switch (sceneTypeEnum)
             {
                 case SceneTypeEnum.PetDungeon:

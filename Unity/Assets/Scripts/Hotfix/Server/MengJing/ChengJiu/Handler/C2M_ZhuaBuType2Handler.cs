@@ -55,8 +55,9 @@ namespace ET.Server
             // 捕捉成功，
             // 捕捉失败怪物死亡（就是隐藏 并播放特效）
             // 捕捉失败怪物逃跑（怪物随机出现在当前地图的任意一个位置）
-          
-            int gailv = CommonHelp.GetZhuPuType2_GaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
+             zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
+             
+             int gailv = CommonHelp.GetZhuPuType2_GaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
              if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
              {
                  response.Message = String.Empty;
@@ -86,7 +87,6 @@ namespace ET.Server
                         zhupuUnit.GetComponent<MoveComponent>().Stop(true);
                         zhupuUnit.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
                         zhupuUnit.Stop(-3);
-                        zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
                     }
                     else
                     {
