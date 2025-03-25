@@ -22,29 +22,26 @@ namespace ET.Client
 
 		public static void OnUpdateData(this Scroll_Item_TaskShopItem self, StoreSellConfig storeSellConfig)
 		{
-			self.E_ButtonBuyButton.AddListener(self.OnButtonBuy().Coroutine);
-
-			self.StoreSellConfig = storeSellConfig;
-			int costType = self.StoreSellConfig.SellType;
-
-			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, costType.ToString());
-			self.E_Image_goldImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-			ItemInfo bagInfo = new();
-			bagInfo.ItemNum = storeSellConfig.SellItemNum;
-			bagInfo.ItemID = storeSellConfig.SellItemID;
-			self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();
-			self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
-			self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
-			if (bagInfo.ItemNum <= 1)
+			self.StoreSellConfigId = storeSellConfig.Id;
+			self.E_ButtonBuyButton.AddListener(()=>
 			{
-				self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-			}
-		}
-		
-		public static async ETTask OnButtonBuy(this Scroll_Item_TaskShopItem self)
-		{
-			await BagClientNetHelper.RquestStoreBuy(self.Root(), self.StoreSellConfig.Id, 0);
+				BagClientNetHelper.RquestStoreBuy(self.Root(), self.StoreSellConfigId, 1).Coroutine();
+			});
+			
+			self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();
+
+			self.ES_CommonItem.UseTextColor = true;
+			self.ES_CommonItem.UpdateItem(new() { ItemID = storeSellConfig.SellItemID }, ItemOperateEnum.None);
+			self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+			self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+			self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+			self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID).ItemQuality);
+
+			ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellType);
+			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+			Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+			self.E_Image_goldImage.sprite = sp;
 		}
 	}
 }

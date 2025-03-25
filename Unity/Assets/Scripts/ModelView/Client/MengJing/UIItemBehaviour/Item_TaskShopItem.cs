@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_TaskShopItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_TaskShopItem> 
 	{
-		public StoreSellConfig StoreSellConfig;
+		public int StoreSellConfigId;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

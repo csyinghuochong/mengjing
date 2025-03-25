@@ -1,46 +1,39 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[FriendOf(typeof(Scroll_Item_TaskShopItem))]
-	[EntitySystemOf(typeof(ES_TaskShop))]
-	[FriendOfAttribute(typeof(ES_TaskShop))]
-	public static partial class ES_TaskShopSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this ES_TaskShop self,Transform transform)
-		{
-			self.uiTransform = transform;
-			
+    [FriendOf(typeof(Scroll_Item_TaskShopItem))]
+    [EntitySystemOf(typeof(ES_TaskShop))]
+    [FriendOfAttribute(typeof(ES_TaskShop))]
+    public static partial class ES_TaskShopSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_TaskShop self, Transform transform)
+        {
+            self.uiTransform = transform;
+
             self.E_TaskShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskShopItemsRefresh);
             self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuyButton);
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
             self.E_Btn_BuyNum_jian1Button.AddListener(() => { self.OnClickChangeBuyNum(-1); });
             self.E_Btn_BuyNum_jian10Button.AddListener(() => { self.OnClickChangeBuyNum(-10); });
-            
+
             self.E_Lab_BuyNumText.text = "1";
             self.E_Lab_BuyPriceText.text = "0";
-            
+
             self.OnInitUI();
-		}
+        }
 
-		[EntitySystem]
-		private static void Destroy(this ES_TaskShop self)
-		{
-			self.DestroyWidget();
-		}
-	 private static void OnTaskShopItemsRefresh(this ES_TaskShop self, Transform transform, int index)
+        [EntitySystem]
+        private static void Destroy(this ES_TaskShop self)
         {
-            foreach (Scroll_Item_TaskShopItem item in self.ScrollItemTaskShopItems.Values)
-            {
-                if (item.uiTransform == transform)
-                {
-                    item.uiTransform = null;
-                }
-            }
+            self.DestroyWidget();
+        }
 
+        private static void OnTaskShopItemsRefresh(this ES_TaskShop self, Transform transform, int index)
+        {
             Scroll_Item_TaskShopItem scrollItemBattleShopItem = self.ScrollItemTaskShopItems[index].BindTrans(transform);
             scrollItemBattleShopItem.OnUpdateData(self.ShowStoreSellConfigs[index]);
         }
@@ -53,7 +46,7 @@ namespace ET.Client
                 return;
             }
 
-            await  BagClientNetHelper.RquestStoreBuy(self.Root(), self.SellId, self.BuyNum);
+            await BagClientNetHelper.RquestStoreBuy(self.Root(), self.SellId, self.BuyNum);
             self.UpdateItemNum();
         }
 
