@@ -12,8 +12,8 @@ namespace ET.Client
 		public int BuyNum;
 		public int SellId;
 		public List<StoreSellConfig> ShowStoreSellConfigs = new();
-		public Dictionary<int, EntityRef<Scroll_Item_BattleShopItem>> ScrollItemBattleShopItems;
-		public UnityEngine.UI.LoopVerticalScrollRect E_BattleShopItemsLoopVerticalScrollRect
+		public Dictionary<int, EntityRef<Scroll_Item_TaskShopItem>> ScrollItemTaskShopItems;
+		public UnityEngine.UI.LoopVerticalScrollRect E_TaskShopItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,11 +22,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BattleShopItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TaskShopItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BattleShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BattleShopItems");
+		    		this.m_E_TaskShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskShopItems");
      			}
-     			return this.m_E_BattleShopItemsLoopVerticalScrollRect;
+     			return this.m_E_TaskShopItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -248,7 +248,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_BattleShopItemsLoopVerticalScrollRect = null;
+			this.m_E_TaskShopItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonBuyButton = null;
 			this.m_E_ButtonBuyImage = null;
 			this.m_E_Lab_BuyPriceText = null;
@@ -264,7 +264,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BattleShopItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_TaskShopItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ButtonBuyButton = null;
 		private UnityEngine.UI.Image m_E_ButtonBuyImage = null;
 		private UnityEngine.UI.Text m_E_Lab_BuyPriceText = null;

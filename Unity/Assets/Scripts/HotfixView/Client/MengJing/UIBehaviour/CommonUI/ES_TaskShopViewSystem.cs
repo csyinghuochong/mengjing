@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[FriendOf(typeof(Scroll_Item_BattleShopItem))]
+	[FriendOf(typeof(Scroll_Item_TaskShopItem))]
 	[EntitySystemOf(typeof(ES_TaskShop))]
 	[FriendOfAttribute(typeof(ES_TaskShop))]
 	public static partial class ES_TaskShopSystem 
@@ -13,7 +13,7 @@ namespace ET.Client
 		{
 			self.uiTransform = transform;
 			
-            self.E_BattleShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBattleShopItemsRefresh);
+            self.E_TaskShopItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskShopItemsRefresh);
             self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuyButton);
             self.E_Btn_BuyNum_jia1Button.AddListener(() => { self.OnClickChangeBuyNum(1); });
             self.E_Btn_BuyNum_jia10Button.AddListener(() => { self.OnClickChangeBuyNum(10); });
@@ -31,9 +31,9 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
-	 private static void OnBattleShopItemsRefresh(this ES_TaskShop self, Transform transform, int index)
+	 private static void OnTaskShopItemsRefresh(this ES_TaskShop self, Transform transform, int index)
         {
-            foreach (Scroll_Item_BattleShopItem item in self.ScrollItemBattleShopItems.Values)
+            foreach (Scroll_Item_TaskShopItem item in self.ScrollItemTaskShopItems.Values)
             {
                 if (item.uiTransform == transform)
                 {
@@ -41,9 +41,8 @@ namespace ET.Client
                 }
             }
 
-            Scroll_Item_BattleShopItem scrollItemBattleShopItem = self.ScrollItemBattleShopItems[index].BindTrans(transform);
+            Scroll_Item_TaskShopItem scrollItemBattleShopItem = self.ScrollItemTaskShopItems[index].BindTrans(transform);
             scrollItemBattleShopItem.OnUpdateData(self.ShowStoreSellConfigs[index]);
-            scrollItemBattleShopItem.SetClickHandler(self.OnClickHandler);
         }
 
         public static async ETTask OnButtonBuyButton(this ES_TaskShop self)
@@ -66,18 +65,6 @@ namespace ET.Client
         public static void OnClickHandler(this ES_TaskShop self, int sellId)
         {
             self.SellId = sellId;
-            if (self.ScrollItemBattleShopItems != null)
-            {
-                foreach (Scroll_Item_BattleShopItem item in self.ScrollItemBattleShopItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    item.SetSelected(sellId);
-                }
-            }
 
             if (sellId != 0)
             {
@@ -102,8 +89,8 @@ namespace ET.Client
                 self.ShowStoreSellConfigs.Add(storeSellConfig);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemBattleShopItems, self.ShowStoreSellConfigs.Count);
-            self.E_BattleShopItemsLoopVerticalScrollRect.SetVisible(true, self.ShowStoreSellConfigs.Count);
+            self.AddUIScrollItems(ref self.ScrollItemTaskShopItems, self.ShowStoreSellConfigs.Count);
+            self.E_TaskShopItemsLoopVerticalScrollRect.SetVisible(true, self.ShowStoreSellConfigs.Count);
 
             self.UpdateItemNum();
         }
