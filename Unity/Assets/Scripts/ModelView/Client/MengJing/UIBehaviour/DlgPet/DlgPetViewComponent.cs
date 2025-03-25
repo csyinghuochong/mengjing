@@ -101,22 +101,22 @@ namespace ET.Client
             }
         }
 
-        public ES_PetShouHu ES_PetShouHu
+        public ES_PetEcho ES_PetEcho
         {
             get
             {
-                ES_PetShouHu es = this.m_es_petshouhu;
+	            ES_PetEcho es = this.m_es_petecho;
                 if (es == null)
                 {
-	                string path = "Assets/Bundles/UI/Common/ES_PetShouHu.prefab";
+	                string path = "Assets/Bundles/UI/Common/ES_PetEcho.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
                     go.SetActive(false);
                     this.AssetList.Add(path);
-                    this.m_es_petshouhu = this.AddChild<ES_PetShouHu, Transform>(go.transform);
+                    this.m_es_petecho = this.AddChild<ES_PetEcho, Transform>(go.transform);
                 }
 
-                return this.m_es_petshouhu;
+                return this.m_es_petecho;
             }
         }
 
@@ -127,7 +127,7 @@ namespace ET.Client
 			this.m_es_petlist = null;
 			this.m_es_pethecheng = null;
 			this.m_es_petxilian = null;
-			this.m_es_petshouhu = null;
+			this.m_es_petecho = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -144,7 +144,7 @@ namespace ET.Client
 		private EntityRef<ES_PetList> m_es_petlist = null;
 		private EntityRef<ES_PetHeCheng> m_es_pethecheng = null;
 		private EntityRef<ES_PetXiLian> m_es_petxilian = null;
-		private EntityRef<ES_PetShouHu> m_es_petshouhu = null;
+		private EntityRef<ES_PetEcho> m_es_petecho = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -75,8 +75,8 @@
                     self.View.ES_PetXiLian.OnUpdateUI();
                     break;
                 case 3:
-                    self.View.ES_PetShouHu.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_PetShouHu.OnUpdateUI();
+                    self.View.ES_PetEcho.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetEcho.OnUpdateUI();
                     break;
             }
         }

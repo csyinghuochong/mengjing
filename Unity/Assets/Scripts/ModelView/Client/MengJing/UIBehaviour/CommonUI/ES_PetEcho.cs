@@ -1,12 +1,17 @@
-﻿
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetEcho : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetEcho : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
+		
+		public Dictionary<int, EntityRef<Scroll_Item_PetEchoItem>> ScrollItemPetEchoItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetEchoSkillItem>> ScrollItemPetEchoSkillItems;
+		
 		public UnityEngine.RectTransform EG_Left_1RectTransform
      	{
      		get
