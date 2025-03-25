@@ -32,7 +32,7 @@
                 {
                     if (unionPlayerInfo.Position == 0)
                     {
-                        self.View.E_FunctionSetBtnToggleGroup.transform.GetChild(0).gameObject.SetActive(false);
+                        self.View.E_FunctionSetBtnToggleGroup.transform.Find("Type_0").gameObject.SetActive(false);
                         self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
                         return;
                     }
