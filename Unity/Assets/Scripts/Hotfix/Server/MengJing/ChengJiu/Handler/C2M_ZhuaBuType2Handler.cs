@@ -25,7 +25,7 @@ namespace ET.Server
             NumericComponentS zhuabuNumeric = zhupuUnit.GetComponent<NumericComponentS>();
             if (zhuabuNumeric.GetAsInt(NumericType.ZhuaBuTime) >= 1)
             {
-                response.Error = ErrorCode.ERR_ZhuaBuFail;
+                response.Error = ErrorCode.ERR_ZhuaBuTimeLimit;
                 return;
             }
 
@@ -69,7 +69,7 @@ namespace ET.Server
             else
             {
                 int failType = RandomHelper.RandomNumber(1, 3);
-                if (failType >= 1)
+                if (failType == 1)
                 {
                     zhupuUnit.GetComponent<HeroDataComponentS>().OnDead(unit ,true);
                 }
@@ -83,9 +83,10 @@ namespace ET.Server
                         
                         string[] mondels = monsters[waveId].Split(';');
                         string[] position = mondels[1].Split(',');
+                        zhupuUnit.GetComponent<MoveComponent>().Stop(true);
                         zhupuUnit.Position = new Unity.Mathematics.float3(float.Parse(position[0]), float.Parse(position[1]), float.Parse(position[2]) );
                         zhupuUnit.Stop(-3);
-                        zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, true);
+                        zhuabuNumeric.ApplyValue(NumericType.ZhuaBuTime, 1, false);
                     }
                     else
                     {
