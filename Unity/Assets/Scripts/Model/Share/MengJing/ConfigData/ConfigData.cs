@@ -938,8 +938,6 @@ namespace ET
             new KeyValuePair() { Value = "玄武守护", Value2 = "200301" }, //闪避
             new KeyValuePair() { Value = "神兽守护", Value2 = "" },
         };
-        
-        
 
         [StaticField]
         public static string DefaultGem = "0_0_0_0";
@@ -2137,6 +2135,37 @@ namespace ET
 
         #endregion
 
+        
+        /// <summary>
+        /// 宠物共鸣属性配置 key=属性id value=名字 value2=开启条件 等级&道具
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePair> PetEchoAttri = new List<KeyValuePair>
+        {
+            new KeyValuePair() { KeyId = 200101, Value = "力量之源1", Value2 = "10&1025008;1@1025009;1" }, //暴击
+            new KeyValuePair() { KeyId = 200401, Value = "力量之源2", Value2 = "20&1025008;1@1025009;2" }, //抗暴
+            new KeyValuePair() { KeyId = 200201, Value = "力量之源3", Value2 = "25&1025008;1@1025009;3" }, //命中
+            new KeyValuePair() { KeyId = 200301, Value = "力量之源4", Value2 = "30&1025008;1@1025009;4" }, //闪避
+            new KeyValuePair() { KeyId = 200101, Value = "力量之源5", Value2 = "50&1025008;1@1025009;5" }, //暴击
+            new KeyValuePair() { KeyId = 200401, Value = "力量之源6", Value2 = "60&1025008;1@1025009;6" }, //抗暴
+        };
+        
+        /// <summary>
+        /// 宠物共鸣技能激活配置 key=总战力 value=技能ID
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePairInt> PetEchoSkill = new List<KeyValuePairInt>
+        {
+            new KeyValuePairInt() { KeyId = 10000, Value = 77001801 }, 
+            new KeyValuePairInt() { KeyId = 20000, Value = 77001802 }, 
+            new KeyValuePairInt() { KeyId = 30000, Value = 77001803 }, 
+            new KeyValuePairInt() { KeyId = 40000, Value = 77001804 }, 
+            new KeyValuePairInt() { KeyId = 50000, Value = 77001805 },
+            new KeyValuePairInt() { KeyId = 60000, Value = 77001806 }, 
+            new KeyValuePairInt() { KeyId = 70000, Value = 77001807 }, 
+            new KeyValuePairInt() { KeyId = 80000, Value = 77001808 },
+        };
+        
         /// <summary>
         /// SkillMake假配置
         /// </summary>
