@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -9,10 +10,15 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMakeLearn self)
         {
-            self.View.E_Button_Select_1Button.AddListener(() => { self.On_Button_Select(1); });
-            self.View.E_Button_Select_2Button.AddListener(() => { self.On_Button_Select(2); });
-            self.View.E_Button_Select_3Button.AddListener(() => { self.On_Button_Select(3); });
-            self.View.E_Button_Select_6Button.AddListener(() => { self.On_Button_Select(6); });
+            self.View.E_Select_1Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(1); });
+            self.View.E_Select_2Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(2); });
+            self.View.E_Select_3Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(3); });
+            self.View.E_Select_6Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(6); });
+            self.InitMakeItem(self.View.E_Select_1Image.transform.Find("RewardList"), 1);
+            self.InitMakeItem(self.View.E_Select_2Image.transform.Find("RewardList"), 2);
+            self.InitMakeItem(self.View.E_Select_3Image.transform.Find("RewardList"), 3);
+            self.InitMakeItem(self.View.E_Select_6Image.transform.Find("RewardList"), 6);
+
             self.View.E_ButtonLearnButton.AddListenerAsync(self.OnButtonLearnButton);
             self.View.E_MakeLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeLearnItemsRefresh);
             self.View.E_ImageButtonButton.AddListener(self.OnImageButtonButton);
@@ -26,6 +32,44 @@ namespace ET.Client
         {
         }
 
+        private static void InitMakeItem(this DlgMakeLearn self, Transform transform, int type)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            int playeLv = userInfoComponent.UserInfo.Lv;
+            Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
+            string initMakeList = GlobalValueConfigCategory.Instance.Get(43).Value;
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            foreach (var item in keyValuePairs)
+            {
+                // if (userInfoComponent.UserInfo.MakeList.Contains(item.Key))
+                // {
+                //     continue;
+                // }
+                //
+                if (initMakeList.Contains(item.Key.ToString()))
+                {
+                    continue;
+                }
+                
+                // if (playeLv < item.Value.LearnLv || item.Value.LearnType != 0)
+                // {
+                //     continue;
+                // }
+
+                if (item.Value.ProficiencyType != type)
+                {
+                    continue;
+                }
+
+                RewardItem rewardItem = new RewardItem();
+                rewardItem.ItemID = item.Value.MakeItemID;
+                rewardItems.Add(rewardItem);
+            }
+            
+            ES_RewardList rewardList = self.View.AddChild<ES_RewardList,Transform>(transform);
+            rewardList.Refresh(rewardItems, showNumber: false, showName: false);
+        }
+        
         private static void OnMakeLearnItemsRefresh(this DlgMakeLearn self, Transform transform, int index)
         {
             // 如果有 选中高亮 等功能，则要添加此段类型代码。
