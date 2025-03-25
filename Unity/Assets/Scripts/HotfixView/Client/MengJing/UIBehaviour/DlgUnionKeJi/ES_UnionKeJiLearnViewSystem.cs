@@ -17,7 +17,7 @@ namespace ET.Client
             self.E_ActiveBtnButton.AddListenerAsync(self.OnStartBtnButton);
             self.E_UpBtnButton.AddListenerAsync(self.OnStartBtnButton);
 
-            self.InitItemList().Coroutine();
+            self.InitItemList();
         }
 
         [EntitySystem]
@@ -26,14 +26,8 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static async ETTask InitItemList(this ES_UnionKeJiLearn self)
+        private static void InitItemList(this ES_UnionKeJiLearn self)
         {
-            self.uiTransform.gameObject.SetActive(false);
-            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
-            self.uiTransform.gameObject.SetActive(true);
-
-            self.UnionMyInfo = respose.UnionMyInfo;
-
             self.UserInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
 
             if (self.Items.Count == 0)
@@ -46,8 +40,6 @@ namespace ET.Client
                     self.Items.Add(item);
                 }
             }
-
-            self.UpdateInfo(0);
         }
 
         public static void UpdateInfo(this ES_UnionKeJiLearn self, int position)

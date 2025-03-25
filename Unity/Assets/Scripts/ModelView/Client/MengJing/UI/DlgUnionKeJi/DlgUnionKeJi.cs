@@ -7,5 +7,7 @@ namespace ET.Client
     public class DlgUnionKeJi : Entity, IAwake, IUILogic
     {
         public DlgUnionKeJiViewComponent View { get => this.GetComponent<DlgUnionKeJiViewComponent>(); }
+        public bool IsInitInfo;
+        public UnionInfo UnionMyInfo { get; set; }
     }
 }

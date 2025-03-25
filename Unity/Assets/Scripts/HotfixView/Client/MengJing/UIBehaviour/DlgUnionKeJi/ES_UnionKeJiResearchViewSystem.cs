@@ -18,7 +18,7 @@ namespace ET.Client
             self.E_QuickBtnButton.AddListener(self.OnQuickBtnButton);
             self.E_UpBtnButton.AddListenerAsync(self.OnUpBtnButton);
 
-            self.InitItemList().Coroutine();
+            self.InitItemList();
         }
 
         [EntitySystem]
@@ -27,14 +27,8 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static async ETTask InitItemList(this ES_UnionKeJiResearch self)
+        private static void InitItemList(this ES_UnionKeJiResearch self)
         {
-            self.uiTransform.gameObject.SetActive(false);
-            U2C_UnionMyInfoResponse respose = await UnionNetHelper.UnionMyInfo(self.Root());
-            self.uiTransform.gameObject.SetActive(true);
-
-            self.UnionMyInfo = respose.UnionMyInfo;
-
             if (self.Items.Count == 0)
             {
                 for (int i = 0; i < self.EG_ContentRectTransform.childCount; i++)
@@ -45,8 +39,7 @@ namespace ET.Client
                     self.Items.Add(item);
                 }
             }
-
-            self.UpdateInfo(0);
+            
             self.UpdataProgressBar().Coroutine();
         }
 
@@ -183,7 +176,10 @@ namespace ET.Client
                             return;
                         }
 
+                        FlyTipComponent.Instance.ShowFlyTip("加速完成");
+                        
                         self.UnionMyInfo = response.UnionInfo;
+                        self.GetParent<DlgUnionKeJi>().UnionMyInfo = response.UnionInfo;
                         self.UpdateInfo(self.Position);
                     }, () => { }).Coroutine();
             }
