@@ -920,6 +920,7 @@ namespace ET.Client
             self.E_InputFieldNameInputField.text = rolePetInfo.PetName;
             self.E_Btn_XiuXiButton.gameObject.SetActive(rolePetInfo.PetStatus == 1);
             self.E_Btn_ChuZhanButton.gameObject.SetActive(rolePetInfo.PetStatus == 0);
+            self.E_Text_Lv.text = rolePetInfo.PetLv.ToString();
 
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);

@@ -1467,6 +1467,23 @@ namespace ET.Client
      		}
      	}
 
+		public Text E_Text_Lv
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Lv == null )
+				{
+					this.m_E_Text_Lv = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Right/E_Text_Lv");
+				}
+				return this.m_E_Text_Lv;
+			}
+		}
+
 		public Button E_JiBanButton
      	{
      		get
@@ -1654,6 +1671,7 @@ namespace ET.Client
 			this.m_E_JiBanImage = null;
 			this.m_E_PetHeXinSuitButton = null;
 			this.m_E_PetHeXinSuitImage = null;
+			this.m_E_Text_Lv = null;
 			this.m_EG_GameObject2RectTransform = null;
 			this.uiTransform = null;
 		}
@@ -1742,6 +1760,7 @@ namespace ET.Client
 		private Image m_E_JinHuaReddotImage = null;
 		private Image m_E_ImageShouHuImage = null;
 		private Text m_E_Text_ShouHuText = null;
+		private Text m_E_Text_Lv = null;
 		private Button m_E_JiBanButton = null;
 		private Image m_E_JiBanImage = null;
 		private Button m_E_PetHeXinSuitButton = null;
