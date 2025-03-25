@@ -36,6 +36,11 @@ namespace ET.Client
             self.OnUpdateUI().Coroutine();
         }
 
+        public static void OnShowWindow(this ES_RankShow self)
+        {
+            self.ES_RankReward.uiTransform.gameObject.SetActive(false);
+        }
+
         [EntitySystem]
         private static void Destroy(this ES_RankShow self)
         {

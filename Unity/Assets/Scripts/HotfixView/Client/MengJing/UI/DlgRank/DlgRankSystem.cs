@@ -24,9 +24,11 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_RankShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RankShow.OnShowWindow();
                     break;
                 case 1:
                     self.View.ES_RankPet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RankPet.OnShowWindow();
                     break;
             }
         }

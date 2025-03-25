@@ -29,6 +29,11 @@ namespace ET.Client
             self.OnUpdateTimes();
         }
 
+        public static void OnShowWindow(this ES_RankPet self)
+        {
+            self.ES_RankPetReward.uiTransform.gameObject.SetActive(false);
+        }
+        
         [EntitySystem]
         private static void Destroy(this ES_RankPet self)
         {
