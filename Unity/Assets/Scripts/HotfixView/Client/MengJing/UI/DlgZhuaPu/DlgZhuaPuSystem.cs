@@ -201,7 +201,13 @@ namespace ET.Client
             {
                 return;
             }
-            
+
+            if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality < 5)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("活力不足！");
+                return;
+            }
+
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
