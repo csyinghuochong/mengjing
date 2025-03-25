@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -38,13 +39,19 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_Plan(1); });
-            self.E_Btn_TianFu_1Button.AddListener(() => { self.OnBtn_Plan(2); });
+            self.E_Btn_TianFu_2Button.AddListener(() => { self.OnBtn_Plan(2); });
             self.E_Btn_MakeButton.AddListener(() => { self.OnBtn_MakeButton().Coroutine(); });
+            
             self.E_Btn_MeltButton.AddListener(self.OnBtn_MeltButton);
-            self.E_Button_Select_1Button.AddListener(() => { self.RequestMakeSelect(1).Coroutine(); });
-            self.E_Button_Select_2Button.AddListener(() => { self.RequestMakeSelect(3).Coroutine(); });
-            self.E_Button_Select_3Button.AddListener(() => { self.RequestMakeSelect(3).Coroutine(); });
-            self.E_Button_Select_4Button.AddListener(() => { self.RequestMakeSelect(6).Coroutine(); });
+            self.E_Select_1Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(1); });
+            self.E_Select_2Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(2); });
+            self.E_Select_3Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(3); });
+            self.E_Select_6Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(6); });
+            self.InitMakeItem(self.E_Select_1Image.transform.Find("RewardList"), 1);
+            self.InitMakeItem(self.E_Select_2Image.transform.Find("RewardList"), 2);
+            self.InitMakeItem(self.E_Select_3Image.transform.Find("RewardList"), 3);
+            self.InitMakeItem(self.E_Select_6Image.transform.Find("RewardList"), 6);
+            
             self.E_Btn_ResetButton.AddListener(self.OnBtn_ResetButton);
             self.E_Btn_LearnButton.AddListener(self.OnBtn_LearnButton);
 
@@ -71,6 +78,26 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        private static void InitMakeItem(this ES_SkillMake self, Transform transform, int type)
+        {
+            Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            foreach (var item in keyValuePairs)
+            {
+                if (item.Value.ProficiencyType != type)
+                {
+                    continue;
+                }
+            
+                RewardItem rewardItem = new RewardItem();
+                rewardItem.ItemID = item.Value.MakeItemID;
+                rewardItems.Add(rewardItem);
+            }
+            
+            ES_RewardList rewardList = self.AddChild<ES_RewardList,Transform>(transform);
+            rewardList.Refresh(rewardItems, showNumber: false, showName: false);
+        }
+        
         public static void OnBtn_ResetButton(this ES_SkillMake self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置,请谨慎选择", () =>
@@ -120,21 +147,25 @@ namespace ET.Client
             }, null).Coroutine();
         }
 
-        public static async ETTask RequestMakeSelect(this ES_SkillMake self, int makeId)
+        private static void RequestMakeSelect(this ES_SkillMake self, int makeId)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int makeType_1 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
-            int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
-            if (makeType_1 == makeId || makeType_2 == makeId)
+            PopupTipHelp.OpenPopupTip(self.Root(), "学习技能", "一旦选择生活技能，如果要重置生活技能会遗忘学习过的所有技能哦！", async () =>
             {
-                FlyTipComponent.Instance.ShowFlyTip("该生活技能已学习！");
-                return;
-            }
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                int makeType_1 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
+                int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
+                if (makeType_1 == makeId || makeType_2 == makeId)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("该生活技能已学习！");
+                    return;
+                }
 
-            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1 ? 1 : self.Plan);
+                await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1 ? 1 : self.Plan);
 
-            self.OnUpdateMakeType();
-            self.UpdateShuLianDu();
+                self.OnUpdateMakeType();
+                self.UpdateShuLianDu();
+                
+            }, null).Coroutine();
         }
 
         public static void OnUpdateMakeType(this ES_SkillMake self)

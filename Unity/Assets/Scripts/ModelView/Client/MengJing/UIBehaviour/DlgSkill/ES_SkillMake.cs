@@ -435,7 +435,7 @@ namespace ET.Client
      		}
      	}
 
-		public Button E_Button_Select_1Button
+		public Image E_Select_1Image
      	{
      		get
      		{
@@ -444,15 +444,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Button_Select_1Button == null )
+     			if( this.m_E_Select_1Image == null )
      			{
-		    		this.m_E_Button_Select_1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Select/Select_1/E_Button_Select_1");
+		    		this.m_E_Select_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/E_Select_1");
      			}
-     			return this.m_E_Button_Select_1Button;
+     			return this.m_E_Select_1Image;
      		}
      	}
 
-		public Image E_Button_Select_1Image
+		public Image E_Select_2Image
      	{
      		get
      		{
@@ -461,15 +461,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Button_Select_1Image == null )
+     			if( this.m_E_Select_2Image == null )
      			{
-		    		this.m_E_Button_Select_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/Select_1/E_Button_Select_1");
+		    		this.m_E_Select_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/E_Select_2");
      			}
-     			return this.m_E_Button_Select_1Image;
+     			return this.m_E_Select_2Image;
      		}
      	}
 
-		public Button E_Button_Select_2Button
+		public Image E_Select_3Image
      	{
      		get
      		{
@@ -478,15 +478,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Button_Select_2Button == null )
+     			if( this.m_E_Select_3Image == null )
      			{
-		    		this.m_E_Button_Select_2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Select/Select_2/E_Button_Select_2");
+		    		this.m_E_Select_3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/E_Select_3");
      			}
-     			return this.m_E_Button_Select_2Button;
+     			return this.m_E_Select_3Image;
      		}
      	}
 
-		public Image E_Button_Select_2Image
+		public Image E_Select_6Image
      	{
      		get
      		{
@@ -495,79 +495,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Button_Select_2Image == null )
+     			if( this.m_E_Select_6Image == null )
      			{
-		    		this.m_E_Button_Select_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/Select_2/E_Button_Select_2");
+		    		this.m_E_Select_6Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/E_Select_6");
      			}
-     			return this.m_E_Button_Select_2Image;
-     		}
-     	}
-
-		public Button E_Button_Select_3Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Button_Select_3Button == null )
-     			{
-		    		this.m_E_Button_Select_3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Select/Select_3/E_Button_Select_3");
-     			}
-     			return this.m_E_Button_Select_3Button;
-     		}
-     	}
-
-		public Image E_Button_Select_3Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Button_Select_3Image == null )
-     			{
-		    		this.m_E_Button_Select_3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/Select_3/E_Button_Select_3");
-     			}
-     			return this.m_E_Button_Select_3Image;
-     		}
-     	}
-
-		public Button E_Button_Select_4Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Button_Select_4Button == null )
-     			{
-		    		this.m_E_Button_Select_4Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Select/Select_4/E_Button_Select_4");
-     			}
-     			return this.m_E_Button_Select_4Button;
-     		}
-     	}
-
-		public Image E_Button_Select_4Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Button_Select_4Image == null )
-     			{
-		    		this.m_E_Button_Select_4Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Select/Select_4/E_Button_Select_4");
-     			}
-     			return this.m_E_Button_Select_4Image;
+     			return this.m_E_Select_6Image;
      		}
      	}
 
@@ -882,14 +814,10 @@ namespace ET.Client
 			this.m_E_Btn_LearnButton = null;
 			this.m_E_Btn_LearnImage = null;
 			this.m_EG_SelectRectTransform = null;
-			this.m_E_Button_Select_1Button = null;
-			this.m_E_Button_Select_1Image = null;
-			this.m_E_Button_Select_2Button = null;
-			this.m_E_Button_Select_2Image = null;
-			this.m_E_Button_Select_3Button = null;
-			this.m_E_Button_Select_3Image = null;
-			this.m_E_Button_Select_4Button = null;
-			this.m_E_Button_Select_4Image = null;
+			this.m_E_Select_1Image = null;
+			this.m_E_Select_2Image = null;
+			this.m_E_Select_3Image = null;
+			this.m_E_Select_6Image = null;
 			this.m_EG_MeltRectTransform = null;
 			this.m_E_CommonItemLoopVerticalScrollRect = null;
 			this.m_es_commonitem_0 = null;
@@ -932,14 +860,10 @@ namespace ET.Client
 		private Button m_E_Btn_LearnButton = null;
 		private Image m_E_Btn_LearnImage = null;
 		private RectTransform m_EG_SelectRectTransform = null;
-		private Button m_E_Button_Select_1Button = null;
-		private Image m_E_Button_Select_1Image = null;
-		private Button m_E_Button_Select_2Button = null;
-		private Image m_E_Button_Select_2Image = null;
-		private Button m_E_Button_Select_3Button = null;
-		private Image m_E_Button_Select_3Image = null;
-		private Button m_E_Button_Select_4Button = null;
-		private Image m_E_Button_Select_4Image = null;
+		private Image m_E_Select_1Image = null;
+		private Image m_E_Select_2Image = null;
+		private Image m_E_Select_3Image = null;
+		private Image m_E_Select_6Image = null;
 		private RectTransform m_EG_MeltRectTransform = null;
 		private LoopVerticalScrollRect m_E_CommonItemLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_0 = null;
