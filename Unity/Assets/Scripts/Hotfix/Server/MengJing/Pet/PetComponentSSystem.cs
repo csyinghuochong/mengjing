@@ -55,7 +55,6 @@ namespace ET.Server
             return proList;
         }
 
-
         public static void CheckPetList(this PetComponentS self, List<long> petList)
         {
             List <long> ids = new List<long>();
@@ -74,6 +73,24 @@ namespace ET.Server
             }
         }
 
+        public static void CheckPetList(this PetComponentS self, List<KeyValuePairInt> petList)
+        {
+            List <long> ids = new List<long>();
+
+            for (int i = petList.Count - 1; i >= 0; i--)
+            {
+                if (petList[i].Value != 0 && (self.GetPetInfo(petList[i].Value) == null) || ids.Contains(petList[i].Value))
+                {
+                    petList[i].Value = 0;
+                }
+                
+                if (petList[i].Value != 0 && ids.Contains(petList[i].Value))
+                {
+                    ids.Add(petList[i].Value);
+                }
+            }
+        }
+        
         public static void CheckPetList(this PetComponentS self, List<PetBarInfo> petList)
         {
             List <long> ids = new List<long>();
@@ -197,6 +214,15 @@ namespace ET.Server
                     }
                 }
             }
+
+            if (self.PetEchoList.Count != ConfigData.PetEchoAttri.Count)
+            {
+                for (int i = self.PetEchoList.Count; i < ConfigData.PetEchoAttri.Count; i++)
+                {
+                    self.PetEchoList.Add( new KeyValuePairInt() );
+                }
+            }
+
             self.CheckPetList(self.PetFormations);
             self.CheckPetList(self.TeamPetList);
             self.CheckPetList(self.PetFightList_1);
@@ -205,6 +231,7 @@ namespace ET.Server
             self.CheckPetList(self.PetShouHuList);
             self.CheckPetList(self.PetMingList);
             self.CheckPetList(self.PetMingPosition);
+            self.CheckPetList(self.PetEchoList);
 
             if (self.PetShouHuActive == 0)
             {
