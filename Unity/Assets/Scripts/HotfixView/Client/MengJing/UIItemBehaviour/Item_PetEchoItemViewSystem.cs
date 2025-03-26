@@ -84,7 +84,7 @@ namespace ET.Client
 		{
             self.Index = index;
 			self.E_ImageButtonButton.AddListener(self.OnClickPetItem);
-            self.E_ImageSelectImage.gameObject.SetActive(false);
+            self.OnSelectUI(-1);
 
             self.E_Text_NameText.text = data.Value;
 

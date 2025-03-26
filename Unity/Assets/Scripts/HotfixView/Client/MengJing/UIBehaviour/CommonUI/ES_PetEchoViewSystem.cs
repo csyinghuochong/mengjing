@@ -7,6 +7,8 @@ namespace ET.Client
 {
 	[EntitySystemOf(typeof(ES_PetEcho))]
 	[FriendOfAttribute(typeof(ES_PetEcho))]
+	[FriendOfAttribute(typeof(Scroll_Item_PetEchoItem))]
+	
 	public static partial class ES_PetEchoSystem 
 	{
 		[EntitySystem]
@@ -19,6 +21,27 @@ namespace ET.Client
 			
 			self.E_ButtonOpenButton.AddListenerAsync(self.OnClickOpenButton);
 			self.E_ButtonChange.AddListenerAsync(self.OnClickChangeButton);
+			
+			self.EG_Left_1RectTransform.gameObject.SetActive(true);
+			self.EG_Left_2RectTransform.gameObject.SetActive(false);
+			self.E_ButtonActiveButton.AddListener(self.OnButtonActiveButton);
+
+			self.UpdateActiveNumber();
+		}
+
+		private static void OnButtonActiveButton(this ES_PetEcho self)
+		{
+			self.EG_Left_1RectTransform.gameObject.SetActive(!self.EG_Left_1RectTransform.gameObject.activeSelf);
+			self.EG_Left_2RectTransform.gameObject.SetActive(!self.EG_Left_2RectTransform.gameObject.activeSelf);
+		}
+
+		private static void UpdateActiveNumber(this ES_PetEcho self)
+		{
+			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+			using (zstring.Block())
+			{
+				self.E_Text_AttributeText.text = zstring.Format("激活({0}/{1})", petComponentC.PetEchoSkillList.Count, ConfigData.PetEchoSkill.Count);
+			}
 		}
 
 		private static async ETTask OnClickOpenButton(this ES_PetEcho self)
@@ -61,7 +84,12 @@ namespace ET.Client
 			Scroll_Item_PetEchoItem scrollItemPetListItem = self.ScrollItemPetEchoItems[index].BindTrans(transform);
 			scrollItemPetListItem.SetClickHandler(self.OnClickPetEchoItemHandler);
             scrollItemPetListItem.OnInitData(ConfigData.PetEchoAttri[index], index);
-        }
+
+            if (index == 0)
+            {
+	            self.OnClickPetEchoItemHandler(0);
+            }
+		}
 
 		private static void OnClickPetEchoItemHandler(this ES_PetEcho self, int index)
 		{
@@ -71,18 +99,35 @@ namespace ET.Client
 			if (petComponentC.PetEchoList[self.Index].KeyId == 0)
 			{
 				//未开启
+				self.EG_Opened.gameObject.SetActive(false);
+				self.EG_NoOpen.gameObject.SetActive(true);	
 				self.UpdateNoOpenStatus();
-
             }
 			else
 			{
 				//已开启
+				self.EG_Opened.gameObject.SetActive(true);
+				self.EG_NoOpen.gameObject.SetActive(false);	
 				self.UpdateOpenedStatus();
 			}
 			
+			self.UpdatePetEchoItemSelect(index);	
         }
 
-        // new KeyValuePair() { KeyId = 200101, Value = "力量之源1", Value2 = "10&1025008;1@1025009;1" }, //暴击
+		private static void UpdatePetEchoItemSelect(this ES_PetEcho self, int index)
+		{
+			foreach (Scroll_Item_PetEchoItem echoitem in self.ScrollItemPetEchoItems.Values)
+			{
+				if (echoitem.uiTransform == null)
+				{
+					continue;	
+				}
+				
+				echoitem.OnSelectUI(index);
+			}
+		}
+
+		// new KeyValuePair() { KeyId = 200101, Value = "力量之源1", Value2 = "10&1025008;1@1025009;1" }, //暴击
         private static void UpdateNoOpenStatus(this ES_PetEcho self)
         {
             KeyValuePair keyValuePair = ConfigData.PetEchoAttri[self.Index];
@@ -93,7 +138,7 @@ namespace ET.Client
             using (zstring.Block())
             {
 	            self.E_Text_NeedLvText.text = zstring.Format("开启等级：{0}级", openlist[0]);
-                			self.E_Text_AttributeText.text = zstring.Format("开启此为止可以提升{0}效果", pname);
+                			self.E_Text_AttributeText.text = zstring.Format("开启此位置可以提升{0}效果", pname);
             }
             
             self.ES_CostList.Refresh(openlist[1]);
