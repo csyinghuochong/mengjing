@@ -27,6 +27,7 @@ namespace ET.Client
 			self.E_ButtonActiveButton.AddListener(self.OnButtonActiveButton);
 
 			self.UpdateActiveNumber();
+			self.UpdateTotalCombat();
 		}
 
 		private static void OnButtonActiveButton(this ES_PetEcho self)
@@ -35,6 +36,34 @@ namespace ET.Client
 			self.EG_Left_2RectTransform.gameObject.SetActive(!self.EG_Left_2RectTransform.gameObject.activeSelf);
 		}
 
+		private static void UpdateTotalCombat(this ES_PetEcho self)
+		{
+			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();	
+			
+			int curCombat = PetHelper.GetPetTotalCombat(petComponentC.RolePetInfos);
+			self.E_TotalCombat_1Text.text = curCombat.ToString();
+			self.E_TotalCombat_2Text.text = curCombat.ToString();
+			
+			int nextCombat = 0;
+			for (int i = 0;  i < ConfigData.PetEchoSkill.Count; i++)
+			{
+				if (ConfigData.PetEchoSkill[i].KeyId > nextCombat)
+				{
+					nextCombat = ConfigData.PetEchoSkill[i].KeyId;
+				}
+			}
+			
+			if(nextCombat > 0)
+			{
+				self.E_NextNeedCombatText.gameObject.SetActive(true);
+				self.E_NextNeedCombatText.text = zstring.Format("距离激活下一级战力还差{0}点", nextCombat - curCombat);
+			}
+			else
+			{
+				self.E_NextNeedCombatText.gameObject.SetActive(false);
+			}
+		}
+        
 		private static void UpdateActiveNumber(this ES_PetEcho self)
 		{
 			//PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();

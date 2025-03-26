@@ -423,7 +423,7 @@ namespace ET
                 switch (targetType)
                 {
                     case 1:
-                        int combat = PetHelper.PetPingJia(petinfo);
+                        int combat = petinfo.PetPingFen;
                         value = combat >= targetValue;
                         break;
                     case 2:

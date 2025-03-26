@@ -330,7 +330,7 @@ namespace ET
         }
 
         //宠物评分
-        public static int PetPingJia(RolePetInfo petinfo)
+        public static int GetPetCombat(RolePetInfo petinfo)
         {
             int fightValue = 0;
             float fightValueFloat = 0f;

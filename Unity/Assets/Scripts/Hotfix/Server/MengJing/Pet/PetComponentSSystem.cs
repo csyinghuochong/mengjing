@@ -475,7 +475,7 @@ namespace ET.Server
                 int intFen = rolePetInfo.PetPingFen;
                 if (intFen == 0)
                 {
-                    intFen = PetHelper.PetPingJia(rolePetInfo);
+                    intFen = rolePetInfo.PetPingFen;
                 }
                 string strFen = $"{rolePetInfo.ConfigId},{intFen};";
                 pingFen += strFen;
@@ -1082,7 +1082,7 @@ namespace ET.Server
 
         public static void UpdatePetAttributeWithData(this PetComponentS self, BagComponentS bagComponent, NumericComponentS numericComponent, RolePetInfo rolePetInfo, bool updateUnit = false)
         {
-            rolePetInfo.PetPingFen = PetHelper.PetPingJia(rolePetInfo);
+            rolePetInfo.PetPingFen = PetHelper.GetPetCombat(rolePetInfo);
             //获取宠物资质
             float actPro = self.GetZiZhiAddPro(1, rolePetInfo.ZiZhi_Act);
             float magePro = self.GetZiZhiAddPro(1, rolePetInfo.ZiZhi_MageAct);
@@ -1375,10 +1375,9 @@ namespace ET.Server
                 rolePetInfo.Vs.RemoveAt(pingfenIndex);
             }
 
-            int pingfen = PetHelper.PetPingJia(rolePetInfo);
+            int pingfen = PetHelper.GetPetCombat(rolePetInfo);
             rolePetInfo.Ks.Add((int)NumericType.PetPinFen);
             rolePetInfo.Vs.Add(pingfen);
-            rolePetInfo.PetPingFen = PetHelper.PetPingJia(rolePetInfo);
             PetHelper.UpdatePetNumeric( rolePetInfo );
         }
 
@@ -1835,7 +1834,6 @@ namespace ET.Server
             }
             self.PetMingRecordList.Add( record );
         }
-
         
         //判断当前宠物是否已满
         public static bool PetIsFull(this PetComponentS self)

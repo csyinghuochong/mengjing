@@ -42,7 +42,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.E_Lab_PinFenText.text = zstring.Format("评分: {0}", PetHelper.PetPingJia(rolePetInfo));
+                self.E_Lab_PinFenText.text = zstring.Format("评分: {0}", rolePetInfo.PetPingFen);
             }
 
             if (PetHelper.IsShenShou(rolePetInfo.ConfigId))

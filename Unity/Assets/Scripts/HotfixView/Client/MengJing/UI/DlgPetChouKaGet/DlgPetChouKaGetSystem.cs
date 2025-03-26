@@ -101,7 +101,7 @@ namespace ET.Client
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.RolePetInfo.PetSkill.Count);
             self.UpdateAttribute(rolePetInfo, oldRolePetInfo);
 
-            self.View.E_Text_FightValueText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
+            self.View.E_Text_FightValueText.text = rolePetInfo.PetPingFen.ToString();
         }
 
         private static void OnCommonSkillItemsRefresh(this DlgPetChouKaGet self, Transform transform, int index)

@@ -710,7 +710,7 @@ namespace ET.Server
 
             self.TriggerTaskEvent(TaskTargetType.GetPet_1008, 0, 1);
 
-            int combat = PetHelper.PetPingJia(rolePetInfo);
+            int combat = rolePetInfo.PetPingFen;
             self.TriggerTaskEvent(TaskTargetType.PetHeChengCombat_32, combat, 1);
         }
 

@@ -109,7 +109,7 @@ namespace ET.Client
                 self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petSkinConfig.SkinID.ToString()), true).Coroutine();
             }
             
-            self.E_Text_PetPingFen.text = PetHelper.PetPingJia(rolePetInfo).ToString();
+            self.E_Text_PetPingFen.text = rolePetInfo.PetPingFen.ToString();
 
             self.E_Text_PetLevelText.text = rolePetInfo.PetLv + LanguageComponent.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);

@@ -762,7 +762,7 @@ namespace ET.Client
             self.UpdatePetSkin(rolePetInfo);
             self.UpdateSkillList(rolePetInfo);
 
-            self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
+            self.E_Text_PetPingFenText.text = rolePetInfo.PetPingFen.ToString();
 
             self.E_Text_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
             string path;

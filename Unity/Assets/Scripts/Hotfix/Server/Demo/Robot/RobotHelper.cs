@@ -257,7 +257,7 @@ namespace ET.Client
                 }
 
                 // 选一只评分最高的
-                if (PetHelper.PetPingJia(petInfo) > PetHelper.PetPingJia(rolePetInfo))
+                if (PetHelper.GetPetCombat(petInfo) > PetHelper.GetPetCombat(rolePetInfo))
                 {
                     rolePetInfo = petInfo;
                 }
@@ -283,7 +283,7 @@ namespace ET.Client
 
             foreach (RolePetInfo petInfo in petComponent.RolePetInfos)
             {
-                if (PetHelper.PetPingJia(petInfo) > score)
+                if (PetHelper.GetPetCombat(petInfo) > score)
                 {
                     rolePetInfos.Add(petInfo);
                 }
@@ -403,7 +403,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (PetHelper.PetPingJia(rolePetInfo) < score && rolePetInfo.PetSkill.Count < skillNum)
+                if (PetHelper.GetPetCombat(rolePetInfo) < score && rolePetInfo.PetSkill.Count < skillNum)
                 {
                     if (HeChengPet_Left == null)
                     {
@@ -470,7 +470,7 @@ namespace ET.Client
                 }
 
                 // 选一只评分最高的
-                if (PetHelper.PetPingJia(petInfo) > PetHelper.PetPingJia(rolePetInfo))
+                if (PetHelper.GetPetCombat(petInfo) > PetHelper.GetPetCombat(rolePetInfo))
                 {
                     rolePetInfo = petInfo;
                 }
@@ -509,7 +509,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo1))
+                        if (PetHelper.GetPetCombat(rolePetInfo) > PetHelper.GetPetCombat(rolePetInfo1))
                         {
                             rolePetInfo1 = rolePetInfo;
                         }
@@ -524,7 +524,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo2))
+                        if (PetHelper.GetPetCombat(rolePetInfo) > PetHelper.GetPetCombat(rolePetInfo2))
                         {
                             rolePetInfo2 = rolePetInfo;
                         }
@@ -539,7 +539,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo3))
+                        if (PetHelper.GetPetCombat(rolePetInfo) > PetHelper.GetPetCombat(rolePetInfo3))
                         {
                             rolePetInfo3 = rolePetInfo;
                         }
@@ -554,7 +554,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(rolePetInfo4))
+                        if (PetHelper.GetPetCombat(rolePetInfo) > PetHelper.GetPetCombat(rolePetInfo4))
                         {
                             rolePetInfo4 = rolePetInfo;
                         }
@@ -604,7 +604,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (PetHelper.PetPingJia(rolePetInfo) > PetHelper.PetPingJia(maxPetInfo))
+                if (PetHelper.GetPetCombat(rolePetInfo) > PetHelper.GetPetCombat(maxPetInfo))
                 {
                     maxPetInfo = rolePetInfo;
                     index = i;

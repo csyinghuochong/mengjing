@@ -43,7 +43,7 @@
                     response.OldPetInfo = CommonHelp.DeepCopy<RolePetInfo>(rolePetInfo);
 
                     //获取评分
-                    int pingfen = PetHelper.PetPingJia(rolePetInfoXianJi);
+                    int pingfen = PetHelper.GetPetCombat(rolePetInfoXianJi);
                     petComponent.UpdatePetStage(rolePetInfo, pingfen);
 
                     petComponent.CheckPetPingFen();
