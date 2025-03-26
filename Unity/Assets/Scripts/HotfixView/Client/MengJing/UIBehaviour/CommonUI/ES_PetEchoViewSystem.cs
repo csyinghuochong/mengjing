@@ -89,7 +89,7 @@ namespace ET.Client
 
             if (index == 0)
             {
-	            self.OnClickPetEchoItemHandler(0);
+	            self.OnClickPetEchoItemHandler(index);
             }
 		}
 
@@ -206,7 +206,15 @@ namespace ET.Client
 		}
 		private static void UpdatePetEchoItemList(this ES_PetEcho self)
 		{
-			
+			foreach (Scroll_Item_PetEchoItem echoitem in self.ScrollItemPetEchoItems.Values)
+			{
+				if (echoitem.uiTransform == null)
+				{
+					continue;	
+				}
+				
+				echoitem.UpdatePetSet();
+			}
 		}
 		
 		private static void InitPetEchoSkillItemList(this ES_PetEcho self)

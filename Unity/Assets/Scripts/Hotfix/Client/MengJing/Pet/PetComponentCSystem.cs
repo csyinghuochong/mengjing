@@ -45,6 +45,11 @@ namespace ET.Client
             self.PetEchoList = m2C_RolePetList.PetEchoList;
         }
 
+        public static void OnPetEchoOperate(this PetComponentC self, M2C_PetEchoOperateResponse m2C_RolePetList)
+        {
+            self.PetEchoList = m2C_RolePetList.PetEchoList;
+        }
+
         public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)
         {
             RolePetInfo rolePetInfo = m2C_RolePetUpdate.PetInfoAdd[0];

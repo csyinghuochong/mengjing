@@ -35,7 +35,7 @@ namespace ET.Client
 
 			self.E_Text_NameText.text = skillConfig.SkillName;
 			
-			self.E_Text_NameText.text = data.KeyId.ToString();
+			self.E_Text_ComabtText.text = data.KeyId.ToString();
 		}
 	}
 	

@@ -13,6 +13,7 @@ namespace ET.Client
             c2mPetEchoOperate.Position = position;
             c2mPetEchoOperate.ParamId = paramId;
             M2C_PetEchoOperateResponse m2CPetEchoOperateResponse = (M2C_PetEchoOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2mPetEchoOperate);
+            root.GetComponent<PetComponentC>().OnPetEchoOperate(m2CPetEchoOperateResponse);
             return m2CPetEchoOperateResponse.Error;
         }
 

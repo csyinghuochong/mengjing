@@ -66,7 +66,11 @@ namespace ET.Client
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             self.ES_ModelShow.SetShow(true);
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
-            self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
+            using (zstring.Block())
+            {
+                self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
+            }
+
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 100f, 450f);
             gameObject.transform.Find("Camera").GetComponent<Camera>().fieldOfView = 30;
             gameObject.transform.localPosition = new Vector2(self.Index * 1000 + 10000, 0);
