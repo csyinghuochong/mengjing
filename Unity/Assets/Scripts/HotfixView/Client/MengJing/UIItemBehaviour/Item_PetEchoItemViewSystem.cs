@@ -83,6 +83,14 @@ namespace ET.Client
             }
         }
 
+        public static void UpdateOpenStatus(this Scroll_Item_PetEchoItem self)
+        {
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            bool open = petComponent.PetEchoList[self.Index].KeyId == 1;
+            
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageButtonButton.gameObject, !open);
+        }
+
         //new KeyValuePair() { KeyId = 200101, Value = "力量之源1", Value2 = "10&1025008;1@1025009;1" }, //暴击
         public static void OnInitData(this Scroll_Item_PetEchoItem self, KeyValuePair data, int index)
 		{
@@ -91,7 +99,7 @@ namespace ET.Client
             self.OnSelectUI(-1);
 
             self.E_Text_NameText.text = data.Value;
-
+            self.UpdateOpenStatus();
             self.UpdatePetSet();
         }
 

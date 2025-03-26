@@ -42,7 +42,7 @@ namespace ET.Client
 			int activeNumber = skillSetComponentC.GetPetEchoSkillList().Count;
 			using (zstring.Block())
 			{
-				self.E_Text_AttributeText.text = zstring.Format("激活({0}/{1})", activeNumber, ConfigData.PetEchoSkill.Count);
+				self.E_ActiveNumberText.text = zstring.Format("激活({0}/{1})", activeNumber, ConfigData.PetEchoSkill.Count);
 			}
 		}
 
@@ -66,6 +66,8 @@ namespace ET.Client
                    return;
               }
               await PetNetHelper.RequestPetEchoOperate(self.Root(), 1, self.Index, 0);
+
+              self.UpdatePetEchoItemOpenStatus();
 		}
 
 		private static async ETTask OnClickChangeButton(this ES_PetEcho self)
@@ -121,6 +123,18 @@ namespace ET.Client
 			
 			self.UpdatePetEchoItemSelect(index);	
         }
+
+		private static void UpdatePetEchoItemOpenStatus(this ES_PetEcho self)
+		{
+			foreach (Scroll_Item_PetEchoItem echoitem in self.ScrollItemPetEchoItems.Values)
+            {
+                if (echoitem.uiTransform == null)
+                {
+                    continue;	
+                }
+                echoitem.UpdateOpenStatus();
+            }
+		}
 
 		private static void UpdatePetEchoItemSelect(this ES_PetEcho self, int index)
 		{
@@ -179,6 +193,18 @@ namespace ET.Client
 			        fightNum = fightNum + rolePetInfoNow.PetPingFen;
 		        }
 	        }
+	        
+	        GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
+	        PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
+	        using (zstring.Block())
+	        {
+		        self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
+	        }
+
+	        gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 100f, 450f);
+	        gameObject.transform.Find("Camera").GetComponent<Camera>().fieldOfView = 30;
+	        gameObject.transform.localPosition = new Vector2(self.Index * 1000 + 10000, 0);
+	        gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
 	        
 	        using (zstring.Block())
 	        {

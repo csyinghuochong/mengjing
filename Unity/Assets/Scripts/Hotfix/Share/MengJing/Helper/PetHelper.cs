@@ -5,7 +5,6 @@ namespace ET
 {
     public static class PetHelper
     {
-
         public static Dictionary<int, int> GetEquipSkillList(RolePetInfo rolePetInfo, List<ItemInfo> bagInfos)
         {
             Dictionary<int, int> hideSkillId = new Dictionary<int, int>();
@@ -264,6 +263,17 @@ namespace ET
          public static int GetAddPropretyNum(RolePetInfo rolePetInfos)
         {
             return (rolePetInfos.PetLv - 1) * 5 - (rolePetInfos.BabyType == 3 ? 30 : 0);
+        }
+        
+        public static int GetPetTotalCombat(List<RolePetInfo> rolePetInfos)
+        {
+            int combat = 0;
+            for (int i = 0; i < rolePetInfos.Count; i++)
+            {
+                combat += rolePetInfos[i].PetPingFen;
+            }
+
+            return combat;
         }
         
         /// <summary>
