@@ -142,6 +142,8 @@ namespace ET.Client
 
                 return;
             }
+            
+            self.EG_RightRectTransform.gameObject.SetActive(true);
 
             self.TaskId = taskPro.taskID;
 
@@ -251,8 +253,6 @@ namespace ET.Client
             {
                 self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "完成任务";
             }
-
-            self.EG_RightRectTransform.gameObject.SetActive(true);
         }
 
         private static void OnGiveupButton(this ES_TaskDetail self)
