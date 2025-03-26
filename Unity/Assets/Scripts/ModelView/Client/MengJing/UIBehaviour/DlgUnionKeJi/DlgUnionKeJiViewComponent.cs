@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionKeJiResearch.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionkejiresearch = this.AddChild<ES_UnionKeJiResearch, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionkejiresearch;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionKeJiLearn.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionkejilearn = this.AddChild<ES_UnionKeJiLearn, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionkejilearn;

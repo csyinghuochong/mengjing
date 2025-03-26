@@ -74,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_JiaYuanMystery_A.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_jiayuanmystery_a = this.AddChild<ES_JiaYuanMystery_A, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_jiayuanmystery_a;
@@ -93,9 +94,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_JiaYuanMystery_B.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_jiayuanmystery_b = this.AddChild<ES_JiaYuanMystery_B, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_jiayuanmystery_b;

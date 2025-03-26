@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_DonationShow.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_donationshow = this.AddChild<ES_DonationShow, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_donationshow;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_DonationUnion.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_donationunion = this.AddChild<ES_DonationUnion, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_donationunion;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RankUnion.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rankunion = this.AddChild<ES_RankUnion, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rankunion;

@@ -71,9 +71,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ActivityYueKa.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_activityyueka = this.AddChild<ES_ActivityYueKa, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_activityyueka;
@@ -90,9 +91,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ActivityMaoXian.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_activitymaoxian = this.AddChild<ES_ActivityMaoXian, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_activitymaoxian;
@@ -109,9 +111,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ActivityToken.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_activitytoken = this.AddChild<ES_ActivityToken, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_activitytoken;
@@ -128,9 +131,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ActivityTeHui.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_activitytehui = this.AddChild<ES_ActivityTeHui, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_activitytehui;
@@ -147,9 +151,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ActivitySingleRecharge.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_activitysinglerecharge = this.AddChild<ES_ActivitySingleRecharge, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_activitysinglerecharge;

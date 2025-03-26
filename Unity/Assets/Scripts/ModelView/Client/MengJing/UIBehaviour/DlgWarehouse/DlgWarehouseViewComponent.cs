@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WarehouseRole.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_warehouserole = this.AddChild<ES_WarehouseRole, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_warehouserole;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WarehouseAccount.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_warehouseaccount = this.AddChild<ES_WarehouseAccount, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_warehouseaccount;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WarehouseGem.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_warehousegem = this.AddChild<ES_WarehouseGem, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_warehousegem;

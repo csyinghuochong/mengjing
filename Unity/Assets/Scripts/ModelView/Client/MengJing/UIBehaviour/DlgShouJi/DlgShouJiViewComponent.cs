@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_ShouJiList.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_shoujilist = this.AddChild<ES_ShouJiList, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_shoujilist;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_ShouJiTreasure.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_shoujitreasure = this.AddChild<ES_ShouJiTreasure, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_shoujitreasure;

@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_HuntRanking.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_huntranking = this.AddChild<ES_HuntRanking, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_huntranking;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_HuntTask.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_hunttask = this.AddChild<ES_HuntTask, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_hunttask;

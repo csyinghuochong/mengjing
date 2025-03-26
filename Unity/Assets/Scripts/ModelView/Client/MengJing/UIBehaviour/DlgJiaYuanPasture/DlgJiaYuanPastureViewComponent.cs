@@ -74,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_JiaYuanPasture_A.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_jiayuanpasture_a = this.AddChild<ES_JiaYuanPasture_A, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_jiayuanpasture_a;
@@ -93,9 +94,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_JiaYuanPasture_B.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_jiayuanpasture_b = this.AddChild<ES_JiaYuanPasture_B, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_jiayuanpasture_b;

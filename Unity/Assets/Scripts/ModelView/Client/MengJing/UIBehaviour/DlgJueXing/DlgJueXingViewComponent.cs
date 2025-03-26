@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_JueXingShow.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_juexingshow = this.AddChild<ES_JueXingShow, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_juexingshow;

@@ -71,9 +71,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ZhanQuLevel.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_zhanqulevel = this.AddChild<ES_ZhanQuLevel, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_zhanqulevel;
@@ -90,9 +91,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ZhanQuCombat.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_zhanqucombat = this.AddChild<ES_ZhanQuCombat, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_zhanqucombat;
@@ -109,9 +111,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_FirstWin.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_firstwin = this.AddChild<ES_FirstWin, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_firstwin;
@@ -128,9 +131,10 @@ namespace ET.Client
 			        string path = "Assets/Bundles/UI/Common/ES_ActivityLogin.prefab";
 			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-			        go.SetActive(false);
+			        go.SetActive(true);
 			        this.AssetList.Add(path);
 			        this.m_es_activitylogin = this.AddChild<ES_ActivityLogin, Transform>(go.transform);
+			        go.SetActive(false);
 		        }
 
 		        return this.m_es_activitylogin;

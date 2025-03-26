@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_WatchEquip.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_watchequip = this.AddChild<ES_WatchEquip, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_watchequip;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_WatchPet.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_watchpet = this.AddChild<ES_WatchPet, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_watchpet;

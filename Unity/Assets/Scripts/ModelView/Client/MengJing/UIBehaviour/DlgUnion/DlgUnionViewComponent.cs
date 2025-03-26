@@ -55,9 +55,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionShow.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionshow = this.AddChild<ES_UnionShow, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionshow;
@@ -74,9 +75,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionMy.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionmy = this.AddChild<ES_UnionMy, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionmy;
@@ -93,9 +95,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionMember.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionmember = this.AddChild<ES_UnionMember, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionmember;
@@ -112,9 +115,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionWish.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionwish = this.AddChild<ES_UnionWish, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionwish;
@@ -132,9 +136,10 @@ namespace ET.Client
         			string path = "Assets/Bundles/UI/Common/ES_UnionOrder.prefab";
         			GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
         			GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-        			go.SetActive(false);
+        			go.SetActive(true);
         			this.AssetList.Add(path);
         			this.m_es_unionorder = this.AddChild<ES_UnionOrder, Transform>(go.transform);
+			        go.SetActive(false);
         		}
 
         		return this.m_es_unionorder;
@@ -151,9 +156,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionMystery.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionmystery = this.AddChild<ES_UnionMystery, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionmystery;
@@ -170,9 +176,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionBoss.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionboss = this.AddChild<ES_UnionBoss, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionboss;

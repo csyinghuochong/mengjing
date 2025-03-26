@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_UnionRoleXiuLian.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_unionrolexiulian = this.AddChild<ES_UnionRoleXiuLian, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_unionrolexiulian;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_UnionPetXiuLian.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_unionpetxiulian = this.AddChild<ES_UnionPetXiuLian, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_unionpetxiulian;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_UnionBloodStone.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_unionbloodstone = this.AddChild<ES_UnionBloodStone, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_unionbloodstone;

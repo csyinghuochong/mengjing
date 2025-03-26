@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_PetBarSet.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_petBarSet = this.AddChild<ES_PetBarSet, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_petBarSet;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_PetBarUpgrade.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_petBarUpgrade = this.AddChild<ES_PetBarUpgrade, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_petBarUpgrade;

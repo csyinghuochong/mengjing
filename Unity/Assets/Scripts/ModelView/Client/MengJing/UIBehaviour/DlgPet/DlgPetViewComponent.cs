@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_PetList.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_petlist = this.AddChild<ES_PetList, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_petlist;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_PetHeCheng.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_pethecheng = this.AddChild<ES_PetHeCheng, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_pethecheng;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_PetXiLian.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_petxilian = this.AddChild<ES_PetXiLian, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_petxilian;
@@ -111,9 +114,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_PetEcho.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_petecho = this.AddChild<ES_PetEcho, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_petecho;

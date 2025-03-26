@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_JiaYuanPurchase.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_jiayuanpurchase = this.AddChild<ES_JiaYuanPurchase, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_jiayuanpurchase;
@@ -75,9 +76,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_JiaYuanCooking.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_jiayuancooking = this.AddChild<ES_JiaYuanCooking, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_jiayuancooking;
@@ -96,9 +98,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_JiaYuanCookbook.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_jiayuancookbook = this.AddChild<ES_JiaYuanCookbook, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_jiayuancookbook;

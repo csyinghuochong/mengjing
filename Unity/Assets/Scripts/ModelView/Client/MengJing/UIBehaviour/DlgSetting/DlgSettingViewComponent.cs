@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SettingGame.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_settinggame = this.AddChild<ES_SettingGame, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_settinggame;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SettingTitle.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_settingtitle = this.AddChild<ES_SettingTitle, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_settingtitle;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SettingGuaJi.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_settingguaji = this.AddChild<ES_SettingGuaJi, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_settingguaji;
@@ -111,9 +114,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_FashionShow.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_fashionshow = this.AddChild<ES_FashionShow, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_fashionshow;

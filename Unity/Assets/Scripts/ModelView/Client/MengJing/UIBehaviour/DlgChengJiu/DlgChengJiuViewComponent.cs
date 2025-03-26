@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ChengJiuReward.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_chengjiureward = this.AddChild<ES_ChengJiuReward, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_chengjiureward;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ChengJiuShow.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_chengjiushow = this.AddChild<ES_ChengJiuShow, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_chengjiushow;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_ChengJiuJingling.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_chengjiujingling = this.AddChild<ES_ChengJiuJingling, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_chengjiujingling;
@@ -111,9 +114,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_PetTuJian.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_pettujian = this.AddChild<ES_PetTuJian, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_pettujian;
@@ -130,9 +134,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_ChengJiuPetTuJian.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_ES_ChengJiuPetTuJian = this.AddChild<ES_ChengJiuPetTuJian, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_ES_ChengJiuPetTuJian;

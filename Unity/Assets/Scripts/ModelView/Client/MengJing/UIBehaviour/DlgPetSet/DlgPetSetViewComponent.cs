@@ -71,9 +71,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_PetChallenge.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_petchallenge = this.AddChild<ES_PetChallenge, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_petchallenge;
@@ -90,9 +91,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_PetMining.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_petmining = this.AddChild<ES_PetMining, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_petmining;

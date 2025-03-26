@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleXiLianShow.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolexilianshow = this.AddChild<ES_RoleXiLianShow, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolexilianshow;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleXiLianLevel.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolexilianlevel = this.AddChild<ES_RoleXiLianLevel, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolexilianlevel;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleXiLianSkill.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolexilianskill = this.AddChild<ES_RoleXiLianSkill, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolexilianskill;
@@ -111,9 +114,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleXiLianTransfer.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolexiliantransfer = this.AddChild<ES_RoleXiLianTransfer, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolexiliantransfer;
@@ -130,9 +134,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleXiLianInherit.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolexilianinherit = this.AddChild<ES_RoleXiLianInherit, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolexilianinherit;

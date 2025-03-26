@@ -88,9 +88,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_FriendList.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_friendlist = this.AddChild<ES_FriendList, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_friendlist;
@@ -107,9 +108,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_FriendApply.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_friendapply = this.AddChild<ES_FriendApply, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_friendapply;
@@ -126,9 +128,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_FriendBlack.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewNodeRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_friendblack = this.AddChild<ES_FriendBlack, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_friendblack;

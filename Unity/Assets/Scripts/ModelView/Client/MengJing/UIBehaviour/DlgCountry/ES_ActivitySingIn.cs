@@ -20,9 +20,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInFree.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_activitySingInFree = this.AddChild<ES_ActivitySingInFree, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_activitySingInFree;
@@ -39,9 +40,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_ActivitySingInVIP.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_PanelRootRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_activitySingInPaid = this.AddChild<ES_ActivitySingInVIP, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_activitySingInPaid;

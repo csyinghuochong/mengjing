@@ -105,9 +105,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WelfareTask.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_welfaretask = this.AddChild<ES_WelfareTask, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_welfaretask;
@@ -124,9 +125,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WelfareDraw.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_welfaredraw = this.AddChild<ES_WelfareDraw, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_welfaredraw;
@@ -143,9 +145,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WelfareInvest.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_welfareinvest = this.AddChild<ES_WelfareInvest, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_welfareinvest;
@@ -162,9 +165,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_WelfareDraw2.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_welfaredraw2 = this.AddChild<ES_WelfareDraw2, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_welfaredraw2;

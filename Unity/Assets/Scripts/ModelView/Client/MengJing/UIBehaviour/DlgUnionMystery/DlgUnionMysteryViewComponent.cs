@@ -74,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionMystery_A.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionmystery_a = this.AddChild<ES_UnionMystery_A, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionmystery_a;
@@ -93,9 +94,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_UnionMystery_B.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_unionmystery_b = this.AddChild<ES_UnionMystery_B, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_unionmystery_b;

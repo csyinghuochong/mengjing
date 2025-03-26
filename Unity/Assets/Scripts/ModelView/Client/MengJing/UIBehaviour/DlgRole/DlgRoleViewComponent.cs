@@ -125,9 +125,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_RoleBag.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolebag = this.AddChild<ES_RoleBag, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolebag;
@@ -145,9 +146,10 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleProperty.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_roleproperty = this.AddChild<ES_RoleProperty, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_roleproperty;
@@ -165,9 +167,10 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleGem.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolegem = this.AddChild<ES_RoleGem, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolegem;
@@ -185,9 +188,10 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleHuiShou.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_rolehuishou;
@@ -205,9 +209,10 @@ namespace ET.Client
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleQiangHua.prefab");
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_roleqianghua;
@@ -225,9 +230,10 @@ namespace ET.Client
 			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>()
 					        .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_RoleZodiac.prefab");
 			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-			        go.SetActive(false);
+			        go.SetActive(true);
 			        this.AssetList.Add(path);
 			        this.m_es_roleZodiac = this.AddChild<ES_RoleZodiac, Transform>(go.transform);
+			        go.SetActive(false);
 		        }
 
 		        return this.m_es_roleZodiac;

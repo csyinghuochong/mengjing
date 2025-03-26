@@ -54,9 +54,10 @@ namespace ET.Client
 				{
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_equipmentincreaseshow = this.AddChild<ES_EquipmentIncreaseShow, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_equipmentincreaseshow;
@@ -73,9 +74,10 @@ namespace ET.Client
 				{
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_equipmentincreasetransfer = this.AddChild<ES_EquipmentIncreaseTransfer, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_equipmentincreasetransfer;
