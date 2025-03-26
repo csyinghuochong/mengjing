@@ -114,8 +114,10 @@ namespace ET.Client
         
         public static void OnBtn_ResetButton(this ES_SkillMake self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置,请谨慎选择", () =>
+            PopupTipHelp.OpenPopupTip(self.Root(), "遗忘技能", "遗忘后将可以重新学习其他的生活技能，之前学习的所有技能将重置,请谨慎选择", async () =>
             {
+                await SkillNetHelper.MakeReset(self.Root(), self.Plan == -1 ? 1 : self.Plan);
+                
                 self.EG_RightRectTransform.gameObject.SetActive(false);
                 self.EG_LeftRectTransform.gameObject.SetActive(false);
                 self.EG_SelectRectTransform.gameObject.SetActive(true);

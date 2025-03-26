@@ -3648,6 +3648,21 @@ message M2C_MakeSelectResponse // ILocationResponse
 	repeated int MakeList = 1;
 }
 
+//ResponseType M2C_MakeResetResponse
+message C2M_MakeResetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Plan = 1;			//1第一套方案 2第二套方案
+}
+
+message M2C_MakeResetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType M2C_MakeEquipResponse
 message C2M_MakeEquipRequest // ILocationRequest
 {

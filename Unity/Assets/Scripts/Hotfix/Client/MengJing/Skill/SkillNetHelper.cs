@@ -129,6 +129,16 @@ namespace ET.Client
 
             return response.Error;
         }
+        
+        public static async ETTask<int> MakeReset(Scene root, int plan)
+        {
+            C2M_MakeResetRequest request = C2M_MakeResetRequest.Create();
+            request.Plan = plan;
+
+            M2C_MakeResetResponse response = (M2C_MakeResetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
 
         public static async ETTask<int> MakeEquip(Scene root, long bagInfoID, int makeId, int plan)
         {
