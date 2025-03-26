@@ -37,10 +37,12 @@ namespace ET.Client
 
 		private static void UpdateActiveNumber(this ES_PetEcho self)
 		{
-			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+			//PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+			SkillSetComponentC skillSetComponentC = self.Root().GetComponent<SkillSetComponentC>();
+			int activeNumber = skillSetComponentC.GetPetEchoSkillList().Count;
 			using (zstring.Block())
 			{
-				self.E_Text_AttributeText.text = zstring.Format("激活({0}/{1})", petComponentC.PetEchoSkillList.Count, ConfigData.PetEchoSkill.Count);
+				self.E_Text_AttributeText.text = zstring.Format("激活({0}/{1})", activeNumber, ConfigData.PetEchoSkill.Count);
 			}
 		}
 
@@ -91,6 +93,12 @@ namespace ET.Client
             }
 		}
 
+		private static void OnPetEchoSkillItemsRefresh(this ES_PetEcho self, Transform transform, int index)
+		{
+			Scroll_Item_PetEchoSkillItem scrollItemPetListItem = self.ScrollItemPetEchoSkillItems[index].BindTrans(transform);
+			scrollItemPetListItem.OnInitData(ConfigData.PetEchoSkill[index]);
+		}
+        
 		private static void OnClickPetEchoItemHandler(this ES_PetEcho self, int index)
 		{
 			self.Index = index;
@@ -179,11 +187,6 @@ namespace ET.Client
 	        }
         }
 
-        private static void OnPetEchoSkillItemsRefresh(this ES_PetEcho self, Transform transform, int index)
-        {
-            Scroll_Item_PetEchoSkillItem scrollItemPetListItem = self.ScrollItemPetEchoSkillItems[index].BindTrans(transform);
-        }
-
         [EntitySystem]
 		private static void Destroy(this ES_PetEcho self)
 		{
@@ -203,13 +206,13 @@ namespace ET.Client
 		}
 		private static void UpdatePetEchoItemList(this ES_PetEcho self)
 		{
-			self.AddUIScrollItems(ref self.ScrollItemPetEchoSkillItems, ConfigData.PetEchoSkill.Count);
-			self.E_PetEchoSkillItemsLoopVerticalScrollRect.SetVisible(true, ConfigData.PetEchoSkill.Count);
+			
 		}
 		
 		private static void InitPetEchoSkillItemList(this ES_PetEcho self)
 		{
-			
+			self.AddUIScrollItems(ref self.ScrollItemPetEchoSkillItems, ConfigData.PetEchoSkill.Count);
+			self.E_PetEchoSkillItemsLoopVerticalScrollRect.SetVisible(true, ConfigData.PetEchoSkill.Count);
 		}
 		
 		private static void UpdatePetEchoSkillItemList(this ES_PetEcho self)

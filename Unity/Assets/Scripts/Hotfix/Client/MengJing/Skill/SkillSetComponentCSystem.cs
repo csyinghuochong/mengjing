@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -338,6 +339,21 @@ namespace ET.Client
             return false;
         }
 
+        public static List<int> GetPetEchoSkillList(this SkillSetComponentC self)
+        {
+            List<int> echoskills = new List<int>();
+            for (int i = 0; i < self.SkillList.Count; i++)
+            {
+                int skilid  = self.SkillList[i].SkillID;
+                if ( ConfigData.PetEchoSkill.Any(p=>p.Value == skilid) )
+                {
+                    echoskills.Add(skilid);
+                }
+            }
+
+            return echoskills;
+        }
+        
         public static SkillPro GetBySkillID(this SkillSetComponentC self, int skillid)
         {
             for (int i = 0; i < self.SkillList.Count; i++)
@@ -435,7 +451,7 @@ namespace ET.Client
             }
             return 0;
         }
-
+        
         //和GetSkillRoleProLists方法一致 主要是获取类型为8的被动技能,8的被动技能不加战斗力
         public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponentC self)
         {
