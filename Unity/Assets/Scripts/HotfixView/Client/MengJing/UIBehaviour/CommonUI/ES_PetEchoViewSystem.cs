@@ -47,16 +47,20 @@ namespace ET.Client
 			int nextCombat = 0;
 			for (int i = 0;  i < ConfigData.PetEchoSkill.Count; i++)
 			{
-				if (ConfigData.PetEchoSkill[i].KeyId > nextCombat)
+				if (ConfigData.PetEchoSkill[i].KeyId > curCombat)
 				{
 					nextCombat = ConfigData.PetEchoSkill[i].KeyId;
+					break;
 				}
 			}
 			
 			if(nextCombat > 0)
 			{
 				self.E_NextNeedCombatText.gameObject.SetActive(true);
-				self.E_NextNeedCombatText.text = zstring.Format("距离激活下一级战力还差{0}点", nextCombat - curCombat);
+				using (zstring.Block())
+				{
+					self.E_NextNeedCombatText.text = zstring.Format("距离激活下一级战力还差{0}点", nextCombat - curCombat);
+				}
 			}
 			else
 			{

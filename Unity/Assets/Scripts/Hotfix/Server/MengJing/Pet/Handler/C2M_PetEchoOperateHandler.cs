@@ -5,7 +5,6 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetEchoOperateRequest request, M2C_PetEchoOperateResponse response)
         {
-
             PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
             
             switch (request.OperateType)
