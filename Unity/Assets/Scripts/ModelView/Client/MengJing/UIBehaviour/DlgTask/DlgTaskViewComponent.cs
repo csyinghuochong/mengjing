@@ -54,9 +54,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_TaskDetail.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_taskdetail = this.AddChild<ES_TaskDetail, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_taskdetail;
@@ -73,9 +74,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_TaskGrowUp.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_taskgrowup = this.AddChild<ES_TaskGrowUp, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_taskgrowup;
@@ -92,9 +94,10 @@ namespace ET.Client
 					string path = "Assets/Bundles/UI/Common/ES_TaskShop.prefab";
 					GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
 					GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-					go.SetActive(false);
+					go.SetActive(true);
 					this.AssetList.Add(path);
 					this.m_es_taskshop = this.AddChild<ES_TaskShop, Transform>(go.transform);
+					go.SetActive(false);
 				}
 
 				return this.m_es_taskshop;

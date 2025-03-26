@@ -54,9 +54,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SeasonHome.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_seasonhome = this.AddChild<ES_SeasonHome, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_seasonhome;
@@ -73,9 +74,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SeasonTask.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_seasontask = this.AddChild<ES_SeasonTask, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_seasontask;
@@ -92,9 +94,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SeasonJingHe.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_seasonjinghe = this.AddChild<ES_SeasonJingHe, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_seasonjinghe;
@@ -111,9 +114,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SeasonStore.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_seasonstore = this.AddChild<ES_SeasonStore, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_seasonstore;
@@ -130,9 +134,10 @@ namespace ET.Client
 	                string path = "Assets/Bundles/UI/Common/ES_SeasonTower.prefab";
                     GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
-                    go.SetActive(false);
+                    go.SetActive(true);
                     this.AssetList.Add(path);
                     this.m_es_seasontower = this.AddChild<ES_SeasonTower, Transform>(go.transform);
+                    go.SetActive(false);
                 }
 
                 return this.m_es_seasontower;
