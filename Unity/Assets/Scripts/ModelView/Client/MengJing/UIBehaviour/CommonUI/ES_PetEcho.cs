@@ -8,7 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetEcho : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
-		
+
+        public int Index;
 		public Dictionary<int, EntityRef<Scroll_Item_PetEchoItem>> ScrollItemPetEchoItems;
 		public Dictionary<int, EntityRef<Scroll_Item_PetEchoSkillItem>> ScrollItemPetEchoSkillItems;
 		
@@ -142,7 +143,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenButton == null )
      			{
-		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonOpen");
+		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject, "Right/EG_NoOpen/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenButton;
      		}
@@ -159,14 +160,14 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenImage == null )
      			{
-		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonOpen");
+		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "Right/EG_NoOpen/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenImage;
      		}
      	}
 
-		public ES_RewardList ES_RewardList
-     	{
+		public ES_CostList ES_CostList
+        {
      		get
      		{
      			if (this.uiTransform == null)
@@ -174,14 +175,14 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			ES_RewardList es = this.m_es_rewardlist;
+                ES_CostList es = this.m_es_costlist;
      			if( es == null )
 
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject, "Right/EG_NoOpen/ES_CostList");
+		    	   this.m_es_costlist = this.AddChild<ES_CostList, Transform>(subTrans);
      			}
-     			return this.m_es_rewardlist;
+     			return this.m_es_costlist;
      		}
      	}
 
@@ -216,7 +217,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_AttributeText == null )
      			{
-		    		this.m_E_Text_AttributeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Attribute");
+		    		this.m_E_Text_AttributeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject, "Right/EG_NoOpen/E_Text_Attribute");
      			}
      			return this.m_E_Text_AttributeText;
      		}
@@ -233,7 +234,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NeedLvText == null )
      			{
-		    		this.m_E_Text_NeedLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_NeedLv");
+		    		this.m_E_Text_NeedLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject, "Right/EG_NoOpen/E_Text_NeedLv");
      			}
      			return this.m_E_Text_NeedLvText;
      		}
@@ -250,7 +251,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NameText == null )
      			{
-		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Name");
+		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject, "Right/EG_NoOpen/E_Text_Name");
      			}
      			return this.m_E_Text_NameText;
      		}
@@ -290,6 +291,142 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.Transform EG_NoOpen
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_NoOpen == null )
+				{
+					this.m_EG_NoOpen = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Right/EG_NoOpen");
+				}
+				return this.m_EG_NoOpen;
+			}
+		}
+
+		public UnityEngine.Transform EG_Opened
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_Opened == null )
+				{
+					this.m_EG_Opened = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Right/EG_Opened");
+				}
+				return this.m_EG_Opened;
+			}
+		}
+		
+		public UnityEngine.UI.Button E_ButtonOpen
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonOpen == null )
+				{
+					this.m_E_ButtonOpen = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_NoOpen/E_ButtonOpen");
+				}
+				return this.m_E_ButtonOpen;
+			}
+		}
+
+		public UnityEngine.UI.Button E_ButtonChange
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonChange == null )
+				{
+					this.m_E_ButtonChange = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_Opened/E_ButtonChange");
+				}
+				return this.m_E_ButtonChange;
+			}
+		}
+		
+		public UnityEngine.UI.Text E_Text_Name_Opened
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Name_Opened == null )
+				{
+					this.m_E_Text_Name_Opened = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_Opened/E_Text_Name_Opened");
+				}
+				return this.m_E_Text_Name_Opened;
+			}
+		}
+
+		public UnityEngine.UI.Text E_Text_Name_Pet
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Name_Pet == null )
+				{
+					this.m_E_Text_Name_Pet = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_Opened/E_Text_Name_Pet");
+				}
+				return this.m_E_Text_Name_Pet;
+			}
+		}
+
+		public UnityEngine.UI.Text E_Text_Name_Pet_Comabt
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_Name_Pet_Comabt == null )
+				{
+					this.m_E_Text_Name_Pet_Comabt = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_Opened/E_Text_Name_Pet_Comabt");
+				}
+				return this.m_E_Text_Name_Pet_Comabt;
+			}
+		}
+
+		public UnityEngine.UI.Text E_Text_Attribute_Opened
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if( this.m_E_Text_Attribute_Opened == null )
+                {
+                    this.m_E_Text_Attribute_Opened = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_Opened/E_Text_Attribute_Opened");
+                }
+                return this.m_E_Text_Attribute_Opened;
+            }
+        }
+		
 		public UnityEngine.UI.Text E_ActiveNumberText
      	{
      		get
@@ -330,7 +467,7 @@ namespace ET.Client
 			this.m_E_TotalCombat_2Text = null;
 			this.m_E_ButtonOpenButton = null;
 			this.m_E_ButtonOpenImage = null;
-			this.m_es_rewardlist = null;
+			this.m_es_costlist = null;
 			this.m_es_modelshow = null;
 			this.m_E_Text_AttributeText = null;
 			this.m_E_Text_NeedLvText = null;
@@ -338,6 +475,14 @@ namespace ET.Client
 			this.m_E_ButtonActiveButton = null;
 			this.m_E_ButtonActiveImage = null;
 			this.m_E_ActiveNumberText = null;
+			this.m_EG_NoOpen = null;
+			this.m_EG_Opened = null;
+			this.m_E_ButtonOpen = null;
+			this.m_E_ButtonChange = null;
+			this. m_E_Text_Name_Opened = null;
+			this. m_E_Text_Name_Pet = null;
+			this. m_E_Text_Name_Pet_Comabt = null;
+			this. m_E_Text_Attribute_Opened = null;
 			this.uiTransform = null;
 		}
 
@@ -350,7 +495,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TotalCombat_2Text = null;
 		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
 		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private EntityRef<ES_CostList> m_es_costlist = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_Text_AttributeText = null;
 		private UnityEngine.UI.Text m_E_Text_NeedLvText = null;
@@ -358,6 +503,14 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ButtonActiveButton = null;
 		private UnityEngine.UI.Image m_E_ButtonActiveImage = null;
 		private UnityEngine.UI.Text m_E_ActiveNumberText = null;
+		private UnityEngine.Transform m_EG_NoOpen = null;
+		private UnityEngine.Transform m_EG_Opened = null;
+		private UnityEngine.UI.Button m_E_ButtonOpen = null;
+		private UnityEngine.UI.Button m_E_ButtonChange = null;
+		private UnityEngine.UI.Text m_E_Text_Name_Opened = null;
+		private UnityEngine.UI.Text m_E_Text_Name_Pet = null;
+		private UnityEngine.UI.Text m_E_Text_Name_Pet_Comabt = null;
+		private UnityEngine.UI.Text m_E_Text_Attribute_Opened = null;
 		public Transform uiTransform = null;
 	}
 }

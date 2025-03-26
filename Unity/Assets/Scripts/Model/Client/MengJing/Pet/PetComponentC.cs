@@ -12,6 +12,13 @@ namespace ET.Client
         public List<long> TeamPetList { get; set; } = new(); //宠物天梯
         public List<long> PetFormations { get; set; } = new(); //宠物副本
         public List<long> PetShouHuList { get; set; } = new(); //守护列表（0-14宠物id  15/16/17矿场ID）
+
+
+        /// <summary>
+        /// key = 位置  value=宠物id
+        /// </summary>
+        public List<KeyValuePairInt> PetEchoList { get; set; } = new(); //宠物共鸣列表
+
         public List<long> PetMingList { get; set; } = new(); //矿场队伍(15个宠物）
         public List<long> PetMingPosition { get; set; } = new(); //矿场宠物位置(27个位置)
 

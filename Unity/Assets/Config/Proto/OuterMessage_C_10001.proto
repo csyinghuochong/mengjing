@@ -2480,12 +2480,6 @@ message JiaYuanPet
 	int32 Position = 11;
 }
 
-//ResponseType M2C_RolePetList
-message C2M_RolePetList // ILocationRequest
-{
-	int32 RpcId = 90;
-}
-
 //宠物栏
 message PetBarInfo
 {
@@ -2493,6 +2487,13 @@ message PetBarInfo
 	int32 PetBarId = 2;  								//PetBarConfig.Id
 	int32 AppearSkill = 3;              //出场技，切换到宠物的时候释放。
 	repeated int32 ActiveSkill = 4;     //有四个，目前只需要做第一个。
+}
+
+
+//ResponseType M2C_RolePetList
+message C2M_RolePetList // ILocationRequest
+{
+	int32 RpcId = 90;
 }
 
 message M2C_RolePetList // ILocationResponse
@@ -2523,6 +2524,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated PetMeleeFubenInfo PetMeleeFubenInfos = 22;
 	repeated int PetMeleeRewardIds = 23;
 	repeated int PetMeleeFubeRewardIds = 24;
+	repeated KeyValuePairInt PetEchoList = 25;
 }
 
 
@@ -3048,6 +3050,26 @@ message M2C_PetShouHuResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 	repeated int64 PetShouHuList = 1;
+}
+
+//ResponseType M2C_PetEchoOperateResponse
+//宠物共鸣
+message C2M_PetEchoOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	int32 Position = 1;
+	int32 OperateType = 2;
+	int64 ParamId = 3;   //操作类型1 开启格子 2 更换宠物
+}
+
+message M2C_PetEchoOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated KeyValuePairInt PetEchoList = 1;
 }
 
 //ResponseType M2C_PetTakeOutBag

@@ -33,6 +33,7 @@
             response.PetMeleeFubenInfos.AddRange(petComponent.PetMeleeFubenInfos);
             response.PetMeleeRewardIds.AddRange(petComponent.PetMeleeRewardIds);
             response.PetMeleeFubeRewardIds.AddRange(petComponent.PetMeleeFubeRewardIds);
+            response.PetEchoList.AddRange(petComponent.PetEchoList);
             
             await ETTask.CompletedTask;
         }

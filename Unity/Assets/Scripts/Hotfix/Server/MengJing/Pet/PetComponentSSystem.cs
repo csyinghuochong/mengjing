@@ -1347,9 +1347,11 @@ namespace ET.Server
                 rolePetInfo.Ks.RemoveAt(pingfenIndex);
                 rolePetInfo.Vs.RemoveAt(pingfenIndex);
             }
-            rolePetInfo.Ks.Add((int)NumericType.PetPinFen);
-            rolePetInfo.Vs.Add(PetHelper.PetPingJia(rolePetInfo));
 
+            int pingfen = PetHelper.PetPingJia(rolePetInfo);
+            rolePetInfo.Ks.Add((int)NumericType.PetPinFen);
+            rolePetInfo.Vs.Add(pingfen);
+            rolePetInfo.PetPingFen = PetHelper.PetPingJia(rolePetInfo);
             PetHelper.UpdatePetNumeric( rolePetInfo );
         }
 

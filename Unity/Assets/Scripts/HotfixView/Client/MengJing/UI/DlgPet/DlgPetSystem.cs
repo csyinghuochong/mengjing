@@ -103,6 +103,10 @@
             {
                 // self.UIPageView.UISubViewList[(int)PetPageEnum.PetUpStar].GetComponent<UIPetUpStarComponent>().PetItemSelect(rolePetInfo);
             }
+            else if (paramsList[0] == PetOperationType.PetEcho.ToString())
+            {
+                self.View.ES_PetEcho.OnPetItemSelect(rolePetInfo).Coroutine();
+            }
         }
 
         public static void OnHeChengReturn(this DlgPet self)

@@ -1,12 +1,18 @@
-﻿
+﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
 	public  class Scroll_Item_PetEchoItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetEchoItem> 
 	{
-		public long DataId {get;set;}
+
+        public int Index;
+        public Action<int> ClickPetEchoHandler;
+
+        public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
 		{
@@ -43,7 +49,55 @@ namespace ET.Client
      		}
      	}
 
-		public ES_ModelShow ES_ModelShow
+        public UnityEngine.UI.Button E_ImageButtonButton
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.isCacheNode)
+                {
+                    if (this.m_E_ImageButtonButton == null)
+                    {
+                        this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject, "E_ImageButton");
+                    }
+                    return this.m_E_ImageButtonButton;
+                }
+                else
+                {
+                    return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject, "E_ImageButton");
+                }
+            }
+        }
+ 
+        public UnityEngine.UI.Image E_ImageSelectImage
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if (this.isCacheNode)
+                {
+                    if (this.m_E_ImageSelectImage == null)
+                    {
+                        this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_ImageSelect");
+                    }
+                    return this.m_E_ImageSelectImage;
+                }
+                else
+                {
+                    return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_ImageSelect");
+                }
+            }
+        }
+
+        public ES_ModelShow ES_ModelShow
      	{
      		get
      		{
@@ -162,7 +216,9 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_ImageButtonImage = null;
-			this.m_es_modelshow = null;
+            this.m_E_ImageButtonButton = null;
+            this.m_E_ImageSelectImage = null;
+            this.m_es_modelshow = null;
 			this.m_E_Text_NameText = null;
 			this.m_E_Text_ComabtText = null;
 			this.m_E_Text_AttriText = null;
@@ -171,7 +227,9 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private EntityRef<ES_ModelShow> m_es_modelshow = null;
+        private UnityEngine.UI.Button m_E_ImageButtonButton = null;
+        private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+        private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_Text_NameText = null;
 		private UnityEngine.UI.Text m_E_Text_ComabtText = null;
 		private UnityEngine.UI.Text m_E_Text_AttriText = null;

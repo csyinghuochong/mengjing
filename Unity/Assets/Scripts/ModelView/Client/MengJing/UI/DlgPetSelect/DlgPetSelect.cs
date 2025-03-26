@@ -11,6 +11,7 @@ namespace ET.Client
         RankPet_Team = 5,
         XianJi = 6,
         JiaYuan_Walk = 7,
+        PetEcho = 8,
     }
 
     [ComponentOf(typeof (UIBaseWindow))]
