@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -36,30 +37,24 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_SeasonStoreItem self, int id)
         {
-            self.E_BuyBtnButton.AddListenerAsync(self.OnBuyBtn);
-
             StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(id);
-            self.StoreSellConfigId = id;
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID);
+            self.StoreSellConfigId = storeSellConfig.Id;
+            self.E_ButtonBuyButton.AddListener(() => { self.OnBuyBtn().Coroutine(); });
 
-            ItemInfo bagInfo = new ItemInfo();
-            bagInfo.ItemID = storeSellConfig.SellItemID;
-            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();
+
+            self.ES_CommonItem.UseTextColor = true;
+            self.ES_CommonItem.UpdateItem(new() { ItemID = storeSellConfig.SellItemID }, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-            self.ES_CommonItem.HideItemName();
-            using (zstring.Block())
-            {
-                self.E_NameTextText.text = zstring.Format("<color=\"#{0}\">{1}</color>", CommonHelp.QualityReturnColor(itemConfig.ItemQuality),
-                    itemConfig.ItemName);
-            }
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID).ItemQuality);
 
-            self.E_ValueTextText.text = storeSellConfig.SellValue.ToString();
-
-            ItemConfig sellTypeItemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellType);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, sellTypeItemConfig.Icon);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellType);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
-            self.E_GoldImgImage.sprite = sp;
+            self.E_Image_goldImage.sprite = sp;
         }
     }
 }
