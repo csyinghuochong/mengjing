@@ -51,7 +51,7 @@ namespace ET.Client
 		
 		private static void InitPetEchoSkillItemList(this ES_PetEcho self)
 		{
-        			
+			
 		}
 		
 		private static void UpdatePetEchoSkillItemList(this ES_PetEcho self)

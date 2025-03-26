@@ -44,6 +44,7 @@
     [FriendOf(typeof(ES_PetHeCheng))]
     [FriendOf(typeof(ES_PetXiLian))]
     [FriendOf(typeof(ES_PetShouHu))]
+    [FriendOf(typeof(ES_PetEcho))]
     [FriendOf(typeof(DlgPet))]
     public static class DlgPetSystem
     {
