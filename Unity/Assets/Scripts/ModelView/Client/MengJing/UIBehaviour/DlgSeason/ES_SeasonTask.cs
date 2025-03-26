@@ -66,6 +66,40 @@ namespace ET.Client
      			return this.m_E_SeasonTaskItemsLoopVerticalScrollRect;
      		}
      	}
+		
+		public Image E_Img_LodingValue
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Img_LodingValue == null )
+				{
+					this.m_E_Img_LodingValue = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue");
+				}
+				return this.m_E_Img_LodingValue;
+			}
+		}
+		
+		public Image E_Img_LodingValue_22
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Img_LodingValue_22 == null )
+				{
+					this.m_E_Img_LodingValue_22 = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_LodingValue_22");
+				}
+				return this.m_E_Img_LodingValue_22;
+			}
+		}
 
 		public Text E_TaskNameTextText
      	{
@@ -239,6 +273,8 @@ namespace ET.Client
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
 			this.m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
+			this.m_E_Img_LodingValue = null;
+			this.m_E_Img_LodingValue_22 = null;
 			this.m_E_TaskNameTextText = null;
 			this.m_E_ProgressTextText = null;
 			this.m_E_TaskDescTextText = null;
@@ -254,6 +290,8 @@ namespace ET.Client
 		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private LoopVerticalScrollRect m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
 		private LoopVerticalScrollRect m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
+		private Image m_E_Img_LodingValue = null;
+		private Image m_E_Img_LodingValue_22 = null;
 		private Text m_E_TaskNameTextText = null;
 		private Text m_E_ProgressTextText = null;
 		private Text m_E_TaskDescTextText = null;

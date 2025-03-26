@@ -38,69 +38,8 @@ namespace ET.Client
         private static void OnSeasonTaskItemsRefresh(this ES_SeasonTask self, Transform transform, int index)
         {
             Scroll_Item_SeasonTaskItem scrollItemSeasonTaskItem = self.ScrollItemSeasonTaskItems[index].BindTrans(transform);
-            int i = index % 4;
-            Vector3 posi = Vector3.zero;
-            int dre = 1;
-            if (i == 0)
-            {
-                posi = new Vector3(-250, 0, 0);
-                dre = 1;
-            }
-            else if (i == 1)
-            {
-                posi = new Vector3(0, 0, 0);
-                dre = 1;
-            }
-            else if (i == 2)
-            {
-                posi = new Vector3(250, 0, 0);
-                dre = -1;
-            }
-            else if (i == 3)
-            {
-                posi = new Vector3(0, 0, 0);
-                dre = -1;
-            }
-
-            scrollItemSeasonTaskItem.EG_ItemRectTransform.localPosition = posi;
-            if (dre == 1)
-            {
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
-            }
-            else
-            {
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
-            }
-
             scrollItemSeasonTaskItem.OnUpdateData(self.ShowTaskIds[index]);
-            scrollItemSeasonTaskItem.E_SeasonIconImage.material = null;
-            scrollItemSeasonTaskItem.E_Img_lineImage.gameObject.SetActive(true);
-            scrollItemSeasonTaskItem.E_Img_lineDiImage.gameObject.SetActive(true);
-
-            if (self.ShowTaskIds[index] > self.TaskPro.taskID)
-            {
-                scrollItemSeasonTaskItem.E_SeasonIconImage.material = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-                scrollItemSeasonTaskItem.E_Img_lineImage.gameObject.SetActive(false);
-            }
-
-            if (self.ShowTaskIds[index] == self.TaskPro.taskID)
-            {
-                scrollItemSeasonTaskItem.E_Img_lineImage.gameObject.SetActive(false);
-            }
-
-            // 尾巴隐藏
-            if (self.ShowTaskIds.Count > 0 && index == self.ShowTaskIds.Count - 1)
-            {
-                scrollItemSeasonTaskItem.E_Img_lineImage.gameObject.SetActive(false);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.gameObject.SetActive(false);
-            }
+            scrollItemSeasonTaskItem.SetCurId(self.TaskPro.taskID);
         }
 
         private static void OnSeasonDayTaskItemsRefresh(this ES_SeasonTask self, Transform transform, int index)
@@ -121,9 +60,8 @@ namespace ET.Client
 
                 //赛季任务。  主任务面板要屏蔽赛季任务
                 //服务器只记录当前的赛季任务。 小于此任务id的为已完成任务, 客户端需要显示所有的赛季任务
-                // self.CompeletTaskId =
-                //         (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SeasonTask];
-                self.CompeletTaskId = 81000006;
+                // self.CompeletTaskId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SeasonTask);
+                self.CompeletTaskId = 81000006;// 测试
 
                 List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
                 for (int i = 0; i < taskPros.Count; i++)
@@ -165,9 +103,9 @@ namespace ET.Client
                 self.UpdateInfo(self.TaskPro.taskID);
 
                 // 滑动到对应位置
-                Vector3 vector3 = self.E_SeasonTaskItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
-                vector3.y = index * 160;
-                self.E_SeasonTaskItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
+                // Vector3 vector3 = self.E_SeasonTaskItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
+                // vector3.y = index * 160;
+                // self.E_SeasonTaskItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
             }
             else
             {
@@ -177,12 +115,7 @@ namespace ET.Client
                 self.E_SeasonDayTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
                 // 赛季每日任务
-                // List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().TaskCountryList;
-
-                // 测试数据
-                List<TaskPro> taskPros = new();
-                // taskPros.Add(new TaskPro() { taskID = 600101, taskStatus = (int)TaskStatuEnum.Accepted });
-                // taskPros.Add(new TaskPro() { taskID = 600102, taskStatus = (int)TaskStatuEnum.Accepted });
+                List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
 
                 taskPros.Sort(delegate(TaskPro a, TaskPro b)
                 {
@@ -202,7 +135,7 @@ namespace ET.Client
                 for (int i = 0; i < taskPros.Count; i++)
                 {
                     TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
-                    if (taskConfig.TaskType != TaskTypeEnum.Season)
+                    if (taskConfig.TaskType != TaskTypeEnum.SeasonDaily)
                     {
                         continue;
                     }
@@ -251,15 +184,16 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "1/1";
+                        self.E_Img_LodingValue_22.fillAmount = 1;   
                     }
                 }
                 else
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;
                     }
                 }
 
@@ -274,7 +208,8 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "0/1";
+                        self.E_Img_LodingValue_22.fillAmount = 0f;  
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -288,7 +223,8 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "1/1";
+                            self.E_Img_LodingValue_22.fillAmount = 1f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(false);
@@ -298,7 +234,8 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "0/1";
+                            self.E_Img_LodingValue_22.fillAmount = 0f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -309,8 +246,8 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(true);
@@ -321,10 +258,19 @@ namespace ET.Client
             }
 
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
-            if (!CommonHelp.IfNull(taskConfig.RewardItem))
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            if (taskConfig.TaskCoin != 0)
             {
-                self.ES_RewardList.Refresh(taskConfig.RewardItem, 0.8f);
+                rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
             }
+
+            if (taskConfig.TaskExp != 0)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
+            }
+
+            rewardItems.AddRange(TaskHelper.GetTaskRewards(taskConfig.Id));
+            self.ES_RewardList.Refresh(rewardItems);
         }
 
         /// <summary>
@@ -347,15 +293,16 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "1/1";
+                        self.E_Img_LodingValue_22.fillAmount = 1;   
                     }
                 }
                 else
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",taskConfig.TargetValue[0], taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = taskConfig.TargetValue[0] * 1f/taskConfig.TargetValue[0] ;   
                     }
                 }
 
@@ -370,7 +317,8 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                        self.E_ProgressTextText.text = "0/1";
+                        self.E_Img_LodingValue_22.fillAmount = 0f;
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(false);
@@ -384,7 +332,8 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 1/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "1/1";
+                            self.E_Img_LodingValue_22.fillAmount = 1f;   
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -394,7 +343,8 @@ namespace ET.Client
                     {
                         using (zstring.Block())
                         {
-                            self.E_ProgressTextText.text = zstring.Format("{0}: 0/1", LanguageComponent.Instance.LoadLocalization("当前进度值"));
+                            self.E_ProgressTextText.text = "0/1";
+                            self.E_Img_LodingValue_22.fillAmount = 0f;
                         }
 
                         self.E_GetBtnButton.gameObject.SetActive(true);
@@ -405,8 +355,8 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        self.E_ProgressTextText.text = zstring.Format("{0}: {1}/{2}", LanguageComponent.Instance.LoadLocalization("当前进度值"),
-                            self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_ProgressTextText.text = zstring.Format("{0}/{1}",self.TaskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+                        self.E_Img_LodingValue_22.fillAmount = self.TaskPro.taskTargetNum_1 * 1f/taskConfig.TargetValue[0];   
                     }
 
                     self.E_GetBtnButton.gameObject.SetActive(true);
@@ -436,7 +386,7 @@ namespace ET.Client
             }
 
             rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
-            self.ES_RewardList.Refresh(rewardItems, 0.8f);
+            self.ES_RewardList.Refresh(rewardItems);
 
             if (self.ScrollItemSeasonTaskItems != null)
             {
