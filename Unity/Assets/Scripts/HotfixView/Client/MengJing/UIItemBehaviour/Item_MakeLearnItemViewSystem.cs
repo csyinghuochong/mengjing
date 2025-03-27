@@ -33,7 +33,7 @@ namespace ET.Client
             self.ClickHandler = action;
         }
 
-        public static void OnUpdateUI(this Scroll_Item_MakeLearnItem self, int makeid)
+        public static void OnUpdateUI(this Scroll_Item_MakeLearnItem self, int makeid, int plan)
         {
             self.E_ImageButtonButton.AddListener(self.OnImageButton);
             self.E_ImageSelectImage.gameObject.SetActive(false);
@@ -45,6 +45,15 @@ namespace ET.Client
                 self.E_Label_LearnLvText.text = zstring.Format("学习等级:{0}级", equipMakeConfig.LearnLv);
             }
 
+            //显示需要熟练度
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // int shulianduNumeric = plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
+            // int nowShuLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
+            using (zstring.Block())
+            {
+                self.E_Label_NeedProficiencyValueText.text = zstring.Format("熟练度:{0}", equipMakeConfig.NeedProficiencyValue);
+            }
+            
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
             self.E_Label_ItemNameText.text = itemConfig.ItemName;
             self.E_Label_ItemNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);

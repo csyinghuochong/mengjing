@@ -64,7 +64,7 @@ namespace ET.Client
 
             Scroll_Item_MakeLearnItem scrollItemMakeLearnItem = self.ScrollItemMakeLearnItems[index].BindTrans(transform);
             scrollItemMakeLearnItem.SetClickHandler((int itemid) => { self.OnSelectLearnItem(itemid); });
-            scrollItemMakeLearnItem.OnUpdateUI(self.ShowMakeLearns[index]);
+            scrollItemMakeLearnItem.OnUpdateUI(self.ShowMakeLearns[index], self.Plan);
         }
 
         public static void OnBtn_Plan(this DlgMakeLearn self, int plan)
@@ -245,6 +245,7 @@ namespace ET.Client
             bagInfo.ItemNum = 1;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.View.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
             //显示需要熟练度
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
