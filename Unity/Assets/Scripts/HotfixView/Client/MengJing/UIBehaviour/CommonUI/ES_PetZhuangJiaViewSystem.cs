@@ -122,11 +122,11 @@ namespace ET.Client
                     {
                         float fvalue = float.Parse(attributeInfo[1]) * 100;
                         string svalue = fvalue.ToString("0.#####");
-                        attributeStr = $"{ItemViewHelp.GetAttributeName(numericType)}+{svalue}% ";
+                        attributeStr = $"{ItemViewHelp.GetAttributeName(numericType)}提升{svalue}% ";
                     }
                     else
                     {
-                        attributeStr = $"{ItemViewHelp.GetAttributeName(numericType)}+{int.Parse(attributeInfo[1])}";
+                        attributeStr = $"{ItemViewHelp.GetAttributeName(numericType)}提升{int.Parse(attributeInfo[1])}点";
                     }
 
                     GameObject go = UnityEngine.Object.Instantiate(self.E_ProText.gameObject, self.EG_ProListRectTransform);

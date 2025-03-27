@@ -45,14 +45,17 @@ namespace ET.Client
         public static void Refresh(this ES_CostList self, string rewarfItems)
         {
             self.ShowBagInfos.Clear();
-            string[] items = rewarfItems.Split('@');
-            foreach (string item in items)
+            if (!CommonHelp.IfNull(rewarfItems))
             {
-                string[] it = item.Split(';');
-                BagInfo bagInfo = BagInfo.Create();
-                bagInfo.ItemID = int.Parse(it[0]);
-                bagInfo.ItemNum = int.Parse(it[1]);
-                self.ShowBagInfos.Add(bagInfo);
+                string[] items = rewarfItems.Split('@');
+                foreach (string item in items)
+                {
+                    string[] it = item.Split(';');
+                    BagInfo bagInfo = BagInfo.Create();
+                    bagInfo.ItemID = int.Parse(it[0]);
+                    bagInfo.ItemNum = int.Parse(it[1]);
+                    self.ShowBagInfos.Add(bagInfo);
+                }
             }
 
             self.AddUIScrollItems(ref self.ScrollItemCommonCostItems, self.ShowBagInfos.Count);

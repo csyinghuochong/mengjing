@@ -203,16 +203,16 @@ namespace ET.Client
             { NumericType.Now_MonsterActReduceDamgeSubPro, new NumericAttribute() { Name = "怪攻减伤", Icon = string.Empty } },
             { NumericType.Now_MonsterMageReduceDamgeSubPro, new NumericAttribute() { Name = "怪技减伤", Icon = string.Empty } },
             
-            { NumericType.Now_PetAllMageAct, new NumericAttribute(){Name = "宠物全体魔法攻击",Icon = string.Empty}},
-            { NumericType.Now_PetAllAct, new NumericAttribute(){Name = "宠物全体攻击",Icon = string.Empty}},
-            { NumericType.Now_PetAllDef, new NumericAttribute(){Name = "宠物全体防御",Icon = string.Empty}},
-            { NumericType.Now_PetAllAdf, new NumericAttribute(){Name = "宠物全体魔防",Icon = string.Empty}},
-            { NumericType.Now_PetAllHp, new NumericAttribute(){Name = "宠物全体生命",Icon = string.Empty}},
-            { NumericType.Now_PetAllMageActPro, new NumericAttribute(){Name = "宠物魔法攻击",Icon = string.Empty}},
-            { NumericType.Now_PetAllActPro, new NumericAttribute(){Name = "宠物攻击",Icon = string.Empty}},
-            { NumericType.Now_PetAllDefPro, new NumericAttribute(){Name = "宠物防御",Icon = string.Empty}},
-            { NumericType.Now_PetAllAdfPro, new NumericAttribute(){Name = "宠物魔防",Icon = string.Empty}},
-            { NumericType.Now_PetAllHpPro, new NumericAttribute(){Name = "宠物生命",Icon = string.Empty}},
+            { NumericType.Now_PetAllMageAct, new NumericAttribute(){Name = "所有宠物魔法攻击",Icon = string.Empty}},//提升x点
+            { NumericType.Now_PetAllAct, new NumericAttribute(){Name = "所有宠物攻击",Icon = string.Empty}},
+            { NumericType.Now_PetAllDef, new NumericAttribute(){Name = "所有宠物防御",Icon = string.Empty}},
+            { NumericType.Now_PetAllAdf, new NumericAttribute(){Name = "所有宠物魔防",Icon = string.Empty}},
+            { NumericType.Now_PetAllHp, new NumericAttribute(){Name = "所有宠物生命",Icon = string.Empty}},
+            { NumericType.Now_PetAllMageActPro, new NumericAttribute(){Name = "所有宠物魔法攻击",Icon = string.Empty}}, //提升x%
+            { NumericType.Now_PetAllActPro, new NumericAttribute(){Name = "所有宠物攻击",Icon = string.Empty}},
+            { NumericType.Now_PetAllDefPro, new NumericAttribute(){Name = "所有宠物防御",Icon = string.Empty}},
+            { NumericType.Now_PetAllAdfPro, new NumericAttribute(){Name = "所有宠物魔防",Icon = string.Empty}},
+            { NumericType.Now_PetAllHpPro, new NumericAttribute(){Name = "所有宠物生命",Icon = string.Empty}},
         };
 
         public struct EquipWeiZhiInfo

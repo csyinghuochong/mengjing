@@ -459,7 +459,7 @@
         public const int Extra_Buff_ActBossAddDamge_Mul = Now_ActBossAddDamge * 100 + 12;            //属性Buff附加乘法
 
 
-        //宠物全体魔法攻击
+        //宠物全体魔法攻击  提升x点
         public const int Now_PetAllMageAct = 1300;         //宠物全体魔法攻击
         public const int Base_PetAllMageAct_Base = Now_PetAllMageAct * 100 + 1;                 //属性累加
         public const int Base_PetAllMageAct_Mul = Now_PetAllMageAct * 100 + 2;                  //属性乘法
@@ -1119,7 +1119,7 @@
         public const int Extra_Buff_PetAllDodge_Add = Now_PetAllDodge * 100 + 11;           //属性Buff附加加法
         public const int Extra_Buff_PetAllDodge_Mul = Now_PetAllDodge * 100 + 12;           //属性Buff附加乘法
 
-        //宠物全体魔法攻击
+        //宠物全体魔法攻击  提升x%
         public const int Now_PetAllMageActPro = 2310;         //宠物全体魔法攻击
         public const int Base_PetAllMageActPro_Base = Now_PetAllMageActPro * 100 + 1;                 //属性累加
         public const int Base_PetAllMageActPro_Mul = Now_PetAllMageActPro * 100 + 2;                  //属性乘法
