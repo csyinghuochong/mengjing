@@ -923,8 +923,6 @@ namespace  ET
         //宠物守护
         public static float GetPetShouHuPro(int mainValue, int fightValue)
         {
-
-            
             mainValue = mainValue - 2000;
             if (mainValue < 2000)
             {
@@ -952,7 +950,7 @@ namespace  ET
 
             float pro = mainPro + otherPro;
 
-            Log.Debug($"mainvalue:{mainValue}  minvalue:{mainValue}  pro:{pro}");
+          
             
             return pro;
         }

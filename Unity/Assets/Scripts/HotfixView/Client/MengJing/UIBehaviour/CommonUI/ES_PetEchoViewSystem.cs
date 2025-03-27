@@ -224,7 +224,7 @@ namespace ET.Client
 	        self.E_Text_Name_Pet.text = rolePetInfo.PetName;
 	       
 	        int fightNum = 0;
-	        for (int i = 0; i < ConfigData.PetEchoAttri.Count; i++)
+	        for (int i = 0; i < petComponent.PetEchoList.Count; i++)
 	        {
 		        RolePetInfo rolePetInfoNow = petComponent.GetPetInfoByID(petComponent.PetEchoList[i].Value);
 		        if (rolePetInfoNow != null)

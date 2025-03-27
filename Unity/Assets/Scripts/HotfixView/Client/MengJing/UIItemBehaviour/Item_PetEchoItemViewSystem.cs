@@ -54,12 +54,12 @@ namespace ET.Client
             }
 
             int fightNum = 0;
-            for (int i = 0; i < ConfigData.PetEchoAttri.Count; i++)
+            for (int i = 0; i < petComponent.PetEchoList.Count; i++)
             {
                 RolePetInfo rolePetInfoNow = petComponent.GetPetInfoByID(petComponent.PetEchoList[i].Value);
                 if (rolePetInfoNow != null)
                 {
-                    fightNum = fightNum + rolePetInfoNow.PetPingFen;
+                    fightNum += rolePetInfoNow.PetPingFen;
                 }
             }
 
