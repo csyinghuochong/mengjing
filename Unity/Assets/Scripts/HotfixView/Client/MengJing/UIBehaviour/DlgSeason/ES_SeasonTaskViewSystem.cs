@@ -60,9 +60,8 @@ namespace ET.Client
 
                 //赛季任务。  主任务面板要屏蔽赛季任务
                 //服务器只记录当前的赛季任务。 小于此任务id的为已完成任务, 客户端需要显示所有的赛季任务
-                // self.CompeletTaskId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SeasonTask);
-                self.CompeletTaskId = 81000006;// 测试
-
+                self.CompeletTaskId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SeasonTask);
+                
                 List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
                 for (int i = 0; i < taskPros.Count; i++)
                 {
