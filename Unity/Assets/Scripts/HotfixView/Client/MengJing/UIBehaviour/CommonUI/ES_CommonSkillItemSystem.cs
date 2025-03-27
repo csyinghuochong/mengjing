@@ -60,7 +60,7 @@ namespace ET.Client
 
         public static void SetImageGray(this ES_CommonSkillItem self, bool gray)
         {
-            CommonViewHelper.SetImageGray( self.Root(),  self.E_ImageIconImage.gameObject, true);
+            CommonViewHelper.SetImageGray( self.Root(),  self.E_ImageIconImage.gameObject, gray);
         }
 
         public static void OnUpdateUI(this ES_CommonSkillItem self, int skillId, string SkillAtlas = ABAtlasTypes.RoleSkillIcon,

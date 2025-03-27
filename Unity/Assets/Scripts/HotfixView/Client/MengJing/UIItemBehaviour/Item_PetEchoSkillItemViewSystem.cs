@@ -27,9 +27,9 @@ namespace ET.Client
 
 			SkillSetComponentC skillSetComponentC = self.Root().GetComponent<SkillSetComponentC>();	
 			bool active = skillSetComponentC.GetPetEchoSkillList().Contains(skillid);
-			CommonViewHelper.SetImageGray(self.Root(), self.E_SkillIconImage.gameObject, !active);
-            
-			self.E_SkillIconImage.sprite = sp;
+			
+            self.ES_CommonSkillItem_0.OnUpdateUI(skillid);
+            self.ES_CommonSkillItem_0.SetImageGray(!active);
 			self.E_Text_NameText.text = skillConfig.SkillName;
 		}
 
