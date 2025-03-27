@@ -17,11 +17,6 @@ namespace ET
         //Alpha = 0,              //仅内部人员使用。一般不向外部发布
         //Beta = 1,               //公开测试版
         //BanHao = 2,
-        public static ServerItem GetServerIpList(int versionMode, int zone)
-        {
-            ServerItem serverItem = GetServerItemByZone(versionMode, zone);
-            return serverItem;
-        }
 
         public static ServerItem GetServerItemByZone( int versionMode,int zone)
         {

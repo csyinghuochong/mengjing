@@ -44,7 +44,7 @@ namespace ET.Client
             
             PlayerInfoComponent playerInfoComponent = root.GetComponent<PlayerInfoComponent>();
             int versionMode =  CommonHelperS.IsInnerNet() ? VersionMode.Alpha: VersionMode.Beta;
-            playerInfoComponent.ServerItem = ServerHelper.GetServerIpList(versionMode, zone);
+            playerInfoComponent.ServerItem = ServerHelper.GetServerItemByZone(versionMode, zone);
             
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
             

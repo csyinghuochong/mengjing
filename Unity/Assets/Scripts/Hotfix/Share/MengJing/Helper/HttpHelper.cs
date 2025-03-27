@@ -63,7 +63,6 @@ namespace ET
             }
             return false;
         }
-
         
         public static async ETTask<string> GetIosPayParameter(string url, string postData)
         {

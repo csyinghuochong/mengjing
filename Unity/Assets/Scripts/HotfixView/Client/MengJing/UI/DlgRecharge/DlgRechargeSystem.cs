@@ -114,6 +114,11 @@ namespace ET.Client
 
         public static async ETTask OnClickRechargeItem(this DlgRecharge self, int chargetNumber)
         {
+            
+        }
+
+        public static async ETTask OnClickRechargeItem_Old(this DlgRecharge self, int chargetNumber)
+        {
             // FangChenMiComponent fangChenMiComponent = self.ZoneScene().GetComponent<FangChenMiComponent>();
             // int code = fangChenMiComponent.CanRechage(chargetNumber);
             // if (code != ErrorCode.ERR_Success)
