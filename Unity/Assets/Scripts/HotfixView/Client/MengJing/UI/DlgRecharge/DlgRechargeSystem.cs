@@ -114,7 +114,7 @@ namespace ET.Client
 
         public static async ETTask OnClickRechargeItem(this DlgRecharge self, int chargetNumber)
         {
-            
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnClickRechargeItem_Old(this DlgRecharge self, int chargetNumber)

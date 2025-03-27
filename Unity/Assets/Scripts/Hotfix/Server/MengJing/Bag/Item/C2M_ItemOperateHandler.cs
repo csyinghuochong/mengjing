@@ -323,7 +323,7 @@ namespace ET.Server
                                 }
                             }
 
-                            unit.GetComponent<SkillSetComponentS>().OnAddSkillByOther(SkillSourceEnum.Book, int.Parse(itemConfig.SkillID));
+                            unit.GetComponent<SkillSetComponentS>().OnAddkillId(int.Parse(itemConfig.SkillID), 0, SkillSetEnum.Skill, SkillSourceEnum.Book, true);
                             break;
                         case 108: //宠物经验骨头
                         case 109: //宠物经验牛奶

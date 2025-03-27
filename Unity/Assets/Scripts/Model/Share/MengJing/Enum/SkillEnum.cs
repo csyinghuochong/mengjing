@@ -147,6 +147,7 @@ namespace ET
         public const int Book = 5;
         public const int Buff = 6;
         public const int Task = 7;
+        public const int PetEcho = 8;
     }
 
     //1.增加范围

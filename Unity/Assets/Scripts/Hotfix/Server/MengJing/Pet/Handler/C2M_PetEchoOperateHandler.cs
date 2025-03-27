@@ -10,6 +10,23 @@ namespace ET.Server
             switch (request.OperateType)
             {
                 case 1:
+                    string[] openlist = ConfigData.PetEchoAttri[request.Position].Value2.Split("&");
+             
+                    int needlv = int.Parse(openlist[0]);
+                    UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
+                    if (userInfoComponentS.UserInfo.Lv < needlv)
+                    {
+                        response.Error = ErrorCode.ERR_LevelIsNot;
+                        return;
+                    }
+              
+                    BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
+                    if (!bagComponent.OnCostItemData(openlist[1]))
+                    {
+                        response.Error = ErrorCode.ERR_ItemNotEnoughError;
+                        return;
+                    }
+                    
                     petComponentS.PetEchoList[request.Position].KeyId = 1;
                     break;
                 case 2:
@@ -22,6 +39,10 @@ namespace ET.Server
                         petComponentS.PetEchoList[oldIndex].Value = 0;
                     }
 
+                    int totalCombat = PetHelper.GetPetTotalCombat(petComponentS.RolePetInfos, petComponentS.PetEchoList);
+                    SkillSetComponentS skillSetComponentS = unit.GetComponent<SkillSetComponentS>();    
+                    skillSetComponentS.UpdatePetEchoSkill(totalCombat);
+                    
                     break;
             }
             response.PetEchoList .AddRange( petComponentS.PetEchoList );  

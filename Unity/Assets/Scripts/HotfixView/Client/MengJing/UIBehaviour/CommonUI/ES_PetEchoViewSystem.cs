@@ -40,7 +40,7 @@ namespace ET.Client
 		{
 			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();	
 			
-			int curCombat = PetHelper.GetPetTotalCombat(petComponentC.RolePetInfos);
+			int curCombat = PetHelper.GetPetTotalCombat(petComponentC.RolePetInfos, petComponentC.PetEchoList);
 			self.E_TotalCombat_1Text.text = curCombat.ToString();
 			self.E_TotalCombat_2Text.text = curCombat.ToString();
 			

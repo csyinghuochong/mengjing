@@ -23,23 +23,19 @@ namespace ET.Server
                 {
                     if (i == 0)
                     {
-                        SkillPro SkillPro = self.InitSkillPro(SkillList[i], 1,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
-                        self.SkillList.Add(  SkillPro  );
+                       self.InitSkillPro(SkillList[i], 1,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
                     }
                     else
                     {
-                        SkillPro SkillPro = self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
-                        self.SkillList.Add(SkillPro);
+                        self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
                     }
                 }
 
                 string initItem = GlobalValueConfigCategory.Instance.Get(9).Value;
                 string[] needList = initItem.Split('@');
-                SkillPro SkillPro_1 = self.InitSkillPro(int.Parse(needList[0].Split(';')[0]), 9, SkillSetEnum.Item, SkillSourceEnum.Skill);
-                self.SkillList.Add(SkillPro_1);
+                self.InitSkillPro(int.Parse(needList[0].Split(';')[0]), 9, SkillSetEnum.Item, SkillSourceEnum.Skill);
 
-                SkillPro SkillPro_2 = self.InitSkillPro(int.Parse(needList[1].Split(';')[0]), 10, SkillSetEnum.Item, SkillSourceEnum.Skill);
-                self.SkillList.Add(SkillPro_2);
+                self.InitSkillPro(int.Parse(needList[1].Split(';')[0]), 10, SkillSetEnum.Item, SkillSourceEnum.Skill);
             }
 
             int robotId = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetRobotId();
@@ -286,8 +282,7 @@ namespace ET.Server
             }
             if (add && index == -1)
             {
-                SkillPro SkillPro = self.InitSkillPro(skillId, 0,  SkillSetEnum.Skill,SkillSourceEnum.TianFu );
-                self.SkillList.Add(SkillPro);
+                self.InitSkillPro(skillId, 0,  SkillSetEnum.Skill,SkillSourceEnum.TianFu );
             }
             if (!add && index >= 0)
             {
@@ -405,8 +400,7 @@ namespace ET.Server
             }
             return proList;
         }
-
-        //��GetSkillRoleProLists����һ�� ��Ҫ�ǻ�ȡ����Ϊ8�ı�������,8�ı������ܲ���ս����
+        
         public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponentS self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
@@ -735,6 +729,7 @@ namespace ET.Server
             skillPro.SkillPosition = position;
             skillPro.SkillSetType = skillsetenum;
             skillPro.SkillSource = skillsource;
+            self.SkillList.Add(skillPro);
             return skillPro;
         }
 
@@ -751,8 +746,7 @@ namespace ET.Server
             int[] addSkills = occupationTwoConfig.SkillID;
             for (int i = 0; i < addSkills.Length; i++)
             {
-                SkillPro skillPro = self.InitSkillPro( addSkills[i], 0, SkillSetEnum.Skill,  SkillSourceEnum.Skill );
-                self.SkillList.Add(skillPro);
+                self.InitSkillPro( addSkills[i], 0, SkillSetEnum.Skill,  SkillSourceEnum.Skill );
             }
 
             if (!unit.GetComponent<UserInfoComponentS>().IsRobot())
@@ -788,9 +782,48 @@ namespace ET.Server
             return ids;
         }
 
-        public static void OnAddItemSkill(this SkillSetComponentS self, List<int> itemSkills)
+        public static void OnAddkillId(this SkillSetComponentS self, int skillId, int position, int skillsetenum, int skillsource, bool notice)  
+        {
+            if (self.GetBySkillID(skillId) != null)
+            {
+                return;
+            }
+            
+            Unit unit = self.GetParent<Unit>();
+            self.InitSkillPro(skillId, position, skillsetenum, skillsource);
+            unit.GetComponent<SkillPassiveComponent>().AddPassiveSkill(skillId);
+            self.CheckSkillTianFu(skillId, true);
+
+            if (notice)
+            {
+                self.UpdateSkillSet();
+            }
+        }
+        
+        public static void OnRemoveSkillId(this SkillSetComponentS self, int skillId, int source, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
+            SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
+            for (int k = self.SkillList.Count - 1; k >= 0; k--)
+            {
+                
+                if (self.SkillList[k].SkillID == skillId && (source == -1 || source ==  self.SkillList[k].SkillSource))
+                {
+                    skillPassiveComponent.RemovePassiveSkill(skillId);
+                    self.CheckSkillTianFu(skillId, false);
+                    self.SkillList.RemoveAt(k);
+                    break;
+                }
+            }
+
+            if (notice)
+            {
+                self.UpdateSkillSet();
+            }
+        }
+        
+        public static void OnAddEquipSkill(this SkillSetComponentS self, List<int> itemSkills)
+        {
             for (int i = 0; i < itemSkills.Count; i++)
             {
                 int skillId = itemSkills[i];
@@ -798,37 +831,15 @@ namespace ET.Server
                 {
                     continue;
                 }
-                if (self.GetBySkillID(skillId) != null)
-                {
-                    continue;
-                }
 
-                SkillPro skillPro = self.InitSkillPro(skillId, 0, SkillSetEnum.Skill, SkillSourceEnum.Equip);
-               
-                self.SkillList.Add(skillPro);
-                unit.GetComponent<SkillPassiveComponent>().AddPassiveSkill(skillId);
-                self.CheckSkillTianFu(skillId, true);
+                self.OnAddkillId(skillId, 0, SkillSetEnum.Skill, SkillSourceEnum.Equip, false);
             }
             
-
             self.UpdateSkillSet();
         }
 
-        public static void CheckSkillTianFu(this SkillSetComponentS self, int skillId, bool active)
+        public static void OnRemoveEquipSkill(this SkillSetComponentS self, List<int> itemSkills, long baginfoid)
         {
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-
-            if (skillConfig.SkillType == 1 || !SkillHelp.havePassiveSkillType(skillConfig.PassiveSkillType, 11))
-            {
-                return;
-            }
-            int tianfuid = int.Parse(skillConfig.ComObjParameter);
-            self.AddiontTianFu(tianfuid, active);
-        }
-
-        public static void OnRmItemSkill(this SkillSetComponentS self, List<int> itemSkills, long baginfoid)
-        {
-
             Unit unit = self.GetParent<Unit>();
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
@@ -839,42 +850,30 @@ namespace ET.Server
                 {
                     continue;
                 }
-
-                //����װ��Ҳ���иü���
+                
                 if (bagComponent.IsHaveEquipSkill(skillId, baginfoid))
                 {
                     continue;
                 }
-                for (int k = self.SkillList.Count - 1; k >= 0; k--)
-                {
-                    if (self.SkillList[k].SkillSource == (int)SkillSourceEnum.Equip && self.SkillList[k].SkillID == skillId)
-                    {
-                        skillPassiveComponent.RemovePassiveSkill(skillId);
-                        self.CheckSkillTianFu(skillId, false);
-                        self.SkillList.RemoveAt(k);
-                        break;
-                    }
-                }
+   
+                self.OnRemoveSkillId(skillId, SkillSourceEnum.Equip, false);
             }
-
-            for (int i = 0; i < itemSkills.Count; i++)
-            {
-                //int key = itemSkills[i];
-
-                //for (int s = 0; s < self.SkillList.Count; s++)
-                //{
-                //    int oldskillid = SkillConfigCategory.Instance.GetOldSkill(key, self.SkillList[s].SkillID);
-                //    if (oldskillid != 0)
-                //    {
-                //        self.SkillList[s].SkillID = oldskillid;
-                //    }
-                //}
-            }
-
+            
             self.UpdateSkillSet();
         }
 
-
+        
+        public static void CheckSkillTianFu(this SkillSetComponentS self, int skillId, bool active)
+        {
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
+            if (skillConfig.SkillType == 1 || !SkillHelp.havePassiveSkillType(skillConfig.PassiveSkillType, 11))
+            {
+                return;
+            }
+            int tianfuid = int.Parse(skillConfig.ComObjParameter);
+            self.AddiontTianFu(tianfuid, active);
+        }
+        
         public static void OnActiveTianfu(this SkillSetComponentS self, int tianfuId)
         {
             bool exist = false;
@@ -916,7 +915,7 @@ namespace ET.Server
         /// <param name="skillid"></param>
         public static void OnJueXing(this SkillSetComponentS self, int skillid)
         {
-            self.OnAddItemSkill(new List<int>() { skillid });
+            self.OnAddEquipSkill(new List<int>() { skillid });
         }
 
         public static void CheckInitSkill(this SkillSetComponentS self, int occ)
@@ -932,8 +931,7 @@ namespace ET.Server
 
                 if (self.GetBySkillID(SkillList[i])  == null)
                 {
-                    SkillPro SkillPro = self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
-                    self.SkillList.Add(SkillPro);
+                     self.InitSkillPro(SkillList[i], 0,SkillSetEnum.Skill,SkillSourceEnum.Skill  );
                 }
             }            
         }
@@ -951,7 +949,6 @@ namespace ET.Server
                             {
                                 self.SkillList.RemoveAt(k);
                             }
-
                             break;
                         }
                     case SkillSetEnum.Item:
@@ -960,7 +957,6 @@ namespace ET.Server
                             {
                                 self.SkillList.RemoveAt(k);
                             }
-
                             break;
                         }
                 }
@@ -982,8 +978,7 @@ namespace ET.Server
                 List<int> addskills = equipIndex == 0 ? ConfigData.HunterFarSkill: ConfigData.HunterNearSkill;
                 for (int i = 0; i < addskills.Count; i++)
                 {
-                    SkillPro skillPro = self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
-                    self.SkillList.Add(skillPro);
+                     self.InitSkillPro(addskills[i], 0, (int)SkillSetEnum.Skill, (int)SkillSourceEnum.Equip);
                 }
             }
 
@@ -992,9 +987,9 @@ namespace ET.Server
 
         public static void OnChangeEquipIndex(this SkillSetComponentS self, int equipIndex)
         {
-            self.OnRmItemSkill(ConfigData.HunterFarSkill, 0);
-            self.OnRmItemSkill(ConfigData.HunterNearSkill, 0);
-            self.OnAddItemSkill(equipIndex == 0 ? ConfigData.HunterFarSkill: ConfigData.HunterNearSkill   );
+            self.OnRemoveEquipSkill(ConfigData.HunterFarSkill, 0);
+            self.OnRemoveEquipSkill(ConfigData.HunterNearSkill, 0);
+            self.OnAddEquipSkill(equipIndex == 0 ? ConfigData.HunterFarSkill: ConfigData.HunterNearSkill   );
         }
 
         /// <summary>
@@ -1016,7 +1011,7 @@ namespace ET.Server
 
             itemSkills.AddRange(bagInfo.HideSkillLists);
             itemSkills.AddRange(bagInfo.InheritSkills);
-            self.OnRmItemSkill(itemSkills, baginfoid);
+            self.OnRemoveEquipSkill(itemSkills, baginfoid);
 
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             self.TianFuRemove(equipConfig.TianFuId);
@@ -1041,7 +1036,7 @@ namespace ET.Server
 
             itemSkills.AddRange(bagInfo.HideSkillLists);
             itemSkills.AddRange(bagInfo.InheritSkills);
-            self.OnAddItemSkill(itemSkills);
+            self.OnAddEquipSkill(itemSkills);
 
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             self.TianFuAdd(equipConfig.TianFuId);
@@ -1117,25 +1112,6 @@ namespace ET.Server
                 }
             }
             return null;
-        }
-
-        /// <summary>
-        /// ������
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="skillSourceEnum"></param>
-        /// <param name="skillId"></param>
-        public static void OnAddSkillByOther(this SkillSetComponentS self, int skillSourceEnum, int skillId)
-        {
-            if (self.GetBySkillID(skillId) != null)
-            {
-                return;
-            }
-
-            SkillPro skillPro = self.InitSkillPro(skillId, 0, SkillSetEnum.Skill, skillSourceEnum);
-            self.SkillList.Add(skillPro);
-
-            self.UpdateSkillSet();
         }
         
         /// <summary>
@@ -1295,8 +1271,7 @@ namespace ET.Server
                 keyValuePair.Exp = curExp;
                 return;
             }
-
-            //��������
+            
             keyValuePair.Level = (curLv + 1);
             keyValuePair.Exp = (curExp + addExp - lifeShieldConfig.ShieldExp);
         }
@@ -1385,6 +1360,49 @@ namespace ET.Server
                 }
             }
 
+            self.UpdateSkillSet();
+        }
+
+        public static void UpdatePetEchoSkill(this SkillSetComponentS self, int totalcombat)
+        {
+            List<int> openlist = new List<int>();
+            for (int i = 0; i < ConfigData.PetEchoSkill.Count; i++)
+            {
+                if (ConfigData.PetEchoSkill[i].KeyId <= totalcombat)
+                {
+                    openlist.Add((int)ConfigData.PetEchoSkill[i].Value);
+                }
+            }
+
+            List<int> addlist = new List<int>();
+            List<int> remlist = new List<int>();    
+            for (int i = self.SkillList.Count - 1; i >= 0; i--)
+            {
+                SkillPro skillPro = self.SkillList[i];
+                if (skillPro.SkillSource != SkillSourceEnum.PetEcho)
+                {
+                    continue;
+                }
+
+                if (!openlist.Contains(skillPro.SkillID))
+                {
+                    remlist.Add(skillPro.SkillID);
+                }
+
+                if (openlist.Contains(skillPro.SkillID))
+                {
+                    openlist.Remove(skillPro.SkillID);  
+                }
+            }
+
+            foreach (int skillid in remlist)
+            {
+                self.OnRemoveSkillId(skillid, SkillSourceEnum.PetEcho, false );
+            }
+            foreach (int skillid in addlist)
+            {
+                self.InitSkillPro(skillid, 0, SkillSetEnum.Skill, SkillSourceEnum.PetEcho);
+            }
             self.UpdateSkillSet();
         }
 

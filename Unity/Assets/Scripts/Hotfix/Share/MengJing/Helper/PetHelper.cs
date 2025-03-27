@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET
 {
@@ -265,12 +266,15 @@ namespace ET
             return (rolePetInfos.PetLv - 1) * 5 - (rolePetInfos.BabyType == 3 ? 30 : 0);
         }
         
-        public static int GetPetTotalCombat(List<RolePetInfo> rolePetInfos)
+        public static int GetPetTotalCombat(List<RolePetInfo> rolePetInfos, List<KeyValuePairInt> petechos)
         {
             int combat = 0;
             for (int i = 0; i < rolePetInfos.Count; i++)
             {
-                combat += rolePetInfos[i].PetPingFen;
+                if (petechos.Any(p=>p.Value == rolePetInfos[i].Id))
+                {
+                    combat += rolePetInfos[i].PetPingFen;
+                }
             }
 
             return combat;

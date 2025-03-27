@@ -542,33 +542,33 @@ namespace ET.Client
                 }
             }
 
-            int index = 0;
+            //int index = 0;
             if (lv10number >= 3)
             {
                 self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "高级核心";
                 self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
-                index = 3;
+                //index = 3;
                 self.PetHeXinSuit = 10;
             }
             else if (lv8number >= 3)
             {
                 self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "中级核心";
                 self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
-                index = 2;
+                //index = 2;
                 self.PetHeXinSuit = 8;
             }
             else if (lv5number >= 3)
             {
                 self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "初级核心";
                 self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
-                index = 1;
+                //index = 1;
                 self.PetHeXinSuit = 5;
             }
             else
             {
                 self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "初级核心";
                 self.E_PetHeXinSuitButton.GetComponent<Image>().material = mat;
-                index = 1;
+                //index = 1;
                 self.PetHeXinSuit = 0;
             }
 

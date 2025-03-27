@@ -19,7 +19,7 @@ namespace ET.Server
             }
           
             int skillid = ConfigData.TaskGrowUpRewardConfig[request.GrowUpRewardId];
-            unit.GetComponent<SkillSetComponentS>().OnAddSkillByOther(SkillSourceEnum.Task, skillid);
+            unit.GetComponent<SkillSetComponentS>().OnAddkillId(skillid, 0, SkillSetEnum.Skill, SkillSourceEnum.Task, true);
             taskComponent.ReceiveGrowUpRewardIds.Add(request.GrowUpRewardId);
             await ETTask.CompletedTask;
         }

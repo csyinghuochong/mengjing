@@ -547,6 +547,11 @@ namespace ET.Server
         /// <returns></returns>
         public static bool IsHaveEquipSkill(this BagComponentS self, int skillId, long xilianequip)
         {
+            if (xilianequip == 0)
+            {
+                return false;
+            }
+
             for (int i = 0; i < self.GetItemByLoc(ItemLocType.ItemLocEquip).Count; i++)
             {
                 if (self.GetItemByLoc(ItemLocType.ItemLocEquip)[i].BagInfoID == xilianequip)
