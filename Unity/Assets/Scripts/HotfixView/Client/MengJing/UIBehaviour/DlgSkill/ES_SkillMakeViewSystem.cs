@@ -469,19 +469,15 @@ namespace ET.Client
             self.OnBagItemUpdate();
 
             //设置选中框
+            self.E_ImageSelectImage.gameObject.SetActive(false);
             for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
             {
                 Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[k];
-                if (scrollItemMakeItem.uiTransform != null)
+                if (scrollItemMakeItem.uiTransform == null)
                 {
-                    if (scrollItemMakeItem.MakeID == makeid)
-                    {
-                        self.E_ImageSelectImage.gameObject.SetActive(true);
-                        CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
-                        self.E_ImageSelectImage.gameObject.transform.localPosition = new Vector3(0f, 12f, 0f);
-                        break;
-                    }
+                  continue;
                 }
+                scrollItemMakeItem.OnSelectMakeItem(scrollItemMakeItem.MakeID == makeid);
             }
         }
 

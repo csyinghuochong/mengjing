@@ -18,6 +18,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void OnSelectMakeItem(this Scroll_Item_MakeItem self, bool select)
+        {
+            self.E_Image_SelectImage.gameObject.SetActive(select);
+        }
+
         public static void OnUpdateUI(this Scroll_Item_MakeItem self, int makeId)
         {
             self.E_Btn_XuanZhongButton.AddListener(self.OnClickItem);

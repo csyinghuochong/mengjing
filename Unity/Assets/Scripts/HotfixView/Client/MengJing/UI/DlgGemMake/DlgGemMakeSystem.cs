@@ -172,18 +172,27 @@ namespace ET.Client
             self.OnCostItemUpdate();
 
             //设置选中框
+            self.View.E_ImageSelectImage.gameObject.SetActive(false);
             if (self.ScrollItemMakeItems != null)
             {
                 for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
                 {
                     Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[k];
-                    if (scrollItemMakeItem.uiTransform != null && scrollItemMakeItem.MakeID == makeid)
+                    if (scrollItemMakeItem.uiTransform == null)
                     {
-                        self.View.E_ImageSelectImage.gameObject.SetActive(true);
-                        CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
-                        self.View.E_ImageSelectImage.transform.localPosition = new Vector3(0f, 12f, 0f);
-                        break;
+                        continue;
                     }
+                    // if (scrollItemMakeItem.MakeID == makeid)
+                    // {
+                    //     self.View.E_ImageSelectImage.gameObject.SetActive(true);
+                    //     CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
+                    //     self.View.E_ImageSelectImage.transform.localPosition = new Vector3(0f, 12f, 0f);
+                    // }
+                    // else
+                    // {
+                    //    
+                    // }
+                    scrollItemMakeItem.OnSelectMakeItem(scrollItemMakeItem.MakeID == makeid);
                 }
             }
         }
