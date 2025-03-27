@@ -1373,8 +1373,7 @@ namespace ET.Server
                     openlist.Add((int)ConfigData.PetEchoSkill[i].Value);
                 }
             }
-
-            List<int> addlist = new List<int>();
+            
             List<int> remlist = new List<int>();    
             for (int i = self.SkillList.Count - 1; i >= 0; i--)
             {
@@ -1399,7 +1398,7 @@ namespace ET.Server
             {
                 self.OnRemoveSkillId(skillid, SkillSourceEnum.PetEcho, false );
             }
-            foreach (int skillid in addlist)
+            foreach (int skillid in openlist)
             {
                 self.InitSkillPro(skillid, 0, SkillSetEnum.Skill, SkillSourceEnum.PetEcho);
             }

@@ -2156,14 +2156,14 @@ namespace ET
         [StaticField]
         public static List<KeyValuePairInt> PetEchoSkill = new List<KeyValuePairInt>
         {
-            new KeyValuePairInt() { KeyId = 10000, Value = 77001801 }, 
-            new KeyValuePairInt() { KeyId = 20000, Value = 77001802 }, 
-            new KeyValuePairInt() { KeyId = 30000, Value = 77001803 }, 
-            new KeyValuePairInt() { KeyId = 40000, Value = 77001804 }, 
-            new KeyValuePairInt() { KeyId = 50000, Value = 77001805 },
-            new KeyValuePairInt() { KeyId = 60000, Value = 77001806 }, 
-            new KeyValuePairInt() { KeyId = 70000, Value = 77001807 }, 
-            new KeyValuePairInt() { KeyId = 80000, Value = 77001808 },
+            new KeyValuePairInt() { KeyId = 3000, Value = 77001801 }, 
+            new KeyValuePairInt() { KeyId = 5000, Value = 77001802 }, 
+            new KeyValuePairInt() { KeyId = 6000, Value = 77001803 }, 
+            new KeyValuePairInt() { KeyId = 8000, Value = 77001804 }, 
+            new KeyValuePairInt() { KeyId = 10000, Value = 77001805 },
+            new KeyValuePairInt() { KeyId = 12000, Value = 77001806 }, 
+            new KeyValuePairInt() { KeyId = 15000, Value = 77001807 }, 
+            new KeyValuePairInt() { KeyId = 20000, Value = 77001808 },
         };
         
         /// <summary>

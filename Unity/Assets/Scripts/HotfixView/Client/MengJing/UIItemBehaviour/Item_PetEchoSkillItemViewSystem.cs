@@ -17,25 +17,30 @@ namespace ET.Client
 			self.DestroyWidget();
 		}
 
-		// new KeyValuePairInt() { KeyId = 10000, Value = 77001801 }, 
-		public static void OnInitData(this Scroll_Item_PetEchoSkillItem self, KeyValuePairInt data)
+		public static void OnUpdateUI(this Scroll_Item_PetEchoSkillItem self)
 		{
-			int skillid = (int)data.Value;
-
+			int skillid  = self.SkillId;	
 			SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
 			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
 			ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 			Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
-            SkillSetComponentC skillSetComponentC = self.Root().GetComponent<SkillSetComponentC>();	
-            bool active = skillSetComponentC.GetPetEchoSkillList().Contains(skillid);
-            CommonViewHelper.SetImageGray(self.Root(), self.E_SkillIconImage.gameObject, !active);
+			SkillSetComponentC skillSetComponentC = self.Root().GetComponent<SkillSetComponentC>();	
+			bool active = skillSetComponentC.GetPetEchoSkillList().Contains(skillid);
+			CommonViewHelper.SetImageGray(self.Root(), self.E_SkillIconImage.gameObject, !active);
             
 			self.E_SkillIconImage.sprite = sp;
-
 			self.E_Text_NameText.text = skillConfig.SkillName;
-			
+		}
+
+		// new KeyValuePairInt() { KeyId = 10000, Value = 77001801 }, 
+		public static void OnInitData(this Scroll_Item_PetEchoSkillItem self, KeyValuePairInt data)
+		{
+			int skillid = (int)data.Value;
+			self.SkillId = skillid;
 			self.E_Text_ComabtText.text = data.KeyId.ToString();
+
+			self.OnUpdateUI();
 		}
 	}
 	

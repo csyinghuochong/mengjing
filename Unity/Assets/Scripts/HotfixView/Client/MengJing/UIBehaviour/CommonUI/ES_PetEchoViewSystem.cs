@@ -8,7 +8,7 @@ namespace ET.Client
 	[EntitySystemOf(typeof(ES_PetEcho))]
 	[FriendOfAttribute(typeof(ES_PetEcho))]
 	[FriendOfAttribute(typeof(Scroll_Item_PetEchoItem))]
-	
+	[FriendOfAttribute(typeof(Scroll_Item_PetEchoSkillItem))]
 	public static partial class ES_PetEchoSystem 
 	{
 		[EntitySystem]
@@ -101,6 +101,9 @@ namespace ET.Client
               await PetNetHelper.RequestPetEchoOperate(self.Root(), 1, self.Index, 0);
 
               self.UpdatePetEchoItemOpenStatus();
+              self.OnClickPetEchoItemHandler(self.Index);
+              self.UpdateActiveNumber();
+              self.UpdateTotalCombat();
 		}
 
 		private static async ETTask OnClickChangeButton(this ES_PetEcho self)
@@ -114,6 +117,9 @@ namespace ET.Client
 			await PetNetHelper.RequestPetEchoOperate(self.Root(), 2, self.Index, rolePetInfo.Id);
 			
 			self.UpdatePetEchoItemList();
+			self.UpdatePetEchoSkillItemList();
+			self.UpdateActiveNumber();
+			self.UpdateTotalCombat();
 		}
 
 		private static void OnPetEchoItemsRefresh(this ES_PetEcho self, Transform transform, int index)
@@ -284,7 +290,14 @@ namespace ET.Client
 		
 		private static void UpdatePetEchoSkillItemList(this ES_PetEcho self)
 		{
-        			
+			foreach (Scroll_Item_PetEchoSkillItem echoitem in self.ScrollItemPetEchoSkillItems.Values)
+			{
+				if (echoitem.uiTransform == null)
+				{
+					continue;	
+				}
+				echoitem.OnUpdateUI();
+			}
 		}
 	}
 
