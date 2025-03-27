@@ -2525,6 +2525,7 @@ message M2C_RolePetList // ILocationResponse
 	repeated int PetMeleeRewardIds = 23;
 	repeated int PetMeleeFubeRewardIds = 24;
 	repeated KeyValuePairInt PetEchoList = 25;
+	repeated int PetZhuangJiaList = 26;
 }
 
 
@@ -3094,6 +3095,20 @@ message C2M_PetTargetLockRequest // ILocationRequest
 }
 
 message M2C_PetTargetLockResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_PetZhuangJiaUpResponse
+message C2M_PetZhuangJiaUpRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Position = 1;
+}
+
+message M2C_PetZhuangJiaUpResponse // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

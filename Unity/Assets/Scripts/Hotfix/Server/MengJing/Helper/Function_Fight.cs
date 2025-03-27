@@ -2043,6 +2043,19 @@ namespace ET.Server
                  }
              }
 
+             //宠物装甲
+             List<int> petZhuangJiaList = unit.GetComponent<PetComponentS>().PetZhuangJiaList;
+             for (int i = 0; i < petZhuangJiaList.Count; i++)
+             {
+                 PetZhuangJiaConfig petZhuangJiaConfig = PetZhuangJiaConfigCategory.Instance.Get(petZhuangJiaList[i]);
+                 List<PropertyValue> proList = new List<PropertyValue>();
+                 NumericHelp.GetProList(petZhuangJiaConfig.PropreAdd, proList);
+                 for (int pro = 0; pro < proList.Count; pro++)
+                 {
+                     AddUpdateProDicList(proList[pro].HideID, proList[pro].HideValue, UpdateProDicList);
+                 }
+             }
+             
              //血石
              int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
              if (bloodstone > 0)

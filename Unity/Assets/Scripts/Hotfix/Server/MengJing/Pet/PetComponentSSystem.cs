@@ -223,6 +223,14 @@ namespace ET.Server
                 }
             }
 
+            if (self.PetZhuangJiaList.Count != PetZhuangJiaConfigCategory.Instance.PetZhuangJiaList.Count)
+            {
+                for (int i = self.PetZhuangJiaList.Count; i < PetZhuangJiaConfigCategory.Instance.PetZhuangJiaList.Count; i++)
+                {
+                    self.PetZhuangJiaList.Add(PetZhuangJiaConfigCategory.Instance.PetZhuangJiaList[i][0].Id);
+                }
+            }
+
             self.CheckPetList(self.PetFormations);
             self.CheckPetList(self.TeamPetList);
             self.CheckPetList(self.PetFightList_1);

@@ -34,6 +34,7 @@
             response.PetMeleeRewardIds.AddRange(petComponent.PetMeleeRewardIds);
             response.PetMeleeFubeRewardIds.AddRange(petComponent.PetMeleeFubeRewardIds);
             response.PetEchoList.AddRange(petComponent.PetEchoList);
+            response.PetZhuangJiaList.AddRange(petComponent.PetZhuangJiaList);
             
             await ETTask.CompletedTask;
         }

@@ -43,6 +43,7 @@ namespace ET.Client
             self.PetMeleeRewardIds = m2C_RolePetList.PetMeleeRewardIds;
             self.PetMeleeFubeRewardIds = m2C_RolePetList.PetMeleeFubeRewardIds;
             self.PetEchoList = m2C_RolePetList.PetEchoList;
+            self.PetZhuangJiaList = m2C_RolePetList.PetZhuangJiaList;
         }
 
         public static void OnPetEchoOperate(this PetComponentC self, M2C_PetEchoOperateResponse m2C_RolePetList)

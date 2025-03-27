@@ -123,6 +123,26 @@ namespace ET.Client
                 return this.m_es_petecho;
             }
         }
+        
+        public ES_PetZhuangJia ES_PetZhuangJia
+        {
+	        get
+	        {
+		        ES_PetZhuangJia es = this.m_es_petezhuangjia;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_PetZhuangJia.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_petezhuangjia = this.AddChild<ES_PetZhuangJia, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_petezhuangjia;
+	        }
+        }
 
 		public void DestroyWidget()
 		{
@@ -132,6 +152,7 @@ namespace ET.Client
 			this.m_es_pethecheng = null;
 			this.m_es_petxilian = null;
 			this.m_es_petecho = null;
+			this.m_es_petezhuangjia = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -149,6 +170,7 @@ namespace ET.Client
 		private EntityRef<ES_PetHeCheng> m_es_pethecheng = null;
 		private EntityRef<ES_PetXiLian> m_es_petxilian = null;
 		private EntityRef<ES_PetEcho> m_es_petecho = null;
+		private EntityRef<ES_PetZhuangJia> m_es_petezhuangjia = null;
 		public Transform uiTransform = null;
 	}
 }

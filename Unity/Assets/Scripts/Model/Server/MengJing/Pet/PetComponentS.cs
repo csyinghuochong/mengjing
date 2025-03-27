@@ -15,6 +15,8 @@ namespace ET.Server
         
         public List<KeyValuePairInt> PetEchoList { get; set; } = new(); //宠物共鸣列表
         
+        public List<int> PetZhuangJiaList { get; set; } = new(); //宠物装甲
+        
         public List<long> PetMingList { get; set; }= new List<long>();     //矿场队伍(15个宠物）
         public List<long> PetMingPosition { get; set; }= new List<long>();   //矿场宠物位置(27个位置)
         

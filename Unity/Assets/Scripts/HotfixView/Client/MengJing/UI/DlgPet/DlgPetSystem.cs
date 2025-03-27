@@ -45,6 +45,7 @@
     [FriendOf(typeof(ES_PetXiLian))]
     [FriendOf(typeof(ES_PetShouHu))]
     [FriendOf(typeof(ES_PetEcho))]
+    [FriendOf(typeof(ES_PetZhuangJia))]
     [FriendOf(typeof(DlgPet))]
     public static class DlgPetSystem
     {
@@ -78,6 +79,9 @@
                 case 3:
                     self.View.ES_PetEcho.uiTransform.gameObject.SetActive(true);
                     self.View.ES_PetEcho.OnUpdateUI();
+                    break;
+                case 4:
+                    self.View.ES_PetZhuangJia.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

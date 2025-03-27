@@ -5,14 +5,14 @@ namespace ET.Client
 {
     public static class PetNetHelper
     {
-
         public static async ETTask<int> RequestPetEchoOperate(Scene root, int operateType, int position, long paramId)
         {
             C2M_PetEchoOperateRequest c2mPetEchoOperate = C2M_PetEchoOperateRequest.Create();
             c2mPetEchoOperate.OperateType = operateType;
             c2mPetEchoOperate.Position = position;
             c2mPetEchoOperate.ParamId = paramId;
-            M2C_PetEchoOperateResponse m2CPetEchoOperateResponse = (M2C_PetEchoOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2mPetEchoOperate);
+            M2C_PetEchoOperateResponse m2CPetEchoOperateResponse =
+                    (M2C_PetEchoOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2mPetEchoOperate);
             root.GetComponent<PetComponentC>().OnPetEchoOperate(m2CPetEchoOperateResponse);
             return m2CPetEchoOperateResponse.Error;
         }
@@ -116,9 +116,10 @@ namespace ET.Client
         public static async ETTask<R2C_RankLastRewardResponse> RequestLastReward(Scene root, int rankType)
         {
             C2R_RankLastRewardRequest c2R_RankLastRewardRequest = C2R_RankLastRewardRequest.Create();
-            c2R_RankLastRewardRequest.RankType = rankType;  
-            R2C_RankLastRewardResponse m2c_RankLastRewardResponse = (R2C_RankLastRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2R_RankLastRewardRequest);
-            return m2c_RankLastRewardResponse;  
+            c2R_RankLastRewardRequest.RankType = rankType;
+            R2C_RankLastRewardResponse m2c_RankLastRewardResponse =
+                    (R2C_RankLastRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2R_RankLastRewardRequest);
+            return m2c_RankLastRewardResponse;
         }
 
         public static async ETTask<int> RequestPetFight(Scene root, long petId, int fight)
@@ -642,6 +643,20 @@ namespace ET.Client
 
             M2C_PetMeleeGetMyCards response = (M2C_PetMeleeGetMyCards)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
+        }
+
+        public static async ETTask<int> PetZhuangJiaUpRequest(Scene root, int position)
+        {
+            C2M_PetZhuangJiaUpRequest request = C2M_PetZhuangJiaUpRequest.Create();
+            request.Position = position;
+
+            M2C_PetZhuangJiaUpResponse response = (M2C_PetZhuangJiaUpResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentC>().PetZhuangJiaList[position]++;
+            }
+
+            return response.Error;
         }
 
         public static async ETTask<int> PetMeleeBeginRequest(Scene root)
