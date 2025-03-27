@@ -23,11 +23,6 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsHoldDown = false;
 		public int PlanMelt = 1;
-
-		public EntityRef<ES_RewardList> RewardList_1;
-		public EntityRef<ES_RewardList> RewardList_2;
-		public EntityRef<ES_RewardList> RewardList_3;
-		public EntityRef<ES_RewardList> RewardList_6;
 		
 		public RectTransform EG_RightRectTransform
      	{

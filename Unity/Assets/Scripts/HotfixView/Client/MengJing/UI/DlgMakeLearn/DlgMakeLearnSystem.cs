@@ -10,6 +10,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMakeLearn self)
         {
+            self.View.EG_SelectRectTransform.gameObject.SetActive(true);
             self.View.E_Select_1Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(1); });
             self.View.E_Select_2Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(2); });
             self.View.E_Select_3Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.On_Button_Select(3); });
@@ -34,35 +35,13 @@ namespace ET.Client
 
         private static void InitMakeItem(this DlgMakeLearn self, Transform transform, int type)
         {
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            int playeLv = userInfoComponent.UserInfo.Lv;
-            Dictionary<int, EquipMakeConfig> keyValuePairs = EquipMakeConfigCategory.Instance.GetAll();
-            string initMakeList = GlobalValueConfigCategory.Instance.Get(43).Value;
             List<RewardItem> rewardItems = new List<RewardItem>();
-            foreach (var item in keyValuePairs)
+            
+            string[] itemList = ConfigData.SkillMakeConfig[type].Split(';');
+            foreach (string itemId in itemList)
             {
-                // if (userInfoComponent.UserInfo.MakeList.Contains(item.Key))
-                // {
-                //     continue;
-                // }
-                //
-                if (initMakeList.Contains(item.Key.ToString()))
-                {
-                    continue;
-                }
-                
-                // if (playeLv < item.Value.LearnLv || item.Value.LearnType != 0)
-                // {
-                //     continue;
-                // }
-
-                if (item.Value.ProficiencyType != type)
-                {
-                    continue;
-                }
-
                 RewardItem rewardItem = new RewardItem();
-                rewardItem.ItemID = item.Value.MakeItemID;
+                rewardItem.ItemID = int.Parse(itemId);
                 rewardItems.Add(rewardItem);
             }
             

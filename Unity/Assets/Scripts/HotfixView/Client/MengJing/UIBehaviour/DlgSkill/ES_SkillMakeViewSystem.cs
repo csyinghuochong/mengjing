@@ -43,14 +43,15 @@ namespace ET.Client
             self.E_Btn_MakeButton.AddListener(() => { self.OnBtn_MakeButton().Coroutine(); });
             
             self.E_Btn_MeltButton.AddListener(self.OnBtn_MeltButton);
+            self.EG_SelectRectTransform.gameObject.SetActive(true);
             self.E_Select_1Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(1); });
             self.E_Select_2Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(2); });
             self.E_Select_3Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(3); });
             self.E_Select_6Image.transform.Find("Button_Select").GetComponent<Button>().AddListener(() => { self.RequestMakeSelect(6); });
-            self.RewardList_1 = self.AddChild<ES_RewardList,Transform>(self.E_Select_1Image.transform.Find("RewardList"));
-            self.RewardList_2 = self.AddChild<ES_RewardList,Transform>(self.E_Select_2Image.transform.Find("RewardList"));
-            self.RewardList_3 = self.AddChild<ES_RewardList,Transform>(self.E_Select_3Image.transform.Find("RewardList"));
-            self.RewardList_6 = self.AddChild<ES_RewardList,Transform>(self.E_Select_6Image.transform.Find("RewardList"));
+            self.InitMakeItem(self.E_Select_1Image.transform.Find("RewardList"), 1);
+            self.InitMakeItem(self.E_Select_2Image.transform.Find("RewardList"), 2);
+            self.InitMakeItem(self.E_Select_3Image.transform.Find("RewardList"), 3);
+            self.InitMakeItem(self.E_Select_6Image.transform.Find("RewardList"), 6);
             
             self.E_Btn_ResetButton.AddListener(self.OnBtn_ResetButton);
             self.E_Btn_LearnButton.AddListener(self.OnBtn_LearnButton);
@@ -77,7 +78,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void ShowRewardItem(this ES_SkillMake self,  int type)
+        private static void InitMakeItem(this ES_SkillMake self, Transform transform, int type)
         {
             List<RewardItem> rewardItems = new List<RewardItem>();
             
@@ -88,27 +89,8 @@ namespace ET.Client
                 rewardItem.ItemID = int.Parse(itemId);
                 rewardItems.Add(rewardItem);
             }
-
-            ES_RewardList rewardList = null;
-            if (type == 1)
-            {
-                rewardList = self.RewardList_1;
-            }
-
-            if (type == 2)
-            {
-                rewardList = self.RewardList_2;
-            }
-
-            if (type == 3)
-            {
-                rewardList = self.RewardList_3;
-            }
-
-            if (type == 6)
-            {
-                rewardList = self.RewardList_6;
-            }
+            
+            ES_RewardList rewardList = self.AddChild<ES_RewardList,Transform>(transform);
             rewardList.Refresh(rewardItems, showNumber: false, showName: false);
         }
         
@@ -192,14 +174,6 @@ namespace ET.Client
             self.EG_RightRectTransform.gameObject.SetActive(makeType != 0);
             self.EG_LeftRectTransform.gameObject.SetActive(makeType != 0);
             self.EG_SelectRectTransform.gameObject.SetActive(makeType == 0);
-            if (makeType == 0)
-            {
-                self.ShowRewardItem(1);
-                self.ShowRewardItem(2);
-                self.ShowRewardItem(3);
-                self.ShowRewardItem(6);
-            }
-
             self.EG_MeltRectTransform.gameObject.SetActive(false);
             self.UpdateMakeList(makeType);
         }
