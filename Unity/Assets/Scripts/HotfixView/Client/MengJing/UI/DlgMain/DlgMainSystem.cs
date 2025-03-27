@@ -1365,6 +1365,13 @@ namespace ET.Client
 
         private static void OnButton_SeasonButton(this DlgMain self)
         {
+            int userlv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
+            if(userlv < 55)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("55级开启！");
+                return;
+            }
+            
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Season).Coroutine();
         }
 
