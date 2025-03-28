@@ -151,8 +151,8 @@ namespace ET.Server
                  for (int i = 0; i < rankPetInfo.PetUId.Count; i++ )
                  {
                      RolePetInfo rolePetInfo = unit.GetComponent<PetComponentS>().GetPetInfo(rankPetInfo.PetUId[i]);
-                     rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
-                     rankPetInfo.Combat += rolePetInfo.PetPingFen;
+                     rankPetInfo.PetConfigId.Add(rolePetInfo != null ? rolePetInfo.ConfigId : 0);
+                     rankPetInfo.Combat += rolePetInfo != null ? rolePetInfo.PetPingFen : 0;
                  }
 
                  M2R_PetRankUpdateRequest M2R_PetRankUpdateRequest = M2R_PetRankUpdateRequest.Create();
