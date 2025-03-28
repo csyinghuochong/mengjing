@@ -243,6 +243,7 @@ namespace ET.Client
             ItemInfo bagInfo = new ItemInfo();
             bagInfo.ItemID = itemConfig.Id;
             bagInfo.ItemNum = 1;
+            self.View.ES_CommonItem.UseTextColor = true;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.View.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
