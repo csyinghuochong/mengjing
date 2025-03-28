@@ -157,6 +157,8 @@ namespace ET.Client
 			self.Index = index;
            
 			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+			self.ES_ModelShow.SetShow(false);
+			self.E_Text_Name_Pet.text = string.Empty;	
 			if (petComponentC.PetEchoList[self.Index].KeyId == 0)
 			{
 				//未开启
@@ -173,6 +175,8 @@ namespace ET.Client
 			}
 			
 			self.UpdatePetEchoItemSelect(index);	
+			
+			
         }
 
 		private static void UpdatePetEchoItemOpenStatus(this ES_PetEcho self)
@@ -247,6 +251,7 @@ namespace ET.Client
 	        
 	        GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
 	        PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
+	        self.ES_ModelShow.SetShow(true);
 	        using (zstring.Block())
 	        {
 		        self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.PetModel)).Coroutine();
