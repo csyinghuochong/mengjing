@@ -137,7 +137,7 @@ namespace ET.Client
 		private static void OnPetEchoSkillItemsRefresh(this ES_PetEcho self, Transform transform, int index)
 		{
 			Scroll_Item_PetEchoSkillItem scrollItemPetListItem = self.ScrollItemPetEchoSkillItems[index].BindTrans(transform);
-			scrollItemPetListItem.OnInitData(ConfigData.PetEchoSkill[index]);
+			scrollItemPetListItem.OnInitData(ConfigData.PetEchoSkill[index], index);
 		}
         
 		private static void OnClickPetEchoItemHandler(this ES_PetEcho self, int index)

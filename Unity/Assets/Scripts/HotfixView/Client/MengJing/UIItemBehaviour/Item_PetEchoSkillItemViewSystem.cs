@@ -34,12 +34,12 @@ namespace ET.Client
 		}
 
 		// new KeyValuePairInt() { KeyId = 10000, Value = 77001801 }, 
-		public static void OnInitData(this Scroll_Item_PetEchoSkillItem self, KeyValuePairInt data)
+		public static void OnInitData(this Scroll_Item_PetEchoSkillItem self, KeyValuePairInt data, int index)
 		{
 			int skillid = (int)data.Value;
 			self.SkillId = skillid;
 			self.E_Text_ComabtText.text = data.KeyId.ToString();
-
+			self.E_JianTouImage.gameObject.SetActive(index % 4 != 3);
 			self.OnUpdateUI();
 		}
 	}
