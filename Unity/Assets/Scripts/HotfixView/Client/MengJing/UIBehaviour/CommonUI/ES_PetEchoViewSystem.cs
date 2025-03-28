@@ -25,15 +25,27 @@ namespace ET.Client
 			self.EG_Left_1RectTransform.gameObject.SetActive(true);
 			self.EG_Left_2RectTransform.gameObject.SetActive(false);
 			self.E_ButtonActiveButton.AddListener(self.OnButtonActiveButton);
+			self.E_ButtonReturnButton.AddListener(self.OnButtonReturnButton);
 
+			self.OnButtonReturnButton();
 			self.UpdateActiveNumber();
 			self.UpdateTotalCombat();
 		}
 
 		private static void OnButtonActiveButton(this ES_PetEcho self)
 		{
-			self.EG_Left_1RectTransform.gameObject.SetActive(!self.EG_Left_1RectTransform.gameObject.activeSelf);
-			self.EG_Left_2RectTransform.gameObject.SetActive(!self.EG_Left_2RectTransform.gameObject.activeSelf);
+			self.EG_Left_1RectTransform.gameObject.SetActive(false);
+			self.EG_Left_2RectTransform.gameObject.SetActive(true);
+			self.E_ButtonActiveButton.gameObject.SetActive(false);
+			self.E_ButtonReturnButton.gameObject.SetActive(true);
+		}
+
+		private static void OnButtonReturnButton(this ES_PetEcho self)
+		{
+			self.EG_Left_1RectTransform.gameObject.SetActive(true);
+			self.EG_Left_2RectTransform.gameObject.SetActive(false);
+			self.E_ButtonActiveButton.gameObject.SetActive(true);
+			self.E_ButtonReturnButton.gameObject.SetActive(false);
 		}
 
 		private static void UpdateTotalCombat(this ES_PetEcho self)
@@ -260,6 +272,7 @@ namespace ET.Client
 
 		public static void OnUpdateUI(this ES_PetEcho self)
 		{
+			self.OnButtonReturnButton();
 			self.InitPetEchoItemList();
 			self.InitPetEchoSkillItemList();
 		}

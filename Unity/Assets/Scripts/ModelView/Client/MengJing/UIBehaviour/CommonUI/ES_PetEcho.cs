@@ -443,7 +443,24 @@ namespace ET.Client
      			return this.m_E_ActiveNumberText;
      		}
      	}
-
+		
+		public UnityEngine.UI.Button E_ButtonReturnButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonReturnButton == null )
+				{
+					this.m_E_ButtonReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonReturn");
+				}
+				return this.m_E_ButtonReturnButton;
+			}
+		}
+		
 		    public Transform UITransform
          {
      	    get
@@ -483,6 +500,7 @@ namespace ET.Client
 			this. m_E_Text_Name_Pet = null;
 			this. m_E_Text_Name_Pet_Comabt = null;
 			this. m_E_Text_Attribute_Opened = null;
+			this.m_E_ButtonReturnButton = null;
 			this.uiTransform = null;
 		}
 
@@ -511,6 +529,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_Name_Pet = null;
 		private UnityEngine.UI.Text m_E_Text_Name_Pet_Comabt = null;
 		private UnityEngine.UI.Text m_E_Text_Attribute_Opened = null;
+		private UnityEngine.UI.Button m_E_ButtonReturnButton = null;
 		public Transform uiTransform = null;
 	}
 }
