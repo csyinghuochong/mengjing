@@ -152,6 +152,7 @@ namespace ET.Server
                  {
                      RolePetInfo rolePetInfo = unit.GetComponent<PetComponentS>().GetPetInfo(rankPetInfo.PetUId[i]);
                      rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
+                     rankPetInfo.Combat += rolePetInfo.PetPingFen;
                  }
 
                  M2R_PetRankUpdateRequest M2R_PetRankUpdateRequest = M2R_PetRankUpdateRequest.Create();

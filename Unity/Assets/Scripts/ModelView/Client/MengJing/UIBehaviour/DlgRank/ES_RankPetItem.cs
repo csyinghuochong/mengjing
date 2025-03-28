@@ -266,6 +266,23 @@ namespace ET.Client
      			return this.m_E_Lab_OwnerText;
      		}
      	}
+		
+		public Text E_Lab_CombatText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Lab_CombatText == null )
+				{
+					this.m_E_Lab_CombatText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Combat");
+				}
+				return this.m_E_Lab_CombatText;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -296,6 +313,7 @@ namespace ET.Client
 			this.m_E_Lab_PaiMingText = null;
 			this.m_E_Lab_TeamNameText = null;
 			this.m_E_Lab_OwnerText = null;
+			this.m_E_Lab_CombatText = null;
 			this.uiTransform = null;
 		}
 
@@ -314,6 +332,7 @@ namespace ET.Client
 		private Text m_E_Lab_PaiMingText = null;
 		private Text m_E_Lab_TeamNameText = null;
 		private Text m_E_Lab_OwnerText = null;
+		private Text m_E_Lab_CombatText = null;
 		public Transform uiTransform = null;
 	}
 }

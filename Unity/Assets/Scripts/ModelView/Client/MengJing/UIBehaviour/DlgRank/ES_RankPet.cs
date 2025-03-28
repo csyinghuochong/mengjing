@@ -9,6 +9,7 @@ namespace ET.Client
 	public  class ES_RankPet : Entity,IAwake<Transform>,IDestroy
 	{
 		public List<EntityRef<ES_RankPetItem>> PetUIList = new();
+		public GameObject[] ImageIconList;
 		
 		public Text E_Text_RankText
      	{
@@ -197,7 +198,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RankPetItem ES_RankPetItem_0
+		public ES_RankPetItem ES_RankPetItem
      	{
      		get
      		{
@@ -207,56 +208,15 @@ namespace ET.Client
      				return null;
      			}
 
-		        ES_RankPetItem es = this.m_es_rankpetitem_0;
+		        ES_RankPetItem es = this.m_es_rankpetitem;
      			if( es ==null)
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetListNode/ES_RankPetItem_0");
-		    	   this.m_es_rankpetitem_0 = this.AddChild<ES_RankPetItem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetListNode/ES_RankPetItem");
+		    	   this.m_es_rankpetitem = this.AddChild<ES_RankPetItem,Transform>(subTrans);
      			}
-     			return this.m_es_rankpetitem_0;
+     			return this.m_es_rankpetitem;
      		}
      	}
-
-		public ES_RankPetItem ES_RankPetItem_1
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_RankPetItem es = this.m_es_rankpetitem_1;
-     			if( es ==null)
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetListNode/ES_RankPetItem_1");
-		    	   this.m_es_rankpetitem_1 = this.AddChild<ES_RankPetItem,Transform>(subTrans);
-     			}
-     			return this.m_es_rankpetitem_1;
-     		}
-     	}
-
-		public ES_RankPetItem ES_RankPetItem_2
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-
-		        ES_RankPetItem es = this.m_es_rankpetitem_2;
-     			if( es ==null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetListNode/ES_RankPetItem_2");
-		    	   this.m_es_rankpetitem_2 = this.AddChild<ES_RankPetItem,Transform>(subTrans);
-     			}
-     			return this.m_es_rankpetitem_2;
-     		}
-     	}
-
 				
 		public ES_RankPetReward ES_RankPetReward
 		{
@@ -295,6 +255,193 @@ namespace ET.Client
 			}
 		}
 		
+		public Text E_Text_CombatText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Text_CombatText == null )
+				{
+					this.m_E_Text_CombatText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Combat");
+				}
+				return this.m_E_Text_CombatText;
+			}
+		}
+		
+		public Button E_ImageIcon1Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon1Button == null )
+     			{
+		    		this.m_E_ImageIcon1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon1");
+     			}
+     			return this.m_E_ImageIcon1Button;
+     		}
+     	}
+
+		public Image E_ImageIcon1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon1Image == null )
+     			{
+		    		this.m_E_ImageIcon1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon1");
+     			}
+     			return this.m_E_ImageIcon1Image;
+     		}
+     	}
+
+		public Button E_ImageIcon2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon2Button == null )
+     			{
+		    		this.m_E_ImageIcon2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon2");
+     			}
+     			return this.m_E_ImageIcon2Button;
+     		}
+     	}
+
+		public Image E_ImageIcon2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon2Image == null )
+     			{
+		    		this.m_E_ImageIcon2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon2");
+     			}
+     			return this.m_E_ImageIcon2Image;
+     		}
+     	}
+
+		public Button E_ImageIcon3Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon3Button == null )
+     			{
+		    		this.m_E_ImageIcon3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon3");
+     			}
+     			return this.m_E_ImageIcon3Button;
+     		}
+     	}
+
+		public Image E_ImageIcon3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon3Image == null )
+     			{
+		    		this.m_E_ImageIcon3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon3");
+     			}
+     			return this.m_E_ImageIcon3Image;
+     		}
+     	}
+
+		public Button E_ImageIcon4Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon4Button == null )
+     			{
+		    		this.m_E_ImageIcon4Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon4");
+     			}
+     			return this.m_E_ImageIcon4Button;
+     		}
+     	}
+
+		public Image E_ImageIcon4Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon4Image == null )
+     			{
+		    		this.m_E_ImageIcon4Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon4");
+     			}
+     			return this.m_E_ImageIcon4Image;
+     		}
+     	}
+
+		public Button E_ImageIcon5Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon5Button == null )
+     			{
+		    		this.m_E_ImageIcon5Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon5");
+     			}
+     			return this.m_E_ImageIcon5Button;
+     		}
+     	}
+
+		public Image E_ImageIcon5Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIcon5Image == null )
+     			{
+		    		this.m_E_ImageIcon5Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon5");
+     			}
+     			return this.m_E_ImageIcon5Image;
+     		}
+     	}
+		
 		    public Transform UITransform
          {
      	    get
@@ -320,9 +467,18 @@ namespace ET.Client
 			this.m_E_Button_AddButton = null;
 			this.m_E_Button_AddImage = null;
 			this.m_EG_PetListNodeRectTransform = null;
-			this.m_es_rankpetitem_0 = null;
-			this.m_es_rankpetitem_1 = null;
-			this.m_es_rankpetitem_2 = null;
+			this.m_es_rankpetitem = null;
+			this.m_E_Text_CombatText = null;
+			this.m_E_ImageIcon1Button = null;
+			this.m_E_ImageIcon1Image = null;
+			this.m_E_ImageIcon2Button = null;
+			this.m_E_ImageIcon2Image = null;
+			this.m_E_ImageIcon3Button = null;
+			this.m_E_ImageIcon3Image = null;
+			this.m_E_ImageIcon4Button = null;
+			this.m_E_ImageIcon4Image = null;
+			this.m_E_ImageIcon5Button = null;
+			this.m_E_ImageIcon5Image = null;
 			this.m_es_rankpetreward = null;
 			this.m_E_RankRewardButton = null;
 			this.uiTransform = null;
@@ -339,11 +495,20 @@ namespace ET.Client
 		private Button m_E_Button_AddButton = null;
 		private Image m_E_Button_AddImage = null;
 		private RectTransform m_EG_PetListNodeRectTransform = null;
-		private EntityRef<ES_RankPetItem> m_es_rankpetitem_0 = null;
-		private EntityRef<ES_RankPetItem> m_es_rankpetitem_1 = null;
-		private EntityRef<ES_RankPetItem> m_es_rankpetitem_2 = null;
+		private EntityRef<ES_RankPetItem> m_es_rankpetitem = null;
 		private EntityRef<ES_RankPetReward> m_es_rankpetreward = null;
 		private UnityEngine.UI.Button m_E_RankRewardButton = null;
+		private Text m_E_Text_CombatText = null;
+		private Button m_E_ImageIcon1Button = null;
+		private Image m_E_ImageIcon1Image = null;
+		private Button m_E_ImageIcon2Button = null;
+		private Image m_E_ImageIcon2Image = null;
+		private Button m_E_ImageIcon3Button = null;
+		private Image m_E_ImageIcon3Image = null;
+		private Button m_E_ImageIcon4Button = null;
+		private Image m_E_ImageIcon4Image = null;
+		private Button m_E_ImageIcon5Button = null;
+		private Image m_E_ImageIcon5Image = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -552,21 +552,23 @@ namespace ET.Server
 
             List<int> allPet = new List<int>()
             {
-                1000101,
-                1000201,
-                1000301,
-                1000401,
-                1000501,
-                1000601,
-                1000701
+                310101,
+                310102,
+                310103,
+                310104,
+                310105,
+                310106,
+                310107,
             };
             for (int i = 0; i < CommonHelp.PetRankNumber; i++)
             {
                 int[] indexs = RandomHelper.GetRandoms(3, 0, allPet.Count);
                 List<int> pets = new List<int>();
+                int combat = 0;
                 for (int p = 0; p < indexs.Length; p++)
                 {
                     pets.Add(allPet[p]);
+                    combat += RandomHelper.RandomNumber(100, 700);
                 }
 
                 RankPetInfo RankPetInfo = RankPetInfo.Create();
@@ -576,6 +578,7 @@ namespace ET.Server
                 RankPetInfo.PlayerName = "机器人:" + (i + 1);
                 RankPetInfo.PetUId = new List<long>() { 0, 0, 0 };
                 RankPetInfo.PetConfigId = pets;
+                RankPetInfo.Combat = combat;
                 self.DBRankInfo.rankingPets.Add(RankPetInfo);
             }
         }

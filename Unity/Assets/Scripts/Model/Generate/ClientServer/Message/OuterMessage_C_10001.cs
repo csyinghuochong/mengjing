@@ -3298,6 +3298,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public List<long> PetUId { get; set; } = new();
 
+        [MemoryPackOrder(6)]
+        public int Combat { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -3311,6 +3314,7 @@ namespace ET
             this.RankId = default;
             this.PetConfigId.Clear();
             this.PetUId.Clear();
+            this.Combat = default;
 
             ObjectPool.Instance.Recycle(this);
         }

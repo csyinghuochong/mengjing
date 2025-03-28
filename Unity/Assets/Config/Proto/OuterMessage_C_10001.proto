@@ -732,6 +732,7 @@ message RankPetInfo
 	int32 RankId  = 4;
 	repeated int32 PetConfigId = 5;
 	repeated int64 PetUId = 6;
+	int32 Combat = 7;
 }
 
 message ServerInfo
