@@ -8,7 +8,7 @@
         {
             RankSceneComponent rankComponent = scene.GetComponent<RankSceneComponent>();
             response.RankNumber = rankComponent.GetPetRank(request.UserId);
-            response.RankPetList .AddRange(rankComponent.GetRankPetList((int)response.RankNumber)); 
+            response.RankPetList.AddRange(rankComponent.GetRankPetList((int)response.RankNumber));
 
             await ETTask.CompletedTask;
         }

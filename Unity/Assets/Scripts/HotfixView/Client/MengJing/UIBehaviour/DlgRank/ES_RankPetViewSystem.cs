@@ -24,6 +24,7 @@ namespace ET.Client
             self.PetUIList.Add(self.ES_RankPetItem);
             self.PetUIList.Add(self.AddChild<ES_RankPetItem, Transform>(UnityEngine.Object.Instantiate(self.ES_RankPetItem.uiTransform.gameObject, self.EG_PetListNodeRectTransform).transform));
             self.PetUIList.Add(self.AddChild<ES_RankPetItem, Transform>(UnityEngine.Object.Instantiate(self.ES_RankPetItem.uiTransform.gameObject, self.EG_PetListNodeRectTransform).transform));
+            self.PetUIList.Add(self.AddChild<ES_RankPetItem, Transform>(UnityEngine.Object.Instantiate(self.ES_RankPetItem.uiTransform.gameObject, self.EG_PetListNodeRectTransform).transform));
 
             self.ImageIconList = new GameObject[5];
             self.ImageIconList[0] = self.E_ImageIcon1Image.gameObject;

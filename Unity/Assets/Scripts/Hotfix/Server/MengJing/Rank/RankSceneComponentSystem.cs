@@ -645,13 +645,15 @@ namespace ET.Server
                     }
                 }
 
-                indexList.Add(RandomHelper.RandomNumber(3, 10));
+                int index = RandomHelper.RandomNumber(3, 10);
+                indexList.Add(index);
+                indexList.Add(index + 1);
             }
             else
             {
                 int randomNumber = 0;
 
-                while (indexList.Count < 3)
+                while (indexList.Count < 4)
                 {
                     if (randomNumber > 200)
                     {
