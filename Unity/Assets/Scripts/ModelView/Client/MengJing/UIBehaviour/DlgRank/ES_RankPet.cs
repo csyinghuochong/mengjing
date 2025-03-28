@@ -283,7 +283,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon1Button == null )
      			{
-		    		this.m_E_ImageIcon1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon1");
+		    		this.m_E_ImageIcon1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon1");
      			}
      			return this.m_E_ImageIcon1Button;
      		}
@@ -300,7 +300,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon1Image == null )
      			{
-		    		this.m_E_ImageIcon1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon1");
+		    		this.m_E_ImageIcon1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon1");
      			}
      			return this.m_E_ImageIcon1Image;
      		}
@@ -317,7 +317,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon2Button == null )
      			{
-		    		this.m_E_ImageIcon2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon2");
+		    		this.m_E_ImageIcon2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon2");
      			}
      			return this.m_E_ImageIcon2Button;
      		}
@@ -334,7 +334,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon2Image == null )
      			{
-		    		this.m_E_ImageIcon2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon2");
+		    		this.m_E_ImageIcon2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon2");
      			}
      			return this.m_E_ImageIcon2Image;
      		}
@@ -351,7 +351,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon3Button == null )
      			{
-		    		this.m_E_ImageIcon3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon3");
+		    		this.m_E_ImageIcon3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon3");
      			}
      			return this.m_E_ImageIcon3Button;
      		}
@@ -368,7 +368,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon3Image == null )
      			{
-		    		this.m_E_ImageIcon3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon3");
+		    		this.m_E_ImageIcon3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon3");
      			}
      			return this.m_E_ImageIcon3Image;
      		}
@@ -385,7 +385,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon4Button == null )
      			{
-		    		this.m_E_ImageIcon4Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon4");
+		    		this.m_E_ImageIcon4Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon4");
      			}
      			return this.m_E_ImageIcon4Button;
      		}
@@ -402,7 +402,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon4Image == null )
      			{
-		    		this.m_E_ImageIcon4Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon4");
+		    		this.m_E_ImageIcon4Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon4");
      			}
      			return this.m_E_ImageIcon4Image;
      		}
@@ -419,7 +419,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon5Button == null )
      			{
-		    		this.m_E_ImageIcon5Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon5");
+		    		this.m_E_ImageIcon5Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon5");
      			}
      			return this.m_E_ImageIcon5Button;
      		}
@@ -436,7 +436,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIcon5Image == null )
      			{
-		    		this.m_E_ImageIcon5Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/E_ImageIcon5");
+		    		this.m_E_ImageIcon5Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"IconShowSet/Mask/E_ImageIcon5");
      			}
      			return this.m_E_ImageIcon5Image;
      		}
