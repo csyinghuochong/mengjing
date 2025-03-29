@@ -582,7 +582,7 @@ namespace ET.Server
                 for (int p = 0; p < indexs.Length; p++)
                 {
                     pets.Add(allPet[p]);
-                    combat += RandomHelper.RandomNumber(100, 700);
+                    combat += RandomHelper.RandomNumber(500, 700);
                 }
 
                 RankPetInfo RankPetInfo = RankPetInfo.Create();
@@ -709,7 +709,7 @@ namespace ET.Server
                 RankPetInfo rankPetInfo = self.DBRankInfo.rankingPets[indexList[i]];
                 if (rankPetInfo.Combat == 0)
                 {
-                    rankPetInfo.Combat = RandomHelper.RandomNumber(100 *rankPetInfo.PetConfigId.Count , 700*rankPetInfo.PetConfigId.Count);
+                    rankPetInfo.Combat = RandomHelper.RandomNumber(500 , 700) * rankPetInfo.PetConfigId.Count;
                 }
 
                 rankPetInfos.Add(rankPetInfo);
