@@ -68,7 +68,7 @@ namespace ET.Server
              }
              else
              {
-                 List<int> petlist = new List<int>() { 1000101, 1000201, 1000301 };
+                 List<int> petlist = new List<int>() { 310101, 310101, 310101 };
                  for (int k = 0; k < petlist.Count; k++)
                  {
                      RolePetInfo petInfo = petComponent.GenerateNewPet(petlist[0], 0, 0, 1);

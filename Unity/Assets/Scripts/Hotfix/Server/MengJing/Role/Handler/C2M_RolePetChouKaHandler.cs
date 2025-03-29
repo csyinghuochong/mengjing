@@ -41,33 +41,33 @@ namespace ET.Server
                 unit.GetComponent<DataCollationComponent>().OnPetChouKa(1);
             }
 
-            List<int> petList = new List<int>() { 1000101, 1000201, 1000301 };
+            List<int> petList = new List<int>() { 310102, 310103, 310104 };
 
             float rand = RandomHelper.RandFloat();
             bool randStatus = false;
             if (rand <= 0.55 && !randStatus)
             {
-                petList = new List<int>() { 1000101, 1000201, 1000301 };
+                petList = new List<int>() { 310102, 310103, 310104 };
                 randStatus = true;
             }
             if (rand <= 0.8 && !randStatus)
             {
-                petList = new List<int>() { 1000201, 1000301, 1000401 };
+                petList = new List<int>() { 310102, 310103, 310104 };
                 randStatus = true;
             }
             if (rand <= 0.94 && !randStatus)
             {
-                petList = new List<int>() { 1000301, 1000401, 1000501 };
+                petList = new List<int>() { 310102, 310103, 310104 };
                 randStatus = true;
             }
             if (rand <= 0.99 && !randStatus)
             {
-                petList = new List<int>() { 1000401, 1000501, 1000601 };
+                petList = new List<int>() { 310102, 310103, 310104};
                 randStatus = true;
             }
             if (rand <= 1 && !randStatus)
             {
-                petList = new List<int>() { 1000501, 1000601, 1000701 };
+                petList = new List<int>() { 310102, 310103, 310104};
                 randStatus = true;
             }
 

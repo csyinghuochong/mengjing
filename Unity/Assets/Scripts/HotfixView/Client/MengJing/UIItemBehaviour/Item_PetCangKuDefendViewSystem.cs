@@ -153,8 +153,7 @@ namespace ET.Client
                 self.E_Text_NameText.text = rolePetInfo.PetName;
 
                 PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-                // self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
-                self.ES_ModelShow.ShowOtherModel("Pet/1000101").Coroutine();
+                self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
                 self.ES_ModelShow.Camera.localPosition = new(0f, 100f, 450f);
                 self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
                 self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));

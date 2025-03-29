@@ -209,6 +209,20 @@ namespace ET.Server
             self.DBRankInfo = dBRankInfo;
             self.DBRankInfo.rankRunRace.Clear();
             self.DBRankInfo.rankingDemon.Clear();
+
+            for (int i = 0; i < self.DBRankInfo.rankingPets.Count; i++)
+            {
+                RankPetInfo rankPetInfo = self.DBRankInfo.rankingPets[i];
+                
+                for (int pet = 0; pet < rankPetInfo.PetConfigId.Count; pet++)
+                {
+                    if (!PetConfigCategory.Instance.Contain(rankPetInfo.PetConfigId[pet]))
+                    {
+                        rankPetInfo.PetConfigId[pet] = 310101;
+                    }
+                }
+            }
+
             self.UpdateRankPetList();
         }
 
@@ -692,7 +706,13 @@ namespace ET.Server
 
             for (int i = 0; i < indexList.Count; i++)
             {
-                rankPetInfos.Add(self.DBRankInfo.rankingPets[indexList[i]]);
+                RankPetInfo rankPetInfo = self.DBRankInfo.rankingPets[indexList[i]];
+                if (rankPetInfo.Combat == 0)
+                {
+                    rankPetInfo.Combat = RandomHelper.RandomNumber(100 *rankPetInfo.PetConfigId.Count , 700*rankPetInfo.PetConfigId.Count);
+                }
+
+                rankPetInfos.Add(rankPetInfo);
             }
 
             return rankPetInfos;
