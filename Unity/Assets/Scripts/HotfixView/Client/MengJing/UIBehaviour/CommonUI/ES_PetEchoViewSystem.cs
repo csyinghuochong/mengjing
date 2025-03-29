@@ -132,6 +132,7 @@ namespace ET.Client
 			self.UpdatePetEchoSkillItemList();
 			self.UpdateActiveNumber();
 			self.UpdateTotalCombat();
+			self.UpdatePetEchoItemOpenStatus();
 		}
 
 		private static void OnPetEchoItemsRefresh(this ES_PetEcho self, Transform transform, int index)

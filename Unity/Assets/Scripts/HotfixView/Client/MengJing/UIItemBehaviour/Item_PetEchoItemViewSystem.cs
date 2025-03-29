@@ -35,7 +35,6 @@ namespace ET.Client
             self.E_ImageSelectImage.gameObject.SetActive(self.Index == index);
         }
 
-
         public static void UpdatePetSet(this Scroll_Item_PetEchoItem self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
@@ -86,7 +85,10 @@ namespace ET.Client
         public static void UpdateOpenStatus(this Scroll_Item_PetEchoItem self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            bool open = petComponent.PetEchoList[self.Index].KeyId == 1;
+            KeyValuePairInt keyValuePairInt = petComponent.PetEchoList[self.Index]; 
+            bool open = keyValuePairInt.KeyId == 1;
+            self.E_Image_Add.gameObject.SetActive(open && keyValuePairInt.Value == 0);
+            self.E_Image_Lock.gameObject.SetActive(!open);
             
             CommonViewHelper.SetImageGray(self.Root(), self.E_ImageButtonButton.gameObject, !open);
         }

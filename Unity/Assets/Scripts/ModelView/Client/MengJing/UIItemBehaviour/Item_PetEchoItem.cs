@@ -188,7 +188,54 @@ namespace ET.Client
      			}
      		}
      	}
+		
+		public UnityEngine.Transform E_Image_Lock
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Image_Lock == null )
+					{
+						this.m_E_Image_Lock = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"E_Image_Lock");
+					}
+					return this.m_E_Image_Lock;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"E_Image_Lock");
+				}
+			}
+		}
 
+		public UnityEngine.Transform E_Image_Add
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_Image_Add == null )
+					{
+						this.m_E_Image_Add = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"E_Image_Add");
+					}
+					return this.m_E_Image_Add;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"E_Image_Add");
+				}
+			}
+		}
 		public UnityEngine.UI.Text E_Text_AttriText
      	{
      		get
@@ -222,6 +269,8 @@ namespace ET.Client
 			this.m_E_Text_NameText = null;
 			this.m_E_Text_ComabtText = null;
 			this.m_E_Text_AttriText = null;
+			this.m_E_Image_Lock = null;
+			this.m_E_Image_Add = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -233,6 +282,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_NameText = null;
 		private UnityEngine.UI.Text m_E_Text_ComabtText = null;
 		private UnityEngine.UI.Text m_E_Text_AttriText = null;
+		private UnityEngine.Transform m_E_Image_Lock = null;
+		private UnityEngine.Transform m_E_Image_Add = null;
 		public Transform uiTransform = null;
 	}
 }
