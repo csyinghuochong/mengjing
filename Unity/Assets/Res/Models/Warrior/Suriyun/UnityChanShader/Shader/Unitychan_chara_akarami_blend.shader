@@ -33,7 +33,7 @@ CGPROGRAM
 #pragma fragment frag
 #include "UnityCG.cginc"
 #include "AutoLight.cginc"
-#include "CharaSkin.cginc"
+#include "CharaSkin.cg"
 ENDCG
 		}
 	}

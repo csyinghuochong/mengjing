@@ -5,7 +5,6 @@ Shader "UnityChan/Skin"
 		_Color ("Main Color", Color) = (1, 1, 1, 1)
 		_ShadowColor ("Shadow Color", Color) = (0.8, 0.8, 1, 1)
 		_EdgeThickness ("Outline Thickness", Float) = 1
-		_DepthBias  ("Outline Depth Bias", Float) = 0.00012
 				
 		_MainTex ("Diffuse", 2D) = "white" {}
 		_FalloffSampler ("Falloff Control", 2D) = "white" {}
@@ -32,7 +31,7 @@ CGPROGRAM
 #pragma fragment frag
 #include "UnityCG.cginc"
 #include "AutoLight.cginc"
-#include "CharaSkin.cginc"
+#include "CharaSkin.cg"
 ENDCG
 		}
 
@@ -45,7 +44,7 @@ CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
 #include "UnityCG.cginc"
-#include "CharaOutline.cginc"
+#include "CharaOutline.cg"
 ENDCG
 		}
 
