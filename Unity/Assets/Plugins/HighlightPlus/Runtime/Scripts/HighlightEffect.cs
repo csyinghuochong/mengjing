@@ -173,6 +173,8 @@ namespace HighlightPlus {
         [Tooltip("The layer that contains the affected objects by this effect when effectGroup is set to LayerMask.")]
         public LayerMask effectGroupLayer = -1;
 
+        public string[] excludeNameFilter;
+        
         /// <summary>
         /// Optional object name filter
         /// </summary>
@@ -2241,6 +2243,25 @@ namespace HighlightPlus {
                 rms[rmsCount].Init();
                 Renderer renderer = rr[k];
                 if (renderer == null) continue;
+
+                if (effectGroup != TargetOptions.OnlyThisObject && excludeNameFilter != null && excludeNameFilter.Length > 0)
+                {
+                    bool contains = false;
+                    foreach (string s in excludeNameFilter)
+                    {
+                        if (renderer.name.Contains(s))
+                        {
+                            contains = true;
+                            break;
+                        }
+                    }
+
+                    if (contains)
+                    {
+                        continue;
+                    }
+                }
+
                 if (effectGroup != TargetOptions.OnlyThisObject && !string.IsNullOrEmpty(effectNameFilter)) {
                     if (effectNameUseRegEx) {
                         try {

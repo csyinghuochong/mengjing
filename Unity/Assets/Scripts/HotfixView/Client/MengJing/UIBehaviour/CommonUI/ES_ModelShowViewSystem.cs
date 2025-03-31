@@ -306,8 +306,9 @@ namespace ET.Client
                 if (effect == null)
                 {
                     effect = gameObject.AddComponent<HighlightEffect>();
-                    
-                    // effect.effectNameFilter = "BackDi";
+
+                    // 一些物体不用高亮描边
+                    effect.excludeNameFilter = new[] { "BackDi" };
                     
                     // 描边
                     effect.outline = 1;
