@@ -257,14 +257,14 @@ namespace ET.Client
                 if (unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric) < equipMakeConfig.NeedProficiencyValue)
                 {
                     //不满足显示红色,满足显示绿色
-                    self.View.E_LabNeedShuLianText.text = zstring.Format("{0}/{1}(熟练度不足)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
-                    self.View.E_LabNeedShuLianText.color = new Color(207f / 255f, 12f / 255f, 0);
+                    self.View.E_LabNeedShuLianText.text = zstring.Format("{0}/{1}(技巧值不足)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
+                    self.View.E_LabNeedShuLianText.color = new Color(236f / 255f, 101f / 255f, 110f / 255f);
                 }
                 else
                 {
                     //满足显示绿色,满足显示绿色
                     self.View.E_LabNeedShuLianText.text = zstring.Format("{0}/{1}(可学习)", nowShuLianDu, equipMakeConfig.NeedProficiencyValue);
-                    self.View.E_LabNeedShuLianText.color = new Color(86f / 255f, 147f / 255f, 0);
+                    self.View.E_LabNeedShuLianText.color = new Color(217f / 255f, 255f / 255f, 134f / 255f);
                 }
             }
 
