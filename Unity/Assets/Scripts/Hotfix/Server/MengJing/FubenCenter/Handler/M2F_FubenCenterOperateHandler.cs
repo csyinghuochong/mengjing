@@ -7,18 +7,19 @@
         protected override async ETTask Run(Scene scene, M2F_FubenCenterOperateRequest request, F2M_FubenCenterOpenResponse response)
         {
             FubenCenterComponent fubenCenterComponent= scene.GetComponent<FubenCenterComponent>();
-            if (request.OperateType == 1)
+            switch (request.OperateType)
             {
-                fubenCenterComponent.FubenInstanceList.Add(request.FubenInstanceId);
-            }
-            else
-            { 
-                fubenCenterComponent.FubenInstanceList.Remove(request.FubenInstanceId);
-            }
+                case 1:   //废弃
+                    fubenCenterComponent.FubenInstanceList.Add(request.FubenInstanceId);
+                    break;
+                case 2:   //废弃
+                    fubenCenterComponent.FubenInstanceList.Remove(request.FubenInstanceId);
+                    break;
 
-            //Log.Debug($"FubenCenterOperate {scene.DomainZone()} {request.OperateType} {request.SceneType} {fubenCenterComponent.FubenInstanceList.Count}");
-            response.ServerInfo = fubenCenterComponent.ServerInfo;
-
+                default:
+                    break;  
+            }
+            
             await ETTask.CompletedTask;
         }
     }

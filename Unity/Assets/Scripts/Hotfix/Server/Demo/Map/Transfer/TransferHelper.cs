@@ -902,18 +902,18 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask NoticeFubenCenter(Scene scene, int operateType)
         {
-            ActorId fubencenterId = UnitCacheHelper.GetFubenCenterId(scene.Zone());
-            int sceneType = 0;
-            if (scene != null && scene.GetComponent<MapComponent>() != null)
-            {
-                sceneType = scene.GetComponent<MapComponent>().SceneType;
-            }
-
-            M2F_FubenCenterOperateRequest request = M2F_FubenCenterOperateRequest.Create();
-            request.SceneType = sceneType;
-            request.OperateType = operateType;
-            request.FubenInstanceId = scene.InstanceId;
-            F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await scene.Root().GetComponent<MessageSender>().Call(fubencenterId, request);
+            // ActorId fubencenterId = UnitCacheHelper.GetFubenCenterId(scene.Zone());
+            // int sceneType = 0;
+            // if (scene != null && scene.GetComponent<MapComponent>() != null)
+            // {
+            //     sceneType = scene.GetComponent<MapComponent>().SceneType;
+            // }
+            //
+            // M2F_FubenCenterOperateRequest request = M2F_FubenCenterOperateRequest.Create();
+            // request.SceneType = sceneType;
+            // request.OperateType = operateType;
+            // request.FubenInstanceId = scene.InstanceId;
+            // F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await scene.Root().GetComponent<MessageSender>().Call(fubencenterId, request);
             await ETTask.CompletedTask;
         }
     }
