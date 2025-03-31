@@ -923,7 +923,7 @@ namespace  ET
 
         public static bool IsSeasonBoss(int monsterid)
         {
-            return ConfigData.SeasonBossList.Any(p => p.KeyId == monsterid);
+            return ConfigData.SeasonBossId == monsterid;
         }
 
         //宠物守护

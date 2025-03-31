@@ -328,9 +328,7 @@ namespace ET.Server
 				long serverNow = TimeHelper.ServerNow();
 				long seasonBossTime = numericComponent.GetAsLong(NumericType.SeasonBossRefreshTime);
 				int sessonBossFuben = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
-				int bosslv = numericComponent.GetAsInt(NumericType.SeasonBossLeve);
-				
-				int bossId = ConfigData.SeasonBossList[bosslv].KeyId;
+				int bossId = ConfigData.SeasonBossId;
 				if (seasonBossTime > 0 && serverNow > seasonBossTime && mapComponent.SceneId == sessonBossFuben)
 				{
 					KeyValuePairInt keyValuePairInt = new KeyValuePairInt();

@@ -74,8 +74,7 @@ namespace ET.Client
                 self.View.E_PositionTextText.text = zstring.Format("即将出现在{0}中...", dungeonConfig.ChapterName);
             }
 
-            int bosslv = numericComponent.GetAsInt(NumericType.SeasonBossLeve);
-            int bossId = ConfigData.SeasonBossList[bosslv].KeyId;
+            int bossId = ConfigData.SeasonBossId;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, monsterConfig.MonsterHeadIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

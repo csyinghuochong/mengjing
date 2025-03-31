@@ -1126,11 +1126,13 @@ namespace ET
             new KeyValuePairLong(){ KeyId = 4, Value = 1738339200001, Value2 = 1753977600000 },
         };
 
+        public const int SeasonBossId = 90000051;
+
         /// <summary>
         /// 赛季BOSS  bossid->exp  默认O级
         /// </summary>
         [StaticField]
-        public static List<KeyValuePairInt> SeasonBossList = new List<KeyValuePairInt>()
+        public static List<KeyValuePairInt> CommonSeasonBossList = new List<KeyValuePairInt>()
         {
             new KeyValuePairInt(){ KeyId = 90000051, Value = 10},
             new KeyValuePairInt(){ KeyId = 90000051, Value = 20},
@@ -1145,13 +1147,18 @@ namespace ET
         };
         
         //赛季捐选道具ID.
-        public const int SeasonDonateItemId = 10024009;
+        public const int CommonSeasonDonateItemId = 10024009;
+
+        /// <summary>
+        /// 捐选随机获得道具
+        /// </summary>
+        public const string CommonSeasonDonateGetItem = "10025005;1@10025005;1@10025005;1@10025005;1@10025005;1";
 
         /// <summary>
         /// 赛季捐选奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> SeasonDonateReward = new Dictionary<int, string>()
+        public static Dictionary<int, string> CommonSeasonDonateReward = new Dictionary<int, string>()
         {
             { 10, "10025005;1@10025005;1" },
             { 20, "10025005;1@10025005;1" },
