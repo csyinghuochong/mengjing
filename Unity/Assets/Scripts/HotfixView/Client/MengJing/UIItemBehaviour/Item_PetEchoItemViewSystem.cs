@@ -33,6 +33,7 @@ namespace ET.Client
         public static void OnSelectUI(this Scroll_Item_PetEchoItem self, int index)
         {
             self.E_ImageSelectImage.gameObject.SetActive(self.Index == index);
+            self.ES_ModelShow.SetHighlight(self.Index == index);
         }
 
         public static void UpdatePetSet(this Scroll_Item_PetEchoItem self)
