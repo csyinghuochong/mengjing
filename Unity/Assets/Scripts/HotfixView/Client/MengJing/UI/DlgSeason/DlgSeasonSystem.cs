@@ -5,6 +5,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_SeasonJingHe))]
     [FriendOf(typeof (ES_SeasonStore))]
     [FriendOf(typeof (ES_SeasonTower))]
+    [FriendOf(typeof (ES_SeasonBoss))]
     [FriendOf(typeof (DlgSeason))]
     public static class DlgSeasonSystem
     {

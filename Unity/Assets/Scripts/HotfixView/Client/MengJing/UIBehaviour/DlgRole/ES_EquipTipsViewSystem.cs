@@ -351,15 +351,20 @@ namespace ET.Client
                 }
 
                 float gemHoleShowHeight = gemNumber > 0 ? 135f : -20;
-                //显示专精属性
-                startPostionY -= gemHoleShowHeight;
-                
+
                 //展示类装备不显示宝石
                 if (self.BagInfo.BagInfoID == 0)
                 {
-                    self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false); 
-                    startPostionY += 50;
+                    self.EG_UIEquipGemHoleSetRectTransform.gameObject.SetActive(false);
+                    //startPostionY += 50;
+                    gemHoleShowHeight = -20;
                 }
+
+
+                //显示专精属性
+                startPostionY -= gemHoleShowHeight;
+                
+               
                 
                 int zhunjingNumber = self.ShowZhuanJingAttribute(itemConfig, startPostionY);
 
