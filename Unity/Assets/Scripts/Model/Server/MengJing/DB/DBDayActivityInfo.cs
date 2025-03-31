@@ -40,8 +40,7 @@ namespace ET.Server
 		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
 		public Dictionary<int, List<long>> GuessPlayerList { get; set; } = new();
 
-
-
+		
 		/// <summary>
         /// 竞猜数字->中奖的玩家
         /// </summary>
@@ -53,8 +52,7 @@ namespace ET.Server
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<long, int> FeedPlayerList { get; set; } = new();
-
-
+        
         public int FeedRewardKey  { get; set; }= 0;
 
         public int BaoShiDu { get; set; } = 0;
@@ -63,6 +61,17 @@ namespace ET.Server
         /// 竞猜开奖的字
         /// </summary>
         public List<int> OpenGuessIds{ get; set; }  = new();
+        
+        /// <summary>
+        /// 赛季领主
+        /// </summary>
+        public int CommonSeasonBossLevel { get; set; } = 0;
+        public int CommonSeasonBossExp { get; set; } = 0;
+        
+        /// <summary>
+        /// 击杀boss后置空
+        /// </summary>
+        public long CommonSeasonBossRefreshTime { get; set; } = 0;
     }
 
 }
