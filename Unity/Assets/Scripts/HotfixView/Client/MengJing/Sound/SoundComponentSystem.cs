@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (SoundComponent))]
-    [EntitySystemOf(typeof (SoundComponent))]
+    [FriendOf(typeof(SoundComponent))]
+    [EntitySystemOf(typeof(SoundComponent))]
     public static partial class SoundComponentSystem
     {
         [EntitySystem]
@@ -266,6 +266,11 @@ namespace ET.Client
             }
 
             self.m_assetlist.Clear();
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.Client.SoundComponent self)
+        {
+            self.DisposeAll();
         }
     }
 }

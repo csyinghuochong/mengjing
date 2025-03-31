@@ -478,8 +478,19 @@ namespace ET.Server
 						if (tempmonsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58) //奇遇宠物
 						{
 							int itemid = tempmonsterConfig.Parameter[1];
+
+							if (!ItemConfigCategory.Instance.Contain(itemid))
+							{
+								Console.WriteLine($" itemid==null {itemid}");
+							}
+
 							ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
 							int petId = int.Parse(itemConfig.ItemUsePar);
+
+							if (!PetConfigCategory.Instance.Contain(petId))
+							{
+								Console.WriteLine($" petId==null {petId}");
+							}
 							PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
 
 							List<int> weight = new List<int>(petConfig.SkinPro);

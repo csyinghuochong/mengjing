@@ -111,6 +111,15 @@ namespace ET.Server
         
         public static void InitPetInfo(this PetComponentS self)
         {
+            for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
+            {
+                RolePetInfo rolePetInfo = self.RolePetInfos[i];
+                if (!PetConfigCategory.Instance.Contain(rolePetInfo.ConfigId))
+                {
+                    self.RolePetInfos.RemoveAt(i);  
+                }
+            }
+            
             if (!self.PetCangKuOpen.Contains(0))
             {
                 self.PetCangKuOpen.Add(0);  

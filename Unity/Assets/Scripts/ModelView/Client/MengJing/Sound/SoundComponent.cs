@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [ComponentOf(typeof (Scene))]
-    public class SoundComponent: Entity, IAwake
+    public class SoundComponent: Entity, IAwake, IDestroy
     {
         [StaticField]
         public static SoundComponent Instance;
