@@ -7224,6 +7224,73 @@ namespace ET
     }
 
     [MemoryPackable]
+    [Message(InnerMessage.M2M_SeasonDonateCreateBossRequest)]
+    [ResponseType(nameof(M2M_SeasonDonateCreateResponse))]
+    public partial class M2M_SeasonDonateCreateBossRequest : MessageObject, IRequest
+    {
+        public static M2M_SeasonDonateCreateBossRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2M_SeasonDonateCreateBossRequest), isFromPool) as M2M_SeasonDonateCreateBossRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int SeasonBossLevel { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.SeasonBossLevel = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.M2M_SeasonDonateCreateResponse)]
+    public partial class M2M_SeasonDonateCreateResponse : MessageObject, IResponse
+    {
+        public static M2M_SeasonDonateCreateResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2M_SeasonDonateCreateResponse), isFromPool) as M2M_SeasonDonateCreateResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(InnerMessage.Popularize2M_RewardRequest)]
     [ResponseType(nameof(M2Popularize_RewardResponse))]
     public partial class Popularize2M_RewardRequest : MessageObject, IRequest
@@ -9069,47 +9136,49 @@ namespace ET
         public const ushort M2G_RechargeResultResponse = 20195;
         public const ushort M2M_AllPlayerListRequest = 20196;
         public const ushort M2M_AllPlayerListResponse = 20197;
-        public const ushort Popularize2M_RewardRequest = 20198;
-        public const ushort M2Popularize_RewardResponse = 20199;
-        public const ushort A2R_DeleteRoleData = 20200;
-        public const ushort R2A_DeleteRoleData = 20201;
-        public const ushort G2Rank_EnterRank = 20202;
-        public const ushort Rank2G_EnterRank = 20203;
-        public const ushort M2R_RankSeasonTowerRequest = 20204;
-        public const ushort R2M_RankSeasonTowerResponse = 20205;
-        public const ushort M2R_RankShowLieRequest = 20206;
-        public const ushort R2M_RankShowLieResponse = 20207;
-        public const ushort M2R_RankTrialRequest = 20208;
-        public const ushort R2M_RankTrialResponse = 20209;
-        public const ushort M2R_RankUpdateRequest = 20210;
-        public const ushort R2M_RankUpdateResponse = 20211;
-        public const ushort M2S_SoloMatchRequest = 20212;
-        public const ushort S2M_SoloMatchResponse = 20213;
-        public const ushort M2S_SoloEnterRequest = 20214;
-        public const ushort S2M_SoloEnterResponse = 20215;
-        public const ushort M2T_TeamDungeonCreateRequest = 20216;
-        public const ushort T2M_TeamDungeonCreateResponse = 20217;
-        public const ushort M2T_TeamDungeonOpenRequest = 20218;
-        public const ushort T2M_TeamDungeonOpenResponse = 20219;
-        public const ushort M2T_TeamDungeonPrepareRequest = 20220;
-        public const ushort T2M_TeamDungeonPrepareResponse = 20221;
-        public const ushort M2T_TeamDungeonEnterRequest = 20222;
-        public const ushort T2M_TeamDungeonEnterResponse = 20223;
-        public const ushort A2M_PetMingChanChuRequest = 20224;
-        public const ushort M2A_PetMingChanChuResponse = 20225;
-        public const ushort A2M_PetMingLoginRequest = 20226;
-        public const ushort M2A_PetMingLoginResponse = 20227;
-        public const ushort M2A_SeasonDonateRequest = 20228;
-        public const ushort A2M_SeasonDonateResponse = 20229;
-        public const ushort M2F_JiaYuanEnterRequest = 20230;
-        public const ushort F2M_JiaYuanEnterResponse = 20231;
-        public const ushort M2J_JiaYuanOperateRequest = 20232;
-        public const ushort J2M_JiaYuanOperateResponse = 20233;
-        public const ushort M2R_RechargeRequest = 20234;
-        public const ushort R2M_RechargeResponse = 20235;
-        public const ushort R2G_RechargeResultRequest = 20236;
-        public const ushort G2R_RechargeResultResponse = 20237;
-        public const ushort A2A_BroadcastSceneRequest = 20238;
-        public const ushort A2A_BroadcastSceneResponse = 20239;
+        public const ushort M2M_SeasonDonateCreateBossRequest = 20198;
+        public const ushort M2M_SeasonDonateCreateResponse = 20199;
+        public const ushort Popularize2M_RewardRequest = 20200;
+        public const ushort M2Popularize_RewardResponse = 20201;
+        public const ushort A2R_DeleteRoleData = 20202;
+        public const ushort R2A_DeleteRoleData = 20203;
+        public const ushort G2Rank_EnterRank = 20204;
+        public const ushort Rank2G_EnterRank = 20205;
+        public const ushort M2R_RankSeasonTowerRequest = 20206;
+        public const ushort R2M_RankSeasonTowerResponse = 20207;
+        public const ushort M2R_RankShowLieRequest = 20208;
+        public const ushort R2M_RankShowLieResponse = 20209;
+        public const ushort M2R_RankTrialRequest = 20210;
+        public const ushort R2M_RankTrialResponse = 20211;
+        public const ushort M2R_RankUpdateRequest = 20212;
+        public const ushort R2M_RankUpdateResponse = 20213;
+        public const ushort M2S_SoloMatchRequest = 20214;
+        public const ushort S2M_SoloMatchResponse = 20215;
+        public const ushort M2S_SoloEnterRequest = 20216;
+        public const ushort S2M_SoloEnterResponse = 20217;
+        public const ushort M2T_TeamDungeonCreateRequest = 20218;
+        public const ushort T2M_TeamDungeonCreateResponse = 20219;
+        public const ushort M2T_TeamDungeonOpenRequest = 20220;
+        public const ushort T2M_TeamDungeonOpenResponse = 20221;
+        public const ushort M2T_TeamDungeonPrepareRequest = 20222;
+        public const ushort T2M_TeamDungeonPrepareResponse = 20223;
+        public const ushort M2T_TeamDungeonEnterRequest = 20224;
+        public const ushort T2M_TeamDungeonEnterResponse = 20225;
+        public const ushort A2M_PetMingChanChuRequest = 20226;
+        public const ushort M2A_PetMingChanChuResponse = 20227;
+        public const ushort A2M_PetMingLoginRequest = 20228;
+        public const ushort M2A_PetMingLoginResponse = 20229;
+        public const ushort M2A_SeasonDonateRequest = 20230;
+        public const ushort A2M_SeasonDonateResponse = 20231;
+        public const ushort M2F_JiaYuanEnterRequest = 20232;
+        public const ushort F2M_JiaYuanEnterResponse = 20233;
+        public const ushort M2J_JiaYuanOperateRequest = 20234;
+        public const ushort J2M_JiaYuanOperateResponse = 20235;
+        public const ushort M2R_RechargeRequest = 20236;
+        public const ushort R2M_RechargeResponse = 20237;
+        public const ushort R2G_RechargeResultRequest = 20238;
+        public const ushort G2R_RechargeResultResponse = 20239;
+        public const ushort A2A_BroadcastSceneRequest = 20240;
+        public const ushort A2A_BroadcastSceneResponse = 20241;
     }
 }

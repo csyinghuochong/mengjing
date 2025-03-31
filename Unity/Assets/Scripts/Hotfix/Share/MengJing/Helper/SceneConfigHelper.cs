@@ -33,6 +33,22 @@ namespace ET
             return true;
         }
 
+        public static List<int> GetSceneListByType(int sceneType)
+        {
+            List<int> sceneList = new List<int>();
+            List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < sceneConfigs.Count; i++)
+            {
+                if (sceneConfigs[i].MapType != sceneType)
+                {
+                    continue;
+                }
+                sceneList.Add(sceneConfigs[i].Id);  
+            }
+
+            return sceneList;
+        }
+
         /// <summary>
         /// 单人副本
         /// </summary>

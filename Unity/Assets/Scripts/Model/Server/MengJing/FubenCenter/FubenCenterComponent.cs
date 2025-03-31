@@ -31,8 +31,6 @@ namespace ET.Server
     [ComponentOf(typeof(Scene))]
     public class FubenCenterComponent: Entity, IAwake
     {
-        public ServerInfo ServerInfo { get; set; }
-        
         public List<long> FubenInstanceList { get; set; } = new List<long>();
         
         public Dictionary<int, ActorId> FubenActorIdList { get; set; } = new Dictionary<int, ActorId>();

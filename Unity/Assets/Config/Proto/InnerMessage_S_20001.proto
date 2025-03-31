@@ -1675,6 +1675,21 @@ message M2M_AllPlayerListResponse // IResponse
 	repeated int64 AllPlayers = 1;
 }
 
+//ResponseType M2M_SeasonDonateCreateResponse
+message M2M_SeasonDonateCreateBossRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SeasonBossLevel = 1;
+}
+
+message M2M_SeasonDonateCreateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType M2Popularize_RewardResponse
 message Popularize2M_RewardRequest // IRequest
 {
