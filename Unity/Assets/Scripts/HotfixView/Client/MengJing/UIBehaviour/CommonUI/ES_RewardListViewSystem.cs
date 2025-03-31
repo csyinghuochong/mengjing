@@ -64,10 +64,10 @@ namespace ET.Client
             }
 
             self.ShowBagInfos = self.ShowBagInfos
-                    .OrderByDescending(t=>ItemConfigCategory.Instance.Get(t.ItemID).ItemQuality)
-                    .ThenBy(t=>ItemConfigCategory.Instance.Get(t.ItemID).ItemType == 3?0:1)
-                    .ToList();  
-            
+                    .OrderByDescending(t => ItemConfigCategory.Instance.Get(t.ItemID).ItemQuality)
+                    .ThenBy(t => ItemConfigCategory.Instance.Get(t.ItemID).ItemType == 3 ? 0 : 1)
+                    .ToList();
+
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
@@ -97,14 +97,22 @@ namespace ET.Client
             self.GetWay = getWay;
 
             self.ShowBagInfos.Clear();
-            string[] items = rewarfItems.Split('@');
-            foreach (string item in items)
+            if (!CommonHelp.IfNull(rewarfItems))
             {
-                string[] it = item.Split(';');
-                ItemInfo bagInfo = new ItemInfo();
-                bagInfo.ItemID = int.Parse(it[0]);
-                bagInfo.ItemNum = int.Parse(it[1]);
-                self.ShowBagInfos.Add(bagInfo);
+                string[] items = rewarfItems.Split('@');
+                foreach (string item in items)
+                {
+                    if (CommonHelp.IfNull(item))
+                    {
+                        continue;
+                    }
+
+                    string[] it = item.Split(';');
+                    ItemInfo bagInfo = new ItemInfo();
+                    bagInfo.ItemID = int.Parse(it[0]);
+                    bagInfo.ItemNum = int.Parse(it[1]);
+                    self.ShowBagInfos.Add(bagInfo);
+                }
             }
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);

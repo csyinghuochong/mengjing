@@ -50,6 +50,11 @@ namespace ET.Client
                 string[] items = rewarfItems.Split('@');
                 foreach (string item in items)
                 {
+                    if (CommonHelp.IfNull(item))
+                    {
+                        continue;
+                    }
+
                     string[] it = item.Split(';');
                     BagInfo bagInfo = BagInfo.Create();
                     bagInfo.ItemID = int.Parse(it[0]);
