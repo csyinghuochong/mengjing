@@ -1952,6 +1952,22 @@ message M2A_PetMingLoginResponse // IResponse
 	string Message = 92;
 }
 
+//赛季捐献
+//ResponseType A2M_SeasonDonateResponse
+message M2A_SeasonDonateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitID = 3;
+}
+
+message A2M_SeasonDonateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //进入家园
 //ResponseType F2M_JiaYuanEnterResponse
 message M2F_JiaYuanEnterRequest // IRequest

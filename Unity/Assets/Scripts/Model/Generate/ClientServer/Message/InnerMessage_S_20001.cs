@@ -8403,6 +8403,74 @@ namespace ET
         }
     }
 
+    // 赛季捐献
+    [MemoryPackable]
+    [Message(InnerMessage.M2A_SeasonDonateRequest)]
+    [ResponseType(nameof(A2M_SeasonDonateResponse))]
+    public partial class M2A_SeasonDonateRequest : MessageObject, IRequest
+    {
+        public static M2A_SeasonDonateRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2A_SeasonDonateRequest), isFromPool) as M2A_SeasonDonateRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long UnitID { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.UnitID = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.A2M_SeasonDonateResponse)]
+    public partial class A2M_SeasonDonateResponse : MessageObject, IResponse
+    {
+        public static A2M_SeasonDonateResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(A2M_SeasonDonateResponse), isFromPool) as A2M_SeasonDonateResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // 进入家园
     [MemoryPackable]
     [Message(InnerMessage.M2F_JiaYuanEnterRequest)]
@@ -9031,15 +9099,17 @@ namespace ET
         public const ushort M2A_PetMingChanChuResponse = 20225;
         public const ushort A2M_PetMingLoginRequest = 20226;
         public const ushort M2A_PetMingLoginResponse = 20227;
-        public const ushort M2F_JiaYuanEnterRequest = 20228;
-        public const ushort F2M_JiaYuanEnterResponse = 20229;
-        public const ushort M2J_JiaYuanOperateRequest = 20230;
-        public const ushort J2M_JiaYuanOperateResponse = 20231;
-        public const ushort M2R_RechargeRequest = 20232;
-        public const ushort R2M_RechargeResponse = 20233;
-        public const ushort R2G_RechargeResultRequest = 20234;
-        public const ushort G2R_RechargeResultResponse = 20235;
-        public const ushort A2A_BroadcastSceneRequest = 20236;
-        public const ushort A2A_BroadcastSceneResponse = 20237;
+        public const ushort M2A_SeasonDonateRequest = 20228;
+        public const ushort A2M_SeasonDonateResponse = 20229;
+        public const ushort M2F_JiaYuanEnterRequest = 20230;
+        public const ushort F2M_JiaYuanEnterResponse = 20231;
+        public const ushort M2J_JiaYuanOperateRequest = 20232;
+        public const ushort J2M_JiaYuanOperateResponse = 20233;
+        public const ushort M2R_RechargeRequest = 20234;
+        public const ushort R2M_RechargeResponse = 20235;
+        public const ushort R2G_RechargeResultRequest = 20236;
+        public const ushort G2R_RechargeResultResponse = 20237;
+        public const ushort A2A_BroadcastSceneRequest = 20238;
+        public const ushort A2A_BroadcastSceneResponse = 20239;
     }
 }
