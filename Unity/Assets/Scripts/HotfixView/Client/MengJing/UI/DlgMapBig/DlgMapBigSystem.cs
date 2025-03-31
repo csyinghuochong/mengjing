@@ -223,7 +223,7 @@ namespace ET.Client
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitInfo.ConfigId);
 
                 // 赛季boss
-                if (unitInfo.ConfigId == ConfigData.SeasonBossId)
+                if ( ConfigData.SeasonBossList.ContainsKey(unitInfo.ConfigId))
                 {
                     self.InstantiateIcon(self.View.EG_bossIconRectTransform.gameObject, vector3, monsterConfig.MonsterName);
                 }

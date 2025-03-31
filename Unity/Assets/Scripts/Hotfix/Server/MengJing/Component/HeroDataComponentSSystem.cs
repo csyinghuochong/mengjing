@@ -360,7 +360,7 @@ namespace ET.Server
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
              int resurrection = (int)monsterConfig.ReviveTime;
              MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-             if (ConfigData.SeasonBossId == unit.ConfigId && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+             if (ConfigData.SeasonBossList.ContainsKey(unit.ConfigId ) && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                  UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
@@ -710,7 +710,7 @@ namespace ET.Server
                      default:
                          break;
                  }
-                 if (monsterConfig.MonsterType == MonsterTypeEnum.Boss && monsterConfig.Id!=ConfigData.SeasonBossId)
+                 if (monsterConfig.MonsterType == MonsterTypeEnum.Boss && !ConfigData.SeasonBossList.ContainsKey( monsterConfig.Id))
                  {
                      switch (fubenDifficulty)
                      {

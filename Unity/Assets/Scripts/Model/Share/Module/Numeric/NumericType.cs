@@ -207,7 +207,9 @@
         public const int BabyRefreshTime = 4011;                                    //宝宝刷新次数
         public const int BaByType = 4012;
         public const int ZhuaBuTime = 4013;
-
+        public const int SeasonBossLeve = 4014;                                    //赛季领主等级  非赛季等级
+        public const int SeasonBossExp = 4015;                                    //赛季领主值
+        
         public const int Max = 10000;
 
         public const int Now_MaxHp = 1002;                                       //生命总值

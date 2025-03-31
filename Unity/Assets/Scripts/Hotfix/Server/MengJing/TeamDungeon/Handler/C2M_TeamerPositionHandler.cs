@@ -25,7 +25,7 @@ namespace ET.Server
                     response.UnitList.Add(UnitInfo);
                 }
                
-                if (sceneType == SceneTypeEnum.LocalDungeon && (uniitem.ConfigId == ConfigData.SeasonBossId ||uniitem.IsJingLingMonster()))
+                if (sceneType == SceneTypeEnum.LocalDungeon && ( ConfigData.SeasonBossList.ContainsKey(uniitem.ConfigId)   ||uniitem.IsJingLingMonster()))
                 {
                     UnitInfo unitInfo = UnitInfo.Create();
                     unitInfo.Type = uniitem.Type;

@@ -325,16 +325,16 @@ namespace ET.Server
 			if (SeasonHelper.GetOpenSeason(userInfoComponent.GetUserLv())!=null)
 			{
 				//赛季boss
-				// long serverNow = TimeHelper.ServerNow();
-				// long seasonBossTime = numericComponent.GetAsLong(NumericType.SeasonBossRefreshTime);
-				// int sessonBossFuben = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
-				// if (seasonBossTime > 0 && serverNow > seasonBossTime && mapComponent.SceneId == sessonBossFuben)
-				// {
-				// 	KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
-				// 	keyValuePairInt.KeyId = RandomHelper.RandomNumber(0, monsters.Length);
-				// 	keyValuePairInt.Value = ConfigData.SeasonBossId;
-				// 	randomMonsterList.Add(keyValuePairInt);
-				// }
+				long serverNow = TimeHelper.ServerNow();
+				long seasonBossTime = numericComponent.GetAsLong(NumericType.SeasonBossRefreshTime);
+				int sessonBossFuben = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
+				if (seasonBossTime > 0 && serverNow > seasonBossTime && mapComponent.SceneId == sessonBossFuben)
+				{
+					KeyValuePairInt keyValuePairInt = new KeyValuePairInt();
+					keyValuePairInt.KeyId = RandomHelper.RandomNumber(0, monsters.Length);
+					keyValuePairInt.Value = ConfigData.SeasonBossId;
+					randomMonsterList.Add(keyValuePairInt);
+				}
 			}
 
 			for (int i = 0; i < monsters.Length; i++)

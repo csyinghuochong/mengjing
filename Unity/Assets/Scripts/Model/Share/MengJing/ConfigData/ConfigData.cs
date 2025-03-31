@@ -1127,10 +1127,36 @@ namespace ET
         };
 
         /// <summary>
-        /// 赛季BOSS
+        /// 赛季BOSS  bossid->exp
         /// </summary>
         [StaticField]
-        public static int SeasonBossId = 90000051;
+        public static Dictionary<int, int> SeasonBossList = new Dictionary<int, int>()
+        {
+            {90000051, 10},
+            {90000051, 20},
+            {90000051, 30},
+            {90000051, 40},
+            {90000051, 50},
+            {90000051, 60},
+            {90000051, 70},
+            {90000051, 80},
+            {90000051, 90},
+            {90000051, 100},
+        };
+        
+        //赛季捐选道具ID.
+        public const int SeasonDonateItemId = 10024009;
+
+        /// <summary>
+        /// 赛季捐选奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> SeasonDonateReward = new Dictionary<int, string>()
+        {
+            { 10, "10025005;1@10025005;1" },
+            { 20, "10025005;1@10025005;1" },
+            { 30, "10025005;1@10025005;1" }
+        };
 
         [StaticField]
         public static Dictionary<int, int> MonsterToFuben = new Dictionary<int, int>();
@@ -2165,6 +2191,8 @@ namespace ET
             new KeyValuePairInt() { KeyId = 15000, Value = 77001807 }, 
             new KeyValuePairInt() { KeyId = 20000, Value = 77001808 },
         };
+        
+        
         
         /// <summary>
         /// SkillMake假配置

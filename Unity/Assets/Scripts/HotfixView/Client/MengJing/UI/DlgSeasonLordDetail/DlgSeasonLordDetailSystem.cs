@@ -67,8 +67,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
 
-            // int fubenid = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
-            int fubenid = 10001;
+            int fubenid = numericComponent.GetAsInt(NumericType.SeasonBossFuben);;
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(fubenid);
             using (zstring.Block())
             {
