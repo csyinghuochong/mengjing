@@ -1127,21 +1127,21 @@ namespace ET
         };
 
         /// <summary>
-        /// 赛季BOSS  bossid->exp
+        /// 赛季BOSS  bossid->exp  默认O级
         /// </summary>
         [StaticField]
-        public static Dictionary<int, int> SeasonBossList = new Dictionary<int, int>()
+        public static List<KeyValuePairInt> SeasonBossList = new List<KeyValuePairInt>()
         {
-            {90000051, 10},
-            {90000051, 20},
-            {90000051, 30},
-            {90000051, 40},
-            {90000051, 50},
-            {90000051, 60},
-            {90000051, 70},
-            {90000051, 80},
-            {90000051, 90},
-            {90000051, 100},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 10},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 20},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 30},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 40},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 50},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 60},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 70},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 80},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 90},
+            new KeyValuePairInt(){ KeyId = 90000051, Value = 100},
         };
         
         //赛季捐选道具ID.

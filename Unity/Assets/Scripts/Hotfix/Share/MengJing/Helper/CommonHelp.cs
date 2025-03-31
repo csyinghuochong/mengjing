@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
+using System.Linq;
 using ET.Client;
 
 namespace  ET
@@ -919,7 +920,12 @@ namespace  ET
             
             SettingData.FindPathLog.Clear();
         }
-        
+
+        public static bool IsSeasonBoss(int monsterid)
+        {
+            return ConfigData.SeasonBossList.Any(p => p.KeyId == monsterid);
+        }
+
         //宠物守护
         public static float GetPetShouHuPro(int mainValue, int fightValue)
         {
