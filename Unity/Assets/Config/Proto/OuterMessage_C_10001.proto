@@ -7090,6 +7090,37 @@ message M2C_SeasonLevelRewardResponse // ILocationResponse
 	string Message = 92;
 }
 
+//赛季捐献
+//ResponseType M2C_SeasonDonateResponse
+message C2M_SeasonDonateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_SeasonDonateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//赛季捐献
+//ResponseType M2C_SeasonDonateRewardResponse
+message C2M_SeasonDonateRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Times = 1;
+}
+
+message M2C_SeasonDonateRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //开启晶核
 //ResponseType M2C_SeasonOpenJingHeResponse
 message C2M_SeasonOpenJingHeRequest // ILocationRequest

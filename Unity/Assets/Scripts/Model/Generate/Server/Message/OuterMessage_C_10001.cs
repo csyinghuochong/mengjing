@@ -30852,6 +30852,138 @@ namespace ET
         }
     }
 
+    // 赛季捐献
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SeasonDonateRequest)]
+    [ResponseType(nameof(M2C_SeasonDonateResponse))]
+    public partial class C2M_SeasonDonateRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SeasonDonateRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SeasonDonateRequest), isFromPool) as C2M_SeasonDonateRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SeasonDonateResponse)]
+    public partial class M2C_SeasonDonateResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SeasonDonateResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SeasonDonateResponse), isFromPool) as M2C_SeasonDonateResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // 赛季捐献
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_SeasonDonateRewardRequest)]
+    [ResponseType(nameof(M2C_SeasonDonateRewardResponse))]
+    public partial class C2M_SeasonDonateRewardRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_SeasonDonateRewardRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_SeasonDonateRewardRequest), isFromPool) as C2M_SeasonDonateRewardRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int Times { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.Times = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_SeasonDonateRewardResponse)]
+    public partial class M2C_SeasonDonateRewardResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_SeasonDonateRewardResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_SeasonDonateRewardResponse), isFromPool) as M2C_SeasonDonateRewardResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     // 开启晶核
     [MemoryPackable]
     [Message(OuterMessage.C2M_SeasonOpenJingHeRequest)]
@@ -34249,78 +34381,82 @@ namespace ET
         public const ushort M2C_RolePetChouKaResponse = 10814;
         public const ushort C2M_SeasonLevelRewardRequest = 10815;
         public const ushort M2C_SeasonLevelRewardResponse = 10816;
-        public const ushort C2M_SeasonOpenJingHeRequest = 10817;
-        public const ushort M2C_SeasonOpenJingHeResponse = 10818;
-        public const ushort C2M_SeasonUseFruitRequest = 10819;
-        public const ushort M2C_SeasonUseFruitResponse = 10820;
-        public const ushort C2M_ShoujiRewardRequest = 10821;
-        public const ushort M2C_ShoujiRewardResponse = 10822;
-        public const ushort C2M_ShouJiTreasureRequest = 10823;
-        public const ushort M2C_ShouJiTreasureResponse = 10824;
-        public const ushort C2M_TitleUseRequest = 10825;
-        public const ushort M2C_TitleUseResponse = 10826;
-        public const ushort M2C_TitleUpdateResult = 10827;
-        public const ushort C2M_TowerFightBeginRequest = 10828;
-        public const ushort M2C_TowerFightBeginResponse = 10829;
-        public const ushort C2M_TowerExitRequest = 10830;
-        public const ushort M2C_TowerExitResponse = 10831;
-        public const ushort C2M_TowerOfSealNextRequest = 10832;
-        public const ushort M2C_TowerOfSealNextResponse = 10833;
-        public const ushort C2M_TrialDungeonBeginRequest = 10834;
-        public const ushort M2C_TrialDungeonBeginResponse = 10835;
-        public const ushort C2M_TrialDungeonFinishRequest = 10836;
-        public const ushort M2C_TrialDungeonFinishResponse = 10837;
-        public const ushort M2C_TrialDungeonDamage = 10838;
-        public const ushort C2M_TurtleRecordRequest = 10839;
-        public const ushort M2C_TurtleRecordResponse = 10840;
-        public const ushort C2M_TurtleSupportRequest = 10841;
-        public const ushort M2C_TurtleSupportResponse = 10842;
-        public const ushort C2M_WelfareDraw2Request = 10843;
-        public const ushort M2C_WelfareDraw2Response = 10844;
-        public const ushort C2M_WelfareDraw2RewardRequest = 10845;
-        public const ushort M2C_WelfareDraw2RewardResponse = 10846;
-        public const ushort C2M_WelfareDrawRequest = 10847;
-        public const ushort M2C_WelfareDrawResponse = 10848;
-        public const ushort C2M_WelfareDrawRewardRequest = 10849;
-        public const ushort M2C_WelfareDrawRewardResponse = 10850;
-        public const ushort C2M_WelfareInvestRequest = 10851;
-        public const ushort M2C_WelfareInvestResponse = 10852;
-        public const ushort C2M_WelfareInvestRewardRequest = 10853;
-        public const ushort M2C_WelfareInvestRewardResponse = 10854;
-        public const ushort C2M_WelfareTaskRewardRequest = 10855;
-        public const ushort M2C_WelfareTaskRewardResponse = 10856;
-        public const ushort C2M_YueKaOpenRequest = 10857;
-        public const ushort M2C_YueKaOpenResponse = 10858;
-        public const ushort C2M_YueKaRewardRequest = 10859;
-        public const ushort M2C_YueKaRewardResponse = 10860;
-        public const ushort C2Popularize_UploadRequest = 10861;
-        public const ushort Popularize2C_UploadResponse = 10862;
-        public const ushort C2Popularize_RewardRequest = 10863;
-        public const ushort Popularize2C_RewardResponse = 10864;
-        public const ushort TestServerInfoProto = 10865;
-        public const ushort ItemInfoProto = 10866;
-        public const ushort PetMeleeInfo = 10867;
-        public const ushort PetMeleeCardInfo = 10868;
-        public const ushort PetMeleeFubenInfo = 10869;
-        public const ushort C2M_PetMeleePlanRequest = 10870;
-        public const ushort M2C_PetMeleePlanResponse = 10871;
-        public const ushort C2M_PetMeleeSetRequest = 10872;
-        public const ushort M2C_PetMeleeSetResponse = 10873;
-        public const ushort C2M_PetMeleeGetMyCards = 10874;
-        public const ushort M2C_PetMeleeGetMyCards = 10875;
-        public const ushort M2C_PetMeleeDealCards = 10876;
-        public const ushort C2M_PetMeleePlace = 10877;
-        public const ushort M2C_PetMeleePlace = 10878;
-        public const ushort C2M_PetMeleeDisposeCard = 10879;
-        public const ushort M2C_PetMeleeDisposeCard = 10880;
-        public const ushort C2M_PetMeleeBegin = 10881;
-        public const ushort M2C_PetMeleeBegin = 10882;
-        public const ushort C2M_PetMeleeRewardRequest = 10883;
-        public const ushort M2C_PetMeleeRewardResponse = 10884;
-        public const ushort C2M_PetMeleeFubenRewardRequest = 10885;
-        public const ushort M2C_PetMeleeFubenRewardResponse = 10886;
-        public const ushort DamageValueInfo = 10887;
-        public const ushort C2M_DamageValueListRequest = 10888;
-        public const ushort M2C_DamageValueListResponse = 10889;
+        public const ushort C2M_SeasonDonateRequest = 10817;
+        public const ushort M2C_SeasonDonateResponse = 10818;
+        public const ushort C2M_SeasonDonateRewardRequest = 10819;
+        public const ushort M2C_SeasonDonateRewardResponse = 10820;
+        public const ushort C2M_SeasonOpenJingHeRequest = 10821;
+        public const ushort M2C_SeasonOpenJingHeResponse = 10822;
+        public const ushort C2M_SeasonUseFruitRequest = 10823;
+        public const ushort M2C_SeasonUseFruitResponse = 10824;
+        public const ushort C2M_ShoujiRewardRequest = 10825;
+        public const ushort M2C_ShoujiRewardResponse = 10826;
+        public const ushort C2M_ShouJiTreasureRequest = 10827;
+        public const ushort M2C_ShouJiTreasureResponse = 10828;
+        public const ushort C2M_TitleUseRequest = 10829;
+        public const ushort M2C_TitleUseResponse = 10830;
+        public const ushort M2C_TitleUpdateResult = 10831;
+        public const ushort C2M_TowerFightBeginRequest = 10832;
+        public const ushort M2C_TowerFightBeginResponse = 10833;
+        public const ushort C2M_TowerExitRequest = 10834;
+        public const ushort M2C_TowerExitResponse = 10835;
+        public const ushort C2M_TowerOfSealNextRequest = 10836;
+        public const ushort M2C_TowerOfSealNextResponse = 10837;
+        public const ushort C2M_TrialDungeonBeginRequest = 10838;
+        public const ushort M2C_TrialDungeonBeginResponse = 10839;
+        public const ushort C2M_TrialDungeonFinishRequest = 10840;
+        public const ushort M2C_TrialDungeonFinishResponse = 10841;
+        public const ushort M2C_TrialDungeonDamage = 10842;
+        public const ushort C2M_TurtleRecordRequest = 10843;
+        public const ushort M2C_TurtleRecordResponse = 10844;
+        public const ushort C2M_TurtleSupportRequest = 10845;
+        public const ushort M2C_TurtleSupportResponse = 10846;
+        public const ushort C2M_WelfareDraw2Request = 10847;
+        public const ushort M2C_WelfareDraw2Response = 10848;
+        public const ushort C2M_WelfareDraw2RewardRequest = 10849;
+        public const ushort M2C_WelfareDraw2RewardResponse = 10850;
+        public const ushort C2M_WelfareDrawRequest = 10851;
+        public const ushort M2C_WelfareDrawResponse = 10852;
+        public const ushort C2M_WelfareDrawRewardRequest = 10853;
+        public const ushort M2C_WelfareDrawRewardResponse = 10854;
+        public const ushort C2M_WelfareInvestRequest = 10855;
+        public const ushort M2C_WelfareInvestResponse = 10856;
+        public const ushort C2M_WelfareInvestRewardRequest = 10857;
+        public const ushort M2C_WelfareInvestRewardResponse = 10858;
+        public const ushort C2M_WelfareTaskRewardRequest = 10859;
+        public const ushort M2C_WelfareTaskRewardResponse = 10860;
+        public const ushort C2M_YueKaOpenRequest = 10861;
+        public const ushort M2C_YueKaOpenResponse = 10862;
+        public const ushort C2M_YueKaRewardRequest = 10863;
+        public const ushort M2C_YueKaRewardResponse = 10864;
+        public const ushort C2Popularize_UploadRequest = 10865;
+        public const ushort Popularize2C_UploadResponse = 10866;
+        public const ushort C2Popularize_RewardRequest = 10867;
+        public const ushort Popularize2C_RewardResponse = 10868;
+        public const ushort TestServerInfoProto = 10869;
+        public const ushort ItemInfoProto = 10870;
+        public const ushort PetMeleeInfo = 10871;
+        public const ushort PetMeleeCardInfo = 10872;
+        public const ushort PetMeleeFubenInfo = 10873;
+        public const ushort C2M_PetMeleePlanRequest = 10874;
+        public const ushort M2C_PetMeleePlanResponse = 10875;
+        public const ushort C2M_PetMeleeSetRequest = 10876;
+        public const ushort M2C_PetMeleeSetResponse = 10877;
+        public const ushort C2M_PetMeleeGetMyCards = 10878;
+        public const ushort M2C_PetMeleeGetMyCards = 10879;
+        public const ushort M2C_PetMeleeDealCards = 10880;
+        public const ushort C2M_PetMeleePlace = 10881;
+        public const ushort M2C_PetMeleePlace = 10882;
+        public const ushort C2M_PetMeleeDisposeCard = 10883;
+        public const ushort M2C_PetMeleeDisposeCard = 10884;
+        public const ushort C2M_PetMeleeBegin = 10885;
+        public const ushort M2C_PetMeleeBegin = 10886;
+        public const ushort C2M_PetMeleeRewardRequest = 10887;
+        public const ushort M2C_PetMeleeRewardResponse = 10888;
+        public const ushort C2M_PetMeleeFubenRewardRequest = 10889;
+        public const ushort M2C_PetMeleeFubenRewardResponse = 10890;
+        public const ushort DamageValueInfo = 10891;
+        public const ushort C2M_DamageValueListRequest = 10892;
+        public const ushort M2C_DamageValueListResponse = 10893;
     }
 }
