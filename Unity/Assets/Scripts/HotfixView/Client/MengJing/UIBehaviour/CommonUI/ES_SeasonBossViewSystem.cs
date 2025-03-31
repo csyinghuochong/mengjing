@@ -18,7 +18,16 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
-	}
+
+
+		public static async ETTask OnInitUI(this ES_SeasonBoss self)
+		{
+			
+
+			await ETTask.CompletedTask;
+		}
+
+    }
 
 
 }

@@ -6,7 +6,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, C2A_ActivityInfoRequest request, A2C_ActivityInfoResponse response)
         {
-            Log.Debug("1111111111111:C2A_ActivityInfoRequest");
+            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
+            //activitySceneComponent.DBDayActivityInfo
+
             await ETTask.CompletedTask;
         }
     }

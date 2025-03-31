@@ -987,6 +987,24 @@ message A2C_ActivityInfoResponse // IActivityActorResponse
 	string ActivityContent = 1;
 }
 
+//ResponseType A2C_CommonSeasonBossInfoResponse
+message C2A_CommonSeasonBossInfoRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ActivityType = 1;
+}
+
+message A2C_CommonSeasonBossInfoResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string ActivityContent = 1;
+	int32 CommonSeasonBossLevel = 2;
+	int32 CommonSeasonBossExp = 3;
+}
+
 //ResponseType A2C_FirstWinInfoResponse
 message C2A_FirstWinInfoRequest // IActivityActorRequest
 {

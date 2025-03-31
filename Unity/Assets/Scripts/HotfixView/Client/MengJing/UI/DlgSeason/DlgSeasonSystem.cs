@@ -39,6 +39,10 @@ namespace ET.Client
                 case 4:
                     self.View.ES_SeasonTower.uiTransform.gameObject.SetActive(true);
                     break;
+                case 5:
+                    self.View.ES_SeasonBoss.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SeasonBoss.OnInitUI().Coroutine();
+                    break;
             }
         }
     }

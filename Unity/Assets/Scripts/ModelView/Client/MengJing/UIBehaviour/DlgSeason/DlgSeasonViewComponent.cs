@@ -144,7 +144,28 @@ namespace ET.Client
             }
         }
 		
-		public void DestroyWidget()
+        public ES_SeasonBoss ES_SeasonBoss
+        {
+            get
+            {
+                ES_SeasonTower es = this.m_es_seasontower;
+                if (es == null)
+                {
+                    string path = "Assets/Bundles/UI/Common/ES_SeasonBoss.prefab";
+                    GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                    GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+                    go.SetActive(true);
+                    this.AssetList.Add(path);
+                    this.m_es_seasonboss = this.AddChild<ES_SeasonBoss, Transform>(go.transform);
+                    go.SetActive(false);
+                }
+
+                return this.m_es_seasonboss;
+            }
+        }
+
+
+        public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
@@ -153,7 +174,8 @@ namespace ET.Client
 			this.m_es_seasonjinghe = null;
 			this.m_es_seasonstore = null;
 			this.m_es_seasontower = null;
-			this.uiTransform = null;
+            this.m_es_seasonboss = null;
+            this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
 			for (int i = 0; i < this.AssetList.Count; i++)
@@ -171,6 +193,7 @@ namespace ET.Client
 		private EntityRef<ES_SeasonJingHe> m_es_seasonjinghe = null;
 		private EntityRef<ES_SeasonStore> m_es_seasonstore = null;
 		private EntityRef<ES_SeasonTower> m_es_seasontower = null;
-		public Transform uiTransform = null;
+        private EntityRef<ES_SeasonBoss> m_es_seasonboss = null;
+        public Transform uiTransform = null;
 	}
 }
