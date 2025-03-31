@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HighlightPlus;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -290,6 +291,49 @@ namespace ET.Client
         }
         public static void OnRenderButton(this ES_ModelShow self)
         {
+        }
+
+        public static void SetHighlight(this ES_ModelShow self, bool isHighlight)
+        {
+            if (self.Model.Count == 0)
+            {
+                return;
+            }
+
+            foreach (GameObject gameObject in self.Model)
+            {
+                HighlightEffect effect = gameObject.GetComponent<HighlightEffect>();
+                if (effect == null)
+                {
+                    effect = gameObject.AddComponent<HighlightEffect>();
+                    
+                    // effect.effectNameFilter = "BackDi";
+                    
+                    // 描边
+                    effect.outline = 1;
+                    effect.outlineColor = new Color(255f, 235f, 0f, 255f);
+                    effect.outlineWidth = 1.5f;
+
+                    // 发出微弱的光
+                    effect.glow = 1f;
+                    effect.glowWidth = 0.2f;
+                    effect.SetGlowColor(new Color(255f, 235f, 0f, 255f));
+                    effect.glowDownsampling = 1;
+                    effect.glowAnimationSpeed = 1f;
+                    
+                    effect.innerGlow = 0.5f;
+                    effect.innerGlowColor = new Color(1f, 1f, 1f, 1f);
+                    effect.innerGlowWidth = 1f;
+                    
+                    // 表面的颜色
+                    effect.overlay = 0.1f;
+                    effect.overlayColor = new Color(255f, 235f, 0f, 255f);
+                    
+                    effect.UpdateMaterialProperties();
+                }
+
+                effect.SetHighlighted(isHighlight);
+            }
         }
     }
 }
