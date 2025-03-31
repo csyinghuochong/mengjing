@@ -22,7 +22,7 @@ namespace ET.Client
 
 		public static async ETTask OnInitUI(this ES_SeasonBoss self)
 		{
-			
+			A2C_CommonSeasonBossInfoResponse infoResponse = await ActivityNetHelper.GetCommonSeasonBossInfo(self.Root());
 
 			await ETTask.CompletedTask;
 		}

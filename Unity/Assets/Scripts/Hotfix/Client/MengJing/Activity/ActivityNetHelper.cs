@@ -172,6 +172,14 @@ namespace ET.Client
             root.GetComponent<UserInfoComponentC>().UserInfo.FirstWinSelf = response.FirstWinInfos;
         }
 
+        public static async ETTask<A2C_CommonSeasonBossInfoResponse> GetCommonSeasonBossInfo(Scene root)
+        {
+            C2A_CommonSeasonBossInfoRequest request = C2A_CommonSeasonBossInfoRequest.Create();
+
+            A2C_CommonSeasonBossInfoResponse response = (A2C_CommonSeasonBossInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
         public static async ETTask<A2C_FirstWinInfoResponse> FirstWinInfo(Scene root)
         {
             C2A_FirstWinInfoRequest request = C2A_FirstWinInfoRequest.Create();
