@@ -44,7 +44,7 @@ namespace ET.Server
                 bagComponentS.OnAddItemData(getiteminfo, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
 
                 NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
-                numericComponentS.ApplyChange(NumericType.CommonSeasonDonateTime, 1);
+                numericComponentS.ApplyChange(NumericType.CommonSeasonDonateTimes, 1);
                 
                 response.CommonSeasonBossExp = r_GameStatusResponse.CommonSeasonBossExp;
                 response.CommonSeasonBossLevel = r_GameStatusResponse.CommonSeasonBossLevel;
