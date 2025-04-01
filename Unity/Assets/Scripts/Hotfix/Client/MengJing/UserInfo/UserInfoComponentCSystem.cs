@@ -353,6 +353,7 @@ namespace ET.Client
             self.UserInfo.SeasonExp = 0;
             self.UserInfo.SeasonCoin = 0;
             self.UserInfo.OpenJingHeIds.Clear();
+            self.UserInfo.SeasonDonateRewardIds.Clear();
         }
     }
 }

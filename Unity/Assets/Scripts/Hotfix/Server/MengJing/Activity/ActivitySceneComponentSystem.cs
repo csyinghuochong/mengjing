@@ -70,6 +70,7 @@ namespace ET.Server
             if (self.DBDayActivityInfo.LastHour != dateTime.Hour)
             {
                 self.DBDayActivityInfo.LastHour = dateTime.Hour;
+                self.CheckSeasonBoss();
                 self.NoticeActivityUpdate_Hour(dateTime).Coroutine();
             }
 
@@ -82,7 +83,19 @@ namespace ET.Server
             }
         }
 
-        public static async ETTask NoticeActivityUpdate_Hour(this ActivitySceneComponent self, DateTime dateTime)
+        private static void CheckSeasonBoss(this ActivitySceneComponent self)
+        {
+            KeyValuePairLong cur = SeasonHelper.GetOpenSeason(100);
+            if (cur!=null && cur.Value != self.DBDayActivityInfo.CommonSeasonOpenTime)
+            {
+                Console.WriteLine($"ActivitySceneComponent.CheckSeasonBoss");
+                self.DBDayActivityInfo.CommonSeasonOpenTime = cur.Value;
+                self.DBDayActivityInfo.CommonSeasonBossExp = 0;
+                self.DBDayActivityInfo.CommonSeasonBossLevel = 0;
+            }
+        }
+
+        private static async ETTask NoticeActivityUpdate_Hour(this ActivitySceneComponent self, DateTime dateTime)
         {
             await ETTask.CompletedTask;
             DayOfWeek dayOfWeek = dateTime.DayOfWeek;

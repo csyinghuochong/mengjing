@@ -72,6 +72,8 @@ namespace ET.Server
         /// 击杀boss后置空   1
         /// </summary>
         public int CommonSeasonBossRefreshState { get; set; } = 0;
+        
+        public long CommonSeasonOpenTime  { get; set; } = 0;
     }
 
 }

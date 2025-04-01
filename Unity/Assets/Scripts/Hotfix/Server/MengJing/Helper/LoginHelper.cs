@@ -71,6 +71,20 @@ namespace ET.Server
             DateTime dateTime = TimeInfo.Instance.ToDateTime(currentTime);
             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();   
             long lastLoginTime = numericComponentS.GetAsLong(NumericType.LastLoginTime);
+            
+            userInfoComponentS.OnLogin( remoteIp,  deviceName, currentTime);
+            unit.GetComponent<BagComponentS>().OnLogin(userInfo.RobotId);
+            unit.GetComponent<TaskComponentS>().OnLogin(userInfo.RobotId);
+            unit.GetComponent<HeroDataComponentS>().OnLogin(userInfo.RobotId);
+            unit.GetComponent<DBSaveComponent>().OnLogin();
+            unit.GetComponent<RechargeComponent>().OnLogin();
+            unit.GetComponent<PetComponentS>().OnLogin();
+            unit.GetComponent<ActivityComponentS>().OnLogin(userInfo.Lv);
+            unit.GetComponent<TitleComponentS>().OnCheckTitle(false);
+            unit.GetComponent<ChengJiuComponentS>().OnLogin(userInfo.Lv);
+            unit.GetComponent<JiaYuanComponentS>().OnLogin();
+            unit.GetComponent<SkillSetComponentS>().OnLogin(userInfo.Occ);
+            
             if (lastLoginTime != 0)
             {
                 DateTime lastdateTime = TimeInfo.Instance.ToDateTime(lastLoginTime);
@@ -142,18 +156,7 @@ namespace ET.Server
                 Log.Debug($"OnZeroClockUpdate [数据初始化]: {unit.Id}");
                 unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
             }
-            userInfoComponentS.OnLogin( remoteIp,  deviceName, currentTime);
-            unit.GetComponent<BagComponentS>().OnLogin(userInfo.RobotId);
-            unit.GetComponent<TaskComponentS>().OnLogin(userInfo.RobotId);
-            unit.GetComponent<HeroDataComponentS>().OnLogin(userInfo.RobotId);
-            unit.GetComponent<DBSaveComponent>().OnLogin();
-            unit.GetComponent<RechargeComponent>().OnLogin();
-            unit.GetComponent<PetComponentS>().OnLogin();
-            unit.GetComponent<ActivityComponentS>().OnLogin(userInfo.Lv);
-            unit.GetComponent<TitleComponentS>().OnCheckTitle(false);
-            unit.GetComponent<ChengJiuComponentS>().OnLogin(userInfo.Lv);
-            unit.GetComponent<JiaYuanComponentS>().OnLogin();
-            unit.GetComponent<SkillSetComponentS>().OnLogin(userInfo.Occ);
+            
         }
     }
 }

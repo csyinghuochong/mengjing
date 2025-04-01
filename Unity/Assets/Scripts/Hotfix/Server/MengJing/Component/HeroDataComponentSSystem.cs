@@ -148,12 +148,7 @@ namespace ET.Server
              self.CheckSeasonOver(false);
              self.CheckSeasonOpen(false);
          }
-
-         public static void ClearSeasonData(this HeroDataComponentS self)
-         { 
-             
-         }
-
+         
          public static void CheckSeasonOver(this HeroDataComponentS self, bool notice)
          {
              ///赛季数据[赛季开始]
@@ -184,23 +179,6 @@ namespace ET.Server
              }
          }
          
-         public static void SendSeasonReward(this HeroDataComponentS self, int seasonLevel)
-         {
-             string rewardItem = SeasonHelper.GetSeasonOverReward(seasonLevel);
-             if (string.IsNullOrEmpty(rewardItem))
-             {
-                 return;
-             }
-
-             MailInfo mailInfo = MailInfo.Create();
-             mailInfo.Status = 0;
-             mailInfo.Context = "赛季结束奖励";
-             mailInfo.Title = "赛季结束奖励";
-             mailInfo.MailId = IdGenerater.Instance.GenerateId();
-             mailInfo.ItemList.AddRange(ItemHelper.GetRewardItems_2(rewardItem));
-             MailHelp.SendUserMail( self.Root(), self.Id, mailInfo, ItemGetWay.Season ).Coroutine();
-         }
-        
          public static void CheckSeasonOpen(this HeroDataComponentS self, bool notice)
          {
              Unit unit = self.GetParent<Unit>();
@@ -217,7 +195,7 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }
 
-              KeyValuePairLong seasonOpenTime = SeasonHelper.GetOpenSeason(userInfoComponent.UserInfo.Lv);
+             KeyValuePairLong seasonOpenTime = SeasonHelper.GetOpenSeason(userInfoComponent.UserInfo.Lv);
              if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && seasonOpenTime != null)
              {
                  Log.Console($"CheckSeasonOpen: {unit.Id}");
@@ -234,7 +212,24 @@ namespace ET.Server
                  taskComponent.UpdateSeasonWeekTask(notice); 
              }
          }
+        
+         public static void SendSeasonReward(this HeroDataComponentS self, int seasonLevel)
+         {
+             string rewardItem = SeasonHelper.GetSeasonOverReward(seasonLevel);
+             if (string.IsNullOrEmpty(rewardItem))
+             {
+                 return;
+             }
 
+             MailInfo mailInfo = MailInfo.Create();
+             mailInfo.Status = 0;
+             mailInfo.Context = "赛季结束奖励";
+             mailInfo.Title = "赛季结束奖励";
+             mailInfo.MailId = IdGenerater.Instance.GenerateId();
+             mailInfo.ItemList.AddRange(ItemHelper.GetRewardItems_2(rewardItem));
+             MailHelp.SendUserMail( self.Root(), self.Id, mailInfo, ItemGetWay.Season ).Coroutine();
+         }
+         
          /// <summary>
          /// 重置。隔天登录或者零点刷新
          /// </summary>
@@ -310,6 +305,8 @@ namespace ET.Server
              // m2C_UnitNumericListUpdate.Vs = vs;
              // m2C_UnitNumericListUpdate.Ks = ks;
              // MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
+             self.CheckSeasonOver(notice);
+             self.CheckSeasonOpen(notice);
          }
 
          /// <summary>
