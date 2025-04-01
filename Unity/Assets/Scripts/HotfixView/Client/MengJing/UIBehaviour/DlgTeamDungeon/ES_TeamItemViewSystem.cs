@@ -53,6 +53,7 @@ namespace ET.Client
                 self.E_TextNameText.gameObject.SetActive(false);
                 self.E_TextCombatText.gameObject.SetActive(false);
                 self.E_TextOccText.gameObject.SetActive(false);
+                self.E_Image_Add.gameObject.SetActive(true);
             }
             else
             {
@@ -62,6 +63,7 @@ namespace ET.Client
                 self.E_TextNameText.gameObject.SetActive(true);
                 self.E_TextCombatText.gameObject.SetActive(true);
                 self.E_TextOccText.gameObject.SetActive(true);
+                self.E_Image_Add.gameObject.SetActive(false);
                 using (zstring.Block())
                 {
                     self.E_TextLevelText.text = zstring.Format("{0} 级", teamPlayerInfo.PlayerLv);

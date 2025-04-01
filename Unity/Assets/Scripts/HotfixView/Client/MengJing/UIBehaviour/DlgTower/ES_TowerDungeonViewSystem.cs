@@ -24,7 +24,7 @@ namespace ET.Client
             }
 
             globalValueConfig = GlobalValueConfigCategory.Instance.Get(61);
-            self.ES_RewardList.Refresh(globalValueConfig.Value);
+            self.ES_RewardList.Refresh(globalValueConfig.Value, 1f, false);
             self.OnButtonSelect(FubenDifficulty.Normal);
         }
 

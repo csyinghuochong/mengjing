@@ -130,6 +130,23 @@ namespace ET.Client
      			return this.m_E_TextOccText;
      		}
      	}
+		
+		public Image E_Image_Add
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Image_Add == null )
+				{
+					this.m_E_Image_Add = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_Add");
+				}
+				return this.m_E_Image_Add;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -152,6 +169,7 @@ namespace ET.Client
 			this.m_E_Text_Wait_2Text = null;
 			this.m_E_TextCombatText = null;
 			this.m_E_TextOccText = null;
+			this.m_E_Image_Add = null;
 			this.uiTransform = null;
 		}
 
@@ -162,6 +180,7 @@ namespace ET.Client
 		private Text m_E_Text_Wait_2Text = null;
 		private Text m_E_TextCombatText = null;
 		private Text m_E_TextOccText = null;
+		private Image m_E_Image_Add = null;
 		public Transform uiTransform = null;
 	}
 }
