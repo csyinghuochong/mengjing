@@ -5,7 +5,7 @@ rem 获取当前脚本所在目录
 set SOURCE_DIR=%~dp0
 
 rem 设置目标目录
-set TARGET_DIR=..\Unity\Assets\Bundles\Recast
+set TARGET_DIR=..\..\Unity\Assets\Bundles\Recast
 
 rem 确保目标目录存在
 if not exist "%TARGET_DIR%" (
