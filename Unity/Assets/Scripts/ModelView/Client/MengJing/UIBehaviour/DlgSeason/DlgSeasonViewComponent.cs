@@ -148,7 +148,7 @@ namespace ET.Client
         {
             get
             {
-                ES_SeasonTower es = this.m_es_seasontower;
+	            ES_SeasonBoss es = this.m_es_seasonboss;
                 if (es == null)
                 {
                     string path = "Assets/Bundles/UI/Common/ES_SeasonBoss.prefab";

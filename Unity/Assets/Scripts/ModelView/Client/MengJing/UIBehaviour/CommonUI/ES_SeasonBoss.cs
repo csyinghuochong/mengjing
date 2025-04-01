@@ -5,8 +5,11 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SeasonBoss : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_SeasonBoss : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+
+		public int LastSeasonBossLevel { get; set; } = -1;
+
 		public UnityEngine.UI.Image E_Img_LodingValueImage
      	{
      		get

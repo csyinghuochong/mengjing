@@ -1981,6 +1981,8 @@ message A2M_SeasonDonateResponse // IResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	int32 CommonSeasonBossLevel = 2;
+	int32 CommonSeasonBossExp = 3;
 }
 
 //进入家园

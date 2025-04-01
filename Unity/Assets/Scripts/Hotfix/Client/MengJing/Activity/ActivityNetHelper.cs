@@ -482,6 +482,14 @@ namespace ET.Client
             M2C_BattleSummonRecord response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_BattleSummonRecord;
             return response;
         }
+        
+        public static async ETTask<M2C_SeasonDonateResponse> SeasonDonateRequest(Scene root)
+        {
+            C2M_SeasonDonateRequest request = C2M_SeasonDonateRequest.Create();
+           
+            M2C_SeasonDonateResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_SeasonDonateResponse;
+            return response;
+        }
 
         public static async ETTask<M2C_BattleSummonResponse> BattleSummonRequest(Scene root, int summonId)
         {
