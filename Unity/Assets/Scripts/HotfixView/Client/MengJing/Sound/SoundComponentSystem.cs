@@ -198,6 +198,9 @@ namespace ET.Client
                     //     }
                     // }
                     break;
+                case SceneTypeEnum.LocalDungeon:
+                    music =DungeonConfigCategory.Instance.Get(sceneId).Music;
+                    break;
                 default:
                     music = "Fight_1";
                     break;
