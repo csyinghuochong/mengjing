@@ -345,10 +345,26 @@ namespace ET.Client
         {
             self.LoadMapCamera().Coroutine();
 
+            self.EG_MainCityShowRectTransform.gameObject.SetActive(true);
+
+            self.UpdateMapName();
+
+            self.EG_HeadListRectTransform.gameObject.SetActive(true);
+            //self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+            //self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
+
+            DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            using (zstring.Block())
+            {
+                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
+            }
+        }
+
+        public static void UpdateMapName(this ES_MapMini self)
+        {
             int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
             int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
-            self.EG_MainCityShowRectTransform.gameObject.SetActive(true);
 
             using (zstring.Block())
             {
@@ -405,18 +421,15 @@ namespace ET.Client
                         UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                         self.E_MapNameText.text = zstring.Format("{0} 家族地图", userInfoComponent.UserInfo.UnionName);
                         break;
+                    case SceneTypeEnum.SealTower:
+                        self.E_MapNameText.text = zstring.Format("{0} {1}", SceneConfigCategory.Instance.Get(sceneId).Name,
+                            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerArrived));
+                        break;
                     default:
                         //显示地图名称
                         self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
                         break;
                 }
-
-                self.EG_HeadListRectTransform.gameObject.SetActive(true);
-                //self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-                //self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MapMiniTimer, self);
-
-                DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
             }
         }
     }

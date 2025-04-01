@@ -328,6 +328,15 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [NumericWatcher(SceneType.Current, NumericType.SealTowerArrived)]
+    public class NumericWatcher_SealTowerArrived_UpdateDlgMain : INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MapMini.UpdateMapName();
+        }
+    }
 
     # endregion
 
