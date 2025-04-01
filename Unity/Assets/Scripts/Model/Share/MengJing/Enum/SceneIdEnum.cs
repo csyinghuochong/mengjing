@@ -70,6 +70,7 @@ namespace ET
         public const int OneChallenge = 26;    //1v1挑战
         public const int PetMelee = 27;      //宠物乱斗
         public const int DragonDungeon = 28;  //龙与地下城副本模式
+        public const int PetMatch = 29;      //宠物匹配
     }
 
     public static class SceneSubTypeEnum
