@@ -173,6 +173,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.ES_EquipSet.PlayerLv(userInfo.Lv);
             self.View.ES_EquipSet.PlayerName(userInfo.Name);
+            self.View.ES_EquipSet.PlayerCombat(userInfo.Combat);
             self.View.ES_EquipSet.ShowPlayerModel(new ItemInfo(), userInfo.Occ, 0, new List<int>());
 
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
@@ -239,6 +240,14 @@ namespace ET.Client
         {
             self.View.E_ZodiacButton.gameObject.SetActive(true);
             self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
+        }
+
+        public static void OnUpdateRoleZodiac(this DlgRole self)
+        {
+            if (self.View.ES_RoleZodiac.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_RoleZodiac.OnUpdate();
+            }
         }
     }
 }

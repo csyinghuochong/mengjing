@@ -63,6 +63,11 @@ namespace ET.Client
             self.E_RoseNameText.text = playerName;
         }
 
+        public static void PlayerCombat(this ES_EquipSet self, int combat)
+        {
+            self.E_CombatText.text = combat.ToString();
+        }
+
         public static void ShowPlayerModel(this ES_EquipSet self, ItemInfo bagInfo, int occ, int equipIndex, List<int> fashonids, int position = 0)
         {
             if (SettingData.ModelShow == 0)
@@ -145,11 +150,7 @@ namespace ET.Client
                 }
             }
 
-            DlgRole dlgRole = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>();
-            if (dlgRole != null)
-            {
-                dlgRole.View.ES_RoleZodiac.OnUpdate();
-            }
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnUpdateRoleZodiac();
         }
 
         private static void RefreshEquip_2(this ES_EquipSet self, List<ItemInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)

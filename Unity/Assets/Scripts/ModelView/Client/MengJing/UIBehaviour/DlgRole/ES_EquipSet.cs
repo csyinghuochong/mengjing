@@ -364,6 +364,23 @@ namespace ET.Client
      			return this.m_es_equipitemwuqi_2;
      		}
      	}
+		
+		public Text E_CombatText
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_CombatText == null )
+				{
+					this.m_E_CombatText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_FightValueShow/E_Combat");
+				}
+				return this.m_E_CombatText;
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -385,6 +402,7 @@ namespace ET.Client
 			this.m_es_equipitemtoukui_1 = null;
 			this.m_es_equipitemxianglian_1 = null;
 			this.m_es_equipitemwuqi_2 = null;
+			this.m_E_CombatText = null;
 			this.uiTransform = null;
 		}
 
@@ -406,6 +424,7 @@ namespace ET.Client
 		private EntityRef<ES_EquipItem> m_es_equipitemtoukui_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemxianglian_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemwuqi_2 = null;
+		private Text m_E_CombatText = null;
 		public Transform uiTransform = null;
 	}
 }
