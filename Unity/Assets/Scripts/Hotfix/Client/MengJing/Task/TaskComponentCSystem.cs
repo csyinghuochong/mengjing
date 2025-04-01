@@ -180,7 +180,24 @@ namespace ET.Client
 
         public static void OnRecvTaskUpdate(this TaskComponentC self, M2C_TaskUpdate message)
         {
-            self.RoleTaskList = message.RoleTaskList;
+            if (message.UpdateMode == 2)
+            {
+                foreach (TaskPro taskpro in message.RoleTaskList)
+                {
+                    for (int i = 0; i < self.RoleTaskList.Count; i++)
+                    {
+                        if (taskpro.taskID != self.RoleTaskList[i].taskID)
+                        {
+                            continue;
+                        }
+                        self.RoleTaskList[i] = taskpro;
+                    }
+                }
+            }
+            else
+            {
+                self.RoleTaskList = message.RoleTaskList;
+            }
             self.RoleComoleteTaskList = message.RoleComoleteTaskList;
             EventSystem.Instance.Publish(self.Root(), new TaskUpdate());
         }

@@ -58,6 +58,7 @@
 
         public static void OnBtn_Return(this DlgTowerFightReward self)
         {
+            EnterMapHelper.RequestQuitFuben(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerFightReward);
         }
     }

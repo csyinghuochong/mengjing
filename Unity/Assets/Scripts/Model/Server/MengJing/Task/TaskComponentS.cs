@@ -14,8 +14,6 @@ namespace ET.Server
 
         public List<TaskPro> RoleTaskList = new List<TaskPro>();
         public List<int> RoleComoleteTaskList { get; set; } = new List<int>();
-        
-        [BsonIgnore]
-        public M2C_TaskUpdate M2C_TaskUpdate = M2C_TaskUpdate.Create();
+
     }
 }

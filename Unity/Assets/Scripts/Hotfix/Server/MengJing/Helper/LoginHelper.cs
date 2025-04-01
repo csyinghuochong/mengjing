@@ -144,6 +144,8 @@ namespace ET.Server
                 unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
             }
             
+            //先重置数据
+            //再触发登陆
             userInfoComponentS.OnLogin( remoteIp,  deviceName, currentTime);
             unit.GetComponent<BagComponentS>().OnLogin(userInfo.RobotId);
             unit.GetComponent<TaskComponentS>().OnLogin(userInfo.RobotId);
