@@ -19,7 +19,7 @@ namespace ET.Server
         {
 
         }
-        
+
         public static void OnDisconnect(this EnergyComponentS self)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();
@@ -64,6 +64,11 @@ namespace ET.Server
             {
                 self.GetRewards[i] = 0;
             }
+        }
+        [EntitySystem]
+        private static void Deserialize(this ET.Server.EnergyComponentS self)
+        {
+
         }
     }
 
