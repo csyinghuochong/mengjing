@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    
-    
+
     [ComponentOf(typeof(Unit))]
-    public class EnergyComponentS: Entity, IAwake, IDestroy
+    public class EnergyComponentS: Entity, IAwake, IDestroy, ITransfer, IUnitCache, IDeserialize
     {
         //可否领取早睡奖励
         public bool EarlySleepReward{ get; set; } = true;
