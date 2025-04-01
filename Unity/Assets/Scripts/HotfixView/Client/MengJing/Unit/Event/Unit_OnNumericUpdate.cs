@@ -110,7 +110,7 @@
                     {
                         long oldvalue = args.OldValue;
                         long newvalue = args.Defend.GetComponent<NumericComponentC>().GetAsInt(NumericType.HappyCellIndex);
-                        if (oldvalue == newvalue)
+                        if (oldvalue == newvalue && oldvalue!=0)
                         {
                             FlyTipComponent.Instance.ShowFlyTip("位置没有改变！");
                         }

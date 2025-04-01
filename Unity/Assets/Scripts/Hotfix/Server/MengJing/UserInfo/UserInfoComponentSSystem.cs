@@ -176,12 +176,13 @@ namespace ET.Server
 
         public static void OnLogin(this UserInfoComponentS self, string remoteIp, string deviceName, long currentTime)
         {
-            self.CheckData();
             self.RemoteAddress = remoteIp;
             self.DeviceName = deviceName;
             
+            self.UpdateRankTime = TimeHelper.ServerNow();
             self.UserName = self.UserInfo.Name;
             self.ShouLieSendTime = 0;
+            self.CheckData();
         }
 
         public static void UpdateRoleMoneyAdd(this UserInfoComponentS self, int Type, string value, bool notice, int getWay,
