@@ -32,6 +32,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_ModelShow self)
         {
+            self.RemoveModel();
             self.DestroyWidget();
         }
 
@@ -233,8 +234,7 @@ namespace ET.Client
                     animator[i].Play(RandomHelper.RandFloat01() >= 0.5 ? "Skill_1" : "Skill_2");
                 }
             }
-
-            self.RemoveModel();
+            
             self.Model.Add(go);
         }
 
