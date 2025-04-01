@@ -20,10 +20,10 @@ if not exist "%UNITY_DIR%" (
     mkdir "%UNITY_DIR%"
 )
 
-rem 第一步：复制所有.bin文件到Config目录（去掉.bin后缀）
+rem 第一步：移动.bin文件到Config目录（去掉.bin后缀）
 for %%f in ("%SOURCE_DIR%*.bin") do (
     set FILENAME=%%~nf
-    copy /y "%%f" "%CONFIG_DIR%\!FILENAME!"
+    move /y "%%f" "%CONFIG_DIR%\!FILENAME!"
 )
 
 rem 第二步：从Config目录复制无后缀文件到Unity目录（加上.bytes后缀）
