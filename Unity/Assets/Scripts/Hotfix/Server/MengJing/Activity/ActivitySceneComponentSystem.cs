@@ -67,6 +67,11 @@ namespace ET.Server
         {
             DateTime dateTime = TimeHelper.DateTimeNow();
 
+            if (self.DBDayActivityInfo.CommonSeasonOpenTime == 0)
+            {
+                self.CheckSeasonBoss();
+            }
+
             if (self.DBDayActivityInfo.LastHour != dateTime.Hour)
             {
                 self.DBDayActivityInfo.LastHour = dateTime.Hour;
