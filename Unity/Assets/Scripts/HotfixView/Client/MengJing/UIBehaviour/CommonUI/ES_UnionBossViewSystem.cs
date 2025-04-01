@@ -31,7 +31,7 @@ namespace ET.Client
 
             int monsterId = FunctionHelp.GetUnionBossId(openDay);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
-            self.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 380f));
+            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 380f));
             using (zstring.Block())
             {
                 self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();

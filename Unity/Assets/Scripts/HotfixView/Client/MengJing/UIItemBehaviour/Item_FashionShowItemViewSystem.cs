@@ -161,13 +161,12 @@ namespace ET.Client
                 self.ES_ModelShow.ShowModelList(initPath, assetList).Coroutine();
             }
 
-            self.ES_ModelShow.Camera.localPosition = new Vector3((float)fashionConfig.Camera[0], (float)fashionConfig.Camera[1],
-                (float)fashionConfig.Camera[2]);
-            self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = (float)fashionConfig.Camera[3];
-            self.ES_ModelShow.EG_RootRectTransform.localPosition = new Vector2(self.Position * 1000, -20000);
+            self.ES_ModelShow.SetCameraPosition(new Vector3((float)fashionConfig.Camera[0], (float)fashionConfig.Camera[1], (float)fashionConfig.Camera[2]));
+            self.ES_ModelShow.Camera.fieldOfView = (float)fashionConfig.Camera[3];
+            // self.ES_ModelShow.SetRootPosition(new Vector2(self.Position * 1000, -20000));
             self.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
-            self.ES_ModelShow.Camera.GetComponent<Camera>().cullingMask = 1 << 0;
-            self.ES_ModelShow.Camera.GetComponent<Camera>().cullingMask = 1 << 11;
+            self.ES_ModelShow.Camera.cullingMask = 1 << 0;
+            self.ES_ModelShow.Camera.cullingMask = 1 << 11;
         }
     }
 }

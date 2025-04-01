@@ -15,16 +15,24 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.Camera = self.EG_RootRectTransform.transform.Find("Camera");
+            self.Camera = self.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>();
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
 
             self.AddComponent<ChangeEquipHelper>();
             self.E_RenderButton.AddListener(self.OnRenderButton);
+            
+            ES_ModelShow.DisPlayUIIndex += 1;
+            if (ES_ModelShow.DisPlayUIIndex >= 100)
+            {
+                ES_ModelShow.DisPlayUIIndex = 0;
+            }
+            self.SetRootPosition(new Vector3(0, ES_ModelShow.DisPlayUIIndex * 1000.0f, 0));
         }
 
         [EntitySystem]
         private static void Destroy(this ES_ModelShow self)
         {
+            self.RemoveModel();
             self.DestroyWidget();
         }
 
@@ -57,25 +65,24 @@ namespace ET.Client
             self.ClickHandler?.Invoke();
         }
 
-        public static void SetPosition(this ES_ModelShow self, Vector3 rootPos, Vector3 cameraPos)
-        {
-            self.EG_RootRectTransform.transform.localPosition = rootPos;
-            self.EG_RootRectTransform.transform.Find("Camera").localPosition = cameraPos;
-        }
-
         public static void SetRootPosition(this ES_ModelShow self, Vector3 vector3)
         {
             self.EG_RootRectTransform.transform.localPosition = vector3;
         }
 
-        public static void SetModelRotation(this ES_ModelShow self, Quaternion quaternion)
+        public static void SetModelParentPosition(this ES_ModelShow self, Vector3 vector3)
         {
-            self.EG_RootRectTransform.transform.Find("ModelParent").localRotation = quaternion;
+            self.ModelParent.localPosition = vector3;
+        }
+        
+        public static void SetModelParentRotation(this ES_ModelShow self, Quaternion quaternion)
+        {
+            self.ModelParent.localRotation = quaternion;
         }
 
         public static void SetCameraPosition(this ES_ModelShow self, Vector3 vector3)
         {
-            self.EG_RootRectTransform.transform.Find("Camera").localPosition = vector3;
+            self.Camera.transform.localPosition = vector3;
         }
 
         public static void RemoveModel(this ES_ModelShow self)
@@ -227,7 +234,7 @@ namespace ET.Client
                     animator[i].Play(RandomHelper.RandFloat01() >= 0.5 ? "Skill_1" : "Skill_2");
                 }
             }
-
+            
             self.Model.Add(go);
         }
 

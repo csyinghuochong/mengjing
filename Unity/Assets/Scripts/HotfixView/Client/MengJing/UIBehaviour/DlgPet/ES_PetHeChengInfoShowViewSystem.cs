@@ -95,13 +95,13 @@ namespace ET.Client
             }
             if (strs != null && strs.Length >= 5)
             {
-                self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = float.Parse(strs[3]);
-                self.ES_ModelShow.SetPosition(new Vector3(0 * 1000, 0, 0), new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
+                self.ES_ModelShow.Camera.fieldOfView = float.Parse(strs[3]);
+                self.ES_ModelShow.SetCameraPosition(new Vector3(float.Parse(strs[0]), float.Parse(strs[1]), float.Parse(strs[2])));
                 self.ES_ModelShow.RotationY = float.Parse(strs[4]); 
             }
             else
             {
-                self.ES_ModelShow.SetPosition(new Vector3(0 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+                self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
             }
             
             using (zstring.Block())

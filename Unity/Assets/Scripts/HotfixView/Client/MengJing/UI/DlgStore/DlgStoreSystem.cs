@@ -21,8 +21,8 @@ namespace ET.Client
         private static void InitModelShowView(this DlgStore self)
         {
             //配置摄像机位置[0,115,257]
-            self.View.ES_ModelShow.EG_RootRectTransform.transform.Find("Camera").localPosition = new Vector3(0f, 100, 257f);
-            self.View.ES_ModelShow.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>().fieldOfView = 50;
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100, 257f));
+            self.View.ES_ModelShow.Camera.fieldOfView = 50;
         }
 
         public static void OncloseButtonButton(this DlgStore self)

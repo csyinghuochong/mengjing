@@ -63,8 +63,8 @@ namespace ET.Client
             // self.ES_ModelShow.ShowOtherModel("ZuoQi/" + modelID).Coroutine();
             self.ES_ModelShow.ShowOtherModel("Monster/70001001").Coroutine();
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 112f, 450f));
-            self.ES_ModelShow.SetRootPosition(new Vector2(zuoQiConfig.Id % 20 * 1000, 0));
-            self.ES_ModelShow.SetModelRotation(Quaternion.Euler(0f, -45f, 0f));
+            // self.ES_ModelShow.SetRootPosition(new Vector2(zuoQiConfig.Id % 20 * 1000, 0));
+            self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             //显示属性和来源
             self.E_LabProDesText.text = self.ZuoQiConfig.Des;

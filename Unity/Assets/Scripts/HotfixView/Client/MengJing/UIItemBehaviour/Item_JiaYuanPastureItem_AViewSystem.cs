@@ -21,10 +21,10 @@ namespace ET.Client
         {
             // self.ES_ModelShow.ShowOtherModel("Pasture/" + zuoQiConfig.Assets).Coroutine();
             self.ES_ModelShow.ShowOtherModel("Pasture/10001").Coroutine();
-            self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));
-            self.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.ES_ModelShow.Camera.fieldOfView = 30;
+            // self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));
+            self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
         }
 
         public static void OnUpdateUI(this Scroll_Item_JiaYuanPastureItem_A self, MysteryItemInfo mysteryItemInfo, int index)

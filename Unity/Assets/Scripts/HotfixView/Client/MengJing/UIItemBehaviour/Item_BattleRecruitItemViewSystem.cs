@@ -46,10 +46,10 @@ namespace ET.Client
 
             // self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID).Coroutine();
             self.ES_ModelShow.ShowOtherModel("Monster/70001001").Coroutine();
-            self.ES_ModelShow.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.ES_ModelShow.EG_RootRectTransform.localPosition = new Vector2(1000 + 1000, 0);
-            self.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.ES_ModelShow.Camera.fieldOfView = 30;
+            // self.ES_ModelShow.SetRootPosition(new Vector2(1000 + 1000, 0));
+            self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             //显示属性
             self.E_PropertiesText_0Text.gameObject.SetActive(true);

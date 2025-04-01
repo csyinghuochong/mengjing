@@ -28,7 +28,7 @@ namespace ET.Client
 
         private static void InitModelShowView(this DlgPetChouKaGet self, RolePetInfo rolePetInfo)
         {
-            self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 115, 257f));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
 
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             using (zstring.Block())
