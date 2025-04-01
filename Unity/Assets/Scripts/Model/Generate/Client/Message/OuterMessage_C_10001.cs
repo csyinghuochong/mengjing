@@ -30980,6 +30980,12 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int CommonSeasonBossLevel { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int CommonSeasonBossExp { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -30990,6 +30996,8 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.CommonSeasonBossLevel = default;
+            this.CommonSeasonBossExp = default;
 
             ObjectPool.Instance.Recycle(this);
         }

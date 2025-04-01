@@ -69,9 +69,9 @@ namespace ET.Server
         public int CommonSeasonBossExp { get; set; } = 0;
         
         /// <summary>
-        /// 击杀boss后置空
+        /// 击杀boss后置空   1
         /// </summary>
-        public long CommonSeasonBossRefreshTime { get; set; } = 0;
+        public int CommonSeasonBossRefreshState { get; set; } = 0;
     }
 
 }

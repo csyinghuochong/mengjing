@@ -41,7 +41,9 @@ namespace ET.Server
                     response.Error = r_GameStatusResponse.Error;
                     return;
                 }
-            
+
+                response.CommonSeasonBossExp = r_GameStatusResponse.CommonSeasonBossExp;
+                response.CommonSeasonBossLevel = r_GameStatusResponse.CommonSeasonBossLevel;
                 await ETTask.CompletedTask;
             }
 

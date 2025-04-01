@@ -24,7 +24,7 @@ namespace ET.Server
             {
                 petMingPlayerInfos.CommonSeasonBossLevel += 1;
                 petMingPlayerInfos.CommonSeasonBossExp = 0;
-                petMingPlayerInfos.CommonSeasonBossRefreshTime = TimeHelper.ServerNow();
+                petMingPlayerInfos.CommonSeasonBossRefreshState = 1;
                 uplevel = true;
             }
             
@@ -35,9 +35,14 @@ namespace ET.Server
                 F2M_FubenSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await scene.Root().GetComponent<MessageSender>().Call(
                     UnitCacheHelper.GetFubenCenterId(scene.Zone()), M2F_FubenSceneIdRequest);
                 
-                
+                M2M_SeasonDonateCreateBossRequest mSeasonDonateCreateBossRequest = M2M_SeasonDonateCreateBossRequest.Create();
+                mSeasonDonateCreateBossRequest.SeasonBossLevel = petMingPlayerInfos.CommonSeasonBossLevel - 1;
+                M2M_SeasonDonateCreateBossResponse mSeasonDonateCreateBossResponse = (M2M_SeasonDonateCreateBossResponse)await scene.Root().GetComponent<MessageSender>().Call(
+                    f2M_YeWaiSceneIdResponse.FubenActorId, mSeasonDonateCreateBossRequest);
             }
-           
+
+            response.CommonSeasonBossExp = petMingPlayerInfos.CommonSeasonBossExp;
+            response.CommonSeasonBossLevel = petMingPlayerInfos.CommonSeasonBossLevel;
             await ETTask.CompletedTask;
         }
     }

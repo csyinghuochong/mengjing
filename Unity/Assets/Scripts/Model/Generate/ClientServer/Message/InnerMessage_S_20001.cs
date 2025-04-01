@@ -7225,7 +7225,7 @@ namespace ET
 
     [MemoryPackable]
     [Message(InnerMessage.M2M_SeasonDonateCreateBossRequest)]
-    [ResponseType(nameof(M2M_SeasonDonateCreateResponse))]
+    [ResponseType(nameof(M2M_SeasonDonateCreateBossResponse))]
     public partial class M2M_SeasonDonateCreateBossRequest : MessageObject, IRequest
     {
         public static M2M_SeasonDonateCreateBossRequest Create(bool isFromPool = false)
@@ -7258,12 +7258,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(InnerMessage.M2M_SeasonDonateCreateResponse)]
-    public partial class M2M_SeasonDonateCreateResponse : MessageObject, IResponse
+    [Message(InnerMessage.M2M_SeasonDonateCreateBossResponse)]
+    public partial class M2M_SeasonDonateCreateBossResponse : MessageObject, IResponse
     {
-        public static M2M_SeasonDonateCreateResponse Create(bool isFromPool = false)
+        public static M2M_SeasonDonateCreateBossResponse Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(M2M_SeasonDonateCreateResponse), isFromPool) as M2M_SeasonDonateCreateResponse;
+            return ObjectPool.Instance.Fetch(typeof(M2M_SeasonDonateCreateBossResponse), isFromPool) as M2M_SeasonDonateCreateBossResponse;
         }
 
         [MemoryPackOrder(89)]
@@ -8523,6 +8523,12 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int CommonSeasonBossLevel { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int CommonSeasonBossExp { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -8533,6 +8539,8 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.CommonSeasonBossLevel = default;
+            this.CommonSeasonBossExp = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -9137,7 +9145,7 @@ namespace ET
         public const ushort M2M_AllPlayerListRequest = 20196;
         public const ushort M2M_AllPlayerListResponse = 20197;
         public const ushort M2M_SeasonDonateCreateBossRequest = 20198;
-        public const ushort M2M_SeasonDonateCreateResponse = 20199;
+        public const ushort M2M_SeasonDonateCreateBossResponse = 20199;
         public const ushort Popularize2M_RewardRequest = 20200;
         public const ushort M2Popularize_RewardResponse = 20201;
         public const ushort A2R_DeleteRoleData = 20202;
