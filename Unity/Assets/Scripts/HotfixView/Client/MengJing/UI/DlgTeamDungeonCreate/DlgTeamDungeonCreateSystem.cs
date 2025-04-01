@@ -209,6 +209,8 @@ namespace ET.Client
             await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
             root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonCreate);
             root.GetComponent<UIComponent>().GetDlgLogic<DlgDragonDungeon>().View.E_FunctionSetBtnToggleGroup.OnSelectIndex(1);
+            //await root.GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
+            FlyTipComponent.Instance.ShowFlyTip($"创建{SceneConfigCategory.Instance.Get(self.FubenId).Name}副本成功！");
         }
         
         public static void OnCloseButtonButton(this DlgTeamDungeonCreate self)
