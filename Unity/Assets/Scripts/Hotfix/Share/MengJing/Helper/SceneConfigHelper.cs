@@ -96,7 +96,8 @@ namespace ET
         {
             return sceneType != SceneTypeEnum.LocalDungeon
                  && sceneType != SceneTypeEnum.CellDungeon
-                 && sceneType != SceneTypeEnum.DragonDungeon;
+                 && sceneType != SceneTypeEnum.DragonDungeon
+                 && sceneType != SceneTypeEnum.LoginScene;
         }
 
         public static bool IfCanRevive(int sceneType, int sceneId)

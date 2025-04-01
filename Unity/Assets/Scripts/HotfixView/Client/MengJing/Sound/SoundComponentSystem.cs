@@ -204,9 +204,9 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if(SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if(SceneConfigHelper.UseSceneConfig(sceneTypeEnum))
             {
-                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
                 music = sceneConfig.Music;
             }
             
