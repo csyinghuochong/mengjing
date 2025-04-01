@@ -21,7 +21,7 @@ namespace ET.Client
 
         public static void OnInitUI(this ES_TeamItem self, int index)
         {
-            self.ES_ModelShow.SetRootPosition(new Vector3(index * 1000, 0, 0));
+            // self.ES_ModelShow.SetRootPosition(new Vector3(index * 1000, 0, 0));
             self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 55f, 115f));
 
             self.ES_ModelShow.ClickHandler = () => { self.OnClickTeamItem().Coroutine(); };

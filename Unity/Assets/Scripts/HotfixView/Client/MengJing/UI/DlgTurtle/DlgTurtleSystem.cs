@@ -26,22 +26,22 @@ namespace ET.Client
         public static void InitModel(this DlgTurtle self)
         {
             self.View.ES_ModelShow1.ShowOtherModel("NPC/" + NpcConfigCategory.Instance.Get(20099008).Asset).Coroutine();
-            self.View.ES_ModelShow1.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.View.ES_ModelShow1.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.View.ES_ModelShow1.SetRootPosition(new Vector2(1000 + 1000, 0));
-            self.View.ES_ModelShow1.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.View.ES_ModelShow1.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.View.ES_ModelShow1.Camera.fieldOfView = 30;
+            // self.View.ES_ModelShow1.SetRootPosition(new Vector2(1000 + 1000, 0));
+            self.View.ES_ModelShow1.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             self.View.ES_ModelShow2.ShowOtherModel("NPC/" + NpcConfigCategory.Instance.Get(20099009).Asset).Coroutine();
-            self.View.ES_ModelShow2.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.View.ES_ModelShow2.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.View.ES_ModelShow2.SetRootPosition(new Vector2(1000 + 1000, 0));
-            self.View.ES_ModelShow2.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.View.ES_ModelShow2.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.View.ES_ModelShow2.Camera.fieldOfView = 30;
+            // self.View.ES_ModelShow2.SetRootPosition(new Vector2(1000 + 1000, 0));
+            self.View.ES_ModelShow2.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             self.View.ES_ModelShow3.ShowOtherModel("NPC/" + NpcConfigCategory.Instance.Get(20099010).Asset).Coroutine();
-            self.View.ES_ModelShow3.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.View.ES_ModelShow3.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.View.ES_ModelShow3.SetRootPosition(new Vector2(1000 + 1000, 0));
-            self.View.ES_ModelShow3.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.View.ES_ModelShow3.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.View.ES_ModelShow3.Camera.fieldOfView = 30;
+            // self.View.ES_ModelShow3.SetRootPosition(new Vector2(1000 + 1000, 0));
+            self.View.ES_ModelShow3.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
         }
 
         public static async ETTask OnTurtleBtn(this DlgTurtle self, int supportId)

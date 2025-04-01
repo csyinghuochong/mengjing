@@ -38,10 +38,10 @@ namespace ET.Client
 
             // self.View.ES_ModelShow.ShowOtherModel($"JiaYuan/{jiaYuanFarmConfig.ModelID + stage}").Coroutine();
             self.View.ES_ModelShow.ShowOtherModel($"JiaYuan/100101").Coroutine();
-            self.View.ES_ModelShow.Camera.localPosition = new Vector3(1f, 11f, 150f);
-            self.View.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 15;
-            self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
-            self.View.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(1f, 11f, 150f));
+            self.View.ES_ModelShow.Camera.fieldOfView = 15;
+            // self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
+            self.View.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             self.View.E_TextNameText.text = jiaYuanFarmConfig.Name;
             self.View.E_TextStageText.text = ET.JiaYuanHelper.GetPlanStageName(stage);

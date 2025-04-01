@@ -52,9 +52,9 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(jiaYuanPet.ConfigId);
             self.View.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
-            self.View.ES_ModelShow.Camera.localPosition = new Vector3(0f, 100f, 450f);
-            self.View.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
-            self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 450f));
+            self.View.ES_ModelShow.Camera.fieldOfView = 30;
+            // self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
             self.View.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
 
             self.OnUpdateItemList();

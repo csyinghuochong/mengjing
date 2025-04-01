@@ -10,7 +10,11 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ModelShow : Entity,IAwake<Transform>,IDestroy
 	{
-		public Transform Camera { get; set; }
+		// 每显示一次就会+1 用于位置偏移 防止RenderTexture画面中出现几个模型
+		[StaticField]
+		public static int DisPlayUIIndex = 0;
+		
+		public Camera Camera { get; set; }
 		public Transform ModelParent { get; set; }
 		public List<GameObject> Model = new();
 		public RenderTexture RenderTexture;

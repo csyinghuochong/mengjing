@@ -38,10 +38,10 @@ namespace ET.Client
                 //显示模型
                 self.View.ES_ModelShow.ShowOtherModel("ItemModel/" + itemConfig.ItemModelID).Coroutine();
 
-                self.View.ES_ModelShow.Camera.localPosition = new Vector3(5.4f, 40.2f, 214.8f);
-                self.View.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 25;
-                self.View.ES_ModelShow.ModelParent.localPosition = new Vector2(10000, 0);
-                self.View.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+                self.View.ES_ModelShow.SetCameraPosition(new Vector3(5.4f, 40.2f, 214.8f));
+                self.View.ES_ModelShow.Camera.fieldOfView = 25;
+                self.View.ES_ModelShow.SetModelParentPosition(new Vector2(10000, 0));
+                self.View.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
             }
         }
     }

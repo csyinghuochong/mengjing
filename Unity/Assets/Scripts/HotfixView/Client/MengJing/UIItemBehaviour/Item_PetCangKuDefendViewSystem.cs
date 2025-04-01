@@ -154,10 +154,10 @@ namespace ET.Client
 
                 PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
                 self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
-                self.ES_ModelShow.Camera.localPosition = new(0f, 100f, 450f);
-                self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
-                self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));
-                self.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+                self.ES_ModelShow.SetCameraPosition(new(0f, 100f, 450f));
+                self.ES_ModelShow.Camera.fieldOfView = 30;
+                // self.ES_ModelShow.SetRootPosition(new Vector2(index * 1000 + 1000, 0));
+                self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
             }
             else
             {

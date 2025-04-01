@@ -24,13 +24,12 @@ namespace ET.Client
             JingLingConfig jingLingConfig = JingLingConfigCategory.Instance.Get(jid);
             self.JingLingId = jid;
             self.E_NameText.text = jingLingConfig.Name;
-
-            GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
+            
             // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
             self.ES_ModelShow.ShowOtherModel("JingLing/70001001").Coroutine();
-            gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
-            gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
-            gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
+            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 40f, 200f));
+            // self.ES_ModelShow.SetRootPosition(new Vector2(jingLingConfig.Id % 10 * 1000, 0));
+            self.ES_ModelShow.SetModelParentRotation(Quaternion.Euler(0f, -45f, 0f));
 
             bool active = jingLingInfo.IsActive == 1;
             self.E_ActivatedText.text = active ? "已激活" : "未激活";

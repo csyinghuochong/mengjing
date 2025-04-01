@@ -41,12 +41,12 @@ namespace ET.Client
         public static void OnInitModelShow(this ES_FashionShow self)
         {
             //模型展示界面
-            self.ES_ModelShow.SetRootPosition(new Vector2(2000, 20000));
+            // self.ES_ModelShow.SetRootPosition(new Vector2(2000, 20000));
             //配置摄像机位置[0,115,257]
-            self.ES_ModelShow.Camera.localPosition = new Vector3(-20f, 80f, 250f);
-            self.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 35;
-            self.ES_ModelShow.Camera.GetComponent<Camera>().cullingMask = 1 << 0;
-            self.ES_ModelShow.Camera.GetComponent<Camera>().cullingMask = 1 << 11;
+            self.ES_ModelShow.SetCameraPosition(new Vector3(-20f, 80f, 250f));
+            self.ES_ModelShow.Camera.fieldOfView = 35;
+            self.ES_ModelShow.Camera.cullingMask = 1 << 0;
+            self.ES_ModelShow.Camera.cullingMask = 1 << 11;
         }
 
         private static void OnFashionShowItemsRefresh(this ES_FashionShow self, Transform transform, int index)
