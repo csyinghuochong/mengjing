@@ -42,7 +42,7 @@
                 FlyTipComponent.Instance.ShowFlyTip("该层boss并未击败，请击败本次boss再继续挑战!!!");
                 return;
             }
-
+            
             // 打开花费道具继续挑战UI
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOfSealCost).Coroutine();
         }

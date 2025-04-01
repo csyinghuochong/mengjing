@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -113,6 +114,17 @@ namespace ET.Client
             self.BeginTimer();
             self.OnResetHurt();
             self.ResetMainUI();
+            self.ShowBossBronEffect();
+        }
+
+        private static void ShowBossBronEffect(this DlgTrialMain self)
+        {
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            TowerConfig towerConfig = TowerConfigCategory.Instance.Get(mapComponent.SonSceneId);
+            string[] monsterinfo = towerConfig.MonsterSet.Split(';');
+            string[] positioninfo = monsterinfo[1].Split(',');
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            FunctionEffect.PlayEffectPosition(unit, 200007, new float3( float.Parse(positioninfo[0]), float.Parse(positioninfo[1]),  float.Parse(positioninfo[2]) ));
         }
 
         private static void ResetMainUI(this DlgTrialMain self)
