@@ -29,7 +29,7 @@ namespace ET.Client
 			 var item = ConfigData.CommonSeasonDonateReward.ToList()[index];
 			 Scroll_Item_SeasonDonateItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
 			 scrollItemRechargeItem.OnInitData(item.Key, item.Value);
-			 //scrollItemRechargeItem.SetClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
+			 //scrollItemRechargeItem.SetOnInitDataClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
 		 }
 		
 		private static void ShowRewardList(this DlgSeasonDonateReward self)

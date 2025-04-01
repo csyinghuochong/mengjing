@@ -50,6 +50,8 @@ namespace ET.Client
 			
 			self.ES_RewardList.Refresh(ConfigData.CommonSeasonDonateGetItem,1f,false);
 
+			Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+			NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
 			using (zstring.Block())
 			{
 				if (self.LastSeasonBossLevel != bosslv)
@@ -84,6 +86,8 @@ namespace ET.Client
 				}
 
 				self.E_SeasonBossLevelText.text = zstring.Format("{0}级", bosslv + 1);
+
+				self.E_SeasonDonateTimes.text = zstring.Format("当前您已捐献{0}次", numericComponentC.GetAsInt(NumericType.CommonSeasonDonateTimes));
 			}
 
 			self.ES_CostItem.UpdateItem( ConfigData.CommonSeasonDonateItemId, 1 );

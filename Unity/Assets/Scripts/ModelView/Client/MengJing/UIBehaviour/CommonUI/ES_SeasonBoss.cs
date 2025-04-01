@@ -206,6 +206,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_SeasonDonateTimes
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_SeasonDonateTimes == null )
+				{
+					this.m_E_SeasonDonateTimes = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonDonateTimes");
+				}
+				return this.m_E_SeasonDonateTimes;
+			}
+		}
+
 		    public Transform UITransform
          {
      	    get
@@ -231,6 +248,7 @@ namespace ET.Client
 			this.m_es_costitem = null;
 			this.m_E_SeasonExperienceTextText = null;
 			this.m_E_SeasonBossLevelText = null;
+			this.m_E_SeasonDonateTimes = null;
 			this.uiTransform = null;
 		}
 
@@ -245,6 +263,7 @@ namespace ET.Client
 		private EntityRef<ES_CostItem> m_es_costitem = null;
 		private UnityEngine.UI.Text m_E_SeasonExperienceTextText = null;
 		private UnityEngine.UI.Text m_E_SeasonBossLevelText = null;
+		private UnityEngine.UI.Text m_E_SeasonDonateTimes = null;
 		public Transform uiTransform = null;
 	}
 }

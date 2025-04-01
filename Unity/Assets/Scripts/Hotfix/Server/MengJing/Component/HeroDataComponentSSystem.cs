@@ -176,6 +176,7 @@ namespace ET.Server
                  numericComponent.ApplyValue(NumericType.SeasonBossRefreshTime, 0, notice);
                  numericComponent.ApplyValue(NumericType.SeasonTowerId, 0, notice);
                  numericComponent.ApplyValue(NumericType.SeasonTask, 0, notice);
+                 numericComponent.ApplyValue(NumericType.CommonSeasonDonateTimes, 0, notice);
 
                  unit.GetComponent<UserInfoComponentS>().OnResetSeason(notice);
                  unit.GetComponent<BagComponentS>().OnResetSeason(notice);
