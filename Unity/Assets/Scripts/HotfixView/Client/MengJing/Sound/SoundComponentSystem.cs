@@ -163,46 +163,53 @@ namespace ET.Client
             self.DisposeAll();
 
             string music = "MainCity";
-            // switch (sceneTypeEnum)
-            // {
-            //     case SceneTypeEnum.LoginScene:
-            //         music = "Login";
-            //         break;
-            //     case SceneTypeEnum.MainCityScene:
-            //         music = "MainCity";
-            //         break;
-            //     case SceneTypeEnum.TeamDungeon:
-            //     case SceneTypeEnum.JiaYuan:
-            //         music = SceneConfigCategory.Instance.Get(sceneId).Music;
-            //         break;
-            //     case SceneTypeEnum.CellDungeon:
-            //         music = ChapterConfigCategory.Instance.Get(sceneId).Music;
-            //         ChapterSonConfig chapterSonConfig = ChapterSonConfigCategory.Instance.Get(sonsceneid);
-            //         string[] monsters = chapterSonConfig.CreateMonster.Split('@');
-            //
-            //         for (int i = 0; i < monsters.Length; i++)
-            //         {
-            //             if (monsters[i] == "0")
-            //             {
-            //                 continue;
-            //             }
-            //
-            //             string[] mondels = monsters[i].Split(';');
-            //             string[] monsterid = mondels[2].Split(',');
-            //             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(int.Parse(monsterid[0]));
-            //             if (monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss)
-            //             {
-            //                 music = "Boss";
-            //                 break;
-            //             }
-            //         }
-            //
-            //         break;
-            //     default:
-            //         music = "Fight_1";
-            //         break;
-            // }
+            switch (sceneTypeEnum)
+            {
+                case SceneTypeEnum.LoginScene:
+                    music = "Login";
+                    break;
+                case SceneTypeEnum.MainCityScene:
+                    music = "MainCity";
+                    break;
+                case SceneTypeEnum.TeamDungeon:
+                case SceneTypeEnum.JiaYuan:
+                    music = SceneConfigCategory.Instance.Get(sceneId).Music;
+                    break;
+                case SceneTypeEnum.CellDungeon:
+                case SceneTypeEnum.DragonDungeon:  
+                    music = CellGenerateConfigCategory.Instance.Get(sceneId).Music;
+                    CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(sonsceneid);
+                    // string[] monsters = chapterSonConfig.CreateMonster.Split('@');
+                    //
+                    // for (int i = 0; i < monsters.Length; i++)
+                    // {
+                    //     if (monsters[i] == "0")
+                    //     {
+                    //         continue;
+                    //     }
+                    //
+                    //     string[] mondels = monsters[i].Split(';');
+                    //     string[] monsterid = mondels[2].Split(',');
+                    //     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(int.Parse(monsterid[0]));
+                    //     if (monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss)
+                    //     {
+                    //         music = "Boss";
+                    //         break;
+                    //     }
+                    // }
+                    break;
+                default:
+                    music = "Fight_1";
+                    break;
+            }
 
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if(SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            {
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
+                music = sceneConfig.Music;
+            }
+            
             if (music != "")
             {
                 self.PlayMusic(music).Coroutine();
