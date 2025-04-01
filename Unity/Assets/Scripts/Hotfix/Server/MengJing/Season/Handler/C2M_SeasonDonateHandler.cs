@@ -22,12 +22,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
-                bagComponentS.OnCostItemData($"{ConfigData.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
-
-                string[] itemlist = ConfigData.CommonSeasonDonateGetItem.Split('@');
-                string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];
-                bagComponentS.OnAddItemData(getiteminfo, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
-            
+           
                 //玩家消耗1个捐献材料道具随机获得1个新道具，并增加领主值，当领主值慢时会在野外召唤领主BOSS,召唤完成后领主值清空为0,并且赛季领主升级到下一级,领主值清空，
                 //总共配置10级领主，到了10级不会触发下一级会一直是10级，每级对应的领主值都不一样
 
@@ -41,7 +36,16 @@ namespace ET.Server
                     response.Error = r_GameStatusResponse.Error;
                     return;
                 }
+                
+                bagComponentS.OnCostItemData($"{ConfigData.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
 
+                string[] itemlist = ConfigData.CommonSeasonDonateGetItem.Split('@');
+                string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];
+                bagComponentS.OnAddItemData(getiteminfo, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+
+                NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+                numericComponentS.ApplyChange(NumericType.CommonSeasonDonateTime, 1);
+                
                 response.CommonSeasonBossExp = r_GameStatusResponse.CommonSeasonBossExp;
                 response.CommonSeasonBossLevel = r_GameStatusResponse.CommonSeasonBossLevel;
                 await ETTask.CompletedTask;

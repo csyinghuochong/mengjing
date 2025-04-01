@@ -207,7 +207,7 @@
         public const int BabyRefreshTime = 4011;                                    //宝宝刷新次数
         public const int BaByType = 4012;
         public const int ZhuaBuTime = 4013;
-        public const int CommonSeasonDonate = 4014;
+        public const int CommonSeasonDonateTimes = 4014;
         
         public const int Max = 10000;
 

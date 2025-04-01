@@ -936,6 +936,8 @@ message UserInfoProto
 	repeated  KeyValuePairInt BuyStoreItems = 61;
 
 	int32 TalentPoints = 62;
+
+	repeated int32 SeasonDonateRewardIds = 63;
 }
 
 message M2C_RoleDataUpdate // IMessage
@@ -7139,6 +7141,7 @@ message M2C_SeasonDonateRewardResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	repeated int32 SeasonDonateRewardIds = 1;	
 }
 
 //开启晶核

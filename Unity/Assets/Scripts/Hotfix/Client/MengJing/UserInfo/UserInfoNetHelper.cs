@@ -126,5 +126,21 @@
 
             return response;
         }
+        
+        public static async ETTask<M2C_SeasonDonateRewardResponse> SeasonDonateRewardRequest(Scene root,  int times)
+        {
+            C2M_SeasonDonateRewardRequest request = C2M_SeasonDonateRewardRequest.Create();
+            request.Times = times;
+            M2C_SeasonDonateRewardResponse response = (M2C_SeasonDonateRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                UserInfoComponentC userInfoComponentC = root.GetComponent<UserInfoComponentC>();
+                userInfoComponentC.UserInfo.SeasonDonateRewardIds = response.SeasonDonateRewardIds;
+            }
+
+            return response;
+            
+        }
     }
 }

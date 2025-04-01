@@ -3940,6 +3940,9 @@ namespace ET
         [MemoryPackOrder(61)]
         public int TalentPoints { get; set; }
 
+        [MemoryPackOrder(62)]
+        public List<int> SeasonDonateRewardIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -4007,6 +4010,7 @@ namespace ET
             this.DefeatedBossIds.Clear();
             this.BuyStoreItems.Clear();
             this.TalentPoints = default;
+            this.SeasonDonateRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -31056,6 +31060,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public List<int> SeasonDonateRewardIds { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -31066,6 +31073,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.SeasonDonateRewardIds.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

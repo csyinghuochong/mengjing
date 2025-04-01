@@ -19,14 +19,22 @@ namespace ET.Client
 
 		private static async ETTask OnButtonReveiveButton(this Scroll_Item_SeasonDonateItem self)
 		{
-			await ETTask.CompletedTask;
+			await UserInfoNetHelper.SeasonDonateRewardRequest(self.Root(), self.Times);
+			self.UpdateReveivedState();
+		}
+
+		private static void UpdateReveivedState(this Scroll_Item_SeasonDonateItem self)
+		{
+			UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+			self.E_ImageReveivedImage.gameObject.SetActive(userInfoComponentC.UserInfo.SeasonDonateRewardIds.Contains(self.Times));
 		}
 
 		public static void OnInitData(this Scroll_Item_SeasonDonateItem self, int time, string reward)
 		{
-			self.Time = time;
+			self.Times = time;
 			self.ES_RewardList.Refresh(reward);
-			
+			self.UpdateReveivedState();
+		
 			self.E_ButtonReveiveButton.AddListenerAsync( self.OnButtonReveiveButton );
 		}
 	}
