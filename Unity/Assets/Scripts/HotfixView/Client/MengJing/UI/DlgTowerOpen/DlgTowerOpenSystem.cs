@@ -124,7 +124,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.View.E_TextTipText.text = zstring.Format("挑战之地：{0}/{1}", TowerConfigCategory.Instance.Get(towerId).CengNum, numMax);
+                self.View.E_TextTipText.text = zstring.Format("勇者之境：{0}/{1}", TowerConfigCategory.Instance.Get(towerId).CengNum, numMax);
             }
         }
     }
