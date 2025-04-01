@@ -22,7 +22,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
-                bagComponentS.OnCostItemData($"{ConfigData.CommonSeasonDonateReward};1", ItemLocType.ItemLocBag);
+                bagComponentS.OnCostItemData($"{ConfigData.CommonSeasonDonateItemId};1", ItemLocType.ItemLocBag);
 
                 string[] itemlist = ConfigData.CommonSeasonDonateGetItem.Split('@');
                 string getiteminfo = itemlist[ RandomHelper.RandomNumber(0, itemlist.Length) ];

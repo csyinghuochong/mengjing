@@ -30,6 +30,8 @@ namespace ET.Client
 			{
 				return;
 			}
+
+			self.UpdateBossInfo(infoResponse.CommonSeasonBossLevel, infoResponse.CommonSeasonBossExp);
 			await ETTask.CompletedTask;
 		}
         

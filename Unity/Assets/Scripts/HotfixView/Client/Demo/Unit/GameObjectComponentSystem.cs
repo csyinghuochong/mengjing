@@ -1154,22 +1154,7 @@ namespace ET.Client
 
         public static void OnRevive(this GameObjectComponent self)
         {
-            // if (self.GameObject == null)
-            // {
-            //     return;
-            // }
-            //
-            // Transform transform = self.GameObject.transform;
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     if (transform.GetChild(i).name == "RoleBoneSet")
-            //     {
-            //         continue;
-            //     }
-            //
-            //     transform.GetChild(i).gameObject.SetActive(true);
-            // }
-            
+           
             self.OnTranferHandler(0, true);
             
             self.LoadGameObject();
@@ -1178,17 +1163,6 @@ namespace ET.Client
         
         public static void OnDead(this GameObjectComponent self)
         {
-            // Transform transform = self.GameObject.transform;
-            // for (int i = 0; i < transform.childCount; i++)
-            // {
-            //     if (transform.GetChild(i).name.Equals(StringBuilderData.RoleBoneSet))
-            //     {
-            //         continue;
-            //     }
-            //
-            //     transform.GetChild(i).gameObject.SetActive(false);
-            // }
-            
             self.OnTranferHandler(0, true);
             
             self.LoadGameObject();
