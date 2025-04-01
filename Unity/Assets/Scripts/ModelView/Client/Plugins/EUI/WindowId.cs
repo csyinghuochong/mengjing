@@ -220,5 +220,6 @@ namespace ET.Client
 		WindowID_BaoXiangReward,
 		WindowID_DamageValue,
 		WindowID_FirstWinBossSkill,
+		WindowID_SeasonDonateReward,
 	}
 }
