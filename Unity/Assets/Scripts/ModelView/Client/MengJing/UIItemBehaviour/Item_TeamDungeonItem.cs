@@ -262,7 +262,31 @@ namespace ET.Client
      			}
      		}
      	}
-
+		
+		public Image E_ImageIcon
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if (this.isCacheNode)
+				{
+					if( this.m_E_ImageIcon == null )
+					{
+						this.m_E_ImageIcon = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageIcon");
+					}
+					return this.m_E_ImageIcon;
+				}
+				else
+				{
+					return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageIcon");
+				}
+			}
+		}
+		
 		public RectTransform EG_ImagePlayer3RectTransform
      	{
      		get
@@ -300,6 +324,7 @@ namespace ET.Client
 			this.m_EG_ImagePlayer1RectTransform = null;
 			this.m_EG_ImagePlayer2RectTransform = null;
 			this.m_EG_ImagePlayer3RectTransform = null;
+			this.m_E_ImageIcon = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -315,6 +340,7 @@ namespace ET.Client
 		private RectTransform m_EG_ImagePlayer1RectTransform = null;
 		private RectTransform m_EG_ImagePlayer2RectTransform = null;
 		private RectTransform m_EG_ImagePlayer3RectTransform = null;
+		private Image m_E_ImageIcon = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -115,6 +115,10 @@ namespace ET.Client
                         addStr = "(深渊模式)";
                     }
 
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, cellGenerateConfig.Icon);
+                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                    self.E_ImageIcon.sprite = sp;
+                    
                     using (zstring.Block())
                     {
                         self.E_Text_NameText.text = zstring.Format("{0}{1}", cellGenerateConfig.ChapterName, addStr);
