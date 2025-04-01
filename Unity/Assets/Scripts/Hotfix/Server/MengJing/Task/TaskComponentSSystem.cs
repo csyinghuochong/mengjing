@@ -1117,16 +1117,30 @@ namespace ET.Server
 
             if (notice)
             {
-                Unit unit = self.GetParent<Unit>();
-                M2C_TaskUpdate m2C_TaskUpdate =  M2C_TaskUpdate.Create();
-                m2C_TaskUpdate.UpdateMode = 2;
-                m2C_TaskUpdate.RoleTaskList.AddRange(taskProlist); 
-                m2C_TaskUpdate.RoleComoleteTaskList.AddRange( self.RoleComoleteTaskList );
-                MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                self.NoticeUpdateOneTask(taskProlist);
             }
         }
 
-
+        private static void NoticeUpdateOneTask(this TaskComponentS self, List<TaskPro> taskProlist)
+        {
+            Unit unit = self.GetParent<Unit>();
+            M2C_TaskUpdate m2C_TaskUpdate =  M2C_TaskUpdate.Create();
+            m2C_TaskUpdate.UpdateMode = 2;
+            m2C_TaskUpdate.RoleTaskList.AddRange(taskProlist); 
+            m2C_TaskUpdate.RoleComoleteTaskList.AddRange( self.RoleComoleteTaskList );
+            MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+        }
+        
+        private static void NoticeUpdateAllTask(this TaskComponentS self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            M2C_TaskUpdate m2C_TaskUpdate =  M2C_TaskUpdate.Create();
+            m2C_TaskUpdate.UpdateMode = 0;
+            m2C_TaskUpdate.RoleTaskList.AddRange(self.RoleTaskList); 
+            m2C_TaskUpdate.RoleComoleteTaskList.AddRange( self.RoleComoleteTaskList );
+            MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
+        }
+        
         /// <summary>
         /// ��TaskCountryTargetTypeΪ׼
         /// </summary>
@@ -1629,16 +1643,6 @@ namespace ET.Server
             }
         }
 
-        private static void NoticeUpdateAllTask(this TaskComponentS self)
-        {
-            Unit unit = self.GetParent<Unit>();
-            M2C_TaskUpdate m2C_TaskUpdate =  M2C_TaskUpdate.Create();
-            m2C_TaskUpdate.UpdateMode = 0;
-            m2C_TaskUpdate.RoleTaskList.AddRange(self.RoleTaskList); 
-            m2C_TaskUpdate.RoleComoleteTaskList.AddRange( self.RoleComoleteTaskList );
-            MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
-        }
-        
         public static void OnZeroClockUpdate(this TaskComponentS self, bool notice)
         {
             self.OnLineTime = 0;
