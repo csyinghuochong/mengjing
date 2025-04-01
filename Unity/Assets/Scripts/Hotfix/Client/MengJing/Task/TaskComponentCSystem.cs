@@ -181,6 +181,7 @@ namespace ET.Client
         public static void OnRecvTaskUpdate(this TaskComponentC self, M2C_TaskUpdate message)
         {
             self.RoleTaskList = message.RoleTaskList;
+            self.RoleComoleteTaskList = message.RoleComoleteTaskList;
             EventSystem.Instance.Publish(self.Root(), new TaskUpdate());
         }
 

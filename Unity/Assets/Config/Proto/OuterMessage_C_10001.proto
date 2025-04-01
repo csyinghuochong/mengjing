@@ -2040,6 +2040,7 @@ message M2C_TaskUpdate // IMessage
 	
 	int32 UpdateMode = 1; //全量  2增量
 	repeated TaskPro RoleTaskList = 2;
+	repeated int32 RoleComoleteTaskList = 3;
 }
 
 //ResponseType M2C_TalentActiveResponse

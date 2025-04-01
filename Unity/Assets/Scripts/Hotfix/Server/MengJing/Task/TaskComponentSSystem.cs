@@ -1625,8 +1625,9 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
             m2C_TaskUpdate.UpdateMode = updatemode;
+            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
+            m2C_TaskUpdate.RoleComoleteTaskList = self.RoleComoleteTaskList;
             MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
         }
         
