@@ -67,7 +67,7 @@ namespace ET.Client
         {
             if (SettingData.ModelShow == 0)
             {
-                self.ES_ModelShow.SetPosition(new Vector3(position * 2000, 2000, 0), new Vector3(0f, 70f, 150f));
+                self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
                 self.ES_ModelShow.ShowPlayerModel(bagInfo, occ, equipIndex, fashonids);
             }
         }

@@ -96,7 +96,7 @@ namespace ET.Client
                 {
                     self.EG_Rank_1RectTransform.gameObject.SetActive(true);
                     self.EG_Rank_1RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
-                    self.ES_ModelShow_1.SetPosition(Vector3.zero, new Vector3(0f, 60f, 150f));
+                    self.ES_ModelShow_1.SetCameraPosition(new Vector3(0f, 60f, 150f));
                     self.ES_ModelShow_1.ShowPlayerModel(new ItemInfo(), response.RankList[i].Occ, 0, new List<int>(), false);
                     self.EG_Rank_1RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
                     using (zstring.Block())
@@ -109,7 +109,7 @@ namespace ET.Client
                 {
                     self.EG_Rank_2RectTransform.gameObject.SetActive(true);
                     self.EG_Rank_2RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
-                    self.ES_ModelShow_2.SetPosition(Vector3.zero, new Vector3(0f, 60f, 150f));
+                    self.ES_ModelShow_2.SetCameraPosition(new Vector3(0f, 60f, 150f));
                     self.ES_ModelShow_2.ShowPlayerModel(new ItemInfo(), response.RankList[i].Occ, 0, new List<int>(), false);
                     self.EG_Rank_2RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
                     using (zstring.Block())
@@ -122,7 +122,7 @@ namespace ET.Client
                 {
                     self.EG_Rank_3RectTransform.gameObject.SetActive(true);
                     self.EG_Rank_3RectTransform.Find("CombatTxt").GetComponent<Text>().text = response.RankList[i].Combat.ToString();
-                    self.ES_ModelShow_3.SetPosition(Vector3.zero, new Vector3(0f, 60f, 150f));
+                    self.ES_ModelShow_3.SetCameraPosition(new Vector3(0f, 60f, 150f));
                     self.ES_ModelShow_3.ShowPlayerModel(new ItemInfo(), response.RankList[i].Occ, 0, new List<int>(), false);
                     self.EG_Rank_3RectTransform.Find("NameTxt").GetComponent<Text>().text = response.RankList[i].PlayerName;
                     using (zstring.Block())

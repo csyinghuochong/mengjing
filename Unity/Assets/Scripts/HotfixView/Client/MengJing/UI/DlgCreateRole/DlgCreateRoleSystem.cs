@@ -115,7 +115,7 @@ namespace ET.Client
             }
 
             self.Occ = index + 1;
-            self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
             self.View.ES_ModelShow.ShowPlayerModel(new ItemInfo(), self.Occ, 0, new List<int>());
         }
 

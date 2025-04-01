@@ -125,7 +125,7 @@ namespace ET.Client
 
             PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
 
-            self.View.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
             using (zstring.Block())
             {
                 self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.SkinID.ToString()), true).Coroutine();

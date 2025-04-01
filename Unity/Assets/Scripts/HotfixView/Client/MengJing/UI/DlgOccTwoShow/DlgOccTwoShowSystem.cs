@@ -50,7 +50,7 @@ namespace ET.Client
 
             self.View.E_TextOccTwoNameText.text = twoCof.OccupationName;
 
-            self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 70f, 150f));
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             ItemInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);

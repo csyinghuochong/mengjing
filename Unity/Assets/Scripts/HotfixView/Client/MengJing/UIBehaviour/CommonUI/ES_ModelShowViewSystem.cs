@@ -64,12 +64,6 @@ namespace ET.Client
             self.ClickHandler?.Invoke();
         }
 
-        public static void SetPosition(this ES_ModelShow self, Vector3 rootPos, Vector3 cameraPos)
-        {
-            self.EG_RootRectTransform.transform.localPosition = rootPos;
-            self.Camera.transform.localPosition = cameraPos;
-        }
-
         public static void SetRootPosition(this ES_ModelShow self, Vector3 vector3)
         {
             self.EG_RootRectTransform.transform.localPosition = vector3;
@@ -240,6 +234,7 @@ namespace ET.Client
                 }
             }
 
+            self.RemoveModel();
             self.Model.Add(go);
         }
 
