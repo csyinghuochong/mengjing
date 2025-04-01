@@ -229,7 +229,16 @@ namespace ET.Server
              mailInfo.ItemList.AddRange(ItemHelper.GetRewardItems_2(rewardItem));
              MailHelp.SendUserMail( self.Root(), self.Id, mailInfo, ItemGetWay.Season ).Coroutine();
          }
-         
+
+         private static void HeroDataApplyValue(this HeroDataComponentS self, int ntype, long value, List<int> keylist)
+         {
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+             numericComponent.ApplyValue(ntype, value, false);
+             
+             keylist.Add(ntype);
+         }
+
          /// <summary>
          /// 重置。隔天登录或者零点刷新
          /// </summary>
@@ -240,71 +249,82 @@ namespace ET.Server
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-             numericComponent.ApplyValue(NumericType.HongBao, 0, notice);
-             numericComponent.ApplyValue(NumericType.Now_XiLian, 0, notice);
-             numericComponent.ApplyValue(NumericType.PetChouKa, 0, notice);
-             numericComponent.ApplyValue(NumericType.YueKaAward, 0, notice);
-             numericComponent.ApplyValue(NumericType.XiuLian_ExpNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.XiuLian_CoinNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.XiuLian_ExpTime, 0, notice);
-             numericComponent.ApplyValue(NumericType.XiuLian_CoinTime, 0, notice);
-             numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.ChouKa, 0, notice);
-             numericComponent.ApplyValue(NumericType.ExpToGoldTimes, 0, notice);
-             numericComponent.ApplyValue(NumericType.RechargeSign, 0, notice);
-             numericComponent.ApplyValue(NumericType.TeamDungeonTimes, 0, notice);
-             numericComponent.ApplyValue(NumericType.TeamDungeonXieZhu, 0, notice);
-             numericComponent.ApplyValue(NumericType.BattleTodayKill, 0, notice);
-             numericComponent.ApplyValue(NumericType.FubenTimesReset, 0, notice);
-             numericComponent.ApplyValue(NumericType.FenShangSet, 0, notice);
-             numericComponent.ApplyValue(NumericType.ArenaNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.JingLingRefreshTime, 0, notice);
-             numericComponent.ApplyValue(NumericType.TreasureTask, 0, notice);
-             numericComponent.ApplyValue(NumericType.JiaYuanExchangeZiJin, 0, notice);
-             numericComponent.ApplyValue(NumericType.JiaYuanExchangeExp, 0, notice);
-             numericComponent.ApplyValue(NumericType.JiaYuanVisitRefresh, 0, notice);
-             numericComponent.ApplyValue(NumericType.JiaYuanGatherOther, 0, notice);
-             numericComponent.ApplyValue(NumericType.JiaYuanPickOther, 0, notice);
-             numericComponent.ApplyValue(NumericType.UnionDonationNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.UnionDiamondDonationNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.UnionWishGet, 0, notice);
-             numericComponent.ApplyValue(NumericType.OrderTaskCompNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
-             // 重置封印之塔数据
-             numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);
-             numericComponent.ApplyValue(NumericType.SealTowerArrived, 0, notice);
-             numericComponent.ApplyValue(NumericType.SealTowerFinished, 0, notice);
+             List<int> ks = new List<int>();
+             self.HeroDataApplyValue(NumericType.HongBao, 0, ks);
+             self.HeroDataApplyValue(NumericType.Now_XiLian, 0, ks);
+             self.HeroDataApplyValue(NumericType.PetChouKa, 0, ks);
+             self.HeroDataApplyValue(NumericType.YueKaAward, 0, ks);
+             self.HeroDataApplyValue(NumericType.XiuLian_ExpNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.XiuLian_CoinNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.XiuLian_ExpTime, 0, ks);
+             self.HeroDataApplyValue(NumericType.XiuLian_CoinTime, 0, ks);
+             self.HeroDataApplyValue(NumericType.TiLiKillNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.ChouKa, 0, ks);
+             self.HeroDataApplyValue(NumericType.ExpToGoldTimes, 0, ks);
+             self.HeroDataApplyValue(NumericType.RechargeSign, 0, ks);
+             self.HeroDataApplyValue(NumericType.TeamDungeonTimes, 0, ks);
+             self.HeroDataApplyValue(NumericType.TeamDungeonXieZhu, 0, ks);
+             self.HeroDataApplyValue(NumericType.BattleTodayKill, 0, ks);
+             self.HeroDataApplyValue(NumericType.FubenTimesReset, 0, ks);
+             self.HeroDataApplyValue(NumericType.FenShangSet, 0, ks);
+             self.HeroDataApplyValue(NumericType.ArenaNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.JingLingRefreshTime, 0, ks);
+             self.HeroDataApplyValue(NumericType.TreasureTask, 0, ks);
+             self.HeroDataApplyValue(NumericType.JiaYuanExchangeZiJin, 0, ks);
+             self.HeroDataApplyValue(NumericType.JiaYuanExchangeExp, 0, ks);
+             self.HeroDataApplyValue(NumericType.JiaYuanVisitRefresh, 0, ks);
+             self.HeroDataApplyValue(NumericType.JiaYuanGatherOther, 0, ks);
+             self.HeroDataApplyValue(NumericType.JiaYuanPickOther, 0, ks);
+             self.HeroDataApplyValue(NumericType.UnionDonationNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.UnionDiamondDonationNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.UnionWishGet, 0, ks);
+             self.HeroDataApplyValue(NumericType.OrderTaskCompNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.RaceDonationNumber, 0, ks);
+         
+             self.HeroDataApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, ks);
+             self.HeroDataApplyValue(NumericType.SealTowerArrived, 0, ks);
+             self.HeroDataApplyValue(NumericType.SealTowerFinished, 0, ks);
 
-             numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, notice);
-             numericComponent.ApplyValue(NumericType.HappyCellIndex, 0, notice);
-             numericComponent.ApplyValue(NumericType.HappyMoveNumber, 0, notice);
+             self.HeroDataApplyValue(NumericType.RunRaceRankId, 0, ks);
+             self.HeroDataApplyValue(NumericType.HappyCellIndex, 0, ks);
+             self.HeroDataApplyValue(NumericType.HappyMoveNumber, 0, ks);
 
-             numericComponent.ApplyValue(NumericType.PetMineBattle, 0, notice);
-             numericComponent.ApplyValue(NumericType.PetMineLogin, 0, notice);
+             self.HeroDataApplyValue(NumericType.PetMineBattle, 0, ks);
+             self.HeroDataApplyValue(NumericType.PetMineLogin, 0, ks);
 
-             numericComponent.ApplyValue(NumericType.CostTiLi, 0, notice);
-             numericComponent.ApplyValue(NumericType.DrawIndex, 0, notice);
-             numericComponent.ApplyValue(NumericType.DrawReward, 0, notice);
+             self.HeroDataApplyValue(NumericType.CostTiLi, 0, ks);
+             self.HeroDataApplyValue(NumericType.DrawIndex, 0, ks);
+             self.HeroDataApplyValue(NumericType.DrawReward, 0, ks);
 
-             numericComponent.ApplyValue(NumericType.PetMineReset, 0, notice);
+             self.HeroDataApplyValue(NumericType.PetMineReset, 0, ks);
 
-             numericComponent.ApplyValue(NumericType.V1DayCostDiamond, 0, notice);
-             numericComponent.ApplyValue(NumericType.V1ChouKaNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.V1RechageNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.PetExploreNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.PetHeXinExploreNumber, 0, notice);
-             numericComponent.ApplyValue(NumericType.ItemXiLianNumber, 0, notice);
+             self.HeroDataApplyValue(NumericType.V1DayCostDiamond, 0, ks);
+             self.HeroDataApplyValue(NumericType.V1ChouKaNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.V1RechageNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.PetExploreNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.PetHeXinExploreNumber, 0, ks);
+             self.HeroDataApplyValue(NumericType.ItemXiLianNumber, 0, ks);
              
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
-             numericComponent.ApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
+             self.HeroDataApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, ks);
              
-             // 需要广播的notice= true
-             // M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
-             // //通知自己
-             // m2C_UnitNumericListUpdate.UnitID = unit.Id;
-             // m2C_UnitNumericListUpdate.Vs = vs;
-             // m2C_UnitNumericListUpdate.Ks = ks;
-             // MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
+             if (notice)
+             {
+                 List<long> vs = new List<long>();
+                 for (int i = 0; i < ks.Count; i++)
+                 {
+                     vs.Add( numericComponent.GetAsLong(ks[i]) );
+                 }
+                 
+                 // 需要广播的notice= true
+                 M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
+                 //通知自己
+                 m2C_UnitNumericListUpdate.UnitID = unit.Id;
+                 m2C_UnitNumericListUpdate.Vs = vs;
+                 m2C_UnitNumericListUpdate.Ks = ks;
+                 MapMessageHelper.SendToClient(unit, m2C_UnitNumericListUpdate);
+             }
+
              self.CheckSeasonOver(notice);
              self.CheckSeasonOpen(notice);
          }

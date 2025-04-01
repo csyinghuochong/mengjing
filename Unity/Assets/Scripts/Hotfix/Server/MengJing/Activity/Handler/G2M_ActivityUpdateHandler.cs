@@ -18,10 +18,10 @@ namespace ET
                 case 0:
                     Log.Debug($"OnZeroClockUpdate [零点刷新]: {unit.Id}");
                     UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+                    unit.GetComponent<UserInfoComponentS>().OnZeroClockUpdate(true);
                     unit.GetComponent<HeroDataComponentS>().OnZeroClockUpdate(true);
                     unit.GetComponent<EnergyComponentS>().OnZeroClockUpdate();
                     unit.GetComponent<UserInfoComponentS>().OnHourUpdate(0, true);
-                    unit.GetComponent<UserInfoComponentS>().OnZeroClockUpdate(true);
                     unit.GetComponent<TaskComponentS>().CheckWeeklyUpdate();
                     unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(true);
                     unit.GetComponent<ActivityComponentS>().OnZeroClockUpdate(userInfo.Lv);
