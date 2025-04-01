@@ -14,7 +14,7 @@ namespace ET.Client
             self.View.E_Button_CreateButton.AddListener(() => { self.OnButton_Create(TeamFubenType.Normal).Coroutine(); });
             self.View.E_ShenYuanButtonButton.AddListener(() => { self.OnShenYuanMode(); });
             self.View.E_CloseButtonButton.AddListener(self.OnCloseButtonButton);
-
+            self.View.E_ShenYuanModeImage.gameObject.SetActive(false);
             self.View.EG_TeamdungeonItemRectTransform.gameObject.SetActive(false);
             List<CellGenerateConfig> sceneConfig = CellGenerateConfigCategory.Instance.GetAll().Values.ToList();
             PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();

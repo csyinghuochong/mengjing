@@ -21,7 +21,10 @@ namespace ET
 
         public const int PetMianShangBuff = 97020003;
 
-        public const int ShenYuanCostId = 10000150;
+        /// <summary>
+        /// 深渊道具ID 
+        /// </summary>
+        public const int ShenYuanCostId = 1000031;
      
         public const int QiangHuaLuckyCostId = 90000015;
 
