@@ -22,30 +22,31 @@ namespace ET.Client
             //     additiveHides[i].ToggleShow();
             // }
 
-            if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon)
+            if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon
+                || sceneTypeEnum == (int)SceneTypeEnum.DragonDungeon)
             {
                 //显示传送 
-                // GameObject ChuanSongPosiSet = GameObject.Find("AdditiveHide/ChuanSongPosiSet");
-                // if (ChuanSongPosiSet == null)
-                //     return;
-                // ChuanSongPosiSet.SetActive(true);
-                // CellDungeonComponentC fubenComponent = self.Root().GetComponent<CellDungeonComponentC>();
-                // bool isEnd = fubenComponent.IsEndCell();
-                // if (isEnd)
-                // {
-                //     ChuanSongPosiSet.SetActive(false);
-                //     return;
-                // }
-                //
-                // for (int i = 0; i < fubenComponent.SonFubenInfo.PassableFlag.Count; i++)
-                // {
-                //     string path = $"NoChuanSong_{i + 1}";
-                //     GameObject obj = ChuanSongPosiSet.transform.Find(path).gameObject;
-                //     if (obj != null)
-                //     {
-                //         obj.SetActive(fubenComponent.SonFubenInfo.PassableFlag[i] == 0);
-                //     }
-                // }
+                GameObject ChuanSongPosiSet = GameObject.Find("AdditiveHide/ChuanSongPosiSet");
+                if (ChuanSongPosiSet == null)
+                    return;
+                ChuanSongPosiSet.SetActive(true);
+                CellDungeonComponentC fubenComponent = self.Root().GetComponent<CellDungeonComponentC>();
+                bool isEnd = fubenComponent.IsEndCell();
+                if (isEnd)
+                {
+                    ChuanSongPosiSet.SetActive(false);
+                    return;
+                }
+                
+                for (int i = 0; i < fubenComponent.SonFubenInfo.PassableFlag.Count; i++)
+                {
+                    string path = $"NoChuanSong_{i + 1}";
+                    GameObject obj = ChuanSongPosiSet.transform.Find(path).gameObject;
+                    if (obj != null)
+                    {
+                        obj.SetActive(fubenComponent.SonFubenInfo.PassableFlag[i] == 0);
+                    }
+                }
             }
         }
 
