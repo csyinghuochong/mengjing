@@ -27,6 +27,7 @@
             {
                 case 0:
                     self.View.ES_WatchEquip.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WatchEquip.OnInitUI();
                     break;
                 case 1:
                     self.View.ES_WatchPet.uiTransform.gameObject.SetActive(true);
