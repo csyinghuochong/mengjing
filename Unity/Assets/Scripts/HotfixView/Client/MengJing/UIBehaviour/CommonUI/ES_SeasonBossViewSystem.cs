@@ -37,7 +37,7 @@ namespace ET.Client
         
 		private static void OnRewardBtn(this ES_SeasonBoss self)
 		{
-			
+			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonDonateReward).Coroutine();
 		}
 
 		private static void UpdateBossInfo(this ES_SeasonBoss self, int bosslv, int bossexp)

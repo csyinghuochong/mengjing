@@ -16,5 +16,18 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
+
+		private static async ETTask OnButtonReveiveButton(this Scroll_Item_SeasonDonateItem self)
+		{
+			await ETTask.CompletedTask;
+		}
+
+		public static void OnInitData(this Scroll_Item_SeasonDonateItem self, int time, string reward)
+		{
+			self.Time = time;
+			self.ES_RewardList.Refresh(reward);
+			
+			self.E_ButtonReveiveButton.AddListenerAsync( self.OnButtonReveiveButton );
+		}
 	}
 }

@@ -6,6 +6,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_SeasonDonateItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SeasonDonateItem> 
 	{
+
+		public int Time { get; set; }
+
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

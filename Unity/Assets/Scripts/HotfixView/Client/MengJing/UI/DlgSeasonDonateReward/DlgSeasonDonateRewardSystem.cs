@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -12,14 +10,33 @@ namespace ET.Client
 
 		public static void RegisterUIEvent(this DlgSeasonDonateReward self)
 		{
-		 
+			self.View.E_ButtonCloseButton.AddListener(() =>
+			{
+				self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonDonateReward);
+			});
+			
+			self.View.E_SeasonDonateItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnRechargeItemsRefresh);
+
 		}
 
 		public static void ShowWindow(this DlgSeasonDonateReward self, Entity contextData = null)
 		{
+			self.ShowRewardList();
 		}
 
-		 
+		 private static void OnRechargeItemsRefresh(this DlgSeasonDonateReward self, Transform transform, int index)
+		 {
+			 var item = ConfigData.CommonSeasonDonateReward.ToList()[index];
+			 Scroll_Item_SeasonDonateItem scrollItemRechargeItem = self.ScrollItemRechargeItems[index].BindTrans(transform);
+			 scrollItemRechargeItem.OnInitData(item.Key, item.Value);
+			 //scrollItemRechargeItem.SetClickHandler((number) => { self.OnClickRechargeItem(number).Coroutine(); });
+		 }
+		
+		private static void ShowRewardList(this DlgSeasonDonateReward self)
+		{
+			self.AddUIScrollItems(ref self.ScrollItemRechargeItems, ConfigData.CommonSeasonDonateReward.Count);
+			self.View.E_SeasonDonateItemLoopVerticalScrollRect.SetVisible(true, ConfigData.CommonSeasonDonateReward.Count);
+		}
 
 	}
 }
