@@ -201,7 +201,7 @@ namespace ET.Client
             chapterMakeids.Add(3, new List<int>()); //<= 40
             chapterMakeids.Add(4, new List<int>()); //<= 50
             chapterMakeids.Add(5, new List<int>()); //<= 100
-            chapterMakeids.Add(6, new List<int>()); //其他
+            // chapterMakeids.Add(6, new List<int>()); //其他
 
             for (int i = 0; i < makeList.Count; i++)
             {
@@ -240,7 +240,8 @@ namespace ET.Client
                 }
                 else
                 {
-                    chapterindex = 6;
+                    continue;
+                    // chapterindex = 6;
                 }
 
                 chapterMakeids[chapterindex].Add(equipMakeConfig.Id);

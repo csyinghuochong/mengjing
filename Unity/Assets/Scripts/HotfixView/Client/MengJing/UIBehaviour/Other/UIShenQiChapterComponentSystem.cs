@@ -17,15 +17,49 @@ namespace ET.Client
             self.MakeListUI.Clear();
 
             ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
+            self.Button_Click = rc.Get<GameObject>("Button_Click");
+            self.Checkmark = rc.Get<GameObject>("Checkmark");
             self.ItemNode = rc.Get<GameObject>("ItemNode");
             self.Text_Name = rc.Get<GameObject>("Text_Name");
+            
+            self.Button_Click.GetComponent<Button>().AddListener(() =>
+            {
+                if (!self.IsExpand)
+                {
+                    self.Expand();
+                }
+                else
+                {
+                    self.Collapse();
+                }
+            });
+        }
+
+        public static void Expand(this UIShenQiChapterComponent self)
+        {
+            self.IsExpand = true;
+            self.ItemNode.transform.gameObject.SetActive(true);
+            self.Checkmark.transform.localScale = new Vector3(1, -1, 1);
+            self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800f, self.Height);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.ItemNode.transform.parent.parent.GetComponent<RectTransform>());
+        }
+
+        public static void Collapse(this UIShenQiChapterComponent self)
+        {
+            self.IsExpand = false;
+            self.ItemNode.transform.gameObject.SetActive(false);
+            self.Checkmark.transform.localScale = new Vector3(1, 1, 1);
+            self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800f, 100f);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.ItemNode.transform.parent.parent.GetComponent<RectTransform>());
         }
 
         public static void OnInitUI(this UIShenQiChapterComponent self, int chaptet, List<int> makeList)
         {
+            self.IsExpand = true;
             int row = (makeList.Count / 5);
             row += (makeList.Count % 5 > 0 ? 1 : 0);
-            self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800f, 100f + row * 170f);
+            self.Height = 100f + row * 170f;
+            self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800f, self.Height);
 
             var path = ABPathHelper.GetUGUIPath("Item/Item_MakeItem");
             var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
