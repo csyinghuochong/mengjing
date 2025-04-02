@@ -422,7 +422,7 @@ namespace ET.Client
                         self.E_MapNameText.text = zstring.Format("{0} 家族地图", userInfoComponent.UserInfo.UnionName);
                         break;
                     case SceneTypeEnum.SealTower:
-                        self.E_MapNameText.text = zstring.Format("{0} {1}", SceneConfigCategory.Instance.Get(sceneId).Name,
+                        self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name,
                             UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerArrived));
                         break;
                     default:
