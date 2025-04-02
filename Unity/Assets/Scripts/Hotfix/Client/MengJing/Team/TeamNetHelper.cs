@@ -176,7 +176,7 @@
                     }
                     break;
                 case SceneTypeEnum.DragonDungeon:
-                    if (teamInfo.PlayerList.Count < 2)
+                    if (teamInfo.PlayerList.Count < 1)
                     {
                         return ErrorCode.ERR_PlayerIsNot;
                     }

@@ -15,7 +15,7 @@ namespace ET.Client
             self.View.E_Button_RefuseButton.AddListener(() => { self.OnButton_Agree(2).Coroutine(); });
             self.View.E_Button_AgreeButton.AddListener(() => { self.OnButton_Agree(1).Coroutine(); });
 
-            self.ShowCountDount().Coroutine();
+            //self.ShowCountDount().Coroutine();
         }
 
         public static void ShowWindow(this DlgTeamDungeonPrepare self, Entity contextData = null)
@@ -150,6 +150,8 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DragonDungeon);
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonPrepare);
             }
+            
+             TeamNetHelper.TeamDungeonPrepareRequest(self.Root(), self.TeamInfo, 1).Coroutine();
         }
     }
 }
