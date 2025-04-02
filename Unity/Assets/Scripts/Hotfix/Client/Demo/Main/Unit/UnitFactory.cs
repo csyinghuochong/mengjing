@@ -177,7 +177,6 @@ namespace ET.Client
             unit.ConfigId = unitInfo.ConfigId;
             unitComponent.Add(unit);
 
-            unit.AddComponent<ChuansongComponent>();
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = unitInfo.Position;
             OnAfterCreateUnit(unit);

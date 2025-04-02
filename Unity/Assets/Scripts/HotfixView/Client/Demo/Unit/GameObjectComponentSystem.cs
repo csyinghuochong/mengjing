@@ -797,7 +797,6 @@ namespace ET.Client
                     unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
                     break;
                 case UnitType.CellTransfers:
-                    ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();   
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;

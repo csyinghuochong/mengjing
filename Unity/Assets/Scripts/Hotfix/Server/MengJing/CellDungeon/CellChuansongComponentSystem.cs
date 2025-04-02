@@ -23,7 +23,7 @@ namespace ET.Server
         }
 
         [Invoke(TimerInvokeType.CellChuansongTimer)]
-        public class DragonChuansongTimer : ATimer<CellChuansongComponent>
+        public class CellChuansongTimer : ATimer<CellChuansongComponent>
         {
             protected override void Run(CellChuansongComponent self)
             {

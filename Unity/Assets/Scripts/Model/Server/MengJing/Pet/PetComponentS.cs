@@ -40,9 +40,9 @@ namespace ET.Server
         public int PetMatchPlan { get; set; }
         
         /// <summary>
-        /// 宠物挑战出战id,一个21个  7个一组
+        /// 宠物挑战出战id,一个18个  个一组
         /// </summary>
-        public int PetMatchFightIds { get; set; }
+        public List<long>  PetMatchFightList { get; set; }= new();
         
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
         public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 

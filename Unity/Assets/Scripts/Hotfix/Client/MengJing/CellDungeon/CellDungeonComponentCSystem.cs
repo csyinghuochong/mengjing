@@ -176,16 +176,6 @@ namespace ET.Client
             Scene scene = self.Root().CurrentScene();
             if (!UnitHelper.IsAllMonsterDead(scene))
                 return;
-
-            List<Entity> entities = scene.GetComponent<UnitComponent>().Children.Values.ToList();
-            for(int i = 0; i < entities.Count; i++)
-            {
-                Unit unit = entities[i] as Unit;
-                if (unit.Type == UnitType.Transfers)
-                {
-                    unit.GetComponent<ChuansongComponent>().ChuanSongOpen = true;
-                }
-            }
             
             EventSystem.Instance.Publish(self.Root(), new ChuanSongOpen());
         }

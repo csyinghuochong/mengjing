@@ -501,6 +501,11 @@ namespace ET.Client
             {
                 return self.PetMingList;
             }
+            
+            if (sceneType == SceneTypeEnum.PetMatch)
+            {
+                return self.PetMatchFightList;
+            }
 
             return null;
         }

@@ -572,7 +572,6 @@ namespace ET.Server
                     Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
                     chuansong.Type = UnitType.CellTransfers;
                     chuansong.GetParent<UnitComponent>().Add(chuansong);
-                    chuansong.AddComponent<ChuansongComponent>();
                     chuansong.AddComponent<CellChuansongComponent>();
                     NumericComponentS numericComponentS = chuansong.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.CellIndex, self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line), false); //走过的格子

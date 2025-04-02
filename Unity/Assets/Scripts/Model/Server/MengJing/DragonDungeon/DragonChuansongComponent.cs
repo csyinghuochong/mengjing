@@ -6,5 +6,7 @@ namespace ET.Server
     public class DragonChuansongComponent : Entity, IAwake, IDestroy
     {
         public long Timer;
+
+        public bool Enter;
     }
 }

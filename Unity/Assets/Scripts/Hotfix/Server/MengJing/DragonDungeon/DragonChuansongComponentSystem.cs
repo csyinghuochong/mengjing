@@ -12,6 +12,7 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this ET.Server.DragonChuansongComponent self)
         {
+            self.Enter = false;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.DragonChuansongTimer, self);
         }
 
@@ -36,7 +37,7 @@ namespace ET.Server
                 }
             }
         }
-
+        
         public static void Check(this DragonChuansongComponent self)
         {
             List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
