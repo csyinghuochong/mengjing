@@ -584,6 +584,14 @@ namespace ET.Client
     {
     }
 
+    public struct PetMeleePlanUpdate
+    {
+    }
+    
+    public struct PetMeleeSetUpdate
+    {
+    }
+    
     public struct StateChange
     {
         public M2C_UnitStateUpdate m2C_UnitStateUpdate;

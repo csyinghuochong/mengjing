@@ -471,6 +471,7 @@ namespace ET.Client
                     break;
             }
 
+            EventSystem.Instance.Publish(root, new PetMeleePlanUpdate());
             return response.Error;
         }
 
@@ -505,19 +506,20 @@ namespace ET.Client
 
             M2C_PetMeleeSetResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetMeleeSetResponse;
 
-            if (response.Error == ErrorCode.ERR_Success)
+            if (response.Error != ErrorCode.ERR_Success)
             {
-                PetComponentC petComponent = root.GetComponent<PetComponentC>();
-                PetMeleeInfo old = petComponent.PetMeleeInfoList[petComponent.PetMeleePlan];
-                old.MainPetList.Clear();
-                old.AssistPetList.Clear();
-                old.MagicList.Clear();
-
-                old.MainPetList.AddRange(petMeleeInfo.MainPetList);
-                old.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
-                old.MagicList.AddRange(petMeleeInfo.MagicList);
+                return response.Error;
             }
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            PetMeleeInfo old = petComponent.PetMeleeInfoList[petComponent.PetMeleePlan];
+            old.MainPetList.Clear();
+            old.AssistPetList.Clear();
+            old.MagicList.Clear();
 
+            old.MainPetList.AddRange(petMeleeInfo.MainPetList);
+            old.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
+            old.MagicList.AddRange(petMeleeInfo.MagicList);
+            EventSystem.Instance.Publish(root, new PetMeleeSetUpdate());            
             return response.Error;
         }
 

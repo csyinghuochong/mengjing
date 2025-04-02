@@ -4,6 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	
+	[Event(SceneType.Demo)]
+	public class PetMeleePlanUpdate_Refresh : AEvent<Scene, PetMeleePlanUpdate>
+	{
+		protected override async ETTask Run(Scene scene, PetMeleePlanUpdate args)
+		{
+			scene.GetComponent<UIComponent>().GetDlgLogic<DlgCountry>()?.View.ES_PetMatch.OnUpdateUI();
+			await ETTask.CompletedTask;
+		}
+	}
+	[Event(SceneType.Demo)]
+	public class PetMeleeSetUpdate_Refresh : AEvent<Scene, PetMeleeSetUpdate>
+	{
+		protected override async ETTask Run(Scene scene, PetMeleeSetUpdate args)
+		{
+			scene.GetComponent<UIComponent>().GetDlgLogic<DlgCountry>()?.View.ES_PetMatch.OnUpdateUI();
+			await ETTask.CompletedTask;
+		}
+	}
+	
 	[EntitySystemOf(typeof(ES_PetMatch))]
 	[FriendOfAttribute(typeof(ES_PetMatch))]
 	public static partial class ES_PetMatchSystem 
@@ -19,7 +39,7 @@ namespace ET.Client
 			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
 			self.InitItemList();
 			
-			self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
+			//self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
 		}
 
 		[EntitySystem]
@@ -36,7 +56,6 @@ namespace ET.Client
 				GameObject go = UnityEngine.Object.Instantiate(self.MainPetItem, self.MainPetItem.transform.parent);
 				self.MainPetItemList.Add(go);
 			}
-
 		}
 
 
@@ -119,7 +138,7 @@ namespace ET.Client
 
 		public static void OnUpdateUI(this ES_PetMatch self)
 		{
-			self.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+			self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
 		}
 
 	}
