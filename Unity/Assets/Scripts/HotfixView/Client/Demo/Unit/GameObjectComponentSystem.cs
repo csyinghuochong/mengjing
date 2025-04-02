@@ -801,24 +801,23 @@ namespace ET.Client
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    switch (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType))
-                    {
-                        case 1: //上
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 180); //设置旋转
-                            break;
-                        case 2: //左
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 90); //设置旋转
-                            break;
-                        case 3: //下
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 0); //设置旋转
-                            break;
-                        case 4: //右
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, -90); //设置旋转
-                            break;
-                        default:
-                            break;
-                    }
-
+                    // switch (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType))
+                    // {
+                    //     case 1: //上
+                    //         go.transform.localRotation = Quaternion.Euler(-90, 0, 180); //设置旋转
+                    //         break;
+                    //     case 2: //左
+                    //         go.transform.localRotation = Quaternion.Euler(-90, 0, 90); //设置旋转
+                    //         break;
+                    //     case 3: //下
+                    //         go.transform.localRotation = Quaternion.Euler(-90, 0, 0); //设置旋转
+                    //         break;
+                    //     case 4: //右
+                    //         go.transform.localRotation = Quaternion.Euler(-90, 0, -90); //设置旋转
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
                     unit.AddComponent<UICellTransferHpComponent>().OnInitUI(mapComponent.SceneType);
                     break;
                 case UnitType.JingLing:
