@@ -38,7 +38,7 @@ namespace ET.Client
         }
 
         public static void Refresh(this ES_EquipItem self, ItemInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
-        List<ItemInfo> equipList)
+        List<ItemInfo> equipList, int type = 0)
         {
             self.Occ = occ;
             self.BagInfo = bagInfo;
@@ -53,7 +53,7 @@ namespace ET.Client
             self.E_EquipIconImage.sprite = sp;
 
             //设置品质
-            string ItemQuality = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
+            string ItemQuality = type == 0 ? FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality) : FunctionUI.ItemQualiytoPath_2(itemconfig.ItemQuality);
             self.E_EquipQualityImage.gameObject.SetActive(true);
             string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality);
             Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);

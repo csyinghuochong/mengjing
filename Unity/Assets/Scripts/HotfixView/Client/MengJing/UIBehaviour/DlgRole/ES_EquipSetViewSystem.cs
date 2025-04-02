@@ -139,7 +139,7 @@ namespace ET.Client
                 if (itemConfig.ItemSubType == (int)ItemSubTypeEnum.Shiping)
                 {
                     ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType + shipingIndex - 1];
-                    esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                    esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist, 1);
                     shipingIndex++;
                 }
 
