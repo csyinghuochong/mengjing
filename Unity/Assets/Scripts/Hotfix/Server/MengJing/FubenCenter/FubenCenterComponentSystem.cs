@@ -14,17 +14,9 @@ namespace ET.Server
         {
             self.FubenInstanceList.Clear();
             self.YeWaiFubenList.Clear();
-
-            Scene root = self.Root();
+            
             //野外场景都放在FubenCenter1  其他玩法根据规则放在不同的
-            if (root.Name.Equals("FubenCenter1"))
-            {
-                self.InitYeWaiScene(new List<int>(){SceneTypeEnum.BaoZang,  SceneTypeEnum.MiJing}).Coroutine();
-            }
-            if (root.Name.Equals("FubenCenter2"))
-            {
-                self.InitYeWaiScene(new List<int>(){SceneTypeEnum.PetMatch}).Coroutine();
-            }
+            self.InitYeWaiScene(new List<int>(){SceneTypeEnum.BaoZang,  SceneTypeEnum.MiJing}).Coroutine();
         }
 
         public static int GetScenePlayer(this FubenCenterComponent self, long instanced)
