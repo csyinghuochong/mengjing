@@ -33675,6 +33675,69 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.C2M_PetMatchRequest)]
+    [ResponseType(nameof(M2C_PetMatchResponse))]
+    public partial class C2M_PetMatchRequest : MessageObject, ILocationRequest
+    {
+        public static C2M_PetMatchRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2M_PetMatchRequest), isFromPool) as C2M_PetMatchRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMatchResponse)]
+    public partial class M2C_PetMatchResponse : MessageObject, ILocationResponse
+    {
+        public static M2C_PetMatchResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMatchResponse), isFromPool) as M2C_PetMatchResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -34571,5 +34634,7 @@ namespace ET
         public const ushort DamageValueInfo = 10893;
         public const ushort C2M_DamageValueListRequest = 10894;
         public const ushort M2C_DamageValueListResponse = 10895;
+        public const ushort C2M_PetMatchRequest = 10896;
+        public const ushort M2C_PetMatchResponse = 10897;
     }
 }

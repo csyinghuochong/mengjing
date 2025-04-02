@@ -182,21 +182,6 @@ namespace ET.Server
                         FubenCenterComponent fubenCenter = scene.GetComponent<FubenCenterComponent>();
                         fubenCenter.OnActivityClose(request.FunctionId);
                     }
-                    if (request.FunctionId == 1043 && request.FunctionType == 1)
-                    {
-                        //Log.Console("OnUnionBoss");
-                        scene.GetComponent<FubenCenterComponent>().OnUnionBoss();
-                    }
-                    if (request.FunctionId == 1044 && request.FunctionType == 1)
-                    {
-                        //Log.Console("OnUnionRaceBegin");
-                        scene.GetComponent<FubenCenterComponent>().OnUnionRaceBegin();
-                    }
-                    if (request.FunctionId == 1044 && request.FunctionType == 2)
-                    {
-                        //Log.Console("UnionSceneComponent.OnUnionRaceOver");
-                        scene.GetComponent<FubenCenterComponent>().OnUnionRaceOver();
-                    }
                     break;
                 case SceneType.LoginCenter:
                     if (hour == 0)

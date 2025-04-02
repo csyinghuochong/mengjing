@@ -236,47 +236,45 @@ namespace ET.Server
 
         public static void CheckPetMine(this ActivitySceneComponent self, int checkindex)
         {
+            int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
+
+            List<PetMingPlayerInfo> petMingPlayers = self.DBDayActivityInfo.PetMingList;
+
+            Dictionary<long, long> playerLimitList = new Dictionary<long, long>();
+            for (int i = 0; i < petMingPlayers.Count; i++)
             {
-                int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
+                MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
+                int chanchu = mineBattleConfig.ChanChuLimit;
 
-                List<PetMingPlayerInfo> petMingPlayers = self.DBDayActivityInfo.PetMingList;
-
-                Dictionary<long, long> playerLimitList = new Dictionary<long, long>();
-                for (int i = 0; i < petMingPlayers.Count; i++)
+                if (!playerLimitList.ContainsKey(petMingPlayers[i].UnitId))
                 {
-                    MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
-                    int chanchu = mineBattleConfig.ChanChuLimit;
-
-                    if (!playerLimitList.ContainsKey(petMingPlayers[i].UnitId))
-                    {
-                        playerLimitList.Add(petMingPlayers[i].UnitId, 0);
-                    }
-
-                    playerLimitList[petMingPlayers[i].UnitId] += chanchu;
+                    playerLimitList.Add(petMingPlayers[i].UnitId, 0);
                 }
 
-                for (int i = 0; i < petMingPlayers.Count; i++)
+                playerLimitList[petMingPlayers[i].UnitId] += chanchu;
+            }
+
+            for (int i = 0; i < petMingPlayers.Count; i++)
+            {
+                long playerLimit = playerLimitList[petMingPlayers[i].UnitId];
+
+                float coffi = CommonHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion,
+                    self.DBDayActivityInfo.PetMingHexinList);
+
+                MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
+                int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi * (checkindex / 3600f));
+
+                if (!self.DBDayActivityInfo.PetMingChanChu.ContainsKey(petMingPlayers[i].UnitId))
                 {
-                    long playerLimit = playerLimitList[petMingPlayers[i].UnitId];
+                    self.DBDayActivityInfo.PetMingChanChu.Add(petMingPlayers[i].UnitId, chanchu);
+                }
+                else
+                {
+                    long oldValue = self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId];
+                    oldValue += chanchu;
+                    oldValue = Math.Min(oldValue, playerLimit);
 
-                    float coffi = CommonHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion,
-                        self.DBDayActivityInfo.PetMingHexinList);
-
-                    MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
-                    int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi * (checkindex / 3600f));
-
-                    if (!self.DBDayActivityInfo.PetMingChanChu.ContainsKey(petMingPlayers[i].UnitId))
-                    {
-                        self.DBDayActivityInfo.PetMingChanChu.Add(petMingPlayers[i].UnitId, chanchu);
-                    }
-                    else
-                    {
-                        long oldValue = self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId];
-                        oldValue += chanchu;
-                        oldValue = Math.Min(oldValue, playerLimit);
-
-                        self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId] = oldValue;
-                    }
+                    self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId] = oldValue;
                 }
             }
         }
@@ -344,6 +342,7 @@ namespace ET.Server
                     case 1055: //喜从天降
                     case 1043: //家族Boss
                     case 1044: //家族争霸
+                    case 1074://宠物挑战赛
                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
                         break;
                     default:
@@ -396,7 +395,7 @@ namespace ET.Server
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
             long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
 
-            ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
+            ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动 1074宠物挑战赛
             List<int> functonIds = new List<int>()
             {
                 1025,
@@ -408,7 +407,8 @@ namespace ET.Server
                 1055,
                 1057,
                 1058,
-                1059
+                1059,
+                1074,
             };
             for (int i = 0; i < functonIds.Count; i++)
             {

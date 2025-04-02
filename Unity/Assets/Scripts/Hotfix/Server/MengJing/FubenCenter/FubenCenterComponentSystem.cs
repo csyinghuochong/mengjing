@@ -68,6 +68,17 @@ namespace ET.Server
                 self.ArenaInfos.Clear();
             }
 
+            if (functionId == 1043 )
+            {
+                //Log.Console("OnUnionBoss");
+                self.OnUnionBoss();
+            }
+            if (functionId == 1044)
+            {
+                //Log.Console("OnUnionRaceBegin");
+                self.OnUnionRaceBegin();
+            }
+
             if (functionId == 1055)
             {
                 self.HappyOpen = true;
@@ -86,7 +97,13 @@ namespace ET.Server
                 self.DemonInfos.Clear();
             }
 
-            //Log.Console($"OnActivityOpen: {functionId}");
+            if (functionId == 1074)
+            {
+                self.PetMatchOepn = true;
+                self.PetMatchInfos.Clear();
+            }
+
+            Console.WriteLine($"OnActivityOpen: {functionId}");
         }
 
         public static void OnActivityClose(this FubenCenterComponent self, int functionId)
@@ -101,6 +118,12 @@ namespace ET.Server
             {
                 self.ArenaOpen = false;
                 self.DisposeFuben(functionId).Coroutine();
+            }
+            
+            if (functionId == 1044 )
+            {
+                //Log.Console("UnionSceneComponent.OnUnionRaceOver");
+                self.OnUnionRaceOver();
             }
 
             if (functionId == 1055)
@@ -121,7 +144,12 @@ namespace ET.Server
                 self.DisposeFuben(functionId).Coroutine();
             }
 
-            //Log.Console($"OnActivityClose: {functionId}");
+            if (functionId == 1074)
+            {
+                self.DemonOpen = false;
+                self.DisposeFuben(functionId).Coroutine();
+            }
+             Console.WriteLine($"OnActivityClose: {functionId}");
         }
 
         public static BattleInfo GetFunctionFubenId(this FubenCenterComponent self, int functionId, long unitId)
@@ -291,37 +319,17 @@ namespace ET.Server
             long waitDisposeTime = 0;
 
             List<BattleInfo> battleInfos = null;
-            if (functionId == 1025)
-            {
-                battleInfos = self.BattleInfos;
-            }
-
-            if (functionId == 1031)
-            {
-                battleInfos = self.ArenaInfos;
-            }
-
-            if (functionId == 1055)
-            {
-                battleInfos = self.HappyInfos;
-            }
-
-            if (functionId == 1058)
-            {
-                battleInfos = self.RunRaceInfos;
-            }
-
-            if (functionId == 1059)
-            {
-                battleInfos = self.DemonInfos;
-            }
 
             switch (functionId)
             {
                 case 1025:
-
+                    battleInfos = self.BattleInfos;
+                    break;
+                case 1074:
+                    battleInfos = self.PetMatchInfos;
                     break;
                 case 1031:
+                    battleInfos = self.ArenaInfos;
                     for (int i = 0; i < battleInfos.Count; i++)
                     {
                         Scene scene = self.GetChild<Scene>(battleInfos[i].FubenId);
@@ -348,6 +356,7 @@ namespace ET.Server
                     waitDisposeTime = (endTime - closeTime) * 1000;
                     break;
                 case 1055:
+                    battleInfos = self.HappyInfos;
                     for (int i = 0; i < battleInfos.Count; i++)
                     {
                         Scene scene = self.GetChild<Scene>(battleInfos[i].FubenId);
@@ -363,6 +372,7 @@ namespace ET.Server
 
                     break;
                 case 1058:
+                    battleInfos = self.RunRaceInfos;
                     for (int i = 0; i < battleInfos.Count; i++)
                     {
                         Scene scene = self.GetChild<Scene>(battleInfos[i].FubenId);
@@ -389,6 +399,7 @@ namespace ET.Server
                     waitDisposeTime = (endTime - closeTime) * 1000;
                     break;
                 case 1059:
+                    battleInfos = self.DemonInfos;
                     for (int i = 0; i < battleInfos.Count; i++)
                     {
                         Scene scene = self.GetChild<Scene>(battleInfos[i].FubenId);

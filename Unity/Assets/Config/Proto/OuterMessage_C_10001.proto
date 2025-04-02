@@ -7734,3 +7734,16 @@ message M2C_DamageValueListResponse // ILocationResponse
 	repeated DamageValueInfo DamageValueList = 2;
 }
 
+//ResponseType M2C_PetMatchResponse
+message C2M_PetMatchRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_PetMatchResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
