@@ -75,6 +75,12 @@ namespace ET.Client
             Vector3 vector3 = self.GetParent<Unit>().Position;
             float distance = PositionHelper.Distance2D(vector3, mainhero.Position);
 
+            long leftTime = self.InitTime - TimeHelper.ServerNow();
+            if (leftTime > 0)
+            {
+                return;
+            }
+
             if (distance <= 1.5f && !self.EnterRange)
             {
                 self.EnterRange = true;
