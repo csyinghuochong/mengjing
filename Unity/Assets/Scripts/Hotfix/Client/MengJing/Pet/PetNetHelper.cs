@@ -450,16 +450,27 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestPetMeleePlan(Scene root, int plan)
+        public static async ETTask<int> RequestPetMeleePlan(Scene root, int sceneType, int plan)
         {
             C2M_PetMeleePlanRequest request = C2M_PetMeleePlanRequest.Create();
             request.PetMeleePlan = plan;
 
             M2C_PetMeleePlanResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PetMeleePlanResponse;
 
-            if (response.Error == ErrorCode.ERR_Success)
+            if (response.Error != ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponentC>().PetMeleePlan = plan;
+                return response.Error;
+            }
+
+            PetComponentC petComponentC = root.GetComponent<PetComponentC>();
+            switch (sceneType)
+            {
+                case SceneTypeEnum.PetMelee:
+                    petComponentC .PetMeleePlan = plan;
+                    break;
+                case SceneTypeEnum.PetMatch:
+                    petComponentC .PetMatchPlan = plan;
+                    break;
             }
 
             return response.Error;

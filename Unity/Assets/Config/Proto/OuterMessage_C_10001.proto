@@ -7588,6 +7588,7 @@ message C2M_PetMeleePlanRequest // ILocationRequest
 {
 	int32 RpcId = 90;
 	int32 PetMeleePlan = 1;
+	int32 SceneType = 2;
 }
 
 message M2C_PetMeleePlanResponse // ILocationResponse

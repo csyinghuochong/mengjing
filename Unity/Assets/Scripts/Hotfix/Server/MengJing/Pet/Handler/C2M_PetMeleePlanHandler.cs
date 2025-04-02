@@ -5,14 +5,25 @@
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleePlanRequest request, M2C_PetMeleePlanResponse response)
         {
-            if (request.PetMeleePlan < 0 || request.PetMeleePlan > 2)
+            switch (request.SceneType)
             {
-                response.Error = ErrorCode.ERR_ModifyData;
-                return;
+                case SceneTypeEnum.PetMelee:
+                    if (request.PetMeleePlan < 0 || request.PetMeleePlan > 2)
+                    {
+                        response.Error = ErrorCode.ERR_ModifyData;
+                        return;
+                    }
+                    unit.GetComponent<PetComponentS>().PetMeleePlan = request.PetMeleePlan;
+                    break;
+                case SceneTypeEnum.PetMatch:
+                    if (request.PetMeleePlan < 0 || request.PetMeleePlan > 3)
+                    {
+                        response.Error = ErrorCode.ERR_ModifyData;
+                        return;
+                    }
+                    unit.GetComponent<PetComponentS>().PetMatchPlan = request.PetMeleePlan;
+                    break;
             }
-
-            unit.GetComponent<PetComponentS>().PetMeleePlan = request.PetMeleePlan;
-
             await ETTask.CompletedTask;
         }
     }

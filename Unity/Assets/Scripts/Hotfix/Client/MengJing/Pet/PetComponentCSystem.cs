@@ -176,7 +176,8 @@ namespace ET.Client
                     self.PetMingPosition = positionList;
                     break;
                 case SceneTypeEnum.PetMatch:
-                    self.PetMatchFightList = petList;
+                    int insertIndex = 9 * self.PetMatchPlan;
+                    CommonHelp.ReplaceList( self.PetMatchFightList, petList, insertIndex );
                     break;
                 case SceneTypeEnum.MainCityScene:
                     break;
@@ -508,8 +509,8 @@ namespace ET.Client
             
             if (sceneType == SceneTypeEnum.PetMatch)
             {
-                int index = ConfigData.PetMatchPetLimit * self.PetMatchPlan;
-                return self.PetMatchFightList.GetRange(index, ConfigData.PetMatchPetLimit);
+                int index = self.PetMatchPlan * 9;
+                return self.PetMatchFightList.GetRange(index, 9);
             }
 
             return null;

@@ -240,10 +240,10 @@ namespace ET.Server
                 }
             }
 
-            if (self.PetMatchFightList.Count != ConfigData.PetMatchPetLimit * 3)
+            if (self.PetMatchFightList.Count != 27)
             {
                 self.PetMatchFightList.Clear();
-                for (int i = 0; i < ConfigData.PetMatchPetLimit * 3; i++)
+                for (int i = 0; i < 27; i++)
                 {
                     self.PetMatchFightList.Add(0);
                 }

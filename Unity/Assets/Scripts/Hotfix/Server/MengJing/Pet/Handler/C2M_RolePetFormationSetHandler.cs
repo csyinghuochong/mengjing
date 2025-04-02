@@ -20,7 +20,7 @@
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
                 case SceneTypeEnum.PetMatch:
-                    int insertIndex = ConfigData.PetMatchPetLimit * petComponent.PetMatchPlan;
+                    int insertIndex = 9 * petComponent.PetMatchPlan;
                     CommonHelp.ReplaceList( petComponent.PetMatchFightList, request.PetFormat, insertIndex );
                     break;
                 case SceneTypeEnum.MainCityScene:

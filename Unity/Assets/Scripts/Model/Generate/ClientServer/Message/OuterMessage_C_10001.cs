@@ -33030,6 +33030,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int PetMeleePlan { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int SceneType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33039,6 +33042,7 @@ namespace ET
 
             this.RpcId = default;
             this.PetMeleePlan = default;
+            this.SceneType = default;
 
             ObjectPool.Instance.Recycle(this);
         }

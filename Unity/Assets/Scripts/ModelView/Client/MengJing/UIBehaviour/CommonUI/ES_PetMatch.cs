@@ -7,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetMatch : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		
+		public GameObject[] ImageIconList;
+		
 		public UnityEngine.UI.Button E_ImageIcon6Button
      	{
      		get
