@@ -152,6 +152,14 @@ namespace ET
             self.LastSendTime = TimeInfo.Instance.ClientNow();
             if (Options.Instance.LogLevel <= 2)
             {
+                if (self.IScene == null)
+                {
+                    Log.Error($"self.IScene == null:  {self}");
+                }
+                if (self.IScene.Fiber == null)
+                {
+                    Log.Error($"self.IScene.Fiber == null:  {self.IScene}");
+                }
                 LogMsg.Instance.Debug(self.Fiber(), message);
             }
 

@@ -221,5 +221,6 @@ namespace ET.Client
 		WindowID_DamageValue,
 		WindowID_FirstWinBossSkill,
 		WindowID_SeasonDonateReward,
+		WindowID_PetMatch,
 	}
 }
