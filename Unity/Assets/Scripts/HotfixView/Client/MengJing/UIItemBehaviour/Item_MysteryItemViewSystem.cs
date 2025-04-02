@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -41,14 +42,10 @@ namespace ET.Client
                 return;
             }
 
-            using (zstring.Block())
+            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
             {
-                if (!self.Root().GetComponent<BagComponentC>()
-                            .CheckNeedItem(zstring.Format("{0};{1}", mysteryConfig.SellType, mysteryConfig.SellValue)))
-                {
-                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
-                    return;
-                }
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
+                return;
             }
 
             MysteryItemInfo mysteryItemInfo = new() { MysteryId = self.MysteryItemInfo.MysteryId };
@@ -73,10 +70,12 @@ namespace ET.Client
 
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
-            ItemInfo bagInfoNew = new ItemInfo();
-            bagInfoNew.ItemID = self.MysteryItemInfo.ItemID;
-            self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
+            self.ES_CommonItem.UseTextColor = true;
+            self.ES_CommonItem.UpdateItem(new() { ItemID = self.MysteryItemInfo.ItemID }, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            self.ES_CommonItem.E_ItemNameText.GetComponent<Outline>().effectColor = FunctionUI.QualityReturnColor(ItemConfigCategory.Instance.Get(self.MysteryItemInfo.ItemID).ItemQuality);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
