@@ -352,9 +352,14 @@ namespace ET.Server
             unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
             //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
             //更新unit坐标
-            unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
+            
+            float3 unitpos = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
+            self.InitChuanSongInPlayers(unit.Id,unitpos );
+
+            unit.Position = unitpos;
             unit.Rotation = quaternion.identity;
             unit.SetBornPosition(unit.Position, false);
+ 
             // 通知客户端开始切场景
             string parminfo = self.CurrentFubenCell.sonid.ToString();
             M2C_StartSceneChange m2CStartSceneChange = new()
@@ -369,6 +374,15 @@ namespace ET.Server
             m2CCellDungeonInfo.FubenInfo = self.FubenInfo;
             m2CCellDungeonInfo.SonFubenInfo = self.SonFubenInfo;
             MapMessageHelper.SendToClient(unit, m2CCellDungeonInfo);
+        }
+
+        private static void InitChuanSongInPlayers(this DragonDungeonComponentS self, long unitid, float3 pos)
+        {
+            List<Unit> allchuansong = UnitHelper.GetUnitList(self.Scene(), UnitType.CellTransfers);
+            foreach (Unit chuansong in allchuansong)
+            {
+                chuansong.GetComponent<DragonChuansongComponent>().Init(unitid, pos);
+            }
         }
 
         public static void InitSonCell(this DragonDungeonComponentS self, string ParamInfo)
@@ -448,7 +462,10 @@ namespace ET.Server
                 unit.RemoveComponent<PathfindingComponent>();
                 unit.AddComponent<PathfindingComponent, int>(mapComponent.NavMeshId);
 
-                unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                float3 unitpos = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+                self.InitChuanSongInPlayers(unit.Id,unitpos );
+
+                unit.Position = unitpos;
                 unit.Rotation = quaternion.identity;
                 unit.SetBornPosition(unit.Position, false);
 
@@ -584,7 +601,7 @@ namespace ET.Server
                     Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
                     chuansong.Type = UnitType.CellTransfers;
                     self.Scene().GetComponent<UnitComponent>().Add(chuansong);
-                    chuansong.AddComponent<DragonChuansongComponent>();
+                    DragonChuansongComponent chuansongComponent = chuansong.AddComponent<DragonChuansongComponent>();
                     NumericComponentS numericComponentS = chuansong.AddComponent<NumericComponentS>();
                     numericComponentS.ApplyValue(NumericType.CellIndex, self.GetCellIndex(fubenCellInfo.row, fubenCellInfo.line), false); //走过的格子
                     numericComponentS.ApplyValue(NumericType.DirectionType, i + 1, false);

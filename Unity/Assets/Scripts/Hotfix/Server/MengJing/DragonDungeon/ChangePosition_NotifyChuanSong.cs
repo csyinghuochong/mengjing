@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -7,14 +8,6 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, ChangePosition args)
         {
-            Unit unit = args.Unit;
-            MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if(mapComponent.SceneType!=SceneTypeEnum.DragonDungeon)
-            {
-                return;
-            }
-            
-            
             
             await ETTask.CompletedTask;
         }

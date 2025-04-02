@@ -36,22 +36,13 @@ namespace ET.Server
                 }
             }
         }
-
-        public static void Init(this DragonChuansongComponent self, Unit unit)
-        {
-            if (math.distance(self.SelfPos, unit.Position) < 1.5f)
-            {
-               self.InitInPlayers.Add(unit.Id);
-            }
-        }
         
-        public static void Move(this DragonChuansongComponent self, Unit unit)
+        public static void Init(this DragonChuansongComponent self, long unitid, float3 pos)
         {
-            if (math.distance(self.SelfPos, unit.Position) > 1.5f)
+            Unit chuansong = self.GetParent<Unit>();
+            if (math.distance(chuansong.Position, pos) < 1.5f)
             {
-                // if ()
-                // {
-                // }
+                self.InitInPlayers.Add(unitid);
             }
         }
 
@@ -61,18 +52,31 @@ namespace ET.Server
             if (unitlist.Count <= 0)
             {
                 return;
+            } 
+            
+            Unit chuansong = self.GetParent<Unit>();
+            foreach (Unit unit in unitlist)
+            {
+                if (math.distance(chuansong.Position, unit.Position) > 1.5f)
+                {
+                    if (self.InitInPlayers.Contains(unit.Id))
+                    {
+                        self.InitInPlayers.Remove(unit.Id);
+                    }
+                }
             }
-
-            Unit mainUnit = unitlist[0];
-            bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), mainUnit);
+            if (self.InitInPlayers.Count > 0)
+            {
+                return;
+            }
+            
+            bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), unitlist[0]);
             if (!allMonsterDead)
             {
                 return;
             }
-
-            bool allin = true;
-            Unit chuansong = self.GetParent<Unit>();
             
+            bool allin = true;
             List<EntityRef<Unit>> allunits = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {

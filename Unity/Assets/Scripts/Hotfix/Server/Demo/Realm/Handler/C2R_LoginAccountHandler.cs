@@ -194,6 +194,15 @@ namespace ET.Server
                         return;
                     }
                     
+                    if (session.IsDisposed || session.Zone() == 0)
+                    {
+                        Log.Console($"session.IsDisposed: {request.Account}");
+                        response.Error = ErrorCode.ERR_LoginInfoIsNull;
+                        centerAccountInfo.Dispose();
+                        return;
+                    }
+                    
+                    
                     Session otherSession  = accountSessionsComponent.Get(request.Account);
                     A2C_Disconnect a2C_Disconnect = A2C_Disconnect.Create();
                     a2C_Disconnect.Error = ErrorCode.ERR_OtherAccountLogin;
