@@ -130,52 +130,7 @@ namespace ET.Server
 
             return cardInfo;
         }
-
-        // 初始化牌库
-        private static void InitCardPool(this PetMeleeDungeonComponent self)
-        {
-            int maxNum = ConfigData.PetMeleeCarInHandNum * 5;
-            int mainPetCardNum = (int)(maxNum * ConfigData.PetMeleeMainPetProb);
-            int assistPetCardNum = (int)(maxNum * ConfigData.PetMeleeAssistPetProb);
-            int skillCardNum = (int)(maxNum * ConfigData.PetMeleeSkillProb);
-
-            for (int i = 0; i < mainPetCardNum; i++)
-            {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.MainPet);
-
-                if (cardInfo != null)
-                {
-                    self.PetMeleeCardPool.Add(cardInfo);
-                }
-            }
-
-            for (int i = 0; i < assistPetCardNum; i++)
-            {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.AssistPet);
-
-                if (cardInfo != null)
-                {
-                    self.PetMeleeCardPool.Add(cardInfo);
-                }
-            }
-
-            for (int i = 0; i < skillCardNum; i++)
-            {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic);
-
-                if (cardInfo != null)
-                {
-                    self.PetMeleeCardPool.Add(cardInfo);
-                }
-            }
-
-            for (int i = self.PetMeleeCardPool.Count - 1; i > 0; i--)
-            {
-                int j = RandomHelper.RandomNumber(0, i + 1);
-                (self.PetMeleeCardPool[i], self.PetMeleeCardPool[j]) = (self.PetMeleeCardPool[j], self.PetMeleeCardPool[i]);
-            }
-        }
-
+        
         // 发放初始卡牌
         private static void DealFirstCards(this PetMeleeDungeonComponent self)
         {
