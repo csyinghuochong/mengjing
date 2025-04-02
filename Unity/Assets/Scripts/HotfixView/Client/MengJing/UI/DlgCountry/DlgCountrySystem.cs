@@ -3,6 +3,7 @@ namespace ET.Client
     [FriendOf(typeof(ES_CountryTask))]
     [FriendOf(typeof(ES_CountryHuoDong))]
     [FriendOf(typeof(ES_ActivitySingIn))]
+    [FriendOf(typeof(ES_PetMatch))]
     [FriendOf(typeof(DlgCountry))]
     public static class DlgCountrySystem
     {
@@ -30,6 +31,10 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_CountryHuoDong.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 3:
+                    self.View.ES_PetMatch.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetMatch.OnUpdateUI();
                     break;
             }
         }

@@ -83,6 +83,26 @@ namespace ET.Client
                 return this.m_es_countryhuodong;
             }
         }
+        
+        public ES_PetMatch ES_PetMatch
+        {
+	        get
+	        {
+		        ES_PetMatch es = this.m_es_petmatch;
+		        if (es == null)
+		        {
+			        string path = "Assets/Bundles/UI/Common/ES_PetMatch.prefab";
+			        GameObject prefab = this.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+			        GameObject go = UnityEngine.Object.Instantiate(prefab, this.EG_SubViewRectTransform);
+			        go.SetActive(true);
+			        this.AssetList.Add(path);
+			        this.m_es_petmatch = this.AddChild<ES_PetMatch, Transform>(go.transform);
+			        go.SetActive(false);
+		        }
+
+		        return this.m_es_petmatch;
+	        }
+        }
 
         public ES_ActivitySingIn ES_ActivitySingIn
         {
@@ -111,6 +131,7 @@ namespace ET.Client
 			this.m_es_countrytask = null;
 			this.m_es_countryhuodong = null;
 			this.m_es_activitysingin = null;
+			this.m_es_petmatch = null;
 			this.uiTransform = null;
 			
 			ResourcesLoaderComponent resourcesLoaderComponent = this.Root().GetComponent<ResourcesLoaderComponent>();
@@ -127,6 +148,7 @@ namespace ET.Client
 		private EntityRef<ES_CountryTask> m_es_countrytask = null;
 		private EntityRef<ES_CountryHuoDong> m_es_countryhuodong = null;
 		private EntityRef<ES_ActivitySingIn> m_es_activitysingin = null;
+		private EntityRef<ES_PetMatch> m_es_petmatch = null;
 		public Transform uiTransform = null;
 	}
 }

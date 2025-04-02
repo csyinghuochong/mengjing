@@ -18,6 +18,12 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
+
+		public static void OnUpdateUI(this ES_PetMatch self)
+		{
+			
+		}
+
 	}
 
 
