@@ -16,11 +16,11 @@ namespace ET.Client
         // 好像已经弃用了
         public static void UpdateChuanSong(this SceneManagerComponent self, int sceneTypeEnum)
         {
-            // AdditiveHide[] additiveHides = (AdditiveHide[])UnityEngine.Object.FindObjectsOfType(typeof (AdditiveHide));
-            // for (int i = 0; i < additiveHides.Length; i++)
-            // {
-            //     additiveHides[i].ToggleShow();
-            // }
+            AdditiveHide[] additiveHides = (AdditiveHide[])UnityEngine.Object.FindObjectsOfType(typeof (AdditiveHide));
+            for (int i = 0; i < additiveHides.Length; i++)
+            {
+                additiveHides[i].ToggleShow();
+            }
 
             if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon
                 || sceneTypeEnum == (int)SceneTypeEnum.DragonDungeon)

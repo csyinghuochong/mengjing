@@ -287,6 +287,19 @@ namespace ET.Client
             }
         }
 
+        private static void PathfindingComponentFind(this ES_JoystickMove self, Unit unit, quaternion rotation, float dis,  List<float3> pathfind)
+        {
+            float3 targetpos = unit.Position + math.forward(rotation) * dis;
+            
+            RaycastHit hit;
+            Physics.Raycast(targetpos + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
+            if (hit.collider != null)
+            {
+                targetpos = hit.point;  
+            }
+            unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
+        }
+
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
             long clientNow = TimeHelper.ClientNow();
@@ -316,16 +329,12 @@ namespace ET.Client
             List<float3> pathfind = new List<float3>();
             
             //self.CanMovePosition(unit, rotation, pathfind);
-
-            float3 targetpos = unit.Position + math.forward(rotation) * 2f;
-            
-            RaycastHit hit;
-            Physics.Raycast(targetpos + new float3(0f, 10f, 0f), Vector3.down, out hit, 100, self.MapLayer);
-            if (hit.collider != null)
+            self.PathfindingComponentFind( unit, rotation, 2f, pathfind );
+            if (pathfind.Count < 2)
             {
-                targetpos = hit.point;  
+                self.PathfindingComponentFind( unit, rotation, 1f, pathfind );
             }
-            unit.GetComponent<ClientPathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
+            
             //unit.GetComponent<ClientPathfinding2Component>().Find(unit.Position + targetpos, pathfind);
             //unit.GetComponent<ET6PathfindingComponent>().Find(unit.Position,  targetpos, pathfind);
             if (pathfind.Count < 2)
