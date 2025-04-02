@@ -49,7 +49,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_DragonDungeonShop.uiTransform.gameObject.SetActive(true);
-                    self.View.ES_DragonDungeonShop.OnUpdateUI();
+                    self.View.ES_DragonDungeonShop.UpdateInfo();
                     break;
             }
         }

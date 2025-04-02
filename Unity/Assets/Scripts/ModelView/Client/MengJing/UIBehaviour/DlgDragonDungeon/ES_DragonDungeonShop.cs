@@ -8,12 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_DragonDungeonShop : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public int BuyNum;
-		public int SellId;
-		public List<StoreSellConfig> ShowStoreSellConfigs = new();
-		public Dictionary<int, EntityRef<Scroll_Item_BattleShopItem>> ScrollItemBattleShopItems;
+		public List<int> ShowItems = new();
+		public Dictionary<int, EntityRef<Scroll_Item_DragonDungeonShopItem>> ScrollItemDragonDungeonShopItems;
 		
-		public LoopVerticalScrollRect E_BattleShopItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_DragonDungeonShopItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,11 +20,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BattleShopItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_DragonDungeonShopItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BattleShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BattleShopItems");
+		    		this.m_E_DragonDungeonShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DragonDungeonShopItems");
      			}
-     			return this.m_E_BattleShopItemsLoopVerticalScrollRect;
+     			return this.m_E_DragonDungeonShopItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -265,7 +263,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_BattleShopItemsLoopVerticalScrollRect = null;
+			this.m_E_DragonDungeonShopItemsLoopVerticalScrollRect = null;
 			this.m_E_ItemNumText = null;
 			this.m_E_ItemIconShowImage = null;
 			this.m_E_Lab_BuyNumText = null;
@@ -282,7 +280,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_BattleShopItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_DragonDungeonShopItemsLoopVerticalScrollRect = null;
 		private Text m_E_ItemNumText = null;
 		private Image m_E_ItemIconShowImage = null;
 		private Text m_E_Lab_BuyNumText = null;
