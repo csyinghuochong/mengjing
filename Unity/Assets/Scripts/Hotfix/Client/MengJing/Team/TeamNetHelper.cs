@@ -175,8 +175,8 @@
                         return ErrorCode.ERR_PlayerIsNot;
                     }
                     break;
-                case SceneTypeEnum.DragonDungeon:
-                    if (teamInfo.PlayerList.Count < 1)
+                case SceneTypeEnum.DragonDungeon: 
+                    if (teamInfo.PlayerList.Count < 1)  //地下城组队人数限制
                     {
                         return ErrorCode.ERR_PlayerIsNot;
                     }
