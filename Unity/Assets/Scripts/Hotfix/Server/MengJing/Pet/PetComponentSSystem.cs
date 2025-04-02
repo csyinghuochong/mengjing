@@ -240,9 +240,13 @@ namespace ET.Server
                 }
             }
 
-            if (self.PetMatchFightList.Count != 18)
+            if (self.PetMatchFightList.Count != ConfigData.PetMatchPetLimit * 3)
             {
                 self.PetMatchFightList.Clear();
+                for (int i = 0; i < ConfigData.PetMatchPetLimit * 3; i++)
+                {
+                    self.PetMatchFightList.Add(0);
+                }
             }
 
             self.CheckPetList(self.PetFormations);

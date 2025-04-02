@@ -40,7 +40,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                self.View.E_TextNumberText.text = zstring.Format("阵容限制：{0}/5", number);
+                self.View.E_TextNumberText.text = zstring.Format("阵容限制：{0}/{1}", number, self.PetNumberLimit);
             }
         }
 
@@ -100,6 +100,7 @@ namespace ET.Client
         {
             self.SetHandler = action;
             self.SceneTypeEnum = sceneType;
+            self.PetNumberLimit = sceneType == SceneTypeEnum.PetMatch ? ConfigData.PetMatchPetLimit : ConfigData.PetDungeonPetLimit;
             self.PetTeamList.AddRange(self.Root().GetComponent<PetComponentC>().GetPetFormatList(sceneType));
             self.View.ES_PetFormationSet.DragEndHandler = self.RequestFormationSet;
             self.View.ES_PetFormationSet.OnUpdateFormation(self.SceneTypeEnum, self.PetTeamList, true);
@@ -125,7 +126,7 @@ namespace ET.Client
                 number += (self.PetTeamList[i] != 0 ? 1 : 0);
             }
 
-            if (index != -1 && number >= 5 && self.PetTeamList[index] == 0 && operateType != 2)
+            if (index != -1 && number >= self.PetNumberLimit && self.PetTeamList[index] == 0 && operateType != 2)
             {
                 FlyTipComponent.Instance.ShowFlyTip("已达到上阵最大数量！");
                 return;

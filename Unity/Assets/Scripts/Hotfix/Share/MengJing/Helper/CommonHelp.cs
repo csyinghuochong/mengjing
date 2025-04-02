@@ -926,6 +926,16 @@ namespace  ET
             return ConfigData.SeasonBossId == monsterid;
         }
 
+        public static void ReplaceList<T>(List<T> mainList, List<T> newList, int insertIndex)
+        {
+            // 移除主列表中从插入位置开始的和新列表长度相同数量的元素
+            int removeCount = Math.Min(newList.Count, mainList.Count - insertIndex);
+            mainList.RemoveRange(insertIndex, removeCount);
+
+            // 在指定位置插入新列表
+            mainList.InsertRange(insertIndex, newList);
+        }
+        
         //宠物守护
         public static float GetPetShouHuPro(int mainValue, int fightValue)
         {

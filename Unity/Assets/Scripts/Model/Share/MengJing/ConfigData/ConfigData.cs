@@ -2201,8 +2201,16 @@ namespace ET
             new KeyValuePairInt() { KeyId = 15000, Value = 77001807 }, 
             new KeyValuePairInt() { KeyId = 20000, Value = 77001808 },
         };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int PetDungeonPetLimit = 5;
         
-        
+        /// <summary>
+        /// 宠物挑战放置宠物数量
+        /// </summary>
+        public const int PetMatchPetLimit = 6;
         
         /// <summary>
         /// SkillMake假配置
