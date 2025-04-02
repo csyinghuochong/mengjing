@@ -8,11 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_TowerShop : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public int SellId;
-		public Dictionary<int, EntityRef<Scroll_Item_WeiJingShopItem>> ScrollItemWeiJingShopItems;
-		public List<StoreSellConfig> ShowStoreSellConfigs = new();
+		public Dictionary<int, EntityRef<Scroll_Item_TowerShopItem>> ScrollItemTowerShopItems;
+		public List<int> ShowItems = new();
 		
-		public LoopVerticalScrollRect E_WeiJingShopItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_TowerShopItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -21,11 +20,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_WeiJingShopItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_TowerShopItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_WeiJingShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_WeiJingShopItems");
+		    		this.m_E_TowerShopItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TowerShopItems");
      			}
-     			return this.m_E_WeiJingShopItemsLoopVerticalScrollRect;
+     			return this.m_E_TowerShopItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -264,7 +263,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_WeiJingShopItemsLoopVerticalScrollRect = null;
+			this.m_E_TowerShopItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonBuyButton = null;
 			this.m_E_ButtonBuyImage = null;
 			this.m_E_Lab_RmbNumInputField = null;
@@ -281,7 +280,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private LoopVerticalScrollRect m_E_WeiJingShopItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_TowerShopItemsLoopVerticalScrollRect = null;
 		private Button m_E_ButtonBuyButton = null;
 		private Image m_E_ButtonBuyImage = null;
 		private InputField m_E_Lab_RmbNumInputField = null;
