@@ -257,6 +257,7 @@ namespace ET.Server
             self.CheckPetList(self.PetShouHuList);
             self.CheckPetList(self.PetMingList);
             self.CheckPetList(self.PetMingPosition);
+            self.CheckPetList(self.PetMatchFightList);
             self.CheckPetList(self.PetEchoList);
 
             if (self.PetShouHuActive == 0)

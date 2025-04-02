@@ -7734,16 +7734,3 @@ message M2C_DamageValueListResponse // ILocationResponse
 	repeated DamageValueInfo DamageValueList = 2;
 }
 
-//ResponseType M2C_PetMatchResponse
-message C2M_PetMatchPlanRequest // ILocationRequest
-{
-	int32 RpcId = 90;
-	int32 PetMeleePlan = 1;
-}
-
-message M2C_PetMatchResponse // ILocationResponse
-{
-	int32 RpcId = 90;
-	string Message = 91;
-	int32 Error = 92;
-}
