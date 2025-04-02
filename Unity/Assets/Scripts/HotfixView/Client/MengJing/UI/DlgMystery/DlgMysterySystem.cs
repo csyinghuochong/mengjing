@@ -56,7 +56,7 @@ namespace ET.Client
             self.MysteryItemInfos.Clear();
             for (int i = 0; i < mysteryItemInfos.Count; i++)
             {
-                if (!itemList.Contains(mysteryItemInfos[i].MysteryId))
+                if (npcid!=1020 &&  !itemList.Contains(mysteryItemInfos[i].MysteryId))
                 {
                     continue;
                 }
