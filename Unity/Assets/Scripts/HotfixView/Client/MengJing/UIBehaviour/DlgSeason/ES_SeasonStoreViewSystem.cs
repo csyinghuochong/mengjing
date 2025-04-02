@@ -30,23 +30,29 @@ namespace ET.Client
 
         public static void UpdateInfo(this ES_SeasonStore self)
         {
-            int seasonShopid = GlobalValueConfigCategory.Instance.Get(103).Value2;
-            self.E_GoldNumTextText.text = self.Root().GetComponent<BagComponentC>()
-                    .GetItemNumber(StoreSellConfigCategory.Instance.Get(seasonShopid).SellType).ToString();
-
-            ItemConfig sellTypeItemConfig = ItemConfigCategory.Instance.Get(StoreSellConfigCategory.Instance.Get(seasonShopid).SellType);
+            int shopid = GlobalValueConfigCategory.Instance.Get(103).Value2;
+            self.E_GoldNumTextText.text = self.Root().GetComponent<BagComponentC>().GetItemNumber(StoreSellConfigCategory.Instance.Get(shopid).SellType).ToString();
+            int playLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
+            
+            ItemConfig sellTypeItemConfig = ItemConfigCategory.Instance.Get(StoreSellConfigCategory.Instance.Get(shopid).SellType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, sellTypeItemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_GoldImgImage.sprite = sp;
 
             self.ShowItems.Clear();
-            while (seasonShopid > 0)
+            while (shopid > 0)
             {
-                self.ShowItems.Add(seasonShopid);
+                StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(shopid);
 
-                StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(seasonShopid);
-                seasonShopid = storeSellConfig.NextID;
+                if (playLv < storeSellConfig.ShowRoleLvMin || playLv > storeSellConfig.ShowRoleLvMax)
+                {
+                    shopid = storeSellConfig.NextID;
+                    continue;
+                }
+
+                self.ShowItems.Add(shopid);
+                shopid = storeSellConfig.NextID;
             }
 
             self.AddUIScrollItems(ref self.ScrollItemSeasonStoreItems, self.ShowItems.Count);

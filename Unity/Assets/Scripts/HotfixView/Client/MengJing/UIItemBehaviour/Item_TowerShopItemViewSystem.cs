@@ -32,7 +32,7 @@ namespace ET.Client
 
             await BagClientNetHelper.RquestStoreBuy(self.Root(), self.StoreSellConfigId, 1);
 
-            self.GetParent<ES_SeasonStore>().UpdateInfo();
+            self.GetParent<ES_TowerShop>().UpdateInfo();
         }
 
         public static void OnUpdateUI(this Scroll_Item_TowerShopItem self, int id)
