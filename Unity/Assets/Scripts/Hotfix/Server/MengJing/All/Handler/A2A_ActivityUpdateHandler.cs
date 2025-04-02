@@ -153,6 +153,16 @@ namespace ET.Server
                         scene.GetComponent<SoloSceneComponent>().OnSoloOver().Coroutine();
                     }
                     break;
+                case SceneType.PetMatch:
+                    if (request.FunctionId == 1074 && request.FunctionType == 1)
+                    {
+                        //scene.GetComponent<PetMatchSceneComponent>().OnSoloBegin().Coroutine();
+                    }
+                    if (request.FunctionId == 1074 && request.FunctionType == 2)
+                    {
+                        //scene.GetComponent<PetMatchSceneComponent>().OnSoloOver().Coroutine();
+                    }
+                    break;
                 case SceneType.FubenCenter:
                     if (hour == 0)
                     {

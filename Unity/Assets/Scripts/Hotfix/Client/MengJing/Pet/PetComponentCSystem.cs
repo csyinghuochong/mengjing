@@ -44,8 +44,6 @@ namespace ET.Client
             self.PetMeleeFubeRewardIds = m2C_RolePetList.PetMeleeFubeRewardIds;
             self.PetEchoList = m2C_RolePetList.PetEchoList;
             self.PetZhuangJiaList = m2C_RolePetList.PetZhuangJiaList;
-            self.PetMatchPlan = m2C_RolePetList.PetMatchPlan;
-            self.PetMatchFightList = m2C_RolePetList.PetMatchFightList;
         }
 
         public static void OnPetEchoOperate(this PetComponentC self, M2C_PetEchoOperateResponse m2C_RolePetList)
@@ -174,10 +172,6 @@ namespace ET.Client
                 case SceneTypeEnum.PetMing:
                     self.PetMingList = petList;
                     self.PetMingPosition = positionList;
-                    break;
-                case SceneTypeEnum.PetMatch:
-                    int insertIndex = 9 * self.PetMatchPlan;
-                    CommonHelp.ReplaceList( self.PetMatchFightList, petList, insertIndex );
                     break;
                 case SceneTypeEnum.MainCityScene:
                     break;
@@ -507,12 +501,6 @@ namespace ET.Client
                 return self.PetMingList;
             }
             
-            if (sceneType == SceneTypeEnum.PetMatch)
-            {
-                int index = self.PetMatchPlan * 9;
-                return self.PetMatchFightList.GetRange(index, 9);
-            }
-
             return null;
         }
 

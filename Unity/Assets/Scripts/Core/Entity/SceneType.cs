@@ -41,6 +41,7 @@ namespace ET
         LoginCenter = 1L << 34,
         ReCharge = 1L << 35,
         RobotManager = 1L << 36,
+        PetMatch = 1L << 37,
 
         // 客户端
         Demo = 1L << 50,

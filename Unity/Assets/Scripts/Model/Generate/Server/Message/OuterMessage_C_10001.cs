@@ -11034,12 +11034,6 @@ namespace ET
         [MemoryPackOrder(25)]
         public List<int> PetZhuangJiaList { get; set; } = new();
 
-        [MemoryPackOrder(26)]
-        public int PetMatchPlan { get; set; }
-
-        [MemoryPackOrder(27)]
-        public List<long> PetMatchFightList { get; set; } = new();
-
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -11075,8 +11069,6 @@ namespace ET
             this.PetMeleeFubeRewardIds.Clear();
             this.PetEchoList.Clear();
             this.PetZhuangJiaList.Clear();
-            this.PetMatchPlan = default;
-            this.PetMatchFightList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

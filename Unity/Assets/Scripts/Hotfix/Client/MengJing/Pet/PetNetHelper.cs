@@ -466,10 +466,8 @@ namespace ET.Client
             switch (sceneType)
             {
                 case SceneTypeEnum.PetMelee:
-                    petComponentC .PetMeleePlan = plan;
-                    break;
                 case SceneTypeEnum.PetMatch:
-                    petComponentC .PetMatchPlan = plan;
+                    petComponentC .PetMeleePlan = plan;
                     break;
             }
 

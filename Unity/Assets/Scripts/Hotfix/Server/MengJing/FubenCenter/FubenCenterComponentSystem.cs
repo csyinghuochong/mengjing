@@ -93,11 +93,6 @@ namespace ET.Server
                 self.DemonInfos.Clear();
             }
 
-            if (functionId == 1074)
-            {
-                self.PetMatchOepn = true;
-                self.PetMatchInfos.Clear();
-            }
 
             Console.WriteLine($"OnActivityOpen: {functionId}");
         }
@@ -140,11 +135,6 @@ namespace ET.Server
                 self.DisposeFuben(functionId).Coroutine();
             }
 
-            if (functionId == 1074)
-            {
-                self.DemonOpen = false;
-                self.DisposeFuben(functionId).Coroutine();
-            }
              Console.WriteLine($"OnActivityClose: {functionId}");
         }
 
@@ -320,9 +310,6 @@ namespace ET.Server
             {
                 case 1025:
                     battleInfos = self.BattleInfos;
-                    break;
-                case 1074:
-                    battleInfos = self.PetMatchInfos;
                     break;
                 case 1031:
                     battleInfos = self.ArenaInfos;

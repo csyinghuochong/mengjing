@@ -33,17 +33,7 @@ namespace ET.Server
         public List<PetMeleeFubenInfo> PetMeleeFubenInfos { get; set; } = new(); //宠物乱斗 副本信息
         public List<int> PetMeleeRewardIds { get; set; } = new(); //宠物乱斗 领取的关卡奖励Id
         public List<int> PetMeleeFubeRewardIds { get; set; } = new(); //宠物乱斗 领取的星星数量奖励Id
-        
-        /// <summary>
-        /// 宠物挑战赛方案
-        /// </summary>
-        public int PetMatchPlan { get; set; }
-        
-        /// <summary>
-        /// 宠物挑战出战id,一个18个  个一组
-        /// </summary>
-        public List<long>  PetMatchFightList { get; set; }= new();
-        
+
         public List<RolePetInfo> RolePetInfos  { get; set; }= new List<RolePetInfo>(); 
         public List<KeyValuePairLong> RolePetEggs { get; set; }= new List<KeyValuePairLong>(); 
         public List<PetFubenInfo> PetFubenInfos{ get; set; }= new List<PetFubenInfo>(); 

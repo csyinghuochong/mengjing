@@ -240,15 +240,6 @@ namespace ET.Server
                 }
             }
 
-            if (self.PetMatchFightList.Count != 27)
-            {
-                self.PetMatchFightList.Clear();
-                for (int i = 0; i < 27; i++)
-                {
-                    self.PetMatchFightList.Add(0);
-                }
-            }
-
             self.CheckPetList(self.PetFormations);
             self.CheckPetList(self.TeamPetList);
             self.CheckPetList(self.PetFightList_1);
@@ -257,7 +248,6 @@ namespace ET.Server
             self.CheckPetList(self.PetShouHuList);
             self.CheckPetList(self.PetMingList);
             self.CheckPetList(self.PetMingPosition);
-            self.CheckPetList(self.PetMatchFightList);
             self.CheckPetList(self.PetEchoList);
 
             if (self.PetShouHuActive == 0)

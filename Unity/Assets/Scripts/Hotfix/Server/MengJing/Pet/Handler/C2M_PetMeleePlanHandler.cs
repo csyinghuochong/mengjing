@@ -8,20 +8,13 @@
             switch (request.SceneType)
             {
                 case SceneTypeEnum.PetMelee:
+                case SceneTypeEnum.PetMatch:
                     if (request.PetMeleePlan < 0 || request.PetMeleePlan > 2)
                     {
                         response.Error = ErrorCode.ERR_ModifyData;
                         return;
                     }
                     unit.GetComponent<PetComponentS>().PetMeleePlan = request.PetMeleePlan;
-                    break;
-                case SceneTypeEnum.PetMatch:
-                    if (request.PetMeleePlan < 0 || request.PetMeleePlan > 3)
-                    {
-                        response.Error = ErrorCode.ERR_ModifyData;
-                        return;
-                    }
-                    unit.GetComponent<PetComponentS>().PetMatchPlan = request.PetMeleePlan;
                     break;
             }
             await ETTask.CompletedTask;

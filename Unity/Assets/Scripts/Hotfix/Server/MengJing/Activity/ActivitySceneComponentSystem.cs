@@ -342,8 +342,10 @@ namespace ET.Server
                     case 1055: //喜从天降
                     case 1043: //家族Boss
                     case 1044: //家族争霸
-                    case 1074://宠物挑战赛
                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
+                        break;
+                    case 1074://宠物挑战赛
+                        sceneserverid = UnitCacheHelper.GetPetMatchServerId(self.Zone());
                         break;
                     default:
                         break;

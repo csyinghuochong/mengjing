@@ -66,13 +66,6 @@ namespace ET.Server
         /// </summary>
         public bool ArenaOpen = false;
         public List<BattleInfo> ArenaInfos { get; set; } = new List<BattleInfo>();
-
-        /// <summary>
-        /// 宠物挑战赛
-        /// </summary>
-        public bool PetMatchOepn = false;
-        
-        public List<BattleInfo> PetMatchInfos { get; set; } = new List<BattleInfo>();
         
         /// <summary>
         /// 家族争霸

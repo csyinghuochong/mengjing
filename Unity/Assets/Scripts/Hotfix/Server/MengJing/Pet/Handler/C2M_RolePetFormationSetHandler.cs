@@ -19,10 +19,6 @@
                     petComponent.PetMingList = request.PetFormat;
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
-                case SceneTypeEnum.PetMatch:
-                    int insertIndex = 9 * petComponent.PetMatchPlan;
-                    CommonHelp.ReplaceList( petComponent.PetMatchFightList, request.PetFormat, insertIndex );
-                    break;
                 case SceneTypeEnum.MainCityScene:
                     // TransferHelper.RemoveFightPetList(unit,request.PetFormat );
                     // petComponent.PetFightList = request.PetFormat; //通过布阵界面设置出战宠物
