@@ -85,7 +85,7 @@ namespace ET.Client
             List<ItemInfo> equipList = bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip);
             int startId = 1600101 + index * 100;
             
-            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(startId);
+            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(ItemConfigCategory.Instance.Get(startId).ItemEquipID);
             EquipSuitConfig equipSuit = EquipSuitConfigCategory.Instance.Get(equipConfig.EquipSuitID);
             int[] needEquipIDSet = equipSuit.NeedEquipID;
             string[] suitPropertyIDSet = equipSuit.SuitPropertyID.Split(';');
