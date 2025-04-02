@@ -574,7 +574,7 @@ namespace ET.Server
 
             if (mapComponent.SceneType == SceneTypeEnum.MiJing && monsterConfig.MonsterType == MonsterTypeEnum.Boss)
             {
-                self.Scene().GetComponent<MiJingComponent>().BossId = refreshMonster.MonsterId;
+                self.Scene().GetComponent<MiJingDungeonComponent>().BossId = refreshMonster.MonsterId;
 
                 if (!CommonHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetServeOpenrDay( self.Zone()) > 0)
                 {

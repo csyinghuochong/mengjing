@@ -3,21 +3,21 @@ using System.Linq;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof (MiJingComponent))]
-    [FriendOf(typeof (MiJingComponent))]
-    public static partial class MiJingComponentSystem
+    [EntitySystemOf(typeof (MiJingDungeonComponent))]
+    [FriendOf(typeof (MiJingDungeonComponent))]
+    public static partial class MiJingDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this MiJingComponent self)
+        private static void Awake(this MiJingDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this MiJingComponent self)
+        private static void Destroy(this MiJingDungeonComponent self)
         {
         }
 
-        public static void OnKillEvent(this MiJingComponent self, Unit defend)
+        public static void OnKillEvent(this MiJingDungeonComponent self, Unit defend)
         {
             if (defend.ConfigId != self.BossId)
             {
@@ -49,7 +49,7 @@ namespace ET.Server
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="rewardList"></param>
-        public static async ETTask SendReward(this MiJingComponent self, List<TeamPlayerInfo> players, int start, int end, string rewardList)
+        public static async ETTask SendReward(this MiJingDungeonComponent self, List<TeamPlayerInfo> players, int start, int end, string rewardList)
         {
             long serverTime = TimeHelper.ServerNow();
             ActorId mailServerId = UnitCacheHelper.GetMailServerId(self.Zone());
@@ -89,7 +89,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnUpdateDamage(this MiJingComponent self, Unit attack, Unit defend, long damage)
+        public static void OnUpdateDamage(this MiJingDungeonComponent self, Unit attack, Unit defend, long damage)
         {
             if (attack == null)
             {

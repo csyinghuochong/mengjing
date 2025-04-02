@@ -64,7 +64,7 @@ namespace ET.Server
 		                break;
 	                case SceneTypeEnum.MiJing://秘境伤害
 		                recordUnit = unit.Type == UnitType.Player ? unit : null;
-		                DomainScene.GetComponent<MiJingComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
+		                DomainScene.GetComponent<MiJingDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
 		                break;
 	                case SceneTypeEnum.TrialDungeon://试炼副本伤害
 		                TrialDungeonComponent trialDungeonComponent = DomainScene.GetComponent<TrialDungeonComponent>();

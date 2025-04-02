@@ -4,7 +4,7 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Scene))]
-    public class MiJingComponent: Entity, IAwake, IDestroy
+    public class MiJingDungeonComponent: Entity, IAwake, IDestroy
     {
         public int BossId { get; set; }
         public long LastTime{ get; set; }

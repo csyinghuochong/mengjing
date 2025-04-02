@@ -255,7 +255,7 @@ namespace ET.Server
                     ;
                     break;
                 case SceneTypeEnum.MiJing:
-                    domainScene.GetComponent<MiJingComponent>().OnKillEvent(defendUnit);
+                    domainScene.GetComponent<MiJingDungeonComponent>().OnKillEvent(defendUnit);
                     break;
                 case SceneTypeEnum.Solo:
                     domainScene.GetComponent<SoloDungeonComponent>().OnKillEvent(mainAttack, defendUnit);

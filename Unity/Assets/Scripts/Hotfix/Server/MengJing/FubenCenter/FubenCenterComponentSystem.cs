@@ -19,7 +19,11 @@ namespace ET.Server
             //野外场景都放在FubenCenter1  其他玩法根据规则放在不同的
             if (root.Name.Equals("FubenCenter1"))
             {
-                self.InitYeWaiScene().Coroutine();
+                self.InitYeWaiScene(new List<int>(){SceneTypeEnum.BaoZang,  SceneTypeEnum.MiJing}).Coroutine();
+            }
+            if (root.Name.Equals("FubenCenter2"))
+            {
+                self.InitYeWaiScene(new List<int>(){SceneTypeEnum.PetMatch}).Coroutine();
             }
         }
 
@@ -475,15 +479,14 @@ namespace ET.Server
 
         #region YeWai
 
-        public static async ETTask InitYeWaiScene(this FubenCenterComponent self)
+        public static async ETTask InitYeWaiScene(this FubenCenterComponent self, List<int> sceneTypelist)
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(0, 1000));
 
             List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < sceneConfigs.Count; i++)
             {
-                if (sceneConfigs[i].MapType != SceneTypeEnum.BaoZang
-                    && sceneConfigs[i].MapType != SceneTypeEnum.MiJing)
+                if (!sceneTypelist.Contains(sceneConfigs[i].MapType))
                 {
                     continue;
                 }
@@ -506,7 +509,10 @@ namespace ET.Server
                 switch (sceneConfigs[i].MapType)
                 {
                     case SceneTypeEnum.MiJing:
-                        fubnescene.AddComponent<MiJingComponent>();
+                        fubnescene.AddComponent<MiJingDungeonComponent>();
+                        break;
+                    case SceneTypeEnum.PetMatch:
+                        
                         break;
                     default:
                         break;
