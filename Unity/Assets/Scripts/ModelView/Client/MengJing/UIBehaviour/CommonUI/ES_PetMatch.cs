@@ -1,6 +1,7 @@
-﻿
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
@@ -8,212 +9,10 @@ namespace ET.Client
 	public  class ES_PetMatch : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		
-		public GameObject[] ImageIconList;
+		public GameObject MainPetItem;
+		public List<GameObject> MainPetItemList = new();
+		public PetMeleeInfo PetMeleeInfo;
 		
-		public UnityEngine.UI.Button E_ImageIcon6Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon6Button == null )
-     			{
-		    		this.m_E_ImageIcon6Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon6");
-     			}
-     			return this.m_E_ImageIcon6Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon6Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon6Image == null )
-     			{
-		    		this.m_E_ImageIcon6Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon6");
-     			}
-     			return this.m_E_ImageIcon6Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ImageIcon5Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon5Button == null )
-     			{
-		    		this.m_E_ImageIcon5Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon5");
-     			}
-     			return this.m_E_ImageIcon5Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon5Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon5Image == null )
-     			{
-		    		this.m_E_ImageIcon5Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon5");
-     			}
-     			return this.m_E_ImageIcon5Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ImageIcon4Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon4Button == null )
-     			{
-		    		this.m_E_ImageIcon4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon4");
-     			}
-     			return this.m_E_ImageIcon4Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon4Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon4Image == null )
-     			{
-		    		this.m_E_ImageIcon4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon4");
-     			}
-     			return this.m_E_ImageIcon4Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ImageIcon3Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon3Button == null )
-     			{
-		    		this.m_E_ImageIcon3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon3");
-     			}
-     			return this.m_E_ImageIcon3Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon3Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon3Image == null )
-     			{
-		    		this.m_E_ImageIcon3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon3");
-     			}
-     			return this.m_E_ImageIcon3Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ImageIcon2Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon2Button == null )
-     			{
-		    		this.m_E_ImageIcon2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon2");
-     			}
-     			return this.m_E_ImageIcon2Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon2Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon2Image == null )
-     			{
-		    		this.m_E_ImageIcon2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon2");
-     			}
-     			return this.m_E_ImageIcon2Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ImageIcon1Button
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon1Button == null )
-     			{
-		    		this.m_E_ImageIcon1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Mask/E_ImageIcon1");
-     			}
-     			return this.m_E_ImageIcon1Button;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageIcon1Image
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageIcon1Image == null )
-     			{
-		    		this.m_E_ImageIcon1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Mask/E_ImageIcon1");
-     			}
-     			return this.m_E_ImageIcon1Image;
-     		}
-     	}
-
 		public UnityEngine.UI.Button E_Button_RefreshButton
      	{
      		get
@@ -400,6 +199,23 @@ namespace ET.Client
      			return this.m_E_Text_RankText;
      		}
      	}
+		
+		public UnityEngine.RectTransform EG_MainPetListRectTransform
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_MainPetListRectTransform == null )
+				{
+					this.m_EG_MainPetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MainPetList");
+				}
+				return this.m_EG_MainPetListRectTransform;
+			}
+		}
 
 		    public Transform UITransform
          {
@@ -415,18 +231,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_ImageIcon6Button = null;
-			this.m_E_ImageIcon6Image = null;
-			this.m_E_ImageIcon5Button = null;
-			this.m_E_ImageIcon5Image = null;
-			this.m_E_ImageIcon4Button = null;
-			this.m_E_ImageIcon4Image = null;
-			this.m_E_ImageIcon3Button = null;
-			this.m_E_ImageIcon3Image = null;
-			this.m_E_ImageIcon2Button = null;
-			this.m_E_ImageIcon2Image = null;
-			this.m_E_ImageIcon1Button = null;
-			this.m_E_ImageIcon1Image = null;
+
 			this.m_E_Button_RefreshButton = null;
 			this.m_E_Button_RefreshImage = null;
 			this.m_E_Button_TeamButton = null;
@@ -438,21 +243,10 @@ namespace ET.Client
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_Text_ScoreText = null;
 			this.m_E_Text_RankText = null;
+			this.m_EG_MainPetListRectTransform = null;
 			this.uiTransform = null;
 		}
-
-		private UnityEngine.UI.Button m_E_ImageIcon6Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon6Image = null;
-		private UnityEngine.UI.Button m_E_ImageIcon5Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon5Image = null;
-		private UnityEngine.UI.Button m_E_ImageIcon4Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon4Image = null;
-		private UnityEngine.UI.Button m_E_ImageIcon3Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon3Image = null;
-		private UnityEngine.UI.Button m_E_ImageIcon2Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon2Image = null;
-		private UnityEngine.UI.Button m_E_ImageIcon1Button = null;
-		private UnityEngine.UI.Image m_E_ImageIcon1Image = null;
+		
 		private UnityEngine.UI.Button m_E_Button_RefreshButton = null;
 		private UnityEngine.UI.Image m_E_Button_RefreshImage = null;
 		private UnityEngine.UI.Button m_E_Button_TeamButton = null;
@@ -464,6 +258,7 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Text m_E_Text_ScoreText = null;
 		private UnityEngine.UI.Text m_E_Text_RankText = null;
+		private UnityEngine.RectTransform m_EG_MainPetListRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

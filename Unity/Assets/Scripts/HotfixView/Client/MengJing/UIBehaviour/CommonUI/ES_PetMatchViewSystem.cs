@@ -14,15 +14,12 @@ namespace ET.Client
 			self.uiTransform = transform;
 			
 			self.E_Button_TeamButton.AddListenerAsync(self.OnButton_TeamButton);
-			self.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+			self.E_FunctionSetBtnToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 			
-			self.ImageIconList = new GameObject[ConfigData.PetMatchPetLimit];
-			self.ImageIconList[0] = self.E_ImageIcon1Image.gameObject;
-			self.ImageIconList[1] = self.E_ImageIcon2Image.gameObject;
-			self.ImageIconList[2] = self.E_ImageIcon3Image.gameObject;
-			self.ImageIconList[3] = self.E_ImageIcon4Image.gameObject;
-			self.ImageIconList[4] = self.E_ImageIcon5Image.gameObject;
-			self.ImageIconList[5] = self.E_ImageIcon6Image.gameObject;
+			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
+			self.InitItemList();
+			
+			self.E_FunctionSetBtnToggleGroup.OnSelectIndex(self.Root().GetComponent<PetComponentC>().PetMeleePlan);
 		}
 
 		[EntitySystem]
@@ -30,20 +27,88 @@ namespace ET.Client
 		{
 			self.DestroyWidget();
 		}
-
-		private static void OnFunctionSetBtn(this ES_PetMatch self, int index)
+		
+		private static void InitItemList(this ES_PetMatch self)
 		{
-			
+			self.MainPetItemList.Add(self.MainPetItem);
+			for (int i = 1; i < 6; i++)
+			{
+				GameObject go = UnityEngine.Object.Instantiate(self.MainPetItem, self.MainPetItem.transform.parent);
+				self.MainPetItemList.Add(go);
+			}
+
 		}
 
-		private static async ETTask RequestSetPlan(this ES_PetMatch self, int index)
+
+		private static void RefreshItemList(this ES_PetMatch self)
 		{
-			
+			PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+			for (int i = 0; i < 6; i++)
+			{
+				Sprite sprite = null;
+				if (i < self.PetMeleeInfo.MainPetList.Count)
+				{
+					long petId = self.PetMeleeInfo.MainPetList[i];
+					RolePetInfo rolePetInfo = petComponent.GetPetInfoByID(petId);
+					PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+					string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petSkinConfig.IconID.ToString());
+					sprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+				}
+
+				GameObject go = self.MainPetItemList[i];
+				if (sprite != null)
+				{
+					go.transform.Find("Mask/Icon").gameObject.SetActive(true);
+					go.transform.Find("Mask/Icon").GetComponent<Image>().sprite = sprite;
+				}
+				else
+				{
+					go.transform.Find("Mask/Icon").gameObject.SetActive(false);
+				}
+			}
 		}
 
+		private static async ETTask OnPlanSet(this ES_PetMatch self, int index)
+		{
+			PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+
+			if (petComponentC.PetMeleePlan != index)
+			{
+				int error = await PetNetHelper.RequestPetMeleePlan(self.Root(), SceneTypeEnum.PetMelee, index);
+
+				if (error == ErrorCode.ERR_Success)
+				{
+					using (zstring.Block())
+					{
+						FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物乱斗切换 {0}", index));
+					}
+				}
+			}
+
+			// 复制一份
+			if (self.PetMeleeInfo == null)
+			{
+				self.PetMeleeInfo = PetMeleeInfo.Create();
+			}
+
+			self.PetMeleeInfo.MainPetList.Clear();
+			self.PetMeleeInfo.AssistPetList.Clear();
+			self.PetMeleeInfo.MagicList.Clear();
+
+			PetMeleeInfo petMeleeInfo = petComponentC.PetMeleeInfoList[petComponentC.PetMeleePlan];
+			self.PetMeleeInfo.MainPetList.AddRange(petMeleeInfo.MainPetList);
+			self.PetMeleeInfo.AssistPetList.AddRange(petMeleeInfo.AssistPetList);
+			self.PetMeleeInfo.MagicList.AddRange(petMeleeInfo.MagicList);
+
+			self.RefreshItemList();
+
+			await ETTask.CompletedTask;
+		}
+		
 		private static async ETTask OnButton_TeamButton(this ES_PetMatch self)
 		{
-			
+			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMelee).Coroutine();
+			await ETTask.CompletedTask;
 		}
 
 		
