@@ -27,7 +27,7 @@ namespace ET.Client
         private static void OnInit(this ES_UnionBoss self)
         {
             //获取开服天数
-            int openDay = TimeHelper.GetServeOpenrDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
+            int openDay = TimeHelper.GetServeOpenDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
 
             int monsterId = FunctionHelp.GetUnionBossId(openDay);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);

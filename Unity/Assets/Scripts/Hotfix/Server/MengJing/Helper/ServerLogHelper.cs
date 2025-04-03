@@ -386,7 +386,7 @@ namespace ET.Server
                 return;
             }
 
-            int openDay = ServerHelper.GetServeOpenrDay( unit.Zone());
+            int openDay = ServerHelper.GetServeOpenDay( unit.Zone());
             //钻石线
             if (userInfo.UserInfo.Diamond >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 150 + 50000)
             {

@@ -189,7 +189,7 @@ namespace ET.Client
         public static void UpdateMyMine(this ES_PetMining self)
         {
             int chatchun = 0;
-            int openDay = TimeHelper.GetServeOpenrDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
+            int openDay = TimeHelper.GetServeOpenDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
 
             List<PetMingPlayerInfo> petMingPlayers = self.GetSelfPetMing();
             for (int i = 0; i < petMingPlayers.Count; i++)

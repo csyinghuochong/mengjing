@@ -61,7 +61,7 @@ namespace ET.Client
                 return;
             }
             
-            int openday = TimeHelper.GetServeOpenrDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
+            int openday = TimeHelper.GetServeOpenDay(self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
 
             self.PaiMaiItemInfos = response.PaiMaiItemInfos;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

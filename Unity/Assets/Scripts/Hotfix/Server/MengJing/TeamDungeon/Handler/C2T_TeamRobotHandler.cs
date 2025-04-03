@@ -17,7 +17,7 @@
             ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
             G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
             G2Robot_MessageRequest.Zone = scene.Zone();
-            G2Robot_MessageRequest.MessageType = ConfigData.RototMessageType[teamInfo.SceneType];
+            G2Robot_MessageRequest.MessageType = teamInfo.SceneType == MapTypeEnum.TeamDungeon ? NoticeType.TeamDungeon:NoticeType.DragonDungeon;
             G2Robot_MessageRequest.Message = $"{teamInfo.SceneId}_{teamInfo.TeamId}";
             scene.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
             

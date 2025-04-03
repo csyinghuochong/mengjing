@@ -60,7 +60,7 @@ namespace ET.Server
 
             //初始化参数
             self.DBServerInfo = dBServerInfo;
-            self.UpdateExchangeGold(ServerHelper.GetServeOpenrDay(  self.Zone()));
+            self.UpdateExchangeGold(ServerHelper.GetServeOpenDay(  self.Zone()));
             //上午重启不刷新世界等级
             DateTime dateTime = TimeHelper.DateTimeNow();
             if (self.DBServerInfo.ServerInfo.WorldLv == 0 || dateTime.Hour >= 12)
@@ -75,7 +75,7 @@ namespace ET.Server
         public static void UpdateWorldLv(this RankSceneComponent self)
         {
             //第二天并且超过12点才刷新
-            int openserverDay = ServerHelper.GetServeOpenrDay( self.Zone());
+            int openserverDay = ServerHelper.GetServeOpenDay( self.Zone());
             int worldLv = CommonHelperS.GetWorldLv(openserverDay);
             self.DBServerInfo.ServerInfo.WorldLv = worldLv;
             Log.Debug($"UpdateWorldLv: {self.Zone()} {worldLv}");
@@ -115,7 +115,7 @@ namespace ET.Server
         {
             //更新服务器拍卖行数据
             //TimeHelper. self.OpenServiceTime
-            self.UpdateExchangeGold(ServerHelper.GetServeOpenrDay( self.Zone()));
+            self.UpdateExchangeGold(ServerHelper.GetServeOpenDay( self.Zone()));
             self.SendCombatReward().Coroutine();
             self.SendPetReward().Coroutine();
             self.SendTrialReward().Coroutine();
@@ -387,7 +387,7 @@ namespace ET.Server
         public static async ETTask UpdateRankNo1(this RankSceneComponent self, long userId, int occ)
         {
             int zone = self.Zone();
-            if (ServerHelper.GetServeOpenrDay( zone) < 3)
+            if (ServerHelper.GetServeOpenDay( zone) < 3)
             {
                 return;
             }

@@ -36,9 +36,9 @@ namespace ET.Server
                         {
                             break;
                         }
-                        
+
                         //message.Message   sceneid_teamid
-                        int  robotId = BattleHelper.GetBattleRobotId(ConfigData.RototBehaviourType[message.MessageType], fubenId);
+                        int  robotId = BattleHelper.GetBattleRobotId(11, fubenId);
                         Console.WriteLine($"GetBattleRobotId: {robotId}");
                         int fiberId= await robotManagerComponent.NewRobot(message.Zone, robotId);
                         ActorId roborActorId = new ActorId(scene.Fiber().Process, fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -48,6 +48,27 @@ namespace ET.Server
                                 await scene.Root().GetComponent<ProcessInnerSender>().Call(roborActorId, main2RobotClientMessage) as
                                         RobotClient2Main_Message;
                         
+                        robotnumber++;
+                    }
+                    break;
+                case NoticeType.PetMatchOpen:
+                    robotnumber = 0;
+                    lastteamtime = 0;
+                    fubenId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMatch);
+        
+                    totalnumber = 0;
+                    while (robotnumber < 1)
+                    {
+                        totalnumber++ ;
+                        if (totalnumber >= 20)
+                        {
+                            break;
+                        }
+                        
+                        //message.Message   sceneid_teamid
+                        int  robotId = BattleHelper.GetBattleRobotId(2, fubenId);
+                        Console.WriteLine($"GetBattleRobotId: {robotId}");
+                        await robotManagerComponent.NewRobot(message.Zone, robotId);
                         robotnumber++;
                     }
                     break;

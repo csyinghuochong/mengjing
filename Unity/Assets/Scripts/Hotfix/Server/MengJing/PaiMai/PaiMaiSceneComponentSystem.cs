@@ -47,7 +47,7 @@ namespace ET.Server
             self.AuctioUnitId = 0;
             self.AuctionPlayer = string.Empty;
 
-            int openDay = ServerHelper.GetServeOpenrDay(  self.Zone());
+            int openDay = ServerHelper.GetServeOpenDay(  self.Zone());
             //第1天
             if (openDay == 1)
             {
@@ -494,7 +494,7 @@ namespace ET.Server
         public static void UpdatePaiMaiShopItemPrice(this PaiMaiSceneComponent self)
         {
             int curzone = ServerHelper.GetOldServerId(self.Zone());
-            int openserverDay = ServerHelper.GetServeOpenrDay( curzone);
+            int openserverDay = ServerHelper.GetServeOpenDay( curzone);
             Log.Info($"curzone = {curzone} openserverDay = {openserverDay} PaiMaiScene开服天数 {self.Zone()} {openserverDay}");
             if (openserverDay == 0)
             {

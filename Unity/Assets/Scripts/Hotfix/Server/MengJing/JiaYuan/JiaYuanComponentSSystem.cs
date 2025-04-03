@@ -505,7 +505,7 @@ namespace ET.Server
 
         public static void UpdatePlanGoodList(this JiaYuanComponentS self)
         {
-            int openday = ServerHelper.GetServeOpenrDay( self.Zone());
+            int openday = ServerHelper.GetServeOpenDay( self.Zone());
             UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo;
             int jiayuanlv = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv).Lv;
 

@@ -56,7 +56,7 @@ namespace ET.Server
             }
 
             //获取开服天数
-            int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
+            int openDay = ServerHelper.GetServeOpenDay(self.Zone());
 
             //根据开服天数创建怪物
             int monsterID = FunctionHelp.GetUnionBossId(openDay);

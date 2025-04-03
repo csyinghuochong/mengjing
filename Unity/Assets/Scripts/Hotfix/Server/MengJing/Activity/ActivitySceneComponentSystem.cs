@@ -106,7 +106,7 @@ namespace ET.Server
             DayOfWeek dayOfWeek = dateTime.DayOfWeek;
             //int yeardate = dateTime.Year * 10000 + dateTime.Month * 100 + dateTime.Day;  //20230412
             int hour = dateTime.Hour;
-            int openServerDay = ServerHelper.GetServeOpenrDay(self.Zone());
+            int openServerDay = ServerHelper.GetServeOpenDay(self.Zone());
             Log.Warning($"NoticeActivityUpdate_Hour: zone: {self.Zone()} openday: {openServerDay}  {hour}");
             for (int i = 0; i < self.MapIdList.Count; i++)
             {
@@ -236,7 +236,7 @@ namespace ET.Server
 
         public static void CheckPetMine(this ActivitySceneComponent self, int checkindex)
         {
-            int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
+            int openDay = ServerHelper.GetServeOpenDay(self.Zone());
 
             List<PetMingPlayerInfo> petMingPlayers = self.DBDayActivityInfo.PetMingList;
 
@@ -296,7 +296,7 @@ namespace ET.Server
                 self.DBDayActivityInfo = dbDayActivityInfos[0];
             }
 
-            int openServerDay = ServerHelper.GetServeOpenrDay(zone);
+            int openServerDay = ServerHelper.GetServeOpenDay(zone);
             Log.Debug($"InitDayActivity: {zone}  {openServerDay}");
             self.DBDayActivityInfo.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
 

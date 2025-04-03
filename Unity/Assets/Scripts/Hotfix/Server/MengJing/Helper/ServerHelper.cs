@@ -43,7 +43,7 @@ namespace ET
             return serverItem.ServerOpenTime;   
         }
 
-        public static int GetServeOpenrDay(int zone)
+        public static int GetServeOpenDay(int zone)
         {
             long serverNow = TimeHelper.ServerNow();
             long openSerTime = GetServerOpenTime( zone);
@@ -52,7 +52,7 @@ namespace ET
                 return 0;
             }
 
-            return TimeHelper.GetServeOpenrDay(openSerTime);
+            return TimeHelper.GetServeOpenDay(openSerTime);
         }
         /// <summary>
         /// 合区后的区

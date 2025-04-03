@@ -596,6 +596,11 @@ namespace ET.Server
             FubenHelp.CreateMonsterList(self.Scene(), SceneConfigCategory.Instance.Get(mapComponent.SceneId).CreateMonsterPosi);
         }
 
+        public static void KickOutPlayer(this PetMeleeDungeonComponent sel)
+        {
+            Console.WriteLine($"PetMeleeDungeonComponent no handler!!!");
+        }
+
         public static void OnKillEvent(this PetMeleeDungeonComponent self, Unit defend, int mapType)
         {
             if (self.GameOver)

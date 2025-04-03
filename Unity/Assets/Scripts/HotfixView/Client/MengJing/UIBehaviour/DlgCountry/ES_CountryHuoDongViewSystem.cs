@@ -18,7 +18,7 @@ namespace ET.Client
             self.E_Btn_HuoDong_ArenaJieShaoButton.AddListenerAsync(self.OnBtn_HuoDong_ArenaJieShaoButton);
             self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.OnBtn_HuoDong_XiaoGuiButton);
             
-            int openDay = TimeHelper.GetServeOpenrDay( self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
+            int openDay = TimeHelper.GetServeOpenDay( self.Root().GetComponent<PlayerInfoComponent>().ServerItem.ServerOpenTime);
             self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7);
         }
 

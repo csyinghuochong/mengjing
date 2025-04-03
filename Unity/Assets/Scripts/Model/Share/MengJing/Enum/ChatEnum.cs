@@ -44,6 +44,8 @@ namespace ET
         public const int Demon = 21;
         public const int PaiMai = 22;
         public const int DragonDungeon = 23;
+        public const int PetMatchOpen = 24;
+        public const int PetMatchClose = 25;
     }
 
 }

@@ -76,6 +76,9 @@ namespace ET
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_Target, Value = "Behaviour_Target" });
                     self.NewBehaviour = BehaviourType.Behaviour_DragonDungeon;
                     break;
+                case 12:
+                    
+                    break;
                 default:
                     break;
             }

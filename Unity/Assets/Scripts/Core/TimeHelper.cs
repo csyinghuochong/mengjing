@@ -164,7 +164,7 @@ namespace ET
             return inTime;
         }
 
-        public static int GetServeOpenrDay(long openSerTime)
+        public static int GetServeOpenDay(long openSerTime)
         {
             long serverNow = TimeHelper.ServerNow();
             if (openSerTime == 0 || serverNow < openSerTime)

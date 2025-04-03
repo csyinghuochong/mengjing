@@ -162,7 +162,7 @@ namespace ET.Client
             ServerItem serverItem = self.Root().GetComponent<PlayerInfoComponent>().ServerItem;
             
             int zone = serverItem.ServerId;
-            int openDay = TimeHelper.GetServeOpenrDay(serverItem.ServerOpenTime);
+            int openDay = TimeHelper.GetServeOpenDay(serverItem.ServerOpenTime);
             float coffi = CommonHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
 

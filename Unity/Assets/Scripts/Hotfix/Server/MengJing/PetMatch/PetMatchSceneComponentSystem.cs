@@ -33,13 +33,17 @@ namespace ET.Server
         public static async ETTask OnSoloBegin(this PetMatchSceneComponent self)
         {
             //通知机器人
-            /*
-            if (DBHelper.GetOpenServerDay(self.DomainZone()) > 0)
+    
+            if (ServerHelper.GetServeOpenDay(self.Zone()) > 0)
             {
-                long robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").InstanceId;
-                MessageHelper.SendActor(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.SoloBegin });
+                ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
+                G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+                G2Robot_MessageRequest.Zone = self.Zone();
+                G2Robot_MessageRequest.MessageType = NoticeType.PetMatchOpen;
+                G2Robot_MessageRequest.Message = string.Empty;
+                self.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
             }
-            */
+     
             Console.WriteLine($"OnSoloBegin: {self.Zone()}");
 
             //清除之前的排名坐骑  确认是否需要保存。。
@@ -138,7 +142,7 @@ namespace ET.Server
                     continue;
                 }
 
-                //scene.GetComponent<PetMatchDungeonComponent>().KickOutPlayer();
+                scene.GetComponent<PetMeleeDungeonComponent>().KickOutPlayer();
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(60000 + RandomHelper.RandomNumber(0, 1000));
                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();

@@ -141,7 +141,7 @@ namespace ET.Server
 
                 if (itemConfig.ItemSubType == 112) //经验木桩
                 {
-                    int openDay = ServerHelper.GetServeOpenrDay( unit.Zone());
+                    int openDay = ServerHelper.GetServeOpenDay( unit.Zone());
                     if (openDay <= 1)
                     {
                         response.Error = ErrorCode.ERR_ItemNoUseTime;

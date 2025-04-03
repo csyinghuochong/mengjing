@@ -36,7 +36,7 @@ namespace ET.Server
 
         public static async ETTask NoticeBattleOpen(this FubenCenterComponent self)
         {
-            if (ServerHelper.GetServeOpenrDay( self.Zone()) <= 0)
+            if (ServerHelper.GetServeOpenDay( self.Zone()) <= 0)
             {
                   return;
             }
@@ -499,7 +499,7 @@ namespace ET.Server
                 
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonsterPosi);
 
-                int openDay = ServerHelper.GetServeOpenrDay(self.Zone());
+                int openDay = ServerHelper.GetServeOpenDay(self.Zone());
                 yeWaiRefreshComponen.OnZeroClockUpdate(openDay);
             }
         }

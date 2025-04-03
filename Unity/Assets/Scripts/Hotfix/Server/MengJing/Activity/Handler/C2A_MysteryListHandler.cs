@@ -14,7 +14,7 @@ namespace ET.Server
             if (activitySceneComponent.DBDayActivityInfo.MysteryItemInfos.Count == 0)
             {
                 Log.Debug($"神秘商店为空: {scene.Zone()}");
-                int openServerDay = ServerHelper.GetServeOpenrDay(scene.Zone());
+                int openServerDay = ServerHelper.GetServeOpenDay(scene.Zone());
                 activitySceneComponent.DBDayActivityInfo.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
             }
             
