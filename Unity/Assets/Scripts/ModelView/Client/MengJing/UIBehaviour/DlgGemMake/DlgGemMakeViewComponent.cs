@@ -198,22 +198,22 @@ namespace ET.Client
      		}
      	}
 
-		public LoopVerticalScrollRect E_MakeItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_MakeItemsLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_MakeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_MakeItems");
-     			}
-     			return this.m_E_MakeItemsLoopVerticalScrollRect;
-     		}
-     	}
+		public RectTransform EG_MakeListNodeRectTransform
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_EG_MakeListNodeRectTransform == null )
+				{
+					this.m_EG_MakeListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/MakeScrollView/Viewport/EG_MakeListNode");
+				}
+				return this.m_EG_MakeListNodeRectTransform;
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -228,7 +228,7 @@ namespace ET.Client
 			this.m_E_Lab_MakeNumText = null;
 			this.m_E_Lab_MakeCDTimeText = null;
 			this.m_E_ImageSelectImage = null;
-			this.m_E_MakeItemsLoopVerticalScrollRect = null;
+			this.m_EG_MakeListNodeRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -243,7 +243,7 @@ namespace ET.Client
 		private Text m_E_Lab_MakeNumText = null;
 		private Text m_E_Lab_MakeCDTimeText = null;
 		private Image m_E_ImageSelectImage = null;
-		private LoopVerticalScrollRect m_E_MakeItemsLoopVerticalScrollRect = null;
+		private RectTransform m_EG_MakeListNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
