@@ -27,9 +27,9 @@ namespace ET.Client
         private static void InitModelShowView(this DlgMystery self)
         {
             //配置摄像机位置[0,115,257]
-            self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
-            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
-            self.View.ES_ModelShow.ShowOtherModel("Npc/" + npcConfig.Asset).Coroutine();
+            //self.View.ES_ModelShow.SetCameraPosition(new Vector3(0f, 115, 257f));
+            //NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
+            //self.View.ES_ModelShow.ShowOtherModel("Npc/" + npcConfig.Asset).Coroutine();
         }
 
         private static List<int> GetMysteryList(this DlgMystery self, int npcid)
