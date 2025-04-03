@@ -2084,7 +2084,7 @@ message M2PetMatch_MatchRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	SoloPlayerInfo SoloPlayerInfo = 1;
+	PetMatchPlayerInfo SoloPlayerInfo = 1;
 }
 
 message PetMatch2M_MatchResponse // IResponse

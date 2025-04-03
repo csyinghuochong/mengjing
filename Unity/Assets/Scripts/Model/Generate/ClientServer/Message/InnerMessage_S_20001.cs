@@ -8963,7 +8963,7 @@ namespace ET
         public long ActorId { get; set; }
 
         [MemoryPackOrder(0)]
-        public SoloPlayerInfo SoloPlayerInfo { get; set; }
+        public PetMatchPlayerInfo SoloPlayerInfo { get; set; }
 
         public override void Dispose()
         {

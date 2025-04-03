@@ -33730,6 +33730,51 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.PetMatchPlayerInfo)]
+    public partial class PetMatchPlayerInfo : MessageObject
+    {
+        public static PetMatchPlayerInfo Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMatchPlayerInfo), isFromPool) as PetMatchPlayerInfo;
+        }
+
+        [MemoryPackOrder(0)]
+        public long MatchTime { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long UnitId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public long Score { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string Name { get; set; }
+
+        [MemoryPackOrder(4)]
+        public int RankId { get; set; }
+
+        [MemoryPackOrder(5)]
+        public int Occ { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.MatchTime = default;
+            this.UnitId = default;
+            this.Score = default;
+            this.Name = default;
+            this.RankId = default;
+            this.Occ = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -34628,5 +34673,6 @@ namespace ET
         public const ushort M2C_DamageValueListResponse = 10895;
         public const ushort C2M_PetMatchRequest = 10896;
         public const ushort M2C_PetMatchResponse = 10897;
+        public const ushort PetMatchPlayerInfo = 10898;
     }
 }

@@ -7745,3 +7745,13 @@ message M2C_PetMatchResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+message PetMatchPlayerInfo
+{
+	int64 MatchTime = 1;
+	int64 UnitId = 2;
+	int64 Score = 3;
+	string Name = 4;
+	int32 RankId = 5;
+	int32 Occ = 6;
+}

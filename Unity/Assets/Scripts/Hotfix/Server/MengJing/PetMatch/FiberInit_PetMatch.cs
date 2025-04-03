@@ -1,3 +1,4 @@
+using System;
 
 namespace ET.Server
 {
@@ -6,7 +7,11 @@ namespace ET.Server
     {
         public override async ETTask Handle(FiberInit fiberInit)
         {
+
             Scene root = fiberInit.Fiber.Root;
+            
+            Console.WriteLine($"FiberInit_PetMatch:  {root.Name}");
+            
             root.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             root.AddComponent<TimerComponent>();
             root.AddComponent<CoroutineLockComponent>();

@@ -8,12 +8,16 @@ namespace ET.Server
         {
             //给匹配服务器发送消息
             ActorId soloServerId = UnitCacheHelper.GetPetMatchServerId(unit.Zone());  //获取solo服务器ID
-            SoloPlayerInfo soloPlayerInfo = SoloPlayerInfo.Create();
+            PetMatchPlayerInfo soloPlayerInfo = PetMatchPlayerInfo.Create();
+            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             soloPlayerInfo.UnitId = unit.Id;
-            soloPlayerInfo.Combat = unit.GetComponent<UserInfoComponentS>().UserInfo.Combat;
-            soloPlayerInfo.Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-            soloPlayerInfo.Occ = unit.GetComponent<UserInfoComponentS>().UserInfo.Occ;
+            soloPlayerInfo.Name = userInfoComponentS.UserInfo.Name;
+            soloPlayerInfo.Occ = userInfoComponentS.UserInfo.Occ;
             soloPlayerInfo.MatchTime = TimeHelper.ServerNow();
+
+            NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
+            soloPlayerInfo.Score = numericComponentS.GetAsLong(NumericType.PetMatchScore);
+            
             M2PetMatch_MatchRequest M2S_SoloMatchRequest = M2PetMatch_MatchRequest.Create();
             M2S_SoloMatchRequest.SoloPlayerInfo = soloPlayerInfo;
             PetMatch2M_MatchResponse d2GGetUnit = (PetMatch2M_MatchResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId,M2S_SoloMatchRequest);
