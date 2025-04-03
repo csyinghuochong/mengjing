@@ -189,7 +189,7 @@ namespace ET.Client
         public static List<string> GetSceneDungeonMonsters(this DlgLoading self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneType) || mapComponent.SceneType != MapTypeEnum.TeamDungeon)
+            if (!SceneConfigHelper.UseSceneConfig(mapComponent.MapType) || mapComponent.MapType != MapTypeEnum.TeamDungeon)
             {
                 return new List<string>();
             }
@@ -438,7 +438,7 @@ namespace ET.Client
                     return;
                 }
 
-                int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+                int sceneType = self.Root().GetComponent<MapComponent>().MapType;
                 self.UpdateMainUI(sceneType);
 
                 Camera camera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();

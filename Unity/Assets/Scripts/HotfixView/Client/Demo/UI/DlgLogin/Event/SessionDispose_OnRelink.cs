@@ -12,8 +12,8 @@ namespace ET.Client
             MapComponent mapComponent = root.GetComponent<MapComponent>();
             int disconnectType = root.GetComponent<PlayerInfoComponent>().DisconnectType;
             root.GetComponent<PlayerInfoComponent>().DisconnectType = 0;
-            Log.Info($"SessionDispose_OnHandler: {mapComponent.SceneType}  {disconnectType}");
-            if (mapComponent.SceneType < MapTypeEnum.MainCityScene)
+            Log.Info($"SessionDispose_OnHandler: {mapComponent.MapType}  {disconnectType}");
+            if (mapComponent.MapType < MapTypeEnum.MainCityScene)
             {
                 //直接返回登陆
                 EventSystem.Instance.Publish(root, new ReturnLogin());

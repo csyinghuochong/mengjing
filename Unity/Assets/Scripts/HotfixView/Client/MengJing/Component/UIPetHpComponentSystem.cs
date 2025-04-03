@@ -14,8 +14,8 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.PetMelee
-                && mapComponent.SceneType != MapTypeEnum.PetMatch)
+            if (mapComponent.MapType != MapTypeEnum.PetMelee
+                && mapComponent.MapType != MapTypeEnum.PetMatch)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace ET.Client
             
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             Vector2 offset = Vector2.zero;
-            offset = (mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch) ? new Vector2(0, 100f) : Vector2.zero;
+            offset = (mapComponent.MapType == MapTypeEnum.PetMelee || mapComponent.MapType == MapTypeEnum.PetMatch) ? new Vector2(0, 100f) : Vector2.zero;
             
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             HeadBarUI_1.enabled = true;
@@ -245,7 +245,7 @@ namespace ET.Client
                 }
 
                 MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                if (mapComponent.SceneType != MapTypeEnum.PetMelee && mapComponent.SceneType != MapTypeEnum.PetMatch)
+                if (mapComponent.MapType != MapTypeEnum.PetMelee && mapComponent.MapType != MapTypeEnum.PetMatch)
                 {
                     self.Lal_JiaZuName.GetComponent<Text>().text = zstring.Format("{0}的宠物", masterName);
                 }

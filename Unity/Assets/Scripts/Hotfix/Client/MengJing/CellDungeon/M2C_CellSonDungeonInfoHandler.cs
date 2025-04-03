@@ -20,7 +20,7 @@ namespace ET.Client
             fubenComponent.SonFubenInfo = message.SonFubenInfo;
             fubenComponent.SetWalkedFlag(fubenComponent.SonFubenInfo.CurrentCell);
             fubenComponent.UpdateCellType(fubenComponent.SonFubenInfo.CurrentCell, fubenComponent.SonFubenInfo.PassableFlag);
-            root.GetComponent<MapComponent>().SetMapInfo(mapComponent.SceneType, mapComponent.SceneId, message.SonFubenInfo.SonSceneId);
+            root.GetComponent<MapComponent>().SetMapInfo(mapComponent.MapType, mapComponent.SceneId, message.SonFubenInfo.SonSceneId);
 
             ///需要无缝切换 加载新场景 
             await EventSystem.Instance.PublishAsync(root, new EnterCellDungeon()

@@ -7,7 +7,7 @@ namespace ET
         
         public int SceneId { set; get; }
 
-        public int SceneType { set; get; }
+        public int MapType { set; get; }
 
         public long LastQuitTime { set; get; }
         

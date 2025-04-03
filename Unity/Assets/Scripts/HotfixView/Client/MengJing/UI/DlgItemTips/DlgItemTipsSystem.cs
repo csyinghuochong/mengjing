@@ -399,7 +399,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 4 || itemConfig.ItemSubType == 14)
             {
-                if (self.Root().GetComponent<MapComponent>().SceneType != (int)MapTypeEnum.LocalDungeon)
+                if (self.Root().GetComponent<MapComponent>().MapType != (int)MapTypeEnum.LocalDungeon)
                 {
                     FlyTipComponent.Instance.ShowFlyTip("副本中才能使用!");
                     return;
@@ -493,7 +493,7 @@ namespace ET.Client
                 int curSceneId = 0;
                 int needSceneId = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
                 MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+                if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
                 {
                     curSceneId = mapComponent.SceneId;
                 }

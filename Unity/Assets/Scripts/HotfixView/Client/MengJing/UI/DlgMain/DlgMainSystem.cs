@@ -710,7 +710,7 @@ namespace ET.Client
         public static void ShowMainUI(this DlgMain self, bool show)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            int sceneType = mapComponent.SceneType;
+            int sceneType = mapComponent.MapType;
             self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(show);
             self.View.EG_LeftSetRectTransform.gameObject.SetActive(show);
             self.View.EG_RightBottomSetRectTransform.gameObject.SetActive(show);
@@ -754,7 +754,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 int sceneid = mapComponent.SceneId;
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
@@ -931,7 +931,7 @@ namespace ET.Client
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType != MapTypeEnum.LocalDungeon)
             {
                 flyTipComponent.ShowFlyTip(fubenName);
                 return;
@@ -1096,7 +1096,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 int sceneid = mapComponent.SceneId;
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
@@ -1708,7 +1708,7 @@ namespace ET.Client
         private static void OnMailHintTipButton(this DlgMain self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != (int)MapTypeEnum.MainCityScene)
+            if (mapComponent.MapType != (int)MapTypeEnum.MainCityScene)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请前往主城!");
                 return;
@@ -1754,7 +1754,7 @@ namespace ET.Client
             }
 
             string tipStr = "确定返回主城？";
-            if (mapComponent.SceneType == MapTypeEnum.Battle)
+            if (mapComponent.MapType == MapTypeEnum.Battle)
             {
                 tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
             }

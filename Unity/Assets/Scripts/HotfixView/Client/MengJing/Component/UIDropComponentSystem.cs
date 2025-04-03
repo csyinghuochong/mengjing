@@ -248,12 +248,12 @@ namespace ET.Client
         public static async ETTask AutoPickItem(this UIDropComponent self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.Happy)
+            if (mapComponent.MapType == MapTypeEnum.Happy)
             {
                 return;
             }
 
-            if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType == MapTypeEnum.LocalDungeon)
             {
                 if (DungeonConfigCategory.Instance.Get(mapComponent.SceneId).MapType == SceneSubTypeEnum.LocalDungeon_1)
                 {

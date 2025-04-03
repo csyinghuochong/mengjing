@@ -25,7 +25,7 @@ namespace ET.Client
             self.View.E_Img_Star_2Image.gameObject.SetActive(message.StarInfos[1] == 1);
             self.View.E_Img_Star_3Image.gameObject.SetActive(message.StarInfos[2] == 1);
 
-            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneType = self.Root().GetComponent<MapComponent>().MapType;
             if ((sceneType == MapTypeEnum.PetDungeon || sceneType == MapTypeEnum.SeasonTower)
                 && message.BattleResult == CombatResultEnum.Win)
             {
@@ -56,7 +56,7 @@ namespace ET.Client
 
         public static void OnButton_continue(this DlgPetFubenResult self)
         {
-            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneType = self.Root().GetComponent<MapComponent>().MapType;
             if (sceneType == MapTypeEnum.PetDungeon)
             {
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
@@ -75,7 +75,7 @@ namespace ET.Client
 
         public static void OnButton_next(this DlgPetFubenResult self)
         {
-            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneType = self.Root().GetComponent<MapComponent>().MapType;
             if (sceneType == MapTypeEnum.PetDungeon)
             {
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId + 1;

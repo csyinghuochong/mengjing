@@ -56,7 +56,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.ResetJoystick();
             Unit unit = self.GetParent<Unit>();
             MapComponent mapComponent = self.Root().GetComponent <MapComponent> ();
-            EnterMapHelper.RequestTransfer(self.Root(), mapComponent.SceneType, 0, mapComponent.FubenDifficulty,
+            EnterMapHelper.RequestTransfer(self.Root(), mapComponent.MapType, 0, mapComponent.FubenDifficulty,
                         $"{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CellIndex)}_{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DirectionType)}")
                     .Coroutine();
         }

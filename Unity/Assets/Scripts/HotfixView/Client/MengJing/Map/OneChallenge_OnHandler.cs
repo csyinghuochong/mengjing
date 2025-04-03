@@ -17,7 +17,7 @@ namespace ET.Client
             if (args.m2C_OneChallenge.Operatate == 2)
             {
                 MapComponent mapComponent = scene.GetComponent<MapComponent>();
-                if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
+                if (mapComponent.MapType != MapTypeEnum.MainCityScene)
                 {
                     return;
                 }
@@ -32,7 +32,7 @@ namespace ET.Client
         private async ETTask RunAsync(Scene root, UIOneChallenge args)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
+            if (mapComponent.MapType != MapTypeEnum.MainCityScene)
             {
                 return;
             }

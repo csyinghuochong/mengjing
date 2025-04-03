@@ -14,7 +14,7 @@ namespace ET.Client
 
             await scene.GetComponent<TimerComponent>().WaitAsync(1000);
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            int sceneTypeEnum = mapComponent.SceneType;
+            int sceneTypeEnum = mapComponent.MapType;
             if (sceneTypeEnum == (int)MapTypeEnum.MainCityScene)
             {
                 return;

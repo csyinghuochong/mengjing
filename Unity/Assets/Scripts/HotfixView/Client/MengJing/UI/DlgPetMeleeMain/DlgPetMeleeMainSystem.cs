@@ -86,9 +86,8 @@ namespace ET.Client
 
             self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.IsCancelCard = true; });
             self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerExit, (pdata) => { self.IsCancelCard = false; });
-
-            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             
+            self.MapTypeEnum =  self.Root().GetComponent<MapComponent>().MapType;
             self.InitCard().Coroutine();
             self.UpdateMoLi();
             self.OnPlayAnimation().Coroutine();

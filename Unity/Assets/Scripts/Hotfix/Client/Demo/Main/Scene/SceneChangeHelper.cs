@@ -15,7 +15,7 @@
             UnitComponent unitComponent = currentScene.AddComponent<UnitComponent>();
 
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            int lastSceneType = mapComponent.SceneType;
+            int lastSceneType = mapComponent.MapType;
             int lastChapterid = mapComponent.SceneId;
             // if (sceneType == SceneTypeEnum.PetMing)
             // {

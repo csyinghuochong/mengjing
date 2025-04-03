@@ -32,7 +32,7 @@ namespace ET.Client
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
 
-                    if (mapComponent.SceneType != MapTypeEnum.Demon)
+                    if (mapComponent.MapType != MapTypeEnum.Demon)
                     {
                         unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmDeathState);
                         ShowRevive(unit, mapComponent).Coroutine();
@@ -84,7 +84,7 @@ namespace ET.Client
                 }
                 dlgMain.View.ES_MainSkill.CheckJingLingFunction();
 
-                if (unit.Type == UnitType.Monster && mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon)
+                if (unit.Type == UnitType.Monster && mapComponent.MapType == (int)MapTypeEnum.TeamDungeon)
                 {
                     GameObject Obstruct = GameObject.Find("Obstruct");
                     if (Obstruct == null)
@@ -96,7 +96,7 @@ namespace ET.Client
                 }
 
                 //如果死亡的是怪物,判断当前是否在挂机
-                if (unit.Type == UnitType.Monster && mapComponent.SceneType == MapTypeEnum.LocalDungeon)
+                if (unit.Type == UnitType.Monster && mapComponent.MapType == MapTypeEnum.LocalDungeon)
                 {
                     //执行下一次攻击怪物指令
                     root.GetComponent<UnitGuaJiComponent>()?.KillMonster().Coroutine();
@@ -160,7 +160,7 @@ namespace ET.Client
 
             Scene root = unit.Root();
 
-            if (!SceneConfigHelper.IfCanRevive(mapComponent.SceneType, mapComponent.SceneId))
+            if (!SceneConfigHelper.IfCanRevive(mapComponent.MapType, mapComponent.SceneId))
             {
                 long instanceId = unit.InstanceId;
                 FlyTipComponent.Instance.ShowFlyTip(LanguageComponent.Instance.LoadLocalization("该地图不支持复活"));
@@ -183,7 +183,7 @@ namespace ET.Client
             {
                 await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CellDungeonRevive);
                 dungeonRevive = root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>();
-                dungeonRevive.OnInitUI(mapComponent.SceneType);
+                dungeonRevive.OnInitUI(mapComponent.MapType);
             }
         }
 

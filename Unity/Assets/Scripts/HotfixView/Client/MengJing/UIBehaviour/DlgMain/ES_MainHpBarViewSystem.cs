@@ -105,7 +105,7 @@ namespace ET.Client
             Unit unitmain = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit unitboss = unitmain.GetParent<UnitComponent>().Get(bossid);
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType == MapTypeEnum.LocalDungeon)
             {
                 int killNumber = self.Root().GetComponent<UserInfoComponentC>().GetMonsterKillNumber(unitboss.ConfigId);
                 int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
@@ -151,7 +151,7 @@ namespace ET.Client
             self.EG_MonsterNodeRectTransform.gameObject.SetActive(true);
             self.E_Lab_MonsterNameText.text = monsterConfig.MonsterName;
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)MapTypeEnum.Tower)
+            if (mapComponent.MapType == (int)MapTypeEnum.Tower)
             {
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                 self.E_Lab_MonsterLvText.text = userInfoComponent.UserInfo.Lv.ToString();

@@ -46,7 +46,7 @@ namespace ET.Client
 
         public static void OnMiniMapButtonButton(this ES_MapMini self)
         {
-            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneType = self.Root().GetComponent<MapComponent>().MapType;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             switch (sceneType)
             {
@@ -299,7 +299,7 @@ namespace ET.Client
             camera.enabled = true;
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
                 mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
@@ -308,8 +308,8 @@ namespace ET.Client
                 camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
             }
 
-            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType)
-                && SceneConfigHelper.ShowMiniMap(mapComponent.SceneType, mapComponent.SceneId))
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType)
+                && SceneConfigHelper.ShowMiniMap(mapComponent.MapType, mapComponent.SceneId))
             {
                 SceneConfig dungeonConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
                 mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
@@ -320,7 +320,7 @@ namespace ET.Client
 
             self.MapCamera = mapCamera;
 
-            self.SceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            self.SceneTypeEnum = self.Root().GetComponent<MapComponent>().MapType;
             self.ScaleRateX = self.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.E_RawImageRawImage.transform.localPosition = Vector2.zero;
@@ -362,7 +362,7 @@ namespace ET.Client
 
         public static void UpdateMapName(this ES_MapMini self)
         {
-            int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = self.Root().GetComponent<MapComponent>().MapType;
             int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
 

@@ -95,7 +95,7 @@ namespace ET
         {
             List<int> npcList = new List<int>();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
                 if (sceneConfig.NpcList != null)
@@ -104,7 +104,7 @@ namespace ET
                 }
             }
 
-            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
                 if (dungeonConfig.NpcList != null)

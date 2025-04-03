@@ -34,9 +34,9 @@ namespace ET.Client
         {
             Scene zoneScene = self.Root();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.PetDungeon
-                || mapComponent.SceneType == MapTypeEnum.PetTianTi
-                || mapComponent.SceneType == MapTypeEnum.PetMing)
+            if (mapComponent.MapType == MapTypeEnum.PetDungeon
+                || mapComponent.MapType == MapTypeEnum.PetTianTi
+                || mapComponent.MapType == MapTypeEnum.PetMing)
             {
                 return;
             }

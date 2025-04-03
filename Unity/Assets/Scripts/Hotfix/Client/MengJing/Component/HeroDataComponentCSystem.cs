@@ -16,7 +16,7 @@
             unit.GetComponent<MoveComponent>()?.Stop(false);
             unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
             unit.GetComponent<BuffManagerComponentC>()?.OnDead();
-            int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().MapType;
             if (sceneTypeEnum == (int)MapTypeEnum.CellDungeon
                 || sceneTypeEnum == (int)MapTypeEnum.DragonDungeon)
             {

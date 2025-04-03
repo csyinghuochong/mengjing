@@ -556,7 +556,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (itemId > 0 && SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (itemId > 0 && SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
                 if (sceneConfig.IfUseSkillItem == 1)

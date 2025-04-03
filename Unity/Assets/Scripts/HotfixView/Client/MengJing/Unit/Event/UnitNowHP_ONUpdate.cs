@@ -86,7 +86,7 @@ namespace ET.Client
             }
 
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
-            if (mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch)
+            if (mapComponent.MapType == MapTypeEnum.PetMelee || mapComponent.MapType == MapTypeEnum.PetMatch)
             {
                 showfloattext = true;   
             }
@@ -104,21 +104,21 @@ namespace ET.Client
             }
 
             //主界面血條
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnUpdateHP(mapComponent.SceneType, unitDefend, unitAttack, args.ChangeHpValue);
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnUpdateHP(mapComponent.MapType, unitDefend, unitAttack, args.ChangeHpValue);
 
-            if (mapComponent.SceneType == MapTypeEnum.PetDungeon
-                || mapComponent.SceneType == MapTypeEnum.PetTianTi
-                || mapComponent.SceneType == MapTypeEnum.PetMing)
+            if (mapComponent.MapType == MapTypeEnum.PetDungeon
+                || mapComponent.MapType == MapTypeEnum.PetTianTi
+                || mapComponent.MapType == MapTypeEnum.PetMing)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
             }
 
-            if (mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch)
+            if (mapComponent.MapType == MapTypeEnum.PetMelee || mapComponent.MapType == MapTypeEnum.PetMatch)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitHpUpdate(unitDefend);
             }
 
-            if (mapComponent.SceneType == MapTypeEnum.BaoZang
+            if (mapComponent.MapType == MapTypeEnum.BaoZang
                 && unitDefend.Type == UnitType.Player && unitDefend.MainHero
                 && unitAttack != null && unitAttack.Type == UnitType.Player)
             {

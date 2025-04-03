@@ -168,7 +168,7 @@ namespace ET.Client
         public static void OnAuto_Exit(this DlgCellDungeonRevive self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (self.IsNoAutoExit(mapComponent.SceneType))
+            if (self.IsNoAutoExit(mapComponent.MapType))
             {
                 return;
             }
@@ -181,13 +181,13 @@ namespace ET.Client
         public static void OnButton_ExitButton(this DlgCellDungeonRevive self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.MainCityScene)
+            if (mapComponent.MapType == MapTypeEnum.MainCityScene)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonRevive);
                 return;
             }
             
-            if (self.IsNoAutoExit(mapComponent.SceneType))
+            if (self.IsNoAutoExit(mapComponent.MapType))
             {
                 if (self.LeftTime > 0)
                 {

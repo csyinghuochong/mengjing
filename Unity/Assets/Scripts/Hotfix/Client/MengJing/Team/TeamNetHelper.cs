@@ -133,8 +133,8 @@
         public static async ETTask SendLeaveRequest(Scene root)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon 
-                || mapComponent.SceneType == (int)MapTypeEnum.DragonDungeon )
+            if (mapComponent.MapType == (int)MapTypeEnum.TeamDungeon 
+                || mapComponent.MapType == (int)MapTypeEnum.DragonDungeon )
             {
                 HintHelp.ShowHint(root, "副本中不能离开队伍");
                 return;
@@ -265,7 +265,7 @@
         public static async ETTask TeamKickOutRequest(Scene root, long userId)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon)
+            if (mapComponent.MapType == (int)MapTypeEnum.TeamDungeon)
             {
                 HintHelp.ShowHint(root, "副本中不能踢人");
                 return;

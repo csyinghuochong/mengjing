@@ -63,8 +63,8 @@ namespace ET.Client
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (preare == 1
-                && mapComponent.SceneType != MapTypeEnum.MainCityScene
-                && mapComponent.SceneType != MapTypeEnum.LocalDungeon)
+                && mapComponent.MapType != MapTypeEnum.MainCityScene
+                && mapComponent.MapType != MapTypeEnum.LocalDungeon)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请先退出当前副本！");
                 return;

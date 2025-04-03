@@ -12,8 +12,8 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(scene);
             unit.UpdateMainHeroPath(mapComponent);
             
-            await scene.GetComponent<SceneManagerComponent>().ChangeCellSonScene(mapComponent.SceneType,
-                mapComponent.SceneType,
+            await scene.GetComponent<SceneManagerComponent>().ChangeCellSonScene(mapComponent.MapType,
+                mapComponent.MapType,
                 mapComponent.SonSceneId);
    
             scene.GetComponent<CellDungeonComponentC>().CheckChuansongOpen();

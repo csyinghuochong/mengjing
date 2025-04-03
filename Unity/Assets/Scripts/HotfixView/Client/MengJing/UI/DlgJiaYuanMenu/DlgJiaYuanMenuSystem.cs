@@ -41,7 +41,7 @@ namespace ET.Client
         {
             long masterid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.JiaYuan)
+            if (mapComponent.MapType == MapTypeEnum.JiaYuan)
             {
                 masterid = self.Root().GetComponent<JiaYuanComponentC>().MasterId;
             }

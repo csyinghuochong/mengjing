@@ -154,9 +154,9 @@ namespace ET.Client
                 case UnitType.Player:
                     MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
                     //宠物副本不显示玩家
-                    if (unit.MainHero && (mapComponent.SceneType == MapTypeEnum.PetDungeon
-                            || mapComponent.SceneType == MapTypeEnum.PetTianTi
-                            || mapComponent.SceneType == MapTypeEnum.PetMing))
+                    if (unit.MainHero && (mapComponent.MapType == MapTypeEnum.PetDungeon
+                            || mapComponent.MapType == MapTypeEnum.PetTianTi
+                            || mapComponent.MapType == MapTypeEnum.PetMing))
                     {
                         return;
                     }
@@ -466,7 +466,7 @@ namespace ET.Client
             if (horseRide != 0)
             {
                 MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+                if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
                 {
                     int sceneid = mapComponent.SceneId;
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
@@ -672,7 +672,7 @@ namespace ET.Client
                         unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true); //血条UI组件
 
                         mapComponent = self.Root().GetComponent<MapComponent>();
-                        bool shenYuan = mapComponent.SceneType == MapTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                        bool shenYuan = mapComponent.MapType == MapTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                         go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
                     }
                     
@@ -753,7 +753,7 @@ namespace ET.Client
                     self.OnAddCollider(go);
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     
-                    if (mapComponent.SceneType == MapTypeEnum.PetMelee)
+                    if (mapComponent.MapType == MapTypeEnum.PetMelee)
                     {
                         FunctionEffect.PlaySelfEffect(unit, 200004);
                     }
@@ -817,7 +817,7 @@ namespace ET.Client
                     //     default:
                     //         break;
                     // }
-                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(mapComponent.SceneType);
+                    unit.AddComponent<UICellTransferHpComponent>().OnInitUI(mapComponent.MapType);
                     break;
                 case UnitType.JingLing:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

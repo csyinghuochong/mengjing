@@ -31,7 +31,7 @@ namespace ET.Client
             self.CameraMoveType = CameraMoveType.Normal;
             self.LookAtUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            self.OnEnterScene(self.Root().GetComponent<MapComponent>().SceneType);
+            self.OnEnterScene(self.Root().GetComponent<MapComponent>().MapType);
         }
 
         [EntitySystem]

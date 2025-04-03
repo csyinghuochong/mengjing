@@ -45,7 +45,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.JiaYuan)
+            if (mapComponent.MapType != MapTypeEnum.JiaYuan)
             {
                 return;
             }

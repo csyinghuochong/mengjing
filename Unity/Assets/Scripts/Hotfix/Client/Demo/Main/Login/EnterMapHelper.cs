@@ -16,7 +16,7 @@ namespace ET.Client
             }
 
             mapComponent.LastQuitTime = TimeHelper.ServerNow();
-            if (!SceneConfigHelper.CanTransfer(mapComponent.SceneType, newsceneType))
+            if (!SceneConfigHelper.CanTransfer(mapComponent.MapType, newsceneType))
             {
                 HintHelp.ShowHint(root, "请先退出副本！");
                 return ErrorCode.ERR_RequestExitFuben;

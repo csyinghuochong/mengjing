@@ -124,7 +124,7 @@ namespace ET.Client
             }
 
             int navmesh = 0;
-            int sceneType = mapComponent.SceneType;
+            int sceneType = mapComponent.MapType;
            
             if (SceneConfigHelper.UseSceneConfig(sceneType))
             {

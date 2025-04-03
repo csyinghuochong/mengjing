@@ -6,7 +6,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, HappyInfo args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.Happy)
+            if (mapComponent.MapType == MapTypeEnum.Happy)
             {
                 DlgHappyMain dlgHappyMain = scene.GetComponent<UIComponent>().GetDlgLogic<DlgHappyMain>();
                 if (dlgHappyMain == null)

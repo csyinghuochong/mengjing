@@ -8,7 +8,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, ReturnLogin args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            mapComponent.SceneType = MapTypeEnum.LoginScene;
+            mapComponent.MapType = MapTypeEnum.LoginScene;
 
             RunAsync2(scene, args, 100).Coroutine();
             

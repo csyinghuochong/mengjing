@@ -131,7 +131,7 @@ namespace ET.Client
         public static async ETTask SendOpenBox(this ES_OpenBox self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.JiaYuan)
+            if (mapComponent.MapType == MapTypeEnum.JiaYuan)
             {
                 long masterid = self.Root().GetComponent<JiaYuanComponentC>().MasterId;
 
