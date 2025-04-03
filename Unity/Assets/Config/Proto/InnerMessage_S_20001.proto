@@ -1845,7 +1845,6 @@ message S2M_SoloEnterResponse // IResponse
 	ActorId FubenActorId = 2;
 }
 
-
 //创建组队副本
 //ResponseType T2M_TeamDungeonCreateResponse
 message M2T_TeamDungeonCreateRequest // IRequest
@@ -2092,4 +2091,21 @@ message PetMatch2M_MatchResponse // IResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+}
+
+//ResponseType PetMatch2M_EnterMapResponse
+message M2PetMatch_EnterMapRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 FubenId = 1;
+}
+
+message PetMatch2M_EnterMapResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 FubenInstanceId = 1;
+	ActorId FubenActorId = 2;
 }

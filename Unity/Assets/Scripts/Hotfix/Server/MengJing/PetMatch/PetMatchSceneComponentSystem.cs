@@ -231,45 +231,47 @@ namespace ET.Server
 
                 //30,秒内 低战力/高战力>=0.8 60秒 低战力/高战力>= 0.6 90秒 低战力/高战力>=0)
                 long passTime = (long)((serverTime - soloPlayerInfo_i.MatchTime) / 1000);
-                float range = 1f; //战力调整系数
-                if (passTime < 30)
-                {
-                    range = 0.7f;
-                }
-                else if (passTime < 60)
-                {
-                    range = 0.4f;
-                }
-                else
-                {
-                    range = 0f;
-                }
+                
+                // float range = 1f; //战力调整系数
+                // if (passTime < 30)
+                // {
+                //     range = 0.7f;
+                // }
+                // else if (passTime < 60)
+                // {
+                //     range = 0.4f;
+                // }
+                // else
+                // {
+                //     range = 0f;
+                // }
                 //这里还需要添加判断2个目标是否掉线
 
-                float maxValue = math.max((float)soloPlayerInfo_i.Score, (float)soloPlayerInfo_t.Score);
-                float minValue = math.min((float)soloPlayerInfo_i.Score, (float)soloPlayerInfo_t.Score);
+                //float maxValue = math.max((float)soloPlayerInfo_i.Score, (float)soloPlayerInfo_t.Score);
+                //float minValue = math.min((float)soloPlayerInfo_i.Score, (float)soloPlayerInfo_t.Score);
 
                 //获取双方战力进行匹配
-                if (minValue / maxValue >= range)
+                //if (minValue / maxValue >= range)
                 {
-                    //匹配成功
-                    i--;
-                    self.MatchList.RemoveAt(t);
-
-                    //存入匹配缓存数据,方便下面发送消息
-                    playerlist.Add(soloPlayerInfo_i);
-                    playerlist.Add(soloPlayerInfo_t);
-
-                    //把匹配的结果和要进入的副本ID存入缓存
-                    long fubenId = self.GetSoloInstanceId(soloPlayerInfo_i.UnitId, soloPlayerInfo_t.UnitId);
-                    SoloMatchInfo soloResultInfo = SoloMatchInfo.Create();
-                    soloResultInfo.UnitId_1 = soloPlayerInfo_i.UnitId;
-                    soloResultInfo.UnitId_2 = soloPlayerInfo_t.UnitId;
-                    soloResultInfo.FubenId = fubenId;
-                    
-                    fubenids[soloPlayerInfo_i.UnitId] = fubenId;
-                    fubenids[soloPlayerInfo_t.UnitId] = fubenId;
+                   
                 }
+                
+                //匹配成功
+                self.MatchList.RemoveAt(i);
+                self.MatchList.RemoveAt(t);
+                
+              
+                //存入匹配缓存数据,方便下面发送消息
+                playerlist.Add(soloPlayerInfo_i);
+                playerlist.Add(soloPlayerInfo_t);
+
+                //把匹配的结果和要进入的副本ID存入缓存
+                long fubenId = self.GetSoloInstanceId(soloPlayerInfo_i.UnitId, soloPlayerInfo_t.UnitId);
+                
+                fubenids[soloPlayerInfo_i.UnitId] = fubenId;
+                fubenids[soloPlayerInfo_t.UnitId] = fubenId;
+                
+                i--;
             }
 
             //对缓存的匹配数据进行发送消息
@@ -300,7 +302,7 @@ namespace ET.Server
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             //创建新的副本场景,并给副本场景附加对应组件
             Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "PetMatch" + unitID_1.ToString());
-            //fubnescene.AddComponent<PetMatchDungeonComponent>(); 
+            fubnescene.AddComponent<PetMatchDungeonComponent>(); 
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
             mapComponent.SetMapInfo((int)SceneTypeEnum.PetMatch, sceneId, 0);

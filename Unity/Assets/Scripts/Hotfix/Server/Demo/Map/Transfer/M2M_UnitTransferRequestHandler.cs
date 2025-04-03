@@ -62,6 +62,7 @@ namespace ET.Server
                 case (int)SceneTypeEnum.PetDungeon:
                 case (int)SceneTypeEnum.PetTianTi:
                 case (int)SceneTypeEnum.PetMelee:
+                case (int)SceneTypeEnum.PetMatch:
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     scene.GetComponent<MapComponent>().NavMeshId = sceneConfig.MapID;
                     unit.AddComponent<PathfindingComponent, int>(sceneConfig.MapID);
@@ -90,11 +91,16 @@ namespace ET.Server
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMing)
                     {
+                        aoivalue = 40;
                         scene.GetComponent<PetMingDungeonComponent>().GenerateFuben().Coroutine();
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetMelee)
                     {
                         scene.GetComponent<PetMeleeDungeonComponent>().SetPlayer();
+                        aoivalue = 40;
+                    }
+                    if (request.SceneType == (int)SceneTypeEnum.PetMatch)
+                    {
                         aoivalue = 40;
                     }
                     break;

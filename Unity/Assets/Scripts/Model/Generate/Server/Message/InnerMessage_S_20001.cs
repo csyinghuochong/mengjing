@@ -9013,6 +9013,81 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.M2PetMatch_EnterMapRequest)]
+    [ResponseType(nameof(PetMatch2M_EnterMapResponse))]
+    public partial class M2PetMatch_EnterMapRequest : MessageObject, IRequest
+    {
+        public static M2PetMatch_EnterMapRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2PetMatch_EnterMapRequest), isFromPool) as M2PetMatch_EnterMapRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public long FubenId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.FubenId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.PetMatch2M_EnterMapResponse)]
+    public partial class PetMatch2M_EnterMapResponse : MessageObject, IResponse
+    {
+        public static PetMatch2M_EnterMapResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMatch2M_EnterMapResponse), isFromPool) as PetMatch2M_EnterMapResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public long FubenInstanceId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public ActorId FubenActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.FubenInstanceId = default;
+            this.FubenActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -9257,5 +9332,7 @@ namespace ET
         public const ushort A2A_BroadcastSceneResponse = 20241;
         public const ushort M2PetMatch_MatchRequest = 20242;
         public const ushort PetMatch2M_MatchResponse = 20243;
+        public const ushort M2PetMatch_EnterMapRequest = 20244;
+        public const ushort PetMatch2M_EnterMapResponse = 20245;
     }
 }
