@@ -144,7 +144,29 @@ namespace ET.Client
 
         public static void OnShenYuanMode(this DlgDragonDungeonCreate self)
         {
-            self.View.E_ShenYuanModeImage.gameObject.SetActive(!self.View.E_ShenYuanModeImage.gameObject.activeSelf);
+            bool active = self.View.E_ShenYuanModeImage.gameObject.activeSelf;
+            if (!active)
+            {
+                BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+                if (bagComponent.GetItemNumber(ConfigData.ShenYuanCostId) < 1)
+                {
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("需要道具{0}！", ItemConfigCategory.Instance.Get(ConfigData.ShenYuanCostId).ItemName));
+                    }
+
+                    return;
+                }
+                
+                PopupTipHelp.OpenPopupTip(self.Root(), "提示", "开启深渊模式需要消耗道具深渊凭证，是否继续？", () =>
+                {
+                    self.View.E_ShenYuanModeImage.gameObject.SetActive(true);
+                }, null).Coroutine();
+            }
+            else
+            {
+                self.View.E_ShenYuanModeImage.gameObject.SetActive(false);
+            }
         }
 
         public static async ETTask OnButton_Create(this DlgDragonDungeonCreate self, int dungeonType)
