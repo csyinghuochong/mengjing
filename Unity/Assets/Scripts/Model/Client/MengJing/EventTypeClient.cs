@@ -632,4 +632,9 @@ namespace ET.Client
     public struct ItemOperateGem
     {
     }
+    
+    public struct PetMatchResult
+    {
+        public M2C_PetMatchResult m2C_SoloMatch;
+    }
 }

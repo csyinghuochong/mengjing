@@ -10,15 +10,15 @@ namespace ET.Server
             
             //给当前solo场景加入匹配的玩家
             PetMatchSceneComponent soloSceneComponent = scene.GetComponent<PetMatchSceneComponent>();
-            
-            
+
+            if (!soloSceneComponent.PetMatchOpen)
+            {
+                response.Error = ErrorCode.ERR_AlreadyFinish;
+                return;
+            }
 
             //添加数据缓存
-            //soloSceneComponent.OnAddSoloDateList(request.SoloPlayerInfo.UnitId, request.SoloPlayerInfo.Name, request.SoloPlayerInfo.Occ);
-
-    
-           // response.Error = soloSceneComponent.OnJoinMatch(request.SoloPlayerInfo);
-
+            response.Error =  soloSceneComponent.OnAddSoloDateList(request.SoloPlayerInfo);
 
             await ETTask.CompletedTask;
         }

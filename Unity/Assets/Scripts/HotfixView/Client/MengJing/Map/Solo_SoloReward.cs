@@ -1,7 +1,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UISoloQuitEvent : AEvent<Scene, UISoloQuit>
+    public class Solo_SoloQuitEvent : AEvent<Scene, UISoloQuit>
     {
         protected override async ETTask Run(Scene scene, UISoloQuit args)
         {

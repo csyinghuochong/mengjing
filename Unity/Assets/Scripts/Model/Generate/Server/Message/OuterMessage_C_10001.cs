@@ -33775,6 +33775,43 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(OuterMessage.M2C_PetMatchResult)]
+    public partial class M2C_PetMatchResult : MessageObject, IMessage
+    {
+        public static M2C_PetMatchResult Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2C_PetMatchResult), isFromPool) as M2C_PetMatchResult;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public int Result { get; set; }
+
+        [MemoryPackOrder(1)]
+        public long FubenId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.Result = default;
+            this.FubenId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class OuterMessage
     {
         public const ushort HttpGetRouterResponse = 10002;
@@ -34674,5 +34711,6 @@ namespace ET
         public const ushort C2M_PetMatchRequest = 10896;
         public const ushort M2C_PetMatchResponse = 10897;
         public const ushort PetMatchPlayerInfo = 10898;
+        public const ushort M2C_PetMatchResult = 10899;
     }
 }

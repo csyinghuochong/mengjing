@@ -7755,3 +7755,11 @@ message PetMatchPlayerInfo
 	int32 RankId = 5;
 	int32 Occ = 6;
 }
+
+message M2C_PetMatchResult // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Result = 1;
+	int64 FubenId = 2;
+}

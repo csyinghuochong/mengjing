@@ -18,6 +18,9 @@ namespace ET.Server
         public List<RankingInfo> rankingCamp1 { get; set; } = new List<RankingInfo>();    //正派
         public List<RankingInfo> rankingCamp2 { get; set; } = new List<RankingInfo>();    //邪派
         public List<RankingInfo> rankSoloInfo { get; set; } = new List<RankingInfo>();    //solo
+        
+        public List<RankingInfo> petMatchInfo { get; set; } = new List<RankingInfo>();    //petmatch
+        
         public List<RankShouLieInfo> rankShowLie { get; set; } = new List<RankShouLieInfo>(); //狩猎
         public List<RankShouLieInfo> rankUnionRace { get; set; } = new List<RankShouLieInfo>();//家族战
         public List<RankingInfo> rankRunRace { get; set; } = new List<RankingInfo>();     //奔跑大赛
