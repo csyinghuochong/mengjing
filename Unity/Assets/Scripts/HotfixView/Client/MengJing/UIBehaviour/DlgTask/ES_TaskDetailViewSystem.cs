@@ -235,7 +235,7 @@ namespace ET.Client
 
             List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
 
-            self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true);
+            self.ES_RewardList.Refresh(rewardItems, showNumber: true, showName: true, showNameOutline: false);
 
             self.E_GoingButton.transform.GetComponentInChildren<Text>().text = "前往任务";
             if (taskConfig.TargetType == TaskTargetType.GiveItem_10)

@@ -14,6 +14,7 @@ namespace ET.Client
 		public bool ShowNum;
 		public bool ShowName;
 		public int GetWay;
+		public bool ShowNameOutline;
 		
 		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
