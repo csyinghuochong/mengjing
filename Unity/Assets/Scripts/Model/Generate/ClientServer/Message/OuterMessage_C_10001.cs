@@ -33149,6 +33149,9 @@ namespace ET
         [MemoryPackOrder(89)]
         public int RpcId { get; set; }
 
+        [MemoryPackOrder(0)]
+        public int MapType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33157,6 +33160,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.MapType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -33247,6 +33251,9 @@ namespace ET
         [MemoryPackOrder(2)]
         public long TargetUnitId { get; set; }
 
+        [MemoryPackOrder(3)]
+        public int MapType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33258,6 +33265,7 @@ namespace ET
             this.CarId = default;
             this.Position = default;
             this.TargetUnitId = default;
+            this.MapType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -33312,6 +33320,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public long CarId { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int MapType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33321,6 +33332,7 @@ namespace ET
 
             this.RpcId = default;
             this.CarId = default;
+            this.MapType = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -33373,6 +33385,9 @@ namespace ET
         [MemoryPackOrder(89)]
         public int RpcId { get; set; }
 
+        [MemoryPackOrder(0)]
+        public int MapType { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33381,6 +33396,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.MapType = default;
 
             ObjectPool.Instance.Recycle(this);
         }

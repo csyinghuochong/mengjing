@@ -7,10 +7,23 @@
         {
             // 当掉线重新连接了，可以发送这个消息拿到当前的卡牌
             // 重连成功，派发事件， 各自的模块去处理。。
-            PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
-            if (petMeleeDungeonComponent != null)
+
+            switch (request.MapType)
             {
-                response.PetMeleeCardList.AddRange(petMeleeDungeonComponent.PetMeleeCardInHand);
+                case MapTypeEnum.PetMelee:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+                    if (petMeleeDungeonComponent != null)
+                    {
+                        response.PetMeleeCardList.AddRange(petMeleeDungeonComponent.PetMeleeCardInHand);
+                    }
+                    break;
+                case MapTypeEnum.PetMatch:
+                    PetMatchDungeonComponent petMatchDungeonComponent = unit.Scene().GetComponent<PetMatchDungeonComponent>();
+                    if (petMatchDungeonComponent != null)
+                    {
+                        response.PetMeleeCardList.AddRange(petMatchDungeonComponent.PetMeleeCardInHand);
+                    }
+                    break;
             }
 
             await ETTask.CompletedTask;

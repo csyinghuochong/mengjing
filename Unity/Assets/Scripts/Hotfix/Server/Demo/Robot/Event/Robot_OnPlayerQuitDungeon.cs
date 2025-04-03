@@ -11,7 +11,7 @@ public class Robot_OnPlayerQuitDungeon : AEvent<Scene, PlayerQuitDungeon>
        
         Scene zoneScene = scene.Root();
         MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-        switch (mapComponent.SceneType)
+        switch (mapComponent.MapType)
         {
             case MapTypeEnum.TeamDungeon:
                 EnterMapHelper.RequestQuitFuben(zoneScene);

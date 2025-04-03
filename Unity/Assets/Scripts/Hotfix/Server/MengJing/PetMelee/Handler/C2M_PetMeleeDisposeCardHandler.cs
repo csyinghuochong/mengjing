@@ -5,14 +5,22 @@
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleeDisposeCard request, M2C_PetMeleeDisposeCard response)
         {
-            PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
-            if (petMeleeDungeonComponent.IsGameOver())
+            switch (request.MapType)
             {
-                response.Error = ErrorCode.ERR_Error;
-                return;
-            }
+                case MapTypeEnum.PetMelee:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+                    if (petMeleeDungeonComponent.IsGameOver())
+                    {
+                        response.Error = ErrorCode.ERR_Error;
+                        return;
+                    }
 
-            response.Error = petMeleeDungeonComponent.DisposeCard(request.CarId);
+                    response.Error = petMeleeDungeonComponent.DisposeCard(request.CarId);
+                    break;
+                case MapTypeEnum.PetMatch:
+                    
+                    break;
+            }
 
             await ETTask.CompletedTask;
         }

@@ -14,7 +14,7 @@ namespace ET.Client
             {
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
                 root.GetComponent<BehaviourComponent>().Stop();
-                switch (mapComponent.SceneType)
+                switch (mapComponent.MapType)
                 {
                     case MapTypeEnum.Battle:
                     case MapTypeEnum.TeamDungeon:

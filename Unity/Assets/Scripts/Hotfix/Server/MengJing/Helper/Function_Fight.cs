@@ -122,7 +122,7 @@ namespace ET.Server
             }
             
             //99002002 角斗场免伤状态
-            int sceneType = defendUnit.Scene().GetComponent<MapComponent>().SceneType;
+            int sceneType = defendUnit.Scene().GetComponent<MapComponent>().MapType;
             if (sceneType == MapTypeEnum.Arena && attackUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, 99002002) > 0)
             {
                 return false;

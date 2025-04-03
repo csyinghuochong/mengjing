@@ -135,7 +135,7 @@ namespace ET.Server
 
             long revetime = 0;
             Unit mainUnit = null;
-            if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
+            if (mapComponent.MapType == MapTypeEnum.LocalDungeon)
             {
                 mainUnit = scene.GetComponent<LocalDungeonComponent>().MainUnit;
                 revetime = mainUnit.GetComponent<UserInfoComponentS>().GetReviveTime(monsterConfig.Id);
@@ -190,7 +190,7 @@ namespace ET.Server
                 skillPassiveComponent.UpdateMonsterPassiveSkill();
                 numericComponent.ApplyValue(NumericType.MasterId, createMonsterInfo.MasterID, false);
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
-                switch (mapComponent.SceneType)
+                switch (mapComponent.MapType)
                 {
                     case MapTypeEnum.LocalDungeon:
                         aIComponent.InitMonster(monsterConfig.Id);
@@ -307,7 +307,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false);
 
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-            if (scene.GetComponent<MapComponent>().SceneType != (int)MapTypeEnum.MainCityScene)
+            if (scene.GetComponent<MapComponent>().MapType != (int)MapTypeEnum.MainCityScene)
             {
                 unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
                 unit.GetComponent<SkillPassiveComponent>().Begin();
@@ -384,7 +384,7 @@ namespace ET.Server
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
             numericComponent.ApplyValue(NumericType.Now_Hp, max_hp, false);
             unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
-            switch (mapComponent.SceneType)
+            switch (mapComponent.MapType)
             {
                 case MapTypeEnum.PetDungeon:
                 case MapTypeEnum.PetTianTi:
@@ -907,7 +907,7 @@ namespace ET.Server
         public static void CreateDropItems(Unit main, Unit beKill, int dropType, int dropId, string par)
         {
             Scene domainScene = beKill.Scene();
-            int sceneType = domainScene.GetComponent<MapComponent>().SceneType;
+            int sceneType = domainScene.GetComponent<MapComponent>().MapType;
 
             // 0 公共掉落 2保护掉落   1私有掉落  3 归属掉落
             if (dropType == 0)

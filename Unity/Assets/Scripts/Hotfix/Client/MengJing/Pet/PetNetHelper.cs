@@ -628,27 +628,27 @@ namespace ET.Client
             root.GetComponent<ClientSenderCompnent>().Send(C2M_PetFubenOverRequest.Create());
         }
 
-        public static async ETTask<int> PetMeleePlaceRequest(Scene root, long carId, float3 position, long targetUnitId)
+        public static async ETTask<int> PetMeleePlaceRequest(Scene root, long carId, float3 position, long targetUnitId, int mapType)
         {
             C2M_PetMeleePlace request = C2M_PetMeleePlace.Create();
             request.CarId = carId;
             request.Position = position;
             request.TargetUnitId = targetUnitId;
-
+            request.MapType = mapType;
             M2C_PetMeleePlace response = (M2C_PetMeleePlace)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
-        public static async ETTask<int> PetMeleeDisposeCardRequest(Scene root, long carId)
+        public static async ETTask<int> PetMeleeDisposeCardRequest(Scene root, long carId, int mapType)
         {
             C2M_PetMeleeDisposeCard request = C2M_PetMeleeDisposeCard.Create();
             request.CarId = carId;
-
+            request.MapType = mapType;
             M2C_PetMeleeDisposeCard response = (M2C_PetMeleeDisposeCard)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
-        public static async ETTask<M2C_PetMeleeGetMyCards> PetMeleePetMeleeGetMyCardsRequest(Scene root)
+        public static async ETTask<M2C_PetMeleeGetMyCards> PetMeleePetMeleeGetMyCardsRequest(Scene root, int mapType)
         {
             C2M_PetMeleeGetMyCards request = C2M_PetMeleeGetMyCards.Create();
 
@@ -670,10 +670,10 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> PetMeleeBeginRequest(Scene root)
+        public static async ETTask<int> PetMeleeBeginRequest(Scene root, int mapType)
         {
             C2M_PetMeleeBegin request = C2M_PetMeleeBegin.Create();
-
+            request.MapType = mapType;
             M2C_PetMeleeBegin response = (M2C_PetMeleeBegin)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }

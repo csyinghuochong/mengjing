@@ -38,7 +38,7 @@ namespace ET.Server
                 return;
             }
 
-            int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().MapType;
             if (sceneTypeEnum == MapTypeEnum.TeamDungeon)
             {
                 response.Error = OnTeamPick(unit, privateIds, publicIds, sceneTypeEnum);

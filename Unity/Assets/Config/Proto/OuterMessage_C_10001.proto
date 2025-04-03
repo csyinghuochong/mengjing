@@ -7614,6 +7614,7 @@ message M2C_PetMeleeSetResponse // ILocationResponse
 message C2M_PetMeleeGetMyCards // ILocationRequest
 {
 	int32 RpcId = 90;
+	int32 MapType = 1;
 }
 
 message M2C_PetMeleeGetMyCards // ILocationResponse
@@ -7637,6 +7638,7 @@ message C2M_PetMeleePlace // ILocationRequest
 	int64 CarId = 1;
 	Unity.Mathematics.float3 Position = 2;
 	int64 TargetUnitId = 3;
+	int32 MapType = 4;
 }
 
 message M2C_PetMeleePlace // ILocationResponse
@@ -7651,6 +7653,7 @@ message C2M_PetMeleeDisposeCard // ILocationRequest
 {
 	int32 RpcId = 90;
 	int64 CarId = 1;
+	int32 MapType = 2;
 }
 
 message M2C_PetMeleeDisposeCard // ILocationResponse
@@ -7665,6 +7668,7 @@ message M2C_PetMeleeDisposeCard // ILocationResponse
 message C2M_PetMeleeBegin // ILocationRequest
 {
 	int32 RpcId = 90;
+	int32 MapType = 1;
 }
 
 message M2C_PetMeleeBegin // ILocationResponse

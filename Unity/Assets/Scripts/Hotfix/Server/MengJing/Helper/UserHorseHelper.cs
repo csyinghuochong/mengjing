@@ -14,7 +14,7 @@ namespace ET.Server
             }
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 int sceneid = mapComponent.SceneId;
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);

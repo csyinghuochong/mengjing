@@ -7,15 +7,24 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleePlace request, M2C_PetMeleePlace response)
         {
-            PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
-            if (petMeleeDungeonComponent.IsGameOver())
+            switch (request.MapType)
             {
-                response.Error = ErrorCode.ERR_Error;
-                return;
+                case MapTypeEnum.PetMelee:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+                    if (petMeleeDungeonComponent.IsGameOver())
+                    {
+                        response.Error = ErrorCode.ERR_Error;
+                        return;
+                    }
+
+                    response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId);
+
+                    break;
+                case MapTypeEnum.PetMatch:
+                    
+                    break;
             }
-
-            response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId);
-
+          
             await ETTask.CompletedTask;
         }
     }

@@ -524,7 +524,7 @@ namespace ET.Server
             long time = TimeHelper.ServerNow() + self.RandomTime;
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
 
-            if (!self.LogTest && mapComponent.SceneType == MapTypeEnum.BaoZang)
+            if (!self.LogTest && mapComponent.MapType == MapTypeEnum.BaoZang)
             {
                 self.LogTest = true;
                 //self.BaozangzhiRefresh();
@@ -544,7 +544,7 @@ namespace ET.Server
                 {
                     self.RefreshMonsters.RemoveAt(i);
 
-                    if (mapComponent.SceneType == MapTypeEnum.BaoZang)
+                    if (mapComponent.MapType == MapTypeEnum.BaoZang)
                     {
                         Log.Debug($" self.RefreshMonsters.RemoveAt : {i}");
                     }
@@ -567,12 +567,12 @@ namespace ET.Server
             float3 form = new float3(refreshMonster.PositionX, refreshMonster.PositionY, refreshMonster.PositionZ);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
 
-            if (mapComponent.SceneType == MapTypeEnum.UnionRace)
+            if (mapComponent.MapType == MapTypeEnum.UnionRace)
             {
                 Log.Warning($"refreshMonster.UnionRace: {refreshMonster.MonsterId}");
             }
 
-            if (mapComponent.SceneType == MapTypeEnum.MiJing && monsterConfig.MonsterType == MonsterTypeEnum.Boss)
+            if (mapComponent.MapType == MapTypeEnum.MiJing && monsterConfig.MonsterType == MonsterTypeEnum.Boss)
             {
                 self.Scene().GetComponent<MiJingDungeonComponent>().BossId = refreshMonster.MonsterId;
 
@@ -588,7 +588,7 @@ namespace ET.Server
             }
 
             int monsterNumber = UnitHelper.GetUnitListByCamp(self.GetParent<Scene>(), UnitType.Monster, monsterConfig.MonsterCamp).Count;
-            if (mapComponent.SceneType == MapTypeEnum.Battle)
+            if (mapComponent.MapType == MapTypeEnum.Battle)
             {
                 if (monsterConfig.MonsterSonType != 55 && monsterConfig.MonsterSonType != 56
                     && monsterNumber >= GlobalValueConfigCategory.Instance.Get(59).Value2)
@@ -596,7 +596,7 @@ namespace ET.Server
                     return;
                 }
             }
-            else if (mapComponent.SceneType == MapTypeEnum.BaoZang)
+            else if (mapComponent.MapType == MapTypeEnum.BaoZang)
             {
                 if (monsterNumber >= GlobalValueConfigCategory.Instance.Get(78).Value2)
                 {

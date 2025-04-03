@@ -28,7 +28,7 @@ namespace ET.Server
         private static void Awake(this BuffManagerComponentS self)
         {
             self.m_Buffs.Clear();
-            self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
+            self.SceneType = self.Scene().GetComponent<MapComponent>().MapType;
         }
 
         [EntitySystem]
@@ -216,7 +216,7 @@ namespace ET.Server
         public static void OnRevive(this BuffManagerComponentS self)
         {
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.RunRace)
+            if (mapComponent.MapType != MapTypeEnum.RunRace)
             {
                 self.InitBaoShiBuff();
                 self.InitDonationBuff();

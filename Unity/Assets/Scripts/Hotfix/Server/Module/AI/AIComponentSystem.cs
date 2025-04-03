@@ -35,7 +35,7 @@ namespace ET
             self.AISkillIDList.Clear();
             self.TargetPoint.Clear();
             self.TargetZhuiJi = float3.zero;
-            self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
+            self.SceneType = self.Scene().GetComponent<MapComponent>().MapType;
         }
 
         [EntitySystem]

@@ -83,7 +83,7 @@ namespace ET.Server
             }
             
             MapComponent mapComponent = attack.Scene().GetComponent<MapComponent>();
-            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            if (!SceneConfigHelper.UseSceneConfig(mapComponent.MapType))
             {
                 return;
             }

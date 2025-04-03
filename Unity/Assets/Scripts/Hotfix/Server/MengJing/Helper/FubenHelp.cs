@@ -229,7 +229,7 @@ namespace ET.Server
 				case 4:
 					//4; 0,0,0; 71020001; 2,2; 2, 2
 					int playerLv = 1;
-					if (scene.GetComponent<MapComponent>().SceneType == MapTypeEnum.Tower)
+					if (scene.GetComponent<MapComponent>().MapType == MapTypeEnum.Tower)
 					{
 						//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
 						//playerLv = mainUnit.GetComponent<UserInfoComponentServer>().GetLv();
@@ -429,7 +429,7 @@ namespace ET.Server
 			}
 
 			MapComponent mapComponent = scene.GetComponent<MapComponent>();
-			int sceneType = mapComponent.SceneType;
+			int sceneType = mapComponent.MapType;
 			string[] monsters = createMonster.Split('@');
 			//1;37.65,0,3.2;70005005;1@138.43,0,0.06;70005010;1
 
@@ -602,7 +602,7 @@ namespace ET.Server
 				{
 					//4; 0,0,0; 71020001; 2,2; 2, 2  //是随机塔附加属性
 					int playerLv = 1;
-					if (scene.GetComponent<MapComponent>().SceneType == MapTypeEnum.Tower)
+					if (scene.GetComponent<MapComponent>().MapType == MapTypeEnum.Tower)
 					{
 						//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
 						//playerLv = mainUnit.GetComponent<UserInfoComponent>().UserInfo.Lv;

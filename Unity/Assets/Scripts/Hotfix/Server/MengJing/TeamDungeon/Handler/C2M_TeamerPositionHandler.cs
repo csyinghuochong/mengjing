@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_TeamerPositionRequest request, M2C_TeamerPositionResponse response)
         {
-            int sceneType = unit.Scene().GetComponent<MapComponent>().SceneType;
+            int sceneType = unit.Scene().GetComponent<MapComponent>().MapType;
             List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
 
             for (int i = 0; i < units.Count; i++)

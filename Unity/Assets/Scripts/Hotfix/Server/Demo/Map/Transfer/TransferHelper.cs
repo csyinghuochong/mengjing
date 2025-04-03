@@ -14,7 +14,7 @@ namespace ET.Server
                 {
                     return ErrorCode.ERR_RequestRepeatedly;
                 }
-                int oldScene = unit.Scene().GetComponent<MapComponent>().SceneType;
+                int oldScene = unit.Scene().GetComponent<MapComponent>().MapType;
                 if (!SceneConfigHelper.CanTransfer(oldScene, request.SceneType))
                 {
                     Log.Debug($"LoginTest1  Actor_Transfer unitId{unit.Id} oldScene:{oldScene}  requestscene{request.SceneType}");
@@ -57,7 +57,7 @@ namespace ET.Server
                             return ErrorCode.ERR_ModifyData;
                         }
                         Scene oldscene = unit.Root();
-                        int sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                        int sceneTypeEnum = oldscene.GetComponent<MapComponent>().MapType;
                         long fubenid = IdGenerater.Instance.GenerateId();
                         long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 
@@ -75,7 +75,7 @@ namespace ET.Server
                         break;
                     case MapTypeEnum.PetMelee:
                         oldscene = unit.Root();
-                        sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                        sceneTypeEnum = oldscene.GetComponent<MapComponent>().MapType;
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 
@@ -113,7 +113,7 @@ namespace ET.Server
                         
                         oldscene = unit.Scene();
                         MapComponent  mapComponent = oldscene.GetComponent<MapComponent>();
-                        sceneTypeEnum = mapComponent.SceneType;
+                        sceneTypeEnum = mapComponent.MapType;
                         BeforeTransfer(unit);
                         await Transfer(unit, enterResponse.FubenActorId, MapTypeEnum.PetMatch, request.SceneId, 0, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
@@ -127,7 +127,7 @@ namespace ET.Server
                         {
                             //第一个格子
                             oldscene = unit.Root();
-                            sceneTypeEnum = oldscene.GetComponent<MapComponent>().SceneType;
+                            sceneTypeEnum = oldscene.GetComponent<MapComponent>().MapType;
                             fubenid = IdGenerater.Instance.GenerateId();
                             fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 
@@ -447,7 +447,7 @@ namespace ET.Server
                         }
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
-                        sceneTypeEnum = mapComponent.SceneType;
+                        sceneTypeEnum = mapComponent.MapType;
                         BeforeTransfer(unit);
                         await Transfer(unit, d2GGetUnit.FubenActorId, MapTypeEnum.Solo, request.SceneId, 0, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
@@ -535,7 +535,7 @@ namespace ET.Server
                         
                         oldscene = unit.Scene();
                         mapComponent = oldscene.GetComponent<MapComponent>();
-                        sceneTypeEnum = mapComponent.SceneType;
+                        sceneTypeEnum = mapComponent.MapType;
                         mapInstanceId = UnitCacheHelper.GetTeamServerId(unit.Zone());
                         //[创建副本Scene]
                         M2T_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2T_TeamDungeonEnterRequest.Create();
@@ -627,7 +627,7 @@ namespace ET.Server
         public static async ETTask MainCityTransfer(Unit unit)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == MapTypeEnum.MainCityScene)
+            if (mapComponent.MapType == MapTypeEnum.MainCityScene)
             {
                 OnMainToMain(unit);
                 return;
@@ -696,7 +696,7 @@ namespace ET.Server
                 return;
             }
 
-            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
             if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
             {
                 NoticeFubenCenter(scene, 2).Coroutine();
@@ -735,7 +735,7 @@ namespace ET.Server
 
         public static void OnPlayerDisconnect(Scene scene, long userId)
         {
-            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
 
             if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
             {

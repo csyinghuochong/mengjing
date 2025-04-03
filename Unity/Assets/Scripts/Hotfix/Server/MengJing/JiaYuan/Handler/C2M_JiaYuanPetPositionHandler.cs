@@ -7,7 +7,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanPetPositionRequest request, M2C_JiaYuanPetPositionResponse response)
         {
-            if (unit.Scene().GetComponent<MapComponent>().SceneType != MapTypeEnum.JiaYuan)
+            if (unit.Scene().GetComponent<MapComponent>().MapType != MapTypeEnum.JiaYuan)
             {
                 return;
             }

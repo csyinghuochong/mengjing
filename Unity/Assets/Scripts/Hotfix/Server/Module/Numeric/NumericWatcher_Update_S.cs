@@ -10,7 +10,7 @@ namespace ET.Server
 
             Scene DomainScene = args.Defend.Scene();
             MapComponent mapComponent = DomainScene.GetComponent<MapComponent>();
-            int sceneTypeEnum = mapComponent.SceneType;
+            int sceneTypeEnum = mapComponent.MapType;
             int sceneId = mapComponent.SceneId;
 
             if (args.NewValue <= 0 && numericComponentDefend.GetAsInt(NumericType.Now_Dead) == 1)

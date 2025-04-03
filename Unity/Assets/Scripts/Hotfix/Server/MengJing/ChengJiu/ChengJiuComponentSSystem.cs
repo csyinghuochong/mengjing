@@ -116,11 +116,11 @@ namespace ET.Server
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
                 MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
                 int fubenDifficulty = (int)FubenDifficulty.None;
-                if (mapComponent.SceneType == (int)MapTypeEnum.CellDungeon)
+                if (mapComponent.MapType == (int)MapTypeEnum.CellDungeon)
                 {
                     fubenDifficulty = (int)self.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                 }
-                if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+                if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
                 {
                     fubenDifficulty = (int)self.Scene().GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }

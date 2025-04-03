@@ -29,7 +29,7 @@ namespace ET.Server
         {
             self.AIConfigId = 14;
             self.PatrolRange = 0f;
-            self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
+            self.SceneType = self.Scene().GetComponent<MapComponent>().MapType;
         }
 
         [EntitySystem]

@@ -741,7 +741,7 @@ namespace ET.Server
         {
             self.TriggerTaskEvent(TaskTargetType.OnLineTime_1010, 0, 1);
 
-            if (self.Scene().GetComponent<MapComponent>().SceneType == MapTypeEnum.Battle)
+            if (self.Scene().GetComponent<MapComponent>().MapType == MapTypeEnum.Battle)
             {
                 self.TriggerTaskEvent(TaskTargetType.BattleExist_1103, 0, 1);
             }
@@ -832,11 +832,11 @@ namespace ET.Server
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
                 MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
                 int fubenDifficulty = FubenDifficulty.None;
-                if (mapComponent.SceneType == (int)MapTypeEnum.CellDungeon)
+                if (mapComponent.MapType == (int)MapTypeEnum.CellDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;
                 }
-                if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+                if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }

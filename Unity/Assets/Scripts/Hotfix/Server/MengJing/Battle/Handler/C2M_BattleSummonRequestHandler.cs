@@ -12,7 +12,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_BattleSummonRequest request, M2C_BattleSummonResponse response)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != MapTypeEnum.Battle)
+            if (mapComponent.MapType != MapTypeEnum.Battle)
             {
                 Log.Error($"C2M_BattleSummonRequest.1");
                 response.Error = ErrorCode.ERR_ModifyData;

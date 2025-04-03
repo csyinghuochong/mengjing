@@ -378,7 +378,7 @@ namespace ET.Server
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
              int resurrection = (int)monsterConfig.ReviveTime;
              MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-             if (CommonHelp.IsSeasonBoss(unit.ConfigId ) && mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+             if (CommonHelp.IsSeasonBoss(unit.ConfigId ) && mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                  UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
@@ -393,9 +393,9 @@ namespace ET.Server
           
              if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
              {
-                 if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon
-                  || mapComponent.SceneType == (int)MapTypeEnum.MiJing
-                  || mapComponent.SceneType == (int)MapTypeEnum.RunRace)
+                 if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon
+                  || mapComponent.MapType == (int)MapTypeEnum.MiJing
+                  || mapComponent.MapType == (int)MapTypeEnum.RunRace)
                  {
                      unit.Scene().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
                  }
@@ -404,7 +404,7 @@ namespace ET.Server
              else
              {
                  long resurrectionTime = 0;
-                 if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
+                 if (mapComponent.MapType == (int)MapTypeEnum.LocalDungeon)
                  {
                      LocalDungeonComponent localDungeon = unit.Scene().GetComponent<LocalDungeonComponent>();
                      UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
@@ -425,7 +425,7 @@ namespace ET.Server
                  }
                  else
                  {
-                     if (mapComponent.SceneType == (int)MapTypeEnum.MiJing)
+                     if (mapComponent.MapType == (int)MapTypeEnum.MiJing)
                      {
                          resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
                          unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
@@ -701,7 +701,7 @@ namespace ET.Server
              //根据副本难度刷新属性
              //进入 挑战关卡 怪物血量增加 1.5 伤害增加 1.2 低于关卡 血量增加2 伤害增加 1.5
              MapComponent mapComponent = nowUnit.Scene().GetComponent<MapComponent>();
-             int sceneType = mapComponent.SceneType;
+             int sceneType = mapComponent.MapType;
              int fubenDifficulty = FubenDifficulty.None;
 
              float attributeAdd = 1f;

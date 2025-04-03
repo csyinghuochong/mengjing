@@ -812,7 +812,7 @@ namespace ET.Server
               int cdRate = 1;
               if (itemid > 0 && unit.Type == UnitType.Player)
               {
-                  int sceneType = unit.Scene().GetComponent<MapComponent>().SceneType;
+                  int sceneType = unit.Scene().GetComponent<MapComponent>().MapType;
                   cdRate = CommonHelp.GetSkillCdRate(sceneType); 
               }
               

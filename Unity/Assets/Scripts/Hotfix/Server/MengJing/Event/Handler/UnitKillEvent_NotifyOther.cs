@@ -14,7 +14,7 @@ namespace ET.Server
             Scene domainScene = defendUnit.Scene();
             MapComponent mapComponent = domainScene.GetComponent<MapComponent>();
             int sceneId = mapComponent.SceneId;
-            int sceneTypeEnum = mapComponent.SceneType;
+            int sceneTypeEnum = mapComponent.MapType;
             defendUnit.GetComponent<MoveComponent>()?.Stop(false);
             defendUnit.GetComponent<AIComponent>()?.Stop();
             defendUnit.GetComponent<SkillPassiveComponent>()?.Stop();
@@ -67,7 +67,7 @@ namespace ET.Server
 
             if (defendUnit.Type == UnitType.Pet)
             {
-                sceneTypeEnum = defendUnit.Scene().GetComponent<MapComponent>().SceneType;
+                sceneTypeEnum = defendUnit.Scene().GetComponent<MapComponent>().MapType;
                 if (sceneTypeEnum != (int)MapTypeEnum.PetTianTi
                     && sceneTypeEnum != (int)MapTypeEnum.PetDungeon
                     && sceneTypeEnum != (int)MapTypeEnum.PetMing

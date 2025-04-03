@@ -237,7 +237,7 @@ namespace ET.Client
                 self.PetMeleeCardPool.Add(esPetMeleeCard);
             }
 
-            M2C_PetMeleeGetMyCards response = await PetNetHelper.PetMeleePetMeleeGetMyCardsRequest(self.Root());
+            M2C_PetMeleeGetMyCards response = await PetNetHelper.PetMeleePetMeleeGetMyCardsRequest(self.Root(), self.MapTypeEnum);
             foreach (ES_PetMeleeCard card in self.PetMeleeCardInHand)
             {
                 self.ReturnCardToPool(card);
@@ -352,7 +352,7 @@ namespace ET.Client
 
             self.View.E_Image_1Image.gameObject.SetActive(false);
             self.View.E_DiImage.gameObject.SetActive(false);
-            await PetNetHelper.PetMeleeBeginRequest(self.Root());
+            await PetNetHelper.PetMeleeBeginRequest(self.Root(), self.MapTypeEnum);
             self.BeginCountdown().Coroutine();
         }
 
@@ -414,7 +414,7 @@ namespace ET.Client
 
         public static async ETTask UseCard(this DlgPetMeleeMain self, ES_PetMeleeCard card, float3 position, long targetUnitId)
         {
-            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position, targetUnitId);
+            int error = await PetNetHelper.PetMeleePlaceRequest(self.Root(), card.PetMeleeCardInfo.Id, position, targetUnitId, self.MapTypeEnum);
 
             if (error == ErrorCode.ERR_Success)
             {
@@ -428,7 +428,7 @@ namespace ET.Client
 
         public static async ETTask DisposeCard(this DlgPetMeleeMain self, ES_PetMeleeCard card)
         {
-            int error = await PetNetHelper.PetMeleeDisposeCardRequest(self.Root(), card.PetMeleeCardInfo.Id);
+            int error = await PetNetHelper.PetMeleeDisposeCardRequest(self.Root(), card.PetMeleeCardInfo.Id, self.MapTypeEnum);
 
             if (error == ErrorCode.ERR_Success)
             {

@@ -284,7 +284,7 @@ namespace ET.Server
             ServerInfo serverInfo = ConfigData.ServerInfoList[scene.Zone()];
             if (serverInfo == null)
             {
-                Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
+                Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().MapType} {self.Id}");
                 return;
             }
 

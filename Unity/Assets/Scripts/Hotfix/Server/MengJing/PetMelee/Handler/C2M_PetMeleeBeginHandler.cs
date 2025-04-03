@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
@@ -5,20 +7,30 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetMeleeBegin request, M2C_PetMeleeBegin response)
         {
-            PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
-            if (petMeleeDungeonComponent.IsGameOver())
+
+            switch (request.MapType)
             {
-                response.Error = ErrorCode.ERR_Error;
-                return;
+                case MapTypeEnum.PetMelee:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
+                    if (petMeleeDungeonComponent.IsGameOver())
+                    {
+                        response.Error = ErrorCode.ERR_Error;
+                        return;
+                    }
+
+                    if (petMeleeDungeonComponent.IsGameStart())
+                    {
+                        response.Error = ErrorCode.ERR_Error;
+                        return;
+                    }
+
+                    petMeleeDungeonComponent.SetGameStart();
+                    break;
+                case MapTypeEnum.PetMatch:
+                    Console.WriteLine("C2M_PetMeleeBeginHandler no handler");
+                    break;
             }
 
-            if (petMeleeDungeonComponent.IsGameStart())
-            {
-                response.Error = ErrorCode.ERR_Error;
-                return;
-            }
-
-            petMeleeDungeonComponent.SetGameStart();
 
             await ETTask.CompletedTask;
         }

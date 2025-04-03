@@ -115,7 +115,7 @@ namespace ET.Server
                     $"{  TimeHelper.DateTimeNow().ToString()}  移除";
 
             Scene scene = unit.Scene();
-            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().MapType;
             if (sceneTypeEnum == MapTypeEnum.MainCityScene)
             {
                 unit.RecordPostion(sceneTypeEnum, CommonHelp.MainCityID());

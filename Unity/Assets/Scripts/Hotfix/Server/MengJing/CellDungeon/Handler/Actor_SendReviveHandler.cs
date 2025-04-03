@@ -24,7 +24,7 @@ namespace ET.Server
             }
             else
             {
-                switch (mapComponent.SceneType)
+                switch (mapComponent.MapType)
                 {
                     case MapTypeEnum.TeamDungeon:
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
@@ -49,7 +49,7 @@ namespace ET.Server
                 unit.GetComponent<HeroDataComponentS>().OnRevive();
             }
 
-            unit.TriggerTeamBuff(mapComponent.SceneType);
+            unit.TriggerTeamBuff(mapComponent.MapType);
             await ETTask.CompletedTask;
         }
     }
