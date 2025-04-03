@@ -14,7 +14,7 @@
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
                     if (petMeleeDungeonComponent != null)
                     {
-                        response.PetMeleeCardList.AddRange(petMeleeDungeonComponent.PetMeleeCardInHand);
+                        response.PetMeleeCardList.AddRange(petMeleeDungeonComponent.PetMeleeCardInHand[unit.Id]);
                     }
                     break;
                 case MapTypeEnum.PetMatch:

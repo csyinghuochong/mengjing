@@ -69,16 +69,22 @@ namespace ET.Server
             timerComponent.Remove(ref self.PetMeleeDungeonDealCardTimer);
             timerComponent.Remove(ref self.PetMeleeDungeonRestoreTimer);
 
-            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand)
+            foreach (List<PetMeleeCardInfo> cardInfos in self.PetMeleeCardInHand.Values)
             {
-                cardInfo.Dispose();
+                foreach (PetMeleeCardInfo cardInfo in cardInfos)
+                {
+                    cardInfo.Dispose();
+                }
             }
 
             self.PetMeleeCardInHand.Clear();
 
-            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardPool)
+            foreach (List<PetMeleeCardInfo> PetMeleeCardInfos in self.PetMeleeCardPool.Values)
             {
-                cardInfo.Dispose();
+                foreach (PetMeleeCardInfo cardInfo in PetMeleeCardInfos)
+                {
+                    cardInfo.Dispose();
+                }
             }
 
             self.PetMeleeCardPool.Clear();
@@ -86,17 +92,24 @@ namespace ET.Server
             self.UsedSkillList.Clear();
         }
 
-        public static void SetPlayer(this PetMeleeDungeonComponent self)
+        private static void InitPlayerData(this PetMeleeDungeonComponent self, long playerId)
         {
-            List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
-            self.Player = players[0];
-
-            self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi, ConfigData.PetMeleeMoLiBase);
-
-            self.DealFirstCards();
+            self.PetMeleeCardInHand.Add(playerId, new List<PetMeleeCardInfo>());
+            self.PetMeleeCardPool.Add(playerId, new List<PetMeleeCardInfo>());
+            self.UsedMainPetList.Add(playerId, new List<long>());
+            self.UsedSkillList.Add(playerId, new List<int>());
         }
 
-        private static PetMeleeCardInfo GetCardByRandom(this PetMeleeDungeonComponent self)
+        public static void SetPlayer(this PetMeleeDungeonComponent self, Unit player)
+        {
+            self.InitPlayerData(player.Id);
+            
+            self.DealFirstCards(player);
+            
+            player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi, ConfigData.PetMeleeMoLiBase);
+        }
+
+        private static PetMeleeCardInfo GetCardByRandom(this PetMeleeDungeonComponent self, Unit player)
         {
             PetMeleeCardInfo cardInfo = null;
 
@@ -106,15 +119,15 @@ namespace ET.Server
 
                 if (random <= ConfigData.PetMeleeMainPetProb)
                 {
-                    cardInfo = self.CreateCard(PetMeleeCarType.MainPet);
+                    cardInfo = self.CreateCard(PetMeleeCarType.MainPet,player);
                 }
                 else if (random <= ConfigData.PetMeleeMainPetProb + ConfigData.PetMeleeAssistPetProb)
                 {
-                    cardInfo = self.CreateCard(PetMeleeCarType.AssistPet);
+                    cardInfo = self.CreateCard(PetMeleeCarType.AssistPet, player);
                 }
                 else
                 {
-                    cardInfo = self.CreateCard(PetMeleeCarType.Magic);
+                    cardInfo = self.CreateCard(PetMeleeCarType.Magic, player);
                 }
 
                 if (cardInfo != null)
@@ -125,49 +138,49 @@ namespace ET.Server
 
             if (cardInfo == null)
             {
-                cardInfo = self.CreateCard(PetMeleeCarType.AssistPet);
+                cardInfo = self.CreateCard(PetMeleeCarType.AssistPet, player);
             }
 
             return cardInfo;
         }
         
         // 发放初始卡牌
-        private static void DealFirstCards(this PetMeleeDungeonComponent self)
+        private static void DealFirstCards(this PetMeleeDungeonComponent self, Unit player)
         {
             for (int i = 0; i < ConfigData.PetMeleeFirstMainPetNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.MainPet);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.MainPet,player);
 
                 if (cardInfo != null)
                 {
-                    self.PetMeleeCardInHand.Add(cardInfo);
+                    self.PetMeleeCardInHand[player.Id].Add(cardInfo);
                 }
             }
 
             for (int i = 0; i < ConfigData.PetMeleeFirstAssistPetNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.AssistPet);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.AssistPet,player);
 
                 if (cardInfo != null)
                 {
-                    self.PetMeleeCardInHand.Add(cardInfo);
+                    self.PetMeleeCardInHand[player.Id].Add(cardInfo);
                 }
             }
 
             for (int i = 0; i < ConfigData.PetMeleeFirstMagicNum; i++)
             {
-                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic);
+                PetMeleeCardInfo cardInfo = self.CreateCard(PetMeleeCarType.Magic,player);
 
                 if (cardInfo != null)
                 {
-                    self.PetMeleeCardInHand.Add(cardInfo);
+                    self.PetMeleeCardInHand[player.Id].Add(cardInfo);
                 }
             }
         }
 
-        private static PetMeleeCardInfo CreateCard(this PetMeleeDungeonComponent self, PetMeleeCarType petMeleeCarType)
+        private static PetMeleeCardInfo CreateCard(this PetMeleeDungeonComponent self, PetMeleeCarType petMeleeCarType, Unit player)
         {
-            PetComponentS petcomponent = self.Player.GetComponent<PetComponentS>();
+            PetComponentS petcomponent = player.GetComponent<PetComponentS>();
             PetMeleeInfo petmeleeinfo = petcomponent.PetMeleeInfoList[petcomponent.PetMeleePlan];
 
             switch (petMeleeCarType)
@@ -183,7 +196,7 @@ namespace ET.Server
                     List<long> cards = new();
                     foreach (long id in petmeleeinfo.MainPetList)
                     {
-                        if (self.UsedMainPetList.Contains(id))
+                        if (self.UsedMainPetList[player.Id].Contains(id))
                         {
                             continue;
                         }
@@ -202,7 +215,7 @@ namespace ET.Server
                     cardInfo.Type = (int)PetMeleeCarType.MainPet;
                     cardInfo.PetId = cards[index];
 
-                    self.UsedMainPetList.Add(cards[index]);
+                    self.UsedMainPetList[player.Id].Add(cards[index]);
 
                     return cardInfo;
                 }
@@ -233,7 +246,7 @@ namespace ET.Server
                     {
                         PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(id);
                         // 判断该卡是不是只能出现一次
-                        if (petMagicCardConfig.IsOnly == 1 && self.UsedSkillList.Contains(id))
+                        if (petMagicCardConfig.IsOnly == 1 && self.UsedSkillList[player.Id].Contains(id))
                         {
                             continue;
                         }
@@ -252,7 +265,7 @@ namespace ET.Server
                     cardInfo.Type = (int)PetMeleeCarType.Magic;
                     cardInfo.ConfigId = cards[index];
 
-                    self.UsedSkillList.Add(cards[index]);
+                    self.UsedSkillList[player.Id].Add(cards[index]);
 
                     return cardInfo;
                 }
@@ -269,7 +282,21 @@ namespace ET.Server
                 return;
             }
 
-            PetMeleeCardInfo cardInfo = self.GetCardByRandom();
+            List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
+            foreach (Unit player in players)
+            {
+                self.DealCardsByPlayer(player);
+            }
+        }
+        
+        public static void DealCardsByPlayer(this PetMeleeDungeonComponent self, Unit player)
+        {
+            if (self.GameOver)
+            {
+                return;
+            }
+
+            PetMeleeCardInfo cardInfo = self.GetCardByRandom(player);
 
             if (cardInfo == null)
             {
@@ -278,19 +305,19 @@ namespace ET.Server
 
             if (self.PetMeleeCardInHand.Count >= ConfigData.PetMeleeCarInHandNum)
             {
-                self.PetMeleeCardPool.Add(cardInfo);
+                self.PetMeleeCardPool[player.Id].Add(cardInfo);
                 return;
             }
 
-            self.PetMeleeCardInHand.Add(cardInfo);
+            self.PetMeleeCardInHand[player.Id].Add(cardInfo);
 
             M2C_PetMeleeDealCards message = M2C_PetMeleeDealCards.Create();
             message.PetMeleeCardList.Add(cardInfo);
-            MapMessageHelper.SendToClient(self.Player, message);
+            MapMessageHelper.SendToClient(player, message);
         }
 
         // 用牌
-        public static int UseCard(this PetMeleeDungeonComponent self, long cardId, float3 position, long targetUnitId)
+        public static int UseCard(this PetMeleeDungeonComponent self, long cardId, float3 position, long targetUnitId, Unit player)
         {
             if (self.GameOver)
             {
@@ -298,7 +325,7 @@ namespace ET.Server
             }
 
             PetMeleeCardInfo useCard = null;
-            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand)
+            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand[player.Id])
             {
                 if (cardInfo.Id == cardId)
                 {
@@ -314,16 +341,16 @@ namespace ET.Server
 
             if (useCard.Type == (int)PetMeleeCarType.MainPet)
             {
-                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeMainPetCost)
+                if (player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < ConfigData.PetMeleeMainPetCost)
                 {
                     return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
-                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeMainPetCost);
+                    player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -ConfigData.PetMeleeMainPetCost);
                 }
 
-                PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
+                PetComponentS petComponent = player.GetComponent<PetComponentS>();
                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(useCard.PetId);
                 if (rolePetInfo == null)
                 {
@@ -343,7 +370,7 @@ namespace ET.Server
                 //     return;
                 // }
 
-                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), self.Player.Id, CampEnum.CampPlayer_1, rolePetInfo, position, 90, -1);
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, CampEnum.CampPlayer_1, rolePetInfo, position, 90, -1);
 
                 if (self.GameStart)
                 {
@@ -354,16 +381,16 @@ namespace ET.Server
             {
                 int cost = PetTuJianConfigCategory.Instance.Get(useCard.ConfigId).Cost;
 
-                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < cost)
+                if (player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < cost)
                 {
                     return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
-                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -cost);
+                    player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -cost);
                 }
 
-                PetComponentS petComponent = self.Player.GetComponent<PetComponentS>();
+                PetComponentS petComponent = player.GetComponent<PetComponentS>();
 
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
                 if (allpet.Count >= ConfigData.PetMeleeMaxPetsInLine)
@@ -371,7 +398,7 @@ namespace ET.Server
                     return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
 
-                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), self.Player.Id, CampEnum.CampPlayer_1,
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, CampEnum.CampPlayer_1,
                     petComponent.GenerateNewPetByPetTuJianConfigId(useCard.ConfigId), position, 90, -1, IdGenerater.Instance.GenerateId());
 
                 if (self.GameStart)
@@ -382,37 +409,37 @@ namespace ET.Server
             else if (useCard.Type == (int)PetMeleeCarType.Magic)
             {
                 PetMagicCardConfig petMagicCardConfig = PetMagicCardConfigCategory.Instance.Get(useCard.ConfigId);
-                if (self.Player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < petMagicCardConfig.Cost)
+                if (player.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetMeleeMoLi) < petMagicCardConfig.Cost)
                 {
                     return ErrorCode.ERR_PetMelee_MoLiNoEnough;
                 }
                 else
                 {
-                    self.Player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -petMagicCardConfig.Cost);
+                    player.GetComponent<NumericComponentS>().ApplyChange(NumericType.PetMeleeMoLi, -petMagicCardConfig.Cost);
                 }
 
-                float3 direction = position - self.Player.Position;
+                float3 direction = position - player.Position;
                 float ange = math.degrees(math.atan2(direction.x, direction.z));
 
                 // 暂时是让主角使用技能
                 C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 cmd.SkillID = petMagicCardConfig.SkillId;
                 cmd.TargetAngle = (int)math.floor(ange);
-                cmd.TargetDistance = math.distance(position, self.Player.Position);
+                cmd.TargetDistance = math.distance(position, player.Position);
                 cmd.TargetID = targetUnitId;
-                self.Player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, false);
+                player.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, false);
             }
 
-            self.PetMeleeCardInHand.Remove(useCard);
+            self.PetMeleeCardInHand[player.Id].Remove(useCard);
             useCard.Dispose();
 
             return ErrorCode.ERR_Success;
         }
 
-        public static int DisposeCard(this PetMeleeDungeonComponent self, long cardId)
+        public static int DisposeCard(this PetMeleeDungeonComponent self, long cardId, Unit player)
         {
             PetMeleeCardInfo useCard = null;
-            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand)
+            foreach (PetMeleeCardInfo cardInfo in self.PetMeleeCardInHand[player.Id])
             {
                 if (cardInfo.Id == cardId)
                 {
@@ -426,7 +453,7 @@ namespace ET.Server
                 return ErrorCode.ERR_ModifyData;
             }
 
-            self.PetMeleeCardInHand.Remove(useCard);
+            self.PetMeleeCardInHand[player.Id].Remove(useCard);
             useCard.Dispose();
 
             return ErrorCode.ERR_Success;
@@ -440,13 +467,27 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentS numericComponentS = self.Player.GetComponent<NumericComponentS>();
-            int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
-            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
-            self.Player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi,
-                num +add > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num +add );
+            List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
+            foreach (Unit player in players)
+            {
+                self.RestoreByPlayer(player);
+            }
         }
 
+        public static void RestoreByPlayer(this PetMeleeDungeonComponent self, Unit player)
+        {
+            if (self.GameOver)
+            {
+                return;
+            }
+
+            NumericComponentS numericComponentS = player.GetComponent<NumericComponentS>();
+            int num = numericComponentS.GetAsInt(NumericType.PetMeleeMoLi);
+            int add = ConfigData.PetMeleeMoLiRPS * (int)(1 + numericComponentS.GetAsFloat(NumericType.PetMeleeMoLiAdd) );
+            player.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeMoLi,
+                num +add > ConfigData.PetMeleeMoLiMax ? ConfigData.PetMeleeMoLiMax : num +add );
+        }
+        
         public static bool IsGameStart(this PetMeleeDungeonComponent self)
         {
             return self.GameStart;
@@ -485,12 +526,13 @@ namespace ET.Server
                 return;
             }
 
-            if (self.Player == null)
+            
+            self.GameOver = true;
+            List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            if (players.Count == 0)
             {
                 return;
             }
-
-            self.GameOver = true;
 
             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = combatResult;
@@ -514,11 +556,10 @@ namespace ET.Server
 
             if (combatResult == CombatResultEnum.Win)
             {
-                NumericComponentS numericComponent = self.Player.GetComponent<NumericComponentS>();
+                NumericComponentS numericComponent = players[0].GetComponent<NumericComponentS>();
                 if (self.Scene().GetComponent<MapComponent>().SceneId > numericComponent.GetAsInt(NumericType.PetMeleeDungeonId))
                 {
-                    self.Player.GetComponent<NumericComponentS>()
-                            .ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
+                    players[0].GetComponent<NumericComponentS>().ApplyValue(NumericType.PetMeleeDungeonId, self.Scene().GetComponent<MapComponent>().SceneId);
                 }
 
                 int sceneId = self.Scene().GetComponent<MapComponent>().SceneId;
@@ -532,10 +573,10 @@ namespace ET.Server
                     star += m2C_FubenSettlement.StarInfos[i];
                 }
 
-                self.Player.GetComponent<PetComponentS>().OnPassPetMeleeFuben(sceneId, star);
+                players[0].GetComponent<PetComponentS>().OnPassPetMeleeFuben(sceneId, star);
             }
 
-            MapMessageHelper.SendToClient(self.Player, m2C_FubenSettlement);
+            MapMessageHelper.SendToClient( players[0], m2C_FubenSettlement);
         }
 
         private static void GenerateFuben(this PetMeleeDungeonComponent self)

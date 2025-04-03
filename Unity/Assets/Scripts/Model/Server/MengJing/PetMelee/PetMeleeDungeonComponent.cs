@@ -12,12 +12,12 @@ namespace ET.Server
         public long PetMeleeDungeonDealCardTimer; //发牌记时
         public long PetMeleeDungeonRestoreTimer; //恢复记时
 
-        private EntityRef<Unit> player;
-        public Unit Player { get => this.player; set => this.player = value; }
+       // private EntityRef<Unit> player;
+       // public Unit Player { get => this.player; set => this.player = value; }
 
-        public List<PetMeleeCardInfo> PetMeleeCardInHand { get; set; } = new(); //手里的卡
-        public List<PetMeleeCardInfo> PetMeleeCardPool = new(); //储存池里的卡
-        public List<long> UsedMainPetList = new();
-        public List<int> UsedSkillList = new();
+        public Dictionary<long, List<PetMeleeCardInfo>> PetMeleeCardInHand { get; set; } = new(); //手里的卡
+        public Dictionary<long, List<PetMeleeCardInfo>> PetMeleeCardPool = new(); //储存池里的卡
+        public Dictionary<long,  List<long>> UsedMainPetList = new();
+        public Dictionary<long, List<int>> UsedSkillList = new();
     }
 }

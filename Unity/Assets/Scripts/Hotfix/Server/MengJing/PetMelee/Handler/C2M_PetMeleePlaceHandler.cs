@@ -17,7 +17,7 @@ namespace ET.Server
                         return;
                     }
 
-                    response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId);
+                    response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId, unit);
 
                     break;
                 case MapTypeEnum.PetMatch:

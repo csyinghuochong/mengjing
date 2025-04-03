@@ -651,7 +651,7 @@ namespace ET.Client
         public static async ETTask<M2C_PetMeleeGetMyCards> PetMeleePetMeleeGetMyCardsRequest(Scene root, int mapType)
         {
             C2M_PetMeleeGetMyCards request = C2M_PetMeleeGetMyCards.Create();
-
+            request.MapType = mapType;
             M2C_PetMeleeGetMyCards response = (M2C_PetMeleeGetMyCards)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }

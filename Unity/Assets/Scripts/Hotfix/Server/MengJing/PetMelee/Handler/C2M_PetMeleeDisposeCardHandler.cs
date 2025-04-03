@@ -15,7 +15,7 @@
                         return;
                     }
 
-                    response.Error = petMeleeDungeonComponent.DisposeCard(request.CarId);
+                    response.Error = petMeleeDungeonComponent.DisposeCard(request.CarId, unit);
                     break;
                 case MapTypeEnum.PetMatch:
                     
