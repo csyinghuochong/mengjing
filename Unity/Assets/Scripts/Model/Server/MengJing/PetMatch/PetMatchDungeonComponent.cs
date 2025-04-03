@@ -7,6 +7,8 @@ namespace ET.Server
     {
         public long Timer;
         public long TimerNum;
+
+        public bool GameOver;
         public bool SendReward { get; set; }
     }
     

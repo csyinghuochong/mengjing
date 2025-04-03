@@ -19,5 +19,25 @@ namespace ET.Server
         {
 
         }
+        
+        public static void OnKillEvent(this PetMatchDungeonComponent self, Unit defend)
+        {
+            if (self.GameOver)
+            {
+                return;
+            }
+
+            // if (defend.Type == UnitType.Monster)
+            // {
+            //     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(defend.ConfigId);
+            //     if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+            //     {
+            //         self.Scene().RemoveComponent<YeWaiRefreshComponent>();
+            //
+            //         int battleCamp = defend.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
+            //         self.SetGameOver(battleCamp == 1 ? CombatResultEnum.Fail : CombatResultEnum.Win);
+            //     }
+            // }
+        }
     }
 }
