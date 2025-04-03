@@ -482,6 +482,12 @@ namespace ET.Client
             }
             else
             {
+                if (monsterConfig.QiYuPetId == 0)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
+                    return;
+                }
+
                 self.OnBuildEnter().Coroutine();
             }
         }
