@@ -22,11 +22,11 @@ namespace ET.Client
 
             self.E_BtnItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             
-            self.E_Btn_ClickButton.AddListener(self.OnBtn_ClickButton);
+            self.EG_ClickRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_ClickButton);
 
             self.E_ButtonSkillSetButton.AddListenerAsync(self.OnButtonSkillSetButton);
 
-            self.E_Btn_YinYingButton.AddListener(self.OnBtn_YinYingButton);
+            self.EG_YinYingRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_YinYingButton);
 
             self.EG_RandomHoreseRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_RandomHorese);
 
@@ -80,10 +80,10 @@ namespace ET.Client
 
             self.E_SliderMusicSlider.onValueChanged.AddListener((float value) => { self.OnSliderMusicChange(value); });
 
-            self.E_Btn_FpsButton.AddListener(self.OnBtn_FpsButton);
-
-            self.E_Image_fpsImage.gameObject.SetActive(self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_FpsRectTransform
-                    .gameObject.activeSelf);
+            self.EG_FpsRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_FpsButton);
+            bool oldValue = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_FpsRectTransform.gameObject.activeSelf;
+            self.EG_FpsRectTransform.Find("On").gameObject.SetActive(oldValue);
+            self.EG_FpsRectTransform.Find("Off").gameObject.SetActive(!oldValue);
 
             self.E_InputFieldCNameInputField.onValueChanged.AddListener((text) => { self.CheckSensitiveWords(); });
 
@@ -104,7 +104,7 @@ namespace ET.Client
 
             self.E_GameMemoryButton.AddListener(self.OnGameMemoryButton);
 
-            self.E_Btn_FixedButton.AddListener(self.OnBtn_FixedButton);
+            self.EG_FixedRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_FixedButton);
 
             self.E_ScreenToggle0Toggle.AddListener(self.OnScreenToggle0_Ex);
             self.E_ScreenToggle1Toggle.AddListener(self.OnScreenToggle1_Ex);
@@ -175,7 +175,8 @@ namespace ET.Client
         public static void OnBtn_ClickButton(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click);
-            self.E_Image_ClickImage.gameObject.SetActive(value == "0");
+            self.EG_ClickRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_ClickRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.Click, value == "0" ? "1" : "0");
             self.Root().CurrentScene().GetComponent<OperaComponent>().UpdateClickMode();
         }
@@ -183,7 +184,8 @@ namespace ET.Client
         public static void OnBtn_YinYingButton(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
-            self.E_Image_YinYingImage.gameObject.SetActive(value == "0");
+            self.EG_YinYingRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_YinYingRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.Shadow, value == "0" ? "1" : "0");
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().UpdateShadow(value == "0" ? "1" : "0");
         }
@@ -247,14 +249,16 @@ namespace ET.Client
         public static void OnBtn_ZhuBo(this ES_SettingGame self)
         {
             int value = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo);
-            self.EG_ZhuBoSetRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
+            self.EG_ZhuBoSetRectTransform.Find("On").gameObject.SetActive(value == 0);
+            self.EG_ZhuBoSetRectTransform.Find("Off").gameObject.SetActive(value != 0);
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, value == 0 ? 1 : 0);
         }
 
         public static void OnBtn_RandomHorese(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.RandomHorese);
-            self.EG_RandomHoreseRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
+            self.EG_RandomHoreseRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_RandomHoreseRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.RandomHorese, value == "0" ? "1" : "0");
         }
 
@@ -271,8 +275,9 @@ namespace ET.Client
             self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.4f);
             self.EG_CameraHorizontalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
             self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(0.5f);
-
-            self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(false);
+            
+            self.EG_RotaAngleSetRectTransform.Find("On").gameObject.SetActive(false);
+            self.EG_RotaAngleSetRectTransform.Find("Off").gameObject.SetActive(true);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(false);
 
             self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
@@ -329,7 +334,8 @@ namespace ET.Client
         public static void OnBtn_RotaAngle(this ES_SettingGame self)
         {
             int value = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle);
-            self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(value == 0);
+            self.EG_RotaAngleSetRectTransform.Find("On").gameObject.SetActive(value == 0);
+            self.EG_RotaAngleSetRectTransform.Find("Off").gameObject.SetActive(value != 0);
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, value == 0 ? 1 : 0);
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(value == 0);
@@ -387,14 +393,16 @@ namespace ET.Client
         public static void OnBtn_FirstUnionName(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FirstUnionName);
-            self.EG_FirstUnionNameRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
+            self.EG_FirstUnionNameRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_FirstUnionNameRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.FirstUnionName, value == "0" ? "1" : "0");
         }
 
         public static void OnSkillAttackPlayerFirst(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst);
-            self.EG_SkillAttackPlayerFirstRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
+            self.EG_SkillAttackPlayerFirstRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_SkillAttackPlayerFirstRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.SkillAttackPlayerFirst, value == "0" ? "1" : "0");
             self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst = int.Parse(value == "0" ? "1" : "0");
         }
@@ -407,14 +415,16 @@ namespace ET.Client
         public static void OnBtn_HideLeftBottom(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
-            self.EG_HideLeftBottomRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
+            self.EG_HideLeftBottomRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_HideLeftBottomRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.HideLeftBottom, value == "0" ? "1" : "0");
         }
 
         public static void OnBtn_AutoAttack(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack);
-            self.EG_AutoAttackRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
+            self.EG_AutoAttackRectTransform.Find("On").gameObject.SetActive(value == "0");
+            self.EG_AutoAttackRectTransform.Find("Off").gameObject.SetActive(value != "0");
             self.SaveSettings(GameSettingEnum.AutoAttack, value == "0" ? "1" : "0");
 
             AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
@@ -425,7 +435,9 @@ namespace ET.Client
         {
             self.E_Image_yinyuImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Music) == "1");
             self.E_Image_SoundImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Sound) == "1");
-            self.E_Image_YinYingImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow) == "1");
+            
+            self.EG_YinYingRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow) == "1");
+            self.EG_YinYingRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow) != "1");
 
             string music = PlayerPrefsHelp.GetString(PlayerPrefsHelp.MusicVolume);
             float musicvalue = string.IsNullOrEmpty(music) ? 1f : float.Parse(music);
@@ -437,21 +449,30 @@ namespace ET.Client
 
             self.E_ScreenToggle0Toggle.isOn = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FenBianlLv) == "1";
             self.E_ScreenToggle1Toggle.isOn = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FenBianlLv) == "2";
-            self.E_Image_ClickImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click) == "1");
-
-            self.EG_RandomHoreseRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.RandomHorese) == "1");
-            self.EG_FirstUnionNameRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FirstUnionName) == "1");
-            self.EG_SkillAttackPlayerFirstRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst) == "1");
-            self.EG_AutoAttackRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack) == "1");
-            self.EG_HideLeftBottomRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom) == "1");
-            self.EG_NoShowOtherRectTransform.Find("Image_Click").gameObject
-                    .SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther) == "1");
-            self.EG_RotaAngleSetRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
+            
+            self.EG_ClickRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click) == "1");
+            self.EG_ClickRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click) != "1");
+            
+            self.EG_RandomHoreseRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.RandomHorese) == "1");
+            self.EG_RandomHoreseRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.RandomHorese) != "1");
+            
+            self.EG_FirstUnionNameRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FirstUnionName) == "1");
+            self.EG_FirstUnionNameRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.FirstUnionName) != "1");
+            
+            self.EG_SkillAttackPlayerFirstRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst) == "1");
+            self.EG_SkillAttackPlayerFirstRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst) != "1");
+            
+            self.EG_AutoAttackRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack) == "1");
+            self.EG_AutoAttackRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack) != "1");
+            
+            self.EG_HideLeftBottomRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom) == "1");
+            self.EG_HideLeftBottomRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom) != "1");
+            
+            self.EG_NoShowOtherRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther) == "1");
+            self.EG_NoShowOtherRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther) != "1");
+            
+            self.EG_RotaAngleSetRectTransform.Find("On").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
+            self.EG_RotaAngleSetRectTransform.Find("Off").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) != 1);
 
             float LenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
             self.EG_LenDepthSetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(LenDepth <= 0 ? 0.4f : (LenDepth - 0.1f) / 2);
@@ -459,8 +480,9 @@ namespace ET.Client
                 (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraHorizontalOffset) + 4) / 8);
             self.EG_CameraVerticalOffsetRectTransform.GetComponentInChildren<Slider>().SetValueWithoutNotify(
                 (PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.CameraVerticalOffset) + 4) / 8);
-
-            self.EG_ZhuBoSetRectTransform.Find("Image_Click").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) == 1);
+            
+            self.EG_ZhuBoSetRectTransform.Find("On").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) == 1);
+            self.EG_ZhuBoSetRectTransform.Find("Off").gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.ZhuBo) != 1);
 
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet);
             string[] setvalues = value.Split('@');
@@ -516,7 +538,9 @@ namespace ET.Client
 
         public static void OnBtn_FpsButton(this ES_SettingGame self)
         {
-            self.E_Image_fpsImage.gameObject.SetActive(!self.E_Image_fpsImage.gameObject.activeSelf);
+            bool oldValue = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_FpsRectTransform.gameObject.activeSelf;
+            self.EG_FpsRectTransform.Find("On").gameObject.SetActive(!oldValue);
+            self.EG_FpsRectTransform.Find("Off").gameObject.SetActive(oldValue);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().ShowPing();
         }
 
@@ -575,14 +599,15 @@ namespace ET.Client
 
         public static void OnBtn_FixedButton(this ES_SettingGame self)
         {
-            string value = self.E_Image_FixedImage.gameObject.activeSelf ? "1" : "0";
+            string value = self.EG_FixedRectTransform.Find("On").gameObject.gameObject.activeSelf ? "1" : "0";
             self.SaveSettings(GameSettingEnum.YanGan, value);
             self.UpdateYaoGan();
         }
 
         public static void UpdateYaoGan(this ES_SettingGame self)
         {
-            self.E_Image_FixedImage.gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.YanGan) == "0");
+            self.EG_FixedRectTransform.Find("On").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.YanGan) == "0");
+            self.EG_FixedRectTransform.Find("Off").gameObject.SetActive(self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.YanGan) != "0");
         }
 
         public static void OnHighFps(this ES_SettingGame self)
@@ -678,20 +703,23 @@ namespace ET.Client
         public static void UpdateHighFps(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
-            self.EG_HighFpsRectTransform.Find("Image_Click").gameObject.SetActive(oldValue == "1");
+            self.EG_HighFpsRectTransform.Find("On").gameObject.SetActive(oldValue == "1");
+            self.EG_HighFpsRectTransform.Find("Off").gameObject.SetActive(oldValue != "1");
             CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
         }
 
         public static void UpdateSmooth(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Smooth);
-            self.EG_SmoothRectTransform.Find("Image_Click").gameObject.SetActive(oldValue == "1");
+            self.EG_SmoothRectTransform.Find("On").gameObject.SetActive(oldValue == "1");
+            self.EG_SmoothRectTransform.Find("Off").gameObject.SetActive(oldValue != "1");
         }
 
         public static void UpdateNoShowOther(this ES_SettingGame self)
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther);
-            self.EG_NoShowOtherRectTransform.Find("Image_Click").gameObject.SetActive(oldValue == "1");
+            self.EG_NoShowOtherRectTransform.Find("On").gameObject.SetActive(oldValue == "1");
+            self.EG_NoShowOtherRectTransform.Find("Off").gameObject.SetActive(oldValue != "1");
         }
 
         public static void CheckSensitiveWords(this ES_SettingGame self)
