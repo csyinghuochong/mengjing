@@ -757,7 +757,6 @@ namespace ET.Client
                     {
                         FunctionEffect.PlaySelfEffect(unit, 200004);
                     }
-
                     break;
                 case UnitType.Npc:
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);

@@ -83,6 +83,9 @@ namespace ET.Client
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement, sceneTypeEnum).Coroutine();
                     break;
+                case SceneTypeEnum.PetMatch:
+                    Log.Error("宠物挑战赛结算没处理！！");
+                    break;
                 case SceneTypeEnum.PetMelee:
                     star = 0;
                     for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)

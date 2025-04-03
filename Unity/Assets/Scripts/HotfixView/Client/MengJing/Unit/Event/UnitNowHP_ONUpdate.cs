@@ -86,7 +86,7 @@ namespace ET.Client
             }
 
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch)
             {
                 showfloattext = true;   
             }
@@ -113,7 +113,7 @@ namespace ET.Client
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            if (mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitHpUpdate(unitDefend);
             }

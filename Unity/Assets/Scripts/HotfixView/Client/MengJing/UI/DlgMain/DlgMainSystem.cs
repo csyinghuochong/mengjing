@@ -1983,6 +1983,7 @@ namespace ET.Client
 
                     break;
                 case SceneTypeEnum.PetMelee:
+                case SceneTypeEnum.PetMatch:
                     break;
                 case SceneTypeEnum.Union:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);

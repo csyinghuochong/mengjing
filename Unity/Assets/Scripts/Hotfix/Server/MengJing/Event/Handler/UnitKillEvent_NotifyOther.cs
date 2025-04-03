@@ -71,7 +71,8 @@ namespace ET.Server
                 if (sceneTypeEnum != (int)SceneTypeEnum.PetTianTi
                     && sceneTypeEnum != (int)SceneTypeEnum.PetDungeon
                     && sceneTypeEnum != (int)SceneTypeEnum.PetMing
-                    && sceneTypeEnum != SceneTypeEnum.PetMelee)
+                    && sceneTypeEnum != SceneTypeEnum.PetMelee
+                    && sceneTypeEnum != SceneTypeEnum.PetMatch)
                 {
                     long manster = numericComponent.GetAsLong(NumericType.MasterId);
                     Unit unit_manster = defendUnit.GetParent<UnitComponent>().Get(manster);
@@ -292,6 +293,9 @@ namespace ET.Server
                     break;
                 case SceneTypeEnum.PetMelee:
                     domainScene.GetComponent<PetMeleeDungeonComponent>().OnKillEvent(defendUnit);
+                    break;
+                case SceneTypeEnum.PetMatch:
+                    domainScene.GetComponent<PetMatchDungeonComponent>().OnKillEvent(defendUnit);
                     break;
                 default:
                     break;

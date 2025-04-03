@@ -93,6 +93,35 @@ namespace ET.Server
                             oldscene.Dispose();
                         }
                         break;
+                    case SceneTypeEnum.PetMatch:
+                        ActorId petmathServerId = UnitCacheHelper.GetPetMatchServerId(unit.Zone());
+                        M2PetMatch_EnterMapRequest matchEnterMapRequest = M2PetMatch_EnterMapRequest.Create();
+                        matchEnterMapRequest.FubenId = long.Parse(request.paramInfo);
+                        PetMatch2M_EnterMapResponse enterResponse = (PetMatch2M_EnterMapResponse)await unit.Root().GetComponent<MessageSender>().Call(petmathServerId, matchEnterMapRequest);
+                        if (enterResponse.Error != ErrorCode.ERR_Success)
+                        {
+                            return enterResponse.Error;
+                        }
+                        if (enterResponse.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        if (!FunctionHelp.IsInTime(1074))
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
+                        
+                        oldscene = unit.Scene();
+                        MapComponent  mapComponent = oldscene.GetComponent<MapComponent>();
+                        sceneTypeEnum = mapComponent.SceneType;
+                        BeforeTransfer(unit);
+                        await Transfer(unit, enterResponse.FubenActorId, SceneTypeEnum.PetMatch, request.SceneId, 0, "0");
+                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+                        {
+                            NoticeFubenCenter(oldscene, 2).Coroutine();
+                            oldscene.Dispose();
+                        }
+                        break;
                     case (int)SceneTypeEnum.CellDungeon:
                         if (request.SceneId > 0)
                         {
@@ -158,7 +187,7 @@ namespace ET.Server
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                         fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "TrialDungeon" + fubenid.ToString());
                         fubnescene.AddComponent<TrialDungeonComponent>();
-                        MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+                        mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.TrialDungeon, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
                         BeforeTransfer(unit);
@@ -397,35 +426,6 @@ namespace ET.Server
                         sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                         BeforeTransfer(unit);
                         await Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, sceneConfig.MapType, request.SceneId, 0, "0");
-                        break;
-                    case SceneTypeEnum.PetMatch:
-                        ActorId petmathServerId = UnitCacheHelper.GetPetMatchServerId(unit.Zone());
-                        M2PetMatch_EnterMapRequest matchEnterMapRequest = M2PetMatch_EnterMapRequest.Create();
-                        matchEnterMapRequest.FubenId = long.Parse(request.paramInfo);
-                        PetMatch2M_EnterMapResponse enterResponse = (PetMatch2M_EnterMapResponse)await unit.Root().GetComponent<MessageSender>().Call(petmathServerId, matchEnterMapRequest);
-                        if (enterResponse.Error != ErrorCode.ERR_Success)
-                        {
-                            return enterResponse.Error;
-                        }
-                        if (enterResponse.FubenInstanceId == 0)
-                        {
-                            return ErrorCode.ERR_ModifyData;
-                        }
-                        if (!FunctionHelp.IsInTime(1074))
-                        {
-                            return ErrorCode.ERR_AlreadyFinish;
-                        }
-                        
-                        oldscene = unit.Scene();
-                        mapComponent = oldscene.GetComponent<MapComponent>();
-                        sceneTypeEnum = mapComponent.SceneType;
-                        BeforeTransfer(unit);
-                        await Transfer(unit, enterResponse.FubenActorId, SceneTypeEnum.PetMatch, request.SceneId, 0, "0");
-                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
-                        {
-                            NoticeFubenCenter(oldscene, 2).Coroutine();
-                            oldscene.Dispose();
-                        }
                         break;
                     case SceneTypeEnum.Solo:
                         ActorId soloServerId = UnitCacheHelper.GetSoloServerId(unit.Zone());
@@ -844,6 +844,7 @@ namespace ET.Server
                 || sceneType == SceneTypeEnum.PetTianTi
                 || sceneType == SceneTypeEnum.PetMing
                 || sceneType == SceneTypeEnum.PetMelee
+                || sceneType == SceneTypeEnum.PetMatch
                 || sceneType == SceneTypeEnum.RunRace
                 || sceneType == SceneTypeEnum.Demon)
             {

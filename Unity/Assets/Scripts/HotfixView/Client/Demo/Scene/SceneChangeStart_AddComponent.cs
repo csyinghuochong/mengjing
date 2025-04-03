@@ -81,6 +81,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonMain);
                         break;
                     case SceneTypeEnum.PetMelee:
+                    case SceneTypeEnum.PetMatch:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
                         break;
                     default:

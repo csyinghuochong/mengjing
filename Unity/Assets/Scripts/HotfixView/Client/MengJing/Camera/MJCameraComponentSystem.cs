@@ -364,6 +364,7 @@ namespace ET.Client
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
                 case SceneTypeEnum.PetMelee:
+                case SceneTypeEnum.PetMatch:
                     self.CameraMoveType = CameraMoveType.PetFuben;
                     self.MainCamera.transform.position = ConfigData.PetMeleeFuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.PetMeleeFuBenCameraRotation);

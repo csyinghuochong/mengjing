@@ -81,8 +81,9 @@ namespace ET.Client
                 case SceneTypeEnum.PetMing:
                 case SceneTypeEnum.Battle:
                 case SceneTypeEnum.Arena: 
-                case SceneTypeEnum.PetMelee:
                 case SceneTypeEnum.SealTower:
+                case SceneTypeEnum.PetMelee:
+                case SceneTypeEnum.PetMatch:
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
@@ -373,6 +374,7 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
+                case SceneTypeEnum.PetMatch:
                 case SceneTypeEnum.PetMelee:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.zero;
@@ -443,7 +445,9 @@ namespace ET.Client
                 camera.GetComponent<Camera>().fieldOfView = 50;
 
                 //播放传送特效
-                if (sceneType != SceneTypeEnum.MainCityScene && sceneType != SceneTypeEnum.PetMelee)
+                if (sceneType != SceneTypeEnum.MainCityScene
+                    && sceneType != SceneTypeEnum.PetMelee
+                    && sceneType != SceneTypeEnum.PetMatch)
                 {
                     FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 }

@@ -15,7 +15,8 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.PetMelee)
+            if (mapComponent.SceneType != SceneTypeEnum.PetMelee
+                && mapComponent.SceneType != SceneTypeEnum.PetMatch)
             {
                 return;
             }
@@ -219,7 +220,7 @@ namespace ET.Client
             self.UIPlayerHpText.gameObject.SetActive(true);
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             Vector2 offset = Vector2.zero;
-            offset = mapComponent.SceneType == SceneTypeEnum.PetMelee ? new Vector2(0, 70f) : Vector2.zero;
+            offset =(  mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch) ? new Vector2(0, 70f) : Vector2.zero;
             
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             HeadBarUI_1.enabled = !unit.MainHero;
