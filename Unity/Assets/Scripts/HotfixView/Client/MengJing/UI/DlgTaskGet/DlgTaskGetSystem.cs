@@ -381,7 +381,7 @@ namespace ET.Client
         {
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             int sceneType = sceneConfig.MapType;
-            if (sceneType == SceneTypeEnum.Arena)
+            if (sceneType == MapTypeEnum.Arena)
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ArenaNumber) > 0)
@@ -662,7 +662,7 @@ namespace ET.Client
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             int chapterid = DungeonConfigCategory.Instance.DungeonToChapter[sceneId];
             int mysterDungeonid = DungeonSectionConfigCategory.Instance.GetMysteryDungeon(chapterid);
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 

@@ -378,7 +378,7 @@ namespace ET.Server
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
              int resurrection = (int)monsterConfig.ReviveTime;
              MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-             if (CommonHelp.IsSeasonBoss(unit.ConfigId ) && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+             if (CommonHelp.IsSeasonBoss(unit.ConfigId ) && mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                  UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
@@ -393,9 +393,9 @@ namespace ET.Server
           
              if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
              {
-                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon
-                  || mapComponent.SceneType == (int)SceneTypeEnum.MiJing
-                  || mapComponent.SceneType == (int)SceneTypeEnum.RunRace)
+                 if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon
+                  || mapComponent.SceneType == (int)MapTypeEnum.MiJing
+                  || mapComponent.SceneType == (int)MapTypeEnum.RunRace)
                  {
                      unit.Scene().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
                  }
@@ -404,7 +404,7 @@ namespace ET.Server
              else
              {
                  long resurrectionTime = 0;
-                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+                 if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
                  {
                      LocalDungeonComponent localDungeon = unit.Scene().GetComponent<LocalDungeonComponent>();
                      UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
@@ -425,7 +425,7 @@ namespace ET.Server
                  }
                  else
                  {
-                     if (mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
+                     if (mapComponent.SceneType == (int)MapTypeEnum.MiJing)
                      {
                          resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
                          unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
@@ -706,14 +706,14 @@ namespace ET.Server
 
              float attributeAdd = 1f;
 
-             if (sceneType == SceneTypeEnum.CellDungeon || sceneType == SceneTypeEnum.LocalDungeon)
+             if (sceneType == MapTypeEnum.CellDungeon || sceneType == MapTypeEnum.LocalDungeon)
              {
                  switch (sceneType)
                  {
-                     case SceneTypeEnum.CellDungeon:
+                     case MapTypeEnum.CellDungeon:
                          fubenDifficulty = nowUnit.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                          break;
-                     case SceneTypeEnum.LocalDungeon:
+                     case MapTypeEnum.LocalDungeon:
                          if (monsterConfig.MonsterType == MonsterTypeEnum.Boss)
                          {
                              LocalDungeonComponent localDungeonComponent = nowUnit.Scene().GetComponent<LocalDungeonComponent>();
@@ -743,7 +743,7 @@ namespace ET.Server
                      }
                  }
              }
-             if (sceneType == SceneTypeEnum.TeamDungeon)
+             if (sceneType == MapTypeEnum.TeamDungeon)
              {
                  //副本的怪物难度提升（类似不难度的个人副本 给个配置即可）
                  int realplayerNumber = nowUnit.Scene().GetComponent<TeamDungeonComponent>().GetRealPlayerNumber();

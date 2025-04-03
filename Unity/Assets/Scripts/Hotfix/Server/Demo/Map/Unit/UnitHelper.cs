@@ -60,17 +60,17 @@ namespace ET.Server
         public static int GetCurrentTowerId(this Unit self, int sceneType)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
-            if (sceneType == SceneTypeEnum.TrialDungeon)
+            if (sceneType == MapTypeEnum.TrialDungeon)
             {
                 return numericComponent.GetAsInt(NumericType.TrialDungeonId);
             }
 
-            if (sceneType == SceneTypeEnum.RandomTower)
+            if (sceneType == MapTypeEnum.RandomTower)
             {
                 return numericComponent.GetAsInt(NumericType.RandomTowerId);
             }
 
-            if (sceneType == SceneTypeEnum.Tower)
+            if (sceneType == MapTypeEnum.Tower)
             {
                 return numericComponent.GetAsInt(NumericType.TowerId);
             }
@@ -386,8 +386,8 @@ namespace ET.Server
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
 
-            if (mapComponent.SceneType != SceneTypeEnum.Battle 
-                && mapComponent.SceneType != SceneTypeEnum.PetMelee)
+            if (mapComponent.SceneType != MapTypeEnum.Battle 
+                && mapComponent.SceneType != MapTypeEnum.PetMelee)
             {
                 if( self.IsYeWaiMonster()  && defend.IsYeWaiMonster())
                 {
@@ -395,7 +395,7 @@ namespace ET.Server
                 }
             }
             
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+            if (mapComponent.SceneType == MapTypeEnum.PetMelee)
             {
                 if (defend.Type == UnitType.Player)
                 {
@@ -404,9 +404,9 @@ namespace ET.Server
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
-                || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
-                || mapComponent.SceneType == (int)SceneTypeEnum.PetMing)
+            if (mapComponent.SceneType == (int)MapTypeEnum.PetDungeon
+                || mapComponent.SceneType == (int)MapTypeEnum.PetTianTi
+                || mapComponent.SceneType == (int)MapTypeEnum.PetMing)
             {
                 if (self.Type == UnitType.Player)
                 {
@@ -418,8 +418,8 @@ namespace ET.Server
                 }
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.BaoZang
-                || mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
+            if (mapComponent.SceneType == (int)MapTypeEnum.BaoZang
+                || mapComponent.SceneType == (int)MapTypeEnum.MiJing)
             {
                 //0不允许pvp
                 if (SceneConfigCategory.Instance.Get(mapComponent.SceneId).IfPVP == 0)
@@ -451,7 +451,7 @@ namespace ET.Server
                 return !self.IsMasterOrPet(defend, petComponent);
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.UnionRace)
+            if (mapComponent.SceneType == MapTypeEnum.UnionRace)
             {
                 if (self.IsSameUnion(defend))
                 {
@@ -466,27 +466,27 @@ namespace ET.Server
                 return true;
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.Union)
+            if (mapComponent.SceneType == MapTypeEnum.Union)
             {
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.Arena
-                || mapComponent.SceneType == (int)SceneTypeEnum.Solo
-                || mapComponent.SceneType == SceneTypeEnum.RunRace
-                || mapComponent.SceneType == SceneTypeEnum.OneChallenge)
+            if (mapComponent.SceneType == (int)MapTypeEnum.Arena
+                || mapComponent.SceneType == (int)MapTypeEnum.Solo
+                || mapComponent.SceneType == MapTypeEnum.RunRace
+                || mapComponent.SceneType == MapTypeEnum.OneChallenge)
             {
                 //允许pk地图
                 return !self.IsMasterOrPet(defend, petComponent);
             }
             
-            if (mapComponent.SceneType == SceneTypeEnum.Battle
-                || mapComponent.SceneType == SceneTypeEnum.Demon)
+            if (mapComponent.SceneType == MapTypeEnum.Battle
+                || mapComponent.SceneType == MapTypeEnum.Demon)
             {
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.JiaYuan)
+            if (mapComponent.SceneType == (int)MapTypeEnum.JiaYuan)
             {
                 return false;
             }

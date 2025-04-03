@@ -213,7 +213,7 @@ namespace ET.Server
             TeamDungeonComponent teamDungeonComponent = fubnescene.AddComponent<TeamDungeonComponent>();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
-            mapComponent.SetMapInfo((int)SceneTypeEnum.TeamDungeon, teamInfo.SceneId, 0);
+            mapComponent.SetMapInfo((int)MapTypeEnum.TeamDungeon, teamInfo.SceneId, 0);
             mapComponent.NavMeshId = sceneConfig.MapID;
             teamDungeonComponent.EnterTime = TimeHelper.ServerNow();
             teamDungeonComponent.FubenType = teamInfo.FubenType;

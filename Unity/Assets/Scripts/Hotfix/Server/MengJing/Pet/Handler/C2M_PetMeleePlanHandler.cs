@@ -7,8 +7,8 @@
         {
             switch (request.SceneType)
             {
-                case SceneTypeEnum.PetMelee:
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     if (request.PetMeleePlan < 0 || request.PetMeleePlan > 2)
                     {
                         response.Error = ErrorCode.ERR_ModifyData;

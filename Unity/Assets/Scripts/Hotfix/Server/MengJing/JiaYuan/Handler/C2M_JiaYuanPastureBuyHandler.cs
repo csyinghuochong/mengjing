@@ -15,7 +15,7 @@ namespace ET.Server
                 return;
             }
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.JiaYuan)
+            if (mapComponent.SceneType != MapTypeEnum.JiaYuan)
             {
                 response.Error = ErrorCode.ERR_NetWorkError;
                 return;

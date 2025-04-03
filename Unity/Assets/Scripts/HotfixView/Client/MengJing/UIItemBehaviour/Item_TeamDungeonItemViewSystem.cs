@@ -63,7 +63,7 @@ namespace ET.Client
 
             switch (sceneType)
             {
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
                     using (zstring.Block())
                     {
@@ -92,7 +92,7 @@ namespace ET.Client
                         self.E_Text_TuijianText.text = zstring.Format("推荐等级： {0}-{1}级", teamDungeonConfig.TuiJianLv[0], teamDungeonConfig.TuiJianLv[1]);
                     }
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(teamInfo.SceneId);
                     using (zstring.Block())
                     {

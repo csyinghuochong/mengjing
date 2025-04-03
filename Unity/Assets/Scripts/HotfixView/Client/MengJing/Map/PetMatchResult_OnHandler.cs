@@ -13,7 +13,7 @@ namespace ET.Client
             PopupTipHelp.OpenPopupTip(scene, "", LanguageComponent.Instance.LoadLocalization(tipStr),
                 () =>
                 {
-                    EnterMapHelper.RequestTransfer(scene, SceneTypeEnum.PetMatch, 2900001, 0, args.m2C_SoloMatch.FubenId.ToString()).Coroutine();
+                    EnterMapHelper.RequestTransfer(scene, MapTypeEnum.PetMatch, 2900001, 0, args.m2C_SoloMatch.FubenId.ToString()).Coroutine();
                     removeStatus = true;
                 },
                 () =>

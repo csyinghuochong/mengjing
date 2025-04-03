@@ -63,8 +63,8 @@ namespace ET.Client
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (preare == 1
-                && mapComponent.SceneType != SceneTypeEnum.MainCityScene
-                && mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
+                && mapComponent.SceneType != MapTypeEnum.MainCityScene
+                && mapComponent.SceneType != MapTypeEnum.LocalDungeon)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请先退出当前副本！");
                 return;
@@ -74,7 +74,7 @@ namespace ET.Client
 
             switch (self.TeamInfo.SceneType)
             {
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     errorCode =  TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(self.Root()), self.TeamInfo);
                     if (preare == 1 && errorCode != ErrorCode.ERR_Success)
                     {
@@ -82,7 +82,7 @@ namespace ET.Client
                         return;
                     }
                     break; 
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     break;
                 default:
                     break;

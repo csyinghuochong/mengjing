@@ -44,7 +44,7 @@ namespace ET.Client
             self.View.E_PetFubenFingerImage.color = new(255, 255, 255, 0);
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            self.View.E_PetFubenFingerImage.gameObject.SetActive(mapComponent.SceneType == SceneTypeEnum.PetDungeon);
+            self.View.E_PetFubenFingerImage.gameObject.SetActive(mapComponent.SceneType == MapTypeEnum.PetDungeon);
 
             self.PetBattleList.Clear();
             self.View.EG_UIMonsterHpRectTransform.gameObject.SetActive(false);

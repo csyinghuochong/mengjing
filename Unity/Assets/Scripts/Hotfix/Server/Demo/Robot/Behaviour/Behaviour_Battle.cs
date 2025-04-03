@@ -28,7 +28,7 @@ namespace ET
                 int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);
                 
                 //Console.WriteLine($"GetBattFubenId   {root.GetComponent<UserInfoComponentC>().UserInfo.Lv}   {sceneId}");
-                int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
+                int errorCode = await EnterMapHelper.RequestTransfer(root, MapTypeEnum.Battle, sceneId);
                 if (errorCode != 0)
                 {
                     Console.WriteLine($"Behaviour_Battle: errorCode {errorCode}");

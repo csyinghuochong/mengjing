@@ -28,10 +28,10 @@ namespace ET.Server
             {
                 switch (request.SceneType)
                 {
-                    case SceneTypeEnum.TeamDungeon:
+                    case MapTypeEnum.TeamDungeon:
                         teamSceneComponent.CreateTeamDungeon(teamInfo);
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         teamSceneComponent.CreateDragonDungeon(teamInfo);
                         break;
                     default:

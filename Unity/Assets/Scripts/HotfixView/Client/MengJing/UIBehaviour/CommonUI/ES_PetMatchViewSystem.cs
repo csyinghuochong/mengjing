@@ -96,7 +96,7 @@ namespace ET.Client
 
 			if (petComponentC.PetMeleePlan != index)
 			{
-				int error = await PetNetHelper.RequestPetMeleePlan(self.Root(), SceneTypeEnum.PetMelee, index);
+				int error = await PetNetHelper.RequestPetMeleePlan(self.Root(), MapTypeEnum.PetMelee, index);
 
 				if (error == ErrorCode.ERR_Success)
 				{

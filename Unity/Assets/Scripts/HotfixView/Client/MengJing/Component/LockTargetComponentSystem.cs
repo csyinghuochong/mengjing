@@ -47,7 +47,7 @@ namespace ET.Client
             Unit haveBoss = null;
             Unit main = self.GetMainUnit();
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
             {
                 List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
                 for (int i = 0; i < allUnit.Count; i++)

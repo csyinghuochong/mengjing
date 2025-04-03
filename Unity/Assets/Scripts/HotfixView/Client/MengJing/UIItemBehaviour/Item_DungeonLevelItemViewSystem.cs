@@ -57,7 +57,7 @@ namespace ET.Client
                     }
 
                     errorCode =
-                            await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
+                            await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
                 }
 
                 if (self.Type == 1)
@@ -69,7 +69,7 @@ namespace ET.Client
                     }
 
                     errorCode =
-                            await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId,
+                            await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, self.ChapterId,
                                 self.Root().GetComponent<MapComponent>().FubenDifficulty);
                 }
 

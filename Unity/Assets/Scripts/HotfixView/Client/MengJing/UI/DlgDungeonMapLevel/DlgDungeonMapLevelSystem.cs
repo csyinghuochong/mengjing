@@ -164,7 +164,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
 
             if (errorCode != ErrorCode.ERR_Success)
             {

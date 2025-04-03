@@ -95,7 +95,7 @@ namespace ET
                     return;
                 }
 
-                if (sceneType == SceneTypeEnum.Battle && target.GetComponent<BuffManagerComponentC>().GetBuffByConfigId(90106002).Count > 0)
+                if (sceneType == MapTypeEnum.Battle && target.GetComponent<BuffManagerComponentC>().GetBuffByConfigId(90106002).Count > 0)
                 {
                     aiComponent.TargetID = 0;
                     aiComponent.ChangeBehaviour(BehaviourType.Behaviour_Retreat);

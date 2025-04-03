@@ -130,7 +130,7 @@ namespace ET.Client
         private static void ResetMainUI(this DlgTrialMain self)
         {
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            dlgMain.DlgMainReset(SceneTypeEnum.TrialDungeon);
+            dlgMain.DlgMainReset(MapTypeEnum.TrialDungeon);
         }
 
         public static void OnTimer(this DlgTrialMain self)

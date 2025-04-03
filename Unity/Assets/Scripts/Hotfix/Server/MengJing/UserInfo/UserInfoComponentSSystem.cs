@@ -1247,7 +1247,7 @@ namespace ET.Server
                 main.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ShowLieMonster_1201, 0, 1);
             }
 
-            if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
+            if (sceneType == MapTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
             {
                 self.OnAddChests(sceneId, beKill.ConfigId);
             }
@@ -1262,7 +1262,7 @@ namespace ET.Server
             numericComponent.ApplyChange(NumericType.KillMonsterNumber, 1);
 
             int tiliKillNumber = numericComponent.GetAsInt(NumericType.TiLiKillNumber);
-            if (sceneType == SceneTypeEnum.LocalDungeon && !showlieopen && self.UserInfo.PiLao > 0)
+            if (sceneType == MapTypeEnum.LocalDungeon && !showlieopen && self.UserInfo.PiLao > 0)
             {
                 if (tiliKillNumber >= 4)
                 {
@@ -1287,7 +1287,7 @@ namespace ET.Server
             {
                 MonsterConfig mCof = MonsterConfigCategory.Instance.Get(beKill.ConfigId);
                 float expcoefficient = 1f;
-                if (sceneType == SceneTypeEnum.LocalDungeon && beKill.IsBoss())
+                if (sceneType == MapTypeEnum.LocalDungeon && beKill.IsBoss())
                 {
                     int killNumber = main.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(mCof.Id);
                     int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(sceneId);
@@ -1295,8 +1295,8 @@ namespace ET.Server
                     expcoefficient *= bossDevelopment.ExpAdd;
                 }
 
-                if ((sceneType == SceneTypeEnum.LocalDungeon && self.UserInfo.PiLao > 0)
-                    || sceneType != SceneTypeEnum.LocalDungeon)
+                if ((sceneType == MapTypeEnum.LocalDungeon && self.UserInfo.PiLao > 0)
+                    || sceneType != MapTypeEnum.LocalDungeon)
                 {
                     if (numericComponent.GetAsInt(NumericType.JueXingExp) < 5000)
                     {

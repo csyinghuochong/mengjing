@@ -80,7 +80,7 @@ namespace ET.Server
                 else
                 {
                     MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-                    if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
+                    if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
                     {
                         string[] monsters = SceneConfigHelper.GetLocalDungeonMonsters_2(mapComponent.SceneId).Split('@');
                         int waveId = RandomHelper.RandomNumber(0, monsters.Length);

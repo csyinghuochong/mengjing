@@ -185,7 +185,7 @@ namespace ET.Server
         public static void BroadcastBuff(Unit unit, IMessage message, SkillBuffConfig buffConfig, int sceneType)
         {
             //主城只给自己广播
-            if (unit.Type == UnitType.Player && sceneType == SceneTypeEnum.MainCityScene)
+            if (unit.Type == UnitType.Player && sceneType == MapTypeEnum.MainCityScene)
             {
                 SendToClient(unit, message);
                 return;
@@ -225,7 +225,7 @@ namespace ET.Server
         public static void BroadcastSkill( Unit unit, IMessage message)
         {
             //主城不广播技能
-            if (unit.SceneType != SceneTypeEnum.MainCityScene)
+            if (unit.SceneType != MapTypeEnum.MainCityScene)
             {
                 Broadcast(unit, message);
             }

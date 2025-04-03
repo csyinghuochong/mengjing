@@ -287,7 +287,7 @@ namespace ET.Client
                 return ErrorCode.ERR_AlreadyFinish;
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
+            int errorCode = await EnterMapHelper.RequestTransfer(root, MapTypeEnum.Battle, sceneId);
             return errorCode;
         }
 

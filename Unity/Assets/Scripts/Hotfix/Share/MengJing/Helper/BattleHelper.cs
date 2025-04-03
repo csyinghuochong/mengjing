@@ -51,7 +51,7 @@ namespace ET
             List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < sceneConfigs.Count; i++)
             {
-                if (sceneConfigs[i].MapType != SceneTypeEnum.Battle)
+                if (sceneConfigs[i].MapType != MapTypeEnum.Battle)
                 {
                     continue;
                 }
@@ -68,7 +68,7 @@ namespace ET
             List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < sceneConfigs.Count; i++)
             {
-                if (sceneConfigs[i].MapType != SceneTypeEnum.PetTianTi)
+                if (sceneConfigs[i].MapType != MapTypeEnum.PetTianTi)
                 {
                     continue;
                 }
@@ -82,7 +82,7 @@ namespace ET
             List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < sceneConfigs.Count; i++)
             {
-                if (sceneConfigs[i].MapType != SceneTypeEnum.PetDungeon)
+                if (sceneConfigs[i].MapType != MapTypeEnum.PetDungeon)
                 {
                     continue;
                 }
@@ -114,7 +114,7 @@ namespace ET
             List<SceneConfig> sceneConfigs = SceneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < sceneConfigs.Count; i++)
             {
-                if (sceneConfigs[i].MapType == SceneTypeEnum.TeamDungeon
+                if (sceneConfigs[i].MapType == MapTypeEnum.TeamDungeon
                     && sceneConfigs[i].CreateLv <= lv)
                 {
                     fubenId = sceneConfigs[i].Id;

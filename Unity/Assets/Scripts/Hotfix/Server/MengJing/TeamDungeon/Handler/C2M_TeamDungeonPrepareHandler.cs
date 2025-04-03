@@ -18,7 +18,7 @@ namespace ET.Server
 			UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 			switch (request.TeamInfo.SceneType)
 			{
-				case SceneTypeEnum.TeamDungeon:
+				case MapTypeEnum.TeamDungeon:
 					SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
 					if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneid))
 					{
@@ -26,7 +26,7 @@ namespace ET.Server
 						return;
 					}
 					break;
-				case SceneTypeEnum.DragonDungeon:
+				case MapTypeEnum.DragonDungeon:
 					break;
 				default:
 					break;

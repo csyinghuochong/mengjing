@@ -165,18 +165,18 @@ namespace ET.Client
             string music = "MainCity";
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.LoginScene:
+                case MapTypeEnum.LoginScene:
                     music = "Login";
                     break;
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     music = "MainCity";
                     break;
-                case SceneTypeEnum.TeamDungeon:
-                case SceneTypeEnum.JiaYuan:
+                case MapTypeEnum.TeamDungeon:
+                case MapTypeEnum.JiaYuan:
                     music = SceneConfigCategory.Instance.Get(sceneId).Music;
                     break;
-                case SceneTypeEnum.CellDungeon:
-                case SceneTypeEnum.DragonDungeon:  
+                case MapTypeEnum.CellDungeon:
+                case MapTypeEnum.DragonDungeon:  
                     music = CellGenerateConfigCategory.Instance.Get(sceneId).Music;
                     CellDungeonConfig chapterSonConfig = CellDungeonConfigCategory.Instance.Get(sonsceneid);
                     // string[] monsters = chapterSonConfig.CreateMonster.Split('@');
@@ -198,7 +198,7 @@ namespace ET.Client
                     //     }
                     // }
                     break;
-                case SceneTypeEnum.LocalDungeon:
+                case MapTypeEnum.LocalDungeon:
                     music =DungeonConfigCategory.Instance.Get(sceneId).Music;
                     break;
                 default:

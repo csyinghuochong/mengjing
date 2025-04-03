@@ -17,13 +17,13 @@ namespace ET.Client
             if (args.m2C_OneChallenge.Operatate == 2)
             {
                 MapComponent mapComponent = scene.GetComponent<MapComponent>();
-                if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
+                if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
                 {
                     return;
                 }
 
-                int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.OneChallenge);
-                EnterMapHelper.RequestTransfer(scene, SceneTypeEnum.OneChallenge, sceneId, 0, args.m2C_OneChallenge.OtherId.ToString()).Coroutine();
+                int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.OneChallenge);
+                EnterMapHelper.RequestTransfer(scene, MapTypeEnum.OneChallenge, sceneId, 0, args.m2C_OneChallenge.OtherId.ToString()).Coroutine();
             }
 
             await ETTask.CompletedTask;
@@ -32,7 +32,7 @@ namespace ET.Client
         private async ETTask RunAsync(Scene root, UIOneChallenge args)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
             {
                 return;
             }

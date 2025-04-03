@@ -8,7 +8,7 @@ namespace ET.Client
             Log.Warning("A2C_Disconnect");
 
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType < SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType < MapTypeEnum.MainCityScene)
             {
                 //直接返回登陆
                 EventSystem.Instance.Publish(root, new ReturnLogin());

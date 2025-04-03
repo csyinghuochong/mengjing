@@ -173,7 +173,7 @@ namespace ET.Client
         public static void OnBtn_StartGuajIButton(this ES_SettingGuaJi self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType != MapTypeEnum.LocalDungeon)
             {
                 FlyTipComponent.Instance.ShowFlyTip("当前地图不能挂机!");
                 return;

@@ -60,7 +60,7 @@ namespace ET.Client
             self.StartLoadAssets = false;
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     // if (!ResourcesComponent.Instance.LoadCommonAsset)
                     // {
                     //     ResourcesComponent.Instance.LoadCommonAsset = true;
@@ -70,39 +70,39 @@ namespace ET.Client
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "Back_5";
                     break;
-                case SceneTypeEnum.TeamDungeon:
-                case SceneTypeEnum.BaoZang:
-                case SceneTypeEnum.MiJing:
-                case SceneTypeEnum.Tower:
-                case SceneTypeEnum.RandomTower:
-                case SceneTypeEnum.TrialDungeon:
-                case SceneTypeEnum.PetDungeon:
-                case SceneTypeEnum.PetTianTi:
-                case SceneTypeEnum.PetMing:
-                case SceneTypeEnum.Battle:
-                case SceneTypeEnum.Arena: 
-                case SceneTypeEnum.SealTower:
-                case SceneTypeEnum.PetMelee:
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.TeamDungeon:
+                case MapTypeEnum.BaoZang:
+                case MapTypeEnum.MiJing:
+                case MapTypeEnum.Tower:
+                case MapTypeEnum.RandomTower:
+                case MapTypeEnum.TrialDungeon:
+                case MapTypeEnum.PetDungeon:
+                case MapTypeEnum.PetTianTi:
+                case MapTypeEnum.PetMing:
+                case MapTypeEnum.Battle:
+                case MapTypeEnum.Arena: 
+                case MapTypeEnum.SealTower:
+                case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetSceneDungeonMonsters());
                     break;
-                case SceneTypeEnum.LocalDungeon:
+                case MapTypeEnum.LocalDungeon:
                     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(dungeonConfig.LoadingRes) ? dungeonConfig.LoadingRes : backpngs[index];
                     
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetLocalDungeonMonsters());
                     break;
-                case SceneTypeEnum.CellDungeon:
+                case MapTypeEnum.CellDungeon:
                     CellGenerateConfig cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(cellGenerateConfig.LoadingRes) ? cellGenerateConfig.LoadingRes : backpngs[index];
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetCommonAssets());
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     cellGenerateConfig = CellGenerateConfigCategory.Instance.Get(chapterId);
                     loadResName = !CommonHelp.IfNull(cellGenerateConfig.LoadingRes) ? cellGenerateConfig.LoadingRes : backpngs[index];
                     break;
@@ -119,7 +119,7 @@ namespace ET.Client
             self.AssetPath = path;
 
             self.PassTime = 0f;
-            self.ChapterId = sceneTypeEnum == (int)SceneTypeEnum.CellDungeon ? chapterId : 0;
+            self.ChapterId = sceneTypeEnum == (int)MapTypeEnum.CellDungeon ? chapterId : 0;
         }
 
         public static List<string> GetMonstersModelAndEffect(this DlgLoading self, List<int> monsterIds)
@@ -189,7 +189,7 @@ namespace ET.Client
         public static List<string> GetSceneDungeonMonsters(this DlgLoading self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneType) || mapComponent.SceneType != SceneTypeEnum.TeamDungeon)
+            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneType) || mapComponent.SceneType != MapTypeEnum.TeamDungeon)
             {
                 return new List<string>();
             }
@@ -291,7 +291,7 @@ namespace ET.Client
             dlgMain.AfterEnterScene(sceneTypeEnum);
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.LocalDungeon:
+                case MapTypeEnum.LocalDungeon:
                     int mapid = self.Root().GetComponent<MapComponent>().SceneId;
                     int subType = DungeonConfigCategory.Instance.Get(mapid).MapType;
                     switch (subType)
@@ -306,76 +306,76 @@ namespace ET.Client
                     }
 
                     break;
-                case SceneTypeEnum.CellDungeon:
+                case MapTypeEnum.CellDungeon:
                     dlgMain.OnCellDungeonEnterShow(self.ChapterId);
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.PetDungeon:
-                case SceneTypeEnum.PetTianTi:
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetDungeon:
+                case MapTypeEnum.PetTianTi:
+                case MapTypeEnum.PetMing:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.zero;
                     break;
-                case SceneTypeEnum.Tower:
+                case MapTypeEnum.Tower:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOpen).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.RandomTower:
+                case MapTypeEnum.RandomTower:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RandomOpen).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.Happy:
+                case MapTypeEnum.Happy:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_HappyMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.Battle:
+                case MapTypeEnum.Battle:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_BattleMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.Arena:
+                case MapTypeEnum.Arena:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ArenaMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.TrialDungeon:
+                case MapTypeEnum.TrialDungeon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TrialMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.SealTower:
+                case MapTypeEnum.SealTower:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOfSealMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.JiaYuan:
+                case MapTypeEnum.JiaYuan:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.RunRace:
+                case MapTypeEnum.RunRace:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RunRaceMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.Demon:
+                case MapTypeEnum.Demon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DemonMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.MiJing:
+                case MapTypeEnum.MiJing:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MiJingMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.SeasonTower:
+                case MapTypeEnum.SeasonTower:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                case SceneTypeEnum.PetMatch:
-                case SceneTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
+                case MapTypeEnum.PetMelee:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMeleeMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.zero;
                     break;
@@ -445,9 +445,9 @@ namespace ET.Client
                 camera.GetComponent<Camera>().fieldOfView = 50;
 
                 //播放传送特效
-                if (sceneType != SceneTypeEnum.MainCityScene
-                    && sceneType != SceneTypeEnum.PetMelee
-                    && sceneType != SceneTypeEnum.PetMatch)
+                if (sceneType != MapTypeEnum.MainCityScene
+                    && sceneType != MapTypeEnum.PetMelee
+                    && sceneType != MapTypeEnum.PetMatch)
                 {
                     FunctionEffect.PlaySelfEffect(UnitHelper.GetMyUnitFromClientScene(self.Root()), 200004);
                 }

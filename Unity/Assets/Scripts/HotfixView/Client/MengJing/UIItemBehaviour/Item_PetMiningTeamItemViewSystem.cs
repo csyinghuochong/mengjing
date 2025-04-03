@@ -31,7 +31,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningFormation>().OnInitUI(SceneTypeEnum.PetMing, self.TeamId, null);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningFormation>().OnInitUI(MapTypeEnum.PetMing, self.TeamId, null);
         }
 
         public static void OnInitUI(this Scroll_Item_PetMiningTeamItem self, int position)

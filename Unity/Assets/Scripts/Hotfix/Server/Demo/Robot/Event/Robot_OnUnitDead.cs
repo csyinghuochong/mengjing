@@ -18,10 +18,10 @@ namespace ET.Client
                 
                 switch (mapComponent.SceneType)
                 {
-                    case SceneTypeEnum.Battle:
-                    case SceneTypeEnum.TeamDungeon:
-                    case SceneTypeEnum.BaoZang:
-                    case SceneTypeEnum.MiJing:
+                    case MapTypeEnum.Battle:
+                    case MapTypeEnum.TeamDungeon:
+                    case MapTypeEnum.BaoZang:
+                    case MapTypeEnum.MiJing:
                         await root.GetComponent<TimerComponent>().WaitAsync(10000);
                         if (InstanceId != unit.InstanceId)
                         {
@@ -31,7 +31,7 @@ namespace ET.Client
                         
                         EnterMapHelper.SendReviveRequest(root, false).Coroutine();
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         Console .WriteLine("地下城机器人死亡！");
                         await root.GetComponent<TimerComponent>().WaitAsync(1000);
                         if (InstanceId != unit.InstanceId)
@@ -42,14 +42,14 @@ namespace ET.Client
                                                 
                         EnterMapHelper.SendReviveRequest(root, false).Coroutine();
                         break;
-                    case SceneTypeEnum.Arena:
+                    case MapTypeEnum.Arena:
                         await root.GetComponent<TimerComponent>().WaitAsync(20000);
                         //发消息移除该rbobot
                         break;
-                    case SceneTypeEnum.Demon:
+                    case MapTypeEnum.Demon:
                         Console .WriteLine("恶魔活动机器人死亡！");
                         break;
-                    case SceneTypeEnum.RunRace:
+                    case MapTypeEnum.RunRace:
                         Console .WriteLine("恶魔活动机器人死亡！");
                         break;
                     default:

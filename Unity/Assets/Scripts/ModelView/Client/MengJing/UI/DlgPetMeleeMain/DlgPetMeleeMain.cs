@@ -12,7 +12,8 @@ namespace ET.Client
         public List<EntityRef<ES_PetMeleeCard>> PetMeleeCardPool = new();
 
         public Vector2 PreviousPressPosition;
-
+        
+        
         public bool IsDisposeCard { get; set; }
         public bool IsCancelCard { get; set; }
 

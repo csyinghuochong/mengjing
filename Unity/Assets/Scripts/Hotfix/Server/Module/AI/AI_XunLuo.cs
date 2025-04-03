@@ -61,8 +61,8 @@ namespace ET.Server
             }
             Unit unit = aiComponent.GetParent<Unit>();
             Unit nearest = null;
-            if (aiComponent.SceneType == SceneTypeEnum.PetDungeon
-                || aiComponent.SceneType == SceneTypeEnum.PetTianTi)
+            if (aiComponent.SceneType == MapTypeEnum.PetDungeon
+                || aiComponent.SceneType == MapTypeEnum.PetTianTi)
             {
                 nearest = GetNearestCell(unit);
             }

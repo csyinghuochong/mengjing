@@ -43,7 +43,7 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<JiaYuanComponentC>().MasterId = self.JiaYuanVisit.UnitId;
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.JiaYuan, 2000011, 1, self.JiaYuanVisit.UnitId.ToString()).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.JiaYuan, 2000011, 1, self.JiaYuanVisit.UnitId.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMain);
         }
     }

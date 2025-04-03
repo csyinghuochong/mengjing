@@ -19,7 +19,7 @@
                 response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                 return;
             }
-            int sceneid = BattleHelper.GetSceneIdByType( SceneTypeEnum.PetMing );
+            int sceneid = BattleHelper.GetSceneIdByType( MapTypeEnum.PetMing );
             numericComponent.ApplyChange( NumericType.PetMineReset, 1);
             userInfoComponent.UpdateRoleData( UserDataType.Diamond,  "-350");
             userInfoComponent.AddFubenTimes(sceneid, 5);

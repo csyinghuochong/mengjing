@@ -31,7 +31,7 @@ namespace ET.Server
             if (uplevel)
             {
                 M2F_FubenSceneIdRequest M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
-                M2F_FubenSceneIdRequest.SceneId =  SceneConfigHelper.GetSceneListByType(SceneTypeEnum.MiJing)[0];
+                M2F_FubenSceneIdRequest.SceneId =  SceneConfigHelper.GetSceneListByType(MapTypeEnum.MiJing)[0];
                 F2M_FubenSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await scene.Root().GetComponent<MessageSender>().Call(
                     UnitCacheHelper.GetFubenCenterId(scene.Zone()), M2F_FubenSceneIdRequest);
                 

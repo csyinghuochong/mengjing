@@ -22,8 +22,8 @@ namespace ET.Client
                 additiveHides[i].ToggleShow();
             }
 
-            if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon
-                || sceneTypeEnum == (int)SceneTypeEnum.DragonDungeon)
+            if (sceneTypeEnum == (int)MapTypeEnum.CellDungeon
+                || sceneTypeEnum == (int)MapTypeEnum.DragonDungeon)
             {
                 //显示传送 
                 GameObject ChuanSongPosiSet = GameObject.Find("AdditiveHide/ChuanSongPosiSet");
@@ -85,24 +85,24 @@ namespace ET.Client
             string paramss = "";
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.InitScene:
+                case MapTypeEnum.InitScene:
                     paramss = "Init";
                     break;
-                case SceneTypeEnum.LoginScene:
+                case MapTypeEnum.LoginScene:
                     paramss = "Login";
                     break;
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     PlayerInfoComponent playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     string scenepath = sceneid.ToString();
                     paramss = scenepath;
                     break;
-                case SceneTypeEnum.CellDungeon:
+                case MapTypeEnum.CellDungeon:
                     paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     paramss = CellDungeonConfigCategory.Instance.Get(self.Root().GetComponent<MapComponent>().SonSceneId).MapID.ToString();
                     break;
-                case SceneTypeEnum.LocalDungeon:
+                case MapTypeEnum.LocalDungeon:
                     paramss = DungeonConfigCategory.Instance.Get(sceneid).MapID.ToString();
                     playerInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     break;
@@ -159,7 +159,7 @@ namespace ET.Client
                     self.Root().GetComponent<SceneUnitManagerComponent>().InitMapObject(null, paramss  );
                 }
             }
-            if (sceneTypeEnum != SceneTypeEnum.LoginScene)
+            if (sceneTypeEnum != MapTypeEnum.LoginScene)
             {
                 ConfigData.LoadSceneFinished = true;
             }

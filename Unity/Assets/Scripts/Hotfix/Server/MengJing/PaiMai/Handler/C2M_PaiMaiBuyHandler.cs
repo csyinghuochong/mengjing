@@ -23,7 +23,7 @@ namespace ET.Server
                 List<long> removeIds = new List<long>();    
                 MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
 
-                if (mapComponent.SceneType == SceneTypeEnum.BaoZang)
+                if (mapComponent.SceneType == MapTypeEnum.BaoZang)
                 {
                     List<Unit> monsterid = UnitHelper.GetUnitList(unit.Scene(), UnitType.Monster);
                     for (int i = 0; i < monsterid.Count; i++)

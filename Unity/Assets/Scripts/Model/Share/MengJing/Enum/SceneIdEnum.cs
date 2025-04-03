@@ -39,7 +39,7 @@ namespace ET
     //MAIN_CITY = 3,
     //BATTLE = 4,
     //FUBEN = 5,
-    public static class SceneTypeEnum
+    public static class MapTypeEnum
     {
         public const int NONE = 0;
         public const int InitScene = 1;

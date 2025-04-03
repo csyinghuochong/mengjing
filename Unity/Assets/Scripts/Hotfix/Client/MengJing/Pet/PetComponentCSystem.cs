@@ -163,17 +163,17 @@ namespace ET.Client
         {
             switch (sceneType)
             {
-                case SceneTypeEnum.PetDungeon:
+                case MapTypeEnum.PetDungeon:
                     self.PetFormations = petList;
                     break;
-                case SceneTypeEnum.PetTianTi:
+                case MapTypeEnum.PetTianTi:
                     self.TeamPetList = petList;
                     break;
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetMing:
                     self.PetMingList = petList;
                     self.PetMingPosition = positionList;
                     break;
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     break;
             }
         }
@@ -486,17 +486,17 @@ namespace ET.Client
 
         public static List<long> GetPetFormatList(this PetComponentC self, int sceneType)
         {
-            if (sceneType == SceneTypeEnum.PetDungeon)
+            if (sceneType == MapTypeEnum.PetDungeon)
             {
                 return self.PetFormations;
             }
 
-            if (sceneType == SceneTypeEnum.PetTianTi)
+            if (sceneType == MapTypeEnum.PetTianTi)
             {
                 return self.TeamPetList;
             }
 
-            if (sceneType == SceneTypeEnum.PetMing)
+            if (sceneType == MapTypeEnum.PetMing)
             {
                 return self.PetMingList;
             }

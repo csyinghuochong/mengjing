@@ -86,7 +86,7 @@ namespace ET.Client
             }
 
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch)
+            if (mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch)
             {
                 showfloattext = true;   
             }
@@ -106,19 +106,19 @@ namespace ET.Client
             //主界面血條
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnUpdateHP(mapComponent.SceneType, unitDefend, unitAttack, args.ChangeHpValue);
 
-            if (mapComponent.SceneType == SceneTypeEnum.PetDungeon
-                || mapComponent.SceneType == SceneTypeEnum.PetTianTi
-                || mapComponent.SceneType == SceneTypeEnum.PetMing)
+            if (mapComponent.SceneType == MapTypeEnum.PetDungeon
+                || mapComponent.SceneType == MapTypeEnum.PetTianTi
+                || mapComponent.SceneType == MapTypeEnum.PetMing)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch)
+            if (mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMeleeMain>()?.OnUnitHpUpdate(unitDefend);
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.BaoZang
+            if (mapComponent.SceneType == MapTypeEnum.BaoZang
                 && unitDefend.Type == UnitType.Player && unitDefend.MainHero
                 && unitAttack != null && unitAttack.Type == UnitType.Player)
             {

@@ -81,7 +81,7 @@ namespace ET.Server
 
             if (unit.Type == UnitType.Player)
             {
-                if (unit.SceneType == SceneTypeEnum.RunRace || unit.SceneType == SceneTypeEnum.Demon)
+                if (unit.SceneType == MapTypeEnum.RunRace || unit.SceneType == MapTypeEnum.Demon)
                 {
                     return;
                 }

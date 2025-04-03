@@ -38,8 +38,8 @@ namespace ET.Client
             }
 
             // 还未到达100层，可以继续闯塔
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.SealTower,
-                BattleHelper.GetSceneIdByType(SceneTypeEnum.SealTower), 0, "0");
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.SealTower,
+                BattleHelper.GetSceneIdByType(MapTypeEnum.SealTower), 0, "0");
             if (errorCode == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSeal, false);

@@ -32,7 +32,7 @@ namespace ET.Server
 
             List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             M2C_BattleInfoResult m2C_Battle = self.m2C_BattleInfoResult;
-            m2C_Battle.SceneType = SceneTypeEnum.Battle;
+            m2C_Battle.SceneType = MapTypeEnum.Battle;
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -123,7 +123,7 @@ namespace ET.Server
         public static async ETTask KickOutPlayer(this BattleDungeonComponent self)
         {
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
 
             List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)

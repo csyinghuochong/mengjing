@@ -15,14 +15,14 @@ namespace ET.Client
             await scene.GetComponent<TimerComponent>().WaitAsync(1000);
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             int sceneTypeEnum = mapComponent.SceneType;
-            if (sceneTypeEnum == (int)SceneTypeEnum.MainCityScene)
+            if (sceneTypeEnum == (int)MapTypeEnum.MainCityScene)
             {
                 return;
             }
 
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.PetDungeon:
+                case MapTypeEnum.PetDungeon:
                     int star = 0;
                     for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)
                     {
@@ -38,7 +38,7 @@ namespace ET.Client
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                case SceneTypeEnum.Tower:
+                case MapTypeEnum.Tower:
                     DlgTowerOpen dlgTowerOpen = uiComponent.GetDlgLogic<DlgTowerOpen>();
                     if (dlgTowerOpen != null)
                     {
@@ -46,47 +46,47 @@ namespace ET.Client
                     }
 
                     break;
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetMing:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                case SceneTypeEnum.PetTianTi:
+                case MapTypeEnum.PetTianTi:
                     FlyTipComponent.Instance.ShowFlyTip("宠物天梯对战结束！！！");
 
                     uiComponent.GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                case SceneTypeEnum.RandomTower:
+                case MapTypeEnum.RandomTower:
                     // ui = await UIHelper.Create(args.Scene, UIType.UIRandomTowerResult);
                     // ui.GetComponent<UIRandomTowerResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                case SceneTypeEnum.TrialDungeon:
+                case MapTypeEnum.TrialDungeon:
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().StopTimer();
                     PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win ? "胜利" : "失败",
                         "恭喜你赢得了本场试炼的胜利！",
                         () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
                     break;
-                case SceneTypeEnum.SealTower:
+                case MapTypeEnum.SealTower:
                     DlgTowerOfSealMain dlgTowerOfSealMain = scene.GetComponent<UIComponent>().GetDlgLogic<DlgTowerOfSealMain>();
                     dlgTowerOfSealMain.ShowStartBtn();
                     Unit myUnit = UnitHelper.GetMyUnitFromClientScene(scene);
                     myUnit.GetComponent<SkillManagerComponentC>().ClearSkillAndCd();
                     dlgMain.DlgMainReset(sceneTypeEnum);
                     break;
-                case SceneTypeEnum.SeasonTower:
+                case MapTypeEnum.SeasonTower:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
-                case SceneTypeEnum.CellDungeon:
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.CellDungeon:
+                case MapTypeEnum.DragonDungeon:
                     await uiComponent.ShowWindowAsync(WindowID.WindowID_CellDungeonSettlement);
                     uiComponent.GetDlgLogic<DlgCellDungeonSettlement>().OnUpdateUI(args.m2C_FubenSettlement, sceneTypeEnum).Coroutine();
                     break;
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMatch:
                     Log.Error("宠物挑战赛结算没处理！！");
                     break;
-                case SceneTypeEnum.PetMelee:
+                case MapTypeEnum.PetMelee:
                     star = 0;
                     for (int i = 0; i < args.m2C_FubenSettlement.StarInfos.Count; i++)
                     {

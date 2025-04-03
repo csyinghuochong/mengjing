@@ -70,7 +70,7 @@ namespace ET.Client
 
             if (signup)
             {
-                EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.UnionRace, 2000008).Coroutine();
+                EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.UnionRace, 2000008).Coroutine();
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Donation);
             }
             else

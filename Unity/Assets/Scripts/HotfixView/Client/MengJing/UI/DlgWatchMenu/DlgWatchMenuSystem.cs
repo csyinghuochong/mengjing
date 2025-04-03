@@ -221,7 +221,7 @@ namespace ET.Client
 
         public static void OnButton_ApplyTeam(this DlgWatchMenu self)
         {
-            TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamId, 0, 0, 0, false, SceneTypeEnum.DragonDungeon).Coroutine();
+            TeamNetHelper.TeamDungeonApplyRequest(self.Root(), self.TeamId, 0, 0, 0, false, MapTypeEnum.DragonDungeon).Coroutine();
 
             self.OnClickImageBg();
         }
@@ -337,7 +337,7 @@ namespace ET.Client
                 case MenuEnumType.Chat:
                     PlayerInfoComponent accountInfoInfoComponent = self.Root().GetComponent<PlayerInfoComponent>();
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-                    self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.SceneType == SceneTypeEnum.MainCityScene);
+                    self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.SceneType == MapTypeEnum.MainCityScene);
                     self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMData.GmAccount.Contains(accountInfoInfoComponent.Account));
                     self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
                     break;

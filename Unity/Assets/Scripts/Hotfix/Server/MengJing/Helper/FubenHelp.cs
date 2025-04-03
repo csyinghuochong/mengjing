@@ -70,7 +70,7 @@ namespace ET.Server
 		/// <param name="sceneType"></param>
 		public static void TriggerTeamBuff(this Unit self, int sceneType)
 		{
-			if (sceneType == SceneTypeEnum.MainCityScene)
+			if (sceneType == MapTypeEnum.MainCityScene)
 			{
 				return;
 			}
@@ -229,7 +229,7 @@ namespace ET.Server
 				case 4:
 					//4; 0,0,0; 71020001; 2,2; 2, 2
 					int playerLv = 1;
-					if (scene.GetComponent<MapComponent>().SceneType == SceneTypeEnum.Tower)
+					if (scene.GetComponent<MapComponent>().SceneType == MapTypeEnum.Tower)
 					{
 						//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
 						//playerLv = mainUnit.GetComponent<UserInfoComponentServer>().GetLv();
@@ -299,7 +299,7 @@ namespace ET.Server
 		{
 			List<KeyValuePairInt> randomMonsterList = new List<KeyValuePairInt>();
 
-			if (sceneType != SceneTypeEnum.LocalDungeon)
+			if (sceneType != MapTypeEnum.LocalDungeon)
 			{
 				return randomMonsterList;
 			}
@@ -398,7 +398,7 @@ namespace ET.Server
 				return 0;	
 			}
 
-			if (sceneType != SceneTypeEnum.LocalDungeon)
+			if (sceneType != MapTypeEnum.LocalDungeon)
 			{
 				return 0;	
 			}
@@ -434,7 +434,7 @@ namespace ET.Server
 			//1;37.65,0,3.2;70005005;1@138.43,0,0.06;70005010;1
 
 			int babyNumber = 0;
-			if (sceneType == SceneTypeEnum.LocalDungeon)
+			if (sceneType == MapTypeEnum.LocalDungeon)
 			{
 				LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 				NumericComponentS numericComponent = localDungeonComponent.MainUnit.GetComponent<NumericComponentS>();
@@ -515,7 +515,7 @@ namespace ET.Server
 				
 				
 				//剧情副本一次性宝箱
-				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
+				if (sceneType == MapTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_55)
 				{
 					LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 					UserInfoComponentS userInfoComponent = localDungeonComponent.MainUnit.GetComponent<UserInfoComponentS>();
@@ -602,7 +602,7 @@ namespace ET.Server
 				{
 					//4; 0,0,0; 71020001; 2,2; 2, 2  //是随机塔附加属性
 					int playerLv = 1;
-					if (scene.GetComponent<MapComponent>().SceneType == SceneTypeEnum.Tower)
+					if (scene.GetComponent<MapComponent>().SceneType == MapTypeEnum.Tower)
 					{
 						//Unit mainUnit = scene.GetComponent<TowerComponent>().MainUnit;
 						//playerLv = mainUnit.GetComponent<UserInfoComponent>().UserInfo.Lv;
@@ -635,7 +635,7 @@ namespace ET.Server
 				}
 			}
 			
-			if (sceneType == SceneTypeEnum.LocalDungeon)
+			if (sceneType == MapTypeEnum.LocalDungeon)
 			{
 				LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 				NumericComponentS numericComponent = localDungeonComponent.MainUnit.GetComponent<NumericComponentS>();

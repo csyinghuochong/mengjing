@@ -133,7 +133,7 @@ namespace ET.Client
                 return;
             }
 
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetTianTi, BattleHelper.GetPetTianTiId(), 0, self.RankPetInfo.UserId.ToString()).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.PetTianTi, BattleHelper.GetPetTianTiId(), 0, self.RankPetInfo.UserId.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Rank);
         }
     }

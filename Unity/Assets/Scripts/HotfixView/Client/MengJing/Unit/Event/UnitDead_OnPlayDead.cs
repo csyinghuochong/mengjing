@@ -32,7 +32,7 @@ namespace ET.Client
                 {
                     unit.GetComponent<EffectViewComponent>()?.OnDispose();
 
-                    if (mapComponent.SceneType != SceneTypeEnum.Demon)
+                    if (mapComponent.SceneType != MapTypeEnum.Demon)
                     {
                         unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmDeathState);
                         ShowRevive(unit, mapComponent).Coroutine();
@@ -84,7 +84,7 @@ namespace ET.Client
                 }
                 dlgMain.View.ES_MainSkill.CheckJingLingFunction();
 
-                if (unit.Type == UnitType.Monster && mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
+                if (unit.Type == UnitType.Monster && mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon)
                 {
                     GameObject Obstruct = GameObject.Find("Obstruct");
                     if (Obstruct == null)
@@ -96,7 +96,7 @@ namespace ET.Client
                 }
 
                 //如果死亡的是怪物,判断当前是否在挂机
-                if (unit.Type == UnitType.Monster && mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
+                if (unit.Type == UnitType.Monster && mapComponent.SceneType == MapTypeEnum.LocalDungeon)
                 {
                     //执行下一次攻击怪物指令
                     root.GetComponent<UnitGuaJiComponent>()?.KillMonster().Coroutine();

@@ -12,7 +12,7 @@
             }
 
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-            if (sceneConfig.MapType != SceneTypeEnum.PetMelee)
+            if (sceneConfig.MapType != MapTypeEnum.PetMelee)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;

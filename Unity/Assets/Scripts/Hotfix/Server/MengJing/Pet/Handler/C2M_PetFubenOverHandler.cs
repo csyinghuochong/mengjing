@@ -9,17 +9,17 @@
             await ETTask.CompletedTask;
             Scene domainScene = unit.Root();
             MapComponent mapComponent = domainScene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == SceneTypeEnum.PetDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.PetDungeon)
             {
                 domainScene.GetComponent<PetDungeonComponent>().OnGameOver();
             }
-            if (mapComponent.SceneType == SceneTypeEnum.PetTianTi)
+            if (mapComponent.SceneType == MapTypeEnum.PetTianTi)
             {
                 int result = domainScene.GetComponent<PetTianTiDungeonComponent>().GetCombatResult();
                 result = result == CombatResultEnum.None ? CombatResultEnum.Fail : result;
                 domainScene.GetComponent<PetTianTiDungeonComponent>().OnGameOver(result).Coroutine();
             }
-            if (mapComponent.SceneType == SceneTypeEnum.PetMing)
+            if (mapComponent.SceneType == MapTypeEnum.PetMing)
             {
                 int result = domainScene.GetComponent<PetMingDungeonComponent>().GetCombatResult();
                 result = result == CombatResultEnum.None ? CombatResultEnum.Fail : result;

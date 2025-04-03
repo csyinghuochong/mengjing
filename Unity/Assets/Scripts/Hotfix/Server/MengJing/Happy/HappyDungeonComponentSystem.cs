@@ -71,7 +71,7 @@ namespace ET.Server
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             Scene fubnescene = self.Scene();
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
             List<EntityRef<Unit>> units = fubnescene.GetComponent<UnitComponent>().GetAll();

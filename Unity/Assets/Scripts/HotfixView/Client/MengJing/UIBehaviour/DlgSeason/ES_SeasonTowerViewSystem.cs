@@ -38,8 +38,8 @@ namespace ET.Client
 
         public static void OnEnterBtnButton(this ES_SeasonTower self)
         {
-            int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.SeasonTower);
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.SeasonTower, sceneId, 0, "0").Coroutine();
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.SeasonTower);
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.SeasonTower, sceneId, 0, "0").Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Season);
         }
 

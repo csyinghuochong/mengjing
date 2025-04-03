@@ -104,7 +104,7 @@ namespace ET
                 }
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
                 if (dungeonConfig.NpcList != null)

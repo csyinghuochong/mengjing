@@ -154,9 +154,9 @@ namespace ET.Client
                 case UnitType.Player:
                     MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
                     //宠物副本不显示玩家
-                    if (unit.MainHero && (mapComponent.SceneType == SceneTypeEnum.PetDungeon
-                            || mapComponent.SceneType == SceneTypeEnum.PetTianTi
-                            || mapComponent.SceneType == SceneTypeEnum.PetMing))
+                    if (unit.MainHero && (mapComponent.SceneType == MapTypeEnum.PetDungeon
+                            || mapComponent.SceneType == MapTypeEnum.PetTianTi
+                            || mapComponent.SceneType == MapTypeEnum.PetMing))
                     {
                         return;
                     }
@@ -672,7 +672,7 @@ namespace ET.Client
                         unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true); //血条UI组件
 
                         mapComponent = self.Root().GetComponent<MapComponent>();
-                        bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                        bool shenYuan = mapComponent.SceneType == MapTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                         go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
                     }
                     
@@ -753,7 +753,7 @@ namespace ET.Client
                     self.OnAddCollider(go);
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     
-                    if (mapComponent.SceneType == SceneTypeEnum.PetMelee)
+                    if (mapComponent.SceneType == MapTypeEnum.PetMelee)
                     {
                         FunctionEffect.PlaySelfEffect(unit, 200004);
                     }

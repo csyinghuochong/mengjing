@@ -54,19 +54,19 @@ namespace ET.Server
                 Unit recordUnit = null; 
                 switch (sceneTypeEnum)
                 {
-	                case SceneTypeEnum.CellDungeon://个人副本接受到的伤害
+	                case MapTypeEnum.CellDungeon://个人副本接受到的伤害
 		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<CellDungeonComponentS>().OnRecivedHurt(args.OldValue - args.NewValue);
 		                break;
-	                case SceneTypeEnum.TeamDungeon://组队副本输出伤害
+	                case MapTypeEnum.TeamDungeon://组队副本输出伤害
 		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<TeamDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
 		                break;
-	                case SceneTypeEnum.MiJing://秘境伤害
+	                case MapTypeEnum.MiJing://秘境伤害
 		                recordUnit = unit.Type == UnitType.Player ? unit : null;
 		                DomainScene.GetComponent<MiJingDungeonComponent>()?.OnUpdateDamage(player, unit, args.OldValue - args.NewValue);
 		                break;
-	                case SceneTypeEnum.TrialDungeon://试炼副本伤害
+	                case MapTypeEnum.TrialDungeon://试炼副本伤害
 		                TrialDungeonComponent trialDungeonComponent = DomainScene.GetComponent<TrialDungeonComponent>();
 		                if (trialDungeonComponent == null)
 		                {

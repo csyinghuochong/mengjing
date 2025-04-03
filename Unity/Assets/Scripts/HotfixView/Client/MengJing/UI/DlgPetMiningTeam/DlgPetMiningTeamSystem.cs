@@ -165,7 +165,7 @@ namespace ET.Client
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             long instanceid = self.InstanceId;
-            int errorCode = await PetNetHelper.RequestRolePetFormationSet(self.Root(), SceneTypeEnum.PetMing, self.PetTeamList, self.PetMingPosition);
+            int errorCode = await PetNetHelper.RequestRolePetFormationSet(self.Root(), MapTypeEnum.PetMing, self.PetTeamList, self.PetMingPosition);
             if (errorCode != ErrorCode.ERR_Success || instanceid != self.InstanceId)
             {
                 return;

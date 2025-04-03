@@ -134,11 +134,11 @@ namespace ET.Client
             {
                 switch (sceneType)
                 {
-                    case SceneTypeEnum.LocalDungeon:
+                    case MapTypeEnum.LocalDungeon:
                         navmesh = DungeonConfigCategory.Instance.Get(mapComponent.SceneId).MapID;
                         break;
-                    case SceneTypeEnum.CellDungeon:
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.CellDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         CellDungeonConfig chapterSon = CellDungeonConfigCategory.Instance.Get(mapComponent.SonSceneId);
                         navmesh = chapterSon.MapID;
                         break;

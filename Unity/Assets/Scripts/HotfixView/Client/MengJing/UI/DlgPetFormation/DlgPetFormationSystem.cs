@@ -79,13 +79,13 @@ namespace ET.Client
         public static void OnButtonChallengeButton(this DlgPetFormation self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFormation);
-            if (self.SceneTypeEnum == SceneTypeEnum.PetDungeon)
+            if (self.SceneTypeEnum == MapTypeEnum.PetDungeon)
             {
                 self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetSet).Coroutine();
                 return;
             }
 
-            if (self.SceneTypeEnum == SceneTypeEnum.PetTianTi)
+            if (self.SceneTypeEnum == MapTypeEnum.PetTianTi)
             {
                 return;
             }
@@ -100,7 +100,7 @@ namespace ET.Client
         {
             self.SetHandler = action;
             self.SceneTypeEnum = sceneType;
-            self.PetNumberLimit = sceneType == SceneTypeEnum.PetMatch ? ConfigData.PetMatchPetLimit : ConfigData.PetDungeonPetLimit;
+            self.PetNumberLimit = sceneType == MapTypeEnum.PetMatch ? ConfigData.PetMatchPetLimit : ConfigData.PetDungeonPetLimit;
             self.PetTeamList.AddRange(self.Root().GetComponent<PetComponentC>().GetPetFormatList(sceneType));
             self.View.ES_PetFormationSet.DragEndHandler = self.RequestFormationSet;
             self.View.ES_PetFormationSet.OnUpdateFormation(self.SceneTypeEnum, self.PetTeamList, true);

@@ -56,7 +56,7 @@ namespace ET.Client
                 return;
             }
 
-            await TeamNetHelper.TeamRobotRequest(self.Root(), SceneTypeEnum.DragonDungeon);
+            await TeamNetHelper.TeamRobotRequest(self.Root(), MapTypeEnum.DragonDungeon);
             battleMessageComponent.CallTeamRobotTime = TimeHelper.ServerNow();
         }
 
@@ -94,7 +94,7 @@ namespace ET.Client
                 {
                     string text = zstring.Format(" 副本:{0}开启冒险,现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{1}_{2}_{3}_{4}_{5}></link>",
                         cellGenerateConfig.ChapterName, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType,
-                        teamInfo.PlayerList[0].PlayerLv, SceneTypeEnum.DragonDungeon);
+                        teamInfo.PlayerList[0].PlayerLv, MapTypeEnum.DragonDungeon);
                     ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
                 }
 
@@ -124,7 +124,7 @@ namespace ET.Client
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，继续则消耗正常次数", async () =>
                     {
-                        int errorCode = await TeamNetHelper.RequestTeamDungeonOpen(self.Root(), SceneTypeEnum.DragonDungeon);
+                        int errorCode = await TeamNetHelper.RequestTeamDungeonOpen(self.Root(), MapTypeEnum.DragonDungeon);
                         if (errorCode != ErrorCode.ERR_Success)
                         {
                             HintHelp.ShowErrorHint(self.Root(), errorCode);
@@ -134,7 +134,7 @@ namespace ET.Client
                 }
             }
 
-            int errorCode = await TeamNetHelper.RequestTeamDungeonOpen(self.Root(), SceneTypeEnum.DragonDungeon);
+            int errorCode = await TeamNetHelper.RequestTeamDungeonOpen(self.Root(), MapTypeEnum.DragonDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);

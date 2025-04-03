@@ -61,7 +61,7 @@ namespace ET.Client
             //     return;
             // }
 
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Union, 2000009).Coroutine();
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Union);
         }

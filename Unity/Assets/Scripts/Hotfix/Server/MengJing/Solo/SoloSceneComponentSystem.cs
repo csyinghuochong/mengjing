@@ -401,7 +401,7 @@ namespace ET.Server
             fubnescene.AddComponent<SoloDungeonComponent>();
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.Solo, sceneId, 0);
+            mapComponent.SetMapInfo((int)MapTypeEnum.Solo, sceneId, 0);
             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(sceneId).MapID;
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             return fubenid;

@@ -15,7 +15,7 @@
         public static async ETTask<M2C_FubenTimesResetResponse> FubenTimesReset(Scene root, int sceneType)
         {
             C2M_FubenTimesResetRequest request = C2M_FubenTimesResetRequest.Create();
-            request.SceneType = SceneTypeEnum.PetTianTi;
+            request.SceneType = MapTypeEnum.PetTianTi;
 
             M2C_FubenTimesResetResponse response = (M2C_FubenTimesResetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 

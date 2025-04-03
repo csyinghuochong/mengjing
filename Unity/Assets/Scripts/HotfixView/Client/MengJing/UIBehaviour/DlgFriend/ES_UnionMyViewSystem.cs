@@ -67,7 +67,7 @@ namespace ET.Client
 
         public static void OnText_EnterUnion(this ES_UnionMy self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Union, 2000009).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Friend);
         }
 
@@ -321,7 +321,7 @@ namespace ET.Client
 
         public static void OnText_EnterUnionButton(this ES_UnionMy self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Union, 2000009).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Union);
         }
 

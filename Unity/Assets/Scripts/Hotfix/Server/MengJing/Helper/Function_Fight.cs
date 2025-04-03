@@ -123,7 +123,7 @@ namespace ET.Server
             
             //99002002 角斗场免伤状态
             int sceneType = defendUnit.Scene().GetComponent<MapComponent>().SceneType;
-            if (sceneType == SceneTypeEnum.Arena && attackUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, 99002002) > 0)
+            if (sceneType == MapTypeEnum.Arena && attackUnit.GetComponent<BuffManagerComponentS>().GetBuffSourceNumber(0, 99002002) > 0)
             {
                 return false;
             }
@@ -264,8 +264,8 @@ namespace ET.Server
             bool ifMonsterBoss_Def = false;
 
             //当前是否在宠物副本
-            bool petfuben = sceneType == SceneTypeEnum.PetDungeon || sceneType == SceneTypeEnum.PetTianTi;
-            if (sceneType == SceneTypeEnum.RunRace)
+            bool petfuben = sceneType == MapTypeEnum.PetDungeon || sceneType == MapTypeEnum.PetTianTi;
+            if (sceneType == MapTypeEnum.RunRace)
             {
                 Log.Warning($"变身大赛触发技能伤害： sceneType == SceneTypeEnum.RunRace  {skillconfig.Id}");
                 return false;
@@ -1438,7 +1438,7 @@ namespace ET.Server
         /// <param name="unit"></param>
         public static void UnitUpdateProperty_Base(Unit unit, bool notice, bool rank)
         {
-            if (unit.SceneType == SceneTypeEnum.RunRace)
+            if (unit.SceneType == MapTypeEnum.RunRace)
             {
                 return;
             }

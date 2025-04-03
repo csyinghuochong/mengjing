@@ -465,8 +465,8 @@ namespace ET.Client
             PetComponentC petComponentC = root.GetComponent<PetComponentC>();
             switch (sceneType)
             {
-                case SceneTypeEnum.PetMelee:
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     petComponentC .PetMeleePlan = plan;
                     break;
             }
@@ -588,7 +588,7 @@ namespace ET.Client
             M2C_PetMingResetResponse response = (M2C_PetMingResetResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
             if (response.Error == ErrorCode.ERR_Success)
             {
-                int sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetMing);
+                int sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMing);
                 root.GetComponent<UserInfoComponentC>().AddFubenTimes(sceneid, 5);
             }
 

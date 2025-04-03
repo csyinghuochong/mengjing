@@ -21,7 +21,7 @@ namespace ET.Client
            
             for (int i = 0; i < sceneConfig.Count; i++)
             {
-                if (sceneConfig[i].MapType != (int)SceneTypeEnum.DragonDungeon)
+                if (sceneConfig[i].MapType != (int)MapTypeEnum.DragonDungeon)
                 {
                     continue;
                 }
@@ -216,7 +216,7 @@ namespace ET.Client
 
         private static async ETTask RequestDragonDungeonCreate(this DlgDragonDungeonCreate self, int dungeonType)
         {
-            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.DragonDungeon);
+            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, MapTypeEnum.DragonDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);

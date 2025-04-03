@@ -311,7 +311,7 @@ namespace ET.Client
             }
 
             long instanceid = self.InstanceId;  
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0");
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.PetMelee, self.SceneId, FubenDifficulty.Normal, "0");
             if (instanceid!= self.InstanceId)
             {
                 return; 

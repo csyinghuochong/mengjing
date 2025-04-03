@@ -8,25 +8,25 @@ namespace ET
 
         public static bool CanTransfer(int oldScene, int newScene)
         {
-            if ((newScene == SceneTypeEnum.Solo || newScene == SceneTypeEnum.TeamDungeon )
-                && (oldScene == SceneTypeEnum.LocalDungeon || oldScene == SceneTypeEnum.JiaYuan))
+            if ((newScene == MapTypeEnum.Solo || newScene == MapTypeEnum.TeamDungeon )
+                && (oldScene == MapTypeEnum.LocalDungeon || oldScene == MapTypeEnum.JiaYuan))
             {
                 return true;
             }
 
             if (oldScene == newScene
-                        && oldScene != SceneTypeEnum.LocalDungeon
-                        && oldScene != SceneTypeEnum.JiaYuan
-                        && oldScene != SceneTypeEnum.MainCityScene
-                        && oldScene != SceneTypeEnum.PetDungeon
-                        && oldScene != SceneTypeEnum.SeasonTower
-                        && oldScene != SceneTypeEnum.CellDungeon)
+                        && oldScene != MapTypeEnum.LocalDungeon
+                        && oldScene != MapTypeEnum.JiaYuan
+                        && oldScene != MapTypeEnum.MainCityScene
+                        && oldScene != MapTypeEnum.PetDungeon
+                        && oldScene != MapTypeEnum.SeasonTower
+                        && oldScene != MapTypeEnum.CellDungeon)
             {
                 return false;
             };
             if (oldScene != newScene
-                && oldScene > SceneTypeEnum.MainCityScene
-                && newScene > SceneTypeEnum.MainCityScene)
+                && oldScene > MapTypeEnum.MainCityScene
+                && newScene > MapTypeEnum.MainCityScene)
             {
                 return false;
             }
@@ -56,48 +56,48 @@ namespace ET
         /// <returns></returns>
         public static bool IsSingleFuben(int sceneTypeEnum)
         {
-            return sceneTypeEnum == SceneTypeEnum.CellDungeon
-                || sceneTypeEnum == SceneTypeEnum.PetTianTi
-                || sceneTypeEnum == SceneTypeEnum.Tower
-                || sceneTypeEnum == SceneTypeEnum.LocalDungeon
-                || sceneTypeEnum == SceneTypeEnum.PetDungeon
-                || sceneTypeEnum == SceneTypeEnum.RandomTower
-                || sceneTypeEnum == SceneTypeEnum.TrialDungeon
-                || sceneTypeEnum == SceneTypeEnum.SealTower
-                || sceneTypeEnum == SceneTypeEnum.PetMing
-                || sceneTypeEnum == SceneTypeEnum.SeasonTower
-                || sceneTypeEnum == SceneTypeEnum.PetMelee;
+            return sceneTypeEnum == MapTypeEnum.CellDungeon
+                || sceneTypeEnum == MapTypeEnum.PetTianTi
+                || sceneTypeEnum == MapTypeEnum.Tower
+                || sceneTypeEnum == MapTypeEnum.LocalDungeon
+                || sceneTypeEnum == MapTypeEnum.PetDungeon
+                || sceneTypeEnum == MapTypeEnum.RandomTower
+                || sceneTypeEnum == MapTypeEnum.TrialDungeon
+                || sceneTypeEnum == MapTypeEnum.SealTower
+                || sceneTypeEnum == MapTypeEnum.PetMing
+                || sceneTypeEnum == MapTypeEnum.SeasonTower
+                || sceneTypeEnum == MapTypeEnum.PetMelee;
         }
 
 
 
         public static bool ShowRightTopButton(int sceneType)
         {
-            return sceneType != SceneTypeEnum.Battle
-                && sceneType != SceneTypeEnum.TrialDungeon
-                && sceneType != SceneTypeEnum.Tower
-                && sceneType != SceneTypeEnum.Arena
-                && sceneType != SceneTypeEnum.Happy
-                && sceneType != SceneTypeEnum.RunRace
-                && sceneType != SceneTypeEnum.Demon
-                && sceneType != SceneTypeEnum.SeasonTower;
+            return sceneType != MapTypeEnum.Battle
+                && sceneType != MapTypeEnum.TrialDungeon
+                && sceneType != MapTypeEnum.Tower
+                && sceneType != MapTypeEnum.Arena
+                && sceneType != MapTypeEnum.Happy
+                && sceneType != MapTypeEnum.RunRace
+                && sceneType != MapTypeEnum.Demon
+                && sceneType != MapTypeEnum.SeasonTower;
         }
 
         public static bool ShowLeftButton(int sceneType)
         {
-            return sceneType != SceneTypeEnum.TrialDungeon
-                && sceneType != SceneTypeEnum.MiJing
-                && sceneType != SceneTypeEnum.Happy
-                && sceneType != SceneTypeEnum.RunRace
-                && sceneType != SceneTypeEnum.Demon;
+            return sceneType != MapTypeEnum.TrialDungeon
+                && sceneType != MapTypeEnum.MiJing
+                && sceneType != MapTypeEnum.Happy
+                && sceneType != MapTypeEnum.RunRace
+                && sceneType != MapTypeEnum.Demon;
         }
 
         public static bool UseSceneConfig(int sceneType)
         {
-            return sceneType != SceneTypeEnum.LocalDungeon
-                 && sceneType != SceneTypeEnum.CellDungeon
-                 && sceneType != SceneTypeEnum.DragonDungeon
-                 && sceneType != SceneTypeEnum.LoginScene;
+            return sceneType != MapTypeEnum.LocalDungeon
+                 && sceneType != MapTypeEnum.CellDungeon
+                 && sceneType != MapTypeEnum.DragonDungeon
+                 && sceneType != MapTypeEnum.LoginScene;
         }
 
         public static bool IfCanRevive(int sceneType, int sceneId)

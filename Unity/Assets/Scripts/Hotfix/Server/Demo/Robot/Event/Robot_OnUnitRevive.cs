@@ -16,25 +16,25 @@ namespace ET.Client
                 root.GetComponent<BehaviourComponent>().Stop();
                 switch (mapComponent.SceneType)
                 {
-                    case SceneTypeEnum.Battle:
-                    case SceneTypeEnum.TeamDungeon:
-                    case SceneTypeEnum.BaoZang:
-                    case SceneTypeEnum.MiJing:
+                    case MapTypeEnum.Battle:
+                    case MapTypeEnum.TeamDungeon:
+                    case MapTypeEnum.BaoZang:
+                    case MapTypeEnum.MiJing:
                         root.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
                         root.GetComponent<BehaviourComponent>().Start();
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         Console .WriteLine("地下城机器人复活！");
                         root.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
                         root.GetComponent<BehaviourComponent>().Start();
                         break;
-                    case SceneTypeEnum.Arena:
+                    case MapTypeEnum.Arena:
                         //发消息移除该rbobot
                         break;
-                    case SceneTypeEnum.Demon:
+                    case MapTypeEnum.Demon:
                         Console .WriteLine("恶魔活动机器人复活！");
                         break;
-                    case SceneTypeEnum.RunRace:
+                    case MapTypeEnum.RunRace:
                         Console .WriteLine("恶魔活动机器人复活！");
                         break;
                     default:

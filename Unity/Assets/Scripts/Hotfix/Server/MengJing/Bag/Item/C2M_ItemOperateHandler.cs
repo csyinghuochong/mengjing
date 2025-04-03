@@ -208,7 +208,7 @@ namespace ET.Server
                             break;
                         //回城卷轴[返回另外一个副本场景]
                         case 4:
-                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            if (mapComponent.SceneType == (int) MapTypeEnum.LocalDungeon)
                             {
                                 //LocalDungeonComponent localDungeon = unit.DomainScene().GetComponent<LocalDungeonComponent>();
                                 //TransferHelper.LocalDungeonTransfer(unit, 0, int.Parse(itemConfig.ItemUsePar), localDungeon.FubenDifficulty).Coroutine();
@@ -254,7 +254,7 @@ namespace ET.Server
                         case 12:
                             userInfoComponent.OnCleanBossCD();
                             
-                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            if (mapComponent.SceneType == (int) MapTypeEnum.LocalDungeon)
                             {
                                 unit.Scene().GetComponent<LocalDungeonComponent>().OnCleanBossCD();
                             }
@@ -262,7 +262,7 @@ namespace ET.Server
                             break;
                         //召唤卷轴
                         case 14:
-                            if (mapComponent.SceneType == (int) SceneTypeEnum.LocalDungeon)
+                            if (mapComponent.SceneType == (int) MapTypeEnum.LocalDungeon)
                             {
                                 //UnitFactory.CreateTempFollower(unit, int.Parse(itemConfig.ItemUsePar));
                             }

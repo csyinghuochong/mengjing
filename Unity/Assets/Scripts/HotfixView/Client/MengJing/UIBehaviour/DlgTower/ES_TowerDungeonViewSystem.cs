@@ -59,8 +59,8 @@ namespace ET.Client
                 return;
             }
 
-            int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.Tower);
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Tower, sceneId, self.FubenDifficulty);
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.Tower);
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Tower, sceneId, self.FubenDifficulty);
             if (errorCode == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Tower, false);

@@ -24,12 +24,12 @@ namespace ET.Client
 
                 switch (args.LastSceneType)
                 {
-                    case SceneTypeEnum.PetTianTi:
-                    case SceneTypeEnum.PetDungeon:
-                    case SceneTypeEnum.PetMing:
+                    case MapTypeEnum.PetTianTi:
+                    case MapTypeEnum.PetDungeon:
+                    case MapTypeEnum.PetMing:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMain);
                         break;
-                    case SceneTypeEnum.LocalDungeon:
+                    case MapTypeEnum.LocalDungeon:
                         DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(args.LastChapterId);
                         switch (dungeonConfig.MapType)
                         {
@@ -41,47 +41,47 @@ namespace ET.Client
                         }
 
                         break;
-                    case SceneTypeEnum.Tower:
+                    case MapTypeEnum.Tower:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOpen);
                         break;
-                    case SceneTypeEnum.Happy:
+                    case MapTypeEnum.Happy:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HappyMain);
                         break;
-                    case SceneTypeEnum.Battle:
+                    case MapTypeEnum.Battle:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_BattleMain);
                         break;
-                    case SceneTypeEnum.Arena:
+                    case MapTypeEnum.Arena:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ArenaMain);
                         break;
-                    case SceneTypeEnum.TeamDungeon:
+                    case MapTypeEnum.TeamDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamMain);
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamMain);
                         break;
-                    case SceneTypeEnum.TrialDungeon:
+                    case MapTypeEnum.TrialDungeon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TrialMain);
                         break;
-                    case SceneTypeEnum.SealTower:
+                    case MapTypeEnum.SealTower:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSealMain);
                         break;
-                    case SceneTypeEnum.JiaYuan:
+                    case MapTypeEnum.JiaYuan:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMain);
                         break;
-                    case SceneTypeEnum.RunRace:
+                    case MapTypeEnum.RunRace:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RunRaceMain);
                         break;
-                    case SceneTypeEnum.Demon:
+                    case MapTypeEnum.Demon:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DemonMain);
                         break;
-                    case SceneTypeEnum.MiJing:
+                    case MapTypeEnum.MiJing:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MiJingMain);
                         break;
-                    case SceneTypeEnum.SeasonTower:
+                    case MapTypeEnum.SeasonTower:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonMain);
                         break;
-                    case SceneTypeEnum.PetMelee:
-                    case SceneTypeEnum.PetMatch:
+                    case MapTypeEnum.PetMelee:
+                    case MapTypeEnum.PetMatch:
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMeleeMain);
                         break;
                     default:

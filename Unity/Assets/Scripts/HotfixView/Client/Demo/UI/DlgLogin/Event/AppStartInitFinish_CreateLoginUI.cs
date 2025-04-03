@@ -10,7 +10,7 @@ namespace ET.Client
             Log.Warning("AppStartInitFinish_CreateLoginUI");
             //await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
             await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MJLogin);
-            await root.GetComponent<SceneManagerComponent>().ChangeScene(SceneTypeEnum.LoginScene, 0, 0);
+            await root.GetComponent<SceneManagerComponent>().ChangeScene(MapTypeEnum.LoginScene, 0, 0);
         }
     }
 }

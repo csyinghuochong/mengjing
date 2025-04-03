@@ -80,7 +80,7 @@ namespace ET.Client
             camera.enabled = true;
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
                 mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
@@ -89,8 +89,8 @@ namespace ET.Client
                 camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.MainCityScene
-                || mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.MainCityScene
+                || mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon)
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
                 mapCamera.transform.position =
@@ -384,7 +384,7 @@ namespace ET.Client
                 self.ShowStallArea();
             }
 
-            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
             {
                 npcList = DungeonConfigCategory.Instance.Get(self.SceneId).NpcList;
                 self.View.E_MapNameText.text = DungeonConfigCategory.Instance.Get(self.SceneId).ChapterName;
@@ -393,12 +393,12 @@ namespace ET.Client
                 self.RequestLocalUnitPosition().Coroutine();
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.JiaYuan)
+            if (mapComponent.SceneType == MapTypeEnum.JiaYuan)
             {
                 self.RequestJiaYuanInfo().Coroutine();
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.TeamDungeon)
             {
                 self.RequestTeamerPosition().Coroutine();
                 self.ShowTeamBossList();
@@ -603,7 +603,7 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType != (int)MapTypeEnum.LocalDungeon)
             {
                 return;
             }

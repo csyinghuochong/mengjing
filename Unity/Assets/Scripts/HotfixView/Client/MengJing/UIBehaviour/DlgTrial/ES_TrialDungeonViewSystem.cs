@@ -30,11 +30,11 @@ namespace ET.Client
         public static int GetShowCengNum(this ES_TrialDungeon self)
         {
             int towerId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.TrialDungeonId);
-            int nextId = TowerHelper.GetNextTowerIdByScene(SceneTypeEnum.TrialDungeon, towerId);
+            int nextId = TowerHelper.GetNextTowerIdByScene(MapTypeEnum.TrialDungeon, towerId);
             //nextId == 0通关了
 
             //第一个可以领取奖励的
-            List<TowerConfig> idlist = TowerHelper.GetTowerListByScene(SceneTypeEnum.TrialDungeon);
+            List<TowerConfig> idlist = TowerHelper.GetTowerListByScene(MapTypeEnum.TrialDungeon);
             for (int i = 0; i < idlist.Count; i++)
             {
                 if (self.IsHaveReward(idlist[i].Id))
@@ -54,7 +54,7 @@ namespace ET.Client
             for (int i = 0; i < towerConfigs.Count; i++)
             {
                 TowerConfig towerConfig = towerConfigs[i];
-                if (towerConfig.MapType != SceneTypeEnum.TrialDungeon)
+                if (towerConfig.MapType != MapTypeEnum.TrialDungeon)
                 {
                     continue;
                 }
@@ -178,7 +178,7 @@ namespace ET.Client
             }
 
             //试炼之地
-            await MapHelper.RequestTowerReward(self.Root(), self.TowerId, SceneTypeEnum.TrialDungeon);
+            await MapHelper.RequestTowerReward(self.Root(), self.TowerId, MapTypeEnum.TrialDungeon);
             self.UpdateButtons();
         }
 
@@ -190,7 +190,7 @@ namespace ET.Client
             }
 
             int towerId = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.TrialDungeonId);
-            int nextId = TowerHelper.GetNextTowerIdByScene(SceneTypeEnum.TrialDungeon, towerId);
+            int nextId = TowerHelper.GetNextTowerIdByScene(MapTypeEnum.TrialDungeon, towerId);
 
             if (self.TowerId > nextId && nextId != 0)
             {
@@ -198,8 +198,8 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.TrialDungeon,
-                BattleHelper.GetSceneIdByType(SceneTypeEnum.TrialDungeon), 0, self.TowerId.ToString());
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.TrialDungeon,
+                BattleHelper.GetSceneIdByType(MapTypeEnum.TrialDungeon), 0, self.TowerId.ToString());
             if (errorCode == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Trial, false);

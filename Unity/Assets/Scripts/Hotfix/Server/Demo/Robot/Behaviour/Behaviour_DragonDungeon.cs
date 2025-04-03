@@ -28,7 +28,7 @@ namespace ET
             while (true)
             {
                 //获取队伍列表
-                await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.DragonDungeon);
+                await TeamNetHelper.RequestTeamDungeonList(root, MapTypeEnum.DragonDungeon);
                 string messagevalue = aiComponent.Message;
                 string[] teamId = messagevalue.Split('_');
 
@@ -37,7 +37,7 @@ namespace ET
                     TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
                     if (teamInfo != null)
                     {
-                        errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.DragonDungeon);
+                        errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,MapTypeEnum.DragonDungeon);
                     }
                     else
                     {

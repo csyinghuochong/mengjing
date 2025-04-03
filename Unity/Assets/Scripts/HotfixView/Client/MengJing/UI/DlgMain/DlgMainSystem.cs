@@ -502,7 +502,7 @@ namespace ET.Client
             self.InitShow();
             self.OnSettingUpdate();
 
-            self.AfterEnterScene(SceneTypeEnum.MainCityScene);
+            self.AfterEnterScene(MapTypeEnum.MainCityScene);
 
             // IOS适配
             IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new(120f, 0f));
@@ -726,7 +726,7 @@ namespace ET.Client
 
             switch (sceneType)
             {
-                case SceneTypeEnum.JiaYuan:
+                case MapTypeEnum.JiaYuan:
                     self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().SetShow(show);
                     break;
                 default:
@@ -931,7 +931,7 @@ namespace ET.Client
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType != MapTypeEnum.LocalDungeon)
             {
                 flyTipComponent.ShowFlyTip(fubenName);
                 return;
@@ -1124,7 +1124,7 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.Root().GetComponent<JiaYuanComponentC>().MasterId = userInfoComponent.UserInfo.UserId;
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.JiaYuan, 2000011, 1, userInfoComponent.UserInfo.UserId.ToString()).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.JiaYuan, 2000011, 1, userInfoComponent.UserInfo.UserId.ToString()).Coroutine();
         }
 
         private static void OnNpcDuiHuaButton(this DlgMain self)
@@ -1134,7 +1134,7 @@ namespace ET.Client
 
         private static void OnUnionButton(this DlgMain self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Union, 2000009).Coroutine();
         }
 
         private static void OnBagButton(this DlgMain self)
@@ -1329,7 +1329,7 @@ namespace ET.Client
 
         private static void OnButton_HappyButton(this DlgMain self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Happy, BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy)).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.Happy, BattleHelper.GetSceneIdByType(MapTypeEnum.Happy)).Coroutine();
         }
 
         private static void OnButton_HuntButton(this DlgMain self)
@@ -1458,7 +1458,7 @@ namespace ET.Client
 
         private static void OnBtn_PetMelee(this DlgMain self)
         {
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.PetMelee, 2700001, FubenDifficulty.Normal, "0").Coroutine();
         }
 
         public static void UpdateKillMonsterReward(this DlgMain self)
@@ -1708,7 +1708,7 @@ namespace ET.Client
         private static void OnMailHintTipButton(this DlgMain self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != (int)SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType != (int)MapTypeEnum.MainCityScene)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请前往主城!");
                 return;
@@ -1735,7 +1735,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                        EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
                     }
                 },
                 null).Coroutine();
@@ -1754,7 +1754,7 @@ namespace ET.Client
             }
 
             string tipStr = "确定返回主城？";
-            if (mapComponent.SceneType == SceneTypeEnum.Battle)
+            if (mapComponent.SceneType == MapTypeEnum.Battle)
             {
                 tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
             }
@@ -1769,7 +1769,7 @@ namespace ET.Client
         public static void OnUpdateHP(this DlgMain self, int sceneType, Unit defend, Unit attack, long hurtvalue)
         {
             int unitType = defend.Type;
-            if (unitType == UnitType.Player && sceneType == SceneTypeEnum.TeamDungeon)
+            if (unitType == UnitType.Player && sceneType == MapTypeEnum.TeamDungeon)
             {
                 self.OnUpdateTeamHP(defend);
             }
@@ -1860,15 +1860,15 @@ namespace ET.Client
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
-            self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&
-                sceneTypeEnum != SceneTypeEnum.JiaYuan);
+            self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != MapTypeEnum.MainCityScene &&
+                sceneTypeEnum != MapTypeEnum.JiaYuan);
             // self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.LocalDungeon);
             self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(false);
             // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
-            self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
-            self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
-            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon ||
-                sceneTypeEnum == SceneTypeEnum.DragonDungeon);
+            self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == MapTypeEnum.MainCityScene);
+            self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != MapTypeEnum.RunRace && sceneTypeEnum != MapTypeEnum.Demon);
+            self.View.ES_CellDungeonCellMini.uiTransform.gameObject.SetActive(sceneTypeEnum == MapTypeEnum.CellDungeon ||
+                sceneTypeEnum == MapTypeEnum.DragonDungeon);
             self.View.E_OpenChatButton.gameObject.SetActive(false);
             self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(false);
             self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
@@ -1896,14 +1896,14 @@ namespace ET.Client
                 self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
                 self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
                 self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
-                self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon ? 1 : 0);
+                self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == MapTypeEnum.TeamDungeon ? 1 : 0);
             }
 
             int sceneid = self.Root().GetComponent<MapComponent>().SceneId;
             self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(false);
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.CellDungeon:
+                case MapTypeEnum.CellDungeon:
                     self.View.ES_CellDungeonCellMini.OnUpdateUI();
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
@@ -1911,7 +1911,7 @@ namespace ET.Client
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     self.View.ES_CellDungeonCellMini.OnUpdateUI();
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
@@ -1919,7 +1919,7 @@ namespace ET.Client
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     self.View.ES_MainHpBar.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainHpBar.EG_BossNodeRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(true);
@@ -1930,20 +1930,20 @@ namespace ET.Client
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.Happy:
+                case MapTypeEnum.Happy:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
                     break;
-                case SceneTypeEnum.RunRace:
+                case MapTypeEnum.RunRace:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.Demon:
+                case MapTypeEnum.Demon:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.JiaYuan:
+                case MapTypeEnum.JiaYuan:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
@@ -1951,7 +1951,7 @@ namespace ET.Client
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.SealTower:
+                case MapTypeEnum.SealTower:
                     self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
@@ -1960,7 +1960,7 @@ namespace ET.Client
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     self.View.EG_MainPetFightsRectTransform.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.LocalDungeon:
+                case MapTypeEnum.LocalDungeon:
                     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(sceneid);
                     switch (dungeonConfig.MapType)
                     {
@@ -1982,16 +1982,16 @@ namespace ET.Client
                     }
 
                     break;
-                case SceneTypeEnum.PetMelee:
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     break;
-                case SceneTypeEnum.Union:
+                case MapTypeEnum.Union:
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     break;
-                case SceneTypeEnum.UnionRace:
+                case MapTypeEnum.UnionRace:
                     self.View.E_OpenChatButton.gameObject.SetActive(true);
                     self.View.EG_MainChatRectTransform.gameObject.gameObject.SetActive(true);
                     break;
@@ -2011,7 +2011,7 @@ namespace ET.Client
             // self.ZoneScene().GetComponent<RelinkComponent>().OnApplicationFocusHandler(true);
 
             self.View.E_UnionButton.gameObject.SetActive(self.MainUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) > 0);
-            if (sceneTypeEnum == SceneTypeEnum.LocalDungeon)
+            if (sceneTypeEnum == MapTypeEnum.LocalDungeon)
             {
                 self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.EnterFuben, sceneid.ToString());
                 bool shenmizhimen =
@@ -2023,9 +2023,9 @@ namespace ET.Client
             }
 
             if (!self.View.ES_JoystickMove.uiTransform.gameObject.activeSelf
-                || sceneTypeEnum == SceneTypeEnum.PetDungeon
-                || sceneTypeEnum == SceneTypeEnum.PetTianTi
-                || sceneTypeEnum == SceneTypeEnum.PetMing)
+                || sceneTypeEnum == MapTypeEnum.PetDungeon
+                || sceneTypeEnum == MapTypeEnum.PetTianTi
+                || sceneTypeEnum == MapTypeEnum.PetMing)
             {
                 self.MainUnit.GetComponent<StateComponentC>().StateTypeAdd(StateTypeEnum.NoMove);
             }

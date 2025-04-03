@@ -305,7 +305,7 @@ namespace ET.Server
             fubnescene.AddComponent<PetMatchDungeonComponent>(); 
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.PetMatch, sceneId, 0);
+            mapComponent.SetMapInfo((int)MapTypeEnum.PetMatch, sceneId, 0);
             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(sceneId).MapID;
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             return fubenid;

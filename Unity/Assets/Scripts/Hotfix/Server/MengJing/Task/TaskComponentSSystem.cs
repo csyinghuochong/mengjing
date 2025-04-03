@@ -741,7 +741,7 @@ namespace ET.Server
         {
             self.TriggerTaskEvent(TaskTargetType.OnLineTime_1010, 0, 1);
 
-            if (self.Scene().GetComponent<MapComponent>().SceneType == SceneTypeEnum.Battle)
+            if (self.Scene().GetComponent<MapComponent>().SceneType == MapTypeEnum.Battle)
             {
                 self.TriggerTaskEvent(TaskTargetType.BattleExist_1103, 0, 1);
             }
@@ -811,12 +811,12 @@ namespace ET.Server
             if (bekill == null || bekill.IsDisposed)
                 return;
 
-            if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.Battle)
+            if (bekill.Type == UnitType.Player && sceneType == MapTypeEnum.Battle)
             {
                 self.TriggerTaskEvent(TaskTargetType.BattleKillPlayer_1102, 0, 1);
                 bekill.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.BattleDead_1104, 0, 1);
             }
-            if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.UnionRace)
+            if (bekill.Type == UnitType.Player && sceneType == MapTypeEnum.UnionRace)
             {
                 self.TriggerTaskEvent(TaskTargetType.UnionRaceKill_1301, 0, 1);
                 self.UpdateUnionRaceRank().Coroutine();
@@ -832,11 +832,11 @@ namespace ET.Server
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
                 MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
                 int fubenDifficulty = FubenDifficulty.None;
-                if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
+                if (mapComponent.SceneType == (int)MapTypeEnum.CellDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;
                 }
-                if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+                if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
                 {
                     //fubenDifficulty = DomainScene.GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }

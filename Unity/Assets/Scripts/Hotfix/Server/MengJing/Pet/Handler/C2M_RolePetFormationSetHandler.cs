@@ -9,17 +9,17 @@
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             switch (request.SceneType)
             {
-                case SceneTypeEnum.PetDungeon:
+                case MapTypeEnum.PetDungeon:
                     petComponent.PetFormations = request.PetFormat;
                     break;
-                case SceneTypeEnum.PetTianTi:
+                case MapTypeEnum.PetTianTi:
                     petComponent.TeamPetList = request.PetFormat;
                     break;
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetMing:
                     petComponent.PetMingList = request.PetFormat;
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
-                case SceneTypeEnum.MainCityScene:
+                case MapTypeEnum.MainCityScene:
                     // TransferHelper.RemoveFightPetList(unit,request.PetFormat );
                     // petComponent.PetFightList = request.PetFormat; //通过布阵界面设置出战宠物
                     // TransferHelper.CreateFightPetList(unit);

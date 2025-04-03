@@ -21,7 +21,7 @@ namespace ET.Client
             bool isGmaccount = GMData.GmAccount.Contains(playerInfoComponent.Account);
             for (int i = 0; i < sceneConfig.Count; i++)
             {
-                if (sceneConfig[i].MapType != (int)SceneTypeEnum.TeamDungeon)
+                if (sceneConfig[i].MapType != (int)MapTypeEnum.TeamDungeon)
                 {
                     continue;
                 }
@@ -198,7 +198,7 @@ namespace ET.Client
         
         private static async ETTask RequestDragonDungeonCreate(this DlgTeamDungeonCreate self, int dungeonType)
         {
-            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, SceneTypeEnum.TeamDungeon);
+            int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType, MapTypeEnum.TeamDungeon);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 HintHelp.ShowErrorHint(self.Root(), errorCode);

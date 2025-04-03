@@ -39,7 +39,7 @@ namespace ET.Server
             }
 
             int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().SceneType;
-            if (sceneTypeEnum == SceneTypeEnum.TeamDungeon)
+            if (sceneTypeEnum == MapTypeEnum.TeamDungeon)
             {
                 response.Error = OnTeamPick(unit, privateIds, publicIds, sceneTypeEnum);
             }
@@ -110,7 +110,7 @@ namespace ET.Server
                     continue;
                 }
 
-                if (sceneTypeEnum == SceneTypeEnum.Happy && cellIndex != unitInfo.KV[NumericType.CellIndex])
+                if (sceneTypeEnum == MapTypeEnum.Happy && cellIndex != unitInfo.KV[NumericType.CellIndex])
                 {
                     errorCode = ErrorCode.Error_PickErrorCell;
                     continue;
@@ -136,7 +136,7 @@ namespace ET.Server
                 FubenHelp.SendFubenPickMessage(unit, unitInfo);
 
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(addItemID);
-                if (sceneTypeEnum == SceneTypeEnum.Happy && itemConfig.ItemQuality >= 5)
+                if (sceneTypeEnum == MapTypeEnum.Happy && itemConfig.ItemQuality >= 5)
                 {
                     string uername = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
                     string getmessage = $"{uername}在喜从天降活动这种获得: <color=#{CommonHelp.QualityReturnColor(5)}>{itemConfig.ItemName}</color>";

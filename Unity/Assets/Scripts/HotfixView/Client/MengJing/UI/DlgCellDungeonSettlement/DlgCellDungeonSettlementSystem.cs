@@ -173,13 +173,13 @@ namespace ET.Client
 
             int chapterId = self.Root().GetComponent<CellDungeonComponentC>().ChapterId;
             int difficulty = self.Root().GetComponent<CellDungeonComponentC>().FubenDifficulty;
-            EnterMapHelper.RequestTransfer(self.Root(),  SceneTypeEnum.CellDungeon, chapterId, difficulty, "0").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(),  MapTypeEnum.CellDungeon, chapterId, difficulty, "0").Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonSettlement);
         }
 
         public static async ETTask OnUpdateUI(this DlgCellDungeonSettlement self, M2C_FubenSettlement m2C_FubenSettlement, int sceneTypeEnum)
         {
-            self.View.E_Button_continueButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
+            self.View.E_Button_continueButton.gameObject.SetActive(sceneTypeEnum == MapTypeEnum.CellDungeon);
             self.View.E_Text_expText.text = m2C_FubenSettlement.RewardExp.ToString();
             self.View.E_Text_goldText.text = m2C_FubenSettlement.RewardGold.ToString();
 

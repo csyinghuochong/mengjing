@@ -56,7 +56,7 @@ namespace ET.Client
 
         public static async ETTask RequestTeamDungeonInfo(this DlgDragonDungeon self)
         {
-            await TeamNetHelper.RequestTeamDungeonList(self.Root(),SceneTypeEnum.DragonDungeon);
+            await TeamNetHelper.RequestTeamDungeonList(self.Root(),MapTypeEnum.DragonDungeon);
 
             if (self.IsDisposed)
             {

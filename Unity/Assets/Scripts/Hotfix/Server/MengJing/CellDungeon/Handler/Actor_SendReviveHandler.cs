@@ -26,11 +26,11 @@ namespace ET.Server
             {
                 switch (mapComponent.SceneType)
                 {
-                    case SceneTypeEnum.TeamDungeon:
+                    case MapTypeEnum.TeamDungeon:
                         TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
                         unit.SetBornPosition(teamDungeonComponent.BossDeadPosition, true);
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         break;
                     default:
                         SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);

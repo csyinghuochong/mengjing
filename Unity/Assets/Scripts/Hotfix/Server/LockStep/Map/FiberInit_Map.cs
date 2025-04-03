@@ -20,7 +20,7 @@
             MapComponent mapComponent =  root.AddComponent<MapComponent>();
             mapComponent.NavMeshId = 101;
             mapComponent.SceneId = 101;
-            mapComponent.SceneType = SceneTypeEnum.MainCityScene;
+            mapComponent.SceneType = MapTypeEnum.MainCityScene;
             FubenHelp.CreateNpc(root, 101);
             
             await ETTask.CompletedTask;

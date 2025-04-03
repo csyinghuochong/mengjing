@@ -77,7 +77,7 @@
 
             switch (sceneType)
             {
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     errorCode =
                             TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), fubenType, fubenId, userInfo.UserId,sceneType);
                     if (errorCode != ErrorCode.ERR_Success)
@@ -97,7 +97,7 @@
                         return errorCode;
                     }
                     break;
-                case SceneTypeEnum.DragonDungeon:
+                case MapTypeEnum.DragonDungeon:
                     break;
                 default:
                     break;
@@ -133,8 +133,8 @@
         public static async ETTask SendLeaveRequest(Scene root)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon 
-                || mapComponent.SceneType == (int)SceneTypeEnum.DragonDungeon )
+            if (mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon 
+                || mapComponent.SceneType == (int)MapTypeEnum.DragonDungeon )
             {
                 HintHelp.ShowHint(root, "副本中不能离开队伍");
                 return;
@@ -156,7 +156,7 @@
 
             switch (sceneType)
             {
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     errorCode = TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), teamInfo);
                     if (errorCode != ErrorCode.ERR_Success)
                     {
@@ -175,7 +175,7 @@
                         return ErrorCode.ERR_PlayerIsNot;
                     }
                     break;
-                case SceneTypeEnum.DragonDungeon: 
+                case MapTypeEnum.DragonDungeon: 
                     if (teamInfo.PlayerList.Count < 1)  //地下城组队人数限制
                     {
                         return ErrorCode.ERR_PlayerIsNot;
@@ -265,7 +265,7 @@
         public static async ETTask TeamKickOutRequest(Scene root, long userId)
         {
             MapComponent mapComponent = root.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.TeamDungeon)
             {
                 HintHelp.ShowHint(root, "副本中不能踢人");
                 return;

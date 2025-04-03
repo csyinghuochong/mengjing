@@ -230,7 +230,7 @@ namespace ET.Client
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "是否返回主城出生点？", () =>
                 {
-                    EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
+                    EnterMapHelper.RequestTransfer( self.Root(), MapTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0"  ).Coroutine();
                 
                     UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                     uiComponent.CloseWindow(WindowID.WindowID_DungeonMap);
@@ -534,7 +534,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请求传送 副本Id:{0} 副本难度：{1}", self.LevelId, self.Difficulty));
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, self.LevelId, self.Difficulty);
 
             if (errorCode != ErrorCode.ERR_Success)
             {

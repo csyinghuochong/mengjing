@@ -79,7 +79,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                    EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
                 }
 
                 return;

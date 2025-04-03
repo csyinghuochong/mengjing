@@ -348,23 +348,23 @@ namespace ET.Client
         {
             switch (sceneTypeEnum)
             {
-                case SceneTypeEnum.PetTianTi:
+                case MapTypeEnum.PetTianTi:
                     self.CameraMoveType = CameraMoveType.PetFuben;
                     self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
-                case SceneTypeEnum.PetDungeon:
+                case MapTypeEnum.PetDungeon:
                     self.CameraMoveType = CameraMoveType.PetFuben;
                     self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetMing:
                     self.CameraMoveType = CameraMoveType.PetFuben;
                     self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
-                case SceneTypeEnum.PetMelee:
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     self.CameraMoveType = CameraMoveType.PetFuben;
                     self.MainCamera.transform.position = ConfigData.PetMeleeFuBenCameraPosition;
                     self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.PetMeleeFuBenCameraRotation);

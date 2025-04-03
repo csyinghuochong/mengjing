@@ -236,7 +236,7 @@ namespace ET.Server
 
             List<Unit> allunits = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             M2C_UnionRaceInfoResult m2C_Battle = M2C_UnionRaceInfoResult.Create();
-            m2C_Battle.SceneType = SceneTypeEnum.UnionRace;
+            m2C_Battle.SceneType = MapTypeEnum.UnionRace;
             for (int i = 0; i < allunits.Count; i++)
             {
                 MapMessageHelper.SendToClient(allunits[i], m2C_Battle);
@@ -245,7 +245,7 @@ namespace ET.Server
             //通知家族争霸赛地图开始踢人
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
             List<Unit> units = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             for (int i = 0; i < units.Count; i++)
             {

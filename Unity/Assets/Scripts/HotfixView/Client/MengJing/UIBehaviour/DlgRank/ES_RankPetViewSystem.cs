@@ -81,7 +81,7 @@ namespace ET.Client
             PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
             int number = 0;
             int combat = 0;
-            List<long> petList = self.Root().GetComponent<PetComponentC>().GetPetFormatList(SceneTypeEnum.PetTianTi);
+            List<long> petList = self.Root().GetComponent<PetComponentC>().GetPetFormatList(MapTypeEnum.PetTianTi);
             for (int i = 0; i < petList.Count; i++)
             {
                 if (petList[i] == 0 || number >= 5)
@@ -111,7 +111,7 @@ namespace ET.Client
 
         private static void OnUpdateTimes(this ES_RankPet self)
         {
-            int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetTianTi);
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetTianTi);
             int totalTimes = SceneConfigCategory.Instance.Get(sceneId).DayEnterNum;
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
@@ -140,13 +140,13 @@ namespace ET.Client
                 return;
             }
 
-            M2C_FubenTimesResetResponse response = await RankNetHelper.FubenTimesReset(self.Root(), SceneTypeEnum.PetTianTi);
+            M2C_FubenTimesResetResponse response = await RankNetHelper.FubenTimesReset(self.Root(), MapTypeEnum.PetTianTi);
             if (response.Error != 0)
             {
                 return;
             }
 
-            int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetTianTi);
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetTianTi);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             userInfoComponent.ClearFubenTimes(sceneId);
             self.OnUpdateTimes();
@@ -165,7 +165,7 @@ namespace ET.Client
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFormation);
             DlgPetFormation dlgPetFormation = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetFormation>();
-            dlgPetFormation.OnInitUI(SceneTypeEnum.PetTianTi, self.UpdateMyTeamInfo);
+            dlgPetFormation.OnInitUI(MapTypeEnum.PetTianTi, self.UpdateMyTeamInfo);
         }
     }
 }

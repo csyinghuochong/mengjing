@@ -96,7 +96,7 @@ namespace ET.Client
                 return;
             }
 
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, 0, 0, self.GetParent<Unit>().ConfigId.ToString()).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, 0, 0, self.GetParent<Unit>().ConfigId.ToString()).Coroutine();
         }
 
         public static void StartTimer(this UITransferHpComponent self)

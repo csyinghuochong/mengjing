@@ -17,8 +17,8 @@
             unit.GetComponent<SkillManagerComponentC>()?.OnFinish();
             unit.GetComponent<BuffManagerComponentC>()?.OnDead();
             int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().SceneType;
-            if (sceneTypeEnum == (int)SceneTypeEnum.CellDungeon
-                || sceneTypeEnum == (int)SceneTypeEnum.DragonDungeon)
+            if (sceneTypeEnum == (int)MapTypeEnum.CellDungeon
+                || sceneTypeEnum == (int)MapTypeEnum.DragonDungeon)
             {
                 unit.Root().GetComponent<CellDungeonComponentC>().CheckChuansongOpen();
             }

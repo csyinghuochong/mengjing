@@ -25,7 +25,7 @@ namespace ET.Client
             }
             else
             {
-                maxNumber = TowerHelper.GetTowerListByScene(SceneTypeEnum.RandomTower).Count;
+                maxNumber = TowerHelper.GetTowerListByScene(MapTypeEnum.RandomTower).Count;
             }
 
             if (maxNumber == 0)

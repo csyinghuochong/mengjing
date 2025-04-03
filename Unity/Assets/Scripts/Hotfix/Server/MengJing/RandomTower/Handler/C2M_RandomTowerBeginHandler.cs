@@ -9,13 +9,13 @@
             int randomTowerid = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.RandomTowerId);
             if (randomTowerid == 0)
             {
-                randomTowerid = TowerHelper.GetFirstTowerIdByScene(SceneTypeEnum.RandomTower);
+                randomTowerid = TowerHelper.GetFirstTowerIdByScene(MapTypeEnum.RandomTower);
             }
             else
             {
                 randomTowerid += request.RandomNumber;
             }
-            if (randomTowerid > TowerHelper.GetLastTowerIdByScene(SceneTypeEnum.RandomTower))
+            if (randomTowerid > TowerHelper.GetLastTowerIdByScene(MapTypeEnum.RandomTower))
             {
                 return;
             }

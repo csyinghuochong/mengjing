@@ -11,7 +11,7 @@ namespace ET.Client
             PopupTipHelp.OpenPopupTip(scene, "", LanguageComponent.Instance.LoadLocalization(tipStr),
                 () =>
                 {
-                    EnterMapHelper.RequestTransfer(scene, SceneTypeEnum.Solo, 2000010, 0, args.m2C_SoloMatch.FubenId.ToString()).Coroutine();
+                    EnterMapHelper.RequestTransfer(scene, MapTypeEnum.Solo, 2000010, 0, args.m2C_SoloMatch.FubenId.ToString()).Coroutine();
                     removeStatus = true;
                 },
                 () =>

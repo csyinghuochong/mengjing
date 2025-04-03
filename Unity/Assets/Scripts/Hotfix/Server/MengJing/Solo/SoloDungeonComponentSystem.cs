@@ -167,7 +167,7 @@ namespace ET.Server
         public static void KickOutPlayer(this SoloDungeonComponent self)
         {
             C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
             
             List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)

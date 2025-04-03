@@ -35,7 +35,7 @@ namespace ET.Client
         public static async ETTask OnEnterBtnButton(this DlgRunRace self)
         {
             int errorCode =
-                    await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.RunRace, BattleHelper.GetSceneIdByType(SceneTypeEnum.RunRace));
+                    await EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.RunRace, BattleHelper.GetSceneIdByType(MapTypeEnum.RunRace));
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return;

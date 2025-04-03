@@ -26,7 +26,7 @@ namespace ET.Client
             self.View.E_Img_Star_3Image.gameObject.SetActive(message.StarInfos[2] == 1);
 
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
-            if ((sceneType == SceneTypeEnum.PetDungeon || sceneType == SceneTypeEnum.SeasonTower)
+            if ((sceneType == MapTypeEnum.PetDungeon || sceneType == MapTypeEnum.SeasonTower)
                 && message.BattleResult == CombatResultEnum.Win)
             {
                 self.View.E_Button_nextButton.gameObject.SetActive(true);
@@ -36,7 +36,7 @@ namespace ET.Client
                 self.View.E_Button_nextButton.gameObject.SetActive(false);
             }
 
-            if (sceneType == SceneTypeEnum.PetDungeon)
+            if (sceneType == MapTypeEnum.PetDungeon)
             {
                 self.View.E_Button_continueButton.gameObject.SetActive(true);
             }
@@ -57,7 +57,7 @@ namespace ET.Client
         public static void OnButton_continue(this DlgPetFubenResult self)
         {
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
-            if (sceneType == SceneTypeEnum.PetDungeon)
+            if (sceneType == MapTypeEnum.PetDungeon)
             {
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
                 if (!PetFubenConfigCategory.Instance.Contain(sonsceneid))
@@ -66,8 +66,8 @@ namespace ET.Client
                     return;
                 }
 
-                EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.PetDungeon,
-                    BattleHelper.GetSceneIdByType(SceneTypeEnum.PetDungeon), 0, sonsceneid.ToString()).Coroutine();
+                EnterMapHelper.RequestTransfer(self.Root(), (int)MapTypeEnum.PetDungeon,
+                    BattleHelper.GetSceneIdByType(MapTypeEnum.PetDungeon), 0, sonsceneid.ToString()).Coroutine();
 
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFubenResult);
             }
@@ -76,7 +76,7 @@ namespace ET.Client
         public static void OnButton_next(this DlgPetFubenResult self)
         {
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
-            if (sceneType == SceneTypeEnum.PetDungeon)
+            if (sceneType == MapTypeEnum.PetDungeon)
             {
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId + 1;
                 if (!PetFubenConfigCategory.Instance.Contain(sonsceneid))
@@ -85,11 +85,11 @@ namespace ET.Client
                     return;
                 }
 
-                EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.PetDungeon,
-                    BattleHelper.GetSceneIdByType(SceneTypeEnum.PetDungeon), 0, sonsceneid.ToString()).Coroutine();
+                EnterMapHelper.RequestTransfer(self.Root(), (int)MapTypeEnum.PetDungeon,
+                    BattleHelper.GetSceneIdByType(MapTypeEnum.PetDungeon), 0, sonsceneid.ToString()).Coroutine();
             }
 
-            if (sceneType == SceneTypeEnum.SeasonTower)
+            if (sceneType == MapTypeEnum.SeasonTower)
             {
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId + 1;
                 if (!TowerConfigCategory.Instance.Contain(sonsceneid))
@@ -98,8 +98,8 @@ namespace ET.Client
                     return;
                 }
 
-                EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.SeasonTower,
-                    BattleHelper.GetSceneIdByType(SceneTypeEnum.SeasonTower), 0, sonsceneid.ToString()).Coroutine();
+                EnterMapHelper.RequestTransfer(self.Root(), (int)MapTypeEnum.SeasonTower,
+                    BattleHelper.GetSceneIdByType(MapTypeEnum.SeasonTower), 0, sonsceneid.ToString()).Coroutine();
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFubenResult);

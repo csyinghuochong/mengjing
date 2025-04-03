@@ -34,7 +34,7 @@ namespace ET.Client
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             int dungeonId = mapComponent.SceneId;
-            if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
             {
                 int fubenType = mapComponent.FubenDifficulty;
                 if (fubenType == FubenDifficulty.DiYu)
@@ -45,7 +45,7 @@ namespace ET.Client
                 self.View.E_titleTextText.text = DungeonConfigCategory.Instance.Get(dungeonId).ChapterName;
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.TeamDungeon)
             {
                 int fubenType = mapComponent.FubenDifficulty;
                 if (fubenType == TeamFubenType.ShenYuan)

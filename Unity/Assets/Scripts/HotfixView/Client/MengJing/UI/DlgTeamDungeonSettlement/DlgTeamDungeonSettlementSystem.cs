@@ -125,7 +125,7 @@ namespace ET.Client
         public static void OnTeamDungeonBoxReward(this DlgTeamDungeonSettlement self, M2C_TeamDungeonBoxRewardResult message)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType != MapTypeEnum.TeamDungeon)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TeamDungeonSettlement);
                 return;

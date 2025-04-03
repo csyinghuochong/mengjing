@@ -18,12 +18,12 @@ namespace ET.Client
 
         public static bool IsNoAutoExit(this DlgCellDungeonRevive self, int sceneType)
         {
-            return sceneType == SceneTypeEnum.TeamDungeon
-                    || sceneType == SceneTypeEnum.Battle
-                    || sceneType == SceneTypeEnum.BaoZang
-                    || sceneType == SceneTypeEnum.MiJing
-                    || sceneType == SceneTypeEnum.UnionRace
-                    || sceneType == SceneTypeEnum.DragonDungeon;
+            return sceneType == MapTypeEnum.TeamDungeon
+                    || sceneType == MapTypeEnum.Battle
+                    || sceneType == MapTypeEnum.BaoZang
+                    || sceneType == MapTypeEnum.MiJing
+                    || sceneType == MapTypeEnum.UnionRace
+                    || sceneType == MapTypeEnum.DragonDungeon;
         }
 
         public static void Check(this DlgCellDungeonRevive self, int leftTime)
@@ -59,7 +59,7 @@ namespace ET.Client
         public static void OnInitUI(this DlgCellDungeonRevive self, int seneTypeEnum)
         {
             self.SceneType = seneTypeEnum;
-            self.LeftTime = seneTypeEnum == SceneTypeEnum.TeamDungeon ? 3 : 10;
+            self.LeftTime = seneTypeEnum == MapTypeEnum.TeamDungeon ? 3 : 10;
 
             self.BegingTimer().Coroutine();
 
@@ -97,7 +97,7 @@ namespace ET.Client
                 self.View.E_Text_CostText.color = Color.yellow;
             }
 
-            if (self.SceneType != SceneTypeEnum.LocalDungeon)
+            if (self.SceneType != MapTypeEnum.LocalDungeon)
             {
                 self.View.E_Text_ExitDesText.text = "返回出生点";
             }
@@ -155,7 +155,7 @@ namespace ET.Client
                 return;
             }
 
-            if (self.SceneType == SceneTypeEnum.UnionRace)
+            if (self.SceneType == MapTypeEnum.UnionRace)
             {
                 FlyTipComponent.Instance.ShowFlyTip("不支持复活");
                 return;
@@ -181,7 +181,7 @@ namespace ET.Client
         public static void OnButton_ExitButton(this DlgCellDungeonRevive self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType == MapTypeEnum.MainCityScene)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CellDungeonRevive);
                 return;
@@ -193,7 +193,7 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        if (self.SceneType == SceneTypeEnum.LocalDungeon)
+                        if (self.SceneType == MapTypeEnum.LocalDungeon)
                         {
                             FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}秒后可返回主城！", self.LeftTime));
                         }

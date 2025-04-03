@@ -135,7 +135,7 @@ namespace ET.Server
 
             long revetime = 0;
             Unit mainUnit = null;
-            if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.LocalDungeon)
             {
                 mainUnit = scene.GetComponent<LocalDungeonComponent>().MainUnit;
                 revetime = mainUnit.GetComponent<UserInfoComponentS>().GetReviveTime(monsterConfig.Id);
@@ -192,12 +192,12 @@ namespace ET.Server
                 AIComponent aIComponent = unit.AddComponent<AIComponent, int>(ai);
                 switch (mapComponent.SceneType)
                 {
-                    case SceneTypeEnum.LocalDungeon:
+                    case MapTypeEnum.LocalDungeon:
                         aIComponent.InitMonster(monsterConfig.Id);
                         aIComponent.Begin();
                         skillPassiveComponent.Begin();
                         break;
-                    case SceneTypeEnum.PetDungeon:
+                    case MapTypeEnum.PetDungeon:
                         aIComponent.InitPetFubenMonster(monsterConfig.Id);
                         break;
                     default:
@@ -307,7 +307,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false);
 
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-            if (scene.GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.MainCityScene)
+            if (scene.GetComponent<MapComponent>().SceneType != (int)MapTypeEnum.MainCityScene)
             {
                 unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
                 unit.GetComponent<SkillPassiveComponent>().Begin();
@@ -386,17 +386,17 @@ namespace ET.Server
             unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
             switch (mapComponent.SceneType)
             {
-                case SceneTypeEnum.PetDungeon:
-                case SceneTypeEnum.PetTianTi:
-                case SceneTypeEnum.PetMing:
+                case MapTypeEnum.PetDungeon:
+                case MapTypeEnum.PetTianTi:
+                case MapTypeEnum.PetMing:
                     unit.AddComponent<AIComponent, int>(1).InitTianTiPet(petinfo.ConfigId); //AI行为树序号  撤退
                     break;
-                case SceneTypeEnum.PetMelee:
+                case MapTypeEnum.PetMelee:
                     AIComponent aiComponent = unit.AddComponent<AIComponent, int>(16);
                     aiComponent.TargetPoint.Add(new float3(13, 0, 0));
                     aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
                     break;
-                case SceneTypeEnum.PetMatch:
+                case MapTypeEnum.PetMatch:
                     Console.WriteLine("petmatch 宠物参数 未初始化！！");
                     break;
                 default:
@@ -642,12 +642,12 @@ namespace ET.Server
             {
                 int fubenDifficulty = FubenDifficulty.None;
                 dropAdd_Pro += main.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Base_DropAdd_Pro_Add);
-                if (sceneType == (int)SceneTypeEnum.CellDungeon)
+                if (sceneType == (int)MapTypeEnum.CellDungeon)
                 {
                     fubenDifficulty = bekill.Scene().GetComponent<CellDungeonComponentS>().FubenDifficulty;
                 }
 
-                if (sceneType == (int)SceneTypeEnum.LocalDungeon)
+                if (sceneType == (int)MapTypeEnum.LocalDungeon)
                 {
                     fubenDifficulty = bekill.Scene().GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }
@@ -669,7 +669,7 @@ namespace ET.Server
             }
 
             //1个人掉率降低
-            if (sceneType == SceneTypeEnum.TeamDungeon)
+            if (sceneType == MapTypeEnum.TeamDungeon)
             {
                 if (playerNumer == 1)
                 {
@@ -694,13 +694,13 @@ namespace ET.Server
             }
 
             // 封印之塔提升爆率
-            if (sceneType == SceneTypeEnum.SealTower)
+            if (sceneType == MapTypeEnum.SealTower)
             {
                 dropAdd_Pro += 1f;
             }
 
             //个人副本根据成长来
-            if (sceneType == SceneTypeEnum.LocalDungeon && bekill.IsBoss() && !CommonHelp.IsSeasonBoss(bekill.ConfigId ))
+            if (sceneType == MapTypeEnum.LocalDungeon && bekill.IsBoss() && !CommonHelp.IsSeasonBoss(bekill.ConfigId ))
             {
                 int killNumber = main.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(monsterCof.Id);
                 int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(scenid);
@@ -775,7 +775,7 @@ namespace ET.Server
                 Scene DomainScene = main != null ? main.Scene() : bekill.Scene();
                 for (int i = 0; i < droplist.Count; i++)
                 {
-                    if (sceneType == SceneTypeEnum.TeamDungeon && (droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019))
+                    if (sceneType == MapTypeEnum.TeamDungeon && (droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019))
                     {
                         Log.Error($"掉落装备.字: {droplist[i].ItemID}   {sceneType}");
                     }
@@ -927,7 +927,7 @@ namespace ET.Server
 
                 for (int i = 0; i < droplist.Count; i++)
                 {
-                    if ((droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019) && sceneType != SceneTypeEnum.LocalDungeon)
+                    if ((droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019) && sceneType != MapTypeEnum.LocalDungeon)
                     {
                         Log.Error($"掉落装备.字: {droplist[i].ItemID}  {par}   {sceneType}");
                     }
@@ -966,7 +966,7 @@ namespace ET.Server
 
                 for (int k = 0; k < droplist.Count; k++)
                 {
-                    if ((droplist[k].ItemID >= 10030011 && droplist[k].ItemID <= 10030019) && sceneType == SceneTypeEnum.TeamDungeon)
+                    if ((droplist[k].ItemID >= 10030011 && droplist[k].ItemID <= 10030019) && sceneType == MapTypeEnum.TeamDungeon)
                     {
                         Log.Error($"掉落装备.字: {droplist[k].ItemID}  {par}   {sceneType}");
                     }

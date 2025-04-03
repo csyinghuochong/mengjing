@@ -216,7 +216,7 @@ namespace ET.Server
         public static void OnRevive(this BuffManagerComponentS self)
         {
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.RunRace)
+            if (mapComponent.SceneType != MapTypeEnum.RunRace)
             {
                 self.InitBaoShiBuff();
                 self.InitDonationBuff();
@@ -739,7 +739,7 @@ namespace ET.Server
 
             unitInfoComponent.Buffs.Clear();
 
-            if (sceneType != SceneTypeEnum.RunRace)
+            if (sceneType != MapTypeEnum.RunRace)
             {
                 self.InitBaoShiBuff();
                 self.InitDonationBuff();
@@ -751,7 +751,7 @@ namespace ET.Server
 
         public static void InitSoloBuff(this BuffManagerComponentS self, int sceneType)
         {
-            if (sceneType != SceneTypeEnum.Solo)
+            if (sceneType != MapTypeEnum.Solo)
             {
                 return;
             }

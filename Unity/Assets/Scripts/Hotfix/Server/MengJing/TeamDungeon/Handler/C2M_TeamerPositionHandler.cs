@@ -14,7 +14,7 @@ namespace ET.Server
             {
                 Unit uniitem = units[i];
                 
-                if ((sceneType == SceneTypeEnum.TeamDungeon || sceneType == SceneTypeEnum.DragonDungeon) && uniitem.Id!=unit.Id && uniitem.Type == UnitType.Player)
+                if ((sceneType == MapTypeEnum.TeamDungeon || sceneType == MapTypeEnum.DragonDungeon) && uniitem.Id!=unit.Id && uniitem.Type == UnitType.Player)
                 {
                     UnitInfo UnitInfo = UnitInfo.Create();
                     UnitInfo.Type = uniitem.Type;
@@ -25,7 +25,7 @@ namespace ET.Server
                     response.UnitList.Add(UnitInfo);
                 }
                
-                if (sceneType == SceneTypeEnum.LocalDungeon && (CommonHelp.IsSeasonBoss(uniitem.ConfigId)   ||uniitem.IsJingLingMonster()))
+                if (sceneType == MapTypeEnum.LocalDungeon && (CommonHelp.IsSeasonBoss(uniitem.ConfigId)   ||uniitem.IsJingLingMonster()))
                 {
                     UnitInfo unitInfo = UnitInfo.Create();
                     unitInfo.Type = uniitem.Type;

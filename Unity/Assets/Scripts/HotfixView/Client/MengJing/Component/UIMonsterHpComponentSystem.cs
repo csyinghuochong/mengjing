@@ -15,8 +15,8 @@ namespace ET.Client
             }
 
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.PetMelee
-                && mapComponent.SceneType != SceneTypeEnum.PetMatch)
+            if (mapComponent.SceneType != MapTypeEnum.PetMelee
+                && mapComponent.SceneType != MapTypeEnum.PetMatch)
             {
                 return;
             }
@@ -220,7 +220,7 @@ namespace ET.Client
             self.UIPlayerHpText.gameObject.SetActive(true);
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             Vector2 offset = Vector2.zero;
-            offset =(  mapComponent.SceneType == SceneTypeEnum.PetMelee || mapComponent.SceneType == SceneTypeEnum.PetMatch) ? new Vector2(0, 70f) : Vector2.zero;
+            offset =(  mapComponent.SceneType == MapTypeEnum.PetMelee || mapComponent.SceneType == MapTypeEnum.PetMatch) ? new Vector2(0, 70f) : Vector2.zero;
             
             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
             HeadBarUI_1.enabled = !unit.MainHero;
@@ -313,7 +313,7 @@ namespace ET.Client
                 //this.ObjName.GetComponent<TextMeshProUGUI>().text = $"{colorstr}{monsterCof.MonsterName}_{numericComponent.GetAsInt(NumericType.Now_AI)}</color>";
                 MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
                 NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-                bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                bool shenYuan = mapComponent.SceneType == MapTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                 using (zstring.Block())
                 {
                     if (shenYuan)

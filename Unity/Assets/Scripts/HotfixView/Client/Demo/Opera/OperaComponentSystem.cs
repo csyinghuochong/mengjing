@@ -463,7 +463,7 @@ namespace ET.Client
 
             GameObject colliderobj = Hit.collider.gameObject;
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (colliderobj.name.Contains("C_PlankPlanterLow_1x1m") && mapComponent.SceneType == SceneTypeEnum.JiaYuan)
+            if (colliderobj.name.Contains("C_PlankPlanterLow_1x1m") && mapComponent.SceneType == MapTypeEnum.JiaYuan)
             {
                 GameObject gameObject = colliderobj.transform.parent.gameObject;
                 string[] namelist = gameObject.name.Split('_');
@@ -498,7 +498,7 @@ namespace ET.Client
                 return;
             }
 
-            if (unitmonster.Type == UnitType.Pet && mapComponent.SceneType == SceneTypeEnum.JiaYuan)
+            if (unitmonster.Type == UnitType.Pet && mapComponent.SceneType == MapTypeEnum.JiaYuan)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnClickPet(unitid).Coroutine();
                 return;
@@ -605,7 +605,7 @@ namespace ET.Client
         public static void OnArriveToNpc(this OperaComponent self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == SceneTypeEnum.JiaYuan)
+            if (mapComponent.SceneType == MapTypeEnum.JiaYuan)
             {
                 JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
                 UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -623,7 +623,7 @@ namespace ET.Client
                     int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
                     int chapterid = DungeonConfigCategory.Instance.DungeonToChapter[sceneId];
                     int mysterDungeonid = DungeonSectionConfigCategory.Instance.GetMysteryDungeon(chapterid);
-                    EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
+                    EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
                 }, null).Coroutine();
             }
             else if (self.NpcId == 40000004)
@@ -638,7 +638,7 @@ namespace ET.Client
                         }
                         else
                         {
-                            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
                         }
                     },
                     null).Coroutine();
@@ -671,7 +671,7 @@ namespace ET.Client
         public static int CheckObstruct(this OperaComponent self, Vector3 start, Vector3 target)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType != MapTypeEnum.TeamDungeon)
             {
                 return 0;
             }

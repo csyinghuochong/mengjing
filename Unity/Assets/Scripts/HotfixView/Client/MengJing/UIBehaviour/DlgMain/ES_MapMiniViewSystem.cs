@@ -50,12 +50,12 @@ namespace ET.Client
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             switch (sceneType)
             {
-                case (int)SceneTypeEnum.MainCityScene:
-                case (int)SceneTypeEnum.LocalDungeon:
+                case (int)MapTypeEnum.MainCityScene:
+                case (int)MapTypeEnum.LocalDungeon:
                     self.OnOpenBigMap(); //打开主城
                     break;
-                case (int)SceneTypeEnum.CellDungeon:
-                case (int)SceneTypeEnum.DragonDungeon:
+                case (int)MapTypeEnum.CellDungeon:
+                case (int)MapTypeEnum.DragonDungeon:
                     self.OnShowFubenIndex(); //打开副本小地图
                     break;
                 default:
@@ -136,7 +136,7 @@ namespace ET.Client
 
             //1自己 2敌对 3队友  4主城
             string showType = "4";
-            if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
+            if (self.SceneTypeEnum != MapTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
             {
                 showType = "2";
             }
@@ -299,7 +299,7 @@ namespace ET.Client
             camera.enabled = true;
 
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType == (int)MapTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
                 mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
@@ -371,15 +371,15 @@ namespace ET.Client
                 //显示地图名称
                 switch (sceneTypeEnum)
                 {
-                    case SceneTypeEnum.CellDungeon:
+                    case MapTypeEnum.CellDungeon:
                         self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
                         self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
                         break;
-                    case SceneTypeEnum.DragonDungeon:
+                    case MapTypeEnum.DragonDungeon:
                         self.EG_MainCityShowRectTransform.gameObject.SetActive(false);
                         self.E_MapNameText.text = CellGenerateConfigCategory.Instance.Get(sceneId).ChapterName;
                         break;
-                    case SceneTypeEnum.LocalDungeon:
+                    case MapTypeEnum.LocalDungeon:
                         string str = string.Empty;
                         if (difficulty == FubenDifficulty.Normal)
                         {
@@ -403,7 +403,7 @@ namespace ET.Client
 
                         self.E_MapNameText.text = zstring.Format("{0}{1}", DungeonConfigCategory.Instance.Get(sceneId).ChapterName, str);
                         break;
-                    case SceneTypeEnum.TeamDungeon:
+                    case MapTypeEnum.TeamDungeon:
                         str = "";
                         if (difficulty == TeamFubenType.XieZhu)
                         {
@@ -417,11 +417,11 @@ namespace ET.Client
 
                         self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name, str);
                         break;
-                    case SceneTypeEnum.Union:
+                    case MapTypeEnum.Union:
                         UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                         self.E_MapNameText.text = zstring.Format("{0} 家族地图", userInfoComponent.UserInfo.UnionName);
                         break;
-                    case SceneTypeEnum.SealTower:
+                    case MapTypeEnum.SealTower:
                         self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name,
                             UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerArrived));
                         break;

@@ -16,7 +16,7 @@ namespace ET.Server
             self.YeWaiFubenList.Clear();
             
             //野外场景都放在FubenCenter1  其他玩法根据规则放在不同的
-            self.InitYeWaiScene(new List<int>(){SceneTypeEnum.BaoZang,  SceneTypeEnum.MiJing}).Coroutine();
+            self.InitYeWaiScene(new List<int>(){MapTypeEnum.BaoZang,  MapTypeEnum.MiJing}).Coroutine();
         }
 
         public static int GetScenePlayer(this FubenCenterComponent self, long instanced)
@@ -194,22 +194,22 @@ namespace ET.Server
             int sceneid = 0;
             if (functionId == 1031)
             {
-                sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Arena);
+                sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.Arena);
             }
 
             if (functionId == 1055)
             {
-                sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy);
+                sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.Happy);
             }
 
             if (functionId == 1058)
             {
-                sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.RunRace);
+                sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.RunRace);
             }
 
             if (functionId == 1059)
             {
-                sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Demon);
+                sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.Demon);
             }
 
             if (sceneid == 0)
@@ -240,26 +240,26 @@ namespace ET.Server
 
             switch (sceneConfig.MapType)
             {
-                case SceneTypeEnum.Arena:
+                case MapTypeEnum.Arena:
                     fubnescene.AddComponent<ArenaDungeonComponent>().ArenaInfo = battleInfo;
                     fubnescene.GetComponent<ArenaDungeonComponent>().OnArenaOpen();
                     break;
-                case SceneTypeEnum.Happy:
+                case MapTypeEnum.Happy:
                     fubnescene.AddComponent<HappyDungeonComponent>();
                     fubnescene.GetComponent<HappyDungeonComponent>().OnHappyBegin();
                     break;
-                case SceneTypeEnum.RunRace:
+                case MapTypeEnum.RunRace:
                     fubnescene.AddComponent<RunRaceDungeonComponent>();
                     fubnescene.GetComponent<RunRaceDungeonComponent>().OnBegin();
                     break;
-                case SceneTypeEnum.Demon:
+                case MapTypeEnum.Demon:
                     fubnescene.AddComponent<DemonDungeonComponent>();
                     fubnescene.GetComponent<DemonDungeonComponent>().OnBegin();
                     break;
-                case SceneTypeEnum.Union:
+                case MapTypeEnum.Union:
 
                     break;
-                case SceneTypeEnum.UnionRace:
+                case MapTypeEnum.UnionRace:
 
                     break;
                 default:
@@ -430,7 +430,7 @@ namespace ET.Server
                 }
 
                 C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-                actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+                actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
                 List<EntityRef<Unit>> units = fubenScene.GetComponent<UnitComponent>().GetAll();
                 for (int unit = 0; unit < units.Count; unit++)
                 {
@@ -487,10 +487,10 @@ namespace ET.Server
 
                 switch (sceneConfigs[i].MapType)
                 {
-                    case SceneTypeEnum.MiJing:
+                    case MapTypeEnum.MiJing:
                         fubnescene.AddComponent<MiJingDungeonComponent>();
                         break;
-                    case SceneTypeEnum.PetMatch:
+                    case MapTypeEnum.PetMatch:
                         
                         break;
                     default:
@@ -518,7 +518,7 @@ namespace ET.Server
             fubnescene.AddComponent<BattleDungeonComponent>().SendReward = false;
             fubnescene.GetComponent<BattleDungeonComponent>().BattleOpenTime = TimeHelper.ServerNow();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.Battle, sceneId, 0);
+            mapComponent.SetMapInfo((int)MapTypeEnum.Battle, sceneId, 0);
             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(sceneId).MapID;
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             fubnescene.AddComponent<YeWaiRefreshComponent>().SceneId = sceneId;
@@ -653,7 +653,7 @@ namespace ET.Server
             Scene fubnescene = GateMapFactory.Create(self, unionid, fubenInstanceId, "Union" + unionid.ToString());
 
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-            mapComponent.SetMapInfo((int)SceneTypeEnum.Union, unionsceneid, 0);
+            mapComponent.SetMapInfo((int)MapTypeEnum.Union, unionsceneid, 0);
             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(unionsceneid).MapID;
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             fubnescene.AddComponent<UnionDungeonComponet>().GenerateUnionBoss();
@@ -767,7 +767,7 @@ namespace ET.Server
                 Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "JiaYuan" + masterid.ToString());
                 fubnescene.AddComponent<JiaYuanDungeonComponent>().MasterId = masterid;
                 MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
-                mapComponent.SetMapInfo((int)SceneTypeEnum.JiaYuan, jiayuansceneid, 0);
+                mapComponent.SetMapInfo((int)MapTypeEnum.JiaYuan, jiayuansceneid, 0);
                 mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(jiayuansceneid).MapID;
                 JiaYuanDungeonComponent jiaYuanDungeonComponent = fubnescene.GetComponent<JiaYuanDungeonComponent>();
                 await jiaYuanDungeonComponent.CreateJiaYuanUnit( masterid, unitid);

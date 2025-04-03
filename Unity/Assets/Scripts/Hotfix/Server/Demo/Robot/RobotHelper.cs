@@ -1066,7 +1066,7 @@ namespace ET.Client
 
         public static async ETTask JoinTeam(Scene root)
         {
-            await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.TeamDungeon);
+            await TeamNetHelper.RequestTeamDungeonList(root, MapTypeEnum.TeamDungeon);
             TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
             TeamInfo teamInfo = teamComponent.GetSelfTeam();
             if (teamInfo == null || teamInfo.SceneId == 0)
@@ -1082,7 +1082,7 @@ namespace ET.Client
                     }
 
                     error = await TeamNetHelper.TeamDungeonApplyRequest(root, teamList[i].TeamId, teamList[i].SceneId, teamList[i].FubenType,
-                        teamList[i].PlayerList[0].PlayerLv, true,SceneTypeEnum.TeamDungeon);
+                        teamList[i].PlayerList[0].PlayerLv, true,MapTypeEnum.TeamDungeon);
 
                     if (error == 0)
                     {
@@ -1092,7 +1092,7 @@ namespace ET.Client
 
                 if (error != 0)
                 {
-                    await TeamNetHelper.RequestTeamDungeonCreate(root, 110001, 1,SceneTypeEnum.TeamDungeon);
+                    await TeamNetHelper.RequestTeamDungeonCreate(root, 110001, 1,MapTypeEnum.TeamDungeon);
                 }
             }
             else

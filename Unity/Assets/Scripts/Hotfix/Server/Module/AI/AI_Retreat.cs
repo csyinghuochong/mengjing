@@ -89,7 +89,7 @@ namespace ET.Server
                 if (!cancellationToken.IsCancel() && math.distance(bornVector3, unit.Position) < 0.5f && !unit.IsDisposed)
                 {
                     NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-                    if (aiComponent.SceneType != SceneTypeEnum.TeamDungeon && numericComponent.GetAsInt(NumericType.Now_Dead) == 0)
+                    if (aiComponent.SceneType != MapTypeEnum.TeamDungeon && numericComponent.GetAsInt(NumericType.Now_Dead) == 0)
                     {
                         long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
                         numericComponent.ApplyValue(NumericType.Now_Hp, max_hp);

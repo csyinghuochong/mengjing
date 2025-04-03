@@ -27,8 +27,8 @@
         protected override async ETTask Run(Scene scene, RecvTeamDungeonOpen args)
         {
             int SceneType = scene.GetComponent<MapComponent>().SceneType;
-            if ( SceneType== SceneTypeEnum.TeamDungeon
-                || SceneType== SceneTypeEnum.DragonDungeon)
+            if ( SceneType== MapTypeEnum.TeamDungeon
+                || SceneType== MapTypeEnum.DragonDungeon)
             {
                 return;
             }
@@ -73,7 +73,7 @@
                 return;
 
             int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
-            if (sceneTypeEnum == SceneTypeEnum.MainCityScene)
+            if (sceneTypeEnum == MapTypeEnum.MainCityScene)
             {
                 return;
             }

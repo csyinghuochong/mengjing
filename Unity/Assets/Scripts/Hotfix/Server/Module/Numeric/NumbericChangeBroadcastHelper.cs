@@ -15,7 +15,7 @@ namespace ET
             }
 
             //主城不广播任何血量相关数值
-			if (args.Defend.SceneType == SceneTypeEnum.MainCityScene)
+			if (args.Defend.SceneType == MapTypeEnum.MainCityScene)
             {
                 if (args.NumericType == NumericType.Now_MaxHp || args.NumericType == NumericType.Now_Hp)
                 {

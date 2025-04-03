@@ -40,7 +40,7 @@ namespace ET.Client
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFormation);
             DlgPetFormation dlgPetFormation = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetFormation>();
-            dlgPetFormation.OnInitUI(SceneTypeEnum.PetDungeon, self.UpdateFormationSet);
+            dlgPetFormation.OnInitUI(MapTypeEnum.PetDungeon, self.UpdateFormationSet);
         }
 
         public static void RequestFormationSet(this ES_PetChallenge self, long rolePetInfoId, int index, int operateType)
@@ -51,17 +51,17 @@ namespace ET.Client
 
         public static void UpdateFormationSet(this ES_PetChallenge self)
         {
-            self.ES_PetFormationSet.OnUpdateFormation(SceneTypeEnum.PetDungeon,
+            self.ES_PetFormationSet.OnUpdateFormation(MapTypeEnum.PetDungeon,
                 self.Root().GetComponent<PetComponentC>().PetFormations, false);
         }
 
         public static void InitSubView(this ES_PetChallenge self)
         {
             self.ES_PetFormationSet.DragEndHandler = self.RequestFormationSet;
-            self.ES_PetFormationSet.OnUpdateFormation(SceneTypeEnum.PetDungeon,
+            self.ES_PetFormationSet.OnUpdateFormation(MapTypeEnum.PetDungeon,
                 self.Root().GetComponent<PetComponentC>().PetFormations, false);
 
-            int sceneId = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetDungeon);
+            int sceneId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetDungeon);
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             using (zstring.Block())
@@ -160,8 +160,8 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.PetDungeon,
-                BattleHelper.GetSceneIdByType(SceneTypeEnum.PetDungeon), 0, self.PetFubenId.ToString());
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), (int)MapTypeEnum.PetDungeon,
+                BattleHelper.GetSceneIdByType(MapTypeEnum.PetDungeon), 0, self.PetFubenId.ToString());
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return;

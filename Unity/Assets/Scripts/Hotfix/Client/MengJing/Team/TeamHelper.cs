@@ -43,7 +43,7 @@
 
             switch (sceneType)
             {
-                case SceneTypeEnum.TeamDungeon:
+                case MapTypeEnum.TeamDungeon:
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenid);
                     if (userInfoComponent.UserInfo.Lv < sceneConfig.CreateLv)
                     {

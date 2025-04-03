@@ -26,13 +26,13 @@ namespace ET
             while (true)
             {
                 //获取队伍列表
-                int errorCode = await TeamNetHelper.RequestTeamDungeonList(root, SceneTypeEnum.TeamDungeon);
+                int errorCode = await TeamNetHelper.RequestTeamDungeonList(root, MapTypeEnum.TeamDungeon);
                 string messagevalue = aiComponent.Message;
                 string[] teamId = messagevalue.Split('_');
                 TeamInfo teamInfo = teamComponent.GetTeamInfo(long.Parse(teamId[1]));
                 if (teamInfo != null)
                 {
-                    errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,SceneTypeEnum.TeamDungeon);
+                    errorCode = await TeamNetHelper.TeamDungeonApplyRequest(root, teamInfo.TeamId, teamInfo.SceneId, teamInfo.FubenType, teamInfo.PlayerList[0].PlayerLv, true,MapTypeEnum.TeamDungeon);
                 }
                 if (errorCode != 0)
                 {

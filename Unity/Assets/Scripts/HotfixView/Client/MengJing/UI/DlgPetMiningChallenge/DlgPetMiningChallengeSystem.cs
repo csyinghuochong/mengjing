@@ -91,7 +91,7 @@ namespace ET.Client
 
         public static void UpdateChallengeTime(this DlgPetMiningChallenge self)
         {
-            int sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetMing);
+            int sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMing);
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
 
             int useTime = (int)self.Root().GetComponent<UserInfoComponentC>().GetSceneFubenTimes(sceneid);
@@ -257,9 +257,9 @@ namespace ET.Client
                 return;
             }
 
-            int sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetMing);
+            int sceneid = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMing);
 
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMing, sceneid, self.MineTpe, $"{self.Position}_{self.TeamId}").Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), MapTypeEnum.PetMing, sceneid, self.MineTpe, $"{self.Position}_{self.TeamId}").Coroutine();
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSet);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningChallenge);

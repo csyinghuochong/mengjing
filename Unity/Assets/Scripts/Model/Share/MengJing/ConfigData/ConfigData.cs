@@ -161,8 +161,8 @@ namespace ET
         [StaticField]
         public static Dictionary<int, int> RototMessageType= new(2)
         {
-            {SceneTypeEnum.TeamDungeon, NoticeType.TeamDungeon},
-            {SceneTypeEnum.DragonDungeon, NoticeType.DragonDungeon}
+            {MapTypeEnum.TeamDungeon, NoticeType.TeamDungeon},
+            {MapTypeEnum.DragonDungeon, NoticeType.DragonDungeon}
         };
         
         [StaticField]

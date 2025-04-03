@@ -10,7 +10,7 @@ namespace ET.Client
         public static void OnGoToNpc(Scene scene, int npc)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
+            if (mapComponent.SceneType != MapTypeEnum.MainCityScene)
             {
                 FlyTipComponent.Instance.ShowFlyTip("请前往主城!");
                 return;
@@ -318,7 +318,7 @@ namespace ET.Client
         {
             TaskPositionConfig taskPositionConfig = TaskPositionConfigCategory.Instance.Get(positionId);
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType != (int)SceneTypeEnum.LocalDungeon)
+            if (mapComponent.SceneType != (int)MapTypeEnum.LocalDungeon)
             {
                 return false;
             }

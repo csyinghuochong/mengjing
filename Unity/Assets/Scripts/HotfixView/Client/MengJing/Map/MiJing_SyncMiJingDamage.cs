@@ -6,12 +6,12 @@
         protected override async ETTask Run(Scene scene, SyncMiJingDamage args)
         {
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
-            if (mapComponent.SceneType == SceneTypeEnum.MiJing)
+            if (mapComponent.SceneType == MapTypeEnum.MiJing)
             {
                 scene.GetComponent<UIComponent>().GetDlgLogic<DlgMiJingMain>()?.OnUpdateDamage(args.M2C_SyncMiJingDamage);
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.TeamDungeon)
+            if (mapComponent.SceneType == MapTypeEnum.TeamDungeon)
             {
                 scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateTeamDamage(args.M2C_SyncMiJingDamage);
             }
