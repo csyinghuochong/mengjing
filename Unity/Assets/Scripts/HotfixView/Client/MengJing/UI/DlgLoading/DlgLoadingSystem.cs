@@ -112,8 +112,13 @@ namespace ET.Client
             }
 
             var path = ABPathHelper.GetJpgPath(loadResName);
-            Log.Debug($"loadingjpg: {path}");
             Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            if (atlas == null)
+            {
+                path = ABPathHelper.GetJpgPath(backpngs[0]);
+                atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            }
+
             self.View.E_Back_1Image.sprite = atlas;
             self.View.E_Back_1Image.gameObject.SetActive(true);
             self.AssetPath = path;
