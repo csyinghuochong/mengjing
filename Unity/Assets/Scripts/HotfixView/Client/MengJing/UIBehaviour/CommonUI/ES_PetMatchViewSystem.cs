@@ -35,7 +35,7 @@ namespace ET.Client
 			
 			self.E_Button_TeamButton.AddListenerAsync(self.OnButton_TeamButton);
 			self.E_FunctionSetBtnToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
-			
+			self.E_Button_RefreshButton.AddListenerAsync( self.OnRefreshButton );
 			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
 			self.InitItemList();
 			
@@ -130,6 +130,16 @@ namespace ET.Client
 			await ETTask.CompletedTask;
 		}
 
+		private static async ETTask OnRefreshButton(this ES_PetMatch self)
+		{
+			BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
+			long lastTime = battleMessageComponent.SoloPiPeiStartTime;
+			battleMessageComponent.SoloPiPeiStartTime = TimeHelper.ServerNow();
+
+			await PetMatchNetHelper.RequestPetMatch(self.Root());
+			
+			await ETTask.CompletedTask;
+		}
 
 		public static void OnUpdateUI(this ES_PetMatch self)
 		{
