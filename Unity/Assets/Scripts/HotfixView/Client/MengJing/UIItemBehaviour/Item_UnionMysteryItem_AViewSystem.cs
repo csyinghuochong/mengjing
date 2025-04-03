@@ -78,6 +78,12 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_Image_goldImage.sprite = sp;
+            
+            ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(mysteryConfig.SellItemID);
+            string qualityiconStr = FunctionUI.BigItemQualiytoPath(itemConfig1.ItemQuality);
+            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+            Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+            self.E_Image_bg.sprite = sp1;
         }
     }
 }
