@@ -8,6 +8,7 @@
             switch (request.MapType)
             {
                 case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
                     if (petMeleeDungeonComponent.IsGameOver())
                     {
@@ -16,9 +17,6 @@
                     }
 
                     response.Error = petMeleeDungeonComponent.DisposeCard(request.CarId, unit);
-                    break;
-                case MapTypeEnum.PetMatch:
-                    
                     break;
             }
 

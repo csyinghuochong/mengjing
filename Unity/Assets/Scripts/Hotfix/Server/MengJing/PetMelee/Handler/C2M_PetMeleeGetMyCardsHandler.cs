@@ -11,17 +11,11 @@
             switch (request.MapType)
             {
                 case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
                     if (petMeleeDungeonComponent != null)
                     {
                         response.PetMeleeCardList.AddRange(petMeleeDungeonComponent.PetMeleeCardInHand[unit.Id]);
-                    }
-                    break;
-                case MapTypeEnum.PetMatch:
-                    PetMatchDungeonComponent petMatchDungeonComponent = unit.Scene().GetComponent<PetMatchDungeonComponent>();
-                    if (petMatchDungeonComponent != null)
-                    {
-                        response.PetMeleeCardList.AddRange(petMatchDungeonComponent.PetMeleeCardInHand);
                     }
                     break;
             }

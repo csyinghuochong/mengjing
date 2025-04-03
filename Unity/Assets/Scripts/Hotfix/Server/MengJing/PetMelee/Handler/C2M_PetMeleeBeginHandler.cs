@@ -11,6 +11,7 @@ namespace ET.Server
             switch (request.MapType)
             {
                 case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
                     if (petMeleeDungeonComponent.IsGameOver())
                     {
@@ -24,10 +25,7 @@ namespace ET.Server
                         return;
                     }
 
-                    petMeleeDungeonComponent.SetGameStart();
-                    break;
-                case MapTypeEnum.PetMatch:
-                    Console.WriteLine("C2M_PetMeleeBeginHandler no handler");
+                    petMeleeDungeonComponent.SetGameStart(unit,request.MapType);
                     break;
             }
 

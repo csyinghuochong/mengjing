@@ -497,9 +497,19 @@ namespace ET.Server
         {
             return self.GameOver;
         }
-
-        public static void SetGameStart(this PetMeleeDungeonComponent self)
+        
+        public static void SetGameStart(this PetMeleeDungeonComponent self,Unit player, int mapType)
         {
+            if (!self.BegingPlayers.Contains(player.Id))
+            {
+                self.BegingPlayers.Add(player.Id);
+            }
+
+            if (mapType == 2 && self.BegingPlayers.Count < 2)
+            {
+                return;
+            }
+
             self.GameStart = true;
             self.StartTime = TimeInfo.Instance.ServerNow();
 
@@ -586,24 +596,31 @@ namespace ET.Server
             FubenHelp.CreateMonsterList(self.Scene(), SceneConfigCategory.Instance.Get(mapComponent.SceneId).CreateMonsterPosi);
         }
 
-        public static void OnKillEvent(this PetMeleeDungeonComponent self, Unit defend)
+        public static void OnKillEvent(this PetMeleeDungeonComponent self, Unit defend, int mapType)
         {
             if (self.GameOver)
             {
                 return;
             }
 
-            if (defend.Type == UnitType.Monster)
+            switch (mapType)
             {
-                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(defend.ConfigId);
-                if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
-                {
-                    self.Scene().RemoveComponent<YeWaiRefreshComponent>();
+                case MapTypeEnum.PetMelee:
+                    
+                    if (defend.Type == UnitType.Monster)
+                    {
+                        MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(defend.ConfigId);
+                        if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_62)
+                        {
+                            self.Scene().RemoveComponent<YeWaiRefreshComponent>();
 
-                    int battleCamp = defend.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
-                    self.SetGameOver(battleCamp == 1 ? CombatResultEnum.Fail : CombatResultEnum.Win);
-                }
+                            int battleCamp = defend.GetComponent<NumericComponentS>().GetAsInt(NumericType.BattleCamp);
+                            self.SetGameOver(battleCamp == 1 ? CombatResultEnum.Fail : CombatResultEnum.Win);
+                        }
+                    }
+                    break;
             }
+          
         }
     }
 }

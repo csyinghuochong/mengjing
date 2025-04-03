@@ -10,6 +10,7 @@ namespace ET.Server
             switch (request.MapType)
             {
                 case MapTypeEnum.PetMelee:
+                case MapTypeEnum.PetMatch:
                     PetMeleeDungeonComponent petMeleeDungeonComponent = unit.Scene().GetComponent<PetMeleeDungeonComponent>();
                     if (petMeleeDungeonComponent.IsGameOver())
                     {
@@ -18,10 +19,6 @@ namespace ET.Server
                     }
 
                     response.Error = petMeleeDungeonComponent.UseCard(request.CarId, request.Position, request.TargetUnitId, unit);
-
-                    break;
-                case MapTypeEnum.PetMatch:
-                    
                     break;
             }
           

@@ -11,7 +11,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_AlreadyFinish;
                 return;
             }
-            if (soloscene.GetComponent<PetMatchDungeonComponent>().SendReward)
+            if (soloscene.GetComponent<PetMeleeDungeonComponent>().IsGameOver())
             {
                 response.Error = ErrorCode.ERR_AlreadyFinish;
                 return;

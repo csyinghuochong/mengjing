@@ -7,11 +7,13 @@ namespace ET.Server
     {
         public bool GameStart;
         public long StartTime;
-        public bool GameOver;
+        public bool GameOver { get; set; }
         public long PetMeleeDungeonBattleTimer; //战斗倒计时
         public long PetMeleeDungeonDealCardTimer; //发牌记时
         public long PetMeleeDungeonRestoreTimer; //恢复记时
 
+
+        public List<long> BegingPlayers = new();
        // private EntityRef<Unit> player;
        // public Unit Player { get => this.player; set => this.player = value; }
 

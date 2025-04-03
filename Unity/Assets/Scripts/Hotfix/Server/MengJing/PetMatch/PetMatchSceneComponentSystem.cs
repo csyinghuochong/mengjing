@@ -302,7 +302,7 @@ namespace ET.Server
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             //创建新的副本场景,并给副本场景附加对应组件
             Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "PetMatch" + unitID_1.ToString());
-            fubnescene.AddComponent<PetMatchDungeonComponent>(); 
+            fubnescene.AddComponent<PetMeleeDungeonComponent>(); 
             //TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
             mapComponent.SetMapInfo((int)MapTypeEnum.PetMatch, sceneId, 0);

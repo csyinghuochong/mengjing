@@ -292,10 +292,8 @@ namespace ET.Server
                     domainScene.GetComponent<DemonDungeonComponent>().OnKillEvent(defendUnit, mainAttack).Coroutine();
                     break;
                 case MapTypeEnum.PetMelee:
-                    domainScene.GetComponent<PetMeleeDungeonComponent>().OnKillEvent(defendUnit);
-                    break;
                 case MapTypeEnum.PetMatch:
-                    domainScene.GetComponent<PetMatchDungeonComponent>().OnKillEvent(defendUnit);
+                    domainScene.GetComponent<PetMeleeDungeonComponent>().OnKillEvent(defendUnit, sceneTypeEnum);
                     break;
                 default:
                     break;
