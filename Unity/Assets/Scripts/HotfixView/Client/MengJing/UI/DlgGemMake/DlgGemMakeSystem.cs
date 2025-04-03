@@ -32,11 +32,10 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgGemMake self)
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_MakeButton);
-            self.View.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
-            
+
             self.OnInitUI();
             int showValue = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId).ShopValue;
-            self.UpdateMakeList(showValue);
+            self.InitMakeList(showValue).Coroutine();
         }
 
         public static void ShowWindow(this DlgGemMake self, Entity contextData = null)
@@ -172,35 +171,30 @@ namespace ET.Client
             self.OnCostItemUpdate();
 
             //设置选中框
-            self.View.E_ImageSelectImage.gameObject.SetActive(false);
-            if (self.ScrollItemMakeItems != null)
+            for (int k = 0; k < self.ChapterListUI.Count; k++)
             {
-                for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
-                {
-                    Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[k];
-                    if (scrollItemMakeItem.uiTransform == null)
-                    {
-                        continue;
-                    }
-                    // if (scrollItemMakeItem.MakeID == makeid)
-                    // {
-                    //     self.View.E_ImageSelectImage.gameObject.SetActive(true);
-                    //     CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
-                    //     self.View.E_ImageSelectImage.transform.localPosition = new Vector3(0f, 12f, 0f);
-                    // }
-                    // else
-                    // {
-                    //    
-                    // }
-                    scrollItemMakeItem.OnSelectMakeItem(scrollItemMakeItem.MakeID == makeid);
-                }
+                UIGemChapterComponent ui = self.ChapterListUI[k];
+                ui.OnSelectMakeItem(makeid);
             }
         }
 
-        public static void UpdateMakeList(this DlgGemMake self, int makeType)
+        public static async ETTask InitMakeList(this DlgGemMake self, int makeType)
         {
+            long instanceid = self.InstanceId;
+            var path = ABPathHelper.GetUGUIPath("Common/UIGemChapter");
+            var bundleGameObject = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
             List<EquipMakeConfig> makeList = EquipMakeConfigCategory.Instance.GetAll().Values.ToList();
-            self.ShowMake.Clear();
+            Dictionary<int, List<int>> chapterMakeids = new Dictionary<int, List<int>>();
+            chapterMakeids.Add(0, new List<int>()); //攻击石 102
+            chapterMakeids.Add(1, new List<int>()); //生命石 104
+            chapterMakeids.Add(2, new List<int>()); //物防石 103
+            chapterMakeids.Add(3, new List<int>()); //魔防石 101
+
             for (int i = 0; i < makeList.Count; i++)
             {
                 EquipMakeConfig equipMakeConfig = makeList[i];
@@ -209,20 +203,44 @@ namespace ET.Client
                     continue;
                 }
 
-                self.ShowMake.Add(equipMakeConfig.Id);
+                int chapterindex = -1;
+                int itemid = equipMakeConfig.MakeItemID;
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
+                if (itemConfig.ItemSubType == 102)
+                {
+                    chapterindex = 0;
+                }
+                else if (itemConfig.ItemSubType == 104)
+                {
+                    chapterindex = 1;
+                }
+                else if (itemConfig.ItemSubType == 103)
+                {
+                    chapterindex = 2;
+                }
+                else if (itemConfig.ItemSubType == 101)
+                {
+                    chapterindex = 3;
+                }
+                else
+                {
+                    continue;
+                }
+
+                chapterMakeids[chapterindex].Add(equipMakeConfig.Id);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemMakeItems, self.ShowMake.Count);
-            self.View.E_MakeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMake.Count);
+            foreach (var item in chapterMakeids)
+            {
+                GameObject itemSpace = UnityEngine.Object.Instantiate(bundleGameObject, self.View.EG_MakeListNodeRectTransform);
+                itemSpace.SetActive(true);
+                UIGemChapterComponent ui_2 = self.AddChild<UIGemChapterComponent, GameObject>(itemSpace);
+                ui_2.SetClickAction(self.OnSelectMakeItem);
+                ui_2.OnInitUI(item.Key, item.Value);
+                self.ChapterListUI.Add(ui_2);
 
-            self.OnSelectMakeItem(self.ShowMake.Count == 0 ? 0 : self.ShowMake[0]);
-        }
-
-        private static void OnMakeItemsRefresh(this DlgGemMake self, Transform transform, int index)
-        {
-            Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[index].BindTrans(transform);
-            scrollItemMakeItem.SetClickAction((itemid) => { self.OnSelectMakeItem(itemid); });
-            scrollItemMakeItem.OnUpdateUI(self.ShowMake[index]);
+                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            }
         }
     }
 }

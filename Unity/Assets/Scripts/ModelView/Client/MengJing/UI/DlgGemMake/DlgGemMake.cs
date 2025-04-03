@@ -10,9 +10,8 @@ namespace ET.Client
             get => this.GetComponent<DlgGemMakeViewComponent>();
         }
 
+        public List<EntityRef<UIGemChapterComponent>> ChapterListUI = new();
         public int MakeId;
         public long Timer;
-        public Dictionary<int, EntityRef<Scroll_Item_MakeItem>> ScrollItemMakeItems;
-        public List<int> ShowMake = new();
     }
 }
