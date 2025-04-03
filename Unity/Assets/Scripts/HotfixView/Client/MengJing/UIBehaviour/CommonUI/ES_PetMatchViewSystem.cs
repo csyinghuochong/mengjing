@@ -141,8 +141,9 @@ namespace ET.Client
 
 		private static async ETTask OnRankButton(this ES_PetMatch self)
 		{
+			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMatchRankShow).Coroutine();
 			//ui参考排行榜界面   先用假数据测试
-			await PetMatchNetHelper.RequestPetMatchRankList(self.Root());
+			// await PetMatchNetHelper.RequestPetMatchRankList(self.Root());
 		}
 
 		private static async ETTask OnRefreshButton(this ES_PetMatch self)
@@ -162,6 +163,4 @@ namespace ET.Client
 		}
 
 	}
-
-
 }

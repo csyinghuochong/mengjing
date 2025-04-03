@@ -223,5 +223,6 @@ namespace ET.Client
 		WindowID_SeasonDonateReward,
 		WindowID_PetMatch,
 		WindowID_PetMatchReward,
+		WindowID_PetMatchRankShow,
 	}
 }
