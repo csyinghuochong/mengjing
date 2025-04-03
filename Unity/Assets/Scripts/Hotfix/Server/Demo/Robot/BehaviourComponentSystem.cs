@@ -47,6 +47,7 @@ namespace ET
             //9   奔跑大赛机器人
             //10  恶魔活动机器人
             //11  龙与地下城机器人
+            //12  宠物挑战赛机器人
             switch (robotConfig.Behaviour)
             {
                 case 0:
