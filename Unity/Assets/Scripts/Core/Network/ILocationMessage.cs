@@ -106,12 +106,12 @@
         
     }
 
-    public interface ICenterActorRequest: IRequest
+    public interface IPetMatchActorRequest: IRequest
     {
         
     }
     
-    public interface ICenterActorResponse: IResponse
+    public interface IPetMatchActorResponse: IResponse
     {
         
     }

@@ -14,5 +14,15 @@ namespace ET.Client
                     (M2C_PetMatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2mPetEchoOperate);
             return m2CPetEchoOperateResponse.Error;
         }
+        
+        
+        public static async ETTask<PetMatch2C_RankListResponse> RequestPetMatchRankList(Scene root)
+        {
+            C2PetMatch_RankListRequest c2mPetEchoOperate = C2PetMatch_RankListRequest.Create();
+           
+            PetMatch2C_RankListResponse m2CPetEchoOperateResponse =
+                    (PetMatch2C_RankListResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2mPetEchoOperate);
+            return m2CPetEchoOperateResponse;
+        }
     }
 }

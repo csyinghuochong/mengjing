@@ -121,6 +121,12 @@ namespace ET.Server
                         ActorId soloServerID = player.SoloServerID;
                         response = await root.GetComponent<MessageSender>().Call(soloServerID, iSoloActorRequest);
                     }
+                    
+                    if (actorRequest is IPetMatchActorRequest iPetMatchActorRequest)
+                    {
+                        ActorId petmatchServerID = player.PetMatchServerID;
+                        response = await root.GetComponent<MessageSender>().Call(petmatchServerID, iPetMatchActorRequest);
+                    }
 
                     if (actorRequest is IPopularizeActorRequest iPopularizeActorRequest)
                     {

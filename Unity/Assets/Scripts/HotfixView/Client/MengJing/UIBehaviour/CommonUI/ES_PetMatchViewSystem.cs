@@ -36,6 +36,9 @@ namespace ET.Client
 			self.E_Button_TeamButton.AddListenerAsync(self.OnButton_TeamButton);
 			self.E_FunctionSetBtnToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 			self.E_Button_RefreshButton.AddListenerAsync( self.OnRefreshButton );
+			self.E_Button_RewardButton.AddListener(self.OnRewardButton);
+			self.E_Button_RankButton.AddListenerAsync(self.OnRankButton);
+			
 			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
 			self.InitItemList();
 			
@@ -128,6 +131,18 @@ namespace ET.Client
 		{
 			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMelee).Coroutine();
 			await ETTask.CompletedTask;
+		}
+
+		private static void OnRewardButton(this ES_PetMatch self)
+		{
+			//RankRewardConfig Type == 8  ui参考宠物天梯排名界面
+			Log.Debug($"OnRewardButton");
+		}
+
+		private static async ETTask OnRankButton(this ES_PetMatch self)
+		{
+			//ui参考排行榜界面   先用假数据测试
+			await PetMatchNetHelper.RequestPetMatchRankList(self.Root());
 		}
 
 		private static async ETTask OnRefreshButton(this ES_PetMatch self)

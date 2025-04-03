@@ -33745,15 +33745,27 @@ namespace ET
         [MemoryPackOrder(1)]
         public long UnitId { get; set; }
 
+        /// <summary>
+        /// 积分
+        /// </summary>
         [MemoryPackOrder(2)]
         public long Score { get; set; }
 
+        /// <summary>
+        /// 名字
+        /// </summary>
         [MemoryPackOrder(3)]
         public string Name { get; set; }
 
+        /// <summary>
+        /// 排名
+        /// </summary>
         [MemoryPackOrder(4)]
         public int RankId { get; set; }
 
+        /// <summary>
+        /// 职业
+        /// </summary>
         [MemoryPackOrder(5)]
         public int Occ { get; set; }
 
@@ -33807,6 +33819,86 @@ namespace ET
             this.ActorId = default;
             this.Result = default;
             this.FubenId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    // PetMatch战绩
+    [MemoryPackable]
+    [Message(OuterMessage.C2PetMatch_RankListRequest)]
+    [ResponseType(nameof(PetMatch2C_RankListResponse))]
+    public partial class C2PetMatch_RankListRequest : MessageObject, IPetMatchActorRequest
+    {
+        public static C2PetMatch_RankListRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(C2PetMatch_RankListRequest), isFromPool) as C2PetMatch_RankListRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(OuterMessage.PetMatch2C_RankListResponse)]
+    public partial class PetMatch2C_RankListResponse : MessageObject, IPetMatchActorResponse
+    {
+        public static PetMatch2C_RankListResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMatch2C_RankListResponse), isFromPool) as PetMatch2C_RankListResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        [MemoryPackOrder(0)]
+        public long MathTime { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int WinTime { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int FailTime { get; set; }
+
+        [MemoryPackOrder(3)]
+        public List<PetMatchPlayerInfo> PetMatchPlayerInfoList { get; set; } = new();
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.MathTime = default;
+            this.WinTime = default;
+            this.FailTime = default;
+            this.PetMatchPlayerInfoList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -34712,5 +34804,7 @@ namespace ET
         public const ushort M2C_PetMatchResponse = 10897;
         public const ushort PetMatchPlayerInfo = 10898;
         public const ushort M2C_PetMatchResult = 10899;
+        public const ushort C2PetMatch_RankListRequest = 10900;
+        public const ushort PetMatch2C_RankListResponse = 10901;
     }
 }

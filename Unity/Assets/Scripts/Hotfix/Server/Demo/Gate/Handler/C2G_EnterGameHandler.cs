@@ -129,6 +129,7 @@ namespace ET.Server
                         player.PaiMaiServerID = UnitCacheHelper.GetPaiMaiServerId(session.Zone());
                         player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
                         player.SoloServerID = UnitCacheHelper.GetSoloServerId(session.Zone());
+                        player.PetMatchServerID = UnitCacheHelper.GetPetMatchServerId(session.Zone());
                         player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
                         player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;

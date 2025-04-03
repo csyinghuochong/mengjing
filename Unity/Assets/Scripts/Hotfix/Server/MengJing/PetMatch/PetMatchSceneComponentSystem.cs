@@ -312,14 +312,13 @@ namespace ET.Server
         public static List<PetMatchPlayerInfo> GetSoloResult(this PetMatchSceneComponent self)
         {
             //返回坏存
-          
-
+            
             //进行排序
         
             List<PetMatchPlayerInfo> soloResultInfoList = new List<PetMatchPlayerInfo>();
 
             //更新 胜负次数 排名
-            return soloResultInfoList;
+            return self.RankList;
         }
     }
 }

@@ -9,7 +9,12 @@ namespace ET.Server
 
         public bool PetMatchOpen { get; set; } = false;
 
+        /// <summary>
+        /// 正在匹配的玩家
+        /// </summary>
         public List<PetMatchPlayerInfo> MatchList { get; set; } = new List<PetMatchPlayerInfo>();
+        
+        public List<PetMatchPlayerInfo> RankList { get; set; } = new List<PetMatchPlayerInfo>();
 
         /// <summary>
         /// 胜利次数
