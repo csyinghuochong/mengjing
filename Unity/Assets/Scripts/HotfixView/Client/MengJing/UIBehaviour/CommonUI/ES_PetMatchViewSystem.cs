@@ -136,7 +136,7 @@ namespace ET.Client
 		private static void OnRewardButton(this ES_PetMatch self)
 		{
 			//RankRewardConfig Type == 8  ui参考宠物天梯排名界面
-			Log.Debug($"OnRewardButton");
+			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMatchReward).Coroutine();
 		}
 
 		private static async ETTask OnRankButton(this ES_PetMatch self)
