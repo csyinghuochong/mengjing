@@ -130,11 +130,6 @@ namespace ET.Client
 			await ETTask.CompletedTask;
 		}
 
-		
-		public static void UpdateMyTeamInfo(this ES_PetMatch self)
-		{
-			
-		}
 
 		public static void OnUpdateUI(this ES_PetMatch self)
 		{

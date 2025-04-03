@@ -8946,6 +8946,73 @@ namespace ET
         }
     }
 
+    [MemoryPackable]
+    [Message(InnerMessage.M2PetMatch_MatchRequest)]
+    [ResponseType(nameof(PetMatch2M_MatchResponse))]
+    public partial class M2PetMatch_MatchRequest : MessageObject, IRequest
+    {
+        public static M2PetMatch_MatchRequest Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(M2PetMatch_MatchRequest), isFromPool) as M2PetMatch_MatchRequest;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(92)]
+        public long ActorId { get; set; }
+
+        [MemoryPackOrder(0)]
+        public SoloPlayerInfo SoloPlayerInfo { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.ActorId = default;
+            this.SoloPlayerInfo = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(InnerMessage.PetMatch2M_MatchResponse)]
+    public partial class PetMatch2M_MatchResponse : MessageObject, IResponse
+    {
+        public static PetMatch2M_MatchResponse Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(PetMatch2M_MatchResponse), isFromPool) as PetMatch2M_MatchResponse;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
     public static class InnerMessage
     {
         public const ushort ObjectQueryRequest = 20002;
@@ -9188,5 +9255,7 @@ namespace ET
         public const ushort G2R_RechargeResultResponse = 20239;
         public const ushort A2A_BroadcastSceneRequest = 20240;
         public const ushort A2A_BroadcastSceneResponse = 20241;
+        public const ushort M2PetMatch_MatchRequest = 20242;
+        public const ushort PetMatch2M_MatchResponse = 20243;
     }
 }
