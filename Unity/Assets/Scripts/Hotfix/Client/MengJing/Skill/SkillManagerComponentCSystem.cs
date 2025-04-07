@@ -60,6 +60,20 @@ namespace ET.Client
             return false;
         }
         
+        public static bool HaveSkillById(this SkillManagerComponentC self, int skillId)
+        {
+            int skillcnt = self.Skills.Count;
+            for (int i = skillcnt - 1; i >= 0; i--)
+            {
+                SkillC skillC = self.Skills[i];
+                if (skillC.SkillConf.Id == skillId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         public static bool IsSkillMoveTime(this SkillManagerComponentC self)
         {
             return TimeHelper.ClientNow() < self.SkillMoveTime;

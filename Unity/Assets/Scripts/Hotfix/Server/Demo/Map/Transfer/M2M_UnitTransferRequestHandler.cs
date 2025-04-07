@@ -94,13 +94,10 @@ namespace ET.Server
                         aoivalue = 40;
                         scene.GetComponent<PetMingDungeonComponent>().GenerateFuben().Coroutine();
                     }
-                    if (request.SceneType == (int)MapTypeEnum.PetMelee)
+                    if (request.SceneType == (int)MapTypeEnum.PetMelee
+                        ||request.SceneType == (int)MapTypeEnum.PetMatch)
                     {
                         scene.GetComponent<PetMeleeDungeonComponent>().SetPlayer(unit);
-                        aoivalue = 40;
-                    }
-                    if (request.SceneType == (int)MapTypeEnum.PetMatch)
-                    {
                         aoivalue = 40;
                     }
                     break;

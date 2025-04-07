@@ -22,7 +22,7 @@ namespace ET
             Scene root = aiComponent.Root();
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
    
-            Console.WriteLine("Behaviour_DragonDungeon");
+            Console.WriteLine("Behaviour_PetMatch");
             while (true)
             {
                 await PetMatchNetHelper.RequestPetMatch(root);
