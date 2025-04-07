@@ -324,6 +324,11 @@ namespace ET.Client
                     float rightPetX = self.CellSize * -1;
                     foreach (Unit unit in units)
                     {
+                        if (unit.Type == UnitType.Player)
+                        {
+                            continue;
+                        }
+                        
                         if (PositionHelper.Distance2D(unit.Position, self.TargetPos) < self.CellSize / 2)
                         {
                             haveUnit = true;

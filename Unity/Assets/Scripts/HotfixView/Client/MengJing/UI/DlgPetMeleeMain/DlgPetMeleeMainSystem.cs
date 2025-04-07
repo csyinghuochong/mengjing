@@ -88,6 +88,10 @@ namespace ET.Client
             self.View.E_CancelCardAreaEventTrigger.RegisterEvent(EventTriggerType.PointerExit, (pdata) => { self.IsCancelCard = false; });
             
             self.MapTypeEnum =  self.Root().GetComponent<MapComponent>().MapType;
+
+            Unit unitmain = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.BattleCamp = unitmain.GetBattleCamp();
+            
             self.InitCard().Coroutine();
             self.UpdateMoLi();
             self.OnPlayAnimation().Coroutine();
@@ -160,7 +164,7 @@ namespace ET.Client
                     }
 
                     int maxHp = numericComponentC.GetAsInt(NumericType.Now_MaxHp);
-                    if (monsterConfig.MonsterCamp == 1) // 我方
+                    if (monsterConfig.MonsterCamp == self.BattleCamp) // 我方
                     {
                         using (zstring.Block())
                         {
@@ -234,6 +238,8 @@ namespace ET.Client
                 GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardPoolRectTransform);
                 go.SetActive(false);
                 ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
+                esPetMeleeCard.BattleCamp = self.BattleCamp;
+                esPetMeleeCard.MapTypeEnum = self.MapTypeEnum;
                 self.PetMeleeCardPool.Add(esPetMeleeCard);
             }
 

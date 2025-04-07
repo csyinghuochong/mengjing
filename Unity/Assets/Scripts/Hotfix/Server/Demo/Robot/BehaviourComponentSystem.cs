@@ -78,6 +78,7 @@ namespace ET
                     break;
                 case 12:
                     self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_PetMatch, Value = "Behaviour_PetMatch" });
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_PetMatchFight, Value = "Behaviour_PetMatchFight" });
                     self.NewBehaviour = BehaviourType.Behaviour_PetMatch;
                     break;
                 default:

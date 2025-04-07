@@ -14,7 +14,9 @@ namespace ET.Client
         public Vector2 PreviousPressPosition;
         
         public int MapTypeEnum { get; set; }
-        
+
+        public int BattleCamp { get; set; }
+
         public bool IsDisposeCard { get; set; }
         public bool IsCancelCard { get; set; }
 

@@ -16,6 +16,10 @@ namespace ET.Client
 		public Vector3 TargetPos;
 		public long TargetUnitId;
 		
+		public int MapTypeEnum { get; set; }
+
+		public int BattleCamp { get; set; }
+		
 		public long Timer;
 		public Vector2 StartPos;
 		public GameObject CardIconGameObject;
