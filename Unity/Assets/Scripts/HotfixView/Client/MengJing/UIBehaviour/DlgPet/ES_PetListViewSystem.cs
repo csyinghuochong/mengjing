@@ -122,8 +122,12 @@ namespace ET.Client
         {
             self.EG_PetZiZhiSetRectTransform.gameObject.SetActive(index == 0);
             self.E_PetProSetNodeImage.gameObject.SetActive(index == 1);
-            self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
-
+            // self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
+            self.EG_PetAddPointRectTransform.gameObject.SetActive(index == 2);
+            if (index == 2)
+            {
+                self.OnInitAddPointUI();
+            }
             self.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
         }
 
