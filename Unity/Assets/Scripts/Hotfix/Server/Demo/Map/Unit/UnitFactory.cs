@@ -397,7 +397,9 @@ namespace ET.Server
                     aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
                     break;
                 case MapTypeEnum.PetMatch:
-                    Console.WriteLine("petmatch 宠物参数 未初始化！！");
+                    aiComponent = unit.AddComponent<AIComponent, int>(16);
+                    aiComponent.TargetPoint.Add(roleCamp == CampEnum.CampPlayer_1 ?  new float3(13, 0, 0) : new float3(-13, 0, 0) );
+                    aiComponent.InitPet(petinfo); //AI行为树序号  不撤退
                     break;
                 default:
                     unit.AddComponent<AIComponent, int>(1).InitPet(petinfo); //AI行为树序号  撤退

@@ -32,7 +32,7 @@ namespace ET.Server
 
         private static async ETTask G2RobotMessage(this PetMatchSceneComponent self, int noticeType)
         {
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(100000, 300000));
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 30000));
             ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
             G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
             G2Robot_MessageRequest.Zone = self.Zone();
@@ -154,7 +154,10 @@ namespace ET.Server
                 scene.Dispose();
             }
             
-            self.G2RobotMessage(NoticeType.PetMatchClose).Coroutine();
+            if (ServerHelper.GetServeOpenDay(self.Zone()) > 0)
+            {
+                self.G2RobotMessage(NoticeType.PetMatchClose).Coroutine();
+            }
         }
         
         public static void OnRecvUnitLeave(this PetMatchSceneComponent self, long userId)

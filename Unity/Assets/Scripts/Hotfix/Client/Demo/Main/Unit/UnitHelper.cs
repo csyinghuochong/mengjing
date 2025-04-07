@@ -383,22 +383,23 @@ namespace ET.Client
             MapComponent mapComponent = defend.Root().GetComponent<MapComponent>();
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
 
-            if (mapComponent.MapType != MapTypeEnum.Battle
-                && mapComponent.MapType != MapTypeEnum.PetMelee)
+            if (mapComponent.MapType != MapTypeEnum.Battle 
+                && mapComponent.MapType != MapTypeEnum.PetMelee
+                && mapComponent.MapType != MapTypeEnum.PetMatch)
             {
-                if (self.IsYeWaiMonster() && defend.IsYeWaiMonster())
+                if( self.IsYeWaiMonster()  && defend.IsYeWaiMonster())
                 {
                     return false;
                 }
             }
-
-            if (mapComponent.MapType == MapTypeEnum.PetMelee)
+            
+            if (mapComponent.MapType == MapTypeEnum.PetMelee
+                || mapComponent.MapType == MapTypeEnum.PetMatch)
             {
                 if (defend.Type == UnitType.Player)
                 {
                     return false;
                 }
-
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
 

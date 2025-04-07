@@ -101,6 +101,10 @@ namespace ET.Server
                     }
                     if (request.SceneType == (int)MapTypeEnum.PetMatch)
                     {
+                        PetMeleeDungeonComponent petMeleeDungeonComponent = scene.GetComponent<PetMeleeDungeonComponent>();
+                        int battlecamp = petMeleeDungeonComponent.PetMeleeCardInHand.Count == 0 ? CampEnum.CampPlayer_1 : CampEnum.CampPlayer_2;
+                        numericComponent.ApplyValue(NumericType.BattleCamp, battlecamp, false);
+                        petMeleeDungeonComponent.SetPlayer(unit);
                         aoivalue = 40;
                     }
                     break;
