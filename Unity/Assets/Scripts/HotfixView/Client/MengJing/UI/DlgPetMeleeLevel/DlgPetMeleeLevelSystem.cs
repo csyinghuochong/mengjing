@@ -88,9 +88,18 @@ namespace ET.Client
 
         private static void OnPetMeleeLevelItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
         {
+            foreach (Scroll_Item_PetMeleeLevelItem item in self.ScrollItemPetMeleeLevelItems.Values)
+            {
+                if (item.uiTransform == transform)
+                {
+                    item.uiTransform = null;
+                }
+            }
+            
             Scroll_Item_PetMeleeLevelItem scrollItemPetMeleeLevelItem = self.ScrollItemPetMeleeLevelItems[index].BindTrans(transform);
             scrollItemPetMeleeLevelItem.OnInit(self.ShowPetMeleeSceneIds[index], index);
             scrollItemPetMeleeLevelItem.E_TouchButton.AddListener(() => self.OnLevel(self.ShowPetMeleeSceneIds[index]));
+            scrollItemPetMeleeLevelItem.SetSelected(self.SelectIndex);
         }
 
         private static void OnMonsterItemsRefresh(this DlgPetMeleeLevel self, Transform transform, int index)
@@ -209,6 +218,8 @@ namespace ET.Client
 
         private static void OnLevel(this DlgPetMeleeLevel self, int sceneId)
         {
+            self.SelectIndex = sceneId;
+            
             for (int i = 0; i < self.ScrollItemPetMeleeLevelItems.Count; i++)
             {
                 Scroll_Item_PetMeleeLevelItem scrollItemPetMeleeLevelItem = self.ScrollItemPetMeleeLevelItems[i];

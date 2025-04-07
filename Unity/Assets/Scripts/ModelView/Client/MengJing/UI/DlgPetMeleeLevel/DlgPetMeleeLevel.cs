@@ -12,5 +12,6 @@ namespace ET.Client
         public int SceneId;
         public Dictionary<int, EntityRef<Scroll_Item_MonsterItem>> ScrollItemMonsterItems;
         public List<int> ShowMonsterIds = new();
+        public int SelectIndex = -1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Coffee.UIEffects;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -210,27 +211,105 @@ namespace ET.Client
 
         public static void SetImageGray(Scene root, GameObject obj, bool val)
         {
+            // 方案一
+            // if (val)
+            // {
+            //     Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+            //     obj.GetComponent<Image>().material = mat;
+            // }
+            // else
+            // {
+            //     obj.GetComponent<Image>().material = null;
+            // }
+            
+            // 方案2
+            UIEffect effect = obj.GetComponent<UIEffect>();
+            if (effect == null)
+            {
+                effect = obj.AddComponent<UIEffect>();
+            }
             if (val)
             {
-                Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-                obj.GetComponent<Image>().material = mat;
+                effect.toneFilter = ToneFilter.Grayscale;
+                effect.toneIntensity = 1f;
             }
             else
             {
-                obj.GetComponent<Image>().material = null;
+                effect.toneFilter = ToneFilter.None;
             }
         }
 
-        public static void SetRawImageGray(Scene root, GameObject obj, bool val)
+        public static void SetImageOutline(GameObject gameObject, bool val)
         {
+            UIEffect effect = gameObject.GetComponent<UIEffect>();
+            if (effect == null)
+            {
+                effect = gameObject.AddComponent<UIEffect>();
+            }
+            UIEffectTweener tweener = effect.GetComponent<UIEffectTweener>();
+
             if (val)
             {
-                Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-                obj.GetComponent<RawImage>().material = mat;
+                // 描边
+                effect.shadowMode = ShadowMode.Outline8;
+                effect.shadowDistance = new Vector2(2, -2);
+                effect.shadowIteration = 2;
+                effect.shadowColorFilter = ColorFilter.Replace;
+                effect.shadowColor = new Color(255 / 255f, 235 / 255f, 0 / 255f, 1f);
+                effect.shadowFade = 0.25f;
+                
+                // 一闪一闪
+                effect.colorFilter = ColorFilter.Additive;
+                effect.color = new Color(225 / 255f, 225 / 255f, 225 / 255f, 1f);
+                if (tweener == null)
+                {
+                    tweener = gameObject.AddComponent<UIEffectTweener>();
+                }
+                tweener.enabled = true;
+                tweener.cullingMask = UIEffectTweener.CullingMask.Color;
+                tweener.curve = AnimationCurve.Linear(0.0f, 0.0f, 1f, 0.25f);
+                tweener.interval = 0.5f;
+                tweener.wrapMode = UIEffectTweener.WrapMode.PingPongLoop;
+                effect.toneIntensity = 1f;
             }
             else
             {
-                obj.GetComponent<RawImage>().material = null;
+                effect.shadowMode = ShadowMode.None;
+
+                effect.colorFilter = ColorFilter.None;
+                if (tweener != null)
+                {
+                    tweener.enabled = false;
+                }
+            }
+        }
+        
+        public static void SetRawImageGray(Scene root, GameObject obj, bool val)
+        {
+            // 方案1
+            // if (val)
+            // {
+            //     Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+            //     obj.GetComponent<RawImage>().material = mat;
+            // }
+            // else
+            // {
+            //     obj.GetComponent<RawImage>().material = null;
+            // }
+            
+            // 方案2
+            UIEffect effect = obj.GetComponent<UIEffect>();
+            if (effect == null)
+            {
+                effect = obj.AddComponent<UIEffect>();
+            }
+            if (val)
+            {
+                effect.toneFilter = ToneFilter.Grayscale;
+            }
+            else
+            {
+                effect.toneFilter = ToneFilter.None;
             }
         }
 

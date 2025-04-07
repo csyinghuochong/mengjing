@@ -325,7 +325,7 @@ namespace ET.Client
                     // 发出微弱的光
                     effect.glow = 1f;
                     effect.glowWidth = 0.2f;
-                    effect.SetGlowColor(new Color(255f, 235f, 0f, 255f));
+                    effect.SetGlowColor(new Color(255 / 255f, 235 / 255f, 0 / 255f, 1f));
                     effect.glowDownsampling = 1;
                     effect.glowAnimationSpeed = 1f;
                     
@@ -335,7 +335,7 @@ namespace ET.Client
                     
                     // 表面的颜色
                     effect.overlay = 0.1f;
-                    effect.overlayColor = new Color(255f, 235f, 0f, 255f);
+                    effect.overlayColor = new Color(255 / 255f, 235 / 255f, 0 / 255f, 1f);
                     
                     effect.UpdateMaterialProperties();
                 }
