@@ -82,7 +82,7 @@ namespace ET.Client
             petMatchPlayerInfo3.Occ = 2;
             petMatchPlayerInfo3.Score = 600;
             petMatchPlayerInfo3.RankId = 3;
-            response.PetMatchPlayerInfoList.Add(petMatchPlayerInfo2);
+            response.PetMatchPlayerInfoList.Add(petMatchPlayerInfo3);
             
             if (instanceid != self.InstanceId)
             {
