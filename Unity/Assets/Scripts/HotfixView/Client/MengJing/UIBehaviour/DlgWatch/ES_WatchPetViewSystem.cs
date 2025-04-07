@@ -256,6 +256,9 @@ namespace ET.Client
             {
                 self.E_Text_PetNumberText.text = zstring.Format("{0}/{1}", PetHelper.GetBagPetNum(rolePetInfos), maxNum);
             }
+            
+            self.uiTransform.Find("PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
+            self.uiTransform.Find("PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
         }
 
         private static int NextPetNumber(this ES_WatchPet self)

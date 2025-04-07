@@ -434,6 +434,7 @@ namespace ET.Client
             }
 
             self.uiTransform.Find("PetShowDi").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
+            self.uiTransform.Find("PetTip").gameObject.SetActive(self.ShowRolePetInfos.Count > 0);
         }
 
         private static int NextPetNumber(this ES_PetList self)
