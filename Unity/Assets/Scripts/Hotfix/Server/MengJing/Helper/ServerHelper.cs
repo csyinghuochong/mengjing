@@ -184,6 +184,7 @@ namespace ET
 
         public static List<ServerItem> GetServerList(int  versionMode)
         {
+            //object padlock = new object();
             if (ConfigData.ServerItems.Count > 0 )
             { 
                 return ConfigData.ServerItems;
@@ -192,11 +193,12 @@ namespace ET
             
             string ip = GetRouterHttpHost(versionMode);
   
-            ConfigData.ServerItems.Clear();
-            ConfigData.ServerItems.Add( GetServerItem( 1, $"{ip}:20325", "封测一区", 1720782000000, 1 ) );
-            ConfigData.ServerItems.Add( GetServerItem( 2, $"{ip}:20335", "封测二区", 1720954800000, 1 ) );
-            ConfigData.ServerItems.Add( GetServerItem( 3, $"{ip}:20345", "封测三区", 1721041200000, 1 ) );
-
+            List<ServerItem> serverItems = new List<ServerItem>();
+            serverItems.Add( GetServerItem( 1, $"{ip}:20325", "封测一区", 1720782000000, 1 ) );
+            serverItems.Add( GetServerItem( 2, $"{ip}:20335", "封测二区", 1720954800000, 1 ) );
+            serverItems.Add( GetServerItem( 3, $"{ip}:20345", "封测三区", 1721041200000, 1 ) );
+            ConfigData.ServerItems = serverItems;
+         
             CheckServerIds(ConfigData.ServerItems);
             
             ///PlatformHelper.GetPlatformName(); 所有渠道ID定义

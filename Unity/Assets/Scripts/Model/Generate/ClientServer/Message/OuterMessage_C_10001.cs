@@ -33785,6 +33785,9 @@ namespace ET
         [MemoryPackOrder(5)]
         public int Occ { get; set; }
 
+        [MemoryPackOrder(6)]
+        public int RobotId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -33798,6 +33801,7 @@ namespace ET
             this.Name = default;
             this.RankId = default;
             this.Occ = default;
+            this.RobotId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

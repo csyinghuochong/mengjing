@@ -181,7 +181,7 @@ namespace ET.Server
             {
                 openDay = 1;
             }
-            Log.Error($"FubenCenter定时刷新: {self.Zone()} {self}");
+       
             long serverTime = TimeHelper.ServerNow();
             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();

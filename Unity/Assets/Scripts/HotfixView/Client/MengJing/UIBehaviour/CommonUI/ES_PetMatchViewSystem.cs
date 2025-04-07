@@ -37,7 +37,7 @@ namespace ET.Client
 			self.E_FunctionSetBtnToggleGroup.AddListener((index) => { self.OnPlanSet(index).Coroutine(); });
 			self.E_Button_RefreshButton.AddListenerAsync( self.OnRefreshButton );
 			self.E_Button_RewardButton.AddListener(self.OnRewardButton);
-			self.E_Button_RankButton.AddListenerAsync(self.OnRankButton);
+			self.E_Button_RankButton.AddListener(self.OnRankButton);
 			
 			self.MainPetItem = self.EG_MainPetListRectTransform.GetChild(0).gameObject;
 			self.InitItemList();
@@ -139,7 +139,7 @@ namespace ET.Client
 			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMatchReward).Coroutine();
 		}
 
-		private static async ETTask OnRankButton(this ES_PetMatch self)
+		private static  void OnRankButton(this ES_PetMatch self)
 		{
 			self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMatchRankShow).Coroutine();
 			//ui参考排行榜界面   先用假数据测试

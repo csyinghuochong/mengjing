@@ -9,6 +9,9 @@ namespace ET
 
         [StaticField]
         public static long LastRemoveTime = 0;
+
+        [StaticField]
+        public static object SyncObject = new object();
         
         /// <summary>
         /// 需要服务器热重载改变的为static,  不需要热重载改变的为const/......
@@ -1896,8 +1899,11 @@ namespace ET
         };
 
         [StaticField]
+        public static readonly object _lockObject = new object();
+        [StaticField]
         public static List<ServerItem> ServerItems = new List<ServerItem>()
         {
+
         };
 
         /// <summary>

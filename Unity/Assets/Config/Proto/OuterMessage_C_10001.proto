@@ -7758,6 +7758,7 @@ message PetMatchPlayerInfo
 	string Name = 4;   //名字
 	int32 RankId = 5;  //排名
 	int32 Occ = 6;     //职业
+	int32 RobotId = 7;
 }
 
 message M2C_PetMatchResult // IMessage

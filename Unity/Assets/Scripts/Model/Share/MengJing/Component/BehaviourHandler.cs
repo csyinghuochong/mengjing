@@ -22,6 +22,7 @@ namespace ET
         public const int Behaviour_Retreat = 16;
         public const int Behaviour_DragonDungeon = 17;
         public const int Behaviour_DragonFollow = 18;
+        public const int Behaviour_PetMatch = 19;
     }
 
     public class BehaviourHandlerAttribute : BaseAttribute

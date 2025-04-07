@@ -66,7 +66,7 @@ namespace ET.Server
                         }
                         
                         //message.Message   sceneid_teamid
-                        int  robotId = BattleHelper.GetBattleRobotId(2, fubenId);
+                        int  robotId = BattleHelper.GetBattleRobotId(12, fubenId);
                         Console.WriteLine($"GetBattleRobotId: {robotId}");
                         await robotManagerComponent.NewRobot(message.Zone, robotId);
                         robotnumber++;

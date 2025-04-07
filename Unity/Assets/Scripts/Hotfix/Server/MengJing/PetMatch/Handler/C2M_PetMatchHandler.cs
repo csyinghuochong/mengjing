@@ -13,6 +13,7 @@ namespace ET.Server
             soloPlayerInfo.UnitId = unit.Id;
             soloPlayerInfo.Name = userInfoComponentS.UserInfo.Name;
             soloPlayerInfo.Occ = userInfoComponentS.UserInfo.Occ;
+            soloPlayerInfo.RobotId = userInfoComponentS.UserInfo.RobotId;
             soloPlayerInfo.MatchTime = TimeHelper.ServerNow();
 
             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();

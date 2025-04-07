@@ -77,7 +77,8 @@ namespace ET
                     self.NewBehaviour = BehaviourType.Behaviour_DragonDungeon;
                     break;
                 case 12:
-                    
+                    self.Behaviours.Add(new KeyValuePair() { KeyId = BehaviourType.Behaviour_PetMatch, Value = "Behaviour_PetMatch" });
+                    self.NewBehaviour = BehaviourType.Behaviour_PetMatch;
                     break;
                 default:
                     break;

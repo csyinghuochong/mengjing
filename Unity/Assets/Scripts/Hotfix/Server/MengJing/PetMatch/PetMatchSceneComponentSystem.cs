@@ -29,19 +29,25 @@ namespace ET.Server
             //self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, r2M_RankUpdateMessage);
             await ETTask.CompletedTask;
         }
-        
+
+        private static async ETTask G2RobotMessage(this PetMatchSceneComponent self, int noticeType)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(100000, 300000));
+            ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
+            G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+            G2Robot_MessageRequest.Zone = self.Zone();
+            G2Robot_MessageRequest.MessageType = noticeType;
+            G2Robot_MessageRequest.Message = string.Empty;
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
+        }
+
         public static async ETTask OnSoloBegin(this PetMatchSceneComponent self)
         {
             //通知机器人
     
             if (ServerHelper.GetServeOpenDay(self.Zone()) > 0)
             {
-                ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
-                G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
-                G2Robot_MessageRequest.Zone = self.Zone();
-                G2Robot_MessageRequest.MessageType = NoticeType.PetMatchOpen;
-                G2Robot_MessageRequest.Message = string.Empty;
-                self.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
+                self.G2RobotMessage(NoticeType.PetMatchOpen).Coroutine();
             }
      
             Console.WriteLine($"OnSoloBegin: {self.Zone()}");
@@ -147,6 +153,8 @@ namespace ET.Server
                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();
             }
+            
+            self.G2RobotMessage(NoticeType.PetMatchClose).Coroutine();
         }
         
         public static void OnRecvUnitLeave(this PetMatchSceneComponent self, long userId)
@@ -174,7 +182,7 @@ namespace ET.Server
             }
 
              //获取次数
-            if (joinNum >= 50)
+            if (joinNum >= 500)
             {
                 return ErrorCode.ERR_SoloNumMax;
             }
@@ -188,11 +196,6 @@ namespace ET.Server
             }
             self.MatchList.Add( petMatchPlayerInfo );
 
-            if (CommonHelperS.IsInnerNet())
-            {
-                self.MatchList.Add(petMatchPlayerInfo);
-            }
-            
             return ErrorCode.ERR_Success;
         }
         
@@ -232,6 +235,11 @@ namespace ET.Server
                 //获取对应玩家数据
                 PetMatchPlayerInfo soloPlayerInfo_i = self.MatchList[i];
                 PetMatchPlayerInfo soloPlayerInfo_t = self.MatchList[t];
+
+                if (soloPlayerInfo_i.RobotId > 0 && soloPlayerInfo_t.RobotId > 0)
+                {
+                    continue;
+                }
 
                 //30,秒内 低战力/高战力>=0.8 60秒 低战力/高战力>= 0.6 90秒 低战力/高战力>=0)
                 long passTime = (long)((serverTime - soloPlayerInfo_i.MatchTime) / 1000);

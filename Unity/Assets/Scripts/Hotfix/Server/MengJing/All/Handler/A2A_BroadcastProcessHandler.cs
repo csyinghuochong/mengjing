@@ -21,7 +21,7 @@ namespace ET.Server
                     case 2:  //世界等级
                         int zone = int.Parse(request.LoadValue);
                         ConfigData.ServerInfoList[zone] = request.ServerInfo;
-                        //Console.WriteLine($" ConfigData.ServerInfo:  {ConfigData.ServerInfo}");
+                        Console.WriteLine($" ConfigData.ServerInfo: ");
                         break;
                     case 3: //热重载
                         string[] ss = request.LoadValue.Split(" ");
