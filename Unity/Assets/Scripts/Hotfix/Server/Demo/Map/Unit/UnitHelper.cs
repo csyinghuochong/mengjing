@@ -387,7 +387,8 @@ namespace ET.Server
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
 
             if (mapComponent.MapType != MapTypeEnum.Battle 
-                && mapComponent.MapType != MapTypeEnum.PetMelee)
+                && mapComponent.MapType != MapTypeEnum.PetMelee
+                && mapComponent.MapType != MapTypeEnum.PetMatch)
             {
                 if( self.IsYeWaiMonster()  && defend.IsYeWaiMonster())
                 {
@@ -395,7 +396,8 @@ namespace ET.Server
                 }
             }
             
-            if (mapComponent.MapType == MapTypeEnum.PetMelee)
+            if (mapComponent.MapType == MapTypeEnum.PetMelee
+                || mapComponent.MapType == MapTypeEnum.PetMatch)
             {
                 if (defend.Type == UnitType.Player)
                 {
@@ -403,7 +405,7 @@ namespace ET.Server
                 }
                 return self.GetBattleCamp() != defend.GetBattleCamp();
             }
-
+            
             if (mapComponent.MapType == (int)MapTypeEnum.PetDungeon
                 || mapComponent.MapType == (int)MapTypeEnum.PetTianTi
                 || mapComponent.MapType == (int)MapTypeEnum.PetMing)

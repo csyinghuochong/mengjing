@@ -369,8 +369,8 @@ namespace ET.Server
                 //     response.Error = ErrorCode.ERR_RequestRepeatedly;
                 //     return;
                 // }
-
-                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, CampEnum.CampPlayer_1, rolePetInfo, position, 90, -1);
+                
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, player.GetBattleCamp(), rolePetInfo, position, 90, -1);
 
                 if (self.GameStart)
                 {
