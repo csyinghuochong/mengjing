@@ -23,7 +23,8 @@ namespace ET.Client
                     scene.Root().GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_Target);
                     break;
                 case MapTypeEnum.PetMatch:
-                    
+                    await timerComponent.WaitAsync(TimeHelper.Second * 10);
+                    scene.Root().GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_PetMatchFight);
                     break;
                 default:
                     break;

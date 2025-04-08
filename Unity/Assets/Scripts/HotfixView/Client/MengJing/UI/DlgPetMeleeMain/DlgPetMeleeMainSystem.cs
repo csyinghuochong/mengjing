@@ -262,6 +262,8 @@ namespace ET.Client
             foreach (PetMeleeCardInfo cardInfo in cards)
             {
                 ES_PetMeleeCard esPetMeleeCard = self.GetCardFromPool();
+                esPetMeleeCard.MapTypeEnum = self.MapTypeEnum;
+                esPetMeleeCard.BattleCamp = self.BattleCamp;
                 self.PetMeleeCardInHand.Add(esPetMeleeCard);
                 esPetMeleeCard.InitCard(cardInfo);
                 esPetMeleeCard.UpdateCostText(numericComponentC.GetAsInt(NumericType.PetMeleeMoLi));

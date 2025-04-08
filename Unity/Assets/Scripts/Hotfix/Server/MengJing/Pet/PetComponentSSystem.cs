@@ -427,6 +427,46 @@ namespace ET.Server
             self.CheckPetZiZhi();
         }
 
+        public static void InitRobotPet(this PetComponentS self)
+        {
+            PetMeleeInfo petMeleeInfo_0 = PetMeleeInfo.Create();
+            if (self.RolePetInfos.Count <= 6)
+            {
+                List<PetConfig> petlist = PetConfigCategory.Instance.GetAll().Values.ToList();
+
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[0].Id);
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[1].Id);
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[2].Id);
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[3].Id);
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[4].Id);
+                self.OnAddPet(ItemGetWay.PetEggDuiHuan, petlist[5].Id);
+            }
+
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[0].Id );
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[1].Id );
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[2].Id );
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[3].Id );
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[4].Id );
+            petMeleeInfo_0.MainPetList.Add( self.RolePetInfos[5].Id );
+
+            petMeleeInfo_0.AssistPetList.Add( PetTuJianConfigCategory.Instance.GetAll().Values.ToList()[0].Id);
+            petMeleeInfo_0.AssistPetList.Add( PetTuJianConfigCategory.Instance.GetAll().Values.ToList()[1].Id);
+
+            List<PetMagicCardConfig>  allmageic = PetMagicCardConfigCategory.Instance.GetAll().Values.ToList();
+            petMeleeInfo_0.MagicList.Add(allmageic[0].Id);
+            petMeleeInfo_0.MagicList.Add(allmageic[1].Id);
+            petMeleeInfo_0.MagicList.Add(allmageic[2].Id);
+            petMeleeInfo_0.MagicList.Add(allmageic[3].Id);
+            petMeleeInfo_0.MagicList.Add(allmageic[4].Id);
+            petMeleeInfo_0.MagicList.Add(allmageic[5].Id);
+            self.PetMeleeInfoList[0] = (petMeleeInfo_0);
+            
+            PetMeleeInfo petMeleeInfo_1 = PetMeleeInfo.Create();
+            self.PetMeleeInfoList[1] = (petMeleeInfo_1);
+            PetMeleeInfo petMeleeInfo_2 = PetMeleeInfo.Create();
+            self.PetMeleeInfoList[2] = (petMeleeInfo_2);
+        }
+
         public static void CheckPetPingFen(this PetComponentS self)
         {
             Unit unit = self.GetParent<Unit>();

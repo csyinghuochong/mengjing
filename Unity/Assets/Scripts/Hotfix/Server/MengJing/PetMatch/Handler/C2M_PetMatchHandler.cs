@@ -15,6 +15,10 @@ namespace ET.Server
             soloPlayerInfo.Occ = userInfoComponentS.UserInfo.Occ;
             soloPlayerInfo.RobotId = userInfoComponentS.UserInfo.RobotId;
             soloPlayerInfo.MatchTime = TimeHelper.ServerNow();
+            if (userInfoComponentS.UserInfo.RobotId > 0)
+            {
+                unit.GetComponent<PetComponentS>().InitRobotPet();
+            }
 
             NumericComponentS numericComponentS = unit.GetComponent<NumericComponentS>();
             soloPlayerInfo.Score = numericComponentS.GetAsLong(NumericType.PetMatchScore);

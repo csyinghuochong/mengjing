@@ -10,7 +10,7 @@ namespace ET.Client
         {
             Unit unit = args.Unit;
             long InstanceId = unit.InstanceId;
-            Console .WriteLine($"Robot_OnUnitDead！{unit.MainHero}  { unit.IsSelfRobot()}");
+            Console .WriteLine($"Robot_OnUnitDead！{unit.MainHero} {unit.Type} { unit.IsSelfRobot()}");
             if (unit.MainHero && unit.IsSelfRobot())
             {
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
