@@ -192,11 +192,19 @@ namespace ET.Client
         {
             int JiFanNum = 0;
             int DiRenNum = 0;
+            
             foreach (Unit unit in self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll())
             {
                 if (unit.Type == UnitType.Pet)
                 {
-                    JiFanNum++;
+                    if (self.BattleCamp == unit.GetBattleCamp())
+                    {
+                        JiFanNum++;
+                    }
+                    else
+                    {
+                        DiRenNum++;
+                    }
                 }
 
                 if (unit.Type == UnitType.Monster)
