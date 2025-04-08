@@ -151,14 +151,16 @@ namespace ET.Server
         /// <returns></returns>
         public static void  OnUnitReturn(this TeamSceneComponent self, Scene fubnescene, long unitId)
         {
+            C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
             List<Unit> allunits = UnitHelper.GetUnitList(fubnescene, UnitType.Player);
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
+                if (!allunits[i].IsRobot())
                 {
                     continue;
                 }
-                MapMessageHelper.SendToClient(allunits[i], M2C_TeamPlayerQuitDungeon.Create());
+                TransferHelper.TransferUnit(allunits[i], actor_Transfer).Coroutine();
             }
             Console.WriteLine($"OnUnitReturn:  {unitId}    {allunits.Count}   {fubnescene.Name}");
             

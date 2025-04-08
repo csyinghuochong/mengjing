@@ -16,7 +16,7 @@ namespace ET
 
         public int Current;
 
-        public int NewBehaviour { get; set; }
+        public int NewBehaviour { get; set; } = -1;
 
         public long TargetID{ get; set; }
 

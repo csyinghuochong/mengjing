@@ -631,10 +631,9 @@ namespace ET.Server
                 return;
             }
             
-            //C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
-            //actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
-            //TransferHelper.TransferUnit(units[0], actor_Transfer).Coroutine();
-            MapMessageHelper.SendToClient(units[0], M2C_TeamPlayerQuitDungeon.Create());
+            C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+            actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
+            TransferHelper.TransferUnit(units[0], actor_Transfer).Coroutine();
         }
 
         public static void OnKillEvent(this PetMeleeDungeonComponent self, Unit defend, int mapType)

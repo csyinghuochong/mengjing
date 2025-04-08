@@ -4457,14 +4457,6 @@ message M2C_TeamUpdateResult // IMessage
 	TeamInfo TeamInfo = 1;
 }
 
-//退出组队广播
-message M2C_TeamPlayerQuitDungeon // IMessage
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 //紫色道具判断是否需要拾取
 message M2C_TeamPickMessage // IMessage
 {
