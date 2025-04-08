@@ -66,10 +66,9 @@ namespace ET.Client
 
             playerInfoComponent.Account = root.Name;
             playerInfoComponent.CurrentRoleId = playerInfoComponent.CreateRoleList[0].UnitId;
+            root.AddComponent<BehaviourComponent, int>(robotid);
             await LoginHelper.LoginGameAsync(root, 0);
             // string account = $"{zone}_{robotid}_{robotNumber}_0001";   //服务器
-            
-            root.AddComponent<BehaviourComponent, int>(robotid);
         }
     }
 }

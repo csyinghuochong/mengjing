@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
 
@@ -20,6 +22,8 @@ namespace ET.Server
             //添加数据缓存
             response.Error =  soloSceneComponent.OnAddSoloDateList(request.SoloPlayerInfo);
 
+            Console.WriteLine($"M2PetMatch_MatchHandler:  {request.SoloPlayerInfo.UnitId}  {soloSceneComponent.MatchList.Count}");
+            
             await ETTask.CompletedTask;
         }
     }

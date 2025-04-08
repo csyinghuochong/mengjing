@@ -69,7 +69,7 @@ namespace ET.Client
                     behaviourComponent.ChangeBehaviour(BehaviourType.Behaviour_Target);
                     break;
                 case MapTypeEnum.PetMatch:
-                    await timerComponent.WaitAsync(TimeHelper.Second * 10);
+                    await timerComponent.WaitAsync(TimeHelper.Second * 5);
                     behaviourComponent.ChangeBehaviour(BehaviourType.Behaviour_PetMatchFight);
                     break;
                 default:

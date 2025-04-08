@@ -227,7 +227,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}/{1}", JiFanNum, ConfigData.PetMeleeMaxPetsInLine);
-                self.View.E_DiRenNumText.text = zstring.Format("召唤怪物数量：{0}", DiRenNum);
+                self.View.E_DiRenNumText.text = zstring.Format("召唤{0}数量：{1}", self.MapTypeEnum == MapTypeEnum.PetMelee ? "怪物" :"宠物",  DiRenNum);
             }
         }
 

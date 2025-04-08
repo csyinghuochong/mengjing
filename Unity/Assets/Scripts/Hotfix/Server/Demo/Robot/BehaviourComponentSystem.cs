@@ -136,6 +136,10 @@ namespace ET
 
         public static void Check(this BehaviourComponent self)
         {
+            if (self.NewBehaviour < 0)
+            {
+                return;
+            }
             if (self.Parent == null)
             {
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
