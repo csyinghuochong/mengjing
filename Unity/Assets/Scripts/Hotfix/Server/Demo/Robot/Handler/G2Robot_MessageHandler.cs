@@ -29,7 +29,7 @@ namespace ET.Server
                     robotManagerComponent.TeamRobot[teamId] = TimeHelper.ServerNow();
 
                     int robotnumber = 0;
-                    while (robotnumber < 3)
+                    while (robotnumber < 1)
                     {
                         robotnumber++ ;
                         
@@ -47,6 +47,11 @@ namespace ET.Server
                     }
                     break;
                 case NoticeType.PetMatchOpen:
+                    // if (message.Zone != 1)
+                    // {
+                    //     return;
+                    // }
+
                     robotnumber = 0;
                     lastteamtime = 0;
                     fubenId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMatch);
