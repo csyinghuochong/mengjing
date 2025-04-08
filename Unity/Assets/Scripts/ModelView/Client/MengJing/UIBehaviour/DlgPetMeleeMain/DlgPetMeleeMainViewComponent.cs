@@ -500,6 +500,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_DiRenTowe
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_DiRenTowe == null )
+				{
+					this.m_E_DiRenTowe = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"DiRenSet/E_DiRenTowe");
+				}
+				return this.m_E_DiRenTowe;
+			}
+		}
+
+		public UnityEngine.UI.Text E_JiFanTowe
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_JiFanTowe == null )
+				{
+					this.m_E_JiFanTowe = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"JiFangSet/E_JiFanTowe");
+				}
+				return this.m_E_JiFanTowe;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_CountdownTimeText = null;
@@ -531,6 +565,8 @@ namespace ET.Client
 			this.m_E_DisposeCardEventTrigger = null;
 			this.m_E_RerurnButton = null;
 			this.m_E_RerurnImage = null;
+			this.m_E_DiRenTowe = null;
+			this.m_E_JiFanTowe = null;
 			this.uiTransform = null;
 		}
 
@@ -563,6 +599,8 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_DisposeCardEventTrigger = null;
 		private UnityEngine.UI.Button m_E_RerurnButton = null;
 		private UnityEngine.UI.Image m_E_RerurnImage = null;
+		private UnityEngine.UI.Text m_E_DiRenTowe = null;
+		private UnityEngine.UI.Text m_E_JiFanTowe = null;
 		public Transform uiTransform = null;
 	}
 }

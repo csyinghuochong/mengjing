@@ -91,6 +91,11 @@ namespace ET.Client
 
             Unit unitmain = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.BattleCamp = unitmain.GetBattleCamp();
+
+            if (self.BattleCamp == CampEnum.CampPlayer_2)
+            {
+                
+            }
             
             self.InitCard().Coroutine();
             self.UpdateMoLi();

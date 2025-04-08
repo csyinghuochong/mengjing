@@ -453,7 +453,7 @@ namespace ET.Client
             {
                 return;
             }
-
+            
             float distance = 10f;
             int zhuabutype = self.GetZhuaBuType(target.ConfigId);
             if (zhuabutype == 0)
@@ -464,6 +464,18 @@ namespace ET.Client
             if (zhuabutype == 1)
             {
                 distance = 3f;
+            }
+
+            if (zhuabutype == 2)
+            {
+                int selflv = self.Root().GetComponent<UserInfoComponentC>().GetUserLv();
+                int monsterlv = MonsterConfigCategory.Instance.Get(target.ConfigId).Lv;
+
+                if (selflv < monsterlv)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("无法捕捉比自己等级高的宠物哦！");
+                    return;
+                }
             }
 
             if (PositionHelper.Distance2D(main.Position, target.Position) <= distance)

@@ -12,13 +12,14 @@ namespace ET.Client
 
             petComponent.OnRecvRolePetUpdate(message);
 
-            if (message.GetWay == 2 && message.PetInfoAdd.Count > 0)
+            if (message.PetInfoAdd.Count > 0 && (message.GetWay == ItemGetWay.TakeOutBag || message.GetWay == ItemGetWay.PickItem ) )
             {
                 PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(message.PetInfoAdd[0].SkinId);
                 HintHelp.ShowHint(root, $"获得{petSkinConfig.Name}宠物!");
+                return;
             }
 
-            if (message.GetWay == 0 && message.PetInfoAdd.Count > 0)
+            if (message.PetInfoAdd.Count > 0)
             {
                 EventSystem.Instance.Publish(root, new RolePetAdd() { OldPetSkin = oldPetSkin, RolePetInfo = message.PetInfoAdd[0] });
             }

@@ -731,6 +731,7 @@ namespace ET.Server
                 M2C_RolePetUpdate m2C_RolePetUpdate = M2C_RolePetUpdate.Create();
                 m2C_RolePetUpdate.PetInfoAdd = new List<RolePetInfo>();
                 m2C_RolePetUpdate.PetInfoAdd.Add(newpet);
+                m2C_RolePetUpdate.GetWay = getWay;
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetUpdate);
             }
             
@@ -1688,7 +1689,7 @@ namespace ET.Server
             M2C_RolePetUpdate m2C_RolePetUpdate = M2C_RolePetUpdate.Create();
             m2C_RolePetUpdate.PetInfoAdd = new List<RolePetInfo>();
             m2C_RolePetUpdate.PetInfoAdd.Add(rolePetInfo);
-            m2C_RolePetUpdate.GetWay = 2;
+            m2C_RolePetUpdate.GetWay = ItemGetWay.TakeOutBag;
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetUpdate);
         }
 
