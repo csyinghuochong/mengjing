@@ -1,7 +1,7 @@
 using System;
-using ET.Server;
 using ET.Client;
 using Unity.Mathematics;
+using UnitHelper = ET.Client.UnitHelper;
 
 namespace ET
 {
@@ -22,7 +22,8 @@ namespace ET
         {
             Scene root = aiComponent.Root();
             TimerComponent timerComponent = root.GetComponent<TimerComponent>();
-   
+            Unit unitmain = UnitHelper.GetMyUnitFromClientScene(root);
+            int camp =  unitmain.GetBattleCamp();
             Console.WriteLine("Behaviour_PetMatchFight");
             while (true)
             {
@@ -35,7 +36,8 @@ namespace ET
                     PetMeleeCardInfo petMeleeCardInfo = response.PetMeleeCardList[RandomHelper.RandomNumber(0, response.PetMeleeCardList.Count)];
                     
                     long cardid =petMeleeCardInfo.Id;
-                    await PetNetHelper.PetMeleePlaceRequest(root, cardid, float3.zero, 0, MapTypeEnum.PetMatch);
+                    float3 startpos = camp == CampEnum.CampPlayer_1 ? new float3(-10f, 0f, 0f) : new float3(10f, 0f, 0f);
+                    await PetNetHelper.PetMeleePlaceRequest(root, cardid, startpos, 0, MapTypeEnum.PetMatch);
                 }
                 else
                 {

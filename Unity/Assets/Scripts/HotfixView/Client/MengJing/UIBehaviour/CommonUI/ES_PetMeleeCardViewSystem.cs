@@ -321,7 +321,7 @@ namespace ET.Client
                     // 获取所有unit的位置，判断这个格子内是否有unit
                     List<EntityRef<Unit>> units = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
                     bool haveUnit = false;
-                    float rightPetX = self.CellSize * -1;
+                    float rightPetX = self.CellSize * ( self.BattleCamp == CampEnum.CampPlayer_1 ? -1f : 1f );
                     foreach (Unit unit in units)
                     {
                         if (unit.Type == UnitType.Player)
@@ -334,13 +334,25 @@ namespace ET.Client
                             haveUnit = true;
                         }
 
-                        if (unit.Type == UnitType.Pet)
+                        if (unit.Type != UnitType.Pet)
+                        {
+                            continue;
+                        }
+
+                        if (  self.BattleCamp == CampEnum.CampPlayer_1)
                         {
                             rightPetX = unit.Position.x > rightPetX ? unit.Position.x : rightPetX;
                         }
+                        if (  self.BattleCamp == CampEnum.CampPlayer_2)
+                        {
+                            rightPetX = unit.Position.x < rightPetX ? unit.Position.x : rightPetX;
+                        }
                     }
 
-                    if (!haveObstruct && !haveUnit && self.TargetPos.x <= rightPetX)
+                    bool canmove = (self.BattleCamp == CampEnum.CampPlayer_1 && self.TargetPos.x <= rightPetX)
+                            ||(self.BattleCamp == CampEnum.CampPlayer_2 && self.TargetPos.x >= rightPetX) ;
+                    
+                    if (!haveObstruct && !haveUnit && canmove)
                     {
                         self.CanPlace = true;
                         CellIndicator.GetComponent<Image>().color = Color.green;

@@ -20,6 +20,7 @@ namespace ET.Client
 
 		public int BattleCamp { get; set; }
 		
+		
 		public long Timer;
 		public Vector2 StartPos;
 		public GameObject CardIconGameObject;

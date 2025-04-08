@@ -16,7 +16,7 @@ namespace ET.Server
             {
                 case NoticeType.TeamDungeon:
                 case NoticeType.DragonDungeon:
-                    int robotnumber = 0;
+ 
                     long lastteamtime = 0;
                     string[] teamInfo = message.Message.Split('_');
                     int fubenId = int.Parse(teamInfo[0]);
@@ -28,18 +28,14 @@ namespace ET.Server
                     }
                     robotManagerComponent.TeamRobot[teamId] = TimeHelper.ServerNow();
 
-                    int totalnumber = 0;
-                    while (robotnumber < 1)
+                    int robotnumber = 0;
+                    while (robotnumber < 3)
                     {
-                        totalnumber++ ;
-                        if (totalnumber >= 2)
-                        {
-                            break;
-                        }
-
+                        robotnumber++ ;
+                        
                         //message.Message   sceneid_teamid
                         int  robotId = BattleHelper.GetBattleRobotId(11, fubenId);
-                        Console.WriteLine($"GetBattleRobotId: {robotId}");
+                        Console.WriteLine($"GetBattleRobotId: {robotId}  {robotnumber}");
                         int fiberId= await robotManagerComponent.NewRobot(message.Zone, robotId);
                         ActorId roborActorId = new ActorId(scene.Fiber().Process, fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
                         Main2RobotClient_Message main2RobotClientMessage = Main2RobotClient_Message.Create();
@@ -48,26 +44,18 @@ namespace ET.Server
                                 await scene.Root().GetComponent<ProcessInnerSender>().Call(roborActorId, main2RobotClientMessage) as
                                         RobotClient2Main_Message;
                         
-                        robotnumber++;
                     }
                     break;
                 case NoticeType.PetMatchOpen:
                     robotnumber = 0;
                     lastteamtime = 0;
                     fubenId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMatch);
-        
-                    totalnumber = 0;
-                    while (robotnumber < 1)
+                    while (robotnumber < 10)
                     {
-                        totalnumber++ ;
-                        if (totalnumber >= 20)
-                        {
-                            break;
-                        }
                         
                         //message.Message   sceneid_teamid
                         int  robotId = BattleHelper.GetBattleRobotId(12, fubenId);
-                        Console.WriteLine($"GetBattleRobotId: {robotId}");
+                        Console.WriteLine($"GetBattleRobotId: {robotId}  {robotnumber}");
                         await robotManagerComponent.NewRobot(message.Zone, robotId);
                         robotnumber++;
                     }
