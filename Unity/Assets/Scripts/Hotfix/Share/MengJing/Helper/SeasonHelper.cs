@@ -42,7 +42,7 @@ namespace ET
         /// <returns></returns>
         public static KeyValuePairLong GetOpenSeason(int userLv)
         {
-            if (userLv < 55)
+            if (userLv < 12)
             {
                 return null;
             }
