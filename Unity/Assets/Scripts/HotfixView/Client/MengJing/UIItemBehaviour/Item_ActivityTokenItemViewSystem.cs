@@ -89,6 +89,9 @@ namespace ET.Client
                 self.E_TextNameText.text = zstring.Format("{0}级", activityConfig.Par_1);
             }
 
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
+            
             ItemInfo bagInfo1 = new ItemInfo();
             bagInfo1.ItemID = int.Parse(activityConfig.Par_2.Split(';')[0]);
             bagInfo1.ItemNum = int.Parse(activityConfig.Par_2.Split(';')[1]);
@@ -99,12 +102,13 @@ namespace ET.Client
             bagInfo2.ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]);
             self.ES_CommonItem_2.UpdateItem(bagInfo2, ItemOperateEnum.None);
             self.ES_CommonItem_2.ShowUIEffect(41100001);
+            CommonViewHelper.SetImageGray( self.Root(), self.ES_CommonItem_2.E_ItemIconImage.gameObject, selfRechage < 98 );
 
             ItemInfo bagInfo3 = new ItemInfo();
             bagInfo3.ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]);
             bagInfo3.ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]);
             self.ES_CommonItem_3.UpdateItem(bagInfo3, ItemOperateEnum.None);
-            self.ES_CommonItem_3.ShowUIEffect(41100001);
+            self.ES_CommonItem_3.ShowUIEffect(41100001); CommonViewHelper.SetImageGray( self.Root(), self.ES_CommonItem_3.E_ItemIconImage.gameObject, selfRechage < 298 );
 
             self.SetReceiced(self.E_LingQuHint_3Image.gameObject, 3);
             self.SetReceiced(self.E_LingQuHint_2Image.gameObject, 2);
