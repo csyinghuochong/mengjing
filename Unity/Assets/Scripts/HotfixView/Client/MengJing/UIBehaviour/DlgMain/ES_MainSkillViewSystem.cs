@@ -449,7 +449,28 @@ namespace ET.Client
                 return;
             }
 
-            if (PositionHelper.Distance2D(main.Position, target.Position) <= 3)
+            if (target.Type != UnitType.Monster)
+            {
+                return;
+            }
+
+            float distance = 10f;
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            {
+                distance = 3f;
+            }
+            else
+            {
+                if (monsterConfig.QiYuPetId == 0)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
+                    return;
+                }
+            }
+
+            if (PositionHelper.Distance2D(main.Position, target.Position) <= distance)
             {
                 self.OnArriveNpc(target);
                 return;
@@ -482,12 +503,6 @@ namespace ET.Client
             }
             else
             {
-                if (monsterConfig.QiYuPetId == 0)
-                {
-                    FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
-                    return;
-                }
-
                 self.OnBuildEnter().Coroutine();
             }
         }
