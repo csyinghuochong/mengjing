@@ -95,6 +95,40 @@ namespace ET.Client
      			return this.m_E_TextRechargeText;
      		}
      	}
+	
+		public Transform E_Image98
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Image98 == null )
+				{
+					this.m_E_Image98 = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_Image98");
+				}
+				return this.m_E_Image98;
+			}
+		}
+		
+		public Transform E_Image298
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_Image298 == null )
+				{
+					this.m_E_Image298 = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_Image298");
+				}
+				return this.m_E_Image298;
+			}
+		}
 
 		public LoopHorizontalScrollRect E_ActivityTokenItemsLoopHorizontalScrollRect
      	{
@@ -132,6 +166,8 @@ namespace ET.Client
 			this.m_E_Btn_GoPayButton = null;
 			this.m_E_Btn_GoPayImage = null;
 			this.m_E_TextRechargeText = null;
+			this.m_E_Image98 = null;
+			this.m_E_Image298 = null;
 			this.m_E_ActivityTokenItemsLoopHorizontalScrollRect = null;
 			this.uiTransform = null;
 		}
@@ -141,6 +177,8 @@ namespace ET.Client
 		private Button m_E_Btn_GoPayButton = null;
 		private Image m_E_Btn_GoPayImage = null;
 		private Text m_E_TextRechargeText = null;
+		private Transform m_E_Image98 = null;
+		private Transform m_E_Image298 = null;
 		private LoopHorizontalScrollRect m_E_ActivityTokenItemsLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}

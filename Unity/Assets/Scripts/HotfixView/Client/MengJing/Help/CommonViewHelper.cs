@@ -239,6 +239,35 @@ namespace ET.Client
             }
         }
 
+        public static void SetImageGrayAllChild(Scene root, GameObject obj, bool val)
+        {
+            // 方案一
+            // if (val)
+            // {
+            //     Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+            //     obj.GetComponent<Image>().material = mat;
+            // }
+            // else
+            // {
+            //     obj.GetComponent<Image>().material = null;
+            // }
+
+            SetImageGray(root, obj, val);
+            
+            // 方案2
+            for (int i = 0; i < obj.transform.childCount; i++)
+            {
+                Transform child = obj.transform.GetChild(i);
+
+                SetImageGray(root, child.gameObject, val);
+                
+                Log.Debug($" child.gameObject:  { child.gameObject.name}");
+                
+                // 递归遍历子对象的子对象
+                SetImageGrayAllChild(root, child.gameObject, val);
+            }
+        }
+        
         public static void SetImageOutline(GameObject gameObject, bool val)
         {
             UIEffect effect = gameObject.GetComponent<UIEffect>();
