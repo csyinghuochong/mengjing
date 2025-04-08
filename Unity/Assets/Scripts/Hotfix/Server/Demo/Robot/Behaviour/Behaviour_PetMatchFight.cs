@@ -32,7 +32,7 @@ namespace ET
                 
                 if (response != null && response.PetMeleeCardList.Count > 0)
                 {
-                    Console.WriteLine("Behaviour_PetMatchFight。  {response.PetMeleeCardList.Count }");
+                    Console.WriteLine($"Behaviour_PetMatchFight。  {response.PetMeleeCardList.Count }");
                     PetMeleeCardInfo petMeleeCardInfo = response.PetMeleeCardList[RandomHelper.RandomNumber(0, response.PetMeleeCardList.Count)];
                     
                     long cardid =petMeleeCardInfo.Id;
