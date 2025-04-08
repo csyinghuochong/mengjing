@@ -114,6 +114,11 @@ namespace ET.Client
                     return self.UserInfo.GameSettingInfos[i].Value;
             }
 
+            return self.GetDefaultGameSettingValue(gameSettingEnum);
+        }
+
+        public static string GetDefaultGameSettingValue(this UserInfoComponentC self, GameSettingEnum gameSettingEnum)
+        {
             switch (gameSettingEnum)
             {
                 case GameSettingEnum.Music:

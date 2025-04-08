@@ -44,6 +44,23 @@ namespace ET.Client
      			return this.m_E_ButtonSkillSetButton;
      		}
      	}
+		
+		public UnityEngine.UI.Button E_ButtonReSetButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ButtonReSetButton == null )
+				{
+					this.m_E_ButtonReSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonReSet");
+				}
+				return this.m_E_ButtonReSetButton;
+			}
+		}
 
 		public UnityEngine.UI.Image E_ButtonSkillSetImage
      	{
@@ -1217,6 +1234,7 @@ namespace ET.Client
 		{
 			this.m_E_HideDiImage = null;
 			this.m_E_ButtonSkillSetButton = null;
+			this.m_E_ButtonReSetButton = null;
 			this.m_E_ButtonSkillSetImage = null;
 			this.m_E_Btn_CloseGameButton = null;
 			this.m_E_Btn_CloseGameImage = null;
@@ -1290,6 +1308,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Image m_E_HideDiImage = null;
 		private UnityEngine.UI.Button m_E_ButtonSkillSetButton = null;
+		private UnityEngine.UI.Button m_E_ButtonReSetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonSkillSetImage = null;
 		private UnityEngine.UI.Button m_E_Btn_CloseGameButton = null;
 		private UnityEngine.UI.Image m_E_Btn_CloseGameImage = null;

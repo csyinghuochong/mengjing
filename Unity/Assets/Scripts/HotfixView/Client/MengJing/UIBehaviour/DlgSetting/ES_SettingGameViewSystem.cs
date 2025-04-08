@@ -25,6 +25,7 @@ namespace ET.Client
             self.EG_ClickRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_ClickButton);
 
             self.E_ButtonSkillSetButton.AddListenerAsync(self.OnButtonSkillSetButton);
+            self.E_ButtonReSetButton.AddListener(self.OnButtonReSetButton);
 
             self.EG_YinYingRectTransform.Find("Btn_Click").GetComponent<Button>().AddListener(self.OnBtn_YinYingButton);
 
@@ -172,6 +173,48 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
+        private static void OnButtonReSetButton(this ES_SettingGame self)
+        {
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+            self.SaveSettings(GameSettingEnum.Music, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.Music));
+            self.SaveSettings(GameSettingEnum.Sound, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.Sound));
+            self.SaveSettings(GameSettingEnum.YanGan, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.YanGan));
+            self.SaveSettings(GameSettingEnum.MusicVolume, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.MusicVolume));
+            self.SaveSettings(GameSettingEnum.SoundVolume, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.SoundVolume));
+            self.SaveSettings(GameSettingEnum.FenBianlLv, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.FenBianlLv));
+            self.SaveSettings(GameSettingEnum.HighFps, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.HighFps));
+            self.SaveSettings(GameSettingEnum.Click, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.Click));
+            self.SaveSettings(GameSettingEnum.Shadow, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.Shadow));
+            self.SaveSettings(GameSettingEnum.RandomHorese, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.RandomHorese));
+            self.SaveSettings(GameSettingEnum.OneSellSet, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.OneSellSet));
+            self.SaveSettings(GameSettingEnum.AttackMode, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.AttackMode));
+            self.SaveSettings(GameSettingEnum.AttackTarget, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.AttackTarget));
+            self.SaveSettings(GameSettingEnum.Smooth, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.Smooth));
+            self.SaveSettings(GameSettingEnum.NoShowOther, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.NoShowOther));
+            self.SaveSettings(GameSettingEnum.AutoAttack, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.AutoAttack));
+            self.SaveSettings(GameSettingEnum.OneSellSet2, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.OneSellSet2));
+            self.SaveSettings(GameSettingEnum.HideLeftBottom, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.HideLeftBottom));
+            self.SaveSettings(GameSettingEnum.FirstUnionName, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.FirstUnionName));
+            self.SaveSettings(GameSettingEnum.SkillAttackPlayerFirst, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
+            self.SaveSettings(GameSettingEnum.PickSet, userInfoComponentC.GetDefaultGameSettingValue(GameSettingEnum.PickSet));
+            
+            PlayerPrefsHelp.SetString(PlayerPrefsHelp.MusicVolume, "1");
+            PlayerPrefsHelp.SetString(PlayerPrefsHelp.SoundVolume, "1");
+            
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, PlayerPrefsHelp.LenDepth_Default);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, PlayerPrefsHelp.CameraHorizontalOffset_Default);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, PlayerPrefsHelp.CameraVerticalOffset_Default);
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, 0);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, PlayerPrefsHelp.OffsetPostion_X_Default);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, PlayerPrefsHelp.OffsetPostion_Y_Default);
+            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, PlayerPrefsHelp.OffsetPostion_Z_Default);
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
+
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, 0);
+            
+            self.InitUI();
+        }
+
         public static void OnBtn_ClickButton(this ES_SettingGame self)
         {
             string value = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.Click);
@@ -283,8 +326,6 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_DragPanelImage.gameObject.SetActive(false);
 
             self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
-
-            FlyTipComponent.Instance.ShowFlyTip("重置视角");
         }
 
         private static void OnTestView(this ES_SettingGame self)
