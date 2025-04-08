@@ -197,12 +197,7 @@ namespace ET.Client
     {
         public M2C_TeamDungeonPrepareResult m2CTeamDungeonPrepareResult;
     }
-
-    public struct PlayerQuitDungeon
-    {
-        public M2C_TeamPlayerQuitDungeon M2CTeamDungeonQuitMessage;
-    }
-
+    
     // 好友更新
     public struct FriendUpdate
     {
