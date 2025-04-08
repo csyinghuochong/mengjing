@@ -54,7 +54,7 @@ namespace ET.Client
                     Log.Error($"behaviourComponent.RobotConfig:  {behaviourComponent.RobotConfig}");
                     return;
                 }
-                await timerComponent.WaitAsync(TimeHelper.Second * 5);
+                await timerComponent.WaitAsync(TimeHelper.Second * 10);
                 behaviourComponent.ChangeBehaviour(NewBehaviour);
             }
             
