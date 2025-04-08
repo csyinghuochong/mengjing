@@ -34,15 +34,20 @@ namespace ET
         
              return string.Empty;
          }
-        
-        /// <summary>
+
+         public static int GetOpenLv()
+         {
+             return 12;
+         }
+
+         /// <summary>
         /// 第几赛季
         /// </summary>
         /// <param name="userLv"></param>
         /// <returns></returns>
         public static KeyValuePairLong GetOpenSeason(int userLv)
         {
-            if (userLv < 12)
+            if (userLv < GetOpenLv())
             {
                 return null;
             }
