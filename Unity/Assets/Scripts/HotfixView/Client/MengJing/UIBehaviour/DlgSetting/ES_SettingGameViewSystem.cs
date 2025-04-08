@@ -225,6 +225,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.EG_OneSellSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+                self.EG_OneSellSetRectTransform.Find(zstring.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
             }
 
             self.SaveSettings(GameSettingEnum.OneSellSet, value);
@@ -240,6 +241,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.EG_PickSetRectTransform.Find(zstring.Format("Image_Click_{0}", index)).gameObject.SetActive(setvalues[index] == "1");
+                self.EG_PickSetRectTransform.Find(zstring.Format("Text_{0}", index)).gameObject.SetActive(setvalues[index] != "1");
             }
 
             self.SaveSettings(GameSettingEnum.PickSet, value);
@@ -488,18 +490,24 @@ namespace ET.Client
             string[] setvalues = value.Split('@');
 
             self.EG_OneSellSetRectTransform.Find("Image_Click_0").gameObject.SetActive(setvalues[0] == "1");
+            self.EG_OneSellSetRectTransform.Find("Text_0").gameObject.SetActive(setvalues[0] != "1");
             self.EG_OneSellSetRectTransform.Find("Image_Click_1").gameObject.SetActive(setvalues[1] == "1");
+            self.EG_OneSellSetRectTransform.Find("Text_1").gameObject.SetActive(setvalues[1] != "1");
             self.EG_OneSellSetRectTransform.Find("Image_Click_2").gameObject.SetActive(setvalues[2] == "1");
+            self.EG_OneSellSetRectTransform.Find("Text_2").gameObject.SetActive(setvalues[2] != "1");
 
             if (setvalues.Length > 3)
             {
                 self.EG_OneSellSetRectTransform.Find("Image_Click_3").gameObject.SetActive(setvalues[3] == "1");
+                self.EG_OneSellSetRectTransform.Find("Text_3").gameObject.SetActive(setvalues[3] != "1");
             }
 
             string value2 = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet);
             string[] setvalues2 = value2.Split('@');
             self.EG_PickSetRectTransform.Find("Image_Click_0").gameObject.SetActive(setvalues2[0] == "1");
+            self.EG_PickSetRectTransform.Find("Text_0").gameObject.SetActive(setvalues2[0] != "1");
             self.EG_PickSetRectTransform.Find("Image_Click_1").gameObject.SetActive(setvalues2[1] == "1");
+            self.EG_PickSetRectTransform.Find("Text_1").gameObject.SetActive(setvalues2[1] != "1");
 
             self.UpdateYaoGan();
             self.UpdateShadow();
