@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HighlightPlus;
 using UnityEngine;
 
 namespace ET.Client
@@ -101,6 +102,7 @@ namespace ET.Client
             {
                 self.LastLockId = 0;
                 self.HideLockEffect();
+                self.SetHighlight(unit.GetComponent<GameObjectComponent>().GameObject, false);
             }
         }
 
@@ -165,6 +167,8 @@ namespace ET.Client
                 self.LockUnitEffect.SetActive(true);
             }
 
+            self.SetHighlight(unitTarget.GetComponent<GameObjectComponent>().GameObject, true);
+
             if (unitTarget.Type == UnitType.Monster)
             {
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitTarget.ConfigId);
@@ -175,6 +179,43 @@ namespace ET.Client
 
                 self.SetEffectSize((float)monsterConfig.SelectSize);
             }
+        }
+
+        public static void SetHighlight(this LockTargetComponent self, GameObject gameObject, bool isHighlight)
+        {
+
+            HighlightEffect effect = gameObject.GetComponent<HighlightEffect>();
+            if (effect == null)
+            {
+                effect = gameObject.AddComponent<HighlightEffect>();
+
+                // 一些物体不用高亮描边
+                effect.excludeNameFilter = new[] { "BackDi" };
+
+                // 描边
+                effect.outline = 1;
+                effect.outlineColor = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
+                effect.outlineWidth = 0.8f;
+
+                // 发出微弱的光
+                // effect.glow = 1f;
+                // effect.glowWidth = 0.2f;
+                // effect.SetGlowColor(new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f));
+                // effect.glowDownsampling = 1;
+                // effect.glowAnimationSpeed = 1f;
+
+                // effect.innerGlow = 0.2f;
+                // effect.innerGlowColor = new Color(1f, 1f, 1f, 1f);
+                // effect.innerGlowWidth = 1f;
+
+                // 表面的颜色
+                // effect.overlay = 0.1f;
+                // effect.overlayColor = new Color(181 / 255f, 250 / 255f, 130 / 255f, 255 / 255f);
+
+                effect.UpdateMaterialProperties();
+            }
+
+            effect.SetHighlighted(isHighlight);
         }
 
         public static void SkillLock(this LockTargetComponent self, Unit main, SkillConfig skillConfig)
