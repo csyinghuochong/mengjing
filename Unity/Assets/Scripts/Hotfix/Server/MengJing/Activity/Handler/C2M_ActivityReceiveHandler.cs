@@ -139,6 +139,7 @@ namespace ET.Server
                         TokenRecvive.ReceiveIndex = request.ReceiveIndex;
                         zhanQuTokenRecvives.Add(TokenRecvive);
                         unit.GetComponent<BagComponentS>().OnAddItemData(rewards, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
+                        response.RewardList = ItemHelper.GetRewardItems(rewards);
                         break;
                     case (int)ActivityEnum.Type_25:  //付费签到
                         if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.RechargeSign) != 1)

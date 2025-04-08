@@ -57,12 +57,16 @@ namespace ET.Client
                     return;
                 }
             }
-
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), 24, self.ActivityConfig.Id, index);
-            if (error != ErrorCode.ERR_Success)
+            
+            M2C_ActivityReceiveResponse response =  await ActivityNetHelper.ActivityReceive(self.Root(), 24, self.ActivityConfig.Id, index);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
+            
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonReward);
+            DlgCommonReward dlgCommonReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonReward>();
+            dlgCommonReward.OnUpdateUI(response.RewardList);
 
             TokenRecvive tokenRecvive = TokenRecvive.Create();
             tokenRecvive.ActivityId = self.ActivityConfig.Id;

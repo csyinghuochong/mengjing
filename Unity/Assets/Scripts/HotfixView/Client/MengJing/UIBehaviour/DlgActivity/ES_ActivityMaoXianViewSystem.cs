@@ -51,8 +51,9 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await ActivityNetHelper.ActivityReceive(self.Root(), activityConfig.ActivityType, activityConfig.Id);
-            if (errorCode != ErrorCode.ERR_Success)
+
+            M2C_ActivityReceiveResponse response =  await ActivityNetHelper.ActivityReceive(self.Root(), activityConfig.ActivityType, activityConfig.Id);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }

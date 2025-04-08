@@ -139,8 +139,8 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_23, activityId);
-            if (error != ErrorCode.ERR_Success)
+            M2C_ActivityReceiveResponse  response = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_23, activityId);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
@@ -179,8 +179,8 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_26, activityId);
-            if (error != ErrorCode.ERR_Success)
+            M2C_ActivityReceiveResponse response = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_26, activityId);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }

@@ -5933,6 +5933,7 @@ message M2C_ActivityReceiveResponse // ILocationResponse
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+	repeated RewardItem RewardList = 1;
 }
 
 //领取充值签到奖励

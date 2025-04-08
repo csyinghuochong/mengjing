@@ -25819,6 +25819,9 @@ namespace ET
         [MemoryPackOrder(91)]
         public string Message { get; set; }
 
+        [MemoryPackOrder(0)]
+        public List<RewardItem> RewardList { get; set; } = new();
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -25829,6 +25832,7 @@ namespace ET
             this.RpcId = default;
             this.Error = default;
             this.Message = default;
+            this.RewardList.Clear();
 
             ObjectPool.Instance.Recycle(this);
         }

@@ -146,11 +146,12 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_25, activityId);
-            if (error != ErrorCode.ERR_Success)
+            M2C_ActivityReceiveResponse response = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_25, activityId);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }
+
 
             activityComponent.TotalSignNumber_VIP++;
             activityComponent.LastSignTime_VIP = TimeHelper.ServerNow();
@@ -186,8 +187,8 @@ namespace ET.Client
                 return;
             }
 
-            int error = await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_27, activityId);
-            if (error != ErrorCode.ERR_Success)
+            M2C_ActivityReceiveResponse response =  await ActivityNetHelper.ActivityReceive(self.Root(), (int)ActivityEnum.Type_27, activityId);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }

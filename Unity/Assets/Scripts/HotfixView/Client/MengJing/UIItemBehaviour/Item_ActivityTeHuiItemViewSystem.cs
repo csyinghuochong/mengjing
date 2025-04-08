@@ -26,12 +26,14 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await ActivityNetHelper.ActivityReceive(self.Root(), self.ActivityConfig.ActivityType, self.ActivityConfig.Id);
-            if (errorCode == ErrorCode.ERR_Success)
+
+            M2C_ActivityReceiveResponse response =  await ActivityNetHelper.ActivityReceive(self.Root(), self.ActivityConfig.ActivityType, self.ActivityConfig.Id);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
-                self.E_ImageReceivedImage.gameObject.SetActive(true);
-                self.E_ButtonBuyButton.gameObject.SetActive(false);
+                return;
             }
+            self.E_ImageReceivedImage.gameObject.SetActive(true);
+            self.E_ButtonBuyButton.gameObject.SetActive(false);
         }
 
         public static void OnUpdateUI(this Scroll_Item_ActivityTeHuiItem self, int activityId, bool received)

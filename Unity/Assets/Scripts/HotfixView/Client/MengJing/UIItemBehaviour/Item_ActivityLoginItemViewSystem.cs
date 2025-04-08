@@ -69,12 +69,13 @@ namespace ET.Client
                 return;
             }
 
-            int errorCode = await ActivityNetHelper.ActivityReceive(self.Root(), self.ActivityConfig.ActivityType, self.ActivityConfig.Id);
-            if (errorCode == ErrorCode.ERR_Success)
+ 
+            M2C_ActivityReceiveResponse response =  await ActivityNetHelper.ActivityReceive(self.Root(), self.ActivityConfig.ActivityType, self.ActivityConfig.Id);
+            if (response == null || response.Error != ErrorCode.ERR_Success)
             {
-                self.SetReceived(true);
+                return;
             }
-
+            self.SetReceived(true);
             self.Root().GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.WelfareLogin);
         }
 

@@ -37,7 +37,7 @@ namespace ET.Client
             return response.Error;   
         }
 
-        public static async ETTask<int> ActivityReceive(Scene root, int activityType, int activityId, int index = 0)
+        public static async ETTask<M2C_ActivityReceiveResponse> ActivityReceive(Scene root, int activityType, int activityId, int index = 0)
         {
             C2M_ActivityReceiveRequest request = C2M_ActivityReceiveRequest.Create();
             request.ActivityType = activityType;
@@ -58,7 +58,7 @@ namespace ET.Client
                 activityComponent.ActivityReceiveIds.Add(activityId);
             }
 
-            return response.Error;
+            return response;
         }
 
         public static async ETTask<M2C_WelfareDrawResponse> WelfareDraw(Scene root)
