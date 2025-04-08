@@ -455,19 +455,15 @@ namespace ET.Client
             }
 
             float distance = 10f;
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
-            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
-                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            int zhuabutype = self.GetZhuaBuType(target.ConfigId);
+            if (zhuabutype == 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
+                return;
+            }
+            if (zhuabutype == 1)
             {
                 distance = 3f;
-            }
-            else
-            {
-                if (monsterConfig.QiYuPetId == 0)
-                {
-                    FlyTipComponent.Instance.ShowFlyTip("无法捕捉,此怪物无法成为您的宠物哦！");
-                    return;
-                }
             }
 
             if (PositionHelper.Distance2D(main.Position, target.Position) <= distance)
@@ -489,10 +485,12 @@ namespace ET.Client
             {
                 return;
             }
-
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(target.ConfigId);
-            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
-                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            int zhuabutype = self.GetZhuaBuType(target.ConfigId);
+            if (zhuabutype == 0)
+            {
+                return;
+            }
+            if (zhuabutype == 1)
             {
                 UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
                 uiComponent.CurrentNpcId = target.ConfigId;
@@ -501,7 +499,7 @@ namespace ET.Client
                 MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
                 cameraComponent.SetBuildEnter(target, CameraBuildType.Type_0, () => { self.OnBuildEnter().Coroutine(); });
             }
-            else
+            if (zhuabutype == 2)
             {
                 self.OnBuildEnter().Coroutine();
             }
@@ -542,26 +540,44 @@ namespace ET.Client
                 return;
             }
             
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
-                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            int zhuabutype = self.GetZhuaBuType(unit.ConfigId);
+            if (zhuabutype == 0)
+            {
+                return;
+            }
+
+            if (zhuabutype == 1)
             {
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhuaPu);
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
             }
-            else
+            if(zhuabutype == 2)
             {
-                if (monsterConfig.QiYuPetId == 0)
-                {
-                    return;
-                }
-
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                 self.OnType2_ButtonDig(unit).Coroutine();
             }
         }
 
-         private static async ETTask OnType2_ButtonDig(this ES_MainSkill self, Unit zhupuUnit)
+        public static int GetZhuaBuType(this ES_MainSkill self, int monsterid)
+        {
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
+            if (monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_58
+                || monsterConfig.MonsterSonType == MonsterSonTypeEnum.Type_59)
+            {
+                return 1;
+            }
+            else
+            {
+                if (monsterConfig.QiYuPetId == 0)
+                {
+                    return 0;
+                }
+
+                return 2;
+            }
+        }
+
+        private static async ETTask OnType2_ButtonDig(this ES_MainSkill self, Unit zhupuUnit)
         {
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality < 5)
             {
