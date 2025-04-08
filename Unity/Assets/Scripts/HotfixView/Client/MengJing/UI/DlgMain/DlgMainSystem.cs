@@ -518,15 +518,15 @@ namespace ET.Client
                 self.SetFenBianLv2();
             }
 
-            if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.LastFrame) == 0)
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingFrame).Coroutine();
-            }
-            else
-            {
-                string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
-                CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
-            }
+            // if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.LastFrame) == 0)
+            // {
+            //     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingFrame).Coroutine();
+            // }
+            // else
+            // {
+            //     string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
+            //     CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
+            // }
 
             string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
             self.Root().GetComponent<LockTargetComponent>().AttackTarget = int.Parse(attackmode);
