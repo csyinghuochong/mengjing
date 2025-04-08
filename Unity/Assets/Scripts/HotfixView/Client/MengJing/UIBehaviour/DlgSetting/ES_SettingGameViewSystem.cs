@@ -200,15 +200,8 @@ namespace ET.Client
             
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.MusicVolume, "1");
             PlayerPrefsHelp.SetString(PlayerPrefsHelp.SoundVolume, "1");
-            
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.LenDepth, PlayerPrefsHelp.LenDepth_Default);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraHorizontalOffset, PlayerPrefsHelp.CameraHorizontalOffset_Default);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.CameraVerticalOffset, PlayerPrefsHelp.CameraVerticalOffset_Default);
-            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.RotaAngle, 0);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_X, PlayerPrefsHelp.OffsetPostion_X_Default);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Y, PlayerPrefsHelp.OffsetPostion_Y_Default);
-            PlayerPrefsHelp.SetFloat(PlayerPrefsHelp.OffsetPostion_Z, PlayerPrefsHelp.OffsetPostion_Z_Default);
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>()?.SetView();
+
+            self.OnReSetCameraBtnButton();
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.ZhuBo, 0);
             
