@@ -102,7 +102,16 @@ namespace ET.Server
                     if (request.SceneType == (int)MapTypeEnum.PetMatch)
                     {
                         PetMeleeDungeonComponent petMeleeDungeonComponent = scene.GetComponent<PetMeleeDungeonComponent>();
-                        int battlecamp = petMeleeDungeonComponent.PetMeleeCardInHand.Count == 0 ? CampEnum.CampPlayer_1 : CampEnum.CampPlayer_2;
+                        List<Unit> playerList = UnitHelper.GetUnitList(scene, UnitType.Player);
+                        int battlecamp = 0;
+                        if (playerList.Count <= 0)
+                        {
+                            battlecamp  = RandomHelper.RandomNumber(1,3);
+                        }
+                        else
+                        {
+                            battlecamp = playerList[0].GetBattleCamp() == CampEnum.CampPlayer_1 ? CampEnum.CampPlayer_2 : CampEnum.CampPlayer_1;
+                        }
                         numericComponent.ApplyValue(NumericType.BattleCamp, battlecamp, false);
                         petMeleeDungeonComponent.SetPlayer(unit);
                         aoivalue = 40;
