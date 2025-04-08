@@ -710,6 +710,10 @@ namespace ET.Server
                     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
                     teamSceneComponent.OnUnitReturn(scene, userId);
                     break;
+                case MapTypeEnum.PetMatch:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = scene.GetComponent<PetMeleeDungeonComponent>();
+                    petMeleeDungeonComponent.OnUnitReturn(userId);
+                    break;
             }
             // if (sceneTypeEnum == SceneTypeEnum.TeamDungeon)
             // {
@@ -752,6 +756,10 @@ namespace ET.Server
                     TeamSceneComponent teamSceneComponent = scene.GetParent<TeamSceneComponent>();
                     teamSceneComponent.OnRecvUnitLeave(userId, true);
                     teamSceneComponent.OnUnitDisconnect(scene, sceneTypeEnum, userId);
+                    break;
+                case MapTypeEnum.PetMatch:
+                    PetMeleeDungeonComponent petMeleeDungeonComponent = scene.GetComponent<PetMeleeDungeonComponent>();
+                    petMeleeDungeonComponent.OnUnitReturn(userId);
                     break;
             }
             // if (sceneTypeEnum == (int)SceneTypeEnum.TeamDungeon)

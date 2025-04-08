@@ -1794,9 +1794,6 @@ namespace ET
         public static string UI_pro_3_2 = "UI_pro_3_2";
 
         [StaticField]
-        public static string UI_pro_3_4 = "UI_pro_3_4";
-
-        [StaticField]
         public static List<float3> PlanPositionList = new List<float3>()
         {
             new float3(22.73f, 0.16f, -4.37f),

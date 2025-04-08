@@ -10,7 +10,6 @@ namespace ET.Client
             TimerComponent timerComponent = scene.Root().GetComponent<TimerComponent>();
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(scene.Root());
-            int battlecamp = unit.GetBattleCamp();
 
             switch (args.SceneType)
             {

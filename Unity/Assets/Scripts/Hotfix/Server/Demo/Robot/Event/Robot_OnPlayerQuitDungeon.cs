@@ -23,6 +23,11 @@ public class Robot_OnPlayerQuitDungeon : AEvent<Scene, PlayerQuitDungeon>
                 zoneScene.GetComponent<BehaviourComponent>().TargetID = 0;
                 zoneScene.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_DragonDungeon);
                 break;
+            case MapTypeEnum.PetMatch:
+                EnterMapHelper.RequestQuitFuben(zoneScene);
+                zoneScene.GetComponent<BehaviourComponent>().TargetID = 0;
+                zoneScene.GetComponent<BehaviourComponent>().ChangeBehaviour(BehaviourType.Behaviour_PetMatch);
+                break;
         }
         
         await ETTask.CompletedTask;

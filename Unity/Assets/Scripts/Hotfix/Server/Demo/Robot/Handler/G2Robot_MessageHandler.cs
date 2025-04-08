@@ -50,9 +50,8 @@ namespace ET.Server
                     robotnumber = 0;
                     lastteamtime = 0;
                     fubenId = BattleHelper.GetSceneIdByType(MapTypeEnum.PetMatch);
-                    while (robotnumber < 10)
+                    while (robotnumber < 1)
                     {
-                        
                         //message.Message   sceneid_teamid
                         int  robotId = BattleHelper.GetBattleRobotId(12, fubenId);
                         Console.WriteLine($"GetBattleRobotId: {robotId}  {robotnumber}");

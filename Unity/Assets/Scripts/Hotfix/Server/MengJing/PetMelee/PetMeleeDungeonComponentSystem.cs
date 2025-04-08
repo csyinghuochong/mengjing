@@ -357,8 +357,17 @@ namespace ET.Server
                     return ErrorCode.ERR_Pet_NoExist;
                 }
 
+                int petnumber = 0;
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-                if (allpet.Count >= ConfigData.PetMeleeMaxPetsInLine)
+                for (int petindex = 0; petindex < allpet.Count; petindex++)
+                {
+                    if (allpet[petindex].GetMasterId() == player.Id)
+                    {
+                        petnumber++;
+                    }
+                }
+
+                if (petnumber >= ConfigData.PetMeleeMaxPetsInLine)
                 {
                     return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
@@ -371,7 +380,6 @@ namespace ET.Server
                 // }
                 
                 Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, player.GetBattleCamp(), rolePetInfo, position, 90, -1);
-
                 if (self.GameStart)
                 {
                     pet.GetComponent<AIComponent>().Begin();
@@ -391,14 +399,22 @@ namespace ET.Server
                 }
 
                 PetComponentS petComponent = player.GetComponent<PetComponentS>();
-
+                
+                int petnumber = 0;
                 List<Unit> allpet = UnitHelper.GetUnitList(self.Scene(), UnitType.Pet);
-                if (allpet.Count >= ConfigData.PetMeleeMaxPetsInLine)
+                for (int petindex = 0; petindex < allpet.Count; petindex++)
+                {
+                    if (allpet[petindex].GetMasterId() == player.Id)
+                    {
+                        petnumber++;
+                    }
+                }
+                if (petnumber >= ConfigData.PetMeleeMaxPetsInLine)
                 {
                     return ErrorCode.ERR_PetMelee_PetNumMax;
                 }
 
-                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, CampEnum.CampPlayer_1,
+                Unit pet = UnitFactory.CreateTianTiPet(self.Scene(), player.Id, player.GetBattleCamp(),
                     petComponent.GenerateNewPetByPetTuJianConfigId(useCard.ConfigId), position, 90, -1, IdGenerater.Instance.GenerateId());
 
                 if (self.GameStart)
@@ -599,6 +615,26 @@ namespace ET.Server
         public static void KickOutPlayer(this PetMeleeDungeonComponent sel)
         {
             Console.WriteLine($"PetMeleeDungeonComponent no handler!!!");
+        }
+
+        public static void OnUnitReturn(this PetMeleeDungeonComponent self, long unitid)
+        {
+            //玩家离开 机器人需要退场
+            List<Unit> units = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
+            if (units.Count != 1)
+            {
+                return;
+            }
+
+            if (!units[0].IsRobot())
+            {
+                return;
+            }
+            
+            //C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+            //actor_Transfer.SceneType = MapTypeEnum.MainCityScene;
+            //TransferHelper.TransferUnit(units[0], actor_Transfer).Coroutine();
+            MapMessageHelper.SendToClient(units[0], M2C_TeamPlayerQuitDungeon.Create());
         }
 
         public static void OnKillEvent(this PetMeleeDungeonComponent self, Unit defend, int mapType)

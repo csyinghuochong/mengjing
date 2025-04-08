@@ -103,7 +103,6 @@
                     {
                         args.Defend.Root().GetComponent<AttackComponent>().OnTransformId(args.Defend.ConfigId, cardMonster);
                     }
-
                     break;
                 case NumericType.HappyCellIndex:
                     if (args.Defend.MainHero)
