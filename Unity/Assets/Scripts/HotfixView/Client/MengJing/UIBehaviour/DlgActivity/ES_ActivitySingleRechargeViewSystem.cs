@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -37,7 +38,17 @@ namespace ET.Client
 
         public static void InitInfo(this ES_ActivitySingleRecharge self)
         {
-            self.ShowItem = ConfigData.SingleRechargeReward.Keys.ToList();
+            self.ShowItem.Clear();
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < activityConfigs.Count; i++)
+            {
+                if (activityConfigs[i].ActivityType != ActivityEnum.Type_35)
+                {
+                    continue;
+                }
+
+                self.ShowItem.Add(activityConfigs[i]);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemActivitySingleRechargeItems, self.ShowItem.Count);
             self.E_ActivitySingleRechargeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowItem.Count);

@@ -267,10 +267,7 @@ namespace ET
 
                 Console.WriteLine("活动 每日特惠");
                 await RobotHelper.ActivityTeHui(root);
-
-                Console.WriteLine("活动 单笔充值奖励");
-                await RobotHelper.ActivitySingleRecharge(root);
-
+                
                 Console.WriteLine("活动 拍卖会");
                 await RobotHelper.PaiMaiAuction(root);
 

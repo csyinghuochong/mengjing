@@ -20,9 +20,10 @@
                     int addNumer = rechargeNumber - (int)args.OldValue;
 
                     UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-                    if (!userInfoComponent.UserInfo.SingleRechargeIds.Contains(addNumer))
+                    int singlerechargeid = ActivityHelper.GetSingleRechargeId(addNumer);
+                    if (singlerechargeid > 0 && !userInfoComponent.UserInfo.SingleRechargeIds.Contains(singlerechargeid))
                     {
-                        userInfoComponent.UserInfo.SingleRechargeIds.Add(addNumer);
+                        userInfoComponent.UserInfo.SingleRechargeIds.Add(singlerechargeid);
                         root.GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.SingleRecharge);
                     }
 

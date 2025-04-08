@@ -8,9 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ActivitySingleRecharge : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
-		public List<int> ShowItem;
+		public List<ActivityConfig> ShowItem = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingleRechargeItem>> ScrollItemActivitySingleRechargeItems;
 		
+        
 		public LoopVerticalScrollRect E_ActivitySingleRechargeItemsLoopVerticalScrollRect
      	{
      		get

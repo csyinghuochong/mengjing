@@ -33,9 +33,10 @@ namespace ET.Server
             }
 
             // 单笔充值奖励记录
-            if (!unit.GetComponent<UserInfoComponentS>().UserInfo.SingleRechargeIds.Contains(rechargeNumber))
+            int singerechargeid =  ActivityHelper.GetSingleRechargeId(rechargeNumber);
+            if (singerechargeid > 0 && !unit.GetComponent<UserInfoComponentS>().UserInfo.SingleRechargeIds.Contains(singerechargeid))
             {
-                unit.GetComponent<UserInfoComponentS>().UserInfo.SingleRechargeIds.Add(rechargeNumber);
+                unit.GetComponent<UserInfoComponentS>().UserInfo.SingleRechargeIds.Add(singerechargeid);
             }
         }
 

@@ -2479,40 +2479,6 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask ActivitySingleRecharge(Scene root)
-        {
-            List<int> showItem = ConfigData.SingleRechargeReward.Keys.ToList();
-            foreach (int key in showItem)
-            {
-                if (!ConfigData.SingleRechargeReward.ContainsKey(key))
-                {
-                    continue;
-                }
-
-                string[] rewarditemlist = ConfigData.SingleRechargeReward[key].Split('@');
-                if (root.GetComponent<BagComponentC>().GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
-                {
-                    // "背包空间不足"
-                    continue;
-                }
-
-                UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
-                if (!userInfo.SingleRechargeIds.Contains(key))
-                {
-                    // "未达条件"
-                    continue;
-                }
-
-                if (userInfo.SingleRewardIds.Contains(key))
-                {
-                    // "已经领取"
-                    continue;
-                }
-
-                await ActivityNetHelper.SingleRechargeReward(root, key);
-            }
-        }
-
         public static async ETTask NewYearCollectionWord(Scene root)
         {
             ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();

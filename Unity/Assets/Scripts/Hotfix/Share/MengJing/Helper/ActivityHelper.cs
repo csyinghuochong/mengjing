@@ -7,7 +7,6 @@ namespace ET
     public static class ActivityHelper
     {
         
-
         public static string GetJieRiReward(int Lv)
         {
             ExpConfig expCof = ExpConfigCategory.Instance.Get(Lv);
@@ -39,6 +38,28 @@ namespace ET
 
                 string[] dayInfo = activityConfigs[i].Par_1.Split(';');
                 if (dateTime.Month == int.Parse(dayInfo[0]) && dateTime.Day == int.Parse(dayInfo[1]))
+                {
+                    activityId = activityConfigs[i].Id;
+                    break;
+                }
+            }
+
+            return activityId;
+        }
+        
+        public static int GetSingleRechargeId(int rechargenumber)
+        {
+            long serverTime = TimeHelper.ServerNow();
+            int activityId = 0;
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < activityConfigs.Count; i++)
+            {
+                if (activityConfigs[i].ActivityType != ActivityEnum.Type_35)
+                {
+                    continue;
+                }
+
+                if (activityConfigs[i].Par_1 == rechargenumber.ToString())
                 {
                     activityId = activityConfigs[i].Id;
                     break;

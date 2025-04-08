@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
+
 
 namespace ET.Client
 {
 	[EnableMethod]
 	public  class Scroll_Item_ActivitySingleRechargeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ActivitySingleRechargeItem> 
 	{
-		public int Key;
+		public ActivityConfig ActivityConfig;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

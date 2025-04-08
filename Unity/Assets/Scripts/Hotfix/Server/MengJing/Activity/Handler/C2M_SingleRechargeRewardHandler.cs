@@ -14,7 +14,7 @@
                 return;
             }
 
-            if (!ConfigData.SingleRechargeReward.ContainsKey(request.RewardId))
+            if (!ActivityConfigCategory.Instance.Contain(request.RewardId))
             {
                 Log.Error($"C2M_SingleRechargeRewardRequest 1");
                 response.Error = ErrorCode.ERR_ModifyData;
@@ -33,7 +33,14 @@
                 return;
             }
 
-            string[] rewarditemlist = ConfigData.SingleRechargeReward[request.RewardId].Split('@');
+            ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(request.RewardId);
+            if (activityConfig.ActivityType != ActivityEnum.Type_35)
+            {
+                response.Error = ErrorCode.ERR_ModifyData;
+                return;
+            }
+
+            string[] rewarditemlist   =   activityConfig.Par_2.Split('@');
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.GetBagLeftCell(ItemLocType.ItemLocBag) < rewarditemlist.Length)
             {
@@ -42,7 +49,7 @@
             }
 
             
-            bool ret = unit.GetComponent<BagComponentS>().OnAddItemData(ConfigData.SingleRechargeReward[request.RewardId],
+            bool ret = unit.GetComponent<BagComponentS>().OnAddItemData(activityConfig.Par_2,
                 $"{ItemGetWay.ActivityChouKa}_{TimeHelper.ServerNow()}");
 
             if (ret)
