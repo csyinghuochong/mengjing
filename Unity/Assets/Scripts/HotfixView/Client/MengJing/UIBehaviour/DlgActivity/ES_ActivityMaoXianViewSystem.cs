@@ -111,6 +111,7 @@ namespace ET.Client
 
             self.ES_RewardList.Refresh(activityConfig.Par_3);
             self.ES_RewardList.ShowUIEffect( 41100001 );
+            self.ES_RewardList.ShowReceived(activityComponent.ActivityReceiveIds.Contains(self.CurActivityId));
             int selId = activityComponent.GetCurActivityId(rechargeNum);
             int maxId = ActivityHelper.GetMaxActivityId(101);
             int minId = ActivityHelper.GetMinActivityId(101);

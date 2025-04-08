@@ -314,6 +314,23 @@ namespace ET.Client
      		}
      	}
 
+		public Image E_ImageReceived
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_ImageReceived == null )
+				{
+					this.m_E_ImageReceived = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageReceived");
+				}
+				return this.m_E_ImageReceived;
+			}
+		}
+
 		    public Transform UITransform
          {
      	    get
@@ -344,6 +361,7 @@ namespace ET.Client
 			this.m_E_ProtectImage = null;
 			this.m_E_LockButton = null;
 			this.m_E_LockImage = null;
+			this.m_E_ImageReceived = null;
 			this.uiTransform = null;
 		}
 
@@ -364,6 +382,7 @@ namespace ET.Client
 		private Image m_E_ProtectImage = null;
 		private Button m_E_LockButton = null;
 		private Image m_E_LockImage = null;
+		private Image m_E_ImageReceived = null;
 		public Transform uiTransform = null;
 	}
 }
