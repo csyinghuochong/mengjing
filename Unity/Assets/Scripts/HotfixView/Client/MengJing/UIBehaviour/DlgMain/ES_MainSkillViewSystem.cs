@@ -475,7 +475,7 @@ namespace ET.Client
             Vector3 unitPos = main.Position;
             Vector3 targetPos = target.Position;
             Vector3 dir = (unitPos - targetPos).normalized;
-            Vector3 position = targetPos + dir * 2f;
+            Vector3 position = targetPos + dir * (distance - 1f);
             self.MoveToNpc(target, position).Coroutine();
         }
 
