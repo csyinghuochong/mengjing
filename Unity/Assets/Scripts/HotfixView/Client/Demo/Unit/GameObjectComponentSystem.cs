@@ -156,7 +156,9 @@ namespace ET.Client
                     //宠物副本不显示玩家
                     if (unit.MainHero && (mapComponent.MapType == MapTypeEnum.PetDungeon
                             || mapComponent.MapType == MapTypeEnum.PetTianTi
-                            || mapComponent.MapType == MapTypeEnum.PetMing))
+                            || mapComponent.MapType == MapTypeEnum.PetMing
+                            || mapComponent.MapType == MapTypeEnum.PetMelee
+                            || mapComponent.MapType == MapTypeEnum.PetMatch))
                     {
                         return;
                     }

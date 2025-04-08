@@ -422,6 +422,20 @@ namespace ET.Server
               }
           }
 
+          public static bool HaveSkillType(this SkillManagerComponentS self, string skilltype)
+          {
+              int skillcnt = self.Skills.Count;
+              for (int i = skillcnt - 1; i >= 0; i--)
+              {
+                  SkillS skillC = self.Skills[i];
+                  if (skillC.SkillConf.GameObjectName.Equals(skilltype))
+                  {
+                      return true;
+                  }
+              }
+              return false;
+          }
+        
           public static bool HaveChongJi(this SkillManagerComponentS self)
           {
               int skillcnt = self.Skills.Count;
