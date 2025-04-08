@@ -14,6 +14,7 @@ namespace ET.Client
         public MyCamera_1 MyCamera_1 { get; set; }
         public int LastLockIndex { get; set; } = -1;
         public long LastLockId { get; set; } = 0;
+        public GameObject LastHighlightGameObject;
         public int AttackTarget { get; set; }
         public int SkillAttackPlayerFirst { get; set; }
 

@@ -89,6 +89,7 @@ namespace ET.Client
 
             self.LastLockId = 0;
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainHpBar.OnCancelLock();
+            self.SetHighlight(self.LastHighlightGameObject, false);
         }
 
         public static void OnSelfDead(this LockTargetComponent self)
@@ -102,7 +103,6 @@ namespace ET.Client
             {
                 self.LastLockId = 0;
                 self.HideLockEffect();
-                self.SetHighlight(unit.GetComponent<GameObjectComponent>().GameObject, false);
             }
         }
 
@@ -167,8 +167,6 @@ namespace ET.Client
                 self.LockUnitEffect.SetActive(true);
             }
 
-            self.SetHighlight(unitTarget.GetComponent<GameObjectComponent>().GameObject, true);
-
             if (unitTarget.Type == UnitType.Monster)
             {
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitTarget.ConfigId);
@@ -179,10 +177,18 @@ namespace ET.Client
 
                 self.SetEffectSize((float)monsterConfig.SelectSize);
             }
+            
+            self.SetHighlight(self.LastHighlightGameObject, false);
+            self.LastHighlightGameObject = unitTarget.GetComponent<GameObjectComponent>().GameObject;
+            self.SetHighlight(self.LastHighlightGameObject, true);
         }
 
         public static void SetHighlight(this LockTargetComponent self, GameObject gameObject, bool isHighlight)
         {
+            if (gameObject == null)
+            {
+                return;
+            }
 
             HighlightEffect effect = gameObject.GetComponent<HighlightEffect>();
             if (effect == null)
@@ -400,6 +406,10 @@ namespace ET.Client
                 CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
                 self.LockUnitEffect.SetActive(true);
                 self.SetEffectSize(1f);
+                
+                self.SetHighlight(self.LastHighlightGameObject, false);
+                self.LastHighlightGameObject = unitTarget.GetComponent<GameObjectComponent>().GameObject;
+                self.SetHighlight(self.LastHighlightGameObject, true);
             }
         }
     }
