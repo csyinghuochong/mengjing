@@ -167,7 +167,7 @@ namespace ET.Client
                     }
 
                     int maxHp = numericComponentC.GetAsInt(NumericType.Now_MaxHp);
-                    if (monsterConfig.MonsterCamp == self.BattleCamp) // 我方
+                    if (monsterConfig.MonsterCamp == CampEnum.CampPlayer_1) // 
                     {
                         using (zstring.Block())
                         {
@@ -177,7 +177,7 @@ namespace ET.Client
                             self.View.E_JiFanHpImgImage.GetComponent<RectTransform>().sizeDelta = size;
                         }
                     }
-                    else // 敌方
+                    else 
                     {
                         using (zstring.Block())
                         {
@@ -209,13 +209,20 @@ namespace ET.Client
                         DiRenNum++;
                     }
                 }
-
+                
                 if (unit.Type == UnitType.Monster)
                 {
                     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     if (monsterConfig.MonsterSonType != MonsterSonTypeEnum.Type_62)
                     {
-                        DiRenNum++;
+                        if (self.BattleCamp == unit.GetBattleCamp())
+                        {
+                            JiFanNum++;
+                        }
+                        else
+                        {
+                            DiRenNum++;
+                        }
                     }
                     else
                     {
@@ -234,7 +241,7 @@ namespace ET.Client
                 else
                 {
                     self.View.E_JiFanNumText.text = zstring.Format("召唤宠物数量：{0}", DiRenNum);
-                    self.View.E_DiRenNumText.text = zstring.Format("召唤宠物数量：{1}", JiFanNum,  ConfigData.PetMeleeMaxPetsInLine);
+                    self.View.E_DiRenNumText.text = zstring.Format("召唤宠物数量：{0}/{1}", JiFanNum,  ConfigData.PetMeleeMaxPetsInLine);
                 }
             }
         }
