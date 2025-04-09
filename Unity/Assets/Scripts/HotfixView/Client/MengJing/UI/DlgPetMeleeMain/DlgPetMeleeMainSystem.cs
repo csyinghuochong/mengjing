@@ -255,19 +255,7 @@ namespace ET.Client
 
         private static async ETTask InitCard(this DlgPetMeleeMain self)
         {
-            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetMeleeCard.prefab");
-
-            // 不用自动布局组件，后面可能会有卡牌的拖动、排序动画什么的
-            for (int i = 0; i < ConfigData.PetMeleeCarInHandNum * 2; i++)
-            {
-                GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardPoolRectTransform);
-                go.SetActive(false);
-                ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
-                esPetMeleeCard.BattleCamp = self.BattleCamp;
-                esPetMeleeCard.MapTypeEnum = self.MapTypeEnum;
-                self.PetMeleeCardPool.Add(esPetMeleeCard);
-            }
+            self.AddCardToPool(ConfigData.PetMeleeCarInHandNum * 2);
 
             M2C_PetMeleeGetMyCards response = await PetNetHelper.PetMeleePetMeleeGetMyCardsRequest(self.Root(), self.MapTypeEnum);
             foreach (ES_PetMeleeCard card in self.PetMeleeCardInHand)
@@ -300,6 +288,7 @@ namespace ET.Client
 
         private static void ArrangeCards(this DlgPetMeleeMain self)
         {
+            // 不用自动布局组件，后面可能会有卡牌的拖动、排序动画什么的
             for (int i = 0; i < self.PetMeleeCardInHand.Count; i++)
             {
                 // 在这可以加一些卡牌的排序动画什么的
@@ -308,8 +297,28 @@ namespace ET.Client
             }
         }
 
+        private static void AddCardToPool(this DlgPetMeleeMain self, int num)
+        {
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>("Assets/Bundles/UI/Common/ES_PetMeleeCard.prefab");
+            
+            for (int i = 0; i < num; i++)
+            {
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.View.EG_CardPoolRectTransform);
+                go.SetActive(false);
+                ES_PetMeleeCard esPetMeleeCard = self.AddChild<ES_PetMeleeCard, Transform>(go.transform);
+                esPetMeleeCard.BattleCamp = self.BattleCamp;
+                esPetMeleeCard.MapTypeEnum = self.MapTypeEnum;
+                self.PetMeleeCardPool.Add(esPetMeleeCard);
+            }
+        }
+        
         private static ES_PetMeleeCard GetCardFromPool(this DlgPetMeleeMain self)
         {
+            if (self.PetMeleeCardPool.Count == 0)
+            {
+                self.AddCardToPool(3);
+            }
+
             ES_PetMeleeCard esPetMeleeCard = self.PetMeleeCardPool[^1];
             self.PetMeleeCardPool.RemoveAt(self.PetMeleeCardPool.Count - 1);
             esPetMeleeCard.uiTransform.SetParent(self.View.EG_CardInHandRectTransform);
