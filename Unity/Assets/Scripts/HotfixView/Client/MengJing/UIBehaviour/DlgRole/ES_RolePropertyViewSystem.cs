@@ -64,7 +64,7 @@ namespace ET.Client
         private static void Destroy(this ES_RoleProperty self)
         {
             ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
-            redPointComponent.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
+            redPointComponent?.UnRegisterReddot(ReddotType.RolePoint, self.Reddot_RolePoint);
 
             self.DestroyWidget();
         }

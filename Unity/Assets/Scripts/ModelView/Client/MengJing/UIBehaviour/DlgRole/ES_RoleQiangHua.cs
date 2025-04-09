@@ -562,6 +562,23 @@ namespace ET.Client
 			}
 		}
 
+		public Text E_QiangHuaProgress
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_QiangHuaProgress == null )
+				{
+					this.m_E_QiangHuaProgress = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_NextNode/E_QiangHuaProgress");
+				}
+				return this.m_E_QiangHuaProgress;
+			}
+		}
+
 		public void DestroyWidget()
 		{
 			this.m_E_ImageSelectImage = null;
@@ -594,6 +611,7 @@ namespace ET.Client
 			this.m_E_ToggleLucky = null;
 			this.m_E_QiangHuaLevel = null;
 			this.m_E_Img_LodingValue = null;
+			this.m_E_QiangHuaProgress = null;
 			this.uiTransform = null;
 		}
 
@@ -627,6 +645,7 @@ namespace ET.Client
 		private Text m_E_QiangHuaLevel = null;
 		private Toggle m_E_ToggleLucky= null;
 		private Image m_E_Img_LodingValue = null;
+		private Text m_E_QiangHuaProgress = null;
 		public Transform uiTransform = null;
 	}
 }

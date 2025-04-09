@@ -140,7 +140,8 @@ namespace ET.Client
                 self.E_SuccessAdditionText.text = zstring.Format("附加成功率 {0}%", (int)(addPro * 100));
             }
 
-            self.E_Img_LodingValue.fillAmount = (qianghuaLevel / 13f);
+            self.E_Img_LodingValue.fillAmount = (qianghuaLevel * 1f / maxLevel);
+            self.E_QiangHuaProgress.text = $"{qianghuaLevel}/{maxLevel}";
         }
 
         public static async ETTask OnQiangHuaButton(this ES_RoleQiangHua self)
