@@ -16,6 +16,5 @@ namespace ET.Client
         public Vector3 StartPosition;
         public float Speed = 10f; // 移动速度
         public float Distance = 0.2f; // 范围(飘到距离角色多少米内发送消息拾取)
-        public float T;
     }
 }

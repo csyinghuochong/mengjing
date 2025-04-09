@@ -313,7 +313,7 @@ namespace ET.Client
                     return;
                 }
 
-                MapHelper.SendShiquItem(self.Root(), new() { self.MyUnit }).Coroutine();
+                MapHelper.SendPickItem(self.Root(), new() { self.MyUnit }).Coroutine();
             }
         }
 

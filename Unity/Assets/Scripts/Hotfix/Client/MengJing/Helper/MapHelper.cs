@@ -149,24 +149,32 @@ namespace ET.Client
             return drops;
         }
 
-        public static async ETTask<int> SendShiquItem(Scene root, List<Unit> unitDrops)
+        public static async ETTask<int> SendPickItem(Scene root, List<Unit> unitDrops)
         {
-            C2M_PickItemRequest request = C2M_PickItemRequest.Create();
+            BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
+            bagComponentC.RealAddItem--;
+            
             List<long> unitDropIds = new();
-            foreach (Unit unit in unitDrops)
-            {
-                unitDropIds.Add(unit.Id);
-            }
-
             List<long> removeIds = new();
+            List<(int, int)> unitDropTipInfos = new List<(int, int)>();
             foreach (Unit unit in unitDrops)
             {
-                if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropType) == 1)
+                if (unit != null && !unit.IsDisposed)
                 {
-                    removeIds.Add(unit.Id);
+                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+                    
+                    unitDropIds.Add(unit.Id);
+                    
+                    if (numericComponent.GetAsInt(NumericType.DropType) == 1)
+                    {
+                        removeIds.Add(unit.Id);
+                    }
+                    
+                    unitDropTipInfos.Add(new(numericComponent.GetAsInt(NumericType.DropItemId), numericComponent.GetAsInt(NumericType.DropItemNum)));
                 }
             }
-
+            
+            C2M_PickItemRequest request = C2M_PickItemRequest.Create();
             request.ItemIds = unitDropIds;
             M2C_PickItemResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
 
@@ -175,7 +183,17 @@ namespace ET.Client
             {
                 unitComponent.Remove(id);
             }
+            
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                foreach ((int, int) unitDropTipInfo in unitDropTipInfos)
+                {
+                    EventSystem.Instance.Publish(root, new GetDrop() { ItemId = unitDropTipInfo.Item1, ItemNum = unitDropTipInfo.Item2 });
+                }
+            }
 
+            bagComponentC.RealAddItem++;
+            
             return response.Error;
         }
 

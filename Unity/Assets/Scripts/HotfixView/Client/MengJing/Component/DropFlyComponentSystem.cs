@@ -28,11 +28,14 @@ namespace ET.Client
                 self.IsPlayEffect = true;
                 self.Root().GetComponent<GameObjectLoadComponent>().AddLoadQueue( self.EffectPath, self.InstanceId, true,self.OnLoadGameObject);
             }
-
+            
             if (!self.Send && math.distance(self.MyUnit.Position, self.TargetUnit.Position) < self.Distance)
             {
                 self.Send = true;
-                self.SendShiquItem().Coroutine();
+                // 只要靠近了就销毁拾取特效 不等消息返回
+                self.Root().GetComponent<PickItemsComponent>().SendPick(self.MyUnit);
+                self.Dispose();
+                return;
             }
 
             if (self.StartPosition == Vector3.zero)
@@ -59,32 +62,11 @@ namespace ET.Client
             self.RecoveryGameObject(self.EffectGameObject);
         }
 
-        private static async ETTask SendShiquItem(this DropFlyComponent self)
-        {
-            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            bagComponentC.RealAddItem--;
-
-            // 提前获取，消息返回后Drop会销毁
-            Scene root = self.Root();
-
-            int itemId = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemId);
-            int itemNum = self.MyUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.DropItemNum);
-
-            int error = await MapHelper.SendShiquItem(self.Root(), new() { self.MyUnit });
-
-            if (error == ErrorCode.ERR_Success)
-            {
-                EventSystem.Instance.Publish(root, new GetDrop() { ItemId = itemId, ItemNum = itemNum });
-            }
-
-            bagComponentC.RealAddItem++;
-        }
-
         private static void OnLoadGameObject(this DropFlyComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed || formId != self.InstanceId || self.MyUnit.IsDisposed || self.TargetUnit.IsDisposed)
             {
-                GameObject.Destroy(gameObject);
+                UnityEngine.Object.Destroy(gameObject);
                 return;
             }
 

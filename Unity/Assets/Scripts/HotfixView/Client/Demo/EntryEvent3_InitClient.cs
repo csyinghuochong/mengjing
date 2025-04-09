@@ -46,6 +46,7 @@ namespace ET.Client
             root.AddComponent<GuideComponent>();
             root.AddComponent<FangChenMiComponentC>();
             root.AddComponent<CellDungeonComponentC>();
+            root.AddComponent<PickItemsComponent>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
