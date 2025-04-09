@@ -87,7 +87,7 @@ namespace ET.Client
                     continue;
                 }
 
-                if (aEffectHandler.EffectConfig.SkillParent != 2)
+                if (aEffectHandler.EffectConfig.SkillParent != 2 && aEffectHandler.EffectConfig.SkillParent != 3)
                 {
                     continue;
                 }
